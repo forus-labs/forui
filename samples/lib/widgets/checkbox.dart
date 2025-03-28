@@ -37,7 +37,7 @@ class _CheckboxState extends StatefulSampleState<CheckboxPage> {
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),
     error: widget.error != null ? Text(widget.error!) : null,
-    semanticLabel: 'Accept terms and conditions',
+    semanticsLabel: 'Accept terms and conditions',
     value: state,
     onChange: (value) => setState(() => state = value),
     enabled: widget.enabled,

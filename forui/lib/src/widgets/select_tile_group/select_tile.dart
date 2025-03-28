@@ -31,7 +31,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   final Widget? details;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The current value.
   final T value;
@@ -61,7 +61,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),
     this.subtitle,
     this.details,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.enabled,
     this.autofocus = false,
     this.focusNode,
@@ -80,7 +80,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),
     this.subtitle,
     this.details,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.enabled,
     this.autofocus = false,
     this.focusNode,
@@ -112,7 +112,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
       details: details,
       suffixIcon: suffix,
       style: style,
-      semanticLabel: semanticLabel,
+      semanticsLabel: semanticsLabel,
       enabled: enabled,
       onPress: () => controller.update(value, add: !selected),
       autofocus: autofocus,
@@ -126,7 +126,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))

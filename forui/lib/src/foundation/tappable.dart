@@ -46,7 +46,7 @@ class FTappable extends StatefulWidget {
   final FFocusedOutlineStyle? focusedOutlineStyle;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// Used by accessibility frameworks to determine whether this tappable has been selected. Defaults to false.
   final bool semanticSelected;
@@ -96,7 +96,7 @@ class FTappable extends StatefulWidget {
   const factory FTappable({
     FTappableStyle? style,
     FFocusedOutlineStyle? focusedOutlineStyle,
-    String? semanticLabel,
+    String? semanticsLabel,
     bool semanticSelected,
     bool excludeSemantics,
     bool autofocus,
@@ -117,7 +117,7 @@ class FTappable extends StatefulWidget {
   const FTappable.static({
     this.style,
     this.focusedOutlineStyle,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.semanticSelected = false,
     this.excludeSemantics = false,
     this.autofocus = false,
@@ -141,7 +141,7 @@ class FTappable extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('semanticsSelected', value: semanticSelected, ifTrue: 'selected'))
       ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
@@ -223,7 +223,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
     tappable = Semantics(
       enabled: widget._enabled,
-      label: widget.semanticLabel,
+      label: widget.semanticsLabel,
       container: true,
       button: true,
       selected: widget.semanticSelected,
@@ -268,7 +268,7 @@ class AnimatedTappable extends FTappable {
   const AnimatedTappable({
     super.style,
     super.focusedOutlineStyle,
-    super.semanticLabel,
+    super.semanticsLabel,
     super.semanticSelected = false,
     super.excludeSemantics = false,
     super.autofocus = false,

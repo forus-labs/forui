@@ -66,7 +66,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The callback that is called when the value changes.
   final ValueChanged<Set<T>>? onChange;
@@ -88,7 +88,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.onChange,
     this.onSelect,
     super.onSaved,
@@ -117,7 +117,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
                final text? => errorBuilder(state.context, text),
                null => null,
              },
-             semanticLabel: semanticLabel,
+             semanticsLabel: semanticsLabel,
              children: [
                for (final child in children)
                  FSelectTileData<T>(
@@ -147,7 +147,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.onChange,
     this.onSelect,
     super.onSaved,
@@ -177,7 +177,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
                final text? => errorBuilder(state.context, text),
                null => null,
              },
-             semanticLabel: semanticLabel,
+             semanticsLabel: semanticsLabel,
              tileBuilder: (context, index) {
                final child = tileBuilder(context, index);
                return child == null
@@ -208,7 +208,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
       ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSelect', onSelect));
   }

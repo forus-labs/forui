@@ -29,7 +29,7 @@ A switch that allows the user to toggle between checked and unchecked.
       @override
       Widget build(BuildContext context) => FSwitch(
         label: const Text('Airplane Mode'),
-        semanticLabel: 'Airplane Mode',
+        semanticsLabel: 'Airplane Mode',
         value: state,
         onChange: (value) => setState(() => state = value),
       );
@@ -47,7 +47,7 @@ FSwitch(
   label: const Text('Airplane Mode'),
   description: const Text('Turn on airplane mode to disable all wireless connections.'),
   error: const Text('Please turn on airplane mode.'),
-  semanticLabel: 'Airplane Mode',
+  semanticsLabel: 'Airplane Mode',
   value: true,
   onChanged: (value) {},
   enabled: true,
@@ -78,7 +78,7 @@ FSwitch(
       @override
       Widget build(BuildContext context) => FSwitch(
         label: const Text('Airplane Mode'),
-        semanticLabel: 'Airplane Mode',
+        semanticsLabel: 'Airplane Mode',
         value: state,
         onChange: (value) => setState(() => state = value),
         enabled: false,

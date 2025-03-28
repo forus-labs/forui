@@ -185,7 +185,7 @@ class Action extends StatelessWidget {
     padding: style.itemPadding,
     child: FTappable(
       style: style.actionTappableStyle,
-      semanticLabel: semanticsLabel,
+      semanticsLabel: semanticsLabel,
       focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
       onPress: onPress,
       builder:
@@ -206,7 +206,7 @@ class Action extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(StringProperty('semanticLabel', semanticsLabel));
+      ..add(StringProperty('semanticsLabel', semanticsLabel));
   }
 }
 

@@ -76,7 +76,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The group's semantic label.
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The label above the group.
   ///
@@ -109,7 +109,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     ScrollPhysics physics = const ClampingScrollPhysics(),
     bool enabled = true,
     FTileDivider divider = FTileDivider.full,
-    String? semanticLabel,
+    String? semanticsLabel,
     Widget? label,
     Widget? description,
     Widget? error,
@@ -124,7 +124,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     physics: physics,
     enabled: enabled,
     divider: divider,
-    semanticLabel: semanticLabel,
+    semanticsLabel: semanticsLabel,
     label: label,
     description: description,
     error: error,
@@ -142,7 +142,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
     this.divider = FTileDivider.indented,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.label,
     this.description,
     this.error,
@@ -190,7 +190,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
     this.divider = FTileDivider.indented,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.label,
     this.description,
     this.error,
@@ -238,7 +238,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
         error: error,
         child: Semantics(
           container: true,
-          label: semanticLabel,
+          label: semanticsLabel,
           child: ConstrainedBox(
             constraints: BoxConstraints(maxHeight: maxHeight),
             child: ClipRRect(
@@ -281,7 +281,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
       ..add(DiagnosticsProperty('physics', physics))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(EnumProperty('divider', divider))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(ObjectFlagProperty.has('delegate', delegate));
   }
 }
@@ -295,7 +295,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
   final ScrollPhysics physics;
   final bool enabled;
   final FTileDivider divider;
-  final String? semanticLabel;
+  final String? semanticsLabel;
   final Widget? label;
   final Widget? description;
   final Widget? error;
@@ -311,7 +311,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
     required this.physics,
     required this.enabled,
     required this.divider,
-    required this.semanticLabel,
+    required this.semanticsLabel,
     required this.label,
     required this.description,
     required this.error,
@@ -335,7 +335,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
       error: error,
       child: Semantics(
         container: true,
-        label: semanticLabel,
+        label: semanticsLabel,
         child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: maxHeight),
           child: ClipRRect(
@@ -385,7 +385,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
       ..add(DiagnosticsProperty('physics', physics))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(EnumProperty('divider', divider))
-      ..add(StringProperty('semanticLabel', semanticLabel));
+      ..add(StringProperty('semanticsLabel', semanticsLabel));
   }
 }
 

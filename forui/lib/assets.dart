@@ -3,4 +3,3 @@
 library forui.assets;
 
 export 'package:forui_assets/forui_assets.dart';
-export 'package:nitrogen_flutter_svg/nitrogen_flutter_svg.dart';

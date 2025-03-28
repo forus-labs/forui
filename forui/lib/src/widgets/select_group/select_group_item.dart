@@ -69,7 +69,7 @@ abstract class FSelectGroupItem<T> extends StatelessWidget {
     Widget? label,
     Widget? description,
     Widget? error,
-    String? semanticLabel,
+    String? semanticsLabel,
     bool enabled,
     bool autofocus,
     FocusNode? focusNode,
@@ -84,7 +84,7 @@ abstract class FSelectGroupItem<T> extends StatelessWidget {
     Widget? label,
     Widget? description,
     Widget? error,
-    String? semanticLabel,
+    String? semanticsLabel,
     bool enabled,
     bool autofocus,
     FocusNode? focusNode,
@@ -125,7 +125,7 @@ class _Checkbox<T> extends FSelectGroupItem<T> {
   final Widget? label;
   final Widget? description;
   final Widget? error;
-  final String? semanticLabel;
+  final String? semanticsLabel;
   final bool enabled;
   final bool autofocus;
   final FocusNode? focusNode;
@@ -137,7 +137,7 @@ class _Checkbox<T> extends FSelectGroupItem<T> {
     this.label,
     this.description,
     this.error,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.enabled = true,
     this.autofocus = false,
     this.focusNode,
@@ -156,7 +156,7 @@ class _Checkbox<T> extends FSelectGroupItem<T> {
         style: checkboxStyle,
         label: label,
         description: description,
-        semanticLabel: semanticLabel,
+        semanticsLabel: semanticsLabel,
         error: error,
         value: selected,
         onChange: (state) => controller.update(value, add: state),
@@ -174,7 +174,7 @@ class _Checkbox<T> extends FSelectGroupItem<T> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -187,7 +187,7 @@ class _Radio<T> extends FSelectGroupItem<T> {
   final Widget? label;
   final Widget? description;
   final Widget? error;
-  final String? semanticLabel;
+  final String? semanticsLabel;
   final bool enabled;
   final bool autofocus;
   final FocusNode? focusNode;
@@ -199,7 +199,7 @@ class _Radio<T> extends FSelectGroupItem<T> {
     this.label,
     this.description,
     this.error,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.enabled = true,
     this.autofocus = false,
     this.focusNode,
@@ -218,7 +218,7 @@ class _Radio<T> extends FSelectGroupItem<T> {
         style: radioStyle,
         label: label,
         description: description,
-        semanticLabel: semanticLabel,
+        semanticsLabel: semanticsLabel,
         error: error,
         value: selected,
         onChange: (state) => controller.update(value, add: state),
@@ -236,7 +236,7 @@ class _Radio<T> extends FSelectGroupItem<T> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))

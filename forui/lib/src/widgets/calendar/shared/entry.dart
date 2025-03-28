@@ -64,7 +64,7 @@ abstract class Entry extends StatelessWidget {
         ? _SelectableEntry(
           focusNode: focusNode,
           date: date,
-          semanticLabel: localizations.fullDate(date.toNative()),
+          semanticsLabel: localizations.fullDate(date.toNative()),
           selected: isSelected,
           onPress: onPress,
           onLongPress: onLongPress,
@@ -97,7 +97,7 @@ abstract class Entry extends StatelessWidget {
         ? _SelectableEntry(
           focusNode: focusNode,
           date: date,
-          semanticLabel: format(date),
+          semanticsLabel: format(date),
           onPress: onPress,
           style: entryStyle,
           builder: builder,
@@ -119,7 +119,7 @@ abstract class Entry extends StatelessWidget {
 class _SelectableEntry extends Entry {
   final FocusNode focusNode;
   final LocalDate date;
-  final String semanticLabel;
+  final String semanticsLabel;
   final bool selected;
   final ValueChanged<LocalDate> onPress;
   final ValueChanged<LocalDate>? onLongPress;
@@ -127,7 +127,7 @@ class _SelectableEntry extends Entry {
   const _SelectableEntry({
     required this.focusNode,
     required this.date,
-    required this.semanticLabel,
+    required this.semanticsLabel,
     required this.onPress,
     required super.style,
     required super.builder,
@@ -138,7 +138,7 @@ class _SelectableEntry extends Entry {
   @override
   Widget build(BuildContext _) => FTappable(
     style: style.tappableStyle,
-    semanticLabel: semanticLabel,
+    semanticsLabel: semanticsLabel,
     semanticSelected: selected,
     focusNode: focusNode,
     excludeSemantics: true,
@@ -153,7 +153,7 @@ class _SelectableEntry extends Entry {
     properties
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('date', date))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress));

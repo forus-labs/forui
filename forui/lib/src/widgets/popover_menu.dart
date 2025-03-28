@@ -77,7 +77,7 @@ class FPopoverMenu extends StatefulWidget {
   final TraversalEdgeBehavior traversalEdgeBehavior;
 
   /// The menu's semantic label used by accessibility frameworks.
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The menu.
   final List<FTileGroupMixin<FTileMixin>> menu;
@@ -103,7 +103,7 @@ class FPopoverMenu extends StatefulWidget {
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
     this.directionPadding = false,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -131,7 +131,7 @@ class FPopoverMenu extends StatefulWidget {
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.directionPadding = false,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -158,7 +158,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
@@ -203,7 +203,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
               cacheExtent: widget.cacheExtent,
               maxHeight: widget.maxHeight,
               dragStartBehavior: widget.dragStartBehavior,
-              semanticLabel: widget.semanticLabel,
+              semanticsLabel: widget.semanticsLabel,
               style: style.tileGroupStyle,
               divider: widget.divider,
               children: widget.menu,

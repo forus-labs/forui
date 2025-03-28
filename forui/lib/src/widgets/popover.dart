@@ -154,7 +154,7 @@ class FPopover extends StatefulWidget {
   final TraversalEdgeBehavior traversalEdgeBehavior;
 
   /// The popover's semantic label used by accessibility frameworks.
-  final String? semanticLabel;
+  final String? semanticsLabel;
 
   /// The popover builder. The child passed to [popoverBuilder] will always be null.
   final ValueWidgetBuilder<FPopoverStyle> popoverBuilder;
@@ -173,7 +173,7 @@ class FPopover extends StatefulWidget {
     this.shift = FPortalShift.flip,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
     this.directionPadding = false,
-    this.semanticLabel,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -202,7 +202,7 @@ class FPopover extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
-    this.semanticLabel,
+    this.semanticsLabel,
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
     super.key,
@@ -224,7 +224,7 @@ class FPopover extends StatefulWidget {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
-      ..add(StringProperty('semanticLabel', semanticLabel))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
@@ -281,7 +281,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
           (context) => CallbackShortcuts(
             bindings: {const SingleActivator(LogicalKeyboardKey.escape): _controller.hide},
             child: Semantics(
-              label: widget.semanticLabel,
+              label: widget.semanticsLabel,
               container: true,
               child: FocusScope(
                 autofocus: widget.autofocus,

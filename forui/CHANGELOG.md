@@ -108,10 +108,31 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 ### Others
 * Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
 * Add `filled` and `fillColor` for `FTextField`. Thanks @MrHeer!
+
 * Add `FCheckboxStateStyle.size`.
+
 * **Breaking** Rename `FAlertStyle` to `FBaseAlertStyle`.
 * **Breaking** Rename `FAlertCustomStyle` to `FAlertStyle`.
 * **Breaking** Move constants in `FBaseAlertStyle` to `FAlertStyle`.
+
+* **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FAvatar.new`.
+* **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FBreadcrumb.collapsed`.
+
+* **Breaking** Rename `FCheckbox.semanticLabel` to `FCheckbox.semanticsLabel`.
+* **Breaking** Rename `FDialog.semanticLabel` to `FDialog.semanticsLabel`.
+* **Breaking** Rename `FHeaderAction.semanticLabel` to `FHeaderAction.semanticsLabel`.
+* **Breaking** Rename `FPopover.semanticLabel` to `FPopover.semanticsLabel`.
+* **Breaking** Rename `FPopoverMenu.semanticLabel` to `FPopoverMenu.semanticsLabel`.
+* **Breaking** Rename `FRadio.semanticLabel` to `FRadio.semanticsLabel`.
+* **Breaking** Rename `FSelectGroupItem.semanticLabel` to `FSelectGroupItem.semanticsLabel`.
+* **Breaking** Rename `FSelectMenuTile.semanticLabel` to `FSelectMenuTile.semanticsLabel`.
+* **Breaking** Rename `FSelectTile.semanticLabel` to `FSelectTile.semanticsLabel`.
+* **Breaking** Rename `FSelectTileGroup.semanticLabel` to `FSelectTileGroup.semanticsLabel`.
+* **Breaking** Rename `FSwitch.semanticLabel` to `FSwitch.semanticsLabel`.
+* **Breaking** Rename `FTappable.semanticLabel` to `FTappable.semanticsLabel`.
+* **Breaking** Rename `FTile.semanticLabel` to `FTile.semanticsLabel`.
+* **Breaking** Rename `FTileGroup.semanticLabel` to `FTileGroup.semanticsLabel`.
+
 * Fixed an issue where header spacing is incorrectly ordered.
 
 ## 0.10.0+1
