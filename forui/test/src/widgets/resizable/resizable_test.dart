@@ -5,7 +5,6 @@ import 'package:flutter/material.dart' hide VerticalDivider;
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 import '../../test_scaffold.dart';
 
@@ -23,10 +22,10 @@ void main() {
   );
 
   setUp(() {
-    Touch.primary = false;
+    FTouch.primary = false;
   });
 
-  tearDown(() => Touch.primary = null);
+  tearDown(() => FTouch.primary = null);
 
   for (final (index, constructor)
       in [

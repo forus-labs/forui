@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
-import 'package:forui/src/foundation/tappable.dart';
 
 part 'popover.style.dart';
 
@@ -86,7 +85,7 @@ enum FHidePopoverRegion {
 class FPopover extends StatefulWidget {
   /// The platform-specific default popover and child anchors.
   static ({Alignment popover, Alignment child}) get defaultPlatform =>
-      Touch.primary
+      FTouch.primary
           ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
           : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
 

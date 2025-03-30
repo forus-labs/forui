@@ -1,11 +1,10 @@
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
-import 'package:pub_semver/pub_semver.dart';
 
 import 'map.dart';
 
 final emitter = DartEmitter();
-final formatter = DartFormatter(languageVersion: Version(3, 7, 0), pageWidth: 120);
+final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
 
 const header = '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -35,7 +34,7 @@ String emit(Map<String, Fragment> fragments) {
                     (EnumValueBuilder()
                           ..name = key.toLowerCase()
                           ..arguments.addAll([
-                            literalBool(fragment.public),
+                            literalString(key),
                             literalNum(fragment.position),
                             literalString(fragment.source),
                             literalList(fragment.closure, refer('String')),
@@ -44,10 +43,10 @@ String emit(Map<String, Fragment> fragments) {
                 ])
                 ..fields.addAll([
                   (FieldBuilder()
-                        ..docs.addAll(['/// True if the style is a top-level style in FThemeData.'])
-                        ..name = 'public'
-                        ..type = refer('bool')
-                        ..modifier = FieldModifier.final$)
+                    ..docs.addAll(['/// The type name.'])
+                    ..name = 'type'
+                    ..type = refer('String')
+                    ..modifier = FieldModifier.final$)
                       .build(),
                   (FieldBuilder()
                         ..docs.addAll([
@@ -76,7 +75,7 @@ String emit(Map<String, Fragment> fragments) {
                   (ConstructorBuilder()
                         ..constant = true
                         ..requiredParameters.addAll([
-                          Parameter((p) => p..name = 'this.public'),
+                          Parameter((p) => p..name = 'this.type'),
                           Parameter((p) => p..name = 'this.position'),
                           Parameter((p) => p..name = 'this.source'),
                           Parameter((p) => p..name = 'this.closure'),
