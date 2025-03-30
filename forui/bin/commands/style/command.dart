@@ -1,6 +1,7 @@
 import 'package:args/command_runner.dart';
 
 import 'create/command.dart';
+import 'ls/command.dart';
 
 class StyleCommand extends Command {
   @override
@@ -11,5 +12,6 @@ class StyleCommand extends Command {
 
   StyleCommand() {
     addSubcommand(StyleCreateCommand());
+    addSubcommand(StyleLsCommand());
   }
 }
