@@ -64,7 +64,7 @@ jobs:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
       - run: dart run forui style create -af
-      - run: dart run orui style create -af -o ./lib/single_file.dart
+      - run: dart run forui style create -af -o ./lib/single_file.dart
       - run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
   build-android:
