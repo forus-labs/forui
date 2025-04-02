@@ -43,10 +43,10 @@ String emit(Map<String, Fragment> fragments) {
                 ])
                 ..fields.addAll([
                   (FieldBuilder()
-                    ..docs.addAll(['/// The type name.'])
-                    ..name = 'type'
-                    ..type = refer('String')
-                    ..modifier = FieldModifier.final$)
+                        ..docs.addAll(['/// The type name.'])
+                        ..name = 'type'
+                        ..type = refer('String')
+                        ..modifier = FieldModifier.final$)
                       .build(),
                   (FieldBuilder()
                         ..docs.addAll([
