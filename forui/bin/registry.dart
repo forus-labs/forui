@@ -77,7 +77,12 @@ enum Registry {
     'FCalendarHeaderStyle',
     21,
     'FCalendarHeaderStyle calendarHeaderStyle({\n  required FColorScheme colorScheme,\n  required FTypography typography,\n  required FStyle style,\n}) => FCalendarHeaderStyle(\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  buttonStyle: _buttonStyles(colorScheme: colorScheme, typography: typography, style: style).outline.transform(\n    (style) => style.copyWith(\n      enabledBoxDecoration: style.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),\n      enabledHoverBoxDecoration: style.enabledHoverBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),\n      disabledBoxDecoration: style.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),\n      iconContentStyle: style.iconContentStyle.copyWith(\n        enabledStyle: IconThemeData(color: colorScheme.mutedForeground, size: 17),\n        disabledStyle: IconThemeData(color: colorScheme.disable(colorScheme.mutedForeground), size: 17),\n      ),\n    ),\n  ),\n  headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),\n  tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),\n);\n',
-    <String>['FCalendarHeaderStyle', 'FButtonStyles', 'FButtonStyle', 'FButtonContentStyle'],
+    <String>[
+      'FCalendarHeaderStyle',
+      'FButtonStyles',
+      'FButtonStyle',
+      'FButtonContentStyle',
+    ],
   ),
   fcalendaryearmonthpickerstyle(
     'FCalendarYearMonthPickerStyle',
@@ -149,7 +154,7 @@ enum Registry {
   fsliderstyles(
     'FSliderStyles',
     14,
-    'FSliderStyles sliderStyles({\n  required FColorScheme colorScheme,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final enabledHorizontalStyle = FSliderStateStyle(\n    labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,\n    activeColor: colorScheme.primary,\n    inactiveColor: colorScheme.secondary,\n    markStyle: FSliderMarkStyle(\n      tickColor: colorScheme.mutedForeground,\n      labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),\n      labelAnchor: Alignment.topCenter,\n      labelOffset: 10,\n    ),\n    tooltipStyle: _tooltipStyle(colorScheme: colorScheme, typography: typography, style: style),\n    thumbStyle: FSliderThumbStyle(\n      color: colorScheme.primaryForeground,\n      borderColor: colorScheme.primary,\n      focusedOutlineStyle: style.focusedOutlineStyle,\n    ),\n  );\n  final disabledHorizontalStyle = FSliderStateStyle(\n    labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,\n    activeColor: colorScheme.disable(colorScheme.primary, colorScheme.secondary),\n    inactiveColor: colorScheme.secondary,\n    markStyle: FSliderMarkStyle(\n      tickColor: colorScheme.mutedForeground,\n      labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),\n      labelAnchor: Alignment.topCenter,\n      labelOffset: 10,\n    ),\n    tooltipStyle: _tooltipStyle(colorScheme: colorScheme, typography: typography, style: style),\n    thumbStyle: FSliderThumbStyle(\n      color: colorScheme.primaryForeground,\n      borderColor: colorScheme.disable(colorScheme.primary),\n      focusedOutlineStyle: style.focusedOutlineStyle,\n    ),\n  );\n  final errorHorizontalStyle = FSliderErrorStyle(\n    labelTextStyle: style.errorFormFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,\n    errorTextStyle: style.errorFormFieldStyle.errorTextStyle,\n    activeColor: colorScheme.error,\n    inactiveColor: colorScheme.secondary,\n    markStyle: FSliderMarkStyle(\n      tickColor: colorScheme.mutedForeground,\n      labelTextStyle: typography.xs.copyWith(color: colorScheme.error),\n      labelAnchor: Alignment.topCenter,\n      labelOffset: 10,\n    ),\n    tooltipStyle: _tooltipStyle(colorScheme: colorScheme, typography: typography, style: style),\n    thumbStyle: FSliderThumbStyle(\n      color: colorScheme.errorForeground,\n      borderColor: colorScheme.error,\n      focusedOutlineStyle: style.focusedOutlineStyle,\n    ),\n  );\n  return FSliderStyles(\n    horizontalStyle: FSliderStyle(\n      labelLayoutStyle: const FLabelLayoutStyle(\n        labelPadding: EdgeInsets.only(bottom: 5),\n        childPadding: EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),\n        descriptionPadding: EdgeInsets.only(top: 10),\n        errorPadding: EdgeInsets.only(top: 5),\n      ),\n      enabledStyle: enabledHorizontalStyle,\n      disabledStyle: disabledHorizontalStyle,\n      errorStyle: errorHorizontalStyle,\n    ),\n    verticalStyle: FSliderStyle(\n      labelLayoutStyle: const FLabelLayoutStyle(\n        labelPadding: EdgeInsets.only(bottom: 5),\n        childPadding: EdgeInsets.all(10),\n        descriptionPadding: EdgeInsets.only(top: 5),\n        errorPadding: EdgeInsets.only(top: 5),\n      ),\n      enabledStyle: enabledHorizontalStyle.transform(\n        (style) =>\n            style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),\n      ),\n      disabledStyle: disabledHorizontalStyle.transform(\n        (style) =>\n            style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),\n      ),\n      errorStyle: errorHorizontalStyle.transform(\n        (style) =>\n            style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),\n      ),\n      tooltipTipAnchor: Touch.primary ? Alignment.bottomCenter : Alignment.centerLeft,\n      tooltipThumbAnchor: Touch.primary ? Alignment.topCenter : Alignment.centerRight,\n    ),\n  );\n}\n',
+    'FSliderStyles sliderStyles({\n  required FColorScheme colorScheme,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final enabledHorizontalStyle = FSliderStateStyle(\n    labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,\n    activeColor: colorScheme.primary,\n    inactiveColor: colorScheme.secondary,\n    markStyle: FSliderMarkStyle(\n      tickColor: colorScheme.mutedForeground,\n      labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),\n      labelAnchor: Alignment.topCenter,\n      labelOffset: 10,\n    ),\n    tooltipStyle: _tooltipStyle(colorScheme: colorScheme, typography: typography, style: style),\n    thumbStyle: FSliderThumbStyle(\n      color: colorScheme.primaryForeground,\n      borderColor: colorScheme.primary,\n      focusedOutlineStyle: style.focusedOutlineStyle,\n    ),\n  );\n  final disabledHorizontalStyle = FSliderStateStyle(\n    labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,\n    activeColor: colorScheme.disable(colorScheme.primary, colorScheme.secondary),\n    inactiveColor: colorScheme.secondary,\n    markStyle: FSliderMarkStyle(\n      tickColor: colorScheme.mutedForeground,\n      labelTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),\n      labelAnchor: Alignment.topCenter,\n      labelOffset: 10,\n    ),\n    tooltipStyle: _tooltipStyle(colorScheme: colorScheme, typography: typography, style: style),\n    thumbStyle: FSliderThumbStyle(\n      color: colorScheme.primaryForeground,\n      borderColor: colorScheme.disable(colorScheme.primary),\n      focusedOutlineStyle: style.focusedOutlineStyle,\n    ),\n  );\n  final errorHorizontalStyle = FSliderErrorStyle(\n    labelTextStyle: style.errorFormFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,\n    errorTextStyle: style.errorFormFieldStyle.errorTextStyle,\n    activeColor: colorScheme.error,\n    inactiveColor: colorScheme.secondary,\n    markStyle: FSliderMarkStyle(\n      tickColor: colorScheme.mutedForeground,\n      labelTextStyle: typography.xs.copyWith(color: colorScheme.error),\n      labelAnchor: Alignment.topCenter,\n      labelOffset: 10,\n    ),\n    tooltipStyle: _tooltipStyle(colorScheme: colorScheme, typography: typography, style: style),\n    thumbStyle: FSliderThumbStyle(\n      color: colorScheme.errorForeground,\n      borderColor: colorScheme.error,\n      focusedOutlineStyle: style.focusedOutlineStyle,\n    ),\n  );\n  return FSliderStyles(\n    horizontalStyle: FSliderStyle(\n      labelLayoutStyle: const FLabelLayoutStyle(\n        labelPadding: EdgeInsets.only(bottom: 5),\n        childPadding: EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),\n        descriptionPadding: EdgeInsets.only(top: 10),\n        errorPadding: EdgeInsets.only(top: 5),\n      ),\n      enabledStyle: enabledHorizontalStyle,\n      disabledStyle: disabledHorizontalStyle,\n      errorStyle: errorHorizontalStyle,\n    ),\n    verticalStyle: FSliderStyle(\n      labelLayoutStyle: const FLabelLayoutStyle(\n        labelPadding: EdgeInsets.only(bottom: 5),\n        childPadding: EdgeInsets.all(10),\n        descriptionPadding: EdgeInsets.only(top: 5),\n        errorPadding: EdgeInsets.only(top: 5),\n      ),\n      enabledStyle: enabledHorizontalStyle.transform(\n        (style) =>\n            style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),\n      ),\n      disabledStyle: disabledHorizontalStyle.transform(\n        (style) =>\n            style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),\n      ),\n      errorStyle: errorHorizontalStyle.transform(\n        (style) =>\n            style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),\n      ),\n      tooltipTipAnchor: FTouch.primary ? Alignment.bottomCenter : Alignment.centerLeft,\n      tooltipThumbAnchor: FTouch.primary ? Alignment.topCenter : Alignment.centerRight,\n    ),\n  );\n}\n',
     <String>['FSliderStyles', 'FTooltipStyle'],
   ),
   fpopoverstyle(
@@ -272,7 +277,12 @@ enum Registry {
     'FPopoverMenuStyle',
     18,
     'FPopoverMenuStyle popoverMenuStyle({\n  required FColorScheme colorScheme,\n  required FStyle style,\n  required FTypography typography,\n}) => FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography);\n',
-    <String>['FPopoverMenuStyle', 'FTileGroupStyle', 'FTileStyle', 'FTileContentStyle'],
+    <String>[
+      'FPopoverMenuStyle',
+      'FTileGroupStyle',
+      'FTileStyle',
+      'FTileContentStyle',
+    ],
   ),
   ftooltipstyle(
     'FTooltipStyle',
@@ -398,7 +408,12 @@ enum Registry {
     'FSelectContentStyle',
     20,
     'FSelectContentStyle selectContentStyle({\n  required FColorScheme colorScheme,\n  required FStyle style,\n  required FTypography typography,\n}) => FSelectContentStyle(\n  sectionStyle: _selectSectionStyle(colorScheme: colorScheme, style: style, typography: typography),\n  scrollHandleStyle: _selectScrollHandleStyle(colorScheme: colorScheme),\n);\n',
-    <String>['FSelectContentStyle', 'FSelectSectionStyle', 'FSelectItemStyle', 'FSelectScrollHandleStyle'],
+    <String>[
+      'FSelectContentStyle',
+      'FSelectSectionStyle',
+      'FSelectItemStyle',
+      'FSelectScrollHandleStyle',
+    ],
   ),
   fsheetstyle(
     'FSheetStyle',
@@ -448,7 +463,13 @@ enum Registry {
     'FSelectMenuTileStyle',
     21,
     'FSelectMenuTileStyle selectMenuTileStyle({\n  required FColorScheme colorScheme,\n  required FStyle style,\n  required FTypography typography,\n}) {\n  final groupStyle = _tileGroupStyle(colorScheme: colorScheme, style: style, typography: typography);\n  return FSelectMenuTileStyle(\n    labelLayoutStyle: groupStyle.labelLayoutStyle,\n    menuStyle: _popoverMenuStyle(colorScheme: colorScheme, style: style, typography: typography),\n    tileStyle: groupStyle.tileStyle,\n    enabledStyle: groupStyle.enabledStyle,\n    disabledStyle: groupStyle.disabledStyle,\n    errorStyle: groupStyle.errorStyle,\n  );\n}\n',
-    <String>['FSelectMenuTileStyle', 'FPopoverMenuStyle', 'FTileGroupStyle', 'FTileStyle', 'FTileContentStyle'],
+    <String>[
+      'FSelectMenuTileStyle',
+      'FPopoverMenuStyle',
+      'FTileGroupStyle',
+      'FTileStyle',
+      'FTileContentStyle',
+    ],
   ),
   frootheaderstyle(
     'FRootHeaderStyle',
@@ -466,7 +487,12 @@ enum Registry {
     'FHeaderStyles',
     14,
     'FHeaderStyles headerStyles({\n  required FColorScheme colorScheme,\n  required FTypography typography,\n  required FStyle style,\n}) => FHeaderStyles(\n  rootStyle: _rootHeaderStyle(colorScheme: colorScheme, typography: typography, style: style),\n  nestedStyle: _nestedHeaderStyle(colorScheme: colorScheme, typography: typography, style: style),\n);\n',
-    <String>['FHeaderStyles', 'FRootHeaderStyle', 'FNestedHeaderStyle', 'FHeaderActionStyle'],
+    <String>[
+      'FHeaderStyles',
+      'FRootHeaderStyle',
+      'FNestedHeaderStyle',
+      'FHeaderActionStyle',
+    ],
   ),
   fheaderactionstyle(
     'FHeaderActionStyle',
