@@ -338,11 +338,7 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
         enabledHoveredBackgroundColor: color.secondary,
         disabledBackgroundColor: color.disable(color.secondary),
         dividerStyle: FDividerStyle(color: color.border, width: style.borderWidth, padding: EdgeInsets.zero),
-        focusedDividerStyle: FDividerStyle(
-          color: color.primary,
-          width: style.borderWidth,
-          padding: EdgeInsets.zero,
-        ),
+        focusedDividerStyle: FDividerStyle(color: color.primary, width: style.borderWidth, padding: EdgeInsets.zero),
         tappableStyle: style.tappableStyle.copyWith(
           touchHoverEnterDuration: Duration.zero,
           touchHoverExitDuration: const Duration(milliseconds: 25),

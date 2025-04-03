@@ -64,15 +64,11 @@ final class _FNestedHeader extends FHeader {
                           children: [
                             Row(
                               children:
-                                  prefixes
-                                      .expand((action) => [action, SizedBox(width: style.actionSpacing)])
-                                      .toList(),
+                                  prefixes.expand((action) => [action, SizedBox(width: style.actionSpacing)]).toList(),
                             ),
                             Row(
                               children:
-                                  suffixes
-                                      .expand((action) => [SizedBox(width: style.actionSpacing), action])
-                                      .toList(),
+                                  suffixes.expand((action) => [SizedBox(width: style.actionSpacing), action]).toList(),
                             ),
                           ],
                         ),

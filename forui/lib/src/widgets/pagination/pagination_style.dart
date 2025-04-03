@@ -53,10 +53,7 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     : this(
         selected: FPaginationStateStyle(
           decoration: BoxDecoration(borderRadius: style.borderRadius, color: color.primary),
-          hoveredDecoration: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: color.hover(color.primary),
-          ),
+          hoveredDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.hover(color.primary)),
           textStyle: text.sm.copyWith(color: color.primaryForeground),
         ),
 

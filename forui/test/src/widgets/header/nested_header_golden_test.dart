@@ -17,10 +17,7 @@ void main() {
               FHeaderAction.back(onPress: () {}),
               const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
             ],
-            suffixes: [
-              FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
-              FHeaderAction.x(onPress: () {}),
-            ],
+            suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
           ),
         ),
       );
@@ -39,10 +36,7 @@ void main() {
                 FHeaderAction.back(onPress: () {}),
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
-              suffixes: [
-                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
-                FHeaderAction.x(onPress: () {}),
-              ],
+              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
             ),
           ),
         );
@@ -88,10 +82,7 @@ void main() {
                 FHeaderAction.back(onPress: () {}),
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
-              suffixes: [
-                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
-                FHeaderAction.x(onPress: () {}),
-              ],
+              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
             ),
           ),
         );

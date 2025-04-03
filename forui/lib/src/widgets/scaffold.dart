@@ -133,9 +133,7 @@ final class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
     : this(
         backgroundColor: color.background,
         childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
-        footerDecoration: BoxDecoration(
-          border: Border(top: BorderSide(color: color.border, width: style.borderWidth)),
-        ),
+        footerDecoration: BoxDecoration(border: Border(top: BorderSide(color: color.border, width: style.borderWidth))),
       );
 }
 

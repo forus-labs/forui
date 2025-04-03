@@ -225,11 +225,7 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     : this(
         headerStyle: FCalendarHeaderStyle.inherit(colorScheme: color, typography: text, style: style),
         dayPickerStyle: FCalendarDayPickerStyle.inherit(colorScheme: color, typography: text, style: style),
-        yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(
-          colorScheme: color,
-          typography: text,
-          style: style,
-        ),
+        yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: color, typography: text, style: style),
         decoration: BoxDecoration(
           borderRadius: style.borderRadius,
           border: Border.all(color: color.border),

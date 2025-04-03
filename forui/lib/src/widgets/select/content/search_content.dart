@@ -269,29 +269,21 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   });
 
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
-  FSelectSearchStyle.inherit({
-    required FColorScheme color,
-    required FTypography text,
-    required FStyle style,
-  }) : this(
-         textFieldStyle: FTextFieldStyle.inherit(
-           color: color,
-           text: text,
-           style: style,
-         ).transform(
-           (style) => style.copyWith(
-             enabledStyle: style.enabledStyle.copyWith(
-               focusedStyle: style.enabledStyle.focusedStyle.copyWith(color: Colors.transparent, width: 0),
-               unfocusedStyle: style.enabledStyle.unfocusedStyle.copyWith(color: Colors.transparent, width: 0),
-             ),
-           ),
-         ),
-         iconStyle: IconThemeData(size: 15, color: color.mutedForeground),
-         dividerStyle: FDividerStyles.inherit(
-           color: color,
-           style: style,
-         ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
-         loadingIndicatorStyle:
-             FProgressStyles.inherit(color: color, style: style).circularIconProgressStyle,
-       );
+  FSelectSearchStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+    : this(
+        textFieldStyle: FTextFieldStyle.inherit(color: color, text: text, style: style).transform(
+          (style) => style.copyWith(
+            enabledStyle: style.enabledStyle.copyWith(
+              focusedStyle: style.enabledStyle.focusedStyle.copyWith(color: Colors.transparent, width: 0),
+              unfocusedStyle: style.enabledStyle.unfocusedStyle.copyWith(color: Colors.transparent, width: 0),
+            ),
+          ),
+        ),
+        iconStyle: IconThemeData(size: 15, color: color.mutedForeground),
+        dividerStyle: FDividerStyles.inherit(
+          color: color,
+          style: style,
+        ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
+        loadingIndicatorStyle: FProgressStyles.inherit(color: color, style: style).circularIconProgressStyle,
+      );
 }

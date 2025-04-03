@@ -109,7 +109,8 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller =
-        widget.controller ?? FTabController(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
+        widget.controller ??
+        FTabController(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
     _controller.addListener(_update);
   }
 
@@ -162,10 +163,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           ),
           SizedBox(height: style.spacing),
           DefaultTextStyle(
-            style: theme.text.base.copyWith(
-              fontFamily: theme.text.defaultFontFamily,
-              color: theme.color.foreground,
-            ),
+            style: theme.text.base.copyWith(fontFamily: theme.text.defaultFontFamily, color: theme.color.foreground),
             child: widget.children[_controller.index].child,
           ),
         ],

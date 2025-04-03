@@ -201,8 +201,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       avatarStyle: avatarStyle ?? FAvatarStyle.inherit(color: color, text: text),
       badgeStyles: badgeStyles ?? FBadgeStyles.inherit(color: color, text: text, style: style),
       bottomNavigationBarStyle:
-          bottomNavigationBarStyle ??
-          FBottomNavigationBarStyle.inherit(color: color, text: text, style: style),
+          bottomNavigationBarStyle ?? FBottomNavigationBarStyle.inherit(color: color, text: text, style: style),
       breadcrumbStyle: breadcrumbStyle ?? FBreadcrumbStyle.inherit(color: color, text: text, style: style),
       buttonStyles: buttonStyles ?? FButtonStyles.inherit(color: color, text: text, style: style),
       calendarStyle: calendarStyle ?? FCalendarStyle.inherit(color: color, text: text, style: style),
@@ -213,22 +212,18 @@ final class FThemeData with Diagnosticable, FTransformable {
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(color: color, style: style),
       headerStyle: headerStyle ?? FHeaderStyles.inherit(color: color, text: text, style: style),
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
-      lineCalendarStyle:
-          lineCalendarStyle ?? FLineCalendarStyle.inherit(color: color, text: text, style: style),
+      lineCalendarStyle: lineCalendarStyle ?? FLineCalendarStyle.inherit(color: color, text: text, style: style),
       paginationStyle: paginationStyle ?? FPaginationStyle.inherit(color: color, text: text, style: style),
       pickerStyle: pickerStyle ?? FPickerStyle.inherit(color: color, style: style, text: text),
       popoverStyle: popoverStyle ?? FPopoverStyle.inherit(color: color, style: style),
-      popoverMenuStyle:
-          popoverMenuStyle ?? FPopoverMenuStyle.inherit(color: color, style: style, text: text),
+      popoverMenuStyle: popoverMenuStyle ?? FPopoverMenuStyle.inherit(color: color, style: style, text: text),
       progressStyles: progressStyles ?? FProgressStyles.inherit(color: color, style: style),
       radioStyle: radioStyle ?? FRadioStyle.inherit(color: color, style: style),
       resizableStyle: resizableStyle ?? FResizableStyle.inherit(color: color, style: style),
       scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(color: color, style: style),
       selectStyle: selectStyle ?? FSelectStyle.inherit(color: color, text: text, style: style),
-      selectGroupStyle:
-          selectGroupStyle ?? FSelectGroupStyle.inherit(color: color, text: text, style: style),
-      selectMenuTileStyle:
-          selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(color: color, text: text, style: style),
+      selectGroupStyle: selectGroupStyle ?? FSelectGroupStyle.inherit(color: color, text: text, style: style),
+      selectMenuTileStyle: selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(color: color, text: text, style: style),
       sheetStyle: sheetStyle ?? FSheetStyle.inherit(color: color),
       sliderStyles: sliderStyles ?? FSliderStyles.inherit(color: color, text: text, style: style),
       switchStyle: switchStyle ?? FSwitchStyle.inherit(color: color, style: style),

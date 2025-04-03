@@ -115,11 +115,7 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
     : this(
         primary: FAlertStyle(
           iconStyle: IconThemeData(color: color.foreground, size: 20),
-          titleTextStyle: text.base.copyWith(
-            fontWeight: FontWeight.w500,
-            color: color.foreground,
-            height: 1.2,
-          ),
+          titleTextStyle: text.base.copyWith(fontWeight: FontWeight.w500, color: color.foreground, height: 1.2),
           subtitleTextStyle: text.sm.copyWith(color: color.foreground),
           decoration: BoxDecoration(
             border: Border.all(color: color.border),
@@ -129,11 +125,7 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
         ),
         destructive: FAlertStyle(
           iconStyle: IconThemeData(color: color.destructive, size: 20),
-          titleTextStyle: text.base.copyWith(
-            fontWeight: FontWeight.w500,
-            color: color.destructive,
-            height: 1.2,
-          ),
+          titleTextStyle: text.base.copyWith(fontWeight: FontWeight.w500, color: color.destructive, height: 1.2),
           subtitleTextStyle: text.sm.copyWith(color: color.destructive),
           decoration: BoxDecoration(
             border: Border.all(color: color.destructive),

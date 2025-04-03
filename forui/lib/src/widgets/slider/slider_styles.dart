@@ -22,11 +22,7 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   FSliderStyles({required this.horizontalStyle, required this.verticalStyle});
 
   /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
-  factory FSliderStyles.inherit({
-    required FColorScheme color,
-    required FTypography text,
-    required FStyle style,
-  }) {
+  factory FSliderStyles.inherit({required FColorScheme color, required FTypography text, required FStyle style}) {
     final enabledHorizontalStyle = FSliderStateStyle(
       labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,

@@ -53,7 +53,10 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
           ),
         ),
         destructive: FBadgeStyle(
-          decoration: BoxDecoration(color: color.destructive, borderRadius:const BorderRadius.all(Radius.circular(100))),
+          decoration: BoxDecoration(
+            color: color.destructive,
+            borderRadius: const BorderRadius.all(Radius.circular(100)),
+          ),
           contentStyle: FBadgeContentStyle(
             labelTextStyle: text.sm.copyWith(color: color.destructiveForeground, fontWeight: FontWeight.w600),
           ),

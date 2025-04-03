@@ -78,12 +78,7 @@ void main() {
         );
         expect(
           typography.sm,
-          TextStyle(
-            color: color.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 14,
-            height: 1.25,
-          ),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 14, height: 1.25),
         );
         expect(
           typography.base,
@@ -91,21 +86,11 @@ void main() {
         );
         expect(
           typography.lg,
-          TextStyle(
-            color: color.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 18,
-            height: 1.75,
-          ),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 18, height: 1.75),
         );
         expect(
           typography.xl,
-          TextStyle(
-            color: color.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 20,
-            height: 1.75,
-          ),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 20, height: 1.75),
         );
         expect(
           typography.xl2,
@@ -113,12 +98,7 @@ void main() {
         );
         expect(
           typography.xl3,
-          TextStyle(
-            color: color.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 30,
-            height: 2.25,
-          ),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 30, height: 2.25),
         );
         expect(
           typography.xl4,
