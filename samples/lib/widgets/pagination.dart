@@ -149,7 +149,7 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
 
   @override
   Widget sample(BuildContext context) {
-    final style = context.theme.colorScheme;
+    final style = context.theme.color;
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -184,7 +184,7 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
             ),
           ),
         ),
-        FPagination(controller: paginationController, onPageChange: _handlePageChange),
+        FPagination(controller: paginationController, onChange: _handlePageChange),
       ],
     );
   }

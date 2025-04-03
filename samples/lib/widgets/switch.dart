@@ -52,9 +52,9 @@ class _FormSwitchState extends StatefulSampleState<FormSwitchPage> {
           children: [
             Text(
               'Email Notifications',
-              style: theme.typography.xl2.copyWith(
+              style: theme.text.xl2.copyWith(
                 fontWeight: FontWeight.w600,
-                color: theme.colorScheme.foreground,
+                color: theme.color.foreground,
                 height: 1.5,
               ),
             ),
@@ -71,15 +71,15 @@ class _FormSwitchState extends StatefulSampleState<FormSwitchPage> {
                         children: [
                           Text(
                             'Marketing Emails',
-                            style: theme.typography.base.copyWith(
+                            style: theme.text.base.copyWith(
                               fontWeight: FontWeight.w500,
-                              color: theme.colorScheme.foreground,
+                              color: theme.color.foreground,
                               height: 1.5,
                             ),
                           ),
                           Text(
                             'Receive emails about new products, features, and more.',
-                            style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
+                            style: theme.text.sm.copyWith(color: theme.color.mutedForeground),
                           ),
                         ],
                       ),
@@ -110,15 +110,15 @@ class _FormSwitchState extends StatefulSampleState<FormSwitchPage> {
                         children: [
                           Text(
                             'Security emails',
-                            style: theme.typography.base.copyWith(
+                            style: theme.text.base.copyWith(
                               fontWeight: FontWeight.w500,
-                              color: theme.colorScheme.foreground,
+                              color: theme.color.foreground,
                               height: 1.5,
                             ),
                           ),
                           Text(
                             'Receive emails about your account security.',
-                            style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
+                            style: theme.text.sm.copyWith(color: theme.color.mutedForeground),
                           ),
                         ],
                       ),
@@ -138,7 +138,7 @@ class _FormSwitchState extends StatefulSampleState<FormSwitchPage> {
             ),
             const SizedBox(height: 30),
             FButton(
-              label: const Text('Submit'),
+              child: const Text('Submit'),
               onPress: () {
                 if (!_formKey.currentState!.validate()) {
                   // Handle errors here.

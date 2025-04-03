@@ -16,10 +16,10 @@ class TabsPage extends Sample {
       Padding(
         padding: const EdgeInsets.all(16),
         child: FTabs(
-          tabs: [
+          children: [
             FTabEntry(
               label: const Text('Account'),
-              content: FCard(
+              child: FCard(
                 title: const Text('Account'),
                 subtitle: const Text('Make changes to your account here. Click save when you are done.'),
                 child: Column(
@@ -28,14 +28,14 @@ class TabsPage extends Sample {
                     const SizedBox(height: 10),
                     const FTextField(label: Text('Email'), hint: 'john@doe.com'),
                     const SizedBox(height: 16),
-                    FButton(label: const Text('Save'), onPress: () {}),
+                    FButton(child: const Text('Save'), onPress: () {}),
                   ],
                 ),
               ),
             ),
             FTabEntry(
               label: const Text('Password'),
-              content: FCard(
+              child: FCard(
                 title: const Text('Password'),
                 subtitle: const Text('Change your password here. After saving, you will be logged out.'),
                 child: Column(
@@ -44,7 +44,7 @@ class TabsPage extends Sample {
                     const SizedBox(height: 10),
                     const FTextField(label: Text('New password')),
                     const SizedBox(height: 16),
-                    FButton(label: const Text('Save'), onPress: () {}),
+                    FButton(child: const Text('Save'), onPress: () {}),
                   ],
                 ),
               ),

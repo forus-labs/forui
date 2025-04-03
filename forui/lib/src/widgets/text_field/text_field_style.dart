@@ -87,46 +87,42 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  FTextFieldStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  FTextFieldStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
-        keyboardAppearance: colorScheme.brightness,
+        keyboardAppearance: color.brightness,
         labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
-        clearButtonStyle: FButtonStyles.inherit(
-          colorScheme: colorScheme,
-          typography: typography,
-          style: style,
-        ).ghost.transform(
+        clearButtonStyle: FButtonStyles.inherit(color: color, text: text, style: style).ghost.transform(
           (ghost) => ghost.copyWith(
             iconContentStyle: ghost.iconContentStyle.copyWith(
-              enabledStyle: IconThemeData(color: colorScheme.mutedForeground, size: 17),
+              enabledStyle: IconThemeData(color: color.mutedForeground, size: 17),
             ),
           ),
         ),
         enabledStyle: FTextFieldStateStyle.inherit(
-          contentColor: colorScheme.primary,
-          hintColor: colorScheme.mutedForeground,
-          focusedBorderColor: colorScheme.primary,
-          unfocusedBorderColor: colorScheme.border,
+          contentColor: color.primary,
+          hintColor: color.mutedForeground,
+          focusedBorderColor: color.primary,
+          unfocusedBorderColor: color.border,
           formFieldStyle: style.enabledFormFieldStyle,
-          typography: typography,
+          text: text,
           style: style,
         ),
         disabledStyle: FTextFieldStateStyle.inherit(
-          contentColor: colorScheme.disable(colorScheme.primary),
-          hintColor: colorScheme.disable(colorScheme.border),
-          focusedBorderColor: colorScheme.disable(colorScheme.border),
-          unfocusedBorderColor: colorScheme.disable(colorScheme.border),
+          contentColor: color.disable(color.primary),
+          hintColor: color.disable(color.border),
+          focusedBorderColor: color.disable(color.border),
+          unfocusedBorderColor: color.disable(color.border),
           formFieldStyle: style.disabledFormFieldStyle,
-          typography: typography,
+          text: text,
           style: style,
         ),
         errorStyle: FTextFieldErrorStyle.inherit(
-          contentColor: colorScheme.primary,
-          hintColor: colorScheme.mutedForeground,
-          focusedBorderColor: colorScheme.error,
-          unfocusedBorderColor: colorScheme.error,
+          contentColor: color.primary,
+          hintColor: color.mutedForeground,
+          focusedBorderColor: color.error,
+          unfocusedBorderColor: color.error,
           formFieldErrorStyle: style.errorFormFieldStyle,
-          typography: typography,
+          text: text,
           style: style,
         ),
       );

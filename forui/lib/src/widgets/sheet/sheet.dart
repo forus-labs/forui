@@ -295,6 +295,6 @@ class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
   });
 
   /// Creates a [FSheetStyle] that inherits its colors from the given [FColorScheme].
-  FSheetStyle.inherit({required FColorScheme colorScheme})
-    : this(barrierColor: colorScheme.barrier, backgroundColor: colorScheme.background);
+  FSheetStyle.inherit({required FColorScheme color})
+    : this(barrierColor: color.barrier, backgroundColor: color.background);
 }

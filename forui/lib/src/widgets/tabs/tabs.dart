@@ -18,18 +18,18 @@ class FTabEntry {
   final Widget label;
 
   /// The content of a tab.
-  final Widget content;
+  final Widget child;
 
   /// Creates a [FTabs].
-  const FTabEntry({required this.label, required this.content});
+  const FTabEntry({required this.label, required this.child});
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FTabEntry && runtimeType == other.runtimeType && label == other.label && content == other.content;
+      other is FTabEntry && runtimeType == other.runtimeType && label == other.label && child == other.child;
 
   @override
-  int get hashCode => label.hashCode ^ content.hashCode;
+  int get hashCode => label.hashCode ^ child.hashCode;
 }
 
 /// Allows switching between widgets through tabs.
@@ -60,29 +60,29 @@ class FTabs extends StatefulWidget {
   /// A callback that returns the tab that was tapped.
   final ValueChanged<int>? onPress;
 
-  /// The tab and it's corresponding view.
-  final List<FTabEntry> tabs;
+  /// The tabs.
+  final List<FTabEntry> children;
 
   /// Creates a [FTabs].
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * [tabs] is empty.
+  /// * [children] is empty.
   /// * [initialIndex] is not within the range '0 <= initialIndex < tabs.length`.
   /// * [controller] index does not match the [initialIndex].
   FTabs({
-    required this.tabs,
+    required this.children,
     this.initialIndex = 0,
     this.scrollable = false,
     this.controller,
     this.style,
     this.onPress,
     super.key,
-  }) : assert(tabs.isNotEmpty, 'Must have at least 1 tab provided.'),
-       assert(0 <= initialIndex && initialIndex < tabs.length, 'initialIndex must be within the range of tabs.'),
+  }) : assert(children.isNotEmpty, 'Must have at least 1 tab provided.'),
+       assert(0 <= initialIndex && initialIndex < children.length, 'initialIndex must be within the range of tabs.'),
        assert(controller == null || controller.index == initialIndex, "Controller's index must match initialIndex."),
        assert(
-         controller == null || controller.length == tabs.length,
+         controller == null || controller.length == children.length,
          'Controller length must match the number of tabs.',
        );
 
@@ -95,7 +95,7 @@ class FTabs extends StatefulWidget {
       ..add(IntProperty('initialIndex', initialIndex))
       ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(IterableProperty('tabs', tabs));
+      ..add(IterableProperty('children', children));
   }
 
   @override
@@ -109,7 +109,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller =
-        widget.controller ?? FTabController(initialIndex: widget.initialIndex, length: widget.tabs.length, vsync: this);
+        widget.controller ?? FTabController(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
     _controller.addListener(_update);
   }
 
@@ -125,7 +125,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
       _controller =
           widget.controller ??
-          FTabController(initialIndex: widget.initialIndex, length: widget.tabs.length, vsync: this);
+          FTabController(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
       _controller.addListener(_update);
     }
   }
@@ -146,7 +146,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
             decoration: style.decoration,
             child: TabBar(
               tabAlignment: widget.scrollable ? TabAlignment.start : TabAlignment.fill,
-              tabs: [for (final tab in widget.tabs) _Tab(style: style, label: tab.label)],
+              tabs: [for (final tab in widget.children) _Tab(style: style, label: tab.label)],
               controller: _controller._controller,
               isScrollable: widget.scrollable,
               padding: style.padding,
@@ -162,11 +162,11 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           ),
           SizedBox(height: style.spacing),
           DefaultTextStyle(
-            style: theme.typography.base.copyWith(
-              fontFamily: theme.typography.defaultFontFamily,
-              color: theme.colorScheme.foreground,
+            style: theme.text.base.copyWith(
+              fontFamily: theme.text.defaultFontFamily,
+              color: theme.color.foreground,
             ),
-            child: widget.tabs[_controller.index].content,
+            child: widget.children[_controller.index].child,
           ),
         ],
       ),

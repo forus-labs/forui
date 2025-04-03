@@ -90,11 +90,11 @@ final class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
     this.fadeInDuration = const Duration(milliseconds: 500),
   });
 
-  /// Creates a [FCardStyle] that inherits its properties from [colorScheme] and [typography].
-  FAvatarStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  /// Creates a [FCardStyle] that inherits its properties from [color] and [text].
+  FAvatarStyle.inherit({required FColorScheme color, required FTypography text})
     : this(
-        backgroundColor: colorScheme.muted,
-        foregroundColor: colorScheme.mutedForeground,
-        textStyle: typography.base.copyWith(color: colorScheme.mutedForeground, height: 0),
+        backgroundColor: color.muted,
+        foregroundColor: color.mutedForeground,
+        textStyle: text.base.copyWith(color: color.mutedForeground, height: 0),
       );
 }

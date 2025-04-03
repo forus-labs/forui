@@ -33,7 +33,7 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
   @override
   final IconThemeData iconStyle;
 
-  /// The border radius. Defaults to `BorderRadius.circular(8)`.
+  /// The border radius. Defaults to `FLerpBorderRadius.circular(8)`.
   @override
   final BorderRadius borderRadius;
 
@@ -64,36 +64,36 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
     required this.focusedOutlineStyle,
     required this.iconStyle,
     required this.tappableStyle,
-    this.borderRadius = const BorderRadius.all(Radius.circular(8)),
+    this.borderRadius = const FLerpBorderRadius.all(Radius.circular(8), min: 24),
     this.borderWidth = 1,
     this.pagePadding = const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
     this.shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
   });
 
   /// Creates an [FStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
-  FStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FStyle.inherit({required FColorScheme color, required FTypography text})
     : this(
         enabledFormFieldStyle: FFormFieldStyle.inherit(
-          labelColor: colorScheme.primary,
-          descriptionColor: colorScheme.mutedForeground,
-          typography: typography,
+          labelColor: color.primary,
+          descriptionColor: color.mutedForeground,
+          text: text,
         ),
         disabledFormFieldStyle: FFormFieldStyle.inherit(
-          labelColor: colorScheme.disable(colorScheme.primary),
-          descriptionColor: colorScheme.disable(colorScheme.mutedForeground),
-          typography: typography,
+          labelColor: color.disable(color.primary),
+          descriptionColor: color.disable(color.mutedForeground),
+          text: text,
         ),
         errorFormFieldStyle: FFormFieldErrorStyle.inherit(
-          labelColor: colorScheme.error,
-          descriptionColor: colorScheme.mutedForeground,
-          errorColor: colorScheme.error,
-          typography: typography,
+          labelColor: color.error,
+          descriptionColor: color.mutedForeground,
+          errorColor: color.error,
+          text: text,
         ),
         focusedOutlineStyle: FFocusedOutlineStyle(
-          color: colorScheme.primary,
+          color: color.primary,
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
-        iconStyle: IconThemeData(color: colorScheme.primary, size: 20),
+        iconStyle: IconThemeData(color: color.primary, size: 20),
         tappableStyle: FTappableStyle(),
       );
 }

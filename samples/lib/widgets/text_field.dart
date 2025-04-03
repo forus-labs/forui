@@ -117,7 +117,7 @@ class _FormFieldState extends StatefulSampleState<FormTextFieldPage> {
           ),
           const SizedBox(height: 20),
           FButton(
-            label: const Text('Login'),
+            child: const Text('Login'),
             onPress: () {
               if (!_formKey.currentState!.validate()) {
                 return; // Form is invalid.

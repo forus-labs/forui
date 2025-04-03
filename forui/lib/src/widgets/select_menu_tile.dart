@@ -599,16 +599,16 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, 
     required super.errorStyle,
   });
 
-  /// Creates a [FSelectMenuTileStyle] that inherits its properties from [colorScheme], [style] and [typography].
+  /// Creates a [FSelectMenuTileStyle] that inherits its properties.
   factory FSelectMenuTileStyle.inherit({
-    required FColorScheme colorScheme,
+    required FColorScheme color,
+    required FTypography text,
     required FStyle style,
-    required FTypography typography,
   }) {
-    final groupStyle = FTileGroupStyle.inherit(colorScheme: colorScheme, style: style, typography: typography);
+    final groupStyle = FTileGroupStyle.inherit(color: color, style: style, text: text);
     return FSelectMenuTileStyle(
       labelLayoutStyle: groupStyle.labelLayoutStyle,
-      menuStyle: FPopoverMenuStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
+      menuStyle: FPopoverMenuStyle.inherit(color: color, style: style, text: text),
       tileStyle: groupStyle.tileStyle,
       enabledStyle: groupStyle.enabledStyle,
       disabledStyle: groupStyle.disabledStyle,

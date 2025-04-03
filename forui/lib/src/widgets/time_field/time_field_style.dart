@@ -9,7 +9,7 @@ part 'time_field_style.style.dart';
 
 /// A time field's style.
 class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
-  /// The time field's textfield style.
+  /// The time field's text field style.
   @override
   final FTextFieldStyle textFieldStyle;
 
@@ -38,12 +38,12 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
     this.popoverConstraints = const BoxConstraints(maxWidth: 200, maxHeight: 200),
   });
 
-  /// Creates a [FTimeFieldStyle] that inherits the [colorScheme], [typography], and [style].
-  FTimeFieldStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FTimeFieldStyle] that inherits the [color], [text], and [style].
+  FTimeFieldStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
-        pickerStyle: FTimePickerStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        iconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 18),
+        textFieldStyle: FTextFieldStyle.inherit(color: color, text: text, style: style),
+        popoverStyle: FPopoverStyle.inherit(color: color, style: style),
+        pickerStyle: FTimePickerStyle.inherit(color: color, text: text, style: style),
+        iconStyle: IconThemeData(color: color.mutedForeground, size: 18),
       );
 }

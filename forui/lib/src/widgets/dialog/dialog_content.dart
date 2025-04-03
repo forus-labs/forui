@@ -131,17 +131,4 @@ final class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFuncti
     required this.padding,
     required this.actionSpacing,
   });
-
-  /// Creates a [FDialogContentStyle] that inherits its properties from [colorScheme] and [typography].
-  FDialogContentStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required EdgeInsets padding,
-    required double actionSpacing,
-  }) : this(
-         titleTextStyle: typography.lg.copyWith(fontWeight: FontWeight.w600, color: colorScheme.foreground),
-         bodyTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-         padding: padding,
-         actionSpacing: actionSpacing,
-       );
 }

@@ -7,23 +7,17 @@ part of 'header.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/header for working examples.
-/// * [FRootHeaderStyle] for customizing a header's appearance.
 final class _FRootHeader extends FHeader {
   /// The header's style.
-  final FRootHeaderStyle? style;
-
-  /// The title, aligned to the left in LTR locales.
-  ///
-  /// It is aligned to the right in RTL locales.
-  final Widget title;
+  final FHeaderStyle? style;
 
   /// The actions, aligned to the right in LTR locales. Defaults to an empty list.
   ///
   /// They are aligned to the left in RTL locales.
-  final List<Widget> actions;
+  final List<Widget> suffixes;
 
   /// Creates a [FHeader].
-  const _FRootHeader({required this.title, this.style, this.actions = const [], super.key}) : super._();
+  const _FRootHeader({this.style, this.suffixes = const [], super.title, super.key}) : super._();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +43,7 @@ final class _FRootHeader extends FHeader {
               FHeaderData(
                 actionStyle: style.actionStyle,
                 child: Row(
-                  children: actions.expand((action) => [SizedBox(width: style.actionSpacing), action]).toList(),
+                  children: suffixes.expand((action) => [SizedBox(width: style.actionSpacing), action]).toList(),
                 ),
               ),
             ],
@@ -62,45 +56,6 @@ final class _FRootHeader extends FHeader {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(IterableProperty('actions', actions));
+    properties.add(DiagnosticsProperty('style', style));
   }
-}
-
-/// [FHeader.new]'s style.
-final class FRootHeaderStyle with Diagnosticable, _$FRootHeaderStyleFunctions {
-  /// The title's [TextStyle].
-  @override
-  final TextStyle titleTextStyle;
-
-  /// The [FHeaderAction]'s style.
-  @override
-  final FHeaderActionStyle actionStyle;
-
-  /// The spacing between [FHeaderAction]s. Defaults to 10.
-  @override
-  final double actionSpacing;
-
-  /// The padding.
-  @override
-  final EdgeInsetsGeometry padding;
-
-  /// Creates a [FRootHeaderStyle].
-  FRootHeaderStyle({
-    required this.titleTextStyle,
-    required this.actionStyle,
-    required this.padding,
-    this.actionSpacing = 10,
-  });
-
-  /// Creates a [FRootHeaderStyle] that inherits its properties from the given [FColorScheme], [FTypography] and
-  /// [FStyle].
-  FRootHeaderStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-    : this(
-        titleTextStyle: typography.xl3.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w700, height: 1),
-        actionStyle: FHeaderActionStyle.inherit(colorScheme: colorScheme, style: style, size: 30),
-        padding: style.pagePadding.copyWith(bottom: 15),
-      );
 }

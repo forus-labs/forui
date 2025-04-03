@@ -13,7 +13,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FAccordion(
-            items: [
+            children: [
               FAccordionItem(
                 title: const Text('Title'),
                 initiallyExpanded: true,
@@ -44,7 +44,7 @@ void main() {
         TestScaffold.app(
           child: FAccordion(
             controller: first,
-            items: const [FAccordionItem(title: Text('Title'), child: Text('button'))],
+            children: const [FAccordionItem(title: Text('Title'), child: Text('button'))],
           ),
         ),
       );
@@ -54,7 +54,7 @@ void main() {
         TestScaffold.app(
           child: FAccordion(
             controller: second,
-            items: const [FAccordionItem(title: Text('Title'), child: Text('button'))],
+            children: const [FAccordionItem(title: Text('Title'), child: Text('button'))],
           ),
         ),
       );

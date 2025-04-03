@@ -16,7 +16,7 @@ void main() {
           child: FHeader(
             style: TestScaffold.blueScreen.headerStyle.rootStyle,
             title: const Text('Title'),
-            actions: [
+            suffixes: [
               FHeaderAction.back(onPress: () {}),
               const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
             ],
@@ -34,7 +34,7 @@ void main() {
             theme: theme.data,
             child: FHeader(
               title: const Text(title),
-              actions: [
+              suffixes: [
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
                 FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
               ],
@@ -51,7 +51,7 @@ void main() {
             theme: theme.data,
             child: FHeader(
               title: const Text(title),
-              actions: [
+              suffixes: [
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
                 FHeaderAction(autofocus: true, icon: const Icon(FIcons.plus), onPress: () {}),
               ],
@@ -69,7 +69,7 @@ void main() {
             textDirection: TextDirection.rtl,
             child: FHeader(
               title: const Text(title),
-              actions: [
+              suffixes: [
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
                 FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
               ],

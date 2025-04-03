@@ -110,35 +110,35 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   /// Creates a [FAlertStyles].
   const FAlertStyles({required this.primary, required this.destructive});
 
-  /// Creates a [FAlertStyles] that inherits its properties from the provided [colorScheme], [typography], and [style].
-  FAlertStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FAlertStyles] that inherits its properties.
+  FAlertStyles.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
         primary: FAlertStyle(
-          iconStyle: IconThemeData(color: colorScheme.foreground, size: 20),
-          titleTextStyle: typography.base.copyWith(
+          iconStyle: IconThemeData(color: color.foreground, size: 20),
+          titleTextStyle: text.base.copyWith(
             fontWeight: FontWeight.w500,
-            color: colorScheme.foreground,
+            color: color.foreground,
             height: 1.2,
           ),
-          subtitleTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
+          subtitleTextStyle: text.sm.copyWith(color: color.foreground),
           decoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
+            border: Border.all(color: color.border),
             borderRadius: style.borderRadius,
-            color: colorScheme.background,
+            color: color.background,
           ),
         ),
         destructive: FAlertStyle(
-          iconStyle: IconThemeData(color: colorScheme.destructive, size: 20),
-          titleTextStyle: typography.base.copyWith(
+          iconStyle: IconThemeData(color: color.destructive, size: 20),
+          titleTextStyle: text.base.copyWith(
             fontWeight: FontWeight.w500,
-            color: colorScheme.destructive,
+            color: color.destructive,
             height: 1.2,
           ),
-          subtitleTextStyle: typography.sm.copyWith(color: colorScheme.destructive),
+          subtitleTextStyle: text.sm.copyWith(color: color.destructive),
           decoration: BoxDecoration(
-            border: Border.all(color: colorScheme.destructive),
+            border: Border.all(color: color.destructive),
             borderRadius: style.borderRadius,
-            color: colorScheme.background,
+            color: color.background,
           ),
         ),
       );

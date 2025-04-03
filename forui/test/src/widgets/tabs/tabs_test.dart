@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: TestScaffold(
-            child: FTabs(tabs: [FTabEntry(label: const Text('Account'), content: Container(height: 100))]),
+            child: FTabs(children: [FTabEntry(label: const Text('Account'), child: Container(height: 100))]),
           ),
         ),
       );
@@ -24,7 +24,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            child: FTabs(tabs: [FTabEntry(label: const Text('Account'), content: Container(height: 100))]),
+            child: FTabs(children: [FTabEntry(label: const Text('Account'), child: Container(height: 100))]),
           ),
         ),
       );
@@ -34,7 +34,7 @@ void main() {
 
     testWidgets('not embedded in any App', (tester) async {
       await tester.pumpWidget(
-        TestScaffold(child: FTabs(tabs: [FTabEntry(label: const Text('Account'), content: Container(height: 100))])),
+        TestScaffold(child: FTabs(children: [FTabEntry(label: const Text('Account'), child: Container(height: 100))])),
       );
 
       expect(tester.takeException(), null);
@@ -50,7 +50,7 @@ void main() {
             DefaultWidgetsLocalizations.delegate,
           ],
           child: TestScaffold(
-            child: FTabs(tabs: [FTabEntry(label: const Text('Account'), content: Container(height: 100))]),
+            child: FTabs(children: [FTabEntry(label: const Text('Account'), child: Container(height: 100))]),
           ),
         ),
       );
@@ -62,9 +62,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTabs(
-            tabs: const [
-              FTabEntry(label: Text('foo'), content: Text('foo content')),
-              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
             ],
           ),
         ),
@@ -84,9 +84,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTabs(
-            tabs: const [
-              FTabEntry(label: Text('foo'), content: Text('foo content')),
-              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
             ],
           ),
         ),
@@ -107,9 +107,9 @@ void main() {
         TestScaffold.app(
           child: FTabs(
             controller: controller,
-            tabs: const [
-              FTabEntry(label: Text('foo'), content: Text('foo content')),
-              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
             ],
           ),
         ),
@@ -130,9 +130,9 @@ void main() {
         TestScaffold.app(
           child: FTabs(
             controller: controller,
-            tabs: const [
-              FTabEntry(label: Text('foo'), content: Text('foo content')),
-              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
             ],
           ),
         ),
@@ -152,9 +152,9 @@ void main() {
         TestScaffold.app(
           child: FTabs(
             controller: first,
-            tabs: const [
-              FTabEntry(label: Text('foo'), content: Text('foo content')),
-              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
             ],
           ),
         ),
@@ -168,9 +168,9 @@ void main() {
         TestScaffold.app(
           child: FTabs(
             controller: second,
-            tabs: const [
-              FTabEntry(label: Text('foo'), content: Text('foo content')),
-              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
             ],
           ),
         ),
@@ -188,9 +188,9 @@ void main() {
         TestScaffold.app(
           child: FTabs(
             controller: controller,
-            tabs: const [
-              FTabEntry(label: Text('foo'), content: Text('foo content')),
-              FTabEntry(label: Text('bar'), content: Text('bar content')),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
             ],
           ),
         ),

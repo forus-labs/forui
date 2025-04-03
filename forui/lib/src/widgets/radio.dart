@@ -202,31 +202,31 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   });
 
   /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
-  FRadioStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  FRadioStyle.inherit({required FColorScheme color, required FStyle style})
     : this(
         labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-        focusedOutlineStyle: FFocusedOutlineStyle(color: colorScheme.primary, borderRadius: BorderRadius.circular(100)),
+        focusedOutlineStyle: FFocusedOutlineStyle(color: color.primary, borderRadius: BorderRadius.circular(100)),
         enabledStyle: FRadioStateStyle(
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.primary,
-          selectedColor: colorScheme.primary,
-          backgroundColor: colorScheme.background,
+          borderColor: color.primary,
+          selectedColor: color.primary,
+          backgroundColor: color.background,
         ),
         disabledStyle: FRadioStateStyle(
           labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.disable(colorScheme.primary),
-          selectedColor: colorScheme.disable(colorScheme.primary),
-          backgroundColor: colorScheme.background,
+          borderColor: color.disable(color.primary),
+          selectedColor: color.disable(color.primary),
+          backgroundColor: color.background,
         ),
         errorStyle: FRadioErrorStyle(
           labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
           errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          borderColor: colorScheme.error,
-          selectedColor: colorScheme.error,
-          backgroundColor: colorScheme.background,
+          borderColor: color.error,
+          selectedColor: color.error,
+          backgroundColor: color.background,
         ),
       );
 

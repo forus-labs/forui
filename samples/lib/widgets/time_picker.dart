@@ -70,7 +70,7 @@ class _AnimatedTimePickerPageState extends StatefulSampleState<AnimatedTimePicke
     children: [
       SizedBox(height: 300, child: FTimePicker(controller: _controller)),
       FButton(
-        label: const Text('Funny button'),
+        child: const Text('Funny button'),
         onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
       ),
     ],

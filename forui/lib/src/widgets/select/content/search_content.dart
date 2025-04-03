@@ -74,7 +74,7 @@ class SearchContent<T> extends StatefulWidget {
 }
 
 class _SearchContentState<T> extends State<SearchContent<T>> {
-  final FocusNode _focus = FocusNode();
+  final FocusNode _focus = FocusNode(debugLabel: 'search field');
   late TextEditingController _controller;
   late String _previous;
   late FutureOr<FSelectSearchData<T>> _data;
@@ -270,13 +270,13 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
 
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
   FSelectSearchStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
+    required FColorScheme color,
+    required FTypography text,
     required FStyle style,
   }) : this(
          textFieldStyle: FTextFieldStyle.inherit(
-           colorScheme: colorScheme,
-           typography: typography,
+           color: color,
+           text: text,
            style: style,
          ).transform(
            (style) => style.copyWith(
@@ -286,12 +286,12 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
              ),
            ),
          ),
-         iconStyle: IconThemeData(size: 15, color: colorScheme.mutedForeground),
+         iconStyle: IconThemeData(size: 15, color: color.mutedForeground),
          dividerStyle: FDividerStyles.inherit(
-           colorScheme: colorScheme,
+           color: color,
            style: style,
          ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
          loadingIndicatorStyle:
-             FProgressStyles.inherit(colorScheme: colorScheme, style: style).circularIconProgressStyle,
+             FProgressStyles.inherit(color: color, style: style).circularIconProgressStyle,
        );
 }

@@ -103,18 +103,12 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   });
 
   /// Creates a [FSelectSectionStyle] that inherits from the given [FColorScheme], [FStyle], and [FTypography].
-  FSelectSectionStyle.inherit({
-    required FColorScheme colorScheme,
-    required FStyle style,
-    required FTypography typography,
-  }) : this(
-         enabledLabelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-         disabledLabelTextStyle: typography.sm.copyWith(
-           color: colorScheme.disable(colorScheme.primary),
-           fontWeight: FontWeight.w600,
-         ),
-         itemStyle: FSelectItemStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
-       );
+  FSelectSectionStyle.inherit({required FColorScheme color, required FStyle style, required FTypography text})
+    : this(
+        enabledLabelTextStyle: text.sm.copyWith(color: color.primary, fontWeight: FontWeight.w600),
+        disabledLabelTextStyle: text.sm.copyWith(color: color.disable(color.primary), fontWeight: FontWeight.w600),
+        itemStyle: FSelectItemStyle.inherit(color: color, style: style, text: text),
+      );
 }
 
 /// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].
@@ -281,14 +275,14 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
     this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
 
-  /// Creates a [FSelectItemStyle] that inherits from the given [FColorScheme], [FStyle], and [FTypography].
-  FSelectItemStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
+  /// Creates a [FSelectItemStyle] that inherits its properties.
+  FSelectItemStyle.inherit({required FColorScheme color, required FStyle style, required FTypography text})
     : this(
-        enabledHoveredDecoration: BoxDecoration(color: colorScheme.secondary, borderRadius: style.borderRadius),
-        enabledTextStyle: typography.sm.copyWith(color: colorScheme.primary),
-        disabledTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.primary)),
-        enabledIconStyle: IconThemeData(color: colorScheme.primary, size: 15),
-        disabledIconStyle: IconThemeData(color: colorScheme.disable(colorScheme.primary), size: 15),
+        enabledHoveredDecoration: BoxDecoration(color: color.secondary, borderRadius: style.borderRadius),
+        enabledTextStyle: text.sm.copyWith(color: color.primary),
+        disabledTextStyle: text.sm.copyWith(color: color.disable(color.primary)),
+        enabledIconStyle: IconThemeData(color: color.primary, size: 15),
+        disabledIconStyle: IconThemeData(color: color.disable(color.primary), size: 15),
         tappableStyle: FTappableStyle(animationTween: FTappableAnimations.none),
       );
 }

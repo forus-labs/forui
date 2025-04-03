@@ -17,24 +17,26 @@ part 'nested_header.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/header for working examples.
-/// * [FRootHeaderStyle] and [FNestedHeaderStyle] for customizing a header's appearance.
+/// * [FHeaderStyle] for customizing a header's appearance.
 sealed class FHeader extends StatelessWidget {
-  const FHeader._({super.key});
+  /// The title.
+  final Widget title;
 
-  /// Creates a header.
+  const FHeader._({this.title = const SizedBox(), super.key});
+
+  /// Creates a header which title is aligned to the start.
   ///
   /// It is typically used on pages at the root of the navigation stack.
-  const factory FHeader({required Widget title, FRootHeaderStyle? style, List<Widget> actions, Key? key}) =
-      _FRootHeader;
+  const factory FHeader({Widget title, FHeaderStyle? style, List<Widget> suffixes, Key? key}) = _FRootHeader;
 
-  /// Creates a nested header.
+  /// Creates a nested header which title is aligned to the center.
   ///
   /// It is typically used on pages NOT at the root of the navigation stack.
   const factory FHeader.nested({
-    required Widget title,
-    FNestedHeaderStyle? style,
-    List<Widget> prefixActions,
-    List<Widget> suffixActions,
+    Widget title,
+    FHeaderStyle? style,
+    List<Widget> prefixes,
+    List<Widget> suffixes,
     Key? key,
   }) = _FNestedHeader;
 }
@@ -72,17 +74,52 @@ class FHeaderData extends InheritedWidget {
 final class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   /// The root header's style.
   @override
-  final FRootHeaderStyle rootStyle;
+  final FHeaderStyle rootStyle;
 
   /// The nested header's style.
   @override
-  final FNestedHeaderStyle nestedStyle;
+  final FHeaderStyle nestedStyle;
 
   /// Creates a [FHeaderStyles].
   const FHeaderStyles({required this.rootStyle, required this.nestedStyle});
 
   /// Creates a [FHeaderStyles] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
-  FHeaderStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
-    : rootStyle = FRootHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-      nestedStyle = FNestedHeaderStyle.inherit(colorScheme: colorScheme, typography: typography, style: style);
+  FHeaderStyles.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+    : rootStyle = FHeaderStyle(
+        titleTextStyle: text.xl3.copyWith(color: color.foreground, fontWeight: FontWeight.w700, height: 1),
+        actionStyle: FHeaderActionStyle.inherit(color: color, style: style, size: 30),
+        padding: style.pagePadding.copyWith(bottom: 15),
+      ),
+      nestedStyle = FHeaderStyle(
+        titleTextStyle: text.xl.copyWith(color: color.foreground, fontWeight: FontWeight.w600, height: 1),
+        actionStyle: FHeaderActionStyle.inherit(color: color, style: style, size: 25),
+        padding: style.pagePadding.copyWith(bottom: 15),
+      );
+}
+
+/// A header's style.
+final class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
+  /// The title's [TextStyle].
+  @override
+  final TextStyle titleTextStyle;
+
+  /// The [FHeaderAction]s' style.
+  @override
+  final FHeaderActionStyle actionStyle;
+
+  /// The spacing between [FHeaderAction]s. Defaults to 10.
+  @override
+  final double actionSpacing;
+
+  /// The padding.
+  @override
+  final EdgeInsetsGeometry padding;
+
+  /// Creates a [FHeaderStyle].
+  const FHeaderStyle({
+    required this.titleTextStyle,
+    required this.actionStyle,
+    required this.padding,
+    this.actionSpacing = 10,
+  });
 }

@@ -20,7 +20,7 @@ class ButtonTextPage extends Sample {
 
   @override
   Widget sample(BuildContext context) =>
-      IntrinsicWidth(child: FButton(label: Text(label), style: variant, onPress: () {}));
+      IntrinsicWidth(child: FButton(style: variant, onPress: () {}, child: Text(label)));
 }
 
 @RoutePage()
@@ -34,9 +34,9 @@ class ButtonIconPage extends Sample {
   Widget sample(BuildContext context) => IntrinsicWidth(
     child: FButton(
       prefix: const Icon(FIcons.mail),
-      label: const Text('Login with Email'),
       style: variant,
       onPress: () {},
+      child: const Text('Login with Email'),
     ),
   );
 }
@@ -56,6 +56,6 @@ class ButtonCircularProgressPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => IntrinsicWidth(
-    child: FButton(prefix: const FProgress.circularIcon(), onPress: null, label: const Text('Please wait')),
+    child: FButton(prefix: const FProgress.circularIcon(), onPress: null, child: const Text('Please wait')),
   );
 }

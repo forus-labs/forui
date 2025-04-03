@@ -15,11 +15,11 @@ void main() {
           TestScaffold.blue(
             child: FButton(
               autofocus: true,
-              label: const Text('Button'),
               style: TestScaffold.blueScreen.buttonStyles.primary,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
+              child: const Text('Button'),
             ),
           ),
         );
@@ -49,11 +49,11 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FButton(
-                label: const Text('Button'),
                 style: variant,
                 prefix: const Icon(FIcons.circlePlay),
                 suffix: const Icon(FIcons.circleStop),
                 onPress: () {},
+                child: const Text('Button'),
               ),
             ),
           );
@@ -69,11 +69,11 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FButton(
-                label: const Text('Button'),
                 style: variant,
                 prefix: const Icon(FIcons.circlePlay),
                 suffix: const Icon(FIcons.circleStop),
                 onPress: () {},
+                child: const Text('Button'),
               ),
             ),
           );
@@ -97,11 +97,11 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FButton(
-                label: const Text('Button'),
                 style: variant,
                 prefix: const Icon(FIcons.circlePlay),
                 suffix: const Icon(FIcons.circleStop),
                 onPress: () {},
+                child: const Text('Button'),
               ),
             ),
           );
@@ -126,11 +126,11 @@ void main() {
               theme: theme.data,
               child: FButton(
                 autofocus: true,
-                label: const Text('Button'),
                 style: variant,
                 prefix: const Icon(FIcons.circlePlay),
                 suffix: const Icon(FIcons.circleStop),
                 onPress: () {},
+                child: const Text('Button'),
               ),
             ),
           );
@@ -143,11 +143,11 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FButton(
-                label: const Text('Button'),
                 style: variant,
                 prefix: const Icon(FIcons.circlePlay),
                 suffix: const Icon(FIcons.circleStop),
                 onPress: null,
+                child: const Text('Button'),
               ),
             ),
           );
@@ -258,9 +258,9 @@ void main() {
               theme: theme.data,
               child: FButton(
                 prefix: const FProgress.circularIcon(),
-                label: const Text('Loading'),
                 onPress: () {},
                 style: variant,
+                child: const Text('Loading'),
               ),
             ),
           );
@@ -277,9 +277,9 @@ void main() {
               theme: theme.data,
               child: FButton(
                 prefix: const FProgress.circularIcon(),
-                label: const Text('Loading'),
                 onPress: null,
                 style: variant,
+                child: const Text('Loading'),
               ),
             ),
           );

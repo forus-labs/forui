@@ -78,7 +78,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
 
 class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   final TextEditingController _textController = TextEditingController();
-  late FocusNode _focus = widget.focusNode ?? FocusNode();
+  late FocusNode _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTimeField');
   DateFormat? _format;
 
   @override
@@ -96,7 +96,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       if (old.focusNode == null) {
         _focus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode();
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTimeField');
     }
 
     if (widget.hour24 != old.hour24) {

@@ -39,7 +39,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   final Widget Function(BuildContext, String) errorBuilder;
 
   /// The items.
-  final List<FSelectGroupItem<T>> items;
+  final List<FSelectGroupItem<T>> children;
 
   /// The callback that is called when the value changes.
   final ValueChanged<Set<T>>? onChange;
@@ -50,7 +50,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   /// Creates a [FSelectGroup].
   FSelectGroup({
     required this.controller,
-    required this.items,
+    required this.children,
     this.style,
     this.label,
     this.description,
@@ -82,7 +82,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
              error: error,
              child: Column(
                children: [
-                 for (final child in items)
+                 for (final child in children)
                    FSelectGroupItemData<T>(
                      controller: controller,
                      style: groupStyle,
@@ -209,70 +209,61 @@ class FSelectGroupStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
   });
 
   /// Creates a [FSelectGroupStyle] that inherits its properties from the given parameters.
-  factory FSelectGroupStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) => FSelectGroupStyle(
-    labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
-    enabledStyle: FSelectGroupStateStyle(
-      labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-    ),
-    disabledStyle: FSelectGroupStateStyle(
-      labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-    ),
-    errorStyle: FSelectGroupErrorStyle(
-      labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-      errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-    ),
-    checkboxStyle: FCheckboxSelectGroupStyle.inherit(
-      style: FCheckboxStyle.inherit(colorScheme: colorScheme, style: style).transform(
-        (style) => style.copyWith(
-          enabledStyle: style.enabledStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-          ),
-          disabledStyle: style.disabledStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(
-              color: colorScheme.disable(colorScheme.primary),
-              fontWeight: FontWeight.w500,
+  factory FSelectGroupStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style}) =>
+      FSelectGroupStyle(
+        labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
+        enabledStyle: FSelectGroupStateStyle(
+          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
+        ),
+        disabledStyle: FSelectGroupStateStyle(
+          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
+        ),
+        errorStyle: FSelectGroupErrorStyle(
+          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
+          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
+          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
+        ),
+        checkboxStyle: FCheckboxSelectGroupStyle.inherit(
+          style: FCheckboxStyle.inherit(color: color, style: style).transform(
+            (style) => style.copyWith(
+              enabledStyle: style.enabledStyle.copyWith(
+                labelTextStyle: text.sm.copyWith(color: color.primary, fontWeight: FontWeight.w500),
+                descriptionTextStyle: text.sm.copyWith(color: color.mutedForeground),
+              ),
+              disabledStyle: style.disabledStyle.copyWith(
+                labelTextStyle: text.sm.copyWith(color: color.disable(color.primary), fontWeight: FontWeight.w500),
+                descriptionTextStyle: text.sm.copyWith(color: color.disable(color.mutedForeground)),
+              ),
+              errorStyle: style.errorStyle.copyWith(
+                labelTextStyle: text.sm.copyWith(color: color.primary, fontWeight: FontWeight.w500),
+                descriptionTextStyle: text.sm.copyWith(color: color.mutedForeground),
+                errorTextStyle: text.sm.copyWith(color: color.error, fontWeight: FontWeight.w500),
+              ),
             ),
-            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
-          ),
-          errorStyle: style.errorStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-            errorTextStyle: typography.sm.copyWith(color: colorScheme.error, fontWeight: FontWeight.w500),
           ),
         ),
-      ),
-    ),
-    radioStyle: FRadioSelectGroupStyle.inherit(
-      style: FRadioStyle.inherit(colorScheme: colorScheme, style: style).transform(
-        (style) => style.copyWith(
-          enabledStyle: style.enabledStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-          ),
-          disabledStyle: style.disabledStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(
-              color: colorScheme.disable(colorScheme.primary),
-              fontWeight: FontWeight.w500,
+        radioStyle: FRadioSelectGroupStyle.inherit(
+          style: FRadioStyle.inherit(color: color, style: style).transform(
+            (style) => style.copyWith(
+              enabledStyle: style.enabledStyle.copyWith(
+                labelTextStyle: text.sm.copyWith(color: color.primary, fontWeight: FontWeight.w500),
+                descriptionTextStyle: text.sm.copyWith(color: color.mutedForeground),
+              ),
+              disabledStyle: style.disabledStyle.copyWith(
+                labelTextStyle: text.sm.copyWith(color: color.disable(color.primary), fontWeight: FontWeight.w500),
+                descriptionTextStyle: text.sm.copyWith(color: color.disable(color.mutedForeground)),
+              ),
+              errorStyle: style.errorStyle.copyWith(
+                labelTextStyle: text.sm.copyWith(color: color.primary, fontWeight: FontWeight.w500),
+                descriptionTextStyle: text.sm.copyWith(color: color.mutedForeground),
+                errorTextStyle: text.sm.copyWith(color: color.error, fontWeight: FontWeight.w500),
+              ),
             ),
-            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.disable(colorScheme.mutedForeground)),
-          ),
-          errorStyle: style.errorStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-            errorTextStyle: typography.sm.copyWith(color: colorScheme.error, fontWeight: FontWeight.w500),
           ),
         ),
-      ),
-    ),
-  );
+      );
 
   /// The [FLabel]'s style.
   // ignore: diagnostic_describe_all_properties

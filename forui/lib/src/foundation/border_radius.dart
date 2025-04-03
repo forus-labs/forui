@@ -7,6 +7,9 @@ class FLerpBorderRadius extends BorderRadius {
   final double _min;
 
   /// Creates a [FLerpBorderRadius].
+  const FLerpBorderRadius.all(super.radius, {required double min}) : _min = min, super.all();
+
+  /// Creates a [FLerpBorderRadius].
   FLerpBorderRadius.circular(super.radius) : _min = radius * 3, super.circular();
 
   @override
@@ -16,13 +19,13 @@ class FLerpBorderRadius extends BorderRadius {
       return super.toRRect(rect);
     }
 
-    final t = dimension / _min;
+    final t = 1 - dimension / _min;
     return RRect.fromRectAndCorners(
       rect,
-      topLeft: Radius.lerp(null, topLeft, t)!,
-      topRight: Radius.lerp(null, topRight, t)!,
-      bottomLeft: Radius.lerp(null, bottomLeft, t)!,
-      bottomRight: Radius.lerp(null, bottomRight, t)!,
+      topLeft: Radius.elliptical(topLeft.x * t, topLeft.y * t),
+      topRight: Radius.elliptical(topRight.x * t, topRight.y * t),
+      bottomLeft: Radius.elliptical(bottomLeft.x * t, bottomLeft.y * t),
+      bottomRight: Radius.elliptical(bottomRight.x * t, bottomRight.y * t),
     );
   }
 }

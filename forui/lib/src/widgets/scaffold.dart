@@ -21,7 +21,7 @@ part 'scaffold.style.dart';
 /// * [FScaffoldStyle] for customizing a scaffold's appearance.
 class FScaffold extends StatelessWidget {
   /// The content.
-  final Widget content;
+  final Widget child;
 
   /// The header.
   final Widget? header;
@@ -29,10 +29,10 @@ class FScaffold extends StatelessWidget {
   /// The footer.
   final Widget? footer;
 
-  /// True if [FScaffoldStyle.contentPadding] should be applied to the [content]. Defaults to `true`.
-  final bool contentPad;
+  /// True if [FScaffoldStyle.childPadding] should be applied to the [child]. Defaults to `true`.
+  final bool childPad;
 
-  /// If true the [content] and the scaffold's floating widgets should size themselves to avoid the onscreen keyboard
+  /// If true the [child] and the scaffold's floating widgets should size themselves to avoid the onscreen keyboard
   /// whose height is defined by the ambient [MediaQuery]'s [MediaQueryData.viewInsets] `bottom` property.
   ///
   /// For example, if there is an onscreen keyboard displayed above the scaffold, the body can be resized to avoid
@@ -46,10 +46,10 @@ class FScaffold extends StatelessWidget {
 
   /// Creates a [FScaffold].
   const FScaffold({
-    required this.content,
+    required this.child,
     this.header,
     this.footer,
-    this.contentPad = true,
+    this.childPad = true,
     this.resizeToAvoidBottomInset = true,
     this.style,
     super.key,
@@ -58,12 +58,12 @@ class FScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.scaffoldStyle;
-    Widget content = this.content;
+    var child = this.child;
     final Widget footer =
         this.footer != null ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!) : const SizedBox();
 
-    if (contentPad) {
-      content = Padding(padding: style.contentPadding, child: content);
+    if (childPad) {
+      child = Padding(padding: style.childPadding, child: child);
     }
 
     return FSheets(
@@ -75,7 +75,7 @@ class FScaffold extends StatelessWidget {
             Column(
               children: [
                 if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-                Expanded(child: content),
+                Expanded(child: child),
               ],
             ),
             footer,
@@ -90,7 +90,7 @@ class FScaffold extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('contentPad', value: contentPad, ifTrue: 'contentPad', defaultValue: true))
+      ..add(FlagProperty('childPad', value: childPad, ifTrue: 'contentPad', defaultValue: true))
       ..add(
         FlagProperty(
           'resizeToAvoidBottomInset',
@@ -108,9 +108,9 @@ final class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   @override
   final Color backgroundColor;
 
-  /// The content padding. Only used when [FScaffold.contentPad] is `true`.
+  /// The child padding. Only used when [FScaffold.childPad] is `true`.
   @override
-  final EdgeInsetsGeometry contentPadding;
+  final EdgeInsetsGeometry childPadding;
 
   /// The header decoration.
   @override
@@ -123,18 +123,18 @@ final class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// Creates a [FScaffoldStyle].
   FScaffoldStyle({
     required this.backgroundColor,
-    required this.contentPadding,
+    required this.childPadding,
     required this.footerDecoration,
     this.headerDecoration = const BoxDecoration(),
   });
 
-  /// Creates a [FScaffoldStyle] that inherits its properties from the provided [colorScheme] and [style].
-  FScaffoldStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  /// Creates a [FScaffoldStyle] that inherits its properties.
+  FScaffoldStyle.inherit({required FColorScheme color, required FStyle style})
     : this(
-        backgroundColor: colorScheme.background,
-        contentPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
+        backgroundColor: color.background,
+        childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
         footerDecoration: BoxDecoration(
-          border: Border(top: BorderSide(color: colorScheme.border, width: style.borderWidth)),
+          border: Border(top: BorderSide(color: color.border, width: style.borderWidth)),
         ),
       );
 }

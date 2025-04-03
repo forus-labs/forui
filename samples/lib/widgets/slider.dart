@@ -160,7 +160,7 @@ class _SliderFormState extends StatefulSampleState<SliderFormPage> {
         ),
         const SizedBox(height: 20),
         FButton(
-          label: const Text('Save'),
+          child: const Text('Save'),
           onPress: () {
             if (!_formKey.currentState!.validate()) {
               // Handle errors here.

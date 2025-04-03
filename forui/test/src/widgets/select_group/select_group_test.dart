@@ -20,7 +20,7 @@ void main() {
             selections++;
             selection = value;
           },
-          items: const [
+          children: const [
             FSelectGroupItem.radio(value: 1, label: Text('1')),
             FSelectGroupItem.radio(value: 2, label: Text('2')),
             FSelectGroupItem.radio(value: 3, label: Text('3')),
@@ -52,7 +52,7 @@ void main() {
             firstSelections++;
             firsSelection = value;
           },
-          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+          children: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
         ),
       ),
     );
@@ -77,7 +77,7 @@ void main() {
             secondSelections++;
             secondSelection = value;
           },
-          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+          children: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
         ),
       ),
     );
@@ -101,7 +101,7 @@ void main() {
           controller: first,
           onChange: (_) {},
           onSelect: (_) {},
-          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+          children: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
         ),
       ),
     );
@@ -116,7 +116,7 @@ void main() {
           controller: second,
           onChange: (_) {},
           onSelect: (_) {},
-          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+          children: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
         ),
       ),
     );
@@ -135,7 +135,7 @@ void main() {
           controller: controller,
           onChange: (_) {},
           onSelect: (_) {},
-          items: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
+          children: const [FSelectGroupItem.checkbox(value: 1, label: Text('1'))],
         ),
       ),
     );

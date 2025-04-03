@@ -42,21 +42,21 @@ class FButton extends StatelessWidget {
   /// The child.
   final Widget child;
 
-  /// Creates a [FButton] that contains a [prefix], [label], and [suffix].
+  /// Creates a [FButton] that contains a [prefix], [child], and [suffix].
   ///
   /// [prefix] and [suffix] are wrapped in [IconThemeData].
   ///
   /// The button layout is as follows, assuming the locale is LTR:
   /// ```diagram
   /// |---------------------------------------|
-  /// |  [prefixIcon]  [label]  [suffixIcon]  |
+  /// |  [prefixIcon]  [child]  [suffixIcon]  |
   /// |---------------------------------------|
   /// ```
   ///
   /// The layout is reversed for RTL locales.
   FButton({
     required this.onPress,
-    required Widget label,
+    required Widget child,
     this.style = Variant.primary,
     this.onLongPress,
     this.autofocus = false,
@@ -65,7 +65,7 @@ class FButton extends StatelessWidget {
     Widget? prefix,
     Widget? suffix,
     super.key,
-  }) : child = Content(prefix: prefix, suffix: suffix, label: label);
+  }) : child = Content(prefix: prefix, suffix: suffix, child: child);
 
   /// Creates a [FButton] that contains only an icon.
   ///
@@ -219,26 +219,24 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
 
   /// Creates a [FButtonStyle] that inherits its properties from the given arguments.
   FButtonStyle.inherit({
-    required FTypography typography,
+    required FColorScheme color,
+    required FTypography text,
     required FStyle style,
-    required Color enabledBoxColor,
-    required Color enabledHoveredBoxColor,
-    required Color disabledBoxColor,
-    required Color enabledContentColor,
-    required Color disabledContentColor,
+    required Color background,
+    required Color foreground,
   }) : this(
-         enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: enabledBoxColor),
-         enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: enabledHoveredBoxColor),
-         disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: disabledBoxColor),
+         enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: background),
+         enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.hover(background)),
+         disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.disable(background)),
          focusedOutlineStyle: style.focusedOutlineStyle,
          contentStyle: FButtonContentStyle.inherit(
-           typography: typography,
-           enabled: enabledContentColor,
-           disabled: disabledContentColor,
+           text: text,
+           enabled: foreground,
+           disabled: color.disable(foreground, color.disable(background)),
          ),
          iconContentStyle: FButtonIconContentStyle(
-           enabledStyle: IconThemeData(color: enabledContentColor, size: 20),
-           disabledStyle: IconThemeData(color: disabledContentColor, size: 20),
+           enabledStyle: IconThemeData(color: foreground, size: 20),
+           disabledStyle: IconThemeData(color: color.disable(foreground, color.disable(background)), size: 20),
          ),
          tappableStyle: style.tappableStyle,
        );

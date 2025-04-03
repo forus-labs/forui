@@ -25,7 +25,7 @@ abstract class Sample extends StatelessWidget {
   Widget build(BuildContext context) => FTheme(
     data: theme,
     child: FScaffold(
-      content: Align(
+      child: Align(
         alignment: alignment,
         child: ConstrainedBox(constraints: BoxConstraints(maxWidth: maxWidth), child: Builder(builder: sample)),
       ),
@@ -55,7 +55,7 @@ abstract class StatefulSampleState<T extends StatefulSample> extends State<T> {
   Widget build(BuildContext context) => FTheme(
     data: widget.theme,
     child: FScaffold(
-      content: Align(
+      child: Align(
         alignment: widget.alignment,
         child: ConstrainedBox(
           constraints: BoxConstraints(maxWidth: widget.maxWidth, maxHeight: widget.maxHeight),

@@ -38,85 +38,70 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
     required this.ghost,
   });
 
-  /// Creates a [FButtonStyle] that inherits its properties from the provided [colorScheme], [typography], and
+  /// Creates a [FButtonStyle] that inherits its properties from the provided [color], [text], and
   /// [style].
-  FButtonStyles.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  FButtonStyles.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
         primary: FButtonStyle.inherit(
+          color: color,
           style: style,
-          typography: typography,
-          enabledBoxColor: colorScheme.primary,
-          enabledHoveredBoxColor: colorScheme.hover(colorScheme.primary),
-          disabledBoxColor: colorScheme.disable(colorScheme.primary),
-          enabledContentColor: colorScheme.primaryForeground,
-          disabledContentColor: colorScheme.disable(
-            colorScheme.primaryForeground,
-            colorScheme.disable(colorScheme.primary),
-          ),
+          text: text,
+          background: color.primary,
+          foreground: color.primaryForeground,
         ),
         secondary: FButtonStyle.inherit(
+          color: color,
           style: style,
-          typography: typography,
-          enabledBoxColor: colorScheme.secondary,
-          enabledHoveredBoxColor: colorScheme.hover(colorScheme.secondary),
-          disabledBoxColor: colorScheme.disable(colorScheme.secondary),
-          enabledContentColor: colorScheme.secondaryForeground,
-          disabledContentColor: colorScheme.disable(
-            colorScheme.secondaryForeground,
-            colorScheme.disable(colorScheme.secondary),
-          ),
+          text: text,
+          background: color.secondary,
+          foreground: color.secondaryForeground,
         ),
         destructive: FButtonStyle.inherit(
+          color: color,
           style: style,
-          typography: typography,
-          enabledBoxColor: colorScheme.destructive,
-          enabledHoveredBoxColor: colorScheme.hover(colorScheme.destructive),
-          disabledBoxColor: colorScheme.disable(colorScheme.destructive),
-          enabledContentColor: colorScheme.destructiveForeground,
-          disabledContentColor: colorScheme.disable(
-            colorScheme.destructiveForeground,
-            colorScheme.disable(colorScheme.destructive),
-          ),
+          text: text,
+          background: color.destructive,
+          foreground: color.destructiveForeground,
         ),
         outline: FButtonStyle(
           enabledBoxDecoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
+            border: Border.all(color: color.border),
             borderRadius: style.borderRadius,
           ),
           enabledHoverBoxDecoration: BoxDecoration(
-            border: Border.all(color: colorScheme.border),
+            border: Border.all(color: color.border),
             borderRadius: style.borderRadius,
-            color: colorScheme.secondary,
+            color: color.secondary,
           ),
           disabledBoxDecoration: BoxDecoration(
-            border: Border.all(color: colorScheme.disable(colorScheme.border)),
+            border: Border.all(color: color.disable(color.border)),
             borderRadius: style.borderRadius,
           ),
           focusedOutlineStyle: style.focusedOutlineStyle,
           contentStyle: FButtonContentStyle.inherit(
-            typography: typography,
-            enabled: colorScheme.secondaryForeground,
-            disabled: colorScheme.disable(colorScheme.secondaryForeground),
+            text: text,
+            enabled: color.secondaryForeground,
+            disabled: color.disable(color.secondaryForeground),
           ),
           iconContentStyle: FButtonIconContentStyle(
-            enabledStyle: IconThemeData(color: colorScheme.secondaryForeground, size: 20),
-            disabledStyle: IconThemeData(color: colorScheme.disable(colorScheme.secondaryForeground), size: 20),
+            enabledStyle: IconThemeData(color: color.secondaryForeground, size: 20),
+            disabledStyle: IconThemeData(color: color.disable(color.secondaryForeground), size: 20),
           ),
           tappableStyle: style.tappableStyle,
         ),
         ghost: FButtonStyle(
           enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius),
-          enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.secondary),
+          enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.secondary),
           disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius),
           focusedOutlineStyle: style.focusedOutlineStyle,
           contentStyle: FButtonContentStyle.inherit(
-            typography: typography,
-            enabled: colorScheme.secondaryForeground,
-            disabled: colorScheme.disable(colorScheme.secondaryForeground),
+            text: text,
+            enabled: color.secondaryForeground,
+            disabled: color.disable(color.secondaryForeground),
           ),
           iconContentStyle: FButtonIconContentStyle(
-            enabledStyle: IconThemeData(color: colorScheme.secondaryForeground, size: 20),
-            disabledStyle: IconThemeData(color: colorScheme.disable(colorScheme.secondaryForeground), size: 20),
+            enabledStyle: IconThemeData(color: color.secondaryForeground, size: 20),
+            disabledStyle: IconThemeData(color: color.disable(color.secondaryForeground), size: 20),
           ),
           tappableStyle: style.tappableStyle,
         ),

@@ -19,7 +19,7 @@ void main() {
             hover: false,
             longPress: false,
             tipBuilder: (context, style, _) => const Text('tip'),
-            child: FButton(onPress: () {}, label: const Text('button')),
+            child: FButton(onPress: () {}, child: const Text('button')),
           ),
         ),
       );
@@ -44,7 +44,7 @@ void main() {
             child: FTooltip(
               longPressExitDuration: duration,
               tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(onPress: () {}, label: const Text('button')),
+              child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
         );
@@ -67,7 +67,7 @@ void main() {
             child: FTooltip(
               longPressExitDuration: duration,
               tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(onPress: () {}, label: const Text('button')),
+              child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
         );
@@ -94,7 +94,7 @@ void main() {
           TestScaffold.app(
             child: FTooltip(
               tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(onPress: () {}, label: const Text('button')),
+              child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
         );
@@ -121,7 +121,7 @@ void main() {
             child: FTooltip(
               hoverEnterDuration: const Duration(seconds: 1),
               tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(onPress: () {}, label: const Text('button')),
+              child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
         );
@@ -154,7 +154,7 @@ void main() {
               hoverEnterDuration: Duration.zero,
               hoverExitDuration: const Duration(seconds: 1),
               tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(onPress: () {}, label: const Text('button')),
+              child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
         );
@@ -188,7 +188,7 @@ void main() {
           TestScaffold.app(
             child: FTooltip(
               tipBuilder: (context, style, _) => const Text('tip'),
-              child: FButton(onPress: () {}, label: const Text('button')),
+              child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
         );
@@ -218,7 +218,7 @@ void main() {
           child: FTooltip(
             controller: first,
             tipBuilder: (context, style, _) => const Text('tip'),
-            child: FButton(onPress: () {}, label: const Text('button')),
+            child: FButton(onPress: () {}, child: const Text('button')),
           ),
         ),
       );
@@ -230,7 +230,7 @@ void main() {
           child: FTooltip(
             controller: first,
             tipBuilder: (context, style, _) => const Text('tip'),
-            child: FButton(onPress: () {}, label: const Text('button')),
+            child: FButton(onPress: () {}, child: const Text('button')),
           ),
         ),
       );

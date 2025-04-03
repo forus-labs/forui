@@ -24,7 +24,7 @@ class AccordionPage extends Sample {
     children: [
       FAccordion(
         controller: controller,
-        items: const [
+        children: const [
           FAccordionItem(
             title: Text('Is it accessible?'),
             child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),

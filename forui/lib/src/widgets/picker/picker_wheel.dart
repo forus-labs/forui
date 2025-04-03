@@ -133,9 +133,8 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
         actions: {
           ScrollIntent: CallbackAction<ScrollIntent>(
             onInvoke: (intent) {
-              final offset = intent.direction == AxisDirection.up ? -1 : 1;
               controller.animateToItem(
-                controller.selectedItem + offset,
+                controller.selectedItem + (intent.direction == AxisDirection.up ? -1 : 1),
                 duration: const Duration(milliseconds: 100),
                 curve: Curves.decelerate,
               );
@@ -151,7 +150,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
               Container(
                 height: extent,
                 decoration: BoxDecoration(
-                  border: Border.all(color: style.focusedOutlineStyle.color),
+                  border: Border.all(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
                   borderRadius: style.focusedOutlineStyle.borderRadius,
                 ),
               ),

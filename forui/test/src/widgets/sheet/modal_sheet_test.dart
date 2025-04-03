@@ -22,7 +22,7 @@ void main() {
                             (context) => Container(
                               height: double.infinity,
                               width: double.infinity,
-                              color: context.theme.colorScheme.background,
+                              color: context.theme.color.background,
                               child: const Center(child: Text('sheet')),
                             ),
                       ),
@@ -61,7 +61,7 @@ void main() {
                               (context) => Container(
                                 height: double.infinity,
                                 width: double.infinity,
-                                color: context.theme.colorScheme.background,
+                                color: context.theme.color.background,
                                 child: const Center(child: Text('sheet')),
                               ),
                         ),
@@ -95,7 +95,7 @@ void main() {
                               (context) => Container(
                                 height: double.infinity,
                                 width: double.infinity,
-                                color: context.theme.colorScheme.background,
+                                color: context.theme.color.background,
                                 child: const Center(child: Text('sheet')),
                               ),
                         ),

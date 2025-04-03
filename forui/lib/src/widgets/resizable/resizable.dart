@@ -271,25 +271,25 @@ final class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
   /// Creates a [FResizableStyle].
   FResizableStyle({required this.horizontalDividerStyle, required this.verticalDividerStyle});
 
-  /// Creates a [FResizableStyle] that inherits its properties from [colorScheme].
-  FResizableStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  /// Creates a [FResizableStyle] that inherits its properties.
+  FResizableStyle.inherit({required FColorScheme color, required FStyle style})
     : this(
         horizontalDividerStyle: FResizableDividerStyle(
-          color: colorScheme.border,
+          color: color.border,
           focusedOutlineStyle: style.focusedOutlineStyle,
           thumbStyle: FResizableDividerThumbStyle(
-            backgroundColor: colorScheme.border,
-            foregroundColor: colorScheme.foreground,
+            decoration: BoxDecoration(color: color.border, borderRadius: style.borderRadius),
+            foregroundColor: color.foreground,
             height: 20,
             width: 10,
           ),
         ),
         verticalDividerStyle: FResizableDividerStyle(
-          color: colorScheme.border,
+          color: color.border,
           focusedOutlineStyle: style.focusedOutlineStyle,
           thumbStyle: FResizableDividerThumbStyle(
-            backgroundColor: colorScheme.border,
-            foregroundColor: colorScheme.foreground,
+            decoration: BoxDecoration(color: color.border, borderRadius: style.borderRadius),
+            foregroundColor: color.foreground,
             height: 10,
             width: 20,
           ),

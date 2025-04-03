@@ -22,11 +22,11 @@ class FBadge extends StatelessWidget {
   /// The builder used to build the badge's content.
   final Widget Function(BuildContext, FBadgeStyle) builder;
 
-  /// Creates a [FBadge] that contains a [label].
-  FBadge({required Widget label, this.style = FBadgeStyle.primary, super.key})
-    : builder = ((context, style) => Content(label: label, style: style));
+  /// Creates a [FBadge].
+  FBadge({required Widget child, this.style = FBadgeStyle.primary, super.key})
+    : builder = ((_, style) => Content(style: style, child: child));
 
-  /// Creates a [FBadge] with custom content.
+  /// Creates a [FBadge] with no defaults applied.
   const FBadge.raw({required this.builder, this.style = FBadgeStyle.primary, super.key});
 
   @override
@@ -40,16 +40,7 @@ class FBadge extends StatelessWidget {
     };
 
     return IntrinsicWidth(
-      child: IntrinsicHeight(
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            border: Border.all(color: style.borderColor, width: style.borderWidth),
-            borderRadius: style.borderRadius,
-            color: style.backgroundColor,
-          ),
-          child: builder(context, style),
-        ),
-      ),
+      child: IntrinsicHeight(child: DecoratedBox(decoration: style.decoration, child: builder(context, style))),
     );
   }
 
@@ -95,37 +86,14 @@ final class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions implements F
   /// Shorthand for the current context's [FBadgeStyles.destructive] style.
   static const FBaseBadgeStyle destructive = Variant.destructive;
 
-  /// The background color.
+  /// The decoration.
   @override
-  final Color backgroundColor;
+  final BoxDecoration decoration;
 
-  /// The border color.
-  @override
-  final Color borderColor;
-
-  /// The border radius. Defaults to `BorderRadius.circular(100)`.
-  @override
-  final BorderRadius borderRadius;
-
-  /// The border width (thickness).
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * `borderWidth` <= 0.0
-  /// * `borderWidth` is Nan
-  @override
-  final double borderWidth;
-
-  /// The badge content's style.
+  /// The content's style.
   @override
   final FBadgeContentStyle contentStyle;
 
   /// Creates a [FBadgeStyle].
-  const FBadgeStyle({
-    required this.backgroundColor,
-    required this.borderColor,
-    required this.borderWidth,
-    required this.contentStyle,
-    this.borderRadius = const BorderRadius.all(Radius.circular(100)),
-  }) : assert(0 < borderWidth, 'The borderWidth is $borderWidth, but it should be in the range "0 < borderWidth".');
+  const FBadgeStyle({required this.decoration, required this.contentStyle});
 }

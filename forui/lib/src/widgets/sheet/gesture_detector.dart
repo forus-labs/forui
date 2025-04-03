@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// The sheet's gesture detector. We use a [RawGestureDetector] instead of a [GestureDetector] because the latter
-/// doesn't allow `onlyAcceptDragOnThreshold` to be configured.
+/// doesn't allow [DragGestureRecognizer.onlyAcceptDragOnThreshold] to be configured.
 ///
 /// This is based on Material's _BottomSheetGestureDetector.
 @internal

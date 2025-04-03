@@ -11,9 +11,9 @@ part 'button_content.style.dart';
 class Content extends StatelessWidget {
   final Widget? prefix;
   final Widget? suffix;
-  final Widget label;
+  final Widget child;
 
-  const Content({required this.label, this.prefix, this.suffix, super.key});
+  const Content({required this.child, this.prefix, this.suffix, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class Content extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
-            children: [if (prefix case final prefix?) prefix, label, if (suffix case final suffix?) suffix],
+            children: [if (prefix case final prefix?) prefix, child, if (suffix case final suffix?) suffix],
           ),
         ),
       ),
@@ -87,10 +87,10 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
   });
 
   /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled].
-  FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
+  FButtonContentStyle.inherit({required FTypography text, required Color enabled, required Color disabled})
     : this(
-        enabledTextStyle: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
-        disabledTextStyle: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
+        enabledTextStyle: text.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
+        disabledTextStyle: text.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
         enabledIconStyle: IconThemeData(color: enabled, size: 20),
         disabledIconStyle: IconThemeData(color: disabled, size: 20),
       );

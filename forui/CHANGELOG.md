@@ -1,7 +1,29 @@
 ## 0.11.0 (Next)
 We are experimenting with a new changelog format which groups changes by feature.
 
-### `FIcon`
+### Styles
+Several breaking changes have been made to styles to improve consistency and usability.
+
+* Add `FBottomNavigationItemStyle.spacing`.
+* Add `FCardContentStyle.imageSpacing`.
+* Add `FCardContentStyle.subtitleSpacing`.
+* Add `FCheckboxStateStyle.size`.
+
+* **Breaking** Rename `FThemeData.colorScheme` to `FThemeData.color`.
+* **Breaking** Rename `FThemeData.typography` to `FThemeData.text`.
+* **Breaking** Rename all `F<Style>.inherit(colorScheme: ...)` to `F<Style>.inherit(color: ...)`.
+* **Breaking** Rename all `F<Style>.inherit(typography: ...)` to `F<Style>.inherit(text: ...)`.
+
+* **Breaking** Rename `FAlertStyle` to `FBaseAlertStyle`.
+* **Breaking** Rename `FAlertCustomStyle` to `FAlertStyle`.
+* **Breaking** Move constants in `FBaseAlertStyle` to `FAlertStyle`.
+
+* **Breaking** Move `FDialog.insetAnimationDuration` to `FDialogStyle.insetAnimationDuration`.
+* **Breaking** Move `FDialog.insetAnimationCurve` to `FDialogStyle.insetAnimationCurve`.
+* **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` into `FDialog.constraints.`.
+* **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` to `FDialog.constraints.`.
+
+#### `FIcon`
 `FIcon` has been removed in favor of Flutter's `Icon` class. `FIcon` was designed with only monochrome icons in mind
 and is not able to support multicolored icons. This coincides with replacement of `FAssets` with `FIcons` and svg icons 
 with font icons. In addition, all `iconColor` and `iconSize` style properties have been replaced with `IconThemeData`.
@@ -109,11 +131,21 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
 * Add `filled` and `fillColor` for `FTextField`. Thanks @MrHeer!
 
-* Add `FCheckboxStateStyle.size`.
+* Add `FLerpBorderRadius`.
 
-* **Breaking** Rename `FAlertStyle` to `FBaseAlertStyle`.
-* **Breaking** Rename `FAlertCustomStyle` to `FAlertStyle`.
-* **Breaking** Move constants in `FBaseAlertStyle` to `FAlertStyle`.
+* Change `FHeader(title: ...)` to be optional.
+* Change `FHeader.nested(title: ...)` to be optional.
+* **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.
+* **Breaking** Change `FHeader(prefixActions: ...)` to `FHeader(prefixes: ...)`.
+* **Breaking** Change `FHeader(suffixActions: ...)` to `FHeader(suffixes: ...)`.
+
+* **Breaking** Change `FAccordion.items` to `FAccordion.children`.
+* **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.
+* **Breaking** Change `FButton(label: ...)` to `FBadge(child: ...)`.
+* **Breaking** Change `FSelectGroup(items: ...)` to `FBadge(children: ...)`.
+* **Breaking** Change `FTabs(tabs: ...)` to `FTabs(children: ...)`.
+* **Breaking** Change `FTabEntry(content: ...)` to `FTabEntry(child: ...)`.
+* **Breaking** Change `FScaffold(content: ...)` to `FScaffold(child: ...)`.
 
 * **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FAvatar.new`.
 * **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FBreadcrumb.collapsed`.

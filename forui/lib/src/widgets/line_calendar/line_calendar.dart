@@ -176,89 +176,55 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
     this.itemContentSpacing = 2,
   });
 
-  /// Creates a [FLineCalendarStyle] that inherits its properties from [colorScheme] and [typography].
-  factory FLineCalendarStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) {
-    final focusedBorder = Border.all(color: colorScheme.primary, width: style.borderWidth);
-
-    final selectedDateTextStyle = typography.xl.copyWith(
-      color: colorScheme.primaryForeground,
-      fontWeight: FontWeight.w500,
-      height: 0,
+  /// Creates a [FLineCalendarStyle] that inherits its properties from [color] and [text].
+  factory FLineCalendarStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style}) {
+    final focused = BoxDecoration(
+      border: Border.all(color: color.primary, width: style.borderWidth),
+      borderRadius: style.borderRadius,
     );
 
-    final selectedWeekdayTextStyle = typography.xs.copyWith(
-      color: colorScheme.primaryForeground,
-      fontWeight: FontWeight.w500,
-      height: 0,
-    );
+    final selectedDate = text.xl.copyWith(color: color.primaryForeground, fontWeight: FontWeight.w500, height: 0);
+    final selectedWeekday = text.xs.copyWith(color: color.primaryForeground, fontWeight: FontWeight.w500, height: 0);
 
-    final unselectedDateTextStyle = typography.xl.copyWith(
-      color: colorScheme.primary,
-      fontWeight: FontWeight.w500,
-      height: 0,
-    );
-    final unselectedWeekdayTextStyle = typography.xs.copyWith(
-      color: colorScheme.mutedForeground,
-      fontWeight: FontWeight.w500,
-      height: 0,
-    );
+    final date = text.xl.copyWith(color: color.primary, fontWeight: FontWeight.w500, height: 0);
+    final weekday = text.xs.copyWith(color: color.mutedForeground, fontWeight: FontWeight.w500, height: 0);
 
     return FLineCalendarStyle(
       selectedItemStyle: FLineCalendarItemStyle(
-        decoration: BoxDecoration(color: colorScheme.primary, borderRadius: style.borderRadius),
-        focusedDecoration: BoxDecoration(
-          color: colorScheme.primary,
-          border: focusedBorder,
-          borderRadius: style.borderRadius,
-        ),
-        todayIndicatorColor: colorScheme.primaryForeground,
-        dateTextStyle: selectedDateTextStyle,
-        weekdayTextStyle: selectedWeekdayTextStyle,
+        decoration: BoxDecoration(color: color.primary, borderRadius: style.borderRadius),
+        focusedDecoration: focused.copyWith(color: color.primary),
+        todayIndicatorColor: color.primaryForeground,
+        dateTextStyle: selectedDate,
+        weekdayTextStyle: selectedWeekday,
       ),
       selectedHoveredItemStyle: FLineCalendarItemStyle(
-        decoration: BoxDecoration(color: colorScheme.hover(colorScheme.primary), borderRadius: style.borderRadius),
-        focusedDecoration: BoxDecoration(
-          color: colorScheme.hover(colorScheme.primary),
-          border: focusedBorder,
-          borderRadius: style.borderRadius,
-        ),
-        todayIndicatorColor: colorScheme.hover(colorScheme.primaryForeground),
-        dateTextStyle: selectedDateTextStyle,
-        weekdayTextStyle: selectedWeekdayTextStyle,
+        decoration: BoxDecoration(color: color.hover(color.primary), borderRadius: style.borderRadius),
+        focusedDecoration: focused.copyWith(color: color.hover(color.primary)),
+        todayIndicatorColor: color.hover(color.primaryForeground),
+        dateTextStyle: selectedDate,
+        weekdayTextStyle: selectedWeekday,
       ),
       unselectedItemStyle: FLineCalendarItemStyle(
         decoration: BoxDecoration(
-          color: colorScheme.background,
-          border: Border.all(color: colorScheme.border),
+          color: color.background,
+          border: Border.all(color: color.border),
           borderRadius: style.borderRadius,
         ),
-        focusedDecoration: BoxDecoration(
-          color: colorScheme.background,
-          border: focusedBorder,
-          borderRadius: style.borderRadius,
-        ),
-        todayIndicatorColor: colorScheme.primary,
-        dateTextStyle: unselectedDateTextStyle,
-        weekdayTextStyle: unselectedWeekdayTextStyle,
+        focusedDecoration: focused.copyWith(color: color.background),
+        todayIndicatorColor: color.primary,
+        dateTextStyle: date,
+        weekdayTextStyle: weekday,
       ),
       unselectedHoveredItemStyle: FLineCalendarItemStyle(
         decoration: BoxDecoration(
-          color: colorScheme.secondary,
-          border: Border.all(color: colorScheme.border),
+          color: color.secondary,
+          border: Border.all(color: color.border),
           borderRadius: style.borderRadius,
         ),
-        focusedDecoration: BoxDecoration(
-          color: colorScheme.secondary,
-          border: focusedBorder,
-          borderRadius: style.borderRadius,
-        ),
-        todayIndicatorColor: colorScheme.hover(colorScheme.primary),
-        dateTextStyle: unselectedDateTextStyle,
-        weekdayTextStyle: unselectedWeekdayTextStyle,
+        focusedDecoration: focused.copyWith(color: color.secondary),
+        todayIndicatorColor: color.hover(color.primary),
+        dateTextStyle: date,
+        weekdayTextStyle: weekday,
       ),
       tappableStyle: style.tappableStyle,
     );

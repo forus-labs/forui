@@ -48,25 +48,25 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     this.contentConstraints = const BoxConstraints.tightFor(width: 40.0, height: 40.0),
   });
 
-  /// Creates a [FPaginationStyle] that inherits its properties from [colorScheme], [typography], and [style].
-  FPaginationStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FPaginationStyle] that inherits its properties.
+  FPaginationStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
         selected: FPaginationStateStyle(
-          decoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.primary),
+          decoration: BoxDecoration(borderRadius: style.borderRadius, color: color.primary),
           hoveredDecoration: BoxDecoration(
             borderRadius: style.borderRadius,
-            color: colorScheme.hover(colorScheme.primary),
+            color: color.hover(color.primary),
           ),
-          textStyle: typography.sm.copyWith(color: colorScheme.primaryForeground),
+          textStyle: text.sm.copyWith(color: color.primaryForeground),
         ),
 
         unselected: FPaginationStateStyle(
-          decoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.background),
-          hoveredDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.border),
-          textStyle: typography.sm.copyWith(color: colorScheme.primary),
+          decoration: BoxDecoration(borderRadius: style.borderRadius, color: color.background),
+          hoveredDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.border),
+          textStyle: text.sm.copyWith(color: color.primary),
         ),
 
-        iconStyle: IconThemeData(color: colorScheme.primary, size: 18),
+        iconStyle: IconThemeData(color: color.primary, size: 18),
         actionTappableStyle: style.tappableStyle,
         pageTappableStyle: style.tappableStyle,
       );

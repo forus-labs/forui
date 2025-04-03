@@ -198,8 +198,8 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
     this.curve = Curves.linear,
   });
 
-  /// Creates a [FCheckboxStyle] that inherits its properties from the given parameters.
-  FCheckboxStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  /// Creates a [FCheckboxStyle] that inherits its properties.
+  FCheckboxStyle.inherit({required FColorScheme color, required FStyle style})
     : this(
         labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
         focusedOutlineStyle: FFocusedOutlineStyle(
@@ -209,27 +209,27 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
         enabledStyle: FCheckboxStateStyle(
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.primary,
-          iconStyle: IconThemeData(color: colorScheme.primaryForeground, size: 14),
-          checkedBackgroundColor: colorScheme.primary,
-          uncheckedBackgroundColor: colorScheme.background,
+          borderColor: color.primary,
+          iconStyle: IconThemeData(color: color.primaryForeground, size: 14),
+          checkedBackgroundColor: color.primary,
+          uncheckedBackgroundColor: color.background,
         ),
         disabledStyle: FCheckboxStateStyle(
           labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colorScheme.disable(colorScheme.primary),
-          iconStyle: IconThemeData(color: colorScheme.disable(colorScheme.primaryForeground), size: 14),
-          checkedBackgroundColor: colorScheme.disable(colorScheme.primary),
-          uncheckedBackgroundColor: colorScheme.disable(colorScheme.background),
+          borderColor: color.disable(color.primary),
+          iconStyle: IconThemeData(color: color.disable(color.primaryForeground), size: 14),
+          checkedBackgroundColor: color.disable(color.primary),
+          uncheckedBackgroundColor: color.disable(color.background),
         ),
         errorStyle: FCheckboxErrorStyle(
           labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
           errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          borderColor: colorScheme.error,
-          iconStyle: IconThemeData(color: colorScheme.errorForeground, size: 14),
-          checkedBackgroundColor: colorScheme.error,
-          uncheckedBackgroundColor: colorScheme.background,
+          borderColor: color.error,
+          iconStyle: IconThemeData(color: color.errorForeground, size: 14),
+          checkedBackgroundColor: color.error,
+          uncheckedBackgroundColor: color.background,
         ),
       );
 

@@ -16,5 +16,5 @@ class BadgePage extends Sample {
   BadgePage({@queryParam super.theme, @queryParam String style = 'primary'}) : style = styles[style]!;
 
   @override
-  Widget sample(BuildContext context) => FBadge(label: const Text('Badge'), style: style);
+  Widget sample(BuildContext context) => FBadge(style: style, child: const Text('Badge'));
 }
