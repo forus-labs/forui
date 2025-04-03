@@ -46,13 +46,13 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        FButton(label: const Text('Left'), onPress: onPress(FLayout.ltr)),
+        FButton(onPress: onPress(FLayout.ltr), child: const Text('Left')),
         const SizedBox(height: 5),
-        FButton(label: const Text('Top'), onPress: onPress(FLayout.ttb)),
+        FButton(onPress: onPress(FLayout.ttb), child: const Text('Top')),
         const SizedBox(height: 5),
-        FButton(label: const Text('Right'), onPress: onPress(FLayout.rtl)),
+        FButton(onPress: onPress(FLayout.rtl), child: const Text('Right')),
         const SizedBox(height: 5),
-        FButton(label: const Text('Bottom'), onPress: onPress(FLayout.btt)),
+        FButton(onPress: onPress(FLayout.btt), child: const Text('Bottom')),
       ],
     );
   }
@@ -77,11 +77,11 @@ class Form extends StatelessWidget {
     height: double.infinity,
     width: double.infinity,
     decoration: BoxDecoration(
-      color: context.theme.colorScheme.background,
+      color: context.theme.color.background,
       border:
           side.vertical
-              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colorScheme.border))
-              : Border.symmetric(vertical: BorderSide(color: context.theme.colorScheme.border)),
+              ? Border.symmetric(horizontal: BorderSide(color: context.theme.color.border))
+              : Border.symmetric(vertical: BorderSide(color: context.theme.color.border)),
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
@@ -92,15 +92,15 @@ class Form extends StatelessWidget {
           children: [
             Text(
               'Account',
-              style: context.theme.typography.xl2.copyWith(
+              style: context.theme.text.xl2.copyWith(
                 fontWeight: FontWeight.w600,
-                color: context.theme.colorScheme.foreground,
+                color: context.theme.color.foreground,
                 height: 1.5,
               ),
             ),
             Text(
               'Make changes to your account here. Click save when you are done.',
-              style: context.theme.typography.sm.copyWith(color: context.theme.colorScheme.mutedForeground),
+              style: context.theme.text.sm.copyWith(color: context.theme.color.mutedForeground),
             ),
             const SizedBox(height: 8),
             SizedBox(
@@ -111,7 +111,7 @@ class Form extends StatelessWidget {
                   const SizedBox(height: 10),
                   const FTextField(label: Text('Email'), hint: 'john@doe.com'),
                   const SizedBox(height: 16),
-                  FButton(label: const Text('Save'), onPress: controller.toggle),
+                  FButton(onPress: controller.toggle, child: const Text('Save')),
                 ],
               ),
             ),
@@ -135,7 +135,7 @@ class _DraggableState extends StatefulSampleState<DraggablePersistentSheetPage> 
 
   @override
   Widget sample(BuildContext context) => FButton(
-    label: const Text('Click me'),
+    child: const Text('Click me'),
     onPress: () {
       if (controller != null) {
         controller!.toggle();

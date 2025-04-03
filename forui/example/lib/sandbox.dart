@@ -66,7 +66,7 @@ class _SandboxState extends State<Sandbox> {
           ),
         ),
       ),
-      SizedBox(height: 200, child: FPagination(controller: paginationController, onPageChange: _handlePageChanged)),
+      SizedBox(height: 200, child: FPagination(controller: paginationController, onChange: _handlePageChanged)),
     ],
   );
 

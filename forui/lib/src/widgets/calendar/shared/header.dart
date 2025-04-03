@@ -195,28 +195,21 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
   });
 
   /// Creates a [FCalendarHeaderStyle] that inherits its values from the given [colorScheme] and [typography].
-  factory FCalendarHeaderStyle.inherit({
+  FCalendarHeaderStyle.inherit({
     required FColorScheme colorScheme,
     required FTypography typography,
     required FStyle style,
-  }) => FCalendarHeaderStyle(
-    focusedOutlineStyle: style.focusedOutlineStyle,
-    buttonStyle: FButtonStyles.inherit(
-      colorScheme: colorScheme,
-      typography: typography,
-      style: style,
-    ).outline.transform(
-      (style) => style.copyWith(
-        enabledBoxDecoration: style.enabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-        enabledHoverBoxDecoration: style.enabledHoverBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-        disabledBoxDecoration: style.disabledBoxDecoration.copyWith(borderRadius: BorderRadius.circular(4)),
-        iconContentStyle: style.iconContentStyle.copyWith(
-          enabledStyle: IconThemeData(color: colorScheme.mutedForeground, size: 17),
-          disabledStyle: IconThemeData(color: colorScheme.disable(colorScheme.mutedForeground), size: 17),
-        ),
-      ),
-    ),
-    headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-    tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-  );
+  }) : this(
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         buttonStyle: FButtonStyles.inherit(color: colorScheme, text: typography, style: style).outline.transform(
+           (style) => style.copyWith(
+             iconContentStyle: style.iconContentStyle.copyWith(
+               enabledStyle: IconThemeData(color: colorScheme.mutedForeground, size: 17),
+               disabledStyle: IconThemeData(color: colorScheme.disable(colorScheme.mutedForeground), size: 17),
+             ),
+           ),
+         ),
+         headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
+         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+       );
 }

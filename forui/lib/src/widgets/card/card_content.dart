@@ -20,14 +20,14 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.cardStyle.contentStyle;
-
     return Padding(
       padding: style.padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (image case final image?) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
-          if ((title != null || subtitle != null || child != null) && image != null) const SizedBox(height: 10),
+          if ((title != null || subtitle != null || child != null) && image != null)
+            SizedBox(height: style.imageSpacing),
           if (title case final title?)
             DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
@@ -46,7 +46,7 @@ class Content extends StatelessWidget {
               style: style.subtitleTextStyle,
               child: subtitle,
             ),
-          if (title != null && subtitle != null && image == null) const SizedBox(height: 8),
+          if (title != null && subtitle != null && image == null) SizedBox(height: style.subtitleSpacing),
           if (child case final child?) child,
         ],
       ),
@@ -64,6 +64,14 @@ class Content extends StatelessWidget {
 
 /// [FCard] content's style.
 final class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
+  /// The spacing between the image and the title, subtitle, and child if any of them is provided. Defaults to 10.
+  @override
+  final double imageSpacing;
+
+  /// The spacing between the title/subtitle and the child if an image is provided. Defaults to 8.
+  @override
+  final double subtitleSpacing;
+
   /// The title's [TextStyle].
   @override
   final TextStyle titleTextStyle;
@@ -80,17 +88,8 @@ final class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions 
   const FCardContentStyle({
     required this.titleTextStyle,
     required this.subtitleTextStyle,
+    this.imageSpacing = 10,
+    this.subtitleSpacing = 8,
     this.padding = const EdgeInsets.all(16),
   });
-
-  /// Creates a [FCardContentStyle] that inherits its properties from [colorScheme] and [typography].
-  FCardContentStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
-    : this(
-        titleTextStyle: typography.xl2.copyWith(
-          fontWeight: FontWeight.w600,
-          color: colorScheme.foreground,
-          height: 1.5,
-        ),
-        subtitleTextStyle: typography.sm.copyWith(color: colorScheme.mutedForeground),
-      );
 }

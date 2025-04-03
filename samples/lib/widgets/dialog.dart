@@ -15,14 +15,14 @@ class DialogPage extends Sample {
   @override
   Widget sample(BuildContext context) {
     final actions = [
-      FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
-      FButton(label: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+      FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+      FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
     ];
 
     final style = context.theme.dialogStyle;
     return IntrinsicWidth(
       child: FButton(
-        label: const Text('Show Dialog'),
+        child: const Text('Show Dialog'),
         onPress:
             () => showAdaptiveDialog(
               context: context,

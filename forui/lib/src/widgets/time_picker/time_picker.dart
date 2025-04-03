@@ -171,11 +171,11 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
   });
 
   /// Creates a [FTimePickerStyle] that inherits its properties.
-  FTimePickerStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
+  FTimePickerStyle.inherit({required FColorScheme color, required FStyle style, required FTypography text})
     : this(
-        textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),
+        textStyle: text.base.copyWith(fontWeight: FontWeight.w500),
         selectionBorderRadius: style.borderRadius,
-        selectionColor: colorScheme.muted,
+        selectionColor: color.muted,
         selectionHeightAdjustment: 5,
         spacing: 2,
         focusedOutlineStyle: style.focusedOutlineStyle,

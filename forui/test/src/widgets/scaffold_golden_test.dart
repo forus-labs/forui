@@ -16,12 +16,12 @@ void main() {
               header: Row(
                 children: [Expanded(child: Container(decoration: const BoxDecoration(color: Colors.red), height: 100))],
               ),
-              content: const Placeholder(),
               footer: Row(
                 children: [
                   Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
                 ],
               ),
+              child: const Placeholder(),
             ),
           ),
         );
@@ -52,8 +52,8 @@ void main() {
                                         height: double.infinity,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: context.theme.colorScheme.primary),
-                                          color: context.theme.colorScheme.background,
+                                          border: Border.all(color: context.theme.color.primary),
+                                          color: context.theme.color.background,
                                         ),
                                         child: const Center(child: Text('sheet')),
                                       ),
@@ -65,12 +65,12 @@ void main() {
                   ),
                 ],
               ),
-              content: const Placeholder(),
               footer: Row(
                 children: [
                   Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
                 ],
               ),
+              child: const Placeholder(),
             ),
           ),
         );
@@ -90,8 +90,8 @@ void main() {
             child: FScaffold(
               resizeToAvoidBottomInset: resizeToAvoidBottomInset,
               header: Container(decoration: const BoxDecoration(color: Colors.red), height: 100),
-              content: const Placeholder(),
               footer: Container(decoration: const BoxDecoration(color: Colors.green), height: 100),
+              child: const Placeholder(),
             ),
           ),
         );

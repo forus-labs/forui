@@ -33,12 +33,12 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
     required this.iconStyle,
   });
 
-  /// Creates a [FDateFieldStyle] that inherits the [colorScheme], [typography], and [style].
-  FDateFieldStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FDateFieldStyle] that inherits the [color], [text], and [style].
+  FDateFieldStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
-        calendarStyle: FCalendarStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        iconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 18),
+        textFieldStyle: FTextFieldStyle.inherit(color: color, text: text, style: style),
+        popoverStyle: FPopoverStyle.inherit(color: color, style: style),
+        calendarStyle: FCalendarStyle.inherit(color: color, text: text, style: style),
+        iconStyle: IconThemeData(color: color.mutedForeground, size: 18),
       );
 }

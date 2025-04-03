@@ -79,7 +79,7 @@ class FBreadcrumbItemData extends InheritedWidget {
   const FBreadcrumbItemData({required this.style, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(FBreadcrumbItemData oldWidget) => style != oldWidget.style;
+  bool updateShouldNotify(FBreadcrumbItemData old) => style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -100,7 +100,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   /// When tapped, it displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsed({
     required List<FTileGroup> menu,
-    FPopoverMenuStyle? popOverMenuStyle,
+    FPopoverMenuStyle? popoverMenuStyle,
     FPopoverController? popoverController,
     ScrollController? scrollController,
     double? cacheExtent,
@@ -167,7 +167,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 // ignore: avoid_implementing_value_types
 class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup> menu;
-  final FPopoverMenuStyle? popOverMenuStyle;
+  final FPopoverMenuStyle? popoverMenuStyle;
   final FPopoverController? popoverController;
   final ScrollController? scrollController;
   final double? cacheExtent;
@@ -187,7 +187,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 
   const _CollapsedCrumb({
     required this.menu,
-    this.popOverMenuStyle,
+    this.popoverMenuStyle,
     this.popoverController,
     this.scrollController,
     this.cacheExtent,
@@ -214,7 +214,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('popOverMenuStyle', popOverMenuStyle))
+      ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle))
       ..add(DiagnosticsProperty('popoverController', popoverController))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
@@ -254,7 +254,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
     final style = FBreadcrumbItemData.of(context).style;
     return FPopoverMenu(
       popoverController: _popoverController,
-      style: widget.popOverMenuStyle,
+      style: widget.popoverMenuStyle,
       menuAnchor: widget.menuAnchor,
       childAnchor: widget.childAnchor,
       shift: widget.shift,
@@ -333,17 +333,17 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
   });
 
-  /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [typography].
-  FBreadcrumbStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FDividerStyles] that inherits its properties from [color] and [text].
+  FBreadcrumbStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
-        selectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colorScheme.foreground),
-        unselectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colorScheme.mutedForeground),
-        hoveredTextStyle: typography.sm.copyWith(
+        selectedTextStyle: text.sm.copyWith(fontWeight: FontWeight.w400, color: color.foreground),
+        unselectedTextStyle: text.sm.copyWith(fontWeight: FontWeight.w400, color: color.mutedForeground),
+        hoveredTextStyle: text.sm.copyWith(
           fontWeight: FontWeight.w400,
-          color: colorScheme.primary,
+          color: color.primary,
           decoration: TextDecoration.underline,
         ),
-        iconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 16),
+        iconStyle: IconThemeData(color: color.mutedForeground, size: 16),
         tappableStyle: style.tappableStyle,
       );
 }

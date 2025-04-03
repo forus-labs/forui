@@ -85,7 +85,7 @@ void main() {
         TestScaffold(
           child: FTile(
             title: const Text('Bluetooth'),
-            details: FButton(onPress: () => count++, label: const Text('child')),
+            details: FButton(onPress: () => count++, child: const Text('child')),
           ),
         ),
       );

@@ -19,7 +19,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   final Widget label;
 
   /// Creates a [FBottomNavigationBarItem].
-  const FBottomNavigationBarItem({required this.label, required this.icon, this.style, super.key});
+  const FBottomNavigationBarItem({required this.icon, required this.label, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
       padding: style.padding,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        spacing: 2,
+        spacing: style.spacing,
         children: [
           ExcludeSemantics(
             child: IconTheme(data: selected ? style.selectedIconStyle : style.unselectedIconStyle, child: icon),
@@ -62,17 +62,21 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
   @override
   final IconThemeData unselectedIconStyle;
 
-  /// The text's style when an item is selected.
+  /// The text style when an item is selected.
   @override
   final TextStyle selectedTextStyle;
 
-  /// The text's style when an item is unselected.
+  /// The text style when an item is unselected.
   @override
   final TextStyle unselectedTextStyle;
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   @override
   final EdgeInsetsGeometry padding;
+
+  /// The spacing between the icon and the label. Defaults to `2`.
+  @override
+  final double spacing;
 
   /// Creates a [FBottomNavigationBarItemStyle].
   FBottomNavigationBarItemStyle({
@@ -81,15 +85,16 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
     required this.selectedTextStyle,
     required this.unselectedTextStyle,
     this.padding = const EdgeInsets.all(5),
+    this.spacing = 2,
   });
 
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColorScheme] and
   /// [FTypography].
-  FBottomNavigationBarItemStyle.inherit({required FColorScheme colorScheme, required FTypography typography})
+  FBottomNavigationBarItemStyle.inherit({required FColorScheme color, required FTypography text})
     : this(
-        selectedIconStyle: IconThemeData(color: colorScheme.primary, size: 24),
-        unselectedIconStyle: IconThemeData(color: colorScheme.disable(colorScheme.foreground), size: 24),
-        selectedTextStyle: typography.base.copyWith(color: colorScheme.primary, fontSize: 10),
-        unselectedTextStyle: typography.base.copyWith(color: colorScheme.disable(colorScheme.foreground), fontSize: 10),
+        selectedIconStyle: IconThemeData(color: color.primary, size: 24),
+        unselectedIconStyle: IconThemeData(color: color.disable(color.foreground), size: 24),
+        selectedTextStyle: text.base.copyWith(color: color.primary, fontSize: 10),
+        unselectedTextStyle: text.base.copyWith(color: color.disable(color.foreground), fontSize: 10),
       );
 }

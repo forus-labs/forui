@@ -24,7 +24,7 @@ void main() {
               FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
               FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
             ],
-            child: FButton(onPress: controller.toggle, label: const Text('target')),
+            child: FButton(onPress: controller.toggle, child: const Text('target')),
           ),
         ),
       );
@@ -50,7 +50,7 @@ void main() {
               FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
               FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
             ],
-            child: FButton(onPress: controller.toggle, label: const Text('target')),
+            child: FButton(onPress: controller.toggle, child: const Text('target')),
           ),
         ),
       );
@@ -75,7 +75,7 @@ void main() {
               FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
               FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
             ],
-            child: FButton(onPress: controller.toggle, label: const Text('target')),
+            child: FButton(onPress: controller.toggle, child: const Text('target')),
           ),
         ),
       );

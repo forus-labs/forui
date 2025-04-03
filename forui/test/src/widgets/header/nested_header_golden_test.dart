@@ -13,14 +13,11 @@ void main() {
           child: FHeader.nested(
             style: TestScaffold.blueScreen.headerStyle.nestedStyle,
             title: const Text('Title'),
-            prefixActions: [
+            prefixes: [
               FHeaderAction.back(onPress: () {}),
               const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
             ],
-            suffixActions: [
-              FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
-              FHeaderAction.x(onPress: () {}),
-            ],
+            suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
           ),
         ),
       );
@@ -35,14 +32,11 @@ void main() {
             theme: theme.data,
             child: FHeader.nested(
               title: const Text('Title'),
-              prefixActions: [
+              prefixes: [
                 FHeaderAction.back(onPress: () {}),
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
-              suffixActions: [
-                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
-                FHeaderAction.x(onPress: () {}),
-              ],
+              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
             ),
           ),
         );
@@ -62,11 +56,11 @@ void main() {
             theme: theme.data,
             child: FHeader.nested(
               title: const Text('Title'),
-              prefixActions: [
+              prefixes: [
                 FHeaderAction.back(onPress: () {}),
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
-              suffixActions: [
+              suffixes: [
                 FHeaderAction(autofocus: true, icon: const Icon(FIcons.plus), onPress: () {}),
                 FHeaderAction.x(onPress: () {}),
               ],
@@ -84,14 +78,11 @@ void main() {
             textDirection: TextDirection.rtl,
             child: FHeader.nested(
               title: const Text('Title'),
-              prefixActions: [
+              prefixes: [
                 FHeaderAction.back(onPress: () {}),
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
-              suffixActions: [
-                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
-                FHeaderAction.x(onPress: () {}),
-              ],
+              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
             ),
           ),
         );

@@ -45,7 +45,7 @@ class _DeterminateLinearProgressPageState extends StatefulSampleState<Determinat
     children: [
       FProgress(value: value),
       FButton(
-        label: const Text('Reset'),
+        child: const Text('Reset'),
         onPress:
             () => setState(() {
               value = 0.2;

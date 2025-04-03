@@ -234,10 +234,10 @@ class FProgressStyles with Diagnosticable, _$FProgressStylesFunctions {
   /// Creates a [FProgressStyles].
   const FProgressStyles({required this.linearProgressStyle, required this.circularIconProgressStyle});
 
-  /// Creates a [FProgressStyles] that inherits its properties from [colorScheme] and [style].
-  FProgressStyles.inherit({required FColorScheme colorScheme, required FStyle style})
-    : linearProgressStyle = FLinearProgressStyle.inherit(colorScheme: colorScheme, style: style),
-      circularIconProgressStyle = IconThemeData(color: colorScheme.mutedForeground, size: 20);
+  /// Creates a [FProgressStyles] that inherits its properties from [color] and [style].
+  FProgressStyles.inherit({required FColorScheme color, required FStyle style})
+    : linearProgressStyle = FLinearProgressStyle.inherit(color: color, style: style),
+      circularIconProgressStyle = IconThemeData(color: color.mutedForeground, size: 20);
 }
 
 /// A linear [FProgress]'s style.
@@ -266,10 +266,10 @@ class FLinearProgressStyle with Diagnosticable, _$FLinearProgressStyleFunctions 
     this.curve = Curves.ease,
   });
 
-  /// Creates a [FLinearProgressStyle] that inherits its properties from [colorScheme] and [style].
-  FLinearProgressStyle.inherit({required FColorScheme colorScheme, required FStyle style})
+  /// Creates a [FLinearProgressStyle] that inherits its properties.
+  FLinearProgressStyle.inherit({required FColorScheme color, required FStyle style})
     : this(
-        backgroundDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.secondary),
-        progressDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.primary),
+        backgroundDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.secondary),
+        progressDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.primary),
       );
 }

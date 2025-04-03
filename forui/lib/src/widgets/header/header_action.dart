@@ -49,6 +49,7 @@ class FHeaderAction extends StatelessWidget {
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    VoidCallback? onLongPress,
     Key? key,
   }) => FHeaderAction(
     icon: const Icon(FIcons.arrowLeft),
@@ -58,6 +59,7 @@ class FHeaderAction extends StatelessWidget {
     autofocus: autofocus,
     focusNode: focusNode,
     onFocusChange: onFocusChange,
+    onLongPress: onLongPress,
     key: key,
   );
 
@@ -68,6 +70,7 @@ class FHeaderAction extends StatelessWidget {
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    VoidCallback? onLongPress,
     Key? key,
   }) => FHeaderAction(
     icon: const Icon(FIcons.x),
@@ -76,6 +79,7 @@ class FHeaderAction extends StatelessWidget {
     autofocus: autofocus,
     focusNode: focusNode,
     onFocusChange: onFocusChange,
+    onLongPress: onLongPress,
     key: key,
   );
 
@@ -139,9 +143,9 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
   });
 
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
-  FHeaderActionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required double size})
-    : enabledStyle = IconThemeData(color: colorScheme.foreground, size: size),
-      disabledStyle = IconThemeData(color: colorScheme.disable(colorScheme.foreground), size: size),
+  FHeaderActionStyle.inherit({required FColorScheme color, required FStyle style, required double size})
+    : enabledStyle = IconThemeData(color: color.foreground, size: size),
+      disabledStyle = IconThemeData(color: color.disable(color.foreground), size: size),
       focusedOutlineStyle = style.focusedOutlineStyle,
       tappableStyle = style.tappableStyle;
 }

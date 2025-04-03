@@ -12,7 +12,7 @@ class RootHeaderPage extends Sample {
   @override
   Widget sample(BuildContext context) => FHeader(
     title: const Text('Edit Alarm'),
-    actions: [
+    suffixes: [
       FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),
       FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
     ],
@@ -26,8 +26,8 @@ class NestedHeaderPage extends Sample {
   @override
   Widget sample(BuildContext context) => FHeader.nested(
     title: const Text('Appointment'),
-    prefixActions: [FHeaderAction.back(onPress: () {})],
-    suffixActions: [
+    prefixes: [FHeaderAction.back(onPress: () {})],
+    suffixes: [
       FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
       FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
     ],
@@ -41,10 +41,10 @@ class XNestedHeaderPage extends Sample {
   @override
   Widget sample(BuildContext context) => FHeader.nested(
     title: const Text('Climate'),
-    prefixActions: [
+    prefixes: [
       FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),
       const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),
     ],
-    suffixActions: [FHeaderAction.x(onPress: () {})],
+    suffixes: [FHeaderAction.x(onPress: () {})],
   );
 }

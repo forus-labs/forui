@@ -38,8 +38,8 @@ void main() {
                   'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 ),
                 actions: [
-                  FButton(label: const Text('Continue'), onPress: () {}),
-                  FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () {}),
+                  FButton(child: const Text('Continue'), onPress: () {}),
+                  FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () {}),
                 ],
               ),
             ),
@@ -76,8 +76,8 @@ void main() {
                 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
               ),
               actions: [
-                FButton(label: const Text('Continue'), onPress: () {}),
-                FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () {}),
+                FButton(child: const Text('Continue'), onPress: () {}),
+                FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () {}),
               ],
             ),
           ),
@@ -99,8 +99,8 @@ void main() {
                 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
               ),
               actions: [
-                FButton(label: const Text('Continue'), onPress: () {}),
-                FButton(style: FButtonStyle.outline, label: const Text('Cancel'), onPress: () {}),
+                FButton(child: const Text('Continue'), onPress: () {}),
+                FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () {}),
               ],
             ),
           ),

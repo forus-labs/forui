@@ -350,7 +350,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     super.initState();
     _controller = widget.controller ?? FSelectController(vsync: this);
 
-    _focus = widget.focusNode ?? FocusNode();
+    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
     _textController.addListener(_updateSelectController);
     _controller.addListener(_updateTextController);
     _controller.popover.addListener(_updateFocus);
@@ -364,7 +364,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       if (old.focusNode == null) {
         _focus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode();
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
     }
 
     if (widget.controller != old.controller) {
@@ -553,14 +553,14 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
     required this.emptyTextStyle,
   });
 
-  /// Creates a [FSelectStyle] that inherits from the given [colorScheme], [typography], and [style].
-  FSelectStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FSelectStyle] that inherits its properties.
+  FSelectStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
-        selectFieldStyle: FTextFieldStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        iconStyle: IconThemeData(color: colorScheme.mutedForeground, size: 18),
-        popoverStyle: FPopoverStyle.inherit(colorScheme: colorScheme, style: style),
-        searchStyle: FSelectSearchStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        contentStyle: FSelectContentStyle.inherit(colorScheme: colorScheme, typography: typography, style: style),
-        emptyTextStyle: typography.sm,
+        selectFieldStyle: FTextFieldStyle.inherit(color: color, text: text, style: style),
+        iconStyle: IconThemeData(color: color.mutedForeground, size: 18),
+        popoverStyle: FPopoverStyle.inherit(color: color, style: style),
+        searchStyle: FSelectSearchStyle.inherit(color: color, text: text, style: style),
+        contentStyle: FSelectContentStyle.inherit(color: color, text: text, style: style),
+        emptyTextStyle: text.sm,
       );
 }

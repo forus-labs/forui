@@ -239,9 +239,9 @@ final class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunc
   const FPopoverMenuStyle({required this.tileGroupStyle, required super.decoration, this.maxWidth = 250, super.padding})
     : assert(0 < maxWidth, 'maxWidth must be positive');
 
-  /// Creates a [FPopoverMenuStyle] that inherits its properties from [colorScheme], [style] and [typography].
-  FPopoverMenuStyle.inherit({required super.colorScheme, required super.style, required FTypography typography})
-    : tileGroupStyle = FTileGroupStyle.inherit(colorScheme: colorScheme, style: style, typography: typography),
+  /// Creates a [FPopoverMenuStyle] that inherits its properties.
+  FPopoverMenuStyle.inherit({required super.color, required super.style, required FTypography text})
+    : tileGroupStyle = FTileGroupStyle.inherit(color: color, style: style, text: text),
       maxWidth = 250,
       super.inherit();
 }

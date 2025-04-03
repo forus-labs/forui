@@ -33,10 +33,10 @@ final class FPagination extends StatefulWidget {
   ///
   /// Invoked when the `page` property of the [FPaginationController] is updated.
   /// Useful for actions like updating the UI or triggering analytics events.
-  final VoidCallback? onPageChange;
+  final VoidCallback? onChange;
 
   /// Creates an [FPagination].
-  const FPagination({required this.controller, this.style, this.previous, this.next, this.onPageChange, super.key});
+  const FPagination({required this.controller, this.style, this.previous, this.next, this.onChange, super.key});
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -47,11 +47,33 @@ final class FPagination extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('onPageChange', onPageChange));
+      ..add(ObjectFlagProperty.has('onPageChange', onChange));
   }
 }
 
 class _FPaginationState extends State<FPagination> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.onChange case final onChange?) {
+      widget.controller.addListener(onChange);
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant FPagination old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller || widget.onChange != old.onChange) {
+      if (old.onChange case final onChange?) {
+        old.controller.removeListener(onChange);
+      }
+
+      if (widget.onChange case final onChange?) {
+        widget.controller.addListener(onChange);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final controller = widget.controller;
@@ -62,21 +84,11 @@ class _FPaginationState extends State<FPagination> {
         Action.previous(
           style: style,
           semanticsLabel: localizations.paginationPreviousSemanticsLabel,
-          onPress: () {
-            controller.previous();
-            widget.onPageChange?.call();
-          },
+          onPress: controller.previous,
         );
     final next =
         widget.next ??
-        Action.next(
-          style: style,
-          semanticsLabel: localizations.paginationNextSemanticsLabel,
-          onPress: () {
-            controller.next();
-            widget.onPageChange?.call();
-          },
-        );
+        Action.next(style: style, semanticsLabel: localizations.paginationNextSemanticsLabel, onPress: controller.next);
     final lastPage = controller.pages - 1;
 
     final ellipsis = Padding(
@@ -101,20 +113,15 @@ class _FPaginationState extends State<FPagination> {
             previous,
             if (controller.page > controller.minPagesDisplayedAtEdges) ...[
               if (controller.showEdges)
-                FPaginationItemData(page: 0, style: style, controller: controller, child: _Page(widget.onPageChange)),
+                FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
               ellipsis,
             ],
             for (int i = start; i <= end; i++)
-              FPaginationItemData(page: i, style: style, controller: controller, child: _Page(widget.onPageChange)),
+              FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
             if (controller.page < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
               ellipsis,
               if (controller.showEdges)
-                FPaginationItemData(
-                  page: lastPage,
-                  style: style,
-                  controller: controller,
-                  child: _Page(widget.onPageChange),
-                ),
+                FPaginationItemData(page: lastPage, style: style, controller: controller, child: const _Page()),
             ],
             next,
           ],
@@ -211,9 +218,7 @@ class Action extends StatelessWidget {
 }
 
 class _Page extends StatelessWidget {
-  final VoidCallback? onPageChange;
-
-  const _Page(this.onPageChange);
+  const _Page();
 
   @override
   Widget build(BuildContext context) {
@@ -230,10 +235,7 @@ class _Page extends StatelessWidget {
           return FTappable(
             style: style.pageTappableStyle,
             focusedOutlineStyle: focusedOutlineStyle,
-            onPress: () {
-              controller.page = page;
-              onPageChange?.call();
-            },
+            onPress: () => controller.page = page,
             builder:
                 (context, data, _) => DecoratedBox(
                   decoration: switch ((selected, data.hovered)) {
@@ -254,11 +256,5 @@ class _Page extends StatelessWidget {
         },
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty.has('onPageChange', onPageChange));
   }
 }

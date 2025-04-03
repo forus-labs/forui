@@ -46,7 +46,6 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
       bucket: _bucket,
       child: FScaffold(
         header: const FHeader(title: Text('Example')),
-        content: _pages[index],
         footer: FBottomNavigationBar(
           index: index,
           onChange: (index) => setState(() => this.index = index),
@@ -58,6 +57,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
             FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
           ],
         ),
+        child: _pages[index],
       ),
     ),
   );

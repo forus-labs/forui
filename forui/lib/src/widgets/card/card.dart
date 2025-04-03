@@ -65,14 +65,17 @@ final class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   /// Creates a [FCardStyle].
   FCardStyle({required this.decoration, required this.contentStyle});
 
-  /// Creates a [FCardStyle] that inherits its properties from [colorScheme], [typography] and [style].
-  FCardStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FCardStyle] that inherits its properties from [color], [text] and [style].
+  FCardStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          border: Border.all(color: colorScheme.border),
+          border: Border.all(color: color.border),
           borderRadius: style.borderRadius,
-          color: colorScheme.background,
+          color: color.background,
         ),
-        contentStyle: FCardContentStyle.inherit(colorScheme: colorScheme, typography: typography),
+        contentStyle: FCardContentStyle(
+          titleTextStyle: text.xl2.copyWith(fontWeight: FontWeight.w600, color: color.foreground, height: 1.5),
+          subtitleTextStyle: text.sm.copyWith(color: color.mutedForeground),
+        ),
       );
 }

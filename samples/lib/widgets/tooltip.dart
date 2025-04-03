@@ -29,7 +29,7 @@ class TooltipPage extends StatelessWidget {
   Widget build(BuildContext context) => FTheme(
     data: theme,
     child: FScaffold(
-      content: Center(
+      child: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
           child: Builder(
@@ -48,7 +48,7 @@ class TooltipPage extends StatelessWidget {
                         child: FButton(
                           style: FButtonStyle.outline,
                           onPress: () {},
-                          label: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
+                          child: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
                         ),
                       ),
                     ),

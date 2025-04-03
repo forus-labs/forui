@@ -12,7 +12,7 @@ void main() {
         TestScaffold.blue(
           child: FAccordion(
             style: TestScaffold.blueScreen.accordionStyle,
-            items: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
+            children: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
           ),
         ),
       );
@@ -26,7 +26,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: const FAccordion(
-              items: [
+              children: [
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: Text('Title'),
@@ -45,7 +45,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: const FAccordion(
-              items: [
+              children: [
                 FAccordionItem(
                   initiallyExpanded: true,
                   autofocus: true,
@@ -69,7 +69,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: const FAccordion(
-              items: [
+              children: [
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: Text('Title'),

@@ -108,7 +108,7 @@ class _FormCheckboxState extends StatefulSampleState<FormCheckboxPage> {
           ),
           const SizedBox(height: 20),
           FButton(
-            label: const Text('Register'),
+            child: const Text('Register'),
             onPress: () {
               if (!_formKey.currentState!.validate()) {
                 // Handle errors here.

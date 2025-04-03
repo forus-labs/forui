@@ -19,7 +19,7 @@ void main() {
             controller = useFAccordionController();
             return FAccordion(
               controller: controller,
-              items: const [
+              children: const [
                 FAccordionItem(title: Text('Header 1'), child: Text('Body 1')),
                 FAccordionItem(title: Text('Header 1'), child: Text('Body 1')),
               ],

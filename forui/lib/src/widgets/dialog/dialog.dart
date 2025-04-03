@@ -18,21 +18,8 @@ part 'dialog.style.dart';
 /// * https://forui.dev/docs/overlay/dialog for working examples.
 /// * [FDialogStyle] for customizing a dialog's appearance.
 class FDialog extends StatelessWidget {
-  static const _defaultDuration = Duration(milliseconds: 100);
-
   /// The dialog's style. Defaults to [FThemeData.dialogStyle].
   final FDialogStyle? style;
-
-  /// The duration of the animation to show when the system keyboard intrudes into the space that the dialog is placed in.
-  ///
-  /// Defaults to 100 milliseconds.
-  final Duration insetAnimationDuration;
-
-  /// The curve to use for the animation shown when the system keyboard intrudes into the space that the dialog is
-  /// placed in.
-  ///
-  /// Defaults to [Curves.decelerate].
-  final Curve insetAnimationCurve;
 
   /// The semantic label of the dialog used by accessibility frameworks to announce screen transitions when the dialog
   /// is opened and closed.
@@ -40,6 +27,9 @@ class FDialog extends StatelessWidget {
   /// See also:
   ///  * [SemanticsConfiguration.namesRoute], for a description of how this value is used.
   final String? semanticsLabel;
+
+  /// The dialog's box constraints. Defaults to `BoxConstraints(minWidth: 280, maxWidth: 560)`.
+  final BoxConstraints constraints;
 
   /// The builder for the dialog's content.
   final Widget Function(BuildContext, FDialogStyle) builder;
@@ -75,9 +65,8 @@ class FDialog extends StatelessWidget {
   FDialog({
     required List<Widget> actions,
     this.style,
-    this.insetAnimationDuration = _defaultDuration,
-    this.insetAnimationCurve = Curves.decelerate,
     this.semanticsLabel,
+    this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
     Widget? title,
     Widget? body,
     Axis direction = Axis.vertical,
@@ -94,9 +83,8 @@ class FDialog extends StatelessWidget {
   FDialog.adaptive({
     required List<Widget> actions,
     this.style,
-    this.insetAnimationDuration = _defaultDuration,
-    this.insetAnimationCurve = Curves.decelerate,
     this.semanticsLabel,
+    this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
     Widget? title,
     Widget? body,
     super.key,
@@ -115,9 +103,8 @@ class FDialog extends StatelessWidget {
   const FDialog.raw({
     required this.builder,
     this.style,
-    this.insetAnimationDuration = _defaultDuration,
-    this.insetAnimationCurve = Curves.decelerate,
     this.semanticsLabel,
+    this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
     super.key,
   });
 
@@ -130,8 +117,8 @@ class FDialog extends StatelessWidget {
       padding:
           MediaQuery.viewInsetsOf(context) +
           style.insetPadding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr),
-      duration: insetAnimationDuration,
-      curve: insetAnimationCurve,
+      duration: style.insetAnimationDuration,
+      curve: style.insetAnimationCurve,
       child: MediaQuery.removeViewInsets(
         removeLeft: true,
         removeTop: true,
@@ -140,14 +127,14 @@ class FDialog extends StatelessWidget {
         context: context,
         child: Align(
           child: DefaultTextStyle(
-            style: context.theme.typography.base.copyWith(color: theme.colorScheme.foreground),
+            style: context.theme.text.base.copyWith(color: theme.color.foreground),
             child: Semantics(
               scopesRoute: true,
               explicitChildNodes: true,
               namesRoute: true,
               label: semanticsLabel,
               child: ConstrainedBox(
-                constraints: BoxConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
+                constraints: constraints,
                 child: DecoratedBox(decoration: style.decoration, child: builder(context, style)),
               ),
             ),
@@ -162,9 +149,8 @@ class FDialog extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('insetAnimationDuration', insetAnimationDuration, defaultValue: _defaultDuration))
-      ..add(DiagnosticsProperty('insetAnimationCurve', insetAnimationCurve, defaultValue: Curves.decelerate))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DiagnosticsProperty('constraints', constraints))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
@@ -174,6 +160,19 @@ final class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   /// The decoration.
   @override
   final BoxDecoration decoration;
+
+  /// The duration of the animation to show when the system keyboard intrudes into the space that the dialog is placed in.
+  ///
+  /// Defaults to 100 milliseconds.
+  @override
+  final Duration insetAnimationDuration;
+
+  /// The curve to use for the animation shown when the system keyboard intrudes into the space that the dialog is
+  /// placed in.
+  ///
+  /// Defaults to [Curves.decelerate].
+  @override
+  final Curve insetAnimationCurve;
 
   /// The inset padding. Defaults to `EdgeInsets.symmetric(horizontal: 40, vertical: 24)`.
   @override
@@ -187,39 +186,34 @@ final class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   @override
   final FDialogContentStyle verticalStyle;
 
-  /// The minimum width of the dialog. Defaults to 280.
-  @override
-  final double minWidth;
-
-  /// The maximum width of the dialog. Defaults to 560.
-  @override
-  final double maxWidth;
-
   /// Creates a [FDialogStyle].
   const FDialogStyle({
     required this.decoration,
     required this.horizontalStyle,
     required this.verticalStyle,
-    this.minWidth = 280.0,
-    this.maxWidth = 560.0,
+    this.insetAnimationDuration = const Duration(milliseconds: 100),
+    this.insetAnimationCurve = Curves.decelerate,
     this.insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
   });
 
-  /// Creates a [FDialogStyle] that inherits its properties from the given [style], [colorScheme], and [typography].
-  FDialogStyle.inherit({required FStyle style, required FColorScheme colorScheme, required FTypography typography})
-    : this(
-        decoration: BoxDecoration(borderRadius: style.borderRadius, color: colorScheme.background),
-        horizontalStyle: FDialogContentStyle.inherit(
-          colorScheme: colorScheme,
-          typography: typography,
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-          actionSpacing: 7,
-        ),
-        verticalStyle: FDialogContentStyle.inherit(
-          colorScheme: colorScheme,
-          typography: typography,
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
-          actionSpacing: 8,
-        ),
-      );
+  /// Creates a [FDialogStyle] that inherits its properties from the given [style], [color], and [text].
+  factory FDialogStyle.inherit({required FStyle style, required FColorScheme color, required FTypography text}) {
+    final title = text.lg.copyWith(fontWeight: FontWeight.w600, color: color.foreground);
+    final body = text.sm.copyWith(color: color.mutedForeground);
+    return FDialogStyle(
+      decoration: BoxDecoration(borderRadius: style.borderRadius, color: color.background),
+      horizontalStyle: FDialogContentStyle(
+        titleTextStyle: title,
+        bodyTextStyle: body,
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+        actionSpacing: 7,
+      ),
+      verticalStyle: FDialogContentStyle(
+        titleTextStyle: title,
+        bodyTextStyle: body,
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+        actionSpacing: 8,
+      ),
+    );
+  }
 }

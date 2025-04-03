@@ -16,25 +16,25 @@ class ModalSheetPage extends Sample {
     mainAxisSize: MainAxisSize.min,
     children: [
       FButton(
-        label: const Text('Left'),
+        child: const Text('Left'),
         onPress:
             () => showFSheet(context: context, side: FLayout.ltr, builder: (context) => const Form(side: FLayout.ltr)),
       ),
       const SizedBox(height: 5),
       FButton(
-        label: const Text('Top'),
+        child: const Text('Top'),
         onPress:
             () => showFSheet(context: context, side: FLayout.ttb, builder: (context) => const Form(side: FLayout.ttb)),
       ),
       const SizedBox(height: 5),
       FButton(
-        label: const Text('Right'),
+        child: const Text('Right'),
         onPress:
             () => showFSheet(context: context, side: FLayout.rtl, builder: (context) => const Form(side: FLayout.rtl)),
       ),
       const SizedBox(height: 5),
       FButton(
-        label: const Text('Bottom'),
+        child: const Text('Bottom'),
         onPress:
             () => showFSheet(context: context, side: FLayout.btt, builder: (context) => const Form(side: FLayout.btt)),
       ),
@@ -52,11 +52,11 @@ class Form extends StatelessWidget {
     height: double.infinity,
     width: double.infinity,
     decoration: BoxDecoration(
-      color: context.theme.colorScheme.background,
+      color: context.theme.color.background,
       border:
           side.vertical
-              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colorScheme.border))
-              : Border.symmetric(vertical: BorderSide(color: context.theme.colorScheme.border)),
+              ? Border.symmetric(horizontal: BorderSide(color: context.theme.color.border))
+              : Border.symmetric(vertical: BorderSide(color: context.theme.color.border)),
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
@@ -67,15 +67,15 @@ class Form extends StatelessWidget {
           children: [
             Text(
               'Account',
-              style: context.theme.typography.xl2.copyWith(
+              style: context.theme.text.xl2.copyWith(
                 fontWeight: FontWeight.w600,
-                color: context.theme.colorScheme.foreground,
+                color: context.theme.color.foreground,
                 height: 1.5,
               ),
             ),
             Text(
               'Make changes to your account here. Click save when you are done.',
-              style: context.theme.typography.sm.copyWith(color: context.theme.colorScheme.mutedForeground),
+              style: context.theme.text.sm.copyWith(color: context.theme.color.mutedForeground),
             ),
             const SizedBox(height: 8),
             SizedBox(
@@ -86,7 +86,7 @@ class Form extends StatelessWidget {
                   const SizedBox(height: 10),
                   const FTextField(label: Text('Email'), hint: 'john@doe.com'),
                   const SizedBox(height: 16),
-                  FButton(label: const Text('Save'), onPress: () => Navigator.of(context).pop()),
+                  FButton(child: const Text('Save'), onPress: () => Navigator.of(context).pop()),
                 ],
               ),
             ),
@@ -103,7 +103,7 @@ class DraggableModalSheetPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FButton(
-    label: const Text('Click me'),
+    child: const Text('Click me'),
     onPress:
         () => showFSheet(
           context: context,

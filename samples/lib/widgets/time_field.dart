@@ -127,7 +127,7 @@ class _FormTimePickerPageState extends StatefulSampleState<FormTimeFieldPage> wi
           ),
           const SizedBox(height: 25),
           FButton(
-            label: const Text('Submit'),
+            child: const Text('Submit'),
             onPress: () {
               if (_formKey.currentState!.validate()) {
                 // Form is valid, process the dates

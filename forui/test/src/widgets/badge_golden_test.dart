@@ -10,7 +10,7 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FBadge(label: const Text('Badge'), style: TestScaffold.blueScreen.badgeStyles.primary),
+          child: FBadge(style: TestScaffold.blueScreen.badgeStyles.primary, child: const Text('Badge')),
         ),
       );
 
@@ -21,7 +21,7 @@ void main() {
       for (final variant in Variant.values) {
         testWidgets('${theme.name} with FBadgeContent', (tester) async {
           await tester.pumpWidget(
-            TestScaffold(theme: theme.data, child: FBadge(label: const Text('Badge'), style: variant)),
+            TestScaffold(theme: theme.data, child: FBadge(style: variant, child: const Text('Badge'))),
           );
 
           await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$variant-content.png'));
@@ -44,7 +44,7 @@ void main() {
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: style.backgroundColor,
+                            color: style.decoration.color,
                             border: Border.all(color: Colors.blueAccent, width: 2),
                           ),
                         ),

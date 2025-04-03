@@ -63,18 +63,18 @@ final class FDividerStyles with Diagnosticable, _$FDividerStylesFunctions {
   /// Creates a [FDividerStyles].
   FDividerStyles({required this.horizontalStyle, required this.verticalStyle});
 
-  /// Creates a [FDividerStyles] that inherits its properties from [colorScheme] and [style].
-  FDividerStyles.inherit({required FColorScheme colorScheme, required FStyle style})
+  /// Creates a [FDividerStyles] that inherits its properties from [color] and [style].
+  FDividerStyles.inherit({required FColorScheme color, required FStyle style})
     : this(
-        horizontalStyle: FDividerStyle.inherit(
-          colorScheme: colorScheme,
-          style: style,
+        horizontalStyle: FDividerStyle(
+          color: color.secondary,
           padding: FDividerStyle.defaultPadding.horizontalStyle,
+          width: style.borderWidth,
         ),
-        verticalStyle: FDividerStyle.inherit(
-          colorScheme: colorScheme,
-          style: style,
+        verticalStyle: FDividerStyle(
+          color: color.secondary,
           padding: FDividerStyle.defaultPadding.verticalStyle,
+          width: style.borderWidth,
         ),
       );
 }
@@ -111,8 +111,4 @@ final class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
   /// Creates a [FDividerStyle].
   FDividerStyle({required this.color, required this.padding, this.width = 1})
     : assert(0 < width, 'The width is $width, but it should be in the range "0 < width".');
-
-  /// Creates a [FDividerStyle] that inherits its properties from [colorScheme], [style], and [padding].
-  FDividerStyle.inherit({required FColorScheme colorScheme, required FStyle style, required EdgeInsetsGeometry padding})
-    : this(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
 }

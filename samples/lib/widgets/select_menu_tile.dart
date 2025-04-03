@@ -178,7 +178,7 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
         ),
         const SizedBox(height: 20),
         FButton(
-          label: const Text('Save'),
+          child: const Text('Save'),
           onPress: () {
             if (!_formKey.currentState!.validate()) {
               // Handle errors here.

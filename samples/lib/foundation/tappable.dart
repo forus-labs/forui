@@ -14,9 +14,9 @@ class TappablePage extends Sample {
     builder:
         (context, data, child) => Container(
           decoration: BoxDecoration(
-            color: data.hovered ? context.theme.colorScheme.secondary : context.theme.colorScheme.background,
+            color: data.hovered ? context.theme.color.secondary : context.theme.color.background,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: context.theme.colorScheme.border),
+            border: Border.all(color: context.theme.color.border),
           ),
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
           child: child!,

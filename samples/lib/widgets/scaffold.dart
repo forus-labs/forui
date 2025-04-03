@@ -24,7 +24,6 @@ class _State extends StatefulSampleState<ScaffoldPage> {
         height: 500,
         child: FScaffold(
           header: headers[index],
-          content: contents[index],
           footer: FBottomNavigationBar(
             index: index,
             onChange: (index) => setState(() => this.index = index),
@@ -35,6 +34,7 @@ class _State extends StatefulSampleState<ScaffoldPage> {
               FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
             ],
           ),
+          child: contents[index],
         ),
       ),
     ],
@@ -45,7 +45,7 @@ final headers = [
   const FHeader(title: Text('Home')),
   const FHeader(title: Text('Categories')),
   const FHeader(title: Text('Search')),
-  FHeader(title: const Text('Settings'), actions: [FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {})]),
+  FHeader(title: const Text('Settings'), suffixes: [FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {})]),
 ];
 
 final contents = [
@@ -64,7 +64,7 @@ final contents = [
             const SizedBox(height: 10),
             const FTextField(label: Text('Email'), hint: 'john@doe.com'),
             const SizedBox(height: 16),
-            FButton(label: const Text('Save'), onPress: () {}),
+            FButton(child: const Text('Save'), onPress: () {}),
           ],
         ),
       ),

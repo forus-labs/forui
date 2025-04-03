@@ -220,7 +220,7 @@ class _Thumb extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     alignment: Alignment.center,
-    decoration: BoxDecoration(color: style.backgroundColor, borderRadius: BorderRadius.circular(4)),
+    decoration: style.decoration,
     height: style.height,
     width: style.width,
     child: Icon(icon, color: style.foregroundColor, size: min(style.height, style.width)),
@@ -281,7 +281,7 @@ final class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyle
 final class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
   /// The background color.
   @override
-  final Color backgroundColor;
+  final BoxDecoration decoration;
 
   /// The foreground color.
   @override
@@ -303,7 +303,7 @@ final class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDivider
 
   /// Creates a [FResizableDividerThumbStyle].
   FResizableDividerThumbStyle({
-    required this.backgroundColor,
+    required this.decoration,
     required this.foregroundColor,
     required this.height,
     required this.width,

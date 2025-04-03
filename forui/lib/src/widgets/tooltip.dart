@@ -304,15 +304,15 @@ final class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
   });
 
-  /// Creates a [FTooltipStyle] that inherits its properties from the given [colorScheme], [typography], and [style].
-  FTooltipStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FTooltipStyle] that inherits its properties.
+  FTooltipStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          color: colorScheme.background,
+          color: color.background,
           borderRadius: style.borderRadius,
-          border: Border.all(width: style.borderWidth, color: colorScheme.border),
+          border: Border.all(width: style.borderWidth, color: color.border),
           boxShadow: shadow,
         ),
-        textStyle: typography.sm,
+        textStyle: text.sm,
       );
 }

@@ -99,10 +99,7 @@ class FTheme extends StatelessWidget {
     child: Directionality(
       textDirection: textDirection ?? Directionality.maybeOf(context) ?? TextDirection.ltr,
       child: DefaultTextStyle(
-        style: data.typography.base.copyWith(
-          fontFamily: data.typography.defaultFontFamily,
-          color: data.colorScheme.foreground,
-        ),
+        style: data.text.base.copyWith(fontFamily: data.text.defaultFontFamily, color: data.color.foreground),
         child: child,
       ),
     ),

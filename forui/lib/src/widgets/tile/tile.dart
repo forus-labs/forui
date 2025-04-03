@@ -328,25 +328,21 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
     required this.contentStyle,
   });
 
-  /// Creates a [FTileStyle] that inherits from the given [colorScheme] and [typography].
-  FTileStyle.inherit({required FColorScheme colorScheme, required FTypography typography, required FStyle style})
+  /// Creates a [FTileStyle] that inherits its properties.
+  FTileStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
-        border: Border.all(width: style.borderWidth, color: colorScheme.border),
-        focusedBorder: Border.all(width: style.borderWidth, color: colorScheme.primary),
+        border: Border.all(width: style.borderWidth, color: color.border),
+        focusedBorder: Border.all(width: style.borderWidth, color: color.primary),
         borderRadius: style.borderRadius,
-        enabledBackgroundColor: colorScheme.background,
-        enabledHoveredBackgroundColor: colorScheme.secondary,
-        disabledBackgroundColor: colorScheme.disable(colorScheme.secondary),
-        dividerStyle: FDividerStyle(color: colorScheme.border, width: style.borderWidth, padding: EdgeInsets.zero),
-        focusedDividerStyle: FDividerStyle(
-          color: colorScheme.primary,
-          width: style.borderWidth,
-          padding: EdgeInsets.zero,
-        ),
+        enabledBackgroundColor: color.background,
+        enabledHoveredBackgroundColor: color.secondary,
+        disabledBackgroundColor: color.disable(color.secondary),
+        dividerStyle: FDividerStyle(color: color.border, width: style.borderWidth, padding: EdgeInsets.zero),
+        focusedDividerStyle: FDividerStyle(color: color.primary, width: style.borderWidth, padding: EdgeInsets.zero),
         tappableStyle: style.tappableStyle.copyWith(
           touchHoverEnterDuration: Duration.zero,
           touchHoverExitDuration: const Duration(milliseconds: 25),
         ),
-        contentStyle: FTileContentStyle.inherit(colorScheme: colorScheme, typography: typography),
+        contentStyle: FTileContentStyle.inherit(color: color, text: text),
       );
 }

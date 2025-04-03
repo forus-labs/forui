@@ -25,11 +25,11 @@ class FAccordion extends StatefulWidget {
   /// The style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
 
-  /// The items.
-  final List<FAccordionItem> items;
+  /// The children.
+  final List<FAccordionItem> children;
 
   /// Creates a [FAccordion].
-  const FAccordion({required this.items, this.controller, this.style, super.key});
+  const FAccordion({required this.children, this.controller, this.style, super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -39,8 +39,7 @@ class FAccordion extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(IterableProperty('items', items));
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -63,7 +62,7 @@ class _FAccordionState extends State<FAccordion> {
     final style = widget.style ?? context.theme.accordionStyle;
     return Column(
       children: [
-        for (final (index, child) in widget.items.indexed)
+        for (final (index, child) in widget.children.indexed)
           FAccordionItemData(index: index, controller: _controller, style: style, child: child),
       ],
     );
@@ -129,14 +128,14 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
-  /// Creates a [FDividerStyles] that inherits its properties from [colorScheme].
-  FAccordionStyle.inherit({required FColorScheme colorScheme, required FStyle style, required FTypography typography})
+  /// Creates a [FDividerStyles] that inherits its properties.
+  FAccordionStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
     : this(
-        titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colorScheme.foreground),
-        childTextStyle: typography.sm.copyWith(color: colorScheme.foreground),
-        iconStyle: IconThemeData(color: colorScheme.primary, size: 20),
+        titleTextStyle: text.base.copyWith(fontWeight: FontWeight.w500, color: color.foreground),
+        childTextStyle: text.sm.copyWith(color: color.foreground),
+        iconStyle: IconThemeData(color: color.primary, size: 20),
         focusedOutlineStyle: style.focusedOutlineStyle,
-        dividerStyle: FDividerStyle(color: colorScheme.border, padding: EdgeInsets.zero),
+        dividerStyle: FDividerStyle(color: color.border, padding: EdgeInsets.zero),
         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       );
 }

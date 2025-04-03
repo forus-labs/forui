@@ -42,7 +42,7 @@ void main() {
                 theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(color: theme.data.colorScheme.border),
+                    border: Border.all(color: theme.data.color.border),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: FResizable(
@@ -75,7 +75,7 @@ void main() {
                 theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(color: theme.data.colorScheme.border),
+                    border: Border.all(color: theme.data.color.border),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: FResizable(
@@ -110,9 +110,9 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FScaffold(
-              content: DecoratedBox(
+              child: DecoratedBox(
                 decoration: BoxDecoration(
-                  border: Border.all(color: FThemes.zinc.light.colorScheme.border),
+                  border: Border.all(color: FThemes.zinc.light.color.border),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: FResizable(

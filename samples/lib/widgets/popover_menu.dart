@@ -19,7 +19,7 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
   @override
   Widget sample(BuildContext context) => FHeader(
     title: const Text('Edit Notes'),
-    actions: [
+    suffixes: [
       FPopoverMenu(
         popoverController: controller,
         menuAnchor: Alignment.topRight,

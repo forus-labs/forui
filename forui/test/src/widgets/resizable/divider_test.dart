@@ -10,7 +10,7 @@ void main() {
     color: const Color(0xFF000000),
     width: 2,
     thumbStyle: FResizableDividerThumbStyle(
-      backgroundColor: const Color(0xFF000000),
+      decoration: const BoxDecoration(color: Color(0xFF000000)),
       foregroundColor: const Color(0xFF000000),
       height: 4,
       width: 4,

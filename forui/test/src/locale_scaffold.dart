@@ -33,7 +33,7 @@ class _LocaleScaffoldState extends State<LocaleScaffold> {
         locale: widget.locales[index % widget.locales.length],
         child: widget.child,
       ),
-      FButton(onPress: () => setState(() => index++), label: const Text('change')),
+      FButton(onPress: () => setState(() => index++), child: const Text('change')),
     ],
   );
 

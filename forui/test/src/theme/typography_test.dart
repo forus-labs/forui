@@ -50,7 +50,7 @@ void main() {
     });
 
     group('inherit constructor', () {
-      const colorScheme = FColorScheme(
+      const color = FColorScheme(
         brightness: Brightness.light,
         barrier: Colors.black12,
         background: Colors.black,
@@ -69,82 +69,62 @@ void main() {
       );
 
       test('no arguments', () {
-        typography = FTypography.inherit(colorScheme: colorScheme);
+        typography = FTypography.inherit(color: color);
 
         expect(typography.defaultFontFamily, 'packages/forui/Inter');
         expect(
           typography.xs,
-          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 12, height: 1),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 12, height: 1),
         );
         expect(
           typography.sm,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 14,
-            height: 1.25,
-          ),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 14, height: 1.25),
         );
         expect(
           typography.base,
-          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 16, height: 1.5),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 16, height: 1.5),
         );
         expect(
           typography.lg,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 18,
-            height: 1.75,
-          ),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 18, height: 1.75),
         );
         expect(
           typography.xl,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 20,
-            height: 1.75,
-          ),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 20, height: 1.75),
         );
         expect(
           typography.xl2,
-          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 22, height: 2),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 22, height: 2),
         );
         expect(
           typography.xl3,
-          TextStyle(
-            color: colorScheme.foreground,
-            fontFamily: typography.defaultFontFamily,
-            fontSize: 30,
-            height: 2.25,
-          ),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 30, height: 2.25),
         );
         expect(
           typography.xl4,
-          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 36, height: 2.5),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 36, height: 2.5),
         );
         expect(
           typography.xl5,
-          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 48, height: 1),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 48, height: 1),
         );
         expect(
           typography.xl6,
-          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 60, height: 1),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 60, height: 1),
         );
         expect(
           typography.xl7,
-          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 72, height: 1),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 72, height: 1),
         );
         expect(
           typography.xl8,
-          TextStyle(color: colorScheme.foreground, fontFamily: typography.defaultFontFamily, fontSize: 96, height: 1),
+          TextStyle(color: color.foreground, fontFamily: typography.defaultFontFamily, fontSize: 96, height: 1),
         );
       });
 
       test(
         'blank font family',
-        () => expect(() => FTypography.inherit(colorScheme: colorScheme, defaultFontFamily: ''), throwsAssertionError),
+        () => expect(() => FTypography.inherit(color: color, defaultFontFamily: ''), throwsAssertionError),
       );
     });
 
