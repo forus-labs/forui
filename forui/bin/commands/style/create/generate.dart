@@ -70,7 +70,7 @@ extension GenerateStyles on StyleCreateCommand {
     final existing = <String>{};
 
     for (final style in all ? registry.keys.toList() : arguments) {
-      final fileName = registry[style]!.type.substring(1).toSnakeCase();
+      final fileName = registry[style.toLowerCase()]!.type.substring(1).toSnakeCase();
       final path = output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart';
 
       (paths[path] ??= []).add(style);
@@ -153,7 +153,7 @@ extension GenerateStyles on StyleCreateCommand {
         _reduce(buffer, closure, many: false);
       } else {
         for (final style in styles) {
-          _reduce(buffer, registry[style]!.closure, many: true);
+          _reduce(buffer, registry[style.toLowerCase()]!.closure, many: true);
         }
       }
 
