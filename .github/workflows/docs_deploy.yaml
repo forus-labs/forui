@@ -49,7 +49,7 @@ jobs:
       - uses: actions/configure-pages@v5
 
       - run: pnpm install
-      - run: NEXT_PUBLIC_DEMO_URL=${{ vars.DEMO_URL }} pnpm run export
+      - run: NEXT_PUBLIC_DEMO_URL=${{ vars.DEMO_URL }} pnpm run build
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
