@@ -1,0 +1,537 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Popover
+A popover displays rich content in a portal that is aligned to a child.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.popover/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='popover' query={{alignment: 'topCenter'}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class _Popover extends StatefulWidget {
+      @override
+      State<_Popover> createState() => _State();
+    }
+
+    class _State extends State<_Popover> with SingleTickerProviderStateMixin {
+      late FPopoverController controller;
+
+      @override
+      void initState() {
+        super.initState();
+        controller = FPopoverController(vsync: this);
+      }
+
+      @override
+      Widget build(BuildContext context) => FPopover(
+            controller: controller,
+            popoverBuilder: (context, style, _) => Padding(
+              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+              child: SizedBox(
+                width: 288,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Dimensions', style: context.theme.typography.base),
+                    const SizedBox(height: 7),
+                    Text(
+                      'Set the dimensions for the layer.',
+                      style: context.theme.typography.sm.copyWith(
+                        color: context.theme.colorScheme.mutedForeground,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    for (final (label, value) in [
+                      ('Width', '100%'),
+                      ('Max. Width', '300px'),
+                      ('Height', '25px'),
+                      ('Max. Height', 'none'),
+                    ]) ...[
+                      Row(
+                        children: [
+                          Expanded(child: Text(label, style: context.theme.typography.sm)),
+                          Expanded(flex: 2, child: FTextField(initialValue: value)),
+                        ],
+                      ),
+                      const SizedBox(height: 7),
+                    ]
+                  ],
+                ),
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: FButton(
+                style: FButtonStyle.outline,
+                onPress: controller.toggle,
+                label: const Text('Open popover'),
+              ),
+            ),
+          );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FPopover(...)`
+
+```dart copy
+const FPopover(
+  controller: FPopoverController(),
+  popoverAnchor: Alignment.topCenter,
+  childAnchor: Alignment.bottomCenter,
+  directionPadding: false,
+  hideOnTapOutside: FHidePopoverRegion.anywhere,
+  shift: FPortalShift.flip,
+  popoverBuilder: (context) => const Placeholder(),
+  child: const Placeholder(),
+);
+```
+
+### `FPopover.automatic()`
+
+```dart copy
+const FPopover.automatic(
+  controller: FPopoverController(),
+  popoverAnchor: Alignment.topCenter,
+  childAnchor: Alignment.bottomCenter,
+  directionPadding: false,
+  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
+  shift: FPortalShift.flip,
+  popoverBuilder: (context) => const Placeholder(),
+  child: const Placeholder(),
+);
+```
+
+## Examples
+
+### Horizontal Alignment
+
+You can change how the popover is aligned to the button.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='popover' query={{axis: 'horizontal'}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {18-19} copy
+    class _Popover extends StatefulWidget {
+      @override
+      State<_Popover> createState() => _State();
+    }
+
+    class _State extends State<_Popover> with SingleTickerProviderStateMixin {
+      late FPopoverController controller;
+
+      @override
+      void initState() {
+        super.initState();
+        controller = FPopoverController(vsync: this);
+      }
+
+      @override
+      Widget build(BuildContext context) => FPopover(
+            controller: controller,
+            popoverAnchor: Alignment.topLeft,
+            childAnchor: Alignment.topRight,
+            popoverBuilder: (context, style, _) => Padding(
+              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+              child: SizedBox(
+                width: 288,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Dimensions', style: context.theme.typography.base),
+                    const SizedBox(height: 7),
+                    Text(
+                      'Set the dimensions for the layer.',
+                      style: context.theme.typography.sm.copyWith(
+                        color: context.theme.colorScheme.mutedForeground,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    for (final (label, value) in [
+                      ('Width', '100%'),
+                      ('Max. Width', '300px'),
+                      ('Height', '25px'),
+                      ('Max. Height', 'none'),
+                    ]) ...[
+                      Row(
+                        children: [
+                          Expanded(child: Text(label, style: context.theme.typography.sm)),
+                          Expanded(flex: 2, child: FTextField(initialValue: value)),
+                        ],
+                      ),
+                      const SizedBox(height: 7),
+                    ]
+                  ],
+                ),
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: FButton(
+                style: FButtonStyle.outline,
+                onPress: controller.toggle,
+                label: const Text('Open popover'),
+              ),
+            ),
+          );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Tapping outside Does Not Close Popover
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='popover' query={{alignment: 'topCenter', hideOnTapOutside: 'none'}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {18} copy
+    class _Popover extends StatefulWidget {
+      @override
+      State<_Popover> createState() => _State();
+    }
+
+    class _State extends State<_Popover> with SingleTickerProviderStateMixin {
+      late FPopoverController controller;
+
+      @override
+      void initState() {
+        super.initState();
+        controller = FPopoverController(vsync: this);
+      }
+
+      @override
+      Widget build(BuildContext context) => FPopover(
+            controller: controller,
+            hideOnTapOutside: FHidePopoverRegion.none,
+            popoverBuilder: (context, style, _) => Padding(
+              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+              child: SizedBox(
+                width: 288,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Dimensions', style: context.theme.typography.base),
+                    const SizedBox(height: 7),
+                    Text(
+                      'Set the dimensions for the layer.',
+                      style: context.theme.typography.sm.copyWith(
+                        color: context.theme.colorScheme.mutedForeground,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    for (final (label, value) in [
+                      ('Width', '100%'),
+                      ('Max. Width', '300px'),
+                      ('Height', '25px'),
+                      ('Max. Height', 'none'),
+                    ]) ...[
+                      Row(
+                        children: [
+                          Expanded(child: Text(label, style: context.theme.typography.sm)),
+                          Expanded(flex: 2, child: FTextField(initialValue: value)),
+                        ],
+                      ),
+                      const SizedBox(height: 7),
+                    ]
+                  ],
+                ),
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: FButton(
+                style: FButtonStyle.outline,
+                onPress: controller.toggle,
+                label: const Text('Open popover'),
+              ),
+            ),
+          );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Flip along Axis
+
+The popover can be flipped along the overflowing axis to stay within the viewport boundaries.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='popover' query={{alignment: 'bottomCenter', shift: 'flip'}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {18} copy
+    class _Popover extends StatefulWidget {
+      @override
+      State<_Popover> createState() => _State();
+    }
+
+    class _State extends State<_Popover> with SingleTickerProviderStateMixin {
+      late FPopoverController controller;
+
+      @override
+      void initState() {
+        super.initState();
+        controller = FPopoverController(vsync: this);
+      }
+
+      @override
+      Widget build(BuildContext context) => FPopover(
+            controller: controller,
+            shift: FPortalShift.flip,
+            popoverBuilder: (context, style, _) => Padding(
+              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+              child: SizedBox(
+                width: 288,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Dimensions', style: context.theme.typography.base),
+                    const SizedBox(height: 7),
+                    Text(
+                      'Set the dimensions for the layer.',
+                      style: context.theme.typography.sm.copyWith(
+                        color: context.theme.colorScheme.mutedForeground,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    for (final (label, value) in [
+                      ('Width', '100%'),
+                      ('Max. Width', '300px'),
+                      ('Height', '25px'),
+                      ('Max. Height', 'none'),
+                    ]) ...[
+                      Row(
+                        children: [
+                          Expanded(child: Text(label, style: context.theme.typography.sm)),
+                          Expanded(flex: 2, child: FTextField(initialValue: value)),
+                        ],
+                      ),
+                      const SizedBox(height: 7),
+                    ]
+                  ],
+                ),
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: FButton(
+                style: FButtonStyle.outline,
+                onPress: controller.toggle,
+                label: const Text('Open popover'),
+              ),
+            ),
+          );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Shift along Axis
+
+The popover can be shifted along the overflowing axis to stay within the viewport boundaries.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='popover' query={{shift: 'along'}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {18} copy
+    class _Popover extends StatefulWidget {
+      @override
+      State<_Popover> createState() => _State();
+    }
+
+    class _State extends State<_Popover> with SingleTickerProviderStateMixin {
+      late FPopoverController controller;
+
+      @override
+      void initState() {
+        super.initState();
+        controller = FPopoverController(vsync: this);
+      }
+
+      @override
+      Widget build(BuildContext context) => FPopover(
+            controller: controller,
+            shift: FPortalShift.along,
+            popoverBuilder: (context, style, _) => Padding(
+              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+              child: SizedBox(
+                width: 288,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Dimensions', style: context.theme.typography.base),
+                    const SizedBox(height: 7),
+                    Text(
+                      'Set the dimensions for the layer.',
+                      style: context.theme.typography.sm.copyWith(
+                        color: context.theme.colorScheme.mutedForeground,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    for (final (label, value) in [
+                      ('Width', '100%'),
+                      ('Max. Width', '300px'),
+                      ('Height', '25px'),
+                      ('Max. Height', 'none'),
+                    ]) ...[
+                      Row(
+                        children: [
+                          Expanded(child: Text(label, style: context.theme.typography.sm)),
+                          Expanded(flex: 2, child: FTextField(initialValue: value)),
+                        ],
+                      ),
+                      const SizedBox(height: 7),
+                    ]
+                  ],
+                ),
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: FButton(
+                style: FButtonStyle.outline,
+                onPress: controller.toggle,
+                label: const Text('Open popover'),
+              ),
+            ),
+          );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### No Shifting
+
+The popover is not shifted to stay within the viewport boundaries, even if it overflows.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='popover' query={{shift: 'none'}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {18} copy
+    class _Popover extends StatefulWidget {
+      @override
+      State<_Popover> createState() => _State();
+    }
+
+    class _State extends State<_Popover> with SingleTickerProviderStateMixin {
+      late FPopoverController controller;
+
+      @override
+      void initState() {
+        super.initState();
+        controller = FPopoverController(vsync: this);
+      }
+
+      @override
+      Widget build(BuildContext context) => FPopover(
+            controller: controller,
+            shift: FPortalShift.none,
+            popoverBuilder: (context, style, _) => Padding(
+              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+              child: SizedBox(
+                width: 288,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Dimensions', style: context.theme.typography.base),
+                    const SizedBox(height: 7),
+                    Text(
+                      'Set the dimensions for the layer.',
+                      style: context.theme.typography.sm.copyWith(
+                        color: context.theme.colorScheme.mutedForeground,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    for (final (label, value) in [
+                      ('Width', '100%'),
+                      ('Max. Width', '300px'),
+                      ('Height', '25px'),
+                      ('Max. Height', 'none'),
+                    ]) ...[
+                      Row(
+                        children: [
+                          Expanded(child: Text(label, style: context.theme.typography.sm)),
+                          Expanded(flex: 2, child: FTextField(initialValue: value)),
+                        ],
+                      ),
+                      const SizedBox(height: 7),
+                    ]
+                  ],
+                ),
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: FButton(
+                style: FButtonStyle.outline,
+                onPress: controller.toggle,
+                label: const Text('Open popover'),
+              ),
+            ),
+          );
+
+      @override
+      void dispose() {
+        controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

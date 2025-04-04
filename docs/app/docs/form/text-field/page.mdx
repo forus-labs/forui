@@ -1,0 +1,267 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Text Field
+A text field lets the user enter text, either with hardware keyboard or with an onscreen keyboard. It can also be used
+in a form.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.text_field/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'true'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {9, 18, 23-29} copy
+    class DefaultTextField extends StatefulWidget {
+      const DefaultTextField({super.key});
+
+      @override
+      State<DefaultTextField> createState() => _DefaultTextFieldState();
+    }
+
+    class _DefaultTextFieldState extends State<DefaultTextField> {
+      final TextEditingController _controller = TextEditingController();
+
+      @override
+      void initState() {
+        super.initState();
+      }
+
+      @override
+      Widget build(BuildContext context) => FTextField(
+        controller: _controller,
+        label: const Text('Username'),
+        hint: 'JaneDoe',
+        description: const Text('Please enter your username.'),
+        maxLines: 1,
+      );
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTextField(...)`
+
+```dart copy
+FTextField(
+  controller: _controller, // TextEditingController
+  clearable: (value) => value.text.isNotEmpty,
+  enabled: true,
+  label: const Text('Email'),
+  hint: 'john@doe.com',
+  description: const Text('Enter your email associated with your Forui account.'),
+  keyboardType: TextInputType.emailAddress,
+  textCapitalization: TextCapitalization.none,
+  maxLines: 1,
+);
+```
+
+
+## Examples
+
+### States
+
+#### Enabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'true'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTextField(
+      controller: _controller, // TextEditingController
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+      maxLines: 1,
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
+#### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' query={{enabled: 'false'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {3} copy
+    FTextField(
+      controller: _controller, // TextEditingController
+      label: const Text('Username'),
+      hint: 'JaneDoe',
+      description: const Text('Please enter your username.'),
+      maxLines: 1,
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Clearable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='clearable' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {18} copy
+    class ClearableTextField extends StatefulWidget {
+      @override
+      State<ClearableTextField> createState() => ClearableTextFieldState();
+    }
+
+    class ClearableTextFieldState extends State<ClearableTextField> {
+      late final TextEditingController _controller = TextEditingController(text: 'MyUsername');
+
+      @override
+      Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: FTextField(
+          controller: _controller,
+          label: const Text('Username'),
+          hint: 'JaneDoe',
+          description: const Text('Please enter your username.'),
+          maxLines: 1,
+          clearable: (value) => value.text.isNotEmpty,
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Presets
+
+#### Email
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='email' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTextField.email(
+      initialValue: 'jane@doe.com',
+      controller: _controller, // TextEditingController
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Password
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='password' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTextField.password(
+      controller: _controller, // TextEditingController
+      obscuringCharacter: '*',
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Multiline
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='multiline' query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTextField.multiline(
+      controller: _controller, // TextEditingController
+      label: const Text('Leave a review'),
+      maxLines: 4,
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='text-field' variant='form' height={550} query={{}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {9-11, 20-21, 26-27, 31-36, 38-42, 46-52} copy
+    class LoginForm extends StatefulWidget {
+      const LoginForm({super.key});
+
+      @override
+      State<LoginForm> createState() => _LoginFormState();
+    }
+
+    class _LoginFormState extends State<LoginForm> {
+      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+      final TextEditingController _emailController = TextEditingController();
+      final TextEditingController _passwordController = TextEditingController();
+
+      @override
+      void initState() {
+        super.initState();
+      }
+
+      @override
+      void dispose() {
+        _emailController.dispose();
+        _passwordController.dispose();
+        super.dispose();
+      }
+
+      @override
+      Widget build(BuildContext context) => Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FTextField.email(
+                  controller: _emailController,
+                  hint: 'janedoe@foruslabs.com',
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+                ),
+                const SizedBox(height: 10),
+                FTextField.password(
+                  controller: _passwordController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+                ),
+                const SizedBox(height: 20),
+                FButton(
+                  label: const Text('Login'),
+                  onPress: () {
+                    if (!_formKey.currentState!.validate()) {
+                      return; // Form is invalid.
+                    }
+
+                    // Form is valid, do something.
+                  },
+                ),
+              ],
+            ),
+          );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
