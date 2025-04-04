@@ -1,0 +1,84 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Tabs
+A set of layered sections of content—known as tab entries—that are displayed one at a time.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tabs/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='tabs' query={{}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FTabs(
+      tabs: [
+        FTabEntry(
+          label: const Text('Account'),
+          content: FCard(
+            title: const Text('Account'),
+            subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+            child: Column(
+              children: [
+                const FTextField(
+                  label: Text('Name'),
+                  hint: 'John Renalo',
+                ),
+                const SizedBox(height: 10),
+                const FTextField(
+                  label: Text('Email'),
+                  hint: 'john@doe.com',
+                ),
+                const SizedBox(height: 16),
+                FButton(
+                  label: const Text('Save'),
+                  onPress: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
+        FTabEntry(
+          label: const Text('Password'),
+          content: FCard(
+            title: const Text('Password'),
+            subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+            child: Column(
+              children: [
+                const FTextField(label: Text('Current password')),
+                const SizedBox(height: 10),
+                const FTextField(label: Text('New password')),
+                const SizedBox(height: 16),
+                FButton(
+                  label: const Text('Save'),
+                  onPress: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTabs(...)`
+
+```dart copy
+FTabs(
+  initialIndex: 1,
+  tabs: const [
+    FTabEntry(label: Text('Account'), content: Placeholder()),
+    FTabEntry(label: Text('Password'), content: Placeholder()),
+  ],
+  onPress: (index) {},
+);
+```

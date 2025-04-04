@@ -1,0 +1,92 @@
+import { Callout, Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Portal
+A portal renders a portal widget that "floats" on top of a child widget.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.foundation/FPortal-class.html"/>
+</LinkBadgeGroup>
+
+<Callout type="info">
+  This widget is typically used to create other high-level widgets, i.e. [popover](../overlay/popover) or
+  [tooltip](../overlay/tooltip). You should prefer those high-level widgets unless you're creating a custom widget.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='portal' query={{}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    final controller = OverlayPortalController();
+
+    FPortal(
+      controller: controller,
+      portalBuilder: (context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: context.theme.colorScheme.background,
+            border: Border.all(color: context.theme.colorScheme.border, width: 1),
+            borderRadius: BorderRadius.circular(4),
+          ),
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colorScheme.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialValue: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ],
+              ],
+            ),
+          ),
+        ),
+      ),
+      child: FButton(
+        label: const Text('Portal'),
+        onPressed: () => controller.toggle(),
+      ),
+    ),
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FPortal(...)`
+
+```dart copy
+FPortal(
+  controller: OverlayPortalController(),
+  shift: FPortalShift.flip,
+  portalAnchor: Alignment.topCenter,
+  portalBuilder: (context) => const Text('portal'),
+  childAnchor: Alignment.bottomCenter,
+  child: const Text('child'),
+);
+```

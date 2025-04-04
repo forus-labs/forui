@@ -1,0 +1,167 @@
+import { Callout, Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Time Picker
+A time picker that allows a time to be selected.
+
+The picker supports arrow key navigation:
+  * Up/Down arrows: Increment/decrement selected value
+  * Left/Right arrows: Move between wheels
+
+Recommended for touch devices.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.time_picker/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-picker' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        class Foo extends StatefulWidget {
+          Foo();
+        
+          @override
+          State<Foo> createState() => _FooState();
+        }
+        
+        class _FooState extends State<Foo> {
+          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
+        
+          @override
+          Widget build(BuildContext context) => FTimePicker(controller: _controller);
+        
+          @override
+          void dispose() {
+            _controller.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FTimePicker(...)`
+
+```dart copy
+const FTimePicker(
+  controller: FTimePickerController(),
+  style: style,
+  hour24: true,
+  hourInterval: 1,
+  minuteInterval: 1,
+);
+```
+
+## Examples
+
+### 24 Hour Clock
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-picker' query={{hour24: 'true'}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {12} copy
+        class Foo extends StatefulWidget {
+          Foo();
+
+          @override
+          State<Foo> createState() => _FooState();
+        }
+
+        class _FooState extends State<Foo> {
+          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
+
+          @override
+          Widget build(BuildContext context) => FTimePicker(controller: _controller, hour24: true);
+
+          @override
+          void dispose() {
+            _controller.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### With Custom Intervals
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-picker' variant='interval'/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {12} copy
+        class Foo extends StatefulWidget {
+          Foo();
+
+          @override
+          State<Foo> createState() => _FooState();
+        }
+
+        class _FooState extends State<Foo> {
+          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
+
+          @override
+          Widget build(BuildContext context) => FTimePicker(controller: _controller, hourInterval: 2, minuteInterval: 5);
+
+          @override
+          void dispose() {
+            _controller.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Animated
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='time-picker' variant='animated' height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        class Foo extends StatefulWidget {
+          Foo();
+
+          @override
+          State<Foo> createState() => _FooState();
+        }
+
+        class _FooState extends State<Foo> {
+          static final _random = Random();
+          late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
+
+          @override
+          Widget build(BuildContext context) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 300, width: 250, child: FTimePicker(controller: _controller)),
+              FButton(
+                label: const Text('Funny button'),
+                onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
+              ),
+            ],
+          );
+
+          @override
+          void dispose() {
+            _controller.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+

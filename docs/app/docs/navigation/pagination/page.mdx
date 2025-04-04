@@ -1,0 +1,216 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Pagination
+Display the current active page and enable navigation between multiple pages.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.pagination/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FPagination(controller: FPaginationController(pages: 10));
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FPagination(...)`
+
+```dart copy
+FPagination(
+  controller: FPaginationController(
+    pages: 20,
+    initialPage: 4,
+    showEdges: false,
+    siblings: 2,
+    onPageChanged: () {},
+  ),
+);
+```
+
+## Examples
+
+
+### Siblings
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' query={{controller: 'siblings'}} height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {5} copy
+        FPagination(
+          controller: FPaginationController(
+            pages: 20,
+            initialPage: 9,
+            siblings: 2,
+          ),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+
+### Hide Edges
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' query={{controller: 'hide-edges'}} height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {4} copy
+        FPagination(
+          controller: FPaginationController(
+            pages: 8,
+            showEdges: false,
+          ),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### Custom Icons
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' variant='custom-icon' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FPagination(
+          controller: FPaginationController(
+            pages: 10,
+            initialPage: 4,
+          ),
+          next: Padding(
+            padding: style.itemPadding,
+            child: ConstrainedBox(
+              constraints: style.contentConstraints,
+              child: FButton.icon(
+                style: FButtonStyle.ghost,
+                onPress: controller.next,
+                child: FIconStyleData(
+                  style: style.iconStyle,
+                  child: Icon(FIcons.bird),
+                ),
+              ),
+            ),
+          ),
+          previous: Padding(
+            padding: style.itemPadding,
+            child: ConstrainedBox(
+              constraints: style.contentConstraints,
+              child: FButton.icon(
+                style: FButtonStyle.ghost,
+                onPress: controller.previous,
+                child: FIconStyleData(
+                  style: style.iconStyle,
+                  child: Icon(FIcons.anchor),
+                ),
+              ),
+            ),
+          ),
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
+### With a `PageView`
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' variant='page-view' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {11} {73} copy
+        class PageViewExample extends StatefulWidget {
+          const PageViewExample({super.key});
+
+          @override
+          State<PageViewExample> createState() => _PageViewExampleState();
+        }
+
+        class _PageViewExampleState extends State<PageViewExample>{
+          int pages = 10;
+          PageController controller = PageController();
+          FPaginationController paginationController = FPaginationController(pages: pages);
+
+          @override
+          void didChangeDependencies() {
+            super.didChangeDependencies();
+            final value = PageStorage.maybeOf(context)?.readState(context) ?? 0;
+            paginationController.page = value;
+          }
+
+          void _handlePageChange() {
+            if (!controller.hasClients) {
+              return;
+            }
+            final page = paginationController.page;
+            final old = controller.page?.round();
+            if (old case final old when old != page) {
+              if (page == old! + 1 || page == old - 1) {
+                controller.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+              } else {
+                controller.jumpToPage(page);
+
+              }
+            }
+          }
+
+          @override
+          Widget build(BuildContext context) {
+          final style = context.theme.colorScheme;
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: SizedBox(
+                  height: 300,
+                  width: 300,
+                  child: NotificationListener(
+                    onNotification: (notification) {
+                      if (notification is ScrollEndNotification) {
+                        if (controller.hasClients) {
+                          paginationController.page = controller.page!.round();
+                          return true;
+                        }
+                      }
+                      return false;
+                    },
+                    child: PageView.builder(
+                      itemCount: pages,
+                      controller: controller,
+                      itemBuilder:(context, index) => ColoredBox(
+                        color: index.isEven ? style.hover(style.primary) : style.mutedForeground,
+                        child: Center(
+                          child: DefaultTextStyle(
+                            style: TextStyle(fontSize: 45, color: style.primaryForeground),
+                            child: Text('Page ${index + 1}'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              FPagination(controller: paginationController, onPageChange: _handlePageChange,),
+            ],
+          );
+
+          @override
+          void dispose() {
+            paginationController.dispose();
+            controller.dispose();
+            super.dispose();
+          }
+        }
+        ```
+    </Tabs.Tab>
+</Tabs>

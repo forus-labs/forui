@@ -13,7 +13,8 @@
             "cwd": "samples",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "debug"
+            "flutterMode": "debug",
+            "args": ["--web-port", "3001"]
         },
         {
             "name": "example: run",
