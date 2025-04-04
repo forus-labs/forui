@@ -1,11 +1,13 @@
-import 'package:args/command_runner.dart';
-
+import '../../args/command.dart';
 import 'create/command.dart';
-import 'ls/command.dart';
+import 'list/command.dart';
 
-class StyleCommand extends Command {
+class StyleCommand extends ForuiCommand {
   @override
   final name = 'style';
+
+  @override
+  final List<String> aliases = ['s'];
 
   @override
   final description = 'Manage your Forui widget styles.';

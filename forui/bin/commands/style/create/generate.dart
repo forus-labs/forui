@@ -38,7 +38,7 @@ const _header = '''
 ///
 /// File that contains your `FThemeData`:
 /// ```dart
-/// import 'package:my_application/styles/divider_styles.dart' // Your generated file
+/// import 'package:my_application/theme/divider_styles.dart' // Your generated file
 ///
 /// FThemeData(
 ///  colorScheme: FThemes.zinc.light.colorScheme,

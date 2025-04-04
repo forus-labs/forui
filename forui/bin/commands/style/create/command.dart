@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:args/command_runner.dart';
 import 'package:dart_console/dart_console.dart';
 
 import '../../../registry.dart';
+import '../../../args/command.dart';
 import 'generate.dart';
 import 'validate.dart';
 
@@ -11,9 +11,12 @@ final console = Console();
 final registry = Registry.values.asNameMap();
 final _path = '${Directory.current.path}${Platform.pathSeparator}lib${Platform.pathSeparator}styles';
 
-class StyleCreateCommand extends Command {
+class StyleCreateCommand extends ForuiCommand {
   @override
   final name = 'create';
+
+  @override
+  final List<String> aliases = ['c'];
 
   @override
   final description = 'Create Forui widget style file(s).';
@@ -31,7 +34,7 @@ class StyleCreateCommand extends Command {
 
   StyleCreateCommand() {
     argParser
-      ..addFlag('all', abbr: 'a', help: 'Create all styles.', negatable: false)
+      ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
       ..addOption('output', abbr: 'o', help: 'The output directory or file.', defaultsTo: _path);
   }
