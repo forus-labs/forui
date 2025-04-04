@@ -131,7 +131,7 @@ extension GenerateStyles on StyleCreateCommand {
     }
 
     _generate(paths);
-    
+
     console
       ..writeLine()
       ..write('See https://forui.dev/docs/cli for how to use the generated styles.')
@@ -147,39 +147,32 @@ extension GenerateStyles on StyleCreateCommand {
       exit(0);
     }
 
+    console
+      ..writeLine()
+      ..write('Existing files:')
+      ..writeLine();
+    for (final path in existing) {
+      console
+        ..write('  $path')
+        ..writeLine();
+    }
+
     while (true) {
       console
         ..writeLine()
-        ..write('Overwrite these files?')
-        ..writeLine()
-        ..write('  1 - Overwrite')
-        ..writeLine()
-        ..write('  2 - Cancel')
-        ..writeLine()
-        ..write('  3 - List existing files')
+        ..write('Overwrite these files? [Y/n]')
         ..writeLine();
 
       switch (console.readLine(cancelOnBreak: true)) {
-        case null:
-          exit(0);
-        case final line when int.tryParse(line) == 2:
-          exit(0);
-        case final line when int.tryParse(line) == 3:
+        case 'y' || 'Y' || '':
           console
-            ..writeLine()
-            ..write('Existing files:')
-            ..writeLine();
-          for (final path in existing) {
-            console
-              ..write('  $path')
-              ..writeLine();
-          }
-          continue;
-        case final line when int.tryParse(line) == 1:
+            .writeLine();
           return;
+        case 'n' || 'N':
+          exit(0);
         default:
           console
-            ..write('Invalid option. Please enter a number between 1 and 3.')
+            ..write('Invalid option. Please enter enter either "y" or "n".')
             ..writeLine();
           continue;
       }
