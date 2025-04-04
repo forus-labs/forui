@@ -31,6 +31,7 @@ dependencies:
   google_fonts: ^6.2.0
   intl: any
   meta: ^1.11.0
+  path: ^1.9.1
   sugar: ^4.0.0
 
 dev_dependencies:
@@ -44,7 +45,6 @@ dev_dependencies:
   http: ^1.2.2
   leak_tracker_flutter_testing: any
   mockito: ^5.4.4
-  path: ^1.9.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

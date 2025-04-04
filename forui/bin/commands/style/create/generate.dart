@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
-import 'package:sugar/core.dart';
+import 'package:path/path.dart' as p;
+import 'package:sugar/sugar.dart';
 
 import '../../../registry.dart';
 import 'command.dart';
@@ -16,24 +17,24 @@ const _header = '''
 ///
 /// Generated style (this):
 /// ```dart
-/// FDividerStyles dividerStyles({required FColorScheme colorScheme, required FStyle style}) => FDividerStyles(
+/// FDividerStyles dividerStyles({required FColorScheme color, required FStyle style}) => FDividerStyles(
 ///   horizontalStyle: dividerStyle(
-///     colorScheme: colorScheme,
+///     color: color,
 ///     style: style,
 ///     padding: FDividerStyle.defaultPadding.horizontalStyle,
 ///   ),
 ///   verticalStyle: dividerStyle(
-///     colorScheme: colorScheme,
+///     color: color,
 ///     style: style,
 ///     padding: FDividerStyle.defaultPadding.verticalStyle,
 ///   ),
 /// );
 /// 
 /// FDividerStyle dividerStyle({
-///   required FColorScheme colorScheme,
+///   required FColorScheme color,
 ///   required FStyle style,
 ///   required EdgeInsetsGeometry padding,
-/// }) => FDividerStyle(color: colorScheme.secondary, padding: padding, width: style.borderWidth);
+/// }) => FDividerStyle(color: color.secondary, padding: padding, width: style.borderWidth);
 /// ```
 ///
 /// File that contains your `FThemeData`:
@@ -41,10 +42,10 @@ const _header = '''
 /// import 'package:my_application/theme/divider_styles.dart' // Your generated file
 ///
 /// FThemeData(
-///  colorScheme: FThemes.zinc.light.colorScheme,
+///  color: FThemes.zinc.light.color,
 ///  style: FThemes.zinc.light.style,
 ///  dividerStyles: dividerStyles(
-///    colorScheme: FThemes.zinc.light.colorScheme,
+///    color: FThemes.zinc.light.color,
 ///    style: FThemes.zinc.light.style,
 ///   ),
 /// );
@@ -71,7 +72,7 @@ extension GenerateStyles on StyleCreateCommand {
 
     for (final style in all ? registry.keys.toList() : arguments) {
       final fileName = registry[style.toLowerCase()]!.type.substring(1).toSnakeCase();
-      final path = output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart';
+      final path = p.relative(output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart');
 
       (paths[path] ??= []).add(style);
       if (File(path).existsSync()) {

@@ -4,10 +4,13 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 
+import 'configuration.dart';
 import 'args/command.dart';
 import 'commands/style/command.dart';
 
 Future<void> main(List<String> arguments) async {
+  configure();
+
   final runner = ForuiCommandRunner('forui', 'Manage your Forui development environment.');
 
   runner.argParser
