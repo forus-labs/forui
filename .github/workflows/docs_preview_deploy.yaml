@@ -56,7 +56,7 @@ jobs:
       - working-directory: ./docs
         run: |
           pnpm install
-          NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.deployment-url }} pnpm run export
+          NEXT_PUBLIC_DEMO_URL=${{ steps.publish-samples.outputs.deployment-url }} pnpm run build
       - uses: cloudflare/wrangler-action@v3
         id: publish-docs
         with:
