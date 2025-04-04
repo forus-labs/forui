@@ -31,7 +31,6 @@ dependencies:
   google_fonts: ^6.2.0
   intl: any
   meta: ^1.11.0
-  path: ^1.9.1
   sugar: ^4.0.0
 
 dev_dependencies:
