@@ -1,0 +1,228 @@
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Switch
+A switch that allows the user to toggle between checked and unchecked.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.switch_/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='switch' query={{enabled: 'true'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {12-17} copy
+    class Page extends StatefulWidget {
+      const Page({super.key});
+
+      @override
+      State<Page> createState() => PageState();
+    }
+
+    class PageState extends State<Page> {
+      bool state = false;
+
+      @override
+      Widget build(BuildContext context) => FSwitch(
+        label: const Text('Airplane Mode'),
+        semanticsLabel: 'Airplane Mode',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FSwitch(...)`
+
+```dart copy
+FSwitch(
+  label: const Text('Airplane Mode'),
+  description: const Text('Turn on airplane mode to disable all wireless connections.'),
+  error: const Text('Please turn on airplane mode.'),
+  semanticsLabel: 'Airplane Mode',
+  value: true,
+  onChanged: (value) {},
+  enabled: true,
+  autofocus: true,
+);
+```
+
+## Examples
+
+### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='switch' query={{enabled: 'false'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {17} copy
+    class Page extends StatefulWidget {
+      const Page({super.key});
+
+      @override
+      State<Page> createState() => PageState();
+    }
+
+    class PageState extends State<Page> {
+      bool state = false;
+
+      @override
+      Widget build(BuildContext context) => FSwitch(
+        label: const Text('Airplane Mode'),
+        semanticsLabel: 'Airplane Mode',
+        value: state,
+        onChange: (value) => setState(() => state = value),
+        enabled: false,
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='switch' variant='form' query={{}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {54-64, 95-105} copy
+    class NotificationForm extends StatefulWidget {
+      const NotificationForm({super.key});
+
+      @override
+      State<NotificationForm> createState() => _NotificationFormState();
+    }
+
+    class _NotificationFormState extends State<NotificationForm> {
+      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+      @override
+      Widget build(BuildContext context) {
+        final theme = context.theme;
+        return Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Email Notifications',
+                style: theme.typography.xl2.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: theme.colorScheme.foreground,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 15),
+              FCard.raw(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Marketing Emails',
+                              style: theme.typography.base.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: theme.colorScheme.foreground,
+                                height: 1.5,
+                              ),
+                            ),
+                            Text(
+                              'Receive emails about new products, features, and more.',
+                              style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
+                            ),
+                          ],
+                        ),
+                      ),
+                      FormField(
+                        initialValue: false,
+                        onSaved: (value) {
+                          // Save values somewhere.
+                        },
+                        validator: (value) => null, // No validation required.
+                        builder: (state) => FSwitch(
+                          value: state.value ?? false,
+                          onChange: (value) => state.didChange(value),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              FCard.raw(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Security emails',
+                              style: theme.typography.base.copyWith(
+                                fontWeight: FontWeight.w500,
+                                color: theme.colorScheme.foreground,
+                                height: 1.5,
+                              ),
+                            ),
+                            Text(
+                              'Receive emails about your account security.',
+                              style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
+                            ),
+                          ],
+                        ),
+                      ),
+                      FormField(
+                        initialValue: true,
+                        onSaved: (value) {
+                          // Save values somewhere.
+                        },
+                        validator: (value) => null, // No validation required.
+                        builder: (state) => FSwitch(
+                          value: state.value ?? false,
+                          onChange: (value) => state.didChange(value),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              FButton(
+                label: const Text('Submit'),
+                onPress: () {
+                  if (!_formKey.currentState!.validate()) {
+                    // Handle errors here.
+                    return;
+                  }
+
+                  _formKey.currentState!.save();
+                  // Do something.
+                },
+              ),
+            ],
+          ),
+        );
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
