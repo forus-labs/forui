@@ -7,10 +7,10 @@ final console = Console();
 
 class StyleLsCommand extends ForuiCommand {
   @override
-  final name = 'list';
+  final name = 'ls';
 
   @override
-  List<String> aliases = ['ls'];
+  List<String> aliases = ['list'];
 
   @override
   final description = 'List all Forui widget styles.';

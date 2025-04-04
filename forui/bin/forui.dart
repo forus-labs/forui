@@ -6,6 +6,7 @@ import 'package:args/command_runner.dart';
 
 import 'configuration.dart';
 import 'args/command.dart';
+import 'commands/init/command.dart';
 import 'commands/style/command.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -17,7 +18,9 @@ Future<void> main(List<String> arguments) async {
     ..addFlag('color', help: 'Use terminal colors.', defaultsTo: _color())
     ..addFlag('no-input', help: 'Disable interactive prompts and assume default values.', negatable: false);
 
-  runner.addCommand(StyleCommand());
+  runner
+    ..addCommand(InitCommand())
+    ..addCommand(StyleCommand());
 
   try {
     await runner.run(arguments);

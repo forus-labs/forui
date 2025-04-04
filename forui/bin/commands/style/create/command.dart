@@ -35,7 +35,13 @@ class StyleCreateCommand extends ForuiCommand {
   StyleCreateCommand() {
     argParser
       ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
-      ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
+      ..addFlag(
+        'force',
+        abbr: 'f',
+        help: 'Overwrite existing files if they exist.',
+        negatable: false,
+        defaultsTo: defaultForce,
+      )
       ..addOption(
         'output',
         abbr: 'o',
@@ -53,7 +59,7 @@ class StyleCreateCommand extends ForuiCommand {
     final output = argResults!['output'] as String;
     final arguments = argResults!.rest;
 
-    if (argResults!.arguments.isEmpty && !all) {
+    if (argResults!.rest.isEmpty && !all) {
       printUsage();
       return;
     }
