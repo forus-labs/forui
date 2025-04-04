@@ -3,14 +3,14 @@ import 'dart:math' as math;
 
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
+
 import 'utils.dart';
 
 // The majority of this file is copied from the args package.
 // We did so as they didn't support the printing of args in the usage message.
 
 mixin _Usage {
-  Never usageException(String message) =>
-      throw UsageException(_wrap(message), _usageWithoutDescription);
+  Never usageException(String message) => throw UsageException(_wrap(message), _usageWithoutDescription);
 
   String get usage => _wrap('$description\n\n') + _usageWithoutDescription;
 

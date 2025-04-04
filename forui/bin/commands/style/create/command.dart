@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dart_console/dart_console.dart';
 
-import '../../../registry.dart';
 import '../../../args/command.dart';
+import '../../../registry.dart';
 import 'generate.dart';
 import 'validate.dart';
 
