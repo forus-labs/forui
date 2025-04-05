@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:dart_console/dart_console.dart';
 import 'package:dart_style/dart_style.dart';
 
+import '../../../args/command.dart';
 import '../../../configuration.dart';
 import '../../../typography.dart';
-import '../../../args/command.dart';
 
 final console = Console();
 
@@ -57,7 +57,8 @@ class TypographyCreateCommand extends ForuiCommand {
     }
 
     final output = argResults!['output'] as String;
-    final path = '${root.path}${Platform.pathSeparator}${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}typography.dart'}';
+    final path =
+        '${root.path}${Platform.pathSeparator}${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}typography.dart'}';
 
     if (File(path).existsSync()) {
       _prompt(path);

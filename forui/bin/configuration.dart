@@ -11,7 +11,6 @@ void configure() {
   try {
     root = _findProjectRoot();
     _configure();
-
   } on FormatException catch (e) {
     stdout.writeln(e.message);
     exit(2);
@@ -50,7 +49,6 @@ void _configure() {
     }
   }
 
-
   final yaml = loadYamlNode(configuration.readAsStringSync());
   if (yaml is! YamlMap) {
     return;
@@ -69,7 +67,9 @@ void _configure() {
       defaultStyleOutput = value;
 
     case final node:
-      throw FormatException('Could not read forui.$extension.\n\n${node.span.message('"color-output" must be a string.')}');
+      throw FormatException(
+        'Could not read forui.$extension.\n\n${node.span.message('"color-output" must be a string.')}',
+      );
   }
 
   switch (cli.nodes['typography-output']) {
@@ -80,7 +80,9 @@ void _configure() {
       defaultTypographyOutput = value;
 
     case final node:
-      throw FormatException('Could not read forui.$extension.\n\n${node.span.message('"typography-output" must be a string.')}');
+      throw FormatException(
+        'Could not read forui.$extension.\n\n${node.span.message('"typography-output" must be a string.')}',
+      );
   }
 
   switch (cli.nodes['style-output']) {
@@ -91,6 +93,8 @@ void _configure() {
       defaultStyleOutput = value;
 
     case final node:
-      throw FormatException('Could not read forui.$extension.\n\n${node.span.message('"style-output" must be a string.')}');
+      throw FormatException(
+        'Could not read forui.$extension.\n\n${node.span.message('"style-output" must be a string.')}',
+      );
   }
 }
