@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:dart_console/dart_console.dart';
 
+import '../../../args/command.dart';
 import '../../../configuration.dart';
 import '../../../style_registry.dart';
-import '../../../args/command.dart';
 import 'generate.dart';
 import 'validate.dart';
 
@@ -35,12 +35,7 @@ class StyleCreateCommand extends ForuiCommand {
   StyleCreateCommand() {
     argParser
       ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
-      ..addFlag(
-        'force',
-        abbr: 'f',
-        help: 'Overwrite existing files if they exist.',
-        negatable: false,
-      )
+      ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
       ..addOption(
         'output',
         abbr: 'o',

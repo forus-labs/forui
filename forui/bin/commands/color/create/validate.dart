@@ -22,7 +22,10 @@ extension ValidateColors on ColorCreateCommand {
       error = true;
 
       final suggestions =
-          registry.keys.map((e) => (e, e.startsWith(colorScheme) ? 1 : distance(colorScheme, e))).where((e) => e.$2 <= 3).toList()
+          registry.keys
+              .map((e) => (e, e.startsWith(colorScheme) ? 1 : distance(colorScheme, e)))
+              .where((e) => e.$2 <= 3)
+              .toList()
             ..sort((a, b) => a.$2.compareTo(b.$2));
 
       console

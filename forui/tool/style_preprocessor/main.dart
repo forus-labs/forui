@@ -17,7 +17,6 @@ final _colors = path.join(Directory.current.parent.path, 'forui', 'bin', 'color_
 final _styles = path.join(Directory.current.parent.path, 'forui', 'bin', 'style_registry.dart');
 final _typography = path.join(Directory.current.parent.path, 'forui', 'bin', 'typography.dart');
 
-
 final emitter = DartEmitter();
 final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
 
@@ -32,7 +31,6 @@ const header = '''
 // ignore_for_file: deprecated_member_use
 
 ''';
-
 
 Future<void> main() async {
   final collection = AnalysisContextCollection(

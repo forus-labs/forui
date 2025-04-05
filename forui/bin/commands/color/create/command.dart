@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:dart_console/dart_console.dart';
 
-import '../../../configuration.dart';
-import '../../../color_registry.dart';
 import '../../../args/command.dart';
+import '../../../color_registry.dart';
+import '../../../configuration.dart';
 import 'generate.dart';
 import 'validate.dart';
 

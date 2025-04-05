@@ -4,13 +4,12 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 
-import 'configuration.dart';
 import 'args/command.dart';
 import 'commands/color/command.dart';
 import 'commands/init/command.dart';
 import 'commands/style/command.dart';
 import 'commands/typography/command.dart';
-
+import 'configuration.dart';
 
 Future<void> main(List<String> arguments) async {
   configure();
