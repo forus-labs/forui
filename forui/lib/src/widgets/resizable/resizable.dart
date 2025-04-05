@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 
 part 'resizable.style.dart';
@@ -86,7 +85,7 @@ class FResizable extends StatefulWidget {
          hitRegionExtent == null || 0 < hitRegionExtent,
          'The hitRegionExtent should be positive, but is $hitRegionExtent.',
        ),
-       hitRegionExtent = hitRegionExtent ?? (Touch.primary ? 60 : 10);
+       hitRegionExtent = hitRegionExtent ?? (FTouch.primary ? 60 : 10);
 
   @override
   State<StatefulWidget> createState() => _FResizableState();

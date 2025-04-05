@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 
 part 'slider_styles.style.dart';
 
@@ -112,8 +111,8 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
           (style) =>
               style.copyWith(markStyle: style.markStyle.copyWith(labelAnchor: Alignment.centerRight, labelOffset: -10)),
         ),
-        tooltipTipAnchor: Touch.primary ? Alignment.bottomCenter : Alignment.centerLeft,
-        tooltipThumbAnchor: Touch.primary ? Alignment.topCenter : Alignment.centerRight,
+        tooltipTipAnchor: FTouch.primary ? Alignment.bottomCenter : Alignment.centerLeft,
+        tooltipThumbAnchor: FTouch.primary ? Alignment.topCenter : Alignment.centerRight,
       ),
     );
   }
@@ -181,7 +180,7 @@ final class FSliderStyle with Diagnosticable, _$FSliderStyleFunctions {
     this.tooltipTipAnchor = Alignment.bottomCenter,
     this.tooltipThumbAnchor = Alignment.topCenter,
   }) : assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
-       thumbSize = thumbSize ?? (Touch.primary ? 25 : 20);
+       thumbSize = thumbSize ?? (FTouch.primary ? 25 : 20);
 }
 
 /// A slider state's style.

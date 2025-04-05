@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -31,7 +30,7 @@ void main() {
       });
 
       testWidgets('${theme.name} shown on touch device', (tester) async {
-        Touch.primary = true;
+        FTouch.primary = true;
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -51,7 +50,7 @@ void main() {
       });
 
       testWidgets('${theme.name} shown on non-touch device', (tester) async {
-        Touch.primary = false;
+        FTouch.primary = false;
 
         await tester.pumpWidget(
           TestScaffold.app(
@@ -125,7 +124,7 @@ void main() {
   }
 
   tearDown(() {
-    Touch.primary = null;
+    FTouch.primary = null;
     controller.dispose();
   });
 }

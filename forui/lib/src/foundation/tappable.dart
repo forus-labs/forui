@@ -8,8 +8,8 @@ import 'package:forui/forui.dart';
 
 part 'tappable.style.dart';
 
-@internal
-extension Touch on Never {
+/// Utilities for retrieving information about the current platform.
+extension FTouch on Never {
   /// The platforms that uses touch as the primary input. It isn't 100% accurate as there are hybrid devices that uses
   /// both touch and keyboard/mouse input, i.e. Windows Surface laptops.
   static const platforms = {TargetPlatform.android, TargetPlatform.iOS, TargetPlatform.fuchsia};

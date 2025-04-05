@@ -311,7 +311,7 @@ final class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
           color: color.background,
           borderRadius: style.borderRadius,
           border: Border.all(width: style.borderWidth, color: color.border),
-          boxShadow: shadow,
+          boxShadow: FTooltipStyle.shadow,
         ),
         textStyle: text.sm,
       );
