@@ -8,6 +8,8 @@ import 'configuration.dart';
 import 'args/command.dart';
 import 'commands/init/command.dart';
 import 'commands/style/command.dart';
+import 'commands/typography/command.dart';
+
 
 Future<void> main(List<String> arguments) async {
   configure();
@@ -20,7 +22,8 @@ Future<void> main(List<String> arguments) async {
 
   runner
     ..addCommand(InitCommand())
-    ..addCommand(StyleCommand());
+    ..addCommand(StyleCommand())
+    ..addCommand(TypographyCommand());
 
   try {
     await runner.run(arguments);

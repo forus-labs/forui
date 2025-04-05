@@ -1,7 +1,7 @@
 import 'package:dart_console/dart_console.dart';
 
 import '../../../args/command.dart';
-import '../../../registry.dart';
+import '../../../style_registry.dart';
 
 final console = Console();
 
@@ -17,7 +17,7 @@ class StyleLsCommand extends ForuiCommand {
 
   @override
   void run() {
-    final styles = Registry.values.asNameMap().values.map((e) => e.type).toList()..sort();
+    final styles = StyleRegistry.values.asNameMap().values.map((e) => e.type).toList()..sort();
 
     console
       ..write('Available styles:')

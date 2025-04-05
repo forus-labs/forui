@@ -4,7 +4,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:sugar/sugar.dart';
 
 import '../../../configuration.dart';
-import '../../../registry.dart';
+import '../../../style_registry.dart';
 import 'command.dart';
 
 const _unnamespacedHeader = '''
@@ -117,8 +117,10 @@ extension GenerateStyles on StyleCreateCommand {
 
     for (final style in all ? registry.keys.toList() : arguments) {
       final fileName = registry[style.toLowerCase()]!.type.substring(1).toSnakeCase();
-      final out = output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart';
-      final path = '${root.path}${Platform.pathSeparator}$out';
+      var path = output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart';
+      if (output != defaultDirectory) {
+        path = '${root.path}${Platform.pathSeparator}$path';
+      }
 
       (paths[path] ??= []).add(style);
       if (File(path).existsSync()) {
@@ -144,6 +146,9 @@ extension GenerateStyles on StyleCreateCommand {
       ..writeLine();
 
     if (!input) {
+      console
+        ..write('Style files already exist. Skipping... ')
+        ..writeLine();
       exit(0);
     }
 
@@ -160,7 +165,7 @@ extension GenerateStyles on StyleCreateCommand {
     while (true) {
       console
         ..writeLine()
-        ..write('Overwrite these files? [Y/n]')
+        ..write('${console.supportsEmoji ? '⚠️' : '[Warning]'} Overwrite these files? [Y/n]')
         ..writeLine();
 
       switch (console.readLine(cancelOnBreak: true)) {
@@ -188,7 +193,7 @@ extension GenerateStyles on StyleCreateCommand {
     for (final MapEntry(key: path, value: styles) in paths.entries) {
       final buffer = StringBuffer();
 
-      if (registry[styles.singleOrNull] case Registry(:final closure)) {
+      if (registry[styles.singleOrNull] case StyleRegistry(:final closure)) {
         buffer.writeln(_unnamespacedHeader);
         _reduce(buffer, closure, many: false);
       } else {

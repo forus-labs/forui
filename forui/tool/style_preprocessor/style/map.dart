@@ -1,14 +1,12 @@
 // ignore_for_file: avoid_positional_boolean_parameters
 
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:dart_style/dart_style.dart';
 import 'package:sugar/core.dart';
 
+import '../main.dart';
 import 'traversal.dart';
 
 final constructor = RegExp(r'F([^ ]*?Styles?)\.inherit');
-
-final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion, pageWidth: 120);
 
 typedef Fragment = ({int position, String source, List<String> closure});
 

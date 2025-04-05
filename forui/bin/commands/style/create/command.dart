@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:dart_console/dart_console.dart';
 
 import '../../../configuration.dart';
-import '../../../registry.dart';
+import '../../../style_registry.dart';
 import '../../../args/command.dart';
 import 'generate.dart';
 import 'validate.dart';
 
 final console = Console();
-final registry = Registry.values.asNameMap();
+final registry = StyleRegistry.values.asNameMap();
 
 class StyleCreateCommand extends ForuiCommand {
   @override

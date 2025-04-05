@@ -5,7 +5,7 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 
-import 'main.dart';
+import '../main.dart';
 import 'package:path/path.dart' as path;
 
 /// Traverses the library and finds all styles that have an inherit constructor.

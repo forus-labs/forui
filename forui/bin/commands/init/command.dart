@@ -6,11 +6,10 @@ import '../../configuration.dart';
 
 final console = Console();
 
-const content =
-'''
+const content = '''
 # See https://forui.dev/docs/cli for more information.
 cli:
-  output: lib/themes
+  output: lib/theme
   force: false
 ''';
 
@@ -24,22 +23,68 @@ class InitCommand extends ForuiCommand {
   @override
   final description = 'Initialize this project to use Forui.';
 
+  InitCommand() {
+    argParser.addFlag(
+      'force',
+      abbr: 'f',
+      help: 'Overwrite existing files if they exist.',
+      negatable: false,
+      defaultsTo: defaultForce,
+    );
+  }
+
   @override
   void run() {
-    final yaml = File('${root.path}/forui.yaml');
-    final yml = File('${root.path}/forui.yml');
-    if (yaml.existsSync() || yml.existsSync()) {
-      console
-        ..write('${console.supportsEmoji ? '✅' : '[Done]'} ')
-        ..write('forui.${yaml.existsSync() ? 'yaml' : 'yml'}')
-        ..write(' already exists. Skipping initialization...')
-        ..writeLine();
-      return;
-    }
+    _prompt().writeAsStringSync(content);
 
-    yaml.writeAsStringSync(content);
     console
       ..write('${console.supportsEmoji ? '✅' : '[Done]'} Created forui.yaml.')
       ..writeLine();
+  }
+
+  File _prompt() {
+    final input = !globalResults!.flag('no-input');
+    final force = argResults!.flag('force');
+
+    final yaml = File('${root.path}/forui.yaml');
+    final yml = File('${root.path}/forui.yml');
+
+    var file = yaml;
+    if (force) {
+      return file;
+    }
+
+    if (yaml.existsSync() || yml.existsSync()) {
+      final extension = yaml.existsSync() ? 'yaml' : 'yml';
+      file = yaml.existsSync() ? yaml : yml;
+
+      if (!input) {
+        console
+          ..write('forui.$extension already exists. Skipping... ')
+          ..writeLine();
+        exit(0);
+      }
+
+      while (true) {
+        console
+          ..write('${console.supportsEmoji ? '⚠️' : '[Warning]'} forui.$extension already exists. Overwrite it? [Y/n]')
+          ..writeLine();
+
+        switch (console.readLine(cancelOnBreak: true)) {
+          case 'y' || 'Y' || '':
+            console.writeLine();
+            return file;
+          case 'n' || 'N':
+            exit(0);
+          default:
+            console
+              ..write('Invalid option. Please enter enter either "y" or "n".')
+              ..writeLine();
+            continue;
+        }
+      }
+    }
+
+    return file;
   }
 }
