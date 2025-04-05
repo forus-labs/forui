@@ -9,7 +9,7 @@ import '../main.dart';
 import 'package:path/path.dart' as path;
 
 /// Traverses the library and finds all styles that have an inherit constructor.
-Future<Map<String, Metadata>> traverse(AnalysisContextCollection collection) async {
+Future<Map<String, Metadata>> traverseStyles(AnalysisContextCollection collection) async {
   final rootStyles = await _findRootStyles(collection);
   final files =
       Directory(

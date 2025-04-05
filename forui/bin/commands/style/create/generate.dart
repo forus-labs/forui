@@ -117,10 +117,8 @@ extension GenerateStyles on StyleCreateCommand {
 
     for (final style in all ? registry.keys.toList() : arguments) {
       final fileName = registry[style.toLowerCase()]!.type.substring(1).toSnakeCase();
-      var path = output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart';
-      if (output != defaultDirectory) {
-        path = '${root.path}${Platform.pathSeparator}$path';
-      }
+      final path =
+          '${root.path}${Platform.pathSeparator}${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart'}';
 
       (paths[path] ??= []).add(style);
       if (File(path).existsSync()) {
@@ -170,8 +168,7 @@ extension GenerateStyles on StyleCreateCommand {
 
       switch (console.readLine(cancelOnBreak: true)) {
         case 'y' || 'Y' || '':
-          console
-            .writeLine();
+          console.writeLine();
           return;
         case 'n' || 'N':
           exit(0);

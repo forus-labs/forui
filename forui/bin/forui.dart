@@ -6,6 +6,7 @@ import 'package:args/command_runner.dart';
 
 import 'configuration.dart';
 import 'args/command.dart';
+import 'commands/color/command.dart';
 import 'commands/init/command.dart';
 import 'commands/style/command.dart';
 import 'commands/typography/command.dart';
@@ -21,6 +22,7 @@ Future<void> main(List<String> arguments) async {
     ..addFlag('no-input', help: 'Disable interactive prompts and assume default values.', negatable: false);
 
   runner
+    ..addCommand(ColorCommand())
     ..addCommand(InitCommand())
     ..addCommand(StyleCommand())
     ..addCommand(TypographyCommand());

@@ -9,8 +9,9 @@ final console = Console();
 const content = '''
 # See https://forui.dev/docs/cli for more information.
 cli:
-  output: lib/theme
-  force: false
+  color-output: lib/theme/color.dart
+  typography-output: lib/theme/typography.dart
+  style-output: lib/theme
 ''';
 
 class InitCommand extends ForuiCommand {
@@ -24,13 +25,7 @@ class InitCommand extends ForuiCommand {
   final description = 'Initialize this project to use Forui.';
 
   InitCommand() {
-    argParser.addFlag(
-      'force',
-      abbr: 'f',
-      help: 'Overwrite existing files if they exist.',
-      negatable: false,
-      defaultsTo: defaultForce,
-    );
+    argParser.addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false);
   }
 
   @override

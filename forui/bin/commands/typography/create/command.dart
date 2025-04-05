@@ -25,7 +25,7 @@ class TypographyCreateCommand extends ForuiCommand {
   final List<String> aliases = ['c'];
 
   @override
-  final description = 'Create a Forui typography.';
+  final description = 'Creates a Forui typography.';
 
   @override
   String get invocation {
@@ -40,18 +40,12 @@ class TypographyCreateCommand extends ForuiCommand {
 
   TypographyCreateCommand() {
     argParser
-      ..addFlag(
-        'force',
-        abbr: 'f',
-        help: 'Overwrite existing files if they exist.',
-        negatable: false,
-        defaultsTo: defaultForce,
-      )
+      ..addFlag('force', abbr: 'f', help: 'Overwrite existing file if it exist.', negatable: false)
       ..addOption(
         'output',
         abbr: 'o',
         help: 'The output directory or file, relative to the project directory.',
-        defaultsTo: defaultDirectory,
+        defaultsTo: defaultTypographyOutput,
       );
   }
 
@@ -63,10 +57,7 @@ class TypographyCreateCommand extends ForuiCommand {
     }
 
     final output = argResults!['output'] as String;
-    var path = output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}typography.dart';
-    if (output != defaultDirectory) {
-      path = '${root.path}${Platform.pathSeparator}$path';
-    }
+    final path = '${root.path}${Platform.pathSeparator}${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}typography.dart'}';
 
     if (File(path).existsSync()) {
       _prompt(path);

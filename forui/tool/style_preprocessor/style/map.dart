@@ -4,14 +4,14 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:sugar/core.dart';
 
 import '../main.dart';
-import 'traversal.dart';
+import 'traverse.dart';
 
 final constructor = RegExp(r'F([^ ]*?Styles?)\.inherit');
 
 typedef Fragment = ({int position, String source, List<String> closure});
 
 /// Maps a constructor declaration AST to a function.
-Map<String, Fragment> map(Map<String, Metadata> metadatas) => {
+Map<String, Fragment> mapStyles(Map<String, Metadata> metadatas) => {
   for (final MapEntry(:key, value: metadata) in metadatas.entries)
     key: (
       position: key.length + 1,

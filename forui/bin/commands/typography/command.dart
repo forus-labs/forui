@@ -9,7 +9,7 @@ class TypographyCommand extends ForuiCommand {
   final List<String> aliases = ['typo', 't'];
 
   @override
-  final description = 'Manage your Forui typography.';
+  final description = 'Manage your Forui typographies.';
 
   TypographyCommand() {
     addSubcommand(TypographyCreateCommand());

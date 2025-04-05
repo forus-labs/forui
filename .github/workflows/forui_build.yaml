@@ -65,8 +65,12 @@ jobs:
           cache: true
       - run: dart run build_runner build --delete-conflicting-outputs
         working-directory: forui
+      - run: dart run forui init -f
+      - run: dart run forui color create -af
+      - run: dart run forui color create -af -o ./lib/theme/all_colors.dart
+      - run: dart run forui typo create -f
       - run: dart run forui style create -af
-      - run: dart run forui style create -af -o ./lib/single_file.dart
+      - run: dart run forui style create -af -o ./lib/theme/all_styles.dart
       - run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
   build-android:

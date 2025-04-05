@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:yaml/yaml.dart';
 
 late final Directory root;
-String defaultDirectory = '';
-bool defaultForce = false;
+String defaultColorOutput = 'lib${Platform.pathSeparator}theme/color.dart';
+String defaultTypographyOutput = 'lib${Platform.pathSeparator}theme/typography.dart';
+String defaultStyleOutput = 'lib${Platform.pathSeparator}theme';
 
 void configure() {
   try {
@@ -45,7 +46,6 @@ void _configure() {
     extension = 'yml';
 
     if (!configuration.existsSync()) {
-      defaultDirectory = '${root.path}${Platform.pathSeparator}lib${Platform.pathSeparator}theme';
       return;
     }
   }
@@ -61,25 +61,36 @@ void _configure() {
     return;
   }
 
-  switch (cli.nodes['output']) {
+  switch (cli.nodes['color-output']) {
     case null:
       break;
 
     case YamlScalar(:final value) when value is String:
-      defaultDirectory = '${root.path}${Platform.pathSeparator}lib${Platform.pathSeparator}theme';
+      defaultStyleOutput = value;
 
     case final node:
-      throw FormatException('Could not read forui.$extension.\n\n${node.span.message('"output" must be a string.')}');
+      throw FormatException('Could not read forui.$extension.\n\n${node.span.message('"color-output" must be a string.')}');
   }
 
-  switch (cli.nodes['force']) {
+  switch (cli.nodes['typography-output']) {
     case null:
       break;
 
-    case YamlScalar(:final value) when value is bool:
-      defaultForce = value;
+    case YamlScalar(:final value) when value is String:
+      defaultTypographyOutput = value;
 
     case final node:
-      throw FormatException('Could not read forui.$extension.\n\n${node.span.message('"force" must be a boolean.')}');
+      throw FormatException('Could not read forui.$extension.\n\n${node.span.message('"typography-output" must be a string.')}');
+  }
+
+  switch (cli.nodes['style-output']) {
+    case null:
+      break;
+
+    case YamlScalar(:final value) when value is String:
+      defaultStyleOutput = value;
+
+    case final node:
+      throw FormatException('Could not read forui.$extension.\n\n${node.span.message('"style-output" must be a string.')}');
   }
 }

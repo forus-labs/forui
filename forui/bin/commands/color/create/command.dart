@@ -3,15 +3,16 @@ import 'dart:io';
 import 'package:dart_console/dart_console.dart';
 
 import '../../../configuration.dart';
-import '../../../style_registry.dart';
+import '../../../color_registry.dart';
 import '../../../args/command.dart';
 import 'generate.dart';
 import 'validate.dart';
 
 final console = Console();
-final registry = StyleRegistry.values.asNameMap();
+final registry = ColorSchemeRegistry.values.asNameMap();
+final separator = RegExp('_|-');
 
-class StyleCreateCommand extends ForuiCommand {
+class ColorCreateCommand extends ForuiCommand {
   @override
   final name = 'create';
 
@@ -19,7 +20,7 @@ class StyleCreateCommand extends ForuiCommand {
   final List<String> aliases = ['c'];
 
   @override
-  final description = 'Create Forui widget style file(s).';
+  final description = 'Create Forui color scheme file(s).';
 
   @override
   String get invocation {
@@ -29,23 +30,18 @@ class StyleCreateCommand extends ForuiCommand {
     }
     parents.add(runner!.executableName);
 
-    return '${parents.reversed.join(' ')} [styles]';
+    return '${parents.reversed.join(' ')} [color schemes]';
   }
 
-  StyleCreateCommand() {
+  ColorCreateCommand() {
     argParser
-      ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
-      ..addFlag(
-        'force',
-        abbr: 'f',
-        help: 'Overwrite existing files if they exist.',
-        negatable: false,
-      )
+      ..addFlag('all', abbr: 'a', help: 'Generate all color schemes.', negatable: false)
+      ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
       ..addOption(
         'output',
         abbr: 'o',
         help: 'The output directory or file, relative to the project directory.',
-        defaultsTo: defaultStyleOutput,
+        defaultsTo: defaultColorOutput,
       );
   }
 
@@ -63,10 +59,10 @@ class StyleCreateCommand extends ForuiCommand {
       return;
     }
 
-    if (validateStyles(arguments, color: color, all: all)) {
+    if (validateColors(arguments, color: color, all: all)) {
       exit(1);
     }
 
-    generateStyles(arguments, color: color, input: input, all: all, force: force, output: output);
+    generateColors(arguments, color: color, input: input, all: all, force: force, output: output);
   }
 }
