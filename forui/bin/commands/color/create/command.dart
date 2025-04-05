@@ -35,7 +35,7 @@ class ColorCreateCommand extends ForuiCommand {
 
   ColorCreateCommand() {
     argParser
-      ..addFlag('all', abbr: 'a', help: 'Generate all color schemes.', negatable: false)
+      ..addFlag('all', abbr: 'a', help: 'Create all color schemes.', negatable: false)
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
       ..addOption(
         'output',

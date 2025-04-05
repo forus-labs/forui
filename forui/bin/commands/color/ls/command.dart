@@ -16,6 +16,17 @@ class ColorLsCommand extends ForuiCommand {
   final description = 'List all Forui color schemes.';
 
   @override
+  String get invocation {
+    final parents = [name];
+    for (var command = parent; command != null; command = command.parent) {
+      parents.add(command.name);
+    }
+    parents.add(runner!.executableName);
+
+    return parents.reversed.join(' ');
+  }
+
+  @override
   void run() {
     final colors =
         ColorSchemeRegistry.values.asNameMap().values.map((e) => e.name).toList()..sort((a, b) {

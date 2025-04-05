@@ -57,8 +57,8 @@ Forui provides an extension on `BuildContext` which allows for direct access to 
 @override
 Widget build(BuildContext context) {
   final theme = context.theme; // FThemeData
-  final colorScheme = context.theme.colorScheme; // FColorScheme
-  final typography = context.theme.typography; // FTypography
+  final colorScheme = context.theme.color; // FColorScheme
+  final typography = context.theme.text; // FTypography
   final style = context.theme.style; // FStyle
 
   return const Placeholder();
@@ -76,20 +76,72 @@ A more detailed explanation of each class can be found in the [Class Diagram](#c
 
 ## Customize Themes
 
-It's recommended to use the predefined themes as a starting point and customize them with
-[`transform(...)`](https://pub.dev/documentation/forui/latest/forui.foundation/FTransformables/transform.html) and
-[`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html) methods to suit your
-needs.
+### CLI
+
+It's recommended to use the [CLI](cli]) to generate color schemes, typographies and styles in your project. These
+styles can be directly modified to fit your design needs.
+
+The following example shows how to generate a `FDividerStyles` in your project.
+
+In your project directory run:
+```shell copy
+dart run forui init
+```
+
+Then:
+```shell copy
+dart run forui style create fdividerstyles
+```
+
+This will generate `lib/theme/divider_styles.dart` containing:
+```dart copy
+// Modify this style to fit your design needs.
+FDividerStyles dividerStyles({
+  required FColorScheme color,
+  required FStyle style,
+}) => FDividerStyles(
+  horizontalStyle: FDividerStyle(
+    color: color.secondary,
+    padding: FDividerStyle.defaultPadding.horizontalStyle,
+    width: style.borderWidth,
+  ),
+  verticalStyle: FDividerStyle(
+    color: color.secondary,
+    padding: FDividerStyle.defaultPadding.verticalStyle,
+    width: style.borderWidth,
+  ),
+);
+```
+
+Call `dividerStyles(...)` in your `FTheme(...)` widget:
+```dart filename="main.dart" {4-7} copy
+@override
+Widget build(BuildContext context) => FTheme(
+    data: FThemeData(
+      dividerStyles: dividerStyles(
+        color: FThemes.zinc.light.color,
+        style: FThemes.zinc.light.style,
+      ),
+    ),
+    child: const FScaffold(...),
+  );
+```
+
+### `copyWith(...)` and `transform(...)`.
+
+Alternatively, you can use the [`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html)
+and [`transform(...)`](https://pub.dev/documentation/forui/latest/forui.foundation/FTransformables/transform.html)
+methods to create a new theme based on an existing one.
 
 ```dart filename="main.dart" {3-14, 17-23} copy
 @override
 Widget build(BuildContext context) => FTheme(
     data: FThemeData(
-      colorScheme: FThemes.zinc.light.colorScheme.copyWith(
+      color: FThemes.zinc.light.color.copyWith(
         primary: const Color(0xFF0D47A1), // dark blue
         primaryForeground: const Color(0xFFFFFFFF), // white
       ),
-      typography: FThemes.zinc.light.typography.copyWith(
+      text: FThemes.zinc.light.text.copyWith(
         defaultFontFamily: 'Roboto',
       ).scale(sizeScalar: 0.8),
       style: FThemes.zinc.light.style.copyWith(
@@ -181,8 +233,8 @@ In most cases, the color will be used as the background color, and the foregroun
 ```dart {3, 6-14} copy
 @override
 Widget build(BuildContext context) {
-  final colorScheme = context.theme.colorScheme;
-  final typography = context.theme.typography;
+  final colorScheme = context.theme.color;
+  final typography = context.theme.text;
 
   return ColoredBox(
     color: colorScheme.primary,
@@ -217,8 +269,8 @@ It is recommended to use the `copyWith(...)` to apply colors and other styles as
 ```dart {4, 8-12} copy
 @override
 Widget build(BuildContext context) {
-  final colorScheme = context.theme.colorScheme;
-  final typography = context.theme.typography;
+  final colorScheme = context.theme.color;
+  final typography = context.theme.text;
 
   return Text(
     'Hello World!',
@@ -257,7 +309,7 @@ The `FStyle` class contains other miscellaneous styling options for the theme.
 ```dart {4, 7-14} copy
 @override
 Widget build(BuildContext context) {
-  final colorScheme = context.theme.colorScheme;
+  final colorScheme = context.theme.text;
   final style = context.theme.style;
 
   return DecoratedBox(
@@ -319,7 +371,9 @@ Forui provides a way to convert its themes to Material Design's `ThemeData` for 
 
 ### Usage
 
-A Forui theme can be converted to a Material theme using the `toApproximateMaterialTheme()` method.
+A Forui theme can be converted to a Material theme using the
+[`toApproximateMaterialTheme()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/toApproximateMaterialTheme.html)
+method.
 
 ```dart {9} copy
 import 'package:flutter/material.dart';

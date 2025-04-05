@@ -34,7 +34,7 @@ class StyleCreateCommand extends ForuiCommand {
 
   StyleCreateCommand() {
     argParser
-      ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
+      ..addFlag('all', abbr: 'a', help: 'Create all styles.', negatable: false)
       ..addFlag(
         'force',
         abbr: 'f',
