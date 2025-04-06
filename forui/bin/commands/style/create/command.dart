@@ -4,33 +4,25 @@ import 'package:dart_console/dart_console.dart';
 
 import '../../../args/command.dart';
 import '../../../configuration.dart';
-import '../../../style_registry.dart';
+import '../style.dart';
 import 'generate.dart';
 import 'validate.dart';
 
 final console = Console();
-final registry = StyleRegistry.values.asNameMap();
+final registry = Style.values.asNameMap();
 
 class StyleCreateCommand extends ForuiCommand {
   @override
   final name = 'create';
 
   @override
-  final List<String> aliases = ['c'];
+  final aliases = ['c'];
 
   @override
   final description = 'Create Forui widget style file(s).';
 
   @override
-  String get invocation {
-    final parents = [name];
-    for (var command = parent; command != null; command = command.parent) {
-      parents.add(command.name);
-    }
-    parents.add(runner!.executableName);
-
-    return '${parents.reversed.join(' ')} [styles]';
-  }
+  final arguments = '[styles]';
 
   StyleCreateCommand() {
     argParser

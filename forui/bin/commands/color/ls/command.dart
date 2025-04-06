@@ -1,7 +1,7 @@
 import 'package:dart_console/dart_console.dart';
 
 import '../../../args/command.dart';
-import '../../../color_registry.dart';
+import '../color.dart';
 
 final console = Console();
 
@@ -10,26 +10,18 @@ class ColorLsCommand extends ForuiCommand {
   final name = 'ls';
 
   @override
-  List<String> aliases = ['list'];
+  final aliases = ['list'];
 
   @override
   final description = 'List all Forui color schemes.';
 
   @override
-  String get invocation {
-    final parents = [name];
-    for (var command = parent; command != null; command = command.parent) {
-      parents.add(command.name);
-    }
-    parents.add(runner!.executableName);
-
-    return parents.reversed.join(' ');
-  }
+  final arguments = '';
 
   @override
   void run() {
     final colors =
-        ColorSchemeRegistry.values.asNameMap().values.map((e) => e.name).toList()..sort((a, b) {
+        ColorScheme.values.asNameMap().values.map((e) => e.name).toList()..sort((a, b) {
           final [aTheme, ...aRest] = a.split('-');
           final [bTheme, ...bRest] = b.split('-');
 

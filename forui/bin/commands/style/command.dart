@@ -7,7 +7,7 @@ class StyleCommand extends ForuiCommand {
   final name = 'style';
 
   @override
-  final List<String> aliases = ['s'];
+  final aliases = ['s'];
 
   @override
   final description = 'Manage your Forui widget styles.';

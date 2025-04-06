@@ -4,7 +4,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:sugar/sugar.dart';
 
 import '../../../configuration.dart';
-import '../../../style_registry.dart';
+import '../style.dart';
 import 'command.dart';
 
 const _unnamespacedHeader = '''
@@ -190,7 +190,7 @@ extension GenerateStyles on StyleCreateCommand {
     for (final MapEntry(key: path, value: styles) in paths.entries) {
       final buffer = StringBuffer();
 
-      if (registry[styles.singleOrNull] case StyleRegistry(:final closure)) {
+      if (registry[styles.singleOrNull] case Style(:final closure)) {
         buffer.writeln(_unnamespacedHeader);
         _reduce(buffer, closure, many: false);
       } else {

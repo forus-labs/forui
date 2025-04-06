@@ -24,6 +24,8 @@ mixin _Usage {
   ArgParser get argParser;
 }
 
+/// A runner that additionally supports:
+/// * Usage information with aliases
 class ForuiCommandRunner<T> extends CommandRunner<T> with _Usage {
   ForuiCommandRunner(super.executableName, super.description);
 
@@ -36,12 +38,8 @@ class ForuiCommandRunner<T> extends CommandRunner<T> with _Usage {
           ..writeln(_wrap('Global options:'))
           ..writeln('${argParser.usage}\n')
           ..writeln('${_getCommandUsage(commands, lineLength: argParser.usageLineLength)}\n')
-          ..write(
-            _wrap(
-              'Run "$executableName help <command>" for more information about a '
-              'command.',
-            ),
-          );
+          ..write(_wrap('Run "$executableName help <command>" for more information about a command.'));
+
     if (usageFooter != null) {
       buffer.write('\n${_wrap(usageFooter!)}');
     }
@@ -49,8 +47,24 @@ class ForuiCommandRunner<T> extends CommandRunner<T> with _Usage {
   }
 }
 
+/// A command that additionally supports:
+/// * Custom invocation arguments
+/// * Usage information with aliases
 abstract class ForuiCommand extends Command with _Usage {
-  /// Returns [usage] with [description] removed from the beginning.
+  @override
+  String get invocation {
+    final parents = [name];
+    for (var command = parent; command != null; command = command.parent) {
+      parents.add(command.name);
+    }
+    parents.add(runner!.executableName);
+
+    final invocation = parents.reversed.join(' ');
+    return (subcommands.isNotEmpty ? '$invocation <subcommand> $arguments' : '$invocation $arguments').trim();
+  }
+
+  String get arguments => '[arguments]';
+
   @override
   String get _usageWithoutDescription {
     final length = argParser.usageLineLength;
@@ -80,10 +94,6 @@ abstract class ForuiCommand extends Command with _Usage {
   }
 }
 
-/// Returns a string representation of [commands] fit for use in a usage string.
-///
-/// [isSubcommand] indicates whether the commands should be called "commands" or
-/// "subcommands".
 String _getCommandUsage(Map<String, Command> commands, {bool isSubcommand = false, int? lineLength}) {
   // Don't include aliases.
   var names = commands.keys.where((name) => !commands[name]!.aliases.contains(name));

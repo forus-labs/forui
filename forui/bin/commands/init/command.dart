@@ -20,21 +20,13 @@ class InitCommand extends ForuiCommand {
   final name = 'init';
 
   @override
-  final List<String> aliases = ['initialize'];
+  final aliases = ['initialize'];
 
   @override
   final description = 'Initialize this project to use Forui.';
 
   @override
-  String get invocation {
-    final parents = [name];
-    for (var command = parent; command != null; command = command.parent) {
-      parents.add(command.name);
-    }
-    parents.add(runner!.executableName);
-
-    return parents.reversed.join(' ');
-  }
+  final arguments = '';
 
   InitCommand() {
     argParser.addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false);

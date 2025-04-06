@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:yaml/yaml.dart';
 
 late final Directory root;
-String defaultColorOutput = 'lib${Platform.pathSeparator}theme/color.dart';
-String defaultTypographyOutput = 'lib${Platform.pathSeparator}theme/typography.dart';
-String defaultStyleOutput = 'lib${Platform.pathSeparator}theme';
+String defaultColorOutput = 'lib/theme/color.dart';
+String defaultTypographyOutput = 'lib/theme/typography.dart';
+String defaultStyleOutput = 'lib/theme';
 
 void configure() {
   try {
@@ -31,8 +31,7 @@ Directory _findProjectRoot([Directory? directory]) {
       'Could not find a Flutter project directory. Make sure you are running this inside a Flutter project.',
     );
   }
-
-  // Recursively check parent directories
+  
   return _findProjectRoot(parent);
 }
 

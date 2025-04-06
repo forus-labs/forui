@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:dart_console/dart_console.dart';
 
 import '../../../args/command.dart';
-import '../../../color_registry.dart';
+import '../color.dart';
 import '../../../configuration.dart';
 import 'generate.dart';
 import 'validate.dart';
 
 final console = Console();
-final registry = ColorSchemeRegistry.values.asNameMap();
+final registry = ColorScheme.values.asNameMap();
 final separator = RegExp('_|-');
 
 class ColorCreateCommand extends ForuiCommand {
@@ -17,21 +17,13 @@ class ColorCreateCommand extends ForuiCommand {
   final name = 'create';
 
   @override
-  final List<String> aliases = ['c'];
+  final aliases = ['c'];
 
   @override
   final description = 'Create Forui color scheme file(s).';
 
   @override
-  String get invocation {
-    final parents = [name];
-    for (var command = parent; command != null; command = command.parent) {
-      parents.add(command.name);
-    }
-    parents.add(runner!.executableName);
-
-    return '${parents.reversed.join(' ')} [color schemes]';
-  }
+  final arguments = '[color schemes]';
 
   ColorCreateCommand() {
     argParser
@@ -54,7 +46,7 @@ class ColorCreateCommand extends ForuiCommand {
     final output = argResults!['output'] as String;
     final arguments = argResults!.rest;
 
-    if (argResults!.rest.isEmpty && !all) {
+    if (arguments.isEmpty && !all) {
       printUsage();
       return;
     }

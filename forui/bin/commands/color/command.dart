@@ -7,7 +7,7 @@ class ColorCommand extends ForuiCommand {
   final name = 'color';
 
   @override
-  final List<String> aliases = ['c'];
+  final aliases = ['c'];
 
   @override
   final description = 'Manage your Forui color schemes.';

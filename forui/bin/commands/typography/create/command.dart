@@ -5,7 +5,7 @@ import 'package:dart_style/dart_style.dart';
 
 import '../../../args/command.dart';
 import '../../../configuration.dart';
-import '../../../typography.dart';
+import '../typography.dart';
 
 final console = Console();
 
@@ -22,21 +22,13 @@ class TypographyCreateCommand extends ForuiCommand {
   final name = 'create';
 
   @override
-  final List<String> aliases = ['c'];
+  final aliases = ['c'];
 
   @override
   final description = 'Creates a Forui typography.';
 
   @override
-  String get invocation {
-    final parents = [name];
-    for (var command = parent; command != null; command = command.parent) {
-      parents.add(command.name);
-    }
-    parents.add(runner!.executableName);
-
-    return parents.reversed.join(' ');
-  }
+  final arguments = '';
 
   TypographyCreateCommand() {
     argParser
