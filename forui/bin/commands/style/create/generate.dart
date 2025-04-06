@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dart_style/dart_style.dart';
 import 'package:sugar/sugar.dart';
 
+import '../../../args/command.dart';
 import '../../../configuration.dart';
 import '../style.dart';
 import 'command.dart';
@@ -99,7 +100,7 @@ import 'package:flutter/material.dart';
 /// );
 /// ```
 /// 
-/// See https://forui.dev/docs/cli for more information.''';
+/// See https://forui.dev/docs/themes#customize-themes for more information.''';
 
 final _formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
 
@@ -132,60 +133,46 @@ extension GenerateStyles on StyleCreateCommand {
 
     _generate(paths);
 
-    console
-      ..writeLine()
-      ..write('See https://forui.dev/docs/cli for how to use the generated styles.')
-      ..writeLine();
+    stdout
+      ..writeln()
+      ..writeln('See https://forui.dev/docs/themes#customize-themes for more information.');
   }
 
   void _prompt(Set<String> existing, {required bool input}) {
-    console
-      ..write('Found ${existing.length} file(s) that already exist.')
-      ..writeLine();
+    stdout.writeln('Found ${existing.length} file(s) that already exist.');
 
     if (!input) {
-      console
-        ..write('Style files already exist. Skipping... ')
-        ..writeLine();
+      stdout.writeln('Style files already exist. Skipping... ');
       exit(0);
     }
 
-    console
-      ..writeLine()
-      ..write('Existing files:')
-      ..writeLine();
+    stdout
+      ..writeln()
+      ..writeln('Existing files:');
     for (final path in existing) {
-      console
-        ..write('  $path')
-        ..writeLine();
+      stdout.writeln('  $path');
     }
 
     while (true) {
-      console
-        ..writeLine()
-        ..write('${console.supportsEmoji ? '⚠️' : '[Warning]'} Overwrite these files? [Y/n]')
-        ..writeLine();
+      stdout
+        ..writeln()
+        ..writeln('${emoji ? '⚠️' : '[Warning]'} Overwrite these files? [Y/n]');
 
-      switch (console.readLine(cancelOnBreak: true)) {
+      switch (stdin.readLineSync()) {
         case 'y' || 'Y' || '':
-          console.writeLine();
           return;
         case 'n' || 'N':
           exit(0);
         default:
-          console
-            ..write('Invalid option. Please enter enter either "y" or "n".')
-            ..writeLine();
-          continue;
+          stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
       }
     }
   }
 
   void _generate(Map<String, List<String>> paths) {
-    console
-      ..write('${console.supportsEmoji ? '⏳' : '[Waiting]'} Creating styles...')
-      ..writeLine()
-      ..writeLine();
+    stdout
+      ..writeln('${emoji ? '⏳' : '[Waiting]'} Creating styles...')
+      ..writeln();
 
     for (final MapEntry(key: path, value: styles) in paths.entries) {
       final buffer = StringBuffer();
@@ -204,9 +191,9 @@ extension GenerateStyles on StyleCreateCommand {
         ..createSync(recursive: true)
         ..writeAsStringSync(_formatter.format(buffer.toString()));
 
-      console
-        ..write('${console.supportsEmoji ? '✅' : '[Done]'} $path')
-        ..writeLine();
+      stdout
+        ..writeln('${emoji ? '✅' : '[Done]'} $path')
+        ..writeln();
     }
   }
 

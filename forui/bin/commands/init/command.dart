@@ -1,11 +1,7 @@
 import 'dart:io';
 
-import 'package:dart_console/dart_console.dart';
-
 import '../../args/command.dart';
 import '../../configuration.dart';
-
-final console = Console();
 
 const content = '''
 # See https://forui.dev/docs/cli for more information.
@@ -36,9 +32,7 @@ class InitCommand extends ForuiCommand {
   void run() {
     _prompt().writeAsStringSync(content);
 
-    console
-      ..write('${console.supportsEmoji ? '✅' : '[Done]'} Created forui.yaml.')
-      ..writeLine();
+    stdout.writeln('${emoji ? '✅' : '[Done]'} Created forui.yaml.');
   }
 
   File _prompt() {
@@ -58,28 +52,20 @@ class InitCommand extends ForuiCommand {
       file = yaml.existsSync() ? yaml : yml;
 
       if (!input) {
-        console
-          ..write('forui.$extension already exists. Skipping... ')
-          ..writeLine();
+        stdout.writeln('forui.$extension already exists. Skipping... ');
         exit(0);
       }
 
       while (true) {
-        console
-          ..write('${console.supportsEmoji ? '⚠️' : '[Warning]'} forui.$extension already exists. Overwrite it? [Y/n]')
-          ..writeLine();
+        stdout.writeln('${emoji ? '⚠️' : '[Warning]'} forui.$extension already exists. Overwrite it? [Y/n]');
 
-        switch (console.readLine(cancelOnBreak: true)) {
+        switch (stdin.readLineSync()) {
           case 'y' || 'Y' || '':
-            console.writeLine();
             return file;
           case 'n' || 'N':
             exit(0);
           default:
-            console
-              ..write('Invalid option. Please enter enter either "y" or "n".')
-              ..writeLine();
-            continue;
+            stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
         }
       }
     }

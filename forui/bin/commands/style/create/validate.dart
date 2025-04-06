@@ -1,14 +1,14 @@
+import 'dart:io';
+
 import '../../../args/utils.dart';
 import 'command.dart';
 
 extension ValidateStyles on StyleCreateCommand {
   bool validateStyles(List<String> arguments, {required bool all, required bool color}) {
     if (arguments.isNotEmpty && all) {
-      console
-        ..write('Cannot use "[styles]" and "--all" at the same time.')
-        ..writeLine()
-        ..write('Either use "--all" or specify the styles.')
-        ..writeLine();
+      stdout
+        ..writeln('Cannot use "[styles]" and "--all" at the same time.')
+        ..writeln('Either use "--all" or specify the styles.');
       return true;
     }
 
@@ -25,34 +25,22 @@ extension ValidateStyles on StyleCreateCommand {
           registry.keys.map((e) => (e, e.startsWith(style) ? 1 : distance(style, e))).where((e) => e.$2 <= 3).toList()
             ..sort((a, b) => a.$2.compareTo(b.$2));
 
-      console
-        ..write('Could not find a style named "')
-        ..setTextStyle(bold: color)
-        ..write(style)
-        ..setTextStyle()
-        ..write('".')
-        ..writeLine();
+      stdout.write('Could not find a style named "$style".');
 
       if (suggestions.isNotEmpty) {
-        console
-          ..writeLine()
-          ..write('Did you mean one of these?')
-          ..writeLine();
-
+        stdout
+          ..writeln()
+          ..writeln('Did you mean one of these?');
         for (final suggestion in suggestions) {
-          console
-            ..write('  ${registry[suggestion.$1]!.type}')
-            ..writeLine();
+          stdout.writeln('  ${registry[suggestion.$1]!.type}');
         }
       }
 
-      console.writeLine();
+      stdout.writeln();
     }
 
     if (error) {
-      console
-        ..write('Run "dart run forui style ls" to see all styles.')
-        ..writeLine();
+      stdout.writeln('Run "dart run forui style ls" to see all styles.');
     }
 
     return error;

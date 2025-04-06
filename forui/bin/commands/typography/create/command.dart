@@ -1,13 +1,10 @@
 import 'dart:io';
 
-import 'package:dart_console/dart_console.dart';
 import 'package:dart_style/dart_style.dart';
 
 import '../../../args/command.dart';
 import '../../../configuration.dart';
 import '../typography.dart';
-
-final console = Console();
 
 const _header = '''
 import 'package:forui/forui.dart';
@@ -65,9 +62,7 @@ class TypographyCreateCommand extends ForuiCommand {
       ..createSync(recursive: true)
       ..writeAsStringSync(_formatter.format(buffer.toString()));
 
-    console
-      ..write('${console.supportsEmoji ? '✅' : '[Done]'} $path')
-      ..writeLine();
+    stdout.writeln('${emoji ? '✅' : '[Done]'} $path');
   }
 
   void _prompt(String file) {
@@ -75,9 +70,7 @@ class TypographyCreateCommand extends ForuiCommand {
     final force = argResults!.flag('force');
 
     if (!input) {
-      console
-        ..write('$file already exists. Skipping... ')
-        ..writeLine();
+      stdout.writeln('$file already exists. Skipping... ');
       exit(0);
     }
 
@@ -86,21 +79,17 @@ class TypographyCreateCommand extends ForuiCommand {
     }
 
     while (true) {
-      console
-        ..write('${console.supportsEmoji ? '⚠️' : '[Warning]'} $file already exists. Overwrite it? [Y/n]')
-        ..writeLine();
+      stdout
+        ..writeln()
+        ..writeln('${emoji ? '⚠️' : '[Warning]'} Overwrite these files? [Y/n]');
 
-      switch (console.readLine(cancelOnBreak: true)) {
+      switch (stdin.readLineSync()) {
         case 'y' || 'Y' || '':
-          console.writeLine();
           return;
         case 'n' || 'N':
           exit(0);
         default:
-          console
-            ..write('Invalid option. Please enter enter either "y" or "n".')
-            ..writeLine();
-          continue;
+          stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
       }
     }
   }

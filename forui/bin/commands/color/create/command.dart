@@ -1,14 +1,11 @@
 import 'dart:io';
 
-import 'package:dart_console/dart_console.dart';
-
 import '../../../args/command.dart';
 import '../color.dart';
 import '../../../configuration.dart';
 import 'generate.dart';
 import 'validate.dart';
 
-final console = Console();
 final registry = ColorScheme.values.asNameMap();
 final separator = RegExp('_|-');
 

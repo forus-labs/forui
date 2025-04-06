@@ -1,9 +1,7 @@
-import 'package:dart_console/dart_console.dart';
+import 'dart:io';
 
 import '../../../args/command.dart';
 import '../color.dart';
-
-final console = Console();
 
 class ColorLsCommand extends ForuiCommand {
   @override
@@ -36,14 +34,9 @@ class ColorLsCommand extends ForuiCommand {
           return (bRest.firstOrNull ?? '').compareTo(aRest.firstOrNull ?? '');
         });
 
-    console
-      ..write('Available color schemes:')
-      ..writeLine();
-
+    stdout.writeln('Available color schemes:');
     for (final color in colors) {
-      console
-        ..write('  $color')
-        ..writeLine();
+      stdout.writeln('  $color');
     }
   }
 }

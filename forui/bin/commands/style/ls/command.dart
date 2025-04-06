@@ -1,9 +1,7 @@
-import 'package:dart_console/dart_console.dart';
+import 'dart:io';
 
 import '../../../args/command.dart';
 import '../style.dart';
-
-final console = Console();
 
 class StyleLsCommand extends ForuiCommand {
   @override
@@ -22,14 +20,9 @@ class StyleLsCommand extends ForuiCommand {
   void run() {
     final styles = Style.values.asNameMap().values.map((e) => e.type).toList()..sort();
 
-    console
-      ..write('Available styles:')
-      ..writeLine();
-
+    stdout.writeln('Available styles:');
     for (final style in styles) {
-      console
-        ..write('  $style')
-        ..writeLine();
+      stdout.writeln('  $style');
     }
   }
 }

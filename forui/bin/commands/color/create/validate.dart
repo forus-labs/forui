@@ -1,14 +1,14 @@
+import 'dart:io';
+
 import '../../../args/utils.dart';
 import 'command.dart';
 
 extension ValidateColors on ColorCreateCommand {
   bool validateColors(List<String> arguments, {required bool all, required bool color}) {
     if (arguments.isNotEmpty && all) {
-      console
-        ..write('Cannot use "[color schemes]" and "--all" at the same time.')
-        ..writeLine()
-        ..write('Either use "--all" or specify the color schemes.')
-        ..writeLine();
+      stdout
+        ..writeln('Cannot use "[color schemes]" and "--all" at the same time.')
+        ..writeln('Either use "--all" or specify the color schemes.');
       return true;
     }
 
@@ -28,34 +28,23 @@ extension ValidateColors on ColorCreateCommand {
               .toList()
             ..sort((a, b) => a.$2.compareTo(b.$2));
 
-      console
-        ..write('Could not find a color scheme named "')
-        ..setTextStyle(bold: color)
-        ..write(colorScheme)
-        ..setTextStyle()
-        ..write('".')
-        ..writeLine();
+      stdout.writeln('Could not find a color scheme named "$colorScheme".');
 
       if (suggestions.isNotEmpty) {
-        console
-          ..writeLine()
-          ..write('Did you mean one of these?')
-          ..writeLine();
+        stdout
+          ..writeln()
+          ..writeln('Did you mean one of these?');
 
         for (final suggestion in suggestions) {
-          console
-            ..write('  ${registry[suggestion.$1]!.name}')
-            ..writeLine();
+          stdout.writeln('  ${registry[suggestion.$1]!.name}');
         }
       }
 
-      console.writeLine();
+      stdout.writeln();
     }
 
     if (error) {
-      console
-        ..write('Run "dart run forui style ls" to see all styles.')
-        ..writeLine();
+      stdout.writeln('Run "dart run forui style ls" to see all styles.');
     }
 
     return error;

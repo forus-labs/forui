@@ -1,14 +1,11 @@
 import 'dart:io';
 
-import 'package:dart_console/dart_console.dart';
-
 import '../../../args/command.dart';
 import '../../../configuration.dart';
 import '../style.dart';
 import 'generate.dart';
 import 'validate.dart';
 
-final console = Console();
 final registry = Style.values.asNameMap();
 
 class StyleCreateCommand extends ForuiCommand {

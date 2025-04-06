@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:args/args.dart';
@@ -6,9 +7,21 @@ import 'package:args/command_runner.dart';
 
 import 'utils.dart';
 
+/// Returns whether the terminal supports Unicode emojis (👍)
+///
+/// Assume Unicode emojis are supported when not on Windows.
+/// If we are on Windows, Unicode emojis are supported in Windows Terminal,
+/// which sets the WT_SESSION environment variable. See:
+/// https://github.com/microsoft/terminal/issues/1040
+bool get emoji => _debugEmoji ?? !Platform.isWindows || Platform.environment.containsKey('WT_SESSION');
+
+// ignore: avoid_positional_boolean_parameters
+set emoji(bool? value) => _debugEmoji = value;
+
+bool? _debugEmoji;
+
 // The majority of this file is copied from the args package.
 // We did so as they didn't support the printing of args in the usage message.
-
 mixin _Usage {
   Never usageException(String message) => throw UsageException(_wrap(message), _usageWithoutDescription);
 
