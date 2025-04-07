@@ -4,11 +4,12 @@ import '../../args/command.dart';
 import '../../configuration.dart';
 
 const content = '''
-# See https://forui.dev/docs/cli for more information.
 cli:
-  color-output: lib/theme/color.dart
-  typography-output: lib/theme/typography.dart
+  # The default file or directory to output generated widget styles.
   style-output: lib/theme
+  
+  # The default file or directory to output generated themes.
+  theme-output: lib/theme/theme.dart
 ''';
 
 class InitCommand extends ForuiCommand {

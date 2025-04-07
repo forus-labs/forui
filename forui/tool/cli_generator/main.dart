@@ -6,16 +6,12 @@ import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 
-import 'color_scheme/emit.dart';
-import 'style/emit.dart';
-import 'style/map.dart';
-import 'style/traverse.dart';
-import 'typography/emit.dart';
+import 'generate_styles.dart';
+import 'generate_themes.dart';
 
 final library = p.join(Directory.current.parent.path, 'forui', 'lib');
-final _colors = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'color', 'color.dart');
-final _styles = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'style', 'style.dart');
-final _typography = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'typography', 'typography.dart');
+final _style = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'style', 'style.dart');
+final _theme = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'theme', 'theme.dart');
 
 final emitter = DartEmitter();
 final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
@@ -38,12 +34,11 @@ Future<void> main() async {
     resourceProvider: PhysicalResourceProvider.INSTANCE,
   );
 
-  final colors = mapColors(await traverseColors(collection));
-  File(_colors).writeAsStringSync(emitColors(colors));
-
   final styles = mapStyles(await traverseStyles(collection));
-  File(_styles).writeAsStringSync(emitStyles(styles));
+  File(_style).writeAsStringSync(generateStyles(styles));
 
-  final typography = mapTypography(await traverseTypography(collection));
-  File(_typography).writeAsStringSync(emitTypography(typography));
+  final themes = mapThemes(await traverseThemes(collection));
+  File(_theme).writeAsStringSync(generateThemes(themes));
+
+  await traverseThemes(collection);
 }

@@ -4,7 +4,7 @@ import '../../../args/utils.dart';
 import 'command.dart';
 
 extension ValidateStyles on StyleCreateCommand {
-  bool validateStyles(List<String> arguments, {required bool all, required bool color}) {
+  bool validateStyles(List<String> arguments, {required bool all}) {
     if (arguments.isNotEmpty && all) {
       stdout
         ..writeln('Cannot use "[styles]" and "--all" at the same time.')

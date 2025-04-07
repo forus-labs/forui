@@ -37,19 +37,7 @@ import 'package:flutter/material.dart';
 ///   ),
 /// );
 /// ```
-///
-/// File that contains your `FThemeData`:
-/// ```dart
-/// import 'package:my_application/theme/divider_style.dart' // Your generated file.
-///
-/// FThemeData(
-///  color: FThemes.zinc.light.color,
-///  style: FThemes.zinc.light.style,
-///  dividerStyles: dividerStyles( // The function in your generated file.
-///    color: FThemes.zinc.light.color,
-///    style: FThemes.zinc.light.style,
-///   ),
-/// );
+/// dart forui theme create [theme name]
 /// ```
 /// 
 /// See https://forui.dev/docs/cli for more information.''';
@@ -100,14 +88,18 @@ import 'package:flutter/material.dart';
 /// );
 /// ```
 /// 
-/// See https://forui.dev/docs/themes#customize-themes for more information.''';
+/// A theme can be generated using the Forui CLI:
+/// ```
+/// dart forui theme create [theme name]
+/// ```
+/// 
+/// See https://forui.dev/docs/cli for more information.''';
 
 final _formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
 
 extension GenerateStyles on StyleCreateCommand {
   void generateStyles(
     List<String> arguments, {
-    required bool color,
     required bool input,
     required bool all,
     required bool force,
@@ -133,9 +125,7 @@ extension GenerateStyles on StyleCreateCommand {
 
     _generate(paths);
 
-    stdout
-      ..writeln()
-      ..writeln('See https://forui.dev/docs/themes#customize-themes for more information.');
+    stdout.writeln('See https://forui.dev/docs/themes#customize-themes for more information.');
   }
 
   void _prompt(Set<String> existing, {required bool input}) {
@@ -212,7 +202,9 @@ extension GenerateStyles on StyleCreateCommand {
         buffer.write('static ');
       }
       final style = registry[nested.toLowerCase()]!;
-      buffer.write('${style.source.substring(0, style.position)}_${style.source.substring(style.position)}\n');
+      buffer.write(
+        '${style.source.substring(0, style.type.length + 1)}_${style.source.substring(style.type.length + 1)}\n',
+      );
     }
 
     if (many) {

@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:yaml/yaml.dart';
 
 late final Directory root;
-String defaultColorOutput = 'lib/theme/color.dart';
-String defaultTypographyOutput = 'lib/theme/typography.dart';
+String defaultThemeOutput = 'lib/theme/theme.dart';
 String defaultStyleOutput = 'lib/theme';
 
 void configure() {
@@ -58,29 +57,16 @@ void _configure() {
     return;
   }
 
-  switch (cli.nodes['color-output']) {
+  switch (cli.nodes['theme-output']) {
     case null:
       break;
 
     case YamlScalar(:final value) when value is String:
-      defaultStyleOutput = value;
+      defaultThemeOutput = value;
 
     case final node:
       throw FormatException(
-        'Could not read forui.$extension.\n\n${node.span.message('"color-output" must be a string.')}',
-      );
-  }
-
-  switch (cli.nodes['typography-output']) {
-    case null:
-      break;
-
-    case YamlScalar(:final value) when value is String:
-      defaultTypographyOutput = value;
-
-    case final node:
-      throw FormatException(
-        'Could not read forui.$extension.\n\n${node.span.message('"typography-output" must be a string.')}',
+        'Could not read forui.$extension.\n\n${node.span.message('"theme-output" must be a string.')}',
       );
   }
 

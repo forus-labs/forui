@@ -35,22 +35,21 @@ class StyleCreateCommand extends ForuiCommand {
 
   @override
   void run() {
-    final color = globalResults!.flag('color');
     final input = !globalResults!.flag('no-input');
     final all = argResults!.flag('all');
     final force = argResults!.flag('force');
     final output = argResults!['output'] as String;
     final arguments = argResults!.rest;
 
-    if (argResults!.rest.isEmpty && !all) {
+    if (arguments.isEmpty && !all) {
       printUsage();
       return;
     }
 
-    if (validateStyles(arguments, color: color, all: all)) {
+    if (validateStyles(arguments, all: all)) {
       exit(1);
     }
 
-    generateStyles(arguments, color: color, input: input, all: all, force: force, output: output);
+    generateStyles(arguments, input: input, all: all, force: force, output: output);
   }
 }

@@ -5,10 +5,9 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 
 import 'args/command.dart';
-import 'commands/color/command.dart';
 import 'commands/init/command.dart';
 import 'commands/style/command.dart';
-import 'commands/typography/command.dart';
+import 'commands/theme/command.dart';
 import 'configuration.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -16,10 +15,9 @@ Future<void> main(List<String> arguments) async {
 
   final runner =
       ForuiCommandRunner('forui', 'Manage your Forui development environment.')
-        ..addCommand(ColorCommand())
         ..addCommand(InitCommand())
         ..addCommand(StyleCommand())
-        ..addCommand(TypographyCommand());
+        ..addCommand(ThemeCommand());
 
   try {
     await runner.run(arguments);
