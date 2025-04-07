@@ -91,10 +91,10 @@ final class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
   });
 
   /// Creates a [FCardStyle] that inherits its properties.
-  FAvatarStyle.inherit({required FColors colors, required FTypography text})
+  FAvatarStyle.inherit({required FColors colors, required FTypography typography})
     : this(
         backgroundColor: colors.muted,
         foregroundColor: colors.mutedForeground,
-        textStyle: text.base.copyWith(color: colors.mutedForeground, height: 0),
+        textStyle: typography.base.copyWith(color: colors.mutedForeground, height: 0),
       );
 }

@@ -103,11 +103,14 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   });
 
   /// Creates a [FSelectSectionStyle] that inherits from the given [FColors], [FStyle], and [FTypography].
-  FSelectSectionStyle.inherit({required FColors colors, required FStyle style, required FTypography text})
+  FSelectSectionStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        enabledLabelTextStyle: text.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-        disabledLabelTextStyle: text.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w600),
-        itemStyle: FSelectItemStyle.inherit(colors: colors, style: style, text: text),
+        enabledLabelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        disabledLabelTextStyle: typography.sm.copyWith(
+          color: colors.disable(colors.primary),
+          fontWeight: FontWeight.w600,
+        ),
+        itemStyle: FSelectItemStyle.inherit(colors: colors, style: style, typography: typography),
       );
 }
 
@@ -140,7 +143,7 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     super.key,
   });
 
-  /// Creates a [FSelectItem] that displays the [value] as the a text.
+  /// Creates a [FSelectItem] that displays the [value] as the a typography.
   static FSelectItem<String> text(String value, {bool? enabled}) =>
       FSelectItem(value: value, enabled: enabled, child: Text(value));
 
@@ -276,11 +279,11 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   });
 
   /// Creates a [FSelectItemStyle] that inherits its properties.
-  FSelectItemStyle.inherit({required FColors colors, required FStyle style, required FTypography text})
+  FSelectItemStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
         enabledHoveredDecoration: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
-        enabledTextStyle: text.sm.copyWith(color: colors.primary),
-        disabledTextStyle: text.sm.copyWith(color: colors.disable(colors.primary)),
+        enabledTextStyle: typography.sm.copyWith(color: colors.primary),
+        disabledTextStyle: typography.sm.copyWith(color: colors.disable(colors.primary)),
         enabledIconStyle: IconThemeData(color: colors.primary, size: 15),
         disabledIconStyle: IconThemeData(color: colors.disable(colors.primary), size: 15),
         tappableStyle: FTappableStyle(animationTween: FTappableAnimations.none),

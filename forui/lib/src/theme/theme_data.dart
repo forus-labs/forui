@@ -148,7 +148,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     required FColors colors,
     String? debugLabel,
     FBreakpoints breakpoints = const FBreakpoints(),
-    FTypography? text,
+    FTypography? typography,
     FStyle? style,
     FAccordionStyle? accordionStyle,
     FAlertStyles? alertStyles,
@@ -188,52 +188,52 @@ final class FThemeData with Diagnosticable, FTransformable {
     FTimePickerStyle? timePickerStyle,
     FTooltipStyle? tooltipStyle,
   }) {
-    text = text ?? FTypography.inherit(colors: colors);
-    style = style ?? FStyle.inherit(colors: colors, text: text);
+    typography = typography ?? FTypography.inherit(colors: colors);
+    style = style ?? FStyle.inherit(colors: colors, typography: typography);
     return FThemeData._(
       debugLabel: debugLabel,
       breakpoints: breakpoints,
       colors: colors,
-      typography: text,
+      typography: typography,
       style: style,
-      accordionStyle: accordionStyle ?? FAccordionStyle.inherit(colors: colors, text: text, style: style),
-      alertStyles: alertStyles ?? FAlertStyles.inherit(colors: colors, text: text, style: style),
-      avatarStyle: avatarStyle ?? FAvatarStyle.inherit(colors: colors, text: text),
-      badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colors: colors, text: text, style: style),
+      accordionStyle: accordionStyle ?? FAccordionStyle.inherit(colors: colors, typography: typography, style: style),
+      alertStyles: alertStyles ?? FAlertStyles.inherit(colors: colors, typography: typography, style: style),
+      avatarStyle: avatarStyle ?? FAvatarStyle.inherit(colors: colors, typography: typography),
+      badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colors: colors, typography: typography, style: style),
       bottomNavigationBarStyle:
-          bottomNavigationBarStyle ?? FBottomNavigationBarStyle.inherit(colors: colors, text: text, style: style),
-      breadcrumbStyle: breadcrumbStyle ?? FBreadcrumbStyle.inherit(colors: colors, text: text, style: style),
-      buttonStyles: buttonStyles ?? FButtonStyles.inherit(colors: colors, text: text, style: style),
-      calendarStyle: calendarStyle ?? FCalendarStyle.inherit(colors: colors, text: text, style: style),
-      cardStyle: cardStyle ?? FCardStyle.inherit(colors: colors, text: text, style: style),
+          bottomNavigationBarStyle ?? FBottomNavigationBarStyle.inherit(colors: colors, typography: typography, style: style),
+      breadcrumbStyle: breadcrumbStyle ?? FBreadcrumbStyle.inherit(colors: colors, typography: typography, style: style),
+      buttonStyles: buttonStyles ?? FButtonStyles.inherit(colors: colors, typography: typography, style: style),
+      calendarStyle: calendarStyle ?? FCalendarStyle.inherit(colors: colors, typography: typography, style: style),
+      cardStyle: cardStyle ?? FCardStyle.inherit(colors: colors, typography: typography, style: style),
       checkboxStyle: checkboxStyle ?? FCheckboxStyle.inherit(colors: colors, style: style),
-      dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, text: text, style: style),
-      dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, text: text, style: style),
+      dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, typography: typography, style: style),
+      dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
-      headerStyle: headerStyle ?? FHeaderStyles.inherit(colors: colors, text: text, style: style),
+      headerStyle: headerStyle ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
-      lineCalendarStyle: lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, text: text, style: style),
-      paginationStyle: paginationStyle ?? FPaginationStyle.inherit(colors: colors, text: text, style: style),
-      pickerStyle: pickerStyle ?? FPickerStyle.inherit(colors: colors, style: style, text: text),
+      lineCalendarStyle: lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
+      paginationStyle: paginationStyle ?? FPaginationStyle.inherit(colors: colors, typography: typography, style: style),
+      pickerStyle: pickerStyle ?? FPickerStyle.inherit(colors: colors, style: style, typography: typography),
       popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colors: colors, style: style),
-      popoverMenuStyle: popoverMenuStyle ?? FPopoverMenuStyle.inherit(colors: colors, style: style, text: text),
+      popoverMenuStyle: popoverMenuStyle ?? FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
       progressStyles: progressStyles ?? FProgressStyles.inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? FRadioStyle.inherit(colors: colors, style: style),
       resizableStyle: resizableStyle ?? FResizableStyle.inherit(colors: colors, style: style),
       scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colors: colors, style: style),
-      selectStyle: selectStyle ?? FSelectStyle.inherit(colors: colors, text: text, style: style),
-      selectGroupStyle: selectGroupStyle ?? FSelectGroupStyle.inherit(colors: colors, text: text, style: style),
-      selectMenuTileStyle: selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(colors: colors, text: text, style: style),
+      selectStyle: selectStyle ?? FSelectStyle.inherit(colors: colors, typography: typography, style: style),
+      selectGroupStyle: selectGroupStyle ?? FSelectGroupStyle.inherit(colors: colors, typography: typography, style: style),
+      selectMenuTileStyle: selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(colors: colors, typography: typography, style: style),
       sheetStyle: sheetStyle ?? FSheetStyle.inherit(colors: colors),
-      sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, text: text, style: style),
+      sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
       switchStyle: switchStyle ?? FSwitchStyle.inherit(colors: colors, style: style),
-      tabsStyle: tabsStyle ?? FTabsStyle.inherit(colors: colors, text: text, style: style),
+      tabsStyle: tabsStyle ?? FTabsStyle.inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
-      textFieldStyle: textFieldStyle ?? FTextFieldStyle.inherit(colors: colors, text: text, style: style),
-      tileGroupStyle: tileGroupStyle ?? FTileGroupStyle.inherit(colors: colors, text: text, style: style),
-      timeFieldStyle: timeFieldStyle ?? FTimeFieldStyle.inherit(colors: colors, text: text, style: style),
-      timePickerStyle: timePickerStyle ?? FTimePickerStyle.inherit(colors: colors, text: text, style: style),
-      tooltipStyle: tooltipStyle ?? FTooltipStyle.inherit(colors: colors, text: text, style: style),
+      textFieldStyle: textFieldStyle ?? FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
+      tileGroupStyle: tileGroupStyle ?? FTileGroupStyle.inherit(colors: colors, typography: typography, style: style),
+      timeFieldStyle: timeFieldStyle ?? FTimeFieldStyle.inherit(colors: colors, typography: typography, style: style),
+      timePickerStyle: timePickerStyle ?? FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
+      tooltipStyle: tooltipStyle ?? FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
     );
   }
 
@@ -677,11 +677,11 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// @override
   /// Widget build(BuildContext context) {
   ///   final theme = FThemeData(
-  ///     color: FThemes.zinc.light.color.copyWith(
+  ///     color: FThemes.zinc.light.colors.copyWith(
   ///       primary: const Color(0xFF0D47A1), // dark blue
   ///       primaryForeground: const Color(0xFFFFFFFF), // white
   ///     ),
-  ///     text: FThemes.zinc.light.text.copyWith(
+  ///     text: FThemes.zinc.light.typography.copyWith(
   ///       defaultFontFamily: 'Roboto',
   ///     ).scale(sizeScalar: 0.8),
   ///     style: FThemes.zinc.light.style.copyWith(
@@ -743,7 +743,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FTooltipStyle? tooltipStyle,
   }) => FThemeData(
     colors: colors,
-    text: typography,
+    typography: typography,
     style: style,
     accordionStyle: accordionStyle ?? this.accordionStyle,
     alertStyles: alertStyles ?? this.alertStyles,

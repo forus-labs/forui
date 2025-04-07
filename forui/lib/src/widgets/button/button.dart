@@ -220,7 +220,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   /// Creates a [FButtonStyle] that inherits its properties from the given arguments.
   FButtonStyle.inherit({
     required FColors colors,
-    required FTypography text,
+    required FTypography typography,
     required FStyle style,
     required Color background,
     required Color foreground,
@@ -230,7 +230,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
          disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(background)),
          focusedOutlineStyle: style.focusedOutlineStyle,
          contentStyle: FButtonContentStyle.inherit(
-           text: text,
+           typography: typography,
            enabled: foreground,
            disabled: colors.disable(foreground, colors.disable(background)),
          ),

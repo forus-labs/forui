@@ -334,11 +334,11 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
-  FBreadcrumbStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FBreadcrumbStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        selectedTextStyle: text.sm.copyWith(fontWeight: FontWeight.w400, color: colors.foreground),
-        unselectedTextStyle: text.sm.copyWith(fontWeight: FontWeight.w400, color: colors.mutedForeground),
-        hoveredTextStyle: text.sm.copyWith(
+        selectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.foreground),
+        unselectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.mutedForeground),
+        hoveredTextStyle: typography.sm.copyWith(
           fontWeight: FontWeight.w400,
           color: colors.primary,
           decoration: TextDecoration.underline,

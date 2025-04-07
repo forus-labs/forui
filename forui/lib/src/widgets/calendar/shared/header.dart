@@ -201,7 +201,7 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
     required FStyle style,
   }) : this(
          focusedOutlineStyle: style.focusedOutlineStyle,
-         buttonStyle: FButtonStyles.inherit(colors: colors, text: typography, style: style).outline.transform(
+         buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.transform(
            (style) => style.copyWith(
              iconContentStyle: style.iconContentStyle.copyWith(
                enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),

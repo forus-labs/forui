@@ -21,7 +21,7 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   FSliderStyles({required this.horizontalStyle, required this.verticalStyle});
 
   /// Creates a [FSliderStyles] that inherits its properties from the given [FColors].
-  factory FSliderStyles.inherit({required FColors colors, required FTypography text, required FStyle style}) {
+  factory FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final enabledHorizontalStyle = FSliderStateStyle(
       labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
@@ -29,11 +29,11 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
       inactiveColor: colors.secondary,
       markStyle: FSliderMarkStyle(
         tickColor: colors.mutedForeground,
-        labelTextStyle: text.xs.copyWith(color: colors.mutedForeground),
+        labelTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
-      tooltipStyle: FTooltipStyle.inherit(colors: colors, text: text, style: style),
+      tooltipStyle: FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
         color: colors.primaryForeground,
         borderColor: colors.primary,
@@ -48,11 +48,11 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
       inactiveColor: colors.secondary,
       markStyle: FSliderMarkStyle(
         tickColor: colors.mutedForeground,
-        labelTextStyle: text.xs.copyWith(color: colors.mutedForeground),
+        labelTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
-      tooltipStyle: FTooltipStyle.inherit(colors: colors, text: text, style: style),
+      tooltipStyle: FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
         color: colors.primaryForeground,
         borderColor: colors.disable(colors.primary),
@@ -68,11 +68,11 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
       inactiveColor: colors.secondary,
       markStyle: FSliderMarkStyle(
         tickColor: colors.mutedForeground,
-        labelTextStyle: text.xs.copyWith(color: colors.error),
+        labelTextStyle: typography.xs.copyWith(color: colors.error),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
-      tooltipStyle: FTooltipStyle.inherit(colors: colors, text: text, style: style),
+      tooltipStyle: FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
       thumbStyle: FSliderThumbStyle(
         color: colors.errorForeground,
         borderColor: colors.error,

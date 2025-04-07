@@ -71,23 +71,23 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
   });
 
   /// Creates an [FStyle] that inherits its properties from the given [FColors] and [FTypography].
-  FStyle.inherit({required FColors colors, required FTypography text})
+  FStyle.inherit({required FColors colors, required FTypography typography})
     : this(
         enabledFormFieldStyle: FFormFieldStyle.inherit(
           labelColor: colors.primary,
           descriptionColor: colors.mutedForeground,
-          text: text,
+          typography: typography,
         ),
         disabledFormFieldStyle: FFormFieldStyle.inherit(
           labelColor: colors.disable(colors.primary),
           descriptionColor: colors.disable(colors.mutedForeground),
-          text: text,
+          typography: typography,
         ),
         errorFormFieldStyle: FFormFieldErrorStyle.inherit(
           labelColor: colors.error,
           descriptionColor: colors.mutedForeground,
           errorColor: colors.error,
-          text: text,
+          typography: typography,
         ),
         focusedOutlineStyle: FFocusedOutlineStyle(
           color: colors.primary,

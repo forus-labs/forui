@@ -51,10 +51,10 @@ class TestScaffold extends StatelessWidget {
       errorForeground: Color(0xFF03A9F4),
       border: Color(0xFF03A9F4),
     );
-    final text = FTypography.inherit(colors: colors);
-    final style = FStyle.inherit(colors: colors, text: text).copyWith(shadow: []);
+    final typography = FTypography.inherit(colors: colors);
+    final style = FStyle.inherit(colors: colors, typography: typography).copyWith(shadow: []);
 
-    return FThemeData(colors: colors, text: text, style: style);
+    return FThemeData(colors: colors, typography: typography, style: style);
   }();
 
   static List<({String name, FThemeData data})> get themes => [

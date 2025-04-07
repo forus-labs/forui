@@ -219,9 +219,9 @@ class FSelectContentStyle with Diagnosticable, _$FSelectContentStyleFunctions {
   });
 
   /// Creates a [FSelectContentStyle] that inherits from the given [FColors], [FStyle], and [FTypography].
-  FSelectContentStyle.inherit({required FColors colors, required FStyle style, required FTypography text})
+  FSelectContentStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        sectionStyle: FSelectSectionStyle.inherit(colors: colors, style: style, text: text),
+        sectionStyle: FSelectSectionStyle.inherit(colors: colors, style: style, typography: typography),
         scrollHandleStyle: FSelectScrollHandleStyle.inherit(colors: colors),
       );
 }

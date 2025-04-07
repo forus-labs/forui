@@ -111,12 +111,12 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   const FAlertStyles({required this.primary, required this.destructive});
 
   /// Creates a [FAlertStyles] that inherits its properties.
-  FAlertStyles.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         primary: FAlertStyle(
           iconStyle: IconThemeData(color: colors.foreground, size: 20),
-          titleTextStyle: text.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground, height: 1.2),
-          subtitleTextStyle: text.sm.copyWith(color: colors.foreground),
+          titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground, height: 1.2),
+          subtitleTextStyle: typography.sm.copyWith(color: colors.foreground),
           decoration: BoxDecoration(
             border: Border.all(color: colors.border),
             borderRadius: style.borderRadius,
@@ -125,8 +125,8 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
         ),
         destructive: FAlertStyle(
           iconStyle: IconThemeData(color: colors.destructive, size: 20),
-          titleTextStyle: text.base.copyWith(fontWeight: FontWeight.w500, color: colors.destructive, height: 1.2),
-          subtitleTextStyle: text.sm.copyWith(color: colors.destructive),
+          titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.destructive, height: 1.2),
+          subtitleTextStyle: typography.sm.copyWith(color: colors.destructive),
           decoration: BoxDecoration(
             border: Border.all(color: colors.destructive),
             borderRadius: style.borderRadius,

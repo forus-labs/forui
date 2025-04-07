@@ -90,11 +90,11 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
 
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColors] and
   /// [FTypography].
-  FBottomNavigationBarItemStyle.inherit({required FColors colors, required FTypography text})
+  FBottomNavigationBarItemStyle.inherit({required FColors colors, required FTypography typography})
     : this(
         selectedIconStyle: IconThemeData(color: colors.primary, size: 24),
         unselectedIconStyle: IconThemeData(color: colors.disable(colors.foreground), size: 24),
-        selectedTextStyle: text.base.copyWith(color: colors.primary, fontSize: 10),
-        unselectedTextStyle: text.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
+        selectedTextStyle: typography.base.copyWith(color: colors.primary, fontSize: 10),
+        unselectedTextStyle: typography.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
       );
 }

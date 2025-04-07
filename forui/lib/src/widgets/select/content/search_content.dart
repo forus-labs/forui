@@ -269,9 +269,9 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   });
 
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
-  FSelectSearchStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(colors: colors, text: text, style: style).transform(
+        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style).transform(
           (style) => style.copyWith(
             enabledStyle: style.enabledStyle.copyWith(
               focusedStyle: style.enabledStyle.focusedStyle.copyWith(color: Colors.transparent, width: 0),

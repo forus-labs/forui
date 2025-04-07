@@ -39,26 +39,26 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
   });
 
   /// Creates a [FButtonStyle] that inherits its properties.
-  FButtonStyles.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         primary: FButtonStyle.inherit(
           colors: colors,
           style: style,
-          text: text,
+          typography: typography,
           background: colors.primary,
           foreground: colors.primaryForeground,
         ),
         secondary: FButtonStyle.inherit(
           colors: colors,
           style: style,
-          text: text,
+          typography: typography,
           background: colors.secondary,
           foreground: colors.secondaryForeground,
         ),
         destructive: FButtonStyle.inherit(
           colors: colors,
           style: style,
-          text: text,
+          typography: typography,
           background: colors.destructive,
           foreground: colors.destructiveForeground,
         ),
@@ -78,7 +78,7 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
           ),
           focusedOutlineStyle: style.focusedOutlineStyle,
           contentStyle: FButtonContentStyle.inherit(
-            text: text,
+            typography: typography,
             enabled: colors.secondaryForeground,
             disabled: colors.disable(colors.secondaryForeground),
           ),
@@ -94,7 +94,7 @@ final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
           disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius),
           focusedOutlineStyle: style.focusedOutlineStyle,
           contentStyle: FButtonContentStyle.inherit(
-            text: text,
+            typography: typography,
             enabled: colors.secondaryForeground,
             disabled: colors.disable(colors.secondaryForeground),
           ),

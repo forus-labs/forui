@@ -209,7 +209,7 @@ class FSelectGroupStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
   });
 
   /// Creates a [FSelectGroupStyle] that inherits its properties from the given parameters.
-  factory FSelectGroupStyle.inherit({required FColors colors, required FTypography text, required FStyle style}) =>
+  factory FSelectGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
       FSelectGroupStyle(
         labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
         enabledStyle: FSelectGroupStateStyle(
@@ -229,17 +229,17 @@ class FSelectGroupStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
           style: FCheckboxStyle.inherit(colors: colors, style: style).transform(
             (style) => style.copyWith(
               enabledStyle: style.enabledStyle.copyWith(
-                labelTextStyle: text.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
-                descriptionTextStyle: text.sm.copyWith(color: colors.mutedForeground),
+                labelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+                descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
               ),
               disabledStyle: style.disabledStyle.copyWith(
-                labelTextStyle: text.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
-                descriptionTextStyle: text.sm.copyWith(color: colors.disable(colors.mutedForeground)),
+                labelTextStyle: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
+                descriptionTextStyle: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
               ),
               errorStyle: style.errorStyle.copyWith(
-                labelTextStyle: text.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
-                descriptionTextStyle: text.sm.copyWith(color: colors.mutedForeground),
-                errorTextStyle: text.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500),
+                labelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+                descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
+                errorTextStyle: typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500),
               ),
             ),
           ),
@@ -248,17 +248,17 @@ class FSelectGroupStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
           style: FRadioStyle.inherit(colors: colors, style: style).transform(
             (style) => style.copyWith(
               enabledStyle: style.enabledStyle.copyWith(
-                labelTextStyle: text.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
-                descriptionTextStyle: text.sm.copyWith(color: colors.mutedForeground),
+                labelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+                descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
               ),
               disabledStyle: style.disabledStyle.copyWith(
-                labelTextStyle: text.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
-                descriptionTextStyle: text.sm.copyWith(color: colors.disable(colors.mutedForeground)),
+                labelTextStyle: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
+                descriptionTextStyle: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
               ),
               errorStyle: style.errorStyle.copyWith(
-                labelTextStyle: text.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
-                descriptionTextStyle: text.sm.copyWith(color: colors.mutedForeground),
-                errorTextStyle: text.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500),
+                labelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+                descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
+                errorTextStyle: typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500),
               ),
             ),
           ),

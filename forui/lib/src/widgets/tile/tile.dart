@@ -329,7 +329,7 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   });
 
   /// Creates a [FTileStyle] that inherits its properties.
-  FTileStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         border: Border.all(width: style.borderWidth, color: colors.border),
         focusedBorder: Border.all(width: style.borderWidth, color: colors.primary),
@@ -343,6 +343,6 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
           touchHoverEnterDuration: Duration.zero,
           touchHoverExitDuration: const Duration(milliseconds: 25),
         ),
-        contentStyle: FTileContentStyle.inherit(colors: colors, text: text),
+        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
       );
 }

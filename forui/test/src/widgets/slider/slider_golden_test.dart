@@ -37,7 +37,7 @@ void main() {
               FTouch.primary = touch;
               final styles = FSliderStyles.inherit(
                 colors: theme.data.colors,
-                text: theme.data.typography,
+                typography: theme.data.typography,
                 style: theme.data.style,
               );
 
@@ -86,7 +86,7 @@ void main() {
             FTouch.primary = touch;
             final styles = FSliderStyles.inherit(
               colors: theme.data.colors,
-              text: theme.data.typography,
+              typography: theme.data.typography,
               style: theme.data.style,
             );
 
@@ -127,7 +127,7 @@ void main() {
             FTouch.primary = touch;
             final styles = FSliderStyles.inherit(
               colors: theme.data.colors,
-              text: theme.data.typography,
+              typography: theme.data.typography,
               style: theme.data.style,
             );
 

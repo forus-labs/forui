@@ -29,18 +29,18 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
   FBadgeStyles({required this.primary, required this.secondary, required this.outline, required this.destructive});
 
   /// Creates a [FBadgeStyles] that inherits its properties.
-  FBadgeStyles.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         primary: FBadgeStyle(
           decoration: BoxDecoration(color: colors.primary, borderRadius: const BorderRadius.all(Radius.circular(100))),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: text.sm.copyWith(color: colors.primaryForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: FontWeight.w600),
           ),
         ),
         secondary: FBadgeStyle(
           decoration: BoxDecoration(color: colors.secondary, borderRadius: const BorderRadius.all(Radius.circular(100))),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: text.sm.copyWith(color: colors.secondaryForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.secondaryForeground, fontWeight: FontWeight.w600),
           ),
         ),
         outline: FBadgeStyle(
@@ -49,7 +49,7 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
             borderRadius: const BorderRadius.all(Radius.circular(100)),
           ),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: text.sm.copyWith(color: colors.foreground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: FontWeight.w600),
           ),
         ),
         destructive: FBadgeStyle(
@@ -58,7 +58,7 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
             borderRadius: const BorderRadius.all(Radius.circular(100)),
           ),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: text.sm.copyWith(color: colors.destructiveForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.destructiveForeground, fontWeight: FontWeight.w600),
           ),
         ),
       );

@@ -87,11 +87,11 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  FTextFieldStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FTextFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         keyboardAppearance: colors.brightness,
         labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
-        clearButtonStyle: FButtonStyles.inherit(colors: colors, text: text, style: style).ghost.transform(
+        clearButtonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost.transform(
           (ghost) => ghost.copyWith(
             iconContentStyle: ghost.iconContentStyle.copyWith(
               enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),
@@ -104,7 +104,7 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
           focusedBorderColor: colors.primary,
           unfocusedBorderColor: colors.border,
           formFieldStyle: style.enabledFormFieldStyle,
-          text: text,
+          typography: typography,
           style: style,
         ),
         disabledStyle: FTextFieldStateStyle.inherit(
@@ -113,7 +113,7 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
           focusedBorderColor: colors.disable(colors.border),
           unfocusedBorderColor: colors.disable(colors.border),
           formFieldStyle: style.disabledFormFieldStyle,
-          text: text,
+          typography: typography,
           style: style,
         ),
         errorStyle: FTextFieldErrorStyle.inherit(
@@ -122,7 +122,7 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
           focusedBorderColor: colors.error,
           unfocusedBorderColor: colors.error,
           formFieldErrorStyle: style.errorFormFieldStyle,
-          text: text,
+          typography: typography,
           style: style,
         ),
       );

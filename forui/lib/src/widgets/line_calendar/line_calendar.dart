@@ -177,17 +177,29 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
   });
 
   /// Creates a [FLineCalendarStyle] that inherits its properties.
-  factory FLineCalendarStyle.inherit({required FColors colors, required FTypography text, required FStyle style}) {
+  factory FLineCalendarStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
     final focused = BoxDecoration(
       border: Border.all(color: colors.primary, width: style.borderWidth),
       borderRadius: style.borderRadius,
     );
 
-    final selectedDate = text.xl.copyWith(color: colors.primaryForeground, fontWeight: FontWeight.w500, height: 0);
-    final selectedWeekday = text.xs.copyWith(color: colors.primaryForeground, fontWeight: FontWeight.w500, height: 0);
+    final selectedDate = typography.xl.copyWith(
+      color: colors.primaryForeground,
+      fontWeight: FontWeight.w500,
+      height: 0,
+    );
+    final selectedWeekday = typography.xs.copyWith(
+      color: colors.primaryForeground,
+      fontWeight: FontWeight.w500,
+      height: 0,
+    );
 
-    final date = text.xl.copyWith(color: colors.primary, fontWeight: FontWeight.w500, height: 0);
-    final weekday = text.xs.copyWith(color: colors.mutedForeground, fontWeight: FontWeight.w500, height: 0);
+    final date = typography.xl.copyWith(color: colors.primary, fontWeight: FontWeight.w500, height: 0);
+    final weekday = typography.xs.copyWith(color: colors.mutedForeground, fontWeight: FontWeight.w500, height: 0);
 
     return FLineCalendarStyle(
       selectedItemStyle: FLineCalendarItemStyle(

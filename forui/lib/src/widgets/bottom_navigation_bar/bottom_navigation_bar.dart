@@ -142,11 +142,11 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   });
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties.
-  FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(border: Border(top: BorderSide(color: colors.border)), color: colors.background),
         focusedOutlineStyle: style.focusedOutlineStyle,
-        itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, text: text),
+        itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle,
       );
 }

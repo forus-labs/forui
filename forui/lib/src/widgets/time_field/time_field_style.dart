@@ -39,11 +39,11 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
   });
 
   /// Creates a [FTimeFieldStyle] that inherits its properties.
-  FTimeFieldStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
+  FTimeFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(colors: colors, text: text, style: style),
+        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
         popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
-        pickerStyle: FTimePickerStyle.inherit(colors: colors, text: text, style: style),
+        pickerStyle: FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
       );
 }
