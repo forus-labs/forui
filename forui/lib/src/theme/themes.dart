@@ -9,7 +9,7 @@ extension FThemes on Never {
   static final zinc = (
     light: FThemeData(
       debugLabel: 'Zinc Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -29,7 +29,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Zinc Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF09090B),
@@ -53,7 +53,7 @@ extension FThemes on Never {
   static final slate = (
     light: FThemeData(
       debugLabel: 'Slate Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -73,7 +73,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Slate Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF020817),
@@ -97,7 +97,7 @@ extension FThemes on Never {
   static final red = (
     light: FThemeData(
       debugLabel: 'Red Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -117,7 +117,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Red Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF0A0A0A),
@@ -141,7 +141,7 @@ extension FThemes on Never {
   static final rose = (
     light: FThemeData(
       debugLabel: 'Rose Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -161,7 +161,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Rose Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
@@ -185,7 +185,7 @@ extension FThemes on Never {
   static final orange = (
     light: FThemeData(
       debugLabel: 'Orange Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -205,7 +205,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Orange Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
@@ -229,7 +229,7 @@ extension FThemes on Never {
   static final green = (
     light: FThemeData(
       debugLabel: 'Green Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -249,7 +249,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Green Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
@@ -273,7 +273,7 @@ extension FThemes on Never {
   static final blue = (
     light: FThemeData(
       debugLabel: 'Blue Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -293,7 +293,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Blue Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF020817),
@@ -317,7 +317,7 @@ extension FThemes on Never {
   static final yellow = (
     light: FThemeData(
       debugLabel: 'Yellow Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -337,7 +337,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Yellow Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
@@ -361,7 +361,7 @@ extension FThemes on Never {
   static final violet = (
     light: FThemeData(
       debugLabel: 'Violet Light ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.light,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
@@ -381,7 +381,7 @@ extension FThemes on Never {
     ),
     dark: FThemeData(
       debugLabel: 'Violet Dark ThemeData',
-      color: const FColorScheme(
+      colors: const FColors(
         brightness: Brightness.dark,
         barrier: Color(0x7A000000),
         background: Color(0xFF030712),

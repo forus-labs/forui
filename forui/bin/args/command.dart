@@ -20,6 +20,9 @@ set emoji(bool? value) => _debugEmoji = value;
 
 bool? _debugEmoji;
 
+bool _color() =>
+    stdout.hasTerminal && !Platform.environment.containsKey('NO_COLOR') && Platform.environment['TERM'] != 'dumb';
+
 // The majority of this file is copied from the args package.
 // We did so as they didn't support the printing of args in the usage message.
 mixin _Usage {
@@ -40,7 +43,11 @@ mixin _Usage {
 /// A runner that additionally supports:
 /// * Usage information with aliases
 class ForuiCommandRunner<T> extends CommandRunner<T> with _Usage {
-  ForuiCommandRunner(super.executableName, super.description);
+  ForuiCommandRunner(super.executableName, super.description) {
+    argParser
+      ..addFlag('color', help: 'Use terminal colors.', defaultsTo: _color())
+      ..addFlag('no-input', help: 'Disable interactive prompts and assume default values.', negatable: false);
+  }
 
   @override
   String get _usageWithoutDescription {

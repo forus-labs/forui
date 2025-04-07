@@ -88,13 +88,13 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
     this.spacing = 2,
   });
 
-  /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColorScheme] and
+  /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColors] and
   /// [FTypography].
-  FBottomNavigationBarItemStyle.inherit({required FColorScheme color, required FTypography text})
+  FBottomNavigationBarItemStyle.inherit({required FColors colors, required FTypography text})
     : this(
-        selectedIconStyle: IconThemeData(color: color.primary, size: 24),
-        unselectedIconStyle: IconThemeData(color: color.disable(color.foreground), size: 24),
-        selectedTextStyle: text.base.copyWith(color: color.primary, fontSize: 10),
-        unselectedTextStyle: text.base.copyWith(color: color.disable(color.foreground), fontSize: 10),
+        selectedIconStyle: IconThemeData(color: colors.primary, size: 24),
+        unselectedIconStyle: IconThemeData(color: colors.disable(colors.foreground), size: 24),
+        selectedTextStyle: text.base.copyWith(color: colors.primary, fontSize: 10),
+        unselectedTextStyle: text.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
       );
 }

@@ -52,8 +52,8 @@ void main() {
                                         height: double.infinity,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: context.theme.color.primary),
-                                          color: context.theme.color.background,
+                                          border: Border.all(color: context.theme.colors.primary),
+                                          color: context.theme.colors.background,
                                         ),
                                         child: const Center(child: Text('sheet')),
                                       ),

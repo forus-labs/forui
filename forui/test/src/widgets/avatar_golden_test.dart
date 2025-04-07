@@ -41,7 +41,7 @@ void main() {
             child: FAvatar.raw(
               child: Padding(
                 padding: const EdgeInsets.all(10),
-                child: Icon(FIcons.baby, color: theme.data.color.mutedForeground, size: 20),
+                child: Icon(FIcons.baby, color: theme.data.colors.mutedForeground, size: 20),
               ),
             ),
           ),

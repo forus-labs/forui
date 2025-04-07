@@ -428,12 +428,12 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  FTileGroupStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  FTileGroupStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
-        borderColor: color.border,
+        borderColor: colors.border,
         borderWidth: style.borderWidth,
         borderRadius: style.borderRadius,
-        tileStyle: FTileStyle.inherit(color: color, text: text, style: style),
+        tileStyle: FTileStyle.inherit(colors: colors, text: text, style: style),
         enabledStyle: FFormFieldStyle(
           labelTextStyle: text.base.copyWith(
             color: style.enabledFormFieldStyle.labelTextStyle.color,

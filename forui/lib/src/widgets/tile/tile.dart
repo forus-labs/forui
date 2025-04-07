@@ -329,20 +329,20 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   });
 
   /// Creates a [FTileStyle] that inherits its properties.
-  FTileStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  FTileStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
-        border: Border.all(width: style.borderWidth, color: color.border),
-        focusedBorder: Border.all(width: style.borderWidth, color: color.primary),
+        border: Border.all(width: style.borderWidth, color: colors.border),
+        focusedBorder: Border.all(width: style.borderWidth, color: colors.primary),
         borderRadius: style.borderRadius,
-        enabledBackgroundColor: color.background,
-        enabledHoveredBackgroundColor: color.secondary,
-        disabledBackgroundColor: color.disable(color.secondary),
-        dividerStyle: FDividerStyle(color: color.border, width: style.borderWidth, padding: EdgeInsets.zero),
-        focusedDividerStyle: FDividerStyle(color: color.primary, width: style.borderWidth, padding: EdgeInsets.zero),
+        enabledBackgroundColor: colors.background,
+        enabledHoveredBackgroundColor: colors.secondary,
+        disabledBackgroundColor: colors.disable(colors.secondary),
+        dividerStyle: FDividerStyle(color: colors.border, width: style.borderWidth, padding: EdgeInsets.zero),
+        focusedDividerStyle: FDividerStyle(color: colors.primary, width: style.borderWidth, padding: EdgeInsets.zero),
         tappableStyle: style.tappableStyle.copyWith(
           touchHoverEnterDuration: Duration.zero,
           touchHoverExitDuration: const Duration(milliseconds: 25),
         ),
-        contentStyle: FTileContentStyle.inherit(color: color, text: text),
+        contentStyle: FTileContentStyle.inherit(colors: colors, text: text),
       );
 }

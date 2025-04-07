@@ -36,8 +36,8 @@ void main() {
             testWidgets('${theme.name} - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
               FTouch.primary = touch;
               final styles = FSliderStyles.inherit(
-                color: theme.data.color,
-                text: theme.data.text,
+                colors: theme.data.colors,
+                text: theme.data.typography,
                 style: theme.data.style,
               );
 
@@ -85,8 +85,8 @@ void main() {
           testWidgets('${theme.name} - $layout - focused', (tester) async {
             FTouch.primary = touch;
             final styles = FSliderStyles.inherit(
-              color: theme.data.color,
-              text: theme.data.text,
+              colors: theme.data.colors,
+              text: theme.data.typography,
               style: theme.data.style,
             );
 
@@ -126,8 +126,8 @@ void main() {
           testWidgets('${theme.name} - $layout - error', (tester) async {
             FTouch.primary = touch;
             final styles = FSliderStyles.inherit(
-              color: theme.data.color,
-              text: theme.data.text,
+              colors: theme.data.colors,
+              text: theme.data.typography,
               style: theme.data.style,
             );
 

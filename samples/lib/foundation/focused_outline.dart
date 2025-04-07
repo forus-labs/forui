@@ -13,11 +13,11 @@ class FocusedOutlinePage extends Sample {
   Widget sample(BuildContext context) => FFocusedOutline(
     focused: true,
     child: Container(
-      decoration: BoxDecoration(color: context.theme.color.primary, borderRadius: BorderRadius.circular(8)),
+      decoration: BoxDecoration(color: context.theme.colors.primary, borderRadius: BorderRadius.circular(8)),
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
       child: Text(
         'Focused',
-        style: context.theme.text.base.copyWith(color: context.theme.color.primaryForeground),
+        style: context.theme.typography.base.copyWith(color: context.theme.colors.primaryForeground),
       ),
     ),
   );

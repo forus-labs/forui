@@ -149,7 +149,7 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
 
   @override
   Widget sample(BuildContext context) {
-    final style = context.theme.color;
+    final colors = context.theme.colors;
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -173,10 +173,10 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
               controller: controller,
               itemBuilder:
                   (context, index) => ColoredBox(
-                    color: index.isEven ? style.hover(style.primary) : style.mutedForeground,
+                    color: index.isEven ? colors.hover(colors.primary) : colors.mutedForeground,
                     child: Center(
                       child: DefaultTextStyle(
-                        style: TextStyle(fontSize: 45, color: style.primaryForeground),
+                        style: TextStyle(fontSize: 45, color: colors.primaryForeground),
                         child: Text('Page ${index + 1}'),
                       ),
                     ),

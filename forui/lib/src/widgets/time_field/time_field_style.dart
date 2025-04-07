@@ -38,12 +38,12 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
     this.popoverConstraints = const BoxConstraints(maxWidth: 200, maxHeight: 200),
   });
 
-  /// Creates a [FTimeFieldStyle] that inherits the [color], [text], and [style].
-  FTimeFieldStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  /// Creates a [FTimeFieldStyle] that inherits its properties.
+  FTimeFieldStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(color: color, text: text, style: style),
-        popoverStyle: FPopoverStyle.inherit(color: color, style: style),
-        pickerStyle: FTimePickerStyle.inherit(color: color, text: text, style: style),
-        iconStyle: IconThemeData(color: color.mutedForeground, size: 18),
+        textFieldStyle: FTextFieldStyle.inherit(colors: colors, text: text, style: style),
+        popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
+        pickerStyle: FTimePickerStyle.inherit(colors: colors, text: text, style: style),
+        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
       );
 }

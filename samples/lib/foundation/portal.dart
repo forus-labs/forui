@@ -37,8 +37,8 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             decoration: BoxDecoration(
-              color: context.theme.color.background,
-              border: Border.all(color: context.theme.color.border),
+              color: context.theme.colors.background,
+              border: Border.all(color: context.theme.colors.border),
               borderRadius: BorderRadius.circular(4),
             ),
             padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
@@ -48,12 +48,12 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Dimensions', style: context.theme.text.base),
+                  Text('Dimensions', style: context.theme.typography.base),
                   const SizedBox(height: 7),
                   Text(
                     'Set the dimensions for the layer.',
-                    style: context.theme.text.sm.copyWith(
-                      color: context.theme.color.mutedForeground,
+                    style: context.theme.typography.sm.copyWith(
+                      color: context.theme.colors.mutedForeground,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -61,7 +61,7 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
                   for (final (label, value) in [('Width', '100%'), ('Max. Width', '300px')]) ...[
                     Row(
                       children: [
-                        Expanded(child: Text(label, style: context.theme.text.sm)),
+                        Expanded(child: Text(label, style: context.theme.typography.sm)),
                         Expanded(flex: 2, child: FTextField(initialValue: value)),
                       ],
                     ),

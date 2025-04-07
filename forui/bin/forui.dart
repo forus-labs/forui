@@ -14,17 +14,12 @@ import 'configuration.dart';
 Future<void> main(List<String> arguments) async {
   configure();
 
-  final runner = ForuiCommandRunner('forui', 'Manage your Forui development environment.');
-
-  runner.argParser
-    ..addFlag('color', help: 'Use terminal colors.', defaultsTo: _color())
-    ..addFlag('no-input', help: 'Disable interactive prompts and assume default values.', negatable: false);
-
-  runner
-    ..addCommand(ColorCommand())
-    ..addCommand(InitCommand())
-    ..addCommand(StyleCommand())
-    ..addCommand(TypographyCommand());
+  final runner =
+      ForuiCommandRunner('forui', 'Manage your Forui development environment.')
+        ..addCommand(ColorCommand())
+        ..addCommand(InitCommand())
+        ..addCommand(StyleCommand())
+        ..addCommand(TypographyCommand());
 
   try {
     await runner.run(arguments);
@@ -33,6 +28,3 @@ Future<void> main(List<String> arguments) async {
     exit(127);
   }
 }
-
-bool _color() =>
-    stdout.hasTerminal && !Platform.environment.containsKey('NO_COLOR') && Platform.environment['TERM'] != 'dumb';

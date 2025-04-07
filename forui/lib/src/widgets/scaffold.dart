@@ -129,11 +129,11 @@ final class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   });
 
   /// Creates a [FScaffoldStyle] that inherits its properties.
-  FScaffoldStyle.inherit({required FColorScheme color, required FStyle style})
+  FScaffoldStyle.inherit({required FColors colors, required FStyle style})
     : this(
-        backgroundColor: color.background,
+        backgroundColor: colors.background,
         childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
-        footerDecoration: BoxDecoration(border: Border(top: BorderSide(color: color.border, width: style.borderWidth))),
+        footerDecoration: BoxDecoration(border: Border(top: BorderSide(color: colors.border, width: style.borderWidth))),
       );
 }
 

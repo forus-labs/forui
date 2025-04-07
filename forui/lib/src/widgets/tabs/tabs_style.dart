@@ -69,25 +69,25 @@ final class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
     this.spacing = 10,
   });
 
-  /// Creates a [FTabsStyle] that inherits its properties from [color].
-  FTabsStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  /// Creates a [FTabsStyle] that inherits its properties.
+  FTabsStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          border: Border.all(color: color.muted),
+          border: Border.all(color: colors.muted),
           borderRadius: style.borderRadius,
-          color: color.muted,
+          color: colors.muted,
         ),
         selectedLabelTextStyle: text.sm.copyWith(
           fontWeight: FontWeight.w500,
           fontFamily: text.defaultFontFamily,
-          color: color.foreground,
+          color: colors.foreground,
         ),
         unselectedLabelTextStyle: text.sm.copyWith(
           fontWeight: FontWeight.w500,
           fontFamily: text.defaultFontFamily,
-          color: color.mutedForeground,
+          color: colors.mutedForeground,
         ),
-        indicatorDecoration: BoxDecoration(color: color.background, borderRadius: style.borderRadius),
+        indicatorDecoration: BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

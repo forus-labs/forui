@@ -26,12 +26,12 @@ import 'package:flutter/material.dart';
 ///   required FStyle style,
 /// }) => FDividerStyles(
 ///   horizontalStyle: FDividerStyle(
-///     color: color.secondary,
+///     colors: colors.secondary,
 ///     padding: FDividerStyle.defaultPadding.horizontalStyle,
 ///     width: style.borderWidth,
 ///   ),
 ///   verticalStyle: FDividerStyle(
-///     color: color.secondary,
+///     colors: colors.secondary,
 ///     padding: FDividerStyle.defaultPadding.verticalStyle,
 ///     width: style.borderWidth,
 ///   ),
@@ -73,12 +73,12 @@ import 'package:flutter/material.dart';
 ///     required FStyle style,
 ///   }) => FDividerStyles(
 ///     horizontalStyle: FDividerStyle(
-///       color: color.secondary,
+///       colors: colors.secondary,
 ///       padding: FDividerStyle.defaultPadding.horizontalStyle,
 ///       width: style.borderWidth,
 ///     ),
 ///     verticalStyle: FDividerStyle(
-///       color: color.secondary,
+///       colors: colors.secondary,
 ///       padding: FDividerStyle.defaultPadding.verticalStyle,
 ///       width: style.borderWidth,
 ///     ),

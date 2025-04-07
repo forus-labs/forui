@@ -9,7 +9,7 @@ part 'text_field_style.style.dart';
 
 /// [FTextFieldStyle]'s style.
 final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
-  /// The appearance of the keyboard. Defaults to [FColorScheme.brightness].
+  /// The appearance of the keyboard. Defaults to [FColors.brightness].
   ///
   /// This setting is only honored on iOS devices.
   @override
@@ -21,7 +21,7 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   @override
   final Color cursorColor;
 
-  /// The base fill color of the decoration's container color.
+  /// The base fill color of the decoration's container colors.
   @override
   final Color? fillColor;
 
@@ -87,40 +87,40 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  FTextFieldStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  FTextFieldStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
-        keyboardAppearance: color.brightness,
+        keyboardAppearance: colors.brightness,
         labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
-        clearButtonStyle: FButtonStyles.inherit(color: color, text: text, style: style).ghost.transform(
+        clearButtonStyle: FButtonStyles.inherit(colors: colors, text: text, style: style).ghost.transform(
           (ghost) => ghost.copyWith(
             iconContentStyle: ghost.iconContentStyle.copyWith(
-              enabledStyle: IconThemeData(color: color.mutedForeground, size: 17),
+              enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),
             ),
           ),
         ),
         enabledStyle: FTextFieldStateStyle.inherit(
-          contentColor: color.primary,
-          hintColor: color.mutedForeground,
-          focusedBorderColor: color.primary,
-          unfocusedBorderColor: color.border,
+          contentColor: colors.primary,
+          hintColor: colors.mutedForeground,
+          focusedBorderColor: colors.primary,
+          unfocusedBorderColor: colors.border,
           formFieldStyle: style.enabledFormFieldStyle,
           text: text,
           style: style,
         ),
         disabledStyle: FTextFieldStateStyle.inherit(
-          contentColor: color.disable(color.primary),
-          hintColor: color.disable(color.border),
-          focusedBorderColor: color.disable(color.border),
-          unfocusedBorderColor: color.disable(color.border),
+          contentColor: colors.disable(colors.primary),
+          hintColor: colors.disable(colors.border),
+          focusedBorderColor: colors.disable(colors.border),
+          unfocusedBorderColor: colors.disable(colors.border),
           formFieldStyle: style.disabledFormFieldStyle,
           text: text,
           style: style,
         ),
         errorStyle: FTextFieldErrorStyle.inherit(
-          contentColor: color.primary,
-          hintColor: color.mutedForeground,
-          focusedBorderColor: color.error,
-          unfocusedBorderColor: color.error,
+          contentColor: colors.primary,
+          hintColor: colors.mutedForeground,
+          focusedBorderColor: colors.error,
+          unfocusedBorderColor: colors.error,
           formFieldErrorStyle: style.errorFormFieldStyle,
           text: text,
           style: style,

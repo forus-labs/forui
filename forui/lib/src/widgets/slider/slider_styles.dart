@@ -20,23 +20,23 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   /// Creates a [FSliderStyles].
   FSliderStyles({required this.horizontalStyle, required this.verticalStyle});
 
-  /// Creates a [FSliderStyles] that inherits its properties from the given [FColorScheme].
-  factory FSliderStyles.inherit({required FColorScheme color, required FTypography text, required FStyle style}) {
+  /// Creates a [FSliderStyles] that inherits its properties from the given [FColors].
+  factory FSliderStyles.inherit({required FColors colors, required FTypography text, required FStyle style}) {
     final enabledHorizontalStyle = FSliderStateStyle(
       labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-      activeColor: color.primary,
-      inactiveColor: color.secondary,
+      activeColor: colors.primary,
+      inactiveColor: colors.secondary,
       markStyle: FSliderMarkStyle(
-        tickColor: color.mutedForeground,
-        labelTextStyle: text.xs.copyWith(color: color.mutedForeground),
+        tickColor: colors.mutedForeground,
+        labelTextStyle: text.xs.copyWith(color: colors.mutedForeground),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
-      tooltipStyle: FTooltipStyle.inherit(color: color, text: text, style: style),
+      tooltipStyle: FTooltipStyle.inherit(colors: colors, text: text, style: style),
       thumbStyle: FSliderThumbStyle(
-        color: color.primaryForeground,
-        borderColor: color.primary,
+        color: colors.primaryForeground,
+        borderColor: colors.primary,
         focusedOutlineStyle: style.focusedOutlineStyle,
       ),
     );
@@ -44,18 +44,18 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
     final disabledHorizontalStyle = FSliderStateStyle(
       labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-      activeColor: color.disable(color.primary, color.secondary),
-      inactiveColor: color.secondary,
+      activeColor: colors.disable(colors.primary, colors.secondary),
+      inactiveColor: colors.secondary,
       markStyle: FSliderMarkStyle(
-        tickColor: color.mutedForeground,
-        labelTextStyle: text.xs.copyWith(color: color.mutedForeground),
+        tickColor: colors.mutedForeground,
+        labelTextStyle: text.xs.copyWith(color: colors.mutedForeground),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
-      tooltipStyle: FTooltipStyle.inherit(color: color, text: text, style: style),
+      tooltipStyle: FTooltipStyle.inherit(colors: colors, text: text, style: style),
       thumbStyle: FSliderThumbStyle(
-        color: color.primaryForeground,
-        borderColor: color.disable(color.primary),
+        color: colors.primaryForeground,
+        borderColor: colors.disable(colors.primary),
         focusedOutlineStyle: style.focusedOutlineStyle,
       ),
     );
@@ -64,18 +64,18 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
       labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
       descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
       errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-      activeColor: color.error,
-      inactiveColor: color.secondary,
+      activeColor: colors.error,
+      inactiveColor: colors.secondary,
       markStyle: FSliderMarkStyle(
-        tickColor: color.mutedForeground,
-        labelTextStyle: text.xs.copyWith(color: color.error),
+        tickColor: colors.mutedForeground,
+        labelTextStyle: text.xs.copyWith(color: colors.error),
         labelAnchor: Alignment.topCenter,
         labelOffset: 10,
       ),
-      tooltipStyle: FTooltipStyle.inherit(color: color, text: text, style: style),
+      tooltipStyle: FTooltipStyle.inherit(colors: colors, text: text, style: style),
       thumbStyle: FSliderThumbStyle(
-        color: color.errorForeground,
-        borderColor: color.error,
+        color: colors.errorForeground,
+        borderColor: colors.error,
         focusedOutlineStyle: style.focusedOutlineStyle,
       ),
     );
@@ -194,11 +194,11 @@ final class FSliderStateStyle with Diagnosticable, _$FSliderStateStyleFunctions 
   @override
   final TextStyle descriptionTextStyle;
 
-  /// The slider's active track color.
+  /// The slider's active track colors.
   @override
   final Color activeColor;
 
-  /// The slider's inactive track color.
+  /// The slider's inactive track colors.
   @override
   final Color inactiveColor;
 

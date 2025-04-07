@@ -333,13 +333,13 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// Creates a [FPopoverStyle].
   const FPopoverStyle({required this.decoration, this.padding = const EdgeInsets.all(4)});
 
-  /// Creates a [FPopoverStyle] that inherits its properties from [color] and [style].
-  FPopoverStyle.inherit({required FColorScheme color, required FStyle style})
+  /// Creates a [FPopoverStyle] that inherits its properties.
+  FPopoverStyle.inherit({required FColors colors, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          color: color.background,
+          color: colors.background,
           borderRadius: style.borderRadius,
-          border: Border.all(width: style.borderWidth, color: color.border),
+          border: Border.all(width: style.borderWidth, color: colors.border),
           boxShadow: style.shadow,
         ),
       );

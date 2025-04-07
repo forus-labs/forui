@@ -333,17 +333,17 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
   });
 
-  /// Creates a [FDividerStyles] that inherits its properties from [color] and [text].
-  FBreadcrumbStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  /// Creates a [FDividerStyles] that inherits its properties.
+  FBreadcrumbStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
-        selectedTextStyle: text.sm.copyWith(fontWeight: FontWeight.w400, color: color.foreground),
-        unselectedTextStyle: text.sm.copyWith(fontWeight: FontWeight.w400, color: color.mutedForeground),
+        selectedTextStyle: text.sm.copyWith(fontWeight: FontWeight.w400, color: colors.foreground),
+        unselectedTextStyle: text.sm.copyWith(fontWeight: FontWeight.w400, color: colors.mutedForeground),
         hoveredTextStyle: text.sm.copyWith(
           fontWeight: FontWeight.w400,
-          color: color.primary,
+          color: colors.primary,
           decoration: TextDecoration.underline,
         ),
-        iconStyle: IconThemeData(color: color.mutedForeground, size: 16),
+        iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
         tappableStyle: style.tappableStyle,
       );
 }

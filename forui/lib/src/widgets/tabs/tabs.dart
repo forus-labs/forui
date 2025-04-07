@@ -163,7 +163,10 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           ),
           SizedBox(height: style.spacing),
           DefaultTextStyle(
-            style: theme.text.base.copyWith(fontFamily: theme.text.defaultFontFamily, color: theme.color.foreground),
+            style: theme.typography.base.copyWith(
+              fontFamily: theme.typography.defaultFontFamily,
+              color: theme.colors.foreground,
+            ),
             child: widget.children[_controller.index].child,
           ),
         ],

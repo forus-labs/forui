@@ -141,12 +141,12 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
     this.padding = const EdgeInsets.all(5),
   });
 
-  /// Creates a [FBottomNavigationBarStyle] that inherits its properties from [color] and [text].
-  FBottomNavigationBarStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  /// Creates a [FBottomNavigationBarStyle] that inherits its properties.
+  FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
-        decoration: BoxDecoration(border: Border(top: BorderSide(color: color.border)), color: color.background),
+        decoration: BoxDecoration(border: Border(top: BorderSide(color: colors.border)), color: colors.background),
         focusedOutlineStyle: style.focusedOutlineStyle,
-        itemStyle: FBottomNavigationBarItemStyle.inherit(color: color, text: text),
+        itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, text: text),
         tappableStyle: style.tappableStyle,
       );
 }

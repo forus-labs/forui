@@ -83,16 +83,16 @@ final class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   /// Creates a [FHeaderStyles].
   const FHeaderStyles({required this.rootStyle, required this.nestedStyle});
 
-  /// Creates a [FHeaderStyles] that inherits its properties from the given [FColorScheme], [FTypography] and [FStyle].
-  FHeaderStyles.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  /// Creates a [FHeaderStyles] that inherits its properties from the given [FColors], [FTypography] and [FStyle].
+  FHeaderStyles.inherit({required FColors colors, required FTypography text, required FStyle style})
     : rootStyle = FHeaderStyle(
-        titleTextStyle: text.xl3.copyWith(color: color.foreground, fontWeight: FontWeight.w700, height: 1),
-        actionStyle: FHeaderActionStyle.inherit(color: color, style: style, size: 30),
+        titleTextStyle: text.xl3.copyWith(color: colors.foreground, fontWeight: FontWeight.w700, height: 1),
+        actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 30),
         padding: style.pagePadding.copyWith(bottom: 15),
       ),
       nestedStyle = FHeaderStyle(
-        titleTextStyle: text.xl.copyWith(color: color.foreground, fontWeight: FontWeight.w600, height: 1),
-        actionStyle: FHeaderActionStyle.inherit(color: color, style: style, size: 25),
+        titleTextStyle: text.xl.copyWith(color: colors.foreground, fontWeight: FontWeight.w600, height: 1),
+        actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 25),
         padding: style.pagePadding.copyWith(bottom: 15),
       );
 }

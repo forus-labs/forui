@@ -105,25 +105,25 @@ final class FCalendarYearMonthPickerStyle with Diagnosticable, _$FCalendarYearMo
 
   /// Creates a new year/month picker style that inherits the color scheme and typography.
   FCalendarYearMonthPickerStyle.inherit({
-    required FColorScheme colorScheme,
+    required FColors colors,
     required FTypography typography,
     required FStyle style,
   }) : this(
          enabledStyle: FCalendarEntryStyle(
-           backgroundColor: colorScheme.background,
-           textStyle: typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500),
-           hoveredBackgroundColor: colorScheme.secondary,
-           focusedBorderColor: colorScheme.foreground,
+           backgroundColor: colors.background,
+           textStyle: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
+           hoveredBackgroundColor: colors.secondary,
+           focusedBorderColor: colors.foreground,
            radius: const Radius.circular(8),
            tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
          ),
          disabledStyle: FCalendarEntryStyle(
-           backgroundColor: colorScheme.background,
+           backgroundColor: colors.background,
            textStyle: typography.base.copyWith(
-             color: colorScheme.disable(colorScheme.mutedForeground),
+             color: colors.disable(colors.mutedForeground),
              fontWeight: FontWeight.w500,
            ),
-           focusedBorderColor: colorScheme.background,
+           focusedBorderColor: colors.background,
            radius: const Radius.circular(8),
            tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
          ),

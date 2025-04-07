@@ -554,13 +554,13 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   });
 
   /// Creates a [FSelectStyle] that inherits its properties.
-  FSelectStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  FSelectStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
-        selectFieldStyle: FTextFieldStyle.inherit(color: color, text: text, style: style),
-        iconStyle: IconThemeData(color: color.mutedForeground, size: 18),
-        popoverStyle: FPopoverStyle.inherit(color: color, style: style),
-        searchStyle: FSelectSearchStyle.inherit(color: color, text: text, style: style),
-        contentStyle: FSelectContentStyle.inherit(color: color, text: text, style: style),
+        selectFieldStyle: FTextFieldStyle.inherit(colors: colors, text: text, style: style),
+        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
+        popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
+        searchStyle: FSelectSearchStyle.inherit(colors: colors, text: text, style: style),
+        contentStyle: FSelectContentStyle.inherit(colors: colors, text: text, style: style),
         emptyTextStyle: text.sm,
       );
 }

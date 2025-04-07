@@ -193,28 +193,28 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
        assert(0 <= suffixIconSpacing, 'suffixIconSpacing must be non-negative.');
 
   /// Creates a [FTileContentStyle] that inherits its properties.
-  FTileContentStyle.inherit({required FColorScheme color, required FTypography text})
+  FTileContentStyle.inherit({required FColors colors, required FTypography text})
     : this(
         enabledStyle: FTileContentStateStyle(
-          prefixIconStyle: IconThemeData(color: color.primary, size: 18),
+          prefixIconStyle: IconThemeData(color: colors.primary, size: 18),
           titleTextStyle: text.base,
-          subtitleTextStyle: text.xs.copyWith(color: color.mutedForeground),
-          detailsTextStyle: text.base.copyWith(color: color.mutedForeground),
-          suffixIconStyle: IconThemeData(color: color.mutedForeground, size: 18),
+          subtitleTextStyle: text.xs.copyWith(color: colors.mutedForeground),
+          detailsTextStyle: text.base.copyWith(color: colors.mutedForeground),
+          suffixIconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
         ),
         enabledHoveredStyle: FTileContentStateStyle(
-          prefixIconStyle: IconThemeData(color: color.primary, size: 18),
+          prefixIconStyle: IconThemeData(color: colors.primary, size: 18),
           titleTextStyle: text.base,
-          subtitleTextStyle: text.xs.copyWith(color: color.mutedForeground),
-          detailsTextStyle: text.base.copyWith(color: color.mutedForeground),
-          suffixIconStyle: IconThemeData(color: color.mutedForeground, size: 18),
+          subtitleTextStyle: text.xs.copyWith(color: colors.mutedForeground),
+          detailsTextStyle: text.base.copyWith(color: colors.mutedForeground),
+          suffixIconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
         ),
         disabledStyle: FTileContentStateStyle(
-          prefixIconStyle: IconThemeData(color: color.disable(color.primary), size: 18),
-          titleTextStyle: text.base.copyWith(color: color.disable(color.primary)),
-          subtitleTextStyle: text.xs.copyWith(color: color.disable(color.mutedForeground)),
-          detailsTextStyle: text.base.copyWith(color: color.disable(color.mutedForeground)),
-          suffixIconStyle: IconThemeData(color: color.disable(color.mutedForeground), size: 18),
+          prefixIconStyle: IconThemeData(color: colors.disable(colors.primary), size: 18),
+          titleTextStyle: text.base.copyWith(color: colors.disable(colors.primary)),
+          subtitleTextStyle: text.xs.copyWith(color: colors.disable(colors.mutedForeground)),
+          detailsTextStyle: text.base.copyWith(color: colors.disable(colors.mutedForeground)),
+          suffixIconStyle: IconThemeData(color: colors.disable(colors.mutedForeground), size: 18),
         ),
       );
 }

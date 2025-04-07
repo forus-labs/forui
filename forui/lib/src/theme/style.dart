@@ -70,30 +70,30 @@ final class FStyle with Diagnosticable, _$FStyleFunctions {
     this.shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
   });
 
-  /// Creates an [FStyle] that inherits its properties from the given [FColorScheme] and [FTypography].
-  FStyle.inherit({required FColorScheme color, required FTypography text})
+  /// Creates an [FStyle] that inherits its properties from the given [FColors] and [FTypography].
+  FStyle.inherit({required FColors colors, required FTypography text})
     : this(
         enabledFormFieldStyle: FFormFieldStyle.inherit(
-          labelColor: color.primary,
-          descriptionColor: color.mutedForeground,
+          labelColor: colors.primary,
+          descriptionColor: colors.mutedForeground,
           text: text,
         ),
         disabledFormFieldStyle: FFormFieldStyle.inherit(
-          labelColor: color.disable(color.primary),
-          descriptionColor: color.disable(color.mutedForeground),
+          labelColor: colors.disable(colors.primary),
+          descriptionColor: colors.disable(colors.mutedForeground),
           text: text,
         ),
         errorFormFieldStyle: FFormFieldErrorStyle.inherit(
-          labelColor: color.error,
-          descriptionColor: color.mutedForeground,
-          errorColor: color.error,
+          labelColor: colors.error,
+          descriptionColor: colors.mutedForeground,
+          errorColor: colors.error,
           text: text,
         ),
         focusedOutlineStyle: FFocusedOutlineStyle(
-          color: color.primary,
+          color: colors.primary,
           borderRadius: const BorderRadius.all(Radius.circular(8)),
         ),
-        iconStyle: IconThemeData(color: color.primary, size: 20),
+        iconStyle: IconThemeData(color: colors.primary, size: 20),
         tappableStyle: FTappableStyle(),
       );
 }

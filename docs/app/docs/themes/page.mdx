@@ -127,65 +127,6 @@ Widget build(BuildContext context) => FTheme(
   );
 ```
 
-### `copyWith(...)` and `transform(...)`.
-
-Alternatively, you can use the [`copyWith(...)`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/copyWith.html)
-and [`transform(...)`](https://pub.dev/documentation/forui/latest/forui.foundation/FTransformables/transform.html)
-methods to create a new theme based on an existing one.
-
-```dart filename="main.dart" {3-14, 17-23} copy
-@override
-Widget build(BuildContext context) => FTheme(
-    data: FThemeData(
-      color: FThemes.zinc.light.color.copyWith(
-        primary: const Color(0xFF0D47A1), // dark blue
-        primaryForeground: const Color(0xFFFFFFFF), // white
-      ),
-      text: FThemes.zinc.light.text.copyWith(
-        defaultFontFamily: 'Roboto',
-      ).scale(sizeScalar: 0.8),
-      style: FThemes.zinc.light.style.copyWith(
-        borderRadius: BorderRadius.zero,
-      ),
-    ).transform((theme) => theme.copyWith(
-      cardStyle: theme.cardStyle.copyWith(
-        decoration: theme.cardStyle.decoration.copyWith(
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
-        ),
-      ),
-    ),
-    child: const FScaffold(...),
-  );
-```
-
-The example above uses `FThemes.zinc.light` theme as a starting point and customizes the following:
-
-- Update the `primary` and `primaryForeground` colors.
-- Change the default font family to `Roboto` and scale the font size by `2`.
-- Remove the `borderRadius` through the style.
-- Although we removed the `borderRadius` for all widgets, override the `borderRadius` to `8` for the `FCard()` widget.
-
-<Callout type="warning">
-    It's important to use the newly created `theme` instead of `FThemes.zinc.light`. This allows `colorScheme`,
-    `typography`, and `style` to be inherited by widget-specific themes.
-
-    ```dart {3-4} copy
-    return FTheme(
-      data: theme.copyWith(
-        cardStyle: theme.cardStyle.copyWith(
-          decoration: theme.cardStyle.decoration.copyWith(
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-        ),
-      ),
-      child: const FScaffold(...),
-    );
-    ```
-</Callout>
-
-While the example may seem overwhelming, most use cases will only require customizations to the `FColorScheme`,
-`FTypography`, and `FStyle` class. Sensible defaults for each Forui widget will be automatically inherited.
-
 ## Class Diagram
 
 ```mermaid

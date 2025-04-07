@@ -52,11 +52,11 @@ class Form extends StatelessWidget {
     height: double.infinity,
     width: double.infinity,
     decoration: BoxDecoration(
-      color: context.theme.color.background,
+      color: context.theme.colors.background,
       border:
           side.vertical
-              ? Border.symmetric(horizontal: BorderSide(color: context.theme.color.border))
-              : Border.symmetric(vertical: BorderSide(color: context.theme.color.border)),
+              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
+              : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
@@ -67,15 +67,15 @@ class Form extends StatelessWidget {
           children: [
             Text(
               'Account',
-              style: context.theme.text.xl2.copyWith(
+              style: context.theme.typography.xl2.copyWith(
                 fontWeight: FontWeight.w600,
-                color: context.theme.color.foreground,
+                color: context.theme.colors.foreground,
                 height: 1.5,
               ),
             ),
             Text(
               'Make changes to your account here. Click save when you are done.',
-              style: context.theme.text.sm.copyWith(color: context.theme.color.mutedForeground),
+              style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
             ),
             const SizedBox(height: 8),
             SizedBox(

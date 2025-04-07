@@ -202,31 +202,31 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   });
 
   /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
-  FRadioStyle.inherit({required FColorScheme color, required FStyle style})
+  FRadioStyle.inherit({required FColors colors, required FStyle style})
     : this(
         labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-        focusedOutlineStyle: FFocusedOutlineStyle(color: color.primary, borderRadius: BorderRadius.circular(100)),
+        focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: BorderRadius.circular(100)),
         enabledStyle: FRadioStateStyle(
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          borderColor: color.primary,
-          selectedColor: color.primary,
-          backgroundColor: color.background,
+          borderColor: colors.primary,
+          selectedColor: colors.primary,
+          backgroundColor: colors.background,
         ),
         disabledStyle: FRadioStateStyle(
           labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          borderColor: color.disable(color.primary),
-          selectedColor: color.disable(color.primary),
-          backgroundColor: color.background,
+          borderColor: colors.disable(colors.primary),
+          selectedColor: colors.disable(colors.primary),
+          backgroundColor: colors.background,
         ),
         errorStyle: FRadioErrorStyle(
           labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
           errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          borderColor: color.error,
-          selectedColor: color.error,
-          backgroundColor: color.background,
+          borderColor: colors.error,
+          selectedColor: colors.error,
+          backgroundColor: colors.background,
         ),
       );
 
@@ -241,15 +241,15 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
 /// A [FRadio]'s state style.
 // ignore: avoid_implementing_value_types
 class FRadioStateStyle with Diagnosticable, _$FRadioStateStyleFunctions implements FFormFieldStyle {
-  /// The border color.
+  /// The border colors.
   @override
   final Color borderColor;
 
-  /// The selected color.
+  /// The selected colors.
   @override
   final Color selectedColor;
 
-  /// The background color.
+  /// The background colors.
   @override
   final Color backgroundColor;
 

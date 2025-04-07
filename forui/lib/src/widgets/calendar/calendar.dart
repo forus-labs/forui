@@ -221,15 +221,15 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   });
 
   /// Creates a [FCalendarStyle] that inherits the color scheme and typography.
-  FCalendarStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  FCalendarStyle.inherit({required FColors colors, required FTypography text, required FStyle style})
     : this(
-        headerStyle: FCalendarHeaderStyle.inherit(colorScheme: color, typography: text, style: style),
-        dayPickerStyle: FCalendarDayPickerStyle.inherit(colorScheme: color, typography: text, style: style),
-        yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colorScheme: color, typography: text, style: style),
+        headerStyle: FCalendarHeaderStyle.inherit(colors: colors, typography: text, style: style),
+        dayPickerStyle: FCalendarDayPickerStyle.inherit(colors: colors, typography: text, style: style),
+        yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(colors: colors, typography: text, style: style),
         decoration: BoxDecoration(
           borderRadius: style.borderRadius,
-          border: Border.all(color: color.border),
-          color: color.background,
+          border: Border.all(color: colors.border),
+          color: colors.background,
         ),
       );
 }
