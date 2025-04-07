@@ -201,8 +201,10 @@ final class FThemeData with Diagnosticable, FTransformable {
       avatarStyle: avatarStyle ?? FAvatarStyle.inherit(colors: colors, typography: typography),
       badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colors: colors, typography: typography, style: style),
       bottomNavigationBarStyle:
-          bottomNavigationBarStyle ?? FBottomNavigationBarStyle.inherit(colors: colors, typography: typography, style: style),
-      breadcrumbStyle: breadcrumbStyle ?? FBreadcrumbStyle.inherit(colors: colors, typography: typography, style: style),
+          bottomNavigationBarStyle ??
+          FBottomNavigationBarStyle.inherit(colors: colors, typography: typography, style: style),
+      breadcrumbStyle:
+          breadcrumbStyle ?? FBreadcrumbStyle.inherit(colors: colors, typography: typography, style: style),
       buttonStyles: buttonStyles ?? FButtonStyles.inherit(colors: colors, typography: typography, style: style),
       calendarStyle: calendarStyle ?? FCalendarStyle.inherit(colors: colors, typography: typography, style: style),
       cardStyle: cardStyle ?? FCardStyle.inherit(colors: colors, typography: typography, style: style),
@@ -212,18 +214,23 @@ final class FThemeData with Diagnosticable, FTransformable {
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
       headerStyle: headerStyle ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
-      lineCalendarStyle: lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
-      paginationStyle: paginationStyle ?? FPaginationStyle.inherit(colors: colors, typography: typography, style: style),
+      lineCalendarStyle:
+          lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
+      paginationStyle:
+          paginationStyle ?? FPaginationStyle.inherit(colors: colors, typography: typography, style: style),
       pickerStyle: pickerStyle ?? FPickerStyle.inherit(colors: colors, style: style, typography: typography),
       popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colors: colors, style: style),
-      popoverMenuStyle: popoverMenuStyle ?? FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
+      popoverMenuStyle:
+          popoverMenuStyle ?? FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
       progressStyles: progressStyles ?? FProgressStyles.inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? FRadioStyle.inherit(colors: colors, style: style),
       resizableStyle: resizableStyle ?? FResizableStyle.inherit(colors: colors, style: style),
       scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colors: colors, style: style),
       selectStyle: selectStyle ?? FSelectStyle.inherit(colors: colors, typography: typography, style: style),
-      selectGroupStyle: selectGroupStyle ?? FSelectGroupStyle.inherit(colors: colors, typography: typography, style: style),
-      selectMenuTileStyle: selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(colors: colors, typography: typography, style: style),
+      selectGroupStyle:
+          selectGroupStyle ?? FSelectGroupStyle.inherit(colors: colors, typography: typography, style: style),
+      selectMenuTileStyle:
+          selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(colors: colors, typography: typography, style: style),
       sheetStyle: sheetStyle ?? FSheetStyle.inherit(colors: colors),
       sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
       switchStyle: switchStyle ?? FSwitchStyle.inherit(colors: colors, style: style),
@@ -232,7 +239,8 @@ final class FThemeData with Diagnosticable, FTransformable {
       textFieldStyle: textFieldStyle ?? FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
       tileGroupStyle: tileGroupStyle ?? FTileGroupStyle.inherit(colors: colors, typography: typography, style: style),
       timeFieldStyle: timeFieldStyle ?? FTimeFieldStyle.inherit(colors: colors, typography: typography, style: style),
-      timePickerStyle: timePickerStyle ?? FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
+      timePickerStyle:
+          timePickerStyle ?? FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
       tooltipStyle: tooltipStyle ?? FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
     );
   }
@@ -307,20 +315,62 @@ final class FThemeData with Diagnosticable, FTransformable {
     // Material requires height to be 1, certain widgets will overflow without it.
     // TextBaseline.alphabetic is required as TextField requires it.
     final textTheme = TextTheme(
-      displayLarge: typography.xl4.copyWith(height: 1, textBaseline: typography.xl4.textBaseline ?? TextBaseline.alphabetic),
-      displayMedium: typography.xl3.copyWith(height: 1, textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic),
-      displaySmall: typography.xl2.copyWith(height: 1, textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic),
-      headlineLarge: typography.xl3.copyWith(height: 1, textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic),
-      headlineMedium: typography.xl2.copyWith(height: 1, textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic),
-      headlineSmall: typography.xl.copyWith(height: 1, textBaseline: typography.xl.textBaseline ?? TextBaseline.alphabetic),
-      titleLarge: typography.lg.copyWith(height: 1, textBaseline: typography.lg.textBaseline ?? TextBaseline.alphabetic),
-      titleMedium: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic),
-      titleSmall: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic),
-      labelLarge: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic),
-      labelMedium: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic),
-      labelSmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic),
-      bodyLarge: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic),
-      bodyMedium: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic),
+      displayLarge: typography.xl4.copyWith(
+        height: 1,
+        textBaseline: typography.xl4.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      displayMedium: typography.xl3.copyWith(
+        height: 1,
+        textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      displaySmall: typography.xl2.copyWith(
+        height: 1,
+        textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      headlineLarge: typography.xl3.copyWith(
+        height: 1,
+        textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      headlineMedium: typography.xl2.copyWith(
+        height: 1,
+        textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      headlineSmall: typography.xl.copyWith(
+        height: 1,
+        textBaseline: typography.xl.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      titleLarge: typography.lg.copyWith(
+        height: 1,
+        textBaseline: typography.lg.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      titleMedium: typography.base.copyWith(
+        height: 1,
+        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      titleSmall: typography.sm.copyWith(
+        height: 1,
+        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      labelLarge: typography.base.copyWith(
+        height: 1,
+        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      labelMedium: typography.sm.copyWith(
+        height: 1,
+        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      labelSmall: typography.xs.copyWith(
+        height: 1,
+        textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      bodyLarge: typography.base.copyWith(
+        height: 1,
+        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
+      ),
+      bodyMedium: typography.sm.copyWith(
+        height: 1,
+        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+      ),
       bodySmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic),
     )..apply(fontFamily: typography.defaultFontFamily, bodyColor: colors.foreground, displayColor: colors.foreground);
 

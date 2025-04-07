@@ -141,7 +141,9 @@ extension GenerateStyles on StyleCreateCommand {
 
     _generate(paths);
 
-    stdout..writeln()..writeln('See https://forui.dev/docs/themes#customize-themes for more information.');
+    stdout
+      ..writeln()
+      ..writeln('See https://forui.dev/docs/themes#customize-themes for more information.');
   }
 
   void _prompt(Set<String> existing, {required bool input}) {

@@ -38,7 +38,10 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
           ),
         ),
         secondary: FBadgeStyle(
-          decoration: BoxDecoration(color: colors.secondary, borderRadius: const BorderRadius.all(Radius.circular(100))),
+          decoration: BoxDecoration(
+            color: colors.secondary,
+            borderRadius: const BorderRadius.all(Radius.circular(100)),
+          ),
           contentStyle: FBadgeContentStyle(
             labelTextStyle: typography.sm.copyWith(color: colors.secondaryForeground, fontWeight: FontWeight.w600),
           ),

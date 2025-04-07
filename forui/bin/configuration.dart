@@ -30,7 +30,7 @@ Directory _findProjectRoot([Directory? directory]) {
       'Could not find a Flutter project directory. Make sure you are running this inside a Flutter project.',
     );
   }
-  
+
   return _findProjectRoot(parent);
 }
 

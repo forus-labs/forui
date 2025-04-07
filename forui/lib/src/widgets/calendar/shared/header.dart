@@ -195,21 +195,18 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
   });
 
   /// Creates a [FCalendarHeaderStyle] that inherits its properties.
-  FCalendarHeaderStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         focusedOutlineStyle: style.focusedOutlineStyle,
-         buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.transform(
-           (style) => style.copyWith(
-             iconContentStyle: style.iconContentStyle.copyWith(
-               enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),
-               disabledStyle: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-             ),
-           ),
-         ),
-         headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-       );
+  FCalendarHeaderStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.transform(
+          (style) => style.copyWith(
+            iconContentStyle: style.iconContentStyle.copyWith(
+              enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),
+              disabledStyle: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+            ),
+          ),
+        ),
+        headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+      );
 }
