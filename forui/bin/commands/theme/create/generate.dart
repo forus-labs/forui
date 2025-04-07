@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 /// dart forui style create [styles]
 /// ```
 /// 
-/// See https://forui.dev/docs/cli for more information.''';
+/// See https://forui.dev/docs/themes#customize-themes for more information.''';
 
 final _formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
 
@@ -39,7 +39,9 @@ extension GenerateColors on ThemeCreateCommand {
 
     _generate(path, theme);
 
-    stdout.writeln('See https://forui.dev/docs/themes#customize-themes for how to use the generated themes.');
+    stdout
+      ..writeln()
+      ..writeln('See https://forui.dev/docs/themes#customize-themes for how to use the generated theme.');
   }
 
   void _prompt(String existing, {required bool input}) {

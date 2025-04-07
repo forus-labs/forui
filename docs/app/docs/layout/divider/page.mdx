@@ -17,7 +17,7 @@ Visually or semantically separates content.
   <Tabs.Tab>
     ```dart copy
     final theme = context.theme;
-    final colorScheme = theme.colorScheme;
+    final colors = theme.colors;
     final typography = theme.typography;
 
     Padding(
@@ -29,13 +29,13 @@ Visually or semantically separates content.
           Text(
             'Flutter Forui',
             style: typography.xl2.copyWith(
-              color: colorScheme.foreground,
+              color: colors.foreground,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
             'An open-source widget library.',
-            style: typography.sm.copyWith(color: colorScheme.mutedForeground),
+            style: typography.sm.copyWith(color: colors.mutedForeground),
           ),
           const FDivider(),
           SizedBox(
@@ -44,17 +44,17 @@ Visually or semantically separates content.
               children: [
                 Text(
                   'Blog',
-                  style: typography.sm.copyWith(color: colorScheme.foreground),
+                  style: typography.sm.copyWith(color: colors.foreground),
                 ),
                 const FDivider(axis : Axis.vertical),
                 Text(
                   'Docs',
-                  style: typography.sm.copyWith(color: colorScheme.foreground),
+                  style: typography.sm.copyWith(color: colors.foreground),
                 ),
                 const FDivider(axis : Axis.vertical),
                 Text(
                   'Source',
-                  style: typography.sm.copyWith(color: colorScheme.foreground),
+                  style: typography.sm.copyWith(color: colors.foreground),
                 ),
               ],
             ),

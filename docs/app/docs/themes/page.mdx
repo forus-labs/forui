@@ -57,8 +57,8 @@ Forui provides an extension on `BuildContext` which allows for direct access to 
 @override
 Widget build(BuildContext context) {
   final theme = context.theme; // FThemeData
-  final colorScheme = context.theme.color; // FColorScheme
-  final typography = context.theme.text; // FTypography
+  final colors = context.theme.colors; // FColors
+  final typography = context.theme.typography; // FTypography
   final style = context.theme.style; // FStyle
 
   return const Placeholder();
@@ -66,8 +66,8 @@ Widget build(BuildContext context) {
 ```
 
 A high level overview of the theme data structure is as follows:
-- [**`FThemeData`**](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html) contains `FColorScheme`, `FTypography`, `FStyle`, and widget styles (eg. `FCardStyle`).
-- [**`FColorScheme`**](https://pub.dev/documentation/forui/latest/forui.theme/FColorScheme-class.html) contains the color scheme (eg. `background`, `foreground`, and `primary`).
+- [**`FThemeData`**](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html) contains `FColors`, `FTypography`, `FStyle`, and widget styles (eg. `FCardStyle`).
+- [**`FColorSs`**](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html) contains the color scheme (eg. `background`, `foreground`, and `primary`).
 - [**`FTypography`**](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html) contains the `defaultFontFamily` and various `TextStyle`s.
 - [**`FStyle`**](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html) contains other miscellaneous styling options (eg. `borderRadius`).
 
@@ -81,7 +81,7 @@ A more detailed explanation of each class can be found in the [Class Diagram](#c
 It's recommended to use the [CLI](cli) to generate color schemes, typographies and styles in your project. These
 styles can be directly modified to fit your design needs.
 
-The following example shows how to generate a `FDividerStyles` in your project.
+The following example shows how to generate a zinc theme and `FDividerStyles` in your project.
 
 In your project directory run:
 ```shell copy
@@ -97,34 +97,88 @@ This will generate `lib/theme/divider_styles.dart` containing:
 ```dart copy
 // Modify this style to fit your design needs.
 FDividerStyles dividerStyles({
-  required FColorScheme color,
+  required FColors colors,
   required FStyle style,
 }) => FDividerStyles(
   horizontalStyle: FDividerStyle(
-    color: color.secondary,
+    color: colors.secondary,
     padding: FDividerStyle.defaultPadding.horizontalStyle,
     width: style.borderWidth,
   ),
   verticalStyle: FDividerStyle(
-    color: color.secondary,
+    color: colors.secondary,
     padding: FDividerStyle.defaultPadding.verticalStyle,
     width: style.borderWidth,
   ),
 );
 ```
 
-Call `dividerStyles(...)` in your `FTheme(...)` widget:
-```dart filename="main.dart" {4-7} copy
-@override
-Widget build(BuildContext context) => FTheme(
-    data: FThemeData(
-      dividerStyles: dividerStyles(
-        color: FThemes.zinc.light.color,
-        style: FThemes.zinc.light.style,
-      ),
-    ),
-    child: const FScaffold(...),
+Then:
+```shell copy
+dart run forui theme create zinc-dark
+```
+
+This will generate `lib/theme/theme.dart` containing:
+```dart copy
+FThemeData get zincLight {
+  const colors = FColors(
+    brightness: Brightness.light,
+    barrier: Color(0x33000000),
+    background: Color(0xFFFFFFFF),
+    foreground: Color(0xFF09090B),
+    primary: Color(0xFF18181B),
+    primaryForeground: Color(0xFFFAFAFA),
+    secondary: Color(0xFFF4F4F5),
+    secondaryForeground: Color(0xFF18181B),
+    muted: Color(0xFFF4F4F5),
+    mutedForeground: Color(0xFF71717A),
+    destructive: Color(0xFFEF4444),
+    destructiveForeground: Color(0xFFFAFAFA),
+    error: Color(0xFFEF4444),
+    errorForeground: Color(0xFFFAFAFA),
+    border: Color(0xFFE4E4E7),
   );
+
+  final typography = _typography(colors: colors);
+  final style = _style(colors: colors, typography: typography);
+
+  return FThemeData(colors: colors, typography: typography, style: style);
+}
+
+// Typography and style functions omitted for brevity.
+```
+
+Insert your generated divider styles:
+```dart {27} copy
+FThemeData get zincLight {
+  const colors = FColors(
+    brightness: Brightness.light,
+    barrier: Color(0x33000000),
+    background: Color(0xFFFFFFFF),
+    foreground: Color(0xFF09090B),
+    primary: Color(0xFF18181B),
+    primaryForeground: Color(0xFFFAFAFA),
+    secondary: Color(0xFFF4F4F5),
+    secondaryForeground: Color(0xFF18181B),
+    muted: Color(0xFFF4F4F5),
+    mutedForeground: Color(0xFF71717A),
+    destructive: Color(0xFFEF4444),
+    destructiveForeground: Color(0xFFFAFAFA),
+    error: Color(0xFFEF4444),
+    errorForeground: Color(0xFFFAFAFA),
+    border: Color(0xFFE4E4E7),
+  );
+
+  final typography = _typography(colors: colors);
+  final style = _style(colors: colors, typography: typography);
+
+  return FThemeData(
+    colors: colors,
+    typography: typography,
+    style: style,
+    dividerStyles: dividerStyles(colors: colors, style: style),
+  );
+}
 ```
 
 ## Class Diagram
@@ -138,13 +192,13 @@ class FThemeData {
     +FThemeData(...)
 }
 
-class FColorScheme {
-    +FColorScheme(...)
+class FColors {
+    +FColors(...)
 }
 
 class FTypography {
     +FTypography(...)
-    +FThemeData.inherit(colorScheme)
+    +FThemeData.inherit(colors)
 }
 
 class FStyle {
@@ -153,20 +207,20 @@ class FStyle {
 
 class FCardStyle {
     +FCardStyle(...)
-    +FCardStyle.inherit(colorScheme, typography, style)
+    +FCardStyle.inherit(colors, typography, style)
 }
 note for FCardStyle "Each Forui widget has a corresponding class.\nWe use FCardStyle here as an example."
 
-FThemeData --> FColorScheme
+FThemeData --> FColors
 FThemeData --> FTypography
 FThemeData --> FStyle
 FThemeData --> FCardStyle
 ```
 
 
-### Color Scheme
+### Colors
 
-The `FColorScheme` class contains the color scheme for the theme.
+The `Colors` class contains the color scheme for the theme.
 This usually consist of a set of colors with its corresponding foreground color (eg. `primary` and `primaryForeground`).
 
 In most cases, the color will be used as the background color, and the foreground color will be used as the text/icon color.
@@ -174,15 +228,15 @@ In most cases, the color will be used as the background color, and the foregroun
 ```dart {3, 6-14} copy
 @override
 Widget build(BuildContext context) {
-  final colorScheme = context.theme.color;
-  final typography = context.theme.text;
+  final colors = context.theme.colors;
+  final typography = context.theme.typography;
 
   return ColoredBox(
-    color: colorScheme.primary,
+    color: colors.primary,
     child: Text(
       'Hello World!',
       style: typography.xs.copyWith(
-          color: colorScheme.primaryForeground
+          color: colors.primaryForeground
       ),
     ),
   );
@@ -191,9 +245,9 @@ Widget build(BuildContext context) {
 
 #### Hovered and Disabled Colors
 
-Hovered and disabled colors are derived by adjusting the opacity. To derive these colors, use the `FColorScheme.hover`
-and `FColorScheme.disable` methods. The opacity can be adjusted with `FColorScheme.enabledHoveredOpacity` and
-`FColorScheme.disabledOpacity`.
+Hovered and disabled colors are derived by adjusting the opacity. To derive these colors, use the `FColors.hover`
+and `FColors.disable` methods. The opacity can be adjusted with `FColors.enabledHoveredOpacity` and
+`FColors.disabledOpacity`.
 
 ### Typography
 
@@ -210,13 +264,13 @@ It is recommended to use the `copyWith(...)` to apply colors and other styles as
 ```dart {4, 8-12} copy
 @override
 Widget build(BuildContext context) {
-  final colorScheme = context.theme.color;
-  final typography = context.theme.text;
+  final colors = context.theme.colors;
+  final typography = context.theme.typography;
 
   return Text(
     'Hello World!',
     style: typography.xs.copyWith(
-      color: colorScheme.primaryForeground,
+      color: colors.primaryForeground,
       fontWeight: FontWeight.bold,
       fontStyle: FontStyle.italic,
     ),
@@ -250,17 +304,17 @@ The `FStyle` class contains other miscellaneous styling options for the theme.
 ```dart {4, 7-14} copy
 @override
 Widget build(BuildContext context) {
-  final colorScheme = context.theme.text;
+  final colors = context.theme.colors;
   final style = context.theme.style;
 
   return DecoratedBox(
     decoration: BoxDecoration(
       border: Border.all(
-        color: colorScheme.border,
+        color: colors.border,
         width: style.borderWidth,
       ),
       borderRadius: style.borderRadius,
-      color: colorScheme.primary,
+      color: colors.primary,
     ),
     child: const Placeholder(),
   );

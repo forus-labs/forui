@@ -30,6 +30,8 @@ mixin _Usage {
 
   String get usage => _wrap('$description\n\n') + _usageWithoutDescription;
 
+  String get usageFooter => '\nSee https://forui.dev/docs/cli for more information.';
+
   String _wrap(String text, {int? hangingIndent}) =>
       wrapText(text, length: argParser.usageLineLength, hangingIndent: hangingIndent);
 
@@ -58,11 +60,9 @@ class ForuiCommandRunner<T> extends CommandRunner<T> with _Usage {
           ..writeln(_wrap('Global options:'))
           ..writeln('${argParser.usage}\n')
           ..writeln('${_getCommandUsage(commands, lineLength: argParser.usageLineLength)}\n')
-          ..write(_wrap('Run "$executableName help <command>" for more information about a command.'));
+          ..write(_wrap('Run "$executableName help <command>" for more information about a command.'))
+          ..write('\n${_wrap(usageFooter)}');
 
-    if (usageFooter != null) {
-      buffer.write('\n${_wrap(usageFooter!)}');
-    }
     return buffer.toString();
   }
 }
@@ -102,13 +102,9 @@ abstract class ForuiCommand extends Command with _Usage {
 
     buffer
       ..writeln()
-      ..write(_wrap('Run "${runner!.executableName} help" to see global options.'));
-
-    if (usageFooter != null) {
-      buffer
-        ..writeln()
-        ..write(_wrap(usageFooter!));
-    }
+      ..write(_wrap('Run "${runner!.executableName} help" to see global options.'))
+      ..writeln()
+      ..write(_wrap(usageFooter));
 
     return buffer.toString();
   }

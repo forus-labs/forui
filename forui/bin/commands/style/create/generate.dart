@@ -36,11 +36,27 @@ import 'package:flutter/material.dart';
 ///     width: style.borderWidth,
 ///   ),
 /// );
+
+/// File that contains your `FThemeData`:
+/// ```dart
+/// import 'package:my_application/theme/divider_style.dart' // Your generated file.
+///
+/// FThemeData(
+///  color: FThemes.zinc.light.color,
+///  style: FThemes.zinc.light.style,
+///  dividerStyles: CustomFDividerStyles.dividerStyles( // The function in your generated file.
+///    color: FThemes.zinc.light.color,
+///    style: FThemes.zinc.light.style,
+///   ),
+/// );
 /// ```
+///
+/// A theme can be generated using the Forui CLI:
+/// ```shell
 /// dart forui theme create [theme name]
 /// ```
 /// 
-/// See https://forui.dev/docs/cli for more information.''';
+/// See https://forui.dev/docs/themes#customize-themes for more information.''';
 
 const _namespacedHeader = '''
 import 'package:forui/forui.dart';
@@ -89,11 +105,11 @@ import 'package:flutter/material.dart';
 /// ```
 /// 
 /// A theme can be generated using the Forui CLI:
-/// ```
+/// ```shell
 /// dart forui theme create [theme name]
 /// ```
 /// 
-/// See https://forui.dev/docs/cli for more information.''';
+/// See https://forui.dev/docs/themes#customize-themes for more information.''';
 
 final _formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
 
@@ -125,7 +141,7 @@ extension GenerateStyles on StyleCreateCommand {
 
     _generate(paths);
 
-    stdout.writeln('See https://forui.dev/docs/themes#customize-themes for more information.');
+    stdout..writeln()..writeln('See https://forui.dev/docs/themes#customize-themes for more information.');
   }
 
   void _prompt(Set<String> existing, {required bool input}) {
@@ -181,9 +197,7 @@ extension GenerateStyles on StyleCreateCommand {
         ..createSync(recursive: true)
         ..writeAsStringSync(_formatter.format(buffer.toString()));
 
-      stdout
-        ..writeln('${emoji ? '✅' : '[Done]'} $path')
-        ..writeln();
+      stdout.writeln('${emoji ? '✅' : '[Done]'} $path');
     }
   }
 

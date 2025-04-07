@@ -153,13 +153,13 @@ final class FColors with Diagnosticable, FTransformable {
   /// Returns a copy of this [FColors] with the given properties replaced.
   ///
   /// ```dart
-  /// final scheme = FColorScheme(
+  /// final colors = FColors(
   ///   brightness: Brightness.light,
   ///   background: Colors.blue,
   ///   // Other arguments omitted for brevity
   /// );
   ///
-  /// final copy = scheme.copyWith(brightness: Brightness.dark);
+  /// final copy = colors.copyWith(brightness: Brightness.dark);
   ///
   /// print(copy.brightness); // Brightness.dark
   /// print(copy.background); // Colors.blue
