@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:sugar/sugar.dart';
 
-import '../../args/utils.dart';
 import '../../args/command.dart';
+import '../../args/utils.dart';
 import '../../configuration.dart';
 import 'command.dart';
 

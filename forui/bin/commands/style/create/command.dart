@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import '../../../args/utils.dart';
 import '../../../args/command.dart';
+import '../../../args/utils.dart';
 import '../../../configuration.dart';
 import '../style.dart';
 import 'generate.dart';
@@ -70,8 +70,8 @@ class StyleCreateCommand extends ForuiCommand {
       success = false;
 
       final suggestions =
-      registry.keys.map((e) => (e, e.startsWith(style) ? 1 : distance(style, e))).where((e) => e.$2 <= 3).toList()
-        ..sort((a, b) => a.$2.compareTo(b.$2));
+          registry.keys.map((e) => (e, e.startsWith(style) ? 1 : distance(style, e))).where((e) => e.$2 <= 3).toList()
+            ..sort((a, b) => a.$2.compareTo(b.$2));
 
       stdout.write('Could not find a style named "$style".');
 
