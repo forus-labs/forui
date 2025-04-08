@@ -62,13 +62,13 @@ class InitCommand extends ForuiCommand {
     }
 
     if (file.existsSync()) {
-      _prompt('lib/main.dart');
+      _prompt('lib/main.dart', 'You can generate a main.dart later by running "dart forui snippet create main". ');
     }
 
     return file;
   }
 
-  void _prompt(String file) {
+  void _prompt(String file, [String message = '']) {
     final input = !globalResults!.flag('no-input');
 
     if (!input) {
@@ -77,7 +77,7 @@ class InitCommand extends ForuiCommand {
     }
 
     while (true) {
-      stdout.write('${emoji ? '⚠️' : '[Warning]'} $file already exists. Overwrite it? [Y/n] ');
+      stdout.write('${emoji ? '⚠️' : '[Warning]'} $file already exists. ${message}Overwrite it? [Y/n] ');
 
       switch (stdin.readLineSync()) {
         case 'y' || 'Y' || '':
