@@ -1,16 +1,8 @@
 import 'dart:io';
 
 import '../../args/command.dart';
+import '../../commands/snippet/snippet.dart';
 import '../../configuration.dart';
-
-const content = '''
-cli:
-  # The default file or directory to output generated widget styles.
-  style-output: lib/theme
-  
-  # The default file or directory to output generated themes.
-  theme-output: lib/theme/theme.dart
-''';
 
 class InitCommand extends ForuiCommand {
   @override
@@ -25,23 +17,26 @@ class InitCommand extends ForuiCommand {
   @override
   final arguments = '';
 
-  InitCommand() {
+  final Configuration configuration;
+
+  InitCommand(this.configuration) {
     argParser.addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false);
   }
 
   @override
   void run() {
-    _prompt().writeAsStringSync(content);
-
+    _configuration().writeAsStringSync(defaults);
     stdout.writeln('${emoji ? '✅' : '[Done]'} Created forui.yaml.');
+
+    _main().writeAsStringSync(snippets['main']!);
+    stdout.writeln('${emoji ? '✅' : '[Done]'} Created lib/main.dart.');
   }
 
-  File _prompt() {
-    final input = !globalResults!.flag('no-input');
+  File _configuration() {
     final force = argResults!.flag('force');
 
-    final yaml = File('${root.path}/forui.yaml');
-    final yml = File('${root.path}/forui.yml');
+    final yaml = File('${configuration.root.path}/forui.yaml');
+    final yml = File('${configuration.root.path}/forui.yml');
 
     var file = yaml;
     if (force) {
@@ -52,25 +47,46 @@ class InitCommand extends ForuiCommand {
       final extension = yaml.existsSync() ? 'yaml' : 'yml';
       file = yaml.existsSync() ? yaml : yml;
 
-      if (!input) {
-        stdout.writeln('forui.$extension already exists. Skipping... ');
-        exit(0);
-      }
-
-      while (true) {
-        stdout.writeln('${emoji ? '⚠️' : '[Warning]'} forui.$extension already exists. Overwrite it? [Y/n]');
-
-        switch (stdin.readLineSync()) {
-          case 'y' || 'Y' || '':
-            return file;
-          case 'n' || 'N':
-            exit(0);
-          default:
-            stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
-        }
-      }
+      _prompt('forui.$extension');
     }
 
     return file;
+  }
+
+  File _main() {
+    final force = argResults!.flag('force');
+
+    final file = File('${configuration.root.path}/lib/main.dart');
+    if (force) {
+      return file;
+    }
+
+    if (file.existsSync()) {
+      _prompt('lib/main.dart');
+    }
+
+    return file;
+  }
+
+  void _prompt(String file) {
+    final input = !globalResults!.flag('no-input');
+
+    if (!input) {
+      stdout.writeln('$file already exists. Skipping... ');
+      exit(0);
+    }
+
+    while (true) {
+      stdout.write('${emoji ? '⚠️' : '[Warning]'} $file already exists. Overwrite it? [Y/n] ');
+
+      switch (stdin.readLineSync()) {
+        case 'y' || 'Y' || '':
+          return;
+        case 'n' || 'N':
+          exit(0);
+        default:
+          stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
+      }
+    }
   }
 }

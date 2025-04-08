@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import '../../../args/command.dart';
-import '../command.dart';
+import '../../args/command.dart';
+import 'command.dart';
 
 class ThemeLsCommand extends ForuiCommand {
   @override

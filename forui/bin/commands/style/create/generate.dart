@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dart_style/dart_style.dart';
 import 'package:sugar/sugar.dart';
 
 import '../../../args/command.dart';
@@ -8,7 +7,7 @@ import '../../../configuration.dart';
 import '../style.dart';
 import 'command.dart';
 
-const _unnamespacedHeader = '''
+const _unnamespaced = '''
 import 'package:forui/forui.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +57,7 @@ import 'package:flutter/material.dart';
 /// 
 /// See https://forui.dev/docs/themes#customize-themes for more information.''';
 
-const _namespacedHeader = '''
+const _namespaced = '''
 import 'package:forui/forui.dart';
 import 'package:flutter/material.dart';
 
@@ -111,23 +110,18 @@ import 'package:flutter/material.dart';
 /// 
 /// See https://forui.dev/docs/themes#customize-themes for more information.''';
 
-final _formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
+extension Generation on StyleCreateCommand {
+  void generate(List<String> arguments, {required bool input, required bool all}) {
+    final force = argResults!.flag('force');
+    final output = argResults!['output'] as String;
 
-extension GenerateStyles on StyleCreateCommand {
-  void generateStyles(
-    List<String> arguments, {
-    required bool input,
-    required bool all,
-    required bool force,
-    required String output,
-  }) {
     final paths = <String, List<String>>{};
     final existing = <String>{};
 
     for (final style in all ? registry.keys.toList() : arguments) {
       final fileName = registry[style.toLowerCase()]!.type.substring(1).toSnakeCase();
       final path =
-          '${root.path}${Platform.pathSeparator}${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart'}';
+          '${configuration.root.path}${Platform.pathSeparator}${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart'}';
 
       (paths[path] ??= []).add(style);
       if (File(path).existsSync()) {
@@ -164,7 +158,7 @@ extension GenerateStyles on StyleCreateCommand {
     while (true) {
       stdout
         ..writeln()
-        ..writeln('${emoji ? '⚠️' : '[Warning]'} Overwrite these files? [Y/n]');
+        ..write('${emoji ? '⚠️' : '[Warning]'} Overwrite these files? [Y/n] ');
 
       switch (stdin.readLineSync()) {
         case 'y' || 'Y' || '':
@@ -186,10 +180,10 @@ extension GenerateStyles on StyleCreateCommand {
       final buffer = StringBuffer();
 
       if (registry[styles.singleOrNull] case Style(:final closure)) {
-        buffer.writeln(_unnamespacedHeader);
+        buffer.writeln(_unnamespaced);
         _reduce(buffer, closure, many: false);
       } else {
-        buffer.writeln(_namespacedHeader);
+        buffer.writeln(_namespaced);
         for (final style in styles) {
           _reduce(buffer, registry[style.toLowerCase()]!.closure, many: true);
         }
@@ -197,7 +191,7 @@ extension GenerateStyles on StyleCreateCommand {
 
       File(path)
         ..createSync(recursive: true)
-        ..writeAsStringSync(_formatter.format(buffer.toString()));
+        ..writeAsStringSync(formatter.format(buffer.toString()));
 
       stdout.writeln('${emoji ? '✅' : '[Done]'} $path');
     }

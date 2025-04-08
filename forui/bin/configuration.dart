@@ -1,85 +1,112 @@
 import 'dart:io';
 
+import 'package:dart_style/dart_style.dart';
 import 'package:yaml/yaml.dart';
 
-late final Directory root;
-String defaultThemeOutput = 'lib/theme/theme.dart';
-String defaultStyleOutput = 'lib/theme';
+const defaults = '''
+cli:
+  # The default file or directory to output generated snippets.
+  snippet-output: ${Configuration.defaultSnippet}
 
-void configure() {
-  try {
-    root = _findProjectRoot();
-    _configure();
-  } on FormatException catch (e) {
-    stdout.writeln(e.message);
-    exit(2);
+  # The default file or directory to output generated widget styles.
+  style-output: ${Configuration.defaultStyle}
+  
+  # The default file or directory to output generated themes.
+  theme-output: ${Configuration.defaultTheme}
+''';
+
+final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
+
+class Configuration {
+  static const defaultSnippet = 'lib';
+  static const defaultStyle = 'lib/theme';
+  static const defaultTheme = 'lib/theme/theme.dart';
+
+  static Directory _findProjectRoot([Directory? directory]) {
+    directory ??= Directory.current;
+
+    final pubspec = File('${directory.path}/pubspec.yaml');
+    if (pubspec.existsSync()) {
+      return directory;
+    }
+
+    final parent = directory.parent;
+    if (parent.path == directory.path) {
+      throw const FormatException(
+        'Could not find a Flutter project directory. Make sure you are running this inside a Flutter project.',
+      );
+    }
+
+    return _findProjectRoot(parent);
   }
-}
 
-Directory _findProjectRoot([Directory? directory]) {
-  directory ??= Directory.current;
+  final Directory root;
+  final String snippet;
+  final String style;
+  final String theme;
 
-  final pubspec = File('${directory.path}/pubspec.yaml');
-  if (pubspec.existsSync()) {
-    return directory;
-  }
+  factory Configuration.parse() {
+    try {
+      final root = _findProjectRoot();
+      var configuration = File('${root.path}/forui.yaml');
+      var extension = 'yaml';
 
-  final parent = directory.parent;
-  if (parent.path == directory.path) {
-    throw const FormatException(
-      'Could not find a Flutter project directory. Make sure you are running this inside a Flutter project.',
-    );
-  }
+      if (!configuration.existsSync()) {
+        configuration = File('${root.path}/forui.yml');
+        extension = 'yml';
 
-  return _findProjectRoot(parent);
-}
+        if (!configuration.existsSync()) {
+          return Configuration(root: root);
+        }
+      }
 
-void _configure() {
-  var configuration = File('${root.path}/forui.yaml');
-  var extension = 'yaml';
+      final yaml = loadYamlNode(configuration.readAsStringSync());
+      if (yaml is! YamlMap) {
+        return Configuration(root: root);
+      }
 
-  if (!configuration.existsSync()) {
-    configuration = File('${root.path}/forui.yml');
-    extension = 'yml';
+      final cli = yaml.nodes['cli'];
+      if (cli is! YamlMap) {
+        return Configuration(root: root);
+      }
 
-    if (!configuration.existsSync()) {
-      return;
+      return Configuration(
+        root: root,
+        snippet: switch (cli.nodes['snippet-output']) {
+          null => defaultSnippet,
+          YamlScalar(:final value) when value is String => value,
+          final node =>
+            throw FormatException(
+              'Could not read forui.$extension.\n\n${node.span.message('"snippet-output" must be a string.')}',
+            ),
+        },
+        style: switch (cli.nodes['style-output']) {
+          null => defaultStyle,
+          YamlScalar(:final value) when value is String => value,
+          final node =>
+            throw FormatException(
+              'Could not read forui.$extension.\n\n${node.span.message('"style-output" must be a string.')}',
+            ),
+        },
+        theme: switch (cli.nodes['theme-output']) {
+          null => defaultTheme,
+          YamlScalar(:final value) when value is String => value,
+          final node =>
+            throw FormatException(
+              'Could not read forui.$extension.\n\n${node.span.message('"theme-output" must be a string.')}',
+            ),
+        },
+      );
+    } on FormatException catch (e) {
+      stdout.writeln(e.message);
+      exit(2);
     }
   }
 
-  final yaml = loadYamlNode(configuration.readAsStringSync());
-  if (yaml is! YamlMap) {
-    return;
-  }
-
-  final cli = yaml.nodes['cli'];
-  if (cli is! YamlMap) {
-    return;
-  }
-
-  switch (cli.nodes['theme-output']) {
-    case null:
-      break;
-
-    case YamlScalar(:final value) when value is String:
-      defaultThemeOutput = value;
-
-    case final node:
-      throw FormatException(
-        'Could not read forui.$extension.\n\n${node.span.message('"theme-output" must be a string.')}',
-      );
-  }
-
-  switch (cli.nodes['style-output']) {
-    case null:
-      break;
-
-    case YamlScalar(:final value) when value is String:
-      defaultStyleOutput = value;
-
-    case final node:
-      throw FormatException(
-        'Could not read forui.$extension.\n\n${node.span.message('"style-output" must be a string.')}',
-      );
-  }
+  Configuration({
+    required this.root,
+    this.snippet = defaultSnippet,
+    this.style = defaultStyle,
+    this.theme = defaultTheme,
+  });
 }

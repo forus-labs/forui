@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import '../../../args/utils.dart';
 import '../../../args/command.dart';
 import '../../../configuration.dart';
 import '../style.dart';
 import 'generate.dart';
-import 'validate.dart';
 
 final registry = Style.values.asNameMap();
 
@@ -21,7 +21,9 @@ class StyleCreateCommand extends ForuiCommand {
   @override
   final arguments = '[styles]';
 
-  StyleCreateCommand() {
+  final Configuration configuration;
+
+  StyleCreateCommand(this.configuration) {
     argParser
       ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
@@ -29,7 +31,7 @@ class StyleCreateCommand extends ForuiCommand {
         'output',
         abbr: 'o',
         help: 'The output directory or file, relative to the project directory.',
-        defaultsTo: defaultStyleOutput,
+        defaultsTo: configuration.style,
       );
   }
 
@@ -37,8 +39,6 @@ class StyleCreateCommand extends ForuiCommand {
   void run() {
     final input = !globalResults!.flag('no-input');
     final all = argResults!.flag('all');
-    final force = argResults!.flag('force');
-    final output = argResults!['output'] as String;
     final arguments = argResults!.rest;
 
     if (arguments.isEmpty && !all) {
@@ -46,10 +46,52 @@ class StyleCreateCommand extends ForuiCommand {
       return;
     }
 
-    if (validateStyles(arguments, all: all)) {
+    if (!_validate(arguments, all: all)) {
       exit(1);
     }
 
-    generateStyles(arguments, input: input, all: all, force: force, output: output);
+    generate(arguments, input: input, all: all);
+  }
+
+  bool _validate(List<String> arguments, {required bool all}) {
+    if (arguments.isNotEmpty && all) {
+      stdout
+        ..writeln('Cannot use "[styles]" and "--all" at the same time.')
+        ..writeln('Either use "--all" or specify the styles.');
+      return false;
+    }
+
+    var success = true;
+    for (final style in arguments) {
+      if (registry.containsKey(style.toLowerCase())) {
+        continue;
+      }
+
+      success = false;
+
+      final suggestions =
+      registry.keys.map((e) => (e, e.startsWith(style) ? 1 : distance(style, e))).where((e) => e.$2 <= 3).toList()
+        ..sort((a, b) => a.$2.compareTo(b.$2));
+
+      stdout.write('Could not find a style named "$style".');
+
+      if (suggestions.isNotEmpty) {
+        stdout
+          ..writeln()
+          ..writeln('Did you mean one of these?');
+
+        for (final (suggestion, _) in suggestions) {
+          stdout.writeln('  ${registry[suggestion]!.type}');
+        }
+      }
+
+      stdout.writeln();
+    }
+
+    if (!success) {
+      stdout.writeln('Run "dart run forui style ls" to see all styles.');
+    }
+
+    return success;
   }
 }

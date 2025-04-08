@@ -18,11 +18,44 @@ Usage: forui init
 -f, --force    Overwrite existing files if they exist.
 ```
 
+
+## snippet
+
+### create
+
+Use the `snippet create` command to generate a code snippet in your project. The snippets are generated in `lib` by default.
+
+```shell copy
+dart run forui snippet create [snippets]
+```
+
+```shell copy
+Usage: forui snippet create [snippets]
+-h, --help      Print this usage information.
+-f, --force     Overwrite existing files if they exist.
+-o, --output    The output directory or file, relative to the project directory.
+                (defaults to "lib")
+```
+
+ ### ls
+
+Use the `snippet ls` command to list all available snippets.
+
+```shell copy
+dart run forui snippet ls
+```
+
+```shell copy
+Usage: forui snippet ls
+-h, --help    Print this usage information.
+```
+
+
 ## style
 
 ### create
 
-Use the `style create` command to generate a style in your project. The styles are generated in `lib/theme/` by default.
+Use the `style create` command to generate a style in your project. The styles are generated in `lib/theme` by default.
 
 ```shell copy
 dart run forui style create [styles]

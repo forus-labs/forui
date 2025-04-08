@@ -6,10 +6,12 @@ import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 
+import 'generate_snippets.dart';
 import 'generate_styles.dart';
 import 'generate_themes.dart';
 
 final library = p.join(Directory.current.parent.path, 'forui', 'lib');
+final _snippet = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'snippet', 'snippet.dart');
 final _style = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'style', 'style.dart');
 final _theme = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'theme', 'theme.dart');
 
@@ -33,6 +35,8 @@ Future<void> main() async {
     includedPaths: [library],
     resourceProvider: PhysicalResourceProvider.INSTANCE,
   );
+
+  File(_snippet).writeAsStringSync(generateSnippets());
 
   final styles = mapStyles(await traverseStyles(collection));
   File(_style).writeAsStringSync(generateStyles(styles));
