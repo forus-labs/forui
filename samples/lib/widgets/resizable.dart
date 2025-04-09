@@ -13,7 +13,7 @@ class ResizablePage extends Sample {
   @override
   Widget sample(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      border: Border.all(color: context.theme.color.border),
+      border: Border.all(color: context.theme.colors.border),
       borderRadius: BorderRadius.circular(8),
     ),
     child: FResizable(
@@ -47,7 +47,7 @@ class NoCascadingResizablePage extends Sample {
   @override
   Widget sample(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      border: Border.all(color: context.theme.color.border),
+      border: Border.all(color: context.theme.colors.border),
       borderRadius: BorderRadius.circular(8),
     ),
     child: FResizable(
@@ -86,7 +86,7 @@ class Label extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FThemeData(color:color, text:typography) = context.theme;
+    final FThemeData(:colors, :typography) = context.theme;
     final start = DateTime.fromMillisecondsSinceEpoch(
       (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
       isUtc: true,
@@ -105,15 +105,15 @@ class Label extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 15, color: color.foreground),
+              Icon(icon, size: 15, color: colors.foreground),
               const SizedBox(width: 3),
-              Text(label, style: typography.sm.copyWith(color: color.foreground)),
+              Text(label, style: typography.sm.copyWith(color: colors.foreground)),
             ],
           ),
           const SizedBox(height: 5),
           Text(
             '${format.format(start)} - ${format.format(end)}',
-            style: typography.sm.copyWith(color: color.foreground),
+            style: typography.sm.copyWith(color: colors.foreground),
           ),
         ],
       ),
@@ -128,7 +128,7 @@ class HorizontalResizablePage extends Sample {
   @override
   Widget sample(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      border: Border.all(color: context.theme.color.border),
+      border: Border.all(color: context.theme.colors.border),
       borderRadius: BorderRadius.circular(8),
     ),
     child: FResizable(
@@ -138,12 +138,12 @@ class HorizontalResizablePage extends Sample {
         FResizableRegion(
           initialExtent: 100,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.text.sm)),
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
         FResizableRegion(
           initialExtent: 300,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.text.sm)),
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),
       ],
     ),
@@ -157,7 +157,7 @@ class NoThumbResizablePage extends Sample {
   @override
   Widget sample(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      border: Border.all(color: context.theme.color.border),
+      border: Border.all(color: context.theme.colors.border),
       borderRadius: BorderRadius.circular(8),
     ),
     child: FResizable(
@@ -168,12 +168,12 @@ class NoThumbResizablePage extends Sample {
         FResizableRegion(
           initialExtent: 100,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.text.sm)),
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
         FResizableRegion(
           initialExtent: 300,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.text.sm)),
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),
       ],
     ),
@@ -187,7 +187,7 @@ class NoDividerResizablePage extends Sample {
   @override
   Widget sample(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      border: Border.all(color: context.theme.color.border),
+      border: Border.all(color: context.theme.colors.border),
       borderRadius: BorderRadius.circular(8),
     ),
     child: FResizable(
@@ -198,12 +198,12 @@ class NoDividerResizablePage extends Sample {
         FResizableRegion(
           initialExtent: 100,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.text.sm)),
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
         FResizableRegion(
           initialExtent: 300,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.text.sm)),
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),
       ],
     ),

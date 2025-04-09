@@ -48,6 +48,29 @@ jobs:
           fi
         if: runner.os == 'Linux'
 
+  test-cli:
+    name: Build CLI
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        flutter-version: [ 3.x ]
+    defaults:
+      run:
+        working-directory: forui/example
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2.19.0
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+          cache: true
+      - run: dart run build_runner build --delete-conflicting-outputs
+        working-directory: forui
+      - run: dart run forui init -f
+      - run: dart run forui theme create -f
+      - run: dart run forui style create -af
+      - run: dart run forui style create -af -o ./lib/theme/all_styles.dart
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+
   build-android:
     name: Build Android
     runs-on: ubuntu-latest

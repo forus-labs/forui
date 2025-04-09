@@ -428,33 +428,33 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  FTileGroupStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        borderColor: color.border,
+        borderColor: colors.border,
         borderWidth: style.borderWidth,
         borderRadius: style.borderRadius,
-        tileStyle: FTileStyle.inherit(color: color, text: text, style: style),
+        tileStyle: FTileStyle.inherit(colors: colors, typography: typography, style: style),
         enabledStyle: FFormFieldStyle(
-          labelTextStyle: text.base.copyWith(
+          labelTextStyle: typography.base.copyWith(
             color: style.enabledFormFieldStyle.labelTextStyle.color,
             fontWeight: FontWeight.w600,
           ),
-          descriptionTextStyle: text.xs.copyWith(color: style.enabledFormFieldStyle.descriptionTextStyle.color),
+          descriptionTextStyle: typography.xs.copyWith(color: style.enabledFormFieldStyle.descriptionTextStyle.color),
         ),
         disabledStyle: FFormFieldStyle(
-          labelTextStyle: text.base.copyWith(
+          labelTextStyle: typography.base.copyWith(
             color: style.disabledFormFieldStyle.labelTextStyle.color,
             fontWeight: FontWeight.w600,
           ),
-          descriptionTextStyle: text.xs.copyWith(color: style.disabledFormFieldStyle.descriptionTextStyle.color),
+          descriptionTextStyle: typography.xs.copyWith(color: style.disabledFormFieldStyle.descriptionTextStyle.color),
         ),
         errorStyle: FFormFieldErrorStyle(
-          labelTextStyle: text.base.copyWith(
+          labelTextStyle: typography.base.copyWith(
             color: style.enabledFormFieldStyle.labelTextStyle.color,
             fontWeight: FontWeight.w600,
           ),
-          descriptionTextStyle: text.xs.copyWith(color: style.errorFormFieldStyle.descriptionTextStyle.color),
-          errorTextStyle: text.xs.copyWith(color: style.errorFormFieldStyle.errorTextStyle.color),
+          descriptionTextStyle: typography.xs.copyWith(color: style.errorFormFieldStyle.descriptionTextStyle.color),
+          errorTextStyle: typography.xs.copyWith(color: style.errorFormFieldStyle.errorTextStyle.color),
         ),
       );
 

@@ -9,10 +9,8 @@ Several breaking changes have been made to styles to improve consistency and usa
 * Add `FCardContentStyle.subtitleSpacing`.
 * Add `FCheckboxStateStyle.size`.
 
-* **Breaking** Rename `FThemeData.colorScheme` to `FThemeData.color`.
-* **Breaking** Rename `FThemeData.typography` to `FThemeData.text`.
+* **Breaking** Rename `FThemeData.colorScheme` to `FThemeData.colors`.
 * **Breaking** Rename all `F<Style>.inherit(colorScheme: ...)` to `F<Style>.inherit(color: ...)`.
-* **Breaking** Rename all `F<Style>.inherit(typography: ...)` to `F<Style>.inherit(text: ...)`.
 
 * **Breaking** Rename `FAlertStyle` to `FBaseAlertStyle`.
 * **Breaking** Rename `FAlertCustomStyle` to `FAlertStyle`.

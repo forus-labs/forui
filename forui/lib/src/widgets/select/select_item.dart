@@ -102,12 +102,15 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     this.labelPadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
 
-  /// Creates a [FSelectSectionStyle] that inherits from the given [FColorScheme], [FStyle], and [FTypography].
-  FSelectSectionStyle.inherit({required FColorScheme color, required FStyle style, required FTypography text})
+  /// Creates a [FSelectSectionStyle] that inherits from the given [FColors], [FStyle], and [FTypography].
+  FSelectSectionStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        enabledLabelTextStyle: text.sm.copyWith(color: color.primary, fontWeight: FontWeight.w600),
-        disabledLabelTextStyle: text.sm.copyWith(color: color.disable(color.primary), fontWeight: FontWeight.w600),
-        itemStyle: FSelectItemStyle.inherit(color: color, style: style, text: text),
+        enabledLabelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        disabledLabelTextStyle: typography.sm.copyWith(
+          color: colors.disable(colors.primary),
+          fontWeight: FontWeight.w600,
+        ),
+        itemStyle: FSelectItemStyle.inherit(colors: colors, style: style, typography: typography),
       );
 }
 
@@ -140,7 +143,7 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     super.key,
   });
 
-  /// Creates a [FSelectItem] that displays the [value] as the a text.
+  /// Creates a [FSelectItem] that displays the [value] as the a typography.
   static FSelectItem<String> text(String value, {bool? enabled}) =>
       FSelectItem(value: value, enabled: enabled, child: Text(value));
 
@@ -276,13 +279,13 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   });
 
   /// Creates a [FSelectItemStyle] that inherits its properties.
-  FSelectItemStyle.inherit({required FColorScheme color, required FStyle style, required FTypography text})
+  FSelectItemStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        enabledHoveredDecoration: BoxDecoration(color: color.secondary, borderRadius: style.borderRadius),
-        enabledTextStyle: text.sm.copyWith(color: color.primary),
-        disabledTextStyle: text.sm.copyWith(color: color.disable(color.primary)),
-        enabledIconStyle: IconThemeData(color: color.primary, size: 15),
-        disabledIconStyle: IconThemeData(color: color.disable(color.primary), size: 15),
+        enabledHoveredDecoration: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
+        enabledTextStyle: typography.sm.copyWith(color: colors.primary),
+        disabledTextStyle: typography.sm.copyWith(color: colors.disable(colors.primary)),
+        enabledIconStyle: IconThemeData(color: colors.primary, size: 15),
+        disabledIconStyle: IconThemeData(color: colors.disable(colors.primary), size: 15),
         tappableStyle: FTappableStyle(animationTween: FTappableAnimations.none),
       );
 }

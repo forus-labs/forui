@@ -219,24 +219,24 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
 
   /// Creates a [FButtonStyle] that inherits its properties from the given arguments.
   FButtonStyle.inherit({
-    required FColorScheme color,
-    required FTypography text,
+    required FColors colors,
+    required FTypography typography,
     required FStyle style,
     required Color background,
     required Color foreground,
   }) : this(
          enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: background),
-         enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.hover(background)),
-         disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: color.disable(background)),
+         enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.hover(background)),
+         disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(background)),
          focusedOutlineStyle: style.focusedOutlineStyle,
          contentStyle: FButtonContentStyle.inherit(
-           text: text,
+           typography: typography,
            enabled: foreground,
-           disabled: color.disable(foreground, color.disable(background)),
+           disabled: colors.disable(foreground, colors.disable(background)),
          ),
          iconContentStyle: FButtonIconContentStyle(
            enabledStyle: IconThemeData(color: foreground, size: 20),
-           disabledStyle: IconThemeData(color: color.disable(foreground, color.disable(background)), size: 20),
+           disabledStyle: IconThemeData(color: colors.disable(foreground, colors.disable(background)), size: 20),
          ),
          tappableStyle: style.tappableStyle,
        );

@@ -142,10 +142,10 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
     required this.tappableStyle,
   });
 
-  /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColorScheme].
-  FHeaderActionStyle.inherit({required FColorScheme color, required FStyle style, required double size})
-    : enabledStyle = IconThemeData(color: color.foreground, size: size),
-      disabledStyle = IconThemeData(color: color.disable(color.foreground), size: size),
+  /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColors].
+  FHeaderActionStyle.inherit({required FColors colors, required FStyle style, required double size})
+    : enabledStyle = IconThemeData(color: colors.foreground, size: size),
+      disabledStyle = IconThemeData(color: colors.disable(colors.foreground), size: size),
       focusedOutlineStyle = style.focusedOutlineStyle,
       tappableStyle = style.tappableStyle;
 }

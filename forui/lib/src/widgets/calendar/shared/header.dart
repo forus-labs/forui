@@ -194,22 +194,19 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
-  /// Creates a [FCalendarHeaderStyle] that inherits its values from the given [colorScheme] and [typography].
-  FCalendarHeaderStyle.inherit({
-    required FColorScheme colorScheme,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         focusedOutlineStyle: style.focusedOutlineStyle,
-         buttonStyle: FButtonStyles.inherit(color: colorScheme, text: typography, style: style).outline.transform(
-           (style) => style.copyWith(
-             iconContentStyle: style.iconContentStyle.copyWith(
-               enabledStyle: IconThemeData(color: colorScheme.mutedForeground, size: 17),
-               disabledStyle: IconThemeData(color: colorScheme.disable(colorScheme.mutedForeground), size: 17),
-             ),
-           ),
-         ),
-         headerTextStyle: typography.base.copyWith(color: colorScheme.primary, fontWeight: FontWeight.w600),
-         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-       );
+  /// Creates a [FCalendarHeaderStyle] that inherits its properties.
+  FCalendarHeaderStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.transform(
+          (style) => style.copyWith(
+            iconContentStyle: style.iconContentStyle.copyWith(
+              enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),
+              disabledStyle: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+            ),
+          ),
+        ),
+        headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+      );
 }

@@ -43,6 +43,7 @@ jobs:
 
       - run: flutter pub get
       - run: dart run ../tool/sort.dart forui
+      - run: dart run ./tool/cli_generator/main.dart
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: dart format .
       - run: dart fix --apply

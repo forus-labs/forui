@@ -224,68 +224,68 @@ final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerSty
        ),
        assert(0 < tileSize, 'tileSize must be positive.');
 
-  /// Creates a [FCalendarDayPickerStyle] that inherits from the given [colorScheme] and [typography].
+  /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
   factory FCalendarDayPickerStyle.inherit({
-    required FColorScheme colorScheme,
+    required FColors colors,
     required FTypography typography,
     required FStyle style,
   }) {
-    final textStyle = typography.base.copyWith(color: colorScheme.foreground, fontWeight: FontWeight.w500);
+    final textStyle = typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500);
     final mutedTextStyle = typography.base.copyWith(
-      color: colorScheme.disable(colorScheme.mutedForeground),
+      color: colors.disable(colors.mutedForeground),
       fontWeight: FontWeight.w500,
     );
 
     final disabled = FCalendarDayStyle(
       selectedStyle: FCalendarEntryStyle(
-        backgroundColor: colorScheme.primaryForeground,
+        backgroundColor: colors.primaryForeground,
         textStyle: mutedTextStyle,
-        focusedBorderColor: colorScheme.primaryForeground,
+        focusedBorderColor: colors.primaryForeground,
         radius: const Radius.circular(4),
         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       ),
       unselectedStyle: FCalendarEntryStyle(
-        backgroundColor: colorScheme.background,
+        backgroundColor: colors.background,
         textStyle: mutedTextStyle,
-        focusedBorderColor: colorScheme.background,
+        focusedBorderColor: colors.background,
         radius: const Radius.circular(4),
         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       ),
     );
 
     return FCalendarDayPickerStyle(
-      headerTextStyle: typography.xs.copyWith(color: colorScheme.mutedForeground),
+      headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
       selectableStyles: (
         current: FCalendarDayStyle(
           selectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.foreground,
-            textStyle: typography.base.copyWith(color: colorScheme.background, fontWeight: FontWeight.w500),
-            focusedBorderColor: colorScheme.foreground,
+            backgroundColor: colors.foreground,
+            textStyle: typography.base.copyWith(color: colors.background, fontWeight: FontWeight.w500),
+            focusedBorderColor: colors.foreground,
             radius: const Radius.circular(4),
             tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
           ),
           unselectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.background,
+            backgroundColor: colors.background,
             textStyle: textStyle,
-            hoveredBackgroundColor: colorScheme.secondary,
-            focusedBorderColor: colorScheme.foreground,
+            hoveredBackgroundColor: colors.secondary,
+            focusedBorderColor: colors.foreground,
             radius: const Radius.circular(4),
             tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
           ),
         ),
         enclosing: FCalendarDayStyle(
           selectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.primaryForeground,
+            backgroundColor: colors.primaryForeground,
             textStyle: mutedTextStyle,
-            focusedBorderColor: colorScheme.foreground,
+            focusedBorderColor: colors.foreground,
             radius: const Radius.circular(4),
             tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
           ),
           unselectedStyle: FCalendarEntryStyle(
-            backgroundColor: colorScheme.background,
+            backgroundColor: colors.background,
             textStyle: mutedTextStyle,
-            hoveredBackgroundColor: colorScheme.secondary,
-            focusedBorderColor: colorScheme.foreground,
+            hoveredBackgroundColor: colors.secondary,
+            focusedBorderColor: colors.foreground,
             radius: const Radius.circular(4),
             tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
           ),

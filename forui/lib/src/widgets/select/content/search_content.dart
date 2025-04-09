@@ -269,9 +269,9 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   });
 
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
-  FSelectSearchStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(color: color, text: text, style: style).transform(
+        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style).transform(
           (style) => style.copyWith(
             enabledStyle: style.enabledStyle.copyWith(
               focusedStyle: style.enabledStyle.focusedStyle.copyWith(color: Colors.transparent, width: 0),
@@ -279,11 +279,11 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
             ),
           ),
         ),
-        iconStyle: IconThemeData(size: 15, color: color.mutedForeground),
+        iconStyle: IconThemeData(size: 15, color: colors.mutedForeground),
         dividerStyle: FDividerStyles.inherit(
-          color: color,
+          colors: colors,
           style: style,
         ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
-        loadingIndicatorStyle: FProgressStyles.inherit(color: color, style: style).circularIconProgressStyle,
+        loadingIndicatorStyle: FProgressStyles.inherit(colors: colors, style: style).circularIconProgressStyle,
       );
 }

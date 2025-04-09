@@ -82,11 +82,11 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
        assert(spacing >= 0, 'The spacing must be greater than or equal to 0.');
 
   /// Creates a [FPickerStyle] that inherits its properties.
-  FPickerStyle.inherit({required FColorScheme color, required FStyle style, required FTypography text})
+  FPickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        textStyle: text.base.copyWith(fontWeight: FontWeight.w500),
+        textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),
         selectionBorderRadius: style.borderRadius,
-        selectionColor: color.muted,
+        selectionColor: colors.muted,
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

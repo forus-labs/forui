@@ -63,16 +63,16 @@ final class FDividerStyles with Diagnosticable, _$FDividerStylesFunctions {
   /// Creates a [FDividerStyles].
   FDividerStyles({required this.horizontalStyle, required this.verticalStyle});
 
-  /// Creates a [FDividerStyles] that inherits its properties from [color] and [style].
-  FDividerStyles.inherit({required FColorScheme color, required FStyle style})
+  /// Creates a [FDividerStyles] that inherits its properties.
+  FDividerStyles.inherit({required FColors colors, required FStyle style})
     : this(
         horizontalStyle: FDividerStyle(
-          color: color.secondary,
+          color: colors.secondary,
           padding: FDividerStyle.defaultPadding.horizontalStyle,
           width: style.borderWidth,
         ),
         verticalStyle: FDividerStyle(
-          color: color.secondary,
+          color: colors.secondary,
           padding: FDividerStyle.defaultPadding.verticalStyle,
           width: style.borderWidth,
         ),

@@ -11,18 +11,15 @@ class DividerPage extends Sample {
 
   @override
   Widget sample(BuildContext context) {
-    final color = theme.color;
-    final text = theme.text;
+    final colors = theme.colors;
+    final text = theme.typography;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          'Flutter Forui',
-          style: text.xl2.copyWith(color: color.foreground, fontWeight: FontWeight.w600),
-        ),
-        Text('An open-source widget library.', style: text.sm.copyWith(color: color.mutedForeground)),
+        Text('Flutter Forui', style: text.xl2.copyWith(color: colors.foreground, fontWeight: FontWeight.w600)),
+        Text('An open-source widget library.', style: text.sm.copyWith(color: colors.mutedForeground)),
         const FDivider(),
         SizedBox(
           height: 30,
@@ -30,11 +27,11 @@ class DividerPage extends Sample {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Blog', style: text.sm.copyWith(color: color.foreground)),
+              Text('Blog', style: text.sm.copyWith(color: colors.foreground)),
               const FDivider(axis: Axis.vertical),
-              Text('Docs', style: text.sm.copyWith(color: color.foreground)),
+              Text('Docs', style: text.sm.copyWith(color: colors.foreground)),
               const FDivider(axis: Axis.vertical),
-              Text('Source', style: text.sm.copyWith(color: color.foreground)),
+              Text('Source', style: text.sm.copyWith(color: colors.foreground)),
             ],
           ),
         ),

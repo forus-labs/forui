@@ -218,10 +218,10 @@ class FSelectContentStyle with Diagnosticable, _$FSelectContentStyleFunctions {
     this.padding = const EdgeInsets.symmetric(vertical: 5),
   });
 
-  /// Creates a [FSelectContentStyle] that inherits from the given [FColorScheme], [FStyle], and [FTypography].
-  FSelectContentStyle.inherit({required FColorScheme color, required FStyle style, required FTypography text})
+  /// Creates a [FSelectContentStyle] that inherits from the given [FColors], [FStyle], and [FTypography].
+  FSelectContentStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        sectionStyle: FSelectSectionStyle.inherit(color: color, style: style, text: text),
-        scrollHandleStyle: FSelectScrollHandleStyle.inherit(color: color),
+        sectionStyle: FSelectSectionStyle.inherit(colors: colors, style: style, typography: typography),
+        scrollHandleStyle: FSelectScrollHandleStyle.inherit(colors: colors),
       );
 }

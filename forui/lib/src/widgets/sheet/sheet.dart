@@ -294,7 +294,7 @@ class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
     this.closeProgressThreshold = 0.5,
   });
 
-  /// Creates a [FSheetStyle] that inherits its colors from the given [FColorScheme].
-  FSheetStyle.inherit({required FColorScheme color})
-    : this(barrierColor: color.barrier, backgroundColor: color.background);
+  /// Creates a [FSheetStyle] that inherits its colors from the given [FColors].
+  FSheetStyle.inherit({required FColors colors})
+    : this(barrierColor: colors.barrier, backgroundColor: colors.background);
 }

@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
@@ -77,7 +76,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       return track;
     }
 
-    if (Touch.primary || trackHitRegionCrossExtent != null) {
+    if (FTouch.primary || trackHitRegionCrossExtent != null) {
       final crossAxisExtent = trackHitRegionCrossExtent ?? max(style.thumbSize, style.crossAxisExtent);
       final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 

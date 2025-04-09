@@ -29,8 +29,8 @@ A portal renders a portal widget that "floats" on top of a child widget.
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
-            color: context.theme.colorScheme.background,
-            border: Border.all(color: context.theme.colorScheme.border, width: 1),
+            color: context.theme.colors.background,
+            border: Border.all(color: context.theme.colors.border, width: 1),
             borderRadius: BorderRadius.circular(4),
           ),
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
@@ -45,7 +45,7 @@ A portal renders a portal widget that "floats" on top of a child widget.
                 Text(
                   'Set the dimensions for the layer.',
                   style: context.theme.typography.sm.copyWith(
-                    color: context.theme.colorScheme.mutedForeground,
+                    color: context.theme.colors.mutedForeground,
                     fontWeight: FontWeight.w300,
                   ),
                 ),

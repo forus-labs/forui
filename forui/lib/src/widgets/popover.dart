@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
-import 'package:forui/src/foundation/tappable.dart';
 
 part 'popover.style.dart';
 
@@ -86,7 +85,7 @@ enum FHidePopoverRegion {
 class FPopover extends StatefulWidget {
   /// The platform-specific default popover and child anchors.
   static ({Alignment popover, Alignment child}) get defaultPlatform =>
-      Touch.primary
+      FTouch.primary
           ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
           : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
 
@@ -334,13 +333,13 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// Creates a [FPopoverStyle].
   const FPopoverStyle({required this.decoration, this.padding = const EdgeInsets.all(4)});
 
-  /// Creates a [FPopoverStyle] that inherits its properties from [color] and [style].
-  FPopoverStyle.inherit({required FColorScheme color, required FStyle style})
+  /// Creates a [FPopoverStyle] that inherits its properties.
+  FPopoverStyle.inherit({required FColors colors, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          color: color.background,
+          color: colors.background,
           borderRadius: style.borderRadius,
-          border: Border.all(width: style.borderWidth, color: color.border),
+          border: Border.all(width: style.borderWidth, color: colors.border),
           boxShadow: style.shadow,
         ),
       );

@@ -20,7 +20,7 @@ A box which children can be resized along either the horizontal or vertical axis
       @override
       Widget build(BuildContext context) => DecoratedBox(
             decoration: BoxDecoration(
-              border: Border.all(color: context.theme.colorScheme.border),
+              border: Border.all(color: context.theme.colors.border),
               borderRadius: BorderRadius.circular(8),
             ),
             child: FResizable(
@@ -58,7 +58,7 @@ A box which children can be resized along either the horizontal or vertical axis
 
       @override
       Widget build(BuildContext context) {
-        final FThemeData(:colorScheme, :typography) = context.theme;
+        final FThemeData(:colors, :typography) = context.theme;
         final start = DateTime.fromMillisecondsSinceEpoch(
           (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
           isUtc: true,
@@ -77,15 +77,15 @@ A box which children can be resized along either the horizontal or vertical axis
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(icon, size; 15, color: colorScheme.foreground),
+                  Icon(icon, size; 15, color: colors.foreground),
                   const SizedBox(width: 3),
-                  Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
+                  Text(label, style: typography.sm.copyWith(color: colors.foreground)),
                 ],
               ),
               const SizedBox(height: 5),
               Text(
                 '${format.format(start)} - ${format.format(end)}',
-                style: typography.sm.copyWith(color: colorScheme.foreground),
+                style: typography.sm.copyWith(color: colors.foreground),
               ),
             ],
           ),
@@ -134,7 +134,7 @@ FResizable(
       @override
       Widget build(BuildContext context) => DecoratedBox(
             decoration: BoxDecoration(
-              border: Border.all(color: context.theme.colorScheme.border),
+              border: Border.all(color: context.theme.colors.border),
               borderRadius: BorderRadius.circular(8),
             ),
             child: FResizable(
@@ -173,7 +173,7 @@ FResizable(
 
       @override
       Widget build(BuildContext context) {
-        final FThemeData(:colorScheme, :typography) = context.theme;
+        final FThemeData(:colors, :typography) = context.theme;
         final start = DateTime.fromMillisecondsSinceEpoch(
           (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
           isUtc: true,
@@ -192,15 +192,15 @@ FResizable(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
+                  icon(height: 15, colorFilter: ColorFilter.mode(colors.foreground, BlendMode.srcIn)),
                   const SizedBox(width: 3),
-                  Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
+                  Text(label, style: typography.sm.copyWith(color: colors.foreground)),
                 ],
               ),
               const SizedBox(height: 5),
               Text(
                 '${format.format(start)} - ${format.format(end)}',
-                style: typography.sm.copyWith(color: colorScheme.foreground),
+                style: typography.sm.copyWith(color: colors.foreground),
               ),
             ],
           ),
@@ -221,7 +221,7 @@ FResizable(
     ```dart {7} copy
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: context.theme.colorScheme.border),
+        border: Border.all(color: context.theme.colors.border),
         borderRadius: BorderRadius.circular(8),
       ),
       child: FResizable(
@@ -259,7 +259,7 @@ FResizable(
     ```dart {8} copy
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: context.theme.colorScheme.border),
+        border: Border.all(color: context.theme.colors.border),
         borderRadius: BorderRadius.circular(8),
       ),
       child: FResizable(
@@ -298,7 +298,7 @@ FResizable(
     ```dart {8} copy
     Widget build(BuildContext context) => DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: context.theme.colorScheme.border),
+        border: Border.all(color: context.theme.colors.border),
         borderRadius: BorderRadius.circular(8),
       ),
       child: FResizable(

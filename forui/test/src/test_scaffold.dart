@@ -34,7 +34,7 @@ extension WidgetTesters on WidgetTester {
 
 class TestScaffold extends StatelessWidget {
   static final blueScreen = () {
-    const colors = FColorScheme(
+    const colors = FColors(
       brightness: Brightness.light,
       barrier: Color(0xFF03A9F4),
       background: Color(0xFF03A9F4),
@@ -51,10 +51,10 @@ class TestScaffold extends StatelessWidget {
       errorForeground: Color(0xFF03A9F4),
       border: Color(0xFF03A9F4),
     );
-    final text = FTypography.inherit(color: colors);
-    final style = FStyle.inherit(color: colors, text: text).copyWith(shadow: []);
+    final typography = FTypography.inherit(colors: colors);
+    final style = FStyle.inherit(colors: colors, typography: typography).copyWith(shadow: []);
 
-    return FThemeData(color: colors, text: text, style: style);
+    return FThemeData(colors: colors, typography: typography, style: style);
   }();
 
   static List<({String name, FThemeData data})> get themes => [
@@ -107,7 +107,7 @@ class TestScaffold extends StatelessWidget {
 
   TestScaffold.blue({required this.child, this.alignment = Alignment.center, super.key})
     : theme = FThemes.zinc.light,
-      background = blueScreen.color.background,
+      background = blueScreen.colors.background,
       locale = null,
       textDirection = null,
       padded = false,
@@ -126,7 +126,7 @@ class TestScaffold extends StatelessWidget {
               data: theme,
               textDirection: textDirection,
               child: Container(
-                color: background ?? theme.color.background,
+                color: background ?? theme.colors.background,
                 alignment: Alignment.center,
                 padding: padded ? const EdgeInsets.all(16) : null,
                 child: child!,
@@ -139,7 +139,7 @@ class TestScaffold extends StatelessWidget {
         data: theme,
         textDirection: textDirection,
         child: Container(
-          color: background ?? theme.color.background,
+          color: background ?? theme.colors.background,
           alignment: Alignment.center,
           padding: padded ? const EdgeInsets.all(16) : null,
           child: Align(alignment: alignment, child: child),

@@ -24,7 +24,7 @@ import 'package:forui/forui.dart';
 /// [disable] methods. The opacity can be adjusted with [enabledHoveredOpacity] and [disabledOpacity].
 ///
 /// See [FThemes] for predefined themes and color schemes.
-final class FColorScheme with Diagnosticable, FTransformable {
+final class FColors with Diagnosticable, FTransformable {
   /// The system brightness.
   ///
   /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
@@ -110,11 +110,11 @@ final class FColorScheme with Diagnosticable, FTransformable {
   /// Throws [AssertionError] if the value is less than 0 or greater than 1.
   final double disabledOpacity;
 
-  /// Creates a [FColorScheme].
+  /// Creates a [FColors].
   ///
   /// **Note:**
   /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
-  const FColorScheme({
+  const FColors({
     required this.brightness,
     required this.barrier,
     required this.background,
@@ -140,32 +140,32 @@ final class FColorScheme with Diagnosticable, FTransformable {
 
   /// Returns a hovered color for the [foreground] on the [background].
   ///
-  /// [FColorScheme.background] is used if [background] is not given.
+  /// [FColors.background] is used if [background] is not given.
   Color hover(Color foreground, [Color? background]) =>
       Color.alphaBlend(foreground.withValues(alpha: enabledHoveredOpacity), background ?? this.background);
 
   /// Returns a disabled color for the [foreground] on the [background].
   ///
-  /// [FColorScheme.background] is used if [background] is not given.
+  /// [FColors.background] is used if [background] is not given.
   Color disable(Color foreground, [Color? background]) =>
       Color.alphaBlend(foreground.withValues(alpha: disabledOpacity), background ?? this.background);
 
-  /// Returns a copy of this [FColorScheme] with the given properties replaced.
+  /// Returns a copy of this [FColors] with the given properties replaced.
   ///
   /// ```dart
-  /// final scheme = FColorScheme(
+  /// final colors = FColors(
   ///   brightness: Brightness.light,
   ///   background: Colors.blue,
   ///   // Other arguments omitted for brevity
   /// );
   ///
-  /// final copy = scheme.copyWith(brightness: Brightness.dark);
+  /// final copy = colors.copyWith(brightness: Brightness.dark);
   ///
   /// print(copy.brightness); // Brightness.dark
   /// print(copy.background); // Colors.blue
   /// ```
   @useResult
-  FColorScheme copyWith({
+  FColors copyWith({
     Brightness? brightness,
     Color? barrier,
     Color? background,
@@ -183,7 +183,7 @@ final class FColorScheme with Diagnosticable, FTransformable {
     Color? border,
     double? enabledHoveredOpacity,
     double? disabledOpacity,
-  }) => FColorScheme(
+  }) => FColors(
     brightness: brightness ?? this.brightness,
     barrier: barrier ?? this.barrier,
     background: background ?? this.background,
@@ -229,7 +229,7 @@ final class FColorScheme with Diagnosticable, FTransformable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FColorScheme &&
+      other is FColors &&
           brightness == other.brightness &&
           barrier == other.barrier &&
           background == other.background &&

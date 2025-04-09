@@ -4,7 +4,6 @@ import 'package:flutter/material.dart' hide Thumb;
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
 import 'package:forui/src/widgets/slider/thumb.dart';
 import '../../test_scaffold.dart';
 
@@ -35,10 +34,10 @@ void main() {
         for (final touch in [true, false]) {
           for (final enabled in [true, false]) {
             testWidgets('${theme.name} - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
-              Touch.primary = touch;
+              FTouch.primary = touch;
               final styles = FSliderStyles.inherit(
-                color: theme.data.color,
-                text: theme.data.text,
+                colors: theme.data.colors,
+                typography: theme.data.typography,
                 style: theme.data.style,
               );
 
@@ -84,10 +83,10 @@ void main() {
           }
 
           testWidgets('${theme.name} - $layout - focused', (tester) async {
-            Touch.primary = touch;
+            FTouch.primary = touch;
             final styles = FSliderStyles.inherit(
-              color: theme.data.color,
-              text: theme.data.text,
+              colors: theme.data.colors,
+              typography: theme.data.typography,
               style: theme.data.style,
             );
 
@@ -125,10 +124,10 @@ void main() {
           });
 
           testWidgets('${theme.name} - $layout - error', (tester) async {
-            Touch.primary = touch;
+            FTouch.primary = touch;
             final styles = FSliderStyles.inherit(
-              color: theme.data.color,
-              text: theme.data.text,
+              colors: theme.data.colors,
+              typography: theme.data.typography,
               style: theme.data.style,
             );
 
@@ -319,5 +318,5 @@ void main() {
     });
   });
 
-  tearDown(() => Touch.primary = null);
+  tearDown(() => FTouch.primary = null);
 }

@@ -1,0 +1,5 @@
+# See https://forui.dev/docs/cli for more information.
+cli:
+  color-output: lib/theme/color.dart
+  typography-output: lib/theme/typography.dart
+  style-output: lib/theme

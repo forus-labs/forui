@@ -129,13 +129,13 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
-  FAccordionStyle.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        titleTextStyle: text.base.copyWith(fontWeight: FontWeight.w500, color: color.foreground),
-        childTextStyle: text.sm.copyWith(color: color.foreground),
-        iconStyle: IconThemeData(color: color.primary, size: 20),
+        titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground),
+        childTextStyle: typography.sm.copyWith(color: colors.foreground),
+        iconStyle: IconThemeData(color: colors.primary, size: 20),
         focusedOutlineStyle: style.focusedOutlineStyle,
-        dividerStyle: FDividerStyle(color: color.border, padding: EdgeInsets.zero),
+        dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       );
 }

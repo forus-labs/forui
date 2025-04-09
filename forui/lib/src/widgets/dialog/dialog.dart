@@ -127,7 +127,7 @@ class FDialog extends StatelessWidget {
         context: context,
         child: Align(
           child: DefaultTextStyle(
-            style: context.theme.text.base.copyWith(color: theme.color.foreground),
+            style: context.theme.typography.base.copyWith(color: theme.colors.foreground),
             child: Semantics(
               scopesRoute: true,
               explicitChildNodes: true,
@@ -196,12 +196,12 @@ final class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     this.insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
   });
 
-  /// Creates a [FDialogStyle] that inherits its properties from the given [style], [color], and [text].
-  factory FDialogStyle.inherit({required FStyle style, required FColorScheme color, required FTypography text}) {
-    final title = text.lg.copyWith(fontWeight: FontWeight.w600, color: color.foreground);
-    final body = text.sm.copyWith(color: color.mutedForeground);
+  /// Creates a [FDialogStyle] that inherits its properties.
+  factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {
+    final title = typography.lg.copyWith(fontWeight: FontWeight.w600, color: colors.foreground);
+    final body = typography.sm.copyWith(color: colors.mutedForeground);
     return FDialogStyle(
-      decoration: BoxDecoration(borderRadius: style.borderRadius, color: color.background),
+      decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
       horizontalStyle: FDialogContentStyle(
         titleTextStyle: title,
         bodyTextStyle: body,

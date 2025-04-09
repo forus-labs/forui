@@ -189,21 +189,21 @@ final class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties.
-  FSwitchStyle.inherit({required FColorScheme color, required FStyle style})
+  FSwitchStyle.inherit({required FColors colors, required FStyle style})
     : this(
-        focusColor: color.primary,
+        focusColor: colors.primary,
         labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
         enabledStyle: FSwitchStateStyle(
-          checkedColor: color.primary,
-          uncheckedColor: color.border,
-          thumbColor: color.background,
+          checkedColor: colors.primary,
+          uncheckedColor: colors.border,
+          thumbColor: colors.background,
           labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
         ),
         disabledStyle: FSwitchStateStyle(
-          checkedColor: color.disable(color.primary),
-          uncheckedColor: color.disable(color.border),
-          thumbColor: color.background,
+          checkedColor: colors.disable(colors.primary),
+          uncheckedColor: colors.disable(colors.border),
+          thumbColor: colors.background,
           labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
           descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
         ),
@@ -233,7 +233,7 @@ final class FSwitchStateStyle with Diagnosticable, _$FSwitchStateStyleFunctions 
   @override
   final Color uncheckedColor;
 
-  /// The thumb's color.
+  /// The thumb's colors.
   @override
   final Color thumbColor;
 

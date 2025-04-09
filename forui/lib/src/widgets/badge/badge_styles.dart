@@ -28,37 +28,40 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
   /// Creates a [FBadgeStyles].
   FBadgeStyles({required this.primary, required this.secondary, required this.outline, required this.destructive});
 
-  /// Creates a [FBadgeStyles] that inherits its properties from the provided [color], [text], and [style].
-  FBadgeStyles.inherit({required FColorScheme color, required FTypography text, required FStyle style})
+  /// Creates a [FBadgeStyles] that inherits its properties.
+  FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         primary: FBadgeStyle(
-          decoration: BoxDecoration(color: color.primary, borderRadius: const BorderRadius.all(Radius.circular(100))),
+          decoration: BoxDecoration(color: colors.primary, borderRadius: const BorderRadius.all(Radius.circular(100))),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: text.sm.copyWith(color: color.primaryForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: FontWeight.w600),
           ),
         ),
         secondary: FBadgeStyle(
-          decoration: BoxDecoration(color: color.secondary, borderRadius: const BorderRadius.all(Radius.circular(100))),
+          decoration: BoxDecoration(
+            color: colors.secondary,
+            borderRadius: const BorderRadius.all(Radius.circular(100)),
+          ),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: text.sm.copyWith(color: color.secondaryForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.secondaryForeground, fontWeight: FontWeight.w600),
           ),
         ),
         outline: FBadgeStyle(
           decoration: BoxDecoration(
-            border: Border.all(color: color.border, width: style.borderWidth),
+            border: Border.all(color: colors.border, width: style.borderWidth),
             borderRadius: const BorderRadius.all(Radius.circular(100)),
           ),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: text.sm.copyWith(color: color.foreground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: FontWeight.w600),
           ),
         ),
         destructive: FBadgeStyle(
           decoration: BoxDecoration(
-            color: color.destructive,
+            color: colors.destructive,
             borderRadius: const BorderRadius.all(Radius.circular(100)),
           ),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: text.sm.copyWith(color: color.destructiveForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.destructiveForeground, fontWeight: FontWeight.w600),
           ),
         ),
       );
