@@ -7,12 +7,10 @@ import '../style.dart';
 import 'generate.dart';
 
 final registry = {
-  for (final MapEntry(:key, :value) in Style.values.asNameMap().entries)
-    ...{
-      key.toLowerCase(): value,
-      for (final alias in value.aliases)
-        alias.toLowerCase(): value,
-    },
+  for (final MapEntry(:key, :value) in Style.values.asNameMap().entries) ...{
+    key.toLowerCase(): value,
+    for (final alias in value.aliases) alias.toLowerCase(): value,
+  },
 };
 
 class StyleCreateCommand extends ForuiCommand {

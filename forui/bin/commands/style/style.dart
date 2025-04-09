@@ -78,12 +78,7 @@ enum Style {
   fcalendarheaderstyle(
     'FCalendarHeaderStyle',
     <String>[],
-    <String>[
-      'FCalendarHeaderStyle',
-      'FButtonStyles',
-      'FButtonStyle',
-      'FButtonContentStyle',
-    ],
+    <String>['FCalendarHeaderStyle', 'FButtonStyles', 'FButtonStyle', 'FButtonContentStyle'],
     'FCalendarHeaderStyle calendarHeaderStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FCalendarHeaderStyle(\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  buttonStyle: _buttonStyles(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ).outline.transform(\n    (style) => style.copyWith(\n      iconContentStyle: style.iconContentStyle.copyWith(\n        enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),\n        disabledStyle: IconThemeData(\n          color: colors.disable(colors.mutedForeground),\n          size: 17,\n        ),\n      ),\n    ),\n  ),\n  headerTextStyle: typography.base.copyWith(\n    color: colors.primary,\n    fontWeight: FontWeight.w600,\n  ),\n  tappableStyle: style.tappableStyle.copyWith(\n    animationTween: FTappableAnimations.none,\n  ),\n);\n',
   ),
   fcalendarstyle(
@@ -221,12 +216,7 @@ enum Style {
   fpopovermenustyle(
     'FPopoverMenuStyle',
     <String>['FPopoverMenu', 'PopoverMenu'],
-    <String>[
-      'FPopoverMenuStyle',
-      'FTileGroupStyle',
-      'FTileStyle',
-      'FTileContentStyle',
-    ],
+    <String>['FPopoverMenuStyle', 'FTileGroupStyle', 'FTileStyle', 'FTileContentStyle'],
     'FPopoverMenuStyle popoverMenuStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FPopoverMenuStyle.inherit(\n  colors: colors,\n  style: style,\n  typography: typography,\n);\n',
   ),
   fpopoverstyle(
@@ -268,12 +258,7 @@ enum Style {
   fselectcontentstyle(
     'FSelectContentStyle',
     <String>[],
-    <String>[
-      'FSelectContentStyle',
-      'FSelectSectionStyle',
-      'FSelectItemStyle',
-      'FSelectScrollHandleStyle',
-    ],
+    <String>['FSelectContentStyle', 'FSelectSectionStyle', 'FSelectItemStyle', 'FSelectScrollHandleStyle'],
     'FSelectContentStyle selectContentStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FSelectContentStyle(\n  sectionStyle: _selectSectionStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  ),\n  scrollHandleStyle: _selectScrollHandleStyle(colors: colors),\n);\n',
   ),
   fselectgroupstyle(
@@ -299,13 +284,7 @@ enum Style {
   fselectmenutilestyle(
     'FSelectMenuTileStyle',
     <String>['FSelectMenuTile', 'SelectMenuTile'],
-    <String>[
-      'FSelectMenuTileStyle',
-      'FPopoverMenuStyle',
-      'FTileGroupStyle',
-      'FTileStyle',
-      'FTileContentStyle',
-    ],
+    <String>['FSelectMenuTileStyle', 'FPopoverMenuStyle', 'FTileGroupStyle', 'FTileStyle', 'FTileContentStyle'],
     'FSelectMenuTileStyle selectMenuTileStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final groupStyle = _tileGroupStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  );\n  return FSelectMenuTileStyle(\n    labelLayoutStyle: groupStyle.labelLayoutStyle,\n    menuStyle: _popoverMenuStyle(\n      colors: colors,\n      style: style,\n      typography: typography,\n    ),\n    tileStyle: groupStyle.tileStyle,\n    enabledStyle: groupStyle.enabledStyle,\n    disabledStyle: groupStyle.disabledStyle,\n    errorStyle: groupStyle.errorStyle,\n  );\n}\n',
   ),
   fselectscrollhandlestyle(
