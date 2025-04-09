@@ -2,7 +2,9 @@
 We are experimenting with a new changelog format which groups changes by feature.
 
 ### Styles
-Several breaking changes have been made to styles to improve consistency and usability.
+A CLI has been added to generate styles for Forui widgets. See forui.dev/docs/cli for more information. Several breaking 
+changes have been made to styles to improve consistency and usability. They have been updated to use `WidgetState`s to 
+make them more customizable and concise.
 
 * Add `FBottomNavigationItemStyle.spacing`.
 * Add `FCardContentStyle.imageSpacing`.
@@ -21,7 +23,8 @@ Several breaking changes have been made to styles to improve consistency and usa
 * **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` into `FDialog.constraints.`.
 * **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` to `FDialog.constraints.`.
 
-#### `FIcon`
+
+### `FIcon`
 `FIcon` has been removed in favor of Flutter's `Icon` class. `FIcon` was designed with only monochrome icons in mind
 and is not able to support multicolored icons. This coincides with replacement of `FAssets` with `FIcons` and svg icons 
 with font icons. In addition, all `iconColor` and `iconSize` style properties have been replaced with `IconThemeData`.
@@ -120,6 +123,9 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Add `FLineCalendarStyle.tappableStyle`.
 * Add `FPaginationStyle.tappableStyle`.
 * Add `FTileStyle.tappableStyle`.
+
+* Add `FTappable.statesController`.
+* Add `FTappableStyle.cursor`.
 * **Breaking** Rename `FTappable` to `FTappable.static`.
 * **Breaking** Rename `FTappable.animated` to `FTappable`.
 * **Breaking** Split `FTappableData.hovered` into `FTappableData.hovered` and `FTappableData.pressed`.

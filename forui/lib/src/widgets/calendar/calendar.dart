@@ -88,10 +88,10 @@ class FCalendar extends StatefulWidget {
     DateTime? initialMonth,
     super.key,
   }) : start = start ?? DateTime(1900),
-       end = end ?? DateTime(2100),
-       today = today ?? DateTime.now(),
-       _initialType = initialType,
-       _initialMonth = (initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months) {
+        end = end ?? DateTime(2100),
+        today = today ?? DateTime.now(),
+        _initialType = initialType,
+        _initialMonth = (initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months) {
     assert(this.start.toLocalDate() < this.end.toLocalDate(), 'end date must be greater than start date');
   }
 
@@ -146,35 +146,35 @@ class _State extends State<FCalendar> {
                 valueListenable: _type,
                 builder:
                     (_, value, _) => switch (value) {
-                      FCalendarPickerType.day => PagedDayPicker(
-                        style: style,
-                        dayBuilder: widget.dayBuilder,
-                        start: widget.start.toLocalDate(),
-                        end: widget.end.toLocalDate(),
-                        today: widget.today.toLocalDate(),
-                        initial: _month.value,
-                        selectable: (date) => widget.controller.selectable(date.toNative()),
-                        selected: (date) => widget.controller.selected(date.toNative()),
-                        onMonthChange: (date) {
-                          _month.value = date;
-                          widget.onMonthChange?.call(date.toNative());
-                        },
-                        onPress: (date) {
-                          final native = date.toNative();
-                          widget.controller.select(native);
-                          widget.onPress?.call(native);
-                        },
-                        onLongPress: (date) => widget.onLongPress?.call(date.toNative()),
-                      ),
-                      FCalendarPickerType.yearMonth => YearMonthPicker(
-                        style: style,
-                        start: widget.start.toLocalDate(),
-                        end: widget.end.toLocalDate(),
-                        today: widget.today.toLocalDate(),
-                        month: _month,
-                        type: _type,
-                      ),
+                  FCalendarPickerType.day => PagedDayPicker(
+                    style: style,
+                    dayBuilder: widget.dayBuilder,
+                    start: widget.start.toLocalDate(),
+                    end: widget.end.toLocalDate(),
+                    today: widget.today.toLocalDate(),
+                    initial: _month.value,
+                    selectable: (date) => widget.controller.selectable(date.toNative()),
+                    selected: (date) => widget.controller.selected(date.toNative()),
+                    onMonthChange: (date) {
+                      _month.value = date;
+                      widget.onMonthChange?.call(date.toNative());
                     },
+                    onPress: (date) {
+                      final native = date.toNative();
+                      widget.controller.select(native);
+                      widget.onPress?.call(native);
+                    },
+                    onLongPress: (date) => widget.onLongPress?.call(date.toNative()),
+                  ),
+                  FCalendarPickerType.yearMonth => YearMonthPicker(
+                    style: style,
+                    start: widget.start.toLocalDate(),
+                    end: widget.end.toLocalDate(),
+                    today: widget.today.toLocalDate(),
+                    month: _month,
+                    type: _type,
+                  ),
+                },
               ),
             ],
           ),
@@ -196,7 +196,7 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
 
   /// The year/month picker's style.
   @override
-  final FCalendarYearMonthPickerStyle yearMonthPickerStyle;
+  final FCalendarEntryStyle yearMonthPickerStyle;
 
   /// The decoration surrounding the header & picker.
   @override
@@ -220,20 +220,33 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     this.pageAnimationDuration = const Duration(milliseconds: 200),
   });
 
-  /// Creates a [FCalendarStyle] that inherits the color scheme and typography.
+  /// Creates a [FCalendarStyle] that inherits its properties.
   FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        headerStyle: FCalendarHeaderStyle.inherit(colors: colors, typography: typography, style: style),
-        dayPickerStyle: FCalendarDayPickerStyle.inherit(colors: colors, typography: typography, style: style),
-        yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
+      : this(
+    headerStyle: FCalendarHeaderStyle.inherit(colors: colors, typography: typography, style: style),
+    dayPickerStyle: FCalendarDayPickerStyle.inherit(colors: colors, typography: typography),
+    yearMonthPickerStyle: FCalendarEntryStyle(
+      backgroundColor: FWidgetStateMap({
+        (WidgetState.hovered | WidgetState.pressed) & ~WidgetState.disabled: colors.secondary,
+        WidgetState.any: colors.background,
+      }),
+      borderColor: FWidgetStateMap({
+        WidgetState.disabled: colors.background,
+        WidgetState.any: colors.foreground,
+      }),
+      textStyle: FWidgetStateMap({
+        WidgetState.disabled: typography.base.copyWith(
+          color: colors.disable(colors.mutedForeground),
+          fontWeight: FontWeight.w500,
         ),
-        decoration: BoxDecoration(
-          borderRadius: style.borderRadius,
-          border: Border.all(color: colors.border),
-          color: colors.background,
-        ),
-      );
+        WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
+      }),
+      radius: const Radius.circular(8),
+    ),
+    decoration: BoxDecoration(
+      borderRadius: style.borderRadius,
+      border: Border.all(color: colors.border),
+      color: colors.background,
+    ),
+  );
 }

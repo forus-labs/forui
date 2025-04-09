@@ -29,15 +29,12 @@ extension FTouch on Never {
   }
 }
 
-/// The tappable's current data.
-typedef FTappableData = ({bool focused, bool hovered, bool pressed});
-
 /// An area that responds to touch.
 ///
 /// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 class FTappable extends StatefulWidget {
-  static Widget _builder(BuildContext _, FTappableData _, Widget? child) => child!;
+  static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) => child!;
 
   /// The style.
   final FTappableStyle? style;
@@ -81,7 +78,9 @@ class FTappable extends StatefulWidget {
   final VoidCallback? onLongPress;
 
   /// The builder used to build to create a child with the current state.
-  final ValueWidgetBuilder<FTappableData> builder;
+  ///
+  /// {@macro forui.foundation.doc_templates.tappable}
+  final ValueWidgetBuilder<Set<WidgetState>> builder;
 
   /// The child.
   ///
@@ -105,7 +104,7 @@ class FTappable extends StatefulWidget {
     HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueWidgetBuilder<FTappableData>? builder,
+    ValueWidgetBuilder<Set<WidgetState>>? builder,
     Widget? child,
     Key? key,
   }) = AnimatedTappable;
@@ -127,7 +126,7 @@ class FTappable extends StatefulWidget {
     this.onPress,
     this.onLongPress,
     this.child,
-    ValueWidgetBuilder<FTappableData>? builder,
+    ValueWidgetBuilder<Set<WidgetState>>? builder,
     super.key,
   }) : assert(builder != null || child != null, 'Either builder or child must be provided.'),
        builder = builder ?? _builder;
@@ -153,42 +152,42 @@ class FTappable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 
-  bool get _enabled => onPress != null || onLongPress != null;
+  bool get _disabled => onPress == null && onLongPress == null;
 }
 
 class _FTappableState<T extends FTappable> extends State<T> {
+  late final WidgetStatesController _controller;
   int _monotonic = 0;
-  bool _focused = false;
-  bool _hovered = false;
-  bool _touched = false;
 
   @override
   void initState() {
     super.initState();
-    _focused = widget.autofocus;
+    _controller = WidgetStatesController({
+      if (widget.autofocus)
+        WidgetState.focused,
+      if (widget._disabled)
+        WidgetState.disabled,
+    });
   }
 
   @override
   void didUpdateWidget(covariant T old) {
     super.didUpdateWidget(old);
-    if (widget._enabled != old._enabled) {
-      _hovered = false;
-      _touched = false;
-    }
+    _controller.update(WidgetState.disabled, widget._disabled);
   }
 
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.tappableStyle;
-    var tappable = widget.builder(context, (focused: _focused, hovered: _hovered, pressed: _touched), widget.child);
+    var tappable = widget.builder(context, _controller.value, widget.child);
 
     tappable = _decorate(context, tappable);
 
-    if (widget._enabled) {
+    if (!widget._disabled) {
       tappable = MouseRegion(
-        cursor: SystemMouseCursors.click,
-        onEnter: (_) => setState(() => _hovered = true),
-        onExit: (_) => setState(() => _hovered = false),
+        cursor: style.cursor.resolve(_controller.value),
+        onEnter: (_) => setState(() => _controller.update(WidgetState.hovered, true)),
+        onExit: (_) => setState(() => _controller.update(WidgetState.hovered, false)),
         // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
         // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
         // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
@@ -197,18 +196,18 @@ class _FTappableState<T extends FTappable> extends State<T> {
             final count = ++_monotonic;
             _onPointerDown();
 
-            await Future.delayed(style.touchHoverEnterDuration);
-            if (mounted && count == _monotonic && !_touched) {
-              setState(() => _touched = true);
+            await Future.delayed(style.pressedEnterDuration);
+            if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
+              setState(() => _controller.update(WidgetState.pressed, true));
             }
           },
           onPointerUp: (_) async {
             final count = ++_monotonic;
             _onPointerUp();
 
-            await Future.delayed(style.touchHoverExitDuration);
-            if (mounted && count == _monotonic && _touched) {
-              setState(() => _touched = false);
+            await Future.delayed(style.pressedExitDuration);
+            if (mounted && count == _monotonic && _controller.value.contains(WidgetState.pressed)) {
+              setState(() => _controller.update(WidgetState.pressed, false));
             }
           },
           child: GestureDetector(
@@ -222,7 +221,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
     }
 
     tappable = Semantics(
-      enabled: widget._enabled,
+      enabled: !widget._disabled,
       label: widget.semanticsLabel,
       container: true,
       button: true,
@@ -232,7 +231,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
         onFocusChange: (focused) {
-          setState(() => _focused = focused);
+          setState(() => _controller.update(WidgetState.focused, focused));
           widget.onFocusChange?.call(focused);
         },
         child: tappable,
@@ -240,7 +239,11 @@ class _FTappableState<T extends FTappable> extends State<T> {
     );
 
     if (widget.focusedOutlineStyle case final style?) {
-      tappable = FFocusedOutline(focused: _focused, style: style, child: tappable);
+      tappable = FFocusedOutline(
+        focused: _controller.value.contains(WidgetState.focused),
+        style: style,
+        child: tappable,
+      );
     }
 
     if (widget.onPress case final onPress?) {
@@ -261,6 +264,12 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void _onPointerDown() {}
 
   void _onPointerUp() {}
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 }
 
 @internal
@@ -269,12 +278,12 @@ class AnimatedTappable extends FTappable {
     super.style,
     super.focusedOutlineStyle,
     super.semanticsLabel,
-    super.semanticSelected = false,
-    super.excludeSemantics = false,
-    super.autofocus = false,
+    super.semanticSelected,
+    super.excludeSemantics,
+    super.autofocus,
     super.focusNode,
     super.onFocusChange,
-    super.behavior = HitTestBehavior.translucent,
+    super.behavior,
     super.onPress,
     super.onLongPress,
     super.builder,
@@ -352,13 +361,17 @@ extension FTappableAnimations on Never {
 
 /// A custom [FTappable] style.
 class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
-  /// The duration to wait before applying the hover effect after the user presses the tile. Defaults to 200ms.
+  /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [SystemMouseCursors.click].
   @override
-  final Duration touchHoverEnterDuration;
+  final FWidgetStateMap<MouseCursor> cursor;
 
-  /// The duration to wait before removing the hover effect after the user stops pressing the tile. Defaults to 0s.
+  /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 200ms.
   @override
-  final Duration touchHoverExitDuration;
+  final Duration pressedEnterDuration;
+
+  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 0s.
+  @override
+  final Duration pressedExitDuration;
 
   /// The tween used to animate the scale of the tappable. Defaults to a scale of 0.97.
   @override
@@ -366,8 +379,9 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
 
   /// Creates a [FTappableStyle].
   FTappableStyle({
-    this.touchHoverEnterDuration = const Duration(milliseconds: 200),
-    this.touchHoverExitDuration = Duration.zero,
+    this.cursor = const FWidgetStateMap({WidgetState.any: SystemMouseCursors.click}),
+    this.pressedEnterDuration = const Duration(milliseconds: 200),
+    this.pressedExitDuration = Duration.zero,
     Tween<double>? animationTween,
   }) : animationTween = animationTween ?? FTappableAnimations.bounce;
 }

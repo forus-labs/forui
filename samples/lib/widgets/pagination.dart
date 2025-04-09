@@ -77,22 +77,22 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
           next: Padding(
             padding: style.itemPadding,
             child: ConstrainedBox(
-              constraints: style.contentConstraints,
+              constraints: style.itemConstraints,
               child: FButton.icon(
                 style: FButtonStyle.ghost,
                 onPress: _controller.next,
-                child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.bird)),
+                child: IconTheme(data: style.itemIconStyle, child: const Icon(FIcons.bird)),
               ),
             ),
           ),
           previous: Padding(
             padding: style.itemPadding,
             child: ConstrainedBox(
-              constraints: style.contentConstraints,
+              constraints: style.itemConstraints,
               child: FButton.icon(
                 style: FButtonStyle.ghost,
                 onPress: _controller.previous,
-                child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.anchor)),
+                child: IconTheme(data: style.itemIconStyle, child: const Icon(FIcons.anchor)),
               ),
             ),
           ),

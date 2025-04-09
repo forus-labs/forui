@@ -23,7 +23,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FBottomNavigationBarData(:itemStyle, :selected) = FBottomNavigationBarData.of(context);
+    final FBottomNavigationBarData(:itemStyle, :states) = FBottomNavigationBarData.of(context);
     final style = this.style ?? itemStyle;
 
     return Padding(
@@ -32,14 +32,8 @@ class FBottomNavigationBarItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: style.spacing,
         children: [
-          ExcludeSemantics(
-            child: IconTheme(data: selected ? style.selectedIconStyle : style.unselectedIconStyle, child: icon),
-          ),
-          DefaultTextStyle.merge(
-            style: selected ? style.selectedTextStyle : style.unselectedTextStyle,
-            overflow: TextOverflow.ellipsis,
-            child: label,
-          ),
+          ExcludeSemantics(child: IconTheme(data: style.iconStyle.resolve(states), child: icon)),
+          DefaultTextStyle.merge(style: style.textStyle.resolve(states), overflow: TextOverflow.ellipsis, child: label),
         ],
       ),
     );
@@ -54,21 +48,17 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
 /// [FBottomNavigationBarItem]'s style.
 final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
-  /// The icon's style when an item is selected.
+  /// The icon's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.selectable}
   @override
-  final IconThemeData selectedIconStyle;
+  final FWidgetStateMap<IconThemeData> iconStyle;
 
-  /// The icon's style when an item is unselected.
+  /// The text style.
+  ///
+  /// {@macro forui.foundation.doc_templates.selectable}
   @override
-  final IconThemeData unselectedIconStyle;
-
-  /// The text style when an item is selected.
-  @override
-  final TextStyle selectedTextStyle;
-
-  /// The text style when an item is unselected.
-  @override
-  final TextStyle unselectedTextStyle;
+  final FWidgetStateMap<TextStyle> textStyle;
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   @override
@@ -80,21 +70,22 @@ final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigati
 
   /// Creates a [FBottomNavigationBarItemStyle].
   FBottomNavigationBarItemStyle({
-    required this.selectedIconStyle,
-    required this.unselectedIconStyle,
-    required this.selectedTextStyle,
-    required this.unselectedTextStyle,
+    required this.iconStyle,
+    required this.textStyle,
     this.padding = const EdgeInsets.all(5),
     this.spacing = 2,
   });
 
-  /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties from the given [FColors] and
-  /// [FTypography].
+  /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties.
   FBottomNavigationBarItemStyle.inherit({required FColors colors, required FTypography typography})
     : this(
-        selectedIconStyle: IconThemeData(color: colors.primary, size: 24),
-        unselectedIconStyle: IconThemeData(color: colors.disable(colors.foreground), size: 24),
-        selectedTextStyle: typography.base.copyWith(color: colors.primary, fontSize: 10),
-        unselectedTextStyle: typography.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
+        iconStyle: FWidgetStateMap({
+          WidgetState.selected: IconThemeData(color: colors.primary, size: 24),
+          WidgetState.any: IconThemeData(color: colors.disable(colors.foreground), size: 24),
+        }),
+        textStyle: FWidgetStateMap({
+          WidgetState.selected: typography.base.copyWith(color: colors.primary, fontSize: 10),
+          WidgetState.any: typography.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
+        }),
       );
 }

@@ -79,9 +79,11 @@ class _FAccordionState extends State<FAccordion> {
 
 /// The [FAccordion]'s style.
 final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
-  /// The title's default text style.
+  /// The title's text style.
+  ///
+  /// {@macro forui.foundation.doc_templates.tappable}
   @override
-  final TextStyle titleTextStyle;
+  final FWidgetStateMap<TextStyle> titleTextStyle;
 
   /// The child's default text style.
   @override
@@ -95,9 +97,11 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   @override
   final EdgeInsetsGeometry childPadding;
 
-  /// The icon's color.
+  /// The icon's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.tappable}
   @override
-  final IconThemeData iconStyle;
+  final FWidgetStateMap<IconThemeData> iconStyle;
 
   /// The focused outline style.
   @override
@@ -116,7 +120,7 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   final FTappableStyle tappableStyle;
 
   /// Creates a [FAccordionStyle].
-  FAccordionStyle({
+  const FAccordionStyle({
     required this.titleTextStyle,
     required this.childTextStyle,
     required this.iconStyle,
@@ -131,9 +135,16 @@ final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// Creates a [FDividerStyles] that inherits its properties.
   FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground),
+        titleTextStyle: FWidgetStateMap({
+          WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
+            fontWeight: FontWeight.w500,
+            color: colors.foreground,
+            decoration: TextDecoration.underline,
+          ),
+          WidgetState.any: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground),
+        }),
         childTextStyle: typography.sm.copyWith(color: colors.foreground),
-        iconStyle: IconThemeData(color: colors.primary, size: 20),
+        iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.primary, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),

@@ -17,13 +17,13 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonStyle(:contentStyle), :enabled) = FButtonData.of(context);
+    final FButtonData(style: FButtonStyle(:contentStyle), :states) = FButtonData.of(context);
     return Padding(
       padding: contentStyle.padding,
       child: DefaultTextStyle.merge(
-        style: enabled ? contentStyle.enabledTextStyle : contentStyle.disabledTextStyle,
+        style: contentStyle.textStyle.resolve(states),
         child: IconTheme(
-          data: enabled ? contentStyle.enabledIconStyle : contentStyle.disabledIconStyle,
+          data: contentStyle.iconStyle.resolve(states),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             spacing: 10,
@@ -43,77 +43,75 @@ class IconContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(:style, :enabled) = FButtonData.of(context);
+    final FButtonData(:style, :states) = FButtonData.of(context);
 
     return Padding(
       padding: style.iconContentStyle.padding,
-      child: IconTheme(
-        data: enabled ? style.iconContentStyle.enabledStyle : style.iconContentStyle.disabledStyle,
-        child: child,
-      ),
+      child: IconTheme(data: style.iconContentStyle.iconStyle.resolve(states), child: child),
     );
   }
 }
 
 /// [FButton] content's style.
 final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
-  /// The [TextStyle] when this button is enabled.
+  /// The [TextStyle].
+  ///
+  /// {@macro forui.foundation.doc_templates.tappable}
   @override
-  final TextStyle enabledTextStyle;
+  final FWidgetStateMap<TextStyle> textStyle;
 
-  /// The [TextStyle] when this button is disabled.
+  /// The icon's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.tappable}
   @override
-  final TextStyle disabledTextStyle;
+  final FWidgetStateMap<IconThemeData> iconStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12.5)`.
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The icon's style when this button is enabled.
-  @override
-  final IconThemeData enabledIconStyle;
-
-  /// The icon's style when this button is disabled.
-  @override
-  final IconThemeData disabledIconStyle;
-
   /// Creates a [FButtonContentStyle].
-  FButtonContentStyle({
-    required this.enabledTextStyle,
-    required this.disabledTextStyle,
-    required this.enabledIconStyle,
-    required this.disabledIconStyle,
+  const FButtonContentStyle({
+    required this.textStyle,
+    required this.iconStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
   });
 
-  /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled].
+  /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled] colors.
   FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
     : this(
-        enabledTextStyle: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
-        disabledTextStyle: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
-        enabledIconStyle: IconThemeData(color: enabled, size: 20),
-        disabledIconStyle: IconThemeData(color: disabled, size: 20),
+        textStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
+          WidgetState.any: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
+        }),
+        iconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: disabled, size: 20),
+          WidgetState.any: IconThemeData(color: enabled, size: 20),
+        }),
       );
 }
 
 /// [FButton] icon content's style.
 final class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
+  /// The icon's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.tappable}
+  @override
+  final FWidgetStateMap<IconThemeData> iconStyle;
+
   /// The padding. Defaults to `EdgeInsets.all(7.5)`.
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The icon's style when this button is enabled.
-  @override
-  final IconThemeData enabledStyle;
-
-  /// The icon's style when this button is disabled.
-  @override
-  final IconThemeData disabledStyle;
-
   /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({
-    required this.enabledStyle,
-    required this.disabledStyle,
-    this.padding = const EdgeInsets.all(7.5),
-  });
+  const FButtonIconContentStyle({required this.iconStyle, this.padding = const EdgeInsets.all(7.5)});
+
+  /// Creates a [FButtonIconContentStyle] that inherits its properties from the given [enabled] and [disabled] colors.
+  FButtonIconContentStyle.inherit({required Color enabled, required Color disabled})
+    : this(
+        iconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: disabled, size: 20),
+          WidgetState.any: IconThemeData(color: enabled, size: 20),
+        }),
+      );
 }

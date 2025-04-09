@@ -53,7 +53,6 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => FTappable(
-    style: widget.style.tappableStyle,
     focusedOutlineStyle: widget.style.focusedOutlineStyle,
     onPress:
         () =>
@@ -62,38 +61,36 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               FCalendarPickerType.yearMonth => FCalendarPickerType.day,
             },
     excludeSemantics: true,
-    child: SizedBox(
-      height: Header.height,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
-              style: widget.style.headerTextStyle,
-            ),
-            RotationTransition(
-              turns: Tween(
-                begin: 0.0,
-                end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25,
-              ).animate(_controller),
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Icon(
-                  FIcons.chevronRight,
-                  size: 15,
-                  color:
-                      widget.style.headerTextStyle.color ??
-                      widget.style.buttonStyle.iconContentStyle.enabledStyle.color,
+    builder:
+        (_, states, _) => SizedBox(
+          height: Header.height,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
+                  style: widget.style.headerTextStyle,
                 ),
-              ),
+                RotationTransition(
+                  turns: Tween(
+                    begin: 0.0,
+                    end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25,
+                  ).animate(_controller),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: IconTheme(
+                      data: widget.style.buttonStyle.iconContentStyle.iconStyle.resolve(states),
+                      child: const Icon(FIcons.chevronRight, size: 15),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-    ),
   );
 
   @override
@@ -141,8 +138,13 @@ class Navigation extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 7),
-            child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
+            child: FButton.icon(
+              style: style.buttonStyle,
+              onPress: onPrevious,
+              child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
+            ),
           ),
+
           const Expanded(child: SizedBox()),
           Padding(
             padding: const EdgeInsetsDirectional.only(end: 7),
@@ -169,7 +171,7 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The style used in the previous and next buttons.
+  /// The button style.
   @override
   final FButtonStyle buttonStyle;
 
@@ -181,32 +183,32 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
   @override
   final Duration animationDuration;
 
-  /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
-
   /// Creates a [FCalendarHeaderStyle].
   FCalendarHeaderStyle({
     required this.focusedOutlineStyle,
     required this.buttonStyle,
     required this.headerTextStyle,
-    required this.tappableStyle,
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
   /// Creates a [FCalendarHeaderStyle] that inherits its properties.
-  FCalendarHeaderStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.transform(
-          (style) => style.copyWith(
-            iconContentStyle: style.iconContentStyle.copyWith(
-              enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),
-              disabledStyle: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-            ),
-          ),
+  factory FCalendarHeaderStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
+    final outline = FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline;
+    return FCalendarHeaderStyle(
+      focusedOutlineStyle: style.focusedOutlineStyle,
+      buttonStyle: outline.copyWith(
+        iconContentStyle: FButtonIconContentStyle(
+          iconStyle: FWidgetStateMap({
+            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+            WidgetState.any: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+          }),
         ),
-        headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-      );
+      ),
+      headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+    );
+  }
 }

@@ -9,80 +9,75 @@ part 'pagination_style.style.dart';
 
 /// The [FPagination] styles.
 final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
-  /// The style for the [FPagination] when it is selected.
-  @override
-  final FPaginationStateStyle selected;
-
-  /// The style for the [FPagination] when it is unselected.
-  @override
-  final FPaginationStateStyle unselected;
-
-  /// The icon style.
-  @override
-  final IconThemeData iconStyle;
-
   /// The padding around each item. Defaults to EdgeInsets.symmetric(horizontal: 2)`.
   @override
   final EdgeInsets itemPadding;
 
-  /// The constraints for the content. Defaults to `BoxConstraints(maxWidth: 40, minWidth: 40, maxHeight: 40, minHeight: 40)`.
+  /// The item's constraints. Defaults to `BoxConstraints(maxWidth: 40, minWidth: 40, maxHeight: 40, minHeight: 40)`.
   @override
-  final BoxConstraints contentConstraints;
+  final BoxConstraints itemConstraints;
 
-  /// The tappable's action style.
+  /// The icon's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.selectable}
+  @override
+  final FWidgetStateMap<IconThemeData> itemIconStyle;
+
+  /// The decoration applied to the pagination item.
+  ///
+  /// {@macro forui.foundation.doc_templates.selectable}
+  @override
+  final FWidgetStateMap<BoxDecoration> itemDecoration;
+
+  /// The default text style applied to the pagination item.
+  ///
+  /// {@macro forui.foundation.doc_templates.selectable}
+  @override
+  final FWidgetStateMap<TextStyle> itemTextStyle;
+
+  /// The ellipsis's text style.
+  @override
+  final TextStyle ellipsisTextStyle;
+
+  /// The action's tappable style.
   @override
   final FTappableStyle actionTappableStyle;
 
-  /// The tappable's page style.
+  /// The pagination item's tappable style.
   @override
   final FTappableStyle pageTappableStyle;
 
   /// Creates a [FPaginationStyle].
   FPaginationStyle({
-    required this.selected,
-    required this.unselected,
-    required this.iconStyle,
+    required this.itemIconStyle,
+    required this.itemDecoration,
+    required this.itemTextStyle,
+    required this.ellipsisTextStyle,
     required this.actionTappableStyle,
     required this.pageTappableStyle,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
-    this.contentConstraints = const BoxConstraints.tightFor(width: 40.0, height: 40.0),
+    this.itemConstraints = const BoxConstraints.tightFor(width: 40.0, height: 40.0),
   });
 
   /// Creates a [FPaginationStyle] that inherits its properties.
   FPaginationStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        selected: FPaginationStateStyle(
-          decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
-          hoveredDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.hover(colors.primary)),
-          textStyle: typography.sm.copyWith(color: colors.primaryForeground),
-        ),
-
-        unselected: FPaginationStateStyle(
-          decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
-          hoveredDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.border),
-          textStyle: typography.sm.copyWith(color: colors.primary),
-        ),
-
-        iconStyle: IconThemeData(color: colors.primary, size: 18),
+        itemIconStyle: FWidgetStateMap.all(IconThemeData(color: colors.primary, size: 18)),
+        itemDecoration: FWidgetStateMap({
+          WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): BoxDecoration(
+            borderRadius: style.borderRadius,
+            color: colors.hover(colors.primary),
+          ),
+          WidgetState.selected: BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
+          WidgetState.hovered: BoxDecoration(borderRadius: style.borderRadius, color: colors.border),
+          WidgetState.any: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
+        }),
+        itemTextStyle: FWidgetStateMap({
+          WidgetState.selected: typography.sm.copyWith(color: colors.primaryForeground),
+          WidgetState.any: typography.sm.copyWith(color: colors.primary),
+        }),
+        ellipsisTextStyle: typography.sm.copyWith(color: colors.primary),
         actionTappableStyle: style.tappableStyle,
         pageTappableStyle: style.tappableStyle,
       );
-}
-
-/// A [FPagination] state's style.
-final class FPaginationStateStyle with Diagnosticable, _$FPaginationStateStyleFunctions {
-  /// The decoration applied to the pagination item.
-  @override
-  final BoxDecoration decoration;
-
-  /// The decoration applied when the pagination item is hovered.
-  @override
-  final BoxDecoration hoveredDecoration;
-
-  /// The text style.
-  @override
-  final TextStyle textStyle;
-
-  /// Creates a [FPaginationStateStyle].
-  FPaginationStateStyle({required this.decoration, required this.hoveredDecoration, required this.textStyle});
 }

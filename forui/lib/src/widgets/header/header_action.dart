@@ -86,8 +86,6 @@ class FHeaderAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? FHeaderData.of(context).actionStyle;
-    final enabled = onPress != null || onLongPress != null;
-
     return FTappable(
       style: style.tappableStyle,
       autofocus: autofocus,
@@ -97,7 +95,8 @@ class FHeaderAction extends StatelessWidget {
       semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,
-      child: IconTheme(data: enabled ? style.enabledStyle : style.disabledStyle, child: icon),
+      builder: (context, states, child) => IconTheme(data: style.iconStyle.resolve(states), child: child!),
+      child: icon,
     );
   }
 
@@ -118,13 +117,11 @@ class FHeaderAction extends StatelessWidget {
 
 /// [FHeaderAction]'s style.
 final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
-  /// The icon's style when an action is enabled.
+  /// The icon's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.tappable}
   @override
-  final IconThemeData enabledStyle;
-
-  /// The icon's style when an action is disabled.
-  @override
-  final IconThemeData disabledStyle;
+  final FWidgetStateMap<IconThemeData> iconStyle;
 
   /// The outline style when this action is focused.
   @override
@@ -135,17 +132,14 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
   final FTappableStyle tappableStyle;
 
   /// Creates a [FHeaderActionStyle].
-  FHeaderActionStyle({
-    required this.enabledStyle,
-    required this.disabledStyle,
-    required this.focusedOutlineStyle,
-    required this.tappableStyle,
-  });
+  FHeaderActionStyle({required this.iconStyle, required this.focusedOutlineStyle, required this.tappableStyle});
 
   /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColors].
   FHeaderActionStyle.inherit({required FColors colors, required FStyle style, required double size})
-    : enabledStyle = IconThemeData(color: colors.foreground, size: size),
-      disabledStyle = IconThemeData(color: colors.disable(colors.foreground), size: size),
+    : iconStyle = FWidgetStateMap({
+        WidgetState.disabled: IconThemeData(color: colors.disable(colors.foreground), size: size),
+        WidgetState.any: IconThemeData(color: colors.foreground, size: size),
+      }),
       focusedOutlineStyle = style.focusedOutlineStyle,
       tappableStyle = style.tappableStyle;
 }
