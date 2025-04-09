@@ -60,12 +60,10 @@ class _ExampleState extends State<Example> {
       spacing: 10,
       children: [
         Text('Count: $_count'),
-        IntrinsicWidth(
-          child: FButton(
-            onPress: () => setState(() => _count++),
-            suffix: const Icon(FIcons.chevronsUp),
-            child: const Text('Increase'),
-          ),
+        FButton(
+          onPress: () => setState(() => _count++),
+          suffix: const Icon(FIcons.chevronsUp),
+          child: const Text('Increase'),
         ),
       ],
     ),

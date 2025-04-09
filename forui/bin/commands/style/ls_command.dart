@@ -18,11 +18,11 @@ class StyleLsCommand extends ForuiCommand {
 
   @override
   void run() {
-    final styles = Style.values.asNameMap().values.map((e) => e.type).toList()..sort();
+    final styles = Style.values.asNameMap().values.toList()..sort((a, b) => a.type.compareTo(b.type));
 
     stdout.writeln('Available styles:');
     for (final style in styles) {
-      stdout.writeln('  $style');
+      stdout.writeln('  ${[style.type, ...style.aliases].join(', ')}');
     }
   }
 }

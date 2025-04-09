@@ -78,28 +78,27 @@ A more detailed explanation of each class can be found in the [Class Diagram](#c
 
 ### CLI
 
-It's recommended to use the [CLI](cli) to generate color schemes, typographies and styles in your project. These
-styles can be directly modified to fit your design needs.
+It's recommended to use the [CLI](cli) to generate themes and styles in your project. These themes and styles can be
+directly modified to fit your design needs.
 
-The following example shows how to generate a zinc theme and `FDividerStyles` in your project.
+This example demonstrates how to generate and use both a theme and `FDividerStyles` in your project.
 
 In your project directory run:
 ```shell copy
 dart run forui init
 ```
 
-Then:
+To generate a `FDivider`'s styles:
 ```shell copy
-dart run forui style create fdividerstyles
+dart run forui style create fdivider
 ```
 
-This will generate `lib/theme/divider_styles.dart` containing:
-```dart copy
-// Modify this style to fit your design needs.
+This will generate:
+```dart filename="lib/theme/divider_styles.dart" copy
 FDividerStyles dividerStyles({
   required FColors colors,
   required FStyle style,
-}) => FDividerStyles(
+}) => FDividerStyles( // Modify these styles to fit your design needs.
   horizontalStyle: FDividerStyle(
     color: colors.secondary,
     padding: FDividerStyle.defaultPadding.horizontalStyle,
@@ -113,60 +112,21 @@ FDividerStyles dividerStyles({
 );
 ```
 
-Then:
+To generate a theme based on [zinc](#predefined-themes):
 ```shell copy
-dart run forui theme create zinc-dark
+dart run forui theme create zinc
 ```
 
-This will generate `lib/theme/theme.dart` containing:
-```dart copy
+This will generate a theme which you can add the generated divider styles to:
+```dart filename="lib/theme/theme.dart" {1, 19, 39} copy
+import 'divider_styles.dart';
+
 FThemeData get zincLight {
   const colors = FColors(
     brightness: Brightness.light,
-    barrier: Color(0x33000000),
     background: Color(0xFFFFFFFF),
     foreground: Color(0xFF09090B),
-    primary: Color(0xFF18181B),
-    primaryForeground: Color(0xFFFAFAFA),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717A),
-    destructive: Color(0xFFEF4444),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFEF4444),
-    errorForeground: Color(0xFFFAFAFA),
-    border: Color(0xFFE4E4E7),
-  );
-
-  final typography = _typography(colors: colors);
-  final style = _style(colors: colors, typography: typography);
-
-  return FThemeData(colors: colors, typography: typography, style: style);
-}
-
-// Typography and style functions omitted for brevity.
-```
-
-Insert your generated divider styles:
-```dart {27} copy
-FThemeData get zincLight {
-  const colors = FColors(
-    brightness: Brightness.light,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFF18181B),
-    primaryForeground: Color(0xFFFAFAFA),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717A),
-    destructive: Color(0xFFEF4444),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFEF4444),
-    errorForeground: Color(0xFFFAFAFA),
-    border: Color(0xFFE4E4E7),
+    ...
   );
 
   final typography = _typography(colors: colors);
@@ -176,7 +136,109 @@ FThemeData get zincLight {
     colors: colors,
     typography: typography,
     style: style,
+    // Add your previously generated divider styles and other generated styles here.
     dividerStyles: dividerStyles(colors: colors, style: style),
+  );
+}
+
+FThemeData get zincDark {
+  const colors = FColors(
+    brightness: Brightness.dark,
+    background: Color(0xFF09090B),
+    foreground: Color(0xFFFAFAFA),
+    ...
+  );
+
+  final typography = _typography(colors: colors);
+  final style = _style(colors: colors, typography: typography);
+
+  return FThemeData(
+    colors: colors,
+    typography: typography,
+    style: style,
+    // Add your previously generated divider styles and other generated styles here.
+    dividerStyles: dividerStyles(colors: colors, style: style),
+  );
+}
+
+FTypography _typography({
+  required FColors colors,
+  String defaultFontFamily = 'packages/forui/Inter',
+}) => FTypography(
+  xs: TextStyle(
+    color: colors.foreground,
+    fontFamily: defaultFontFamily,
+    fontSize: 12,
+    height: 1,
+  ),
+  sm: TextStyle(
+    color: colors.foreground,
+    fontFamily: defaultFontFamily,
+    fontSize: 14,
+    height: 1.25,
+  ),
+  ...
+);
+
+FStyle _style({required FColors colors, required FTypography typography}) =>
+    FStyle(
+      enabledFormFieldStyle: FFormFieldStyle.inherit(
+        labelColor: colors.primary,
+        descriptionColor: colors.mutedForeground,
+        typography: typography,
+      ),
+      disabledFormFieldStyle: FFormFieldStyle.inherit(
+        labelColor: colors.disable(colors.primary),
+        descriptionColor: colors.disable(colors.mutedForeground),
+        typography: typography,
+      ),
+      ...
+    );
+```
+
+The first command, `dart forui init` generates a main file which you can add the generated theme to:
+```dart filename="lib/main.dart" {1, 13} copy
+import 'theme/theme.dart';
+
+void main() {
+  runApp(const Application());
+}
+
+class Application extends StatelessWidget {
+  const Application({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // Assign the generated theme to `theme`.
+    final theme = zincLight;
+
+    return MaterialApp(
+      localizationsDelegates: FLocalizations.localizationsDelegates,
+      supportedLocales: FLocalizations.supportedLocales,
+      builder: (_, child) => FTheme(data: theme, child: child!),
+      theme: theme.toApproximateMaterialTheme(),
+      // You can replace FScaffold with Material's Scaffold.
+      home: const FScaffold(
+        // TODO: replace with your widget.
+        child: Example(),
+      ),
+    );
+  }
+}
+
+class Example extends StatefulWidget {
+  const Example({super.key});
+
+  @override
+  State<Example> createState() => _ExampleState();
+}
+
+class _ExampleState extends State<Example> {
+  int _count = 0;
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: ...
   );
 }
 ```
@@ -216,7 +278,6 @@ FThemeData --> FTypography
 FThemeData --> FStyle
 FThemeData --> FCardStyle
 ```
-
 
 ### Colors
 

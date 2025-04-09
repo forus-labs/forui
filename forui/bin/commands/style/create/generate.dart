@@ -38,12 +38,12 @@ import 'package:flutter/material.dart';
 
 /// File that contains your `FThemeData`:
 /// ```dart
-/// import 'package:my_application/theme/divider_style.dart' // Your generated file.
+/// import 'package:my_application/theme/divider_style.dart' // Your generated style file.
 ///
 /// FThemeData(
 ///  color: FThemes.zinc.light.color,
 ///  style: FThemes.zinc.light.style,
-///  dividerStyles: CustomFDividerStyles.dividerStyles( // The function in your generated file.
+///  dividerStyles: CustomFDividerStyles.dividerStyles( // The function in your generated style file.
 ///    color: FThemes.zinc.light.color,
 ///    style: FThemes.zinc.light.style,
 ///   ),
@@ -91,12 +91,12 @@ import 'package:flutter/material.dart';
 ///
 /// File that contains your `FThemeData`:
 /// ```dart
-/// import 'package:my_application/theme/divider_style.dart' // Your generated file.
+/// import 'package:my_application/theme/divider_style.dart' // Your generated style file.
 ///
 /// FThemeData(
 ///  color: FThemes.zinc.light.color,
 ///  style: FThemes.zinc.light.style,
-///  dividerStyles: CustomFDividerStyles.dividerStyles( // The function in your generated file.
+///  dividerStyles: CustomFDividerStyles.dividerStyles( // The function in your generated style file.
 ///    color: FThemes.zinc.light.color,
 ///    style: FThemes.zinc.light.style,
 ///   ),

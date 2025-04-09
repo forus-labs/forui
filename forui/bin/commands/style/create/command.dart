@@ -6,7 +6,14 @@ import '../../../configuration.dart';
 import '../style.dart';
 import 'generate.dart';
 
-final registry = Style.values.asNameMap();
+final registry = {
+  for (final MapEntry(:key, :value) in Style.values.asNameMap().entries)
+    ...{
+      key.toLowerCase(): value,
+      for (final alias in value.aliases)
+        alias.toLowerCase(): value,
+    },
+};
 
 class StyleCreateCommand extends ForuiCommand {
   @override

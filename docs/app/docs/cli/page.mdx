@@ -1,3 +1,5 @@
+import {Callout} from "nextra/components";
+
 # CLI
 
 Forui includes a CLI that generates themes and styles in your project. These themes and styles can be directly modified
@@ -6,7 +8,7 @@ bundle size.
 
 ## init
 
-Use the `init` command to create a `forui.yaml` configuration file in your project's directory.
+Use the `init` command to create `forui.yaml` and `main.dart` files in your project's directory.
 
 ```shell copy
 dart run forui init
@@ -57,6 +59,11 @@ Usage: forui snippet ls
 
 Use the `style create` command to generate a style in your project. The styles are generated in `lib/theme` by default.
 
+<Callout type="info">
+    See the [docs](themes#customize-themes) on how to use the generated styles.
+</Callout>
+
+
 ```shell copy
 dart run forui style create [styles]
 ```
@@ -89,6 +96,10 @@ Usage: forui style ls
 
 Use the `theme create` command to generate a theme in your project. The theme is generated in `lib/theme/theme.dart` by
 default.
+
+<Callout type="info">
+    See the [docs](themes#customize-themes) on how to use the generated theme.
+</Callout>
 
 ```shell copy
 dart run forui theme create [theme]

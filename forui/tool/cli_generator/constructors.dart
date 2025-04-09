@@ -14,6 +14,7 @@ class ConstructorFragment {
   static Map<String, ConstructorFragment> inline(RegExp pattern, Map<String, ConstructorMatch> matches) => {
     for (final MapEntry(:key, value: match) in matches.entries)
       key: ConstructorFragment(
+        root: match.root,
         type: key,
         closure: _closure(key, matches),
         source: formatter.format(switch (match.constructor) {
@@ -100,11 +101,12 @@ class ConstructorFragment {
     return '$type ${type.substring(1).toCamelCase()}$constructorParameters => $type($arguments);';
   }
 
+  final bool root;
   final String type;
   final List<String> closure;
   final String source;
 
-  ConstructorFragment({required this.type, required this.closure, required this.source});
+  ConstructorFragment({required this.root, required this.type, required this.closure, required this.source});
 }
 
 class ConstructorMatch {
