@@ -30,7 +30,7 @@ class FRadio extends StatefulWidget {
   /// If the value is present, the radio is in an error state.
   final Widget? error;
 
-  //// {@macro forui.foundation.doc_templates.semanticsLabel}
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
   /// The current value of the radio.
@@ -160,11 +160,11 @@ class _State extends State<FRadio> {
 
 /// A [FRadio]'s style.
 class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
-  /// The duration of the animation when the radio's switches between selected and unselected. Defaults to 100ms.
+  /// The duration of the animation when the radio switches between selected and unselected. Defaults to 100ms.
   @override
   final Duration animationDuration;
 
-  /// The curve of the animation when the radio's switches between selected and unselected.
+  /// The curve of the animation when the radio switches between selected and unselected.
   ///
   /// Defaults to [Curves.easeOutCirc].
   @override
@@ -178,15 +178,15 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The [FRadio]'s when the radio is enabled.
+  /// The [FRadio]'s style when the radio is enabled.
   @override
   final FRadioStateStyle enabledStyle;
 
-  /// The [FRadio]'s when the radio is disabled.
+  /// The [FRadio]'s style when the radio is disabled.
   @override
   final FRadioStateStyle disabledStyle;
 
-  /// The [FRadio]'s when the radio is in an error state.
+  /// The [FRadio]'s style when the radio is in an error state.
   @override
   final FRadioErrorStyle errorStyle;
 
@@ -241,15 +241,15 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
 /// A [FRadio]'s state style.
 // ignore: avoid_implementing_value_types
 class FRadioStateStyle with Diagnosticable, _$FRadioStateStyleFunctions implements FFormFieldStyle {
-  /// The border colors.
+  /// The border color.
   @override
   final Color borderColor;
 
-  /// The selected colors.
+  /// The selected color.
   @override
   final Color selectedColor;
 
-  /// The background colors.
+  /// The background color.
   @override
   final Color backgroundColor;
 

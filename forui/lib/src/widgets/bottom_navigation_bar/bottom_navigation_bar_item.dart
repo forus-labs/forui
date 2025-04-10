@@ -50,13 +50,13 @@ class FBottomNavigationBarItem extends StatelessWidget {
 final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
   /// The icon's style.
   ///
-  /// {@macro forui.foundation.doc_templates.selectable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
   /// The text style.
   ///
-  /// {@macro forui.foundation.doc_templates.selectable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<TextStyle> textStyle;
 

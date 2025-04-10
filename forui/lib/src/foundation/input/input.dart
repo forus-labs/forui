@@ -129,7 +129,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
           statesController: controller.states,
           builder: widget.builder,
           autocorrect: false,
-          // We cannot use TextInputType.number as it is does not contain a done button.
+          // We cannot use TextInputType.number as it does not contain a done button.
           keyboardType: const TextInputType.numberWithOptions(signed: true),
           minLines: 1,
           maxLines: 1,

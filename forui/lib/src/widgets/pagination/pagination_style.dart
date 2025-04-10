@@ -19,19 +19,19 @@ final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
 
   /// The icon's style.
   ///
-  /// {@macro forui.foundation.doc_templates.selectable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<IconThemeData> itemIconStyle;
 
   /// The decoration applied to the pagination item.
   ///
-  /// {@macro forui.foundation.doc_templates.selectable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<BoxDecoration> itemDecoration;
 
   /// The default text style applied to the pagination item.
   ///
-  /// {@macro forui.foundation.doc_templates.selectable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<TextStyle> itemTextStyle;
 

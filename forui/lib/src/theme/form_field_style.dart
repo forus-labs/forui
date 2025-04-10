@@ -11,40 +11,43 @@ part 'form_field_style.style.dart';
 class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   /// The label's text style.
   @override
-  final TextStyle labelTextStyle;
+  final FWidgetStateMap<TextStyle> labelTextStyle;
 
   /// The description's text style.
   @override
-  final TextStyle descriptionTextStyle;
+  final FWidgetStateMap<TextStyle> descriptionTextStyle;
 
-  /// Creates a [FFormFieldStyle].
-  const FFormFieldStyle({required this.labelTextStyle, required this.descriptionTextStyle});
-
-  /// Creates a [FFormFieldStyle] that inherits its properties from the given [FTypography].
-  FFormFieldStyle.inherit({required Color labelColor, required Color descriptionColor, required FTypography typography})
-    : labelTextStyle = typography.sm.copyWith(color: labelColor, fontWeight: FontWeight.w600),
-      descriptionTextStyle = typography.sm.copyWith(color: descriptionColor);
-}
-
-/// A form field's error style.
-class FFormFieldErrorStyle extends FFormFieldStyle with _$FFormFieldErrorStyleFunctions {
   /// The error's text style.
   @override
-  final TextStyle errorTextStyle;
+  final FWidgetStateMap<TextStyle> errorTextStyle;
 
-  /// Creates a [FFormFieldErrorStyle].
-  FFormFieldErrorStyle({
+  /// Creates a [FFormFieldStyle].
+  const FFormFieldStyle({
+    required this.labelTextStyle,
+    required this.descriptionTextStyle,
     required this.errorTextStyle,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
   });
 
-  /// Creates a [FFormFieldErrorStyle] that inherits its properties from the given arguments.
-  FFormFieldErrorStyle.inherit({
-    required Color errorColor,
-    required super.labelColor,
-    required super.descriptionColor,
-    required super.typography,
-  }) : errorTextStyle = typography.sm.copyWith(color: errorColor, fontWeight: FontWeight.w600),
-       super.inherit();
+  /// Creates a [FFormFieldStyle] that inherits its properties.
+  FFormFieldStyle.inherit({required FColors colors, required FTypography typography})
+    : labelTextStyle = FWidgetStateMap({
+        WidgetState.error: typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w600),
+        WidgetState.disabled: typography.sm.copyWith(
+          color: colors.disable(colors.primary),
+          fontWeight: FontWeight.w600,
+        ),
+        WidgetState.any: typography.sm.copyWith(
+          color: colors.primary,
+          fontWeight: FontWeight.w600,
+        ),
+      }),
+        descriptionTextStyle = FWidgetStateMap({
+          WidgetState.error: typography.sm.copyWith(color: colors.mutedForeground),
+          WidgetState.disabled: typography.sm.copyWith(
+            color: colors.disable(colors.primary),
+          ),
+          WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
+        });
+      descriptionTextStyle = typography.sm.copyWith(color: descriptionColor),
+      errorTextStyle = typography.sm.copyWith(color: errorColor, fontWeight: FontWeight.w600);
 }

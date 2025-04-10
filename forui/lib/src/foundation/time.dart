@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-/// Represents the time of the day.
+/// Represents the time of day.
 final class FTime implements Comparable<FTime> {
   /// The hour. Always in 24-hour format.
   ///

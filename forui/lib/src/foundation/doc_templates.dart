@@ -37,16 +37,14 @@ extension Focus on Never {
 
 @internal
 extension WidgetStates on Never {
-  /// {@template forui.foundation.doc_templates.tappable}
+  /// {@template forui.foundation.doc_templates.WidgetStates.form}
   ///  Supported states:
-  /// * [WidgetState.focused]
-  /// * [WidgetState.hovered]
-  /// * [WidgetState.pressed]
   /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
   /// {@endtemplate}
-  static const tappable = '';
+  static const form = '';
 
-  /// {@template forui.foundation.doc_templates.selectable}
+  /// {@template forui.foundation.doc_templates.WidgetStates.selectable}
   ///  Supported states:
   /// * [WidgetState.focused]
   /// * [WidgetState.hovered]
@@ -54,6 +52,15 @@ extension WidgetStates on Never {
   /// * [WidgetState.disabled]
   /// {@endtemplate}
   static const selectable = '';
+
+  /// {@template forui.foundation.doc_templates.WidgetStates.tappable}
+  ///  Supported states:
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.disabled]
+  /// {@endtemplate}
+  static const tappable = '';
 }
 
 @internal

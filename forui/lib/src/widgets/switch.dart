@@ -20,7 +20,7 @@ class FSwitch extends StatelessWidget {
   /// The style. Defaults to [FThemeData.switchStyle].
   final FSwitchStyle? style;
 
-  /// The label displayed next to the checkbox.
+  /// The label displayed next to the switch.
   final Widget? label;
 
   /// The description displayed below the [label].
@@ -28,13 +28,13 @@ class FSwitch extends StatelessWidget {
 
   /// The error displayed below the [description].
   ///
-  /// If the value is present, the checkbox is in an error state.
+  /// If the value is present, the switch is in an error state.
   final Widget? error;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
-  /// The current value of the checkbox.
+  /// The current value of the switch.
   final bool value;
 
   /// Called when the user toggles the switch on or off.
@@ -43,7 +43,7 @@ class FSwitch extends StatelessWidget {
   /// rebuilds the switch with the new value.
   final ValueChanged<bool>? onChange;
 
-  /// Whether this checkbox is enabled. Defaults to true.
+  /// Whether this switch is enabled. Defaults to true.
   final bool enabled;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
@@ -233,7 +233,7 @@ final class FSwitchStateStyle with Diagnosticable, _$FSwitchStateStyleFunctions 
   @override
   final Color uncheckedColor;
 
-  /// The thumb's colors.
+  /// The thumb's color.
   @override
   final Color thumbColor;
 

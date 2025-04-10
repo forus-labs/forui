@@ -20,7 +20,7 @@ final class FPopoverController extends FChangeNotifier {
   late final Animation<double> _scale;
 
   /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
-  FPopoverController({required TickerProvider vsync, animationDuration = const Duration(milliseconds: 100)}) {
+  FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
     _fade = _fadeTween.animate(_animation);
     _scale = _scaleTween.animate(_animation);
@@ -33,7 +33,7 @@ final class FPopoverController extends FChangeNotifier {
 
   /// Shows the popover.
   ///
-  /// If [shown] is already true, calling this method brings the popover it controls to the top.
+  /// If [shown] is already true, calling this method brings the popover to the top.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
@@ -45,7 +45,7 @@ final class FPopoverController extends FChangeNotifier {
   /// Hides the popover.
   ///
   /// Once hidden, the popover will be removed from the widget tree the next time the widget tree rebuilds, and stateful
-  /// widgets in the popover may lose states as a result.
+  /// widgets in the popover may lose their states as a result.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> hide() async {
@@ -96,7 +96,7 @@ class FPopover extends StatefulWidget {
   final FPopoverStyle? style;
 
   /// {@template forui.widgets.FPopover.popoverAnchor}
-  /// The point on the popover (floating content) that connects with the child, at the child's anchor.
+  /// The point on the popover (floating content) that connects with the child at the child's anchor.
   ///
   /// For example, [Alignment.topCenter] means the top-center point of the popover will connect with the child.
   /// See [childAnchor] for changing the child's anchor.
@@ -106,7 +106,7 @@ class FPopover extends StatefulWidget {
   final AlignmentGeometry popoverAnchor;
 
   /// {@template forui.widgets.FPopover.childAnchor}
-  /// The point on the child that connects with the popover, at the popover's anchor.
+  /// The point on the child that connects with the popover at the popover's anchor.
   ///
   /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the popover.
   /// See [popoverAnchor] for changing the popover's anchor.

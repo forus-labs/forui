@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 
 part 'tooltip.style.dart';
 
-/// A controller that controls whether a [FPopover] is shown or hidden.
+/// A controller that controls whether a [FTooltip] is shown or hidden.
 class FTooltipController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
   static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
@@ -33,7 +33,7 @@ class FTooltipController extends FChangeNotifier {
 
   /// Shows the tooltip.
   ///
-  /// If [shown] is already true, calling this method brings the tooltip it controls to the top.
+  /// If [shown] is already true, calling this method brings the tooltip to the top.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
@@ -64,7 +64,7 @@ class FTooltipController extends FChangeNotifier {
   }
 }
 
-/// A tooltip displays information related to a widget when focused, hovered over, and/or long pressed.
+/// A tooltip displays information related to a widget when focused, hovered over, or long pressed.
 ///
 /// **Note**:
 /// The tooltip will not be shown when long pressed if the [child] contains a [GestureDetector] that has a long-press
@@ -81,10 +81,10 @@ class FTooltip extends StatefulWidget {
   /// The tooltip's style.
   final FTooltipStyle? style;
 
-  /// The anchor of the follower to which the [childAnchor] is aligned to. Defaults to [Alignment.bottomCenter].
+  /// The anchor of the follower to which the [childAnchor] is aligned. Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry tipAnchor;
 
-  /// The anchor of the target to which the [tipAnchor] is aligned to. Defaults to [Alignment.topCenter].
+  /// The anchor of the target to which the [tipAnchor] is aligned. Defaults to [Alignment.topCenter].
   final AlignmentGeometry childAnchor;
 
   /// The shifting strategy used to shift a tooltip's tip when it overflows out of the viewport. Defaults to

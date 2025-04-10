@@ -91,7 +91,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The order is reversed for RTL locales.
   ///
   /// ## Overflow behavior
-  /// If the tile's content overflows and `details` is text, it'll be truncated first. Otherwise, `title` and `subtitle`
+  /// If the tile's content overflows and `details` is text, `details` will be truncated first. Otherwise, `title` and `subtitle`
   /// will be truncated first.
   FTile({
     required Widget title,

@@ -11,8 +11,8 @@ part 'breadcrumb.style.dart';
 
 /// A breadcrumb.
 ///
-/// A breadcrumb is a list of links that help visualize a page's location within a site's hierarchical structure,
-/// it allows navigation up to any of the ancestors.
+/// A breadcrumb is a list of links that helps visualize a page's location within a site's hierarchical structure,
+/// allowing navigation up to any of its ancestors.
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/breadcrumb for working examples.
@@ -29,7 +29,7 @@ final class FBreadcrumb extends StatelessWidget {
   /// Navigation can be handled via the `onPress` callback.
   final List<Widget> children;
 
-  /// The divider placed in between the children.
+  /// The divider placed between the children.
   ///
   /// Defaults to an `FIcons.chevronRight` icon.
   final Widget? divider;
@@ -333,7 +333,7 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
   });
 
-  /// Creates a [FDividerStyles] that inherits its properties.
+  /// Creates a [FBreadcrumbStyle] that inherits its properties.
   FBreadcrumbStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         selectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.foreground),

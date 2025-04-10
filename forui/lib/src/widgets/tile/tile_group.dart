@@ -399,7 +399,7 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
   @override
   final Color borderColor;
 
-  /// the group's border width.
+  /// The group's border width.
   @override
   final double borderWidth;
 

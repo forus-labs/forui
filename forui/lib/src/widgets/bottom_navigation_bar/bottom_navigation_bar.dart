@@ -99,7 +99,7 @@ class FBottomNavigationBarData extends InheritedWidget {
 
   /// The current states.
   ///
-  /// {@macro forui.foundation.doc_templates.selectable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   final Set<WidgetState> states;
 
   /// Creates a [FBottomNavigationBarData].

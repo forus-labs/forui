@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 
 part 'text_field_style.style.dart';
 
-/// [FTextFieldStyle]'s style.
+/// The text field style.
 final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   /// The appearance of the keyboard. Defaults to [FColors.brightness].
   ///
@@ -62,7 +62,7 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   @override
   final FTextFieldStateStyle enabledStyle;
 
-  /// The style when this text field is enabled.
+  /// The style when this text field is disabled.
   @override
   final FTextFieldStateStyle disabledStyle;
 

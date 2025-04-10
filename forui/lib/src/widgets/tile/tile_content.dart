@@ -221,7 +221,7 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
 
 /// A [FTile] content's state style.
 final class FTileContentStateStyle with Diagnosticable, _$FTileContentStateStyleFunctions {
-  /// The prefix icon's style.
+  /// The prefix icon style.
   @override
   final IconThemeData prefixIconStyle;
 
@@ -233,11 +233,11 @@ final class FTileContentStateStyle with Diagnosticable, _$FTileContentStateStyle
   @override
   final TextStyle subtitleTextStyle;
 
-  /// The detail's text style.
+  /// The details text style.
   @override
   final TextStyle detailsTextStyle;
 
-  /// The suffix icon's style.
+  /// The suffix icon style.
   @override
   final IconThemeData suffixIconStyle;
 

@@ -10,7 +10,7 @@ part 'button.style.dart';
 
 /// A button.
 ///
-/// [FButton]s typically contain icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
+/// [FButton] typically contains icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
 /// button will be disabled, and it will not react to touch.
 ///
 /// The constants in [FBaseButtonStyle] provide a convenient way to style a button.
@@ -173,7 +173,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
 
   /// The box decoration.
   ///
-  /// {@macro forui.foundation.doc_templates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
   final FWidgetStateMap<BoxDecoration> decoration;
 

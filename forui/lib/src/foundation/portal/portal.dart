@@ -25,10 +25,10 @@ class FPortal extends StatefulWidget {
   /// Defaults to [Alignment.topCenter].
   final AlignmentGeometry portalAnchor;
 
-  /// The point on the child widget that connections with the portal (floating content), at the portal's anchor.
+  /// The point on the child widget that connects with the portal (floating content), at the portal's anchor.
   ///
   /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the portal.
-  /// See [childAnchor] for changing the child's anchor.
+  /// See [portalAnchor] for changing the portal's anchor.
   ///
   /// Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry childAnchor;

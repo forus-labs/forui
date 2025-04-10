@@ -7,27 +7,27 @@ import 'package:forui/forui.dart';
 
 part 'alert.style.dart';
 
-/// An alert.
+/// A visual element displaying status information (info, warning, success, or error).
 ///
-/// Displays a callout for user attention.
+/// Use alerts to communicate statuses, provide feedback, or convey important contextual information.
 ///
 /// See:
-/// * https://forui.dev/docs/navigation/alert for working examples.
-/// * [FBaseAlertStyle] for customizing an alert's appearance.
+/// * https://forui.dev/docs/feedback/alert for working examples.
+/// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
-  /// The icon, wrapped in [IconThemeData]. Defaults to `FIcons.circleAlert`.
-  final Widget icon;
-
-  /// The title.
-  final Widget title;
-
-  /// The subtitle.
-  final Widget? subtitle;
-
   /// The style. Defaults to [FAlertStyle.primary].
   ///
-  /// Although typically one of the pre-defined styles in [FBaseAlertStyle], it can also be a [FAlertStyle].
+  /// Although typically one of the pre-defined styles in [FBaseAlertStyle], it can also be a [FAlertStyle]
   final FBaseAlertStyle style;
+
+  /// The title of the alert.
+  final Widget title;
+
+  /// The subtitle of the alert.
+  final Widget? subtitle;
+
+  /// The icon displayed on the left side of the alert.
+  final Widget icon;
 
   /// Creates a [FAlert] with a title, subtitle, and icon.
   ///
@@ -97,7 +97,7 @@ class FAlert extends StatelessWidget {
   }
 }
 
-/// [FAlertStyle]'s style.
+/// The alert styles.
 final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   /// The primary alert style.
   @override

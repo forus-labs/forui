@@ -146,25 +146,25 @@ final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunction
 
   /// The decoration.
   ///
-  /// @macro forui.foundation.doc_templates.selectable}
+  /// @macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<BoxDecoration> decoration;
 
   /// The color of the today indicator.
   ///
-  /// @macro forui.foundation.doc_templates.selectable}
+  /// @macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<Color> todayIndicatorColor;
 
   /// The text style for the date.
   ///
-  /// @macro forui.foundation.doc_templates.selectable}
+  /// @macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<TextStyle> dateTextStyle;
 
   /// The text style for the day of the week.
   ///
-  /// {@macro forui.foundation.doc_templates.selectable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<TextStyle> weekdayTextStyle;
 

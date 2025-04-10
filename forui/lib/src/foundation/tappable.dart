@@ -10,7 +10,7 @@ part 'tappable.style.dart';
 
 /// Utilities for retrieving information about the current platform.
 extension FTouch on Never {
-  /// The platforms that use touch as the primary input. It isn't 100% accurate as there are hybrid devices that use
+  /// The platforms that use touch as the primary input. This isn't 100% accurate as there are hybrid devices that use
   /// both touch and keyboard/mouse input, i.e., Windows Surface laptops.
   static const platforms = {TargetPlatform.android, TargetPlatform.iOS, TargetPlatform.fuchsia};
 
@@ -79,7 +79,7 @@ class FTappable extends StatefulWidget {
 
   /// The builder used to build to create a child with the current state.
   ///
-  /// {@macro forui.foundation.doc_templates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   final ValueWidgetBuilder<Set<WidgetState>> builder;
 
   /// The child.

@@ -22,7 +22,7 @@ enum FLabelState {
   error,
 }
 
-/// A label that describes a form field with a label, description, and error message (if any).
+/// A component that describes a form field with a label, description, and error message (if any).
 ///
 /// There are two different [Axis] variants for labels:
 /// * [Axis.horizontal] - Used in [FCheckbox].
@@ -48,8 +48,6 @@ enum FLabelState {
 /// * https://forui.dev/docs/form/label for working examples.
 /// * [FLabelStyles] for customizing a label's appearance.
 final class FLabel extends StatelessWidget {
-
-
   /// The label's style. Defaults to the appropriate style in [FThemeData.labelStyles].
   // ignore: diagnostic_describe_all_properties
   final FLabelStyle? style;
@@ -63,7 +61,7 @@ final class FLabel extends StatelessWidget {
   /// The error message.
   final Widget? error;
 
-  /// The axis that represents.
+  /// The axis that determines the layout direction.
   final Axis axis;
 
   /// The state of the label.
@@ -128,7 +126,7 @@ final class FLabel extends StatelessWidget {
   }
 }
 
-final class _FHorizontalLabel extends StatelessWidget {
+class _FHorizontalLabel extends StatelessWidget {
   final FLabelStyle style;
   final Widget? label;
   final Widget? description;

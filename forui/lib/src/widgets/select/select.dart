@@ -155,7 +155,7 @@ abstract class FSelect<T> extends StatefulWidget {
   /// Whether to add padding based on the popover direction. Defaults to false.
   final bool directionPadding;
 
-  /// True if the dropdown menu should be automatically hidden after an item is selected. Defaults to false.
+  /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
   /// The builder that is called when the select is empty. Defaults to [defaultEmptyBuilder].

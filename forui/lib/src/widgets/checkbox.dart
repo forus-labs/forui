@@ -157,11 +157,11 @@ class _State extends State<FCheckbox> {
 
 /// A [FCheckbox]'s style.
 class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
-  /// The duration of the animation when the checkbox's switches between checked and unchecked. Defaults to 100ms.
+  /// The duration of the animation when the checkbox switches between checked and unchecked. Defaults to 100ms.
   @override
   final Duration animationDuration;
 
-  /// The curve of the animation when the checkbox's switches between checked and unchecked.
+  /// The curve of the animation when the checkbox switches between checked and unchecked.
   ///
   /// Defaults to [Curves.linear].
   @override
@@ -252,15 +252,15 @@ class FCheckboxStateStyle with Diagnosticable, _$FCheckboxStateStyleFunctions im
   @override
   final IconThemeData iconStyle;
 
-  /// The border colors.
+  /// The border color.
   @override
   final Color borderColor;
 
-  /// The checked background colors.
+  /// The checked background color.
   @override
   final Color checkedBackgroundColor;
 
-  /// The unchecked background colors.
+  /// The unchecked background color.
   @override
   final Color uncheckedBackgroundColor;
 

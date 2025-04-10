@@ -25,8 +25,8 @@ typedef FTextFieldCounterBuilder =
 
 /// A text field.
 ///
-/// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard. A [FTextField] is internally
-/// a [FormField], therefore it can be used in a [Form].
+/// It lets the user enter text, either with a hardware keyboard or with an onscreen keyboard. A [FTextField] is
+/// internally a [FormField], therefore it can be used in a [Form].
 ///
 /// See:
 /// * https://forui.dev/docs/form/text-field for working examples.
@@ -635,6 +635,16 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   @override
   final Widget Function(BuildContext, String) errorBuilder;
 
+  /// {@template f_text_field.floating_label_alignment}
+  /// The alignment of the label. Defaults to [AlignmentDirectional.topStart].
+  /// {@endtemplate}
+  final AlignmentGeometry? floatingLabelAlignment;
+
+  /// {@template f_text_field.floating_label_behavior}
+  /// The width value interval for the text span. Defaults to FloatingLabelWidth.sufficient
+  /// {@endtemplate}
+  final FloatingLabelBehavior? floatingLabelBehavior;
+
   /// Creates a [FTextField].
   const FTextField({
     this.style,
@@ -700,6 +710,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
+    this.floatingLabelAlignment,
+    this.floatingLabelBehavior,
     super.key,
   });
 
@@ -768,6 +780,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
+    this.floatingLabelAlignment,
+    this.floatingLabelBehavior,
     super.key,
   });
 
@@ -839,6 +853,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
+    this.floatingLabelAlignment,
+    this.floatingLabelBehavior,
     super.key,
   });
 
@@ -911,6 +927,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
+    this.floatingLabelAlignment,
+    this.floatingLabelBehavior,
     super.key,
   });
 
@@ -1029,6 +1047,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(StringProperty('initialValue', initialValue))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(DiagnosticsProperty('floatingLabelAlignment', floatingLabelAlignment))
+      ..add(EnumProperty('floatingLabelBehavior', floatingLabelBehavior));
   }
 }
