@@ -19,7 +19,7 @@ part 'select.style.dart';
 ///
 /// It is a [FormField] and therefore can be used in a [Form] widget.
 ///
-/// See
+/// See:
 /// * https://forui.dev/docs/form/select for working examples.
 /// * [FSelectController] for customizing the behavior of a select.
 /// * [FSelectStyle] for customizing the appearance of a select.

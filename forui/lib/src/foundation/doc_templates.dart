@@ -7,7 +7,7 @@ extension Focus on Never {
   /// {@template forui.foundation.doc_templates.autofocus}
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
   ///
-  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
+  /// Ideally, there should be only one widget with autofocus set in each FocusScope. If there is more than one widget with
   /// autofocus set, then the first one added to the tree will get focus.
   ///
   /// Defaults to false.

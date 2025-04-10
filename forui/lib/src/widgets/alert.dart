@@ -29,7 +29,7 @@ class FAlert extends StatelessWidget {
   /// Although typically one of the pre-defined styles in [FBaseAlertStyle], it can also be a [FAlertStyle].
   final FBaseAlertStyle style;
 
-  /// Creates a [FAlert] with a tile, subtitle, and icon.
+  /// Creates a [FAlert] with a title, subtitle, and icon.
   ///
   /// The alert's layout is as follows:
   /// ```diagram
@@ -138,7 +138,7 @@ final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
 
 /// A [FAlert]'s style.
 ///
-/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonStyle] itself.
+/// A style can be either one of the pre-defined styles in [FAlertStyle] or an [FAlertStyle] itself.
 sealed class FBaseAlertStyle {}
 
 @internal

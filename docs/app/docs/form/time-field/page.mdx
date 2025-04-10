@@ -172,7 +172,7 @@ FTimeField.picker(
             _controller = FTimeFieldController(vsync: this, validator: _validate);
           }
 
-          String? _validate(FTime? time) => time == 12 ? 'Time cannot be noon.' : null;
+          String? _validate(FTime? time) => time == FTime(hour: 12) ? 'Time cannot be noon.' : null;
 
           @override
           Widget build(BuildContext context) => FTimeField(

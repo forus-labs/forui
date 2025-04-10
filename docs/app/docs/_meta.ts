@@ -19,8 +19,8 @@ const meta = {
     type: 'separator',
     title: 'Widgets'
   },
-  // TODO: Workaround for a seperator bug. Remove when patched.
-  // A page need to be listed after a separator or else the order will be messed up.
+  // TODO: Workaround for a separator bug. Remove when patched.
+  // A page needs to be listed after a separator or else the order will be messed up.
   layout: 'Layout',
   form: 'Form',
   data: 'Data Presentation',

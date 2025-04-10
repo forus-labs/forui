@@ -11,9 +11,9 @@ part 'button.style.dart';
 /// A button.
 ///
 /// [FButton]s typically contain icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
-/// button will be disabled, it will not react to touch.
+/// button will be disabled, and it will not react to touch.
 ///
-/// The constants in [FBaseButtonStyle] provide a convenient way to style a badge.
+/// The constants in [FBaseButtonStyle] provide a convenient way to style a button.
 ///
 /// See:
 /// * https://forui.dev/docs/form/button for working examples.

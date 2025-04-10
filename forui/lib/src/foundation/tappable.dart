@@ -10,8 +10,8 @@ part 'tappable.style.dart';
 
 /// Utilities for retrieving information about the current platform.
 extension FTouch on Never {
-  /// The platforms that uses touch as the primary input. It isn't 100% accurate as there are hybrid devices that uses
-  /// both touch and keyboard/mouse input, i.e. Windows Surface laptops.
+  /// The platforms that use touch as the primary input. It isn't 100% accurate as there are hybrid devices that use
+  /// both touch and keyboard/mouse input, i.e., Windows Surface laptops.
   static const platforms = {TargetPlatform.android, TargetPlatform.iOS, TargetPlatform.fuchsia};
 
   static bool? _primary;
@@ -31,7 +31,7 @@ extension FTouch on Never {
 
 /// An area that responds to touch.
 ///
-/// It is typically used to create other high-level widgets, i.e. [FButton]. Unless you are creating a custom widget,
+/// It is typically used to create other high-level widgets, i.e., [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 class FTappable extends StatefulWidget {
   static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) => child!;

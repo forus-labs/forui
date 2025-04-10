@@ -25,7 +25,7 @@ final class FBreadcrumb extends StatelessWidget {
   /// A list of breadcrumb items representing the navigation path.
   ///
   /// Each item is typically an [FBreadcrumbItem], separated by a [divider].
-  /// /// The last item generally represents the current page and has its `current` property set to `true`.
+  /// The last item generally represents the current page and has its `current` property set to `true`.
   /// Navigation can be handled via the `onPress` callback.
   final List<Widget> children;
 

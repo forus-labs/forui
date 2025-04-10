@@ -45,7 +45,7 @@ class FTooltipController extends FChangeNotifier {
   /// Hides the tooltip.
   ///
   /// Once hidden, the tooltip will be removed from the widget tree the next time the widget tree rebuilds, and stateful
-  /// widgets in the tooltip may lose states as a result.
+  /// widgets in the tooltip may lose their states as a result.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> hide() async {
@@ -64,7 +64,7 @@ class FTooltipController extends FChangeNotifier {
   }
 }
 
-/// A tooltip displays information related to a widget when focused, hovered over and/or long pressed.
+/// A tooltip displays information related to a widget when focused, hovered over, and/or long pressed.
 ///
 /// **Note**:
 /// The tooltip will not be shown when long pressed if the [child] contains a [GestureDetector] that has a long-press

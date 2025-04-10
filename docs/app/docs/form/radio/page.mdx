@@ -25,8 +25,12 @@ A radio button that typically allows the user to choose only one of a predefined
     FRadio(
       label: const Text('Default'),
       description: const Text('The description of the default option.'),
+      error: const Text('Please select the default option.'),
+      semanticsLabel: 'Default',
       value: true,
       onChange: (value) {},
+      enabled: true,
+      autofocus: true,
     );
     ```
   </Tabs.Tab>
@@ -43,7 +47,7 @@ FRadio(
   error: const Text('Please select the default option.'),
   semanticsLabel: 'Default',
   value: true,
-  onChanged: (value) {},
+  onChange: (value) {},
   enabled: true,
   autofocus: true,
 );

@@ -74,7 +74,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   ///
   /// // Convert scale factors to Color opacity values.
   /// final opacityProperty = property.map((scale) => Colors.blue.withOpacity(scale));
-  /// ``
+  /// ```
   @useResult
   FWidgetStateMap<R> map<R>(R Function(T) map) => FWidgetStateMap<R>({
     for (final MapEntry(key: constraint, :value) in _constraints.entries) constraint: map(value),
