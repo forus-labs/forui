@@ -23,11 +23,7 @@ class StyleGenerator extends Generator {
 
 /// Generates a mixin for the given [element].
 Mixin generateMixin(ClassElement element) {
-  final fields = [
-    ...element.fields.where((f) => !f.isStatic && (f.getter?.isSynthetic ?? true)),
-    ...element.supertype?.element.fields.where((f) => !f.isStatic && (f.getter?.isSynthetic ?? true)) ??
-        <FieldElement>[],
-  ];
+  final fields = _collectFields(element);
 
   final type =
       MixinBuilder()
@@ -43,6 +39,22 @@ Mixin generateMixin(ClassElement element) {
         ]);
 
   return type.build();
+}
+
+List<FieldElement> _collectFields(ClassElement element) {
+  final fields = <FieldElement>[];
+
+  void addFieldsFromType(ClassElement element) {
+    fields.addAll(element.fields.where((f) => !f.isStatic && (f.getter?.isSynthetic ?? true)));
+    if (element.supertype?.element case final ClassElement supertype) {
+      addFieldsFromType(supertype);
+    }
+  }
+
+  addFieldsFromType(element);
+
+  // Remove duplicates (in case a field is overridden)
+  return fields.toSet().toList();
 }
 
 /// Generates getters for the given [fields].

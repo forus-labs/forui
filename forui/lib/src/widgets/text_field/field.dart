@@ -172,7 +172,7 @@ class Field extends FormField<String> {
             bucket: state.bucket,
             child: FLabel(
               axis: Axis.vertical,
-              state: labelState,
+              states: labelState,
               label: parent.label,
               style: style.labelStyle,
               description: parent.description,

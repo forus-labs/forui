@@ -89,15 +89,10 @@ class FSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.switchStyle;
-    final (labelState, switchStyle) = switch ((enabled, error != null)) {
-      (true, false) => (FLabelState.enabled, style.enabledStyle),
-      (false, false) => (FLabelState.disabled, style.disabledStyle),
-      (_, true) => (
-        FLabelState.error,
-        style.enabledStyle,
-      ), // `enabledStyle` is used as error style doesn't contain any switch styles.
-    };
+    final formStates = {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error};
+    final states = {if (value) WidgetState.selected, ...formStates};
 
+    // TODO: Why do we need to wrap a switch with `FLabel`?
     return GestureDetector(
       onTap: enabled ? () => onChange?.call(!value) : null,
       child: FocusableActionDetector(
@@ -112,8 +107,8 @@ class FSwitch extends StatelessWidget {
           toggled: value,
           child: FLabel(
             axis: Axis.horizontal,
-            state: labelState,
-            style: style.labelStyle,
+            states: formStates,
+            style: style,
             label: label,
             description: description,
             error: error,
@@ -127,9 +122,10 @@ class FSwitch extends StatelessWidget {
                 onChange?.call(value);
               },
               applyTheme: false,
-              activeTrackColor: switchStyle.checkedColor,
-              inactiveTrackColor: switchStyle.uncheckedColor,
-              thumbColor: switchStyle.thumbColor,
+              activeTrackColor: style.trackColor.resolve(states),
+              // Don't use [states] as it always contains [WidgetState.selected] but we want the unselected color.
+              inactiveTrackColor: style.trackColor.resolve(formStates),
+              thumbColor: style.thumbColor.resolve(states),
               focusColor: style.focusColor,
               autofocus: autofocus,
               focusNode: focusNode,
@@ -145,126 +141,75 @@ class FSwitch extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start));
+    properties..add(DiagnosticsProperty('style', style))..add(StringProperty('semanticsLabel', semanticsLabel))..add(
+        ObjectFlagProperty.has('onChange', onChange))..add(
+        FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))..add(
+        FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))..add(
+        DiagnosticsProperty('focusNode', focusNode))..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))..add(
+        EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start));
   }
 }
 
 /// [FSwitch]'s style.
-final class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
+final class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
   /// This [FSwitch]'s color when focused.
   @override
   final Color focusColor;
 
-  /// The [FLabel]'s style.
+  /// The track's color.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.selected]
   @override
-  final FLabelLayoutStyle labelLayoutStyle;
+  final FWidgetStateMap<Color> trackColor;
 
-  /// The [FSwitch]'s style when it's enabled.
+  /// The thumb's color.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.selected]
   @override
-  final FSwitchStateStyle enabledStyle;
-
-  /// The [FSwitch]'s style when it's disabled.
-  @override
-  final FSwitchStateStyle disabledStyle;
-
-  /// The [FSwitch]'s style when it has an error.
-  @override
-  final FSwitchErrorStyle errorStyle;
+  final FWidgetStateMap<Color> thumbColor;
 
   /// Creates a [FSwitchStyle].
   const FSwitchStyle({
     required this.focusColor,
-    required this.labelLayoutStyle,
-    required this.enabledStyle,
-    required this.disabledStyle,
-    required this.errorStyle,
+    required this.trackColor,
+    required this.thumbColor,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties.
-  FSwitchStyle.inherit({required FColors colors, required FStyle style})
-    : this(
-        focusColor: colors.primary,
-        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-        enabledStyle: FSwitchStateStyle(
-          checkedColor: colors.primary,
-          uncheckedColor: colors.border,
-          thumbColor: colors.background,
-          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-        ),
-        disabledStyle: FSwitchStateStyle(
-          checkedColor: colors.disable(colors.primary),
-          uncheckedColor: colors.disable(colors.border),
-          thumbColor: colors.background,
-          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-        ),
-        errorStyle: FSwitchErrorStyle(
-          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-        ),
-      );
+  factory FSwitchStyle.inherit({required FColors colors, required FStyle style}) {
+    final label = FLabelStyles.inherit(style: style).horizontalStyle;
+    return FSwitchStyle(
+      focusColor: colors.primary,
+      trackColor: FWidgetStateMap({
+        // Disabled
+        WidgetState.disabled & WidgetState.selected: colors.disable(colors.primary),
+        WidgetState.disabled: colors.disable(colors.border),
 
-  /// The [FLabel]'s style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (
-    layout: labelLayoutStyle,
-    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
-  );
-}
-
-/// [FSwitch]'s state style.
-// ignore: avoid_implementing_value_types
-final class FSwitchStateStyle with Diagnosticable, _$FSwitchStateStyleFunctions implements FFormFieldStyle {
-  /// The track's color when checked.
-  @override
-  final Color checkedColor;
-
-  /// The track's color when unchecked.
-  @override
-  final Color uncheckedColor;
-
-  /// The thumb's color.
-  @override
-  final Color thumbColor;
-
-  @override
-  final TextStyle labelTextStyle;
-
-  @override
-  final TextStyle descriptionTextStyle;
-
-  /// Creates a [FSwitchStateStyle].
-  FSwitchStateStyle({
-    required this.checkedColor,
-    required this.uncheckedColor,
-    required this.thumbColor,
-    required this.labelTextStyle,
-    required this.descriptionTextStyle,
-  });
-}
-
-/// [FSwitch]'s error style.
-// ignore: avoid_implementing_value_types
-final class FSwitchErrorStyle with Diagnosticable, _$FSwitchErrorStyleFunctions implements FFormFieldErrorStyle {
-  @override
-  final TextStyle labelTextStyle;
-
-  @override
-  final TextStyle descriptionTextStyle;
-
-  @override
-  final TextStyle errorTextStyle;
-
-  /// Creates a [FSwitchErrorStyle].
-  FSwitchErrorStyle({required this.labelTextStyle, required this.descriptionTextStyle, required this.errorTextStyle});
+        // Enabled / Error
+        WidgetState.selected: colors.primary,
+        WidgetState.any: colors.border,
+      }),
+      thumbColor: FWidgetStateMap.all(colors.background),
+      labelTextStyle: style.formFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.formFieldStyle.errorTextStyle,
+      labelPadding: label.labelPadding,
+      descriptionPadding: label.descriptionPadding,
+      errorPadding: label.errorPadding,
+      childPadding: label.childPadding,
+    );
+  }
 }

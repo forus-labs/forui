@@ -4,91 +4,177 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Badge
-A badge typically draws attention to specific information, such as labels and counts.
+A badge draws attention to specific information, such as labels and counts. Use badges to display status, notifications, or small pieces of information that need to stand out.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.badge/"/>
+    <LinkBadge label="API Reference" href="/api/badge"/>
+    <LinkBadge label="Source Code" href="https://github.com/forus-labs/forui/blob/main/lib/src/widgets/badge/badge.dart"/>
 </LinkBadgeGroup>
 
+## Overview
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
       <Widget name='badge' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart copy
-      FBadge(label: const Text('Badge'));
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FBadge(label: const Text('New')),
+          const SizedBox(width: 8),
+          FBadge(
+            label: const Text('3'),
+            style: FBadgeStyle.secondary,
+          ),
+        ],
+      );
       ```
   </Tabs.Tab>
 </Tabs>
 
 ## Usage
 
-### `FBadge(...)`
+### Basic Usage
+Create a badge with just a label.
 
 ```dart copy
-FBadge(label: const Text('Badge'));
+FBadge(label: const Text('New'));
 ```
 
-### `FBadge.raw(...)`
+### With Icon
+Add an icon to enhance the badge's visual appeal.
 
 ```dart copy
-FBadge.raw(builder: (context, style) => Text('Badge'));
+FBadge(
+  label: const Text('New'),
+  icon: const Icon(FIcons.bell, size: 12),
+);
 ```
+
+### Raw Constructor
+Use the raw constructor for complete customization of the badge content.
+
+```dart copy
+FBadge.raw(
+  builder: (context, style) => Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Icon(FIcons.star, size: 12, color: style.color),
+      const SizedBox(width: 4),
+      Text('Premium', style: style.textStyle),
+    ],
+  ),
+);
+```
+
 ## Examples
 
-### Primary
+### Variants
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{}}/>
+      <Widget name='badge' variant='variants' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart copy
-      FBadge(label: const Text('Badge'));
-      ```
-  </Tabs.Tab>
-</Tabs>
-
-### Secondary
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-      <Widget name='badge' query={{style: 'secondary'}}/>
-  </Tabs.Tab>
-  <Tabs.Tab>
-      ```dart {3} copy
-      FBadge(
-        label: const Text('Badge'),
-        style: FBadgeStyle.secondary,
+      Column(
+        children: [
+          FBadge(
+            label: const Text('Primary'),
+            style: FBadgeStyle.primary,
+          ),
+          const SizedBox(height: 8),
+          FBadge(
+            label: const Text('Secondary'),
+            style: FBadgeStyle.secondary,
+          ),
+          const SizedBox(height: 8),
+          FBadge(
+            label: const Text('Outline'),
+            style: FBadgeStyle.outline,
+          ),
+          const SizedBox(height: 8),
+          FBadge(
+            label: const Text('Destructive'),
+            style: FBadgeStyle.destructive,
+          ),
+        ],
       );
       ```
   </Tabs.Tab>
 </Tabs>
 
-### Outline
+### With Counters
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{style: 'outline'}}/>
+      <Widget name='badge' variant='counters' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {3} copy
-      FBadge(
-        label: const Text('Badge'),
-        style: FBadgeStyle.outline,
+      ```dart copy
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FBadge(
+            label: const Text('3'),
+            style: FBadgeStyle.primary,
+          ),
+          const SizedBox(width: 8),
+          FBadge(
+            label: const Text('99+'),
+            style: FBadgeStyle.secondary,
+          ),
+        ],
       );
       ```
   </Tabs.Tab>
 </Tabs>
 
-### Destructive
+### Custom Styling
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{style: 'destructive'}}/>
+      <Widget name='badge' variant='custom' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {3} copy
-      FBadge(
-        label: const Text('Badge'),
-        style: FBadgeStyle.destructive,
+      ```dart copy
+      FBadge.raw(
+        builder: (context, style) => Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: style.backgroundColor,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: style.borderColor ?? Colors.transparent,
+              width: 1,
+            ),
+          ),
+          child: Text(
+            'Custom',
+            style: style.textStyle?.copyWith(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       );
       ```
   </Tabs.Tab>
 </Tabs>
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `Widget` | - | The main content of the badge |
+| `icon` | `Widget?` | `null` | An optional icon to display alongside the label |
+| `style` | `FBadgeStyle` | `FBadgeStyle.primary` | The visual style of the badge |
+| `builder` | `Widget Function(BuildContext, FBadgeStyle)` | - | A builder function for the raw constructor |
+
+## Best Practices
+
+1. Use badges sparingly to avoid visual clutter
+2. Keep badge text short and concise
+3. Choose appropriate styles based on the context:
+   - Primary: Important information
+   - Secondary: Less important information
+4. Use icons to enhance visual communication
+5. When using the raw constructor, ensure custom styling matches the overall design system

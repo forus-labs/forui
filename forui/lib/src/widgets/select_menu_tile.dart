@@ -178,15 +178,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
            final tileData = FTileData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
-           final labelStyle = style?.labelStyle ?? global.labelStyle;
            final menuStyle = style?.menuStyle ?? global.menuStyle;
            final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
-
-           final (labelState, error) = switch (state.errorText) {
-             _ when !enabled => (FLabelState.disabled, null),
-             final text? => (FLabelState.error, errorBuilder(state.context, text)),
-             null => (FLabelState.enabled, null),
-           };
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -237,11 +230,16 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              ),
            );
 
-           if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
+           if (groupData == null &&
+               tileData == null &&
+               (label != null || description != null || state.errorText != null)) {
+             final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+             final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
+
              tile = FLabel(
                axis: Axis.vertical,
-               style: labelStyle,
-               state: labelState,
+               style: style ?? global,
+               states: states,
                label: label,
                description: description,
                error: error,
@@ -316,15 +314,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
            final tileData = FTileData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
-           final labelStyle = style?.labelStyle ?? global.labelStyle;
            final menuStyle = style?.menuStyle ?? global.menuStyle;
            final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
-
-           final (labelState, error) = switch (state.errorText) {
-             _ when !enabled => (FLabelState.disabled, null),
-             final text? => (FLabelState.error, errorBuilder(state.context, text)),
-             null => (FLabelState.enabled, null),
-           };
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -376,11 +367,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              ),
            );
 
-           if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
+           if (groupData == null &&
+               tileData == null &&
+               (label != null || description != null || state.errorText != null)) {
+             final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+             final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
              tile = FLabel(
                axis: Axis.vertical,
-               style: labelStyle,
-               state: labelState,
+               style: style,
+               states: states,
                label: label,
                description: description,
                error: error,
@@ -576,11 +571,7 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
 }
 
 /// A select menu tile's style.
-final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, _$FSelectMenuTileStyleFunctions {
-  /// The group label's layout style.
-  @override
-  final FLabelLayoutStyle labelLayoutStyle;
-
+final class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFunctions {
   /// The menu's style.
   @override
   final FPopoverMenuStyle menuStyle;
@@ -591,12 +582,15 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, 
 
   /// Creates a [FSelectMenuTileStyle].
   FSelectMenuTileStyle({
-    required this.labelLayoutStyle,
     required this.menuStyle,
     required this.tileStyle,
-    required super.enabledStyle,
-    required super.disabledStyle,
-    required super.errorStyle,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
   });
 
   /// Creates a [FSelectMenuTileStyle] that inherits its properties.
@@ -607,16 +601,14 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, 
   }) {
     final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography);
     return FSelectMenuTileStyle(
-      labelLayoutStyle: groupStyle.labelLayoutStyle,
       menuStyle: FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
       tileStyle: groupStyle.tileStyle,
-      enabledStyle: groupStyle.enabledStyle,
-      disabledStyle: groupStyle.disabledStyle,
-      errorStyle: groupStyle.errorStyle,
+      labelTextStyle: style.formFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.formFieldStyle.errorTextStyle,
+      labelPadding: groupStyle.labelPadding,
+      descriptionPadding: groupStyle.descriptionPadding,
+      errorPadding: groupStyle.errorPadding,
     );
   }
-
-  /// The label's style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
 }

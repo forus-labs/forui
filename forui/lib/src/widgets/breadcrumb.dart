@@ -24,9 +24,8 @@ final class FBreadcrumb extends StatelessWidget {
 
   /// A list of breadcrumb items representing the navigation path.
   ///
-  /// Each item is typically an [FBreadcrumbItem], separated by a [divider].
-  /// The last item generally represents the current page and has its `current` property set to `true`.
-  /// Navigation can be handled via the `onPress` callback.
+  /// Each item is typically an [FBreadcrumbItem], separated by a [divider]. The last item generally represents the
+  /// current page and has its `current` property set to `true`. Navigation can be handled via the `onPress` callback.
   final List<Widget> children;
 
   /// The divider placed between the children.
@@ -96,8 +95,8 @@ abstract interface class FBreadcrumbItem extends Widget {
 
   /// Creates a collapsed crumb.
   ///
-  /// It is typically used to keep the breadcrumb compact and reduce the number of items displayed.
-  /// When tapped, it displays a popover menu with the collapsed items.
+  /// It is typically used to keep the breadcrumb compact and reduce the number of items displayed. When tapped, it
+  /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsed({
     required List<FTileGroup> menu,
     FPopoverMenuStyle? popoverMenuStyle,
@@ -138,20 +137,8 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
       style: style.tappableStyle,
       focusedOutlineStyle: focusedOutlineStyle,
       onPress: onPress,
-      builder:
-          (_, data, child) => Padding(
-            padding: style.padding,
-            child: DefaultTextStyle(
-              style: switch ((current, data.hovered || data.pressed)) {
-                (false, false) => style.unselectedTextStyle,
-                (false, true) => style.hoveredTextStyle,
-                (true, true) => style.hoveredTextStyle,
-                (true, false) => style.selectedTextStyle,
-              },
-              child: child!,
-            ),
-          ),
-      child: child,
+      builder: (_, states, child) => DefaultTextStyle(style: style.textStyle.resolve(states), child: child!),
+      child: Padding(padding: style.padding, child: child),
     );
   }
 
@@ -299,17 +286,9 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
 
 /// The [FBreadcrumb] styles.
 final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
-  /// The selected breadcrumb [TextStyle].
+  /// The text style.
   @override
-  final TextStyle selectedTextStyle;
-
-  /// The unselected breadcrumb [TextStyle].
-  @override
-  final TextStyle unselectedTextStyle;
-
-  /// The hovered breadcrumb [TextStyle].
-  @override
-  final TextStyle hoveredTextStyle;
+  final FWidgetStateMap<TextStyle> textStyle;
 
   /// The divider icon style.
   @override
@@ -325,9 +304,7 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
 
   /// Creates a [FBreadcrumbStyle].
   FBreadcrumbStyle({
-    required this.selectedTextStyle,
-    required this.unselectedTextStyle,
-    required this.hoveredTextStyle,
+    required this.textStyle,
     required this.iconStyle,
     required this.tappableStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
@@ -336,14 +313,24 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   /// Creates a [FBreadcrumbStyle] that inherits its properties.
   FBreadcrumbStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        selectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.foreground),
-        unselectedTextStyle: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.mutedForeground),
-        hoveredTextStyle: typography.sm.copyWith(
-          fontWeight: FontWeight.w400,
-          color: colors.primary,
-          decoration: TextDecoration.underline,
-        ),
+        textStyle: FWidgetStateMap({
+          // Selected
+          WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): typography.sm.copyWith(
+            fontWeight: FontWeight.w400,
+            color: colors.foreground,
+            decoration: TextDecoration.underline,
+          ),
+          WidgetState.selected: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.foreground),
+
+          // Unselected
+          WidgetState.hovered | WidgetState.pressed: typography.sm.copyWith(
+            fontWeight: FontWeight.w400,
+            color: colors.primary,
+            decoration: TextDecoration.underline,
+          ),
+          WidgetState.any: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.mutedForeground),
+        }),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
-        tappableStyle: style.tappableStyle,
+        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       );
 }

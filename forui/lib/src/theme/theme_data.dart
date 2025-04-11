@@ -518,22 +518,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
       //// Switch
       switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateColor.fromMap({
-          WidgetState.disabled: switchStyle.disabledStyle.thumbColor,
-          WidgetState.any: switchStyle.enabledStyle.thumbColor,
-        }),
-        trackColor: WidgetStateColor.fromMap({
-          WidgetState.disabled & WidgetState.selected: switchStyle.disabledStyle.checkedColor,
-          WidgetState.disabled: switchStyle.disabledStyle.uncheckedColor,
-          WidgetState.selected: switchStyle.enabledStyle.checkedColor,
-          WidgetState.any: switchStyle.enabledStyle.uncheckedColor,
-        }),
-        trackOutlineColor: WidgetStateColor.fromMap({
-          WidgetState.disabled & WidgetState.selected: switchStyle.disabledStyle.checkedColor,
-          WidgetState.disabled: switchStyle.disabledStyle.uncheckedColor,
-          WidgetState.selected: switchStyle.enabledStyle.checkedColor,
-          WidgetState.any: switchStyle.enabledStyle.uncheckedColor,
-        }),
+        thumbColor: switchStyle.thumbColor,
+        trackColor: switchStyle.trackColor,
+        trackOutlineColor: switchStyle.trackColor,
       ),
 
       //// Buttons

@@ -75,7 +75,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
 
            return FLabel(
              axis: Axis.vertical,
-             state: labelState,
+             states: labelState,
              style: groupStyle.labelStyle,
              label: label,
              description: description,
@@ -272,7 +272,7 @@ class FSelectGroupStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
     layout: labelLayoutStyle,
-    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+    states: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
   );
 }
 

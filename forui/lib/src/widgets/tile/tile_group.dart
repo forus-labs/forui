@@ -154,9 +154,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
                FTileData(
                  style: style,
                  divider: divider,
-                 enabled: enabled,
-                 hovered: false,
-                 focused: false,
+                 states: {if (!enabled) WidgetState.disabled},
                  index: index,
                  last: index == children.length - 1,
                  child: child,
@@ -207,9 +205,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
              return FTileData(
                style: style,
                divider: divider,
-               enabled: enabled,
-               hovered: false,
-               focused: false,
+               states: {if (!enabled) WidgetState.disabled},
                index: index,
                last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
                child: tile,
@@ -220,19 +216,16 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   Widget build(BuildContext context) {
     final data = FTileGroupData.maybeOf(context);
     final style = this.style ?? data?.style ?? context.theme.tileGroupStyle;
-    final enabled = this.enabled ?? data?.enabled ?? true;
+    final enabled = this.enabled ?? !(data?.states.contains(WidgetState.disabled) ?? false);
 
+    // The only shard state between a tile group and tile is [WidgetState.disabled].
     final sliver = SliverList(delegate: delegate(style.tileStyle, enabled: enabled));
 
     if (data == null) {
       return FLabel(
-        style: style.labelStyle,
+        style: style,
         axis: Axis.vertical,
-        state: switch ((enabled, error)) {
-          _ when !enabled => FLabelState.disabled,
-          (_, null) => FLabelState.enabled,
-          _ => FLabelState.error,
-        },
+        states: {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error},
         label: label,
         description: description,
         error: error,
@@ -321,15 +314,12 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.tileGroupStyle;
+    final states = {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error};
 
     return FLabel(
-      style: style.labelStyle,
+      style: style,
       axis: Axis.vertical,
-      state: switch ((enabled, error)) {
-        _ when !enabled => FLabelState.disabled,
-        (_, null) => FLabelState.enabled,
-        _ => FLabelState.error,
-      },
+      states: states,
       label: label,
       description: description,
       error: error,
@@ -359,7 +349,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
                     FTileGroupData(
                       style: style,
                       divider: divider,
-                      enabled: enabled,
+                      states: states,
                       index: index,
                       length: children.length,
                       child: child,
@@ -390,11 +380,7 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
 }
 
 /// A [FTileGroup]'s style.
-class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGroupStyleFunctions {
-  /// The group label's layout style.
-  @override
-  final FLabelLayoutStyle labelLayoutStyle;
-
+class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   /// The group's border color.
   @override
   final Color borderColor;
@@ -417,14 +403,13 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
     required this.borderWidth,
     required this.borderRadius,
     required this.tileStyle,
-    required super.enabledStyle,
-    required super.disabledStyle,
-    required super.errorStyle,
-    this.labelLayoutStyle = const FLabelLayoutStyle(
-      labelPadding: EdgeInsets.symmetric(vertical: 7.7),
-      descriptionPadding: EdgeInsets.only(top: 7.5),
-      errorPadding: EdgeInsets.only(top: 5),
-    ),
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
+    super.labelPadding = const EdgeInsets.symmetric(vertical: 7.7),
+    super.descriptionPadding = const EdgeInsets.only(top: 7.5),
+    super.errorPadding = const EdgeInsets.only(top: 5),
+    super.childPadding,
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
@@ -434,33 +419,27 @@ class FTileGroupStyle extends FLabelStateStyles with Diagnosticable, _$FTileGrou
         borderWidth: style.borderWidth,
         borderRadius: style.borderRadius,
         tileStyle: FTileStyle.inherit(colors: colors, typography: typography, style: style),
-        enabledStyle: FFormFieldStyle(
-          labelTextStyle: typography.base.copyWith(
-            color: style.enabledFormFieldStyle.labelTextStyle.color,
+        labelTextStyle: FWidgetStateMap({
+          WidgetState.error: typography.base.copyWith(
+            color: style.formFieldStyle.labelTextStyle.maybeResolve({WidgetState.error})?.color ?? colors.primary,
             fontWeight: FontWeight.w600,
           ),
-          descriptionTextStyle: typography.xs.copyWith(color: style.enabledFormFieldStyle.descriptionTextStyle.color),
-        ),
-        disabledStyle: FFormFieldStyle(
-          labelTextStyle: typography.base.copyWith(
-            color: style.disabledFormFieldStyle.labelTextStyle.color,
+          WidgetState.disabled: typography.base.copyWith(
+            color:
+                style.formFieldStyle.labelTextStyle.maybeResolve({WidgetState.disabled})?.color ??
+                colors.disable(colors.primary),
             fontWeight: FontWeight.w600,
           ),
-          descriptionTextStyle: typography.xs.copyWith(color: style.disabledFormFieldStyle.descriptionTextStyle.color),
-        ),
-        errorStyle: FFormFieldErrorStyle(
-          labelTextStyle: typography.base.copyWith(
-            color: style.enabledFormFieldStyle.labelTextStyle.color,
+          WidgetState.any: typography.base.copyWith(
+            color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
             fontWeight: FontWeight.w600,
           ),
-          descriptionTextStyle: typography.xs.copyWith(color: style.errorFormFieldStyle.descriptionTextStyle.color),
-          errorTextStyle: typography.xs.copyWith(color: style.errorFormFieldStyle.errorTextStyle.color),
+        }),
+        descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.map(
+          (s) => typography.xs.copyWith(color: s.color),
         ),
+        errorTextStyle: style.formFieldStyle.errorTextStyle.map((s) => typography.xs.copyWith(color: s.color)),
       );
-
-  /// The label's style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
 }
 
 /// Extracts the data from the given [FTileGroupData].
@@ -485,8 +464,10 @@ class FTileGroupData extends InheritedWidget {
   /// The divider if there are more than 1 tiles in the current group.
   final FTileDivider divider;
 
-  /// True if the group is enabled.
-  final bool enabled;
+  /// The states.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
+  final Set<WidgetState> states;
 
   /// The group's index.
   final int index;
@@ -498,7 +479,7 @@ class FTileGroupData extends InheritedWidget {
   const FTileGroupData({
     required this.style,
     required this.divider,
-    required this.enabled,
+    required this.states,
     required this.index,
     required this.length,
     required super.child,
@@ -509,7 +490,7 @@ class FTileGroupData extends InheritedWidget {
   bool updateShouldNotify(FTileGroupData old) =>
       style != old.style ||
       divider != old.divider ||
-      enabled != old.enabled ||
+      !setEquals(states, old.states) ||
       index != old.index ||
       length != old.length;
 
@@ -519,7 +500,7 @@ class FTileGroupData extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('divider', divider))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(IterableProperty('states', states))
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length));
   }

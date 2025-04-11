@@ -18,7 +18,7 @@ void main() {
               label: const Text('Email'),
               description: const Text('Enter your email address.'),
               error: const Text('Please enter a valid email address.'),
-              state: FLabelState.error,
+              states: FLabelState.error,
               child: const SizedBox(width: 16, height: 16),
             ),
           ),
@@ -41,7 +41,7 @@ void main() {
                   label: const Text('Email'),
                   description: const Text('Enter your email address.'),
                   error: const Text('Please enter a valid email address.'),
-                  state: state,
+                  states: state,
                   child: const DecoratedBox(
                     decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
                     child: SizedBox(width: 16, height: 16),
@@ -65,7 +65,7 @@ void main() {
                 label: const Text('Email'),
                 description: const Text('Enter your email address.'),
                 error: const Text('Please enter a valid email address.'),
-                state: state,
+                states: state,
                 child: const DecoratedBox(
                   decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
                   child: SizedBox(width: 200, height: 30),

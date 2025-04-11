@@ -4,7 +4,7 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Switch
-A switch that allows the user to toggle between checked and unchecked.
+A toggle switch component that allows users to enable or disable a setting with a sliding motion.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.switch_/"/>
@@ -152,9 +152,9 @@ FSwitch(
                       FormField(
                         initialValue: false,
                         onSaved: (value) {
-                          // Save values somewhere.
+                          // Save the marketing email preference
                         },
-                        validator: (value) => null, // No validation required.
+                        validator: (value) => null, // No validation required for this field
                         builder: (state) => FSwitch(
                           value: state.value ?? false,
                           onChange: (value) => state.didChange(value),
@@ -176,7 +176,7 @@ FSwitch(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Security emails',
+                              'Security Emails',
                               style: theme.typography.base.copyWith(
                                 fontWeight: FontWeight.w500,
                                 color: theme.colors.foreground,
@@ -193,9 +193,9 @@ FSwitch(
                       FormField(
                         initialValue: true,
                         onSaved: (value) {
-                          // Save values somewhere.
+                          // Save the security email preference
                         },
-                        validator: (value) => null, // No validation required.
+                        validator: (value) => null, // No validation required for this field
                         builder: (state) => FSwitch(
                           value: state.value ?? false,
                           onChange: (value) => state.didChange(value),
@@ -210,12 +210,12 @@ FSwitch(
                 label: const Text('Submit'),
                 onPress: () {
                   if (!_formKey.currentState!.validate()) {
-                    // Handle errors here.
+                    // Handle form validation errors
                     return;
                   }
 
                   _formKey.currentState!.save();
-                  // Do something.
+                  // Process the form submission
                 },
               ),
             ],

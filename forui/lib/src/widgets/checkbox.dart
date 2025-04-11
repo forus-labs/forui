@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/keys.dart';
 
 import 'package:meta/meta.dart';
 
@@ -14,8 +14,8 @@ part 'checkbox.style.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/form/checkbox for working examples.
-/// * [FCheckboxStyle] for customizing a checkbox's appearance.
-class FCheckbox extends StatefulWidget {
+/// * [FCheckboxStyle] for customizing a checkboxes appearance.
+class FCheckbox extends StatelessWidget {
   /// The style. Defaults to [FThemeData.checkboxStyle].
   final FCheckboxStyle? style;
 
@@ -68,7 +68,51 @@ class FCheckbox extends StatefulWidget {
   });
 
   @override
-  State<FCheckbox> createState() => _State();
+  Widget build(BuildContext context) {
+    final style = this.style ?? context.theme.checkboxStyle;
+    final formStates = {
+      if (!enabled) WidgetState.disabled,
+      if (error != null) WidgetState.error,
+      if (value) WidgetState.selected,
+    };
+
+    return FLabel(
+      axis: Axis.horizontal,
+      states: formStates,
+      style: style,
+      label: label,
+      description: description,
+      error: error,
+      child: FTappable(
+        style: style.tappableStyle,
+        semanticsLabel: semanticsLabel,
+        semanticSelected: value,
+        onPress: enabled ? () => onChange?.call(!value) : null,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        builder: (context, states, _) {
+          states = {...states, ...formStates};
+
+          final iconTheme = style.iconStyle.maybeResolve(states);
+          return AnimatedSwitcher(
+            duration: style.animationDuration,
+            switchInCurve: style.curve,
+            child: SizedBox.square(
+              key: SetKey(states),
+              dimension: style.size,
+              child: DecoratedBox(
+                decoration: style.decoration.resolve(states),
+                child:
+                    iconTheme == null ? const SizedBox() : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -85,78 +129,8 @@ class FCheckbox extends StatefulWidget {
   }
 }
 
-class _State extends State<FCheckbox> {
-  bool _focused = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _focused = widget.autofocus;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.checkboxStyle;
-    final (labelState, stateStyle) = switch ((widget.enabled, widget.error != null)) {
-      (true, false) => (FLabelState.enabled, style.enabledStyle),
-      (false, false) => (FLabelState.disabled, style.disabledStyle),
-      (_, true) => (FLabelState.error, style.errorStyle),
-    };
-
-    return GestureDetector(
-      onTap: widget.enabled ? () => widget.onChange?.call(!widget.value) : null,
-      child: FocusableActionDetector(
-        enabled: widget.enabled,
-        autofocus: widget.autofocus,
-        focusNode: widget.focusNode,
-        onFocusChange: (focused) {
-          setState(() => _focused = focused);
-          widget.onFocusChange?.call(focused);
-        },
-        mouseCursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
-        child: Semantics(
-          label: widget.semanticsLabel,
-          enabled: widget.enabled,
-          checked: widget.value,
-          child: FLabel(
-            axis: Axis.horizontal,
-            state: labelState,
-            style: style.labelStyle,
-            label: widget.label,
-            description: widget.description,
-            error: widget.error,
-            child: FFocusedOutline(
-              style: style.focusedOutlineStyle,
-              focused: _focused,
-              child: AnimatedSwitcher(
-                duration: style.animationDuration,
-                switchInCurve: style.curve,
-                child: SizedBox.square(
-                  key: ValueKey(widget.value),
-                  dimension: stateStyle.size,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      border: Border.all(color: stateStyle.borderColor, width: 0.6),
-                      color: widget.value ? stateStyle.checkedBackgroundColor : stateStyle.uncheckedBackgroundColor,
-                    ),
-                    child:
-                        widget.value
-                            ? IconTheme(data: stateStyle.iconStyle, child: const Icon(FIcons.check))
-                            : const SizedBox(),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// A [FCheckbox]'s style.
-class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
+/// A checkboxes style.
+class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   /// The duration of the animation when the checkbox switches between checked and unchecked. Defaults to 100ms.
   @override
   final Duration animationDuration;
@@ -167,139 +141,97 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
   @override
   final Curve curve;
 
-  /// The [FLabel]'s style.
+  /// The tappable style.
   @override
-  final FLabelLayoutStyle labelLayoutStyle;
+  final FTappableStyle tappableStyle;
 
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The [FCheckbox]'s style when it's enabled.
-  @override
-  final FCheckboxStateStyle enabledStyle;
-
-  /// The [FCheckbox]'s style when it's disabled.
-  @override
-  final FCheckboxStateStyle disabledStyle;
-
-  /// The [FCheckbox]'s style when it's in an error state.
-  @override
-  final FCheckboxErrorStyle errorStyle;
-
-  /// Creates a [FCheckboxStyle].
-  FCheckboxStyle({
-    required this.labelLayoutStyle,
-    required this.focusedOutlineStyle,
-    required this.enabledStyle,
-    required this.disabledStyle,
-    required this.errorStyle,
-    this.animationDuration = const Duration(milliseconds: 100),
-    this.curve = Curves.linear,
-  });
-
-  /// Creates a [FCheckboxStyle] that inherits its properties.
-  FCheckboxStyle.inherit({required FColors colors, required FStyle style})
-    : this(
-        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-        focusedOutlineStyle: FFocusedOutlineStyle(
-          color: style.focusedOutlineStyle.color,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        enabledStyle: FCheckboxStateStyle(
-          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colors.primary,
-          iconStyle: IconThemeData(color: colors.primaryForeground, size: 14),
-          checkedBackgroundColor: colors.primary,
-          uncheckedBackgroundColor: colors.background,
-        ),
-        disabledStyle: FCheckboxStateStyle(
-          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colors.disable(colors.primary),
-          iconStyle: IconThemeData(color: colors.disable(colors.primaryForeground), size: 14),
-          checkedBackgroundColor: colors.disable(colors.primary),
-          uncheckedBackgroundColor: colors.disable(colors.background),
-        ),
-        errorStyle: FCheckboxErrorStyle(
-          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          borderColor: colors.error,
-          iconStyle: IconThemeData(color: colors.errorForeground, size: 14),
-          checkedBackgroundColor: colors.error,
-          uncheckedBackgroundColor: colors.background,
-        ),
-      );
-
-  /// The [FLabel]'s style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (
-    layout: labelLayoutStyle,
-    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
-  );
-}
-
-/// A checkbox state's style.
-// ignore: avoid_implementing_value_types
-class FCheckboxStateStyle with Diagnosticable, _$FCheckboxStateStyleFunctions implements FFormFieldStyle {
-  /// The checkbox's size. Defaults to 16.
+  /// The checkboxes size. Defaults to 16.
   @override
   final double size;
 
-  /// The checked icon's style.
+  /// The icon style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final IconThemeData iconStyle;
+  final FWidgetStateMap<IconThemeData> iconStyle;
 
-  /// The border color.
+  /// The box decoration.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.selected]
   @override
-  final Color borderColor;
+  final FWidgetStateMap<BoxDecoration> decoration;
 
-  /// The checked background color.
-  @override
-  final Color checkedBackgroundColor;
-
-  /// The unchecked background color.
-  @override
-  final Color uncheckedBackgroundColor;
-
-  @override
-  final TextStyle labelTextStyle;
-
-  @override
-  final TextStyle descriptionTextStyle;
-
-  /// Creates a [FCheckboxStateStyle].
-  const FCheckboxStateStyle({
-    required this.borderColor,
+  /// Creates a [FCheckboxStyle].
+  const FCheckboxStyle({
+    required this.tappableStyle,
+    required this.focusedOutlineStyle,
     required this.iconStyle,
-    required this.checkedBackgroundColor,
-    required this.uncheckedBackgroundColor,
-    required this.labelTextStyle,
-    required this.descriptionTextStyle,
-    this.size = 16,
-  });
-}
-
-/// A checkbox's error state style.
-final class FCheckboxErrorStyle extends FCheckboxStateStyle
-    with _$FCheckboxErrorStyleFunctions
-    implements
-        // ignore: avoid_implementing_value_types
-        FFormFieldErrorStyle {
-  @override
-  final TextStyle errorTextStyle;
-
-  /// Creates a [FCheckboxErrorStyle].
-  FCheckboxErrorStyle({
-    required this.errorTextStyle,
-    required super.borderColor,
-    required super.iconStyle,
+    required this.decoration,
     required super.labelTextStyle,
     required super.descriptionTextStyle,
-    required super.checkedBackgroundColor,
-    required super.uncheckedBackgroundColor,
-    super.size,
+    required super.errorTextStyle,
+    this.animationDuration = const Duration(milliseconds: 100),
+    this.curve = Curves.linear,
+    this.size = 16,
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
   });
+
+  /// Creates a [FCheckboxStyle] that inherits its properties.
+  factory FCheckboxStyle.inherit({required FColors colors, required FStyle style}) {
+    final label = FLabelStyles.inherit(style: style).horizontalStyle;
+    return FCheckboxStyle(
+      tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+      focusedOutlineStyle: style.focusedOutlineStyle,
+      iconStyle: FWidgetStateMap({
+        WidgetState.error: IconThemeData(color: colors.errorForeground, size: 14),
+        WidgetState.disabled: IconThemeData(color: colors.disable(colors.primaryForeground), size: 14),
+        ~WidgetState.disabled: IconThemeData(color: colors.primaryForeground, size: 14),
+      }),
+      decoration: FWidgetStateMap({
+        // Error
+        WidgetState.error & WidgetState.selected: BoxDecoration(borderRadius: style.borderRadius, color: colors.error),
+        WidgetState.error: BoxDecoration(
+          borderRadius: style.borderRadius,
+          border: Border.all(color: colors.error, width: 0.6),
+          color: colors.background,
+        ),
+
+        // Disabled
+        WidgetState.disabled & WidgetState.selected: BoxDecoration(
+          borderRadius: style.borderRadius,
+          color: colors.disable(colors.primary),
+        ),
+        WidgetState.disabled: BoxDecoration(
+          borderRadius: style.borderRadius,
+          border: Border.all(color: colors.disable(colors.primary), width: 0.6),
+          color: colors.disable(colors.background),
+        ),
+
+        // Enabled
+        WidgetState.selected: BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
+        WidgetState.any: BoxDecoration(
+          borderRadius: style.borderRadius,
+          border: Border.all(color: colors.primary, width: 0.6),
+          color: colors.background,
+        ),
+      }),
+      labelTextStyle: style.formFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.formFieldStyle.errorTextStyle,
+      labelPadding: label.labelPadding,
+    );
+  }
 }

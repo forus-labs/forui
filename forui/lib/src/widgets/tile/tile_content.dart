@@ -32,17 +32,12 @@ class FTileContent extends StatelessWidget {
     final ltr = Directionality.maybeOf(context) == TextDirection.ltr;
 
     final tile = FTileData.maybeOf(context)!;
-    final FTileData(style: tileStyle, :enabled, :hovered, :focused, :index, :last) = tile;
+    final FTileData(style: tileStyle, :states, :index, :last) = tile;
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
 
-    final FTileStyle(:contentStyle, :dividerStyle, :focusedDividerStyle) = tileStyle;
-    final style = switch ((enabled, hovered)) {
-      (true, true) => contentStyle.enabledHoveredStyle,
-      (true, false) => contentStyle.enabledStyle,
-      (false, _) => contentStyle.disabledStyle,
-    };
-    final divider = switch ((focused, last)) {
+    final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
+    final divider = switch ((states.contains(WidgetState.focused), last)) {
       (true, false) => FTileDivider.full,
       (true, true) when group.index != group.length - 1 => FTileDivider.full,
       (false, false) => tile.divider,
@@ -60,7 +55,7 @@ class FTileContent extends StatelessWidget {
                 ltr
                     ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
                     : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
-            child: IconTheme(data: style.prefixIconStyle, child: prefix),
+            child: IconTheme(data: contentStyle.prefixIconStyle.resolve(states), child: prefix),
           )
         else
           const SizedBox(),
@@ -75,7 +70,7 @@ class FTileContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DefaultTextStyle.merge(
-                style: style.titleTextStyle,
+                style: contentStyle.titleTextStyle.resolve(states),
                 textHeightBehavior: const TextHeightBehavior(
                   applyHeightToFirstAscent: false,
                   applyHeightToLastDescent: false,
@@ -87,7 +82,7 @@ class FTileContent extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: contentStyle.titleSpacing),
                   child: DefaultTextStyle.merge(
-                    style: style.subtitleTextStyle,
+                    style: contentStyle.subtitleTextStyle.resolve(states),
                     textHeightBehavior: const TextHeightBehavior(
                       applyHeightToFirstAscent: false,
                       applyHeightToLastDescent: false,
@@ -101,7 +96,7 @@ class FTileContent extends StatelessWidget {
         ),
         if (details case final details?)
           DefaultTextStyle.merge(
-            style: style.detailsTextStyle,
+            style: contentStyle.detailsTextStyle.resolve(states),
             textHeightBehavior: const TextHeightBehavior(
               applyHeightToFirstAscent: false,
               applyHeightToLastDescent: false,
@@ -117,15 +112,11 @@ class FTileContent extends StatelessWidget {
                 ltr
                     ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
                     : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
-            child: IconTheme(data: style.suffixIconStyle, child: suffixIcon),
+            child: IconTheme(data: contentStyle.suffixIconStyle.resolve(states), child: suffixIcon),
           )
         else
           const SizedBox(),
-        switch ((focused, divider)) {
-          (_, FTileDivider.none) => const SizedBox(),
-          (true, _) => FDivider(style: focusedDividerStyle),
-          (false, _) => FDivider(style: dividerStyle),
-        },
+        if (divider != FTileDivider.none) FDivider(style: dividerStyle.resolve(states)) else const SizedBox(),
       ],
     );
   }
@@ -137,12 +128,20 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
   @override
   final EdgeInsetsGeometry padding;
 
+  /// The prefix icon style.
+  @override
+  final FWidgetStateMap<IconThemeData> prefixIconStyle;
+
   /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [prefixIconSpacing] is negative.
   @override
   final double prefixIconSpacing;
+
+  /// The title's text style.
+  @override
+  final FWidgetStateMap<TextStyle> titleTextStyle;
 
   /// The vertical spacing between the title and the subtitle. Defaults to 4.
   ///
@@ -151,12 +150,24 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
   @override
   final double titleSpacing;
 
+  /// The subtitle's text style.
+  @override
+  final FWidgetStateMap<TextStyle> subtitleTextStyle;
+
   /// The minimum horizontal spacing between the title, subtitle, combined, and the details. Defaults to 4.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [middleSpacing] is negative.
   @override
   final double middleSpacing;
+
+  /// The details text style.
+  @override
+  final FWidgetStateMap<TextStyle> detailsTextStyle;
+
+  /// The suffix icon style.
+  @override
+  final FWidgetStateMap<IconThemeData> suffixIconStyle;
 
   /// The horizontal spacing between the details and suffix icon. Defaults to 10.
   ///
@@ -165,23 +176,13 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
   @override
   final double suffixIconSpacing;
 
-  /// The content's enabled style.
-  @override
-  final FTileContentStateStyle enabledStyle;
-
-  /// The content's enabled hovered style.
-  @override
-  final FTileContentStateStyle enabledHoveredStyle;
-
-  /// The content's disabled style.
-  @override
-  final FTileContentStateStyle disabledStyle;
-
   /// Creates a [FTileContentStyle].
   FTileContentStyle({
-    required this.enabledStyle,
-    required this.enabledHoveredStyle,
-    required this.disabledStyle,
+    required this.prefixIconStyle,
+    required this.titleTextStyle,
+    required this.subtitleTextStyle,
+    required this.detailsTextStyle,
+    required this.suffixIconStyle,
     this.padding = const EdgeInsetsDirectional.fromSTEB(15, 13, 10, 13),
     this.prefixIconSpacing = 10,
     this.titleSpacing = 3,
@@ -195,58 +196,25 @@ final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions 
   /// Creates a [FTileContentStyle] that inherits its properties.
   FTileContentStyle.inherit({required FColors colors, required FTypography typography})
     : this(
-        enabledStyle: FTileContentStateStyle(
-          prefixIconStyle: IconThemeData(color: colors.primary, size: 18),
-          titleTextStyle: typography.base,
-          subtitleTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
-          detailsTextStyle: typography.base.copyWith(color: colors.mutedForeground),
-          suffixIconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
-        ),
-        enabledHoveredStyle: FTileContentStateStyle(
-          prefixIconStyle: IconThemeData(color: colors.primary, size: 18),
-          titleTextStyle: typography.base,
-          subtitleTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
-          detailsTextStyle: typography.base.copyWith(color: colors.mutedForeground),
-          suffixIconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
-        ),
-        disabledStyle: FTileContentStateStyle(
-          prefixIconStyle: IconThemeData(color: colors.disable(colors.primary), size: 18),
-          titleTextStyle: typography.base.copyWith(color: colors.disable(colors.primary)),
-          subtitleTextStyle: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
-          detailsTextStyle: typography.base.copyWith(color: colors.disable(colors.mutedForeground)),
-          suffixIconStyle: IconThemeData(color: colors.disable(colors.mutedForeground), size: 18),
-        ),
+        prefixIconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
+          WidgetState.any: IconThemeData(color: colors.primary, size: 18),
+        }),
+        titleTextStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.primary)),
+          WidgetState.any: typography.base,
+        }),
+        subtitleTextStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
+          WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
+        }),
+        detailsTextStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.mutedForeground)),
+          WidgetState.any: typography.base.copyWith(color: colors.mutedForeground),
+        }),
+        suffixIconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 18),
+          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
+        }),
       );
-}
-
-/// A [FTile] content's state style.
-final class FTileContentStateStyle with Diagnosticable, _$FTileContentStateStyleFunctions {
-  /// The prefix icon style.
-  @override
-  final IconThemeData prefixIconStyle;
-
-  /// The title's text style.
-  @override
-  final TextStyle titleTextStyle;
-
-  /// The subtitle's text style.
-  @override
-  final TextStyle subtitleTextStyle;
-
-  /// The details text style.
-  @override
-  final TextStyle detailsTextStyle;
-
-  /// The suffix icon style.
-  @override
-  final IconThemeData suffixIconStyle;
-
-  /// Creates a [FTileContentStateStyle].
-  const FTileContentStateStyle({
-    required this.prefixIconStyle,
-    required this.titleTextStyle,
-    required this.subtitleTextStyle,
-    required this.detailsTextStyle,
-    required this.suffixIconStyle,
-  });
 }

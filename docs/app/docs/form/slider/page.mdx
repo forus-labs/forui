@@ -4,7 +4,7 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Slider
-An input where the user selects a value from within a given range.
+A sliding input component that allows users to select a value within a specified range by dragging a handle or tapping on the track.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.slider/"/>
@@ -132,8 +132,9 @@ FSlider(
 
 #### Marks
 
-A mark consists of a tick - a visual indicator of the mark's position on the slider - and a label - a text that
-describes the mark's value.
+Marks provide visual reference points on the slider track. Each mark consists of:
+- A tick: A visual indicator showing the mark's position
+- A label: Text describing the mark's value (optional)
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -159,7 +160,7 @@ describes the mark's value.
 
 ### Layouts and Selections
 
-#### Discrete Selection
+#### Discrete Values
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -200,7 +201,7 @@ describes the mark's value.
   </Tabs.Tab>
 </Tabs>
 
-#### Min & Max Selection Extent
+#### Selection Boundaries
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -220,7 +221,7 @@ describes the mark's value.
   </Tabs.Tab>
 </Tabs>
 
-#### Vertical Layout
+#### Vertical Orientation
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>

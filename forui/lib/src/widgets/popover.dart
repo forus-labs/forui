@@ -326,7 +326,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final BoxDecoration decoration;
 
-  /// The margin surrounding the popover. Defaults to `EdgeInsets.all(4)`.
+  /// The padding surrounding the popover. Defaults to `EdgeInsets.all(4)`.
   @override
   final EdgeInsetsGeometry padding;
 

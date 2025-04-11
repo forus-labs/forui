@@ -131,6 +131,6 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   // ignore: diagnostic_describe_all_properties
   FLabelStyle get labelStyle => (
     layout: labelLayoutStyle,
-    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
+    states: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
   );
 }

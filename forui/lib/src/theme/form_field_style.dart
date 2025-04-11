@@ -10,14 +10,20 @@ part 'form_field_style.style.dart';
 /// A form field state's style.
 class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   /// The label's text style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
   final FWidgetStateMap<TextStyle> labelTextStyle;
 
   /// The description's text style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
   final FWidgetStateMap<TextStyle> descriptionTextStyle;
 
   /// The error's text style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
   final FWidgetStateMap<TextStyle> errorTextStyle;
 
@@ -36,18 +42,14 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
           color: colors.disable(colors.primary),
           fontWeight: FontWeight.w600,
         ),
-        WidgetState.any: typography.sm.copyWith(
-          color: colors.primary,
-          fontWeight: FontWeight.w600,
-        ),
+        WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
       }),
-        descriptionTextStyle = FWidgetStateMap({
-          WidgetState.error: typography.sm.copyWith(color: colors.mutedForeground),
-          WidgetState.disabled: typography.sm.copyWith(
-            color: colors.disable(colors.primary),
-          ),
-          WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
-        });
-      descriptionTextStyle = typography.sm.copyWith(color: descriptionColor),
-      errorTextStyle = typography.sm.copyWith(color: errorColor, fontWeight: FontWeight.w600);
+      descriptionTextStyle = FWidgetStateMap({
+        WidgetState.error: typography.sm.copyWith(color: colors.mutedForeground),
+        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
+        WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
+      }),
+      errorTextStyle = FWidgetStateMap({
+        WidgetState.error: typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w600),
+      });
 }

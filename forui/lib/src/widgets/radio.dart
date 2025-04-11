@@ -15,7 +15,7 @@ part 'radio.style.dart';
 /// See:
 /// * https://forui.dev/docs/form/radio for working examples.
 /// * [FRadioStyle] for customizing a radio's appearance.
-class FRadio extends StatefulWidget {
+class FRadio extends StatelessWidget {
   /// The style. Defaults to [FThemeData.radioStyle].
   final FRadioStyle? style;
 
@@ -68,7 +68,59 @@ class FRadio extends StatefulWidget {
   });
 
   @override
-  State<FRadio> createState() => _State();
+  Widget build(BuildContext context) {
+    final style = this.style ?? context.theme.radioStyle;
+    final formStates = {
+      if (!enabled) WidgetState.disabled,
+      if (error != null) WidgetState.error,
+      if (value) WidgetState.selected,
+    };
+
+    return FLabel(
+      axis: Axis.horizontal,
+      states: formStates,
+      style: style,
+      label: label,
+      description: description,
+      error: error,
+      child: FTappable(
+        style: style.tappableStyle,
+        semanticsLabel: semanticsLabel,
+        semanticSelected: value,
+        onPress: enabled ? () => onChange?.call(!value) : null,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        builder: (context, states, _) {
+          states = {...states, ...formStates};
+
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  border: Border.all(color: style.borderColor.resolve(states)),
+                  color: style.backgroundColor.resolve(states),
+                  shape: BoxShape.circle,
+                ),
+                child: const SizedBox.square(dimension: 10),
+              ),
+              DecoratedBox(
+                decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: BoxShape.circle),
+                child: AnimatedSize(
+                  duration: style.animationDuration,
+                  curve: style.curve,
+                  child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -85,81 +137,8 @@ class FRadio extends StatefulWidget {
   }
 }
 
-class _State extends State<FRadio> {
-  bool _focused = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _focused = widget.autofocus;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.radioStyle;
-    final (labelState, stateStyle) = switch ((widget.enabled, widget.error != null)) {
-      (true, false) => (FLabelState.enabled, style.enabledStyle),
-      (false, false) => (FLabelState.disabled, style.disabledStyle),
-      (_, true) => (FLabelState.error, style.errorStyle),
-    };
-
-    return GestureDetector(
-      onTap: widget.enabled ? () => widget.onChange?.call(!widget.value) : null,
-      child: FocusableActionDetector(
-        enabled: widget.enabled,
-        autofocus: widget.autofocus,
-        focusNode: widget.focusNode,
-        onFocusChange: (focused) {
-          setState(() => _focused = focused);
-          widget.onFocusChange?.call(focused);
-        },
-        mouseCursor: widget.enabled ? SystemMouseCursors.click : MouseCursor.defer,
-        child: Semantics(
-          label: widget.semanticsLabel,
-          enabled: widget.enabled,
-          checked: widget.value,
-          child: FLabel(
-            axis: Axis.horizontal,
-            state: labelState,
-            style: style.labelStyle,
-            label: widget.label,
-            description: widget.description,
-            error: widget.error,
-            child: FFocusedOutline(
-              style: style.focusedOutlineStyle,
-              focused: _focused,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: stateStyle.borderColor),
-                      color: stateStyle.backgroundColor,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const SizedBox.square(dimension: 10),
-                  ),
-                  DecoratedBox(
-                    decoration: BoxDecoration(color: stateStyle.selectedColor, shape: BoxShape.circle),
-                    child: AnimatedSize(
-                      duration: style.animationDuration,
-                      curve: style.curve,
-                      child: widget.value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 /// A [FRadio]'s style.
-class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
+class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   /// The duration of the animation when the radio switches between selected and unselected. Defaults to 100ms.
   @override
   final Duration animationDuration;
@@ -170,118 +149,92 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   @override
   final Curve curve;
 
-  /// The [FLabel]'s style.
+  /// The tappable style.
   @override
-  final FLabelLayoutStyle labelLayoutStyle;
+  final FTappableStyle tappableStyle;
 
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The [FRadio]'s style when the radio is enabled.
+  /// The [FRadio]'s border color.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.selected]
   @override
-  final FRadioStateStyle enabledStyle;
+  final FWidgetStateMap<Color> borderColor;
 
-  /// The [FRadio]'s style when the radio is disabled.
+  /// The [FRadio]'s background color.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.selected]
   @override
-  final FRadioStateStyle disabledStyle;
+  final FWidgetStateMap<Color> backgroundColor;
 
-  /// The [FRadio]'s style when the radio is in an error state.
+  /// The [FRadio]'s indicator color.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.selected]
   @override
-  final FRadioErrorStyle errorStyle;
+  final FWidgetStateMap<Color> indicatorColor;
 
   /// Creates a [FRadioStyle].
   FRadioStyle({
-    required this.labelLayoutStyle,
+    required this.tappableStyle,
     required this.focusedOutlineStyle,
-    required this.enabledStyle,
-    required this.disabledStyle,
-    required this.errorStyle,
+    required this.borderColor,
+    required this.backgroundColor,
+    required this.indicatorColor,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
     this.animationDuration = const Duration(milliseconds: 100),
     this.curve = Curves.easeOutCirc,
   });
 
   /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
-  FRadioStyle.inherit({required FColors colors, required FStyle style})
-    : this(
-        labelLayoutStyle: FLabelStyles.inherit(style: style).horizontalStyle.layout,
-        focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: BorderRadius.circular(100)),
-        enabledStyle: FRadioStateStyle(
-          labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colors.primary,
-          selectedColor: colors.primary,
-          backgroundColor: colors.background,
-        ),
-        disabledStyle: FRadioStateStyle(
-          labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-          borderColor: colors.disable(colors.primary),
-          selectedColor: colors.disable(colors.primary),
-          backgroundColor: colors.background,
-        ),
-        errorStyle: FRadioErrorStyle(
-          labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-          descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-          errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-          borderColor: colors.error,
-          selectedColor: colors.error,
-          backgroundColor: colors.background,
-        ),
-      );
-
-  /// The [FLabel]'s style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (
-    layout: labelLayoutStyle,
-    state: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
-  );
-}
-
-/// A [FRadio]'s state style.
-// ignore: avoid_implementing_value_types
-class FRadioStateStyle with Diagnosticable, _$FRadioStateStyleFunctions implements FFormFieldStyle {
-  /// The border color.
-  @override
-  final Color borderColor;
-
-  /// The selected color.
-  @override
-  final Color selectedColor;
-
-  /// The background color.
-  @override
-  final Color backgroundColor;
-
-  @override
-  final TextStyle labelTextStyle;
-
-  @override
-  final TextStyle descriptionTextStyle;
-
-  /// Creates a [FRadioStateStyle].
-  FRadioStateStyle({
-    required this.borderColor,
-    required this.selectedColor,
-    required this.backgroundColor,
-    required this.labelTextStyle,
-    required this.descriptionTextStyle,
-  });
-}
-
-/// A [FRadio]'s error style.
-// ignore: avoid_implementing_value_types
-final class FRadioErrorStyle extends FRadioStateStyle with _$FRadioErrorStyleFunctions implements FFormFieldErrorStyle {
-  @override
-  final TextStyle errorTextStyle;
-
-  /// Creates a [FRadioErrorStyle].
-  FRadioErrorStyle({
-    required super.borderColor,
-    required super.selectedColor,
-    required super.backgroundColor,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required this.errorTextStyle,
-  });
+  factory FRadioStyle.inherit({required FColors colors, required FStyle style}) {
+    final label = FLabelStyles.inherit(style: style).horizontalStyle;
+    return FRadioStyle(
+      tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+      focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: BorderRadius.circular(100)),
+      borderColor: FWidgetStateMap({
+        WidgetState.error: colors.error,
+        WidgetState.disabled: colors.disable(colors.primary),
+        WidgetState.any: colors.primary,
+      }),
+      backgroundColor: FWidgetStateMap.all(colors.background),
+      indicatorColor: FWidgetStateMap({
+        WidgetState.error: colors.error,
+        WidgetState.disabled: colors.disable(colors.primary),
+        WidgetState.any: colors.primary,
+      }),
+      labelTextStyle: style.formFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.formFieldStyle.errorTextStyle,
+      labelPadding: label.labelPadding,
+      descriptionPadding: label.descriptionPadding,
+      errorPadding: label.errorPadding,
+      childPadding: label.childPadding,
+    );
+  }
 }
