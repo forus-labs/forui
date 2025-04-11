@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:meta/meta.dart';
 
@@ -8,7 +9,7 @@ import 'package:forui/forui.dart';
 part 'text_field_style.style.dart';
 
 /// The text field style.
-final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
+final class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// The appearance of the keyboard. Defaults to [FColors.brightness].
   ///
   /// This setting is only honored on iOS devices.
@@ -50,87 +51,126 @@ final class FTextFieldStyle with Diagnosticable, _$FTextFieldStyleFunctions {
   @override
   final EdgeInsets scrollPadding;
 
-  /// The label's layout style.
-  @override
-  final FLabelLayoutStyle labelLayoutStyle;
-
   /// The clear button's style when [FTextField.clearable] is true.
   @override
   final FButtonStyle clearButtonStyle;
 
-  /// The style when this text field is enabled.
+  /// The content's [TextStyle].
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
   @override
-  final FTextFieldStateStyle enabledStyle;
+  final FWidgetStateMap<TextStyle> contentTextStyle;
 
-  /// The style when this text field is disabled.
+  /// The hint's [TextStyle].
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
   @override
-  final FTextFieldStateStyle disabledStyle;
+  final FWidgetStateMap<TextStyle> hintTextStyle;
 
-  /// The style when this text field has an error.
+  /// The counter's [TextStyle].
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
   @override
-  final FTextFieldErrorStyle errorStyle;
+  final FWidgetStateMap<TextStyle> counterTextStyle;
+
+  /// The border.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  @override
+  final FWidgetStateMap<InputBorder> border;
 
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
     required this.keyboardAppearance,
-    required this.labelLayoutStyle,
     required this.clearButtonStyle,
-    required this.enabledStyle,
-    required this.disabledStyle,
-    required this.errorStyle,
+    required this.contentTextStyle,
+    required this.hintTextStyle,
+    required this.counterTextStyle,
+    required this.border,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
     this.cursorColor = CupertinoColors.activeBlue,
     this.fillColor,
     this.filled = false,
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
     this.clearButtonPadding = const EdgeInsetsDirectional.only(end: 4),
     this.scrollPadding = const EdgeInsets.all(20),
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  FTextFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        keyboardAppearance: colors.brightness,
-        labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
-        clearButtonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost.transform(
-          (ghost) => ghost.copyWith(
-            iconContentStyle: ghost.iconContentStyle.copyWith(
-              enabledStyle: IconThemeData(color: colors.mutedForeground, size: 17),
-            ),
-          ),
-        ),
-        enabledStyle: FTextFieldStateStyle.inherit(
-          contentColor: colors.primary,
-          hintColor: colors.mutedForeground,
-          focusedBorderColor: colors.primary,
-          unfocusedBorderColor: colors.border,
-          formFieldStyle: style.enabledFormFieldStyle,
-          typography: typography,
-          style: style,
-        ),
-        disabledStyle: FTextFieldStateStyle.inherit(
-          contentColor: colors.disable(colors.primary),
-          hintColor: colors.disable(colors.border),
-          focusedBorderColor: colors.disable(colors.border),
-          unfocusedBorderColor: colors.disable(colors.border),
-          formFieldStyle: style.disabledFormFieldStyle,
-          typography: typography,
-          style: style,
-        ),
-        errorStyle: FTextFieldErrorStyle.inherit(
-          contentColor: colors.primary,
-          hintColor: colors.mutedForeground,
-          focusedBorderColor: colors.error,
-          unfocusedBorderColor: colors.error,
-          formFieldErrorStyle: style.errorFormFieldStyle,
-          typography: typography,
-          style: style,
-        ),
-      );
+  factory FTextFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final label = FLabelStyles.inherit(style: style).verticalStyle;
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
+    final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
 
-  /// The label style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (
-    layout: labelLayoutStyle,
-    states: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
-  );
+    return FTextFieldStyle(
+      keyboardAppearance: colors.brightness,
+      clearButtonStyle: ghost.copyWith(
+        iconContentStyle: ghost.iconContentStyle.copyWith(
+          iconStyle: FWidgetStateMap({
+            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
+          }),
+        ),
+      ),
+      contentTextStyle: FWidgetStateMap({
+        WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.primary)),
+        WidgetState.any: textStyle.copyWith(color: colors.primary),
+      }),
+      hintTextStyle: FWidgetStateMap({
+        WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.border)),
+        WidgetState.any: textStyle.copyWith(color: colors.mutedForeground),
+      }),
+      counterTextStyle: FWidgetStateMap({
+        WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.primary)),
+        WidgetState.any: textStyle.copyWith(color: colors.primary),
+      }),
+      border: FWidgetStateMap({
+        WidgetState.error: OutlineInputBorder(
+          borderSide: BorderSide(color: colors.error, width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.disabled: OutlineInputBorder(
+          borderSide: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.focused: OutlineInputBorder(
+          borderSide: BorderSide(color: colors.primary, width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.any: OutlineInputBorder(
+          borderSide: BorderSide(color: colors.border, width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+      }),
+      labelTextStyle: style.formFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.formFieldStyle.errorTextStyle,
+      labelPadding: label.labelPadding,
+      descriptionPadding: label.descriptionPadding,
+      errorPadding: label.errorPadding,
+      childPadding: label.childPadding,
+    );
+  }
 }

@@ -232,6 +232,9 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
       errorTextStyle: style.formFieldStyle.errorTextStyle,
       labelPadding: label.labelPadding,
+      descriptionPadding: label.descriptionPadding,
+      errorPadding: label.errorPadding,
+      childPadding: label.childPadding,
     );
   }
 }

@@ -10,16 +10,15 @@ class Field extends FormField<String> {
     _State state,
     FTextField parent,
     FTextFieldStyle style,
-    FTextFieldStateStyle stateStyle,
-    EdgeInsetsGeometry contentPadding,
+    Set<WidgetState> states,
     Widget? suffix,
   ) {
     final textDirection = Directionality.maybeOf(state.context) ?? TextDirection.ltr;
-    final padding = contentPadding.resolve(textDirection);
+    final padding = style.contentPadding.resolve(textDirection);
 
     return InputDecoration(
       isDense: true,
-      prefixIcon: parent.prefixBuilder?.call(state.context, stateStyle, null),
+      prefixIcon: parent.prefixBuilder?.call(state.context, (style, states), null),
       suffixIcon: suffix,
       // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
       prefix: Padding(
@@ -35,21 +34,10 @@ class Field extends FormField<String> {
         TextDirection.rtl => padding.copyWith(right: 0),
       },
       hintText: parent.hint,
-      hintStyle: stateStyle.hintTextStyle,
+      hintStyle: WidgetStateTextStyle.resolveWith(style.hintTextStyle.resolve),
       fillColor: style.fillColor,
       filled: style.filled,
-      disabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
-        borderRadius: stateStyle.unfocusedStyle.radius,
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: stateStyle.unfocusedStyle.color, width: stateStyle.unfocusedStyle.width),
-        borderRadius: stateStyle.unfocusedStyle.radius,
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: stateStyle.focusedStyle.color, width: stateStyle.focusedStyle.width),
-        borderRadius: stateStyle.focusedStyle.radius,
-      ),
+      border: WidgetStateInputBorder.resolveWith(style.border.resolve),
     );
   }
 
@@ -66,13 +54,9 @@ class Field extends FormField<String> {
         restorationId: parent.restorationId,
         builder: (field) {
           final state = field as _State;
-          final (labelState, stateStyle) = switch (parent) {
-            _ when !parent.enabled => (FLabelState.disabled, style.disabledStyle),
-            _ when state.errorText != null => (FLabelState.error, style.errorStyle),
-            _ => (FLabelState.enabled, style.enabledStyle),
-          };
+          final states = state._statesController.value;
 
-          final suffixIcon = parent.suffixBuilder?.call(state.context, stateStyle, null);
+          final suffixIcon = parent.suffixBuilder?.call(state.context, (style, states), null);
           final clear =
               parent.clearable(state._effectiveController.value)
                   ? Padding(
@@ -94,32 +78,32 @@ class Field extends FormField<String> {
                   : null;
 
           final suffix = switch ((suffixIcon, clear)) {
-            (final icon?, final clear?) when labelState != FLabelState.disabled => Row(
+            (final icon?, final clear?) when !states.contains(WidgetState.disabled) => Row(
               mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.min,
               children: [clear, icon],
             ),
-            (null, final clear?) when labelState != FLabelState.disabled => clear,
+            (null, final clear?) when !states.contains(WidgetState.disabled) => clear,
             (final icon, _) => icon,
           };
 
           final textfield = TextField(
             controller: state._effectiveController,
-            decoration: _decoration(state, parent, style, stateStyle, style.contentPadding, suffix),
+            decoration: _decoration(state, parent, style, states, suffix),
             focusNode: parent.focusNode,
             undoController: parent.undoController,
             cursorErrorColor: style.cursorColor,
             keyboardType: parent.keyboardType,
             textInputAction: parent.textInputAction,
             textCapitalization: parent.textCapitalization,
-            style: stateStyle.contentTextStyle,
+            style: style.contentTextStyle.resolve(states),
             textAlign: parent.textAlign,
             textAlignVertical: parent.textAlignVertical,
             textDirection: parent.textDirection,
             readOnly: parent.readOnly,
             showCursor: parent.showCursor,
             autofocus: parent.autofocus,
-            statesController: parent.statesController,
+            statesController: state._statesController,
             obscuringCharacter: parent.obscuringCharacter,
             obscureText: parent.obscureText,
             autocorrect: parent.autocorrect,
@@ -152,7 +136,7 @@ class Field extends FormField<String> {
               final counter = parent.counterBuilder?.call(context, currentLength, maxLength, isFocused);
               return counter == null
                   ? null
-                  : DefaultTextStyle.merge(style: stateStyle.counterTextStyle, child: counter);
+                  : DefaultTextStyle.merge(style: style.counterTextStyle.resolve(states), child: counter);
             },
             selectionControls: parent.selectionControls,
             scrollController: parent.scrollController,
@@ -172,15 +156,15 @@ class Field extends FormField<String> {
             bucket: state.bucket,
             child: FLabel(
               axis: Axis.vertical,
-              states: labelState,
+              states: states,
               label: parent.label,
-              style: style.labelStyle,
+              style: style,
               description: parent.description,
               error: switch (state.errorText) {
                 null => const SizedBox(),
                 final error => parent.errorBuilder(state.context, error),
               },
-              child: parent.builder(state.context, stateStyle, textfield),
+              child: parent.builder(state.context, (style, states), textfield),
             ),
           );
         },
@@ -193,15 +177,20 @@ class Field extends FormField<String> {
 // This class is based on Material's _TextFormFieldState implementation.
 class _State extends FormFieldState<String> {
   RestorableTextEditingController? _controller;
+  late WidgetStatesController _statesController;
 
   @override
   void initState() {
     super.initState();
     if (widget.parent.controller case final controller?) {
-      controller.addListener(_handleControllerChanged);
+      controller.addListener(_handleTextEditingChange);
     } else {
       _registerController(RestorableTextEditingController(text: widget.initialValue));
     }
+
+    _statesController =
+        widget.parent.statesController ?? WidgetStatesController()
+          ..addListener(_handleStatesChange);
   }
 
   @override
@@ -230,8 +219,8 @@ class _State extends FormFieldState<String> {
       return;
     }
 
-    widget.parent.controller?.addListener(_handleControllerChanged);
-    old.parent.controller?.removeListener(_handleControllerChanged);
+    widget.parent.controller?.addListener(_handleTextEditingChange);
+    old.parent.controller?.removeListener(_handleTextEditingChange);
 
     switch ((widget.parent.controller, old.parent.controller)) {
       case (final current?, _):
@@ -245,11 +234,28 @@ class _State extends FormFieldState<String> {
       case (null, final old?):
         _registerController(RestorableTextEditingController.fromValue(old.value));
     }
+
+    if (widget.parent.statesController != old.parent.statesController) {
+      if (old.parent.statesController == null) {
+        _statesController.dispose();
+      } else {
+        _statesController.removeListener(_handleStatesChange);
+      }
+      _statesController =
+          widget.parent.statesController ?? WidgetStatesController()
+            ..addListener(_handleStatesChange);
+    }
   }
 
   @override
   void dispose() {
-    widget.parent.controller?.removeListener(_handleControllerChanged);
+    if (widget.parent.statesController == null) {
+      _statesController.dispose();
+    } else {
+      _statesController.removeListener(_handleStatesChange);
+    }
+
+    widget.parent.controller?.removeListener(_handleTextEditingChange);
     _controller?.dispose();
     super.dispose();
   }
@@ -270,7 +276,7 @@ class _State extends FormFieldState<String> {
     widget.parent.onChange?.call(_effectiveController.text);
   }
 
-  void _handleControllerChanged() {
+  void _handleTextEditingChange() {
     // Suppress changes that originated from within this class.
     //
     // In the case where a controller has been passed in to this widget, we register this change listener. In these
@@ -280,6 +286,8 @@ class _State extends FormFieldState<String> {
       didChange(_effectiveController.text);
     }
   }
+
+  void _handleStatesChange() => setState(() {});
 
   @override
   Field get widget => super.widget as Field;

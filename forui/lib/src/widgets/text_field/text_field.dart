@@ -36,7 +36,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   static Widget _contextMenuBuilder(BuildContext _, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 
-  static Widget _fieldBuilder(BuildContext _, FTextFieldStateStyle _, Widget? child) => child!;
+  static Widget _fieldBuilder(BuildContext _, (FTextFieldStyle, Set<WidgetState>) _, Widget? child) => child!;
 
   static Widget _errorBuilder(BuildContext _, String text) => Text(text);
 
@@ -52,7 +52,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   ///
   /// Defaults to returning the given child.
   /// {@endtemplate}
-  final ValueWidgetBuilder<FTextFieldStateStyle> builder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder;
 
   /// {@template forui.text_field.errorBuilder}
   /// A builder that creates a widget to display validation errors.
@@ -597,14 +597,14 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   ///
   /// See [InputDecoration.prefixIcon] for more information.
   /// {@endtemplate}
-  final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
 
   /// {@template forui.text_field.suffixBuilder}
   /// The suffix's builder.
   ///
   /// See [InputDecoration.suffixIcon] for more information.
   /// {@endtemplate}
-  final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
 
   /// {@template forui.text_field.clearable}
   /// A predicate that returns true if a clear icon should be shown at the end when the text field is not empty.

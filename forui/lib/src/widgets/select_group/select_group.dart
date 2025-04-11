@@ -267,44 +267,4 @@ class FSelectGroupStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
       ),
     ),
   );
-
-  /// The [FLabel]'s style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (
-    layout: labelLayoutStyle,
-    states: FLabelStateStyles(enabledStyle: enabledStyle, disabledStyle: disabledStyle, errorStyle: errorStyle),
-  );
-}
-
-/// [FSelectGroup]'s state style.
-// ignore: avoid_implementing_value_types
-class FSelectGroupStateStyle with Diagnosticable, _$FSelectGroupStateStyleFunctions implements FFormFieldStyle {
-  @override
-  final TextStyle labelTextStyle;
-
-  @override
-  final TextStyle descriptionTextStyle;
-
-  /// Creates a [FSelectGroupStateStyle].
-  FSelectGroupStateStyle({required this.labelTextStyle, required this.descriptionTextStyle});
-}
-
-/// [FSelectGroup]'s error style.
-// ignore: avoid_implementing_value_types
-class FSelectGroupErrorStyle with Diagnosticable, _$FSelectGroupErrorStyleFunctions implements FFormFieldErrorStyle {
-  @override
-  final TextStyle labelTextStyle;
-
-  @override
-  final TextStyle descriptionTextStyle;
-
-  @override
-  final TextStyle errorTextStyle;
-
-  /// Creates a [FSelectGroupErrorStyle].
-  FSelectGroupErrorStyle({
-    required this.labelTextStyle,
-    required this.descriptionTextStyle,
-    required this.errorTextStyle,
-  });
 }

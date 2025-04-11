@@ -4,8 +4,9 @@ We are experimenting with a new changelog format which groups changes by feature
 ### Styles
 A CLI has been added to generate styles for Forui widgets. See forui.dev/docs/cli for more information. 
 
-Several breaking changes have been made to styles to improve consistency and usability (too many to list in a sane manner). 
-Generally, all styles have been updated to use `WidgetState`s, becoming more customizable and concise.
+Several breaking changes have been made to styles and widgets that rely on state styles to improve consistency and 
+usability (too many to list in a sane manner). Generally, all styles have been updated to use `WidgetState`s, becoming 
+more customizable and concise.
 
 * Add `FBottomNavigationItemStyle.spacing`.
 * Add `FCardContentStyle.imageSpacing`.
