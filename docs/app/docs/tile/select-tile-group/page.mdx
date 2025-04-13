@@ -1,18 +1,19 @@
-import {Callout} from "nextra/components";
+import { Callout } from 'nextra/components';
 import { Tabs } from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Select Tile Group
+
 A group of tiles that allow users to make a selection from a set of options.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select_tile/"/>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select_tile/" />
 </LinkBadgeGroup>
 
 <Callout type="info">
-    For desktop, a [select group](/docs/form/select-group) is generally recommended over this.
+  For desktop, a [select group](/docs/form/select-group) is generally recommended over this.
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
@@ -46,6 +47,7 @@ A group of tiles that allow users to make a selection from a set of options.
       ],
     );
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -107,34 +109,14 @@ FSelectTileGroup<Value>.builder(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select-tile-group' variant='scrollable' query={{}} height={300}/>
+    <Widget name="select-tile-group" variant="scrollable" query={{}} height={300} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {5} copy
-    FSelectTileGroup(
-      selectController: FSelectTileGroupController(values: {Sidebar.recents}),
-      label: const Text('Settings'),
-      description: const Text('Personalize your experience'),
-      maxHeight: 100,
-      children: [
-        FSelectTile(
-          title: const Text('Recents'),
-          suffixIcon: Icon(FIcons.timer),
-          value: Sidebar.recents,
-        ),
-        FSelectTile(
-          title: const Text('Home'),
-          suffixIcon: Icon(FIcons.house),
-          value: Sidebar.home,
-        ),
-        FSelectTile(
-          title: const Text('Applications'),
-          suffixIcon: Icon(FIcons.appWindowMac),
-          value: Sidebar.applications,
-        ),
-      ],
-    );
-    ```
+    ```dart {5} copy FSelectTileGroup( selectController: FSelectTileGroupController(values: {Sidebar.recents}), label:
+    const Text('Settings'), description: const Text('Personalize your experience'), maxHeight: 100, children: [
+    FSelectTile( title: const Text('Recents'), suffixIcon: Icon(FIcons.timer), value: Sidebar.recents, ), FSelectTile(
+    title: const Text('Home'), suffixIcon: Icon(FIcons.house), value: Sidebar.home, ), FSelectTile( title: const
+    Text('Applications'), suffixIcon: Icon(FIcons.appWindowMac), value: Sidebar.applications, ), ], ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -142,26 +124,15 @@ FSelectTileGroup<Value>.builder(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select-tile-group' variant='lazy' query={{}} height={300}/>
+    <Widget name="select-tile-group" variant="lazy" query={{}} height={300} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {1, 5-11} copy
-    FSelectTileGroup.builder(
-      selectController: FSelectTileGroupController(values: {1}),
-      label: const Text('Settings'),
-      description: const Text('Personalize your experience'),
-      maxHeight: 200,
-      count: 200,
-      tileBuilder: (context, index) => FTile(
-        title: Text('Tile $index'),
-        suffixIcon: Icon(FIcons.chevronRight),
-        onPress: () {},
-      ),
-    );
-    ```
+    ```dart {(1, 5 - 11)} copy FSelectTileGroup.builder( selectController: FSelectTileGroupController(values: {1}),
+    label: const Text('Settings'), description: const Text('Personalize your experience'), maxHeight: 200, count: 200,
+    tileBuilder: (context, index) => FTile( title: Text('Tile $index'), suffixIcon: Icon(FIcons.chevronRight), onPress:
+    () {}, ), ); ```
   </Tabs.Tab>
 </Tabs>
-
 
 #### Multi-value Form
 
@@ -226,6 +197,7 @@ FSelectTileGroup<Value>.builder(
       }
     }
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -301,6 +273,7 @@ FSelectTileGroup<Value>.builder(
       }
     }
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -310,27 +283,13 @@ FSelectTileGroup<Value>.builder(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select-tile-group' variant='suffix' query={{}}/>
+    <Widget name="select-tile-group" variant="suffix" query={{}} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4, 9} copy
-    FSelectTileGroup(
-      selectController: FSelectTileGroupController.radio(),
-      label: const Text('Settings'),
-      children: [
-        FSelectTile.suffix(
-          prefixIcon: Icon(FIcons.list),
-          title: const Text('List View'),
-          value: 'List',
-        ),
-        FSelectTile.suffix(
-          prefixIcon: Icon(FIcons.layoutGrid),
-          title: const Text('Grid View'),
-          value: 'Grid',
-        ),
-      ],
-    );
-    ```
+    ```dart {(4, 9)} copy FSelectTileGroup( selectController: FSelectTileGroupController.radio(), label: const
+    Text('Settings'), children: [ FSelectTile.suffix( prefixIcon: Icon(FIcons.list), title: const Text('List View'),
+    value: 'List', ), FSelectTile.suffix( prefixIcon: Icon(FIcons.layoutGrid), title: const Text('Grid View'), value:
+    'Grid', ), ], ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -368,6 +327,7 @@ FSelectTileGroup<Value>.builder(
       ],
     );
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -404,5 +364,6 @@ FSelectTileGroup<Value>.builder(
       ],
     );
     ```
+
   </Tabs.Tab>
 </Tabs>

@@ -1,33 +1,26 @@
-import {Callout} from "nextra/components";
+import { Callout } from 'nextra/components';
 import { Tabs } from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Tile
+
 A tile that is typically used to group related information together.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/"/>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/" />
 </LinkBadgeGroup>
 
-<Callout type="info">
-    Tiles can be grouped together inside a [FTileGroup](/docs/tile/tile-group).
-</Callout>
+<Callout type="info">Tiles can be grouped together inside a [FTileGroup](/docs/tile/tile-group).</Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile' variant='default' query={{}}/>
+    <Widget name="tile" variant="default" query={{}} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart copy
-    FTile(
-      prefixIcon: Icon(FIcons.user),
-      title: const Text('Personalization'),
-      suffixIcon: Icon(FIcons.chevronRight),
-      onPress: () { },
-    );
-    ```
+    ```dart copy FTile( prefixIcon: Icon(FIcons.user), title: const Text('Personalization'), suffixIcon:
+    Icon(FIcons.chevronRight), onPress: () {}, ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -55,16 +48,11 @@ FTile(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile' variant='default' query={{tappable: false}}/>
+    <Widget name="tile" variant="default" query={{ tappable: false }} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart copy
-    FTile(
-      prefixIcon: Icon(FIcons.user),
-      title: const Text('Personalization'),
-      suffixIcon: Icon(FIcons.chevronRight),
-    );
-    ```
+    ```dart copy FTile( prefixIcon: Icon(FIcons.user), title: const Text('Personalization'), suffixIcon:
+    Icon(FIcons.chevronRight), ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -72,18 +60,11 @@ FTile(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile' variant='default' query={{enabled: false}}/>
+    <Widget name="tile" variant="default" query={{ enabled: false }} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy
-    FTile(
-      enabled: false
-      prefixIcon: Icon(FIcons.user),
-      title: const Text('Personalization'),
-      suffixIcon: Icon(FIcons.chevronRight),
-      onPress: () { },
-    );
-    ```
+    ```dart {2} copy FTile( enabled: false prefixIcon: Icon(FIcons.user), title: const Text('Personalization'),
+    suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -91,18 +72,11 @@ FTile(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile' variant='subtitle' query={{}}/>
+    <Widget name="tile" variant="subtitle" query={{}} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4} copy
-    FTile(
-      prefixIcon: Icon(FIcons.bell),
-      title: const Text('Notifications'),
-      subtitle: const Text('Banners, Sounds, Badges'),
-      suffixIcon: Icon(FIcons.chevronRight),
-      onPress: () {},
-    );
-    ```
+    ```dart {4} copy FTile( prefixIcon: Icon(FIcons.bell), title: const Text('Notifications'), subtitle: const
+    Text('Banners, Sounds, Badges'), suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -110,17 +84,10 @@ FTile(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile' variant='details' query={{}}/>
+    <Widget name="tile" variant="details" query={{}} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4} copy
-    FTile(
-      prefixIcon: Icon(FIcons.wifi),
-      title: const Text('WiFi'),
-      details: const Text('Forus Labs (5G)'),
-      suffixIcon: Icon(FIcons.chevronRight),
-      onPress: () {},
-    );
-    ```
+    ```dart {4} copy FTile( prefixIcon: Icon(FIcons.wifi), title: const Text('WiFi'), details: const Text('Forus Labs
+    (5G)'), suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ); ```
   </Tabs.Tab>
 </Tabs>

@@ -4,6 +4,7 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Calendar
+
 A calendar that allows users to enter and edit dates.
 
 The calendar pages are designed to be navigable through swipe gestures on mobile platforms, allowing left and right
@@ -13,26 +14,21 @@ A [`FCalendarController`](https://pub.dev/documentation/forui/latest/forui.widge
 is used to customize the date selection behavior.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.calendar/"/>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.calendar/" />
 </LinkBadgeGroup>
 
 <Callout type="info">
-    `FCalendar` and all `FCalendarController`s return `DateTime`s in UTC timezone, truncated to the nearest day.
+  `FCalendar` and all `FCalendarController`s return `DateTime`s in UTC timezone, truncated to the nearest day.
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='calendar' query={{}} height={500}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart copy
-        FCalendar(
-          controller: FCalendarController.date(initialSelection: selected),
-          start: DateTime(2000),
-          end: DateTime(2030),
-        );
-        ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name="calendar" query={{}} height={500} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy FCalendar( controller: FCalendarController.date(initialSelection: selected), start: DateTime(2000),
+    end: DateTime(2030), ); ```
+  </Tabs.Tab>
 </Tabs>
 
 ## Usage
@@ -56,78 +52,56 @@ FCalendar(
   onLongPress: (date) => print(date),
 );
 ```
+
 ## Examples
 
 ### Single Date
+
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='calendar' query={{}} height={500}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart {2} copy
-        FCalendar(
-          controller: FCalendarController.date(),
-          start: DateTime(2000),
-          end: DateTime(2030),
-        );
-        ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name="calendar" query={{}} height={500} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {2} copy FCalendar( controller: FCalendarController.date(), start: DateTime(2000), end: DateTime(2030), );
+    ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Multiple Dates with Initial Selections
+
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='calendar' variant='dates' query={{}} height={500}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart {2-4} copy
-        FCalendar(
-          controller: FCalendarController.dates(
-            initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-          ),
-          start: DateTime(2000),
-          today: DateTime(2024, 7, 15),
-          end: DateTime(2030),
-        );
-        ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name="calendar" variant="dates" query={{}} height={500} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {2 - 4} copy FCalendar( controller: FCalendarController.dates( initialSelections:{' '}
+    {(DateTime(2024, 7, 17), DateTime(2024, 7, 20))}, ), start: DateTime(2000), today: DateTime(2024, 7, 15), end:
+    DateTime(2030), ); ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Unselectable Dates
+
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='calendar' variant='unselectable' query={{}} height={500}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-      ```dart {4} copy
-      FCalendar(
-        controller: FCalendarController.dates(
-          initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-          selectable: (date) => !{DateTime(2024, 7, 18), DateTime(2024, 7, 19)}.contains(date),
-        ),
-        start: DateTime(2000),
-        today: DateTime(2024, 7, 15),
-        end: DateTime(2030),
-      );
-      ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name="calendar" variant="unselectable" query={{}} height={500} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4} copy FCalendar( controller: FCalendarController.dates( initialSelections:{' '}
+    {(DateTime(2024, 7, 17), DateTime(2024, 7, 20))}, selectable: (date) => !
+    {(DateTime(2024, 7, 18), DateTime(2024, 7, 19))}.contains(date), ), start: DateTime(2000), today: DateTime(2024, 7,
+    15), end: DateTime(2030), ); ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Range Selection with Initial Range
+
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='calendar' variant='range' query={{}} height={500}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart {2-4} copy
-        FCalendar(
-          controller: FCalendarController.range(
-            initialSelection: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)),
-          ),
-          start: DateTime(2000),
-          today: DateTime(2024, 7, 15),
-          end: DateTime(2030),
-        );
-        ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name="calendar" variant="range" query={{}} height={500} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {2 - 4} copy FCalendar( controller: FCalendarController.range( initialSelection: (DateTime(2024, 7, 17),
+    DateTime(2024, 7, 20)), ), start: DateTime(2000), today: DateTime(2024, 7, 15), end: DateTime(2030), ); ```
+  </Tabs.Tab>
 </Tabs>

@@ -1,42 +1,26 @@
-import {Callout} from "nextra/components";
+import { Callout } from 'nextra/components';
 import { Tabs } from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Tile Group
+
 A tile group that typically groups related information together.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/"/>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/" />
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile-group' variant='default' query={{}}/>
+    <Widget name="tile-group" variant="default" query={{}} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart copy
-    FTileGroup(
-      label: const Text('Settings'),
-      description: const Text('Personalize your experience'),
-      children: [
-        FTile(
-          prefixIcon: Icon(FIcons.user),
-          title: const Text('Personalization'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefixIcon: Icon(FIcons.wifi),
-          title: const Text('WiFi'),
-          details: const Text('Forus Labs (5G)'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-      ],
-    );
-    ```
+    ```dart copy FTileGroup( label: const Text('Settings'), description: const Text('Personalize your experience'),
+    children: [ FTile( prefixIcon: Icon(FIcons.user), title: const Text('Personalization'), suffixIcon:
+    Icon(FIcons.chevronRight), onPress: () {}, ), FTile( prefixIcon: Icon(FIcons.wifi), title: const Text('WiFi'),
+    details: const Text('Forus Labs (5G)'), suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ), ], ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -101,49 +85,17 @@ controller: ScrollController(),
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile-group' variant='scrollable' query={{}} height={300}/>
+    <Widget name="tile-group" variant="scrollable" query={{}} height={300} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4} copy
-    FTileGroup(
-      label: const Text('Settings'),
-      description: const Text('Personalize your experience'),
-      maxHeight: 200,
-      children: [
-        FTile(
-          prefixIcon: Icon(FIcons.user),
-          title: const Text('Personalization'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefixIcon: Icon(FIcons.mail),
-          title: const Text('Mail'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefixIcon: Icon(FIcons.wifi),
-          title: const Text('WiFi'),
-          details: const Text('Forus Labs (5G)'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefixIcon: Icon(FIcons.alarmClock),
-          title: const Text('Alarm Clock'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefixIcon: Icon(FIcons.qrCode),
-          title: const Text('QR code'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-      ],
-    );
-    ```
+    ```dart {4} copy FTileGroup( label: const Text('Settings'), description: const Text('Personalize your experience'),
+    maxHeight: 200, children: [ FTile( prefixIcon: Icon(FIcons.user), title: const Text('Personalization'), suffixIcon:
+    Icon(FIcons.chevronRight), onPress: () {}, ), FTile( prefixIcon: Icon(FIcons.mail), title: const Text('Mail'),
+    suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ), FTile( prefixIcon: Icon(FIcons.wifi), title: const
+    Text('WiFi'), details: const Text('Forus Labs (5G)'), suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ),
+    FTile( prefixIcon: Icon(FIcons.alarmClock), title: const Text('Alarm Clock'), suffixIcon: Icon(FIcons.chevronRight),
+    onPress: () {}, ), FTile( prefixIcon: Icon(FIcons.qrCode), title: const Text('QR code'), suffixIcon:
+    Icon(FIcons.chevronRight), onPress: () {}, ), ], ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -151,22 +103,12 @@ controller: ScrollController(),
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile-group' variant='lazy' query={{}} height={300}/>
+    <Widget name="tile-group" variant="lazy" query={{}} height={300} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {1, 4-10} copy
-    FTileGroup.builder(
-      label: const Text('Settings'),
-      description: const Text('Personalize your experience'),
-      maxHeight: 200,
-      count: 200,
-      tileBuilder: (context, index) => FTile(
-        title: Text('Tile $index'),
-        suffixIcon: Icon(FIcons.chevronRight),
-        onPress: () {},
-      ),
-    );
-    ```
+    ```dart {(1, 4 - 10)} copy FTileGroup.builder( label: const Text('Settings'), description: const Text('Personalize
+    your experience'), maxHeight: 200, count: 200, tileBuilder: (context, index) => FTile( title: Text('Tile $index'),
+    suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ), ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -175,10 +117,7 @@ controller: ScrollController(),
 This function merges multiple `FTileGroupMixin`s into a single group. It is useful for representing a group with
 several sections.
 
-<Callout type="warning">
-    Deeply nesting `FTileGroupMixin`s  is not supported.
-</Callout>
-
+<Callout type="warning">Deeply nesting `FTileGroupMixin`s is not supported.</Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -231,30 +170,13 @@ several sections.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile-group' variant='default' query={{divider: 'full'}}/>
+    <Widget name="tile-group" variant="default" query={{ divider: 'full' }} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3} copy
-    FTileGroup(
-      label: const Text('Settings'),
-      divider: FTileDivider.full,
-      children: [
-        FTile(
-          prefixIcon: Icon(FIcons.user),
-          title: const Text('Personalization'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefixIcon: Icon(FIcons.wifi),
-          title: const Text('WiFi'),
-          details: const Text('Forus Labs (5G)'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-      ],
-    );
-    ```
+    ```dart {3} copy FTileGroup( label: const Text('Settings'), divider: FTileDivider.full, children: [ FTile(
+    prefixIcon: Icon(FIcons.user), title: const Text('Personalization'), suffixIcon: Icon(FIcons.chevronRight), onPress:
+    () {}, ), FTile( prefixIcon: Icon(FIcons.wifi), title: const Text('WiFi'), details: const Text('Forus Labs (5G)'),
+    suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ), ], ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -262,29 +184,12 @@ several sections.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='tile-group' variant='default' query={{divider: 'none'}}/>
+    <Widget name="tile-group" variant="default" query={{ divider: 'none' }} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3} copy
-    FTileGroup(
-      label: const Text('Settings'),
-      divider: FTileDivider.none,
-      children: [
-        FTile(
-          prefixIcon: Icon(FIcons.user),
-          title: const Text('Personalization'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefixIcon: Icon(FIcons.wifi),
-          title: const Text('WiFi'),
-          details: const Text('Forus Labs (5G)'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-      ],
-    );
-    ```
+    ```dart {3} copy FTileGroup( label: const Text('Settings'), divider: FTileDivider.none, children: [ FTile(
+    prefixIcon: Icon(FIcons.user), title: const Text('Personalization'), suffixIcon: Icon(FIcons.chevronRight), onPress:
+    () {}, ), FTile( prefixIcon: Icon(FIcons.wifi), title: const Text('WiFi'), details: const Text('Forus Labs (5G)'),
+    suffixIcon: Icon(FIcons.chevronRight), onPress: () {}, ), ], ); ```
   </Tabs.Tab>
 </Tabs>

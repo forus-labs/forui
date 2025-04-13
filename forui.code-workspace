@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "docs"
+		},
+		{
+			"path": "forui"
+		},
+		{
+			"path": "forui_assets"
+		},
+		{
+			"path": "forui_hooks"
+		},
+		{
+			"path": "forui_internal_gen"
+		},
+		{
+			"path": "forui_internal_lints"
+		},
+		{
+			"path": "samples"
+		}
+	],
+	"settings": {}
+}

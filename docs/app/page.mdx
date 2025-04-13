@@ -1,52 +1,45 @@
 import Image from 'next/image';
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from '@/components/ui/accordion';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 export const metadata = {
-  title: 'Forui - Minimalistic Flutter UI Library'
+  title: 'Forui - Minimalistic Flutter UI Library',
 };
 
 <br />
 
 <Image
-    src="/banner-crop-160724.png"
-    className="w-full border rounded"
-    alt="Forui Demo"
-    width={1200}
-    height={0}
-    quality={100}
-    priority
+  src="/banner-crop-160724.png"
+  className="w-full border rounded"
+  alt="Forui Demo"
+  width={1200}
+  height={0}
+  quality={100}
+  priority
 />
-
 
 ## Core Principles
 
 **Forui** is a UI library for Flutter that provides a set of minimalistic widgets heavily inspired by [shadcn/ui](https://ui.shadcn.com/).
 
-
 Flutter shines as a powerful multi-platform development tool, but its native Material and Cupertino widgets often fall short of truly universal design.
 Forui strives to be the default platform-agnostic alternative for developers seeking consistent and elegant UIs across all devices.
 
 The library is designed with the following core principles in mind:
+
 - **Platform Agnostic Design:** Our widgets are crafted to seamlessly adapt to various platforms, ensuring a cohesive and polished look across devices.
 - **Touch-First Interaction:** We prioritize touch interactions, providing a natural and responsive feel for mobile and tablet users.
 - **Minimalistic Aesthetics:** Our library embraces simplicity and clean design principles, delivering a visually appealing and uncluttered user interface.
 - **Extensible and Customizable:** We encourage customization and provide flexible options to tailor components to your unique design needs.
 
-
 ## Quick Links
 
-import {Cards} from 'nextra/components';
-import {Sparkles, MessagesSquare, FolderGit2} from 'lucide-react';
+import { Cards } from 'nextra/components';
+import { Sparkles, MessagesSquare, FolderGit2 } from 'lucide-react';
 
 <Cards>
-    <Cards.Card icon={<Sparkles/>} title="Get Started" href="/docs"/>
-    <Cards.Card icon={<MessagesSquare/>} title="Discussion" href="https://github.com/forus-labs/forui/discussions"/>
-    <Cards.Card icon={<FolderGit2/>} title="Source" href="https://github.com/forus-labs/forui"/>
+  <Cards.Card icon={<Sparkles />} title="Get Started" href="/docs" />
+  <Cards.Card icon={<MessagesSquare />} title="Discussion" href="https://github.com/forus-labs/forui/discussions" />
+  <Cards.Card icon={<FolderGit2 />} title="Source" href="https://github.com/forus-labs/forui" />
 </Cards>
 
 ## FAQ
@@ -74,6 +67,5 @@ If you have any questions that are not answered here, please [open a discussions
             This means we've adapted the designs to be more intuitive for mobile and tablet devices.
         </AccordionContent>
     </AccordionItem>
+
 </Accordion>
-
-

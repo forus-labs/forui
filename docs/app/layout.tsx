@@ -1,31 +1,26 @@
-import { Footer, Layout, Navbar } from 'nextra-theme-docs'
-import { Banner, Head } from 'nextra/components'
-import { getPageMap } from 'nextra/page-map'
-import Logo from '@/components/ui/logo'
+import { Footer, Layout, Navbar } from 'nextra-theme-docs';
+import { Banner, Head } from 'nextra/components';
+import { getPageMap } from 'nextra/page-map';
+import Logo from '@/components/ui/logo';
 
-import 'nextra-theme-docs/style.css'
-import './globals.css'
-
+import 'nextra-theme-docs/style.css';
+import './globals.css';
 
 export const metadata = {
   title: {
-    template: '%s – Forui'
+    template: '%s – Forui',
   },
   icons: {
-    icon: '/favicon.ico'
-  }
-}
- 
-const banner = <Banner storageKey="some-key">Forui 0.11.0 is released 🎉</Banner>
+    icon: '/favicon.ico',
+  },
+};
+
+const banner = <Banner storageKey="some-key">Forui 0.11.0 is released 🎉</Banner>;
 const navbar = (
-  <Navbar
-    logo={<Logo />}
-    projectLink="https://github.com/forus-labs/forui"
-    chatLink="https://discord.gg/jrw3qHksjE"
-  />
-)
-const footer = <Footer>A Forus Labs initiative.</Footer>
- 
+  <Navbar logo={<Logo />} projectLink="https://github.com/forus-labs/forui" chatLink="https://discord.gg/jrw3qHksjE" />
+);
+const footer = <Footer>A Forus Labs initiative.</Footer>;
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -54,5 +49,5 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </Layout>
       </body>
     </html>
-  )
+  );
 }
