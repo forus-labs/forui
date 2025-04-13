@@ -1,4 +1,4 @@
-export default {
+const meta = {
   index: 'Getting Started',
   themes: 'Themes',
   cli: 'CLI',
@@ -17,7 +17,7 @@ export default {
 
   '-- widgets': {
     type: 'separator',
-    title: 'Widgets'
+    title: 'Widgets',
   },
   // TODO: Workaround for a seperator bug. Remove when patched.
   // A page need to be listed after a separator or else the order will be messed up.
@@ -30,6 +30,8 @@ export default {
   overlay: 'Overlay',
   foundation: 'Foundation',
   '*': {
-    title: ''
+    title: '',
   },
 };
+
+export default meta;

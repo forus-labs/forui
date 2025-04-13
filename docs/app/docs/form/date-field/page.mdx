@@ -1,49 +1,48 @@
-import {Callout, Tabs} from 'nextra/components';
+import { Callout, Tabs } from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Date Field
+
 A date field allows a date to be selected from a calendar or input field.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.date_field/"/>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.date_field/" />
 </LinkBadgeGroup>
 
 <div className="pb-5">
-    <Callout type="info">
-        It is recommended to use [FDateField.calendar](#fdatefieldcalendar) on touch devices and
-        [FDateField.new](#fdatefield)/[FDateField.input](#fdatefieldinput) on non-primarily touch devices.
-    </Callout>
+  <Callout type="info">
+    It is recommended to use [FDateField.calendar](#fdatefieldcalendar) on touch devices and
+    [FDateField.new](#fdatefield)/[FDateField.input](#fdatefieldinput) on non-primarily touch devices.
+  </Callout>
 </div>
 
 The input field supports both arrow key navigation:
-  * Up/Down arrows: Increment/decrement values
-  * Left/Right arrows: Move between date segments
+
+- Up/Down arrows: Increment/decrement values
+- Left/Right arrows: Move between date segments
 
 The input field does not support the following locales that use non-western numerals, it will default to English:
-  * Arabic (العربية)
-  * Assamese (অসমীয়া)
-  * Bengali (বাংলা)
-  * Persian/Farsi (فارسی)
-  * Marathi (मराठी)
-  * Burmese (မြန်မာ)
-  * Nepali (नेपाली)
-  * Pashto (پښتو)
-  * Tamil (தமிழ்)
+
+- Arabic (العربية)
+- Assamese (অসমীয়া)
+- Bengali (বাংলা)
+- Persian/Farsi (فارسی)
+- Marathi (मराठी)
+- Burmese (မြန်မာ)
+- Nepali (नेपाली)
+- Pashto (پښتو)
+- Tamil (தமிழ்)
 
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='date-field' query={{}} height={500}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart copy
-        const FDateField(
-          label: Text('Appointment Date'),
-          description: Text('Select a date for your appointment'),
-        );
-        ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name="date-field" query={{}} height={500} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy const FDateField( label: Text('Appointment Date'), description: Text('Select a date for your
+    appointment'), ); ```
+  </Tabs.Tab>
 </Tabs>
 
 ## Usage
@@ -142,36 +141,29 @@ FDateField.input(
 ### Calendar Only
 
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='date-field' variant='calendar' query={{}} height={500}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart copy
-        const FDateField.calendar(
-          label: Text('Appointment Date'),
-          description: Text('Select a date for your appointment'),
-        );
-        ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name="date-field" variant="calendar" query={{}} height={500} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy const FDateField.calendar( label: Text('Appointment Date'), description: Text('Select a date for your
+    appointment'), ); ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Input Only
 
 <Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='date-field' variant='input' query={{}}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart copy
-        FDateField.input(
-          label: Text('Appointment Date'),
-          description: Text('Select a date for your appointment'),
-        );
-        ```
-    </Tabs.Tab>
+  <Tabs.Tab>
+    <Widget name="date-field" variant="input" query={{}} />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy FDateField.input( label: Text('Appointment Date'), description: Text('Select a date for your
+    appointment'), ); ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Clearable
+
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='date-field' variant='clearable' query={{}} height={500}/>
@@ -205,6 +197,7 @@ FDateField.input(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>
 
 ### Custom Validation
@@ -245,6 +238,7 @@ FDateField.input(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>
 
 ### Form
@@ -341,4 +335,5 @@ FDateField.input(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>

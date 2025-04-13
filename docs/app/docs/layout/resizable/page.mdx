@@ -4,10 +4,11 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Resizable
+
 A box which children can be resized along either the horizontal or vertical axis.
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.resizable/"/>
+  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.resizable/" />
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -93,6 +94,7 @@ A box which children can be resized along either the horizontal or vertical axis
       }
     }
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -208,6 +210,7 @@ FResizable(
       }
     }
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -215,37 +218,15 @@ FResizable(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='resizable' variant='horizontal' query={{}} height={400}/>
+    <Widget name="resizable" variant="horizontal" query={{}} height={400} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {7} copy
-    Widget build(BuildContext context) => DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: context.theme.colors.border),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: FResizable(
-        axis: Axis.horizontal,
-        crossAxisExtent: 300,
-        children: [
-          FResizableRegion(
-            initialExtent: 100,
-            minExtent: 100,
-            builder: (context, data, _) => Align(
-                child: Text('Sidebar', style: context.theme.typography.sm),
-              ),
-          ),
-          FResizableRegion(
-            initialExtent: 300,
-            minExtent: 100,
-            builder: (context, data, _) => Align(
-              child: Text('Content', style: context.theme.typography.sm),
-            ),
-          ),
-        ],
-      ),
-    );
-    ```
+    ```dart {7} copy Widget build(BuildContext context) => DecoratedBox( decoration: BoxDecoration( border:
+    Border.all(color: context.theme.colors.border), borderRadius: BorderRadius.circular(8), ), child: FResizable( axis:
+    Axis.horizontal, crossAxisExtent: 300, children: [ FResizableRegion( initialExtent: 100, minExtent: 100, builder:
+    (context, data, _) => Align( child: Text('Sidebar', style: context.theme.typography.sm), ), ), FResizableRegion(
+    initialExtent: 300, minExtent: 100, builder: (context, data, _) => Align( child: Text('Content', style:
+    context.theme.typography.sm), ), ), ], ), ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -253,38 +234,15 @@ FResizable(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='resizable' variant='no-thumb' query={{}} height={400}/>
+    <Widget name="resizable" variant="no-thumb" query={{}} height={400} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {8} copy
-    Widget build(BuildContext context) => DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: context.theme.colors.border),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: FResizable(
-        axis: Axis.horizontal,
-        divider: FResizableDivider.divider,
-        crossAxisExtent: 300,
-        children: [
-          FResizableRegion(
-            initialExtent: 100,
-            minExtent: 100,
-            builder: (context, data, _) => Align(
-                child: Text('Sidebar', style: context.theme.typography.sm),
-              ),
-          ),
-          FResizableRegion(
-            initialExtent: 300,
-            minExtent: 100,
-            builder: (context, data, _) => Align(
-              child: Text('Content', style: context.theme.typography.sm),
-            ),
-          ),
-        ],
-      ),
-    );
-    ```
+    ```dart {8} copy Widget build(BuildContext context) => DecoratedBox( decoration: BoxDecoration( border:
+    Border.all(color: context.theme.colors.border), borderRadius: BorderRadius.circular(8), ), child: FResizable( axis:
+    Axis.horizontal, divider: FResizableDivider.divider, crossAxisExtent: 300, children: [ FResizableRegion(
+    initialExtent: 100, minExtent: 100, builder: (context, data, _) => Align( child: Text('Sidebar', style:
+    context.theme.typography.sm), ), ), FResizableRegion( initialExtent: 300, minExtent: 100, builder: (context, data,
+    _) => Align( child: Text('Content', style: context.theme.typography.sm), ), ), ], ), ); ```
   </Tabs.Tab>
 </Tabs>
 
@@ -292,37 +250,14 @@ FResizable(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='resizable' variant='no-divider' query={{}} height={400}/>
+    <Widget name="resizable" variant="no-divider" query={{}} height={400} />
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {8} copy
-    Widget build(BuildContext context) => DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: context.theme.colors.border),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: FResizable(
-        axis: Axis.horizontal,
-        divider: FResizableDivider.none,
-        crossAxisExtent: 300,
-        children: [
-          FResizableRegion(
-            initialExtent: 100,
-            minExtent: 100,
-            builder: (context, data, _) => Align(
-                child: Text('Sidebar', style: context.theme.typography.sm),
-              ),
-          ),
-          FResizableRegion(
-            initialExtent: 300,
-            minExtent: 100,
-            builder: (context, data, _) => Align(
-              child: Text('Content', style: context.theme.typography.sm),
-            ),
-          ),
-        ],
-      ),
-    );
-    ```
+    ```dart {8} copy Widget build(BuildContext context) => DecoratedBox( decoration: BoxDecoration( border:
+    Border.all(color: context.theme.colors.border), borderRadius: BorderRadius.circular(8), ), child: FResizable( axis:
+    Axis.horizontal, divider: FResizableDivider.none, crossAxisExtent: 300, children: [ FResizableRegion( initialExtent:
+    100, minExtent: 100, builder: (context, data, _) => Align( child: Text('Sidebar', style:
+    context.theme.typography.sm), ), ), FResizableRegion( initialExtent: 300, minExtent: 100, builder: (context, data,
+    _) => Align( child: Text('Content', style: context.theme.typography.sm), ), ), ], ), ); ```
   </Tabs.Tab>
 </Tabs>
