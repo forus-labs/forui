@@ -438,7 +438,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.map(
           (s) => typography.xs.copyWith(color: s.color),
         ),
-        errorTextStyle: style.formFieldStyle.errorTextStyle.map((s) => typography.xs.copyWith(color: s.color)),
+        errorTextStyle: typography.xs.copyWith(color: style.formFieldStyle.errorTextStyle.color),
       );
 }
 

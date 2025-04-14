@@ -163,10 +163,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void initState() {
     super.initState();
     _controller = WidgetStatesController({
-      if (widget.autofocus)
-        WidgetState.focused,
-      if (widget._disabled)
-        WidgetState.disabled,
+      if (widget.autofocus) WidgetState.focused,
+      if (widget._disabled) WidgetState.disabled,
     });
   }
 
@@ -379,7 +377,10 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
 
   /// Creates a [FTappableStyle].
   FTappableStyle({
-    this.cursor = const FWidgetStateMap({WidgetState.any: SystemMouseCursors.click}),
+    this.cursor = const FWidgetStateMap({
+      WidgetState.disabled: MouseCursor.defer,
+      WidgetState.any: SystemMouseCursors.click,
+    }),
     this.pressedEnterDuration = const Duration(milliseconds: 200),
     this.pressedExitDuration = Duration.zero,
     Tween<double>? animationTween,

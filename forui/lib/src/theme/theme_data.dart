@@ -429,54 +429,13 @@ final class FThemeData with Diagnosticable, FTransformable {
 
       //// Input
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: textFieldStyle.enabledStyle.unfocusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.enabledStyle.unfocusedStyle.color,
-            width: textFieldStyle.enabledStyle.unfocusedStyle.width,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.enabledStyle.unfocusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.enabledStyle.unfocusedStyle.color,
-            width: textFieldStyle.enabledStyle.unfocusedStyle.width,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.enabledStyle.focusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.enabledStyle.focusedStyle.color,
-            width: textFieldStyle.enabledStyle.focusedStyle.width,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.errorStyle.unfocusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.errorStyle.unfocusedStyle.color,
-            width: textFieldStyle.errorStyle.unfocusedStyle.width,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.errorStyle.focusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.errorStyle.focusedStyle.color,
-            width: textFieldStyle.errorStyle.focusedStyle.width,
-          ),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.disabledStyle.unfocusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.disabledStyle.unfocusedStyle.color,
-            width: textFieldStyle.disabledStyle.unfocusedStyle.width,
-          ),
-        ),
-        labelStyle: textFieldStyle.enabledStyle.descriptionTextStyle,
-        floatingLabelStyle: textFieldStyle.enabledStyle.labelTextStyle,
-        hintStyle: textFieldStyle.enabledStyle.hintTextStyle,
-        errorStyle: textFieldStyle.errorStyle.errorTextStyle,
-        helperStyle: textFieldStyle.enabledStyle.descriptionTextStyle,
-        counterStyle: textFieldStyle.enabledStyle.counterTextStyle,
+        border: WidgetStateInputBorder.resolveWith(textFieldStyle.border.resolve),
+        labelStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
+        floatingLabelStyle: textFieldStyle.labelTextStyle.maybeResolve({}),
+        hintStyle: textFieldStyle.hintTextStyle.maybeResolve({}),
+        errorStyle: textFieldStyle.errorTextStyle,
+        helperStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
+        counterStyle: textFieldStyle.counterTextStyle.maybeResolve({}),
         contentPadding: textFieldStyle.contentPadding,
       ),
 
@@ -502,18 +461,22 @@ final class FThemeData with Diagnosticable, FTransformable {
 
       /// Slider
       sliderTheme: SliderThemeData(
-        activeTrackColor: sliderStyles.horizontalStyle.enabledStyle.activeColor,
-        inactiveTrackColor: sliderStyles.horizontalStyle.enabledStyle.inactiveColor,
-        disabledActiveTrackColor: sliderStyles.horizontalStyle.disabledStyle.activeColor,
-        disabledInactiveTrackColor: sliderStyles.horizontalStyle.disabledStyle.inactiveColor,
-        activeTickMarkColor: sliderStyles.horizontalStyle.enabledStyle.markStyle.tickColor,
-        inactiveTickMarkColor: sliderStyles.horizontalStyle.enabledStyle.markStyle.tickColor,
-        disabledActiveTickMarkColor: sliderStyles.horizontalStyle.disabledStyle.markStyle.tickColor,
-        disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.disabledStyle.markStyle.tickColor,
-        thumbColor: sliderStyles.horizontalStyle.enabledStyle.thumbStyle.borderColor,
-        disabledThumbColor: sliderStyles.horizontalStyle.disabledStyle.thumbStyle.borderColor,
-        valueIndicatorColor: sliderStyles.horizontalStyle.enabledStyle.tooltipStyle.decoration.color,
-        valueIndicatorTextStyle: sliderStyles.horizontalStyle.enabledStyle.tooltipStyle.textStyle,
+        activeTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve({}),
+        inactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.maybeResolve({}),
+        disabledActiveTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve({WidgetState.disabled}),
+        disabledInactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.maybeResolve({WidgetState.disabled}),
+        activeTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({}),
+        inactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({}),
+        disabledActiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({
+          WidgetState.disabled,
+        }),
+        disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({
+          WidgetState.disabled,
+        }),
+        thumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.maybeResolve({}),
+        disabledThumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.maybeResolve({WidgetState.disabled}),
+        valueIndicatorColor: sliderStyles.horizontalStyle.tooltipStyle.decoration.color,
+        valueIndicatorTextStyle: sliderStyles.horizontalStyle.tooltipStyle.textStyle,
       ),
 
       //// Switch
@@ -528,11 +491,11 @@ final class FThemeData with Diagnosticable, FTransformable {
         style: ButtonStyle(
           textStyle: buttonStyles.secondary.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) => buttonStyles.secondary.decoration.resolve(states).color ?? colors.secondary,
+            (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondary,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
             (states) =>
-                buttonStyles.secondary.contentStyle.textStyle.resolve(states).color ?? colors.secondaryForeground,
+                buttonStyles.secondary.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
           padding: WidgetStateProperty.all(buttonStyles.secondary.contentStyle.padding),
           shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
@@ -542,10 +505,10 @@ final class FThemeData with Diagnosticable, FTransformable {
         style: ButtonStyle(
           textStyle: buttonStyles.primary.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) => buttonStyles.primary.decoration.resolve(states).color ?? colors.secondary,
+            (states) => buttonStyles.primary.decoration.maybeResolve(states)?.color ?? colors.secondary,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
-            (states) => buttonStyles.secondary.decoration.resolve(states).color ?? colors.secondaryForeground,
+            (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
           padding: WidgetStateProperty.all(buttonStyles.primary.contentStyle.padding),
           shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
@@ -555,14 +518,14 @@ final class FThemeData with Diagnosticable, FTransformable {
         style: ButtonStyle(
           textStyle: buttonStyles.outline.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) => buttonStyles.outline.decoration.resolve(states).color ?? Colors.transparent,
+            (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
-            (states) => buttonStyles.outline.decoration.resolve(states).color ?? Colors.transparent,
+            (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           padding: WidgetStateProperty.all(buttonStyles.outline.contentStyle.padding),
           side: WidgetStateBorderSide.resolveWith((states) {
-            final border = buttonStyles.outline.decoration.resolve(states).border;
+            final border = buttonStyles.outline.decoration.maybeResolve(states)?.border;
             return BorderSide(
               color:
                   border?.top.color ??
@@ -576,7 +539,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           }),
           shape: WidgetStateProperty.resolveWith(
             (states) => RoundedRectangleBorder(
-              borderRadius: buttonStyles.outline.decoration.resolve(states).borderRadius ?? style.borderRadius,
+              borderRadius: buttonStyles.outline.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
@@ -585,40 +548,40 @@ final class FThemeData with Diagnosticable, FTransformable {
         style: ButtonStyle(
           textStyle: buttonStyles.ghost.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) => buttonStyles.ghost.decoration.resolve(states).color ?? Colors.transparent,
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle.resolve(states).color ?? colors.secondaryForeground,
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
           shape: WidgetStateProperty.resolveWith(
             (states) => RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.decoration.resolve(states).borderRadius ?? style.borderRadius,
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: buttonStyles.primary.decoration.resolve(const {}).color,
-        foregroundColor: buttonStyles.primary.contentStyle.textStyle.resolve(const {}).color,
-        hoverColor: buttonStyles.primary.decoration.resolve(const {WidgetState.hovered}).color,
+        backgroundColor: buttonStyles.primary.decoration.maybeResolve(const {})?.color,
+        foregroundColor: buttonStyles.primary.contentStyle.textStyle.maybeResolve(const {})?.color,
+        hoverColor: buttonStyles.primary.decoration.maybeResolve(const {WidgetState.hovered})?.color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: buttonStyles.primary.decoration.resolve(const {}).borderRadius ?? style.borderRadius,
+          borderRadius: buttonStyles.primary.decoration.maybeResolve(const {})?.borderRadius ?? style.borderRadius,
         ),
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) => buttonStyles.ghost.decoration.resolve(states).color ?? Colors.transparent,
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle.resolve(states).color ?? colors.secondaryForeground,
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
           shape: WidgetStateProperty.resolveWith(
             (states) => RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.decoration.resolve(states).borderRadius ?? style.borderRadius,
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
@@ -627,15 +590,15 @@ final class FThemeData with Diagnosticable, FTransformable {
         style: ButtonStyle(
           textStyle: buttonStyles.ghost.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) => buttonStyles.ghost.decoration.resolve(states).color ?? Colors.transparent,
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle.resolve(states).color ?? colors.secondaryForeground,
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
           shape: WidgetStateProperty.resolveWith(
             (states) => RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.decoration.resolve(states).borderRadius ?? style.borderRadius,
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),

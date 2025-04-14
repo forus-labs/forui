@@ -22,10 +22,8 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   final FWidgetStateMap<TextStyle> descriptionTextStyle;
 
   /// The error's text style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final FWidgetStateMap<TextStyle> errorTextStyle;
+  final TextStyle errorTextStyle;
 
   /// Creates a [FFormFieldStyle].
   const FFormFieldStyle({
@@ -49,7 +47,5 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
         WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
         WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
       }),
-      errorTextStyle = FWidgetStateMap({
-        WidgetState.error: typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w600),
-      });
+      errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w600);
 }
