@@ -118,7 +118,7 @@ extension Generation on StyleCreateCommand {
     final paths = <String, List<String>>{};
     final existing = <String>{};
 
-    for (final style in all ? registry.keys.toList() : arguments) {
+    for (final style in all ? Style.values.asNameMap().keys : arguments) {
       final fileName = registry[style.toLowerCase()]!.type.substring(1).toSnakeCase();
       final path =
           '${configuration.root.path}${Platform.pathSeparator}${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$fileName.dart'}';
