@@ -180,44 +180,6 @@ class _FTappableState<T extends FTappable> extends State<T> {
     var tappable = widget.builder(context, _controller.value, widget.child);
 
     tappable = _decorate(context, tappable);
-
-    if (!widget._disabled) {
-      tappable = MouseRegion(
-        cursor: style.cursor.resolve(_controller.value),
-        onEnter: (_) => setState(() => _controller.update(WidgetState.hovered, true)),
-        onExit: (_) => setState(() => _controller.update(WidgetState.hovered, false)),
-        // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
-        // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
-        // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
-        child: Listener(
-          onPointerDown: (_) async {
-            final count = ++_monotonic;
-            _onPointerDown();
-
-            await Future.delayed(style.pressedEnterDuration);
-            if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
-              setState(() => _controller.update(WidgetState.pressed, true));
-            }
-          },
-          onPointerUp: (_) async {
-            final count = ++_monotonic;
-            _onPointerUp();
-
-            await Future.delayed(style.pressedExitDuration);
-            if (mounted && count == _monotonic && _controller.value.contains(WidgetState.pressed)) {
-              setState(() => _controller.update(WidgetState.pressed, false));
-            }
-          },
-          child: GestureDetector(
-            behavior: widget.behavior,
-            onTap: widget.onPress,
-            onLongPress: widget.onLongPress,
-            child: tappable,
-          ),
-        ),
-      );
-    }
-
     tappable = Semantics(
       enabled: !widget._disabled,
       label: widget.semanticsLabel,
@@ -232,7 +194,46 @@ class _FTappableState<T extends FTappable> extends State<T> {
           setState(() => _controller.update(WidgetState.focused, focused));
           widget.onFocusChange?.call(focused);
         },
-        child: tappable,
+        child: MouseRegion(
+          cursor: style.cursor.resolve(_controller.value),
+          onEnter: (_) {
+            setState(() => _controller.update(WidgetState.hovered, true));
+          },
+          onExit: (_) => setState(() => _controller.update(WidgetState.hovered, false)),
+          // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
+          // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
+          // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
+          child: Listener(
+            onPointerDown: (_) async {
+              final count = ++_monotonic;
+              if (!widget._disabled) {
+                _onPointerDown();
+              }
+
+              await Future.delayed(style.pressedEnterDuration);
+              if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
+                setState(() => _controller.update(WidgetState.pressed, true));
+              }
+            },
+            onPointerUp: (_) async {
+              final count = ++_monotonic;
+              if (!widget._disabled) {
+                _onPointerUp();
+              }
+
+              await Future.delayed(style.pressedExitDuration);
+              if (mounted && count == _monotonic && _controller.value.contains(WidgetState.pressed)) {
+                setState(() => _controller.update(WidgetState.pressed, false));
+              }
+            },
+            child: GestureDetector(
+              behavior: widget.behavior,
+              onTap: widget.onPress,
+              onLongPress: widget.onLongPress,
+              child: tappable,
+            ),
+          ),
+        ),
       ),
     );
 
