@@ -305,7 +305,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// Whitespace characters (e.g. newline, space, tab) are included in the character count.
   ///
   /// If [maxLengthEnforcement] is [MaxLengthEnforcement.none], then more than [maxLength] characters may be entered,
-  /// but the error counter and divider will switch to the [style]'s [FTextFieldStyle.errorStyle] when the limit is exceeded.
+  /// but the error counter and divider will switch to the [style]'s error style when the limit is exceeded.
   /// {@endtemplate}
   final int? maxLength;
 

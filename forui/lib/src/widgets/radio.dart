@@ -9,7 +9,7 @@ part 'radio.style.dart';
 
 /// A radio button that typically allows the user to choose only one of a predefined set of options.
 ///
-/// It is recommended to use [FSelectGroup] in conjunction with [FSelectGroupItem.radio] to create a group of radio
+/// It is recommended to use [FSelectGroup] in conjunction with [FRadio.grouped] to create a group of radio
 /// buttons.
 ///
 /// See:
@@ -50,6 +50,31 @@ class FRadio extends StatelessWidget {
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
+
+  /// Creates a [FRadio] that is part of a [FSelectGroup].
+  static FSelectGroupItem<T> grouped<T>({
+    required T value,
+    Widget? label,
+    Widget? description,
+    Widget? error,
+    String? semanticsLabel,
+    FRadioStyle? style,
+    bool enabled = true,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+  }) => _Radio<T>(
+      value: value,
+      label: label,
+      description: description,
+      error: error,
+      semanticsLabel: semanticsLabel,
+      style: style,
+      enabled: enabled,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+    );
 
   /// Creates a [FRadio].
   const FRadio({
@@ -132,6 +157,68 @@ class FRadio extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+  }
+}
+
+class _Radio<T> extends StatelessWidget with FSelectGroupItem<T> {
+  @override
+  final T value;
+  final FRadioStyle? style;
+  final Widget? label;
+  final Widget? description;
+  final Widget? error;
+  final String? semanticsLabel;
+  final bool enabled;
+  final bool autofocus;
+  final FocusNode? focusNode;
+  final ValueChanged<bool>? onFocusChange;
+
+  const _Radio({
+    required this.value,
+    this.style,
+    this.label,
+    this.description,
+    this.error,
+    this.semanticsLabel,
+    this.enabled = true,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final FSelectGroupItemData(:controller, :selected, :style) = FSelectGroupItemData.of<T>(context);
+    final radioStyle = this.style ?? style.radioStyle;
+
+    return FRadio(
+      style: radioStyle,
+      label: label,
+      description: description,
+      semanticsLabel: semanticsLabel,
+      error: error,
+      value: selected,
+      onChange: (state) => controller.update(value, add: state),
+      enabled: enabled,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      key: key,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(DiagnosticsProperty('value', value))
+      ..add(FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }

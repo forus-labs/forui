@@ -1,21 +1,67 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/select_group/select_group_item.dart';
 
 part 'select_group.style.dart';
 
 /// A [FSelectGroup]'s controller.
 typedef FSelectGroupController<T> = FMultiValueNotifier<T>;
 
+/// Represents an item in a [FSelectGroup].
+mixin FSelectGroupItem<T> on Widget {
+  /// The value.
+  T get value;
+}
+
+/// A [FSelectGroup]'s item data. Useful for creating your own [FSelectGroupItem].
+class FSelectGroupItemData<T> extends InheritedWidget {
+  /// Return the [FSelectGroup]'s item data.
+  static FSelectGroupItemData<T> of<T>(BuildContext context) {
+    final result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
+    assert(
+    result != null,
+    "No FSelectGroupItemData<$T> found in context. This likely because FSelectGroup's type parameter could not be inferred. "
+        'It is currently inferred as FSelectGroup<$T>. To fix this, provide the type parameter explicitly, i.e. FSelectGroup<MyType>.',
+    );
+    return result!;
+  }
+
+  /// The controller.
+  final FSelectGroupController<T> controller;
+
+  /// The style.
+  final FSelectGroupStyle style;
+
+  /// True if the item is selected.
+  final bool selected;
+
+  /// The [FSelectGroup]'s item data.
+  const FSelectGroupItemData({
+    required this.controller,
+    required this.style,
+    required this.selected,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(FSelectGroupItemData old) =>
+      controller != old.controller || style != old.style || selected != old.selected;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('controller', controller))..add(DiagnosticsProperty('style', style))..add(
+        FlagProperty('selected', value: selected, ifTrue: 'selected'));
+  }
+}
+
 /// A set of items that are treated as a single selection.
 ///
-/// Typically used to group multiple [FSelectGroupItem.checkbox]s or [FSelectGroupItem.radio]s.
+/// Typically used to group multiple [FCheckbox.grouped]s or [FRadio.grouped]s.
 ///
 /// For touch devices, a [FSelectTileGroup] is generally recommended over this.
 ///
@@ -64,36 +110,38 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     super.autovalidateMode,
     super.key,
   }) : super(
-         builder: (field) {
-           final state = field as _State;
-           final groupStyle = style ?? state.context.theme.selectGroupStyle;
-           final (labelState, error) = switch (state.errorText) {
-             _ when !enabled => (FLabelState.disabled, null),
-             final text? => (FLabelState.error, errorBuilder(state.context, text)),
-             null => (FLabelState.enabled, null),
-           };
+    builder: (field) {
+      final state = field as _State;
+      final groupStyle = style ?? state.context.theme.selectGroupStyle;
+      final formStates = {
+        if (!enabled) WidgetState.disabled,
+        if (state.errorText != null) WidgetState.error,
+      };
 
-           return FLabel(
-             axis: Axis.vertical,
-             states: labelState,
-             style: groupStyle.labelStyle,
-             label: label,
-             description: description,
-             error: error,
-             child: Column(
-               children: [
-                 for (final child in children)
-                   FSelectGroupItemData<T>(
-                     controller: controller,
-                     style: groupStyle,
-                     selected: controller.contains(child.value),
-                     child: child,
-                   ),
-               ],
-             ),
-           );
-         },
-       );
+      return FLabel(
+        axis: Axis.vertical,
+        states: formStates,
+        style: groupStyle,
+        label: label,
+        description: description,
+        error: state.errorText == null ? null : errorBuilder(state.context, state.errorText!),
+        child: Column(
+          children: [
+            for (final child in children)
+              Padding(
+                padding: groupStyle.itemPadding,
+                child: FSelectGroupItemData<T>(
+                  controller: controller,
+                  style: groupStyle,
+                  selected: controller.contains(child.value),
+                  child: child,
+                ),
+              ),
+          ],
+        ),
+      );
+    },
+  );
 
   @override
   FormFieldState<Set<T>> createState() => _State();
@@ -101,12 +149,9 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(ObjectFlagProperty.has('onSelect', onSelect));
+    properties..add(DiagnosticsProperty('style', style))..add(DiagnosticsProperty('controller', controller))..add(
+        ObjectFlagProperty.has('errorBuilder', errorBuilder))..add(ObjectFlagProperty.has('onChange', onChange))..add(
+        ObjectFlagProperty.has('onSelect', onSelect));
   }
 }
 
@@ -173,98 +218,71 @@ class _State<T> extends FormFieldState<Set<T>> {
 }
 
 /// [FSelectGroup]'s style.
-class FSelectGroupStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
-  /// The [FLabel]'s style.
+class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
+  /// The [FCheckbox]'s style.
   @override
-  final FLabelLayoutStyle labelLayoutStyle;
+  final FCheckboxStyle checkboxStyle;
 
-  /// The [FSelectGroup]'s style when it's enabled.
+  /// The [FRadio]'s style.
   @override
-  final FSelectGroupStateStyle enabledStyle;
+  final FRadioStyle radioStyle;
 
-  /// The [FSelectGroup]'s style when it's disabled.
+  /// The padding surrounding an item. Defaults to `EdgeInsets.symmetric(vertical: 2)`.
   @override
-  final FSelectGroupStateStyle disabledStyle;
-
-  /// The [FSelectGroup]'s style when it has an error.
-  @override
-  final FSelectGroupErrorStyle errorStyle;
-
-  /// The [FSelectGroupItem.checkbox]'s style.
-  @override
-  final FCheckboxSelectGroupStyle checkboxStyle;
-
-  /// The [FSelectGroupItem.radio]'s style.
-  @override
-  final FRadioSelectGroupStyle radioStyle;
+  final EdgeInsetsGeometry itemPadding;
 
   /// Creates a [FSelectGroupStyle].
   const FSelectGroupStyle({
-    required this.labelLayoutStyle,
-    required this.enabledStyle,
-    required this.disabledStyle,
-    required this.errorStyle,
     required this.checkboxStyle,
     required this.radioStyle,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
+    this.itemPadding = const EdgeInsets.symmetric(vertical: 2),
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
   });
 
-  /// Creates a [FSelectGroupStyle] that inherits its properties from the given parameters.
+  /// Creates a [FSelectGroupStyle] that inherits its properties.
   factory FSelectGroupStyle.inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-  }) => FSelectGroupStyle(
-    labelLayoutStyle: FLabelStyles.inherit(style: style).verticalStyle.layout,
-    enabledStyle: FSelectGroupStateStyle(
-      labelTextStyle: style.enabledFormFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.enabledFormFieldStyle.descriptionTextStyle,
-    ),
-    disabledStyle: FSelectGroupStateStyle(
-      labelTextStyle: style.disabledFormFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.disabledFormFieldStyle.descriptionTextStyle,
-    ),
-    errorStyle: FSelectGroupErrorStyle(
-      labelTextStyle: style.errorFormFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.errorFormFieldStyle.descriptionTextStyle,
-      errorTextStyle: style.errorFormFieldStyle.errorTextStyle,
-    ),
-    checkboxStyle: FCheckboxSelectGroupStyle.inherit(
-      style: FCheckboxStyle.inherit(colors: colors, style: style).transform(
-        (style) => style.copyWith(
-          enabledStyle: style.enabledStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
-          ),
-          disabledStyle: style.disabledStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
-          ),
-          errorStyle: style.errorStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
-            errorTextStyle: typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500),
-          ),
-        ),
+  }) {
+    final vertical = FLabelStyles
+        .inherit(style: style)
+        .verticalStyle;
+
+    final labelTextStyle = FWidgetStateMap({
+      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
+      WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+    });
+    final descriptionTextStyle = FWidgetStateMap({
+      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
+      WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
+    });
+    final errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500);
+
+    return FSelectGroupStyle(
+      checkboxStyle: FCheckboxStyle.inherit(colors: colors, style: style).copyWith(
+        labelTextStyle: labelTextStyle,
+        descriptionTextStyle: descriptionTextStyle,
+        errorTextStyle: errorTextStyle,
       ),
-    ),
-    radioStyle: FRadioSelectGroupStyle.inherit(
-      style: FRadioStyle.inherit(colors: colors, style: style).transform(
-        (style) => style.copyWith(
-          enabledStyle: style.enabledStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
-          ),
-          disabledStyle: style.disabledStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
-          ),
-          errorStyle: style.errorStyle.copyWith(
-            labelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
-            descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
-            errorTextStyle: typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500),
-          ),
-        ),
+      radioStyle: FRadioStyle.inherit(colors: colors, style: style).copyWith(
+        labelTextStyle: labelTextStyle,
+        descriptionTextStyle: descriptionTextStyle,
+        errorTextStyle: errorTextStyle,
       ),
-    ),
-  );
+      labelTextStyle: style.formFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.formFieldStyle.errorTextStyle,
+      labelPadding: vertical.labelPadding,
+      descriptionPadding: vertical.descriptionPadding,
+      errorPadding: vertical.errorPadding,
+      childPadding: vertical.childPadding,
+    );
+  }
 }

@@ -106,7 +106,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
 
     for (final key in constraints.keys) {
       if (key.isSatisfiedBy(states)) {
-        constraints[key] = replace(constraints[key]!);
+        constraints[key] = replace(constraints[key] as T);
         break;
       }
     }
@@ -137,7 +137,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
 
     for (final key in constraints.keys) {
       if (key.isSatisfiedBy(states)) {
-        constraints[key] = replace(constraints[key]!);
+        constraints[key] = replace(constraints[key] as T);
         break;
       }
     }

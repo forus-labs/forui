@@ -23,10 +23,10 @@ class SelectGroupPage extends Sample {
         controller: FSelectGroupController(values: {Sidebar.recents}),
         label: const Text('Sidebar'),
         description: const Text('These will be shown in the sidebar.'),
-        children: const [
-          FSelectGroupItem.checkbox(value: Sidebar.recents, label: Text('Recents')),
-          FSelectGroupItem.checkbox(value: Sidebar.home, label: Text('Home')),
-          FSelectGroupItem.checkbox(value: Sidebar.applications, label: Text('Applications')),
+        children: [
+          FCheckbox.grouped(value: Sidebar.recents, label: const Text('Recents')),
+          FCheckbox.grouped(value: Sidebar.home, label: const Text('Home')),
+          FCheckbox.grouped(value: Sidebar.applications, label: const Text('Applications')),
         ],
       ),
     ],
@@ -57,11 +57,11 @@ class _CheckboxFormState extends StatefulSampleState<SelectGroupCheckboxFormPage
           label: const Text('Favorite Languages'),
           description: const Text('Your favorite language.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
-          children: const [
-            FSelectGroupItem.checkbox(value: Language.dart, label: Text('Dart')),
-            FSelectGroupItem.checkbox(value: Language.java, label: Text('Java')),
-            FSelectGroupItem.checkbox(value: Language.rust, label: Text('Rust')),
-            FSelectGroupItem.checkbox(value: Language.python, label: Text('Python')),
+          children: [
+            FCheckbox.grouped(value: Language.dart, label: const Text('Dart')),
+            FCheckbox.grouped(value: Language.java, label: const Text('Java')),
+            FCheckbox.grouped(value: Language.rust, label: const Text('Rust')),
+            FCheckbox.grouped(value: Language.python, label: const Text('Python')),
           ],
         ),
         const SizedBox(height: 20),
@@ -112,10 +112,10 @@ class _RadioFormState extends StatefulSampleState<SelectGroupRadioFormPage> {
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-          children: const [
-            FSelectGroupItem.radio(value: Notification.all, label: Text('All new messages')),
-            FSelectGroupItem.radio(value: Notification.direct, label: Text('Direct messages and mentions')),
-            FSelectGroupItem.radio(value: Notification.nothing, label: Text('Nothing')),
+          children: [
+            FRadio.grouped(value: Notification.all, label: const Text('All new messages')),
+            FRadio.grouped(value: Notification.direct, label: const Text('Direct messages and mentions')),
+            FRadio.grouped(value: Notification.nothing, label: const Text('Nothing')),
           ],
         ),
         const SizedBox(height: 20),

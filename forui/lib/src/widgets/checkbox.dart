@@ -51,6 +51,32 @@ class FCheckbox extends StatelessWidget {
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
+  /// Creates a [FCheckbox] that is part of a [FSelectGroup].
+  static FSelectGroupItem<T> grouped<T>({
+    required T value,
+    FCheckboxStyle? style,
+    Widget? label,
+    Widget? description,
+    Widget? error,
+    String? semanticsLabel,
+    bool enabled = true,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+  }) =>
+      _Checkbox(
+        value: value,
+        style: style,
+        label: label,
+        description: description,
+        error: error,
+        semanticsLabel: semanticsLabel,
+        enabled: enabled,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+      );
+
   /// Creates a [FCheckbox].
   const FCheckbox({
     this.style,
@@ -128,6 +154,68 @@ class FCheckbox extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
 }
+
+class _Checkbox<T> extends StatelessWidget with FSelectGroupItem<T> {
+  @override
+  final T value;
+  final FCheckboxStyle? style;
+  final Widget? label;
+  final Widget? description;
+  final Widget? error;
+  final String? semanticsLabel;
+  final bool enabled;
+  final bool autofocus;
+  final FocusNode? focusNode;
+  final ValueChanged<bool>? onFocusChange;
+
+  const _Checkbox({
+    required this.value,
+    this.style,
+    this.label,
+    this.description,
+    this.error,
+    this.semanticsLabel,
+    this.enabled = true,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final FSelectGroupItemData(:controller, :selected, :style) = FSelectGroupItemData.of<T>(context);
+    final checkboxStyle = this.style ?? style.checkboxStyle;
+    return FCheckbox(
+      style: checkboxStyle,
+      label: label,
+      description: description,
+      semanticsLabel: semanticsLabel,
+      error: error,
+      value: selected,
+      onChange: (state) => controller.update(value, add: state),
+      enabled: enabled,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      key: key,
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(DiagnosticsProperty('value', value))
+      ..add(FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+  }
+}
+
 
 /// A checkboxes style.
 class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {

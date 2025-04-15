@@ -3,8 +3,6 @@ import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
-import 'package:forui/forui.dart';
-
 @internal
 class InheritedStates extends InheritedWidget {
   static InheritedStates of(BuildContext context) {
