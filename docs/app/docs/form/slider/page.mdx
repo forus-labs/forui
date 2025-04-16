@@ -119,7 +119,7 @@ FSlider(
         ```dart {5-8} copy
         FSlider(
           controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
+            selection: FSliderSelection(max: 0.35),
           ),
           tooltipBuilder: (style, value) {
             final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
@@ -232,7 +232,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
-          layout: Layout.btt,
+          layout: FLayout.btt,
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           trackMainAxisExtent: 350,
           marks: const [
@@ -242,7 +242,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
             FSliderMark(value: 0.75, tick: false),
             FSliderMark(value: 1, label: Text('100%')),
           ],
-        ),
+        );
         ```
   </Tabs.Tab>
 </Tabs>

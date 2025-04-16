@@ -136,6 +136,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
     return FTappable(
       style: style.tappableStyle,
       focusedOutlineStyle: focusedOutlineStyle,
+      selected: current,
       onPress: onPress,
       builder: (_, states, child) => DefaultTextStyle(style: style.textStyle.resolve(states), child: child!),
       child: Padding(padding: style.padding, child: child),

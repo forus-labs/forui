@@ -60,6 +60,9 @@ class FTappable extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
+  /// True if this tappable is currently selected. Defaults to false.
+  final bool selected;
+
   /// The tappable's hit test behavior. Defaults to [HitTestBehavior.translucent].
   final HitTestBehavior behavior;
 
@@ -101,6 +104,7 @@ class FTappable extends StatefulWidget {
     bool autofocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    bool selected,
     HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
@@ -122,6 +126,7 @@ class FTappable extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.selected = false,
     this.behavior = HitTestBehavior.translucent,
     this.onPress,
     this.onLongPress,
@@ -146,6 +151,7 @@ class FTappable extends StatefulWidget {
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
@@ -163,6 +169,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void initState() {
     super.initState();
     _controller = WidgetStatesController({
+      if (widget.selected) WidgetState.selected,
       if (widget.autofocus) WidgetState.focused,
       if (widget._disabled) WidgetState.disabled,
     });
@@ -171,7 +178,9 @@ class _FTappableState<T extends FTappable> extends State<T> {
   @override
   void didUpdateWidget(covariant T old) {
     super.didUpdateWidget(old);
-    _controller.update(WidgetState.disabled, widget._disabled);
+    _controller
+      ..update(WidgetState.selected, widget.selected)
+      ..update(WidgetState.disabled, widget._disabled);
   }
 
   @override
@@ -282,6 +291,7 @@ class AnimatedTappable extends FTappable {
     super.autofocus,
     super.focusNode,
     super.onFocusChange,
+    super.selected,
     super.behavior,
     super.onPress,
     super.onLongPress,
