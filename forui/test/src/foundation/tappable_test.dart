@@ -157,10 +157,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setter) {
               setState = setter;
-              return FTappable(builder: (_, states, _) {
-                print(states);
-                return Text('$states');
-              }, onPress: onPress);
+              return FTappable(builder: (_, states, _) => Text('$states'), onPress: onPress);
             },
           ),
         ),

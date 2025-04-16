@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:meta/meta.dart';
 
@@ -287,7 +288,7 @@ class _State extends FormFieldState<String> {
     }
   }
 
-  void _handleStatesChange() => setState(() {});
+  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {}));
 
   @override
   Field get widget => super.widget as Field;
