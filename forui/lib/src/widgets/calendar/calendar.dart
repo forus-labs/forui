@@ -232,7 +232,7 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
       }),
       borderColor: FWidgetStateMap({
         WidgetState.disabled: colors.background,
-        WidgetState.any: colors.foreground,
+        WidgetState.focused: colors.foreground,
       }),
       textStyle: FWidgetStateMap({
         WidgetState.disabled: typography.base.copyWith(

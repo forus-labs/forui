@@ -82,7 +82,9 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: IconTheme(
-                      data: widget.style.buttonStyle.iconContentStyle.iconStyle.resolve(states),
+                      data: widget.style.buttonStyle.iconContentStyle.iconStyle
+                          .resolve(states)
+                          .copyWith(color: widget.style.headerTextStyle.color),
                       child: const Icon(FIcons.chevronRight, size: 15),
                     ),
                   ),
@@ -138,11 +140,7 @@ class Navigation extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onPrevious,
-              child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
-            ),
+            child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
           ),
 
           const Expanded(child: SizedBox()),
@@ -201,10 +199,11 @@ final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunc
     return FCalendarHeaderStyle(
       focusedOutlineStyle: style.focusedOutlineStyle,
       buttonStyle: outline.copyWith(
+        decoration: outline.decoration.map((d) => d.copyWith(borderRadius: BorderRadius.circular(4))),
         iconContentStyle: FButtonIconContentStyle(
           iconStyle: FWidgetStateMap({
             WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-            WidgetState.any: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
           }),
         ),
       ),

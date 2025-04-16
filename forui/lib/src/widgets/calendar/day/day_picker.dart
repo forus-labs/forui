@@ -255,7 +255,7 @@ final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerSty
         textStyle: FWidgetStateMap({
           WidgetState.disabled: mutedTextStyle,
           WidgetState.selected: typography.base.copyWith(color: colors.background, fontWeight: FontWeight.w500),
-          ~WidgetState.selected: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
+          WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
         }),
         radius: const Radius.circular(4),
       ),

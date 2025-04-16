@@ -10,7 +10,7 @@ part 'entry.style.dart';
 
 /// A calendar day's data.
 typedef FCalendarDayData =
-({FCalendarDayPickerStyle style, DateTime date, bool current, bool today, bool selectable, bool selected});
+    ({FCalendarDayPickerStyle style, DateTime date, bool current, bool today, bool selectable, bool selected});
 
 @internal
 abstract class Entry extends StatelessWidget {
@@ -41,18 +41,18 @@ abstract class Entry extends StatelessWidget {
       return dayBuilder(
         context,
         (
-        style: style,
-        date: date.toNative(),
-        current: current,
-        today: today,
-        selectable: canSelect,
-        selected: isSelected,
+          style: style,
+          date: date.toNative(),
+          current: current,
+          today: today,
+          selectable: canSelect,
+          selected: isSelected,
         ),
         _Content(
           style: entryStyle,
           borderRadius: BorderRadiusDirectional.horizontal(start: yesterday, end: tomorrow),
           text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
-          states: {...states, if (isSelected) WidgetState.selected},
+          states: {...states, if (isSelected) WidgetState.selected, if (!canSelect) WidgetState.disabled},
           current: today,
         ),
       );
@@ -60,15 +60,15 @@ abstract class Entry extends StatelessWidget {
 
     return canSelect
         ? _SelectableEntry(
-      focusNode: focusNode,
-      date: date,
-      semanticsLabel: localizations.fullDate(date.toNative()),
-      selected: isSelected,
-      onPress: onPress,
-      onLongPress: onLongPress,
-      style: entryStyle,
-      builder: builder,
-    )
+          focusNode: focusNode,
+          date: date,
+          semanticsLabel: localizations.fullDate(date.toNative()),
+          selected: isSelected,
+          onPress: onPress,
+          onLongPress: onLongPress,
+          style: entryStyle,
+          builder: builder,
+        )
         : _UnselectableEntry(style: entryStyle, builder: builder);
   }
 
@@ -85,19 +85,19 @@ abstract class Entry extends StatelessWidget {
       style: style,
       borderRadius: BorderRadius.all(style.radius),
       text: format(date),
-      states: states,
+      states: {...states, if (!selectable) WidgetState.disabled},
       current: current,
     );
 
     return selectable
         ? _SelectableEntry(
-      focusNode: focusNode,
-      date: date,
-      semanticsLabel: format(date),
-      onPress: onPress,
-      style: style,
-      builder: builder,
-    )
+          focusNode: focusNode,
+          date: date,
+          semanticsLabel: format(date),
+          onPress: onPress,
+          style: style,
+          builder: builder,
+        )
         : _UnselectableEntry(style: style, builder: builder);
   }
 
