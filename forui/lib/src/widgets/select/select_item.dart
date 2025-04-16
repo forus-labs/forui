@@ -275,7 +275,7 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   FSelectItemStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
         decoration: FWidgetStateMap({
-          WidgetState.hovered | WidgetState.pressed: BoxDecoration(
+          ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
             color: colors.secondary,
             borderRadius: style.borderRadius,
           ),

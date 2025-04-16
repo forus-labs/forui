@@ -165,7 +165,7 @@ void main() {
         await tester.pumpAndSettle();
 
         await tester.tap(find.text('A'));
-        await tester.pumpAndSettle();
+        await tester.pumpAndSettle(const Duration(seconds: 2));
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/disabled-item.png'));
       });
