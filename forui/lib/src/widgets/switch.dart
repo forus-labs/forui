@@ -92,7 +92,7 @@ class FSwitch extends StatelessWidget {
     final formStates = {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error};
     final states = {if (value) WidgetState.selected, ...formStates};
 
-    // TODO: Why do we need to wrap a switch with `FLabel`?
+    // The label is wrapped in a GestureDetector to improve affordance.
     return GestureDetector(
       onTap: enabled ? () => onChange?.call(!value) : null,
       child: FocusableActionDetector(

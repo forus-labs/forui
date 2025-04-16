@@ -102,40 +102,44 @@ class FCheckbox extends StatelessWidget {
       if (value) WidgetState.selected,
     };
 
-    return FLabel(
-      axis: Axis.horizontal,
-      states: formStates,
-      style: style,
-      label: label,
-      description: description,
-      error: error,
-      child: FTappable(
-        style: style.tappableStyle,
-        semanticsLabel: semanticsLabel,
-        semanticSelected: value,
-        onPress: enabled ? () => onChange?.call(!value) : null,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        builder: (context, states, _) {
-          states = {...states, ...formStates};
+    // The label is wrapped in a GestureDetector to improve affordance.
+    return GestureDetector(
+      onTap: enabled ? () => onChange?.call(!value) : null,
+      child: FLabel(
+        axis: Axis.horizontal,
+        states: formStates,
+        style: style,
+        label: label,
+        description: description,
+        error: error,
+        child: FTappable(
+          style: style.tappableStyle,
+          semanticsLabel: semanticsLabel,
+          semanticSelected: value,
+          onPress: enabled ? () => onChange?.call(!value) : null,
+          autofocus: autofocus,
+          focusNode: focusNode,
+          onFocusChange: onFocusChange,
+          focusedOutlineStyle: style.focusedOutlineStyle,
+          builder: (context, states, _) {
+            states = {...states, ...formStates};
 
-          final iconTheme = style.iconStyle.maybeResolve(states);
-          return AnimatedSwitcher(
-            duration: style.animationDuration,
-            switchInCurve: style.curve,
-            child: SizedBox.square(
-              key: SetKey(states),
-              dimension: style.size,
-              child: DecoratedBox(
-                decoration: style.decoration.resolve(states),
-                child:
-                    iconTheme == null ? const SizedBox() : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
+            final iconTheme = style.iconStyle.maybeResolve(states);
+            return AnimatedSwitcher(
+              duration: style.animationDuration,
+              switchInCurve: style.curve,
+              child: SizedBox.square(
+                key: SetKey(states),
+                dimension: style.size,
+                child: DecoratedBox(
+                  decoration: style.decoration.resolve(states),
+                  child:
+                      iconTheme == null ? const SizedBox() : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

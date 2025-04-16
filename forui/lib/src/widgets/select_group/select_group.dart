@@ -22,9 +22,9 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   static FSelectGroupItemData<T> of<T>(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
     assert(
-    result != null,
-    "No FSelectGroupItemData<$T> found in context. This likely because FSelectGroup's type parameter could not be inferred. "
-        'It is currently inferred as FSelectGroup<$T>. To fix this, provide the type parameter explicitly, i.e. FSelectGroup<MyType>.',
+      result != null,
+      "No FSelectGroupItemData<$T> found in context. This likely because FSelectGroup's type parameter could not be inferred. "
+      'It is currently inferred as FSelectGroup<$T>. To fix this, provide the type parameter explicitly, i.e. FSelectGroup<MyType>.',
     );
     return result!;
   }
@@ -54,8 +54,10 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('controller', controller))..add(DiagnosticsProperty('style', style))..add(
-        FlagProperty('selected', value: selected, ifTrue: 'selected'));
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'));
   }
 }
 
@@ -110,38 +112,39 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     super.autovalidateMode,
     super.key,
   }) : super(
-    builder: (field) {
-      final state = field as _State;
-      final groupStyle = style ?? state.context.theme.selectGroupStyle;
-      final formStates = {
-        if (!enabled) WidgetState.disabled,
-        if (state.errorText != null) WidgetState.error,
-      };
+         builder: (field) {
+           final state = field as _State;
+           final groupStyle = style ?? state.context.theme.selectGroupStyle;
+           final formStates = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
 
-      return FLabel(
-        axis: Axis.vertical,
-        states: formStates,
-        style: groupStyle,
-        label: label,
-        description: description,
-        error: state.errorText == null ? null : errorBuilder(state.context, state.errorText!),
-        child: Column(
-          children: [
-            for (final child in children)
-              Padding(
-                padding: groupStyle.itemPadding,
-                child: FSelectGroupItemData<T>(
-                  controller: controller,
-                  style: groupStyle,
-                  selected: controller.contains(child.value),
-                  child: child,
-                ),
-              ),
-          ],
-        ),
-      );
-    },
-  );
+           return FLabel(
+             axis: Axis.vertical,
+             states: formStates,
+             style: groupStyle,
+             label: label,
+             description: description,
+             error: state.errorText == null ? null : errorBuilder(state.context, state.errorText!),
+             child: ListenableBuilder(
+               listenable: controller,
+               builder:
+                   (context, _) => Column(
+                     children: [
+                       for (final child in children)
+                         Padding(
+                           padding: groupStyle.itemPadding,
+                           child: FSelectGroupItemData<T>(
+                             controller: controller,
+                             style: groupStyle,
+                             selected: controller.contains(child.value),
+                             child: child,
+                           ),
+                         ),
+                     ],
+                   ),
+             ),
+           );
+         },
+       );
 
   @override
   FormFieldState<Set<T>> createState() => _State();
@@ -149,9 +152,12 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('style', style))..add(DiagnosticsProperty('controller', controller))..add(
-        ObjectFlagProperty.has('errorBuilder', errorBuilder))..add(ObjectFlagProperty.has('onChange', onChange))..add(
-        ObjectFlagProperty.has('onSelect', onSelect));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onSelect', onSelect));
   }
 }
 
@@ -246,14 +252,8 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   });
 
   /// Creates a [FSelectGroupStyle] that inherits its properties.
-  factory FSelectGroupStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) {
-    final vertical = FLabelStyles
-        .inherit(style: style)
-        .verticalStyle;
+  factory FSelectGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final vertical = FLabelStyles.inherit(style: style).verticalStyle;
 
     final labelTextStyle = FWidgetStateMap({
       WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
