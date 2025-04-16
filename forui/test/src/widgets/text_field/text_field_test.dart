@@ -55,6 +55,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(theme: FThemes.zinc.light, child: FTextField(enabled: false, clearable: (_) => true)),
         );
+        await tester.pumpAndSettle();
 
         expect(find.bySemanticsLabel('Clear'), findsNothing);
       });
@@ -66,6 +67,7 @@ void main() {
             child: FTextField(enabled: false, clearable: (_) => true, suffixBuilder: (_, _, _) => const SizedBox()),
           ),
         );
+        await tester.pumpAndSettle();
 
         expect(find.bySemanticsLabel('Clear'), findsNothing);
       });

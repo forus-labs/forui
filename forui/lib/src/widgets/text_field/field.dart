@@ -39,6 +39,7 @@ class Field extends FormField<String> {
       fillColor: style.fillColor,
       filled: style.filled,
       border: WidgetStateInputBorder.resolveWith(style.border.resolve),
+      error: state.hasError ? const SizedBox() : null, // Necessary to trigger error state.
     );
   }
 
@@ -192,6 +193,7 @@ class _State extends FormFieldState<String> {
     _statesController =
         widget.parent.statesController ?? WidgetStatesController()
           ..addListener(_handleStatesChange);
+    _statesController.update(WidgetState.error, widget.forceErrorText != null);
   }
 
   @override

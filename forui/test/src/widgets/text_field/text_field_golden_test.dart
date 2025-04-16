@@ -34,7 +34,7 @@ void main() {
     for (final theme in TestScaffold.themes) {
       for (final (focused, focused_) in [('focused', true), ('unfocused', false)]) {
         for (final text in ['short text', null]) {
-          testWidgets('default - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('default - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -57,7 +57,7 @@ void main() {
             );
           });
 
-          testWidgets('error - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('error - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -80,7 +80,7 @@ void main() {
             );
           });
 
-          testWidgets('email - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('email - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -97,7 +97,7 @@ void main() {
             );
           });
 
-          testWidgets('password - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('password - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
@@ -116,7 +116,7 @@ void main() {
         }
 
         for (final (text) in [_longText, null]) {
-          testWidgets('multiline - ${theme.name} - $focused - ${text == null ? 'no text' : ''}', (tester) async {
+          testWidgets('multiline - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
             final controller = text == null ? null : TextEditingController(text: text);
             await tester.pumpWidget(
               TestScaffold.app(
