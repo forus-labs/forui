@@ -44,7 +44,7 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
       }),
       descriptionTextStyle = FWidgetStateMap({
         WidgetState.error: typography.sm.copyWith(color: colors.mutedForeground),
-        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
+        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
         WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
       }),
       errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w600);
