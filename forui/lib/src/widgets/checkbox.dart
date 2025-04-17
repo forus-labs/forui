@@ -63,19 +63,18 @@ class FCheckbox extends StatelessWidget {
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
-  }) =>
-      _Checkbox(
-        value: value,
-        style: style,
-        label: label,
-        description: description,
-        error: error,
-        semanticsLabel: semanticsLabel,
-        enabled: enabled,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-      );
+  }) => _Checkbox(
+    value: value,
+    style: style,
+    label: label,
+    description: description,
+    error: error,
+    semanticsLabel: semanticsLabel,
+    enabled: enabled,
+    autofocus: autofocus,
+    focusNode: focusNode,
+    onFocusChange: onFocusChange,
+  );
 
   /// Creates a [FCheckbox].
   const FCheckbox({
@@ -134,7 +133,9 @@ class FCheckbox extends StatelessWidget {
                 child: DecoratedBox(
                   decoration: style.decoration.resolve(states),
                   child:
-                      iconTheme == null ? const SizedBox() : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
+                      iconTheme == null
+                          ? const SizedBox()
+                          : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
                 ),
               ),
             );
@@ -220,7 +221,6 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItem<T> {
   }
 }
 
-
 /// A checkboxes style.
 class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   /// The duration of the animation when the checkbox switches between checked and unchecked. Defaults to 100ms.
@@ -286,11 +286,14 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return FCheckboxStyle(
       tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-      focusedOutlineStyle: style.focusedOutlineStyle,
+      focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: BorderRadius.circular(4)),
       iconStyle: FWidgetStateMap({
-        WidgetState.error: IconThemeData(color: colors.errorForeground, size: 14),
-        WidgetState.disabled: IconThemeData(color: colors.disable(colors.primaryForeground), size: 14),
-        ~WidgetState.disabled: IconThemeData(color: colors.primaryForeground, size: 14),
+        WidgetState.selected & WidgetState.error: IconThemeData(color: colors.errorForeground, size: 14),
+        WidgetState.selected & ~WidgetState.disabled: IconThemeData(color: colors.primaryForeground, size: 14),
+        WidgetState.selected & WidgetState.disabled: IconThemeData(
+          color: colors.disable(colors.primaryForeground),
+          size: 14,
+        ),
       }),
       decoration: FWidgetStateMap({
         // Error

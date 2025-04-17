@@ -90,8 +90,8 @@ class _CalendarLayoutState extends State<CalendarLayout> {
   }
 
   double _estimateWidth() {
-    final scale = MediaQuery.textScalerOf(context);
-    final textStyle = DefaultTextStyle.of(context).style;
+    final scale = widget.scale;
+    final textStyle = widget.textStyle;
 
     double height(FLineCalendarStyle style, Set<WidgetState> states) {
       final dateHeight = scale.scale(style.dateTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
