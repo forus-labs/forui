@@ -64,17 +64,17 @@ class FRadio extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
   }) => _Radio<T>(
-      value: value,
-      label: label,
-      description: description,
-      error: error,
-      semanticsLabel: semanticsLabel,
-      style: style,
-      enabled: enabled,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-    );
+    value: value,
+    label: label,
+    description: description,
+    error: error,
+    semanticsLabel: semanticsLabel,
+    style: style,
+    enabled: enabled,
+    autofocus: autofocus,
+    focusNode: focusNode,
+    onFocusChange: onFocusChange,
+  );
 
   /// Creates a [FRadio].
   const FRadio({

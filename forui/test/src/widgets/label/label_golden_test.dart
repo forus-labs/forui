@@ -29,7 +29,11 @@ void main() {
     });
 
     for (final theme in TestScaffold.themes) {
-      for (final states in [{WidgetState.disabled}, {WidgetState.error}, <WidgetState>{}]) {
+      for (final states in [
+        {WidgetState.disabled},
+        {WidgetState.error},
+        <WidgetState>{},
+      ]) {
         testWidgets('${theme.name} horizontal with $states', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -55,7 +59,11 @@ void main() {
         });
       }
 
-      for (final state in [{WidgetState.disabled}, {WidgetState.error}, <WidgetState>{}]) {
+      for (final state in [
+        {WidgetState.disabled},
+        {WidgetState.error},
+        <WidgetState>{},
+      ]) {
         testWidgets('${theme.name} vertical with $state', (tester) async {
           await tester.pumpWidget(
             TestScaffold(

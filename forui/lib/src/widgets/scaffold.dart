@@ -14,7 +14,7 @@ part 'scaffold.style.dart';
 /// A layout structure that contains a header, content, and footer.
 ///
 /// A scaffold provides the basic visual structure for an application, containing
-/// elements like headers, content areas, and footers. It is highly recommended 
+/// elements like headers, content areas, and footers. It is highly recommended
 /// to use a scaffold when creating a page even if a header and footer are not required.
 ///
 /// See:

@@ -52,13 +52,7 @@ abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
 }
 
 class _RenderHorizontalSlider extends _RenderSlider {
-  _RenderHorizontalSlider(
-    super._style,
-    super._layout,
-    super._textDirection,
-    super._marks,
-    super._mainAxisExtent,
-  );
+  _RenderHorizontalSlider(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent);
 
   @override
   void performLayout() {
@@ -100,13 +94,7 @@ class _RenderHorizontalSlider extends _RenderSlider {
 }
 
 class _RenderVerticalSlider extends _RenderSlider {
-  _RenderVerticalSlider(
-    super._style,
-    super._layout,
-    super._textDirection,
-    super._marks,
-    super._mainAxisExtent,
-  );
+  _RenderVerticalSlider(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent);
 
   @override
   void performLayout() {
