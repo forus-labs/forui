@@ -9,12 +9,10 @@ export function Theme({title, color}) {
     );
 }
 
-
 # Themes
 
 Forui themes allows you to customize the look and feel of your Flutter application.
 Our theming solution is designed to help you get started quickly while offering powerful and flexible customization options.
-
 
 ## Predefined Themes
 
@@ -29,13 +27,14 @@ Our theming solution is designed to help you get started quickly while offering 
           child: const FScaffold(...),
         );
     ```
+
 </Callout>
 
 Forui provides a set of predefined themes that you can use out of the box.
 The color schemes are heavily inspired by [shadcn/ui themes](https://ui.shadcn.com/themes).
 
 | Theme                                    | Light Accessor         | Dark Accessor         |
-|:-----------------------------------------|:-----------------------|:----------------------|
+| :--------------------------------------- | :--------------------- | :-------------------- |
 | <Theme title="Zinc" color="#18181b" />   | `FThemes.zinc.light`   | `FThemes.zinc.dark`   |
 | <Theme title="Slate" color="#64748b" />  | `FThemes.slate.light`  | `FThemes.slate.dark`  |
 | <Theme title="Red" color="#dc2626" />    | `FThemes.red.light`    | `FThemes.red.dark`    |
@@ -45,7 +44,6 @@ The color schemes are heavily inspired by [shadcn/ui themes](https://ui.shadcn.c
 | <Theme title="Blue" color="#2563eb" />   | `FThemes.blue.light`   | `FThemes.blue.dark`   |
 | <Theme title="Yellow" color="#facc15" /> | `FThemes.yellow.light` | `FThemes.yellow.dark` |
 | <Theme title="Violet" color="#7c3aed" /> | `FThemes.violet.light` | `FThemes.violet.dark` |
-
 
 ## Usage
 
@@ -66,13 +64,13 @@ Widget build(BuildContext context) {
 ```
 
 A high level overview of the theme data structure is as follows:
+
 - [**`FThemeData`**](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html) contains `FColors`, `FTypography`, `FStyle`, and widget styles (eg. `FCardStyle`).
 - [**`FColors`**](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html) contains the color scheme (eg. `background`, `foreground`, and `primary`).
 - [**`FTypography`**](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html) contains the `defaultFontFamily` and various `TextStyle`s.
 - [**`FStyle`**](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html) contains other miscellaneous styling options (eg. `borderRadius`).
 
 A more detailed explanation of each class can be found in the [Class Diagram](#class-diagram) section.
-
 
 ## Customize Themes
 
@@ -84,16 +82,19 @@ directly modified to fit your design needs.
 This example demonstrates how to generate and use both a theme and `FDividerStyles` in your project.
 
 In your project directory run:
+
 ```shell copy
 dart run forui init
 ```
 
 To generate a `FDivider`'s styles:
+
 ```shell copy
 dart run forui style create fdivider
 ```
 
 This will generate:
+
 ```dart filename="lib/theme/divider_styles.dart" copy
 FDividerStyles dividerStyles({
   required FColors colors,
@@ -113,11 +114,13 @@ FDividerStyles dividerStyles({
 ```
 
 To generate a theme based on [zinc](#predefined-themes):
+
 ```shell copy
 dart run forui theme create zinc
 ```
 
 This will generate a theme which you can add the generated divider styles to:
+
 ```dart filename="lib/theme/theme.dart" {1, 19, 39} copy
 import 'divider_styles.dart';
 
@@ -196,6 +199,7 @@ FStyle _style({required FColors colors, required FTypography typography}) =>
 ```
 
 The first command, `dart forui init` generates a main file which you can add the generated theme to:
+
 ```dart filename="lib/main.dart" {1, 13} copy
 import 'theme/theme.dart';
 
@@ -338,7 +342,6 @@ Widget build(BuildContext context) {
 }
 ```
 
-
 #### Custom Font Family
 
 To change the default font family, use the `copyWith(...)` method to apply the new font family.
@@ -357,7 +360,6 @@ Widget build(BuildContext context) =>
       child: const FScaffold(...),
     );
 ```
-
 
 ### Style
 
@@ -382,7 +384,6 @@ Widget build(BuildContext context) {
   );
 }
 ```
-
 
 ## Override Individual Widgets
 
@@ -411,7 +412,6 @@ Widget build(BuildContext context) {
 }
 ```
 
-
 ## Material Design Interoperability
 
 Forui provides a way to convert its themes to Material Design's `ThemeData` for interoperability between Forui and Material widgets. This is useful when:
@@ -424,7 +424,6 @@ Forui provides a way to convert its themes to Material Design's `ThemeData` for 
   The `toApproximateMaterialTheme()` method is marked as experimental. As an experimental feature, this method can change without prior warning.
   The mapping between Forui and Material themes is done on a best-effort basis, and may not perfectly capture all the nuances of a Forui theme.
 </Callout>
-
 
 ### Usage
 
@@ -439,7 +438,7 @@ import 'package:forui/forui.dart';
 @override
 Widget build(BuildContext context) {
   final fThemeData = FThemes.zinc.light;
-  
+
   return MaterialApp(
     theme: fThemeData.toApproximateMaterialTheme(),
     home: Scaffold(

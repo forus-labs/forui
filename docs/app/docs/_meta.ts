@@ -17,7 +17,7 @@ const meta = {
 
   '-- widgets': {
     type: 'separator',
-    title: 'Widgets'
+    title: 'Widgets',
   },
   // TODO: Workaround for a separator bug. Remove when patched.
   // A page needs to be listed after a separator or else the order will be messed up.
@@ -30,7 +30,7 @@ const meta = {
   overlay: 'Overlay',
   foundation: 'Foundation',
   '*': {
-    title: ''
+    title: '',
   },
 };
 

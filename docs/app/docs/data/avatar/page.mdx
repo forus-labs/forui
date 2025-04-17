@@ -4,6 +4,7 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Avatar
+
 A circular image component that displays user profile pictures with a fallback option. The Avatar component provides a consistent way to represent users in your application, displaying profile images with fallbacks to initials or icons when images are unavailable.
 
 <LinkBadgeGroup>
@@ -12,6 +13,7 @@ A circular image component that displays user profile pictures with a fallback o
 </LinkBadgeGroup>
 
 ## Overview
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
       <Widget name='avatar' variant='default' query={{}}/>
@@ -40,12 +42,14 @@ A circular image component that displays user profile pictures with a fallback o
         ],
       );
       ```
+
   </Tabs.Tab>
 </Tabs>
 
 ## Usage
 
 ### Basic Usage
+
 Display a user's profile picture with a fallback to their initials.
 
 ```dart copy
@@ -56,6 +60,7 @@ FAvatar(
 ```
 
 ### Custom Fallback
+
 Customize the fallback content that appears when the image fails to load.
 
 ```dart copy
@@ -66,6 +71,7 @@ FAvatar(
 ```
 
 ### Raw Constructor
+
 Use the raw constructor for complete customization of the avatar content.
 
 ```dart copy
@@ -92,6 +98,7 @@ FAvatar.raw(
 ## Examples
 
 ### Different Sizes
+
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='avatar' variant='sizes' query={{}}/>
@@ -125,6 +132,7 @@ FAvatar.raw(
 </Tabs>
 
 ### Grouped Avatars
+
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='avatar' variant='group' query={{}}/>
