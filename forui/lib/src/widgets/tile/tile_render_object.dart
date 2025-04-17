@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'dart:math';
 
 import 'package:flutter/rendering.dart';
@@ -12,12 +14,23 @@ import 'package:forui/src/foundation/rendering.dart';
 class TileRenderObject extends MultiChildRenderObjectWidget {
   final FTileContentStyle style;
   final FTileDivider divider;
+  final bool first;
+  final bool last;
+  final BorderSide? side;
 
-  const TileRenderObject({required this.style, required this.divider, super.key, super.children});
+  const TileRenderObject({
+    required this.style,
+    required this.divider,
+    required this.first,
+    required this.last,
+    required this.side,
+    super.key,
+    super.children,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      _RenderTile(style, divider, Directionality.maybeOf(context) ?? TextDirection.ltr);
+      _RenderTile(style, divider, first, last, side, Directionality.maybeOf(context) ?? TextDirection.ltr);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -25,6 +38,7 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
     tile
       ..style = style
       ..divider = divider
+      ..side = side
       ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
   }
 
@@ -33,7 +47,10 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('divider', divider));
+      ..add(EnumProperty('divider', divider))
+      ..add(FlagProperty('first', value: first, ifTrue: 'first'))
+      ..add(FlagProperty('last', value: last, ifTrue: 'last'))
+      ..add(DiagnosticsProperty('side', side));
   }
 }
 
@@ -43,9 +60,12 @@ class _RenderTile extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
   FTileContentStyle _style;
   FTileDivider _divider;
+  bool _first;
+  bool _last;
+  BorderSide? _side;
   TextDirection _textDirection;
 
-  _RenderTile(this._style, this._divider, this._textDirection);
+  _RenderTile(this._style, this._divider, this._first, this._last, this._side, this._textDirection);
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = _Data();
@@ -134,7 +154,31 @@ class _RenderTile extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
+  void paint(PaintingContext context, Offset offset) {
+    defaultPaint(context, offset);
+    if (side case final side?) {
+      final canvas = context.canvas;
+      final focusedOutline =
+          Paint()
+            ..color = side.color
+            ..style = PaintingStyle.stroke
+            ..isAntiAlias = false
+            ..blendMode = BlendMode.src
+            ..strokeWidth = 1;
+
+      if (!first) {
+        canvas.drawLine(Offset(offset.dx, offset.dy), Offset(offset.dx + size.width, offset.dy), focusedOutline);
+      }
+
+      if (!last) {
+        canvas.drawLine(
+          Offset(offset.dx, offset.dy + size.height),
+          Offset(offset.dx + size.width, offset.dy + size.height),
+          focusedOutline,
+        );
+      }
+    }
+  }
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
@@ -146,6 +190,9 @@ class _RenderTile extends RenderBox
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('divider', divider))
+      ..add(FlagProperty('first', value: first, ifTrue: 'first'))
+      ..add(FlagProperty('last', value: last, ifTrue: 'last'))
+      ..add(DiagnosticsProperty('side', side))
       ..add(EnumProperty('textDirection', textDirection));
   }
 
@@ -157,7 +204,7 @@ class _RenderTile extends RenderBox
     }
 
     _style = value;
-    markNeedsLayout();
+    markNeedsPaint();
   }
 
   FTileDivider get divider => _divider;
@@ -169,6 +216,39 @@ class _RenderTile extends RenderBox
 
     _divider = value;
     markNeedsLayout();
+  }
+
+  bool get first => _first;
+
+  set first(bool value) {
+    if (_first == value) {
+      return;
+    }
+
+    _first = value;
+    markNeedsPaint();
+  }
+
+  bool get last => _last;
+
+  set last(bool value) {
+    if (_last == value) {
+      return;
+    }
+
+    _last = value;
+    markNeedsPaint();
+  }
+
+  BorderSide? get side => _side;
+
+  set side(BorderSide? value) {
+    if (_side == value) {
+      return;
+    }
+
+    _side = value;
+    markNeedsPaint();
   }
 
   TextDirection get textDirection => _textDirection;

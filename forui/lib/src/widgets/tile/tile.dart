@@ -142,6 +142,13 @@ class FTile extends StatelessWidget with FTileMixin {
           states = {...states}..remove(WidgetState.disabled);
         }
 
+        if (onPress == null && onLongPress == null) {
+          states =
+              {...states}
+                ..remove(WidgetState.hovered)
+                ..remove(WidgetState.pressed);
+        }
+
         final border = style.border.resolve(states);
         return DecoratedBox(
           decoration: BoxDecoration(
@@ -235,7 +242,7 @@ class FTileData extends InheritedWidget {
   bool updateShouldNotify(FTileData old) =>
       style != old.style ||
       divider != old.divider ||
-      setEquals(states, old.states) ||
+      !setEquals(states, old.states) ||
       index != old.index ||
       last != old.last;
 
@@ -254,6 +261,8 @@ class FTileData extends InheritedWidget {
 /// A [FTile]'s style.
 final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   /// The tile's border.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
   final FWidgetStateMap<Border> border;
 
@@ -263,7 +272,7 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
 
   /// The tile's background color.
   ///
-  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
   final FWidgetStateMap<Color> backgroundColor;
 
@@ -273,13 +282,13 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   @override
   final FWidgetStateMap<FDividerStyle> dividerStyle;
 
-  /// The tappable style.
-  @override
-  final FTappableStyle tappableStyle;
-
   /// The default tile content's style.
   @override
   final FTileContentStyle contentStyle;
+
+  /// The tappable style.
+  @override
+  final FTappableStyle tappableStyle;
 
   /// Creates a [FTileStyle].
   FTileStyle({
@@ -287,8 +296,8 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
     required this.borderRadius,
     required this.backgroundColor,
     required this.dividerStyle,
-    required this.tappableStyle,
     required this.contentStyle,
+    required this.tappableStyle,
   });
 
   /// Creates a [FTileStyle] that inherits its properties.
@@ -305,13 +314,12 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
           WidgetState.any: colors.background,
         }),
         dividerStyle: FWidgetStateMap({
-          WidgetState.focused: FDividerStyle(color: colors.primary, width: style.borderWidth, padding: EdgeInsets.zero),
           WidgetState.any: FDividerStyle(color: colors.border, width: style.borderWidth, padding: EdgeInsets.zero),
         }),
+        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
           pressedEnterDuration: Duration.zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),
-        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
       );
 }

@@ -421,7 +421,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         tileStyle: FTileStyle.inherit(colors: colors, typography: typography, style: style),
         labelTextStyle: FWidgetStateMap({
           WidgetState.error: typography.base.copyWith(
-            color: style.formFieldStyle.labelTextStyle.maybeResolve({WidgetState.error})?.color ?? colors.primary,
+            color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
             fontWeight: FontWeight.w600,
           ),
           WidgetState.disabled: typography.base.copyWith(

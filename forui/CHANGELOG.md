@@ -134,8 +134,11 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 
 
 ### Others
-* Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
-* Add `filled` and `fillColor` for `FTextField`. Thanks @MrHeer!
+* Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
+* Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
+
+* Change how focused outline is drawn in `FTile` - The previous implementation was extremely hacky and had several edge
+  cases to consider.
 
 * Add `FLerpBorderRadius`.
 

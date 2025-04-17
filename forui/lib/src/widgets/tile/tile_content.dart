@@ -32,22 +32,24 @@ class FTileContent extends StatelessWidget {
     final ltr = Directionality.maybeOf(context) == TextDirection.ltr;
 
     final tile = FTileData.maybeOf(context)!;
-    final FTileData(style: tileStyle, :states, :index, :last) = tile;
+    final FTileData(style: tileStyle, :states) = tile;
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
 
     final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
-    final divider = switch ((states.contains(WidgetState.focused), last)) {
-      (true, false) => FTileDivider.full,
-      (true, true) when group.index != group.length - 1 => FTileDivider.full,
-      (false, false) => tile.divider,
-      (false, true) when group.index != group.length - 1 => group.divider,
-      _ => FTileDivider.none,
+    final (dividerType) = switch (tile.last) {
+      false => tile.divider,
+      true when group.index == group.length - 1 => FTileDivider.none,
+      true => group.divider,
     };
 
     return TileRenderObject(
       style: contentStyle,
-      divider: divider,
+      divider: dividerType,
+      first: tile.index == 0 && group.index == 0,
+      last: tile.last && group.index == group.length - 1,
+      // We use the left side of the border to draw the focused outline.
+      side: states.contains(WidgetState.focused) ? tileStyle.border.resolve(states).left : null,
       children: [
         if (prefixIcon case final prefix?)
           Padding(
@@ -116,7 +118,7 @@ class FTileContent extends StatelessWidget {
           )
         else
           const SizedBox(),
-        if (divider != FTileDivider.none) FDivider(style: dividerStyle.resolve(states)) else const SizedBox(),
+        if (dividerType != FTileDivider.none) FDivider(style: dividerStyle.resolve(states)) else const SizedBox(),
       ],
     );
   }
