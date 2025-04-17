@@ -140,6 +140,8 @@ class FTile extends StatelessWidget with FTileMixin {
       builder: (_, states, _) {
         if (enabled) {
           states = {...states}..remove(WidgetState.disabled);
+        } else {
+          states = {...states}..add(WidgetState.disabled);
         }
 
         if (onPress == null && onLongPress == null) {

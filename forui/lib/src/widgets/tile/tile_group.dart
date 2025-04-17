@@ -218,6 +218,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     final style = this.style ?? data?.style ?? context.theme.tileGroupStyle;
     final enabled = this.enabled ?? !(data?.states.contains(WidgetState.disabled) ?? false);
 
+    print(enabled);
     // The only shard state between a tile group and tile is [WidgetState.disabled].
     final sliver = SliverList(delegate: delegate(style.tileStyle, enabled: enabled));
 
