@@ -52,35 +52,3 @@ class SetKey<T> extends LocalKey {
   @override
   String toString() => 'SetKey(${items.join(', ')})';
 }
-
-@internal
-class MapKey<K, V> extends LocalKey {
-  final Map<K, V> map;
-
-  const MapKey(this.map);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-
-    if (other.runtimeType != runtimeType) {
-      return false;
-    }
-
-    return other is MapKey<K, V> && mapEquals(other.map, map);
-  }
-
-  @override
-  int get hashCode {
-    final sortedKeys = map.keys.toList()..sort((a, b) => a.hashCode.compareTo(b.hashCode));
-    return Object.hashAll(sortedKeys.map((k) => Object.hash(k, map[k])));
-  }
-
-  @override
-  String toString() {
-    final entries = map.entries.map((e) => '${e.key}: ${e.value}').join(', ');
-    return 'MapKey({$entries})';
-  }
-}

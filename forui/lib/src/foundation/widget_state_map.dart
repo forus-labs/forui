@@ -135,7 +135,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   FWidgetStateMap<T> replaceLastWhere(Set<WidgetState> states, T Function(T) replace) {
     final constraints = {..._constraints};
 
-    for (final key in constraints.keys) {
+    for (final key in constraints.keys.toList().reversed) {
       if (key.isSatisfiedBy(states)) {
         constraints[key] = replace(constraints[key] as T);
         break;
