@@ -141,12 +141,15 @@ class FSwitch extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('style', style))..add(StringProperty('semanticsLabel', semanticsLabel))..add(
-        ObjectFlagProperty.has('onChange', onChange))..add(
-        FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))..add(
-        FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))..add(
-        DiagnosticsProperty('focusNode', focusNode))..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))..add(
-        EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start));
   }
 }
 

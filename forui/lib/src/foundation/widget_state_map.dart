@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 /// A [WidgetStateProperty] that [resolve]s to a [T] using a [WidgetStateMap].

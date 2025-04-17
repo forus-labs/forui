@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
 
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'divider.style.dart';
 
@@ -17,7 +18,7 @@ part 'divider.style.dart';
 final class FDivider extends StatelessWidget {
   /// The style.
   final FDividerStyle? style;
-  
+
   /// The axis along which the divider is drawn. Defaults to horizontal.
   final Axis axis;
 
