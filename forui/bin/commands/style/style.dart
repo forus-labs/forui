@@ -177,7 +177,7 @@ enum Style {
     'FLabelStyle',
     <String>[],
     <String>['FLabelStyle'],
-    'FLabelStyle labelStyle({\n  required FStyle style,\n  EdgeInsetsGeometry labelPadding = EdgeInsets.zero,\n  EdgeInsetsGeometry descriptionPadding = EdgeInsets.zero,\n  EdgeInsetsGeometry errorPadding = EdgeInsets.zero,\n  EdgeInsetsGeometry childPadding = EdgeInsets.zero,\n}) => FLabelStyle();\n',
+    'FLabelStyle labelStyle({\n  required FStyle style,\n  EdgeInsetsGeometry labelPadding = EdgeInsets.zero,\n  EdgeInsetsGeometry descriptionPadding = EdgeInsets.zero,\n  EdgeInsetsGeometry errorPadding = EdgeInsets.zero,\n  EdgeInsetsGeometry childPadding = EdgeInsets.zero,\n}) => FLabelStyle.inherit(\n  style: style,\n  labelPadding: labelPadding,\n  descriptionPadding: descriptionPadding,\n  errorPadding: errorPadding,\n  childPadding: childPadding,\n);\n',
   ),
   flabelstyles(
     'FLabelStyles',

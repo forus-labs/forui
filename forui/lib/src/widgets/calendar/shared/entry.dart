@@ -211,22 +211,19 @@ class _Content extends StatelessWidget {
 final class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFunctions {
   /// The day's background color.
   ///
-  /// {@macro forui.foundation.FTappable.builder}
-  /// * [WidgetState.selected]
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<Color> backgroundColor;
 
   /// The border.
   ///
-  /// {@macro forui.foundation.FTappable.builder}
-  /// * [WidgetState.selected]
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<Color?> borderColor;
 
   /// The day's text style.
   ///
-  /// {@macro forui.foundation.FTappable.builder}
-  /// * [WidgetState.selected]
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<TextStyle> textStyle;
 
