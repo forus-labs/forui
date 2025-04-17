@@ -205,9 +205,7 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItem<T> {
       semanticsLabel: semanticsLabel,
       error: error,
       value: selected,
-      onChange: (state) {
-        controller.update(value, add: state);
-      },
+      onChange: (state) => controller.update(value, add: state),
       enabled: enabled,
       autofocus: autofocus,
       focusNode: focusNode,
