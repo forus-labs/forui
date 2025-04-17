@@ -43,7 +43,7 @@ FLabel(
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),
     error: const Text('Please accept the terms and conditions.'),
-    state: FLabelState.error,
+    states: { WidgetState.error },
     child: const Placeholder(),
 );
 ```
@@ -84,7 +84,7 @@ FLabel(
         axis: Axis.horizontal,
         label: const Text('Accept terms and conditions'),
         description: const Text('You agree to our terms and conditions.'),
-        state: FLabelState.disabled,
+        states: { WidgetState.disabled },
         child: const DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -109,7 +109,7 @@ FLabel(
         label: const Text('Accept terms and conditions'),
         description: const Text('You agree to our terms and conditions.'),
         error: const Text('Please accept the terms.'),
-        state: FLabelState.error,
+        states: { WidgetState.error },
         child: const DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),

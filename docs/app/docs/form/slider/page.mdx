@@ -31,8 +31,8 @@ A sliding input component that allows users to select a value within a specified
 
 ```dart copy
 FSlider(
-  layout: Layout.rtl,
-  tooltipBuilder: (style, value) => Text('${(value.toStringAsFixed(2)}%'),
+  layout: FLayout.rtl,
+  tooltipBuilder: (style, value) => Text('${value.toStringAsFixed(2)}%'),
   controller: FContinuousSliderController(
     allowedInteraction: FSliderInteraction.tap,
     selection: FSliderSelection(max: 0.75, extent: (min: 0, max: 0.8)),
@@ -60,9 +60,7 @@ FSlider(
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
-          ),
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -100,9 +98,7 @@ FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
           forceErrorText: 'Volume is too high.',
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
-          ),
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -118,13 +114,11 @@ FSlider(
   <Tabs.Tab>
         ```dart {5-8} copy
         FSlider(
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.35),
-          ),
           tooltipBuilder: (style, value) {
             final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
             return Text('0x$hex');
           },
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -143,9 +137,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
   <Tabs.Tab>
         ```dart {5-11} copy
         FSlider(
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.35),
-          ),
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
             FSliderMark(value: 0.25, tick: false),
@@ -169,9 +161,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
   <Tabs.Tab>
         ```dart {2-4} copy
         FSlider(
-          controller: FDiscreteSliderController(
-            selection: FSliderSelection(max: 0.25),
-          ),
+          controller: FDiscreteSliderController(selection: FSliderSelection(max: 0.25)),
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
             FSliderMark(value: 0.25, tick: false),
@@ -212,8 +202,8 @@ Marks provide visual reference points on the slider track. Each mark consists of
         FSlider(
           controller: FContinuousSliderController(
             selection: FSliderSelection(
-                max: 0.6,
-                extent: (min: 0.25, max: 0.75),
+              max: 0.6,
+              extent: (min: 0.25, max: 0.75),
             ),
           ),
         );
@@ -357,10 +347,7 @@ Tap anywhere or slide the thumb to select a value.
                     FSlider(
                       label: const Text('Brightness'),
                       description: const Text('Adjust the brightness level.'),
-                      // validator: (value) => 'An error text.',
-                      controller: FContinuousSliderController(
-                        selection: FSliderSelection(max: 0.35),
-                      ),
+                      controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
                       marks: const [
                         FSliderMark(value: 0, label: Text('0%')),
                         FSliderMark(value: 0.25, tick: false),
@@ -371,7 +358,7 @@ Tap anywhere or slide the thumb to select a value.
                     ),
                     const SizedBox(height: 20),
                     FButton(
-                      label: const Text('Save'),
+                      child: const Text('Save'),
                       onPress: () {
                         if (!_formKey.currentState!.validate()) {
                           // Handle errors here.

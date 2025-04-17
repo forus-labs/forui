@@ -148,7 +148,7 @@ const FTimePicker(
             children: [
               SizedBox(height: 300, width: 250, child: FTimePicker(controller: _controller)),
               FButton(
-                label: const Text('Funny button'),
+                child: const Text('Funny button'),
                 onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
               ),
             ],

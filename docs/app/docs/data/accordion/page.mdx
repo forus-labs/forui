@@ -21,7 +21,7 @@ A vertically stacked set of interactive headings that reveal associated content 
           children: [
             FAccordion(
               controller: FAccordionController(max: 2),
-              items: [
+              children: [
                 FAccordionItem(
                   title: const Text('Is it accessible?'),
                   child: const Text('Yes. It follows WAI-ARIA design patterns.'),
@@ -50,13 +50,13 @@ A vertically stacked set of interactive headings that reveal associated content 
 ```dart copy
 FAccordion(
   controller: FAccordionController(min: 1, max: 2), // or FAccordionController.radio()
-  items: [
+  children: [
     FAccordionItem(
       title: const Text('Is it accessible?'),
       child: const Text('Yes. It follows WAI-ARIA design patterns.'),
     ),
   ],
-),
+);
 ```
 
 ## Examples
@@ -73,7 +73,7 @@ FAccordion(
           children: [
             FAccordion(
               controller: FAccordionController.radio(),
-              items: [
+              children: [
                 FAccordionItem(
                   title: const Text('Is it accessible?'),
                   child: const Text('Yes. It follows WAI-ARIA design patterns.'),
@@ -107,7 +107,7 @@ FAccordion(
           children: [
             FAccordion(
               controller: FAccordionController(),
-              items: [
+              children: [
                 FAccordionItem(
                   title: const Text('Is it accessible?'),
                   child: const Text('Yes. It follows WAI-ARIA design patterns.'),

@@ -182,17 +182,16 @@ FTypography _typography({
 
 FStyle _style({required FColors colors, required FTypography typography}) =>
     FStyle(
-      enabledFormFieldStyle: FFormFieldStyle.inherit(
-        labelColor: colors.primary,
-        descriptionColor: colors.mutedForeground,
+      formFieldStyle: FFormFieldStyle.inherit(
+        colors: colors,
         typography: typography,
       ),
-      disabledFormFieldStyle: FFormFieldStyle.inherit(
-        labelColor: colors.disable(colors.primary),
-        descriptionColor: colors.disable(colors.mutedForeground),
-        typography: typography,
+      focusedOutlineStyle: FFocusedOutlineStyle(
+        color: colors.primary,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
-      ...
+      iconStyle: IconThemeData(color: colors.primary, size: 20),
+      tappableStyle: FTappableStyle(),
     );
 ```
 
@@ -345,10 +344,12 @@ Widget build(BuildContext context) {
 To change the default font family, use the `copyWith(...)` method to apply the new font family.
 As some fonts may have different sizes, the `scale(...)` method is provided to quickly scale all the font sizes.
 
-```dart filename="main.dart" {4-6} copy
+```dart filename="main.dart" copy
 @override
-Widget build(BuildContext context) => FTheme(
-      data: FThemes.zinc.light.copyWith(
+Widget build(BuildContext context) =>
+    FTheme(
+      data: FThemeData(
+        colors: FThemes.zinc.light.colors,
         typography: FThemes.zinc.light.typography.copyWith(
           defaultFontFamily: 'Roboto',
         ).scale(sizeScalar: 0.8),

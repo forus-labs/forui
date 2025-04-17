@@ -64,10 +64,10 @@ The following locales will default to Chinese (zh):
 FTimeField(
   controller: FTimeFieldController(
     vsync: this,
-    initialTime: FTime(hour: 12, minute: 30),
-    validator: (time) => time?.isBefore(const FTime(14, 30)) ?? false ? 'Time must be in the future' : null,
+    initialTime: FTime(12, 30),
+    validator: (time) => time != null && time < const FTime(14, 30) ? 'Time must be in the future' : null,
   ),
-  style: FTimeFieldStyle(),
+  style: FTimeFieldStyle(...),
   textAlign: TextAlign.start,
   textAlignVertical: TextAlignVertical.center,
   autofocus: false,
@@ -76,7 +76,7 @@ FTimeField(
   onSubmit: (time) => print('Time submitted: $time'),
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
-  prefixBuilder: (context, styles, child) => Icon(Icons.clock2),
+  prefixBuilder: (context, styles, child) => Icon(FIcons.clock2),
   suffixBuilder: null,
   label: Text('Select Time'),
   description: Text('Choose a time'),
@@ -92,8 +92,8 @@ FTimeField(
 FTimeField.picker(
   controller: FTimeFieldController(
     vsync: this,
-    initialTime: FTime(hour: 12, minute: 30),
-    validator: (time) => time?.isBefore(const FTime(14, 30)) ?? false ? 'Time must be in the future' : null,
+    initialTime: FTime(12, 30),
+    validator: (time) => time != null && time < const FTime(14, 30) ? 'Time must be in the future' : null,
   ),
   format: DateFormat.jms(),
   textAlign: TextAlign.start,
@@ -172,7 +172,7 @@ FTimeField.picker(
             _controller = FTimeFieldController(vsync: this, validator: _validate);
           }
 
-          String? _validate(FTime? time) => time == FTime(hour: 12) ? 'Time cannot be noon.' : null;
+          String? _validate(FTime? time) => time == FTime(12) ? 'Time cannot be noon.' : null;
 
           @override
           Widget build(BuildContext context) => FTimeField(
@@ -222,7 +222,7 @@ FTimeField.picker(
           }
 
           String? _validateStartTime(FTime? time) {
-            if (time < FTime.now()) {
+            if (time != null && time < FTime.now()) {
               return 'Start time must be in the future.';
             }
             return null;
@@ -257,7 +257,7 @@ FTimeField.picker(
                   ),
                   const SizedBox(height: 25),
                   FButton(
-                    label: const Text('Submit'),
+                    child: const Text('Submit'),
                     onPress: () {
                       if (_formKey.currentState!.validate()) {
                         // Form is valid, process the dates

@@ -57,7 +57,7 @@ FDateField(
     initialDate: DateTime(2024, 1, 1),
     validator: (date) => date?.isBefore(DateTime.now()) ?? false ? 'Date must be in the future' : null,
   ),
-  style: FDateFieldStyle(),
+  style: FDateFieldStyle(...),
   textAlign: TextAlign.start,
   textAlignVertical: TextAlignVertical.center,
   autofocus: false,
@@ -98,7 +98,7 @@ FDateField.calendar(
   start: DateTime(2024),
   end: DateTime(2025),
   today: DateTime.now(),
-  initialType: FCalendarFieldType.yearMonth,
+  initialType: FCalendarPickerType.yearMonth,
   autoHide: true,
   anchor: Alignment.topLeft,
   inputAnchor: Alignment.bottomLeft,
@@ -114,27 +114,33 @@ FDateField.calendar(
 ### `FDateField.input(...)`
 
 ```dart copy
-FDateField.input(
+FDateField.calendar(
   controller: FDateFieldController(
     vsync: this,
     initialDate: DateTime(2024, 1, 1),
   ),
-  textInputAction: TextInputAction.done,
+  format: DateFormat('d MMM y'),
   textAlign: TextAlign.start,
   textAlignVertical: TextAlignVertical.center,
   expands: false,
-  onEditingComplete: () => print('Editing complete'),
-  onSubmit: (date) => print('Date submitted: $date'),
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
   clearable: true,
-  baselineInputYear: 2000,
-  label: Text('Input Date'),
-  description: Text('Enter a date using the keyboard'),
-  autovalidateMode: AutovalidateMode.onUnfocus,
+  hint: 'Select a date',
+  start: DateTime(2024),
+  end: DateTime(2025),
+  today: DateTime.now(),
+  initialType: FCalendarPickerType.yearMonth,
+  autoHide: true,
+  anchor: Alignment.topLeft,
+  inputAnchor: Alignment.bottomLeft,
+  hideOnTapOutside: FHidePopoverRegion.none,
+  directionPadding: false,
+  label: Text('Calendar Date'),
+  description: Text('Select a date from the calendar'),
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
   suffixBuilder: null,
-)
+);
 ```
 
 ## Examples

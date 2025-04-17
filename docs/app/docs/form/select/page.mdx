@@ -58,7 +58,7 @@ It is a form-field and can therefore be used in a form.
 
 ```dart copy
 FSelect<String>(
-  controller: FSelectController<String>(),
+  controller: FSelectController<String>(vysnc: this),
   label: const Text('Country'),
   description: const Text('Select your country of residence'),
   hint: 'Choose a country',
@@ -420,7 +420,7 @@ FSelect<User>.search(
               ),
               const SizedBox(height: 25),
               FButton(
-                label: const Text('Submit'),
+                child: const Text('Submit'),
                 onPress: () {
                   if (_formKey.currentState!.validate()) {
                     // Form is valid, do something with department.e

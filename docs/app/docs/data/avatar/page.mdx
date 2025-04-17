@@ -61,7 +61,7 @@ Customize the fallback content that appears when the image fails to load.
 ```dart copy
 FAvatar(
   image: const NetworkImage('https://example.com/profile.jpg'),
-  fallback: Icon(FIcons.user, color: theme.colors.mutedForeground),
+  fallback: Icon(FIcons.user, color: context.theme.colors.mutedForeground),
 );
 ```
 
@@ -156,21 +156,3 @@ FAvatar.raw(
         ```
     </Tabs.Tab>
 </Tabs>
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `image` | `ImageProvider` | - | The image provider for the avatar |
-| `fallback` | `Widget` | - | The widget to display when the image fails to load |
-| `size` | `double` | `40` | The size of the avatar in logical pixels |
-| `child` | `Widget` | - | The widget to display in the raw constructor |
-
-## Best Practices
-
-1. Always provide a fallback when using the main constructor
-2. Use appropriate sizes based on the context:
-   - 24px for lists and compact views
-   - 40px for profile pages and detailed views
-3. Use initials as fallback when possible for better user recognition
-4. Ensure the child widget is properly centered and sized when using the raw constructor

@@ -2,11 +2,11 @@
 We are experimenting with a new changelog format which groups changes by feature.
 
 ### Styles
-A CLI has been added to generate styles for Forui widgets. See forui.dev/docs/cli for more information. 
+We added a CLI to generate styles for Forui widgets. See forui.dev/docs/cli for more information. 
 
-Several breaking changes have been made to styles and widgets that rely on state styles to improve consistency and 
-usability (too many to list in a sane manner). Generally, all styles have been updated to use `WidgetState`s, becoming 
-more customizable and concise.
+We made several breaking changes to styles and widgets that rely on state styles to improve consistency and usability 
+(too many to list sanely). Generally, all styles have been updated to use `WidgetState`s, becoming more customizable and 
+concise.
 
 * Add `FBottomNavigationItemStyle.spacing`.
 * Add `FCardContentStyle.imageSpacing`.
@@ -67,7 +67,7 @@ of items.
 
 
 ### `FPopover`
-The traversal edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
+The traversal-edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
 
 * Add `FPopover.traversalEdgeBehavior`.
 * Add `traversalEdgeBehavior` to `FBreadcrumbItem.collapsed`.
@@ -136,11 +136,8 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 ### Others
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
-
-* Change how focused outline is drawn in `FTile` - The previous implementation was extremely hacky and had several edge
-  cases to consider.
-
 * Add `FLerpBorderRadius`.
+
 
 * Change `FHeader(title: ...)` to be optional.
 * Change `FHeader.nested(title: ...)` to be optional.
@@ -174,7 +171,10 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * **Breaking** Rename `FTile.semanticLabel` to `FTile.semanticsLabel`.
 * **Breaking** Rename `FTileGroup.semanticLabel` to `FTileGroup.semanticsLabel`.
 
-* Fixed an issue where header spacing is incorrectly ordered.
+* Replace `FSelectGroupItem` with `FCheckbox.grouped(...)` and `FRadio.grouped(...)`.
+
+
+* Fixed an issue where header spacing appeared in incorrect order.
 
 ## 0.10.0+1
 
