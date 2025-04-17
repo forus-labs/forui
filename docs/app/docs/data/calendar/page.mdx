@@ -4,7 +4,6 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Calendar
-
 A calendar that allows users to enter and edit dates.
 
 The calendar pages are designed to be navigable through swipe gestures on mobile platforms, allowing left and right
@@ -57,11 +56,9 @@ FCalendar(
   onLongPress: (date) => print(date),
 );
 ```
-
 ## Examples
 
 ### Single Date
-
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='calendar' query={{}} height={500}/>
@@ -78,7 +75,6 @@ FCalendar(
 </Tabs>
 
 ### Multiple Dates with Initial Selections
-
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='calendar' variant='dates' query={{}} height={500}/>
@@ -98,7 +94,6 @@ FCalendar(
 </Tabs>
 
 ### Unselectable Dates
-
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='calendar' variant='unselectable' query={{}} height={500}/>
@@ -119,7 +114,6 @@ FCalendar(
 </Tabs>
 
 ### Range Selection with Initial Range
-
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='calendar' variant='range' query={{}} height={500}/>
