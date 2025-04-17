@@ -374,7 +374,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
              tile = FLabel(
                axis: Axis.vertical,
-               style: style,
+               style: global,
                states: states,
                label: label,
                description: description,
@@ -603,9 +603,9 @@ final class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyle
     return FSelectMenuTileStyle(
       menuStyle: FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
       tileStyle: groupStyle.tileStyle,
-      labelTextStyle: style.formFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
-      errorTextStyle: style.formFieldStyle.errorTextStyle,
+      labelTextStyle: groupStyle.labelTextStyle,
+      descriptionTextStyle: groupStyle.descriptionTextStyle,
+      errorTextStyle: groupStyle.errorTextStyle,
       labelPadding: groupStyle.labelPadding,
       descriptionPadding: groupStyle.descriptionPadding,
       errorPadding: groupStyle.errorPadding,

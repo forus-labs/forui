@@ -318,6 +318,7 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
         }),
         contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
+          animationTween: FTappableAnimations.none,
           pressedEnterDuration: Duration.zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),
