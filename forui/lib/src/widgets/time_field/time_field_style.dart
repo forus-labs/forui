@@ -44,6 +44,6 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
         textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
         popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
         pickerStyle: FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
-        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
+        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18, weight: 100),
       );
 }
