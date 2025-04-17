@@ -1,11 +1,10 @@
-const meta = {
+export default {
   index: 'Getting Started',
   themes: 'Themes',
-  cli: 'CLI',
   localization: 'Localization',
   responsive: 'Responsive',
   'icon-library': 'Icon Library',
-  hooks: 'Hooks',
+  'hooks': 'Hooks',
   api_reference: {
     title: 'API Reference',
     href: 'https://pub.dev/documentation/forui',
@@ -17,7 +16,7 @@ const meta = {
 
   '-- widgets': {
     type: 'separator',
-    title: 'Widgets',
+    title: 'Widgets'
   },
   // TODO: Workaround for a seperator bug. Remove when patched.
   // A page need to be listed after a separator or else the order will be messed up.
@@ -30,8 +29,6 @@ const meta = {
   overlay: 'Overlay',
   foundation: 'Foundation',
   '*': {
-    title: '',
+    title: ''
   },
 };
-
-export default meta;

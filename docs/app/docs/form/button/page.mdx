@@ -4,18 +4,24 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Button
-
 A button.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.button/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.button/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="text" query={{}} />
+    <Widget name='button' variant='text' query={{}}/>
   </Tabs.Tab>
-  <Tabs.Tab>```dart copy FButton( label: const Text('Button'), onPress: () {}, ); ```</Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FButton(
+      label: const Text('Button'),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
 </Tabs>
 
 ## Usage
@@ -43,90 +49,131 @@ FButton.raw(
 ### Appearance
 
 #### Primary
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="text" query={{}} />
+    <Widget name='button' variant='text' query={{}}/>
   </Tabs.Tab>
-  <Tabs.Tab>```dart copy FButton( label: const Text('Button'), onPress: () {}, ); ```</Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    FButton(
+      label: const Text('Button'),
+      onPress: () {},
+    );
+    ```
+  </Tabs.Tab>
 </Tabs>
 
 #### Secondary
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="text" query={{ style: 'secondary' }} />
+    <Widget name='button' variant='text' query={{style: 'secondary'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3} copy FButton( label: const Text('Button'), style: FButtonStyle.secondary, onPress: () {}, ); ```
+    ```dart {3} copy
+    FButton(
+      label: const Text('Button'),
+      style: FButtonStyle.secondary,
+      onPress: () {},
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
 
 #### Destructive
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="text" query={{ style: 'destructive' }} />
+    <Widget name='button' variant='text' query={{style: 'destructive'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3} copy FButton( label: const Text('Button'), style: FButtonStyle.destructive, onPress: () {}, ); ```
+    ```dart {3} copy
+    FButton(
+      label: const Text('Button'),
+      style: FButtonStyle.destructive,
+      onPress: () {},
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
 
 #### Outline
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="text" query={{ style: 'outline' }} />
+    <Widget name='button' variant='text' query={{style: 'outline'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3} copy FButton( label: const Text('Button'), style: FButtonStyle.outline, onPress: () {}, ); ```
+    ```dart {3} copy
+    FButton(
+      label: const Text('Button'),
+      style: FButtonStyle.outline,
+      onPress: () {},
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
 
 #### Ghost
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="text" query={{ style: 'ghost' }} />
+    <Widget name='button' variant='text' query={{style: 'ghost'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3} copy FButton( label: const Text('Button'), style: FButtonStyle.ghost, onPress: () {}, ); ```
+    ```dart {3} copy
+    FButton(
+      label: const Text('Button'),
+      style: FButtonStyle.ghost,
+      onPress: () {},
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
+
 
 ### Content
 
 #### With Text and Icon
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="icon" query={{}} />
+    <Widget name='button' variant='icon' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy FButton( prefix: Icon(FIcons.mail), label: const Text('Login with Email'), onPress: () {}, ), ```
+    ```dart {2} copy
+    FButton(
+      prefix: Icon(FIcons.mail),
+      label: const Text('Login with Email'),
+      onPress: () {},
+    ),
+    ```
   </Tabs.Tab>
 </Tabs>
 
 #### With Only Icon
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="only-icon" query={{}} />
+    <Widget name='button' variant='only-icon' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy FButton.icon( child: Icon(FIcons.chevronRight), onPress: () {}, ), ```
+    ```dart {2} copy
+    FButton.icon(
+      child: Icon(FIcons.chevronRight),
+      onPress: () {},
+    ),
+    ```
   </Tabs.Tab>
 </Tabs>
 
 #### With Circular Progress
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="button" variant="spinner" query={{}} />
+    <Widget name='button' variant='spinner' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {2} copy FButton( prefix: const FProgress.circularIcon(), label: const Text('Please wait'), onPress: null,
-    ), ```
+    ```dart {2} copy
+    FButton(
+      prefix: const FProgress.circularIcon(),
+      label: const Text('Please wait'),
+      onPress: null,
+    ),
+    ```
   </Tabs.Tab>
 </Tabs>
+

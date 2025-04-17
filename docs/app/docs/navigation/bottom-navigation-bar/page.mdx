@@ -1,19 +1,15 @@
-import { Callout } from 'nextra/components';
+import {Callout} from "nextra/components";
 import { Tabs } from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Bottom Navigation Bar
-
 A bottom navigation bar is usually present at the bottom of root pages.
 It is used to navigate between a small number of views, typically between three and five.
 
 <LinkBadgeGroup>
-  <LinkBadge
-    label="API Reference"
-    href="https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/"
-  />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -62,14 +58,12 @@ It is used to navigate between a small number of views, typically between three 
       }
       ```
     </Tabs.Tab>
-
 </Tabs>
 
 ## Usage
 
 <Callout type="info">
-  A bottom navigation bar is typically used with `FScaffold`. A working example can be found
-  [here](/docs/layout/scaffold).
+    A bottom navigation bar is typically used with `FScaffold`. A working example can be found [here](/docs/layout/scaffold).
 </Callout>
 
 ### `FBottomNavigationBar(...)`

@@ -9,17 +9,17 @@ A persistent sheet is displayed above another widget while still allowing users 
 It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in most cases.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sheet/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
-  A closely related widget is a [modal sheet](/docs/overlay/sheet) which prevents the user from interacting with the
-  rest of the app.
+    A closely related widget is a [modal sheet](/docs/overlay/sheet) which prevents the user from interacting with the
+    rest of the app.
 </Callout>
 
 <Callout type="warning">
-  All calls to `showFPersistentSheet(...)` should be made inside widgets that have either `FScaffold` or `FSheets` as
-  their ancestor.
+    All calls to `showFPersistentSheet(...)` should be made inside widgets that have either `FScaffold` or `FSheets` as
+    their ancestor.
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
@@ -98,10 +98,10 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
             height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: context.theme.colors.background,
+              color: context.theme.colorScheme.background,
               border: side.vertical
-                  ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-                  : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
+                  ? Border.symmetric(horizontal: BorderSide(color: context.theme.colorScheme.border))
+                  : Border.symmetric(vertical: BorderSide(color: context.theme.colorScheme.border)),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
@@ -114,14 +114,14 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
                       'Account',
                       style: context.theme.typography.xl2.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: context.theme.colors.foreground,
+                        color: context.theme.colorScheme.foreground,
                         height: 1.5,
                       ),
                     ),
                     Text(
                       'Make changes to your account here. Click save when you are done.',
                       style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
+                        color: context.theme.colorScheme.mutedForeground,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -161,7 +161,6 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
       }
     }
     ```
-
   </Tabs.Tab>
 </Tabs>
 
@@ -264,10 +263,10 @@ showFPersistentSheet(
             height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: context.theme.colors.background,
+              color: context.theme.colorScheme.background,
               border: side.vertical
-                  ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-                  : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
+                  ? Border.symmetric(horizontal: BorderSide(color: context.theme.colorScheme.border))
+                  : Border.symmetric(vertical: BorderSide(color: context.theme.colorScheme.border)),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
@@ -280,14 +279,14 @@ showFPersistentSheet(
                       'Account',
                       style: context.theme.typography.xl2.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: context.theme.colors.foreground,
+                        color: context.theme.colorScheme.foreground,
                         height: 1.5,
                       ),
                     ),
                     Text(
                       'Make changes to your account here. Click save when you are done.',
                       style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
+                        color: context.theme.colorScheme.mutedForeground,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -327,7 +326,6 @@ showFPersistentSheet(
       }
     }
     ```
-
   </Tabs.Tab>
 </Tabs>
 
@@ -392,6 +390,6 @@ showFPersistentSheet(
       }
     }
     ```
-
   </Tabs.Tab>
 </Tabs>
+

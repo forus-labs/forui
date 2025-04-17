@@ -4,11 +4,10 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Switch
-
 A switch that allows the user to toggle between checked and unchecked.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.switch_/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.switch_/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -36,7 +35,6 @@ A switch that allows the user to toggle between checked and unchecked.
       );
     }
     ```
-
   </Tabs.Tab>
 </Tabs>
 
@@ -87,7 +85,6 @@ FSwitch(
       );
     }
     ```
-
   </Tabs.Tab>
 </Tabs>
 
@@ -122,7 +119,7 @@ FSwitch(
                 'Email Notifications',
                 style: theme.typography.xl2.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: theme.colors.foreground,
+                  color: theme.colorScheme.foreground,
                   height: 1.5,
                 ),
               ),
@@ -141,13 +138,13 @@ FSwitch(
                               'Marketing Emails',
                               style: theme.typography.base.copyWith(
                                 fontWeight: FontWeight.w500,
-                                color: theme.colors.foreground,
+                                color: theme.colorScheme.foreground,
                                 height: 1.5,
                               ),
                             ),
                             Text(
                               'Receive emails about new products, features, and more.',
-                              style: theme.typography.sm.copyWith(color: theme.colors.mutedForeground),
+                              style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
                             ),
                           ],
                         ),
@@ -182,13 +179,13 @@ FSwitch(
                               'Security emails',
                               style: theme.typography.base.copyWith(
                                 fontWeight: FontWeight.w500,
-                                color: theme.colors.foreground,
+                                color: theme.colorScheme.foreground,
                                 height: 1.5,
                               ),
                             ),
                             Text(
                               'Receive emails about your account security.',
-                              style: theme.typography.sm.copyWith(color: theme.colors.mutedForeground),
+                              style: theme.typography.sm.copyWith(color: theme.colorScheme.mutedForeground),
                             ),
                           ],
                         ),
@@ -227,6 +224,5 @@ FSwitch(
       }
     }
     ```
-
   </Tabs.Tab>
 </Tabs>

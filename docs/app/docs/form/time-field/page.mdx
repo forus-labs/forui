@@ -1,59 +1,59 @@
-import { Callout, Tabs } from 'nextra/components';
+import {Callout, Tabs} from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Time Field
-
 A time field allows a time to be selected from a picker or input field.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.time_field/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.time_field/"/>
 </LinkBadgeGroup>
 
 <div className="pb-5">
-  <Callout type="info">
-    It is recommended to use [FTimeField.picker](#ftimefieldpicker) on touch devices and [FTimeField.new](#ftimefield)
-    on non-primarily touch devices.
-  </Callout>
+    <Callout type="info">
+        It is recommended to use [FTimeField.picker](#ftimefieldpicker) on touch devices and [FTimeField.new](#ftimefield)
+         on non-primarily touch devices.
+    </Callout>
 </div>
 
 The input field supports both arrow key navigation:
-
-- Up/Down arrows: Increment/decrement values
-- Left/Right arrows: Move between time segments
+  * Up/Down arrows: Increment/decrement values
+  * Left/Right arrows: Move between time segments
 
 The input field does not support the following locales that use non-western numerals & scripts that require composing,
 it will default to English:
-
-- Arabic (العربية)
-- Assamese (অসমীয়া)
-- Bengali (বাংলা)
-- Persian/Farsi (فارسی)
-- Marathi (मराठी)
-- Burmese (မြန်မာ)
-- Nepali (नेपाली)
-- Pashto (پښتو)
-- Tamil (தமிழ்)
-- Amharic (አማርኛ)
-- Kannada (ಕನ್ನಡ)
-- Korean (한국어)
-- Punjabi (ਪੰਜਾਬੀ)
-- Thai (ไทย)
+  * Arabic (العربية)
+  * Assamese (অসমীয়া)
+  * Bengali (বাংলা)
+  * Persian/Farsi (فارسی)
+  * Marathi (मराठी)
+  * Burmese (မြန်မာ)
+  * Nepali (नेपाली)
+  * Pashto (پښتو)
+  * Tamil (தமிழ்)
+  * Amharic (አማርኛ)
+  * Kannada (ಕನ್ನಡ)
+  * Korean (한국어)
+  * Punjabi (ਪੰਜਾਬੀ)
+  * Thai (ไทย)
 
 The following locales will default to Chinese (zh):
-
-- Chinese (Hong Kong) (繁體中文)
-- Chinese (Taiwan) (繁體中文)
+  * Chinese (Hong Kong) (繁體中文)
+  * Chinese (Taiwan) (繁體中文)
 
 <Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name="time-field" query={{}} />
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart copy const FTimeField( label: Text('Appointment Time'), description: Text('Select a time for your
-    appointment.'), ); ```
-  </Tabs.Tab>
+    <Tabs.Tab>
+        <Widget name='time-field' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        const FTimeField(
+          label: Text('Appointment Time'),
+          description: Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tabs.Tab>
 </Tabs>
 
 ## Usage
@@ -120,25 +120,34 @@ FTimeField.picker(
 ### 24 Hours
 
 <Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name="time-field" query={{ hour24: 'true' }} />
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart {2} copy const FTimeField( hour24: true, label: Text('Appointment Time'), description: Text('Select a time
-    for your appointment.'), ); ```
-  </Tabs.Tab>
+    <Tabs.Tab>
+        <Widget name='time-field'  query={{hour24: 'true'}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {2} copy
+        const FTimeField(
+          hour24: true,
+          label: Text('Appointment Time'),
+          description: Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tabs.Tab>
 </Tabs>
 
 ### Picker Only
 
 <Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name="time-field" variant="picker" query={{}} height={500} />
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart copy const FTimeField.picker( label: Text('Appointment Time'), description: Text('Select a time for your
-    appointment.'), ); ```
-  </Tabs.Tab>
+    <Tabs.Tab>
+        <Widget name='time-field' variant='picker' query={{}} height={500}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        const FTimeField.picker(
+          label: Text('Appointment Time'),
+          description: Text('Select a time for your appointment.'),
+        );
+        ```
+    </Tabs.Tab>
 </Tabs>
 
 ### Custom Validation
@@ -179,7 +188,6 @@ FTimeField.picker(
         }
         ```
     </Tabs.Tab>
-
 </Tabs>
 
 ### Form
@@ -270,5 +278,4 @@ FTimeField.picker(
         }
         ```
     </Tabs.Tab>
-
 </Tabs>

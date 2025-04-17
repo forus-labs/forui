@@ -4,22 +4,32 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Label
-
 Describes a form field with a label, description, and error message (if any). This widget is usually used for custom
 form fields. All form fields in Forui comes with this widget wrapped.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.label/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.label/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="label" variant="horizontal" query={{}} />
+    <Widget name='label' variant='horizontal' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart copy FLabel( axis: Axis.horizontal, label: const Text('Accept terms and conditions'), description: const
-    Text('You agree to our terms and conditions.'), child: const DecoratedBox( decoration: BoxDecoration( borderRadius:
-    BorderRadius.all(Radius.circular(5)), color: Colors.grey, ), child: SizedBox(width: 16, height: 16), ), ); ```
+    ```dart copy
+    FLabel(
+        axis: Axis.horizontal,
+        label: const Text('Accept terms and conditions'),
+        description: const Text('You agree to our terms and conditions.'),
+        child: const DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.grey,
+          ),
+          child: SizedBox(width: 16, height: 16),
+        ),
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
 
@@ -41,42 +51,73 @@ FLabel(
 ## Examples
 
 ### Vertical
-
 <Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name="label" variant="vertical" query={{}} />
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart copy FLabel( axis: Axis.vertical, label: const Text('Email'), description: const Text('Enter your email
-    address.'), child: const DecoratedBox( decoration: BoxDecoration( borderRadius:
-    BorderRadius.all(Radius.circular(5)), color: Colors.grey, ), child: SizedBox(width: 250, height: 30), ), ); ```
-  </Tabs.Tab>
+    <Tabs.Tab>
+        <Widget name='label' variant='vertical' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FLabel(
+            axis: Axis.vertical,
+            label: const Text('Email'),
+            description: const Text('Enter your email address.'),
+            child: const DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                color: Colors.grey,
+              ),
+              child: SizedBox(width: 250, height: 30),
+            ),
+        );
+        ```
+    </Tabs.Tab>
 </Tabs>
 
 ### Disabled
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="label" variant="horizontal" query={{ state: 'disabled' }} />
+    <Widget name='label' variant='horizontal' query={{ state: 'disabled' }}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart copy FLabel( axis: Axis.horizontal, label: const Text('Accept terms and conditions'), description: const
-    Text('You agree to our terms and conditions.'), state: FLabelState.disabled, child: const DecoratedBox( decoration:
-    BoxDecoration( borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey, ), child: SizedBox(width: 16,
-    height: 16), ), ); ```
+    ```dart copy
+    FLabel(
+        axis: Axis.horizontal,
+        label: const Text('Accept terms and conditions'),
+        description: const Text('You agree to our terms and conditions.'),
+        state: FLabelState.disabled,
+        child: const DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.grey,
+          ),
+          child: SizedBox(width: 16, height: 16),
+        ),
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
 
 ### Error
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="label" variant="horizontal" query={{ state: 'error' }} />
+    <Widget name='label' variant='horizontal' query={{ state: 'error' }}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart copy FLabel( axis: Axis.horizontal, label: const Text('Accept terms and conditions'), description: const
-    Text('You agree to our terms and conditions.'), error: const Text('Please accept the terms.'), state:
-    FLabelState.error, child: const DecoratedBox( decoration: BoxDecoration( borderRadius:
-    BorderRadius.all(Radius.circular(5)), color: Colors.grey, ), child: SizedBox(width: 16, height: 16), ), ); ```
+    ```dart copy
+    FLabel(
+        axis: Axis.horizontal,
+        label: const Text('Accept terms and conditions'),
+        description: const Text('You agree to our terms and conditions.'),
+        error: const Text('Please accept the terms.'),
+        state: FLabelState.error,
+        child: const DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.grey,
+          ),
+          child: SizedBox(width: 16, height: 16),
+        ),
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
