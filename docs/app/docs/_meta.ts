@@ -1,10 +1,11 @@
 const meta = {
   index: 'Getting Started',
   themes: 'Themes',
+  cli: 'CLI',
   localization: 'Localization',
   responsive: 'Responsive',
   'icon-library': 'Icon Library',
-  'hooks': 'Hooks',
+  hooks: 'Hooks',
   api_reference: {
     title: 'API Reference',
     href: 'https://pub.dev/documentation/forui',

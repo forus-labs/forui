@@ -78,10 +78,10 @@ It navigates to a new page each time.
             height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: context.theme.colorScheme.background,
+              color: context.theme.colors.background,
               border: side.vertical
-                  ? Border.symmetric(horizontal: BorderSide(color: context.theme.colorScheme.border))
-                  : Border.symmetric(vertical: BorderSide(color: context.theme.colorScheme.border)),
+                  ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
+                  : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
@@ -94,14 +94,14 @@ It navigates to a new page each time.
                       'Account',
                       style: context.theme.typography.xl2.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: context.theme.colorScheme.foreground,
+                        color: context.theme.colors.foreground,
                         height: 1.5,
                       ),
                     ),
                     Text(
                       'Make changes to your account here. Click save when you are done.',
                       style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colorScheme.mutedForeground,
+                        color: context.theme.colors.mutedForeground,
                       ),
                     ),
                     const SizedBox(height: 8),
