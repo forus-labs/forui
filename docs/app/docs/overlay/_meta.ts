@@ -1,4 +1,4 @@
-const meta = {
+export default {
   dialog: 'Dialog',
   sheet: 'Sheet',
   'persistent-sheet': 'Persistent Sheet',
@@ -6,5 +6,3 @@ const meta = {
   'popover-menu': 'Popover Menu',
   tooltip: 'Tooltip',
 };
-
-export default meta;

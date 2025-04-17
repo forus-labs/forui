@@ -1,19 +1,18 @@
-import { Callout, Tabs } from 'nextra/components';
+import {Callout, Tabs} from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Select Group
-
 A group of items that allow users to make a selection from a set of options.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select_group/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.select_group/"/>
 </LinkBadgeGroup>
 
 <Callout type="info">
-  For touch devices, a [select tile group](/docs/tile/select-tile-group) or [select menu
-  tile](/docs/tile/select-menu-tile) is generally recommended over this.
+    For touch devices, a [select tile group](/docs/tile/select-tile-group) or
+    [select menu tile](/docs/tile/select-menu-tile) is generally recommended over this.
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
@@ -44,7 +43,6 @@ A group of items that allow users to make a selection from a set of options.
       ],
     );
     ```
-
   </Tabs.Tab>
 </Tabs>
 
@@ -76,7 +74,6 @@ FSelectGroup<Value>(
 ## Examples
 
 ### Checkbox Form
-
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='select-group' variant='checkbox-form' query={{}} height={400}/>
@@ -152,11 +149,9 @@ FSelectGroup<Value>(
         }
         ```
     </Tabs.Tab>
-
 </Tabs>
 
 ### Radio Form
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='select-group' variant='radio-form' query={{}} height={400}/>
@@ -227,6 +222,5 @@ FSelectGroup<Value>(
       }
     }
     ```
-
   </Tabs.Tab>
 </Tabs>

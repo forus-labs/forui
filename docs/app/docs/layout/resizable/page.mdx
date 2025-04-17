@@ -4,11 +4,10 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Resizable
-
 A box which children can be resized along either the horizontal or vertical axis.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.resizable/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.resizable/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -21,7 +20,7 @@ A box which children can be resized along either the horizontal or vertical axis
       @override
       Widget build(BuildContext context) => DecoratedBox(
             decoration: BoxDecoration(
-              border: Border.all(color: context.theme.colors.border),
+              border: Border.all(color: context.theme.colorScheme.border),
               borderRadius: BorderRadius.circular(8),
             ),
             child: FResizable(
@@ -59,7 +58,7 @@ A box which children can be resized along either the horizontal or vertical axis
 
       @override
       Widget build(BuildContext context) {
-        final FThemeData(:colors, :typography) = context.theme;
+        final FThemeData(:colorScheme, :typography) = context.theme;
         final start = DateTime.fromMillisecondsSinceEpoch(
           (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
           isUtc: true,
@@ -78,15 +77,15 @@ A box which children can be resized along either the horizontal or vertical axis
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(icon, size; 15, color: colors.foreground),
+                  Icon(icon, size; 15, color: colorScheme.foreground),
                   const SizedBox(width: 3),
-                  Text(label, style: typography.sm.copyWith(color: colors.foreground)),
+                  Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
                 ],
               ),
               const SizedBox(height: 5),
               Text(
                 '${format.format(start)} - ${format.format(end)}',
-                style: typography.sm.copyWith(color: colors.foreground),
+                style: typography.sm.copyWith(color: colorScheme.foreground),
               ),
             ],
           ),
@@ -94,7 +93,6 @@ A box which children can be resized along either the horizontal or vertical axis
       }
     }
     ```
-
   </Tabs.Tab>
 </Tabs>
 
@@ -136,7 +134,7 @@ FResizable(
       @override
       Widget build(BuildContext context) => DecoratedBox(
             decoration: BoxDecoration(
-              border: Border.all(color: context.theme.colors.border),
+              border: Border.all(color: context.theme.colorScheme.border),
               borderRadius: BorderRadius.circular(8),
             ),
             child: FResizable(
@@ -175,7 +173,7 @@ FResizable(
 
       @override
       Widget build(BuildContext context) {
-        final FThemeData(:colors, :typography) = context.theme;
+        final FThemeData(:colorScheme, :typography) = context.theme;
         final start = DateTime.fromMillisecondsSinceEpoch(
           (data.offsetPercentage.min * Duration.millisecondsPerDay).round(),
           isUtc: true,
@@ -194,15 +192,15 @@ FResizable(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  icon(height: 15, colorFilter: ColorFilter.mode(colors.foreground, BlendMode.srcIn)),
+                  icon(height: 15, colorFilter: ColorFilter.mode(colorScheme.foreground, BlendMode.srcIn)),
                   const SizedBox(width: 3),
-                  Text(label, style: typography.sm.copyWith(color: colors.foreground)),
+                  Text(label, style: typography.sm.copyWith(color: colorScheme.foreground)),
                 ],
               ),
               const SizedBox(height: 5),
               Text(
                 '${format.format(start)} - ${format.format(end)}',
-                style: typography.sm.copyWith(color: colors.foreground),
+                style: typography.sm.copyWith(color: colorScheme.foreground),
               ),
             ],
           ),
@@ -210,7 +208,6 @@ FResizable(
       }
     }
     ```
-
   </Tabs.Tab>
 </Tabs>
 
@@ -218,15 +215,37 @@ FResizable(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="resizable" variant="horizontal" query={{}} height={400} />
+    <Widget name='resizable' variant='horizontal' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {7} copy Widget build(BuildContext context) => DecoratedBox( decoration: BoxDecoration( border:
-    Border.all(color: context.theme.colors.border), borderRadius: BorderRadius.circular(8), ), child: FResizable( axis:
-    Axis.horizontal, crossAxisExtent: 300, children: [ FResizableRegion( initialExtent: 100, minExtent: 100, builder:
-    (context, data, _) => Align( child: Text('Sidebar', style: context.theme.typography.sm), ), ), FResizableRegion(
-    initialExtent: 300, minExtent: 100, builder: (context, data, _) => Align( child: Text('Content', style:
-    context.theme.typography.sm), ), ), ], ), ); ```
+    ```dart {7} copy
+    Widget build(BuildContext context) => DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colorScheme.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+              child: Text('Content', style: context.theme.typography.sm),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
 
@@ -234,15 +253,38 @@ FResizable(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="resizable" variant="no-thumb" query={{}} height={400} />
+    <Widget name='resizable' variant='no-thumb' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {8} copy Widget build(BuildContext context) => DecoratedBox( decoration: BoxDecoration( border:
-    Border.all(color: context.theme.colors.border), borderRadius: BorderRadius.circular(8), ), child: FResizable( axis:
-    Axis.horizontal, divider: FResizableDivider.divider, crossAxisExtent: 300, children: [ FResizableRegion(
-    initialExtent: 100, minExtent: 100, builder: (context, data, _) => Align( child: Text('Sidebar', style:
-    context.theme.typography.sm), ), ), FResizableRegion( initialExtent: 300, minExtent: 100, builder: (context, data,
-    _) => Align( child: Text('Content', style: context.theme.typography.sm), ), ), ], ), ); ```
+    ```dart {8} copy
+    Widget build(BuildContext context) => DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colorScheme.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        divider: FResizableDivider.divider,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+              child: Text('Content', style: context.theme.typography.sm),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
   </Tabs.Tab>
 </Tabs>
 
@@ -250,14 +292,37 @@ FResizable(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="resizable" variant="no-divider" query={{}} height={400} />
+    <Widget name='resizable' variant='no-divider' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {8} copy Widget build(BuildContext context) => DecoratedBox( decoration: BoxDecoration( border:
-    Border.all(color: context.theme.colors.border), borderRadius: BorderRadius.circular(8), ), child: FResizable( axis:
-    Axis.horizontal, divider: FResizableDivider.none, crossAxisExtent: 300, children: [ FResizableRegion( initialExtent:
-    100, minExtent: 100, builder: (context, data, _) => Align( child: Text('Sidebar', style:
-    context.theme.typography.sm), ), ), FResizableRegion( initialExtent: 300, minExtent: 100, builder: (context, data,
-    _) => Align( child: Text('Content', style: context.theme.typography.sm), ), ), ], ), ); ```
+    ```dart {8} copy
+    Widget build(BuildContext context) => DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(color: context.theme.colorScheme.border),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: FResizable(
+        axis: Axis.horizontal,
+        divider: FResizableDivider.none,
+        crossAxisExtent: 300,
+        children: [
+          FResizableRegion(
+            initialExtent: 100,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+                child: Text('Sidebar', style: context.theme.typography.sm),
+              ),
+          ),
+          FResizableRegion(
+            initialExtent: 300,
+            minExtent: 100,
+            builder: (context, data, _) => Align(
+              child: Text('Content', style: context.theme.typography.sm),
+            ),
+          ),
+        ],
+      ),
+    );
+    ```
   </Tabs.Tab>
 </Tabs>

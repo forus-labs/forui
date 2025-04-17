@@ -4,18 +4,21 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Badge
-
 A badge typically draws attention to specific information, such as labels and counts.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.badge/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.badge/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="badge" query={{}} />
+      <Widget name='badge' query={{}}/>
   </Tabs.Tab>
-  <Tabs.Tab>```dart copy FBadge(label: const Text('Badge')); ```</Tabs.Tab>
+  <Tabs.Tab>
+      ```dart copy
+      FBadge(label: const Text('Badge'));
+      ```
+  </Tabs.Tab>
 </Tabs>
 
 ## Usage
@@ -31,41 +34,61 @@ FBadge(label: const Text('Badge'));
 ```dart copy
 FBadge.raw(builder: (context, style) => Text('Badge'));
 ```
-
 ## Examples
 
 ### Primary
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="badge" query={{}} />
+      <Widget name='badge' query={{}}/>
   </Tabs.Tab>
-  <Tabs.Tab>```dart copy FBadge(label: const Text('Badge')); ```</Tabs.Tab>
+  <Tabs.Tab>
+      ```dart copy
+      FBadge(label: const Text('Badge'));
+      ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Secondary
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="badge" query={{ style: 'secondary' }} />
+      <Widget name='badge' query={{style: 'secondary'}}/>
   </Tabs.Tab>
-  <Tabs.Tab>```dart {3} copy FBadge( label: const Text('Badge'), style: FBadgeStyle.secondary, ); ```</Tabs.Tab>
+  <Tabs.Tab>
+      ```dart {3} copy
+      FBadge(
+        label: const Text('Badge'),
+        style: FBadgeStyle.secondary,
+      );
+      ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Outline
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="badge" query={{ style: 'outline' }} />
+      <Widget name='badge' query={{style: 'outline'}}/>
   </Tabs.Tab>
-  <Tabs.Tab>```dart {3} copy FBadge( label: const Text('Badge'), style: FBadgeStyle.outline, ); ```</Tabs.Tab>
+  <Tabs.Tab>
+      ```dart {3} copy
+      FBadge(
+        label: const Text('Badge'),
+        style: FBadgeStyle.outline,
+      );
+      ```
+  </Tabs.Tab>
 </Tabs>
 
 ### Destructive
-
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name="badge" query={{ style: 'destructive' }} />
+      <Widget name='badge' query={{style: 'destructive'}}/>
   </Tabs.Tab>
-  <Tabs.Tab>```dart {3} copy FBadge( label: const Text('Badge'), style: FBadgeStyle.destructive, ); ```</Tabs.Tab>
+  <Tabs.Tab>
+      ```dart {3} copy
+      FBadge(
+        label: const Text('Badge'),
+        style: FBadgeStyle.destructive,
+      );
+      ```
+  </Tabs.Tab>
 </Tabs>

@@ -4,11 +4,10 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Divider
-
 Visually or semantically separates content.
 
 <LinkBadgeGroup>
-  <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.divider/" />
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.divider/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
@@ -18,7 +17,7 @@ Visually or semantically separates content.
   <Tabs.Tab>
     ```dart copy
     final theme = context.theme;
-    final colors = theme.colors;
+    final colorScheme = theme.colorScheme;
     final typography = theme.typography;
 
     Padding(
@@ -30,13 +29,13 @@ Visually or semantically separates content.
           Text(
             'Flutter Forui',
             style: typography.xl2.copyWith(
-              color: colors.foreground,
+              color: colorScheme.foreground,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
             'An open-source widget library.',
-            style: typography.sm.copyWith(color: colors.mutedForeground),
+            style: typography.sm.copyWith(color: colorScheme.mutedForeground),
           ),
           const FDivider(),
           SizedBox(
@@ -45,17 +44,17 @@ Visually or semantically separates content.
               children: [
                 Text(
                   'Blog',
-                  style: typography.sm.copyWith(color: colors.foreground),
+                  style: typography.sm.copyWith(color: colorScheme.foreground),
                 ),
                 const FDivider(axis : Axis.vertical),
                 Text(
                   'Docs',
-                  style: typography.sm.copyWith(color: colors.foreground),
+                  style: typography.sm.copyWith(color: colorScheme.foreground),
                 ),
                 const FDivider(axis : Axis.vertical),
                 Text(
                   'Source',
-                  style: typography.sm.copyWith(color: colors.foreground),
+                  style: typography.sm.copyWith(color: colorScheme.foreground),
                 ),
               ],
             ),
@@ -64,7 +63,6 @@ Visually or semantically separates content.
       ),
      );
     ```
-
   </Tabs.Tab>
 </Tabs>
 

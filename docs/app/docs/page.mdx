@@ -1,9 +1,11 @@
-import { Callout } from 'nextra/components';
+import {Callout} from "nextra/components";
+
 
 # Getting Started
 
 This guide assumes you have a basic understanding of Flutter and have already set up your development environment.
 If you're new to Flutter, you may follow the official [installation guide](https://docs.flutter.dev/get-started).
+
 
 ## Installation
 
@@ -13,10 +15,11 @@ From your Flutter project directory, run the following command to install Forui.
 flutter pub add forui
 ```
 
+
 ### Forui Icons
 
 <Callout type="info">
-  Forui Icons is bundled with the forui package. You don't need to install it separately if you install `forui`.
+    Forui Icons is bundled with the forui package. You don't need to install it separately if you install `forui`.
 </Callout>
 
 If you would like to only use the icons, run the following command from your Flutter project's directory.
@@ -25,19 +28,12 @@ If you would like to only use the icons, run the following command from your Flu
 flutter pub add forui_assets
 ```
 
+
 ## Usage
 
 To use Forui widgets in your Flutter app, import the Forui package and place the
 [`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) widget underneath `CupertinoApp`,
 `MaterialApp`, or `WidgetsApp` at the root of the widget tree.
-
-You can run:
-
-```shell copy
-dart run forui init
-```
-
-to generate a basic Forui app structure in your project.
 
 It is perfectly fine to use Cupertino/Material widgets alongside Forui widgets!
 
@@ -62,6 +58,7 @@ class Application extends StatelessWidget {
   );
 }
 ```
+
 
 ### Themes
 
