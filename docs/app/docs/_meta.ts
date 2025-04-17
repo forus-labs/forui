@@ -1,4 +1,4 @@
-export default {
+const meta = {
   index: 'Getting Started',
   themes: 'Themes',
   cli: 'CLI',
@@ -33,3 +33,5 @@ export default {
     title: ''
   },
 };
+
+export default meta;
