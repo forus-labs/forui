@@ -134,7 +134,7 @@ final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunction
   /// Creates a [FHeaderActionStyle].
   FHeaderActionStyle({required this.iconStyle, required this.focusedOutlineStyle, required this.tappableStyle});
 
-  /// Creates a [FHeaderActionStyle] that inherits its properties from the given [FColors].
+  /// Creates a [FHeaderActionStyle] that inherits its properties.
   FHeaderActionStyle.inherit({required FColors colors, required FStyle style, required double size})
     : iconStyle = FWidgetStateMap({
         WidgetState.disabled: IconThemeData(color: colors.disable(colors.foreground), size: size),

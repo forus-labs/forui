@@ -302,7 +302,7 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
     this.curve = Curves.easeOutCirc,
   });
 
-  /// Creates a [FRadioStyle] that inherits its properties from the given parameters.
+  /// Creates a [FRadioStyle] that inherits its properties.
   factory FRadioStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return FRadioStyle(
