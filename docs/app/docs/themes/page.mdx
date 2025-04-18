@@ -79,7 +79,7 @@ A more detailed explanation of each class can be found in the [Class Diagram](#c
 It's recommended to use the [CLI](cli) to generate themes and styles in your project. These themes and styles can be
 directly modified to fit your design needs.
 
-This example demonstrates how to generate and use both a theme and `FDividerStyles` in your project.
+This example demonstrates how to generate and use both a theme and `FButtonStyles` in your project.
 
 In your project directory run:
 
@@ -87,31 +87,73 @@ In your project directory run:
 dart run forui init
 ```
 
-To generate a `FDivider`'s styles:
+To generate a `FButton`'s styles:
 
 ```shell copy
-dart run forui style create fdivider
+dart run forui style create button
 ```
 
 This will generate:
-
-```dart filename="lib/theme/divider_styles.dart" copy
-FDividerStyles dividerStyles({
+```dart filename="lib/theme/button_styles.dart" {25-28} copy
+FButtonStyles buttonStyles({
   required FColors colors,
+  required FTypography typography,
   required FStyle style,
-}) => FDividerStyles( // Modify these styles to fit your design needs.
-  horizontalStyle: FDividerStyle(
-    color: colors.secondary,
-    padding: FDividerStyle.defaultPadding.horizontalStyle,
-    width: style.borderWidth,
+}) => FButtonStyles(
+  primary: _buttonStyle(
+    colors: colors,
+    style: style,
+    typography: typography,
+    color: colors.primary,
+    foregroundColor: colors.primaryForeground,
   ),
-  verticalStyle: FDividerStyle(
-    color: colors.secondary,
-    padding: FDividerStyle.defaultPadding.verticalStyle,
-    width: style.borderWidth,
-  ),
+  ...
+);
+
+FButtonStyle _buttonStyle({
+  required FColors colors,
+  required FTypography typography,
+  required FStyle style,
+  required Color color,
+  required Color foregroundColor,
+}) => FButtonStyle(
+  decoration: FWidgetStateMap({
+    // We want to add a decoration for a disabled button when it is hovered or pressed.
+    WidgetState.disabled & (WidgetState.hovered | WidgetState.pressed): BoxDecoration(
+      borderRadius: style.borderRadius,
+      color: colors.hover(colors.disable(color)),
+    ),
+
+    WidgetState.disabled: BoxDecoration(
+      borderRadius: style.borderRadius,
+      color: colors.disable(color),
+    ),
+
+    // Multiple states can be combined to form more complex constraints.
+    // This constraint is equivalent to: `WidgetState.hovered` or `WidgetState.pressed`.
+    // See https://api.flutter.dev/flutter/widgets/WidgetStatesConstraint-class.html
+    WidgetState.hovered | WidgetState.pressed: BoxDecoration(
+      borderRadius: style.borderRadius,
+      color: colors.hover(color),
+    ),
+    WidgetState.any: BoxDecoration(
+      borderRadius: style.borderRadius,
+      color: color,
+    ),
+  }),
+  ...
 );
 ```
+
+`FWidgetStateMap` allows you to define different styles for different combinations of states for a widget. This
+combination of states is known as a "constraint".
+
+Constraints are applied in the order they are defined (top to bottom). The first matching constraint will be used.
+This means that more specific constraints should be defined above more general ones.
+
+Most `FWidgetStateMap` properties only support a subset of `WidgetState`s. For example, `FButtonStyle.decoration` only
+supports `WidgetState.disabled`, `WidgetState.hovered`, `WidgetState.pressed` and `WidgetState.focused`. A property's
+supported states are documented in its API docs.
 
 To generate a theme based on [zinc](#predefined-themes):
 
@@ -119,7 +161,7 @@ To generate a theme based on [zinc](#predefined-themes):
 dart run forui theme create zinc
 ```
 
-This will generate a theme which you can add the generated divider styles to:
+This will generate a theme which you can add the generated button styles to:
 
 ```dart filename="lib/theme/theme.dart" {1, 19, 39} copy
 import 'divider_styles.dart';
@@ -140,7 +182,7 @@ FThemeData get zincLight {
     typography: typography,
     style: style,
     // Add your previously generated divider styles and other generated styles here.
-    dividerStyles: dividerStyles(colors: colors, style: style),
+    buttonStyles: buttonStyles(colors: colors, style: style),
   );
 }
 
@@ -160,7 +202,7 @@ FThemeData get zincDark {
     typography: typography,
     style: style,
     // Add your previously generated divider styles and other generated styles here.
-    dividerStyles: dividerStyles(colors: colors, style: style),
+    buttonStyles: buttonStyles(colors: colors, style: style),
   );
 }
 
@@ -385,9 +427,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-## Override Widget Styles
-
-### Override Individual Widget Styles
+## Override Individual Widget Styles
 
 In certain cases, you may want to override the theme for a specific widget. This can be easily achieved by using the
 `copyWith(...)` function.
@@ -419,68 +459,52 @@ Widget build(BuildContext context) {
 `FWidgetStateMap` allows you to define different styles for different combinations of states for a widget. This
 combination of states is known as a "constraint".
 
-<Callout type="info">
-    In the example below, we add a new decoration to a generated `FButton` style. The style is generated by the
-    [CLI](cli) via:
-    ```shell copy
-    dart run forui style create button
-    ```
-</Callout>
-
-```dart filename="lib/theme/button_styles.dart" {25-28} copy
-FButtonStyles buttonStyles({
-  required FColors colors,
-  required FTypography typography,
-  required FStyle style,
-}) => FButtonStyles(
-  primary: _buttonStyle(
-    colors: colors,
-    style: style,
-    typography: typography,
-    color: colors.primary,
-    foregroundColor: colors.primaryForeground,
-  ),
-  ...
-);
-
-FButtonStyle _buttonStyle({
-  required FColors colors,
-  required FTypography typography,
-  required FStyle style,
-  required Color color,
-  required Color foregroundColor,
-}) => FButtonStyle(
-  decoration: FWidgetStateMap({
-    // We want to add a decoration for a disabled button when it is hovered or pressed.
-    WidgetState.disabled & (WidgetState.hovered | WidgetState.pressed): BoxDecoration(
-      borderRadius: style.borderRadius,
-      color: colors.hover(colors.disable(color)),
-    ),
-
-    // <----- Generated constraints ----->
-    WidgetState.disabled: BoxDecoration(
-      borderRadius: style.borderRadius,
-      color: colors.disable(color),
-    ),
-
-    // Multiple states can be combined to form more complex constraints.
-    // This constraint is equivalent to: `WidgetState.hovered` or `WidgetState.pressed`.
-    // See https://api.flutter.dev/flutter/widgets/WidgetStatesConstraint-class.html
-    WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-      borderRadius: style.borderRadius,
-      color: colors.hover(color),
-    ),
-    WidgetState.any: BoxDecoration(
-      borderRadius: style.borderRadius,
-      color: color,
-    ),
-  }),
-  ...
-);
-```
-
 Constraints are applied in the order they are defined (top to bottom). The first matching constraint will be used.
 This means that more specific constraints should be defined above more general ones.
+
+```dart {8, 22, 36} copy
+@override
+Widget build(BuildContext context) {
+  final style = context.theme.buttonStyles.primary;
+
+  return FButton(
+    style: style.copyWith(
+      // Override the decoration for the constraints that are hovered.
+      decoration: style.decoration.replaceAllWhere({WidgetState.hovered}, BoxDecoration()),
+    ),
+    onPress: () {},
+    child: const Text('Button'),
+  );
+}
+
+@override
+Widget build(BuildContext context) {
+  final style = context.theme.buttonStyles.primary;
+
+  return FButton(
+    style: style.copyWith(
+      // Override the decoration for the first constraint that is hovered.
+      decoration: style.decoration.replaceFirstWhere({WidgetState.hovered}, BoxDecoration()),
+    ),
+    onPress: () {},
+    child: const Text('Button'),
+  );
+}
+
+@override
+Widget build(BuildContext context) {
+  final style = context.theme.buttonStyles.primary;
+
+  return FButton(
+    style: style.copyWith(
+      // Override the decoration for the last constraint that is hovered.
+      decoration: style.decoration.replaceLastWhere({WidgetState.hovered}, BoxDecoration()),
+    ),
+    onPress: () {},
+    child: const Text('Button'),
+  );
+}
+```
 
 Most `FWidgetStateMap` properties only support a subset of `WidgetState`s. For example, `FButtonStyle.decoration` only
 supports `WidgetState.disabled`, `WidgetState.hovered`, `WidgetState.pressed` and `WidgetState.focused`. A property's
