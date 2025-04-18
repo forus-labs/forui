@@ -100,7 +100,7 @@ class FRadio extends StatelessWidget {
       if (error != null) WidgetState.error,
       if (value) WidgetState.selected,
     };
-    
+
     return FTappable(
       style: style.tappableStyle,
       semanticsLabel: semanticsLabel,

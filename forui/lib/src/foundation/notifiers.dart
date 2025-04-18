@@ -84,13 +84,13 @@ abstract class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
 
   FMultiValueNotifier._(super._value);
 
-  /// Returns true if the notifier contains the [element].
-  bool contains(T element) => value.contains(element);
+  /// Returns true if the notifier contains the [value].
+  bool contains(T value) => super.value.contains(value);
 
-  /// Adds or removes the [element] from this notifier.
+  /// Adds or removes the [value] from this notifier.
   ///
   /// Subclasses _must_ call [notifyUpdateListeners] after changing the value.
-  void update(T element, {required bool add});
+  void update(T value, {required bool add});
 
   /// Registers a closure to be called whenever [update] successfully adds/removes an element if not null.
   void addUpdateListener(ValueChanged<(T, bool)>? listener) {
@@ -129,22 +129,22 @@ class _MultiNotifier<T> extends FMultiValueNotifier<T> {
       super._(values ?? {});
 
   @override
-  void update(T element, {required bool add}) {
+  void update(T value, {required bool add}) {
     if (add) {
-      if (max case final max? when max <= value.length) {
+      if (max case final max? when max <= this.value.length) {
         return;
       }
 
-      super.value = {...value, element};
-      notifyUpdateListeners(element, add: add);
+      super.value = {...this.value, value};
+      notifyUpdateListeners(value, add: add);
 
     } else {
-      if (value.length <= min) {
+      if (this.value.length <= min) {
         return;
       }
 
-      super.value = {...value}..remove(element);
-      notifyUpdateListeners(element, add: add);
+      super.value = {...this.value}..remove(value);
+      notifyUpdateListeners(value, add: add);
     }
   }
 
@@ -162,13 +162,13 @@ class _RadioNotifier<T> extends FMultiValueNotifier<T> {
   _RadioNotifier({T? value}) : super._({if (value != null) value});
 
   @override
-  void update(T element, {required bool add}) {
-    if (!add || contains(element)) {
+  void update(T value, {required bool add}) {
+    if (!add || contains(value)) {
       return;
     }
 
-    super.value = {element};
-    notifyUpdateListeners(element, add: add);
+    super.value = {value};
+    notifyUpdateListeners(value, add: add);
   }
 
   @override
