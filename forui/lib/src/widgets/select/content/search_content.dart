@@ -181,11 +181,11 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             prefixBuilder:
                 prefix == null
                     ? null
-                    : (context, style, child) => prefix(context, (widget.style.searchStyle, style), child),
+                    : (context, style, child) => prefix(context, (widget.style.searchStyle, style.$1, style.$2), child),
             suffixBuilder:
                 suffix == null
                     ? null
-                    : (context, style, child) => suffix(context, (widget.style.searchStyle, style), child),
+                    : (context, style, child) => suffix(context, (widget.style.searchStyle, style.$1, style.$2), child),
             clearable: widget.properties.clearable,
           ),
         ),
@@ -271,13 +271,8 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
   FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style).transform(
-          (style) => style.copyWith(
-            enabledStyle: style.enabledStyle.copyWith(
-              focusedStyle: style.enabledStyle.focusedStyle.copyWith(color: Colors.transparent, width: 0),
-              unfocusedStyle: style.enabledStyle.unfocusedStyle.copyWith(color: Colors.transparent, width: 0),
-            ),
-          ),
+        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style).copyWith(
+          border: FWidgetStateMap.all(const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))),
         ),
         iconStyle: IconThemeData(size: 15, color: colors.mutedForeground),
         dividerStyle: FDividerStyles.inherit(

@@ -111,7 +111,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                 onFocusChange: widget.onFocusChange,
                 onPress: () => controller.toggle(index),
                 builder:
-                    (_, data, child) => Padding(
+                    (_, states, _) => Padding(
                       padding: style.titlePadding,
                       child: Row(
                         children: [
@@ -121,21 +121,21 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                                 applyHeightToFirstAscent: false,
                                 applyHeightToLastDescent: false,
                               ),
-                              style:
-                                  data.hovered || data.pressed
-                                      ? style.titleTextStyle.copyWith(decoration: TextDecoration.underline)
-                                      : style.titleTextStyle,
+                              style: style.titleTextStyle.resolve(states),
                               child: widget.title,
                             ),
                           ),
-                          FFocusedOutline(style: style.focusedOutlineStyle, focused: data.focused, child: child!),
+                          FFocusedOutline(
+                            style: style.focusedOutlineStyle,
+                            focused: states.contains(WidgetState.focused),
+                            child: Transform.rotate(
+                              angle: (_controller!.value * angle + 90) * math.pi / 180.0,
+                              child: IconTheme(data: style.iconStyle.resolve(states), child: widget.icon),
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                child: Transform.rotate(
-                  angle: (_controller!.value * angle + 90) * math.pi / 180.0,
-                  child: IconTheme(data: style.iconStyle, child: widget.icon),
-                ),
               ),
               // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
               // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the

@@ -18,7 +18,7 @@ void main() {
         TestScaffold(
           child: const FLabel(
             axis: Axis.horizontal,
-            state: FLabelState.error,
+            states: {WidgetState.error},
             error: Text('Error'),
             child: Text('Child'),
           ),
@@ -37,7 +37,7 @@ void main() {
             label: Text('Label'),
             description: Text('Description'),
             error: Text('Error'),
-            state: FLabelState.error,
+            states: {WidgetState.error},
             child: Text('Child'),
           ),
         ),
@@ -57,7 +57,7 @@ void main() {
             label: Text('Label'),
             description: Text('Description'),
             error: Text('Error'),
-            state: FLabelState.error,
+            states: {WidgetState.error},
             child: Text('Child'),
           ),
         ),

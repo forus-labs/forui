@@ -64,7 +64,7 @@ class ConstructorFragment {
     }
 
     final parameters = <String>[];
-    var superInherit = false;
+    var abort = false;
     var constructorParameters = match.constructor.parameters.toSource();
 
     for (final parameter in match.constructor.parameters.parameters) {
@@ -72,7 +72,7 @@ class ConstructorFragment {
 
       if (parameter case final DefaultFormalParameter superParameter) {
         if (superParameter.parameter case final SuperFormalParameter superParameter) {
-          superInherit = true;
+          abort = true;
           constructorParameters = constructorParameters.replaceAll(
             'super.${parameter.name!.lexeme}',
             '${superParameter.declaredElement?.type} ${parameter.name!.lexeme}',
@@ -86,7 +86,13 @@ class ConstructorFragment {
       }
     }
 
-    if (superInherit) {
+    for (final initializer in match.constructor.initializers) {
+      if (initializer case final SuperConstructorInvocation _) {
+        abort = true;
+      }
+    }
+
+    if (abort) {
       // We give up inlining the inherit constructor if it calls super.inherit(...). Shit's hard.
       return '$type ${type.substring(1).toCamelCase()}$constructorParameters => $type.inherit(${parameters.join()});';
     }

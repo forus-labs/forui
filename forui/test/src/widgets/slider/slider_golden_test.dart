@@ -226,22 +226,22 @@ void main() {
             FSliderMark(
               value: 0.0,
               label: const Text('0'),
-              style: sliderStyle.enabledStyle.markStyle.copyWith(labelOffset: 20, labelAnchor: positive),
+              style: sliderStyle.markStyle.copyWith(labelOffset: 20, labelAnchor: positive),
             ),
             FSliderMark(
               value: 0.25,
               label: const Text('25'),
-              style: sliderStyle.enabledStyle.markStyle.copyWith(labelOffset: 1, labelAnchor: positive),
+              style: sliderStyle.markStyle.copyWith(labelOffset: 1, labelAnchor: positive),
             ),
             FSliderMark(
               value: 0.75,
               label: const Text('75'),
-              style: sliderStyle.enabledStyle.markStyle.copyWith(labelOffset: -1, labelAnchor: negative),
+              style: sliderStyle.markStyle.copyWith(labelOffset: -1, labelAnchor: negative),
             ),
             FSliderMark(
               value: 1.0,
               label: const Text('100'),
-              style: sliderStyle.enabledStyle.markStyle.copyWith(labelOffset: -20, labelAnchor: negative),
+              style: sliderStyle.markStyle.copyWith(labelOffset: -20, labelAnchor: negative),
             ),
           ];
         });
@@ -265,9 +265,7 @@ void main() {
             TestScaffold.app(
               child: FSlider(
                 style: sliderStyle.copyWith(
-                  labelLayoutStyle: sliderStyle.labelLayoutStyle.copyWith(
-                    childPadding: const EdgeInsets.only(left: 20, top: 40, right: 10, bottom: 30),
-                  ),
+                  childPadding: const EdgeInsets.only(left: 20, top: 40, right: 10, bottom: 30),
                 ),
                 controller: autoDispose(FContinuousSliderController(selection: FSliderSelection(min: 0.30, max: 0.60))),
                 layout: layout,

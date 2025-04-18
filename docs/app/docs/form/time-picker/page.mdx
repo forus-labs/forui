@@ -4,11 +4,13 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Time Picker
+
 A time picker that allows a time to be selected.
 
 The picker supports arrow key navigation:
-  * Up/Down arrows: Increment/decrement selected value
-  * Left/Right arrows: Move between wheels
+
+- Up/Down arrows: Increment/decrement selected value
+- Left/Right arrows: Move between wheels
 
 Recommended for touch devices.
 
@@ -90,6 +92,7 @@ const FTimePicker(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>
 
 ### With Custom Intervals
@@ -121,6 +124,7 @@ const FTimePicker(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>
 
 ### Animated
@@ -148,7 +152,7 @@ const FTimePicker(
             children: [
               SizedBox(height: 300, width: 250, child: FTimePicker(controller: _controller)),
               FButton(
-                label: const Text('Funny button'),
+                child: const Text('Funny button'),
                 onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
               ),
             ],
@@ -162,6 +166,5 @@ const FTimePicker(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>
-
-

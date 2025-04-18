@@ -39,7 +39,7 @@ class FPopoverMenu extends StatefulWidget {
   /// Defaults to [FTileDivider.full].
   final FTileDivider divider;
 
-  /// The point on the menu (floating content) that connects with the child, at the child's anchor.
+  /// The point on the menu (floating content) that connects with the child at the child's anchor.
   ///
   /// For example, [Alignment.topCenter] means the top-center point of the menu will connect with the child.
   /// See [childAnchor] for changing the child's anchor.
@@ -47,10 +47,10 @@ class FPopoverMenu extends StatefulWidget {
   /// Defaults to [Alignment.topCenter].
   final AlignmentGeometry menuAnchor;
 
-  /// The point on the child that connects with the menu, at the menu's anchor.
+  /// The point on the child that connects with the menu at the menu's anchor.
   ///
   /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the menu.
-  /// See [menuAnchor] for changing the popover's anchor.
+  /// See [menuAnchor] for changing the menu's anchor.
   ///
   /// Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry childAnchor;

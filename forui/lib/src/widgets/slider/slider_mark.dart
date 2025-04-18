@@ -56,8 +56,10 @@ final class FSliderMark with Diagnosticable {
 /// A [FSlider] mark's style.
 final class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
   /// The tick's color.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final Color tickColor;
+  final FWidgetStateMap<Color> tickColor;
 
   /// The tick's size. Defaults to 3.
   ///
@@ -67,8 +69,10 @@ final class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
   final double tickSize;
 
   /// The label's default text style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final TextStyle labelTextStyle;
+  final FWidgetStateMap<TextStyle> labelTextStyle;
 
   /// The label's anchor to which the [labelOffset] is applied.
   @override

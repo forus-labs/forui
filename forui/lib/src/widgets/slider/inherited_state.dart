@@ -3,29 +3,24 @@ import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
-import 'package:forui/forui.dart';
-
 @internal
-class InheritedState extends InheritedWidget {
-  static InheritedState of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<InheritedState>();
-    assert(result != null, 'No InheritedState found in context');
+class InheritedStates extends InheritedWidget {
+  static InheritedStates of(BuildContext context) {
+    final result = context.dependOnInheritedWidgetOfExactType<InheritedStates>();
+    assert(result != null, 'No InheritedStates found in context');
     return result!;
   }
 
-  final FSliderStateStyle style;
-  final FLabelState state;
+  final Set<WidgetState> states;
 
-  const InheritedState({required this.style, required this.state, required super.child, super.key});
+  const InheritedStates({required this.states, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(InheritedState old) => style != old.style || state != old.state;
+  bool updateShouldNotify(InheritedStates old) => !setEquals(states, states);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('state', state));
+    properties.add(IterableProperty('states', states));
   }
 }

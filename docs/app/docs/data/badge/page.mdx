@@ -4,11 +4,15 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Badge
-A badge typically draws attention to specific information, such as labels and counts.
+
+A badge draws attention to specific information, such as labels and counts. Use badges to display status, notifications, or small pieces of information that need to stand out.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.badge/"/>
+    <LinkBadge label="Source Code" href="https://github.com/forus-labs/forui/blob/main/lib/src/widgets/badge/badge.dart"/>
 </LinkBadgeGroup>
+
+## Overview
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -16,7 +20,17 @@ A badge typically draws attention to specific information, such as labels and co
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart copy
-      FBadge(label: const Text('Badge'));
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FBadge(child: const Text('New')),
+          const SizedBox(width: 8),
+          FBadge(
+            child: const Text('3'),
+            style: FBadgeStyle.secondary,
+          ),
+        ],
+      );
       ```
   </Tabs.Tab>
 </Tabs>
@@ -26,7 +40,7 @@ A badge typically draws attention to specific information, such as labels and co
 ### `FBadge(...)`
 
 ```dart copy
-FBadge(label: const Text('Badge'));
+FBadge(child: const Text('Badge'));
 ```
 
 ### `FBadge.raw(...)`
@@ -34,60 +48,84 @@ FBadge(label: const Text('Badge'));
 ```dart copy
 FBadge.raw(builder: (context, style) => Text('Badge'));
 ```
+
 ## Examples
 
-### Primary
+### Variants
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{}}/>
+      <Widget name='badge' variant='variants' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
       ```dart copy
-      FBadge(label: const Text('Badge'));
-      ```
-  </Tabs.Tab>
-</Tabs>
-
-### Secondary
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-      <Widget name='badge' query={{style: 'secondary'}}/>
-  </Tabs.Tab>
-  <Tabs.Tab>
-      ```dart {3} copy
-      FBadge(
-        label: const Text('Badge'),
-        style: FBadgeStyle.secondary,
+      Column(
+        children: [
+          FBadge(
+            child: const Text('Primary'),
+            style: FBadgeStyle.primary,
+          ),
+          const SizedBox(height: 8),
+          FBadge(
+            child: const Text('Secondary'),
+            style: FBadgeStyle.secondary,
+          ),
+          const SizedBox(height: 8),
+          FBadge(
+            child: const Text('Outline'),
+            style: FBadgeStyle.outline,
+          ),
+          const SizedBox(height: 8),
+          FBadge(
+            child: const Text('Destructive'),
+            style: FBadgeStyle.destructive,
+          ),
+        ],
       );
       ```
   </Tabs.Tab>
 </Tabs>
 
-### Outline
+### With Counters
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{style: 'outline'}}/>
+      <Widget name='badge' variant='counters' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {3} copy
-      FBadge(
-        label: const Text('Badge'),
-        style: FBadgeStyle.outline,
+      ```dart copy
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FBadge(
+            child: const Text('3'),
+            style: FBadgeStyle.primary,
+          ),
+          const SizedBox(width: 8),
+          FBadge(
+            child: const Text('99+'),
+            style: FBadgeStyle.secondary,
+          ),
+        ],
       );
       ```
   </Tabs.Tab>
 </Tabs>
 
-### Destructive
+### Custom Styling
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-      <Widget name='badge' query={{style: 'destructive'}}/>
+      <Widget name='badge' variant='custom' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {3} copy
-      FBadge(
-        label: const Text('Badge'),
-        style: FBadgeStyle.destructive,
+      ```dart copy
+      FBadge.raw(
+        builder: (context, style) => Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: style.decoration,
+          child: Text('Custom', style: style.contentStyle.labelTextStyle),
+        ),
       );
       ```
   </Tabs.Tab>

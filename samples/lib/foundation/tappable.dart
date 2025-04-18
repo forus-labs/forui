@@ -12,9 +12,12 @@ class TappablePage extends Sample {
   @override
   Widget sample(BuildContext context) => FTappable(
     builder:
-        (context, data, child) => Container(
+        (context, states, child) => Container(
           decoration: BoxDecoration(
-            color: data.hovered ? context.theme.colors.secondary : context.theme.colors.background,
+            color:
+                (states.contains(WidgetState.hovered) || states.contains(WidgetState.pressed))
+                    ? context.theme.colors.secondary
+                    : context.theme.colors.background,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: context.theme.colors.border),
           ),

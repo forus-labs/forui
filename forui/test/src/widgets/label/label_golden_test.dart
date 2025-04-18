@@ -18,7 +18,7 @@ void main() {
               label: const Text('Email'),
               description: const Text('Enter your email address.'),
               error: const Text('Please enter a valid email address.'),
-              state: FLabelState.error,
+              states: const {WidgetState.error},
               child: const SizedBox(width: 16, height: 16),
             ),
           ),
@@ -29,8 +29,12 @@ void main() {
     });
 
     for (final theme in TestScaffold.themes) {
-      for (final state in FLabelState.values) {
-        testWidgets('${theme.name} horizontal with $state', (tester) async {
+      for (final states in [
+        {WidgetState.disabled},
+        {WidgetState.error},
+        <WidgetState>{},
+      ]) {
+        testWidgets('${theme.name} horizontal with $states', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
@@ -41,7 +45,7 @@ void main() {
                   label: const Text('Email'),
                   description: const Text('Enter your email address.'),
                   error: const Text('Please enter a valid email address.'),
-                  state: state,
+                  states: states,
                   child: const DecoratedBox(
                     decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
                     child: SizedBox(width: 16, height: 16),
@@ -51,11 +55,15 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$state.png'));
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$states.png'));
         });
       }
 
-      for (final state in FLabelState.values) {
+      for (final state in [
+        {WidgetState.disabled},
+        {WidgetState.error},
+        <WidgetState>{},
+      ]) {
         testWidgets('${theme.name} vertical with $state', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -65,7 +73,7 @@ void main() {
                 label: const Text('Email'),
                 description: const Text('Enter your email address.'),
                 error: const Text('Please enter a valid email address.'),
-                state: state,
+                states: state,
                 child: const DecoratedBox(
                   decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
                   child: SizedBox(width: 200, height: 30),

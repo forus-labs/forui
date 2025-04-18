@@ -282,54 +282,6 @@ void main() {
           );
         });
 
-        testWidgets('constrained height, clamped scrolling physics - ${theme.name} - $divider', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold(
-              theme: theme.data,
-              child: FTileGroup.merge(
-                maxHeight: 100,
-                label: const Text('Network'),
-                description: const Text('Description'),
-                divider: divider,
-                children: [
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: const Icon(FIcons.wifi),
-                        title: const Text('WiFi'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: const Icon(FIcons.mail),
-                        title: const Text('Mail'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                      ),
-                      FTile(
-                        prefixIcon: const Icon(FIcons.bluetooth),
-                        title: const Text('Bluetooth'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-
-          await tester.drag(find.byType(FTile).at(1), const Offset(0, 100));
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('tile/group/merge/${theme.name}/clamped-physics/$divider.png'),
-          );
-        });
-
         // The rounded corners will not be colored properly. This is a known issue that's a side effect of clipping the
         // tiles. There isn't a known, straightforward solution to this. It is minor enough that it is acceptable.
         testWidgets('focused on non-first bottom viewport - ${theme.name} - $divider', (tester) async {
@@ -400,7 +352,6 @@ void main() {
             child: FTileGroup.merge(
               label: const Text('Network'),
               description: const Text('Description'),
-              error: const Text('This should not appear'),
               enabled: false,
               children: [
                 FTileGroup(

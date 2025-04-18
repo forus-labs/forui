@@ -4,11 +4,15 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Avatar
-An image element with a fallback for representing the user.
+
+A circular image component that displays user profile pictures with a fallback option. The Avatar component provides a consistent way to represent users in your application, displaying profile images with fallbacks to initials or icons when images are unavailable.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.avatar/"/>
+    <LinkBadge label="Source Code" href="https://github.com/forus-labs/forui/blob/main/lib/src/widgets/avatar/avatar.dart"/>
 </LinkBadgeGroup>
+
+## Overview
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -19,100 +23,142 @@ An image element with a fallback for representing the user.
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // With valid image.
+          // With valid image
           FAvatar(
             image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
             fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
 
-          // With invalid image and fallback.
+          // With invalid image and fallback
           FAvatar(
             image: const NetworkImage(''),
             fallback: const Text('MN'),
           ),
           const SizedBox(width: 10),
 
-          // With invalid image without fallback.
+          // With invalid image without fallback
           FAvatar(image: const NetworkImage('')),
         ],
       );
       ```
+
   </Tabs.Tab>
 </Tabs>
 
 ## Usage
 
-### `FAvatar(...)`
+### Basic Usage
+
+Display a user's profile picture with a fallback to their initials.
 
 ```dart copy
 FAvatar(
-  image: const NetworkImage('https://raw.githubusercontent.com/forus-labs/forui/main/samples/assets/avatar.png'),
-  fallback: const Text('MN'),
+  image: const NetworkImage('https://example.com/profile.jpg'),
+  fallback: const Text('JD'),
 );
 ```
 
-### `FAvatar.raw(...)`
+### Custom Fallback
+
+Customize the fallback content that appears when the image fails to load.
 
 ```dart copy
-// Raw constructor - with icon.
+FAvatar(
+  image: const NetworkImage('https://example.com/profile.jpg'),
+  fallback: Icon(FIcons.user, color: context.theme.colors.mutedForeground),
+);
+```
+
+### Raw Constructor
+
+Use the raw constructor for complete customization of the avatar content.
+
+```dart copy
+// Raw constructor with icon
 FAvatar.raw(
   child: Icon(FIcons.baby, color: theme.colors.mutedForeground),
 );
 
-// Raw constructor - with text.
+// Raw constructor with text
 FAvatar.raw(child: const Text('MN'));
+
+// Raw constructor with custom widget
+FAvatar.raw(
+  child: Container(
+    decoration: BoxDecoration(
+      color: theme.colors.primary,
+      shape: BoxShape.circle,
+    ),
+    child: const Icon(FIcons.star, color: Colors.white),
+  ),
+);
 ```
 
 ## Examples
 
-### Invalid Image
+### Different Sizes
+
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='avatar' variant='invalid' query={{}}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart {7} copy
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // With fallback.
-            FAvatar(
-              image: const AssetImage(''),
-              fallback: const Text('MN'),
-            ),
-            const SizedBox(width: 10),
-
-            // Without fallback.
-            FAvatar(image: const AssetImage('')),
-          ],
-        );
-        ```
-    </Tabs.Tab>
-</Tabs>
-
-### Raw Constructor
-<Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='avatar' variant='raw' query={{}}/>
+        <Widget name='avatar' variant='sizes' query={{}}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Raw constructor - without child.
-            FAvatar.raw(),
-            const SizedBox(width: 10),
-
-            // Raw constructor - with icon.
-            FAvatar.raw(
-              child: Icon(FIcons.baby, color: theme.colors.mutedForeground),
+            FAvatar(
+              size: 24,
+              image: const NetworkImage('https://example.com/small.jpg'),
+              fallback: const Text('S'),
             ),
             const SizedBox(width: 10),
+            FAvatar(
+              size: 32,
+              image: const NetworkImage('https://example.com/medium.jpg'),
+              fallback: const Text('M'),
+            ),
+            const SizedBox(width: 10),
+            FAvatar(
+              size: 48,
+              image: const NetworkImage('https://example.com/large.jpg'),
+              fallback: const Text('L'),
+            ),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
 
-            // Raw constructor - with text.
-            FAvatar.raw(child: const Text('MN')),
+### Grouped Avatars
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='avatar' variant='group' query={{}}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        Stack(
+          children: [
+            FAvatar(
+              image: const NetworkImage('https://example.com/user1.jpg'),
+              fallback: const Text('U1'),
+            ),
+            Positioned(
+              left: 20,
+              child: FAvatar(
+                image: const NetworkImage('https://example.com/user2.jpg'),
+                fallback: const Text('U2'),
+              ),
+            ),
+            Positioned(
+              left: 40,
+              child: FAvatar(
+                image: const NetworkImage('https://example.com/user3.jpg'),
+                fallback: const Text('U3'),
+              ),
+            ),
           ],
         );
         ```

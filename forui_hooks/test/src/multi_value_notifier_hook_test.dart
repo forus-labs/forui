@@ -17,9 +17,9 @@ void main() {
             controller = useFMultiValueNotifier<int>();
             return FSelectGroup<int>(
               controller: controller,
-              children: const [
-                FSelectGroupItem.checkbox(value: 0, label: Text('0')),
-                FSelectGroupItem.checkbox(value: 1, label: Text('1')),
+              children: [
+                FCheckbox.grouped(value: 0, label: const Text('0')),
+                FCheckbox.grouped(value: 1, label: const Text('1')),
               ],
             );
           },
@@ -42,9 +42,9 @@ void main() {
             controller = useFRadioMultiValueNotifier<int>();
             return FSelectGroup<int>(
               controller: controller,
-              children: const [
-                FSelectGroupItem.radio(value: 0, label: Text('0')),
-                FSelectGroupItem.radio(value: 1, label: Text('1')),
+              children: [
+                FRadio.grouped(value: 0, label: const Text('0')),
+                FRadio.grouped(value: 1, label: const Text('1')),
               ],
             );
           },

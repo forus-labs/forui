@@ -7,22 +7,7 @@ import 'package:forui/forui.dart';
 
 part 'label.style.dart';
 
-/// The [FLabel]'s style.
-typedef FLabelStyle = ({FLabelLayoutStyle layout, FLabelStateStyles state});
-
-/// The label's state.
-enum FLabelState {
-  /// The label is enabled.
-  enabled,
-
-  /// The label is disabled.
-  disabled,
-
-  /// The label has an error.
-  error,
-}
-
-/// A label that describes a form field with a label, description, and error message (if any).
+/// A component that describes a form field with a label, description, and error message (if any).
 ///
 /// There are two different [Axis] variants for labels:
 /// * [Axis.horizontal] - Used in [FCheckbox].
@@ -61,13 +46,11 @@ final class FLabel extends StatelessWidget {
   /// The error message.
   final Widget? error;
 
-  /// The axis that represents.
+  /// The axis that determines the layout direction.
   final Axis axis;
 
-  /// The state of the label.
-  ///
-  /// If state != [FLabelState.error], the [error] will not be displayed.
-  final FLabelState state;
+  /// The label's states.
+  final Set<WidgetState> states;
 
   /// The child.
   final Widget child;
@@ -80,7 +63,7 @@ final class FLabel extends StatelessWidget {
     this.label,
     this.description,
     this.error,
-    this.state = FLabelState.enabled,
+    this.states = const {},
     super.key,
   });
 
@@ -94,7 +77,7 @@ final class FLabel extends StatelessWidget {
         };
 
     if (label == null && description == null && error == null) {
-      return Padding(padding: style.layout.childPadding, child: child);
+      return Padding(padding: style.childPadding, child: child);
     }
 
     return switch (axis) {
@@ -103,7 +86,7 @@ final class FLabel extends StatelessWidget {
         label: label,
         description: description,
         error: error,
-        state: state,
+        states: states,
         child: child,
       ),
       Axis.vertical => _FVerticalLabel(
@@ -111,7 +94,7 @@ final class FLabel extends StatelessWidget {
         label: label,
         description: description,
         error: error,
-        state: state,
+        states: states,
         child: child,
       ),
     };
@@ -122,16 +105,16 @@ final class FLabel extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty('axis', axis))
-      ..add(EnumProperty('state', state));
+      ..add(IterableProperty('states', states));
   }
 }
 
-final class _FHorizontalLabel extends StatelessWidget {
+class _FHorizontalLabel extends StatelessWidget {
   final FLabelStyle style;
   final Widget? label;
   final Widget? description;
   final Widget? error;
-  final FLabelState state;
+  final Set<WidgetState> states;
   final Widget child;
 
   const _FHorizontalLabel({
@@ -139,62 +122,54 @@ final class _FHorizontalLabel extends StatelessWidget {
     required this.label,
     required this.description,
     required this.error,
-    required this.state,
+    required this.states,
     required this.child,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final stateStyle = switch (state) {
-      FLabelState.enabled => style.state.enabledStyle,
-      FLabelState.disabled => style.state.disabledStyle,
-      FLabelState.error => style.state.errorStyle,
-    };
-
-    return Table(
-      defaultColumnWidth: const IntrinsicColumnWidth(),
-      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      columnWidths: const {0: IntrinsicColumnWidth(), 1: FlexColumnWidth()},
-      children: [
+  Widget build(BuildContext context) => Table(
+    defaultColumnWidth: const IntrinsicColumnWidth(),
+    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+    columnWidths: const {0: IntrinsicColumnWidth(), 1: FlexColumnWidth()},
+    children: [
+      TableRow(
+        children: [
+          TableCell(child: Padding(padding: style.childPadding, child: child)),
+          if (label != null)
+            _buildCell(padding: style.labelPadding, textStyle: style.labelTextStyle.resolve(states), child: label)
+          else
+            _buildCell(
+              padding: style.descriptionPadding,
+              textStyle: style.descriptionTextStyle.resolve(states),
+              child: description,
+            ),
+        ],
+      ),
+      if (label != null && description != null)
         TableRow(
           children: [
-            TableCell(child: Padding(padding: style.layout.childPadding, child: child)),
-            if (label != null)
-              _buildCell(padding: style.layout.labelPadding, textStyle: stateStyle.labelTextStyle, child: label)
-            else
-              _buildCell(
-                padding: style.layout.descriptionPadding,
-                textStyle: stateStyle.descriptionTextStyle,
-                child: description,
-              ),
+            const TableCell(child: SizedBox()),
+            _buildCell(
+              padding: style.descriptionPadding,
+              textStyle: style.descriptionTextStyle.resolve(states),
+              child: description,
+            ),
           ],
         ),
-        if (label != null && description != null)
-          TableRow(
-            children: [
-              const TableCell(child: SizedBox()),
-              _buildCell(
-                padding: style.layout.descriptionPadding,
-                textStyle: stateStyle.descriptionTextStyle,
-                child: description,
+      if (error != null && states.contains(WidgetState.error))
+        TableRow(
+          children: [
+            const TableCell(child: SizedBox()),
+            TableCell(
+              child: Padding(
+                padding: style.errorPadding,
+                child: DefaultTextStyle(style: style.errorTextStyle, child: error!),
               ),
-            ],
-          ),
-        if (error != null && state == FLabelState.error)
-          TableRow(
-            children: [
-              const TableCell(child: SizedBox()),
-              TableCell(
-                child: Padding(
-                  padding: style.layout.errorPadding,
-                  child: DefaultTextStyle(style: style.state.errorStyle.errorTextStyle, child: error!),
-                ),
-              ),
-            ],
-          ),
-      ],
-    );
-  }
+            ),
+          ],
+        ),
+    ],
+  );
 
   Widget _buildCell({required EdgeInsetsGeometry padding, required TextStyle textStyle, Widget? child}) {
     if (child == null) {
@@ -209,7 +184,7 @@ final class _FHorizontalLabel extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('style', style.toString()))
-      ..add(EnumProperty('state', state));
+      ..add(IterableProperty('states', states));
   }
 }
 
@@ -218,7 +193,7 @@ class _FVerticalLabel extends StatelessWidget {
   final Widget? label;
   final Widget? description;
   final Widget? error;
-  final FLabelState state;
+  final Set<WidgetState> states;
   final Widget child;
 
   const _FVerticalLabel({
@@ -226,65 +201,57 @@ class _FVerticalLabel extends StatelessWidget {
     required this.label,
     required this.description,
     required this.error,
-    required this.state,
+    required this.states,
     required this.child,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final stateStyle = switch (state) {
-      FLabelState.enabled => style.state.enabledStyle,
-      FLabelState.disabled => style.state.disabledStyle,
-      FLabelState.error => style.state.errorStyle,
-    };
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (label != null)
-          Padding(
-            padding: style.layout.labelPadding,
-            child: DefaultTextStyle(
-              style: stateStyle.labelTextStyle,
-              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
-              child: label!,
-            ),
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      if (label != null)
+        Padding(
+          padding: style.labelPadding,
+          child: DefaultTextStyle(
+            style: style.labelTextStyle.resolve(states),
+            textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
+            child: label!,
           ),
-        Padding(padding: style.layout.childPadding, child: child),
-        if (description != null)
-          Padding(
-            padding: style.layout.descriptionPadding,
-            child: DefaultTextStyle(
-              style: stateStyle.descriptionTextStyle,
-              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
-              child: description!,
-            ),
+        ),
+      Padding(padding: style.childPadding, child: child),
+      if (description != null)
+        Padding(
+          padding: style.descriptionPadding,
+          child: DefaultTextStyle(
+            style: style.descriptionTextStyle.resolve(states),
+            textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
+            child: description!,
           ),
-        if (error != null && state == FLabelState.error)
-          Padding(
-            padding: style.layout.errorPadding,
-            child: DefaultTextStyle(
-              style: style.state.errorStyle.errorTextStyle,
-              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
-              child: error!,
-            ),
+        ),
+      if (error != null && states.contains(WidgetState.error))
+        Padding(
+          padding: style.errorPadding,
+          child: DefaultTextStyle(
+            style: style.errorTextStyle,
+            textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
+            child: error!,
           ),
-      ],
-    );
-  }
+        ),
+    ],
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('style', style.toString()))
-      ..add(EnumProperty('state', state));
+      ..add(IterableProperty('states', states));
   }
 }
 
 /// The [FLabel]'s styles.
-final class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
+class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
   /// The horizontal label's style.
   @override
   final FLabelStyle horizontalStyle;
@@ -296,28 +263,24 @@ final class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
   /// Creates a [FLabelStyles].
   const FLabelStyles({required this.horizontalStyle, required this.verticalStyle});
 
-  /// Creates a [FLabelStyles] that inherits its properties from the given [style].
+  /// Creates a [FLabelStyles] that inherits its properties.
   FLabelStyles.inherit({required FStyle style})
-    : horizontalStyle = (
-        layout: const FLabelLayoutStyle(
-          childPadding: EdgeInsets.symmetric(horizontal: 8),
-          descriptionPadding: EdgeInsets.only(top: 2),
-          errorPadding: EdgeInsets.only(top: 2),
-        ),
-        state: FLabelStateStyles.inherit(style: style),
+    : horizontalStyle = FLabelStyle.inherit(
+        style: style,
+        descriptionPadding: const EdgeInsets.only(top: 2),
+        errorPadding: const EdgeInsets.only(top: 2),
+        childPadding: const EdgeInsets.symmetric(horizontal: 8),
       ),
-      verticalStyle = (
-        layout: const FLabelLayoutStyle(
-          labelPadding: EdgeInsets.only(bottom: 5),
-          descriptionPadding: EdgeInsets.only(top: 5),
-          errorPadding: EdgeInsets.only(top: 5),
-        ),
-        state: FLabelStateStyles.inherit(style: style),
+      verticalStyle = FLabelStyle.inherit(
+        style: style,
+        labelPadding: const EdgeInsets.only(bottom: 5),
+        descriptionPadding: const EdgeInsets.only(top: 5),
+        errorPadding: const EdgeInsets.only(top: 5),
       );
 }
 
-/// The [FLabel]'s layout style.
-final class FLabelLayoutStyle with Diagnosticable, _$FLabelLayoutStyleFunctions {
+/// The [FLabel]'s style.
+class FLabelStyle extends FFormFieldStyle with _$FLabelStyleFunctions {
   /// The label's padding.
   @override
   final EdgeInsetsGeometry labelPadding;
@@ -334,37 +297,27 @@ final class FLabelLayoutStyle with Diagnosticable, _$FLabelLayoutStyleFunctions 
   @override
   final EdgeInsetsGeometry childPadding;
 
-  /// Creates a [FLabelLayoutStyle].
-  const FLabelLayoutStyle({
+  /// Creates a [FLabelStyle].
+  const FLabelStyle({
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
     this.labelPadding = EdgeInsets.zero,
     this.descriptionPadding = EdgeInsets.zero,
     this.errorPadding = EdgeInsets.zero,
     this.childPadding = EdgeInsets.zero,
   });
-}
 
-/// The [FLabel]'s state styles.
-class FLabelStateStyles with Diagnosticable, _$FLabelStateStylesFunctions {
-  /// The style for the form field when it is enabled.
-  @override
-  final FFormFieldStyle enabledStyle;
-
-  /// The style for the form field when it is disabled.
-  @override
-  final FFormFieldStyle disabledStyle;
-
-  /// The style for the form field when it has an error.
-  @override
-  final FFormFieldErrorStyle errorStyle;
-
-  /// Creates a [FLabelStateStyles].
-  FLabelStateStyles({required this.enabledStyle, required this.disabledStyle, required this.errorStyle});
-
-  /// Creates a [FLabelStateStyles] that inherits its properties from [style].
-  FLabelStateStyles.inherit({required FStyle style})
-    : this(
-        enabledStyle: style.enabledFormFieldStyle,
-        disabledStyle: style.disabledFormFieldStyle,
-        errorStyle: style.errorFormFieldStyle,
-      );
+  /// Creates a [FLabelStyle].
+  FLabelStyle.inherit({
+    required FStyle style,
+    this.labelPadding = EdgeInsets.zero,
+    this.descriptionPadding = EdgeInsets.zero,
+    this.errorPadding = EdgeInsets.zero,
+    this.childPadding = EdgeInsets.zero,
+  }) : super(
+         labelTextStyle: style.formFieldStyle.labelTextStyle,
+         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+         errorTextStyle: style.formFieldStyle.errorTextStyle,
+       );
 }

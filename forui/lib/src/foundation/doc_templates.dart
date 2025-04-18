@@ -7,7 +7,7 @@ extension Focus on Never {
   /// {@template forui.foundation.doc_templates.autofocus}
   /// True if this widget will be selected as the initial focus when no other node in its scope is currently focused.
   ///
-  /// Ideally, there is only one widget with autofocus set in each FocusScope. If there is more than one widget with
+  /// Ideally, there should be only one widget with autofocus set in each FocusScope. If there is more than one widget with
   /// autofocus set, then the first one added to the tree will get focus.
   ///
   /// Defaults to false.
@@ -33,6 +33,34 @@ extension Focus on Never {
   /// Called with true if this widget's node gains focus, and false if it loses focus.
   /// {@endtemplate}
   static const onFocusChange = '';
+}
+
+@internal
+extension WidgetStates on Never {
+  /// {@template forui.foundation.doc_templates.WidgetStates.form}
+  ///  Supported states:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// {@endtemplate}
+  static const form = '';
+
+  /// {@template forui.foundation.doc_templates.WidgetStates.selectable}
+  ///  Supported states:
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.disabled]
+  /// {@endtemplate}
+  static const selectable = '';
+
+  /// {@template forui.foundation.doc_templates.WidgetStates.tappable}
+  ///  Supported states:
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  /// * [WidgetState.disabled]
+  /// {@endtemplate}
+  static const tappable = '';
 }
 
 @internal

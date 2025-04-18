@@ -196,7 +196,7 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
 
   /// The year/month picker's style.
   @override
-  final FCalendarYearMonthPickerStyle yearMonthPickerStyle;
+  final FCalendarEntryStyle yearMonthPickerStyle;
 
   /// The decoration surrounding the header & picker.
   @override
@@ -220,15 +220,28 @@ final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     this.pageAnimationDuration = const Duration(milliseconds: 200),
   });
 
-  /// Creates a [FCalendarStyle] that inherits the color scheme and typography.
+  /// Creates a [FCalendarStyle] that inherits its properties.
   FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         headerStyle: FCalendarHeaderStyle.inherit(colors: colors, typography: typography, style: style),
-        dayPickerStyle: FCalendarDayPickerStyle.inherit(colors: colors, typography: typography, style: style),
-        yearMonthPickerStyle: FCalendarYearMonthPickerStyle.inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
+        dayPickerStyle: FCalendarDayPickerStyle.inherit(colors: colors, typography: typography),
+        yearMonthPickerStyle: FCalendarEntryStyle(
+          backgroundColor: FWidgetStateMap({
+            (WidgetState.hovered | WidgetState.pressed) & ~WidgetState.disabled: colors.secondary,
+            WidgetState.any: colors.background,
+          }),
+          borderColor: FWidgetStateMap({
+            WidgetState.disabled: colors.background,
+            WidgetState.focused: colors.foreground,
+          }),
+          textStyle: FWidgetStateMap({
+            WidgetState.disabled: typography.base.copyWith(
+              color: colors.disable(colors.mutedForeground),
+              fontWeight: FontWeight.w500,
+            ),
+            WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
+          }),
+          radius: const Radius.circular(8),
         ),
         decoration: BoxDecoration(
           borderRadius: style.borderRadius,

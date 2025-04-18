@@ -38,47 +38,39 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
            final state = field as _State;
            final InheritedData(:layout, :marks, :trackMainAxisExtent) = InheritedData.of(state.context);
            final style = InheritedData.of(state.context).style;
-           final (labelState, stateStyle) = switch ((state.hasError, enabled)) {
-             (false, true) => (FLabelState.enabled, style.enabledStyle),
-             (false, false) => (FLabelState.disabled, style.disabledStyle),
-             (true, _) => (FLabelState.error, style.errorStyle),
-           };
+           final states = {if (!enabled) WidgetState.disabled, if (state.hasError) WidgetState.error};
 
            // DO NOT REORDER THE CHILDREN - _RenderSlider assumes this order.
            final children = [
-             Padding(padding: style.labelLayoutStyle.childPadding, child: const Track()),
+             Padding(padding: style.childPadding, child: const Track()),
              if (label != null)
                DefaultTextStyle(
-                 style: stateStyle.labelTextStyle,
-                 child: Padding(padding: style.labelLayoutStyle.labelPadding, child: label),
+                 style: style.labelTextStyle.resolve(states),
+                 child: Padding(padding: style.labelPadding, child: label),
                )
              else
                const SizedBox(),
              if (description != null)
                DefaultTextStyle.merge(
-                 style: stateStyle.descriptionTextStyle,
-                 child: Padding(padding: style.labelLayoutStyle.descriptionPadding, child: description),
+                 style: style.descriptionTextStyle.resolve(states),
+                 child: Padding(padding: style.descriptionPadding, child: description),
                )
              else
                const SizedBox(),
              if (state.errorText != null)
                DefaultTextStyle.merge(
-                 style: (stateStyle as FSliderErrorStyle).errorTextStyle,
-                 child: Padding(
-                   padding: style.labelLayoutStyle.errorPadding,
-                   child: errorBuilder(state.context, state.errorText!),
-                 ),
+                 style: style.errorTextStyle,
+                 child: Padding(padding: style.errorPadding, child: errorBuilder(state.context, state.errorText!)),
                )
              else
                const SizedBox(),
              for (final mark in marks.where((mark) => mark.label != null).toList())
-               if (mark case FSliderMark(:final style, :final label?))
-                 DefaultTextStyle(style: (style ?? stateStyle.markStyle).labelTextStyle, child: label),
+               if (mark case FSliderMark(style: final markStyle, :final label?))
+                 DefaultTextStyle(style: (markStyle ?? style.markStyle).labelTextStyle.resolve(states), child: label),
            ];
 
-           return InheritedState(
-             style: stateStyle,
-             state: labelState,
+           return InheritedStates(
+             states: states,
              child:
                  layout.vertical
                      ? VerticalSliderRenderObject(children: children)

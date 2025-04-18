@@ -78,22 +78,22 @@ void main() {
               next: Padding(
                 padding: style.itemPadding,
                 child: ConstrainedBox(
-                  constraints: style.contentConstraints,
+                  constraints: style.itemConstraints,
                   child: FButton.icon(
                     style: FButtonStyle.ghost,
                     onPress: controller.next,
-                    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.bird)),
+                    child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.bird)),
                   ),
                 ),
               ),
               previous: Padding(
                 padding: style.itemPadding,
                 child: ConstrainedBox(
-                  constraints: style.contentConstraints,
+                  constraints: style.itemConstraints,
                   child: FButton.icon(
                     style: FButtonStyle.ghost,
                     onPress: controller.previous,
-                    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.anchor)),
+                    child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.anchor)),
                   ),
                 ),
               ),

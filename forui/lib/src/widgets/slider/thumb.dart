@@ -60,10 +60,14 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final thumbStyle = InheritedState.of(context).style.thumbStyle;
-    final InheritedData(:style, :layout, :tooltipBuilder, :semanticValueFormatterCallback, :enabled) = InheritedData.of(
-      context,
-    );
+    final states = InheritedStates.of(context).states;
+    final InheritedData(
+      style: FSliderStyle(:thumbSize, :thumbStyle, :tooltipTipAnchor, :tooltipThumbAnchor),
+      :layout,
+      :tooltipBuilder,
+      :semanticValueFormatterCallback,
+      :enabled,
+    ) = InheritedData.of(context);
 
     String? increasedValue;
     if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection
@@ -98,10 +102,10 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
           child: DecoratedBox(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: thumbStyle.color,
-              border: Border.all(color: thumbStyle.borderColor, width: thumbStyle.borderWidth),
+              color: thumbStyle.color.resolve(states),
+              border: Border.all(color: thumbStyle.borderColor.resolve(states), width: thumbStyle.borderWidth),
             ),
-            child: SizedBox.square(dimension: style.thumbSize),
+            child: SizedBox.square(dimension: thumbSize),
           ),
         ),
       ),
@@ -121,8 +125,8 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         },
         child: FTooltip(
           controller: _tooltip,
-          tipAnchor: style.tooltipTipAnchor,
-          childAnchor: style.tooltipThumbAnchor,
+          tipAnchor: tooltipTipAnchor,
+          childAnchor: tooltipThumbAnchor,
           tipBuilder: (_, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
           longPress: false,
           hover: false,
@@ -163,7 +167,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onVerticalDragStart: start,
-        onVerticalDragUpdate: _drag(_controller, style.thumbSize, layout),
+        onVerticalDragUpdate: _drag(_controller, thumbSize, layout),
         onVerticalDragEnd: end,
         child: thumb,
       );
@@ -172,7 +176,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onHorizontalDragStart: start,
-        onHorizontalDragUpdate: _drag(_controller, style.thumbSize, layout),
+        onHorizontalDragUpdate: _drag(_controller, thumbSize, layout),
         onHorizontalDragEnd: end,
         child: thumb,
       );
@@ -230,12 +234,16 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 /// implementation.
 final class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
   /// The thumb's color.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final Color color;
+  final FWidgetStateMap<Color> color;
 
   /// The border's color.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final Color borderColor;
+  final FWidgetStateMap<Color> borderColor;
 
   /// The border's width. Defaults to `2`.
   ///

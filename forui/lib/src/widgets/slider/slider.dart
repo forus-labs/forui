@@ -233,7 +233,7 @@ class _Slider extends StatefulWidget {
   State<_Slider> createState() => _SliderState();
 
   double get _mainAxisExtent {
-    final insets = style.labelLayoutStyle.childPadding.resolve(textDirection);
+    final insets = style.childPadding.resolve(textDirection);
     final extent = switch (mainAxisExtent) {
       final extent? => extent,
       _ when layout.vertical => constraints.maxHeight - insets.top - insets.bottom,

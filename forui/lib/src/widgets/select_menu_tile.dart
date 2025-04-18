@@ -15,12 +15,12 @@ typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;
 ///
 /// A [FSelectMenuTile] is internally a [FormField], therefore it can be used in a [Form].
 ///
-/// For desktop, a [FSelectGroup] is generally recommended over this.
+/// For desktop, an [FSelectGroup] is generally recommended over this.
 ///
 /// See:
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
-/// * [FSelectMenuTileStyle] for customizing a select group's appearance.
+/// * [FSelectMenuTileStyle] for customizing a select menu tile's appearance.
 class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldProperties<Set<T>> {
   /// The controller that controls the selected tiles.
   final FSelectMenuTileController<T> selectController;
@@ -30,7 +30,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 
   /// The scroll controller used to control the position to which this menu is scrolled.
   ///
-  /// Scrolling past the end of the group using the controller will result in undefined behaviour.
+  /// Scrolling past the end of the group using the controller will result in undefined behavior.
   final ScrollController? scrollController;
 
   /// The menu's cache extent in logical pixels.
@@ -57,7 +57,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// The divider between select tiles. Defaults to [FTileDivider.indented].
   final FTileDivider divider;
 
-  /// The point on the menu (floating content) that connects with the tile, at the tile's anchor.
+  /// The point on the menu (floating content) that connects with the tile at the tile's anchor.
   ///
   /// For example, [Alignment.topCenter] means the top-center point of the menu will connect with the tile.
   /// See [tileAnchor] for changing the tile's anchor.
@@ -65,7 +65,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// Defaults to [Alignment.topRight].
   final AlignmentGeometry menuAnchor;
 
-  /// The point on the tile that connects with the menu, at the menu's anchor.
+  /// The point on the tile that connects with the menu at the menu's anchor.
   ///
   /// For example, [Alignment.bottomCenter] means the bottom-center point of the tile will connect with the menu.
   /// See [menuAnchor] for changing the menu's anchor.
@@ -178,22 +178,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
            final tileData = FTileData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
-           final labelStyle = style?.labelStyle ?? global.labelStyle;
            final menuStyle = style?.menuStyle ?? global.menuStyle;
            final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
 
-           final (labelState, error) = switch (state.errorText) {
-             _ when !enabled => (FLabelState.disabled, null),
-             final text? => (FLabelState.error, errorBuilder(state.context, text)),
-             null => (FLabelState.enabled, null),
-           };
-
            Widget tile = FPopover(
-             // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
+             // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
              //
              // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
              // by FLabel and its internals can cause a new parent to be inserted above FPopover. This leads to the
-             // entire widget subtree being rebuilt and losing their state. Consequently, the controller is assigned
+             // entire widget subtree being rebuilt and losing their states. Consequently, the controller is assigned
              // another _OverlayPortalState, causing an assertion to be thrown.
              //
              // See https://stackoverflow.com/a/59410824/4189771
@@ -237,11 +230,16 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              ),
            );
 
-           if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
+           if (groupData == null &&
+               tileData == null &&
+               (label != null || description != null || state.errorText != null)) {
+             final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+             final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
+
              tile = FLabel(
                axis: Axis.vertical,
-               style: labelStyle,
-               state: labelState,
+               style: style ?? global,
+               states: states,
                label: label,
                description: description,
                error: error,
@@ -265,9 +263,9 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   ///
   /// ## Notes
   /// May result in an infinite loop or run out of memory if:
-  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
-  /// * [count] is null and [menuBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
-  ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
+  /// * Placed in a parent widget that does not constrain its size, i.e., [Column].
+  /// * [count] is null and [menuBuilder] always provides a zero-size widget, i.e., SizedBox(). If possible, provide
+  ///   tiles with non-zero size, return null from the builder, or set [count] to non-null.
   FSelectMenuTile.builder({
     required this.selectController,
     required this.title,
@@ -316,22 +314,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
            final tileData = FTileData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
-           final labelStyle = style?.labelStyle ?? global.labelStyle;
            final menuStyle = style?.menuStyle ?? global.menuStyle;
            final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
 
-           final (labelState, error) = switch (state.errorText) {
-             _ when !enabled => (FLabelState.disabled, null),
-             final text? => (FLabelState.error, errorBuilder(state.context, text)),
-             null => (FLabelState.enabled, null),
-           };
-
            Widget tile = FPopover(
-             // A GlobalObjectKey is used to workaround Flutter not recognizing how widgets move inside the widget tree.
+             // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
              //
              // OverlayPortalControllers are tied to a single _OverlayPortalState, and conditional rebuilds introduced
              // by FLabel and its internals can cause a new parent to be inserted above FPopover. This leads to the
-             // entire widget subtree being rebuilt and losing their state. Consequently, the controller is assigned
+             // entire widget subtree being rebuilt and losing their states. Consequently, the controller is assigned
              // another _OverlayPortalState, causing an assertion to be thrown.
              //
              // See https://stackoverflow.com/a/59410824/4189771
@@ -376,11 +367,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              ),
            );
 
-           if (groupData == null && tileData == null && (label != null || description != null || error != null)) {
+           if (groupData == null &&
+               tileData == null &&
+               (label != null || description != null || state.errorText != null)) {
+             final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+             final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
              tile = FLabel(
                axis: Axis.vertical,
-               style: labelStyle,
-               state: labelState,
+               style: global,
+               states: states,
                label: label,
                description: description,
                error: error,
@@ -575,12 +570,8 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
   bool get hasListeners => delegate.hasListeners;
 }
 
-/// A [FSelectMenuTileStyle]'s style.
-final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, _$FSelectMenuTileStyleFunctions {
-  /// The group label's layout style.
-  @override
-  final FLabelLayoutStyle labelLayoutStyle;
-
+/// A select menu tile's style.
+final class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFunctions {
   /// The menu's style.
   @override
   final FPopoverMenuStyle menuStyle;
@@ -591,12 +582,15 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, 
 
   /// Creates a [FSelectMenuTileStyle].
   FSelectMenuTileStyle({
-    required this.labelLayoutStyle,
     required this.menuStyle,
     required this.tileStyle,
-    required super.enabledStyle,
-    required super.disabledStyle,
-    required super.errorStyle,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
   });
 
   /// Creates a [FSelectMenuTileStyle] that inherits its properties.
@@ -607,16 +601,14 @@ final class FSelectMenuTileStyle extends FLabelStateStyles with Diagnosticable, 
   }) {
     final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography);
     return FSelectMenuTileStyle(
-      labelLayoutStyle: groupStyle.labelLayoutStyle,
       menuStyle: FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
       tileStyle: groupStyle.tileStyle,
-      enabledStyle: groupStyle.enabledStyle,
-      disabledStyle: groupStyle.disabledStyle,
-      errorStyle: groupStyle.errorStyle,
+      labelTextStyle: groupStyle.labelTextStyle,
+      descriptionTextStyle: groupStyle.descriptionTextStyle,
+      errorTextStyle: groupStyle.errorTextStyle,
+      labelPadding: groupStyle.labelPadding,
+      descriptionPadding: groupStyle.descriptionPadding,
+      errorPadding: groupStyle.errorPadding,
     );
   }
-
-  /// The label's style.
-  // ignore: diagnostic_describe_all_properties
-  FLabelStyle get labelStyle => (layout: labelLayoutStyle, state: this);
 }

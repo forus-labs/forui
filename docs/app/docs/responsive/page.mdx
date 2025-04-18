@@ -2,18 +2,18 @@
 
 Forui contains responsive breakpoints based on [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
 
-## Predefine Breakpoints
+## Predefined Breakpoints
 
 All breakpoints are in logical pixels. Mobile devices are typically smaller than `sm` (640), while tablet and desktop
-devices are typically larger than than `md` (768) and `lg` (1024) respectively.
+devices are typically larger than `md` (768) and `lg` (1024) respectively.
 
-| Breakpoint | 	Minimum width   | Accessor                     |
-|:-----------|:-----------------|:-----------------------------|
-| `sm`       | 640              | `FThemeData.breakpoints.sm`  |
-| `md`       | 768              | `FThemeData.breakpoints.md`  |
-| `lg`       | 1024             | `FThemeData.breakpoints.lg`  |
-| `xl`       | 1280             | `FThemeData.breakpoints.xl`  |
-| `xl2`      | 1536             | `FThemeData.breakpoints.xl2` |
+| Breakpoint | Minimum width | Accessor                     |
+| :--------- | :------------ | :--------------------------- |
+| `sm`       | 640           | `FThemeData.breakpoints.sm`  |
+| `md`       | 768           | `FThemeData.breakpoints.md`  |
+| `lg`       | 1024          | `FThemeData.breakpoints.lg`  |
+| `xl`       | 1280          | `FThemeData.breakpoints.xl`  |
+| `xl2`      | 1536          | `FThemeData.breakpoints.xl2` |
 
 ## Usage
 
@@ -34,6 +34,7 @@ Widget build(BuildContext context) {
 ## Custom Breakpoints
 
 Additional breakpoints can be added via an extension on `FBreakpoints`:
+
 ```dart copy
 extension CustomBreakpoints on FBreakpoints {
   double get custom => 42;
@@ -41,6 +42,7 @@ extension CustomBreakpoints on FBreakpoints {
 ```
 
 After which, the custom breakpoint can be accessed like so:
+
 ```dart {7} copy
 @override
 Widget build(BuildContext context) {

@@ -10,10 +10,10 @@ enum FLayout {
   /// Lays out the items horizontally from right to left.
   rtl(vertical: false),
 
-  /// Lays out the items vertically from bottom to top.
+  /// Lays out the items vertically from top to bottom.
   ttb(vertical: true),
 
-  /// Lays out the items vertically from top to bottom.
+  /// Lays out the items vertically from bottom to top.
   btt(vertical: true);
 
   /// Whether the layout is vertical.

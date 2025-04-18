@@ -19,13 +19,17 @@ part 'select.style.dart';
 ///
 /// It is a [FormField] and therefore can be used in a [Form] widget.
 ///
-/// See
+/// See:
 /// * https://forui.dev/docs/form/select for working examples.
 /// * [FSelectController] for customizing the behavior of a select.
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, (FSelectStyle, FTextFieldStateStyle) styles, Widget? _) => Padding(
+  static Widget defaultIconBuilder(
+    BuildContext _,
+    (FSelectStyle, FTextFieldStyle, Set<WidgetState>) styles,
+    Widget? _,
+  ) => Padding(
     padding: const EdgeInsetsDirectional.only(end: 8.0),
     child: IconTheme(data: styles.$1.iconStyle, child: const Icon(FIcons.chevronDown)),
   );
@@ -61,11 +65,11 @@ abstract class FSelect<T> extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// Builds a widget at the start of the select that can be pressed to toggle the popover. Defaults to no icon.
-  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? prefixBuilder;
+  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
 
   /// Builds a widget at the end of the select that can be pressed to toggle the popover. Defaults to
   /// [defaultIconBuilder].
-  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? suffixBuilder;
+  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
 
   /// The label.
   final Widget? label;
@@ -155,7 +159,7 @@ abstract class FSelect<T> extends StatefulWidget {
   /// Whether to add padding based on the popover direction. Defaults to false.
   final bool directionPadding;
 
-  /// True if the dropdown menu should be automatically hidden after an item is selected. Defaults to false.
+  /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
   /// The builder that is called when the select is empty. Defaults to [defaultEmptyBuilder].
@@ -177,8 +181,8 @@ abstract class FSelect<T> extends StatefulWidget {
     FSelectStyle? style,
     bool autofocus,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? suffixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -229,8 +233,8 @@ abstract class FSelect<T> extends StatefulWidget {
     FSelectStyle? style,
     bool autofocus,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStateStyle)>? suffixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -441,16 +445,16 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       prefixBuilder:
           widget.prefixBuilder == null
               ? null
-              : (context, stateStyle, _) => MouseRegion(
+              : (context, styles, _) => MouseRegion(
                 cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, stateStyle), null),
+                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
               ),
       suffixBuilder:
           widget.suffixBuilder == null
               ? null
-              : (context, stateStyle, _) => MouseRegion(
+              : (context, styles, _) => MouseRegion(
                 cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, stateStyle), null),
+                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
               ),
       clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
       label: widget.label,

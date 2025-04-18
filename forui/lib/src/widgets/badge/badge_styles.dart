@@ -9,6 +9,9 @@ part 'badge_styles.style.dart';
 
 /// The [FBadgeStyle]s.
 final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
+  /// The default border radius for badges.
+  static const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(100));
+
   /// The primary badge style.
   @override
   final FBadgeStyle primary;
@@ -32,16 +35,13 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
   FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         primary: FBadgeStyle(
-          decoration: BoxDecoration(color: colors.primary, borderRadius: const BorderRadius.all(Radius.circular(100))),
+          decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultRadius),
           contentStyle: FBadgeContentStyle(
             labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: FontWeight.w600),
           ),
         ),
         secondary: FBadgeStyle(
-          decoration: BoxDecoration(
-            color: colors.secondary,
-            borderRadius: const BorderRadius.all(Radius.circular(100)),
-          ),
+          decoration: BoxDecoration(color: colors.secondary, borderRadius: FBadgeStyles.defaultRadius),
           contentStyle: FBadgeContentStyle(
             labelTextStyle: typography.sm.copyWith(color: colors.secondaryForeground, fontWeight: FontWeight.w600),
           ),
@@ -49,17 +49,14 @@ final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
         outline: FBadgeStyle(
           decoration: BoxDecoration(
             border: Border.all(color: colors.border, width: style.borderWidth),
-            borderRadius: const BorderRadius.all(Radius.circular(100)),
+            borderRadius: FBadgeStyles.defaultRadius,
           ),
           contentStyle: FBadgeContentStyle(
             labelTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: FontWeight.w600),
           ),
         ),
         destructive: FBadgeStyle(
-          decoration: BoxDecoration(
-            color: colors.destructive,
-            borderRadius: const BorderRadius.all(Radius.circular(100)),
-          ),
+          decoration: BoxDecoration(color: colors.destructive, borderRadius: FBadgeStyles.defaultRadius),
           contentStyle: FBadgeContentStyle(
             labelTextStyle: typography.sm.copyWith(color: colors.destructiveForeground, fontWeight: FontWeight.w600),
           ),

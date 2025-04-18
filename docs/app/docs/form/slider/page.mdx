@@ -4,7 +4,8 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Slider
-An input where the user selects a value from within a given range.
+
+A sliding input component that allows users to select a value within a specified range by dragging a handle or tapping on the track.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.slider/"/>
@@ -31,16 +32,16 @@ An input where the user selects a value from within a given range.
 
 ```dart copy
 FSlider(
-  layout: Layout.rtl,
-  tooltipBuilder: (style, value) => Text('${(value.toStringAsFixed(2)}%'),
+  layout: FLayout.rtl,
+  tooltipBuilder: (style, value) => Text('${value.toStringAsFixed(2)}%'),
   controller: FContinuousSliderController(
     allowedInteraction: FSliderInteraction.tap,
     selection: FSliderSelection(max: 0.75, extent: (min: 0, max: 0.8)),
   ),
   marks: const [
-    FSliderMark(value: 0, label: const Text('0%')),
-    FSliderMark(value: 0.5, label: const Text('50%')),
-    FSliderMark(value: 1, label: const Text('100%')),
+    FSliderMark(value: 0, label: Text('0%')),
+    FSliderMark(value: 0.5, label: Text('50%')),
+    FSliderMark(value: 1, label: Text('100%')),
   ],
 );
 ```
@@ -60,9 +61,7 @@ FSlider(
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
-          ),
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -100,14 +99,11 @@ FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
           forceErrorText: 'Volume is too high.',
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
-          ),
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
 </Tabs>
-
 
 #### Tooltip
 
@@ -118,13 +114,11 @@ FSlider(
   <Tabs.Tab>
         ```dart {5-8} copy
         FSlider(
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.6),
-          ),
           tooltipBuilder: (style, value) {
             final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
             return Text('0x$hex');
           },
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.6)),
         );
         ```
   </Tabs.Tab>
@@ -132,8 +126,10 @@ FSlider(
 
 #### Marks
 
-A mark consists of a tick - a visual indicator of the mark's position on the slider - and a label - a text that
-describes the mark's value.
+Marks provide visual reference points on the slider track. Each mark consists of:
+
+- A tick: A visual indicator showing the mark's position
+- A label: Text describing the mark's value (optional)
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -142,9 +138,7 @@ describes the mark's value.
   <Tabs.Tab>
         ```dart {5-11} copy
         FSlider(
-          controller: FContinuousSliderController(
-            selection: FSliderSelection(max: 0.35),
-          ),
+          controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
             FSliderMark(value: 0.25, tick: false),
@@ -159,7 +153,7 @@ describes the mark's value.
 
 ### Layouts and Selections
 
-#### Discrete Selection
+#### Discrete Values
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -168,9 +162,7 @@ describes the mark's value.
   <Tabs.Tab>
         ```dart {2-4} copy
         FSlider(
-          controller: FDiscreteSliderController(
-            selection: FSliderSelection(max: 0.25),
-          ),
+          controller: FDiscreteSliderController(selection: FSliderSelection(max: 0.25)),
           marks: const [
             FSliderMark(value: 0, label: Text('0%')),
             FSliderMark(value: 0.25, tick: false),
@@ -200,7 +192,7 @@ describes the mark's value.
   </Tabs.Tab>
 </Tabs>
 
-#### Min & Max Selection Extent
+#### Selection Boundaries
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -211,8 +203,8 @@ describes the mark's value.
         FSlider(
           controller: FContinuousSliderController(
             selection: FSliderSelection(
-                max: 0.6,
-                extent: (min: 0.25, max: 0.75),
+              max: 0.6,
+              extent: (min: 0.25, max: 0.75),
             ),
           ),
         );
@@ -220,7 +212,7 @@ describes the mark's value.
   </Tabs.Tab>
 </Tabs>
 
-#### Vertical Layout
+#### Vertical Orientation
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -231,7 +223,7 @@ describes the mark's value.
         FSlider(
           label: const Text('Volume'),
           description: const Text('Adjust the volume by dragging the slider.'),
-          layout: Layout.btt,
+          layout: FLayout.btt,
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           trackMainAxisExtent: 350,
           marks: const [
@@ -241,7 +233,7 @@ describes the mark's value.
             FSliderMark(value: 0.75, tick: false),
             FSliderMark(value: 1, label: Text('100%')),
           ],
-        ),
+        );
         ```
   </Tabs.Tab>
 </Tabs>
@@ -356,10 +348,7 @@ Tap anywhere or slide the thumb to select a value.
                     FSlider(
                       label: const Text('Brightness'),
                       description: const Text('Adjust the brightness level.'),
-                      // validator: (value) => 'An error text.',
-                      controller: FContinuousSliderController(
-                        selection: FSliderSelection(max: 0.35),
-                      ),
+                      controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
                       marks: const [
                         FSliderMark(value: 0, label: Text('0%')),
                         FSliderMark(value: 0.25, tick: false),
@@ -370,7 +359,7 @@ Tap anywhere or slide the thumb to select a value.
                     ),
                     const SizedBox(height: 20),
                     FButton(
-                      label: const Text('Save'),
+                      child: const Text('Save'),
                       onPress: () {
                         if (!_formKey.currentState!.validate()) {
                           // Handle errors here.
@@ -386,5 +375,6 @@ Tap anywhere or slide the thumb to select a value.
               );
         }
         ```
+
   </Tabs.Tab>
 </Tabs>

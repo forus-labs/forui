@@ -163,7 +163,7 @@ class _Track extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :enabled) = InheritedData.of(context);
-    final FSliderStateStyle(:inactiveColor, :borderRadius, :markStyle, :thumbStyle) = InheritedState.of(context).style;
+    final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
 
     final extent = InheritedController.of(context, InheritedController.rawExtent).selection.rawExtent.total;
@@ -173,20 +173,20 @@ class _Track extends StatelessWidget {
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return DecoratedBox(
-      decoration: BoxDecoration(borderRadius: borderRadius, color: inactiveColor),
+      decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.inactiveColor.resolve(states)),
       child: SizedBox(
         height: height,
         width: width,
         child: Stack(
           alignment: Alignment.center,
           children: [
-            for (var FSliderMark(:style, :value, :tick) in marks)
+            for (var FSliderMark(style: markStyle, :value, :tick) in marks)
               if (tick)
                 position(
-                  offset: value * extent + half - ((style ??= markStyle).tickSize / 2),
+                  offset: value * extent + half - ((markStyle ??= style.markStyle).tickSize / 2),
                   child: DecoratedBox(
-                    decoration: BoxDecoration(shape: BoxShape.circle, color: style.tickColor),
-                    child: SizedBox.square(dimension: style.tickSize),
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: markStyle.tickColor.resolve(states)),
+                    child: SizedBox.square(dimension: markStyle.tickSize),
                   ),
                 ),
             const ActiveTrack(),
@@ -204,7 +204,7 @@ class ActiveTrack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout) = InheritedData.of(context);
-    final FSliderStateStyle(:activeColor, :borderRadius, :thumbStyle) = InheritedState.of(context).style;
+    final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
     final rawOffset = InheritedController.of(context, InheritedController.rawOffset).selection.rawOffset;
 
@@ -214,7 +214,7 @@ class ActiveTrack extends StatelessWidget {
     return layout.position(
       offset: rawOffset.min,
       child: DecoratedBox(
-        decoration: BoxDecoration(borderRadius: borderRadius, color: activeColor),
+        decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.activeColor.resolve(states)),
         child: SizedBox(height: height, width: width),
       ),
     );

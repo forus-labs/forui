@@ -12,7 +12,7 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 /// [context] is used to look up the [Navigator] and [FSheetStyle] for the sheet. It is only used when the method is
 /// called. Its corresponding widget can be safely removed from the tree before the sheet is closed.
 ///
-/// [useRootNavigator] ensures that the root navigator displays the sheet when`true`. This is useful in the case that a
+/// [useRootNavigator] ensures that the root navigator displays the sheet when `true`. This is useful in the case that a
 /// modal sheet needs to be displayed above all other content but the caller is inside another [Navigator].
 ///
 /// [style] defaults to [FSheetStyle] from the closest [FTheme] ancestor.

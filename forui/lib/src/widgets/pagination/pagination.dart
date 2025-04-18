@@ -79,26 +79,31 @@ class _FPaginationState extends State<FPagination> {
     final controller = widget.controller;
     final style = widget.style ?? context.theme.paginationStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+
     final previous =
         widget.previous ??
-        Action.previous(
+        Action(
           style: style,
           semanticsLabel: localizations.paginationPreviousSemanticsLabel,
           onPress: controller.previous,
+          child: const Icon(FIcons.chevronLeft),
         );
     final next =
         widget.next ??
-        Action.next(style: style, semanticsLabel: localizations.paginationNextSemanticsLabel, onPress: controller.next);
+        Action(
+          style: style,
+          semanticsLabel: localizations.paginationNextSemanticsLabel,
+          onPress: controller.next,
+          child: const Icon(FIcons.chevronRight),
+        );
+
     final lastPage = controller.pages - 1;
 
     final ellipsis = Padding(
       padding: style.itemPadding,
-      child: DecoratedBox(
-        decoration: style.unselected.decoration,
-        child: ConstrainedBox(
-          constraints: style.contentConstraints,
-          child: DefaultTextStyle(style: style.unselected.textStyle, child: const Center(child: Text('...'))),
-        ),
+      child: ConstrainedBox(
+        constraints: style.itemConstraints,
+        child: DefaultTextStyle(style: style.ellipsisTextStyle, child: const Center(child: Text('...'))),
       ),
     );
 
@@ -181,12 +186,6 @@ class Action extends StatelessWidget {
     super.key,
   });
 
-  Action.previous({required this.style, required this.semanticsLabel, required this.onPress, super.key})
-    : child = Icon(FIcons.chevronLeft, color: style.iconStyle.color, size: style.iconStyle.size);
-
-  Action.next({required this.style, required this.semanticsLabel, required this.onPress, super.key})
-    : child = Icon(FIcons.chevronRight, color: style.iconStyle.color, size: style.iconStyle.size);
-
   @override
   Widget build(BuildContext context) => Padding(
     padding: style.itemPadding,
@@ -196,11 +195,14 @@ class Action extends StatelessWidget {
       focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
       onPress: onPress,
       builder:
-          (context, tappableData, child) => DecoratedBox(
-            decoration: tappableData.hovered ? style.unselected.hoveredDecoration : style.unselected.decoration,
+          (context, states, child) => DecoratedBox(
+            decoration: style.itemDecoration.resolve(states),
             child: ConstrainedBox(
-              constraints: style.contentConstraints,
-              child: DefaultTextStyle(style: style.unselected.textStyle, child: Center(child: child!)),
+              constraints: style.itemConstraints,
+              child: DefaultTextStyle(
+                style: style.itemTextStyle.resolve(states),
+                child: Center(child: IconTheme(data: style.itemIconStyle.resolve(states), child: child!)),
+              ),
             ),
           ),
       child: child,
@@ -229,31 +231,26 @@ class _Page extends StatelessWidget {
       padding: style.itemPadding,
       child: ListenableBuilder(
         listenable: controller,
-        builder: (context, _) {
-          final selected = controller.page == page;
+        builder:
+            (context, _) => FTappable(
+              style: style.pageTappableStyle,
+              focusedOutlineStyle: focusedOutlineStyle,
+              onPress: () => controller.page = page,
+              builder: (context, states, _) {
+                states = {...states, if (controller.page == page) WidgetState.selected};
 
-          return FTappable(
-            style: style.pageTappableStyle,
-            focusedOutlineStyle: focusedOutlineStyle,
-            onPress: () => controller.page = page,
-            builder:
-                (context, data, _) => DecoratedBox(
-                  decoration: switch ((selected, data.hovered)) {
-                    (false, false) => style.unselected.decoration,
-                    (false, true) => style.unselected.hoveredDecoration,
-                    (true, true) => style.selected.hoveredDecoration,
-                    (true, false) => style.selected.decoration,
-                  },
+                return DecoratedBox(
+                  decoration: style.itemDecoration.resolve(states),
                   child: ConstrainedBox(
-                    constraints: style.contentConstraints,
+                    constraints: style.itemConstraints,
                     child: DefaultTextStyle(
-                      style: selected ? style.selected.textStyle : style.unselected.textStyle,
+                      style: style.itemTextStyle.resolve(states),
                       child: Center(child: Text('${page + 1}')),
                     ),
                   ),
-                ),
-          );
-        },
+                );
+              },
+            ),
       ),
     );
   }

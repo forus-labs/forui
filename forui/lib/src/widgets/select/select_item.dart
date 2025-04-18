@@ -102,7 +102,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     this.labelPadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
 
-  /// Creates a [FSelectSectionStyle] that inherits from the given [FColors], [FStyle], and [FTypography].
+  /// Creates a [FSelectSectionStyle] that inherits its properties.
   FSelectSectionStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
         enabledLabelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
@@ -190,41 +190,38 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
     final style = widget.style ?? content.style.itemStyle;
     final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
 
-    Widget item = Semantics(
-      selected: selected,
-      child: Padding(
-        padding: padding.copyWith(left: padding.left - 4, right: padding.right - 4),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            DefaultTextStyle(style: enabled ? style.enabledTextStyle : style.disabledTextStyle, child: widget.child),
-            if (selected)
-              IconTheme(data: enabled ? style.enabledIconStyle : style.disabledIconStyle, child: widget.selectedIcon),
-          ],
-        ),
-      ),
+    Widget item = FTappable(
+      style: style.tappableStyle,
+      autofocus: selected || content.first,
+      focusNode: _focus,
+      behavior: HitTestBehavior.opaque,
+      onPress: enabled ? () => onPress(widget.value) : null,
+      builder: (_, states, _) {
+        states = {...states, if (selected) WidgetState.selected};
+        final child = Semantics(
+          selected: selected,
+          child: Padding(
+            padding: padding.copyWith(left: padding.left - 4, right: padding.right - 4),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                DefaultTextStyle(style: style.textStyle.resolve(states), child: widget.child),
+                if (selected) IconTheme(data: style.iconStyle.resolve(states), child: widget.selectedIcon),
+              ],
+            ),
+          ),
+        );
+
+        if (style.decoration.resolve(states) case final decoration?) {
+          return DecoratedBox(decoration: decoration, child: child);
+        }
+
+        return child;
+      },
     );
 
     if (enabled) {
-      item = MouseRegion(
-        onEnter: (_) => _focus.requestFocus(),
-        onExit: (_) => _focus.unfocus(),
-        child: FTappable(
-          style: style.tappableStyle,
-          autofocus: selected || content.first,
-          focusNode: _focus,
-          behavior: HitTestBehavior.opaque,
-          onPress: () => onPress(widget.value),
-          builder: (context, data, child) {
-            if (data.pressed || data.focused) {
-              child = DecoratedBox(decoration: style.enabledHoveredDecoration, child: child);
-            }
-
-            return child!;
-          },
-          child: item,
-        ),
-      );
+      item = MouseRegion(onEnter: (_) => _focus.requestFocus(), onExit: (_) => _focus.unfocus(), child: item);
     }
 
     return Padding(padding: const EdgeInsetsDirectional.only(start: 4, end: 4), child: item);
@@ -243,25 +240,23 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The decoration for the item when enabled and hovered.
+  /// The decoration.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final BoxDecoration enabledHoveredDecoration;
+  final FWidgetStateMap<BoxDecoration?> decoration;
 
-  /// The text style for the child when enabled.
+  /// The default text style for the child.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final TextStyle enabledTextStyle;
+  final FWidgetStateMap<TextStyle> textStyle;
 
-  /// The text style for the child when disabled.
+  /// The icon style for a checked item.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final TextStyle disabledTextStyle;
-
-  /// The icon style for a checked item when enabled.
-  @override
-  final IconThemeData enabledIconStyle;
-
-  /// The icon style for a checked item when disabled.
-  @override
-  final IconThemeData disabledIconStyle;
+  final FWidgetStateMap<IconThemeData> iconStyle;
 
   /// The tappable style for the item.
   @override
@@ -269,11 +264,9 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
 
   /// Creates a [FSelectItemStyle].
   FSelectItemStyle({
-    required this.enabledHoveredDecoration,
-    required this.enabledTextStyle,
-    required this.disabledTextStyle,
-    required this.enabledIconStyle,
-    required this.disabledIconStyle,
+    required this.decoration,
+    required this.textStyle,
+    required this.iconStyle,
     required this.tappableStyle,
     this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
@@ -281,11 +274,20 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   /// Creates a [FSelectItemStyle] that inherits its properties.
   FSelectItemStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        enabledHoveredDecoration: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
-        enabledTextStyle: typography.sm.copyWith(color: colors.primary),
-        disabledTextStyle: typography.sm.copyWith(color: colors.disable(colors.primary)),
-        enabledIconStyle: IconThemeData(color: colors.primary, size: 15),
-        disabledIconStyle: IconThemeData(color: colors.disable(colors.primary), size: 15),
-        tappableStyle: FTappableStyle(animationTween: FTappableAnimations.none),
+        decoration: FWidgetStateMap({
+          ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
+            color: colors.secondary,
+            borderRadius: style.borderRadius,
+          ),
+        }),
+        textStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
+          WidgetState.any: typography.sm.copyWith(color: colors.primary),
+        }),
+        iconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
+          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
+        }),
+        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
       );
 }

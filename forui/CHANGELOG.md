@@ -2,7 +2,11 @@
 We are experimenting with a new changelog format which groups changes by feature.
 
 ### Styles
-Several breaking changes have been made to styles to improve consistency and usability.
+We added a CLI to generate styles for Forui widgets. See forui.dev/docs/cli for more information. 
+
+We made several breaking changes to styles and widgets that rely on state styles to improve consistency and usability 
+(too many to list sanely). Generally, all styles have been updated to use `WidgetState`s, becoming more customizable and 
+concise.
 
 * Add `FBottomNavigationItemStyle.spacing`.
 * Add `FCardContentStyle.imageSpacing`.
@@ -21,7 +25,8 @@ Several breaking changes have been made to styles to improve consistency and usa
 * **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` into `FDialog.constraints.`.
 * **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` to `FDialog.constraints.`.
 
-#### `FIcon`
+
+### `FIcon`
 `FIcon` has been removed in favor of Flutter's `Icon` class. `FIcon` was designed with only monochrome icons in mind
 and is not able to support multicolored icons. This coincides with replacement of `FAssets` with `FIcons` and svg icons 
 with font icons. In addition, all `iconColor` and `iconSize` style properties have been replaced with `IconThemeData`.
@@ -62,7 +67,7 @@ of items.
 
 
 ### `FPopover`
-The traversal edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
+The traversal-edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
 
 * Add `FPopover.traversalEdgeBehavior`.
 * Add `traversalEdgeBehavior` to `FBreadcrumbItem.collapsed`.
@@ -120,16 +125,19 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Add `FLineCalendarStyle.tappableStyle`.
 * Add `FPaginationStyle.tappableStyle`.
 * Add `FTileStyle.tappableStyle`.
+
+* Add `FTappable.statesController`.
+* Add `FTappableStyle.cursor`.
 * **Breaking** Rename `FTappable` to `FTappable.static`.
 * **Breaking** Rename `FTappable.animated` to `FTappable`.
 * **Breaking** Split `FTappableData.hovered` into `FTappableData.hovered` and `FTappableData.pressed`.
 
 
 ### Others
-* Add `obscuringCharacter` for `FTextField`. Thanks @MrHeer!
-* Add `filled` and `fillColor` for `FTextField`. Thanks @MrHeer!
-
+* Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
+* Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
 * Add `FLerpBorderRadius`.
+
 
 * Change `FHeader(title: ...)` to be optional.
 * Change `FHeader.nested(title: ...)` to be optional.
@@ -163,7 +171,10 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * **Breaking** Rename `FTile.semanticLabel` to `FTile.semanticsLabel`.
 * **Breaking** Rename `FTileGroup.semanticLabel` to `FTileGroup.semanticsLabel`.
 
-* Fixed an issue where header spacing is incorrectly ordered.
+* Replace `FSelectGroupItem` with `FCheckbox.grouped(...)` and `FRadio.grouped(...)`.
+
+
+* Fixed an issue where header spacing appeared in incorrect order.
 
 ## 0.10.0+1
 

@@ -9,12 +9,10 @@ export function Theme({title, color}) {
     );
 }
 
-
 # Themes
 
 Forui themes allows you to customize the look and feel of your Flutter application.
 Our theming solution is designed to help you get started quickly while offering powerful and flexible customization options.
-
 
 ## Predefined Themes
 
@@ -29,13 +27,14 @@ Our theming solution is designed to help you get started quickly while offering 
           child: const FScaffold(...),
         );
     ```
+
 </Callout>
 
 Forui provides a set of predefined themes that you can use out of the box.
 The color schemes are heavily inspired by [shadcn/ui themes](https://ui.shadcn.com/themes).
 
 | Theme                                    | Light Accessor         | Dark Accessor         |
-|:-----------------------------------------|:-----------------------|:----------------------|
+| :--------------------------------------- | :--------------------- | :-------------------- |
 | <Theme title="Zinc" color="#18181b" />   | `FThemes.zinc.light`   | `FThemes.zinc.dark`   |
 | <Theme title="Slate" color="#64748b" />  | `FThemes.slate.light`  | `FThemes.slate.dark`  |
 | <Theme title="Red" color="#dc2626" />    | `FThemes.red.light`    | `FThemes.red.dark`    |
@@ -45,7 +44,6 @@ The color schemes are heavily inspired by [shadcn/ui themes](https://ui.shadcn.c
 | <Theme title="Blue" color="#2563eb" />   | `FThemes.blue.light`   | `FThemes.blue.dark`   |
 | <Theme title="Yellow" color="#facc15" /> | `FThemes.yellow.light` | `FThemes.yellow.dark` |
 | <Theme title="Violet" color="#7c3aed" /> | `FThemes.violet.light` | `FThemes.violet.dark` |
-
 
 ## Usage
 
@@ -66,13 +64,13 @@ Widget build(BuildContext context) {
 ```
 
 A high level overview of the theme data structure is as follows:
+
 - [**`FThemeData`**](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html) contains `FColors`, `FTypography`, `FStyle`, and widget styles (eg. `FCardStyle`).
 - [**`FColors`**](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html) contains the color scheme (eg. `background`, `foreground`, and `primary`).
 - [**`FTypography`**](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html) contains the `defaultFontFamily` and various `TextStyle`s.
 - [**`FStyle`**](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html) contains other miscellaneous styling options (eg. `borderRadius`).
 
 A more detailed explanation of each class can be found in the [Class Diagram](#class-diagram) section.
-
 
 ## Customize Themes
 
@@ -81,122 +79,27 @@ A more detailed explanation of each class can be found in the [Class Diagram](#c
 It's recommended to use the [CLI](cli) to generate themes and styles in your project. These themes and styles can be
 directly modified to fit your design needs.
 
-This example demonstrates how to generate and use both a theme and `FDividerStyles` in your project.
+This example demonstrates how to generate and use both a theme and `FButtonStyles` in your project.
 
-In your project directory run:
+Navigate to your project directory.
+
+Run the following command to generate a `main.dart`:
 ```shell copy
 dart run forui init
 ```
 
-To generate a `FDivider`'s styles:
-```shell copy
-dart run forui style create fdivider
-```
-
-This will generate:
-```dart filename="lib/theme/divider_styles.dart" copy
-FDividerStyles dividerStyles({
-  required FColors colors,
-  required FStyle style,
-}) => FDividerStyles( // Modify these styles to fit your design needs.
-  horizontalStyle: FDividerStyle(
-    color: colors.secondary,
-    padding: FDividerStyle.defaultPadding.horizontalStyle,
-    width: style.borderWidth,
-  ),
-  verticalStyle: FDividerStyle(
-    color: colors.secondary,
-    padding: FDividerStyle.defaultPadding.verticalStyle,
-    width: style.borderWidth,
-  ),
-);
-```
-
-To generate a theme based on [zinc](#predefined-themes):
+Run the following command to generate a theme based on [zinc](#predefined-themes):
 ```shell copy
 dart run forui theme create zinc
 ```
 
-This will generate a theme which you can add the generated divider styles to:
-```dart filename="lib/theme/theme.dart" {1, 19, 39} copy
-import 'divider_styles.dart';
-
-FThemeData get zincLight {
-  const colors = FColors(
-    brightness: Brightness.light,
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    ...
-  );
-
-  final typography = _typography(colors: colors);
-  final style = _style(colors: colors, typography: typography);
-
-  return FThemeData(
-    colors: colors,
-    typography: typography,
-    style: style,
-    // Add your previously generated divider styles and other generated styles here.
-    dividerStyles: dividerStyles(colors: colors, style: style),
-  );
-}
-
-FThemeData get zincDark {
-  const colors = FColors(
-    brightness: Brightness.dark,
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    ...
-  );
-
-  final typography = _typography(colors: colors);
-  final style = _style(colors: colors, typography: typography);
-
-  return FThemeData(
-    colors: colors,
-    typography: typography,
-    style: style,
-    // Add your previously generated divider styles and other generated styles here.
-    dividerStyles: dividerStyles(colors: colors, style: style),
-  );
-}
-
-FTypography _typography({
-  required FColors colors,
-  String defaultFontFamily = 'packages/forui/Inter',
-}) => FTypography(
-  xs: TextStyle(
-    color: colors.foreground,
-    fontFamily: defaultFontFamily,
-    fontSize: 12,
-    height: 1,
-  ),
-  sm: TextStyle(
-    color: colors.foreground,
-    fontFamily: defaultFontFamily,
-    fontSize: 14,
-    height: 1.25,
-  ),
-  ...
-);
-
-FStyle _style({required FColors colors, required FTypography typography}) =>
-    FStyle(
-      enabledFormFieldStyle: FFormFieldStyle.inherit(
-        labelColor: colors.primary,
-        descriptionColor: colors.mutedForeground,
-        typography: typography,
-      ),
-      disabledFormFieldStyle: FFormFieldStyle.inherit(
-        labelColor: colors.disable(colors.primary),
-        descriptionColor: colors.disable(colors.mutedForeground),
-        typography: typography,
-      ),
-      ...
-    );
+Run the following command to generate a `FButtonStyles`:
+```shell copy
+dart run forui style create button
 ```
 
-The first command, `dart forui init` generates a main file which you can add the generated theme to:
+The first command, `dart run forui init` generates a main file which you can add the generated theme to:
+
 ```dart filename="lib/main.dart" {1, 13} copy
 import 'theme/theme.dart';
 
@@ -243,6 +146,145 @@ class _ExampleState extends State<Example> {
 }
 ```
 
+The second command, `dart run forui theme create zinc` generates a theme file which you can add the generated button
+styles to:
+```dart filename="lib/theme/theme.dart" {1, 19, 39} copy
+import 'button_styles.dart';
+
+FThemeData get zincLight {
+  const colors = FColors(
+    brightness: Brightness.light,
+    background: Color(0xFFFFFFFF),
+    foreground: Color(0xFF09090B),
+    ...
+  );
+
+  final typography = _typography(colors: colors);
+  final style = _style(colors: colors, typography: typography);
+
+  return FThemeData(
+    colors: colors,
+    typography: typography,
+    style: style,
+    // Add your previously generated button styles and other generated styles here.
+    buttonStyles: buttonStyles(colors: colors, typography, typography, style: style),
+  );
+}
+
+FThemeData get zincDark {
+  const colors = FColors(
+    brightness: Brightness.dark,
+    background: Color(0xFF09090B),
+    foreground: Color(0xFFFAFAFA),
+    ...
+  );
+
+  final typography = _typography(colors: colors);
+  final style = _style(colors: colors, typography: typography);
+
+  return FThemeData(
+    colors: colors,
+    typography: typography,
+    style: style,
+    // Add your previously generated button styles and other generated styles here.
+    buttonStyles: buttonStyles(colors: colors, typography, typography, style: style),
+  );
+}
+
+FTypography _typography({
+  required FColors colors,
+  String defaultFontFamily = 'packages/forui/Inter',
+}) => FTypography(
+  xs: TextStyle(
+    color: colors.foreground,
+    fontFamily: defaultFontFamily,
+    fontSize: 12,
+    height: 1,
+  ),
+  sm: TextStyle(
+    color: colors.foreground,
+    fontFamily: defaultFontFamily,
+    fontSize: 14,
+    height: 1.25,
+  ),
+  ...
+);
+
+FStyle _style({required FColors colors, required FTypography typography}) =>
+    FStyle(
+      formFieldStyle: FFormFieldStyle.inherit(
+        colors: colors,
+        typography: typography,
+      ),
+      focusedOutlineStyle: FFocusedOutlineStyle(
+        color: colors.primary,
+        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      ),
+      iconStyle: IconThemeData(color: colors.primary, size: 20),
+      tappableStyle: FTappableStyle(),
+    );
+```
+
+The last command, `dart run forui style create button` generates a button styles file which you can add to your theme.
+
+`FWidgetStateMap` allows you to define different styles for different combinations of states for a widget. This
+combination of states is known as a "constraint".
+
+To add a decoration for a disabled button when it is hovered or pressed:
+```dart filename="lib/theme/button_styles.dart" {24-27} copy
+FButtonStyles buttonStyles({
+  required FColors colors,
+  required FTypography typography,
+  required FStyle style,
+}) => FButtonStyles(
+  primary: _buttonStyle(
+    colors: colors,
+    style: style,
+    typography: typography,
+    color: colors.primary,
+    foregroundColor: colors.primaryForeground,
+  ),
+  ...
+);
+
+FButtonStyle _buttonStyle({
+  required FColors colors,
+  required FTypography typography,
+  required FStyle style,
+  required Color color,
+  required Color foregroundColor,
+}) => FButtonStyle(
+  decoration: FWidgetStateMap({
+    WidgetState.disabled & (WidgetState.hovered | WidgetState.pressed): BoxDecoration(
+      borderRadius: style.borderRadius,
+      color: colors.hover(colors.disable(color)),
+    ),
+
+    WidgetState.disabled: BoxDecoration(
+      borderRadius: style.borderRadius,
+      color: colors.disable(color),
+    ),
+
+    WidgetState.hovered | WidgetState.pressed: BoxDecoration(
+      borderRadius: style.borderRadius,
+      color: colors.hover(color),
+    ),
+    WidgetState.any: BoxDecoration(
+      borderRadius: style.borderRadius,
+      color: color,
+    ),
+  }),
+  ...
+);
+```
+
+Constraints are applied in the order they are defined (top to bottom). The first matching constraint will be used.
+This means that more specific constraints should be defined above more general ones.
+
+Most `FWidgetStateMap` properties only support a subset of `WidgetState`s. For example, `FButtonStyle.decoration` only
+supports `WidgetState.disabled`, `WidgetState.hovered`, `WidgetState.pressed` and `WidgetState.focused`. A property's
+supported states are documented in its API docs.
+
 ## Class Diagram
 
 ```mermaid
@@ -282,7 +324,7 @@ FThemeData --> FCardStyle
 ### Colors
 
 The `Colors` class contains the color scheme for the theme.
-This usually consist of a set of colors with its corresponding foreground color (eg. `primary` and `primaryForeground`).
+This usually consists of a set of colors with its corresponding foreground color (eg. `primary` and `primaryForeground`).
 
 In most cases, the color will be used as the background color, and the foreground color will be used as the text/icon color.
 
@@ -339,16 +381,17 @@ Widget build(BuildContext context) {
 }
 ```
 
-
 #### Custom Font Family
 
 To change the default font family, use the `copyWith(...)` method to apply the new font family.
 As some fonts may have different sizes, the `scale(...)` method is provided to quickly scale all the font sizes.
 
-```dart filename="main.dart" {4-6} copy
+```dart filename="main.dart" copy
 @override
-Widget build(BuildContext context) => FTheme(
-      data: FThemes.zinc.light.copyWith(
+Widget build(BuildContext context) =>
+    FTheme(
+      data: FThemeData(
+        colors: FThemes.zinc.light.colors,
         typography: FThemes.zinc.light.typography.copyWith(
           defaultFontFamily: 'Roboto',
         ).scale(sizeScalar: 0.8),
@@ -356,7 +399,6 @@ Widget build(BuildContext context) => FTheme(
       child: const FScaffold(...),
     );
 ```
-
 
 ### Style
 
@@ -382,11 +424,10 @@ Widget build(BuildContext context) {
 }
 ```
 
+## Override Individual Widget Styles
 
-## Override Individual Widgets
-
-In certain cases, you may want to override the theme for a specific widget.
-This can be easily achieved by using the `style(...)` parameter.
+In certain cases, you may want to override the theme for a specific widget. This can be easily achieved by using the
+`copyWith(...)` function.
 
 <Callout type="info">
     In the example below, styles are only overridden for this specific `FCard` widget.
@@ -410,10 +451,58 @@ Widget build(BuildContext context) {
 }
 ```
 
+### Override `FWidgetStateMap` Properties
+
+`FWidgetStateMap` allows you to define different styles for different combinations of states for a widget. This
+combination of states is known as a "constraint".
+
+Constraints are applied in the order they are defined (top to bottom). The first matching constraint will be used.
+This means that more specific constraints should be defined above more general ones.
+
+```dart {10, 18, 26} copy
+@override
+Widget build(BuildContext context) {
+  final style = context.theme.buttonStyles.primary;
+
+  return Column(
+    children: [
+      FButton(
+        style: style.copyWith(
+          // Override the decoration for the constraints that are hovered.
+          decoration: style.decoration.replaceAllWhere({WidgetState.hovered}, BoxDecoration()),
+        ),
+        onPress: () {},
+        child: const Text('Button'),
+      ),
+      FButton(
+        style: style.copyWith(
+          // Override the decoration for the first constraint that is hovered.
+          decoration: style.decoration.replaceFirstWhere({WidgetState.hovered}, BoxDecoration()),
+        ),
+        onPress: () {},
+        child: const Text('Button'),
+      ),
+      FButton(
+        style: style.copyWith(
+          // Override the decoration for the last constraint that is hovered.
+          decoration: style.decoration.replaceLastWhere({WidgetState.hovered}, BoxDecoration()),
+        ),
+        onPress: () {},
+        child: const Text('Button'),
+      ),
+    ],
+  );
+}
+```
+
+Most `FWidgetStateMap` properties only support a subset of `WidgetState`s. For example, `FButtonStyle.decoration` only
+supports `WidgetState.disabled`, `WidgetState.hovered`, `WidgetState.pressed` and `WidgetState.focused`. A property's
+supported states are documented in its API docs.
 
 ## Material Design Interoperability
 
-Forui provides a way to convert its themes to Material Design's `ThemeData` for interoperability between Forui and Material widgets. This is useful when:
+Forui provides a way to convert its themes to Material Design's `ThemeData` for interoperability between Forui and
+Material widgets. This is useful when:
 
 - Using Material widgets within a Forui application
 - Maintaining consistent theming across both Forui and Material components
@@ -423,7 +512,6 @@ Forui provides a way to convert its themes to Material Design's `ThemeData` for 
   The `toApproximateMaterialTheme()` method is marked as experimental. As an experimental feature, this method can change without prior warning.
   The mapping between Forui and Material themes is done on a best-effort basis, and may not perfectly capture all the nuances of a Forui theme.
 </Callout>
-
 
 ### Usage
 
@@ -438,7 +526,7 @@ import 'package:forui/forui.dart';
 @override
 Widget build(BuildContext context) {
   final fThemeData = FThemes.zinc.light;
-  
+
   return MaterialApp(
     theme: fThemeData.toApproximateMaterialTheme(),
     home: Scaffold(

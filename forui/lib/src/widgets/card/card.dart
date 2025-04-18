@@ -10,7 +10,7 @@ part 'card.style.dart';
 
 /// A card.
 ///
-/// Card are typically used to group related information together.
+/// Cards are typically used to group related information together.
 ///
 /// See:
 /// * https://forui.dev/docs/data/card for working examples.
@@ -22,7 +22,7 @@ final class FCard extends StatelessWidget {
   /// The child.
   final Widget child;
 
-  /// Creates a [FCard] with a tile, subtitle, and [child].
+  /// Creates a [FCard] with a title, subtitle, and [child].
   ///
   /// The card's layout is as follows:
   /// ```diagram

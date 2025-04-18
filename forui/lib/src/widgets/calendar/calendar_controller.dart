@@ -13,7 +13,7 @@ DateTime _truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, dat
 ///
 /// This class should be extended to customize date selection. By default, the following controllers are provided:
 /// * [FCalendarController.date] for selecting a single date.
-/// * [FCalendarController.dates] for selecting multiple date.
+/// * [FCalendarController.dates] for selecting multiple dates.
 /// * [FCalendarController.range] for selecting a single range.
 abstract class FCalendarController<T> extends FValueNotifier<T> {
   /// Creates a [FCalendarController] that allows only a single date to be selected, with the given initially selected
@@ -55,7 +55,7 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   /// ```
   ///
   /// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
-  /// the help of an 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
+  /// the help of a 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
   /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
   ///
   /// ## Contract
@@ -82,15 +82,15 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   /// ```
   ///
   /// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
-  /// the help of an 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
+  /// the help of a 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
   /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
   ///
-  /// Both the start and end dates of the range is inclusive. Unselectable dates within the selected range are selected
+  /// Both the start and end dates of the range are inclusive. Unselectable dates within the selected range are selected
   /// regardless.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * the given dates in [initialSelection] is not in UTC timezone and [truncateAndStripTimezone] is false.
+  /// * the given dates in [initialSelection] are not in UTC timezone and [truncateAndStripTimezone] is false.
   /// * the end date is less than start date.
   static FCalendarController<(DateTime, DateTime)?> range({
     (DateTime, DateTime)? initialSelection,

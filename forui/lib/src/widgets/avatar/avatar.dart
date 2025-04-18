@@ -90,7 +90,7 @@ final class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
     this.fadeInDuration = const Duration(milliseconds: 500),
   });
 
-  /// Creates a [FCardStyle] that inherits its properties.
+  /// Creates a [FAvatarStyle] that inherits its properties.
   FAvatarStyle.inherit({required FColors colors, required FTypography typography})
     : this(
         backgroundColor: colors.muted,

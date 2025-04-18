@@ -8,13 +8,13 @@ import 'package:forui/src/foundation/input/parser.dart';
 @internal
 abstract class InputController extends TextEditingController {
   final FTextFieldStyle style;
-  final WidgetStatesController states;
+  final WidgetStatesController statesController;
   final Parser parser;
   final String placeholder;
   bool mutating = false;
 
   InputController(this.style, this.parser, this.placeholder, TextEditingValue? value)
-    : states = WidgetStatesController(),
+    : statesController = WidgetStatesController(),
       super.fromValue(value);
 
   void traverse({required bool forward});
@@ -86,19 +86,12 @@ abstract class InputController extends TextEditingController {
   @override
   TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
     if (text == placeholder) {
-      style = switch (states.value) {
-        // Disabled styles
-        final values when values.containsAll(const {WidgetState.disabled, WidgetState.focused}) =>
-          this.style.disabledStyle.contentTextStyle,
-        final values when values.contains(WidgetState.disabled) => this.style.disabledStyle.contentTextStyle,
-        // Error styles
-        final values when values.containsAll(const {WidgetState.error, WidgetState.focused}) =>
-          this.style.errorStyle.contentTextStyle,
-        final values when values.contains(WidgetState.error) => this.style.errorStyle.contentTextStyle,
-        // Enabled styles
-        final values when values.containsAll({WidgetState.focused}) => this.style.enabledStyle.contentTextStyle,
-        _ => this.style.enabledStyle.hintTextStyle,
-      };
+      final states = statesController.value;
+      // TODO: explore custom widget states.
+      style =
+          states.contains(WidgetState.focused)
+              ? this.style.contentTextStyle.resolve(states)
+              : this.style.hintTextStyle.maybeResolve({}) ?? style;
     }
 
     return super.buildTextSpan(context: context, withComposing: withComposing, style: style);

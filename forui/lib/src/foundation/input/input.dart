@@ -10,7 +10,7 @@ import 'package:forui/src/localizations/localization.dart';
 
 @internal
 abstract class Input<T> extends StatefulWidget {
-  final ValueWidgetBuilder<FTextFieldStateStyle> builder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder;
   final Widget? label;
   final Widget? description;
   final Widget Function(BuildContext, String) errorBuilder;
@@ -30,8 +30,8 @@ abstract class Input<T> extends StatefulWidget {
   final MouseCursor? mouseCursor;
   final VoidCallback? onTap;
   final bool canRequestFocus;
-  final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
-  final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
   final bool clearable;
   final FLocalizations localizations;
 
@@ -126,10 +126,10 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
         child: FTextField(
           controller: controller,
           style: textFieldStyle,
-          statesController: controller.states,
+          statesController: controller.statesController,
           builder: widget.builder,
           autocorrect: false,
-          // We cannot use TextInputType.number as it is does not contain a done button.
+          // We cannot use TextInputType.number as it does not contain a done button.
           keyboardType: const TextInputType.numberWithOptions(signed: true),
           minLines: 1,
           maxLines: 1,

@@ -8,8 +8,6 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/month/paged_month_picker.dart';
 import 'package:forui/src/widgets/calendar/year/paged_year_picker.dart';
 
-part 'year_month_picker.style.dart';
-
 @internal
 class YearMonthPicker extends StatefulWidget {
   final FCalendarStyle style;
@@ -88,44 +86,4 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
       );
     }
   }
-}
-
-/// The year/month picker's style.
-final class FCalendarYearMonthPickerStyle with Diagnosticable, _$FCalendarYearMonthPickerStyleFunctions {
-  /// The enabled years/months' styles.
-  @override
-  final FCalendarEntryStyle enabledStyle;
-
-  /// The disabled years/months' styles.
-  @override
-  final FCalendarEntryStyle disabledStyle;
-
-  /// Creates a new year/month picker style.
-  FCalendarYearMonthPickerStyle({required this.enabledStyle, required this.disabledStyle});
-
-  /// Creates a new year/month picker style that inherits the color scheme and typography.
-  FCalendarYearMonthPickerStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         enabledStyle: FCalendarEntryStyle(
-           backgroundColor: colors.background,
-           textStyle: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
-           hoveredBackgroundColor: colors.secondary,
-           focusedBorderColor: colors.foreground,
-           radius: const Radius.circular(8),
-           tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-         ),
-         disabledStyle: FCalendarEntryStyle(
-           backgroundColor: colors.background,
-           textStyle: typography.base.copyWith(
-             color: colors.disable(colors.mutedForeground),
-             fontWeight: FontWeight.w500,
-           ),
-           focusedBorderColor: colors.background,
-           radius: const Radius.circular(8),
-           tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-         ),
-       );
 }

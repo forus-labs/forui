@@ -10,10 +10,10 @@ part 'button.style.dart';
 
 /// A button.
 ///
-/// [FButton]s typically contain icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
-/// button will be disabled, it will not react to touch.
+/// [FButton] typically contains icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
+/// button will be disabled, and it will not react to touch.
 ///
-/// The constants in [FBaseButtonStyle] provide a convenient way to style a badge.
+/// The constants in [FBaseButtonStyle] provide a convenient way to style a button.
 ///
 /// See:
 /// * https://forui.dev/docs/form/button for working examples.
@@ -104,8 +104,6 @@ class FButton extends StatelessWidget {
       Variant.ghost => context.theme.buttonStyles.ghost,
     };
 
-    final enabled = onPress != null || onLongPress != null;
-
     return FTappable(
       style: style.tappableStyle,
       focusedOutlineStyle: style.focusedOutlineStyle,
@@ -115,15 +113,10 @@ class FButton extends StatelessWidget {
       onPress: onPress,
       onLongPress: onLongPress,
       builder:
-          (_, data, child) => DecoratedBox(
-            decoration: switch ((enabled, data.hovered || data.pressed)) {
-              (true, false) => style.enabledBoxDecoration,
-              (true, true) => style.enabledHoverBoxDecoration,
-              (false, _) => style.disabledBoxDecoration,
-            },
-            child: child,
+          (_, states, _) => DecoratedBox(
+            decoration: style.decoration.resolve(states),
+            child: FButtonData(style: style, states: states, child: child),
           ),
-      child: FButtonData(style: style, enabled: enabled, child: child),
     );
   }
 
@@ -178,17 +171,11 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   /// Shorthand for the current context's [FButtonStyles.ghost] style.
   static const FBaseButtonStyle ghost = Variant.ghost;
 
-  /// The box decoration for an enabled button.
+  /// The box decoration.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
-  final BoxDecoration enabledBoxDecoration;
-
-  /// The box decoration for an enabled button when it is hovered over.
-  @override
-  final BoxDecoration enabledHoverBoxDecoration;
-
-  /// The box decoration for a disabled button.
-  @override
-  final BoxDecoration disabledBoxDecoration;
+  final FWidgetStateMap<BoxDecoration> decoration;
 
   /// The focused outline style.
   @override
@@ -208,35 +195,43 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
 
   /// Creates a [FButtonStyle].
   FButtonStyle({
-    required this.enabledBoxDecoration,
-    required this.enabledHoverBoxDecoration,
-    required this.disabledBoxDecoration,
+    required this.decoration,
     required this.focusedOutlineStyle,
     required this.contentStyle,
     required this.iconContentStyle,
     required this.tappableStyle,
   });
 
-  /// Creates a [FButtonStyle] that inherits its properties from the given arguments.
+  /// Creates a [FButtonStyle] that inherits its properties.
   FButtonStyle.inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    required Color background,
-    required Color foreground,
+    required Color color,
+    required Color foregroundColor,
   }) : this(
-         enabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: background),
-         enabledHoverBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.hover(background)),
-         disabledBoxDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(background)),
+         decoration: FWidgetStateMap({
+           WidgetState.disabled: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(color)),
+           WidgetState.hovered | WidgetState.pressed: BoxDecoration(
+             borderRadius: style.borderRadius,
+             color: colors.hover(color),
+           ),
+           WidgetState.any: BoxDecoration(borderRadius: style.borderRadius, color: color),
+         }),
          focusedOutlineStyle: style.focusedOutlineStyle,
          contentStyle: FButtonContentStyle.inherit(
            typography: typography,
-           enabled: foreground,
-           disabled: colors.disable(foreground, colors.disable(background)),
+           enabled: foregroundColor,
+           disabled: colors.disable(foregroundColor, colors.disable(color)),
          ),
          iconContentStyle: FButtonIconContentStyle(
-           enabledStyle: IconThemeData(color: foreground, size: 20),
-           disabledStyle: IconThemeData(color: colors.disable(foreground, colors.disable(background)), size: 20),
+           iconStyle: FWidgetStateMap({
+             WidgetState.disabled: IconThemeData(
+               color: colors.disable(foregroundColor, colors.disable(color)),
+               size: 20,
+             ),
+             WidgetState.any: IconThemeData(color: foregroundColor, size: 20),
+           }),
          ),
          tappableStyle: style.tappableStyle,
        );
@@ -258,20 +253,20 @@ class FButtonData extends InheritedWidget {
   /// The button's style.
   final FButtonStyle style;
 
-  /// True if the button is enabled.
-  final bool enabled;
+  /// The current states.
+  final Set<WidgetState> states;
 
   /// Creates a [FButtonData].
-  const FButtonData({required this.style, required super.child, this.enabled = true, super.key});
+  const FButtonData({required this.style, required this.states, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(covariant FButtonData old) => style != old.style || enabled != old.enabled;
+  bool updateShouldNotify(covariant FButtonData old) => style != old.style || !setEquals(states, old.states);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'));
+      ..add(IterableProperty('states', states));
   }
 }

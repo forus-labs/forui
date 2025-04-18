@@ -4,6 +4,7 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Select
+
 A select displays a list of drop-down options for the user to pick from.
 
 It is a form-field and can therefore be used in a form.
@@ -49,6 +50,7 @@ It is a form-field and can therefore be used in a form.
         );
     }
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -58,7 +60,7 @@ It is a form-field and can therefore be used in a form.
 
 ```dart copy
 FSelect<String>(
-  controller: FSelectController<String>(),
+  controller: FSelectController<String>(vysnc: this),
   label: const Text('Country'),
   description: const Text('Select your country of residence'),
   hint: 'Choose a country',
@@ -128,7 +130,7 @@ FSelect<User>.search(
     hint: 'Type to search...',
     debounce: const Duration(milliseconds: 300),
   ),
-  searchLoadingBuilder: (context, style, _) => Text('Loading...),
+  searchLoadingBuilder: (context, style, _) => Text('Loading...'),
   searchErrorBuilder: (context, error, stackTrace) => Text('Error...'),
 );
 ```
@@ -420,7 +422,7 @@ FSelect<User>.search(
               ),
               const SizedBox(height: 25),
               FButton(
-                label: const Text('Submit'),
+                child: const Text('Submit'),
                 onPress: () {
                   if (_formKey.currentState!.validate()) {
                     // Form is valid, do something with department.e

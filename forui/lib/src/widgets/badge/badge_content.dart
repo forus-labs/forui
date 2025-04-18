@@ -40,7 +40,7 @@ final class FBadgeContentStyle with Diagnosticable, _$FBadgeContentStyleFunction
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FBadgeContentStyle].
-  FBadgeContentStyle({
+  const FBadgeContentStyle({
     required this.labelTextStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
   });

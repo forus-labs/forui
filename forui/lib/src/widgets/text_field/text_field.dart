@@ -25,8 +25,8 @@ typedef FTextFieldCounterBuilder =
 
 /// A text field.
 ///
-/// It lets the user enter text, either with hardware keyboard or with an onscreen keyboard. A [FTextField] is internally
-/// a [FormField], therefore it can be used in a [Form].
+/// It lets the user enter text, either with a hardware keyboard or with an onscreen keyboard. A [FTextField] is
+/// internally a [FormField], therefore it can be used in a [Form].
 ///
 /// See:
 /// * https://forui.dev/docs/form/text-field for working examples.
@@ -36,7 +36,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   static Widget _contextMenuBuilder(BuildContext _, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 
-  static Widget _fieldBuilder(BuildContext _, FTextFieldStateStyle _, Widget? child) => child!;
+  static Widget _fieldBuilder(BuildContext _, (FTextFieldStyle, Set<WidgetState>) _, Widget? child) => child!;
 
   static Widget _errorBuilder(BuildContext _, String text) => Text(text);
 
@@ -52,7 +52,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   ///
   /// Defaults to returning the given child.
   /// {@endtemplate}
-  final ValueWidgetBuilder<FTextFieldStateStyle> builder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder;
 
   /// {@template forui.text_field.errorBuilder}
   /// A builder that creates a widget to display validation errors.
@@ -305,7 +305,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   /// Whitespace characters (e.g. newline, space, tab) are included in the character count.
   ///
   /// If [maxLengthEnforcement] is [MaxLengthEnforcement.none], then more than [maxLength] characters may be entered,
-  /// but the error counter and divider will switch to the [style]'s [FTextFieldStyle.errorStyle] when the limit is exceeded.
+  /// but the error counter and divider will switch to the [style]'s error style when the limit is exceeded.
   /// {@endtemplate}
   final int? maxLength;
 
@@ -597,14 +597,14 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
   ///
   /// See [InputDecoration.prefixIcon] for more information.
   /// {@endtemplate}
-  final ValueWidgetBuilder<FTextFieldStateStyle>? prefixBuilder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
 
   /// {@template forui.text_field.suffixBuilder}
   /// The suffix's builder.
   ///
   /// See [InputDecoration.suffixIcon] for more information.
   /// {@endtemplate}
-  final ValueWidgetBuilder<FTextFieldStateStyle>? suffixBuilder;
+  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
 
   /// {@template forui.text_field.clearable}
   /// A predicate that returns true if a clear icon should be shown at the end when the text field is not empty.
@@ -634,6 +634,16 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
 
   @override
   final Widget Function(BuildContext, String) errorBuilder;
+
+  /// {@template f_text_field.floating_label_alignment}
+  /// The alignment of the label. Defaults to [AlignmentDirectional.topStart].
+  /// {@endtemplate}
+  final AlignmentGeometry? floatingLabelAlignment;
+
+  /// {@template f_text_field.floating_label_behavior}
+  /// The width value interval for the text span. Defaults to FloatingLabelWidth.sufficient
+  /// {@endtemplate}
+  final FloatingLabelBehavior? floatingLabelBehavior;
 
   /// Creates a [FTextField].
   const FTextField({
@@ -700,6 +710,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
+    this.floatingLabelAlignment,
+    this.floatingLabelBehavior,
     super.key,
   });
 
@@ -768,6 +780,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
+    this.floatingLabelAlignment,
+    this.floatingLabelBehavior,
     super.key,
   });
 
@@ -839,6 +853,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
+    this.floatingLabelAlignment,
+    this.floatingLabelBehavior,
     super.key,
   });
 
@@ -911,6 +927,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.autovalidateMode = AutovalidateMode.disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
+    this.floatingLabelAlignment,
+    this.floatingLabelBehavior,
     super.key,
   });
 
@@ -1029,6 +1047,8 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
       ..add(StringProperty('initialValue', initialValue))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(DiagnosticsProperty('floatingLabelAlignment', floatingLabelAlignment))
+      ..add(EnumProperty('floatingLabelBehavior', floatingLabelBehavior));
   }
 }

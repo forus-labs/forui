@@ -429,54 +429,13 @@ final class FThemeData with Diagnosticable, FTransformable {
 
       //// Input
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: textFieldStyle.enabledStyle.unfocusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.enabledStyle.unfocusedStyle.color,
-            width: textFieldStyle.enabledStyle.unfocusedStyle.width,
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.enabledStyle.unfocusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.enabledStyle.unfocusedStyle.color,
-            width: textFieldStyle.enabledStyle.unfocusedStyle.width,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.enabledStyle.focusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.enabledStyle.focusedStyle.color,
-            width: textFieldStyle.enabledStyle.focusedStyle.width,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.errorStyle.unfocusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.errorStyle.unfocusedStyle.color,
-            width: textFieldStyle.errorStyle.unfocusedStyle.width,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.errorStyle.focusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.errorStyle.focusedStyle.color,
-            width: textFieldStyle.errorStyle.focusedStyle.width,
-          ),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: textFieldStyle.disabledStyle.unfocusedStyle.radius,
-          borderSide: BorderSide(
-            color: textFieldStyle.disabledStyle.unfocusedStyle.color,
-            width: textFieldStyle.disabledStyle.unfocusedStyle.width,
-          ),
-        ),
-        labelStyle: textFieldStyle.enabledStyle.descriptionTextStyle,
-        floatingLabelStyle: textFieldStyle.enabledStyle.labelTextStyle,
-        hintStyle: textFieldStyle.enabledStyle.hintTextStyle,
-        errorStyle: textFieldStyle.errorStyle.errorTextStyle,
-        helperStyle: textFieldStyle.enabledStyle.descriptionTextStyle,
-        counterStyle: textFieldStyle.enabledStyle.counterTextStyle,
+        border: WidgetStateInputBorder.resolveWith(textFieldStyle.border.resolve),
+        labelStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
+        floatingLabelStyle: textFieldStyle.labelTextStyle.maybeResolve({}),
+        hintStyle: textFieldStyle.hintTextStyle.maybeResolve({}),
+        errorStyle: textFieldStyle.errorTextStyle,
+        helperStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
+        counterStyle: textFieldStyle.counterTextStyle.maybeResolve({}),
         contentPadding: textFieldStyle.contentPadding,
       ),
 
@@ -502,183 +461,144 @@ final class FThemeData with Diagnosticable, FTransformable {
 
       /// Slider
       sliderTheme: SliderThemeData(
-        activeTrackColor: sliderStyles.horizontalStyle.enabledStyle.activeColor,
-        inactiveTrackColor: sliderStyles.horizontalStyle.enabledStyle.inactiveColor,
-        disabledActiveTrackColor: sliderStyles.horizontalStyle.disabledStyle.activeColor,
-        disabledInactiveTrackColor: sliderStyles.horizontalStyle.disabledStyle.inactiveColor,
-        activeTickMarkColor: sliderStyles.horizontalStyle.enabledStyle.markStyle.tickColor,
-        inactiveTickMarkColor: sliderStyles.horizontalStyle.enabledStyle.markStyle.tickColor,
-        disabledActiveTickMarkColor: sliderStyles.horizontalStyle.disabledStyle.markStyle.tickColor,
-        disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.disabledStyle.markStyle.tickColor,
-        thumbColor: sliderStyles.horizontalStyle.enabledStyle.thumbStyle.borderColor,
-        disabledThumbColor: sliderStyles.horizontalStyle.disabledStyle.thumbStyle.borderColor,
-        valueIndicatorColor: sliderStyles.horizontalStyle.enabledStyle.tooltipStyle.decoration.color,
-        valueIndicatorTextStyle: sliderStyles.horizontalStyle.enabledStyle.tooltipStyle.textStyle,
+        activeTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve({}),
+        inactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.maybeResolve({}),
+        disabledActiveTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve({WidgetState.disabled}),
+        disabledInactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.maybeResolve({WidgetState.disabled}),
+        activeTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({}),
+        inactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({}),
+        disabledActiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({
+          WidgetState.disabled,
+        }),
+        disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({
+          WidgetState.disabled,
+        }),
+        thumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.maybeResolve({}),
+        disabledThumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.maybeResolve({WidgetState.disabled}),
+        valueIndicatorColor: sliderStyles.horizontalStyle.tooltipStyle.decoration.color,
+        valueIndicatorTextStyle: sliderStyles.horizontalStyle.tooltipStyle.textStyle,
       ),
 
       //// Switch
       switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateColor.fromMap({
-          WidgetState.disabled: switchStyle.disabledStyle.thumbColor,
-          WidgetState.any: switchStyle.enabledStyle.thumbColor,
-        }),
-        trackColor: WidgetStateColor.fromMap({
-          WidgetState.disabled & WidgetState.selected: switchStyle.disabledStyle.checkedColor,
-          WidgetState.disabled: switchStyle.disabledStyle.uncheckedColor,
-          WidgetState.selected: switchStyle.enabledStyle.checkedColor,
-          WidgetState.any: switchStyle.enabledStyle.uncheckedColor,
-        }),
-        trackOutlineColor: WidgetStateColor.fromMap({
-          WidgetState.disabled & WidgetState.selected: switchStyle.disabledStyle.checkedColor,
-          WidgetState.disabled: switchStyle.disabledStyle.uncheckedColor,
-          WidgetState.selected: switchStyle.enabledStyle.checkedColor,
-          WidgetState.any: switchStyle.enabledStyle.uncheckedColor,
-        }),
+        thumbColor: switchStyle.thumbColor,
+        trackColor: switchStyle.trackColor,
+        trackOutlineColor: switchStyle.trackColor,
       ),
 
       //// Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateTextStyle.fromMap({
-            WidgetState.disabled: buttonStyles.secondary.contentStyle.disabledTextStyle,
-            WidgetState.any: buttonStyles.secondary.contentStyle.enabledTextStyle,
-          }),
-          backgroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.secondary.disabledBoxDecoration.color,
-            WidgetState.hovered: buttonStyles.secondary.enabledHoverBoxDecoration.color,
-            WidgetState.any: buttonStyles.secondary.enabledBoxDecoration.color,
-          }),
-          foregroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.secondary.contentStyle.disabledTextStyle.color,
-            WidgetState.any: buttonStyles.secondary.contentStyle.enabledTextStyle.color,
-          }),
+          textStyle: buttonStyles.secondary.contentStyle.textStyle,
+          backgroundColor: WidgetStateColor.resolveWith(
+            (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondary,
+          ),
+          foregroundColor: WidgetStateColor.resolveWith(
+            (states) =>
+                buttonStyles.secondary.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
+          ),
           padding: WidgetStateProperty.all(buttonStyles.secondary.contentStyle.padding),
           shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateTextStyle.fromMap({
-            WidgetState.disabled: buttonStyles.primary.contentStyle.disabledTextStyle,
-            WidgetState.any: buttonStyles.primary.contentStyle.enabledTextStyle,
-          }),
-          backgroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.primary.disabledBoxDecoration.color,
-            WidgetState.hovered: buttonStyles.primary.enabledHoverBoxDecoration.color,
-            WidgetState.any: buttonStyles.primary.enabledBoxDecoration.color,
-          }),
-          foregroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.primary.contentStyle.disabledTextStyle.color,
-            WidgetState.any: buttonStyles.primary.contentStyle.enabledTextStyle.color,
-          }),
+          textStyle: buttonStyles.primary.contentStyle.textStyle,
+          backgroundColor: WidgetStateColor.resolveWith(
+            (states) => buttonStyles.primary.decoration.maybeResolve(states)?.color ?? colors.secondary,
+          ),
+          foregroundColor: WidgetStateColor.resolveWith(
+            (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondaryForeground,
+          ),
           padding: WidgetStateProperty.all(buttonStyles.primary.contentStyle.padding),
           shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateTextStyle.fromMap({
-            WidgetState.disabled: buttonStyles.outline.contentStyle.disabledTextStyle,
-            ~WidgetState.disabled: buttonStyles.outline.contentStyle.enabledTextStyle,
-          }),
-          backgroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.outline.disabledBoxDecoration.color,
-            WidgetState.hovered: buttonStyles.outline.enabledHoverBoxDecoration.color,
-            WidgetState.any: buttonStyles.outline.enabledBoxDecoration.color,
-          }),
-          foregroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.outline.contentStyle.disabledTextStyle.color,
-            WidgetState.any: buttonStyles.outline.contentStyle.enabledTextStyle.color,
-          }),
+          textStyle: buttonStyles.outline.contentStyle.textStyle,
+          backgroundColor: WidgetStateColor.resolveWith(
+            (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
+          ),
+          foregroundColor: WidgetStateColor.resolveWith(
+            (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
+          ),
           padding: WidgetStateProperty.all(buttonStyles.outline.contentStyle.padding),
-          side: WidgetStateBorderSide.fromMap({
-            WidgetState.disabled: BorderSide(
-              color: buttonStyles.outline.disabledBoxDecoration.border?.top.color ?? colors.disable(colors.border),
-              width: buttonStyles.outline.disabledBoxDecoration.border?.top.width ?? style.borderWidth,
-            ),
-            WidgetState.hovered: BorderSide(
-              color: buttonStyles.outline.enabledHoverBoxDecoration.border?.top.color ?? colors.hover(colors.border),
-              width: buttonStyles.outline.enabledHoverBoxDecoration.border?.top.width ?? style.borderWidth,
-            ),
-            WidgetState.any: BorderSide(
-              color: buttonStyles.outline.enabledBoxDecoration.border?.top.color ?? colors.border,
-              width: buttonStyles.outline.enabledBoxDecoration.border?.top.width ?? style.borderWidth,
-            ),
+          side: WidgetStateBorderSide.resolveWith((states) {
+            final border = buttonStyles.outline.decoration.maybeResolve(states)?.border;
+            return BorderSide(
+              color:
+                  border?.top.color ??
+                  switch (states) {
+                    _ when states.contains(WidgetState.disabled) => colors.disable(colors.border),
+                    _ when states.contains(WidgetState.hovered) => colors.hover(colors.border),
+                    _ => colors.border,
+                  },
+              width: border?.top.width ?? style.borderWidth,
+            );
           }),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: buttonStyles.outline.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          shape: WidgetStateProperty.resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius: buttonStyles.outline.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateTextStyle.fromMap({
-            WidgetState.disabled: buttonStyles.ghost.contentStyle.disabledTextStyle,
-            WidgetState.any: buttonStyles.ghost.contentStyle.enabledTextStyle,
-          }),
-          backgroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.ghost.disabledBoxDecoration.color,
-            WidgetState.hovered: buttonStyles.ghost.enabledHoverBoxDecoration.color,
-            WidgetState.any: buttonStyles.ghost.enabledBoxDecoration.color,
-          }),
-          foregroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.ghost.contentStyle.disabledTextStyle.color,
-            WidgetState.any: buttonStyles.ghost.contentStyle.enabledTextStyle.color,
-          }),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          textStyle: buttonStyles.ghost.contentStyle.textStyle,
+          backgroundColor: WidgetStateColor.resolveWith(
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
+          ),
+          foregroundColor: WidgetStateColor.resolveWith(
+            (states) =>
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
+          ),
+          shape: WidgetStateProperty.resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: buttonStyles.primary.enabledBoxDecoration.color,
-        foregroundColor: buttonStyles.primary.contentStyle.enabledTextStyle.color,
-        hoverColor: buttonStyles.primary.enabledHoverBoxDecoration.color,
+        backgroundColor: buttonStyles.primary.decoration.maybeResolve(const {})?.color,
+        foregroundColor: buttonStyles.primary.contentStyle.textStyle.maybeResolve(const {})?.color,
+        hoverColor: buttonStyles.primary.decoration.maybeResolve(const {WidgetState.hovered})?.color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: buttonStyles.primary.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          borderRadius: buttonStyles.primary.decoration.maybeResolve(const {})?.borderRadius ?? style.borderRadius,
         ),
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.ghost.disabledBoxDecoration.color,
-            WidgetState.hovered: buttonStyles.ghost.enabledHoverBoxDecoration.color,
-            WidgetState.any: buttonStyles.ghost.enabledBoxDecoration.color,
-          }),
-          foregroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.ghost.contentStyle.disabledTextStyle.color,
-            WidgetState.any: buttonStyles.ghost.contentStyle.enabledTextStyle.color,
-          }),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          backgroundColor: WidgetStateColor.resolveWith(
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
+          ),
+          foregroundColor: WidgetStateColor.resolveWith(
+            (states) =>
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
+          ),
+          shape: WidgetStateProperty.resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
-          textStyle: WidgetStateTextStyle.fromMap({
-            WidgetState.disabled: buttonStyles.ghost.contentStyle.disabledTextStyle,
-            WidgetState.any: buttonStyles.ghost.contentStyle.enabledTextStyle,
-          }),
-          backgroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.ghost.disabledBoxDecoration.color,
-            WidgetState.hovered: buttonStyles.ghost.enabledHoverBoxDecoration.color,
-            WidgetState.any: buttonStyles.ghost.enabledBoxDecoration.color,
-          }),
-          foregroundColor: WidgetStateMapper({
-            WidgetState.disabled: buttonStyles.ghost.contentStyle.disabledTextStyle.color,
-            WidgetState.any: buttonStyles.ghost.contentStyle.enabledTextStyle.color,
-          }),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: buttonStyles.ghost.enabledBoxDecoration.borderRadius ?? style.borderRadius,
+          textStyle: buttonStyles.ghost.contentStyle.textStyle,
+          backgroundColor: WidgetStateColor.resolveWith(
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
+          ),
+          foregroundColor: WidgetStateColor.resolveWith(
+            (states) =>
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
+          ),
+          shape: WidgetStateProperty.resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),

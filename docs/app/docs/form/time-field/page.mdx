@@ -4,6 +4,7 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Time Field
+
 A time field allows a time to be selected from a picker or input field.
 
 <LinkBadgeGroup>
@@ -18,29 +19,32 @@ A time field allows a time to be selected from a picker or input field.
 </div>
 
 The input field supports both arrow key navigation:
-  * Up/Down arrows: Increment/decrement values
-  * Left/Right arrows: Move between time segments
+
+- Up/Down arrows: Increment/decrement values
+- Left/Right arrows: Move between time segments
 
 The input field does not support the following locales that use non-western numerals & scripts that require composing,
 it will default to English:
-  * Arabic (العربية)
-  * Assamese (অসমীয়া)
-  * Bengali (বাংলা)
-  * Persian/Farsi (فارسی)
-  * Marathi (मराठी)
-  * Burmese (မြန်မာ)
-  * Nepali (नेपाली)
-  * Pashto (پښتو)
-  * Tamil (தமிழ்)
-  * Amharic (አማርኛ)
-  * Kannada (ಕನ್ನಡ)
-  * Korean (한국어)
-  * Punjabi (ਪੰਜਾਬੀ)
-  * Thai (ไทย)
+
+- Arabic (العربية)
+- Assamese (অসমীয়া)
+- Bengali (বাংলা)
+- Persian/Farsi (فارسی)
+- Marathi (मराठी)
+- Burmese (မြန်မာ)
+- Nepali (नेपाली)
+- Pashto (پښتو)
+- Tamil (தமிழ்)
+- Amharic (አማርኛ)
+- Kannada (ಕನ್ನಡ)
+- Korean (한국어)
+- Punjabi (ਪੰਜਾਬੀ)
+- Thai (ไทย)
 
 The following locales will default to Chinese (zh):
-  * Chinese (Hong Kong) (繁體中文)
-  * Chinese (Taiwan) (繁體中文)
+
+- Chinese (Hong Kong) (繁體中文)
+- Chinese (Taiwan) (繁體中文)
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
@@ -64,22 +68,22 @@ The following locales will default to Chinese (zh):
 FTimeField(
   controller: FTimeFieldController(
     vsync: this,
-    initialTime: FTime(hour: 12, minute: 30),
-    validator: (time) => time?.isBefore(const FTime(14, 30)) ?? false ? 'Time must be in the future' : null,
+    initialTime: FTime(12, 30),
+    validator: (time) => time != null && time < const FTime(14, 30) ? 'Time must be in the future' : null,
   ),
-  style: FTimeFieldStyle(),
+  style: FTimeFieldStyle(...),
   textAlign: TextAlign.start,
   textAlignVertical: TextAlignVertical.center,
   autofocus: false,
   expands: false,
   onEditingComplete: () => print('Editing complete'),
-  onSubmit: (time) => print('Time submitted: time'),
+  onSubmit: (time) => print('Time submitted: $time'),
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
-  prefixBuilder: (context, styles, child) => Icon(Icons.clock2),
+  prefixBuilder: (context, styles, child) => Icon(FIcons.clock2),
   suffixBuilder: null,
   label: Text('Select Time'),
-  description: Text('Choose a input field'),
+  description: Text('Choose a time'),
   enabled: true,
   onSaved: (time) => print('Time saved: $time'),
   autovalidateMode: AutovalidateMode.onUnfocus,
@@ -92,8 +96,8 @@ FTimeField(
 FTimeField.picker(
   controller: FTimeFieldController(
     vsync: this,
-    initialTime: FTime(hour: 12, minute: 30),
-    validator: (time) => time?.isBefore(const FTime(14, 30)) ?? false ? 'Time must be in the future' : null,
+    initialTime: FTime(12, 30),
+    validator: (time) => time != null && time < const FTime(14, 30) ? 'Time must be in the future' : null,
   ),
   format: DateFormat.jms(),
   textAlign: TextAlign.start,
@@ -172,7 +176,7 @@ FTimeField.picker(
             _controller = FTimeFieldController(vsync: this, validator: _validate);
           }
 
-          String? _validate(FTime? time) => time == 12 ? 'Time cannot be noon.' : null;
+          String? _validate(FTime? time) => time == FTime(12) ? 'Time cannot be noon.' : null;
 
           @override
           Widget build(BuildContext context) => FTimeField(
@@ -188,6 +192,7 @@ FTimeField.picker(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>
 
 ### Form
@@ -222,7 +227,7 @@ FTimeField.picker(
           }
 
           String? _validateStartTime(FTime? time) {
-            if (time < FTime.now()) {
+            if (time != null && time < FTime.now()) {
               return 'Start time must be in the future.';
             }
             return null;
@@ -257,7 +262,7 @@ FTimeField.picker(
                   ),
                   const SizedBox(height: 25),
                   FButton(
-                    label: const Text('Submit'),
+                    child: const Text('Submit'),
                     onPress: () {
                       if (_formKey.currentState!.validate()) {
                         // Form is valid, process the dates
@@ -278,4 +283,5 @@ FTimeField.picker(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>

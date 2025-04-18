@@ -4,6 +4,7 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Select Group
+
 A group of items that allow users to make a selection from a set of options.
 
 <LinkBadgeGroup>
@@ -27,22 +28,23 @@ A group of items that allow users to make a selection from a set of options.
       controller: FSelectGroupController(values: {Sidebar.recents}),
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
-      items: [
-        FSelectGroupItem.checkbox(
+      children: [
+        FCheckbox.grouped(
           value: Sidebar.recents,
           label: const Text('Recents'),
         ),
-        FSelectGroupItem.checkbox(
+        FCheckbox.grouped(
           value: Sidebar.home,
           label: const Text('Home'),
         ),
-        FSelectGroupItem.checkbox(
+        FCheckbox.grouped(
           value: Sidebar.applications,
           label: const Text('Applications'),
         ),
       ],
     );
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -56,14 +58,14 @@ FSelectGroup<Value>(
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   onChange: (all) => print(all),
-  onSelect: (selection) => print(selection);
-  items: [
-    FSelectGroupItem.checkbox(
+  onSelect: (selection) => print(selection),
+  children: [
+    FCheckbox.grouped(
       value: Value.checkbox,
       label: const Text('Checkbox'),
     ),
     // or
-    FSelectGroupItem.radio(
+    FRadio.grouped(
       value: Value.radio,
       label: const Text('Radio'),
     ),
@@ -74,6 +76,7 @@ FSelectGroup<Value>(
 ## Examples
 
 ### Checkbox Form
+
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='select-group' variant='checkbox-form' query={{}} height={400}/>
@@ -105,20 +108,20 @@ FSelectGroup<Value>(
                       label: const Text('Favorite Languages'),
                       description: const Text('Your favorite language.'),
                       validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
-                      items: [
-                        FSelectGroupItem.checkbox(
+                      children: [
+                        FCheckbox.grouped(
                           value: Language.dart,
                           label: const Text('Dart'),
                         ),
-                        FSelectGroupItem.checkbox(
+                        FCheckbox.grouped(
                           value: Language.java,
                           label: const Text('Java'),
                         ),
-                        FSelectGroupItem.checkbox(
+                        FCheckbox.grouped(
                           value: Language.rust,
                           label: const Text('Rust'),
                         ),
-                        FSelectGroupItem.checkbox(
+                        FCheckbox.grouped(
                           value: Language.python,
                           label: const Text('Python'),
                         ),
@@ -149,9 +152,11 @@ FSelectGroup<Value>(
         }
         ```
     </Tabs.Tab>
+
 </Tabs>
 
 ### Radio Form
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='select-group' variant='radio-form' query={{}} height={400}/>
@@ -183,16 +188,16 @@ FSelectGroup<Value>(
                   label: const Text('Notifications'),
                   description: const Text('Select the notifications.'),
                   validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-                  items: [
-                    FSelectGroupItem.radio(
+                  children: [
+                    FRadio.grouped(
                       value: Notification.all,
                       label: const Text('All new messages'),
                     ),
-                    FSelectGroupItem.radio(
+                    FRadio.grouped(
                       value: Notification.direct,
                       label: const Text('Direct messages and mentions'),
                     ),
-                    FSelectGroupItem.radio(
+                    FRadio.grouped(
                       value: Notification.nothing,
                       label: const Text('Nothing'),
                     ),
@@ -222,5 +227,6 @@ FSelectGroup<Value>(
       }
     }
     ```
+
   </Tabs.Tab>
 </Tabs>

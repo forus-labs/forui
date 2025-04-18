@@ -15,9 +15,9 @@ void main() {
             label: const Text('Select Group'),
             description: const Text('Select Group Description'),
             controller: autoDispose(FMultiValueNotifier(values: {1})),
-            children: const [
-              FSelectGroupItem.checkbox(value: 1, label: Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
-              FSelectGroupItem.radio(value: 2, label: Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
+            children: [
+              FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
+              FRadio.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
             ],
           ),
         ),
@@ -35,10 +35,10 @@ void main() {
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
               controller: autoDispose(FMultiValueNotifier(values: {1})),
-              children: const [
-                FSelectGroupItem.checkbox(value: 1, label: Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
-                FSelectGroupItem.checkbox(value: 2, label: Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
-                FSelectGroupItem.checkbox(value: 3, label: Text('Checkbox 3'), semanticsLabel: 'Checkbox 3'),
+              children: [
+                FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
+                FCheckbox.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
+                FCheckbox.grouped(value: 3, label: const Text('Checkbox 3'), semanticsLabel: 'Checkbox 3'),
               ],
             ),
           ),
@@ -56,10 +56,10 @@ void main() {
               description: const Text('Select Group Description'),
               forceErrorText: 'Some error message.',
               controller: autoDispose(FMultiValueNotifier(values: {1})),
-              children: const [
-                FSelectGroupItem.checkbox(value: 1, label: Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
-                FSelectGroupItem.checkbox(value: 2, label: Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
-                FSelectGroupItem.checkbox(value: 3, label: Text('Checkbox 3'), semanticsLabel: 'Checkbox 3'),
+              children: [
+                FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
+                FCheckbox.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
+                FCheckbox.grouped(value: 3, label: const Text('Checkbox 3'), semanticsLabel: 'Checkbox 3'),
               ],
             ),
           ),
@@ -83,10 +83,10 @@ void main() {
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
               controller: autoDispose(FMultiValueNotifier.radio(value: 1)),
-              children: const [
-                FSelectGroupItem.radio(value: 1, label: Text('Radio 1'), semanticsLabel: 'Radio 1'),
-                FSelectGroupItem.radio(value: 2, label: Text('Radio 2'), semanticsLabel: 'Radio 2'),
-                FSelectGroupItem.radio(value: 3, label: Text('Radio 3'), semanticsLabel: 'Radio 3'),
+              children: [
+                FRadio.grouped(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
+                FRadio.grouped(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
+                FRadio.grouped(value: 3, label: const Text('Radio 3'), semanticsLabel: 'Radio 3'),
               ],
             ),
           ),
@@ -104,10 +104,10 @@ void main() {
               description: const Text('Select Group Description'),
               forceErrorText: 'Some error message.',
               controller: autoDispose(FMultiValueNotifier.radio(value: 1)),
-              children: const [
-                FSelectGroupItem.radio(value: 1, label: Text('Radio 1'), semanticsLabel: 'Radio 1'),
-                FSelectGroupItem.radio(value: 2, label: Text('Radio 2'), semanticsLabel: 'Radio 2'),
-                FSelectGroupItem.radio(value: 3, label: Text('Radio 3'), semanticsLabel: 'Radio 3'),
+              children: [
+                FRadio.grouped(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
+                FRadio.grouped(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
+                FRadio.grouped(value: 3, label: const Text('Radio 3'), semanticsLabel: 'Radio 3'),
               ],
             ),
           ),

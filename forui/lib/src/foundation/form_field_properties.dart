@@ -34,15 +34,15 @@ mixin FFormFieldProperties<T> {
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.
   ///
-  /// The returned value is exposed by the [FormFieldState.errorText] property. It transforms the text using
+  /// The returned value is exposed by the [FormFieldState.errorText] property. It is transformed using
   /// [errorBuilder].
   ///
-  /// Alternating between error and normal state can cause the height of the [FTextField] to change if no other
+  /// Alternating between error and normal states can cause the height of the [FTextField] to change if no other
   /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
   /// error is displayed, wrap the [FTextField] in a fixed height parent like [SizedBox].
   FormFieldValidator<T>? get validator;
 
-  /// Used to enable/disable this checkbox auto validation and update its error text.
+  /// Used to enable/disable this form field's auto validation and update its error text.
   ///
   /// Defaults to [AutovalidateMode.disabled].
   ///

@@ -4,7 +4,8 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Accordion
-A vertically stacked set of interactive headings that each reveal a section of content.
+
+A vertically stacked set of interactive headings that reveal associated content sections when clicked. Each section can be expanded or collapsed independently.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.accordion/"/>
@@ -21,23 +22,19 @@ A vertically stacked set of interactive headings that each reveal a section of c
           children: [
             FAccordion(
               controller: FAccordionController(max: 2),
-              items: [
+              children: [
                 FAccordionItem(
                   title: const Text('Is it accessible?'),
-                  child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+                  child: const Text('Yes. It follows WAI-ARIA design patterns.'),
                 ),
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: const Text('Is it Styled?'),
-                  child: const Text(
-                    "Yes. It comes with default styles that matches the other components' aesthetics",
-                  ),
+                  child: const Text('Yes. It includes default styles matching other components.'),
                 ),
                 FAccordionItem(
                   title: const Text('Is it Animated?'),
-                  child: const Text(
-                    'Yes. It is animated by default, but you can disable it if you prefer',
-                  ),
+                  child: const Text('Yes. Animations are enabled by default but can be disabled.'),
                 ),
               ],
             ),
@@ -54,18 +51,19 @@ A vertically stacked set of interactive headings that each reveal a section of c
 ```dart copy
 FAccordion(
   controller: FAccordionController(min: 1, max: 2), // or FAccordionController.radio()
-  items: [
+  children: [
     FAccordionItem(
       title: const Text('Is it accessible?'),
-      child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+      child: const Text('Yes. It follows WAI-ARIA design patterns.'),
     ),
   ],
-),
+);
 ```
 
 ## Examples
 
 ### With Radio Behaviour
+
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='accordion' query={{controller: 'radio'}} height={500}/>
@@ -77,19 +75,19 @@ FAccordion(
           children: [
             FAccordion(
               controller: FAccordionController.radio(),
-              items: [
+              children: [
                 FAccordionItem(
                   title: const Text('Is it accessible?'),
-                  child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+                  child: const Text('Yes. It follows WAI-ARIA design patterns.'),
                 ),
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: const Text('Is it Styled?'),
-                  child: const Text("Yes. It comes with default styles that matches the other components' aesthetics"),
+                  child: const Text('Yes. It includes default styles matching other components.'),
                 ),
                 FAccordionItem(
                   title: const Text('Is it Animated?'),
-                  child: const Text('Yes. It is animated by default, but you can disable it if you prefer'),
+                  child: const Text('Yes. Animations are enabled by default but can be disabled.'),
                 ),
               ],
             ),
@@ -100,6 +98,7 @@ FAccordion(
 </Tabs>
 
 ### With Multi-select Behaviour
+
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='accordion' query={{controller: 'default'}} height={500}/>
@@ -111,19 +110,19 @@ FAccordion(
           children: [
             FAccordion(
               controller: FAccordionController(),
-              items: [
+              children: [
                 FAccordionItem(
                   title: const Text('Is it accessible?'),
-                  child: const Text('Yes. It adheres to the WAI-ARIA design pattern.'),
+                  child: const Text('Yes. It follows WAI-ARIA design patterns.'),
                 ),
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: const Text('Is it Styled?'),
-                  child: const Text("Yes. It comes with default styles that matches the other components' aesthetics"),
+                  child: const Text('Yes. It includes default styles matching other components.'),
                 ),
                 FAccordionItem(
                   title: const Text('Is it Animated?'),
-                  child: const Text('Yes. It is animated by default, but you can disable it if you prefer'),
+                  child: const Text('Yes. Animations are enabled by default but can be disabled.'),
                 ),
               ],
             ),

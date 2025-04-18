@@ -153,7 +153,7 @@ class AsyncLoadingSelectPage extends Sample {
       searchLoadingBuilder:
           (context, style, _) => Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Here be dragons...', style: style.textFieldStyle.enabledStyle.contentTextStyle),
+            child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
           ),
       builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
     ),

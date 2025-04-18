@@ -13,7 +13,7 @@ import 'package:forui/src/widgets/calendar/year/year_picker.dart';
 class MonthPicker extends StatefulWidget {
   static const columns = 3;
 
-  final FCalendarYearMonthPickerStyle yearMonthStyle;
+  final FCalendarEntryStyle yearMonthStyle;
   final FCalendarDayPickerStyle dayStyle;
   final LocalDate currentYear;
   final LocalDate start;

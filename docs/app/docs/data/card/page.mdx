@@ -4,7 +4,8 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Card
-A card, typically with a title, subtitle, and child widget.
+
+A flexible container component that displays content with an optional title, subtitle, and child widget. Cards are commonly used to group related information and actions.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.card/"/>
@@ -27,7 +28,7 @@ A card, typically with a title, subtitle, and child widget.
           height: 200,
         ),
         title: const Text('Gratitude'),
-        subtitle: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
+        subtitle: const Text('Being thankful and showing appreciation for kindness.'),
       );
       ```
   </Tabs.Tab>
@@ -41,7 +42,7 @@ A card, typically with a title, subtitle, and child widget.
 FCard(
   title: const Text('Notification'),
   subtitle: const Text('You have 3 unread messages.'),
-  child: FButton(label: const Text('Read messages'), onPress: () {}),
+  child: FButton(child: const Text('Read messages'), onPress: () {}),
 );
 ```
 

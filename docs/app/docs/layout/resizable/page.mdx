@@ -4,6 +4,7 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Resizable
+
 A box which children can be resized along either the horizontal or vertical axis.
 
 <LinkBadgeGroup>
@@ -77,7 +78,7 @@ A box which children can be resized along either the horizontal or vertical axis
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(icon, size; 15, color: colors.foreground),
+                  Icon(icon, size: 15, color: colors.foreground),
                   const SizedBox(width: 3),
                   Text(label, style: typography.sm.copyWith(color: colors.foreground)),
                 ],
@@ -93,6 +94,7 @@ A box which children can be resized along either the horizontal or vertical axis
       }
     }
     ```
+
   </Tabs.Tab>
 </Tabs>
 
@@ -111,8 +113,8 @@ FResizable(
   crossAxisExtent: 400,
   children: [
     FResizableRegion(
-      initialSize: 200,
-      minSize: 100,
+      initialExtent: 200,
+      minExtent: 100,
       builder: (context, data, child) => child!,
       child: const Placeholder(),
     ),
@@ -208,6 +210,7 @@ FResizable(
       }
     }
     ```
+
   </Tabs.Tab>
 </Tabs>
 

@@ -47,8 +47,8 @@ extension FPortalShift on Never {
         }
     }
 
-    final foo = _along(anchor, viewBox, anchor & portal.size);
-    return foo.translate(-child.offset.dx, -child.offset.dy);
+    final adjustedAnchor = _along(anchor, viewBox, anchor & portal.size);
+    return adjustedAnchor.translate(-child.offset.dx, -child.offset.dy);
   }
 
   static Offset _flip(FPortalChildBox child, FPortalBox portal, {required bool x}) {

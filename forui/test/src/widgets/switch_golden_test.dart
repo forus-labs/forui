@@ -84,7 +84,6 @@ void main() {
                   error: const Text('Please enable to continue.'),
                   semanticsLabel: 'Airplane Mode',
                   value: value,
-                  enabled: false,
                   autofocus: true,
                 ),
               ),

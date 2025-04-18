@@ -22,7 +22,6 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               description: const Text('Description'),
-              error: const Text('This should not appear'),
               children: [
                 FTile(
                   prefixIcon: const Icon(FIcons.wifi),
@@ -94,6 +93,38 @@ void main() {
               children: [
                 FTile(
                   enabled: false,
+                  prefixIcon: const Icon(FIcons.wifi),
+                  title: const Text('WiFi'),
+                  details: const Text('Forus Labs (5G)'),
+                  suffixIcon: const Icon(FIcons.chevronRight),
+                  onPress: () {},
+                ),
+                FTile(
+                  prefixIcon: const Icon(FIcons.bluetooth),
+                  title: const Text('Bluetooth'),
+                  subtitle: const Text('Fee, Fo, Fum'),
+                  details: const Text('Forus Labs (5G)'),
+                  suffixIcon: const Icon(FIcons.chevronRight),
+                  onPress: () {},
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await expectBlueScreen(find.byType(TestScaffold));
+      });
+
+      testWidgets('error', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.blue(
+            child: FTileGroup(
+              style: TestScaffold.blueScreen.tileGroupStyle,
+              label: const Text('Network'),
+              description: const Text('Description'),
+              error: const Text('This should not appear'),
+              children: [
+                FTile(
                   prefixIcon: const Icon(FIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('Forus Labs (5G)'),
@@ -227,45 +258,6 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('tile/group/${theme.name}/constrained-first/$divider.png'),
-          );
-        });
-
-        testWidgets('constrained height, clamped scrolling physics - ${theme.name} - $divider', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold(
-              theme: theme.data,
-              child: FTileGroup(
-                scrollController: controller,
-                maxHeight: 100,
-                label: const Text('Network'),
-                description: const Text('Description'),
-                divider: divider,
-                children: [
-                  FTile(
-                    prefixIcon: const Icon(FIcons.wifi),
-                    title: const Text('WiFi'),
-                    suffixIcon: const Icon(FIcons.chevronRight),
-                  ),
-                  FTile(
-                    prefixIcon: const Icon(FIcons.mail),
-                    title: const Text('Mail'),
-                    suffixIcon: const Icon(FIcons.chevronRight),
-                  ),
-                  FTile(
-                    prefixIcon: const Icon(FIcons.bluetooth),
-                    title: const Text('Bluetooth'),
-                    suffixIcon: const Icon(FIcons.chevronRight),
-                  ),
-                ],
-              ),
-            ),
-          );
-
-          await tester.drag(find.byType(FTile).at(1), const Offset(0, 100));
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('tile/group/${theme.name}/clamped-physics/$divider.png'),
           );
         });
 
@@ -440,7 +432,6 @@ void main() {
                 child: FTileGroup(
                   label: const Text('Network'),
                   description: const Text('Configure your network'),
-                  error: const Text('This should not appear'),
                   enabled: false,
                   divider: divider,
                   children: [

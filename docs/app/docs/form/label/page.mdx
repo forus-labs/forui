@@ -4,8 +4,9 @@ import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Label
+
 Describes a form field with a label, description, and error message (if any). This widget is usually used for custom
-form fields. All form fields in Forui comes with this widget wrapped.
+form fields. All form fields in Forui come with this widget wrapped.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.label/"/>
@@ -43,7 +44,7 @@ FLabel(
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),
     error: const Text('Please accept the terms and conditions.'),
-    state: FLabelState.error,
+    states: { WidgetState.error },
     child: const Placeholder(),
 );
 ```
@@ -51,6 +52,7 @@ FLabel(
 ## Examples
 
 ### Vertical
+
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
         <Widget name='label' variant='vertical' query={{}}/>
@@ -74,6 +76,7 @@ FLabel(
 </Tabs>
 
 ### Disabled
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='label' variant='horizontal' query={{ state: 'disabled' }}/>
@@ -84,7 +87,7 @@ FLabel(
         axis: Axis.horizontal,
         label: const Text('Accept terms and conditions'),
         description: const Text('You agree to our terms and conditions.'),
-        state: FLabelState.disabled,
+        states: { WidgetState.disabled },
         child: const DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -98,6 +101,7 @@ FLabel(
 </Tabs>
 
 ### Error
+
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='label' variant='horizontal' query={{ state: 'error' }}/>
@@ -109,7 +113,7 @@ FLabel(
         label: const Text('Accept terms and conditions'),
         description: const Text('You agree to our terms and conditions.'),
         error: const Text('Please accept the terms.'),
-        state: FLabelState.error,
+        states: { WidgetState.error },
         child: const DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(5)),

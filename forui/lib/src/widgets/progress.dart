@@ -18,7 +18,7 @@ abstract class FProgress extends StatefulWidget {
   /// The semantics label.
   final String? semanticsLabel;
 
-  /// The progress's value. Defaults to null.
+  /// The progress value. Defaults to null.
   ///
   /// A value of 0.0 means no progress and 1.0 means that progress is complete.
   /// The value will be clamped to be in the range, `[0.0, 1.0]`.
@@ -40,7 +40,7 @@ abstract class FProgress extends StatefulWidget {
     Key? key,
   }) = _Linear;
 
-  /// Creates a indeterminate circular [FProgress].
+  /// Creates an indeterminate circular [FProgress].
   const factory FProgress.circularIcon({IconThemeData? style, Duration duration, String? semanticsLabel, Key? key}) =
       _Circular;
 

@@ -72,13 +72,13 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.timeFieldStyle;
-    final ValueWidgetBuilder<FTextFieldStateStyle>? prefix = switch (widget.prefixBuilder) {
+    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefix = switch (widget.prefixBuilder) {
       null => null,
-      final builder => (context, stateStyle, child) => builder(context, (style, stateStyle), child),
+      final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
     };
-    final ValueWidgetBuilder<FTextFieldStateStyle>? suffix = switch (widget.suffixBuilder) {
+    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffix = switch (widget.suffixBuilder) {
       null => null,
-      final builder => (context, stateStyle, child) => builder(context, (style, stateStyle), child),
+      final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
     };
 
     return TimeInput(

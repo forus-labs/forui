@@ -172,16 +172,16 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       prefixBuilder:
           widget.prefixBuilder == null
               ? null
-              : (context, stateStyle, _) => MouseRegion(
+              : (context, styles, _) => MouseRegion(
                 cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, stateStyle), null),
+                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
               ),
       suffixBuilder:
           widget.suffixBuilder == null
               ? null
-              : (context, stateStyle, _) => MouseRegion(
+              : (context, styles, _) => MouseRegion(
                 cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, stateStyle), null),
+                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
               ),
       clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
       label: widget.label,

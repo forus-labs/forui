@@ -11,7 +11,7 @@ part 'resizable.style.dart';
 
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
 ///
-/// Each child is a [FResizableRegion] has a initial and minimum extent. Setting an initial extent less than the
+/// Each child is a [FResizableRegion] that has an initial and minimum extent. Setting an initial extent less than the
 /// minimum extent will result in undefined behaviour. The children are arranged from top to bottom, or left to right,
 /// depending on the main [axis].
 ///
