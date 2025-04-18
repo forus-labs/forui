@@ -713,7 +713,11 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.floatingLabelAlignment,
     this.floatingLabelBehavior,
     super.key,
-  });
+  }) : assert(
+         initialValue == null || controller == null,
+         'Cannot provide both an initial value and a controller. '
+         'If you want to use a controller, set its initial value directly on the controller.',
+       );
 
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
@@ -783,7 +787,11 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.floatingLabelAlignment,
     this.floatingLabelBehavior,
     super.key,
-  });
+  }) : assert(
+         initialValue == null || controller == null,
+         'Cannot provide both an initial value and a controller. '
+         'If you want to use a controller, set its initial value directly on the controller.',
+       );
 
   /// Creates a [FTextField] configured for passwords.
   ///
@@ -856,7 +864,11 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.floatingLabelAlignment,
     this.floatingLabelBehavior,
     super.key,
-  });
+  }) : assert(
+         initialValue == null || controller == null,
+         'Cannot provide both an initial value and a controller. '
+         'If you want to use a controller, set its initial value directly on the controller.',
+       );
 
   /// Creates a [FTextField] configured for multiline inputs.
   ///
@@ -930,7 +942,11 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.floatingLabelAlignment,
     this.floatingLabelBehavior,
     super.key,
-  });
+  }) : assert(
+         initialValue == null || controller == null,
+         'Cannot provide both an initial value and a controller. '
+         'If you want to use a controller, set its initial value directly on the controller.',
+       );
 
   @override
   Widget build(BuildContext context) {

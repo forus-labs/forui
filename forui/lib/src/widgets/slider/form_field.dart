@@ -34,6 +34,7 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
     super.restorationId,
     super.key,
   }) : super(
+         initialValue: controller.selection,
          builder: (field) {
            final state = field as _State;
            final InheritedData(:layout, :marks, :trackMainAxisExtent) = InheritedData.of(state.context);

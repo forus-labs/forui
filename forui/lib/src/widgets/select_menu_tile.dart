@@ -165,13 +165,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.onSelect,
     super.onSaved,
     super.validator,
-    super.initialValue,
     super.forceErrorText,
     super.enabled = true,
     super.autovalidateMode,
     super.restorationId,
     super.key,
   }) : super(
+        initialValue: selectController.value,
          builder: (field) {
            final state = field as _State<T>;
            final groupData = FTileGroupData.maybeOf(state.context);

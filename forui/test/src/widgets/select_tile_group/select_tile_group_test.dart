@@ -120,6 +120,29 @@ void main() {
     });
   });
 
+  testWidgets('set initial value', (tester) async {
+    final key = GlobalKey<FormState>();
+
+    Set<int>? initial;
+    await tester.pumpWidget(
+      TestScaffold(
+        child: Form(
+          key: key,
+          child: FSelectTileGroup<int>(
+            selectController: autoDispose(FMultiValueNotifier(values: {1})),
+            children: const [FSelectTile(title: Text('1'), value: 1)],
+            onSaved: (value) => initial = value,
+          ),
+        ),
+      ),
+    );
+
+    key.currentState!.save();
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    expect(initial, {1});
+  });
+
   testWidgets('callbacks called', (tester) async {
     var changes = 0;
     var selections = 0;
