@@ -100,54 +100,50 @@ class FRadio extends StatelessWidget {
       if (error != null) WidgetState.error,
       if (value) WidgetState.selected,
     };
+    
+    return FTappable(
+      style: style.tappableStyle,
+      semanticsLabel: semanticsLabel,
+      semanticSelected: value,
+      onPress: enabled ? () => onChange?.call(!value) : null,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      focusedOutlineStyle: style.focusedOutlineStyle,
+      builder: (context, states, _) {
+        states = {...states, ...formStates};
 
-    // The label is wrapped in a GestureDetector to improve affordance.
-    return GestureDetector(
-      onTap: enabled ? () => onChange?.call(!value) : null,
-      child: FLabel(
-        axis: Axis.horizontal,
-        states: formStates,
-        style: style,
-        label: label,
-        description: description,
-        error: error,
-        child: FTappable(
-          style: style.tappableStyle,
-          semanticsLabel: semanticsLabel,
-          semanticSelected: value,
-          onPress: enabled ? () => onChange?.call(!value) : null,
-          autofocus: autofocus,
-          focusNode: focusNode,
-          onFocusChange: onFocusChange,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          builder: (context, states, _) {
-            states = {...states, ...formStates};
-
-            return Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: style.borderColor.resolve(states)),
-                    color: style.backgroundColor.resolve(states),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const SizedBox.square(dimension: 10),
+        return FLabel(
+          axis: Axis.horizontal,
+          states: formStates,
+          style: style,
+          label: label,
+          description: description,
+          error: error,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(2),
+                decoration: BoxDecoration(
+                  border: Border.all(color: style.borderColor.resolve(states)),
+                  color: style.backgroundColor.resolve(states),
+                  shape: BoxShape.circle,
                 ),
-                DecoratedBox(
-                  decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: BoxShape.circle),
-                  child: AnimatedSize(
-                    duration: style.animationDuration,
-                    curve: style.curve,
-                    child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
-                  ),
+                child: const SizedBox.square(dimension: 10),
+              ),
+              DecoratedBox(
+                decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: BoxShape.circle),
+                child: AnimatedSize(
+                  duration: style.animationDuration,
+                  curve: style.curve,
+                  child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
                 ),
-              ],
-            );
-          },
-        ),
-      ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
