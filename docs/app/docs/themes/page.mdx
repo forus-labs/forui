@@ -181,8 +181,8 @@ FThemeData get zincLight {
     colors: colors,
     typography: typography,
     style: style,
-    // Add your previously generated divider styles and other generated styles here.
-    buttonStyles: buttonStyles(colors: colors, style: style),
+    // Add your previously generated button styles and other generated styles here.
+    buttonStyles: buttonStyles(colors: colors, typography, typography, style: style),
   );
 }
 
@@ -201,8 +201,8 @@ FThemeData get zincDark {
     colors: colors,
     typography: typography,
     style: style,
-    // Add your previously generated divider styles and other generated styles here.
-    buttonStyles: buttonStyles(colors: colors, style: style),
+    // Add your previously generated button styles and other generated styles here.
+    buttonStyles: buttonStyles(colors: colors, typography, typography, style: style),
   );
 }
 
@@ -462,46 +462,38 @@ combination of states is known as a "constraint".
 Constraints are applied in the order they are defined (top to bottom). The first matching constraint will be used.
 This means that more specific constraints should be defined above more general ones.
 
-```dart {8, 22, 36} copy
+```dart {10, 18, 26} copy
 @override
 Widget build(BuildContext context) {
   final style = context.theme.buttonStyles.primary;
 
-  return FButton(
-    style: style.copyWith(
-      // Override the decoration for the constraints that are hovered.
-      decoration: style.decoration.replaceAllWhere({WidgetState.hovered}, BoxDecoration()),
-    ),
-    onPress: () {},
-    child: const Text('Button'),
-  );
-}
-
-@override
-Widget build(BuildContext context) {
-  final style = context.theme.buttonStyles.primary;
-
-  return FButton(
-    style: style.copyWith(
-      // Override the decoration for the first constraint that is hovered.
-      decoration: style.decoration.replaceFirstWhere({WidgetState.hovered}, BoxDecoration()),
-    ),
-    onPress: () {},
-    child: const Text('Button'),
-  );
-}
-
-@override
-Widget build(BuildContext context) {
-  final style = context.theme.buttonStyles.primary;
-
-  return FButton(
-    style: style.copyWith(
-      // Override the decoration for the last constraint that is hovered.
-      decoration: style.decoration.replaceLastWhere({WidgetState.hovered}, BoxDecoration()),
-    ),
-    onPress: () {},
-    child: const Text('Button'),
+  return Column(
+    children: [
+      FButton(
+        style: style.copyWith(
+          // Override the decoration for the constraints that are hovered.
+          decoration: style.decoration.replaceAllWhere({WidgetState.hovered}, BoxDecoration()),
+        ),
+        onPress: () {},
+        child: const Text('Button'),
+      ),
+      FButton(
+        style: style.copyWith(
+          // Override the decoration for the first constraint that is hovered.
+          decoration: style.decoration.replaceFirstWhere({WidgetState.hovered}, BoxDecoration()),
+        ),
+        onPress: () {},
+        child: const Text('Button'),
+      ),
+      FButton(
+        style: style.copyWith(
+          // Override the decoration for the last constraint that is hovered.
+          decoration: style.decoration.replaceLastWhere({WidgetState.hovered}, BoxDecoration()),
+        ),
+        onPress: () {},
+        child: const Text('Button'),
+      ),
+    ],
   );
 }
 ```
