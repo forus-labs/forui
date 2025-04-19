@@ -33,7 +33,11 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>.search(key: key, filter: (_) => [], contentBuilder: (_, _) => [FSelectItem.text('A')]),
+            child: FSelect<String>.search(
+              key: key,
+              filter: (_) => [],
+              contentBuilder: (_, _) => [FSelectItem.text('A')],
+            ),
           ),
         );
 

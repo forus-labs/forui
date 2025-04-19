@@ -1,9 +1,9 @@
 import 'dart:collection';
 
-import 'package:forui/src/foundation/doubles.dart';
 import 'package:sugar/collection_aggregate.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/doubles.dart';
 import 'package:forui/src/widgets/resizable/resizable_region_data.dart';
 
 /// A controller that manages the resizing of regions in a [FResizable].

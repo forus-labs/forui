@@ -137,7 +137,6 @@ class _MultiNotifier<T> extends FMultiValueNotifier<T> {
 
       super.value = {...this.value, value};
       notifyUpdateListeners(value, add: add);
-
     } else {
       if (this.value.length <= min) {
         return;

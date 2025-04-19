@@ -112,7 +112,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     super.autovalidateMode,
     super.key,
   }) : super(
-        initialValue: controller.value,
+         initialValue: controller.value,
          builder: (field) {
            final state = field as _State;
            final groupStyle = style ?? state.context.theme.selectGroupStyle;

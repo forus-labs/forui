@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:forui/src/foundation/doubles.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/doubles.dart';
 
 /// A [FResizableRegion]'s data.
 final class FResizableRegionData with Diagnosticable {

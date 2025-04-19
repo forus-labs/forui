@@ -54,10 +54,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/builder.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/builder.png'));
     });
 
     testWidgets('${theme.name} hr locale', (tester) async {
