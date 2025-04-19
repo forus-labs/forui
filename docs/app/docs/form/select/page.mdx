@@ -68,6 +68,7 @@ FSelect<String>(
   onSaved: (value) => print('Selected country: $value'),
   style: FSelectStyle.inherit(...),
   autovalidateMode: AutovalidateMode.onUserInteraction,
+  builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
   suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
   popoverConstraints: const BoxConstraints(
@@ -105,6 +106,7 @@ FSelect<User>.search(
   controller: FSelectController<User>(),
   label: const Text('User'),
   description: const Text('Search and select a user'),
+  builder: (context, styles, child) => child!,
   format: (user) => '${user.firstName} ${user.lastName}',
   hint: 'Search users...',
   style: FSelectStyle.inherit(...),
@@ -121,7 +123,7 @@ FSelect<User>.search(
     // Fetch users based on search query
     return fetchUsers(query);
   },
-  builder: (context, users) => [
+  contentBuilder: (context, users) => [
     for (final user in users)
       FSelectItem(value: user, child: Text('${user.firstName} ${user.lastName}')),
   ],
@@ -227,7 +229,7 @@ FSelect<User>.search(
         filter:
             (query) =>
                 query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
-        builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
       );
     }
     ```
@@ -250,7 +252,7 @@ FSelect<User>.search(
           await Future.delayed(const Duration(seconds: 1));
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
       );
     }
     ```
@@ -277,7 +279,7 @@ FSelect<User>.search(
           padding: const EdgeInsets.all(8.0),
           child: Text('Here be dragons...', style: style.textFieldStyle.enabledStyle.contentTextStyle),
         ),
-        builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
       );
     }
     ```
@@ -300,7 +302,7 @@ FSelect<User>.search(
           await Future.delayed(const Duration(seconds: 1));
           throw StateError('Error loading data');
         },
-        builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
         searchErrorBuilder: (context, error, trace) {
           final style = context.theme.selectStyle.iconStyle;
           return Padding(
