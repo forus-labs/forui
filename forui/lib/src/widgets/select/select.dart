@@ -47,6 +47,9 @@ abstract class FSelect<T> extends StatefulWidget {
     );
   }
 
+  static Widget _fieldBuilder(BuildContext _, (FSelectStyle, FTextFieldStyle, Set<WidgetState>) _, Widget? child) =>
+      child!;
+
   /// The default format function that converts the selected items to a comma separated string.
   static String defaultFormat(Object? selected) => selected.toString();
 
@@ -63,6 +66,11 @@ abstract class FSelect<T> extends StatefulWidget {
 
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
+
+  /// The builder used to decorate the select. It should use the given child.
+  ///
+  /// Defaults to returning the given child.
+  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder;
 
   /// Builds a widget at the start of the select that can be pressed to toggle the popover. Defaults to no icon.
   final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
@@ -181,6 +189,7 @@ abstract class FSelect<T> extends StatefulWidget {
     FSelectStyle? style,
     bool autofocus,
     FocusNode? focusNode,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder,
     ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
     ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
@@ -219,13 +228,13 @@ abstract class FSelect<T> extends StatefulWidget {
   /// The [searchFieldProperties] can be used to customize the search field.
   ///
   /// The [filter] callback produces a list of items based on the search query either synchronously or asynchronously.
-  /// The [builder] callback builds the list of items based on search results returned by [filter].
+  /// The [contentBuilder] callback builds the list of items based on search results returned by [filter].
   /// The [searchLoadingBuilder] is used to show a loading indicator while the search results is processed
   /// asynchronously by [filter].
   /// The [searchErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
   const factory FSelect.search({
     required FSelectSearchFilter<T> filter,
-    required FSelectSearchContentBuilder<T> builder,
+    required FSelectSearchContentBuilder<T> contentBuilder,
     FSelectSearchFieldProperties searchFieldProperties,
     ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder,
     Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder,
@@ -233,6 +242,7 @@ abstract class FSelect<T> extends StatefulWidget {
     FSelectStyle? style,
     bool autofocus,
     FocusNode? focusNode,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder,
     ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
     ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
@@ -271,6 +281,7 @@ abstract class FSelect<T> extends StatefulWidget {
     this.style,
     this.autofocus = false,
     this.focusNode,
+    this.builder = _fieldBuilder,
     this.prefixBuilder,
     this.suffixBuilder = defaultIconBuilder,
     this.label,
@@ -312,6 +323,7 @@ abstract class FSelect<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
@@ -466,7 +478,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
       builder:
-          (_, _, child) => FPopover(
+          (context, data, child) => FPopover(
             style: style.popoverStyle,
             controller: _controller.popover,
             popoverAnchor: widget.anchor,
@@ -494,7 +506,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
                 const SingleActivator(LogicalKeyboardKey.enter): _show,
                 const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
               },
-              child: child!,
+              child: widget.builder(context, (style, data.$1, data.$2), child),
             ),
           ),
     );

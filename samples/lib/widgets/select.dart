@@ -114,7 +114,7 @@ class SyncSelectPage extends Sample {
       filter:
           (query) =>
               query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
-      builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
     ),
   );
 }
@@ -132,7 +132,7 @@ class AsyncSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
     ),
   );
 }
@@ -155,7 +155,7 @@ class AsyncLoadingSelectPage extends Sample {
             padding: const EdgeInsets.all(8.0),
             child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
           ),
-      builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
     ),
   );
 }
@@ -173,7 +173,7 @@ class AsyncErrorSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         throw StateError('Error loading data');
       },
-      builder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
       searchErrorBuilder: (context, error, trace) {
         final style = context.theme.selectStyle.iconStyle;
         return Padding(

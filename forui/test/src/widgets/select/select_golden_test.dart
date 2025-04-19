@@ -71,7 +71,7 @@ void main() {
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             filter: (_) => [],
-            builder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
           ),
         ),
       );
@@ -93,7 +93,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            builder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
           ),
         ),
       );
@@ -123,6 +123,29 @@ void main() {
         await tester.pumpAndSettle();
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/auto-hide-disabled.png'));
+      });
+
+      testWidgets('with builder', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>(
+              key: key,
+              autoHide: false,
+              children: [FSelectItem.text('A'), FSelectItem.text('B')],
+              builder: (_, _, child) => DecoratedBox(decoration: const BoxDecoration(color: Colors.red), child: child),
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('B'));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/builder.png'));
       });
     });
 

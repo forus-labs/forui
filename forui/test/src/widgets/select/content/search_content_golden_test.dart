@@ -15,7 +15,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>.search(key: key, filter: (_) => [], builder: (_, _) => []),
+            child: FSelect<String>.search(key: key, filter: (_) => [], contentBuilder: (_, _) => []),
           ),
         );
 
@@ -33,7 +33,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>.search(key: key, filter: (_) => [], builder: (_, _) => [FSelectItem.text('A')]),
+            child: FSelect<String>.search(key: key, filter: (_) => [], contentBuilder: (_, _) => [FSelectItem.text('A')]),
           ),
         );
 
@@ -54,7 +54,7 @@ void main() {
                 await Future.delayed(const Duration(seconds: 1));
                 return [];
               },
-              builder: (_, _) => [FSelectItem.text('A')],
+              contentBuilder: (_, _) => [FSelectItem.text('A')],
             ),
           ),
         );
@@ -79,7 +79,7 @@ void main() {
                 await Future.delayed(const Duration(seconds: 5));
                 throw ArgumentError();
               },
-              builder: (_, _) => [FSelectItem.text('A')],
+              contentBuilder: (_, _) => [FSelectItem.text('A')],
               searchErrorBuilder: (_, error, trace) => Container(color: Colors.red, height: 10, width: 10),
             ),
           ),
@@ -107,7 +107,7 @@ void main() {
                 await Future.delayed(const Duration(seconds: 5));
                 throw ArgumentError();
               },
-              builder: (_, data) => [for (final v in data.values) FSelectItem.text(v)],
+              contentBuilder: (_, data) => [for (final v in data.values) FSelectItem.text(v)],
             ),
           ),
         );
@@ -134,7 +134,7 @@ void main() {
                 await Future.delayed(const Duration(seconds: 5));
                 return [];
               },
-              builder: (_, _) => [FSelectItem.text('A')],
+              contentBuilder: (_, _) => [FSelectItem.text('A')],
             ),
           ),
         );
