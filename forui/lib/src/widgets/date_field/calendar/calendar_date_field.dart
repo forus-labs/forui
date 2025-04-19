@@ -59,6 +59,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     super.style,
     super.autofocus,
     super.focusNode,
+    super.builder,
     super.prefixBuilder,
     super.suffixBuilder,
     super.label,
@@ -193,7 +194,12 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
       builder:
-          (_, _, child) => _CalendarPopover(controller: _controller, style: style, properties: widget, child: child!),
+          (context, data, child) => _CalendarPopover(
+            controller: _controller,
+            style: style,
+            properties: widget,
+            child: widget.builder(context, (style, data.$1, data.$2), child),
+          ),
     );
   }
 

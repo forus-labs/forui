@@ -324,6 +324,7 @@ abstract class FTimeField extends StatefulWidget {
       ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
