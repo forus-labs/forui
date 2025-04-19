@@ -26,6 +26,7 @@ class _InputTimeField extends FTimeField {
     super.hour24,
     super.autofocus,
     super.focusNode,
+    super.builder,
     super.prefixBuilder,
     super.suffixBuilder,
     super.label,
@@ -107,7 +108,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       prefixBuilder: prefix,
       suffixBuilder: suffix,
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
-      builder: (_, _, child) => child!,
+      builder: (context, styles, child) => widget.builder(context, (style, styles.$1, styles.$2), child),
     );
   }
 

@@ -47,7 +47,7 @@ final class FResizableRegionData with Diagnosticable {
          'Min extent should be less than the max extent, but min is ${extent.min} and max is ${extent.max}',
        ),
        assert(
-         extent.max < extent.total,
+         extent.max <= extent.total,
          'Max extent should be less than or equal to the total extent, but max is ${extent.max} and total is ${extent.total}',
        ),
        assert(0 <= offset.min, 'Min offset should be non-negative, but is ${offset.min}'),

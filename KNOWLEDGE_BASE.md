@@ -3,6 +3,10 @@
 This file contains pointers and guidelines for working on specific parts of Forui. It is meant for contributors, not
 end users.
 
+## Calculations
+* Always use `Doubles.lessOrAround`/`Doubles.greaterOrAround` when comparing doubles. This is important when calculating
+  areas/lengths of widget, as floating point precision errors are a thing.
+
 ## Styles
 * Don't mark style classes as final. We originally recommended marking them as final but this turned out to be an
   unnecessary restriction.

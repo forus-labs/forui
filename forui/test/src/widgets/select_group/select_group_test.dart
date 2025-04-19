@@ -53,6 +53,7 @@ void main() {
     );
 
     await tester.tap(find.text('2'));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(changes, 1);
     expect(selections, 1);
@@ -81,6 +82,7 @@ void main() {
     );
 
     await tester.tap(find.text('1'));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(firstChanges, 1);
     expect(firstSelections, 1);
@@ -106,6 +108,7 @@ void main() {
     );
 
     await tester.tap(find.text('1'));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(firstChanges, 1);
     expect(firstSelections, 1);

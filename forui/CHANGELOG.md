@@ -136,6 +136,8 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 ### Others
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
+* Add `FDateField.builder`.
+* Add `FTimeField.builder`.
 * Add `FLerpBorderRadius`.
 
 
@@ -175,6 +177,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 
 
 * Fix an issue where header spacing appeared in incorrect order.
+* Fix `FResizable` not guarding against precision errors in assertions.
 * Fix `FSelectGroup` not setting its `FormField`'s initial value.
 * Fix `FSelectTileGroup` not setting its `FormField`'s initial value.
 * Fix `FSlider` not setting its `FormField`'s initial value.

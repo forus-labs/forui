@@ -32,6 +32,23 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/no-icon.png'));
     });
 
+    testWidgets('${theme.name} with builder', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FTimeField.picker(
+            key: key,
+            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/builder.png'));
+    });
+
     testWidgets('${theme.name} zh locale', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
