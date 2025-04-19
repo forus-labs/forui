@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/doubles.dart';
 import 'package:forui/src/widgets/resizable/resizable.dart';
 
 /// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
@@ -32,11 +33,11 @@ class FResizableRegion extends StatelessWidget {
   final Widget? child;
 
   /// Creates a [FResizableRegion].
-  const FResizableRegion({required this.initialExtent, required this.builder, this.minExtent, this.child, super.key})
+  FResizableRegion({required this.initialExtent, required this.builder, this.minExtent, this.child, super.key})
     : assert(0 < initialExtent, 'The initial extent should be positive, but it is $initialExtent.'),
       assert(minExtent == null || 0 < minExtent, 'The min extent should be positive, but it is $minExtent.'),
       assert(
-        minExtent == null || minExtent <= initialExtent,
+        minExtent == null || minExtent.lessOrAround(initialExtent),
         'The initial extent, $initialExtent is less than the min extent, $minExtent.',
       );
 

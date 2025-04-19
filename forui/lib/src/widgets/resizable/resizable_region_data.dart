@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:forui/src/foundation/doubles.dart';
 
 import 'package:meta/meta.dart';
 
@@ -46,7 +47,7 @@ final class FResizableRegionData with Diagnosticable {
          'Min extent should be less than the max extent, but min is ${extent.min} and max is ${extent.max}',
        ),
        assert(
-         extent.max <= extent.total,
+         extent.max < extent.total,
          'Max extent should be less than or equal to the total extent, but max is ${extent.max} and total is ${extent.total}',
        ),
        assert(0 <= offset.min, 'Min offset should be non-negative, but is ${offset.min}'),
@@ -55,7 +56,7 @@ final class FResizableRegionData with Diagnosticable {
          'Min offset should be less than the max offset, but min is ${offset.min} and max is ${offset.max}',
        ),
        assert(
-         0 <= offset.max - offset.min && offset.max - offset.min <= extent.max,
+         0.0.lessOrAround(offset.max - offset.min) && (offset.max - offset.min).lessOrAround(extent.max),
          'Current extent should be non-negative and less than or equal to the max extent, but current is '
          '${offset.max - offset.min} and max is ${extent.max}.',
        ),
@@ -117,7 +118,7 @@ extension UpdatableResizableRegionData on FResizableRegionData {
     final newExtent = max - min;
 
     assert(0 <= min, '$min should be non-negative.');
-    assert(newExtent <= extent.max, '$newExtent should be less than ${extent.max}.');
+    assert(newExtent.lessOrAround(extent.max), '$newExtent should be less than ${extent.max}.');
 
     if (extent.min <= newExtent) {
       return (copyWith(minOffset: min, maxOffset: max), delta);

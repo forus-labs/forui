@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:forui/src/foundation/doubles.dart';
 import 'package:sugar/collection_aggregate.dart';
 
 import 'package:forui/forui.dart';
@@ -182,7 +183,7 @@ final class _CascadeController extends FResizableController {
     }
 
     assert(
-      regions.sum((r) => r.extent.current, initial: 0.0) == regions[0].extent.total,
+      regions.sum((r) => r.extent.current, initial: 0.0).around(regions[0].extent.total),
       'Current total size: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total size: ${regions[0].extent.total}. '
       'This is likely a bug in Forui. Please file a bug report: https://github.com/forus-labs/forui/issues/new?template=bug_report.md',
     );

@@ -10,6 +10,5 @@ export 'src/foundation/rendering.dart' hide Alignments, RenderBoxes;
 export 'src/foundation/tappable.dart' show FTappable, FTappableAnimations, FTappableStyle, FTouch;
 export 'src/foundation/time.dart';
 export 'src/foundation/transform.dart';
-export 'src/foundation/widget_state_map.dart';
 export 'src/foundation/portal/portal.dart';
 export 'src/foundation/portal/portal_shift.dart';
