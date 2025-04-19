@@ -30,7 +30,7 @@
     "@next/eslint-plugin-next": "^15.3.0",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@tailwindcss/postcss": "^4.1.2",
-    "@types/node": "^20.17.30",
+    "@types/node": "^22.0.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.1",
     "@typescript-eslint/eslint-plugin": "^8.29.1",
