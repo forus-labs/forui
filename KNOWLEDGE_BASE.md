@@ -20,7 +20,7 @@ It is really easy to mess up the lifecycle of a stateful widget's controller. We
 or whatever IDE's template feature to generate the boilerplate code. Don't forget to write tests.
 
 * `initState()` is pretty straightforward.
-* `didUpateWidget`:
+* `didUpdateWidget`:
   ```dart
   if (widget.controller != old.controller) {
     if (old.controller == null) {
