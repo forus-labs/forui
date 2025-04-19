@@ -40,6 +40,23 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/no-icon.png'));
     });
 
+    testWidgets('${theme.name} with builder', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField.calendar(
+            key: key,
+            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/builder.png'));
+    });
+
     testWidgets('${theme.name} hr locale', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

@@ -9,6 +9,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.style,
     super.autofocus,
     super.focusNode,
+    super.builder,
     super.prefixBuilder,
     super.suffixBuilder,
     super.label,

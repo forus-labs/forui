@@ -6,6 +6,29 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('set initial value', (tester) async {
+    final key = GlobalKey<FormState>();
+
+    Set<int>? initial;
+    await tester.pumpWidget(
+      TestScaffold(
+        child: Form(
+          key: key,
+          child: FSelectGroup<int>(
+            controller: autoDispose(FMultiValueNotifier(values: {1})),
+            children: [FRadio.grouped(label: const Text('1'), value: 1)],
+            onSaved: (value) => initial = value,
+          ),
+        ),
+      ),
+    );
+
+    key.currentState!.save();
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    expect(initial, {1});
+  });
+
   testWidgets('callbacks called', (tester) async {
     var changes = 0;
     var selections = 0;
@@ -30,6 +53,7 @@ void main() {
     );
 
     await tester.tap(find.text('2'));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(changes, 1);
     expect(selections, 1);
@@ -58,6 +82,7 @@ void main() {
     );
 
     await tester.tap(find.text('1'));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(firstChanges, 1);
     expect(firstSelections, 1);
@@ -83,6 +108,7 @@ void main() {
     );
 
     await tester.tap(find.text('1'));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(firstChanges, 1);
     expect(firstSelections, 1);

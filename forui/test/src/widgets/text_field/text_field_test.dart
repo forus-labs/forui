@@ -113,4 +113,55 @@ void main() {
       });
     });
   });
+
+  group('state', () {
+    for (final (type, field) in [
+      ('normal', (text, controller, saved) => FTextField(initialValue: text, controller: controller, onSaved: saved)),
+      (
+        'email',
+        (text, controller, saved) => FTextField.email(initialValue: text, controller: controller, onSaved: saved),
+      ),
+      (
+        'password',
+        (text, controller, saved) => FTextField.password(initialValue: text, controller: controller, onSaved: saved),
+      ),
+      (
+        'multiline',
+        (text, controller, saved) => FTextField.multiline(initialValue: text, controller: controller, onSaved: saved),
+      ),
+    ]) {
+      testWidgets('$type - set initial value using initialValue', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        String? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(child: Form(key: key, child: field('initial', null, (value) => initial = value))),
+        );
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, 'initial');
+      });
+
+      testWidgets('$type - both provided', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        String? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Form(
+              key: key,
+              child: field(null, autoDispose(TextEditingController(text: 'initial')), (value) => initial = value),
+            ),
+          ),
+        );
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, 'initial');
+      });
+    }
+  });
 }

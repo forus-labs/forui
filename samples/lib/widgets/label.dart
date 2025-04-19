@@ -13,20 +13,20 @@ class VerticalLabelPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FLabel(
-      axis: Axis.vertical,
-      label: const Text('Email'),
-      description: const Text('Enter your email address.'),
-      error: const Text('Please enter a valid email address.'),
-      states: switch (state) {
-        'disabled' => {WidgetState.disabled},
-        'error' => {WidgetState.error},
-        _ => {},
-      },
-      child: const DecoratedBox(
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
-        child: SizedBox(width: 250, height: 30),
-      ),
-    );
+    axis: Axis.vertical,
+    label: const Text('Email'),
+    description: const Text('Enter your email address.'),
+    error: const Text('Please enter a valid email address.'),
+    states: switch (state) {
+      'disabled' => {WidgetState.disabled},
+      'error' => {WidgetState.error},
+      _ => {},
+    },
+    child: const DecoratedBox(
+      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+      child: SizedBox(width: 250, height: 30),
+    ),
+  );
 }
 
 @RoutePage()
@@ -37,18 +37,18 @@ class HorizontalLabelPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FLabel(
-      axis: Axis.horizontal,
-      label: const Text('Accept terms and conditions'),
-      description: const Text('You agree to our terms and conditions.'),
-      error: const Text('Please accept the terms.'),
-      states: switch (state) {
-        'disabled' => {WidgetState.disabled},
-        'error' => {WidgetState.error},
-        _ => {},
-      },
-      child: const DecoratedBox(
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
-        child: SizedBox(width: 16, height: 16),
-      ),
-    );
+    axis: Axis.horizontal,
+    label: const Text('Accept terms and conditions'),
+    description: const Text('You agree to our terms and conditions.'),
+    error: const Text('Please accept the terms.'),
+    states: switch (state) {
+      'disabled' => {WidgetState.disabled},
+      'error' => {WidgetState.error},
+      _ => {},
+    },
+    child: const DecoratedBox(
+      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+      child: SizedBox(width: 16, height: 16),
+    ),
+  );
 }

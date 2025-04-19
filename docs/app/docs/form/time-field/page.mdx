@@ -80,6 +80,7 @@ FTimeField(
   onSubmit: (time) => print('Time submitted: $time'),
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
+  builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, child) => Icon(FIcons.clock2),
   suffixBuilder: null,
   label: Text('Select Time'),
@@ -114,6 +115,7 @@ FTimeField.picker(
   directionPadding: false,
   label: Text('Picker Time'),
   description: Text('Select a time from the calendar'),
+  builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
   suffixBuilder: null,
 );

@@ -43,6 +43,27 @@ void main() {
       );
     });
 
+    // This looks really buggy but it seems like a Flutter issue.
+    testWidgets('${theme.name} with builder', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField(
+            key: key,
+            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('date-field/${theme.name}/input-calendar/builder.png'),
+      );
+    });
+
     testWidgets('${theme.name} hr locale', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

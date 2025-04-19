@@ -112,6 +112,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     super.autovalidateMode,
     super.key,
   }) : super(
+         initialValue: controller.value,
          builder: (field) {
            final state = field as _State;
            final groupStyle = style ?? state.context.theme.selectGroupStyle;
@@ -124,23 +125,19 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
              label: label,
              description: description,
              error: state.errorText == null ? null : errorBuilder(state.context, state.errorText!),
-             child: ListenableBuilder(
-               listenable: controller,
-               builder:
-                   (context, _) => Column(
-                     children: [
-                       for (final child in children)
-                         Padding(
-                           padding: groupStyle.itemPadding,
-                           child: FSelectGroupItemData<T>(
-                             controller: controller,
-                             style: groupStyle,
-                             selected: controller.contains(child.value),
-                             child: child,
-                           ),
-                         ),
-                     ],
+             child: Column(
+               children: [
+                 for (final child in children)
+                   Padding(
+                     padding: groupStyle.itemPadding,
+                     child: FSelectGroupItemData<T>(
+                       controller: controller,
+                       style: groupStyle,
+                       selected: controller.contains(child.value),
+                       child: child,
+                     ),
                    ),
+               ],
              ),
            );
          },

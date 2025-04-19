@@ -3,13 +3,13 @@ part of 'select.dart';
 class _SearchSelect<T> extends FSelect<T> {
   final FSelectSearchFieldProperties searchFieldProperties;
   final FSelectSearchFilter<T> filter;
-  final FSelectSearchContentBuilder<T> builder;
+  final FSelectSearchContentBuilder<T> contentBuilder;
   final ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder;
   final Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder;
 
   const _SearchSelect({
     required this.filter,
-    required this.builder,
+    required this.contentBuilder,
     this.searchFieldProperties = const FSelectSearchFieldProperties(),
     this.searchLoadingBuilder = FSelect.defaultSearchLoadingBuilder,
     this.searchErrorBuilder,
@@ -17,6 +17,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.style,
     super.autofocus,
     super.focusNode,
+    super.builder,
     super.prefixBuilder,
     super.suffixBuilder,
     super.label,
@@ -60,6 +61,7 @@ class _SearchSelect<T> extends FSelect<T> {
       ..add(DiagnosticsProperty('searchFieldProperties', searchFieldProperties))
       ..add(DiagnosticsProperty('filter', filter))
       ..add(DiagnosticsProperty('builder', builder))
+      ..add(ObjectFlagProperty.has('contentBuilder', contentBuilder))
       ..add(ObjectFlagProperty('searchLoadingBuilder', searchLoadingBuilder, ifPresent: 'searchLoadingBuilder'))
       ..add(ObjectFlagProperty('searchErrorBuilder', searchErrorBuilder, ifPresent: 'searchErrorBuilder'));
   }
@@ -76,7 +78,7 @@ class _SearchSelectState<T> extends _State<_SearchSelect<T>, T> {
     enabled: widget.enabled,
     physics: widget.contentPhysics,
     filter: widget.filter,
-    builder: widget.builder,
+    builder: widget.contentBuilder,
     emptyBuilder: widget.emptyBuilder,
     loadingBuilder: widget.searchLoadingBuilder,
     errorBuilder: widget.searchErrorBuilder,

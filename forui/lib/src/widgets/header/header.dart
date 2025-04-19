@@ -83,7 +83,7 @@ final class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   /// Creates a [FHeaderStyles].
   const FHeaderStyles({required this.rootStyle, required this.nestedStyle});
 
-  /// Creates a [FHeaderStyles] that inherits its properties from the given [FColors], [FTypography] and [FStyle].
+  /// Creates a [FHeaderStyles] that inherits its properties.
   FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : rootStyle = FHeaderStyle(
         titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: FontWeight.w700, height: 1),

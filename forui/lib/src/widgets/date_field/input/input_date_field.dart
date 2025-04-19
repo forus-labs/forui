@@ -31,6 +31,7 @@ class _InputDateField extends FDateField {
     super.style,
     super.autofocus,
     super.focusNode,
+    super.builder,
     super.prefixBuilder,
     super.suffixBuilder,
     super.label,
@@ -102,9 +103,14 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
     };
 
     final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder = switch (widget.calendar) {
-      null => (_, _, child) => child!,
+      null => (context, data, child) => widget.builder(context, (style, data.$1, data.$2), child!),
       final properties =>
-        (_, _, child) => _CalendarPopover(controller: _controller, style: style, properties: properties, child: child!),
+        (context, data, child) => _CalendarPopover(
+          controller: _controller,
+          style: style,
+          properties: properties,
+          child: widget.builder(context, (style, data.$1, data.$2), child!),
+        ),
     };
 
     return DateInput(

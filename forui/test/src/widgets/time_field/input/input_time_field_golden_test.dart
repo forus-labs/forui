@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -29,6 +29,23 @@ void main() {
       await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FTimeField(prefixBuilder: null)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/no-icon.png'));
+    });
+
+    testWidgets('${theme.name} with builder', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FTimeField(
+            key: key,
+            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/builder.png'));
     });
 
     testWidgets('${theme.name} 24 hours', (tester) async {
@@ -98,6 +115,25 @@ void main() {
         find.byType(TestScaffold),
         matchesGoldenFile('time-field/${theme.name}/input/mobile-focused.png'),
       );
+    });
+
+    testWidgets('${theme.name} tap outside unfocuses on desktop', (tester) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FTimeField(key: key)));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-field/${theme.name}/input/desktop-unfocused.png'),
+      );
+
+      debugDefaultTargetPlatformOverride = null;
     });
 
     testWidgets('${theme.name} tap outside unfocuses on desktop', (tester) async {

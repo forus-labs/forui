@@ -11,6 +11,28 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('state', () {
+    testWidgets('set initial value', (tester) async {
+      final key = GlobalKey<FormState>();
+
+      FSliderSelection? initial;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Form(
+            key: key,
+            child: FSlider(
+              controller: autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5))),
+              onSaved: (value) => initial = value,
+            ),
+          ),
+        ),
+      );
+
+      key.currentState!.save();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      expect(initial?.offset, (max: 0.5, min: 0.0));
+    });
+
     testWidgets('update controller', (tester) async {
       final first = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5)));
       await tester.pumpWidget(TestScaffold(child: FSlider(controller: first)));

@@ -46,6 +46,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     super.hour24,
     super.autofocus,
     super.focusNode,
+    super.builder,
     super.prefixBuilder,
     super.suffixBuilder,
     super.label,
@@ -184,12 +185,12 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
       builder:
-          (_, _, child) => _PickerPopover(
+          (context, styles, child) => _PickerPopover(
             controller: _controller,
             style: style,
             hour24: widget.hour24,
             properties: widget,
-            child: child!,
+            child: widget.builder(context, (style, styles.$1, styles.$2), child),
           ),
     );
   }

@@ -70,6 +70,7 @@ FDateField(
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
   baselineInputYear: 2000,
+  builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
   suffixBuilder: null,
   clearable: true,
@@ -109,6 +110,7 @@ FDateField.calendar(
   directionPadding: false,
   label: Text('Calendar Date'),
   description: Text('Select a date from the calendar'),
+  builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
     suffixBuilder: null,
 );
@@ -141,6 +143,7 @@ FDateField.calendar(
   directionPadding: false,
   label: Text('Calendar Date'),
   description: Text('Select a date from the calendar'),
+  builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
   suffixBuilder: null,
 );

@@ -21,7 +21,7 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   /// Creates a [FSliderStyles].
   FSliderStyles({required this.horizontalStyle, required this.verticalStyle});
 
-  /// Creates a [FSliderStyles] that inherits its properties from the given [FColors].
+  /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         horizontalStyle: FSliderStyle.inherit(

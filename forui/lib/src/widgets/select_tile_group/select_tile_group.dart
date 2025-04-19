@@ -98,9 +98,9 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     super.autovalidateMode,
     super.key,
   }) : super(
+         initialValue: selectController.value,
          builder: (field) {
            final state = field as _State;
-
            return FTileGroup(
              scrollController: scrollController,
              style: style ?? state.context.theme.tileGroupStyle,
@@ -157,6 +157,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     super.autovalidateMode,
     super.key,
   }) : super(
+         initialValue: selectController.value,
          builder: (field) {
            final state = field as _State;
 
@@ -267,7 +268,7 @@ class _State<T> extends FormFieldState<Set<T>> {
     // In the case where a controller has been passed in to this widget, we register this change listener. In these
     // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
     // reset() method. In such cases, the FormField value will already have been set.
-    if (widget.selectController.value != value) {
+    if (!setEquals(widget.selectController.value, value)) {
       didChange(widget.selectController.value);
     }
   }

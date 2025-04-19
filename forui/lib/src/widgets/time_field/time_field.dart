@@ -106,6 +106,9 @@ abstract class FTimeField extends StatefulWidget {
     child: IconTheme(data: styles.$1.iconStyle, child: const Icon(FIcons.clock4)),
   );
 
+  static Widget _fieldBuilder(BuildContext _, (FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>) _, Widget? child) =>
+      child!;
+
   /// The controller.
   final FTimeFieldController? controller;
 
@@ -122,6 +125,11 @@ abstract class FTimeField extends StatefulWidget {
 
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
+
+  /// The builder used to decorate the time-field. It should use the given child.
+  ///
+  /// Defaults to returning the given child.
+  final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder;
 
   /// Builds a widget at the start of the input field that can be pressed to toggle the popover. Defaults to
   /// [defaultIconBuilder].
@@ -171,6 +179,7 @@ abstract class FTimeField extends StatefulWidget {
     this.hour24 = false,
     this.autofocus = false,
     this.focusNode,
+    this.builder = _fieldBuilder,
     this.prefixBuilder = defaultIconBuilder,
     this.suffixBuilder,
     this.label,
@@ -212,6 +221,7 @@ abstract class FTimeField extends StatefulWidget {
     bool hour24,
     bool autofocus,
     FocusNode? focusNode,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
     ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
     ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     TextInputAction? textInputAction,
@@ -292,6 +302,7 @@ abstract class FTimeField extends StatefulWidget {
     bool directionPadding,
     int hourInterval,
     int minuteInterval,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
     ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
     ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
@@ -313,6 +324,7 @@ abstract class FTimeField extends StatefulWidget {
       ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))

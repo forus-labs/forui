@@ -100,6 +100,31 @@ void main() {
   });
 
   group('state', () {
+    testWidgets('set initial value', (tester) async {
+      final key = GlobalKey<FormState>();
+
+      Set<int>? initial;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Form(
+            key: key,
+            child: FSelectMenuTile<int>(
+              autoHide: true,
+              selectController: autoDispose(FMultiValueNotifier(values: {1})),
+              title: const Text('Repeat'),
+              onSaved: (value) => initial = value,
+              menu: const [FSelectTile(title: Text('1'), value: 1)],
+            ),
+          ),
+        ),
+      );
+
+      key.currentState!.save();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      expect(initial, {1});
+    });
+
     testWidgets('update callbacks', (tester) async {
       final controller = autoDispose(FMultiValueNotifier<int>());
 

@@ -60,7 +60,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
     this.shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
   });
 
-  /// Creates an [FStyle] that inherits its properties from the given [FColors] and [FTypography].
+  /// Creates an [FStyle] that inherits its properties.
   FStyle.inherit({required FColors colors, required FTypography typography})
     : this(
         formFieldStyle: FFormFieldStyle.inherit(colors: colors, typography: typography),

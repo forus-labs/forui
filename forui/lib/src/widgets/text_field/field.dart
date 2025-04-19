@@ -49,7 +49,7 @@ class Field extends FormField<String> {
     : super(
         onSaved: parent.onSaved,
         validator: parent.validator,
-        initialValue: parent.initialValue,
+        initialValue: parent.controller?.text ?? parent.initialValue,
         enabled: parent.enabled,
         autovalidateMode: parent.autovalidateMode,
         forceErrorText: parent.forceErrorText,

@@ -77,7 +77,7 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
   });
 
-  /// Creates a [FButtonContentStyle] that inherits its properties from the given [enabled] and [disabled] colors.
+  /// Creates a [FButtonContentStyle] that inherits its properties.
   FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
     : this(
         textStyle: FWidgetStateMap({
@@ -106,7 +106,7 @@ final class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentSty
   /// Creates a [FButtonIconContentStyle].
   const FButtonIconContentStyle({required this.iconStyle, this.padding = const EdgeInsets.all(7.5)});
 
-  /// Creates a [FButtonIconContentStyle] that inherits its properties from the given [enabled] and [disabled] colors.
+  /// Creates a [FButtonIconContentStyle] that inherits its properties.
   FButtonIconContentStyle.inherit({required Color enabled, required Color disabled})
     : this(
         iconStyle: FWidgetStateMap({

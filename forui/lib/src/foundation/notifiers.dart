@@ -85,7 +85,7 @@ abstract class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   FMultiValueNotifier._(super._value);
 
   /// Returns true if the notifier contains the [value].
-  bool contains(T value) => _value.contains(value);
+  bool contains(T value) => super.value.contains(value);
 
   /// Adds or removes the [value] from this notifier.
   ///
@@ -112,17 +112,6 @@ abstract class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   }
 
   @override
-  set value(Set<T> values) {
-    _value
-      ..clear()
-      ..addAll(values);
-
-    notifyListeners();
-  }
-
-  Set<T> get _value => super.value;
-
-  @override
   void dispose() {
     _updateListeners.clear();
     super.dispose();
@@ -142,21 +131,20 @@ class _MultiNotifier<T> extends FMultiValueNotifier<T> {
   @override
   void update(T value, {required bool add}) {
     if (add) {
-      if (max case final max? when max <= _value.length) {
+      if (max case final max? when max <= this.value.length) {
         return;
       }
 
-      _value.add(value);
+      super.value = {...this.value, value};
+      notifyUpdateListeners(value, add: add);
     } else {
-      if (_value.length <= min) {
+      if (this.value.length <= min) {
         return;
       }
 
-      _value.remove(value);
+      super.value = {...this.value}..remove(value);
+      notifyUpdateListeners(value, add: add);
     }
-
-    notifyUpdateListeners(value, add: add);
-    notifyListeners();
   }
 
   @override
@@ -165,7 +153,7 @@ class _MultiNotifier<T> extends FMultiValueNotifier<T> {
       throw ArgumentError('The number of elements must be between $min and ${max ?? 'infinite'}.');
     }
 
-    super.value = value;
+    super.value = {...value};
   }
 }
 
@@ -178,12 +166,8 @@ class _RadioNotifier<T> extends FMultiValueNotifier<T> {
       return;
     }
 
-    _value
-      ..clear()
-      ..add(value);
-
+    super.value = {value};
     notifyUpdateListeners(value, add: add);
-    notifyListeners();
   }
 
   @override
@@ -191,6 +175,7 @@ class _RadioNotifier<T> extends FMultiValueNotifier<T> {
     if (1 < value.length) {
       throw ArgumentError('Can contain only 1 element.');
     }
-    super.value = value;
+
+    super.value = {...value};
   }
 }

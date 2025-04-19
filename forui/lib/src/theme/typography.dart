@@ -120,7 +120,7 @@ final class FTypography with Diagnosticable, FTransformable {
     this.xl8 = const TextStyle(fontSize: 96, height: 1),
   }) : assert(0 < defaultFontFamily.length, 'The defaultFontFamily should not be empty.');
 
-  /// Creates a [FTypography] that inherits its properties from [colors].
+  /// Creates a [FTypography] that inherits its properties.
   FTypography.inherit({required FColors colors, this.defaultFontFamily = 'packages/forui/Inter'})
     : xs = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
       sm = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
