@@ -216,7 +216,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
             onPointerDown: (_) async {
               final count = ++_monotonic;
               if (!widget._disabled) {
-                _onPointerDown();
+                onPointerDown();
               }
 
               await Future.delayed(style.pressedEnterDuration);
@@ -227,7 +227,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
             onPointerUp: (_) async {
               final count = ++_monotonic;
               if (!widget._disabled) {
-                _onPointerUp();
+                onPointerUp();
               }
 
               await Future.delayed(style.pressedExitDuration);
@@ -269,9 +269,9 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   Widget _decorate(BuildContext _, Widget child) => child;
 
-  void _onPointerDown() {}
+  void onPointerDown() {}
 
-  void _onPointerUp() {}
+  void onPointerUp() {}
 
   @override
   void dispose() {
@@ -338,10 +338,20 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
 
   @override
-  void _onPointerDown() => controller.forward();
+  void onPointerDown() {
+    // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
+    if (mounted) {
+      controller.forward();
+    }
+  }
 
   @override
-  void _onPointerUp() => controller.reverse();
+  void onPointerUp() {
+    // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
+    if (mounted) {
+      controller.reverse();
+    }
+  }
 
   @override
   void dispose() {
