@@ -10,6 +10,24 @@ import '../test_scaffold.dart';
 // ignore: avoid_positional_boolean_parameters
 Set<WidgetState> set(bool enabled) => {if (!enabled) WidgetState.disabled};
 
+class _StubTappable extends AnimatedTappable {
+  static void _press() {}
+
+
+  // ignore: unused_element_parameter
+  const _StubTappable({super.onPress = _press, super.child = const Text('stub')});
+
+  @override
+  _StubTappableState createState() => _StubTappableState();
+}
+
+class _StubTappableState extends AnimatedTappableState {
+  @override
+  void onPointerUp() {
+    Future.delayed(const Duration(seconds: 1)).then((_) => super.onPointerUp());
+  }
+}
+
 void main() {
   late FocusNode focusNode;
 
@@ -147,6 +165,22 @@ void main() {
         expect(longPressCount, 0);
       });
     }
+
+    testWidgets('simulated race condition between animation and unmounting of widget', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: const _StubTappable(),
+        ),
+      );
+
+      await tester.tap(find.text('stub'));
+
+      await tester.pumpWidget(const SizedBox());
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+
+      expect(tester.takeException(), null);
+    });
 
     testWidgets('resets hover and touch states when enabled state changes', (tester) async {
       late StateSetter setState;
