@@ -131,6 +131,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * **Breaking** Rename `FTappable` to `FTappable.static`.
 * **Breaking** Rename `FTappable.animated` to `FTappable`.
 * **Breaking** Split `FTappableData.hovered` into `FTappableData.hovered` and `FTappableData.pressed`.
+* Fix `FTappable`'s animation sometimes being invoked after it is unmounted.
 
 
 ### Others
