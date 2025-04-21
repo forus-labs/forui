@@ -3,6 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/portal/composited_child.dart';
+import 'package:forui/src/foundation/portal/composited_portal.dart';
+import 'package:forui/src/foundation/portal/layer.dart';
 
 /// A portal renders a portal widget that "floats" on top of a child widget.
 ///
@@ -77,32 +80,38 @@ class FPortal extends StatefulWidget {
 }
 
 class _State extends State<FPortal> {
-  final LayerLink _link = LayerLink();
+  final _link = ChildLayerLink();
 
   @override
-  Widget build(BuildContext _) => CompositedTransformTarget(
-    link: _link,
-    child: OverlayPortal(
-      controller: widget.controller,
-      overlayChildBuilder:
-          (context) => CompositedTransformFollower(
-            link: _link,
-            child: _Alignment(
+  Widget build(BuildContext _) => RepaintBoundary(
+    child: CompositedChild(
+      link: _link,
+      child: OverlayPortal(
+        controller: widget.controller,
+        overlayChildBuilder:
+            (context) => CompositedPortal(
               link: _link,
-              portalAnchor: widget.portalAnchor,
-              childAnchor: widget.childAnchor,
-              shift: widget.shift,
-              offset: widget.offset,
-              child: widget.portalBuilder(context),
+              showWhenUnlinked: true,
+              offset: Offset.zero,
+              portalAnchor: Alignment.topLeft,
+              childAnchor: Alignment.topLeft,
+              child: _Alignment(
+                link: _link,
+                portalAnchor: widget.portalAnchor,
+                childAnchor: widget.childAnchor,
+                shift: widget.shift,
+                offset: widget.offset,
+                child: widget.portalBuilder(context),
+              ),
             ),
-          ),
-      child: widget.child,
+        child: widget.child,
+      ),
     ),
   );
 }
 
 class _Alignment extends SingleChildRenderObjectWidget {
-  final LayerLink _link;
+  final ChildLayerLink _link;
   final AlignmentGeometry _childAnchor;
   final AlignmentGeometry _portalAnchor;
   final Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
@@ -110,7 +119,7 @@ class _Alignment extends SingleChildRenderObjectWidget {
 
   const _Alignment({
     required Widget child,
-    required LayerLink link,
+    required ChildLayerLink link,
     required AlignmentGeometry childAnchor,
     required AlignmentGeometry portalAnchor,
     required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
@@ -147,14 +156,15 @@ class _Alignment extends SingleChildRenderObjectWidget {
 }
 
 class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
-  LayerLink _link;
+  ChildLayerLink _link;
+  // TODO: shift alignment logic to this.
   Alignment _childAnchor;
   Alignment _portalAnchor;
   Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
   Offset _offset;
 
   _RenderBox({
-    required LayerLink link,
+    required ChildLayerLink link,
     required Alignment childAnchor,
     required Alignment portalAnchor,
     required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
@@ -176,7 +186,8 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
 
   @override
   void paint(PaintingContext context, Offset _) {
-    final tuple = (child, child?.parentData, link.leader?.offset, link.leaderSize);
+    final tuple = (child, child?.parentData, link.childLayer?.globalOffset, link.childSize);
+
     if (tuple case (final child?, final BoxParentData data?, final offset?, final leaderSize?)) {
       data.offset =
           _shift(
@@ -185,6 +196,7 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
             (size: child.size, anchor: portalAnchor),
           ) +
           _offset;
+      
       context.paintChild(child, data.offset);
     }
   }
@@ -216,9 +228,9 @@ class _RenderBox extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
       ..add(DiagnosticsProperty('offset', offset));
   }
 
-  LayerLink get link => _link;
+  ChildLayerLink get link => _link;
 
-  set link(LayerLink value) {
+  set link(ChildLayerLink value) {
     if (_link == value) {
       return;
     }
