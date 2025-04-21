@@ -11,8 +11,8 @@ typedef FPortalBox = ({Size size, Alignment anchor});
 
 /// Provides various portal shifting strategies for when a portal overflows out of the viewport.
 extension FPortalShift on Never {
-  /// Flips the portal to the opposite side of the child if it does not cause the portal to overflow out of the
-  /// viewport. Otherwise shifts the portal along the child's edge.
+  /// Flips the portal to the opposite side of the [child] if it does not cause the [portal] to overflow out of the
+  /// viewport. Otherwise shifts the portal along the [child]'s edge.
   static Offset flip(Size view, FPortalChildBox child, FPortalBox portal) {
     var anchor = none(view, child, portal).translate(child.offset.dx, child.offset.dy);
 
@@ -60,7 +60,7 @@ extension FPortalShift on Never {
     return anchor.translate(child.offset.dx, child.offset.dy);
   }
 
-  /// Shifts the portal along the child's edge if the portal overflows out of the viewport.
+  /// Shifts the [portal] along the [child]'s edge if the portal overflows out of the viewport.
   static Offset along(Size view, FPortalChildBox child, FPortalBox portal) {
     final anchor = none(view, child, portal).translate(child.offset.dx, child.offset.dy);
 
@@ -86,7 +86,7 @@ extension FPortalShift on Never {
     return anchor;
   }
 
-  /// Does not perform any shifting if the portal overflows out of the viewport.
+  /// Does not perform any shifting if the [portal] overflows out of the viewport.
   static Offset none(Size _, FPortalChildBox child, FPortalBox portal) {
     final childAnchor = child.anchor.relative(to: child.size);
     final portalAnchor = portal.anchor.relative(to: portal.size);

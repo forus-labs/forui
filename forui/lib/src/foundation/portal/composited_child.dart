@@ -21,10 +21,14 @@ class CompositedChild extends SingleChildRenderObjectWidget {
   const CompositedChild({required this.link, super.key, super.child});
 
   @override
-  RenderChildLayer createRenderObject(BuildContext context) => RenderChildLayer(link: link);
+  RenderChildLayer createRenderObject(BuildContext context) =>
+      RenderChildLayer(viewSize: MediaQuery.sizeOf(context), link: link);
 
   @override
-  void updateRenderObject(BuildContext context, RenderChildLayer renderObject) => renderObject.link = link;
+  void updateRenderObject(BuildContext context, RenderChildLayer renderObject) =>
+      renderObject
+        ..viewSize = MediaQuery.sizeOf(context)
+        ..link = link;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -41,9 +45,13 @@ class RenderChildLayer extends RenderProxyBox {
   // The latest size of this [RenderBox], computed during the previous layout pass. It should always be equal to [size],
   // but can be accessed even when [debugDoingThisResize] and [debugDoingThisLayout] are false.
   Size? _previousLayoutSize;
+  Size _viewSize;
   ChildLayerLink _link;
 
-  RenderChildLayer({required ChildLayerLink link, RenderBox? child}) : _link = link, super(child);
+  RenderChildLayer({required Size viewSize, required ChildLayerLink link, RenderBox? child})
+    : _viewSize = viewSize,
+      _link = link,
+      super(child);
 
   @override
   void performLayout() {
@@ -75,6 +83,17 @@ class RenderChildLayer extends RenderProxyBox {
     }());
   }
 
+  Size get viewSize => _viewSize;
+
+  set viewSize(Size value) {
+    if (_viewSize == value) {
+      return;
+    }
+
+    _viewSize = value;
+    markNeedsPaint();
+  }
+
   /// The link object that connects this [RenderChildLayer] with one or more
   /// [RenderFollowerLayer]s.
   ///
@@ -102,6 +121,8 @@ class RenderChildLayer extends RenderProxyBox {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('link', link));
+    properties
+      ..add(DiagnosticsProperty('viewSize', viewSize))
+      ..add(DiagnosticsProperty('link', link));
   }
 }

@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_asserts_with_message
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/portal/composited_child.dart';
 import 'package:forui/src/foundation/portal/layer.dart';
 import 'package:meta/meta.dart';
@@ -35,21 +37,41 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   /// The anchor point on the linked [CompositedChild] that [portalAnchor] will line up with.
   final Alignment childAnchor;
 
+  /// The shifting strategy used to shift a portal when it overflows out of the viewport.
+  ///
+  /// See [FPortalShift] for the different shifting strategies.
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+
   const CompositedPortal({
     required this.link,
     required this.showWhenUnlinked,
     required this.offset,
     required this.portalAnchor,
     required this.childAnchor,
+    required this.shift,
     super.key,
     super.child,
   });
 
   @override
-  RenderPortalLayer createRenderObject(BuildContext context) => RenderPortalLayer(link: link);
+  RenderPortalLayer createRenderObject(BuildContext context) => RenderPortalLayer(
+    link: link,
+    showWhenUnlinked: showWhenUnlinked,
+    offset: offset,
+    portalAnchor: portalAnchor,
+    childAnchor: childAnchor,
+    shift: FPortalShift.flip,
+  );
 
   @override
-  void updateRenderObject(BuildContext context, RenderPortalLayer renderObject) => renderObject.link = link;
+  void updateRenderObject(BuildContext context, RenderPortalLayer renderObject) =>
+      renderObject
+        ..link = link
+        ..showWhenUnlinked = showWhenUnlinked
+        ..offset = offset
+        ..portalAnchor = portalAnchor
+        ..childAnchor = childAnchor
+        ..shift = shift;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -59,13 +81,15 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
       ..add(DiagnosticsProperty('showWhenUnlinked', showWhenUnlinked))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
-      ..add(DiagnosticsProperty('portalAnchor', portalAnchor));
+      ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
+      ..add(ObjectFlagProperty.has('shift', shift));
   }
 }
 
 /// ## Implementation details:
-/// This class is a copy of [RenderFollowerLayer] with the following differences:
+/// This class is a copy of [RenderFollowerLayer] with the following differences/enhancements:
 /// * Contains a [ChildLayerLink] instead of a [LayerLink].
+/// * Shifts the portal if it overflows out of the viewport.
 @internal
 class RenderPortalLayer extends RenderProxyBox {
   ChildLayerLink _link;
@@ -73,20 +97,32 @@ class RenderPortalLayer extends RenderProxyBox {
   Offset _offset;
   Alignment _portalAnchor;
   Alignment _childAnchor;
+  Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
 
   RenderPortalLayer({
     required ChildLayerLink link,
-    bool showWhenUnlinked = true,
-    Offset offset = Offset.zero,
-    Alignment portalAnchor = Alignment.topLeft,
-    Alignment childAnchor = Alignment.topLeft,
+    required bool showWhenUnlinked,
+    required Offset offset,
+    required Alignment portalAnchor,
+    required Alignment childAnchor,
+    required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     RenderBox? child,
   }) : _link = link,
        _showWhenUnlinked = showWhenUnlinked,
        _offset = offset,
        _childAnchor = childAnchor,
        _portalAnchor = portalAnchor,
+       _shift = shift,
        super(child);
+
+  @override
+  void performLayout() {
+    if (child case final child?) {
+      child.layout(constraints.loosen(), parentUsesSize: true);
+    }
+
+    size = constraints.biggest;
+  }
 
   @override
   void paint(PaintingContext context, Offset offset) {
@@ -97,21 +133,29 @@ class RenderPortalLayer extends RenderProxyBox {
       'childSize is required when childAnchor is not Alignment.topLeft '
       '(current value is $childAnchor).',
     );
-    final effectiveLinkedOffset =
-        childSize == null ? this.offset : childAnchor.alongSize(childSize) - portalAnchor.alongSize(size) + this.offset;
+
+    final linkedOffset = this.offset + switch ((child, link.childLayer?.globalOffset)) {
+      _ when childSize == null => Offset.zero,
+      (final child?, final offset?) => _shift(
+        size,
+        (offset: offset, size: childSize, anchor: childAnchor),
+        (size: child.size, anchor: portalAnchor),
+      ),
+      _ => childAnchor.alongSize(childSize) - portalAnchor.alongSize(size),
+    };
 
     if (layer == null) {
       layer = PortalLayer(
         link: link,
         showWhenUnlinked: showWhenUnlinked,
-        linkedOffset: effectiveLinkedOffset,
+        linkedOffset: linkedOffset,
         unlinkedOffset: offset,
       );
     } else {
       layer
         ?..link = link
         ..showWhenUnlinked = showWhenUnlinked
-        ..linkedOffset = effectiveLinkedOffset
+        ..linkedOffset = linkedOffset
         ..unlinkedOffset = offset;
     }
 
@@ -153,9 +197,7 @@ class RenderPortalLayer extends RenderProxyBox {
   );
 
   @override
-  void applyPaintTransform(RenderBox child, Matrix4 transform) {
-    transform.multiply(_currentTransform);
-  }
+  void applyPaintTransform(RenderBox child, Matrix4 transform) => transform.multiply(_currentTransform);
 
   /// Return the transform that was used in the last composition phase, if any.
   ///
@@ -240,6 +282,17 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  Offset Function(Size, FPortalChildBox, FPortalBox) get shift => _shift;
+
+  set shift(Offset Function(Size, FPortalChildBox, FPortalBox) value) {
+    if (_shift == value) {
+      return;
+    }
+
+    _shift = value;
+    markNeedsPaint();
+  }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -249,6 +302,7 @@ class RenderPortalLayer extends RenderProxyBox {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
+      ..add(ObjectFlagProperty.has('shift', shift))
       ..add(TransformProperty('current transform matrix', _currentTransform));
   }
 }
