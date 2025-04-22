@@ -119,6 +119,14 @@ A new `onChange` and `onSelect` callback has been added to most Forui widgets.
 * **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
 
 
+### `FPortal`
+`FPortal` has been reworked to fix a series of longstanding issues.
+
+* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`.
+* Fix `FPortal` not updating portals when child's offset/size changes.
+* Fix `FPortal` displaying portal when child is not rendered.
+
+
 ### `FTappable`
 `FTappable` has been updated to support animations by default. This applies to all Forui widgets that use `FTappable`.
 The `hovered` state has also been split into `hovered` and `pressed` states.
@@ -185,8 +193,6 @@ have been renamed to `semanticsLabel` for consistency.
 * Replace `FSelectGroupItem` with `FCheckbox.grouped(...)` and `FRadio.grouped(...)`.
 
 * Fix an issue where header spacing appeared in incorrect order.
-* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`.
-* Fix `FPortal` displaying portal when child is not rendered.
 * Fix `FResizable` not guarding against precision errors in assertions.
 * Fix `FSelectGroup` not setting its `FormField`'s initial value.
 * Fix `FSelectTileGroup` not setting its `FormField`'s initial value.

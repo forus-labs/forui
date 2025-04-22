@@ -80,17 +80,20 @@ class FPortal extends StatefulWidget {
 }
 
 class _State extends State<FPortal> {
+  final _notifier = FChangeNotifier();
   final _link = ChildLayerLink();
 
   @override
   Widget build(BuildContext _) => RepaintBoundary(
     child: CompositedChild(
+      notifier: _notifier,
       link: _link,
       child: OverlayPortal(
         controller: widget.controller,
         overlayChildBuilder: (context) {
           final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
           return CompositedPortal(
+            notifier: _notifier,
             link: _link,
             offset: widget.offset,
             portalAnchor: widget.portalAnchor.resolve(direction),
@@ -99,8 +102,14 @@ class _State extends State<FPortal> {
             child: widget.portalBuilder(context),
           );
         },
-        child: widget.child,
+        child: RepaintBoundary(child: widget.child),
       ),
     ),
   );
+
+  @override
+  void dispose() {
+    _notifier.dispose();
+    super.dispose();
+  }
 }

@@ -2,5 +2,7 @@ include: package:flint/analysis_options.flutter.yaml
 analyzer:
   errors:
     diagnostic_describe_all_properties: ignore
+    prefer_const_constructors: ignore
+    prefer_expression_function_bodies: ignore
     public_member_api_docs: ignore
     unused_result: ignore

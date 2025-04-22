@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/portal/composited_child.dart';
@@ -15,6 +16,9 @@ import 'package:meta/meta.dart';
 /// * Receives the global position of a linked [CompositedChild].
 @internal
 class CompositedPortal extends SingleChildRenderObjectWidget {
+  /// The notifier that is updated whenever the linked [CompositedChild] changes its global position.
+  final FChangeNotifier notifier;
+
   /// The link object that connects this [CompositedPortal] with a [CompositedChild]s.
   final ChildLayerLink link;
 
@@ -43,6 +47,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   const CompositedPortal({
+    required this.notifier,
     required this.link,
     required this.offset,
     required this.portalAnchor,
@@ -55,6 +60,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
 
   @override
   RenderPortalLayer createRenderObject(BuildContext context) => RenderPortalLayer(
+    notifier: notifier,
     link: link,
     showWhenUnlinked: showWhenUnlinked,
     offset: offset,
@@ -66,6 +72,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   @override
   void updateRenderObject(BuildContext context, RenderPortalLayer renderObject) =>
       renderObject
+        ..notifier = notifier
         ..link = link
         ..showWhenUnlinked = showWhenUnlinked
         ..offset = offset
@@ -77,6 +84,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('notifier', notifier))
       ..add(DiagnosticsProperty('link', link))
       ..add(DiagnosticsProperty('showWhenUnlinked', showWhenUnlinked))
       ..add(DiagnosticsProperty('offset', offset))
@@ -88,10 +96,12 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
 
 /// ## Implementation details:
 /// This class is a copy of [RenderFollowerLayer] with the following differences/enhancements:
+/// * Repaints whenever the linked [CompositedChild]'s globalOffset changes.
 /// * Contains a [ChildLayerLink] instead of a [LayerLink].
 /// * Shifts the portal if it overflows out of the viewport.
 @internal
 class RenderPortalLayer extends RenderProxyBox {
+  FChangeNotifier _notifier;
   ChildLayerLink _link;
   bool _showWhenUnlinked;
   Offset _offset;
@@ -100,6 +110,7 @@ class RenderPortalLayer extends RenderProxyBox {
   Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
 
   RenderPortalLayer({
+    required FChangeNotifier notifier,
     required ChildLayerLink link,
     required bool showWhenUnlinked,
     required Offset offset,
@@ -107,13 +118,25 @@ class RenderPortalLayer extends RenderProxyBox {
     required Alignment childAnchor,
     required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     RenderBox? child,
-  }) : _link = link,
+  }) : _notifier = notifier,
+       _link = link,
        _showWhenUnlinked = showWhenUnlinked,
        _offset = offset,
        _childAnchor = childAnchor,
        _portalAnchor = portalAnchor,
        _shift = shift,
        super(child);
+
+  @override
+  void attach(PipelineOwner owner) {
+    super.attach(owner);
+    notifier.addListener(_schedule);
+  }
+
+  /// Marks for repaint between frames so that calculations are performed using consistent state.
+  /// This was inspired by visibility_detector's implementation:
+  /// https://github.com/google/flutter.widgets/blob/494c6abd3de44a92d34c5cbc424db2eefe3915cf/packages/visibility_detector/lib/src/render_visibility_detector.dart#L46
+  void _schedule() => SchedulerBinding.instance.scheduleTask(markNeedsPaint, Priority.touch);
 
   @override
   void performLayout() {
@@ -126,7 +149,6 @@ class RenderPortalLayer extends RenderProxyBox {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    final childSize = link.childSize;
     assert(
       link.childSize != null || link.childLayer == null || childAnchor == Alignment.topLeft,
       '$link: layer is linked to ${link.childLayer} but a valid childSize is not set. '
@@ -134,15 +156,16 @@ class RenderPortalLayer extends RenderProxyBox {
       '(current value is $childAnchor).',
     );
 
-    final linkedOffset = this.offset + switch ((child, link.childLayer?.globalOffset)) {
-      _ when childSize == null => Offset.zero,
-      (final child?, final offset?) => _shift(
-        size,
-        (offset: offset, size: childSize, anchor: childAnchor),
-        (size: child.size, anchor: portalAnchor),
-      ),
-      _ => childAnchor.alongSize(childSize) - portalAnchor.alongSize(size),
-    };
+    final linkedOffset =
+        this.offset +
+        switch ((child, link.childSize, link.childLayer?.globalOffset)) {
+          (final child?, final childSize?, final offset?) => _shift(
+            size,
+            (offset: offset, size: childSize, anchor: childAnchor),
+            (size: child.size, anchor: portalAnchor),
+          ),
+          _ => Offset.zero,
+        };
 
     if (layer == null) {
       layer = PortalLayer(
@@ -207,6 +230,7 @@ class RenderPortalLayer extends RenderProxyBox {
 
   @override
   void detach() {
+    notifier.removeListener(_schedule);
     layer = null;
     super.detach();
   }
@@ -217,6 +241,18 @@ class RenderPortalLayer extends RenderProxyBox {
   /// The layer we created when we were last painted.
   @override
   PortalLayer? get layer => super.layer as PortalLayer?;
+
+  FChangeNotifier get notifier => _notifier;
+
+  set notifier(FChangeNotifier value) {
+    if (_notifier == value) {
+      return;
+    }
+
+    _notifier.removeListener(_schedule);
+    _notifier = value;
+    _notifier.addListener(_schedule);
+  }
 
   ChildLayerLink get link => _link;
 
@@ -297,6 +333,7 @@ class RenderPortalLayer extends RenderProxyBox {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('notifier', notifier))
       ..add(DiagnosticsProperty('link', link))
       ..add(DiagnosticsProperty('showWhenUnlinked', showWhenUnlinked))
       ..add(DiagnosticsProperty('offset', offset))

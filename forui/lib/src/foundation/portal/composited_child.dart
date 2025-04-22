@@ -2,6 +2,7 @@
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/portal/composited_portal.dart';
 import 'package:forui/src/foundation/portal/layer.dart';
 import 'package:meta/meta.dart';
@@ -15,25 +16,31 @@ import 'package:meta/meta.dart';
 /// * Passes its global position to the [CompositedPortal]s.
 @internal
 class CompositedChild extends SingleChildRenderObjectWidget {
+  /// The notifier used to signal to the linked [CompositedPortal]s that they need to repaint.
+  final FChangeNotifier notifier;
+
   /// The link object that connects this [CompositedChild] with one or more [CompositedPortal]s.
   final ChildLayerLink link;
 
-  const CompositedChild({required this.link, super.key, super.child});
+  const CompositedChild({required this.notifier, required this.link, super.key, super.child});
 
   @override
   RenderChildLayer createRenderObject(BuildContext context) =>
-      RenderChildLayer(viewSize: MediaQuery.sizeOf(context), link: link);
+      RenderChildLayer(notifier: notifier, link: link, viewSize: MediaQuery.sizeOf(context));
 
   @override
   void updateRenderObject(BuildContext context, RenderChildLayer renderObject) =>
       renderObject
-        ..viewSize = MediaQuery.sizeOf(context)
-        ..link = link;
+        ..notifier = notifier
+        ..link = link
+        ..viewSize = MediaQuery.sizeOf(context);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('link', link));
+    properties
+      ..add(DiagnosticsProperty('notifier', notifier))
+      ..add(DiagnosticsProperty('link', link));
   }
 }
 
@@ -42,16 +49,25 @@ class CompositedChild extends SingleChildRenderObjectWidget {
 /// * Passes its global position to the [CompositedPortal]s.
 @internal
 class RenderChildLayer extends RenderProxyBox {
+  /// The notifier used to signal to the linked [CompositedPortal]s that they need to repaint.
+  FChangeNotifier _notifier;
+
   // The latest size of this [RenderBox], computed during the previous layout pass. It should always be equal to [size],
   // but can be accessed even when [debugDoingThisResize] and [debugDoingThisLayout] are false.
   Size? _previousLayoutSize;
-  Size _viewSize;
   ChildLayerLink _link;
+  Size _viewSize;
+  Offset? _previousGlobalOffset;
 
-  RenderChildLayer({required Size viewSize, required ChildLayerLink link, RenderBox? child})
-    : _viewSize = viewSize,
-      _link = link,
-      super(child);
+  RenderChildLayer({
+    required FChangeNotifier notifier,
+    required ChildLayerLink link,
+    required Size viewSize,
+    RenderBox? child,
+  }) : _notifier = notifier,
+       _link = link,
+       _viewSize = viewSize,
+       super(child);
 
   @override
   void performLayout() {
@@ -81,17 +97,29 @@ class RenderChildLayer extends RenderProxyBox {
       layer!.debugCreator = debugCreator;
       return true;
     }());
+
+    if (globalOffset != _previousGlobalOffset) {
+      _previousGlobalOffset = globalOffset;
+      // Signals to the linked [CompositedPortal]s that they need to repaint. This is requires as the child & portal
+      // are painted in separate layers and the portal might not re-paint otherwise, i.e. if the child expands in size.
+      //
+      // We can create a custom notifier that wraps this, but that seems like overkill.
+      // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+      notifier.notifyListeners();
+    }
   }
 
-  Size get viewSize => _viewSize;
+  @override
+  bool get alwaysNeedsCompositing => true;
 
-  set viewSize(Size value) {
-    if (_viewSize == value) {
+  FChangeNotifier get notifier => _notifier;
+
+  set notifier(FChangeNotifier value) {
+    if (_notifier == value) {
       return;
     }
 
-    _viewSize = value;
-    markNeedsPaint();
+    _notifier = value;
   }
 
   /// The link object that connects this [RenderChildLayer] with one or more
@@ -115,14 +143,23 @@ class RenderChildLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
-  @override
-  bool get alwaysNeedsCompositing => true;
+  Size get viewSize => _viewSize;
+
+  set viewSize(Size value) {
+    if (_viewSize == value) {
+      return;
+    }
+
+    _viewSize = value;
+    markNeedsPaint();
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('viewSize', viewSize))
-      ..add(DiagnosticsProperty('link', link));
+      ..add(DiagnosticsProperty('notifier', notifier))
+      ..add(DiagnosticsProperty('link', link))
+      ..add(DiagnosticsProperty('viewSize', viewSize));
   }
 }
