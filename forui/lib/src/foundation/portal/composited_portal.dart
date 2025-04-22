@@ -62,6 +62,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   RenderPortalLayer createRenderObject(BuildContext context) => RenderPortalLayer(
     notifier: notifier,
     link: link,
+    viewSize: MediaQuery.sizeOf(context),
     showWhenUnlinked: showWhenUnlinked,
     offset: offset,
     portalAnchor: portalAnchor,
@@ -74,6 +75,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
       renderObject
         ..notifier = notifier
         ..link = link
+        ..viewSize = MediaQuery.sizeOf(context)
         ..showWhenUnlinked = showWhenUnlinked
         ..offset = offset
         ..portalAnchor = portalAnchor
@@ -98,11 +100,13 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
 /// This class is a copy of [RenderFollowerLayer] with the following differences/enhancements:
 /// * Repaints whenever the linked [CompositedChild]'s globalOffset changes.
 /// * Contains a [ChildLayerLink] instead of a [LayerLink].
+/// * Changes the [paintBounds] to be the entire viewport.
 /// * Shifts the portal if it overflows out of the viewport.
 @internal
 class RenderPortalLayer extends RenderProxyBox {
   FChangeNotifier _notifier;
   ChildLayerLink _link;
+  Size _viewSize;
   bool _showWhenUnlinked;
   Offset _offset;
   Alignment _portalAnchor;
@@ -112,6 +116,7 @@ class RenderPortalLayer extends RenderProxyBox {
   RenderPortalLayer({
     required FChangeNotifier notifier,
     required ChildLayerLink link,
+    required Size viewSize,
     required bool showWhenUnlinked,
     required Offset offset,
     required Alignment portalAnchor,
@@ -120,6 +125,7 @@ class RenderPortalLayer extends RenderProxyBox {
     RenderBox? child,
   }) : _notifier = notifier,
        _link = link,
+        _viewSize = viewSize,
        _showWhenUnlinked = showWhenUnlinked,
        _offset = offset,
        _childAnchor = childAnchor,
@@ -160,7 +166,9 @@ class RenderPortalLayer extends RenderProxyBox {
         this.offset +
         switch ((child, link.childSize, link.childLayer?.globalOffset)) {
           (final child?, final childSize?, final offset?) => _shift(
-            size,
+            // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
+            // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
+            viewSize,
             (offset: offset, size: childSize, anchor: childAnchor),
             (size: child.size, anchor: portalAnchor),
           ),
@@ -200,6 +208,9 @@ class RenderPortalLayer extends RenderProxyBox {
       return true;
     }());
   }
+
+  @override
+  Rect get paintBounds => globalToLocal(Offset.zero) & viewSize;
 
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) {
@@ -326,6 +337,17 @@ class RenderPortalLayer extends RenderProxyBox {
     }
 
     _shift = value;
+    markNeedsPaint();
+  }
+
+  Size get viewSize => _viewSize;
+
+  set viewSize(Size value) {
+    if (_viewSize == value) {
+      return;
+    }
+
+    _viewSize = value;
     markNeedsPaint();
   }
 

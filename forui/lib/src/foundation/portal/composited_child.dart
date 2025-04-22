@@ -56,6 +56,9 @@ class RenderChildLayer extends RenderProxyBox {
   // but can be accessed even when [debugDoingThisResize] and [debugDoingThisLayout] are false.
   Size? _previousLayoutSize;
   ChildLayerLink _link;
+
+  /// The size is not used directly. Instead, it's used to mark this render box for repainting whenever the window size
+  /// changes.
   Size _viewSize;
   Offset? _previousGlobalOffset;
 

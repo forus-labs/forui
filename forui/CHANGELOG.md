@@ -122,7 +122,7 @@ A new `onChange` and `onSelect` callback has been added to most Forui widgets.
 ### `FPortal`
 `FPortal` has been reworked to fix a series of longstanding issues.
 
-* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`.
+* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`/`Padding`.
 * Fix `FPortal` not updating portals when child's offset/size changes.
 * Fix `FPortal` displaying portal when child is not rendered.
 
