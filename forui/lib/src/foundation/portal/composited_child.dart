@@ -2,10 +2,12 @@
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/portal/composited_portal.dart';
 import 'package:forui/src/foundation/portal/layer.dart';
-import 'package:meta/meta.dart';
 
 /// A [CompositedChild] allows [CompositedPortal]s to position themselves relative to it.
 ///

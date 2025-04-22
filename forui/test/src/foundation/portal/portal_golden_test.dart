@@ -82,10 +82,11 @@ void main() {
                 children: [
                   FPortal(
                     controller: controller,
-                    portalBuilder: (context) => const Padding(
-                      padding: EdgeInsets.all(5),
-                      child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                    ),
+                    portalBuilder:
+                        (context) => const Padding(
+                          padding: EdgeInsets.all(5),
+                          child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                        ),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
@@ -113,10 +114,11 @@ void main() {
                 children: [
                   FPortal(
                     controller: controller,
-                    portalBuilder: (context) => const Padding(
-                      padding: EdgeInsets.all(5),
-                      child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                    ),
+                    portalBuilder:
+                        (context) => const Padding(
+                          padding: EdgeInsets.all(5),
+                          child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                        ),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
@@ -144,10 +146,11 @@ void main() {
                 children: [
                   FPortal(
                     controller: controller,
-                    portalBuilder: (context) => const Padding(
-                      padding: EdgeInsets.all(5),
-                      child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                    ),
+                    portalBuilder:
+                        (context) => const Padding(
+                          padding: EdgeInsets.all(5),
+                          child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                        ),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
@@ -175,10 +178,11 @@ void main() {
                 children: [
                   FPortal(
                     controller: controller,
-                    portalBuilder: (context) => const Padding(
-                      padding: EdgeInsets.all(5),
-                      child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                    ),
+                    portalBuilder:
+                        (context) => const Padding(
+                          padding: EdgeInsets.all(5),
+                          child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                        ),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
@@ -206,10 +210,11 @@ void main() {
                 children: [
                   FPortal(
                     controller: controller,
-                    portalBuilder: (context) => const Padding(
-                      padding: EdgeInsets.all(5),
-                      child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                    ),
+                    portalBuilder:
+                        (context) => const Padding(
+                          padding: EdgeInsets.all(5),
+                          child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                        ),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
@@ -232,10 +237,11 @@ void main() {
         TestScaffold.app(
           child: FPortal(
             controller: controller,
-            portalBuilder: (context) => const Padding(
-              padding: EdgeInsets.all(5),
-              child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-            ),
+            portalBuilder:
+                (context) => const Padding(
+                  padding: EdgeInsets.all(5),
+                  child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                ),
             child: const Center(child: Expanding()),
           ),
         ),
@@ -256,19 +262,21 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Builder(
-            builder: (context) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
-              child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: FPortal(
-                    portalAnchor: Alignment.topLeft,
-                    childAnchor: Alignment.bottomRight,
-                    controller: controller,
-                    portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                    child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+            builder:
+                (context) => MediaQuery(
+                  data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: FPortal(
+                      portalAnchor: Alignment.topLeft,
+                      childAnchor: Alignment.bottomRight,
+                      controller: controller,
+                      portalBuilder:
+                          (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                      child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                    ),
                   ),
                 ),
-            )
           ),
         ),
       );

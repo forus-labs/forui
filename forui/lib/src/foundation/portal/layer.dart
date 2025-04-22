@@ -5,9 +5,11 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart' hide Matrix4;
 import 'package:flutter/scheduler.dart';
-import 'package:forui/src/foundation/portal/composited_child.dart';
+
 import 'package:meta/meta.dart';
 import 'package:vector_math/vector_math_64.dart';
+
+import 'package:forui/src/foundation/portal/composited_child.dart';
 
 /// An object that a [ChildLayer] can register with. It links a [ChildLayer] to one or more [PortalLayer]s.
 ///
@@ -299,7 +301,7 @@ class PortalLayer extends ContainerLayer {
       return null;
     }
     final Matrix4 result = Matrix4.translationValues(-_lastOffset!.dx, -_lastOffset!.dy, 0.0)
-    ..multiply(_lastTransform!);
+      ..multiply(_lastTransform!);
     return result;
   }
 
