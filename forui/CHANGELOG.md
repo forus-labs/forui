@@ -58,13 +58,12 @@ with font icons. In addition, all `iconColor` and `iconSize` style properties ha
 * **Breaking** Change `FBreadcrumbStyle.iconStyle` from `FIconStyle` to `IconThemeData`.
 * **Breaking** Replace `FCheckboxStateStyle` `iconColor` with `iconStyle`.
 
-### `FSelect`
+### `FSelect` (new)
 A select displays a list of options for the user to pick from. It is searchable and supports both async & sync loading
 of items.
 
 * Add `FSelect`.
 * Add `FSelectController`.
-
 
 ### `FPopover`
 The traversal-edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
@@ -77,6 +76,17 @@ The traversal-edge behavior of `FPopover` and Forui widgets that depend on it ha
 * **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FBreadcrumbItem.collapsed`.
 * **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FPopoverMenu`.
 * **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FSelectMenuTile`.
+
+
+### `FHeader`
+
+Several minor tweaks have been made to `FHeader` to improve usability and consistency.
+
+* Change `FHeader(title: ...)` to be optional.
+* Change `FHeader.nested(title: ...)` to be optional.
+* **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.
+* **Breaking** Change `FHeader(prefixActions: ...)` to `FHeader(prefixes: ...)`.
+* **Breaking** Change `FHeader(suffixActions: ...)` to `FHeader(suffixes: ...)`.
 
 
 ### `FProgress`
@@ -109,6 +119,15 @@ A new `onChange` and `onSelect` callback has been added to most Forui widgets.
 * **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
 
 
+### `FPortal`
+`FPortal` has been reworked to fix a series of longstanding issues.
+
+* Add `FPortal.useViewPadding`.
+* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`/`Padding`.
+* Fix `FPortal` not updating portals when child's offset/size changes.
+* Fix `FPortal` displaying portal when child is not rendered.
+
+
 ### `FTappable`
 `FTappable` has been updated to support animations by default. This applies to all Forui widgets that use `FTappable`.
 The `hovered` state has also been split into `hovered` and `pressed` states.
@@ -134,31 +153,13 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Fix `FTappable`'s animation sometimes being invoked after it is unmounted.
 
 
-### Others
-* Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
-* Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
-* Add `FDateField.builder`.
-* Add `FTimeField.builder`.
-* Add `FLerpBorderRadius`.
+### Semantics Labels
 
-
-* Change `FHeader(title: ...)` to be optional.
-* Change `FHeader.nested(title: ...)` to be optional.
-* **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.
-* **Breaking** Change `FHeader(prefixActions: ...)` to `FHeader(prefixes: ...)`.
-* **Breaking** Change `FHeader(suffixActions: ...)` to `FHeader(suffixes: ...)`.
-
-* **Breaking** Change `FAccordion.items` to `FAccordion.children`.
-* **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.
-* **Breaking** Change `FButton(label: ...)` to `FBadge(child: ...)`.
-* **Breaking** Change `FSelectGroup(items: ...)` to `FBadge(children: ...)`.
-* **Breaking** Change `FTabs(tabs: ...)` to `FTabs(children: ...)`.
-* **Breaking** Change `FTabEntry(content: ...)` to `FTabEntry(child: ...)`.
-* **Breaking** Change `FScaffold(content: ...)` to `FScaffold(child: ...)`.
+We previously used both `semanticsLabel` and `semanticLabel` interchangeably throughout the library. All `semanticLabel`s
+have been renamed to `semanticsLabel` for consistency.
 
 * **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FAvatar.new`.
 * **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FBreadcrumb.collapsed`.
-
 * **Breaking** Rename `FCheckbox.semanticLabel` to `FCheckbox.semanticsLabel`.
 * **Breaking** Rename `FDialog.semanticLabel` to `FDialog.semanticsLabel`.
 * **Breaking** Rename `FHeaderAction.semanticLabel` to `FHeaderAction.semanticsLabel`.
@@ -174,8 +175,23 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * **Breaking** Rename `FTile.semanticLabel` to `FTile.semanticsLabel`.
 * **Breaking** Rename `FTileGroup.semanticLabel` to `FTileGroup.semanticsLabel`.
 
-* Replace `FSelectGroupItem` with `FCheckbox.grouped(...)` and `FRadio.grouped(...)`.
 
+### Others
+* Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
+* Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
+* Add `FDateField.builder`.
+* Add `FTimeField.builder`.
+* Add `FLerpBorderRadius`.
+
+* **Breaking** Change `FAccordion.items` to `FAccordion.children`.
+* **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.
+* **Breaking** Change `FButton(label: ...)` to `FBadge(child: ...)`.
+* **Breaking** Change `FSelectGroup(items: ...)` to `FBadge(children: ...)`.
+* **Breaking** Change `FTabs(tabs: ...)` to `FTabs(children: ...)`.
+* **Breaking** Change `FTabEntry(content: ...)` to `FTabEntry(child: ...)`.
+* **Breaking** Change `FScaffold(content: ...)` to `FScaffold(child: ...)`.
+
+* Replace `FSelectGroupItem` with `FCheckbox.grouped(...)` and `FRadio.grouped(...)`.
 
 * Fix an issue where header spacing appeared in incorrect order.
 * Fix `FResizable` not guarding against precision errors in assertions.
@@ -183,6 +199,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Fix `FSelectTileGroup` not setting its `FormField`'s initial value.
 * Fix `FSlider` not setting its `FormField`'s initial value.
 * Fix `FTextField` not setting its `FormField`'s initial value.
+
 
 ## 0.10.0+1
 

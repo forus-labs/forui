@@ -109,7 +109,6 @@ class FRadio extends StatelessWidget {
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
-      focusedOutlineStyle: style.focusedOutlineStyle,
       builder: (context, states, _) {
         states = {...states, ...formStates};
 
@@ -120,27 +119,33 @@ class FRadio extends StatelessWidget {
           label: label,
           description: description,
           error: error,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  border: Border.all(color: style.borderColor.resolve(states)),
-                  color: style.backgroundColor.resolve(states),
-                  shape: BoxShape.circle,
+          // A separate FFocusedOutline is used instead of FTappable's built-in one so that only the radio,
+          // rather than the entire FLabel, is outlined.
+          child: FFocusedOutline(
+            focused: states.contains(WidgetState.focused),
+            style: style.focusedOutlineStyle,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: style.borderColor.resolve(states)),
+                    color: style.backgroundColor.resolve(states),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const SizedBox.square(dimension: 10),
                 ),
-                child: const SizedBox.square(dimension: 10),
-              ),
-              DecoratedBox(
-                decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: BoxShape.circle),
-                child: AnimatedSize(
-                  duration: style.animationDuration,
-                  curve: style.curve,
-                  child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
+                DecoratedBox(
+                  decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: BoxShape.circle),
+                  child: AnimatedSize(
+                    duration: style.animationDuration,
+                    curve: style.curve,
+                    child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

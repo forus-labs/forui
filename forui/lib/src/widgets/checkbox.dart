@@ -109,7 +109,6 @@ class FCheckbox extends StatelessWidget {
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
-      focusedOutlineStyle: style.focusedOutlineStyle,
       builder: (context, states, _) {
         states = {...states, ...formStates};
 
@@ -121,16 +120,24 @@ class FCheckbox extends StatelessWidget {
           label: label,
           description: description,
           error: error,
-          child: AnimatedSwitcher(
-            duration: style.animationDuration,
-            switchInCurve: style.curve,
-            child: SizedBox.square(
-              key: SetKey(states),
-              dimension: style.size,
-              child: DecoratedBox(
-                decoration: style.decoration.resolve(states),
-                child:
-                    iconTheme == null ? const SizedBox() : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
+          // A separate FFocusedOutline is used instead of FTappable's built-in one so that only the checkbox,
+          // rather than the entire FLabel, is outlined.
+          child: FFocusedOutline(
+            focused: states.contains(WidgetState.focused),
+            style: style.focusedOutlineStyle,
+            child: AnimatedSwitcher(
+              duration: style.animationDuration,
+              switchInCurve: style.curve,
+              child: SizedBox.square(
+                key: SetKey(states),
+                dimension: style.size,
+                child: DecoratedBox(
+                  decoration: style.decoration.resolve(states),
+                  child:
+                      iconTheme == null
+                          ? const SizedBox()
+                          : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
+                ),
               ),
             ),
           ),
