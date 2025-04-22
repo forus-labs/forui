@@ -249,6 +249,35 @@ void main() {
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/expanded.png'));
     });
+
+    testWidgets('respect view padding', (tester) async {
+      final controller = OverlayPortalController();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Builder(
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
+              child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: FPortal(
+                    portalAnchor: Alignment.topLeft,
+                    childAnchor: Alignment.bottomRight,
+                    controller: controller,
+                    portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                    child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                  ),
+                ),
+            )
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/view-padding.png'));
+    });
   });
 }
 

@@ -41,6 +41,9 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   /// The anchor point on the linked [CompositedChild] that [portalAnchor] will line up with.
   final Alignment childAnchor;
 
+  /// The padding to avoid system intrusions.
+  final EdgeInsets viewPadding;
+
   /// The shifting strategy used to shift a portal when it overflows out of the viewport.
   ///
   /// See [FPortalShift] for the different shifting strategies.
@@ -52,6 +55,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     required this.offset,
     required this.portalAnchor,
     required this.childAnchor,
+    required this.viewPadding,
     required this.shift,
     this.showWhenUnlinked = false,
     super.key,
@@ -67,6 +71,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     offset: offset,
     portalAnchor: portalAnchor,
     childAnchor: childAnchor,
+    viewPadding: viewPadding,
     shift: FPortalShift.flip,
   );
 
@@ -80,6 +85,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
         ..offset = offset
         ..portalAnchor = portalAnchor
         ..childAnchor = childAnchor
+        ..viewPadding = viewPadding
         ..shift = shift;
 
   @override
@@ -92,6 +98,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
+      ..add(DiagnosticsProperty('viewPadding', viewPadding))
       ..add(ObjectFlagProperty.has('shift', shift));
   }
 }
@@ -111,6 +118,7 @@ class RenderPortalLayer extends RenderProxyBox {
   Offset _offset;
   Alignment _portalAnchor;
   Alignment _childAnchor;
+  EdgeInsets _viewPadding;
   Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
 
   RenderPortalLayer({
@@ -121,15 +129,17 @@ class RenderPortalLayer extends RenderProxyBox {
     required Offset offset,
     required Alignment portalAnchor,
     required Alignment childAnchor,
+    required EdgeInsets viewPadding,
     required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     RenderBox? child,
   }) : _notifier = notifier,
        _link = link,
-        _viewSize = viewSize,
+       _viewSize = viewSize,
        _showWhenUnlinked = showWhenUnlinked,
        _offset = offset,
        _childAnchor = childAnchor,
        _portalAnchor = portalAnchor,
+       _viewPadding = viewPadding,
        _shift = shift,
        super(child);
 
@@ -164,13 +174,20 @@ class RenderPortalLayer extends RenderProxyBox {
 
     final linkedOffset =
         this.offset +
-        switch ((child, link.childSize, link.childLayer?.globalOffset)) {
-          (final child?, final childSize?, final offset?) => _shift(
+        switch ((link.childLayer?.globalOffset, link.childSize, child)) {
+          (final childOffset?, final childSize?, final portal?) => _shift(
             // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
             // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
-            viewSize,
-            (offset: offset, size: childSize, anchor: childAnchor),
-            (size: child.size, anchor: portalAnchor),
+            Size(
+              viewSize.width - (viewPadding.left + viewPadding.right),
+              viewSize.height - (viewPadding.top + viewPadding.bottom),
+            ),
+            (
+              offset: Offset(childOffset.dx - viewPadding.left, childOffset.dy - viewPadding.top),
+              size: childSize,
+              anchor: childAnchor,
+            ),
+            (size: portal.size, anchor: portalAnchor),
           ),
           _ => Offset.zero,
         };
@@ -329,6 +346,17 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  EdgeInsets get viewPadding => _viewPadding;
+
+  set viewPadding(EdgeInsets value) {
+    if (_viewPadding == value) {
+      return;
+    }
+
+    _viewPadding = value;
+    markNeedsPaint();
+  }
+
   Offset Function(Size, FPortalChildBox, FPortalBox) get shift => _shift;
 
   set shift(Offset Function(Size, FPortalChildBox, FPortalBox) value) {
@@ -362,6 +390,8 @@ class RenderPortalLayer extends RenderProxyBox {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('viewPadding', viewPadding))
+      ..add(DiagnosticsProperty('viewSize', viewSize))
       ..add(TransformProperty('current transform matrix', _currentTransform));
   }
 }

@@ -45,6 +45,9 @@ class FPortal extends StatefulWidget {
   /// See [FPortalShift] for the different shifting strategies.
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
+  /// Whether to avoid system intrusions. Defaults to true.
+  final bool useViewPadding;
+
   /// The portal builder which returns the floating content.
   final WidgetBuilder portalBuilder;
 
@@ -60,6 +63,7 @@ class FPortal extends StatefulWidget {
     this.portalAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
+    this.useViewPadding = true,
     super.key,
   });
 
@@ -75,6 +79,7 @@ class FPortal extends StatefulWidget {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
+      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'uses view padding'))
       ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder));
   }
 }
@@ -98,6 +103,7 @@ class _State extends State<FPortal> {
             offset: widget.offset,
             portalAnchor: widget.portalAnchor.resolve(direction),
             childAnchor: widget.childAnchor.resolve(direction),
+            viewPadding: widget.useViewPadding ? MediaQuery.viewPaddingOf(context) : EdgeInsets.zero,
             shift: widget.shift,
             child: widget.portalBuilder(context),
           );

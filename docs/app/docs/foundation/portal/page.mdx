@@ -87,8 +87,9 @@ FPortal(
   controller: OverlayPortalController(),
   shift: FPortalShift.flip,
   portalAnchor: Alignment.topCenter,
-  portalBuilder: (context) => const Text('portal'),
   childAnchor: Alignment.bottomCenter,
+  useViewPadding: true,
+  portalBuilder: (context) => const Text('portal'),
   child: const Text('child'),
 );
 ```
