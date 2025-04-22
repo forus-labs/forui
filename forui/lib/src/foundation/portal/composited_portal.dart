@@ -44,11 +44,11 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
 
   const CompositedPortal({
     required this.link,
-    required this.showWhenUnlinked,
     required this.offset,
     required this.portalAnchor,
     required this.childAnchor,
     required this.shift,
+    this.showWhenUnlinked = false,
     super.key,
     super.child,
   });

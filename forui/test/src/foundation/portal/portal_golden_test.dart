@@ -131,5 +131,36 @@ void main() {
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted-outside-repaint-boundary.png'));
     });
+
+    testWidgets('does not show portal when child is unlinked/not visible', (tester) async {
+      final controller = OverlayPortalController();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: ListView(
+            children: [
+              const SizedBox(height: 1000),
+              Row(
+                children: [
+                  FPortal(
+                    controller: controller,
+                    portalBuilder: (context) => const Padding(
+                      padding: EdgeInsets.all(5),
+                      child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                    ),
+                    child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/unlinked.png'));
+    });
   });
 }

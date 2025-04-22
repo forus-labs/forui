@@ -20,6 +20,9 @@ class FPortal extends StatefulWidget {
   /// The controller that shows and hides the portal. It initially hides the portal.
   final OverlayPortalController controller;
 
+  /// The offset to adjust the [shift]ed portal by. Defaults to [Offset.zero].
+  final Offset offset;
+
   /// The point on the portal (floating content) that connects with the child, at the child's anchor.
   ///
   /// For example, [Alignment.topCenter] means the top-center point of the portal will connect with the child.
@@ -42,9 +45,6 @@ class FPortal extends StatefulWidget {
   /// See [FPortalShift] for the different shifting strategies.
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
-  /// The offset to adjust the [shift]ed portal by. Defaults to [Offset.zero].
-  final Offset offset;
-
   /// The portal builder which returns the floating content.
   final WidgetBuilder portalBuilder;
 
@@ -56,10 +56,10 @@ class FPortal extends StatefulWidget {
     required this.controller,
     required this.portalBuilder,
     required this.child,
+    this.offset = Offset.zero,
     this.portalAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
-    this.offset = Offset.zero,
     super.key,
   });
 
@@ -92,7 +92,6 @@ class _State extends State<FPortal> {
           final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
           return CompositedPortal(
             link: _link,
-            showWhenUnlinked: true,
             offset: widget.offset,
             portalAnchor: widget.portalAnchor.resolve(direction),
             childAnchor: widget.childAnchor.resolve(direction),
