@@ -54,13 +54,11 @@ class FBottomNavigationBar extends StatelessWidget {
                   child: FTappable(
                     style: style.tappableStyle,
                     focusedOutlineStyle: style.focusedOutlineStyle,
+                    selected: i == index,
                     onPress: () => onChange?.call(i),
                     builder:
-                        (_, states, _) => FBottomNavigationBarData(
-                          itemStyle: style.itemStyle,
-                          states: {...states, if (i == index) WidgetState.selected},
-                          child: child,
-                        ),
+                        (_, states, _) =>
+                            FBottomNavigationBarData(itemStyle: style.itemStyle, states: states, child: child),
                   ),
                 ),
             ],
