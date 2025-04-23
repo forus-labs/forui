@@ -45,9 +45,6 @@ class FTappable extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
-  /// Used by accessibility frameworks to determine whether this tappable has been selected. Defaults to false.
-  final bool semanticSelected;
-
   /// Whether to replace all child semantics with this node. Defaults to false.
   final bool excludeSemantics;
 
@@ -99,7 +96,6 @@ class FTappable extends StatefulWidget {
     FTappableStyle? style,
     FFocusedOutlineStyle? focusedOutlineStyle,
     String? semanticsLabel,
-    bool semanticSelected,
     bool excludeSemantics,
     bool autofocus,
     FocusNode? focusNode,
@@ -121,7 +117,6 @@ class FTappable extends StatefulWidget {
     this.style,
     this.focusedOutlineStyle,
     this.semanticsLabel,
-    this.semanticSelected = false,
     this.excludeSemantics = false,
     this.autofocus = false,
     this.focusNode,
@@ -146,7 +141,6 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(FlagProperty('semanticsSelected', value: semanticSelected, ifTrue: 'selected'))
       ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -194,7 +188,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       label: widget.semanticsLabel,
       container: true,
       button: true,
-      selected: widget.semanticSelected,
+      selected: widget.selected,
       excludeSemantics: widget.excludeSemantics,
       child: Focus(
         autofocus: widget.autofocus,
@@ -286,7 +280,6 @@ class AnimatedTappable extends FTappable {
     super.style,
     super.focusedOutlineStyle,
     super.semanticsLabel,
-    super.semanticSelected,
     super.excludeSemantics,
     super.autofocus,
     super.focusNode,
