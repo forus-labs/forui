@@ -85,8 +85,8 @@ class FPicker extends StatefulWidget {
   /// The individual wheels and separators.
   ///
   /// ## Contract
-  /// A wheel cannot be wrapped in a widget other than a custom [FPickerWheel]. Doing so will result in this picker
-  /// treating it as a separator and causing an error.
+  /// A picker wheel must mix-in [FAccordionItemMixin]. Not doing so will result in the wheel being treated as a
+  /// separator and cause undefined behavior.
   final List<Widget> children;
 
   /// Creates a [FPicker] with several wheels, and optionally, separators.

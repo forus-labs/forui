@@ -25,8 +25,12 @@ class FAccordion extends StatefulWidget {
   /// The style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
 
-  /// The children.
-  final List<FAccordionItem> children;
+  /// The individual accordion items and separators.
+  ///
+  /// ## Contract
+  /// A accordion item must mix-in [FAccordionItemMixin]. Not doing so will result in the item being treated as a
+  /// separator and cause undefined behavior.
+  final List<Widget> children;
 
   /// Creates a [FAccordion].
   const FAccordion({required this.children, this.controller, this.style, super.key});
@@ -63,7 +67,10 @@ class _FAccordionState extends State<FAccordion> {
     return Column(
       children: [
         for (final (index, child) in widget.children.indexed)
-          FAccordionItemData(index: index, controller: _controller, style: style, child: child),
+          if (child is FAccordionItemMixin)
+            FAccordionItemData(index: index, controller: _controller, style: style, child: child)
+          else
+            child,
       ],
     );
   }
