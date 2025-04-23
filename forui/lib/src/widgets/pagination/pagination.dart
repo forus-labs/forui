@@ -232,24 +232,22 @@ class _Page extends StatelessWidget {
       child: ListenableBuilder(
         listenable: controller,
         builder:
-            (context, _) => FTappable(
+            (_, _) => FTappable(
               style: style.pageTappableStyle,
               focusedOutlineStyle: focusedOutlineStyle,
+              selected: controller.page == page,
               onPress: () => controller.page = page,
-              builder: (context, states, _) {
-                states = {...states, if (controller.page == page) WidgetState.selected};
-
-                return DecoratedBox(
-                  decoration: style.itemDecoration.resolve(states),
-                  child: ConstrainedBox(
-                    constraints: style.itemConstraints,
-                    child: DefaultTextStyle(
-                      style: style.itemTextStyle.resolve(states),
-                      child: Center(child: Text('${page + 1}')),
+              builder:
+                  (_, states, _) => DecoratedBox(
+                    decoration: style.itemDecoration.resolve(states),
+                    child: ConstrainedBox(
+                      constraints: style.itemConstraints,
+                      child: DefaultTextStyle(
+                        style: style.itemTextStyle.resolve(states),
+                        child: Center(child: Text('${page + 1}')),
+                      ),
                     ),
                   ),
-                );
-              },
             ),
       ),
     );
