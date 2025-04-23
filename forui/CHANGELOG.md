@@ -178,6 +178,7 @@ have been renamed to `semanticsLabel` for consistency.
 
 
 ### Others
+* Add `FBreadcrumbStyle.focusedOutlineStyle`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
 * Add `FDateField.builder`.
