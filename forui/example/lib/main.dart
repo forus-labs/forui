@@ -1,7 +1,3 @@
-import 'dart:async';
-import 'dart:ui';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -46,11 +42,6 @@ class Example extends StatefulWidget {
 enum Sidebar { recents, home, applications }
 
 class _ExampleState extends State<Example> {
-
   @override
-  Widget build(BuildContext context) => Column(
-    children: const [
-      FProgress.circularIcon(),
-    ],
-  );
+  Widget build(BuildContext context) => Column(children: const [FProgress.circularIcon()]);
 }
