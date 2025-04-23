@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:ui';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -39,24 +43,30 @@ class Example extends StatefulWidget {
   State<Example> createState() => _ExampleState();
 }
 
+enum Sidebar { recents, home, applications }
+
 class _ExampleState extends State<Example> {
   int _count = 0;
 
   @override
-  Widget build(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 10,
-      children: [
-        Text('Count: $_count'),
-        IntrinsicWidth(
-          child: FButton(
-            onPress: () => setState(() => _count++),
-            suffix: const Icon(FIcons.chevronsUp),
-            child: const Text('Increase'),
+  Widget build(BuildContext context) =>
+      FTileGroup(
+        label: const Text('Settings'),
+        divider: FTileDivider.none,
+        children: [
+          FTile(
+            prefixIcon: Icon(FIcons.user),
+            title: const Text('Personalization'),
+            suffixIcon: Icon(FIcons.chevronRight),
+            onPress: () {},
           ),
-        ),
-      ],
-    ),
-  );
+          FTile(
+            prefixIcon: Icon(FIcons.wifi),
+            title: const Text('WiFi'),
+            details: const Text('Forus Labs (5G)'),
+            suffixIcon: Icon(FIcons.chevronRight),
+            onPress: () {},
+          ),
+        ],
+      );
 }

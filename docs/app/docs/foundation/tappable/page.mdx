@@ -23,17 +23,17 @@ An area that responds to touch.
   <Tabs.Tab>
     ```dart copy
     FTappable(
-      builder: (context, data, child) => Container(
-        decoration: BoxDecoration(
-          color: data.hovered ? context.theme.colors.secondary : context.theme.colors.background,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: context.theme.colors.border,
-          )
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-        child: child!,
-      ),
+      builder:
+          (context, data, child) => Container(
+            decoration: BoxDecoration(
+              color:
+                  data.contains(WidgetState.hovered) ? context.theme.colors.secondary : context.theme.colors.background,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: context.theme.colors.border),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+            child: child!,
+          ),
       child: const Text('Tappable'),
       onPress: () {},
     );
@@ -51,11 +51,9 @@ const FTappable(
   semanticsLabel: 'Label',
   semanticSelected: false,
   excludeSemantics: false,
-  this.autofocus: false,
+  autofocus: false,
   focusNode: FocusNode(),
   onFocusChange: (focused) {},
-  touchHoverEnterDuration: const Duration(milliseconds: 200),
-  touchHoverExitDuration: Duration.zero,
   behavior: HitTestBehavior.translucent,
   onPress: () {},
   onLongPress: () {},
@@ -69,16 +67,14 @@ const FTappable(
 A variant of `FTappable` without any animation. This is similar to using `FTappableAnimations.none`.
 
 ```dart copy
-const FTappable.static(
+FTappable.static(
   style: FTappableStyle(),
   semanticsLabel: 'Label',
   semanticSelected: false,
   excludeSemantics: false,
-  this.autofocus: false,
+  autofocus: false,
   focusNode: FocusNode(),
   onFocusChange: (focused) {},
-  touchHoverEnterDuration: const Duration(milliseconds: 200),
-  touchHoverExitDuration: Duration.zero,
   behavior: HitTestBehavior.translucent,
   onPress: () {},
   onLongPress: () {},

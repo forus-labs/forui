@@ -20,32 +20,32 @@ A box which children can be resized along either the horizontal or vertical axis
     class TimeOfDay extends StatelessWidget {
       @override
       Widget build(BuildContext context) => DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.all(color: context.theme.colors.border),
-              borderRadius: BorderRadius.circular(8),
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colors.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          axis: Axis.vertical,
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 250,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
             ),
-            child: FResizable(
-              axis: Axis.vertical,
-              crossAxisExtent: 300,
-              children: [
-                FResizableRegion(
-                  initialExtent: 250,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
-                ),
-                FResizableRegion(
-                  initialExtent: 100,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
-                ),
-                FResizableRegion(
-                  initialExtent: 250,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
-                ),
-              ],
+            FResizableRegion(
+              initialExtent: 100,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
             ),
-          );
+            FResizableRegion(
+              initialExtent: 250,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
+            ),
+          ],
+        ),
+      );
     }
 
     class Label extends StatelessWidget {
@@ -135,40 +135,40 @@ FResizable(
     class TimeOfDay extends StatelessWidget {
       @override
       Widget build(BuildContext context) => DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.all(color: context.theme.colors.border),
-              borderRadius: BorderRadius.circular(8),
+        decoration: BoxDecoration(
+          border: Border.all(color: context.theme.colors.border),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: FResizable(
+          axis: Axis.vertical,
+          controller: FResizableController(),
+          crossAxisExtent: 300,
+          children: [
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
             ),
-            child: FResizable(
-              axis: Axis.vertical,
-              controller: FResizableController(),
-              crossAxisExtent: 300,
-              children: [
-                FResizableRegion(
-                  initialExtent: 200,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
-                ),
-                FResizableRegion(
-                  initialExtent: 200,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
-                ),
-                FResizableRegion(
-                  initialExtent: 200,
-                  minExtent: 100,
-                  builder: (_, data, __) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
-                ),
-              ],
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
             ),
-          );
+            FResizableRegion(
+              initialExtent: 200,
+              minExtent: 100,
+              builder: (_, data, __) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
+            ),
+          ],
+        ),
+      );
     }
 
     class Label extends StatelessWidget {
       static final DateFormat format = DateFormat.jm(); // Requires package:intl
 
       final FResizableRegionData data;
-      final SvgAsset icon;
+      final IconData icon;
       final String label;
 
       const Label({required this.data, required this.icon, required this.label, super.key});
@@ -194,7 +194,7 @@ FResizable(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  icon(height: 15, colorFilter: ColorFilter.mode(colors.foreground, BlendMode.srcIn)),
+                  Icon(icon, size: 15, color: colors.foreground),
                   const SizedBox(width: 3),
                   Text(label, style: typography.sm.copyWith(color: colors.foreground)),
                 ],
@@ -222,7 +222,7 @@ FResizable(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {7} copy
-    Widget build(BuildContext context) => DecoratedBox(
+    DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colors.border),
         borderRadius: BorderRadius.circular(8),
@@ -260,7 +260,7 @@ FResizable(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {8} copy
-    Widget build(BuildContext context) => DecoratedBox(
+    DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colors.border),
         borderRadius: BorderRadius.circular(8),
@@ -299,7 +299,7 @@ FResizable(
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {8} copy
-    Widget build(BuildContext context) => DecoratedBox(
+    DecoratedBox(
       decoration: BoxDecoration(
         border: Border.all(color: context.theme.colors.border),
         borderRadius: BorderRadius.circular(8),

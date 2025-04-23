@@ -55,10 +55,10 @@ Recommended for touch devices.
 
 ```dart copy
 const FPicker(
-  controller: FPickerController(),
+  controller: FPickerController(initialIndexes: []),
   style: style,
   children: [
-    const FPickerWheel(
+    FPickerWheel(
       flex: 2,
       loop: true,
       itemExtent: 20,
@@ -70,13 +70,13 @@ const FPicker(
         Text('2'),
       ],
     ),
-    const FPickerWheel(
+    FPickerWheel.builder(
       flex: 2,
       itemExtent: 20,
       autofocus: true,
       focusNode: FocusNode(),
       onFocusChange: (focused) {},
-      builder: (context, index) => Text('$1'),
+      builder: (context, index) => Text('$index'),
     ),
   ],
 );
@@ -125,7 +125,7 @@ const FPicker(
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {3-5} copy
-        const FPicker(
+        FPicker(
           children: [
             FPickerWheel.builder(
               builder: (context, index) => Text('$index'),

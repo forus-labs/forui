@@ -33,8 +33,8 @@ FPagination(
     initialPage: 4,
     showEdges: false,
     siblings: 2,
-    onPageChanged: () {},
   ),
+  onChange: () {},
 );
 ```
 
@@ -86,39 +86,30 @@ FPagination(
     <Tabs.Tab>
         ```dart copy
         FPagination(
-          controller: FPaginationController(
-            pages: 10,
-            initialPage: 4,
-          ),
-          next: Padding(
-            padding: style.itemPadding,
-            child: ConstrainedBox(
-              constraints: style.contentConstraints,
-              child: FButton.icon(
-                style: FButtonStyle.ghost,
-                onPress: controller.next,
-                child: FIconStyleData(
-                  style: style.iconStyle,
-                  child: Icon(FIcons.bird),
+            controller: FPaginationController(pages: 10, initialPage: 4),
+            next: Padding(
+              padding: style.itemPadding,
+              child: ConstrainedBox(
+                constraints: style.itemConstraints,
+                child: FButton.icon(
+                  style: FButtonStyle.ghost,
+                  onPress: controller.next,
+                  child: IconTheme(data: style.itemIconStyle.resolve({}), child: Icon(FIcons.bird)),
                 ),
               ),
             ),
-          ),
-          previous: Padding(
-            padding: style.itemPadding,
-            child: ConstrainedBox(
-              constraints: style.contentConstraints,
-              child: FButton.icon(
-                style: FButtonStyle.ghost,
-                onPress: controller.previous,
-                child: FIconStyleData(
-                  style: style.iconStyle,
-                  child: Icon(FIcons.anchor),
+            previous: Padding(
+              padding: style.itemPadding,
+              child: ConstrainedBox(
+                constraints: style.itemConstraints,
+                child: FButton.icon(
+                  style: FButtonStyle.ghost,
+                  onPress: controller.previous,
+                  child: IconTheme(data: style.itemIconStyle.resolve({}), child: Icon(FIcons.anchor)),
                 ),
               ),
             ),
-          ),
-        );
+          );
         ```
     </Tabs.Tab>
 </Tabs>
@@ -141,7 +132,7 @@ FPagination(
         class _PageViewExampleState extends State<PageViewExample>{
           int pages = 10;
           PageController controller = PageController();
-          FPaginationController paginationController = FPaginationController(pages: pages);
+          late FPaginationController paginationController = FPaginationController(pages: pages);
 
           @override
           void didChangeDependencies() {
@@ -168,45 +159,45 @@ FPagination(
 
           @override
           Widget build(BuildContext context) {
-          final style = context.theme.colors;
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: SizedBox(
-                  height: 300,
-                  width: 300,
-                  child: NotificationListener(
-                    onNotification: (notification) {
-                      if (notification is ScrollEndNotification) {
-                        if (controller.hasClients) {
-                          paginationController.page = controller.page!.round();
-                          return true;
+            final style = context.theme.colors;
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: SizedBox(
+                    height: 300,
+                    width: 300,
+                    child: NotificationListener(
+                      onNotification: (notification) {
+                        if (notification is ScrollEndNotification) {
+                          if (controller.hasClients) {
+                            paginationController.page = controller.page!.round();
+                            return true;
+                          }
                         }
-                      }
-                      return false;
-                    },
-                    child: PageView.builder(
-                      itemCount: pages,
-                      controller: controller,
-                      itemBuilder:(context, index) => ColoredBox(
-                        color: index.isEven ? style.hover(style.primary) : style.mutedForeground,
-                        child: Center(
-                          child: DefaultTextStyle(
-                            style: TextStyle(fontSize: 45, color: style.primaryForeground),
-                            child: Text('Page ${index + 1}'),
+                        return false;
+                      },
+                      child: PageView.builder(
+                        itemCount: pages,
+                        controller: controller,
+                        itemBuilder:(context, index) => ColoredBox(
+                          color: index.isEven ? style.hover(style.primary) : style.mutedForeground,
+                          child: Center(
+                            child: DefaultTextStyle(
+                              style: TextStyle(fontSize: 45, color: style.primaryForeground),
+                              child: Text('Page ${index + 1}'),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              FPagination(controller: paginationController, onPageChange: _handlePageChange,),
-            ],
-          );
-        }
+                FPagination(controller: paginationController, onChange: _handlePageChange,),
+              ],
+            );
+          }
 
           @override
           void dispose() {

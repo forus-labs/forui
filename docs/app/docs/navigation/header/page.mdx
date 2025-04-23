@@ -20,7 +20,7 @@ It is typically used on pages at the root of the navigation stack.
         ```dart copy
         FHeader(
           title: const Text('Edit Alarm'),
-          actions: [
+          suffixes: [
             FHeaderAction(
               icon: Icon(FIcons.alarmClock),
               onPress: () {},
@@ -47,10 +47,10 @@ It is typically used on nested pages or sheets.
         ```dart copy
         FHeader.nested(
           title: const Text('Appointment'),
-          prefixActions: [
+          prefixes: [
             FHeaderAction.back(onPress: () {}),
           ],
-          suffixActions: [
+          suffixes: [
             FHeaderAction(
               icon: Icon(FIcons.info),
               onPress: () {},
@@ -76,7 +76,7 @@ It is typically used on nested pages or sheets.
 ```dart copy
 FHeader(
   title: const Text('Title'),
-  actions: [
+  suffixes: [
     FHeaderAction(
       icon: Icon(FIcons.alarmClock),
       onPress: () {},
@@ -94,17 +94,17 @@ FHeader(
 ```dart copy
 FHeader.nested(
   title: const Text('Title'),
-  prefixActions: [
+  prefixes: [
     FHeaderAction.back(onPress: () {}),
   ],
-  suffixActions: [
+  suffixes: [
     FHeaderAction(
       icon: Icon(FIcons.info),
       onPress: () {},
     ),
     FHeaderAction.x(onPress: () {}),
   ],
-),
+);
 ```
 
 ## Examples
@@ -119,7 +119,7 @@ FHeader.nested(
         ```dart copy
         FHeader(
           title: const Text('Edit Alarm'),
-          actions: [
+          suffixes: [
             FHeaderAction(
               icon: Icon(FIcons.alarmClock),
               onPress: () {},
@@ -144,10 +144,10 @@ FHeader.nested(
         ```dart {3-5} copy
         FHeader.nested(
           title: const Text('Appointment'),
-          prefixActions: [
+          prefixes: [
             FHeaderAction.back(onPress: () {}),
           ],
-          suffixActions: [
+          suffixes: [
             FHeaderAction(
               icon: Icon(FIcons.info),
               onPress: () {},
@@ -172,7 +172,7 @@ FHeader.nested(
         ```dart {13-15} copy
         FHeader.nested(
           title: const Text('Climate'),
-          prefixActions: [
+          prefixes: [
             FHeaderAction(
               icon: Icon(FIcons.thermometer),
               onPress: () {},
@@ -182,7 +182,7 @@ FHeader.nested(
               onPress: null,
             ),
           ],
-          suffixActions: [
+          suffixes: [
             FHeaderAction.x(onPress: () {}),
           ],
         );

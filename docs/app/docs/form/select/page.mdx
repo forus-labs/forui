@@ -60,7 +60,7 @@ It is a form-field and can therefore be used in a form.
 
 ```dart copy
 FSelect<String>(
-  controller: FSelectController<String>(vysnc: this),
+  controller: FSelectController<String>(vsync: this),
   label: const Text('Country'),
   description: const Text('Select your country of residence'),
   hint: 'Choose a country',
@@ -130,7 +130,6 @@ FSelect<User>.search(
   searchFieldProperties: FSelectSearchFieldProperties(
     autofocus: true,
     hint: 'Type to search...',
-    debounce: const Duration(milliseconds: 300),
   ),
   searchLoadingBuilder: (context, style, _) => Text('Loading...'),
   searchErrorBuilder: (context, error, stackTrace) => Text('Error...'),
@@ -277,7 +276,7 @@ FSelect<User>.search(
         },
         searchLoadingBuilder: (context, style, _) => Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('Here be dragons...', style: style.textFieldStyle.enabledStyle.contentTextStyle),
+          child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.maybeResolve({})),
         ),
         contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
       );
@@ -392,10 +391,9 @@ FSelect<User>.search(
     <Widget name='select' variant='form' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {5} copy
+    ```dart copy
     class FormSelectPage extends StatefulWidget {
-      FormSelectPage({@queryParam super.key, super.alignment = Alignment.topCenter});
-    
+
       @override
       State<FormSelectPage> createState() => _FormSelectPageState();
     }

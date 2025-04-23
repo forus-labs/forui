@@ -30,38 +30,38 @@ It navigates to a new page each time.
         mainAxisSize: MainAxisSize.min,
         children: [
           FButton(
-            label: const Text('Left'),
+            child: const Text('Left'),
             onPress: () => showFSheet(
               context: context,
-              side: Layout.ltr,
-              builder: (context) => const Form(side: Layout.ltr),
+              side: FLayout.ltr,
+              builder: (context) => const Form(side: FLayout.ltr),
             ),
           ),
           const SizedBox(height: 5),
           FButton(
-            label: const Text('Top'),
+            child: const Text('Top'),
             onPress: () => showFSheet(
               context: context,
-              side: Layout.ttb,
-              builder: (context) => const Form(side: Layout.ttb),
+              side: FLayout.ttb,
+              builder: (context) => const Form(side: FLayout.ttb),
             ),
           ),
           const SizedBox(height: 5),
           FButton(
-            label: const Text('Right'),
+            child: const Text('Right'),
             onPress: () => showFSheet(
               context: context,
-              side: Layout.rtl,
-              builder: (context) => const Form(side: Layout.rtl),
+              side: FLayout.rtl,
+              builder: (context) => const Form(side: FLayout.rtl),
             ),
           ),
           const SizedBox(height: 5),
           FButton(
-            label: const Text('Bottom'),
+            child: const Text('Bottom'),
             onPress: () => showFSheet(
               context: context,
-              side: Layout.btt,
-              builder: (context) => const Form(side: Layout.btt),
+              side: FLayout.btt,
+              builder: (context) => const Form(side: FLayout.btt),
             ),
           ),
         ],
@@ -69,68 +69,68 @@ It navigates to a new page each time.
     }
 
     class Form extends StatelessWidget {
-      final Layout side;
+      final FLayout side;
 
       const Form({required this.side, super.key});
 
       @override
       Widget build(BuildContext context) => Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: context.theme.colors.background,
-              border: side.vertical
-                  ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-                  : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Account',
-                      style: context.theme.typography.xl2.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: context.theme.colors.foreground,
-                        height: 1.5,
-                      ),
-                    ),
-                    Text(
-                      'Make changes to your account here. Click save when you are done.',
-                      style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      width: 450,
-                      child: Column(
-                        children: [
-                          const FTextField(
-                            label: Text('Name'),
-                            hint: 'John Renalo',
-                          ),
-                          const SizedBox(height: 10),
-                          const FTextField(
-                            label: Text('Email'),
-                            hint: 'john@doe.com',
-                          ),
-                          const SizedBox(height: 16),
-                          FButton(
-                            label: const Text('Save'),
-                            onPress: () => Navigator.of(context).pop(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: context.theme.colors.background,
+          border: side.vertical
+              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
+              : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Account',
+                  style: context.theme.typography.xl2.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: context.theme.colors.foreground,
+                    height: 1.5,
+                  ),
                 ),
-              ),
+                Text(
+                  'Make changes to your account here. Click save when you are done.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: 450,
+                  child: Column(
+                    children: [
+                      const FTextField(
+                        label: Text('Name'),
+                        hint: 'John Renalo',
+                      ),
+                      const SizedBox(height: 10),
+                      const FTextField(
+                        label: Text('Email'),
+                        hint: 'john@doe.com',
+                      ),
+                      const SizedBox(height: 16),
+                      FButton(
+                        onPress: () => Navigator.of(context).pop(),
+                        child: const Text('Save'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          );
+          ),
+        ),
+      );
     }
     ```
 
@@ -144,7 +144,7 @@ It navigates to a new page each time.
 ```dart copy
 showFSheet(
   context: context,
-  side: Layout.ltr,
+  side: FLayout.ltr,
   useRootNavigator: true,
   useSafeArea: false,
   mainAxisMaxRatio: null,
@@ -166,10 +166,10 @@ showFSheet(
   <Tabs.Tab>
     ```dart {9-22} copy
     FButton(
-      label: const Text('Click me'),
+      child: const Text('Click me'),
       onPress: () => showFSheet(
         context: context,
-        side: Layout.btt,
+        side: FLayout.btt,
         mainAxisMaxRatio: null,
         builder: (context) => DraggableScrollableSheet(
           expand: false,
@@ -183,7 +183,7 @@ showFSheet(
             }),
             child: FTileGroup.builder(
               count: 25,
-              controller: controller,
+              scrollController: controller,
               tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
             ),
           ),

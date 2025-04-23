@@ -33,54 +33,54 @@ A popover menu displays a menu in a portal aligned to a child.
 
       @override
       Widget build(BuildContext context) => FHeader(
-            title: const Text('Edit Notes'),
-            actions: [
-              FPopoverMenu(
-                popoverController: controller,
-                menuAnchor: Alignment.topRight,
-                childAnchor: Alignment.bottomRight,
-                menu: [
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: Icon(FIcons.user),
-                        title: const Text('Personalization'),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        prefixIcon: Icon(FIcons.paperclip),
-                        title: const Text('Add attachments'),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        prefixIcon: Icon(FIcons.qrCode),
-                        title: const Text('Scan Document'),
-                        onPress: () {},
-                      ),
-                    ],
+        title: const Text('Edit Notes'),
+        suffixes: [
+          FPopoverMenu(
+            popoverController: controller,
+            menuAnchor: Alignment.topRight,
+            childAnchor: Alignment.bottomRight,
+            menu: [
+              FTileGroup(
+                children: [
+                  FTile(
+                    prefixIcon: Icon(FIcons.user),
+                    title: const Text('Personalization'),
+                    onPress: () {},
                   ),
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: Icon(FIcons.list),
-                        title: const Text('List View'),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        prefixIcon: Icon(FIcons.layoutGrid),
-                        title: const Text('Grid View'),
-                        onPress: () {},
-                      ),
-                    ],
+                  FTile(
+                    prefixIcon: Icon(FIcons.paperclip),
+                    title: const Text('Add attachments'),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: Icon(FIcons.qrCode),
+                    title: const Text('Scan Document'),
+                    onPress: () {},
                   ),
                 ],
-                child: FHeaderAction(
-                  icon: Icon(FIcons.ellipsis),
-                  onPress: controller.toggle,
-                ),
+              ),
+              FTileGroup(
+                children: [
+                  FTile(
+                    prefixIcon: Icon(FIcons.list),
+                    title: const Text('List View'),
+                    onPress: () {},
+                  ),
+                  FTile(
+                    prefixIcon: Icon(FIcons.layoutGrid),
+                    title: const Text('Grid View'),
+                    onPress: () {},
+                  ),
+                ],
               ),
             ],
-          );
+            child: FHeaderAction(
+              icon: Icon(FIcons.ellipsis),
+              onPress: controller.toggle,
+            ),
+          ),
+        ],
+      );
 
       @override
       void dispose() {
@@ -98,8 +98,8 @@ A popover menu displays a menu in a portal aligned to a child.
 ### `FPopoverMenu(...)`
 
 ```dart copy
-const FPopoverMenu(
-  popoverController: FPopoverController(),
+FPopoverMenu(
+  popoverController: FPopoverController(vsync: this),
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
@@ -121,8 +121,8 @@ const FPopoverMenu(
 ### `FPopoverMenu.automatic()`
 
 ```dart copy
-const FPopoverMenu.automatic(
-  popoverController: FPopoverController(),
+FPopoverMenu.automatic(
+  popoverController: FPopoverController(vsync: this),
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,

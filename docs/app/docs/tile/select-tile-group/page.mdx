@@ -25,7 +25,7 @@ A group of tiles that allow users to make a selection from a set of options.
     enum Sidebar { recents, home, applications }
 
     FSelectTileGroup<Sidebar>(
-      controller: FSelectTileGroupController(values: {Sidebar.recents}),
+      selectController: FSelectTileGroupController(values: {Sidebar.recents}),
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [
@@ -57,7 +57,7 @@ A group of tiles that allow users to make a selection from a set of options.
 
 ```dart copy
 FSelectTileGroup<Value>(
-  groupController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
+  selectController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
@@ -68,9 +68,9 @@ FSelectTileGroup<Value>(
   divider: FTileDivider.indented,
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
-  items: [
+  children: [
     FSelectTile(
-      label: const Text('1'),
+      title: const Text('1'),
       value: Value.something,
     ),
   ],
@@ -81,7 +81,7 @@ FSelectTileGroup<Value>(
 
 ```dart copy
 FSelectTileGroup<Value>.builder(
-  groupController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
+  selectController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
@@ -154,11 +154,8 @@ FSelectTileGroup<Value>.builder(
       description: const Text('Personalize your experience'),
       maxHeight: 200,
       count: 200,
-      tileBuilder: (context, index) => FTile(
-        title: Text('Tile $index'),
-        suffixIcon: Icon(FIcons.chevronRight),
-        onPress: () {},
-      ),
+      tileBuilder:
+          (context, index) => FSelectTile(title: Text('Tile $index'), suffixIcon: Icon(FIcons.chevronRight), value: 1),
     );
     ```
   </Tabs.Tab>
@@ -281,7 +278,7 @@ FSelectTileGroup<Value>.builder(
             ),
             const SizedBox(height: 20),
             FButton(
-              label: const Text('Save'),
+              child: const Text('Save'),
               onPress: () {
                 if (!_formKey.currentState!.validate()) {
                   // Handle errors here.
