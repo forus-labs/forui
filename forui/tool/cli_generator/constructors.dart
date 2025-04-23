@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use - Wait for changes to stabilize before migrating.
+// https://github.com/dart-lang/sdk/blob/main/pkg/analyzer/doc/element_model_migration_guide.md
+
 import 'dart:io';
 
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';

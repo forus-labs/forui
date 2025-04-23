@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use - Wait for changes to stabilize before migrating.
+// https://github.com/dart-lang/sdk/blob/main/pkg/analyzer/doc/element_model_migration_guide.md
+
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
