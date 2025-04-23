@@ -46,27 +46,11 @@ class Example extends StatefulWidget {
 enum Sidebar { recents, home, applications }
 
 class _ExampleState extends State<Example> {
-  int _count = 0;
 
   @override
-  Widget build(BuildContext context) =>
-      FTileGroup(
-        label: const Text('Settings'),
-        divider: FTileDivider.none,
-        children: [
-          FTile(
-            prefixIcon: Icon(FIcons.user),
-            title: const Text('Personalization'),
-            suffixIcon: Icon(FIcons.chevronRight),
-            onPress: () {},
-          ),
-          FTile(
-            prefixIcon: Icon(FIcons.wifi),
-            title: const Text('WiFi'),
-            details: const Text('Forus Labs (5G)'),
-            suffixIcon: Icon(FIcons.chevronRight),
-            onPress: () {},
-          ),
-        ],
-      );
+  Widget build(BuildContext context) => Column(
+    children: const [
+      FProgress.circularIcon(),
+    ],
+  );
 }

@@ -149,7 +149,7 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='default' query={{autoHide: 'true'}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {16} copy
+    ```dart {14} copy
     enum Notification { all, direct, nothing }
 
     class _SelectMenuTile extends StatefulWidget {
@@ -202,7 +202,7 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='scrollable' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {33} copy
+    ```dart copy
     enum Notification { all, direct, limitedTime, timeSensitive, selectedApps, nothing }
 
     class _ScrollableSelectMenuTile extends StatefulWidget {
@@ -262,7 +262,7 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='lazy' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {12, 18-22} copy
+    ```dart {17-21} copy
     class _LazySelectMenuTile extends StatefulWidget {
       @override
       State<_LazySelectMenuTile> createState() => _LazySelectMenuTileState();

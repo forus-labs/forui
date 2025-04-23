@@ -147,7 +147,7 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='lazy' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {1, 5-11} copy
+    ```dart copy
     FSelectTileGroup.builder(
       selectController: FSelectTileGroupController(values: {1}),
       label: const Text('Settings'),
@@ -306,14 +306,14 @@ FSelectTileGroup<Value>.builder(
 
 ### Appearance
 
-#### Suffix Icon
+#### Prefix Icon
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='select-tile-group' variant='suffix' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4, 9} copy
+    ```dart {6, 11} copy
     FSelectTileGroup(
       selectController: FSelectTileGroupController.radio(),
       label: const Text('Settings'),
@@ -384,6 +384,7 @@ FSelectTileGroup<Value>.builder(
 
     FSelectTileGroup<Sidebar>(
       selectController: FSelectTileGroupController(values: {Sidebar.recents}),
+      divider: FTileDivider.none,
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [

@@ -73,5 +73,6 @@ class CircularProgressPage extends StatefulSample {
 
 class _CircularProgressPageState extends StatefulSampleState<CircularProgressPage> {
   @override
-  Widget sample(BuildContext context) => const FProgress.circularIcon();
+  Widget sample(BuildContext context) =>
+      FProgress.circularIcon(style: widget.theme.progressStyles.circularIconProgressStyle);
 }
