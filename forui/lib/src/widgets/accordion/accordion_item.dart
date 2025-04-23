@@ -8,11 +8,14 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/accordion/accordion.dart';
 import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
+/// A marker interface which denotes that mixed-in widgets can be used in a [FAccordion].
+mixin FAccordionItemMixin on Widget {}
+
 /// An interactive heading that reveals a section of content.
 ///
 /// See:
 /// * https://forui.dev/docs/data/accordion for working examples.
-class FAccordionItem extends StatefulWidget {
+class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// The accordion's style. Defaults to [FThemeData.accordionStyle].
   final FAccordionStyle? style;
 
