@@ -52,7 +52,7 @@ abstract class Entry extends StatelessWidget {
           style: entryStyle,
           borderRadius: BorderRadiusDirectional.horizontal(start: yesterday, end: tomorrow),
           text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
-          states: {...states, if (isSelected) WidgetState.selected, if (!canSelect) WidgetState.disabled},
+          states: {...states, if (!canSelect) WidgetState.disabled},
           current: today,
         ),
       );
@@ -69,7 +69,7 @@ abstract class Entry extends StatelessWidget {
           style: entryStyle,
           builder: builder,
         )
-        : _UnselectableEntry(style: entryStyle, builder: builder);
+        : _UnselectableEntry(selected: isSelected, style: entryStyle, builder: builder);
   }
 
   factory Entry.yearMonth({
@@ -94,11 +94,12 @@ abstract class Entry extends StatelessWidget {
           focusNode: focusNode,
           date: date,
           semanticsLabel: format(date),
+          selected: selectable,
           onPress: onPress,
           style: style,
           builder: builder,
         )
-        : _UnselectableEntry(style: style, builder: builder);
+        : _UnselectableEntry(selected: selectable, style: style, builder: builder);
   }
 
   const Entry._({required this.style, required this.builder});
@@ -124,17 +125,17 @@ class _SelectableEntry extends Entry {
     required this.focusNode,
     required this.date,
     required this.semanticsLabel,
+    required this.selected,
     required this.onPress,
     required super.style,
     required super.builder,
-    this.selected = false,
     this.onLongPress,
   }) : super._();
 
   @override
   Widget build(BuildContext _) => FTappable(
     semanticsLabel: semanticsLabel,
-    semanticSelected: selected,
+    selected: selected,
     focusNode: focusNode,
     excludeSemantics: true,
     onPress: () => onPress(date),
@@ -156,10 +157,19 @@ class _SelectableEntry extends Entry {
 }
 
 class _UnselectableEntry extends Entry {
-  const _UnselectableEntry({required super.style, required super.builder}) : super._();
+  final bool selected;
+
+  const _UnselectableEntry({required this.selected, required super.style, required super.builder}) : super._();
 
   @override
-  Widget build(BuildContext context) => ExcludeSemantics(child: builder(context, {}, null));
+  Widget build(BuildContext context) =>
+      ExcludeSemantics(child: builder(context, {if (selected) WidgetState.selected}, null));
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(FlagProperty('selected', value: selected, ifTrue: 'selected'));
+  }
 }
 
 class _Content extends StatelessWidget {
