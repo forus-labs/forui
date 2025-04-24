@@ -147,7 +147,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 
 * Add `FTappable.statesController`.
 * Add `FTappableStyle.cursor`.
-* **Breaking** Replace `FTappable.semanticsSelected` to `FTappable.selected`.
+* **Breaking** Replace `FTappable.semanticsSelected` with `FTappable.selected`.
 * **Breaking** Rename `FTappable` to `FTappable.static`.
 * **Breaking** Rename `FTappable.animated` to `FTappable`.
 * **Breaking** Split `FTappableData.hovered` into `FTappableData.hovered` and `FTappableData.pressed`.
