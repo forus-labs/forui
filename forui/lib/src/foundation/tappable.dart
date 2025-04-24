@@ -77,6 +77,9 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final VoidCallback? onLongPress;
 
+  /// The callback that is called when the tappable's [WidgetState]s changes.
+  final ValueChanged<Set<WidgetState>>? onChange;
+
   /// The builder used to build to create a child with the current state.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
@@ -104,7 +107,8 @@ class FTappable extends StatefulWidget {
     HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueWidgetBuilder<Set<WidgetState>>? builder,
+    ValueChanged<Set<WidgetState>>? onChange,
+    ValueWidgetBuilder<Set<WidgetState>> builder,
     Widget? child,
     Key? key,
   }) = AnimatedTappable;
@@ -125,11 +129,11 @@ class FTappable extends StatefulWidget {
     this.behavior = HitTestBehavior.translucent,
     this.onPress,
     this.onLongPress,
+    this.onChange,
+    this.builder = _builder,
     this.child,
-    ValueWidgetBuilder<Set<WidgetState>>? builder,
     super.key,
-  }) : assert(builder != null || child != null, 'Either builder or child must be provided.'),
-       builder = builder ?? _builder;
+  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.');
 
   @override
   State<FTappable> createState() => _FTappableState<FTappable>();
@@ -149,6 +153,7 @@ class FTappable extends StatefulWidget {
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 
@@ -167,6 +172,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
       if (widget.autofocus) WidgetState.focused,
       if (widget._disabled) WidgetState.disabled,
     });
+
+    _controller.addListener(_onChange);
   }
 
   @override
@@ -176,6 +183,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
       ..update(WidgetState.selected, widget.selected)
       ..update(WidgetState.disabled, widget._disabled);
   }
+
+  void _onChange() => widget.onChange?.call(_controller.value);
 
   @override
   Widget build(BuildContext context) {
@@ -288,6 +297,7 @@ class AnimatedTappable extends FTappable {
     super.behavior,
     super.onPress,
     super.onLongPress,
+    super.onChange,
     super.builder,
     super.child,
     super.key,

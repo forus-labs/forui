@@ -145,7 +145,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Add `FPaginationStyle.tappableStyle`.
 * Add `FTileStyle.tappableStyle`.
 
-* Add `FTappable.statesController`.
+* Add `FTappable.onChange`.
 * Add `FTappableStyle.cursor`.
 * **Breaking** Replace `FTappable.semanticsSelected` with `FTappable.selected`.
 * **Breaking** Rename `FTappable` to `FTappable.static`.

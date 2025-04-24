@@ -205,6 +205,25 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text({WidgetState.hovered, ...set(false)}.toString()), findsOneWidget);
     });
+
+    testWidgets('onChange callback called', (tester) async {
+      Set<WidgetState>? states;
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(builder: (_, _, _) => const Text('tappable'), onChange: (v) => states = v, onPress: () {}),
+        ),
+      );
+
+      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await gesture.addPointer(location: Offset.zero);
+      addTearDown(gesture.removePointer);
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.text('tappable')));
+      await tester.pumpAndSettle();
+
+      expect(states, {WidgetState.hovered});
+    });
   });
 
   group('FTappable.static', () {
@@ -363,6 +382,29 @@ void main() {
       setState(() => onPress = null);
       await tester.pumpAndSettle();
       expect(find.text({WidgetState.hovered, ...set(false)}.toString()), findsOneWidget);
+    });
+
+    testWidgets('onChange callback called', (tester) async {
+      Set<WidgetState>? states;
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable.static(
+            builder: (_, _, _) => const Text('tappable'),
+            onChange: (v) => states = v,
+            onPress: () {},
+          ),
+        ),
+      );
+
+      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+      await gesture.addPointer(location: Offset.zero);
+      addTearDown(gesture.removePointer);
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.text('tappable')));
+      await tester.pumpAndSettle();
+
+      expect(states, {WidgetState.hovered});
     });
   });
 }
