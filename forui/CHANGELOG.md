@@ -203,6 +203,11 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FDateField.builder`.
 * Add `FTimeField.builder`.
 * Add `FLerpBorderRadius`.
+* Add `FButton.onChange`.
+* Add `FButton.onHoverChange`.
+* Add `FButton.selected`.
+* Add `intrinsicWidth` to `FButton(...)`.
+
 
 * **Breaking** Change `FAccordion.items` to `FAccordion.children`.
 * **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.

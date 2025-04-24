@@ -97,7 +97,7 @@ class FTappable extends StatefulWidget {
 
   /// The builder used to build to create a child with the current state.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   final ValueWidgetBuilder<Set<WidgetState>> builder;
 
   /// The child.
