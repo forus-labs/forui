@@ -508,16 +508,16 @@ Material widgets. This is useful when:
 - Maintaining consistent theming across both Forui and Material components
 - Gradually migrating from Material Design to Forui
 
-<Callout type="warning">
-  The `toApproximateMaterialTheme()` method is marked as experimental. As an experimental feature, this method can change without prior warning.
-  The mapping between Forui and Material themes is done on a best-effort basis, and may not perfectly capture all the nuances of a Forui theme.
-</Callout>
-
-### Usage
+### `toApproximateMaterialTheme()`
 
 A Forui theme can be converted to a Material theme using the
 [`toApproximateMaterialTheme()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/toApproximateMaterialTheme.html)
 method.
+
+<Callout type="warning">
+  The `toApproximateMaterialTheme()` method is marked as experimental. As an experimental feature, this method can change without prior warning.
+  The mapping between Forui and Material themes is done on a best-effort basis, and may not perfectly capture all the nuances of a Forui theme.
+</Callout>
 
 ```dart {9} copy
 import 'package:flutter/material.dart';
@@ -543,4 +543,14 @@ Widget build(BuildContext context) {
     ),
   );
 }
+```
+
+### CLI
+
+For more fine-grained control, you can use the CLI to generate a copy of the `toApproximateMaterialTheme()` inside your
+project. The generated copy can then be directly modified to fit your design needs.
+
+To generate a copy of `toApproximateMaterialTheme()`, run:
+```shell copy
+dart run forui snippet create material-mapping
 ```

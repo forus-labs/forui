@@ -36,7 +36,8 @@ Future<void> main() async {
     resourceProvider: PhysicalResourceProvider.INSTANCE,
   );
 
-  File(_snippet).writeAsStringSync(generateSnippets());
+  final snippets = mapSnippets(await traverseSnippets(collection));
+  File(_snippet).writeAsStringSync(generateSnippets(snippets));
 
   final styles = mapStyles(await traverseStyles(collection));
   File(_style).writeAsStringSync(generateStyles(styles));
