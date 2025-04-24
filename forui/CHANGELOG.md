@@ -175,7 +175,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 
 ### Semantics Labels
 
-Both `semanticsLabel` and `semanticLabel` was used interchangeably throughout the library. All `semanticLabel`s
+Both `semanticsLabel` and `semanticLabel` were used interchangeably throughout the library. All `semanticLabel`s
 have been renamed to `semanticsLabel` for consistency.
 
 * **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FAvatar.new`.
