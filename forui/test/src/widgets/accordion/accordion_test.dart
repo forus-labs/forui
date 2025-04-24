@@ -72,10 +72,7 @@ void main() {
               FAccordionItem(
                 title: Text('Title'),
                 initiallyExpanded: true,
-                child: SizedBox.square(
-                  dimension: 1,
-                  child: Text('button'),
-                ),
+                child: SizedBox.square(dimension: 1, child: Text('button')),
               ),
             ],
           ),
