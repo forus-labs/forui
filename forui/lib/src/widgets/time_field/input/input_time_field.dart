@@ -32,6 +32,7 @@ class _InputTimeField extends FTimeField {
     super.label,
     super.description,
     super.enabled,
+    super.onChange,
     super.onSaved,
     super.autovalidateMode,
     super.forceErrorText,
@@ -60,13 +61,25 @@ class _InputTimeField extends FTimeField {
 
 class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
+  void initState() {
+    super.initState();
+    _controller.addValueListener(widget.onChange);
+  }
+
+  @override
   void didUpdateWidget(covariant _InputTimeField old) {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
+      } else {
+        old.controller?.removeValueListener(old.onChange);
       }
       _controller = widget.controller ?? FTimeFieldController(vsync: this);
+      _controller.addValueListener(widget.onChange);
+    } else if (widget.onChange != old.onChange) {
+      _controller.removeValueListener(old.onChange);
+      _controller.addValueListener(widget.onChange);
     }
   }
 
@@ -116,6 +129,8 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   void dispose() {
     if (widget.controller == null) {
       _controller.dispose();
+    } else {
+      _controller.removeValueListener(widget.onChange);
     }
     super.dispose();
   }

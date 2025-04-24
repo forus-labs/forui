@@ -203,6 +203,7 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FDateField.builder`.
 * Add `FDateField.onChange`.
 * Add `FTimeField.builder`.
+* Add `FTimeField.onChange`.
 * Add `FLerpBorderRadius`.
 * Add `FButton.onChange`.
 * Add `FButton.onHoverChange`.

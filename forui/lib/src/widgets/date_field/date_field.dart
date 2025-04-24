@@ -165,7 +165,7 @@ abstract class FDateField extends StatefulWidget {
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
 
-  /// Handler called when the date-time changes.
+  /// Handler called when the date changes.
   ///
   /// The given [DateTime] is always in UTC timezone.
   final ValueChanged<DateTime?>? onChange;
