@@ -37,6 +37,7 @@ class _InputDateField extends FDateField {
     super.label,
     super.description,
     super.enabled,
+    super.onChange,
     super.onSaved,
     super.autovalidateMode,
     super.forceErrorText,
@@ -68,13 +69,26 @@ class _InputDateField extends FDateField {
 
 class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   @override
+  void initState() {
+    super.initState();
+    _controller.addValueListener(widget.onChange);
+  }
+
+  @override
   void didUpdateWidget(covariant _InputDateField old) {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
+      } else {
+        old.controller?.removeValueListener(old.onChange);
       }
+
       _controller = widget.controller ?? FDateFieldController(vsync: this);
+      _controller.addValueListener(widget.onChange);
+    } else if (widget.onChange != old.onChange) {
+      _controller.removeValueListener(old.onChange);
+      _controller.addValueListener(widget.onChange);
     }
   }
 
@@ -148,6 +162,8 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   void dispose() {
     if (widget.controller == null) {
       _controller.dispose();
+    } else {
+      _controller.removeValueListener(widget.onChange);
     }
     super.dispose();
   }

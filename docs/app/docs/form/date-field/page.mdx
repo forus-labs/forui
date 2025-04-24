@@ -78,6 +78,7 @@ FDateField(
   label: Text('Select Date'),
   description: Text('Choose a date from the calendar or input field'),
   enabled: true,
+  onChange: (date) => print('Date changed: $date'),
   onSaved: (date) => print('Date saved: $date'),
   autovalidateMode: AutovalidateMode.onUnfocus,
 );
@@ -98,6 +99,7 @@ FDateField.calendar(
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
   clearable: true,
+  onChange: (date) => print('Date changed: $date'),
   hint: 'Select a date',
   start: DateTime(2024),
   end: DateTime(2025),
@@ -119,7 +121,7 @@ FDateField.calendar(
 ### `FDateField.input(...)`
 
 ```dart copy
-FDateField.calendar(
+FDateField.input(
   controller: FDateFieldController(
     vsync: this,
     initialDate: DateTime(2024, 1, 1),
@@ -131,6 +133,7 @@ FDateField.calendar(
   mouseCursor: SystemMouseCursors.text,
   canRequestFocus: true,
   clearable: true,
+  onChange: (date) => print('Date changed: $date'),
   hint: 'Select a date',
   start: DateTime(2024),
   end: DateTime(2025),

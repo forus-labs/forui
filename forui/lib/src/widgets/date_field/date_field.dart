@@ -165,6 +165,11 @@ abstract class FDateField extends StatefulWidget {
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
 
+  /// Handler called when the date-time changes.
+  ///
+  /// The given [DateTime] is always in UTC timezone.
+  final ValueChanged<DateTime?>? onChange;
+
   /// {@macro forui.foundation.form_field_properties.onSaved}
   final FormFieldSetter<DateTime>? onSaved;
 
@@ -198,6 +203,7 @@ abstract class FDateField extends StatefulWidget {
     this.label,
     this.description,
     this.enabled = true,
+    this.onChange,
     this.onSaved,
     this.autovalidateMode = AutovalidateMode.onUnfocus,
     this.forceErrorText,
@@ -263,6 +269,7 @@ abstract class FDateField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
+    ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
@@ -350,6 +357,7 @@ abstract class FDateField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
+    ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
@@ -408,6 +416,7 @@ abstract class FDateField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled = true,
+    ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
@@ -436,6 +445,7 @@ abstract class FDateField extends StatefulWidget {
     label: label,
     description: description,
     enabled: enabled,
+    onChange: onChange,
     onSaved: onSaved,
     autovalidateMode: autovalidateMode,
     forceErrorText: forceErrorText,
@@ -456,6 +466,7 @@ abstract class FDateField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText));

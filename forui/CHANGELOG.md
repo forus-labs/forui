@@ -201,6 +201,7 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
 * Add `FDateField.builder`.
+* Add `FDateField.onChange`.
 * Add `FTimeField.builder`.
 * Add `FLerpBorderRadius`.
 * Add `FButton.onChange`.
