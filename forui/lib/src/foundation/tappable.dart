@@ -57,6 +57,24 @@ class FTappable extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
+  /// {@template forui.foundation.FTappable.onHoverChange}
+  /// Handler called when the hover changes.
+  ///
+  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  /// {@endtemplate}
+  final ValueChanged<bool>? onHoverChange;
+
+  /// {@template forui.foundation.FTappable.onChange}
+  /// Handler called when there is any changes to a tappable's [WidgetState]s.
+  ///
+  /// It is called before the more specific callbacks, i.e., [onFocusChange].
+  ///
+  /// Consider using the more specific callbacks if you only need to listen to a specific state change:
+  /// * [onFocusChange] for focus changes.
+  /// * [onHoverChange] for hover changes.
+  /// {@endtemplate}
+  final ValueChanged<Set<WidgetState>>? onChange;
+
   /// True if this tappable is currently selected. Defaults to false.
   final bool selected;
 
@@ -76,9 +94,6 @@ class FTappable extends StatefulWidget {
   /// The widget will be disabled if both [onPress] and [onLongPress] are null.
   /// {@endtemplate}
   final VoidCallback? onLongPress;
-
-  /// The callback that is called when the tappable's [WidgetState]s changes.
-  final ValueChanged<Set<WidgetState>>? onChange;
 
   /// The builder used to build to create a child with the current state.
   ///
@@ -103,11 +118,12 @@ class FTappable extends StatefulWidget {
     bool autofocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<Set<WidgetState>>? onChange,
     bool selected,
     HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueChanged<Set<WidgetState>>? onChange,
     ValueWidgetBuilder<Set<WidgetState>> builder,
     Widget? child,
     Key? key,
@@ -125,11 +141,12 @@ class FTappable extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onChange,
     this.selected = false,
     this.behavior = HitTestBehavior.translucent,
     this.onPress,
     this.onLongPress,
-    this.onChange,
     this.builder = _builder,
     this.child,
     super.key,
@@ -149,11 +166,12 @@ class FTappable extends StatefulWidget {
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 
@@ -210,8 +228,12 @@ class _FTappableState<T extends FTappable> extends State<T> {
           cursor: style.cursor.resolve(_controller.value),
           onEnter: (_) {
             setState(() => _controller.update(WidgetState.hovered, true));
+            widget.onHoverChange?.call(true);
           },
-          onExit: (_) => setState(() => _controller.update(WidgetState.hovered, false)),
+          onExit: (_) => setState(() {
+            _controller.update(WidgetState.hovered, false);
+            widget.onHoverChange?.call(false);
+          }),
           // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
           // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
           // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
@@ -293,11 +315,12 @@ class AnimatedTappable extends FTappable {
     super.autofocus,
     super.focusNode,
     super.onFocusChange,
+    super.onHoverChange,
+    super.onChange,
     super.selected,
     super.behavior,
     super.onPress,
     super.onLongPress,
-    super.onChange,
     super.builder,
     super.child,
     super.key,

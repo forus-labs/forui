@@ -78,6 +78,11 @@ FBottomNavigationBar(
     FBottomNavigationBarItem(
       icon: Icon(FIcons.house),
       label: const Text('Home'),
+      autofocus: false,
+      focusNode: FocusNode(),
+      onFocusChange: (focused) {},
+      onHoverChange: (hovered) {},
+      onChange: (states) {},
     ),
   ],
 );

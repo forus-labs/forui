@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui_example/sandbox.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 import 'package:forui_example/sandbox.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -12,11 +14,11 @@ void main() {
   runApp(const Application());
 }
 
-const List<Widget> _pages = [
-  Text('Home'),
-  Text('Categories'),
-  Text('Search'),
-  Text('Settings'),
+List<Widget> _pages = [
+  const Text('Home'),
+  const Text('Categories'),
+  const Text('Search'),
+  const Text('Settings'),
   Sandbox(key: PageStorageKey<String>('Sandbox')),
 ];
 
@@ -41,6 +43,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     locale: const Locale('en', 'US'),
     localizationsDelegates: FLocalizations.localizationsDelegates,
     supportedLocales: FLocalizations.supportedLocales,
+    theme: FThemes.zinc.light.toApproximateMaterialTheme(),
     builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
     home: PageStorage(
       bucket: _bucket,

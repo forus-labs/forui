@@ -26,7 +26,33 @@ concise.
 * **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` to `FDialog.constraints.`.
 
 
-### `FIcon`
+### `FBottomNavigationBar`
+
+The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigationBarItem` to improve
+`FBottomNavigationBarItem`'s usability. Unfortunately, this means that custom navigation items have to implement
+`FTappable` on their own moving forward.
+
+* Add `FBottomNavigationBarItem.autofocus`.
+* Add `FBottomNavigationBarItem.focusNode`.
+* Add `FBottomNavigationBarItem.onFocusChange`.
+* Add `FBottomNavigationBarItem.onHoverChange`.
+* Add `FBottomNavigationBarItem.onChange`.
+* **Breaking** Move `FBottomNavigationBarStyle.tappableStyle` to `FBottomNavigationBarItemStyle.tappableStyle`.
+* **Breaking** Move `FBottomNavigationBarStyle.focusedOutlineStyle` to `FBottomNavigationBarItemStyle.focusedOutlineStyle`.
+
+
+### `FHeader`
+
+Several minor tweaks have been made to `FHeader` to improve usability and consistency.
+
+* Change `FHeader(title: ...)` to be optional.
+* Change `FHeader.nested(title: ...)` to be optional.
+* **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.
+* **Breaking** Change `FHeader(prefixActions: ...)` to `FHeader(prefixes: ...)`.
+* **Breaking** Change `FHeader(suffixActions: ...)` to `FHeader(suffixes: ...)`.
+
+
+### `FIcon` (removed)
 `FIcon` has been removed in favor of Flutter's `Icon` class. `FIcon` was designed with only monochrome icons in mind
 and is not able to support multicolored icons. This coincides with replacement of `FAssets` with `FIcons` and svg icons 
 with font icons. In addition, all `iconColor` and `iconSize` style properties have been replaced with `IconThemeData`.
@@ -58,12 +84,6 @@ with font icons. In addition, all `iconColor` and `iconSize` style properties ha
 * **Breaking** Change `FBreadcrumbStyle.iconStyle` from `FIconStyle` to `IconThemeData`.
 * **Breaking** Replace `FCheckboxStateStyle` `iconColor` with `iconStyle`.
 
-### `FSelect` (new)
-A select displays a list of options for the user to pick from. It is searchable and supports both async & sync loading
-of items.
-
-* Add `FSelect`.
-* Add `FSelectController`.
 
 ### `FPopover`
 The traversal-edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
@@ -78,15 +98,13 @@ The traversal-edge behavior of `FPopover` and Forui widgets that depend on it ha
 * **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FSelectMenuTile`.
 
 
-### `FHeader`
+### `FPortal`
+`FPortal` has been reworked to fix a series of longstanding issues.
 
-Several minor tweaks have been made to `FHeader` to improve usability and consistency.
-
-* Change `FHeader(title: ...)` to be optional.
-* Change `FHeader.nested(title: ...)` to be optional.
-* **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.
-* **Breaking** Change `FHeader(prefixActions: ...)` to `FHeader(prefixes: ...)`.
-* **Breaking** Change `FHeader(suffixActions: ...)` to `FHeader(suffixes: ...)`.
+* Add `FPortal.useViewPadding`.
+* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`/`Padding`.
+* Fix `FPortal` not updating portals when child's offset/size changes.
+* Fix `FPortal` displaying portal when child is not rendered.
 
 
 ### `FProgress`
@@ -95,6 +113,15 @@ Several minor tweaks have been made to `FHeader` to improve usability and consis
 * Add `FProgress.circularIcon`.
 * **Breaking** Change `FProgressStyle` to `FLinearProgressStyle`.
 * **Breaking** Remove `FButtonSpinner` - use `FProgress.circularIcon(...)` instead.
+
+
+### `FSelect` (new)
+A select displays a list of options for the user to pick from. It is searchable and supports both async & sync loading
+of items.
+
+* Add `FSelect`.
+* Add `FSelectController`.
+
 
 ### `FSelectGroupController` & controller callbacks
 `FSelectGroupController` has been replaced with `FMultiValueNotifier` to allow usage across other non-select group 
@@ -119,15 +146,6 @@ A new `onChange` and `onSelect` callback has been added to most Forui widgets.
 * **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
 
 
-### `FPortal`
-`FPortal` has been reworked to fix a series of longstanding issues.
-
-* Add `FPortal.useViewPadding`.
-* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`/`Padding`.
-* Fix `FPortal` not updating portals when child's offset/size changes.
-* Fix `FPortal` displaying portal when child is not rendered.
-
-
 ### `FTappable`
 `FTappable` has been updated to support animations by default. This applies to all Forui widgets that use `FTappable`.
 The `hovered` state has also been split into `hovered` and `pressed` states.
@@ -146,6 +164,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Add `FTileStyle.tappableStyle`.
 
 * Add `FTappable.onChange`.
+* Add `FTappable.onHoverChange`.
 * Add `FTappableStyle.cursor`.
 * **Breaking** Replace `FTappable.semanticsSelected` with `FTappable.selected`.
 * **Breaking** Rename `FTappable` to `FTappable.static`.
@@ -156,7 +175,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 
 ### Semantics Labels
 
-We previously used both `semanticsLabel` and `semanticLabel` interchangeably throughout the library. All `semanticLabel`s
+Both `semanticsLabel` and `semanticLabel` was used interchangeably throughout the library. All `semanticLabel`s
 have been renamed to `semanticsLabel` for consistency.
 
 * **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FAvatar.new`.

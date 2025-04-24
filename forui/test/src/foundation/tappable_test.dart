@@ -384,13 +384,15 @@ void main() {
       expect(find.text({WidgetState.hovered, ...set(false)}.toString()), findsOneWidget);
     });
 
-    testWidgets('onChange callback called', (tester) async {
+    testWidgets('onChange & onHoverChange callback called', (tester) async {
       Set<WidgetState>? states;
+      bool? hovered;
       await tester.pumpWidget(
         TestScaffold(
           child: FTappable.static(
             builder: (_, _, _) => const Text('tappable'),
             onChange: (v) => states = v,
+            onHoverChange: (v) => hovered = v,
             onPress: () {},
           ),
         ),
@@ -405,6 +407,13 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(states, {WidgetState.hovered});
+      expect(hovered, true);
+
+      await gesture.moveTo(Offset.zero);
+      await tester.pumpAndSettle();
+
+      expect(states, <WidgetState>{});
+      expect(hovered, false);
     });
   });
 }
