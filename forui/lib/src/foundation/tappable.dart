@@ -230,10 +230,11 @@ class _FTappableState<T extends FTappable> extends State<T> {
             setState(() => _controller.update(WidgetState.hovered, true));
             widget.onHoverChange?.call(true);
           },
-          onExit: (_) => setState(() {
-            _controller.update(WidgetState.hovered, false);
-            widget.onHoverChange?.call(false);
-          }),
+          onExit:
+              (_) => setState(() {
+                _controller.update(WidgetState.hovered, false);
+                widget.onHoverChange?.call(false);
+              }),
           // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
           // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
           // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.

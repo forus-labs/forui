@@ -3,8 +3,8 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_field/time_field.dart';
 import '../../locale_scaffold.dart';
 import '../../test_scaffold.dart';
