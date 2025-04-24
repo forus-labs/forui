@@ -14,7 +14,7 @@ rather than the norm. Even then, we had to remove a few fields such as restorati
 that), and initialValue (form fields with controllers generally do no support that)
 
 So in general, we wanted to group properties tgt and expose a set of them through an interface. But grouping more than 
-required makes API bloated and suprisingly since not all fields might be supported. Grouping too little makes the 
+required makes API bloated and surprisingly since not all fields might be supported. Grouping too little makes the 
 grouping not useful.
 
 ## Calculations
