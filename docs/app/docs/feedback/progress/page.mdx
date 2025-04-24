@@ -39,7 +39,7 @@ FProgress(
 
 ```dart copy
 FProgress.circularIcon(
-  style: FCircularIconProgressStyle(...),
+  style: IconThemeData(...),
   semanticsLabel: 'Label',
   duration: const Duration(milliseconds: 500),
 );
@@ -72,15 +72,19 @@ FProgress.circularIcon(
 
       @override
       Widget build(BuildContext context) => Column(
-       children: [
-         FProgress(value: value),
-         FButton(label: const Text('Reset'), onPress: () => setState(() {
-           value = 0.2;
-           timer.cancel();
-           timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
-         })),
-       ],
-     );
+        children: [
+          FProgress(value: value),
+          FButton(
+            onPress:
+                () => setState(() {
+                  value = 0.2;
+                  timer.cancel();
+                  timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+                }),
+            child: const Text('Reset'),
+          ),
+        ],
+      );
 
       @override
       void dispose() {

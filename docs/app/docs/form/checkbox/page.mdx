@@ -27,7 +27,7 @@ A control that allows the user to toggle between checked and not checked.
         <Widget name='checkbox' query={{enabled: 'true'}}/>
     </Tabs.Tab>
     <Tabs.Tab>
-        ```dart {12-18} copy
+        ```dart copy
         class Page extends StatefulWidget {
           const Page({super.key});
 
@@ -218,7 +218,6 @@ FCheckbox(
                 ),
                 const SizedBox(height: 20),
                 FButton(
-                  label: const Text('Register'),
                   onPress: () {
                     if (!_formKey.currentState!.validate()) {
                       // Handle errors here.
@@ -228,6 +227,7 @@ FCheckbox(
                     _formKey.currentState!.save();
                     // Do something.
                   },
+                  child: const Text('Register'),
                 ),
               ],
             ),

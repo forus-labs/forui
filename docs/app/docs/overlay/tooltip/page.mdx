@@ -22,10 +22,10 @@ A tooltip displays information related to a widget when focused, hovered over, o
         child: FButton(
           style: FButtonStyle.outline,
           onPress: () {},
-          label: Text('Long press/Hover'),
+          child: Text('Long press/Hover'),
         ),
       ),
-    ),
+    );
     ```
   </Tabs.Tab>
 </Tabs>
@@ -67,7 +67,7 @@ You can change how the tooltip is aligned to the button.
         child: FButton(
           style: FButtonStyle.outline,
           onPress: () {},
-          label: Text('Long press/Hover'),
+          child: Text('Long press/Hover'),
         ),
       ),
     );
@@ -91,7 +91,7 @@ You can change how the tooltip is aligned to the button.
         child: FButton(
           style: FButtonStyle.outline,
           onPress: () {},
-          label: Text('Long press'),
+          child: Text('Long press'),
         ),
       ),
     );

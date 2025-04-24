@@ -39,24 +39,9 @@ class Example extends StatefulWidget {
   State<Example> createState() => _ExampleState();
 }
 
-class _ExampleState extends State<Example> {
-  int _count = 0;
+enum Sidebar { recents, home, applications }
 
+class _ExampleState extends State<Example> {
   @override
-  Widget build(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 10,
-      children: [
-        Text('Count: $_count'),
-        IntrinsicWidth(
-          child: FButton(
-            onPress: () => setState(() => _count++),
-            suffix: const Icon(FIcons.chevronsUp),
-            child: const Text('Increase'),
-          ),
-        ),
-      ],
-    ),
-  );
+  Widget build(BuildContext context) => Column(children: const [FProgress.circularIcon()]);
 }

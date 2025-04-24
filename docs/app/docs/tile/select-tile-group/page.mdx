@@ -25,7 +25,7 @@ A group of tiles that allow users to make a selection from a set of options.
     enum Sidebar { recents, home, applications }
 
     FSelectTileGroup<Sidebar>(
-      controller: FSelectTileGroupController(values: {Sidebar.recents}),
+      selectController: FSelectTileGroupController(values: {Sidebar.recents}),
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [
@@ -57,7 +57,7 @@ A group of tiles that allow users to make a selection from a set of options.
 
 ```dart copy
 FSelectTileGroup<Value>(
-  groupController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
+  selectController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
@@ -68,9 +68,9 @@ FSelectTileGroup<Value>(
   divider: FTileDivider.indented,
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
-  items: [
+  children: [
     FSelectTile(
-      label: const Text('1'),
+      title: const Text('1'),
       value: Value.something,
     ),
   ],
@@ -81,7 +81,7 @@ FSelectTileGroup<Value>(
 
 ```dart copy
 FSelectTileGroup<Value>.builder(
-  groupController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
+  selectController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
   scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
@@ -147,18 +147,15 @@ FSelectTileGroup<Value>.builder(
     <Widget name='select-tile-group' variant='lazy' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {1, 5-11} copy
+    ```dart copy
     FSelectTileGroup.builder(
       selectController: FSelectTileGroupController(values: {1}),
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
       maxHeight: 200,
       count: 200,
-      tileBuilder: (context, index) => FTile(
-        title: Text('Tile $index'),
-        suffixIcon: Icon(FIcons.chevronRight),
-        onPress: () {},
-      ),
+      tileBuilder:
+          (context, index) => FSelectTile(title: Text('Tile $index'), suffixIcon: Icon(FIcons.chevronRight), value: 1),
     );
     ```
   </Tabs.Tab>
@@ -281,7 +278,7 @@ FSelectTileGroup<Value>.builder(
             ),
             const SizedBox(height: 20),
             FButton(
-              label: const Text('Save'),
+              child: const Text('Save'),
               onPress: () {
                 if (!_formKey.currentState!.validate()) {
                   // Handle errors here.
@@ -309,14 +306,14 @@ FSelectTileGroup<Value>.builder(
 
 ### Appearance
 
-#### Suffix Icon
+#### Prefix Icon
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
     <Widget name='select-tile-group' variant='suffix' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4, 9} copy
+    ```dart {6, 11} copy
     FSelectTileGroup(
       selectController: FSelectTileGroupController.radio(),
       label: const Text('Settings'),
@@ -387,6 +384,7 @@ FSelectTileGroup<Value>.builder(
 
     FSelectTileGroup<Sidebar>(
       selectController: FSelectTileGroupController(values: {Sidebar.recents}),
+      divider: FTileDivider.none,
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [

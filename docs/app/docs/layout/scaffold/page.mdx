@@ -23,9 +23,9 @@ Creates a visual scaffold for Forui widgets.
       const FHeader(title: Text('Search')),
       FHeader(
         title: const Text('Settings'),
-        actions: [
+        suffixes: [
           FHeaderAction(
-            icon: FIcons.ellipsis,
+            icon: Icon(FIcons.ellipsis),
             onPress: () {},
           ),
         ],
@@ -64,8 +64,8 @@ Creates a visual scaffold for Forui widgets.
                 ),
                 const SizedBox(height: 16),
                 FButton(
-                  label: const Text('Save'),
                   onPress: () {},
+                  child: const Text('Save'),
                 ),
               ],
             ),
@@ -86,31 +86,31 @@ Creates a visual scaffold for Forui widgets.
 
       @override
       Widget build(BuildContext context) => FScaffold(
-            header: headers[index],
-            content: contents[index],
-            footer: FBottomNavigationBar(
-              index: index,
-              onChange: (index) => setState(() => this.index = index),
-              items: [
-                FBottomNavigationBarItem(
-                  icon: FIcons.home,
-                  label: 'Home',
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcons.layoutGrid,
-                  label: 'Categories',
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcons.search,
-                  label: 'Search',
-                ),
-                FBottomNavigationBarItem(
-                  icon: FIcons.settings,
-                  label: 'Settings',
-                ),
-              ],
+        header: headers[index],
+        child: contents[index],
+        footer: FBottomNavigationBar(
+          index: index,
+          onChange: (index) => setState(() => this.index = index),
+          children: const [
+            FBottomNavigationBarItem(
+              icon: Icon(FIcons.house),
+              label: Text('Home'),
             ),
-          );
+            FBottomNavigationBarItem(
+              icon: Icon(FIcons.layoutGrid),
+              label: Text('Categories'),
+            ),
+            FBottomNavigationBarItem(
+              icon: Icon(FIcons.search),
+              label: Text('Search'),
+            ),
+            FBottomNavigationBarItem(
+              icon: Icon(FIcons.settings),
+              label: Text('Settings'),
+            ),
+          ],
+        ),
+      );
     }
     ```
 
@@ -125,24 +125,23 @@ Creates a visual scaffold for Forui widgets.
 FScaffold(
   header: FHeader(
     title: const Text('Settings'),
-    actions: [
+    suffixes: [
       FHeaderAction(
         icon: Icon(FIcons.ellipsis),
         onPress: () {},
       ),
     ],
   ),
-  content: Column(
+  childPad: true,
+  child: Column(
     children: [
       FCard(
         title: const Text('Notification'),
         subtitle: const Text('You have 3 unread messages.'),
-        child: FButton(label: const Text('Read messages'), onPress: () {}),
+        child: FButton(onPress: () {}, child: const Text('Read messages')),
       ),
     ],
   ),
-  footer: FBottomNavigationBar(items: const []),
-  contentPad: true,
-  resizeToAvoidBottomInset: true,
+  footer: FBottomNavigationBar(children: const []),
 );
 ```

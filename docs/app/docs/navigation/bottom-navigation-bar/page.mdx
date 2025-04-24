@@ -35,7 +35,7 @@ It is used to navigate between a small number of views, typically between three 
               onChange: (index) => setState(() => this.index = index),
               children: [
                 FBottomNavigationBarItem(
-                  icon: Icon(FIcons.home),
+                  icon: Icon(FIcons.house),
                   label: const Text('Home'),
                 ),
                 FBottomNavigationBarItem(
@@ -72,13 +72,13 @@ It is used to navigate between a small number of views, typically between three 
 
 ```dart copy
 FBottomNavigationBar(
-    index: 0,
-    onChange: (index) => {},
-    children: [
-      FBottomNavigationBarItem(
-        icon: Icon(FIcons.home),
-        label: const Text('Home'),
-      ),
-    ],
-  )
+  index: 0,
+  onChange: (index) => {},
+  children: [
+    FBottomNavigationBarItem(
+      icon: Icon(FIcons.house),
+      label: const Text('Home'),
+    ),
+  ],
+);
 ```

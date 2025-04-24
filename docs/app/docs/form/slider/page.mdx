@@ -112,7 +112,7 @@ FSlider(
     <Widget name='slider' variant='tooltip'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {5-8} copy
+        ```dart {2-5} copy
         FSlider(
           tooltipBuilder: (style, value) {
             final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
@@ -136,7 +136,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='marks'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {5-11} copy
+        ```dart {4-8} copy
         FSlider(
           controller: FContinuousSliderController(selection: FSliderSelection(max: 0.35)),
           marks: const [
@@ -160,7 +160,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='discrete'/>
   </Tabs.Tab>
   <Tabs.Tab>
-        ```dart {2-4} copy
+        ```dart {4-8} copy
         FSlider(
           controller: FDiscreteSliderController(selection: FSliderSelection(max: 0.25)),
           marks: const [

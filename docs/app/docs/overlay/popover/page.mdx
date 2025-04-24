@@ -74,7 +74,7 @@ A popover displays rich content in a portal that is aligned to a child.
               child: FButton(
                 style: FButtonStyle.outline,
                 onPress: controller.toggle,
-                label: const Text('Open popover'),
+                child: const Text('Open popover'),
               ),
             ),
           );
@@ -95,14 +95,14 @@ A popover displays rich content in a portal that is aligned to a child.
 ### `FPopover(...)`
 
 ```dart copy
-const FPopover(
-  controller: FPopoverController(),
+FPopover(
+  controller: FPopoverController(vsync: this),
   popoverAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
   hideOnTapOutside: FHidePopoverRegion.anywhere,
   shift: FPortalShift.flip,
-  popoverBuilder: (context) => const Placeholder(),
+  popoverBuilder: (context, style, child) => const Placeholder(),
   child: const Placeholder(),
 );
 ```
@@ -110,14 +110,14 @@ const FPopover(
 ### `FPopover.automatic()`
 
 ```dart copy
-const FPopover.automatic(
-  controller: FPopoverController(),
+FPopover.automatic(
+  controller: FPopoverController(vsync: this),
   popoverAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   directionPadding: false,
   hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   shift: FPortalShift.flip,
-  popoverBuilder: (context) => const Placeholder(),
+  popoverBuilder: (context, style, child) => const Placeholder(),
   child: const Placeholder(),
 );
 ```
@@ -150,53 +150,53 @@ You can change how the popover is aligned to the button.
 
       @override
       Widget build(BuildContext context) => FPopover(
-            controller: controller,
-            popoverAnchor: Alignment.topLeft,
-            childAnchor: Alignment.topRight,
-            popoverBuilder: (context, style, _) => Padding(
-              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-              child: SizedBox(
-                width: 288,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dimensions', style: context.theme.typography.base),
-                    const SizedBox(height: 7),
-                    Text(
-                      'Set the dimensions for the layer.',
-                      style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    for (final (label, value) in [
-                      ('Width', '100%'),
-                      ('Max. Width', '300px'),
-                      ('Height', '25px'),
-                      ('Max. Height', 'none'),
-                    ]) ...[
-                      Row(
-                        children: [
-                          Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialValue: value)),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                    ]
-                  ],
+        controller: controller,
+        popoverAnchor: Alignment.topLeft,
+        childAnchor: Alignment.topRight,
+        popoverBuilder: (context, style, _) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                  ('Height', '25px'),
+                  ('Max. Height', 'none'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialValue: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ]
+              ],
             ),
-            child: IntrinsicWidth(
-              child: FButton(
-                style: FButtonStyle.outline,
-                onPress: controller.toggle,
-                label: const Text('Open popover'),
-              ),
-            ),
-          );
+          ),
+        ),
+        child: IntrinsicWidth(
+          child: FButton(
+            style: FButtonStyle.outline,
+            onPress: controller.toggle,
+            child: const Text('Open popover'),
+          ),
+        ),
+      );
 
       @override
       void dispose() {
@@ -233,52 +233,52 @@ You can change how the popover is aligned to the button.
 
       @override
       Widget build(BuildContext context) => FPopover(
-            controller: controller,
-            hideOnTapOutside: FHidePopoverRegion.none,
-            popoverBuilder: (context, style, _) => Padding(
-              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-              child: SizedBox(
-                width: 288,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dimensions', style: context.theme.typography.base),
-                    const SizedBox(height: 7),
-                    Text(
-                      'Set the dimensions for the layer.',
-                      style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    for (final (label, value) in [
-                      ('Width', '100%'),
-                      ('Max. Width', '300px'),
-                      ('Height', '25px'),
-                      ('Max. Height', 'none'),
-                    ]) ...[
-                      Row(
-                        children: [
-                          Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialValue: value)),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                    ]
-                  ],
+        controller: controller,
+        hideOnTapOutside: FHidePopoverRegion.none,
+        popoverBuilder: (context, style, _) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                  ('Height', '25px'),
+                  ('Max. Height', 'none'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialValue: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ]
+              ],
             ),
-            child: IntrinsicWidth(
-              child: FButton(
-                style: FButtonStyle.outline,
-                onPress: controller.toggle,
-                label: const Text('Open popover'),
-              ),
-            ),
-          );
+          ),
+        ),
+        child: IntrinsicWidth(
+          child: FButton(
+            style: FButtonStyle.outline,
+            onPress: controller.toggle,
+            child: const Text('Open popover'),
+          ),
+        ),
+      );
 
       @override
       void dispose() {
@@ -317,52 +317,52 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
 
       @override
       Widget build(BuildContext context) => FPopover(
-            controller: controller,
-            shift: FPortalShift.flip,
-            popoverBuilder: (context, style, _) => Padding(
-              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-              child: SizedBox(
-                width: 288,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dimensions', style: context.theme.typography.base),
-                    const SizedBox(height: 7),
-                    Text(
-                      'Set the dimensions for the layer.',
-                      style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    for (final (label, value) in [
-                      ('Width', '100%'),
-                      ('Max. Width', '300px'),
-                      ('Height', '25px'),
-                      ('Max. Height', 'none'),
-                    ]) ...[
-                      Row(
-                        children: [
-                          Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialValue: value)),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                    ]
-                  ],
+        controller: controller,
+        shift: FPortalShift.flip,
+        popoverBuilder: (context, style, _) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                  ('Height', '25px'),
+                  ('Max. Height', 'none'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialValue: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ]
+              ],
             ),
-            child: IntrinsicWidth(
-              child: FButton(
-                style: FButtonStyle.outline,
-                onPress: controller.toggle,
-                label: const Text('Open popover'),
-              ),
-            ),
-          );
+          ),
+        ),
+        child: IntrinsicWidth(
+          child: FButton(
+            style: FButtonStyle.outline,
+            onPress: controller.toggle,
+            child: const Text('Open popover'),
+          ),
+        ),
+      );
 
       @override
       void dispose() {
@@ -401,52 +401,52 @@ The popover can be shifted along the overflowing axis to stay within the viewpor
 
       @override
       Widget build(BuildContext context) => FPopover(
-            controller: controller,
-            shift: FPortalShift.along,
-            popoverBuilder: (context, style, _) => Padding(
-              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-              child: SizedBox(
-                width: 288,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dimensions', style: context.theme.typography.base),
-                    const SizedBox(height: 7),
-                    Text(
-                      'Set the dimensions for the layer.',
-                      style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    for (final (label, value) in [
-                      ('Width', '100%'),
-                      ('Max. Width', '300px'),
-                      ('Height', '25px'),
-                      ('Max. Height', 'none'),
-                    ]) ...[
-                      Row(
-                        children: [
-                          Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialValue: value)),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                    ]
-                  ],
+        controller: controller,
+        shift: FPortalShift.along,
+        popoverBuilder: (context, style, _) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                  ('Height', '25px'),
+                  ('Max. Height', 'none'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialValue: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ]
+              ],
             ),
-            child: IntrinsicWidth(
-              child: FButton(
-                style: FButtonStyle.outline,
-                onPress: controller.toggle,
-                label: const Text('Open popover'),
-              ),
-            ),
-          );
+          ),
+        ),
+        child: IntrinsicWidth(
+          child: FButton(
+            style: FButtonStyle.outline,
+            onPress: controller.toggle,
+            child: const Text('Open popover'),
+          ),
+        ),
+      );
 
       @override
       void dispose() {
@@ -485,52 +485,52 @@ The popover is not shifted to stay within the viewport boundaries, even if it ov
 
       @override
       Widget build(BuildContext context) => FPopover(
-            controller: controller,
-            shift: FPortalShift.none,
-            popoverBuilder: (context, style, _) => Padding(
-              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-              child: SizedBox(
-                width: 288,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dimensions', style: context.theme.typography.base),
-                    const SizedBox(height: 7),
-                    Text(
-                      'Set the dimensions for the layer.',
-                      style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    for (final (label, value) in [
-                      ('Width', '100%'),
-                      ('Max. Width', '300px'),
-                      ('Height', '25px'),
-                      ('Max. Height', 'none'),
-                    ]) ...[
-                      Row(
-                        children: [
-                          Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialValue: value)),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                    ]
-                  ],
+        controller: controller,
+        shift: FPortalShift.none,
+        popoverBuilder: (context, style, _) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                  ('Height', '25px'),
+                  ('Max. Height', 'none'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialValue: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ]
+              ],
             ),
-            child: IntrinsicWidth(
-              child: FButton(
-                style: FButtonStyle.outline,
-                onPress: controller.toggle,
-                label: const Text('Open popover'),
-              ),
-            ),
-          );
+          ),
+        ),
+        child: IntrinsicWidth(
+          child: FButton(
+            style: FButtonStyle.outline,
+            onPress: controller.toggle,
+            child: const Text('Open popover'),
+          ),
+        ),
+      );
 
       @override
       void dispose() {

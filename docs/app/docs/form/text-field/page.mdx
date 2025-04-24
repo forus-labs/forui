@@ -17,7 +17,7 @@ in a form.
     <Widget name='text-field' query={{enabled: 'true'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {9, 18, 23-29} copy
+    ```dart copy
     class DefaultTextField extends StatefulWidget {
       const DefaultTextField({super.key});
 
@@ -101,13 +101,14 @@ FTextField(
     <Widget name='text-field' query={{enabled: 'false'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {3} copy
+    ```dart {7} copy
     FTextField(
       controller: _controller, // TextEditingController
       label: const Text('Username'),
       hint: 'JaneDoe',
       description: const Text('Please enter your username.'),
       maxLines: 1,
+      enabled: false,
     );
     ```
   </Tabs.Tab>
@@ -205,7 +206,7 @@ FTextField(
     <Widget name='text-field' variant='form' height={550} query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {9-11, 20-21, 26-27, 31-36, 38-42, 46-52} copy
+    ```dart {9-11, 20-21, 27, 31-36, 38-42, 46-52} copy
     class LoginForm extends StatefulWidget {
       const LoginForm({super.key});
 
@@ -232,36 +233,36 @@ FTextField(
 
       @override
       Widget build(BuildContext context) => Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FTextField.email(
-                  controller: _emailController,
-                  hint: 'janedoe@foruslabs.com',
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
-                ),
-                const SizedBox(height: 10),
-                FTextField.password(
-                  controller: _passwordController,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-                ),
-                const SizedBox(height: 20),
-                FButton(
-                  child: const Text('Login'),
-                  onPress: () {
-                    if (!_formKey.currentState!.validate()) {
-                      return; // Form is invalid.
-                    }
-
-                    // Form is valid, do something.
-                  },
-                ),
-              ],
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FTextField.email(
+              controller: _emailController,
+              hint: 'janedoe@foruslabs.com',
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
             ),
-          );
+            const SizedBox(height: 10),
+            FTextField.password(
+              controller: _passwordController,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+            ),
+            const SizedBox(height: 20),
+            FButton(
+              child: const Text('Login'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  return; // Form is invalid.
+                }
+
+                // Form is valid, do something.
+              },
+            ),
+          ],
+        ),
+      );
     }
     ```
 

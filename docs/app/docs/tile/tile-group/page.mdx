@@ -47,7 +47,7 @@ A tile group that typically groups related information together.
 
 ```dart copy
 FTileGroup(
-  controller: ScrollController(),
+  scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
@@ -64,7 +64,7 @@ FTileGroup(
 
 ```dart copy
 FTileGroup.builder(
-  controller: ScrollController(),
+  scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
@@ -82,7 +82,7 @@ FTileGroup.builder(
 
 ```dart copy
 FTileGroup.merge(
-controller: ScrollController(),
+  scrollController: ScrollController(),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
@@ -155,7 +155,7 @@ controller: ScrollController(),
     <Widget name='tile-group' variant='lazy' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {1, 4-10} copy
+    ```dart copy
     FTileGroup.builder(
       label: const Text('Settings'),
       description: const Text('Personalize your experience'),
@@ -207,16 +207,10 @@ several sections.
           ],
         ),
         FSelectTileGroup<String>(
-          controller: FRadioSelectGroupController(value: 'List')),
+          selectController: FSelectTileGroupController.radio(value: 'List'),
           children: [
-            FSelectTile(
-              title: const Text('List View'),
-              value: 'List',
-            ),
-            FSelectTile(
-              title: const Text('Grid View'),
-              value: 'Grid',
-            ),
+            FSelectTile(title: const Text('List View'), value: 'List'),
+            FSelectTile(title: const Text('Grid View'), value: 'Grid'),
           ],
         ),
       ],

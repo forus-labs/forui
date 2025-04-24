@@ -25,8 +25,6 @@ A tile that, when triggered, displays a list of options for the user to pick fro
     enum Notification { all, direct, nothing }
 
     class _SelectMenuTile extends StatefulWidget {
-      const _SelectMenuTileForm({super.key});
-
       @override
       State<_SelectMenuTile> createState() => _SelectMenuTileState();
     }
@@ -78,7 +76,7 @@ FSelectMenuTile<Value>(
   selectController: FSelectMenuTileController(), // or FSelectMenuTileController.radio()
   menuAnchor: Alignment.bottomLeft,
   tileAnchor: Alignment.bottomLeft,
-  shift: FPortalFollowerShift.flip,
+  shift: FPortalShift.flip,
   hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   directionPadding: true,
   autoHide: false,
@@ -114,8 +112,8 @@ FSelectMenuTile<Value>.builder(
   selectController: FSelectMenuTileController(), // or FSelectMenuTileController.radio()
   menuAnchor: Alignment.bottomLeft,
   tileAnchor: Alignment.bottomLeft,
-  shift: FPortalFollowerShift.flip,
-  hideOnTapOutside: true,
+  shift: FPortalShift.flip,
+  hideOnTapOutside: FHidePopoverRegion.anywhere,
   directionPadding: true,
   autoHide: false,
   scrollController: ScrollController(),
@@ -133,7 +131,7 @@ FSelectMenuTile<Value>.builder(
   details: Text('All'),
   suffixIcon: Icon(FIcons.chevronsUpDown),
   menuBuilder: (context, index) => index < 10 ? FSelectTile(
-    label: Text('Tile $index'),
+    title: Text('Tile $index'),
     value: Value.something,
   ) : null,
   count: 100,
@@ -151,18 +149,16 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='default' query={{autoHide: 'true'}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {16} copy
+    ```dart {14} copy
     enum Notification { all, direct, nothing }
 
     class _SelectMenuTile extends StatefulWidget {
-      const _SelectMenuTileForm({super.key});
-
       @override
       State<_SelectMenuTile> createState() => _SelectMenuTileState();
     }
 
     class _SelectMenuTileState extends State<_SelectMenuTile> {
-      final controller = FSelectMenuTileController.radio(Notification.all);
+      final controller = FSelectMenuTileController.radio(value: Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
@@ -206,18 +202,16 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='scrollable' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {33} copy
+    ```dart copy
     enum Notification { all, direct, limitedTime, timeSensitive, selectedApps, nothing }
 
     class _ScrollableSelectMenuTile extends StatefulWidget {
-      const _ScrollableSelectMenuTile({super.key});
-
       @override
       State<_ScrollableSelectMenuTile> createState() => _ScrollableSelectMenuTileState();
     }
 
     class _ScrollableSelectMenuTileState extends State<_ScrollableSelectMenuTile> {
-      final controller = FSelectMenuTileController.radio(Notification.all);
+      final controller = FSelectMenuTileController.radio(value: Notification.all);
 
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
@@ -234,7 +228,7 @@ FSelectMenuTile<Value>.builder(
               Notification.all => 'All',
               Notification.direct => 'Direct Messages',
               Notification.limitedTime => 'Limited Time',
-              Notification.SelectedApps => 'Selected Apps',
+              Notification.selectedApps => 'Selected Apps',
               Notification.timeSensitive => 'Time Sensitive',
               null || Notification.nothing => 'None',
             },
@@ -244,7 +238,7 @@ FSelectMenuTile<Value>.builder(
           FSelectTile(title: const Text('All'), value: Notification.all),
           FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
           FSelectTile(title: const Text('Limited Time'), value: Notification.limitedTime),
-          FSelectTile(title: const Text('Selected Apps'), value: Notification.SelectedApps),
+          FSelectTile(title: const Text('Selected Apps'), value: Notification.selectedApps),
           FSelectTile(title: const Text('Time Sensitive'), value: Notification.timeSensitive),
           FSelectTile(title: const Text('None'), value: Notification.nothing),
         ],
@@ -268,10 +262,8 @@ FSelectMenuTile<Value>.builder(
     <Widget name='select-menu-tile' variant='lazy' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {12, 18-22} copy
+    ```dart {17-21} copy
     class _LazySelectMenuTile extends StatefulWidget {
-      const _SelectMenuTileForm({super.key});
-
       @override
       State<_LazySelectMenuTile> createState() => _LazySelectMenuTileState();
     }
@@ -315,60 +307,58 @@ FSelectMenuTile<Value>.builder(
     enum Notification { all, direct, nothing }
 
     class _SelectMenuTileForm extends StatefulWidget {
-      const _SelectMenuTileForm({super.key});
-
       @override
       State<_SelectMenuTileForm> createState() => _SelectMenuTileFormState();
     }
 
     class _SelectMenuTileFormState extends State<_SelectMenuTileForm> {
       final _formKey = GlobalKey<FormState>();
-      final controller = FSelectMenuTileController.radio();
+      final controller = FSelectMenuTileController<Notification>.radio();
 
       @override
       Widget build(BuildContext context) => Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FSelectMenuTile(
-                  selectController: controller,
-                  autoHide: true,
-                  validator: (value) => value == null ? 'Select an item' : null,
-                  prefixIcon: Icon(FIcons.bell),
-                  title: const Text('Notifications'),
-                  details: ListenableBuilder(
-                    listenable: controller,
-                    builder: (context, _) => Text(
-                      switch (controller.value.firstOrNull) {
-                        Notification.all => 'All',
-                        Notification.direct => 'Direct Messages',
-                        null || Notification.nothing => 'None',
-                      },
-                    ),
-                  ),
-                  menu: [
-                    FSelectTile(title: const Text('All'), value: Notification.all),
-                    FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
-                    FSelectTile(title: const Text('None'), value: Notification.nothing),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                FButton(
-                  label: const Text('Save'),
-                  onPress: () {
-                    if (!_formKey.currentState!.validate()) {
-                      // Handle errors here.
-                      return;
-                    }
-
-                    _formKey.currentState!.save();
-                    // Do something.
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FSelectMenuTile(
+              selectController: controller,
+              autoHide: true,
+              validator: (value) => value == null ? 'Select an item' : null,
+              prefixIcon: Icon(FIcons.bell),
+              title: const Text('Notifications'),
+              details: ListenableBuilder(
+                listenable: controller,
+                builder: (context, _) => Text(
+                  switch (controller.value.firstOrNull) {
+                    Notification.all => 'All',
+                    Notification.direct => 'Direct Messages',
+                    null || Notification.nothing => 'None',
                   },
                 ),
+              ),
+              menu: [
+                FSelectTile(title: const Text('All'), value: Notification.all),
+                FSelectTile(title: const Text('Direct Messages'), value: Notification.direct),
+                FSelectTile(title: const Text('None'), value: Notification.nothing),
               ],
             ),
-          );
+            const SizedBox(height: 20),
+            FButton(
+              child: const Text('Save'),
+              onPress: () {
+                if (!_formKey.currentState!.validate()) {
+                  // Handle errors here.
+                  return;
+                }
+
+                _formKey.currentState!.save();
+                // Do something.
+              },
+            ),
+          ],
+        ),
+      );
 
       @override
       void dispose() {

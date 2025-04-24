@@ -335,12 +335,12 @@ FDateField.calendar(
                   ),
                   const SizedBox(height: 25),
                   FButton(
-                    label: const Text('Submit'),
                     onPress: () {
                       if (_formKey.currentState!.validate()) {
                         // Form is valid, process the dates
                       }
                     },
+                    child: const Text('Submit'),
                   ),
                 ],
               ),
