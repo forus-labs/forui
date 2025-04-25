@@ -22,6 +22,7 @@ sealed class FHeader extends StatelessWidget {
   /// The title.
   final Widget title;
 
+
   const FHeader._({this.title = const SizedBox(), super.key});
 
   /// Creates a header which title is aligned to the start.
@@ -35,6 +36,7 @@ sealed class FHeader extends StatelessWidget {
   const factory FHeader.nested({
     Widget title,
     FHeaderStyle? style,
+    TextAlign titleAlignment,
     List<Widget> prefixes,
     List<Widget> suffixes,
     Key? key,
