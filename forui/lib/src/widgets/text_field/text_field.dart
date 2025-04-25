@@ -670,7 +670,7 @@ final class FTextField extends StatelessWidget with FFormFieldProperties<String>
     this.smartQuotesType,
     this.enableSuggestions = true,
     this.minLines,
-    this.maxLines,
+    this.maxLines = 1,
     this.expands = false,
     this.readOnly = false,
     this.showCursor,

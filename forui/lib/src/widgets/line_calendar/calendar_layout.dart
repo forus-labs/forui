@@ -14,7 +14,9 @@ class CalendarLayout extends StatefulWidget {
   final FCalendarController<DateTime?>? controller;
   final FLineCalendarStyle style;
   final AlignmentDirectional alignment;
+  final ScrollPhysics? physics;
   final double? cacheExtent;
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final TextScaler scale;
   final TextStyle textStyle;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
@@ -30,7 +32,9 @@ class CalendarLayout extends StatefulWidget {
     required this.controller,
     required this.style,
     required this.alignment,
+    required this.physics,
     required this.cacheExtent,
+    required this.keyboardDismissBehavior,
     required this.scale,
     required this.textStyle,
     required this.builder,
@@ -54,7 +58,9 @@ class CalendarLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('alignment', alignment))
+      ..add(DiagnosticsProperty('physics', physics))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
       ..add(DiagnosticsProperty('scaler', scale))
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ObjectFlagProperty.has('builder', builder))
@@ -79,7 +85,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     _width = _estimateWidth();
 
     _controller = widget.controller ?? FCalendarController.date(initialSelection: widget.initialSelection?.toNative());
-    _controller.addValueListener(widget.onChange);
+    _controller.addValueListener(_onChange);
 
     final start = ((widget.initialScroll ?? widget.today).difference(widget.start).inDays) * _width;
     _scrollController = ScrollController(
@@ -102,15 +108,11 @@ class _CalendarLayoutState extends State<CalendarLayout> {
       if (old.controller == null) {
         _controller.dispose();
       } else {
-        _controller.removeValueListener(old.onChange);
+        _controller.removeValueListener(_onChange);
       }
 
       _controller = widget.controller ?? FCalendarController.date(initialSelection: _controller.value);
-      _controller.addValueListener(widget.onChange);
-    } else if (widget.onChange != old.onChange) {
-      _controller
-        ..removeValueListener(old.onChange)
-        ..addValueListener(widget.onChange);
+      _controller.addValueListener(_onChange);
     }
   }
 
@@ -135,6 +137,8 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     ].max!;
   }
 
+  void _onChange(DateTime? date) => widget.onChange?.call(date);
+
   @override
   Widget build(BuildContext _) {
     final placeholder = widget.today.toNative();
@@ -148,7 +152,9 @@ class _CalendarLayoutState extends State<CalendarLayout> {
           controller: _scrollController,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.zero,
+          physics: widget.physics,
           cacheExtent: widget.cacheExtent,
+          keyboardDismissBehavior: widget.keyboardDismissBehavior,
           itemExtent: _width,
           itemCount: widget.end == null ? null : widget.end!.difference(widget.start).inDays + 1,
           itemBuilder: (_, index) {
@@ -175,7 +181,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     if (widget.controller == null) {
       _controller.dispose();
     } else {
-      _controller.removeValueListener(widget.onChange);
+      _controller.removeValueListener(_onChange);
     }
     super.dispose();
   }

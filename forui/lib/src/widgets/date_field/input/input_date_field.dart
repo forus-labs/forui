@@ -71,7 +71,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   @override
   void initState() {
     super.initState();
-    _controller.addValueListener(widget.onChange);
+    _controller.addValueListener(_onChange);
   }
 
   @override
@@ -81,16 +81,15 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
       if (old.controller == null) {
         _controller.dispose();
       } else {
-        old.controller?.removeValueListener(old.onChange);
+        old.controller?.removeValueListener(_onChange);
       }
 
       _controller = widget.controller ?? FDateFieldController(vsync: this);
-      _controller.addValueListener(widget.onChange);
-    } else if (widget.onChange != old.onChange) {
-      _controller.removeValueListener(old.onChange);
-      _controller.addValueListener(widget.onChange);
+      _controller.addValueListener(_onChange);
     }
   }
+
+  void _onChange(DateTime? time) => widget.onChange?.call(time);
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +162,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
     if (widget.controller == null) {
       _controller.dispose();
     } else {
-      _controller.removeValueListener(widget.onChange);
+      _controller.removeValueListener(_onChange);
     }
     super.dispose();
   }

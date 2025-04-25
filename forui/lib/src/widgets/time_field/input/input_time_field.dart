@@ -63,7 +63,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
   void initState() {
     super.initState();
-    _controller.addValueListener(widget.onChange);
+    _controller.addValueListener(_onChange);
   }
 
   @override
@@ -73,15 +73,15 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       if (old.controller == null) {
         _controller.dispose();
       } else {
-        old.controller?.removeValueListener(old.onChange);
+        old.controller?.removeValueListener(_onChange);
       }
+
       _controller = widget.controller ?? FTimeFieldController(vsync: this);
-      _controller.addValueListener(widget.onChange);
-    } else if (widget.onChange != old.onChange) {
-      _controller.removeValueListener(old.onChange);
-      _controller.addValueListener(widget.onChange);
+      _controller.addValueListener(_onChange);
     }
   }
+
+  void _onChange(FTime? time) => widget.onChange?.call(time);
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +130,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
     if (widget.controller == null) {
       _controller.dispose();
     } else {
-      _controller.removeValueListener(widget.onChange);
+      _controller.removeValueListener(_onChange);
     }
     super.dispose();
   }

@@ -96,6 +96,8 @@ Several updates have been made to `FLineCalendar` to improve usability and consi
 
 * Add `FLineCalendar.onChange`.
 * Add `FLineCalendar.initialSelection`.
+* Add `FLineCalendar.physics`.
+* Add `FLineCalendar.keyboardDismissBehavior`.
 * Change `FLineCalendar.controller` to be optional.
 * **Breaking** Rename `FLineCalendar.initialDateAlignment` to `FLineCalendar.initialScrollAlignment`.
 * **Breaking** Rename `FLineCalendar.initial` to `FLineCalendar.initialScroll`.
@@ -244,7 +246,7 @@ have been renamed to `semanticsLabel` for consistency.
 * Fix `FSelectTileGroup` not setting its `FormField`'s initial value.
 * Fix `FSlider` not setting its `FormField`'s initial value.
 * Fix `FTextField` not setting its `FormField`'s initial value.
-
+* Fix `FTextField(...)` not setting the max lines to 1 default.
 
 ## 0.10.0+1
 

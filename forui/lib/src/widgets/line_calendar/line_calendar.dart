@@ -30,8 +30,18 @@ class FLineCalendar extends StatelessWidget {
   /// The alignment to which the initially scrolled date will be aligned. Defaults to [Alignment.center].
   final AlignmentDirectional initialScrollAlignment;
 
+  /// How the scroll view should respond to user input.
+  ///
+  /// Defaults to matching platform conventions.
+  final ScrollPhysics? physics;
+
   /// {@macro forui.foundation.doc_templates.cacheExtent}
   final double? cacheExtent;
+
+  /// [ScrollViewKeyboardDismissBehavior] the defines how this [FLineCalendar] will dismiss the keyboard automatically.
+  ///
+  /// Defaults to [ScrollViewKeyboardDismissBehavior.manual].
+  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
 
   /// The builder used to build a line calendar item. Defaults to returning the given child.
   ///
@@ -73,7 +83,9 @@ class FLineCalendar extends StatelessWidget {
     this.controller,
     this.style,
     this.initialScrollAlignment = AlignmentDirectional.center,
+    this.physics,
     this.cacheExtent,
+    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.builder = _builder,
     this.onChange,
     DateTime? start,
@@ -94,8 +106,7 @@ class FLineCalendar extends StatelessWidget {
        assert(
          initialScroll == null ||
              start == null ||
-             (initialScroll.toLocalDate() >= start.toLocalDate() &&
-                 initialScroll.toLocalDate() < end!.toLocalDate()),
+             (initialScroll.toLocalDate() >= start.toLocalDate() && initialScroll.toLocalDate() < end!.toLocalDate()),
          'initial scrolled date must be greater than or equal to start date',
        ),
        assert(
@@ -122,7 +133,9 @@ class FLineCalendar extends StatelessWidget {
         (context, constraints) => CalendarLayout(
           controller: controller,
           style: style ?? context.theme.lineCalendarStyle,
+          physics: physics,
           cacheExtent: cacheExtent,
+          keyboardDismissBehavior: keyboardDismissBehavior,
           scale: MediaQuery.textScalerOf(context),
           textStyle: DefaultTextStyle.of(context).style,
           onChange: onChange,
@@ -144,7 +157,9 @@ class FLineCalendar extends StatelessWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('initialScrollAlignment', initialScrollAlignment))
+      ..add(DiagnosticsProperty('physics', physics))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('onChange', onChange));
   }

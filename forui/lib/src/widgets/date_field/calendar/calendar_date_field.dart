@@ -102,7 +102,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     super.initState();
     _controller._calendar.addListener(_updateTextController);
     _controller.calendar.addListener(_updateFocus);
-    _controller.addValueListener(widget.onChange);
+    _controller.addValueListener(_onChange);
   }
 
   @override
@@ -122,7 +122,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       } else {
         _controller._calendar.removeListener(_updateTextController);
         _controller.calendar.removeListener(_updateFocus);
-        _controller.removeValueListener(old.onChange);
+        _controller.removeValueListener(_onChange);
       }
 
       _controller = widget.controller ?? FDateFieldController(vsync: this);
@@ -130,11 +130,10 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       _controller.calendar.addListener(_updateFocus);
       _controller.addValueListener(widget.onChange);
       _updateTextController();
-    } else if (widget.onChange != old.onChange) {
-      _controller.removeValueListener(old.onChange);
-      _controller.addValueListener(widget.onChange);
     }
   }
+
+  void _onChange(DateTime? date) => widget.onChange?.call(date);
 
   @override
   void didChangeDependencies() {
@@ -217,7 +216,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     } else {
       _controller._calendar.removeListener(_updateTextController);
       _controller.calendar.removeListener(_updateFocus);
-      _controller.removeValueListener(widget.onChange);
+      _controller.removeValueListener(_onChange);
     }
 
     if (widget.focusNode == null) {

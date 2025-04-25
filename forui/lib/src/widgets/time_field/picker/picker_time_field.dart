@@ -88,7 +88,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     super.initState();
     _controller._picker.addListener(_updateTextController);
     _controller.popover.addListener(_updateFocus);
-    _controller.addValueListener(widget.onChange);
+    _controller.addValueListener(_onChange);
   }
 
   @override
@@ -113,19 +113,18 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       } else {
         _controller._picker.removeListener(_updateTextController);
         _controller.popover.removeListener(_updateFocus);
-        _controller.removeValueListener(old.onChange);
+        _controller.removeValueListener(_onChange);
       }
 
       _controller = widget.controller ?? FTimeFieldController(vsync: this);
       _controller._picker.addListener(_updateTextController);
       _controller.popover.addListener(_updateFocus);
-      _controller.addValueListener(widget.onChange);
+      _controller.addValueListener(_onChange);
       _updateTextController();
-    } else if (widget.onChange != old.onChange) {
-      _controller.removeValueListener(old.onChange);
-      _controller.addValueListener(widget.onChange);
     }
   }
+
+  void _onChange(FTime? time) => widget.onChange?.call(time);
 
   @override
   void didChangeDependencies() {
@@ -209,7 +208,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     } else {
       _controller._picker.removeListener(_updateTextController);
       _controller.popover.removeListener(_updateFocus);
-      _controller.removeValueListener(widget.onChange);
+      _controller.removeValueListener(_onChange);
     }
 
     if (widget.focusNode == null) {
