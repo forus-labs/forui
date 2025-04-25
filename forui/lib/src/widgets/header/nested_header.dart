@@ -21,7 +21,7 @@ final class _FNestedHeader extends FHeader {
   ///
   /// They are aligned to the left in RTL locales.
   final List<Widget> suffixes;
-  
+
   final TextAlign titleAlignment;
 
   /// Creates a [_FNestedHeader].
@@ -39,13 +39,13 @@ final class _FNestedHeader extends FHeader {
     final style = this.style ?? context.theme.headerStyle.nestedStyle;
 
     final header = DefaultTextStyle.merge(
-        overflow: TextOverflow.fade,
-        maxLines: 1,
-        softWrap: false,
-        style: style.titleTextStyle,
-        child: title,
-        textAlign: titleAlignment,
-      );
+      overflow: TextOverflow.fade,
+      maxLines: 1,
+      softWrap: false,
+      style: style.titleTextStyle,
+      child: title,
+      textAlign: titleAlignment,
+    );
 
     return SafeArea(
       bottom: false,
@@ -59,27 +59,26 @@ final class _FNestedHeader extends FHeader {
                 prefixes.isEmpty && suffixes.isEmpty
                     ? header
                     : Row(
-  children: [
-    if (prefixes.isNotEmpty)
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        children: prefixes.expand((action) => [action, SizedBox(width: style.actionSpacing)]).toList()
-          ..removeLast(), // Remove the last spacing
-      ),
-    Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: style.actionSpacing),
-        child: header,
-      ),
-    ),
-    if (suffixes.isNotEmpty)
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        children: suffixes.expand((action) => [SizedBox(width: style.actionSpacing), action]).toList()
-          ..removeAt(0), // Remove the first spacing
-      ),
-  ],
-),
+                      children: [
+                        if (prefixes.isNotEmpty)
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children:
+                                prefixes.expand((action) => [action, SizedBox(width: style.actionSpacing)]).toList()
+                                  ..removeLast(), // Remove the last spacing
+                          ),
+                        Expanded(
+                          child: Padding(padding: EdgeInsets.symmetric(horizontal: style.actionSpacing), child: header),
+                        ),
+                        if (suffixes.isNotEmpty)
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children:
+                                suffixes.expand((action) => [SizedBox(width: style.actionSpacing), action]).toList()
+                                  ..removeAt(0), // Remove the first spacing
+                          ),
+                      ],
+                    ),
           ),
         ),
       ),
@@ -89,7 +88,8 @@ final class _FNestedHeader extends FHeader {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('style', style))
-    ..add(DiagnosticsProperty<TextAlign>('titleAlignment', titleAlignment));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty<TextAlign>('titleAlignment', titleAlignment));
   }
 }
