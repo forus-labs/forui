@@ -45,6 +45,10 @@ The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigat
 
 Several minor tweaks have been made to `FHeader` to improve usability and consistency.
 
+* Add `FHeaderAction.onHoverChange`.
+* Add `FHeaderAction.onChange`.
+* Add `FHeaderAction.selected`.
+
 * Change `FHeader(title: ...)` to be optional.
 * Change `FHeader.nested(title: ...)` to be optional.
 * **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.

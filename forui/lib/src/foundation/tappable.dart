@@ -69,6 +69,8 @@ class FTappable extends StatefulWidget {
   ///
   /// It is called before the more specific callbacks, i.e., [onFocusChange].
   ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  ///
   /// Consider using the more specific callbacks if you only need to listen to a specific state change:
   /// * [onFocusChange] for focus changes.
   /// * [onHoverChange] for hover changes.
