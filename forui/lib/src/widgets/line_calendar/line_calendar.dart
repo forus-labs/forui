@@ -12,7 +12,7 @@ part 'line_calendar.style.dart';
 /// A line calendar displays dates in a single horizontal, scrollable line.
 ///
 /// ## Desktop and web note
-/// As the dates scrolls on the horizontal axis (left to right or right to left), hold Shift while using the mouse
+/// As the dates scroll on the horizontal axis (left to right or right to left), hold Shift while using the mouse
 /// scroll wheel to scroll the list.
 ///
 /// See:
@@ -22,13 +22,13 @@ class FLineCalendar extends StatelessWidget {
   static Widget _builder(BuildContext _, FLineCalendarItemData _, Widget? child) => child!;
 
   /// The controller.
-  final FCalendarController<DateTime?> controller;
+  final FCalendarController<DateTime?>? controller;
 
   /// The style.
   final FLineCalendarStyle? style;
 
-  /// The alignment to which the initial date will be aligned. Defaults to [Alignment.center].
-  final AlignmentDirectional initialDateAlignment;
+  /// The alignment to which the initially scrolled date will be aligned. Defaults to [Alignment.center].
+  final AlignmentDirectional initialScrollAlignment;
 
   /// {@macro forui.foundation.doc_templates.cacheExtent}
   final double? cacheExtent;
@@ -39,9 +39,13 @@ class FLineCalendar extends StatelessWidget {
   /// in a [Stack] to avoid re-creating the custom content from scratch.
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
 
+  /// The callback that is called when the date changes.
+  final ValueChanged<DateTime?>? onChange;
+
   final LocalDate _start;
   final LocalDate? _end;
-  final LocalDate? _initial;
+  final LocalDate? _initialScroll;
+  final LocalDate? _initialSelection;
   final LocalDate _today;
 
   /// Creates a [FLineCalendar].
@@ -51,46 +55,65 @@ class FLineCalendar extends StatelessWidget {
   ///
   /// [end] represents the end date, exclusive. It is truncated to the nearest date.
   ///
-  /// [initial] represents the initial date that will appear on the left-most edge on LTR locales. It is truncated to
-  /// the nearest date.
+  /// [initialScroll] represents the initial date to which the line calendar is scrolled. It is aligned based on
+  /// [initialScrollAlignment]. It is truncated to the nearest date. Defaults to [today] if not provided.
+  ///
+  /// [initialSelection] represents the initial date which is selected. It is truncated to the nearest date.
   ///
   /// [today] represents the current date. It is truncated to the nearest date. Defaults to the [DateTime.now].
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
+  /// * [controller] and [initialSelection] are both non-null.
   /// * [end] <= [start].
-  /// * [initial] < [start] or [end] <= [initial].
+  /// * [initialScroll] < [start] or [end] <= [initialScroll].
+  /// * [initialSelection] < [start] or [end] <= [initialSelection].
   /// * [today] < [start] or [end] <= [today].
   FLineCalendar({
-    required this.controller,
+    this.controller,
     this.style,
-    this.initialDateAlignment = AlignmentDirectional.center,
+    this.initialScrollAlignment = AlignmentDirectional.center,
     this.cacheExtent,
     this.builder = _builder,
+    this.onChange,
     DateTime? start,
     DateTime? end,
-    DateTime? initial,
+    DateTime? initialScroll,
+    DateTime? initialSelection,
     DateTime? today,
     super.key,
   }) : _start = (start ?? DateTime.utc(1900)).toLocalDate(),
        _end = end?.toLocalDate(),
-       _initial = initial?.toLocalDate(),
+       _initialScroll = initialScroll?.toLocalDate(),
+       _initialSelection = initialSelection?.toLocalDate(),
        _today = (today ?? DateTime.now()).toLocalDate(),
        assert(
          start == null || end == null || start.toLocalDate() < end.toLocalDate(),
          'end date must be greater than start date',
        ),
        assert(
-         initial == null ||
+         initialScroll == null ||
              start == null ||
-             (initial.toLocalDate() >= start.toLocalDate() && initial.toLocalDate() < end!.toLocalDate()),
-         'initial date must be greater than or equal to start date',
+             (initialScroll.toLocalDate() >= start.toLocalDate() &&
+                 initialScroll.toLocalDate() < end!.toLocalDate()),
+         'initial scrolled date must be greater than or equal to start date',
+       ),
+       assert(
+         controller == null || initialSelection == null,
+         'controller and initial selection cannot be both non-null',
+       ),
+       assert(
+         initialSelection == null ||
+             start == null ||
+             (initialSelection.toLocalDate() >= start.toLocalDate() &&
+                 initialSelection.toLocalDate() < end!.toLocalDate()),
+         'initial selection date must be greater than or equal to start date',
        ),
        assert(
          today == null ||
              start == null ||
              (today.toLocalDate() >= start.toLocalDate() && today.toLocalDate() < end!.toLocalDate()),
-         'initial date must be greater than or equal to start date',
+         'today must be greater than or equal to start date',
        );
 
   @override
@@ -102,13 +125,15 @@ class FLineCalendar extends StatelessWidget {
           cacheExtent: cacheExtent,
           scale: MediaQuery.textScalerOf(context),
           textStyle: DefaultTextStyle.of(context).style,
+          onChange: onChange,
           builder: builder,
           start: _start,
           end: _end,
-          initial: _initial,
+          initialScroll: _initialScroll,
+          initialSelection: _initialSelection,
           today: _today,
           constraints: constraints,
-          alignment: initialDateAlignment,
+          alignment: initialScrollAlignment,
         ),
   );
 
@@ -118,9 +143,10 @@ class FLineCalendar extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('initialDateAlignment', initialDateAlignment))
+      ..add(DiagnosticsProperty('initialScrollAlignment', initialScrollAlignment))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
-      ..add(ObjectFlagProperty.has('builder', builder));
+      ..add(ObjectFlagProperty.has('builder', builder))
+      ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }
 

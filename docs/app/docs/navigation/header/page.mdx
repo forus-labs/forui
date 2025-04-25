@@ -80,6 +80,8 @@ FHeader(
     FHeaderAction(
       icon: Icon(FIcons.alarmClock),
       onPress: () {},
+      onHoverChange: (hovered) {},
+      onChange: (states) {},
     ),
     FHeaderAction(
       icon: Icon(FIcons.plus),
@@ -95,14 +97,22 @@ FHeader(
 FHeader.nested(
   title: const Text('Title'),
   prefixes: [
-    FHeaderAction.back(onPress: () {}),
+    FHeaderAction.back(
+      onPress: () {},
+      onHoverChange: (hovered) {},
+      onChange: (states) {},
+    ),
   ],
   suffixes: [
     FHeaderAction(
       icon: Icon(FIcons.info),
       onPress: () {},
     ),
-    FHeaderAction.x(onPress: () {}),
+    FHeaderAction.x(
+      onPress: () {},
+      onHoverChange: (hovered) {},
+      onChange: (states) {},
+    ),
   ],
 );
 ```

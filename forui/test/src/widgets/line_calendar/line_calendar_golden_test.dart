@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import '../test_scaffold.dart';
+import '../../test_scaffold.dart';
 
 void main() {
   late FocusScopeNode focus;
@@ -181,7 +181,7 @@ void main() {
         TestScaffold.app(
           child: FLineCalendar(
             controller: autoDispose(FCalendarController.date()),
-            initialDateAlignment: AlignmentDirectional.bottomStart,
+            initialScrollAlignment: AlignmentDirectional.bottomStart,
             today: DateTime(2024, 11, 28),
           ),
         ),
@@ -195,7 +195,7 @@ void main() {
         TestScaffold.app(
           child: FLineCalendar(
             controller: autoDispose(FCalendarController.date()),
-            initialDateAlignment: AlignmentDirectional.bottomEnd,
+            initialScrollAlignment: AlignmentDirectional.bottomEnd,
             today: DateTime(2024, 11, 28),
           ),
         ),
@@ -222,6 +222,17 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/builder.png'));
+    });
+
+    testWidgets('retains same scrolled date when controller changes', (tester) async {
+      final first = FCalendarController.date(initialSelection: DateTime(2025, 4, 23));
+      await tester.pumpWidget(
+        TestScaffold.app(child: FLineCalendar(controller: first, initialScroll: DateTime(2025, 4, 25))),
+      );
+
+      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar()));
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/retains-scroll-offset.png'));
     });
   });
 }

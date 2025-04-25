@@ -65,7 +65,7 @@ class FTappable extends StatefulWidget {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@template forui.foundation.FTappable.onChange}
-  /// Handler called when there is any changes to a tappable's [WidgetState]s.
+  /// Handler called when there are any changes to a tappable's [WidgetState]s.
   ///
   /// It is called before the more specific callbacks, i.e., [onFocusChange].
   ///
@@ -97,7 +97,7 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final VoidCallback? onLongPress;
 
-  /// The builder used to build to create a child with the current state.
+  /// The builder used to create a child with the current state.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   final ValueWidgetBuilder<Set<WidgetState>> builder;

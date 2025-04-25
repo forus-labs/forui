@@ -74,14 +74,22 @@ void main() {
       final first = FDateFieldController(vsync: tester);
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            controller: first,
+            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          ),
         ),
       );
 
       final second = FDateFieldController(vsync: tester);
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            controller: second,
+            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          ),
         ),
       );
 
@@ -210,7 +218,8 @@ void main() {
         final secondController = FDateFieldController(vsync: tester);
         await tester.pumpWidget(TestScaffold.app(child: field(secondController, onChange)));
 
-        secondController.value = DateTime.utc(2024);
+        firstController.value = DateTime.utc(2024);
+        secondController.value = DateTime.utc(2025);
         await tester.pump();
 
         expect(count, 2);

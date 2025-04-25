@@ -1,6 +1,7 @@
 ## 0.11.0 (Next)
 We are experimenting with a new changelog format which groups changes by feature.
 
+
 ### Styles
 We added a CLI to generate styles for Forui widgets. See forui.dev/docs/cli for more information. 
 
@@ -87,6 +88,17 @@ with font icons. In addition, all `iconColor` and `iconSize` style properties ha
 * **Breaking** Replace `FAlertCustomStyle` `iconColor` and `iconSize` with `iconStyle`.
 * **Breaking** Change `FBreadcrumbStyle.iconStyle` from `FIconStyle` to `IconThemeData`.
 * **Breaking** Replace `FCheckboxStateStyle` `iconColor` with `iconStyle`.
+
+
+### `FLineCalendar`
+
+Several updates have been made to `FLineCalendar` to improve usability and consistency.
+
+* Add `FLineCalendar.onChange`.
+* Add `FLineCalendar.initialSelection`.
+* Change `FLineCalendar.controller` to be optional.
+* **Breaking** Rename `FLineCalendar.initialDateAlignment` to `FLineCalendar.initialScrollAlignment`.
+* **Breaking** Rename `FLineCalendar.initial` to `FLineCalendar.initialScroll`.
 
 
 ### `FPopover`

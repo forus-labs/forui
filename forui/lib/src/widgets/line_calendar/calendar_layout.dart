@@ -11,16 +11,18 @@ import 'package:forui/src/widgets/line_calendar/line_calendar_item.dart';
 
 @internal
 class CalendarLayout extends StatefulWidget {
-  final FCalendarController<DateTime?> controller;
+  final FCalendarController<DateTime?>? controller;
   final FLineCalendarStyle style;
   final AlignmentDirectional alignment;
   final double? cacheExtent;
   final TextScaler scale;
   final TextStyle textStyle;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
+  final ValueChanged<DateTime?>? onChange;
   final LocalDate start;
   final LocalDate? end;
-  final LocalDate? initial;
+  final LocalDate? initialScroll;
+  final LocalDate? initialSelection;
   final LocalDate today;
   final BoxConstraints constraints;
 
@@ -32,9 +34,11 @@ class CalendarLayout extends StatefulWidget {
     required this.scale,
     required this.textStyle,
     required this.builder,
+    required this.onChange,
     required this.start,
     required this.end,
-    required this.initial,
+    required this.initialScroll,
+    required this.initialSelection,
     required this.today,
     required this.constraints,
     super.key,
@@ -54,15 +58,18 @@ class CalendarLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('scaler', scale))
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ObjectFlagProperty.has('builder', builder))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
-      ..add(DiagnosticsProperty('initial', initial))
+      ..add(DiagnosticsProperty('initialScroll', initialScroll))
+      ..add(DiagnosticsProperty('initialSelection', initialSelection))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('constraints', constraints));
   }
 }
 
 class _CalendarLayoutState extends State<CalendarLayout> {
+  late FCalendarController<DateTime?> _controller;
   late ScrollController _scrollController;
   late double _width;
 
@@ -71,7 +78,10 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     super.initState();
     _width = _estimateWidth();
 
-    final start = ((widget.initial ?? widget.today).difference(widget.start).inDays) * _width;
+    _controller = widget.controller ?? FCalendarController.date(initialSelection: widget.initialSelection?.toNative());
+    _controller.addValueListener(widget.onChange);
+
+    final start = ((widget.initialScroll ?? widget.today).difference(widget.start).inDays) * _width;
     _scrollController = ScrollController(
       initialScrollOffset: switch (widget.alignment.start) {
         -1 => start,
@@ -86,6 +96,21 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     super.didUpdateWidget(old);
     if (widget.style != old.style || widget.scale != old.scale || widget.textStyle != old.textStyle) {
       _width = _estimateWidth();
+    }
+
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        _controller.removeValueListener(old.onChange);
+      }
+
+      _controller = widget.controller ?? FCalendarController.date(initialSelection: _controller.value);
+      _controller.addValueListener(widget.onChange);
+    } else if (widget.onChange != old.onChange) {
+      _controller
+        ..removeValueListener(old.onChange)
+        ..addValueListener(widget.onChange);
     }
   }
 
@@ -131,7 +156,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
             return Padding(
               padding: widget.style.padding,
               child: Item(
-                controller: widget.controller,
+                controller: _controller,
                 style: widget.style,
                 date: date.toNative(),
                 today: widget.today == date,
@@ -147,6 +172,11 @@ class _CalendarLayoutState extends State<CalendarLayout> {
   @override
   void dispose() {
     _scrollController.dispose();
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller.removeValueListener(widget.onChange);
+    }
     super.dispose();
   }
 }

@@ -22,11 +22,7 @@ A compact calendar component that displays dates in a horizontally scrollable li
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        FLineCalendar(
-          controller: FCalendarController.date(
-            initialSelection: DateTime.now().subtract(const Duration(days: 1)),
-          ),
-        );
+        FLineCalendar(initialSelection: DateTime.now().subtract(const Duration(days: 1)));
         ```
     </Tabs.Tab>
 </Tabs>
@@ -38,12 +34,14 @@ A compact calendar component that displays dates in a horizontally scrollable li
 ```dart copy
 FLineCalendar(
   controller: FCalendarController.date(),
-  initialDateAlignment: AlignmentDirectional.center,
+  initialScrollAlignment: AlignmentDirectional.center,
   cacheExtent: 100,
   builder: (context, data, child) => child!,
+  onChange: (date) => print('Selected date: $date'),
   start: DateTime(1900),
   end: DateTime(2050),
-  initial: DateTime.now(),
+  initialScroll: DateTime.now(),
+  initialSelection: DateTime.now(),
   today: DateTime.now(),
 );
 ```
