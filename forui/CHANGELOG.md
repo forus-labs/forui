@@ -193,7 +193,8 @@ have been renamed to `semanticsLabel` for consistency.
 
 * Replace `FSelectGroupItem` with `FCheckbox.grouped(...)` and `FRadio.grouped(...)`.
 
-* Fix an issue where header spacing appeared in incorrect order.
+* Fix `FDialog` not handling infinitely sized body correctly.
+* Fix `FHeader` spacing appearing in incorrect order.
 * Fix `FResizable` not guarding against precision errors in assertions.
 * Fix `FSelectGroup` not setting its `FormField`'s initial value.
 * Fix `FSelectTileGroup` not setting its `FormField`'s initial value.
