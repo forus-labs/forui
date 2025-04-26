@@ -128,11 +128,7 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
     paginationController.page = value;
   }
 
-  void _handlePageChange() {
-    if (!controller.hasClients) {
-      return;
-    }
-    final page = paginationController.page;
+  void _handlePageChange(int page) {
     final old = controller.page?.round();
     if (old case final old when old != page) {
       if (page == old! + 1 || page == old - 1) {

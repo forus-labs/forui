@@ -17,7 +17,7 @@ Display the current active page and enable navigation between multiple pages.
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
-        FPagination(controller: FPaginationController(pages: 10));
+        FPagination(pages: 10);
         ```
     </Tabs.Tab>
 </Tabs>
@@ -34,6 +34,8 @@ FPagination(
     showEdges: false,
     siblings: 2,
   ),
+  initialPage: 1,
+  pages: 20,
   onChange: () {},
 );
 ```
@@ -141,18 +143,17 @@ FPagination(
             paginationController.page = value;
           }
 
-          void _handlePageChange() {
-            if (!controller.hasClients) {
-              return;
-            }
-            final page = paginationController.page;
+          void _handlePageChange(int page) {
             final old = controller.page?.round();
             if (old case final old when old != page) {
               if (page == old! + 1 || page == old - 1) {
-                controller.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                setState(() {
+                  controller.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                });
               } else {
-                controller.jumpToPage(page);
-
+                setState(() {
+                  controller.jumpToPage(page);
+                });
               }
             }
           }
@@ -194,7 +195,7 @@ FPagination(
                     ),
                   ),
                 ),
-                FPagination(controller: paginationController, onChange: _handlePageChange,),
+                FPagination(controller: paginationController, onChange: _handlePageChange),
               ],
             );
           }
@@ -209,4 +210,23 @@ FPagination(
         ```
     </Tabs.Tab>
 
+</Tabs>
+
+### Simplified Usage
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='pagination' query={{controller: 'simplified'}} height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart copy
+        FPagination(
+          pages: 15,
+          initialPage: 7,
+          onChange: (page) {
+            print('Current page: $page');
+          },
+        );
+        ```
+    </Tabs.Tab>
 </Tabs>

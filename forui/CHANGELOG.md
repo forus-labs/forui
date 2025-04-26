@@ -103,6 +103,17 @@ Several updates have been made to `FLineCalendar` to improve usability and consi
 * **Breaking** Rename `FLineCalendar.initial` to `FLineCalendar.initialScroll`.
 
 
+### `FPagination`
+
+Several updates have been made to `FPagination` to improve usability and flexibility.
+
+* Add `FPagination.initialPage`.
+* Add `FPagination.pages`.
+* Change `FPagination.controller` to be optional.
+* Change `FPagination.onChange` from `VoidCallback?` to `ValueChanged<int>?` to provide the current page number.
+* **Breaking** Change `FPaginationController` to require `pages` parameter.
+
+
 ### `FPopover`
 The traversal-edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
 
