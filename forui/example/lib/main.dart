@@ -1,47 +1,64 @@
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
 
+import 'package:forui_example/sandbox.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  WakelockPlus.enable();
+
   runApp(const Application());
 }
 
-class Application extends StatelessWidget {
+const List<Widget> _pages = [
+  Text('Home'),
+  Text('Categories'),
+  Text('Search'),
+  Text('Settings'),
+  Sandbox(key: PageStorageKey<String>('Sandbox')),
+];
+
+class Application extends StatefulWidget {
   const Application({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    /// Try changing this and hot reloading the application.
-    ///
-    /// To create a custom theme:
-    /// ```shell
-    /// dart forui theme create [theme template].
-    /// ```
-    final theme = FThemes.zinc.dark;
+  State<Application> createState() => _ApplicationState();
+}
 
-    return MaterialApp(
-      localizationsDelegates: FLocalizations.localizationsDelegates,
-      supportedLocales: FLocalizations.supportedLocales,
-      builder: (_, child) => FTheme(data: theme, child: child!),
-      theme: theme.toApproximateMaterialTheme(),
-      // You can replace FScaffold with Material's Scaffold.
-      home: const FScaffold(
-        // TODO: replace with your widget.
-        child: Example(),
-      ),
-    );
+class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
+  int index = 4;
+  final PageStorageBucket _bucket = PageStorageBucket();
+
+  @override
+  void initState() {
+    super.initState();
   }
-}
-
-class Example extends StatefulWidget {
-  const Example({super.key});
 
   @override
-  State<Example> createState() => _ExampleState();
-}
-
-enum Sidebar { recents, home, applications }
-
-class _ExampleState extends State<Example> {
-  @override
-  Widget build(BuildContext context) => Column(children: const [FProgress.circularIcon()]);
+  Widget build(BuildContext context) => MaterialApp(
+    locale: const Locale('en', 'US'),
+    localizationsDelegates: FLocalizations.localizationsDelegates,
+    supportedLocales: FLocalizations.supportedLocales,
+    builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
+    home: PageStorage(
+      bucket: _bucket,
+      child: FScaffold(
+        header: const FHeader(title: Text('Example')),
+        footer: FBottomNavigationBar(
+          index: index,
+          onChange: (index) => setState(() => this.index = index),
+          children: const [
+            FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
+            FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
+          ],
+        ),
+        child: _pages[index],
+      ),
+    ),
+  );
 }
