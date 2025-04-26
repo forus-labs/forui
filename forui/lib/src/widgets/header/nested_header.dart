@@ -116,6 +116,6 @@ final class _FNestedHeader extends FHeader {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('titleAlignment', titleAlignment));
+      ..add(EnumProperty('titleAlignment', titleAlignment as Enum?));
   }
 }
