@@ -29,33 +29,31 @@ sealed class Content extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => IntrinsicWidth(
-    child: Padding(
-      padding: style.padding,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: alignment,
-        children: [
-          if (title case final title?)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Semantics(
-                container: true,
-                child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
-              ),
+  Widget build(BuildContext context) => Padding(
+    padding: style.padding,
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: alignment,
+      children: [
+        if (title case final title?)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Semantics(
+              container: true,
+              child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
             ),
-          if (body case final body?)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 4),
-              child: Semantics(
-                container: true,
-                child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
-              ),
+          ),
+        if (body case final body?)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Semantics(
+              container: true,
+              child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
             ),
-          if (title != null && body != null) const SizedBox(height: 8),
-          _actions(context),
-        ],
-      ),
+          ),
+        if (title != null && body != null) const SizedBox(height: 8),
+        _actions(context),
+      ],
     ),
   );
 
