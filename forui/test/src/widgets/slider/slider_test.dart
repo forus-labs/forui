@@ -98,9 +98,7 @@ void main() {
 
       expect(first, 1);
 
-      await tester.pumpWidget(
-        TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => second++)),
-      );
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => second++)));
 
       controller.selection = FSliderSelection(max: 0.3);
       await tester.pump();
@@ -114,9 +112,7 @@ void main() {
       int second = 0;
 
       final firstController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
-      await tester.pumpWidget(
-        TestScaffold.app(child: FSlider(controller: firstController, onChange: (_) => first++)),
-      );
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: firstController, onChange: (_) => first++)));
 
       firstController.selection = FSliderSelection(max: 0.2);
       await tester.pump();
