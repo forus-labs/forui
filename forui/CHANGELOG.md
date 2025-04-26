@@ -110,7 +110,7 @@ Several updates have been made to `FPagination` to improve usability and flexibi
 * Add `FPagination.initialPage`.
 * Add `FPagination.pages`.
 * Change `FPagination.controller` to be optional.
-* Change `FPagination.onChange` from `VoidCallback?` to `ValueChanged<int>?` to provide the current page number.
+* Change `FPagination.onChange` from `VoidCallback?` to `ValueChanged<int>?`
 * **Breaking** Change `FPaginationController` to require `pages` parameter.
 
 
@@ -173,6 +173,16 @@ A new `onChange` and `onSelect` callback has been added to most Forui widgets.
 * **Breaking** Rename `FSelectTileGroup.groupController` to `FSelectTileGroup.selectController`.
 * **Breaking** Rename `FSelectMenuTile.groupController` to `FSelectMenuTile.selectController`.
 * **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
+
+
+### `FSlider`
+
+Several updates have been made to `FSlider` to improve usability and flexibility.
+
+* Add `FSlider.initialSelection`.
+* Add `FSlider.onChange`.
+* Change `FSlider.controller` to be optional.
+* Fix `FSlider` not setting its `FormField`'s initial value.
 
 
 ### `FTappable`
@@ -257,7 +267,6 @@ have been renamed to `semanticsLabel` for consistency.
 * Fix `FResizable` not guarding against precision errors in assertions.
 * Fix `FSelectGroup` not setting its `FormField`'s initial value.
 * Fix `FSelectTileGroup` not setting its `FormField`'s initial value.
-* Fix `FSlider` not setting its `FormField`'s initial value.
 * Fix `FTextField` not setting its `FormField`'s initial value.
 * Fix `FTextField(...)` not setting the max lines to 1 default.
 
