@@ -62,6 +62,9 @@ class FResizable extends StatefulWidget {
   /// A callback that formats the semantic label for the resizable. Defaults to announcing the extents of both regions.
   final String Function(FResizableRegionData, FResizableRegionData) semanticFormatterCallback;
 
+  /// Handler called when the resizable regions change.
+  final ValueChanged<List<FResizableRegionData>>? onChange;
+
   /// The children that may be resized.
   final List<FResizableRegion> children;
 
@@ -75,6 +78,7 @@ class FResizable extends StatefulWidget {
     this.crossAxisExtent,
     this.resizePercentage = 0.005,
     this.semanticFormatterCallback = _label,
+    this.onChange,
     double? hitRegionExtent,
     super.key,
   }) : assert(
@@ -102,6 +106,7 @@ class FResizable extends StatefulWidget {
       ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
       ..add(PercentProperty('resizePercentage', resizePercentage))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(IterableProperty('children', children));
   }
 }
@@ -113,6 +118,7 @@ class _FResizableState extends State<FResizable> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _update();
+    _controller.addListener(_onChange);
   }
 
   @override
@@ -121,9 +127,12 @@ class _FResizableState extends State<FResizable> {
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
+      } else {
+        old.controller?.removeListener(_onChange);
       }
 
       _controller = widget.controller ?? FResizableController.cascade();
+      _controller.addListener(_onChange);
     }
 
     if (widget.axis != old.axis ||
@@ -154,6 +163,8 @@ class _FResizableState extends State<FResizable> {
     _controller.regions.clear();
     _controller.regions.addAll(regions);
   }
+
+  void _onChange() => widget.onChange?.call(_controller.regions);
 
   @override
   Widget build(BuildContext context) {
@@ -252,6 +263,8 @@ class _FResizableState extends State<FResizable> {
   void dispose() {
     if (widget.controller == null) {
       _controller.dispose();
+    } else {
+      _controller.removeListener(_onChange);
     }
     super.dispose();
   }

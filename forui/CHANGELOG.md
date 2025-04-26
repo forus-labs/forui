@@ -233,7 +233,8 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FBreadcrumbStyle.focusedOutlineStyle`.
 * Add `FDateField.builder`.
 * Add `FDateField.onChange`.
-* Add `FPicker.onChange` callback to respond to changes in the picker's value.
+* Add `FPicker.onChange`.
+* Add `FResizable.onChange`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
 * Add `FTimeField.builder`.
