@@ -104,7 +104,7 @@ class _FPaginationState extends State<FPagination> {
       if (old.controller == null) {
         _controller.dispose();
       } else {
-        _controller.removeListener(_onChange);
+        old.controller?.removeListener(_onChange);
       }
 
       _controller =

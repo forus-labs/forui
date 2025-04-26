@@ -82,6 +82,12 @@ class FPicker extends StatefulWidget {
   /// The style.
   final FPickerStyle? style;
 
+  /// Handler called when the picker indexes change.
+  ///
+  /// The given indexes are not automatically wrap around the wheel's length. This means that the indexes may be greater
+  /// than the wheel's length or even negative.
+  final ValueChanged<List<int>>? onChange;
+
   /// The individual wheels and separators.
   ///
   /// ## Contract
@@ -90,7 +96,7 @@ class FPicker extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FPicker] with several wheels, and optionally, separators.
-  const FPicker({required this.children, this.controller, this.style, super.key});
+  const FPicker({required this.children, this.controller, this.style, this.onChange, super.key});
 
   @override
   State<FPicker> createState() => _FPickerState();
@@ -100,7 +106,8 @@ class FPicker extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }
 
@@ -114,6 +121,7 @@ class _FPickerState extends State<FPicker> {
   void initState() {
     super.initState();
     _createController();
+    _controller.addValueListener(_onChange);
   }
 
   @override
@@ -122,9 +130,12 @@ class _FPickerState extends State<FPicker> {
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
+      } else {
+        old.controller?.removeValueListener(_onChange);
       }
 
       _createController();
+      _controller.addValueListener(_onChange);
     }
   }
 
@@ -154,6 +165,8 @@ class _FPickerState extends State<FPicker> {
       );
     }
   }
+
+  void _onChange(List<int> value) => widget.onChange?.call(value);
 
   @override
   Widget build(BuildContext context) {
@@ -221,6 +234,8 @@ class _FPickerState extends State<FPicker> {
   void dispose() {
     if (widget.controller == null) {
       _controller.dispose();
+    } else {
+      _controller.removeValueListener(_onChange);
     }
     super.dispose();
   }

@@ -226,18 +226,19 @@ have been renamed to `semanticsLabel` for consistency.
 
 
 ### Others
-* Add `FBreadcrumbStyle.focusedOutlineStyle`.
-* Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
-* Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
-* Add `FDateField.builder`.
-* Add `FDateField.onChange`.
-* Add `FTimeField.builder`.
-* Add `FTimeField.onChange`.
-* Add `FLerpBorderRadius`.
 * Add `FButton.onChange`.
 * Add `FButton.onHoverChange`.
 * Add `FButton.selected`.
 * Add `intrinsicWidth` to `FButton(...)`.
+* Add `FBreadcrumbStyle.focusedOutlineStyle`.
+* Add `FDateField.builder`.
+* Add `FDateField.onChange`.
+* Add `FPicker.onChange` callback to respond to changes in the picker's value.
+* Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
+* Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
+* Add `FTimeField.builder`.
+* Add `FTimeField.onChange`.
+* Add `FLerpBorderRadius`.
 
 
 * **Breaking** Change `FAccordion.items` to `FAccordion.children`.
