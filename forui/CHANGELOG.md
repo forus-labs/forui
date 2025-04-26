@@ -84,8 +84,7 @@ Several minor tweaks have been made to `FHeader` to improve usability and consis
 
 * Change `FHeader(title: ...)` to be optional.
 * Change `FHeader.nested(title: ...)` to be optional.
-* Add optional `titleAlignment` to `FHeader.nested`.
-* Refactor `FHeader.nested` so it would support `titleAlignment`
+* Add `titleAlignment` to `FHeader.nested`.
 * **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.
 * **Breaking** Change `FHeader(prefixActions: ...)` to `FHeader(prefixes: ...)`.
 * **Breaking** Change `FHeader(suffixActions: ...)` to `FHeader(suffixes: ...)`.

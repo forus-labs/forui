@@ -26,8 +26,9 @@ class NestedHeaderPage extends Sample {
   @override
   Widget sample(BuildContext context) => FHeader.nested(
     title: const Text('Appointment'),
-    titleAlignment: TextAlign.start,
-    prefixes: [FHeaderAction.back(onPress: () {}), FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+    prefixes: [
+      FHeaderAction.back(onPress: () {}),
+    ],
     suffixes: [
       FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
       FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
