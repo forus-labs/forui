@@ -69,6 +69,7 @@ jobs:
       - run: dart run forui theme create -f
       - run: dart run forui style create -af
       - run: dart run forui style create -af -o ./lib/theme/all_styles.dart
+      - run: dart run forui snippet create material-mapping -f
       - run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
   build-android:
