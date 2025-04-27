@@ -62,5 +62,27 @@ void main() {
       expect(first.disposed, false);
       expect(second.disposed, false);
     });
+
+    testWidgets('separators', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: const FAccordion(
+            children: [
+              SizedBox(height: 100),
+              FAccordionItem(
+                title: Text('Title'),
+                initiallyExpanded: true,
+                child: SizedBox.square(dimension: 1, child: Text('button')),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Title'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('button'), findsOneWidget);
+    });
   });
 }

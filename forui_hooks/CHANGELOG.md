@@ -10,6 +10,7 @@
 * Add `useFSelectMenuTileController`.
 * Add `useFRadioSelectMenuTileController`.
 
+* **Breaking** Change `FPaginationController` to require `pages` parameter.
 * Rename `useFMultiSelectGroupController` to `useFMultiValueNotifier`.
 * Rename `useFRadioSelectGroupController` to `useFRadioMultiValueNotifier`.
 

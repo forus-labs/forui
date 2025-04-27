@@ -51,16 +51,12 @@ class FBottomNavigationBar extends StatelessWidget {
             children: [
               for (final (i, child) in children.indexed)
                 Expanded(
-                  child: FTappable(
-                    style: style.tappableStyle,
-                    focusedOutlineStyle: style.focusedOutlineStyle,
-                    onPress: () => onChange?.call(i),
-                    builder:
-                        (_, states, _) => FBottomNavigationBarData(
-                          itemStyle: style.itemStyle,
-                          states: {...states, if (i == index) WidgetState.selected},
-                          child: child,
-                        ),
+                  child: FBottomNavigationBarData(
+                    itemStyle: style.itemStyle,
+                    index: i,
+                    selected: i == index,
+                    onChange: onChange,
+                    child: child,
                   ),
                 ),
             ],
@@ -97,23 +93,37 @@ class FBottomNavigationBarData extends InheritedWidget {
   /// The item's style.
   final FBottomNavigationBarItemStyle itemStyle;
 
-  /// The current states.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  final Set<WidgetState> states;
+  /// The item's index.
+  final int index;
+
+  /// True if the item is selected.
+  final bool selected;
+
+  /// A callback for when an item is selected.
+  final ValueChanged<int>? onChange;
 
   /// Creates a [FBottomNavigationBarData].
-  const FBottomNavigationBarData({required this.itemStyle, required this.states, required super.child, super.key});
+  const FBottomNavigationBarData({
+    required this.itemStyle,
+    required this.index,
+    required this.selected,
+    required this.onChange,
+    required super.child,
+    super.key,
+  });
 
   @override
-  bool updateShouldNotify(FBottomNavigationBarData old) => old.itemStyle != itemStyle || !setEquals(old.states, states);
+  bool updateShouldNotify(FBottomNavigationBarData old) =>
+      old.itemStyle != itemStyle || old.index != index || old.selected != selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('itemStyle', itemStyle))
-      ..add(IterableProperty('states', states));
+      ..add(IntProperty('index', index))
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected', ifFalse: 'not selected'))
+      ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }
 
@@ -127,14 +137,6 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The item's focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
-  /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
-
   /// The item's style.
   @override
   final FBottomNavigationBarItemStyle itemStyle;
@@ -142,8 +144,6 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   /// Creates a [FBottomNavigationBarStyle].
   const FBottomNavigationBarStyle({
     required this.decoration,
-    required this.focusedOutlineStyle,
-    required this.tappableStyle,
     required this.itemStyle,
     this.padding = const EdgeInsets.all(5),
   });
@@ -152,8 +152,6 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(border: Border(top: BorderSide(color: colors.border)), color: colors.background),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        tappableStyle: style.tappableStyle,
-        itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, typography: typography),
+        itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, typography: typography, style: style),
       );
 }

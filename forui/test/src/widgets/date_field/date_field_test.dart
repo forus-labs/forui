@@ -69,120 +69,224 @@ void main() {
     expect(find.text('15/01/2025'), findsNothing);
   });
 
-  testWidgets('old controller is not disposed', (tester) async {
-    final first = FDateFieldController(vsync: tester);
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
-      ),
-    );
+  group('controller', () {
+    testWidgets('old controller is not disposed', (tester) async {
+      final first = FDateFieldController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField(
+            key: key,
+            controller: first,
+            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          ),
+        ),
+      );
 
-    final second = FDateFieldController(vsync: tester);
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
-      ),
-    );
+      final second = FDateFieldController(vsync: tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField(
+            key: key,
+            controller: second,
+            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          ),
+        ),
+      );
 
-    expect(first.disposed, false);
-    expect(second.disposed, false);
-  });
+      expect(first.disposed, false);
+      expect(second.disposed, false);
+    });
 
-  testWidgets('input only - change locale without changing controller', (tester) async {
-    final controller = FDateFieldController(vsync: tester);
+    testWidgets('input only - change locale without changing controller', (tester) async {
+      final controller = FDateFieldController(vsync: tester);
 
-    await tester.pumpWidget(
-      TestScaffold.app(child: LocaleScaffold(child: FDateField.input(controller: controller, key: key))),
-    );
-    expect(find.text('MM/DD/YYYY'), findsOneWidget);
-    expect(find.text('YYYY. MM. DD.'), findsNothing);
+      await tester.pumpWidget(
+        TestScaffold.app(child: LocaleScaffold(child: FDateField.input(controller: controller, key: key))),
+      );
+      expect(find.text('MM/DD/YYYY'), findsOneWidget);
+      expect(find.text('YYYY. MM. DD.'), findsNothing);
 
-    await tester.tap(find.byType(FButton));
-    await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.tap(find.byType(FButton));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
-    expect(find.text('MM/DD/YYYY'), findsNothing);
-    expect(find.text('YYYY. MM. DD.'), findsOneWidget);
-  });
+      expect(find.text('MM/DD/YYYY'), findsNothing);
+      expect(find.text('YYYY. MM. DD.'), findsOneWidget);
+    });
 
-  testWidgets('calendar only - change locale without changing controller', (tester) async {
-    final controller = FDateFieldController(vsync: tester);
+    testWidgets('calendar only - change locale without changing controller', (tester) async {
+      final controller = FDateFieldController(vsync: tester);
 
-    await tester.pumpWidget(
-      TestScaffold.app(child: LocaleScaffold(child: FDateField.calendar(controller: controller))),
-    );
-    expect(find.text('Pick a date'), findsOneWidget);
-    expect(find.text('날짜 선택'), findsNothing);
+      await tester.pumpWidget(
+        TestScaffold.app(child: LocaleScaffold(child: FDateField.calendar(controller: controller))),
+      );
+      expect(find.text('Pick a date'), findsOneWidget);
+      expect(find.text('날짜 선택'), findsNothing);
 
-    await tester.tap(find.byType(FButton));
-    await tester.pumpAndSettle(const Duration(seconds: 1));
+      await tester.tap(find.byType(FButton));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
-    expect(find.text('Pick a date'), findsNothing);
-    expect(find.text('날짜 선택'), findsOneWidget);
+      expect(find.text('Pick a date'), findsNothing);
+      expect(find.text('날짜 선택'), findsOneWidget);
+    });
+
+    for (final (name, field) in [
+      ('calendar only', (controller, focus) => FDateField.calendar(controller: controller, focusNode: focus)),
+      ('input only', (controller, focus) => FDateField.input(controller: controller, focusNode: focus)),
+      ('both', (controller, focus) => FDateField(controller: controller, focusNode: focus)),
+    ]) {
+      group(name, () {
+        testWidgets('update controller', (tester) async {
+          final first = FDateFieldController(vsync: tester);
+
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
+
+          expect(first.hasListeners, true);
+          expect(first.disposed, false);
+
+          final second = FDateFieldController(vsync: tester);
+
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second, null))));
+
+          expect(first.hasListeners, false);
+          expect(first.calendar.hasListeners, false);
+          expect(first.disposed, false);
+          expect(second.hasListeners, true);
+          expect(second.disposed, false);
+        });
+
+        testWidgets('dispose controller', (tester) async {
+          final controller = FDateFieldController(vsync: tester);
+
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(controller, null))));
+
+          expect(controller.hasListeners, true);
+          expect(controller.disposed, false);
+
+          await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
+
+          expect(controller.hasListeners, false);
+          expect(controller.calendar.hasListeners, false);
+          expect(controller.disposed, false);
+        });
+
+        testWidgets('update focus', (tester) async {
+          final first = FocusNode();
+
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+
+          expect(first.hasListeners, true);
+
+          final second = FocusNode();
+
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, second))));
+
+          expect(first.hasListeners, false);
+          expect(second.hasListeners, true);
+        });
+
+        testWidgets('dispose focus', (tester) async {
+          final first = FocusNode();
+
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+          expect(first.hasListeners, true);
+
+          await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
+          expect(first.hasListeners, false);
+        });
+      });
+    }
   });
 
   for (final (name, field) in [
-    ('calendar only', (controller, focus) => FDateField.calendar(controller: controller, focusNode: focus)),
-    ('input only', (controller, focus) => FDateField.input(controller: controller, focusNode: focus)),
-    ('both', (controller, focus) => FDateField(controller: controller, focusNode: focus)),
+    ('calendar only', (controller, onChange) => FDateField.calendar(controller: controller, onChange: onChange)),
+    ('input only', (controller, onChange) => FDateField.input(controller: controller, onChange: onChange)),
+    ('both', (controller, onChange) => FDateField(controller: controller, onChange: onChange)),
   ]) {
-    group(name, () {
-      testWidgets('update controller', (tester) async {
-        final first = FDateFieldController(vsync: tester);
+    group('$name - onChange', () {
+      testWidgets('when controller changes but onChange callback is the same', (tester) async {
+        int count = 0;
+        void onChange(DateTime? _) => count++;
 
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
+        final firstController = FDateFieldController(vsync: tester);
+        await tester.pumpWidget(TestScaffold.app(child: field(firstController, onChange)));
 
-        expect(first.hasListeners, true);
-        expect(first.disposed, false);
+        firstController.value = DateTime.utc(2023);
+        await tester.pump();
 
-        final second = FDateFieldController(vsync: tester);
+        expect(count, 1);
 
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second, null))));
+        final secondController = FDateFieldController(vsync: tester);
+        await tester.pumpWidget(TestScaffold.app(child: field(secondController, onChange)));
 
-        expect(first.hasListeners, false);
-        expect(first.calendar.hasListeners, false);
-        expect(first.disposed, false);
-        expect(second.hasListeners, true);
-        expect(second.disposed, false);
+        firstController.value = DateTime.utc(2024);
+        secondController.value = DateTime.utc(2025);
+        await tester.pump();
+
+        expect(count, 2);
       });
 
-      testWidgets('dispose controller', (tester) async {
+      testWidgets('when onChange callback changes but controller is the same', (tester) async {
+        int first = 0;
+        int second = 0;
+
         final controller = FDateFieldController(vsync: tester);
+        await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => first++)));
 
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(controller, null))));
+        controller.value = DateTime.utc(2023);
+        await tester.pump();
 
-        expect(controller.hasListeners, true);
-        expect(controller.disposed, false);
+        expect(first, 1);
 
-        await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
+        await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => second++)));
 
-        expect(controller.hasListeners, false);
-        expect(controller.calendar.hasListeners, false);
-        expect(controller.disposed, false);
+        controller.value = DateTime.utc(2024);
+        await tester.pump();
+
+        expect(first, 1);
+        expect(second, 1);
       });
 
-      testWidgets('update focus', (tester) async {
-        final first = FocusNode();
+      testWidgets('when both controller and onChange callback change', (tester) async {
+        int first = 0;
+        int second = 0;
 
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+        final firstController = FDateFieldController(vsync: tester);
+        await tester.pumpWidget(TestScaffold.app(child: field(firstController, (_) => first++)));
 
-        expect(first.hasListeners, true);
+        firstController.value = DateTime.utc(2023);
+        await tester.pump();
+        expect(first, 1);
 
-        final second = FocusNode();
+        final secondController = FDateFieldController(vsync: tester);
+        await tester.pumpWidget(TestScaffold.app(child: field(secondController, (_) => second++)));
 
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, second))));
+        secondController.value = DateTime.utc(2024);
+        await tester.pump();
 
-        expect(first.hasListeners, false);
-        expect(second.hasListeners, true);
+        firstController.value = DateTime.utc(2025);
+        await tester.pump();
+
+        expect(first, 1);
+        expect(second, 1);
       });
 
-      testWidgets('dispose focus', (tester) async {
-        final first = FocusNode();
+      testWidgets('disposed when controller is external', (tester) async {
+        int count = 0;
 
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
-        expect(first.hasListeners, true);
+        final controller = FDateFieldController(vsync: tester);
+        await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => count++)));
 
-        await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
-        expect(first.hasListeners, false);
+        controller.value = DateTime.utc(2023);
+        await tester.pump();
+
+        expect(count, 1);
+
+        await tester.pumpWidget(TestScaffold.app(child: const SizedBox()));
+
+        controller.value = DateTime.utc(2024);
+        await tester.pump();
+
+        expect(count, 1);
       });
     });
   }

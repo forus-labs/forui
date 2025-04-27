@@ -151,6 +151,9 @@ abstract class FTimeField extends StatefulWidget {
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
 
+  /// Handler called when the time changes.
+  final ValueChanged<FTime?>? onChange;
+
   /// {@macro forui.foundation.form_field_properties.onSaved}
   final FormFieldSetter<FTime>? onSaved;
 
@@ -185,6 +188,7 @@ abstract class FTimeField extends StatefulWidget {
     this.label,
     this.description,
     this.enabled = true,
+    this.onChange,
     this.onSaved,
     this.autovalidateMode = AutovalidateMode.onUnfocus,
     this.forceErrorText,
@@ -236,6 +240,7 @@ abstract class FTimeField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
+    ValueChanged<FTime?>? onChange,
     FormFieldSetter<FTime>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
@@ -308,6 +313,7 @@ abstract class FTimeField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
+    ValueChanged<FTime?>? onChange,
     FormFieldSetter<FTime>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
@@ -329,6 +335,7 @@ abstract class FTimeField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText));

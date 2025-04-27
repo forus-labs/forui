@@ -63,6 +63,95 @@ void main() {
     });
   });
 
+  group('onChange', () {
+    testWidgets('when controller changes but onChange callback is the same', (tester) async {
+      int count = 0;
+      void onChange(FSliderSelection _) => count++;
+
+      final firstController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: firstController, onChange: onChange)));
+
+      firstController.selection = FSliderSelection(max: 0.2);
+      await tester.pump();
+
+      expect(count, 1);
+
+      final secondController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: secondController, onChange: onChange)));
+
+      firstController.selection = FSliderSelection(max: 0.3);
+      secondController.selection = FSliderSelection(max: 0.4);
+      await tester.pump();
+
+      expect(count, 2);
+    });
+
+    testWidgets('when onChange callback changes but controller is the same', (tester) async {
+      int first = 0;
+      int second = 0;
+
+      final controller = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => first++)));
+
+      controller.selection = FSliderSelection(max: 0.2);
+      await tester.pump();
+
+      expect(first, 1);
+
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => second++)));
+
+      controller.selection = FSliderSelection(max: 0.3);
+      await tester.pump();
+
+      expect(first, 1);
+      expect(second, 1);
+    });
+
+    testWidgets('when both controller and onChange callback change', (tester) async {
+      int first = 0;
+      int second = 0;
+
+      final firstController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: firstController, onChange: (_) => first++)));
+
+      firstController.selection = FSliderSelection(max: 0.2);
+      await tester.pump();
+
+      expect(first, 1);
+
+      final secondController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(
+        TestScaffold.app(child: FSlider(controller: secondController, onChange: (_) => second++)),
+      );
+
+      firstController.selection = FSliderSelection(max: 0.3);
+      secondController.selection = FSliderSelection(max: 0.4);
+      await tester.pump();
+
+      expect(first, 1);
+      expect(second, 1);
+    });
+
+    testWidgets('disposed when controller is external', (tester) async {
+      int count = 0;
+
+      final controller = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => count++)));
+
+      controller.selection = FSliderSelection(max: 0.2);
+      await tester.pump();
+
+      expect(count, 1);
+
+      await tester.pumpWidget(TestScaffold.app(child: const SizedBox()));
+
+      controller.selection = FSliderSelection(max: 0.3);
+      await tester.pump();
+
+      expect(count, 1);
+    });
+  });
+
   group('value slider tooltip', () {
     Widget slider({
       FSliderSelection? selection,

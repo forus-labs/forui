@@ -260,7 +260,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       divider: widget.divider,
       menu: widget.menu,
       child: FTappable(
-        focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle,
         onPress: _popoverController.toggle,
         child: Padding(
           padding: style.padding,
@@ -303,11 +303,16 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   @override
   final FTappableStyle tappableStyle;
 
+  /// The focused outline style.
+  @override
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// Creates a [FBreadcrumbStyle].
   FBreadcrumbStyle({
     required this.textStyle,
     required this.iconStyle,
     required this.tappableStyle,
+    required this.focusedOutlineStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 5),
   });
 
@@ -333,5 +338,6 @@ final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
         }),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
         tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+        focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }
