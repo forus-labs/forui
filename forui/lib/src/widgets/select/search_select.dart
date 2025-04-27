@@ -23,6 +23,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.label,
     super.description,
     super.enabled,
+    super.onChange,
     super.onSaved,
     super.autovalidateMode,
     super.forceErrorText,

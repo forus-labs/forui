@@ -7,24 +7,10 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class LineCalendarPage extends StatefulSample {
+class LineCalendarPage extends Sample {
   LineCalendarPage({@queryParam super.theme}) : super(maxWidth: 600);
 
   @override
-  State<LineCalendarPage> createState() => _State();
-}
-
-class _State extends StatefulSampleState<LineCalendarPage> {
-  late FCalendarController<DateTime?> controller = FCalendarController.date(
-    initialSelection: DateTime.now().subtract(const Duration(days: 1)),
-  );
-
-  @override
-  Widget sample(BuildContext context) => FLineCalendar(controller: controller);
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+  Widget sample(BuildContext context) =>
+      FLineCalendar(initialSelection: DateTime.now().subtract(const Duration(days: 1)));
 }

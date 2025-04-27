@@ -72,7 +72,7 @@ abstract class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
 
   /// Creates a [FMultiValueNotifier] with a [min] and [max] number of elements allowed. Defaults to no min and max.
   ///
-  /// # Contract:
+  /// ## Contract:
   /// Throws [AssertionError] if:
   /// * [min] < 0.
   /// * [max] < 0.

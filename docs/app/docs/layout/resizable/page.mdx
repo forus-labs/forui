@@ -111,6 +111,7 @@ FResizable(
   axis: Axis.vertical,
   divider: FResizableDivider.dividerWithThumb,
   crossAxisExtent: 400,
+  onChange: (regions) => print('Regions changed: $regions'),
   children: [
     FResizableRegion(
       initialExtent: 200,

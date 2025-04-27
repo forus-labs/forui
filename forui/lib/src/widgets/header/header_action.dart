@@ -13,6 +13,9 @@ class FHeaderAction extends StatelessWidget {
   /// The icon, wrapped in a [IconThemeData].
   final Widget icon;
 
+  /// True if this action is currently selected. Defaults to false.
+  final bool selected;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -21,6 +24,12 @@ class FHeaderAction extends StatelessWidget {
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
+
+  /// {@macro forui.foundation.FTappable.onHoverChange}
+  final ValueChanged<bool>? onHoverChange;
+
+  /// {@macro forui.foundation.FTappable.onChange}
+  final ValueChanged<Set<WidgetState>>? onChange;
 
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
@@ -34,9 +43,12 @@ class FHeaderAction extends StatelessWidget {
     required this.onPress,
     this.style,
     this.semanticsLabel,
+    this.selected = false,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onChange,
     this.onLongPress,
     super.key,
   });
@@ -49,6 +61,8 @@ class FHeaderAction extends StatelessWidget {
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<Set<WidgetState>>? onChange,
     VoidCallback? onLongPress,
     Key? key,
   }) => FHeaderAction(
@@ -59,6 +73,8 @@ class FHeaderAction extends StatelessWidget {
     autofocus: autofocus,
     focusNode: focusNode,
     onFocusChange: onFocusChange,
+    onHoverChange: onHoverChange,
+    onChange: onChange,
     onLongPress: onLongPress,
     key: key,
   );
@@ -70,6 +86,8 @@ class FHeaderAction extends StatelessWidget {
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<Set<WidgetState>>? onChange,
     VoidCallback? onLongPress,
     Key? key,
   }) => FHeaderAction(
@@ -79,6 +97,8 @@ class FHeaderAction extends StatelessWidget {
     autofocus: autofocus,
     focusNode: focusNode,
     onFocusChange: onFocusChange,
+    onHoverChange: onHoverChange,
+    onChange: onChange,
     onLongPress: onLongPress,
     key: key,
   );
@@ -91,11 +111,13 @@ class FHeaderAction extends StatelessWidget {
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
+      onHoverChange: onHoverChange,
+      onChange: onChange,
       focusedOutlineStyle: style.focusedOutlineStyle,
       semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,
-      builder: (context, states, child) => IconTheme(data: style.iconStyle.resolve(states), child: child!),
+      builder: (_, states, child) => IconTheme(data: style.iconStyle.resolve(states), child: child!),
       child: icon,
     );
   }
@@ -107,9 +129,12 @@ class FHeaderAction extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(DiagnosticsProperty('icon', icon))
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }

@@ -27,7 +27,7 @@ class FPaginationController extends FChangeNotifier {
   ///
   /// # Contract:
   /// * Throws [AssertionError] if 0 <= [initialPage] and [initialPage] < [pages].
-  FPaginationController({int initialPage = 0, this.pages = 1, this.showEdges = true, this.siblings = 1})
+  FPaginationController({required this.pages, int initialPage = 0, this.showEdges = true, this.siblings = 1})
     : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
       assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
       assert(

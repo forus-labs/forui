@@ -1,6 +1,7 @@
 ## 0.11.0 (Next)
 We are experimenting with a new changelog format which groups changes by feature.
 
+
 ### Styles
 We added a CLI to generate styles for Forui widgets. See forui.dev/docs/cli for more information. 
 
@@ -26,7 +27,45 @@ concise.
 * **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` to `FDialog.constraints.`.
 
 
-### `FIcon`
+### `FAccordion`
+
+Several minor tweaks have been made to `FHeader` to improve usability and consistency.
+
+* Add `FAccordionItemMixin`.
+* **Breaking** Change `FAccordion.items` to `FAccordion.children`.
+* Change `FAccordion.children` from `List<FAccordionItem>` to `List<FAccordionIteMixin`.
+
+### `FBottomNavigationBar`
+
+The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigationBarItem` to improve
+`FBottomNavigationBarItem`'s usability. Unfortunately, this means that custom navigation items have to implement
+`FTappable` on their own moving forward.
+
+* Add `FBottomNavigationBarItem.autofocus`.
+* Add `FBottomNavigationBarItem.focusNode`.
+* Add `FBottomNavigationBarItem.onFocusChange`.
+* Add `FBottomNavigationBarItem.onHoverChange`.
+* Add `FBottomNavigationBarItem.onChange`.
+* **Breaking** Move `FBottomNavigationBarStyle.tappableStyle` to `FBottomNavigationBarItemStyle.tappableStyle`.
+* **Breaking** Move `FBottomNavigationBarStyle.focusedOutlineStyle` to `FBottomNavigationBarItemStyle.focusedOutlineStyle`.
+
+
+### `FHeader`
+
+Several minor tweaks have been made to `FHeader` to improve usability and consistency.
+
+* Add `FHeaderAction.onHoverChange`.
+* Add `FHeaderAction.onChange`.
+* Add `FHeaderAction.selected`.
+
+* Change `FHeader(title: ...)` to be optional.
+* Change `FHeader.nested(title: ...)` to be optional.
+* **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.
+* **Breaking** Change `FHeader(prefixActions: ...)` to `FHeader(prefixes: ...)`.
+* **Breaking** Change `FHeader(suffixActions: ...)` to `FHeader(suffixes: ...)`.
+
+
+### `FIcon` (removed)
 `FIcon` has been removed in favor of Flutter's `Icon` class. `FIcon` was designed with only monochrome icons in mind
 and is not able to support multicolored icons. This coincides with replacement of `FAssets` with `FIcons` and svg icons 
 with font icons. In addition, all `iconColor` and `iconSize` style properties have been replaced with `IconThemeData`.
@@ -58,12 +97,30 @@ with font icons. In addition, all `iconColor` and `iconSize` style properties ha
 * **Breaking** Change `FBreadcrumbStyle.iconStyle` from `FIconStyle` to `IconThemeData`.
 * **Breaking** Replace `FCheckboxStateStyle` `iconColor` with `iconStyle`.
 
-### `FSelect` (new)
-A select displays a list of options for the user to pick from. It is searchable and supports both async & sync loading
-of items.
 
-* Add `FSelect`.
-* Add `FSelectController`.
+### `FLineCalendar`
+
+Several updates have been made to `FLineCalendar` to improve usability and consistency.
+
+* Add `FLineCalendar.onChange`.
+* Add `FLineCalendar.initialSelection`.
+* Add `FLineCalendar.physics`.
+* Add `FLineCalendar.keyboardDismissBehavior`.
+* Change `FLineCalendar.controller` to be optional.
+* **Breaking** Rename `FLineCalendar.initialDateAlignment` to `FLineCalendar.initialScrollAlignment`.
+* **Breaking** Rename `FLineCalendar.initial` to `FLineCalendar.initialScroll`.
+
+
+### `FPagination`
+
+Several updates have been made to `FPagination` to improve usability and flexibility.
+
+* Add `FPagination.initialPage`.
+* Add `FPagination.pages`.
+* Change `FPagination.controller` to be optional.
+* Change `FPagination.onChange` from `VoidCallback?` to `ValueChanged<int>?`
+* **Breaking** Change `FPaginationController` to require `pages` parameter.
+
 
 ### `FPopover`
 The traversal-edge behavior of `FPopover` and Forui widgets that depend on it have been fixed.
@@ -78,15 +135,13 @@ The traversal-edge behavior of `FPopover` and Forui widgets that depend on it ha
 * **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FSelectMenuTile`.
 
 
-### `FHeader`
+### `FPortal`
+`FPortal` has been reworked to fix a series of longstanding issues.
 
-Several minor tweaks have been made to `FHeader` to improve usability and consistency.
-
-* Change `FHeader(title: ...)` to be optional.
-* Change `FHeader.nested(title: ...)` to be optional.
-* **Breaking** Change `FHeader(actions: ...)` to `FHeader(suffixes: ...)`.
-* **Breaking** Change `FHeader(prefixActions: ...)` to `FHeader(prefixes: ...)`.
-* **Breaking** Change `FHeader(suffixActions: ...)` to `FHeader(suffixes: ...)`.
+* Add `FPortal.useViewPadding`.
+* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`/`Padding`.
+* Fix `FPortal` not updating portals when child's offset/size changes.
+* Fix `FPortal` displaying portal when child is not rendered.
 
 
 ### `FProgress`
@@ -95,6 +150,15 @@ Several minor tweaks have been made to `FHeader` to improve usability and consis
 * Add `FProgress.circularIcon`.
 * **Breaking** Change `FProgressStyle` to `FLinearProgressStyle`.
 * **Breaking** Remove `FButtonSpinner` - use `FProgress.circularIcon(...)` instead.
+
+
+### `FSelect` (new)
+A select displays a list of options for the user to pick from. It is searchable and supports both async & sync loading
+of items.
+
+* Add `FSelect`.
+* Add `FSelectController`.
+
 
 ### `FSelectGroupController` & controller callbacks
 `FSelectGroupController` has been replaced with `FMultiValueNotifier` to allow usage across other non-select group 
@@ -119,13 +183,14 @@ A new `onChange` and `onSelect` callback has been added to most Forui widgets.
 * **Breaking** Rename `FSelectMenuTile.menuTileBuilder` to `FSelectMenuTile.menuBuilder`.
 
 
-### `FPortal`
-`FPortal` has been reworked to fix a series of longstanding issues.
+### `FSlider`
 
-* Add `FPortal.useViewPadding`.
-* Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`/`Padding`.
-* Fix `FPortal` not updating portals when child's offset/size changes.
-* Fix `FPortal` displaying portal when child is not rendered.
+Several updates have been made to `FSlider` to improve usability and flexibility.
+
+* Add `FSlider.initialSelection`.
+* Add `FSlider.onChange`.
+* Change `FSlider.controller` to be optional.
+* Fix `FSlider` not setting its `FormField`'s initial value.
 
 
 ### `FTappable`
@@ -145,8 +210,10 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Add `FPaginationStyle.tappableStyle`.
 * Add `FTileStyle.tappableStyle`.
 
-* Add `FTappable.statesController`.
+* Add `FTappable.onChange`.
+* Add `FTappable.onHoverChange`.
 * Add `FTappableStyle.cursor`.
+* **Breaking** Replace `FTappable.semanticsSelected` with `FTappable.selected`.
 * **Breaking** Rename `FTappable` to `FTappable.static`.
 * **Breaking** Rename `FTappable.animated` to `FTappable`.
 * **Breaking** Split `FTappableData.hovered` into `FTappableData.hovered` and `FTappableData.pressed`.
@@ -155,7 +222,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 
 ### Semantics Labels
 
-We previously used both `semanticsLabel` and `semanticLabel` interchangeably throughout the library. All `semanticLabel`s
+Both `semanticsLabel` and `semanticLabel` were used interchangeably throughout the library. All `semanticLabel`s
 have been renamed to `semanticsLabel` for consistency.
 
 * **Breaking** Rename `semanticLabel` to `semanticsLabel` in `FAvatar.new`.
@@ -177,13 +244,22 @@ have been renamed to `semanticsLabel` for consistency.
 
 
 ### Others
+* Add `FButton.onChange`.
+* Add `FButton.onHoverChange`.
+* Add `FButton.selected`.
+* Add `intrinsicWidth` to `FButton(...)`.
+* Add `FBreadcrumbStyle.focusedOutlineStyle`.
+* Add `FDateField.builder`.
+* Add `FDateField.onChange`.
+* Add `FPicker.onChange`.
+* Add `FResizable.onChange`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
-* Add `FDateField.builder`.
 * Add `FTimeField.builder`.
+* Add `FTimeField.onChange`.
 * Add `FLerpBorderRadius`.
 
-* **Breaking** Change `FAccordion.items` to `FAccordion.children`.
+
 * **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.
 * **Breaking** Change `FButton(label: ...)` to `FBadge(child: ...)`.
 * **Breaking** Change `FSelectGroup(items: ...)` to `FBadge(children: ...)`.
@@ -198,9 +274,8 @@ have been renamed to `semanticsLabel` for consistency.
 * Fix `FResizable` not guarding against precision errors in assertions.
 * Fix `FSelectGroup` not setting its `FormField`'s initial value.
 * Fix `FSelectTileGroup` not setting its `FormField`'s initial value.
-* Fix `FSlider` not setting its `FormField`'s initial value.
 * Fix `FTextField` not setting its `FormField`'s initial value.
-
+* Fix `FTextField(...)` not setting the max lines to 1 default.
 
 ## 0.10.0+1
 

@@ -52,6 +52,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     super.label,
     super.description,
     super.enabled = true,
+    super.onChange,
     super.onSaved,
     super.autovalidateMode = AutovalidateMode.onUnfocus,
     super.forceErrorText,
@@ -87,6 +88,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     super.initState();
     _controller._picker.addListener(_updateTextController);
     _controller.popover.addListener(_updateFocus);
+    _controller.addValueListener(_onChange);
   }
 
   @override
@@ -111,14 +113,18 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       } else {
         _controller._picker.removeListener(_updateTextController);
         _controller.popover.removeListener(_updateFocus);
+        _controller.removeValueListener(_onChange);
       }
 
       _controller = widget.controller ?? FTimeFieldController(vsync: this);
       _controller._picker.addListener(_updateTextController);
       _controller.popover.addListener(_updateFocus);
+      _controller.addValueListener(_onChange);
       _updateTextController();
     }
   }
+
+  void _onChange(FTime? time) => widget.onChange?.call(time);
 
   @override
   void didChangeDependencies() {
@@ -202,6 +208,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     } else {
       _controller._picker.removeListener(_updateTextController);
       _controller.popover.removeListener(_updateFocus);
+      _controller.removeValueListener(_onChange);
     }
 
     if (widget.focusNode == null) {

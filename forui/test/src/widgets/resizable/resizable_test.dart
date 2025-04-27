@@ -143,4 +143,175 @@ void main() {
       expect(controller.disposed, false);
     });
   });
+
+  group('onChange', () {
+    testWidgets('when controller changes but onChange callback is the same', (tester) async {
+      int count = 0;
+      void onChange(List<FResizableRegionData> _) => count++;
+
+      final firstController = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: firstController,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              onChange: onChange,
+              children: [top, bottom],
+            ),
+          ),
+        ),
+      );
+
+      firstController.update(0, 1, 10);
+      await tester.pump();
+
+      expect(count, 1);
+
+      final secondController = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: secondController,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              onChange: onChange,
+              children: [top, bottom],
+            ),
+          ),
+        ),
+      );
+
+      firstController.update(0, 1, 10);
+      secondController.update(0, 1, 10);
+      await tester.pump();
+
+      expect(count, 2);
+    });
+
+    testWidgets('when onChange callback changes but controller is the same', (tester) async {
+      int first = 0;
+      int second = 0;
+
+      final controller = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: controller,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              children: [top, bottom],
+              onChange: (_) => first++,
+            ),
+          ),
+        ),
+      );
+
+      controller.update(0, 1, 10);
+      await tester.pump();
+
+      expect(first, 1);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: controller,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              children: [top, bottom],
+              onChange: (_) => second++,
+            ),
+          ),
+        ),
+      );
+
+      controller.update(0, 1, 10);
+      await tester.pump();
+
+      expect(first, 1);
+      expect(second, 1);
+    });
+
+    testWidgets('when both controller and onChange callback change', (tester) async {
+      int first = 0;
+      int second = 0;
+
+      final firstController = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: firstController,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              children: [top, bottom],
+              onChange: (_) => first++,
+            ),
+          ),
+        ),
+      );
+
+      firstController.update(0, 1, 50);
+      await tester.pump();
+
+      expect(first, 1);
+
+      final secondController = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: secondController,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              children: [top, bottom],
+              onChange: (_) => second++,
+            ),
+          ),
+        ),
+      );
+
+      firstController.update(0, 1, 50);
+      secondController.update(0, 1, 50);
+      await tester.pump();
+
+      expect(first, 1);
+      expect(second, 1);
+    });
+
+    testWidgets('disposed when controller is external', (tester) async {
+      int count = 0;
+
+      final controller = autoDispose(FResizableController.cascade());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Center(
+            child: FResizable(
+              controller: controller,
+              crossAxisExtent: 50,
+              axis: Axis.horizontal,
+              children: [top, bottom],
+              onChange: (_) => count++,
+            ),
+          ),
+        ),
+      );
+
+      controller.update(0, 1, 50);
+      await tester.pump();
+
+      expect(count, 1);
+
+      await tester.pumpWidget(TestScaffold.app(child: const SizedBox()));
+
+      controller.update(0, 1, 50);
+      await tester.pump();
+
+      expect(count, 1);
+    });
+  });
 }

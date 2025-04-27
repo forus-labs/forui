@@ -91,6 +91,9 @@ abstract class FSelect<T> extends StatefulWidget {
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
 
+  /// Handler called when the selected value changes.
+  final ValueChanged<T?>? onChange;
+
   /// {@macro forui.foundation.form_field_properties.onSaved}
   final FormFieldSetter<T>? onSaved;
 
@@ -195,6 +198,7 @@ abstract class FSelect<T> extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
+    ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
@@ -248,6 +252,7 @@ abstract class FSelect<T> extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
+    ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
@@ -287,6 +292,7 @@ abstract class FSelect<T> extends StatefulWidget {
     this.label,
     this.description,
     this.enabled = true,
+    this.onChange,
     this.onSaved,
     this.autovalidateMode = AutovalidateMode.onUnfocus,
     this.forceErrorText,
@@ -328,6 +334,7 @@ abstract class FSelect<T> extends StatefulWidget {
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
@@ -365,6 +372,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
   void initState() {
     super.initState();
     _controller = widget.controller ?? FSelectController(vsync: this);
+    _controller.addValueListener(_onChange);
 
     _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
     _textController.addListener(_updateSelectController);
@@ -387,16 +395,21 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       if (old.controller == null) {
         _controller.dispose();
       } else {
-        old.controller!.popover.removeListener(_updateFocus);
-        old.controller!.removeListener(_updateTextController);
+        old.controller?.removeValueListener(_onChange);
+        old.controller?.popover.removeListener(_updateFocus);
+        old.controller?.removeListener(_updateTextController);
       }
 
       _controller = widget.controller ?? FSelectController(vsync: this);
-      _controller.addListener(_updateTextController);
+      _controller
+        ..addValueListener(_onChange)
+        ..addListener(_updateTextController);
       _controller.popover.addListener(_updateFocus);
       _updateTextController();
     }
   }
+
+  void _onChange(T? value) => widget.onChange?.call(value);
 
   void _updateSelectController() {
     if (_mutating) {
@@ -524,6 +537,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     if (widget.controller == null) {
       _controller.dispose();
     } else {
+      _controller.removeValueListener(_onChange);
       _controller.popover.removeListener(_updateFocus);
       _controller.removeListener(_updateTextController);
     }

@@ -14,7 +14,12 @@ import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 /// * [FPaginationStyle] for customizing the pagination's appearance.
 final class FPagination extends StatefulWidget {
   /// The controller.
-  final FPaginationController controller;
+  ///
+  /// ## Contract
+  /// Throws an [AssertionError] if:
+  /// * Both [controller] and [initialPage] are provided.
+  /// * Both [controller] and [pages] are provided.
+  final FPaginationController? controller;
 
   /// The pagination's style.
   final FPaginationStyle? style;
@@ -29,14 +34,42 @@ final class FPagination extends StatefulWidget {
   /// Defaults to an `FIcons.chevronRight` icon.
   final Widget? next;
 
-  /// A callback triggered when the current page changes.
+  /// The initial page to be displayed.
   ///
-  /// Invoked when the `page` property of the [FPaginationController] is updated.
-  /// Useful for actions like updating the UI or triggering analytics events.
-  final VoidCallback? onChange;
+  /// ## Contract
+  /// Throws an [AssertionError] if:
+  /// * Both [controller] and [initialPage] are provided.
+  /// * [initialPage] is < 0.
+  /// * [initialPage] is >= [pages]
+  final int? initialPage;
+
+  /// The total number of pages.
+  ///
+  /// ## Contract
+  /// Throws an [AssertionError] if:
+  /// * [controller] and [pages] are provided.
+  /// * [pages] is < 0.
+  /// * [pages] is >= [initialPage]
+  final int? pages;
+
+  /// A callback triggered when the current page changes.
+  final ValueChanged<int>? onChange;
 
   /// Creates an [FPagination].
-  const FPagination({required this.controller, this.style, this.previous, this.next, this.onChange, super.key});
+  const FPagination({
+    this.controller,
+    this.style,
+    this.previous,
+    this.next,
+    this.initialPage,
+    this.pages,
+    this.onChange,
+    super.key,
+  }) : assert(controller == null || initialPage == null, 'Cannot provide both controller and initialPage'),
+       assert(controller == null || pages == null, 'Cannot provide both controller and pages'),
+       assert(initialPage == null || initialPage >= 0, 'initialPage must be >= 0'),
+       assert(initialPage == null || pages == null || initialPage < pages, 'initialPage must be < pages'),
+       assert(pages == null || pages > 0, 'pages must be > 0');
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -47,36 +80,43 @@ final class FPagination extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('onPageChange', onChange));
+      ..add(IntProperty('initialPage', initialPage))
+      ..add(IntProperty('pages', pages))
+      ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }
 
 class _FPaginationState extends State<FPagination> {
+  late FPaginationController _controller;
+
   @override
   void initState() {
     super.initState();
-    if (widget.onChange case final onChange?) {
-      widget.controller.addListener(onChange);
-    }
+    _controller =
+        widget.controller ?? FPaginationController(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
+    _controller.addListener(_onChange);
   }
 
   @override
   void didUpdateWidget(covariant FPagination old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller || widget.onChange != old.onChange) {
-      if (old.onChange case final onChange?) {
-        old.controller.removeListener(onChange);
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        old.controller?.removeListener(_onChange);
       }
 
-      if (widget.onChange case final onChange?) {
-        widget.controller.addListener(onChange);
-      }
+      _controller =
+          widget.controller ?? FPaginationController(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
+      _controller.addListener(_onChange);
     }
   }
 
+  void _onChange() => widget.onChange?.call(_controller.page);
+
   @override
   Widget build(BuildContext context) {
-    final controller = widget.controller;
     final style = widget.style ?? context.theme.paginationStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
@@ -85,7 +125,7 @@ class _FPaginationState extends State<FPagination> {
         Action(
           style: style,
           semanticsLabel: localizations.paginationPreviousSemanticsLabel,
-          onPress: controller.previous,
+          onPress: _controller.previous,
           child: const Icon(FIcons.chevronLeft),
         );
     final next =
@@ -93,11 +133,11 @@ class _FPaginationState extends State<FPagination> {
         Action(
           style: style,
           semanticsLabel: localizations.paginationNextSemanticsLabel,
-          onPress: controller.next,
+          onPress: _controller.next,
           child: const Icon(FIcons.chevronRight),
         );
 
-    final lastPage = controller.pages - 1;
+    final lastPage = _controller.pages - 1;
 
     final ellipsis = Padding(
       padding: style.itemPadding,
@@ -108,31 +148,41 @@ class _FPaginationState extends State<FPagination> {
     );
 
     return ListenableBuilder(
-      listenable: controller,
+      listenable: _controller,
       builder: (context, _) {
-        final (start, end) = controller.siblingRange;
+        final (start, end) = _controller.siblingRange;
 
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             previous,
-            if (controller.page > controller.minPagesDisplayedAtEdges) ...[
-              if (controller.showEdges)
-                FPaginationItemData(page: 0, style: style, controller: controller, child: const _Page()),
+            if (_controller.page > _controller.minPagesDisplayedAtEdges) ...[
+              if (_controller.showEdges)
+                FPaginationItemData(page: 0, style: style, controller: _controller, child: const _Page()),
               ellipsis,
             ],
             for (int i = start; i <= end; i++)
-              FPaginationItemData(page: i, style: style, controller: controller, child: const _Page()),
-            if (controller.page < (lastPage - controller.minPagesDisplayedAtEdges)) ...[
+              FPaginationItemData(page: i, style: style, controller: _controller, child: const _Page()),
+            if (_controller.page < (lastPage - _controller.minPagesDisplayedAtEdges)) ...[
               ellipsis,
-              if (controller.showEdges)
-                FPaginationItemData(page: lastPage, style: style, controller: controller, child: const _Page()),
+              if (_controller.showEdges)
+                FPaginationItemData(page: lastPage, style: style, controller: _controller, child: const _Page()),
             ],
             next,
           ],
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller.removeListener(_onChange);
+    }
+    super.dispose();
   }
 }
 
@@ -232,24 +282,22 @@ class _Page extends StatelessWidget {
       child: ListenableBuilder(
         listenable: controller,
         builder:
-            (context, _) => FTappable(
+            (_, _) => FTappable(
               style: style.pageTappableStyle,
               focusedOutlineStyle: focusedOutlineStyle,
+              selected: controller.page == page,
               onPress: () => controller.page = page,
-              builder: (context, states, _) {
-                states = {...states, if (controller.page == page) WidgetState.selected};
-
-                return DecoratedBox(
-                  decoration: style.itemDecoration.resolve(states),
-                  child: ConstrainedBox(
-                    constraints: style.itemConstraints,
-                    child: DefaultTextStyle(
-                      style: style.itemTextStyle.resolve(states),
-                      child: Center(child: Text('${page + 1}')),
+              builder:
+                  (_, states, _) => DecoratedBox(
+                    decoration: style.itemDecoration.resolve(states),
+                    child: ConstrainedBox(
+                      constraints: style.itemConstraints,
+                      child: DefaultTextStyle(
+                        style: style.itemTextStyle.resolve(states),
+                        child: Center(child: Text('${page + 1}')),
+                      ),
                     ),
                   ),
-                );
-              },
             ),
       ),
     );

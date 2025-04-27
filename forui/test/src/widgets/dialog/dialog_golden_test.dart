@@ -38,8 +38,8 @@ void main() {
                   'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                 ),
                 actions: [
-                  FButton(child: const Text('Continue'), onPress: () {}),
-                  FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () {}),
+                  FButton(onPress: () {}, child: const Text('Continue')),
+                  FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
                 ],
               ),
             ),

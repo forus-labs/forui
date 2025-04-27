@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 /// Creates a [FPaginationController] that is automatically disposed.
 FPaginationController useFPaginationController({
-  int pages = 1,
+  required int pages,
   int initialPage = 0,
   bool showEdges = true,
   int siblings = 1,
