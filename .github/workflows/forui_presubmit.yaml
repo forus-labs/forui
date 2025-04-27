@@ -43,8 +43,8 @@ jobs:
 
       - run: flutter pub get
       - run: dart run ../tool/sort.dart forui
-      - run: dart run ./tool/cli_generator/main.dart
       - run: dart run build_runner build --delete-conflicting-outputs
+      - run: dart run ./tool/cli_generator/main.dart
       - run: dart format .
       - run: dart fix --apply
         # We format the code again since the required trailing comma lint fixes causes code to be formatted differently
