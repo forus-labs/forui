@@ -42,13 +42,16 @@ final class _FNestedHeader extends FHeader {
     final hasSuffix = suffixes.isNotEmpty;
     final isCenterAligned = titleAlignment == Alignment.center;
 
-    final titleWidget = Padding(padding: const EdgeInsets.symmetric(horizontal: 10.0), child: DefaultTextStyle.merge(
-      overflow: TextOverflow.fade,
-      maxLines: 1,
-      softWrap: false,
-      style: style.titleTextStyle,
-      child: title,
-    ));
+    final titleWidget = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: DefaultTextStyle.merge(
+        overflow: TextOverflow.fade,
+        maxLines: 1,
+        softWrap: false,
+        style: style.titleTextStyle,
+        child: title,
+      ),
+    );
 
     return SafeArea(
       bottom: false,
