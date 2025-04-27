@@ -27,6 +27,14 @@ concise.
 * **Breaking** Combine `FDialogStyle.minWidth` and `FDialogStyle.maxWidth` to `FDialog.constraints.`.
 
 
+### `FAccordion`
+
+Several minor tweaks have been made to `FHeader` to improve usability and consistency.
+
+* Add `FAccordionItemMixin`.
+* **Breaking** Change `FAccordion.items` to `FAccordion.children`.
+* Change `FAccordion.children` from `List<FAccordionItem>` to `List<FAccordionIteMixin`.
+
 ### `FBottomNavigationBar`
 
 The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigationBarItem` to improve
@@ -252,7 +260,6 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FLerpBorderRadius`.
 
 
-* **Breaking** Change `FAccordion.items` to `FAccordion.children`.
 * **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.
 * **Breaking** Change `FButton(label: ...)` to `FBadge(child: ...)`.
 * **Breaking** Change `FSelectGroup(items: ...)` to `FBadge(children: ...)`.
