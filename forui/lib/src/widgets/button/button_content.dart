@@ -12,8 +12,15 @@ class Content extends StatelessWidget {
   final Widget? prefix;
   final Widget? suffix;
   final Widget child;
+  final bool intrinsicWidth;
 
-  const Content({required this.child, this.prefix, this.suffix, super.key});
+  const Content({
+    required this.prefix,
+    required this.suffix,
+    required this.child,
+    required this.intrinsicWidth,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +33,19 @@ class Content extends StatelessWidget {
           data: contentStyle.iconStyle.resolve(states),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: intrinsicWidth ? MainAxisSize.min : MainAxisSize.max,
             spacing: 10,
             children: [if (prefix case final prefix?) prefix, child, if (suffix case final suffix?) suffix],
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'));
   }
 }
 
@@ -56,13 +70,13 @@ class IconContent extends StatelessWidget {
 final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   /// The [TextStyle].
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<TextStyle> textStyle;
 
   /// The icon's style.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
@@ -95,7 +109,7 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
 final class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
   /// The icon's style.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 

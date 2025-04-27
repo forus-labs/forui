@@ -64,6 +64,27 @@ void main() {
           );
         });
 
+        testWidgets('${theme.name} with intrinsic width', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FButton(
+                style: variant,
+                intrinsicWidth: true,
+                prefix: const Icon(FIcons.circlePlay),
+                suffix: const Icon(FIcons.circleStop),
+                onPress: () {},
+                child: const Text('Button'),
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('button/${theme.name}/$variant/intrinsic-width.png'),
+          );
+        });
+
         testWidgets('${theme.name} enabled and hovered over', (tester) async {
           await tester.pumpWidget(
             TestScaffold(

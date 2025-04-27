@@ -126,4 +126,147 @@ void main() {
       expect(controller.dispose, returnsNormally);
     });
   });
+
+  group('onChange', () {
+    testWidgets('when controller changes but onChange callback is the same', (tester) async {
+      int count = 0;
+      void onChange(String? _) => count++;
+
+      final firstController = FSelectController<String>(vsync: const TestVSync());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            controller: firstController,
+            onChange: onChange,
+            children: [for (final letter in letters) FSelectItem.text(letter)],
+          ),
+        ),
+      );
+
+      firstController.value = 'A';
+      await tester.pump();
+
+      expect(count, 1);
+
+      final secondController = FSelectController<String>(vsync: const TestVSync());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            controller: secondController,
+            onChange: onChange,
+            children: [for (final letter in letters) FSelectItem.text(letter)],
+          ),
+        ),
+      );
+
+      firstController.value = 'B';
+      secondController.value = 'C';
+      await tester.pump();
+
+      expect(count, 2);
+    });
+
+    testWidgets('when onChange callback changes but controller is the same', (tester) async {
+      int first = 0;
+      int second = 0;
+
+      final controller = FSelectController<String>(vsync: const TestVSync());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            controller: controller,
+            onChange: (_) => first++,
+            children: [for (final letter in letters) FSelectItem.text(letter)],
+          ),
+        ),
+      );
+
+      controller.value = 'A';
+      await tester.pump();
+
+      expect(first, 1);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            controller: controller,
+            onChange: (_) => second++,
+            children: [for (final letter in letters) FSelectItem.text(letter)],
+          ),
+        ),
+      );
+
+      controller.value = 'B';
+      await tester.pump();
+
+      expect(first, 1);
+      expect(second, 1);
+    });
+
+    testWidgets('when both controller and onChange callback change', (tester) async {
+      int first = 0;
+      int second = 0;
+
+      final firstController = FSelectController<String>(vsync: const TestVSync());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            controller: firstController,
+            onChange: (_) => first++,
+            children: [for (final letter in letters) FSelectItem.text(letter)],
+          ),
+        ),
+      );
+
+      firstController.value = 'A';
+      await tester.pump();
+
+      expect(first, 1);
+
+      final secondController = FSelectController<String>(vsync: const TestVSync());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            controller: secondController,
+            onChange: (_) => second++,
+            children: [for (final letter in letters) FSelectItem.text(letter)],
+          ),
+        ),
+      );
+
+      firstController.value = 'B';
+      secondController.value = 'C';
+      await tester.pump();
+
+      expect(first, 1);
+      expect(second, 1);
+    });
+
+    testWidgets('disposed when controller is external', (tester) async {
+      int count = 0;
+
+      final controller = FSelectController<String>(vsync: const TestVSync());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            controller: controller,
+            onChange: (_) => count++,
+            children: [for (final letter in letters) FSelectItem.text(letter)],
+          ),
+        ),
+      );
+
+      controller.value = 'A';
+      await tester.pump();
+
+      expect(count, 1);
+
+      await tester.pumpWidget(TestScaffold.app(child: const SizedBox()));
+
+      controller.value = 'B';
+      await tester.pump();
+
+      expect(count, 1);
+    });
+  });
 }

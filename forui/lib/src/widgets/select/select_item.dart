@@ -195,9 +195,9 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
       autofocus: selected || content.first,
       focusNode: _focus,
       behavior: HitTestBehavior.opaque,
+      selected: selected,
       onPress: enabled ? () => onPress(widget.value) : null,
       builder: (_, states, _) {
-        states = {...states, if (selected) WidgetState.selected};
         final child = Semantics(
           selected: selected,
           child: Padding(

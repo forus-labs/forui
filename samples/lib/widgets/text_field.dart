@@ -19,7 +19,6 @@ class TextFieldPage extends Sample {
       label: const Text('Username'),
       hint: 'JaneDoe',
       description: const Text('Please enter your username.'),
-      maxLines: 1,
     ),
   );
 }
@@ -43,7 +42,6 @@ class ClearableTextFieldState extends StatefulSampleState<ClearableTextFieldPage
       label: const Text('Username'),
       hint: 'JaneDoe',
       description: const Text('Please enter your username.'),
-      maxLines: 1,
       clearable: (value) => value.text.isNotEmpty,
     ),
   );

@@ -86,6 +86,7 @@ FTimeField(
   label: Text('Select Time'),
   description: Text('Choose a time'),
   enabled: true,
+  onChange: (time) => print('Time changed: $time'),
   onSaved: (time) => print('Time saved: $time'),
   autovalidateMode: AutovalidateMode.onUnfocus,
 );
@@ -115,6 +116,7 @@ FTimeField.picker(
   directionPadding: false,
   label: Text('Picker Time'),
   description: Text('Select a time from the calendar'),
+  onChange: (time) => print('Time changed: $time'),
   builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
   suffixBuilder: null,

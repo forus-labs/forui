@@ -32,30 +32,31 @@ class Item extends StatelessWidget {
         (context, selected, _) => FTappable(
           style: style.tappableStyle,
           semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
+          selected: selected == date,
           onPress: () => controller.select(date),
-          builder: (context, states, _) {
-            states = {...states, if (selected == date) WidgetState.selected};
-            final child = Stack(
-              children: [
-                Positioned.fill(child: ItemContent(style: style, date: date, states: states)),
-                if (today)
-                  Positioned(
-                    top: 6,
-                    right: 6,
-                    child: Container(
-                      height: 4,
-                      width: 4,
-                      decoration: BoxDecoration(
-                        color: style.todayIndicatorColor.resolve(states),
-                        shape: BoxShape.circle,
+          builder:
+              (context, states, _) => builder(
+                context,
+                (style: style, date: date, today: today, states: states),
+                Stack(
+                  children: [
+                    Positioned.fill(child: ItemContent(style: style, date: date, states: states)),
+                    if (today)
+                      Positioned(
+                        top: 6,
+                        right: 6,
+                        child: Container(
+                          height: 4,
+                          width: 4,
+                          decoration: BoxDecoration(
+                            color: style.todayIndicatorColor.resolve(states),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-              ],
-            );
-
-            return builder(context, (style: style, date: date, today: today, states: states), child);
-          },
+                  ],
+                ),
+              ),
         ),
   );
 

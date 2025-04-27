@@ -65,6 +65,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     super.label,
     super.description,
     super.enabled = true,
+    super.onChange,
     super.onSaved,
     super.autovalidateMode = AutovalidateMode.onUnfocus,
     super.forceErrorText,
@@ -101,6 +102,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     super.initState();
     _controller._calendar.addListener(_updateTextController);
     _controller.calendar.addListener(_updateFocus);
+    _controller.addValueListener(_onChange);
   }
 
   @override
@@ -120,14 +122,18 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       } else {
         _controller._calendar.removeListener(_updateTextController);
         _controller.calendar.removeListener(_updateFocus);
+        _controller.removeValueListener(_onChange);
       }
 
       _controller = widget.controller ?? FDateFieldController(vsync: this);
       _controller._calendar.addListener(_updateTextController);
       _controller.calendar.addListener(_updateFocus);
+      _controller.addValueListener(widget.onChange);
       _updateTextController();
     }
   }
+
+  void _onChange(DateTime? date) => widget.onChange?.call(date);
 
   @override
   void didChangeDependencies() {
@@ -210,6 +216,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     } else {
       _controller._calendar.removeListener(_updateTextController);
       _controller.calendar.removeListener(_updateFocus);
+      _controller.removeValueListener(_onChange);
     }
 
     if (widget.focusNode == null) {

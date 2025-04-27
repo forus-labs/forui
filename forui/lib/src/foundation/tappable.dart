@@ -45,9 +45,6 @@ class FTappable extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
-  /// Used by accessibility frameworks to determine whether this tappable has been selected. Defaults to false.
-  final bool semanticSelected;
-
   /// Whether to replace all child semantics with this node. Defaults to false.
   final bool excludeSemantics;
 
@@ -59,6 +56,26 @@ class FTappable extends StatefulWidget {
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
+
+  /// {@template forui.foundation.FTappable.onHoverChange}
+  /// Handler called when the hover changes.
+  ///
+  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  /// {@endtemplate}
+  final ValueChanged<bool>? onHoverChange;
+
+  /// {@template forui.foundation.FTappable.onChange}
+  /// Handler called when there are any changes to a tappable's [WidgetState]s.
+  ///
+  /// It is called before the more specific callbacks, i.e., [onFocusChange].
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  ///
+  /// Consider using the more specific callbacks if you only need to listen to a specific state change:
+  /// * [onFocusChange] for focus changes.
+  /// * [onHoverChange] for hover changes.
+  /// {@endtemplate}
+  final ValueChanged<Set<WidgetState>>? onChange;
 
   /// True if this tappable is currently selected. Defaults to false.
   final bool selected;
@@ -80,9 +97,9 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final VoidCallback? onLongPress;
 
-  /// The builder used to build to create a child with the current state.
+  /// The builder used to create a child with the current state.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   final ValueWidgetBuilder<Set<WidgetState>> builder;
 
   /// The child.
@@ -99,16 +116,17 @@ class FTappable extends StatefulWidget {
     FTappableStyle? style,
     FFocusedOutlineStyle? focusedOutlineStyle,
     String? semanticsLabel,
-    bool semanticSelected,
     bool excludeSemantics,
     bool autofocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<Set<WidgetState>>? onChange,
     bool selected,
     HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
-    ValueWidgetBuilder<Set<WidgetState>>? builder,
+    ValueWidgetBuilder<Set<WidgetState>> builder,
     Widget? child,
     Key? key,
   }) = AnimatedTappable;
@@ -121,20 +139,20 @@ class FTappable extends StatefulWidget {
     this.style,
     this.focusedOutlineStyle,
     this.semanticsLabel,
-    this.semanticSelected = false,
     this.excludeSemantics = false,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onChange,
     this.selected = false,
     this.behavior = HitTestBehavior.translucent,
     this.onPress,
     this.onLongPress,
+    this.builder = _builder,
     this.child,
-    ValueWidgetBuilder<Set<WidgetState>>? builder,
     super.key,
-  }) : assert(builder != null || child != null, 'Either builder or child must be provided.'),
-       builder = builder ?? _builder;
+  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.');
 
   @override
   State<FTappable> createState() => _FTappableState<FTappable>();
@@ -146,11 +164,12 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(FlagProperty('semanticsSelected', value: semanticSelected, ifTrue: 'selected'))
       ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
@@ -173,6 +192,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
       if (widget.autofocus) WidgetState.focused,
       if (widget._disabled) WidgetState.disabled,
     });
+
+    _controller.addListener(_onChange);
   }
 
   @override
@@ -182,6 +203,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
       ..update(WidgetState.selected, widget.selected)
       ..update(WidgetState.disabled, widget._disabled);
   }
+
+  void _onChange() => widget.onChange?.call(_controller.value);
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +217,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       label: widget.semanticsLabel,
       container: true,
       button: true,
-      selected: widget.semanticSelected,
+      selected: widget.selected,
       excludeSemantics: widget.excludeSemantics,
       child: Focus(
         autofocus: widget.autofocus,
@@ -207,8 +230,13 @@ class _FTappableState<T extends FTappable> extends State<T> {
           cursor: style.cursor.resolve(_controller.value),
           onEnter: (_) {
             setState(() => _controller.update(WidgetState.hovered, true));
+            widget.onHoverChange?.call(true);
           },
-          onExit: (_) => setState(() => _controller.update(WidgetState.hovered, false)),
+          onExit:
+              (_) => setState(() {
+                _controller.update(WidgetState.hovered, false);
+                widget.onHoverChange?.call(false);
+              }),
           // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
           // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
           // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
@@ -286,11 +314,12 @@ class AnimatedTappable extends FTappable {
     super.style,
     super.focusedOutlineStyle,
     super.semanticsLabel,
-    super.semanticSelected,
     super.excludeSemantics,
     super.autofocus,
     super.focusNode,
     super.onFocusChange,
+    super.onHoverChange,
+    super.onChange,
     super.selected,
     super.behavior,
     super.onPress,

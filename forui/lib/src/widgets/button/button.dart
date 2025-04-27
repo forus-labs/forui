@@ -39,10 +39,22 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
+  /// {@macro forui.foundation.FTappable.onHoverChange}
+  final ValueChanged<bool>? onHoverChange;
+
+  /// {@macro forui.foundation.FTappable.onChange}
+  final ValueChanged<Set<WidgetState>>? onChange;
+
+  /// True if this tappable is currently selected. Defaults to false.
+  final bool selected;
+
   /// The child.
   final Widget child;
 
   /// Creates a [FButton] that contains a [prefix], [child], and [suffix].
+  ///
+  /// [intrinsicWidth] is used to determine if the button should take up the minimum width required to fit its content.
+  /// Defaults to false.
   ///
   /// [prefix] and [suffix] are wrapped in [IconThemeData].
   ///
@@ -62,10 +74,14 @@ class FButton extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onChange,
+    this.selected = false,
     Widget? prefix,
     Widget? suffix,
+    bool intrinsicWidth = false,
     super.key,
-  }) : child = Content(prefix: prefix, suffix: suffix, child: child);
+  }) : child = Content(prefix: prefix, suffix: suffix, intrinsicWidth: intrinsicWidth, child: child);
 
   /// Creates a [FButton] that contains only an icon.
   ///
@@ -78,6 +94,9 @@ class FButton extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onChange,
+    this.selected = false,
     super.key,
   }) : child = IconContent(child: child);
 
@@ -90,6 +109,9 @@ class FButton extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onChange,
+    this.selected = false,
     super.key,
   });
 
@@ -110,8 +132,11 @@ class FButton extends StatelessWidget {
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
+      onHoverChange: onHoverChange,
+      onChange: onChange,
       onPress: onPress,
       onLongPress: onLongPress,
+      selected: selected,
       builder:
           (_, states, _) => DecoratedBox(
             decoration: style.decoration.resolve(states),
@@ -129,7 +154,10 @@ class FButton extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(FlagProperty('selected', value: selected, defaultValue: false, ifTrue: 'selected'));
   }
 }
 
@@ -173,13 +201,9 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
 
   /// The box decoration.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<BoxDecoration> decoration;
-
-  /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The content's style.
   @override
@@ -193,13 +217,17 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   @override
   final FTappableStyle tappableStyle;
 
+  /// The focused outline style.
+  @override
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// Creates a [FButtonStyle].
   FButtonStyle({
     required this.decoration,
-    required this.focusedOutlineStyle,
     required this.contentStyle,
     required this.iconContentStyle,
     required this.tappableStyle,
+    required this.focusedOutlineStyle,
   });
 
   /// Creates a [FButtonStyle] that inherits its properties.
