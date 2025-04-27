@@ -310,6 +310,11 @@ final class FThemeData with Diagnosticable, FTransformable {
   ///   // ...
   /// )
   /// ```
+  ///
+  /// This method can be generated inside projects and directly modified by running:
+  /// ```shell
+  /// dart run forui snippet create material-mapping
+  /// ```
   @experimental
   ThemeData toApproximateMaterialTheme() {
     // Material requires height to be 1, certain widgets will overflow without it.
