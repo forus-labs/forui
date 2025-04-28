@@ -54,10 +54,10 @@ final class _FNestedHeader extends FHeader {
       ),
     );
 
-    if (prefixes.isNotEmpty && suffixes.isNotEmpty) {
+    if (prefixes.isNotEmpty || suffixes.isNotEmpty) {
       final spacing = SizedBox(width: style.actionSpacing);
-      final prefixes = Row(children: this.prefixes.expand((action) => [action, spacing]).toList());
-      final suffixes = Row(children: this.suffixes.expand((action) => [spacing, action]).toList());
+      final prefixes = Row(mainAxisSize: MainAxisSize.min, children: separate(this.prefixes, by: [spacing]));
+      final suffixes = Row(mainAxisSize: MainAxisSize.min, children: separate(this.suffixes, by: [spacing]));
 
       // We use a stack as a row could result in the title being off centered if the icon on the left or right is
       // missing/different sizes.
