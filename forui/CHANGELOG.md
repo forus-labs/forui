@@ -253,12 +253,14 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FDateField.onChange`.
 * Add `FPicker.onChange`.
 * Add `FResizable.onChange`.
+* Add `FTabs.physics`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
 * Add `FTimeField.builder`.
 * Add `FTimeField.onChange`.
 * Add `FLerpBorderRadius`.
 
+* **Breaking** Rename `FTabs.onPress` to `FTabs.onChange` to better reflect its purpose.
 
 * **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.
 * **Breaking** Change `FButton(label: ...)` to `FBadge(child: ...)`.

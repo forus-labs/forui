@@ -51,14 +51,19 @@ class FTabs extends StatefulWidget {
   /// * [initialIndex] is not within the range '0 <= initialIndex < tabs.length`.
   final int initialIndex;
 
-  /// Whether this tab bar can be scrolled horizontally.
+  /// Whether this tab bar can be scrolled horizontally. Defaults to false.
   ///
   /// If [scrollable] is true, then each tab is as wide as needed for its label and the entire [TabBar] is scrollable.
   /// Otherwise each tab gets an equal share of the available space.
   final bool scrollable;
 
-  /// A callback that returns the tab that was tapped.
-  final ValueChanged<int>? onPress;
+  /// How the tab should respond to user input.
+  ///
+  /// Defaults to matching platform conventions.
+  final ScrollPhysics? physics;
+
+  /// Handler for when a tab is changed.
+  final ValueChanged<int>? onChange;
 
   /// The tabs.
   final List<FTabEntry> children;
@@ -74,9 +79,10 @@ class FTabs extends StatefulWidget {
     required this.children,
     this.initialIndex = 0,
     this.scrollable = false,
+    this.physics,
     this.controller,
     this.style,
-    this.onPress,
+    this.onChange,
     super.key,
   }) : assert(children.isNotEmpty, 'Must have at least 1 tab provided.'),
        assert(0 <= initialIndex && initialIndex < children.length, 'initialIndex must be within the range of tabs.'),
@@ -94,7 +100,8 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(IntProperty('initialIndex', initialIndex))
       ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'))
-      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(DiagnosticsProperty('physics', physics))
+      ..add(ObjectFlagProperty.has('onPress', onChange))
       ..add(IterableProperty('children', children));
   }
 
@@ -131,7 +138,12 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     }
   }
 
-  void _update() => setState(() {});
+  void _update() {
+    if (!_controller._controller.indexIsChanging) {
+      widget.onChange?.call(_controller.index);
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -150,15 +162,13 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               tabs: [for (final tab in widget.children) _Tab(style: style, label: tab.label)],
               controller: _controller._controller,
               isScrollable: widget.scrollable,
+              physics: widget.physics,
               padding: style.padding,
               indicator: style.indicatorDecoration,
               indicatorSize: style.indicatorSize._value,
               dividerColor: Colors.transparent,
               labelStyle: style.selectedLabelTextStyle,
               unselectedLabelStyle: style.unselectedLabelTextStyle,
-              onTap: (index) {
-                widget.onPress?.call(index);
-              },
             ),
           ),
           SizedBox(height: style.spacing),
