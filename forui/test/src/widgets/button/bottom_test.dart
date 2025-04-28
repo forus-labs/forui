@@ -7,13 +7,13 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  testWidgets('onChange & onHoverChange callback called', (tester) async {
+  testWidgets('onStateChange & onHoverChange callback called', (tester) async {
     Set<WidgetState>? states;
     bool? hovered;
     await tester.pumpWidget(
       TestScaffold(
         child: FButton(
-          onChange: (v) => states = v,
+          onStateChange: (v) => states = v,
           onHoverChange: (v) => hovered = v,
           onPress: () {},
           child: const Text('Button'),

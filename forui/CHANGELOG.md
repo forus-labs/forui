@@ -45,7 +45,7 @@ The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigat
 * Add `FBottomNavigationBarItem.focusNode`.
 * Add `FBottomNavigationBarItem.onFocusChange`.
 * Add `FBottomNavigationBarItem.onHoverChange`.
-* Add `FBottomNavigationBarItem.onChange`.
+* Add `FBottomNavigationBarItem.onStateChange`.
 * **Breaking** Move `FBottomNavigationBarStyle.tappableStyle` to `FBottomNavigationBarItemStyle.tappableStyle`.
 * **Breaking** Move `FBottomNavigationBarStyle.focusedOutlineStyle` to `FBottomNavigationBarItemStyle.focusedOutlineStyle`.
 
@@ -55,7 +55,7 @@ The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigat
 Several minor tweaks have been made to `FHeader` to improve usability and consistency.
 
 * Add `FHeaderAction.onHoverChange`.
-* Add `FHeaderAction.onChange`.
+* Add `FHeaderAction.onStateChange`.
 * Add `FHeaderAction.selected`.
 
 * Change `FHeader(title: ...)` to be optional.
@@ -210,7 +210,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Add `FPaginationStyle.tappableStyle`.
 * Add `FTileStyle.tappableStyle`.
 
-* Add `FTappable.onChange`.
+* Add `FTappable.onStateChange`.
 * Add `FTappable.onHoverChange`.
 * Add `FTappableStyle.cursor`.
 * **Breaking** Replace `FTappable.semanticsSelected` with `FTappable.selected`.
@@ -259,7 +259,7 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
 * Add `FTile.onHoverChange`.
-* Add `FTile.onChange`.
+* Add `FTile.onStateChange`.
 * Add `FTile.selected`.
 * Add `FTimeField.builder`.
 * Add `FTimeField.onChange`.

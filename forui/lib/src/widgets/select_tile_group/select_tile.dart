@@ -130,7 +130,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onChange: onStatesChange,
+      onStateChange: onStatesChange,
     );
   }
 

@@ -72,7 +72,7 @@ class FTile extends StatelessWidget with FTileMixin {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onChange}
-  final ValueChanged<Set<WidgetState>>? onChange;
+  final ValueChanged<Set<WidgetState>>? onStateChange;
 
   /// A callback for when the tile is pressed.
   ///
@@ -112,7 +112,7 @@ class FTile extends StatelessWidget with FTileMixin {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onChange,
+    this.onStateChange,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
     Widget? prefixIcon,
@@ -153,7 +153,7 @@ class FTile extends StatelessWidget with FTileMixin {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onChange: onChange,
+      onStateChange: onStateChange,
       selected: selected,
       onPress: enabled ? (onPress ?? () {}) : null,
       onLongPress: enabled ? (onLongPress ?? () {}) : null,
@@ -201,7 +201,7 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }

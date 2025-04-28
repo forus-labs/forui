@@ -29,7 +29,7 @@ class FHeaderAction extends StatelessWidget {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onChange}
-  final ValueChanged<Set<WidgetState>>? onChange;
+  final ValueChanged<Set<WidgetState>>? onStateChange;
 
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
@@ -48,7 +48,7 @@ class FHeaderAction extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onChange,
+    this.onStateChange,
     this.onLongPress,
     super.key,
   });
@@ -62,7 +62,7 @@ class FHeaderAction extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<Set<WidgetState>>? onChange,
+    ValueChanged<Set<WidgetState>>? onStateChange,
     VoidCallback? onLongPress,
     Key? key,
   }) => FHeaderAction(
@@ -74,7 +74,7 @@ class FHeaderAction extends StatelessWidget {
     focusNode: focusNode,
     onFocusChange: onFocusChange,
     onHoverChange: onHoverChange,
-    onChange: onChange,
+    onStateChange: onStateChange,
     onLongPress: onLongPress,
     key: key,
   );
@@ -87,7 +87,7 @@ class FHeaderAction extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<Set<WidgetState>>? onChange,
+    ValueChanged<Set<WidgetState>>? onStateChange,
     VoidCallback? onLongPress,
     Key? key,
   }) => FHeaderAction(
@@ -98,7 +98,7 @@ class FHeaderAction extends StatelessWidget {
     focusNode: focusNode,
     onFocusChange: onFocusChange,
     onHoverChange: onHoverChange,
-    onChange: onChange,
+    onStateChange: onStateChange,
     onLongPress: onLongPress,
     key: key,
   );
@@ -112,7 +112,7 @@ class FHeaderAction extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onChange: onChange,
+      onStateChange: onStateChange,
       focusedOutlineStyle: style.focusedOutlineStyle,
       semanticsLabel: semanticsLabel,
       onPress: onPress,
@@ -134,7 +134,7 @@ class FHeaderAction extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }

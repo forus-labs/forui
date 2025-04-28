@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  testWidgets('onChange & onHoverChange callback called', (tester) async {
+  testWidgets('onStateChange & onHoverChange callback called', (tester) async {
     Set<WidgetState>? states;
     bool? hovered;
     await tester.pumpWidget(
@@ -15,7 +15,7 @@ void main() {
         child: FHeader.nested(
           title: const Text('Title'),
           prefixes: [
-            FHeaderAction.back(onHoverChange: (v) => hovered = v, onChange: (v) => states = v, onPress: () {}),
+            FHeaderAction.back(onHoverChange: (v) => hovered = v, onStateChange: (v) => states = v, onPress: () {}),
           ],
         ),
       ),
