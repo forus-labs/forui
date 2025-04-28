@@ -22,6 +22,7 @@ class _InputTimeField extends FTimeField {
     this.mouseCursor,
     this.canRequestFocus = true,
     super.controller,
+    super.initialTime,
     super.style,
     super.hour24,
     super.autofocus,
@@ -76,7 +77,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
         old.controller?.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FTimeFieldController(vsync: this);
+      _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
       _controller.addValueListener(_onChange);
     }
   }

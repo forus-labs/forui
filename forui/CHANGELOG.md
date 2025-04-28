@@ -263,6 +263,7 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `intrinsicWidth` to `FButton(...)`.
 * Add `FBreadcrumbStyle.focusedOutlineStyle`.
 * Add `FDateField.builder`.
+* Add `FDateField.initialDate`.
 * Add `FDateField.onChange`.
 * Add `FPicker.onChange`.
 * Add `FResizable.onChange`.
@@ -275,6 +276,7 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FTile.onStateChange`.
 * Add `FTile.selected`.
 * Add `FTimeField.builder`.
+* Add `FTimeField.initialTime`.
 * Add `FTimeField.onChange`.
 * Add `FTimePicker.onChange`.
 * Add `FLerpBorderRadius`.

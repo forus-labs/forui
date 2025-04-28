@@ -29,6 +29,7 @@ class _InputDateField extends FDateField {
     this.calendar = const FDateFieldCalendarProperties(),
     super.controller,
     super.style,
+    super.initialDate,
     super.autofocus,
     super.focusNode,
     super.builder,
@@ -84,7 +85,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         old.controller?.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FDateFieldController(vsync: this);
+      _controller = widget.controller ?? FDateFieldController(vsync: this, initialDate: _controller.value);
       _controller.addValueListener(_onChange);
     }
   }

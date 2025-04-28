@@ -110,10 +110,21 @@ abstract class FTimeField extends StatefulWidget {
       child!;
 
   /// The controller.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * Both [controller] and [initialTime] are provided.
   final FTimeFieldController? controller;
 
   /// The style.
   final FTimeFieldStyle? style;
+
+  /// The initial time.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * Both [controller] and [initialTime] are provided.
+  final FTime? initialTime;
 
   /// True if the time field should use the 24-hour format.
   ///
@@ -179,6 +190,7 @@ abstract class FTimeField extends StatefulWidget {
   const FTimeField._({
     this.controller,
     this.style,
+    this.initialTime,
     this.hour24 = false,
     this.autofocus = false,
     this.focusNode,
@@ -194,7 +206,7 @@ abstract class FTimeField extends StatefulWidget {
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.key,
-  });
+  }) : assert(controller == null || initialTime == null, 'Cannot provide both controller and initialTime.');
 
   /// Creates a time field that wraps a text input field.
   ///
@@ -222,6 +234,7 @@ abstract class FTimeField extends StatefulWidget {
   const factory FTimeField({
     FTimeFieldController? controller,
     FTimeFieldStyle? style,
+    FTime? initialTime,
     bool hour24,
     bool autofocus,
     FocusNode? focusNode,
@@ -289,6 +302,7 @@ abstract class FTimeField extends StatefulWidget {
   const factory FTimeField.picker({
     FTimeFieldController? controller,
     FTimeFieldStyle? style,
+    FTime? initialTime,
     bool hour24,
     DateFormat? format,
     TextAlign textAlign,
@@ -327,6 +341,7 @@ abstract class FTimeField extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('initialTime', initialTime))
       ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -343,5 +358,6 @@ abstract class FTimeField extends StatefulWidget {
 }
 
 abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with SingleTickerProviderStateMixin {
-  late FTimeFieldController _controller = widget.controller ?? FTimeFieldController(vsync: this);
+  late FTimeFieldController _controller =
+      widget.controller ?? FTimeFieldController(vsync: this, initialTime: widget.initialTime);
 }
