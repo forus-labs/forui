@@ -10,9 +10,7 @@ class RatingBasicPage extends Sample {
   RatingBasicPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => const FRating(
-    value: 3,
-  );
+  Widget sample(BuildContext context) => const FRating(value: 3);
 }
 
 @RoutePage()
