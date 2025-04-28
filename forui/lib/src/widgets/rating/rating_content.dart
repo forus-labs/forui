@@ -7,7 +7,6 @@ class _RatingContent extends StatelessWidget {
   final Widget filledIcon;
   final Widget emptyIcon;
   final Widget? halfFilledIcon;
-  final bool allowHalfRating;
   final FRatingStyle style;
   final FThemeData theme;
   final String? semanticsLabel;
@@ -21,7 +20,10 @@ class _RatingContent extends StatelessWidget {
     required this.spacing,
     required this.filledIcon,
     required this.emptyIcon,
-    required this.allowHalfRating, required this.style, required this.theme, required this.autofocus, this.halfFilledIcon,
+    required this.style,
+    required this.theme,
+    required this.autofocus,
+    this.halfFilledIcon,
     this.semanticsLabel,
     this.focusNode,
     this.onFocusChange,
@@ -29,30 +31,26 @@ class _RatingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Semantics(
-      label: semanticsLabel ?? 'Rating: ${value.toStringAsFixed(1)} of $count',
-      child: Focus(
-        focusNode: focusNode,
-        autofocus: autofocus,
-        onFocusChange: onFocusChange,
-        child: LayoutBuilder(
-          builder: (context, constraints) => Row(
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(
-              count,
-              _buildRatingItem,
-            ),
-          ),
-        ),
+    label: semanticsLabel ?? 'Rating: ${value.toStringAsFixed(1)} of $count',
+    child: Focus(
+      focusNode: focusNode,
+      autofocus: autofocus,
+      onFocusChange: onFocusChange,
+      child: LayoutBuilder(
+        builder:
+            (context, constraints) =>
+                Row(mainAxisSize: MainAxisSize.min, children: List.generate(count, _buildRatingItem)),
       ),
-    );
+    ),
+  );
 
   Widget _buildRatingItem(int index) {
     final itemValue = index + 1.0;
     final Widget icon;
-    
+
     if (itemValue <= value) {
       icon = filledIcon;
-    } else if (allowHalfRating && (itemValue - 0.5) <= value && value < itemValue) {
+    } else if (halfFilledIcon != null && (itemValue - 0.5) <= value && value < itemValue) {
       icon = halfFilledIcon ?? filledIcon;
     } else {
       icon = emptyIcon;
@@ -61,10 +59,7 @@ class _RatingContent extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(right: index < count - 1 ? spacing : 0),
       child: IconTheme(
-        data: IconThemeData(
-          color: style.color ?? theme.colors.primary, 
-          size: style.size ?? 24.0
-        ),
+        data: IconThemeData(color: style.color ?? theme.colors.primary, size: style.size ?? 24.0),
         child: icon,
       ),
     );
@@ -73,15 +68,15 @@ class _RatingContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DoubleProperty('value', value))
-    ..add(IntProperty('count', count))
-    ..add(DoubleProperty('spacing', spacing))
-    ..add(DiagnosticsProperty<bool>('allowHalfRating', allowHalfRating))
-    ..add(DiagnosticsProperty<FRatingStyle>('style', style))
-    ..add(DiagnosticsProperty<FThemeData>('theme', theme))
-    ..add(StringProperty('semanticsLabel', semanticsLabel))
-    ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
-    ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
-    ..add(ObjectFlagProperty<ValueChanged<bool>?>.has('onFocusChange', onFocusChange));
+    properties
+      ..add(DoubleProperty('value', value))
+      ..add(IntProperty('count', count))
+      ..add(DoubleProperty('spacing', spacing))
+      ..add(DiagnosticsProperty<FRatingStyle>('style', style))
+      ..add(DiagnosticsProperty<FThemeData>('theme', theme))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
+      ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
+      ..add(ObjectFlagProperty<ValueChanged<bool>?>.has('onFocusChange', onFocusChange));
   }
 }

@@ -32,7 +32,6 @@ class RatingInteractivePageState extends StatefulSampleState<RatingInteractivePa
     children: [
       FRating(
         value: interactiveRatingValue,
-        allowHalfRating: true,
         filledIcon: Icon(FIcons.star, color: context.theme.colors.primary),
         emptyIcon: Icon(FIcons.starOff, color: context.theme.colors.primary),
         halfFilledIcon: Icon(FIcons.starHalf, color: context.theme.colors.primary),

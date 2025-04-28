@@ -22,9 +22,6 @@ class FRating extends StatefulWidget {
   /// Called when the rating value changes.
   final ValueChanged<double>? onStateChanged;
 
-  /// Whether to allow half ratings.
-  final bool allowHalfRating;
-
   /// Whether this rating widget is enabled. Defaults to true.
   final bool enabled;
 
@@ -61,7 +58,6 @@ class FRating extends StatefulWidget {
     this.value = 0.0,
     this.count = 5,
     this.onStateChanged,
-    this.allowHalfRating = false,
     this.enabled = true,
     this.style,
     this.filledIcon = const Icon(FIcons.star, color: Color(0xFFFFD700)), // Gold
@@ -84,7 +80,6 @@ class FRating extends StatefulWidget {
       ..add(DoubleProperty('value', value))
       ..add(IntProperty('count', count))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
-      ..add(FlagProperty('allowHalfRating', value: allowHalfRating, ifTrue: 'allowHalfRating'))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty<ValueChanged<double>?>.has('onStateChanged', onStateChanged))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
@@ -110,7 +105,7 @@ class _FRatingState extends State<FRating> {
     final localPosition = x - (index * itemWidth);
 
     double rating = index + 1.0;
-    if (widget.allowHalfRating && localPosition < itemWidth / 2) {
+    if (widget.halfFilledIcon != null && localPosition < itemWidth / 2) {
       rating -= 0.5;
     }
 
@@ -156,7 +151,6 @@ class _FRatingState extends State<FRating> {
           filledIcon: widget.filledIcon,
           emptyIcon: widget.emptyIcon,
           halfFilledIcon: widget.halfFilledIcon,
-          allowHalfRating: widget.allowHalfRating,
           style: style,
           theme: theme,
           semanticsLabel: widget.semanticsLabel,

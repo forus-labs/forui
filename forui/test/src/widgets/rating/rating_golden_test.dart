@@ -34,7 +34,6 @@ void main() {
               SizedBox(height: 8),
               FRating(
                 value: 2.5,
-                allowHalfRating: true,
                 halfFilledIcon: Icon(Icons.star_half),
               ),
             ],
