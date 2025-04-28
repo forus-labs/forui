@@ -16,10 +16,7 @@ void main() {
   ]) {
     group('$name - constructor', () {
       testWidgets('cannot provide both controller and initialTime', (tester) async {
-        expect(
-          () => constructor(FTimeFieldController(vsync: tester), const FTime()),
-          throwsAssertionError,
-        );
+        expect(() => constructor(FTimeFieldController(vsync: tester), const FTime()), throwsAssertionError);
       });
     });
   }

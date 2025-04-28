@@ -162,9 +162,7 @@ void main() {
 
       expect(first, 3);
 
-      await tester.pumpWidget(
-        TestScaffold.app(child: FTimePicker(controller: controller, onChange: (_) => second++)),
-      );
+      await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller, onChange: (_) => second++)));
 
       controller.value = const FTime(12);
       await tester.pump();

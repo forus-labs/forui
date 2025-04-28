@@ -210,7 +210,11 @@ void main() {
       Set<WidgetState>? states;
       await tester.pumpWidget(
         TestScaffold(
-          child: FTappable(builder: (_, _, _) => const Text('tappable'), onStateChange: (v) => states = v, onPress: () {}),
+          child: FTappable(
+            builder: (_, _, _) => const Text('tappable'),
+            onStateChange: (v) => states = v,
+            onPress: () {},
+          ),
         ),
       );
 

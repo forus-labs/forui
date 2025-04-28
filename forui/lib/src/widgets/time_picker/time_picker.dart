@@ -49,7 +49,6 @@ class FTimePicker extends StatefulWidget {
   /// Handler called when the time picker's time changes.
   final ValueChanged<FTime>? onChange;
 
-
   /// Creates a [FTimePicker].
   const FTimePicker({
     this.controller,
