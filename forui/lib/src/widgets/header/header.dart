@@ -34,8 +34,8 @@ sealed class FHeader extends StatelessWidget {
   /// It is typically used on pages NOT at the root of the navigation stack.
   const factory FHeader.nested({
     Widget title,
-    FHeaderStyle? style,
     AlignmentGeometry titleAlignment,
+    FHeaderStyle? style,
     List<Widget> prefixes,
     List<Widget> suffixes,
     Key? key,
