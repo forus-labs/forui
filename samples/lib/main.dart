@@ -28,7 +28,7 @@ class ForuiSamples extends StatelessWidget {
 @RoutePage()
 class InitialPage extends Sample {
   InitialPage({super.key, super.maxWidth = double.infinity});
-  
+
   @override
   Widget sample(BuildContext context) {
     final router = AutoRouter.of(context);
