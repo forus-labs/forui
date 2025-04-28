@@ -58,7 +58,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onStateChange: this.onStateChange,
+      onStateChange: onStateChange,
       behavior: HitTestBehavior.opaque,
       selected: selected,
       onPress: () => onChange?.call(index),

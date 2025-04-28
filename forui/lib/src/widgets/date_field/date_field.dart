@@ -475,6 +475,7 @@ abstract class FDateField extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('initialDate', initialDate))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('builder', builder))
