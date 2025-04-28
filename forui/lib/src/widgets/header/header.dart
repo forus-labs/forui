@@ -37,7 +37,6 @@ sealed class FHeader extends StatelessWidget {
     Widget title,
     AlignmentGeometry titleAlignment,
     FHeaderStyle? style,
-    AlignmentGeometry titleAlignment,
     List<Widget> prefixes,
     List<Widget> suffixes,
     Key? key,
