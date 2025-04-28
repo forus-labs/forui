@@ -253,6 +253,8 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FDateField.onChange`.
 * Add `FPicker.onChange`.
 * Add `FResizable.onChange`.
+* Add `FSelectTile.onHoverChange`.
+* Add `FSelectTile.onStatesChange`.
 * Add `FTabs.physics`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
