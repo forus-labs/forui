@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 /// A tile that represents a selection in a [FSelectTileGroup]. It should only be used in a [FSelectTileGroup].
 ///
 /// See:
-/// * https://forui.dev/docs/tile/select-tile for working examples.
+/// * https://forui.dev/docs/tile/select-tile-group for working examples.
 /// * [FSelectTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a select tile's appearance.
 class FSelectTile<T> extends StatelessWidget with FTileMixin {
@@ -48,6 +48,12 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
+  /// {@macro forui.foundation.FTappable.onHoverChange}
+  final ValueChanged<bool>? onHoverChange;
+
+  /// {@macro forui.foundation.FTappable.onStateChange}
+  final ValueChanged<Set<WidgetState>>? onStatesChange;
+
   final Widget? _icon;
 
   final bool _suffix;
@@ -66,6 +72,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onStatesChange,
     Widget? suffixIcon,
     super.key,
   }) : _suffix = false,
@@ -85,6 +93,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onStatesChange,
     Widget? prefixIcon,
     super.key,
   }) : _icon = prefixIcon,
@@ -114,10 +124,13 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
       style: style,
       semanticsLabel: semanticsLabel,
       enabled: enabled,
+      selected: selected,
       onPress: () => controller.update(value, add: !selected),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
+      onHoverChange: onHoverChange,
+      onStateChange: onStatesChange,
     );
   }
 
@@ -130,7 +143,9 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onStatesChange', onStatesChange));
   }
 }
 

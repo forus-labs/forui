@@ -81,7 +81,7 @@ FHeader(
       icon: Icon(FIcons.alarmClock),
       onPress: () {},
       onHoverChange: (hovered) {},
-      onChange: (states) {},
+      onStateChange: (states) {},
     ),
     FHeaderAction(
       icon: Icon(FIcons.plus),
@@ -96,11 +96,12 @@ FHeader(
 ```dart copy
 FHeader.nested(
   title: const Text('Title'),
+  titleAlignment: Alignment.center,
   prefixes: [
     FHeaderAction.back(
       onPress: () {},
       onHoverChange: (hovered) {},
-      onChange: (states) {},
+      onStateChange: (states) {},
     ),
   ],
   suffixes: [
@@ -111,7 +112,7 @@ FHeader.nested(
     FHeaderAction.x(
       onPress: () {},
       onHoverChange: (hovered) {},
-      onChange: (states) {},
+      onStateChange: (states) {},
     ),
   ],
 );

@@ -32,12 +32,13 @@ class FTileContent extends StatelessWidget {
     final ltr = Directionality.maybeOf(context) == TextDirection.ltr;
 
     final tile = FTileData.maybeOf(context)!;
-    final FTileData(style: tileStyle, :states) = tile;
+    final FTileData(style: tileStyle, :states, :pressable) = tile;
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
 
-    final FTileStyle(:contentStyle, :dividerStyle) = tileStyle;
-    final (dividerType) = switch (tile.last) {
+    final stateStyle = pressable ? tileStyle.pressable : tileStyle.unpressable;
+    final FTileStateStyle(:contentStyle, :dividerStyle) = stateStyle;
+    final dividerType = switch (tile.last) {
       false => tile.divider,
       true when group.index == group.length - 1 => FTileDivider.none,
       true => group.divider,
@@ -49,7 +50,7 @@ class FTileContent extends StatelessWidget {
       first: tile.index == 0 && group.index == 0,
       last: tile.last && group.index == group.length - 1,
       // We use the left side of the border to draw the focused outline.
-      side: states.contains(WidgetState.focused) ? tileStyle.border.resolve(states).left : null,
+      side: states.contains(WidgetState.focused) ? stateStyle.border.resolve(states).left : null,
       children: [
         if (prefixIcon case final prefix?)
           Padding(

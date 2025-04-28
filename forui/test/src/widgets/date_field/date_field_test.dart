@@ -197,6 +197,19 @@ void main() {
     }
   });
 
+  for (final (name, constructor) in [
+    ('default', (controller, initialDate) => FDateField(controller: controller, initialDate: initialDate)),
+    ('calendar', (controller, initialDate) => FDateField.calendar(controller: controller, initialDate: initialDate)),
+    ('input', (controller, initialDate) => FDateField.input(controller: controller, initialDate: initialDate)),
+  ]) {
+    test('$name - constructor cannot provide both controller and initialDate', () {
+      expect(
+        () => constructor(FDateFieldController(vsync: const TestVSync()), DateTime.utc(2023)),
+        throwsAssertionError,
+      );
+    });
+  }
+
   for (final (name, field) in [
     ('calendar only', (controller, onChange) => FDateField.calendar(controller: controller, onChange: onChange)),
     ('input only', (controller, onChange) => FDateField.input(controller: controller, onChange: onChange)),

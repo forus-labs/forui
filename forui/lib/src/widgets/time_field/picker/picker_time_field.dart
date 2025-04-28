@@ -43,6 +43,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.minuteInterval = 1,
     super.controller,
     super.style,
+    super.initialTime,
     super.hour24,
     super.autofocus,
     super.focusNode,
@@ -116,7 +117,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         _controller.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FTimeFieldController(vsync: this);
+      _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
       _controller._picker.addListener(_updateTextController);
       _controller.popover.addListener(_updateFocus);
       _controller.addValueListener(_onChange);

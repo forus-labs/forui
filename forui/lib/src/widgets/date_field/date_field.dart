@@ -129,10 +129,21 @@ abstract class FDateField extends StatefulWidget {
       child!;
 
   /// The controller.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * Both [controller] and [initialDate] are provided.
   final FDateFieldController? controller;
 
   /// The style.
   final FDateFieldStyle? style;
+
+  /// The initial date.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * Both [controller] and [initialDate] are provided.
+  final DateTime? initialDate;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -195,6 +206,7 @@ abstract class FDateField extends StatefulWidget {
   const FDateField._({
     this.controller,
     this.style,
+    this.initialDate,
     this.autofocus = false,
     this.focusNode,
     this.builder = _fieldBuilder,
@@ -209,7 +221,7 @@ abstract class FDateField extends StatefulWidget {
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.key,
-  });
+  }) : assert(controller == null || initialDate == null, 'Cannot provide both controller and initialDate.');
 
   /// Creates a [FDateField] that allows date selection through both an input field and a calendar popover.
   ///
@@ -249,6 +261,7 @@ abstract class FDateField extends StatefulWidget {
   const factory FDateField({
     FDateFieldController? controller,
     FDateFieldStyle? style,
+    DateTime? initialDate,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
     TextAlign textAlign,
@@ -329,6 +342,7 @@ abstract class FDateField extends StatefulWidget {
   const factory FDateField.calendar({
     FDateFieldController? controller,
     FDateFieldStyle? style,
+    DateTime? initialDate,
     DateFormat? format,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -397,6 +411,7 @@ abstract class FDateField extends StatefulWidget {
   factory FDateField.input({
     FDateFieldController? controller,
     FDateFieldStyle? style,
+    DateTime? initialDate,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
@@ -425,6 +440,7 @@ abstract class FDateField extends StatefulWidget {
   }) => _InputDateField(
     controller: controller,
     style: style,
+    initialDate: initialDate,
     autofocus: autofocus,
     focusNode: focusNode,
     builder: builder,
@@ -459,6 +475,7 @@ abstract class FDateField extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('initialDate', initialDate))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('builder', builder))
@@ -474,5 +491,6 @@ abstract class FDateField extends StatefulWidget {
 }
 
 abstract class _FDateFieldState<T extends FDateField> extends State<T> with SingleTickerProviderStateMixin {
-  late FDateFieldController _controller = widget.controller ?? FDateFieldController(vsync: this);
+  late FDateFieldController _controller =
+      widget.controller ?? FDateFieldController(vsync: this, initialDate: widget.initialDate);
 }

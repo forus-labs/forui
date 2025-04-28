@@ -94,7 +94,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   final Widget? error;
 
   /// The delegate.
-  final SliverChildDelegate Function(FTileStyle style, {required bool enabled}) delegate;
+  final SliverChildDelegate Function(FTileStyle styles, {required bool enabled}) delegate;
 
   /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
   ///
@@ -157,6 +157,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
                  states: {if (!enabled) WidgetState.disabled},
                  index: index,
                  last: index == children.length - 1,
+                 pressable: true,
                  child: child,
                ),
            ]));
@@ -208,6 +209,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
                states: {if (!enabled) WidgetState.disabled},
                index: index,
                last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
+               pressable: true,
                child: tile,
              );
            }, childCount: count));

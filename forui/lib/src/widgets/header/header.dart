@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
+import 'package:sugar/collection.dart';
 
 import 'package:forui/forui.dart';
 
@@ -34,8 +35,8 @@ sealed class FHeader extends StatelessWidget {
   /// It is typically used on pages NOT at the root of the navigation stack.
   const factory FHeader.nested({
     Widget title,
-    FHeaderStyle? style,
     AlignmentGeometry titleAlignment,
+    FHeaderStyle? style,
     List<Widget> prefixes,
     List<Widget> suffixes,
     Key? key,

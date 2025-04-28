@@ -57,6 +57,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.autoHide = true,
     super.controller,
     super.style,
+    super.initialDate,
     super.autofocus,
     super.focusNode,
     super.builder,
@@ -125,7 +126,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         _controller.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FDateFieldController(vsync: this);
+      _controller = widget.controller ?? FDateFieldController(vsync: this, initialDate: _controller.value);
       _controller._calendar.addListener(_updateTextController);
       _controller.calendar.addListener(_updateFocus);
       _controller.addValueListener(widget.onChange);
