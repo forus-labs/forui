@@ -22,7 +22,8 @@ class Content extends StatelessWidget {
     final style = this.style ?? context.theme.cardStyle.contentStyle;
     return Padding(
       padding: style.padding,
-      child: Column(
+      child: Flex(
+        direction: Axis.vertical,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (image case final image?) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),

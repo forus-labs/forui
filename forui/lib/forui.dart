@@ -43,3 +43,4 @@ export 'widgets/tile.dart';
 export 'widgets/time_picker.dart';
 export 'widgets/time_field.dart';
 export 'widgets/tooltip.dart';
+export 'widgets/rating.dart';
