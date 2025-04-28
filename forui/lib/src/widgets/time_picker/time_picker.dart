@@ -46,6 +46,10 @@ class FTimePicker extends StatefulWidget {
   /// Throws [AssertionError] if [minuteInterval] < 1.
   final int minuteInterval;
 
+  /// Handler called when the time picker's time changes.
+  final ValueChanged<FTime>? onChange;
+
+
   /// Creates a [FTimePicker].
   const FTimePicker({
     this.controller,
@@ -53,6 +57,7 @@ class FTimePicker extends StatefulWidget {
     this.hour24 = false,
     this.hourInterval = 1,
     this.minuteInterval = 1,
+    this.onChange,
     super.key,
   }) : assert(0 < hourInterval, 'hourInterval cannot be less than 1'),
        assert(0 < minuteInterval, 'minuteInterval cannot be less than 1');
@@ -68,14 +73,22 @@ class FTimePicker extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('hour24', value: hour24, ifTrue: '24-hour'))
       ..add(IntProperty('hourInterval', hourInterval))
-      ..add(IntProperty('minuteInterval', minuteInterval));
+      ..add(IntProperty('minuteInterval', minuteInterval))
+      ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }
 
 class _FTimePickerState extends State<FTimePicker> {
-  late FTimePickerController _controller = widget.controller ?? FTimePickerController();
+  late FTimePickerController _controller;
   late DateFormat format;
   late int padding;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? FTimePickerController();
+    _controller.addListener(_onChange);
+  }
 
   @override
   void didChangeDependencies() {
@@ -89,13 +102,18 @@ class _FTimePickerState extends State<FTimePicker> {
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
+      } else {
+        old.controller?.removeListener(_onChange);
       }
 
       _controller = widget.controller ?? FTimePickerController();
+      _controller.addListener(_onChange);
     }
 
     _update();
   }
+
+  void _onChange() => widget.onChange?.call(_controller.value);
 
   void _update() {
     final locale = FLocalizations.of(context) ?? FDefaultLocalizations();
@@ -131,6 +149,8 @@ class _FTimePickerState extends State<FTimePicker> {
   void dispose() {
     if (widget.controller == null) {
       _controller.dispose();
+    } else {
+      _controller.removeListener(_onChange);
     }
     super.dispose();
   }

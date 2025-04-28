@@ -263,6 +263,7 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FTile.selected`.
 * Add `FTimeField.builder`.
 * Add `FTimeField.onChange`.
+* Add `FTimePicker.onChange`.
 * Add `FLerpBorderRadius`.
 
 * **Breaking** Rename `FTabs.onPress` to `FTabs.onChange` to better reflect its purpose.
