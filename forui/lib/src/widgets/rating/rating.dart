@@ -100,19 +100,20 @@ class _FRatingState extends State<FRating> {
   bool _isHovering = false;
 
   double _calculateRating(double dx, double totalWidth) {
-    // ignore: always_put_control_body_on_new_line
-    if (totalWidth <= 0) return 0.0;
-    
+    if (totalWidth <= 0) {
+      return 0;
+    }
+
     final itemWidth = totalWidth / widget.count;
     final x = dx.clamp(0.0, totalWidth);
     final index = x ~/ itemWidth;
     final localPosition = x - (index * itemWidth);
-    
+
     double rating = index + 1.0;
     if (widget.allowHalfRating && localPosition < itemWidth / 2) {
       rating -= 0.5;
     }
-    
+
     return rating.clamp(0.0, widget.count.toDouble());
   }
 
@@ -121,7 +122,7 @@ class _FRatingState extends State<FRating> {
     if (box == null) {
       return;
     }
-    
+
     final localPosition = box.globalToLocal(event.position);
     setState(() => _hoverValue = _calculateRating(localPosition.dx, box.size.width));
   }
@@ -130,7 +131,7 @@ class _FRatingState extends State<FRating> {
     final box = context.findRenderObject()! as RenderBox;
     final localPosition = box.globalToLocal(details.globalPosition);
     final rating = _calculateRating(localPosition.dx, box.size.width);
-    
+
     widget.onStateChanged?.call(rating);
     setState(() => _isHovering = false);
   }
@@ -169,9 +170,6 @@ class _FRatingState extends State<FRating> {
 }
 
 /// Internal widget to display the rating content
-
-
-
 
 /// Defines the visual properties for [FRating].
 ///
