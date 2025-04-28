@@ -262,6 +262,7 @@ have been renamed to `semanticsLabel` for consistency.
 
 * **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.
 * **Breaking** Change `FButton(label: ...)` to `FBadge(child: ...)`.
+* **Breaking** Change `FDialog` to not automatically wrap actions in `InstrinicWidth`.
 * **Breaking** Change `FSelectGroup(items: ...)` to `FBadge(children: ...)`.
 * **Breaking** Change `FTabs(tabs: ...)` to `FTabs(children: ...)`.
 * **Breaking** Change `FTabEntry(content: ...)` to `FTabEntry(child: ...)`.

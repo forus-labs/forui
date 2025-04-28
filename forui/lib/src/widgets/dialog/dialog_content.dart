@@ -85,7 +85,7 @@ class HorizontalContent extends Content {
   Widget _actions(BuildContext context) => Row(
     mainAxisAlignment: MainAxisAlignment.end,
     spacing: style.actionSpacing,
-    children: [for (final action in actions) IntrinsicWidth(child: action)],
+    children: [for (final action in actions) action],
   );
 }
 
