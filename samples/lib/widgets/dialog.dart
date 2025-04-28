@@ -20,27 +20,26 @@ class DialogPage extends Sample {
     ];
 
     final style = context.theme.dialogStyle;
-    return IntrinsicWidth(
-      child: FButton(
-        child: const Text('Show Dialog'),
-        onPress:
-            () => showAdaptiveDialog(
-              context: context,
-              builder:
-                  (context) => FTheme(
-                    data: theme,
-                    child: FDialog(
-                      style: style,
-                      direction: direction,
-                      title: const Text('Are you absolutely sure?'),
-                      body: const Text(
-                        'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-                      ),
-                      actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
+    return FButton(
+      intrinsicWidth: true,
+      onPress:
+          () => showAdaptiveDialog(
+            context: context,
+            builder:
+                (context) => FTheme(
+                  data: theme,
+                  child: FDialog(
+                    style: style,
+                    direction: direction,
+                    title: const Text('Are you absolutely sure?'),
+                    body: const Text(
+                      'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
                     ),
+                    actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
                   ),
-            ),
-      ),
+                ),
+          ),
+      child: const Text('Show Dialog'),
     );
   }
 }
