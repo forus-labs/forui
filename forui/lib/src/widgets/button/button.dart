@@ -42,8 +42,8 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onChange}
-  final ValueChanged<Set<WidgetState>>? onChange;
+  /// {@macro forui.foundation.FTappable.onStateChange}
+  final ValueChanged<Set<WidgetState>>? onStateChange;
 
   /// True if this tappable is currently selected. Defaults to false.
   final bool selected;
@@ -75,7 +75,7 @@ class FButton extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onChange,
+    this.onStateChange,
     this.selected = false,
     Widget? prefix,
     Widget? suffix,
@@ -95,7 +95,7 @@ class FButton extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onChange,
+    this.onStateChange,
     this.selected = false,
     super.key,
   }) : child = IconContent(child: child);
@@ -110,7 +110,7 @@ class FButton extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onChange,
+    this.onStateChange,
     this.selected = false,
     super.key,
   });
@@ -133,7 +133,7 @@ class FButton extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onChange: onChange,
+      onStateChange: onStateChange,
       onPress: onPress,
       onLongPress: onLongPress,
       selected: selected,
@@ -156,7 +156,7 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
       ..add(FlagProperty('selected', value: selected, defaultValue: false, ifTrue: 'selected'));
   }
 }

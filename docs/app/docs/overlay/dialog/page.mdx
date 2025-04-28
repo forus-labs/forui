@@ -20,22 +20,21 @@ A modal dialog interrupts the user with important content and expects a response
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        IntrinsicWidth(
-          child: FButton(
-            onPress: () => showAdaptiveDialog(
-              context: context,
-              builder: (context) => FDialog(
-                direction: Axis.horizontal,
-                title: const Text('Are you absolutely sure?'),
-                body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
-                actions: [
-                  FButton(style: FButtonStyle.outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
-                  FButton(onPress: () => Navigator.of(context).pop(), child: const Text('Continue')),
-                ],
-              ),
+        FButton(
+          intrinsicWidth: true,
+          onPress: () => showAdaptiveDialog(
+            context: context,
+            builder: (context) => FDialog(
+              direction: Axis.horizontal,
+              title: const Text('Are you absolutely sure?'),
+              body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
+              actions: [
+                FButton(style: FButtonStyle.outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                FButton(onPress: () => Navigator.of(context).pop(), child: const Text('Continue')),
+              ],
             ),
-            child: const Text('Show Dialog'),
           ),
+          child: const Text('Show Dialog'),
         ),
       ],
     );

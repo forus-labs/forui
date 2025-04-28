@@ -10,6 +10,17 @@ import '../../locale_scaffold.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  for (final (name, constructor) in [
+    ('input only', (controller, time) => FTimeField(controller: controller, initialTime: time)),
+    ('picker only', (controller, time) => FTimeField.picker(controller: controller, initialTime: time)),
+  ]) {
+    group('$name - constructor', () {
+      testWidgets('cannot provide both controller and initialTime', (tester) async {
+        expect(() => constructor(FTimeFieldController(vsync: tester), const FTime()), throwsAssertionError);
+      });
+    });
+  }
+
   for (final (name, field) in [
     ('input only', (controller, focus) => FTimeField(controller: controller, focusNode: focus)),
     ('picker only', (controller, focus) => FTimeField.picker(controller: controller, focusNode: focus)),

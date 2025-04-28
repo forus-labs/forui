@@ -82,11 +82,8 @@ class HorizontalContent extends Content {
   }) : super(alignment: CrossAxisAlignment.start, titleTextAlign: TextAlign.start, bodyTextAlign: TextAlign.start);
 
   @override
-  Widget _actions(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.end,
-    spacing: style.actionSpacing,
-    children: [for (final action in actions) IntrinsicWidth(child: action)],
-  );
+  Widget _actions(BuildContext context) =>
+      Row(mainAxisAlignment: MainAxisAlignment.end, spacing: style.actionSpacing, children: actions);
 }
 
 @internal

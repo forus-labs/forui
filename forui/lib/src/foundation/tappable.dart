@@ -64,7 +64,7 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@template forui.foundation.FTappable.onChange}
+  /// {@template forui.foundation.FTappable.onStateChange}
   /// Handler called when there are any changes to a tappable's [WidgetState]s.
   ///
   /// It is called before the more specific callbacks, i.e., [onFocusChange].
@@ -75,7 +75,7 @@ class FTappable extends StatefulWidget {
   /// * [onFocusChange] for focus changes.
   /// * [onHoverChange] for hover changes.
   /// {@endtemplate}
-  final ValueChanged<Set<WidgetState>>? onChange;
+  final ValueChanged<Set<WidgetState>>? onStateChange;
 
   /// True if this tappable is currently selected. Defaults to false.
   final bool selected;
@@ -121,7 +121,7 @@ class FTappable extends StatefulWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<Set<WidgetState>>? onChange,
+    ValueChanged<Set<WidgetState>>? onStateChange,
     bool selected,
     HitTestBehavior behavior,
     VoidCallback? onPress,
@@ -144,7 +144,7 @@ class FTappable extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onChange,
+    this.onStateChange,
     this.selected = false,
     this.behavior = HitTestBehavior.translucent,
     this.onPress,
@@ -169,7 +169,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
@@ -204,12 +204,13 @@ class _FTappableState<T extends FTappable> extends State<T> {
       ..update(WidgetState.disabled, widget._disabled);
   }
 
-  void _onChange() => widget.onChange?.call(_controller.value);
+  void _onChange() => widget.onStateChange?.call(_controller.value);
 
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.tappableStyle;
-    var tappable = widget.builder(context, _controller.value, widget.child);
+    // TODO: https://github.com/flutter/flutter/issues/167916
+    var tappable = widget.builder(context, {..._controller.value}, widget.child);
 
     tappable = _decorate(context, tappable);
     tappable = Semantics(
@@ -319,7 +320,7 @@ class AnimatedTappable extends FTappable {
     super.focusNode,
     super.onFocusChange,
     super.onHoverChange,
-    super.onChange,
+    super.onStateChange,
     super.selected,
     super.behavior,
     super.onPress,

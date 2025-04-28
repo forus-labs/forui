@@ -38,6 +38,8 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
     tile
       ..style = style
       ..divider = divider
+      ..first = first
+      ..last = last
       ..side = side
       ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
   }
@@ -156,7 +158,7 @@ class _RenderTile extends RenderBox
   @override
   void paint(PaintingContext context, Offset offset) {
     defaultPaint(context, offset);
-    if (side case final side?) {
+    if (_side case final side?) {
       final canvas = context.canvas;
       final focusedOutline =
           Paint()
@@ -166,14 +168,18 @@ class _RenderTile extends RenderBox
             ..blendMode = BlendMode.src
             ..strokeWidth = 1;
 
-      if (!first) {
-        canvas.drawLine(Offset(offset.dx, offset.dy), Offset(offset.dx + size.width, offset.dy), focusedOutline);
+      if (!_first) {
+        canvas.drawLine(
+          Offset(offset.dx, offset.dy + 1),
+          Offset(offset.dx + size.width, offset.dy + 1),
+          focusedOutline,
+        );
       }
 
-      if (!last) {
+      if (!_last) {
         canvas.drawLine(
-          Offset(offset.dx, offset.dy + size.height),
-          Offset(offset.dx + size.width, offset.dy + size.height),
+          Offset(offset.dx, offset.dy + size.height - 1),
+          Offset(offset.dx + size.width, offset.dy + size.height - 1),
           focusedOutline,
         );
       }
@@ -204,7 +210,7 @@ class _RenderTile extends RenderBox
     }
 
     _style = value;
-    markNeedsPaint();
+    markNeedsLayout();
   }
 
   FTileDivider get divider => _divider;
@@ -248,7 +254,7 @@ class _RenderTile extends RenderBox
     }
 
     _side = value;
-    markNeedsPaint();
+    markNeedsLayout();
   }
 
   TextDirection get textDirection => _textDirection;

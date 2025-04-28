@@ -30,8 +30,8 @@ class FBottomNavigationBarItem extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onChange}
-  final ValueChanged<Set<WidgetState>>? onChange;
+  /// {@macro forui.foundation.FTappable.onStateChange}
+  final ValueChanged<Set<WidgetState>>? onStateChange;
 
   /// Creates a [FBottomNavigationBarItem].
   const FBottomNavigationBarItem({
@@ -42,7 +42,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onChange,
+    this.onStateChange,
     super.key,
   });
 
@@ -58,7 +58,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onChange: this.onChange,
+      onStateChange: onStateChange,
       behavior: HitTestBehavior.opaque,
       selected: selected,
       onPress: () => onChange?.call(index),
@@ -90,7 +90,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
       ..add(ObjectFlagProperty.has('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onChange', onChange));
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange));
   }
 }
 

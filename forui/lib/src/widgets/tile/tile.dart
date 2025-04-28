@@ -43,7 +43,7 @@ mixin FTileMixin on Widget {}
 /// See:
 /// * https://forui.dev/docs/tile/tile for working examples.
 /// * [FTileGroup] for grouping tiles together.
-/// * [FTileStyle] for customizing a tile's appearance.
+/// * [FTileStateStyle] for customizing a tile's appearance.
 class FTile extends StatelessWidget with FTileMixin {
   /// The tile's style. Defaults to the ancestor tile group's style if present, and [FThemeData.tileGroupStyle] otherwise.
   ///
@@ -52,6 +52,9 @@ class FTile extends StatelessWidget with FTileMixin {
 
   /// Whether the `FTile` is enabled. Defaults to true.
   final bool? enabled;
+
+  /// True if this tappable is currently selected. Defaults to false.
+  final bool selected;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
@@ -64,6 +67,12 @@ class FTile extends StatelessWidget with FTileMixin {
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
+
+  /// {@macro forui.foundation.FTappable.onHoverChange}
+  final ValueChanged<bool>? onHoverChange;
+
+  /// {@macro forui.foundation.FTappable.onStateChange}
+  final ValueChanged<Set<WidgetState>>? onStateChange;
 
   /// A callback for when the tile is pressed.
   ///
@@ -91,16 +100,19 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The order is reversed for RTL locales.
   ///
   /// ## Overflow behavior
-  /// If the tile's content overflows and `details` is text, `details` will be truncated first. Otherwise, `title` and `subtitle`
-  /// will be truncated first.
+  /// If the tile's content overflows and `details` is text, `details` will be truncated first. Otherwise, `title` and
+  /// `subtitle` will be truncated first.
   FTile({
     required Widget title,
     this.style,
     this.enabled,
+    this.selected = false,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onStateChange,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
     Widget? prefixIcon,
@@ -121,40 +133,35 @@ class FTile extends StatelessWidget with FTileMixin {
   @override
   Widget build(BuildContext context) {
     final tileData = FTileData.maybeOf(context);
+
+    final pressable = onPress != null || onLongPress != null;
     final style = this.style ?? tileData?.style ?? context.theme.tileGroupStyle.tileStyle;
+    final stateStyle = pressable ? style.pressable : style.unpressable;
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
     final tile = extractTile(tileData);
+
     final enabled = this.enabled ?? !tile.states.contains(WidgetState.disabled);
+
     final curveTop = group.index == 0 && tile.index == 0;
     final curveBottom = group.index == group.length - 1 && tile.last;
 
     return FTappable(
-      style: style.tappableStyle,
+      style: stateStyle.tappableStyle,
       semanticsLabel: semanticsLabel,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
-      onPress: onPress,
-      onLongPress: onLongPress,
+      onHoverChange: onHoverChange,
+      onStateChange: onStateChange,
+      selected: selected,
+      onPress: enabled ? (onPress ?? () {}) : null,
+      onLongPress: enabled ? (onLongPress ?? () {}) : null,
       builder: (_, states, _) {
-        if (enabled) {
-          states = {...states}..remove(WidgetState.disabled);
-        } else {
-          states = {...states}..add(WidgetState.disabled);
-        }
-
-        if (onPress == null && onLongPress == null) {
-          states =
-              {...states}
-                ..remove(WidgetState.hovered)
-                ..remove(WidgetState.pressed);
-        }
-
-        final border = style.border.resolve(states);
+        final border = stateStyle.border.resolve(states);
         return DecoratedBox(
           decoration: BoxDecoration(
-            color: style.backgroundColor.resolve(states),
+            color: stateStyle.backgroundColor.resolve(states),
             border: Border(
               top: curveTop ? border.top : BorderSide.none,
               left: border.left,
@@ -162,10 +169,10 @@ class FTile extends StatelessWidget with FTileMixin {
               bottom: curveBottom ? border.top : BorderSide.none,
             ),
             borderRadius: BorderRadius.only(
-              topLeft: curveTop ? style.borderRadius.topLeft : Radius.zero,
-              topRight: curveTop ? style.borderRadius.topRight : Radius.zero,
-              bottomLeft: curveBottom ? style.borderRadius.bottomLeft : Radius.zero,
-              bottomRight: curveBottom ? style.borderRadius.bottomLeft : Radius.zero,
+              topLeft: curveTop ? stateStyle.borderRadius.topLeft : Radius.zero,
+              topRight: curveTop ? stateStyle.borderRadius.topRight : Radius.zero,
+              bottomLeft: curveBottom ? stateStyle.borderRadius.bottomLeft : Radius.zero,
+              bottomRight: curveBottom ? stateStyle.borderRadius.bottomLeft : Radius.zero,
             ),
           ),
           child: FTileData(
@@ -174,6 +181,7 @@ class FTile extends StatelessWidget with FTileMixin {
             states: states,
             index: tile.index,
             last: tile.last,
+            pressable: pressable,
             child: child,
           ),
         );
@@ -187,12 +195,15 @@ class FTile extends StatelessWidget with FTileMixin {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(StringProperty('semanticsLabel', semanticsLabel, defaultValue: null, quoted: false))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(ObjectFlagProperty('onPress', onPress, ifPresent: 'onPress'))
-      ..add(ObjectFlagProperty('onLongPress', onLongPress, ifPresent: 'onLongPress'));
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onChange', onStateChange))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }
 }
 
@@ -220,7 +231,7 @@ class FTileData extends InheritedWidget {
 
   /// The currently active states.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   final Set<WidgetState> states;
 
   /// The tile's index in the current group.
@@ -229,6 +240,9 @@ class FTileData extends InheritedWidget {
   /// True if the tile is the last in the group.
   final bool last;
 
+  /// True if the tile is pressable.
+  final bool pressable;
+
   /// Creates a [FTileData].
   const FTileData({
     required this.style,
@@ -236,6 +250,7 @@ class FTileData extends InheritedWidget {
     required this.states,
     required this.index,
     required this.last,
+    required this.pressable,
     required super.child,
     super.key,
   });
@@ -256,15 +271,77 @@ class FTileData extends InheritedWidget {
       ..add(EnumProperty('divider', divider))
       ..add(IterableProperty('states', states))
       ..add(IntProperty('index', index))
-      ..add(FlagProperty('last', value: last, ifTrue: 'last'));
+      ..add(FlagProperty('last', value: last, ifTrue: 'last'))
+      ..add(FlagProperty('pressable', value: pressable, ifTrue: 'pressable'));
   }
 }
 
-/// A [FTile]'s style.
-final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
+/// A tile's style.
+class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
+  /// A pressable tile's style.
+  @override
+  final FTileStateStyle pressable;
+
+  /// A unpressable tile's style.
+  @override
+  final FTileStateStyle unpressable;
+
+  /// Creates a [FTileStyle].
+  FTileStyle({required this.pressable, required this.unpressable});
+
+  /// Creates a [FTileStyle] that inherits its properties.
+  factory FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final border = FWidgetStateMap({
+      WidgetState.focused: Border.all(width: style.borderWidth, color: colors.primary),
+      WidgetState.any: Border.all(width: style.borderWidth, color: colors.border),
+    });
+
+    final divider = FWidgetStateMap({
+      WidgetState.any: FDividerStyle(color: colors.border, width: style.borderWidth, padding: EdgeInsets.zero),
+    });
+
+    return FTileStyle(
+      pressable: FTileStateStyle(
+        border: border,
+        borderRadius: style.borderRadius,
+        backgroundColor: FWidgetStateMap({
+          WidgetState.disabled: colors.disable(colors.secondary),
+          WidgetState.hovered: colors.secondary,
+          WidgetState.any: colors.background,
+        }),
+        dividerStyle: divider,
+        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
+        tappableStyle: style.tappableStyle.copyWith(
+          animationTween: FTappableAnimations.none,
+          pressedEnterDuration: Duration.zero,
+          pressedExitDuration: const Duration(milliseconds: 25),
+        ),
+      ),
+      unpressable: FTileStateStyle(
+        border: border,
+        borderRadius: style.borderRadius,
+        backgroundColor: FWidgetStateMap({
+          WidgetState.disabled: colors.disable(colors.secondary),
+          WidgetState.any: colors.background,
+        }),
+        dividerStyle: divider,
+        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
+        tappableStyle: style.tappableStyle.copyWith(
+          cursor: FWidgetStateMap.all(MouseCursor.defer),
+          animationTween: FTappableAnimations.none,
+          pressedEnterDuration: Duration.zero,
+          pressedExitDuration: const Duration(milliseconds: 25),
+        ),
+      ),
+    );
+  }
+}
+
+/// A [FTile]'s state style.
+class FTileStateStyle with Diagnosticable, _$FTileStateStyleFunctions {
   /// The tile's border.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<Border> border;
 
@@ -274,13 +351,13 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
 
   /// The tile's background color.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<Color> backgroundColor;
 
   /// The divider's style.
   ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<FDividerStyle> dividerStyle;
 
@@ -292,8 +369,8 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   @override
   final FTappableStyle tappableStyle;
 
-  /// Creates a [FTileStyle].
-  FTileStyle({
+  /// Creates a [FTileStateStyle].
+  FTileStateStyle({
     required this.border,
     required this.borderRadius,
     required this.backgroundColor,
@@ -301,28 +378,4 @@ final class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
     required this.contentStyle,
     required this.tappableStyle,
   });
-
-  /// Creates a [FTileStyle] that inherits its properties.
-  FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        border: FWidgetStateMap({
-          WidgetState.focused: Border.all(width: style.borderWidth, color: colors.primary),
-          WidgetState.any: Border.all(width: style.borderWidth, color: colors.border),
-        }),
-        borderRadius: style.borderRadius,
-        backgroundColor: FWidgetStateMap({
-          WidgetState.disabled: colors.disable(colors.secondary),
-          WidgetState.hovered: colors.secondary,
-          WidgetState.any: colors.background,
-        }),
-        dividerStyle: FWidgetStateMap({
-          WidgetState.any: FDividerStyle(color: colors.border, width: style.borderWidth, padding: EdgeInsets.zero),
-        }),
-        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
-        tappableStyle: style.tappableStyle.copyWith(
-          animationTween: FTappableAnimations.none,
-          pressedEnterDuration: Duration.zero,
-          pressedExitDuration: const Duration(milliseconds: 25),
-        ),
-      );
 }

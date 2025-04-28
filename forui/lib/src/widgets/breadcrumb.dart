@@ -90,8 +90,17 @@ class FBreadcrumbItemData extends InheritedWidget {
 /// A breadcrumb item.
 abstract interface class FBreadcrumbItem extends Widget {
   /// Creates a crumb that typically represents a single item in the navigation path.
-  factory FBreadcrumbItem({required Widget child, bool current = false, VoidCallback? onPress, Key? key}) =>
-      _Crumb(current: current, onPress: onPress, key: key, child: child);
+  const factory FBreadcrumbItem({
+    required Widget child,
+    bool current,
+    bool autofocus,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<Set<WidgetState>>? onStateChange,
+    VoidCallback? onPress,
+    Key? key,
+  }) = _Crumb;
 
   /// Creates a collapsed crumb.
   ///
@@ -114,6 +123,8 @@ abstract interface class FBreadcrumbItem extends Widget {
     bool autofocus,
     FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<Set<WidgetState>>? onStateChange,
     TraversalEdgeBehavior traversalEdgeBehavior,
     String? semanticsLabel,
     Key? key,
@@ -123,10 +134,25 @@ abstract interface class FBreadcrumbItem extends Widget {
 // ignore: avoid_implementing_value_types
 class _Crumb extends StatelessWidget implements FBreadcrumbItem {
   final bool current;
+  final bool autofocus;
+  final FocusNode? focusNode;
+  final ValueChanged<bool>? onFocusChange;
+  final ValueChanged<bool>? onHoverChange;
+  final ValueChanged<Set<WidgetState>>? onStateChange;
   final VoidCallback? onPress;
   final Widget child;
 
-  const _Crumb({required this.child, this.onPress, this.current = false, super.key});
+  const _Crumb({
+    required this.child,
+    this.onPress,
+    this.current = false,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    this.onHoverChange,
+    this.onStateChange,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +174,11 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
     super.debugFillProperties(properties);
     properties
       ..add(FlagProperty('current', value: current, ifTrue: 'current'))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress));
   }
 }
@@ -170,6 +201,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final bool autofocus;
   final FocusScopeNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
+  final ValueChanged<bool>? onHoverChange;
+  final ValueChanged<Set<WidgetState>>? onStateChange;
   final TraversalEdgeBehavior traversalEdgeBehavior;
   final String? semanticsLabel;
 
@@ -191,6 +224,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onStateChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     super.key,
   });
@@ -217,6 +252,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(StringProperty('semanticsLabel', semanticsLabel));
   }

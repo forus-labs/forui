@@ -45,9 +45,22 @@ The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigat
 * Add `FBottomNavigationBarItem.focusNode`.
 * Add `FBottomNavigationBarItem.onFocusChange`.
 * Add `FBottomNavigationBarItem.onHoverChange`.
-* Add `FBottomNavigationBarItem.onChange`.
+* Add `FBottomNavigationBarItem.onStateChange`.
 * **Breaking** Move `FBottomNavigationBarStyle.tappableStyle` to `FBottomNavigationBarItemStyle.tappableStyle`.
 * **Breaking** Move `FBottomNavigationBarStyle.focusedOutlineStyle` to `FBottomNavigationBarItemStyle.focusedOutlineStyle`.
+
+
+### `FBreadcrumb`
+
+Several minor tweaks have been made to `FBreadcrumb` to improve usability and consistency.
+
+* Add `autofocus` to `FBreadcrumbItem` constructor.
+* Add `focusNode` to `FBreadcrumbItem` constructor.
+* Add `onFocusChange` to `FBreadcrumbItem` constructor.
+* Add `onHoverChange` to `FBreadcrumbItem` constructor.
+* Add `onStateChange` to `FBreadcrumbItem` constructor.
+* Add `onHoverChange` to `FBreadcrumbItem.collapsed` constructor.
+* Add `onStateChange` to `FBreadcrumbItem.collapsed` constructor.
 
 
 ### `FHeader`
@@ -55,7 +68,7 @@ The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigat
 Several minor tweaks have been made to `FHeader` to improve usability and consistency.
 
 * Add `FHeaderAction.onHoverChange`.
-* Add `FHeaderAction.onChange`.
+* Add `FHeaderAction.onStateChange`.
 * Add `FHeaderAction.selected`.
 
 * Change `FHeader(title: ...)` to be optional.
@@ -210,7 +223,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Add `FPaginationStyle.tappableStyle`.
 * Add `FTileStyle.tappableStyle`.
 
-* Add `FTappable.onChange`.
+* Add `FTappable.onStateChange`.
 * Add `FTappable.onHoverChange`.
 * Add `FTappableStyle.cursor`.
 * **Breaking** Replace `FTappable.semanticsSelected` with `FTappable.selected`.
@@ -250,18 +263,29 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `intrinsicWidth` to `FButton(...)`.
 * Add `FBreadcrumbStyle.focusedOutlineStyle`.
 * Add `FDateField.builder`.
+* Add `FDateField.initialDate`.
 * Add `FDateField.onChange`.
 * Add `FPicker.onChange`.
 * Add `FResizable.onChange`.
+* Add `FSelectTile.onHoverChange`.
+* Add `FSelectTile.onStatesChange`.
+* Add `FTabs.physics`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
+* Add `FTile.onHoverChange`.
+* Add `FTile.onStateChange`.
+* Add `FTile.selected`.
 * Add `FTimeField.builder`.
+* Add `FTimeField.initialTime`.
 * Add `FTimeField.onChange`.
+* Add `FTimePicker.onChange`.
 * Add `FLerpBorderRadius`.
 
+* **Breaking** Rename `FTabs.onPress` to `FTabs.onChange` to better reflect its purpose.
 
 * **Breaking** Change `FBadge(label: ...)` to `FBadge(child: ...)`.
 * **Breaking** Change `FButton(label: ...)` to `FBadge(child: ...)`.
+* **Breaking** Change `FDialog` to not automatically wrap actions in `InstrinicWidth`.
 * **Breaking** Change `FSelectGroup(items: ...)` to `FBadge(children: ...)`.
 * **Breaking** Change `FTabs(tabs: ...)` to `FTabs(children: ...)`.
 * **Breaking** Change `FTabEntry(content: ...)` to `FTabEntry(child: ...)`.
