@@ -42,7 +42,7 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onChange}
+  /// {@macro forui.foundation.FTappable.onStateChange}
   final ValueChanged<Set<WidgetState>>? onStateChange;
 
   /// True if this tappable is currently selected. Defaults to false.

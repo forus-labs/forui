@@ -50,6 +50,19 @@ The tappable logic has been moved from `FBottomNavigationBar` to `FBottomNavigat
 * **Breaking** Move `FBottomNavigationBarStyle.focusedOutlineStyle` to `FBottomNavigationBarItemStyle.focusedOutlineStyle`.
 
 
+### `FBreadcrumb`
+
+Several minor tweaks have been made to `FBreadcrumb` to improve usability and consistency.
+
+* Add `autofocus` to `FBreadcrumbItem` constructor.
+* Add `focusNode` to `FBreadcrumbItem` constructor.
+* Add `onFocusChange` to `FBreadcrumbItem` constructor.
+* Add `onHoverChange` to `FBreadcrumbItem` constructor.
+* Add `onStateChange` to `FBreadcrumbItem` constructor.
+* Add `onHoverChange` to `FBreadcrumbItem.collapsed` constructor.
+* Add `onStateChange` to `FBreadcrumbItem.collapsed` constructor.
+
+
 ### `FHeader`
 
 Several minor tweaks have been made to `FHeader` to improve usability and consistency.

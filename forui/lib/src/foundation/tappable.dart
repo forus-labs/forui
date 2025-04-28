@@ -64,7 +64,7 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@template forui.foundation.FTappable.onChange}
+  /// {@template forui.foundation.FTappable.onStateChange}
   /// Handler called when there are any changes to a tappable's [WidgetState]s.
   ///
   /// It is called before the more specific callbacks, i.e., [onFocusChange].
