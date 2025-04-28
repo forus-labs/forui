@@ -1,7 +1,11 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
+
+part 'rating.style.dart';
+part 'rating_content.dart';
 
 /// A customizable rating widget that allows users to select a rating by tapping on icons.
 ///
@@ -16,7 +20,7 @@ class FRating extends StatefulWidget {
   final int count;
 
   /// Called when the rating value changes.
-  final ValueChanged<double>? onChanged;
+  final ValueChanged<double>? onStateChanged;
 
   /// Whether to allow half ratings.
   final bool allowHalfRating;
@@ -56,20 +60,19 @@ class FRating extends StatefulWidget {
     super.key,
     this.value = 0.0,
     this.count = 5,
-    this.onChanged,
+    this.onStateChanged,
     this.allowHalfRating = false,
     this.enabled = true,
     this.style,
-    Widget? filledIcon,
-    Widget? emptyIcon,
+    this.filledIcon = const Icon(FIcons.star, color: Color(0xFFFFD700)), // Gold
+    this.emptyIcon = const Icon(FIcons.starOff, color: Color(0xFFBDBDBD)), // Gray
     this.halfFilledIcon,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     this.spacing = 4.0,
-  }) : filledIcon = filledIcon ?? const Icon(FIcons.star, color: Color.fromARGB(255, 255, 215, 0)),
-       emptyIcon = emptyIcon ?? const Icon(FIcons.starOff, color: Color.fromARGB(255, 189, 189, 189));
+  });
 
   @override
   State<FRating> createState() => _FRatingState();
@@ -83,12 +86,12 @@ class FRating extends StatefulWidget {
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('allowHalfRating', value: allowHalfRating, ifTrue: 'allowHalfRating'))
       ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty<ValueChanged<double>?>.has('onStateChanged', onStateChanged))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(DoubleProperty('spacing', spacing))
-      ..add(ObjectFlagProperty<ValueChanged<double>?>.has('onChanged', onChanged));
+      ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
+      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
+      ..add(ObjectFlagProperty<ValueChanged<bool>?>.has('onFocusChange', onFocusChange))
+      ..add(DoubleProperty('spacing', spacing));
   }
 }
 
@@ -96,21 +99,16 @@ class _FRatingState extends State<FRating> {
   double _hoverValue = 0.0;
   bool _isHovering = false;
 
-  /// Calculate rating based on pointer position
   double _calculateRating(double dx, double totalWidth) {
-    // Early return if invalid input
-    if (totalWidth <= 0) {
-      return 0.0;
-    }
+    // ignore: always_put_control_body_on_new_line
+    if (totalWidth <= 0) return 0.0;
     
     final itemWidth = totalWidth / widget.count;
     final x = dx.clamp(0.0, totalWidth);
-    
-    final int index = x ~/ itemWidth;
-    final double localPosition = x - (index * itemWidth);
+    final index = x ~/ itemWidth;
+    final localPosition = x - (index * itemWidth);
     
     double rating = index + 1.0;
-    
     if (widget.allowHalfRating && localPosition < itemWidth / 2) {
       rating -= 0.5;
     }
@@ -119,149 +117,75 @@ class _FRatingState extends State<FRating> {
   }
 
   void _handleHover(PointerHoverEvent event) {
-    final RenderBox? box = context.findRenderObject() as RenderBox?;
+    final box = context.findRenderObject() as RenderBox?;
     if (box == null) {
       return;
     }
     
     final localPosition = box.globalToLocal(event.position);
-    setState(() {
-      _hoverValue = _calculateRating(localPosition.dx, box.size.width);
-    });
+    setState(() => _hoverValue = _calculateRating(localPosition.dx, box.size.width));
   }
 
   void _handleTap(TapUpDetails details) {
-    final RenderBox box = context.findRenderObject()! as RenderBox;
+    final box = context.findRenderObject()! as RenderBox;
     final localPosition = box.globalToLocal(details.globalPosition);
     final rating = _calculateRating(localPosition.dx, box.size.width);
     
-    widget.onChanged?.call(rating);
-    setState(() {
-      _isHovering = false;
-    });
+    widget.onStateChanged?.call(rating);
+    setState(() => _isHovering = false);
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
     final style = widget.style ?? const FRatingStyle();
-    
-    final bool effectiveEnabled = widget.enabled && widget.onChanged != null;
-    final double effectiveValue = _isHovering ? _hoverValue : widget.value;
-    
+    final effectiveEnabled = widget.enabled && widget.onStateChanged != null;
+    final effectiveValue = _isHovering ? _hoverValue : widget.value;
+
     return MouseRegion(
       onEnter: effectiveEnabled ? (_) => setState(() => _isHovering = true) : null,
       onExit: effectiveEnabled ? (_) => setState(() => _isHovering = false) : null,
       onHover: effectiveEnabled ? _handleHover : null,
       child: GestureDetector(
         onTapUp: effectiveEnabled ? _handleTap : null,
-        child: Semantics(
-          label: widget.semanticsLabel ?? 'Rating: ${effectiveValue.toStringAsFixed(1)} of ${widget.count}',
-          child: Focus(
-            focusNode: widget.focusNode,
-            autofocus: widget.autofocus,
-            onFocusChange: widget.onFocusChange,
-            child: LayoutBuilder(
-              builder: (context, constraints) => _buildRatingRow(
-                context, 
-                effectiveValue, 
-                style, 
-                theme,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRatingRow(
-    BuildContext context, 
-    double value, 
-    FRatingStyle style,
-    FThemeData theme,
-  ) => Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(
-        widget.count,
-        (index) => _buildRatingItem(
-          index: index,
-          value: value,
+        child: _RatingContent(
+          value: effectiveValue,
+          count: widget.count,
+          spacing: widget.spacing,
+          filledIcon: widget.filledIcon,
+          emptyIcon: widget.emptyIcon,
+          halfFilledIcon: widget.halfFilledIcon,
+          allowHalfRating: widget.allowHalfRating,
           style: style,
           theme: theme,
+          semanticsLabel: widget.semanticsLabel,
+          focusNode: widget.focusNode,
+          autofocus: widget.autofocus,
+          onFocusChange: widget.onFocusChange,
         ),
-      ),
-    );
-
-  Widget _buildRatingItem({
-    required int index,
-    required double value,
-    required FRatingStyle style,
-    required FThemeData theme,
-  }) {
-    final double itemValue = index + 1.0;
-    
-    // Determine which icon to show based on the current rating value
-    Widget icon;
-    if (itemValue <= value) {
-      // Fully filled icon
-      icon = widget.filledIcon;
-    } else if (widget.allowHalfRating && 
-              (itemValue - 0.5) <= value && 
-              value < itemValue) {
-      // Half-filled icon
-      icon = widget.halfFilledIcon ?? widget.filledIcon;
-    } else {
-      // Empty icon
-      icon = widget.emptyIcon;
-    }
-    
-    return Padding(
-      padding: EdgeInsets.only(
-        right: index < widget.count - 1 ? widget.spacing : 0,
-      ),
-      child: IconTheme(
-        data: IconThemeData(
-          color: style.color ?? theme.colors.primary,
-          size: style.size ?? 24.0,
-        ),
-        child: icon,
       ),
     );
   }
 }
 
+/// Internal widget to display the rating content
+
+
+
+
 /// Defines the visual properties for [FRating].
 ///
 /// See also:
 /// * [FRating], which uses this class for its visual styling.
-class FRatingStyle with Diagnosticable {
+final class FRatingStyle with Diagnosticable, _$FRatingStyleFunctions {
   /// The color of the rating icons.
+  @override
   final Color? color;
 
   /// The size of the rating icons.
+  @override
   final double? size;
 
   /// Creates a [FRatingStyle].
-  const FRatingStyle({
-    this.color,
-    this.size,
-  });
-
-  /// Creates a copy of this style with the given fields replaced by new values.
-  FRatingStyle copyWith({
-    Color? color,
-    double? size,
-  }) => FRatingStyle(
-      color: color ?? this.color,
-      size: size ?? this.size,
-    );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(ColorProperty('color', color))
-      ..add(DoubleProperty('size', size));
-  }
+  const FRatingStyle({this.color, this.size});
 }
