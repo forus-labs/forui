@@ -38,13 +38,17 @@ A tile that is typically used to group related information together.
 
 ```dart copy
 FTile(
-  prefixIcon: Icon(FIcons.globe),
+  prefixIcon: Icon(FIcons.user),
   title: const Text('Title'),
-  subtitle: const Text('subtitle'),
-  details: const Text('details'),
+  subtitle: const Text('Subtitle'),
+  details: const Text('Details'),
   suffixIcon: Icon(FIcons.chevronRight),
   semanticsLabel: 'Label',
   enabled: true,
+  selected: false,
+  onFocusChange: (focused) {},
+  onHoverChange: (hovered) {},
+  onChange: (states) {},
   onPress: () {},
   onLongPress: () {},
 );

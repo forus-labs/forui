@@ -209,7 +209,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.tappableStyle;
-    var tappable = widget.builder(context, _controller.value, widget.child);
+    // TODO: https://github.com/flutter/flutter/issues/167916
+    var tappable = widget.builder(context, {..._controller.value}, widget.child);
 
     tappable = _decorate(context, tappable);
     tappable = Semantics(

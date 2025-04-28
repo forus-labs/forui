@@ -256,6 +256,9 @@ have been renamed to `semanticsLabel` for consistency.
 * Add `FTabs.physics`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
+* Add `FTile.onHoverChange`.
+* Add `FTile.onChange`.
+* Add `FTile.selected`.
 * Add `FTimeField.builder`.
 * Add `FTimeField.onChange`.
 * Add `FLerpBorderRadius`.
