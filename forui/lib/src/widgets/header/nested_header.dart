@@ -85,7 +85,8 @@ final class _FNestedHeader extends FHeader {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty<FHeaderStyle?>('style', style))
-    ..add(DiagnosticsProperty<AlignmentGeometry>('titleAlignment', titleAlignment));
+    properties
+      ..add(DiagnosticsProperty<FHeaderStyle?>('style', style))
+      ..add(DiagnosticsProperty<AlignmentGeometry>('titleAlignment', titleAlignment));
   }
 }
