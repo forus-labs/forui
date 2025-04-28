@@ -26,16 +26,90 @@ class ForuiSamples extends StatelessWidget {
 }
 
 @RoutePage()
-class EmptyPage extends Sample {
+class InitialPage extends Sample {
+  InitialPage({super.key, super.maxWidth = double.infinity});
+  
   @override
-  Widget sample(BuildContext context) => const Placeholder();
+  Widget sample(BuildContext context) {
+    final router = AutoRouter.of(context);
+    final routeCollection = router.routeCollection;
+
+    // Group routes by component name
+    final Map<String, List<String>> groupedRoutes = {};
+
+    // Skip the initial route
+    for (final route in routeCollection.routes) {
+      final path = route.path;
+      if (path.isEmpty || path == '/') {
+        continue;
+      }
+
+      final pathParts = path.split('/');
+      if (pathParts.length >= 2) {
+        final componentName = pathParts[1].replaceAll('-', ' ');
+
+        if (!groupedRoutes.containsKey(componentName)) {
+          groupedRoutes[componentName] = [];
+        }
+
+        groupedRoutes[componentName]!.add(path);
+      }
+    }
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Forui Component Samples', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            ...groupedRoutes.entries.map((entry) {
+              final componentName = entry.key;
+              final routes = entry.value;
+
+              return FAccordion(
+                children: [
+                  FAccordionItem(
+                    title: Text(
+                      componentName.toUpperCase(),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...routes.map((route) {
+                          final variantName = route.split('/').last;
+                          return MouseRegion(
+                            cursor: SystemMouseCursors.click, // This changes the cursor to a hand/pointer
+                            child: GestureDetector(
+                              onTap: () => context.router.navigatePath(route),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 3.0),
+                                child: Text(variantName, style: const TextStyle(fontSize: 12)),
+                              ),
+                            ),
+                          );
+                        }),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            }),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
+// ...existing code...
 @AutoRouterConfig()
 class _AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
-    AutoRoute(page: EmptyRoute.page, initial: true),
+    AutoRoute(page: InitialRoute.page, initial: true),
     AutoRoute(path: '/accordion/default', page: AccordionRoute.page),
     AutoRoute(path: '/alert/default', page: AlertRoute.page),
     AutoRoute(path: '/avatar/default', page: AvatarRoute.page),
@@ -87,6 +161,8 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/progress/linear', page: DeterminateLinearProgressRoute.page),
     AutoRoute(path: '/progress/circular', page: CircularProgressRoute.page),
     AutoRoute(path: '/radio/default', page: RadioRoute.page),
+    AutoRoute(path: '/rating/default', page: RatingBasicRoute.page),
+    AutoRoute(path: '/rating/interactive', page: RatingInteractiveRoute.page),
     AutoRoute(path: '/resizable/default', page: ResizableRoute.page),
     AutoRoute(path: '/resizable/no-cascading', page: NoCascadingResizableRoute.page),
     AutoRoute(path: '/resizable/horizontal', page: HorizontalResizableRoute.page),
