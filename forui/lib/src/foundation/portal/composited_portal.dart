@@ -44,7 +44,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   final Alignment childAnchor;
 
   /// The padding to avoid system intrusions.
-  final EdgeInsets viewPadding;
+  final EdgeInsets viewInsets;
 
   /// The shifting strategy used to shift a portal when it overflows out of the viewport.
   ///
@@ -57,7 +57,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     required this.offset,
     required this.portalAnchor,
     required this.childAnchor,
-    required this.viewPadding,
+    required this.viewInsets,
     required this.shift,
     this.showWhenUnlinked = false,
     super.key,
@@ -73,7 +73,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     offset: offset,
     portalAnchor: portalAnchor,
     childAnchor: childAnchor,
-    viewPadding: viewPadding,
+    viewPadding: viewInsets,
     shift: FPortalShift.flip,
   );
 
@@ -87,7 +87,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
         ..offset = offset
         ..portalAnchor = portalAnchor
         ..childAnchor = childAnchor
-        ..viewPadding = viewPadding
+        ..viewPadding = viewInsets
         ..shift = shift;
 
   @override
@@ -100,7 +100,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
-      ..add(DiagnosticsProperty('viewPadding', viewPadding))
+      ..add(DiagnosticsProperty('viewPadding', viewInsets))
       ..add(ObjectFlagProperty.has('shift', shift));
   }
 }

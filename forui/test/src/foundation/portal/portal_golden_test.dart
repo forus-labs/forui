@@ -166,70 +166,6 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/unlinked.png'));
     });
 
-    testWidgets('does not show portal when child is unlinked/not visible', (tester) async {
-      final controller = OverlayPortalController();
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: ListView(
-            children: [
-              const SizedBox(height: 1000),
-              Row(
-                children: [
-                  FPortal(
-                    controller: controller,
-                    portalBuilder:
-                        (context) => const Padding(
-                          padding: EdgeInsets.all(5),
-                          child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                        ),
-                    child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-
-      controller.show();
-      await tester.pumpAndSettle();
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/unlinked.png'));
-    });
-
-    testWidgets('does not show portal when child is unlinked/not visible', (tester) async {
-      final controller = OverlayPortalController();
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: ListView(
-            children: [
-              const SizedBox(height: 1000),
-              Row(
-                children: [
-                  FPortal(
-                    controller: controller,
-                    portalBuilder:
-                        (context) => const Padding(
-                          padding: EdgeInsets.all(5),
-                          child: ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                        ),
-                    child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-
-      controller.show();
-      await tester.pumpAndSettle();
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/unlinked.png'));
-    });
-
     testWidgets('portal repositions when expanded', (tester) async {
       final controller = OverlayPortalController();
 
@@ -256,7 +192,7 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/expanded.png'));
     });
 
-    testWidgets('respect view padding', (tester) async {
+    testWidgets('view padding', (tester) async {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
@@ -285,6 +221,70 @@ void main() {
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/view-padding.png'));
+    });
+
+    testWidgets('view insets', (tester) async {
+      final controller = OverlayPortalController();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Builder(
+            builder:
+                (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FPortal(
+                  portalAnchor: Alignment.topLeft,
+                  childAnchor: Alignment.bottomRight,
+                  controller: controller,
+                  viewInsets: const EdgeInsets.all(50),
+                  portalBuilder:
+                      (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/view-insets.png'));
+    });
+
+    testWidgets('no view insets', (tester) async {
+      final controller = OverlayPortalController();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Builder(
+            builder:
+                (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FPortal(
+                  portalAnchor: Alignment.topLeft,
+                  childAnchor: Alignment.bottomRight,
+                  controller: controller,
+                  viewInsets: EdgeInsets.zero,
+                  portalBuilder:
+                      (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/no-view-insets.png'));
     });
   });
 }

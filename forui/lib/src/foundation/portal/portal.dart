@@ -45,8 +45,11 @@ class FPortal extends StatefulWidget {
   /// See [FPortalShift] for the different shifting strategies.
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
-  /// Whether to avoid system intrusions. Defaults to true.
-  final bool useViewPadding;
+  /// The insets of the view. In other words, the minimum distance between the edges of the view and the edges of the
+  /// portal. Defaults to [MediaQueryData.viewPadding].
+  ///
+  /// Set this to [EdgeInsets.zero] to disable the insets.
+  final EdgeInsetsGeometry? viewInsets;
 
   /// The portal builder which returns the floating content.
   final WidgetBuilder portalBuilder;
@@ -63,7 +66,7 @@ class FPortal extends StatefulWidget {
     this.portalAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.shift = FPortalShift.flip,
-    this.useViewPadding = true,
+    this.viewInsets,
     super.key,
   });
 
@@ -79,7 +82,7 @@ class FPortal extends StatefulWidget {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'uses view padding'))
+      ..add(DiagnosticsProperty('viewInsets', viewInsets))
       ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder));
   }
 }
@@ -89,29 +92,35 @@ class _State extends State<FPortal> {
   final _link = ChildLayerLink();
 
   @override
-  Widget build(BuildContext _) => RepaintBoundary(
-    child: CompositedChild(
-      notifier: _notifier,
-      link: _link,
-      child: OverlayPortal(
-        controller: widget.controller,
-        overlayChildBuilder: (context) {
-          final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
-          return CompositedPortal(
-            notifier: _notifier,
-            link: _link,
-            offset: widget.offset,
-            portalAnchor: widget.portalAnchor.resolve(direction),
-            childAnchor: widget.childAnchor.resolve(direction),
-            viewPadding: widget.useViewPadding ? MediaQuery.viewPaddingOf(context) : EdgeInsets.zero,
-            shift: widget.shift,
-            child: widget.portalBuilder(context),
-          );
-        },
-        child: RepaintBoundary(child: widget.child),
+  Widget build(BuildContext context) {
+    final insets =
+        widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
+        MediaQuery.viewPaddingOf(context);
+
+    return RepaintBoundary(
+      child: CompositedChild(
+        notifier: _notifier,
+        link: _link,
+        child: OverlayPortal(
+          controller: widget.controller,
+          overlayChildBuilder: (context) {
+            final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+            return CompositedPortal(
+              notifier: _notifier,
+              link: _link,
+              offset: widget.offset,
+              portalAnchor: widget.portalAnchor.resolve(direction),
+              childAnchor: widget.childAnchor.resolve(direction),
+              viewInsets: insets,
+              shift: widget.shift,
+              child: widget.portalBuilder(context),
+            );
+          },
+          child: RepaintBoundary(child: widget.child),
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   @override
   void dispose() {
