@@ -30,7 +30,7 @@ jobs:
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter analyze
-      - run: flutter test
+      - run: flutter test --coverage
       - run: |
           if output=$(dart doc --dry-run 2>&1); then
               if echo "$output" | grep -q -i "warning:"; then
@@ -47,6 +47,11 @@ jobs:
               exit 1
           fi
         if: runner.os == 'Linux'
+      - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+
 
   test-cli:
     name: Build CLI
