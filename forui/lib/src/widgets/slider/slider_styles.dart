@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 part 'slider_styles.style.dart';
 
 /// A slider's styles.
-final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
+class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   /// The enabled slider's horizontal style.
   @override
   final FSliderStyle horizontalStyle;
@@ -48,7 +48,7 @@ final class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
 }
 
 /// A slider's style.
-final class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
+class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   /// The slider's active track colors.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.form}

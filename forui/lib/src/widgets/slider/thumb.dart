@@ -232,7 +232,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 /// **Note**:
 /// The thumb size can be configured inside [FSliderStyle] instead. This is due to an unfortunate limitation of the
 /// implementation.
-final class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
+class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
   /// The thumb's color.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.form}

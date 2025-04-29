@@ -218,7 +218,7 @@ class _Content extends StatelessWidget {
 }
 
 /// A calendar entry's style.
-final class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFunctions {
+class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFunctions {
   /// The day's background color.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}

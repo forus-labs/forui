@@ -19,7 +19,7 @@ enum FTabBarIndicatorSize {
 }
 
 /// [FTabs]'s style.
-final class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
+class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   /// The decoration.
   @override
   final BoxDecoration decoration;

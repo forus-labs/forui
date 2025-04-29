@@ -12,7 +12,7 @@ import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 /// * https://forui.dev/docs/navigation/pagination for working examples.
 /// * [FPaginationController] for customizing the pagination's behavior.
 /// * [FPaginationStyle] for customizing the pagination's appearance.
-final class FPagination extends StatefulWidget {
+class FPagination extends StatefulWidget {
   /// The controller.
   ///
   /// ## Contract

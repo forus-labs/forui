@@ -185,7 +185,7 @@ class _State extends State<FCalendar> {
 }
 
 /// The calendar's style.
-final class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
+class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   /// The header's style.
   @override
   final FCalendarHeaderStyle headerStyle;

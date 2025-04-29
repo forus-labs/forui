@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 part 'badge_content.style.dart';
 
 @internal
-final class Content extends StatelessWidget {
+class Content extends StatelessWidget {
   final FBadgeStyle style;
   final Widget child;
 

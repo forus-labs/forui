@@ -15,7 +15,7 @@ part 'card.style.dart';
 /// See:
 /// * https://forui.dev/docs/data/card for working examples.
 /// * [FCardStyle] for customizing a card's appearance.
-final class FCard extends StatelessWidget {
+class FCard extends StatelessWidget {
   /// The style. Defaults to [FThemeData.cardStyle].
   final FCardStyle? style;
 
@@ -53,7 +53,7 @@ final class FCard extends StatelessWidget {
 }
 
 /// [FCard]'s style.
-final class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
+class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   /// The decoration.
   @override
   final BoxDecoration decoration;

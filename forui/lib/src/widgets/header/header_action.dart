@@ -141,7 +141,7 @@ class FHeaderAction extends StatelessWidget {
 }
 
 /// [FHeaderAction]'s style.
-final class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
+class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
   /// The icon's style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}

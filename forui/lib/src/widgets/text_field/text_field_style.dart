@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 part 'text_field_style.style.dart';
 
 /// The text field style.
-final class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
+class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// The appearance of the keyboard. Defaults to [FColors.brightness].
   ///
   /// This setting is only honored on iOS devices.

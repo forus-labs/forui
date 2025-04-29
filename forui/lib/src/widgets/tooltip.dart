@@ -273,7 +273,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 }
 
 /// A [FTooltip]'s style.
-final class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
+class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   /// The tooltip's default shadow in [FTooltipStyle.inherit].
   static const shadow = [
     BoxShadow(color: Color(0x1a000000), offset: Offset(0, 4), blurRadius: 6, spreadRadius: -1),

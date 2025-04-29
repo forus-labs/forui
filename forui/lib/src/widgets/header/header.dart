@@ -73,7 +73,7 @@ class FHeaderData extends InheritedWidget {
 }
 
 /// [FHeader]'s styles.
-final class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
+class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   /// The root header's style.
   @override
   final FHeaderStyle rootStyle;
@@ -100,7 +100,7 @@ final class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
 }
 
 /// A header's style.
-final class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
+class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
   /// The title's [TextStyle].
   @override
   final TextStyle titleTextStyle;

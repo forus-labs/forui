@@ -85,7 +85,7 @@ class _FAccordionState extends State<FAccordion> {
 }
 
 /// The [FAccordion]'s style.
-final class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
+class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The title's text style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}

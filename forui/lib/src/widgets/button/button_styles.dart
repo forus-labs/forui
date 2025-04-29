@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 part 'button_styles.style.dart';
 
 /// [FButtonStyle]'s style.
-final class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
+class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
   /// The primary button style.
   @override
   final FButtonStyle primary;

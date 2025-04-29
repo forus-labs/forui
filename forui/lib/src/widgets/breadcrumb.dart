@@ -18,7 +18,7 @@ part 'breadcrumb.style.dart';
 /// * https://forui.dev/docs/navigation/breadcrumb for working examples.
 /// * [FBreadcrumbStyle] for customizing a breadcrumb's appearance.
 /// * [FBreadcrumbItem] for adding items to a breadcrumb.
-final class FBreadcrumb extends StatelessWidget {
+class FBreadcrumb extends StatelessWidget {
   /// The breadcrumb's style. Defaults to the appropriate style in [FThemeData.breadcrumbStyle].
   final FBreadcrumbStyle? style;
 
@@ -323,7 +323,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
 }
 
 /// The [FBreadcrumb] styles.
-final class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
+class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   /// The text style.
   @override
   final FWidgetStateMap<TextStyle> textStyle;

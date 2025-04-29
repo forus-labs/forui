@@ -65,7 +65,7 @@ class FAvatar extends StatelessWidget {
 }
 
 /// [FAvatar]'s style.
-final class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
+class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
   /// The fallback's background color.
   @override
   final Color backgroundColor;

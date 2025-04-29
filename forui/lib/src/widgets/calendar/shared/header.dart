@@ -164,7 +164,7 @@ class Navigation extends StatelessWidget {
 }
 
 /// The calendar header's style.
-final class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions {
+class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions {
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;

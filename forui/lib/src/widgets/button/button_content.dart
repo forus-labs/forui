@@ -67,7 +67,7 @@ class IconContent extends StatelessWidget {
 }
 
 /// [FButton] content's style.
-final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
+class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   /// The [TextStyle].
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
@@ -106,7 +106,7 @@ final class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFuncti
 }
 
 /// [FButton] icon content's style.
-final class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
+class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
   /// The icon's style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}

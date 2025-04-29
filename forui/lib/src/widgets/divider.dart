@@ -15,7 +15,7 @@ part 'divider.style.dart';
 /// See:
 /// * https://forui.dev/docs/layout/divider for working examples.
 /// * [FDividerStyle] for customizing a divider's appearance.
-final class FDivider extends StatelessWidget {
+class FDivider extends StatelessWidget {
   /// The style.
   final FDividerStyle? style;
 
@@ -52,7 +52,7 @@ final class FDivider extends StatelessWidget {
 }
 
 /// The [FDivider] styles.
-final class FDividerStyles with Diagnosticable, _$FDividerStylesFunctions {
+class FDividerStyles with Diagnosticable, _$FDividerStylesFunctions {
   /// The horizontal divider's style.
   @override
   final FDividerStyle horizontalStyle;
@@ -83,7 +83,7 @@ final class FDividerStyles with Diagnosticable, _$FDividerStylesFunctions {
 /// The divider style.
 ///
 /// The [padding] property can be used to indent the start and end of the separating line.
-final class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
+class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
   /// The default padding for horizontal and vertical dividers.
   static const defaultPadding = (
     horizontalStyle: EdgeInsets.symmetric(vertical: 20),

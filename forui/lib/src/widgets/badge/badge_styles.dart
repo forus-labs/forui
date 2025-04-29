@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 part 'badge_styles.style.dart';
 
 /// The [FBadgeStyle]s.
-final class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
+class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
   /// The default border radius for badges.
   static const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(100));
 

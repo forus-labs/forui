@@ -98,7 +98,7 @@ class FAlert extends StatelessWidget {
 }
 
 /// The alert styles.
-final class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
+class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   /// The primary alert style.
   @override
   final FAlertStyle primary;

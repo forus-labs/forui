@@ -102,7 +102,7 @@ class VerticalContent extends Content {
 }
 
 /// [FDialog] content's style.
-final class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
+class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
   /// The title's [TextStyle].
   @override
   final TextStyle titleTextStyle;

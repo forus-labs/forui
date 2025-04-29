@@ -271,7 +271,7 @@ class _FResizableState extends State<FResizable> {
 }
 
 /// A [FResizable]'s style.
-final class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
+class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
   /// The horizontal divider style.
   @override
   final FResizableDividerStyle horizontalDividerStyle;

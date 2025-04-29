@@ -156,7 +156,7 @@ class FDialog extends StatelessWidget {
 }
 
 /// [FDialog]'s style.
-final class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
+class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   /// The decoration.
   @override
   final BoxDecoration decoration;

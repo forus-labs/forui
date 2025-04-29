@@ -166,7 +166,7 @@ class FLineCalendar extends StatelessWidget {
 }
 
 /// [FLineCalendar]'s style.
-final class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
+class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   /// The horizontal padding around each calendar item. Defaults to `EdgeInsets.symmetric(horizontal: 6.5)`.
   @override
   final EdgeInsetsGeometry padding;
