@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 part 'pagination_style.style.dart';
 
 /// The [FPagination] styles.
-final class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
+class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   /// The padding around each item. Defaults to EdgeInsets.symmetric(horizontal: 2)`.
   @override
   final EdgeInsets itemPadding;

@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
 
 /// The search field's properties.
-final class FSelectSearchFieldProperties with Diagnosticable {
+class FSelectSearchFieldProperties with Diagnosticable {
   /// The search field's default prefix builder that displays a search icon.
   static Widget defaultIconBuilder(
     BuildContext _,

@@ -248,7 +248,7 @@ enum FResizableDivider {
 }
 
 /// The style of the dividers between [FResizableRegion]s.
-final class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFunctions {
+class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFunctions {
   /// The divider's color.
   @override
   final Color color;
@@ -278,7 +278,7 @@ final class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyle
 }
 
 /// The style of the dividers' thumbs between [FResizableRegion]s.
-final class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
+class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
   /// The background color.
   @override
   final BoxDecoration decoration;

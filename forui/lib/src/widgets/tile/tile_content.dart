@@ -126,7 +126,7 @@ class FTileContent extends StatelessWidget {
 }
 
 /// A [FTile] content's style.
-final class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions {
+class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions {
   /// The content's padding. Defaults to `EdgeInsetsDirectional.only(15, 13, 10, 13)`.
   @override
   final EdgeInsetsGeometry padding;

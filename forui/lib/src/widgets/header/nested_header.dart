@@ -8,7 +8,7 @@ part of 'header.dart';
 /// See:
 /// * https://forui.dev/docs/navigation/header for working examples.
 /// * [FHeaderStyle] for customizing a header's appearance.
-final class _FNestedHeader extends FHeader {
+class _FNestedHeader extends FHeader {
   /// The style.
   final FHeaderStyle? style;
 

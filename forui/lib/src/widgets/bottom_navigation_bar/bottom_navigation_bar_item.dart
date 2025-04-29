@@ -95,7 +95,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
 }
 
 /// [FBottomNavigationBarItem]'s style.
-final class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
+class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
   /// The icon's style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}

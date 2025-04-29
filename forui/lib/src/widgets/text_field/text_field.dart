@@ -32,7 +32,7 @@ typedef FTextFieldCounterBuilder =
 /// * https://forui.dev/docs/form/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [TextField] for more details about working with a text field.
-final class FTextField extends StatelessWidget with FFormFieldProperties<String> {
+class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   static Widget _contextMenuBuilder(BuildContext _, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 

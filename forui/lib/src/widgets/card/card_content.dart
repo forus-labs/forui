@@ -63,7 +63,7 @@ class Content extends StatelessWidget {
 }
 
 /// [FCard] content's style.
-final class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
+class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
   /// The spacing between the image and the title, subtitle, and child if any of them is provided. Defaults to 10.
   @override
   final double imageSpacing;

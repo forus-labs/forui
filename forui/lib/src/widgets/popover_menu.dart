@@ -223,7 +223,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
 }
 
 /// A [FPopoverMenuStyle]'s style.
-final class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions {
+class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions {
   /// The tile group's style.
   @override
   final FTileGroupStyle tileGroupStyle;

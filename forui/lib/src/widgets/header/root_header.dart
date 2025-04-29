@@ -7,7 +7,7 @@ part of 'header.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/navigation/header for working examples.
-final class _FRootHeader extends FHeader {
+class _FRootHeader extends FHeader {
   /// The header's style.
   final FHeaderStyle? style;
 

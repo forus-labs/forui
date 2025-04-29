@@ -104,7 +104,7 @@ class FScaffold extends StatelessWidget {
 }
 
 /// The scaffold style.
-final class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
+class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// The background color.
   @override
   final Color backgroundColor;

@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 part 'slider_mark.style.dart';
 
 /// A mark in a [FSlider]. It is a combination of a tick - a visual indicator along the track, and a label.
-final class FSliderMark with Diagnosticable {
+class FSliderMark with Diagnosticable {
   /// The mark's style.
   final FSliderMarkStyle? style;
 
@@ -54,7 +54,7 @@ final class FSliderMark with Diagnosticable {
 }
 
 /// A [FSlider] mark's style.
-final class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
+class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
   /// The tick's color.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.form}

@@ -180,7 +180,7 @@ class _GridDelegate extends SliverGridDelegate {
 }
 
 /// A day picker's style.
-final class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
+class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
   /// The text style for the day of th week headers.
   @override
   final TextStyle headerTextStyle;

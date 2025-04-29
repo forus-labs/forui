@@ -154,7 +154,7 @@ class FSwitch extends StatelessWidget {
 }
 
 /// [FSwitch]'s style.
-final class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
+class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
   /// This [FSwitch]'s color when focused.
   @override
   final Color focusColor;

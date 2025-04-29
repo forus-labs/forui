@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 @internal
-final class InheritedData extends InheritedWidget {
+class InheritedData extends InheritedWidget {
   static InheritedData of(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
     assert(result != null, 'No InheritedData found in context');
