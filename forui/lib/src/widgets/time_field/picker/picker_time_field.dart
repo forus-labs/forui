@@ -242,6 +242,7 @@ class _PickerPopover extends StatelessWidget {
   Widget build(BuildContext _) => FPopover(
     style: style.popoverStyle,
     controller: controller.popover,
+    constraints: style.popoverConstraints,
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
     spacing: properties.spacing,
@@ -250,17 +251,14 @@ class _PickerPopover extends StatelessWidget {
     hideOnTapOutside: properties.hideOnTapOutside,
     popoverBuilder:
         (_, _, _) => TextFieldTapRegion(
-          child: ConstrainedBox(
-            constraints: style.popoverConstraints,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: FTimePicker(
-                controller: controller._picker,
-                style: style.pickerStyle,
-                hour24: hour24,
-                hourInterval: properties.hourInterval,
-                minuteInterval: properties.minuteInterval,
-              ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: FTimePicker(
+              controller: controller._picker,
+              style: style.pickerStyle,
+              hour24: hour24,
+              hourInterval: properties.hourInterval,
+              minuteInterval: properties.minuteInterval,
             ),
           ),
         ),

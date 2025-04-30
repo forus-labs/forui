@@ -191,6 +191,7 @@ The traversal-edge behavior of `FPopover` and Forui widgets that depend on it ha
 
 * Add `FPopover.traversalEdgeBehavior`.
 * Add `traversalEdgeBehavior` to `FPopoverMenu`.
+* Add `FPopover.constraints`.
 * Add `FPopover.spacing`.
 * Add `FPopover.offset`.
 * Add `FPopoverMenu.spacing`.
@@ -200,6 +201,8 @@ The traversal-edge behavior of `FPopover` and Forui widgets that depend on it ha
 * **Breaking** Change `FPopoverMenu.focusNode` from `FocusNode` to `FocusScopeNode`.
 * **Breaking** Remove `FPopover.directionPadding`.
 * **Breaking** Remove `FPopoverMenu.directionPadding`.
+
+* Fix `FPopover` unconditionally calling `FPopoverController.hide()` when tapping outside a `FPopover`.
 
 
 ### `FPortal`

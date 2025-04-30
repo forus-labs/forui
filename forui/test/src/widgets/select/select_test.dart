@@ -71,7 +71,49 @@ void main() {
       expect(controller.value, 'A');
     });
 
-    testWidgets('update controller', (tester) async {
+    testWidgets('external focus is not disposed', (tester) async {
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            key: key,
+            focusNode: focus,
+            controller: controller,
+            children: [FSelectItem.text('A'), FSelectItem.text('B')],
+          ),
+        ),
+      );
+
+      expect(tester.takeException(), null);
+    });
+
+    testWidgets('refocus after selection', (tester) async {
+      final focus = autoDispose(FocusNode());
+      const itemKey = ValueKey('item');
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            key: key,
+            focusNode: focus,
+            controller: controller,
+            children: [FSelectItem.text('A', key: itemKey), FSelectItem.text('B')],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(itemKey));
+      await tester.pumpAndSettle();
+
+      expect(focus.hasFocus, true);
+    });
+  });
+
+  group('controller', () {
+    testWidgets('update', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>(
@@ -102,7 +144,7 @@ void main() {
       expect(controller.dispose, returnsNormally);
     });
 
-    testWidgets('dispose controller', (tester) async {
+    testWidgets('dispose', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>(

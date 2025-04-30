@@ -192,6 +192,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
     return (widget._automatic ? FPopover.automatic : FPopover.new)(
       controller: _popoverController,
       style: style,
+      constraints: FPortalConstraints(maxWidth: style.maxWidth),
       popoverAnchor: widget.menuAnchor,
       childAnchor: widget.childAnchor,
       spacing: widget.spacing,
@@ -203,18 +204,15 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       onFocusChange: widget.onFocusChange,
       traversalEdgeBehavior: widget.traversalEdgeBehavior,
       popoverBuilder:
-          (_, _, _) => ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: style.maxWidth),
-            child: FTileGroup.merge(
-              scrollController: widget.scrollController,
-              cacheExtent: widget.cacheExtent,
-              maxHeight: widget.maxHeight,
-              dragStartBehavior: widget.dragStartBehavior,
-              semanticsLabel: widget.semanticsLabel,
-              style: style.tileGroupStyle,
-              divider: widget.divider,
-              children: widget.menu,
-            ),
+          (_, _, _) => FTileGroup.merge(
+            scrollController: widget.scrollController,
+            cacheExtent: widget.cacheExtent,
+            maxHeight: widget.maxHeight,
+            dragStartBehavior: widget.dragStartBehavior,
+            semanticsLabel: widget.semanticsLabel,
+            style: style.tileGroupStyle,
+            divider: widget.divider,
+            children: widget.menu,
           ),
       child: widget.child,
     );

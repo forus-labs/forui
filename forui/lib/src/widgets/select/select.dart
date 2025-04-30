@@ -158,8 +158,8 @@ abstract class FSelect<T> extends StatefulWidget {
   /// The alignment point on the select's field. Defaults to [Alignment.bottomLeft].
   final AlignmentGeometry fieldAnchor;
 
-  /// The constraints to apply to the popover. Defaults to `const BoxConstraints(maxWidth: 200, maxHeight: 300)`.
-  final BoxConstraints popoverConstraints;
+  /// The constraints to apply to the popover. Defaults to `const FAutoWidthPortalConstraints(maxHeight: 300)`.
+  final FPortalConstraints popoverConstraints;
 
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
@@ -218,7 +218,7 @@ abstract class FSelect<T> extends StatefulWidget {
     bool clearable,
     AlignmentGeometry anchor,
     AlignmentGeometry fieldAnchor,
-    BoxConstraints popoverConstraints,
+    FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
@@ -273,7 +273,7 @@ abstract class FSelect<T> extends StatefulWidget {
     bool clearable,
     AlignmentGeometry anchor,
     AlignmentGeometry fieldAnchor,
-    BoxConstraints popoverConstraints,
+    FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
@@ -314,7 +314,7 @@ abstract class FSelect<T> extends StatefulWidget {
     this.clearable = false,
     this.anchor = Alignment.topLeft,
     this.fieldAnchor = Alignment.bottomLeft,
-    this.popoverConstraints = const BoxConstraints(maxWidth: 200, maxHeight: 300),
+    this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
@@ -356,7 +356,7 @@ abstract class FSelect<T> extends StatefulWidget {
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
       ..add(DiagnosticsProperty('anchor', anchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
-      ..add(DiagnosticsProperty('constraints', popoverConstraints))
+      ..add(DiagnosticsProperty('popoverConstraints', popoverConstraints))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
@@ -364,7 +364,7 @@ abstract class FSelect<T> extends StatefulWidget {
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
-      ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles))
+      ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics));
   }
 }
@@ -451,7 +451,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
   void _updateFocus() {
     if (!_controller.popover.shown) {
-      _focus.unfocus();
+      _focus.requestFocus();
     }
   }
 
@@ -501,6 +501,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
           (context, data, child) => FPopover(
             style: style.popoverStyle,
             controller: _controller.popover,
+            constraints: widget.popoverConstraints,
             popoverAnchor: widget.anchor,
             childAnchor: widget.fieldAnchor,
             spacing: widget.spacing,
@@ -508,8 +509,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
             offset: widget.offset,
             hideOnTapOutside: widget.hideOnTapOutside,
             popoverBuilder:
-                (_, _, _) => ConstrainedBox(
-                  constraints: widget.popoverConstraints,
+                (_, _, _) => TextFieldTapRegion(
                   child: SelectControllerData<T>(
                     contains: (value) => _controller.value == value,
                     onPress: (value) async {
@@ -550,7 +550,10 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       _controller.removeListener(_updateTextController);
     }
     _textController.dispose();
-    _focus.dispose();
+
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
     super.dispose();
   }
 }

@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 class FTimeFieldPickerProperties with Diagnosticable {
   final AlignmentGeometry anchor;
   final AlignmentGeometry inputAnchor;
-  final  FPortalSpacing spacing;
+  final FPortalSpacing spacing;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   final Offset offset;
   final FHidePopoverRegion hideOnTapOutside;

@@ -144,8 +144,8 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   });
 
   /// Creates a [FSelectItem] that displays the [value] as the a typography.
-  static FSelectItem<String> text(String value, {bool? enabled}) =>
-      FSelectItem(value: value, enabled: enabled, child: Text(value));
+  static FSelectItem<String> text(String value, {bool? enabled, Key? key}) =>
+      FSelectItem(key: key, value: value, enabled: enabled, child: Text(value));
 
   @override
   State<FSelectItem<T>> createState() => _FSelectItemState<T>();

@@ -94,6 +94,9 @@ class FPopover extends StatefulWidget {
   /// The popover's style.
   final FPopoverStyle? style;
 
+  /// The constraints.
+  final FPortalConstraints constraints;
+
   /// {@template forui.widgets.FPopover.popoverAnchor}
   /// The point on the popover (floating content) that connects with the child at the child's anchor.
   ///
@@ -177,6 +180,7 @@ class FPopover extends StatefulWidget {
     required this.popoverBuilder,
     required this.child,
     this.style,
+    this.constraints = const FPortalConstraints(),
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
@@ -203,6 +207,7 @@ class FPopover extends StatefulWidget {
     required this.child,
     this.controller,
     this.style,
+    this.constraints = const FPortalConstraints(),
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
@@ -228,6 +233,7 @@ class FPopover extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
@@ -269,11 +275,19 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             : widget.child;
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
-      child = TapRegion(groupId: _group, onTapOutside: (_) => _controller.hide(), child: child);
+      child = TapRegion(groupId: _group, onTapOutside: (_) {
+        // We need to check if it is shown first, otherwise it will fire even when hidden. This messes with the focus
+        // when there are multiple FSelects/other widgets.
+        if (_controller.shown) {
+          _controller.hide();
+        }
+
+      }, child: child);
     }
 
     return FPortal(
       controller: _controller._overlay,
+      constraints: widget.constraints,
       portalAnchor: widget.popoverAnchor,
       childAnchor: widget.childAnchor,
       viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
