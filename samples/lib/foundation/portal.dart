@@ -30,8 +30,7 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) =>
-  FPortal(
+  Widget build(BuildContext context) => FPortal(
     controller: controller,
     spacing: const FPortalSpacing(8),
     viewInsets: const EdgeInsets.all(5),
