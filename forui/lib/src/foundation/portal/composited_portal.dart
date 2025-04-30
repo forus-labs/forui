@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/portal/portal_constraints.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/portal/composited_child.dart';
 import 'package:forui/src/foundation/portal/layer.dart';
+import 'package:forui/src/foundation/portal/portal_constraints.dart';
 
 /// A [CompositedPortal] positions itself relative to a [CompositedChild].
 ///
