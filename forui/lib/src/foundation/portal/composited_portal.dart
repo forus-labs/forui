@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/portal/portal_constraints.dart';
 
 import 'package:meta/meta.dart';
 
@@ -33,6 +34,9 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   /// it is false, then child is hidden.
   final bool showWhenUnlinked;
 
+  /// The portal's constraints.
+  final FPortalConstraints constraints;
+
   /// The anchor point on this widget that will line up with [childAnchor] on the linked [CompositedChild].
   final Alignment portalAnchor;
 
@@ -61,6 +65,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   const CompositedPortal({
     required this.notifier,
     required this.link,
+    required this.constraints,
     required this.portalAnchor,
     required this.childAnchor,
     required this.viewInsets,
@@ -78,6 +83,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     link: link,
     viewSize: MediaQuery.sizeOf(context),
     showWhenUnlinked: showWhenUnlinked,
+    portalConstraints: constraints,
     portalAnchor: portalAnchor,
     childAnchor: childAnchor,
     viewInsets: viewInsets,
@@ -93,6 +99,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
         ..link = link
         ..viewSize = MediaQuery.sizeOf(context)
         ..showWhenUnlinked = showWhenUnlinked
+        ..portalConstraints = constraints
         ..portalAnchor = portalAnchor
         ..childAnchor = childAnchor
         ..viewInsets = viewInsets
@@ -107,8 +114,9 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
       ..add(DiagnosticsProperty('notifier', notifier))
       ..add(DiagnosticsProperty('link', link))
       ..add(DiagnosticsProperty('showWhenUnlinked', showWhenUnlinked))
-      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('viewInsets', viewInsets))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
@@ -128,6 +136,7 @@ class RenderPortalLayer extends RenderProxyBox {
   ChildLayerLink _link;
   Size _viewSize;
   bool _showWhenUnlinked;
+  FPortalConstraints _portalConstraints;
   Alignment _portalAnchor;
   Alignment _childAnchor;
   EdgeInsets _viewInsets;
@@ -140,6 +149,7 @@ class RenderPortalLayer extends RenderProxyBox {
     required ChildLayerLink link,
     required Size viewSize,
     required bool showWhenUnlinked,
+    required FPortalConstraints portalConstraints,
     required Alignment portalAnchor,
     required Alignment childAnchor,
     required EdgeInsets viewInsets,
@@ -151,8 +161,9 @@ class RenderPortalLayer extends RenderProxyBox {
        _link = link,
        _viewSize = viewSize,
        _showWhenUnlinked = showWhenUnlinked,
-       _childAnchor = childAnchor,
+       _portalConstraints = portalConstraints,
        _portalAnchor = portalAnchor,
+       _childAnchor = childAnchor,
        _viewInsets = viewInsets,
        _spacing = spacing,
        _shift = shift,
@@ -173,7 +184,24 @@ class RenderPortalLayer extends RenderProxyBox {
   @override
   void performLayout() {
     if (child case final child?) {
-      child.layout(constraints.loosen(), parentUsesSize: true);
+      final size = link.childSize;
+      final constraints = switch (portalConstraints) {
+        final FixedConstraints constraints => constraints,
+        FAutoHeightPortalConstraints(:final minWidth, :final maxWidth) => BoxConstraints(
+          minWidth: minWidth,
+          maxWidth: maxWidth,
+          minHeight: size?.height ?? 0,
+          maxHeight: size?.height ?? double.infinity,
+        ),
+        FAutoWidthPortalConstraints(:final minHeight, :final maxHeight) => BoxConstraints(
+          minWidth: size?.width ?? 0,
+          maxWidth: size?.width ?? double.infinity,
+          minHeight: minHeight,
+          maxHeight: maxHeight,
+        ),
+      };
+
+      child.layout(constraints.normalize(), parentUsesSize: true);
     }
 
     size = constraints.biggest;
@@ -336,6 +364,17 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  /// The portal's constraints.
+  FPortalConstraints get portalConstraints => _portalConstraints;
+
+  set portalConstraints(FPortalConstraints value) {
+    if (_portalConstraints == value) {
+      return;
+    }
+    _portalConstraints = value;
+    markNeedsLayout();
+  }
+
   /// The anchor point on this [RenderPortalLayer] that will line up with [portalAnchor] on the linked [RenderChildLayer].
   ///
   /// Defaults to [Alignment.topLeft].
@@ -414,8 +453,9 @@ class RenderPortalLayer extends RenderProxyBox {
       ..add(DiagnosticsProperty('link', link))
       ..add(DiagnosticsProperty('viewSize', viewSize))
       ..add(DiagnosticsProperty('showWhenUnlinked', showWhenUnlinked))
-      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('portalConstraints', portalConstraints))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('viewInsets', viewInsets))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))

@@ -41,6 +41,77 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shown.png'));
   });
 
+  group('constraints', () {
+    testWidgets('fixed constraints', (tester) async {
+      final controller = OverlayPortalController();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPortal(
+            constraints: const FPortalConstraints.tightFor(width: 25, height: 25),
+            controller: controller,
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            child: GestureDetector(
+              onTap: controller.toggle,
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+            ),
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/fixed-constraints.png'));
+    });
+
+    testWidgets('auto-height constraints', (tester) async {
+      final controller = OverlayPortalController();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPortal(
+            constraints: const FAutoHeightPortalConstraints.tightFor(width: 100),
+            controller: controller,
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            child: GestureDetector(
+              onTap: controller.toggle,
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+            ),
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/auto-height-constraints.png'));
+    });
+
+    testWidgets('auto-width constraints', (tester) async {
+      final controller = OverlayPortalController();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPortal(
+            constraints: const FAutoWidthPortalConstraints.tightFor(height: 100),
+            controller: controller,
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            child: GestureDetector(
+              onTap: controller.toggle,
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+            ),
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/auto-width-constraints.png'));
+    });
+  });
+
   group('spacing, shifting & offset', () {
     testWidgets('spacing', (tester) async {
       final controller = OverlayPortalController();

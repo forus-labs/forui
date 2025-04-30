@@ -20,6 +20,9 @@ class FPortal extends StatefulWidget {
   /// The controller that shows and hides the portal. It initially hides the portal.
   final OverlayPortalController controller;
 
+  /// The constraints.
+  final FPortalConstraints constraints;
+
   /// The point on the portal (floating content) that connects with the child, at the child's anchor.
   ///
   /// For example, [Alignment.topCenter] means the top-center point of the portal will connect with the child.
@@ -71,6 +74,7 @@ class FPortal extends StatefulWidget {
     required this.controller,
     required this.portalBuilder,
     required this.child,
+    this.constraints = const FPortalConstraints(),
     this.portalAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.spacing = FPortalSpacing.zero,
@@ -88,6 +92,7 @@ class FPortal extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
@@ -117,6 +122,7 @@ class _State extends State<FPortal> {
           return CompositedPortal(
             notifier: _notifier,
             link: _link,
+            constraints: widget.constraints,
             portalAnchor: portalAnchor,
             childAnchor: childAnchor,
             viewInsets:

@@ -207,6 +207,7 @@ The traversal-edge behavior of `FPopover` and Forui widgets that depend on it ha
 
 * Add `FPortal.vewInsets`.
 * Add `FPortal.spacing`.
+* Add `FPortalConstraints`.
 * Add `FPortalSpacing`.
 * Fix `FPortal` not positioning portals correctly when wrapped in a `RepaintBoundary`/`Padding`.
 * Fix `FPortal` not updating portals when child's offset/size changes.

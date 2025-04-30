@@ -24,7 +24,7 @@ A portal renders a portal widget that "floats" on top of a child widget.
     ```dart copy
     final controller = OverlayPortalController();
 
-     FPortal(
+    FPortal(
       controller: controller,
       spacing: const FPortalSpacing(8),
       viewInsets: const EdgeInsets.all(5),
@@ -82,6 +82,7 @@ FPortal(
   spacing: FPortalSpacing.zero,
   shift: FPortalShift.flip,
   offset: Offset.zero,
+  portalConstraints: const FAutoWidthPortalConstraints(),
   portalAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   viewInsets: EdgeInsets.zero,
