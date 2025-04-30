@@ -210,7 +210,7 @@ The traversal-edge behavior of `FPopover` and Forui widgets that depend on it ha
 ### `FPortal`
 `FPortal` has been re-implemented to support size alignment, directional spacing & fix a series of longstanding issues.
 
-* Add `FPortal.vewInsets`.
+* Add `FPortal.viewInsets`.
 * Add `FPortal.spacing`.
 * Add `FPortalConstraints`.
 * Add `FPortalSpacing`.
@@ -270,7 +270,7 @@ A new `onChange` and `onSelect` callback has been added to most Forui widgets.
 * Add `FSelectMenuTile.offset`.
 
 * **Breaking** Change `focusNode` from `FocusNode` to `FocusScopeNode` in `FSelectMenuTile`.
-* **Breaking** Remove `FSelectMenutTile.directionalPadding`.
+* **Breaking** Remove `FSelectMenuTile.directionalPadding`.
 
 
 ### `FSelectTile` & `FSelectTileGroup`
