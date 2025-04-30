@@ -1,3 +1,6 @@
+comment: false
+coverage:
+  range: 60..80
 ignore:
   - forui/lib/src/theme/theme_data.dart # Mostly configuration
   - forui/lib/src/theme/themes.dart # Mostly configuration
