@@ -194,8 +194,10 @@ The traversal-edge behavior of `FPopover` and Forui widgets that depend on it ha
 * Add `FPopover.constraints`.
 * Add `FPopover.spacing`.
 * Add `FPopover.offset`.
+* Add `FPopover.groupId`.
 * Add `FPopoverMenu.spacing`.
 * Add `FPopoverMenu.offset`.
+* Add `FPopoverMenu.groupId`.
 
 * **Breaking** Change `FPopover.focusNode` from `FocusNode` to `FocusScopeNode`.
 * **Breaking** Change `FPopoverMenu.focusNode` from `FocusNode` to `FocusScopeNode`.

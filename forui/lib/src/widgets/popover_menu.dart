@@ -64,6 +64,9 @@ class FPopoverMenu extends StatefulWidget {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
+  /// {@macro forui.widgets.FPopover.groupId}
+  final Object? groupId;
+
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
 
@@ -106,6 +109,7 @@ class FPopoverMenu extends StatefulWidget {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
+    this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
     this.semanticsLabel,
     this.autofocus = false,
@@ -135,6 +139,7 @@ class FPopoverMenu extends StatefulWidget {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
+    this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.semanticsLabel,
     this.autofocus = false,
@@ -163,6 +168,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
+      ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
@@ -198,6 +204,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       spacing: widget.spacing,
       shift: widget.shift,
       offset: widget.offset,
+      groupId: widget.groupId,
       hideOnTapOutside: widget.hideOnTapOutside,
       autofocus: widget.autofocus,
       focusNode: widget.focusNode,

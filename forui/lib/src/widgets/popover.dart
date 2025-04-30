@@ -141,6 +141,18 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   final Offset offset;
 
+  /// {@template forui.widgets.FPopover.groupId}
+  /// An optional group ID that groups [TapRegion]s together so that they operate as one region. If a tap occurs outside
+  /// of all group members, then group members that are shown will be hidden.
+  ///
+  /// If the group id is null, then only this region is hit tested.
+  ///
+  /// ## Contract
+  /// Throws an [AssertionError] if the group id is not null and [hideOnTapOutside] is not set to
+  /// [FHidePopoverRegion.excludeTarget].
+  /// {@endtemplate}
+  final Object? groupId;
+
   /// {@template forui.widgets.FPopover.hideOnTapOutside}
   /// The region that can be tapped to hide the popover.
   /// {@endtemplate}
@@ -184,6 +196,7 @@ class FPopover extends StatefulWidget {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
+    this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
     this.semanticsLabel,
     this.autofocus = false,
@@ -193,7 +206,11 @@ class FPopover extends StatefulWidget {
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
     super.key,
-  }) : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
+  }) : assert(
+         groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
+         'groupId can only be used with FHidePopoverRegion.excludeTarget',
+       ),
+       popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
        childAnchor = childAnchor ?? defaultPlatform.child,
        _automatic = false;
 
@@ -211,6 +228,7 @@ class FPopover extends StatefulWidget {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
+    this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.autofocus = false,
     this.focusNode,
@@ -220,7 +238,11 @@ class FPopover extends StatefulWidget {
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
     super.key,
-  }) : popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
+  }) : assert(
+         groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
+         'groupId can only be used with FHidePopoverRegion.excludeTarget',
+       ),
+       popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
        childAnchor = childAnchor ?? defaultPlatform.child,
        _automatic = true;
 
@@ -239,6 +261,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
+      ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
@@ -250,12 +273,16 @@ class FPopover extends StatefulWidget {
 }
 
 class _State extends State<FPopover> with SingleTickerProviderStateMixin {
-  final Key _group = UniqueKey();
+  late Object? _groupId = widget.groupId ?? UniqueKey();
   late FPopoverController _controller = widget.controller ?? FPopoverController(vsync: this);
 
   @override
   void didUpdateWidget(covariant FPopover old) {
     super.didUpdateWidget(old);
+    if (widget.groupId != old.groupId) {
+      _groupId = widget.groupId ?? UniqueKey();
+    }
+
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
@@ -275,14 +302,17 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             : widget.child;
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
-      child = TapRegion(groupId: _group, onTapOutside: (_) {
-        // We need to check if it is shown first, otherwise it will fire even when hidden. This messes with the focus
-        // when there are multiple FSelects/other widgets.
-        if (_controller.shown) {
-          _controller.hide();
-        }
-
-      }, child: child);
+      child = TapRegion(
+        groupId: _groupId,
+        onTapOutside: (_) {
+          // We need to check if it is shown first, otherwise it will fire even when hidden. This messes with the focus
+          // when there are multiple FSelects/other widgets.
+          if (_controller.shown) {
+            _controller.hide();
+          }
+        },
+        child: child,
+      );
     }
 
     return FPortal(
@@ -309,7 +339,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                   child: ScaleTransition(
                     scale: _controller._scale,
                     child: TapRegion(
-                      groupId: _group,
+                      groupId: _groupId,
                       onTapOutside:
                           widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
                       child: DecoratedBox(

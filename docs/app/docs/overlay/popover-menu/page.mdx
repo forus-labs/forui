@@ -109,7 +109,8 @@ FPopoverMenu(
   spacing: FPortalSpacing.zero,
   shift: FPortalShift.flip,
   offset: Offset.zero,
-  hideOnTapOutside: FHidePopoverRegion.anywhere,
+  groupId: 'popover-menu-group',
+  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
   menu: [
     FTileGroup(
@@ -133,7 +134,8 @@ FPopoverMenu.automatic(
   childAnchor: Alignment.bottomCenter,
   spacing: FPortalSpacing.zero,
   offset: Offset.zero,
-  hideOnTapOutside: FHidePopoverRegion.none,
+  groupId: 'popover-menu-group',
+  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   shift: FPortalShift.flip,
   traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
   menu: [

@@ -103,7 +103,8 @@ FPopover(
   spacing: const FPortalSpacing(4),
   shift: FPortalShift.flip,
   offset: Offset.zero,
-  hideOnTapOutside: FHidePopoverRegion.anywhere,
+  groupId: 'popover-group',
+  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   popoverBuilder: (context, style, child) => const Placeholder(),
   child: const Placeholder(),
 );
@@ -120,6 +121,7 @@ FPopover.automatic(
   spacing: const FPortalSpacing(4),
   shift: FPortalShift.flip,
   offset: Offset.zero,
+  groupId: 'popover-group',
   hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   popoverBuilder: (context, style, child) => const Placeholder(),
   child: const Placeholder(),
