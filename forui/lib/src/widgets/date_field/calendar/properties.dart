@@ -11,14 +11,17 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// The alignment point on the input field. Defaults to [Alignment.bottomLeft].
   final AlignmentGeometry inputAnchor;
 
+  /// {@macro forui.widgets.FPopover.spacing}
+  final FPortalSpacing spacing;
+
   /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
+  /// {@macro forui.widgets.FPopover.offset}
+  final Offset offset;
+
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
-
-  /// Whether to add padding based on the popover direction. Defaults to false.
-  final bool directionPadding;
 
   /// Customizes the appearance of calendar days.
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
@@ -42,9 +45,10 @@ class FDateFieldCalendarProperties with Diagnosticable {
   const FDateFieldCalendarProperties({
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.directionPadding = false,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -59,9 +63,10 @@ class FDateFieldCalendarProperties with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('anchor', anchor))
       ..add(DiagnosticsProperty('inputAnchor', inputAnchor))
+      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
@@ -77,9 +82,10 @@ class FDateFieldCalendarProperties with Diagnosticable {
           runtimeType == other.runtimeType &&
           anchor == other.anchor &&
           inputAnchor == other.inputAnchor &&
+          spacing == other.spacing &&
           shift == other.shift &&
+          offset == other.offset &&
           hideOnTapOutside == other.hideOnTapOutside &&
-          directionPadding == other.directionPadding &&
           dayBuilder == other.dayBuilder &&
           start == other.start &&
           end == other.end &&
@@ -91,9 +97,10 @@ class FDateFieldCalendarProperties with Diagnosticable {
   int get hashCode =>
       anchor.hashCode ^
       inputAnchor.hashCode ^
+      spacing.hashCode ^
       shift.hashCode ^
+      offset.hashCode ^
       hideOnTapOutside.hashCode ^
-      directionPadding.hashCode ^
       dayBuilder.hashCode ^
       start.hashCode ^
       end.hashCode ^

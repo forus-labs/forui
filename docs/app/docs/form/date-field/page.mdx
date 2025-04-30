@@ -82,6 +82,8 @@ FDateField(
   onChange: (date) => print('Date changed: $date'),
   onSaved: (date) => print('Date saved: $date'),
   autovalidateMode: AutovalidateMode.onUnfocus,
+  forceErrorText: null,
+  errorBuilder: (context, error) => Text(error, style: TextStyle(color: Colors.red)),
 );
 ```
 
@@ -110,13 +112,17 @@ FDateField.calendar(
   autoHide: true,
   anchor: Alignment.topLeft,
   inputAnchor: Alignment.bottomLeft,
+  spacing: FPortalSpacing(4),
+  shift: FPortalShift.flip,
+  offset: Offset.zero,
   hideOnTapOutside: FHidePopoverRegion.none,
-  directionPadding: false,
   label: Text('Calendar Date'),
   description: Text('Select a date from the calendar'),
   builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
-    suffixBuilder: null,
+  suffixBuilder: null,
+  forceErrorText: null,
+  errorBuilder: (context, error) => Text(error, style: TextStyle(color: Colors.red)),
 );
 ```
 
@@ -146,12 +152,13 @@ FDateField.input(
   anchor: Alignment.topLeft,
   inputAnchor: Alignment.bottomLeft,
   hideOnTapOutside: FHidePopoverRegion.none,
-  directionPadding: false,
   label: Text('Calendar Date'),
   description: Text('Select a date from the calendar'),
   builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, child) => Icon(Icons.calendar_today),
   suffixBuilder: null,
+  forceErrorText: null,
+  errorBuilder: (context, error) => Text(error, style: TextStyle(color: Colors.red)),
 );
 ```
 

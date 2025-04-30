@@ -15,11 +15,13 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final Alignment inputAnchor;
   @override
+  final FPortalSpacing spacing;
+  @override
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   @override
-  final FHidePopoverRegion hideOnTapOutside;
+  final Offset offset;
   @override
-  final bool directionPadding;
+  final FHidePopoverRegion hideOnTapOutside;
   @override
   final int hourInterval;
   @override
@@ -36,9 +38,10 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.canRequestFocus = true,
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.directionPadding = false,
     this.hourInterval = 1,
     this.minuteInterval = 1,
     super.controller,
@@ -241,9 +244,10 @@ class _PickerPopover extends StatelessWidget {
     controller: controller.popover,
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
+    spacing: properties.spacing,
     shift: properties.shift,
+    offset: properties.offset,
     hideOnTapOutside: properties.hideOnTapOutside,
-    directionPadding: properties.directionPadding,
     popoverBuilder:
         (_, _, _) => TextFieldTapRegion(
           child: ConstrainedBox(

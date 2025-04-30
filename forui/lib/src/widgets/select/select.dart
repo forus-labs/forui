@@ -161,14 +161,17 @@ abstract class FSelect<T> extends StatefulWidget {
   /// The constraints to apply to the popover. Defaults to `const BoxConstraints(maxWidth: 200, maxHeight: 300)`.
   final BoxConstraints popoverConstraints;
 
+  /// {@macro forui.widgets.FPopover.spacing}
+  final FPortalSpacing spacing;
+
   /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
+  /// {@macro forui.widgets.FPopover.offset}
+  final Offset offset;
+
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
-
-  /// Whether to add padding based on the popover direction. Defaults to false.
-  final bool directionPadding;
 
   /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
@@ -216,9 +219,10 @@ abstract class FSelect<T> extends StatefulWidget {
     AlignmentGeometry anchor,
     AlignmentGeometry fieldAnchor,
     BoxConstraints popoverConstraints,
+    FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset offset,
     FHidePopoverRegion hideOnTapOutside,
-    bool directionPadding,
     bool autoHide,
     ValueWidgetBuilder<FSelectStyle> emptyBuilder,
     ScrollController? contentScrollController,
@@ -270,9 +274,10 @@ abstract class FSelect<T> extends StatefulWidget {
     AlignmentGeometry anchor,
     AlignmentGeometry fieldAnchor,
     BoxConstraints popoverConstraints,
+    FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset offset,
     FHidePopoverRegion hideOnTapOutside,
-    bool directionPadding,
     bool autoHide,
     ValueWidgetBuilder<FSelectStyle> emptyBuilder,
     ScrollController? contentScrollController,
@@ -310,9 +315,10 @@ abstract class FSelect<T> extends StatefulWidget {
     this.anchor = Alignment.topLeft,
     this.fieldAnchor = Alignment.bottomLeft,
     this.popoverConstraints = const BoxConstraints(maxWidth: 200, maxHeight: 300),
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.directionPadding = false,
     this.autoHide = true,
     this.emptyBuilder = defaultEmptyBuilder,
     this.contentScrollController,
@@ -351,9 +357,10 @@ abstract class FSelect<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('anchor', anchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
       ..add(DiagnosticsProperty('constraints', popoverConstraints))
+      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
@@ -496,9 +503,10 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
             controller: _controller.popover,
             popoverAnchor: widget.anchor,
             childAnchor: widget.fieldAnchor,
+            spacing: widget.spacing,
             shift: widget.shift,
+            offset: widget.offset,
             hideOnTapOutside: widget.hideOnTapOutside,
-            directionPadding: widget.directionPadding,
             popoverBuilder:
                 (_, _, _) => ConstrainedBox(
                   constraints: widget.popoverConstraints,

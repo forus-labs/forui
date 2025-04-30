@@ -106,9 +106,11 @@ FPopoverMenu(
   dragStartBehavior: DragStartBehavior.start,
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
-  directionPadding: false,
-  hideOnTapOutside: FHidePopoverRegion.anywhere,
+  spacing: FPortalSpacing.zero,
   shift: FPortalShift.flip,
+  offset: Offset.zero,
+  hideOnTapOutside: FHidePopoverRegion.anywhere,
+  traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
   menu: [
     FTileGroup(
       children: [],
@@ -129,9 +131,11 @@ FPopoverMenu.automatic(
   dragStartBehavior: DragStartBehavior.start,
   menuAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
-  directionPadding: false,
+  spacing: FPortalSpacing.zero,
+  offset: Offset.zero,
   hideOnTapOutside: FHidePopoverRegion.none,
   shift: FPortalShift.flip,
+  traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
   menu: [
     FTileGroup(
       children: [],

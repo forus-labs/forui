@@ -74,11 +74,12 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 ```dart copy
 FSelectMenuTile<Value>(
   selectController: FSelectMenuTileController(), // or FSelectMenuTileController.radio()
-  menuAnchor: Alignment.bottomLeft,
-  tileAnchor: Alignment.bottomLeft,
+  menuAnchor: Alignment.topRight,
+  tileAnchor: Alignment.bottomRight,
+  spacing: const FPortalSpacing(4),
   shift: FPortalShift.flip,
-  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
-  directionPadding: true,
+  offset: Offset.zero,
+  hideOnTapOutside: FHidePopoverRegion.anywhere,
   autoHide: false,
   scrollController: ScrollController(),
   cacheExtent: 100,
@@ -110,11 +111,12 @@ FSelectMenuTile<Value>(
 ```dart copy
 FSelectMenuTile<Value>.builder(
   selectController: FSelectMenuTileController(), // or FSelectMenuTileController.radio()
-  menuAnchor: Alignment.bottomLeft,
-  tileAnchor: Alignment.bottomLeft,
+  menuAnchor: Alignment.topRight,
+  tileAnchor: Alignment.bottomRight,
+  spacing: const FPortalSpacing(4),
   shift: FPortalShift.flip,
+  offset: Offset.zero,
   hideOnTapOutside: FHidePopoverRegion.anywhere,
-  directionPadding: true,
   autoHide: false,
   scrollController: ScrollController(),
   cacheExtent: 100,

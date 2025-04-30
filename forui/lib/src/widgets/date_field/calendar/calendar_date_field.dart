@@ -16,11 +16,13 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final AlignmentGeometry inputAnchor;
   @override
+  final FPortalSpacing spacing;
+  @override
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   @override
-  final FHidePopoverRegion hideOnTapOutside;
+  final Offset offset;
   @override
-  final bool directionPadding;
+  final FHidePopoverRegion hideOnTapOutside;
   @override
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
   @override
@@ -46,9 +48,10 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.clearable = false,
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.directionPadding = false,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -247,9 +250,10 @@ class _CalendarPopover extends StatelessWidget {
     controller: controller.calendar,
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
+    spacing: properties.spacing,
     shift: properties.shift,
+    offset: properties.offset,
     hideOnTapOutside: properties.hideOnTapOutside,
-    directionPadding: properties.directionPadding,
     popoverBuilder:
         (_, _, _) => TextFieldTapRegion(
           child: ValueListenableBuilder(

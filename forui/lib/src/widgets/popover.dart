@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/rendering.dart';
 
 part 'popover.style.dart';
 
@@ -115,25 +114,34 @@ class FPopover extends StatefulWidget {
   /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
   final AlignmentGeometry childAnchor;
 
+  /// {@template forui.widgets.FPopover.spacing}
+  /// The spacing between the child's anchor and popover's anchor. Defaults to `FPortalSpacing(4)`.
+  ///
+  /// It applied before [shift].
+  /// {@endtemplate}
+  final FPortalSpacing spacing;
+
   /// {@template forui.widgets.FPopover.shift}
   /// The shifting strategy used to shift a popover when it overflows out of the viewport. Defaults to
   /// [FPortalShift.flip].
+  ///
+  /// It is applied after [spacing] and before [offset].
   ///
   /// See [FPortalShift] for more information on the different shifting strategies.
   /// {@endtemplate}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
+  /// {@template forui.widgets.FPopover.offset}
+  /// The offset to adjust the popover by. Defaults to [Offset.zero].
+  ///
+  /// It is applied after [shift].
+  /// {@endtemplate}
+  final Offset offset;
+
   /// {@template forui.widgets.FPopover.hideOnTapOutside}
   /// The region that can be tapped to hide the popover.
   /// {@endtemplate}
   final FHidePopoverRegion hideOnTapOutside;
-
-  /// {@template forui.widgets.FPopover.directionPadding}
-  /// True if the popover should include the cross-axis padding of the anchor when aligning to it. Defaults to false.
-  ///
-  /// Diagonal corners are ignored.
-  /// {@endtemplate}
-  final bool directionPadding;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -169,9 +177,10 @@ class FPopover extends StatefulWidget {
     required this.popoverBuilder,
     required this.child,
     this.style,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.directionPadding = false,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -194,9 +203,10 @@ class FPopover extends StatefulWidget {
     required this.child,
     this.controller,
     this.style,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.directionPadding = false,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -220,9 +230,10 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -250,9 +261,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
-    final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
-    final popover = widget.popoverAnchor;
-    final childAnchor = widget.childAnchor;
+    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
     var child =
         widget._automatic
@@ -267,15 +276,10 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       controller: _controller._overlay,
       portalAnchor: widget.popoverAnchor,
       childAnchor: widget.childAnchor,
+      viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
+      spacing: widget.spacing,
       shift: widget.shift,
-      offset:
-          widget.directionPadding
-              ? Offset.zero
-              : Alignments.removeDirectionalPadding(
-                style.padding.resolve(textDirection),
-                popover.resolve(textDirection),
-                childAnchor.resolve(textDirection),
-              ),
+      offset: widget.offset,
       portalBuilder:
           (context) => CallbackShortcuts(
             bindings: {const SingleActivator(LogicalKeyboardKey.escape): _controller.hide},
@@ -286,20 +290,17 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                 autofocus: widget.autofocus,
                 node: widget.focusNode,
                 onFocusChange: widget.onFocusChange,
-                child: Padding(
-                  padding: style.padding,
-                  child: FadeTransition(
-                    opacity: _controller._fade,
-                    child: ScaleTransition(
-                      scale: _controller._scale,
-                      child: TapRegion(
-                        groupId: _group,
-                        onTapOutside:
-                            widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
-                        child: DecoratedBox(
-                          decoration: style.decoration,
-                          child: widget.popoverBuilder(context, style, null),
-                        ),
+                child: FadeTransition(
+                  opacity: _controller._fade,
+                  child: ScaleTransition(
+                    scale: _controller._scale,
+                    child: TapRegion(
+                      groupId: _group,
+                      onTapOutside:
+                          widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
+                      child: DecoratedBox(
+                        decoration: style.decoration,
+                        child: widget.popoverBuilder(context, style, null),
                       ),
                     ),
                   ),
@@ -326,12 +327,15 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final BoxDecoration decoration;
 
-  /// The padding surrounding the popover. Defaults to `EdgeInsets.all(4)`.
+  /// The additional insets of the view. In other words, the minimum distance between the edges of the view and the
+  /// edges of the popover. This applied in addition to the insets provided by [MediaQueryData.viewPadding].
+  ///
+  /// Defaults to `EdgeInsets.all(5)`.
   @override
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry viewInsets;
 
   /// Creates a [FPopoverStyle].
-  const FPopoverStyle({required this.decoration, this.padding = const EdgeInsets.all(4)});
+  const FPopoverStyle({required this.decoration, this.viewInsets = const EdgeInsets.all(5)});
 
   /// Creates a [FPopoverStyle] that inherits its properties.
   FPopoverStyle.inherit({required FColors colors, required FStyle style})

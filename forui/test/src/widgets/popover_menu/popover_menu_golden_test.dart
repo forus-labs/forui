@@ -85,61 +85,6 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/scrollable-${theme.name}.png'));
       });
-
-      testWidgets('${theme.name} with directional padding', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold.app(
-            theme: theme.data,
-            child: FPopoverMenu(
-              menuAnchor: Alignment.topRight,
-              childAnchor: Alignment.bottomRight,
-              directionPadding: true,
-              style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
-              popoverController: controller,
-              menu: [
-                FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
-                FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
-              ],
-              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
-            ),
-          ),
-        );
-
-        unawaited(controller.show());
-        await tester.pumpAndSettle();
-
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('popover-menu/directional-padding-${theme.name}.png'),
-        );
-      });
-
-      testWidgets('${theme.name} without no directional padding', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold.app(
-            theme: theme.data,
-            child: FPopoverMenu(
-              menuAnchor: Alignment.topRight,
-              childAnchor: Alignment.bottomRight,
-              style: theme.data.popoverMenuStyle.copyWith(padding: const EdgeInsets.all(50)),
-              popoverController: controller,
-              menu: [
-                FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
-                FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
-              ],
-              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
-            ),
-          ),
-        );
-
-        unawaited(controller.show());
-        await tester.pumpAndSettle();
-
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('popover-menu/no-directional-padding-${theme.name}.png'),
-        );
-      });
     });
   }
 

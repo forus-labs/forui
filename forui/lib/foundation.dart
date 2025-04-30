@@ -12,3 +12,4 @@ export 'src/foundation/time.dart';
 export 'src/foundation/transform.dart';
 export 'src/foundation/portal/portal.dart';
 export 'src/foundation/portal/portal_shift.dart';
+export 'src/foundation/portal/portal_spacing.dart';

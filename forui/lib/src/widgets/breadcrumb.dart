@@ -117,9 +117,10 @@ abstract interface class FBreadcrumbItem extends Widget {
     FTileDivider divider,
     AlignmentGeometry menuAnchor,
     AlignmentGeometry childAnchor,
+    FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset offset,
     FHidePopoverRegion hideOnTapOutside,
-    bool directionPadding,
     bool autofocus,
     FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -195,9 +196,10 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final FTileDivider divider;
   final AlignmentGeometry menuAnchor;
   final AlignmentGeometry childAnchor;
+  final FPortalSpacing spacing;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset offset;
   final FHidePopoverRegion hideOnTapOutside;
-  final bool directionPadding;
   final bool autofocus;
   final FocusScopeNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
@@ -217,9 +219,10 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topLeft,
     this.childAnchor = Alignment.bottomLeft,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.directionPadding = false,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -246,9 +249,10 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
@@ -282,9 +286,10 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       style: widget.popoverMenuStyle,
       menuAnchor: widget.menuAnchor,
       childAnchor: widget.childAnchor,
+      spacing: widget.spacing,
       shift: widget.shift,
+      offset: widget.offset,
       hideOnTapOutside: widget.hideOnTapOutside,
-      directionPadding: widget.directionPadding,
       autofocus: widget.autofocus,
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,
@@ -313,12 +318,6 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       _popoverController.dispose();
     }
     super.dispose();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('controller', _popoverController));
   }
 }
 

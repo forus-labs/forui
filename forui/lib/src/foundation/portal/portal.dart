@@ -20,9 +20,6 @@ class FPortal extends StatefulWidget {
   /// The controller that shows and hides the portal. It initially hides the portal.
   final OverlayPortalController controller;
 
-  /// The offset to adjust the [shift]ed portal by. Defaults to [Offset.zero].
-  final Offset offset;
-
   /// The point on the portal (floating content) that connects with the child, at the child's anchor.
   ///
   /// For example, [Alignment.topCenter] means the top-center point of the portal will connect with the child.
@@ -39,11 +36,23 @@ class FPortal extends StatefulWidget {
   /// Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry childAnchor;
 
+  /// The spacing between the child's anchor and portal's anchor. Defaults to [FPortalSpacing.zero].
+  ///
+  /// It applied before [shift].
+  final FPortalSpacing spacing;
+
   /// The shifting strategy used to shift a portal when it overflows out of the viewport. Defaults to
   /// [FPortalShift.flip].
   ///
+  /// It is applied after [spacing] and before [offset].
+  ///
   /// See [FPortalShift] for the different shifting strategies.
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+
+  /// The offset to adjust the portal by. Defaults to [Offset.zero].
+  ///
+  /// It is applied after [shift].
+  final Offset offset;
 
   /// The insets of the view. In other words, the minimum distance between the edges of the view and the edges of the
   /// portal. Defaults to [MediaQueryData.viewPadding].
@@ -62,10 +71,11 @@ class FPortal extends StatefulWidget {
     required this.controller,
     required this.portalBuilder,
     required this.child,
-    this.offset = Offset.zero,
     this.portalAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
+    this.spacing = FPortalSpacing.zero,
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.viewInsets,
     super.key,
   });
@@ -80,6 +90,7 @@ class FPortal extends StatefulWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('viewInsets', viewInsets))
@@ -92,35 +103,35 @@ class _State extends State<FPortal> {
   final _link = ChildLayerLink();
 
   @override
-  Widget build(BuildContext context) {
-    final insets =
-        widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
-        MediaQuery.viewPaddingOf(context);
+  Widget build(BuildContext context) => RepaintBoundary(
+    child: CompositedChild(
+      notifier: _notifier,
+      link: _link,
+      child: OverlayPortal(
+        controller: widget.controller,
+        overlayChildBuilder: (context) {
+          final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+          final portalAnchor = widget.portalAnchor.resolve(direction);
+          final childAnchor = widget.childAnchor.resolve(direction);
 
-    return RepaintBoundary(
-      child: CompositedChild(
-        notifier: _notifier,
-        link: _link,
-        child: OverlayPortal(
-          controller: widget.controller,
-          overlayChildBuilder: (context) {
-            final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
-            return CompositedPortal(
-              notifier: _notifier,
-              link: _link,
-              offset: widget.offset,
-              portalAnchor: widget.portalAnchor.resolve(direction),
-              childAnchor: widget.childAnchor.resolve(direction),
-              viewInsets: insets,
-              shift: widget.shift,
-              child: widget.portalBuilder(context),
-            );
-          },
-          child: RepaintBoundary(child: widget.child),
-        ),
+          return CompositedPortal(
+            notifier: _notifier,
+            link: _link,
+            portalAnchor: portalAnchor,
+            childAnchor: childAnchor,
+            viewInsets:
+                widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
+                MediaQuery.viewPaddingOf(context),
+            spacing: widget.spacing.resolve(childAnchor, portalAnchor),
+            shift: widget.shift,
+            offset: widget.offset,
+            child: widget.portalBuilder(context),
+          );
+        },
+        child: RepaintBoundary(child: widget.child),
       ),
-    );
-  }
+    ),
+  );
 
   @override
   void dispose() {

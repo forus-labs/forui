@@ -73,14 +73,17 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// Defaults to [Alignment.bottomRight].
   final AlignmentGeometry tileAnchor;
 
+  /// {@macro forui.widgets.FPopover.spacing}
+  final FPortalSpacing spacing;
+
   /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
+  /// {@macro forui.widgets.FPopover.offset}
+  final Offset offset;
+
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
-
-  /// {@macro forui.widgets.FPopover.directionPadding}
-  final bool directionPadding;
 
   /// True if the menu should be automatically hidden after a menu option is selected. Defaults to false.
   final bool autoHide;
@@ -145,9 +148,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.directionPadding = false,
     this.autoHide = false,
     this.label,
     this.description,
@@ -195,9 +199,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              style: menuStyle,
              popoverAnchor: menuAnchor,
              childAnchor: tileAnchor,
+             spacing: spacing,
              shift: shift,
+             offset: offset,
              hideOnTapOutside: hideOnTapOutside,
-             directionPadding: directionPadding,
              autofocus: autofocus,
              focusNode: focusNode,
              onFocusChange: onFocusChange,
@@ -281,9 +286,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.directionPadding = false,
     this.autoHide = false,
     this.label,
     this.description,
@@ -331,9 +337,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              style: menuStyle,
              popoverAnchor: menuAnchor,
              childAnchor: tileAnchor,
+             spacing: spacing,
              shift: shift,
+             offset: offset,
              hideOnTapOutside: hideOnTapOutside,
-             directionPadding: directionPadding,
              autofocus: autofocus,
              focusNode: focusNode,
              onFocusChange: onFocusChange,
@@ -405,9 +412,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
+      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
