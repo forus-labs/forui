@@ -92,7 +92,7 @@ class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderS
                       Row(
                         children: [
                           Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialValue: value)),
+                          Expanded(flex: 2, child: FTextField(initialText: value)),
                         ],
                       ),
                       const SizedBox(height: 7),

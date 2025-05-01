@@ -327,10 +327,13 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Fix `FTappable`'s animation sometimes being invoked after it is unmounted.
 
 
-### `FTextField`
+### `FTextField` & `FTextFormField` (new)
+We've split `FTextField` into `FTextField` and `FTextFormField`. This change was necessary to allow `FTextField` to be 
+used in other widgets and allowing those widgets to properly implement `FormField`.
 
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
+* Add `FTextFormField`.
 
 * Fix `FTextField` not setting its `FormField`'s initial value.
 * Fix `FTextField(...)` not setting the max lines to 1 default.

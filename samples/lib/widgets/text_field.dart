@@ -54,7 +54,7 @@ class EmailTextFieldPage extends Sample {
   @override
   Widget sample(BuildContext context) => const Padding(
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.email(initialValue: 'jane@doe.com'),
+    child: FTextField.email(initialText: 'jane@doe.com'),
   );
 }
 
@@ -65,7 +65,7 @@ class PasswordTextFieldPage extends Sample {
   @override
   Widget sample(BuildContext context) => const Padding(
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.password(initialValue: 'My password', obscuringCharacter: '*'),
+    child: FTextField.password(initialText: 'My password', obscuringCharacter: '*'),
   );
 }
 
@@ -101,14 +101,14 @@ class _FormFieldState extends StatefulSampleState<FormTextFieldPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FTextField.email(
+          FTextFormField.email(
             controller: _emailController,
             hint: 'janedoe@foruslabs.com',
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
           ),
           const SizedBox(height: 10),
-          FTextField.password(
+          FTextFormField.password(
             controller: _passwordController,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',

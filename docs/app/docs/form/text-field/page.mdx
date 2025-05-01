@@ -5,8 +5,10 @@ import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Text Field
 
-A text field lets the user enter text, either with a hardware keyboard or with an onscreen keyboard. It can also be used
-in a form.
+A text field lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
+
+A closely related widget is a `FTextFormField`. It behaves exactly like a text field but has additional support for
+forms.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.text_field/"/>
@@ -65,6 +67,28 @@ FTextField(
   label: const Text('Email'),
   hint: 'john@doe.com',
   description: const Text('Enter your email associated with your Forui account.'),
+  error: const Text('Error'),
+  keyboardType: TextInputType.emailAddress,
+  textCapitalization: TextCapitalization.none,
+  maxLines: 1,
+
+);
+```
+
+### `FTextFormField`
+
+```dart copy
+FTextFormField(
+  controller: _controller, // TextEditingController
+  clearable: (value) => value.text.isNotEmpty,
+  enabled: true,
+  onSaved: (value) {},
+  validator: (value) => true,
+  label: const Text('Email'),
+  hint: 'john@doe.com',
+  description: const Text('Enter your email associated with your Forui account.'),
+  forceErrorText: 'Error'
+  errorBuilder: (context, error) => const Text(error),
   keyboardType: TextInputType.emailAddress,
   textCapitalization: TextCapitalization.none,
   maxLines: 1,
@@ -237,14 +261,14 @@ FTextField(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FTextField.email(
+            FTextFormField.email(
               controller: _emailController,
               hint: 'janedoe@foruslabs.com',
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
             ),
             const SizedBox(height: 10),
-            FTextField.password(
+            FTextFormField.password(
               controller: _passwordController,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',

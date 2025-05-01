@@ -14,16 +14,16 @@ const _longText =
     'proident, sunt in culpa qui officia deserunt mollit anim id est laborum ';
 
 void main() {
-  group('FTextField', () {
+  group('FTextFormField', () {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FTextField(
+          child: FTextFormField(
             style: TestScaffold.blueScreen.textFieldStyle,
             label: const Text('My Label'),
             hint: 'hint',
             description: const Text('Some help text.'),
-            error: const Text('Error'),
+            forceErrorText: 'Error',
           ),
         ),
       );
@@ -39,7 +39,7 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme.data,
-                child: FTextField(
+                child: FTextFormField(
                   controller: controller,
                   autofocus: focused_,
                   label: const Text('My Label'),
@@ -53,7 +53,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text-field/${theme.name}/default-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-form-field/${theme.name}/default-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
@@ -62,12 +62,12 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme.data,
-                child: FTextField(
+                child: FTextFormField(
                   controller: controller,
                   autofocus: focused_,
                   label: const Text('My Label'),
                   hint: 'hint',
-                  error: const Text('An error has occurred.'),
+                  forceErrorText: 'An error has occurred.',
                 ),
               ),
             );
@@ -76,7 +76,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text-field/${theme.name}/error-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-form-field/${theme.name}/error-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
@@ -85,7 +85,7 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme.data,
-                child: FTextField.email(controller: controller, autofocus: focused_, hint: 'janedoe@foruslabs.com'),
+                child: FTextFormField.email(controller: controller, autofocus: focused_, hint: 'janedoe@foruslabs.com'),
               ),
             );
 
@@ -93,7 +93,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text-field/${theme.name}/email-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-form-field/${theme.name}/email-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
 
@@ -102,7 +102,7 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme.data,
-                child: FTextField.password(controller: controller, autofocus: focused_, hint: 'password'),
+                child: FTextFormField.password(controller: controller, autofocus: focused_, hint: 'password'),
               ),
             );
 
@@ -110,7 +110,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text-field/${theme.name}/password-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile('text-form-field/${theme.name}/password-$focused${text == null ? '-no-text' : ''}.png'),
             );
           });
         }
@@ -121,7 +121,7 @@ void main() {
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme.data,
-                child: FTextField.multiline(
+                child: FTextFormField.multiline(
                   controller: controller,
                   autofocus: focused_,
                   label: const Text('My Label'),
@@ -134,7 +134,9 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile('text-field/${theme.name}/multiline-$focused${text == null ? '-no-text' : ''}.png'),
+              matchesGoldenFile(
+                'text-form-field/${theme.name}/multiline-$focused${text == null ? '-no-text' : ''}.png',
+              ),
             );
           });
         }
@@ -144,14 +146,14 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            child: FTextField(
+            child: FTextFormField(
               label: const Text('My Label'),
               counterBuilder: (context, current, max, focused) => Text('$current of $max'),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('text-field/${theme.name}/counter.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('text-form-field/${theme.name}/counter.png'));
       });
 
       testWidgets('iOS selection handles - ${theme.name}', (tester) async {
@@ -159,16 +161,16 @@ void main() {
 
         final controller = TextEditingController(text: 'text');
 
-        await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FTextField(controller: controller)));
+        await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FTextFormField(controller: controller)));
 
-        await tester.tap(find.byType(FTextField));
-        await tester.tap(find.byType(FTextField));
-        await tester.tap(find.byType(FTextField));
+        await tester.tap(find.byType(FTextFormField));
+        await tester.tap(find.byType(FTextFormField));
+        await tester.tap(find.byType(FTextFormField));
         await tester.pumpAndSettle();
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('text-field/${theme.name}/ios-selection-handle.png'),
+          matchesGoldenFile('text-form-field/${theme.name}/ios-selection-handle.png'),
         );
 
         debugDefaultTargetPlatformOverride = null;
@@ -176,7 +178,7 @@ void main() {
 
       group('clearable', () {
         testWidgets('clear icon', (tester) async {
-          await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FTextField(clearable: (_) => true)));
+          await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FTextFormField(clearable: (_) => true)));
 
           final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
           await gesture.addPointer(location: Offset.zero);
@@ -186,14 +188,17 @@ void main() {
           await gesture.moveTo(tester.getCenter(find.bySemanticsLabel('Clear')));
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('text-field/${theme.name}/clear-icon.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('text-form-field/${theme.name}/clear-icon.png'),
+          );
         });
 
         testWidgets('clear & suffix icon', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
-              child: FTextField(suffixBuilder: (_, _, _) => const Icon(FIcons.alarmClock), clearable: (_) => true),
+              child: FTextFormField(suffixBuilder: (_, _, _) => const Icon(FIcons.alarmClock), clearable: (_) => true),
             ),
           );
 
@@ -207,7 +212,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('text-field/${theme.name}/clear-suffix-icon.png'),
+            matchesGoldenFile('text-form-field/${theme.name}/clear-suffix-icon.png'),
           );
         });
       });

@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/text_field/field.dart';
+import 'package:meta/meta.dart';
 
 /// The [FTextField.counterBuilder] callback.
 ///
@@ -23,25 +24,28 @@ typedef FTextFieldCounterBuilder =
       bool focused,
     );
 
+@internal
+extension Defaults on Never {
+  static bool clearable(TextEditingValue _) => false;
+
+  static Widget contextMenuBuilder(BuildContext _, EditableTextState state) =>
+      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+
+  static Widget builder(BuildContext _, (FTextFieldStyle, Set<WidgetState>) _, Widget? child) => child!;
+}
+
+
+
 /// A text field.
 ///
-/// It lets the user enter text, either with a hardware keyboard or with an onscreen keyboard. A [FTextField] is
-/// internally a [FormField], therefore it can be used in a [Form].
+/// It lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
 ///
 /// See:
 /// * https://forui.dev/docs/form/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
+/// * [FTextFormField] for creating a text field that can be used in a form.
 /// * [TextField] for more details about working with a text field.
-class FTextField extends StatelessWidget with FFormFieldProperties<String> {
-  static Widget _contextMenuBuilder(BuildContext _, EditableTextState state) =>
-      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
-
-  static Widget _fieldBuilder(BuildContext _, (FTextFieldStyle, Set<WidgetState>) _, Widget? child) => child!;
-
-  static Widget _errorBuilder(BuildContext _, String text) => Text(text);
-
-  static bool _clearable(TextEditingValue _) => false;
-
+class FTextField extends StatefulWidget {
   /// {@template forui.text_field.style}
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   /// {@endtemplate}
@@ -54,10 +58,9 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   /// {@endtemplate}
   final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder;
 
-  /// {@template forui.text_field.errorBuilder}
+  /// {@template forui.text_field.label}
   /// A builder that creates a widget to display validation errors.
   /// {@endtemplate}
-  @override
   final Widget? label;
 
   /// {@template forui.text_field.hint}
@@ -72,8 +75,12 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   ///
   /// See [InputDecoration.helper] for more information.
   /// {@endtemplate}
-  @override
   final Widget? description;
+
+  /// {@template forui.text_field.error}
+  /// The error message.
+  /// {@endtemplate}
+  final Widget? error;
 
   /// {@template forui.text_field.magnifier_configuration}
   /// The configuration for the magnifier of this text field.
@@ -224,7 +231,7 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   /// See also:
   ///  * [maxLines], which sets the maximum number of lines visible, and has several examples of how minLines and
   ///    maxLines interact to produce various behaviors.
-  ///  * [expands], which determines whether the field should fill the height of its parent.
+  ///  * [expands], which determines whether the field should fill the height of its widget.
   /// {@endtemplate}
   final int? minLines;
 
@@ -246,22 +253,22 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   ///
   /// See also:
   ///  * [minLines], which sets the minimum number of lines visible.
-  ///  * [expands], which determines whether the field should fill the height of its parent.
+  ///  * [expands], which determines whether the field should fill the height of its widget.
   /// {@endtemplate}
   final int? maxLines;
 
   /// {@template forui.text_field.expands}
-  /// Whether this widget's height will be sized to fill its parent. Defaults to false.
+  /// Whether this widget's height will be sized to fill its widget. Defaults to false.
   ///
-  /// If set to true and wrapped in a parent widget like [Expanded] or [SizedBox], the input will expand to fill the
-  /// parent.
+  /// If set to true and wrapped in a widget widget like [Expanded] or [SizedBox], the input will expand to fill the
+  /// widget.
   ///
   /// [maxLines] and [minLines] must both be null when this is set to true, otherwise an error is thrown.
   ///
   /// See the examples in [maxLines] for the complete picture of how [maxLines], [minLines], and [expands] interact to
   /// produce various behaviors.
   ///
-  /// Input that matches the height of its parent:
+  /// Input that matches the height of its widget:
   /// ```dart
   /// const Expanded(
   ///   child: FTextField(maxLines: null, expands: true),
@@ -428,7 +435,6 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   /// {@template forui.text_field.enabled}
   /// If false the text field is "disabled": it ignores taps. Defaults to true.
   /// {@endtemplate}
-  @override
   final bool enabled;
 
   /// {@template forui.text_field.ignorePointers}
@@ -615,43 +621,19 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   /// {@endtemplate}
   final bool Function(TextEditingValue) clearable;
 
-  @override
-  final FormFieldSetter<String>? onSaved;
-
-  @override
-  final FormFieldValidator<String>? validator;
-
   /// {@template forui.text_field.initialValue}
   /// An optional value to initialize the form field to, or null otherwise.
   /// {@endtemplate}
-  final String? initialValue;
-
-  @override
-  final AutovalidateMode autovalidateMode;
-
-  @override
-  final String? forceErrorText;
-
-  @override
-  final Widget Function(BuildContext, String) errorBuilder;
-
-  /// {@template f_text_field.floating_label_alignment}
-  /// The alignment of the label. Defaults to [AlignmentDirectional.topStart].
-  /// {@endtemplate}
-  final AlignmentGeometry? floatingLabelAlignment;
-
-  /// {@template f_text_field.floating_label_behavior}
-  /// The width value interval for the text span. Defaults to FloatingLabelWidth.sufficient
-  /// {@endtemplate}
-  final FloatingLabelBehavior? floatingLabelBehavior;
+  final String? initialText;
 
   /// Creates a [FTextField].
   const FTextField({
     this.style,
-    this.builder = _fieldBuilder,
+    this.builder = Defaults.builder,
     this.label,
     this.hint,
     this.description,
+    this.error,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -697,24 +679,17 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = _contextMenuBuilder,
+    this.contextMenuBuilder = Defaults.contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = _clearable,
-    this.onSaved,
-    this.validator,
-    this.initialValue,
-    this.autovalidateMode = AutovalidateMode.disabled,
-    this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
-    this.floatingLabelAlignment,
-    this.floatingLabelBehavior,
+    this.clearable = Defaults.clearable,
+    this.initialText,
     super.key,
   }) : assert(
-         initialValue == null || controller == null,
+         initialText == null || controller == null,
          'Cannot provide both an initial value and a controller. '
          'If you want to use a controller, set its initial value directly on the controller.',
        );
@@ -722,10 +697,11 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.style,
-    this.builder = _fieldBuilder,
+    this.builder = Defaults.builder,
     this.label = const Text('Email'),
     this.hint,
     this.description,
+    this.error,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -771,24 +747,17 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = _contextMenuBuilder,
+    this.contextMenuBuilder = Defaults.contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = _clearable,
-    this.onSaved,
-    this.validator,
-    this.initialValue,
-    this.autovalidateMode = AutovalidateMode.disabled,
-    this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
-    this.floatingLabelAlignment,
-    this.floatingLabelBehavior,
+    this.clearable = Defaults.clearable,
+    this.initialText,
     super.key,
   }) : assert(
-         initialValue == null || controller == null,
+         initialText == null || controller == null,
          'Cannot provide both an initial value and a controller. '
          'If you want to use a controller, set its initial value directly on the controller.',
        );
@@ -799,10 +768,11 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   /// when handling the creation of new passwords.
   const FTextField.password({
     this.style,
-    this.builder = _fieldBuilder,
+    this.builder = Defaults.builder,
     this.label = const Text('Password'),
     this.hint,
     this.description,
+    this.error,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -848,24 +818,17 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = _contextMenuBuilder,
+    this.contextMenuBuilder = Defaults.contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = _clearable,
-    this.onSaved,
-    this.validator,
-    this.initialValue,
-    this.autovalidateMode = AutovalidateMode.disabled,
-    this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
-    this.floatingLabelAlignment,
-    this.floatingLabelBehavior,
+    this.clearable = Defaults.clearable,
+    this.initialText,
     super.key,
   }) : assert(
-         initialValue == null || controller == null,
+         initialText == null || controller == null,
          'Cannot provide both an initial value and a controller. '
          'If you want to use a controller, set its initial value directly on the controller.',
        );
@@ -877,10 +840,11 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
   /// [maxLines].
   const FTextField.multiline({
     this.style,
-    this.builder = _fieldBuilder,
+    this.builder = Defaults.builder,
     this.label,
     this.hint,
     this.description,
+    this.error,
     this.magnifierConfiguration,
     this.controller,
     this.focusNode,
@@ -926,68 +890,23 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = _contextMenuBuilder,
+    this.contextMenuBuilder = Defaults.contextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = _clearable,
-    this.onSaved,
-    this.validator,
-    this.initialValue,
-    this.autovalidateMode = AutovalidateMode.disabled,
-    this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
-    this.floatingLabelAlignment,
-    this.floatingLabelBehavior,
+    this.clearable = Defaults.clearable,
+    this.initialText,
     super.key,
   }) : assert(
-         initialValue == null || controller == null,
+         initialText == null || controller == null,
          'Cannot provide both an initial value and a controller. '
          'If you want to use a controller, set its initial value directly on the controller.',
        );
 
   @override
-  Widget build(BuildContext context) {
-    final theme = context.theme;
-    final style = this.style ?? theme.textFieldStyle;
-
-    final textFormField = MergeSemantics(
-      child: Material(
-        color: Colors.transparent,
-        child: Theme(
-          // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
-          // for overriding selectionHandleColor.
-          data: Theme.of(context).copyWith(
-            textSelectionTheme: TextSelectionThemeData(
-              cursorColor: style.cursorColor,
-              selectionColor: style.cursorColor.withValues(alpha: 0.4),
-              selectionHandleColor: style.cursorColor,
-            ),
-          ),
-          child: CupertinoTheme(
-            // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
-            data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
-            child: Field(parent: this, style: style, key: key),
-          ),
-        ),
-      ),
-    );
-
-    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
-    return materialLocalizations == null
-        ? Localizations(
-          locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-          delegates: const [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          child: textFormField,
-        )
-        : textFormField;
-  }
+  State<FTextField> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -1058,13 +977,235 @@ class FTextField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
-      ..add(ObjectFlagProperty.has('onSaved', onSaved))
-      ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(StringProperty('initialValue', initialValue))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode))
-      ..add(StringProperty('forceErrorText', forceErrorText))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(DiagnosticsProperty('floatingLabelAlignment', floatingLabelAlignment))
-      ..add(EnumProperty('floatingLabelBehavior', floatingLabelBehavior));
+      ..add(StringProperty('initialText', initialText));
+  }
+}
+
+class _State extends State<FTextField> {
+  late TextEditingController _controller;
+  late WidgetStatesController _statesController;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+    _controller.addListener(_handleOnChange);
+
+    _statesController = widget.statesController ?? WidgetStatesController();
+    _statesController.addListener(_handleStatesChange);
+  }
+
+  @override
+  void didUpdateWidget(covariant FTextField old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        _controller.removeListener(_handleOnChange);
+      }
+
+      _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+      _controller.addListener(_handleOnChange);
+    }
+
+    if (widget.statesController != old.statesController) {
+      if (old.statesController == null) {
+        _statesController.dispose();
+      } else {
+        _statesController.removeListener(_handleStatesChange);
+      }
+
+      _statesController = widget.statesController ?? WidgetStatesController();
+      _statesController.addListener(_handleStatesChange);
+    }
+  }
+
+  void _handleOnChange() => widget.onChange?.call(_controller.text);
+
+  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {}));
+
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style ?? context.theme.textFieldStyle;
+    final states = {..._statesController.value};
+
+    final textfield = TextField(
+      controller: _controller,
+      decoration: _decoration(style),
+      focusNode: widget.focusNode,
+      undoController: widget.undoController,
+      cursorErrorColor: style.cursorColor,
+      keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
+      textCapitalization: widget.textCapitalization,
+      style: style.contentTextStyle.resolve(states),
+      textAlign: widget.textAlign,
+      textAlignVertical: widget.textAlignVertical,
+      textDirection: widget.textDirection,
+      readOnly: widget.readOnly,
+      showCursor: widget.showCursor,
+      autofocus: widget.autofocus,
+      statesController: _statesController,
+      obscuringCharacter: widget.obscuringCharacter,
+      obscureText: widget.obscureText,
+      autocorrect: widget.autocorrect,
+      smartDashesType: widget.smartDashesType,
+      smartQuotesType: widget.smartQuotesType,
+      enableSuggestions: widget.enableSuggestions,
+      maxLines: widget.maxLines,
+      minLines: widget.minLines,
+      expands: widget.expands,
+      maxLength: widget.maxLength,
+      maxLengthEnforcement: widget.maxLengthEnforcement,
+      onTap: widget.onTap,
+      onTapAlwaysCalled: widget.onTapAlwaysCalled,
+      onEditingComplete: widget.onEditingComplete,
+      onSubmitted: widget.onSubmit,
+      onAppPrivateCommand: widget.onAppPrivateCommand,
+      inputFormatters: widget.inputFormatters,
+      enabled: widget.enabled,
+      ignorePointers: widget.ignorePointers,
+      enableInteractiveSelection: widget.enableInteractiveSelection,
+      keyboardAppearance: style.keyboardAppearance,
+      scrollPadding: style.scrollPadding,
+      dragStartBehavior: widget.dragStartBehavior,
+      mouseCursor: widget.mouseCursor,
+      buildCounter: (context, {required currentLength, required isFocused, required maxLength}) {
+        final counter = widget.counterBuilder?.call(context, currentLength, maxLength, isFocused);
+        return counter == null
+            ? null
+            : DefaultTextStyle.merge(style: style.counterTextStyle.resolve(states), child: counter);
+      },
+      selectionControls: widget.selectionControls,
+      scrollController: widget.scrollController,
+      scrollPhysics: widget.scrollPhysics,
+      autofillHints: widget.autofillHints,
+      restorationId: widget.restorationId,
+      stylusHandwritingEnabled: widget.stylusHandwritingEnabled,
+      enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
+      contentInsertionConfiguration: widget.contentInsertionConfiguration,
+      contextMenuBuilder: widget.contextMenuBuilder,
+      canRequestFocus: widget.canRequestFocus,
+      spellCheckConfiguration: widget.spellCheckConfiguration,
+      magnifierConfiguration: widget.magnifierConfiguration,
+    );
+
+    Widget field = FLabel(
+      axis: Axis.vertical,
+      states: states,
+      label: widget.label,
+      style: style,
+      description: widget.description,
+      error: widget.error,
+      child: widget.builder(context, (style, states), textfield),
+    );
+
+    field = MergeSemantics(
+      child: Material(
+        color: Colors.transparent,
+        child: Theme(
+          // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
+          // for overriding selectionHandleColor.
+          data: Theme.of(context).copyWith(
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: style.cursorColor,
+              selectionColor: style.cursorColor.withValues(alpha: 0.4),
+              selectionHandleColor: style.cursorColor,
+            ),
+          ),
+          child: CupertinoTheme(
+            // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
+            data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
+            child: field,
+          ),
+        ),
+      ),
+    );
+
+    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+    if (materialLocalizations == null) {
+      field = Localizations(
+        locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+        delegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        child: field,
+      );
+    }
+
+    return field;
+  }
+
+  InputDecoration _decoration(FTextFieldStyle style) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final padding = style.contentPadding.resolve(textDirection);
+    final states = _statesController.value;
+
+    final suffixIcon = widget.suffixBuilder?.call(context, (style, states), null);
+    final clear =
+        widget.clearable(_controller.value)
+            ? Padding(
+              padding: style.clearButtonPadding,
+              child: FButton.icon(
+                style: style.clearButtonStyle,
+                onPress: () => _controller.text = '',
+                child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
+              ),
+            )
+            : null;
+
+    return InputDecoration(
+      isDense: true,
+      prefixIcon: widget.prefixBuilder?.call(context, (style, states), null),
+      suffixIcon: switch ((suffixIcon, clear)) {
+        (final icon?, final clear?) when !states.contains(WidgetState.disabled) => Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [clear, icon],
+        ),
+        (null, final clear?) when !states.contains(WidgetState.disabled) => clear,
+        (final icon, _) => icon,
+      },
+      // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
+      prefix: Padding(
+        padding: switch (textDirection) {
+          TextDirection.ltr => EdgeInsets.only(left: widget.prefixBuilder == null ? padding.left : 0),
+          TextDirection.rtl => EdgeInsets.only(right: widget.prefixBuilder == null ? padding.right : 0),
+        },
+      ),
+      prefixIconConstraints: const BoxConstraints(),
+      suffixIconConstraints: const BoxConstraints(),
+      contentPadding: switch (textDirection) {
+        TextDirection.ltr => padding.copyWith(left: 0),
+        TextDirection.rtl => padding.copyWith(right: 0),
+      },
+      hintText: widget.hint,
+      hintStyle: WidgetStateTextStyle.resolveWith(style.hintTextStyle.resolve),
+      fillColor: style.fillColor,
+      filled: style.filled,
+      border: WidgetStateInputBorder.resolveWith(style.border.resolve),
+      // This is done to trigger the error state. We don't pass in error directly since we build our own using FLabel.
+      error: widget.error == null ? null : const SizedBox(),
+    );
+  }
+
+  @override
+  void dispose() {
+    if (widget.statesController == null) {
+      _statesController.dispose();
+    } else {
+      _statesController.removeListener(_handleStatesChange);
+    }
+
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller.removeListener(_handleOnChange);
+    }
+    super.dispose();
   }
 }
