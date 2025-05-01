@@ -1,27 +1,22 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
 @internal
 class Field<T> extends FormField<T> {
-  final FSelectController<T> controller;
-  final FFormFieldProperties<T> properties;
+  final ValueNotifier<T?> controller;
 
   Field({
     required this.controller,
-    required this.properties,
+    required super.enabled,
+    required super.autovalidateMode,
+    required super.forceErrorText,
+    required super.onSaved,
+    required super.validator,
     required T? initialValue,
     required super.builder,
     super.key,
-  }) : super(
-         enabled: properties.enabled,
-         autovalidateMode: properties.autovalidateMode,
-         forceErrorText: properties.forceErrorText,
-         onSaved: properties.onSaved,
-         validator: properties.validator,
-         initialValue: initialValue ?? controller.value,
-       );
+  }) : super(initialValue: initialValue ?? controller.value);
 
   @override
   FormFieldState<T> createState() => _State();

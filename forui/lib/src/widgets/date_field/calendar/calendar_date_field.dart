@@ -36,7 +36,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final bool autoHide;
 
-  const _CalendarDateField({
+  _CalendarDateField({
     this.format,
     this.hint,
     this.textAlign = TextAlign.start,
@@ -166,49 +166,60 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final hint = widget.hint ?? localizations.dateFieldHint;
     final onSaved = widget.onSaved;
-    return FTextField(
-      focusNode: _focus,
-      controller: _textController,
-      style: style.textFieldStyle,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      textDirection: widget.textDirection,
-      expands: widget.expands,
-      mouseCursor: widget.mouseCursor,
-      canRequestFocus: widget.canRequestFocus,
-      onTap: _controller.calendar.toggle,
-      hint: hint,
-      readOnly: true,
-      enableInteractiveSelection: false,
-      prefixBuilder:
-          widget.prefixBuilder == null
-              ? null
-              : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
-      suffixBuilder:
-          widget.suffixBuilder == null
-              ? null
-              : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
-      clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
-      label: widget.label,
-      description: widget.description,
+
+    return Field(
+      controller: _controller,
       enabled: widget.enabled,
-      onSaved: onSaved == null ? null : (_) => onSaved(_controller.value),
-      validator: (_) => _controller.validator(_controller.value),
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
-      errorBuilder: widget.errorBuilder,
+      onSaved: onSaved,
+      validator: _controller.validator,
+      initialValue: widget.initialDate,
       builder:
-          (context, data, child) => _CalendarPopover(
-            controller: _controller,
-            style: style,
-            properties: widget,
-            child: widget.builder(context, (style, data.$1, data.$2), child),
+          (state) => FTextField(
+            focusNode: _focus,
+            controller: _textController,
+            style: style.textFieldStyle,
+            textAlign: widget.textAlign,
+            textAlignVertical: widget.textAlignVertical,
+            textDirection: widget.textDirection,
+            expands: widget.expands,
+            mouseCursor: widget.mouseCursor,
+            canRequestFocus: widget.canRequestFocus,
+            onTap: () {
+              _focus.unfocus();
+              _controller.calendar.toggle();
+            },
+            // TODO: focus onTapOutside
+            hint: hint,
+            readOnly: true,
+            enableInteractiveSelection: false,
+            prefixBuilder:
+                widget.prefixBuilder == null
+                    ? null
+                    : (context, styles, _) => MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                    ),
+            suffixBuilder:
+                widget.suffixBuilder == null
+                    ? null
+                    : (context, styles, _) => MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                    ),
+            clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
+            label: widget.label,
+            description: widget.description,
+            error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
+            enabled: widget.enabled,
+            builder:
+                (context, data, child) => _CalendarPopover(
+                  controller: _controller,
+                  style: style,
+                  properties: widget,
+                  child: widget.builder(context, (style, data.$1, data.$2), child),
+                ),
           ),
     );
   }
@@ -246,6 +257,7 @@ class _CalendarPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => FPopover(
+    traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
     style: style.popoverStyle,
     controller: controller.calendar,
     popoverAnchor: properties.anchor,

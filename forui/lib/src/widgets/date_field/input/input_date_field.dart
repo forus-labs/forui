@@ -14,7 +14,7 @@ class _InputDateField extends FDateField {
   final int baselineInputYear;
   final FDateFieldCalendarProperties? calendar;
 
-  const _InputDateField({
+  _InputDateField({
     this.textInputAction,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
@@ -128,6 +128,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
     };
 
     return DateInput(
+      controller: _controller,
       calendarController: _controller._calendar,
       onTap: widget.calendar == null ? null : _controller.calendar.show,
       style: style,

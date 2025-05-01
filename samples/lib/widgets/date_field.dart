@@ -10,9 +10,9 @@ class DateFieldPage extends Sample {
   DateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
-  Widget sample(BuildContext context) => const Padding(
-    padding: EdgeInsets.only(top: 30),
-    child: FDateField(label: Text('Appointment Date'), description: Text('Select a date for your appointment')),
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 30),
+    child: FDateField(label: const Text('Appointment Date'), description: const Text('Select a date for your appointment')),
   );
 }
 
@@ -21,11 +21,11 @@ class CalendarDateFieldPage extends Sample {
   CalendarDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
-  Widget sample(BuildContext context) => const Padding(
-    padding: EdgeInsets.only(top: 30),
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 30),
     child: FDateField.calendar(
-      label: Text('Appointment Date'),
-      description: Text('Select a date for your appointment'),
+      label: const Text('Appointment Date'),
+      description: const Text('Select a date for your appointment'),
     ),
   );
 }

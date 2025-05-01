@@ -303,4 +303,60 @@ void main() {
       });
     });
   }
+
+  for (final (name, field) in [
+    (
+      'calendar',
+      (controller, date, save) => FDateField.calendar(controller: controller, initialDate: date, onSaved: save),
+    ),
+    ('input', (controller, date, save) => FDateField.input(controller: controller, initialDate: date, onSaved: save)),
+    ('both', (controller, date, save) => FDateField(controller: controller, initialDate: date, onSaved: save)),
+  ]) {
+    group('$name - form', () {
+      testWidgets('set initial value using initialValue', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        DateTime? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            locale: const Locale('en', 'SG'),
+            child: Form(key: key, child: field(null, DateTime(2025, 1, 1, 10, 25), (v) => initial = v)),
+          ),
+        );
+
+        expect(find.textContaining(RegExp('(1 Jan 2025)|(01/01/2025)')), findsOne);
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, DateTime.utc(2025));
+      });
+
+      testWidgets('controller provided', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        DateTime? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            locale: const Locale('en', 'SG'),
+            child: Form(
+              key: key,
+              child: field(
+                autoDispose(FDateFieldController(vsync: tester, initialDate: DateTime(2025, 1, 1, 10, 25))),
+                null,
+                (v) => initial = v,
+              ),
+            ),
+          ),
+        );
+
+        expect(find.textContaining(RegExp('(1 Jan 2025)|(01/01/2025)')), findsOne);
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, DateTime.utc(2025));
+      });
+    });
+  }
 }

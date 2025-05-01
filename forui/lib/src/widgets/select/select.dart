@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/select/select_form_field.dart';
+import 'package:forui/src/foundation/form_field.dart';
 
 import 'package:meta/meta.dart';
 
@@ -479,7 +479,11 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
     return Field(
       controller: _controller,
-      properties: widget,
+      enabled: widget.enabled,
+      autovalidateMode: widget.autovalidateMode,
+      forceErrorText: widget.forceErrorText,
+      onSaved: widget.onSaved,
+      validator: widget.validator,
       initialValue: widget.initialValue,
       builder:
           (state) => FTextField(

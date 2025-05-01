@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/form_field.dart';
 
 import 'package:intl/intl.dart' hide TextDirection;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/date_field/input/date_input.dart';
+import 'package:sugar/sugar.dart' hide Offset;
 
 part 'calendar/calendar_date_field.dart';
 
@@ -203,10 +205,9 @@ abstract class FDateField extends StatefulWidget {
   /// [FDateFieldController.validator] will not be called unless [forceErrorText] is null.
   final String? forceErrorText;
 
-  const FDateField._({
+  FDateField._({
     this.controller,
     this.style,
-    this.initialDate,
     this.autofocus = false,
     this.focusNode,
     this.builder = _fieldBuilder,
@@ -220,8 +221,10 @@ abstract class FDateField extends StatefulWidget {
     this.autovalidateMode = AutovalidateMode.onUnfocus,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    DateTime? initialDate,
     super.key,
-  }) : assert(controller == null || initialDate == null, 'Cannot provide both controller and initialDate.');
+  }) : assert(controller == null || initialDate == null, 'Cannot provide both controller and initialDate.'),
+    initialDate = initialDate?.toLocalDate().toNative();
 
   /// Creates a [FDateField] that allows date selection through both an input field and a calendar popover.
   ///
@@ -258,7 +261,7 @@ abstract class FDateField extends StatefulWidget {
   /// See also:
   /// * [FDateField.calendar] - Creates a date field with only a calendar.
   /// * [FDateField.input] - Creates a date field with only an input field.
-  const factory FDateField({
+  factory FDateField({
     FDateFieldController? controller,
     FDateFieldStyle? style,
     DateTime? initialDate,
@@ -341,7 +344,7 @@ abstract class FDateField extends StatefulWidget {
   /// See also:
   /// * [FDateField] - Creates a date field with both input field and calendar.
   /// * [FDateField.input] - Creates a date field with only an input field.
-  const factory FDateField.calendar({
+  factory FDateField.calendar({
     FDateFieldController? controller,
     FDateFieldStyle? style,
     DateTime? initialDate,
