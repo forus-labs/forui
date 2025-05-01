@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  group('state', () {
+  group('form', () {
     for (final (type, field) in [
       (
         'normal',

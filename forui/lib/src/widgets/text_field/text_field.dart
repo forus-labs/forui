@@ -34,8 +34,6 @@ extension Defaults on Never {
   static Widget builder(BuildContext _, (FTextFieldStyle, Set<WidgetState>) _, Widget? child) => child!;
 }
 
-
-
 /// A text field.
 ///
 /// It lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
@@ -92,6 +90,9 @@ class FTextField extends StatefulWidget {
 
   /// {@template forui.text_field.controller}
   /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
+  ///
+  /// ## Contract
+  /// Throws an [AssertionError] if both [controller] and [initialText] are provided.
   /// {@endtemplate}
   final TextEditingController? controller;
 
@@ -622,7 +623,10 @@ class FTextField extends StatefulWidget {
   final bool Function(TextEditingValue) clearable;
 
   /// {@template forui.text_field.initialValue}
-  /// An optional value to initialize the form field to, or null otherwise.
+  /// The initial text.
+  ///
+  /// ## Contract
+  /// Throws an [AssertionError] if both [controller] and [initialText] are provided.
   /// {@endtemplate}
   final String? initialText;
 
@@ -689,9 +693,9 @@ class FTextField extends StatefulWidget {
     this.initialText,
     super.key,
   }) : assert(
-         initialText == null || controller == null,
-         'Cannot provide both an initial value and a controller. '
-         'If you want to use a controller, set its initial value directly on the controller.',
+         controller == null || initialText == null,
+         'Cannot provide both a controller and an initialText. '
+         'To fix, set the initial text directly in the controller.',
        );
 
   /// Creates a [FTextField] configured for emails.
@@ -757,9 +761,9 @@ class FTextField extends StatefulWidget {
     this.initialText,
     super.key,
   }) : assert(
-         initialText == null || controller == null,
-         'Cannot provide both an initial value and a controller. '
-         'If you want to use a controller, set its initial value directly on the controller.',
+         controller == null || initialText == null,
+         'Cannot provide both a controller and an initialText. '
+         'To fix, set the initial text directly in the controller.',
        );
 
   /// Creates a [FTextField] configured for passwords.
@@ -828,9 +832,9 @@ class FTextField extends StatefulWidget {
     this.initialText,
     super.key,
   }) : assert(
-         initialText == null || controller == null,
-         'Cannot provide both an initial value and a controller. '
-         'If you want to use a controller, set its initial value directly on the controller.',
+         controller == null || initialText == null,
+         'Cannot provide both a controller and an initialText. '
+         'To fix, set the initial text directly in the controller.',
        );
 
   /// Creates a [FTextField] configured for multiline inputs.
@@ -900,9 +904,9 @@ class FTextField extends StatefulWidget {
     this.initialText,
     super.key,
   }) : assert(
-         initialText == null || controller == null,
-         'Cannot provide both an initial value and a controller. '
-         'If you want to use a controller, set its initial value directly on the controller.',
+         controller == null || initialText == null,
+         'Cannot provide both a controller and an initialText. '
+         'To fix, set the initial text directly in the controller.',
        );
 
   @override

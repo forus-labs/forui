@@ -19,6 +19,58 @@ void main() {
     controller = FSelectController<String>(vsync: const TestVSync());
   });
 
+  group('form', () {
+    testWidgets('set initial value using initialValue', (tester) async {
+      final key = GlobalKey<FormState>();
+
+      String? initial;
+      await tester.pumpWidget(
+        TestScaffold.app(child: Form(
+          key: key,
+          child: FSelect<String>(
+            format: (value) => '$value!',
+            onSaved: (value) => initial = value,
+            initialValue: 'A',
+            children: [FSelectItem.text('A'), FSelectItem.text('B')],
+          ),
+        )),
+      );
+
+      expect(find.text('A!'), findsOneWidget);
+
+      key.currentState!.save();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      expect(initial, 'A');
+    });
+
+    testWidgets('controller provided', (tester) async {
+      final key = GlobalKey<FormState>();
+
+      String? initial;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Form(
+            key: key,
+            child: FSelect<String>(
+              controller: autoDispose(FSelectController(vsync: tester, value: 'A')),
+              format: (value) => '$value!',
+              onSaved: (value) => initial = value,
+              children: [FSelectItem.text('A'), FSelectItem.text('B')],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('A!'), findsOneWidget);
+
+      key.currentState!.save();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      expect(initial, 'A');
+    });
+  });
+
   group('FSelect', () {
     testWidgets('custom format', (tester) async {
       await tester.pumpWidget(
