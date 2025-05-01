@@ -62,7 +62,7 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
   void initState() {
     super.initState();
     current = widget.initial;
-    _controller = PageController(initialPage: delta(widget.start, widget.initial));
+    _controller = PageController(initialPage: delta(widget.start, widget.initial), keepPage: false);
     _key = ValueKey((widget.start, widget.end));
     _actions = {
       NextFocusIntent: CallbackAction<NextFocusIntent>(onInvoke: _onGridNextFocus),
@@ -77,7 +77,7 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
     super.didUpdateWidget(old);
     if (widget.start != old.start || widget.end != old.end) {
       _controller.dispose();
-      _controller = PageController(initialPage: delta(widget.start, current));
+      _controller = PageController(initialPage: delta(widget.start, current), keepPage: false);
       _key = ValueKey((widget.start, widget.end));
     }
   }
