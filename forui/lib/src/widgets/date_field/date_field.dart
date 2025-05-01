@@ -327,14 +327,16 @@ abstract class FDateField extends StatefulWidget {
   /// The [anchor] and [inputAnchor] control the alignment points for the calendar popover positioning.
   /// Defaults to [Alignment.topLeft] and [Alignment.bottomLeft] respectively.
   ///
-  /// The [shift] function controls how the calendar repositions when space is constrained. Defaults to
+  /// The [spacing] property controls the spacing between the input field and the picker popover. Defaults to
+  /// `FPortalSpacing(4)`.
+  ///
+  /// The [shift] function controls how the picker repositions when space is constrained. Defaults to
   /// [FPortalShift.flip].
+  ///
+  /// The [offset] property controls the offset of the picker popover. Defaults to [Offset.zero].
   ///
   /// [hideOnTapOutside] controls the region that can be tapped to hide the popover. Defaults to
   /// [FHidePopoverRegion.anywhere].
-  ///
-  /// [directionPadding] controls whether the popover should include the cross-axis padding of the anchor when aligning
-  /// to it. Defaults to false.
   ///
   /// See also:
   /// * [FDateField] - Creates a date field with both input field and calendar.
@@ -362,9 +364,10 @@ abstract class FDateField extends StatefulWidget {
     bool autoHide,
     Alignment anchor,
     Alignment inputAnchor,
+    FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset offset,
     FHidePopoverRegion hideOnTapOutside,
-    bool directionPadding,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,

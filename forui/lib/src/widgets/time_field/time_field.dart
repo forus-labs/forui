@@ -285,14 +285,16 @@ abstract class FTimeField extends StatefulWidget {
   /// The [anchor] and [inputAnchor] control the alignment points for the picker popover positioning.
   /// Defaults to [Alignment.topLeft] and [Alignment.bottomLeft] respectively.
   ///
+  /// The [spacing] property controls the spacing between the input field and the picker popover. Defaults to
+  /// `FPortalSpacing(4)`.
+  ///
   /// The [shift] function controls how the picker repositions when space is constrained. Defaults to
   /// [FPortalShift.flip].
   ///
+  /// The [offset] property controls the offset of the picker popover. Defaults to [Offset.zero].
+  ///
   /// [hideOnTapOutside] controls the region that can be tapped to hide the popover. Defaults to
   /// [FHidePopoverRegion.anywhere].
-  ///
-  /// [directionPadding] controls whether the popover should include the cross-axis padding of the anchor when aligning
-  /// to it. Defaults to false.
   ///
   /// [hourInterval] and [minuteInterval] control the increment/decrement interval of the hour and minute respectively.
   /// Default to 1.
@@ -316,9 +318,10 @@ abstract class FTimeField extends StatefulWidget {
     FocusNode? focusNode,
     Alignment anchor,
     Alignment inputAnchor,
+    FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset offset,
     FHidePopoverRegion hideOnTapOutside,
-    bool directionPadding,
     int hourInterval,
     int minuteInterval,
     ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,

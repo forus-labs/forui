@@ -55,14 +55,20 @@ class FPopoverMenu extends StatefulWidget {
   /// Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry childAnchor;
 
+  /// {@macro forui.widgets.FPopover.spacing}
+  final FPortalSpacing spacing;
+
   /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
+  /// {@macro forui.widgets.FPopover.offset}
+  final Offset offset;
+
+  /// {@macro forui.widgets.FPopover.groupId}
+  final Object? groupId;
+
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
-
-  /// {@macro forui.widgets.FPopover.directionPadding}
-  final bool directionPadding;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -100,9 +106,11 @@ class FPopoverMenu extends StatefulWidget {
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
+    this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.directionPadding = false,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -128,9 +136,11 @@ class FPopoverMenu extends StatefulWidget {
     this.divider = FTileDivider.full,
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
+    this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.directionPadding = false,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -155,9 +165,11 @@ class FPopoverMenu extends StatefulWidget {
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('popoverAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset))
+      ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(FlagProperty('directionPadding', value: directionPadding, ifTrue: 'directionPadding'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -186,28 +198,28 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
     return (widget._automatic ? FPopover.automatic : FPopover.new)(
       controller: _popoverController,
       style: style,
+      constraints: FPortalConstraints(maxWidth: style.maxWidth),
       popoverAnchor: widget.menuAnchor,
       childAnchor: widget.childAnchor,
+      spacing: widget.spacing,
       shift: widget.shift,
+      offset: widget.offset,
+      groupId: widget.groupId,
       hideOnTapOutside: widget.hideOnTapOutside,
-      directionPadding: widget.directionPadding,
       autofocus: widget.autofocus,
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,
       traversalEdgeBehavior: widget.traversalEdgeBehavior,
       popoverBuilder:
-          (_, _, _) => ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: style.maxWidth),
-            child: FTileGroup.merge(
-              scrollController: widget.scrollController,
-              cacheExtent: widget.cacheExtent,
-              maxHeight: widget.maxHeight,
-              dragStartBehavior: widget.dragStartBehavior,
-              semanticsLabel: widget.semanticsLabel,
-              style: style.tileGroupStyle,
-              divider: widget.divider,
-              children: widget.menu,
-            ),
+          (_, _, _) => FTileGroup.merge(
+            scrollController: widget.scrollController,
+            cacheExtent: widget.cacheExtent,
+            maxHeight: widget.maxHeight,
+            dragStartBehavior: widget.dragStartBehavior,
+            semanticsLabel: widget.semanticsLabel,
+            style: style.tileGroupStyle,
+            divider: widget.divider,
+            children: widget.menu,
           ),
       child: widget.child,
     );
@@ -236,8 +248,12 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   final double maxWidth;
 
   /// Creates a [FPopoverMenuStyle].
-  const FPopoverMenuStyle({required this.tileGroupStyle, required super.decoration, this.maxWidth = 250, super.padding})
-    : assert(0 < maxWidth, 'maxWidth must be positive');
+  const FPopoverMenuStyle({
+    required this.tileGroupStyle,
+    required super.decoration,
+    this.maxWidth = 250,
+    super.viewInsets,
+  }) : assert(0 < maxWidth, 'maxWidth must be positive');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
   FPopoverMenuStyle.inherit({required super.colors, required super.style, required FTypography typography})

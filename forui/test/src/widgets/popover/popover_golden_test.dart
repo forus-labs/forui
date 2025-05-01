@@ -71,55 +71,6 @@ void main() {
           matchesGoldenFile('popover/shown-non-touch-device-${theme.name}.png'),
         );
       });
-
-      testWidgets('${theme.name} with directional padding', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold.app(
-            theme: theme.data,
-            child: FPopover(
-              popoverAnchor: Alignment.topRight,
-              childAnchor: Alignment.bottomRight,
-              directionPadding: true,
-              style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
-              controller: controller,
-              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
-            ),
-          ),
-        );
-
-        unawaited(controller.show());
-        await tester.pumpAndSettle();
-
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('popover/directional-padding-${theme.name}.png'),
-        );
-      });
-
-      testWidgets('${theme.name} no directional padding', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold.app(
-            theme: theme.data,
-            child: FPopover(
-              popoverAnchor: Alignment.topRight,
-              childAnchor: Alignment.bottomRight,
-              style: theme.data.popoverStyle.copyWith(padding: const EdgeInsets.all(50)),
-              controller: controller,
-              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
-            ),
-          ),
-        );
-
-        unawaited(controller.show());
-        await tester.pumpAndSettle();
-
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('popover/no-directional-padding-${theme.name}.png'),
-        );
-      });
     });
   }
 

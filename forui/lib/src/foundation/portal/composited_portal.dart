@@ -10,6 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/portal/composited_child.dart';
 import 'package:forui/src/foundation/portal/layer.dart';
+import 'package:forui/src/foundation/portal/portal_constraints.dart';
 
 /// A [CompositedPortal] positions itself relative to a [CompositedChild].
 ///
@@ -33,9 +34,8 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   /// it is false, then child is hidden.
   final bool showWhenUnlinked;
 
-  /// The additional offset to apply to the [childAnchor] of the linked [CompositedChild] to obtain this widget's
-  /// [portalAnchor] position.
-  final Offset offset;
+  /// The portal's constraints.
+  final FPortalConstraints constraints;
 
   /// The anchor point on this widget that will line up with [childAnchor] on the linked [CompositedChild].
   final Alignment portalAnchor;
@@ -44,21 +44,34 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   final Alignment childAnchor;
 
   /// The padding to avoid system intrusions.
-  final EdgeInsets viewPadding;
+  final EdgeInsets viewInsets;
+
+  /// The spacing between the child's anchor and portal's anchor.
+  final Offset spacing;
 
   /// The shifting strategy used to shift a portal when it overflows out of the viewport.
+  ///
+  /// It is applied after [spacing].
   ///
   /// See [FPortalShift] for the different shifting strategies.
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
+  /// The additional offset to apply to the [childAnchor] of the linked [CompositedChild] to obtain this widget's
+  /// [portalAnchor] position.
+  ///
+  /// It is applied after [shift].
+  final Offset offset;
+
   const CompositedPortal({
     required this.notifier,
     required this.link,
-    required this.offset,
+    required this.constraints,
     required this.portalAnchor,
     required this.childAnchor,
-    required this.viewPadding,
+    required this.viewInsets,
+    required this.spacing,
     required this.shift,
+    required this.offset,
     this.showWhenUnlinked = false,
     super.key,
     super.child,
@@ -70,11 +83,13 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     link: link,
     viewSize: MediaQuery.sizeOf(context),
     showWhenUnlinked: showWhenUnlinked,
-    offset: offset,
+    portalConstraints: constraints,
     portalAnchor: portalAnchor,
     childAnchor: childAnchor,
-    viewPadding: viewPadding,
-    shift: FPortalShift.flip,
+    viewInsets: viewInsets,
+    spacing: spacing,
+    shift: shift,
+    offset: offset,
   );
 
   @override
@@ -84,11 +99,13 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
         ..link = link
         ..viewSize = MediaQuery.sizeOf(context)
         ..showWhenUnlinked = showWhenUnlinked
-        ..offset = offset
+        ..portalConstraints = constraints
         ..portalAnchor = portalAnchor
         ..childAnchor = childAnchor
-        ..viewPadding = viewPadding
-        ..shift = shift;
+        ..viewInsets = viewInsets
+        ..spacing = spacing
+        ..shift = shift
+        ..offset = offset;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -97,11 +114,13 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
       ..add(DiagnosticsProperty('notifier', notifier))
       ..add(DiagnosticsProperty('link', link))
       ..add(DiagnosticsProperty('showWhenUnlinked', showWhenUnlinked))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
-      ..add(DiagnosticsProperty('viewPadding', viewPadding))
-      ..add(ObjectFlagProperty.has('shift', shift));
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('viewInsets', viewInsets))
+      ..add(DiagnosticsProperty('spacing', spacing))
+      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset));
   }
 }
 
@@ -117,32 +136,38 @@ class RenderPortalLayer extends RenderProxyBox {
   ChildLayerLink _link;
   Size _viewSize;
   bool _showWhenUnlinked;
-  Offset _offset;
+  FPortalConstraints _portalConstraints;
   Alignment _portalAnchor;
   Alignment _childAnchor;
-  EdgeInsets _viewPadding;
+  EdgeInsets _viewInsets;
+  Offset _spacing;
   Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
+  Offset _offset;
 
   RenderPortalLayer({
     required FChangeNotifier notifier,
     required ChildLayerLink link,
     required Size viewSize,
     required bool showWhenUnlinked,
-    required Offset offset,
+    required FPortalConstraints portalConstraints,
     required Alignment portalAnchor,
     required Alignment childAnchor,
-    required EdgeInsets viewPadding,
+    required EdgeInsets viewInsets,
+    required Offset spacing,
     required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    required Offset offset,
     RenderBox? child,
   }) : _notifier = notifier,
        _link = link,
        _viewSize = viewSize,
        _showWhenUnlinked = showWhenUnlinked,
-       _offset = offset,
-       _childAnchor = childAnchor,
+       _portalConstraints = portalConstraints,
        _portalAnchor = portalAnchor,
-       _viewPadding = viewPadding,
+       _childAnchor = childAnchor,
+       _viewInsets = viewInsets,
+       _spacing = spacing,
        _shift = shift,
+       _offset = offset,
        super(child);
 
   @override
@@ -159,7 +184,24 @@ class RenderPortalLayer extends RenderProxyBox {
   @override
   void performLayout() {
     if (child case final child?) {
-      child.layout(constraints.loosen(), parentUsesSize: true);
+      final size = link.childSize;
+      final constraints = switch (portalConstraints) {
+        final FixedConstraints constraints => constraints,
+        FAutoHeightPortalConstraints(:final minWidth, :final maxWidth) => BoxConstraints(
+          minWidth: minWidth,
+          maxWidth: maxWidth,
+          minHeight: size?.height ?? 0,
+          maxHeight: size?.height ?? double.infinity,
+        ),
+        FAutoWidthPortalConstraints(:final minHeight, :final maxHeight) => BoxConstraints(
+          minWidth: size?.width ?? 0,
+          maxWidth: size?.width ?? double.infinity,
+          minHeight: minHeight,
+          maxHeight: maxHeight,
+        ),
+      };
+
+      child.layout(constraints.normalize(), parentUsesSize: true);
     }
 
     size = constraints.biggest;
@@ -177,19 +219,19 @@ class RenderPortalLayer extends RenderProxyBox {
     final linkedOffset =
         this.offset +
         switch ((link.childLayer?.globalOffset, link.childSize, child)) {
-          (final childOffset?, final childSize?, final portal?) => _shift(
+          (final childOffset?, final childSize?, final portal?) => shift(
             // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
             // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
             Size(
-              viewSize.width - (viewPadding.left + viewPadding.right),
-              viewSize.height - (viewPadding.top + viewPadding.bottom),
+              viewSize.width - (viewInsets.left + viewInsets.right),
+              viewSize.height - (viewInsets.top + viewInsets.bottom),
             ),
             (
-              offset: Offset(childOffset.dx - viewPadding.left, childOffset.dy - viewPadding.top),
+              offset: Offset(childOffset.dx - viewInsets.left, childOffset.dy - viewInsets.top),
               size: childSize,
               anchor: childAnchor,
             ),
-            (size: portal.size, anchor: portalAnchor),
+            (offset: spacing, size: portal.size, anchor: portalAnchor),
           ),
           _ => Offset.zero,
         };
@@ -294,6 +336,17 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
+  Size get viewSize => _viewSize;
+
+  set viewSize(Size value) {
+    if (_viewSize == value) {
+      return;
+    }
+
+    _viewSize = value;
+    markNeedsPaint();
+  }
+
   /// Whether to show the render object's contents when there is no corresponding [RenderChildLayer] with the same [link].
   ///
   /// When the render object is linked, the child is positioned such that it has the same global position as the linked
@@ -311,15 +364,15 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
-  /// The offset to apply to the origin of the linked [RenderChildLayer] to obtain this render object's origin.
-  Offset get offset => _offset;
+  /// The portal's constraints.
+  FPortalConstraints get portalConstraints => _portalConstraints;
 
-  set offset(Offset value) {
-    if (_offset == value) {
+  set portalConstraints(FPortalConstraints value) {
+    if (_portalConstraints == value) {
       return;
     }
-    _offset = value;
-    markNeedsPaint();
+    _portalConstraints = value;
+    markNeedsLayout();
   }
 
   /// The anchor point on this [RenderPortalLayer] that will line up with [portalAnchor] on the linked [RenderChildLayer].
@@ -348,14 +401,25 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
-  EdgeInsets get viewPadding => _viewPadding;
+  EdgeInsets get viewInsets => _viewInsets;
 
-  set viewPadding(EdgeInsets value) {
-    if (_viewPadding == value) {
+  set viewInsets(EdgeInsets value) {
+    if (_viewInsets == value) {
       return;
     }
 
-    _viewPadding = value;
+    _viewInsets = value;
+    markNeedsPaint();
+  }
+
+  Offset get spacing => _spacing;
+
+  set spacing(Offset value) {
+    if (_spacing == value) {
+      return;
+    }
+
+    _spacing = value;
     markNeedsPaint();
   }
 
@@ -370,14 +434,14 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
-  Size get viewSize => _viewSize;
+  /// The offset to apply to the origin of the linked [RenderChildLayer] to obtain this render object's origin.
+  Offset get offset => _offset;
 
-  set viewSize(Size value) {
-    if (_viewSize == value) {
+  set offset(Offset value) {
+    if (_offset == value) {
       return;
     }
-
-    _viewSize = value;
+    _offset = value;
     markNeedsPaint();
   }
 
@@ -387,13 +451,15 @@ class RenderPortalLayer extends RenderProxyBox {
     properties
       ..add(DiagnosticsProperty('notifier', notifier))
       ..add(DiagnosticsProperty('link', link))
-      ..add(DiagnosticsProperty('showWhenUnlinked', showWhenUnlinked))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(DiagnosticsProperty('childAnchor', childAnchor))
-      ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
-      ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(DiagnosticsProperty('viewPadding', viewPadding))
       ..add(DiagnosticsProperty('viewSize', viewSize))
+      ..add(DiagnosticsProperty('showWhenUnlinked', showWhenUnlinked))
+      ..add(DiagnosticsProperty('portalConstraints', portalConstraints))
+      ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
+      ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('viewInsets', viewInsets))
+      ..add(DiagnosticsProperty('spacing', spacing))
+      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset))
       ..add(TransformProperty('current transform matrix', _currentTransform));
   }
 }

@@ -26,52 +26,46 @@ A portal renders a portal widget that "floats" on top of a child widget.
 
     FPortal(
       controller: controller,
-      portalBuilder: (context) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: context.theme.colors.background,
-            border: Border.all(color: context.theme.colors.border, width: 1),
-            borderRadius: BorderRadius.circular(4),
-          ),
-          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-          child: SizedBox(
-            width: 288,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Dimensions', style: context.theme.typography.base),
-                const SizedBox(height: 7),
-                Text(
-                  'Set the dimensions for the layer.',
-                  style: context.theme.typography.sm.copyWith(
-                    color: context.theme.colors.mutedForeground,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                const SizedBox(height: 15),
-                for (final (label, value) in [
-                  ('Width', '100%'),
-                  ('Max. Width', '300px'),
-                ]) ...[
-                  Row(
-                    children: [
-                      Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialValue: value)),
-                    ],
-                  ),
+      spacing: const FPortalSpacing(8),
+      viewInsets: const EdgeInsets.all(5),
+      portalBuilder:
+          (context) => Container(
+            decoration: BoxDecoration(
+              color: context.theme.colors.background,
+              border: Border.all(color: context.theme.colors.border),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+            child: SizedBox(
+              width: 288,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Dimensions', style: context.theme.typography.base),
                   const SizedBox(height: 7),
+                  Text(
+                    'Set the dimensions for the layer.',
+                    style: context.theme.typography.sm.copyWith(
+                      color: context.theme.colors.mutedForeground,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  for (final (label, value) in [('Width', '100%'), ('Max. Width', '300px')]) ...[
+                    Row(
+                      children: [
+                        Expanded(child: Text(label, style: context.theme.typography.sm)),
+                        Expanded(flex: 2, child: FTextField(initialValue: value)),
+                      ],
+                    ),
+                    const SizedBox(height: 7),
+                  ],
                 ],
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-      child: FButton(
-        onPress: () => controller.toggle(),
-        child: const Text('Portal'),
-      ),
+      child: FButton(child: const Text('Portal'), onPress: () => controller.toggle()),
     );
     ```
 
@@ -85,10 +79,13 @@ A portal renders a portal widget that "floats" on top of a child widget.
 ```dart copy
 FPortal(
   controller: OverlayPortalController(),
+  spacing: FPortalSpacing.zero,
   shift: FPortalShift.flip,
+  offset: Offset.zero,
+  portalConstraints: const FAutoWidthPortalConstraints(),
   portalAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
-  useViewPadding: true,
+  viewInsets: EdgeInsets.zero,
   portalBuilder: (context) => const Text('portal'),
   child: const Text('child'),
 );

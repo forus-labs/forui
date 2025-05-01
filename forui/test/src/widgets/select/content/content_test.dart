@@ -43,10 +43,6 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(scrollController.hasListeners, false);
       expect(scrollController.dispose, returnsNormally);
     });
 

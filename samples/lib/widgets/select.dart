@@ -43,7 +43,6 @@ class SectionSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>(
       hint: 'Select a timezone',
-      popoverConstraints: const BoxConstraints(maxWidth: 400, maxHeight: 300),
       children: [
         FSelectSection(
           label: const Text('North America'),

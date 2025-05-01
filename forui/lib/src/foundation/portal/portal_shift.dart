@@ -7,9 +7,11 @@ import 'package:forui/src/foundation/rendering.dart';
 typedef FPortalChildBox = ({Offset offset, Size size, Alignment anchor});
 
 /// A portal's rectangle.
-typedef FPortalBox = ({Size size, Alignment anchor});
+typedef FPortalBox = ({Offset offset, Size size, Alignment anchor});
 
 /// Provides various portal shifting strategies for when a portal overflows out of the viewport.
+///
+/// The returned offset should be in the local coordinate system relative to the child's top left corner (0, 0).
 extension FPortalShift on Never {
   /// Flips the portal to the opposite side of the [child] if it does not cause the [portal] to overflow out of the
   /// viewport. Otherwise shifts the portal along the [child]'s edge.
@@ -52,10 +54,13 @@ extension FPortalShift on Never {
   }
 
   static Offset _flip(FPortalChildBox child, FPortalBox portal, {required bool x}) {
-    final childAnchor = x ? child.anchor.flipX() : child.anchor.flipY();
-    final portalAnchor = x ? portal.anchor.flipX() : portal.anchor.flipY();
+    final (childAnchor, portalAnchor, portalOffset) =
+        x
+            ? (child.anchor.flipX(), portal.anchor.flipX(), portal.offset.scale(1, -1))
+            : (child.anchor.flipY(), portal.anchor.flipY(), portal.offset.scale(-1, 1));
 
-    final anchor = childAnchor.relative(to: child.size) - portalAnchor.relative(to: portal.size);
+    // This is fucked if we don't want to flip one axis.
+    final anchor = childAnchor.relative(to: child.size) - portalAnchor.relative(to: portal.size, origin: portalOffset);
 
     return anchor.translate(child.offset.dx, child.offset.dy);
   }
@@ -89,7 +94,7 @@ extension FPortalShift on Never {
   /// Does not perform any shifting if the [portal] overflows out of the viewport.
   static Offset none(Size _, FPortalChildBox child, FPortalBox portal) {
     final childAnchor = child.anchor.relative(to: child.size);
-    final portalAnchor = portal.anchor.relative(to: portal.size);
+    final portalAnchor = portal.anchor.relative(to: portal.size, origin: -portal.offset);
     return childAnchor - portalAnchor;
   }
 }

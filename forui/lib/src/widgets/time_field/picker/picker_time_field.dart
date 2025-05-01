@@ -15,11 +15,13 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final Alignment inputAnchor;
   @override
+  final FPortalSpacing spacing;
+  @override
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   @override
-  final FHidePopoverRegion hideOnTapOutside;
+  final Offset offset;
   @override
-  final bool directionPadding;
+  final FHidePopoverRegion hideOnTapOutside;
   @override
   final int hourInterval;
   @override
@@ -36,9 +38,10 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.canRequestFocus = true,
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.directionPadding = false,
     this.hourInterval = 1,
     this.minuteInterval = 1,
     super.controller,
@@ -239,24 +242,23 @@ class _PickerPopover extends StatelessWidget {
   Widget build(BuildContext _) => FPopover(
     style: style.popoverStyle,
     controller: controller.popover,
+    constraints: style.popoverConstraints,
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
+    spacing: properties.spacing,
     shift: properties.shift,
+    offset: properties.offset,
     hideOnTapOutside: properties.hideOnTapOutside,
-    directionPadding: properties.directionPadding,
     popoverBuilder:
         (_, _, _) => TextFieldTapRegion(
-          child: ConstrainedBox(
-            constraints: style.popoverConstraints,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: FTimePicker(
-                controller: controller._picker,
-                style: style.pickerStyle,
-                hour24: hour24,
-                hourInterval: properties.hourInterval,
-                minuteInterval: properties.minuteInterval,
-              ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: FTimePicker(
+              controller: controller._picker,
+              style: style.pickerStyle,
+              hour24: hour24,
+              hourInterval: properties.hourInterval,
+              minuteInterval: properties.minuteInterval,
             ),
           ),
         ),

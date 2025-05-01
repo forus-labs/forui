@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  group('FCheckBox', () {
+  group('FCheckbox', () {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(

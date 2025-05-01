@@ -72,10 +72,7 @@ FSelect<String>(
   builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
   suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
-  popoverConstraints: const BoxConstraints(
-    maxWidth: 300,
-    maxHeight: 400,
-  ),
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   contentScrollHandles: true,
   children: [
@@ -111,10 +108,7 @@ FSelect<User>.search(
   format: (user) => '${user.firstName} ${user.lastName}',
   hint: 'Search users...',
   style: FSelectStyle.inherit(...),
-  popoverConstraints: const BoxConstraints(
-    maxWidth: 350,
-    maxHeight: 500,
-  ),
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   autoHide: false,
   onChange: (value) => print('Selected country: $value'),
@@ -152,7 +146,6 @@ FSelect<User>.search(
       @override
       Widget build(BuildContext context) => FSelect<String>(
         hint: 'Select a timezone',
-        popoverConstraints: const BoxConstraints(maxWidth: 400, maxHeight: 300),
         children: [
           FSelectSection(
             label: const Text('North America'),
