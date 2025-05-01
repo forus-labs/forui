@@ -84,6 +84,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(theme: theme.data, child: const FTimeField(forceErrorText: 'Error', key: key)),
       );
+      await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/input/error.png'));
     });

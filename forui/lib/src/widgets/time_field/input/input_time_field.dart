@@ -96,32 +96,35 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
     };
 
-    return SizedBox();
-
-    // return TimeInput(
-    //   timeController: _controller,
-    //   hour24: widget.hour24,
-    //   style: style,
-    //   label: widget.label,
-    //   description: widget.description,
-    //   error: widget.err,
-    //   enabled: widget.enabled,
-    //   focusNode: widget.focusNode,
-    //   textInputAction: widget.textInputAction,
-    //   textAlign: widget.textAlign,
-    //   textAlignVertical: widget.textAlignVertical,
-    //   textDirection: widget.textDirection,
-    //   expands: widget.expands,
-    //   autofocus: widget.autofocus,
-    //   onEditingComplete: widget.onEditingComplete,
-    //   mouseCursor: widget.mouseCursor,
-    //   onTap: null,
-    //   canRequestFocus: widget.canRequestFocus,
-    //   prefixBuilder: prefix,
-    //   suffixBuilder: suffix,
-    //   localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
-    //   builder: (context, styles, child) => widget.builder(context, (style, styles.$1, styles.$2), child),
-    // );
+    return TimeInput(
+      controller: _controller,
+      timeController: _controller,
+      hour24: widget.hour24,
+      style: style,
+      label: widget.label,
+      description: widget.description,
+      errorBuilder: widget.errorBuilder,
+      enabled: widget.enabled,
+      onSaved: widget.onSaved,
+      validator: _controller.validator,
+      autovalidateMode: widget.autovalidateMode,
+      forceErrorText: widget.forceErrorText,
+      focusNode: widget.focusNode,
+      textInputAction: widget.textInputAction,
+      textAlign: widget.textAlign,
+      textAlignVertical: widget.textAlignVertical,
+      textDirection: widget.textDirection,
+      expands: widget.expands,
+      autofocus: widget.autofocus,
+      onEditingComplete: widget.onEditingComplete,
+      mouseCursor: widget.mouseCursor,
+      onTap: null,
+      canRequestFocus: widget.canRequestFocus,
+      prefixBuilder: prefix,
+      suffixBuilder: suffix,
+      localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
+      builder: (context, styles, child) => widget.builder(context, (style, styles.$1, styles.$2), child),
+    );
   }
 
   @override

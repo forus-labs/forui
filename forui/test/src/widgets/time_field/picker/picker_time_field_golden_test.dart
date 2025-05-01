@@ -28,6 +28,7 @@ void main() {
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with no icon', (tester) async {
       await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FTimeField.picker(prefixBuilder: null)));
+      await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/no-icon.png'));
     });

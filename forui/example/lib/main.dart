@@ -16,7 +16,7 @@ List<Widget> _pages = [
   const Text('Categories'),
   const Text('Search'),
   const Text('Settings'),
-  Sandbox(key: PageStorageKey<String>('Sandbox')),
+  Sandbox(),
 ];
 
 class Application extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/form_field.dart';
+import 'package:forui/src/widgets/time_field/picker/picker_form_field.dart';
 
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:meta/meta.dart';
@@ -208,7 +208,11 @@ abstract class FTimeField extends StatefulWidget {
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.key,
-  }) : assert(controller == null || initialTime == null, 'Cannot provide both controller and initialTime.');
+  }) : assert(
+         controller == null || initialTime == null,
+         'Cannot provide both a controller and an initialTime. '
+         'To fix, set the initial time directly in the controller.',
+       );
 
   /// Creates a time field that wraps a text input field.
   ///

@@ -223,8 +223,12 @@ abstract class FDateField extends StatefulWidget {
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     DateTime? initialDate,
     super.key,
-  }) : assert(controller == null || initialDate == null, 'Cannot provide both controller and initialDate.'),
-    initialDate = initialDate?.toLocalDate().toNative();
+  }) : assert(
+         controller == null || initialDate == null,
+         'Cannot provide both a controller and an initialDate. '
+         'To fix, set the initial date directly in the controller.',
+       ),
+       initialDate = initialDate?.toLocalDate().toNative();
 
   /// Creates a [FDateField] that allows date selection through both an input field and a calendar popover.
   ///

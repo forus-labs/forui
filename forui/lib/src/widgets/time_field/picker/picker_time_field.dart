@@ -160,14 +160,14 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     final style = widget.style ?? context.theme.timeFieldStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
-    return Field(
+    return PickerFormField(
       controller: _controller,
       enabled: widget.enabled,
       onSaved: widget.onSaved,
       validator: _controller.validator,
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
-      initialValue: widget.initialTime,
+      initialTime: widget.initialTime,
       builder:
           (state) => FTextField(
             focusNode: _focus,
