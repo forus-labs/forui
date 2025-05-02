@@ -141,7 +141,7 @@ void main() {
       expect(tester.takeException(), null);
     });
 
-    testWidgets('refocus after selection', (tester) async {
+    testWidgets('does not refocus after selection', (tester) async {
       final focus = autoDispose(FocusNode());
       const itemKey = ValueKey('item');
 
@@ -162,7 +162,7 @@ void main() {
       await tester.tap(find.byKey(itemKey));
       await tester.pumpAndSettle();
 
-      expect(focus.hasFocus, true);
+      expect(focus.hasFocus, false);
     });
   });
 
@@ -182,7 +182,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, true);
-      expect(controller.popover.hasListeners, true);
+      expect(controller.popover.hasListeners, false);
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -213,7 +213,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, true);
-      expect(controller.popover.hasListeners, true);
+      expect(controller.popover.hasListeners, false);
 
       await tester.pumpWidget(const SizedBox());
 

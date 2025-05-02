@@ -650,8 +650,9 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     if (widget.controller == null) {
       _controller.dispose();
     } else {
-      _controller.removeValueListener(_onChange);
-      _controller.removeListener(_updateTextController);
+      _controller
+        ..removeValueListener(_onChange)
+        ..removeListener(_updateTextController);
     }
     _textController.dispose();
 
