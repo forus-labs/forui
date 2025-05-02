@@ -476,7 +476,6 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
     _textController.addListener(_updateSelectController);
     _controller.addListener(_updateTextController);
-    _controller.popover.addListener(_updateFocus);
   }
 
   String get _initialText {
@@ -505,7 +504,6 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
         _controller.dispose();
       } else {
         old.controller?.removeValueListener(_onChange);
-        old.controller?.popover.removeListener(_updateFocus);
         old.controller?.removeListener(_updateTextController);
       }
 
@@ -519,7 +517,6 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       _controller
         ..addValueListener(_onChange)
         ..addListener(_updateTextController);
-      _controller.popover.addListener(_updateFocus);
       _updateTextController();
     }
   }
@@ -554,12 +551,6 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       };
     } finally {
       _mutating = false;
-    }
-  }
-
-  void _updateFocus() {
-    if (!_controller.popover.shown) {
-      _focus.requestFocus();
     }
   }
 
@@ -660,7 +651,6 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       _controller.dispose();
     } else {
       _controller.removeValueListener(_onChange);
-      _controller.popover.removeListener(_updateFocus);
       _controller.removeListener(_updateTextController);
     }
     _textController.dispose();
