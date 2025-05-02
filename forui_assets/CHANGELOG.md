@@ -1,6 +1,6 @@
 ## 0.11.0
 
-All svg icons have been replaced with font icons, improving performance.
+All svg icons have been replaced with font icons, improving performance. Also updates icons to Luicide 0.506.0.
 
 **Breaking** Replace `FAssets` with `FIcons`.
 

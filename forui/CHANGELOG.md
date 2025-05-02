@@ -1,6 +1,4 @@
 ## 0.11.0
-We are experimenting with a new changelog format which groups changes by feature.
-
 
 ### Styles
 We added a CLI to generate styles for Forui widgets. See forui.dev/docs/cli for more information. 
