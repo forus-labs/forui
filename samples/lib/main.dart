@@ -135,7 +135,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/text-field/email', page: EmailTextFieldRoute.page),
     AutoRoute(path: '/text-field/password', page: PasswordTextFieldRoute.page),
     AutoRoute(path: '/text-field/multiline', page: MultilineTextFieldRoute.page),
-    AutoRoute(path: '/text-form-field/default', page: TextFormFieldRoute.page),
+    AutoRoute(path: '/text-field/form', page: FormTextFieldRoute.page),
     AutoRoute(path: '/tile/default', page: TileRoute.page),
     AutoRoute(path: '/tile/subtitle', page: TileSubtitleRoute.page),
     AutoRoute(path: '/tile/details', page: TileDetailsRoute.page),
