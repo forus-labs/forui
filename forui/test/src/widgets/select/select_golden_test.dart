@@ -66,11 +66,7 @@ void main() {
     testWidgets('fromMap', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FSelect<int>.fromMap(
-            const {'A': 1, 'B': 2},
-            key: key,
-            style: TestScaffold.blueScreen.selectStyle,
-          ),
+          child: FSelect<int>.fromMap(const {'A': 1, 'B': 2}, key: key, style: TestScaffold.blueScreen.selectStyle),
         ),
       );
 
