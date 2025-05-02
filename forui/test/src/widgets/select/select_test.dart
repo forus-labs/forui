@@ -25,15 +25,17 @@ void main() {
 
       String? initial;
       await tester.pumpWidget(
-        TestScaffold.app(child: Form(
-          key: key,
-          child: FSelect<String>(
-            format: (value) => '$value!',
-            onSaved: (value) => initial = value,
-            initialValue: 'A',
-            children: [FSelectItem.text('A'), FSelectItem.text('B')],
+        TestScaffold.app(
+          child: Form(
+            key: key,
+            child: FSelect<String>(
+              format: (value) => '$value!',
+              onSaved: (value) => initial = value,
+              initialValue: 'A',
+              children: [FSelectItem.text('A'), FSelectItem.text('B')],
+            ),
           ),
-        )),
+        ),
       );
 
       expect(find.text('A!'), findsOneWidget);

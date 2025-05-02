@@ -6,9 +6,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:meta/meta.dart';
 
 /// The [FTextField.counterBuilder] callback.
 ///

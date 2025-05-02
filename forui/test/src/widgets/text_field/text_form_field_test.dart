@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -64,17 +65,11 @@ void main() {
     testWidgets('reset', (tester) async {
       final key = GlobalKey<FormState>();
       final controller = autoDispose(TextEditingController(text: 'initial'));
-      int count= 0;
+      int count = 0;
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: Form(
-            key: key,
-            child: FTextFormField(
-              controller: controller,
-              onChange: (value) => count++,
-            ),
-          ),
+          child: Form(key: key, child: FTextFormField(controller: controller, onChange: (value) => count++)),
         ),
       );
 
