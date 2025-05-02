@@ -39,7 +39,7 @@ extension Defaults on Never {
 /// It lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
 ///
 /// See:
-/// * https://forui.dev/docs/form/text-field for working examples.
+/// * https://forui.dev/docs/data/text-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [FTextFormField] for creating a text field that can be used in a form.
 /// * [TextField] for more details about working with a text field.
