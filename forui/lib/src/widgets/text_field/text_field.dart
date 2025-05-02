@@ -88,6 +88,13 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final TextMagnifierConfiguration? magnifierConfiguration;
 
+  /// {@template forui.text_field_groupId}
+  /// The group identifier for the [TextFieldTapRegion] of this text field.
+  ///
+  /// Text fields with the same group identifier share the same tap region. Defaults to the type of [EditableText].
+  /// {@endtemplate}
+  final Object groupId;
+
   /// {@template forui.text_field.controller}
   /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
   ///
@@ -639,6 +646,7 @@ class FTextField extends StatefulWidget {
     this.description,
     this.error,
     this.magnifierConfiguration,
+    this.groupId = EditableText,
     this.controller,
     this.focusNode,
     this.keyboardType,
@@ -707,6 +715,7 @@ class FTextField extends StatefulWidget {
     this.description,
     this.error,
     this.magnifierConfiguration,
+    this.groupId = EditableText,
     this.controller,
     this.focusNode,
     this.keyboardType = TextInputType.emailAddress,
@@ -778,6 +787,7 @@ class FTextField extends StatefulWidget {
     this.description,
     this.error,
     this.magnifierConfiguration,
+    this.groupId = EditableText,
     this.controller,
     this.focusNode,
     this.keyboardType,
@@ -850,6 +860,7 @@ class FTextField extends StatefulWidget {
     this.description,
     this.error,
     this.magnifierConfiguration,
+    this.groupId = EditableText,
     this.controller,
     this.focusNode,
     this.keyboardType,
@@ -920,6 +931,7 @@ class FTextField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
+      ..add(DiagnosticsProperty('groupId', groupId))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))
@@ -1093,6 +1105,7 @@ class _State extends State<FTextField> {
       canRequestFocus: widget.canRequestFocus,
       spellCheckConfiguration: widget.spellCheckConfiguration,
       magnifierConfiguration: widget.magnifierConfiguration,
+      groupId: widget.groupId,
     );
 
     Widget field = FLabel(

@@ -37,6 +37,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// {@macro forui.text_field.magnifier_configuration}
   final TextMagnifierConfiguration? magnifierConfiguration;
 
+  // {@macro forui.text_field_groupId}
+  final Object groupId;
+
   /// {@macro forui.text_field.controller}
   final TextEditingController? controller;
 
@@ -217,6 +220,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.hint,
     this.description,
     this.magnifierConfiguration,
+    this.groupId = EditableText,
     this.controller,
     this.focusNode,
     this.keyboardType,
@@ -285,6 +289,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.hint,
     this.description,
     this.magnifierConfiguration,
+    this.groupId = EditableText,
     this.controller,
     this.focusNode,
     this.keyboardType = TextInputType.emailAddress,
@@ -356,6 +361,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.hint,
     this.description,
     this.magnifierConfiguration,
+    this.groupId = EditableText,
     this.controller,
     this.focusNode,
     this.keyboardType,
@@ -428,6 +434,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.hint,
     this.description,
     this.magnifierConfiguration,
+    this.groupId = EditableText,
     this.controller,
     this.focusNode,
     this.keyboardType,
@@ -499,6 +506,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
+      ..add(DiagnosticsProperty('groupId', groupId))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))
@@ -596,6 +604,7 @@ class _FormField extends FormField<String> {
                 final error => field.errorBuilder(state.context, error),
               },
               magnifierConfiguration: field.magnifierConfiguration,
+              groupId: field.groupId,
               controller: state._effectiveController,
               focusNode: field.focusNode,
               keyboardType: field.keyboardType,

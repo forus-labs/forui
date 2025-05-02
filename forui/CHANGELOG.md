@@ -331,6 +331,7 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 We've split `FTextField` into `FTextField` and `FTextFormField`. This change was necessary to allow `FTextField` to be 
 used in other widgets and allowing those widgets to properly implement `FormField`.
 
+* Add `FTextField.groupId`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
 * Add `FTextFormField`.
