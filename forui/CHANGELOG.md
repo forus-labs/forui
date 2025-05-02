@@ -1,4 +1,4 @@
-## 0.11.0 (Next)
+## 0.11.0
 We are experimenting with a new changelog format which groups changes by feature.
 
 
@@ -335,6 +335,8 @@ used in other widgets and allowing those widgets to properly implement `FormFiel
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
 * Add `FTextFormField`.
+
+* **Breaking** Change `FTextField` to not support form-related operations. Use `FTextFormField` instead.
 
 * Fix `FTextField` not setting its `FormField`'s initial value.
 * Fix `FTextField(...)` not setting the max lines to 1 default.
