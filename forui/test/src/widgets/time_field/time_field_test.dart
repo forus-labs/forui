@@ -22,6 +22,58 @@ void main() {
   }
 
   for (final (name, field) in [
+    ('picker', (controller, time, save) => FTimeField.picker(controller: controller, initialTime: time, onSaved: save)),
+    ('input', (controller, time, save) => FTimeField(controller: controller, initialTime: time, onSaved: save)),
+  ]) {
+    group('$name - form', () {
+      testWidgets('set initial value using initialValue', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        FTime? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            locale: const Locale('en', 'SG'),
+            child: Form(key: key, child: field(null, const FTime(10, 30), (v) => initial = v)),
+          ),
+        );
+
+        expect(find.text('10:30 am'), findsOne);
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, const FTime(10, 30));
+      });
+
+      testWidgets('controller provided', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        FTime? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            locale: const Locale('en', 'SG'),
+            child: Form(
+              key: key,
+              child: field(
+                autoDispose(FTimeFieldController(vsync: tester, initialTime: const FTime(10, 30))),
+                null,
+                (v) => initial = v,
+              ),
+            ),
+          ),
+        );
+
+        expect(find.text('10:30 am'), findsOne);
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, const FTime(10, 30));
+      });
+    });
+  }
+
+  for (final (name, field) in [
     ('input only', (controller, focus) => FTimeField(controller: controller, focusNode: focus)),
     ('picker only', (controller, focus) => FTimeField.picker(controller: controller, focusNode: focus)),
   ]) {

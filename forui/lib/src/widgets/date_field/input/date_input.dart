@@ -19,6 +19,7 @@ class DateInput extends Input<DateTime?> {
     required this.calendarController,
     required this.style,
     required this.baselineYear,
+    required super.controller,
     required super.builder,
     required super.label,
     required super.description,

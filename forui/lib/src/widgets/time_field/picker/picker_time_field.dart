@@ -141,10 +141,12 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   }
 
   void _updateTextController() {
-    if (_controller._picker.value case final value) {
-      final time = value.withDate(DateTime(1970));
-      _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
-    }
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (_controller._picker.value case final value) {
+        final time = value.withDate(DateTime(1970));
+        _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
+      }
+    });
   }
 
   void _updateFocus() {
@@ -157,50 +159,56 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.timeFieldStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    final onSaved = widget.onSaved;
-    return FTextField(
-      focusNode: _focus,
-      controller: _textController,
-      style: style.textFieldStyle,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      textDirection: widget.textDirection,
-      expands: widget.expands,
-      mouseCursor: widget.mouseCursor,
-      canRequestFocus: widget.canRequestFocus,
-      onTap: _controller.popover.toggle,
-      hint: widget.hint ?? localizations.dateFieldHint,
-      readOnly: true,
-      enableInteractiveSelection: false,
-      prefixBuilder:
-          widget.prefixBuilder == null
-              ? null
-              : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
-      suffixBuilder:
-          widget.suffixBuilder == null
-              ? null
-              : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
-      label: widget.label,
-      description: widget.description,
+
+    return PickerFormField(
+      controller: _controller,
       enabled: widget.enabled,
-      onSaved: onSaved == null ? null : (_) => onSaved(_controller.value),
-      validator: (_) => _controller.validator(_controller.value),
+      onSaved: widget.onSaved,
+      validator: _controller.validator,
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
-      errorBuilder: widget.errorBuilder,
+      initialTime: widget.initialTime,
       builder:
-          (context, styles, child) => _PickerPopover(
-            controller: _controller,
-            style: style,
-            hour24: widget.hour24,
-            properties: widget,
-            child: widget.builder(context, (style, styles.$1, styles.$2), child),
+          (state) => FTextField(
+            focusNode: _focus,
+            controller: _textController,
+            style: style.textFieldStyle,
+            textAlign: widget.textAlign,
+            textAlignVertical: widget.textAlignVertical,
+            textDirection: widget.textDirection,
+            expands: widget.expands,
+            mouseCursor: widget.mouseCursor,
+            canRequestFocus: widget.canRequestFocus,
+            onTap: _controller.popover.toggle,
+            hint: widget.hint ?? localizations.dateFieldHint,
+            readOnly: true,
+            enableInteractiveSelection: false,
+            prefixBuilder:
+                widget.prefixBuilder == null
+                    ? null
+                    : (context, styles, _) => MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                    ),
+            suffixBuilder:
+                widget.suffixBuilder == null
+                    ? null
+                    : (context, styles, _) => MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                    ),
+            label: widget.label,
+            description: widget.description,
+            enabled: widget.enabled,
+            error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
+            builder:
+                (context, styles, child) => _PickerPopover(
+                  controller: _controller,
+                  style: style,
+                  hour24: widget.hour24,
+                  properties: widget,
+                  child: widget.builder(context, (style, styles.$1, styles.$2), child),
+                ),
           ),
     );
   }

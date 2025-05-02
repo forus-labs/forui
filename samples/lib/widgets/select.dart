@@ -185,6 +185,34 @@ class AsyncErrorSelectPage extends Sample {
 }
 
 @RoutePage()
+class ToggleableSelectPage extends StatefulSample {
+  ToggleableSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+
+  @override
+  State<ToggleableSelectPage> createState() => ToggleableSelectPageState();
+}
+
+class ToggleableSelectPageState extends StatefulSampleState<ToggleableSelectPage> with SingleTickerProviderStateMixin {
+  late final _controller = FSelectController(vsync: this, value: 'Apple', toggleable: true);
+
+  @override
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 15.0),
+    child: FSelect<String>(
+      hint: 'Select a fruit',
+      controller: _controller,
+      children: [for (final fruit in fruits) FSelectItem.text(fruit)],
+    ),
+  );
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+
+@RoutePage()
 class ClearableSelectPage extends Sample {
   ClearableSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 

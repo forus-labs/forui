@@ -12,7 +12,7 @@ void main() {
 
   for (final (description, field) in [
     ('input only', FDateField.input(key: key)),
-    ('input & calendar', const FDateField(key: key)),
+    ('input & calendar', FDateField(key: key)),
   ]) {
     for (final (index, (locale, placeholder))
         in const [
@@ -56,7 +56,7 @@ void main() {
   group('validator', () {
     for (final (description, field) in [
       ('input only', FDateField.input(key: key)),
-      ('input & calendar', const FDateField(key: key)),
+      ('input & calendar', FDateField(key: key)),
     ]) {
       testWidgets('placeholder - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
@@ -70,6 +70,7 @@ void main() {
         await tester.pumpAndSettle();
 
         await tester.tapAt(tester.getBottomRight(find.byType(TestScaffold)));
+        await tester.pumpAndSettle();
 
         expect(find.text('Invalid date.'), findsNothing);
 
@@ -160,9 +161,9 @@ void main() {
 
   for (final (description, field, expected) in [
     ('input only', FDateField.input(key: key), 0),
-    ('input & calendar', const FDateField(key: key), 0),
+    ('input & calendar', FDateField(key: key), 0),
     ('input only, clearable', FDateField.input(key: key, clearable: true), 1),
-    ('input & calendar, clearable', const FDateField(key: key, clearable: true), 1),
+    ('input & calendar, clearable', FDateField(key: key, clearable: true), 1),
   ]) {
     testWidgets(description, (tester) async {
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field));

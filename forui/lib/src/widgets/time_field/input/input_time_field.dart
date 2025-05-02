@@ -97,6 +97,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
     };
 
     return TimeInput(
+      controller: _controller,
       timeController: _controller,
       hour24: widget.hour24,
       style: style,

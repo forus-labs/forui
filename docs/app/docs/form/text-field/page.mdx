@@ -1,3 +1,4 @@
+import { Callout } from "nextra/components";
 import { Tabs } from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
@@ -5,12 +6,15 @@ import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Text Field
 
-A text field lets the user enter text, either with a hardware keyboard or with an onscreen keyboard. It can also be used
-in a form.
+A text field lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.text_field/"/>
 </LinkBadgeGroup>
+
+<Callout type="info">
+  See [`FTextFormField`](/docs/form/text-form-field) for using text fields in forms.
+</Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
@@ -65,6 +69,7 @@ FTextField(
   label: const Text('Email'),
   hint: 'john@doe.com',
   description: const Text('Enter your email associated with your Forui account.'),
+  error: const Text('Error'),
   keyboardType: TextInputType.emailAddress,
   textCapitalization: TextCapitalization.none,
   maxLines: 1,
@@ -196,75 +201,5 @@ FTextField(
       maxLines: 4,
     );
     ```
-  </Tabs.Tab>
-</Tabs>
-
-### Form
-
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name='text-field' variant='form' height={550} query={{}}/>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart {9-11, 20-21, 27, 31-36, 38-42, 46-52} copy
-    class LoginForm extends StatefulWidget {
-      const LoginForm({super.key});
-
-      @override
-      State<LoginForm> createState() => _LoginFormState();
-    }
-
-    class _LoginFormState extends State<LoginForm> {
-      final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-      final TextEditingController _emailController = TextEditingController();
-      final TextEditingController _passwordController = TextEditingController();
-
-      @override
-      void initState() {
-        super.initState();
-      }
-
-      @override
-      void dispose() {
-        _emailController.dispose();
-        _passwordController.dispose();
-        super.dispose();
-      }
-
-      @override
-      Widget build(BuildContext context) => Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FTextField.email(
-              controller: _emailController,
-              hint: 'janedoe@foruslabs.com',
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
-            ),
-            const SizedBox(height: 10),
-            FTextField.password(
-              controller: _passwordController,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-            ),
-            const SizedBox(height: 20),
-            FButton(
-              child: const Text('Login'),
-              onPress: () {
-                if (!_formKey.currentState!.validate()) {
-                  return; // Form is invalid.
-                }
-
-                // Form is valid, do something.
-              },
-            ),
-          ],
-        ),
-      );
-    }
-    ```
-
   </Tabs.Tab>
 </Tabs>

@@ -29,7 +29,7 @@ void main() {
       await expectBlueScreen(find.byType(TestScaffold));
     });
 
-    testWidgets('basic', (tester) async {
+    testWidgets('basic - empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FSelect<String>(key: key, style: TestScaffold.blueScreen.selectStyle, children: const []),
@@ -54,6 +54,19 @@ void main() {
               for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
             ],
           ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    testWidgets('fromMap', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelect<int>.fromMap(const {'A': 1, 'B': 2}, key: key, style: TestScaffold.blueScreen.selectStyle),
         ),
       );
 
@@ -107,6 +120,21 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     group('FSelect', () {
+      testWidgets('fromMap', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/from-map.png'));
+      });
+
       testWidgets('auto-hide disabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(

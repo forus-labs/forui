@@ -21,6 +21,7 @@ class TimeInput extends Input<FTime?> {
     required this.timeController,
     required this.hour24,
     required this.style,
+    required super.controller,
     required super.builder,
     required super.label,
     required super.description,
@@ -59,12 +60,7 @@ class TimeInput extends Input<FTime?> {
       ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(ObjectFlagProperty.has('onSaved', onSaved))
-      ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode))
-      ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(EnumProperty('textInputAction', textInputAction))
       ..add(EnumProperty('textAlign', textAlign))

@@ -26,7 +26,7 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FDateField.calendar(key: key)));
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField.calendar(key: key)));
 
       await expectLater(
         find.byType(TestScaffold),
@@ -35,7 +35,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDateField.calendar(prefixBuilder: null)));
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDateField.calendar(prefixBuilder: null)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/no-icon.png'));
     });
@@ -47,6 +47,7 @@ void main() {
           child: FDateField.calendar(
             key: key,
             builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+            today: DateTime(2025, 4),
           ),
         ),
       );
@@ -119,7 +120,7 @@ void main() {
 
     testWidgets('${theme.name} disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, child: const FDateField.calendar(enabled: false, key: key)),
+        TestScaffold.app(theme: theme.data, child: FDateField.calendar(enabled: false, key: key)),
       );
 
       await tester.tap(find.byKey(key));
@@ -133,7 +134,7 @@ void main() {
         TestScaffold.app(
           alignment: Alignment.topCenter,
           theme: theme.data,
-          child: const FDateField.calendar(forceErrorText: 'Error', key: key),
+          child: FDateField.calendar(forceErrorText: 'Error', key: key, today: DateTime(2025, 4)),
         ),
       );
 
@@ -145,7 +146,7 @@ void main() {
 
     testWidgets('${theme.name} tap outside unfocuses on Android/iOS', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: const FDateField.calendar(key: key)),
+        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField.calendar(key: key)),
       );
 
       await tester.tap(find.byKey(key));
@@ -164,13 +165,13 @@ void main() {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: const FDateField.calendar(key: key)),
+        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField.calendar(key: key)),
       );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.tapAt(Offset.zero);
+      await tester.tapAt(const Offset(500, 500));
       await tester.pumpAndSettle();
 
       await expectLater(

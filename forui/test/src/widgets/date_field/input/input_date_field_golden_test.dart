@@ -69,6 +69,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(theme: theme.data, child: FDateField.input(forceErrorText: 'Error', key: key)),
       );
+      await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/error.png'));
     });

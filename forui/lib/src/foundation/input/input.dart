@@ -5,11 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/form_field.dart';
 import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
 
 @internal
 abstract class Input<T> extends StatefulWidget {
+  final ValueNotifier<T?> controller;
   final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder;
   final Widget? label;
   final Widget? description;
@@ -36,6 +38,7 @@ abstract class Input<T> extends StatefulWidget {
   final FLocalizations localizations;
 
   const Input({
+    required this.controller,
     required this.builder,
     required this.label,
     required this.description,
@@ -67,6 +70,7 @@ abstract class Input<T> extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('controller', controller))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
@@ -108,61 +112,71 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   @protected
   InputController createController();
 
+  // validator:
+  // (value) => switch (this.value) {
+  // null when value == controller.placeholder => widget.validator(null),
+  // null => errorMessage,
+  // final value => widget.validator(value),
+  // },
+
   @override
-  Widget build(BuildContext _) {
-    final onSaved = widget.onSaved;
-    return Shortcuts(
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.arrowUp): AdjustIntent(1),
-        SingleActivator(LogicalKeyboardKey.arrowDown): AdjustIntent(-1),
-      },
-      child: Actions(
-        actions: {
-          AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => controller.adjust(intent.amount)),
-          ExtendSelectionByCharacterIntent: CallbackAction<ExtendSelectionByCharacterIntent>(
-            onInvoke: (intent) => controller.traverse(forward: intent.forward),
-          ),
-        },
-        child: FTextField(
-          controller: controller,
-          style: textFieldStyle,
-          statesController: controller.statesController,
-          builder: widget.builder,
-          autocorrect: false,
-          // We cannot use TextInputType.number as it does not contain a done button.
-          keyboardType: const TextInputType.numberWithOptions(signed: true),
-          minLines: 1,
-          label: widget.label,
-          description: widget.description,
-          enabled: widget.enabled,
-          focusNode: widget.focusNode,
-          textInputAction: widget.textInputAction,
-          textAlign: widget.textAlign,
-          textAlignVertical: widget.textAlignVertical,
-          textDirection: widget.textDirection,
-          expands: widget.expands,
-          autofocus: widget.autofocus,
-          onEditingComplete: widget.onEditingComplete,
-          mouseCursor: widget.mouseCursor,
-          onTap: widget.onTap,
-          canRequestFocus: widget.canRequestFocus,
-          prefixBuilder: widget.prefixBuilder,
-          suffixBuilder: widget.suffixBuilder,
-          clearable: widget.clearable ? clearable : (_) => false,
-          onSaved: onSaved == null ? null : (_) => onSaved(this.value),
-          validator:
-              (value) => switch (this.value) {
-                null when value == controller.placeholder => widget.validator(null),
-                null => errorMessage,
-                final value => widget.validator(value),
-              },
-          autovalidateMode: widget.autovalidateMode,
-          forceErrorText: widget.forceErrorText,
-          errorBuilder: widget.errorBuilder,
+  Widget build(BuildContext _) => Shortcuts(
+    shortcuts: const {
+      SingleActivator(LogicalKeyboardKey.arrowUp): AdjustIntent(1),
+      SingleActivator(LogicalKeyboardKey.arrowDown): AdjustIntent(-1),
+    },
+    child: Actions(
+      actions: {
+        AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => controller.adjust(intent.amount)),
+        ExtendSelectionByCharacterIntent: CallbackAction<ExtendSelectionByCharacterIntent>(
+          onInvoke: (intent) => controller.traverse(forward: intent.forward),
         ),
+      },
+      child: Field<U>(
+        controller: widget.controller,
+        enabled: widget.enabled,
+        onSaved: widget.onSaved,
+        initialValue: widget.controller.value,
+        validator:
+            (value) => switch (this.value) {
+              null when controller.text == controller.placeholder => widget.validator(null),
+              null => errorMessage,
+              final value => widget.validator(value),
+            },
+        autovalidateMode: widget.autovalidateMode,
+        forceErrorText: widget.forceErrorText,
+        builder:
+            (state) => FTextField(
+              controller: controller,
+              style: textFieldStyle,
+              statesController: controller.statesController,
+              builder: widget.builder,
+              autocorrect: false,
+              // We cannot use TextInputType.number as it does not contain a done button.
+              keyboardType: const TextInputType.numberWithOptions(signed: true),
+              minLines: 1,
+              label: widget.label,
+              description: widget.description,
+              error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
+              enabled: widget.enabled,
+              focusNode: widget.focusNode,
+              textInputAction: widget.textInputAction,
+              textAlign: widget.textAlign,
+              textAlignVertical: widget.textAlignVertical,
+              textDirection: widget.textDirection,
+              expands: widget.expands,
+              autofocus: widget.autofocus,
+              onEditingComplete: widget.onEditingComplete,
+              mouseCursor: widget.mouseCursor,
+              onTap: widget.onTap,
+              canRequestFocus: widget.canRequestFocus,
+              prefixBuilder: widget.prefixBuilder,
+              suffixBuilder: widget.suffixBuilder,
+              clearable: widget.clearable ? clearable : (_) => false,
+            ),
       ),
-    );
-  }
+    ),
+  );
 
   @protected
   bool clearable(TextEditingValue value) => false;

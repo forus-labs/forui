@@ -75,6 +75,7 @@ FSelect<String>(
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   contentScrollHandles: true,
+  initialValue: 'ca',
   children: [
     FSelectSection(
       label: const Text('North American Countries'),
@@ -97,6 +98,33 @@ FSelect<String>(
 );
 ```
 
+### `FSelect.fromMap(...)`
+
+```dart copy
+FSelect<Locale>.fromMap(
+  {
+    'United States': Locale('en', 'US'),
+    'Canada': Locale('en', 'CA'),
+    'jp': Locale('ja', 'JP'),
+  },
+  initialValue: 'ca',
+  controller: FSelectController<Locale>(vsync: this),
+  label: const Text('Country'),
+  description: const Text('Select your country of residence'),
+  hint: 'Choose a country',
+  onChange: (value) => print('Selected country: $value'),
+  onSaved: (value) => print('Saved country: $value'),
+  style: FSelectStyle.inherit(...),
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  builder: (context, styles, child) => child!,
+  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
+  suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
+  clearable: true,
+  contentScrollHandles: true,
+);
+```
+
 ### `FSelect.search(...)`
 
 ```dart copy
@@ -112,6 +140,7 @@ FSelect<User>.search(
   clearable: true,
   autoHide: false,
   onChange: (value) => print('Selected country: $value'),
+  initialValue: 'value',
   contentScrollHandles: false,
   contentPhysics: const BouncingScrollPhysics(),
   emptyBuilder: (context, style, _) => Text('No results'),
@@ -311,6 +340,40 @@ FSelect<User>.search(
 </Tabs>
 
 ### Behavior
+
+#### Toggleable Items
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select' variant='toggleable' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {7} copy
+    class ToggleableSelectPage extends StatefulWidget {
+      @override
+      State<ToggleableSelectPage> createState() => ToggleableSelectPageState();
+    }
+
+    class ToggleableSelectPageState extends State<ToggleableSelectPage> {
+      late final _controller = FSelectController(vsync: this, value: 'Apple', toggleable: true);
+
+      @override
+      Widget build(BuildContext context) => FSelect<String>(
+        hint: 'Select a fruit',
+        controller: _controller,
+        children: [for (final fruit in fruits) FSelectItem.text(fruit)],
+      );
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 
 #### Clearable
 

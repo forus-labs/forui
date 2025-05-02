@@ -1,6 +1,4 @@
-## 0.11.0 (Next)
-We are experimenting with a new changelog format which groups changes by feature.
-
+## 0.11.0
 
 ### Styles
 We added a CLI to generate styles for Forui widgets. See forui.dev/docs/cli for more information. 
@@ -327,10 +325,16 @@ The `hovered` state has also been split into `hovered` and `pressed` states.
 * Fix `FTappable`'s animation sometimes being invoked after it is unmounted.
 
 
-### `FTextField`
+### `FTextField` & `FTextFormField` (new)
+We've split `FTextField` into `FTextField` and `FTextFormField`. This change was necessary to allow `FTextField` to be 
+used in other widgets and allowing those widgets to properly implement `FormField`.
 
+* Add `FTextField.groupId`.
 * Add `FTextField.obscuringCharacter`. Thanks @MrHeer!
 * Add `FTextField.filled` and `FTextField.fillColor`. Thanks @MrHeer!
+* Add `FTextFormField`.
+
+* **Breaking** Change `FTextField` to not support form-related operations. Use `FTextFormField` instead.
 
 * Fix `FTextField` not setting its `FormField`'s initial value.
 * Fix `FTextField(...)` not setting the max lines to 1 default.

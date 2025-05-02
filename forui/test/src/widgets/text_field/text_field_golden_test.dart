@@ -23,7 +23,7 @@ void main() {
             label: const Text('My Label'),
             hint: 'hint',
             description: const Text('Some help text.'),
-            forceErrorText: 'Error',
+            error: const Text('Error'),
           ),
         ),
       );
@@ -67,7 +67,7 @@ void main() {
                   autofocus: focused_,
                   label: const Text('My Label'),
                   hint: 'hint',
-                  forceErrorText: 'An error has occurred.',
+                  error: const Text('An error has occurred.'),
                 ),
               ),
             );

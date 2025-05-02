@@ -19,6 +19,60 @@ void main() {
     controller = FSelectController<String>(vsync: const TestVSync());
   });
 
+  group('form', () {
+    testWidgets('set initial value using initialValue', (tester) async {
+      final key = GlobalKey<FormState>();
+
+      String? initial;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Form(
+            key: key,
+            child: FSelect<String>(
+              format: (value) => '$value!',
+              onSaved: (value) => initial = value,
+              initialValue: 'A',
+              children: [FSelectItem.text('A'), FSelectItem.text('B')],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('A!'), findsOneWidget);
+
+      key.currentState!.save();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      expect(initial, 'A');
+    });
+
+    testWidgets('controller provided', (tester) async {
+      final key = GlobalKey<FormState>();
+
+      String? initial;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Form(
+            key: key,
+            child: FSelect<String>(
+              controller: autoDispose(FSelectController(vsync: tester, value: 'A')),
+              format: (value) => '$value!',
+              onSaved: (value) => initial = value,
+              children: [FSelectItem.text('A'), FSelectItem.text('B')],
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('A!'), findsOneWidget);
+
+      key.currentState!.save();
+      await tester.pumpAndSettle(const Duration(seconds: 5));
+
+      expect(initial, 'A');
+    });
+  });
+
   group('FSelect', () {
     testWidgets('custom format', (tester) async {
       await tester.pumpWidget(
@@ -87,7 +141,7 @@ void main() {
       expect(tester.takeException(), null);
     });
 
-    testWidgets('refocus after selection', (tester) async {
+    testWidgets('does not refocus after selection', (tester) async {
       final focus = autoDispose(FocusNode());
       const itemKey = ValueKey('item');
 
@@ -108,7 +162,7 @@ void main() {
       await tester.tap(find.byKey(itemKey));
       await tester.pumpAndSettle();
 
-      expect(focus.hasFocus, true);
+      expect(focus.hasFocus, false);
     });
   });
 
@@ -128,7 +182,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, true);
-      expect(controller.popover.hasListeners, true);
+      expect(controller.popover.hasListeners, false);
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -159,7 +213,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, true);
-      expect(controller.popover.hasListeners, true);
+      expect(controller.popover.hasListeners, false);
 
       await tester.pumpWidget(const SizedBox());
 

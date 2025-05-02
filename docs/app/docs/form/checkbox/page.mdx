@@ -193,12 +193,12 @@ FCheckbox(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FTextField.email(
+                FTextFormField.email(
                   hint: 'janedoe@foruslabs.com',
                   validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
                 ),
                 const SizedBox(height: 12),
-                FTextField.password(
+                FTextFormField.password(
                   validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
                 ),
                 const SizedBox(height: 15),

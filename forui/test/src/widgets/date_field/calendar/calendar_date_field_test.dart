@@ -17,7 +17,7 @@ void main() {
         (Locale('hr'), 'Odaberite datum'),
       ].indexed) {
     testWidgets('placeholder - $index', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(locale: locale, child: const FDateField.calendar()));
+      await tester.pumpWidget(TestScaffold.app(locale: locale, child: FDateField.calendar()));
 
       expect(find.text(placeholder), findsOneWidget);
     });

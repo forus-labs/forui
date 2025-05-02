@@ -60,8 +60,8 @@ class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderS
       const SizedBox(height: 30),
       FPopover(
         controller: controller,
-        popoverAnchor: widget.axis == Axis.horizontal ? Alignment.topLeft : Alignment.topCenter,
-        childAnchor: widget.axis == Axis.horizontal ? Alignment.topRight : Alignment.bottomCenter,
+        popoverAnchor: widget.axis == Axis.horizontal ? Alignment.bottomLeft : Alignment.topCenter,
+        childAnchor: widget.axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
         hideOnTapOutside: widget.hideOnTapOutside,
         shift: widget.shift,
         popoverBuilder:
@@ -92,7 +92,7 @@ class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderS
                       Row(
                         children: [
                           Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialValue: value)),
+                          Expanded(flex: 2, child: FTextField(initialText: value)),
                         ],
                       ),
                       const SizedBox(height: 7),

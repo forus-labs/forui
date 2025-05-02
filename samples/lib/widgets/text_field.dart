@@ -54,7 +54,7 @@ class EmailTextFieldPage extends Sample {
   @override
   Widget sample(BuildContext context) => const Padding(
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.email(initialValue: 'jane@doe.com'),
+    child: FTextField.email(initialText: 'jane@doe.com'),
   );
 }
 
@@ -65,7 +65,7 @@ class PasswordTextFieldPage extends Sample {
   @override
   Widget sample(BuildContext context) => const Padding(
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.password(initialValue: 'My password', obscuringCharacter: '*'),
+    child: FTextField.password(initialText: 'My password', obscuringCharacter: '*'),
   );
 }
 
@@ -78,61 +78,4 @@ class MultilineTextFieldPage extends Sample {
     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
     child: FTextField.multiline(label: Text('Leave a review'), maxLines: 4),
   );
-}
-
-@RoutePage()
-class FormTextFieldPage extends StatefulSample {
-  FormTextFieldPage({@queryParam super.theme});
-
-  @override
-  State<FormTextFieldPage> createState() => _FormFieldState();
-}
-
-class _FormFieldState extends StatefulSampleState<FormTextFieldPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(15.0),
-    child: Form(
-      key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FTextField.email(
-            controller: _emailController,
-            hint: 'janedoe@foruslabs.com',
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
-          ),
-          const SizedBox(height: 10),
-          FTextField.password(
-            controller: _passwordController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-          ),
-          const SizedBox(height: 20),
-          FButton(
-            child: const Text('Login'),
-            onPress: () {
-              if (!_formKey.currentState!.validate()) {
-                return; // Form is invalid.
-              }
-
-              // Form is valid, do something.
-            },
-          ),
-        ],
-      ),
-    ),
-  );
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
 }

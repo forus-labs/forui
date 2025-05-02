@@ -157,8 +157,8 @@ You can change how the popover is aligned to the button.
       @override
       Widget build(BuildContext context) => FPopover(
         controller: controller,
-        popoverAnchor: Alignment.topLeft,
-        childAnchor: Alignment.topRight,
+        popoverAnchor: Alignment.bottomLeft,
+        childAnchor: Alignment.bottomRight,
         popoverBuilder: (context, style, _) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(

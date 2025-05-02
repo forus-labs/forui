@@ -50,6 +50,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.contentScrollController,
     super.contentScrollHandles,
     super.contentPhysics,
+    super.initialValue,
     super.key,
   }) : super._();
 

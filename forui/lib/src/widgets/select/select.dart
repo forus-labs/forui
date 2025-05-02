@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/form_field.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
@@ -23,7 +24,7 @@ part 'select.style.dart';
 /// * https://forui.dev/docs/form/select for working examples.
 /// * [FSelectController] for customizing the behavior of a select.
 /// * [FSelectStyle] for customizing the appearance of a select.
-abstract class FSelect<T> extends StatefulWidget {
+abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
   static Widget defaultIconBuilder(
     BuildContext _,
@@ -79,47 +80,31 @@ abstract class FSelect<T> extends StatefulWidget {
   /// [defaultIconBuilder].
   final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
 
-  /// The label.
+  @override
   final Widget? label;
 
-  /// The description.
+  @override
   final Widget? description;
 
-  /// {@macro forui.foundation.form_field_properties.errorBuilder}
+  @override
   final Widget Function(BuildContext, String) errorBuilder;
 
-  /// {@macro forui.foundation.form_field_properties.enabled}
+  @override
   final bool enabled;
 
   /// Handler called when the selected value changes.
   final ValueChanged<T?>? onChange;
 
-  /// {@macro forui.foundation.form_field_properties.onSaved}
+  @override
   final FormFieldSetter<T>? onSaved;
 
-  /// Used to enable/disable this checkbox auto validation and update its error text.
-  ///
-  /// Defaults to [AutovalidateMode.onUnfocus].
-  ///
-  /// If [AutovalidateMode.onUserInteraction], this checkbox will only auto-validate after its content changes. If
-  /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
-  /// auto-validation will be disabled.
+  @override
   final AutovalidateMode autovalidateMode;
 
-  /// An optional property that forces the [FormFieldState] into an error state by directly setting the
-  /// [FormFieldState.errorText] property without running the validator function.
-  ///
-  /// When the [forceErrorText] property is provided, the [FormFieldState.errorText] will be set to the provided value,
-  /// causing the form field to be considered invalid and to display the error message specified.
-  ///
-  /// When [validator] is provided, [forceErrorText] will override any error that it returns. [validator] will not be
-  /// called unless [forceErrorText] is null.
+  @override
   final String? forceErrorText;
 
-  /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
-  /// whether a time in a picker is selectable.
-  ///
-  /// Defaults to always returning null.
+  @override
   final FormFieldValidator<T> validator;
 
   /// The function that formats the selected items into a string. The items are sorted in order of selection.
@@ -188,6 +173,12 @@ abstract class FSelect<T> extends StatefulWidget {
   /// The content's scroll physics. Defaults to [ClampingScrollPhysics].
   final ScrollPhysics contentPhysics;
 
+  /// The initial value.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if both the controller and initialValue are provided.
+  final T? initialValue;
+
   /// Creates a select with a list of selectable items.
   const factory FSelect({
     required List<FSelectItemMixin> children,
@@ -228,8 +219,100 @@ abstract class FSelect<T> extends StatefulWidget {
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
+    T? initialValue,
     Key? key,
   }) = _BasicSelect<T>;
+
+  /// Creates a [FSelect] from the given [items].
+  ///
+  /// ## Contract
+  /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
+  /// undefined behavior.
+  factory FSelect.fromMap(
+    Map<String, T> items, {
+    FSelectController<T>? controller,
+    FSelectStyle? style,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder = defaultIconBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled = true,
+    ValueChanged<T?>? onChange,
+    FormFieldSetter<T>? onSaved,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
+    String? forceErrorText,
+    FormFieldValidator<T> validator = _defaultValidator,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    String? hint,
+    TextAlign textAlign = TextAlign.start,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands = false,
+    MouseCursor mouseCursor = SystemMouseCursors.click,
+    bool canRequestFocus = true,
+    bool clearable = false,
+    AlignmentGeometry anchor = Alignment.topLeft,
+    AlignmentGeometry fieldAnchor = Alignment.bottomLeft,
+    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing spacing = const FPortalSpacing(4),
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset offset = Offset.zero,
+    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    bool autoHide = true,
+    ValueWidgetBuilder<FSelectStyle> emptyBuilder = defaultEmptyBuilder,
+    ScrollController? contentScrollController,
+    bool contentScrollHandles = false,
+    ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
+    T? initialValue,
+    Key? key,
+  }) {
+    final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
+    return FSelect<T>(
+      controller: controller,
+      style: style,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      builder: builder,
+      prefixBuilder: prefixBuilder,
+      suffixBuilder: suffixBuilder,
+      label: label,
+      description: description,
+      enabled: enabled,
+      onChange: onChange,
+      onSaved: onSaved,
+      autovalidateMode: autovalidateMode,
+      forceErrorText: forceErrorText,
+      validator: validator,
+      errorBuilder: errorBuilder,
+      format: (value) => inverse[value]!,
+      hint: hint,
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      expands: expands,
+      mouseCursor: mouseCursor,
+      canRequestFocus: canRequestFocus,
+      clearable: clearable,
+      anchor: anchor,
+      fieldAnchor: fieldAnchor,
+      popoverConstraints: popoverConstraints,
+      spacing: spacing,
+      shift: shift,
+      offset: offset,
+      hideOnTapOutside: hideOnTapOutside,
+      autoHide: autoHide,
+      emptyBuilder: emptyBuilder,
+      contentScrollController: contentScrollController,
+      contentScrollHandles: contentScrollHandles,
+      contentPhysics: contentPhysics,
+      initialValue: initialValue,
+      key: key,
+      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(value: value, child: Text(key))],
+    );
+  }
 
   /// Creates a searchable select with dynamic content based on search input.
   ///
@@ -283,6 +366,7 @@ abstract class FSelect<T> extends StatefulWidget {
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
+    T? initialValue,
     Key? key,
   }) = _SearchSelect<T>;
 
@@ -324,8 +408,13 @@ abstract class FSelect<T> extends StatefulWidget {
     this.contentScrollController,
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
+    this.initialValue,
     super.key,
-  });
+  }) : assert(
+         controller == null || initialValue == null,
+         'Cannot provide both a controller and an initialValue. '
+         'To fix, set the initial value directly in the controller.',
+       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -365,12 +454,13 @@ abstract class FSelect<T> extends StatefulWidget {
       ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
-      ..add(DiagnosticsProperty('contentPhysics', contentPhysics));
+      ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
+      ..add(DiagnosticsProperty('initialValue', initialValue));
   }
 }
 
 abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTickerProviderStateMixin {
-  final TextEditingController _textController = TextEditingController();
+  late final TextEditingController _textController;
   late FSelectController<T> _controller;
   late FocusNode _focus;
   bool _mutating = false;
@@ -378,13 +468,24 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FSelectController(vsync: this);
+    _textController = TextEditingController(text: _initialText);
+    _controller = widget.controller ?? FSelectController(vsync: this, value: widget.initialValue);
     _controller.addValueListener(_onChange);
 
     _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
+
     _textController.addListener(_updateSelectController);
     _controller.addListener(_updateTextController);
-    _controller.popover.addListener(_updateFocus);
+  }
+
+  String get _initialText {
+    if (widget.initialValue case final value?) {
+      return widget.format(value);
+    } else if (widget.controller?.value case final value?) {
+      return widget.format(value);
+    } else {
+      return '';
+    }
   }
 
   @override
@@ -403,15 +504,19 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
         _controller.dispose();
       } else {
         old.controller?.removeValueListener(_onChange);
-        old.controller?.popover.removeListener(_updateFocus);
         old.controller?.removeListener(_updateTextController);
       }
 
-      _controller = widget.controller ?? FSelectController(vsync: this);
+      if (widget.controller case final controller?) {
+        _controller = controller;
+      } else {
+        _textController.text = widget.initialValue == null ? '' : widget.format(widget.initialValue as T);
+        _controller = FSelectController(vsync: this, value: widget.initialValue);
+      }
+
       _controller
         ..addValueListener(_onChange)
         ..addListener(_updateTextController);
-      _controller.popover.addListener(_updateFocus);
       _updateTextController();
     }
   }
@@ -449,86 +554,86 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     }
   }
 
-  void _updateFocus() {
-    if (!_controller.popover.shown) {
-      _focus.requestFocus();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.selectStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    final onSaved = widget.onSaved;
-    return FTextField(
-      focusNode: _focus,
-      controller: _textController,
-      style: style.selectFieldStyle,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      textDirection: widget.textDirection,
-      expands: widget.expands,
-      mouseCursor: widget.mouseCursor,
-      canRequestFocus: widget.canRequestFocus,
-      onTap: _show,
-      hint: widget.hint ?? localizations.selectHint,
-      readOnly: true,
-      enableInteractiveSelection: false,
-      prefixBuilder:
-          widget.prefixBuilder == null
-              ? null
-              : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
-      suffixBuilder:
-          widget.suffixBuilder == null
-              ? null
-              : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
-      clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
-      label: widget.label,
-      description: widget.description,
+
+    return Field(
+      controller: _controller,
       enabled: widget.enabled,
-      onSaved: onSaved == null ? null : (_) => onSaved(_controller.value),
-      validator: (_) => widget.validator(_controller.value),
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
-      errorBuilder: widget.errorBuilder,
+      onSaved: widget.onSaved,
+      validator: widget.validator,
+      initialValue: widget.initialValue,
       builder:
-          (context, data, child) => FPopover(
-            style: style.popoverStyle,
-            controller: _controller.popover,
-            constraints: widget.popoverConstraints,
-            popoverAnchor: widget.anchor,
-            childAnchor: widget.fieldAnchor,
-            spacing: widget.spacing,
-            shift: widget.shift,
-            offset: widget.offset,
-            hideOnTapOutside: widget.hideOnTapOutside,
-            popoverBuilder:
-                (_, _, _) => TextFieldTapRegion(
-                  child: SelectControllerData<T>(
-                    contains: (value) => _controller.value == value,
-                    onPress: (value) async {
-                      if (widget.autoHide) {
-                        await _controller.popover.hide();
-                      }
+          (state) => FTextField(
+            focusNode: _focus,
+            controller: _textController,
+            style: style.selectFieldStyle,
+            textAlign: widget.textAlign,
+            textAlignVertical: widget.textAlignVertical,
+            textDirection: widget.textDirection,
+            expands: widget.expands,
+            mouseCursor: widget.mouseCursor,
+            canRequestFocus: widget.canRequestFocus,
+            onTap: _show,
+            hint: widget.hint ?? localizations.selectHint,
+            readOnly: true,
+            enableInteractiveSelection: false,
+            prefixBuilder:
+                widget.prefixBuilder == null
+                    ? null
+                    : (context, styles, _) => MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                    ),
+            suffixBuilder:
+                widget.suffixBuilder == null
+                    ? null
+                    : (context, styles, _) => MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                    ),
+            clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
+            label: widget.label,
+            description: widget.description,
+            error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
+            enabled: widget.enabled,
+            builder:
+                (context, data, child) => FPopover(
+                  style: style.popoverStyle,
+                  controller: _controller.popover,
+                  constraints: widget.popoverConstraints,
+                  popoverAnchor: widget.anchor,
+                  childAnchor: widget.fieldAnchor,
+                  spacing: widget.spacing,
+                  shift: widget.shift,
+                  offset: widget.offset,
+                  hideOnTapOutside: widget.hideOnTapOutside,
+                  popoverBuilder:
+                      (_, _, _) => TextFieldTapRegion(
+                        child: SelectControllerData<T>(
+                          contains: (value) => _controller.value == value,
+                          onPress: (value) async {
+                            if (widget.autoHide) {
+                              await _controller.popover.hide();
+                            }
 
-                      _controller.value = value;
+                            _controller.value = value;
+                          },
+                          child: content(context, style),
+                        ),
+                      ),
+                  child: CallbackShortcuts(
+                    bindings: {
+                      const SingleActivator(LogicalKeyboardKey.enter): _show,
+                      const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
                     },
-                    child: content(context, style),
+                    child: widget.builder(context, (style, data.$1, data.$2), child),
                   ),
                 ),
-            child: CallbackShortcuts(
-              bindings: {
-                const SingleActivator(LogicalKeyboardKey.enter): _show,
-                const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
-              },
-              child: widget.builder(context, (style, data.$1, data.$2), child),
-            ),
           ),
     );
   }
@@ -545,9 +650,9 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     if (widget.controller == null) {
       _controller.dispose();
     } else {
-      _controller.removeValueListener(_onChange);
-      _controller.popover.removeListener(_updateFocus);
-      _controller.removeListener(_updateTextController);
+      _controller
+        ..removeValueListener(_onChange)
+        ..removeListener(_updateTextController);
     }
     _textController.dispose();
 

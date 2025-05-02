@@ -16,7 +16,7 @@ List<Widget> _pages = [
   const Text('Categories'),
   const Text('Search'),
   const Text('Settings'),
-  Sandbox(key: PageStorageKey<String>('Sandbox')),
+  Sandbox(),
 ];
 
 class Application extends StatefulWidget {
@@ -28,7 +28,6 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
   int index = 4;
-  final PageStorageBucket _bucket = PageStorageBucket();
 
   @override
   void initState() {
@@ -42,23 +41,20 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     supportedLocales: FLocalizations.supportedLocales,
     theme: FThemes.zinc.light.toApproximateMaterialTheme(),
     builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
-    home: PageStorage(
-      bucket: _bucket,
-      child: FScaffold(
-        header: const FHeader(title: Text('Example')),
-        footer: FBottomNavigationBar(
-          index: index,
-          onChange: (index) => setState(() => this.index = index),
-          children: const [
-            FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-            FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
-            FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
-            FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
-            FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
-          ],
-        ),
-        child: _pages[index],
+    home: FScaffold(
+      header: const FHeader(title: Text('Example')),
+      footer: FBottomNavigationBar(
+        index: index,
+        onChange: (index) => setState(() => this.index = index),
+        children: const [
+          FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
+        ],
       ),
+      child: _pages[index],
     ),
   );
 }
