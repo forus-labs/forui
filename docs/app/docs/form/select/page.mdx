@@ -113,6 +113,7 @@ FSelect<User>.search(
   clearable: true,
   autoHide: false,
   onChange: (value) => print('Selected country: $value'),
+  initialValue: 'value',
   contentScrollHandles: false,
   contentPhysics: const BouncingScrollPhysics(),
   emptyBuilder: (context, style, _) => Text('No results'),
@@ -312,6 +313,40 @@ FSelect<User>.search(
 </Tabs>
 
 ### Behavior
+
+#### Toggleable Items
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select' variant='toggleable' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {7} copy
+    class ToggleableSelectPage extends StatefulWidget {
+      @override
+      State<ToggleableSelectPage> createState() => ToggleableSelectPageState();
+    }
+
+    class ToggleableSelectPageState extends State<ToggleableSelectPage> {
+      late final _controller = FSelectController(vsync: this, value: 'Apple', toggleable: true);
+
+      @override
+      Widget build(BuildContext context) => FSelect<String>(
+        hint: 'Select a fruit',
+        controller: _controller,
+        children: [for (final fruit in fruits) FSelectItem.text(fruit)],
+      );
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 
 #### Clearable
 

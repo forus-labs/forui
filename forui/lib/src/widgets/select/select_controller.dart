@@ -41,16 +41,20 @@ class FSelectController<T> extends FValueNotifier<T?> {
   /// Manually disposing this controller is undefined behavior. Dispose this [FSelectController] instead.
   final FPopoverController popover;
 
+  /// True if the items in the select can toggled (unselected). Defaults to false.
+  final bool toggleable;
+
   /// Creates a [FSelectController].
   FSelectController({
     required TickerProvider vsync,
     T? value,
+    this.toggleable = false,
     Duration popoverAnimationDuration = const Duration(milliseconds: 50),
   }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
        super(value);
 
   @override
-  set value(T? value) => super.value = super.value == value ? null : value;
+  set value(T? value) => super.value = toggleable && super.value == value ? null : value;
 
   @override
   void dispose() {
