@@ -38,7 +38,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// {@macro forui.text_field.magnifier_configuration}
   final TextMagnifierConfiguration? magnifierConfiguration;
 
-  // {@macro forui.text_field_groupId}
+  /// {@macro forui.text_field_groupId}
   final Object groupId;
 
   /// {@macro forui.text_field.controller}
