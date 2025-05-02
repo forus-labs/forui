@@ -12,7 +12,10 @@ class DateFieldPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 30),
-    child: FDateField(label: const Text('Appointment Date'), description: const Text('Select a date for your appointment')),
+    child: FDateField(
+      label: const Text('Appointment Date'),
+      description: const Text('Select a date for your appointment'),
+    ),
   );
 }
 
