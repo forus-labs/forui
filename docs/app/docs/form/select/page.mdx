@@ -98,6 +98,33 @@ FSelect<String>(
 );
 ```
 
+### `FSelect.fromMap(...)`
+
+```dart copy
+FSelect<Locale>.fromMap(
+  {
+    'United States': Locale('en', 'US'),
+    'Canada': Locale('en', 'CA'),
+    'jp': Locale('ja', 'JP'),
+  },
+  initialValue: 'ca',
+  controller: FSelectController<Locale>(vsync: this),
+  label: const Text('Country'),
+  description: const Text('Select your country of residence'),
+  hint: 'Choose a country',
+  onChange: (value) => print('Selected country: $value'),
+  onSaved: (value) => print('Saved country: $value'),
+  style: FSelectStyle.inherit(...),
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  builder: (context, styles, child) => child!,
+  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
+  suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
+  clearable: true,
+  contentScrollHandles: true,
+);
+```
+
 ### `FSelect.search(...)`
 
 ```dart copy

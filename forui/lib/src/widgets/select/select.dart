@@ -223,6 +223,97 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Key? key,
   }) = _BasicSelect<T>;
 
+  /// Creates a [FSelect] from the given [items].
+  ///
+  /// ## Contract
+  /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
+  /// undefined behavior.
+  factory FSelect.fromMap(
+    Map<String, T> items, {
+    FSelectController<T>? controller,
+    FSelectStyle? style,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder = defaultIconBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled = true,
+    ValueChanged<T?>? onChange,
+    FormFieldSetter<T>? onSaved,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
+    String? forceErrorText,
+    FormFieldValidator<T> validator = _defaultValidator,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    String? hint,
+    TextAlign textAlign = TextAlign.start,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands = false,
+    MouseCursor mouseCursor = SystemMouseCursors.click,
+    bool canRequestFocus = true,
+    bool clearable = false,
+    AlignmentGeometry anchor = Alignment.topLeft,
+    AlignmentGeometry fieldAnchor = Alignment.bottomLeft,
+    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing spacing = const FPortalSpacing(4),
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset offset = Offset.zero,
+    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    bool autoHide = true,
+    ValueWidgetBuilder<FSelectStyle> emptyBuilder = defaultEmptyBuilder,
+    ScrollController? contentScrollController,
+    bool contentScrollHandles = false,
+    ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
+    T? initialValue,
+    Key? key,
+  }) {
+    final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
+    return FSelect<T>(
+      controller: controller,
+      style: style,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      builder: builder,
+      prefixBuilder: prefixBuilder,
+      suffixBuilder: suffixBuilder,
+      label: label,
+      description: description,
+      enabled: enabled,
+      onChange: onChange,
+      onSaved: onSaved,
+      autovalidateMode: autovalidateMode,
+      forceErrorText: forceErrorText,
+      validator: validator,
+      errorBuilder: errorBuilder,
+      format: (value) => inverse[value]!,
+      hint: hint,
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      expands: expands,
+      mouseCursor: mouseCursor,
+      canRequestFocus: canRequestFocus,
+      clearable: clearable,
+      anchor: anchor,
+      fieldAnchor: fieldAnchor,
+      popoverConstraints: popoverConstraints,
+      spacing: spacing,
+      shift: shift,
+      offset: offset,
+      hideOnTapOutside: hideOnTapOutside,
+      autoHide: autoHide,
+      emptyBuilder: emptyBuilder,
+      contentScrollController: contentScrollController,
+      contentScrollHandles: contentScrollHandles,
+      contentPhysics: contentPhysics,
+      initialValue: initialValue,
+      key: key,
+      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(value: value, child: Text(key))],
+    );
+  }
+
   /// Creates a searchable select with dynamic content based on search input.
   ///
   /// The [searchFieldProperties] can be used to customize the search field.
