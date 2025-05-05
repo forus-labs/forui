@@ -24,5 +24,6 @@ jobs:
           private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
       - uses: lycheeverse/lychee-action@v2
         with:
-          args: --base . --no-progress './**/*.md'
+          # GitHub seems to have tightened their secondary rate limits causing previously working checks to fail.
+          args: --base . --no-progress './**/*.md' --exclude '^https://www\.github\.com'
           token: ${{ steps.generate-token.outputs.token }}
