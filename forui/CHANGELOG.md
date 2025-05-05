@@ -1,3 +1,7 @@
+## 0.12.0 (Next)
+
+
+
 ## 0.11.0
 
 ### Styles
@@ -8,7 +12,7 @@ We made several breaking changes to styles and widgets that rely on state styles
 concise.
 
 * **Breaking** Rename `FThemeData.colorScheme` to `FThemeData.colors`.
-* **Breaking** Rename all `F<Style>.inherit(colorScheme: ...)` to `F<Style>.inherit(color: ...)`.
+* **Breaking** Rename all `F<Style>.inherit(colorScheme: ...)` to `F<Style>.inherit(colors: ...)`.
 
 
 ### Semantics Labels

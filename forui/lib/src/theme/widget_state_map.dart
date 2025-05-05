@@ -86,6 +86,8 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   ///
   /// Unlike [replaceAllWhere], which modifies all matching values, this method only modifies the first matching value.
   ///
+  /// To replace values associated with [WidgetState.any], pass in an empty set.
+  ///
   /// ## Example
   /// ```dart
   /// final property = FWidgetStateMap<Color>({
@@ -117,6 +119,8 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
 
   /// Creates a new [FWidgetStateMap] where only the last value associated with a constraint satisfied by [states]
   /// is replaced with the result of calling [replace] on the original value.
+  ///
+  /// To replace values associated with [WidgetState.any], pass in an empty set.
   ///
   /// ## Example
   /// ```dart

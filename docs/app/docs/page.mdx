@@ -9,8 +9,29 @@ If you're new to Flutter, you may follow the official [installation guide](https
 
 From your Flutter project directory, run the following command to install Forui.
 
+<Callout type="warning">
+  Forui 0.11.0 requires Flutter **3.29.0+**. Run `flutter --version` to check your Flutter version.
+</Callout>
+
 ```bash filename="bash" copy
 flutter pub add forui
+```
+
+## Upgrading
+
+Flutter does not automatically upgrade minor versions of packages prior to `1.0.0`.
+
+This means that that following entry in your `pubspec.yaml` file will **not** automatically upgrade to `0.11.0`:
+
+```yaml filename="pubspec.yaml"
+dependencies:
+  forui: ^0.10.0
+```
+
+To upgrade to the latest version of Forui, run the following command:
+
+```bash filename="bash" copy
+flutter pub upgrade forui --major-versions
 ```
 
 ### Forui Icons
@@ -31,13 +52,11 @@ To use Forui widgets in your Flutter app, import the Forui package and place the
 [`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) widget underneath `CupertinoApp`,
 `MaterialApp`, or `WidgetsApp` at the root of the widget tree.
 
-You can run:
+To generate a basic Forui app structure in your project, run:
 
-```shell copy
+```bash filename="bash" copy
 dart run forui init
 ```
-
-to generate a basic Forui app structure in your project.
 
 It is perfectly fine to use Cupertino/Material widgets alongside Forui widgets!
 
