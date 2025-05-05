@@ -1,3 +1,6 @@
+## 0.12.0 (Next)
+
+
 ## 0.11.0
 
 All svg icons have been replaced with font icons, improving performance. Also updates icons to Luicide 0.506.0.
