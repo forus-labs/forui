@@ -1,4 +1,6 @@
-## 0.12.0 (Next)
+## 0.11.1 (Next)
+
+* Fix `FTileStyle.pressable` not changing background color on press & hold.
 
 
 

@@ -306,7 +306,7 @@ class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
         borderRadius: style.borderRadius,
         backgroundColor: FWidgetStateMap({
           WidgetState.disabled: colors.disable(colors.secondary),
-          WidgetState.hovered: colors.secondary,
+          WidgetState.hovered | WidgetState.pressed: colors.secondary,
           WidgetState.any: colors.background,
         }),
         dividerStyle: divider,
