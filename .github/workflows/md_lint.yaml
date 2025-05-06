@@ -2,14 +2,14 @@ name: MD Lint
 
 on:
   workflow_dispatch: {}
-  # push:
-  #   paths:
-  #     - .github/workflows/md_lint.yaml
-  #     - '**.md'
-  # pull_request_target:
-  #   paths:
-  #     - .github/workflows/md_lint.yaml
-  #     - '**.md'
+  push:
+    paths:
+      - .github/workflows/md_lint.yaml
+      - '**.md'
+  pull_request_target:
+    paths:
+      - .github/workflows/md_lint.yaml
+      - '**.md'
 
 jobs:
   lint:
