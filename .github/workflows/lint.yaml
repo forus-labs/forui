@@ -25,5 +25,5 @@ jobs:
       - uses: lycheeverse/lychee-action@v2
         with:
           # GitHub seems to have tightened their secondary rate limits causing previously working checks to fail.
-          args: --base . --no-progress './**/*.md' --exclude '^https://www\.github\.com'
+          args: --base . --no-progress './**/*.md' --exclude '(github)\.com'
           token: ${{ steps.generate-token.outputs.token }}
