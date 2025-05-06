@@ -16,11 +16,13 @@ export default function Logo({ className = 'w-24 h-auto' }: Props) {
     setMounted(true);
   }, []);
 
-  const logoSrc = mounted && resolvedTheme === 'dark' ? '/dark_logo.svg' : '/light_logo.svg';
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <Image
-      src={logoSrc}
+      src={resolvedTheme === 'dark' ? '/dark_logo.svg' : '/light_logo.svg'}
       className={className}
       width={0}
       height={0}
