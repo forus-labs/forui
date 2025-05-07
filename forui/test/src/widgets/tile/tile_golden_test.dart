@@ -135,7 +135,7 @@ void main() {
             ),
           ),
         );
-        
+
         await tester.longPress(find.byType(FTile));
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/pressed-${theme.name}.png'));
 
