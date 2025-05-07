@@ -7,6 +7,7 @@ import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
+import 'package:collection/collection.dart';
 import 'package:sugar/sugar.dart';
 
 import 'main.dart';
@@ -50,21 +51,75 @@ class ConstructorFragment {
     return result.reversed.toList();
   }
 
-  static String _factory(String type, RegExp pattern, ConstructorMatch match) => match.constructor
-      .toSource()
-      .replaceAll('factory $type.inherit', '$type ${type.substring(1).toCamelCase()}')
-      .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
+  static String _factory(String type, RegExp pattern, ConstructorMatch match) {
+    var source = match.constructor
+        .toSource()
+        .replaceAll('factory $type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
 
-  static String _redirecting(String type, RegExp pattern, ConstructorMatch metadata) => metadata.constructor
-      .toSource()
-      .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
-      .replaceAll(' : this', ' => $type')
-      .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
+    final visitor = _ConstructorInvocationVisitor(type);
+    match.constructor.body.accept(visitor);
+
+    for (final invocation in visitor.constructorInvocations) {
+      // Finds all optional named parameters that are not given in the invocation.
+      final constructor = invocation.constructorName.element!;
+      final given =
+          invocation.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
+      final additional = [
+        for (final p in constructor.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name3)))
+          if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name3}: $defaultValue',
+      ];
+
+      final creationSource = invocation.toSource();
+      final index = source.indexOf(creationSource);
+      if (additional.isNotEmpty && index >= 0) {
+        final closingParenthesis = index + creationSource.lastIndexOf(')');
+        if (index < closingParenthesis) {
+          source =
+              source.substring(0, closingParenthesis) +
+              (given.isEmpty ? '' : ',') +
+              additional.join(', ') +
+              source.substring(closingParenthesis);
+        }
+      }
+    }
+
+    return source;
+  }
+
+  static String _redirecting(String type, RegExp pattern, ConstructorMatch metadata) {
+    var source = metadata.constructor
+        .toSource()
+        .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAll(' : this', ' => $type');
+
+    // Finds all optional named parameters that are not given in the constructor.
+    final to = metadata.constructor.initializers.whereType<RedirectingConstructorInvocation>().single;
+    final given = to.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
+    final additional = [
+      for (final p in to.element!.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name3)))
+        if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name3}: $defaultValue',
+    ];
+
+    final closingParenthesis = source.lastIndexOf(')');
+    if (additional.isNotEmpty && closingParenthesis > 0) {
+      source =
+          source.substring(0, closingParenthesis) +
+          (given.isEmpty ? '' : ',') +
+          additional.join(', ') +
+          source.substring(closingParenthesis);
+    }
+
+    return source.replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
+  }
 
   static String _initializers(String type, RegExp pattern, ConstructorMatch match) {
     if (match.constructor.body.toSource() != ';') {
       throw UnsupportedError('Constructor bodies are not supported: ${match.constructor.toSource()}');
     }
+
+    // Unlike factory & redirecting constructors, creating a type using an initializer list implies that there are no
+    // optional parameters that need to be added to the constructor.
 
     final parameters = <String>[];
     var abort = false;
@@ -116,6 +171,22 @@ class ConstructorFragment {
   final String source;
 
   ConstructorFragment({required this.root, required this.type, required this.closure, required this.source});
+}
+
+/// Visitor that all constructor invocations of a given type.
+class _ConstructorInvocationVisitor extends RecursiveAstVisitor<void> {
+  final String type;
+  final List<InstanceCreationExpression> constructorInvocations = [];
+
+  _ConstructorInvocationVisitor(this.type);
+
+  @override
+  void visitInstanceCreationExpression(InstanceCreationExpression node) {
+    if (node.constructorName.type.name2.lexeme == type) {
+      constructorInvocations.add(node);
+    }
+    super.visitInstanceCreationExpression(node);
+  }
 }
 
 class ConstructorMatch {

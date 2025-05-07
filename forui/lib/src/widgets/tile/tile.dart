@@ -341,11 +341,17 @@ class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
 class FTileStateStyle with Diagnosticable, _$FTileStateStyleFunctions {
   /// The tile's border.
   ///
+  /// If wrapped in a [FTileGroup], [FTileGroupStyle.borderColor] needs to be also be modified for the changes to be
+  /// visible.
+  ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<Border> border;
 
   /// The tile's border radius.
+  ///
+  /// If wrapped in a [FTileGroup], [FTileGroupStyle.borderRadius] needs to be also be modified for the changes to be
+  /// visible.
   @override
   final BorderRadius borderRadius;
 
