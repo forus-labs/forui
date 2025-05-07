@@ -1,5 +1,8 @@
-## 0.12.0 (Next)
+## 0.11.1
 
+* Add optional named parameters with their default values to CLI generated styles. 
+* Fix `FTileStyle.pressable` not changing background color on press & hold.
+* Fix typo in CLI generated styles' documentation.
 
 
 ## 0.11.0

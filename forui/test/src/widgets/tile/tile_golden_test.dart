@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -116,6 +117,31 @@ void main() {
         await tester.pumpAndSettle();
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/hovered-${theme.name}.png'));
+      });
+
+      testWidgets('pressed', (tester) async {
+        debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FTile(
+              prefixIcon: const Icon(FIcons.bluetooth),
+              title: const Text('Lorem'),
+              subtitle: const Text('Fee, Fo'),
+              details: const Text('FL (5G)'),
+              suffixIcon: const Icon(FIcons.chevronRight),
+              onPress: () {},
+            ),
+          ),
+        );
+
+        await tester.longPress(find.byType(FTile));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/pressed-${theme.name}.png'));
+
+        await tester.pumpAndSettle();
+
+        debugDefaultTargetPlatformOverride = null;
       });
 
       testWidgets('RTL', (tester) async {
