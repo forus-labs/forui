@@ -124,6 +124,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
           style: style,
           properties: properties,
           autofocus: false,
+          fieldFocusNode: null,
           child: widget.builder(context, (style, data.$1, data.$2), child!),
         ),
     };

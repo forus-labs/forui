@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -161,44 +160,6 @@ void main() {
         find.byType(TestScaffold),
         matchesGoldenFile('date-field/${theme.name}/calendar/keyboard-navigation.png'),
       );
-    });
-
-    testWidgets('${theme.name} tap outside unfocuses on Android/iOS', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField.calendar(key: key)),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tapAt(Offset.zero);
-      await tester.pumpAndSettle();
-
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/mobile-unfocused.png'),
-      );
-    });
-
-    testWidgets('${theme.name} tap outside unfocuses on desktop', (tester) async {
-      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
-
-      await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField.calendar(key: key)),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tapAt(const Offset(500, 500));
-      await tester.pumpAndSettle();
-
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/desktop-unfocused.png'),
-      );
-
-      debugDefaultTargetPlatformOverride = null;
     });
   }
 }

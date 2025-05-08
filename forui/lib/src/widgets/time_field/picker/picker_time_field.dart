@@ -91,7 +91,6 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   void initState() {
     super.initState();
     _controller._picker.addListener(_updateTextController);
-    _controller.popover.addListener(_updateFocus);
     _controller.addValueListener(_onChange);
   }
 
@@ -116,13 +115,11 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         _controller.dispose();
       } else {
         _controller._picker.removeListener(_updateTextController);
-        _controller.popover.removeListener(_updateFocus);
         _controller.removeValueListener(_onChange);
       }
 
       _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
       _controller._picker.addListener(_updateTextController);
-      _controller.popover.addListener(_updateFocus);
       _controller.addValueListener(_onChange);
       _updateTextController();
     }
@@ -149,12 +146,6 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     });
   }
 
-  void _updateFocus() {
-    if (!_controller.popover.shown) {
-      _focus.unfocus();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.timeFieldStyle;
@@ -179,7 +170,8 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
             expands: widget.expands,
             mouseCursor: widget.mouseCursor,
             canRequestFocus: widget.canRequestFocus,
-            onTap: _show,
+            onTap: _onTap,
+            onTapAlwaysCalled: true,
             hint: widget.hint ?? localizations.dateFieldHint,
             readOnly: true,
             enableInteractiveSelection: false,
@@ -208,8 +200,9 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
                   hour24: widget.hour24,
                   properties: widget,
                   autofocus: true,
+                  fieldFocusNode: _focus,
                   child: CallbackShortcuts(
-                    bindings: {const SingleActivator(LogicalKeyboardKey.enter): _show},
+                    bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
                     child: widget.builder(context, (style, styles.$1, styles.$2), child),
                   ),
                 ),
@@ -217,8 +210,8 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     );
   }
 
-  void _show() {
-    _focus.unfocus();
+  void _onTap() {
+    _controller.popover.shown ? _focus.requestFocus() : _focus.unfocus();
     _controller.popover.toggle();
   }
 
@@ -228,7 +221,6 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       _controller.dispose();
     } else {
       _controller._picker.removeListener(_updateTextController);
-      _controller.popover.removeListener(_updateFocus);
       _controller.removeValueListener(_onChange);
     }
 
@@ -246,6 +238,7 @@ class _PickerPopover extends StatelessWidget {
   final FTimeFieldPickerProperties properties;
   final bool hour24;
   final bool autofocus;
+  final FocusNode? fieldFocusNode;
   final Widget child;
 
   const _PickerPopover({
@@ -254,6 +247,7 @@ class _PickerPopover extends StatelessWidget {
     required this.properties,
     required this.hour24,
     required this.autofocus,
+    required this.fieldFocusNode,
     required this.child,
   });
 
@@ -269,6 +263,7 @@ class _PickerPopover extends StatelessWidget {
     offset: properties.offset,
     hideOnTapOutside: properties.hideOnTapOutside,
     autofocus: autofocus,
+    shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
     popoverBuilder:
         (_, _, _) => TextFieldTapRegion(
           child: Padding(
@@ -285,6 +280,11 @@ class _PickerPopover extends StatelessWidget {
     child: child,
   );
 
+  void _hide() {
+    fieldFocusNode?.requestFocus();
+    controller.popover.hide();
+  }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -293,6 +293,7 @@ class _PickerPopover extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('properties', this.properties))
       ..add(DiagnosticsProperty('hour24', hour24))
-      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'));
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('fieldFocusNode', fieldFocusNode));
   }
 }

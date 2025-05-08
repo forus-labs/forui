@@ -178,6 +178,11 @@ class FPopover extends StatefulWidget {
   /// The popover's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
+  /// The shortcuts and the associated actions.
+  ///
+  /// Defaults to closing the popover when the escape key is pressed.
+  final Map<ShortcutActivator, VoidCallback>? shortcuts;
+
   /// The popover builder. The child passed to [popoverBuilder] will always be null.
   final ValueWidgetBuilder<FPopoverStyle> popoverBuilder;
 
@@ -198,11 +203,12 @@ class FPopover extends StatefulWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.semanticsLabel,
+    this.shortcuts,
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
     super.key,
@@ -235,6 +241,7 @@ class FPopover extends StatefulWidget {
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     this.semanticsLabel,
+    this.shortcuts,
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
     super.key,
@@ -268,6 +275,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
   }
 }
@@ -302,17 +310,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             : widget.child;
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
-      child = TapRegion(
-        groupId: _groupId,
-        onTapOutside: (_) {
-          // We need to check if it is shown first, otherwise it will fire even when hidden. This messes with the focus
-          // when there are multiple FSelects/other widgets.
-          if (_controller.shown) {
-            _controller.hide();
-          }
-        },
-        child: child,
-      );
+      child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
     }
 
     return FPortal(
@@ -326,7 +324,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       offset: widget.offset,
       portalBuilder:
           (context) => CallbackShortcuts(
-            bindings: {const SingleActivator(LogicalKeyboardKey.escape): _controller.hide},
+            bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
             child: Semantics(
               label: widget.semanticsLabel,
               container: true,
@@ -340,8 +338,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                     scale: _controller._scale,
                     child: TapRegion(
                       groupId: _groupId,
-                      onTapOutside:
-                          widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _controller.hide(),
+                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
                       child: DecoratedBox(
                         decoration: style.decoration,
                         child: widget.popoverBuilder(context, style, null),
@@ -354,6 +351,14 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
           ),
       child: child,
     );
+  }
+
+  void _hide() {
+    // We need to check if it is shown first, otherwise it will fire even when hidden. This messes with the focus
+    // when there are multiple FSelects/other widgets.
+    if (_controller.shown) {
+      _controller.hide();
+    }
   }
 
   @override

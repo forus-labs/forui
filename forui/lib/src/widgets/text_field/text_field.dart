@@ -1070,7 +1070,11 @@ class _State extends State<FTextField> {
 
   void _handleOnChange() => widget.onChange?.call(_controller.text);
 
-  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
+    if (mounted) {
+      setState(() {});
+    }
+  });
 
   @override
   Widget build(BuildContext context) {

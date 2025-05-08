@@ -1,9 +1,13 @@
 ## 0.12.0 (Next)
 
-### `FTextField`
+### Others
 
+* Add `FPopover.shortcuts`.
 * Add `FTextField.onTapOutside`.
-* Add `FTextField.onTap`.
+
+* Enhance `FDateField.calendar`'s focus management.
+* Enhance `FSelect`'s focus management.
+* Enhance `FTimeField.picker`'s focus management.
 
 
 ## 0.11.1
