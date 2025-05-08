@@ -1,3 +1,11 @@
+## 0.12.0 (Next)
+
+### `FTextField`
+
+* Add `FTextField.onTapOutside`.
+* Add `FTextField.onTap`.
+
+
 ## 0.11.1
 
 * Add optional named parameters with their default values to CLI generated styles. 
