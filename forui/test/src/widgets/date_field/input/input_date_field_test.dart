@@ -176,4 +176,18 @@ void main() {
       expect(find.bySemanticsLabel('Clear'), findsExactly(expected));
     });
   }
+
+  testWidgets('enter closes popover', (tester) async {
+    await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: FDateField(key: key)));
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(FCalendar), findsOne);
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(FCalendar), findsNothing);
+  });
 }

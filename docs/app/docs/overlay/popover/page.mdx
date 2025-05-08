@@ -123,6 +123,7 @@ FPopover.automatic(
   offset: Offset.zero,
   groupId: 'popover-group',
   hideOnTapOutside: FHidePopoverRegion.excludeTarget,
+  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): () => print('shortcut')},
   popoverBuilder: (context, style, child) => const Placeholder(),
   child: const Placeholder(),
 );

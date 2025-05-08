@@ -578,7 +578,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
             expands: widget.expands,
             mouseCursor: widget.mouseCursor,
             canRequestFocus: widget.canRequestFocus,
-            onTap: _show,
+            onTap: _toggle,
+            onTapAlwaysCalled: true,
             hint: widget.hint ?? localizations.selectHint,
             readOnly: true,
             enableInteractiveSelection: false,
@@ -612,12 +613,14 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
                   shift: widget.shift,
                   offset: widget.offset,
                   hideOnTapOutside: widget.hideOnTapOutside,
+                  shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
                   popoverBuilder:
                       (_, _, _) => TextFieldTapRegion(
                         child: SelectControllerData<T>(
                           contains: (value) => _controller.value == value,
                           onPress: (value) async {
                             if (widget.autoHide) {
+                              _focus.requestFocus();
                               await _controller.popover.hide();
                             }
 
@@ -628,7 +631,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
                       ),
                   child: CallbackShortcuts(
                     bindings: {
-                      const SingleActivator(LogicalKeyboardKey.enter): _show,
+                      const SingleActivator(LogicalKeyboardKey.enter): _toggle,
+                      // TODO: Remove once https://github.com/flutter/flutter/issues/161482 lands
                       const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
                     },
                     child: widget.builder(context, (style, data.$1, data.$2), child),
@@ -640,8 +644,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
   Widget content(BuildContext context, FSelectStyle style);
 
-  void _show() {
-    _focus.unfocus();
+  void _toggle() {
+    _controller.popover.shown ? _focus.requestFocus() : _focus.unfocus();
     _controller.popover.toggle();
   }
 

@@ -117,6 +117,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final GestureTapCallback? onTap;
 
   /// {@macro forui.text_field.onTapAlwaysCalled}
+  final TapRegionCallback? onTapOutside;
+
+  /// {@macro forui.text_field.onTap}
   final bool onTapAlwaysCalled;
 
   /// {@macro forui.text_field.onEditingComplete}
@@ -247,6 +250,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.maxLengthEnforcement,
     this.onChange,
     this.onTap,
+    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -316,6 +320,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.maxLengthEnforcement,
     this.onChange,
     this.onTap,
+    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -388,6 +393,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.maxLengthEnforcement,
     this.onChange,
     this.onTap,
+    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -461,6 +467,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.maxLengthEnforcement,
     this.onChange,
     this.onTap,
+    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -533,6 +540,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
+      ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
       ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))

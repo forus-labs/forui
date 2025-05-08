@@ -368,6 +368,32 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final GestureTapCallback? onTap;
 
+  /// {@template forui.text_field.onTapOutside}
+  /// Called for each tap down that occurs outside of the [TextFieldTapRegion]
+  /// group when the text field is focused.
+  ///
+  /// If this is null, [EditableTextTapOutsideIntent] will be invoked. In the
+  /// default implementation, [FocusNode.unfocus] will be called on the
+  /// [focusNode] for this text field when a [PointerDownEvent] is received on
+  /// another part of the UI. However, it will not unfocus as a result of mobile
+  /// application touch events (which does not include mouse clicks), to conform
+  /// with the platform conventions. To change this behavior, a callback may be
+  /// set here or [EditableTextTapOutsideIntent] may be overridden.
+  ///
+  /// When adding additional controls to a text field (for example, a spinner, a
+  /// button that copies the selected text, or modifies formatting), it is
+  /// helpful if tapping on that control doesn't unfocus the text field. In
+  /// order for an external widget to be considered as part of the text field
+  /// for the purposes of tapping "outside" of the field, wrap the control in a
+  /// [TextFieldTapRegion].
+  ///
+  /// The [PointerDownEvent] passed to the function is the event that caused the
+  /// notification. It is possible that the event may occur outside of the
+  /// immediate bounding box defined by the text field, although it will be
+  /// within the bounding box of a [TextFieldTapRegion] member.
+  /// {@endtemplate}
+  final TapRegionCallback? onTapOutside;
+
   /// {@template forui.text_field.onTapAlwaysCalled}
   /// Whether [onTap] should be called for every tap.
   ///
@@ -672,6 +698,7 @@ class FTextField extends StatefulWidget {
     this.maxLengthEnforcement,
     this.onChange,
     this.onTap,
+    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -741,6 +768,7 @@ class FTextField extends StatefulWidget {
     this.maxLengthEnforcement,
     this.onChange,
     this.onTap,
+    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -813,6 +841,7 @@ class FTextField extends StatefulWidget {
     this.maxLengthEnforcement,
     this.onChange,
     this.onTap,
+    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -886,6 +915,7 @@ class FTextField extends StatefulWidget {
     this.maxLengthEnforcement,
     this.onChange,
     this.onTap,
+    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -957,6 +987,7 @@ class FTextField extends StatefulWidget {
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
+      ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
       ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
@@ -1039,7 +1070,11 @@ class _State extends State<FTextField> {
 
   void _handleOnChange() => widget.onChange?.call(_controller.text);
 
-  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) => setState(() {}));
+  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
+    if (mounted) {
+      setState(() {});
+    }
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1075,6 +1110,7 @@ class _State extends State<FTextField> {
       maxLength: widget.maxLength,
       maxLengthEnforcement: widget.maxLengthEnforcement,
       onTap: widget.onTap,
+      onTapOutside: widget.onTapOutside,
       onTapAlwaysCalled: widget.onTapAlwaysCalled,
       onEditingComplete: widget.onEditingComplete,
       onSubmitted: widget.onSubmit,
@@ -1114,7 +1150,6 @@ class _State extends State<FTextField> {
       label: widget.label,
       style: style,
       description: widget.description,
-      // TODO: add test to prevent this regression.
       // Error should never be null as doing so causes the widget tree to change. This causes overlays attached to
       // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.
       error: widget.error ?? const SizedBox(),

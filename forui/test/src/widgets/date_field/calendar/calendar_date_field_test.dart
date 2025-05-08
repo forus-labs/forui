@@ -1,4 +1,5 @@
-import 'package:flutter/rendering.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -140,6 +141,68 @@ void main() {
       await tester.pumpAndSettle(const Duration(seconds: 3));
 
       expect(find.bySemanticsLabel('Clear'), findsOne);
+    });
+  });
+
+  group('focus', () {
+    testWidgets('tap on text-field should refocus', (tester) async {
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, focusNode: focus)));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(focus.hasFocus, true);
+    });
+
+    testWidgets('escape should refocus', (tester) async {
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, focusNode: focus)));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+      await tester.pumpAndSettle();
+
+      expect(focus.hasFocus, true);
+    });
+
+    testWidgets('tap outside unfocuses on Android/iOS', (tester) async {
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, focusNode: focus)));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
+      expect(focus.hasFocus, false);
+    });
+
+    testWidgets('tap outside unfocuses on desktop', (tester) async {
+      debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
+
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, focusNode: focus)));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tapAt(const Offset(500, 500));
+      await tester.pumpAndSettle();
+
+      expect(focus.hasFocus, false);
+
+      debugDefaultTargetPlatformOverride = null;
     });
   });
 }
