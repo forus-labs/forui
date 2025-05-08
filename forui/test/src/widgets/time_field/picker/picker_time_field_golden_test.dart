@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -112,6 +113,22 @@ void main() {
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/error.png'));
+    });
+
+    testWidgets('${theme.name} keyboard navigation', (tester) async {
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FTimeField.picker(key: key)));
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-field/${theme.name}/picker/keyboard-navigation.png'),
+      );
     });
 
     testWidgets('${theme.name} tap outside unfocuses on Android/iOS', (tester) async {
