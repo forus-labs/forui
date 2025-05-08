@@ -179,7 +179,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
             expands: widget.expands,
             mouseCursor: widget.mouseCursor,
             canRequestFocus: widget.canRequestFocus,
-            onTap: _controller.popover.toggle,
+            onTap: _show,
             hint: widget.hint ?? localizations.dateFieldHint,
             readOnly: true,
             enableInteractiveSelection: false,
@@ -207,10 +207,19 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
                   style: style,
                   hour24: widget.hour24,
                   properties: widget,
-                  child: widget.builder(context, (style, styles.$1, styles.$2), child),
+                  autofocus: true,
+                  child: CallbackShortcuts(
+                    bindings: {const SingleActivator(LogicalKeyboardKey.enter): _show},
+                    child: widget.builder(context, (style, styles.$1, styles.$2), child),
+                  ),
                 ),
           ),
     );
+  }
+
+  void _show() {
+    _focus.unfocus();
+    _controller.popover.toggle();
   }
 
   @override
@@ -236,6 +245,7 @@ class _PickerPopover extends StatelessWidget {
   final FTimeFieldStyle style;
   final FTimeFieldPickerProperties properties;
   final bool hour24;
+  final bool autofocus;
   final Widget child;
 
   const _PickerPopover({
@@ -243,6 +253,7 @@ class _PickerPopover extends StatelessWidget {
     required this.style,
     required this.properties,
     required this.hour24,
+    required this.autofocus,
     required this.child,
   });
 
@@ -257,6 +268,7 @@ class _PickerPopover extends StatelessWidget {
     shift: properties.shift,
     offset: properties.offset,
     hideOnTapOutside: properties.hideOnTapOutside,
+    autofocus: autofocus,
     popoverBuilder:
         (_, _, _) => TextFieldTapRegion(
           child: Padding(
@@ -280,6 +292,7 @@ class _PickerPopover extends StatelessWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('properties', this.properties))
-      ..add(DiagnosticsProperty('hour24', hour24));
+      ..add(DiagnosticsProperty('hour24', hour24))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'));
   }
 }

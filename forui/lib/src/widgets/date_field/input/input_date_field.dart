@@ -123,6 +123,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
           controller: _controller,
           style: style,
           properties: properties,
+          autofocus: false,
           child: widget.builder(context, (style, data.$1, data.$2), child!),
         ),
     };

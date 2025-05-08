@@ -83,16 +83,13 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('format', format))
-      ..add(StringProperty('hint', hint))
-      ..add(EnumProperty('textAlign', textAlign))
-      ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
-      ..add(EnumProperty('textDirection', textDirection))
-      ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
-      ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
-      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
+    properties..add(DiagnosticsProperty('format', format))..add(StringProperty('hint', hint))..add(
+        EnumProperty('textAlign', textAlign))..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))..add(
+        EnumProperty('textDirection', textDirection))..add(
+        FlagProperty('expands', value: expands, ifTrue: 'expands'))..add(
+        DiagnosticsProperty('mouseCursor', mouseCursor))..add(
+        FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))..add(
+        FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
   }
 }
 
@@ -142,7 +139,9 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _format = DateFormat.yMMMd(FLocalizations.of(context)?.localeName);
+    _format = DateFormat.yMMMd(FLocalizations
+        .of(context)
+        ?.localeName);
     _updateTextController();
   }
 
@@ -176,7 +175,8 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       validator: _controller.validator,
       initialValue: widget.initialDate,
       builder:
-          (state) => FTextField(
+          (state) =>
+          FTextField(
             focusNode: _focus,
             controller: _textController,
             style: style.textFieldStyle,
@@ -186,42 +186,53 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
             expands: widget.expands,
             mouseCursor: widget.mouseCursor,
             canRequestFocus: widget.canRequestFocus,
-            onTap: () {
-              _focus.unfocus();
-              _controller.calendar.toggle();
-            },
+            onTap: _show,
             // TODO: focus onTapOutside
             hint: hint,
             readOnly: true,
             enableInteractiveSelection: false,
             prefixBuilder:
-                widget.prefixBuilder == null
-                    ? null
-                    : (context, styles, _) => MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-                    ),
+            widget.prefixBuilder == null
+                ? null
+                : (context, styles, _) =>
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                ),
             suffixBuilder:
-                widget.suffixBuilder == null
-                    ? null
-                    : (context, styles, _) => MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-                    ),
+            widget.suffixBuilder == null
+                ? null
+                : (context, styles, _) =>
+                MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                ),
             clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
             label: widget.label,
             description: widget.description,
             error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
             enabled: widget.enabled,
             builder:
-                (context, data, child) => _CalendarPopover(
+                (context, data, child) =>
+                _CalendarPopover(
                   controller: _controller,
                   style: style,
                   properties: widget,
-                  child: widget.builder(context, (style, data.$1, data.$2), child),
+                  autofocus: true,
+                  child: CallbackShortcuts(
+                    bindings: {
+                      const SingleActivator(LogicalKeyboardKey.enter): _show,
+                    },
+                    child: widget.builder(context, (style, data.$1, data.$2), child),
+                  ),
                 ),
           ),
     );
+  }
+
+  void _show() {
+    _focus.unfocus();
+    _controller.calendar.toggle();
   }
 
   @override
@@ -246,58 +257,63 @@ class _CalendarPopover extends StatelessWidget {
   final FDateFieldController controller;
   final FDateFieldStyle style;
   final FDateFieldCalendarProperties properties;
+  final bool autofocus;
   final Widget child;
 
   const _CalendarPopover({
     required this.controller,
     required this.style,
     required this.properties,
+    required this.autofocus,
     required this.child,
   });
 
   @override
-  Widget build(BuildContext _) => FPopover(
-    traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
-    style: style.popoverStyle,
-    controller: controller.calendar,
-    popoverAnchor: properties.anchor,
-    childAnchor: properties.inputAnchor,
-    spacing: properties.spacing,
-    shift: properties.shift,
-    offset: properties.offset,
-    hideOnTapOutside: properties.hideOnTapOutside,
-    popoverBuilder:
-        (_, _, _) => TextFieldTapRegion(
-          child: ValueListenableBuilder(
-            valueListenable: controller._calendar,
-            builder:
-                (_, value, _) => FCalendar(
-                  style: style.calendarStyle,
-                  controller: controller._calendar,
-                  initialMonth: switch (value) {
-                    null => null,
-                    _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
-                    _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
-                    _ => value,
-                  },
-                  onPress: properties.autoHide ? (_) => controller.calendar.toggle() : null,
-                  dayBuilder: properties.dayBuilder,
-                  start: properties.start,
-                  end: properties.end,
-                  today: properties.today,
-                  initialType: properties.initialType,
-                ),
-          ),
-        ),
-    child: child,
-  );
+  Widget build(BuildContext _) =>
+      FPopover(
+        traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+        style: style.popoverStyle,
+        controller: controller.calendar,
+        popoverAnchor: properties.anchor,
+        childAnchor: properties.inputAnchor,
+        spacing: properties.spacing,
+        shift: properties.shift,
+        offset: properties.offset,
+        hideOnTapOutside: properties.hideOnTapOutside,
+        autofocus: autofocus,
+        popoverBuilder:
+            (_, _, _) =>
+            TextFieldTapRegion(
+              child: ValueListenableBuilder(
+                valueListenable: controller._calendar,
+                builder:
+                    (_, value, _) =>
+                    FCalendar(
+                      style: style.calendarStyle,
+                      controller: controller._calendar,
+                      initialMonth: switch (value) {
+                        null => null,
+                        _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
+                        _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
+                        _ => value,
+                      },
+                      onPress: properties.autoHide ? (_) => controller.calendar.toggle() : null,
+                      dayBuilder: properties.dayBuilder,
+                      start: properties.start,
+                      end: properties.end,
+                      today: properties.today,
+                      initialType: properties.initialType,
+                    ),
+              ),
+            ),
+        child: child,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('properties', this.properties));
+    properties..add(DiagnosticsProperty('controller', controller))..add(DiagnosticsProperty('style', style))..add(
+        DiagnosticsProperty('properties', this.properties))..add(
+        FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'));
   }
 }

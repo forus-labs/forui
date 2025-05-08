@@ -629,6 +629,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
                   child: CallbackShortcuts(
                     bindings: {
                       const SingleActivator(LogicalKeyboardKey.enter): _show,
+                      // TODO: Remove once https://github.com/flutter/flutter/issues/161482 lands
                       const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
                     },
                     child: widget.builder(context, (style, data.$1, data.$2), child),
