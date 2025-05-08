@@ -1,15 +1,24 @@
 ## 0.12.0 (Next)
 
+### `FDateField`
+
+* Enhance `FDateField.calendar`'s focus management.
+
+* Fix `FDateField` not closing calendar popover when enter is pressed.
+
+
+### `FTextField` & `FTextFormField`
+
+* Add `FTextField.onTapOutside`.
+* Add `FTextFormField.onTapOutside`.
+
+
 ### Others
 
 * Add `FPopover.shortcuts`.
-* Add `FTextField.onTapOutside`.
 
-* Enhance `FDateField.calendar`'s focus management.
 * Enhance `FSelect`'s focus management.
 * Enhance `FTimeField.picker`'s focus management.
-
-* Fix `FDateField` not closing calendar popover when enter is pressed.
 
 
 ## 0.11.1
