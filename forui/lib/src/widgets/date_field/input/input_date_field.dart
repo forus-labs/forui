@@ -69,10 +69,13 @@ class _InputDateField extends FDateField {
 }
 
 class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
+  late FocusNode _focus;
+
   @override
   void initState() {
     super.initState();
     _controller.addValueListener(_onChange);
+    _focus = widget.focusNode ?? FocusNode();
   }
 
   @override
@@ -87,6 +90,10 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
 
       _controller = widget.controller ?? FDateFieldController(vsync: this, initialDate: _controller.value);
       _controller.addValueListener(_onChange);
+    }
+
+    if (widget.focusNode != old.focusNode) {
+      _focus = widget.focusNode ?? FocusNode();
     }
   }
 
@@ -129,40 +136,50 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         ),
     };
 
-    return DateInput(
-      controller: _controller,
-      calendarController: _controller._calendar,
-      onTap: widget.calendar == null ? null : _controller.calendar.show,
-      style: style,
-      label: widget.label,
-      description: widget.description,
-      errorBuilder: widget.errorBuilder,
-      clearable: widget.clearable,
-      enabled: widget.enabled,
-      onSaved: widget.onSaved,
-      validator: _controller.validator,
-      autovalidateMode: widget.autovalidateMode,
-      forceErrorText: widget.forceErrorText,
-      focusNode: widget.focusNode,
-      textInputAction: widget.textInputAction,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      textDirection: widget.textDirection,
-      expands: widget.expands,
-      autofocus: widget.autofocus,
-      onEditingComplete: widget.onEditingComplete,
-      mouseCursor: widget.mouseCursor,
-      canRequestFocus: widget.canRequestFocus,
-      prefixBuilder: prefix,
-      suffixBuilder: suffix,
-      localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
-      baselineYear: widget.baselineInputYear,
-      builder: builder,
+    return CallbackShortcuts(
+      bindings: {
+        const SingleActivator(LogicalKeyboardKey.enter): () {
+          _focus.unfocus();
+          _controller.calendar.hide();
+        },
+      },
+      child: DateInput(
+        controller: _controller,
+        calendarController: _controller._calendar,
+        onTap: widget.calendar == null ? null : _controller.calendar.show,
+        style: style,
+        label: widget.label,
+        description: widget.description,
+        errorBuilder: widget.errorBuilder,
+        clearable: widget.clearable,
+        enabled: widget.enabled,
+        onSaved: widget.onSaved,
+        validator: _controller.validator,
+        autovalidateMode: widget.autovalidateMode,
+        forceErrorText: widget.forceErrorText,
+        focusNode: _focus,
+        textInputAction: widget.textInputAction,
+        textAlign: widget.textAlign,
+        textAlignVertical: widget.textAlignVertical,
+        textDirection: widget.textDirection,
+        expands: widget.expands,
+        autofocus: widget.autofocus,
+        onEditingComplete: widget.onEditingComplete,
+        mouseCursor: widget.mouseCursor,
+        canRequestFocus: widget.canRequestFocus,
+        prefixBuilder: prefix,
+        suffixBuilder: suffix,
+        localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
+        baselineYear: widget.baselineInputYear,
+        builder: builder,
+      ),
     );
   }
 
   @override
   void dispose() {
+    _focus.dispose();
+
     if (widget.controller == null) {
       _controller.dispose();
     } else {

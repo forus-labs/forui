@@ -9,6 +9,8 @@
 * Enhance `FSelect`'s focus management.
 * Enhance `FTimeField.picker`'s focus management.
 
+* Fix `FDateField` not closing calendar popover when enter is pressed.
+
 
 ## 0.11.1
 
