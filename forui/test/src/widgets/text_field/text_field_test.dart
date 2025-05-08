@@ -130,7 +130,7 @@ void main() {
       ),
     );
 
-     unawaited(controller.show());
+    unawaited(controller.show());
     await tester.pumpAndSettle();
 
     await tester.pumpWidget(

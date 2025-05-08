@@ -177,7 +177,7 @@ void main() {
     });
   }
 
-  testWidgets('enter closes popover'  , (tester) async {
+  testWidgets('enter closes popover', (tester) async {
     await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: FDateField(key: key)));
 
     await tester.tap(find.byKey(key));
