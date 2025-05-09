@@ -1,0 +1,95 @@
+import { Callout, Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Collapsible
+
+A collapsible widget that animates between visible and hidden states.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.foundation/FCollapsible-class.html"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='collapsible' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class Demo extends StatefulWidget {
+      const Demo({super.key});
+
+      @override
+      State<Demo> createState() => _DemoState();
+    }
+
+    class _DemoState extends State<Demo> with SingleTickerProviderStateMixin {
+      late final AnimationController _controller;
+      late final Animation<double> _animation;
+      bool _expanded = false;
+
+      @override
+      void initState() {
+        super.initState();
+        _controller = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
+        _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+      }
+
+      @override
+      void dispose() {
+        _controller.dispose();
+        super.dispose();
+      }
+
+      void _toggle() {
+        setState(() {
+          _expanded = !_expanded;
+          if (_expanded) {
+            _controller.forward();
+          } else {
+            _controller.reverse();
+          }
+        });
+      }
+
+      @override
+      Widget build(BuildContext context) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          FButton(onPress: _toggle, child: Text(_expanded ? 'Collapse' : 'Expand')),
+          const SizedBox(height: 16),
+          AnimatedBuilder(
+            animation: _animation,
+            builder:
+                (context, child) => FCollapsible(
+                  value: _animation.value,
+                  child: FCard(
+                    title: const Text('Lorem ipsum'),
+                    child: const Text(
+                      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem '
+                      'accusantium doloremque laudantium, totam rem aperiam, eaque ipsa '
+                      'quae ab illo inventore veritatis et quasi architecto beatae vitae '
+                      'dicta sunt explicabo.',
+                    ),
+                  ),
+                ),
+          ),
+        ],
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### `FCollapsible(...)`
+
+```dart copy
+FCollapsible(
+  value: 1.0, // 0.0 for collapsed, 1.0 for expanded.
+  child: const Text('child'),
+);
+```

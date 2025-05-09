@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-/// A widget that collapses and expands its child.
+/// A widget that animates between visible and hidden states.
 ///
 /// The child is completely clipped when the value is 0. When the value is 1, the child is fully visible.
 /// It is recommended to lerp between 0 and 1 to create a smooth animation.
