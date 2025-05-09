@@ -1,5 +1,11 @@
 ## 0.12.0 (Next)
 
+### `FCollapsible` (new)
+A widget that collapses and expands its child.
+
+* Add `FCollapsible`.
+
+
 ### `FDateField`
 
 * Enhance `FDateField.calendar`'s focus management.

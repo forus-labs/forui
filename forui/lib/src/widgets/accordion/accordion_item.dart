@@ -5,7 +5,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/collapsible.dart';
 import 'package:forui/src/widgets/accordion/accordion.dart';
 import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
