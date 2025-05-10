@@ -41,12 +41,8 @@ class _DemoState extends State<Demo> with SingleTickerProviderStateMixin {
   void _toggle() {
     setState(() {
       _expanded = !_expanded;
-      if (_expanded) {
-        _controller.forward();
-      } else {
-        _controller.reverse();
-      }
     });
+    _controller.toggle();
   }
 
   @override
