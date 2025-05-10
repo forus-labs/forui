@@ -47,7 +47,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('collapsible/${theme.name}/fully_collapsed.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('collapsible/${theme.name}/fully_collapsed.png'),
+        );
       });
     }
   });
