@@ -7,7 +7,6 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FCollapsible', () {
-
     for (final theme in TestScaffold.themes) {
       testWidgets('fully expanded', (tester) async {
         await tester.pumpWidget(
