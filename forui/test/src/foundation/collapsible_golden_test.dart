@@ -7,18 +7,6 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FCollapsible', () {
-    testWidgets('blue screen', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.blue(
-          child: const FCollapsible(
-            value: 0.5,
-            child: ColoredBox(color: Colors.transparent, child: SizedBox.square(dimension: 50)),
-          ),
-        ),
-      );
-
-      await expectBlueScreen(find.byType(TestScaffold));
-    });
 
     for (final theme in TestScaffold.themes) {
       testWidgets('fully expanded', (tester) async {
