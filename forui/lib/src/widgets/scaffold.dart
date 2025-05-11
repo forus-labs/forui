@@ -27,6 +27,12 @@ class FScaffold extends StatelessWidget {
   /// The optional header displayed at the top of the scaffold.
   final Widget? header;
 
+  /// The optional sidebar displayed at the left of the scaffold.
+  final Widget? sidebar;
+
+  /// The optional drawer displayed at the left of the scaffold.
+  final Widget? drawer;
+
   /// The optional footer displayed at the bottom of the scaffold.
   final Widget? footer;
 
@@ -49,6 +55,8 @@ class FScaffold extends StatelessWidget {
   const FScaffold({
     required this.child,
     this.header,
+    this.sidebar,
+    this.drawer,
     this.footer,
     this.childPad = true,
     this.resizeToAvoidBottomInset = true,
