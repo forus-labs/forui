@@ -75,19 +75,21 @@ class FScaffold extends StatelessWidget {
       child: Row(
         children: [
           if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
-          ColoredBox(
-            color: style.backgroundColor,
-            child: _RenderScaffoldWidget(
-              resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-              children: [
-                Column(
-                  children: [
-                    if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-                    Expanded(child: child),
-                  ],
-                ),
-                footer,
-              ],
+          Expanded(
+            child: ColoredBox(
+              color: style.backgroundColor,
+              child: _RenderScaffoldWidget(
+                resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+                children: [
+                  Column(
+                    children: [
+                      if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                      Expanded(child: child),
+                    ],
+                  ),
+                  footer,
+                ],
+              ),
             ),
           ),
         ],
