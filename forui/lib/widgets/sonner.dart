@@ -7,4 +7,3 @@ library forui.widgets.sonner;
 
 export '../src/widgets/toast/toast.dart';
 export '../src/widgets/toast/toast_style.dart';
-export '../src/widgets/toast/util.dart';

@@ -166,7 +166,7 @@ class FToastLayerState extends State<FToastLayer> {
       final location = locationEntry.key;
       final entries = locationEntry.value.entries;
       final expanding = locationEntry.value._expanding;
-      final startVisible = max(entries.length - (style.maxStackedEntries * 2),0);
+      final startVisible = max(entries.length - (style.maxStackedEntries * 2), 0);
       final entryAlignment = location.childrenAlignment * -1;
       final positionedChildren = <Widget>[];
       int toastIndex = 0;
@@ -484,74 +484,72 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
         child: AnimatedBuilder(
           animation: widget.closing,
           builder:
-              (context, child) => AnimatedValueBuilder(
-            value: widget.closing.value ? 0.0 : _dismissOffset,
-            duration: _dismissing && !widget.closing.value ? Duration.zero : style.animationDuration,
-            builder:
-                (context, dismissProgress, child) => AnimatedValueBuilder(
-              value: widget.closing.value ? 0.0 : _closeDismissing ?? 0.0,
-              duration: style.animationDuration,
-              onEnd: (value) {
-                if (value == -1.0 || value == 1.0) {
-                  widget.onClosed();
-                }
-              },
-              builder:
-                  (context, closeDismissingProgress, child) => AnimatedValueBuilder(
-                value: widget.index.toDouble(),
-                curve: widget.curve,
-                duration: widget.duration,
+              (context, child) => TweenAnimationBuilder(
+                tween: Tween(end: widget.closing.value ? 0.0 : _dismissOffset),
+                duration: _dismissing && !widget.closing.value ? Duration.zero : style.animationDuration,
                 builder:
-                    (context, indexProgress, child) => AnimatedValueBuilder(
-                  initialValue: widget.index > 0 ? 1.0 : 0.0,
-                  value: widget.closing.value && !_dismissing ? 0.0 : 1.0,
-                  curve: widget.curve,
-                  duration: widget.duration,
-                  onEnd: (value) {
-                    if (value == 0.0 && widget.closing.value) {
-                      widget.onClosed();
-                    }
-                  },
-                  builder:
-                      (context, showingProgress, child) => AnimatedValueBuilder(
-                    value: widget.visible ? 1.0 : 0.0,
-                    curve: widget.curve,
-                    duration: widget.duration,
-                    builder:
-                        (context, visibleProgress, child) => AnimatedValueBuilder(
-                      value: widget.expanded ? 1.0 : 0.0,
-                      curve: widget.expandingCurve,
-                      duration: widget.expandingDuration,
+                    (context, dismissProgress, child) => TweenAnimationBuilder(
+                      tween: Tween(end: widget.closing.value ? 0.0 : _closeDismissing ?? 0.0),
+                      duration: style.animationDuration,
+                      onEnd: () => widget.onClosed(),
                       builder:
-                          (context, expandProgress, child) => _buildToast(
-                        style,
-                        expandProgress,
-                        showingProgress,
-                        visibleProgress,
-                        indexProgress,
-                        dismissProgress,
-                        closeDismissingProgress,
-                      ),
+                          (context, closeDismissingProgress, child) => TweenAnimationBuilder(
+                            tween: Tween(end: widget.index.toDouble()),
+                            curve: widget.curve,
+                            duration: widget.duration,
+                            builder:
+                                (context, indexProgress, child) => TweenAnimationBuilder(
+                                  tween: Tween(
+                                    begin: widget.index > 0 ? 1.0 : 0.0,
+                                    end: widget.closing.value && !_dismissing ? 0.0 : 1.0,
+                                  ),
+                                  curve: widget.curve,
+                                  duration: widget.duration,
+                                  onEnd: () {
+                                    if (widget.closing.value) {
+                                      widget.onClosed();
+                                    }
+                                  },
+                                  builder:
+                                      (context, showingProgress, child) => TweenAnimationBuilder(
+                                        tween: Tween(end: widget.visible ? 1.0 : 0.0),
+                                        curve: widget.curve,
+                                        duration: widget.duration,
+                                        builder:
+                                            (context, visibleProgress, child) => TweenAnimationBuilder(
+                                              tween: Tween(end: widget.expanded ? 1.0 : 0.0),
+                                              curve: widget.expandingCurve,
+                                              duration: widget.expandingDuration,
+                                              builder:
+                                                  (context, expandProgress, child) => _buildToast(
+                                                    style,
+                                                    expandProgress,
+                                                    showingProgress,
+                                                    visibleProgress,
+                                                    indexProgress,
+                                                    dismissProgress,
+                                                    closeDismissingProgress,
+                                                  ),
+                                            ),
+                                      ),
+                                ),
+                          ),
                     ),
-                  ),
-                ),
               ),
-            ),
-          ),
         ),
       ),
     );
   }
 
   Widget _buildToast(
-      FToastStyle style,
-      double expandProgress,
-      double showingProgress,
-      double visibleProgress,
-      double indexProgress,
-      double dismissProgress,
-      double closeDismissingProgress,
-      ) {
+    FToastStyle style,
+    double expandProgress,
+    double showingProgress,
+    double visibleProgress,
+    double indexProgress,
+    double dismissProgress,
+    double closeDismissingProgress,
+  ) {
     final nonCollapsingProgress = (1.0 - expandProgress) * showingProgress;
     var offset = widget.entryOffset * (1.0 - showingProgress);
 
@@ -562,7 +560,7 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
           (widget.collapsedOffset.dx * previousAlignment.x) * nonCollapsingProgress,
           (widget.collapsedOffset.dy * previousAlignment.y) * nonCollapsingProgress,
         ) *
-            indexProgress;
+        indexProgress;
 
     final expandingShift = Offset(
       previousAlignment.x * (16 * style.scaling) * expandProgress,
@@ -577,7 +575,7 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
           (widget.spacing * previousAlignment.x) * expandProgress,
           (widget.spacing * previousAlignment.y) * expandProgress,
         ) *
-            indexProgress;
+        indexProgress;
 
     final entryAlignment = widget.entryAlignment;
     var fractionalOffset = Offset(
