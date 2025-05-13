@@ -31,6 +31,9 @@
  <img width="800" alt="Forui" src="docs/public/banner-160724.png">
 </div>
 
+> [!IMPORTANT]
+> Forui 0.11.0+ requires Flutter **3.29.0+**. Run `flutter --version` to check your Flutter version.
+
 ## Documentation
 
 Visit [forui.dev/docs](https://forui.dev/docs) to view the documentation.
