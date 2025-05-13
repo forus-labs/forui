@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forui/forui.dart';
 
 import 'package:forui/forui.dart';
 
@@ -12,15 +13,20 @@ class Sandbox extends StatefulWidget {
 class _SandboxState extends State<Sandbox> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
-        FTile(
-          prefixIcon: Icon(FIcons.bell),
-          title: const Text('Home'),
-          suffixIcon: Icon(FIcons.chevronRight),
-          // onPress: () {},
+        FButton(
+          onPress: () {
+            showToast(context: context, builder: buildToast);
+          },
+          child: Text('Button'),
         ),
       ],
     );
   }
+
+  Widget buildToast(BuildContext context, ToastOverlay overlay) => FCard(
+    title: Text('Event has been created'),
+    subtitle: FButton(onPress: () => print('hi'), child: const Text('close')),
+  );
 }
