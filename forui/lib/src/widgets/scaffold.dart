@@ -14,8 +14,23 @@ part 'scaffold.style.dart';
 /// A layout structure that contains a header, content, and footer.
 ///
 /// A scaffold provides the basic visual structure for an application, containing
-/// elements like headers, content areas, and footers. It is highly recommended
-/// to use a scaffold when creating a page even if a header and footer are not required.
+/// elements like header, sidebar, content area, and footer. It is highly recommended
+/// to use a scaffold when creating a page even if other elements are not required.
+/// 
+/// The layout structure is organized as follows:
+/// ```
+/// ┌─────────┬─────────────────────┐
+/// │         │       HEADER        │
+/// │         ├─────────────────────┤
+/// │         │                     │
+/// │         │                     │
+/// │ SIDEBAR │    CONTENT AREA     │
+/// │         │                     │
+/// │         │                     │
+/// │         ├─────────────────────┤
+/// │         │       FOOTER        │
+/// └─────────┴─────────────────────┘
+/// ```
 ///
 /// See:
 /// * https://forui.dev/docs/layout/scaffold for working examples.
