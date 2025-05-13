@@ -16,8 +16,8 @@ part 'scaffold.style.dart';
 /// A scaffold provides the basic visual structure for an application, containing
 /// elements like header, sidebar, content area, and footer. It is highly recommended
 /// to use a scaffold when creating a page even if other elements are not required.
-///
-/// The layout structure is organized as follows:
+/// 
+/// The layout structure (LTR) is organized as follows:
 /// ```
 /// ┌─────────┬─────────────────────┐
 /// │         │       HEADER        │
@@ -42,7 +42,7 @@ class FScaffold extends StatelessWidget {
   /// The optional header displayed at the top of the scaffold.
   final Widget? header;
 
-  /// The optional sidebar displayed at the left of the scaffold.
+  /// The optional sidebar displayed at the side of the scaffold.
   final Widget? sidebar;
 
   /// The optional footer displayed at the bottom of the scaffold.
