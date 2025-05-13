@@ -18,7 +18,7 @@ part 'scaffold.style.dart';
 /// to use a scaffold when creating a page even if other elements are not required.
 ///
 /// The layout structure (LTR) is organized as follows:
-/// ```
+/// ```md
 /// ┌─────────┬─────────────────────┐
 /// │         │       HEADER        │
 /// │         ├─────────────────────┤
