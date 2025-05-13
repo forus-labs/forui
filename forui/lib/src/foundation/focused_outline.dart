@@ -15,13 +15,6 @@ part 'focused_outline.style.dart';
 /// * [FFocusedOutlineStyle] for customizing an outline.
 class FFocusedOutline extends SingleChildRenderObjectWidget {
   /// The style.
-  ///
-  /// ## CLI
-  /// To generate and customize this style:
-  ///
-  /// ```shell
-  /// dart run forui style create focused-outline
-  /// ```
   final FFocusedOutlineStyle? style;
 
   /// True if the [child] should be outlined.

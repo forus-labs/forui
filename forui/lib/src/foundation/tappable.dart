@@ -37,13 +37,6 @@ class FTappable extends StatefulWidget {
   static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) => child!;
 
   /// The style.
-  ///
-  /// ## CLI
-  /// To generate and customize this style:
-  ///
-  /// ```shell
-  /// dart run forui style create tappable
-  /// ```
   final FTappableStyle? style;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
