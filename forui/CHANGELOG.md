@@ -19,6 +19,12 @@ A widget that collapses and expands its child.
 * Add `FTextFormField.onTapOutside`.
 
 
+### `FScaffold`
+
+* Add `FScaffold.sidebar`.
+* Add `FScaffoldStyle.sidebarBackgroundColor`.
+
+
 ### Others
 
 * Add `FPopover.shortcuts`.
