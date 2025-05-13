@@ -18,6 +18,13 @@ part 'bottom_navigation_bar.style.dart';
 /// * [FBottomNavigationBarItem] for the items in a bottom navigation bar.
 class FBottomNavigationBar extends StatelessWidget {
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create bottom-navigation-bar
+  /// ```
   final FBottomNavigationBarStyle? style;
 
   /// A callback for when an item is selected.

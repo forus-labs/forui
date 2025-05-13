@@ -13,6 +13,13 @@ import 'package:forui/forui.dart';
 /// * [FTileStyle] for customizing a select tile's appearance.
 class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tile
+  /// ```
   final FTileStyle? style;
 
   /// The checked icon. Defaults to `FIcon(FIcons.check)`.

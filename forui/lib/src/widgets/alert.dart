@@ -18,6 +18,13 @@ class FAlert extends StatelessWidget {
   /// The style. Defaults to [FAlertStyle.primary].
   ///
   /// Although typically one of the pre-defined styles in [FBaseAlertStyle], it can also be a [FAlertStyle]
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create alert
+  /// ```
   final FBaseAlertStyle style;
 
   /// The title of the alert.

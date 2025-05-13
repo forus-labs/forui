@@ -29,6 +29,13 @@ class FCalendar extends StatefulWidget {
   static Widget defaultDayBuilder(BuildContext _, FCalendarDayData data, Widget? child) => child!;
 
   /// The style. Defaults to [FThemeData.calendarStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create calendar
+  /// ```
   final FCalendarStyle? style;
 
   /// A controller that determines if a date is selected.

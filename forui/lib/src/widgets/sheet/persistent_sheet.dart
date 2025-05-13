@@ -38,8 +38,15 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 ///
 /// ## Contract
 /// Throws [FlutterError] if:
-/// * the [context] does not contain a [FSheets] or [FScaffold] ancestor.
-/// * a sheet with the same [key] already exists.
+///   * the [context] does not contain a [FSheets] or [FScaffold] ancestor.
+///   * a sheet with the same [key] already exists.
+///
+/// ## CLI
+/// To generate and customize this widget's style:
+///
+/// ```shell
+/// dart run forui style create sheet
+/// ```
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/persistent-sheet for working examples.

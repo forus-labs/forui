@@ -17,6 +17,13 @@ part 'radio.style.dart';
 /// * [FRadioStyle] for customizing a radio's appearance.
 class FRadio extends StatelessWidget {
   /// The style. Defaults to [FThemeData.radioStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create radio
+  /// ```
   final FRadioStyle? style;
 
   /// The label displayed next to the radio.

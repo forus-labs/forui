@@ -42,6 +42,13 @@ class FTabs extends StatefulWidget {
   final FTabController? controller;
 
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tabs
+  /// ```
   final FTabsStyle? style;
 
   /// The initial tab that is selected.

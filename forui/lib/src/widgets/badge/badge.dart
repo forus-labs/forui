@@ -17,6 +17,13 @@ part 'badge.style.dart';
 /// * [FBadgeStyle] for customizing a badge's appearance.
 class FBadge extends StatelessWidget {
   /// The style. Defaults to [FBadgeStyle.primary].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create badges
+  /// ```
   final FBaseBadgeStyle style;
 
   /// The builder used to build the badge's content.

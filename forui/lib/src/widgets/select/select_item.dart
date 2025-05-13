@@ -16,6 +16,13 @@ mixin FSelectItemMixin on Widget {}
 /// A section in a [FSelect] that can contain multiple [FSelectItem]s.
 class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// The style. Defaults to the [FSelectSectionStyle] inherited from the parent [FSelect].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select-section
+  /// ```
   final FSelectSectionStyle? style;
 
   /// True if the section is enabled. Disabled sections cannot be selected, and is skipped during traversal.
@@ -117,6 +124,13 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 /// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].
 class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// The style. Defaults to the [FSelectItemStyle] inherited from the parent [FSelectSection] or [FSelect].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select-item
+  /// ```
   final FSelectItemStyle? style;
 
   /// The value.

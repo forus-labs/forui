@@ -10,6 +10,13 @@ part 'bottom_navigation_bar_item.style.dart';
 /// A [FBottomNavigationBar] item.
 class FBottomNavigationBarItem extends StatelessWidget {
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create bottom-navigation-bar-item
+  /// ```
   final FBottomNavigationBarItemStyle? style;
 
   /// The icon, wrapped in a [IconTheme].

@@ -19,6 +19,13 @@ part 'dialog.style.dart';
 /// * [FDialogStyle] for customizing a dialog's appearance.
 class FDialog extends StatelessWidget {
   /// The dialog's style. Defaults to [FThemeData.dialogStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create dialog
+  /// ```
   final FDialogStyle? style;
 
   /// The semantic label of the dialog used by accessibility frameworks to announce screen transitions when the dialog

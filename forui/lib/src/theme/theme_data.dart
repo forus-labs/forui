@@ -34,7 +34,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The accordion style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create accordion
   /// ```
@@ -42,7 +44,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The alert styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create alerts
   /// ```
@@ -50,7 +54,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The avatar style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create avatar
   /// ```
@@ -58,7 +64,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The badge styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create badges
   /// ```
@@ -66,7 +74,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The bottom navigation bar style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create bottom-navigation-bar
   /// ```
@@ -74,7 +84,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The breadcrumb style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create breadcrumb
   /// ```
@@ -82,7 +94,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The button styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create buttons
   /// ```
@@ -90,7 +104,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The calendar style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create calendar
   /// ```
@@ -98,7 +114,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The card style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create card
   /// ```
@@ -106,7 +124,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The checkbox style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create checkbox
   /// ```
@@ -114,7 +134,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The date picker style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create date-field
   /// ```
@@ -122,7 +144,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The dialog style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create dialog
   /// ```
@@ -130,7 +154,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The divider styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create dividers
   /// ```
@@ -138,7 +164,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The header styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create headers
   /// ```
@@ -146,7 +174,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The label styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create labels
   /// ```
@@ -154,7 +184,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The line calendar style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create line-calendar
   /// ```
@@ -162,7 +194,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The pagination style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create pagination
   /// ```
@@ -170,7 +204,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The picker's style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create picker
   /// ```
@@ -178,7 +214,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The popover's style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create popover
   /// ```
@@ -186,7 +224,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The popover menu's style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create popover-menu
   /// ```
@@ -194,7 +234,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The progress styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create progresses
   /// ```
@@ -202,7 +244,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The radio style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create radio
   /// ```
@@ -210,7 +254,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The resizable style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create resizable
   /// ```
@@ -218,7 +264,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The scaffold style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create scaffold
   /// ```
@@ -226,7 +274,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The select style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create select
   /// ```
@@ -234,7 +284,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The select group style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create select-group
   /// ```
@@ -242,7 +294,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The select menu tile style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create select-menu-tile
   /// ```
@@ -250,7 +304,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The sheet style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create sheet
   /// ```
@@ -258,7 +314,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The slider styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create sliders
   /// ```
@@ -266,7 +324,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The switch style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create switch
   /// ```
@@ -274,7 +334,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The tabs styles.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create tabs
   /// ```
@@ -282,7 +344,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The tappable style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create tappable
   /// ```
@@ -290,7 +354,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The text field style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create text-field
   /// ```
@@ -298,7 +364,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The tile group's style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create tile-group
   /// ```
@@ -306,7 +374,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The time field's style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create time-field
   /// ```
@@ -314,7 +384,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The time picker style.
   ///
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create time-picker
   /// ```
@@ -322,7 +394,9 @@ final class FThemeData with Diagnosticable, FTransformable {
 
   /// The tooltip style.
   /// 
-  /// To generate this style using the CLI:
+  /// ## CLI
+  /// To generate and customize this style:
+  /// 
   /// ```shell
   /// dart run forui style create tooltip
   /// ```

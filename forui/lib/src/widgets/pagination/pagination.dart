@@ -22,6 +22,13 @@ class FPagination extends StatefulWidget {
   final FPaginationController? controller;
 
   /// The pagination's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create pagination
+  /// ```
   final FPaginationStyle? style;
 
   /// The previous button placed at the beginning of the pagination.

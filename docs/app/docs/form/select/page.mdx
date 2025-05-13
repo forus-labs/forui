@@ -54,6 +54,14 @@ It is a form-field and can therefore be used in a form.
   </Tabs.Tab>
 </Tabs>
 
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create select 
+```
+
 ## Usage
 
 ### `FSelect(...)`
@@ -410,7 +418,7 @@ FSelect<User>.search(
         (firstName: 'Mary', lastName: 'Jane'),
         (firstName: 'Peter', lastName: 'Parker'),
       ];
-    
+
       @override
       Widget build(BuildContext context) => FSelect<({String firstName, String lastName})>(
         hint: 'Select a user',
@@ -455,13 +463,13 @@ FSelect<User>.search(
       @override
       State<FormSelectPage> createState() => _FormSelectPageState();
     }
-    
+
     class _FormSelectPageState extends State<FormSelectPage> with SingleTickerProviderStateMixin {
       static const _departments = ['Engineering', 'Marketing', 'Sales', 'Human Resources', 'Finance'];
-    
+
       final _formKey = GlobalKey<FormState>();
       late final _departmentController = FSelectController<String>(vsync: this);
-    
+
       @override
       Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(30.0),
@@ -491,14 +499,14 @@ FSelect<User>.search(
           ),
         ),
       );
-    
+
       String? _validateDepartment(String? department) {
         if (department == null) {
           return 'Please select a department';
         }
         return null;
       }
-    
+
       @override
       void dispose() {
         _departmentController.dispose();

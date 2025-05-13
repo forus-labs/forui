@@ -17,6 +17,13 @@ part 'checkbox.style.dart';
 /// * [FCheckboxStyle] for customizing a checkboxes appearance.
 class FCheckbox extends StatelessWidget {
   /// The style. Defaults to [FThemeData.checkboxStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create checkbox
+  /// ```
   final FCheckboxStyle? style;
 
   /// The label displayed next to the checkbox.

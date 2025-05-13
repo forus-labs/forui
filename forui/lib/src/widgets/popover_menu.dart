@@ -17,6 +17,13 @@ part 'popover_menu.style.dart';
 /// * [FTileGroup] for customizing the items in the menu.
 class FPopoverMenu extends StatefulWidget {
   /// The popover menu's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create popover-menu
+  /// ```
   final FPopoverMenuStyle? style;
 
   /// The controller that shows and hides the menu. It initially hides the menu.

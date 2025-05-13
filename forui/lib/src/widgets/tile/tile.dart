@@ -48,6 +48,13 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The tile's style. Defaults to the ancestor tile group's style if present, and [FThemeData.tileGroupStyle] otherwise.
   ///
   /// Provide a style to prevent inheriting from the ancestor tile group's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tile
+  /// ```
   final FTileStyle? style;
 
   /// Whether the `FTile` is enabled. Defaults to true.

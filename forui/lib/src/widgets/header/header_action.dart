@@ -5,6 +5,13 @@ part of 'header.dart';
 /// If the [onPress] and [onLongPress] callbacks are null, then this action will be disabled, it will not react to touch.
 class FHeaderAction extends StatelessWidget {
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create header-action
+  /// ```
   final FHeaderActionStyle? style;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}

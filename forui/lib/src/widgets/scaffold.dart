@@ -43,6 +43,13 @@ class FScaffold extends StatelessWidget {
   final bool resizeToAvoidBottomInset;
 
   /// The style. Defaults to [FThemeData.scaffoldStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create scaffold
+  /// ```
   final FScaffoldStyle? style;
 
   /// Creates a [FScaffold].

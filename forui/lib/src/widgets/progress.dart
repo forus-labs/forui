@@ -32,6 +32,13 @@ abstract class FProgress extends StatefulWidget {
   /// Creates a linear [FProgress].
   ///
   /// The [duration] is the duration of the animation. Defaults to 3s if [value] is null and 0.5s otherwise.
+  ///
+  /// ## CLI
+  /// To generate and customize this widget's style:
+  ///
+  /// ```shell
+  /// dart run forui style create progresses
+  /// ```
   const factory FProgress({
     FLinearProgressStyle? style,
     String? semanticsLabel,

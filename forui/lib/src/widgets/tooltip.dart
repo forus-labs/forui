@@ -79,6 +79,13 @@ class FTooltip extends StatefulWidget {
   final FTooltipController? controller;
 
   /// The tooltip's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tooltip
+  /// ```
   final FTooltipStyle? style;
 
   /// The anchor of the follower to which the [childAnchor] is aligned. Defaults to [Alignment.bottomCenter].

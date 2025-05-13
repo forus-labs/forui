@@ -17,6 +17,13 @@ part 'divider.style.dart';
 /// * [FDividerStyle] for customizing a divider's appearance.
 class FDivider extends StatelessWidget {
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create dividers
+  /// ```
   final FDividerStyle? style;
 
   /// The axis along which the divider is drawn. Defaults to horizontal.

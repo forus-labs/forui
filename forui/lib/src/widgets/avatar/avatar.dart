@@ -20,6 +20,13 @@ part 'avatar.style.dart';
 /// * https://forui.dev/docs/data/avatar for working examples.
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create accordion
+  /// ```
   final FAvatarStyle? style;
 
   /// The circle's size. Defaults to 40.

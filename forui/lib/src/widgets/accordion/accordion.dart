@@ -23,6 +23,13 @@ class FAccordion extends StatefulWidget {
   final FAccordionController? controller;
 
   /// The style. Defaults to [FThemeData.accordionStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create accordion
+  /// ```
   final FAccordionStyle? style;
 
   /// The individual accordion items and separators.

@@ -46,6 +46,13 @@ extension Defaults on Never {
 class FTextField extends StatefulWidget {
   /// {@template forui.text_field.style}
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create text-field
+  /// ```
   /// {@endtemplate}
   final FTextFieldStyle? style;
 

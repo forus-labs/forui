@@ -20,6 +20,13 @@ part 'breadcrumb.style.dart';
 /// * [FBreadcrumbItem] for adding items to a breadcrumb.
 class FBreadcrumb extends StatelessWidget {
   /// The breadcrumb's style. Defaults to the appropriate style in [FThemeData.breadcrumbStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create breadcrumb
+  /// ```
   final FBreadcrumbStyle? style;
 
   /// A list of breadcrumb items representing the navigation path.
