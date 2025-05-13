@@ -29,6 +29,7 @@ A widget that collapses and expands its child.
 
 * Add `FPopover.shortcuts`.
 
+* **Breaking** Change `FThemeData.headerStyle` to `FThemeData.headerStyles`.
 * Enhance `FSelect`'s focus management.
 * Enhance `FTimeField.picker`'s focus management.
 
