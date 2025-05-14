@@ -132,15 +132,14 @@ class ToastOverlay {
   }
 }
 
-
 /// How the toast should be expanded.
 @internal
 enum ExpandMode { alwaysExpanded, expandOnHover, expandOnTap, disabled }
 
 class _ToastLocationData {
   final List<ToastOverlay> entries = [];
-  bool _expanding = false;
-  int _hoverCount = 0;
+  bool expanding = false;
+  int hoverCount = 0;
 }
 
 /// The Toast provider widget that manages and displays toast notifications.
@@ -214,15 +213,13 @@ class FToastLayerState extends State<FToastLayer> {
     final style = widget.style;
     final children = [widget.child];
 
-    for (final locationEntry in _entries.entries) {
-      final location = locationEntry.key;
-      final entries = locationEntry.value.entries;
-      final expanding = locationEntry.value._expanding;
+    for (final MapEntry(key: location, value: _ToastLocationData(:entries, :expanding)) in _entries.entries) {
       final startVisible = max(entries.length - (style.maxStackedEntries * 2), 0);
       final entryAlignment = location.collapsedAlignment * -1;
       final positionedChildren = <Widget>[];
       int toastIndex = 0;
       final padding = style.padding;
+
       for (var i = entries.length - 1; i >= startVisible; i--) {
         final entry = entries[i];
         if (toastIndex < style.maxStackedEntries) {
@@ -238,12 +235,6 @@ class FToastLayerState extends State<FToastLayer> {
               duration: entry.entry.duration,
               closing: entry._isClosing,
               style: style,
-              collapsedOffset: style.collapsedOffset,
-              collapsedScale: style.collapsedScale,
-              expandingCurve: style.expandingCurve,
-              expandingDuration: style.expandingDuration,
-              collapsedOpacity: style.collapsedOpacity,
-              entryOpacity: style.entryOpacity,
               onClosed: () {
                 removeEntry(entry.entry);
                 entry.entry.onClosed?.call();
@@ -253,9 +244,7 @@ class FToastLayerState extends State<FToastLayer> {
                 padding.top * entryAlignment.y.clamp(0, 1) + padding.bottom * entryAlignment.y.clamp(-1, 0),
               ),
               entryAlignment: entryAlignment,
-              spacing: style.spacing,
               index: toastIndex,
-              actualIndex: entries.length - i - 1,
               onClosing: entry.close,
               child: ConstrainedBox(constraints: style.toastConstraints, child: entry.entry.builder(context, entry)),
             ),
@@ -266,9 +255,11 @@ class FToastLayerState extends State<FToastLayer> {
           toastIndex++;
         }
       }
+
       if (positionedChildren.isEmpty) {
         continue;
       }
+
       children.add(
         Positioned.fill(
           child: SafeArea(
@@ -322,6 +313,7 @@ class FToastLayerState extends State<FToastLayer> {
         ),
       );
     }
+
     return FToastData(
       style: style,
       data: this,
@@ -338,20 +330,12 @@ class ToastEntryLayout extends StatefulWidget {
   final Alignment previousAlignment;
   final Curve curve;
   final Duration duration;
-  final FToastStyle? style;
+  final FToastStyle style;
   final ValueListenable<bool> closing;
-  final Offset collapsedOffset;
-  final double collapsedScale;
-  final Curve expandingCurve;
-  final Duration expandingDuration;
-  final double collapsedOpacity;
-  final double entryOpacity;
   final Widget child;
   final Offset entryOffset;
   final Alignment entryAlignment;
-  final double spacing;
   final int index;
-  final int actualIndex;
   final VoidCallback onClosing;
   final VoidCallback onClosed;
 
@@ -360,21 +344,13 @@ class ToastEntryLayout extends StatefulWidget {
     required this.expanded,
     required this.closing,
     required this.onClosed,
-    required this.collapsedOffset,
-    required this.collapsedScale,
     required this.entryOffset,
     required this.child,
     required this.entryAlignment,
-    required this.spacing,
     required this.index,
-    required this.actualIndex,
     required this.onClosing,
     required this.duration,
-    required this.expandingDuration,
-    this.style,
-    this.expandingCurve = Curves.easeInOut,
-    this.collapsedOpacity = 0.8,
-    this.entryOpacity = 0.0,
+    required this.style,
     this.dismissible = true,
     this.previousAlignment = Alignment.center,
     this.curve = Curves.easeInOut,
@@ -396,18 +372,10 @@ class ToastEntryLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('duration', duration))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('closing', closing))
-      ..add(DiagnosticsProperty('collapsedOffset', collapsedOffset))
-      ..add(DiagnosticsProperty('collapsedScale', collapsedScale))
-      ..add(DiagnosticsProperty('expandingCurve', expandingCurve))
-      ..add(DiagnosticsProperty('expandingDuration', expandingDuration))
-      ..add(DiagnosticsProperty('collapsedOpacity', collapsedOpacity))
-      ..add(DiagnosticsProperty('entryOpacity', entryOpacity))
       ..add(DiagnosticsProperty('child', child))
       ..add(DiagnosticsProperty('entryOffset', entryOffset))
       ..add(DiagnosticsProperty('entryAlignment', entryAlignment))
-      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(DiagnosticsProperty('index', index))
-      ..add(DiagnosticsProperty('actualIndex', actualIndex))
       ..add(DiagnosticsProperty('onClosing', onClosing))
       ..add(DiagnosticsProperty('onClosed', onClosed));
   }
@@ -437,94 +405,89 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? FToastData.of(context).style;
-    return MouseRegion(
-      key: _key,
-      hitTestBehavior: HitTestBehavior.deferToChild,
-      onEnter: (event) {
-        _closingTimer?.cancel();
+  Widget build(BuildContext context) => MouseRegion(
+    key: _key,
+    hitTestBehavior: HitTestBehavior.deferToChild,
+    onEnter: (event) {
+      _closingTimer?.cancel();
+    },
+    onExit: (event) {
+      _startClosingTimer();
+    },
+    child: GestureDetector(
+      onHorizontalDragStart: (details) {
+        if (widget.dismissible) {
+          setState(() {
+            _closingTimer?.cancel();
+            _dismissing = true;
+          });
+        }
       },
-      onExit: (event) {
-        _startClosingTimer();
+      onHorizontalDragUpdate: (details) {
+        if (widget.dismissible) {
+          setState(() {
+            _dismissProgress += details.primaryDelta! / context.size!.width;
+          });
+        }
       },
-      child: GestureDetector(
-        onHorizontalDragStart: (details) {
-          if (widget.dismissible) {
-            setState(() {
-              _closingTimer?.cancel();
-              _dismissing = true;
-            });
+      onHorizontalDragEnd: (_) {
+        if (widget.dismissible) {
+          setState(() {
+            _dismissing = false;
+          });
+          // if its < -0.5 or > 0.5 dismiss it
+          if (_dismissProgress < -0.5) {
+            _targetDismissProgress = -1.0;
+          } else if (_dismissProgress > 0.5) {
+            _targetDismissProgress = 1.0;
+          } else {
+            _dismissProgress = 0;
+            _startClosingTimer();
           }
-        },
-        onHorizontalDragUpdate: (details) {
-          if (widget.dismissible) {
-            setState(() {
-              _dismissProgress += details.primaryDelta! / context.size!.width;
-            });
-          }
-        },
-        onHorizontalDragEnd: (details) {
-          if (widget.dismissible) {
-            setState(() {
-              _dismissing = false;
-            });
-            // if its < -0.5 or > 0.5 dismiss it
-            if (_dismissProgress < -0.5) {
-              _targetDismissProgress = -1.0;
-            } else if (_dismissProgress > 0.5) {
-              _targetDismissProgress = 1.0;
-            } else {
-              _dismissProgress = 0;
-              _startClosingTimer();
-            }
-          }
-        },
-        child: AnimatedBuilder(
-          animation: widget.closing,
-          builder:
-              (_, _) => TweenAnimationBuilder(
-                tween: Tween(end: widget.closing.value ? 0.0 : (_targetDismissProgress ?? _dismissProgress)),
-                duration: _dismissing ? Duration.zero : style.animationDuration,
-                onEnd: _targetDismissProgress == null ? null : widget.onClosed,
-                builder:
-                    (_, dismissProgress, _) => TweenAnimationBuilder(
-                      tween: Tween(end: widget.index.toDouble()),
-                      curve: widget.curve,
-                      duration: widget.duration,
-                      builder:
-                          (_, indexProgress, _) => TweenAnimationBuilder(
-                            tween: Tween(
-                              begin: widget.index > 0 ? 1.0 : 0.0,
-                              end: widget.closing.value && !_dismissing ? 0.0 : 1.0,
-                            ),
-                            curve: widget.curve,
-                            duration: widget.duration,
-                            onEnd: widget.closing.value ? widget.onClosed : null,
-                            builder:
-                                (_, entranceExitProgress, _) => TweenAnimationBuilder(
-                                  tween: Tween(end: widget.expanded ? 1.0 : 0.0),
-                                  curve: widget.expandingCurve,
-                                  duration: widget.expandingDuration,
-                                  builder:
-                                      (_, expandingProgress, _) => _buildToast(
-                                        style,
-                                        expandingProgress,
-                                        entranceExitProgress,
-                                        indexProgress,
-                                        dismissProgress,
-                                      ),
-                                ),
+        }
+      },
+      child: AnimatedBuilder(
+        animation: widget.closing,
+        builder:
+            (_, _) => TweenAnimationBuilder(
+              tween: Tween(end: widget.closing.value ? 0.0 : (_targetDismissProgress ?? _dismissProgress)),
+              duration: _dismissing ? Duration.zero : widget.style.animationDuration,
+              onEnd: _targetDismissProgress == null ? null : widget.onClosed,
+              builder:
+                  (_, dismissProgress, _) => TweenAnimationBuilder(
+                    tween: Tween(end: widget.index.toDouble()),
+                    curve: widget.curve,
+                    duration: widget.duration,
+                    builder:
+                        (_, indexProgress, _) => TweenAnimationBuilder(
+                          tween: Tween(
+                            begin: widget.index > 0 ? 1.0 : 0.0,
+                            end: widget.closing.value && !_dismissing ? 0.0 : 1.0,
                           ),
-                    ),
-              ),
-        ),
+                          curve: widget.curve,
+                          duration: widget.duration,
+                          onEnd: widget.closing.value ? widget.onClosed : null,
+                          builder:
+                              (_, entranceExitProgress, _) => TweenAnimationBuilder(
+                                tween: Tween(end: widget.expanded ? 1.0 : 0.0),
+                                curve: widget.style.expandingCurve,
+                                duration: widget.style.expandingDuration,
+                                builder:
+                                    (_, expandingProgress, _) => _buildToast(
+                                      expandingProgress,
+                                      entranceExitProgress,
+                                      indexProgress,
+                                      dismissProgress,
+                                    ),
+                              ),
+                        ),
+                  ),
+            ),
       ),
-    );
-  }
+    ),
+  );
 
   Widget _buildToast(
-    FToastStyle style,
     double expandingProgress,
     double showingProgress,
     double indexProgress,
@@ -537,14 +500,14 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     final previousAlignment = widget.previousAlignment;
     offset +=
         Offset(
-          (widget.collapsedOffset.dx * previousAlignment.x) * nonCollapsingProgress,
-          (widget.collapsedOffset.dy * previousAlignment.y) * nonCollapsingProgress,
+          (widget.style.collapsedOffset.dx * previousAlignment.x) * nonCollapsingProgress,
+          (widget.style.collapsedOffset.dy * previousAlignment.y) * nonCollapsingProgress,
         ) *
         indexProgress;
 
     final expandingShift = Offset(
-      previousAlignment.x * (16 * style.scaling) * expandingProgress,
-      previousAlignment.y * (16 * style.scaling) * expandingProgress,
+      previousAlignment.x * (16 * widget.style.scaling) * expandingProgress,
+      previousAlignment.y * (16 * widget.style.scaling) * expandingProgress,
     );
 
     offset += expandingShift;
@@ -552,8 +515,8 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     // and then add the spacing when its in expanded mode
     offset +=
         Offset(
-          (widget.spacing * previousAlignment.x) * expandingProgress,
-          (widget.spacing * previousAlignment.y) * expandingProgress,
+          (widget.style.spacing * previousAlignment.x) * expandingProgress,
+          (widget.style.spacing * previousAlignment.y) * expandingProgress,
         ) *
         indexProgress;
 
@@ -569,13 +532,13 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     fractionalOffset +=
         Offset(expandingProgress * previousAlignment.x, expandingProgress * previousAlignment.y) * indexProgress;
 
-    double opacity = widget.entryOpacity + (1.0 - widget.entryOpacity) * showingProgress;
+    double opacity = widget.style.entryOpacity + (1.0 - widget.style.entryOpacity) * showingProgress;
 
     // fade out the toast behind
-    opacity *= pow(widget.collapsedOpacity, indexProgress * nonCollapsingProgress);
+    opacity *= pow(widget.style.collapsedOpacity, indexProgress * nonCollapsingProgress);
     opacity *= 1 - dismissProgress.abs();
 
-    final scale = 1.0 * pow(widget.collapsedScale, indexProgress * (1 - expandingProgress));
+    final scale = 1.0 * pow(widget.style.collapsedScale, indexProgress * (1 - expandingProgress));
 
     return Transform.translate(
       offset: offset,
