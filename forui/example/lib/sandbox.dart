@@ -17,9 +17,33 @@ class _SandboxState extends State<Sandbox> {
       children: [
         FButton(
           onPress: () {
-            showToast(context: context, builder: buildToast);
+            showToast(context: context, builder: buildToast, location: ToastLocation.topLeft);
           },
-          child: Text('Button'),
+          child: Text('TL'),
+        ),
+        FButton(
+          onPress: () {
+            showToast(context: context, builder: buildToast, location: ToastLocation.topRight);
+          },
+          child: Text('TR'),
+        ),
+        FButton(
+          onPress: () {
+            showToast(context: context, builder: buildToast, location: ToastLocation.topCenter);
+          },
+          child: Text('TC'),
+        ),
+        FButton(
+          onPress: () {
+            showToast(context: context, builder: buildToast, location: ToastLocation.bottomLeft);
+          },
+          child: Text('BL'),
+        ),
+        FButton(
+          onPress: () {
+            showToast(context: context, builder: buildToast, location: ToastLocation.bottomRight);
+          },
+          child: Text('BR'),
         ),
       ],
     );

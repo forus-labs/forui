@@ -8,17 +8,17 @@ import 'package:meta/meta.dart';
 
 @internal
 enum ToastLocation {
-  topLeft(childrenAlignment: Alignment.bottomCenter, alignment: Alignment.topLeft),
-  topCenter(childrenAlignment: Alignment.bottomCenter, alignment: Alignment.topCenter),
-  topRight(childrenAlignment: Alignment.bottomCenter, alignment: Alignment.topRight),
-  bottomLeft(childrenAlignment: Alignment.topCenter, alignment: Alignment.bottomLeft),
-  bottomCenter(childrenAlignment: Alignment.topCenter, alignment: Alignment.bottomCenter),
-  bottomRight(childrenAlignment: Alignment.topCenter, alignment: Alignment.bottomRight);
+  topLeft(alignment: Alignment.topLeft, collapsedAlignment: Alignment.bottomCenter),
+  topCenter(alignment: Alignment.topCenter, collapsedAlignment: Alignment.bottomCenter),
+  topRight(alignment: Alignment.topRight, collapsedAlignment: Alignment.bottomCenter),
+  bottomLeft(alignment: Alignment.bottomLeft, collapsedAlignment: Alignment.topCenter),
+  bottomCenter(alignment: Alignment.bottomCenter, collapsedAlignment: Alignment.topCenter),
+  bottomRight(alignment: Alignment.bottomRight, collapsedAlignment: Alignment.topCenter);
 
   final Alignment alignment;
-  final Alignment childrenAlignment;
+  final Alignment collapsedAlignment;
 
-  const ToastLocation({required this.alignment, required this.childrenAlignment});
+  const ToastLocation({required this.alignment, required this.collapsedAlignment});
 }
 
 /// A Toast's data.
@@ -82,9 +82,66 @@ ToastOverlay showToast({
   return layer!.addEntry(entry);
 }
 
+@internal
+class ToastEntry {
+  final Widget Function(BuildContext context, ToastOverlay overlay) builder;
+  final ToastLocation location;
+  final bool dismissible;
+  final Curve curve;
+  final Duration duration;
+  final FToastStyle? style;
+  final VoidCallback? onClosed;
+  final Duration? showDuration;
+
+  ToastEntry({
+    required this.builder,
+    required this.location,
+    required this.style,
+    required this.duration,
+    required this.showDuration,
+    this.dismissible = true,
+    this.curve = Curves.bounceIn,
+    this.onClosed,
+  });
+}
+
+@internal
+class ToastOverlay {
+  /// The key of the toast entry.
+  final GlobalKey key = GlobalKey();
+
+  /// The toast entry.
+  final ToastEntry entry;
+
+  FToastLayerState? _attached;
+  final ValueNotifier<bool> _isClosing = ValueNotifier(false);
+
+  ToastOverlay(this.entry, this._attached);
+
+  /// True if the toast is attached to the overlay.
+  bool get isShowing => _attached != null;
+
+  /// Removes the toast entry from the overlay.
+  void close() {
+    if (_attached == null) {
+      return;
+    }
+    _isClosing.value = true;
+    _attached!._triggerEntryClosing();
+    _attached = null;
+  }
+}
+
+
 /// How the toast should be expanded.
 @internal
 enum ExpandMode { alwaysExpanded, expandOnHover, expandOnTap, disabled }
+
+class _ToastLocationData {
+  final List<ToastOverlay> entries = [];
+  bool _expanding = false;
+  int _hoverCount = 0;
+}
 
 /// The Toast provider widget that manages and displays toast notifications.
 ///
@@ -112,12 +169,6 @@ class FToastLayer extends StatefulWidget {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('style', style));
   }
-}
-
-class _ToastLocationData {
-  final List<ToastOverlay> entries = [];
-  bool _expanding = false;
-  int _hoverCount = 0;
 }
 
 /// The state of the [FToastLayer].
@@ -162,12 +213,13 @@ class FToastLayerState extends State<FToastLayer> {
   Widget build(BuildContext context) {
     final style = widget.style;
     final children = [widget.child];
+
     for (final locationEntry in _entries.entries) {
       final location = locationEntry.key;
       final entries = locationEntry.value.entries;
       final expanding = locationEntry.value._expanding;
       final startVisible = max(entries.length - (style.maxStackedEntries * 2), 0);
-      final entryAlignment = location.childrenAlignment * -1;
+      final entryAlignment = location.collapsedAlignment * -1;
       final positionedChildren = <Widget>[];
       int toastIndex = 0;
       final padding = style.padding;
@@ -180,9 +232,8 @@ class FToastLayerState extends State<FToastLayer> {
               key: entry.key,
               entry: entry.entry,
               expanded: expanding || style.expandMode == ExpandMode.alwaysExpanded,
-              visible: true,
               dismissible: entry.entry.dismissible,
-              previousAlignment: location.childrenAlignment,
+              previousAlignment: location.collapsedAlignment,
               curve: entry.entry.curve,
               duration: entry.entry.duration,
               closing: entry._isClosing,
@@ -280,60 +331,9 @@ class FToastLayerState extends State<FToastLayer> {
 }
 
 @internal
-class ToastOverlay {
-  /// The key of the toast entry.
-  final GlobalKey key = GlobalKey();
-
-  /// The toast entry.
-  final ToastEntry entry;
-
-  FToastLayerState? _attached;
-  final ValueNotifier<bool> _isClosing = ValueNotifier(false);
-
-  ToastOverlay(this.entry, this._attached);
-
-  /// True if the toast is attached to the overlay.
-  bool get isShowing => _attached != null;
-
-  /// Removes the toast entry from the overlay.
-  void close() {
-    if (_attached == null) {
-      return;
-    }
-    _isClosing.value = true;
-    _attached!._triggerEntryClosing();
-    _attached = null;
-  }
-}
-
-@internal
-class ToastEntry {
-  final Widget Function(BuildContext context, ToastOverlay overlay) builder;
-  final ToastLocation location;
-  final bool dismissible;
-  final Curve curve;
-  final Duration duration;
-  final FToastStyle? style;
-  final VoidCallback? onClosed;
-  final Duration? showDuration;
-
-  ToastEntry({
-    required this.builder,
-    required this.location,
-    required this.style,
-    required this.duration,
-    required this.showDuration,
-    this.dismissible = true,
-    this.curve = Curves.bounceIn,
-    this.onClosed,
-  });
-}
-
-@internal
 class ToastEntryLayout extends StatefulWidget {
   final ToastEntry entry;
   final bool expanded;
-  final bool visible; // unused
   final bool dismissible;
   final Alignment previousAlignment;
   final Curve curve;
@@ -375,7 +375,6 @@ class ToastEntryLayout extends StatefulWidget {
     this.expandingCurve = Curves.easeInOut,
     this.collapsedOpacity = 0.8,
     this.entryOpacity = 0.0,
-    this.visible = true,
     this.dismissible = true,
     this.previousAlignment = Alignment.center,
     this.curve = Curves.easeInOut,
@@ -484,39 +483,31 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
         child: AnimatedBuilder(
           animation: widget.closing,
           builder:
-              (context, child) => TweenAnimationBuilder(
+              (_, _) => TweenAnimationBuilder(
                 tween: Tween(end: widget.closing.value ? 0.0 : (_targetDismissProgress ?? _dismissProgress)),
                 duration: _dismissing ? Duration.zero : style.animationDuration,
-                onEnd: () {
-                  if (_targetDismissProgress != null) {
-                    widget.onClosed();
-                  }
-                },
+                onEnd: _targetDismissProgress == null ? null : widget.onClosed,
                 builder:
-                    (context, dismissProgress, child) => TweenAnimationBuilder(
+                    (_, dismissProgress, _) => TweenAnimationBuilder(
                       tween: Tween(end: widget.index.toDouble()),
                       curve: widget.curve,
                       duration: widget.duration,
                       builder:
-                          (context, indexProgress, child) => TweenAnimationBuilder(
+                          (_, indexProgress, _) => TweenAnimationBuilder(
                             tween: Tween(
                               begin: widget.index > 0 ? 1.0 : 0.0,
                               end: widget.closing.value && !_dismissing ? 0.0 : 1.0,
                             ),
                             curve: widget.curve,
                             duration: widget.duration,
-                            onEnd: () {
-                              if (widget.closing.value) {
-                                widget.onClosed();
-                              }
-                            },
+                            onEnd: widget.closing.value ? widget.onClosed : null,
                             builder:
-                                (context, entranceExitProgress, child) => TweenAnimationBuilder(
+                                (_, entranceExitProgress, _) => TweenAnimationBuilder(
                                   tween: Tween(end: widget.expanded ? 1.0 : 0.0),
                                   curve: widget.expandingCurve,
                                   duration: widget.expandingDuration,
                                   builder:
-                                      (context, expandingProgress, child) => _buildToast(
+                                      (_, expandingProgress, _) => _buildToast(
                                         style,
                                         expandingProgress,
                                         entranceExitProgress,
