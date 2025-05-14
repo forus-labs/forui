@@ -359,35 +359,31 @@ class Toast extends StatefulWidget {
 
 class _ToastState extends State<Toast> {
   bool _dismissing = false;
-  double _dismissProgress = 0;
-  double? _targetDismissProgress;
+  double _dismiss = 0;
+  double? _dismissEnd;
   Timer? _closingTimer;
-
-  final GlobalKey _key = GlobalKey();
 
   @override
   void initState() {
     super.initState();
-    _startClosingTimer();
+    _start();
   }
 
-  void _startClosingTimer() {
+  void _start() {
     _closingTimer?.cancel();
-    _closingTimer = Timer(widget.entry.showDuration, () {
-      widget.onClosing.call();
-    });
+    _closingTimer = Timer(widget.entry.showDuration, widget.onClosing);
   }
 
   @override
   Widget build(BuildContext context) {
-    final toast = ValueListenableBuilder(
+    Widget toast = ValueListenableBuilder(
       valueListenable: widget.closing,
       builder:
           (_, closing, _) => TweenAnimationBuilder(
-            tween: Tween(end: closing ? 0.0 : (_targetDismissProgress ?? _dismissProgress)),
+            tween: Tween(end: closing ? 0.0 : (_dismissEnd ?? _dismiss)),
             curve: widget.style.dismissCurve,
             duration: _dismissing ? Duration.zero : widget.style.dismissDuration,
-            onEnd: _targetDismissProgress == null ? null : widget.onClosed,
+            onEnd: _dismissEnd == null ? null : widget.onClosed,
             builder:
                 (_, dismiss, _) => TweenAnimationBuilder(
                   tween: Tween(end: widget.expanded ? 1.0 : 0.0),
@@ -411,49 +407,37 @@ class _ToastState extends State<Toast> {
           ),
     );
 
-    return MouseRegion(
-      key: _key,
-      hitTestBehavior: HitTestBehavior.deferToChild,
-      onEnter: (event) {
-        _closingTimer?.cancel();
-      },
-      onExit: (event) {
-        _startClosingTimer();
-      },
-      child: GestureDetector(
-        onHorizontalDragStart: (details) {
-          if (widget.dismissible) {
-            setState(() {
+    if (widget.dismissible) {
+      toast = GestureDetector(
+        onHorizontalDragStart:
+            (_) => setState(() {
               _closingTimer?.cancel();
               _dismissing = true;
-            });
-          }
-        },
-        onHorizontalDragUpdate: (details) {
-          if (widget.dismissible) {
-            setState(() {
-              _dismissProgress += details.primaryDelta! / context.size!.width;
-            });
-          }
-        },
+            }),
+        onHorizontalDragUpdate: (details) => setState(() => _dismiss += details.primaryDelta! / context.size!.width),
         onHorizontalDragEnd: (_) {
-          if (widget.dismissible) {
-            setState(() {
-              _dismissing = false;
-            });
-            // if its < -0.5 or > 0.5 dismiss it
-            if (_dismissProgress < -0.5) {
-              _targetDismissProgress = -1.0;
-            } else if (_dismissProgress > 0.5) {
-              _targetDismissProgress = 1.0;
-            } else {
-              _dismissProgress = 0;
-              _startClosingTimer();
-            }
+          setState(() => _dismissing = false);
+
+          switch (_dismiss) {
+            case < -0.5:
+              _dismissEnd = -1.0;
+            case > 0.5:
+              _dismissEnd = 1.0;
+            default:
+              _dismiss = 0;
+              _start();
           }
         },
         child: toast,
-      ),
+      );
+    }
+
+    // TODO: Support more expand modes
+    return MouseRegion(
+      hitTestBehavior: HitTestBehavior.deferToChild,
+      onEnter: (_) => _closingTimer?.cancel(),
+      onExit: (_) => _start(),
+      child: toast,
     );
   }
 
