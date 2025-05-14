@@ -239,10 +239,6 @@ class FToastLayerState extends State<FToastLayer> {
                 removeEntry(entry.entry);
                 entry.entry.onClosed?.call();
               },
-              entryOffset: Offset(
-                padding.left * entryAlignment.x.clamp(0, 1) + padding.right * entryAlignment.x.clamp(-1, 0),
-                padding.top * entryAlignment.y.clamp(0, 1) + padding.bottom * entryAlignment.y.clamp(-1, 0),
-              ),
               entryAlignment: entryAlignment,
               index: toastIndex,
               onClosing: entry.close,
@@ -333,7 +329,6 @@ class ToastEntryLayout extends StatefulWidget {
   final FToastStyle style;
   final ValueListenable<bool> closing;
   final Widget child;
-  final Offset entryOffset;
   final Alignment entryAlignment;
   final int index;
   final VoidCallback onClosing;
@@ -344,7 +339,6 @@ class ToastEntryLayout extends StatefulWidget {
     required this.expanded,
     required this.closing,
     required this.onClosed,
-    required this.entryOffset,
     required this.child,
     required this.entryAlignment,
     required this.index,
@@ -373,7 +367,6 @@ class ToastEntryLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('closing', closing))
       ..add(DiagnosticsProperty('child', child))
-      ..add(DiagnosticsProperty('entryOffset', entryOffset))
       ..add(DiagnosticsProperty('entryAlignment', entryAlignment))
       ..add(DiagnosticsProperty('index', index))
       ..add(DiagnosticsProperty('onClosing', onClosing))
@@ -492,9 +485,8 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     final entryAlignment = widget.entryAlignment;
     final behindTransform = Offset(widget.previousAlignment.x, widget.previousAlignment.y);
 
-    var offset = widget.entryOffset * (1.0 - transition);
     // Shift up/down when behind another toast
-    offset += widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapsedProgress * index;
+    var offset = widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapsedProgress * index;
     // Shift up/down when expanding/collapsing
     offset += behindTransform * (16 * widget.style.scaling) * expand;
     // Add spacing when expanded
