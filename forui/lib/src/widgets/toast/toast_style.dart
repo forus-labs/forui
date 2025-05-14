@@ -37,10 +37,6 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   @override
   final Duration showDuration;
 
-  /// The scaling factor for the toast. Defaults to 1.0.
-  @override
-  final double scaling;
-
   /// The spacing between each toast when it is expanded. Defaults to 8.0.
   @override
   final double spacing;
@@ -59,6 +55,7 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   final double entryOpacity;
 
   /// How the toast should be expanded.
+  @override
   final ExpandMode expandMode;
 
   /// The toast's padding.
@@ -82,7 +79,6 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     this.expandingDuration = const Duration(milliseconds: 500),
     this.showDuration = const Duration(seconds: 5),
     this.expandingCurve = Curves.easeOutCubic,
-    this.scaling = 1.0,
     this.spacing = 8.0,
     this.collapsedScale = 0.9,
     this.collapsedOpacity = 1,
@@ -90,9 +86,8 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     this.expandMode = ExpandMode.expandOnHover,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     BoxConstraints? toastConstraints,
-    Offset? collapsedOffset,
-  }) : toastConstraints = toastConstraints ?? BoxConstraints.tightFor(width: 320 * scaling),
-       collapsedOffset = const Offset(0, 12) * scaling;
+    this.collapsedOffset = const Offset(0, 12),
+  }) : toastConstraints = toastConstraints ?? const BoxConstraints.tightFor(width: 320);
 
   /// Creates a [FToastStyle] that inherits its properties.
   FToastStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
@@ -107,18 +102,6 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
           subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
         ),
       );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DoubleProperty('spacing', spacing))
-      ..add(DoubleProperty('scaling', scaling))
-      ..add(DiagnosticsProperty('toastConstraints', toastConstraints))
-      ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('animationDuration', animationDuration))
-      ..add(DiagnosticsProperty('expandingDuration', expandingDuration));
-  }
 }
 
 /// [FToast] content's style.
@@ -146,14 +129,4 @@ final class FToastContentStyle with Diagnosticable, _$FToastContentStyleFunction
     this.subtitleSpacing = 8,
     this.padding = const EdgeInsets.all(16),
   });
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DoubleProperty('subtitleSpacing', subtitleSpacing))
-      ..add(DiagnosticsProperty('titleTextStyle', titleTextStyle))
-      ..add(DiagnosticsProperty('subtitleTextStyle', subtitleTextStyle))
-      ..add(DiagnosticsProperty('padding', padding));
-  }
 }

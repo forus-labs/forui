@@ -366,7 +366,6 @@ class ToastEntryLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('duration', duration))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('closing', closing))
-      ..add(DiagnosticsProperty('child', child))
       ..add(DiagnosticsProperty('entryAlignment', entryAlignment))
       ..add(DiagnosticsProperty('index', index))
       ..add(DiagnosticsProperty('onClosing', onClosing))
@@ -485,10 +484,12 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     final entryAlignment = widget.entryAlignment;
     final behindTransform = Offset(widget.previousAlignment.x, widget.previousAlignment.y);
 
+    print(entryAlignment);
+
     // Shift up/down when behind another toast
     var offset = widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapsedProgress * index;
     // Shift up/down when expanding/collapsing
-    offset += behindTransform * (16 * widget.style.scaling) * expand;
+    offset += behindTransform * 16 * expand;
     // Add spacing when expanded
     offset += behindTransform * widget.style.spacing * expand * index;
 
