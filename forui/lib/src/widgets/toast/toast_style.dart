@@ -60,7 +60,7 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   /// The initial opacity of the toast when it begins to expand. Defaults to 0.0.
   /// To remove the fade-in effect, set this to 1.0.
   @override
-  final double entryOpacity;
+  final double transitionOpacity;
 
   /// How the toast should be expanded.
   @override
@@ -92,7 +92,7 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     this.spacing = 8.0,
     this.collapsedScale = 0.9,
     this.collapsedOpacity = 1,
-    this.entryOpacity = 0.0,
+    this.transitionOpacity = 0,
     this.expandMode = ExpandMode.expandOnHover,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     BoxConstraints? toastConstraints,
