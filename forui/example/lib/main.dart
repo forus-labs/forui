@@ -43,6 +43,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
     home: FScaffold(
       header: const FHeader(title: Text('Example')),
+      sidebar: Container(decoration: const BoxDecoration(color: Colors.blue), width: 200),
       footer: FBottomNavigationBar(
         index: index,
         onChange: (index) => setState(() => this.index = index),

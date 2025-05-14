@@ -14,8 +14,23 @@ part 'scaffold.style.dart';
 /// A layout structure that contains a header, content, and footer.
 ///
 /// A scaffold provides the basic visual structure for an application, containing
-/// elements like headers, content areas, and footers. It is highly recommended
-/// to use a scaffold when creating a page even if a header and footer are not required.
+/// elements like header, sidebar, content area, and footer. It is highly recommended
+/// to use a scaffold when creating a page even if other elements are not required.
+///
+/// The layout structure (LTR) is organized as follows:
+/// ```md
+/// ┌─────────┬─────────────────────┐
+/// │         │       HEADER        │
+/// │         ├─────────────────────┤
+/// │         │                     │
+/// │         │                     │
+/// │ SIDEBAR │    CONTENT AREA     │
+/// │         │                     │
+/// │         │                     │
+/// │         ├─────────────────────┤
+/// │         │       FOOTER        │
+/// └─────────┴─────────────────────┘
+/// ```
 ///
 /// See:
 /// * https://forui.dev/docs/layout/scaffold for working examples.
@@ -26,6 +41,9 @@ class FScaffold extends StatelessWidget {
 
   /// The optional header displayed at the top of the scaffold.
   final Widget? header;
+
+  /// The optional sidebar displayed at the side of the scaffold.
+  final Widget? sidebar;
 
   /// The optional footer displayed at the bottom of the scaffold.
   final Widget? footer;
@@ -49,6 +67,7 @@ class FScaffold extends StatelessWidget {
   const FScaffold({
     required this.child,
     this.header,
+    this.sidebar,
     this.footer,
     this.childPad = true,
     this.resizeToAvoidBottomInset = true,
@@ -68,20 +87,27 @@ class FScaffold extends StatelessWidget {
     }
 
     return FSheets(
-      child: ColoredBox(
-        color: style.backgroundColor,
-        child: _RenderScaffoldWidget(
-          resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-          children: [
-            Column(
-              children: [
-                if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-                Expanded(child: child),
-              ],
+      child: Row(
+        children: [
+          if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
+          Expanded(
+            child: ColoredBox(
+              color: style.backgroundColor,
+              child: _RenderScaffoldWidget(
+                resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+                children: [
+                  Column(
+                    children: [
+                      if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                      Expanded(child: child),
+                    ],
+                  ),
+                  footer,
+                ],
+              ),
             ),
-            footer,
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -109,6 +135,10 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   @override
   final Color backgroundColor;
 
+  /// The sidebar background color.
+  @override
+  final Color sidebarBackgroundColor;
+
   /// The child padding. Only used when [FScaffold.childPad] is `true`.
   @override
   final EdgeInsetsGeometry childPadding;
@@ -124,6 +154,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// Creates a [FScaffoldStyle].
   FScaffoldStyle({
     required this.backgroundColor,
+    required this.sidebarBackgroundColor,
     required this.childPadding,
     required this.footerDecoration,
     this.headerDecoration = const BoxDecoration(),
@@ -133,6 +164,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   FScaffoldStyle.inherit({required FColors colors, required FStyle style})
     : this(
         backgroundColor: colors.background,
+        sidebarBackgroundColor: colors.background,
         childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
         footerDecoration: BoxDecoration(
           border: Border(top: BorderSide(color: colors.border, width: style.borderWidth)),
