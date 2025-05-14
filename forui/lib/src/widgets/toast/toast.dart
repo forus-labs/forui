@@ -217,7 +217,7 @@ class FToastLayerState extends State<FToastLayer> {
         if (toastIndex < style.maxStackedEntries) {
           positionedChildren.insert(
             0,
-            ToastEntryLayout(
+            Toast(
               key: entry.key,
               entry: entry.entry,
               expanded: data.expanding || style.expandMode == ExpandMode.alwaysExpanded,
@@ -309,7 +309,7 @@ class FToastLayerState extends State<FToastLayer> {
 }
 
 @internal
-class ToastEntryLayout extends StatefulWidget {
+class Toast extends StatefulWidget {
   final ToastEntry entry;
   final bool expanded;
   final bool dismissible;
@@ -322,7 +322,7 @@ class ToastEntryLayout extends StatefulWidget {
   final VoidCallback onClosing;
   final VoidCallback onClosed;
 
-  const ToastEntryLayout({
+  const Toast({
     required this.entry,
     required this.expanded,
     required this.closing,
@@ -338,7 +338,7 @@ class ToastEntryLayout extends StatefulWidget {
   });
 
   @override
-  State<ToastEntryLayout> createState() => _ToastEntryLayoutState();
+  State<Toast> createState() => _ToastState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -357,7 +357,7 @@ class ToastEntryLayout extends StatefulWidget {
   }
 }
 
-class _ToastEntryLayoutState extends State<ToastEntryLayout> {
+class _ToastState extends State<Toast> {
   bool _dismissing = false;
   double _dismissProgress = 0;
   double? _targetDismissProgress;
@@ -379,86 +379,85 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
   }
 
   @override
-  Widget build(BuildContext context) => MouseRegion(
-    key: _key,
-    hitTestBehavior: HitTestBehavior.deferToChild,
-    onEnter: (event) {
-      _closingTimer?.cancel();
-    },
-    onExit: (event) {
-      _startClosingTimer();
-    },
-    child: GestureDetector(
-      onHorizontalDragStart: (details) {
-        if (widget.dismissible) {
-          setState(() {
-            _closingTimer?.cancel();
-            _dismissing = true;
-          });
-        }
-      },
-      onHorizontalDragUpdate: (details) {
-        if (widget.dismissible) {
-          setState(() {
-            _dismissProgress += details.primaryDelta! / context.size!.width;
-          });
-        }
-      },
-      onHorizontalDragEnd: (_) {
-        if (widget.dismissible) {
-          setState(() {
-            _dismissing = false;
-          });
-          // if its < -0.5 or > 0.5 dismiss it
-          if (_dismissProgress < -0.5) {
-            _targetDismissProgress = -1.0;
-          } else if (_dismissProgress > 0.5) {
-            _targetDismissProgress = 1.0;
-          } else {
-            _dismissProgress = 0;
-            _startClosingTimer();
-          }
-        }
-      },
-      child: AnimatedBuilder(
-        animation: widget.closing,
-        builder:
-            (_, _) => TweenAnimationBuilder(
-              tween: Tween(end: widget.closing.value ? 0.0 : (_targetDismissProgress ?? _dismissProgress)),
-              curve: widget.style.dismissCurve,
-              duration: _dismissing ? Duration.zero : widget.style.dismissDuration,
-              onEnd: _targetDismissProgress == null ? null : widget.onClosed,
-              builder:
-                  (_, dismissProgress, _) => TweenAnimationBuilder(
-                    tween: Tween(end: widget.index.toDouble()),
-                    curve: widget.style.animationCurve,
-                    duration: widget.style.animationDuration,
-                    builder:
-                        (_, indexProgress, _) => TweenAnimationBuilder(
-                          tween: Tween(
-                            begin: widget.index > 0 ? 1.0 : 0.0,
-                            end: widget.closing.value && !_dismissing ? 0.0 : 1.0,
-                          ),
-                          curve: widget.style.animationCurve,
-                          duration: widget.style.animationDuration,
-                          onEnd: widget.closing.value ? widget.onClosed : null,
-                          builder:
-                              (_, entranceExitProgress, _) => TweenAnimationBuilder(
-                                tween: Tween(end: widget.expanded ? 1.0 : 0.0),
-                                curve: widget.style.expandCurve,
-                                duration: widget.style.expandDuration,
-                                builder:
-                                    (_, expandingProgress, _) =>
-                                        _toast(expandingProgress, entranceExitProgress, indexProgress, dismissProgress),
-                              ),
-                        ),
-                  ),
-            ),
-      ),
-    ),
-  );
+  Widget build(BuildContext context) {
+    final toast = ValueListenableBuilder(
+      valueListenable: widget.closing,
+      builder:
+          (_, closing, _) => TweenAnimationBuilder(
+            tween: Tween(end: closing ? 0.0 : (_targetDismissProgress ?? _dismissProgress)),
+            curve: widget.style.dismissCurve,
+            duration: _dismissing ? Duration.zero : widget.style.dismissDuration,
+            onEnd: _targetDismissProgress == null ? null : widget.onClosed,
+            builder:
+                (_, dismiss, _) => TweenAnimationBuilder(
+                  tween: Tween(end: widget.expanded ? 1.0 : 0.0),
+                  curve: widget.style.expandCurve,
+                  duration: widget.style.expandDuration,
+                  builder:
+                      (_, expand, _) => TweenAnimationBuilder(
+                        tween: Tween(begin: widget.index > 0 ? 1.0 : 0.0, end: closing && !_dismissing ? 0.0 : 1.0),
+                        curve: widget.style.animationCurve,
+                        duration: widget.style.animationDuration,
+                        onEnd: closing ? widget.onClosed : null,
+                        builder:
+                            (_, transition, _) => TweenAnimationBuilder(
+                              tween: Tween(end: widget.index.toDouble()),
+                              curve: widget.style.animationCurve,
+                              duration: widget.style.animationDuration,
+                              builder: (_, index, _) => _toast(dismiss, expand, transition, index),
+                            ),
+                      ),
+                ),
+          ),
+    );
 
-  Widget _toast(double expand, double transition, double index, double dismiss) {
+    return MouseRegion(
+      key: _key,
+      hitTestBehavior: HitTestBehavior.deferToChild,
+      onEnter: (event) {
+        _closingTimer?.cancel();
+      },
+      onExit: (event) {
+        _startClosingTimer();
+      },
+      child: GestureDetector(
+        onHorizontalDragStart: (details) {
+          if (widget.dismissible) {
+            setState(() {
+              _closingTimer?.cancel();
+              _dismissing = true;
+            });
+          }
+        },
+        onHorizontalDragUpdate: (details) {
+          if (widget.dismissible) {
+            setState(() {
+              _dismissProgress += details.primaryDelta! / context.size!.width;
+            });
+          }
+        },
+        onHorizontalDragEnd: (_) {
+          if (widget.dismissible) {
+            setState(() {
+              _dismissing = false;
+            });
+            // if its < -0.5 or > 0.5 dismiss it
+            if (_dismissProgress < -0.5) {
+              _targetDismissProgress = -1.0;
+            } else if (_dismissProgress > 0.5) {
+              _targetDismissProgress = 1.0;
+            } else {
+              _dismissProgress = 0;
+              _startClosingTimer();
+            }
+          }
+        },
+        child: toast,
+      ),
+    );
+  }
+
+  Widget _toast(double dismiss, double expand, double transition, double index) {
     final collapsedProgress = (1.0 - expand) * transition;
     final alignment = widget.alignment;
     final behindTransform = Offset(widget.behindAlignment.x, widget.behindAlignment.y);
