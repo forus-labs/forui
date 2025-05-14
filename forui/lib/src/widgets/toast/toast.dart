@@ -213,22 +213,22 @@ class FToastLayerState extends State<FToastLayer> {
     final style = widget.style;
     final children = [widget.child];
 
-    for (final MapEntry(key: location, value: _ToastLocationData(:entries, :expanding)) in _entries.entries) {
-      final startVisible = max(entries.length - (style.maxStackedEntries * 2), 0);
+    for (final MapEntry(key: location, value: data) in _entries.entries) {
+      final startVisible = max(data.entries.length - (style.maxStackedEntries * 2), 0);
       final entryAlignment = location.collapsedAlignment * -1;
       final positionedChildren = <Widget>[];
       int toastIndex = 0;
       final padding = style.padding;
 
-      for (var i = entries.length - 1; i >= startVisible; i--) {
-        final entry = entries[i];
+      for (var i = data.entries.length - 1; i >= startVisible; i--) {
+        final entry = data.entries[i];
         if (toastIndex < style.maxStackedEntries) {
           positionedChildren.insert(
             0,
             ToastEntryLayout(
               key: entry.key,
               entry: entry.entry,
-              expanded: expanding || style.expandMode == ExpandMode.alwaysExpanded,
+              expanded: data.expanding || style.expandMode == ExpandMode.alwaysExpanded,
               dismissible: entry.entry.dismissible,
               previousAlignment: location.collapsedAlignment,
               curve: entry.entry.curve,
@@ -270,23 +270,23 @@ class FToastLayerState extends State<FToastLayer> {
                 child: MouseRegion(
                   hitTestBehavior: HitTestBehavior.deferToChild,
                   onEnter: (event) {
-                    locationEntry.value._hoverCount++;
+                    data.hoverCount++;
                     if (style.expandMode == ExpandMode.expandOnHover) {
                       setState(() {
-                        locationEntry.value._expanding = true;
+                        data.expanding = true;
                       });
                     }
                   },
                   onExit: (event) {
-                    final currentCount = ++locationEntry.value._hoverCount;
+                    final currentCount = ++data.hoverCount;
                     Future.delayed(const Duration(milliseconds: 300), () {
-                      if (currentCount == locationEntry.value._hoverCount) {
+                      if (currentCount == data.hoverCount) {
                         if (mounted) {
                           setState(() {
-                            locationEntry.value._expanding = false;
+                            data.expanding = false;
                           });
                         } else {
-                          locationEntry.value._expanding = false;
+                          data.expanding = false;
                         }
                       }
                     });
@@ -351,9 +351,9 @@ class ToastEntryLayout extends StatefulWidget {
     required this.onClosing,
     required this.duration,
     required this.style,
+    required this.curve,
+    required this.previousAlignment,
     this.dismissible = true,
-    this.previousAlignment = Alignment.center,
-    this.curve = Curves.easeInOut,
     super.key,
   });
 
@@ -473,7 +473,7 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
                                 curve: widget.style.expandingCurve,
                                 duration: widget.style.expandingDuration,
                                 builder:
-                                    (_, expandingProgress, _) => _buildToast(
+                                    (_, expandingProgress, _) => _toast(
                                       expandingProgress,
                                       entranceExitProgress,
                                       indexProgress,
@@ -487,63 +487,37 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     ),
   );
 
-  Widget _buildToast(
-    double expandingProgress,
-    double showingProgress,
-    double indexProgress,
-    double dismissProgress,
-  ) {
-    final nonCollapsingProgress = (1.0 - expandingProgress) * showingProgress;
-    var offset = widget.entryOffset * (1.0 - showingProgress);
-
-    // when its behind another toast, shift it up based on index
-    final previousAlignment = widget.previousAlignment;
-    offset +=
-        Offset(
-          (widget.style.collapsedOffset.dx * previousAlignment.x) * nonCollapsingProgress,
-          (widget.style.collapsedOffset.dy * previousAlignment.y) * nonCollapsingProgress,
-        ) *
-        indexProgress;
-
-    final expandingShift = Offset(
-      previousAlignment.x * (16 * widget.style.scaling) * expandingProgress,
-      previousAlignment.y * (16 * widget.style.scaling) * expandingProgress,
-    );
-
-    offset += expandingShift;
-
-    // and then add the spacing when its in expanded mode
-    offset +=
-        Offset(
-          (widget.style.spacing * previousAlignment.x) * expandingProgress,
-          (widget.style.spacing * previousAlignment.y) * expandingProgress,
-        ) *
-        indexProgress;
-
+  Widget _toast(double expand, double transition, double index, double dismiss) {
+    final collapsedProgress = (1.0 - expand) * transition;
     final entryAlignment = widget.entryAlignment;
-    var fractionalOffset = Offset(
-      entryAlignment.x * (1.0 - showingProgress),
-      entryAlignment.y * (1.0 - showingProgress),
-    );
+    final behindTransform = Offset(widget.previousAlignment.x, widget.previousAlignment.y);
 
-    fractionalOffset += Offset(dismissProgress, 0);
+    var offset = widget.entryOffset * (1.0 - transition);
+    // Shift up/down when behind another toast
+    offset += widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapsedProgress * index;
+    // Shift up/down when expanding/collapsing
+    offset += behindTransform * (16 * widget.style.scaling) * expand;
+    // Add spacing when expanded
+    offset += behindTransform * widget.style.spacing * expand * index;
 
-    // when its behind another toast AND is expanded, shift it up based on index and the size of self
-    fractionalOffset +=
-        Offset(expandingProgress * previousAlignment.x, expandingProgress * previousAlignment.y) * indexProgress;
+    var fractional = Offset(entryAlignment.x, entryAlignment.y) * (1.0 - transition);
+    // Add dismiss offset
+    fractional += Offset(dismiss, 0);
+    // Shift up/down when behind another toast & expanded
+    fractional += behindTransform * expand * index;
 
-    double opacity = widget.style.entryOpacity + (1.0 - widget.style.entryOpacity) * showingProgress;
+    var opacity = widget.style.entryOpacity + (1.0 - widget.style.entryOpacity) * transition;
+    // Fade out the toast behind
+    opacity *= pow(widget.style.collapsedOpacity, index * collapsedProgress);
+    // Fade out the toast when dismissing
+    opacity *= 1 - dismiss.abs();
 
-    // fade out the toast behind
-    opacity *= pow(widget.style.collapsedOpacity, indexProgress * nonCollapsingProgress);
-    opacity *= 1 - dismissProgress.abs();
-
-    final scale = 1.0 * pow(widget.style.collapsedScale, indexProgress * (1 - expandingProgress));
+    final scale = 1.0 * pow(widget.style.collapsedScale, index * (1 - expand));
 
     return Transform.translate(
       offset: offset,
       child: FractionalTranslation(
-        translation: fractionalOffset,
+        translation: fractional,
         child: Opacity(opacity: opacity.clamp(0, 1), child: Transform.scale(scale: scale, child: widget.child)),
       ),
     );
