@@ -11,7 +11,6 @@ class Toast extends StatefulWidget {
   final FToastStyle style;
   final int index;
   final int length;
-  final Alignment alignment;
   final Alignment behindAlignment;
   final Duration duration;
   final bool expanded;
@@ -25,7 +24,6 @@ class Toast extends StatefulWidget {
     required this.style,
     required this.index,
     required this.length,
-    required this.alignment,
     required this.behindAlignment,
     required this.duration,
     required this.expanded,
@@ -46,7 +44,7 @@ class Toast extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(IntProperty('index', index))
-      ..add(DiagnosticsProperty('alignment', alignment))
+      ..add(IntProperty('length', length))
       ..add(DiagnosticsProperty('behindAlignment', behindAlignment))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(FlagProperty('expanded', value: expanded, ifTrue: 'expanded'))
@@ -79,7 +77,7 @@ class _ToastState extends State<Toast> {
       }
     }
   }
-  
+
   void _resume([Duration stagger = Duration.zero]) {
     _timer.cancel();
     _timer = Timer(widget.duration + stagger, widget.onClosing);
@@ -87,6 +85,7 @@ class _ToastState extends State<Toast> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO improve exit animation -> Needs to fade out more?
     Widget toast = MouseRegion(
       hitTestBehavior: HitTestBehavior.deferToChild,
       onEnter: (_) => _timer.cancel(),
@@ -153,18 +152,17 @@ class _ToastState extends State<Toast> {
   }
 
   Widget _toast(double dismiss, double expand, double transition, double index) {
-    final collapsed = (1.0 - expand) * transition;
-    final alignment = widget.alignment;
+    final collapse = (1.0 - expand) * transition;
     final behindTransform = Offset(widget.behindAlignment.x, widget.behindAlignment.y);
 
     // Shift up/down when behind another toast
-    var offset = widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapsed * index;
+    var offset = widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapse * index;
     // Shift up/down when expanding/collapsing
     offset += behindTransform * 16 * expand;
     // Add spacing when expanded
     offset += behindTransform * widget.style.spacing * expand * index;
 
-    var fractional = Offset(alignment.x, alignment.y) * (1.0 - transition);
+    var fractional = -behindTransform * (1.0 - transition);
     // Add dismiss offset
     fractional += Offset(dismiss, 0);
     // Shift up/down when behind another toast & expanded
@@ -172,7 +170,7 @@ class _ToastState extends State<Toast> {
 
     var opacity = widget.style.transitionOpacity + (1.0 - widget.style.transitionOpacity) * transition;
     // Fade out the toast behind
-    opacity *= pow(widget.style.collapsedOpacity, index * collapsed);
+    opacity *= pow(widget.style.collapsedOpacity, index * collapse);
     // Fade out the toast when dismissing
     opacity *= 1 - dismiss.abs();
 

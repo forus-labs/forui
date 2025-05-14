@@ -207,15 +207,14 @@ class FToastLayerState extends State<FToastLayer> {
     final children = [widget.child];
 
     for (final MapEntry(key: location, value: data) in _entries.entries) {
-      final entryAlignment = location.collapsedAlignment * -1;
-      final positionedChildren = <Widget>[];
+      final positioned = <Widget>[];
       int toastIndex = 0;
       final padding = style.padding;
 
       for (var i = data.entries.length - 1; i >= 0; i--) {
         final entry = data.entries[i];
         if (toastIndex < style.maxStackedEntries) {
-          positionedChildren.insert(
+          positioned.insert(
             0,
             Toast(
               key: entry.key,
@@ -229,7 +228,6 @@ class FToastLayerState extends State<FToastLayer> {
                 removeEntry(entry.entry);
                 entry.entry.onClosed?.call();
               },
-              alignment: entryAlignment,
               index: toastIndex,
               length: style.maxStackedEntries,
               onClosing: entry.close,
@@ -243,7 +241,7 @@ class FToastLayerState extends State<FToastLayer> {
         }
       }
 
-      if (positionedChildren.isEmpty) {
+      if (positioned.isEmpty) {
         continue;
       }
 
@@ -288,7 +286,7 @@ class FToastLayerState extends State<FToastLayer> {
                           alignment: location.alignment,
                           clipBehavior: Clip.none,
                           fit: StackFit.passthrough,
-                          children: positionedChildren,
+                          children: positioned,
                         ),
                       ],
                     ),
