@@ -4,6 +4,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:path/path.dart' as p;
+import 'package:sugar/sugar.dart';
 
 import 'constructors.dart';
 import 'main.dart';
@@ -26,12 +27,7 @@ String generateStyles(Map<String, ConstructorFragment> fragments) {
                           ..name = fragment.type.toLowerCase()
                           ..arguments.addAll([
                             literalString(fragment.type),
-                            literalList([
-                              if (fragment.root) ...[
-                                fragment.type.replaceAll(RegExp('Styles?'), ''),
-                                fragment.type.replaceAll(RegExp('Styles?'), '').substring(1),
-                              ],
-                            ], refer('String')),
+                            literalList(_aliases(fragment), refer('String')),
                             literalList(fragment.closure, refer('String')),
                             literalString(fragment.source),
                           ]))
@@ -80,6 +76,18 @@ String generateStyles(Map<String, ConstructorFragment> fragments) {
         ]);
 
   return formatter.format(registry.build().accept(emitter).toString());
+}
+
+List<String> _aliases(ConstructorFragment fragment) {
+  final es = RegExp(r'(ch|sh|x|ss|z)$', caseSensitive: false);
+
+  var name = fragment.type.replaceAll(RegExp('Styles?'), '').substring(1);
+  if (fragment.type.endsWith('Styles')) {
+    // English pluralization rules are a convoluted mess. Checking for the simple cases should suffice for now.
+    name = es.hasMatch(name) ? '${name}es' : '${name}s';
+  }
+
+  return [if (name.toLowerCase() != name.toKebabCase()) name.toKebabCase(), name.toLowerCase()];
 }
 
 Map<String, ConstructorFragment> mapStyles(Map<String, ConstructorMatch> matches) =>

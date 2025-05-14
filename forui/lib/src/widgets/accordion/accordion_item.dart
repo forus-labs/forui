@@ -17,6 +17,13 @@ mixin FAccordionItemMixin on Widget {}
 /// * https://forui.dev/docs/data/accordion for working examples.
 class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// The accordion's style. Defaults to [FThemeData.accordionStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create accordion
+  /// ```
   final FAccordionStyle? style;
 
   /// The title.

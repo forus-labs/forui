@@ -25,6 +25,13 @@ class FLineCalendar extends StatelessWidget {
   final FCalendarController<DateTime?>? controller;
 
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create line-calendar
+  /// ```
   final FLineCalendarStyle? style;
 
   /// The alignment to which the initially scrolled date will be aligned. Defaults to [Alignment.center].

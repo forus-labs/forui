@@ -27,6 +27,13 @@ class FTimePicker extends StatefulWidget {
   final FTimePickerController? controller;
 
   /// The style. If null, the default picker style will be used.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create time-picker
+  /// ```
   final FTimePickerStyle? style;
 
   /// True if the time picker should use the 24-hour format.

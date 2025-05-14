@@ -34,6 +34,13 @@ part 'label.style.dart';
 /// * [FLabelStyles] for customizing a label's appearance.
 class FLabel extends StatelessWidget {
   /// The label's style. Defaults to the appropriate style in [FThemeData.labelStyles].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create labels
+  /// ```
   // ignore: diagnostic_describe_all_properties
   final FLabelStyle? style;
 

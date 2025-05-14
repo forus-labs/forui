@@ -18,6 +18,13 @@ part 'switch.style.dart';
 /// * [FSwitchStyle] for customizing a switch's appearance.
 class FSwitch extends StatelessWidget {
   /// The style. Defaults to [FThemeData.switchStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create switch
+  /// ```
   final FSwitchStyle? style;
 
   /// The label displayed next to the switch.

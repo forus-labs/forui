@@ -1,5 +1,11 @@
 ## 0.12.0 (Next)
 
+### CLI
+
+* **Breaking** Improve how style aliases are generated - Certain style aliases may be removed or renamed.
+
+* Fix style suggestions always displaying actual style name instead of alias.
+
 ### `FCollapsible` (new)
 A widget that collapses and expands its child.
 
@@ -29,6 +35,7 @@ A widget that collapses and expands its child.
 
 * Add `FPopover.shortcuts`.
 
+* **Breaking** Change `FThemeData.headerStyle` to `FThemeData.headerStyles`.
 * Enhance `FSelect`'s focus management.
 * Enhance `FTimeField.picker`'s focus management.
 

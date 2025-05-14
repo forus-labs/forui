@@ -22,6 +22,13 @@ class FButton extends StatelessWidget {
   /// The style. Defaults to [FButtonStyle.primary].
   ///
   /// Although typically one of the pre-defined styles in [FBaseButtonStyle], it can also be a [FButtonStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create buttons
+  /// ```
   final FBaseButtonStyle style;
 
   /// {@macro forui.foundation.FTappable.onPress}

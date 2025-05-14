@@ -20,6 +20,13 @@ mixin FTileGroupMixin<T extends Widget> on Widget {}
 /// * [FTileGroupStyle] for customizing a tile's appearance.
 class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tile-group
+  /// ```
   final FTileGroupStyle? style;
 
   /// {@template forui.widgets.FTileGroup.scrollController}

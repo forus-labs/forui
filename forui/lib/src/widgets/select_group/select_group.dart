@@ -33,6 +33,13 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   final FSelectGroupController<T> controller;
 
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select-group
+  /// ```
   final FSelectGroupStyle style;
 
   /// True if the item is selected.

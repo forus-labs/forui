@@ -17,6 +17,13 @@ part 'card.style.dart';
 /// * [FCardStyle] for customizing a card's appearance.
 class FCard extends StatelessWidget {
   /// The style. Defaults to [FThemeData.cardStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create card
+  /// ```
   final FCardStyle? style;
 
   /// The child.

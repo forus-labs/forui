@@ -27,6 +27,13 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 /// Returns a `Future` that resolves to the value (if any) that was passed to [Navigator.pop] when the modal sheet was
 /// closed.
 ///
+/// ## CLI
+/// To generate and customize this widget's style:
+///
+/// ```shell
+/// dart run forui style create sheet
+/// ```
+///
 /// See:
 /// * https://forui.dev/docs/overlay/sheet for working examples.
 /// * [showFPersistentSheet] for displaying a sheet above the current widget.

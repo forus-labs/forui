@@ -60,6 +60,13 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final FSelectController<T>? controller;
 
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select
+  /// ```
   final FSelectStyle? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}

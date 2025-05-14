@@ -52,6 +52,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   final ScrollPhysics physics;
 
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select-menu-tile
+  /// ```
   final FSelectMenuTileStyle? style;
 
   /// The divider between select tiles. Defaults to [FTileDivider.indented].

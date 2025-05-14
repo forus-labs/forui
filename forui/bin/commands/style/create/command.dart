@@ -86,7 +86,7 @@ class StyleCreateCommand extends ForuiCommand {
           ..writeln('Did you mean one of these?');
 
         for (final (suggestion, _) in suggestions) {
-          stdout.writeln('  ${registry[suggestion]!.type}');
+          stdout.writeln('  $suggestion');
         }
       }
 

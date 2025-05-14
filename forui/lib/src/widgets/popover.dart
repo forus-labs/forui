@@ -92,6 +92,13 @@ class FPopover extends StatefulWidget {
   final FPopoverController? controller;
 
   /// The popover's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create popover
+  /// ```
   final FPopoverStyle? style;
 
   /// The constraints.

@@ -119,6 +119,13 @@ abstract class FTimeField extends StatefulWidget {
   final FTimeFieldController? controller;
 
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create time-field
+  /// ```
   final FTimeFieldStyle? style;
 
   /// The initial time.

@@ -33,114 +33,373 @@ final class FThemeData with Diagnosticable, FTransformable {
   final FStyle style;
 
   /// The accordion style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create accordion
+  /// ```
   final FAccordionStyle accordionStyle;
 
   /// The alert styles.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create alerts
+  /// ```
   final FAlertStyles alertStyles;
 
   /// The avatar style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create avatar
+  /// ```
   final FAvatarStyle avatarStyle;
 
   /// The badge styles.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create badges
+  /// ```
   final FBadgeStyles badgeStyles;
 
   /// The bottom navigation bar style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create bottom-navigation-bar
+  /// ```
   final FBottomNavigationBarStyle bottomNavigationBarStyle;
 
   /// The breadcrumb style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create breadcrumb
+  /// ```
   final FBreadcrumbStyle breadcrumbStyle;
 
   /// The button styles.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create buttons
+  /// ```
   final FButtonStyles buttonStyles;
 
   /// The calendar style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create calendar
+  /// ```
   final FCalendarStyle calendarStyle;
 
   /// The card style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create card
+  /// ```
   final FCardStyle cardStyle;
 
   /// The checkbox style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create checkbox
+  /// ```
   final FCheckboxStyle checkboxStyle;
 
   /// The date picker style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create date-field
+  /// ```
   final FDateFieldStyle dateFieldStyle;
 
   /// The dialog style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create dialog
+  /// ```
   final FDialogStyle dialogStyle;
 
   /// The divider styles.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create dividers
+  /// ```
   final FDividerStyles dividerStyles;
 
   /// The header styles.
-  final FHeaderStyles headerStyle;
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create headers
+  /// ```
+  final FHeaderStyles headerStyles;
 
   /// The label styles.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create labels
+  /// ```
   final FLabelStyles labelStyles;
 
   /// The line calendar style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create line-calendar
+  /// ```
   final FLineCalendarStyle lineCalendarStyle;
 
   /// The pagination style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create pagination
+  /// ```
   final FPaginationStyle paginationStyle;
 
   /// The picker's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create picker
+  /// ```
   final FPickerStyle pickerStyle;
 
   /// The popover's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create popover
+  /// ```
   final FPopoverStyle popoverStyle;
 
   /// The popover menu's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create popover-menu
+  /// ```
   final FPopoverMenuStyle popoverMenuStyle;
 
   /// The progress styles.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create progresses
+  /// ```
   final FProgressStyles progressStyles;
 
   /// The radio style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create radio
+  /// ```
   final FRadioStyle radioStyle;
 
   /// The resizable style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create resizable
+  /// ```
   final FResizableStyle resizableStyle;
 
   /// The scaffold style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create scaffold
+  /// ```
   final FScaffoldStyle scaffoldStyle;
 
   /// The select style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select
+  /// ```
   final FSelectStyle selectStyle;
 
   /// The select group style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select-group
+  /// ```
   final FSelectGroupStyle selectGroupStyle;
 
   /// The select menu tile style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select-menu-tile
+  /// ```
   final FSelectMenuTileStyle selectMenuTileStyle;
 
   /// The sheet style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create sheet
+  /// ```
   final FSheetStyle sheetStyle;
 
   /// The slider styles.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create sliders
+  /// ```
   final FSliderStyles sliderStyles;
 
   /// The switch style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create switch
+  /// ```
   final FSwitchStyle switchStyle;
 
   /// The tabs styles.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tabs
+  /// ```
   final FTabsStyle tabsStyle;
 
   /// The tappable style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tappable
+  /// ```
   final FTappableStyle tappableStyle;
 
   /// The text field style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create text-field
+  /// ```
   final FTextFieldStyle textFieldStyle;
 
   /// The tile group's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tile-group
+  /// ```
   final FTileGroupStyle tileGroupStyle;
 
   /// The time field's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create time-field
+  /// ```
   final FTimeFieldStyle timeFieldStyle;
 
   /// The time picker style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create time-picker
+  /// ```
   final FTimePickerStyle timePickerStyle;
 
   /// The tooltip style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tooltip
+  /// ```
   final FTooltipStyle tooltipStyle;
 
   /// Creates a [FThemeData] that configures the widget styles using the given properties if not given.
@@ -163,7 +422,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FDateFieldStyle? dateFieldStyle,
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
-    FHeaderStyles? headerStyle,
+    FHeaderStyles? headerStyles,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
     FPaginationStyle? paginationStyle,
@@ -212,7 +471,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, typography: typography, style: style),
       dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
-      headerStyle: headerStyle ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
+      headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
       lineCalendarStyle:
           lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
@@ -264,7 +523,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.dateFieldStyle,
     required this.dialogStyle,
     required this.dividerStyles,
-    required this.headerStyle,
+    required this.headerStyles,
     required this.labelStyles,
     required this.lineCalendarStyle,
     required this.paginationStyle,
@@ -693,7 +952,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FDateFieldStyle? dateFieldStyle,
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
-    FHeaderStyles? headerStyle,
+    FHeaderStyles? headerStyles,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
     FPaginationStyle? paginationStyle,
@@ -733,7 +992,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     dateFieldStyle: dateFieldStyle ?? this.dateFieldStyle,
     dialogStyle: dialogStyle ?? this.dialogStyle,
     dividerStyles: dividerStyles ?? this.dividerStyles,
-    headerStyle: headerStyle ?? this.headerStyle,
+    headerStyles: headerStyles ?? this.headerStyles,
     labelStyles: labelStyles ?? this.labelStyles,
     lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
     paginationStyle: paginationStyle ?? this.paginationStyle,
@@ -780,7 +1039,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('dateFieldStyle', dateFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('headerStyle', headerStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('headerStyles', headerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('paginationStyle', paginationStyle, level: DiagnosticLevel.debug))
@@ -828,7 +1087,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           dateFieldStyle == other.dateFieldStyle &&
           dialogStyle == other.dialogStyle &&
           dividerStyles == other.dividerStyles &&
-          headerStyle == other.headerStyle &&
+          headerStyles == other.headerStyles &&
           labelStyles == other.labelStyles &&
           lineCalendarStyle == other.lineCalendarStyle &&
           paginationStyle == other.paginationStyle &&
@@ -872,7 +1131,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       dateFieldStyle.hashCode ^
       dialogStyle.hashCode ^
       dividerStyles.hashCode ^
-      headerStyle.hashCode ^
+      headerStyles.hashCode ^
       labelStyles.hashCode ^
       lineCalendarStyle.hashCode ^
       paginationStyle.hashCode ^

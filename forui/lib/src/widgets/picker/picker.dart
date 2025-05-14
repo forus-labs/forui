@@ -80,6 +80,13 @@ class FPicker extends StatefulWidget {
   final FPickerController? controller;
 
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create picker
+  /// ```
   final FPickerStyle? style;
 
   /// Handler called when the picker indexes change.

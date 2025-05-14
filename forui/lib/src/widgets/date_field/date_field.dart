@@ -138,6 +138,13 @@ abstract class FDateField extends StatefulWidget {
   final FDateFieldController? controller;
 
   /// The style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create date-field
+  /// ```
   final FDateFieldStyle? style;
 
   /// The initial date.

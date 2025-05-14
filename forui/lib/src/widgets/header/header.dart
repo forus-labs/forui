@@ -28,11 +28,25 @@ sealed class FHeader extends StatelessWidget {
   /// Creates a header which title is aligned to the start.
   ///
   /// It is typically used on pages at the root of the navigation stack.
+  ///
+  /// ## CLI
+  /// To generate and customize this widget's style:
+  ///
+  /// ```shell
+  /// dart run forui style create headers
+  /// ```
   const factory FHeader({Widget title, FHeaderStyle? style, List<Widget> suffixes, Key? key}) = _FRootHeader;
 
   /// Creates a nested header which title is aligned to the center.
   ///
   /// It is typically used on pages NOT at the root of the navigation stack.
+  ///
+  /// ## CLI
+  /// To generate and customize this widget's style:
+  ///
+  /// ```shell
+  /// dart run forui style create headers
+  /// ```
   const factory FHeader.nested({
     Widget title,
     AlignmentGeometry titleAlignment,

@@ -28,6 +28,13 @@ class FResizable extends StatefulWidget {
   final FResizableController? controller;
 
   /// The resizable' style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create resizable
+  /// ```
   final FResizableStyle? style;
 
   /// The main axis along which the [children] can be resized.
