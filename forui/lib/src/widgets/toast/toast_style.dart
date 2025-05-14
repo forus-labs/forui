@@ -21,21 +21,29 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   @override
   final int maxStackedEntries;
 
-  /// The entry animation duration. Defaults to 150ms.
+  /// The toast's general animation duration. Defaults to 500ms.
   @override
   final Duration animationDuration;
 
-  /// The expanding/collapsing animation duration. Defaults to 500ms.
+  /// The toast's general animation curve. Defaults to [Curves.easeOutCubic].
   @override
-  final Duration expandingDuration;
+  final Curve animationCurve;
+
+  /// The dismiss animation duration. Defaults to 150ms.
+  @override
+  final Duration dismissDuration;
+
+  /// The dismiss curve. Defaults to [Curves.linear].
+  @override
+  final Curve dismissCurve;
 
   /// The expanding/collapsing animation duration. Defaults to 500ms.
   @override
-  final Curve expandingCurve;
+  final Duration expandDuration;
 
-  /// The duration the toast is shown. Defaults to 5 seconds.
+  /// The expanding/collapsing animation duration. Defaults to 500ms.
   @override
-  final Duration showDuration;
+  final Curve expandCurve;
 
   /// The spacing between each toast when it is expanded. Defaults to 8.0.
   @override
@@ -75,10 +83,12 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     required this.decoration,
     required this.contentStyle,
     this.maxStackedEntries = 3,
-    this.animationDuration = const Duration(milliseconds: 150),
-    this.expandingDuration = const Duration(milliseconds: 500),
-    this.showDuration = const Duration(seconds: 5),
-    this.expandingCurve = Curves.easeOutCubic,
+    this.animationDuration = const Duration(milliseconds: 500),
+    this.animationCurve = Curves.easeOutCubic,
+    this.dismissDuration = const Duration(milliseconds: 150),
+    this.dismissCurve = Curves.linear,
+    this.expandDuration = const Duration(milliseconds: 500),
+    this.expandCurve = Curves.easeOutCubic,
     this.spacing = 8.0,
     this.collapsedScale = 0.9,
     this.collapsedOpacity = 1,

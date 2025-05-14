@@ -61,8 +61,6 @@ ToastOverlay showToast({
   FToastStyle? style,
   ToastLocation location = ToastLocation.bottomRight,
   bool dismissible = true,
-  Curve curve = Curves.easeOutCubic,
-  Duration entryDuration = const Duration(milliseconds: 500),
   VoidCallback? onClosed,
   Duration showDuration = const Duration(seconds: 5),
 }) {
@@ -73,8 +71,6 @@ ToastOverlay showToast({
     builder: builder,
     location: location,
     dismissible: dismissible,
-    curve: curve,
-    duration: entryDuration,
     style: style ?? data.style,
     onClosed: onClosed,
     showDuration: showDuration,
@@ -87,20 +83,16 @@ class ToastEntry {
   final Widget Function(BuildContext context, ToastOverlay overlay) builder;
   final ToastLocation location;
   final bool dismissible;
-  final Curve curve;
-  final Duration duration;
   final FToastStyle? style;
   final VoidCallback? onClosed;
-  final Duration? showDuration;
+  final Duration showDuration;
 
   ToastEntry({
     required this.builder,
     required this.location,
     required this.style,
-    required this.duration,
     required this.showDuration,
-    this.dismissible = true,
-    this.curve = Curves.bounceIn,
+    required this.dismissible,
     this.onClosed,
   });
 }
@@ -230,16 +222,14 @@ class FToastLayerState extends State<FToastLayer> {
               entry: entry.entry,
               expanded: data.expanding || style.expandMode == ExpandMode.alwaysExpanded,
               dismissible: entry.entry.dismissible,
-              previousAlignment: location.collapsedAlignment,
-              curve: entry.entry.curve,
-              duration: entry.entry.duration,
+              behindAlignment: location.collapsedAlignment,
               closing: entry._isClosing,
               style: style,
               onClosed: () {
                 removeEntry(entry.entry);
                 entry.entry.onClosed?.call();
               },
-              entryAlignment: entryAlignment,
+              alignment: entryAlignment,
               index: toastIndex,
               onClosing: entry.close,
               child: ConstrainedBox(constraints: style.toastConstraints, child: entry.entry.builder(context, entry)),
@@ -323,13 +313,11 @@ class ToastEntryLayout extends StatefulWidget {
   final ToastEntry entry;
   final bool expanded;
   final bool dismissible;
-  final Alignment previousAlignment;
-  final Curve curve;
-  final Duration duration;
+  final Alignment behindAlignment;
   final FToastStyle style;
   final ValueListenable<bool> closing;
   final Widget child;
-  final Alignment entryAlignment;
+  final Alignment alignment;
   final int index;
   final VoidCallback onClosing;
   final VoidCallback onClosed;
@@ -340,13 +328,11 @@ class ToastEntryLayout extends StatefulWidget {
     required this.closing,
     required this.onClosed,
     required this.child,
-    required this.entryAlignment,
+    required this.alignment,
     required this.index,
     required this.onClosing,
-    required this.duration,
     required this.style,
-    required this.curve,
-    required this.previousAlignment,
+    required this.behindAlignment,
     this.dismissible = true,
     super.key,
   });
@@ -361,12 +347,10 @@ class ToastEntryLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('entry', entry))
       ..add(FlagProperty('expanded', value: expanded, ifTrue: 'expanded'))
       ..add(FlagProperty('dismissible', value: dismissible, ifTrue: 'dismissible'))
-      ..add(DiagnosticsProperty('previousAlignment', previousAlignment))
-      ..add(DiagnosticsProperty('curve', curve))
-      ..add(DiagnosticsProperty('duration', duration))
+      ..add(DiagnosticsProperty('behindAlignment', behindAlignment))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('closing', closing))
-      ..add(DiagnosticsProperty('entryAlignment', entryAlignment))
+      ..add(DiagnosticsProperty('alignment', alignment))
       ..add(DiagnosticsProperty('index', index))
       ..add(DiagnosticsProperty('onClosing', onClosing))
       ..add(DiagnosticsProperty('onClosed', onClosed));
@@ -388,12 +372,10 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
   }
 
   void _startClosingTimer() {
-    if (widget.entry.showDuration != null) {
-      _closingTimer?.cancel();
-      _closingTimer = Timer(widget.entry.showDuration!, () {
-        widget.onClosing.call();
-      });
-    }
+    _closingTimer?.cancel();
+    _closingTimer = Timer(widget.entry.showDuration, () {
+      widget.onClosing.call();
+    });
   }
 
   @override
@@ -443,34 +425,31 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
         builder:
             (_, _) => TweenAnimationBuilder(
               tween: Tween(end: widget.closing.value ? 0.0 : (_targetDismissProgress ?? _dismissProgress)),
-              duration: _dismissing ? Duration.zero : widget.style.animationDuration,
+              curve: widget.style.dismissCurve,
+              duration: _dismissing ? Duration.zero : widget.style.dismissDuration,
               onEnd: _targetDismissProgress == null ? null : widget.onClosed,
               builder:
                   (_, dismissProgress, _) => TweenAnimationBuilder(
                     tween: Tween(end: widget.index.toDouble()),
-                    curve: widget.curve,
-                    duration: widget.duration,
+                    curve: widget.style.animationCurve,
+                    duration: widget.style.animationDuration,
                     builder:
                         (_, indexProgress, _) => TweenAnimationBuilder(
                           tween: Tween(
                             begin: widget.index > 0 ? 1.0 : 0.0,
                             end: widget.closing.value && !_dismissing ? 0.0 : 1.0,
                           ),
-                          curve: widget.curve,
-                          duration: widget.duration,
+                          curve: widget.style.animationCurve,
+                          duration: widget.style.animationDuration,
                           onEnd: widget.closing.value ? widget.onClosed : null,
                           builder:
                               (_, entranceExitProgress, _) => TweenAnimationBuilder(
                                 tween: Tween(end: widget.expanded ? 1.0 : 0.0),
-                                curve: widget.style.expandingCurve,
-                                duration: widget.style.expandingDuration,
+                                curve: widget.style.expandCurve,
+                                duration: widget.style.expandDuration,
                                 builder:
-                                    (_, expandingProgress, _) => _toast(
-                                      expandingProgress,
-                                      entranceExitProgress,
-                                      indexProgress,
-                                      dismissProgress,
-                                    ),
+                                    (_, expandingProgress, _) =>
+                                        _toast(expandingProgress, entranceExitProgress, indexProgress, dismissProgress),
                               ),
                         ),
                   ),
@@ -481,10 +460,8 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
 
   Widget _toast(double expand, double transition, double index, double dismiss) {
     final collapsedProgress = (1.0 - expand) * transition;
-    final entryAlignment = widget.entryAlignment;
-    final behindTransform = Offset(widget.previousAlignment.x, widget.previousAlignment.y);
-
-    print(entryAlignment);
+    final alignment = widget.alignment;
+    final behindTransform = Offset(widget.behindAlignment.x, widget.behindAlignment.y);
 
     // Shift up/down when behind another toast
     var offset = widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapsedProgress * index;
@@ -493,7 +470,7 @@ class _ToastEntryLayoutState extends State<ToastEntryLayout> {
     // Add spacing when expanded
     offset += behindTransform * widget.style.spacing * expand * index;
 
-    var fractional = Offset(entryAlignment.x, entryAlignment.y) * (1.0 - transition);
+    var fractional = Offset(alignment.x, alignment.y) * (1.0 - transition);
     // Add dismiss offset
     fractional += Offset(dismiss, 0);
     // Shift up/down when behind another toast & expanded
