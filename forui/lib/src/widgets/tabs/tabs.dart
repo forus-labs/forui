@@ -72,6 +72,9 @@ class FTabs extends StatefulWidget {
   /// Handler for when a tab is changed.
   final ValueChanged<int>? onChange;
 
+  /// Triggered when the tab is clicked
+  final ValueChanged<int>? onTap;
+
   /// The tabs.
   final List<FTabEntry> children;
 
@@ -90,6 +93,7 @@ class FTabs extends StatefulWidget {
     this.controller,
     this.style,
     this.onChange,
+    this.onTap,
     super.key,
   }) : assert(children.isNotEmpty, 'Must have at least 1 tab provided.'),
        assert(0 <= initialIndex && initialIndex < children.length, 'initialIndex must be within the range of tabs.'),
@@ -110,6 +114,7 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('physics', physics))
       ..add(ObjectFlagProperty.has('onPress', onChange))
       ..add(IterableProperty('children', children));
+      ..add(ObjectFlagProperty.has('onTap', onTap));
   }
 
   @override
@@ -176,6 +181,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               dividerColor: Colors.transparent,
               labelStyle: style.selectedLabelTextStyle,
               unselectedLabelStyle: style.unselectedLabelTextStyle,
+              onTap: widget.onTap,
             ),
           ),
           SizedBox(height: style.spacing),
