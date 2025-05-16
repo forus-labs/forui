@@ -28,10 +28,10 @@ class Toast extends StatefulWidget {
 
 class _ToastState extends State<Toast> with TickerProviderStateMixin {
   late final AnimationController _transitionController;
-  late final AnimationController _indexController;
-  late Tween<double> _indexTween;
+  late final AnimationController _indexTransitionController;
+  late Tween<double> _indexTransitionTween;
   late Animation<double> _transition;
-  late Animation<double> _index;
+  late Animation<double> _indexTransition;
 
   @override
   void initState() {
@@ -41,10 +41,12 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     _transition = _transitionController.drive(CurveTween(curve: widget.style.transitionCurve));
     _transitionController.forward();
 
-    _indexController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
-    _indexController.addListener(() => setState(() {}));
-    _indexTween = Tween(begin: widget.index.toDouble(), end: widget.index.toDouble());
-    _index = _indexTween.animate(CurvedAnimation(parent: _indexController, curve: widget.style.transitionCurve));
+    _indexTransitionController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
+    _indexTransitionController.addListener(() => setState(() {}));
+    _indexTransitionTween = Tween(begin: widget.index.toDouble(), end: widget.index.toDouble());
+    _indexTransition = _indexTransitionTween.animate(
+      CurvedAnimation(parent: _indexTransitionController, curve: widget.style.transitionCurve),
+    );
   }
 
   @override
@@ -54,13 +56,16 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
       _transitionController.duration = widget.style.transitionDuration;
       _transition = _transitionController.drive(CurveTween(curve: widget.style.transitionCurve));
 
-      _indexController.duration = widget.style.transitionDuration;
+      _indexTransitionController.duration = widget.style.transitionDuration;
     }
 
     if (widget.index != old.index) {
-      _indexTween = Tween(begin: _index.value, end: widget.index.toDouble());
-      _index = _indexTween.animate(CurvedAnimation(parent: _indexController, curve: widget.style.transitionCurve));
-      _indexController
+      _indexTransitionTween = Tween(begin: _indexTransition.value, end: widget.index.toDouble());
+      _indexTransition = _indexTransitionTween.animate(
+        CurvedAnimation(parent: _indexTransitionController, curve: widget.style.transitionCurve),
+      );
+
+      _indexTransitionController
         ..reset()
         ..forward();
     }
@@ -68,42 +73,43 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _indexController.dispose();
+    _indexTransitionController.dispose();
     _transitionController.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => _toast(_index.value);
-
-  Widget _toast(double index) {
+  Widget build(BuildContext context) {
+    final behindTransform = widget.behindTransform;
+    final indexTransition = _indexTransition.value;
+    final previousIndex = _indexTransitionTween.begin!;
     final collapse = (1.0 - widget.expand) * _transition.value;
 
     // Shift up/down when behind another toast
-    var offset =
-        widget.style.collapsedOffset.scale(widget.behindTransform.dx, widget.behindTransform.dy) * collapse * index;
+    final collapsedOffset = widget.style.collapsedOffset;
+    var offset = collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapse * indexTransition;
     // // Shift up/down when expanding/collapsing
     // offset = behindTransform * 16 * widget.expand;
     // // Add spacing when expanded
     // offset += behindTransform * widget.style.spacing * widget.expand * index;
 
     // Slide in
-    var fractional = -widget.behindTransform * (1.0 - _transition.value);
+    var fractional = -behindTransform * (1.0 - _transition.value);
     // Add dismiss offset
     // fractional += Offset(dismiss, 0);
     // // Shift up/down when behinddfix another toast & expanded
     fractional +=
-        widget.behindTransform * widget.expand * index; // TODO: Using different sized children will break this.
+        behindTransform * widget.expand * indexTransition; // TODO: Using different sized children will break this.
 
     var opacity = widget.style.transitionOpacity + (1.0 - widget.style.transitionOpacity) * _transition.value;
     // Fade out the toast behind
-    opacity *= pow(widget.style.collapsedOpacity, index * collapse);
+    opacity *= pow(widget.style.collapsedOpacity, indexTransition * collapse);
     // Fade out the toast when dismissing
     // opacity *= 1 - dismiss.abs();
 
     return Animated(
-      index: index - _indexTween.begin!,
-      previous: _indexTween.begin!,
+      indexTransition: indexTransition - previousIndex,
+      previousIndex: previousIndex,
       child: Transform.translate(
         offset: offset,
         child: FractionalTranslation(translation: fractional, child: Opacity(opacity: opacity, child: widget.child)),

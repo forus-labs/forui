@@ -6,11 +6,12 @@ import 'package:meta/meta.dart';
 @internal
 class Animated extends ParentDataWidget<AnimatedToasterParentData> {
   /// The animation progress for shifting a toast whenever another toast is inserted or removed.
-  final double index;
+  final double indexTransition;
 
-  final double previous;
+  /// The previous index of the toast in the toaster.
+  final double previousIndex;
 
-  const Animated({required this.index, required this.previous, required super.child, super.key});
+  const Animated({required this.indexTransition, required this.previousIndex, required super.child, super.key});
 
   @override
   void applyParentData(RenderObject renderObject) {
@@ -22,13 +23,13 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
     final data = renderObject.parentData! as AnimatedToasterParentData;
     var needsLayout = false;
 
-    if (data.index != index) {
-      data.index = index;
+    if (data.indexTransition != indexTransition) {
+      data.indexTransition = indexTransition;
       needsLayout = true;
     }
 
-    if (data.previous != previous) {
-      data.previous = previous;
+    if (data.previousIndex != previousIndex) {
+      data.previousIndex = previousIndex;
       needsLayout = true;
     }
 
@@ -43,18 +44,16 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('shift', index));
+    properties.add(DoubleProperty('shift', indexTransition));
   }
 }
 
 /// Parent data for use with [RenderAnimatedToaster].
 @internal
 class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
-  /// The origin.
-  Offset shiftOrigin = Offset.zero;
+  /// The animation progress for transitioning from one index to another.
+  double indexTransition = 0;
 
-  double previous = 0;
-
-  /// The animation progress for shifting a toast whenever another toast is inserted or removed.
-  double index = 0;
+  /// The previous index of the toast in the toaster.
+  double previousIndex = 0;
 }
