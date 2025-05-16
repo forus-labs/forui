@@ -8,19 +8,23 @@ import 'package:meta/meta.dart';
 
 @internal
 class AnimatedToaster extends MultiChildRenderObjectWidget {
-  final Offset behindTransform;
+  /// A unit vector indicating how a toast should be aligned to the toast in front of it.
+  ///
+  /// For example, `Offset(0, -1)` indicates that the top-center of this toast should be aligned to the top-center of
+  /// the toast in front of it.
+  final Offset alignmentVector;
   final double expand;
 
-  const AnimatedToaster({required this.behindTransform, required this.expand, super.children, super.key});
+  const AnimatedToaster({required this.alignmentVector, required this.expand, super.children, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      RenderAnimatedToaster(shiftTransform: behindTransform, expand: expand);
+      RenderAnimatedToaster(shiftTransform: alignmentVector, expand: expand);
 
   @override
   void updateRenderObject(BuildContext context, covariant RenderAnimatedToaster renderObject) =>
       renderObject
-        ..behindTransform = behindTransform
+        ..behindTransform = alignmentVector
         ..expand = expand;
 }
 
@@ -67,8 +71,8 @@ class RenderAnimatedToaster extends RenderBox
 
     // We assume the toast's size at the forefront is the target. The front toast's size may be different from the
     // current front toast's size.
-    final target = lastChild!.size;
-    final previousTarget = childCount >= 2 ? childBefore(lastChild!)!.size : target;
+    final front = lastChild!.size;
+    final previousFront = childCount >= 2 ? childBefore(lastChild!)!.size : front;
 
     var current = firstChild;
     var distanceFromFront = childCount - 1;
@@ -80,13 +84,13 @@ class RenderAnimatedToaster extends RenderBox
       //
       // Calculate target sizes explicitly for each toast based on its distance from front rather than iteratively,
       // since toasts need to be painted in reverse order of their size reduction.
-      final targetWidth = target.width * pow(behindScale, distanceFromFront);
-      final targetHeight = target.height * pow(behindScale, distanceFromFront);
+      final targetWidth = front.width * pow(behindScale, distanceFromFront);
+      final targetHeight = front.height * pow(behindScale, distanceFromFront);
       distanceFromFront--;
 
       // Calculate base scaling factors from current size to target size.
-      final baseWidth = lerpDouble(previousTarget.width * pow(behindScale, data.previous), targetWidth, data.index)!;
-      final baseHeight = lerpDouble(previousTarget.height * pow(behindScale, data.previous), targetHeight, data.index)!;
+      final baseWidth = lerpDouble(previousFront.width * pow(behindScale, data.previous), targetWidth, data.index)!;
+      final baseHeight = lerpDouble(previousFront.height * pow(behindScale, data.previous), targetHeight, data.index)!;
 
       final baseScaleX = baseWidth / current.size.width;
       final baseScaleY = baseHeight / current.size.height;
@@ -97,9 +101,19 @@ class RenderAnimatedToaster extends RenderBox
       final scaleX = lerpDouble(baseScaleX, 1.0, expand)!;
       final scaleY = lerpDouble(baseScaleY, 1.0, expand)!;
 
+      // Calculate the reference points (point of alignment).
+      // This is a simplified implementation that assumes toasts are vertically stacked either on top or below another
+      // toast and never purely horizontal.
+      final frontReferenceX = front.width * (0.5 + behindTransform.dx * 0.5);
+      final frontReferenceY = behindTransform.dy < 0 ? 0.0 : front.height;
+      final thisReferenceX = (current.size.width * scaleX) * (0.5 + behindTransform.dx * 0.5);
+      final thisReferenceY = behindTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
+
+      final translation = Offset(frontReferenceX - thisReferenceX, frontReferenceY - thisReferenceY);
+
       context.pushTransform(
         needsCompositing,
-        data.offset + offset,
+        data.offset + offset + translation,
         Matrix4.diagonal3Values(scaleX, scaleY, 1.0),
         (context, offset) => context.paintChild(current!, offset),
       );

@@ -9,14 +9,14 @@ import 'package:meta/meta.dart';
 class Toast extends StatefulWidget {
   final FToastStyle style;
   final int index;
-  final Alignment behindAlignment;
+  final Offset behindTransform;
   final double expand;
   final Widget child;
 
   const Toast({
     required this.style,
     required this.index,
-    this.behindAlignment = Alignment.topCenter,
+    required this.behindTransform,
     required this.expand,
     required this.child,
     super.key,
@@ -60,7 +60,9 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     if (widget.index != old.index) {
       _indexTween = Tween(begin: _index.value, end: widget.index.toDouble());
       _index = _indexTween.animate(CurvedAnimation(parent: _indexController, curve: widget.style.transitionCurve));
-      _indexController..reset()..forward();
+      _indexController
+        ..reset()
+        ..forward();
     }
   }
 
@@ -76,21 +78,22 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
   Widget _toast(double index) {
     final collapse = (1.0 - widget.expand) * _transition.value;
-    final behindTransform = Offset(widget.behindAlignment.x, widget.behindAlignment.y);
 
     // Shift up/down when behind another toast
-    var offset = widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapse * index;
+    var offset =
+        widget.style.collapsedOffset.scale(widget.behindTransform.dx, widget.behindTransform.dy) * collapse * index;
     // // Shift up/down when expanding/collapsing
     // offset = behindTransform * 16 * widget.expand;
     // // Add spacing when expanded
     // offset += behindTransform * widget.style.spacing * widget.expand * index;
 
     // Slide in
-    var fractional = -behindTransform * (1.0 - _transition.value);
+    var fractional = -widget.behindTransform * (1.0 - _transition.value);
     // Add dismiss offset
     // fractional += Offset(dismiss, 0);
     // // Shift up/down when behinddfix another toast & expanded
-    fractional += behindTransform * widget.expand * index; // TODO: Using different sized children will break this.
+    fractional +=
+        widget.behindTransform * widget.expand * index; // TODO: Using different sized children will break this.
 
     var opacity = widget.style.transitionOpacity + (1.0 - widget.style.transitionOpacity) * _transition.value;
     // Fade out the toast behind

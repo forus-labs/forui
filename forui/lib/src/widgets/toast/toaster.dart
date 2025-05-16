@@ -238,7 +238,7 @@ class FToastLayerState extends State<FToastLayer> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Toaster(
-                      shiftTransform: Offset(Alignment.bottomCenter.x, Alignment.bottomCenter.y),
+                      shiftTransform: Offset(Alignment.topCenter.x, Alignment.topCenter.y),
                       style: style,
                       children: positioned,
                     ),
