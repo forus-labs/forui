@@ -87,7 +87,8 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
     // Shift up/down when behind another toast
     final collapsedOffset = widget.style.collapsedOffset;
-    var offset = collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapse * indexTransition;
+    var offset = Offset.zero;
+
     // // Shift up/down when expanding/collapsing
     // offset = behindTransform * 16 * widget.expand;
     // // Add spacing when expanded
@@ -108,6 +109,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     // opacity *= 1 - dismiss.abs();
 
     return Animated(
+      transition: _transition.value,
       indexTransition: indexTransition - previousIndex,
       previousIndex: previousIndex,
       child: Transform.translate(

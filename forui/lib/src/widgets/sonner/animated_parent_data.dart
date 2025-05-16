@@ -5,13 +5,21 @@ import 'package:meta/meta.dart';
 
 @internal
 class Animated extends ParentDataWidget<AnimatedToasterParentData> {
+  final double transition;
+
   /// The animation progress for shifting a toast whenever another toast is inserted or removed.
   final double indexTransition;
 
   /// The previous index of the toast in the toaster.
   final double previousIndex;
 
-  const Animated({required this.indexTransition, required this.previousIndex, required super.child, super.key});
+  const Animated({
+    required this.transition,
+    required this.indexTransition,
+    required this.previousIndex,
+    required super.child,
+    super.key,
+  });
 
   @override
   void applyParentData(RenderObject renderObject) {
@@ -22,6 +30,11 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
 
     final data = renderObject.parentData! as AnimatedToasterParentData;
     var needsLayout = false;
+
+    if (data.transition != transition) {
+      data.transition = transition;
+      needsLayout = true;
+    }
 
     if (data.indexTransition != indexTransition) {
       data.indexTransition = indexTransition;
@@ -51,6 +64,9 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
 /// Parent data for use with [RenderAnimatedToaster].
 @internal
 class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
+  /// The animation progress for shifting a toast whenever another toast is inserted or removed.
+  double transition = 0;
+
   /// The animation progress for transitioning from one index to another.
   double indexTransition = 0;
 

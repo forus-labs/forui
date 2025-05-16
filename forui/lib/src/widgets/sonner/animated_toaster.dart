@@ -12,19 +12,19 @@ class AnimatedToaster extends MultiChildRenderObjectWidget {
   ///
   /// For example, `Offset(0, -1)` indicates that the top-center of this toast should be aligned to the top-center of
   /// the toast in front of it.
-  final Offset alignmentVector;
+  final Offset behindTransform;
   final double expand;
 
-  const AnimatedToaster({required this.alignmentVector, required this.expand, super.children, super.key});
+  const AnimatedToaster({required this.behindTransform, required this.expand, super.children, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      RenderAnimatedToaster(shiftTransform: alignmentVector, expand: expand);
+      RenderAnimatedToaster(shiftTransform: behindTransform, expand: expand);
 
   @override
   void updateRenderObject(BuildContext context, covariant RenderAnimatedToaster renderObject) =>
       renderObject
-        ..behindTransform = alignmentVector
+        ..behindTransform = behindTransform
         ..expand = expand;
 }
 
@@ -62,6 +62,9 @@ class RenderAnimatedToaster extends RenderBox
 
   // TODO: Fetch from style.
   static const behindScale = 0.9;
+
+  // TODO: Fetch from style.
+  static const behindSpacing = 12;
 
   @override
   void paint(PaintingContext context, Offset offset) {
@@ -102,6 +105,8 @@ class RenderAnimatedToaster extends RenderBox
       final scaleX = lerpDouble(baseScaleX, 1.0, expand)!;
       final scaleY = lerpDouble(baseScaleY, 1.0, expand)!;
 
+      // The following section is responsible for translating the toast to the correct position.
+
       // Calculate the reference points (point of alignment).
       // This is a simplified implementation that assumes toasts are vertically stacked either on top or below another
       // toast and never purely horizontal.
@@ -110,11 +115,16 @@ class RenderAnimatedToaster extends RenderBox
       final thisReferenceX = (current.size.width * scaleX) * (0.5 + behindTransform.dx * 0.5);
       final thisReferenceY = behindTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
 
-      final translation = Offset(frontReferenceX - thisReferenceX, frontReferenceY - thisReferenceY);
+      final alignment = Offset(frontReferenceX - thisReferenceX, frontReferenceY - thisReferenceY);
+
+      // Calculate the amount to shift the toast such that it protrudes slightly above the toast in front.
+      final protrudeStart = behindSpacing * (log(data.previousIndex + 1) / log(2));
+      final protrudeEnd = behindSpacing * (log(data.previousIndex + 2) / log(2));
+      final protrude = behindTransform * lerpDouble(protrudeStart, protrudeEnd, data.indexTransition)! * (1 - expand);
 
       context.pushTransform(
         needsCompositing,
-        data.offset + offset + translation,
+        data.offset + offset + alignment + protrude,
         Matrix4.diagonal3Values(scaleX, scaleY, 1.0),
         (context, offset) => context.paintChild(current!, offset),
       );

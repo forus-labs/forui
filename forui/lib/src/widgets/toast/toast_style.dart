@@ -82,7 +82,7 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   FToastStyle({
     required this.decoration,
     required this.contentStyle,
-    this.maxStackedEntries = 3,
+    this.maxStackedEntries = 5,
     this.transitionDuration = const Duration(milliseconds: 500),
     this.transitionCurve = Curves.easeOutCubic,
     this.dismissDuration = const Duration(milliseconds: 150),
