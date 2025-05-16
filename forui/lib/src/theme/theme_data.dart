@@ -312,6 +312,16 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// ```
   final FSheetStyle sheetStyle;
 
+  /// The sidebar style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create sidebar
+  /// ```
+  final FSidebarStyle sidebarStyle;
+
   /// The slider styles.
   ///
   /// ## CLI
@@ -437,6 +447,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FSelectGroupStyle? selectGroupStyle,
     FSelectMenuTileStyle? selectMenuTileStyle,
     FSheetStyle? sheetStyle,
+    FSidebarStyle? sidebarStyle,
     FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
@@ -491,6 +502,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       selectMenuTileStyle:
           selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(colors: colors, typography: typography, style: style),
       sheetStyle: sheetStyle ?? FSheetStyle.inherit(colors: colors),
+      sidebarStyle: sidebarStyle ?? FSidebarStyle.inherit(colors: colors, typography: typography, style: style),
       sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
       switchStyle: switchStyle ?? FSwitchStyle.inherit(colors: colors, style: style),
       tabsStyle: tabsStyle ?? FTabsStyle.inherit(colors: colors, typography: typography, style: style),
@@ -538,6 +550,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.selectGroupStyle,
     required this.selectMenuTileStyle,
     required this.sheetStyle,
+    required this.sidebarStyle,
     required this.sliderStyles,
     required this.switchStyle,
     required this.tabsStyle,
@@ -967,6 +980,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FSelectGroupStyle? selectGroupStyle,
     FSelectMenuTileStyle? selectMenuTileStyle,
     FSheetStyle? sheetStyle,
+    FSidebarStyle? sidebarStyle,
     FSliderStyles? sliderStyles,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
@@ -1007,6 +1021,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
     selectMenuTileStyle: selectMenuTileStyle ?? this.selectMenuTileStyle,
     sheetStyle: sheetStyle ?? this.sheetStyle,
+    sidebarStyle: sidebarStyle ?? this.sidebarStyle,
     sliderStyles: sliderStyles ?? this.sliderStyles,
     switchStyle: switchStyle ?? this.switchStyle,
     tabsStyle: tabsStyle ?? this.tabsStyle,
@@ -1055,6 +1070,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('selectMenuTileStyle', selectMenuTileStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sheetStyle', sheetStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('sidebarStyle', sidebarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tappableStyle', tappableStyle, level: DiagnosticLevel.debug))
@@ -1102,6 +1118,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           selectGroupStyle == other.selectGroupStyle &&
           selectMenuTileStyle == other.selectMenuTileStyle &&
           sheetStyle == other.sheetStyle &&
+          sidebarStyle == other.sidebarStyle &&
           sliderStyles == other.sliderStyles &&
           switchStyle == other.switchStyle &&
           tabsStyle == other.tabsStyle &&
@@ -1146,6 +1163,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       selectGroupStyle.hashCode ^
       selectMenuTileStyle.hashCode ^
       sheetStyle.hashCode ^
+      sidebarStyle.hashCode ^
       sliderStyles.hashCode ^
       switchStyle.hashCode ^
       tabsStyle.hashCode ^
