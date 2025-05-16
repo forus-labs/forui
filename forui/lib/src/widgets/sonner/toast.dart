@@ -32,6 +32,8 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
   late final AnimationController _shiftController;
   late final Animation<double> _shift;
 
+  late int _previous;
+
   @override
   void initState() {
     super.initState();
@@ -56,7 +58,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
       _transition = _transitionController.drive(CurveTween(curve: widget.style.expandCurve));
     }
 
-    if (widget.index != old.index && widget.index != 0) {
+    if (widget.index != old.index) {
       _shiftController..reset()..forward();
     }
   }
@@ -74,15 +76,18 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     final collapse = (1.0 - widget.expand) * _transition.value;
     final behindTransform = Offset(widget.behindAlignment.x, widget.behindAlignment.y);
 
-    var offset = behindTransform * 16 * widget.expand;
-    // Add spacing when expanded
-    offset += behindTransform * widget.style.spacing * widget.expand * index;
+    // Shift up/down when behind another toast
+    var offset = widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapse * index;
+    // // Shift up/down when expanding/collapsing
+    // offset = behindTransform * 16 * widget.expand;
+    // // Add spacing when expanded
+    // offset += behindTransform * widget.style.spacing * widget.expand * index;
 
     // Slide in
     var fractional = -behindTransform * (1.0 - _transition.value);
     // Add dismiss offset
     // fractional += Offset(dismiss, 0);
-    // // Shift up/down when behind another toast & expanded
+    // // Shift up/down when behinddfix another toast & expanded
     fractional += behindTransform * widget.expand * index; // TODO: Using different sized children will break this.
 
     var opacity = widget.style.transitionOpacity + (1.0 - widget.style.transitionOpacity) * _transition.value;
@@ -95,9 +100,9 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
     return Animated(
       shift: _shift.value,
-      child: FractionalTranslation(
-        translation: fractional,
-        child: Opacity(opacity: opacity, child: Transform.scale(scale: scale, child: widget.child)),
+      child: Transform.translate(
+        offset: offset,
+        child: FractionalTranslation(translation: fractional, child: Opacity(opacity: opacity, child: widget.child)),
       ),
     );
   }

@@ -21,10 +21,6 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
     var needsLayout = false;
 
     if (data.shift != shift) {
-      if (data.shift == 1) {
-        data.shiftOrigin = data.offset;
-      }
-
       data.shift = shift;
       needsLayout = true;
     }
