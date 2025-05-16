@@ -28,11 +28,10 @@ class Toast extends StatefulWidget {
 
 class _ToastState extends State<Toast> with TickerProviderStateMixin {
   late final AnimationController _transitionController;
-  late final Animation<double> _transition;
-  late final AnimationController _shiftController;
-  late final Animation<double> _shift;
-
-  late int _previous;
+  late final AnimationController _indexController;
+  late Tween<double> _indexTween;
+  late Animation<double> _transition;
+  late Animation<double> _index;
 
   @override
   void initState() {
@@ -42,35 +41,38 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     _transition = _transitionController.drive(CurveTween(curve: widget.style.transitionCurve));
     _transitionController.forward();
 
-    _shiftController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
-    _shiftController.addListener(() => setState(() {}));
-    _shift = _shiftController.drive(CurveTween(curve: widget.style.transitionCurve));
-    if (widget.index != 0) {
-      _shiftController.forward();
-    }
+    _indexController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
+    _indexController.addListener(() => setState(() {}));
+    _indexTween = Tween(begin: widget.index.toDouble(), end: widget.index.toDouble());
+    _index = _indexTween.animate(CurvedAnimation(parent: _indexController, curve: widget.style.transitionCurve));
   }
 
   @override
   void didUpdateWidget(Toast old) {
     super.didUpdateWidget(old);
     if (old.style != widget.style) {
-      _transitionController.duration = widget.style.expandDuration;
-      _transition = _transitionController.drive(CurveTween(curve: widget.style.expandCurve));
+      _transitionController.duration = widget.style.transitionDuration;
+      _transition = _transitionController.drive(CurveTween(curve: widget.style.transitionCurve));
+
+      _indexController.duration = widget.style.transitionDuration;
     }
 
     if (widget.index != old.index) {
-      _shiftController..reset()..forward();
+      _indexTween = Tween(begin: _index.value, end: widget.index.toDouble());
+      _index = _indexTween.animate(CurvedAnimation(parent: _indexController, curve: widget.style.transitionCurve));
+      _indexController..reset()..forward();
     }
   }
 
-  // TODO improve exit animation -> Needs to fade out more?
   @override
-  Widget build(BuildContext context) => TweenAnimationBuilder(
-    tween: Tween(end: widget.index.toDouble()),
-    curve: widget.style.transitionCurve,
-    duration: widget.style.transitionDuration,
-    builder: (_, index, _) => _toast(index),
-  );
+  void dispose() {
+    _indexController.dispose();
+    _transitionController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => _toast(_index.value);
 
   Widget _toast(double index) {
     final collapse = (1.0 - widget.expand) * _transition.value;
@@ -96,10 +98,9 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     // Fade out the toast when dismissing
     // opacity *= 1 - dismiss.abs();
 
-    final scale = 1.0 * pow(widget.style.collapsedScale, index * (1 - widget.expand));
-
     return Animated(
-      shift: _shift.value,
+      index: index - _indexTween.begin!,
+      previous: _indexTween.begin!,
       child: Transform.translate(
         offset: offset,
         child: FractionalTranslation(translation: fractional, child: Opacity(opacity: opacity, child: widget.child)),

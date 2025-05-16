@@ -208,14 +208,14 @@ class FToastLayerState extends State<FToastLayer> {
     final children = [widget.child];
 
     for (final MapEntry(key: location, value: data) in _entries.entries) {
-      final positioned = <Widget>[];
+      final positioned = <(Key, Widget)>[];
       int toastIndex = 0;
       final padding = style.padding;
 
       for (var i = data.entries.length - 1; i >= 0; i--) {
         final entry = data.entries[i];
         if (toastIndex < style.maxStackedEntries) {
-          positioned.add(entry.entry.builder(context, entry));
+          positioned.add((entry.key, entry.entry.builder(context, entry)));
         }
 
         if (!entry._isClosing.value) {
@@ -237,13 +237,10 @@ class FToastLayerState extends State<FToastLayer> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ColoredBox(
-                      color: Colors.red,
-                      child: Toaster(
-                        shiftTransform: Offset(Alignment.bottomCenter.x, Alignment.bottomCenter.y),
-                        style: style,
-                        children: positioned,
-                      ),
+                    Toaster(
+                      shiftTransform: Offset(Alignment.bottomCenter.x, Alignment.bottomCenter.y),
+                      style: style,
+                      children: positioned,
                     ),
                   ],
                 ),

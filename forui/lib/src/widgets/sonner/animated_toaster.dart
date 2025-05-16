@@ -65,8 +65,10 @@ class RenderAnimatedToaster extends RenderBox
       return;
     }
 
-    // We assume the toast's size at the forefront is the target.
+    // We assume the toast's size at the forefront is the target. The front toast's size may be different from the
+    // current front toast's size.
     final target = lastChild!.size;
+    final previousTarget = childCount >= 2 ? childBefore(lastChild!)!.size : target;
 
     var current = firstChild;
     var distanceFromFront = childCount - 1;
@@ -83,8 +85,8 @@ class RenderAnimatedToaster extends RenderBox
       distanceFromFront--;
 
       // Calculate base scaling factors from current size to target size.
-      final baseWidth = lerpDouble(current.size.width, targetWidth, data.shift)!;
-      final baseHeight = lerpDouble(current.size.height, targetHeight, data.shift)!;
+      final baseWidth = lerpDouble(previousTarget.width * pow(behindScale, data.previous), targetWidth, data.index)!;
+      final baseHeight = lerpDouble(previousTarget.height * pow(behindScale, data.previous), targetHeight, data.index)!;
 
       final baseScaleX = baseWidth / current.size.width;
       final baseScaleY = baseHeight / current.size.height;

@@ -14,7 +14,7 @@ import 'package:forui/src/widgets/sonner/animated_toaster.dart';
 class Toaster extends StatefulWidget {
   final FToastStyle style;
   final Offset shiftTransform;
-  final List<Widget> children;
+  final List<(Key, Widget)> children;
 
   const Toaster({required this.style, required this.shiftTransform, required this.children, super.key});
 
@@ -56,18 +56,22 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      MouseRegion(
-        onEnter: (_) => _controller.forward(),
-        onExit: (_) => _controller.reverse(),
-        child: AnimatedToaster(
-          behindTransform: widget.shiftTransform,
-          expand: _expand.value,
-          children: [
-            for (final (index, child) in widget.children.reversed.indexed)
-              Toast(
-                  style: widget.style, index: widget.children.length - 1 - index, expand: _expand.value, child: child),
-          ],
-        ),
-      );
+  Widget build(BuildContext context) => MouseRegion(
+    onEnter: (_) => _controller.forward(),
+    onExit: (_) => _controller.reverse(),
+    child: AnimatedToaster(
+      behindTransform: widget.shiftTransform,
+      expand: _expand.value,
+      children: [
+        for (final (index, (key, child)) in widget.children.reversed.indexed)
+          Toast(
+            key: key,
+            style: widget.style,
+            index: widget.children.length - 1 - index,
+            expand: _expand.value,
+            child: child,
+          ),
+      ],
+    ),
+  );
 }
