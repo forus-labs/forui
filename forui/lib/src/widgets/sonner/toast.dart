@@ -1,186 +1,103 @@
-import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/sonner/animated_parent_data.dart';
 import 'package:meta/meta.dart';
 
 @internal
 class Toast extends StatefulWidget {
   final FToastStyle style;
   final int index;
-  final int length;
   final Alignment behindAlignment;
-  final Duration duration;
-  final bool expanded;
-  final bool dismissible;
-  final ValueListenable<bool> closing;
-  final VoidCallback onClosing;
-  final VoidCallback onClose;
+  final double expand;
   final Widget child;
 
   const Toast({
     required this.style,
     required this.index,
-    required this.length,
-    required this.behindAlignment,
-    required this.duration,
-    required this.expanded,
-    required this.dismissible,
-    required this.closing,
-    required this.onClosing,
-    required this.onClose,
+    this.behindAlignment = Alignment.topCenter,
+    required this.expand,
     required this.child,
     super.key,
   });
 
   @override
   State<Toast> createState() => _ToastState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(IntProperty('index', index))
-      ..add(IntProperty('length', length))
-      ..add(DiagnosticsProperty('behindAlignment', behindAlignment))
-      ..add(DiagnosticsProperty('duration', duration))
-      ..add(FlagProperty('expanded', value: expanded, ifTrue: 'expanded'))
-      ..add(FlagProperty('dismissible', value: dismissible, ifTrue: 'dismissible'))
-      ..add(DiagnosticsProperty('closing', closing))
-      ..add(ObjectFlagProperty.has('onClosing', onClosing))
-      ..add(ObjectFlagProperty.has('onClose', onClose));
-  }
 }
 
-class _ToastState extends State<Toast> {
-  late Timer _timer;
-  bool _dismissing = false;
-  double _dismiss = 0;
+class _ToastState extends State<Toast> with TickerProviderStateMixin {
+  late final AnimationController _transitionController;
+  late final Animation<double> _transition;
+  late final AnimationController _shiftController;
+  late final Animation<double> _shift;
 
   @override
   void initState() {
     super.initState();
-    _timer = Timer(widget.duration, widget.onClosing);
+    _transitionController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
+    _transitionController.addListener(() => setState(() {}));
+    _transition = _transitionController.drive(CurveTween(curve: widget.style.transitionCurve));
+    _transitionController.forward();
+
+    _shiftController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
+    _shiftController.addListener(() => setState(() {}));
+    _shift = _shiftController.drive(CurveTween(curve: widget.style.transitionCurve));
+    if (widget.index != 0) {
+      _shiftController.forward();
+    }
   }
 
   @override
-  void didUpdateWidget(covariant Toast old) {
+  void didUpdateWidget(Toast old) {
     super.didUpdateWidget(old);
-    if (widget.expanded != old.expanded) {
-      if (widget.expanded) {
-        _timer.cancel();
-      } else {
-        _resume(Duration(milliseconds: (widget.length - widget.index - 1) * 500));
-      }
+    if (old.style != widget.style) {
+      _transitionController.duration = widget.style.expandDuration;
+      _transition = _transitionController.drive(CurveTween(curve: widget.style.expandCurve));
+    }
+
+    if (widget.index != old.index && widget.index != 0) {
+      _shiftController..reset()..forward();
     }
   }
 
-  void _resume([Duration stagger = Duration.zero]) {
-    _timer.cancel();
-    _timer = Timer(widget.duration + stagger, widget.onClosing);
-  }
-
+  // TODO improve exit animation -> Needs to fade out more?
   @override
-  Widget build(BuildContext context) {
-    // TODO improve exit animation -> Needs to fade out more?
-    Widget toast = MouseRegion(
-      hitTestBehavior: HitTestBehavior.deferToChild,
-      onEnter: (_) => _timer.cancel(),
-      onExit: (_) => _resume(),
-      child: ValueListenableBuilder(
-        valueListenable: widget.closing,
-        // This isn't the most ideal for performance but manually managing several animation controllers isn't worth it.
-        builder:
-            (_, closing, _) => TweenAnimationBuilder(
-              tween: Tween(end: closing ? 0.0 : _dismiss),
-              curve: widget.style.dismissCurve,
-              duration: _dismissing ? Duration.zero : widget.style.dismissDuration,
-              onEnd: (_dismiss == 1 || _dismiss == -1) ? widget.onClose : null,
-              builder:
-                  (_, dismiss, _) => TweenAnimationBuilder(
-                    tween: Tween(end: widget.expanded ? 1.0 : 0.0),
-                    curve: widget.style.expandCurve,
-                    duration: widget.style.expandDuration,
-                    builder:
-                        (_, expand, _) => TweenAnimationBuilder(
-                          tween: Tween(begin: widget.index > 0 ? 1.0 : 0.0, end: closing && !_dismissing ? 0.0 : 1.0),
-                          curve: widget.style.animationCurve,
-                          duration: widget.style.animationDuration,
-                          onEnd: closing ? widget.onClose : null,
-                          builder:
-                              (_, transition, _) => TweenAnimationBuilder(
-                                tween: Tween(end: widget.index.toDouble()),
-                                curve: widget.style.animationCurve,
-                                duration: widget.style.animationDuration,
-                                builder: (_, index, _) => _toast(dismiss, expand, transition, index),
-                              ),
-                        ),
-                  ),
-            ),
-      ),
-    );
+  Widget build(BuildContext context) => TweenAnimationBuilder(
+    tween: Tween(end: widget.index.toDouble()),
+    curve: widget.style.transitionCurve,
+    duration: widget.style.transitionDuration,
+    builder: (_, index, _) => _toast(index),
+  );
 
-    if (widget.dismissible) {
-      toast = GestureDetector(
-        onHorizontalDragStart:
-            (_) => setState(() {
-              _timer.cancel();
-              _dismissing = true;
-            }),
-        onHorizontalDragUpdate: (details) => setState(() => _dismiss += details.primaryDelta! / context.size!.width),
-        onHorizontalDragEnd:
-            (_) => setState(() {
-              _dismissing = false;
-              switch (_dismiss) {
-                case < -0.5:
-                  _dismiss = -1;
-                case > 0.5:
-                  _dismiss = 1;
-                default:
-                  _dismiss = 0;
-                  _resume();
-              }
-            }),
-        child: toast,
-      );
-    }
-
-    return toast;
-  }
-
-  Widget _toast(double dismiss, double expand, double transition, double index) {
-    final collapse = (1.0 - expand) * transition;
+  Widget _toast(double index) {
+    final collapse = (1.0 - widget.expand) * _transition.value;
     final behindTransform = Offset(widget.behindAlignment.x, widget.behindAlignment.y);
 
-    // Shift up/down when behind another toast
-    var offset = widget.style.collapsedOffset.scale(behindTransform.dx, behindTransform.dy) * collapse * index;
-    // Shift up/down when expanding/collapsing
-    offset += behindTransform * 16 * expand;
+    var offset = behindTransform * 16 * widget.expand;
     // Add spacing when expanded
-    offset += behindTransform * widget.style.spacing * expand * index;
+    offset += behindTransform * widget.style.spacing * widget.expand * index;
 
-    var fractional = -behindTransform * (1.0 - transition);
+    // Slide in
+    var fractional = -behindTransform * (1.0 - _transition.value);
     // Add dismiss offset
-    fractional += Offset(dismiss, 0);
-    // Shift up/down when behind another toast & expanded
-    fractional += behindTransform * expand * index;
+    // fractional += Offset(dismiss, 0);
+    // // Shift up/down when behind another toast & expanded
+    fractional += behindTransform * widget.expand * index; // TODO: Using different sized children will break this.
 
-    var opacity = widget.style.transitionOpacity + (1.0 - widget.style.transitionOpacity) * transition;
+    var opacity = widget.style.transitionOpacity + (1.0 - widget.style.transitionOpacity) * _transition.value;
     // Fade out the toast behind
     opacity *= pow(widget.style.collapsedOpacity, index * collapse);
     // Fade out the toast when dismissing
-    opacity *= 1 - dismiss.abs();
+    // opacity *= 1 - dismiss.abs();
 
-    final scale = 1.0 * pow(widget.style.collapsedScale, index * (1 - expand));
+    final scale = 1.0 * pow(widget.style.collapsedScale, index * (1 - widget.expand));
 
-    return Transform.translate(
-      offset: offset,
+    return Animated(
+      shift: _shift.value,
       child: FractionalTranslation(
         translation: fractional,
-        child: Opacity(opacity: opacity.clamp(0, 1), child: Transform.scale(scale: scale, child: widget.child)),
+        child: Opacity(opacity: opacity, child: Transform.scale(scale: scale, child: widget.child)),
       ),
     );
   }

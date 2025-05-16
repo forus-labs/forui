@@ -11,46 +11,40 @@ class Sandbox extends StatefulWidget {
 }
 
 class _SandboxState extends State<Sandbox> {
+  int a = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         FButton(
           onPress: () {
-            showToast(context: context, builder: buildToast, location: ToastLocation.topLeft);
-          },
-          child: Text('TL'),
-        ),
-        FButton(
-          onPress: () {
-            showToast(context: context, builder: buildToast, location: ToastLocation.topRight);
-          },
-          child: Text('TR'),
-        ),
-        FButton(
-          onPress: () {
-            showToast(context: context, builder: buildToast, location: ToastLocation.topCenter);
-          },
-          child: Text('TC'),
-        ),
-        FButton(
-          onPress: () {
-            showToast(context: context, builder: buildToast, location: ToastLocation.bottomLeft);
-          },
-          child: Text('BL'),
-        ),
-        FButton(
-          onPress: () {
+            final i = a++;
+            Widget buildToast(BuildContext context, ToastOverlay overlay) => FCard(
+              title: Text('Event has been created: $i'),
+              subtitle: FButton(onPress: () => overlay.close(), child: const Text('close')),
+            );
+
             showToast(context: context, builder: buildToast, location: ToastLocation.bottomRight);
           },
-          child: Text('BR'),
+          child: Text('Small'),
+        ),
+        FButton(
+          onPress: () {
+            final i = a++;
+            Widget buildToast(BuildContext context, ToastOverlay overlay) =>
+                Container(width: 500, height: 150, color: Colors.blue);
+
+            showToast(context: context, builder: buildToast, location: ToastLocation.bottomRight);
+          },
+          child: Text('Large'),
         ),
       ],
     );
   }
 
   Widget buildToast(BuildContext context, ToastOverlay overlay) => FCard(
-    title: Text('Event has been created'),
-    subtitle: FButton(onPress: () => print('hi'), child: const Text('close')),
+    title: Text('Event has been created: $a'),
+    subtitle: FButton(onPress: () => overlay.close(), child: const Text('close')),
   );
 }

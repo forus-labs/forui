@@ -23,11 +23,11 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
 
   /// The toast's general animation duration. Defaults to 500ms.
   @override
-  final Duration animationDuration;
+  final Duration transitionDuration;
 
   /// The toast's general animation curve. Defaults to [Curves.easeOutCubic].
   @override
-  final Curve animationCurve;
+  final Curve transitionCurve;
 
   /// The dismiss animation duration. Defaults to 150ms.
   @override
@@ -83,8 +83,8 @@ final class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     required this.decoration,
     required this.contentStyle,
     this.maxStackedEntries = 3,
-    this.animationDuration = const Duration(milliseconds: 500),
-    this.animationCurve = Curves.easeOutCubic,
+    this.transitionDuration = const Duration(milliseconds: 500),
+    this.transitionCurve = Curves.easeOutCubic,
     this.dismissDuration = const Duration(milliseconds: 150),
     this.dismissCurve = Curves.linear,
     this.expandDuration = const Duration(milliseconds: 500),
