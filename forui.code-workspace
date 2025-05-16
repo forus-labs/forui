@@ -1,28 +1,36 @@
 {
 	"folders": [
 		{
-			"path": "."
-		},
-		{
+			"name": "docs",
 			"path": "docs"
 		},
 		{
+			"name": "forui",
 			"path": "forui"
 		},
 		{
+			"name": "forui_assets",
 			"path": "forui_assets"
 		},
 		{
+			"name": "forui_hooks",
 			"path": "forui_hooks"
 		},
 		{
+			"name": "forui_internal_gen",
 			"path": "forui_internal_gen"
 		},
 		{
+			"name": "forui_internal_lints",
 			"path": "forui_internal_lints"
 		},
 		{
+			"name": "samples",
 			"path": "samples"
+		},
+		{
+			"name": "forui",
+			"path": "."
 		}
 	],
 	"settings": {}
