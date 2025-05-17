@@ -95,9 +95,15 @@ class RenderAnimatedToaster extends RenderBox
       current = data.previousSibling;
     }
 
-    final collapsedSize = lastChild!.size;
-    final expandedSize = Size(collapsedSize.width + accumulated.dx.abs(), collapsedSize.height + accumulated.dy.abs());
-    size = Size.lerp(collapsedSize, expandedSize, expand)!;
+    // Transition between previous front and front toast if their sizes are different.
+    final front = lastChild!;
+    final data = front.parentData! as AnimatedToasterParentData;
+    final previousFront = childCount >= 2 ? childBefore(lastChild!)! : front;
+
+    // Transition between collapsed and expanded sizes.
+    final frontSize = Size.lerp(previousFront.size, front.size, data.transition)!;
+    final expandedSize = Size(front.size.width + accumulated.dx.abs(), front.size.height + accumulated.dy.abs());
+    size = constraints.constrain(Size.lerp(frontSize, expandedSize, expand * data.transition)!);
 
     // Second pass: Shifts offsets if the [alignmentTransform] is negative (toaster expands leftwards/upwards).
     if (!alignmentTransform.dx.isNegative && !alignmentTransform.dy.isNegative) {
