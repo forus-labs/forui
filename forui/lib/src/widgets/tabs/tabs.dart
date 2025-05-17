@@ -72,8 +72,9 @@ class FTabs extends StatefulWidget {
   /// Handler for when a tab is changed.
   final ValueChanged<int>? onChange;
 
-  /// Triggered when the tab is clicked
-  final ValueChanged<int>? onTap;
+  /// A callback that is triggered when a tab is pressed. It is called **before** the tab switching animation begins
+  /// and the controller is updated.
+  final ValueChanged<int>? onPress;
 
   /// The tabs.
   final List<FTabEntry> children;
@@ -93,7 +94,7 @@ class FTabs extends StatefulWidget {
     this.controller,
     this.style,
     this.onChange,
-    this.onTap,
+    this.onPress,
     super.key,
   }) : assert(children.isNotEmpty, 'Must have at least 1 tab provided.'),
        assert(0 <= initialIndex && initialIndex < children.length, 'initialIndex must be within the range of tabs.'),
@@ -114,7 +115,7 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('physics', physics))
       ..add(ObjectFlagProperty.has('onPress', onChange))
       ..add(IterableProperty('children', children))
-      ..add(ObjectFlagProperty.has('onTap', onTap));
+      ..add(ObjectFlagProperty.has('onTap', onPress));
   }
 
   @override
@@ -181,7 +182,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               dividerColor: Colors.transparent,
               labelStyle: style.selectedLabelTextStyle,
               unselectedLabelStyle: style.unselectedLabelTextStyle,
-              onTap: widget.onTap,
+              onTap: widget.onPress,
             ),
           ),
           SizedBox(height: style.spacing),
