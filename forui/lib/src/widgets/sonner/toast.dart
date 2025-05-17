@@ -40,10 +40,12 @@ class Toast extends StatefulWidget {
 
 class _ToastState extends State<Toast> with TickerProviderStateMixin {
   late final AnimationController _transitionController;
-  late final AnimationController _indexTransitionController;
-  late Tween<double> _indexTransitionTween;
+  late final AnimationController _scaleController;
+  late final AnimationController _shiftController;
+  late Tween<double> _scaleTween;
   late Animation<double> _transition;
-  late Animation<double> _indexTransition;
+  late Animation<double> _scale;
+  late Animation<double> _shift;
 
   @override
   void initState() {
@@ -53,12 +55,15 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     _transition = _transitionController.drive(CurveTween(curve: widget.style.transitionCurve));
     _transitionController.forward();
 
-    _indexTransitionController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
-    _indexTransitionController.addListener(() => setState(() {}));
-    _indexTransitionTween = Tween(begin: widget.index.toDouble(), end: widget.index.toDouble());
-    _indexTransition = _indexTransitionTween.animate(
-      CurvedAnimation(parent: _indexTransitionController, curve: widget.style.transitionCurve),
-    );
+    _scaleController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
+    _scaleController.addListener(() => setState(() {}));
+    _scaleTween = Tween(begin: widget.index.toDouble(), end: widget.index.toDouble());
+    _scale = _scaleTween.animate(CurvedAnimation(parent: _scaleController, curve: widget.style.transitionCurve));
+
+    _shiftController = AnimationController(vsync: this, duration: widget.style.transitionDuration);
+    _shiftController.addListener(() => setState(() {}));
+    _shift = _shiftController.drive(CurveTween(curve: widget.style.transitionCurve));
+    _shiftController.forward();
   }
 
   @override
@@ -68,16 +73,18 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
       _transitionController.duration = widget.style.transitionDuration;
       _transition = _transitionController.drive(CurveTween(curve: widget.style.transitionCurve));
 
-      _indexTransitionController.duration = widget.style.transitionDuration;
+      _scaleController.duration = widget.style.transitionDuration;
     }
 
     if (widget.index != old.index) {
-      _indexTransitionTween = Tween(begin: _indexTransition.value, end: widget.index.toDouble());
-      _indexTransition = _indexTransitionTween.animate(
-        CurvedAnimation(parent: _indexTransitionController, curve: widget.style.transitionCurve),
-      );
+      _scaleTween = Tween(begin: _scale.value, end: widget.index.toDouble());
+      _scale = _scaleTween.animate(CurvedAnimation(parent: _scaleController, curve: widget.style.transitionCurve));
 
-      _indexTransitionController
+      _scaleController
+        ..reset()
+        ..forward();
+
+      _shiftController
         ..reset()
         ..forward();
     }
@@ -85,7 +92,8 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _indexTransitionController.dispose();
+    _shiftController.dispose();
+    _scaleController.dispose();
     _transitionController.dispose();
     super.dispose();
   }
@@ -93,8 +101,8 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final alignmentTransform = widget.alignmentTransform;
-    final indexTransition = _indexTransition.value;
-    final previousIndex = _indexTransitionTween.begin!;
+    final indexTransition = _scale.value;
+    final previousIndex = _scaleTween.begin!;
     final collapse = (1.0 - widget.expand) * _transition.value;
 
     // Slide in
@@ -109,10 +117,11 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     // opacity *= 1 - dismiss.abs();
 
     return Animated(
-      transition: _transition.value,
-      indexTransition: indexTransition - previousIndex,
       index: widget.index.toDouble(),
       previousIndex: previousIndex,
+      transition: _transition.value,
+      scale: indexTransition - previousIndex,
+      shift: _shift.value,
       child: FractionalTranslation(translation: fractional, child: Opacity(opacity: opacity, child: widget.child)),
     );
   }

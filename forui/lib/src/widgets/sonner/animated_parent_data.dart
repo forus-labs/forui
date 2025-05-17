@@ -5,23 +5,26 @@ import 'package:meta/meta.dart';
 
 @internal
 class Animated extends ParentDataWidget<AnimatedToasterParentData> {
-  /// The animation progress for entrance & exit animations.
-  final double transition;
-
-  /// The animation progress for shifting a toast whenever another toast is inserted or removed.
-  final double indexTransition;
-
   /// The current index of the toast in the toaster.
   final double index;
 
   /// The previous index of the toast in the toaster.
   final double previousIndex;
 
+  /// The animation progress for entrance & exit animations.
+  final double transition;
+
+  /// The animation progress for scaling a toast whenever another toast is inserted or removed.
+  final double scale;
+
+  final double shift;
+
   const Animated({
-    required this.transition,
-    required this.indexTransition,
     required this.index,
     required this.previousIndex,
+    required this.transition,
+    required this.scale,
+    required this.shift,
     required super.child,
     super.key,
   });
@@ -36,16 +39,6 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
     final data = renderObject.parentData! as AnimatedToasterParentData;
     var needsLayout = false;
 
-    if (data.transition != transition) {
-      data.transition = transition;
-      needsLayout = true;
-    }
-
-    if (data.indexTransition != indexTransition) {
-      data.indexTransition = indexTransition;
-      needsLayout = true;
-    }
-
     if (data.index != index) {
       data.index = index;
       needsLayout = true;
@@ -53,6 +46,21 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
 
     if (data.previousIndex != previousIndex) {
       data.previousIndex = previousIndex;
+      needsLayout = true;
+    }
+
+    if (data.transition != transition) {
+      data.transition = transition;
+      needsLayout = true;
+    }
+
+    if (data.scale != scale) {
+      data.scale = scale;
+      needsLayout = true;
+    }
+
+    if (data.shift != shift) {
+      data.shift = shift;
       needsLayout = true;
     }
 
@@ -67,22 +75,24 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('shift', indexTransition));
+    properties.add(DoubleProperty('shift', scale));
   }
 }
 
 /// Parent data for use with [RenderAnimatedToaster].
 @internal
 class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
-  /// The animation progress for entrance & exit animations.
-  double transition = 0;
-
-  /// The animation progress for transitioning from one index to another.
-  double indexTransition = 0;
-
   /// The current index of the toast in the toaster.
   double index = 0;
 
   /// The previous index of the toast in the toaster.
   double previousIndex = 0;
+
+  /// The animation progress for entrance & exit animations.
+  double transition = 0;
+
+  /// The animation progress for transitioning from one index to another.
+  double scale = 0;
+
+  double shift = 0;
 }

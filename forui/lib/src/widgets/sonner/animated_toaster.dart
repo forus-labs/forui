@@ -52,7 +52,7 @@ class RenderAnimatedToaster extends RenderBox
   }
 
   // TODO: Fetch from style.
-  static const style = (behindScale: 0.9, expansionStartSpacing: 16, expansionSpacing: 10.0, protrusion: 12.0);
+  static const style = (behindScale: 0.9, expansionStartSpacing: 16.0, expansionSpacing: 10.0, protrusion: 12.0);
 
   @override
   void performLayout() {
@@ -62,35 +62,49 @@ class RenderAnimatedToaster extends RenderBox
     }
 
     var current = lastChild;
-    var previousWidth = 0.0;
     var previousHeight = 0.0;
-    var accumulated = alignmentTransform * style.expansionSpacing;
+    var accumulated = alignmentTransform.dy * style.expansionStartSpacing;
 
     // First pass: calculate the offset to move the toasts when expanded, relative to (0, 0).
+    //
+    // This is a simplified implementation that assumes toasts can only be vertically stacked.
+    // I'm not fucking doing this for every possible alignment. You're welcome to open a PR if you want it. >:(
     while (current != null) {
       final data = current.parentData! as AnimatedToasterParentData;
       current.layout(constraints, parentUsesSize: true);
 
-      // Calculate the additional offset to move the current toast when expanded, relative to the previous toast.
-      final iterationWidth = switch (_alignmentTransform.dx) {
-        0 => 0.0,
-        < 0 when current == lastChild => 0.0,
-        < 0 => -current.size.width,
-        _ => previousWidth,
-      };
-      final iterationHeight = switch (_alignmentTransform.dy) {
-        0 => 0.0,
-        < 0 when current == lastChild => 0.0,
-        < 0 => -current.size.height,
-        _ => previousHeight,
-      };
+      if (_alignmentTransform.dy < 0) {
+        // Calculate the additional offset to move the current toast when expanded.
+        // Top aligned toasts use the current height as the offset.
+        final iterationHeight = current == lastChild ? 0.0 : -current.size.height;
+        accumulated += iterationHeight;
 
-      /// Calculate the total offset to move the current toast when expanded, relative to (0, 0).
-      accumulated += Offset(iterationWidth, iterationHeight);
-      current.data.offset = accumulated * expand;
-      accumulated += alignmentTransform * style.expansionSpacing;
+        // Top aligned toasts' origins are affected by the previous front toast and not the current front toast. This is
+        // because the front toast's content is rendered after (0, 0) in the 1st quadrant.
+        final affectingHeight = switch (current) {
+          _ when current == lastChild! => 0.0,
+          _ when current == childBefore(lastChild!) => current.size.height, // TODO: do we need this case?
+          _ => childBefore(lastChild!)!.size.height,
+        };
 
-      previousWidth = current.size.width;
+        current.data.offset = Offset(
+          current.data.offset.dx,
+          lerpDouble(accumulated + affectingHeight, accumulated, data.shift)! * expand,
+        );
+      } else {
+        // Calculate the additional offset to move the current toast when expanded.
+        // Bottom aligned toasts use the height of the toast in front as the offset.
+        final iterationHeight = previousHeight;
+        accumulated += iterationHeight;
+
+        final front = current == lastChild ? Size.zero : lastChild!.size;
+        final previous = accumulated - alignmentTransform.dy * style.expansionSpacing - front.height;
+
+        current.data.offset = Offset(current.data.offset.dx, lerpDouble(previous, accumulated, data.shift)! * expand);
+      }
+
+      accumulated += alignmentTransform.dy * style.expansionSpacing;
+
       previousHeight = current.size.height;
       current = data.previousSibling;
     }
@@ -102,7 +116,7 @@ class RenderAnimatedToaster extends RenderBox
 
     // Transition between collapsed and expanded sizes.
     final frontSize = Size.lerp(previousFront.size, front.size, data.transition)!;
-    final expandedSize = Size(front.size.width + accumulated.dx.abs(), front.size.height + accumulated.dy.abs());
+    final expandedSize = Size(front.size.width, front.size.height + accumulated.abs());
     size = constraints.constrain(Size.lerp(frontSize, expandedSize, expand * data.transition)!);
 
     // Second pass: Shifts offsets if the [alignmentTransform] is negative (toaster expands leftwards/upwards).
@@ -111,13 +125,12 @@ class RenderAnimatedToaster extends RenderBox
     }
 
     // Calculate the shift needed for each dimension
-    final translateX = accumulated.dx.isNegative ? -accumulated.dx * expand : 0.0;
-    final translateY = accumulated.dy.isNegative ? -accumulated.dy * expand : 0.0;
+    final translateY = accumulated.isNegative ? -accumulated * data.shift * expand : 0.0;
 
     var child = firstChild;
     while (child != null) {
       final data = child.parentData! as AnimatedToasterParentData;
-      data.offset = data.offset.translate(translateX, translateY);
+      data.offset = data.offset.translate(0, translateY);
 
       child = data.nextSibling;
     }
@@ -152,8 +165,8 @@ class RenderAnimatedToaster extends RenderBox
 
       // Calculate base scaling factors from current size to target size.
       final previousScale = pow(style.behindScale, data.previousIndex);
-      final baseWidth = lerpDouble(previousFront.width * previousScale, targetWidth, data.indexTransition)!;
-      final baseHeight = lerpDouble(previousFront.height * previousScale, targetHeight, data.indexTransition)!;
+      final baseWidth = lerpDouble(previousFront.width * previousScale, targetWidth, data.scale)!;
+      final baseHeight = lerpDouble(previousFront.height * previousScale, targetHeight, data.scale)!;
 
       final baseScaleX = baseWidth / current.size.width;
       final baseScaleY = baseHeight / current.size.height;
@@ -179,7 +192,7 @@ class RenderAnimatedToaster extends RenderBox
       // Calculate the amount to shift the toast such that it protrudes slightly above the toast in front.
       final start = style.protrusion * (log(data.previousIndex + 1) / log(2));
       final end = style.protrusion * (log(data.index + 1) / log(2));
-      final protrusion = alignmentTransform * lerpDouble(start, end, data.indexTransition)! * (1 - expand);
+      final protrusion = alignmentTransform * lerpDouble(start, end, data.scale)! * (1 - expand);
 
       // Remove translation when expanded
       final translation = (alignment + protrusion) * (1 - expand);
