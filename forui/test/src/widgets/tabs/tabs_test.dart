@@ -201,5 +201,42 @@ void main() {
       expect(controller.hasListeners, false);
       expect(controller.disposed, false);
     });
+
+    testWidgets('onPress is triggered when a tab is pressed', (tester) async {
+      int tabIndex = -1;
+
+      Widget buildFTabs({required FTabController controller, required List<Map<String, String>> tabs}) => FTabs(
+        controller: controller,
+        children: tabs.map((tab) => FTabEntry(label: Text(tab['label']!), child: Text(tab['content']!))).toList(),
+        onPress: (index) {
+          tabIndex = index;
+        },
+      );
+
+      final List<Map<String, String>> tabs = <Map<String, String>>[
+        {'label': 'foo', 'content': 'foo content'},
+        {'label': 'bar', 'content': 'bar content'},
+      ];
+
+      final FTabController controller = FTabController(
+        vsync: tester,
+        length: tabs.length,
+        initialIndex: tabs.indexWhere((element) => element['label'] == 'foo'),
+      );
+
+      await tester.pumpWidget(TestScaffold.app(child: buildFTabs(controller: controller, tabs: tabs)));
+      expect(find.text('foo'), findsOneWidget);
+      expect(find.text('bar'), findsOneWidget);
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
+      expect(tabIndex, -1);
+
+      await tester.tap(find.text('bar'));
+      await tester.pumpAndSettle();
+      expect(controller.index, tabs.indexWhere((element) => element['label'] == 'bar')); // change
+      expect(tabIndex, tabs.indexWhere((element) => element['label'] == 'bar'));
+      expect(find.text('foo content'), findsNothing);
+      expect(find.text('bar content'), findsOneWidget);
+    });
   });
 }
