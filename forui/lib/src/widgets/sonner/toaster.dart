@@ -69,7 +69,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
             style: widget.style,
             index: widget.children.length - 1 - index,
             expand: _expand.value,
-            behindTransform: widget.shiftTransform,
+            alignmentTransform: widget.shiftTransform,
             child: child,
           ),
       ],

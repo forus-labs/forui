@@ -14,6 +14,8 @@ class AnimatedToaster extends MultiChildRenderObjectWidget {
   /// For example, `Offset(0, -1)` indicates that the top-center of this toast's protrusion should be aligned to the
   /// top-center of the toast in front of it.
   final Offset alignmentTransform;
+
+  /// The expansion's animation value between `[0, 1]`.
   final double expand;
 
   const AnimatedToaster({required this.alignmentTransform, required this.expand, super.children, super.key});
@@ -50,7 +52,7 @@ class RenderAnimatedToaster extends RenderBox
   }
 
   // TODO: Fetch from style.
-  static const style = (behindScale: 0.9, expansionSpacing: 10.0, protrusion: 12.0);
+  static const style = (behindScale: 0.9, expansionStartSpacing: 16, expansionSpacing: 10.0, protrusion: 12.0);
 
   @override
   void performLayout() {
@@ -62,7 +64,7 @@ class RenderAnimatedToaster extends RenderBox
     var current = lastChild;
     var previousWidth = 0.0;
     var previousHeight = 0.0;
-    var accumulated = Offset.zero;
+    var accumulated = alignmentTransform * style.expansionSpacing;
 
     // First pass: calculate the offset to move the toasts when expanded, relative to (0, 0).
     while (current != null) {
@@ -213,5 +215,13 @@ class RenderAnimatedToaster extends RenderBox
 
     _expand = value;
     markNeedsLayout();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('expand', expand))
+      ..add(DiagnosticsProperty('alignmentTransform', alignmentTransform));
   }
 }

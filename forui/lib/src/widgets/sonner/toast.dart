@@ -7,16 +7,28 @@ import 'package:meta/meta.dart';
 
 @internal
 class Toast extends StatefulWidget {
+  /// The style.
   final FToastStyle style;
+
+  /// The toast's index starting from the back.
   final int index;
-  final Offset behindTransform;
+
+  /// A unit vector indicating how a toast's protrusion should be aligned to the toast in front of it.
+  ///
+  /// For example, `Offset(0, -1)` indicates that the top-center of this toast's protrusion should be aligned to the
+  /// top-center of the toast in front of it.
+  final Offset alignmentTransform;
+
+  /// The expansion's animation value between `[0, 1]`.
   final double expand;
+
+  /// The toast's content.
   final Widget child;
 
   const Toast({
     required this.style,
     required this.index,
-    required this.behindTransform,
+    required this.alignmentTransform,
     required this.expand,
     required this.child,
     super.key,
@@ -80,18 +92,15 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final behindTransform = widget.behindTransform;
+    final alignmentTransform = widget.alignmentTransform;
     final indexTransition = _indexTransition.value;
     final previousIndex = _indexTransitionTween.begin!;
     final collapse = (1.0 - widget.expand) * _transition.value;
 
     // Slide in
-    var fractional = -behindTransform * (1.0 - _transition.value);
+    var fractional = -alignmentTransform * (1.0 - _transition.value);
     // Add dismiss offset
     // fractional += Offset(dismiss, 0);
-    // Shift up/down when behind another toast & expanded
-    // // TODO: Using different sized children will break this.
-    // fractional += behindTransform * widget.expand * indexTransition;
 
     var opacity = widget.style.transitionOpacity + (1.0 - widget.style.transitionOpacity) * _transition.value;
     // Fade out the toast behind

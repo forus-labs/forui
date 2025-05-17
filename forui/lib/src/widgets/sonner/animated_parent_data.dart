@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 
 @internal
 class Animated extends ParentDataWidget<AnimatedToasterParentData> {
+  /// The animation progress for entrance & exit animations.
   final double transition;
 
   /// The animation progress for shifting a toast whenever another toast is inserted or removed.
@@ -73,7 +74,7 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
 /// Parent data for use with [RenderAnimatedToaster].
 @internal
 class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
-  /// The animation progress for shifting a toast whenever another toast is inserted or removed.
+  /// The animation progress for entrance & exit animations.
   double transition = 0;
 
   /// The animation progress for transitioning from one index to another.
