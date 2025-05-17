@@ -64,11 +64,12 @@ class RenderAnimatedToaster extends RenderBox
     var previousHeight = 0.0;
     var accumulated = Offset.zero;
 
+    // First pass: calculate the offset to move the toasts when expanded, relative to (0, 0).
     while (current != null) {
       final data = current.parentData! as AnimatedToasterParentData;
       current.layout(constraints, parentUsesSize: true);
 
-      // Calculate the base offset to move the current toast, relative to the previous toast.
+      // Calculate the additional offset to move the current toast when expanded, relative to the previous toast.
       final iterationWidth = switch (_alignmentTransform.dx) {
         0 => 0.0,
         < 0 when current == lastChild => 0.0,
@@ -82,18 +83,36 @@ class RenderAnimatedToaster extends RenderBox
         _ => previousHeight,
       };
 
-      /// Calculate the actual offset to move the current toast, relative to (0, 0).
+      /// Calculate the total offset to move the current toast when expanded, relative to (0, 0).
       accumulated += Offset(iterationWidth, iterationHeight);
       current.data.offset = accumulated * expand;
       accumulated += alignmentTransform * style.expansionSpacing;
 
-      // Do not assign size to previous here since it might be 0 (1st iteration).
       previousWidth = current.size.width;
       previousHeight = current.size.height;
       current = data.previousSibling;
     }
 
-    size = constraints.tighten(height: 700).biggest;
+    final collapsedSize = lastChild!.size;
+    final expandedSize = Size(collapsedSize.width + accumulated.dx.abs(), collapsedSize.height + accumulated.dy.abs());
+    size = Size.lerp(collapsedSize, expandedSize, expand)!;
+
+    // Second pass: Shifts offsets if the [alignmentTransform] is negative (toaster expands leftwards/upwards).
+    if (!alignmentTransform.dx.isNegative && !alignmentTransform.dy.isNegative) {
+      return;
+    }
+
+    // Calculate the shift needed for each dimension
+    final translateX = accumulated.dx.isNegative ? -accumulated.dx * expand : 0.0;
+    final translateY = accumulated.dy.isNegative ? -accumulated.dy * expand : 0.0;
+
+    var child = firstChild;
+    while (child != null) {
+      final data = child.parentData! as AnimatedToasterParentData;
+      data.offset = data.offset.translate(translateX, translateY);
+
+      child = data.nextSibling;
+    }
   }
 
   /// Scales and aligns toasts before painting them.
@@ -167,7 +186,7 @@ class RenderAnimatedToaster extends RenderBox
       current = data.nextSibling;
     }
 
-    context.paintChild(lastChild!, offset);
+    context.paintChild(lastChild!, lastChild!.data.offset + offset);
   }
 
   @override

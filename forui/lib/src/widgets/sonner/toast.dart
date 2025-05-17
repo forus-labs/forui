@@ -85,10 +85,6 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     final previousIndex = _indexTransitionTween.begin!;
     final collapse = (1.0 - widget.expand) * _transition.value;
 
-    var offset = Offset.zero;
-    // // Shift up/down when expanding/collapsing
-    // offset = behindTransform * 16 * widget.expand;
-
     // Slide in
     var fractional = -behindTransform * (1.0 - _transition.value);
     // Add dismiss offset
