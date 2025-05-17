@@ -5,5 +5,5 @@
 /// See https://forui.dev/docs/form/slider for working examples.
 library forui.widgets.sonner;
 
-export '../src/widgets/toast/toaster.dart';
+export '../src/widgets/toast/toaster_layer.dart';
 export '../src/widgets/toast/toast_style.dart';

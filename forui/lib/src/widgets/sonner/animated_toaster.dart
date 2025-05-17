@@ -3,28 +3,29 @@ import 'dart:ui';
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/widgets/sonner/animated_parent_data.dart';
 import 'package:meta/meta.dart';
 
 @internal
 class AnimatedToaster extends MultiChildRenderObjectWidget {
-  /// A unit vector indicating how a toast should be aligned to the toast in front of it.
+  /// A unit vector indicating how a toast's protrusion should be aligned to the toast in front of it.
   ///
-  /// For example, `Offset(0, -1)` indicates that the top-center of this toast should be aligned to the top-center of
-  /// the toast in front of it.
-  final Offset behindTransform;
+  /// For example, `Offset(0, -1)` indicates that the top-center of this toast's protrusion should be aligned to the
+  /// top-center of the toast in front of it.
+  final Offset alignmentTransform;
   final double expand;
 
-  const AnimatedToaster({required this.behindTransform, required this.expand, super.children, super.key});
+  const AnimatedToaster({required this.alignmentTransform, required this.expand, super.children, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      RenderAnimatedToaster(shiftTransform: behindTransform, expand: expand);
+      RenderAnimatedToaster(alignmentTransform: alignmentTransform, expand: expand);
 
   @override
   void updateRenderObject(BuildContext context, covariant RenderAnimatedToaster renderObject) =>
       renderObject
-        ..behindTransform = behindTransform
+        ..alignmentTransform = alignmentTransform
         ..expand = expand;
 }
 
@@ -33,12 +34,12 @@ class RenderAnimatedToaster extends RenderBox
     with
         ContainerRenderObjectMixin<RenderBox, AnimatedToasterParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, AnimatedToasterParentData> {
-  Offset _shiftTransform;
+  Offset _alignmentTransform;
   double _expand;
 
   /// Creates a [RenderAnimatedToaster].
-  RenderAnimatedToaster({required Offset shiftTransform, required double expand})
-    : _shiftTransform = shiftTransform,
+  RenderAnimatedToaster({required Offset alignmentTransform, required double expand})
+    : _alignmentTransform = alignmentTransform,
       _expand = expand;
 
   @override
@@ -48,24 +49,54 @@ class RenderAnimatedToaster extends RenderBox
     }
   }
 
+  // TODO: Fetch from style.
+  static const style = (behindScale: 0.9, expansionSpacing: 10.0, protrusion: 12.0);
+
   @override
   void performLayout() {
-    var current = firstChild;
+    if (childCount == 0) {
+      size = constraints.smallest;
+      return;
+    }
+
+    var current = lastChild;
+    var previousWidth = 0.0;
+    var previousHeight = 0.0;
+    var accumulated = Offset.zero;
+
     while (current != null) {
       final data = current.parentData! as AnimatedToasterParentData;
       current.layout(constraints, parentUsesSize: true);
-      current = data.nextSibling;
+
+      // Calculate the base offset to move the current toast, relative to the previous toast.
+      final iterationWidth = switch (_alignmentTransform.dx) {
+        0 => 0.0,
+        < 0 when current == lastChild => 0.0,
+        < 0 => -current.size.width,
+        _ => previousWidth,
+      };
+      final iterationHeight = switch (_alignmentTransform.dy) {
+        0 => 0.0,
+        < 0 when current == lastChild => 0.0,
+        < 0 => -current.size.height,
+        _ => previousHeight,
+      };
+
+      /// Calculate the actual offset to move the current toast, relative to (0, 0).
+      accumulated += Offset(iterationWidth, iterationHeight);
+      current.data.offset = accumulated * expand;
+      accumulated += alignmentTransform * style.expansionSpacing;
+
+      // Do not assign size to previous here since it might be 0 (1st iteration).
+      previousWidth = current.size.width;
+      previousHeight = current.size.height;
+      current = data.previousSibling;
     }
 
-    size = constraints.tighten(height: 400).biggest;
+    size = constraints.tighten(height: 700).biggest;
   }
 
-  // TODO: Fetch from style.
-  static const behindScale = 0.9;
-
-  // TODO: Fetch from style.
-  static const behindSpacing = 12;
-
+  /// Scales and aligns toasts before painting them.
   @override
   void paint(PaintingContext context, Offset offset) {
     if (childCount == 0) {
@@ -82,17 +113,18 @@ class RenderAnimatedToaster extends RenderBox
 
     while (current != lastChild && current != null) {
       final data = current.parentData! as AnimatedToasterParentData;
+      // The following section is responsible for scaling the toast to match the size of the frontmost toast.
 
       // Each consecutive toast should be slightly smaller.
       //
       // Calculate target sizes explicitly for each toast based on its distance from front rather than iteratively,
       // since toasts need to be painted in reverse order of their size reduction.
-      final targetWidth = front.width * pow(behindScale, distanceFromFront);
-      final targetHeight = front.height * pow(behindScale, distanceFromFront);
+      final targetWidth = front.width * pow(style.behindScale, distanceFromFront);
+      final targetHeight = front.height * pow(style.behindScale, distanceFromFront);
       distanceFromFront--;
 
       // Calculate base scaling factors from current size to target size.
-      final previousScale = pow(behindScale, data.previousIndex);
+      final previousScale = pow(style.behindScale, data.previousIndex);
       final baseWidth = lerpDouble(previousFront.width * previousScale, targetWidth, data.indexTransition)!;
       final baseHeight = lerpDouble(previousFront.height * previousScale, targetHeight, data.indexTransition)!;
 
@@ -110,21 +142,24 @@ class RenderAnimatedToaster extends RenderBox
       // Calculate the reference points (point of alignment).
       // This is a simplified implementation that assumes toasts are vertically stacked either on top or below another
       // toast and never purely horizontal.
-      final frontReferenceX = front.width * (0.5 + behindTransform.dx * 0.5);
-      final frontReferenceY = behindTransform.dy < 0 ? 0.0 : front.height;
-      final thisReferenceX = (current.size.width * scaleX) * (0.5 + behindTransform.dx * 0.5);
-      final thisReferenceY = behindTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
+      final frontReferenceX = front.width * (0.5 + alignmentTransform.dx * 0.5);
+      final frontReferenceY = alignmentTransform.dy < 0 ? 0.0 : front.height;
+      final thisReferenceX = (current.size.width * scaleX) * (0.5 + alignmentTransform.dx * 0.5);
+      final thisReferenceY = alignmentTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
 
       final alignment = Offset(frontReferenceX - thisReferenceX, frontReferenceY - thisReferenceY);
 
       // Calculate the amount to shift the toast such that it protrudes slightly above the toast in front.
-      final protrudeStart = behindSpacing * (log(data.previousIndex + 1) / log(2));
-      final protrudeEnd = behindSpacing * (log(data.previousIndex + 2) / log(2));
-      final protrude = behindTransform * lerpDouble(protrudeStart, protrudeEnd, data.indexTransition)! * (1 - expand);
+      final start = style.protrusion * (log(data.previousIndex + 1) / log(2));
+      final end = style.protrusion * (log(data.index + 1) / log(2));
+      final protrusion = alignmentTransform * lerpDouble(start, end, data.indexTransition)! * (1 - expand);
+
+      // Remove translation when expanded
+      final translation = (alignment + protrusion) * (1 - expand);
 
       context.pushTransform(
         needsCompositing,
-        data.offset + offset + alignment + protrude,
+        data.offset + offset + translation,
         Matrix4.diagonal3Values(scaleX, scaleY, 1.0),
         (context, offset) => context.paintChild(current!, offset),
       );
@@ -139,14 +174,14 @@ class RenderAnimatedToaster extends RenderBox
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
       defaultHitTestChildren(result, position: position);
 
-  Offset get behindTransform => _shiftTransform;
+  Offset get alignmentTransform => _alignmentTransform;
 
-  set behindTransform(Offset value) {
-    if (_shiftTransform == value) {
+  set alignmentTransform(Offset value) {
+    if (_alignmentTransform == value) {
       return;
     }
 
-    _shiftTransform = value;
+    _alignmentTransform = value;
     markNeedsLayout();
   }
 

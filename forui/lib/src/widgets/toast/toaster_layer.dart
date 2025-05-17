@@ -234,15 +234,13 @@ class FToastLayerState extends State<FToastLayer> {
               padding: padding,
               child: Align(
                 alignment: location.alignment,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Toaster(
-                      shiftTransform: Offset(Alignment.topCenter.x, Alignment.topCenter.y),
-                      style: style,
-                      children: positioned,
-                    ),
-                  ],
+                child: ColoredBox(
+                  color: Colors.red,
+                  child: Toaster(
+                    shiftTransform: Offset(Alignment.topCenter.x, Alignment.topCenter.y),
+                    style: style,
+                    children: positioned,
+                  ),
                 ),
               ),
             ),

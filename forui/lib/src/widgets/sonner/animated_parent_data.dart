@@ -10,12 +10,16 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
   /// The animation progress for shifting a toast whenever another toast is inserted or removed.
   final double indexTransition;
 
+  /// The current index of the toast in the toaster.
+  final double index;
+
   /// The previous index of the toast in the toaster.
   final double previousIndex;
 
   const Animated({
     required this.transition,
     required this.indexTransition,
+    required this.index,
     required this.previousIndex,
     required super.child,
     super.key,
@@ -38,6 +42,11 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
 
     if (data.indexTransition != indexTransition) {
       data.indexTransition = indexTransition;
+      needsLayout = true;
+    }
+
+    if (data.index != index) {
+      data.index = index;
       needsLayout = true;
     }
 
@@ -69,6 +78,9 @@ class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
 
   /// The animation progress for transitioning from one index to another.
   double indexTransition = 0;
+
+  /// The current index of the toast in the toaster.
+  double index = 0;
 
   /// The previous index of the toast in the toaster.
   double previousIndex = 0;

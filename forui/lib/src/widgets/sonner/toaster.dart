@@ -60,7 +60,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
     onEnter: (_) => _controller.forward(),
     onExit: (_) => _controller.reverse(),
     child: AnimatedToaster(
-      behindTransform: widget.shiftTransform,
+      alignmentTransform: widget.shiftTransform,
       expand: _expand.value,
       children: [
         for (final (index, (key, child)) in widget.children.reversed.indexed)

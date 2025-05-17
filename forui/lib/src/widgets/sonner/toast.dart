@@ -85,22 +85,17 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     final previousIndex = _indexTransitionTween.begin!;
     final collapse = (1.0 - widget.expand) * _transition.value;
 
-    // Shift up/down when behind another toast
-    final collapsedOffset = widget.style.collapsedOffset;
     var offset = Offset.zero;
-
     // // Shift up/down when expanding/collapsing
     // offset = behindTransform * 16 * widget.expand;
-    // // Add spacing when expanded
-    // offset += behindTransform * widget.style.spacing * widget.expand * index;
 
     // Slide in
     var fractional = -behindTransform * (1.0 - _transition.value);
     // Add dismiss offset
     // fractional += Offset(dismiss, 0);
-    // // Shift up/down when behinddfix another toast & expanded
-    fractional +=
-        behindTransform * widget.expand * indexTransition; // TODO: Using different sized children will break this.
+    // Shift up/down when behind another toast & expanded
+    // // TODO: Using different sized children will break this.
+    // fractional += behindTransform * widget.expand * indexTransition;
 
     var opacity = widget.style.transitionOpacity + (1.0 - widget.style.transitionOpacity) * _transition.value;
     // Fade out the toast behind
@@ -111,11 +106,9 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     return Animated(
       transition: _transition.value,
       indexTransition: indexTransition - previousIndex,
+      index: widget.index.toDouble(),
       previousIndex: previousIndex,
-      child: Transform.translate(
-        offset: offset,
-        child: FractionalTranslation(translation: fractional, child: Opacity(opacity: opacity, child: widget.child)),
-      ),
+      child: FractionalTranslation(translation: fractional, child: Opacity(opacity: opacity, child: widget.child)),
     );
   }
 }
