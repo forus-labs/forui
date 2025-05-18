@@ -6,6 +6,12 @@
 
 * Fix style suggestions always displaying actual style name instead of alias.
 
+### `FTabs` (new)
+Added an onPress callback property to the FTabs component. This callback is triggered when a tab is pressed, and it is called before the tab switching animation begins and before the controller is updated.
+
+* Add `FTabs.onPress`.
+
+
 ### `FCollapsible` (new)
 A widget that collapses and expands its child.
 
