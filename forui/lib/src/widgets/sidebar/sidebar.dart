@@ -31,16 +31,7 @@ part 'sidebar.style.dart';
 /// * https://forui.dev/docs/layout/sidebar for working examples.
 /// * [FSidebarStyle] for customizing a sidebar's appearance.
 class FSidebar extends StatelessWidget {
-  /// The optional sticky header widget.
-  final Widget? header;
-
-  /// The main scrollable content widget.
-  final Widget child;
-
-  /// The optional sticky footer widget.
-  final Widget? footer;
-
-  /// The styles for the sidebar.
+  /// The sidebar's style.
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -50,6 +41,15 @@ class FSidebar extends StatelessWidget {
   /// ```
   final FSidebarStyle? style;
 
+  /// The optional sticky header widget.
+  final Widget? header;
+
+  /// The main scrollable content widget.
+  final Widget child;
+
+  /// The optional sticky footer widget.
+  final Widget? footer;
+
   /// Creates a sidebar with a list of children that will be wrapped in a [ListView].
   FSidebar({required List<Widget> children, this.header, this.footer, this.style, super.key})
     : child = ListView(children: children);
@@ -58,9 +58,9 @@ class FSidebar extends StatelessWidget {
   FSidebar.builder({
     required Widget Function(BuildContext, int) itemBuilder,
     required int itemCount,
+    this.style,
     this.header,
     this.footer,
-    this.style,
     super.key,
   }) : child = ListView.builder(itemBuilder: itemBuilder, itemCount: itemCount);
 
@@ -74,9 +74,14 @@ class FSidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.sidebarStyle;
 
-    return SizedBox(
-      width: style.width,
-      child: Column(children: [if (header != null) header!, Expanded(child: child), if (footer != null) footer!]),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: BorderDirectional(end: BorderSide(color: style.borderColor, width: style.borderWidth)),
+      ),
+      child: SizedBox(
+        width: style.width,
+        child: Column(children: [if (header != null) header!, Expanded(child: child), if (footer != null) footer!]),
+      ),
     );
   }
 
@@ -93,14 +98,38 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   @override
   final double width;
 
-  /// The style for the sidebar items.
+  /// The border color for the sidebar.
+  @override
+  final Color borderColor;
+
+  /// The border width for the sidebar.
+  @override
+  final double borderWidth;
+
+  /// The style for [FSidebarGroup]s.
+  @override
+  final FSidebarGroupStyle groupStyle;
+
+  /// The style for [FSidebarItem]s.
   @override
   final FSidebarItemStyle itemStyle;
 
   /// Creates a [FSidebarStyle].
-  const FSidebarStyle({required this.width, required this.itemStyle});
+  const FSidebarStyle({
+    required this.width,
+    required this.borderColor,
+    required this.borderWidth,
+    required this.groupStyle,
+    required this.itemStyle,
+  });
 
   /// Creates a [FSidebarStyle] that inherits its properties from the theme.
   FSidebarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(width: 300, itemStyle: FSidebarItemStyle.inherit(colors: colors, typography: typography, style: style));
+    : this(
+        width: 250,
+        borderColor: colors.border,
+        borderWidth: 1,
+        groupStyle: FSidebarGroupStyle.inherit(colors: colors, typography: typography, style: style),
+        itemStyle: FSidebarItemStyle.inherit(colors: colors, typography: typography, style: style),
+      );
 }

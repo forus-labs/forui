@@ -7,8 +7,26 @@ import 'package:meta/meta.dart';
 
 part 'sidebar_item.style.dart';
 
-/// A sidebar item that can display an icon, label, and optional action.
+/// A sidebar item.
+///
+/// The [FSidebarItem] widget is useful for creating interactive items in a sidebar.
+/// It can display an icon, label, and optional action, with support for selected and
+/// enabled states.
+///
+/// See:
+/// * https://forui.dev/docs/layout/sidebar for working examples.
+/// * [FSidebarItemStyle] for customizing a sidebar item's appearance.
 class FSidebarItem extends StatelessWidget {
+  /// The sidebar item's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create sidebar
+  /// ```
+  final FSidebarItemStyle? style;
+
   /// The icon to display before the label.
   final Widget? icon;
 
@@ -18,14 +36,17 @@ class FSidebarItem extends StatelessWidget {
   /// An optional action widget to display after the label.
   final Widget? action;
 
-  /// Whether this item is currently active.
-  final bool active;
+  /// Whether this item is currently selected.
+  final bool selected;
 
-  /// Whether this item is disabled.
-  final bool disabled;
+  /// Whether this item is enabled.
+  final bool enabled;
 
-  /// The style to use for this item.
-  final FSidebarItemStyle? style;
+  /// Called when the item is pressed.
+  final VoidCallback? onPress;
+
+  /// Called when the item is long pressed.
+  final VoidCallback? onLongPress;
 
   /// Called when the hover state changes.
   final ValueChanged<bool>? onHoverChange;
@@ -35,12 +56,14 @@ class FSidebarItem extends StatelessWidget {
 
   /// Creates a [FSidebarItem].
   const FSidebarItem({
+    this.style,
     this.icon,
     this.label,
     this.action,
-    this.active = false,
-    this.disabled = false,
-    this.style,
+    this.selected = false,
+    this.enabled = true,
+    this.onPress,
+    this.onLongPress,
     this.onHoverChange,
     this.onStateChange,
     super.key,
@@ -48,12 +71,14 @@ class FSidebarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? FTheme.of(context).sidebarStyle.itemStyle;
+    final style = this.style ?? context.theme.sidebarStyle.itemStyle;
 
     return FTappable(
       style: style.tappableStyle,
       focusedOutlineStyle: style.focusedOutlineStyle,
-      selected: active,
+      selected: selected,
+      onPress: enabled ? onPress : null,
+      onLongPress: enabled ? onLongPress : null,
       onHoverChange: onHoverChange,
       onStateChange: onStateChange,
       builder:
@@ -61,14 +86,18 @@ class FSidebarItem extends StatelessWidget {
             padding: style.padding,
             decoration: BoxDecoration(color: style.backgroundColor.resolve(states), borderRadius: style.borderRadius),
             child: Row(
+              spacing: style.actionSpacing,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    if (icon != null) IconTheme(data: style.iconStyle.resolve(states), child: icon!),
-                    if (label != null)
-                      Expanded(child: DefaultTextStyle.merge(style: style.textStyle.resolve(states), child: label!)),
-                  ],
+                Expanded(
+                  child: Row(
+                    spacing: style.iconSpacing,
+                    children: [
+                      if (icon != null) IconTheme(data: style.iconStyle.resolve(states), child: icon!),
+                      if (label != null)
+                        Expanded(child: DefaultTextStyle.merge(style: style.textStyle.resolve(states), child: label!)),
+                    ],
+                  ),
                 ),
                 if (action != null) IconTheme(data: style.actionStyle.resolve(states), child: action!),
               ],
@@ -81,10 +110,13 @@ class FSidebarItem extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(FlagProperty('active', value: active, ifTrue: 'active'))
-      ..add(FlagProperty('disabled', value: disabled, ifTrue: 'disabled'))
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStateChange', onStateChange));
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -96,11 +128,19 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FWidgetStateMap<TextStyle> textStyle;
 
+  /// The spacing between the icon and label.
+  @override
+  final double iconSpacing;
+
   /// The style for the icon.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
+
+  /// The spacing between the label and action.
+  @override
+  final double actionSpacing;
 
   /// The style for the action widget.
   ///
@@ -136,55 +176,34 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
     required this.iconStyle,
     required this.actionStyle,
     required this.backgroundColor,
+    required this.borderRadius,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-    this.borderRadius = BorderRadius.zero,
+    this.iconSpacing = 8,
+    this.actionSpacing = 8,
+    this.padding = const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
   });
 
   /// Creates a [FSidebarItemStyle] that inherits its properties.
   FSidebarItemStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textStyle: FWidgetStateMap({
-          WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): typography.base.copyWith(
-            color: colors.primary,
-            fontWeight: FontWeight.w600,
-          ),
-          WidgetState.selected: typography.base.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-          WidgetState.disabled: typography.base.copyWith(color: colors.muted, fontWeight: FontWeight.w500),
-          WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
-            color: colors.primary,
-            fontWeight: FontWeight.w500,
-          ),
-          // Default state
-          WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
-        }),
-        iconStyle: FWidgetStateMap({
-          WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): IconThemeData(
-            color: colors.primary,
-            size: 20,
-          ),
-          WidgetState.selected: IconThemeData(color: colors.primary, size: 20),
-          WidgetState.disabled: IconThemeData(color: colors.muted, size: 20),
-          WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 20),
-          WidgetState.any: IconThemeData(color: colors.foreground, size: 20),
-        }),
-        actionStyle: FWidgetStateMap({
-          WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): IconThemeData(
-            color: colors.primary,
-            size: 16,
-          ),
-          WidgetState.selected: IconThemeData(color: colors.primary, size: 16),
-          WidgetState.disabled: IconThemeData(color: colors.muted, size: 16),
-          WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 16),
-          WidgetState.any: IconThemeData(color: colors.foreground, size: 16),
-        }),
+        textStyle: FWidgetStateMap.all(typography.base.copyWith(
+          color: colors.foreground,
+          height: 1,
+          overflow: TextOverflow.ellipsis,
+        )),
+        iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.foreground, size: 16)),
+        actionStyle: FWidgetStateMap.all(IconThemeData(color: colors.foreground, size: 16)),
         backgroundColor: FWidgetStateMap({
-          WidgetState.selected: colors.primary.withValues(alpha: 0.1),
-          WidgetState.hovered | WidgetState.pressed: colors.primary.withValues(alpha: 0.05),
+          WidgetState.selected | WidgetState.hovered | WidgetState.pressed: colors.primary.withValues(alpha: 0.03),
           WidgetState.any: Colors.transparent,
         }),
-        tappableStyle: style.tappableStyle,
+        borderRadius: style.borderRadius,
+        tappableStyle: style.tappableStyle.copyWith(
+          animationTween: FTappableAnimations.none,
+          pressedEnterDuration: Duration.zero,
+          pressedExitDuration: const Duration(milliseconds: 25),
+        ),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }
