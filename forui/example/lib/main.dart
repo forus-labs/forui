@@ -16,7 +16,7 @@ List<Widget> _pages = [
   const Text('Categories'),
   const Text('Search'),
   const Text('Settings'),
-  Sandbox(),
+  const Sandbox(),
 ];
 
 class Application extends StatefulWidget {
@@ -43,7 +43,76 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
     home: FScaffold(
       header: const FHeader(title: Text('Example')),
-      sidebar: Container(decoration: const BoxDecoration(color: Colors.blue), width: 200),
+      sidebar: FSidebar(
+        children: [
+          FSidebarGroup(
+            label: const Text('Navigation Navigation Navigation Navigation'),
+            action: const Icon(FIcons.plus),
+            onActionPress: () {},
+            children: [
+              FSidebarItem(
+                icon: const Icon(FIcons.house),
+                label: const Text('Home'),
+                selected: true,
+                onPress: () {},
+              ),
+              FSidebarItem(
+                icon: const Icon(FIcons.layoutGrid),
+                label: const Text('Categories'),
+                onPress: () {},
+              ),
+              FSidebarItem(
+                icon: const Icon(FIcons.search),
+                label: const Text('Search'),
+                onPress: () {},
+              ),
+            ],
+          ),
+          FSidebarGroup(
+            label: const Text('Settings'),
+            children: [
+              FSidebarItem(
+                icon: const Icon(FIcons.settings),
+                label: const Text('Generalasdasdasdasdsaasdas'),
+                action: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+              FSidebarItem(
+                icon: const Icon(FIcons.user),
+                label: const Text('Profile'),
+                action: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+              FSidebarItem(
+                icon: const Icon(FIcons.bell),
+                label: const Text('Notifications'),
+                action: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+            ],
+          ),
+          FSidebarGroup(
+            label: const Text('Support'),
+            children: [
+              FSidebarItem(
+                icon: const Icon(FIcons.info),
+                label: const Text('Help Center'),
+                onPress: () {},
+              ),
+              FSidebarItem(
+                icon: const Icon(FIcons.mail),
+                label: const Text('Contact Us'),
+                onPress: () {},
+              ),
+              FSidebarItem(
+                icon: const Icon(FIcons.file),
+                label: const Text('Documentation'),
+                onPress: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
       footer: FBottomNavigationBar(
         index: index,
         onChange: (index) => setState(() => this.index = index),
