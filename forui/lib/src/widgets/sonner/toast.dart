@@ -122,7 +122,10 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
       transition: _transition.value,
       scale: indexTransition - previousIndex,
       shift: _shift.value,
-      child: FractionalTranslation(translation: fractional, child: Opacity(opacity: opacity, child: widget.child)),
+      child: FractionalTranslation(
+        translation: fractional,
+        child: Opacity(opacity: opacity.clamp(0, 1), child: widget.child),
+      ),
     );
   }
 }

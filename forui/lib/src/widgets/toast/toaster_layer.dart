@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -57,9 +55,9 @@ class FToastData extends InheritedWidget {
 }
 
 /// Displays the toast with the given configurations.
-ToastOverlay showToast({
+ToastEntry showToast({
   required BuildContext context,
-  required Widget Function(BuildContext context, ToastOverlay overlay) builder,
+  required Widget Function(BuildContext context, ToastEntry overlay) builder,
   FToastStyle? style,
   ToastLocation location = ToastLocation.bottomRight,
   bool dismissible = true,
@@ -74,15 +72,24 @@ ToastOverlay showToast({
     location: location,
     dismissible: dismissible,
     style: style ?? data.style,
-    onClosed: onClosed,
     showDuration: showDuration,
+    attached: layer,
+    onClosed: onClosed,
   );
   return layer!.addEntry(entry);
 }
 
 @internal
 class ToastEntry {
-  final Widget Function(BuildContext context, ToastOverlay overlay) builder;
+  /// The key of the toast entry.
+  final GlobalKey key = GlobalKey();
+  FToastLayerState? attached;
+  final ValueNotifier<bool> _isClosing = ValueNotifier(false);
+
+  /// True if the toast is attached to the overlay.
+  bool get isShowing => attached != null;
+
+  final Widget Function(BuildContext context, ToastEntry overlay) builder;
   final ToastLocation location;
   final bool dismissible;
   final FToastStyle? style;
@@ -95,34 +102,18 @@ class ToastEntry {
     required this.style,
     required this.showDuration,
     required this.dismissible,
+    required this.attached,
     this.onClosed,
   });
-}
-
-@internal
-class ToastOverlay {
-  /// The key of the toast entry.
-  final GlobalKey key = GlobalKey();
-
-  /// The toast entry.
-  final ToastEntry entry;
-
-  FToastLayerState? _attached;
-  final ValueNotifier<bool> _isClosing = ValueNotifier(false);
-
-  ToastOverlay(this.entry, this._attached);
-
-  /// True if the toast is attached to the overlay.
-  bool get isShowing => _attached != null;
 
   /// Removes the toast entry from the overlay.
   void close() {
-    if (_attached == null) {
+    if (attached == null) {
       return;
     }
     _isClosing.value = true;
-    _attached!._triggerEntryClosing();
-    _attached = null;
+    attached!._triggerEntryClosing();
+    attached = null;
   }
 }
 
@@ -131,7 +122,7 @@ class ToastOverlay {
 enum ExpandMode { alwaysExpanded, expandOnHover, expandOnTap, disabled }
 
 class _ToastLocationData {
-  final List<ToastOverlay> entries = [];
+  final List<ToastEntry> entries = [];
   bool expanding = false;
   int hoverCount = 0;
 }
@@ -145,7 +136,7 @@ class _ToastLocationData {
 /// Should be placed near the top of the widget tree to ensure global access
 /// and proper overlay behavior.
 class FToastLayer extends StatefulWidget {
-  /// The style. Defaults to [FThemeData.toastStyle].
+  /// The style.
   final FToastStyle style;
 
   /// The child.
@@ -183,18 +174,17 @@ class FToastLayerState extends State<FToastLayer> {
   }
 
   /// Adds a toast entry to the overlay.
-  ToastOverlay addEntry(ToastEntry entry) {
-    final attachedToastEntry = ToastOverlay(entry, this);
+  ToastEntry addEntry(ToastEntry entry) {
     setState(() {
       final entries = _entries[entry.location];
-      entries!.entries.add(attachedToastEntry);
+      entries!.entries.add(entry);
     });
-    return attachedToastEntry;
+    return entry;
   }
 
   /// Removes a toast entry from the overlay.
   void removeEntry(ToastEntry entry) {
-    final last = _entries[entry.location]!.entries.where((e) => e.entry == entry).lastOrNull;
+    final last = _entries[entry.location]!.entries.where((e) => e == entry).lastOrNull;
     if (last != null) {
       setState(() {
         _entries[entry.location]!.entries.remove(last);
@@ -207,15 +197,15 @@ class FToastLayerState extends State<FToastLayer> {
     final style = widget.style;
     final children = [widget.child];
 
-    for (final MapEntry(key: location, value: data) in _entries.entries) {
-      final positioned = <(Key, Widget)>[];
+    for (final MapEntry(value: data) in _entries.entries) {
+      final positioned = <ToastEntry>[];
       int toastIndex = 0;
       final padding = style.padding;
 
       for (var i = data.entries.length - 1; i >= 0; i--) {
         final entry = data.entries[i];
         if (toastIndex < style.maxStackedEntries) {
-          positioned.add((entry.key, entry.entry.builder(context, entry)));
+          positioned.insert(0, entry);
         }
 
         if (!entry._isClosing.value) {
@@ -233,14 +223,11 @@ class FToastLayerState extends State<FToastLayer> {
             child: Padding(
               padding: padding,
               child: Align(
-                alignment: Alignment.topCenter,
-                child: ColoredBox(
-                  color: Colors.red,
-                  child: Toaster(
-                    shiftTransform: Offset(Alignment.bottomCenter.x, Alignment.bottomCenter.y),
-                    style: style,
-                    children: positioned,
-                  ),
+                alignment: Alignment.bottomCenter,
+                child: Toaster(
+                  alignTransform: Offset(Alignment.topCenter.x, Alignment.topCenter.y),
+                  style: style,
+                  entries: positioned,
                 ),
               ),
             ),
