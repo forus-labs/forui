@@ -55,17 +55,35 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
                 label: const Text('Home'),
                 selected: true,
                 onPress: () {},
+                children: [
+                  FSidebarItem(
+                    icon: const Icon(FIcons.settings),
+                    label: const Text('Generalasdasdasdasdsaasdas'),
+                    onPress: () {},
+                  ),
+                  FSidebarItem(icon: const Icon(FIcons.user), label: const Text('Profile'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FIcons.bell), label: const Text('Notifications'), onPress: () {}),
+                ],
               ),
               FSidebarItem(
                 icon: const Icon(FIcons.layoutGrid),
                 label: const Text('Categories'),
+                initiallyExpanded: true,
                 onPress: () {},
+                children: [
+                  FSidebarItem(
+                    label: const Text('Some super looooong option'),
+                    onPress: () {},
+                    children: [
+                      FSidebarItem(label: const Text('Profile'), onPress: () {}),
+                      FSidebarItem(label: const Text('Notifications'), onPress: () {}),
+                    ],
+                  ),
+                  FSidebarItem(label: const Text('Profile'), onPress: () {}),
+                  FSidebarItem(label: const Text('Notifications'), onPress: () {}),
+                ],
               ),
-              FSidebarItem(
-                icon: const Icon(FIcons.search),
-                label: const Text('Search'),
-                onPress: () {},
-              ),
+              FSidebarItem(icon: const Icon(FIcons.search), label: const Text('Search'), onPress: () {}),
             ],
           ),
           FSidebarGroup(
@@ -74,41 +92,21 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
               FSidebarItem(
                 icon: const Icon(FIcons.settings),
                 label: const Text('Generalasdasdasdasdsaasdas'),
-                action: const Icon(FIcons.chevronRight),
                 onPress: () {},
               ),
-              FSidebarItem(
-                icon: const Icon(FIcons.user),
-                label: const Text('Profile'),
-                action: const Icon(FIcons.chevronRight),
-                onPress: () {},
-              ),
+              FSidebarItem(icon: const Icon(FIcons.user), label: const Text('Profile')),
               FSidebarItem(
                 icon: const Icon(FIcons.bell),
                 label: const Text('Notifications'),
-                action: const Icon(FIcons.chevronRight),
                 onPress: () {},
               ),
             ],
           ),
           FSidebarGroup(
-            label: const Text('Support'),
             children: [
-              FSidebarItem(
-                icon: const Icon(FIcons.info),
-                label: const Text('Help Center'),
-                onPress: () {},
-              ),
-              FSidebarItem(
-                icon: const Icon(FIcons.mail),
-                label: const Text('Contact Us'),
-                onPress: () {},
-              ),
-              FSidebarItem(
-                icon: const Icon(FIcons.file),
-                label: const Text('Documentation'),
-                onPress: () {},
-              ),
+              FSidebarItem(icon: const Icon(FIcons.info), label: const Text('Help Center'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FIcons.mail), label: const Text('Contact Us'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Documentation')),
             ],
           ),
         ],

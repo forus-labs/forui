@@ -50,8 +50,11 @@ class FSidebar extends StatelessWidget {
   /// The optional sticky footer widget.
   final Widget? footer;
 
+  /// The optional width of the sidebar. If not provided, the width from the style will be used.
+  final double? width;
+
   /// Creates a sidebar with a list of children that will be wrapped in a [ListView].
-  FSidebar({required List<Widget> children, this.header, this.footer, this.style, super.key})
+  FSidebar({required List<Widget> children, this.header, this.footer, this.style, this.width, super.key})
     : child = ListView(children: children);
 
   /// Creates a sidebar with a builder function that will be wrapped in a [ListView.builder].
@@ -61,6 +64,7 @@ class FSidebar extends StatelessWidget {
     this.style,
     this.header,
     this.footer,
+    this.width,
     super.key,
   }) : child = ListView.builder(itemBuilder: itemBuilder, itemCount: itemCount);
 
@@ -68,19 +72,28 @@ class FSidebar extends StatelessWidget {
   ///
   /// Use this constructor when you want to provide your own scrollable content widget
   /// instead of using the default [ListView].
-  const FSidebar.raw({required this.child, this.header, this.footer, this.style, super.key});
+  const FSidebar.raw({required this.child, this.header, this.footer, this.style, this.width, super.key});
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.sidebarStyle;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        border: BorderDirectional(end: BorderSide(color: style.borderColor, width: style.borderWidth)),
-      ),
-      child: SizedBox(
-        width: style.width,
-        child: Column(children: [if (header != null) header!, Expanded(child: child), if (footer != null) footer!]),
+    return FSidebarData(
+      style: style,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: BorderDirectional(end: BorderSide(color: style.borderColor, width: style.borderWidth)),
+        ),
+        child: SizedBox(
+          width: width ?? style.width,
+          child: Column(
+            children: [
+              if (header != null) Padding(padding: style.headerPadding, child: header!),
+              Expanded(child: Padding(padding: style.contentPadding, child: child)),
+              if (footer != null) Padding(padding: style.footerPadding, child: footer!),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -88,7 +101,33 @@ class FSidebar extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FSidebarStyle>('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DoubleProperty('width', width));
+  }
+}
+
+/// A [FSidebar]'s data.
+class FSidebarData extends InheritedWidget {
+  /// Returns the [FSidebarData] of the [FSidebar] in the given [context].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FSidebar] in the given [context].
+  static FSidebarData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FSidebarData>();
+
+  /// The [FSidebar]'s style.
+  final FSidebarStyle style;
+
+  /// Creates a [FSidebarData].
+  const FSidebarData({required this.style, required super.child, super.key});
+
+  @override
+  bool updateShouldNotify(FSidebarData old) => style != old.style;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -110,17 +149,27 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   @override
   final FSidebarGroupStyle groupStyle;
 
-  /// The style for [FSidebarItem]s.
+  /// The padding for the header section.
   @override
-  final FSidebarItemStyle itemStyle;
+  final EdgeInsetsGeometry headerPadding;
+
+  /// The padding for the content section.
+  @override
+  final EdgeInsetsGeometry contentPadding;
+
+  /// The padding for the footer section.
+  @override
+  final EdgeInsetsGeometry footerPadding;
 
   /// Creates a [FSidebarStyle].
   const FSidebarStyle({
     required this.width,
     required this.borderColor,
     required this.borderWidth,
+    required this.headerPadding,
+    required this.contentPadding,
+    required this.footerPadding,
     required this.groupStyle,
-    required this.itemStyle,
   });
 
   /// Creates a [FSidebarStyle] that inherits its properties from the theme.
@@ -129,7 +178,9 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
         width: 250,
         borderColor: colors.border,
         borderWidth: 1,
+        headerPadding: const EdgeInsets.all(12),
+        contentPadding: const EdgeInsets.all(12),
+        footerPadding: const EdgeInsets.all(12),
         groupStyle: FSidebarGroupStyle.inherit(colors: colors, typography: typography, style: style),
-        itemStyle: FSidebarItemStyle.inherit(colors: colors, typography: typography, style: style),
       );
 }
