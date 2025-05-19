@@ -58,39 +58,43 @@ class FSidebarGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.sidebarStyle.groupStyle;
+    final sidebarData = FSidebarData.maybeOf(context);
+    final style = this.style ?? sidebarData?.style.groupStyle ?? context.theme.sidebarStyle.groupStyle;
 
-    return Column(
-      spacing: style.childrenSpacing,
-      children: [
-        if (label != null || action != null)
-          Padding(
-            padding: style.headerPadding,
-            child: Row(
-              spacing: style.headerSpacing,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (label != null)
-                  Expanded(child: DefaultTextStyle.merge(style: style.labelStyle, child: label!))
-                else
-                  const SizedBox(),
-                if (action != null)
-                  FTappable(
-                    style: style.tappableStyle,
-                    focusedOutlineStyle: style.focusedOutlineStyle,
-                    onHoverChange: onActionHoverChange,
-                    onStateChange: onActionStateChange,
-                    onPress: onActionPress,
-                    builder: (_, states, child) => IconTheme(data: style.actionStyle.resolve(states), child: child!),
-                    child: action!,
-                  )
-                else
-                  const SizedBox(),
-              ],
+    return FSidebarGroupData(
+      style: style,
+      child: Column(
+        children: [
+          if (label != null || action != null)
+            Padding(
+              padding: style.headerPadding,
+              child: Row(
+                spacing: style.headerSpacing,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (label != null)
+                    Expanded(child: DefaultTextStyle.merge(style: style.labelStyle, child: label!))
+                  else
+                    const SizedBox(),
+                  if (action != null)
+                    FTappable(
+                      style: style.tappableStyle,
+                      focusedOutlineStyle: style.focusedOutlineStyle,
+                      onHoverChange: onActionHoverChange,
+                      onStateChange: onActionStateChange,
+                      onPress: onActionPress,
+                      builder: (_, states, child) => IconTheme(data: style.actionStyle.resolve(states), child: child!),
+                      child: action!,
+                    )
+                  else
+                    const SizedBox(),
+                ],
+              ),
             ),
-          ),
-        Padding(padding: style.childrenPadding, child: Column(spacing: style.childrenSpacing, children: children)),
-      ],
+          SizedBox(height: style.childrenSpacing),
+          Padding(padding: style.childrenPadding, child: Column(spacing: style.childrenSpacing, children: children)),
+        ],
+      ),
     );
   }
 
@@ -102,6 +106,34 @@ class FSidebarGroup extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onActionStateChange', onActionStateChange))
       ..add(ObjectFlagProperty.has('onActionPress', onActionPress))
       ..add(DiagnosticsProperty('style', style));
+  }
+}
+
+/// A [FSidebarGroup]'s data.
+class FSidebarGroupData extends InheritedWidget {
+  /// Returns the [FSidebarGroupData] of the [FSidebarGroup] in the given [context].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FSidebarGroup] in the given [context].
+  static FSidebarGroupData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FSidebarGroupData>();
+
+  /// The [FSidebarGroup]'s style.
+  final FSidebarGroupStyle style;
+
+  /// Creates a [FSidebarGroupData].
+  const FSidebarGroupData({
+    required this.style,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(FSidebarGroupData old) => style != old.style;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -139,31 +171,33 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
+  /// The style for [FSidebarItem]s.
+  @override
+  final FSidebarItemStyle itemStyle;
+
   /// Creates a [FSidebarGroupStyle].
   const FSidebarGroupStyle({
-    required this.headerSpacing,
-    required this.headerPadding,
     required this.labelStyle,
     required this.actionStyle,
-    required this.childrenSpacing,
-    required this.childrenPadding,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
+    required this.itemStyle,
+    this.headerSpacing = 8,
+    this.headerPadding = const EdgeInsets.fromLTRB(8, 0, 8, 2),
+    this.childrenSpacing = 2,
+    this.childrenPadding = const EdgeInsets.fromLTRB(0, 0, 0, 12),
   });
 
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
   FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        headerSpacing: 8,
-        headerPadding: const EdgeInsets.fromLTRB(20, 16, 16, 0),
         labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis),
         actionStyle: FWidgetStateMap({
           WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 16),
           WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 16),
         }),
-        childrenSpacing: 5,
-        childrenPadding: const EdgeInsets.symmetric(horizontal: 12),
         tappableStyle: style.tappableStyle,
         focusedOutlineStyle: style.focusedOutlineStyle,
+        itemStyle: FSidebarItemStyle.inherit(colors: colors, typography: typography, style: style),
       );
 }
