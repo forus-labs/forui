@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/sonner/toaster.dart';
+import 'package:forui/src/widgets/toast/toaster.dart';
 import 'package:meta/meta.dart';
 
 @internal

@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/sonner/toast.dart';
+import 'package:forui/src/widgets/toast/toast.dart';
 import 'package:meta/meta.dart';
 
-import 'package:forui/src/widgets/sonner/animated_toaster.dart';
+import 'package:forui/src/widgets/toast/animated_toaster.dart';
 
 /// A toaster is responsible for managing a stack of toasts, including the expanding & transitioning animations.
 ///

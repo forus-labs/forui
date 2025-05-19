@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/src/foundation/rendering.dart';
-import 'package:forui/src/widgets/sonner/animated_parent_data.dart';
+import 'package:forui/src/widgets/toast/animated_parent_data.dart';
 import 'package:meta/meta.dart';
 
 @internal

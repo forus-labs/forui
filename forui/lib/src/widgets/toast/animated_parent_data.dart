@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import 'package:forui/src/widgets/sonner/animated_toaster.dart';
+import 'package:forui/src/widgets/toast/animated_toaster.dart';
 import 'package:meta/meta.dart';
 
 @internal
