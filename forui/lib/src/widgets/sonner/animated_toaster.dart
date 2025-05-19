@@ -173,6 +173,10 @@ class RenderAnimatedToaster extends RenderBox
       final baseScaleX = baseWidth / current.size.width;
       final baseScaleY = baseHeight / current.size.height;
 
+      print('inside');
+      print(baseHeight);
+      data.help = baseHeight;
+
       // Interpolate between the base scale and 1.0 based on expand
       // When expand is 1.0, we use a scale of 1.0 (no scaling)
       // When expand is 0.0, we use the base scale calculation

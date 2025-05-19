@@ -19,12 +19,15 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
 
   final double shift;
 
+  final int m;
+
   const Animated({
     required this.index,
     required this.previousIndex,
     required this.transition,
     required this.scale,
     required this.shift,
+    required this.m,
     required super.child,
     super.key,
   });
@@ -64,6 +67,11 @@ class Animated extends ParentDataWidget<AnimatedToasterParentData> {
       needsLayout = true;
     }
 
+    if (data.m != m) {
+      data.m = m;
+      needsLayout = true;
+    }
+
     if (needsLayout) {
       renderObject.parent?.markNeedsLayout();
     }
@@ -95,4 +103,20 @@ class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
   double scale = 0;
 
   double shift = 0;
+
+  int _monotonic = 0;
+
+  double help = 0;
+
+  int get m => _monotonic;
+
+  set m(int value) {
+    if (_monotonic == value) {
+      return;
+    }
+
+    _monotonic = value;
+    print('set m');
+    print(help);
+  }
 }

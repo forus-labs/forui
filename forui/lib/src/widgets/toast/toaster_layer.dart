@@ -61,12 +61,27 @@ ToastEntry showToast({
   FToastStyle? style,
   ToastLocation location = ToastLocation.bottomRight,
   bool dismissible = true,
-  VoidCallback? onClosed,
+  VoidCallback? onClose,
   Duration showDuration = const Duration(seconds: 5),
 }) {
   final data = FToastData.of(context);
   final layer = data.data;
-  assert(layer != null, 'No ToastLayer found in context');
+  if (layer == null) {
+    throw FlutterError.fromParts([
+      ErrorSummary('showFSonner(...) called with a context that does not contain a FSonner/FScaffold.'),
+      ErrorDescription(
+        'No FSonner/FScaffold ancestor could be found starting from the context that was passed to FSonner/FScaffold.of(). '
+        'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
+        'actually creates the FSonner/FScaffold widget being sought.',
+      ),
+      ErrorHint(
+        'There are several ways to avoid this problem. The simplest is to use a Builder to get a '
+        'context that is "under" the FSonner/FScaffold.',
+      ),
+      context.describeElement('The context used was'),
+    ]);
+  }
+
   final entry = ToastEntry(
     builder: builder,
     location: location,
@@ -74,9 +89,13 @@ ToastEntry showToast({
     style: style ?? data.style,
     showDuration: showDuration,
     attached: layer,
-    onClosed: onClosed,
   );
-  return layer!.addEntry(entry);
+  entry.onClose = () {
+    layer.removeEntry(entry);
+    onClose?.call();
+  };
+
+  return layer.addEntry(entry);
 }
 
 @internal
@@ -84,7 +103,7 @@ class ToastEntry {
   /// The key of the toast entry.
   final GlobalKey key = GlobalKey();
   FToastLayerState? attached;
-  final ValueNotifier<bool> _isClosing = ValueNotifier(false);
+  final ValueNotifier<bool> closing = ValueNotifier(false);
 
   /// True if the toast is attached to the overlay.
   bool get isShowing => attached != null;
@@ -93,7 +112,7 @@ class ToastEntry {
   final ToastLocation location;
   final bool dismissible;
   final FToastStyle? style;
-  final VoidCallback? onClosed;
+  late VoidCallback onClose;
   final Duration showDuration;
 
   ToastEntry({
@@ -103,7 +122,6 @@ class ToastEntry {
     required this.showDuration,
     required this.dismissible,
     required this.attached,
-    this.onClosed,
   });
 
   /// Removes the toast entry from the overlay.
@@ -111,7 +129,7 @@ class ToastEntry {
     if (attached == null) {
       return;
     }
-    _isClosing.value = true;
+    closing.value = true;
     attached!._triggerEntryClosing();
     attached = null;
   }
@@ -208,7 +226,7 @@ class FToastLayerState extends State<FToastLayer> {
           positioned.insert(0, entry);
         }
 
-        if (!entry._isClosing.value) {
+        if (!entry.closing.value) {
           toastIndex++;
         }
       }
