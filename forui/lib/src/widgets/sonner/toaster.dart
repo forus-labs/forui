@@ -59,8 +59,8 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => MouseRegion(
-    // onEnter: (_) => _controller.forward(),
-    // onExit: (_) => _controller.reverse(),
+    onEnter: (_) => _controller.forward(),
+    onExit: (_) => _controller.reverse(),
     child: AnimatedToaster(
       style: widget.style,
       alignTransform: widget.alignTransform,
@@ -72,6 +72,8 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
             style: entry.style ?? widget.style.toastStyle,
             alignTransform: widget.alignTransform,
             index: widget.entries.length - 1 - index,
+            length: widget.entries.length,
+            duration: entry.duration,
             expand: _expand.value,
             dismissing: entry.dismissing,
             onDismiss: entry.onDismiss!,

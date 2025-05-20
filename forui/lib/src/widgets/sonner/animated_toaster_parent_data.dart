@@ -69,6 +69,8 @@ class AnimatedToast extends ParentDataWidget<AnimatedToasterParentData> {
 @internal
 class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
   final AnimationTween<Size> scale = AnimationTween.size();
+
+  final AnimationTween<Offset> alignment = AnimationTween.offset();
   
   final AnimationTween<double> shift = AnimationTween.of();
 
@@ -87,6 +89,7 @@ class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
   set signal(int value) {
     _signal = value;
     scale.mark();
+    alignment.mark();
     shift.mark();
     protrusion.mark();
   }

@@ -140,7 +140,7 @@ class RenderAnimatedToaster extends RenderBox
 
     size = constraints.constrain(Size.lerp(collapsedSize, expandedSize, expand * data.transition)!);
 
-    // Second pass: Shifts offsets if the [alignmentTransform] is negative (toaster expands leftwards/upwards).
+    // Second pass: Shifts offsets if the [alignTransform] is negative (toaster expands leftwards/upwards).
     if (!alignTransform.dy.isNegative) {
       return;
     }
@@ -196,12 +196,15 @@ class RenderAnimatedToaster extends RenderBox
       // Calculate the reference points (point of alignment).
       // This is a simplified implementation that assumes toasts are vertically stacked either on top or below another
       // toast and never purely horizontal.
-      final frontReferenceX = front.width * (0.5 + alignTransform.dx * 0.5);
-      final frontReferenceY = alignTransform.dy < 0 ? 0.0 : front.height;
-      final thisReferenceX = (current.size.width * scaleX) * (0.5 + alignTransform.dx * 0.5);
-      final thisReferenceY = alignTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
+      final frontX = front.width * (0.5 + alignTransform.dx * 0.5);
+      final frontY = alignTransform.dy < 0 ? 0.0 : front.height;
+      final thisX = (current.size.width * scaleX) * (0.5 + alignTransform.dx * 0.5);
+      final thisY = alignTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
 
-      final alignment = Offset(frontReferenceX - thisReferenceX, frontReferenceY - thisReferenceY);
+      final alignmentBegin = data.alignment.begin ??= Offset.zero;
+      // We don't set data.alignment.end as this constantly changes.
+      final alignmentEnd = Offset(frontX - thisX, frontY - thisY);
+      final alignment = data.alignment.value = Offset.lerp(alignmentBegin, alignmentEnd, data.transition)!;
 
       // Calculate the amount to shift the toast such that it protrudes slightly above the toast in front.
       final begin = data.protrusion.begin ??= style.collapsedProtrusion * (log(data.index.previous + 1) / log(2));

@@ -26,7 +26,7 @@ class _SandboxState extends State<Sandbox> {
               ),
             );
 
-            showFToast(context: context, builder: buildToast, alignment: FSonnerAlignment.topCenter);
+            showFToast(context: context, builder: buildToast, alignment: FSonnerAlignment.bottomRight);
           },
           child: Text('Small'),
         ),
@@ -59,7 +59,7 @@ class _SandboxState extends State<Sandbox> {
               ),
             );
 
-            showFToast(context: context, builder: buildToast, alignment: FSonnerAlignment.topCenter);
+            showFToast(context: context, builder: buildToast, alignment: FSonnerAlignment.bottomRight);
           },
           child: Text('Large'),
         ),

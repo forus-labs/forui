@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -128,6 +129,7 @@ class FSonnerState extends State<FSonner> {
   }) {
     final entry = ToastEntry(style, alignment._alignment, duration, builder);
     entry.onDismiss = () {
+      entry.dismissing.value = true;
       _remove(entry);
       onDismiss?.call();
     };
@@ -137,16 +139,29 @@ class FSonnerState extends State<FSonner> {
   }
 
   void _add(FSonnerAlignment alignment, ToastEntry entry) {
+    if (!mounted) {
+      return;
+    }
+
     final FSonnerAlignment(:_alignment, :_toastAlignment) = alignment;
     final resolved = _alignment.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+    final style = widget.style ?? context.theme.sonnerStyle;
 
     setState(() {
       final (_, entries) = _entries[resolved] ??= (_toastAlignment, []);
+      if (style.max <= entries.whereNot((e) => e.dismissing.value).length) {
+        entries.reversed.lastWhereOrNull((e) => !e.dismissing.value)?.dismissing.value = true;
+      }
+
       entries.add(entry);
     });
   }
 
   void _remove(ToastEntry entry) {
+    if (!mounted) {
+      return;
+    }
+
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     if (_entries[entry.alignment.resolve(direction)]?.$2 case final entries?) {
       setState(() => entries.remove(entry));

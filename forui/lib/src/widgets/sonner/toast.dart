@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -20,6 +21,12 @@ class Toast extends StatefulWidget {
   /// The toast's index starting from the back.
   final int index;
 
+  /// The total number of toasts.
+  final int length;
+
+  /// The toast's show duration.
+  final Duration duration;
+
   /// The expansion animation, between `[0, 1]`.
   final double expand;
 
@@ -34,8 +41,10 @@ class Toast extends StatefulWidget {
 
   const Toast({
     required this.style,
-    required this.index,
     required this.alignTransform,
+    required this.index,
+    required this.length,
+    required this.duration,
     required this.expand,
     required this.dismissing,
     required this.onDismiss,
@@ -51,8 +60,10 @@ class Toast extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(IntProperty('index', index))
       ..add(DiagnosticsProperty('alignTransform', alignTransform))
+      ..add(IntProperty('index', index))
+      ..add(IntProperty('length', length))
+      ..add(DiagnosticsProperty('duration', duration))
       ..add(PercentProperty('expand', expand))
       ..add(DiagnosticsProperty('dismissing', dismissing))
       ..add(ObjectFlagProperty.has('onDismiss', onDismiss));
@@ -60,9 +71,9 @@ class Toast extends StatefulWidget {
 }
 
 class _ToastState extends State<Toast> with TickerProviderStateMixin {
+  late Timer _timer;
   late final AnimationController _entranceExitController;
   late Animation<double> _entranceExit;
-
   late final AnimationController _transitionController;
   late Animation<double> _transition;
 
@@ -72,6 +83,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     widget.dismissing.addListener(_dismissing);
+    _timer = Timer(widget.duration, _dismissing);
 
     _entranceExitController =
         AnimationController(vsync: this, duration: widget.style.entranceExitDuration)
@@ -120,6 +132,14 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
         ..forward();
       _signal++;
     }
+
+    if (widget.expand != old.expand) {
+      if (0 < widget.expand) {
+        _timer.cancel();
+      } else {
+        _resume(Duration(milliseconds: (widget.length - widget.index - 1) * 300));
+      }
+    }
   }
 
   void _dismissing() => _entranceExitController.reverse();
@@ -130,11 +150,17 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     }
   }
 
+  void _resume([Duration stagger = Duration.zero]) {
+    _timer.cancel();
+    _timer = Timer(widget.duration + stagger, _dismissing);
+  }
+
   @override
   void dispose() {
     widget.dismissing.removeListener(_dismissing);
     _transitionController.dispose();
     _entranceExitController.dispose();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -150,7 +176,11 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
       index: widget.index,
       transition: _transition.value,
       signal: _signal,
-      child: FractionalTranslation(translation: entranceExit, child: Opacity(opacity: opacity, child: widget.child)),
+      child: MouseRegion(
+        onEnter: (_) => _timer.cancel(),
+        onExit: (_) => _resume(),
+        child: FractionalTranslation(translation: entranceExit, child: Opacity(opacity: opacity, child: widget.child)),
+      ),
     );
   }
 }
