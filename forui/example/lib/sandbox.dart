@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-import 'package:forui_example/portal/visualizer.dart';
-import 'package:intl/intl.dart';
-
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -19,23 +16,23 @@ class _SandboxState extends State<Sandbox> {
       children: [
         FButton(
           onPress: () {
-            Widget buildToast(BuildContext context, ToastEntry overlay) => IntrinsicHeight(
+            Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
               child: FCard(
                 title: Text('Event has been created'),
                 subtitle: Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: FButton(onPress: () => overlay.close(), child: const Text('close')),
+                  child: FButton(onPress: () => toast.dismiss(), child: const Text('close')),
                 ),
               ),
             );
 
-            showToast(context: context, builder: buildToast, location: ToastLocation.bottomRight);
+            showFToast(context: context, builder: buildToast, alignment: FSonnerAlignment.topCenter);
           },
           child: Text('Small'),
         ),
         FButton(
           onPress: () {
-            Widget buildToast(BuildContext context, ToastEntry overlay) => IntrinsicHeight(
+            Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
               child: FCard(
                 style: FThemes.zinc.dark.cardStyle,
                 title: Text('Event has been created'),
@@ -54,7 +51,7 @@ class _SandboxState extends State<Sandbox> {
                     ),
                     FButton(
                       style: FThemes.zinc.dark.buttonStyles.primary,
-                      onPress: () => overlay.close(),
+                      onPress: () => toast.dismiss(),
                       child: const Text('close'),
                     ),
                   ],
@@ -62,7 +59,7 @@ class _SandboxState extends State<Sandbox> {
               ),
             );
 
-            showToast(context: context, builder: buildToast, location: ToastLocation.bottomRight);
+            showFToast(context: context, builder: buildToast, alignment: FSonnerAlignment.topCenter);
           },
           child: Text('Large'),
         ),

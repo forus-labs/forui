@@ -1,18 +1,17 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/toast/toast.dart';
+import 'package:forui/src/widgets/sonner/animated_toaster.dart';
+import 'package:forui/src/widgets/sonner/sonner.dart';
+import 'package:forui/src/widgets/sonner/toast.dart';
 import 'package:meta/meta.dart';
 
-import 'package:forui/src/widgets/toast/animated_toaster.dart';
-
-/// A toaster is responsible for managing a stack of toasts, including the expanding & transitioning animations.
+/// A toaster is responsible for managing a stack of toasts, including the expanding animations.
 ///
 /// The actual positioning of toasts is delegated to [AnimatedToaster].
 @internal
 class Toaster extends StatefulWidget {
-  final FToastStyle style;
+  final FSonnerStyle style;
   final Offset alignTransform;
   final List<ToastEntry> entries;
 
@@ -24,7 +23,10 @@ class Toaster extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('alignTransform', alignTransform))
+      ..add(IterableProperty('entries', entries));
   }
 }
 
@@ -35,8 +37,8 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: widget.style.expandDuration);
-    _controller.addListener(() => setState(() {}));
+    _controller = AnimationController(vsync: this, duration: widget.style.expandDuration)
+      ..addListener(() => setState(() {}));
     _expand = _controller.drive(CurveTween(curve: widget.style.expandCurve));
   }
 
@@ -60,18 +62,19 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
     // onEnter: (_) => _controller.forward(),
     // onExit: (_) => _controller.reverse(),
     child: AnimatedToaster(
+      style: widget.style,
       alignTransform: widget.alignTransform,
       expand: _expand.value,
       children: [
-        for (final (index, entry) in widget.entries.indexed)
+        for (final (index, entry) in widget.entries.reversed.indexed)
           Toast(
             key: entry.key,
-            style: widget.style,
+            style: entry.style ?? widget.style.toastStyle,
+            alignTransform: widget.alignTransform,
             index: widget.entries.length - 1 - index,
-            alignmentTransform: widget.alignTransform,
             expand: _expand.value,
-            closing: entry.closing,
-            onClose: entry.onClose,
+            dismissing: entry.dismissing,
+            onDismiss: entry.onDismiss!,
             child: entry.builder(context, entry),
           ),
       ],
