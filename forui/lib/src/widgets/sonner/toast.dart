@@ -176,10 +176,13 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
       index: widget.index,
       transition: _transition.value,
       signal: _signal,
-      child: MouseRegion(
-        onEnter: (_) => _timer.cancel(),
-        onExit: (_) => _resume(),
-        child: FractionalTranslation(translation: entranceExit, child: Opacity(opacity: opacity, child: widget.child)),
+      child: ConstrainedBox(
+        constraints: widget.style.constraints,
+        child: MouseRegion(
+          onEnter: (_) => _timer.cancel(),
+          onExit: (_) => _resume(),
+          child: FractionalTranslation(translation: entranceExit, child: Opacity(opacity: opacity, child: widget.child)),
+        ),
       ),
     );
   }
