@@ -27,7 +27,9 @@ void main() {
 
     for (final theme in TestScaffold.themes) {
       for (final direction in Axis.values) {
-        testWidgets('${theme.name} with $direction FDialogContent', (tester) async {
+        testWidgets('${theme.name} with $direction FDialogContent', (
+          tester,
+        ) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
@@ -39,7 +41,11 @@ void main() {
                 ),
                 actions: [
                   FButton(onPress: () {}, child: const Text('Continue')),
-                  FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
+                  FButton(
+                    style: FButtonStyle.outline,
+                    onPress: () {},
+                    child: const Text('Cancel'),
+                  ),
                 ],
               ),
             ),
@@ -47,7 +53,9 @@ void main() {
 
           await expectLater(
             find.byType(FDialog),
-            matchesGoldenFile('dialog/${theme.name}-$direction-content-dialog.png'),
+            matchesGoldenFile(
+              'dialog/${theme.name}-$direction-content-dialog.png',
+            ),
           );
         });
       }
@@ -56,11 +64,17 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FDialog.raw(builder: (context, style) => const SizedBox(width: 50, height: 50)),
+            child: FDialog.raw(
+              builder:
+                  (context, style) => const SizedBox(width: 50, height: 50),
+            ),
           ),
         );
 
-        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-raw-content-dialog.png'));
+        await expectLater(
+          find.byType(FDialog),
+          matchesGoldenFile('dialog/${theme.name}-raw-content-dialog.png'),
+        );
       });
 
       testWidgets('${theme.name} adaptive on mobile device', (tester) async {
@@ -77,13 +91,20 @@ void main() {
               ),
               actions: [
                 FButton(child: const Text('Continue'), onPress: () {}),
-                FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () {}),
+                FButton(
+                  style: FButtonStyle.outline,
+                  child: const Text('Cancel'),
+                  onPress: () {},
+                ),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-adaptive-mobile.png'));
+        await expectLater(
+          find.byType(FDialog),
+          matchesGoldenFile('dialog/${theme.name}-adaptive-mobile.png'),
+        );
       });
 
       testWidgets('${theme.name} adaptive on tablet device', (tester) async {
@@ -100,13 +121,20 @@ void main() {
               ),
               actions: [
                 FButton(child: const Text('Continue'), onPress: () {}),
-                FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () {}),
+                FButton(
+                  style: FButtonStyle.outline,
+                  child: const Text('Cancel'),
+                  onPress: () {},
+                ),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/${theme.name}-adaptive-tablet.png'));
+        await expectLater(
+          find.byType(FDialog),
+          matchesGoldenFile('dialog/${theme.name}-adaptive-tablet.png'),
+        );
       });
     }
   });

@@ -8,7 +8,10 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FProgress(style: TestScaffold.blueScreen.progressStyles.linearProgressStyle, value: 0.5),
+          child: FProgress(
+            style: TestScaffold.blueScreen.progressStyles.linearProgressStyle,
+            value: 0.5,
+          ),
         ),
       );
 
@@ -18,18 +21,28 @@ void main() {
     for (final theme in TestScaffold.themes) {
       for (final value in [0.0, 0.5, 1.0]) {
         testWidgets('${theme.name} - $value', (tester) async {
-          await tester.pumpWidget(TestScaffold(theme: theme.data, child: FProgress(value: value)));
+          await tester.pumpWidget(
+            TestScaffold(theme: theme.data, child: FProgress(value: value)),
+          );
           await tester.pumpAndSettle();
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/linear/${theme.name}/$value.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('progress/linear/${theme.name}/$value.png'),
+          );
         });
       }
 
       testWidgets('${theme.name} - indefinite', (tester) async {
-        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FProgress()));
+        await tester.pumpWidget(
+          TestScaffold(theme: theme.data, child: const FProgress()),
+        );
         await tester.pump(const Duration(milliseconds: 500));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/linear/${theme.name}/indefinite.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('progress/linear/${theme.name}/indefinite.png'),
+        );
       });
     }
 
@@ -38,7 +51,10 @@ void main() {
       await tester.pumpWidget(TestScaffold(child: const FProgress(value: 1)));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/linear/update-value-double.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('progress/linear/update-value-double.png'),
+      );
     });
 
     testWidgets('update value to null', (tester) async {
@@ -46,7 +62,10 @@ void main() {
       await tester.pumpWidget(TestScaffold(child: const FProgress()));
       await tester.pump(const Duration(milliseconds: 300));
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/linear/update-value-numer.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('progress/linear/update-value-numer.png'),
+      );
     });
   });
 
@@ -54,7 +73,13 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FProgress.circularIcon(style: TestScaffold.blueScreen.progressStyles.circularIconProgressStyle),
+          child: FProgress.circularIcon(
+            style:
+                TestScaffold
+                    .blueScreen
+                    .progressStyles
+                    .circularIconProgressStyle,
+          ),
         ),
       );
 
@@ -63,7 +88,12 @@ void main() {
 
     for (final theme in TestScaffold.themes) {
       testWidgets('${theme.name} - indefinite', (tester) async {
-        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FProgress.circularIcon()));
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: const FProgress.circularIcon(),
+          ),
+        );
         await tester.pump(const Duration(milliseconds: 500));
 
         await expectLater(

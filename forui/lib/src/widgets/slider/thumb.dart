@@ -31,7 +31,9 @@ class Thumb extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(FlagProperty('min', value: min, ifTrue: 'min', ifFalse: 'max'));
+    properties.add(
+      FlagProperty('min', value: min, ifTrue: 'min', ifFalse: 'max'),
+    );
   }
 }
 
@@ -48,7 +50,10 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _tooltip = FTooltipController(vsync: this);
-    _key = widget.min ? FSliderTooltipsController.min : FSliderTooltipsController.max;
+    _key =
+        widget.min
+            ? FSliderTooltipsController.min
+            : FSliderTooltipsController.max;
   }
 
   @override
@@ -62,7 +67,12 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final states = InheritedStates.of(context).states;
     final InheritedData(
-      style: FSliderStyle(:thumbSize, :thumbStyle, :tooltipTipAnchor, :tooltipThumbAnchor),
+      style: FSliderStyle(
+        :thumbSize,
+        :thumbStyle,
+        :tooltipTipAnchor,
+        :tooltipThumbAnchor,
+      ),
       :layout,
       :tooltipBuilder,
       :semanticValueFormatterCallback,
@@ -70,14 +80,14 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
     ) = InheritedData.of(context);
 
     String? increasedValue;
-    if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection
-        when _controller.selection != selection) {
+    if (_controller.selection.step(min: widget.min, extend: !widget.min)
+        case final selection when _controller.selection != selection) {
       increasedValue = semanticValueFormatterCallback(_offset(selection));
     }
 
     String? decreasedValue;
-    if (_controller.selection.step(min: widget.min, extend: widget.min) case final selection
-        when _controller.selection != selection) {
+    if (_controller.selection.step(min: widget.min, extend: widget.min)
+        case final selection when _controller.selection != selection) {
       decreasedValue = semanticValueFormatterCallback(_offset(selection));
     }
 
@@ -89,8 +99,12 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
       child: FocusableActionDetector(
         shortcuts: _shortcuts(layout),
         actions: {
-          _ExtendIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: true)),
-          _ShrinkIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: false)),
+          _ExtendIntent: CallbackAction(
+            onInvoke: (_) => _controller.step(min: widget.min, extend: true),
+          ),
+          _ShrinkIntent: CallbackAction(
+            onInvoke: (_) => _controller.step(min: widget.min, extend: false),
+          ),
         },
         enabled: enabled,
         mouseCursor: enabled ? _cursor : MouseCursor.defer,
@@ -103,7 +117,10 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: thumbStyle.color.resolve(states),
-              border: Border.all(color: thumbStyle.borderColor.resolve(states), width: thumbStyle.borderWidth),
+              border: Border.all(
+                color: thumbStyle.borderColor.resolve(states),
+                width: thumbStyle.borderWidth,
+              ),
             ),
             child: SizedBox.square(dimension: thumbSize),
           ),
@@ -127,7 +144,9 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
           controller: _tooltip,
           tipAnchor: tooltipTipAnchor,
           childAnchor: tooltipThumbAnchor,
-          tipBuilder: (_, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
+          tipBuilder:
+              (_, style, _) =>
+                  tooltipBuilder(style, _offset(_controller.selection)),
           longPress: false,
           hover: false,
           child: thumb,
@@ -183,9 +202,13 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
     }
   }
 
-  double _offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
+  double _offset(FSliderSelection selection) =>
+      widget.min ? selection.offset.min : selection.offset.max;
 
-  Map<ShortcutActivator, Intent> _shortcuts(FLayout layout) => switch ((layout, widget.min)) {
+  Map<ShortcutActivator, Intent> _shortcuts(FLayout layout) => switch ((
+    layout,
+    widget.min,
+  )) {
     (FLayout.ltr, true) || (FLayout.rtl, false) => const {
       SingleActivator(LogicalKeyboardKey.arrowLeft): _ExtendIntent(),
       SingleActivator(LogicalKeyboardKey.arrowRight): _ShrinkIntent(),
@@ -204,7 +227,11 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
     },
   };
 
-  GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, FLayout layout) {
+  GestureDragUpdateCallback? _drag(
+    FSliderController controller,
+    double thumbSize,
+    FLayout layout,
+  ) {
     if (controller.allowedInteraction == FSliderInteraction.tap) {
       return null;
     }
@@ -213,7 +240,10 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
 
     void drag(DragUpdateDetails details) {
       final origin = widget.min ? _origin!.min : _origin!.max;
-      controller.slide(origin + translate(details.localPosition), min: widget.min);
+      controller.slide(
+        origin + translate(details.localPosition),
+        min: widget.min,
+      );
     }
 
     return drag;
@@ -267,10 +297,11 @@ class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
 
 @internal
 extension Layouts on FLayout {
-  double Function(Offset) translateThumbDrag(double thumbSize) => switch (this) {
-    FLayout.ltr => (delta) => delta.dx - thumbSize / 2,
-    FLayout.rtl => (delta) => -delta.dx + thumbSize / 2,
-    FLayout.ttb => (delta) => delta.dy - thumbSize / 2,
-    FLayout.btt => (delta) => -delta.dy + thumbSize / 2,
-  };
+  double Function(Offset) translateThumbDrag(double thumbSize) =>
+      switch (this) {
+        FLayout.ltr => (delta) => delta.dx - thumbSize / 2,
+        FLayout.rtl => (delta) => -delta.dx + thumbSize / 2,
+        FLayout.ttb => (delta) => delta.dy - thumbSize / 2,
+        FLayout.btt => (delta) => -delta.dy + thumbSize / 2,
+      };
 }

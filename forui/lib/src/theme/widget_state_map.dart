@@ -78,7 +78,8 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   /// ```
   @useResult
   FWidgetStateMap<R> map<R>(R Function(T) map) => FWidgetStateMap<R>({
-    for (final MapEntry(key: constraint, :value) in _constraints.entries) constraint: map(value),
+    for (final MapEntry(key: constraint, :value) in _constraints.entries)
+      constraint: map(value),
   });
 
   /// Creates a new [FWidgetStateMap] where only the first value associated with a constraint satisfied by [states]
@@ -104,7 +105,10 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   /// // Only the 'pressed' state's color will be modified.
   /// ```
   @useResult
-  FWidgetStateMap<T> replaceFirstWhere(Set<WidgetState> states, T Function(T) replace) {
+  FWidgetStateMap<T> replaceFirstWhere(
+    Set<WidgetState> states,
+    T Function(T) replace,
+  ) {
     final constraints = {..._constraints};
 
     for (final key in constraints.keys) {
@@ -137,7 +141,10 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   /// // Only the 'hovered' state's color will be modified, 'pressed' remains unchanged
   /// ```
   @useResult
-  FWidgetStateMap<T> replaceLastWhere(Set<WidgetState> states, T Function(T) replace) {
+  FWidgetStateMap<T> replaceLastWhere(
+    Set<WidgetState> states,
+    T Function(T) replace,
+  ) {
     final constraints = {..._constraints};
 
     for (final key in constraints.keys.toList().reversed) {
@@ -167,7 +174,11 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   /// );
   /// ```
   @useResult
-  FWidgetStateMap<T> replaceAllWhere(Set<WidgetState> states, T Function(T) replace) => FWidgetStateMap({
-    for (final e in _constraints.entries) e.key: e.key.isSatisfiedBy(states) ? replace(e.value) : e.value,
+  FWidgetStateMap<T> replaceAllWhere(
+    Set<WidgetState> states,
+    T Function(T) replace,
+  ) => FWidgetStateMap({
+    for (final e in _constraints.entries)
+      e.key: e.key.isSatisfiedBy(states) ? replace(e.value) : e.value,
   });
 }

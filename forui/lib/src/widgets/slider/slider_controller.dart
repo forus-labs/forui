@@ -51,11 +51,13 @@ abstract class FSliderController extends FChangeNotifier {
        _initialSelection = selection;
 
   /// Creates a [FSliderController] for selecting a range.
-  FSliderController.range({required FSliderSelection selection, bool tooltips = true})
-    : tooltips = FSliderTooltipsController(enabled: tooltips),
-      allowedInteraction = FSliderInteraction.tapAndSlideThumb,
-      extendable = (min: true, max: true),
-      _initialSelection = selection;
+  FSliderController.range({
+    required FSliderSelection selection,
+    bool tooltips = true,
+  }) : tooltips = FSliderTooltipsController(enabled: tooltips),
+       allowedInteraction = FSliderInteraction.tapAndSlideThumb,
+       extendable = (min: true, max: true),
+       _initialSelection = selection;
 
   /// Registers the controller to a slider with the given extent and marks.
   ///
@@ -77,7 +79,10 @@ abstract class FSliderController extends FChangeNotifier {
       return;
     }
 
-    assert(min ? extendable.min : extendable.max, 'Slider is not extendable at the ${min ? 'min' : 'max'} edge.');
+    assert(
+      min ? extendable.min : extendable.max,
+      'Slider is not extendable at the ${min ? 'min' : 'max'} edge.',
+    );
 
     if (_selection case final selection?) {
       this.selection = selection.move(min: min, to: offset);
@@ -93,7 +98,8 @@ abstract class FSliderController extends FChangeNotifier {
   ///
   /// The offset is relative to the origin defined by [FSlider.layout].
   bool? tap(double offset) {
-    if (allowedInteraction == FSliderInteraction.slide || allowedInteraction == FSliderInteraction.slideThumb) {
+    if (allowedInteraction == FSliderInteraction.slide ||
+        allowedInteraction == FSliderInteraction.slideThumb) {
       return null;
     }
 
@@ -147,12 +153,21 @@ class FContinuousSliderController extends FSliderController {
     super.tooltips = true,
     super.allowedInteraction,
     super.minExtendable,
-  }) : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.');
+  }) : assert(
+         0 <= stepPercentage && stepPercentage <= 1,
+         'stepPercentage must be between 0 and 1, inclusive.',
+       );
 
   /// Creates a [FContinuousSliderController] for selecting a range.
-  FContinuousSliderController.range({required super.selection, this.stepPercentage = 0.05, super.tooltips = true})
-    : assert(0 <= stepPercentage && stepPercentage <= 1, 'stepPercentage must be between 0 and 1, inclusive.'),
-      super.range();
+  FContinuousSliderController.range({
+    required super.selection,
+    this.stepPercentage = 0.05,
+    super.tooltips = true,
+  }) : assert(
+         0 <= stepPercentage && stepPercentage <= 1,
+         'stepPercentage must be between 0 and 1, inclusive.',
+       ),
+       super.range();
 
   @override
   @internal
@@ -165,7 +180,8 @@ class FContinuousSliderController extends FSliderController {
     );
 
     if (_selection == null) {
-      _selection = proposed; // We don't want to notify listeners when performing initialization.
+      _selection =
+          proposed; // We don't want to notify listeners when performing initialization.
     } else {
       selection = proposed;
     }
@@ -195,7 +211,10 @@ class FDiscreteSliderController extends FSliderController {
   });
 
   /// Creates a [FDiscreteSliderController] for selecting a range.
-  FDiscreteSliderController.range({required super.selection, super.tooltips = true}) : super.range();
+  FDiscreteSliderController.range({
+    required super.selection,
+    super.tooltips = true,
+  }) : super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
@@ -205,11 +224,15 @@ class FDiscreteSliderController extends FSliderController {
       mainAxisExtent: extent,
       extent: selection.extent,
       offset: selection.offset,
-      ticks: SplayTreeMap.fromIterable(marks.map((mark) => mark.value), value: (_) {}),
+      ticks: SplayTreeMap.fromIterable(
+        marks.map((mark) => mark.value),
+        value: (_) {},
+      ),
     );
 
     if (_selection == null) {
-      _selection = proposed; // We don't want to notify listeners when performing initialization.
+      _selection =
+          proposed; // We don't want to notify listeners when performing initialization.
     } else {
       selection = proposed;
     }

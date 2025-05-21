@@ -45,7 +45,10 @@ void main() {
       (Alignment.bottomCenter, const Offset(25, 100)),
       (Alignment.bottomRight, const Offset(50, 100)),
     ]) {
-      test('relative()', () => expect(alignment.relative(to: const Size(50, 100)), offset));
+      test(
+        'relative()',
+        () => expect(alignment.relative(to: const Size(50, 100)), offset),
+      );
     }
   });
 }

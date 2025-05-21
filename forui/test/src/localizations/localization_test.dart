@@ -27,7 +27,8 @@ void main() {
           locale: const Locale('de'),
           child: Builder(
             builder: (context) {
-              final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+              final localizations =
+                  FLocalizations.of(context) ?? FDefaultLocalizations();
               expect(localizations.localeName, 'de');
               return const Placeholder();
             },
@@ -41,7 +42,10 @@ void main() {
 
   group('FDateTimeLocalizations', () {
     group('firstDayOfWeek', () {
-      test('default implementation', () => expect(FDefaultLocalizations().firstDayOfWeek, 7));
+      test(
+        'default implementation',
+        () => expect(FDefaultLocalizations().firstDayOfWeek, 7),
+      );
 
       testWidgets('monday', (tester) async {
         await tester.pumpWidget(
@@ -49,7 +53,8 @@ void main() {
             locale: const Locale('de'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+                final localizations =
+                    FLocalizations.of(context) ?? FDefaultLocalizations();
                 expect(localizations.firstDayOfWeek, 1);
                 return const Placeholder();
               },
@@ -66,7 +71,8 @@ void main() {
             locale: const Locale('en'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+                final localizations =
+                    FLocalizations.of(context) ?? FDefaultLocalizations();
                 expect(localizations.firstDayOfWeek, 7);
                 return const Placeholder();
               },
@@ -80,7 +86,15 @@ void main() {
 
     group('shortWeekdays', () {
       test('default implementation', () {
-        expect(FDefaultLocalizations().shortWeekDays, ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
+        expect(FDefaultLocalizations().shortWeekDays, [
+          'Sun',
+          'Mon',
+          'Tue',
+          'Wed',
+          'Thu',
+          'Fri',
+          'Sat',
+        ]);
       });
 
       testWidgets('de locale', (tester) async {
@@ -89,8 +103,17 @@ void main() {
             locale: const Locale('de'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-                expect(localizations.shortWeekDays, ['So.', 'Mo.', 'Di.', 'Mi.', 'Do.', 'Fr.', 'Sa.']);
+                final localizations =
+                    FLocalizations.of(context) ?? FDefaultLocalizations();
+                expect(localizations.shortWeekDays, [
+                  'So.',
+                  'Mo.',
+                  'Di.',
+                  'Mi.',
+                  'Do.',
+                  'Fr.',
+                  'Sa.',
+                ]);
                 return const Placeholder();
               },
             ),
@@ -103,7 +126,15 @@ void main() {
 
     group('narrowWeekDays', () {
       test('default implementation', () {
-        expect(FDefaultLocalizations().narrowWeekDays, ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
+        expect(FDefaultLocalizations().narrowWeekDays, [
+          'Su',
+          'Mo',
+          'Tu',
+          'We',
+          'Th',
+          'Fr',
+          'Sa',
+        ]);
       });
 
       testWidgets('de locale', (tester) async {
@@ -112,8 +143,17 @@ void main() {
             locale: const Locale('de'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-                expect(localizations.narrowWeekDays, ['S', 'M', 'D', 'M', 'D', 'F', 'S']);
+                final localizations =
+                    FLocalizations.of(context) ?? FDefaultLocalizations();
+                expect(localizations.narrowWeekDays, [
+                  'S',
+                  'M',
+                  'D',
+                  'M',
+                  'D',
+                  'F',
+                  'S',
+                ]);
                 return const Placeholder();
               },
             ),
@@ -129,8 +169,17 @@ void main() {
             locale: const Locale('en', 'SG'),
             child: Builder(
               builder: (context) {
-                final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-                expect(localizations.narrowWeekDays, ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
+                final localizations =
+                    FLocalizations.of(context) ?? FDefaultLocalizations();
+                expect(localizations.narrowWeekDays, [
+                  'Su',
+                  'Mo',
+                  'Tu',
+                  'We',
+                  'Th',
+                  'Fr',
+                  'Sa',
+                ]);
                 return const Placeholder();
               },
             ),

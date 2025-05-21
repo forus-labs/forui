@@ -49,15 +49,16 @@ extension Alignments on Alignment {
     _ => this,
   };
 
-  Offset relative({required Size to, Offset origin = Offset.zero}) => switch (this) {
-    Alignment.topCenter => to.topCenter(origin),
-    Alignment.topRight => to.topRight(origin),
-    Alignment.centerLeft => to.centerLeft(origin),
-    Alignment.center => to.center(origin),
-    Alignment.centerRight => to.centerRight(origin),
-    Alignment.bottomLeft => to.bottomLeft(origin),
-    Alignment.bottomCenter => to.bottomCenter(origin),
-    Alignment.bottomRight => to.bottomRight(origin),
-    _ => to.topLeft(origin),
-  };
+  Offset relative({required Size to, Offset origin = Offset.zero}) =>
+      switch (this) {
+        Alignment.topCenter => to.topCenter(origin),
+        Alignment.topRight => to.topRight(origin),
+        Alignment.centerLeft => to.centerLeft(origin),
+        Alignment.center => to.center(origin),
+        Alignment.centerRight => to.centerRight(origin),
+        Alignment.bottomLeft => to.bottomLeft(origin),
+        Alignment.bottomCenter => to.bottomCenter(origin),
+        Alignment.bottomRight => to.bottomRight(origin),
+        _ => to.topLeft(origin),
+      };
 }

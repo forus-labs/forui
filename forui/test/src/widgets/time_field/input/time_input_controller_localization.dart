@@ -27,12 +27,17 @@ void main() {
               builder: (context) {
                 final controller = TimeInputController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(vsync: const TestVSync(), initialTime: const FTime(12, 15)),
+                  FTimeFieldController(
+                    vsync: const TestVSync(),
+                    initialTime: const FTime(12, 15),
+                  ),
                   DateFormat.jm(locale.toString()),
                   context.theme.textFieldStyle,
                 );
 
-                parts = controller.selector.split(DateFormat.jm(locale.toString()).format(_date));
+                parts = controller.selector.split(
+                  DateFormat.jm(locale.toString()).format(_date),
+                );
                 joined = controller.selector.join(parts);
 
                 return const Text('');
@@ -41,7 +46,13 @@ void main() {
           ),
         );
 
-        expect(parts, anyOf(unorderedEquals(['3', '30', anything]), unorderedEquals(['15', '30'])));
+        expect(
+          parts,
+          anyOf(
+            unorderedEquals(['3', '30', anything]),
+            unorderedEquals(['15', '30']),
+          ),
+        );
         expect(joined, DateFormat.jm(locale.toString()).format(_date));
       });
 
@@ -56,12 +67,17 @@ void main() {
               builder: (context) {
                 final controller = TimeInputController(
                   FLocalizations.of(context)!,
-                  FTimeFieldController(vsync: const TestVSync(), initialTime: const FTime(12, 15)),
+                  FTimeFieldController(
+                    vsync: const TestVSync(),
+                    initialTime: const FTime(12, 15),
+                  ),
                   DateFormat.Hm(locale.toString()),
                   context.theme.textFieldStyle,
                 );
 
-                parts = controller.selector.split(DateFormat.Hm(locale.toString()).format(_date));
+                parts = controller.selector.split(
+                  DateFormat.Hm(locale.toString()).format(_date),
+                );
                 joined = controller.selector.join(parts);
                 return const Text('');
               },

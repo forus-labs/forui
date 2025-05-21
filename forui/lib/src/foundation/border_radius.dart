@@ -7,10 +7,14 @@ class FLerpBorderRadius extends BorderRadius {
   final double _min;
 
   /// Creates a [FLerpBorderRadius].
-  const FLerpBorderRadius.all(super.radius, {required double min}) : _min = min, super.all();
+  const FLerpBorderRadius.all(super.radius, {required double min})
+    : _min = min,
+      super.all();
 
   /// Creates a [FLerpBorderRadius].
-  FLerpBorderRadius.circular(super.radius) : _min = radius * 3, super.circular();
+  FLerpBorderRadius.circular(super.radius)
+    : _min = radius * 3,
+      super.circular();
 
   @override
   RRect toRRect(Rect rect) {

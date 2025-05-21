@@ -26,7 +26,10 @@ class FTabEntry {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FTabEntry && runtimeType == other.runtimeType && label == other.label && child == other.child;
+      other is FTabEntry &&
+          runtimeType == other.runtimeType &&
+          label == other.label &&
+          child == other.child;
 
   @override
   int get hashCode => label.hashCode ^ child.hashCode;
@@ -72,6 +75,10 @@ class FTabs extends StatefulWidget {
   /// Handler for when a tab is changed.
   final ValueChanged<int>? onChange;
 
+  /// A callback that is triggered when a tab is pressed. It is called **before** the tab switching animation begins
+  /// and the controller is updated.
+  final ValueChanged<int>? onPress;
+
   /// The tabs.
   final List<FTabEntry> children;
 
@@ -90,10 +97,17 @@ class FTabs extends StatefulWidget {
     this.controller,
     this.style,
     this.onChange,
+    this.onPress,
     super.key,
   }) : assert(children.isNotEmpty, 'Must have at least 1 tab provided.'),
-       assert(0 <= initialIndex && initialIndex < children.length, 'initialIndex must be within the range of tabs.'),
-       assert(controller == null || controller.index == initialIndex, "Controller's index must match initialIndex."),
+       assert(
+         0 <= initialIndex && initialIndex < children.length,
+         'initialIndex must be within the range of tabs.',
+       ),
+       assert(
+         controller == null || controller.index == initialIndex,
+         "Controller's index must match initialIndex.",
+       ),
        assert(
          controller == null || controller.length == children.length,
          'Controller length must match the number of tabs.',
@@ -109,7 +123,8 @@ class FTabs extends StatefulWidget {
       ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(ObjectFlagProperty.has('onPress', onChange))
-      ..add(IterableProperty('children', children));
+      ..add(IterableProperty('children', children))
+      ..add(ObjectFlagProperty.has('onTap', onPress));
   }
 
   @override
@@ -124,7 +139,11 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     super.initState();
     _controller =
         widget.controller ??
-        FTabController(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
+        FTabController(
+          initialIndex: widget.initialIndex,
+          length: widget.children.length,
+          vsync: this,
+        );
     _controller.addListener(_update);
   }
 
@@ -140,7 +159,11 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
       _controller =
           widget.controller ??
-          FTabController(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
+          FTabController(
+            initialIndex: widget.initialIndex,
+            length: widget.children.length,
+            vsync: this,
+          );
       _controller.addListener(_update);
     }
   }
@@ -156,7 +179,10 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final theme = context.theme;
     final style = widget.style ?? context.theme.tabsStyle;
-    final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+    final localizations = Localizations.of<MaterialLocalizations>(
+      context,
+      MaterialLocalizations,
+    );
 
     final tabs = Material(
       color: Colors.transparent,
@@ -165,8 +191,12 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           DecoratedBox(
             decoration: style.decoration,
             child: TabBar(
-              tabAlignment: widget.scrollable ? TabAlignment.start : TabAlignment.fill,
-              tabs: [for (final tab in widget.children) _Tab(style: style, label: tab.label)],
+              tabAlignment:
+                  widget.scrollable ? TabAlignment.start : TabAlignment.fill,
+              tabs: [
+                for (final tab in widget.children)
+                  _Tab(style: style, label: tab.label),
+              ],
               controller: _controller._controller,
               isScrollable: widget.scrollable,
               physics: widget.physics,
@@ -176,6 +206,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               dividerColor: Colors.transparent,
               labelStyle: style.selectedLabelTextStyle,
               unselectedLabelStyle: style.unselectedLabelTextStyle,
+              onTap: widget.onPress,
             ),
           ),
           SizedBox(height: style.spacing),
@@ -192,7 +223,8 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
     if (localizations == null) {
       return Localizations(
-        locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+        locale:
+            Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
         delegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -253,7 +285,8 @@ class _TabState extends State<_Tab> {
     child: Tab(height: widget.style.height, child: widget.label),
   );
 
-  void _handleFocusChange() => setState(() => _focused = _focus?.hasFocus ?? false);
+  void _handleFocusChange() =>
+      setState(() => _focused = _focus?.hasFocus ?? false);
 
   @override
   void dispose() {

@@ -109,7 +109,10 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     this.cursorColor = CupertinoColors.activeBlue,
     this.fillColor,
     this.filled = false,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+    this.contentPadding = const EdgeInsets.symmetric(
+      horizontal: 14,
+      vertical: 14,
+    ),
     this.clearButtonPadding = const EdgeInsetsDirectional.only(end: 4),
     this.scrollPadding = const EdgeInsets.all(20),
     super.labelPadding,
@@ -119,31 +122,54 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  factory FTextFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory FTextFieldStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
-    final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
+    final ghost =
+        FButtonStyles.inherit(
+          colors: colors,
+          typography: typography,
+          style: style,
+        ).ghost;
+    final textStyle = typography.sm.copyWith(
+      fontFamily: typography.defaultFontFamily,
+    );
 
     return FTextFieldStyle(
       keyboardAppearance: colors.brightness,
       clearButtonStyle: ghost.copyWith(
         iconContentStyle: ghost.iconContentStyle.copyWith(
           iconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
+            WidgetState.disabled: IconThemeData(
+              color: colors.disable(colors.mutedForeground),
+              size: 17,
+            ),
+            WidgetState.any: IconThemeData(
+              color: colors.mutedForeground,
+              size: 17,
+            ),
           }),
         ),
       ),
       contentTextStyle: FWidgetStateMap({
-        WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.primary)),
+        WidgetState.disabled: textStyle.copyWith(
+          color: colors.disable(colors.primary),
+        ),
         WidgetState.any: textStyle.copyWith(color: colors.primary),
       }),
       hintTextStyle: FWidgetStateMap({
-        WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.border)),
+        WidgetState.disabled: textStyle.copyWith(
+          color: colors.disable(colors.border),
+        ),
         WidgetState.any: textStyle.copyWith(color: colors.mutedForeground),
       }),
       counterTextStyle: FWidgetStateMap({
-        WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.primary)),
+        WidgetState.disabled: textStyle.copyWith(
+          color: colors.disable(colors.primary),
+        ),
         WidgetState.any: textStyle.copyWith(color: colors.primary),
       }),
       border: FWidgetStateMap({
@@ -152,15 +178,24 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
           borderRadius: style.borderRadius,
         ),
         WidgetState.disabled: OutlineInputBorder(
-          borderSide: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+          borderSide: BorderSide(
+            color: colors.disable(colors.border),
+            width: style.borderWidth,
+          ),
           borderRadius: style.borderRadius,
         ),
         WidgetState.focused: OutlineInputBorder(
-          borderSide: BorderSide(color: colors.primary, width: style.borderWidth),
+          borderSide: BorderSide(
+            color: colors.primary,
+            width: style.borderWidth,
+          ),
           borderRadius: style.borderRadius,
         ),
         WidgetState.any: OutlineInputBorder(
-          borderSide: BorderSide(color: colors.border, width: style.borderWidth),
+          borderSide: BorderSide(
+            color: colors.border,
+            width: style.borderWidth,
+          ),
           borderRadius: style.borderRadius,
         ),
       }),

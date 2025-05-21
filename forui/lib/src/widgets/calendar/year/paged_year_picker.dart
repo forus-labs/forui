@@ -37,7 +37,9 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   Widget buildItem(BuildContext _, int page) => YearPicker(
     yearMonthStyle: widget.style.yearMonthPickerStyle,
     dayStyle: widget.style.dayPickerStyle,
-    startYear: widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items),
+    startYear: widget.start
+        .truncate(to: DateUnit.years)
+        .plus(years: page * YearPicker.items),
     start: widget.start,
     end: widget.end,
     today: widget.today,
@@ -50,7 +52,10 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
     setState(() {
       if (focused && focusedDate == null) {
         final currentYear = widget.today.truncate(to: DateUnit.years);
-        focusedDate = _focusableYear(current, currentYear == current ? currentYear : current);
+        focusedDate = _focusableYear(
+          current,
+          currentYear == current ? currentYear : current,
+        );
       }
     });
   }
@@ -58,13 +63,16 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   @override
   void onPageChange(int page) {
     setState(() {
-      final changed = widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items);
+      final changed = widget.start
+          .truncate(to: DateUnit.years)
+          .plus(years: page * YearPicker.items);
       if (current == changed) {
         return;
       }
 
       current = changed;
-      if (focusedDate case final focused? when focused.truncate(to: DateUnit.years) == current) {
+      if (focusedDate case final focused?
+          when focused.truncate(to: DateUnit.years) == current) {
         // We have navigated to a new page with the grid focused, but the
         // focused year is not in this page. Choose a new one.
         focusedDate = _focusableYear(current, focusedDate!);
@@ -80,7 +88,11 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
       return preferredYear;
     }
 
-    for (var newFocus = startYear; newFocus < endYear; newFocus = newFocus.plus(years: 1)) {
+    for (
+      var newFocus = startYear;
+      newFocus < endYear;
+      newFocus = newFocus.plus(years: 1)
+    ) {
       if (widget.selectable(newFocus)) {
         return newFocus;
       }
@@ -90,7 +102,8 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   }
 
   @override
-  int delta(LocalDate start, LocalDate end) => ((end.year - start.year) / YearPicker.items).floor();
+  int delta(LocalDate start, LocalDate end) =>
+      ((end.year - start.year) / YearPicker.items).floor();
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {

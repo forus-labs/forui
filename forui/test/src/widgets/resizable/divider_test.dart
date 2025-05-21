@@ -22,12 +22,22 @@ void main() {
     ),
   );
 
-  final left = FResizableRegionData(index: 0, extent: (min: 10, max: 100, total: 100), offset: (min: 0, max: 50));
-  final right = FResizableRegionData(index: 1, extent: (min: 10, max: 100, total: 100), offset: (min: 50, max: 100));
+  final left = FResizableRegionData(
+    index: 0,
+    extent: (min: 10, max: 100, total: 100),
+    offset: (min: 0, max: 50),
+  );
+  final right = FResizableRegionData(
+    index: 1,
+    extent: (min: 10, max: 100, total: 100),
+    offset: (min: 50, max: 100),
+  );
 
   late FResizableController controller;
 
-  setUp(() => controller = FResizableController()..regions.addAll([left, right]));
+  setUp(
+    () => controller = FResizableController()..regions.addAll([left, right]),
+  );
 
   for (final (index, constructor)
       in [
@@ -56,6 +66,9 @@ void main() {
           semanticFormatterCallback: (l, r) => '',
         ),
       ].indexed) {
-    test('[$index] constructor throws error', () => expect(constructor, throwsAssertionError));
+    test(
+      '[$index] constructor throws error',
+      () => expect(constructor, throwsAssertionError),
+    );
   }
 }

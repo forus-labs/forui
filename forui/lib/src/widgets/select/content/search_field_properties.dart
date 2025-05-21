@@ -176,10 +176,16 @@ class FSelectSearchFieldProperties with Diagnosticable {
   final SpellCheckConfiguration? spellCheckConfiguration;
 
   /// The prefix builder. Defaults to a search icon.
-  final ValueWidgetBuilder<(FSelectSearchStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
+  final ValueWidgetBuilder<
+    (FSelectSearchStyle, FTextFieldStyle, Set<WidgetState>)
+  >?
+  prefixBuilder;
 
   /// {@macro forui.text_field.suffixBuilder}
-  final ValueWidgetBuilder<(FSelectSearchStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
+  final ValueWidgetBuilder<
+    (FSelectSearchStyle, FTextFieldStyle, Set<WidgetState>)
+  >?
+  suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue) clearable;
@@ -239,7 +245,9 @@ class FSelectSearchFieldProperties with Diagnosticable {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(StringProperty('hint', hint))
-      ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
+      ..add(
+        DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration),
+      )
       ..add(DiagnosticsProperty('keyboardType', keyboardType))
       ..add(EnumProperty('textInputAction', textInputAction))
       ..add(EnumProperty('textCapitalization', textCapitalization))
@@ -247,10 +255,18 @@ class FSelectSearchFieldProperties with Diagnosticable {
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
+      ..add(
+        FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'),
+      )
       ..add(EnumProperty('smartDashesType', smartDashesType))
       ..add(EnumProperty('smartQuotesType', smartQuotesType))
-      ..add(FlagProperty('enableSuggestions', value: enableSuggestions, ifTrue: 'enableSuggestions'))
+      ..add(
+        FlagProperty(
+          'enableSuggestions',
+          value: enableSuggestions,
+          ifTrue: 'enableSuggestions',
+        ),
+      )
       ..add(IntProperty('minLines', minLines))
       ..add(IntProperty('maxLines', maxLines))
       ..add(FlagProperty('readOnly', value: readOnly, ifTrue: 'readOnly'))
@@ -259,14 +275,30 @@ class FSelectSearchFieldProperties with Diagnosticable {
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
-      ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
+      ..add(
+        FlagProperty(
+          'onTapAlwaysCalled',
+          value: onTapAlwaysCalled,
+          ifTrue: 'onTapAlwaysCalled',
+        ),
+      )
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(IterableProperty('inputFormatters', inputFormatters))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
-      ..add(FlagProperty('ignorePointers', value: ignorePointers, ifTrue: 'ignorePointers'))
       ..add(
-        FlagProperty('enableInteractSelection', value: enableInteractiveSelection, ifTrue: 'enableInteractSelection'),
+        FlagProperty(
+          'ignorePointers',
+          value: ignorePointers,
+          ifTrue: 'ignorePointers',
+        ),
+      )
+      ..add(
+        FlagProperty(
+          'enableInteractSelection',
+          value: enableInteractiveSelection,
+          ifTrue: 'enableInteractSelection',
+        ),
       )
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
@@ -276,7 +308,11 @@ class FSelectSearchFieldProperties with Diagnosticable {
       ..add(IterableProperty('autofillHints', autofillHints))
       ..add(StringProperty('restorationId', restorationId))
       ..add(
-        FlagProperty('stylusHandwritingEnabled', value: stylusHandwritingEnabled, ifTrue: 'stylusHandwritingEnabled'),
+        FlagProperty(
+          'stylusHandwritingEnabled',
+          value: stylusHandwritingEnabled,
+          ifTrue: 'stylusHandwritingEnabled',
+        ),
       )
       ..add(
         FlagProperty(
@@ -285,10 +321,17 @@ class FSelectSearchFieldProperties with Diagnosticable {
           ifTrue: 'enableIMEPersonalizedLearning',
         ),
       )
-      ..add(DiagnosticsProperty('contentInsertionConfiguration', contentInsertionConfiguration))
+      ..add(
+        DiagnosticsProperty(
+          'contentInsertionConfiguration',
+          contentInsertionConfiguration,
+        ),
+      )
       ..add(ObjectFlagProperty.has('contextMenuBuilder', contextMenuBuilder))
       ..add(DiagnosticsProperty('undoController', undoController))
-      ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
+      ..add(
+        DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration),
+      )
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable));

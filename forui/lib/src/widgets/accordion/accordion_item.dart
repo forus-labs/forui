@@ -68,14 +68,28 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('initiallyExpanded', value: initiallyExpanded, ifTrue: 'Initially expanded'))
-      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
+      ..add(
+        FlagProperty(
+          'initiallyExpanded',
+          value: initiallyExpanded,
+          ifTrue: 'Initially expanded',
+        ),
+      )
+      ..add(
+        FlagProperty(
+          'autofocus',
+          value: autofocus,
+          defaultValue: false,
+          ifTrue: 'autofocus',
+        ),
+      )
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
 }
 
-class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStateMixin {
+class _FAccordionItemState extends State<FAccordionItem>
+    with TickerProviderStateMixin {
   AnimationController? _controller;
   CurvedAnimation? _curved;
   late Animation<double> _animation;
@@ -84,7 +98,11 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final FAccordionItemData(:index, :controller, :style) = FAccordionItemData.of(context);
+    final FAccordionItemData(
+      :index,
+      :controller,
+      :style,
+    ) = FAccordionItemData.of(context);
     controller.removeItem(index);
 
     _controller?.dispose();
@@ -99,15 +117,25 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     _animation = Tween<double>(begin: 0, end: 100).animate(_curved!);
 
     if (!controller.addItem(index, _controller!)) {
-      throw StateError('Number of expanded items must be within the min and max.');
+      throw StateError(
+        'Number of expanded items must be within the min and max.',
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final FAccordionItemData(:index, :controller, style: inheritedStyle) = FAccordionItemData.of(context);
+    final FAccordionItemData(
+      :index,
+      :controller,
+      style: inheritedStyle,
+    ) = FAccordionItemData.of(context);
     final style = widget.style ?? inheritedStyle;
-    final angle = ((Directionality.maybeOf(context) ?? TextDirection.ltr) == TextDirection.ltr) ? -180 : 180;
+    final angle =
+        ((Directionality.maybeOf(context) ?? TextDirection.ltr) ==
+                TextDirection.ltr)
+            ? -180
+            : 180;
     return AnimatedBuilder(
       animation: _animation,
       builder:
@@ -139,8 +167,14 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                             style: style.focusedOutlineStyle,
                             focused: states.contains(WidgetState.focused),
                             child: Transform.rotate(
-                              angle: (_controller!.value * angle + 90) * math.pi / 180.0,
-                              child: IconTheme(data: style.iconStyle.resolve(states), child: widget.icon),
+                              angle:
+                                  (_controller!.value * angle + 90) *
+                                  math.pi /
+                                  180.0,
+                              child: IconTheme(
+                                data: style.iconStyle.resolve(states),
+                                child: widget.icon,
+                              ),
                             ),
                           ),
                         ],
@@ -151,7 +185,10 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                 value: _controller!.value,
                 child: Padding(
                   padding: style.childPadding,
-                  child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
+                  child: DefaultTextStyle(
+                    style: style.childTextStyle,
+                    child: widget.child,
+                  ),
                 ),
               ),
               FDivider(style: style.dividerStyle),

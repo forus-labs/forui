@@ -14,7 +14,10 @@ void main() {
         TestScaffold(
           child: FFocusedOutline(
             focused: true,
-            child: GestureDetector(onTap: () => count++, child: Container(width: 100, height: 100, color: Colors.blue)),
+            child: GestureDetector(
+              onTap: () => count++,
+              child: Container(width: 100, height: 100, color: Colors.blue),
+            ),
           ),
         ),
       );
@@ -32,12 +35,17 @@ void main() {
         TestScaffold(
           child: FFocusedOutline(
             focused: true,
-            child: GestureDetector(onTap: () => count++, child: Container(width: 100, height: 100, color: Colors.blue)),
+            child: GestureDetector(
+              onTap: () => count++,
+              child: Container(width: 100, height: 100, color: Colors.blue),
+            ),
           ),
         ),
       );
 
-      await tester.tapAt(tester.getCenter(find.byType(Container).last).translate(51, 0));
+      await tester.tapAt(
+        tester.getCenter(find.byType(Container).last).translate(51, 0),
+      );
       await tester.pumpAndSettle();
 
       expect(count, 0);

@@ -13,7 +13,8 @@ abstract interface class FPortalSpacing {
   /// The [diagonal] parameter controls how spacing is applied when both anchors are at corners:
   /// * When [diagonal] is `false` (default), spacing is **not** applied if both anchors are at corners.
   /// * When [diagonal] is `true`, spacing is applied regardless of anchor positions.
-  const factory FPortalSpacing(double spacing, {bool diagonal}) = _FPortalSpacing;
+  const factory FPortalSpacing(double spacing, {bool diagonal}) =
+      _FPortalSpacing;
 
   /// Computes spacing between the [child]'s anchor and the [portal]'s anchor, returning an offset by which to shift
   /// the portal.
@@ -29,7 +30,9 @@ class _FPortalSpacing with Diagnosticable implements FPortalSpacing {
   @override
   Offset resolve(Alignment child, Alignment portal) {
     // ignore corners that are diagonal.
-    if (!diagonal && (child.x != 0 && child.y != 0) && (child.x == -portal.x && child.y == -portal.y)) {
+    if (!diagonal &&
+        (child.x != 0 && child.y != 0) &&
+        (child.x == -portal.x && child.y == -portal.y)) {
       return Offset.zero;
     }
 
@@ -52,6 +55,12 @@ class _FPortalSpacing with Diagnosticable implements FPortalSpacing {
     super.debugFillProperties(properties);
     properties
       ..add(DoubleProperty('spacing', spacing))
-      ..add(FlagProperty('diagonal', value: diagonal, ifFalse: 'spacing not applied to two diagonal corners'));
+      ..add(
+        FlagProperty(
+          'diagonal',
+          value: diagonal,
+          ifFalse: 'spacing not applied to two diagonal corners',
+        ),
+      );
   }
 }

@@ -65,8 +65,20 @@ class _SearchSelect<T> extends FSelect<T> {
       ..add(DiagnosticsProperty('filter', filter))
       ..add(DiagnosticsProperty('builder', builder))
       ..add(ObjectFlagProperty.has('contentBuilder', contentBuilder))
-      ..add(ObjectFlagProperty('searchLoadingBuilder', searchLoadingBuilder, ifPresent: 'searchLoadingBuilder'))
-      ..add(ObjectFlagProperty('searchErrorBuilder', searchErrorBuilder, ifPresent: 'searchErrorBuilder'));
+      ..add(
+        ObjectFlagProperty(
+          'searchLoadingBuilder',
+          searchLoadingBuilder,
+          ifPresent: 'searchLoadingBuilder',
+        ),
+      )
+      ..add(
+        ObjectFlagProperty(
+          'searchErrorBuilder',
+          searchErrorBuilder,
+          ifPresent: 'searchErrorBuilder',
+        ),
+      );
   }
 }
 

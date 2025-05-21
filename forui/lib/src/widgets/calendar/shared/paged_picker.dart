@@ -25,7 +25,11 @@ abstract class PagedPicker extends StatefulWidget {
     required this.initial,
     Predicate<LocalDate>? selectable,
     super.key,
-  }) : selectable = ((date) => start <= date && date <= end && (selectable?.call(date) ?? true));
+  }) : selectable =
+           ((date) =>
+               start <= date &&
+               date <= end &&
+               (selectable?.call(date) ?? true));
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -44,10 +48,18 @@ abstract class PagedPicker extends StatefulWidget {
 @internal
 abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
   static const _shortcuts = {
-    SingleActivator(LogicalKeyboardKey.arrowLeft): DirectionalFocusIntent(TraversalDirection.left),
-    SingleActivator(LogicalKeyboardKey.arrowRight): DirectionalFocusIntent(TraversalDirection.right),
-    SingleActivator(LogicalKeyboardKey.arrowDown): DirectionalFocusIntent(TraversalDirection.down),
-    SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(TraversalDirection.up),
+    SingleActivator(LogicalKeyboardKey.arrowLeft): DirectionalFocusIntent(
+      TraversalDirection.left,
+    ),
+    SingleActivator(LogicalKeyboardKey.arrowRight): DirectionalFocusIntent(
+      TraversalDirection.right,
+    ),
+    SingleActivator(LogicalKeyboardKey.arrowDown): DirectionalFocusIntent(
+      TraversalDirection.down,
+    ),
+    SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(
+      TraversalDirection.up,
+    ),
   };
 
   LocalDate? focusedDate;
@@ -62,12 +74,20 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
   void initState() {
     super.initState();
     current = widget.initial;
-    _controller = PageController(initialPage: delta(widget.start, widget.initial));
+    _controller = PageController(
+      initialPage: delta(widget.start, widget.initial),
+    );
     _key = ValueKey((widget.start, widget.end));
     _actions = {
-      NextFocusIntent: CallbackAction<NextFocusIntent>(onInvoke: _onGridNextFocus),
-      PreviousFocusIntent: CallbackAction<PreviousFocusIntent>(onInvoke: _onGridPreviousFocus),
-      DirectionalFocusIntent: CallbackAction<DirectionalFocusIntent>(onInvoke: _onDirectionFocus),
+      NextFocusIntent: CallbackAction<NextFocusIntent>(
+        onInvoke: _onGridNextFocus,
+      ),
+      PreviousFocusIntent: CallbackAction<PreviousFocusIntent>(
+        onInvoke: _onGridPreviousFocus,
+      ),
+      DirectionalFocusIntent: CallbackAction<DirectionalFocusIntent>(
+        onInvoke: _onDirectionFocus,
+      ),
     };
     _focusNode = FocusNode();
   }
@@ -135,23 +155,34 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
 
   void _onNext() {
     if (!_last) {
-      _controller.nextPage(duration: widget.style.pageAnimationDuration, curve: Curves.ease);
+      _controller.nextPage(
+        duration: widget.style.pageAnimationDuration,
+        curve: Curves.ease,
+      );
     }
   }
 
   void _onPrevious() {
     if (!_first) {
-      _controller.previousPage(duration: widget.style.pageAnimationDuration, curve: Curves.ease);
+      _controller.previousPage(
+        duration: widget.style.pageAnimationDuration,
+        curve: Curves.ease,
+      );
     }
   }
 
   bool get _first => delta(widget.start, current) == 0;
 
-  bool get _last => delta(widget.start, current) == delta(widget.start, widget.end);
+  bool get _last =>
+      delta(widget.start, current) == delta(widget.start, widget.end);
 
   void _showPage(LocalDate date) {
     final page = delta(widget.start, date);
-    _controller.animateToPage(page, duration: widget.style.pageAnimationDuration, curve: Curves.ease);
+    _controller.animateToPage(
+      page,
+      duration: widget.style.pageAnimationDuration,
+      curve: Curves.ease,
+    );
   }
 
   void onPageChange(int page);
@@ -198,8 +229,10 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
     final textDirection = Directionality.of(context);
     final offset =
         directionOffset[switch ((direction, textDirection)) {
-          (TraversalDirection.left, TextDirection.rtl) => TraversalDirection.right,
-          (TraversalDirection.right, TextDirection.rtl) => TraversalDirection.left,
+          (TraversalDirection.left, TextDirection.rtl) =>
+            TraversalDirection.right,
+          (TraversalDirection.right, TextDirection.rtl) =>
+            TraversalDirection.left,
           _ => direction,
         }]!;
 

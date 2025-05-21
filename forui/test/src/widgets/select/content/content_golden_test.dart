@@ -5,7 +5,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../../test_scaffold.dart';
 
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+const letters = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+];
 
 void main() {
   const key = ValueKey('select');
@@ -33,7 +49,9 @@ void main() {
                 children: [
                   FSelectSection(
                     label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem.text(letter)],
+                    children: [
+                      for (final letter in letters) FSelectItem.text(letter),
+                    ],
                   ),
                 ],
               ),
@@ -43,12 +61,16 @@ void main() {
           await tester.tap(find.byKey(key));
           await tester.pumpAndSettle();
 
-          scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
+          scrollController.jumpTo(
+            scrollController.position.maxScrollExtent / 2,
+          );
           await tester.pumpAndSettle();
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/both_scroll_handles.png'),
+            matchesGoldenFile(
+              'select/${theme.name}/content/both_scroll_handles.png',
+            ),
           );
         });
 
@@ -64,7 +86,9 @@ void main() {
                 children: [
                   FSelectSection(
                     label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem.text(letter)],
+                    children: [
+                      for (final letter in letters) FSelectItem.text(letter),
+                    ],
                   ),
                 ],
               ),
@@ -76,7 +100,9 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/hide_start_scroll_handle.png'),
+            matchesGoldenFile(
+              'select/${theme.name}/content/hide_start_scroll_handle.png',
+            ),
           );
         });
 
@@ -92,7 +118,9 @@ void main() {
                 children: [
                   FSelectSection(
                     label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem.text(letter)],
+                    children: [
+                      for (final letter in letters) FSelectItem.text(letter),
+                    ],
                   ),
                 ],
               ),
@@ -107,11 +135,15 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/hide_end_scroll_handle.png'),
+            matchesGoldenFile(
+              'select/${theme.name}/content/hide_end_scroll_handle.png',
+            ),
           );
         });
 
-        testWidgets('hide scroll handles when handles disabled', (tester) async {
+        testWidgets('hide scroll handles when handles disabled', (
+          tester,
+        ) async {
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
@@ -122,7 +154,9 @@ void main() {
                 children: [
                   FSelectSection(
                     label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem.text(letter)],
+                    children: [
+                      for (final letter in letters) FSelectItem.text(letter),
+                    ],
                   ),
                 ],
               ),
@@ -132,16 +166,22 @@ void main() {
           await tester.tap(find.byKey(key));
           await tester.pumpAndSettle();
 
-          scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
+          scrollController.jumpTo(
+            scrollController.position.maxScrollExtent / 2,
+          );
           await tester.pumpAndSettle();
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/no_scroll_handles.png'),
+            matchesGoldenFile(
+              'select/${theme.name}/content/no_scroll_handles.png',
+            ),
           );
         });
 
-        testWidgets('hide scroll handles when all items visible', (tester) async {
+        testWidgets('hide scroll handles when all items visible', (
+          tester,
+        ) async {
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
@@ -151,7 +191,10 @@ void main() {
                 contentScrollController: scrollController,
                 contentScrollHandles: true,
                 children: [
-                  FSelectSection(label: const Text('Lorem'), children: [FSelectItem.text('1')]),
+                  FSelectSection(
+                    label: const Text('Lorem'),
+                    children: [FSelectItem.text('1')],
+                  ),
                 ],
               ),
             ),
@@ -160,12 +203,16 @@ void main() {
           await tester.tap(find.byKey(key));
           await tester.pumpAndSettle();
 
-          scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
+          scrollController.jumpTo(
+            scrollController.position.maxScrollExtent / 2,
+          );
           await tester.pumpAndSettle();
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/all_items_visible.png'),
+            matchesGoldenFile(
+              'select/${theme.name}/content/all_items_visible.png',
+            ),
           );
         });
       });
@@ -184,7 +231,9 @@ void main() {
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem.text(letter)],
+                  children: [
+                    for (final letter in letters) FSelectItem.text(letter),
+                  ],
                 ),
               ],
             ),
@@ -196,7 +245,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/content/focused_selected_item.png'),
+          matchesGoldenFile(
+            'select/${theme.name}/content/focused_selected_item.png',
+          ),
         );
       });
     });

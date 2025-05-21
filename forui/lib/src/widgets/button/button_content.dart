@@ -24,7 +24,10 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonStyle(:contentStyle), :states) = FButtonData.of(context);
+    final FButtonData(
+      style: FButtonStyle(:contentStyle),
+      :states,
+    ) = FButtonData.of(context);
     return Padding(
       padding: contentStyle.padding,
       child: DefaultTextStyle.merge(
@@ -35,7 +38,11 @@ class Content extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: intrinsicWidth ? MainAxisSize.min : MainAxisSize.max,
             spacing: 10,
-            children: [if (prefix case final prefix?) prefix, child, if (suffix case final suffix?) suffix],
+            children: [
+              if (prefix case final prefix?) prefix,
+              child,
+              if (suffix case final suffix?) suffix,
+            ],
           ),
         ),
       ),
@@ -45,7 +52,13 @@ class Content extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'));
+    properties.add(
+      FlagProperty(
+        'intrinsicWidth',
+        value: intrinsicWidth,
+        ifTrue: 'intrinsicWidth',
+      ),
+    );
   }
 }
 
@@ -61,7 +74,10 @@ class IconContent extends StatelessWidget {
 
     return Padding(
       padding: style.iconContentStyle.padding,
-      child: IconTheme(data: style.iconContentStyle.iconStyle.resolve(states), child: child),
+      child: IconTheme(
+        data: style.iconContentStyle.iconStyle.resolve(states),
+        child: child,
+      ),
     );
   }
 }
@@ -92,21 +108,33 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   });
 
   /// Creates a [FButtonContentStyle] that inherits its properties.
-  FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
-    : this(
-        textStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
-          WidgetState.any: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
-        }),
-        iconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: disabled, size: 20),
-          WidgetState.any: IconThemeData(color: enabled, size: 20),
-        }),
-      );
+  FButtonContentStyle.inherit({
+    required FTypography typography,
+    required Color enabled,
+    required Color disabled,
+  }) : this(
+         textStyle: FWidgetStateMap({
+           WidgetState.disabled: typography.base.copyWith(
+             color: disabled,
+             fontWeight: FontWeight.w500,
+             height: 1,
+           ),
+           WidgetState.any: typography.base.copyWith(
+             color: enabled,
+             fontWeight: FontWeight.w500,
+             height: 1,
+           ),
+         }),
+         iconStyle: FWidgetStateMap({
+           WidgetState.disabled: IconThemeData(color: disabled, size: 20),
+           WidgetState.any: IconThemeData(color: enabled, size: 20),
+         }),
+       );
 }
 
 /// [FButton] icon content's style.
-class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
+class FButtonIconContentStyle
+    with Diagnosticable, _$FButtonIconContentStyleFunctions {
   /// The icon's style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
@@ -118,14 +146,19 @@ class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunc
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({required this.iconStyle, this.padding = const EdgeInsets.all(7.5)});
+  const FButtonIconContentStyle({
+    required this.iconStyle,
+    this.padding = const EdgeInsets.all(7.5),
+  });
 
   /// Creates a [FButtonIconContentStyle] that inherits its properties.
-  FButtonIconContentStyle.inherit({required Color enabled, required Color disabled})
-    : this(
-        iconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: disabled, size: 20),
-          WidgetState.any: IconThemeData(color: enabled, size: 20),
-        }),
-      );
+  FButtonIconContentStyle.inherit({
+    required Color enabled,
+    required Color disabled,
+  }) : this(
+         iconStyle: FWidgetStateMap({
+           WidgetState.disabled: IconThemeData(color: disabled, size: 20),
+           WidgetState.any: IconThemeData(color: enabled, size: 20),
+         }),
+       );
 }

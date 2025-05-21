@@ -10,16 +10,44 @@ import 'package:forui/src/widgets/date_field/input/date_parser.dart';
 
 ///
 @internal
-typedef Select = TextEditingValue Function(TextEditingValue, int first, int last, int end, int separator);
+typedef Select =
+    TextEditingValue Function(
+      TextEditingValue,
+      int first,
+      int last,
+      int end,
+      int separator,
+    );
 
-TextEditingValue _first(TextEditingValue value, int first, int _, int _, int _) =>
-    value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
+TextEditingValue _first(
+  TextEditingValue value,
+  int first,
+  int _,
+  int _,
+  int _,
+) => value.copyWith(
+  selection: TextSelection(baseOffset: 0, extentOffset: first),
+);
 
-TextEditingValue _middle(TextEditingValue value, int first, int last, int _, int separator) =>
-    value.copyWith(selection: TextSelection(baseOffset: first + separator, extentOffset: last));
+TextEditingValue _middle(
+  TextEditingValue value,
+  int first,
+  int last,
+  int _,
+  int separator,
+) => value.copyWith(
+  selection: TextSelection(baseOffset: first + separator, extentOffset: last),
+);
 
-TextEditingValue _last(TextEditingValue value, int _, int last, int end, int separator) =>
-    value.copyWith(selection: TextSelection(baseOffset: last + separator, extentOffset: end));
+TextEditingValue _last(
+  TextEditingValue value,
+  int _,
+  int last,
+  int end,
+  int separator,
+) => value.copyWith(
+  selection: TextSelection(baseOffset: last + separator, extentOffset: end),
+);
 
 @internal
 class DateInputController extends InputController {
@@ -39,7 +67,10 @@ class DateInputController extends InputController {
         .replaceAll(RegExp('M{1,2}'), 'MM')
         .replaceAll('y', 'YYYY')
         .replaceAll("'", '');
-    final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
+    final text =
+        controller.value == null
+            ? placeholder
+            : localizations.shortDate(controller.value!);
     return DateInputController.test(
       controller,
       localizations,
@@ -60,7 +91,12 @@ class DateInputController extends InputController {
     TextEditingValue? value,
   ) : selector = DateSelector(localizations),
       _format = DateFormat.yMd(localizations.localeName),
-      super(style, DateParser(localizations.localeName, initialYear), placeholder, value) {
+      super(
+        style,
+        DateParser(localizations.localeName, initialYear),
+        placeholder,
+        value,
+      ) {
     controller.addListener(updateFromCalendar);
   }
 
@@ -86,9 +122,15 @@ class DateInputController extends InputController {
       rawValue =
           selector.resolve(
             value,
-            onFirst: (_, _, _, _, _) => selector.select(parser.adjust(parts, 0, amount), 0),
-            onMiddle: (_, _, _, _, _) => selector.select(parser.adjust(parts, 1, amount), 1),
-            onLast: (_, _, _, _, _) => selector.select(parser.adjust(parts, 2, amount), 2),
+            onFirst:
+                (_, _, _, _, _) =>
+                    selector.select(parser.adjust(parts, 0, amount), 0),
+            onMiddle:
+                (_, _, _, _, _) =>
+                    selector.select(parser.adjust(parts, 1, amount), 1),
+            onLast:
+                (_, _, _, _, _) =>
+                    selector.select(parser.adjust(parts, 2, amount), 2),
           ) ??
           value;
       onValueChanged(text);
@@ -98,7 +140,8 @@ class DateInputController extends InputController {
   }
 
   @override
-  void onValueChanged(String newValue) => controller.value = _format.tryParseStrict(newValue, true);
+  void onValueChanged(String newValue) =>
+      controller.value = _format.tryParseStrict(newValue, true);
 
   @visibleForTesting
   void updateFromCalendar() {
@@ -122,7 +165,10 @@ class DateInputController extends InputController {
 @internal
 class DateSelector extends Selector {
   DateSelector(FLocalizations localizations)
-    : super(localizations, RegExp(RegExp.escape(localizations.shortDateSuffix) + r'$'));
+    : super(
+        localizations,
+        RegExp(RegExp.escape(localizations.shortDateSuffix) + r'$'),
+      );
 
   @override
   TextEditingValue? resolve(
@@ -138,14 +184,35 @@ class DateSelector extends Selector {
     final separator = localizations.shortDateSeparator.length;
 
     final first = value.text.indexOf(localizations.shortDateSeparator);
-    final last = value.text.indexOf(localizations.shortDateSeparator, first + separator);
+    final last = value.text.indexOf(
+      localizations.shortDateSeparator,
+      first + separator,
+    );
     final end = value.text.length - localizations.shortDateSuffix.length;
     final offset = value.selection.extentOffset;
 
     return switch (offset) {
-      _ when 0 <= offset && offset <= first => onFirst(value, first, last, end, separator),
-      _ when first + separator <= offset && offset <= last => onMiddle(value, first, last, end, separator),
-      _ when last + separator <= offset && offset <= end => onLast(value, first, last, end, separator),
+      _ when 0 <= offset && offset <= first => onFirst(
+        value,
+        first,
+        last,
+        end,
+        separator,
+      ),
+      _ when first + separator <= offset && offset <= last => onMiddle(
+        value,
+        first,
+        last,
+        end,
+        separator,
+      ),
+      _ when last + separator <= offset && offset <= end => onLast(
+        value,
+        first,
+        last,
+        end,
+        separator,
+      ),
       _ => null,
     };
   }
@@ -159,12 +226,18 @@ class DateSelector extends Selector {
       end = start + parts[i].length;
     }
 
-    return TextEditingValue(text: join(parts), selection: TextSelection(baseOffset: start, extentOffset: end));
+    return TextEditingValue(
+      text: join(parts),
+      selection: TextSelection(baseOffset: start, extentOffset: end),
+    );
   }
 
   @override
-  List<String> split(String raw) => raw.replaceAll(suffix, '').split(localizations.shortDateSeparator);
+  List<String> split(String raw) =>
+      raw.replaceAll(suffix, '').split(localizations.shortDateSeparator);
 
   @override
-  String join(List<String> parts) => parts.join(localizations.shortDateSeparator) + localizations.shortDateSuffix;
+  String join(List<String> parts) =>
+      parts.join(localizations.shortDateSeparator) +
+      localizations.shortDateSuffix;
 }

@@ -11,8 +11,14 @@ part 'sheet.style.dart';
 
 @internal
 class Sheet extends StatefulWidget {
-  static AnimationController createAnimationController(TickerProvider vsync, FSheetStyle style) =>
-      AnimationController(duration: style.enterDuration, reverseDuration: style.exitDuration, vsync: vsync);
+  static AnimationController createAnimationController(
+    TickerProvider vsync,
+    FSheetStyle style,
+  ) => AnimationController(
+    duration: style.enterDuration,
+    reverseDuration: style.exitDuration,
+    vsync: vsync,
+  );
 
   static void _onClosing() {}
 
@@ -43,7 +49,10 @@ class Sheet extends StatefulWidget {
     this.onChange,
     this.onClosing = _onClosing,
     super.key,
-  }) : assert(!draggable || controller != null, 'Draggable sheets must have a controller.');
+  }) : assert(
+         !draggable || controller != null,
+         'Draggable sheets must have a controller.',
+       );
 
   @override
   State<Sheet> createState() => _SheetState();
@@ -60,7 +69,9 @@ class Sheet extends StatefulWidget {
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('anchorPoint', anchorPoint))
       ..add(FlagProperty('draggable', value: draggable, ifTrue: 'draggable'))
-      ..add(FlagProperty('useSafeArea', value: useSafeArea, ifTrue: 'useSafeArea'))
+      ..add(
+        FlagProperty('useSafeArea', value: useSafeArea, ifTrue: 'useSafeArea'),
+      )
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onClosing', onClosing));
@@ -78,7 +89,9 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
+    _controller =
+        widget.controller ??
+        Sheet.createAnimationController(this, widget.style);
     _animation = widget.animation ?? _controller.view;
   }
 
@@ -90,7 +103,9 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         _controller.dispose();
       }
 
-      _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
+      _controller =
+          widget.controller ??
+          Sheet.createAnimationController(this, widget.style);
     }
   }
 
@@ -114,7 +129,8 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
           child: NotificationListener<DraggableScrollableNotification>(
             key: _key,
             onNotification: (notification) {
-              if (notification.extent == notification.minExtent && notification.shouldCloseOnMinExtent) {
+              if (notification.extent == notification.minExtent &&
+                  notification.shouldCloseOnMinExtent) {
                 widget.onClosing();
               }
               return false;
@@ -141,10 +157,26 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       (FLayout.btt, true) => SafeArea(bottom: false, child: sheet),
       (FLayout.ltr, true) => SafeArea(left: false, child: sheet),
       (FLayout.rtl, true) => SafeArea(right: false, child: sheet),
-      (FLayout.ttb, false) => MediaQuery.removePadding(context: context, removeBottom: true, child: sheet),
-      (FLayout.btt, false) => MediaQuery.removePadding(context: context, removeTop: true, child: sheet),
-      (FLayout.ltr, false) => MediaQuery.removePadding(context: context, removeRight: true, child: sheet),
-      (FLayout.rtl, false) => MediaQuery.removePadding(context: context, removeLeft: true, child: sheet),
+      (FLayout.ttb, false) => MediaQuery.removePadding(
+        context: context,
+        removeBottom: true,
+        child: sheet,
+      ),
+      (FLayout.btt, false) => MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: sheet,
+      ),
+      (FLayout.ltr, false) => MediaQuery.removePadding(
+        context: context,
+        removeRight: true,
+        child: sheet,
+      ),
+      (FLayout.rtl, false) => MediaQuery.removePadding(
+        context: context,
+        removeLeft: true,
+        child: sheet,
+      ),
     };
 
     return AnimatedBuilder(
@@ -155,7 +187,9 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
             namesRoute: true,
             label: switch (defaultTargetPlatform) {
               TargetPlatform.iOS || TargetPlatform.macOS => null,
-              _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).dialogLabel,
+              _ =>
+                (FLocalizations.of(context) ?? FDefaultLocalizations())
+                    .dialogLabel,
             },
             explicitChildNodes: true,
             child: ClipRect(
@@ -197,10 +231,14 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
   GestureDragEndCallback get _dragEnd {
     final double Function(DragEndDetails) velocity = switch (widget.side) {
-      FLayout.ttb => (details) => details.primaryVelocity! / _key.currentChildHeight,
-      FLayout.btt => (details) => -details.primaryVelocity! / _key.currentChildHeight,
-      FLayout.ltr => (details) => details.primaryVelocity! / _key.currentChildWidth,
-      FLayout.rtl => (details) => -details.primaryVelocity! / _key.currentChildWidth,
+      FLayout.ttb =>
+        (details) => details.primaryVelocity! / _key.currentChildHeight,
+      FLayout.btt =>
+        (details) => -details.primaryVelocity! / _key.currentChildHeight,
+      FLayout.ltr =>
+        (details) => details.primaryVelocity! / _key.currentChildWidth,
+      FLayout.rtl =>
+        (details) => -details.primaryVelocity! / _key.currentChildWidth,
     };
 
     return (details) {
@@ -247,9 +285,11 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 }
 
 extension on GlobalKey {
-  double get currentChildWidth => (currentContext!.findRenderObject()! as RenderBox).size.width;
+  double get currentChildWidth =>
+      (currentContext!.findRenderObject()! as RenderBox).size.width;
 
-  double get currentChildHeight => (currentContext!.findRenderObject()! as RenderBox).size.height;
+  double get currentChildHeight =>
+      (currentContext!.findRenderObject()! as RenderBox).size.height;
 }
 
 /// A sheet's style.

@@ -6,7 +6,10 @@ import 'package:forui/forui.dart';
 
 void main() {
   group('FSliderMark', () {
-    for (final constructor in [() => FSliderMark(value: -0.1), () => FSliderMark(value: 1.1)]) {
+    for (final constructor in [
+      () => FSliderMark(value: -0.1),
+      () => FSliderMark(value: 1.1),
+    ]) {
       test('constructor', () => expect(constructor, throwsAssertionError));
     }
   });

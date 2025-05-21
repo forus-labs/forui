@@ -14,13 +14,19 @@ class ScrollHandle extends StatefulWidget {
   final Alignment alignment;
   final IconData icon;
 
-  const ScrollHandle.up({required this.controller, required this.style, super.key})
-    : alignment = Alignment.topCenter,
-      icon = FIcons.chevronUp;
+  const ScrollHandle.up({
+    required this.controller,
+    required this.style,
+    super.key,
+  }) : alignment = Alignment.topCenter,
+       icon = FIcons.chevronUp;
 
-  const ScrollHandle.down({required this.controller, required this.style, super.key})
-    : alignment = Alignment.bottomCenter,
-      icon = FIcons.chevronDown;
+  const ScrollHandle.down({
+    required this.controller,
+    required this.style,
+    super.key,
+  }) : alignment = Alignment.bottomCenter,
+       icon = FIcons.chevronDown;
 
   @override
   State<ScrollHandle> createState() => _ScrollHandleState();
@@ -76,7 +82,10 @@ class _ScrollHandleState extends State<ScrollHandle> {
                 width: double.infinity,
                 child: ColoredBox(
                   color: widget.style.background,
-                  child: IconTheme(data: widget.style.iconStyle, child: Icon(widget.icon)),
+                  child: IconTheme(
+                    data: widget.style.iconStyle,
+                    child: Icon(widget.icon),
+                  ),
                 ),
               ),
             ),
@@ -100,7 +109,11 @@ class _ScrollHandleState extends State<ScrollHandle> {
 
     final ms = currentOffset / (widget.style.pixelsPerSecond / 1000);
 
-    await widget.controller.animateTo(0, duration: Duration(microseconds: (ms * 1000).round()), curve: Curves.linear);
+    await widget.controller.animateTo(
+      0,
+      duration: Duration(microseconds: (ms * 1000).round()),
+      curve: Curves.linear,
+    );
   }
 
   Future<void> _down() async {
@@ -128,7 +141,8 @@ class _ScrollHandleState extends State<ScrollHandle> {
 }
 
 /// A [FSelect] content scroll handle's style.
-class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFunctions {
+class FSelectScrollHandleStyle
+    with Diagnosticable, _$FSelectScrollHandleStyleFunctions {
   /// The handle icon's style.
   @override
   final IconThemeData iconStyle;
@@ -154,9 +168,15 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
     required this.iconStyle,
     this.enterDuration = const Duration(milliseconds: 200),
     this.pixelsPerSecond = 200,
-  }) : assert(0 < pixelsPerSecond, 'The pixels per second must be greater than 0.');
+  }) : assert(
+         0 < pixelsPerSecond,
+         'The pixels per second must be greater than 0.',
+       );
 
   /// Creates a [FSelectScrollHandleStyle] that inherits its properties.
   FSelectScrollHandleStyle.inherit({required FColors colors})
-    : this(iconStyle: IconThemeData(color: colors.primary, size: 17), background: colors.background);
+    : this(
+        iconStyle: IconThemeData(color: colors.primary, size: 17),
+        background: colors.background,
+      );
 }

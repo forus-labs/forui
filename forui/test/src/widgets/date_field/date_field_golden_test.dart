@@ -14,7 +14,10 @@ void main() {
       TestScaffold.blue(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: FDateField(style: TestScaffold.blueScreen.dateFieldStyle, key: key),
+          home: FDateField(
+            style: TestScaffold.blueScreen.dateFieldStyle,
+            key: key,
+          ),
         ),
       ),
     );
@@ -26,20 +29,28 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(theme: theme.data, child: FDateField(key: key)),
+      );
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/placeholder.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/placeholder.png',
+        ),
       );
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDateField(prefixBuilder: null)));
+      await tester.pumpWidget(
+        TestScaffold(theme: theme.data, child: FDateField(prefixBuilder: null)),
+      );
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/no-icon.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/no-icon.png',
+        ),
       );
     });
 
@@ -51,7 +62,11 @@ void main() {
           child: FDateField(
             key: key,
             calendar: FDateFieldCalendarProperties(today: DateTime(2025, 4)),
-            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+            builder:
+                (context, data, child) => ColoredBox(
+                  color: context.theme.colors.destructive,
+                  child: child!,
+                ),
           ),
         ),
       );
@@ -61,7 +76,9 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/builder.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/builder.png',
+        ),
       );
     });
 
@@ -71,7 +88,12 @@ void main() {
           theme: theme.data,
           locale: const Locale('hr'),
           alignment: Alignment.topCenter,
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            calendar: FDateFieldCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
+          ),
         ),
       );
 
@@ -80,7 +102,9 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/hr-locale.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/hr-locale.png',
+        ),
       );
     });
 
@@ -90,7 +114,12 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            calendar: FDateFieldCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
+          ),
         ),
       );
 
@@ -99,7 +128,9 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/show-calendar.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/show-calendar.png',
+        ),
       );
     });
 
@@ -109,7 +140,12 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            calendar: FDateFieldCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
+          ),
         ),
       );
 
@@ -121,7 +157,9 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/calendar-updates-field.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/calendar-updates-field.png',
+        ),
       );
     });
 
@@ -131,7 +169,12 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            calendar: FDateFieldCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
+          ),
         ),
       );
 
@@ -143,7 +186,9 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/field-updates-calendar.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/field-updates-calendar.png',
+        ),
       );
     });
 
@@ -155,7 +200,10 @@ void main() {
           alignment: Alignment.topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15), autoHide: false),
+            calendar: FDateFieldCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+              autoHide: false,
+            ),
           ),
         ),
       );
@@ -168,19 +216,28 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/no-auto-hide.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/no-auto-hide.png',
+        ),
       );
     });
 
     testWidgets('${theme.name} disabled', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField(enabled: false, key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField(enabled: false, key: key),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/disabled.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/disabled.png',
+        ),
       );
     });
 
@@ -190,7 +247,9 @@ void main() {
           alignment: Alignment.topCenter,
           theme: theme.data,
           child: FDateField(
-            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+            calendar: FDateFieldCalendarProperties(
+              today: DateTime.utc(2025, 1, 15),
+            ),
             forceErrorText: 'Error',
             key: key,
           ),
@@ -206,9 +265,15 @@ void main() {
       );
     });
 
-    testWidgets('${theme.name} tap outside does not unfocus on Android/iOS', (tester) async {
+    testWidgets('${theme.name} tap outside does not unfocus on Android/iOS', (
+      tester,
+    ) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField(key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FDateField(key: key),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -219,15 +284,23 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/mobile-focused.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/mobile-focused.png',
+        ),
       );
     });
 
-    testWidgets('${theme.name} tap outside unfocuses on desktop', (tester) async {
+    testWidgets('${theme.name} tap outside unfocuses on desktop', (
+      tester,
+    ) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField(key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FDateField(key: key),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -238,7 +311,9 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/input-calendar/desktop-unfocused.png'),
+        matchesGoldenFile(
+          'date-field/${theme.name}/input-calendar/desktop-unfocused.png',
+        ),
       );
 
       debugDefaultTargetPlatformOverride = null;

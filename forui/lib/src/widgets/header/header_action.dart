@@ -124,7 +124,9 @@ class FHeaderAction extends StatelessWidget {
       semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,
-      builder: (_, states, child) => IconTheme(data: style.iconStyle.resolve(states), child: child!),
+      builder:
+          (_, states, child) =>
+              IconTheme(data: style.iconStyle.resolve(states), child: child!),
       child: icon,
     );
   }
@@ -164,14 +166,24 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
   final FTappableStyle tappableStyle;
 
   /// Creates a [FHeaderActionStyle].
-  FHeaderActionStyle({required this.iconStyle, required this.focusedOutlineStyle, required this.tappableStyle});
+  FHeaderActionStyle({
+    required this.iconStyle,
+    required this.focusedOutlineStyle,
+    required this.tappableStyle,
+  });
 
   /// Creates a [FHeaderActionStyle] that inherits its properties.
-  FHeaderActionStyle.inherit({required FColors colors, required FStyle style, required double size})
-    : iconStyle = FWidgetStateMap({
-        WidgetState.disabled: IconThemeData(color: colors.disable(colors.foreground), size: size),
-        WidgetState.any: IconThemeData(color: colors.foreground, size: size),
-      }),
-      focusedOutlineStyle = style.focusedOutlineStyle,
-      tappableStyle = style.tappableStyle;
+  FHeaderActionStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required double size,
+  }) : iconStyle = FWidgetStateMap({
+         WidgetState.disabled: IconThemeData(
+           color: colors.disable(colors.foreground),
+           size: size,
+         ),
+         WidgetState.any: IconThemeData(color: colors.foreground, size: size),
+       }),
+       focusedOutlineStyle = style.focusedOutlineStyle,
+       tappableStyle = style.tappableStyle;
 }

@@ -15,7 +15,11 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>.search(key: key, filter: (_) => [], contentBuilder: (_, _) => []),
+            child: FSelect<String>.search(
+              key: key,
+              filter: (_) => [],
+              contentBuilder: (_, _) => [],
+            ),
           ),
         );
 
@@ -24,7 +28,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/search_content/no_results.png'),
+          matchesGoldenFile(
+            'select/${theme.name}/search_content/no_results.png',
+          ),
         );
       });
 
@@ -44,7 +50,10 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search_content/sync.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/search_content/sync.png'),
+        );
       });
 
       testWidgets('async', (tester) async {
@@ -84,7 +93,9 @@ void main() {
                 throw ArgumentError();
               },
               contentBuilder: (_, _) => [FSelectItem.text('A')],
-              searchErrorBuilder: (_, error, trace) => Container(color: Colors.red, height: 10, width: 10),
+              searchErrorBuilder:
+                  (_, error, trace) =>
+                      Container(color: Colors.red, height: 10, width: 10),
             ),
           ),
         );
@@ -94,7 +105,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/search_content/async_error_with_error_builder.png'),
+          matchesGoldenFile(
+            'select/${theme.name}/search_content/async_error_with_error_builder.png',
+          ),
         );
 
         await tester.pumpAndSettle();
@@ -111,7 +124,10 @@ void main() {
                 await Future.delayed(const Duration(seconds: 5));
                 throw ArgumentError();
               },
-              contentBuilder: (_, data) => [for (final v in data.values) FSelectItem.text(v)],
+              contentBuilder:
+                  (_, data) => [
+                    for (final v in data.values) FSelectItem.text(v),
+                  ],
             ),
           ),
         );
@@ -121,7 +137,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/search_content/async_error.png'),
+          matchesGoldenFile(
+            'select/${theme.name}/search_content/async_error.png',
+          ),
         );
 
         await tester.pumpAndSettle();
@@ -149,7 +167,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/search_content/async_loading.png'),
+          matchesGoldenFile(
+            'select/${theme.name}/search_content/async_loading.png',
+          ),
         );
 
         await tester.pumpAndSettle();

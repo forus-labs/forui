@@ -19,7 +19,11 @@ part 'line_calendar.style.dart';
 /// * https://forui.dev/docs/data/line-calendar for working examples.
 /// * [FLineCalendarStyle] for customizing a line calendar's style.
 class FLineCalendar extends StatelessWidget {
-  static Widget _builder(BuildContext _, FLineCalendarItemData _, Widget? child) => child!;
+  static Widget _builder(
+    BuildContext _,
+    FLineCalendarItemData _,
+    Widget? child,
+  ) => child!;
 
   /// The controller.
   final FCalendarController<DateTime?>? controller;
@@ -107,13 +111,16 @@ class FLineCalendar extends StatelessWidget {
        _initialSelection = initialSelection?.toLocalDate(),
        _today = (today ?? DateTime.now()).toLocalDate(),
        assert(
-         start == null || end == null || start.toLocalDate() < end.toLocalDate(),
+         start == null ||
+             end == null ||
+             start.toLocalDate() < end.toLocalDate(),
          'end date must be greater than start date',
        ),
        assert(
          initialScroll == null ||
              start == null ||
-             (initialScroll.toLocalDate() >= start.toLocalDate() && initialScroll.toLocalDate() < end!.toLocalDate()),
+             (initialScroll.toLocalDate() >= start.toLocalDate() &&
+                 initialScroll.toLocalDate() < end!.toLocalDate()),
          'initial scrolled date must be greater than or equal to start date',
        ),
        assert(
@@ -130,7 +137,8 @@ class FLineCalendar extends StatelessWidget {
        assert(
          today == null ||
              start == null ||
-             (today.toLocalDate() >= start.toLocalDate() && today.toLocalDate() < end!.toLocalDate()),
+             (today.toLocalDate() >= start.toLocalDate() &&
+                 today.toLocalDate() < end!.toLocalDate()),
          'today must be greater than or equal to start date',
        );
 
@@ -163,10 +171,14 @@ class FLineCalendar extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('initialScrollAlignment', initialScrollAlignment))
+      ..add(
+        DiagnosticsProperty('initialScrollAlignment', initialScrollAlignment),
+      )
       ..add(DiagnosticsProperty('physics', physics))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
-      ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
+      ..add(
+        DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior),
+      )
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('onChange', onChange));
   }
@@ -238,15 +250,21 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
     required FTypography typography,
     required FStyle style,
   }) {
-    final focusedBorder = Border.all(color: colors.primary, width: style.borderWidth);
+    final focusedBorder = Border.all(
+      color: colors.primary,
+      width: style.borderWidth,
+    );
     return FLineCalendarStyle(
       decoration: FWidgetStateMap({
-        WidgetState.selected & (WidgetState.hovered | WidgetState.pressed) & WidgetState.focused: BoxDecoration(
+        WidgetState.selected &
+            (WidgetState.hovered | WidgetState.pressed) &
+            WidgetState.focused: BoxDecoration(
           color: colors.hover(colors.primary),
           border: focusedBorder,
           borderRadius: style.borderRadius,
         ),
-        WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): BoxDecoration(
+        WidgetState.selected &
+            (WidgetState.hovered | WidgetState.pressed): BoxDecoration(
           color: colors.hover(colors.primary),
           borderRadius: style.borderRadius,
         ),
@@ -255,8 +273,12 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
           border: focusedBorder,
           borderRadius: style.borderRadius,
         ),
-        WidgetState.selected: BoxDecoration(color: colors.primary, borderRadius: style.borderRadius),
-        (WidgetState.hovered | WidgetState.pressed) & WidgetState.focused: BoxDecoration(
+        WidgetState.selected: BoxDecoration(
+          color: colors.primary,
+          borderRadius: style.borderRadius,
+        ),
+        (WidgetState.hovered | WidgetState.pressed) &
+            WidgetState.focused: BoxDecoration(
           color: colors.secondary,
           border: focusedBorder,
           borderRadius: style.borderRadius,
@@ -278,9 +300,12 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
         ),
       }),
       todayIndicatorColor: FWidgetStateMap({
-        WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): colors.hover(colors.primaryForeground),
+        WidgetState.selected & (WidgetState.hovered | WidgetState.pressed):
+            colors.hover(colors.primaryForeground),
         WidgetState.selected: colors.primaryForeground,
-        (WidgetState.hovered | WidgetState.pressed): colors.hover(colors.primary),
+        (WidgetState.hovered | WidgetState.pressed): colors.hover(
+          colors.primary,
+        ),
         WidgetState.any: colors.primary,
       }),
       dateTextStyle: FWidgetStateMap({
@@ -289,7 +314,11 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
           fontWeight: FontWeight.w500,
           height: 0,
         ),
-        WidgetState.any: typography.xl.copyWith(color: colors.primary, fontWeight: FontWeight.w500, height: 0),
+        WidgetState.any: typography.xl.copyWith(
+          color: colors.primary,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
       }),
       weekdayTextStyle: FWidgetStateMap({
         WidgetState.selected: typography.xs.copyWith(
@@ -297,7 +326,11 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
           fontWeight: FontWeight.w500,
           height: 0,
         ),
-        WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground, fontWeight: FontWeight.w500, height: 0),
+        WidgetState.any: typography.xs.copyWith(
+          color: colors.mutedForeground,
+          fontWeight: FontWeight.w500,
+          height: 0,
+        ),
       }),
       tappableStyle: style.tappableStyle,
     );

@@ -58,10 +58,29 @@ class InheritedData extends InheritedWidget {
       ..add(EnumProperty('layout', layout))
       ..add(IterableProperty('marks', marks))
       ..add(DoubleProperty('trackMainAxisExtent', trackMainAxisExtent))
-      ..add(DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent))
+      ..add(
+        DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent),
+      )
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
-      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
-      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticValueFormatterCallback))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+      ..add(
+        ObjectFlagProperty.has(
+          'semanticFormatterCallback',
+          semanticFormatterCallback,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty.has(
+          'semanticFormatterCallback',
+          semanticValueFormatterCallback,
+        ),
+      )
+      ..add(
+        FlagProperty(
+          'enabled',
+          value: enabled,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      );
   }
 }

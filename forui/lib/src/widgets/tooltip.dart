@@ -19,7 +19,10 @@ class FTooltipController extends FChangeNotifier {
   late final Animation<double> _scale;
 
   /// Creates a [FTooltipController] with the given [vsync] and animation [animationDuration].
-  FTooltipController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
+  FTooltipController({
+    required TickerProvider vsync,
+    Duration animationDuration = const Duration(milliseconds: 100),
+  }) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
     _fade = _fadeTween.animate(_animation);
     _scale = _scaleTween.animate(_animation);
@@ -160,7 +163,8 @@ class FTooltip extends StatefulWidget {
   }
 }
 
-class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
+class _FTooltipState extends State<FTooltip>
+    with SingleTickerProviderStateMixin {
   late FTooltipController _controller;
   int _monotonic = 0;
 
@@ -190,7 +194,10 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     if (widget.hover || widget.longPress) {
       child = CallbackShortcuts(
         bindings: {const SingleActivator(LogicalKeyboardKey.escape): _exit},
-        child: Focus(onFocusChange: (focused) async => focused ? _enter() : _exit(), child: child),
+        child: Focus(
+          onFocusChange: (focused) async => focused ? _enter() : _exit(),
+          child: child,
+        ),
       );
     }
 
@@ -241,7 +248,10 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
                     decoration: style.decoration,
                     child: Padding(
                       padding: style.padding,
-                      child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, style, null)),
+                      child: DefaultTextStyle(
+                        style: style.textStyle,
+                        child: widget.tipBuilder(context, style, null),
+                      ),
                     ),
                   ),
                 ),
@@ -283,8 +293,18 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   /// The tooltip's default shadow in [FTooltipStyle.inherit].
   static const shadow = [
-    BoxShadow(color: Color(0x1a000000), offset: Offset(0, 4), blurRadius: 6, spreadRadius: -1),
-    BoxShadow(color: Color(0x1a000000), offset: Offset(0, 2), blurRadius: 4, spreadRadius: -2),
+    BoxShadow(
+      color: Color(0x1a000000),
+      offset: Offset(0, 4),
+      blurRadius: 6,
+      spreadRadius: -1,
+    ),
+    BoxShadow(
+      color: Color(0x1a000000),
+      offset: Offset(0, 2),
+      blurRadius: 4,
+      spreadRadius: -2,
+    ),
   ];
 
   /// The box decoration.
@@ -312,14 +332,17 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   });
 
   /// Creates a [FTooltipStyle] that inherits its properties.
-  FTooltipStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        decoration: BoxDecoration(
-          color: colors.background,
-          borderRadius: style.borderRadius,
-          border: Border.all(width: style.borderWidth, color: colors.border),
-          boxShadow: FTooltipStyle.shadow,
-        ),
-        textStyle: typography.sm,
-      );
+  FTooltipStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) : this(
+         decoration: BoxDecoration(
+           color: colors.background,
+           borderRadius: style.borderRadius,
+           border: Border.all(width: style.borderWidth, color: colors.border),
+           boxShadow: FTooltipStyle.shadow,
+         ),
+         textStyle: typography.sm,
+       );
 }

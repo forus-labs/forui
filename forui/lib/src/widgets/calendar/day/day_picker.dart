@@ -79,7 +79,8 @@ class _DayPickerState extends State<DayPicker> {
   }
 
   (LocalDate, LocalDate) get _range {
-    final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
+    final firstDayOfWeek =
+        widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
     final firstDayOfMonth = widget.month.firstDayOfMonth;
     var difference = firstDayOfMonth.weekday - firstDayOfWeek;
     if (difference < 0) {
@@ -88,7 +89,10 @@ class _DayPickerState extends State<DayPicker> {
 
     final first = firstDayOfMonth.minus(days: difference);
 
-    final lastDayOfWeek = firstDayOfWeek == DateTime.monday ? DateTime.sunday : firstDayOfWeek - 1;
+    final lastDayOfWeek =
+        firstDayOfWeek == DateTime.monday
+            ? DateTime.sunday
+            : firstDayOfWeek - 1;
     final lastDayOfMonth = widget.month.lastDayOfMonth;
     difference = lastDayOfWeek - lastDayOfMonth.weekday;
     if (difference < 0) {
@@ -129,13 +133,19 @@ class _DayPickerState extends State<DayPicker> {
   );
 
   List<Widget> _headers(BuildContext _) {
-    final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
+    final firstDayOfWeek =
+        widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
     final narrowWeekdays = widget.localization.narrowWeekDays;
 
     return [
       for (int i = firstDayOfWeek, j = 0; j < DateTime.daysPerWeek; i++, j++)
         ExcludeSemantics(
-          child: Center(child: Text(narrowWeekdays[i % DateTime.daysPerWeek], style: widget.style.headerTextStyle)),
+          child: Center(
+            child: Text(
+              narrowWeekdays[i % DateTime.daysPerWeek],
+              style: widget.style.headerTextStyle,
+            ),
+          ),
         ),
     ];
   }
@@ -145,7 +155,8 @@ class _DayPickerState extends State<DayPicker> {
     super.didUpdateWidget(old);
     assert(old.month == widget.month, 'Current month must not change.');
 
-    if (_days[widget.focused] case final focusNode? when old.focused != widget.focused) {
+    if (_days[widget.focused] case final focusNode?
+        when old.focused != widget.focused) {
       focusNode.requestFocus();
     }
   }
@@ -166,21 +177,26 @@ class _GridDelegate extends SliverGridDelegate {
   const _GridDelegate(this.tileSize);
 
   @override
-  SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-    childCrossAxisExtent: tileSize,
-    childMainAxisExtent: tileSize,
-    crossAxisCount: DateTime.daysPerWeek,
-    crossAxisStride: tileSize,
-    mainAxisStride: tileSize,
-    reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
-  );
+  SliverGridLayout getLayout(SliverConstraints constraints) =>
+      SliverGridRegularTileLayout(
+        childCrossAxisExtent: tileSize,
+        childMainAxisExtent: tileSize,
+        crossAxisCount: DateTime.daysPerWeek,
+        crossAxisStride: tileSize,
+        mainAxisStride: tileSize,
+        reverseCrossAxis: axisDirectionIsReversed(
+          constraints.crossAxisDirection,
+        ),
+      );
 
   @override
-  bool shouldRelayout(_GridDelegate oldDelegate) => tileSize != oldDelegate.tileSize;
+  bool shouldRelayout(_GridDelegate oldDelegate) =>
+      tileSize != oldDelegate.tileSize;
 }
 
 /// A day picker's style.
-class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
+class FCalendarDayPickerStyle
+    with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
   /// The text style for the day of th week headers.
   @override
   final TextStyle headerTextStyle;
@@ -219,13 +235,18 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     this.startDayOfWeek,
     this.tileSize = 42,
   }) : assert(
-         startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
+         startDayOfWeek == null ||
+             (DateTime.monday <= startDayOfWeek &&
+                 startDayOfWeek <= DateTime.sunday),
          'startDayOfWeek must be between DateTime.monday (1) and DateTime.sunday (7).',
        ),
        assert(0 < tileSize, 'tileSize must be positive.');
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
-  factory FCalendarDayPickerStyle.inherit({required FColors colors, required FTypography typography}) {
+  factory FCalendarDayPickerStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+  }) {
     final mutedTextStyle = typography.base.copyWith(
       color: colors.disable(colors.mutedForeground),
       fontWeight: FontWeight.w500,
@@ -237,7 +258,8 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     };
 
     final border = {
-      WidgetState.disabled & WidgetState.selected & WidgetState.focused: colors.primaryForeground,
+      WidgetState.disabled & WidgetState.selected & WidgetState.focused:
+          colors.primaryForeground,
       WidgetState.disabled & WidgetState.focused: colors.background,
       WidgetState.focused: colors.foreground,
     };
@@ -248,14 +270,21 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         backgroundColor: FWidgetStateMap({
           ...background,
           WidgetState.selected: colors.foreground,
-          ~WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): colors.secondary,
+          ~WidgetState.selected & (WidgetState.hovered | WidgetState.pressed):
+              colors.secondary,
           WidgetState.any: colors.background,
         }),
         borderColor: FWidgetStateMap(border),
         textStyle: FWidgetStateMap({
           WidgetState.disabled: mutedTextStyle,
-          WidgetState.selected: typography.base.copyWith(color: colors.background, fontWeight: FontWeight.w500),
-          WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
+          WidgetState.selected: typography.base.copyWith(
+            color: colors.background,
+            fontWeight: FontWeight.w500,
+          ),
+          WidgetState.any: typography.base.copyWith(
+            color: colors.foreground,
+            fontWeight: FontWeight.w500,
+          ),
         }),
         radius: const Radius.circular(4),
       ),
@@ -263,7 +292,8 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         backgroundColor: FWidgetStateMap({
           ...background,
           WidgetState.selected: colors.primaryForeground,
-          ~WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): colors.secondary,
+          ~WidgetState.selected & (WidgetState.hovered | WidgetState.pressed):
+              colors.secondary,
           WidgetState.any: colors.background,
         }),
         borderColor: FWidgetStateMap(border),

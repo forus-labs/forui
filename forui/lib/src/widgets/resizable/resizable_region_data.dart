@@ -41,7 +41,10 @@ final class FResizableRegionData with Diagnosticable {
     required ({double min, double max, double total}) extent,
     required this.offset,
   }) : assert(0 <= index, 'Index should be non-negative, but is $index.'),
-       assert(0 < extent.min, 'Min extent should be positive, but is ${extent.min}'),
+       assert(
+         0 < extent.min,
+         'Min extent should be positive, but is ${extent.min}',
+       ),
        assert(
          extent.min < extent.max,
          'Min extent should be less than the max extent, but min is ${extent.min} and max is ${extent.max}',
@@ -50,17 +53,26 @@ final class FResizableRegionData with Diagnosticable {
          extent.max <= extent.total,
          'Max extent should be less than or equal to the total extent, but max is ${extent.max} and total is ${extent.total}',
        ),
-       assert(0 <= offset.min, 'Min offset should be non-negative, but is ${offset.min}'),
+       assert(
+         0 <= offset.min,
+         'Min offset should be non-negative, but is ${offset.min}',
+       ),
        assert(
          offset.min < offset.max,
          'Min offset should be less than the max offset, but min is ${offset.min} and max is ${offset.max}',
        ),
        assert(
-         0.0.lessOrAround(offset.max - offset.min) && (offset.max - offset.min).lessOrAround(extent.max),
+         0.0.lessOrAround(offset.max - offset.min) &&
+             (offset.max - offset.min).lessOrAround(extent.max),
          'Current extent should be non-negative and less than or equal to the max extent, but current is '
          '${offset.max - offset.min} and max is ${extent.max}.',
        ),
-       extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
+       extent = (
+         min: extent.min,
+         current: offset.max - offset.min,
+         max: extent.max,
+         total: extent.total,
+       );
 
   /// Returns a copy of this [FResizableRegionData] with the given fields replaced by the new values.
   @useResult
@@ -72,7 +84,11 @@ final class FResizableRegionData with Diagnosticable {
     double? maxOffset,
   }) => FResizableRegionData(
     index: index ?? this.index,
-    extent: (min: minExtent ?? extent.min, max: maxExtent ?? extent.max, total: extent.total),
+    extent: (
+      min: minExtent ?? extent.min,
+      max: maxExtent ?? extent.max,
+      total: extent.total,
+    ),
     offset: (min: minOffset ?? offset.min, max: maxOffset ?? offset.max),
   );
 
@@ -80,7 +96,10 @@ final class FResizableRegionData with Diagnosticable {
   ///
   /// For example, if the offsets are `(200, 400)`, and the [FResizable]'s size is 500, [offsetPercentage] will be
   /// `(0.4, 0.8)`.
-  ({double min, double max}) get offsetPercentage => (min: offset.min / extent.total, max: offset.max / extent.total);
+  ({double min, double max}) get offsetPercentage => (
+    min: offset.min / extent.total,
+    max: offset.max / extent.total,
+  );
 
   @override
   bool operator ==(Object other) =>
@@ -112,13 +131,19 @@ extension UpdatableResizableRegionData on FResizableRegionData {
   ///
   /// This method assumes that shrinking regions are computed before expanding regions.
   @useResult
-  (FResizableRegionData, double translated) update(double delta, {required bool lhs}) {
+  (FResizableRegionData, double translated) update(
+    double delta, {
+    required bool lhs,
+  }) {
     var (:min, :max) = offset;
     lhs ? min += delta : max += delta;
     final newExtent = max - min;
 
     assert(0 <= min, '$min should be non-negative.');
-    assert(newExtent.lessOrAround(extent.max), '$newExtent should be less than ${extent.max}.');
+    assert(
+      newExtent.lessOrAround(extent.max),
+      '$newExtent should be less than ${extent.max}.',
+    );
 
     if (extent.min <= newExtent) {
       return (copyWith(minOffset: min, maxOffset: max), delta);
@@ -134,12 +159,16 @@ extension UpdatableResizableRegionData on FResizableRegionData {
     // It isn't ideal but it works and I'm too dumb & lazy to address this issue properly.
     if (lhs) {
       return (
-        extent.min == extent.current ? this : copyWith(minOffset: max - extent.min),
+        extent.min == extent.current
+            ? this
+            : copyWith(minOffset: max - extent.min),
         delta + newExtent - extent.min,
       );
     } else {
       return (
-        extent.min == extent.current ? this : copyWith(maxOffset: min + extent.min),
+        extent.min == extent.current
+            ? this
+            : copyWith(maxOffset: min + extent.min),
         delta - newExtent + extent.min,
       );
     }

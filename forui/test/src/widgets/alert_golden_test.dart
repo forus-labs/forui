@@ -55,7 +55,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/${theme.name}/$variant-user-icon.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('alert/${theme.name}/$variant-user-icon.png'),
+          );
         });
       }
     }

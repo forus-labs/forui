@@ -19,7 +19,10 @@ final class FPopoverController extends FChangeNotifier {
   late final Animation<double> _scale;
 
   /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
-  FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
+  FPopoverController({
+    required TickerProvider vsync,
+    Duration animationDuration = const Duration(milliseconds: 100),
+  }) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
     _fade = _fadeTween.animate(_animation);
     _scale = _scaleTween.animate(_animation);
@@ -220,7 +223,8 @@ class FPopover extends StatefulWidget {
     AlignmentGeometry? childAnchor,
     super.key,
   }) : assert(
-         groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
+         groupId == null ||
+             hideOnTapOutside == FHidePopoverRegion.excludeTarget,
          'groupId can only be used with FHidePopoverRegion.excludeTarget',
        ),
        popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
@@ -253,7 +257,8 @@ class FPopover extends StatefulWidget {
     AlignmentGeometry? childAnchor,
     super.key,
   }) : assert(
-         groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
+         groupId == null ||
+             hideOnTapOutside == FHidePopoverRegion.excludeTarget,
          'groupId can only be used with FHidePopoverRegion.excludeTarget',
        ),
        popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
@@ -289,7 +294,8 @@ class FPopover extends StatefulWidget {
 
 class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   late Object? _groupId = widget.groupId ?? UniqueKey();
-  late FPopoverController _controller = widget.controller ?? FPopoverController(vsync: this);
+  late FPopoverController _controller =
+      widget.controller ?? FPopoverController(vsync: this);
 
   @override
   void didUpdateWidget(covariant FPopover old) {
@@ -313,11 +319,19 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
     var child =
         widget._automatic
-            ? GestureDetector(behavior: HitTestBehavior.translucent, onTap: _controller.toggle, child: widget.child)
+            ? GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: _controller.toggle,
+              child: widget.child,
+            )
             : widget.child;
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
-      child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
+      child = TapRegion(
+        groupId: _groupId,
+        onTapOutside: (_) => _hide(),
+        child: child,
+      );
     }
 
     return FPortal(
@@ -325,13 +339,17 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       constraints: widget.constraints,
       portalAnchor: widget.popoverAnchor,
       childAnchor: widget.childAnchor,
-      viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
+      viewInsets:
+          MediaQuery.viewPaddingOf(context) +
+          style.viewInsets.resolve(direction),
       spacing: widget.spacing,
       shift: widget.shift,
       offset: widget.offset,
       portalBuilder:
           (context) => CallbackShortcuts(
-            bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
+            bindings:
+                widget.shortcuts ??
+                {const SingleActivator(LogicalKeyboardKey.escape): _hide},
             child: Semantics(
               label: widget.semanticsLabel,
               container: true,
@@ -345,7 +363,10 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                     scale: _controller._scale,
                     child: TapRegion(
                       groupId: _groupId,
-                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
+                      onTapOutside:
+                          widget.hideOnTapOutside == FHidePopoverRegion.none
+                              ? null
+                              : (_) => _hide(),
                       child: DecoratedBox(
                         decoration: style.decoration,
                         child: widget.popoverBuilder(context, style, null),
@@ -391,7 +412,10 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final EdgeInsetsGeometry viewInsets;
 
   /// Creates a [FPopoverStyle].
-  const FPopoverStyle({required this.decoration, this.viewInsets = const EdgeInsets.all(5)});
+  const FPopoverStyle({
+    required this.decoration,
+    this.viewInsets = const EdgeInsets.all(5),
+  });
 
   /// Creates a [FPopoverStyle] that inherits its properties.
   FPopoverStyle.inherit({required FColors colors, required FStyle style})
