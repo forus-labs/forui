@@ -73,7 +73,13 @@ class DateInput extends Input<DateTime?> {
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(ObjectFlagProperty.has('onTap', onTap))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(
+        FlagProperty(
+          'canRequestFocus',
+          value: canRequestFocus,
+          ifTrue: 'canRequestFocus',
+        ),
+      )
       ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
       ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
       ..add(DiagnosticsProperty('localizations', localizations))
@@ -87,7 +93,9 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
       localizations =
-          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+          scriptNumerals.contains(widget.localizations.localeName)
+              ? FDefaultLocalizations()
+              : widget.localizations;
       controller.dispose();
       controller = createController();
     } else if (widget.calendarController != old.calendarController) {
@@ -98,12 +106,17 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
 
   @override
   @protected
-  InputController createController() =>
-      DateInputController(widget.calendarController, localizations, widget.style.textFieldStyle, widget.baselineYear);
+  InputController createController() => DateInputController(
+    widget.calendarController,
+    localizations,
+    widget.style.textFieldStyle,
+    widget.baselineYear,
+  );
 
   @override
   @protected
-  bool clearable(TextEditingValue value) => value.text != controller.placeholder;
+  bool clearable(TextEditingValue value) =>
+      value.text != controller.placeholder;
 
   @override
   @protected

@@ -12,7 +12,10 @@ class DateParser extends Parser {
 
   DateParser(String locale, int initialYear)
     : this._(
-        RegExp('(y|MM|M|dd|d)').allMatches(DateFormat.yMd(locale).pattern!).map((e) => e.group(1)!).toList(),
+        RegExp('(y|MM|M|dd|d)')
+            .allMatches(DateFormat.yMd(locale).pattern!)
+            .map((e) => e.group(1)!)
+            .toList(),
         initialYear,
         locale,
       );
@@ -24,16 +27,20 @@ class DateParser extends Parser {
 
   @override
   @protected
-  (String, bool) updatePart(String pattern, String previous, String current) => switch (pattern) {
-    'd' || 'dd' => updateDay(previous, current),
-    'M' || 'MM' => updateMonth(previous, current),
-    'y' => updateYear(previous, current),
-    _ => (previous, false),
-  };
+  (String, bool) updatePart(String pattern, String previous, String current) =>
+      switch (pattern) {
+        'd' || 'dd' => updateDay(previous, current),
+        'M' || 'MM' => updateMonth(previous, current),
+        'y' => updateYear(previous, current),
+        _ => (previous, false),
+      };
 
   @visibleForTesting
   (String, bool) updateDay(String previous, String current) {
-    assert(previous.length <= 2, 'previous day must be at most 2 characters long');
+    assert(
+      previous.length <= 2,
+      'previous day must be at most 2 characters long',
+    );
 
     final full = previous == 'DD' ? current : '$previous$current';
     switch (_day.tryParse(full)?.toInt()) {
@@ -60,7 +67,10 @@ class DateParser extends Parser {
 
   @visibleForTesting
   (String, bool) updateMonth(String previous, String current) {
-    assert(previous.length <= 2, 'previous month must be at most 2 characters long');
+    assert(
+      previous.length <= 2,
+      'previous month must be at most 2 characters long',
+    );
 
     final full = previous == 'MM' ? current : '$previous$current';
     switch (_month.tryParse(full)?.toInt()) {
@@ -114,18 +124,20 @@ class DateParser extends Parser {
 
   @override
   @protected
-  String adjustPart(String pattern, String current, int amount) => switch (pattern) {
-    'd' || 'dd' => adjustDay(current, amount),
-    'M' || 'MM' => adjustMonth(current, amount),
-    'y' => adjustYear(current, amount),
-    _ => current,
-  };
+  String adjustPart(String pattern, String current, int amount) =>
+      switch (pattern) {
+        'd' || 'dd' => adjustDay(current, amount),
+        'M' || 'MM' => adjustMonth(current, amount),
+        'y' => adjustYear(current, amount),
+        _ => current,
+      };
 
   @visibleForTesting
   String adjustDay(String current, int amount) {
     assert(current.length <= 2, 'day must be at most 2 characters long');
 
-    final day = (_day.tryParse(current)?.toInt() ?? (amount <= 0 ? 1 : 0)) + amount;
+    final day =
+        (_day.tryParse(current)?.toInt() ?? (amount <= 0 ? 1 : 0)) + amount;
     return _day.format((day - 1) % 31 + 1);
   }
 
@@ -133,7 +145,9 @@ class DateParser extends Parser {
   String adjustMonth(String value, int adjustment) {
     assert(value.length <= 2, 'month must be at most 2 characters long');
 
-    final month = (_month.tryParse(value)?.toInt() ?? (adjustment <= 0 ? 1 : 0)) + adjustment;
+    final month =
+        (_month.tryParse(value)?.toInt() ?? (adjustment <= 0 ? 1 : 0)) +
+        adjustment;
     return _month.format((month - 1) % 12 + 1);
   }
 

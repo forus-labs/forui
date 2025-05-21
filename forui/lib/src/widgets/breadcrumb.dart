@@ -41,12 +41,20 @@ class FBreadcrumb extends StatelessWidget {
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
-  const FBreadcrumb({required this.children, this.style, this.divider, super.key});
+  const FBreadcrumb({
+    required this.children,
+    this.style,
+    this.divider,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.breadcrumbStyle;
-    final divider = IconTheme(data: style.iconStyle, child: this.divider ?? const Icon(FIcons.chevronRight));
+    final divider = IconTheme(
+      data: style.iconStyle,
+      child: this.divider ?? const Icon(FIcons.chevronRight),
+    );
 
     return Row(
       children: [
@@ -73,7 +81,8 @@ class FBreadcrumbItemData extends InheritedWidget {
   /// Throws [AssertionError] if there is no ancestor [FBreadcrumb] in the given [context].
   @useResult
   static FBreadcrumbItemData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FBreadcrumbItemData>();
+    final data =
+        context.dependOnInheritedWidgetOfExactType<FBreadcrumbItemData>();
     assert(data != null, 'No FBreadcrumbData found in context');
     return data!;
   }
@@ -82,7 +91,11 @@ class FBreadcrumbItemData extends InheritedWidget {
   final FBreadcrumbStyle style;
 
   /// Creates a [FBreadcrumbItemData].
-  const FBreadcrumbItemData({required this.style, required super.child, super.key});
+  const FBreadcrumbItemData({
+    required this.style,
+    required super.child,
+    super.key,
+  });
 
   @override
   bool updateShouldNotify(FBreadcrumbItemData old) => style != old.style;
@@ -172,7 +185,11 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
       focusedOutlineStyle: focusedOutlineStyle,
       selected: current,
       onPress: onPress,
-      builder: (_, states, child) => DefaultTextStyle(style: style.textStyle.resolve(states), child: child!),
+      builder:
+          (_, states, child) => DefaultTextStyle(
+            style: style.textStyle.resolve(states),
+            child: child!,
+          ),
       child: Padding(padding: style.padding, child: child),
     );
   }
@@ -270,8 +287,10 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   }
 }
 
-class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProviderStateMixin {
-  late FPopoverController _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
+class _CollapsedCrumbState extends State<_CollapsedCrumb>
+    with SingleTickerProviderStateMixin {
+  late FPopoverController _popoverController =
+      widget.popoverController ?? FPopoverController(vsync: this);
 
   @override
   void didUpdateWidget(covariant _CollapsedCrumb old) {
@@ -281,7 +300,8 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         _popoverController.dispose();
       }
 
-      _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
+      _popoverController =
+          widget.popoverController ?? FPopoverController(vsync: this);
     }
   }
 
@@ -313,7 +333,10 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         onPress: _popoverController.toggle,
         child: Padding(
           padding: style.padding,
-          child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
+          child: IconTheme(
+            data: style.iconStyle,
+            child: const Icon(FIcons.ellipsis),
+          ),
         ),
       ),
     );
@@ -360,27 +383,39 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   });
 
   /// Creates a [FBreadcrumbStyle] that inherits its properties.
-  FBreadcrumbStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        textStyle: FWidgetStateMap({
-          // Selected
-          WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
-            color: colors.foreground,
-            decoration: TextDecoration.underline,
-          ),
-          WidgetState.selected: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.foreground),
+  FBreadcrumbStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) : this(
+         textStyle: FWidgetStateMap({
+           // Selected
+           WidgetState.selected & (WidgetState.hovered | WidgetState.pressed):
+               typography.sm.copyWith(
+                 fontWeight: FontWeight.w400,
+                 color: colors.foreground,
+                 decoration: TextDecoration.underline,
+               ),
+           WidgetState.selected: typography.sm.copyWith(
+             fontWeight: FontWeight.w400,
+             color: colors.foreground,
+           ),
 
-          // Unselected
-          WidgetState.hovered | WidgetState.pressed: typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
-            color: colors.primary,
-            decoration: TextDecoration.underline,
-          ),
-          WidgetState.any: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.mutedForeground),
-        }),
-        iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
-        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-      );
+           // Unselected
+           WidgetState.hovered | WidgetState.pressed: typography.sm.copyWith(
+             fontWeight: FontWeight.w400,
+             color: colors.primary,
+             decoration: TextDecoration.underline,
+           ),
+           WidgetState.any: typography.sm.copyWith(
+             fontWeight: FontWeight.w400,
+             color: colors.mutedForeground,
+           ),
+         }),
+         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
+         tappableStyle: style.tappableStyle.copyWith(
+           animationTween: FTappableAnimations.none,
+         ),
+         focusedOutlineStyle: style.focusedOutlineStyle,
+       );
 }

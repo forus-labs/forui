@@ -39,12 +39,20 @@ class FBottomNavigationBar extends StatelessWidget {
   /// Creates a [FBottomNavigationBar] with [FBottomNavigationBarItem]s.
   ///
   /// See [FBottomNavigationBarItem] for the items in a bottom navigation bar.
-  const FBottomNavigationBar({required this.children, this.style, this.onChange, this.index = -1, super.key});
+  const FBottomNavigationBar({
+    required this.children,
+    this.style,
+    this.onChange,
+    this.index = -1,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.bottomNavigationBarStyle;
-    final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+    final padding = style.padding.resolve(
+      Directionality.maybeOf(context) ?? TextDirection.ltr,
+    );
 
     return DecoratedBox(
       decoration: style.decoration,
@@ -52,7 +60,11 @@ class FBottomNavigationBar extends StatelessWidget {
         top: false,
         bottom: false,
         child: Padding(
-          padding: padding.copyWith(bottom: padding.bottom + (MediaQuery.viewPaddingOf(context).bottom * 2 / 3)),
+          padding: padding.copyWith(
+            bottom:
+                padding.bottom +
+                (MediaQuery.viewPaddingOf(context).bottom * 2 / 3),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -92,7 +104,8 @@ class FBottomNavigationBarData extends InheritedWidget {
   /// Throws [AssertionError] if there is no ancestor [FBottomNavigationBar] in the given [context].
   @useResult
   static FBottomNavigationBarData of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FBottomNavigationBarData>();
+    final result =
+        context.dependOnInheritedWidgetOfExactType<FBottomNavigationBarData>();
     assert(result != null, 'No FBottomNavigationBarData found in context');
     return result!;
   }
@@ -121,7 +134,9 @@ class FBottomNavigationBarData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(FBottomNavigationBarData old) =>
-      old.itemStyle != itemStyle || old.index != index || old.selected != selected;
+      old.itemStyle != itemStyle ||
+      old.index != index ||
+      old.selected != selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -129,13 +144,21 @@ class FBottomNavigationBarData extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('itemStyle', itemStyle))
       ..add(IntProperty('index', index))
-      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected', ifFalse: 'not selected'))
+      ..add(
+        FlagProperty(
+          'selected',
+          value: selected,
+          ifTrue: 'selected',
+          ifFalse: 'not selected',
+        ),
+      )
       ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }
 
 /// [FBottomNavigationBar]'s style.
-class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyleFunctions {
+class FBottomNavigationBarStyle
+    with Diagnosticable, _$FBottomNavigationBarStyleFunctions {
   /// The decoration.
   @override
   final BoxDecoration decoration;
@@ -156,9 +179,19 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   });
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties.
-  FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        decoration: BoxDecoration(border: Border(top: BorderSide(color: colors.border)), color: colors.background),
-        itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, typography: typography, style: style),
-      );
+  FBottomNavigationBarStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) : this(
+         decoration: BoxDecoration(
+           border: Border(top: BorderSide(color: colors.border)),
+           color: colors.background,
+         ),
+         itemStyle: FBottomNavigationBarItemStyle.inherit(
+           colors: colors,
+           typography: typography,
+           style: style,
+         ),
+       );
 }

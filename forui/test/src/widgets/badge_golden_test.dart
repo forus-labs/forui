@@ -10,7 +10,10 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FBadge(style: TestScaffold.blueScreen.badgeStyles.primary, child: const Text('Badge')),
+          child: FBadge(
+            style: TestScaffold.blueScreen.badgeStyles.primary,
+            child: const Text('Badge'),
+          ),
         ),
       );
 
@@ -21,10 +24,16 @@ void main() {
       for (final variant in Variant.values) {
         testWidgets('${theme.name} with FBadgeContent', (tester) async {
           await tester.pumpWidget(
-            TestScaffold(theme: theme.data, child: FBadge(style: variant, child: const Text('Badge'))),
+            TestScaffold(
+              theme: theme.data,
+              child: FBadge(style: variant, child: const Text('Badge')),
+            ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$variant-content.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('badge/${theme.name}/$variant-content.png'),
+          );
         });
 
         testWidgets('${theme.name} with raw content', (tester) async {
@@ -45,7 +54,10 @@ void main() {
                           height: 50,
                           decoration: BoxDecoration(
                             color: style.decoration.color,
-                            border: Border.all(color: Colors.blueAccent, width: 2),
+                            border: Border.all(
+                              color: Colors.blueAccent,
+                              width: 2,
+                            ),
                           ),
                         ),
                       ),
@@ -54,7 +66,10 @@ void main() {
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$variant-raw.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('badge/${theme.name}/$variant-raw.png'),
+          );
         });
       }
     }

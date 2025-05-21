@@ -15,7 +15,9 @@ cli:
   theme-output: ${Configuration.defaultTheme}
 ''';
 
-final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
+final formatter = DartFormatter(
+  languageVersion: DartFormatter.latestLanguageVersion,
+);
 
 class Configuration {
   static const defaultSnippet = 'lib';

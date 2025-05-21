@@ -15,7 +15,10 @@ void main() {
       TestScaffold.blue(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: FTimeField.picker(style: TestScaffold.blueScreen.timeFieldStyle, key: key),
+          home: FTimeField.picker(
+            style: TestScaffold.blueScreen.timeFieldStyle,
+            key: key,
+          ),
         ),
       ),
     );
@@ -27,10 +30,18 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FTimeField.picker(prefixBuilder: null)));
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: const FTimeField.picker(prefixBuilder: null),
+        ),
+      );
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/no-icon.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-field/${theme.name}/picker/no-icon.png'),
+      );
     });
 
     testWidgets('${theme.name} with builder', (tester) async {
@@ -39,7 +50,11 @@ void main() {
           theme: theme.data,
           child: FTimeField.picker(
             key: key,
-            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+            builder:
+                (context, data, child) => ColoredBox(
+                  color: context.theme.colors.destructive,
+                  child: child!,
+                ),
           ),
         ),
       );
@@ -47,7 +62,10 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/builder.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-field/${theme.name}/picker/builder.png'),
+      );
     });
 
     testWidgets('${theme.name} zh locale', (tester) async {
@@ -85,18 +103,27 @@ void main() {
       await tester.drag(find.byType(BuilderWheel).first, const Offset(0, 50));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/text.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-field/${theme.name}/picker/text.png'),
+      );
     });
 
     testWidgets('${theme.name} disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, child: const FTimeField.picker(enabled: false, key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          child: const FTimeField.picker(enabled: false, key: key),
+        ),
       );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/disabled.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-field/${theme.name}/picker/disabled.png'),
+      );
     });
 
     testWidgets('${theme.name} error', (tester) async {
@@ -111,11 +138,19 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/error.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-field/${theme.name}/picker/error.png'),
+      );
     });
 
     testWidgets('${theme.name} keyboard navigation', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FTimeField.picker(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: const FTimeField.picker(key: key),
+        ),
+      );
 
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.sendKeyEvent(LogicalKeyboardKey.enter);
@@ -126,7 +161,9 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('time-field/${theme.name}/picker/keyboard-navigation.png'),
+        matchesGoldenFile(
+          'time-field/${theme.name}/picker/keyboard-navigation.png',
+        ),
       );
     });
   }

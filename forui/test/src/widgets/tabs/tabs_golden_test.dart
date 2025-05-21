@@ -34,7 +34,9 @@ void main() {
                   label: const Text('Account'),
                   child: FCard(
                     title: const Text('Account'),
-                    subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+                    subtitle: const Text(
+                      'Make changes to your account here. Click save when you are done.',
+                    ),
                     child: Container(color: Colors.blue, height: 100),
                   ),
                 ),
@@ -42,7 +44,9 @@ void main() {
                   label: const Text('Password'),
                   child: FCard(
                     title: const Text('Password'),
-                    subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+                    subtitle: const Text(
+                      'Change your password here. After saving, you will be logged out.',
+                    ),
                     child: Container(color: Colors.red, height: 100),
                   ),
                 ),
@@ -51,7 +55,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tabs/${theme.name}.png'),
+        );
       });
 
       testWidgets('scrollable - ${theme.name}', (tester) async {
@@ -60,12 +67,18 @@ void main() {
             theme: theme.data,
             child: FTabs(
               scrollable: true,
-              children: [for (var i = 0; i < 10; i++) FTabEntry(label: Text('$i'), child: Text('Tab $i'))],
+              children: [
+                for (var i = 0; i < 10; i++)
+                  FTabEntry(label: Text('$i'), child: Text('Tab $i')),
+              ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-scrollable.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tabs/${theme.name}-scrollable.png'),
+        );
       });
 
       testWidgets('focus - ${theme.name}', (tester) async {
@@ -78,7 +91,9 @@ void main() {
                   label: const Text('Account'),
                   child: FCard(
                     title: const Text('Account'),
-                    subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+                    subtitle: const Text(
+                      'Make changes to your account here. Click save when you are done.',
+                    ),
                     child: Container(color: Colors.blue, height: 100),
                   ),
                 ),
@@ -86,7 +101,9 @@ void main() {
                   label: const Text('Password'),
                   child: FCard(
                     title: const Text('Password'),
-                    subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+                    subtitle: const Text(
+                      'Change your password here. After saving, you will be logged out.',
+                    ),
                     child: Container(color: Colors.red, height: 100),
                   ),
                 ),
@@ -98,7 +115,10 @@ void main() {
         Focus.of(tester.element(find.text('Account').first)).requestFocus();
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-focused.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tabs/${theme.name}-focused.png'),
+        );
       });
     }
   });

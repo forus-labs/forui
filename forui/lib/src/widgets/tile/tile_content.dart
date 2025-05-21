@@ -50,7 +50,10 @@ class FTileContent extends StatelessWidget {
       first: tile.index == 0 && group.index == 0,
       last: tile.last && group.index == group.length - 1,
       // We use the left side of the border to draw the focused outline.
-      side: states.contains(WidgetState.focused) ? stateStyle.border.resolve(states).left : null,
+      side:
+          states.contains(WidgetState.focused)
+              ? stateStyle.border.resolve(states).left
+              : null,
       children: [
         if (prefixIcon case final prefix?)
           Padding(
@@ -58,7 +61,10 @@ class FTileContent extends StatelessWidget {
                 ltr
                     ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
                     : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
-            child: IconTheme(data: contentStyle.prefixIconStyle.resolve(states), child: prefix),
+            child: IconTheme(
+              data: contentStyle.prefixIconStyle.resolve(states),
+              child: prefix,
+            ),
           )
         else
           const SizedBox(),
@@ -115,11 +121,17 @@ class FTileContent extends StatelessWidget {
                 ltr
                     ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
                     : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
-            child: IconTheme(data: contentStyle.suffixIconStyle.resolve(states), child: suffixIcon),
+            child: IconTheme(
+              data: contentStyle.suffixIconStyle.resolve(states),
+              child: suffixIcon,
+            ),
           )
         else
           const SizedBox(),
-        if (dividerType != FTileDivider.none) FDivider(style: dividerStyle.resolve(states)) else const SizedBox(),
+        if (dividerType != FTileDivider.none)
+          FDivider(style: dividerStyle.resolve(states))
+        else
+          const SizedBox(),
       ],
     );
   }
@@ -191,33 +203,60 @@ class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions {
     this.titleSpacing = 3,
     this.middleSpacing = 4,
     this.suffixIconSpacing = 5,
-  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing must be non-negative.'),
+  }) : assert(
+         0 <= prefixIconSpacing,
+         'prefixIconSpacing must be non-negative.',
+       ),
        assert(0 <= titleSpacing, 'titleSpacing must be non-negative.'),
        assert(0 <= middleSpacing, 'middleSpacing must be non-negative.'),
-       assert(0 <= suffixIconSpacing, 'suffixIconSpacing must be non-negative.');
+       assert(
+         0 <= suffixIconSpacing,
+         'suffixIconSpacing must be non-negative.',
+       );
 
   /// Creates a [FTileContentStyle] that inherits its properties.
-  FTileContentStyle.inherit({required FColors colors, required FTypography typography})
-    : this(
-        prefixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
-          WidgetState.any: IconThemeData(color: colors.primary, size: 18),
-        }),
-        titleTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.primary)),
-          WidgetState.any: typography.base,
-        }),
-        subtitleTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
-          WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
-        }),
-        detailsTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.mutedForeground)),
-          WidgetState.any: typography.base.copyWith(color: colors.mutedForeground),
-        }),
-        suffixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 18),
-          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
-        }),
-      );
+  FTileContentStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+  }) : this(
+         prefixIconStyle: FWidgetStateMap({
+           WidgetState.disabled: IconThemeData(
+             color: colors.disable(colors.primary),
+             size: 18,
+           ),
+           WidgetState.any: IconThemeData(color: colors.primary, size: 18),
+         }),
+         titleTextStyle: FWidgetStateMap({
+           WidgetState.disabled: typography.base.copyWith(
+             color: colors.disable(colors.primary),
+           ),
+           WidgetState.any: typography.base,
+         }),
+         subtitleTextStyle: FWidgetStateMap({
+           WidgetState.disabled: typography.xs.copyWith(
+             color: colors.disable(colors.mutedForeground),
+           ),
+           WidgetState.any: typography.xs.copyWith(
+             color: colors.mutedForeground,
+           ),
+         }),
+         detailsTextStyle: FWidgetStateMap({
+           WidgetState.disabled: typography.base.copyWith(
+             color: colors.disable(colors.mutedForeground),
+           ),
+           WidgetState.any: typography.base.copyWith(
+             color: colors.mutedForeground,
+           ),
+         }),
+         suffixIconStyle: FWidgetStateMap({
+           WidgetState.disabled: IconThemeData(
+             color: colors.disable(colors.mutedForeground),
+             size: 18,
+           ),
+           WidgetState.any: IconThemeData(
+             color: colors.mutedForeground,
+             size: 18,
+           ),
+         }),
+       );
 }

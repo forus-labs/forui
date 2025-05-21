@@ -33,10 +33,15 @@ void main() {
         TestScaffold.blue(
           child: FPicker(
             // The default opacity messes up the coloring.
-            style: TestScaffold.blueScreen.pickerStyle.copyWith(overAndUnderCenterOpacity: 1),
+            style: TestScaffold.blueScreen.pickerStyle.copyWith(
+              overAndUnderCenterOpacity: 1,
+            ),
             children: [
               const FPickerWheel(flex: 3, loop: true, children: months),
-              FPickerWheel.builder(flex: 3, builder: (context, index) => Text('Item $index')),
+              FPickerWheel.builder(
+                flex: 3,
+                builder: (context, index) => Text('Item $index'),
+              ),
             ],
           ),
         ),
@@ -54,13 +59,18 @@ void main() {
               controller: controller,
               children: [
                 const FPickerWheel(flex: 3, loop: true, children: months),
-                FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
+                FPickerWheel.builder(
+                  builder: (context, index) => Text('Item $index'),
+                ),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/${theme.name}/default.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('picker/${theme.name}/default.png'),
+        );
       });
 
       testWidgets('${theme.name} with separator', (tester) async {
@@ -72,13 +82,18 @@ void main() {
               children: [
                 const FPickerWheel(flex: 3, loop: true, children: months),
                 const Text(':'),
-                FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
+                FPickerWheel.builder(
+                  builder: (context, index) => Text('Item $index'),
+                ),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/${theme.name}/with-separator.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('picker/${theme.name}/with-separator.png'),
+        );
       });
 
       testWidgets('${theme.name} non-looping', (tester) async {
@@ -87,11 +102,17 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPicker(controller: controller, children: const [FPickerWheel(flex: 3, children: months)]),
+            child: FPicker(
+              controller: controller,
+              children: const [FPickerWheel(flex: 3, children: months)],
+            ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/${theme.name}/non-looping.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('picker/${theme.name}/non-looping.png'),
+        );
       });
 
       testWidgets('${theme.name} focused', (tester) async {
@@ -101,15 +122,25 @@ void main() {
             child: FPicker(
               controller: controller,
               children: [
-                const FPickerWheel(autofocus: true, flex: 3, loop: true, children: months),
+                const FPickerWheel(
+                  autofocus: true,
+                  flex: 3,
+                  loop: true,
+                  children: months,
+                ),
                 const Text(':'),
-                FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
+                FPickerWheel.builder(
+                  builder: (context, index) => Text('Item $index'),
+                ),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/${theme.name}/focused.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('picker/${theme.name}/focused.png'),
+        );
       });
     }
 
@@ -123,7 +154,9 @@ void main() {
             children: [
               const FPickerWheel(flex: 3, key: key, children: months),
               const Text(':'),
-              FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
+              FPickerWheel.builder(
+                builder: (context, index) => Text('Item $index'),
+              ),
             ],
           ),
         ),
@@ -133,7 +166,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.value, [5, 5]);
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/touch-dragged.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('picker/touch-dragged.png'),
+      );
     });
 
     testWidgets('desktop dragged', (tester) async {
@@ -147,7 +183,9 @@ void main() {
             children: [
               const FPickerWheel(flex: 3, key: key, children: months),
               const Text(':'),
-              FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
+              FPickerWheel.builder(
+                builder: (context, index) => Text('Item $index'),
+              ),
             ],
           ),
         ),
@@ -157,7 +195,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.value, [4, 5]);
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/desktop-dragged.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('picker/desktop-dragged.png'),
+      );
 
       debugDefaultTargetPlatformOverride = null;
     });
@@ -171,9 +212,16 @@ void main() {
           child: FPicker(
             controller: controller,
             children: [
-              const FPickerWheel(autofocus: true, flex: 3, key: key, children: months),
+              const FPickerWheel(
+                autofocus: true,
+                flex: 3,
+                key: key,
+                children: months,
+              ),
               const Text(':'),
-              FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
+              FPickerWheel.builder(
+                builder: (context, index) => Text('Item $index'),
+              ),
             ],
           ),
         ),
@@ -183,7 +231,10 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.value, [2, 5]);
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/arrow-key.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('picker/arrow-key.png'),
+      );
 
       debugDefaultTargetPlatformOverride = null;
     });

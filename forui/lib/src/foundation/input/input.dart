@@ -88,7 +88,13 @@ abstract class Input<T> extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(ObjectFlagProperty.has('onTap', onTap))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(
+        FlagProperty(
+          'canRequestFocus',
+          value: canRequestFocus,
+          ifTrue: 'canRequestFocus',
+        ),
+      )
       ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
       ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
@@ -105,7 +111,9 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   void initState() {
     super.initState();
     localizations =
-        scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+        scriptNumerals.contains(widget.localizations.localeName)
+            ? FDefaultLocalizations()
+            : widget.localizations;
     controller = createController();
   }
 
@@ -120,10 +128,12 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
     },
     child: Actions(
       actions: {
-        AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => controller.adjust(intent.amount)),
-        ExtendSelectionByCharacterIntent: CallbackAction<ExtendSelectionByCharacterIntent>(
-          onInvoke: (intent) => controller.traverse(forward: intent.forward),
+        AdjustIntent: CallbackAction<AdjustIntent>(
+          onInvoke: (intent) => controller.adjust(intent.amount),
         ),
+        ExtendSelectionByCharacterIntent: CallbackAction<
+          ExtendSelectionByCharacterIntent
+        >(onInvoke: (intent) => controller.traverse(forward: intent.forward)),
       },
       child: Field<U>(
         controller: widget.controller,
@@ -132,7 +142,8 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
         initialValue: widget.controller.value,
         validator:
             (value) => switch (this.value) {
-              null when controller.text == controller.placeholder => widget.validator(null),
+              null when controller.text == controller.placeholder => widget
+                  .validator(null),
               null => errorMessage,
               final value => widget.validator(value),
             },
@@ -150,7 +161,10 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
               minLines: 1,
               label: widget.label,
               description: widget.description,
-              error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
+              error:
+                  state.hasError
+                      ? widget.errorBuilder(context, state.errorText ?? '')
+                      : null,
               enabled: widget.enabled,
               focusNode: widget.focusNode,
               textInputAction: widget.textInputAction,

@@ -185,8 +185,10 @@ class FPopoverMenu extends StatefulWidget {
   }
 }
 
-class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderStateMixin {
-  late FPopoverController _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
+class _FPopoverMenuState extends State<FPopoverMenu>
+    with SingleTickerProviderStateMixin {
+  late FPopoverController _popoverController =
+      widget.popoverController ?? FPopoverController(vsync: this);
 
   @override
   void didUpdateWidget(covariant FPopoverMenu old) {
@@ -195,7 +197,8 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       if (old.popoverController == null) {
         _popoverController.dispose();
       }
-      _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
+      _popoverController =
+          widget.popoverController ?? FPopoverController(vsync: this);
     }
   }
 
@@ -242,7 +245,8 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
 }
 
 /// A [FPopoverMenuStyle]'s style.
-class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions {
+class FPopoverMenuStyle extends FPopoverStyle
+    with _$FPopoverMenuStyleFunctions {
   /// The tile group's style.
   @override
   final FTileGroupStyle tileGroupStyle;
@@ -263,8 +267,15 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   }) : assert(0 < maxWidth, 'maxWidth must be positive');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
-  FPopoverMenuStyle.inherit({required super.colors, required super.style, required FTypography typography})
-    : tileGroupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography),
-      maxWidth = 250,
-      super.inherit();
+  FPopoverMenuStyle.inherit({
+    required super.colors,
+    required super.style,
+    required FTypography typography,
+  }) : tileGroupStyle = FTileGroupStyle.inherit(
+         colors: colors,
+         style: style,
+         typography: typography,
+       ),
+       maxWidth = 250,
+       super.inherit();
 }

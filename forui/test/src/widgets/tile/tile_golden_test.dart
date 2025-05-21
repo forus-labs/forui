@@ -43,7 +43,9 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        final gesture = await tester.createGesture(
+          kind: PointerDeviceKind.mouse,
+        );
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -90,7 +92,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/enabled-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/tile/enabled-${theme.name}.png'),
+        );
       });
 
       testWidgets('hovered', (tester) async {
@@ -108,7 +113,9 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        final gesture = await tester.createGesture(
+          kind: PointerDeviceKind.mouse,
+        );
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -116,7 +123,10 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.byType(FTile)));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/hovered-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/tile/hovered-${theme.name}.png'),
+        );
       });
 
       testWidgets('pressed', (tester) async {
@@ -137,7 +147,10 @@ void main() {
         );
 
         await tester.longPress(find.byType(FTile));
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/pressed-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/tile/pressed-${theme.name}.png'),
+        );
 
         await tester.pumpAndSettle();
 
@@ -161,7 +174,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/rtl-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/tile/rtl-${theme.name}.png'),
+        );
       });
 
       testWidgets('focused', (tester) async {
@@ -180,7 +196,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/focused-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/tile/focused-${theme.name}.png'),
+        );
       });
 
       testWidgets('disabled - ${theme.name}', (tester) async {
@@ -199,7 +218,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/disabled-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/tile/disabled-${theme.name}.png'),
+        );
       });
     }
 
@@ -223,7 +245,10 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.byType(FTile)));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/unhoverable.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/tile/unhoverable.png'),
+      );
     });
 
     testWidgets('utilize all space', (tester) async {
@@ -242,13 +267,23 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/utilize-all-space.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/tile/utilize-all-space.png'),
+      );
     });
 
     testWidgets('minimal', (tester) async {
-      await tester.pumpWidget(TestScaffold(child: FTile(title: const Text('Bluetooth'), onPress: () {})));
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile(title: const Text('Bluetooth'), onPress: () {}),
+        ),
+      );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/tile/minimal.png'),
+      );
     });
 
     testWidgets('no subtitle', (tester) async {
@@ -264,7 +299,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/tile/no-subtitle.png'),
+      );
     });
 
     testWidgets('no suffix icon', (tester) async {
@@ -279,7 +317,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/tile/no-subtitle.png'),
+      );
     });
 
     testWidgets('prioritize title', (tester) async {
@@ -301,7 +342,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-title.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/tile/prioritize-title.png'),
+      );
     });
 
     testWidgets('prioritize subtitle', (tester) async {
@@ -314,7 +358,9 @@ void main() {
               child: FTile(
                 prefixIcon: const Icon(FIcons.bluetooth),
                 title: const Text('Title'),
-                subtitle: const Text('L                                     ong'),
+                subtitle: const Text(
+                  'L                                     ong',
+                ),
                 details: const Text('FL (5G)'),
                 suffixIcon: const Icon(FIcons.chevronRight),
                 onPress: () {},
@@ -324,7 +370,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-subtitle.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/tile/prioritize-subtitle.png'),
+      );
     });
 
     testWidgets('prioritize details', (tester) async {
@@ -337,7 +386,9 @@ void main() {
               child: FTile(
                 prefixIcon: const Icon(FIcons.bluetooth),
                 title: const Text('Title'),
-                subtitle: const Text('L                                     ong'),
+                subtitle: const Text(
+                  'L                                     ong',
+                ),
                 details: const FSwitch(),
                 suffixIcon: const Icon(FIcons.chevronRight),
                 onPress: () {},
@@ -347,7 +398,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-details.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/tile/prioritize-details.png'),
+      );
     });
   });
 }

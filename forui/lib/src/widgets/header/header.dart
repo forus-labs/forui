@@ -35,7 +35,12 @@ sealed class FHeader extends StatelessWidget {
   /// ```shell
   /// dart run forui style create headers
   /// ```
-  const factory FHeader({Widget title, FHeaderStyle? style, List<Widget> suffixes, Key? key}) = _FRootHeader;
+  const factory FHeader({
+    Widget title,
+    FHeaderStyle? style,
+    List<Widget> suffixes,
+    Key? key,
+  }) = _FRootHeader;
 
   /// Creates a nested header which title is aligned to the center.
   ///
@@ -74,10 +79,15 @@ class FHeaderData extends InheritedWidget {
   final FHeaderActionStyle actionStyle;
 
   /// Creates a [FHeaderData].
-  const FHeaderData({required this.actionStyle, required super.child, super.key});
+  const FHeaderData({
+    required this.actionStyle,
+    required super.child,
+    super.key,
+  });
 
   @override
-  bool updateShouldNotify(FHeaderData oldWidget) => actionStyle != oldWidget.actionStyle;
+  bool updateShouldNotify(FHeaderData oldWidget) =>
+      actionStyle != oldWidget.actionStyle;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -100,17 +110,36 @@ class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   const FHeaderStyles({required this.rootStyle, required this.nestedStyle});
 
   /// Creates a [FHeaderStyles] that inherits its properties.
-  FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : rootStyle = FHeaderStyle(
-        titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: FontWeight.w700, height: 1),
-        actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 30),
-        padding: style.pagePadding.copyWith(bottom: 15),
-      ),
-      nestedStyle = FHeaderStyle(
-        titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: FontWeight.w600, height: 1),
-        actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 25),
-        padding: style.pagePadding.copyWith(bottom: 15),
-      );
+  FHeaderStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) : rootStyle = FHeaderStyle(
+         titleTextStyle: typography.xl3.copyWith(
+           color: colors.foreground,
+           fontWeight: FontWeight.w700,
+           height: 1,
+         ),
+         actionStyle: FHeaderActionStyle.inherit(
+           colors: colors,
+           style: style,
+           size: 30,
+         ),
+         padding: style.pagePadding.copyWith(bottom: 15),
+       ),
+       nestedStyle = FHeaderStyle(
+         titleTextStyle: typography.xl.copyWith(
+           color: colors.foreground,
+           fontWeight: FontWeight.w600,
+           height: 1,
+         ),
+         actionStyle: FHeaderActionStyle.inherit(
+           colors: colors,
+           style: style,
+           size: 25,
+         ),
+         padding: style.pagePadding.copyWith(bottom: 15),
+       );
 }
 
 /// A header's style.

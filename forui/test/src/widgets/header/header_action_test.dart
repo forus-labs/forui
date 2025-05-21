@@ -15,7 +15,11 @@ void main() {
         child: FHeader.nested(
           title: const Text('Title'),
           prefixes: [
-            FHeaderAction.back(onHoverChange: (v) => hovered = v, onStateChange: (v) => states = v, onPress: () {}),
+            FHeaderAction.back(
+              onHoverChange: (v) => hovered = v,
+              onStateChange: (v) => states = v,
+              onPress: () {},
+            ),
           ],
         ),
       ),

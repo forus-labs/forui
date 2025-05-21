@@ -15,8 +15,14 @@ abstract class Parser {
 
   /// Updates the [current] input based on the [current] and [previous] input.
   (List<String>, Changes) update(List<String> previous, List<String> current) {
-    assert(previous.length == pattern.length, 'previous must have ${pattern.length} parts');
-    assert(current.length == pattern.length, 'current must have ${pattern.length} parts');
+    assert(
+      previous.length == pattern.length,
+      'previous must have ${pattern.length} parts',
+    );
+    assert(
+      current.length == pattern.length,
+      'current must have ${pattern.length} parts',
+    );
 
     Changes changes = const None();
     for (int i = 0; i < pattern.length; i++) {
@@ -40,11 +46,18 @@ abstract class Parser {
   }
 
   @protected
-  (String updated, bool next) updatePart(String pattern, String previous, String current);
+  (String updated, bool next) updatePart(
+    String pattern,
+    String previous,
+    String current,
+  );
 
   /// Adjusts the current part of the input by [amount].
   List<String> adjust(List<String> current, int selected, int amount) {
-    assert(current.length == pattern.length, 'Must have ${pattern.length} parts.');
+    assert(
+      current.length == pattern.length,
+      'Must have ${pattern.length} parts.',
+    );
 
     final part = current[selected];
     current[selected] = adjustPart(pattern[selected], part, amount);
@@ -82,7 +95,10 @@ class Single extends Changes {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is Single && runtimeType == other.runtimeType && index == other.index;
+      identical(this, other) ||
+      other is Single &&
+          runtimeType == other.runtimeType &&
+          index == other.index;
 
   @override
   int get hashCode => index.hashCode;

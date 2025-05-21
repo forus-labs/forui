@@ -1,7 +1,7 @@
 part of '../date_field.dart';
 
-// ignore: avoid_implementing_value_types
-class _CalendarDateField extends FDateField implements FDateFieldCalendarProperties {
+class _CalendarDateField extends FDateField
+    implements FDateFieldCalendarProperties {
   final DateFormat? format;
   final String? hint;
   final TextAlign textAlign;
@@ -91,7 +91,13 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(
+        FlagProperty(
+          'canRequestFocus',
+          value: canRequestFocus,
+          ifTrue: 'canRequestFocus',
+        ),
+      )
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
   }
 }
@@ -127,7 +133,9 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         _controller.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FDateFieldController(vsync: this, initialDate: _controller.value);
+      _controller =
+          widget.controller ??
+          FDateFieldController(vsync: this, initialDate: _controller.value);
       _controller._calendar.addListener(_updateTextController);
       _controller.addValueListener(widget.onChange);
       _updateTextController();
@@ -145,7 +153,8 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
   void _updateTextController() {
     if (_controller._calendar.value case final value?) {
-      _textController.text = widget.format?.format(value) ?? _format?.format(value) ?? '';
+      _textController.text =
+          widget.format?.format(value) ?? _format?.format(value) ?? '';
     } else {
       _textController.text = '';
     }
@@ -187,19 +196,33 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
                     ? null
                     : (context, styles, _) => MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                      child: widget.prefixBuilder?.call(context, (
+                        style,
+                        styles.$1,
+                        styles.$2,
+                      ), null),
                     ),
             suffixBuilder:
                 widget.suffixBuilder == null
                     ? null
                     : (context, styles, _) => MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+                      child: widget.suffixBuilder?.call(context, (
+                        style,
+                        styles.$1,
+                        styles.$2,
+                      ), null),
                     ),
-            clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
+            clearable:
+                widget.clearable
+                    ? (value) => value.text.isNotEmpty
+                    : (_) => false,
             label: widget.label,
             description: widget.description,
-            error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
+            error:
+                state.hasError
+                    ? widget.errorBuilder(context, state.errorText ?? '')
+                    : null,
             enabled: widget.enabled,
             builder:
                 (context, data, child) => _CalendarPopover(
@@ -209,8 +232,14 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
                   autofocus: true,
                   fieldFocusNode: _focus,
                   child: CallbackShortcuts(
-                    bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
-                    child: widget.builder(context, (style, data.$1, data.$2), child),
+                    bindings: {
+                      const SingleActivator(LogicalKeyboardKey.enter): _onTap,
+                    },
+                    child: widget.builder(context, (
+                      style,
+                      data.$1,
+                      data.$2,
+                    ), child),
                   ),
                 ),
           ),
@@ -279,8 +308,16 @@ class _CalendarPopover extends StatelessWidget {
                   controller: controller._calendar,
                   initialMonth: switch (value) {
                     null => null,
-                    _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
-                    _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
+                    _
+                        when value.isBefore(
+                          properties.start ?? DateTime.utc(1900),
+                        ) =>
+                      properties.today,
+                    _
+                        when value.isAfter(
+                          properties.end ?? DateTime.utc(2100),
+                        ) =>
+                      properties.today,
                     _ => value,
                   },
                   onPress: properties.autoHide ? (_) => _hide() : null,

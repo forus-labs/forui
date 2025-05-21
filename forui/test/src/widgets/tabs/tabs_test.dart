@@ -12,7 +12,14 @@ void main() {
       await tester.pumpWidget(
         CupertinoApp(
           home: TestScaffold(
-            child: FTabs(children: [FTabEntry(label: const Text('Account'), child: Container(height: 100))]),
+            child: FTabs(
+              children: [
+                FTabEntry(
+                  label: const Text('Account'),
+                  child: Container(height: 100),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -24,7 +31,14 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: TestScaffold(
-            child: FTabs(children: [FTabEntry(label: const Text('Account'), child: Container(height: 100))]),
+            child: FTabs(
+              children: [
+                FTabEntry(
+                  label: const Text('Account'),
+                  child: Container(height: 100),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -34,7 +48,16 @@ void main() {
 
     testWidgets('not embedded in any App', (tester) async {
       await tester.pumpWidget(
-        TestScaffold(child: FTabs(children: [FTabEntry(label: const Text('Account'), child: Container(height: 100))])),
+        TestScaffold(
+          child: FTabs(
+            children: [
+              FTabEntry(
+                label: const Text('Account'),
+                child: Container(height: 100),
+              ),
+            ],
+          ),
+        ),
       );
 
       expect(tester.takeException(), null);
@@ -50,7 +73,14 @@ void main() {
             DefaultWidgetsLocalizations.delegate,
           ],
           child: TestScaffold(
-            child: FTabs(children: [FTabEntry(label: const Text('Account'), child: Container(height: 100))]),
+            child: FTabs(
+              children: [
+                FTabEntry(
+                  label: const Text('Account'),
+                  child: Container(height: 100),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -80,7 +110,9 @@ void main() {
       expect(find.text('bar content'), findsNothing);
     });
 
-    testWidgets('tapping on tab with internal controller switches tab entry', (tester) async {
+    testWidgets('tapping on tab with internal controller switches tab entry', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTabs(
@@ -100,7 +132,9 @@ void main() {
       expect(find.text('bar content'), findsOneWidget);
     });
 
-    testWidgets('tapping on tab with external controller switches tab entry', (tester) async {
+    testWidgets('tapping on tab with external controller switches tab entry', (
+      tester,
+    ) async {
       final controller = FTabController(length: 2, vsync: tester);
 
       await tester.pumpWidget(
@@ -205,9 +239,20 @@ void main() {
     testWidgets('onPress is triggered when a tab is pressed', (tester) async {
       int tabIndex = -1;
 
-      Widget buildFTabs({required FTabController controller, required List<Map<String, String>> tabs}) => FTabs(
+      Widget buildFTabs({
+        required FTabController controller,
+        required List<Map<String, String>> tabs,
+      }) => FTabs(
         controller: controller,
-        children: tabs.map((tab) => FTabEntry(label: Text(tab['label']!), child: Text(tab['content']!))).toList(),
+        children:
+            tabs
+                .map(
+                  (tab) => FTabEntry(
+                    label: Text(tab['label']!),
+                    child: Text(tab['content']!),
+                  ),
+                )
+                .toList(),
         onPress: (index) {
           tabIndex = index;
         },
@@ -224,7 +269,9 @@ void main() {
         initialIndex: tabs.indexWhere((element) => element['label'] == 'foo'),
       );
 
-      await tester.pumpWidget(TestScaffold.app(child: buildFTabs(controller: controller, tabs: tabs)));
+      await tester.pumpWidget(
+        TestScaffold.app(child: buildFTabs(controller: controller, tabs: tabs)),
+      );
       expect(find.text('foo'), findsOneWidget);
       expect(find.text('bar'), findsOneWidget);
       expect(find.text('foo content'), findsOneWidget);
@@ -233,7 +280,10 @@ void main() {
 
       await tester.tap(find.text('bar'));
       await tester.pumpAndSettle();
-      expect(controller.index, tabs.indexWhere((element) => element['label'] == 'bar')); // change
+      expect(
+        controller.index,
+        tabs.indexWhere((element) => element['label'] == 'bar'),
+      ); // change
       expect(tabIndex, tabs.indexWhere((element) => element['label'] == 'bar'));
       expect(find.text('foo content'), findsNothing);
       expect(find.text('bar content'), findsOneWidget);

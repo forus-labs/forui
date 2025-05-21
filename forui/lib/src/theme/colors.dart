@@ -136,19 +136,26 @@ final class FColors with Diagnosticable, FTransformable {
          0 <= enabledHoveredOpacity && enabledHoveredOpacity <= 1,
          'The enabledHoveredOpacity must be between 0 and 1.',
        ),
-       assert(0 <= disabledOpacity && disabledOpacity <= 1, 'The disabledOpacity must be between 0 and 1.');
+       assert(
+         0 <= disabledOpacity && disabledOpacity <= 1,
+         'The disabledOpacity must be between 0 and 1.',
+       );
 
   /// Returns a hovered color for the [foreground] on the [background].
   ///
   /// [FColors.background] is used if [background] is not given.
-  Color hover(Color foreground, [Color? background]) =>
-      Color.alphaBlend(foreground.withValues(alpha: enabledHoveredOpacity), background ?? this.background);
+  Color hover(Color foreground, [Color? background]) => Color.alphaBlend(
+    foreground.withValues(alpha: enabledHoveredOpacity),
+    background ?? this.background,
+  );
 
   /// Returns a disabled color for the [foreground] on the [background].
   ///
   /// [FColors.background] is used if [background] is not given.
-  Color disable(Color foreground, [Color? background]) =>
-      Color.alphaBlend(foreground.withValues(alpha: disabledOpacity), background ?? this.background);
+  Color disable(Color foreground, [Color? background]) => Color.alphaBlend(
+    foreground.withValues(alpha: disabledOpacity),
+    background ?? this.background,
+  );
 
   /// Returns a copy of this [FColors] with the given properties replaced.
   ///

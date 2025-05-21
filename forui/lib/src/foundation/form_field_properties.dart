@@ -5,7 +5,8 @@ import 'package:forui/forui.dart';
 /// A form field's properties.
 mixin FFormFieldProperties<T> {
   /// The default builder for errors displayed below the [description].
-  static Widget defaultErrorBuilder(BuildContext _, String error) => Text(error);
+  static Widget defaultErrorBuilder(BuildContext _, String error) =>
+      Text(error);
 
   /// The label.
   Widget? get label;

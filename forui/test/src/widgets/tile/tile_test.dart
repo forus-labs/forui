@@ -12,7 +12,11 @@ void main() {
       var longPress = 0;
       await tester.pumpWidget(
         TestScaffold(
-          child: FTile(title: const Text('Bluetooth'), onPress: () => press++, onLongPress: () => longPress++),
+          child: FTile(
+            title: const Text('Bluetooth'),
+            onPress: () => press++,
+            onLongPress: () => longPress++,
+          ),
         ),
       );
 
@@ -48,7 +52,13 @@ void main() {
       var press = 0;
       var longPress = 0;
       await tester.pumpWidget(
-        TestScaffold(child: FTile(title: const Text('Lorem'), onPress: () => press++, onLongPress: () => longPress++)),
+        TestScaffold(
+          child: FTile(
+            title: const Text('Lorem'),
+            onPress: () => press++,
+            onLongPress: () => longPress++,
+          ),
+        ),
       );
 
       await tester.longPress(find.byType(FTile));
@@ -85,7 +95,10 @@ void main() {
         TestScaffold(
           child: FTile(
             title: const Text('Bluetooth'),
-            details: FButton(onPress: () => count++, child: const Text('child')),
+            details: FButton(
+              onPress: () => count++,
+              child: const Text('child'),
+            ),
           ),
         ),
       );

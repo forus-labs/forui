@@ -71,7 +71,9 @@ FPersistentSheetController showFPersistentSheet({
   final state = context.findAncestorStateOfType<FSheetsState>();
   if (state == null) {
     throw FlutterError.fromParts([
-      ErrorSummary('showFSheet(...) called with a context that does not contain a FSheets/FScaffold.'),
+      ErrorSummary(
+        'showFSheet(...) called with a context that does not contain a FSheets/FScaffold.',
+      ),
       ErrorDescription(
         'No FSheets/FScaffold ancestor could be found starting from the context that was passed to FSheets/FScaffold.of(). '
         'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
@@ -220,9 +222,14 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
     children: [
       widget.child,
       for (final (controller, sheet) in sheets.values)
-        if (controller.shown || controller.keepAliveOffstage || controller._controller.status.isAnimating)
+        if (controller.shown ||
+            controller.keepAliveOffstage ||
+            controller._controller.status.isAnimating)
           CallbackShortcuts(
-            bindings: {const SingleActivator(LogicalKeyboardKey.escape): controller._controller.reverse},
+            bindings: {
+              const SingleActivator(LogicalKeyboardKey.escape):
+                  controller._controller.reverse,
+            },
             child: FocusTraversalGroup(
               descendantsAreFocusable: controller.shown,
               descendantsAreTraversable: controller.shown,
@@ -257,7 +264,8 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
     // This checks if the method was called during the build phase, and schedules the removal for the next frame.
     // This done as _remove is called in FSheetController.dispose, and subsequently StatefulWidget.dispose, which is
     // part of the build phase.
-    if (mounted && SchedulerBinding.instance.schedulerPhase == SchedulerPhase.idle) {
+    if (mounted &&
+        SchedulerBinding.instance.schedulerPhase == SchedulerPhase.idle) {
       setState(() => sheets.remove(key));
     } else {
       WidgetsBinding.instance.addPostFrameCallback((_) {

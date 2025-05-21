@@ -32,7 +32,9 @@ final class FSliderTooltipsController {
       return;
     }
 
-    await Future.wait([for (final tooltip in _tooltips.values) tooltip.toggle()]);
+    await Future.wait([
+      for (final tooltip in _tooltips.values) tooltip.toggle(),
+    ]);
   }
 
   /// Shows the tooltip with the given key, or all tooltips if none is specified.
@@ -64,7 +66,9 @@ final class FSliderTooltipsController {
     if (controller == null) {
       _tooltips.remove(key);
     } else {
-      _tooltips.removeWhere((key, controller) => key == key && controller == controller);
+      _tooltips.removeWhere(
+        (key, controller) => key == key && controller == controller,
+      );
     }
   }
 }

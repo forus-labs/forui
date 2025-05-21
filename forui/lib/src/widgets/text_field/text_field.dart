@@ -31,7 +31,11 @@ extension Defaults on Never {
   static Widget contextMenuBuilder(BuildContext _, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 
-  static Widget builder(BuildContext _, (FTextFieldStyle, Set<WidgetState>) _, Widget? child) => child!;
+  static Widget builder(
+    BuildContext _,
+    (FTextFieldStyle, Set<WidgetState>) _,
+    Widget? child,
+  ) => child!;
 }
 
 /// A text field.
@@ -967,7 +971,9 @@ class FTextField extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))
-      ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
+      ..add(
+        DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration),
+      )
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -979,12 +985,28 @@ class FTextField extends StatefulWidget {
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('statesController', statesController))
-      ..add(StringProperty('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
-      ..add(FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'))
-      ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
+      ..add(
+        StringProperty(
+          'obscuringCharacter',
+          obscuringCharacter,
+          defaultValue: '•',
+        ),
+      )
+      ..add(
+        FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'),
+      )
+      ..add(
+        FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'),
+      )
       ..add(EnumProperty('smartDashesType', smartDashesType))
       ..add(EnumProperty('smartQuotesType', smartQuotesType))
-      ..add(FlagProperty('enableSuggestions', value: enableSuggestions, ifTrue: 'enableSuggestions'))
+      ..add(
+        FlagProperty(
+          'enableSuggestions',
+          value: enableSuggestions,
+          ifTrue: 'enableSuggestions',
+        ),
+      )
       ..add(IntProperty('minLines', minLines))
       ..add(IntProperty('maxLines', maxLines))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
@@ -995,15 +1017,31 @@ class FTextField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
-      ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
+      ..add(
+        FlagProperty(
+          'onTapAlwaysCalled',
+          value: onTapAlwaysCalled,
+          ifTrue: 'onTapAlwaysCalled',
+        ),
+      )
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(ObjectFlagProperty.has('onAppPrivateCommand', onAppPrivateCommand))
       ..add(IterableProperty('inputFormatters', inputFormatters))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
-      ..add(FlagProperty('ignorePointers', value: ignorePointers, ifTrue: 'ignorePointers'))
       ..add(
-        FlagProperty('enableInteractSelection', value: enableInteractiveSelection, ifTrue: 'enableInteractSelection'),
+        FlagProperty(
+          'ignorePointers',
+          value: ignorePointers,
+          ifTrue: 'ignorePointers',
+        ),
+      )
+      ..add(
+        FlagProperty(
+          'enableInteractSelection',
+          value: enableInteractiveSelection,
+          ifTrue: 'enableInteractSelection',
+        ),
       )
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
@@ -1014,7 +1052,11 @@ class FTextField extends StatefulWidget {
       ..add(IterableProperty('autofillHints', autofillHints))
       ..add(StringProperty('restorationId', restorationId))
       ..add(
-        FlagProperty('stylusHandwritingEnabled', value: stylusHandwritingEnabled, ifTrue: 'stylusHandwritingEnabled'),
+        FlagProperty(
+          'stylusHandwritingEnabled',
+          value: stylusHandwritingEnabled,
+          ifTrue: 'stylusHandwritingEnabled',
+        ),
       )
       ..add(
         FlagProperty(
@@ -1023,11 +1065,24 @@ class FTextField extends StatefulWidget {
           ifTrue: 'enableIMEPersonalizedLearning',
         ),
       )
-      ..add(DiagnosticsProperty('contentInsertionConfiguration', contentInsertionConfiguration))
+      ..add(
+        DiagnosticsProperty(
+          'contentInsertionConfiguration',
+          contentInsertionConfiguration,
+        ),
+      )
       ..add(ObjectFlagProperty.has('contextMenuBuilder', contextMenuBuilder))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(
+        FlagProperty(
+          'canRequestFocus',
+          value: canRequestFocus,
+          ifTrue: 'canRequestFocus',
+        ),
+      )
       ..add(DiagnosticsProperty('undoController', undoController))
-      ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
+      ..add(
+        DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration),
+      )
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
@@ -1042,7 +1097,8 @@ class _State extends State<FTextField> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initialText);
     _controller.addListener(_handleOnChange);
 
     _statesController = widget.statesController ?? WidgetStatesController();
@@ -1059,7 +1115,8 @@ class _State extends State<FTextField> {
         _controller.removeListener(_handleOnChange);
       }
 
-      _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+      _controller =
+          widget.controller ?? TextEditingController(text: widget.initialText);
       _controller.addListener(_handleOnChange);
     }
 
@@ -1077,11 +1134,12 @@ class _State extends State<FTextField> {
 
   void _handleOnChange() => widget.onChange?.call(_controller.text);
 
-  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
-    if (mounted) {
-      setState(() {});
-    }
-  });
+  void _handleStatesChange() =>
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {});
+        }
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -1130,11 +1188,24 @@ class _State extends State<FTextField> {
       scrollPadding: style.scrollPadding,
       dragStartBehavior: widget.dragStartBehavior,
       mouseCursor: widget.mouseCursor,
-      buildCounter: (context, {required currentLength, required isFocused, required maxLength}) {
-        final counter = widget.counterBuilder?.call(context, currentLength, maxLength, isFocused);
+      buildCounter: (
+        context, {
+        required currentLength,
+        required isFocused,
+        required maxLength,
+      }) {
+        final counter = widget.counterBuilder?.call(
+          context,
+          currentLength,
+          maxLength,
+          isFocused,
+        );
         return counter == null
             ? null
-            : DefaultTextStyle.merge(style: style.counterTextStyle.resolve(states), child: counter);
+            : DefaultTextStyle.merge(
+              style: style.counterTextStyle.resolve(states),
+              child: counter,
+            );
       },
       selectionControls: widget.selectionControls,
       scrollController: widget.scrollController,
@@ -1178,17 +1249,23 @@ class _State extends State<FTextField> {
           ),
           child: CupertinoTheme(
             // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
-            data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
+            data: CupertinoTheme.of(
+              context,
+            ).copyWith(primaryColor: style.cursorColor),
             child: field,
           ),
         ),
       ),
     );
 
-    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+    final materialLocalizations = Localizations.of<MaterialLocalizations>(
+      context,
+      MaterialLocalizations,
+    );
     if (materialLocalizations == null) {
       field = Localizations(
-        locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
+        locale:
+            Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
         delegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -1207,7 +1284,10 @@ class _State extends State<FTextField> {
     final padding = style.contentPadding.resolve(textDirection);
     final states = _statesController.value;
 
-    final suffixIcon = widget.suffixBuilder?.call(context, (style, states), null);
+    final suffixIcon = widget.suffixBuilder?.call(context, (
+      style,
+      states,
+    ), null);
     final clear =
         widget.clearable(_controller.value)
             ? Padding(
@@ -1215,7 +1295,11 @@ class _State extends State<FTextField> {
               child: FButton.icon(
                 style: style.clearButtonStyle,
                 onPress: () => _controller.text = '',
-                child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
+                child: Icon(
+                  FIcons.x,
+                  semanticLabel:
+                      localizations.textFieldClearButtonSemanticsLabel,
+                ),
               ),
             )
             : null;
@@ -1224,19 +1308,26 @@ class _State extends State<FTextField> {
       isDense: true,
       prefixIcon: widget.prefixBuilder?.call(context, (style, states), null),
       suffixIcon: switch ((suffixIcon, clear)) {
-        (final icon?, final clear?) when !states.contains(WidgetState.disabled) => Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: [clear, icon],
-        ),
-        (null, final clear?) when !states.contains(WidgetState.disabled) => clear,
+        (final icon?, final clear?)
+            when !states.contains(WidgetState.disabled) =>
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [clear, icon],
+          ),
+        (null, final clear?) when !states.contains(WidgetState.disabled) =>
+          clear,
         (final icon, _) => icon,
       },
       // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
       prefix: Padding(
         padding: switch (textDirection) {
-          TextDirection.ltr => EdgeInsets.only(left: widget.prefixBuilder == null ? padding.left : 0),
-          TextDirection.rtl => EdgeInsets.only(right: widget.prefixBuilder == null ? padding.right : 0),
+          TextDirection.ltr => EdgeInsets.only(
+            left: widget.prefixBuilder == null ? padding.left : 0,
+          ),
+          TextDirection.rtl => EdgeInsets.only(
+            right: widget.prefixBuilder == null ? padding.right : 0,
+          ),
         },
       ),
       prefixIconConstraints: const BoxConstraints(),

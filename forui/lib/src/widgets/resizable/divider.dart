@@ -29,7 +29,8 @@ sealed class Divider extends StatefulWidget {
   final double hitRegionExtent;
   final double resizePercentage;
   final MouseCursor cursor;
-  final String Function(FResizableRegionData, FResizableRegionData) semanticFormatterCallback;
+  final String Function(FResizableRegionData, FResizableRegionData)
+  semanticFormatterCallback;
 
   const Divider({
     required this.controller,
@@ -44,7 +45,10 @@ sealed class Divider extends StatefulWidget {
     required this.semanticFormatterCallback,
     super.key,
   }) : assert(0 <= left, 'Left child should be non-negative, but is $left.'),
-       assert(left + 1 == right, 'Left and right should be next to each other.');
+       assert(
+         left + 1 == right,
+         'Left and right should be next to each other.',
+       );
 
   Widget focusableActionDetector({
     required Map<ShortcutActivator, Intent> shortcuts,
@@ -52,22 +56,38 @@ sealed class Divider extends StatefulWidget {
     required bool focused,
     required ValueChanged<bool> onFocusChange,
   }) => Semantics(
-    value: semanticFormatterCallback(controller.regions[left], controller.regions[right]),
+    value: semanticFormatterCallback(
+      controller.regions[left],
+      controller.regions[right],
+    ),
     child: FocusableActionDetector(
       mouseCursor: cursor,
       shortcuts: shortcuts,
       onFocusChange: onFocusChange,
       actions: {
         _Up: CallbackAction(
-          onInvoke: (_) => controller.update(left, right, -resizePercentage * (controller.regions[left].extent.total)),
+          onInvoke:
+              (_) => controller.update(
+                left,
+                right,
+                -resizePercentage * (controller.regions[left].extent.total),
+              ),
         ),
         _Down: CallbackAction(
-          onInvoke: (_) => controller.update(left, right, resizePercentage * (controller.regions[left].extent.total)),
+          onInvoke:
+              (_) => controller.update(
+                left,
+                right,
+                resizePercentage * (controller.regions[left].extent.total),
+              ),
         ),
       },
       child: FFocusedOutline(
         focused: focused,
-        child: Stack(alignment: AlignmentDirectional.center, children: children),
+        child: Stack(
+          alignment: AlignmentDirectional.center,
+          children: children,
+        ),
       ),
     ),
   );
@@ -85,7 +105,12 @@ sealed class Divider extends StatefulWidget {
       ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
       ..add(PercentProperty('resizePercentage', resizePercentage))
       ..add(DiagnosticsProperty('cursor', cursor))
-      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback));
+      ..add(
+        ObjectFlagProperty.has(
+          'semanticFormatterCallback',
+          semanticFormatterCallback,
+        ),
+      );
   }
 }
 
@@ -114,7 +139,9 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
 
   @override
   Widget build(BuildContext context) => Positioned(
-    left: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
+    left:
+        widget.controller.regions[widget.left].offset.max -
+        (widget.hitRegionExtent / 2),
     child: widget.focusableActionDetector(
       shortcuts: const {
         SingleActivator(LogicalKeyboardKey.arrowLeft): _Up(),
@@ -123,10 +150,14 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
       onFocusChange: (focused) => setState(() => _focused = focused),
       focused: _focused,
       children: [
-        if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
+        if (widget.type == FResizableDivider.divider ||
+            widget.type == FResizableDivider.dividerWithThumb)
           ColoredBox(
             color: widget.style.color,
-            child: SizedBox(height: widget.crossAxisExtent, width: widget.style.width),
+            child: SizedBox(
+              height: widget.crossAxisExtent,
+              width: widget.style.width,
+            ),
           ),
         if (widget.type == FResizableDivider.dividerWithThumb)
           _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripVertical),
@@ -139,10 +170,15 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
                 return;
               }
 
-              widget.controller.update(widget.left, widget.right, details.delta.dx);
+              widget.controller.update(
+                widget.left,
+                widget.right,
+                details.delta.dx,
+              );
               // TODO: haptic feedback
             },
-            onHorizontalDragEnd: (_) => widget.controller.end(widget.left, widget.right),
+            onHorizontalDragEnd:
+                (_) => widget.controller.end(widget.left, widget.right),
           ),
         ),
       ],
@@ -175,7 +211,9 @@ class _VerticalDividerState extends State<VerticalDivider> {
 
   @override
   Widget build(BuildContext context) => Positioned(
-    top: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
+    top:
+        widget.controller.regions[widget.left].offset.max -
+        (widget.hitRegionExtent / 2),
     child: widget.focusableActionDetector(
       shortcuts: const {
         SingleActivator(LogicalKeyboardKey.arrowUp): _Up(),
@@ -184,10 +222,14 @@ class _VerticalDividerState extends State<VerticalDivider> {
       onFocusChange: (focused) => setState(() => _focused = focused),
       focused: _focused,
       children: [
-        if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
+        if (widget.type == FResizableDivider.divider ||
+            widget.type == FResizableDivider.dividerWithThumb)
           ColoredBox(
             color: widget.style.color,
-            child: SizedBox(height: widget.style.width, width: widget.crossAxisExtent),
+            child: SizedBox(
+              height: widget.style.width,
+              width: widget.crossAxisExtent,
+            ),
           ),
         if (widget.type == FResizableDivider.dividerWithThumb)
           _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripHorizontal),
@@ -200,10 +242,15 @@ class _VerticalDividerState extends State<VerticalDivider> {
                 return;
               }
 
-              widget.controller.update(widget.left, widget.right, details.delta.dy);
+              widget.controller.update(
+                widget.left,
+                widget.right,
+                details.delta.dy,
+              );
               // TODO: haptic feedback
             },
-            onVerticalDragEnd: (_) => widget.controller.end(widget.left, widget.right),
+            onVerticalDragEnd:
+                (_) => widget.controller.end(widget.left, widget.right),
           ),
         ),
       ],
@@ -223,7 +270,11 @@ class _Thumb extends StatelessWidget {
     decoration: style.decoration,
     height: style.height,
     width: style.width,
-    child: Icon(icon, color: style.foregroundColor, size: min(style.height, style.width)),
+    child: Icon(
+      icon,
+      color: style.foregroundColor,
+      size: min(style.height, style.width),
+    ),
   );
 
   @override
@@ -248,7 +299,8 @@ enum FResizableDivider {
 }
 
 /// The style of the dividers between [FResizableRegion]s.
-class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFunctions {
+class FResizableDividerStyle
+    with Diagnosticable, _$FResizableDividerStyleFunctions {
   /// The divider's color.
   @override
   final Color color;
@@ -278,7 +330,8 @@ class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFuncti
 }
 
 /// The style of the dividers' thumbs between [FResizableRegion]s.
-class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
+class FResizableDividerThumbStyle
+    with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
   /// The background color.
   @override
   final BoxDecoration decoration;

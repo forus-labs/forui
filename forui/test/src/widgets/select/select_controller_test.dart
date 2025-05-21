@@ -7,7 +7,8 @@ void main() {
     group('non-toggleable', () {
       test('set value to existing', () {
         var count = 0;
-        final controller = FSelectController(vsync: const TestVSync(), value: 1)..addListener(() => count++);
+        final controller = FSelectController(vsync: const TestVSync(), value: 1)
+          ..addListener(() => count++);
         expect(controller.value, 1);
 
         controller.value = 1;
@@ -17,7 +18,8 @@ void main() {
 
       test('set value to new', () {
         var count = 0;
-        final controller = FSelectController(vsync: const TestVSync(), value: 1)..addListener(() => count++);
+        final controller = FSelectController(vsync: const TestVSync(), value: 1)
+          ..addListener(() => count++);
         expect(controller.value, 1);
 
         controller.value = 2;
@@ -29,8 +31,11 @@ void main() {
     group('toggleable', () {
       test('set value to existing', () {
         var count = 0;
-        final controller = FSelectController(vsync: const TestVSync(), value: 1, toggleable: true)
-          ..addListener(() => count++);
+        final controller = FSelectController(
+          vsync: const TestVSync(),
+          value: 1,
+          toggleable: true,
+        )..addListener(() => count++);
 
         expect(controller.value, 1);
 
@@ -41,8 +46,11 @@ void main() {
 
       test('set value to new', () {
         var count = 0;
-        final controller = FSelectController(vsync: const TestVSync(), value: 1, toggleable: true)
-          ..addListener(() => count++);
+        final controller = FSelectController(
+          vsync: const TestVSync(),
+          value: 1,
+          toggleable: true,
+        )..addListener(() => count++);
 
         expect(controller.value, 1);
 
@@ -53,7 +61,8 @@ void main() {
     });
 
     test('dispose', () {
-      final controller = FSelectController(vsync: const TestVSync(), value: 1)..dispose();
+      final controller = FSelectController(vsync: const TestVSync(), value: 1)
+        ..dispose();
 
       expect(controller.popover.disposed, true);
     });

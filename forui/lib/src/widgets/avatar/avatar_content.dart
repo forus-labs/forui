@@ -24,7 +24,12 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fallback = this.fallback ?? PlaceholderContent(style: style ?? context.theme.avatarStyle, size: size);
+    final fallback =
+        this.fallback ??
+        PlaceholderContent(
+          style: style ?? context.theme.avatarStyle,
+          size: size,
+        );
 
     return Image(
       height: size,
@@ -40,7 +45,9 @@ class Content extends StatelessWidget {
                     duration: const Duration(milliseconds: 500),
                     child: frame == null ? fallback : child,
                   ),
-      loadingBuilder: (_, child, loadingProgress) => loadingProgress == null ? child : fallback,
+      loadingBuilder:
+          (_, child, loadingProgress) =>
+              loadingProgress == null ? child : fallback,
       fit: BoxFit.cover,
     );
   }
@@ -64,8 +71,11 @@ class PlaceholderContent extends StatelessWidget {
   const PlaceholderContent({required this.size, this.style, super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      Icon(FIcons.userRound, size: size / 2, color: (style ?? context.theme.avatarStyle).foregroundColor);
+  Widget build(BuildContext context) => Icon(
+    FIcons.userRound,
+    size: size / 2,
+    color: (style ?? context.theme.avatarStyle).foregroundColor,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -40,7 +40,11 @@ sealed class Content extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 4),
             child: Semantics(
               container: true,
-              child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
+              child: DefaultTextStyle.merge(
+                textAlign: titleTextAlign,
+                style: style.titleTextStyle,
+                child: title,
+              ),
             ),
           ),
         if (body case final body?)
@@ -48,7 +52,11 @@ sealed class Content extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 4),
             child: Semantics(
               container: true,
-              child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
+              child: DefaultTextStyle.merge(
+                textAlign: bodyTextAlign,
+                style: style.bodyTextStyle,
+                child: body,
+              ),
             ),
           ),
         if (title != null && body != null) const SizedBox(height: 8),
@@ -79,11 +87,18 @@ class HorizontalContent extends Content {
     required super.body,
     required super.actions,
     super.key,
-  }) : super(alignment: CrossAxisAlignment.start, titleTextAlign: TextAlign.start, bodyTextAlign: TextAlign.start);
+  }) : super(
+         alignment: CrossAxisAlignment.start,
+         titleTextAlign: TextAlign.start,
+         bodyTextAlign: TextAlign.start,
+       );
 
   @override
-  Widget _actions(BuildContext context) =>
-      Row(mainAxisAlignment: MainAxisAlignment.end, spacing: style.actionSpacing, children: actions);
+  Widget _actions(BuildContext context) => Row(
+    mainAxisAlignment: MainAxisAlignment.end,
+    spacing: style.actionSpacing,
+    children: actions,
+  );
 }
 
 @internal
@@ -94,11 +109,18 @@ class VerticalContent extends Content {
     required super.body,
     required super.actions,
     super.key,
-  }) : super(alignment: CrossAxisAlignment.center, titleTextAlign: TextAlign.center, bodyTextAlign: TextAlign.center);
+  }) : super(
+         alignment: CrossAxisAlignment.center,
+         titleTextAlign: TextAlign.center,
+         bodyTextAlign: TextAlign.center,
+       );
 
   @override
-  Widget _actions(BuildContext context) =>
-      Column(mainAxisSize: MainAxisSize.min, spacing: style.actionSpacing, children: actions);
+  Widget _actions(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    spacing: style.actionSpacing,
+    children: actions,
+  );
 }
 
 /// [FDialog] content's style.

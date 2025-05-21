@@ -14,12 +14,18 @@ void main() {
             theme: theme.data,
             child: const FCollapsible(
               value: 1.0,
-              child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+              child: ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(dimension: 50),
+              ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('collapsible/${theme.name}/fully_expanded.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('collapsible/${theme.name}/fully_expanded.png'),
+        );
       });
 
       testWidgets('half expanded', (tester) async {
@@ -28,12 +34,18 @@ void main() {
             theme: theme.data,
             child: const FCollapsible(
               value: 0.5,
-              child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+              child: ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(dimension: 50),
+              ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('collapsible/${theme.name}/half_expanded.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('collapsible/${theme.name}/half_expanded.png'),
+        );
       });
 
       testWidgets('fully collapsed', (tester) async {
@@ -42,7 +54,10 @@ void main() {
             theme: theme.data,
             child: const FCollapsible(
               value: 0.0,
-              child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+              child: ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(dimension: 50),
+              ),
             ),
           ),
         );

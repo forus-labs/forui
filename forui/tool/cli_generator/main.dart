@@ -11,12 +11,35 @@ import 'generate_styles.dart';
 import 'generate_themes.dart';
 
 final library = p.join(Directory.current.parent.path, 'forui', 'lib');
-final _snippet = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'snippet', 'snippet.dart');
-final _style = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'style', 'style.dart');
-final _theme = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'theme', 'theme.dart');
+final _snippet = p.join(
+  Directory.current.parent.path,
+  'forui',
+  'bin',
+  'commands',
+  'snippet',
+  'snippet.dart',
+);
+final _style = p.join(
+  Directory.current.parent.path,
+  'forui',
+  'bin',
+  'commands',
+  'style',
+  'style.dart',
+);
+final _theme = p.join(
+  Directory.current.parent.path,
+  'forui',
+  'bin',
+  'commands',
+  'theme',
+  'theme.dart',
+);
 
 final emitter = DartEmitter();
-final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
+final formatter = DartFormatter(
+  languageVersion: DartFormatter.latestLanguageVersion,
+);
 
 const header = '''
 // GENERATED CODE - DO NOT MODIFY BY HAND

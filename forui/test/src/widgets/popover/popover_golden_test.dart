@@ -20,13 +20,20 @@ void main() {
             theme: theme.data,
             child: FPopover(
               controller: controller,
-              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
+              popoverBuilder:
+                  (context, style, _) => const SizedBox.square(dimension: 100),
+              child: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(dimension: 100),
+              ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/hidden-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('popover/hidden-${theme.name}.png'),
+        );
       });
 
       testWidgets('${theme.name} shown on touch device', (tester) async {
@@ -37,8 +44,12 @@ void main() {
             theme: theme.data,
             child: FPopover(
               controller: controller,
-              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
+              popoverBuilder:
+                  (context, style, _) => const SizedBox.square(dimension: 100),
+              child: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(dimension: 100),
+              ),
             ),
           ),
         );
@@ -46,7 +57,10 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/shown-touch-device-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('popover/shown-touch-device-${theme.name}.png'),
+        );
       });
 
       testWidgets('${theme.name} shown on non-touch device', (tester) async {
@@ -57,8 +71,12 @@ void main() {
             theme: theme.data,
             child: FPopover(
               controller: controller,
-              popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
-              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
+              popoverBuilder:
+                  (context, style, _) => const SizedBox.square(dimension: 100),
+              child: const ColoredBox(
+                color: Colors.yellow,
+                child: SizedBox.square(dimension: 100),
+              ),
             ),
           ),
         );

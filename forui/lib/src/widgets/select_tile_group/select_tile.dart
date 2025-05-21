@@ -109,7 +109,9 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectTileData(:controller, :selected) = FSelectTileData.of<T>(context);
+    final FSelectTileData(:controller, :selected) = FSelectTileData.of<T>(
+      context,
+    );
     final prefix = switch ((_suffix, selected)) {
       (true, _) => _icon,
       (false, true) => checkedIcon,
@@ -159,7 +161,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
 @internal
 class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   static FSelectTileData<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>();
+    final result =
+        context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>();
     assert(
       result != null,
       "No FSelectTileData found in context. This likely because FSelectTileGroup's type parameter could not be inferred. "
@@ -172,10 +175,16 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   final FSelectTileGroupController<T> controller;
   final bool selected;
 
-  const FSelectTileData({required this.controller, required this.selected, required super.child, super.key});
+  const FSelectTileData({
+    required this.controller,
+    required this.selected,
+    required super.child,
+    super.key,
+  });
 
   @override
-  bool updateShouldNotify(FSelectTileData old) => controller != old.controller || selected != old.selected;
+  bool updateShouldNotify(FSelectTileData old) =>
+      controller != old.controller || selected != old.selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
