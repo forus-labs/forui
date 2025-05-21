@@ -10,4 +10,4 @@ workspace:
   - samples
 
 dev_dependencies:
-  flint: ^2.8.1
+  flint: ^2.13.0

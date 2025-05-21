@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
@@ -59,12 +57,6 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
   @override
   final Widget? description;
 
-  /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
-  ///
-  /// It is not rendered if the group is disabled or part of a [FTileGroup].
-  @override
-  final Widget Function(BuildContext, String) errorBuilder;
-
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
@@ -87,10 +79,10 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.divider = FTileDivider.indented,
     this.label,
     this.description,
-    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticsLabel,
     this.onChange,
     this.onSelect,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -146,10 +138,10 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.divider = FTileDivider.indented,
     this.label,
     this.description,
-    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticsLabel,
     this.onChange,
     this.onSelect,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -158,6 +150,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     super.key,
   }) : super(
          initialValue: selectController.value,
+         errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State;
 
@@ -216,6 +209,8 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
 }
 
 class _State<T> extends FormFieldState<Set<T>> {
+  final FocusNode _focus = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -259,6 +254,7 @@ class _State<T> extends FormFieldState<Set<T>> {
       ..removeListener(_handleControllerChanged)
       ..removeValueListener(widget.onChange)
       ..removeUpdateListener(widget.onSelect);
+    _focus.dispose();
     super.dispose();
   }
 
@@ -271,6 +267,36 @@ class _State<T> extends FormFieldState<Set<T>> {
     if (!setEquals(widget.selectController.value, value)) {
       didChange(widget.selectController.value);
     }
+  }
+
+  @protected
+  @override
+  Widget build(BuildContext context) {
+    // This is a workaround the default FormField.build() function wrapping the child (a SliverList) in a Semantics
+    // which results in:
+    // "A RenderSemanticsAnnotations expected a child of type RenderBox but received a child of type RenderSliverList."
+    //
+    // This behavior was introduced without any prior notice in Flutter 3.32.
+    super.build(context);
+
+    final child = widget.builder(this);
+    if (Form.maybeOf(context)?.widget.autovalidateMode == AutovalidateMode.onUnfocus &&
+            widget.autovalidateMode != AutovalidateMode.always ||
+        widget.autovalidateMode == AutovalidateMode.onUnfocus) {
+      return Focus(
+        canRequestFocus: false,
+        skipTraversal: true,
+        onFocusChange: (value) {
+          if (!value) {
+            validate();
+          }
+        },
+        focusNode: _focus,
+        child: child,
+      );
+    }
+
+    return child;
   }
 
   @override

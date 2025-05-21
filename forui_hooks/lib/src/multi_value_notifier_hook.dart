@@ -7,7 +7,12 @@ import 'package:forui/forui.dart';
 /// Creates a [FMultiValueNotifier] that manages a set of elements and is automatically disposed.
 ///
 /// The [min] and [max] number of elements allowed. Defaults to no min and max.
-FMultiValueNotifier<T> useFMultiValueNotifier<T>({Set<T>? values, int min = 0, int? max, List<Object?>? keys}) =>
+FMultiValueNotifier<T> useFMultiValueNotifier<T>({
+  Set<T>? values,
+  int min = 0,
+  int? max,
+  List<Object?>? keys,
+}) =>
     use(_MultiNotifierHook<T>(values: values, min: min, max: max, keys: keys));
 
 class _MultiNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
@@ -15,7 +20,12 @@ class _MultiNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
   final int min;
   final int? max;
 
-  const _MultiNotifierHook({required this.values, required this.min, required this.max, super.keys});
+  const _MultiNotifierHook({
+    required this.values,
+    required this.min,
+    required this.max,
+    super.keys,
+  });
 
   @override
   _MultiNotifierHookState<T> createState() => _MultiNotifierHookState<T>();
@@ -30,8 +40,13 @@ class _MultiNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
   }
 }
 
-class _MultiNotifierHookState<T> extends HookState<FMultiValueNotifier<T>, _MultiNotifierHook<T>> {
-  late final _controller = FMultiValueNotifier(values: hook.values, min: hook.min, max: hook.max);
+class _MultiNotifierHookState<T>
+    extends HookState<FMultiValueNotifier<T>, _MultiNotifierHook<T>> {
+  late final _controller = FMultiValueNotifier(
+    values: hook.values,
+    min: hook.min,
+    max: hook.max,
+  );
 
   @override
   FMultiValueNotifier<T> build(BuildContext context) => _controller;
@@ -47,8 +62,10 @@ class _MultiNotifierHookState<T> extends HookState<FMultiValueNotifier<T>, _Mult
 }
 
 /// Creates a radio [FMultiValueNotifier] that allows only one element at a time.
-FMultiValueNotifier<T> useFRadioMultiValueNotifier<T>({T? value, List<Object?>? keys}) =>
-    use(_RadioNotifierHook<T>(value: value, keys: keys));
+FMultiValueNotifier<T> useFRadioMultiValueNotifier<T>({
+  T? value,
+  List<Object?>? keys,
+}) => use(_RadioNotifierHook<T>(value: value, keys: keys));
 
 class _RadioNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
   final T? value;
@@ -65,7 +82,8 @@ class _RadioNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
   }
 }
 
-class _RadioNotifierHookState<T> extends HookState<FMultiValueNotifier<T>, _RadioNotifierHook<T>> {
+class _RadioNotifierHookState<T>
+    extends HookState<FMultiValueNotifier<T>, _RadioNotifierHook<T>> {
   late final _controller = FMultiValueNotifier.radio(value: hook.value);
 
   @override

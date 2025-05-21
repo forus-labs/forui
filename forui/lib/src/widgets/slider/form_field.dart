@@ -17,15 +17,13 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
   final Widget? label;
   @override
   final Widget? description;
-  @override
-  final Widget Function(BuildContext, String) errorBuilder;
 
   SliderFormField({
     required this.controller,
     required this.constraints,
     required this.label,
     required this.description,
-    required this.errorBuilder,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -35,6 +33,7 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
     super.key,
   }) : super(
          initialValue: controller.selection,
+         errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State;
            final InheritedData(:layout, :marks, :trackMainAxisExtent) = InheritedData.of(state.context);

@@ -14,7 +14,9 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFContinuousSliderController(selection: FSliderSelection(max: 0.2));
+            controller = useFContinuousSliderController(
+              selection: FSliderSelection(max: 0.2),
+            );
             return FSlider(controller: controller);
           },
         ),
@@ -33,7 +35,9 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFContinuousRangeSliderController(selection: FSliderSelection(max: 0.2));
+            controller = useFContinuousRangeSliderController(
+              selection: FSliderSelection(max: 0.2),
+            );
             return FSlider(controller: controller);
           },
         ),
@@ -52,10 +56,16 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFDiscreteSliderController(selection: FSliderSelection(max: 0.2));
+            controller = useFDiscreteSliderController(
+              selection: FSliderSelection(max: 0.2),
+            );
             return FSlider(
               controller: controller,
-              marks: const [FSliderMark(value: 0), FSliderMark(value: 0.2), FSliderMark(value: 0.5)],
+              marks: const [
+                FSliderMark(value: 0),
+                FSliderMark(value: 0.2),
+                FSliderMark(value: 0.5),
+              ],
             );
           },
         ),
@@ -74,10 +84,16 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFDiscreteRangeSliderController(selection: FSliderSelection(max: 0.2));
+            controller = useFDiscreteRangeSliderController(
+              selection: FSliderSelection(max: 0.2),
+            );
             return FSlider(
               controller: controller,
-              marks: const [FSliderMark(value: 0), FSliderMark(value: 0.2), FSliderMark(value: 0.5)],
+              marks: const [
+                FSliderMark(value: 0),
+                FSliderMark(value: 0.2),
+                FSliderMark(value: 0.5),
+              ],
             );
           },
         ),

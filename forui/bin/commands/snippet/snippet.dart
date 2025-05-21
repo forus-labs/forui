@@ -85,72 +85,81 @@ extension CustomMaterialTheme on FThemeData {
   // );
   // ```
   ThemeData toCustomMaterialTheme() {
-    final textTheme = TextTheme(
-      displayLarge: typography.xl4.copyWith(
-        height: 1,
-        textBaseline: typography.xl4.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      displayMedium: typography.xl3.copyWith(
-        height: 1,
-        textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      displaySmall: typography.xl2.copyWith(
-        height: 1,
-        textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      headlineLarge: typography.xl3.copyWith(
-        height: 1,
-        textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      headlineMedium: typography.xl2.copyWith(
-        height: 1,
-        textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      headlineSmall: typography.xl.copyWith(
-        height: 1,
-        textBaseline: typography.xl.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      titleLarge: typography.lg.copyWith(
-        height: 1,
-        textBaseline: typography.lg.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      titleMedium: typography.base.copyWith(
-        height: 1,
-        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      titleSmall: typography.sm.copyWith(
-        height: 1,
-        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      labelLarge: typography.base.copyWith(
-        height: 1,
-        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      labelMedium: typography.sm.copyWith(
-        height: 1,
-        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      labelSmall: typography.xs.copyWith(
-        height: 1,
-        textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      bodyLarge: typography.base.copyWith(
-        height: 1,
-        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      bodyMedium: typography.sm.copyWith(
-        height: 1,
-        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      bodySmall: typography.xs.copyWith(
-        height: 1,
-        textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
-      ),
-    )..apply(
-      fontFamily: typography.defaultFontFamily,
-      bodyColor: colors.foreground,
-      displayColor: colors.foreground,
-    );
+    final textTheme =
+        TextTheme(
+          displayLarge: typography.xl4.copyWith(
+            height: 1,
+            textBaseline:
+                typography.xl4.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          displayMedium: typography.xl3.copyWith(
+            height: 1,
+            textBaseline:
+                typography.xl3.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          displaySmall: typography.xl2.copyWith(
+            height: 1,
+            textBaseline:
+                typography.xl2.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          headlineLarge: typography.xl3.copyWith(
+            height: 1,
+            textBaseline:
+                typography.xl3.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          headlineMedium: typography.xl2.copyWith(
+            height: 1,
+            textBaseline:
+                typography.xl2.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          headlineSmall: typography.xl.copyWith(
+            height: 1,
+            textBaseline: typography.xl.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          titleLarge: typography.lg.copyWith(
+            height: 1,
+            textBaseline: typography.lg.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          titleMedium: typography.base.copyWith(
+            height: 1,
+            textBaseline:
+                typography.base.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          titleSmall: typography.sm.copyWith(
+            height: 1,
+            textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          labelLarge: typography.base.copyWith(
+            height: 1,
+            textBaseline:
+                typography.base.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          labelMedium: typography.sm.copyWith(
+            height: 1,
+            textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          labelSmall: typography.xs.copyWith(
+            height: 1,
+            textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          bodyLarge: typography.base.copyWith(
+            height: 1,
+            textBaseline:
+                typography.base.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          bodyMedium: typography.sm.copyWith(
+            height: 1,
+            textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+          ),
+          bodySmall: typography.xs.copyWith(
+            height: 1,
+            textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
+          ),
+        )..apply(
+          fontFamily: typography.defaultFontFamily,
+          bodyColor: colors.foreground,
+          displayColor: colors.foreground,
+        );
     return ThemeData(
       colorScheme: ColorScheme(
         brightness: colors.brightness,
@@ -191,7 +200,7 @@ extension CustomMaterialTheme on FThemeData {
           borderRadius: style.borderRadius,
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: style.borderRadius,
@@ -336,14 +345,15 @@ extension CustomMaterialTheme on FThemeData {
             buttonStyles.outline.contentStyle.padding,
           ),
           side: WidgetStateBorderSide.resolveWith((states) {
-            final border =
-                buttonStyles.outline.decoration.maybeResolve(states)?.border;
+            final border = buttonStyles.outline.decoration
+                .maybeResolve(states)
+                ?.border;
             return BorderSide(
               color:
                   border?.top.color ??
                   switch (states) {
-                    _ when states.contains(WidgetState.disabled) => colors
-                        .disable(colors.border),
+                    _ when states.contains(WidgetState.disabled) =>
+                      colors.disable(colors.border),
                     _ when states.contains(WidgetState.hovered) => colors.hover(
                       colors.border,
                     ),
@@ -390,16 +400,15 @@ extension CustomMaterialTheme on FThemeData {
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor:
-            buttonStyles.primary.decoration.maybeResolve(const {})?.color,
-        foregroundColor:
-            buttonStyles.primary.contentStyle.textStyle
-                .maybeResolve(const {})
-                ?.color,
-        hoverColor:
-            buttonStyles.primary.decoration.maybeResolve(const {
-              WidgetState.hovered,
-            })?.color,
+        backgroundColor: buttonStyles.primary.decoration
+            .maybeResolve(const {})
+            ?.color,
+        foregroundColor: buttonStyles.primary.contentStyle.textStyle
+            .maybeResolve(const {})
+            ?.color,
+        hoverColor: buttonStyles.primary.decoration.maybeResolve(const {
+          WidgetState.hovered,
+        })?.color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius:
@@ -460,7 +469,7 @@ extension CustomMaterialTheme on FThemeData {
           ),
         ),
       ),
-      dialogTheme: DialogTheme(
+      dialogTheme: DialogThemeData(
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
       bottomSheetTheme: BottomSheetThemeData(

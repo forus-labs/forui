@@ -101,9 +101,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   @override
   final Widget? description;
 
-  @override
-  final Widget Function(BuildContext, String) errorBuilder;
-
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
@@ -162,7 +159,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autoHide = false,
     this.label,
     this.description,
-    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -174,6 +170,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.suffixIcon,
     this.onChange,
     this.onSelect,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -183,6 +180,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     super.key,
   }) : super(
          initialValue: selectController.value,
+         errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State<T>;
            final groupData = FTileGroupData.maybeOf(state.context);
@@ -300,7 +298,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autoHide = false,
     this.label,
     this.description,
-    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -312,6 +309,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.suffixIcon,
     this.onChange,
     this.onSelect,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -321,6 +319,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     super.restorationId,
     super.key,
   }) : super(
+         errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State<T>;
            final groupData = FTileGroupData.maybeOf(state.context);

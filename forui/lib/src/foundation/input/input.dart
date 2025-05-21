@@ -112,13 +112,6 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   @protected
   InputController createController();
 
-  // validator:
-  // (value) => switch (this.value) {
-  // null when value == controller.placeholder => widget.validator(null),
-  // null => errorMessage,
-  // final value => widget.validator(value),
-  // },
-
   @override
   Widget build(BuildContext _) => Shortcuts(
     shortcuts: const {

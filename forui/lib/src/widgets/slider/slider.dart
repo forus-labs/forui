@@ -81,7 +81,6 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   /// A callback that formats the semantic label for the slider's thumb. Defaults to announcing the percentage.
   ///
   /// In practice, this is mostly useful for range sliders.
-  // ignore: avoid_positional_boolean_parameters
   final String Function(double) semanticValueFormatterCallback;
 
   @override
