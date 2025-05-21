@@ -24,7 +24,6 @@ abstract interface class FResizableController extends FChangeNotifier {
   /// ## Contract
   /// [_hapticFeedbackVelocity] should be a positive, finite number. It will otherwise
   /// result in undefined behaviour.
-  // ignore: avoid_field_initializers_in_const_classes
   final double _hapticFeedbackVelocity = 6.5; // ignore: unused_field, TODO: haptic feedback
 
   bool _haptic = false;
