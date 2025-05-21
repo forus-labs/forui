@@ -46,12 +46,11 @@ class _DeterminateLinearProgressPageState extends StatefulSampleState<Determinat
       FProgress(value: value),
       FButton(
         child: const Text('Reset'),
-        onPress:
-            () => setState(() {
-              value = 0.2;
-              timer.cancel();
-              timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
-            }),
+        onPress: () => setState(() {
+          value = 0.2;
+          timer.cancel();
+          timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+        }),
       ),
     ],
   );

@@ -60,9 +60,7 @@ class CalendarLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('alignment', alignment))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
-      ..add(
-        DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior),
-      )
+      ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
       ..add(DiagnosticsProperty('scaler', scale))
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ObjectFlagProperty.has('builder', builder))
@@ -86,18 +84,10 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     super.initState();
     _width = _estimateWidth();
 
-    _controller =
-        widget.controller ??
-        FCalendarController.date(
-          initialSelection: widget.initialSelection?.toNative(),
-        );
+    _controller = widget.controller ?? FCalendarController.date(initialSelection: widget.initialSelection?.toNative());
     _controller.addValueListener(_onChange);
 
-    final start =
-        ((widget.initialScroll ?? widget.today)
-            .difference(widget.start)
-            .inDays) *
-        _width;
+    final start = ((widget.initialScroll ?? widget.today).difference(widget.start).inDays) * _width;
     _scrollController = ScrollController(
       initialScrollOffset: switch (widget.alignment.start) {
         -1 => start,
@@ -110,9 +100,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
   @override
   void didUpdateWidget(covariant CalendarLayout old) {
     super.didUpdateWidget(old);
-    if (widget.style != old.style ||
-        widget.scale != old.scale ||
-        widget.textStyle != old.textStyle) {
+    if (widget.style != old.style || widget.scale != old.scale || widget.textStyle != old.textStyle) {
       _width = _estimateWidth();
     }
 
@@ -123,9 +111,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
         _controller.removeValueListener(_onChange);
       }
 
-      _controller =
-          widget.controller ??
-          FCalendarController.date(initialSelection: _controller.value);
+      _controller = widget.controller ?? FCalendarController.date(initialSelection: _controller.value);
       _controller.addValueListener(_onChange);
     }
   }
@@ -135,16 +121,9 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     final textStyle = widget.textStyle;
 
     double height(FLineCalendarStyle style, Set<WidgetState> states) {
-      final dateHeight = scale.scale(
-        style.dateTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0,
-      );
-      final weekdayHeight = scale.scale(
-        style.weekdayTextStyle.resolve(states).fontSize ??
-            textStyle.fontSize ??
-            0,
-      );
-      final otherHeight =
-          widget.style.contentSpacing + (widget.style.contentEdgeSpacing * 2);
+      final dateHeight = scale.scale(style.dateTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
+      final weekdayHeight = scale.scale(style.weekdayTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
+      final otherHeight = widget.style.contentSpacing + (widget.style.contentEdgeSpacing * 2);
 
       return dateHeight + weekdayHeight + otherHeight;
     }
@@ -165,22 +144,10 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     final placeholder = widget.today.toNative();
     return SpeculativeLayout(
       children: [
-        ItemContent(
-          style: widget.style,
-          states: const {WidgetState.selected},
-          date: placeholder,
-        ),
-        ItemContent(
-          style: widget.style,
-          states: const {WidgetState.selected, WidgetState.hovered},
-          date: placeholder,
-        ),
+        ItemContent(style: widget.style, states: const {WidgetState.selected}, date: placeholder),
+        ItemContent(style: widget.style, states: const {WidgetState.selected, WidgetState.hovered}, date: placeholder),
         ItemContent(style: widget.style, states: const {}, date: placeholder),
-        ItemContent(
-          style: widget.style,
-          states: const {WidgetState.hovered},
-          date: placeholder,
-        ),
+        ItemContent(style: widget.style, states: const {WidgetState.hovered}, date: placeholder),
         ListView.builder(
           controller: _scrollController,
           scrollDirection: Axis.horizontal,
@@ -189,10 +156,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
           cacheExtent: widget.cacheExtent,
           keyboardDismissBehavior: widget.keyboardDismissBehavior,
           itemExtent: _width,
-          itemCount:
-              widget.end == null
-                  ? null
-                  : widget.end!.difference(widget.start).inDays + 1,
+          itemCount: widget.end == null ? null : widget.end!.difference(widget.start).inDays + 1,
           itemBuilder: (_, index) {
             final date = widget.start.plus(days: index);
             return Padding(
@@ -234,9 +198,7 @@ class SpeculativeLayout extends MultiChildRenderObjectWidget {
 class _Data extends ContainerBoxParentData<RenderBox> {}
 
 class _SpeculativeBox extends RenderBox
-    with
-        ContainerRenderObjectMixin<RenderBox, _Data>,
-        RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
+    with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
   @override
   void setupParentData(RenderObject child) => child.parentData = _Data();
 
@@ -256,15 +218,12 @@ class _SpeculativeBox extends RenderBox
         ].max!;
 
     final heightConstraints = constraints.copyWith(maxHeight: maxHeight);
-    final viewport =
-        childAfter(unselectedHovered)!
-          ..layout(heightConstraints, parentUsesSize: true);
+    final viewport = childAfter(unselectedHovered)!..layout(heightConstraints, parentUsesSize: true);
     size = constraints.constrain(viewport.size);
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) =>
-      context.paintChild(lastChild!, offset);
+  void paint(PaintingContext context, Offset offset) => context.paintChild(lastChild!, offset);
 
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) {
@@ -272,13 +231,10 @@ class _SpeculativeBox extends RenderBox
     return result.addWithPaintOffset(
       offset: viewport.data.offset,
       position: position,
-      hitTest:
-          (result, transformed) =>
-              viewport.hitTest(result, position: transformed),
+      hitTest: (result, transformed) => viewport.hitTest(result, position: transformed),
     );
   }
 
   @override
-  void visitChildrenForSemantics(RenderObjectVisitor visitor) =>
-      visitor(lastChild!);
+  void visitChildrenForSemantics(RenderObjectVisitor visitor) => visitor(lastChild!);
 }

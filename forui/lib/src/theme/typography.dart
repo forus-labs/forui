@@ -118,91 +118,23 @@ final class FTypography with Diagnosticable, FTransformable {
     this.xl6 = const TextStyle(fontSize: 60, height: 1),
     this.xl7 = const TextStyle(fontSize: 72, height: 1),
     this.xl8 = const TextStyle(fontSize: 96, height: 1),
-  }) : assert(
-         0 < defaultFontFamily.length,
-         'The defaultFontFamily should not be empty.',
-       );
+  }) : assert(0 < defaultFontFamily.length, 'The defaultFontFamily should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
-  FTypography.inherit({
-    required FColors colors,
-    this.defaultFontFamily = 'packages/forui/Inter',
-  }) : xs = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 12,
-         height: 1,
-       ),
-       sm = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 14,
-         height: 1.25,
-       ),
-       base = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 16,
-         height: 1.5,
-       ),
-       lg = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 18,
-         height: 1.75,
-       ),
-       xl = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 20,
-         height: 1.75,
-       ),
-       xl2 = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 22,
-         height: 2,
-       ),
-       xl3 = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 30,
-         height: 2.25,
-       ),
-       xl4 = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 36,
-         height: 2.5,
-       ),
-       xl5 = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 48,
-         height: 1,
-       ),
-       xl6 = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 60,
-         height: 1,
-       ),
-       xl7 = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 72,
-         height: 1,
-       ),
-       xl8 = TextStyle(
-         color: colors.foreground,
-         fontFamily: defaultFontFamily,
-         fontSize: 96,
-         height: 1,
-       ),
-       assert(
-         defaultFontFamily.isNotEmpty,
-         'The defaultFontFamily should not be empty.',
-       );
+  FTypography.inherit({required FColors colors, this.defaultFontFamily = 'packages/forui/Inter'})
+    : xs = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
+      sm = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
+      base = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),
+      lg = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 18, height: 1.75),
+      xl = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 20, height: 1.75),
+      xl2 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 22, height: 2),
+      xl3 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 30, height: 2.25),
+      xl4 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 36, height: 2.5),
+      xl5 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 48, height: 1),
+      xl6 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 60, height: 1),
+      xl7 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 72, height: 1),
+      xl8 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 96, height: 1),
+      assert(defaultFontFamily.isNotEmpty, 'The defaultFontFamily should not be empty.');
 
   /// Scales the fields of this [FTypography] by the given fields.
   ///
@@ -235,10 +167,8 @@ final class FTypography with Diagnosticable, FTransformable {
   );
 
   // default font size: https://api.flutter.dev/flutter/painting/TextStyle/fontSize.html
-  TextStyle _scaleTextStyle({
-    required TextStyle style,
-    required double sizeScalar,
-  }) => style.copyWith(fontSize: (style.fontSize ?? 14) * sizeScalar);
+  TextStyle _scaleTextStyle({required TextStyle style, required double sizeScalar}) =>
+      style.copyWith(fontSize: (style.fontSize ?? 14) * sizeScalar);
 
   /// Returns a copy of this [FTypography] with the given properties replaced.
   ///
@@ -290,13 +220,7 @@ final class FTypography with Diagnosticable, FTransformable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-        StringProperty(
-          'defaultFontFamily',
-          defaultFontFamily,
-          defaultValue: 'packages/forui/Inter',
-        ),
-      )
+      ..add(StringProperty('defaultFontFamily', defaultFontFamily, defaultValue: 'packages/forui/Inter'))
       ..add(DiagnosticsProperty('xs', xs))
       ..add(DiagnosticsProperty('sm', sm))
       ..add(DiagnosticsProperty('base', base))

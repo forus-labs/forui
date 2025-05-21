@@ -38,16 +38,12 @@ void main() {
   });
 
   group('SearchContent', () {
-    testWidgets('didUpdateWidget does not dispose external controller', (
-      tester,
-    ) async {
+    testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.search(
             key: key,
-            searchFieldProperties: FSelectSearchFieldProperties(
-              controller: textController,
-            ),
+            searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
             filter: (_) => [],
             contentBuilder: (_, _) => [],
           ),
@@ -60,13 +56,7 @@ void main() {
       expect(textController.hasListeners, true);
 
       await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>.search(
-            key: key,
-            filter: (_) => [],
-            contentBuilder: (_, _) => [],
-          ),
-        ),
+        TestScaffold.app(child: FSelect<String>.search(key: key, filter: (_) => [], contentBuilder: (_, _) => [])),
       );
 
       await tester.tap(find.byKey(key));
@@ -76,16 +66,12 @@ void main() {
       expect(textController.dispose, returnsNormally);
     });
 
-    testWidgets('dispose() does not dispose external controller', (
-      tester,
-    ) async {
+    testWidgets('dispose() does not dispose external controller', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.search(
             key: key,
-            searchFieldProperties: FSelectSearchFieldProperties(
-              controller: textController,
-            ),
+            searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
             filter: (_) => [],
             contentBuilder: (_, _) => [],
           ),
@@ -109,22 +95,13 @@ void main() {
           child: FSelect<String>.search(
             key: key,
             controller: controller,
-            searchFieldProperties: FSelectSearchFieldProperties(
-              controller: textController,
-            ),
+            searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
             filter:
                 (query) =>
                     query.isEmpty
                         ? fruits
-                        : fruits.where(
-                          (fruit) => fruit.toLowerCase().startsWith(
-                            query.toLowerCase(),
-                          ),
-                        ),
-            contentBuilder:
-                (context, data) => [
-                  for (final fruit in data.values) FSelectItem.text(fruit),
-                ],
+                        : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
+            contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
           ),
         ),
       );

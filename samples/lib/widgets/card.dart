@@ -18,7 +18,9 @@ class CardPage extends Sample {
     children: [
       FCard(
         image: Container(
-          decoration: BoxDecoration(image: DecorationImage(image: AssetImage(path('avatar.png')), fit: BoxFit.cover)),
+          decoration: BoxDecoration(
+            image: DecorationImage(image: AssetImage(path('avatar.png')), fit: BoxFit.cover),
+          ),
           height: 200,
         ),
         title: const Text('Gratitude'),

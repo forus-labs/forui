@@ -35,10 +35,7 @@ void main() {
         await tester.tap(find.byType(FButton));
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('sheet/modal/default-$side.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/modal/default-$side.png'));
       });
 
       testWidgets('constrained - $side', (tester) async {
@@ -52,10 +49,7 @@ void main() {
                         () => showFSheet(
                           context: context,
                           side: side,
-                          constraints: const BoxConstraints(
-                            maxHeight: 200,
-                            maxWidth: 200,
-                          ),
+                          constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
                           builder:
                               (context) => Container(
                                 height: double.infinity,
@@ -72,10 +66,7 @@ void main() {
         await tester.tap(find.byType(FButton));
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('sheet/modal/constrained-$side.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/modal/constrained-$side.png'));
       });
 
       testWidgets('scrollable - $side', (tester) async {
@@ -96,15 +87,10 @@ void main() {
                                 width: double.infinity,
                                 color: context.theme.colors.background,
                                 child: ListView.builder(
-                                  scrollDirection:
-                                      side.vertical
-                                          ? Axis.vertical
-                                          : Axis.horizontal,
+                                  scrollDirection: side.vertical ? Axis.vertical : Axis.horizontal,
                                   itemBuilder:
-                                      (context, index) => Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Text('Tile $index'),
-                                      ),
+                                      (context, index) =>
+                                          Padding(padding: const EdgeInsets.all(8.0), child: Text('Tile $index')),
                                   itemCount: 20,
                                 ),
                               ),
@@ -117,10 +103,7 @@ void main() {
         await tester.tap(find.byType(FButton));
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('sheet/modal/scrollable-$side.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/modal/scrollable-$side.png'));
       });
     }
   });

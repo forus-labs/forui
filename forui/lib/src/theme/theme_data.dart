@@ -466,206 +466,53 @@ final class FThemeData with Diagnosticable, FTransformable {
       colors: colors,
       typography: typography,
       style: style,
-      accordionStyle:
-          accordionStyle ??
-          FAccordionStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      alertStyles:
-          alertStyles ??
-          FAlertStyles.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      avatarStyle:
-          avatarStyle ??
-          FAvatarStyle.inherit(colors: colors, typography: typography),
-      badgeStyles:
-          badgeStyles ??
-          FBadgeStyles.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+      accordionStyle: accordionStyle ?? FAccordionStyle.inherit(colors: colors, typography: typography, style: style),
+      alertStyles: alertStyles ?? FAlertStyles.inherit(colors: colors, typography: typography, style: style),
+      avatarStyle: avatarStyle ?? FAvatarStyle.inherit(colors: colors, typography: typography),
+      badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colors: colors, typography: typography, style: style),
       bottomNavigationBarStyle:
           bottomNavigationBarStyle ??
-          FBottomNavigationBarStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+          FBottomNavigationBarStyle.inherit(colors: colors, typography: typography, style: style),
       breadcrumbStyle:
-          breadcrumbStyle ??
-          FBreadcrumbStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      buttonStyles:
-          buttonStyles ??
-          FButtonStyles.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      calendarStyle:
-          calendarStyle ??
-          FCalendarStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      cardStyle:
-          cardStyle ??
-          FCardStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      checkboxStyle:
-          checkboxStyle ?? FCheckboxStyle.inherit(colors: colors, style: style),
-      dateFieldStyle:
-          dateFieldStyle ??
-          FDateFieldStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      dialogStyle:
-          dialogStyle ??
-          FDialogStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      dividerStyles:
-          dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
-      headerStyles:
-          headerStyles ??
-          FHeaderStyles.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+          breadcrumbStyle ?? FBreadcrumbStyle.inherit(colors: colors, typography: typography, style: style),
+      buttonStyles: buttonStyles ?? FButtonStyles.inherit(colors: colors, typography: typography, style: style),
+      calendarStyle: calendarStyle ?? FCalendarStyle.inherit(colors: colors, typography: typography, style: style),
+      cardStyle: cardStyle ?? FCardStyle.inherit(colors: colors, typography: typography, style: style),
+      checkboxStyle: checkboxStyle ?? FCheckboxStyle.inherit(colors: colors, style: style),
+      dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, typography: typography, style: style),
+      dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
+      dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
+      headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
       lineCalendarStyle:
-          lineCalendarStyle ??
-          FLineCalendarStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+          lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
       paginationStyle:
-          paginationStyle ??
-          FPaginationStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      pickerStyle:
-          pickerStyle ??
-          FPickerStyle.inherit(
-            colors: colors,
-            style: style,
-            typography: typography,
-          ),
-      popoverStyle:
-          popoverStyle ?? FPopoverStyle.inherit(colors: colors, style: style),
+          paginationStyle ?? FPaginationStyle.inherit(colors: colors, typography: typography, style: style),
+      pickerStyle: pickerStyle ?? FPickerStyle.inherit(colors: colors, style: style, typography: typography),
+      popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colors: colors, style: style),
       popoverMenuStyle:
-          popoverMenuStyle ??
-          FPopoverMenuStyle.inherit(
-            colors: colors,
-            style: style,
-            typography: typography,
-          ),
-      progressStyles:
-          progressStyles ??
-          FProgressStyles.inherit(colors: colors, style: style),
-      radioStyle:
-          radioStyle ?? FRadioStyle.inherit(colors: colors, style: style),
-      resizableStyle:
-          resizableStyle ??
-          FResizableStyle.inherit(colors: colors, style: style),
-      scaffoldStyle:
-          scaffoldStyle ?? FScaffoldStyle.inherit(colors: colors, style: style),
-      selectStyle:
-          selectStyle ??
-          FSelectStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+          popoverMenuStyle ?? FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
+      progressStyles: progressStyles ?? FProgressStyles.inherit(colors: colors, style: style),
+      radioStyle: radioStyle ?? FRadioStyle.inherit(colors: colors, style: style),
+      resizableStyle: resizableStyle ?? FResizableStyle.inherit(colors: colors, style: style),
+      scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colors: colors, style: style),
+      selectStyle: selectStyle ?? FSelectStyle.inherit(colors: colors, typography: typography, style: style),
       selectGroupStyle:
-          selectGroupStyle ??
-          FSelectGroupStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+          selectGroupStyle ?? FSelectGroupStyle.inherit(colors: colors, typography: typography, style: style),
       selectMenuTileStyle:
-          selectMenuTileStyle ??
-          FSelectMenuTileStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+          selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(colors: colors, typography: typography, style: style),
       sheetStyle: sheetStyle ?? FSheetStyle.inherit(colors: colors),
       sidebarStyle: sidebarStyle ?? FSidebarStyle.inherit(colors: colors, typography: typography, style: style),
-      sliderStyles:
-          sliderStyles ??
-          FSliderStyles.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      switchStyle:
-          switchStyle ?? FSwitchStyle.inherit(colors: colors, style: style),
-      tabsStyle:
-          tabsStyle ??
-          FTabsStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+      sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
+      switchStyle: switchStyle ?? FSwitchStyle.inherit(colors: colors, style: style),
+      tabsStyle: tabsStyle ?? FTabsStyle.inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
-      textFieldStyle:
-          textFieldStyle ??
-          FTextFieldStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      tileGroupStyle:
-          tileGroupStyle ??
-          FTileGroupStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      timeFieldStyle:
-          timeFieldStyle ??
-          FTimeFieldStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+      textFieldStyle: textFieldStyle ?? FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
+      tileGroupStyle: tileGroupStyle ?? FTileGroupStyle.inherit(colors: colors, typography: typography, style: style),
+      timeFieldStyle: timeFieldStyle ?? FTimeFieldStyle.inherit(colors: colors, typography: typography, style: style),
       timePickerStyle:
-          timePickerStyle ??
-          FTimePickerStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
-      tooltipStyle:
-          tooltipStyle ??
-          FTooltipStyle.inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-          ),
+          timePickerStyle ?? FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
+      tooltipStyle: tooltipStyle ?? FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
     );
   }
 
@@ -801,15 +648,8 @@ final class FThemeData with Diagnosticable, FTransformable {
         height: 1,
         textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
       ),
-      bodySmall: typography.xs.copyWith(
-        height: 1,
-        textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
-      ),
-    )..apply(
-      fontFamily: typography.defaultFontFamily,
-      bodyColor: colors.foreground,
-      displayColor: colors.foreground,
-    );
+      bodySmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic),
+    )..apply(fontFamily: typography.defaultFontFamily, bodyColor: colors.foreground, displayColor: colors.foreground);
 
     return ThemeData(
       colorScheme: ColorScheme(
@@ -839,23 +679,17 @@ final class FThemeData with Diagnosticable, FTransformable {
 
       //// Navigation Bar
       navigationBarTheme: NavigationBarThemeData(
-        indicatorShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
-        ),
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
       //// Navigation Drawer
       navigationDrawerTheme: NavigationDrawerThemeData(
-        indicatorShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
-        ),
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
       //// Navigation Rail
       navigationRailTheme: NavigationRailThemeData(
-        indicatorShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
-        ),
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
       //// Card
@@ -868,15 +702,11 @@ final class FThemeData with Diagnosticable, FTransformable {
       ),
 
       //// Chip
-      chipTheme: ChipThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-      ),
+      chipTheme: ChipThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
 
       //// Input
       inputDecorationTheme: InputDecorationTheme(
-        border: WidgetStateInputBorder.resolveWith(
-          textFieldStyle.border.resolve,
-        ),
+        border: WidgetStateInputBorder.resolveWith(textFieldStyle.border.resolve),
         labelStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
         floatingLabelStyle: textFieldStyle.labelTextStyle.maybeResolve({}),
         hintStyle: textFieldStyle.hintTextStyle.maybeResolve({}),
@@ -889,64 +719,41 @@ final class FThemeData with Diagnosticable, FTransformable {
       //// Date Picker
       datePickerTheme: DatePickerThemeData(
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-        dayShape: WidgetStateProperty.all(
-          RoundedRectangleBorder(borderRadius: style.borderRadius),
-        ),
-        rangePickerShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
-        ),
+        dayShape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+        rangePickerShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
       //// Time Picker
       timePickerTheme: TimePickerThemeData(
         hourMinuteTextColor: colors.secondaryForeground,
         hourMinuteColor: colors.secondary,
-        hourMinuteShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
-        ),
+        hourMinuteShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
         dayPeriodTextColor: colors.foreground,
         dayPeriodColor: colors.secondary,
         dayPeriodBorderSide: BorderSide(color: colors.border),
-        dayPeriodShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
-        ),
+        dayPeriodShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
         dialBackgroundColor: colors.secondary,
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
       /// Slider
       sliderTheme: SliderThemeData(
-        activeTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve(
-          {},
-        ),
-        inactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor
-            .maybeResolve({}),
-        disabledActiveTrackColor: sliderStyles.horizontalStyle.activeColor
-            .maybeResolve({WidgetState.disabled}),
-        disabledInactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor
-            .maybeResolve({WidgetState.disabled}),
-        activeTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor
-            .maybeResolve({}),
-        inactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor
-            .maybeResolve({}),
-        disabledActiveTickMarkColor: sliderStyles
-            .horizontalStyle
-            .markStyle
-            .tickColor
-            .maybeResolve({WidgetState.disabled}),
-        disabledInactiveTickMarkColor: sliderStyles
-            .horizontalStyle
-            .markStyle
-            .tickColor
-            .maybeResolve({WidgetState.disabled}),
-        thumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor
-            .maybeResolve({}),
-        disabledThumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor
-            .maybeResolve({WidgetState.disabled}),
-        valueIndicatorColor:
-            sliderStyles.horizontalStyle.tooltipStyle.decoration.color,
-        valueIndicatorTextStyle:
-            sliderStyles.horizontalStyle.tooltipStyle.textStyle,
+        activeTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve({}),
+        inactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.maybeResolve({}),
+        disabledActiveTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve({WidgetState.disabled}),
+        disabledInactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.maybeResolve({WidgetState.disabled}),
+        activeTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({}),
+        inactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({}),
+        disabledActiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({
+          WidgetState.disabled,
+        }),
+        disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({
+          WidgetState.disabled,
+        }),
+        thumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.maybeResolve({}),
+        disabledThumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.maybeResolve({WidgetState.disabled}),
+        valueIndicatorColor: sliderStyles.horizontalStyle.tooltipStyle.decoration.color,
+        valueIndicatorTextStyle: sliderStyles.horizontalStyle.tooltipStyle.textStyle,
       ),
 
       //// Switch
@@ -961,74 +768,47 @@ final class FThemeData with Diagnosticable, FTransformable {
         style: ButtonStyle(
           textStyle: buttonStyles.secondary.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) =>
-                buttonStyles.secondary.decoration.maybeResolve(states)?.color ??
-                colors.secondary,
+            (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondary,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
             (states) =>
-                buttonStyles.secondary.contentStyle.textStyle
-                    .maybeResolve(states)
-                    ?.color ??
-                colors.secondaryForeground,
+                buttonStyles.secondary.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
-          padding: WidgetStateProperty.all(
-            buttonStyles.secondary.contentStyle.padding,
-          ),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(borderRadius: style.borderRadius),
-          ),
+          padding: WidgetStateProperty.all(buttonStyles.secondary.contentStyle.padding),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
           textStyle: buttonStyles.primary.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) =>
-                buttonStyles.primary.decoration.maybeResolve(states)?.color ??
-                colors.secondary,
+            (states) => buttonStyles.primary.decoration.maybeResolve(states)?.color ?? colors.secondary,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
-            (states) =>
-                buttonStyles.secondary.decoration.maybeResolve(states)?.color ??
-                colors.secondaryForeground,
+            (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
-          padding: WidgetStateProperty.all(
-            buttonStyles.primary.contentStyle.padding,
-          ),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(borderRadius: style.borderRadius),
-          ),
+          padding: WidgetStateProperty.all(buttonStyles.primary.contentStyle.padding),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
           textStyle: buttonStyles.outline.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) =>
-                buttonStyles.outline.decoration.maybeResolve(states)?.color ??
-                Colors.transparent,
+            (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
-            (states) =>
-                buttonStyles.outline.decoration.maybeResolve(states)?.color ??
-                Colors.transparent,
+            (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
-          padding: WidgetStateProperty.all(
-            buttonStyles.outline.contentStyle.padding,
-          ),
+          padding: WidgetStateProperty.all(buttonStyles.outline.contentStyle.padding),
           side: WidgetStateBorderSide.resolveWith((states) {
-            final border =
-                buttonStyles.outline.decoration.maybeResolve(states)?.border;
+            final border = buttonStyles.outline.decoration.maybeResolve(states)?.border;
             return BorderSide(
               color:
                   border?.top.color ??
                   switch (states) {
-                    _ when states.contains(WidgetState.disabled) => colors
-                        .disable(colors.border),
-                    _ when states.contains(WidgetState.hovered) => colors.hover(
-                      colors.border,
-                    ),
+                    _ when states.contains(WidgetState.disabled) => colors.disable(colors.border),
+                    _ when states.contains(WidgetState.hovered) => colors.hover(colors.border),
                     _ => colors.border,
                   },
               width: border?.top.width ?? style.borderWidth,
@@ -1036,11 +816,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           }),
           shape: WidgetStateProperty.resolveWith(
             (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.outline.decoration
-                      .maybeResolve(states)
-                      ?.borderRadius ??
-                  style.borderRadius,
+              borderRadius: buttonStyles.outline.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
@@ -1049,69 +825,40 @@ final class FThemeData with Diagnosticable, FTransformable {
         style: ButtonStyle(
           textStyle: buttonStyles.ghost.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) =>
-                buttonStyles.ghost.decoration.maybeResolve(states)?.color ??
-                Colors.transparent,
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle
-                    .maybeResolve(states)
-                    ?.color ??
-                colors.secondaryForeground,
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
           shape: WidgetStateProperty.resolveWith(
             (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.decoration
-                      .maybeResolve(states)
-                      ?.borderRadius ??
-                  style.borderRadius,
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor:
-            buttonStyles.primary.decoration.maybeResolve(const {})?.color,
-        foregroundColor:
-            buttonStyles.primary.contentStyle.textStyle
-                .maybeResolve(const {})
-                ?.color,
-        hoverColor:
-            buttonStyles.primary.decoration.maybeResolve(const {
-              WidgetState.hovered,
-            })?.color,
+        backgroundColor: buttonStyles.primary.decoration.maybeResolve(const {})?.color,
+        foregroundColor: buttonStyles.primary.contentStyle.textStyle.maybeResolve(const {})?.color,
+        hoverColor: buttonStyles.primary.decoration.maybeResolve(const {WidgetState.hovered})?.color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius:
-              buttonStyles.primary.decoration
-                  .maybeResolve(const {})
-                  ?.borderRadius ??
-              style.borderRadius,
+          borderRadius: buttonStyles.primary.decoration.maybeResolve(const {})?.borderRadius ?? style.borderRadius,
         ),
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) =>
-                buttonStyles.ghost.decoration.maybeResolve(states)?.color ??
-                Colors.transparent,
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle
-                    .maybeResolve(states)
-                    ?.color ??
-                colors.secondaryForeground,
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
           shape: WidgetStateProperty.resolveWith(
             (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.decoration
-                      .maybeResolve(states)
-                      ?.borderRadius ??
-                  style.borderRadius,
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
@@ -1120,48 +867,31 @@ final class FThemeData with Diagnosticable, FTransformable {
         style: ButtonStyle(
           textStyle: buttonStyles.ghost.contentStyle.textStyle,
           backgroundColor: WidgetStateColor.resolveWith(
-            (states) =>
-                buttonStyles.ghost.decoration.maybeResolve(states)?.color ??
-                Colors.transparent,
+            (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
           foregroundColor: WidgetStateColor.resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle
-                    .maybeResolve(states)
-                    ?.color ??
-                colors.secondaryForeground,
+                buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
           shape: WidgetStateProperty.resolveWith(
             (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.decoration
-                      .maybeResolve(states)
-                      ?.borderRadius ??
-                  style.borderRadius,
+              borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
             ),
           ),
         ),
       ),
 
       /// Dialog
-      dialogTheme: DialogThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-      ),
+      dialogTheme: DialogThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
 
       /// Bottom Sheet
-      bottomSheetTheme: BottomSheetThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-      ),
+      bottomSheetTheme: BottomSheetThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
 
       /// Snack Bar
-      snackBarTheme: SnackBarThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-      ),
+      snackBarTheme: SnackBarThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
 
       /// List Tile
-      listTileTheme: ListTileThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-      ),
+      listTileTheme: ListTileThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
 
       /// Divider
       dividerTheme: DividerThemeData(
@@ -1267,8 +997,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     alertStyles: alertStyles ?? this.alertStyles,
     avatarStyle: avatarStyle ?? this.avatarStyle,
     badgeStyles: badgeStyles ?? this.badgeStyles,
-    bottomNavigationBarStyle:
-        bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
+    bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
     breadcrumbStyle: breadcrumbStyle ?? this.breadcrumbStyle,
     buttonStyles: buttonStyles ?? this.buttonStyles,
     calendarStyle: calendarStyle ?? this.calendarStyle,

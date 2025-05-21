@@ -56,13 +56,7 @@ class _InputTimeField extends FTimeField {
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(
-        FlagProperty(
-          'canRequestFocus',
-          value: canRequestFocus,
-          ifTrue: 'canRequestFocus',
-        ),
-      );
+      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'));
   }
 }
 
@@ -83,9 +77,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
         old.controller?.removeValueListener(_onChange);
       }
 
-      _controller =
-          widget.controller ??
-          FTimeFieldController(vsync: this, initialTime: _controller.value);
+      _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
       _controller.addValueListener(_onChange);
     }
   }
@@ -95,20 +87,14 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.timeFieldStyle;
-    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefix =
-        switch (widget.prefixBuilder) {
-          null => null,
-          final builder =>
-            (context, styles, child) =>
-                builder(context, (style, styles.$1, styles.$2), child),
-        };
-    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffix =
-        switch (widget.suffixBuilder) {
-          null => null,
-          final builder =>
-            (context, styles, child) =>
-                builder(context, (style, styles.$1, styles.$2), child),
-        };
+    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefix = switch (widget.prefixBuilder) {
+      null => null,
+      final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
+    };
+    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffix = switch (widget.suffixBuilder) {
+      null => null,
+      final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
+    };
 
     return TimeInput(
       controller: _controller,
@@ -137,9 +123,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       prefixBuilder: prefix,
       suffixBuilder: suffix,
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
-      builder:
-          (context, styles, child) =>
-              widget.builder(context, (style, styles.$1, styles.$2), child),
+      builder: (context, styles, child) => widget.builder(context, (style, styles.$1, styles.$2), child),
     );
   }
 

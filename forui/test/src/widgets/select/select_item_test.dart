@@ -23,14 +23,8 @@ void main() {
             key: key,
             controller: controller,
             children: [
-              FSelectSection(
-                label: const Text('1st'),
-                children: [FSelectItem.text('A')],
-              ),
-              FSelectSection(
-                label: const Text('2nd'),
-                children: [FSelectItem.text('B')],
-              ),
+              FSelectSection(label: const Text('1st'), children: [FSelectItem.text('A')]),
+              FSelectSection(label: const Text('2nd'), children: [FSelectItem.text('B')]),
             ],
           ),
         ),

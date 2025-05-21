@@ -19,21 +19,9 @@ void main() {
     resizeUpdate = null;
     resizeEnd = null;
 
-    top = FResizableRegionData(
-      index: 0,
-      extent: (min: 10, max: 40, total: 60),
-      offset: (min: 0, max: 25),
-    );
-    middle = FResizableRegionData(
-      index: 1,
-      extent: (min: 10, max: 40, total: 60),
-      offset: (min: 25, max: 40),
-    );
-    bottom = FResizableRegionData(
-      index: 2,
-      extent: (min: 10, max: 40, total: 60),
-      offset: (min: 40, max: 60),
-    );
+    top = FResizableRegionData(index: 0, extent: (min: 10, max: 40, total: 60), offset: (min: 0, max: 25));
+    middle = FResizableRegionData(index: 1, extent: (min: 10, max: 40, total: 60), offset: (min: 25, max: 40));
+    bottom = FResizableRegionData(index: 2, extent: (min: 10, max: 40, total: 60), offset: (min: 40, max: 60));
   });
 
   group('_ResizableController', () {
@@ -48,21 +36,12 @@ void main() {
     });
 
     for (final (i, (offset, topOffsets, middleOffsets, maximized))
-        in [
-          (-100.0, (0, 10), (10, 40), false),
-          (100.0, (0, 30), (30, 40), false),
-        ].indexed) {
+        in [(-100.0, (0, 10), (10, 40), false), (100.0, (0, 30), (30, 40), false)].indexed) {
       test('[$i] update(...) direction', () {
         expect(controller.update(0, 1, offset), maximized);
 
-        expect(controller.regions[0].offset, (
-          min: topOffsets.$1,
-          max: topOffsets.$2,
-        ));
-        expect(controller.regions[1].offset, (
-          min: middleOffsets.$1,
-          max: middleOffsets.$2,
-        ));
+        expect(controller.regions[0].offset, (min: topOffsets.$1, max: topOffsets.$2));
+        expect(controller.regions[1].offset, (min: middleOffsets.$1, max: middleOffsets.$2));
         expect(controller.regions[2].offset, (min: 40, max: 60));
 
         expect(count, 1);
@@ -106,18 +85,9 @@ void main() {
           ..update(0, 1, offset)
           ..update(0, 1, offset);
 
-        expect(controller.regions[0].offset, (
-          min: topOffset.$1,
-          max: topOffset.$2,
-        ));
-        expect(controller.regions[1].offset, (
-          min: middleOffset.$1,
-          max: middleOffset.$2,
-        ));
-        expect(controller.regions[2].offset, (
-          min: bottomOffset.$1,
-          max: bottomOffset.$2,
-        ));
+        expect(controller.regions[0].offset, (min: topOffset.$1, max: topOffset.$2));
+        expect(controller.regions[1].offset, (min: middleOffset.$1, max: middleOffset.$2));
+        expect(controller.regions[2].offset, (min: bottomOffset.$1, max: bottomOffset.$2));
 
         expect(count, anyOf(1, 2));
         expect(resizeUpdate?.associate(by: (e) => e.index).length, length);

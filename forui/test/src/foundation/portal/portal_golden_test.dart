@@ -13,23 +13,13 @@ void main() {
       TestScaffold.app(
         child: FPortal(
           controller: controller,
-          portalBuilder:
-              (context) => const ColoredBox(
-                color: Colors.red,
-                child: SizedBox.square(dimension: 100),
-              ),
-          child: const ColoredBox(
-            color: Colors.yellow,
-            child: SizedBox.square(dimension: 100),
-          ),
+          portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+          child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
         ),
       ),
     );
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('portal/hidden.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/hidden.png'));
   });
 
   testWidgets('shown', (tester) async {
@@ -39,15 +29,8 @@ void main() {
       TestScaffold.app(
         child: FPortal(
           controller: controller,
-          portalBuilder:
-              (context) => const ColoredBox(
-                color: Colors.red,
-                child: SizedBox.square(dimension: 100),
-              ),
-          child: const ColoredBox(
-            color: Colors.yellow,
-            child: SizedBox.square(dimension: 50),
-          ),
+          portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+          child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
         ),
       ),
     );
@@ -55,10 +38,7 @@ void main() {
     controller.show();
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('portal/shown.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shown.png'));
   });
 
   group('constraints', () {
@@ -68,22 +48,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPortal(
-            constraints: const FPortalConstraints.tightFor(
-              width: 25,
-              height: 25,
-            ),
+            constraints: const FPortalConstraints.tightFor(width: 25, height: 25),
             controller: controller,
-            portalBuilder:
-                (context) => const ColoredBox(
-                  color: Colors.red,
-                  child: SizedBox.square(dimension: 100),
-                ),
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: GestureDetector(
               onTap: controller.toggle,
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -92,10 +62,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/fixed-constraints.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/fixed-constraints.png'));
     });
 
     testWidgets('auto-height constraints', (tester) async {
@@ -104,21 +71,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPortal(
-            constraints: const FAutoHeightPortalConstraints.tightFor(
-              width: 100,
-            ),
+            constraints: const FAutoHeightPortalConstraints.tightFor(width: 100),
             controller: controller,
-            portalBuilder:
-                (context) => const ColoredBox(
-                  color: Colors.red,
-                  child: SizedBox.square(dimension: 100),
-                ),
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: GestureDetector(
               onTap: controller.toggle,
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -127,10 +85,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/auto-height-constraints.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/auto-height-constraints.png'));
     });
 
     testWidgets('auto-width constraints', (tester) async {
@@ -139,21 +94,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPortal(
-            constraints: const FAutoWidthPortalConstraints.tightFor(
-              height: 100,
-            ),
+            constraints: const FAutoWidthPortalConstraints.tightFor(height: 100),
             controller: controller,
-            portalBuilder:
-                (context) => const ColoredBox(
-                  color: Colors.red,
-                  child: SizedBox.square(dimension: 100),
-                ),
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: GestureDetector(
               onTap: controller.toggle,
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -162,10 +108,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/auto-width-constraints.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/auto-width-constraints.png'));
     });
   });
 
@@ -178,15 +121,8 @@ void main() {
           child: FPortal(
             controller: controller,
             spacing: const FPortalSpacing(5),
-            portalBuilder:
-                (context) => const ColoredBox(
-                  color: Colors.red,
-                  child: SizedBox.square(dimension: 100),
-                ),
-            child: const ColoredBox(
-              color: Colors.yellow,
-              child: SizedBox.square(dimension: 50),
-            ),
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
         ),
       );
@@ -194,10 +130,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/spacing.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/spacing.png'));
     });
 
     testWidgets('shifted', (tester) async {
@@ -209,15 +142,8 @@ void main() {
             alignment: Alignment.bottomRight,
             child: FPortal(
               controller: controller,
-              portalBuilder:
-                  (context) => const ColoredBox(
-                    color: Colors.red,
-                    child: SizedBox.square(dimension: 100),
-                  ),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -226,10 +152,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/shifted.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted.png'));
     });
 
     testWidgets('offset', (tester) async {
@@ -240,15 +163,8 @@ void main() {
           child: FPortal(
             offset: const Offset(50, 70),
             controller: controller,
-            portalBuilder:
-                (context) => const ColoredBox(
-                  color: Colors.red,
-                  child: SizedBox.square(dimension: 100),
-                ),
-            child: const ColoredBox(
-              color: Colors.yellow,
-              child: SizedBox.square(dimension: 50),
-            ),
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
         ),
       );
@@ -256,10 +172,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/offset.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/offset.png'));
     });
 
     testWidgets('spacing & shifted', (tester) async {
@@ -272,15 +185,8 @@ void main() {
             child: FPortal(
               controller: controller,
               spacing: const FPortalSpacing(5),
-              portalBuilder:
-                  (context) => const ColoredBox(
-                    color: Colors.red,
-                    child: SizedBox.square(dimension: 100),
-                  ),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -289,10 +195,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/spacing-shifted.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/spacing-shifted.png'));
     });
 
     testWidgets('shifted & offset', (tester) async {
@@ -305,15 +208,8 @@ void main() {
             child: FPortal(
               controller: controller,
               offset: const Offset(30, 0),
-              portalBuilder:
-                  (context) => const ColoredBox(
-                    color: Colors.red,
-                    child: SizedBox.square(dimension: 100),
-                  ),
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -322,10 +218,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/shifted-offset.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted-offset.png'));
     });
   });
 
@@ -344,14 +237,8 @@ void main() {
                     controller: controller,
                     spacing: const FPortalSpacing(5),
                     portalBuilder:
-                        (context) => const ColoredBox(
-                          color: Colors.red,
-                          child: SizedBox.square(dimension: 100),
-                        ),
-                    child: const ColoredBox(
-                      color: Colors.yellow,
-                      child: SizedBox.square(dimension: 50),
-                    ),
+                        (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                    child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
               ),
@@ -363,15 +250,10 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/shifted-inside-repaint-boundary.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted-inside-repaint-boundary.png'));
     });
 
-    testWidgets('shifted when wrapped outside repaint boundary', (
-      tester,
-    ) async {
+    testWidgets('shifted when wrapped outside repaint boundary', (tester) async {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
@@ -385,14 +267,8 @@ void main() {
                     controller: controller,
                     spacing: const FPortalSpacing(5),
                     portalBuilder:
-                        (context) => const ColoredBox(
-                          color: Colors.red,
-                          child: SizedBox.square(dimension: 100),
-                        ),
-                    child: const ColoredBox(
-                      color: Colors.yellow,
-                      child: SizedBox.square(dimension: 50),
-                    ),
+                        (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                    child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
               ),
@@ -404,15 +280,10 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/shifted-outside-repaint-boundary.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted-outside-repaint-boundary.png'));
     });
 
-    testWidgets('does not show portal when child is unlinked/not visible', (
-      tester,
-    ) async {
+    testWidgets('does not show portal when child is unlinked/not visible', (tester) async {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
@@ -426,14 +297,8 @@ void main() {
                     controller: controller,
                     spacing: const FPortalSpacing(5),
                     portalBuilder:
-                        (context) => const ColoredBox(
-                          color: Colors.red,
-                          child: SizedBox.square(dimension: 100),
-                        ),
-                    child: const ColoredBox(
-                      color: Colors.yellow,
-                      child: SizedBox.square(dimension: 50),
-                    ),
+                        (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                    child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
               ),
@@ -445,10 +310,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/unlinked.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/unlinked.png'));
     });
 
     testWidgets('portal repositions when child expanded', (tester) async {
@@ -459,11 +321,7 @@ void main() {
           child: FPortal(
             controller: controller,
             spacing: const FPortalSpacing(5),
-            portalBuilder:
-                (context) => const ColoredBox(
-                  color: Colors.red,
-                  child: SizedBox.square(dimension: 100),
-                ),
+            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: const Center(child: Expanding()),
           ),
         ),
@@ -475,10 +333,7 @@ void main() {
       await tester.tap(find.byType(Expanding));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/expanded.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/expanded.png'));
     });
   });
 
@@ -491,9 +346,7 @@ void main() {
           child: Builder(
             builder:
                 (context) => MediaQuery(
-                  data: MediaQuery.of(
-                    context,
-                  ).copyWith(viewPadding: const EdgeInsets.all(100)),
+                  data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: FPortal(
@@ -501,14 +354,8 @@ void main() {
                       childAnchor: Alignment.bottomRight,
                       controller: controller,
                       portalBuilder:
-                          (context) => const ColoredBox(
-                            color: Colors.red,
-                            child: SizedBox.square(dimension: 100),
-                          ),
-                      child: const ColoredBox(
-                        color: Colors.yellow,
-                        child: SizedBox.square(dimension: 50),
-                      ),
+                          (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                      child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                     ),
                   ),
                 ),
@@ -519,10 +366,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/view-padding.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/view-padding.png'));
     });
 
     testWidgets('view insets', (tester) async {
@@ -533,9 +377,7 @@ void main() {
           child: Builder(
             builder:
                 (context) => MediaQuery(
-                  data: MediaQuery.of(
-                    context,
-                  ).copyWith(viewPadding: const EdgeInsets.all(100)),
+                  data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: FPortal(
@@ -544,14 +386,8 @@ void main() {
                       controller: controller,
                       viewInsets: const EdgeInsets.all(50),
                       portalBuilder:
-                          (context) => const ColoredBox(
-                            color: Colors.red,
-                            child: SizedBox.square(dimension: 100),
-                          ),
-                      child: const ColoredBox(
-                        color: Colors.yellow,
-                        child: SizedBox.square(dimension: 50),
-                      ),
+                          (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                      child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                     ),
                   ),
                 ),
@@ -562,10 +398,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/view-insets.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/view-insets.png'));
     });
 
     testWidgets('no view insets', (tester) async {
@@ -576,9 +409,7 @@ void main() {
           child: Builder(
             builder:
                 (context) => MediaQuery(
-                  data: MediaQuery.of(
-                    context,
-                  ).copyWith(viewPadding: const EdgeInsets.all(100)),
+                  data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: FPortal(
@@ -587,14 +418,8 @@ void main() {
                       controller: controller,
                       viewInsets: EdgeInsets.zero,
                       portalBuilder:
-                          (context) => const ColoredBox(
-                            color: Colors.red,
-                            child: SizedBox.square(dimension: 100),
-                          ),
-                      child: const ColoredBox(
-                        color: Colors.yellow,
-                        child: SizedBox.square(dimension: 50),
-                      ),
+                          (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                      child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                     ),
                   ),
                 ),
@@ -605,10 +430,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('portal/no-view-insets.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/no-view-insets.png'));
     });
   });
 }

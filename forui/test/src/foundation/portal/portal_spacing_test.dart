@@ -98,10 +98,7 @@ void main() {
   ]) {
     test(
       'default portal spacing, diagonals - $child -$portal',
-      () => expect(
-        const FPortalSpacing(1, diagonal: true).resolve(child, portal),
-        expected,
-      ),
+      () => expect(const FPortalSpacing(1, diagonal: true).resolve(child, portal), expected),
     );
   }
 

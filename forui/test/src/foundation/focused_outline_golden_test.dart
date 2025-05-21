@@ -28,19 +28,12 @@ void main() {
             theme: theme.data,
             child: FFocusedOutline(
               focused: true,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: theme.data.colors.primary,
-              ),
+              child: Container(width: 100, height: 100, color: theme.data.colors.primary),
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('focused-outline/${theme.name}/focused.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('focused-outline/${theme.name}/focused.png'));
       });
 
       testWidgets('unfocused', (tester) async {
@@ -49,19 +42,12 @@ void main() {
             theme: theme.data,
             child: FFocusedOutline(
               focused: false,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: theme.data.colors.primary,
-              ),
+              child: Container(width: 100, height: 100, color: theme.data.colors.primary),
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('focused-outline/${theme.name}/unfocused.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('focused-outline/${theme.name}/unfocused.png'));
       });
     }
   });

@@ -42,29 +42,15 @@ class FCard extends StatelessWidget {
   /// |  [child]                  |
   /// |---------------------------|
   /// ```
-  FCard({
-    Widget? image,
-    Widget? title,
-    Widget? subtitle,
-    Widget? child,
-    this.style,
-    super.key,
-  }) : child = Content(
-         image: image,
-         title: title,
-         subtitle: subtitle,
-         style: style?.contentStyle,
-         child: child,
-       );
+  FCard({Widget? image, Widget? title, Widget? subtitle, Widget? child, this.style, super.key})
+    : child = Content(image: image, title: title, subtitle: subtitle, style: style?.contentStyle, child: child);
 
   /// Creates a [FCard] with custom content.
   const FCard.raw({required this.child, this.style, super.key});
 
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-    decoration: (style ?? context.theme.cardStyle).decoration,
-    child: child,
-  );
+  Widget build(BuildContext context) =>
+      DecoratedBox(decoration: (style ?? context.theme.cardStyle).decoration, child: child);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -87,25 +73,16 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   FCardStyle({required this.decoration, required this.contentStyle});
 
   /// Creates a [FCardStyle] that inherits its properties.
-  FCardStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         decoration: BoxDecoration(
-           border: Border.all(color: colors.border),
-           borderRadius: style.borderRadius,
-           color: colors.background,
-         ),
-         contentStyle: FCardContentStyle(
-           titleTextStyle: typography.xl2.copyWith(
-             fontWeight: FontWeight.w600,
-             color: colors.foreground,
-             height: 1.5,
-           ),
-           subtitleTextStyle: typography.sm.copyWith(
-             color: colors.mutedForeground,
-           ),
-         ),
-       );
+  FCardStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        decoration: BoxDecoration(
+          border: Border.all(color: colors.border),
+          borderRadius: style.borderRadius,
+          color: colors.background,
+        ),
+        contentStyle: FCardContentStyle(
+          titleTextStyle: typography.xl2.copyWith(fontWeight: FontWeight.w600, color: colors.foreground, height: 1.5),
+          subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
+        ),
+      );
 }

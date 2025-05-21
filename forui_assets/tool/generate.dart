@@ -41,20 +41,20 @@ void main() => generate(parse());
 
 // This script assumes that .dart_tool/lucide-font exists. The archive is manually downloaded and unzipped from
 // https://github.com/lucide-icons/lucide/releases/latest.
-List<(String, String, String)> parse() =>
-    html
-        .parse(File('./.dart_tool/lucide-font/unicode.html').readAsStringSync())
-        .getElementsByClassName('unicode-icon')
-        .map(
-          (element) => (
-            element.getElementsByTagName('h4').single.text.toCamelCase(),
-            element.getElementsByTagName('h4').single.text,
-            element.getElementsByClassName('unicode').single.text.replaceAll('&#', '').replaceAll(';', ''),
-          ),
-        )
-        .toList();
+List<(String, String, String)> parse() => html
+    .parse(File('./.dart_tool/lucide-font/unicode.html').readAsStringSync())
+    .getElementsByClassName('unicode-icon')
+    .map(
+      (element) => (
+        element.getElementsByTagName('h4').single.text.toCamelCase(),
+        element.getElementsByTagName('h4').single.text,
+        element.getElementsByClassName('unicode').single.text.replaceAll('&#', '').replaceAll(';', ''),
+      ),
+    )
+    .toList();
 
-const header = '''
+const header =
+    '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // 
 // **************************************************************************
@@ -68,53 +68,50 @@ const header = '''
 ''';
 
 void generate(List<(String, String, String)> icons) {
-  final library =
-      LibraryBuilder()
-        ..directives.addAll([Directive.import('package:flutter/widgets.dart')])
-        ..body
-        ..comments.addAll([header])
-        ..body.addAll([
-          (ClassBuilder()
-                ..docs.addAll([
-                  '/// The Lucide icons bundled with Forui.',
-                  '/// ',
-                  '/// Use with the [Icon] class to show specific icons. Icons are identified by their name as listed below, e.g. ',
-                  '/// [FIcons.armchair].',
-                  '/// ',
-                  '/// Search and find the perfect icon on the [Lucide Icons](https://lucide.dev/icons/) website.',
-                ])
-                ..annotations.add(refer('staticIconProvider'))
-                ..name = 'FIcons'
-                ..fields.addAll([
-                  for (final icon in icons)
-                    (FieldBuilder()
-                          ..docs.addAll(['/// An [`${icon.$2}`](https://lucide.dev/icons/${icon.$2}) icon.'])
-                          ..static = true
-                          ..modifier = FieldModifier.constant
-                          ..type
-                          ..name = icon.$1
-                          ..assignment =
-                              refer('IconData')
-                                  .newInstance(
-                                    [literalNum(int.parse(icon.$3))],
-                                    {
-                                      'fontFamily': literalString(family),
-                                      'fontPackage': literalString(package),
-                                      if (directional.contains(icon.$2))
-                                        'matchTextDirection': literalTrue,
-                                    },
-                                  )
-                                  .code)
-                        .build(),
-                ])
-                ..constructors.add(
-                  (ConstructorBuilder()
-                        ..name = '_'
-                        ..constant = true)
-                      .build(),
-                ))
-              .build(),
-        ]);
+  final library = LibraryBuilder()
+    ..directives.addAll([Directive.import('package:flutter/widgets.dart')])
+    ..body
+    ..comments.addAll([header])
+    ..body.addAll([
+      (ClassBuilder()
+            ..docs.addAll([
+              '/// The Lucide icons bundled with Forui.',
+              '/// ',
+              '/// Use with the [Icon] class to show specific icons. Icons are identified by their name as listed below, e.g. ',
+              '/// [FIcons.armchair].',
+              '/// ',
+              '/// Search and find the perfect icon on the [Lucide Icons](https://lucide.dev/icons/) website.',
+            ])
+            ..annotations.add(refer('staticIconProvider'))
+            ..name = 'FIcons'
+            ..fields.addAll([
+              for (final icon in icons)
+                (FieldBuilder()
+                      ..docs.addAll(['/// An [`${icon.$2}`](https://lucide.dev/icons/${icon.$2}) icon.'])
+                      ..static = true
+                      ..modifier = FieldModifier.constant
+                      ..type
+                      ..name = icon.$1
+                      ..assignment = refer('IconData')
+                          .newInstance(
+                            [literalNum(int.parse(icon.$3))],
+                            {
+                              'fontFamily': literalString(family),
+                              'fontPackage': literalString(package),
+                              if (directional.contains(icon.$2)) 'matchTextDirection': literalTrue,
+                            },
+                          )
+                          .code)
+                    .build(),
+            ])
+            ..constructors.add(
+              (ConstructorBuilder()
+                    ..name = '_'
+                    ..constant = true)
+                  .build(),
+            ))
+          .build(),
+    ]);
 
   final code = DartFormatter(
     pageWidth: 120,

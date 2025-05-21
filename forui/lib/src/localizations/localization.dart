@@ -34,10 +34,7 @@ const scriptPeriods = ['am', 'kn', 'ko', 'pa', 'th', 'zh_HK', 'zh_TW'];
 /// Localizations for date and time formatting.
 extension FDateTimeLocalizations on FLocalizations {
   /// The first day of the week, in ISO 8601 style, where the first day of the week, i. e. index 1, is Monday.
-  int get firstDayOfWeek =>
-      localeName == ''
-          ? 7
-          : DateFormat.yMMMMd(localeName).dateSymbols.FIRSTDAYOFWEEK + 1;
+  int get firstDayOfWeek => localeName == '' ? 7 : DateFormat.yMMMMd(localeName).dateSymbols.FIRSTDAYOFWEEK + 1;
 
   /// Short names for days of the week, starting with Sunday, e.g. 'Sun'.
   List<String> get shortWeekDays =>
@@ -125,8 +122,7 @@ class FDefaultLocalizations extends FLocalizations {
   String get barrierLabel => 'Barrier';
 
   @override
-  String barrierOnTapHint(String modalRouteContentName) =>
-      'Close $modalRouteContentName';
+  String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
 
   @override
   String get timeFieldHint => 'Pick a time';

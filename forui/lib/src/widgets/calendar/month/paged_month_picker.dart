@@ -52,9 +52,7 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
     setState(() {
       if (focused && focusedDate == null) {
         final currentMonth = widget.today.truncate(to: DateUnit.months);
-        focusedDate = _focusableMonth(
-          widget.initial.year == widget.today.year ? currentMonth : current,
-        );
+        focusedDate = _focusableMonth(widget.initial.year == widget.today.year ? currentMonth : current);
       }
     });
   }
@@ -65,11 +63,7 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
       return preferredMonth;
     }
 
-    for (
-      var newFocus = widget.initial;
-      newFocus < end;
-      newFocus = newFocus.plus(months: 1)
-    ) {
+    for (var newFocus = widget.initial; newFocus < end; newFocus = newFocus.plus(months: 1)) {
       if (widget.selectable(newFocus)) {
         return newFocus;
       }

@@ -68,16 +68,12 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
 
-        await gesture.moveTo(
-          tester.getCenter(find.byType(FSelectTile<int>).first),
-        );
+        await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>).first));
         await tester.pumpAndSettle();
 
         await expectBlueScreen(find.byType(TestScaffold));
@@ -153,9 +149,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'select-tile-group/group/${theme.name}/enabled/$divider.png',
-            ),
+            matchesGoldenFile('select-tile-group/group/${theme.name}/enabled/$divider.png'),
           );
         });
 
@@ -180,16 +174,12 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'select-tile-group/group/${theme.name}/scrollable/$divider.png',
-            ),
+            matchesGoldenFile('select-tile-group/group/${theme.name}/scrollable/$divider.png'),
           );
         });
 
         for (final (index, position) in ['top', 'bottom'].indexed) {
-          testWidgets('hovered - ${theme.name} - $divider - $position', (
-            tester,
-          ) async {
+          testWidgets('hovered - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme.data,
@@ -219,29 +209,21 @@ void main() {
               ),
             );
 
-            final gesture = await tester.createGesture(
-              kind: PointerDeviceKind.mouse,
-            );
+            final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
             await gesture.addPointer(location: Offset.zero);
             addTearDown(gesture.removePointer);
             await tester.pump();
 
-            await gesture.moveTo(
-              tester.getCenter(find.byType(FSelectTile<int>).at(index)),
-            );
+            await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>).at(index)));
             await tester.pumpAndSettle();
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile(
-                'select-tile-group/group/${theme.name}/hovered/$divider-$position.png',
-              ),
+              matchesGoldenFile('select-tile-group/group/${theme.name}/hovered/$divider-$position.png'),
             );
           });
 
-          testWidgets('disabled - ${theme.name} - $divider - $position', (
-            tester,
-          ) async {
+          testWidgets('disabled - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme.data,
@@ -274,9 +256,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile(
-                'select-tile-group/group/${theme.name}/disabled/$divider-$position.png',
-              ),
+              matchesGoldenFile('select-tile-group/group/${theme.name}/disabled/$divider-$position.png'),
             );
           });
         }
@@ -350,11 +330,7 @@ void main() {
             theme: theme.data,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: FSelectTileGroup(
-                selectController: controller,
-                label: const Text('Network'),
-                children: const [],
-              ),
+              child: FSelectTileGroup(selectController: controller, label: const Text('Network'), children: const []),
             ),
           ),
         );
@@ -392,10 +368,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select-tile-group/group/override-style.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/override-style.png'));
     });
 
     testWidgets('tile state overrides group state', (tester) async {
@@ -425,10 +398,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select-tile-group/group/override-state.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/override-state.png'));
     });
   });
 
@@ -442,9 +412,7 @@ void main() {
             maxHeight: 200,
             count: 5,
             label: const Text('Network'),
-            tileBuilder:
-                (context, index) =>
-                    FSelectTile(title: Text('Tile $index'), value: index + 1),
+            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index + 1),
           ),
         ),
       );
@@ -460,17 +428,12 @@ void main() {
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 250,
-            tileBuilder:
-                (context, index) =>
-                    FSelectTile(title: Text('Tile $index'), value: index),
+            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select-tile-group/group/builder/lazy.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-tile-group/group/builder/lazy.png'));
     });
 
     testWidgets('limited by count', (tester) async {
@@ -482,9 +445,7 @@ void main() {
             description: const Text('Description'),
             maxHeight: 500,
             count: 2,
-            tileBuilder:
-                (context, index) =>
-                    FSelectTile(title: Text('Tile $index'), value: index),
+            tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -504,11 +465,7 @@ void main() {
             description: const Text('Description'),
             maxHeight: 500,
             count: 24,
-            tileBuilder:
-                (context, index) =>
-                    index < 2
-                        ? FSelectTile(title: Text('Tile $index'), value: index)
-                        : null,
+            tileBuilder: (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
           ),
         ),
       );

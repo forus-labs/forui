@@ -27,8 +27,7 @@ final class FTime implements Comparable<FTime> {
 
   /// Returns a new [FTime] with the hour and/or minute replaced.
   @useResult
-  FTime copyWith({int? hour, int? minute}) =>
-      FTime(hour ?? this.hour, minute ?? this.minute);
+  FTime copyWith({int? hour, int? minute}) => FTime(hour ?? this.hour, minute ?? this.minute);
 
   /// Returns a [DateTime] with the date part of [date] and the time part of this [FTime].
   @useResult
@@ -58,15 +57,11 @@ final class FTime implements Comparable<FTime> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FTime &&
-          runtimeType == other.runtimeType &&
-          hour == other.hour &&
-          minute == other.minute;
+      other is FTime && runtimeType == other.runtimeType && hour == other.hour && minute == other.minute;
 
   @override
   int get hashCode => hour.hashCode ^ minute.hashCode;
 
   @override
-  String toString() =>
-      '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+  String toString() => '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
 }

@@ -74,17 +74,14 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   @override
   void onPageChange(int page) {
     setState(() {
-      final changed = widget.start
-          .truncate(to: DateUnit.months)
-          .plus(months: page);
+      final changed = widget.start.truncate(to: DateUnit.months).plus(months: page);
       if (current == changed) {
         return;
       }
 
       current = changed;
       widget.onMonthChange?.call(current);
-      if (focusedDate case final focused?
-          when focused.truncate(to: DateUnit.months) == current) {
+      if (focusedDate case final focused? when focused.truncate(to: DateUnit.months) == current) {
         // We have navigated to a new month with the grid focused, but the
         // focused day is not in this month. Choose a new one trying to keep
         // the same day of the month.
@@ -92,9 +89,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
       }
 
       SemanticsService.announce(
-        (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(
-          current.toNative(),
-        ),
+        (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(current.toNative()),
         textDirection,
       );
     });
@@ -105,10 +100,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
     setState(() {
       _gridFocused = focused;
       if (focused && focusedDate == null) {
-        final preferred =
-            widget.today.truncate(to: DateUnit.months) == current
-                ? widget.today.day
-                : 1;
+        final preferred = widget.today.truncate(to: DateUnit.months) == current ? widget.today.day : 1;
         focusedDate = _focusableDayForMonth(current, preferred);
       } else if (!focused) {
         focusedDate = null;
@@ -131,11 +123,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
     }
 
     // Start at the 1st and take the first enabled date.
-    for (
-      var newFocus = month;
-      newFocus.month == month.month;
-      newFocus = newFocus.tomorrow
-    ) {
+    for (var newFocus = month; newFocus.month == month.month; newFocus = newFocus.tomorrow) {
       if (widget.selectable(newFocus)) {
         return newFocus;
       }
@@ -145,8 +133,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   }
 
   @override
-  int delta(LocalDate start, LocalDate end) =>
-      (end.year - start.year) * 12 + end.month - start.month;
+  int delta(LocalDate start, LocalDate end) => (end.year - start.year) * 12 + end.month - start.month;
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {

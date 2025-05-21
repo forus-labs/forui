@@ -54,16 +54,12 @@ void main() {
 
         expect(find.text('tip'), findsOneWidget);
 
-        await tester.pumpAndSettle(
-          kLongPressTimeout + kPressTimeout + duration,
-        );
+        await tester.pumpAndSettle(kLongPressTimeout + kPressTimeout + duration);
 
         expect(find.text('tip'), findsNothing);
       });
 
-      testWidgets('re-long-press shows resets longPressExitDuration', (
-        tester,
-      ) async {
+      testWidgets('re-long-press shows resets longPressExitDuration', (tester) async {
         const duration = Duration(milliseconds: 1000);
 
         await tester.pumpWidget(
@@ -80,19 +76,13 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('tip'), findsOneWidget);
-        await tester.pumpAndSettle(
-          kLongPressTimeout + kPressTimeout + const Duration(milliseconds: 100),
-        );
+        await tester.pumpAndSettle(kLongPressTimeout + kPressTimeout + const Duration(milliseconds: 100));
 
         await tester.longPress(find.byType(FButton));
         await tester.pumpAndSettle();
 
         expect(find.text('tip'), findsOneWidget);
-        await tester.pumpAndSettle(
-          kLongPressTimeout +
-              kPressTimeout +
-              const Duration(milliseconds: 1000),
-        );
+        await tester.pumpAndSettle(kLongPressTimeout + kPressTimeout + const Duration(milliseconds: 1000));
 
         expect(find.text('tip'), findsNothing);
       });
@@ -109,9 +99,7 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -127,9 +115,7 @@ void main() {
         expect(find.text('tip'), findsNothing);
       });
 
-      testWidgets('hover enter and re-enter resets hoverEnterDuration', (
-        tester,
-      ) async {
+      testWidgets('hover enter and re-enter resets hoverEnterDuration', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FTooltip(
@@ -140,9 +126,7 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -163,9 +147,7 @@ void main() {
         expect(find.text('tip'), findsOneWidget);
       });
 
-      testWidgets('hover exit and re-exit resets hoverExitDuration', (
-        tester,
-      ) async {
+      testWidgets('hover exit and re-exit resets hoverExitDuration', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FTooltip(
@@ -177,9 +159,7 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -203,9 +183,7 @@ void main() {
         expect(find.text('tip'), findsNothing);
       });
 
-      testWidgets('tap hides tooltip even if child is GestureDetector', (
-        tester,
-      ) async {
+      testWidgets('tap hides tooltip even if child is GestureDetector', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FTooltip(
@@ -215,9 +193,7 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();

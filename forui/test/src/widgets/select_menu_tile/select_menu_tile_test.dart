@@ -26,10 +26,7 @@ void main() {
             title: const Text('Repeat'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('None'),
-            menu: const [
-              FSelectTile(title: Text('Item 1'), value: 1),
-              FSelectTile(title: Text('Item 2'), value: 2),
-            ],
+            menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
           ),
         ),
       );
@@ -55,10 +52,7 @@ void main() {
             title: const Text('Repeat'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('None'),
-            menu: const [
-              FSelectTile(title: Text('Item 1'), value: 1),
-              FSelectTile(title: Text('Item 2'), value: 2),
-            ],
+            menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
           ),
         ),
       );
@@ -87,10 +81,7 @@ void main() {
             title: const Text('Repeat'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('None'),
-            menu: const [
-              FSelectTile(title: Text('Item 1'), value: 1),
-              FSelectTile(title: Text('Item 2'), value: 2),
-            ],
+            menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
           ),
         ),
       );
@@ -202,9 +193,7 @@ void main() {
 
     testWidgets('update controller', (tester) async {
       final firstController = autoDispose(FMultiValueNotifier<int>());
-      final firstPopoverController = autoDispose(
-        FPopoverController(vsync: tester),
-      );
+      final firstPopoverController = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile<int>(
@@ -224,12 +213,8 @@ void main() {
       expect(firstPopoverController.hasListeners, false);
       expect(firstPopoverController.disposed, false);
 
-      final secondController = autoDispose(
-        FMultiValueNotifier<int>(values: {1}),
-      );
-      final secondPopoverController = autoDispose(
-        FPopoverController(vsync: tester),
-      );
+      final secondController = autoDispose(FMultiValueNotifier<int>(values: {1}));
+      final secondPopoverController = autoDispose(FPopoverController(vsync: tester));
 
       await tester.pumpWidget(
         TestScaffold.app(

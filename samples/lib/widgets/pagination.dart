@@ -45,8 +45,10 @@ class _PaginationPageState extends StatefulSampleState<PaginationPage> {
   }
 
   @override
-  Widget sample(BuildContext context) =>
-      Column(mainAxisAlignment: MainAxisAlignment.center, children: [FPagination(controller: _controller)]);
+  Widget sample(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [FPagination(controller: _controller)],
+  );
 }
 
 @RoutePage()
@@ -167,16 +169,15 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
             child: PageView.builder(
               itemCount: pages,
               controller: controller,
-              itemBuilder:
-                  (context, index) => ColoredBox(
-                    color: index.isEven ? colors.hover(colors.primary) : colors.mutedForeground,
-                    child: Center(
-                      child: DefaultTextStyle(
-                        style: TextStyle(fontSize: 45, color: colors.primaryForeground),
-                        child: Text('Page ${index + 1}'),
-                      ),
-                    ),
+              itemBuilder: (context, index) => ColoredBox(
+                color: index.isEven ? colors.hover(colors.primary) : colors.mutedForeground,
+                child: Center(
+                  child: DefaultTextStyle(
+                    style: TextStyle(fontSize: 45, color: colors.primaryForeground),
+                    child: Text('Page ${index + 1}'),
                   ),
+                ),
+              ),
             ),
           ),
         ),

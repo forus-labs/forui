@@ -78,26 +78,22 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   });
 
   @override
-  RenderPortalLayer createRenderObject(BuildContext context) =>
-      RenderPortalLayer(
-        notifier: notifier,
-        link: link,
-        viewSize: MediaQuery.sizeOf(context),
-        showWhenUnlinked: showWhenUnlinked,
-        portalConstraints: constraints,
-        portalAnchor: portalAnchor,
-        childAnchor: childAnchor,
-        viewInsets: viewInsets,
-        spacing: spacing,
-        shift: shift,
-        offset: offset,
-      );
+  RenderPortalLayer createRenderObject(BuildContext context) => RenderPortalLayer(
+    notifier: notifier,
+    link: link,
+    viewSize: MediaQuery.sizeOf(context),
+    showWhenUnlinked: showWhenUnlinked,
+    portalConstraints: constraints,
+    portalAnchor: portalAnchor,
+    childAnchor: childAnchor,
+    viewInsets: viewInsets,
+    spacing: spacing,
+    shift: shift,
+    offset: offset,
+  );
 
   @override
-  void updateRenderObject(
-    BuildContext context,
-    RenderPortalLayer renderObject,
-  ) =>
+  void updateRenderObject(BuildContext context, RenderPortalLayer renderObject) =>
       renderObject
         ..notifier = notifier
         ..link = link
@@ -183,8 +179,7 @@ class RenderPortalLayer extends RenderProxyBox {
   /// Marks for repaint between frames so that calculations are performed using consistent state.
   /// This was inspired by visibility_detector's implementation:
   /// https://github.com/google/flutter.widgets/blob/494c6abd3de44a92d34c5cbc424db2eefe3915cf/packages/visibility_detector/lib/src/render_visibility_detector.dart#L46
-  void _schedule() =>
-      SchedulerBinding.instance.scheduleTask(markNeedsPaint, Priority.touch);
+  void _schedule() => SchedulerBinding.instance.scheduleTask(markNeedsPaint, Priority.touch);
 
   @override
   void performLayout() {
@@ -192,20 +187,18 @@ class RenderPortalLayer extends RenderProxyBox {
       final size = link.childSize;
       final constraints = switch (portalConstraints) {
         final FixedConstraints constraints => constraints,
-        FAutoHeightPortalConstraints(:final minWidth, :final maxWidth) =>
-          BoxConstraints(
-            minWidth: minWidth,
-            maxWidth: maxWidth,
-            minHeight: size?.height ?? 0,
-            maxHeight: size?.height ?? double.infinity,
-          ),
-        FAutoWidthPortalConstraints(:final minHeight, :final maxHeight) =>
-          BoxConstraints(
-            minWidth: size?.width ?? 0,
-            maxWidth: size?.width ?? double.infinity,
-            minHeight: minHeight,
-            maxHeight: maxHeight,
-          ),
+        FAutoHeightPortalConstraints(:final minWidth, :final maxWidth) => BoxConstraints(
+          minWidth: minWidth,
+          maxWidth: maxWidth,
+          minHeight: size?.height ?? 0,
+          maxHeight: size?.height ?? double.infinity,
+        ),
+        FAutoWidthPortalConstraints(:final minHeight, :final maxHeight) => BoxConstraints(
+          minWidth: size?.width ?? 0,
+          maxWidth: size?.width ?? double.infinity,
+          minHeight: minHeight,
+          maxHeight: maxHeight,
+        ),
       };
 
       child.layout(constraints.normalize(), parentUsesSize: true);
@@ -217,9 +210,7 @@ class RenderPortalLayer extends RenderProxyBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     assert(
-      link.childSize != null ||
-          link.childLayer == null ||
-          childAnchor == Alignment.topLeft,
+      link.childSize != null || link.childLayer == null || childAnchor == Alignment.topLeft,
       '$link: layer is linked to ${link.childLayer} but a valid childSize is not set. '
       'childSize is required when childAnchor is not Alignment.topLeft '
       '(current value is $childAnchor).',
@@ -236,10 +227,7 @@ class RenderPortalLayer extends RenderProxyBox {
               viewSize.height - (viewInsets.top + viewInsets.bottom),
             ),
             (
-              offset: Offset(
-                childOffset.dx - viewInsets.left,
-                childOffset.dy - viewInsets.top,
-              ),
+              offset: Offset(childOffset.dx - viewInsets.left, childOffset.dy - viewInsets.top),
               size: childSize,
               anchor: childAnchor,
             ),
@@ -297,25 +285,20 @@ class RenderPortalLayer extends RenderProxyBox {
   }
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
-      result.addWithPaintTransform(
-        transform: _currentTransform,
-        position: position,
-        hitTest:
-            (result, position) =>
-                super.hitTestChildren(result, position: position),
-      );
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) => result.addWithPaintTransform(
+    transform: _currentTransform,
+    position: position,
+    hitTest: (result, position) => super.hitTestChildren(result, position: position),
+  );
 
   @override
-  void applyPaintTransform(RenderBox child, Matrix4 transform) =>
-      transform.multiply(_currentTransform);
+  void applyPaintTransform(RenderBox child, Matrix4 transform) => transform.multiply(_currentTransform);
 
   /// Return the transform that was used in the last composition phase, if any.
   ///
   /// If the [PortalLayer] has not yet been created, was never composited, or was unable to determine the transform (see
   /// [PortalLayer.getLastTransform]), this returns the identity matrix (see [Matrix4.identity]).
-  Matrix4 get _currentTransform =>
-      layer?.getLastTransform() ?? Matrix4.identity();
+  Matrix4 get _currentTransform => layer?.getLastTransform() ?? Matrix4.identity();
 
   @override
   void detach() {

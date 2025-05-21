@@ -12,24 +12,17 @@ part 'tappable.style.dart';
 extension FTouch on Never {
   /// The platforms that use touch as the primary input. This isn't 100% accurate as there are hybrid devices that use
   /// both touch and keyboard/mouse input, i.e., Windows Surface laptops.
-  static const platforms = {
-    TargetPlatform.android,
-    TargetPlatform.iOS,
-    TargetPlatform.fuchsia,
-  };
+  static const platforms = {TargetPlatform.android, TargetPlatform.iOS, TargetPlatform.fuchsia};
 
   static bool? _primary;
 
   /// True if the current platform uses touch as the primary input.
-  static bool get primary =>
-      _primary ?? platforms.contains(defaultTargetPlatform);
+  static bool get primary => _primary ?? platforms.contains(defaultTargetPlatform);
 
   @visibleForTesting
   static set primary(bool? value) {
     if (!kDebugMode) {
-      throw UnsupportedError(
-        'Setting Touch.primary is only available in debug mode.',
-      );
+      throw UnsupportedError('Setting Touch.primary is only available in debug mode.');
     }
 
     _primary = value;
@@ -41,8 +34,7 @@ extension FTouch on Never {
 /// It is typically used to create other high-level widgets, i.e., [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 class FTappable extends StatefulWidget {
-  static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) =>
-      child!;
+  static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) => child!;
 
   /// The style.
   final FTappableStyle? style;
@@ -160,10 +152,7 @@ class FTappable extends StatefulWidget {
     this.builder = _builder,
     this.child,
     super.key,
-  }) : assert(
-         builder != _builder || child != null,
-         'Either builder or child must be provided.',
-       );
+  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.');
 
   @override
   State<FTappable> createState() => _FTappableState<FTappable>();
@@ -175,13 +164,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(
-        FlagProperty(
-          'excludeSemantics',
-          value: excludeSemantics,
-          ifTrue: 'excludeSemantics',
-        ),
-      )
+      ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
@@ -227,9 +210,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.tappableStyle;
     // TODO: https://github.com/flutter/flutter/issues/167916
-    var tappable = widget.builder(context, {
-      ..._controller.value,
-    }, widget.child);
+    var tappable = widget.builder(context, {..._controller.value}, widget.child);
 
     tappable = _decorate(context, tappable);
     tappable = Semantics(
@@ -268,9 +249,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
               }
 
               await Future.delayed(style.pressedEnterDuration);
-              if (mounted &&
-                  count == _monotonic &&
-                  !_controller.value.contains(WidgetState.pressed)) {
+              if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
                 setState(() => _controller.update(WidgetState.pressed, true));
               }
             },
@@ -281,9 +260,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
               }
 
               await Future.delayed(style.pressedExitDuration);
-              if (mounted &&
-                  count == _monotonic &&
-                  _controller.value.contains(WidgetState.pressed)) {
+              if (mounted && count == _monotonic && _controller.value.contains(WidgetState.pressed)) {
                 setState(() => _controller.update(WidgetState.pressed, false));
               }
             },
@@ -308,15 +285,9 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
     if (widget.onPress case final onPress?) {
       tappable = Shortcuts(
-        shortcuts: const {
-          SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-        },
+        shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
         child: Actions(
-          actions: {
-            ActivateIntent: CallbackAction<ActivateIntent>(
-              onInvoke: (_) => onPress(),
-            ),
-          },
+          actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => onPress())},
           child: tappable,
         ),
       );
@@ -364,8 +335,7 @@ class AnimatedTappable extends FTappable {
 }
 
 @internal
-class AnimatedTappableState extends _FTappableState<AnimatedTappable>
-    with SingleTickerProviderStateMixin {
+class AnimatedTappableState extends _FTappableState<AnimatedTappable> with SingleTickerProviderStateMixin {
   late final AnimationController controller;
   late Animation<double> animation;
   late FTappableStyle style;
@@ -373,12 +343,8 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable>
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 100),
-    );
-    animation = (widget.style?.animationTween ?? Tween(begin: 1.0, end: 0.97))
-        .animate(controller);
+    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
+    animation = (widget.style?.animationTween ?? Tween(begin: 1.0, end: 0.97)).animate(controller);
   }
 
   @override
@@ -399,8 +365,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable>
   }
 
   @override
-  Widget _decorate(BuildContext _, Widget child) =>
-      ScaleTransition(scale: animation, child: child);
+  Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
 
   @override
   void onPointerDown() {

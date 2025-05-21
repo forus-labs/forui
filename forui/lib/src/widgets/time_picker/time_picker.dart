@@ -124,10 +124,7 @@ class _FTimePickerState extends State<FTimePicker> {
   void _update() {
     final locale = FLocalizations.of(context) ?? FDefaultLocalizations();
 
-    format =
-        widget.hour24
-            ? DateFormat.Hm(locale.localeName)
-            : DateFormat.jm(locale.localeName);
+    format = widget.hour24 ? DateFormat.Hm(locale.localeName) : DateFormat.jm(locale.localeName);
     padding = format.pattern!.contains(RegExp('HH|hh')) ? 2 : 0;
 
     // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
@@ -140,9 +137,7 @@ class _FTimePickerState extends State<FTimePicker> {
       ..minuteInterval = widget.minuteInterval;
 
     _controller.picker?.dispose();
-    _controller.picker = FPickerController(
-      initialIndexes: _controller.encode(_controller.value),
-    );
+    _controller.picker = FPickerController(initialIndexes: _controller.encode(_controller.value));
     _controller.picker?.addListener(() => _controller.decode());
   }
 
@@ -202,17 +197,14 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
   });
 
   /// Creates a [FTimePickerStyle] that inherits its properties.
-  FTimePickerStyle.inherit({
-    required FColors colors,
-    required FStyle style,
-    required FTypography typography,
-  }) : this(
-         textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),
-         selectionBorderRadius: style.borderRadius,
-         selectionColor: colors.muted,
-         selectionHeightAdjustment: 5,
-         spacing: 2,
-         focusedOutlineStyle: style.focusedOutlineStyle,
-         padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
-       );
+  FTimePickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
+    : this(
+        textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),
+        selectionBorderRadius: style.borderRadius,
+        selectionColor: colors.muted,
+        selectionHeightAdjustment: 5,
+        spacing: 2,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
+      );
 }

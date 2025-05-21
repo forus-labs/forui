@@ -16,10 +16,7 @@ void main() {
             key: key,
             style: TestScaffold.blueScreen.selectStyle,
             children: [
-              FSelectSection(
-                label: const Text('A'),
-                children: [FSelectItem.text('B')],
-              ),
+              FSelectSection(label: const Text('A'), children: [FSelectItem.text('B')]),
               for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
             ],
           ),
@@ -35,11 +32,7 @@ void main() {
     testWidgets('basic - empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FSelect<String>(
-            key: key,
-            style: TestScaffold.blueScreen.selectStyle,
-            children: const [],
-          ),
+          child: FSelect<String>(key: key, style: TestScaffold.blueScreen.selectStyle, children: const []),
         ),
       );
 
@@ -57,10 +50,7 @@ void main() {
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             children: [
-              FSelectSection(
-                label: const Text('A'),
-                children: [FSelectItem.text('B')],
-              ),
+              FSelectSection(label: const Text('A'), children: [FSelectItem.text('B')]),
               for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
             ],
           ),
@@ -76,11 +66,7 @@ void main() {
     testWidgets('fromMap', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FSelect<int>.fromMap(
-            const {'A': 1, 'B': 2},
-            key: key,
-            style: TestScaffold.blueScreen.selectStyle,
-          ),
+          child: FSelect<int>.fromMap(const {'A': 1, 'B': 2}, key: key, style: TestScaffold.blueScreen.selectStyle),
         ),
       );
 
@@ -98,8 +84,7 @@ void main() {
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             filter: (_) => [],
-            contentBuilder:
-                (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
           ),
         ),
       );
@@ -121,8 +106,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder:
-                (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
           ),
         ),
       );
@@ -147,10 +131,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/from-map.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/from-map.png'));
     });
 
     testWidgets('auto-hide disabled', (tester) async {
@@ -158,11 +139,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
-            key: key,
-            autoHide: false,
-            children: [FSelectItem.text('A'), FSelectItem.text('B')],
-          ),
+          child: FSelect<String>(key: key, autoHide: false, children: [FSelectItem.text('A'), FSelectItem.text('B')]),
         ),
       );
 
@@ -172,10 +149,7 @@ void main() {
       await tester.tap(find.text('B'));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/auto-hide-disabled.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/auto-hide-disabled.png'));
     });
 
     testWidgets('with builder', (tester) async {
@@ -187,11 +161,7 @@ void main() {
             key: key,
             autoHide: false,
             children: [FSelectItem.text('A'), FSelectItem.text('B')],
-            builder:
-                (_, _, child) => DecoratedBox(
-                  decoration: const BoxDecoration(color: Colors.red),
-                  child: child,
-                ),
+            builder: (_, _, child) => DecoratedBox(decoration: const BoxDecoration(color: Colors.red), child: child),
           ),
         ),
       );
@@ -202,10 +172,7 @@ void main() {
       await tester.tap(find.text('B'));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/builder.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/builder.png'));
     });
 
     testWidgets('empty', (tester) async {
@@ -220,10 +187,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/empty.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/empty.png'));
     });
   }
 }

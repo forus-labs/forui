@@ -15,11 +15,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFDateCalendarController();
-            return FCalendar(
-              controller: controller,
-              start: DateTime.utc(1900),
-              end: DateTime.utc(2100),
-            );
+            return FCalendar(controller: controller, start: DateTime.utc(1900), end: DateTime.utc(2100));
           },
         ),
       ),
@@ -38,11 +34,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFDatesCalendarController();
-            return FCalendar(
-              controller: controller,
-              start: DateTime.utc(1900),
-              end: DateTime.utc(2100),
-            );
+            return FCalendar(controller: controller, start: DateTime.utc(1900), end: DateTime.utc(2100));
           },
         ),
       ),
@@ -61,11 +53,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFRangeCalendarController();
-            return FCalendar(
-              controller: controller,
-              start: DateTime.utc(1900),
-              end: DateTime.utc(2100),
-            );
+            return FCalendar(controller: controller, start: DateTime.utc(1900), end: DateTime.utc(2100));
           },
         ),
       ),

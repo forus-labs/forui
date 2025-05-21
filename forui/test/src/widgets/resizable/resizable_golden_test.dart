@@ -66,15 +66,10 @@ void main() {
               ),
             );
 
-            await expectLater(
-              find.byType(FResizable),
-              matchesGoldenFile('resizable/${theme.name}/$axis-$divider.png'),
-            );
+            await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/${theme.name}/$axis-$divider.png'));
           });
 
-          testWidgets('${theme.name} - $axis - $divider - focused', (
-            tester,
-          ) async {
+          testWidgets('${theme.name} - $axis - $divider - focused', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme.data,
@@ -104,10 +99,7 @@ void main() {
               ),
             );
 
-            await expectLater(
-              find.byType(FResizable),
-              matchesGoldenFile('resizable/${theme.name}/$axis-$divider.png'),
-            );
+            await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/${theme.name}/$axis-$divider.png'));
           });
         }
       }
@@ -143,10 +135,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(FResizable),
-          matchesGoldenFile('resizable/expanded-$axis.png'),
-        );
+        await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/expanded-$axis.png'));
       });
     }
   });

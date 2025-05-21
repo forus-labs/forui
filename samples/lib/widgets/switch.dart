@@ -90,8 +90,8 @@ class _FormSwitchState extends StatefulSampleState<FormSwitchPage> {
                         // Save values somewhere.
                       },
                       validator: (value) => null, // No validation required.
-                      builder:
-                          (state) => FSwitch(value: state.value ?? false, onChange: (value) => state.didChange(value)),
+                      builder: (state) =>
+                          FSwitch(value: state.value ?? false, onChange: (value) => state.didChange(value)),
                     ),
                   ],
                 ),
@@ -129,8 +129,8 @@ class _FormSwitchState extends StatefulSampleState<FormSwitchPage> {
                         // Save values somewhere.
                       },
                       validator: (value) => null, // No validation required.
-                      builder:
-                          (state) => FSwitch(value: state.value ?? false, onChange: (value) => state.didChange(value)),
+                      builder: (state) =>
+                          FSwitch(value: state.value ?? false, onChange: (value) => state.didChange(value)),
                     ),
                   ],
                 ),

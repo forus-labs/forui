@@ -15,22 +15,13 @@ const _map = TypeChecker.fromUrl('dart:core#Map');
 
 /// Generates corresponding style mixins that implement several commonly used operations.
 class StyleGenerator extends Generator {
-  final _emitter = DartEmitter(
-    orderDirectives: true,
-    useNullSafetySyntax: true,
-  );
+  final _emitter = DartEmitter(orderDirectives: true, useNullSafetySyntax: true);
 
   @override
-  Future<String?> generate(LibraryReader library, BuildStep step) async =>
-      library.classes
-          .where(
-            (type) =>
-                _style.hasMatch(type.name) &&
-                !type.isSealed &&
-                !type.isAbstract,
-          )
-          .map((type) => _emitter.visitMixin(generateMixin(type)).toString())
-          .join('\n');
+  Future<String?> generate(LibraryReader library, BuildStep step) async => library.classes
+      .where((type) => _style.hasMatch(type.name) && !type.isSealed && !type.isAbstract)
+      .map((type) => _emitter.visitMixin(generateMixin(type)).toString())
+      .join('\n');
 }
 
 /// Generates a mixin for the given [element].
@@ -56,11 +47,7 @@ List<FieldElement> _collectFields(ClassElement element) {
   final fields = <FieldElement>[];
 
   void addFieldsFromType(ClassElement element) {
-    fields.addAll(
-      element.fields.where(
-        (f) => !f.isStatic && (f.getter?.isSynthetic ?? true),
-      ),
-    );
+    fields.addAll(element.fields.where((f) => !f.isStatic && (f.getter?.isSynthetic ?? true)));
     if (element.supertype?.element case final ClassElement supertype) {
       addFieldsFromType(supertype);
     }
@@ -88,15 +75,11 @@ List<Method> getters(List<FieldElement> fields) => fields
 /// Generates a `copyWith` method using the given [element] and [fields].
 @visibleForTesting
 Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
-  final assignments = fields
-      .map((f) => '${f.name}: ${f.name} ?? this.${f.name},')
-      .join();
+  final assignments = fields.map((f) => '${f.name}: ${f.name} ?? this.${f.name},').join();
   return Method(
     (m) => m
       ..returns = refer(element.name)
-      ..docs.addAll([
-        '/// Returns a copy of this [${element.name}] with the given properties replaced.',
-      ])
+      ..docs.addAll(['/// Returns a copy of this [${element.name}] with the given properties replaced.'])
       ..annotations.add(refer('useResult'))
       ..name = 'copyWith'
       ..optionalParameters.addAll([
@@ -119,10 +102,7 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
 
 /// Generates a `debugFillProperties` method using the given [element] and [fields].
 @visibleForTesting
-Method generateDebugFillProperties(
-  ClassElement element,
-  List<FieldElement> fields,
-) {
+Method generateDebugFillProperties(ClassElement element, List<FieldElement> fields) {
   const string = TypeChecker.fromUrl('dart:core#String');
   const int = TypeChecker.fromUrl('dart:core#int');
   const double = TypeChecker.fromUrl('dart:core#double');
@@ -135,26 +115,17 @@ Method generateDebugFillProperties(
   final properties = fields
       .map(
         (field) => switch (field.type) {
-          _ when string.isAssignableFromType(field.type) =>
-            "StringProperty('${field.name}', ${field.name})",
-          _ when int.isAssignableFromType(field.type) =>
-            "IntProperty('${field.name}', ${field.name})",
-          _ when double.isAssignableFromType(field.type) =>
-            "DoubleProperty('${field.name}', ${field.name})",
-          _ when color.isAssignableFromType(field.type) =>
-            "ColorProperty('${field.name}', ${field.name})",
-          _ when iconData.isAssignableFromType(field.type) =>
-            "IconDataProperty('${field.name}', ${field.name})",
-          _ when enumeration.isAssignableFromType(field.type) =>
-            "EnumProperty('${field.name}', ${field.name})",
-          _ when iterable.isAssignableFromType(field.type) =>
-            "IterableProperty('${field.name}', ${field.name})",
+          _ when string.isAssignableFromType(field.type) => "StringProperty('${field.name}', ${field.name})",
+          _ when int.isAssignableFromType(field.type) => "IntProperty('${field.name}', ${field.name})",
+          _ when double.isAssignableFromType(field.type) => "DoubleProperty('${field.name}', ${field.name})",
+          _ when color.isAssignableFromType(field.type) => "ColorProperty('${field.name}', ${field.name})",
+          _ when iconData.isAssignableFromType(field.type) => "IconDataProperty('${field.name}', ${field.name})",
+          _ when enumeration.isAssignableFromType(field.type) => "EnumProperty('${field.name}', ${field.name})",
+          _ when iterable.isAssignableFromType(field.type) => "IterableProperty('${field.name}', ${field.name})",
           _ when bool.isAssignableFromType(field.type) =>
             "FlagProperty('${field.name}', value: ${field.name}, ifTrue: '${field.name}')",
-          _ when field.type.isDartCoreFunction =>
-            "ObjectFlagProperty.has('${field.name}', ${field.name})",
-          _ when field.type is RecordType =>
-            "StringProperty('${field.name}', ${field.name}.toString())",
+          _ when field.type.isDartCoreFunction => "ObjectFlagProperty.has('${field.name}', ${field.name})",
+          _ when field.type is RecordType => "StringProperty('${field.name}', ${field.name}.toString())",
           _ => "DiagnosticsProperty('${field.name}', ${field.name})",
         },
       )
@@ -189,18 +160,13 @@ Method generateDebugFillProperties(
 @visibleForTesting
 Method generateEquals(ClassElement element, List<FieldElement> fields) {
   String generate(FieldElement field) => switch (field.type) {
-    _ when _list.isAssignableFromType(field.type) =>
-      'listEquals(${field.name}, other.${field.name})',
-    _ when _set.isAssignableFromType(field.type) =>
-      'setEquals(${field.name}, other.${field.name})',
-    _ when _map.isAssignableFromType(field.type) =>
-      'mapEquals(${field.name}, other.${field.name})',
+    _ when _list.isAssignableFromType(field.type) => 'listEquals(${field.name}, other.${field.name})',
+    _ when _set.isAssignableFromType(field.type) => 'setEquals(${field.name}, other.${field.name})',
+    _ when _map.isAssignableFromType(field.type) => 'mapEquals(${field.name}, other.${field.name})',
     _ => '${field.name} == other.${field.name}',
   };
 
-  final comparisons = fields.isEmpty
-      ? ''
-      : '&& ${fields.map(generate).join(' && ')}';
+  final comparisons = fields.isEmpty ? '' : '&& ${fields.map(generate).join(' && ')}';
   return Method(
     (m) => m
       ..returns = refer('bool')
@@ -214,9 +180,7 @@ Method generateEquals(ClassElement element, List<FieldElement> fields) {
         ),
       )
       ..lambda = true
-      ..body = Code(
-        'identical(this, other) || (other is ${element.name} $comparisons)',
-      ),
+      ..body = Code('identical(this, other) || (other is ${element.name} $comparisons)'),
   );
 }
 
@@ -224,12 +188,9 @@ Method generateEquals(ClassElement element, List<FieldElement> fields) {
 @visibleForTesting
 Method generateHashCode(ClassElement element, List<FieldElement> fields) {
   String generate(FieldElement field) => switch (field.type) {
-    _ when _list.isAssignableFromType(field.type) =>
-      'const ListEquality().hash(${field.name})',
-    _ when _set.isAssignableFromType(field.type) =>
-      'const SetEquality().hash(${field.name})',
-    _ when _map.isAssignableFromType(field.type) =>
-      'const MapEquality().hash(${field.name})',
+    _ when _list.isAssignableFromType(field.type) => 'const ListEquality().hash(${field.name})',
+    _ when _set.isAssignableFromType(field.type) => 'const SetEquality().hash(${field.name})',
+    _ when _map.isAssignableFromType(field.type) => 'const MapEquality().hash(${field.name})',
     _ => '${field.name}.hashCode',
   };
 

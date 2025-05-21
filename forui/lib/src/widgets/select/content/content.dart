@@ -25,8 +25,7 @@ class SelectContentData<T> extends InheritedWidget {
   });
 
   static SelectContentData<T> of<T>(BuildContext context) {
-    final result =
-        context.dependOnInheritedWidgetOfExactType<SelectContentData<T>>();
+    final result = context.dependOnInheritedWidgetOfExactType<SelectContentData<T>>();
     assert(
       result != null,
       "No SelectContentData found in context. Try explicitly specifying FSelect's type parameter, i.e. FSelect<String>.",
@@ -36,32 +35,16 @@ class SelectContentData<T> extends InheritedWidget {
 
   @override
   bool updateShouldNotify(SelectContentData<T> old) =>
-      style != old.style ||
-      first != old.first ||
-      enabled != old.enabled ||
-      ensureVisible != old.ensureVisible;
+      style != old.style || first != old.first || enabled != old.enabled || ensureVisible != old.ensureVisible;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(
-        FlagProperty(
-          'enabled',
-          value: enabled,
-          ifTrue: 'enabled',
-          ifFalse: 'disabled',
-        ),
-      )
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(FlagProperty('first', value: first, ifTrue: 'first'))
-      ..add(
-        ObjectFlagProperty(
-          'ensureVisible',
-          ensureVisible,
-          ifPresent: 'ensureVisible',
-        ),
-      );
+      ..add(ObjectFlagProperty('ensureVisible', ensureVisible, ifPresent: 'ensureVisible'));
   }
 }
 
@@ -96,21 +79,8 @@ class Content<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('first', value: first, ifTrue: 'first'))
-      ..add(
-        FlagProperty(
-          'enabled',
-          value: enabled,
-          ifTrue: 'enabled',
-          ifFalse: 'disabled',
-        ),
-      )
-      ..add(
-        FlagProperty(
-          'scrollHandles',
-          value: scrollHandles,
-          ifTrue: 'scroll handles',
-        ),
-      )
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(FlagProperty('scrollHandles', value: scrollHandles, ifTrue: 'scroll handles'))
       ..add(DiagnosticsProperty('physics', physics));
   }
 }
@@ -142,8 +112,7 @@ class _ContentState<T> extends State<Content<T>> {
   }
 
   void _updateHandles() {
-    if (_controller.positions.isEmpty ||
-        !_controller.position.hasContentDimensions) {
+    if (_controller.positions.isEmpty || !_controller.position.hasContentDimensions) {
       return;
     }
 
@@ -195,23 +164,13 @@ class _ContentState<T> extends State<Content<T>> {
               return false;
             },
             child: ScrollConfiguration(
-              behavior: ScrollConfiguration.of(
-                context,
-              ).copyWith(scrollbars: false),
+              behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
               child: content,
             ),
           ),
-          if (_up)
-            ScrollHandle.up(
-              controller: _controller,
-              style: widget.style.scrollHandleStyle,
-            ),
+          if (_up) ScrollHandle.up(controller: _controller, style: widget.style.scrollHandleStyle),
 
-          if (_down)
-            ScrollHandle.down(
-              controller: _controller,
-              style: widget.style.scrollHandleStyle,
-            ),
+          if (_down) ScrollHandle.down(controller: _controller, style: widget.style.scrollHandleStyle),
         ],
       );
     }
@@ -223,13 +182,8 @@ class _ContentState<T> extends State<Content<T>> {
     await Scrollable.ensureVisible(context);
     // There is an edge case, when at max scroll extent, the first visible item, if selected, remains partially obscured
     // by the scroll handle.
-    if (widget.scrollHandles &&
-        0 < _controller.offset &&
-        _controller.offset < _controller.position.maxScrollExtent) {
-      _controller.jumpTo(
-        _controller.offset -
-            (widget.style.scrollHandleStyle.iconStyle.size ?? 0),
-      );
+    if (widget.scrollHandles && 0 < _controller.offset && _controller.offset < _controller.position.maxScrollExtent) {
+      _controller.jumpTo(_controller.offset - (widget.style.scrollHandleStyle.iconStyle.size ?? 0));
     }
   }
 
@@ -265,16 +219,9 @@ class FSelectContentStyle with Diagnosticable, _$FSelectContentStyleFunctions {
   });
 
   /// Creates a [FSelectContentStyle] that inherits from the given [FColors], [FStyle], and [FTypography].
-  FSelectContentStyle.inherit({
-    required FColors colors,
-    required FStyle style,
-    required FTypography typography,
-  }) : this(
-         sectionStyle: FSelectSectionStyle.inherit(
-           colors: colors,
-           style: style,
-           typography: typography,
-         ),
-         scrollHandleStyle: FSelectScrollHandleStyle.inherit(colors: colors),
-       );
+  FSelectContentStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
+    : this(
+        sectionStyle: FSelectSectionStyle.inherit(colors: colors, style: style, typography: typography),
+        scrollHandleStyle: FSelectScrollHandleStyle.inherit(colors: colors),
+      );
 }

@@ -205,17 +205,8 @@ void main() {
       });
     });
 
-    for (final (length, expected) in [
-      (-1, false),
-      (0, true),
-      (1, true),
-      (2, true),
-      (3, false),
-    ]) {
-      test(
-        'validate $length',
-        () => expect(controller.validate(length), expected),
-      );
+    for (final (length, expected) in [(-1, false), (0, true), (1, true), (2, true), (3, false)]) {
+      test('validate $length', () => expect(controller.validate(length), expected));
     }
 
     tearDown(() {

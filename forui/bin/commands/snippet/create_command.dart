@@ -24,17 +24,11 @@ class SnippetCreateCommand extends ForuiCommand {
 
   SnippetCreateCommand(this.configuration) {
     argParser
-      ..addFlag(
-        'force',
-        abbr: 'f',
-        help: 'Overwrite existing files if they exist.',
-        negatable: false,
-      )
+      ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
       ..addOption(
         'output',
         abbr: 'o',
-        help:
-            'The output directory or file, relative to the project directory.',
+        help: 'The output directory or file, relative to the project directory.',
         defaultsTo: configuration.snippet,
       );
   }
@@ -59,9 +53,7 @@ class SnippetCreateCommand extends ForuiCommand {
   bool _validate(List<String> arguments, String output) {
     if (arguments.length > 1 && FileSystemEntity.isFileSync(output)) {
       stdout
-        ..writeln(
-          'Cannot use "[snippets]" and output to a file at the same time.',
-        )
+        ..writeln('Cannot use "[snippets]" and output to a file at the same time.')
         ..writeln('Either specify a single snippet or a directory.');
       return false;
     }
@@ -97,9 +89,7 @@ class SnippetCreateCommand extends ForuiCommand {
     }
 
     if (!success) {
-      stdout.writeln(
-        'Run "dart run forui snippet ls" to see all code snippets.',
-      );
+      stdout.writeln('Run "dart run forui snippet ls" to see all code snippets.');
     }
 
     return success;
@@ -168,9 +158,7 @@ class SnippetCreateCommand extends ForuiCommand {
         case 'n' || 'N':
           exit(0);
         default:
-          stdout.writeln(
-            'Invalid option. Please enter enter either "y" or "n".',
-          );
+          stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
       }
     }
   }

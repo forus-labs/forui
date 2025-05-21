@@ -74,10 +74,7 @@ class FAlert extends StatelessWidget {
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8),
-                    child: DefaultTextStyle.merge(
-                      style: style.titleTextStyle,
-                      child: title,
-                    ),
+                    child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
                   ),
                 ),
               ],
@@ -89,10 +86,7 @@ class FAlert extends StatelessWidget {
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 3, left: 8),
-                      child: DefaultTextStyle.merge(
-                        style: style.subtitleTextStyle,
-                        child: subtitle,
-                      ),
+                      child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
                     ),
                   ),
                 ],
@@ -124,40 +118,29 @@ class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
   const FAlertStyles({required this.primary, required this.destructive});
 
   /// Creates a [FAlertStyles] that inherits its properties.
-  FAlertStyles.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         primary: FAlertStyle(
-           iconStyle: IconThemeData(color: colors.foreground, size: 20),
-           titleTextStyle: typography.base.copyWith(
-             fontWeight: FontWeight.w500,
-             color: colors.foreground,
-             height: 1.2,
-           ),
-           subtitleTextStyle: typography.sm.copyWith(color: colors.foreground),
-           decoration: BoxDecoration(
-             border: Border.all(color: colors.border),
-             borderRadius: style.borderRadius,
-             color: colors.background,
-           ),
-         ),
-         destructive: FAlertStyle(
-           iconStyle: IconThemeData(color: colors.destructive, size: 20),
-           titleTextStyle: typography.base.copyWith(
-             fontWeight: FontWeight.w500,
-             color: colors.destructive,
-             height: 1.2,
-           ),
-           subtitleTextStyle: typography.sm.copyWith(color: colors.destructive),
-           decoration: BoxDecoration(
-             border: Border.all(color: colors.destructive),
-             borderRadius: style.borderRadius,
-             color: colors.background,
-           ),
-         ),
-       );
+  FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        primary: FAlertStyle(
+          iconStyle: IconThemeData(color: colors.foreground, size: 20),
+          titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground, height: 1.2),
+          subtitleTextStyle: typography.sm.copyWith(color: colors.foreground),
+          decoration: BoxDecoration(
+            border: Border.all(color: colors.border),
+            borderRadius: style.borderRadius,
+            color: colors.background,
+          ),
+        ),
+        destructive: FAlertStyle(
+          iconStyle: IconThemeData(color: colors.destructive, size: 20),
+          titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.destructive, height: 1.2),
+          subtitleTextStyle: typography.sm.copyWith(color: colors.destructive),
+          decoration: BoxDecoration(
+            border: Border.all(color: colors.destructive),
+            borderRadius: style.borderRadius,
+            color: colors.background,
+          ),
+        ),
+      );
 }
 
 /// A [FAlert]'s style.
@@ -171,8 +154,7 @@ enum Variant implements FBaseAlertStyle { primary, destructive }
 /// A custom [FAlert] style.
 ///
 /// The pre-defined styles are a convenient shorthand for the various [FAlertStyle]s in the current context.
-final class FAlertStyle extends FBaseAlertStyle
-    with Diagnosticable, _$FAlertStyleFunctions {
+final class FAlertStyle extends FBaseAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
   /// The alert's primary style.
   ///
   /// Shorthand for the current context's [FAlertStyle.primary] style.

@@ -24,25 +24,14 @@ class CompositedChild extends SingleChildRenderObjectWidget {
   /// The link object that connects this [CompositedChild] with one or more [CompositedPortal]s.
   final ChildLayerLink link;
 
-  const CompositedChild({
-    required this.notifier,
-    required this.link,
-    super.key,
-    super.child,
-  });
+  const CompositedChild({required this.notifier, required this.link, super.key, super.child});
 
   @override
-  RenderChildLayer createRenderObject(BuildContext context) => RenderChildLayer(
-    notifier: notifier,
-    link: link,
-    viewSize: MediaQuery.sizeOf(context),
-  );
+  RenderChildLayer createRenderObject(BuildContext context) =>
+      RenderChildLayer(notifier: notifier, link: link, viewSize: MediaQuery.sizeOf(context));
 
   @override
-  void updateRenderObject(
-    BuildContext context,
-    RenderChildLayer renderObject,
-  ) =>
+  void updateRenderObject(BuildContext context, RenderChildLayer renderObject) =>
       renderObject
         ..notifier = notifier
         ..link = link
@@ -100,11 +89,7 @@ class RenderChildLayer extends RenderProxyBox {
     }
 
     if (layer == null) {
-      layer = ChildLayer(
-        link: link,
-        globalOffset: globalOffset,
-        localOffset: offset,
-      );
+      layer = ChildLayer(link: link, globalOffset: globalOffset, localOffset: offset);
     } else {
       layer! as ChildLayer
         ..link = link

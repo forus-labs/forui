@@ -15,34 +15,22 @@ import 'main.dart';
 /// A constructor's code fragment.
 class ConstructorFragment {
   /// Maps a matching constructor to a code fragment.
-  static Map<String, ConstructorFragment> inline(
-    RegExp pattern,
-    Map<String, ConstructorMatch> matches,
-  ) => {
+  static Map<String, ConstructorFragment> inline(RegExp pattern, Map<String, ConstructorMatch> matches) => {
     for (final MapEntry(:key, value: match) in matches.entries)
       key: ConstructorFragment(
         root: match.root,
         type: key,
         closure: _closure(key, matches),
         source: formatter.format(switch (match.constructor) {
-          final constructor when constructor.factoryKeyword != null => _factory(
-            key,
-            pattern,
-            match,
-          ),
-          final constructor
-              when constructor.initializers.singleOrNull
-                  is RedirectingConstructorInvocation =>
+          final constructor when constructor.factoryKeyword != null => _factory(key, pattern, match),
+          final constructor when constructor.initializers.singleOrNull is RedirectingConstructorInvocation =>
             _redirecting(key, pattern, match),
           _ => _initializers(key, pattern, match),
         }),
       ),
   };
 
-  static List<String> _closure(
-    String key,
-    Map<String, ConstructorMatch> matches,
-  ) {
+  static List<String> _closure(String key, Map<String, ConstructorMatch> matches) {
     final elements = <String>[];
 
     void dfs(String element) {
@@ -66,10 +54,7 @@ class ConstructorFragment {
   static String _factory(String type, RegExp pattern, ConstructorMatch match) {
     var source = match.constructor
         .toSource()
-        .replaceAll(
-          'factory $type.inherit',
-          '$type ${type.substring(1).toCamelCase()}',
-        )
+        .replaceAll('factory $type.inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
 
     final visitor = _ConstructorInvocationVisitor(type);
@@ -79,17 +64,10 @@ class ConstructorFragment {
       // Finds all optional named parameters that are not given in the invocation.
       final constructor = invocation.constructorName.element!;
       final given =
-          invocation.argumentList.arguments
-              .whereType<NamedExpression>()
-              .map((p) => p.name.label.name)
-              .toSet();
+          invocation.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
       final additional = [
-        for (final p in constructor.formalParameters.where(
-          (p) => p.isOptionalNamed && !given.contains(p.name3),
-        ))
-          if (p.defaultValueCode case final defaultValue?
-              when defaultValue.isNotEmpty)
-            '${p.name3}: $defaultValue',
+        for (final p in constructor.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name3)))
+          if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name3}: $defaultValue',
       ];
 
       final creationSource = invocation.toSource();
@@ -109,33 +87,18 @@ class ConstructorFragment {
     return source;
   }
 
-  static String _redirecting(
-    String type,
-    RegExp pattern,
-    ConstructorMatch metadata,
-  ) {
+  static String _redirecting(String type, RegExp pattern, ConstructorMatch metadata) {
     var source = metadata.constructor
         .toSource()
         .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAll(' : this', ' => $type');
 
     // Finds all optional named parameters that are not given in the constructor.
-    final to =
-        metadata.constructor.initializers
-            .whereType<RedirectingConstructorInvocation>()
-            .single;
-    final given =
-        to.argumentList.arguments
-            .whereType<NamedExpression>()
-            .map((p) => p.name.label.name)
-            .toSet();
+    final to = metadata.constructor.initializers.whereType<RedirectingConstructorInvocation>().single;
+    final given = to.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
     final additional = [
-      for (final p in to.element!.formalParameters.where(
-        (p) => p.isOptionalNamed && !given.contains(p.name3),
-      ))
-        if (p.defaultValueCode case final defaultValue?
-            when defaultValue.isNotEmpty)
-          '${p.name3}: $defaultValue',
+      for (final p in to.element!.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name3)))
+        if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name3}: $defaultValue',
     ];
 
     final closingParenthesis = source.lastIndexOf(')');
@@ -147,21 +110,12 @@ class ConstructorFragment {
           source.substring(closingParenthesis);
     }
 
-    return source.replaceAllMapped(
-      pattern,
-      (m) => '_${m.group(1)!.toCamelCase()}',
-    );
+    return source.replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
   }
 
-  static String _initializers(
-    String type,
-    RegExp pattern,
-    ConstructorMatch match,
-  ) {
+  static String _initializers(String type, RegExp pattern, ConstructorMatch match) {
     if (match.constructor.body.toSource() != ';') {
-      throw UnsupportedError(
-        'Constructor bodies are not supported: ${match.constructor.toSource()}',
-      );
+      throw UnsupportedError('Constructor bodies are not supported: ${match.constructor.toSource()}');
     }
 
     // Unlike factory & redirecting constructors, creating a type using an initializer list implies that there are no
@@ -175,15 +129,13 @@ class ConstructorFragment {
       parameters.add('${parameter.name!.lexeme}: ${parameter.name!.lexeme},');
 
       if (parameter case final DefaultFormalParameter superParameter) {
-        if (superParameter.parameter
-            case final SuperFormalParameter superParameter) {
+        if (superParameter.parameter case final SuperFormalParameter superParameter) {
           abort = true;
           constructorParameters = constructorParameters.replaceAll(
             'super.${parameter.name!.lexeme}',
             '${superParameter.declaredElement?.type} ${parameter.name!.lexeme}',
           );
-        } else if (parameter.parameter
-            case final FieldFormalParameter parameter) {
+        } else if (parameter.parameter case final FieldFormalParameter parameter) {
           constructorParameters = constructorParameters.replaceAll(
             'this.${parameter.name.lexeme}',
             '${parameter.declaredElement?.type} ${parameter.name.lexeme}',
@@ -205,10 +157,7 @@ class ConstructorFragment {
 
     final arguments = match.constructor.initializers
         .whereType<ConstructorFieldInitializer>()
-        .map(
-          (initializer) =>
-              '${initializer.fieldName}: ${initializer.expression.toSource()},',
-        )
+        .map((initializer) => '${initializer.fieldName}: ${initializer.expression.toSource()},')
         .toList()
         .join()
         .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
@@ -221,12 +170,7 @@ class ConstructorFragment {
   final List<String> closure;
   final String source;
 
-  ConstructorFragment({
-    required this.root,
-    required this.type,
-    required this.closure,
-    required this.source,
-  });
+  ConstructorFragment({required this.root, required this.type, required this.closure, required this.source});
 }
 
 /// Visitor that all constructor invocations of a given type.
@@ -263,8 +207,7 @@ class ConstructorMatch {
 
     final visitor = _Visitor(type, constructor, roots);
     for (final file in files) {
-      if (await collection.contextFor(file).currentSession.getResolvedUnit(file)
-          case final ResolvedUnitResult result) {
+      if (await collection.contextFor(file).currentSession.getResolvedUnit(file) case final ResolvedUnitResult result) {
         result.unit.accept(visitor);
       }
     }
@@ -318,9 +261,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
     // * Factory constructors
     // * Field initializers
     // * Redirecting constructors
-    final nested =
-        matches[_class!.name.lexeme]!.nested
-          ..addAll(_match(constructor.body.toSource()));
+    final nested = matches[_class!.name.lexeme]!.nested..addAll(_match(constructor.body.toSource()));
     for (final initializer in constructor.initializers) {
       nested.addAll(_match(initializer.toSource()));
     }
@@ -329,15 +270,10 @@ class _Visitor extends RecursiveAstVisitor<void> {
   }
 
   @override
-  void visitRedirectingConstructorInvocation(
-    RedirectingConstructorInvocation invocation,
-  ) {
+  void visitRedirectingConstructorInvocation(RedirectingConstructorInvocation invocation) {
     // TODO: It will be nice to check for, and fail if there are external/private method invocations.
-    matches[_class!.name.lexeme]!.nested.addAll(
-      _match(invocation.argumentList.toSource()),
-    );
+    matches[_class!.name.lexeme]!.nested.addAll(_match(invocation.argumentList.toSource()));
   }
 
-  Set<String> _match(String source) =>
-      _constructor.allMatches(source).map((m) => m.group(1)!).toSet();
+  Set<String> _match(String source) => _constructor.allMatches(source).map((m) => m.group(1)!).toSet();
 }

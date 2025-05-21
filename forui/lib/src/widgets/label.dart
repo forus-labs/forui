@@ -143,11 +143,7 @@ class _FHorizontalLabel extends StatelessWidget {
         children: [
           TableCell(child: Padding(padding: style.childPadding, child: child)),
           if (label != null)
-            _buildCell(
-              padding: style.labelPadding,
-              textStyle: style.labelTextStyle.resolve(states),
-              child: label,
-            )
+            _buildCell(padding: style.labelPadding, textStyle: style.labelTextStyle.resolve(states), child: label)
           else
             _buildCell(
               padding: style.descriptionPadding,
@@ -174,10 +170,7 @@ class _FHorizontalLabel extends StatelessWidget {
             TableCell(
               child: Padding(
                 padding: style.errorPadding,
-                child: DefaultTextStyle(
-                  style: style.errorTextStyle,
-                  child: error!,
-                ),
+                child: DefaultTextStyle(style: style.errorTextStyle, child: error!),
               ),
             ),
           ],
@@ -185,21 +178,12 @@ class _FHorizontalLabel extends StatelessWidget {
     ],
   );
 
-  Widget _buildCell({
-    required EdgeInsetsGeometry padding,
-    required TextStyle textStyle,
-    Widget? child,
-  }) {
+  Widget _buildCell({required EdgeInsetsGeometry padding, required TextStyle textStyle, Widget? child}) {
     if (child == null) {
       return const TableCell(child: SizedBox());
     }
 
-    return TableCell(
-      child: Padding(
-        padding: padding,
-        child: DefaultTextStyle(style: textStyle, child: child),
-      ),
-    );
+    return TableCell(child: Padding(padding: padding, child: DefaultTextStyle(style: textStyle, child: child)));
   }
 
   @override
@@ -238,9 +222,7 @@ class _FVerticalLabel extends StatelessWidget {
           padding: style.labelPadding,
           child: DefaultTextStyle(
             style: style.labelTextStyle.resolve(states),
-            textHeightBehavior: const TextHeightBehavior(
-              applyHeightToFirstAscent: false,
-            ),
+            textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
             child: label!,
           ),
         ),
@@ -250,9 +232,7 @@ class _FVerticalLabel extends StatelessWidget {
           padding: style.descriptionPadding,
           child: DefaultTextStyle(
             style: style.descriptionTextStyle.resolve(states),
-            textHeightBehavior: const TextHeightBehavior(
-              applyHeightToFirstAscent: false,
-            ),
+            textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
             child: description!,
           ),
         ),
@@ -261,9 +241,7 @@ class _FVerticalLabel extends StatelessWidget {
           padding: style.errorPadding,
           child: DefaultTextStyle(
             style: style.errorTextStyle,
-            textHeightBehavior: const TextHeightBehavior(
-              applyHeightToFirstAscent: false,
-            ),
+            textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
             child: error!,
           ),
         ),
@@ -290,10 +268,7 @@ class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
   final FLabelStyle verticalStyle;
 
   /// Creates a [FLabelStyles].
-  const FLabelStyles({
-    required this.horizontalStyle,
-    required this.verticalStyle,
-  });
+  const FLabelStyles({required this.horizontalStyle, required this.verticalStyle});
 
   /// Creates a [FLabelStyles] that inherits its properties.
   FLabelStyles.inherit({required FStyle style})

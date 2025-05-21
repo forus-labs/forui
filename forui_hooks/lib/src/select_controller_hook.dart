@@ -43,17 +43,11 @@ class _SelectHook<T> extends Hook<FSelectController<T>> {
     properties
       ..add(DiagnosticsProperty('vsync', vsync))
       ..add(DiagnosticsProperty('value', value))
-      ..add(
-        DiagnosticsProperty(
-          'popoverAnimationDuration',
-          popoverAnimationDuration,
-        ),
-      );
+      ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
   }
 }
 
-class _SelectHookState<T>
-    extends HookState<FSelectController<T>, _SelectHook<T>> {
+class _SelectHookState<T> extends HookState<FSelectController<T>, _SelectHook<T>> {
   late final FSelectController<T> _controller = FSelectController<T>(
     vsync: hook.vsync,
     value: hook.value,
