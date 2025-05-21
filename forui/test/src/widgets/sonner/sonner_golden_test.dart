@@ -330,9 +330,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSonner(
-            child: Center(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
-            ),
+            child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')])),
           ),
         ),
       );
@@ -361,9 +359,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FSonner(
-            child: Center(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
-            ),
+            child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')])),
           ),
         ),
       );
@@ -389,9 +385,7 @@ void main() {
         TestScaffold(
           child: FSonner(
             style: FThemes.zinc.light.sonnerStyle.copyWith(expandable: false),
-            child: Center(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
-            ),
+            child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')])),
           ),
         ),
       );
@@ -419,9 +413,7 @@ void main() {
         TestScaffold(
           child: FSonner(
             style: FThemes.zinc.light.sonnerStyle.copyWith(expandable: false),
-            child: Center(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
-            ),
+            child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')])),
           ),
         ),
       );

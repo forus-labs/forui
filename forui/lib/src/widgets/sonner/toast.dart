@@ -30,6 +30,9 @@ class Toast extends StatefulWidget {
   /// The expansion animation, between `[0, 1]`.
   final double expand;
 
+  /// True if the toast is visible.
+  final bool visible;
+
   /// A value that indicates whether the toast is dismissing.
   final ValueListenable<bool> dismissing;
 
@@ -46,6 +49,7 @@ class Toast extends StatefulWidget {
     required this.length,
     required this.duration,
     required this.expand,
+    required this.visible,
     required this.dismissing,
     required this.onDismiss,
     required this.child,
@@ -65,6 +69,7 @@ class Toast extends StatefulWidget {
       ..add(IntProperty('length', length))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(PercentProperty('expand', expand))
+      ..add(FlagProperty('visible', value: visible, ifTrue: 'visible'))
       ..add(DiagnosticsProperty('dismissing', dismissing))
       ..add(ObjectFlagProperty.has('onDismiss', onDismiss));
   }
@@ -76,6 +81,8 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
   late Animation<double> _entranceExit;
   late final AnimationController _transitionController;
   late Animation<double> _transition;
+  late final AnimationController _visibleController;
+  late Animation<double> _visible;
 
   int _signal = 0; // Used to signal to [RenderAnimatedToaster] that a toast has been updated.
 
@@ -87,9 +94,9 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
     _entranceExitController =
         AnimationController(vsync: this, duration: widget.style.enterExitDuration)
+          ..forward()
           ..addListener(() => setState(() {}))
-          ..addStatusListener(_dismiss)
-          ..forward();
+          ..addStatusListener(_dismiss);
     _entranceExit = CurvedAnimation(
       parent: _entranceExitController,
       curve: widget.style.enterCurve,
@@ -98,10 +105,16 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
     _transitionController =
         AnimationController(vsync: this, duration: widget.style.transitionDuration)
-          ..addListener(() => setState(() {}))
-          ..forward();
+          ..forward()
+          ..addListener(() => setState(() {}));
     _transition = CurvedAnimation(parent: _transitionController, curve: widget.style.transitionCurve);
     _transitionController.forward();
+
+    _visibleController =
+        AnimationController(vsync: this, duration: widget.style.transitionDuration)
+          ..value = widget.visible ? 1 : 0
+          ..addListener(() => setState(() {}));
+    _visible = CurvedAnimation(parent: _visibleController, curve: widget.style.transitionCurve);
   }
 
   @override
@@ -140,6 +153,10 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
         _resume(Duration(milliseconds: (widget.length - widget.index - 1) * 300));
       }
     }
+
+    if (widget.visible != old.visible) {
+      widget.visible ? _visibleController.forward() : _visibleController.reverse();
+    }
   }
 
   void _dismissing() => _entranceExitController.reverse();
@@ -170,18 +187,24 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     final entranceExit = -widget.alignTransform * (1.0 - _entranceExit.value);
 
     // Gradually increase & decrease opacity during entrance & exit.
-    final opacity = lerpDouble(widget.style.entranceExitOpacity, 1.0, _entranceExit.value)!;
+    final opacity = lerpDouble(widget.style.entranceExitOpacity, 1.0, _entranceExit.value)! * _visible.value;
 
     return AnimatedToast(
       index: widget.index,
       transition: _transition.value,
       signal: _signal,
-      child: ConstrainedBox(
-        constraints: widget.style.constraints,
-        child: MouseRegion(
-          onEnter: (_) => _timer.cancel(),
-          onExit: (_) => _resume(),
-          child: FractionalTranslation(translation: entranceExit, child: Opacity(opacity: opacity, child: widget.child)),
+      child: IgnorePointer(
+        ignoring: !widget.visible,
+        child: ConstrainedBox(
+          constraints: widget.style.constraints,
+          child: MouseRegion(
+            onEnter: (_) => _timer.cancel(),
+            onExit: (_) => _resume(),
+            child: FractionalTranslation(
+              translation: entranceExit,
+              child: Opacity(opacity: opacity, child: widget.child),
+            ),
+          ),
         ),
       ),
     );

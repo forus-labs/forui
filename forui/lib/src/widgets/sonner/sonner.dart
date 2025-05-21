@@ -145,14 +145,8 @@ class FSonnerState extends State<FSonner> {
 
     final FSonnerAlignment(:_alignment, :_toastAlignment) = alignment;
     final resolved = _alignment.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
-    final style = widget.style ?? context.theme.sonnerStyle;
-
     setState(() {
       final (_, entries) = _entries[resolved] ??= (_toastAlignment, []);
-      if (style.max <= entries.whereNot((e) => e.dismissing.value).length) {
-        entries.reversed.lastWhereOrNull((e) => !e.dismissing.value)?.dismissing.value = true;
-      }
-
       entries.add(entry);
     });
   }
@@ -174,20 +168,6 @@ class FSonnerState extends State<FSonner> {
 
     final children = [widget.child];
     for (final MapEntry(key: alignment, value: (toastAlignment, entries)) in _entries.entries) {
-      final toasts = <ToastEntry>[];
-
-      var count = 0;
-      for (final entry in entries) {
-        if (style.max <= count) {
-          break;
-        }
-
-        toasts.insert(0, entry);
-        if (!entry.dismissing.value) {
-          count++;
-        }
-      }
-
       children.add(
         Positioned.fill(
           child: SafeArea(
@@ -199,7 +179,7 @@ class FSonnerState extends State<FSonner> {
                   expandedAlignTransform: Offset(alignment.x, alignment.y),
                   collapsedAlignTransform: Offset(toastAlignment.x, toastAlignment.y),
                   style: style,
-                  entries: toasts,
+                  entries: entries,
                 ),
               ),
             ),

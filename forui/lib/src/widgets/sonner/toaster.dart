@@ -78,7 +78,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
       collapsedAlignTransform: widget.collapsedAlignTransform,
       expand: _expand.value,
       children: [
-        for (final (index, entry) in widget.entries.reversed.indexed)
+        for (final (index, entry) in widget.entries.indexed)
           Toast(
             key: entry.key,
             style: entry.style ?? widget.style.toastStyle,
@@ -87,6 +87,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
             length: widget.entries.length,
             duration: entry.duration,
             expand: _expand.value,
+            visible: (widget.entries.length - 1 - index) < (widget.style.max),
             dismissing: entry.dismissing,
             onDismiss: entry.onDismiss!,
             child: entry.builder(context, entry),
