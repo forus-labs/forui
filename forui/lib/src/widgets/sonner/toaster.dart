@@ -13,10 +13,17 @@ import 'package:meta/meta.dart';
 @internal
 class Toaster extends StatefulWidget {
   final FSonnerStyle style;
-  final Offset alignTransform;
+  final Offset expandedAlignTransform;
+  final Offset collapsedAlignTransform;
   final List<ToastEntry> entries;
 
-  const Toaster({required this.style, required this.alignTransform, required this.entries, super.key});
+  const Toaster({
+    required this.style,
+    required this.expandedAlignTransform,
+    required this.collapsedAlignTransform,
+    required this.entries,
+    super.key,
+  });
 
   @override
   State<Toaster> createState() => _ToasterState();
@@ -26,7 +33,8 @@ class Toaster extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('alignTransform', alignTransform))
+      ..add(DiagnosticsProperty('expandedAlignTransform', expandedAlignTransform))
+      ..add(DiagnosticsProperty('collapsedAlignTransform', collapsedAlignTransform))
       ..add(IterableProperty('entries', entries));
   }
 }
@@ -66,14 +74,15 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     Widget toaster = AnimatedToaster(
       style: widget.style,
-      alignTransform: widget.alignTransform,
+      expandedAlignTransform: widget.expandedAlignTransform,
+      collapsedAlignTransform: widget.collapsedAlignTransform,
       expand: _expand.value,
       children: [
         for (final (index, entry) in widget.entries.reversed.indexed)
           Toast(
             key: entry.key,
             style: entry.style ?? widget.style.toastStyle,
-            alignTransform: widget.alignTransform,
+            alignTransform: widget.collapsedAlignTransform,
             index: widget.entries.length - 1 - index,
             length: widget.entries.length,
             duration: entry.duration,

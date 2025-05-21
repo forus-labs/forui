@@ -196,7 +196,8 @@ class FSonnerState extends State<FSonner> {
               child: Align(
                 alignment: alignment,
                 child: Toaster(
-                  alignTransform: Offset(toastAlignment.x, toastAlignment.y),
+                  expandedAlignTransform: Offset(alignment.x, alignment.y),
+                  collapsedAlignTransform: Offset(toastAlignment.x, toastAlignment.y),
                   style: style,
                   entries: toasts,
                 ),

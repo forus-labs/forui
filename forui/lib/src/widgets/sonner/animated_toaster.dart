@@ -14,32 +14,43 @@ class AnimatedToaster extends MultiChildRenderObjectWidget {
   /// Tje sonner's style.
   final FSonnerStyle style;
 
+  /// A unit vector indicating how a toasts should be aligned to the front-most toast when expanded
+  ///
+  /// For example, `Offset(1, 0)` indicates that all toasts ahould be aligned to the right edge.
+  final Offset expandedAlignTransform;
+
   /// A unit vector indicating how a toast's protrusion should be aligned to the toast in front of it.
   ///
   /// For example, `Offset(0, -1)` indicates that the top-center of this toast's protrusion should be aligned to the
   /// top-center of the toast in front of it.
-  final Offset alignTransform;
+  final Offset collapsedAlignTransform;
 
   /// The expansion's animation value between `[0, 1]`.
   final double expand;
 
   const AnimatedToaster({
     required this.style,
-    required this.alignTransform,
+    required this.expandedAlignTransform,
+    required this.collapsedAlignTransform,
     required this.expand,
     super.children,
     super.key,
   });
 
   @override
-  RenderObject createRenderObject(BuildContext context) =>
-      RenderAnimatedToaster(style: style, alignTransform: alignTransform, expand: expand);
+  RenderObject createRenderObject(BuildContext context) => RenderAnimatedToaster(
+    style: style,
+    expandedAlignTransform: expandedAlignTransform,
+    collapsedAlignTransform: collapsedAlignTransform,
+    expand: expand,
+  );
 
   @override
   void updateRenderObject(BuildContext context, covariant RenderAnimatedToaster renderObject) =>
       renderObject
         ..style = style
-        ..alignTransform = alignTransform
+        ..expandedAlignTransform = expandedAlignTransform
+        ..collapsedAlignTransform = collapsedAlignTransform
         ..expand = expand;
 
   @override
@@ -47,7 +58,8 @@ class AnimatedToaster extends MultiChildRenderObjectWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('alignTransform', alignTransform))
+      ..add(DiagnosticsProperty('expandedAlignTransform', expandedAlignTransform))
+      ..add(DiagnosticsProperty('collapsedAlignTransform', collapsedAlignTransform))
       ..add(PercentProperty('expand', expand));
   }
 }
@@ -58,14 +70,20 @@ class RenderAnimatedToaster extends RenderBox
         ContainerRenderObjectMixin<RenderBox, AnimatedToasterParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, AnimatedToasterParentData> {
   FSonnerStyle _style;
-  Offset _alignTransform;
+  Offset _expandedAlignTransform;
+  Offset _collapsedAlignTransform;
   double _expand;
 
   /// Creates a [RenderAnimatedToaster].
-  RenderAnimatedToaster({required FSonnerStyle style, required Offset alignTransform, required double expand})
-    : _style = style,
-      _alignTransform = alignTransform,
-      _expand = expand;
+  RenderAnimatedToaster({
+    required FSonnerStyle style,
+    required Offset expandedAlignTransform,
+    required Offset collapsedAlignTransform,
+    required double expand,
+  }) : _style = style,
+       _expandedAlignTransform = expandedAlignTransform,
+       _collapsedAlignTransform = collapsedAlignTransform,
+       _expand = expand;
 
   @override
   void setupParentData(RenderBox child) {
@@ -83,7 +101,7 @@ class RenderAnimatedToaster extends RenderBox
 
     var current = lastChild;
     var previousHeight = 0.0;
-    var accumulated = alignTransform.dy * style.expandStartSpacing;
+    var accumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
 
     // First pass: calculate the offset to move the toasts when expanded, relative to (0, 0).
     //
@@ -93,7 +111,7 @@ class RenderAnimatedToaster extends RenderBox
       final data = current.parentData! as AnimatedToasterParentData;
       current.layout(constraints, parentUsesSize: true);
 
-      if (_alignTransform.dy < 0) {
+      if (_collapsedAlignTransform.dy < 0) {
         // Calculate the additional offset to move the current toast when expanded.
         // Top aligned toasts use the current height as the offset.
         final iterationHeight = current == lastChild ? 0.0 : -current.size.height;
@@ -114,14 +132,15 @@ class RenderAnimatedToaster extends RenderBox
         accumulated += iterationHeight;
 
         final front = current == lastChild ? Size.zero : lastChild!.size;
-        final begin = data.shift.begin ??= accumulated - alignTransform.dy * style.expandSpacing - front.height;
+        final begin =
+            data.shift.begin ??= accumulated - collapsedAlignTransform.dy * style.expandSpacing - front.height;
         final end = data.shift.end ??= accumulated;
         final value = data.shift.value = lerpDouble(begin, end, data.transition)! * expand;
 
         current.data.offset = Offset(current.data.offset.dx, value);
       }
 
-      accumulated += alignTransform.dy * style.expandSpacing;
+      accumulated += collapsedAlignTransform.dy * style.expandSpacing;
 
       previousHeight = current.size.height;
       current = data.previousSibling;
@@ -138,7 +157,6 @@ class RenderAnimatedToaster extends RenderBox
       final previous = childBefore(lastChild!)!;
       previousFrontSize = previous.size;
       (previous.parentData! as AnimatedToasterParentData).collapsedUntransformedSize = front.size;
-
     } else {
       previousFrontSize = data.collapsedUntransformedSize ?? front.size;
     }
@@ -146,23 +164,31 @@ class RenderAnimatedToaster extends RenderBox
     // Transition between collapsed and expanded sizes.
     final collapsedSize = Size.lerp(previousFrontSize, front.size, data.transition)!;
 
-    final baseHeight = alignTransform.dy.isNegative ? front.size.height : firstChild!.size.height;
+    final baseHeight = collapsedAlignTransform.dy.isNegative ? front.size.height : firstChild!.size.height;
     final expandedSize = Size(front.size.width, baseHeight + accumulated.abs());
 
     size = constraints.constrain(Size.lerp(collapsedSize, expandedSize, expand * data.transition)!);
 
-    // Second pass: Shifts offsets if the [alignTransform] is negative (toaster expands leftwards/upwards).
-    if (!alignTransform.dy.isNegative) {
+    // Second pass: Shifts offsets if the [collapsed] is negative (toaster expands leftwards/upwards).
+    if (!collapsedAlignTransform.dy.isNegative) {
       return;
     }
 
-    // Calculate the shift needed for each dimension
     final translateY = accumulated.isNegative ? -accumulated * data.transition * expand : 0.0;
 
     var child = firstChild;
     while (child != null) {
       final data = child.parentData! as AnimatedToasterParentData;
-      data.offset = data.offset.translate(0, translateY);
+      final translateX =
+          data.transition *
+          expand *
+          switch (expandedAlignTransform.dx) {
+            -1 => 0,
+            0 => (size.width - child.size.width) / 2,
+            _ => size.width - child.size.width,
+          };
+
+      data.offset = Offset(translateX, data.offset.dy + translateY);
 
       child = data.nextSibling;
     }
@@ -207,10 +233,10 @@ class RenderAnimatedToaster extends RenderBox
       // Calculate the reference points (point of alignment).
       // This is a simplified implementation that assumes toasts are vertically stacked either on top or below another
       // toast and never purely horizontal.
-      final frontX = front.width * (0.5 + alignTransform.dx * 0.5);
-      final frontY = alignTransform.dy < 0 ? 0.0 : front.height;
-      final thisX = (current.size.width * scaleX) * (0.5 + alignTransform.dx * 0.5);
-      final thisY = alignTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
+      final frontX = front.width * (0.5 + collapsedAlignTransform.dx * 0.5);
+      final frontY = collapsedAlignTransform.dy < 0 ? 0.0 : front.height;
+      final thisX = (current.size.width * scaleX) * (0.5 + collapsedAlignTransform.dx * 0.5);
+      final thisY = collapsedAlignTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
 
       final alignmentBegin = data.alignment.begin ??= Offset.zero;
       // We don't set data.alignment.end as this constantly changes.
@@ -224,7 +250,7 @@ class RenderAnimatedToaster extends RenderBox
 
       context.pushTransform(
         needsCompositing,
-        data.offset + offset + (alignment + alignTransform * protrusion) * (1 - expand),
+        data.offset + offset + (alignment + collapsedAlignTransform * protrusion) * (1 - expand),
         Matrix4.diagonal3Values(scaleX, scaleY, 1.0),
         (context, offset) => context.paintChild(current!, offset),
       );
@@ -248,14 +274,25 @@ class RenderAnimatedToaster extends RenderBox
     markNeedsLayout();
   }
 
-  Offset get alignTransform => _alignTransform;
+  Offset get expandedAlignTransform => _expandedAlignTransform;
 
-  set alignTransform(Offset value) {
-    if (_alignTransform == value) {
+  set expandedAlignTransform(Offset value) {
+    if (_expandedAlignTransform == value) {
       return;
     }
 
-    _alignTransform = value;
+    _expandedAlignTransform = value;
+    markNeedsLayout();
+  }
+
+  Offset get collapsedAlignTransform => _collapsedAlignTransform;
+
+  set collapsedAlignTransform(Offset value) {
+    if (_collapsedAlignTransform == value) {
+      return;
+    }
+
+    _collapsedAlignTransform = value;
     markNeedsLayout();
   }
 
@@ -276,6 +313,7 @@ class RenderAnimatedToaster extends RenderBox
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('expand', expand))
-      ..add(DiagnosticsProperty('alignTransform', alignTransform));
+      ..add(DiagnosticsProperty('expandedAlignTransform', expandedAlignTransform))
+      ..add(DiagnosticsProperty('collapsedAlignTransform', collapsedAlignTransform));
   }
 }
