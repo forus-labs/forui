@@ -146,9 +146,11 @@ void main() {
 
     testWidgets('${theme.name} keyboard navigation', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField.calendar(
-          today: DateTime(DateTime(2025, 5, 21)),
-        )),
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FDateField.calendar(today: DateTime(2025, 5, 21)),
+        ),
       );
 
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
