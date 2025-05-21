@@ -29,136 +29,65 @@ void main() {
 
   for (final (index, constructor)
       in [
-        () => FResizable(
-          crossAxisExtent: 0,
-          axis: Axis.vertical,
-          children: [top, bottom],
-        ),
+        () => FResizable(crossAxisExtent: 0, axis: Axis.vertical, children: [top, bottom]),
       ].indexed) {
-    test(
-      '[$index] constructor throws error',
-      () => expect(constructor, throwsAssertionError),
-    );
+    test('[$index] constructor throws error', () => expect(constructor, throwsAssertionError));
   }
 
   testWidgets('vertical drag downwards', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: Center(
-          child: FResizable(
-            crossAxisExtent: 50,
-            axis: Axis.vertical,
-            children: [top, bottom],
-          ),
-        ),
+        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom])),
       ),
     );
 
-    await tester.timedDrag(
-      find.byType(VerticalDivider),
-      const Offset(0, 100),
-      const Duration(seconds: 1),
-    );
+    await tester.timedDrag(find.byType(VerticalDivider), const Offset(0, 100), const Duration(seconds: 1));
     await tester.pumpAndSettle();
 
-    expect(
-      tester.getSize(find.byType(FResizableRegion).first),
-      const Size(50, 80),
-    );
-    expect(
-      tester.getSize(find.byType(FResizableRegion).last),
-      const Size(50, 20),
-    );
+    expect(tester.getSize(find.byType(FResizableRegion).first), const Size(50, 80));
+    expect(tester.getSize(find.byType(FResizableRegion).last), const Size(50, 20));
   });
 
   testWidgets('vertical drag upwards', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: Center(
-          child: FResizable(
-            crossAxisExtent: 50,
-            axis: Axis.vertical,
-            children: [top, bottom],
-          ),
-        ),
+        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom])),
       ),
     );
 
-    await tester.timedDrag(
-      find.byType(VerticalDivider),
-      const Offset(0, -100),
-      const Duration(seconds: 1),
-    );
+    await tester.timedDrag(find.byType(VerticalDivider), const Offset(0, -100), const Duration(seconds: 1));
     await tester.pumpAndSettle();
 
-    expect(
-      tester.getSize(find.byType(FResizableRegion).first),
-      const Size(50, 20),
-    );
-    expect(
-      tester.getSize(find.byType(FResizableRegion).last),
-      const Size(50, 80),
-    );
+    expect(tester.getSize(find.byType(FResizableRegion).first), const Size(50, 20));
+    expect(tester.getSize(find.byType(FResizableRegion).last), const Size(50, 80));
   });
 
   testWidgets('horizontal drag right', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: Center(
-          child: FResizable(
-            crossAxisExtent: 50,
-            axis: Axis.horizontal,
-            children: [top, bottom],
-          ),
-        ),
+        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom])),
       ),
     );
 
-    await tester.timedDrag(
-      find.byType(HorizontalDivider),
-      const Offset(100, 0),
-      const Duration(seconds: 1),
-    );
+    await tester.timedDrag(find.byType(HorizontalDivider), const Offset(100, 0), const Duration(seconds: 1));
     await tester.pumpAndSettle();
 
-    expect(
-      tester.getSize(find.byType(FResizableRegion).first),
-      const Size(80, 50),
-    );
-    expect(
-      tester.getSize(find.byType(FResizableRegion).last),
-      const Size(20, 50),
-    );
+    expect(tester.getSize(find.byType(FResizableRegion).first), const Size(80, 50));
+    expect(tester.getSize(find.byType(FResizableRegion).last), const Size(20, 50));
   });
 
   testWidgets('horizontal drag left', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: Center(
-          child: FResizable(
-            crossAxisExtent: 50,
-            axis: Axis.horizontal,
-            children: [top, bottom],
-          ),
-        ),
+        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom])),
       ),
     );
 
-    await tester.timedDrag(
-      find.byType(HorizontalDivider),
-      const Offset(-100, 0),
-      const Duration(seconds: 1),
-    );
+    await tester.timedDrag(find.byType(HorizontalDivider), const Offset(-100, 0), const Duration(seconds: 1));
     await tester.pumpAndSettle();
 
-    expect(
-      tester.getSize(find.byType(FResizableRegion).first),
-      const Size(20, 50),
-    );
-    expect(
-      tester.getSize(find.byType(FResizableRegion).last),
-      const Size(80, 50),
-    );
+    expect(tester.getSize(find.byType(FResizableRegion).first), const Size(20, 50));
+    expect(tester.getSize(find.byType(FResizableRegion).last), const Size(80, 50));
   });
 
   group('state', () {
@@ -167,12 +96,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Center(
-            child: FResizable(
-              controller: first,
-              crossAxisExtent: 50,
-              axis: Axis.horizontal,
-              children: [top, bottom],
-            ),
+            child: FResizable(controller: first, crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]),
           ),
         ),
       );
@@ -184,12 +108,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Center(
-            child: FResizable(
-              controller: second,
-              crossAxisExtent: 50,
-              axis: Axis.horizontal,
-              children: [top, bottom],
-            ),
+            child: FResizable(controller: second, crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]),
           ),
         ),
       );
@@ -226,9 +145,7 @@ void main() {
   });
 
   group('onChange', () {
-    testWidgets('when controller changes but onChange callback is the same', (
-      tester,
-    ) async {
+    testWidgets('when controller changes but onChange callback is the same', (tester) async {
       int count = 0;
       void onChange(List<FResizableRegionData> _) => count++;
 
@@ -274,9 +191,7 @@ void main() {
       expect(count, 2);
     });
 
-    testWidgets('when onChange callback changes but controller is the same', (
-      tester,
-    ) async {
+    testWidgets('when onChange callback changes but controller is the same', (tester) async {
       int first = 0;
       int second = 0;
 
@@ -321,9 +236,7 @@ void main() {
       expect(second, 1);
     });
 
-    testWidgets('when both controller and onChange callback change', (
-      tester,
-    ) async {
+    testWidgets('when both controller and onChange callback change', (tester) async {
       int first = 0;
       int second = 0;
 

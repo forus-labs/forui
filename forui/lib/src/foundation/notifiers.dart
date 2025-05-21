@@ -40,8 +40,7 @@ class FValueNotifier<T> extends ValueNotifier<T> {
   }
 
   /// Removes a previously registered closure from the list of closures that are notified when the object changes.
-  void removeValueListener(ValueChanged<T>? listener) =>
-      _listeners.remove(listener);
+  void removeValueListener(ValueChanged<T>? listener) => _listeners.remove(listener);
 
   @override
   @protected
@@ -78,8 +77,7 @@ abstract class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   /// * [min] < 0.
   /// * [max] < 0.
   /// * [min] > [max].
-  factory FMultiValueNotifier({int min, int? max, Set<T>? values}) =
-      _MultiNotifier<T>;
+  factory FMultiValueNotifier({int min, int? max, Set<T>? values}) = _MultiNotifier<T>;
 
   /// Creates a [FMultiValueNotifier] that allows only one element at a time.
   factory FMultiValueNotifier.radio({T? value}) = _RadioNotifier<T>;
@@ -103,8 +101,7 @@ abstract class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
 
   /// Removes a previously registered closure from the list of closures that are notified whenever [update] successfully
   /// adds/removes an element.
-  void removeUpdateListener(ValueChanged<(T, bool)>? listener) =>
-      _updateListeners.remove(listener);
+  void removeUpdateListener(ValueChanged<(T, bool)>? listener) => _updateListeners.remove(listener);
 
   /// Notifies all registered update listeners of a change.
   @protected
@@ -127,14 +124,8 @@ class _MultiNotifier<T> extends FMultiValueNotifier<T> {
 
   _MultiNotifier({this.min = 0, this.max, Set<T>? values})
     : assert(min >= 0, 'The min must be greater than or equal to 0.'),
-      assert(
-        max == null || max >= 0,
-        'The max must be greater than or equal to 0.',
-      ),
-      assert(
-        max == null || min <= max,
-        'The max must be greater than or equal to the min.',
-      ),
+      assert(max == null || max >= 0, 'The max must be greater than or equal to 0.'),
+      assert(max == null || min <= max, 'The max must be greater than or equal to the min.'),
       super._(values ?? {});
 
   @override
@@ -159,9 +150,7 @@ class _MultiNotifier<T> extends FMultiValueNotifier<T> {
   @override
   set value(Set<T> value) {
     if (value.length < min || (max != null && max! < value.length)) {
-      throw ArgumentError(
-        'The number of elements must be between $min and ${max ?? 'infinite'}.',
-      );
+      throw ArgumentError('The number of elements must be between $min and ${max ?? 'infinite'}.');
     }
 
     super.value = {...value};

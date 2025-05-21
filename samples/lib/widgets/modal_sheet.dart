@@ -17,26 +17,38 @@ class ModalSheetPage extends Sample {
     children: [
       FButton(
         child: const Text('Left'),
-        onPress:
-            () => showFSheet(context: context, side: FLayout.ltr, builder: (context) => const Form(side: FLayout.ltr)),
+        onPress: () => showFSheet(
+          context: context,
+          side: FLayout.ltr,
+          builder: (context) => const Form(side: FLayout.ltr),
+        ),
       ),
       const SizedBox(height: 5),
       FButton(
         child: const Text('Top'),
-        onPress:
-            () => showFSheet(context: context, side: FLayout.ttb, builder: (context) => const Form(side: FLayout.ttb)),
+        onPress: () => showFSheet(
+          context: context,
+          side: FLayout.ttb,
+          builder: (context) => const Form(side: FLayout.ttb),
+        ),
       ),
       const SizedBox(height: 5),
       FButton(
         child: const Text('Right'),
-        onPress:
-            () => showFSheet(context: context, side: FLayout.rtl, builder: (context) => const Form(side: FLayout.rtl)),
+        onPress: () => showFSheet(
+          context: context,
+          side: FLayout.rtl,
+          builder: (context) => const Form(side: FLayout.rtl),
+        ),
       ),
       const SizedBox(height: 5),
       FButton(
         child: const Text('Bottom'),
-        onPress:
-            () => showFSheet(context: context, side: FLayout.btt, builder: (context) => const Form(side: FLayout.btt)),
+        onPress: () => showFSheet(
+          context: context,
+          side: FLayout.btt,
+          builder: (context) => const Form(side: FLayout.btt),
+        ),
       ),
     ],
   );
@@ -53,10 +65,9 @@ class Form extends StatelessWidget {
     width: double.infinity,
     decoration: BoxDecoration(
       color: context.theme.colors.background,
-      border:
-          side.vertical
-              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-              : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
+      border: side.vertical
+          ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
+          : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
@@ -104,28 +115,25 @@ class DraggableModalSheetPage extends Sample {
   @override
   Widget sample(BuildContext context) => FButton(
     child: const Text('Click me'),
-    onPress:
-        () => showFSheet(
-          context: context,
-          side: FLayout.btt,
-          mainAxisMaxRatio: null,
-          builder:
-              (context) => DraggableScrollableSheet(
-                expand: false,
-                builder:
-                    (context, controller) => ScrollConfiguration(
-                      // This is required to enable dragging on desktop.
-                      // See https://github.com/flutter/flutter/issues/101903 for more information.
-                      behavior: ScrollConfiguration.of(context).copyWith(
-                        dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad},
-                      ),
-                      child: FTileGroup.builder(
-                        count: 25,
-                        scrollController: controller,
-                        tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
-                      ),
-                    ),
-              ),
+    onPress: () => showFSheet(
+      context: context,
+      side: FLayout.btt,
+      mainAxisMaxRatio: null,
+      builder: (context) => DraggableScrollableSheet(
+        expand: false,
+        builder: (context, controller) => ScrollConfiguration(
+          // This is required to enable dragging on desktop.
+          // See https://github.com/flutter/flutter/issues/101903 for more information.
+          behavior: ScrollConfiguration.of(
+            context,
+          ).copyWith(dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad}),
+          child: FTileGroup.builder(
+            count: 25,
+            scrollController: controller,
+            tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+          ),
         ),
+      ),
+    ),
   );
 }

@@ -30,13 +30,12 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
 
       var controller = _controllers[side];
       if (controller == null) {
-        controller =
-            _controllers[side] ??= showFPersistentSheet(
-              context: context,
-              side: side,
-              keepAliveOffstage: widget.keepAliveOffstage,
-              builder: (context, controller) => Form(side: side, controller: controller),
-            );
+        controller = _controllers[side] ??= showFPersistentSheet(
+          context: context,
+          side: side,
+          keepAliveOffstage: widget.keepAliveOffstage,
+          builder: (context, controller) => Form(side: side, controller: controller),
+        );
       } else {
         controller.toggle();
       }
@@ -78,10 +77,9 @@ class Form extends StatelessWidget {
     width: double.infinity,
     decoration: BoxDecoration(
       color: context.theme.colors.background,
-      border:
-          side.vertical
-              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-              : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
+      border: side.vertical
+          ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
+          : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
@@ -146,23 +144,21 @@ class _DraggableState extends StatefulSampleState<DraggablePersistentSheetPage> 
         context: context,
         side: FLayout.btt,
         mainAxisMaxRatio: null,
-        builder:
-            (context, _) => DraggableScrollableSheet(
-              expand: false,
-              builder:
-                  (context, controller) => ScrollConfiguration(
-                    // This is required to enable dragging on desktop.
-                    // See https://github.com/flutter/flutter/issues/101903 for more information.
-                    behavior: ScrollConfiguration.of(context).copyWith(
-                      dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad},
-                    ),
-                    child: FTileGroup.builder(
-                      count: 25,
-                      scrollController: controller,
-                      tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
-                    ),
-                  ),
+        builder: (context, _) => DraggableScrollableSheet(
+          expand: false,
+          builder: (context, controller) => ScrollConfiguration(
+            // This is required to enable dragging on desktop.
+            // See https://github.com/flutter/flutter/issues/101903 for more information.
+            behavior: ScrollConfiguration.of(
+              context,
+            ).copyWith(dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad}),
+            child: FTileGroup.builder(
+              count: 25,
+              scrollController: controller,
+              tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
             ),
+          ),
+        ),
       );
     },
   );

@@ -5,10 +5,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
 /// Creates a [FPickerController] that is automatically disposed.
-FPickerController useFPickerController({
-  required List<int> initialIndexes,
-  List<Object?>? keys,
-}) => use(_PickerControllerHook(initialIndexes: initialIndexes, keys: keys));
+FPickerController useFPickerController({required List<int> initialIndexes, List<Object?>? keys}) =>
+    use(_PickerControllerHook(initialIndexes: initialIndexes, keys: keys));
 
 class _PickerControllerHook extends Hook<FPickerController> {
   final List<int> initialIndexes;
@@ -25,11 +23,8 @@ class _PickerControllerHook extends Hook<FPickerController> {
   }
 }
 
-class _PickerControllerHookState
-    extends HookState<FPickerController, _PickerControllerHook> {
-  late final FPickerController _controller = FPickerController(
-    initialIndexes: hook.initialIndexes,
-  );
+class _PickerControllerHookState extends HookState<FPickerController, _PickerControllerHook> {
+  late final FPickerController _controller = FPickerController(initialIndexes: hook.initialIndexes);
 
   @override
   FPickerController build(BuildContext context) => _controller;

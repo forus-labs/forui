@@ -14,14 +14,8 @@ void main() {
             style: TestScaffold.blueScreen.bottomNavigationBarStyle,
             index: 2,
             children: const [
-              FBottomNavigationBarItem(
-                icon: Icon(FIcons.house),
-                label: Text('Home'),
-              ),
-              FBottomNavigationBarItem(
-                icon: Icon(FIcons.layoutGrid),
-                label: Text('Browse'),
-              ),
+              FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
             ],
           ),
         ),
@@ -38,26 +32,11 @@ void main() {
             child: const FBottomNavigationBar(
               index: 2,
               children: [
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.house),
-                  label: Text('Home'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.layoutGrid),
-                  label: Text('Browse'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.radio),
-                  label: Text('Radio'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.radio),
-                  label: Text('Library'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.radio),
-                  label: Text('Search'),
-                ),
+                FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Library')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Search')),
               ],
             ),
           ),
@@ -65,9 +44,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile(
-            'bottom-navigation-bar/${theme.name}-forui-icon.png',
-          ),
+          matchesGoldenFile('bottom-navigation-bar/${theme.name}-forui-icon.png'),
         );
       });
 
@@ -78,26 +55,11 @@ void main() {
             child: const FBottomNavigationBar(
               index: 2,
               children: [
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.house),
-                  label: Text('Home'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.layoutGrid),
-                  label: Text('Browse'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.radio),
-                  label: Text('Radio'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.radio),
-                  label: Text('Library'),
-                ),
-                FBottomNavigationBarItem(
-                  icon: Icon(FIcons.radio),
-                  label: Text('Search'),
-                ),
+                FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Library')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Search')),
               ],
             ),
           ),

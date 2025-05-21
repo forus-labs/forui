@@ -20,83 +20,47 @@ void main() {
           // Select everything
           (
             const TextEditingValue(text: '13 h 30'),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 7),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
           ),
           // Backspace
           (
             const TextEditingValue(text: '13 h 30'),
             TextEditingValue.empty,
-            const TextEditingValue(
-              text: 'HH h MM',
-              selection: TextSelection(baseOffset: 0, extentOffset: 7),
-            ),
+            const TextEditingValue(text: 'HH h MM', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
           ),
           // Malformed paste
           (
             const TextEditingValue(text: '13 h 30'),
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection.collapsed(offset: 4),
-            ),
+            const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 4)),
             const TextEditingValue(text: '13 h 30'),
           ),
           (
             const TextEditingValue(text: '13 h 30'),
-            const TextEditingValue(
-              text: '13 h 30 h 1',
-              selection: TextSelection.collapsed(offset: 4),
-            ),
+            const TextEditingValue(text: '13 h 30 h 1', selection: TextSelection.collapsed(offset: 4)),
             const TextEditingValue(text: '13 h 30'),
           ),
           // Changes
           (
             const TextEditingValue(text: '13 h 30'),
-            const TextEditingValue(
-              text: '13 h 71',
-              selection: TextSelection(baseOffset: 0, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 71', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
             const TextEditingValue(text: '13 h 30'),
           ),
           (
             const TextEditingValue(text: '13 h 30'),
-            const TextEditingValue(
-              text: '13 h 45',
-              selection: TextSelection(baseOffset: 0, extentOffset: 7),
-            ),
-            const TextEditingValue(
-              text: '13 h 45',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 45', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 45', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           ),
           (
             const TextEditingValue(text: '13 h 30'),
-            const TextEditingValue(
-              text: '11 h 30',
-              selection: TextSelection.collapsed(offset: 1),
-            ),
-            const TextEditingValue(
-              text: '11 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '11 h 30', selection: TextSelection.collapsed(offset: 1)),
+            const TextEditingValue(text: '11 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           ),
           // Select part
           (
             const TextEditingValue(text: '13 h 30'),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection.collapsed(offset: 1),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 1)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
         ].indexed) {
       test('multiple separator - $index', () {
@@ -118,34 +82,16 @@ void main() {
     for (final (index, (value, expected))
         in [
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 7),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           ),
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           ),
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           ),
         ].indexed) {
       test('forward - $index', () {
@@ -165,34 +111,16 @@ void main() {
     for (final (index, (value, expected))
         in [
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 7),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
         ].indexed) {
       test('backward - $index', () {
@@ -214,48 +142,24 @@ void main() {
       in [
         // TODO: This is a quirk, but what should the expected behavior be?
         (
-          const TextEditingValue(
-            text: '13 h 30',
-            selection: TextSelection(baseOffset: 0, extentOffset: 7),
-          ),
+          const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 7)),
           1,
-          const TextEditingValue(
-            text: '13 h 31',
-            selection: TextSelection(baseOffset: 5, extentOffset: 7),
-          ),
+          const TextEditingValue(text: '13 h 31', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
         ),
         (
-          const TextEditingValue(
-            text: '13 h 30',
-            selection: TextSelection(baseOffset: 0, extentOffset: 2),
-          ),
+          const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           1,
-          const TextEditingValue(
-            text: '14 h 30',
-            selection: TextSelection(baseOffset: 0, extentOffset: 2),
-          ),
+          const TextEditingValue(text: '14 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
         ),
         (
-          const TextEditingValue(
-            text: '13 h 30',
-            selection: TextSelection(baseOffset: 5, extentOffset: 7),
-          ),
+          const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           1,
-          const TextEditingValue(
-            text: '13 h 31',
-            selection: TextSelection(baseOffset: 5, extentOffset: 7),
-          ),
+          const TextEditingValue(text: '13 h 31', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
         ),
         (
-          const TextEditingValue(
-            text: 'HH h MM',
-            selection: TextSelection(baseOffset: 5, extentOffset: 7),
-          ),
+          const TextEditingValue(text: 'HH h MM', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           1,
-          const TextEditingValue(
-            text: 'HH h 01',
-            selection: TextSelection(baseOffset: 5, extentOffset: 7),
-          ),
+          const TextEditingValue(text: 'HH h 01', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
         ),
       ].indexed) {
     testWidgets('adjust - $index', (tester) async {
@@ -277,65 +181,29 @@ void main() {
         in [
           // 1st part
           (
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection.collapsed(offset: 0),
-            ),
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 0)),
+            const TextEditingValue(text: '13:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
           (
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection.collapsed(offset: 1),
-            ),
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 1)),
+            const TextEditingValue(text: '13:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
           (
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection.collapsed(offset: 2),
-            ),
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 2)),
+            const TextEditingValue(text: '13:30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
           // 2nd part
           (
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection.collapsed(offset: 3),
-            ),
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection(baseOffset: 3, extentOffset: 5),
-            ),
+            const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 3)),
+            const TextEditingValue(text: '13:30', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
           ),
           (
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection.collapsed(offset: 4),
-            ),
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection(baseOffset: 3, extentOffset: 5),
-            ),
+            const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 4)),
+            const TextEditingValue(text: '13:30', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
           ),
           (
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection.collapsed(offset: 5),
-            ),
-            const TextEditingValue(
-              text: '13:30',
-              selection: TextSelection(baseOffset: 3, extentOffset: 5),
-            ),
+            const TextEditingValue(text: '13:30', selection: TextSelection.collapsed(offset: 5)),
+            const TextEditingValue(text: '13:30', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
           ),
           // invalid
           (const TextEditingValue(text: '13:30'), null),
@@ -356,75 +224,33 @@ void main() {
         in [
           // 1st part
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection.collapsed(offset: 0),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 0)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection.collapsed(offset: 1),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 1)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection.collapsed(offset: 2),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 0, extentOffset: 2),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 2)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
           ),
           // 2nd part
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection.collapsed(offset: 5),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 5)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           ),
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection.collapsed(offset: 6),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 6)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           ),
           (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection.collapsed(offset: 7),
-            ),
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection(baseOffset: 5, extentOffset: 7),
-            ),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 7)),
+            const TextEditingValue(text: '13 h 30', selection: TextSelection(baseOffset: 5, extentOffset: 7)),
           ),
           // invalid
           (const TextEditingValue(text: '13 h 30'), null),
-          (
-            const TextEditingValue(
-              text: '13 h 30',
-              selection: TextSelection.collapsed(offset: 3),
-            ),
-            null,
-          ),
+          (const TextEditingValue(text: '13 h 30', selection: TextSelection.collapsed(offset: 3)), null),
         ].indexed) {
       test('multiple time separator - $index', () {
         final controller = TimeInputController(
@@ -442,50 +268,20 @@ void main() {
         in [
           // 3rd part
           (
-            const TextEditingValue(
-              text: '13:30 ч.',
-              selection: TextSelection.collapsed(offset: 3),
-            ),
-            const TextEditingValue(
-              text: '13:30 ч.',
-              selection: TextSelection(baseOffset: 3, extentOffset: 5),
-            ),
+            const TextEditingValue(text: '13:30 ч.', selection: TextSelection.collapsed(offset: 3)),
+            const TextEditingValue(text: '13:30 ч.', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
           ),
           (
-            const TextEditingValue(
-              text: '13:30 ч.',
-              selection: TextSelection.collapsed(offset: 4),
-            ),
-            const TextEditingValue(
-              text: '13:30 ч.',
-              selection: TextSelection(baseOffset: 3, extentOffset: 5),
-            ),
+            const TextEditingValue(text: '13:30 ч.', selection: TextSelection.collapsed(offset: 4)),
+            const TextEditingValue(text: '13:30 ч.', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
           ),
           (
-            const TextEditingValue(
-              text: '13:30 ч.',
-              selection: TextSelection.collapsed(offset: 5),
-            ),
-            const TextEditingValue(
-              text: '13:30 ч.',
-              selection: TextSelection(baseOffset: 3, extentOffset: 5),
-            ),
+            const TextEditingValue(text: '13:30 ч.', selection: TextSelection.collapsed(offset: 5)),
+            const TextEditingValue(text: '13:30 ч.', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
           ),
           (const TextEditingValue(text: '13:30 ч.'), null),
-          (
-            const TextEditingValue(
-              text: '13:30 ч.',
-              selection: TextSelection.collapsed(offset: 11),
-            ),
-            null,
-          ),
-          (
-            const TextEditingValue(
-              text: '13:30 ч.',
-              selection: TextSelection.collapsed(offset: 12),
-            ),
-            null,
-          ),
+          (const TextEditingValue(text: '13:30 ч.', selection: TextSelection.collapsed(offset: 11)), null),
+          (const TextEditingValue(text: '13:30 ч.', selection: TextSelection.collapsed(offset: 12)), null),
         ].indexed) {
       test('suffix - $index', () {
         final controller = TimeInputController(
@@ -506,10 +302,7 @@ void main() {
         (const FTime(9, 30), null, const TextEditingValue(text: 'HH:MM ч.')),
       ].indexed) {
     test('update from time controller(...) - $index', () {
-      final timeController = FTimeFieldController(
-        vsync: const TestVSync(),
-        initialTime: initial,
-      );
+      final timeController = FTimeFieldController(vsync: const TestVSync(), initialTime: initial);
       final controller = TimeInputController(
         FLocalizationsBg(),
         timeController,

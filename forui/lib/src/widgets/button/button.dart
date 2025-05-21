@@ -88,12 +88,7 @@ class FButton extends StatelessWidget {
     Widget? suffix,
     bool intrinsicWidth = false,
     super.key,
-  }) : child = Content(
-         prefix: prefix,
-         suffix: suffix,
-         intrinsicWidth: intrinsicWidth,
-         child: child,
-       );
+  }) : child = Content(prefix: prefix, suffix: suffix, intrinsicWidth: intrinsicWidth, child: child);
 
   /// Creates a [FButton] that contains only an icon.
   ///
@@ -164,26 +159,12 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
-      ..add(
-        FlagProperty(
-          'autofocus',
-          value: autofocus,
-          defaultValue: false,
-          ifTrue: 'autofocus',
-        ),
-      )
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
-      ..add(
-        FlagProperty(
-          'selected',
-          value: selected,
-          defaultValue: false,
-          ifTrue: 'selected',
-        ),
-      );
+      ..add(FlagProperty('selected', value: selected, defaultValue: false, ifTrue: 'selected'));
   }
 }
 
@@ -193,20 +174,13 @@ class FButton extends StatelessWidget {
 sealed class FBaseButtonStyle {}
 
 @internal
-enum Variant implements FBaseButtonStyle {
-  primary,
-  secondary,
-  destructive,
-  outline,
-  ghost,
-}
+enum Variant implements FBaseButtonStyle { primary, secondary, destructive, outline, ghost }
 
 /// A [FButton]'s style.
 ///
 /// The pre-defined styles are a convenient shorthand for the various [FButtonStyle]s in the current context's
 /// [FButtonStyles].
-class FButtonStyle extends FBaseButtonStyle
-    with Diagnosticable, _$FButtonStyleFunctions {
+class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
   /// The button's primary style.
   ///
   /// Shorthand for the current context's [FButtonStyles.primary] style.
@@ -272,18 +246,12 @@ class FButtonStyle extends FBaseButtonStyle
     required Color foregroundColor,
   }) : this(
          decoration: FWidgetStateMap({
-           WidgetState.disabled: BoxDecoration(
-             borderRadius: style.borderRadius,
-             color: colors.disable(color),
-           ),
+           WidgetState.disabled: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(color)),
            WidgetState.hovered | WidgetState.pressed: BoxDecoration(
              borderRadius: style.borderRadius,
              color: colors.hover(color),
            ),
-           WidgetState.any: BoxDecoration(
-             borderRadius: style.borderRadius,
-             color: color,
-           ),
+           WidgetState.any: BoxDecoration(borderRadius: style.borderRadius, color: color),
          }),
          focusedOutlineStyle: style.focusedOutlineStyle,
          contentStyle: FButtonContentStyle.inherit(
@@ -324,16 +292,10 @@ class FButtonData extends InheritedWidget {
   final Set<WidgetState> states;
 
   /// Creates a [FButtonData].
-  const FButtonData({
-    required this.style,
-    required this.states,
-    required super.child,
-    super.key,
-  });
+  const FButtonData({required this.style, required this.states, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(covariant FButtonData old) =>
-      style != old.style || !setEquals(states, old.states);
+  bool updateShouldNotify(covariant FButtonData old) => style != old.style || !setEquals(states, old.states);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

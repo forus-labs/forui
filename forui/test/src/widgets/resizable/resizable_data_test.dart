@@ -6,56 +6,17 @@ void main() {
   group('FResizableRegionData', () {
     for (final (index, function)
         in [
-          () => FResizableRegionData(
-            index: 1,
-            extent: (min: 1, max: -2, total: 10),
-            offset: (min: 1, max: 2),
-          ),
-          () => FResizableRegionData(
-            index: 1,
-            extent: (min: -1, max: 2, total: 10),
-            offset: (min: 1, max: 2),
-          ),
-          () => FResizableRegionData(
-            index: 1,
-            extent: (min: 1, max: 1, total: 10),
-            offset: (min: 1, max: 2),
-          ),
-          () => FResizableRegionData(
-            index: 1,
-            extent: (min: 2, max: 1, total: 10),
-            offset: (min: 1, max: 2),
-          ),
-          () => FResizableRegionData(
-            index: 1,
-            extent: (min: 1, max: 5, total: 10),
-            offset: (min: 1, max: 1),
-          ),
-          () => FResizableRegionData(
-            index: 1,
-            extent: (min: 1, max: 5, total: 10),
-            offset: (min: 2, max: 1),
-          ),
-          () => FResizableRegionData(
-            index: 1,
-            extent: (min: 1, max: 5, total: 10),
-            offset: (min: 1, max: 1),
-          ),
-          () => FResizableRegionData(
-            index: 1,
-            extent: (min: 1, max: 5, total: 10),
-            offset: (min: 1, max: 10),
-          ),
-          () => FResizableRegionData(
-            index: -1,
-            extent: (min: 1, max: 5, total: 10),
-            offset: (min: 1, max: 3),
-          ),
+          () => FResizableRegionData(index: 1, extent: (min: 1, max: -2, total: 10), offset: (min: 1, max: 2)),
+          () => FResizableRegionData(index: 1, extent: (min: -1, max: 2, total: 10), offset: (min: 1, max: 2)),
+          () => FResizableRegionData(index: 1, extent: (min: 1, max: 1, total: 10), offset: (min: 1, max: 2)),
+          () => FResizableRegionData(index: 1, extent: (min: 2, max: 1, total: 10), offset: (min: 1, max: 2)),
+          () => FResizableRegionData(index: 1, extent: (min: 1, max: 5, total: 10), offset: (min: 1, max: 1)),
+          () => FResizableRegionData(index: 1, extent: (min: 1, max: 5, total: 10), offset: (min: 2, max: 1)),
+          () => FResizableRegionData(index: 1, extent: (min: 1, max: 5, total: 10), offset: (min: 1, max: 1)),
+          () => FResizableRegionData(index: 1, extent: (min: 1, max: 5, total: 10), offset: (min: 1, max: 10)),
+          () => FResizableRegionData(index: -1, extent: (min: 1, max: 5, total: 10), offset: (min: 1, max: 3)),
         ].indexed) {
-      test(
-        '[$index] constructor throws error',
-        () => expect(function, throwsAssertionError),
-      );
+      test('[$index] constructor throws error', () => expect(function, throwsAssertionError));
     }
 
     test(
@@ -73,11 +34,7 @@ void main() {
     test(
       'size',
       () => expect(
-        FResizableRegionData(
-          index: 1,
-          extent: (min: 1, max: 10, total: 100),
-          offset: (min: 0, max: 5),
-        ).extent.current,
+        FResizableRegionData(index: 1, extent: (min: 1, max: 10, total: 100), offset: (min: 0, max: 5)).extent.current,
         5,
       ),
     );
@@ -109,11 +66,7 @@ void main() {
     }
 
     test('update(...) throws error', () {
-      final data = FResizableRegionData(
-        index: 0,
-        extent: (min: 10, max: 100, total: 100),
-        offset: (min: 0, max: 30),
-      );
+      final data = FResizableRegionData(index: 0, extent: (min: 10, max: 100, total: 100), offset: (min: 0, max: 30));
 
       expect(() => data.update(-10, lhs: true), throwsAssertionError);
     });

@@ -33,27 +33,26 @@ class TooltipPage extends StatelessWidget {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
           child: Builder(
-            builder:
-                (context) => Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 30),
-                    FTooltip(
-                      hover: hover,
-                      longPress: longPress,
-                      tipAnchor: axis == Axis.horizontal ? Alignment.topLeft : Alignment.bottomCenter,
-                      childAnchor: axis == Axis.horizontal ? Alignment.topRight : Alignment.topCenter,
-                      tipBuilder: (context, style, _) => const Text('Add to library'),
-                      child: IntrinsicWidth(
-                        child: FButton(
-                          style: FButtonStyle.outline,
-                          onPress: () {},
-                          child: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
-                        ),
-                      ),
+            builder: (context) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 30),
+                FTooltip(
+                  hover: hover,
+                  longPress: longPress,
+                  tipAnchor: axis == Axis.horizontal ? Alignment.topLeft : Alignment.bottomCenter,
+                  childAnchor: axis == Axis.horizontal ? Alignment.topRight : Alignment.topCenter,
+                  tipBuilder: (context, style, _) => const Text('Add to library'),
+                  child: IntrinsicWidth(
+                    child: FButton(
+                      style: FButtonStyle.outline,
+                      onPress: () {},
+                      child: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
                     ),
-                  ],
+                  ),
                 ),
+              ],
+            ),
           ),
         ),
       ),

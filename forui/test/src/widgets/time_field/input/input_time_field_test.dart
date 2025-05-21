@@ -19,21 +19,14 @@ void main() {
         (Locale('zh', 'HK'), '--HH:MM'),
       ].indexed) {
     testWidgets('placeholder - $index', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(locale: locale, child: const FTimeField(key: key)),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: locale, child: const FTimeField(key: key)));
 
       expect(find.text(placeholder), findsOneWidget);
     });
   }
 
   testWidgets('arrow key adjustment', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        locale: const Locale('en', 'SG'),
-        child: const FTimeField(key: key),
-      ),
-    );
+    await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: const FTimeField(key: key)));
 
     await tester.tapAt(tester.getTopLeft(find.byKey(key)));
     await tester.pumpAndSettle();
@@ -60,12 +53,7 @@ void main() {
     testWidgets('placeholder', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: const FTimeField(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: const FTimeField(key: key)));
 
       await tester.tapAt(tester.getTopLeft(find.byKey(key)));
       await tester.pumpAndSettle();
@@ -83,12 +71,7 @@ void main() {
     testWidgets('partial time', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: const FTimeField(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: const FTimeField(key: key)));
 
       await tester.enterText(find.byKey(key), '12:MM --');
       await tester.pumpAndSettle();
@@ -104,12 +87,7 @@ void main() {
     testWidgets('partial time - zh HK', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('zh', 'HK'),
-          child: const FTimeField(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('zh', 'HK'), child: const FTimeField(key: key)));
 
       await tester.enterText(find.byKey(key), '--HH:12');
       await tester.pumpAndSettle();
@@ -125,12 +103,7 @@ void main() {
     testWidgets('full time', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: const FTimeField(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: const FTimeField(key: key)));
 
       await tester.enterText(find.byKey(key), '12:30 pm');
       await tester.pumpAndSettle();
@@ -158,10 +131,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: FTimeField(controller: controller, key: key),
-        ),
+        TestScaffold.app(locale: const Locale('en', 'SG'), child: FTimeField(controller: controller, key: key)),
       );
 
       await tester.enterText(find.byKey(key), '12:30 pm');

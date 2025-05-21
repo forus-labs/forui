@@ -17,93 +17,25 @@ void main() {
     for (final (index, (old, current, expected))
         in [
           // None
-          (
-            ['01', '01', '2024'],
-            ['01', '01', '2024'],
-            (['01', '01', '2024'], const None()),
-          ),
-          (
-            ['DD', '02', '2024'],
-            ['32', '02', '2024'],
-            (['DD', '02', '2024'], const None()),
-          ),
-          (
-            ['01', 'MM', '2024'],
-            ['01', '13', '2024'],
-            (['01', 'MM', '2024'], const None()),
-          ),
-          (
-            ['01', '01', 'YYYY'],
-            ['01', '01', '10000'],
-            (['01', '01', 'YYYY'], const None()),
-          ),
+          (['01', '01', '2024'], ['01', '01', '2024'], (['01', '01', '2024'], const None())),
+          (['DD', '02', '2024'], ['32', '02', '2024'], (['DD', '02', '2024'], const None())),
+          (['01', 'MM', '2024'], ['01', '13', '2024'], (['01', 'MM', '2024'], const None())),
+          (['01', '01', 'YYYY'], ['01', '01', '10000'], (['01', '01', 'YYYY'], const None())),
           // Single
-          (
-            ['DD', '02', '2024'],
-            ['3', '02', '2024'],
-            (['03', '02', '2024'], const Single(0)),
-          ),
-          (
-            ['0', '02', '2024'],
-            ['3', '02', '2024'],
-            (['03', '02', '2024'], const Single(0)),
-          ),
-          (
-            ['1', '02', '2024'],
-            ['2', '02', '2024'],
-            (['12', '02', '2024'], const Single(1)),
-          ),
-          (
-            ['01', 'MM', '2024'],
-            ['01', '1', '2024'],
-            (['01', '01', '2024'], const Single(1)),
-          ),
-          (
-            ['01', '01', '2024'],
-            ['01', '2', '2024'],
-            (['01', '12', '2024'], const Single(2)),
-          ),
-          (
-            ['01', '02', '2024'],
-            ['01', '3', '2024'],
-            (['01', '03', '2024'], const Single(2)),
-          ),
-          (
-            ['01', '01', 'YYYY'],
-            ['01', '01', '4'],
-            (['01', '01', '0004'], const Single(2)),
-          ),
-          (
-            ['01', '01', '0202'],
-            ['01', '01', '4'],
-            (['01', '01', '2024'], const Single(2)),
-          ),
-          (
-            ['01', '01', '2024'],
-            ['01', '01', '2'],
-            (['01', '01', '0002'], const Single(2)),
-          ),
+          (['DD', '02', '2024'], ['3', '02', '2024'], (['03', '02', '2024'], const Single(0))),
+          (['0', '02', '2024'], ['3', '02', '2024'], (['03', '02', '2024'], const Single(0))),
+          (['1', '02', '2024'], ['2', '02', '2024'], (['12', '02', '2024'], const Single(1))),
+          (['01', 'MM', '2024'], ['01', '1', '2024'], (['01', '01', '2024'], const Single(1))),
+          (['01', '01', '2024'], ['01', '2', '2024'], (['01', '12', '2024'], const Single(2))),
+          (['01', '02', '2024'], ['01', '3', '2024'], (['01', '03', '2024'], const Single(2))),
+          (['01', '01', 'YYYY'], ['01', '01', '4'], (['01', '01', '0004'], const Single(2))),
+          (['01', '01', '0202'], ['01', '01', '4'], (['01', '01', '2024'], const Single(2))),
+          (['01', '01', '2024'], ['01', '01', '2'], (['01', '01', '0002'], const Single(2))),
           // Many
-          (
-            ['DD', 'MM', '2024'],
-            ['3', '2', '2024'],
-            (['03', '02', '2024'], const Many()),
-          ),
-          (
-            ['DD', '02', 'YYYY'],
-            ['3', '02', '2024'],
-            (['03', '02', '2024'], const Many()),
-          ),
-          (
-            ['03', 'MM', 'YYYY'],
-            ['03', '2', '2024'],
-            (['03', '02', '2024'], const Many()),
-          ),
-          (
-            ['DD', 'MM', 'YYYY'],
-            ['3', '2', '2024'],
-            (['03', '02', '2024'], const Many()),
-          ),
+          (['DD', 'MM', '2024'], ['3', '2', '2024'], (['03', '02', '2024'], const Many())),
+          (['DD', '02', 'YYYY'], ['3', '02', '2024'], (['03', '02', '2024'], const Many())),
+          (['03', 'MM', 'YYYY'], ['03', '2', '2024'], (['03', '02', '2024'], const Many())),
+          (['DD', 'MM', 'YYYY'], ['3', '2', '2024'], (['03', '02', '2024'], const Many())),
         ].indexed) {
       test('en_SG (double digit) - $index', () {
         final (parts, changes) = enSG.update(old, current);
@@ -115,93 +47,25 @@ void main() {
     for (final (index, (old, current, expected))
         in [
           // None
-          (
-            ['1', '1', '2024'],
-            ['1', '1', '2024'],
-            (['1', '1', '2024'], const None()),
-          ),
-          (
-            ['DD', '2', '2024'],
-            ['32', '2', '2024'],
-            (['DD', '2', '2024'], const None()),
-          ),
-          (
-            ['1', 'MM', '2024'],
-            ['1', '13', '2024'],
-            (['1', 'MM', '2024'], const None()),
-          ),
-          (
-            ['1', '1', 'YYYY'],
-            ['1', '1', '10000'],
-            (['1', '1', 'YYYY'], const None()),
-          ),
+          (['1', '1', '2024'], ['1', '1', '2024'], (['1', '1', '2024'], const None())),
+          (['DD', '2', '2024'], ['32', '2', '2024'], (['DD', '2', '2024'], const None())),
+          (['1', 'MM', '2024'], ['1', '13', '2024'], (['1', 'MM', '2024'], const None())),
+          (['1', '1', 'YYYY'], ['1', '1', '10000'], (['1', '1', 'YYYY'], const None())),
           // Single
-          (
-            ['DD', '2', '2024'],
-            ['3', '2', '2024'],
-            (['3', '2', '2024'], const Single(0)),
-          ),
-          (
-            ['0', '2', '2024'],
-            ['3', '2', '2024'],
-            (['3', '2', '2024'], const Single(0)),
-          ),
-          (
-            ['1', '2', '2024'],
-            ['2', '2', '2024'],
-            (['12', '2', '2024'], const Single(1)),
-          ),
-          (
-            ['1', 'MM', '2024'],
-            ['1', '1', '2024'],
-            (['1', '1', '2024'], const Single(1)),
-          ),
-          (
-            ['1', '1', '2024'],
-            ['1', '2', '2024'],
-            (['1', '12', '2024'], const Single(2)),
-          ),
-          (
-            ['1', '2', '2024'],
-            ['1', '3', '2024'],
-            (['1', '3', '2024'], const Single(2)),
-          ),
-          (
-            ['1', '1', 'YYYY'],
-            ['1', '1', '4'],
-            (['1', '1', '0004'], const Single(2)),
-          ),
-          (
-            ['1', '1', '202'],
-            ['1', '1', '4'],
-            (['1', '1', '2024'], const Single(2)),
-          ),
-          (
-            ['1', '1', '2024'],
-            ['1', '1', '2'],
-            (['1', '1', '0002'], const Single(2)),
-          ),
+          (['DD', '2', '2024'], ['3', '2', '2024'], (['3', '2', '2024'], const Single(0))),
+          (['0', '2', '2024'], ['3', '2', '2024'], (['3', '2', '2024'], const Single(0))),
+          (['1', '2', '2024'], ['2', '2', '2024'], (['12', '2', '2024'], const Single(1))),
+          (['1', 'MM', '2024'], ['1', '1', '2024'], (['1', '1', '2024'], const Single(1))),
+          (['1', '1', '2024'], ['1', '2', '2024'], (['1', '12', '2024'], const Single(2))),
+          (['1', '2', '2024'], ['1', '3', '2024'], (['1', '3', '2024'], const Single(2))),
+          (['1', '1', 'YYYY'], ['1', '1', '4'], (['1', '1', '0004'], const Single(2))),
+          (['1', '1', '202'], ['1', '1', '4'], (['1', '1', '2024'], const Single(2))),
+          (['1', '1', '2024'], ['1', '1', '2'], (['1', '1', '0002'], const Single(2))),
           // Many
-          (
-            ['DD', 'MM', '2024'],
-            ['3', '2', '2024'],
-            (['3', '2', '2024'], const Many()),
-          ),
-          (
-            ['DD', '2', 'YYYY'],
-            ['3', '2', '2024'],
-            (['3', '2', '2024'], const Many()),
-          ),
-          (
-            ['3', 'MM', 'YYYY'],
-            ['3', '2', '2024'],
-            (['3', '2', '2024'], const Many()),
-          ),
-          (
-            ['DD', 'MM', 'YYYY'],
-            ['3', '2', '2024'],
-            (['3', '2', '2024'], const Many()),
-          ),
+          (['DD', 'MM', '2024'], ['3', '2', '2024'], (['3', '2', '2024'], const Many())),
+          (['DD', '2', 'YYYY'], ['3', '2', '2024'], (['3', '2', '2024'], const Many())),
+          (['3', 'MM', 'YYYY'], ['3', '2', '2024'], (['3', '2', '2024'], const Many())),
+          (['DD', 'MM', 'YYYY'], ['3', '2', '2024'], (['3', '2', '2024'], const Many())),
         ].indexed) {
       test('enIE (single digit) - $index', () {
         final (parts, changes) = enIE.update(old, current);
@@ -222,17 +86,9 @@ void main() {
           ('DD', '3', ('03', false)),
           ('DD', '4', ('04', true)),
           ('DD', '12', ('12', true)),
-          (
-            'DD',
-            '3.3',
-            ('03', false),
-          ), // This is a quirk but it's not worth fixing
+          ('DD', '3.3', ('03', false)), // This is a quirk but it's not worth fixing
           ('03', '1', ('31', true)),
-          (
-            '02',
-            '3.3',
-            ('23', true),
-          ), // This is a quirk but it's not worth fixing
+          ('02', '3.3', ('23', true)), // This is a quirk but it's not worth fixing
           // Replace rather than append
           ('03', '2', ('02', false)),
           ('04', '3', ('03', false)),
@@ -250,10 +106,7 @@ void main() {
           ('DD', '32', ('DD', false)),
           ('DD', '321', ('DD', false)),
         ].indexed) {
-      test(
-        'double digit - $i',
-        () => expect(enSG.updateDay(old, current), expected),
-      );
+      test('double digit - $i', () => expect(enSG.updateDay(old, current), expected));
     }
 
     for (final (i, (old, current, expected))
@@ -266,17 +119,9 @@ void main() {
           ('DD', '3', ('3', false)),
           ('DD', '4', ('4', true)),
           ('DD', '12', ('12', true)),
-          (
-            'DD',
-            '3,3',
-            ('3', false),
-          ), // This is a quirk but it's not worth fixing
+          ('DD', '3,3', ('3', false)), // This is a quirk but it's not worth fixing
           ('3', '1', ('31', true)),
-          (
-            '2',
-            '3,3',
-            ('23', true),
-          ), // This is a quirk but it's not worth fixing
+          ('2', '3,3', ('23', true)), // This is a quirk but it's not worth fixing
           // Replace rather than append
           ('3', '2', ('2', false)),
           ('4', '3', ('3', false)),
@@ -294,10 +139,7 @@ void main() {
           ('DD', '32', ('DD', false)),
           ('DD', '321', ('DD', false)),
         ].indexed) {
-      test(
-        'single digit - $i',
-        () => expect(bg.updateDay(old, current), expected),
-      );
+      test('single digit - $i', () => expect(bg.updateDay(old, current), expected));
     }
   });
 
@@ -312,17 +154,9 @@ void main() {
           ('MM', '1', ('01', false)),
           ('MM', '2', ('02', true)),
           ('MM', '12', ('12', true)),
-          (
-            'MM',
-            '1.1',
-            ('01', false),
-          ), // This is a quirk but it's not worth fixing
+          ('MM', '1.1', ('01', false)), // This is a quirk but it's not worth fixing
           ('01', '2', ('12', true)),
-          (
-            '01',
-            '1.1',
-            ('11', true),
-          ), // This is a quirk but it's not worth fixing
+          ('01', '1.1', ('11', true)), // This is a quirk but it's not worth fixing
           // Replace rather than append
           ('03', '2', ('02', true)),
           ('02', '1', ('01', false)),
@@ -337,10 +171,7 @@ void main() {
           ('MM', '13', ('MM', false)),
           ('MM', '321', ('MM', false)),
         ].indexed) {
-      test(
-        'double digit month - $i',
-        () => expect(enSG.updateMonth(old, current), expected),
-      );
+      test('double digit month - $i', () => expect(enSG.updateMonth(old, current), expected));
     }
 
     for (final (i, (old, current, expected))
@@ -353,17 +184,9 @@ void main() {
           ('MM', '1', ('1', false)),
           ('MM', '2', ('2', true)),
           ('MM', '12', ('12', true)),
-          (
-            'MM',
-            '1.1',
-            ('1', false),
-          ), // This is a quirk but it's not worth fixing
+          ('MM', '1.1', ('1', false)), // This is a quirk but it's not worth fixing
           ('1', '2', ('12', true)),
-          (
-            '1',
-            '1.1',
-            ('11', true),
-          ), // This is a quirk but it's not worth fixing
+          ('1', '1.1', ('11', true)), // This is a quirk but it's not worth fixing
           // Replace rather than append
           ('3', '2', ('2', true)),
           ('2', '1', ('1', false)),
@@ -378,10 +201,7 @@ void main() {
           ('MM', '13', ('MM', false)),
           ('MM', '321', ('MM', false)),
         ].indexed) {
-      test(
-        'single digit day - $i',
-        () => expect(enIE.updateMonth(old, current), expected),
-      );
+      test('single digit day - $i', () => expect(enIE.updateMonth(old, current), expected));
     }
   });
 
@@ -399,16 +219,8 @@ void main() {
           ('0001', '2', ('0012', false)),
           ('0012', '3', ('0123', false)),
           ('0123', '4', ('1234', true)),
-          (
-            'YYYY',
-            '3.3',
-            ('0003', false),
-          ), // This is a quirk but it's not worth fixing
-          (
-            '0002',
-            '3.3',
-            ('0023', false),
-          ), // This is a quirk but it's not worth fixing
+          ('YYYY', '3.3', ('0003', false)), // This is a quirk but it's not worth fixing
+          ('0002', '3.3', ('0023', false)), // This is a quirk but it's not worth fixing
           // Replace rather than append
           ('2024', '1', ('0001', false)),
           ('2024', '12', ('0012', false)),
@@ -421,10 +233,7 @@ void main() {
           ('0002', '-1', ('0002', false)),
           ('YYYY', '10000', ('YYYY', false)),
         ].indexed) {
-      test(
-        '4 digit year - $i',
-        () => expect(enSG.updateYear(old, current), expected),
-      );
+      test('4 digit year - $i', () => expect(enSG.updateYear(old, current), expected));
     }
   });
 
@@ -443,10 +252,7 @@ void main() {
         (['DD', 'MM', 'YYYY'], 2, -1, ['DD', 'MM', '1999']),
         (['DD', 'MM', '0001'], 2, 1, ['DD', 'MM', '0002']),
       ].indexed) {
-    test(
-      'adjust(...) - $index',
-      () => expect(enSG.adjust(parts, selected, adjustment), expected),
-    );
+    test('adjust(...) - $index', () => expect(enSG.adjust(parts, selected, adjustment), expected));
   }
 
   for (final (index, (year, adjustment, expected))
@@ -459,10 +265,7 @@ void main() {
         ('05', 1, '06'),
         ('05', -1, '04'),
       ].indexed) {
-    test(
-      'adjustDay(...) - $index',
-      () => expect(enSG.adjustDay(year, adjustment), expected),
-    );
+    test('adjustDay(...) - $index', () => expect(enSG.adjustDay(year, adjustment), expected));
   }
 
   for (final (index, (year, adjustment, expected))
@@ -475,10 +278,7 @@ void main() {
         ('05', 1, '06'),
         ('05', -1, '04'),
       ].indexed) {
-    test(
-      'adjustMonth(...) - $index',
-      () => expect(enSG.adjustMonth(year, adjustment), expected),
-    );
+    test('adjustMonth(...) - $index', () => expect(enSG.adjustMonth(year, adjustment), expected));
   }
 
   for (final (index, (year, adjustment, expected))
@@ -491,9 +291,6 @@ void main() {
         ('2024', 1, '2025'),
         ('2024', -1, '2023'),
       ].indexed) {
-    test(
-      'adjustYear(...) - $index',
-      () => expect(enSG.adjustYear(year, adjustment), expected),
-    );
+    test('adjustYear(...) - $index', () => expect(enSG.adjustYear(year, adjustment), expected));
   }
 }

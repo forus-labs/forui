@@ -39,8 +39,7 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
   }) : _debugLabel = debugLabel;
 
   @override
-  _PaginationControllerHookState createState() =>
-      _PaginationControllerHookState();
+  _PaginationControllerHookState createState() => _PaginationControllerHookState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -53,8 +52,7 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
   }
 }
 
-class _PaginationControllerHookState
-    extends HookState<FPaginationController, _PaginationControllerHook> {
+class _PaginationControllerHookState extends HookState<FPaginationController, _PaginationControllerHook> {
   late final FPaginationController _controller = FPaginationController(
     pages: hook.pages,
     initialPage: hook.initialPage,

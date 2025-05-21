@@ -72,22 +72,10 @@ class FPagination extends StatefulWidget {
     this.pages,
     this.onChange,
     super.key,
-  }) : assert(
-         controller == null || initialPage == null,
-         'Cannot provide both controller and initialPage',
-       ),
-       assert(
-         controller == null || pages == null,
-         'Cannot provide both controller and pages',
-       ),
-       assert(
-         initialPage == null || initialPage >= 0,
-         'initialPage must be >= 0',
-       ),
-       assert(
-         initialPage == null || pages == null || initialPage < pages,
-         'initialPage must be < pages',
-       ),
+  }) : assert(controller == null || initialPage == null, 'Cannot provide both controller and initialPage'),
+       assert(controller == null || pages == null, 'Cannot provide both controller and pages'),
+       assert(initialPage == null || initialPage >= 0, 'initialPage must be >= 0'),
+       assert(initialPage == null || pages == null || initialPage < pages, 'initialPage must be < pages'),
        assert(pages == null || pages > 0, 'pages must be > 0');
 
   @override
@@ -112,11 +100,7 @@ class _FPaginationState extends State<FPagination> {
   void initState() {
     super.initState();
     _controller =
-        widget.controller ??
-        FPaginationController(
-          initialPage: widget.initialPage ?? 0,
-          pages: widget.pages ?? 1,
-        );
+        widget.controller ?? FPaginationController(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
     _controller.addListener(_onChange);
   }
 
@@ -131,11 +115,7 @@ class _FPaginationState extends State<FPagination> {
       }
 
       _controller =
-          widget.controller ??
-          FPaginationController(
-            initialPage: widget.initialPage ?? 0,
-            pages: widget.pages ?? 1,
-          );
+          widget.controller ?? FPaginationController(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
       _controller.addListener(_onChange);
     }
   }
@@ -170,10 +150,7 @@ class _FPaginationState extends State<FPagination> {
       padding: style.itemPadding,
       child: ConstrainedBox(
         constraints: style.itemConstraints,
-        child: DefaultTextStyle(
-          style: style.ellipsisTextStyle,
-          child: const Center(child: Text('...')),
-        ),
+        child: DefaultTextStyle(style: style.ellipsisTextStyle, child: const Center(child: Text('...'))),
       ),
     );
 
@@ -188,31 +165,15 @@ class _FPaginationState extends State<FPagination> {
             previous,
             if (_controller.page > _controller.minPagesDisplayedAtEdges) ...[
               if (_controller.showEdges)
-                FPaginationItemData(
-                  page: 0,
-                  style: style,
-                  controller: _controller,
-                  child: const _Page(),
-                ),
+                FPaginationItemData(page: 0, style: style, controller: _controller, child: const _Page()),
               ellipsis,
             ],
             for (int i = start; i <= end; i++)
-              FPaginationItemData(
-                page: i,
-                style: style,
-                controller: _controller,
-                child: const _Page(),
-              ),
-            if (_controller.page <
-                (lastPage - _controller.minPagesDisplayedAtEdges)) ...[
+              FPaginationItemData(page: i, style: style, controller: _controller, child: const _Page()),
+            if (_controller.page < (lastPage - _controller.minPagesDisplayedAtEdges)) ...[
               ellipsis,
               if (_controller.showEdges)
-                FPaginationItemData(
-                  page: lastPage,
-                  style: style,
-                  controller: _controller,
-                  child: const _Page(),
-                ),
+                FPaginationItemData(page: lastPage, style: style, controller: _controller, child: const _Page()),
             ],
             next,
           ],
@@ -236,8 +197,7 @@ class _FPaginationState extends State<FPagination> {
 class FPaginationItemData extends InheritedWidget {
   @useResult
   static FPaginationItemData of(BuildContext context) {
-    final data =
-        context.dependOnInheritedWidgetOfExactType<FPaginationItemData>();
+    final data = context.dependOnInheritedWidgetOfExactType<FPaginationItemData>();
     assert(data != null, 'No FPaginationItemData found in context.');
     return data!;
   }
@@ -298,12 +258,7 @@ class Action extends StatelessWidget {
               constraints: style.itemConstraints,
               child: DefaultTextStyle(
                 style: style.itemTextStyle.resolve(states),
-                child: Center(
-                  child: IconTheme(
-                    data: style.itemIconStyle.resolve(states),
-                    child: child!,
-                  ),
-                ),
+                child: Center(child: IconTheme(data: style.itemIconStyle.resolve(states), child: child!)),
               ),
             ),
           ),
@@ -326,11 +281,7 @@ class _Page extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FPaginationItemData(
-      :page,
-      :controller,
-      :style,
-    ) = FPaginationItemData.of(context);
+    final FPaginationItemData(:page, :controller, :style) = FPaginationItemData.of(context);
     final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
     return Padding(

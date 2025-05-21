@@ -45,7 +45,10 @@ final headers = [
   const FHeader(title: Text('Home')),
   const FHeader(title: Text('Categories')),
   const FHeader(title: Text('Search')),
-  FHeader(title: const Text('Settings'), suffixes: [FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {})]),
+  FHeader(
+    title: const Text('Settings'),
+    suffixes: [FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {})],
+  ),
 ];
 
 final contents = [

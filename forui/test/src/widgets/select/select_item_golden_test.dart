@@ -7,23 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
-const letters = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
-  'M',
-  'N',
-  'O',
-];
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
 
 void main() {
   const key = ValueKey('select');
@@ -48,9 +32,7 @@ void main() {
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
-                  children: [
-                    for (final letter in letters) FSelectItem.text(letter),
-                  ],
+                  children: [for (final letter in letters) FSelectItem.text(letter)],
                 ),
               ],
             ),
@@ -60,10 +42,7 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/section/default.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/section/default.png'));
       });
 
       testWidgets('disabled section', (tester) async {
@@ -77,11 +56,7 @@ void main() {
                 FSelectSection(
                   label: const Text('Lorem'),
                   enabled: false,
-                  children: [
-                    FSelectItem.text('A'),
-                    FSelectItem.text('B'),
-                    FSelectItem.text('C', enabled: true),
-                  ],
+                  children: [FSelectItem.text('A'), FSelectItem.text('B'), FSelectItem.text('C', enabled: true)],
                 ),
               ],
             ),
@@ -91,10 +66,7 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/section/disabled.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/section/disabled.png'));
       });
 
       testWidgets('hover over title does nothing', (tester) async {
@@ -107,9 +79,7 @@ void main() {
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
-                  children: [
-                    for (final letter in letters) FSelectItem.text(letter),
-                  ],
+                  children: [for (final letter in letters) FSelectItem.text(letter)],
                 ),
               ],
             ),
@@ -119,19 +89,14 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
 
         await gesture.moveTo(tester.getCenter(find.text('Lorem')));
         await tester.pump();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/section/hovered.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/section/hovered.png'));
       });
     });
 
@@ -145,9 +110,7 @@ void main() {
               key: key,
               controller: controller,
               contentScrollController: scrollController,
-              children: [
-                for (final letter in letters) FSelectItem.text(letter),
-              ],
+              children: [for (final letter in letters) FSelectItem.text(letter)],
             ),
           ),
         );
@@ -164,10 +127,7 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/item/selects-item.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/selects-item.png'));
       });
 
       testWidgets('does not select disabled item', (tester) async {
@@ -188,9 +148,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile(
-            'select/${theme.name}/item/disabled-selected-item.png',
-          ),
+          matchesGoldenFile('select/${theme.name}/item/disabled-selected-item.png'),
         );
       });
 
@@ -199,10 +157,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
-              key: key,
-              children: [FSelectItem.text(letters.first, enabled: false)],
-            ),
+            child: FSelect<String>(key: key, children: [FSelectItem.text(letters.first, enabled: false)]),
           ),
         );
 
@@ -212,10 +167,7 @@ void main() {
         await tester.tap(find.text('A'));
         await tester.pumpAndSettle(const Duration(seconds: 2));
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/item/disabled-item.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/disabled-item.png'));
       });
 
       testWidgets('hover effect', (tester) async {
@@ -223,29 +175,21 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
-              key: key,
-              children: [FSelectItem.text(letters.first)],
-            ),
+            child: FSelect<String>(key: key, children: [FSelectItem.text(letters.first)]),
           ),
         );
 
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
 
         await gesture.moveTo(tester.getCenter(find.text('A')));
         await tester.pump();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/item/hover.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/hover.png'));
       });
 
       testWidgets('press effect on mobile', (tester) async {
@@ -255,10 +199,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
-              key: key,
-              children: [FSelectItem.text(letters.first)],
-            ),
+            child: FSelect<String>(key: key, children: [FSelectItem.text(letters.first)]),
           ),
         );
 
@@ -272,10 +213,7 @@ void main() {
         await gesture.down(tester.getCenter(find.text('A')));
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/item/press.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/press.png'));
 
         debugDefaultTargetPlatformOverride = null;
       });

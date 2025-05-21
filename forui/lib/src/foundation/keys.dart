@@ -48,9 +48,7 @@ class SetKey<T> extends LocalKey {
   }
 
   @override
-  int get hashCode => Object.hashAll(
-    items.toList()..sort((a, b) => a.hashCode.compareTo(b.hashCode)),
-  );
+  int get hashCode => Object.hashAll(items.toList()..sort((a, b) => a.hashCode.compareTo(b.hashCode)));
 
   @override
   String toString() => 'SetKey(${items.join(', ')})';

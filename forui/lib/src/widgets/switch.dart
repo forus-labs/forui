@@ -96,10 +96,7 @@ class FSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.switchStyle;
-    final formStates = {
-      if (!enabled) WidgetState.disabled,
-      if (error != null) WidgetState.error,
-    };
+    final formStates = {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error};
     final states = {if (value) WidgetState.selected, ...formStates};
 
     // The label is wrapped in a GestureDetector to improve affordance.
@@ -156,23 +153,10 @@ class FSwitch extends StatelessWidget {
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(
-        FlagProperty(
-          'autofocus',
-          value: autofocus,
-          defaultValue: false,
-          ifTrue: 'autofocus',
-        ),
-      )
+      ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(
-        EnumProperty(
-          'dragStartBehavior',
-          dragStartBehavior,
-          defaultValue: DragStartBehavior.start,
-        ),
-      );
+      ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start));
   }
 }
 
@@ -215,18 +199,13 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties.
-  factory FSwitchStyle.inherit({
-    required FColors colors,
-    required FStyle style,
-  }) {
+  factory FSwitchStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return FSwitchStyle(
       focusColor: colors.primary,
       trackColor: FWidgetStateMap({
         // Disabled
-        WidgetState.disabled & WidgetState.selected: colors.disable(
-          colors.primary,
-        ),
+        WidgetState.disabled & WidgetState.selected: colors.disable(colors.primary),
         WidgetState.disabled: colors.disable(colors.border),
 
         // Enabled / Error

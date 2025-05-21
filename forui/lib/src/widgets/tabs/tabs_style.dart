@@ -70,30 +70,24 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   });
 
   /// Creates a [FTabsStyle] that inherits its properties.
-  FTabsStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         decoration: BoxDecoration(
-           border: Border.all(color: colors.muted),
-           borderRadius: style.borderRadius,
-           color: colors.muted,
-         ),
-         selectedLabelTextStyle: typography.sm.copyWith(
-           fontWeight: FontWeight.w500,
-           fontFamily: typography.defaultFontFamily,
-           color: colors.foreground,
-         ),
-         unselectedLabelTextStyle: typography.sm.copyWith(
-           fontWeight: FontWeight.w500,
-           fontFamily: typography.defaultFontFamily,
-           color: colors.mutedForeground,
-         ),
-         indicatorDecoration: BoxDecoration(
-           color: colors.background,
-           borderRadius: style.borderRadius,
-         ),
-         focusedOutlineStyle: style.focusedOutlineStyle,
-       );
+  FTabsStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        decoration: BoxDecoration(
+          border: Border.all(color: colors.muted),
+          borderRadius: style.borderRadius,
+          color: colors.muted,
+        ),
+        selectedLabelTextStyle: typography.sm.copyWith(
+          fontWeight: FontWeight.w500,
+          fontFamily: typography.defaultFontFamily,
+          color: colors.foreground,
+        ),
+        unselectedLabelTextStyle: typography.sm.copyWith(
+          fontWeight: FontWeight.w500,
+          fontFamily: typography.defaultFontFamily,
+          color: colors.mutedForeground,
+        ),
+        indicatorDecoration: BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
+        focusedOutlineStyle: style.focusedOutlineStyle,
+      );
 }

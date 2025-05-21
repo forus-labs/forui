@@ -29,19 +29,13 @@ void main() {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                FCard(
-                  title: const Text('Notifications'),
-                  subtitle: const Text('You have 3 unread messages.'),
-                ),
+                FCard(title: const Text('Notifications'), subtitle: const Text('You have 3 unread messages.')),
               ],
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('card/${theme.name}/content.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/${theme.name}/content.png'));
       });
 
       testWidgets('${theme.name} with image', (tester) async {
@@ -61,10 +55,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('card/${theme.name}/content-image.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/${theme.name}/content-image.png'));
       });
 
       testWidgets('${theme.name} with raw content', (tester) async {
@@ -78,10 +69,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('card/${theme.name}/raw.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('card/${theme.name}/raw.png'));
       });
     }
   });

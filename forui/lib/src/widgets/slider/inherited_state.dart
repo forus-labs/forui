@@ -6,19 +6,14 @@ import 'package:meta/meta.dart';
 @internal
 class InheritedStates extends InheritedWidget {
   static InheritedStates of(BuildContext context) {
-    final result =
-        context.dependOnInheritedWidgetOfExactType<InheritedStates>();
+    final result = context.dependOnInheritedWidgetOfExactType<InheritedStates>();
     assert(result != null, 'No InheritedStates found in context');
     return result!;
   }
 
   final Set<WidgetState> states;
 
-  const InheritedStates({
-    required this.states,
-    required super.child,
-    super.key,
-  });
+  const InheritedStates({required this.states, required super.child, super.key});
 
   @override
   bool updateShouldNotify(InheritedStates old) => !setEquals(states, states);

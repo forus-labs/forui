@@ -18,10 +18,7 @@ void main() {
         TestScaffold(
           child: FSelectTileGroup(
             selectController: controller,
-            children: const [
-              FSelectTile(title: Text('1'), value: 1),
-              FSelectTile(title: Text('2'), value: 2),
-            ],
+            children: const [FSelectTile(title: Text('1'), value: 1), FSelectTile(title: Text('2'), value: 2)],
           ),
         ),
       );
@@ -81,8 +78,7 @@ void main() {
           child: FSelectTileGroup(
             selectController: controller,
             autovalidateMode: AutovalidateMode.always,
-            validator:
-                (values) => values?.isEmpty ?? true ? 'error message' : null,
+            validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
             children: const [
               FSelectTile.suffix(title: Text('1'), value: 1),
               FSelectTile.suffix(title: Text('2'), value: 2),
@@ -106,18 +102,10 @@ void main() {
         TestScaffold(
           child: FTileGroup.merge(
             children: [
-              FTileGroup(
-                children: [
-                  FTile(title: const Text('A')),
-                  FTile(title: const Text('B')),
-                ],
-              ),
+              FTileGroup(children: [FTile(title: const Text('A')), FTile(title: const Text('B'))]),
               FSelectTileGroup(
                 selectController: controller,
-                children: const [
-                  FSelectTile(title: Text('1'), value: 1),
-                  FSelectTile(title: Text('2'), value: 2),
-                ],
+                children: const [FSelectTile(title: Text('1'), value: 1), FSelectTile(title: Text('2'), value: 2)],
               ),
             ],
           ),

@@ -43,13 +43,7 @@ class FAvatar extends StatelessWidget {
     String? semanticsLabel,
     Widget? fallback,
     super.key,
-  }) : child = Content(
-         style: style,
-         size: size,
-         image: image,
-         semanticsLabel: semanticsLabel,
-         fallback: fallback,
-       );
+  }) : child = Content(style: style, size: size, image: image, semanticsLabel: semanticsLabel, fallback: fallback);
 
   /// Creates a [FAvatar] without a fallback.
   FAvatar.raw({Widget? child, this.style, this.size = 40.0, super.key})
@@ -62,10 +56,7 @@ class FAvatar extends StatelessWidget {
       alignment: Alignment.center,
       height: size,
       width: size,
-      decoration: BoxDecoration(
-        color: style.backgroundColor,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: style.backgroundColor, shape: BoxShape.circle),
       clipBehavior: Clip.hardEdge,
       child: DefaultTextStyle(style: style.textStyle, child: child),
     );
@@ -107,15 +98,10 @@ class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
   });
 
   /// Creates a [FAvatarStyle] that inherits its properties.
-  FAvatarStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-  }) : this(
-         backgroundColor: colors.muted,
-         foregroundColor: colors.mutedForeground,
-         textStyle: typography.base.copyWith(
-           color: colors.mutedForeground,
-           height: 0,
-         ),
-       );
+  FAvatarStyle.inherit({required FColors colors, required FTypography typography})
+    : this(
+        backgroundColor: colors.muted,
+        foregroundColor: colors.mutedForeground,
+        textStyle: typography.base.copyWith(color: colors.mutedForeground, height: 0),
+      );
 }

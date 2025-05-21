@@ -10,50 +10,16 @@ import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 ///
 @internal
 typedef Select12 =
-    TextEditingValue Function(
-      TextEditingValue,
-      int first,
-      int last,
-      int end,
-      int firstSeparator,
-      int lastSeparator,
-    );
+    TextEditingValue Function(TextEditingValue, int first, int last, int end, int firstSeparator, int lastSeparator);
 
-TextEditingValue _onFirst(
-  TextEditingValue value,
-  int first,
-  int _,
-  int _,
-  int _,
-  int _,
-) => value.copyWith(
-  selection: TextSelection(baseOffset: 0, extentOffset: first),
-);
+TextEditingValue _onFirst(TextEditingValue value, int first, int _, int _, int _, int _) =>
+    value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
 
-TextEditingValue _onMiddle(
-  TextEditingValue value,
-  int first,
-  int last,
-  int _,
-  int firstSeparator,
-  int _,
-) => value.copyWith(
-  selection: TextSelection(
-    baseOffset: first + firstSeparator,
-    extentOffset: last,
-  ),
-);
+TextEditingValue _onMiddle(TextEditingValue value, int first, int last, int _, int firstSeparator, int _) =>
+    value.copyWith(selection: TextSelection(baseOffset: first + firstSeparator, extentOffset: last));
 
-TextEditingValue _onLast(
-  TextEditingValue value,
-  int _,
-  int last,
-  int end,
-  int _,
-  int lastSeparator,
-) => value.copyWith(
-  selection: TextSelection(baseOffset: last + lastSeparator, extentOffset: end),
-);
+TextEditingValue _onLast(TextEditingValue value, int _, int last, int end, int _, int lastSeparator) =>
+    value.copyWith(selection: TextSelection(baseOffset: last + lastSeparator, extentOffset: end));
 
 @internal
 class Time12InputController extends TimeInputController {
@@ -78,11 +44,7 @@ class Time12InputController extends TimeInputController {
       rawValue =
           (forward
               ? selector.resolve(value, onFirst: _onMiddle, onMiddle: _onLast)
-              : selector.resolve(
-                value,
-                onLast: _onMiddle,
-                onMiddle: _onFirst,
-              )) ??
+              : selector.resolve(value, onLast: _onMiddle, onMiddle: _onFirst)) ??
           value;
     } finally {
       mutating = false;
@@ -97,15 +59,9 @@ class Time12InputController extends TimeInputController {
       rawValue =
           selector.resolve(
             value,
-            onFirst:
-                (_, _, _, _, _, _) =>
-                    selector.select(parser.adjust(parts, 0, amount), 0),
-            onMiddle:
-                (_, _, _, _, _, _) =>
-                    selector.select(parser.adjust(parts, 1, amount), 1),
-            onLast:
-                (_, _, _, _, _, _) =>
-                    selector.select(parser.adjust(parts, 2, amount), 2),
+            onFirst: (_, _, _, _, _, _) => selector.select(parser.adjust(parts, 0, amount), 0),
+            onMiddle: (_, _, _, _, _, _) => selector.select(parser.adjust(parts, 1, amount), 1),
+            onLast: (_, _, _, _, _, _) => selector.select(parser.adjust(parts, 2, amount), 2),
           ) ??
           value;
       onValueChanged(text);
@@ -129,10 +85,7 @@ class Time12Selector extends Selector {
           format.pattern!.startsWith('a')
               ? localizations.timeFieldTimeSeparator
               : localizations.timeFieldPeriodSeparator,
-      super(
-        localizations,
-        RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'),
-      );
+      super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
 
   @override
   TextEditingValue? resolve(
@@ -160,30 +113,9 @@ class Time12Selector extends Selector {
     final offset = value.selection.extentOffset;
 
     return switch (offset) {
-      _ when 0 <= offset && offset <= first => onFirst(
-        value,
-        first,
-        last,
-        end,
-        f,
-        l,
-      ),
-      _ when first + f <= offset && offset <= last => onMiddle(
-        value,
-        first,
-        last,
-        end,
-        f,
-        l,
-      ),
-      _ when last + l <= offset && offset <= end => onLast(
-        value,
-        first,
-        last,
-        end,
-        f,
-        l,
-      ),
+      _ when 0 <= offset && offset <= first => onFirst(value, first, last, end, f, l),
+      _ when first + f <= offset && offset <= last => onMiddle(value, first, last, end, f, l),
+      _ when last + l <= offset && offset <= end => onLast(value, first, last, end, f, l),
       _ => null,
     };
   }
@@ -204,37 +136,23 @@ class Time12Selector extends Selector {
         end = start + parts[1].length;
 
       default:
-        start =
-            parts[0].length + _first.length + parts[1].length + _last.length;
+        start = parts[0].length + _first.length + parts[1].length + _last.length;
         end = start + parts[2].length;
     }
 
-    return TextEditingValue(
-      text: join(parts),
-      selection: TextSelection(baseOffset: start, extentOffset: end),
-    );
+    return TextEditingValue(text: join(parts), selection: TextSelection(baseOffset: start, extentOffset: end));
   }
 
   @override
-  String join(List<String> parts) =>
-      parts[0] +
-      _first +
-      parts[1] +
-      _last +
-      parts[2] +
-      localizations.timeFieldSuffix;
+  String join(List<String> parts) => parts[0] + _first + parts[1] + _last + parts[2] + localizations.timeFieldSuffix;
 
   @override
   List<String> split(String raw) {
     final truncated = raw.replaceAll(suffix, '');
 
     // These locales do not have a separator between the period and time.
-    if (localizations.localeName == 'zh_HK' ||
-        localizations.localeName == 'zh_TW') {
-      return [
-        truncated.substring(0, 2),
-        ...truncated.substring(2).split(localizations.timeFieldTimeSeparator),
-      ];
+    if (localizations.localeName == 'zh_HK' || localizations.localeName == 'zh_TW') {
+      return [truncated.substring(0, 2), ...truncated.substring(2).split(localizations.timeFieldTimeSeparator)];
     }
 
     final parts = truncated.split(_last);

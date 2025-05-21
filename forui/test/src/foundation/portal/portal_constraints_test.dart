@@ -17,13 +17,7 @@ void main() {
 
     test('constructor with parameters initializes with given values', () {
       const constraints =
-          FPortalConstraints(
-                minWidth: 100,
-                maxWidth: 200,
-                minHeight: 300,
-                maxHeight: 400,
-              )
-              as FixedConstraints;
+          FPortalConstraints(minWidth: 100, maxWidth: 200, minHeight: 300, maxHeight: 400) as FixedConstraints;
 
       expect(constraints.minWidth, 100);
       expect(constraints.maxWidth, 200);
@@ -31,22 +25,17 @@ void main() {
       expect(constraints.maxHeight, 400);
     });
 
-    test(
-      'tightFor constructor with both width and height initializes with tight constraints',
-      () {
-        const constraints =
-            FPortalConstraints.tightFor(width: 150, height: 250)
-                as FixedConstraints;
+    test('tightFor constructor with both width and height initializes with tight constraints', () {
+      const constraints = FPortalConstraints.tightFor(width: 150, height: 250) as FixedConstraints;
 
-        expect(constraints.minWidth, 150);
-        expect(constraints.maxWidth, 150);
-        expect(constraints.minHeight, 250);
-        expect(constraints.maxHeight, 250);
-        expect(constraints.hasTightWidth, true);
-        expect(constraints.hasTightHeight, true);
-        expect(constraints.isTight, true);
-      },
-    );
+      expect(constraints.minWidth, 150);
+      expect(constraints.maxWidth, 150);
+      expect(constraints.minHeight, 250);
+      expect(constraints.maxHeight, 250);
+      expect(constraints.hasTightWidth, true);
+      expect(constraints.hasTightHeight, true);
+      expect(constraints.isTight, true);
+    });
   });
 
   group('FAutoHeightPortalConstraints', () {
@@ -59,10 +48,7 @@ void main() {
     });
 
     test('constructor with parameters initializes with given values', () {
-      const constraints = FAutoHeightPortalConstraints(
-        minWidth: 100,
-        maxWidth: 200,
-      );
+      const constraints = FAutoHeightPortalConstraints(minWidth: 100, maxWidth: 200);
 
       expect(constraints.minWidth, 100);
       expect(constraints.maxWidth, 200);
@@ -83,38 +69,17 @@ void main() {
     });
 
     test('isTight returns true when minWidth equals maxWidth', () {
-      expect(
-        const FAutoHeightPortalConstraints(
-          minWidth: 100,
-          maxWidth: 100,
-        ).isTight,
-        true,
-      );
+      expect(const FAutoHeightPortalConstraints(minWidth: 100, maxWidth: 100).isTight, true);
     });
 
     test('isTight returns false when minWidth is less than maxWidth', () {
-      expect(
-        const FAutoHeightPortalConstraints(
-          minWidth: 100,
-          maxWidth: 101,
-        ).isTight,
-        false,
-      );
+      expect(const FAutoHeightPortalConstraints(minWidth: 100, maxWidth: 101).isTight, false);
     });
 
     test('equality and hashCode', () {
-      const constraints1 = FAutoHeightPortalConstraints(
-        minWidth: 100,
-        maxWidth: 200,
-      );
-      const constraints2 = FAutoHeightPortalConstraints(
-        minWidth: 100,
-        maxWidth: 200,
-      );
-      const constraints3 = FAutoHeightPortalConstraints(
-        minWidth: 150,
-        maxWidth: 250,
-      );
+      const constraints1 = FAutoHeightPortalConstraints(minWidth: 100, maxWidth: 200);
+      const constraints2 = FAutoHeightPortalConstraints(minWidth: 100, maxWidth: 200);
+      const constraints3 = FAutoHeightPortalConstraints(minWidth: 150, maxWidth: 250);
 
       expect(constraints1, equals(constraints2));
       expect(constraints1.hashCode, equals(constraints2.hashCode));
@@ -124,14 +89,8 @@ void main() {
     });
 
     test('toString returns correct string representation', () {
-      const constraints = FAutoHeightPortalConstraints(
-        minWidth: 100,
-        maxWidth: 200,
-      );
-      expect(
-        constraints.toString(),
-        'FAutoHeightPortalConstraints(minWidth: 100.0, maxWidth: 200.0)',
-      );
+      const constraints = FAutoHeightPortalConstraints(minWidth: 100, maxWidth: 200);
+      expect(constraints.toString(), 'FAutoHeightPortalConstraints(minWidth: 100.0, maxWidth: 200.0)');
     });
   });
 
@@ -145,10 +104,7 @@ void main() {
     });
 
     test('constructor with parameters initializes with given values', () {
-      const constraints = FAutoWidthPortalConstraints(
-        minHeight: 100,
-        maxHeight: 200,
-      );
+      const constraints = FAutoWidthPortalConstraints(minHeight: 100, maxHeight: 200);
 
       expect(constraints.minHeight, 100);
       expect(constraints.maxHeight, 200);
@@ -169,38 +125,17 @@ void main() {
     });
 
     test('isTight returns true when minHeight equals maxHeight', () {
-      expect(
-        const FAutoWidthPortalConstraints(
-          minHeight: 100,
-          maxHeight: 100,
-        ).isTight,
-        true,
-      );
+      expect(const FAutoWidthPortalConstraints(minHeight: 100, maxHeight: 100).isTight, true);
     });
 
     test('isTight returns false when minHeight is less than maxHeight', () {
-      expect(
-        const FAutoWidthPortalConstraints(
-          minHeight: 100,
-          maxHeight: 200,
-        ).isTight,
-        false,
-      );
+      expect(const FAutoWidthPortalConstraints(minHeight: 100, maxHeight: 200).isTight, false);
     });
 
     test('equality and hashCode', () {
-      const constraints1 = FAutoWidthPortalConstraints(
-        minHeight: 100,
-        maxHeight: 200,
-      );
-      const constraints2 = FAutoWidthPortalConstraints(
-        minHeight: 100,
-        maxHeight: 200,
-      );
-      const constraints3 = FAutoWidthPortalConstraints(
-        minHeight: 150,
-        maxHeight: 250,
-      );
+      const constraints1 = FAutoWidthPortalConstraints(minHeight: 100, maxHeight: 200);
+      const constraints2 = FAutoWidthPortalConstraints(minHeight: 100, maxHeight: 200);
+      const constraints3 = FAutoWidthPortalConstraints(minHeight: 150, maxHeight: 250);
 
       expect(constraints1, equals(constraints2));
       expect(constraints1.hashCode, equals(constraints2.hashCode));
@@ -210,14 +145,8 @@ void main() {
     });
 
     test('toString returns correct string representation', () {
-      const constraints = FAutoWidthPortalConstraints(
-        minHeight: 100,
-        maxHeight: 200,
-      );
-      expect(
-        constraints.toString(),
-        'FAutoWidthPortalConstraints(minHeight: 100.0, maxHeight: 200.0)',
-      );
+      const constraints = FAutoWidthPortalConstraints(minHeight: 100, maxHeight: 200);
+      expect(constraints.toString(), 'FAutoWidthPortalConstraints(minHeight: 100.0, maxHeight: 200.0)');
     });
   });
 }

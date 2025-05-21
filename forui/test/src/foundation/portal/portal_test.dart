@@ -26,18 +26,12 @@ void main() {
                       dimension: 100,
                       child: Align(
                         alignment: Alignment.bottomLeft,
-                        child: SizedBox.square(
-                          dimension: 1,
-                          child: GestureDetector(onTap: () => taps++),
-                        ),
+                        child: SizedBox.square(dimension: 1, child: GestureDetector(onTap: () => taps++)),
                       ),
                     ),
                   ),
                 ),
-            child: const ColoredBox(
-              color: Colors.yellow,
-              child: SizedBox.square(dimension: 100),
-            ),
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),
       );

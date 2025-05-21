@@ -11,19 +11,17 @@ class TappablePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTappable(
-    builder:
-        (context, states, child) => Container(
-          decoration: BoxDecoration(
-            color:
-                (states.contains(WidgetState.hovered) || states.contains(WidgetState.pressed))
-                    ? context.theme.colors.secondary
-                    : context.theme.colors.background,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: context.theme.colors.border),
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-          child: child!,
-        ),
+    builder: (context, states, child) => Container(
+      decoration: BoxDecoration(
+        color: (states.contains(WidgetState.hovered) || states.contains(WidgetState.pressed))
+            ? context.theme.colors.secondary
+            : context.theme.colors.background,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: context.theme.colors.border),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+      child: child!,
+    ),
     child: const Text('Tappable'),
     onPress: () {},
   );

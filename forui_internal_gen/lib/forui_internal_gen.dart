@@ -16,6 +16,5 @@ Builder styleBuilder(BuilderOptions options) => PartBuilder(
   [StyleGenerator()],
   '.style.dart',
   header: _header,
-  formatOutput: (generated, version) =>
-      DartFormatter(pageWidth: 120, languageVersion: version).format(generated),
+  formatOutput: (generated, version) => DartFormatter(pageWidth: 120, languageVersion: version).format(generated),
 );

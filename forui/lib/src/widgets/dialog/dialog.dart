@@ -80,19 +80,9 @@ class FDialog extends StatelessWidget {
     super.key,
   }) : builder = switch (direction) {
          Axis.horizontal =>
-           (_, style) => HorizontalContent(
-             style: style.horizontalStyle,
-             title: title,
-             body: body,
-             actions: actions,
-           ),
+           (_, style) => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
          Axis.vertical =>
-           (_, style) => VerticalContent(
-             style: style.verticalStyle,
-             title: title,
-             body: body,
-             actions: actions,
-           ),
+           (_, style) => VerticalContent(style: style.verticalStyle, title: title, body: body, actions: actions),
        };
 
   /// Creates a adaptive [FDialog] that lays out the [actions] vertically on [FBreakpoints.sm] devices and
@@ -107,19 +97,13 @@ class FDialog extends StatelessWidget {
     super.key,
   }) : builder =
            ((context, style) => switch (MediaQuery.sizeOf(context).width) {
-             final width when width < context.theme.breakpoints.sm =>
-               VerticalContent(
-                 style: style.verticalStyle,
-                 title: title,
-                 body: body,
-                 actions: actions,
-               ),
-             _ => HorizontalContent(
-               style: style.horizontalStyle,
+             final width when width < context.theme.breakpoints.sm => VerticalContent(
+               style: style.verticalStyle,
                title: title,
                body: body,
                actions: actions,
              ),
+             _ => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
            });
 
   /// Creates a [FDialog] with a custom builder.
@@ -139,9 +123,7 @@ class FDialog extends StatelessWidget {
     return AnimatedPadding(
       padding:
           MediaQuery.viewInsetsOf(context) +
-          style.insetPadding.resolve(
-            Directionality.maybeOf(context) ?? TextDirection.ltr,
-          ),
+          style.insetPadding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr),
       duration: style.insetAnimationDuration,
       curve: style.insetAnimationCurve,
       child: MediaQuery.removeViewInsets(
@@ -152,9 +134,7 @@ class FDialog extends StatelessWidget {
         context: context,
         child: Align(
           child: DefaultTextStyle(
-            style: context.theme.typography.base.copyWith(
-              color: theme.colors.foreground,
-            ),
+            style: context.theme.typography.base.copyWith(color: theme.colors.foreground),
             child: Semantics(
               scopesRoute: true,
               explicitChildNodes: true,
@@ -162,10 +142,7 @@ class FDialog extends StatelessWidget {
               label: semanticsLabel,
               child: ConstrainedBox(
                 constraints: constraints,
-                child: DecoratedBox(
-                  decoration: style.decoration,
-                  child: builder(context, style),
-                ),
+                child: DecoratedBox(decoration: style.decoration, child: builder(context, style)),
               ),
             ),
           ),
@@ -223,28 +200,15 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     required this.verticalStyle,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,
-    this.insetPadding = const EdgeInsets.symmetric(
-      horizontal: 40,
-      vertical: 24,
-    ),
+    this.insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
   });
 
   /// Creates a [FDialogStyle] that inherits its properties.
-  factory FDialogStyle.inherit({
-    required FStyle style,
-    required FColors colors,
-    required FTypography typography,
-  }) {
-    final title = typography.lg.copyWith(
-      fontWeight: FontWeight.w600,
-      color: colors.foreground,
-    );
+  factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {
+    final title = typography.lg.copyWith(fontWeight: FontWeight.w600, color: colors.foreground);
     final body = typography.sm.copyWith(color: colors.mutedForeground);
     return FDialogStyle(
-      decoration: BoxDecoration(
-        borderRadius: style.borderRadius,
-        color: colors.background,
-      ),
+      decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
       horizontalStyle: FDialogContentStyle(
         titleTextStyle: title,
         bodyTextStyle: body,

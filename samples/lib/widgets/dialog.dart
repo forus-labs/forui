@@ -22,23 +22,21 @@ class DialogPage extends Sample {
     final style = context.theme.dialogStyle;
     return FButton(
       intrinsicWidth: true,
-      onPress:
-          () => showAdaptiveDialog(
-            context: context,
-            builder:
-                (context) => FTheme(
-                  data: theme,
-                  child: FDialog(
-                    style: style,
-                    direction: direction,
-                    title: const Text('Are you absolutely sure?'),
-                    body: const Text(
-                      'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-                    ),
-                    actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
-                  ),
-                ),
+      onPress: () => showAdaptiveDialog(
+        context: context,
+        builder: (context) => FTheme(
+          data: theme,
+          child: FDialog(
+            style: style,
+            direction: direction,
+            title: const Text('Are you absolutely sure?'),
+            body: const Text(
+              'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+            ),
+            actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
           ),
+        ),
+      ),
       child: const Text('Show Dialog'),
     );
   }

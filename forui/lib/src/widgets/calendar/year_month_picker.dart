@@ -56,9 +56,7 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
         today: widget.today,
         initial: widget.month.value.truncate(to: DateUnit.years),
         onPress: (date) {
-          widget.month.value = switch (widget.month.value.copyWith(
-            year: date.year,
-          )) {
+          widget.month.value = switch (widget.month.value.copyWith(year: date.year)) {
             final proposed when proposed < widget.start => widget.start,
             final proposed when widget.end < proposed => widget.end,
             final proposed => proposed,
@@ -77,9 +75,7 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
         today: widget.today,
         initial: widget.month.value.truncate(to: DateUnit.years),
         onPress: (date) {
-          widget.month.value = switch (widget.month.value.copyWith(
-            month: date.month,
-          )) {
+          widget.month.value = switch (widget.month.value.copyWith(month: date.month)) {
             final proposed when proposed < widget.start => widget.start,
             final proposed when widget.end < proposed => widget.end,
             final proposed => proposed,

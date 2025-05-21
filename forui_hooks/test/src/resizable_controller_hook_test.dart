@@ -23,15 +23,13 @@ void main() {
                   FResizableRegion(
                     initialExtent: 100,
                     minExtent: 50,
-                    builder: (context, snapshot, child) =>
-                        const Align(child: Text('A')),
+                    builder: (context, snapshot, child) => const Align(child: Text('A')),
                     child: Container(),
                   ),
                   FResizableRegion(
                     initialExtent: 100,
                     minExtent: 50,
-                    builder: (context, snapshot, child) =>
-                        const Align(child: Text('B')),
+                    builder: (context, snapshot, child) => const Align(child: Text('B')),
                     child: Container(),
                   ),
                 ],
@@ -62,15 +60,13 @@ void main() {
                   FResizableRegion(
                     initialExtent: 100,
                     minExtent: 50,
-                    builder: (context, snapshot, child) =>
-                        const Align(child: Text('A')),
+                    builder: (context, snapshot, child) => const Align(child: Text('A')),
                     child: Container(),
                   ),
                   FResizableRegion(
                     initialExtent: 100,
                     minExtent: 50,
-                    builder: (context, snapshot, child) =>
-                        const Align(child: Text('B')),
+                    builder: (context, snapshot, child) => const Align(child: Text('B')),
                     child: Container(),
                   ),
                 ],

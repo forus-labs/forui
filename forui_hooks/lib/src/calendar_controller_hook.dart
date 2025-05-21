@@ -4,8 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
-typedef _Create<T> =
-    FCalendarController<T> Function(_CalendarControllerHook<T>);
+typedef _Create<T> = FCalendarController<T> Function(_CalendarControllerHook<T>);
 
 /// Creates a [FCalendarController] that allows only a single date to be selected and is automatically disposed.
 ///
@@ -135,8 +134,7 @@ class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
        _debugLabel = debugLabel;
 
   @override
-  _CalendarControllerHookState<T> createState() =>
-      _CalendarControllerHookState<T>();
+  _CalendarControllerHookState<T> createState() => _CalendarControllerHookState<T>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -147,8 +145,7 @@ class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
   }
 }
 
-class _CalendarControllerHookState<T>
-    extends HookState<FCalendarController<T>, _CalendarControllerHook<T>> {
+class _CalendarControllerHookState<T> extends HookState<FCalendarController<T>, _CalendarControllerHook<T>> {
   late final FCalendarController<T> _controller;
 
   @override

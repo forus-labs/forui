@@ -44,9 +44,7 @@ void main() {
 
     for (final theme in TestScaffold.themes) {
       for (final variant in Variant.values) {
-        testWidgets('${theme.name} enabled with FButtonContent', (
-          tester,
-        ) async {
+        testWidgets('${theme.name} enabled with FButtonContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
@@ -62,9 +60,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/enabled-content.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/enabled-content.png'),
           );
         });
 
@@ -85,9 +81,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/intrinsic-width.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/intrinsic-width.png'),
           );
         });
 
@@ -105,9 +99,7 @@ void main() {
             ),
           );
 
-          final gesture = await tester.createGesture(
-            kind: PointerDeviceKind.mouse,
-          );
+          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
           await gesture.addPointer(location: Offset.zero);
           addTearDown(gesture.removePointer);
           await tester.pump();
@@ -117,9 +109,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/enabled-hovered.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/enabled-hovered.png'),
           );
         });
 
@@ -137,9 +127,7 @@ void main() {
             ),
           );
 
-          final gesture = await tester.createGesture(
-            kind: PointerDeviceKind.mouse,
-          );
+          final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
           await gesture.addPointer(location: Offset.zero);
           addTearDown(gesture.removePointer);
           await tester.pump();
@@ -149,9 +137,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/enabled-long-pressed.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/enabled-long-pressed.png'),
           );
         });
 
@@ -170,15 +156,10 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('button/${theme.name}/$variant/focused.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$variant/focused.png'));
         });
 
-        testWidgets('${theme.name} disabled with FButtonContent', (
-          tester,
-        ) async {
+        testWidgets('${theme.name} disabled with FButtonContent', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
@@ -194,9 +175,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/disabled-content.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/disabled-content.png'),
           );
         });
 
@@ -270,19 +249,13 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FButton.icon(
-                onPress: () {},
-                style: variant,
-                child: const Icon(FIcons.chevronRight),
-              ),
+              child: FButton.icon(onPress: () {}, style: variant, child: const Icon(FIcons.chevronRight)),
             ),
           );
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/icon-enabled-button.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/icon-enabled-button.png'),
           );
         });
 
@@ -290,25 +263,17 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child: FButton.icon(
-                onPress: null,
-                style: variant,
-                child: const Icon(FIcons.chevronRight),
-              ),
+              child: FButton.icon(onPress: null, style: variant, child: const Icon(FIcons.chevronRight)),
             ),
           );
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/icon-disabled.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/icon-disabled.png'),
           );
         });
 
-        testWidgets('${theme.name} with enabled circular progress', (
-          tester,
-        ) async {
+        testWidgets('${theme.name} with enabled circular progress', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
@@ -323,15 +288,11 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/circular-progress-enabled-button.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/circular-progress-enabled-button.png'),
           );
         });
 
-        testWidgets('${theme.name} with disabled circular progress', (
-          tester,
-        ) async {
+        testWidgets('${theme.name} with disabled circular progress', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
@@ -346,9 +307,7 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile(
-              'button/${theme.name}/$variant/circular-progress-disabled-button.png',
-            ),
+            matchesGoldenFile('button/${theme.name}/$variant/circular-progress-disabled-button.png'),
           );
         });
       }

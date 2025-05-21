@@ -25,17 +25,9 @@ void main() {
 
     for (final theme in TestScaffold.themes) {
       testWidgets('${theme.name} focused', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: const FCheckbox(autofocus: true),
-          ),
-        );
+        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FCheckbox(autofocus: true)));
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('check-box/${theme.name}/focused.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('check-box/${theme.name}/focused.png'));
       });
 
       for (final (enabled, value, error) in [
@@ -54,11 +46,7 @@ void main() {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme.data,
-                child: FCheckbox(
-                  enabled: enabled,
-                  value: value,
-                  error: error ? const Text('') : null,
-                ),
+                child: FCheckbox(enabled: enabled, value: value, error: error ? const Text('') : null),
               ),
             );
 
@@ -79,13 +67,8 @@ void main() {
                 theme: theme.data,
                 child: FCheckbox(
                   label: const Text('Terms and Conditions'),
-                  description: const Text(
-                    'I agree to the terms and conditions.',
-                  ),
-                  error:
-                      error
-                          ? const Text('Please check the agree to continue.')
-                          : null,
+                  description: const Text('I agree to the terms and conditions.'),
+                  error: error ? const Text('Please check the agree to continue.') : null,
                   value: value,
                   enabled: enabled,
                 ),

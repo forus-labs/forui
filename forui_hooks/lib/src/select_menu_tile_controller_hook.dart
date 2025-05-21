@@ -11,7 +11,5 @@ FSelectMenuTileController<T> useFSelectMenuTileController<T>({
 }) => useFMultiValueNotifier<T>(values: values, min: min, max: max, keys: keys);
 
 /// Creates a [FSelectMenuTileController] that allows only one element at a time.
-FSelectMenuTileController<T> useFRadioSelectMenuTileController<T>({
-  T? value,
-  List<Object?>? keys,
-}) => useFRadioMultiValueNotifier<T>(value: value, keys: keys);
+FSelectMenuTileController<T> useFRadioSelectMenuTileController<T>({T? value, List<Object?>? keys}) =>
+    useFRadioMultiValueNotifier<T>(value: value, keys: keys);

@@ -29,9 +29,7 @@ void main() {
     }
 
     testWidgets('arrow key adjustment - $description', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(locale: const Locale('en', 'SG'), child: field),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field));
 
       await tester.tapAt(tester.getTopLeft(find.byKey(key)));
       await tester.pumpAndSettle();
@@ -63,9 +61,7 @@ void main() {
       testWidgets('placeholder - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('en', 'SG'), child: field),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field));
 
         await tester.tapAt(tester.getTopLeft(find.byKey(key)));
         await tester.pumpAndSettle();
@@ -84,9 +80,7 @@ void main() {
       testWidgets('partial date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('en', 'SG'), child: field),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field));
 
         await tester.enterText(find.byKey(key), '28/MM/YYYY');
         await tester.pumpAndSettle();
@@ -102,9 +96,7 @@ void main() {
       testWidgets('partial date - hr locale - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('hr'), child: field),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('hr'), child: field));
 
         await tester.enterText(find.byKey(key), '28. MM. YYYY');
         await tester.pumpAndSettle();
@@ -120,9 +112,7 @@ void main() {
       testWidgets('full date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('en', 'SG'), child: field),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field));
 
         await tester.enterText(find.byKey(key), '14/01/2025');
         await tester.pumpAndSettle();
@@ -137,14 +127,8 @@ void main() {
     }
 
     for (final (description, field) in [
-      (
-        'input only',
-        (controller) => FDateField.input(key: key, controller: controller),
-      ),
-      (
-        'input & calendar',
-        (controller) => FDateField(key: key, controller: controller),
-      ),
+      ('input only', (controller) => FDateField.input(key: key, controller: controller)),
+      ('input & calendar', (controller) => FDateField(key: key, controller: controller)),
     ]) {
       testWidgets('custom invalid date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
@@ -160,12 +144,7 @@ void main() {
           },
         );
 
-        await tester.pumpWidget(
-          TestScaffold.app(
-            locale: const Locale('en', 'SG'),
-            child: field(controller),
-          ),
-        );
+        await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field(controller)));
 
         await tester.enterText(find.byKey(key), '01/01/1984');
         await tester.pumpAndSettle();
@@ -187,9 +166,7 @@ void main() {
     ('input & calendar, clearable', FDateField(key: key, clearable: true), 1),
   ]) {
     testWidgets(description, (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(locale: const Locale('en', 'SG'), child: field),
-      );
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field));
 
       expect(find.bySemanticsLabel('Clear'), findsNothing);
 
@@ -201,12 +178,7 @@ void main() {
   }
 
   testWidgets('enter closes popover', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        locale: const Locale('en', 'SG'),
-        child: FDateField(key: key),
-      ),
-    );
+    await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: FDateField(key: key)));
 
     await tester.tap(find.byKey(key));
     await tester.pumpAndSettle();

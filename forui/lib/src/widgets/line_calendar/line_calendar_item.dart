@@ -6,13 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 /// The state of a line calendar item used to build a line calendar item.
-typedef FLineCalendarItemData =
-    ({
-      FLineCalendarStyle style,
-      DateTime date,
-      bool today,
-      Set<WidgetState> states,
-    });
+typedef FLineCalendarItemData = ({FLineCalendarStyle style, DateTime date, bool today, Set<WidgetState> states});
 
 @internal
 class Item extends StatelessWidget {
@@ -37,9 +31,7 @@ class Item extends StatelessWidget {
     builder:
         (context, selected, _) => FTappable(
           style: style.tappableStyle,
-          semanticsLabel: (FLocalizations.of(context) ??
-                  FDefaultLocalizations())
-              .fullDate(date),
+          semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
           selected: selected == date,
           onPress: () => controller.select(date),
           builder:
@@ -48,13 +40,7 @@ class Item extends StatelessWidget {
                 (style: style, date: date, today: today, states: states),
                 Stack(
                   children: [
-                    Positioned.fill(
-                      child: ItemContent(
-                        style: style,
-                        date: date,
-                        states: states,
-                      ),
-                    ),
+                    Positioned.fill(child: ItemContent(style: style, date: date, states: states)),
                     if (today)
                       Positioned(
                         top: 6,
@@ -92,12 +78,7 @@ class ItemContent extends StatelessWidget {
   final DateTime date;
   final Set<WidgetState> states;
 
-  const ItemContent({
-    required this.style,
-    required this.date,
-    required this.states,
-    super.key,
-  });
+  const ItemContent({required this.style, required this.date, required this.states, super.key});
 
   @override
   Widget build(BuildContext context) {

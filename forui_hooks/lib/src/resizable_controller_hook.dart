@@ -16,10 +16,7 @@ FResizableController useFResizableController({
     onResizeUpdate: onResizeUpdate,
     onResizeEnd: onResizeEnd,
     debugLabel: 'useFResizableController',
-    create: (hook) => FResizableController(
-      onResizeUpdate: hook.onResizeUpdate,
-      onResizeEnd: hook.onResizeEnd,
-    ),
+    create: (hook) => FResizableController(onResizeUpdate: hook.onResizeUpdate, onResizeEnd: hook.onResizeEnd),
   ),
 );
 
@@ -34,10 +31,7 @@ FResizableController useFCascadeResizableController({
     onResizeUpdate: onResizeUpdate,
     onResizeEnd: onResizeEnd,
     debugLabel: 'useFResizableCascadeController',
-    create: (hook) => FResizableController.cascade(
-      onResizeUpdate: hook.onResizeUpdate,
-      onResizeEnd: hook.onResizeEnd,
-    ),
+    create: (hook) => FResizableController.cascade(onResizeUpdate: hook.onResizeUpdate, onResizeEnd: hook.onResizeEnd),
     keys: keys,
   ),
 );
@@ -58,8 +52,7 @@ class _ResizableControllerHook extends Hook<FResizableController> {
        _create = create;
 
   @override
-  _ResizableControllerHookState createState() =>
-      _ResizableControllerHookState();
+  _ResizableControllerHookState createState() => _ResizableControllerHookState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -70,8 +63,7 @@ class _ResizableControllerHook extends Hook<FResizableController> {
   }
 }
 
-class _ResizableControllerHookState<T>
-    extends HookState<FResizableController, _ResizableControllerHook> {
+class _ResizableControllerHookState<T> extends HookState<FResizableController, _ResizableControllerHook> {
   late final FResizableController _controller;
 
   @override

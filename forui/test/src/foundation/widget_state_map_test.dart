@@ -8,24 +8,15 @@ void main() {
   group('FWidgetStateMap', () {
     group('resolve(...)', () {
       test('resolves matching', () {
-        const map = FWidgetStateMap<Color>({
-          WidgetState.hovered: Colors.green,
-          WidgetState.pressed: Colors.blue,
-        });
+        const map = FWidgetStateMap<Color>({WidgetState.hovered: Colors.green, WidgetState.pressed: Colors.blue});
 
         expect(map.resolve({WidgetState.pressed}), Colors.blue);
       });
 
       test('resolves first matching', () {
-        const map = FWidgetStateMap<Color>({
-          WidgetState.pressed: Colors.blue,
-          WidgetState.hovered: Colors.green,
-        });
+        const map = FWidgetStateMap<Color>({WidgetState.pressed: Colors.blue, WidgetState.hovered: Colors.green});
 
-        expect(
-          map.resolve({WidgetState.pressed, WidgetState.hovered}),
-          Colors.blue,
-        );
+        expect(map.resolve({WidgetState.pressed, WidgetState.hovered}), Colors.blue);
       });
 
       test('throws ArgumentError when no matches and T', () {
@@ -56,25 +47,16 @@ void main() {
     });
 
     test('map(...)', () {
-      const original = FWidgetStateMap({
-        WidgetState.pressed: 1,
-        WidgetState.hovered: 2,
-      });
+      const original = FWidgetStateMap({WidgetState.pressed: 1, WidgetState.hovered: 2});
 
       final mapped = original.map((scale) => Colors.blue.withRed(scale));
 
-      expect(
-        mapped.resolve({WidgetState.pressed, WidgetState.hovered}),
-        Colors.blue.withRed(1),
-      );
+      expect(mapped.resolve({WidgetState.pressed, WidgetState.hovered}), Colors.blue.withRed(1));
       expect(mapped.resolve({WidgetState.hovered}), Colors.blue.withRed(2));
     });
 
     test('replaceFirstWhere(...)', () {
-      const original = FWidgetStateMap<Color>({
-        WidgetState.pressed: Colors.blue,
-        WidgetState.hovered: Colors.green,
-      });
+      const original = FWidgetStateMap<Color>({WidgetState.pressed: Colors.blue, WidgetState.hovered: Colors.green});
 
       final modified = original.replaceFirstWhere({
         WidgetState.pressed,
@@ -86,10 +68,7 @@ void main() {
     });
 
     test('replaceLastWhere(...)', () {
-      const original = FWidgetStateMap<Color>({
-        WidgetState.pressed: Colors.blue,
-        WidgetState.hovered: Colors.green,
-      });
+      const original = FWidgetStateMap<Color>({WidgetState.pressed: Colors.blue, WidgetState.hovered: Colors.green});
 
       final modified = original.replaceLastWhere({
         WidgetState.pressed,

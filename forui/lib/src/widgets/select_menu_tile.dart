@@ -21,8 +21,7 @@ typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select menu tile's appearance.
-class FSelectMenuTile<T> extends FormField<Set<T>>
-    with FTileMixin, FFormFieldProperties<Set<T>> {
+class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldProperties<Set<T>> {
   /// The controller that controls the selected tiles.
   final FSelectMenuTileController<T> selectController;
 
@@ -171,8 +170,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>>
     this.suffixIcon,
     this.onChange,
     this.onSelect,
-    Widget Function(BuildContext, String) errorBuilder =
-        FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -190,11 +188,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>>
 
            final global = state.context.theme.selectMenuTileStyle;
            final menuStyle = style?.menuStyle ?? global.menuStyle;
-           final tileStyle =
-               style?.tileStyle ??
-               tileData?.style ??
-               groupData?.style.tileStyle ??
-               global.tileStyle;
+           final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -248,17 +242,9 @@ class FSelectMenuTile<T> extends FormField<Set<T>>
 
            if (groupData == null &&
                tileData == null &&
-               (label != null ||
-                   description != null ||
-                   state.errorText != null)) {
-             final states = {
-               if (!enabled) WidgetState.disabled,
-               if (state.errorText != null) WidgetState.error,
-             };
-             final error =
-                 state.errorText == null
-                     ? null
-                     : errorBuilder(state.context, state.errorText!);
+               (label != null || description != null || state.errorText != null)) {
+             final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+             final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
 
              tile = FLabel(
                axis: Axis.vertical,
@@ -323,8 +309,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>>
     this.suffixIcon,
     this.onChange,
     this.onSelect,
-    Widget Function(BuildContext, String) errorBuilder =
-        FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.initialValue,
@@ -342,11 +327,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>>
 
            final global = state.context.theme.selectMenuTileStyle;
            final menuStyle = style?.menuStyle ?? global.menuStyle;
-           final tileStyle =
-               style?.tileStyle ??
-               tileData?.style ??
-               groupData?.style.tileStyle ??
-               global.tileStyle;
+           final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -399,17 +380,9 @@ class FSelectMenuTile<T> extends FormField<Set<T>>
 
            if (groupData == null &&
                tileData == null &&
-               (label != null ||
-                   description != null ||
-                   state.errorText != null)) {
-             final states = {
-               if (!enabled) WidgetState.disabled,
-               if (state.errorText != null) WidgetState.error,
-             };
-             final error =
-                 state.errorText == null
-                     ? null
-                     : errorBuilder(state.context, state.errorText!);
+               (label != null || description != null || state.errorText != null)) {
+             final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+             final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
              tile = FLabel(
                axis: Axis.vertical,
                style: global,
@@ -459,8 +432,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>>
   }
 }
 
-class _State<T> extends FormFieldState<Set<T>>
-    with SingleTickerProviderStateMixin {
+class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMixin {
   late _Notifier<T> _controller;
 
   @override
@@ -485,8 +457,7 @@ class _State<T> extends FormFieldState<Set<T>>
         _controller._popover.dispose();
       }
 
-      _controller._popover =
-          widget.popoverController ?? FPopoverController(vsync: this);
+      _controller._popover = widget.popoverController ?? FPopoverController(vsync: this);
     }
 
     _controller.autoHide = old.autoHide;
@@ -578,31 +549,25 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
   void addListener(VoidCallback listener) => delegate.addListener(listener);
 
   @override
-  void addValueListener(ValueChanged<Set<T>>? listener) =>
-      delegate.addValueListener(listener);
+  void addValueListener(ValueChanged<Set<T>>? listener) => delegate.addValueListener(listener);
 
   @override
-  void addUpdateListener(ValueChanged<(T, bool)>? listener) =>
-      delegate.addUpdateListener(listener);
+  void addUpdateListener(ValueChanged<(T, bool)>? listener) => delegate.addUpdateListener(listener);
 
   @override
-  void removeListener(VoidCallback listener) =>
-      delegate.removeListener(listener);
+  void removeListener(VoidCallback listener) => delegate.removeListener(listener);
 
   @override
-  void removeValueListener(ValueChanged<Set<T>>? listener) =>
-      delegate.removeValueListener(listener);
+  void removeValueListener(ValueChanged<Set<T>>? listener) => delegate.removeValueListener(listener);
 
   @override
-  void removeUpdateListener(ValueChanged<(T, bool)>? listener) =>
-      delegate.removeUpdateListener(listener);
+  void removeUpdateListener(ValueChanged<(T, bool)>? listener) => delegate.removeUpdateListener(listener);
 
   @override
   void notifyListeners() => delegate.notifyListeners();
 
   @override
-  void notifyUpdateListeners(T value, {required bool add}) =>
-      delegate.notifyUpdateListeners(value, add: add);
+  void notifyUpdateListeners(T value, {required bool add}) => delegate.notifyUpdateListeners(value, add: add);
 
   @override
   Set<T> get value => delegate.value;
@@ -618,8 +583,7 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
 }
 
 /// A select menu tile's style.
-class FSelectMenuTileStyle extends FLabelStyle
-    with _$FSelectMenuTileStyleFunctions {
+class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFunctions {
   /// The menu's style.
   @override
   final FPopoverMenuStyle menuStyle;
@@ -647,17 +611,9 @@ class FSelectMenuTileStyle extends FLabelStyle
     required FTypography typography,
     required FStyle style,
   }) {
-    final groupStyle = FTileGroupStyle.inherit(
-      colors: colors,
-      style: style,
-      typography: typography,
-    );
+    final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography);
     return FSelectMenuTileStyle(
-      menuStyle: FPopoverMenuStyle.inherit(
-        colors: colors,
-        style: style,
-        typography: typography,
-      ),
+      menuStyle: FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
       tileStyle: groupStyle.tileStyle,
       labelTextStyle: groupStyle.labelTextStyle,
       descriptionTextStyle: groupStyle.descriptionTextStyle,

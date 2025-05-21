@@ -30,12 +30,11 @@ class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
     title: const Text('Notifications'),
     details: ListenableBuilder(
       listenable: controller,
-      builder:
-          (context, _) => Text(switch (controller.value.firstOrNull) {
-            Notification.all => 'All',
-            Notification.direct => 'Direct Messages',
-            _ => 'None',
-          }),
+      builder: (context, _) => Text(switch (controller.value.firstOrNull) {
+        Notification.all => 'All',
+        Notification.direct => 'Direct Messages',
+        _ => 'None',
+      }),
     ),
     menu: const [
       FSelectTile(title: Text('All'), value: Notification.all),
@@ -75,15 +74,14 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
     title: const Text('Notifications'),
     details: ListenableBuilder(
       listenable: controller,
-      builder:
-          (context, _) => Text(switch (controller.value.firstOrNull) {
-            Notification.all => 'All',
-            Notification.direct => 'Direct Messages',
-            Notification.limitedTime => 'Limited Time',
-            Notification.selectedApps => 'Selected Apps',
-            Notification.timeSensitive => 'Time Sensitive',
-            null || Notification.nothing => 'None',
-          }),
+      builder: (context, _) => Text(switch (controller.value.firstOrNull) {
+        Notification.all => 'All',
+        Notification.direct => 'Direct Messages',
+        Notification.limitedTime => 'Limited Time',
+        Notification.selectedApps => 'Selected Apps',
+        Notification.timeSensitive => 'Time Sensitive',
+        null || Notification.nothing => 'None',
+      }),
     ),
     menu: const [
       FSelectTile(title: Text('All'), value: Notification.all),
@@ -163,12 +161,11 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
           title: const Text('Notifications'),
           details: ListenableBuilder(
             listenable: controller,
-            builder:
-                (context, _) => Text(switch (controller.value.firstOrNull) {
-                  Notification.all => 'All',
-                  Notification.direct => 'Direct Messages',
-                  _ => 'None',
-                }),
+            builder: (context, _) => Text(switch (controller.value.firstOrNull) {
+              Notification.all => 'All',
+              Notification.direct => 'Direct Messages',
+              _ => 'None',
+            }),
           ),
           menu: const [
             FSelectTile(title: Text('All'), value: Notification.all),

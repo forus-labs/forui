@@ -14,23 +14,11 @@ void main() {
             theme: theme.data,
             child: FScaffold(
               header: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.red),
-                      height: 100,
-                    ),
-                  ),
-                ],
+                children: [Expanded(child: Container(decoration: const BoxDecoration(color: Colors.red), height: 100))],
               ),
               footer: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      height: 100,
-                    ),
-                  ),
+                  Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
                 ],
               ),
               child: const Placeholder(),
@@ -38,10 +26,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('scaffold/${theme.name}.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/${theme.name}.png'));
       });
 
       testWidgets('${theme.name} with sidebar', (tester) async {
@@ -50,27 +35,12 @@ void main() {
             theme: theme.data,
             child: FScaffold(
               header: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.red),
-                      height: 100,
-                    ),
-                  ),
-                ],
+                children: [Expanded(child: Container(decoration: const BoxDecoration(color: Colors.red), height: 100))],
               ),
-              sidebar: Container(
-                decoration: const BoxDecoration(color: Colors.blue),
-                width: 100,
-              ),
+              sidebar: Container(decoration: const BoxDecoration(color: Colors.blue), width: 100),
               footer: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      height: 100,
-                    ),
-                  ),
+                  Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
                 ],
               ),
               child: const Placeholder(),
@@ -78,10 +48,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('scaffold/${theme.name}-sidebar.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/${theme.name}-sidebar.png'));
       });
 
       testWidgets('${theme.name} with sheets', (tester) async {
@@ -107,15 +74,10 @@ void main() {
                                         height: double.infinity,
                                         width: double.infinity,
                                         decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: context.theme.colors.primary,
-                                          ),
-                                          color:
-                                              context.theme.colors.background,
+                                          border: Border.all(color: context.theme.colors.primary),
+                                          color: context.theme.colors.background,
                                         ),
-                                        child: const Center(
-                                          child: Text('sheet'),
-                                        ),
+                                        child: const Center(child: Text('sheet')),
                                       ),
                                 ),
                               );
@@ -127,12 +89,7 @@ void main() {
               ),
               footer: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.green),
-                      height: 100,
-                    ),
-                  ),
+                  Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
                 ],
               ),
               child: const Placeholder(),
@@ -143,30 +100,19 @@ void main() {
         await tester.tap(find.byType(FButton));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('scaffold/${theme.name}-sheets.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('scaffold/${theme.name}-sheets.png'));
       });
     }
 
     for (final resizeToAvoidBottomInset in [true, false]) {
-      testWidgets('resizeToAvoidBottomInset - $resizeToAvoidBottomInset', (
-        tester,
-      ) async {
+      testWidgets('resizeToAvoidBottomInset - $resizeToAvoidBottomInset', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: TestScaffold.themes[0].data,
             child: FScaffold(
               resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-              header: Container(
-                decoration: const BoxDecoration(color: Colors.red),
-                height: 100,
-              ),
-              footer: Container(
-                decoration: const BoxDecoration(color: Colors.green),
-                height: 100,
-              ),
+              header: Container(decoration: const BoxDecoration(color: Colors.red), height: 100),
+              footer: Container(decoration: const BoxDecoration(color: Colors.green), height: 100),
               child: const Placeholder(),
             ),
           ),
@@ -178,49 +124,33 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile(
-            'scaffold/resizeToAvoidBottomInset-$resizeToAvoidBottomInset.png',
-          ),
+          matchesGoldenFile('scaffold/resizeToAvoidBottomInset-$resizeToAvoidBottomInset.png'),
         );
       });
 
-      testWidgets(
-        'resizeToAvoidBottomInset with sidebar - $resizeToAvoidBottomInset',
-        (tester) async {
-          await tester.pumpWidget(
-            TestScaffold(
-              theme: TestScaffold.themes[0].data,
-              child: FScaffold(
-                resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-                header: Container(
-                  decoration: const BoxDecoration(color: Colors.red),
-                  height: 100,
-                ),
-                sidebar: Container(
-                  decoration: const BoxDecoration(color: Colors.blue),
-                  width: 100,
-                ),
-                footer: Container(
-                  decoration: const BoxDecoration(color: Colors.green),
-                  height: 100,
-                ),
-                child: const Placeholder(),
-              ),
+      testWidgets('resizeToAvoidBottomInset with sidebar - $resizeToAvoidBottomInset', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: TestScaffold.themes[0].data,
+            child: FScaffold(
+              resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+              header: Container(decoration: const BoxDecoration(color: Colors.red), height: 100),
+              sidebar: Container(decoration: const BoxDecoration(color: Colors.blue), width: 100),
+              footer: Container(decoration: const BoxDecoration(color: Colors.green), height: 100),
+              child: const Placeholder(),
             ),
-          );
+          ),
+        );
 
-          // Simulate keyboard.
-          tester.view.viewInsets = const FakeViewPadding(bottom: 800);
-          await tester.pump();
+        // Simulate keyboard.
+        tester.view.viewInsets = const FakeViewPadding(bottom: 800);
+        await tester.pump();
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile(
-              'scaffold/resizeToAvoidBottomInset-$resizeToAvoidBottomInset-sidebar.png',
-            ),
-          );
-        },
-      );
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('scaffold/resizeToAvoidBottomInset-$resizeToAvoidBottomInset-sidebar.png'),
+        );
+      });
     }
   });
 }

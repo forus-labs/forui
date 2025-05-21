@@ -27,7 +27,10 @@ abstract class Sample extends StatelessWidget {
     child: FScaffold(
       child: Align(
         alignment: alignment,
-        child: ConstrainedBox(constraints: BoxConstraints(maxWidth: maxWidth), child: Builder(builder: sample)),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxWidth),
+          child: Builder(builder: sample),
+        ),
       ),
     ),
   );

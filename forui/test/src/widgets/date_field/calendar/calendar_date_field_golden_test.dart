@@ -14,10 +14,7 @@ void main() {
       TestScaffold.blue(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: FDateField.calendar(
-            style: TestScaffold.blueScreen.dateFieldStyle,
-            key: key,
-          ),
+          home: FDateField.calendar(style: TestScaffold.blueScreen.dateFieldStyle, key: key),
         ),
       ),
     );
@@ -29,12 +26,7 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: FDateField.calendar(key: key),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField.calendar(key: key)));
 
       await expectLater(
         find.byType(TestScaffold),
@@ -43,17 +35,9 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: theme.data,
-          child: FDateField.calendar(prefixBuilder: null),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDateField.calendar(prefixBuilder: null)));
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/no-icon.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/no-icon.png'));
     });
 
     testWidgets('${theme.name} with builder', (tester) async {
@@ -62,11 +46,7 @@ void main() {
           theme: theme.data,
           child: FDateField.calendar(
             key: key,
-            builder:
-                (context, data, child) => ColoredBox(
-                  color: context.theme.colors.destructive,
-                  child: child!,
-                ),
+            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
             today: DateTime(2025, 4),
           ),
         ),
@@ -75,10 +55,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/builder.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/builder.png'));
     });
 
     testWidgets('${theme.name} hr locale', (tester) async {
@@ -87,10 +64,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('hr'),
           alignment: Alignment.topCenter,
-          child: FDateField.calendar(
-            key: key,
-            today: DateTime.utc(2025, 1, 15),
-          ),
+          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
         ),
       );
 
@@ -109,10 +83,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDateField.calendar(
-            key: key,
-            today: DateTime.utc(2025, 1, 15),
-          ),
+          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
         ),
       );
 
@@ -122,10 +93,7 @@ void main() {
       await tester.tap(find.text('15'));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/text.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/text.png'));
     });
 
     testWidgets('${theme.name} does not auto hide', (tester) async {
@@ -134,11 +102,7 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDateField.calendar(
-            key: key,
-            today: DateTime.utc(2025, 1, 15),
-            autoHide: false,
-          ),
+          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15), autoHide: false),
         ),
       );
 
@@ -156,19 +120,13 @@ void main() {
 
     testWidgets('${theme.name} disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: FDateField.calendar(enabled: false, key: key),
-        ),
+        TestScaffold.app(theme: theme.data, child: FDateField.calendar(enabled: false, key: key)),
       );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/disabled.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/disabled.png'));
     });
 
     testWidgets('${theme.name} error', (tester) async {
@@ -176,21 +134,14 @@ void main() {
         TestScaffold.app(
           alignment: Alignment.topCenter,
           theme: theme.data,
-          child: FDateField.calendar(
-            forceErrorText: 'Error',
-            key: key,
-            today: DateTime(2025, 4),
-          ),
+          child: FDateField.calendar(forceErrorText: 'Error', key: key, today: DateTime(2025, 4)),
         ),
       );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/${theme.name}/calendar/error.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/error.png'));
     });
 
     testWidgets('${theme.name} keyboard navigation', (tester) async {
@@ -211,9 +162,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile(
-          'date-field/${theme.name}/calendar/keyboard-navigation.png',
-        ),
+        matchesGoldenFile('date-field/${theme.name}/calendar/keyboard-navigation.png'),
       );
     });
   }
