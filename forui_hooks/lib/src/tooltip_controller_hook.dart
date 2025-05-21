@@ -21,7 +21,11 @@ class _TooltipControllerHook extends Hook<FTooltipController> {
   final TickerProvider vsync;
   final Duration animationDuration;
 
-  const _TooltipControllerHook({required this.vsync, required this.animationDuration, super.keys});
+  const _TooltipControllerHook({
+    required this.vsync,
+    required this.animationDuration,
+    super.keys,
+  });
 
   @override
   _TooltipControllerHookState createState() => _TooltipControllerHookState();
@@ -35,7 +39,8 @@ class _TooltipControllerHook extends Hook<FTooltipController> {
   }
 }
 
-class _TooltipControllerHookState extends HookState<FTooltipController, _TooltipControllerHook> {
+class _TooltipControllerHookState
+    extends HookState<FTooltipController, _TooltipControllerHook> {
   late final FTooltipController _controller = FTooltipController(
     vsync: hook.vsync,
     animationDuration: hook.animationDuration,

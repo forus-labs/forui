@@ -54,11 +54,17 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
       ..add(DiagnosticsProperty('vsync', vsync))
       ..add(DiagnosticsProperty('initialTime', initialTime))
       ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
+      ..add(
+        DiagnosticsProperty(
+          'popoverAnimationDuration',
+          popoverAnimationDuration,
+        ),
+      );
   }
 }
 
-class _TimeFieldHookState extends HookState<FTimeFieldController, _TimeFieldHook> {
+class _TimeFieldHookState
+    extends HookState<FTimeFieldController, _TimeFieldHook> {
   late final FTimeFieldController _controller = FTimeFieldController(
     vsync: hook.vsync,
     initialTime: hook.initialTime,

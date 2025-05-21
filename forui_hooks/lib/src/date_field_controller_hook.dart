@@ -74,13 +74,23 @@ class _DateFieldHook extends Hook<FDateFieldController> {
       ..add(DiagnosticsProperty('initialDate', initialDate))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(
-        FlagProperty('truncateAndStripTimezone', value: truncateAndStripTimezone, ifTrue: 'truncateAndStripTimezone'),
+        FlagProperty(
+          'truncateAndStripTimezone',
+          value: truncateAndStripTimezone,
+          ifTrue: 'truncateAndStripTimezone',
+        ),
       )
-      ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
+      ..add(
+        DiagnosticsProperty(
+          'popoverAnimationDuration',
+          popoverAnimationDuration,
+        ),
+      );
   }
 }
 
-class _DateFieldHookState extends HookState<FDateFieldController, _DateFieldHook> {
+class _DateFieldHookState
+    extends HookState<FDateFieldController, _DateFieldHook> {
   late final FDateFieldController _controller = FDateFieldController(
     vsync: hook.vsync,
     initialDate: hook.initialDate,
