@@ -181,7 +181,7 @@ class FSonnerState extends State<FSonner> {
         if (style.max <= count) {
           break;
         }
-        
+
         toasts.insert(0, entry);
         if (!entry.dismissing.value) {
           count++;

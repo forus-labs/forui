@@ -86,13 +86,13 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     _timer = Timer(widget.duration, _dismissing);
 
     _entranceExitController =
-        AnimationController(vsync: this, duration: widget.style.entranceExitDuration)
+        AnimationController(vsync: this, duration: widget.style.enterExitDuration)
           ..addListener(() => setState(() {}))
           ..addStatusListener(_dismiss)
           ..forward();
     _entranceExit = CurvedAnimation(
       parent: _entranceExitController,
-      curve: widget.style.entranceCurve,
+      curve: widget.style.enterCurve,
       reverseCurve: widget.style.exitCurve,
     );
 
@@ -113,10 +113,10 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     }
 
     if (widget.style != old.style) {
-      _entranceExitController.duration = widget.style.entranceExitDuration;
+      _entranceExitController.duration = widget.style.enterExitDuration;
       _entranceExit = CurvedAnimation(
         parent: _entranceExitController,
-        curve: widget.style.entranceCurve,
+        curve: widget.style.enterCurve,
         reverseCurve: widget.style.exitCurve,
       );
 

@@ -130,10 +130,21 @@ class RenderAnimatedToaster extends RenderBox
     // Transition between previous front and front toast if their sizes are different.
     final front = lastChild!;
     final data = front.parentData! as AnimatedToasterParentData;
-    final previousFront = childCount >= 2 ? childBefore(lastChild!)! : front;
+
+    final Size previousFrontSize;
+    if (childCount >= 2) {
+      // Save the front toast's size in the previous front toast.
+      // Allows us to properly transition when there is only 1 toast after the front toast is removed.
+      final previous = childBefore(lastChild!)!;
+      previousFrontSize = previous.size;
+      (previous.parentData! as AnimatedToasterParentData).collapsedUntransformedSize = front.size;
+
+    } else {
+      previousFrontSize = data.collapsedUntransformedSize ?? front.size;
+    }
 
     // Transition between collapsed and expanded sizes.
-    final collapsedSize = Size.lerp(previousFront.size, front.size, data.transition)!;
+    final collapsedSize = Size.lerp(previousFrontSize, front.size, data.transition)!;
 
     final baseHeight = alignTransform.dy.isNegative ? front.size.height : firstChild!.size.height;
     final expandedSize = Size(front.size.width, baseHeight + accumulated.abs());

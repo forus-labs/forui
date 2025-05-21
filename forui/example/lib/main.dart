@@ -8,7 +8,7 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   WakelockPlus.enable();
-  timeDilation = 1;
+  timeDilation = 10;
 
   runApp(const Application());
 }
@@ -46,7 +46,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     home: Builder(
       builder: (context) {
         return FSonner(
-          style: context.theme.sonnerStyle,
+          style: context.theme.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
           child: FScaffold(
             header: const FHeader(title: Text('Example')),
             footer: FBottomNavigationBar(

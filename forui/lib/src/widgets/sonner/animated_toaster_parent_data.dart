@@ -79,6 +79,8 @@ class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
   /// The index of the child.
   ({int previous, int current}) index = (previous: 0, current: 0);
 
+  Size? collapsedUntransformedSize;
+
   /// The transition between different indexes.
   double transition = 0.0;
 

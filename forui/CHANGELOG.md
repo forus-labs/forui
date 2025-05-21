@@ -17,9 +17,6 @@ A sidebar widget that usually resides on the side of the screen for navigation.
 
 ### `FTabs`
 
-* Add `FTabs.onPress`.
-
-
 ### `FCollapsible` (new)
 A widget that collapses and expands its child.
 
@@ -31,6 +28,20 @@ A widget that collapses and expands its child.
 * Enhance `FDateField.calendar`'s focus management.
 
 * Fix `FDateField` not closing calendar popover when enter is pressed.
+
+
+### `FSonner` (new)
+An optional toast.
+
+* Add `FSonner`.
+* Add `FSonnerExpandBehavior`.
+* Add `FSonnerStyle`.
+* Add `FToastStyle`.
+
+
+### `FTabs`
+
+* Add `FTabs.onPress`.
 
 
 ### `FTextField` & `FTextFormField`
