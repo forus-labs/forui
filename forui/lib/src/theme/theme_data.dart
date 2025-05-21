@@ -680,7 +680,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ),
 
       //// Card
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: style.borderRadius,
@@ -869,7 +869,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ),
 
       /// Dialog
-      dialogTheme: DialogTheme(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+      dialogTheme: DialogThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
 
       /// Bottom Sheet
       bottomSheetTheme: BottomSheetThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),

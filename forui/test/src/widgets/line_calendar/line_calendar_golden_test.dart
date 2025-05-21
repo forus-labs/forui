@@ -227,7 +227,9 @@ void main() {
     testWidgets('retains same scrolled date when controller changes', (tester) async {
       final first = autoDispose(FCalendarController.date(initialSelection: DateTime(2025, 4, 23)));
       await tester.pumpWidget(
-        TestScaffold.app(child: FLineCalendar(controller: first, initialScroll: DateTime(2025, 4, 25))),
+        TestScaffold.app(
+          child: FLineCalendar(controller: first, initialScroll: DateTime(2025, 4, 25), today: DateTime(2025, 5, 21)),
+        ),
       );
 
       await tester.pumpWidget(TestScaffold.app(child: FLineCalendar()));

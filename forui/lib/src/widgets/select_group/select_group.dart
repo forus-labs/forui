@@ -90,9 +90,6 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   @override
   final Widget? description;
 
-  @override
-  final Widget Function(BuildContext, String) errorBuilder;
-
   /// The items.
   final List<FSelectGroupItem<T>> children;
 
@@ -109,9 +106,9 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     this.style,
     this.label,
     this.description,
-    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.onChange,
     this.onSelect,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -120,6 +117,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     super.key,
   }) : super(
          initialValue: controller.value,
+         errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State;
            final groupStyle = style ?? state.context.theme.selectGroupStyle;
