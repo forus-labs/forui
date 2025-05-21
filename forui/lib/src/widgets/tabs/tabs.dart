@@ -153,11 +153,9 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   }
 
   void _update() {
-    print('update');
     if (!_controller._controller.indexIsChanging) {
       widget.onChange?.call(_controller.index);
     }
-    print(_controller.index);
     setState(() {});
   }
 
