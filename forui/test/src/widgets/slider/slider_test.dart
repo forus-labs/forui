@@ -20,11 +20,7 @@ void main() {
           child: Form(
             key: key,
             child: FSlider(
-              controller: autoDispose(
-                FContinuousSliderController(
-                  selection: FSliderSelection(max: 0.5),
-                ),
-              ),
+              controller: autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5))),
               onSaved: (value) => initial = value,
             ),
           ),
@@ -38,17 +34,13 @@ void main() {
     });
 
     testWidgets('update controller', (tester) async {
-      final first = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.5)),
-      );
+      final first = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5)));
       await tester.pumpWidget(TestScaffold(child: FSlider(controller: first)));
 
       expect(first.hasListeners, true);
       expect(first.disposed, false);
 
-      final second = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.5)),
-      );
+      final second = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5)));
       await tester.pumpWidget(TestScaffold(child: FSlider(controller: second)));
 
       expect(first.hasListeners, false);
@@ -58,12 +50,8 @@ void main() {
     });
 
     testWidgets('dispose controller', (tester) async {
-      final controller = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.5)),
-      );
-      await tester.pumpWidget(
-        TestScaffold(child: FSlider(controller: controller)),
-      );
+      final controller = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.5)));
+      await tester.pumpWidget(TestScaffold(child: FSlider(controller: controller)));
 
       expect(controller.hasListeners, true);
       expect(controller.disposed, false);
@@ -76,34 +64,20 @@ void main() {
   });
 
   group('onChange', () {
-    testWidgets('when controller changes but onChange callback is the same', (
-      tester,
-    ) async {
+    testWidgets('when controller changes but onChange callback is the same', (tester) async {
       int count = 0;
       void onChange(FSliderSelection _) => count++;
 
-      final firstController = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.1)),
-      );
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSlider(controller: firstController, onChange: onChange),
-        ),
-      );
+      final firstController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: firstController, onChange: onChange)));
 
       firstController.selection = FSliderSelection(max: 0.2);
       await tester.pump();
 
       expect(count, 1);
 
-      final secondController = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.1)),
-      );
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSlider(controller: secondController, onChange: onChange),
-        ),
-      );
+      final secondController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: secondController, onChange: onChange)));
 
       firstController.selection = FSliderSelection(max: 0.3);
       secondController.selection = FSliderSelection(max: 0.4);
@@ -112,31 +86,19 @@ void main() {
       expect(count, 2);
     });
 
-    testWidgets('when onChange callback changes but controller is the same', (
-      tester,
-    ) async {
+    testWidgets('when onChange callback changes but controller is the same', (tester) async {
       int first = 0;
       int second = 0;
 
-      final controller = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.1)),
-      );
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSlider(controller: controller, onChange: (_) => first++),
-        ),
-      );
+      final controller = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => first++)));
 
       controller.selection = FSliderSelection(max: 0.2);
       await tester.pump();
 
       expect(first, 1);
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSlider(controller: controller, onChange: (_) => second++),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => second++)));
 
       controller.selection = FSliderSelection(max: 0.3);
       await tester.pump();
@@ -145,36 +107,21 @@ void main() {
       expect(second, 1);
     });
 
-    testWidgets('when both controller and onChange callback change', (
-      tester,
-    ) async {
+    testWidgets('when both controller and onChange callback change', (tester) async {
       int first = 0;
       int second = 0;
 
-      final firstController = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.1)),
-      );
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSlider(controller: firstController, onChange: (_) => first++),
-        ),
-      );
+      final firstController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: firstController, onChange: (_) => first++)));
 
       firstController.selection = FSliderSelection(max: 0.2);
       await tester.pump();
 
       expect(first, 1);
 
-      final secondController = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.1)),
-      );
+      final secondController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
       await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSlider(
-            controller: secondController,
-            onChange: (_) => second++,
-          ),
-        ),
+        TestScaffold.app(child: FSlider(controller: secondController, onChange: (_) => second++)),
       );
 
       firstController.selection = FSliderSelection(max: 0.3);
@@ -188,14 +135,8 @@ void main() {
     testWidgets('disposed when controller is external', (tester) async {
       int count = 0;
 
-      final controller = autoDispose(
-        FContinuousSliderController(selection: FSliderSelection(max: 0.1)),
-      );
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSlider(controller: controller, onChange: (_) => count++),
-        ),
-      );
+      final controller = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
+      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => count++)));
 
       controller.selection = FSliderSelection(max: 0.2);
       await tester.pump();
@@ -267,11 +208,7 @@ void main() {
           await tester.pumpWidget(slider(interaction: interaction));
           expect(find.byType(Text), findsNothing);
 
-          await tester.fling(
-            find.byType(ActiveTrack),
-            const Offset(-300, 0),
-            10,
-          );
+          await tester.fling(find.byType(ActiveTrack), const Offset(-300, 0), 10);
           await tester.pump();
           expect(find.byType(Text), expected);
         });
@@ -281,11 +218,7 @@ void main() {
           expect(find.byType(Text), findsNothing);
 
           final track = tester.getRect(find.byType(ActiveTrack));
-          await tester.flingFrom(
-            track.centerRight.translate(-50, 0),
-            const Offset(-300, 0),
-            10,
-          );
+          await tester.flingFrom(track.centerRight.translate(-50, 0), const Offset(-300, 0), 10);
           await tester.pump(const Duration(seconds: 1));
           expect(find.byType(Text), expected);
         });
@@ -297,11 +230,7 @@ void main() {
     Widget slider({FSliderSelection? selection}) => TestScaffold.app(
       theme: FThemes.zinc.light,
       child: FSlider(
-        controller: autoDispose(
-          FContinuousSliderController.range(
-            selection: selection ?? FSliderSelection(max: 0.75),
-          ),
-        ),
+        controller: autoDispose(FContinuousSliderController.range(selection: selection ?? FSliderSelection(max: 0.75))),
       ),
     );
 
@@ -347,62 +276,40 @@ void main() {
     );
 
     group('value selection - $layout', () {
-      FSliderController continuous(FSliderInteraction interaction) =>
-          FContinuousSliderController(
-            allowedInteraction: interaction,
-            selection: FSliderSelection(
-              max: 0.75,
-              extent: (min: 0.5, max: 0.8),
-            ),
-          );
+      FSliderController continuous(FSliderInteraction interaction) => FContinuousSliderController(
+        allowedInteraction: interaction,
+        selection: FSliderSelection(max: 0.75, extent: (min: 0.5, max: 0.8)),
+      );
 
-      FSliderController discrete(FSliderInteraction interaction) =>
-          FDiscreteSliderController(
-            allowedInteraction: interaction,
-            selection: FSliderSelection(
-              max: 0.5,
-              extent: (min: 0.25, max: 0.8),
-            ),
-          );
+      FSliderController discrete(FSliderInteraction interaction) => FDiscreteSliderController(
+        allowedInteraction: interaction,
+        selection: FSliderSelection(max: 0.5, extent: (min: 0.25, max: 0.8)),
+      );
 
       for (final (con, interaction, expandExpected, shrinkExpected) in [
         (true, FSliderInteraction.slide, greaterThan(0.75), lessThan(0.75)),
-        (
-          true,
-          FSliderInteraction.slideThumb,
-          greaterThan(0.75),
-          lessThan(0.75),
-        ),
+        (true, FSliderInteraction.slideThumb, greaterThan(0.75), lessThan(0.75)),
         (true, FSliderInteraction.tap, 0.75, 0.75),
-        (
-          true,
-          FSliderInteraction.tapAndSlideThumb,
-          greaterThan(0.75),
-          lessThan(0.75),
-        ),
+        (true, FSliderInteraction.tapAndSlideThumb, greaterThan(0.75), lessThan(0.75)),
         (false, FSliderInteraction.slide, 0.75, 0.5),
         (false, FSliderInteraction.slideThumb, 0.75, 0.5),
         (false, FSliderInteraction.tap, 0.5, 0.5),
         (false, FSliderInteraction.tapAndSlideThumb, 0.75, 0.5),
       ]) {
-        testWidgets(
-          'drag thumb - ${con ? 'continuous' : 'discrete'} - $interaction',
-          (tester) async {
-            final controller =
-                con ? continuous(interaction) : discrete(interaction);
-            await tester.pumpWidget(slider(controller));
+        testWidgets('drag thumb - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
+          final controller = con ? continuous(interaction) : discrete(interaction);
+          await tester.pumpWidget(slider(controller));
 
-            await tester.drag(find.byType(Thumb), layout.directional(100));
-            await tester.pumpAndSettle();
-            expect(controller.selection.offset.min, 0);
-            expect(controller.selection.offset.max, expandExpected);
+          await tester.drag(find.byType(Thumb), layout.directional(100));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, 0);
+          expect(controller.selection.offset.max, expandExpected);
 
-            await tester.drag(find.byType(Thumb), layout.directional(-200));
-            await tester.pumpAndSettle();
-            expect(controller.selection.offset.min, 0);
-            expect(controller.selection.offset.max, shrinkExpected);
-          },
-        );
+          await tester.drag(find.byType(Thumb), layout.directional(-200));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset.min, 0);
+          expect(controller.selection.offset.max, shrinkExpected);
+        });
       }
 
       for (final (con, interaction, shrinkExpected, expandExpected) in [
@@ -415,24 +322,20 @@ void main() {
         (false, FSliderInteraction.tap, 0.25, 0.75),
         (false, FSliderInteraction.tapAndSlideThumb, 0.25, 0.75),
       ]) {
-        testWidgets(
-          'tap track - ${con ? 'continuous' : 'discrete'} - $interaction',
-          (tester) async {
-            final controller =
-                con ? continuous(interaction) : discrete(interaction);
-            await tester.pumpWidget(slider(controller));
+        testWidgets('tap track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
+          final controller = con ? continuous(interaction) : discrete(interaction);
+          await tester.pumpWidget(slider(controller));
 
-            final track = tester.getRect(find.byType(ActiveTrack));
+          final track = tester.getRect(find.byType(ActiveTrack));
 
-            await tester.tapAt(track.center);
-            await tester.pumpAndSettle();
-            expect(controller.selection.offset, (min: 0, max: shrinkExpected));
+          await tester.tapAt(track.center);
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: shrinkExpected));
 
-            await tester.tapAt(track.max(layout) + layout.directional(100));
-            await tester.pumpAndSettle();
-            expect(controller.selection.offset, (min: 0, max: expandExpected));
-          },
-        );
+          await tester.tapAt(track.max(layout) + layout.directional(100));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: expandExpected));
+        });
       }
 
       for (final (con, interaction, expandExpected, shrinkExpected) in [
@@ -445,28 +348,18 @@ void main() {
         (false, FSliderInteraction.tap, 0.5, 0.5),
         (false, FSliderInteraction.tapAndSlideThumb, 0.5, 0.5),
       ]) {
-        testWidgets(
-          'drag active track - ${con ? 'continuous' : 'discrete'} - $interaction',
-          (tester) async {
-            final controller =
-                con ? continuous(interaction) : discrete(interaction);
-            await tester.pumpWidget(slider(controller));
+        testWidgets('drag active track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
+          final controller = con ? continuous(interaction) : discrete(interaction);
+          await tester.pumpWidget(slider(controller));
 
-            await tester.drag(
-              find.byType(ActiveTrack),
-              layout.directional(500),
-            );
-            await tester.pumpAndSettle();
-            expect(controller.selection.offset, (min: 0, max: expandExpected));
+          await tester.drag(find.byType(ActiveTrack), layout.directional(500));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: expandExpected));
 
-            await tester.drag(
-              find.byType(ActiveTrack),
-              layout.directional(-500),
-            );
-            await tester.pumpAndSettle();
-            expect(controller.selection.offset, (min: 0, max: shrinkExpected));
-          },
-        );
+          await tester.drag(find.byType(ActiveTrack), layout.directional(-500));
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: shrinkExpected));
+        });
       }
 
       for (final (con, interaction, expandExpected, shrinkExpected) in [
@@ -479,45 +372,34 @@ void main() {
         (false, FSliderInteraction.tap, 0.5, 0.5),
         (false, FSliderInteraction.tapAndSlideThumb, 0.5, 0.5),
       ]) {
-        testWidgets(
-          'drag inactive track - ${con ? 'continuous' : 'discrete'} - $interaction',
-          (tester) async {
-            final controller =
-                con ? continuous(interaction) : discrete(interaction);
-            await tester.pumpWidget(slider(controller));
+        testWidgets('drag inactive track - ${con ? 'continuous' : 'discrete'} - $interaction', (tester) async {
+          final controller = con ? continuous(interaction) : discrete(interaction);
+          await tester.pumpWidget(slider(controller));
 
-            await tester.dragFrom(
-              tester.getRect(find.byType(ActiveTrack)).max(layout) +
-                  layout.directional(50),
-              layout.directional(500),
-            );
-            await tester.pumpAndSettle();
-            expect(controller.selection.offset, (min: 0, max: expandExpected));
+          await tester.dragFrom(
+            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
+            layout.directional(500),
+          );
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: expandExpected));
 
-            await tester.dragFrom(
-              tester.getRect(find.byType(ActiveTrack)).max(layout) +
-                  layout.directional(50),
-              layout.directional(-500),
-            );
-            await tester.pumpAndSettle();
-            expect(controller.selection.offset, (min: 0, max: shrinkExpected));
-          },
-        );
+          await tester.dragFrom(
+            tester.getRect(find.byType(ActiveTrack)).max(layout) + layout.directional(50),
+            layout.directional(-500),
+          );
+          await tester.pumpAndSettle();
+          expect(controller.selection.offset, (min: 0, max: shrinkExpected));
+        });
       }
     });
 
     group('range selection - $layout', () {
       FSliderController continuous() => FContinuousSliderController.range(
-        selection: FSliderSelection(
-          min: 0.25,
-          max: 0.75,
-          extent: (min: 0.3, max: 0.8),
-        ),
+        selection: FSliderSelection(min: 0.25, max: 0.75, extent: (min: 0.3, max: 0.8)),
       );
 
-      FSliderController discrete() => FDiscreteSliderController.range(
-        selection: FSliderSelection(min: 0.25, max: 0.75),
-      );
+      FSliderController discrete() =>
+          FDiscreteSliderController.range(selection: FSliderSelection(min: 0.25, max: 0.75));
 
       for (final (index, constructor) in [continuous, discrete].indexed) {
         testWidgets('tap active track - $index', (tester) async {
@@ -533,10 +415,7 @@ void main() {
       }
 
       for (final (index, (constructor, minExpected, maxExpected))
-          in [
-            (continuous, lessThan(0.25), greaterThan(0.75)),
-            (discrete, 0, 1),
-          ].indexed) {
+          in [(continuous, lessThan(0.25), greaterThan(0.75)), (discrete, 0, 1)].indexed) {
         testWidgets('tap inactive track - $index', (tester) async {
           final controller = constructor();
           await tester.pumpWidget(slider(controller));
@@ -555,18 +434,9 @@ void main() {
         });
       }
 
-      for (final (
-            index,
-            (constructor, minShrink, minExpand, maxExpand, maxShrink),
-          )
+      for (final (index, (constructor, minShrink, minExpand, maxExpand, maxShrink))
           in [
-            (
-              continuous,
-              greaterThan(0.25),
-              lessThan(0.25),
-              greaterThan(0.75),
-              lessThan(0.75),
-            ),
+            (continuous, greaterThan(0.25), lessThan(0.25), greaterThan(0.75), lessThan(0.75)),
             (discrete, 0.5, 0.25, 1, 0.75),
           ].indexed) {
         testWidgets('drag thumbs - $index', (tester) async {

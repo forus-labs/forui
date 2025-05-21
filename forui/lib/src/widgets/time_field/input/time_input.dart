@@ -70,13 +70,7 @@ class TimeInput extends Input<FTime?> {
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(
-        FlagProperty(
-          'canRequestFocus',
-          value: canRequestFocus,
-          ifTrue: 'canRequestFocus',
-        ),
-      )
+      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
       ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
       ..add(DiagnosticsProperty('localizations', localizations));
@@ -92,10 +86,7 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
       // composing support is. I'll gladly accept any PR that fixes this.
       localizations = switch (widget.localizations.localeName) {
         'zh_HK' || 'zh_TW' => FLocalizationsZh(),
-        final name
-            when scriptNumerals.contains(name) ||
-                scriptPeriods.contains(name) =>
-          FDefaultLocalizations(),
+        final name when scriptNumerals.contains(name) || scriptPeriods.contains(name) => FDefaultLocalizations(),
         _ => widget.localizations,
       };
 
@@ -110,16 +101,8 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
   @override
   @protected
   InputController createController() {
-    final format =
-        widget.hour24
-            ? DateFormat.Hm(localizations.localeName)
-            : DateFormat.jm(localizations.localeName);
-    return TimeInputController(
-      localizations,
-      widget.timeController,
-      format,
-      widget.style.textFieldStyle,
-    );
+    final format = widget.hour24 ? DateFormat.Hm(localizations.localeName) : DateFormat.jm(localizations.localeName);
+    return TimeInputController(localizations, widget.timeController, format, widget.style.textFieldStyle);
   }
 
   @override

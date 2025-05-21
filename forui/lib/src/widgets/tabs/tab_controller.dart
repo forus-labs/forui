@@ -29,8 +29,7 @@ final class FTabController extends FChangeNotifier {
   void notifyListeners() => _controller.notifyListeners();
 
   @override
-  void removeListener(VoidCallback listener) =>
-      _controller.removeListener(listener);
+  void removeListener(VoidCallback listener) => _controller.removeListener(listener);
 
   /// The index of the selected tab.
   int get index => _controller.index;

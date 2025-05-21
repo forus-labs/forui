@@ -137,26 +137,18 @@ class FRadio extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      color: style.borderColor.resolve(states),
-                    ),
+                    border: Border.all(color: style.borderColor.resolve(states)),
                     color: style.backgroundColor.resolve(states),
                     shape: BoxShape.circle,
                   ),
                   child: const SizedBox.square(dimension: 10),
                 ),
                 DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: style.indicatorColor.resolve(states),
-                    shape: BoxShape.circle,
-                  ),
+                  decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: BoxShape.circle),
                   child: AnimatedSize(
                     duration: style.animationDuration,
                     curve: style.curve,
-                    child:
-                        value
-                            ? const SizedBox.square(dimension: 9)
-                            : const SizedBox.shrink(),
+                    child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
                   ),
                 ),
               ],
@@ -211,11 +203,7 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItem<T> {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectGroupItemData(
-      :controller,
-      :selected,
-      :style,
-    ) = FSelectGroupItemData.of<T>(context);
+    final FSelectGroupItemData(:controller, :selected, :style) = FSelectGroupItemData.of<T>(context);
     final radioStyle = this.style ?? style.radioStyle;
 
     return FRadio(
@@ -242,9 +230,7 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItem<T> {
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(DiagnosticsProperty('value', value))
-      ..add(
-        FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'),
-      )
+      ..add(FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
@@ -325,19 +311,11 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   });
 
   /// Creates a [FRadioStyle] that inherits its properties.
-  factory FRadioStyle.inherit({
-    required FColors colors,
-    required FStyle style,
-  }) {
+  factory FRadioStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return FRadioStyle(
-      tappableStyle: style.tappableStyle.copyWith(
-        animationTween: FTappableAnimations.none,
-      ),
-      focusedOutlineStyle: FFocusedOutlineStyle(
-        color: colors.primary,
-        borderRadius: BorderRadius.circular(100),
-      ),
+      tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+      focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: BorderRadius.circular(100)),
       borderColor: FWidgetStateMap({
         WidgetState.error: colors.error,
         WidgetState.disabled: colors.disable(colors.primary),

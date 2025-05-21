@@ -25,12 +25,7 @@ class Header extends StatefulWidget {
   final ValueNotifier<FCalendarPickerType> type;
   final LocalDate month;
 
-  const Header({
-    required this.style,
-    required this.type,
-    required this.month,
-    super.key,
-  });
+  const Header({required this.style, required this.type, required this.month, super.key});
 
   @override
   State<Header> createState() => _HeaderState();
@@ -52,12 +47,8 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     widget.type.addListener(_animate);
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.style.animationDuration,
-    );
-    _controller.value =
-        widget.type.value == FCalendarPickerType.day ? 0.0 : 1.0;
+    _controller = AnimationController(vsync: this, duration: widget.style.animationDuration);
+    _controller.value = widget.type.value == FCalendarPickerType.day ? 0.0 : 1.0;
   }
 
   @override
@@ -80,17 +71,13 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  (FLocalizations.of(context) ?? FDefaultLocalizations())
-                      .yearMonth(widget.month.toNative()),
+                  (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
                   style: widget.style.headerTextStyle,
                 ),
                 RotationTransition(
                   turns: Tween(
                     begin: 0.0,
-                    end:
-                        Directionality.maybeOf(context) == TextDirection.rtl
-                            ? -0.25
-                            : 0.25,
+                    end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25,
                   ).animate(_controller),
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
@@ -141,12 +128,7 @@ class Navigation extends StatelessWidget {
   final VoidCallback? onPrevious;
   final VoidCallback? onNext;
 
-  const Navigation({
-    required this.style,
-    required this.onPrevious,
-    required this.onNext,
-    super.key,
-  });
+  const Navigation({required this.style, required this.onPrevious, required this.onNext, super.key});
 
   @override
   Widget build(BuildContext _) => Padding(
@@ -158,21 +140,13 @@ class Navigation extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onPrevious,
-              child: const Icon(FIcons.chevronLeft),
-            ),
+            child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
           ),
 
           const Expanded(child: SizedBox()),
           Padding(
             padding: const EdgeInsetsDirectional.only(end: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onNext,
-              child: const Icon(FIcons.chevronRight),
-            ),
+            child: FButton.icon(style: style.buttonStyle, onPress: onNext, child: const Icon(FIcons.chevronRight)),
           ),
         ],
       ),
@@ -190,8 +164,7 @@ class Navigation extends StatelessWidget {
 }
 
 /// The calendar header's style.
-class FCalendarHeaderStyle
-    with Diagnosticable, _$FCalendarHeaderStyleFunctions {
+class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions {
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
@@ -222,35 +195,19 @@ class FCalendarHeaderStyle
     required FTypography typography,
     required FStyle style,
   }) {
-    final outline =
-        FButtonStyles.inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
-        ).outline;
+    final outline = FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline;
     return FCalendarHeaderStyle(
       focusedOutlineStyle: style.focusedOutlineStyle,
       buttonStyle: outline.copyWith(
-        decoration: outline.decoration.map(
-          (d) => d.copyWith(borderRadius: BorderRadius.circular(4)),
-        ),
+        decoration: outline.decoration.map((d) => d.copyWith(borderRadius: BorderRadius.circular(4))),
         iconContentStyle: FButtonIconContentStyle(
           iconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(
-              color: colors.disable(colors.mutedForeground),
-              size: 17,
-            ),
-            WidgetState.any: IconThemeData(
-              color: colors.mutedForeground,
-              size: 17,
-            ),
+            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
           }),
         ),
       ),
-      headerTextStyle: typography.base.copyWith(
-        color: colors.primary,
-        fontWeight: FontWeight.w600,
-      ),
+      headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
     );
   }
 }

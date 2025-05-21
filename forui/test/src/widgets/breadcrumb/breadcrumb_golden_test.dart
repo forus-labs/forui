@@ -38,10 +38,7 @@ void main() {
                   menu: [
                     FTileGroup(
                       children: [
-                        FTile(
-                          title: const Text('Documentation'),
-                          onPress: () {},
-                        ),
+                        FTile(title: const Text('Documentation'), onPress: () {}),
                         FTile(title: const Text('Themes'), onPress: () {}),
                       ],
                     ),
@@ -54,9 +51,7 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -81,10 +76,7 @@ void main() {
                   menu: [
                     FTileGroup(
                       children: [
-                        FTile(
-                          title: const Text('Documentation'),
-                          onPress: () {},
-                        ),
+                        FTile(title: const Text('Documentation'), onPress: () {}),
                         FTile(title: const Text('Themes'), onPress: () {}),
                       ],
                     ),
@@ -117,10 +109,7 @@ void main() {
                   menu: [
                     FTileGroup(
                       children: [
-                        FTile(
-                          title: const Text('Documentation'),
-                          onPress: () {},
-                        ),
+                        FTile(title: const Text('Documentation'), onPress: () {}),
                         FTile(title: const Text('Themes'), onPress: () {}),
                       ],
                     ),
@@ -135,9 +124,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile(
-            'breadcrumb/${theme.name}/collapsed-breadcrumb.png',
-          ),
+          matchesGoldenFile('breadcrumb/${theme.name}/collapsed-breadcrumb.png'),
         );
       });
 
@@ -166,19 +153,12 @@ void main() {
           ),
         );
 
-        await tester.tap(
-          find.descendant(
-            of: find.byType(FBreadcrumb),
-            matching: find.byType(FPopoverMenu),
-          ),
-        );
+        await tester.tap(find.descendant(of: find.byType(FBreadcrumb), matching: find.byType(FPopoverMenu)));
         await tester.pumpAndSettle();
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile(
-            'breadcrumb/${theme.name}/shown-collapsed-breadcrumb.png',
-          ),
+          matchesGoldenFile('breadcrumb/${theme.name}/shown-collapsed-breadcrumb.png'),
         );
       });
     }

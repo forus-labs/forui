@@ -54,10 +54,7 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
     this.truncateAndStripTimezone = true,
     DateTime? initialDate,
     Duration popoverAnimationDuration = const Duration(milliseconds: 100),
-  }) : calendar = FPopoverController(
-         vsync: vsync,
-         animationDuration: popoverAnimationDuration,
-       ),
+  }) : calendar = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
        _calendar = FCalendarController.date(
          initialSelection: initialDate,
          selectable: (date) => validator(date) == null,
@@ -67,19 +64,16 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
   void addListener(VoidCallback listener) => _calendar.addListener(listener);
 
   @override
-  void addValueListener(ValueChanged<DateTime?>? listener) =>
-      _calendar.addValueListener(listener);
+  void addValueListener(ValueChanged<DateTime?>? listener) => _calendar.addValueListener(listener);
 
   @override
   void notifyListeners() => _calendar.notifyListeners();
 
   @override
-  void removeListener(VoidCallback listener) =>
-      _calendar.removeListener(listener);
+  void removeListener(VoidCallback listener) => _calendar.removeListener(listener);
 
   @override
-  void removeValueListener(ValueChanged<DateTime?>? listener) =>
-      _calendar.removeValueListener(listener);
+  void removeValueListener(ValueChanged<DateTime?>? listener) => _calendar.removeValueListener(listener);
 
   @override
   bool get hasListeners => _calendar.hasListeners;
@@ -130,17 +124,11 @@ abstract class FDateField extends StatefulWidget {
     Widget? _,
   ) => Padding(
     padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
-    child: IconTheme(
-      data: styles.$1.iconStyle,
-      child: const Icon(FIcons.calendar),
-    ),
+    child: IconTheme(data: styles.$1.iconStyle, child: const Icon(FIcons.calendar)),
   );
 
-  static Widget _fieldBuilder(
-    BuildContext _,
-    (FDateFieldStyle, FTextFieldStyle, Set<WidgetState>) _,
-    Widget? child,
-  ) => child!;
+  static Widget _fieldBuilder(BuildContext _, (FDateFieldStyle, FTextFieldStyle, Set<WidgetState>) _, Widget? child) =>
+      child!;
 
   /// The controller.
   ///
@@ -175,22 +163,15 @@ abstract class FDateField extends StatefulWidget {
   /// The builder used to decorate the date-field. It should use the given child.
   ///
   /// Defaults to returning the given child.
-  final ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>
-  builder;
+  final ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder;
 
   /// Builds a widget at the start of the input field that can be pressed to toggle the calendar popover. Defaults to
   /// [defaultIconBuilder].
-  final ValueWidgetBuilder<
-    (FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)
-  >?
-  prefixBuilder;
+  final ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
 
   /// Builds a widget at the end of the input field that can be pressed to toggle the calendar popover. Defaults to
   /// no prefix.
-  final ValueWidgetBuilder<
-    (FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)
-  >?
-  suffixBuilder;
+  final ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
 
   /// The label.
   final Widget? label;
@@ -308,12 +289,9 @@ abstract class FDateField extends StatefulWidget {
     bool canRequestFocus,
     bool clearable,
     int baselineInputYear,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>
-    builder,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    prefixBuilder,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    suffixBuilder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     FDateFieldCalendarProperties calendar,
     Widget? label,
     Widget? description,
@@ -404,12 +382,9 @@ abstract class FDateField extends StatefulWidget {
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
     FHidePopoverRegion hideOnTapOutside,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>
-    builder,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    prefixBuilder,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    suffixBuilder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -456,14 +431,9 @@ abstract class FDateField extends StatefulWidget {
     DateTime? initialDate,
     bool autofocus = false,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>
-        builder =
-        _fieldBuilder,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-        prefixBuilder =
-        defaultIconBuilder,
-    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    suffixBuilder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder = defaultIconBuilder,
+    ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     TextInputAction? textInputAction,
     TextAlign textAlign = TextAlign.start,
     TextAlignVertical? textAlignVertical,
@@ -482,8 +452,7 @@ abstract class FDateField extends StatefulWidget {
     FormFieldSetter<DateTime>? onSaved,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
-    Widget Function(BuildContext, String) errorBuilder =
-        FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Key? key,
   }) => _InputDateField(
     controller: controller,
@@ -538,9 +507,7 @@ abstract class FDateField extends StatefulWidget {
   }
 }
 
-abstract class _FDateFieldState<T extends FDateField> extends State<T>
-    with SingleTickerProviderStateMixin {
+abstract class _FDateFieldState<T extends FDateField> extends State<T> with SingleTickerProviderStateMixin {
   late FDateFieldController _controller =
-      widget.controller ??
-      FDateFieldController(vsync: this, initialDate: widget.initialDate);
+      widget.controller ?? FDateFieldController(vsync: this, initialDate: widget.initialDate);
 }

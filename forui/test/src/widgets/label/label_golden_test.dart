@@ -47,10 +47,7 @@ void main() {
                   error: const Text('Please enter a valid email address.'),
                   states: states,
                   child: const DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
-                      color: Colors.grey,
-                    ),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
                     child: SizedBox(width: 16, height: 16),
                   ),
                 ),
@@ -58,10 +55,7 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('label/${theme.name}/horizontal-$states.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$states.png'));
         });
       }
 
@@ -81,20 +75,14 @@ void main() {
                 error: const Text('Please enter a valid email address.'),
                 states: state,
                 child: const DecoratedBox(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Colors.grey,
-                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
                   child: SizedBox(width: 200, height: 30),
                 ),
               ),
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('label/${theme.name}/vertical-$state.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/vertical-$state.png'));
         });
       }
     }

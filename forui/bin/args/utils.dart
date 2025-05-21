@@ -3,8 +3,7 @@ import 'dart:math' as math;
 // Copied from package:dart/args/lib/src/utils.dart since it wasn't public.
 
 /// Pads [source] to [length] by adding spaces at the end.
-String padRight(String source, int length) =>
-    source + ' ' * (length - source.length);
+String padRight(String source, int length) => source + ' ' * (length - source.length);
 
 /// Wraps a block of text into lines no longer than [length].
 ///
@@ -42,34 +41,20 @@ String wrapText(String text, {int? length, int? hangingIndent}) {
   final result = <String>[];
   for (final line in splitText) {
     var trimmedText = line.trimLeft();
-    final leadingWhitespace = line.substring(
-      0,
-      line.length - trimmedText.length,
-    );
+    final leadingWhitespace = line.substring(0, line.length - trimmedText.length);
     List<String> notIndented;
     if (hangingIndent != 0) {
       // When we have a hanging indent, we want to wrap the first line at one
       // width, and the rest at another (offset by hangingIndent), so we wrap
       // them twice and recombine.
-      final firstLineWrap = wrapTextAsLines(
-        trimmedText,
-        length: length - leadingWhitespace.length,
-      );
+      final firstLineWrap = wrapTextAsLines(trimmedText, length: length - leadingWhitespace.length);
       notIndented = [firstLineWrap.removeAt(0)];
       trimmedText = trimmedText.substring(notIndented[0].length).trimLeft();
       if (firstLineWrap.isNotEmpty) {
-        notIndented.addAll(
-          wrapTextAsLines(
-            trimmedText,
-            length: length - leadingWhitespace.length - hangingIndent,
-          ),
-        );
+        notIndented.addAll(wrapTextAsLines(trimmedText, length: length - leadingWhitespace.length - hangingIndent));
       }
     } else {
-      notIndented = wrapTextAsLines(
-        trimmedText,
-        length: length - leadingWhitespace.length,
-      );
+      notIndented = wrapTextAsLines(trimmedText, length: length - leadingWhitespace.length);
     }
     String? hangingIndentString;
     result.addAll(

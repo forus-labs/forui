@@ -12,9 +12,7 @@ void main() {
         TestScaffold.blue(
           child: FAccordion(
             style: TestScaffold.blueScreen.accordionStyle,
-            children: const [
-              FAccordionItem(title: Text('Title'), child: SizedBox()),
-            ],
+            children: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
           ),
         ),
       );
@@ -32,20 +30,14 @@ void main() {
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: Text('Title'),
-                  child: ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(dimension: 50),
-                  ),
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('accordion/${theme.name}/shown.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/shown.png'));
       });
 
       testWidgets('focused', (tester) async {
@@ -58,27 +50,18 @@ void main() {
                   initiallyExpanded: true,
                   autofocus: true,
                   title: Text('Title'),
-                  child: ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(dimension: 50),
-                  ),
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
                 FAccordionItem(
                   title: Text('Title'),
-                  child: ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(dimension: 50),
-                  ),
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('accordion/${theme.name}/focused.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/focused.png'));
       });
 
       testWidgets('hidden', (tester) async {
@@ -90,10 +73,7 @@ void main() {
                 FAccordionItem(
                   initiallyExpanded: true,
                   title: Text('Title'),
-                  child: ColoredBox(
-                    color: Colors.yellow,
-                    child: SizedBox.square(dimension: 50),
-                  ),
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
               ],
             ),
@@ -103,10 +83,7 @@ void main() {
         await tester.tap(find.text('Title'));
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('accordion/${theme.name}/hidden.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/hidden.png'));
       });
     }
   });

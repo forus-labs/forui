@@ -19,8 +19,9 @@ class ButtonTextPage extends Sample {
     : variant = variants[style] ?? Variant.primary;
 
   @override
-  Widget sample(BuildContext context) =>
-      IntrinsicWidth(child: FButton(style: variant, onPress: () {}, child: Text(label)));
+  Widget sample(BuildContext context) => IntrinsicWidth(
+    child: FButton(style: variant, onPress: () {}, child: Text(label)),
+  );
 }
 
 @RoutePage()
@@ -46,8 +47,9 @@ class ButtonOnlyIconPage extends Sample {
   ButtonOnlyIconPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) =>
-      IntrinsicWidth(child: FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {}));
+  Widget sample(BuildContext context) => IntrinsicWidth(
+    child: FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {}),
+  );
 }
 
 @RoutePage()

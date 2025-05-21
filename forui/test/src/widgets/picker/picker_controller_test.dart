@@ -24,10 +24,7 @@ void main() {
     });
 
     test('setting value throws if length mismatch with wheels', () {
-      controller.wheels.addAll([
-        FixedExtentScrollController(),
-        FixedExtentScrollController(),
-      ]);
+      controller.wheels.addAll([FixedExtentScrollController(), FixedExtentScrollController()]);
 
       expect(() => controller.value = [1], throwsAssertionError);
       expect(() => controller.value = [1, 2, 3], throwsAssertionError);
@@ -75,10 +72,7 @@ void main() {
 
     test('dispose cleans up wheel controllers', () {
       final controller = FPickerController(initialIndexes: [0, 1]);
-      controller.wheels.addAll([
-        FixedExtentScrollController(),
-        FixedExtentScrollController(),
-      ]);
+      controller.wheels.addAll([FixedExtentScrollController(), FixedExtentScrollController()]);
 
       controller.dispose();
 

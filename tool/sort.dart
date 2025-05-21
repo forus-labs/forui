@@ -5,11 +5,12 @@ void main(List<String> args) {
   final [packageName, ...] = args;
   final ignore = {
     '$currentPath/lib/generated_plugin_registrant.dart',
-    '$currentPath/lib/src/localizations/'
+    '$currentPath/lib/src/localizations/',
   };
 
   // Getting all the dart files for the project
-  final files = dartFiles(currentPath)..removeWhere((key, _) => ignore.any(key.startsWith));
+  final files = dartFiles(currentPath)
+    ..removeWhere((key, _) => ignore.any(key.startsWith));
 
   // Sorting and writing to files
   for (final file in files.values) {
@@ -32,7 +33,9 @@ Map<String, File> dartFiles(String currentPath) {
     ..._readDir(currentPath, 'integration_test'),
   ];
 
-  for (final file in allContents.whereType<File>().where((file) => file.path.endsWith('.dart'))) {
+  for (final file in allContents.whereType<File>().where(
+    (file) => file.path.endsWith('.dart'),
+  )) {
     dartFiles[file.path] = file;
   }
 
@@ -40,7 +43,8 @@ Map<String, File> dartFiles(String currentPath) {
 }
 
 List<FileSystemEntity> _readDir(String currentPath, String name) {
-  if (Directory('$currentPath/$name') case final directory when directory.existsSync()) {
+  if (Directory('$currentPath/$name') case final directory
+      when directory.existsSync()) {
     return directory.listSync(recursive: true);
   }
   return [];
@@ -59,21 +63,24 @@ String sortImports(List<String> lines, String packageName, {String? filePath}) {
 
   bool noImports() =>
       dartImports.isEmpty &&
-          flutterImports.isEmpty &&
-          packageImports.isEmpty &&
-          projectImports.isEmpty &&
-          projectRelativeImports.isEmpty;
+      flutterImports.isEmpty &&
+      packageImports.isEmpty &&
+      projectImports.isEmpty &&
+      projectRelativeImports.isEmpty;
 
   var isMultiLineString = false;
 
   for (final line in lines) {
     // Check if line is in multiline string
-    if (_timesContained(line, "'''") == 1 || _timesContained(line, '"""') == 1) {
+    if (_timesContained(line, "'''") == 1 ||
+        _timesContained(line, '"""') == 1) {
       isMultiLineString = !isMultiLineString;
     }
 
     // If line is an import line
-    if (line.startsWith('import ') && line.endsWith(';') && !isMultiLineString) {
+    if (line.startsWith('import ') &&
+        line.endsWith(';') &&
+        !isMultiLineString) {
       if (line.contains('dart:')) {
         dartImports.add(line);
       } else if (line.contains('package:flutter/')) {
@@ -133,7 +140,9 @@ String sortImports(List<String> lines, String packageName, {String? filePath}) {
     sortedLines.addAll(packageImports);
   }
   if (projectImports.isNotEmpty || projectRelativeImports.isNotEmpty) {
-    if (dartImports.isNotEmpty || flutterImports.isNotEmpty || packageImports.isNotEmpty) {
+    if (dartImports.isNotEmpty ||
+        flutterImports.isNotEmpty ||
+        packageImports.isNotEmpty) {
       sortedLines.add('');
     }
     projectImports.sort();
@@ -163,4 +172,5 @@ String sortImports(List<String> lines, String packageName, {String? filePath}) {
 
 /// Get the number of times a string contains another
 /// string
-int _timesContained(String string, String looking) => string.split(looking).length - 1;
+int _timesContained(String string, String looking) =>
+    string.split(looking).length - 1;

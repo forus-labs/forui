@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 const _size = Size(100, 100);
-const _shifts = {
-  FPortalShift.flip: 'flip',
-  FPortalShift.along: 'along',
-  FPortalShift.none: 'none',
-};
+const _shifts = {FPortalShift.flip: 'flip', FPortalShift.along: 'along', FPortalShift.none: 'none'};
 
 /// Visualizer for port shifting strategies
 class Visualizer extends StatefulWidget {
@@ -27,16 +23,8 @@ class _VisualizerState extends State<Visualizer> {
 
   @override
   Widget build(BuildContext context) {
-    final child = (
-      offset: _childOffset,
-      size: _childSize,
-      anchor: _childAnchor,
-    );
-    final portal = (
-      offset: _portalOffset,
-      size: _portalSize,
-      anchor: _portalAnchor,
-    );
+    final child = (offset: _childOffset, size: _childSize, anchor: _childAnchor);
+    final portal = (offset: _portalOffset, size: _portalSize, anchor: _portalAnchor);
     final offset = _shift(_size, child, portal);
 
     return ListView(
@@ -56,38 +44,25 @@ class _VisualizerState extends State<Visualizer> {
           label: const Text('Shift'),
           onChange: (closure) => setState(() => _shift = closure ?? _shift),
           format: (closure) => _shifts[closure]!,
-          children: [
-            for (final MapEntry(:key, :value) in _shifts.entries)
-              FSelectItem(value: key, child: Text(value)),
-          ],
+          children: [for (final MapEntry(:key, :value) in _shifts.entries) FSelectItem(value: key, child: Text(value))],
         ),
         const SizedBox(height: 16),
         _Settings(
           header: 'Child',
-          onOffsetXChange: (value) =>
-              setState(() => _childOffset = Offset(value, _childOffset.dy)),
-          onOffsetYChange: (value) =>
-              setState(() => _childOffset = Offset(_childOffset.dx, value)),
-          onSizeWChange: (value) =>
-              setState(() => _childSize = Size(value, _childSize.height)),
-          onSizeHChange: (value) =>
-              setState(() => _childSize = Size(_childSize.width, value)),
-          onAnchorChange: (alignment) =>
-              setState(() => _childAnchor = alignment ?? _childAnchor),
+          onOffsetXChange: (value) => setState(() => _childOffset = Offset(value, _childOffset.dy)),
+          onOffsetYChange: (value) => setState(() => _childOffset = Offset(_childOffset.dx, value)),
+          onSizeWChange: (value) => setState(() => _childSize = Size(value, _childSize.height)),
+          onSizeHChange: (value) => setState(() => _childSize = Size(_childSize.width, value)),
+          onAnchorChange: (alignment) => setState(() => _childAnchor = alignment ?? _childAnchor),
         ),
         const SizedBox(height: 16),
         _Settings(
           header: 'Portal',
-          onOffsetXChange: (value) =>
-              setState(() => _portalOffset = Offset(value, _portalOffset.dy)),
-          onOffsetYChange: (value) =>
-              setState(() => _portalOffset = Offset(_portalOffset.dx, value)),
-          onSizeWChange: (value) =>
-              setState(() => _portalSize = Size(value, _portalSize.height)),
-          onSizeHChange: (value) =>
-              setState(() => _portalSize = Size(_portalSize.width, value)),
-          onAnchorChange: (alignment) =>
-              setState(() => _portalAnchor = alignment ?? _portalAnchor),
+          onOffsetXChange: (value) => setState(() => _portalOffset = Offset(value, _portalOffset.dy)),
+          onOffsetYChange: (value) => setState(() => _portalOffset = Offset(_portalOffset.dx, value)),
+          onSizeWChange: (value) => setState(() => _portalSize = Size(value, _portalSize.height)),
+          onSizeHChange: (value) => setState(() => _portalSize = Size(_portalSize.width, value)),
+          onAnchorChange: (alignment) => setState(() => _portalAnchor = alignment ?? _portalAnchor),
         ),
       ],
     );
@@ -117,10 +92,7 @@ class _Visualizer extends StatelessWidget {
       child: Container(
         width: _size.width * 3,
         height: _size.height * 3,
-        decoration: BoxDecoration(
-          border: Border.all(),
-          color: Colors.grey.shade200,
-        ),
+        decoration: BoxDecoration(border: Border.all(), color: Colors.grey.shade200),
         child: Stack(
           clipBehavior: Clip.none,
           children: [
@@ -131,38 +103,18 @@ class _Visualizer extends StatelessWidget {
               child: Container(
                 width: childSize.width * 3,
                 height: childSize.height * 3,
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
-                  border: Border.all(),
-                ),
-                child: Center(
-                  child: Text(
-                    'Child\n${childAnchor.toString().replaceAll('Alignment.', '')}',
-                  ),
-                ),
+                decoration: BoxDecoration(color: Colors.yellow, border: Border.all()),
+                child: Center(child: Text('Child\n${childAnchor.toString().replaceAll('Alignment.', '')}')),
               ),
             ),
 
             Positioned(
-              left:
-                  (childOffset.dx +
-                          childAnchor.x * childSize.width / 2 +
-                          childSize.width / 2) *
-                      3 -
-                  5,
-              top:
-                  (childOffset.dy +
-                          childAnchor.y * childSize.height / 2 +
-                          childSize.height / 2) *
-                      3 -
-                  5,
+              left: (childOffset.dx + childAnchor.x * childSize.width / 2 + childSize.width / 2) * 3 - 5,
+              top: (childOffset.dy + childAnchor.y * childSize.height / 2 + childSize.height / 2) * 3 - 5,
               child: Container(
                 width: 10,
                 height: 10,
-                decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  shape: BoxShape.circle,
-                ),
+                decoration: const BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
               ),
             ),
 
@@ -173,41 +125,25 @@ class _Visualizer extends StatelessWidget {
               child: Container(
                 width: portalSize.width * 3,
                 height: portalSize.height * 3,
-                decoration: BoxDecoration(
-                  color: Colors.red.withValues(alpha: 0.7),
-                  border: Border.all(),
-                ),
-                child: Center(
-                  child: Text(
-                    'Portal\n${portalAnchor.toString().replaceAll('Alignment.', '')}',
-                  ),
-                ),
+                decoration: BoxDecoration(color: Colors.red.withValues(alpha: 0.7), border: Border.all()),
+                child: Center(child: Text('Portal\n${portalAnchor.toString().replaceAll('Alignment.', '')}')),
               ),
             ),
 
             // Portal anchor point
             Positioned(
               left:
-                  (portalOffset.dx +
-                          childOffset.dx +
-                          portalAnchor.x * portalSize.width / 2 +
-                          portalSize.width / 2) *
+                  (portalOffset.dx + childOffset.dx + portalAnchor.x * portalSize.width / 2 + portalSize.width / 2) *
                       3 -
                   5,
               top:
-                  (portalOffset.dy +
-                          childOffset.dy +
-                          portalAnchor.y * portalSize.height / 2 +
-                          portalSize.height / 2) *
+                  (portalOffset.dy + childOffset.dy + portalAnchor.y * portalSize.height / 2 + portalSize.height / 2) *
                       3 -
                   5,
               child: Container(
                 width: 10,
                 height: 10,
-                decoration: const BoxDecoration(
-                  color: Colors.green,
-                  shape: BoxShape.circle,
-                ),
+                decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle),
               ),
             ),
           ],
@@ -249,16 +185,14 @@ class _Settings extends StatelessWidget {
               child: FTextField(
                 label: const Text('Offset X: '),
                 keyboardType: TextInputType.number,
-                onChange: (value) =>
-                    onOffsetXChange(double.tryParse(value) ?? 0),
+                onChange: (value) => onOffsetXChange(double.tryParse(value) ?? 0),
               ),
             ),
             Expanded(
               child: FTextField(
                 label: const Text('Offset Y: '),
                 keyboardType: TextInputType.number,
-                onChange: (value) =>
-                    onOffsetYChange(double.tryParse(value) ?? 0),
+                onChange: (value) => onOffsetYChange(double.tryParse(value) ?? 0),
               ),
             ),
           ],
@@ -298,10 +232,7 @@ class _Settings extends StatelessWidget {
               Alignment.bottomCenter,
               Alignment.bottomRight,
             ])
-              FSelectItem(
-                value: anchor,
-                child: Text(anchor.toString().replaceAll('Alignment.', '')),
-              ),
+              FSelectItem(value: anchor, child: Text(anchor.toString().replaceAll('Alignment.', ''))),
           ],
         ),
       ],

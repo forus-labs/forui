@@ -10,35 +10,20 @@ void main() {
     for (final (type, field) in [
       (
         'normal',
-        (text, controller, saved) => FTextFormField(
-          initialText: text,
-          controller: controller,
-          onSaved: saved,
-        ),
+        (text, controller, saved) => FTextFormField(initialText: text, controller: controller, onSaved: saved),
       ),
       (
         'email',
-        (text, controller, saved) => FTextFormField.email(
-          initialText: text,
-          controller: controller,
-          onSaved: saved,
-        ),
+        (text, controller, saved) => FTextFormField.email(initialText: text, controller: controller, onSaved: saved),
       ),
       (
         'password',
-        (text, controller, saved) => FTextFormField.password(
-          initialText: text,
-          controller: controller,
-          onSaved: saved,
-        ),
+        (text, controller, saved) => FTextFormField.password(initialText: text, controller: controller, onSaved: saved),
       ),
       (
         'multiline',
-        (text, controller, saved) => FTextFormField.multiline(
-          initialText: text,
-          controller: controller,
-          onSaved: saved,
-        ),
+        (text, controller, saved) =>
+            FTextFormField.multiline(initialText: text, controller: controller, onSaved: saved),
       ),
     ]) {
       testWidgets('$type - set initial text using initialText', (tester) async {
@@ -46,12 +31,7 @@ void main() {
 
         String? initial;
         await tester.pumpWidget(
-          TestScaffold.app(
-            child: Form(
-              key: key,
-              child: field('initial', null, (value) => initial = value),
-            ),
-          ),
+          TestScaffold.app(child: Form(key: key, child: field('initial', null, (value) => initial = value))),
         );
 
         key.currentState!.save();
@@ -68,11 +48,7 @@ void main() {
           TestScaffold.app(
             child: Form(
               key: key,
-              child: field(
-                null,
-                autoDispose(TextEditingController(text: 'initial')),
-                (value) => initial = value,
-              ),
+              child: field(null, autoDispose(TextEditingController(text: 'initial')), (value) => initial = value),
             ),
           ),
         );
@@ -93,13 +69,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: Form(
-            key: key,
-            child: FTextFormField(
-              controller: controller,
-              onChange: (value) => count++,
-            ),
-          ),
+          child: Form(key: key, child: FTextFormField(controller: controller, onChange: (value) => count++)),
         ),
       );
 

@@ -94,9 +94,8 @@ class LazyTileGroupPage extends Sample {
     description: const Text('Personalize your experience'),
     maxHeight: 200,
     count: 200,
-    tileBuilder:
-        (context, index) =>
-            FTile(title: Text('Tile $index'), suffixIcon: const Icon(FIcons.chevronRight), onPress: () {}),
+    tileBuilder: (context, index) =>
+        FTile(title: Text('Tile $index'), suffixIcon: const Icon(FIcons.chevronRight), onPress: () {}),
   );
 }
 

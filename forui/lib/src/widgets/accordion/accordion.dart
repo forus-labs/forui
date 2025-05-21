@@ -40,12 +40,7 @@ class FAccordion extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FAccordion].
-  const FAccordion({
-    required this.children,
-    this.controller,
-    this.style,
-    super.key,
-  });
+  const FAccordion({required this.children, this.controller, this.style, super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -60,8 +55,7 @@ class FAccordion extends StatefulWidget {
 }
 
 class _FAccordionState extends State<FAccordion> {
-  late FAccordionController _controller =
-      widget.controller ?? FAccordionController();
+  late FAccordionController _controller = widget.controller ?? FAccordionController();
 
   @override
   void didUpdateWidget(covariant FAccordion old) {
@@ -81,12 +75,7 @@ class _FAccordionState extends State<FAccordion> {
       children: [
         for (final (index, child) in widget.children.indexed)
           if (child is FAccordionItemMixin)
-            FAccordionItemData(
-              index: index,
-              controller: _controller,
-              style: style,
-              child: child,
-            )
+            FAccordionItemData(index: index, controller: _controller, style: style, child: child)
           else
             child,
       ],
@@ -158,43 +147,29 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
-  FAccordionStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         titleTextStyle: FWidgetStateMap({
-           WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
-             fontWeight: FontWeight.w500,
-             color: colors.foreground,
-             decoration: TextDecoration.underline,
-           ),
-           WidgetState.any: typography.base.copyWith(
-             fontWeight: FontWeight.w500,
-             color: colors.foreground,
-           ),
-         }),
-         childTextStyle: typography.sm.copyWith(color: colors.foreground),
-         iconStyle: FWidgetStateMap.all(
-           IconThemeData(color: colors.primary, size: 20),
-         ),
-         focusedOutlineStyle: style.focusedOutlineStyle,
-         dividerStyle: FDividerStyle(
-           color: colors.border,
-           padding: EdgeInsets.zero,
-         ),
-         tappableStyle: style.tappableStyle.copyWith(
-           animationTween: FTappableAnimations.none,
-         ),
-       );
+  FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        titleTextStyle: FWidgetStateMap({
+          WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
+            fontWeight: FontWeight.w500,
+            color: colors.foreground,
+            decoration: TextDecoration.underline,
+          ),
+          WidgetState.any: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground),
+        }),
+        childTextStyle: typography.sm.copyWith(color: colors.foreground),
+        iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.primary, size: 20)),
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
+        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+      );
 }
 
 @internal
 class FAccordionItemData extends InheritedWidget {
   @useResult
   static FAccordionItemData of(BuildContext context) {
-    final data =
-        context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
+    final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
     assert(data != null, 'No FAccordionItemData found in context.');
     return data!;
   }

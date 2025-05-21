@@ -63,13 +63,7 @@ final class FBreakpoints with Diagnosticable {
   final double xl2;
 
   /// Creates a [FBreakpoints].
-  const FBreakpoints({
-    this.sm = 640,
-    this.md = 768,
-    this.lg = 1024,
-    this.xl = 1280,
-    this.xl2 = 1536,
-  });
+  const FBreakpoints({this.sm = 640, this.md = 768, this.lg = 1024, this.xl = 1280, this.xl2 = 1536});
 
   @override
   bool operator ==(Object other) =>
@@ -83,8 +77,7 @@ final class FBreakpoints with Diagnosticable {
           xl2 == other.xl2;
 
   @override
-  int get hashCode =>
-      sm.hashCode ^ md.hashCode ^ lg.hashCode ^ xl.hashCode ^ xl2.hashCode;
+  int get hashCode => sm.hashCode ^ md.hashCode ^ lg.hashCode ^ xl.hashCode ^ xl2.hashCode;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

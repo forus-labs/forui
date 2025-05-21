@@ -21,29 +21,15 @@ void main() {
             child: FPopoverMenu(
               popoverController: controller,
               menu: [
-                FTileGroup(
-                  children: [
-                    FTile(title: const Text('Item 1'), onPress: () {}),
-                  ],
-                ),
-                FTileGroup(
-                  children: [
-                    FTile(title: const Text('Item 1'), onPress: () {}),
-                  ],
-                ),
+                FTileGroup(children: [FTile(title: const Text('Item 1'), onPress: () {})]),
+                FTileGroup(children: [FTile(title: const Text('Item 1'), onPress: () {})]),
               ],
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('popover-menu/hidden-${theme.name}.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/hidden-${theme.name}.png'));
       });
 
       testWidgets('${theme.name} shown', (tester) async {
@@ -53,21 +39,10 @@ void main() {
             child: FPopoverMenu(
               popoverController: controller,
               menu: [
-                FTileGroup(
-                  children: [
-                    FTile(title: const Text('Group 1'), onPress: () {}),
-                  ],
-                ),
-                FTileGroup(
-                  children: [
-                    FTile(title: const Text('Group 2'), onPress: () {}),
-                  ],
-                ),
+                FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+                FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
               ],
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         );
@@ -75,10 +50,7 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('popover-menu/shown-${theme.name}.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/shown-${theme.name}.png'));
       });
 
       testWidgets('${theme.name} scrollable', (tester) async {
@@ -91,34 +63,19 @@ void main() {
               menu: [
                 FTileGroup(
                   children: [
-                    FTile(
-                      title: const Text('Group 1 - Tile 1'),
-                      onPress: () {},
-                    ),
-                    FTile(
-                      title: const Text('Group 1 - Tile 2'),
-                      onPress: () {},
-                    ),
+                    FTile(title: const Text('Group 1 - Tile 1'), onPress: () {}),
+                    FTile(title: const Text('Group 1 - Tile 2'), onPress: () {}),
                   ],
                 ),
                 FTileGroup(
                   children: [
                     FTile(title: const Text('Group 2- Tile 1'), onPress: () {}),
-                    FTile(
-                      title: const Text('Group 2 - Tile 2'),
-                      onPress: () {},
-                    ),
-                    FTile(
-                      title: const Text('Group 2 - Tile 3'),
-                      onPress: () {},
-                    ),
+                    FTile(title: const Text('Group 2 - Tile 2'), onPress: () {}),
+                    FTile(title: const Text('Group 2 - Tile 3'), onPress: () {}),
                   ],
                 ),
               ],
-              child: const ColoredBox(
-                color: Colors.yellow,
-                child: SizedBox.square(dimension: 50),
-              ),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         );
@@ -126,10 +83,7 @@ void main() {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('popover-menu/scrollable-${theme.name}.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/scrollable-${theme.name}.png'));
       });
     });
   }

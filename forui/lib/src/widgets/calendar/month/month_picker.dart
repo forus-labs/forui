@@ -32,10 +32,7 @@ class MonthPicker extends StatefulWidget {
     required this.focused,
     required this.onPress,
     super.key,
-  }) : assert(
-         currentYear == currentYear.truncate(to: DateUnit.years),
-         'currentYear must be truncated to years',
-       );
+  }) : assert(currentYear == currentYear.truncate(to: DateUnit.years), 'currentYear must be truncated to years');
 
   @override
   State<MonthPicker> createState() => _MonthPickerState();
@@ -43,36 +40,14 @@ class MonthPicker extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-        DiagnosticsProperty(
-          'yearMonthStyle',
-          yearMonthStyle,
-          level: DiagnosticLevel.debug,
-        ),
-      )
-      ..add(
-        DiagnosticsProperty('dayStyle', dayStyle, level: DiagnosticLevel.debug),
-      )
-      ..add(
-        DiagnosticsProperty(
-          'currentYear',
-          currentYear,
-          level: DiagnosticLevel.debug,
-        ),
-      )
+      ..add(DiagnosticsProperty('yearMonthStyle', yearMonthStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('dayStyle', dayStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('currentYear', currentYear, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('start', start, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('end', end, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('today', today, level: DiagnosticLevel.debug))
-      ..add(
-        DiagnosticsProperty('focused', focused, level: DiagnosticLevel.debug),
-      )
-      ..add(
-        ObjectFlagProperty.has(
-          'onPress',
-          onPress,
-          level: DiagnosticLevel.debug,
-        ),
-      );
+      ..add(DiagnosticsProperty('focused', focused, level: DiagnosticLevel.debug))
+      ..add(ObjectFlagProperty.has('onPress', onPress, level: DiagnosticLevel.debug));
   }
 }
 
@@ -82,10 +57,7 @@ class _MonthPickerState extends State<MonthPicker> {
   @override
   void initState() {
     super.initState();
-    _months = List.generate(
-      12,
-      (i) => FocusNode(skipTraversal: true, debugLabel: '$i'),
-    );
+    _months = List.generate(12, (i) => FocusNode(skipTraversal: true, debugLabel: '$i'));
 
     if (widget.focused != null) {
       _months[widget.focused!.month - 1].requestFocus();
@@ -99,27 +71,18 @@ class _MonthPickerState extends State<MonthPicker> {
       padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: YearPicker.columns,
-        mainAxisExtent:
-            ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) /
-            YearPicker.rows,
+        mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
         mainAxisSpacing: 5.0,
       ),
       children: [
-        for (
-          var month = widget.currentYear, i = 0;
-          i < 12;
-          month = month.plus(months: 1), i++
-        )
+        for (var month = widget.currentYear, i = 0; i < 12; month = month.plus(months: 1), i++)
           Entry.yearMonth(
             style: widget.yearMonthStyle,
             date: month,
             focusNode: _months[i],
             current: widget.today.truncate(to: DateUnit.months) == month,
             selectable: widget.start <= month && month <= widget.end,
-            format:
-                (date) =>
-                    (FLocalizations.of(context) ?? FDefaultLocalizations())
-                        .abbreviatedMonth(date.toNative()),
+            format: (date) => (FLocalizations.of(context) ?? FDefaultLocalizations()).abbreviatedMonth(date.toNative()),
             onPress: widget.onPress,
           ),
       ],
@@ -129,20 +92,14 @@ class _MonthPickerState extends State<MonthPicker> {
   @override
   void didUpdateWidget(MonthPicker old) {
     super.didUpdateWidget(old);
-    assert(
-      old.currentYear == widget.currentYear,
-      'currentYear must not change.',
-    );
+    assert(old.currentYear == widget.currentYear, 'currentYear must not change.');
 
     final focused = widget.focused;
-    if (focused == null ||
-        focused < widget.currentYear ||
-        widget.currentYear.plus(years: 1) <= focused) {
+    if (focused == null || focused < widget.currentYear || widget.currentYear.plus(years: 1) <= focused) {
       return;
     }
 
-    if (_months[focused.month - 1] case final focusNode
-        when old.focused != widget.focused) {
+    if (_months[focused.month - 1] case final focusNode when old.focused != widget.focused) {
       focusNode.requestFocus();
     }
   }

@@ -18,8 +18,7 @@ typedef FSelectTileGroupController<T> = FMultiValueNotifier<T>;
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FTileGroupStyle] for customizing a select group's appearance.
-class FSelectTileGroup<T> extends FormField<Set<T>>
-    with FTileGroupMixin<FTileMixin>, FFormFieldProperties<Set<T>> {
+class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMixin>, FFormFieldProperties<Set<T>> {
   /// The controller.
   final FSelectTileGroupController<T> selectController;
 
@@ -83,8 +82,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
     this.semanticsLabel,
     this.onChange,
     this.onSelect,
-    Widget Function(BuildContext, String) errorBuilder =
-        FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -143,8 +141,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>>
     this.semanticsLabel,
     this.onChange,
     this.onSelect,
-    Widget Function(BuildContext, String) errorBuilder =
-        FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -283,8 +280,7 @@ class _State<T> extends FormFieldState<Set<T>> {
     super.build(context);
 
     final child = widget.builder(this);
-    if (Form.maybeOf(context)?.widget.autovalidateMode ==
-                AutovalidateMode.onUnfocus &&
+    if (Form.maybeOf(context)?.widget.autovalidateMode == AutovalidateMode.onUnfocus &&
             widget.autovalidateMode != AutovalidateMode.always ||
         widget.autovalidateMode == AutovalidateMode.onUnfocus) {
       return Focus(

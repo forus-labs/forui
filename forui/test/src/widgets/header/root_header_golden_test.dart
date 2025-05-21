@@ -35,49 +35,31 @@ void main() {
             child: FHeader(
               title: const Text(title),
               suffixes: [
-                const FHeaderAction(
-                  icon: Icon(FIcons.alarmClock),
-                  onPress: null,
-                ),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
                 FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
               ],
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('header/root/${theme.name}.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}.png'));
       });
 
-      testWidgets('${theme.name} with focused FRootHeader actions', (
-        tester,
-      ) async {
+      testWidgets('${theme.name} with focused FRootHeader actions', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FHeader(
               title: const Text(title),
               suffixes: [
-                const FHeaderAction(
-                  icon: Icon(FIcons.alarmClock),
-                  onPress: null,
-                ),
-                FHeaderAction(
-                  autofocus: true,
-                  icon: const Icon(FIcons.plus),
-                  onPress: () {},
-                ),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+                FHeaderAction(autofocus: true, icon: const Icon(FIcons.plus), onPress: () {}),
               ],
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('header/root/${theme.name}-focused.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-focused.png'));
       });
 
       testWidgets('${theme.name} with RTL FRootHeader actions', (tester) async {
@@ -88,20 +70,14 @@ void main() {
             child: FHeader(
               title: const Text(title),
               suffixes: [
-                const FHeaderAction(
-                  icon: Icon(FIcons.alarmClock),
-                  onPress: null,
-                ),
+                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
                 FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
               ],
             ),
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('header/root/${theme.name}-rtl.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-rtl.png'));
       });
     }
   });

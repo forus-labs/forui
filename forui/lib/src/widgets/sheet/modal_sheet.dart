@@ -68,13 +68,8 @@ Future<T?> showFSheet<T>({
       side: side,
       builder: builder,
       mainAxisMaxRatio: mainAxisMaxRatio,
-      capturedThemes: InheritedTheme.capture(
-        from: context,
-        to: navigator.context,
-      ),
-      barrierOnTapHint: localizations.barrierOnTapHint(
-        localizations.sheetSemanticsLabel,
-      ),
+      capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
+      barrierOnTapHint: localizations.barrierOnTapHint(localizations.sheetSemanticsLabel),
       barrierLabel: barrierLabel ?? localizations.barrierLabel,
       barrierDismissible: barrierDismissible,
       barrierColor: (style ?? context.theme.sheetStyle).barrierColor,
@@ -185,8 +180,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   @override
   final Color barrierColor;
 
-  final ValueNotifier<EdgeInsets> _clipDetailsNotifier =
-      ValueNotifier<EdgeInsets>(EdgeInsets.zero);
+  final ValueNotifier<EdgeInsets> _clipDetailsNotifier = ValueNotifier<EdgeInsets>(EdgeInsets.zero);
 
   AnimationController? _animationController;
 
@@ -222,11 +216,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildPage(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-  ) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     final sheet = Sheet(
       controller: controller,
       animation: animation,
@@ -262,26 +252,19 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
         color: animation!.drive(
           ColorTween(
             begin: barrierColor.withValues(alpha: 0.0),
-            end:
-                barrierColor, // changedInternalState is called if barrierColor updates
-          ).chain(
-            CurveTween(curve: barrierCurve),
-          ), // changedInternalState is called if barrierCurve updates
+            end: barrierColor, // changedInternalState is called if barrierColor updates
+          ).chain(CurveTween(curve: barrierCurve)), // changedInternalState is called if barrierCurve updates
         ),
-        dismissible:
-            barrierDismissible, // changedInternalState is called if barrierDismissible updates
-        semanticsLabel:
-            barrierLabel, // changedInternalState is called if barrierLabel updates
+        dismissible: barrierDismissible, // changedInternalState is called if barrierDismissible updates
+        semanticsLabel: barrierLabel, // changedInternalState is called if barrierLabel updates
         barrierSemanticsDismissible: semanticsDismissible,
         clipDetailsNotifier: _clipDetailsNotifier,
         semanticsOnTapHint: barrierOnTapHint,
       );
     } else {
       return ModalBarrier(
-        dismissible:
-            barrierDismissible, // changedInternalState is called if barrierDismissible updates
-        semanticsLabel:
-            barrierLabel, // changedInternalState is called if barrierLabel updates
+        dismissible: barrierDismissible, // changedInternalState is called if barrierDismissible updates
+        semanticsLabel: barrierLabel, // changedInternalState is called if barrierLabel updates
         barrierSemanticsDismissible: semanticsDismissible,
         clipDetailsNotifier: _clipDetailsNotifier,
         semanticsOnTapHint: barrierOnTapHint,

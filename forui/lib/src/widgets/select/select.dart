@@ -32,28 +32,15 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget? _,
   ) => Padding(
     padding: const EdgeInsetsDirectional.only(end: 8.0),
-    child: IconTheme(
-      data: styles.$1.iconStyle,
-      child: const Icon(FIcons.chevronDown),
-    ),
+    child: IconTheme(data: styles.$1.iconStyle, child: const Icon(FIcons.chevronDown)),
   );
 
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
-  static Widget defaultSearchLoadingBuilder(
-    BuildContext _,
-    FSelectSearchStyle style,
-    Widget? _,
-  ) => Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: FProgress.circularIcon(style: style.loadingIndicatorStyle),
-  );
+  static Widget defaultSearchLoadingBuilder(BuildContext _, FSelectSearchStyle style, Widget? _) =>
+      Padding(padding: const EdgeInsets.all(8.0), child: FProgress.circularIcon(style: style.loadingIndicatorStyle));
 
   /// The default empty builder that shows a localized message when there are no results.
-  static Widget defaultEmptyBuilder(
-    BuildContext context,
-    FSelectStyle style,
-    Widget? _,
-  ) {
+  static Widget defaultEmptyBuilder(BuildContext context, FSelectStyle style, Widget? _) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
@@ -61,11 +48,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     );
   }
 
-  static Widget _fieldBuilder(
-    BuildContext _,
-    (FSelectStyle, FTextFieldStyle, Set<WidgetState>) _,
-    Widget? child,
-  ) => child!;
+  static Widget _fieldBuilder(BuildContext _, (FSelectStyle, FTextFieldStyle, Set<WidgetState>) _, Widget? child) =>
+      child!;
 
   /// The default format function that converts the selected items to a comma separated string.
   static String defaultFormat(Object? selected) => selected.toString();
@@ -94,17 +78,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The builder used to decorate the select. It should use the given child.
   ///
   /// Defaults to returning the given child.
-  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>
-  builder;
+  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder;
 
   /// Builds a widget at the start of the select that can be pressed to toggle the popover. Defaults to no icon.
-  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>?
-  prefixBuilder;
+  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
 
   /// Builds a widget at the end of the select that can be pressed to toggle the popover. Defaults to
   /// [defaultIconBuilder].
-  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>?
-  suffixBuilder;
+  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
 
   @override
   final Widget? label;
@@ -212,12 +193,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FSelectStyle? style,
     bool autofocus,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>
-    builder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>?
-    prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>?
-    suffixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -263,14 +241,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FSelectStyle? style,
     bool autofocus = false,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>
-        builder =
-        _fieldBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>?
-    prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>?
-        suffixBuilder =
-        defaultIconBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder = defaultIconBuilder,
     Widget? label,
     Widget? description,
     bool enabled = true,
@@ -279,8 +252,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     FormFieldValidator<T> validator = _defaultValidator,
-    Widget Function(BuildContext, String) errorBuilder =
-        FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     String? hint,
     TextAlign textAlign = TextAlign.start,
     TextAlignVertical? textAlignVertical,
@@ -291,12 +263,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool clearable = false,
     AlignmentGeometry anchor = Alignment.topLeft,
     AlignmentGeometry fieldAnchor = Alignment.bottomLeft,
-    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(
-      maxHeight: 300,
-    ),
+    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift =
-        FPortalShift.flip,
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     bool autoHide = true,
@@ -307,9 +276,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     T? initialValue,
     Key? key,
   }) {
-    final inverse = {
-      for (final MapEntry(:key, :value) in items.entries) value: key,
-    };
+    final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
     return FSelect<T>(
       controller: controller,
       style: style,
@@ -350,10 +317,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentPhysics: contentPhysics,
       initialValue: initialValue,
       key: key,
-      children: [
-        for (final MapEntry(:key, :value) in items.entries)
-          FSelectItem(value: value, child: Text(key)),
-      ],
+      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(value: value, child: Text(key))],
     );
   }
 
@@ -376,12 +340,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FSelectStyle? style,
     bool autofocus,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>
-    builder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>?
-    prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>?
-    suffixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -487,13 +448,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(
-        FlagProperty(
-          'canRequestFocus',
-          value: canRequestFocus,
-          ifTrue: 'canRequestFocus',
-        ),
-      )
+      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
       ..add(DiagnosticsProperty('anchor', anchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
@@ -504,23 +459,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
-      ..add(
-        DiagnosticsProperty('contentScrollController', contentScrollController),
-      )
-      ..add(
-        FlagProperty(
-          'contentScrollHandles',
-          value: contentScrollHandles,
-          ifTrue: 'contentScrollHandles',
-        ),
-      )
+      ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
+      ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
       ..add(DiagnosticsProperty('initialValue', initialValue));
   }
 }
 
-abstract class _State<S extends FSelect<T>, T> extends State<S>
-    with SingleTickerProviderStateMixin {
+abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTickerProviderStateMixin {
   late final TextEditingController _textController;
   late FSelectController<T> _controller;
   late FocusNode _focus;
@@ -530,9 +476,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S>
   void initState() {
     super.initState();
     _textController = TextEditingController(text: _initialText);
-    _controller =
-        widget.controller ??
-        FSelectController(vsync: this, value: widget.initialValue);
+    _controller = widget.controller ?? FSelectController(vsync: this, value: widget.initialValue);
     _controller.addValueListener(_onChange);
 
     _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
@@ -573,14 +517,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S>
       if (widget.controller case final controller?) {
         _controller = controller;
       } else {
-        _textController.text =
-            widget.initialValue == null
-                ? ''
-                : widget.format(widget.initialValue as T);
-        _controller = FSelectController(
-          vsync: this,
-          value: widget.initialValue,
-        );
+        _textController.text = widget.initialValue == null ? '' : widget.format(widget.initialValue as T);
+        _controller = FSelectController(vsync: this, value: widget.initialValue);
       }
 
       _controller
@@ -657,33 +595,19 @@ abstract class _State<S extends FSelect<T>, T> extends State<S>
                     ? null
                     : (context, styles, _) => MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: widget.prefixBuilder?.call(context, (
-                        style,
-                        styles.$1,
-                        styles.$2,
-                      ), null),
+                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
                     ),
             suffixBuilder:
                 widget.suffixBuilder == null
                     ? null
                     : (context, styles, _) => MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: widget.suffixBuilder?.call(context, (
-                        style,
-                        styles.$1,
-                        styles.$2,
-                      ), null),
+                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
                     ),
-            clearable:
-                widget.clearable
-                    ? (_) => _controller.value != null
-                    : (_) => false,
+            clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
             label: widget.label,
             description: widget.description,
-            error:
-                state.hasError
-                    ? widget.errorBuilder(state.context, state.errorText ?? '')
-                    : null,
+            error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
             enabled: widget.enabled,
             builder:
                 (context, data, child) => FPopover(
@@ -696,9 +620,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S>
                   shift: widget.shift,
                   offset: widget.offset,
                   hideOnTapOutside: widget.hideOnTapOutside,
-                  shortcuts: {
-                    const SingleActivator(LogicalKeyboardKey.escape): _toggle,
-                  },
+                  shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
                   popoverBuilder:
                       (_, _, _) => TextFieldTapRegion(
                         child: SelectControllerData<T>(
@@ -718,14 +640,9 @@ abstract class _State<S extends FSelect<T>, T> extends State<S>
                     bindings: {
                       const SingleActivator(LogicalKeyboardKey.enter): _toggle,
                       // TODO: Remove once https://github.com/flutter/flutter/issues/161482 lands
-                      const SingleActivator(LogicalKeyboardKey.tab):
-                          _focus.nextFocus,
+                      const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
                     },
-                    child: widget.builder(context, (
-                      style,
-                      data.$1,
-                      data.$2,
-                    ), child),
+                    child: widget.builder(context, (style, data.$1, data.$2), child),
                   ),
                 ),
           ),
@@ -794,28 +711,13 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   });
 
   /// Creates a [FSelectStyle] that inherits its properties.
-  FSelectStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         selectFieldStyle: FTextFieldStyle.inherit(
-           colors: colors,
-           typography: typography,
-           style: style,
-         ),
-         iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
-         popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
-         searchStyle: FSelectSearchStyle.inherit(
-           colors: colors,
-           typography: typography,
-           style: style,
-         ),
-         contentStyle: FSelectContentStyle.inherit(
-           colors: colors,
-           typography: typography,
-           style: style,
-         ),
-         emptyTextStyle: typography.sm,
-       );
+  FSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        selectFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
+        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
+        popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
+        searchStyle: FSelectSearchStyle.inherit(colors: colors, typography: typography, style: style),
+        contentStyle: FSelectContentStyle.inherit(colors: colors, typography: typography, style: style),
+        emptyTextStyle: typography.sm,
+      );
 }

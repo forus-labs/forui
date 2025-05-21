@@ -41,13 +41,12 @@ class SheetGestureDetector extends StatelessWidget {
       excludeFromSemantics: true,
       gestures: {
         if (layout.vertical)
-          VerticalDragGestureRecognizer: GestureRecognizerFactoryWithHandlers<
-            VerticalDragGestureRecognizer
-          >(() => VerticalDragGestureRecognizer(debugOwner: this), initialize)
+          VerticalDragGestureRecognizer: GestureRecognizerFactoryWithHandlers<VerticalDragGestureRecognizer>(
+            () => VerticalDragGestureRecognizer(debugOwner: this),
+            initialize,
+          )
         else
-          HorizontalDragGestureRecognizer: GestureRecognizerFactoryWithHandlers<
-            HorizontalDragGestureRecognizer
-          >(
+          HorizontalDragGestureRecognizer: GestureRecognizerFactoryWithHandlers<HorizontalDragGestureRecognizer>(
             () => HorizontalDragGestureRecognizer(debugOwner: this),
             initialize,
           ),

@@ -64,43 +64,42 @@ class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderS
         childAnchor: widget.axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
         hideOnTapOutside: widget.hideOnTapOutside,
         shift: widget.shift,
-        popoverBuilder:
-            (context, style, _) => Padding(
-              padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-              child: SizedBox(
-                width: 288,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Dimensions', style: context.theme.typography.base),
-                    const SizedBox(height: 7),
-                    Text(
-                      'Set the dimensions for the layer.',
-                      style: context.theme.typography.sm.copyWith(
-                        color: context.theme.colors.mutedForeground,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    for (final (label, value) in [
-                      ('Width', '100%'),
-                      ('Max. Width', '300px'),
-                      ('Height', '25px'),
-                      ('Max. Height', 'none'),
-                    ]) ...[
-                      Row(
-                        children: [
-                          Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialText: value)),
-                        ],
-                      ),
-                      const SizedBox(height: 7),
-                    ],
-                  ],
+        popoverBuilder: (context, style, _) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                  ('Height', '25px'),
+                  ('Max. Height', 'none'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ],
+              ],
             ),
+          ),
+        ),
         child: IntrinsicWidth(
           child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
         ),

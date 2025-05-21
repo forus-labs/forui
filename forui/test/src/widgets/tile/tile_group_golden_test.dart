@@ -73,9 +73,7 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(
-          kind: PointerDeviceKind.mouse,
-        );
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -190,146 +188,131 @@ void main() {
           );
         });
 
-        testWidgets(
-          'constrained height, last outside viewport - ${theme.name} - $divider',
-          (tester) async {
-            await tester.pumpWidget(
-              TestScaffold(
-                theme: theme.data,
-                child: FTileGroup(
-                  maxHeight: 100,
-                  label: const Text('Network'),
-                  description: const Text('Description'),
-                  divider: divider,
-                  children: [
-                    FTile(
-                      prefixIcon: const Icon(FIcons.wifi),
-                      title: const Text('WiFi'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                    FTile(
-                      prefixIcon: const Icon(FIcons.mail),
-                      title: const Text('Mail'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                    FTile(
-                      prefixIcon: const Icon(FIcons.bluetooth),
-                      title: const Text('Bluetooth'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                  ],
-                ),
+        testWidgets('constrained height, last outside viewport - ${theme.name} - $divider', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FTileGroup(
+                maxHeight: 100,
+                label: const Text('Network'),
+                description: const Text('Description'),
+                divider: divider,
+                children: [
+                  FTile(
+                    prefixIcon: const Icon(FIcons.wifi),
+                    title: const Text('WiFi'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                  FTile(
+                    prefixIcon: const Icon(FIcons.mail),
+                    title: const Text('Mail'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                  FTile(
+                    prefixIcon: const Icon(FIcons.bluetooth),
+                    title: const Text('Bluetooth'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                ],
               ),
-            );
+            ),
+          );
 
-            await expectLater(
-              find.byType(TestScaffold),
-              matchesGoldenFile(
-                'tile/group/${theme.name}/constrained-last/$divider.png',
-              ),
-            );
-          },
-        );
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('tile/group/${theme.name}/constrained-last/$divider.png'),
+          );
+        });
 
-        testWidgets(
-          'constrained height, first outside viewport - ${theme.name} - $divider',
-          (tester) async {
-            await tester.pumpWidget(
-              TestScaffold(
-                theme: theme.data,
-                child: FTileGroup(
-                  scrollController: controller,
-                  maxHeight: 100,
-                  label: const Text('Network'),
-                  description: const Text('Description'),
-                  divider: divider,
-                  children: [
-                    FTile(
-                      prefixIcon: const Icon(FIcons.wifi),
-                      title: const Text('WiFi'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                    FTile(
-                      prefixIcon: const Icon(FIcons.mail),
-                      title: const Text('Mail'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                    FTile(
-                      prefixIcon: const Icon(FIcons.bluetooth),
-                      title: const Text('Bluetooth'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                  ],
-                ),
+        testWidgets('constrained height, first outside viewport - ${theme.name} - $divider', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FTileGroup(
+                scrollController: controller,
+                maxHeight: 100,
+                label: const Text('Network'),
+                description: const Text('Description'),
+                divider: divider,
+                children: [
+                  FTile(
+                    prefixIcon: const Icon(FIcons.wifi),
+                    title: const Text('WiFi'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                  FTile(
+                    prefixIcon: const Icon(FIcons.mail),
+                    title: const Text('Mail'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                  FTile(
+                    prefixIcon: const Icon(FIcons.bluetooth),
+                    title: const Text('Bluetooth'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                ],
               ),
-            );
+            ),
+          );
 
-            await expectLater(
-              find.byType(TestScaffold),
-              matchesGoldenFile(
-                'tile/group/${theme.name}/constrained-first/$divider.png',
-              ),
-            );
-          },
-        );
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('tile/group/${theme.name}/constrained-first/$divider.png'),
+          );
+        });
 
         // The rounded corners will not be colored properly. This is a known issue that's a side effect of clipping the
         // tiles. There isn't a known, straightforward solution to this. It is minor enough that it is acceptable.
-        testWidgets(
-          'focused on non-first bottom viewport - ${theme.name} - $divider',
-          (tester) async {
-            final focusNode = autoDispose(FocusNode());
+        testWidgets('focused on non-first bottom viewport - ${theme.name} - $divider', (tester) async {
+          final focusNode = autoDispose(FocusNode());
 
-            await tester.pumpWidget(
-              TestScaffold(
-                theme: theme.data,
-                child: FTileGroup(
-                  scrollController: controller,
-                  maxHeight: 100,
-                  label: const Text('Network'),
-                  description: const Text('Description'),
-                  divider: divider,
-                  children: [
-                    FTile(
-                      prefixIcon: const Icon(FIcons.wifi),
-                      title: const Text('WiFi'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                    FTile(
-                      focusNode: focusNode,
-                      prefixIcon: const Icon(FIcons.mail),
-                      title: const Text('Mail'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                    FTile(
-                      prefixIcon: const Icon(FIcons.bluetooth),
-                      title: const Text('Bluetooth'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                    FTile(
-                      prefixIcon: const Icon(FIcons.arrowDown),
-                      title: const Text('Last'),
-                      suffixIcon: const Icon(FIcons.chevronRight),
-                    ),
-                  ],
-                ),
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FTileGroup(
+                scrollController: controller,
+                maxHeight: 100,
+                label: const Text('Network'),
+                description: const Text('Description'),
+                divider: divider,
+                children: [
+                  FTile(
+                    prefixIcon: const Icon(FIcons.wifi),
+                    title: const Text('WiFi'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                  FTile(
+                    focusNode: focusNode,
+                    prefixIcon: const Icon(FIcons.mail),
+                    title: const Text('Mail'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                  FTile(
+                    prefixIcon: const Icon(FIcons.bluetooth),
+                    title: const Text('Bluetooth'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                  FTile(
+                    prefixIcon: const Icon(FIcons.arrowDown),
+                    title: const Text('Last'),
+                    suffixIcon: const Icon(FIcons.chevronRight),
+                  ),
+                ],
               ),
-            );
+            ),
+          );
 
-            focusNode.requestFocus();
-            await tester.pumpAndSettle();
+          focusNode.requestFocus();
+          await tester.pumpAndSettle();
 
-            focusNode.nextFocus();
-            await tester.pumpAndSettle();
+          focusNode.nextFocus();
+          await tester.pumpAndSettle();
 
-            await expectLater(
-              find.byType(TestScaffold),
-              matchesGoldenFile(
-                'tile/group/${theme.name}/focused-bottom-viewport/$divider.png',
-              ),
-            );
-          },
-        );
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('tile/group/${theme.name}/focused-bottom-viewport/$divider.png'),
+          );
+        });
 
         testWidgets('RTL - ${theme.name} - $divider', (tester) async {
           await tester.pumpWidget(
@@ -364,16 +347,11 @@ void main() {
             ),
           );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('tile/group/${theme.name}/rtl/$divider.png'),
-          );
+          await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/rtl/$divider.png'));
         });
 
         for (final (index, position) in ['top', 'bottom'].indexed) {
-          testWidgets('hovered - ${theme.name} - $divider - $position', (
-            tester,
-          ) async {
+          testWidgets('hovered - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme.data,
@@ -399,29 +377,21 @@ void main() {
               ),
             );
 
-            final gesture = await tester.createGesture(
-              kind: PointerDeviceKind.mouse,
-            );
+            final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
             await gesture.addPointer(location: Offset.zero);
             addTearDown(gesture.removePointer);
             await tester.pump();
 
-            await gesture.moveTo(
-              tester.getCenter(find.byType(FTile).at(index)),
-            );
+            await gesture.moveTo(tester.getCenter(find.byType(FTile).at(index)));
             await tester.pumpAndSettle();
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile(
-                'tile/group/${theme.name}/hovered/$divider-$position.png',
-              ),
+              matchesGoldenFile('tile/group/${theme.name}/hovered/$divider-$position.png'),
             );
           });
 
-          testWidgets('focused - ${theme.name} - $divider - $position', (
-            tester,
-          ) async {
+          testWidgets('focused - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme.data,
@@ -451,15 +421,11 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile(
-                'tile/group/${theme.name}/focused/$divider-$position.png',
-              ),
+              matchesGoldenFile('tile/group/${theme.name}/focused/$divider-$position.png'),
             );
           });
 
-          testWidgets('disabled - ${theme.name} - $divider - $position', (
-            tester,
-          ) async {
+          testWidgets('disabled - ${theme.name} - $divider - $position', (tester) async {
             await tester.pumpWidget(
               TestScaffold(
                 theme: theme.data,
@@ -491,9 +457,7 @@ void main() {
 
             await expectLater(
               find.byType(TestScaffold),
-              matchesGoldenFile(
-                'tile/group/${theme.name}/disabled/$divider-$position.png',
-              ),
+              matchesGoldenFile('tile/group/${theme.name}/disabled/$divider-$position.png'),
             );
           });
         }
@@ -526,10 +490,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('tile/group/${theme.name}/error.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/error.png'));
       });
 
       testWidgets('single tile - ${theme.name}', (tester) async {
@@ -551,24 +512,15 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('tile/group/${theme.name}/single.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/single.png'));
       });
 
       testWidgets('empty tile group - ${theme.name}', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: FTileGroup(label: const Text('Network'), children: const []),
-          ),
+          TestScaffold(theme: theme.data, child: FTileGroup(label: const Text('Network'), children: const [])),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('tile/group/${theme.name}/empty.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/empty.png'));
       });
     }
 
@@ -598,10 +550,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/override-style.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/override-style.png'));
     });
 
     testWidgets('tile state overrides group state', (tester) async {
@@ -631,10 +580,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/override-state.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/override-state.png'));
     });
   });
 
@@ -668,10 +614,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/builder/lazy.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/builder/lazy.png'));
     });
 
     testWidgets('limited by count', (tester) async {
@@ -687,10 +630,7 @@ void main() {
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/builder/count-limited.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/builder/count-limited.png'));
     });
 
     testWidgets('limited by returning null', (tester) async {
@@ -701,17 +641,12 @@ void main() {
             description: const Text('Description'),
             maxHeight: 500,
             count: 24,
-            tileBuilder:
-                (context, index) =>
-                    index < 2 ? FTile(title: Text('Tile $index')) : null,
+            tileBuilder: (context, index) => index < 2 ? FTile(title: Text('Tile $index')) : null,
           ),
         ),
       );
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('tile/group/builder/null-limited.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/builder/null-limited.png'));
     });
   });
 

@@ -27,24 +27,14 @@ class FPaginationController extends FChangeNotifier {
   ///
   /// # Contract:
   /// * Throws [AssertionError] if 0 <= [initialPage] and [initialPage] < [pages].
-  FPaginationController({
-    required this.pages,
-    int initialPage = 0,
-    this.showEdges = true,
-    this.siblings = 1,
-  }) : assert(
-         0 < pages,
-         'The total length of pages should be more than 0, but is $pages.',
-       ),
-       assert(
-         0 <= siblings,
-         'The siblingLength should be non-negative, but is $siblings',
-       ),
-       assert(
-         0 <= initialPage && initialPage < pages,
-         'The initial page must be greater than or equal to 0 and less than pages.',
-       ),
-       _page = initialPage;
+  FPaginationController({required this.pages, int initialPage = 0, this.showEdges = true, this.siblings = 1})
+    : assert(0 < pages, 'The total length of pages should be more than 0, but is $pages.'),
+      assert(0 <= siblings, 'The siblingLength should be non-negative, but is $siblings'),
+      assert(
+        0 <= initialPage && initialPage < pages,
+        'The initial page must be greater than or equal to 0 and less than pages.',
+      ),
+      _page = initialPage;
 
   /// The current page index.
   int get page => _page;
@@ -84,16 +74,14 @@ class FPaginationController extends FChangeNotifier {
       }
       rangeStart = switch (_page) {
         _ when _page - siblings < 0 => 0,
-        _ when _page > (last - minPagesDisplayedAtEdges) =>
-          (last - minPagesDisplayedAtEdges) - siblings,
+        _ when _page > (last - minPagesDisplayedAtEdges) => (last - minPagesDisplayedAtEdges) - siblings,
         _ when _page <= minPagesDisplayedAtEdges => 0,
         _ => _page - siblings,
       };
 
       rangeEnd = switch (_page) {
         _ when _page + siblings > last => last,
-        _ when _page < minPagesDisplayedAtEdges + 1 =>
-          minPagesDisplayedAtEdges + siblings,
+        _ when _page < minPagesDisplayedAtEdges + 1 => minPagesDisplayedAtEdges + siblings,
         _ when _page >= (last - minPagesDisplayedAtEdges) => last,
         _ => _page + siblings,
       };
@@ -122,9 +110,7 @@ extension MinPagesDisplayedAtEdges on FPaginationController {
   int get minPagesDisplayedAtEdges {
     if (pages.isFinite) {
       final minDisplayedAtEnds = siblings + 1 + (showEdges ? 1 : 0);
-      return pages <= (minDisplayedAtEnds + (siblings * 2 + 2))
-          ? pages
-          : minDisplayedAtEnds;
+      return pages <= (minDisplayedAtEnds + (siblings * 2 + 2)) ? pages : minDisplayedAtEnds;
     }
     return siblings + 1 + (showEdges ? 1 : 0);
   }

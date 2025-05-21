@@ -26,10 +26,7 @@ abstract class TimeInputController extends InputController {
         .replaceAll(RegExp('mm'), 'MM')
         .replaceAll('a', '--')
         .replaceAll("'", '');
-    final time =
-        controller.value == null
-            ? placeholder
-            : format.format(controller.value!.withDate(DateTime(1970)));
+    final time = controller.value == null ? placeholder : format.format(controller.value!.withDate(DateTime(1970)));
 
     return TimeInputController.test(
       localizations,
@@ -52,15 +49,7 @@ abstract class TimeInputController extends InputController {
   ) => switch (format.pattern!.contains('a')) {
     true => Time12InputController.new,
     false => Time24InputController.new,
-  }(
-    localizations,
-    controller,
-    format,
-    style,
-    TimeParser(format),
-    placeholder,
-    value,
-  );
+  }(localizations, controller, format, style, TimeParser(format), placeholder, value);
 
   TimeInputController.fromValue(
     this.controller,

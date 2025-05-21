@@ -1,7 +1,7 @@
 part of '../time_field.dart';
 
-class _PickerTimeField extends FTimeField
-    implements FTimeFieldPickerProperties {
+// ignore: avoid_implementing_value_types
+class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties {
   final DateFormat? format;
   final String? hint;
   final TextAlign textAlign;
@@ -78,20 +78,13 @@ class _PickerTimeField extends FTimeField
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(
-        FlagProperty(
-          'canRequestFocus',
-          value: canRequestFocus,
-          ifTrue: 'canRequestFocus',
-        ),
-      );
+      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'));
   }
 }
 
 class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   final TextEditingController _textController = TextEditingController();
-  late FocusNode _focus =
-      widget.focusNode ?? FocusNode(debugLabel: 'FTimeField');
+  late FocusNode _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTimeField');
   DateFormat? _format;
 
   @override
@@ -114,10 +107,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
 
     if (widget.hour24 != old.hour24) {
       final localizations = FLocalizations.of(context)?.localeName;
-      _format =
-          widget.hour24
-              ? DateFormat.Hm(localizations)
-              : DateFormat.jm(localizations);
+      _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
     }
 
     if (widget.controller != old.controller) {
@@ -128,9 +118,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         _controller.removeValueListener(_onChange);
       }
 
-      _controller =
-          widget.controller ??
-          FTimeFieldController(vsync: this, initialTime: _controller.value);
+      _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
       _controller._picker.addListener(_updateTextController);
       _controller.addValueListener(_onChange);
       _updateTextController();
@@ -144,10 +132,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     super.didChangeDependencies();
 
     final localizations = FLocalizations.of(context)?.localeName;
-    _format =
-        widget.hour24
-            ? DateFormat.Hm(localizations)
-            : DateFormat.jm(localizations);
+    _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
 
     _updateTextController();
   }
@@ -156,8 +141,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (_controller._picker.value case final value) {
         final time = value.withDate(DateTime(1970));
-        _textController.text =
-            widget.format?.format(time) ?? _format?.format(time) ?? '';
+        _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
       }
     });
   }
@@ -196,30 +180,19 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
                     ? null
                     : (context, styles, _) => MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: widget.prefixBuilder?.call(context, (
-                        style,
-                        styles.$1,
-                        styles.$2,
-                      ), null),
+                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
                     ),
             suffixBuilder:
                 widget.suffixBuilder == null
                     ? null
                     : (context, styles, _) => MouseRegion(
                       cursor: SystemMouseCursors.click,
-                      child: widget.suffixBuilder?.call(context, (
-                        style,
-                        styles.$1,
-                        styles.$2,
-                      ), null),
+                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
                     ),
             label: widget.label,
             description: widget.description,
             enabled: widget.enabled,
-            error:
-                state.hasError
-                    ? widget.errorBuilder(state.context, state.errorText ?? '')
-                    : null,
+            error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
             builder:
                 (context, styles, child) => _PickerPopover(
                   controller: _controller,
@@ -229,14 +202,8 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
                   autofocus: true,
                   fieldFocusNode: _focus,
                   child: CallbackShortcuts(
-                    bindings: {
-                      const SingleActivator(LogicalKeyboardKey.enter): _onTap,
-                    },
-                    child: widget.builder(context, (
-                      style,
-                      styles.$1,
-                      styles.$2,
-                    ), child),
+                    bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
+                    child: widget.builder(context, (style, styles.$1, styles.$2), child),
                   ),
                 ),
           ),

@@ -67,8 +67,7 @@ class FResizable extends StatefulWidget {
   final double resizePercentage;
 
   /// A callback that formats the semantic label for the resizable. Defaults to announcing the extents of both regions.
-  final String Function(FResizableRegionData, FResizableRegionData)
-  semanticFormatterCallback;
+  final String Function(FResizableRegionData, FResizableRegionData) semanticFormatterCallback;
 
   /// Handler called when the resizable regions change.
   final ValueChanged<List<FResizableRegionData>>? onChange;
@@ -113,20 +112,14 @@ class FResizable extends StatefulWidget {
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
       ..add(DoubleProperty('hitRegionExtent', hitRegionExtent))
       ..add(PercentProperty('resizePercentage', resizePercentage))
-      ..add(
-        ObjectFlagProperty.has(
-          'semanticFormatterCallback',
-          semanticFormatterCallback,
-        ),
-      )
+      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(IterableProperty('children', children));
   }
 }
 
 class _FResizableState extends State<FResizable> {
-  late FResizableController _controller =
-      widget.controller ?? FResizableController.cascade();
+  late FResizableController _controller = widget.controller ?? FResizableController.cascade();
 
   @override
   void didChangeDependencies() {
@@ -159,24 +152,15 @@ class _FResizableState extends State<FResizable> {
 
   void _update() {
     var minOffset = 0.0;
-    final minTotalExtent = widget.children.sum(
-      (c) => max(c.minExtent ?? 0, widget.hitRegionExtent),
-      initial: 0.0,
-    );
-    final totalExtent = widget.children.sum(
-      (c) => c.initialExtent,
-      initial: 0.0,
-    );
+    final minTotalExtent = widget.children.sum((c) => max(c.minExtent ?? 0, widget.hitRegionExtent), initial: 0.0);
+    final totalExtent = widget.children.sum((c) => c.initialExtent, initial: 0.0);
     final regions = [
       for (final (index, region) in widget.children.indexed)
         FResizableRegionData(
           index: index,
           extent: (
             min: region.minExtent ?? widget.hitRegionExtent,
-            max:
-                totalExtent -
-                minTotalExtent +
-                max(region.minExtent ?? 0, widget.hitRegionExtent),
+            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
             total: totalExtent,
           ),
           offset: (min: minOffset, max: minOffset += region.initialExtent),
@@ -227,14 +211,11 @@ class _FResizableState extends State<FResizable> {
                             left: i,
                             right: i + 1,
                             crossAxisExtent:
-                                constraints.maxHeight.isFinite
-                                    ? constraints.maxHeight
-                                    : widget.crossAxisExtent,
+                                constraints.maxHeight.isFinite ? constraints.maxHeight : widget.crossAxisExtent,
                             hitRegionExtent: widget.hitRegionExtent,
                             resizePercentage: widget.resizePercentage,
                             cursor: SystemMouseCursors.resizeLeftRight,
-                            semanticFormatterCallback:
-                                widget.semanticFormatterCallback,
+                            semanticFormatterCallback: widget.semanticFormatterCallback,
                           ),
                       ],
                     ),
@@ -271,14 +252,11 @@ class _FResizableState extends State<FResizable> {
                             left: i,
                             right: i + 1,
                             crossAxisExtent:
-                                constraints.maxWidth.isFinite
-                                    ? constraints.maxWidth
-                                    : widget.crossAxisExtent,
+                                constraints.maxWidth.isFinite ? constraints.maxWidth : widget.crossAxisExtent,
                             hitRegionExtent: widget.hitRegionExtent,
                             resizePercentage: widget.resizePercentage,
                             cursor: SystemMouseCursors.resizeUpDown,
-                            semanticFormatterCallback:
-                                widget.semanticFormatterCallback,
+                            semanticFormatterCallback: widget.semanticFormatterCallback,
                           ),
                       ],
                     ),
@@ -310,10 +288,7 @@ class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
   final FResizableDividerStyle verticalDividerStyle;
 
   /// Creates a [FResizableStyle].
-  FResizableStyle({
-    required this.horizontalDividerStyle,
-    required this.verticalDividerStyle,
-  });
+  FResizableStyle({required this.horizontalDividerStyle, required this.verticalDividerStyle});
 
   /// Creates a [FResizableStyle] that inherits its properties.
   FResizableStyle.inherit({required FColors colors, required FStyle style})
@@ -322,10 +297,7 @@ class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
           color: colors.border,
           focusedOutlineStyle: style.focusedOutlineStyle,
           thumbStyle: FResizableDividerThumbStyle(
-            decoration: BoxDecoration(
-              color: colors.border,
-              borderRadius: style.borderRadius,
-            ),
+            decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
             foregroundColor: colors.foreground,
             height: 20,
             width: 10,
@@ -335,10 +307,7 @@ class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
           color: colors.border,
           focusedOutlineStyle: style.focusedOutlineStyle,
           thumbStyle: FResizableDividerThumbStyle(
-            decoration: BoxDecoration(
-              color: colors.border,
-              borderRadius: style.borderRadius,
-            ),
+            decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
             foregroundColor: colors.foreground,
             height: 10,
             width: 20,
@@ -350,12 +319,8 @@ class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
 @internal
 class InheritedData extends InheritedWidget {
   static InheritedData of(BuildContext context) {
-    final InheritedData? result =
-        context.dependOnInheritedWidgetOfExactType<InheritedData>();
-    assert(
-      result != null,
-      'No InheritedData found in context. Is there a parent FResizableBox?',
-    );
+    final InheritedData? result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
+    assert(result != null, 'No InheritedData found in context. Is there a parent FResizableBox?');
     return result!;
   }
 
@@ -372,8 +337,7 @@ class InheritedData extends InheritedWidget {
   });
 
   @override
-  bool updateShouldNotify(InheritedData old) =>
-      controller != old.controller || axis != old.axis || data != old.data;
+  bool updateShouldNotify(InheritedData old) => controller != old.controller || axis != old.axis || data != old.data;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

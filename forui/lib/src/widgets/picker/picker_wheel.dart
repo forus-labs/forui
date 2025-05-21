@@ -30,8 +30,7 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
     final scale = MediaQuery.textScalerOf(context);
 
     final height = style.textStyle.height ?? defaultTextStyle.style.height;
-    final fontSize =
-        style.textStyle.fontSize ?? defaultTextStyle.style.fontSize ?? 0;
+    final fontSize = style.textStyle.fontSize ?? defaultTextStyle.style.fontSize ?? 0;
     return scale.scale(height == null ? fontSize : height * fontSize);
   }
 
@@ -113,8 +112,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
   @override
   Widget build(BuildContext context) {
     final PickerData(:controller, :style) = PickerData.of(context);
-    final extent =
-        widget.itemExtent ?? FPickerWheel.estimateExtent(style, context);
+    final extent = widget.itemExtent ?? FPickerWheel.estimateExtent(style, context);
     return Flexible(
       flex: widget.flex,
       child: FocusableActionDetector(
@@ -129,19 +127,14 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
         },
         mouseCursor: SystemMouseCursors.click,
         shortcuts: const {
-          SingleActivator(LogicalKeyboardKey.arrowUp): ScrollIntent(
-            direction: AxisDirection.up,
-          ),
-          SingleActivator(LogicalKeyboardKey.arrowDown): ScrollIntent(
-            direction: AxisDirection.down,
-          ),
+          SingleActivator(LogicalKeyboardKey.arrowUp): ScrollIntent(direction: AxisDirection.up),
+          SingleActivator(LogicalKeyboardKey.arrowDown): ScrollIntent(direction: AxisDirection.down),
         },
         actions: {
           ScrollIntent: CallbackAction<ScrollIntent>(
             onInvoke: (intent) {
               controller.animateToItem(
-                controller.selectedItem +
-                    (intent.direction == AxisDirection.up ? -1 : 1),
+                controller.selectedItem + (intent.direction == AxisDirection.up ? -1 : 1),
                 duration: const Duration(milliseconds: 100),
                 curve: Curves.decelerate,
               );
@@ -157,10 +150,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
               Container(
                 height: extent,
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: style.focusedOutlineStyle.color,
-                    width: style.focusedOutlineStyle.width,
-                  ),
+                  border: Border.all(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
                   borderRadius: style.focusedOutlineStyle.borderRadius,
                 ),
               ),
@@ -259,15 +249,14 @@ class BuilderWheel extends FPickerWheel {
 
 class _BuilderState extends _State<BuilderWheel> {
   @override
-  ListWheelChildDelegate delegate(FPickerStyle style) =>
-      ListWheelChildBuilderDelegate(
-        builder:
-            (context, index) => Center(
-              child: DefaultTextStyle.merge(
-                textHeightBehavior: style.textHeightBehavior,
-                style: style.textStyle,
-                child: widget.builder(context, index),
-              ),
-            ),
-      );
+  ListWheelChildDelegate delegate(FPickerStyle style) => ListWheelChildBuilderDelegate(
+    builder:
+        (context, index) => Center(
+          child: DefaultTextStyle.merge(
+            textHeightBehavior: style.textHeightBehavior,
+            style: style.textStyle,
+            child: widget.builder(context, index),
+          ),
+        ),
+  );
 }

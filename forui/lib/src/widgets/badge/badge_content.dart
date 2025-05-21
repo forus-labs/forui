@@ -18,10 +18,7 @@ class Content extends StatelessWidget {
   Widget build(BuildContext _) => Center(
     child: Padding(
       padding: style.contentStyle.padding,
-      child: DefaultTextStyle.merge(
-        style: style.contentStyle.labelTextStyle,
-        child: child,
-      ),
+      child: DefaultTextStyle.merge(style: style.contentStyle.labelTextStyle, child: child),
     ),
   );
 
@@ -33,8 +30,7 @@ class Content extends StatelessWidget {
 }
 
 /// [FBadge] content's style.
-final class FBadgeContentStyle
-    with Diagnosticable, _$FBadgeContentStyleFunctions {
+final class FBadgeContentStyle with Diagnosticable, _$FBadgeContentStyleFunctions {
   /// The label's [TextStyle].
   @override
   final TextStyle labelTextStyle;

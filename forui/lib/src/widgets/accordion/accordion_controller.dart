@@ -30,14 +30,8 @@ class FAccordionController extends FChangeNotifier {
       controllers = {},
       _expanded = {},
       assert(min >= 0, 'The min value must be greater than or equal to 0.'),
-      assert(
-        max == null || 0 <= max,
-        'The max value must be greater than or equal to 0.',
-      ),
-      assert(
-        max == null || min <= max,
-        'The max value must be greater than or equal to the min value.',
-      );
+      assert(max == null || 0 <= max, 'The max value must be greater than or equal to 0.'),
+      assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
   /// Creates an [FAccordionController] that allows only one section to be expanded at a time.
   FAccordionController.radio() : this(max: 1);
@@ -97,8 +91,7 @@ class FAccordionController extends FChangeNotifier {
   }
 
   /// Returns true if the number of expanded items is within the allowed range.
-  bool validate(int length) =>
-      _min <= length && (_max == null || length <= _max);
+  bool validate(int length) => _min <= length && (_max == null || length <= _max);
 
   /// The indexes of the currently expanded items.
   Set<int> get expanded => {..._expanded};

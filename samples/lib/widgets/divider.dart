@@ -18,7 +18,10 @@ class DividerPage extends Sample {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('Flutter Forui', style: text.xl2.copyWith(color: colors.foreground, fontWeight: FontWeight.w600)),
+        Text(
+          'Flutter Forui',
+          style: text.xl2.copyWith(color: colors.foreground, fontWeight: FontWeight.w600),
+        ),
         Text('An open-source widget library.', style: text.sm.copyWith(color: colors.mutedForeground)),
         const FDivider(),
         SizedBox(

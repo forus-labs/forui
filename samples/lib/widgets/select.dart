@@ -110,9 +110,8 @@ class SyncSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>.search(
       hint: 'Select a fruit',
-      filter:
-          (query) =>
-              query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
+      filter: (query) =>
+          query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
       contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
     ),
   );
@@ -149,11 +148,10 @@ class AsyncLoadingSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      searchLoadingBuilder:
-          (context, style, _) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
-          ),
+      searchLoadingBuilder: (context, style, _) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
+      ),
       contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
     ),
   );

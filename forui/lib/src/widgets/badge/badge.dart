@@ -34,11 +34,7 @@ class FBadge extends StatelessWidget {
     : builder = ((_, style) => Content(style: style, child: child));
 
   /// Creates a [FBadge] with no defaults applied.
-  const FBadge.raw({
-    required this.builder,
-    this.style = FBadgeStyle.primary,
-    super.key,
-  });
+  const FBadge.raw({required this.builder, this.style = FBadgeStyle.primary, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +47,7 @@ class FBadge extends StatelessWidget {
     };
 
     return IntrinsicWidth(
-      child: IntrinsicHeight(
-        child: DecoratedBox(
-          decoration: style.decoration,
-          child: builder(context, style),
-        ),
-      ),
+      child: IntrinsicHeight(child: DecoratedBox(decoration: style.decoration, child: builder(context, style))),
     );
   }
 
@@ -64,9 +55,7 @@ class FBadge extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-        DiagnosticsProperty('style', style, defaultValue: FBadgeStyle.primary),
-      )
+      ..add(DiagnosticsProperty('style', style, defaultValue: FBadgeStyle.primary))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
@@ -77,20 +66,13 @@ class FBadge extends StatelessWidget {
 sealed class FBaseBadgeStyle {}
 
 @internal
-enum Variant implements FBaseBadgeStyle {
-  primary,
-  secondary,
-  outline,
-  destructive,
-}
+enum Variant implements FBaseBadgeStyle { primary, secondary, outline, destructive }
 
 /// A [FBadge]'s style.
 ///
 /// The pre-defined styles are a convenient shorthand for the various [FBadgeStyle]s in the current context's
 /// [FBadgeStyles].
-class FBadgeStyle
-    with Diagnosticable, _$FBadgeStyleFunctions
-    implements FBaseBadgeStyle {
+class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions implements FBaseBadgeStyle {
   /// The badge's primary style.
   ///
   /// Shorthand for the current context's [FBadgeStyles.primary] style.

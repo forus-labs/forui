@@ -26,11 +26,7 @@ part 'calendar.style.dart';
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatefulWidget {
   /// The default day builder.
-  static Widget defaultDayBuilder(
-    BuildContext _,
-    FCalendarDayData data,
-    Widget? child,
-  ) => child!;
+  static Widget defaultDayBuilder(BuildContext _, FCalendarDayData data, Widget? child) => child!;
 
   /// The style. Defaults to [FThemeData.calendarStyle].
   ///
@@ -102,13 +98,8 @@ class FCalendar extends StatefulWidget {
        end = end ?? DateTime(2100),
        today = today ?? DateTime.now(),
        _initialType = initialType,
-       _initialMonth = (initialMonth ?? today ?? DateTime.now())
-           .toLocalDate()
-           .truncate(to: DateUnit.months) {
-    assert(
-      this.start.toLocalDate() < this.end.toLocalDate(),
-      'end date must be greater than start date',
-    );
+       _initialMonth = (initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months) {
+    assert(this.start.toLocalDate() < this.end.toLocalDate(), 'end date must be greater than start date');
   }
 
   @override
@@ -149,22 +140,14 @@ class _State extends State<FCalendar> {
       child: Padding(
         padding: style.padding,
         child: SizedBox(
-          height:
-              (DayPicker.maxRows * style.dayPickerStyle.tileSize) +
-              Header.height +
-              5,
+          height: (DayPicker.maxRows * style.dayPickerStyle.tileSize) + Header.height + 5,
           width: DateTime.daysPerWeek * style.dayPickerStyle.tileSize,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
               ValueListenableBuilder(
                 valueListenable: _month,
-                builder:
-                    (_, month, _) => Header(
-                      style: style.headerStyle,
-                      type: _type,
-                      month: month,
-                    ),
+                builder: (_, month, _) => Header(style: style.headerStyle, type: _type, month: month),
               ),
               ValueListenableBuilder(
                 valueListenable: _type,
@@ -177,12 +160,8 @@ class _State extends State<FCalendar> {
                         end: widget.end.toLocalDate(),
                         today: widget.today.toLocalDate(),
                         initial: _month.value,
-                        selectable:
-                            (date) =>
-                                widget.controller.selectable(date.toNative()),
-                        selected:
-                            (date) =>
-                                widget.controller.selected(date.toNative()),
+                        selectable: (date) => widget.controller.selectable(date.toNative()),
+                        selected: (date) => widget.controller.selected(date.toNative()),
                         onMonthChange: (date) {
                           _month.value = date;
                           widget.onMonthChange?.call(date.toNative());
@@ -192,8 +171,7 @@ class _State extends State<FCalendar> {
                           widget.controller.select(native);
                           widget.onPress?.call(native);
                         },
-                        onLongPress:
-                            (date) => widget.onLongPress?.call(date.toNative()),
+                        onLongPress: (date) => widget.onLongPress?.call(date.toNative()),
                       ),
                       FCalendarPickerType.yearMonth => YearMonthPicker(
                         style: style,
@@ -250,47 +228,32 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   });
 
   /// Creates a [FCalendarStyle] that inherits its properties.
-  FCalendarStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         headerStyle: FCalendarHeaderStyle.inherit(
-           colors: colors,
-           typography: typography,
-           style: style,
-         ),
-         dayPickerStyle: FCalendarDayPickerStyle.inherit(
-           colors: colors,
-           typography: typography,
-         ),
-         yearMonthPickerStyle: FCalendarEntryStyle(
-           backgroundColor: FWidgetStateMap({
-             (WidgetState.hovered | WidgetState.pressed) &
-                     ~WidgetState.disabled:
-                 colors.secondary,
-             WidgetState.any: colors.background,
-           }),
-           borderColor: FWidgetStateMap({
-             WidgetState.disabled: colors.background,
-             WidgetState.focused: colors.foreground,
-           }),
-           textStyle: FWidgetStateMap({
-             WidgetState.disabled: typography.base.copyWith(
-               color: colors.disable(colors.mutedForeground),
-               fontWeight: FontWeight.w500,
-             ),
-             WidgetState.any: typography.base.copyWith(
-               color: colors.foreground,
-               fontWeight: FontWeight.w500,
-             ),
-           }),
-           radius: const Radius.circular(8),
-         ),
-         decoration: BoxDecoration(
-           borderRadius: style.borderRadius,
-           border: Border.all(color: colors.border),
-           color: colors.background,
-         ),
-       );
+  FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        headerStyle: FCalendarHeaderStyle.inherit(colors: colors, typography: typography, style: style),
+        dayPickerStyle: FCalendarDayPickerStyle.inherit(colors: colors, typography: typography),
+        yearMonthPickerStyle: FCalendarEntryStyle(
+          backgroundColor: FWidgetStateMap({
+            (WidgetState.hovered | WidgetState.pressed) & ~WidgetState.disabled: colors.secondary,
+            WidgetState.any: colors.background,
+          }),
+          borderColor: FWidgetStateMap({
+            WidgetState.disabled: colors.background,
+            WidgetState.focused: colors.foreground,
+          }),
+          textStyle: FWidgetStateMap({
+            WidgetState.disabled: typography.base.copyWith(
+              color: colors.disable(colors.mutedForeground),
+              fontWeight: FontWeight.w500,
+            ),
+            WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
+          }),
+          radius: const Radius.circular(8),
+        ),
+        decoration: BoxDecoration(
+          borderRadius: style.borderRadius,
+          border: Border.all(color: colors.border),
+          color: colors.background,
+        ),
+      );
 }

@@ -40,10 +40,7 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
     this.validator = _defaultValidator,
     FTime? initialTime,
     Duration popoverAnimationDuration = const Duration(milliseconds: 100),
-  }) : popover = FPopoverController(
-         vsync: vsync,
-         animationDuration: popoverAnimationDuration,
-       ),
+  }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
        _picker = FTimePickerController(initial: initialTime ?? const FTime()),
        super(initialTime) {
     _picker.addValueListener((time) {
@@ -108,17 +105,11 @@ abstract class FTimeField extends StatefulWidget {
     Widget? _,
   ) => Padding(
     padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
-    child: IconTheme(
-      data: styles.$1.iconStyle,
-      child: const Icon(FIcons.clock4),
-    ),
+    child: IconTheme(data: styles.$1.iconStyle, child: const Icon(FIcons.clock4)),
   );
 
-  static Widget _fieldBuilder(
-    BuildContext _,
-    (FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>) _,
-    Widget? child,
-  ) => child!;
+  static Widget _fieldBuilder(BuildContext _, (FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>) _, Widget? child) =>
+      child!;
 
   /// The controller.
   ///
@@ -158,22 +149,15 @@ abstract class FTimeField extends StatefulWidget {
   /// The builder used to decorate the time-field. It should use the given child.
   ///
   /// Defaults to returning the given child.
-  final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>
-  builder;
+  final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder;
 
   /// Builds a widget at the start of the input field that can be pressed to toggle the popover. Defaults to
   /// [defaultIconBuilder].
-  final ValueWidgetBuilder<
-    (FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)
-  >?
-  prefixBuilder;
+  final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
 
   /// Builds a widget at the end of the input field that can be pressed to toggle the popover. Defaults to
   /// no suffix.
-  final ValueWidgetBuilder<
-    (FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)
-  >?
-  suffixBuilder;
+  final ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
 
   /// The label.
   final Widget? label;
@@ -267,12 +251,9 @@ abstract class FTimeField extends StatefulWidget {
     bool hour24,
     bool autofocus,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>
-    builder,
-    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    prefixBuilder,
-    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    suffixBuilder,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     TextInputAction? textInputAction,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -356,12 +337,9 @@ abstract class FTimeField extends StatefulWidget {
     FHidePopoverRegion hideOnTapOutside,
     int hourInterval,
     int minuteInterval,
-    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>
-    builder,
-    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    prefixBuilder,
-    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>?
-    suffixBuilder,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -395,9 +373,7 @@ abstract class FTimeField extends StatefulWidget {
   }
 }
 
-abstract class _FTimeFieldState<T extends FTimeField> extends State<T>
-    with SingleTickerProviderStateMixin {
+abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with SingleTickerProviderStateMixin {
   late FTimeFieldController _controller =
-      widget.controller ??
-      FTimeFieldController(vsync: this, initialTime: widget.initialTime);
+      widget.controller ?? FTimeFieldController(vsync: this, initialTime: widget.initialTime);
 }

@@ -7,22 +7,13 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FLabel', () {
-    testWidgets(
-      'renders child only when label, description, and error are null',
-      (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: const FLabel(axis: Axis.horizontal, child: Text('Child')),
-          ),
-        );
+    testWidgets('renders child only when label, description, and error are null', (tester) async {
+      await tester.pumpWidget(TestScaffold(child: const FLabel(axis: Axis.horizontal, child: Text('Child'))));
 
-        expect(find.text('Child'), findsOneWidget);
-      },
-    );
+      expect(find.text('Child'), findsOneWidget);
+    });
 
-    testWidgets('renders error even when label and description are null', (
-      tester,
-    ) async {
+    testWidgets('renders error even when label and description are null', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           child: const FLabel(
@@ -38,9 +29,7 @@ void main() {
       expect(find.text('Error'), findsOneWidget);
     });
 
-    testWidgets('renders horizontal label with label, description, and error', (
-      tester,
-    ) async {
+    testWidgets('renders horizontal label with label, description, and error', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           child: const FLabel(
@@ -60,9 +49,7 @@ void main() {
       expect(find.text('Error'), findsOneWidget);
     });
 
-    testWidgets('renders vertical label with label, description, and error', (
-      tester,
-    ) async {
+    testWidgets('renders vertical label with label, description, and error', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           child: const FLabel(
@@ -82,17 +69,9 @@ void main() {
       expect(find.text('Error'), findsOneWidget);
     });
 
-    testWidgets('does not render error when state is not error', (
-      tester,
-    ) async {
+    testWidgets('does not render error when state is not error', (tester) async {
       await tester.pumpWidget(
-        TestScaffold(
-          child: const FLabel(
-            axis: Axis.horizontal,
-            error: Text('Error'),
-            child: Text('Child'),
-          ),
-        ),
+        TestScaffold(child: const FLabel(axis: Axis.horizontal, error: Text('Error'), child: Text('Child'))),
       );
 
       expect(find.text('Child'), findsOneWidget);

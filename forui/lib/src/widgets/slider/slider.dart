@@ -19,13 +19,10 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 /// * [FDiscreteSliderController.new] for selecting a discrete value.
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
 /// * [FSliderStyles] for customizing a slider's appearance.
-class FSlider extends StatelessWidget
-    with FFormFieldProperties<FSliderSelection> {
-  static Widget _tooltipBuilder(FTooltipStyle _, double value) =>
-      Text('${(value * 100).toStringAsFixed(0)}%');
+class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection> {
+  static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
 
-  static String _semanticValueFormatter(double value) =>
-      '${(value * 100).toStringAsFixed(0)}%';
+  static String _semanticValueFormatter(double value) => '${(value * 100).toStringAsFixed(0)}%';
 
   /// The controller. Defaults to [FContinuousSliderController.new].
   ///
@@ -154,13 +151,10 @@ class FSlider extends StatelessWidget
     final styles = context.theme.sliderStyles;
     final layout = switch (this.layout) {
       final layout? => layout,
-      _ when Directionality.maybeOf(context) == TextDirection.rtl =>
-        FLayout.rtl,
+      _ when Directionality.maybeOf(context) == TextDirection.rtl => FLayout.rtl,
       _ => FLayout.ltr,
     };
-    final sliderStyle =
-        style ??
-        (layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
+    final sliderStyle = style ?? (layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
     return LayoutBuilder(
       builder:
           (_, constraints) => _Slider(
@@ -200,33 +194,14 @@ class FSlider extends StatelessWidget
       ..add(IterableProperty('marks', marks))
       ..add(DiagnosticsProperty('initialSelection', initialSelection))
       ..add(DoubleProperty('trackMainAxisExtent', trackMainAxisExtent))
-      ..add(
-        DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent),
-      )
+      ..add(DoubleProperty('trackHitRegionCrossExtent', trackHitRegionCrossExtent))
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
-      ..add(
-        ObjectFlagProperty.has(
-          'semanticFormatterCallback',
-          semanticFormatterCallback,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty.has(
-          'semanticValueFormatterCallback',
-          semanticValueFormatterCallback,
-        ),
-      )
+      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
+      ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(
-        FlagProperty(
-          'enabled',
-          value: enabled,
-          ifTrue: 'enabled',
-          ifFalse: 'disabled',
-        ),
-      )
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(ObjectFlagProperty.has('forceErrorText', forceErrorText));
   }
@@ -286,8 +261,7 @@ class _Slider extends StatefulWidget {
     final insets = style.childPadding.resolve(textDirection);
     final extent = switch (mainAxisExtent) {
       final extent? => extent,
-      _ when layout.vertical =>
-        constraints.maxHeight - insets.top - insets.bottom,
+      _ when layout.vertical => constraints.maxHeight - insets.top - insets.bottom,
       _ => constraints.maxWidth - insets.left - insets.right,
     };
 
@@ -321,34 +295,12 @@ class _Slider extends StatefulWidget {
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(ObjectFlagProperty.has('forceErrorText', forceErrorText))
-      ..add(
-        FlagProperty(
-          'enabled',
-          value: enabled,
-          ifTrue: 'enabled',
-          ifFalse: 'disabled',
-        ),
-      )
-      ..add(
-        ObjectFlagProperty.has(
-          'trackHitRegionCrossExtent',
-          trackHitRegionCrossExtent,
-        ),
-      )
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(ObjectFlagProperty.has('trackHitRegionCrossExtent', trackHitRegionCrossExtent))
       ..add(DiagnosticsProperty('initialSelection', initialSelection))
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
-      ..add(
-        ObjectFlagProperty.has(
-          'semanticFormatterCallback',
-          semanticFormatterCallback,
-        ),
-      )
-      ..add(
-        ObjectFlagProperty.has(
-          'semanticValueFormatterCallback',
-          semanticValueFormatterCallback,
-        ),
-      )
+      ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
+      ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback))
       ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }
@@ -387,10 +339,7 @@ class _SliderState extends State<_Slider> {
   }
 
   FSliderController _createController() =>
-      widget.controller ??
-      FContinuousSliderController(
-        selection: widget.initialSelection ?? FSliderSelection(max: 0),
-      );
+      widget.controller ?? FContinuousSliderController(selection: widget.initialSelection ?? FSliderSelection(max: 0));
 
   void _onChange() => widget.onChange?.call(_controller.selection);
 
@@ -418,8 +367,7 @@ class _SliderState extends State<_Slider> {
               errorBuilder: widget.errorBuilder,
               onSaved: widget.onSaved,
               validator: widget.validator,
-              autovalidateMode:
-                  widget.autovalidateMode ?? AutovalidateMode.disabled,
+              autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
               forceErrorText: widget.forceErrorText,
               enabled: widget.enabled,
             ),
@@ -427,12 +375,9 @@ class _SliderState extends State<_Slider> {
     ),
   );
 
-  String Function(FSliderSelection) get formatter => switch (_controller
-      .extendable) {
-    (min: true, max: false) =>
-      (selection) => '${(selection.offset.min * 100).toStringAsFixed(0)}%',
-    (min: false, max: true) =>
-      (selection) => '${(selection.offset.max * 100).toStringAsFixed(0)}%',
+  String Function(FSliderSelection) get formatter => switch (_controller.extendable) {
+    (min: true, max: false) => (selection) => '${(selection.offset.min * 100).toStringAsFixed(0)}%',
+    (min: false, max: true) => (selection) => '${(selection.offset.max * 100).toStringAsFixed(0)}%',
     (min: true, max: true) || (min: false, max: false) =>
       (selection) =>
           '${(selection.offset.min * 100).toStringAsFixed(0)}% - ${(selection.offset.max * 100).toStringAsFixed(0)}%',
@@ -451,11 +396,6 @@ class _SliderState extends State<_Slider> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(
-      ObjectFlagProperty<String Function(FSliderSelection p1)>.has(
-        'formatter',
-        formatter,
-      ),
-    );
+    properties.add(ObjectFlagProperty<String Function(FSliderSelection p1)>.has('formatter', formatter));
   }
 }

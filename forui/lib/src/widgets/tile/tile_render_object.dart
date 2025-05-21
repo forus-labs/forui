@@ -29,14 +29,8 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
   });
 
   @override
-  RenderObject createRenderObject(BuildContext context) => _RenderTile(
-    style,
-    divider,
-    first,
-    last,
-    side,
-    Directionality.maybeOf(context) ?? TextDirection.ltr,
-  );
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderTile(style, divider, first, last, side, Directionality.maybeOf(context) ?? TextDirection.ltr);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -62,13 +56,10 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
   }
 }
 
-class _Data extends ContainerBoxParentData<RenderBox>
-    with ContainerParentDataMixin<RenderBox> {}
+class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
 
 class _RenderTile extends RenderBox
-    with
-        ContainerRenderObjectMixin<RenderBox, _Data>,
-        RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
+    with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
   FTileContentStyle _style;
   FTileDivider _divider;
   bool _first;
@@ -76,27 +67,15 @@ class _RenderTile extends RenderBox
   BorderSide? _side;
   TextDirection _textDirection;
 
-  _RenderTile(
-    this._style,
-    this._divider,
-    this._first,
-    this._last,
-    this._side,
-    this._textDirection,
-  );
+  _RenderTile(this._style, this._divider, this._first, this._last, this._side, this._textDirection);
 
   @override
-  void setupParentData(covariant RenderObject child) =>
-      child.parentData = _Data();
+  void setupParentData(covariant RenderObject child) => child.parentData = _Data();
 
   @override
   void performLayout() {
-    final EdgeInsets(:left, :top, :right, :bottom) = _style.padding.resolve(
-      _textDirection,
-    );
-    var constraints = this.constraints.loosen().copyWith(
-      maxWidth: this.constraints.maxWidth - left - right,
-    );
+    final EdgeInsets(:left, :top, :right, :bottom) = _style.padding.resolve(_textDirection);
+    var constraints = this.constraints.loosen().copyWith(maxWidth: this.constraints.maxWidth - left - right);
     var height = 0.0;
 
     final prefix = firstChild!;
@@ -107,30 +86,22 @@ class _RenderTile extends RenderBox
 
     // Layout all children
     prefix.layout(constraints, parentUsesSize: true);
-    constraints = constraints.copyWith(
-      maxWidth: constraints.maxWidth - prefix.size.width,
-    );
+    constraints = constraints.copyWith(maxWidth: constraints.maxWidth - prefix.size.width);
     height = prefix.size.height;
 
     suffix.layout(constraints, parentUsesSize: true);
-    constraints = constraints.copyWith(
-      maxWidth: constraints.maxWidth - suffix.size.width,
-    );
+    constraints = constraints.copyWith(maxWidth: constraints.maxWidth - suffix.size.width);
     height = max(height, suffix.size.height);
 
     // Details take priority if it is not text, i.e. a checkbox/switch. Otherwise, if details is text, we always try to
     // shrink it first.
     if (details is RenderParagraph) {
       column.layout(constraints, parentUsesSize: true);
-      constraints = constraints.copyWith(
-        maxWidth: constraints.maxWidth - column.size.width,
-      );
+      constraints = constraints.copyWith(maxWidth: constraints.maxWidth - column.size.width);
       details.layout(constraints, parentUsesSize: true);
     } else {
       details.layout(constraints, parentUsesSize: true);
-      constraints = constraints.copyWith(
-        maxWidth: constraints.maxWidth - details.size.width,
-      );
+      constraints = constraints.copyWith(maxWidth: constraints.maxWidth - details.size.width);
       column.layout(constraints, parentUsesSize: true);
     }
 
@@ -141,10 +112,7 @@ class _RenderTile extends RenderBox
       case FTileDivider.indented:
         final constraints = this.constraints.loosen();
         final width = constraints.maxWidth - left - prefix.size.width;
-        divider.layout(
-          constraints.copyWith(maxWidth: width),
-          parentUsesSize: true,
-        );
+        divider.layout(constraints.copyWith(maxWidth: width), parentUsesSize: true);
     }
 
     height = max(height, column.size.height);
@@ -152,20 +120,11 @@ class _RenderTile extends RenderBox
 
     // Position all children
     if (textDirection == TextDirection.ltr) {
-      prefix.data.offset = Offset(
-        left,
-        top + (height - prefix.size.height) / 2,
-      );
-      column.data.offset = Offset(
-        left + prefix.size.width,
-        top + (height - column.size.height) / 2,
-      );
+      prefix.data.offset = Offset(left, top + (height - prefix.size.height) / 2);
+      column.data.offset = Offset(left + prefix.size.width, top + (height - column.size.height) / 2);
 
       details.data.offset = Offset(
-        this.constraints.maxWidth -
-            right -
-            suffix.size.width -
-            details.size.width,
+        this.constraints.maxWidth - right - suffix.size.width - details.size.width,
         top + (height - details.size.height) / 2,
       );
       suffix.data.offset = Offset(
@@ -178,20 +137,11 @@ class _RenderTile extends RenderBox
         top + height + bottom - divider.size.height,
       );
     } else {
-      suffix.data.offset = Offset(
-        left,
-        top + (height - suffix.size.height) / 2,
-      );
-      details.data.offset = Offset(
-        left + suffix.size.width,
-        top + (height - details.size.height) / 2,
-      );
+      suffix.data.offset = Offset(left, top + (height - suffix.size.height) / 2);
+      details.data.offset = Offset(left + suffix.size.width, top + (height - details.size.height) / 2);
 
       column.data.offset = Offset(
-        this.constraints.maxWidth -
-            right -
-            prefix.size.width -
-            column.size.width,
+        this.constraints.maxWidth - right - prefix.size.width - column.size.width,
         top + (height - column.size.height) / 2,
       );
       prefix.data.offset = Offset(
@@ -199,10 +149,7 @@ class _RenderTile extends RenderBox
         top + (height - prefix.size.height) / 2,
       );
 
-      divider.data.offset = Offset(
-        0,
-        top + height + bottom - divider.size.height,
-      );
+      divider.data.offset = Offset(0, top + height + bottom - divider.size.height);
     }
 
     size = Size(this.constraints.maxWidth, height + top + bottom);

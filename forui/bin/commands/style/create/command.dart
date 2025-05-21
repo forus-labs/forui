@@ -30,23 +30,12 @@ class StyleCreateCommand extends ForuiCommand {
 
   StyleCreateCommand(this.configuration) {
     argParser
-      ..addFlag(
-        'all',
-        abbr: 'a',
-        help: 'Generate all styles.',
-        negatable: false,
-      )
-      ..addFlag(
-        'force',
-        abbr: 'f',
-        help: 'Overwrite existing files if they exist.',
-        negatable: false,
-      )
+      ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
+      ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
       ..addOption(
         'output',
         abbr: 'o',
-        help:
-            'The output directory or file, relative to the project directory.',
+        help: 'The output directory or file, relative to the project directory.',
         defaultsTo: configuration.style,
       );
   }
@@ -86,10 +75,7 @@ class StyleCreateCommand extends ForuiCommand {
       success = false;
 
       final suggestions =
-          registry.keys
-              .map((e) => (e, e.startsWith(style) ? 1 : distance(style, e)))
-              .where((e) => e.$2 <= 3)
-              .toList()
+          registry.keys.map((e) => (e, e.startsWith(style) ? 1 : distance(style, e))).where((e) => e.$2 <= 3).toList()
             ..sort((a, b) => a.$2.compareTo(b.$2));
 
       stdout.write('Could not find a style named "$style".');

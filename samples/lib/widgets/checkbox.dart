@@ -97,14 +97,13 @@ class _FormCheckboxState extends StatefulSampleState<FormCheckboxPage> {
               // Save values somewhere.
             },
             validator: (value) => (value ?? false) ? null : 'Please accept the terms and conditions.',
-            builder:
-                (state) => FCheckbox(
-                  label: const Text('Accept terms and conditions'),
-                  description: const Text('You agree to our terms and conditions.'),
-                  error: state.errorText != null ? Text(state.errorText!) : null,
-                  value: state.value ?? false,
-                  onChange: (value) => state.didChange(value),
-                ),
+            builder: (state) => FCheckbox(
+              label: const Text('Accept terms and conditions'),
+              description: const Text('You agree to our terms and conditions.'),
+              error: state.errorText != null ? Text(state.errorText!) : null,
+              value: state.value ?? false,
+              onChange: (value) => state.didChange(value),
+            ),
           ),
           const SizedBox(height: 20),
           FButton(

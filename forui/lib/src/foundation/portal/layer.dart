@@ -86,13 +86,10 @@ class ChildLayer extends ContainerLayer {
   Offset _globalOffset;
   Offset _localOffset;
 
-  ChildLayer({
-    required ChildLayerLink link,
-    required Offset globalOffset,
-    required Offset localOffset,
-  }) : _link = link,
-       _globalOffset = globalOffset,
-       _localOffset = localOffset;
+  ChildLayer({required ChildLayerLink link, required Offset globalOffset, required Offset localOffset})
+    : _link = link,
+      _globalOffset = globalOffset,
+      _localOffset = localOffset;
 
   @override
   void attach(Object owner) {
@@ -107,15 +104,8 @@ class ChildLayer extends ContainerLayer {
   }
 
   @override
-  bool findAnnotations<S extends Object>(
-    AnnotationResult<S> result,
-    Offset localPosition, {
-    required bool onlyFirst,
-  }) => super.findAnnotations<S>(
-    result,
-    localPosition - localOffset,
-    onlyFirst: onlyFirst,
-  );
+  bool findAnnotations<S extends Object>(AnnotationResult<S> result, Offset localPosition, {required bool onlyFirst}) =>
+      super.findAnnotations<S>(result, localPosition - localOffset, onlyFirst: onlyFirst);
 
   @override
   void addToScene(ui.SceneBuilder builder) {
@@ -286,18 +276,10 @@ class PortalLayer extends ContainerLayer {
   }
 
   @override
-  bool findAnnotations<S extends Object>(
-    AnnotationResult<S> result,
-    Offset localPosition, {
-    required bool onlyFirst,
-  }) {
+  bool findAnnotations<S extends Object>(AnnotationResult<S> result, Offset localPosition, {required bool onlyFirst}) {
     if (link.childLayer == null) {
       if (showWhenUnlinked!) {
-        return super.findAnnotations(
-          result,
-          localPosition - unlinkedOffset!,
-          onlyFirst: onlyFirst,
-        );
+        return super.findAnnotations(result, localPosition - unlinkedOffset!, onlyFirst: onlyFirst);
       }
       return false;
     }
@@ -305,11 +287,7 @@ class PortalLayer extends ContainerLayer {
     if (transformedOffset == null) {
       return false;
     }
-    return super.findAnnotations<S>(
-      result,
-      transformedOffset,
-      onlyFirst: onlyFirst,
-    );
+    return super.findAnnotations<S>(result, transformedOffset, onlyFirst: onlyFirst);
   }
 
   /// The transform that was used during the last composition phase.
@@ -322,11 +300,8 @@ class PortalLayer extends ContainerLayer {
     if (_lastTransform == null) {
       return null;
     }
-    final Matrix4 result = Matrix4.translationValues(
-      -_lastOffset!.dx,
-      -_lastOffset!.dy,
-      0.0,
-    )..multiply(_lastTransform!);
+    final Matrix4 result = Matrix4.translationValues(-_lastOffset!.dx, -_lastOffset!.dy, 0.0)
+      ..multiply(_lastTransform!);
     return result;
   }
 
@@ -395,10 +370,8 @@ class PortalLayer extends ContainerLayer {
     }
 
     // Common ancestor is neither the leader nor the follower.
-    final ContainerLayer leaderSubtreeBelowAncestor =
-        leaderToCommonAncestor[leaderToCommonAncestor.length - 2];
-    final ContainerLayer followerSubtreeBelowAncestor =
-        followerToCommonAncestor[followerToCommonAncestor.length - 2];
+    final ContainerLayer leaderSubtreeBelowAncestor = leaderToCommonAncestor[leaderToCommonAncestor.length - 2];
+    final ContainerLayer followerSubtreeBelowAncestor = followerToCommonAncestor[followerToCommonAncestor.length - 2];
 
     Layer? sibling = leaderSubtreeBelowAncestor;
     while (sibling != null) {
@@ -420,10 +393,7 @@ class PortalLayer extends ContainerLayer {
       return;
     }
     // If we're linked, check the link is valid.
-    assert(
-      leader.owner == owner,
-      'Linked ChildLayer anchor is not in the same layer tree as the FollowerLayer.',
-    );
+    assert(leader.owner == owner, 'Linked ChildLayer anchor is not in the same layer tree as the FollowerLayer.');
 
     // Stores [leader, ..., commonAncestor] after calling _pathsToCommonAncestor.
     final List<ContainerLayer> forwardLayers = <ContainerLayer>[leader];
@@ -431,33 +401,21 @@ class PortalLayer extends ContainerLayer {
     // _pathsToCommonAncestor.
     final List<ContainerLayer> inverseLayers = <ContainerLayer>[this];
 
-    final Layer? ancestor = _pathsToCommonAncestor(
-      leader,
-      this,
-      forwardLayers,
-      inverseLayers,
-    );
-    assert(
-      ancestor != null,
-      'ChildLayer and FollowerLayer do not have a common ancestor.',
-    );
+    final Layer? ancestor = _pathsToCommonAncestor(leader, this, forwardLayers, inverseLayers);
+    assert(ancestor != null, 'ChildLayer and FollowerLayer do not have a common ancestor.');
     assert(
       _debugCheckLeaderBeforeFollower(forwardLayers, inverseLayers),
       'ChildLayer anchor must come before FollowerLayer in paint order, but the reverse was true.',
     );
 
-    final Matrix4 forwardTransform = _collectTransformForLayerChain(
-      forwardLayers,
-    );
+    final Matrix4 forwardTransform = _collectTransformForLayerChain(forwardLayers);
     // Further transforms the coordinate system to a hypothetical child (null)
     // of the leader layer, to account for the leader's additional paint offset
     // and layer offset (ChildLayer.offset).
     leader.applyTransform(null, forwardTransform);
     forwardTransform.translate(linkedOffset!.dx, linkedOffset!.dy);
 
-    final Matrix4 inverseTransform = _collectTransformForLayerChain(
-      inverseLayers,
-    );
+    final Matrix4 inverseTransform = _collectTransformForLayerChain(inverseLayers);
 
     if (inverseTransform.invert() == 0.0) {
       // We are in a degenerate transform, so there's not much we can do.
@@ -495,23 +453,13 @@ class PortalLayer extends ContainerLayer {
     _establishTransform();
     if (_lastTransform != null) {
       _lastOffset = unlinkedOffset;
-      engineLayer = builder.pushTransform(
-        _lastTransform!.storage,
-        oldLayer: engineLayer as ui.TransformEngineLayer?,
-      );
+      engineLayer = builder.pushTransform(_lastTransform!.storage, oldLayer: engineLayer as ui.TransformEngineLayer?);
       addChildrenToScene(builder);
       builder.pop();
     } else {
       _lastOffset = null;
-      final Matrix4 matrix = Matrix4.translationValues(
-        unlinkedOffset!.dx,
-        unlinkedOffset!.dy,
-        .0,
-      );
-      engineLayer = builder.pushTransform(
-        matrix.storage,
-        oldLayer: engineLayer as ui.TransformEngineLayer?,
-      );
+      final Matrix4 matrix = Matrix4.translationValues(unlinkedOffset!.dx, unlinkedOffset!.dy, .0);
+      engineLayer = builder.pushTransform(matrix.storage, oldLayer: engineLayer as ui.TransformEngineLayer?);
       addChildrenToScene(builder);
       builder.pop();
     }
@@ -524,9 +472,7 @@ class PortalLayer extends ContainerLayer {
     if (_lastTransform != null) {
       transform.multiply(_lastTransform!);
     } else {
-      transform.multiply(
-        Matrix4.translationValues(unlinkedOffset!.dx, unlinkedOffset!.dy, 0),
-      );
+      transform.multiply(Matrix4.translationValues(unlinkedOffset!.dx, unlinkedOffset!.dy, 0));
     }
   }
 
@@ -535,8 +481,6 @@ class PortalLayer extends ContainerLayer {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('link', link))
-      ..add(
-        TransformProperty('transform', getLastTransform(), defaultValue: null),
-      );
+      ..add(TransformProperty('transform', getLastTransform(), defaultValue: null));
   }
 }

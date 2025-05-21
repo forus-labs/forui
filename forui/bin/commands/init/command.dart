@@ -20,12 +20,7 @@ class InitCommand extends ForuiCommand {
   final Configuration configuration;
 
   InitCommand(this.configuration) {
-    argParser.addFlag(
-      'force',
-      abbr: 'f',
-      help: 'Overwrite existing files if they exist.',
-      negatable: false,
-    );
+    argParser.addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false);
   }
 
   @override
@@ -67,10 +62,7 @@ class InitCommand extends ForuiCommand {
     }
 
     if (file.existsSync()) {
-      _prompt(
-        'lib/main.dart',
-        'You can generate a main.dart later by running "dart forui snippet create main". ',
-      );
+      _prompt('lib/main.dart', 'You can generate a main.dart later by running "dart forui snippet create main". ');
     }
 
     return file;
@@ -85,9 +77,7 @@ class InitCommand extends ForuiCommand {
     }
 
     while (true) {
-      stdout.write(
-        '${emoji ? '⚠️' : '[Warning]'} $file already exists. ${message}Overwrite it? [Y/n] ',
-      );
+      stdout.write('${emoji ? '⚠️' : '[Warning]'} $file already exists. ${message}Overwrite it? [Y/n] ');
 
       switch (stdin.readLineSync()) {
         case 'y' || 'Y' || '':
@@ -95,9 +85,7 @@ class InitCommand extends ForuiCommand {
         case 'n' || 'N':
           exit(0);
         default:
-          stdout.writeln(
-            'Invalid option. Please enter enter either "y" or "n".',
-          );
+          stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
       }
     }
   }
