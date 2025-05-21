@@ -46,7 +46,10 @@ void main() {
             theme: theme.data,
             child: Focus(
               focusNode: focus,
-              child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+              child: FLineCalendar(
+                controller: autoDispose(FCalendarController.date()),
+                today: DateTime(2024, 11, 28),
+              ),
             ),
           ),
         );
@@ -55,14 +58,20 @@ void main() {
         nodes[nodes.length ~/ 2 - 1].requestFocus();
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/default.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('line-calendar/${theme.name}/default.png'),
+        );
       });
 
       testWidgets('${theme.name} - selected other date', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              controller: autoDispose(FCalendarController.date()),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
@@ -71,7 +80,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('line-calendar/${theme.name}/selected-other-date.png'),
+          matchesGoldenFile(
+            'line-calendar/${theme.name}/selected-other-date.png',
+          ),
         );
       });
 
@@ -79,7 +90,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              controller: autoDispose(FCalendarController.date()),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
@@ -99,7 +113,10 @@ void main() {
             theme: theme.data,
             child: Focus(
               focusNode: focus,
-              child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+              child: FLineCalendar(
+                controller: autoDispose(FCalendarController.date()),
+                today: DateTime(2024, 11, 28),
+              ),
             ),
           ),
         );
@@ -121,14 +138,19 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              controller: autoDispose(FCalendarController.date()),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
         await tester.tap(find.text('28').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        final gesture = await tester.createGesture(
+          kind: PointerDeviceKind.mouse,
+        );
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -146,11 +168,16 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              controller: autoDispose(FCalendarController.date()),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        final gesture = await tester.createGesture(
+          kind: PointerDeviceKind.mouse,
+        );
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -160,7 +187,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('line-calendar/${theme.name}/unselected-hovered.png'),
+          matchesGoldenFile(
+            'line-calendar/${theme.name}/unselected-hovered.png',
+          ),
         );
       });
     }
@@ -169,11 +198,17 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           textDirection: TextDirection.rtl,
-          child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+          child: FLineCalendar(
+            controller: autoDispose(FCalendarController.date()),
+            today: DateTime(2024, 11, 28),
+          ),
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/rtl.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('line-calendar/rtl.png'),
+      );
     });
 
     testWidgets('align to start', (tester) async {
@@ -187,7 +222,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/align-start.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('line-calendar/align-start.png'),
+      );
     });
 
     testWidgets('align to end', (tester) async {
@@ -201,7 +239,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/align-end.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('line-calendar/align-end.png'),
+      );
     });
 
     testWidgets('custom item builder', (tester) async {
@@ -213,7 +254,15 @@ void main() {
                 (context, state, child) => Stack(
                   children: [
                     child!,
-                    Positioned(top: 5, left: 5, child: Container(width: 3, height: 3, color: const Color(0xFF00FF00))),
+                    Positioned(
+                      top: 5,
+                      left: 5,
+                      child: Container(
+                        width: 3,
+                        height: 3,
+                        color: const Color(0xFF00FF00),
+                      ),
+                    ),
                   ],
                 ),
             today: DateTime(2024, 11, 28),
@@ -221,18 +270,34 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/builder.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('line-calendar/builder.png'),
+      );
     });
 
-    testWidgets('retains same scrolled date when controller changes', (tester) async {
-      final first = autoDispose(FCalendarController.date(initialSelection: DateTime(2025, 4, 23)));
+    testWidgets('retains same scrolled date when controller changes', (
+      tester,
+    ) async {
+      final first = autoDispose(
+        FCalendarController.date(initialSelection: DateTime(2025, 4, 23)),
+      );
       await tester.pumpWidget(
-        TestScaffold.app(child: FLineCalendar(controller: first, initialScroll: DateTime(2025, 4, 25))),
+        TestScaffold.app(
+          child: FLineCalendar(
+            controller: first,
+            initialScroll: DateTime(2025, 4, 25),
+            today: DateTime(2025, 5, 21),
+          ),
+        ),
       );
 
       await tester.pumpWidget(TestScaffold.app(child: FLineCalendar()));
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/retains-scroll-offset.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('line-calendar/retains-scroll-offset.png'),
+      );
     });
   });
 }

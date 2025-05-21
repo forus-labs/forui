@@ -11,13 +11,17 @@ import '../../test_scaffold.dart';
 void main() {
   group('embedding', () {
     testWidgets('embedded in CupertinoApp', (tester) async {
-      await tester.pumpWidget(CupertinoApp(home: TestScaffold(child: const FTextField())));
+      await tester.pumpWidget(
+        CupertinoApp(home: TestScaffold(child: const FTextField())),
+      );
 
       expect(tester.takeException(), null);
     });
 
     testWidgets('embedded in MaterialApp', (tester) async {
-      await tester.pumpWidget(MaterialApp(home: TestScaffold(child: const FTextField())));
+      await tester.pumpWidget(
+        MaterialApp(home: TestScaffold(child: const FTextField())),
+      );
 
       expect(tester.takeException(), null);
     });
@@ -37,7 +41,10 @@ void main() {
             DefaultCupertinoLocalizations.delegate,
             DefaultWidgetsLocalizations.delegate,
           ],
-          child: TestScaffold(theme: FThemes.zinc.light, child: const FTextField()),
+          child: TestScaffold(
+            theme: FThemes.zinc.light,
+            child: const FTextField(),
+          ),
         ),
       );
 
@@ -47,14 +54,22 @@ void main() {
 
   group('clearable', () {
     testWidgets('no icon when clearable return false', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: FThemes.zinc.light, child: FTextField(clearable: (_) => false)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: FThemes.zinc.light,
+          child: FTextField(clearable: (_) => false),
+        ),
+      );
 
       expect(find.bySemanticsLabel('Clear'), findsNothing);
     });
 
     testWidgets('no icon when disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: FThemes.zinc.light, child: FTextField(enabled: false, clearable: (_) => true)),
+        TestScaffold.app(
+          theme: FThemes.zinc.light,
+          child: FTextField(enabled: false, clearable: (_) => true),
+        ),
       );
       await tester.pumpAndSettle();
 
@@ -65,7 +80,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: FThemes.zinc.light,
-          child: FTextField(enabled: false, clearable: (_) => true, suffixBuilder: (_, _, _) => const SizedBox()),
+          child: FTextField(
+            enabled: false,
+            clearable: (_) => true,
+            suffixBuilder: (_, _, _) => const SizedBox(),
+          ),
         ),
       );
       await tester.pumpAndSettle();
@@ -79,7 +98,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: FThemes.zinc.light,
-          child: FTextField(controller: controller, clearable: (value) => value.text.isNotEmpty),
+          child: FTextField(
+            controller: controller,
+            clearable: (value) => value.text.isNotEmpty,
+          ),
         ),
       );
 
@@ -123,7 +145,9 @@ void main() {
           builder:
               (_, _, child) => FPopover(
                 controller: controller,
-                popoverBuilder: (_, _, _) => Container(height: 100, width: 100, color: Colors.blue),
+                popoverBuilder:
+                    (_, _, _) =>
+                        Container(height: 100, width: 100, color: Colors.blue),
                 child: child!,
               ),
         ),
@@ -140,7 +164,9 @@ void main() {
           builder:
               (_, _, child) => FPopover(
                 controller: controller,
-                popoverBuilder: (_, _, _) => Container(height: 100, width: 100, color: Colors.blue),
+                popoverBuilder:
+                    (_, _, _) =>
+                        Container(height: 100, width: 100, color: Colors.blue),
                 child: child!,
               ),
         ),

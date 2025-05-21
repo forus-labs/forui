@@ -10,7 +10,14 @@ part 'entry.style.dart';
 
 /// A calendar day's data.
 typedef FCalendarDayData =
-    ({FCalendarDayPickerStyle style, DateTime date, bool current, bool today, bool selectable, bool selected});
+    ({
+      FCalendarDayPickerStyle style,
+      DateTime date,
+      bool current,
+      bool today,
+      bool selectable,
+      bool selected,
+    });
 
 @internal
 abstract class Entry extends StatelessWidget {
@@ -36,8 +43,14 @@ abstract class Entry extends StatelessWidget {
     final entryStyle = current ? style.current : style.enclosing;
 
     Widget builder(BuildContext context, Set<WidgetState> states, Widget? _) {
-      final yesterday = isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius;
-      final tomorrow = isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius;
+      final yesterday =
+          isSelected && selected(date.yesterday)
+              ? Radius.zero
+              : entryStyle.radius;
+      final tomorrow =
+          isSelected && selected(date.tomorrow)
+              ? Radius.zero
+              : entryStyle.radius;
       return dayBuilder(
         context,
         (
@@ -50,8 +63,13 @@ abstract class Entry extends StatelessWidget {
         ),
         _Content(
           style: entryStyle,
-          borderRadius: BorderRadiusDirectional.horizontal(start: yesterday, end: tomorrow),
-          text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
+          borderRadius: BorderRadiusDirectional.horizontal(
+            start: yesterday,
+            end: tomorrow,
+          ),
+          text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(
+            date.toNative(),
+          ),
           states: {...states, if (!canSelect) WidgetState.disabled},
           current: today,
         ),
@@ -69,7 +87,11 @@ abstract class Entry extends StatelessWidget {
           style: entryStyle,
           builder: builder,
         )
-        : _UnselectableEntry(selected: isSelected, style: entryStyle, builder: builder);
+        : _UnselectableEntry(
+          selected: isSelected,
+          style: entryStyle,
+          builder: builder,
+        );
   }
 
   factory Entry.yearMonth({
@@ -81,13 +103,14 @@ abstract class Entry extends StatelessWidget {
     required ValueChanged<LocalDate> onPress,
     required String Function(LocalDate) format,
   }) {
-    Widget builder(BuildContext _, Set<WidgetState> states, Widget? _) => _Content(
-      style: style,
-      borderRadius: BorderRadius.all(style.radius),
-      text: format(date),
-      states: {...states, if (!selectable) WidgetState.disabled},
-      current: current,
-    );
+    Widget builder(BuildContext _, Set<WidgetState> states, Widget? _) =>
+        _Content(
+          style: style,
+          borderRadius: BorderRadius.all(style.radius),
+          text: format(date),
+          states: {...states, if (!selectable) WidgetState.disabled},
+          current: current,
+        );
 
     return selectable
         ? _SelectableEntry(
@@ -99,7 +122,11 @@ abstract class Entry extends StatelessWidget {
           style: style,
           builder: builder,
         )
-        : _UnselectableEntry(selected: selectable, style: style, builder: builder);
+        : _UnselectableEntry(
+          selected: selectable,
+          style: style,
+          builder: builder,
+        );
   }
 
   const Entry._({required this.style, required this.builder});
@@ -159,16 +186,23 @@ class _SelectableEntry extends Entry {
 class _UnselectableEntry extends Entry {
   final bool selected;
 
-  const _UnselectableEntry({required this.selected, required super.style, required super.builder}) : super._();
+  const _UnselectableEntry({
+    required this.selected,
+    required super.style,
+    required super.builder,
+  }) : super._();
 
   @override
-  Widget build(BuildContext context) =>
-      ExcludeSemantics(child: builder(context, {if (selected) WidgetState.selected}, null));
+  Widget build(BuildContext context) => ExcludeSemantics(
+    child: builder(context, {if (selected) WidgetState.selected}, null),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(FlagProperty('selected', value: selected, ifTrue: 'selected'));
+    properties.add(
+      FlagProperty('selected', value: selected, ifTrue: 'selected'),
+    );
   }
 }
 

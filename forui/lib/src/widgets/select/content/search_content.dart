@@ -19,7 +19,10 @@ typedef FSelectSearchFilter<T> = FutureOr<Iterable<T>> Function(String query);
 
 /// A builder for [FSelect] search results.
 typedef FSelectSearchContentBuilder<T> =
-    List<FSelectItemMixin> Function(BuildContext context, FSelectSearchData<T> data);
+    List<FSelectItemMixin> Function(
+      BuildContext context,
+      FSelectSearchData<T> data,
+    );
 
 @internal
 class SearchContent<T> extends StatefulWidget {
@@ -117,8 +120,12 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     }
   }
 
-  FutureOr<FSelectSearchData<T>> _filter(String query) => switch (widget.filter(query)) {
-    final Future<Iterable<T>> values => values.then((values) => (query: query, values: values)),
+  FutureOr<FSelectSearchData<T>> _filter(String query) => switch (widget.filter(
+    query,
+  )) {
+    final Future<Iterable<T>> values => values.then(
+      (values) => (query: query, values: values),
+    ),
     final values => (query: query, values: values),
   };
 
@@ -132,7 +139,9 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       mainAxisSize: MainAxisSize.min,
       children: [
         CallbackShortcuts(
-          bindings: {const SingleActivator(LogicalKeyboardKey.enter): _focus.nextFocus},
+          bindings: {
+            const SingleActivator(LogicalKeyboardKey.enter): _focus.nextFocus,
+          },
           child: FTextField(
             controller: _controller,
             focusNode: _focus,
@@ -164,7 +173,8 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             inputFormatters: widget.properties.inputFormatters,
             enabled: widget.properties.enabled,
             ignorePointers: widget.properties.ignorePointers,
-            enableInteractiveSelection: widget.properties.enableInteractiveSelection,
+            enableInteractiveSelection:
+                widget.properties.enableInteractiveSelection,
             selectionControls: widget.properties.selectionControls,
             dragStartBehavior: widget.properties.dragStartBehavior,
             mouseCursor: widget.properties.mouseCursor,
@@ -172,20 +182,31 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             scrollController: widget.properties.scrollController,
             autofillHints: widget.properties.autofillHints,
             restorationId: widget.properties.restorationId,
-            stylusHandwritingEnabled: widget.properties.stylusHandwritingEnabled,
-            enableIMEPersonalizedLearning: widget.properties.enableIMEPersonalizedLearning,
-            contentInsertionConfiguration: widget.properties.contentInsertionConfiguration,
+            stylusHandwritingEnabled:
+                widget.properties.stylusHandwritingEnabled,
+            enableIMEPersonalizedLearning:
+                widget.properties.enableIMEPersonalizedLearning,
+            contentInsertionConfiguration:
+                widget.properties.contentInsertionConfiguration,
             contextMenuBuilder: widget.properties.contextMenuBuilder,
             undoController: widget.properties.undoController,
             spellCheckConfiguration: widget.properties.spellCheckConfiguration,
             prefixBuilder:
                 prefix == null
                     ? null
-                    : (context, style, child) => prefix(context, (widget.style.searchStyle, style.$1, style.$2), child),
+                    : (context, style, child) => prefix(context, (
+                      widget.style.searchStyle,
+                      style.$1,
+                      style.$2,
+                    ), child),
             suffixBuilder:
                 suffix == null
                     ? null
-                    : (context, style, child) => suffix(context, (widget.style.searchStyle, style.$1, style.$2), child),
+                    : (context, style, child) => suffix(context, (
+                      widget.style.searchStyle,
+                      style.$1,
+                      style.$2,
+                    ), child),
             clearable: widget.properties.clearable,
           ),
         ),
@@ -197,14 +218,22 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             builder:
                 (context, snapshot) => switch (snapshot.connectionState) {
                   ConnectionState.waiting => Center(
-                    child: widget.loadingBuilder(context, widget.style.searchStyle, null),
+                    child: widget.loadingBuilder(
+                      context,
+                      widget.style.searchStyle,
+                      null,
+                    ),
                   ),
-                  _ when snapshot.hasError && widget.errorBuilder != null => widget.errorBuilder!.call(
+                  _ when snapshot.hasError && widget.errorBuilder != null =>
+                    widget.errorBuilder!.call(
+                      context,
+                      snapshot.error,
+                      snapshot.stackTrace!,
+                    ),
+                  _ => _content(
                     context,
-                    snapshot.error,
-                    snapshot.stackTrace!,
+                    snapshot.data ?? (query: '', values: []),
                   ),
-                  _ => _content(context, snapshot.data ?? (query: '', values: [])),
                 },
           ),
         },
@@ -269,16 +298,31 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   });
 
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
-  FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style).copyWith(
-          border: FWidgetStateMap.all(const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))),
-        ),
-        iconStyle: IconThemeData(size: 15, color: colors.mutedForeground),
-        dividerStyle: FDividerStyles.inherit(
-          colors: colors,
-          style: style,
-        ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
-        loadingIndicatorStyle: FProgressStyles.inherit(colors: colors, style: style).circularIconProgressStyle,
-      );
+  FSelectSearchStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) : this(
+         textFieldStyle: FTextFieldStyle.inherit(
+           colors: colors,
+           typography: typography,
+           style: style,
+         ).copyWith(
+           border: FWidgetStateMap.all(
+             const OutlineInputBorder(
+               borderSide: BorderSide(color: Colors.transparent),
+             ),
+           ),
+         ),
+         iconStyle: IconThemeData(size: 15, color: colors.mutedForeground),
+         dividerStyle: FDividerStyles.inherit(
+           colors: colors,
+           style: style,
+         ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
+         loadingIndicatorStyle:
+             FProgressStyles.inherit(
+               colors: colors,
+               style: style,
+             ).circularIconProgressStyle,
+       );
 }

@@ -13,7 +13,10 @@ void main() {
       testWidgets('${theme.name} with image', (tester) async {
         final testWidget = TestScaffold.app(
           theme: theme.data,
-          child: FAvatar(image: FileImage(File('$relativePath/test/resources/pante.jpg')), fallback: const Text('MN')),
+          child: FAvatar(
+            image: FileImage(File('$relativePath/test/resources/pante.jpg')),
+            fallback: const Text('MN'),
+          ),
         );
 
         /// current workaround for flaky image asset testing.
@@ -29,7 +32,10 @@ void main() {
           }
         });
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('avatar/${theme.name}/image.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('avatar/${theme.name}/image.png'),
+        );
       });
 
       /// We will not be testing for the fallback behavior due to this issue on flutter
@@ -41,13 +47,20 @@ void main() {
             child: FAvatar.raw(
               child: Padding(
                 padding: const EdgeInsets.all(10),
-                child: Icon(FIcons.baby, color: theme.data.colors.mutedForeground, size: 20),
+                child: Icon(
+                  FIcons.baby,
+                  color: theme.data.colors.mutedForeground,
+                  size: 20,
+                ),
               ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('avatar/${theme.name}/raw.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('avatar/${theme.name}/raw.png'),
+        );
       });
     }
   });

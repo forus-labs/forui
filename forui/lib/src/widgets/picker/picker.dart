@@ -29,7 +29,8 @@ class FPickerController extends FValueNotifier<List<int>> {
   final List<FixedExtentScrollController> wheels = [];
 
   /// Creates a [FPickerController].
-  FPickerController({required this.initialIndexes}) : super([...initialIndexes]);
+  FPickerController({required this.initialIndexes})
+    : super([...initialIndexes]);
 
   @override
   List<int> get value => [...super.value];
@@ -103,7 +104,13 @@ class FPicker extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FPicker] with several wheels, and optionally, separators.
-  const FPicker({required this.children, this.controller, this.style, this.onChange, super.key});
+  const FPicker({
+    required this.children,
+    this.controller,
+    this.style,
+    this.onChange,
+    super.key,
+  });
 
   @override
   State<FPicker> createState() => _FPickerState();
@@ -149,7 +156,12 @@ class _FPickerState extends State<FPicker> {
   void _createController() {
     _controller =
         widget.controller ??
-        FPickerController(initialIndexes: List.filled(widget.children.whereType<FPickerWheel>().length, 0));
+        FPickerController(
+          initialIndexes: List.filled(
+            widget.children.whereType<FPickerWheel>().length,
+            0,
+          ),
+        );
 
     for (final wheel in _controller.wheels) {
       wheel.dispose();
@@ -179,7 +191,8 @@ class _FPickerState extends State<FPicker> {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.pickerStyle;
     final selectionExtent =
-        FPickerWheel.estimateExtent(style, context) * style.magnification + style.selectionHeightAdjustment;
+        FPickerWheel.estimateExtent(style, context) * style.magnification +
+        style.selectionHeightAdjustment;
 
     var wheelIndex = 0;
     return Stack(
@@ -187,13 +200,18 @@ class _FPickerState extends State<FPicker> {
       children: [
         Container(
           height: selectionExtent,
-          decoration: BoxDecoration(color: style.selectionColor, borderRadius: style.selectionBorderRadius),
+          decoration: BoxDecoration(
+            color: style.selectionColor,
+            borderRadius: style.selectionBorderRadius,
+          ),
         ),
         // Syncs the controller's value with the wheel's scroll controller when the widget is updated.
         NotificationListener<ScrollMetricsNotification>(
           onNotification: (_) {
             if (_scrolling == 0) {
-              _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+              _controller._value = [
+                for (final wheel in _controller.wheels) wheel.selectedItem,
+              ];
             }
 
             return false;
@@ -207,7 +225,9 @@ class _FPickerState extends State<FPicker> {
               onNotification: (_) {
                 _scrolling = max(_scrolling - 1, 0);
                 if (_scrolling == 0) {
-                  _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+                  _controller._value = [
+                    for (final wheel in _controller.wheels) wheel.selectedItem,
+                  ];
                 }
 
                 return false;
@@ -219,7 +239,11 @@ class _FPickerState extends State<FPicker> {
                 children: [
                   for (final child in widget.children)
                     if (child is FPickerWheelMixin)
-                      PickerData(controller: _controller.wheels[wheelIndex++], style: style, child: child)
+                      PickerData(
+                        controller: _controller.wheels[wheelIndex++],
+                        style: style,
+                        child: child,
+                      )
                     else
                       Center(
                         child: DefaultTextStyle.merge(
@@ -259,10 +283,16 @@ class PickerData extends InheritedWidget {
   final FixedExtentScrollController controller;
   final FPickerStyle style;
 
-  const PickerData({required this.controller, required this.style, required super.child, super.key});
+  const PickerData({
+    required this.controller,
+    required this.style,
+    required super.child,
+    super.key,
+  });
 
   @override
-  bool updateShouldNotify(PickerData old) => controller != old.controller || style != old.style;
+  bool updateShouldNotify(PickerData old) =>
+      controller != old.controller || style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

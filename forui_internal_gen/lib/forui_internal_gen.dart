@@ -3,7 +3,8 @@ import 'package:dart_style/dart_style.dart';
 import 'package:forui_internal_gen/src/style_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
-const _header = '''
+const _header =
+    '''
 $defaultFileHeader
 
 // dart format width=120
@@ -15,5 +16,6 @@ Builder styleBuilder(BuilderOptions options) => PartBuilder(
   [StyleGenerator()],
   '.style.dart',
   header: _header,
-  formatOutput: (generated, version) => DartFormatter(pageWidth: 120, languageVersion: version).format(generated),
+  formatOutput: (generated, version) =>
+      DartFormatter(pageWidth: 120, languageVersion: version).format(generated),
 );

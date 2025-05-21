@@ -33,13 +33,24 @@ class FResizableRegion extends StatelessWidget {
   final Widget? child;
 
   /// Creates a [FResizableRegion].
-  FResizableRegion({required this.initialExtent, required this.builder, this.minExtent, this.child, super.key})
-    : assert(0 < initialExtent, 'The initial extent should be positive, but it is $initialExtent.'),
-      assert(minExtent == null || 0 < minExtent, 'The min extent should be positive, but it is $minExtent.'),
-      assert(
-        minExtent == null || minExtent.lessOrAround(initialExtent),
-        'The initial extent, $initialExtent is less than the min extent, $minExtent.',
-      );
+  FResizableRegion({
+    required this.initialExtent,
+    required this.builder,
+    this.minExtent,
+    this.child,
+    super.key,
+  }) : assert(
+         0 < initialExtent,
+         'The initial extent should be positive, but it is $initialExtent.',
+       ),
+       assert(
+         minExtent == null || 0 < minExtent,
+         'The min extent should be positive, but it is $minExtent.',
+       ),
+       assert(
+         minExtent == null || minExtent.lessOrAround(initialExtent),
+         'The initial extent, $initialExtent is less than the min extent, $minExtent.',
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +59,14 @@ class FResizableRegion extends StatelessWidget {
       container: true,
       child: GestureDetector(
         child: switch (axis) {
-          Axis.horizontal => SizedBox(width: data.extent.current, child: builder(context, data, child)),
-          Axis.vertical => SizedBox(height: data.extent.current, child: builder(context, data, child)),
+          Axis.horizontal => SizedBox(
+            width: data.extent.current,
+            child: builder(context, data, child),
+          ),
+          Axis.vertical => SizedBox(
+            height: data.extent.current,
+            child: builder(context, data, child),
+          ),
         },
       ),
     );

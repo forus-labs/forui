@@ -14,7 +14,12 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   LeakTesting.enable();
   LeakTesting.settings = LeakTesting.settings.withIgnored(
     createdByTestHelpers: true,
-    classes: ['Image', 'ImageInfo', 'ImageStreamCompleterHandle', '_CachedImage'],
+    classes: [
+      'Image',
+      'ImageInfo',
+      'ImageStreamCompleterHandle',
+      '_CachedImage',
+    ],
   );
 
   await configureGoldenTests(_kGoldenTestsThreshold);
@@ -25,11 +30,15 @@ Future<void> configureGoldenTests(double threshold) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final workingDirectory =
-      Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
+      Directory.current.path.contains('forui${Platform.pathSeparator}forui')
+          ? '.'
+          : '${Directory.current.path}/forui';
 
   final inter = FontLoader('packages/forui/Inter');
   final directory = Directory('$workingDirectory/assets/fonts/inter/');
-  for (final file in directory.listSync().whereType<File>().where((e) => e.path.endsWith('.ttf'))) {
+  for (final file in directory.listSync().whereType<File>().where(
+    (e) => e.path.endsWith('.ttf'),
+  )) {
     inter.addFont(rootBundle.load(file.path));
   }
 

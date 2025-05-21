@@ -10,22 +10,22 @@ import 'package:forui/src/widgets/slider/slider_render_object.dart';
 import 'package:forui/src/widgets/slider/track.dart';
 
 @internal
-class SliderFormField extends FormField<FSliderSelection> with FFormFieldProperties<FSliderSelection> {
+class SliderFormField extends FormField<FSliderSelection>
+    with FFormFieldProperties<FSliderSelection> {
   final FSliderController controller;
   final BoxConstraints constraints;
   @override
   final Widget? label;
   @override
   final Widget? description;
-  @override
-  final Widget Function(BuildContext, String) errorBuilder;
 
   SliderFormField({
     required this.controller,
     required this.constraints,
     required this.label,
     required this.description,
-    required this.errorBuilder,
+    Widget Function(BuildContext, String) errorBuilder =
+        FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -35,11 +35,19 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
     super.key,
   }) : super(
          initialValue: controller.selection,
+         errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State;
-           final InheritedData(:layout, :marks, :trackMainAxisExtent) = InheritedData.of(state.context);
+           final InheritedData(
+             :layout,
+             :marks,
+             :trackMainAxisExtent,
+           ) = InheritedData.of(state.context);
            final style = InheritedData.of(state.context).style;
-           final states = {if (!enabled) WidgetState.disabled, if (state.hasError) WidgetState.error};
+           final states = {
+             if (!enabled) WidgetState.disabled,
+             if (state.hasError) WidgetState.error,
+           };
 
            // DO NOT REORDER THE CHILDREN - _RenderSlider assumes this order.
            final children = [
@@ -54,20 +62,32 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
              if (description != null)
                DefaultTextStyle.merge(
                  style: style.descriptionTextStyle.resolve(states),
-                 child: Padding(padding: style.descriptionPadding, child: description),
+                 child: Padding(
+                   padding: style.descriptionPadding,
+                   child: description,
+                 ),
                )
              else
                const SizedBox(),
              if (state.errorText != null)
                DefaultTextStyle.merge(
                  style: style.errorTextStyle,
-                 child: Padding(padding: style.errorPadding, child: errorBuilder(state.context, state.errorText!)),
+                 child: Padding(
+                   padding: style.errorPadding,
+                   child: errorBuilder(state.context, state.errorText!),
+                 ),
                )
              else
                const SizedBox(),
-             for (final mark in marks.where((mark) => mark.label != null).toList())
+             for (final mark
+                 in marks.where((mark) => mark.label != null).toList())
                if (mark case FSliderMark(style: final markStyle, :final label?))
-                 DefaultTextStyle(style: (markStyle ?? style.markStyle).labelTextStyle.resolve(states), child: label),
+                 DefaultTextStyle(
+                   style: (markStyle ?? style.markStyle).labelTextStyle.resolve(
+                     states,
+                   ),
+                   child: label,
+                 ),
            ];
 
            return InheritedStates(

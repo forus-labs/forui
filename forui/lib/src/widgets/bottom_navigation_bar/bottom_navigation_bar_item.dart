@@ -55,7 +55,12 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FBottomNavigationBarData(:itemStyle, :selected, :index, :onChange) = FBottomNavigationBarData.of(context);
+    final FBottomNavigationBarData(
+      :itemStyle,
+      :selected,
+      :index,
+      :onChange,
+    ) = FBottomNavigationBarData.of(context);
     final style = this.style ?? itemStyle;
 
     return FTappable(
@@ -76,7 +81,12 @@ class FBottomNavigationBarItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               spacing: style.spacing,
               children: [
-                ExcludeSemantics(child: IconTheme(data: style.iconStyle.resolve(states), child: icon)),
+                ExcludeSemantics(
+                  child: IconTheme(
+                    data: style.iconStyle.resolve(states),
+                    child: icon,
+                  ),
+                ),
                 DefaultTextStyle.merge(
                   style: style.textStyle.resolve(states),
                   overflow: TextOverflow.ellipsis,
@@ -102,7 +112,8 @@ class FBottomNavigationBarItem extends StatelessWidget {
 }
 
 /// [FBottomNavigationBarItem]'s style.
-class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
+class FBottomNavigationBarItemStyle
+    with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
   /// The icon's style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
@@ -149,11 +160,20 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
   }) : this(
          iconStyle: FWidgetStateMap({
            WidgetState.selected: IconThemeData(color: colors.primary, size: 24),
-           WidgetState.any: IconThemeData(color: colors.disable(colors.foreground), size: 24),
+           WidgetState.any: IconThemeData(
+             color: colors.disable(colors.foreground),
+             size: 24,
+           ),
          }),
          textStyle: FWidgetStateMap({
-           WidgetState.selected: typography.base.copyWith(color: colors.primary, fontSize: 10),
-           WidgetState.any: typography.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
+           WidgetState.selected: typography.base.copyWith(
+             color: colors.primary,
+             fontSize: 10,
+           ),
+           WidgetState.any: typography.base.copyWith(
+             color: colors.disable(colors.foreground),
+             fontSize: 10,
+           ),
          }),
          tappableStyle: style.tappableStyle,
          focusedOutlineStyle: style.focusedOutlineStyle,

@@ -21,7 +21,11 @@ class _PopoverControllerHook extends Hook<FPopoverController> {
   final TickerProvider vsync;
   final Duration animationDuration;
 
-  const _PopoverControllerHook({required this.vsync, required this.animationDuration, super.keys});
+  const _PopoverControllerHook({
+    required this.vsync,
+    required this.animationDuration,
+    super.keys,
+  });
 
   @override
   _PopoverControllerHookState createState() => _PopoverControllerHookState();
@@ -35,7 +39,8 @@ class _PopoverControllerHook extends Hook<FPopoverController> {
   }
 }
 
-class _PopoverControllerHookState extends HookState<FPopoverController, _PopoverControllerHook> {
+class _PopoverControllerHookState
+    extends HookState<FPopoverController, _PopoverControllerHook> {
   late final FPopoverController _controller = FPopoverController(
     vsync: hook.vsync,
     animationDuration: hook.animationDuration,

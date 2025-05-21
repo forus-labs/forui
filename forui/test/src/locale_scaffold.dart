@@ -7,7 +7,11 @@ class LocaleScaffold extends StatefulWidget {
   final List<Locale> locales;
   final Widget child;
 
-  const LocaleScaffold({required this.child, this.locales = const [Locale('en', 'US'), Locale('ko')], super.key});
+  const LocaleScaffold({
+    required this.child,
+    this.locales = const [Locale('en', 'US'), Locale('ko')],
+    super.key,
+  });
 
   @override
   State<LocaleScaffold> createState() => _LocaleScaffoldState();
@@ -33,7 +37,10 @@ class _LocaleScaffoldState extends State<LocaleScaffold> {
         locale: widget.locales[index % widget.locales.length],
         child: widget.child,
       ),
-      FButton(onPress: () => setState(() => index++), child: const Text('change')),
+      FButton(
+        onPress: () => setState(() => index++),
+        child: const Text('change'),
+      ),
     ],
   );
 

@@ -24,8 +24,8 @@ abstract interface class FResizableController extends FChangeNotifier {
   /// ## Contract
   /// [_hapticFeedbackVelocity] should be a positive, finite number. It will otherwise
   /// result in undefined behaviour.
-  // ignore: avoid_field_initializers_in_const_classes
-  final double _hapticFeedbackVelocity = 6.5; // ignore: unused_field, TODO: haptic feedback
+  final double _hapticFeedbackVelocity =
+      6.5; // ignore: unused_field, TODO: haptic feedback
 
   bool _haptic = false;
 
@@ -88,7 +88,8 @@ final class _ResizableController extends FResizableController {
       regions[expanded.index] = expanded;
 
       assert(
-        regions.sum((r) => r.extent.current, initial: 0.0) == regions[0].extent.total,
+        regions.sum((r) => r.extent.current, initial: 0.0) ==
+            regions[0].extent.total,
         'Current total extent: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total extent: '
         '${regions[0].extent.total}. This is likely a bug in Forui. Please file a bug report: '
         'https://github.com/forus-labs/forui/issues/new?template=bug_report.md',
@@ -122,14 +123,19 @@ final class _ResizableController extends FResizableController {
 /// A cascading [FResizableController].
 final class _CascadeController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
-  final void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd;
+  final void Function(UnmodifiableListView<FResizableRegionData> all)?
+  onResizeEnd;
 
   _CascadeController({this.onResizeUpdate, this.onResizeEnd}) : super._();
 
   @override
   bool update(int left, int right, double delta) {
     final (shrinks, expand, lhs) = switch (delta) {
-      < 0 => (regions.sublist(0, right).reversed.toList(), regions[right], false),
+      < 0 => (
+        regions.sublist(0, right).reversed.toList(),
+        regions[right],
+        false,
+      ),
       _ => (regions.sublist(right), regions[left], true),
     };
 
@@ -166,7 +172,10 @@ final class _CascadeController extends FResizableController {
 
     if (lhs) {
       for (final region in shrunks) {
-        final updated = region.copyWith(minOffset: max, maxOffset: max + region.extent.current);
+        final updated = region.copyWith(
+          minOffset: max,
+          maxOffset: max + region.extent.current,
+        );
         (:min, :max) = updated.offset;
 
         regions[updated.index] = updated;
@@ -174,7 +183,10 @@ final class _CascadeController extends FResizableController {
       }
     } else {
       for (final region in shrunks) {
-        final updated = region.copyWith(minOffset: min - region.extent.current, maxOffset: min);
+        final updated = region.copyWith(
+          minOffset: min - region.extent.current,
+          maxOffset: min,
+        );
         (:min, :max) = updated.offset;
 
         regions[updated.index] = updated;
@@ -183,7 +195,9 @@ final class _CascadeController extends FResizableController {
     }
 
     assert(
-      regions.sum((r) => r.extent.current, initial: 0.0).around(regions[0].extent.total),
+      regions
+          .sum((r) => r.extent.current, initial: 0.0)
+          .around(regions[0].extent.total),
       'Current total size: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total size: ${regions[0].extent.total}. '
       'This is likely a bug in Forui. Please file a bug report: https://github.com/forus-labs/forui/issues/new?template=bug_report.md',
     );

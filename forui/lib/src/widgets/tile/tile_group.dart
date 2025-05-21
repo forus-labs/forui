@@ -101,7 +101,8 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   final Widget? error;
 
   /// The delegate.
-  final SliverChildDelegate Function(FTileStyle styles, {required bool enabled}) delegate;
+  final SliverChildDelegate Function(FTileStyle styles, {required bool enabled})
+  delegate;
 
   /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
   ///
@@ -204,37 +205,46 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
        assert(count == null || 0 <= count, 'count must be non-negative.'),
        delegate =
-           ((style, {required enabled}) => SliverChildBuilderDelegate((context, index) {
-             final tile = tileBuilder(context, index);
-             if (tile == null) {
-               return null;
-             }
+           ((style, {required enabled}) =>
+               SliverChildBuilderDelegate((context, index) {
+                 final tile = tileBuilder(context, index);
+                 if (tile == null) {
+                   return null;
+                 }
 
-             return FTileData(
-               style: style,
-               divider: divider,
-               states: {if (!enabled) WidgetState.disabled},
-               index: index,
-               last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
-               pressable: true,
-               child: tile,
-             );
-           }, childCount: count));
+                 return FTileData(
+                   style: style,
+                   divider: divider,
+                   states: {if (!enabled) WidgetState.disabled},
+                   index: index,
+                   last:
+                       (count != null && index == count - 1) ||
+                       tileBuilder(context, index + 1) == null,
+                   pressable: true,
+                   child: tile,
+                 );
+               }, childCount: count));
 
   @override
   Widget build(BuildContext context) {
     final data = FTileGroupData.maybeOf(context);
     final style = this.style ?? data?.style ?? context.theme.tileGroupStyle;
-    final enabled = this.enabled ?? !(data?.states.contains(WidgetState.disabled) ?? false);
+    final enabled =
+        this.enabled ?? !(data?.states.contains(WidgetState.disabled) ?? false);
 
     // The only shard state between a tile group and tile is [WidgetState.disabled].
-    final sliver = SliverList(delegate: delegate(style.tileStyle, enabled: enabled));
+    final sliver = SliverList(
+      delegate: delegate(style.tileStyle, enabled: enabled),
+    );
 
     if (data == null) {
       return FLabel(
         style: style,
         axis: Axis.vertical,
-        states: {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error},
+        states: {
+          if (!enabled) WidgetState.disabled,
+          if (error != null) WidgetState.error,
+        },
         label: label,
         description: description,
         error: error,
@@ -288,7 +298,8 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
   }
 }
 
-class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
+class _MergeTileGroups extends StatelessWidget
+    with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
   final FTileGroupStyle? style;
   final ScrollController? scrollController;
   final double? cacheExtent;
@@ -323,7 +334,10 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.tileGroupStyle;
-    final states = {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error};
+    final states = {
+      if (!enabled) WidgetState.disabled,
+      if (error != null) WidgetState.error,
+    };
 
     return FLabel(
       style: style,
@@ -422,38 +436,55 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        borderColor: colors.border,
-        borderWidth: style.borderWidth,
-        borderRadius: style.borderRadius,
-        tileStyle: FTileStyle.inherit(colors: colors, typography: typography, style: style),
-        labelTextStyle: FWidgetStateMap({
-          WidgetState.error: typography.base.copyWith(
-            color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
-            fontWeight: FontWeight.w600,
-          ),
-          WidgetState.disabled: typography.base.copyWith(
-            color:
-                style.formFieldStyle.labelTextStyle.maybeResolve({WidgetState.disabled})?.color ??
-                colors.disable(colors.primary),
-            fontWeight: FontWeight.w600,
-          ),
-          WidgetState.any: typography.base.copyWith(
-            color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
-            fontWeight: FontWeight.w600,
-          ),
-        }),
-        descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.map(
-          (s) => typography.xs.copyWith(color: s.color),
-        ),
-        errorTextStyle: typography.xs.copyWith(color: style.formFieldStyle.errorTextStyle.color),
-      );
+  FTileGroupStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) : this(
+         borderColor: colors.border,
+         borderWidth: style.borderWidth,
+         borderRadius: style.borderRadius,
+         tileStyle: FTileStyle.inherit(
+           colors: colors,
+           typography: typography,
+           style: style,
+         ),
+         labelTextStyle: FWidgetStateMap({
+           WidgetState.error: typography.base.copyWith(
+             color:
+                 style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ??
+                 colors.primary,
+             fontWeight: FontWeight.w600,
+           ),
+           WidgetState.disabled: typography.base.copyWith(
+             color:
+                 style.formFieldStyle.labelTextStyle.maybeResolve({
+                   WidgetState.disabled,
+                 })?.color ??
+                 colors.disable(colors.primary),
+             fontWeight: FontWeight.w600,
+           ),
+           WidgetState.any: typography.base.copyWith(
+             color:
+                 style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ??
+                 colors.primary,
+             fontWeight: FontWeight.w600,
+           ),
+         }),
+         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.map(
+           (s) => typography.xs.copyWith(color: s.color),
+         ),
+         errorTextStyle: typography.xs.copyWith(
+           color: style.formFieldStyle.errorTextStyle.color,
+         ),
+       );
 }
 
 /// Extracts the data from the given [FTileGroupData].
 @internal
-({int index, int length, FTileDivider divider}) extractTileGroup(FTileGroupData? data) => (
+({int index, int length, FTileDivider divider}) extractTileGroup(
+  FTileGroupData? data,
+) => (
   index: data?.index ?? 0,
   length: data?.length ?? 1,
   divider: data?.divider ?? FTileDivider.full,
@@ -465,7 +496,8 @@ class FTileGroupData extends InheritedWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if there is no ancestor [FTile] in the given [context].
-  static FTileGroupData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FTileGroupData>();
+  static FTileGroupData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FTileGroupData>();
 
   /// The tile group's style.
   final FTileGroupStyle style;

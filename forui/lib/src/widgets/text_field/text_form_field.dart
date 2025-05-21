@@ -513,7 +513,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))
-      ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
+      ..add(
+        DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration),
+      )
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -525,12 +527,28 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('statesController', statesController))
-      ..add(StringProperty('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
-      ..add(FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'))
-      ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
+      ..add(
+        StringProperty(
+          'obscuringCharacter',
+          obscuringCharacter,
+          defaultValue: '•',
+        ),
+      )
+      ..add(
+        FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'),
+      )
+      ..add(
+        FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'),
+      )
       ..add(EnumProperty('smartDashesType', smartDashesType))
       ..add(EnumProperty('smartQuotesType', smartQuotesType))
-      ..add(FlagProperty('enableSuggestions', value: enableSuggestions, ifTrue: 'enableSuggestions'))
+      ..add(
+        FlagProperty(
+          'enableSuggestions',
+          value: enableSuggestions,
+          ifTrue: 'enableSuggestions',
+        ),
+      )
       ..add(IntProperty('minLines', minLines))
       ..add(IntProperty('maxLines', maxLines))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
@@ -541,15 +559,31 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
-      ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
+      ..add(
+        FlagProperty(
+          'onTapAlwaysCalled',
+          value: onTapAlwaysCalled,
+          ifTrue: 'onTapAlwaysCalled',
+        ),
+      )
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(ObjectFlagProperty.has('onAppPrivateCommand', onAppPrivateCommand))
       ..add(IterableProperty('inputFormatters', inputFormatters))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
-      ..add(FlagProperty('ignorePointers', value: ignorePointers, ifTrue: 'ignorePointers'))
       ..add(
-        FlagProperty('enableInteractSelection', value: enableInteractiveSelection, ifTrue: 'enableInteractSelection'),
+        FlagProperty(
+          'ignorePointers',
+          value: ignorePointers,
+          ifTrue: 'ignorePointers',
+        ),
+      )
+      ..add(
+        FlagProperty(
+          'enableInteractSelection',
+          value: enableInteractiveSelection,
+          ifTrue: 'enableInteractSelection',
+        ),
       )
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
@@ -560,7 +594,11 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(IterableProperty('autofillHints', autofillHints))
       ..add(StringProperty('restorationId', restorationId))
       ..add(
-        FlagProperty('stylusHandwritingEnabled', value: stylusHandwritingEnabled, ifTrue: 'stylusHandwritingEnabled'),
+        FlagProperty(
+          'stylusHandwritingEnabled',
+          value: stylusHandwritingEnabled,
+          ifTrue: 'stylusHandwritingEnabled',
+        ),
       )
       ..add(
         FlagProperty(
@@ -569,11 +607,24 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
           ifTrue: 'enableIMEPersonalizedLearning',
         ),
       )
-      ..add(DiagnosticsProperty('contentInsertionConfiguration', contentInsertionConfiguration))
+      ..add(
+        DiagnosticsProperty(
+          'contentInsertionConfiguration',
+          contentInsertionConfiguration,
+        ),
+      )
       ..add(ObjectFlagProperty.has('contextMenuBuilder', contextMenuBuilder))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(
+        FlagProperty(
+          'canRequestFocus',
+          value: canRequestFocus,
+          ifTrue: 'canRequestFocus',
+        ),
+      )
       ..add(DiagnosticsProperty('undoController', undoController))
-      ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
+      ..add(
+        DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration),
+      )
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
@@ -656,8 +707,10 @@ class _FormField extends FormField<String> {
               autofillHints: field.autofillHints,
               restorationId: field.restorationId,
               stylusHandwritingEnabled: field.stylusHandwritingEnabled,
-              enableIMEPersonalizedLearning: field.enableIMEPersonalizedLearning,
-              contentInsertionConfiguration: field.contentInsertionConfiguration,
+              enableIMEPersonalizedLearning:
+                  field.enableIMEPersonalizedLearning,
+              contentInsertionConfiguration:
+                  field.contentInsertionConfiguration,
               contextMenuBuilder: field.contextMenuBuilder,
               canRequestFocus: field.canRequestFocus,
               undoController: field.undoController,
@@ -685,7 +738,9 @@ class _State extends FormFieldState<String> {
     if (widget.field.controller case final controller?) {
       controller.addListener(_handleTextEditingChange);
     } else {
-      _registerController(RestorableTextEditingController(text: widget.initialValue));
+      _registerController(
+        RestorableTextEditingController(text: widget.initialValue),
+      );
     }
   }
 
@@ -728,7 +783,9 @@ class _State extends FormFieldState<String> {
         }
 
       case (null, final old?):
-        _registerController(RestorableTextEditingController.fromValue(old.value));
+        _registerController(
+          RestorableTextEditingController.fromValue(old.value),
+        );
     }
   }
 
@@ -768,5 +825,6 @@ class _State extends FormFieldState<String> {
   @override
   _FormField get widget => super.widget as _FormField;
 
-  TextEditingController get _effectiveController => widget.field.controller ?? _controller!.value;
+  TextEditingController get _effectiveController =>
+      widget.field.controller ?? _controller!.value;
 }

@@ -16,7 +16,11 @@ extension FPortalShift on Never {
   /// Flips the portal to the opposite side of the [child] if it does not cause the [portal] to overflow out of the
   /// viewport. Otherwise shifts the portal along the [child]'s edge.
   static Offset flip(Size view, FPortalChildBox child, FPortalBox portal) {
-    var anchor = none(view, child, portal).translate(child.offset.dx, child.offset.dy);
+    var anchor = none(
+      view,
+      child,
+      portal,
+    ).translate(child.offset.dx, child.offset.dy);
 
     final viewBox = Offset.zero & view;
     final portalBox = anchor & portal.size;
@@ -53,38 +57,72 @@ extension FPortalShift on Never {
     return adjustedAnchor.translate(-child.offset.dx, -child.offset.dy);
   }
 
-  static Offset _flip(FPortalChildBox child, FPortalBox portal, {required bool x}) {
+  static Offset _flip(
+    FPortalChildBox child,
+    FPortalBox portal, {
+    required bool x,
+  }) {
     final (childAnchor, portalAnchor, portalOffset) =
         x
-            ? (child.anchor.flipX(), portal.anchor.flipX(), portal.offset.scale(1, -1))
-            : (child.anchor.flipY(), portal.anchor.flipY(), portal.offset.scale(-1, 1));
+            ? (
+              child.anchor.flipX(),
+              portal.anchor.flipX(),
+              portal.offset.scale(1, -1),
+            )
+            : (
+              child.anchor.flipY(),
+              portal.anchor.flipY(),
+              portal.offset.scale(-1, 1),
+            );
 
     // This is fucked if we don't want to flip one axis.
-    final anchor = childAnchor.relative(to: child.size) - portalAnchor.relative(to: portal.size, origin: portalOffset);
+    final anchor =
+        childAnchor.relative(to: child.size) -
+        portalAnchor.relative(to: portal.size, origin: portalOffset);
 
     return anchor.translate(child.offset.dx, child.offset.dy);
   }
 
   /// Shifts the [portal] along the [child]'s edge if the portal overflows out of the viewport.
   static Offset along(Size view, FPortalChildBox child, FPortalBox portal) {
-    final anchor = none(view, child, portal).translate(child.offset.dx, child.offset.dy);
+    final anchor = none(
+      view,
+      child,
+      portal,
+    ).translate(child.offset.dx, child.offset.dy);
 
     final viewBox = Offset.zero & view;
     final portalBox = anchor & portal.size;
 
-    return _along(anchor, viewBox, portalBox).translate(-child.offset.dx, -child.offset.dy);
+    return _along(
+      anchor,
+      viewBox,
+      portalBox,
+    ).translate(-child.offset.dx, -child.offset.dy);
   }
 
   static Offset _along(Offset anchor, Rect viewBox, Rect portalBox) {
     anchor = switch ((viewBox, portalBox)) {
-      _ when portalBox.left < viewBox.left => Offset(anchor.dx + (viewBox.left - portalBox.left), anchor.dy),
-      _ when viewBox.right < portalBox.right => Offset(anchor.dx - portalBox.right + viewBox.right, anchor.dy),
+      _ when portalBox.left < viewBox.left => Offset(
+        anchor.dx + (viewBox.left - portalBox.left),
+        anchor.dy,
+      ),
+      _ when viewBox.right < portalBox.right => Offset(
+        anchor.dx - portalBox.right + viewBox.right,
+        anchor.dy,
+      ),
       _ => anchor,
     };
 
     anchor = switch ((viewBox, portalBox)) {
-      _ when portalBox.top < viewBox.top => Offset(anchor.dx, anchor.dy + (viewBox.top - portalBox.top)),
-      _ when viewBox.bottom < portalBox.bottom => Offset(anchor.dx, anchor.dy - portalBox.bottom + viewBox.bottom),
+      _ when portalBox.top < viewBox.top => Offset(
+        anchor.dx,
+        anchor.dy + (viewBox.top - portalBox.top),
+      ),
+      _ when viewBox.bottom < portalBox.bottom => Offset(
+        anchor.dx,
+        anchor.dy - portalBox.bottom + viewBox.bottom,
+      ),
       _ => anchor,
     };
 
@@ -94,7 +132,10 @@ extension FPortalShift on Never {
   /// Does not perform any shifting if the [portal] overflows out of the viewport.
   static Offset none(Size _, FPortalChildBox child, FPortalBox portal) {
     final childAnchor = child.anchor.relative(to: child.size);
-    final portalAnchor = portal.anchor.relative(to: portal.size, origin: -portal.offset);
+    final portalAnchor = portal.anchor.relative(
+      to: portal.size,
+      origin: -portal.offset,
+    );
     return childAnchor - portalAnchor;
   }
 }

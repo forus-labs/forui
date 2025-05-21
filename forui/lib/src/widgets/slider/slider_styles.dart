@@ -22,29 +22,39 @@ class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   FSliderStyles({required this.horizontalStyle, required this.verticalStyle});
 
   /// Creates a [FSliderStyles] that inherits its properties.
-  FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        horizontalStyle: FSliderStyle.inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
-          labelAnchor: Alignment.topCenter,
-          labelOffset: 10,
-          descriptionPadding: const EdgeInsets.only(top: 10),
-          childPadding: const EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),
-        ),
-        verticalStyle: FSliderStyle.inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
-          labelAnchor: Alignment.centerRight,
-          labelOffset: -10,
-          tooltipTipAnchor: FTouch.primary ? Alignment.bottomCenter : Alignment.centerLeft,
-          tooltipThumbAnchor: FTouch.primary ? Alignment.topCenter : Alignment.centerRight,
-          descriptionPadding: const EdgeInsets.only(top: 5),
-          childPadding: const EdgeInsets.all(10),
-        ),
-      );
+  FSliderStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) : this(
+         horizontalStyle: FSliderStyle.inherit(
+           colors: colors,
+           typography: typography,
+           style: style,
+           labelAnchor: Alignment.topCenter,
+           labelOffset: 10,
+           descriptionPadding: const EdgeInsets.only(top: 10),
+           childPadding: const EdgeInsets.only(
+             top: 10,
+             bottom: 20,
+             left: 10,
+             right: 10,
+           ),
+         ),
+         verticalStyle: FSliderStyle.inherit(
+           colors: colors,
+           typography: typography,
+           style: style,
+           labelAnchor: Alignment.centerRight,
+           labelOffset: -10,
+           tooltipTipAnchor:
+               FTouch.primary ? Alignment.bottomCenter : Alignment.centerLeft,
+           tooltipThumbAnchor:
+               FTouch.primary ? Alignment.topCenter : Alignment.centerRight,
+           descriptionPadding: const EdgeInsets.only(top: 5),
+           childPadding: const EdgeInsets.all(10),
+         ),
+       );
 }
 
 /// A slider's style.
@@ -129,7 +139,10 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     super.descriptionPadding,
     super.errorPadding = const EdgeInsets.only(top: 5),
     super.childPadding,
-  }) : assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
+  }) : assert(
+         thumbSize == null || 0 < thumbSize,
+         'The thumb size must be positive',
+       ),
        thumbSize = thumbSize ?? (FTouch.primary ? 25 : 20);
 
   /// Creates a [FSliderStyle] that inherits its properties.
@@ -146,7 +159,10 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   }) : this(
          activeColor: FWidgetStateMap({
            WidgetState.error: colors.error,
-           WidgetState.disabled: colors.disable(colors.primary, colors.secondary),
+           WidgetState.disabled: colors.disable(
+             colors.primary,
+             colors.secondary,
+           ),
            WidgetState.any: colors.primary,
          }),
          inactiveColor: FWidgetStateMap.all(colors.secondary),
@@ -166,12 +182,18 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
            tickColor: FWidgetStateMap.all(colors.mutedForeground),
            labelTextStyle: FWidgetStateMap({
              WidgetState.error: typography.xs.copyWith(color: colors.error),
-             WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
+             WidgetState.any: typography.xs.copyWith(
+               color: colors.mutedForeground,
+             ),
            }),
            labelAnchor: labelAnchor,
            labelOffset: labelOffset,
          ),
-         tooltipStyle: FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
+         tooltipStyle: FTooltipStyle.inherit(
+           colors: colors,
+           typography: typography,
+           style: style,
+         ),
          tooltipTipAnchor: tooltipTipAnchor,
          tooltipThumbAnchor: tooltipThumbAnchor,
          labelTextStyle: style.formFieldStyle.labelTextStyle,

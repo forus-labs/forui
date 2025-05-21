@@ -142,7 +142,8 @@ class FTile extends StatelessWidget with FTileMixin {
     final tileData = FTileData.maybeOf(context);
 
     final pressable = onPress != null || onLongPress != null;
-    final style = this.style ?? tileData?.style ?? context.theme.tileGroupStyle.tileStyle;
+    final style =
+        this.style ?? tileData?.style ?? context.theme.tileGroupStyle.tileStyle;
     final stateStyle = pressable ? style.pressable : style.unpressable;
 
     final group = extractTileGroup(FTileGroupData.maybeOf(context));
@@ -177,9 +178,16 @@ class FTile extends StatelessWidget with FTileMixin {
             ),
             borderRadius: BorderRadius.only(
               topLeft: curveTop ? stateStyle.borderRadius.topLeft : Radius.zero,
-              topRight: curveTop ? stateStyle.borderRadius.topRight : Radius.zero,
-              bottomLeft: curveBottom ? stateStyle.borderRadius.bottomLeft : Radius.zero,
-              bottomRight: curveBottom ? stateStyle.borderRadius.bottomLeft : Radius.zero,
+              topRight:
+                  curveTop ? stateStyle.borderRadius.topRight : Radius.zero,
+              bottomLeft:
+                  curveBottom
+                      ? stateStyle.borderRadius.bottomLeft
+                      : Radius.zero,
+              bottomRight:
+                  curveBottom
+                      ? stateStyle.borderRadius.bottomLeft
+                      : Radius.zero,
             ),
           ),
           child: FTileData(
@@ -203,7 +211,14 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
-      ..add(StringProperty('semanticsLabel', semanticsLabel, defaultValue: null, quoted: false))
+      ..add(
+        StringProperty(
+          'semanticsLabel',
+          semanticsLabel,
+          defaultValue: null,
+          quoted: false,
+        ),
+      )
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
@@ -215,7 +230,8 @@ class FTile extends StatelessWidget with FTileMixin {
 }
 
 @internal
-({Set<WidgetState> states, int index, bool last, FTileDivider divider}) extractTile(FTileData? data) => (
+({Set<WidgetState> states, int index, bool last, FTileDivider divider})
+extractTile(FTileData? data) => (
   states: data?.states ?? {},
   index: data?.index ?? 0,
   last: data?.last ?? true,
@@ -228,7 +244,8 @@ class FTileData extends InheritedWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if there is no ancestor [FTile] in the given [context].
-  static FTileData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FTileData>();
+  static FTileData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FTileData>();
 
   /// The tile's style.
   final FTileStyle style;
@@ -297,14 +314,28 @@ class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
   FTileStyle({required this.pressable, required this.unpressable});
 
   /// Creates a [FTileStyle] that inherits its properties.
-  factory FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory FTileStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
     final border = FWidgetStateMap({
-      WidgetState.focused: Border.all(width: style.borderWidth, color: colors.primary),
-      WidgetState.any: Border.all(width: style.borderWidth, color: colors.border),
+      WidgetState.focused: Border.all(
+        width: style.borderWidth,
+        color: colors.primary,
+      ),
+      WidgetState.any: Border.all(
+        width: style.borderWidth,
+        color: colors.border,
+      ),
     });
 
     final divider = FWidgetStateMap({
-      WidgetState.any: FDividerStyle(color: colors.border, width: style.borderWidth, padding: EdgeInsets.zero),
+      WidgetState.any: FDividerStyle(
+        color: colors.border,
+        width: style.borderWidth,
+        padding: EdgeInsets.zero,
+      ),
     });
 
     return FTileStyle(
@@ -317,7 +348,10 @@ class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
           WidgetState.any: colors.background,
         }),
         dividerStyle: divider,
-        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
+        contentStyle: FTileContentStyle.inherit(
+          colors: colors,
+          typography: typography,
+        ),
         tappableStyle: style.tappableStyle.copyWith(
           animationTween: FTappableAnimations.none,
           pressedEnterDuration: Duration.zero,
@@ -332,7 +366,10 @@ class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
           WidgetState.any: colors.background,
         }),
         dividerStyle: divider,
-        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
+        contentStyle: FTileContentStyle.inherit(
+          colors: colors,
+          typography: typography,
+        ),
         tappableStyle: style.tappableStyle.copyWith(
           cursor: FWidgetStateMap.all(MouseCursor.defer),
           animationTween: FTappableAnimations.none,

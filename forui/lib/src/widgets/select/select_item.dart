@@ -37,7 +37,13 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   final List<FSelectItem<T>> children;
 
   /// Creates a [FSelectSection].
-  const FSelectSection({required this.label, required this.children, this.style, this.enabled, super.key});
+  const FSelectSection({
+    required this.label,
+    required this.children,
+    this.style,
+    this.enabled,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +61,10 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DefaultTextStyle(
-            style: enabled ? style.enabledLabelTextStyle : style.disabledLabelTextStyle,
+            style:
+                enabled
+                    ? style.enabledLabelTextStyle
+                    : style.disabledLabelTextStyle,
             child: Padding(padding: style.labelPadding, child: label),
           ),
           // There is an edge case where a non-first, enabled child of a disabled section will not be auto-focused.
@@ -79,7 +88,14 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+      ..add(
+        FlagProperty(
+          'enabled',
+          value: enabled,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      );
   }
 }
 
@@ -106,19 +122,34 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required this.enabledLabelTextStyle,
     required this.disabledLabelTextStyle,
     required this.itemStyle,
-    this.labelPadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.labelPadding = const EdgeInsetsDirectional.only(
+      start: 15,
+      top: 7.5,
+      bottom: 7.5,
+      end: 10,
+    ),
   });
 
   /// Creates a [FSelectSectionStyle] that inherits its properties.
-  FSelectSectionStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
-    : this(
-        enabledLabelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-        disabledLabelTextStyle: typography.sm.copyWith(
-          color: colors.disable(colors.primary),
-          fontWeight: FontWeight.w600,
-        ),
-        itemStyle: FSelectItemStyle.inherit(colors: colors, style: style, typography: typography),
-      );
+  FSelectSectionStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required FTypography typography,
+  }) : this(
+         enabledLabelTextStyle: typography.sm.copyWith(
+           color: colors.primary,
+           fontWeight: FontWeight.w600,
+         ),
+         disabledLabelTextStyle: typography.sm.copyWith(
+           color: colors.disable(colors.primary),
+           fontWeight: FontWeight.w600,
+         ),
+         itemStyle: FSelectItemStyle.inherit(
+           colors: colors,
+           style: style,
+           typography: typography,
+         ),
+       );
 }
 
 /// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].
@@ -170,7 +201,14 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('value', value))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+      ..add(
+        FlagProperty(
+          'enabled',
+          value: enabled,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      );
   }
 }
 
@@ -186,7 +224,10 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
         return;
       }
 
-      final SelectControllerData(:contains, :onPress) = SelectControllerData.of<T>(context);
+      final SelectControllerData(
+        :contains,
+        :onPress,
+      ) = SelectControllerData.of<T>(context);
       final content = SelectContentData.of<T>(context);
       if (contains(widget.value)) {
         content.ensureVisible(context);
@@ -196,13 +237,18 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final SelectControllerData(:contains, :onPress) = SelectControllerData.of<T>(context);
+    final SelectControllerData(
+      :contains,
+      :onPress,
+    ) = SelectControllerData.of<T>(context);
     final content = SelectContentData.of<T>(context);
 
     final selected = contains(widget.value);
     final enabled = widget.enabled ?? content.enabled;
     final style = widget.style ?? content.style.itemStyle;
-    final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+    final padding = style.padding.resolve(
+      Directionality.maybeOf(context) ?? TextDirection.ltr,
+    );
 
     Widget item = FTappable(
       style: style.tappableStyle,
@@ -215,12 +261,22 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
         final child = Semantics(
           selected: selected,
           child: Padding(
-            padding: padding.copyWith(left: padding.left - 4, right: padding.right - 4),
+            padding: padding.copyWith(
+              left: padding.left - 4,
+              right: padding.right - 4,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                DefaultTextStyle(style: style.textStyle.resolve(states), child: widget.child),
-                if (selected) IconTheme(data: style.iconStyle.resolve(states), child: widget.selectedIcon),
+                DefaultTextStyle(
+                  style: style.textStyle.resolve(states),
+                  child: widget.child,
+                ),
+                if (selected)
+                  IconTheme(
+                    data: style.iconStyle.resolve(states),
+                    child: widget.selectedIcon,
+                  ),
               ],
             ),
           ),
@@ -235,10 +291,17 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
     );
 
     if (enabled) {
-      item = MouseRegion(onEnter: (_) => _focus.requestFocus(), onExit: (_) => _focus.unfocus(), child: item);
+      item = MouseRegion(
+        onEnter: (_) => _focus.requestFocus(),
+        onExit: (_) => _focus.unfocus(),
+        child: item,
+      );
     }
 
-    return Padding(padding: const EdgeInsetsDirectional.only(start: 4, end: 4), child: item);
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 4, end: 4),
+      child: item,
+    );
   }
 
   @override
@@ -282,26 +345,44 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
     required this.textStyle,
     required this.iconStyle,
     required this.tappableStyle,
-    this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.padding = const EdgeInsetsDirectional.only(
+      start: 15,
+      top: 7.5,
+      bottom: 7.5,
+      end: 10,
+    ),
   });
 
   /// Creates a [FSelectItemStyle] that inherits its properties.
-  FSelectItemStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
-    : this(
-        decoration: FWidgetStateMap({
-          ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
-            color: colors.secondary,
-            borderRadius: style.borderRadius,
-          ),
-        }),
-        textStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
-          WidgetState.any: typography.sm.copyWith(color: colors.primary),
-        }),
-        iconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-        }),
-        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-      );
+  FSelectItemStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required FTypography typography,
+  }) : this(
+         decoration: FWidgetStateMap({
+           ~WidgetState.disabled &
+               (WidgetState.focused |
+                   WidgetState.hovered |
+                   WidgetState.pressed): BoxDecoration(
+             color: colors.secondary,
+             borderRadius: style.borderRadius,
+           ),
+         }),
+         textStyle: FWidgetStateMap({
+           WidgetState.disabled: typography.sm.copyWith(
+             color: colors.disable(colors.primary),
+           ),
+           WidgetState.any: typography.sm.copyWith(color: colors.primary),
+         }),
+         iconStyle: FWidgetStateMap({
+           WidgetState.disabled: IconThemeData(
+             color: colors.disable(colors.primary),
+             size: 15,
+           ),
+           WidgetState.any: IconThemeData(color: colors.primary, size: 15),
+         }),
+         tappableStyle: style.tappableStyle.copyWith(
+           animationTween: FTappableAnimations.none,
+         ),
+       );
 }

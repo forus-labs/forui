@@ -53,7 +53,9 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        final gesture = await tester.createGesture(
+          kind: PointerDeviceKind.mouse,
+        );
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -152,7 +154,9 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        final gesture = await tester.createGesture(
+          kind: PointerDeviceKind.mouse,
+        );
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
 
@@ -186,7 +190,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/disabled-${theme.name}.png'),
+          matchesGoldenFile(
+            'select-tile-group/tile/disabled-${theme.name}.png',
+          ),
         );
       });
 
@@ -234,7 +240,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/suffix-checked-${theme.name}.png'),
+          matchesGoldenFile(
+            'select-tile-group/tile/suffix-checked-${theme.name}.png',
+          ),
         );
       });
 
@@ -258,7 +266,9 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-tile-group/tile/suffix-unchecked-${theme.name}.png'),
+          matchesGoldenFile(
+            'select-tile-group/tile/suffix-unchecked-${theme.name}.png',
+          ),
         );
       });
     }

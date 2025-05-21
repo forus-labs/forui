@@ -61,7 +61,13 @@ class _InputDateField extends FDateField {
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(
+        FlagProperty(
+          'canRequestFocus',
+          value: canRequestFocus,
+          ifTrue: 'canRequestFocus',
+        ),
+      )
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
       ..add(DiagnosticsProperty('calendar', calendar))
       ..add(IntProperty('baselineInputYear', baselineInputYear));
@@ -88,7 +94,9 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         old.controller?.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FDateFieldController(vsync: this, initialDate: _controller.value);
+      _controller =
+          widget.controller ??
+          FDateFieldController(vsync: this, initialDate: _controller.value);
       _controller.addValueListener(_onChange);
     }
 
@@ -103,38 +111,47 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.dateFieldStyle;
 
-    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefix = switch (widget.prefixBuilder) {
-      null => null,
-      final builder when widget.calendar != null =>
-        (context, styles, child) => MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: builder(context, (style, styles.$1, styles.$2), child),
-        ),
-      final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
-    };
+    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefix =
+        switch (widget.prefixBuilder) {
+          null => null,
+          final builder when widget.calendar != null =>
+            (context, styles, child) => MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: builder(context, (style, styles.$1, styles.$2), child),
+            ),
+          final builder =>
+            (context, styles, child) =>
+                builder(context, (style, styles.$1, styles.$2), child),
+        };
 
-    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffix = switch (widget.suffixBuilder) {
-      null => null,
-      final builder when widget.calendar != null =>
-        (context, styles, child) => MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: builder(context, (style, styles.$1, styles.$2), child),
-        ),
-      final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
-    };
+    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffix =
+        switch (widget.suffixBuilder) {
+          null => null,
+          final builder when widget.calendar != null =>
+            (context, styles, child) => MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: builder(context, (style, styles.$1, styles.$2), child),
+            ),
+          final builder =>
+            (context, styles, child) =>
+                builder(context, (style, styles.$1, styles.$2), child),
+        };
 
-    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder = switch (widget.calendar) {
-      null => (context, data, child) => widget.builder(context, (style, data.$1, data.$2), child!),
-      final properties =>
-        (context, data, child) => _CalendarPopover(
-          controller: _controller,
-          style: style,
-          properties: properties,
-          autofocus: false,
-          fieldFocusNode: null,
-          child: widget.builder(context, (style, data.$1, data.$2), child!),
-        ),
-    };
+    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder =
+        switch (widget.calendar) {
+          null =>
+            (context, data, child) =>
+                widget.builder(context, (style, data.$1, data.$2), child!),
+          final properties =>
+            (context, data, child) => _CalendarPopover(
+              controller: _controller,
+              style: style,
+              properties: properties,
+              autofocus: false,
+              fieldFocusNode: null,
+              child: widget.builder(context, (style, data.$1, data.$2), child!),
+            ),
+        };
 
     return CallbackShortcuts(
       bindings: {

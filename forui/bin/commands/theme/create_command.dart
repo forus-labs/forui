@@ -44,11 +44,17 @@ class ThemeCreateCommand extends ForuiCommand {
 
   ThemeCreateCommand(this.configuration) {
     argParser
-      ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
+      ..addFlag(
+        'force',
+        abbr: 'f',
+        help: 'Overwrite existing files if they exist.',
+        negatable: false,
+      )
       ..addOption(
         'output',
         abbr: 'o',
-        help: 'The output directory or file, relative to the project directory.',
+        help:
+            'The output directory or file, relative to the project directory.',
         defaultsTo: configuration.theme,
       );
   }
@@ -78,7 +84,10 @@ class ThemeCreateCommand extends ForuiCommand {
     }
 
     final suggestions =
-        registry.keys.map((e) => (e, e.startsWith(theme) ? 1 : distance(theme, e))).where((e) => e.$2 <= 3).toList()
+        registry.keys
+            .map((e) => (e, e.startsWith(theme) ? 1 : distance(theme, e)))
+            .where((e) => e.$2 <= 3)
+            .toList()
           ..sort((a, b) => a.$2.compareTo(b.$2));
 
     stdout.writeln('Could not find a theme named "$theme".');
@@ -100,7 +109,12 @@ class ThemeCreateCommand extends ForuiCommand {
     return false;
   }
 
-  void _generate(String argument, {required bool input, required bool force, required String output}) {
+  void _generate(
+    String argument, {
+    required bool input,
+    required bool force,
+    required String output,
+  }) {
     final theme = registry[argument]!;
     final fileName = theme.toSnakeCase();
     final path =
@@ -126,7 +140,9 @@ class ThemeCreateCommand extends ForuiCommand {
     stdout
       ..writeln('${emoji ? '✅' : '[Done]'} $path')
       ..writeln()
-      ..writeln('See https://forui.dev/docs/themes#customize-themes for how to use the generated theme.');
+      ..writeln(
+        'See https://forui.dev/docs/themes#customize-themes for how to use the generated theme.',
+      );
   }
 
   void _prompt(String existing, {required bool input}) {
@@ -136,7 +152,9 @@ class ThemeCreateCommand extends ForuiCommand {
     }
 
     while (true) {
-      stdout.write('${emoji ? '⚠️' : '[Warning]'} $existing already exists. Overwrite it? [Y/n] ');
+      stdout.write(
+        '${emoji ? '⚠️' : '[Warning]'} $existing already exists. Overwrite it? [Y/n] ',
+      );
 
       switch (stdin.readLineSync()) {
         case 'y' || 'Y' || '':
@@ -144,7 +162,9 @@ class ThemeCreateCommand extends ForuiCommand {
         case 'n' || 'N':
           exit(0);
         default:
-          stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
+          stdout.writeln(
+            'Invalid option. Please enter enter either "y" or "n".',
+          );
       }
     }
   }

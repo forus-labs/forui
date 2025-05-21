@@ -18,13 +18,25 @@ void main() {
       expect(time.minute, 30);
     });
 
-    test('hour is less than 0', () => expect(() => FTime(-1), throwsAssertionError));
+    test(
+      'hour is less than 0',
+      () => expect(() => FTime(-1), throwsAssertionError),
+    );
 
-    test('hour is greater than 23', () => expect(() => FTime(24), throwsAssertionError));
+    test(
+      'hour is greater than 23',
+      () => expect(() => FTime(24), throwsAssertionError),
+    );
 
-    test(' minute is less than 0', () => expect(() => FTime(0, -1), throwsAssertionError));
+    test(
+      ' minute is less than 0',
+      () => expect(() => FTime(0, -1), throwsAssertionError),
+    );
 
-    test('minute is greater than 59', () => expect(() => FTime(0, 60), throwsAssertionError));
+    test(
+      'minute is greater than 59',
+      () => expect(() => FTime(0, 60), throwsAssertionError),
+    );
 
     test('given DateTime', () {
       final time = FTime.fromDateTime(DateTime(2022, 1, 1, 12, 30));

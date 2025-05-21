@@ -17,13 +17,25 @@ void main() {
               body: SingleChildScrollView(
                 child: Text.rich(
                   WidgetSpan(
-                    child: Stack(children: [Container(height: 200, width: double.infinity, color: Colors.red)]),
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 200,
+                          width: double.infinity,
+                          color: Colors.red,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
               actions: [
                 FButton(child: const Text('Continue'), onPress: () {}),
-                FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () {}),
+                FButton(
+                  style: FButtonStyle.outline,
+                  child: const Text('Cancel'),
+                  onPress: () {},
+                ),
               ],
             ),
           ),

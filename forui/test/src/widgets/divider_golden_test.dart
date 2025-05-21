@@ -10,7 +10,10 @@ void main() {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FDivider(style: TestScaffold.blueScreen.dividerStyles.verticalStyle, axis: Axis.vertical),
+          child: FDivider(
+            style: TestScaffold.blueScreen.dividerStyles.verticalStyle,
+            axis: Axis.vertical,
+          ),
         ),
       );
 
@@ -45,12 +48,21 @@ void main() {
               theme: theme.data,
               child:
                   axis == Axis.vertical
-                      ? Row(mainAxisAlignment: MainAxisAlignment.center, children: children)
-                      : Column(mainAxisAlignment: MainAxisAlignment.center, children: children),
+                      ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: children,
+                      )
+                      : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: children,
+                      ),
             ),
           );
 
-          await expectLater(find.byType(TestScaffold), matchesGoldenFile('divider/${theme.name}-$axis.png'));
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('divider/${theme.name}-$axis.png'),
+          );
         });
       }
     }

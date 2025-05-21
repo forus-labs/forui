@@ -13,8 +13,12 @@ abstract class InputController extends TextEditingController {
   final String placeholder;
   bool mutating = false;
 
-  InputController(this.style, this.parser, this.placeholder, TextEditingValue? value)
-    : statesController = WidgetStatesController(),
+  InputController(
+    this.style,
+    this.parser,
+    this.placeholder,
+    TextEditingValue? value,
+  ) : statesController = WidgetStatesController(),
       super.fromValue(value);
 
   void traverse({required bool forward});
@@ -29,7 +33,9 @@ abstract class InputController extends TextEditingController {
 
     final TextSelection(:baseOffset, :extentOffset) = value.selection;
     // Selected everything without doing anything else.
-    if (baseOffset == 0 && extentOffset == value.text.length && text == value.text) {
+    if (baseOffset == 0 &&
+        extentOffset == value.text.length &&
+        text == value.text) {
       super.value = value;
       return;
     }
@@ -41,7 +47,10 @@ abstract class InputController extends TextEditingController {
       super.value = switch (value) {
         _ when value.text.isEmpty => TextEditingValue(
           text: placeholder,
-          selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length),
+          selection: TextSelection(
+            baseOffset: 0,
+            extentOffset: placeholder.length,
+          ),
         ),
         _ when text != value.text => _update(value),
         _ => selector.resolve(value) ?? this.value,
@@ -71,7 +80,10 @@ abstract class InputController extends TextEditingController {
 
       case Many():
         final text = selector.join(parts);
-        return TextEditingValue(text: text, selection: TextSelection(baseOffset: 0, extentOffset: text.length));
+        return TextEditingValue(
+          text: text,
+          selection: TextSelection(baseOffset: 0, extentOffset: text.length),
+        );
     }
   }
 
@@ -84,7 +96,11 @@ abstract class InputController extends TextEditingController {
   set rawValue(TextEditingValue value) => super.value = value; // ignore: avoid_setters_without_getters
 
   @override
-  TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
+  TextSpan buildTextSpan({
+    required BuildContext context,
+    required bool withComposing,
+    TextStyle? style,
+  }) {
     if (text == placeholder) {
       final states = statesController.value;
       // TODO: explore custom widget states.
@@ -94,6 +110,10 @@ abstract class InputController extends TextEditingController {
               : this.style.hintTextStyle.maybeResolve({}) ?? style;
     }
 
-    return super.buildTextSpan(context: context, withComposing: withComposing, style: style);
+    return super.buildTextSpan(
+      context: context,
+      withComposing: withComposing,
+      style: style,
+    );
   }
 }

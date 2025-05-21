@@ -24,8 +24,12 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
   });
 
   @override
-  RenderBox createRenderObject(BuildContext _) =>
-      _ShiftedSheet(side: side, value: value, mainAxisMaxRatio: mainAxisMaxRatio, onChange: onChange);
+  RenderBox createRenderObject(BuildContext _) => _ShiftedSheet(
+    side: side,
+    value: value,
+    mainAxisMaxRatio: mainAxisMaxRatio,
+    onChange: onChange,
+  );
 
   @override
   // ignore: library_private_types_in_public_api
@@ -71,11 +75,15 @@ class _ShiftedSheet extends RenderShiftedBox {
 
     if (child case final child?) {
       final childConstraints = constrainChild(constraints);
-      assert(childConstraints.debugAssertIsValid(isAppliedConstraint: true), '');
+      assert(
+        childConstraints.debugAssertIsValid(isAppliedConstraint: true),
+        '',
+      );
 
       child.layout(childConstraints, parentUsesSize: !childConstraints.isTight);
 
-      final childSize = childConstraints.isTight ? childConstraints.smallest : child.size;
+      final childSize =
+          childConstraints.isTight ? childConstraints.smallest : child.size;
       child.data.offset = positionChild(size, childSize);
 
       if (_previous != childSize) {
@@ -86,7 +94,10 @@ class _ShiftedSheet extends RenderShiftedBox {
   }
 
   @override
-  double? computeDryBaseline(covariant BoxConstraints constraints, TextBaseline baseline) {
+  double? computeDryBaseline(
+    covariant BoxConstraints constraints,
+    TextBaseline baseline,
+  ) {
     if (child case final child?) {
       final childConstraints = constrainChild(constraints);
       final result = child.getDryBaseline(childConstraints, baseline);
@@ -94,7 +105,10 @@ class _ShiftedSheet extends RenderShiftedBox {
         return null;
       }
 
-      final childSize = childConstraints.isTight ? childConstraints.smallest : child.getDryLayout(childConstraints);
+      final childSize =
+          childConstraints.isTight
+              ? childConstraints.smallest
+              : child.getDryLayout(childConstraints);
       return result + positionChild(constraints.biggest, childSize).dy;
     }
 
@@ -106,10 +120,16 @@ class _ShiftedSheet extends RenderShiftedBox {
           ? BoxConstraints(
             minWidth: constraints.maxWidth,
             maxWidth: constraints.maxWidth,
-            maxHeight: _mainAxisMaxRatio == null ? constraints.maxHeight : constraints.maxHeight * _mainAxisMaxRatio!,
+            maxHeight:
+                _mainAxisMaxRatio == null
+                    ? constraints.maxHeight
+                    : constraints.maxHeight * _mainAxisMaxRatio!,
           )
           : BoxConstraints(
-            maxWidth: _mainAxisMaxRatio == null ? constraints.maxWidth : constraints.maxWidth * _mainAxisMaxRatio!,
+            maxWidth:
+                _mainAxisMaxRatio == null
+                    ? constraints.maxWidth
+                    : constraints.maxWidth * _mainAxisMaxRatio!,
             minHeight: constraints.maxHeight,
             maxHeight: constraints.maxHeight,
           );

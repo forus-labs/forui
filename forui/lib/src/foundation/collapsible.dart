@@ -25,7 +25,10 @@ class FCollapsible extends StatelessWidget {
     // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
     // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
     // child to layout at a smaller size while the amount of padding remains the same.
-    return _Expandable(value: value, child: ClipRect(clipper: _Clipper(value), child: child));
+    return _Expandable(
+      value: value,
+      child: ClipRect(clipper: _Clipper(value), child: child),
+    );
   }
 
   @override
@@ -44,7 +47,10 @@ class _Expandable extends SingleChildRenderObjectWidget {
   RenderObject createRenderObject(BuildContext _) => _RenderExpandable(value);
 
   @override
-  void updateRenderObject(BuildContext context, _RenderExpandable renderObject) => renderObject..value = value;
+  void updateRenderObject(
+    BuildContext context,
+    _RenderExpandable renderObject,
+  ) => renderObject..value = value;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -53,7 +59,8 @@ class _Expandable extends SingleChildRenderObjectWidget {
   }
 }
 
-class _RenderExpandable extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
+class _RenderExpandable extends RenderBox
+    with RenderObjectWithChildMixin<RenderBox> {
   double _value;
 
   _RenderExpandable(this._value);
@@ -109,8 +116,10 @@ class _Clipper extends CustomClipper<Rect> {
   _Clipper(this.percentage);
 
   @override
-  Rect getClip(Size size) => Offset.zero & Size(size.width, size.height * percentage);
+  Rect getClip(Size size) =>
+      Offset.zero & Size(size.width, size.height * percentage);
 
   @override
-  bool shouldReclip(covariant _Clipper oldClipper) => oldClipper.percentage != percentage;
+  bool shouldReclip(covariant _Clipper oldClipper) =>
+      oldClipper.percentage != percentage;
 }

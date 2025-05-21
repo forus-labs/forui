@@ -21,7 +21,12 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   final bool focused;
 
   /// Creates a [FFocusedOutline].
-  const FFocusedOutline({required this.focused, required super.child, this.style, super.key});
+  const FFocusedOutline({
+    required this.focused,
+    required super.child,
+    this.style,
+    super.key,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) => _Outline(
@@ -53,7 +58,8 @@ class _Outline extends RenderProxyBox {
   TextDirection _textDirection;
   bool _focused;
 
-  _Outline(this._style, this._textDirection, {required bool focused}) : _focused = focused;
+  _Outline(this._style, this._textDirection, {required bool focused})
+    : _focused = focused;
 
   @override
   void paint(PaintingContext context, Offset offset) {
@@ -79,7 +85,8 @@ class _Outline extends RenderProxyBox {
   }
 
   @override
-  Rect get paintBounds => _focused ? child!.paintBounds.inflate(_style.spacing) : super.paintBounds;
+  Rect get paintBounds =>
+      _focused ? child!.paintBounds.inflate(_style.spacing) : super.paintBounds;
 
   FFocusedOutlineStyle get style => _style;
 
@@ -119,7 +126,8 @@ class _Outline extends RenderProxyBox {
 }
 
 /// The [FFocusedOutline]'s style.
-class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions {
+class FFocusedOutlineStyle
+    with Diagnosticable, _$FFocusedOutlineStyleFunctions {
   /// The outline's color.
   @override
   final Color color;
@@ -140,6 +148,10 @@ class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions 
   final double spacing;
 
   /// Creates a [FFocusedOutlineStyle].
-  const FFocusedOutlineStyle({required this.color, required this.borderRadius, this.width = 1, this.spacing = 3})
-    : assert(0 < width, 'The width must be greater than 0.');
+  const FFocusedOutlineStyle({
+    required this.color,
+    required this.borderRadius,
+    this.width = 1,
+    this.spacing = 3,
+  }) : assert(0 < width, 'The width must be greater than 0.');
 }

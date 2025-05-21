@@ -17,7 +17,10 @@ void main() {
               FHeaderAction.back(onPress: () {}),
               const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
             ],
-            suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
+            suffixes: [
+              FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+              FHeaderAction.x(onPress: () {}),
+            ],
           ),
         ),
       );
@@ -34,23 +37,44 @@ void main() {
               title: const Text('Title'),
               prefixes: [
                 FHeaderAction.back(onPress: () {}),
-                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+                const FHeaderAction(
+                  icon: Icon(FIcons.alarmClock),
+                  onPress: null,
+                ),
               ],
-              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
+              suffixes: [
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+                FHeaderAction.x(onPress: () {}),
+              ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('header/nested/${theme.name}.png'),
+        );
       });
 
-      testWidgets('${theme.name} with no FNestedHeader actions', (tester) async {
-        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FHeader.nested(title: Text('Title'))));
+      testWidgets('${theme.name} with no FNestedHeader actions', (
+        tester,
+      ) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: const FHeader.nested(title: Text('Title')),
+          ),
+        );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-no-actions.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('header/nested/${theme.name}-no-actions.png'),
+        );
       });
 
-      testWidgets('${theme.name} with focused FNestedHeader actions', (tester) async {
+      testWidgets('${theme.name} with focused FNestedHeader actions', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
@@ -58,20 +82,32 @@ void main() {
               title: const Text('Title'),
               prefixes: [
                 FHeaderAction.back(onPress: () {}),
-                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+                const FHeaderAction(
+                  icon: Icon(FIcons.alarmClock),
+                  onPress: null,
+                ),
               ],
               suffixes: [
-                FHeaderAction(autofocus: true, icon: const Icon(FIcons.plus), onPress: () {}),
+                FHeaderAction(
+                  autofocus: true,
+                  icon: const Icon(FIcons.plus),
+                  onPress: () {},
+                ),
                 FHeaderAction.x(onPress: () {}),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-focused.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('header/nested/${theme.name}-focused.png'),
+        );
       });
 
-      testWidgets('${theme.name} with RTL FNestedHeader actions', (tester) async {
+      testWidgets('${theme.name} with RTL FNestedHeader actions', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -80,22 +116,56 @@ void main() {
               title: const Text('Title'),
               prefixes: [
                 FHeaderAction.back(onPress: () {}),
-                const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+                const FHeaderAction(
+                  icon: Icon(FIcons.alarmClock),
+                  onPress: null,
+                ),
               ],
-              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
+              suffixes: [
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+                FHeaderAction.x(onPress: () {}),
+              ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-rtl.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('header/nested/${theme.name}-rtl.png'),
+        );
       });
 
-      testWidgets('${theme.name} with prefix + title aligned start + no suffix', (tester) async {
+      testWidgets(
+        '${theme.name} with prefix + title aligned start + no suffix',
+        (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FHeader.nested(
+                titleAlignment: Alignment.centerLeft,
+                title: const Text('Title'),
+                prefixes: [FHeaderAction.back(onPress: () {})],
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile(
+              'header/nested/${theme.name}-prefix-start-no-suffix.png',
+            ),
+          );
+        },
+      );
+
+      testWidgets('${theme.name} with prefix + title aligned end + no suffix', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FHeader.nested(
-              titleAlignment: Alignment.centerLeft,
+              titleAlignment: Alignment.centerRight,
               title: const Text('Title'),
               prefixes: [FHeaderAction.back(onPress: () {})],
             ),
@@ -104,91 +174,104 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('header/nested/${theme.name}-prefix-start-no-suffix.png'),
+          matchesGoldenFile(
+            'header/nested/${theme.name}-prefix-end-no-suffix.png',
+          ),
         );
       });
 
-      testWidgets('${theme.name} with prefix + title aligned end + no suffix', (tester) async {
+      testWidgets(
+        '${theme.name} with no prefix + title aligned start + suffix',
+        (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FHeader.nested(
+                titleAlignment: Alignment.centerLeft,
+                title: const Text('Title'),
+                suffixes: [
+                  FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+                ],
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile(
+              'header/nested/${theme.name}-no-prefix-start-suffix.png',
+            ),
+          );
+        },
+      );
+
+      testWidgets('${theme.name} with no prefix + title aligned end + suffix', (
+        tester,
+      ) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FHeader.nested(
               titleAlignment: Alignment.centerRight,
               title: const Text('Title'),
-              prefixes: [FHeaderAction.back(onPress: () {})],
+              suffixes: [
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+              ],
             ),
           ),
         );
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('header/nested/${theme.name}-prefix-end-no-suffix.png'),
+          matchesGoldenFile(
+            'header/nested/${theme.name}-no-prefix-end-suffix.png',
+          ),
         );
       });
 
-      testWidgets('${theme.name} with no prefix + title aligned start + suffix', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: FHeader.nested(
-              titleAlignment: Alignment.centerLeft,
-              title: const Text('Title'),
-              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+      testWidgets(
+        '${theme.name} with no prefix + title aligned start + no suffix',
+        (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: const FHeader.nested(
+                titleAlignment: Alignment.centerLeft,
+                title: Text('Title'),
+              ),
             ),
-          ),
-        );
+          );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('header/nested/${theme.name}-no-prefix-start-suffix.png'),
-        );
-      });
-
-      testWidgets('${theme.name} with no prefix + title aligned end + suffix', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: FHeader.nested(
-              titleAlignment: Alignment.centerRight,
-              title: const Text('Title'),
-              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile(
+              'header/nested/${theme.name}-no-prefix-start-no-suffix.png',
             ),
-          ),
-        );
+          );
+        },
+      );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('header/nested/${theme.name}-no-prefix-end-suffix.png'),
-        );
-      });
+      testWidgets(
+        '${theme.name} with no prefix + title aligned end + no suffix',
+        (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: const FHeader.nested(
+                titleAlignment: Alignment.centerRight,
+                title: Text('Title'),
+              ),
+            ),
+          );
 
-      testWidgets('${theme.name} with no prefix + title aligned start + no suffix', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: const FHeader.nested(titleAlignment: Alignment.centerLeft, title: Text('Title')),
-          ),
-        );
-
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('header/nested/${theme.name}-no-prefix-start-no-suffix.png'),
-        );
-      });
-
-      testWidgets('${theme.name} with no prefix + title aligned end + no suffix', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            theme: theme.data,
-            child: const FHeader.nested(titleAlignment: Alignment.centerRight, title: Text('Title')),
-          ),
-        );
-
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('header/nested/${theme.name}-no-prefix-end-no-suffix.png'),
-        );
-      });
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile(
+              'header/nested/${theme.name}-no-prefix-end-no-suffix.png',
+            ),
+          );
+        },
+      );
     }
   });
 }

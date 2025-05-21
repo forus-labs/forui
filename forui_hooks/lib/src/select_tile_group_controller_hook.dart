@@ -11,5 +11,7 @@ FSelectTileGroupController<T> useFSelectTileGroupController<T>({
 }) => useFMultiValueNotifier<T>(values: values, min: min, max: max, keys: keys);
 
 /// Creates a [FSelectTileGroupController] that allows only one element at a time.
-FSelectTileGroupController<T> useFRadioSelectMenuTileGroupController<T>({T? value, List<Object?>? keys}) =>
-    useFRadioMultiValueNotifier<T>(value: value, keys: keys);
+FSelectTileGroupController<T> useFRadioSelectMenuTileGroupController<T>({
+  T? value,
+  List<Object?>? keys,
+}) => useFRadioMultiValueNotifier<T>(value: value, keys: keys);

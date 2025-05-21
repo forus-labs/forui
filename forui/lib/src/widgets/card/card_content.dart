@@ -15,7 +15,14 @@ class Content extends StatelessWidget {
   final Widget? child;
   final FCardContentStyle? style;
 
-  const Content({this.image, this.title, this.subtitle, this.child, this.style, super.key});
+  const Content({
+    this.image,
+    this.title,
+    this.subtitle,
+    this.child,
+    this.style,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +32,13 @@ class Content extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (image case final image?) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
-          if ((title != null || subtitle != null || child != null) && image != null)
+          if (image case final image?)
+            ClipRRect(
+              borderRadius: context.theme.style.borderRadius,
+              child: image,
+            ),
+          if ((title != null || subtitle != null || child != null) &&
+              image != null)
             SizedBox(height: style.imageSpacing),
           if (title case final title?)
             DefaultTextStyle.merge(
@@ -46,7 +58,8 @@ class Content extends StatelessWidget {
               style: style.subtitleTextStyle,
               child: subtitle,
             ),
-          if (title != null && subtitle != null && image == null) SizedBox(height: style.subtitleSpacing),
+          if (title != null && subtitle != null && image == null)
+            SizedBox(height: style.subtitleSpacing),
           if (child case final child?) child,
         ],
       ),

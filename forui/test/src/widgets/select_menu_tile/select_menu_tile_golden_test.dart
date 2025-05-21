@@ -67,14 +67,19 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
             ),
           ),
         );
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select-menu-tile/enabled-hidden-${theme.name}.png'),
+          matchesGoldenFile(
+            'select-menu-tile/enabled-hidden-${theme.name}.png',
+          ),
         );
       });
 
@@ -90,7 +95,10 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
             ),
           ),
         );
@@ -145,12 +153,18 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/disabled-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select-menu-tile/disabled-${theme.name}.png'),
+        );
       });
 
       testWidgets('error - hidden - ${theme.name}', (tester) async {
@@ -166,12 +180,18 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/error-${theme.name}.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select-menu-tile/error-${theme.name}.png'),
+        );
       });
     }
   });
@@ -186,7 +206,9 @@ void main() {
             description: const Text('Description'),
             maxHeight: 250,
             title: const Text('Title'),
-            menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            menuBuilder:
+                (context, index) =>
+                    FSelectTile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -194,7 +216,10 @@ void main() {
       await tester.tap(find.byType(FSelectMenuTile<int>));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/lazy.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select-menu-tile/builder/lazy.png'),
+      );
     });
 
     testWidgets('limited by count', (tester) async {
@@ -207,7 +232,9 @@ void main() {
             maxHeight: 500,
             count: 2,
             title: const Text('Title'),
-            menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+            menuBuilder:
+                (context, index) =>
+                    FSelectTile(title: Text('Tile $index'), value: index),
           ),
         ),
       );
@@ -215,7 +242,10 @@ void main() {
       await tester.tap(find.byType(FSelectMenuTile<int>));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/count-limited.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select-menu-tile/builder/count-limited.png'),
+      );
     });
 
     testWidgets('limited by returning null', (tester) async {
@@ -228,7 +258,11 @@ void main() {
             maxHeight: 500,
             count: 24,
             title: const Text('Title'),
-            menuBuilder: (context, index) => index < 2 ? FSelectTile(title: Text('Tile $index'), value: index) : null,
+            menuBuilder:
+                (context, index) =>
+                    index < 2
+                        ? FSelectTile(title: Text('Tile $index'), value: index)
+                        : null,
           ),
         ),
       );
@@ -236,7 +270,10 @@ void main() {
       await tester.tap(find.byType(FSelectMenuTile<int>));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/null-limited.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select-menu-tile/builder/null-limited.png'),
+      );
     });
   });
 

@@ -10,11 +10,15 @@ import 'package:forui/forui.dart';
 import 'threshold_file_comparator.dart';
 
 final relativePath =
-    Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
+    Directory.current.path.contains('forui${Platform.pathSeparator}forui')
+        ? '.'
+        : '${Directory.current.path}/forui';
 
-MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
+MatchesGoldenFile get isBlueScreen =>
+    MatchesGoldenFile.forStringPath(blueScreen, null);
 
-Future<void> expectBlueScreen(dynamic actual) => expectLater(actual, isBlueScreen);
+Future<void> expectBlueScreen(dynamic actual) =>
+    expectLater(actual, isBlueScreen);
 
 T autoDispose<T>(T disposable) {
   // We cast this to dynamic as there isn't a standard Disposable interface.
@@ -23,7 +27,9 @@ T autoDispose<T>(T disposable) {
 }
 
 extension WidgetTesters on WidgetTester {
-  Future<TestGesture> createPointerGesture({PointerDeviceKind kind = PointerDeviceKind.mouse}) async {
+  Future<TestGesture> createPointerGesture({
+    PointerDeviceKind kind = PointerDeviceKind.mouse,
+  }) async {
     final gesture = await createGesture(kind: kind);
     await gesture.addPointer(location: Offset.zero);
     addTearDown(gesture.removePointer);
@@ -52,7 +58,10 @@ class TestScaffold extends StatelessWidget {
       border: Color(0xFF03A9F4),
     );
     final typography = FTypography.inherit(colors: colors);
-    final style = FStyle.inherit(colors: colors, typography: typography).copyWith(shadow: []);
+    final style = FStyle.inherit(
+      colors: colors,
+      typography: typography,
+    ).copyWith(shadow: []);
 
     return FThemeData(colors: colors, typography: typography, style: style);
   }();
@@ -82,8 +91,12 @@ class TestScaffold extends StatelessWidget {
   }) : theme = theme ?? FThemes.zinc.light,
        locale = null,
        background = switch ((theme, background)) {
-         (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
-         (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
+         (final theme, null) when theme == FThemes.zinc.light => const Color(
+           0xFFEEFFFF,
+         ),
+         (final theme, null) when theme == FThemes.zinc.dark => const Color(
+           0xFF06111C,
+         ),
          (_, final background) => background,
        },
        wrapped = false;
@@ -99,19 +112,26 @@ class TestScaffold extends StatelessWidget {
     super.key,
   }) : theme = theme ?? FThemes.zinc.light,
        background = switch ((theme, background)) {
-         (final theme, null) when theme == FThemes.zinc.light => const Color(0xFFEEFFFF),
-         (final theme, null) when theme == FThemes.zinc.dark => const Color(0xFF06111C),
+         (final theme, null) when theme == FThemes.zinc.light => const Color(
+           0xFFEEFFFF,
+         ),
+         (final theme, null) when theme == FThemes.zinc.dark => const Color(
+           0xFF06111C,
+         ),
          (_, final background) => background,
        },
        wrapped = true;
 
-  TestScaffold.blue({required this.child, this.alignment = Alignment.center, super.key})
-    : theme = FThemes.zinc.light,
-      background = blueScreen.colors.background,
-      locale = null,
-      textDirection = null,
-      padded = false,
-      wrapped = true;
+  TestScaffold.blue({
+    required this.child,
+    this.alignment = Alignment.center,
+    super.key,
+  }) : theme = FThemes.zinc.light,
+       background = blueScreen.colors.background,
+       locale = null,
+       textDirection = null,
+       padded = false,
+       wrapped = true;
 
   @override
   Widget build(BuildContext context) {

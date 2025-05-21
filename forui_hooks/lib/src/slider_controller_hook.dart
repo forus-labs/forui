@@ -40,7 +40,8 @@ class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
   });
 
   @override
-  _ContinuousControllerHookState createState() => _ContinuousControllerHookState();
+  _ContinuousControllerHookState createState() =>
+      _ContinuousControllerHookState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -48,20 +49,36 @@ class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
     properties
       ..add(DiagnosticsProperty('selection', selection))
       ..add(PercentProperty('stepPercentage', stepPercentage))
-      ..add(FlagProperty('tooltips', value: tooltips, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(
+        FlagProperty(
+          'tooltips',
+          value: tooltips,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      )
       ..add(EnumProperty('allowedInteraction', allowedInteraction))
-      ..add(FlagProperty('minExtendable', value: minExtendable, ifTrue: 'min extendable', ifFalse: 'max extendable'));
+      ..add(
+        FlagProperty(
+          'minExtendable',
+          value: minExtendable,
+          ifTrue: 'min extendable',
+          ifFalse: 'max extendable',
+        ),
+      );
   }
 }
 
-class _ContinuousControllerHookState extends HookState<FContinuousSliderController, _ContinuousControllerHook> {
-  late final FContinuousSliderController _controller = FContinuousSliderController(
-    selection: hook.selection,
-    stepPercentage: hook.stepPercentage,
-    allowedInteraction: hook.allowedInteraction,
-    tooltips: hook.tooltips,
-    minExtendable: hook.minExtendable,
-  );
+class _ContinuousControllerHookState
+    extends HookState<FContinuousSliderController, _ContinuousControllerHook> {
+  late final FContinuousSliderController _controller =
+      FContinuousSliderController(
+        selection: hook.selection,
+        stepPercentage: hook.stepPercentage,
+        allowedInteraction: hook.allowedInteraction,
+        tooltips: hook.tooltips,
+        minExtendable: hook.minExtendable,
+      );
 
   @override
   FContinuousSliderController build(BuildContext context) => _controller;
@@ -83,7 +100,12 @@ FContinuousSliderController useFContinuousRangeSliderController({
   bool tooltips = true,
   List<Object?>? keys,
 }) => use(
-  _ContinuousRangeControllerHook(selection: selection, stepPercentage: stepPercentage, tooltips: tooltips, keys: keys),
+  _ContinuousRangeControllerHook(
+    selection: selection,
+    stepPercentage: stepPercentage,
+    tooltips: tooltips,
+    keys: keys,
+  ),
 );
 
 class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
@@ -99,7 +121,8 @@ class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
   });
 
   @override
-  _ContinuousRangeControllerHookState createState() => _ContinuousRangeControllerHookState();
+  _ContinuousRangeControllerHookState createState() =>
+      _ContinuousRangeControllerHookState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -107,17 +130,26 @@ class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
     properties
       ..add(DiagnosticsProperty('selection', selection))
       ..add(DoubleProperty('stepPercentage', stepPercentage))
-      ..add(FlagProperty('tooltips', value: tooltips, ifTrue: 'enabled', ifFalse: 'disabled'));
+      ..add(
+        FlagProperty(
+          'tooltips',
+          value: tooltips,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      );
   }
 }
 
 class _ContinuousRangeControllerHookState
-    extends HookState<FContinuousSliderController, _ContinuousRangeControllerHook> {
-  late final FContinuousSliderController _controller = FContinuousSliderController.range(
-    selection: hook.selection,
-    stepPercentage: hook.stepPercentage,
-    tooltips: hook.tooltips,
-  );
+    extends
+        HookState<FContinuousSliderController, _ContinuousRangeControllerHook> {
+  late final FContinuousSliderController _controller =
+      FContinuousSliderController.range(
+        selection: hook.selection,
+        stepPercentage: hook.stepPercentage,
+        tooltips: hook.tooltips,
+      );
 
   @override
   FContinuousSliderController build(BuildContext context) => _controller;
@@ -171,13 +203,28 @@ class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('selection', selection))
-      ..add(FlagProperty('tooltips', value: tooltips, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(
+        FlagProperty(
+          'tooltips',
+          value: tooltips,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      )
       ..add(EnumProperty('allowedInteraction', allowedInteraction))
-      ..add(FlagProperty('minExtendable', value: minExtendable, ifTrue: 'min extendable', ifFalse: 'max extendable'));
+      ..add(
+        FlagProperty(
+          'minExtendable',
+          value: minExtendable,
+          ifTrue: 'min extendable',
+          ifFalse: 'max extendable',
+        ),
+      );
   }
 }
 
-class _DiscreteControllerHookState extends HookState<FDiscreteSliderController, _DiscreteControllerHook> {
+class _DiscreteControllerHookState
+    extends HookState<FDiscreteSliderController, _DiscreteControllerHook> {
   late final FDiscreteSliderController _controller = FDiscreteSliderController(
     selection: hook.selection,
     allowedInteraction: hook.allowedInteraction,
@@ -203,31 +250,51 @@ FDiscreteSliderController useFDiscreteRangeSliderController({
   required FSliderSelection selection,
   bool tooltips = true,
   List<Object?>? keys,
-}) => use(_DiscreteRangeControllerHook(selection: selection, tooltips: tooltips, keys: keys));
+}) => use(
+  _DiscreteRangeControllerHook(
+    selection: selection,
+    tooltips: tooltips,
+    keys: keys,
+  ),
+);
 
 class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
   final FSliderSelection selection;
   final bool tooltips;
 
-  const _DiscreteRangeControllerHook({required this.selection, required this.tooltips, super.keys});
+  const _DiscreteRangeControllerHook({
+    required this.selection,
+    required this.tooltips,
+    super.keys,
+  });
 
   @override
-  _DiscreteRangeControllerHookState createState() => _DiscreteRangeControllerHookState();
+  _DiscreteRangeControllerHookState createState() =>
+      _DiscreteRangeControllerHookState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('selection', selection))
-      ..add(FlagProperty('tooltips', value: tooltips, ifTrue: 'enabled', ifFalse: 'disabled'));
+      ..add(
+        FlagProperty(
+          'tooltips',
+          value: tooltips,
+          ifTrue: 'enabled',
+          ifFalse: 'disabled',
+        ),
+      );
   }
 }
 
-class _DiscreteRangeControllerHookState extends HookState<FDiscreteSliderController, _DiscreteRangeControllerHook> {
-  late final FDiscreteSliderController _controller = FDiscreteSliderController.range(
-    selection: hook.selection,
-    tooltips: hook.tooltips,
-  );
+class _DiscreteRangeControllerHookState
+    extends HookState<FDiscreteSliderController, _DiscreteRangeControllerHook> {
+  late final FDiscreteSliderController _controller =
+      FDiscreteSliderController.range(
+        selection: hook.selection,
+        tooltips: hook.tooltips,
+      );
 
   @override
   FDiscreteSliderController build(BuildContext context) => _controller;

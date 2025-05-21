@@ -68,7 +68,9 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        final gesture = await tester.createGesture(
+          kind: PointerDeviceKind.mouse,
+        );
         await gesture.addPointer(location: Offset.zero);
         addTearDown(gesture.removePointer);
         await tester.pump();
@@ -190,159 +192,174 @@ void main() {
           );
         });
 
-        testWidgets('constrained height, last outside viewport - ${theme.name} - $divider', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold(
-              theme: theme.data,
-              child: FTileGroup.merge(
-                maxHeight: 100,
-                label: const Text('Network'),
-                description: const Text('Description'),
-                divider: divider,
-                children: [
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: const Icon(FIcons.wifi),
-                        title: const Text('WiFi'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: const Icon(FIcons.mail),
-                        title: const Text('Mail'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                      ),
-                      FTile(
-                        prefixIcon: const Icon(FIcons.bluetooth),
-                        title: const Text('Bluetooth'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
-                ],
+        testWidgets(
+          'constrained height, last outside viewport - ${theme.name} - $divider',
+          (tester) async {
+            await tester.pumpWidget(
+              TestScaffold(
+                theme: theme.data,
+                child: FTileGroup.merge(
+                  maxHeight: 100,
+                  label: const Text('Network'),
+                  description: const Text('Description'),
+                  divider: divider,
+                  children: [
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          prefixIcon: const Icon(FIcons.wifi),
+                          title: const Text('WiFi'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          prefixIcon: const Icon(FIcons.mail),
+                          title: const Text('Mail'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                        ),
+                        FTile(
+                          prefixIcon: const Icon(FIcons.bluetooth),
+                          title: const Text('Bluetooth'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('tile/group/merge/${theme.name}/constrained-last/$divider.png'),
-          );
-        });
-
-        testWidgets('constrained height, first outside viewport - ${theme.name} - $divider', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold(
-              theme: theme.data,
-              child: FTileGroup.merge(
-                maxHeight: 100,
-                label: const Text('Network'),
-                description: const Text('Description'),
-                divider: divider,
-                children: [
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: const Icon(FIcons.wifi),
-                        title: const Text('WiFi'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: const Icon(FIcons.mail),
-                        title: const Text('Mail'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                      ),
-                      FTile(
-                        prefixIcon: const Icon(FIcons.bluetooth),
-                        title: const Text('Bluetooth'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                        onPress: () {},
-                      ),
-                    ],
-                  ),
-                ],
+            await expectLater(
+              find.byType(TestScaffold),
+              matchesGoldenFile(
+                'tile/group/merge/${theme.name}/constrained-last/$divider.png',
               ),
-            ),
-          );
+            );
+          },
+        );
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('tile/group/merge/${theme.name}/constrained-first/$divider.png'),
-          );
-        });
+        testWidgets(
+          'constrained height, first outside viewport - ${theme.name} - $divider',
+          (tester) async {
+            await tester.pumpWidget(
+              TestScaffold(
+                theme: theme.data,
+                child: FTileGroup.merge(
+                  maxHeight: 100,
+                  label: const Text('Network'),
+                  description: const Text('Description'),
+                  divider: divider,
+                  children: [
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          prefixIcon: const Icon(FIcons.wifi),
+                          title: const Text('WiFi'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          prefixIcon: const Icon(FIcons.mail),
+                          title: const Text('Mail'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                        ),
+                        FTile(
+                          prefixIcon: const Icon(FIcons.bluetooth),
+                          title: const Text('Bluetooth'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                          onPress: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+
+            await expectLater(
+              find.byType(TestScaffold),
+              matchesGoldenFile(
+                'tile/group/merge/${theme.name}/constrained-first/$divider.png',
+              ),
+            );
+          },
+        );
 
         // The rounded corners will not be colored properly. This is a known issue that's a side effect of clipping the
         // tiles. There isn't a known, straightforward solution to this. It is minor enough that it is acceptable.
-        testWidgets('focused on non-first bottom viewport - ${theme.name} - $divider', (tester) async {
-          final focusNode = autoDispose(FocusNode());
+        testWidgets(
+          'focused on non-first bottom viewport - ${theme.name} - $divider',
+          (tester) async {
+            final focusNode = autoDispose(FocusNode());
 
-          await tester.pumpWidget(
-            TestScaffold(
-              theme: theme.data,
-              child: FTileGroup.merge(
-                maxHeight: 100,
-                label: const Text('Network'),
-                description: const Text('Description'),
-                divider: divider,
-                children: [
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: const Icon(FIcons.wifi),
-                        title: const Text('WiFi'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        focusNode: focusNode,
-                        prefixIcon: const Icon(FIcons.mail),
-                        title: const Text('Mail'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                      ),
-                    ],
-                  ),
-                  FTileGroup(
-                    children: [
-                      FTile(
-                        prefixIcon: const Icon(FIcons.bluetooth),
-                        title: const Text('Bluetooth'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                        onPress: () {},
-                      ),
-                      FTile(
-                        prefixIcon: const Icon(FIcons.arrowDown),
-                        title: const Text('Last'),
-                        suffixIcon: const Icon(FIcons.chevronRight),
-                      ),
-                    ],
-                  ),
-                ],
+            await tester.pumpWidget(
+              TestScaffold(
+                theme: theme.data,
+                child: FTileGroup.merge(
+                  maxHeight: 100,
+                  label: const Text('Network'),
+                  description: const Text('Description'),
+                  divider: divider,
+                  children: [
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          prefixIcon: const Icon(FIcons.wifi),
+                          title: const Text('WiFi'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                          onPress: () {},
+                        ),
+                        FTile(
+                          focusNode: focusNode,
+                          prefixIcon: const Icon(FIcons.mail),
+                          title: const Text('Mail'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                        ),
+                      ],
+                    ),
+                    FTileGroup(
+                      children: [
+                        FTile(
+                          prefixIcon: const Icon(FIcons.bluetooth),
+                          title: const Text('Bluetooth'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                          onPress: () {},
+                        ),
+                        FTile(
+                          prefixIcon: const Icon(FIcons.arrowDown),
+                          title: const Text('Last'),
+                          suffixIcon: const Icon(FIcons.chevronRight),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
+            );
 
-          focusNode.requestFocus();
-          await tester.pumpAndSettle();
+            focusNode.requestFocus();
+            await tester.pumpAndSettle();
 
-          focusNode.nextFocus();
-          await tester.pumpAndSettle();
+            focusNode.nextFocus();
+            await tester.pumpAndSettle();
 
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('tile/group/merge/${theme.name}/focused-bottom-viewport/$divider.png'),
-          );
-        });
+            await expectLater(
+              find.byType(TestScaffold),
+              matchesGoldenFile(
+                'tile/group/merge/${theme.name}/focused-bottom-viewport/$divider.png',
+              ),
+            );
+          },
+        );
       }
 
       testWidgets('disabled - ${theme.name}', (tester) async {
@@ -379,7 +396,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/${theme.name}/disabled.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/group/merge/${theme.name}/disabled.png'),
+        );
       });
 
       testWidgets('error - ${theme.name}', (tester) async {
@@ -416,7 +436,10 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/${theme.name}/error.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/group/merge/${theme.name}/error.png'),
+        );
       });
 
       testWidgets('single group', (tester) async {
@@ -440,17 +463,29 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/single.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/group/merge/single.png'),
+        );
       });
 
       testWidgets('empty tile group', (tester) async {
-        await tester.pumpWidget(TestScaffold(child: FTileGroup.merge(label: const Text('Network'), children: [])));
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FTileGroup.merge(label: const Text('Network'), children: []),
+          ),
+        );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/empty.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('tile/group/merge/empty.png'),
+        );
       });
     }
 
-    testWidgets('full dividers between groups and no dividers between tiles', (tester) async {
+    testWidgets('full dividers between groups and no dividers between tiles', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         TestScaffold(
           child: FTileGroup.merge(
@@ -460,13 +495,19 @@ void main() {
                 divider: FTileDivider.none,
                 children: [
                   FTile(
-                    prefixIcon: const Icon(FIcons.list, color: Colors.transparent),
+                    prefixIcon: const Icon(
+                      FIcons.list,
+                      color: Colors.transparent,
+                    ),
                     title: const Text('Personalization'),
                     suffixIcon: const Icon(FIcons.user),
                     onPress: () {},
                   ),
                   FTile(
-                    prefixIcon: const Icon(FIcons.list, color: Colors.transparent),
+                    prefixIcon: const Icon(
+                      FIcons.list,
+                      color: Colors.transparent,
+                    ),
                     title: const Text('Network'),
                     suffixIcon: const Icon(FIcons.appWindowMac),
                     onPress: () {},
@@ -477,13 +518,19 @@ void main() {
                 divider: FTileDivider.none,
                 children: [
                   FTile(
-                    prefixIcon: const Icon(FIcons.list, color: Colors.transparent),
+                    prefixIcon: const Icon(
+                      FIcons.list,
+                      color: Colors.transparent,
+                    ),
                     title: const Text('List View'),
                     suffixIcon: const Icon(FIcons.list),
                     onPress: () {},
                   ),
                   FTile(
-                    prefixIcon: const Icon(FIcons.list, color: Colors.transparent),
+                    prefixIcon: const Icon(
+                      FIcons.list,
+                      color: Colors.transparent,
+                    ),
                     title: const Text('Grid View'),
                     suffixIcon: const Icon(FIcons.layoutGrid),
                     onPress: () {},
@@ -495,7 +542,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/full-no-dividers.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/merge/full-no-dividers.png'),
+      );
     });
 
     testWidgets('ignore group label', (tester) async {
@@ -523,7 +573,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/ignore-group-label.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/merge/ignore-group-label.png'),
+      );
     });
 
     testWidgets('ignore group labels', (tester) async {
@@ -565,7 +618,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/ignore-group-labels.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/merge/ignore-group-labels.png'),
+      );
     });
 
     testWidgets('group style overrides group style', (tester) async {
@@ -609,7 +665,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/override-style.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/merge/override-style.png'),
+      );
     });
 
     testWidgets('group state overrides group state', (tester) async {
@@ -653,7 +712,10 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/override-state.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/merge/override-state.png'),
+      );
     });
   });
 

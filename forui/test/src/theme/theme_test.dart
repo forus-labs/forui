@@ -11,25 +11,39 @@ class Foo extends StatelessWidget {
   const Foo({required this.child, super.key});
 
   @override
-  Widget build(BuildContext context) => FTheme(data: FThemes.zinc.dark, textDirection: TextDirection.ltr, child: child);
+  Widget build(BuildContext context) => FTheme(
+    data: FThemes.zinc.dark,
+    textDirection: TextDirection.ltr,
+    child: child,
+  );
 }
 
 void main() {
   group('FTheme', () {
     testWidgets('ThemeData is visible in child widgets', (tester) async {
-      await tester.pumpWidget(Foo(child: Builder(builder: (context) => Text('${context.theme == FThemes.zinc.dark}'))));
+      await tester.pumpWidget(
+        Foo(
+          child: Builder(
+            builder: (context) => Text('${context.theme == FThemes.zinc.dark}'),
+          ),
+        ),
+      );
 
       expect(find.text('true'), findsOneWidget);
     });
 
-    testWidgets('Changes to ThemData is propagated to children widgets', (tester) async {
+    testWidgets('Changes to ThemData is propagated to children widgets', (
+      tester,
+    ) async {
       const key = ValueKey('dependent');
 
       await tester.pumpWidget(
         FTheme(
           data: FThemes.zinc.light,
           textDirection: TextDirection.ltr,
-          child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
+          child: Builder(
+            builder: (context) => Text(context.theme.toString(), key: key),
+          ),
         ),
       );
       final initial = tester.widget<Text>(find.byKey(key)).data;
@@ -38,7 +52,9 @@ void main() {
         FTheme(
           data: FThemes.zinc.dark,
           textDirection: TextDirection.ltr,
-          child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
+          child: Builder(
+            builder: (context) => Text(context.theme.toString(), key: key),
+          ),
         ),
       );
       final updated = tester.widget<Text>(find.byKey(key)).data;
@@ -50,7 +66,9 @@ void main() {
       await tester.pumpWidget(
         Directionality(
           textDirection: TextDirection.ltr,
-          child: Builder(builder: (context) => Text('${context.theme == FThemes.zinc.dark}')),
+          child: Builder(
+            builder: (context) => Text('${context.theme == FThemes.zinc.dark}'),
+          ),
         ),
       );
 
@@ -58,7 +76,11 @@ void main() {
     });
 
     testWidgets('inherit TextDirection from parent', (tester) async {
-      await tester.pumpWidget(MaterialApp(home: FTheme(data: FThemes.zinc.dark, child: const Text(''))));
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FTheme(data: FThemes.zinc.dark, child: const Text('')),
+        ),
+      );
 
       expect(tester.takeException(), null);
     });
@@ -72,7 +94,11 @@ void main() {
       expect(
         builder.properties.map((p) => p.toString()),
         [
-          DiagnosticsProperty<FThemeData>('data', FThemes.zinc.dark, showName: false),
+          DiagnosticsProperty<FThemeData>(
+            'data',
+            FThemes.zinc.dark,
+            showName: false,
+          ),
           EnumProperty<TextDirection?>('textDirection', theme.textDirection),
         ].map((p) => p.toString()),
       );

@@ -143,7 +143,10 @@ class FCheckbox extends StatelessWidget {
                   child:
                       iconTheme == null
                           ? const SizedBox()
-                          : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
+                          : IconTheme(
+                            data: iconTheme,
+                            child: const Icon(FIcons.check),
+                          ),
                 ),
               ),
             ),
@@ -197,7 +200,11 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItem<T> {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectGroupItemData(:controller, :selected, :style) = FSelectGroupItemData.of<T>(context);
+    final FSelectGroupItemData(
+      :controller,
+      :selected,
+      :style,
+    ) = FSelectGroupItemData.of<T>(context);
     final checkboxStyle = this.style ?? style.checkboxStyle;
     return FCheckbox(
       style: checkboxStyle,
@@ -223,7 +230,9 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItem<T> {
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(DiagnosticsProperty('value', value))
-      ..add(FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'))
+      ..add(
+        FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'),
+      )
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
@@ -290,14 +299,27 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties.
-  factory FCheckboxStyle.inherit({required FColors colors, required FStyle style}) {
+  factory FCheckboxStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+  }) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return FCheckboxStyle(
-      tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
-      focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: BorderRadius.circular(4)),
+      tappableStyle: style.tappableStyle.copyWith(
+        animationTween: FTappableAnimations.none,
+      ),
+      focusedOutlineStyle: style.focusedOutlineStyle.copyWith(
+        borderRadius: BorderRadius.circular(4),
+      ),
       iconStyle: FWidgetStateMap({
-        WidgetState.selected & WidgetState.error: IconThemeData(color: colors.errorForeground, size: 14),
-        WidgetState.selected & ~WidgetState.disabled: IconThemeData(color: colors.primaryForeground, size: 14),
+        WidgetState.selected & WidgetState.error: IconThemeData(
+          color: colors.errorForeground,
+          size: 14,
+        ),
+        WidgetState.selected & ~WidgetState.disabled: IconThemeData(
+          color: colors.primaryForeground,
+          size: 14,
+        ),
         WidgetState.selected & WidgetState.disabled: IconThemeData(
           color: colors.disable(colors.primaryForeground),
           size: 14,
@@ -305,7 +327,10 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
       }),
       decoration: FWidgetStateMap({
         // Error
-        WidgetState.error & WidgetState.selected: BoxDecoration(borderRadius: style.borderRadius, color: colors.error),
+        WidgetState.error & WidgetState.selected: BoxDecoration(
+          borderRadius: style.borderRadius,
+          color: colors.error,
+        ),
         WidgetState.error: BoxDecoration(
           borderRadius: style.borderRadius,
           border: Border.all(color: colors.error, width: 0.6),
@@ -324,7 +349,10 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
         ),
 
         // Enabled
-        WidgetState.selected: BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
+        WidgetState.selected: BoxDecoration(
+          borderRadius: style.borderRadius,
+          color: colors.primary,
+        ),
         WidgetState.any: BoxDecoration(
           borderRadius: style.borderRadius,
           border: Border.all(color: colors.primary, width: 0.6),

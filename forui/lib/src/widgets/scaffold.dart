@@ -87,7 +87,12 @@ class FScaffold extends StatelessWidget {
     final style = this.style ?? context.theme.scaffoldStyle;
     var child = this.child;
     final Widget footer =
-        this.footer != null ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!) : const SizedBox();
+        this.footer != null
+            ? DecoratedBox(
+              decoration: style.footerDecoration,
+              child: this.footer!,
+            )
+            : const SizedBox();
 
     if (childPad) {
       child = Padding(padding: style.childPadding, child: child);
@@ -96,7 +101,8 @@ class FScaffold extends StatelessWidget {
     return FSheets(
       child: Row(
         children: [
-          if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
+          if (sidebar != null)
+            ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
           Expanded(
             child: ColoredBox(
               color: style.backgroundColor,
@@ -105,7 +111,11 @@ class FScaffold extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                      if (header != null)
+                        DecoratedBox(
+                          decoration: style.headerDecoration,
+                          child: header!,
+                        ),
                       Expanded(child: child),
                     ],
                   ),
@@ -124,7 +134,14 @@ class FScaffold extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('childPad', value: childPad, ifTrue: 'contentPad', defaultValue: true))
+      ..add(
+        FlagProperty(
+          'childPad',
+          value: childPad,
+          ifTrue: 'contentPad',
+          defaultValue: true,
+        ),
+      )
       ..add(
         FlagProperty(
           'resizeToAvoidBottomInset',
@@ -174,7 +191,9 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
         sidebarBackgroundColor: colors.background,
         childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
         footerDecoration: BoxDecoration(
-          border: Border(top: BorderSide(color: colors.border, width: style.borderWidth)),
+          border: Border(
+            top: BorderSide(color: colors.border, width: style.borderWidth),
+          ),
         ),
       );
 }
@@ -182,13 +201,19 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
 class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {
   final bool resizeToAvoidBottomInset;
 
-  const _RenderScaffoldWidget({required this.resizeToAvoidBottomInset, required super.children});
+  const _RenderScaffoldWidget({
+    required this.resizeToAvoidBottomInset,
+    required super.children,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) {
     final viewInsets = MediaQuery.viewInsetsOf(context);
 
-    return _RenderScaffold(resizeToAvoidBottomInset: resizeToAvoidBottomInset, insets: viewInsets);
+    return _RenderScaffold(
+      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+      insets: viewInsets,
+    );
   }
 
   @override
@@ -203,24 +228,34 @@ class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
-      FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, ifTrue: 'resizeToAvoidBottomInset'),
+      FlagProperty(
+        'resizeToAvoidBottomInset',
+        value: resizeToAvoidBottomInset,
+        ifTrue: 'resizeToAvoidBottomInset',
+      ),
     );
   }
 }
 
-class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
+class _Data extends ContainerBoxParentData<RenderBox>
+    with ContainerParentDataMixin<RenderBox> {}
 
 class _RenderScaffold extends RenderBox
-    with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
+    with
+        ContainerRenderObjectMixin<RenderBox, _Data>,
+        RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
   bool _resizeToAvoidBottomInset;
   EdgeInsets _insets;
 
-  _RenderScaffold({required bool resizeToAvoidBottomInset, required EdgeInsets insets})
-    : _resizeToAvoidBottomInset = resizeToAvoidBottomInset,
-      _insets = insets;
+  _RenderScaffold({
+    required bool resizeToAvoidBottomInset,
+    required EdgeInsets insets,
+  }) : _resizeToAvoidBottomInset = resizeToAvoidBottomInset,
+       _insets = insets;
 
   @override
-  void setupParentData(covariant RenderObject child) => child.parentData = _Data();
+  void setupParentData(covariant RenderObject child) =>
+      child.parentData = _Data();
 
   @override
   void performLayout() {
@@ -229,7 +264,10 @@ class _RenderScaffold extends RenderBox
 
     final footerConstraints = constraints.loosen();
     final footer = lastChild!..layout(footerConstraints, parentUsesSize: true);
-    final footerHeight = _resizeToAvoidBottomInset ? max(insets.bottom, footer.size.height) : footer.size.height;
+    final footerHeight =
+        _resizeToAvoidBottomInset
+            ? max(insets.bottom, footer.size.height)
+            : footer.size.height;
 
     final othersHeight = constraints.maxHeight - footerHeight;
     others.layout(constraints.copyWith(minHeight: 0, maxHeight: othersHeight));
@@ -239,7 +277,8 @@ class _RenderScaffold extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
+  void paint(PaintingContext context, Offset offset) =>
+      defaultPaint(context, offset);
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
@@ -272,7 +311,11 @@ class _RenderScaffold extends RenderBox
     super.debugFillProperties(properties);
     properties
       ..add(
-        FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, ifTrue: 'resizeToAvoidBottomInset'),
+        FlagProperty(
+          'resizeToAvoidBottomInset',
+          value: resizeToAvoidBottomInset,
+          ifTrue: 'resizeToAvoidBottomInset',
+        ),
       )
       ..add(DiagnosticsProperty('insets', insets));
   }

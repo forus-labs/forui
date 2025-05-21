@@ -20,7 +20,8 @@ mixin FSelectGroupItem<T> on Widget {
 class FSelectGroupItemData<T> extends InheritedWidget {
   /// Return the [FSelectGroup]'s item data.
   static FSelectGroupItemData<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
+    final result =
+        context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
     assert(
       result != null,
       "No FSelectGroupItemData<$T> found in context. This likely because FSelectGroup's type parameter could not be inferred. "
@@ -56,7 +57,9 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 
   @override
   bool updateShouldNotify(FSelectGroupItemData old) =>
-      controller != old.controller || style != old.style || selected != old.selected;
+      controller != old.controller ||
+      style != old.style ||
+      selected != old.selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -77,7 +80,8 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 /// See:
 /// * https://forui.dev/docs/form/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
-class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>> {
+class FSelectGroup<T> extends FormField<Set<T>>
+    with FFormFieldProperties<Set<T>> {
   /// The controller.
   final FSelectGroupController<T> controller;
 
@@ -89,9 +93,6 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
 
   @override
   final Widget? description;
-
-  @override
-  final Widget Function(BuildContext, String) errorBuilder;
 
   /// The items.
   final List<FSelectGroupItem<T>> children;
@@ -109,9 +110,10 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     this.style,
     this.label,
     this.description,
-    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.onChange,
     this.onSelect,
+    Widget Function(BuildContext, String) errorBuilder =
+        FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -120,10 +122,14 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     super.key,
   }) : super(
          initialValue: controller.value,
+         errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State;
            final groupStyle = style ?? state.context.theme.selectGroupStyle;
-           final formStates = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+           final formStates = {
+             if (!enabled) WidgetState.disabled,
+             if (state.errorText != null) WidgetState.error,
+           };
 
            return FLabel(
              axis: Axis.vertical,
@@ -131,7 +137,10 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
              style: groupStyle,
              label: label,
              description: description,
-             error: state.errorText == null ? null : errorBuilder(state.context, state.errorText!),
+             error:
+                 state.errorText == null
+                     ? null
+                     : errorBuilder(state.context, state.errorText!),
              child: Column(
                children: [
                  for (final child in children)
@@ -228,7 +237,8 @@ class _State<T> extends FormFieldState<Set<T>> {
 }
 
 /// [FSelectGroup]'s style.
-class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
+class FSelectGroupStyle extends FLabelStyle
+    with Diagnosticable, _$FSelectGroupStyleFunctions {
   /// The [FCheckbox]'s style.
   @override
   final FCheckboxStyle checkboxStyle;
@@ -256,21 +266,39 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   });
 
   /// Creates a [FSelectGroupStyle] that inherits its properties.
-  factory FSelectGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory FSelectGroupStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
     final vertical = FLabelStyles.inherit(style: style).verticalStyle;
 
     final labelTextStyle = FWidgetStateMap({
-      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
-      WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+      WidgetState.disabled: typography.sm.copyWith(
+        color: colors.disable(colors.primary),
+        fontWeight: FontWeight.w500,
+      ),
+      WidgetState.any: typography.sm.copyWith(
+        color: colors.primary,
+        fontWeight: FontWeight.w500,
+      ),
     });
     final descriptionTextStyle = FWidgetStateMap({
-      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
+      WidgetState.disabled: typography.sm.copyWith(
+        color: colors.disable(colors.mutedForeground),
+      ),
       WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
     });
-    final errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500);
+    final errorTextStyle = typography.sm.copyWith(
+      color: colors.error,
+      fontWeight: FontWeight.w500,
+    );
 
     return FSelectGroupStyle(
-      checkboxStyle: FCheckboxStyle.inherit(colors: colors, style: style).copyWith(
+      checkboxStyle: FCheckboxStyle.inherit(
+        colors: colors,
+        style: style,
+      ).copyWith(
         labelTextStyle: labelTextStyle,
         descriptionTextStyle: descriptionTextStyle,
         errorTextStyle: errorTextStyle,

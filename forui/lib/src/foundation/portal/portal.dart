@@ -115,7 +115,8 @@ class _State extends State<FPortal> {
       child: OverlayPortal(
         controller: widget.controller,
         overlayChildBuilder: (context) {
-          final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+          final direction =
+              Directionality.maybeOf(context) ?? TextDirection.ltr;
           final portalAnchor = widget.portalAnchor.resolve(direction);
           final childAnchor = widget.childAnchor.resolve(direction);
 
@@ -126,7 +127,9 @@ class _State extends State<FPortal> {
             portalAnchor: portalAnchor,
             childAnchor: childAnchor,
             viewInsets:
-                widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
+                widget.viewInsets?.resolve(
+                  Directionality.maybeOf(context) ?? TextDirection.ltr,
+                ) ??
                 MediaQuery.viewPaddingOf(context),
             spacing: widget.spacing.resolve(childAnchor, portalAnchor),
             shift: widget.shift,
