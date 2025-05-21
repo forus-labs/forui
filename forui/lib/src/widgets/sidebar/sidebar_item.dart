@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Colors, Icons;
+import 'package:flutter/material.dart' show Colors;
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -91,7 +91,7 @@ class FSidebarItem extends StatefulWidget {
 
 class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  late final Animation<double> _animation;
+  late final CurvedAnimation _curvedAnimation;
   late bool _expanded;
 
   void _toggle() {
@@ -117,7 +117,7 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
 
     _expanded = widget.initiallyExpanded;
     _controller = AnimationController(vsync: this, value: _expanded ? 1.0 : 0.0);
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _curvedAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   }
 
   @override
@@ -179,8 +179,8 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
                       IconTheme(
                         data: style.collapsibleIconStyle.resolve(states),
                         child: RotationTransition(
-                          turns: Tween(begin: 0.0, end: 0.25).animate(_animation),
-                          child: const Icon(Icons.chevron_right),
+                          turns: Tween(begin: 0.0, end: 0.25).animate(_curvedAnimation),
+                          child: const Icon(FIcons.chevronRight),
                         ),
                       ),
                   ],
@@ -189,7 +189,7 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
         ),
         if (hasChildren)
           AnimatedBuilder(
-            animation: _animation,
+            animation: _curvedAnimation,
             builder:
                 (context, child) => FCollapsible(
                   value: _controller.value,
@@ -210,6 +210,7 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
   @override
   void dispose() {
     _controller.dispose();
+    _curvedAnimation.dispose();
     super.dispose();
   }
 }
@@ -322,11 +323,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
           WidgetState.any: Colors.transparent,
         }),
         borderRadius: style.borderRadius,
-        tappableStyle: style.tappableStyle.copyWith(
-          animationTween: FTappableAnimations.none,
-          pressedEnterDuration: Duration.zero,
-          pressedExitDuration: const Duration(milliseconds: 25),
-        ),
+        tappableStyle: style.tappableStyle,
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }
