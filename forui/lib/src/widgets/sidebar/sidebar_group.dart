@@ -41,6 +41,9 @@ class FSidebarGroup extends StatelessWidget {
   /// Called when the action is pressed.
   final VoidCallback? onActionPress;
 
+  /// Called when the action is long pressed.
+  final VoidCallback? onActionLongPress;
+
   /// The children of the group.
   final List<Widget> children;
 
@@ -53,6 +56,7 @@ class FSidebarGroup extends StatelessWidget {
     this.onActionHoverChange,
     this.onActionStateChange,
     this.onActionPress,
+    this.onActionLongPress,
     super.key,
   });
 
@@ -83,6 +87,7 @@ class FSidebarGroup extends StatelessWidget {
                       onHoverChange: onActionHoverChange,
                       onStateChange: onActionStateChange,
                       onPress: onActionPress,
+                      onLongPress: onActionLongPress,
                       builder: (_, states, child) => IconTheme(data: style.actionStyle.resolve(states), child: child!),
                       child: action!,
                     )
@@ -105,6 +110,7 @@ class FSidebarGroup extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onActionHoverChange', onActionHoverChange))
       ..add(ObjectFlagProperty.has('onActionStateChange', onActionStateChange))
       ..add(ObjectFlagProperty.has('onActionPress', onActionPress))
+      ..add(ObjectFlagProperty.has('onActionLongPress', onActionLongPress))
       ..add(DiagnosticsProperty('style', style));
   }
 }
@@ -193,8 +199,8 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
     : this(
         labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis),
         actionStyle: FWidgetStateMap({
-          WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 16),
-          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 16),
+          WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 18),
+          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
         }),
         tappableStyle: style.tappableStyle,
         focusedOutlineStyle: style.focusedOutlineStyle,

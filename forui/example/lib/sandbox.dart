@@ -18,7 +18,7 @@ class _SandboxState extends State<Sandbox> {
           prefixIcon: Icon(FIcons.bell),
           title: const Text('Home'),
           suffixIcon: Icon(FIcons.chevronRight),
-          onPress: () {},
+          // onPress: () {},
         ),
       ],
     );
