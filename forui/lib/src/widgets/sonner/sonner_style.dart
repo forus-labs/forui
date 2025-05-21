@@ -5,19 +5,6 @@ import 'package:meta/meta.dart';
 
 part 'sonner_style.style.dart';
 
-/// How the sonner should be expanded.
-enum FSonnerExpandBehavior {
-  /// The sonner is always expanded.
-  always,
-
-  /// The sonner is expanded on hover or pressed.
-  onHoverOrPressed,
-
-  /// The sonner is never expanded.
-  disabled,
-}
-
-
 /// [FSonner]'s style.
 class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
   /// The maximum number of entries shown per [FSonnerAlignment]. Defaults to to 3.
@@ -28,9 +15,9 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The sonner's expansion behavior. Defaults to [FSonnerExpandBehavior.onHoverOrPressed].
+  /// True if the toasts should expand when hovered or pressed. Defaults to true.
   @override
-  final FSonnerExpandBehavior expandBehavior;
+  final bool expandable;
 
   /// The duration to wait after entering the sonner before expanding the toasts. Defaults to 200ms.
   @override
@@ -78,7 +65,7 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
   const FSonnerStyle({
     this.max = 3,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-    this.expandBehavior = FSonnerExpandBehavior.onHoverOrPressed,
+    this.expandable = true,
     this.expandHoverEnterDuration = const Duration(milliseconds: 200),
     this.expandHoverExitDuration = const Duration(milliseconds: 300),
     this.expandStartSpacing = 16,

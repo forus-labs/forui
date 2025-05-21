@@ -43,30 +43,16 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
     _controller = AnimationController(vsync: this, duration: widget.style.expandDuration)
       ..addListener(() => setState(() {}));
     _expand = _controller.drive(CurveTween(curve: widget.style.expandCurve));
-
-    if (widget.style.expandBehavior == FSonnerExpandBehavior.always) {
-      _controller.value = 1;
-    }
   }
 
   @override
   void didUpdateWidget(Toaster old) {
     super.didUpdateWidget(old);
     if (old.style != widget.style) {
-      _controller.duration = widget.style.expandDuration;
+      _controller
+        ..duration = widget.style.expandDuration
+        ..value = 0;
       _expand = _controller.drive(CurveTween(curve: widget.style.expandCurve));
-    }
-
-    if (widget.style.expandBehavior != old.style.expandBehavior) {
-      if (widget.style.expandBehavior == FSonnerExpandBehavior.always) {
-        _controller.value = 1;
-      } else if (widget.style.expandBehavior == FSonnerExpandBehavior.disabled) {
-        _controller.value = 0;
-      }
-    }
-
-    if (widget.entries.isEmpty && widget.style.expandBehavior == FSonnerExpandBehavior.onHoverOrPressed) {
-      _controller.value = 0;
     }
   }
 
@@ -99,7 +85,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
       ],
     );
 
-    if (widget.style.expandBehavior == FSonnerExpandBehavior.onHoverOrPressed) {
+    if (widget.style.expandable) {
       toaster = MouseRegion(
         onEnter: (_) => _enter(),
         onExit: (_) => _exit(),

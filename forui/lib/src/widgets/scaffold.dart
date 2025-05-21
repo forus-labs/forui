@@ -44,7 +44,17 @@ class FScaffold extends StatelessWidget {
   /// ```shell
   /// dart run forui style create scaffold
   /// ```
-  final FScaffoldStyle? style;
+  final FScaffoldStyle? scaffoldStyle;
+
+  /// The sonner style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create sonner
+  /// ```
+  final FSonnerStyle? sonnerStyle;
 
   /// The main content area of the scaffold.
   final Widget child;
@@ -79,12 +89,14 @@ class FScaffold extends StatelessWidget {
     this.footer,
     this.childPad = true,
     this.resizeToAvoidBottomInset = true,
+    this.scaffoldStyle,
+    this.sonnerStyle,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.scaffoldStyle;
+    final style = scaffoldStyle ?? context.theme.scaffoldStyle;
     var child = this.child;
     final Widget footer =
         this.footer != null ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!) : const SizedBox();
@@ -94,27 +106,30 @@ class FScaffold extends StatelessWidget {
     }
 
     return FSheets(
-      child: Row(
-        children: [
-          if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
-          Expanded(
-            child: ColoredBox(
-              color: style.backgroundColor,
-              child: _RenderScaffoldWidget(
-                resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-                children: [
-                  Column(
-                    children: [
-                      if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-                      Expanded(child: child),
-                    ],
-                  ),
-                  footer,
-                ],
+      child: FSonner(
+        style: sonnerStyle ?? context.theme.sonnerStyle,
+        child: Row(
+          children: [
+            if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
+            Expanded(
+              child: ColoredBox(
+                color: style.backgroundColor,
+                child: _RenderScaffoldWidget(
+                  resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+                  children: [
+                    Column(
+                      children: [
+                        if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                        Expanded(child: child),
+                      ],
+                    ),
+                    footer,
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -123,7 +138,8 @@ class FScaffold extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('style', scaffoldStyle))
+      ..add(DiagnosticsProperty('sonnerStyle', sonnerStyle))
       ..add(FlagProperty('childPad', value: childPad, ifTrue: 'contentPad', defaultValue: true))
       ..add(
         FlagProperty(

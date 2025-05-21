@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui_example/sandbox.dart';
@@ -8,7 +7,6 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   WakelockPlus.enable();
-  timeDilation = 10;
 
   runApp(const Application());
 }
@@ -46,7 +44,6 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     home: Builder(
       builder: (context) {
         return FSonner(
-          style: context.theme.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
           child: FScaffold(
             header: const FHeader(title: Text('Example')),
             footer: FBottomNavigationBar(
