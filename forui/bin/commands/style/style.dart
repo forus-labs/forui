@@ -318,6 +318,24 @@ enum Style {
     <String>['FSheetStyle'],
     'FSheetStyle sheetStyle({required FColors colors}) => FSheetStyle(\n  barrierColor: colors.barrier,\n  backgroundColor: colors.background,\n  enterDuration: const Duration(milliseconds: 200),\n  exitDuration: const Duration(milliseconds: 200),\n  flingVelocity: 700,\n  closeProgressThreshold: 0.5,\n);\n',
   ),
+  fsidebargroupstyle(
+    'FSidebarGroupStyle',
+    <String>['sidebar-group', 'sidebargroup'],
+    <String>['FSidebarGroupStyle', 'FSidebarItemStyle'],
+    'FSidebarGroupStyle sidebarGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSidebarGroupStyle(\n  labelStyle: typography.sm.copyWith(\n    color: colors.mutedForeground,\n    overflow: TextOverflow.ellipsis,\n    fontWeight: FontWeight.w500,\n  ),\n  actionStyle: FWidgetStateMap({\n    WidgetState.hovered | WidgetState.pressed: IconThemeData(\n      color: colors.primary,\n      size: 18,\n    ),\n    WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),\n  }),\n  tappableStyle: style.tappableStyle,\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  itemStyle: _sidebarItemStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  headerSpacing: 8,\n  headerPadding: const EdgeInsets.fromLTRB(12, 0, 8, 2),\n  childrenSpacing: 2,\n  childrenPadding: const EdgeInsets.fromLTRB(0, 0, 0, 24),\n);\n',
+  ),
+  fsidebaritemstyle(
+    'FSidebarItemStyle',
+    <String>['sidebar-item', 'sidebaritem'],
+    <String>['FSidebarItemStyle'],
+    'FSidebarItemStyle sidebarItemStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSidebarItemStyle(\n  textStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.base.copyWith(\n      color: colors.mutedForeground,\n      height: 1,\n      overflow: TextOverflow.ellipsis,\n    ),\n    WidgetState.any: typography.base.copyWith(\n      color: colors.foreground,\n      height: 1,\n      overflow: TextOverflow.ellipsis,\n    ),\n  }),\n  iconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.mutedForeground,\n      size: 16,\n    ),\n    WidgetState.any: IconThemeData(color: colors.foreground, size: 16),\n  }),\n  collapsibleIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.mutedForeground,\n      size: 16,\n    ),\n    WidgetState.any: IconThemeData(color: colors.foreground, size: 16),\n  }),\n  backgroundColor: FWidgetStateMap({\n    WidgetState.disabled: Colors.transparent,\n    WidgetState.selected | WidgetState.hovered | WidgetState.pressed: colors\n        .primary\n        .withValues(alpha: 0.03),\n    WidgetState.any: Colors.transparent,\n  }),\n  borderRadius: style.borderRadius,\n  tappableStyle: style.tappableStyle,\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  iconSpacing: 8,\n  collapsibleIconSpacing: 8,\n  childrenSpacing: 2,\n  childrenPadding: const EdgeInsets.only(left: 26, top: 2),\n  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),\n  collapsibleAnimationDuration: const Duration(milliseconds: 100),\n);\n',
+  ),
+  fsidebarstyle(
+    'FSidebarStyle',
+    <String>['sidebar'],
+    <String>['FSidebarStyle', 'FSidebarGroupStyle', 'FSidebarItemStyle'],
+    'FSidebarStyle sidebarStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSidebarStyle(\n  width: 250,\n  borderColor: colors.border,\n  borderWidth: style.borderWidth,\n  groupStyle: _sidebarGroupStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  headerPadding: const EdgeInsets.fromLTRB(16, 16, 16, 0),\n  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),\n  footerPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),\n);\n',
+  ),
   fsliderstyle(
     'FSliderStyle',
     <String>['slider'],

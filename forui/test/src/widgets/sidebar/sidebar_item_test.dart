@@ -13,11 +13,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          child: FSidebarItem(
-            label: const Text('Item'),
-            onPress: () => press++,
-            onLongPress: () => longPress++,
-          ),
+          child: FSidebarItem(label: const Text('Item'), onPress: () => press++, onLongPress: () => longPress++),
         ),
       );
 
@@ -34,11 +30,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          child: FSidebarItem(
-            label: const Text('Item'),
-            onPress: () => press++,
-            onLongPress: () => longPress++,
-          ),
+          child: FSidebarItem(label: const Text('Item'), onPress: () => press++, onLongPress: () => longPress++),
         ),
       );
 
