@@ -40,10 +40,7 @@ class SonnerPage extends Sample {
                 ),
               );
 
-              showFToast(
-                context: context,
-                builder: buildToast,
-              );
+              showFToast(context: context, builder: buildToast);
             },
             child: const Text('Show Small Toast'),
           ),
@@ -58,18 +55,15 @@ class SonnerPage extends Sample {
                     padding: EdgeInsets.symmetric(vertical: 5),
                     child: Text(
                       'This is a more detailed description that provides comprehensive context and additional '
-                          'information about the notification, explaining what happened and what the user might expect '
-                          'next.',
+                      'information about the notification, explaining what happened and what the user might expect '
+                      'next.',
                     ),
                   ),
                   child: FButton(onPress: () => toast.dismiss(), child: const Text('Undo')),
                 ),
               );
 
-              showFToast(
-                context: context,
-                builder: buildToast,
-              );
+              showFToast(context: context, builder: buildToast);
             },
             child: const Text('Show Large Toast'),
           ),
