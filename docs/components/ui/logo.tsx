@@ -2,23 +2,14 @@
 
 import { useTheme } from 'nextra-theme-docs';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 
 interface Props {
   className?: string;
 }
 
-export default function Logo({ className = 'w-24 h-auto' }: Props) {
+function Logo({ className = 'w-24 h-auto' }: Props) {
   const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <Image
@@ -30,3 +21,7 @@ export default function Logo({ className = 'w-24 h-auto' }: Props) {
     />
   );
 }
+
+export default dynamic(() => Promise.resolve(Logo), {
+  ssr: false
+});

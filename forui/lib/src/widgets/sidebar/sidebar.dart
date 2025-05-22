@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 
 part 'sidebar.style.dart';
 
-/// A sidebar widget that provides an opinionated layout.
+/// A sidebar widget that provides an opinionated layout on the side of the screen.
 ///
 /// The [FSidebar] widget is useful for creating navigation sidebars with
 /// a header (sticky), content (scrollable), and footer (sticky) sections.
@@ -166,10 +166,10 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
     required this.width,
     required this.borderColor,
     required this.borderWidth,
-    required this.headerPadding,
-    required this.contentPadding,
-    required this.footerPadding,
     required this.groupStyle,
+    this.headerPadding = const EdgeInsets.fromLTRB(16, 16, 16, 0),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    this.footerPadding = const EdgeInsets.fromLTRB(16, 0, 16, 16),
   });
 
   /// Creates a [FSidebarStyle] that inherits its properties from the theme.
@@ -177,10 +177,7 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
     : this(
         width: 250,
         borderColor: colors.border,
-        borderWidth: 1,
-        headerPadding: const EdgeInsets.all(12),
-        contentPadding: const EdgeInsets.all(12),
-        footerPadding: const EdgeInsets.all(12),
+        borderWidth: style.borderWidth,
         groupStyle: FSidebarGroupStyle.inherit(colors: colors, typography: typography, style: style),
       );
 }

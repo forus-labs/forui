@@ -189,15 +189,15 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
     required this.focusedOutlineStyle,
     required this.itemStyle,
     this.headerSpacing = 8,
-    this.headerPadding = const EdgeInsets.fromLTRB(8, 0, 8, 2),
+    this.headerPadding = const EdgeInsets.fromLTRB(12, 0, 8, 2),
     this.childrenSpacing = 2,
-    this.childrenPadding = const EdgeInsets.fromLTRB(0, 0, 0, 12),
+    this.childrenPadding = const EdgeInsets.fromLTRB(0, 0, 0, 24),
   });
 
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
   FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis),
+        labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis, fontWeight: FontWeight.w500),
         actionStyle: FWidgetStateMap({
           WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 18),
           WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
