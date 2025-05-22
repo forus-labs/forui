@@ -95,11 +95,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
                 onPress: () {},
               ),
               FSidebarItem(icon: const Icon(FIcons.user), label: const Text('Profile')),
-              FSidebarItem(
-                icon: const Icon(FIcons.bell),
-                label: const Text('Notifications'),
-                onPress: () {},
-              ),
+              FSidebarItem(icon: const Icon(FIcons.bell), label: const Text('Notifications'), onPress: () {}),
             ],
           ),
           FSidebarGroup(
