@@ -173,7 +173,7 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
     this.footerPadding = const EdgeInsets.fromLTRB(16, 0, 16, 16),
   });
 
-  /// Creates a [FSidebarStyle] that inherits its properties from the theme.
+  /// Creates a [FSidebarStyle] that inherits its properties.
   FSidebarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         width: 250,

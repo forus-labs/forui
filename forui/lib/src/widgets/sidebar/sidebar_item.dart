@@ -192,7 +192,7 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
           AnimatedBuilder(
             animation: _curvedAnimation,
             builder:
-                (context, child) => FCollapsible(
+                (_, _) => FCollapsible(
                   value: _controller.value,
                   child: Padding(
                     padding: style.childrenPadding,
@@ -210,15 +210,15 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
 
   @override
   void dispose() {
-    _controller.dispose();
     _curvedAnimation.dispose();
+    _controller.dispose();
     super.dispose();
   }
 }
 
 /// The style for a [FSidebarItem].
 class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
-  /// The text style for the label.
+  /// The label's text style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
@@ -228,7 +228,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final double iconSpacing;
 
-  /// The style for the icon.
+  /// The icon's style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
@@ -238,13 +238,13 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final double collapsibleIconSpacing;
 
-  /// The style for the collapsible widget.
+  /// The collapsible style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<IconThemeData> collapsibleIconStyle;
 
-  /// The duration of the expand/collapse animation.
+  /// The expand/collapse animation's duration.
   @override
   final Duration collapsibleAnimationDuration;
 
@@ -266,7 +266,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The border radius of the item.
+  /// The item's border radius.
   @override
   final BorderRadius borderRadius;
 
