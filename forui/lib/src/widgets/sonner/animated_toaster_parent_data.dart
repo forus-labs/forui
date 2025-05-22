@@ -70,6 +70,7 @@ class AnimatedToast extends ParentDataWidget<AnimatedToasterParentData> {
     properties
       ..add(DiagnosticsProperty('index', index.toString()))
       ..add(DoubleProperty('transition', transition))
+      ..add(DiagnosticsProperty('visible', visible))
       ..add(IntProperty('signal', signal));
   }
 }
