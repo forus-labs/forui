@@ -1,0 +1,132 @@
+import { Callout, Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Sonner
+
+An opinionated toast that temporarily displays a succinct message. 
+
+To show a toast, use the `showFToast(...)` function. The function must be called from a widget that is a descendant of a
+`FSonner` or `FScaffold` widget.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sonner/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='sonner' query={{}} height={620}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {13, 37, 60} copy
+    class SonnerPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) {
+        final cardStyle = context.theme.cardStyle.copyWith(
+          contentStyle: context.theme.cardStyle.contentStyle.copyWith(
+            titleTextStyle: context.theme.typography.sm.copyWith(
+              color: context.theme.colors.primary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        );
+
+        return FSonner(
+          child: Builder(
+            builder: (context) => Expanded(
+              child:
+               Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 5,
+                  children: [
+                    FButton(
+                      intrinsicWidth: true,
+                      onPress: () {
+                        Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
+                          child: FCard(
+                            style: cardStyle,
+                            title: const Text('Event has been created'),
+                            subtitle: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              child: Text('This is a brief description that provides additional context.'),
+                            ),
+                            child: FButton(onPress: () => toast.dismiss(), child: const Text('Undo')),
+                          ),
+                        );
+
+                        showFToast(context: context, builder: buildToast);
+                      },
+                      child: const Text('Show Small Toast'),
+                    ),
+                    FButton(
+                      intrinsicWidth: true,
+                      onPress: () {
+                        Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
+                          child: FCard(
+                            style: cardStyle,
+                            title: const Text('Event has been created'),
+                            subtitle: const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5),
+                              child: Text(
+                                'This is a more detailed description that provides comprehensive context and additional '
+                                'information about the notification, explaining what happened and what the user might expect '
+                                'next.',
+                              ),
+                            ),
+                            child: FButton(onPress: () => toast.dismiss(), child: const Text('Undo')),
+                          ),
+                        );
+
+                        showFToast(context: context, builder: buildToast);
+                      },
+                      child: const Text('Show Large Toast'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create sonner 
+```
+
+## Usage
+
+### `showFToast(...)`
+
+```dart copy
+showFToast(
+  context: context,
+  style: FSonnerStyle(...),
+  alignment: FSonnerAlignment.,
+  duration: const Duration(seconds: 10),
+  builder: (context, toast) => FCard(
+    title: Text('Download Complete'),
+    subtitle: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 10,
+      children: [
+        Text('Your file has been downloaded.'),
+        FButton(
+          onPress: () => toast.dismiss(),
+          child: const Text('Dismiss'),
+        ),
+      ],
+    ),
+  ),
+);
+```

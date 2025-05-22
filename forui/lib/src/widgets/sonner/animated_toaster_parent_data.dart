@@ -11,12 +11,16 @@ class AnimatedToast extends ParentDataWidget<AnimatedToasterParentData> {
   /// The transition between different indexes.
   final double transition;
 
+  /// True if visible.
+  final bool visible;
+
   /// The signal to indicate that a widget update has occurred.
   final int signal;
 
   const AnimatedToast({
     required this.index,
     required this.transition,
+    required this.visible,
     required this.signal,
     required super.child,
     super.key,
@@ -39,6 +43,11 @@ class AnimatedToast extends ParentDataWidget<AnimatedToasterParentData> {
 
     if (data.transition != transition) {
       data.transition = transition;
+      needsLayout = true;
+    }
+
+    if (data.visible != visible) {
+      data.visible = visible;
       needsLayout = true;
     }
 
@@ -83,6 +92,9 @@ class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
 
   /// The transition between different indexes.
   double transition = 0.0;
+
+  /// True if visible.
+  bool visible = true;
 
   int _signal = 0;
 

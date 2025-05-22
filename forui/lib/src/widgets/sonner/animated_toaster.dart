@@ -102,6 +102,7 @@ class RenderAnimatedToaster extends RenderBox
     var current = lastChild;
     var previousHeight = 0.0;
     var accumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
+    var visibleAccumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
 
     // First pass: calculate the offset to move the toasts when expanded, relative to (0, 0).
     //
@@ -116,6 +117,9 @@ class RenderAnimatedToaster extends RenderBox
         // Top aligned toasts use the current height as the offset.
         final iterationHeight = current == lastChild ? 0.0 : -current.size.height;
         accumulated += iterationHeight;
+        if (data.visible) {
+          visibleAccumulated += iterationHeight;
+        }
 
         // Top aligned toasts' origins are affected by the previous front toast and not the current front toast. This is
         // because the front toast's content is rendered after (0, 0) in the 1st quadrant.
@@ -130,6 +134,9 @@ class RenderAnimatedToaster extends RenderBox
         // Bottom aligned toasts use the height of the toast in front as the offset.
         final iterationHeight = previousHeight;
         accumulated += iterationHeight;
+        if (data.visible) {
+          visibleAccumulated += iterationHeight;
+        }
 
         final front = current == lastChild ? Size.zero : lastChild!.size;
         final begin =
@@ -141,6 +148,9 @@ class RenderAnimatedToaster extends RenderBox
       }
 
       accumulated += collapsedAlignTransform.dy * style.expandSpacing;
+      if (data.visible) {
+        visibleAccumulated += collapsedAlignTransform.dy * style.expandSpacing;
+      }
 
       previousHeight = current.size.height;
       current = data.previousSibling;
@@ -165,20 +175,15 @@ class RenderAnimatedToaster extends RenderBox
     final collapsedSize = Size.lerp(previousFrontSize, front.size, data.transition)!;
 
     final baseHeight = collapsedAlignTransform.dy.isNegative ? front.size.height : firstChild!.size.height;
-    final expandedSize = Size(front.size.width, baseHeight + accumulated.abs());
+    final expandedSize = Size(front.size.width, baseHeight + visibleAccumulated.abs());
 
     size = constraints.constrain(Size.lerp(collapsedSize, expandedSize, expand * data.transition)!);
 
-    // Second pass: Shifts offsets if the [collapsed] is negative (toaster expands leftwards/upwards).
-    if (!collapsedAlignTransform.dy.isNegative) {
-      return;
-    }
-
-    final translateY = accumulated.isNegative ? -accumulated * data.transition * expand : 0.0;
-
+    final translateY = visibleAccumulated.isNegative ? -visibleAccumulated * data.transition * expand : 0.0;
     var child = firstChild;
     while (child != null) {
       final data = child.parentData! as AnimatedToasterParentData;
+      // Horizontally aligns the toast to the left, center or right based on [expandedAlignTransform].
       final translateX =
           data.transition *
           expand *

@@ -1,6 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
+Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
+  builder: (context) => FButton(
+    intrinsicWidth: true,
+    onPress: () => showFToast(
+      alignment: alignment,
+      context: context,
+      builder: (_, _) => Container(
+        width: 250,
+        height: 143,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.blue),
+        child: Text(text),
+      ),
+    ),
+    child: Text(text),
+  ),
+);
+
+Widget big(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
+  builder: (context) => FButton(
+    intrinsicWidth: true,
+    onPress: () => showFToast(
+      alignment: alignment,
+      context: context,
+      builder: (_, _) => Container(
+        width: 312,
+        height: 201,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.red),
+        child: Text(text),
+      ),
+    ),
+    child: Text(text),
+  ),
+);
+
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -11,57 +47,68 @@ class Sandbox extends StatefulWidget {
 class _SandboxState extends State<Sandbox> {
   @override
   Widget build(BuildContext context) {
+    final cardStyle = context.theme.cardStyle.copyWith(
+      contentStyle: context.theme.cardStyle.contentStyle.copyWith(
+        titleTextStyle: context.theme.typography.sm.copyWith(
+          color: context.theme.colors.primary,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+
     return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       spacing: 5,
       children: [
         FButton(
+          intrinsicWidth: true,
           onPress: () {
-            Widget buildToast(BuildContext context, FToast toast) =>
-                IntrinsicHeight(
-                  child: FCard(
-                    title: Text('Event has been created'),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: FButton(onPress: () => toast.dismiss(), child: const Text('close')),
-                    ),
-                  ),
-                );
+            Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
+              child: FCard(
+                style: cardStyle,
+                title: const Text('Event has been created'),
+                subtitle: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Text('This is a brief description that provides additional context.'),
+                ),
+                child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
+              ),
+            );
 
-            showFToast(context: context, builder: buildToast, alignment: FSonnerAlignment.bottomRight, duration: const Duration(minutes: 1));
+            showFToast(
+              context: context,
+              builder: buildToast,
+              alignment: FSonnerAlignment.bottomRight,
+              duration: const Duration(minutes: 1),
+            );
           },
           child: Text('Small'),
         ),
         FButton(
+          intrinsicWidth: true,
           onPress: () {
-            Widget buildToast(BuildContext context, FToast toast) =>
-                IntrinsicHeight(
-                  child: FCard(
-                    style: FThemes.zinc.dark.cardStyle,
-                    title: Text('Event has been created'),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 10,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('This is a large card.'),
-                            Text('It can span multiple lines.'),
-                            Text('It can also have a lot of text.'),
-                            Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-                          ],
-                        ),
-                        FButton(
-                          style: FThemes.zinc.dark.buttonStyles.primary,
-                          onPress: () => toast.dismiss(),
-                          child: const Text('close'),
-                        ),
-                      ],
-                    ),
+            Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
+              child: FCard(
+                style: cardStyle,
+                title: const Text('Event has been created'),
+                subtitle: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Text(
+                    'This is a more detailed description that provides comprehensive context and additional information '
+                    'about the notification, explaining what happened and what the user might expect next.',
                   ),
-                );
+                ),
+                child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
+              ),
+            );
 
-            showFToast(context: context, builder: buildToast, alignment: FSonnerAlignment.bottomRight, duration: const Duration(minutes: 1));
+            showFToast(
+              context: context,
+              builder: buildToast,
+              alignment: FSonnerAlignment.bottomRight,
+              duration: const Duration(minutes: 1),
+            );
           },
           child: Text('Large'),
         ),

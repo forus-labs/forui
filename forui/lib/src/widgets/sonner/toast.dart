@@ -192,6 +192,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     return AnimatedToast(
       index: widget.index,
       transition: _transition.value,
+      visible: widget.visible,
       signal: _signal,
       child: IgnorePointer(
         ignoring: !widget.visible,
