@@ -19,27 +19,13 @@ void main() {
                   action: const Icon(FIcons.plus),
                   onActionPress: () {},
                   children: [
-                    FSidebarItem(
-                      icon: const Icon(FIcons.box),
-                      label: const Text('Item 1'),
-                      onPress: () {},
-                    ),
-                    FSidebarItem(
-                      icon: const Icon(FIcons.folder),
-                      label: const Text('Item 2'),
-                      onPress: () {},
-                    ),
+                    FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
+                    FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
                   ],
                 ),
                 FSidebarGroup(
                   label: const Text('Group 2'),
-                  children: [
-                    FSidebarItem(
-                      icon: const Icon(FIcons.file),
-                      label: const Text('Item 3'),
-                      onPress: () {},
-                    ),
-                  ],
+                  children: [FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {})],
                 ),
               ],
             ),
@@ -64,27 +50,13 @@ void main() {
                   action: const Icon(FIcons.plus),
                   onActionPress: () {},
                   children: [
-                    FSidebarItem(
-                      icon: const Icon(FIcons.box),
-                      label: const Text('Item 1'),
-                      onPress: () {},
-                    ),
-                    FSidebarItem(
-                      icon: const Icon(FIcons.folder),
-                      label: const Text('Item 2'),
-                      onPress: () {},
-                    ),
+                    FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
+                    FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
                   ],
                 ),
                 FSidebarGroup(
                   label: const Text('Group 2'),
-                  children: [
-                    FSidebarItem(
-                      icon: const Icon(FIcons.file),
-                      label: const Text('Item 3'),
-                      onPress: () {},
-                    ),
-                  ],
+                  children: [FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {})],
                 ),
               ],
             ),
@@ -100,14 +72,8 @@ void main() {
             theme: theme.data,
             child: FSidebar(
               children: [
-                FSidebarItem(
-                  label: const Text('Item 1'),
-                  onPress: () {},
-                ),
-                FSidebarItem(
-                  label: const Text('Item 2'),
-                  onPress: () {},
-                ),
+                FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                FSidebarItem(label: const Text('Item 2'), onPress: () {}),
               ],
             ),
           ),
@@ -123,20 +89,17 @@ void main() {
             child: FSidebar(
               header: const Text('Header'),
               children: [
-                FSidebarItem(
-                  label: const Text('Item 1'),
-                  onPress: () {},
-                ),
-                FSidebarItem(
-                  label: const Text('Item 2'),
-                  onPress: () {},
-                ),
+                FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                FSidebarItem(label: const Text('Item 2'), onPress: () {}),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar/${theme.name}/with-header-only.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('sidebar/sidebar/${theme.name}/with-header-only.png'),
+        );
       });
 
       testWidgets('with footer only - ${theme.name}', (tester) async {
@@ -146,20 +109,17 @@ void main() {
             child: FSidebar(
               footer: const Text('Footer'),
               children: [
-                FSidebarItem(
-                  label: const Text('Item 1'),
-                  onPress: () {},
-                ),
-                FSidebarItem(
-                  label: const Text('Item 2'),
-                  onPress: () {},
-                ),
+                FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                FSidebarItem(label: const Text('Item 2'), onPress: () {}),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar/${theme.name}/with-footer-only.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('sidebar/sidebar/${theme.name}/with-footer-only.png'),
+        );
       });
 
       testWidgets('with custom width - ${theme.name}', (tester) async {
@@ -171,20 +131,17 @@ void main() {
               header: const Text('Header'),
               footer: const Text('Footer'),
               children: [
-                FSidebarItem(
-                  label: const Text('Item 1'),
-                  onPress: () {},
-                ),
-                FSidebarItem(
-                  label: const Text('Item 2'),
-                  onPress: () {},
-                ),
+                FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                FSidebarItem(label: const Text('Item 2'), onPress: () {}),
               ],
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar/${theme.name}/with-custom-width.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('sidebar/sidebar/${theme.name}/with-custom-width.png'),
+        );
       });
 
       testWidgets('with builder - ${theme.name}', (tester) async {
@@ -195,15 +152,15 @@ void main() {
               header: const Text('Header'),
               footer: const Text('Footer'),
               itemCount: 2,
-              itemBuilder: (context, index) => FSidebarItem(
-                label: Text('Item ${index + 1}'),
-                onPress: () {},
-              ),
+              itemBuilder: (context, index) => FSidebarItem(label: Text('Item ${index + 1}'), onPress: () {}),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar/${theme.name}/with-builder.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('sidebar/sidebar/${theme.name}/with-builder.png'),
+        );
       });
 
       testWidgets('with raw content - ${theme.name}', (tester) async {
@@ -215,21 +172,18 @@ void main() {
               footer: const Text('Footer'),
               child: ListView(
                 children: [
-                  FSidebarItem(
-                    label: const Text('Item 1'),
-                    onPress: () {},
-                  ),
-                  FSidebarItem(
-                    label: const Text('Item 2'),
-                    onPress: () {},
-                  ),
+                  FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                  FSidebarItem(label: const Text('Item 2'), onPress: () {}),
                 ],
               ),
             ),
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar/${theme.name}/with-raw-content.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('sidebar/sidebar/${theme.name}/with-raw-content.png'),
+        );
       });
 
       testWidgets('RTL - ${theme.name}', (tester) async {
@@ -246,27 +200,13 @@ void main() {
                   action: const Icon(FIcons.plus),
                   onActionPress: () {},
                   children: [
-                    FSidebarItem(
-                      icon: const Icon(FIcons.box),
-                      label: const Text('Item 1'),
-                      onPress: () {},
-                    ),
-                    FSidebarItem(
-                      icon: const Icon(FIcons.folder),
-                      label: const Text('Item 2'),
-                      onPress: () {},
-                    ),
+                    FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
+                    FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
                   ],
                 ),
                 FSidebarGroup(
                   label: const Text('Group 2'),
-                  children: [
-                    FSidebarItem(
-                      icon: const Icon(FIcons.file),
-                      label: const Text('Item 3'),
-                      onPress: () {},
-                    ),
-                  ],
+                  children: [FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {})],
                 ),
               ],
             ),

@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'sidebar_group.style.dart';
 
@@ -121,17 +122,14 @@ class FSidebarGroupData extends InheritedWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if there is no ancestor [FSidebarGroup] in the given [context].
-  static FSidebarGroupData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FSidebarGroupData>();
+  static FSidebarGroupData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FSidebarGroupData>();
 
   /// The [FSidebarGroup]'s style.
   final FSidebarGroupStyle style;
 
   /// Creates a [FSidebarGroupData].
-  const FSidebarGroupData({
-    required this.style,
-    required super.child,
-    super.key,
-  });
+  const FSidebarGroupData({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FSidebarGroupData old) => style != old.style;
@@ -197,7 +195,11 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
   FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis, fontWeight: FontWeight.w500),
+        labelStyle: typography.sm.copyWith(
+          color: colors.mutedForeground,
+          overflow: TextOverflow.ellipsis,
+          fontWeight: FontWeight.w500,
+        ),
         actionStyle: FWidgetStateMap({
           WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 18),
           WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
