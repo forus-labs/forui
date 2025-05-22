@@ -156,7 +156,7 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
                   borderRadius: style.borderRadius,
                 ),
                 child: Row(
-                  spacing: style.collapsibleSpacing,
+                  spacing: style.collapsibleIconSpacing,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
@@ -235,7 +235,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
 
   /// The spacing between the label and collapsible widget.
   @override
-  final double collapsibleSpacing;
+  final double collapsibleIconSpacing;
 
   /// The style for the collapsible widget.
   ///
@@ -287,9 +287,9 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     this.iconSpacing = 8,
-    this.collapsibleSpacing = 8,
+    this.collapsibleIconSpacing = 8,
     this.childrenSpacing = 2,
-    this.childrenPadding = const EdgeInsets.only(left: 10, top: 4),
+    this.childrenPadding = const EdgeInsets.only(left: 26, top: 2),
     this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
     this.collapsibleAnimationDuration = const Duration(milliseconds: 100),
   });

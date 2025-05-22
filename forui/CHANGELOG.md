@@ -6,6 +6,16 @@
 
 * Fix style suggestions always displaying actual style name instead of alias.
 
+
+### `FSidebar`
+
+* Add `FSidebar`.
+
+* Add `FSidebarGroup`.
+
+* Add `FSidebarItem`.
+
+
 ### `FTabs`
 
 * Add `FTabs.onPress`.

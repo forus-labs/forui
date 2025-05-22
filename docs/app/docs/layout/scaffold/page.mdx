@@ -1,3 +1,4 @@
+import { Callout } from 'nextra/components';
 import { Tabs } from 'nextra/components';
 import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
@@ -127,6 +128,10 @@ dart run forui style create scaffold
 
 ## Usage
 
+<Callout type="info">
+    A scaffold may include a sidebar. A working example can be found [here](/docs/navigation/sidebar).
+</Callout>
+
 ### `FScaffold(...)`
 
 ```dart copy
@@ -150,6 +155,7 @@ FScaffold(
       ),
     ],
   ),
+  sidebar: FSidebar(children: const []),
   footer: FBottomNavigationBar(children: const []),
 );
 ```
