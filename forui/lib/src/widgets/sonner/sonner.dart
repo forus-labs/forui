@@ -157,8 +157,21 @@ class FSonnerState extends State<FSonner> {
 
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     if (_entries[entry.alignment.resolve(direction)]?.$2 case final entries?) {
-      setState(() => entries.remove(entry));
+      setState(() {
+        entries.remove(entry);
+        entry.dismissing.dispose();
+      });
     }
+  }
+
+  @override
+  void dispose() {
+    for (final MapEntry(value: entries) in _entries.entries) {
+      for (final entry in entries.$2) {
+        entry.dismissing.dispose();
+      }
+    }
+    super.dispose();
   }
 
   @override

@@ -78,11 +78,11 @@ class Toast extends StatefulWidget {
 class _ToastState extends State<Toast> with TickerProviderStateMixin {
   late Timer _timer;
   late final AnimationController _entranceExitController;
-  late Animation<double> _entranceExit;
+  late CurvedAnimation _entranceExit;
   late final AnimationController _transitionController;
-  late Animation<double> _transition;
+  late CurvedAnimation _transition;
   late final AnimationController _visibleController;
-  late Animation<double> _visible;
+  late CurvedAnimation _visible;
 
   int _signal = 0; // Used to signal to [RenderAnimatedToaster] that a toast has been updated.
 
@@ -175,7 +175,11 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
   @override
   void dispose() {
     widget.dismissing.removeListener(_dismissing);
+    _visible.dispose();
+    _visibleController.dispose();
+    _transition.dispose();
     _transitionController.dispose();
+    _entranceExit.dispose();
     _entranceExitController.dispose();
     _timer.cancel();
     super.dispose();
