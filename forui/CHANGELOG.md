@@ -7,7 +7,7 @@
 * Fix style suggestions always displaying actual style name instead of alias.
 
 
-### `FSidebar`
+### `FSidebar` (new)
 
 * Add `FSidebar`.
 

@@ -245,21 +245,25 @@ class CustomWidthSidebarPage extends Sample {
   Widget sample(BuildContext context) => FSidebar(
     width: 500,
     children: [
-      FSidebarItem(
-        icon: const Icon(FIcons.layoutDashboard),
-        label: const Text('Dashboard'),
-        selected: true,
-        onPress: () {},
-      ),
-      FSidebarItem(icon: const Icon(FIcons.chartLine), label: const Text('Analytics'), onPress: () {}),
-      FSidebarItem(
-        icon: const Icon(FIcons.chartBar),
-        label: const Text('Reports'),
-        initiallyExpanded: true,
+      FSidebarGroup(
         children: [
-          FSidebarItem(label: const Text('Daily'), onPress: () {}),
-          FSidebarItem(label: const Text('Weekly'), onPress: () {}),
-          FSidebarItem(label: const Text('Monthly'), onPress: () {}),
+          FSidebarItem(
+            icon: const Icon(FIcons.layoutDashboard),
+            label: const Text('Dashboard'),
+            selected: true,
+            onPress: () {},
+          ),
+          FSidebarItem(icon: const Icon(FIcons.chartLine), label: const Text('Analytics'), onPress: () {}),
+          FSidebarItem(
+            icon: const Icon(FIcons.chartBar),
+            label: const Text('Reports'),
+            initiallyExpanded: true,
+            children: [
+              FSidebarItem(label: const Text('Daily'), onPress: () {}),
+              FSidebarItem(label: const Text('Weekly'), onPress: () {}),
+              FSidebarItem(label: const Text('Monthly'), onPress: () {}),
+            ],
+          ),
         ],
       ),
     ],
@@ -274,39 +278,43 @@ class NestedSidebarPage extends Sample {
   Widget sample(BuildContext context) => FSidebar(
     width: 300,
     children: [
-      FSidebarItem(
-        icon: const Icon(FIcons.userRound),
-        label: const Text('Account'),
-        initiallyExpanded: true,
+      FSidebarGroup(
         children: [
           FSidebarItem(
-            label: const Text('Profile'),
-            children: [
-              FSidebarItem(label: const Text('Personal Info'), onPress: () {}),
-              FSidebarItem(label: const Text('Preferences'), onPress: () {}),
-            ],
-          ),
-          FSidebarItem(
-            label: const Text('Security'),
+            icon: const Icon(FIcons.userRound),
+            label: const Text('Account'),
             initiallyExpanded: true,
             children: [
               FSidebarItem(
-                label: const Text('Password'),
-                initiallyExpanded: true,
+                label: const Text('Profile'),
                 children: [
-                  FSidebarItem(label: const Text('Change Password'), onPress: () {}),
-                  FSidebarItem(label: const Text('Password History'), onPress: () {}),
+                  FSidebarItem(label: const Text('Personal Info'), onPress: () {}),
+                  FSidebarItem(label: const Text('Preferences'), onPress: () {}),
                 ],
               ),
-              FSidebarItem(label: const Text('Two-Factor Authentication'), onPress: () {}),
-              FSidebarItem(label: const Text('Device History'), onPress: () {}),
+              FSidebarItem(
+                label: const Text('Security'),
+                initiallyExpanded: true,
+                children: [
+                  FSidebarItem(
+                    label: const Text('Password'),
+                    initiallyExpanded: true,
+                    children: [
+                      FSidebarItem(label: const Text('Change Password'), onPress: () {}),
+                      FSidebarItem(label: const Text('Password History'), onPress: () {}),
+                    ],
+                  ),
+                  FSidebarItem(label: const Text('Two-Factor Authentication'), onPress: () {}),
+                  FSidebarItem(label: const Text('Device History'), onPress: () {}),
+                ],
+              ),
+              FSidebarItem(label: const Text('Notifications'), onPress: () {}),
             ],
           ),
-          FSidebarItem(label: const Text('Notifications'), onPress: () {}),
+          FSidebarItem(icon: const Icon(FIcons.palette), label: const Text('Appearance'), onPress: () {}),
+          FSidebarItem(icon: const Icon(FIcons.settings), label: const Text('System'), onPress: () {}),
         ],
       ),
-      FSidebarItem(icon: const Icon(FIcons.palette), label: const Text('Appearance'), onPress: () {}),
-      FSidebarItem(icon: const Icon(FIcons.settings), label: const Text('System'), onPress: () {}),
     ],
   );
 }
