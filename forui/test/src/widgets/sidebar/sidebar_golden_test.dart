@@ -168,12 +168,13 @@ void main() {
               header: const Text('Header'),
               footer: const Text('Footer'),
               itemCount: 2,
-              itemBuilder: (context, index) => FSidebarGroup(
-                children: [
-                  FSidebarItem(label: Text('Item ${index + 1}'), onPress: () {}),
-                  FSidebarItem(label: Text('Item ${index + 1}'), onPress: () {}),
-                ],
-              ),
+              itemBuilder:
+                  (context, index) => FSidebarGroup(
+                    children: [
+                      FSidebarItem(label: Text('Item ${index + 1}'), onPress: () {}),
+                      FSidebarItem(label: Text('Item ${index + 1}'), onPress: () {}),
+                    ],
+                  ),
             ),
           ),
         );
