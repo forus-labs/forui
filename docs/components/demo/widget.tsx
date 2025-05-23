@@ -1,6 +1,7 @@
 'use client';
 
 import { useTheme } from 'nextra-theme-docs';
+import dynamic from 'next/dynamic';
 
 interface Props {
   name: string;
@@ -9,7 +10,7 @@ interface Props {
   query?: Record<string, string>;
 }
 
-export function Widget({ name, variant = 'default', height = 200, query = {} }: Props) {
+function Component({ name, variant = 'default', height = 200, query = {} }: Props) {
   const { resolvedTheme } = useTheme();
   query['theme'] = `zinc-${resolvedTheme}`;
 
@@ -23,3 +24,7 @@ export function Widget({ name, variant = 'default', height = 200, query = {} }: 
     />
   );
 }
+
+export const Widget = dynamic(() => Promise.resolve(Component), {
+  ssr: false
+});

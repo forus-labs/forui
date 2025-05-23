@@ -36,6 +36,16 @@ part 'scaffold.style.dart';
 /// * https://forui.dev/docs/layout/scaffold for working examples.
 /// * [FScaffoldStyle] for customizing a scaffold's appearance.
 class FScaffold extends StatelessWidget {
+  /// The style. Defaults to [FThemeData.scaffoldStyle].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create scaffold
+  /// ```
+  final FScaffoldStyle? style;
+
   /// The main content area of the scaffold.
   final Widget child;
 
@@ -60,25 +70,15 @@ class FScaffold extends StatelessWidget {
   /// Defaults to `true`.
   final bool resizeToAvoidBottomInset;
 
-  /// The style. Defaults to [FThemeData.scaffoldStyle].
-  ///
-  /// ## CLI
-  /// To generate and customize this style:
-  ///
-  /// ```shell
-  /// dart run forui style create scaffold
-  /// ```
-  final FScaffoldStyle? style;
-
   /// Creates a [FScaffold].
   const FScaffold({
     required this.child,
+    this.style,
     this.header,
     this.sidebar,
     this.footer,
     this.childPad = true,
     this.resizeToAvoidBottomInset = true,
-    this.style,
     super.key,
   });
 

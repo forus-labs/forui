@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:forui_example/portal/visualizer.dart';
+import 'package:forui/forui.dart';
 
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
@@ -12,6 +12,15 @@ class Sandbox extends StatefulWidget {
 class _SandboxState extends State<Sandbox> {
   @override
   Widget build(BuildContext context) {
-    return const Visualizer();
+    return ListView(
+      children: [
+        FTile(
+          prefixIcon: Icon(FIcons.bell),
+          title: const Text('Home'),
+          suffixIcon: Icon(FIcons.chevronRight),
+          // onPress: () {},
+        ),
+      ],
+    );
   }
 }
