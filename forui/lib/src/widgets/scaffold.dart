@@ -83,14 +83,13 @@ class FScaffold extends StatelessWidget {
   /// Creates a [FScaffold].
   const FScaffold({
     required this.child,
-    this.style,
+    this.scaffoldStyle,
+    this.sonnerStyle,
     this.header,
     this.sidebar,
     this.footer,
     this.childPad = true,
     this.resizeToAvoidBottomInset = true,
-    this.scaffoldStyle,
-    this.sonnerStyle,
     super.key,
   });
 
