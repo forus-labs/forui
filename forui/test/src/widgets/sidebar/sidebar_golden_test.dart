@@ -72,8 +72,12 @@ void main() {
             theme: theme.data,
             child: FSidebar(
               children: [
-                FSidebarItem(label: const Text('Item 1'), onPress: () {}),
-                FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                FSidebarGroup(
+                  children: [
+                    FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                    FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                  ],
+                ),
               ],
             ),
           ),
@@ -89,8 +93,12 @@ void main() {
             child: FSidebar(
               header: const Text('Header'),
               children: [
-                FSidebarItem(label: const Text('Item 1'), onPress: () {}),
-                FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                FSidebarGroup(
+                  children: [
+                    FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                    FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                  ],
+                ),
               ],
             ),
           ),
@@ -109,8 +117,12 @@ void main() {
             child: FSidebar(
               footer: const Text('Footer'),
               children: [
-                FSidebarItem(label: const Text('Item 1'), onPress: () {}),
-                FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                FSidebarGroup(
+                  children: [
+                    FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                    FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                  ],
+                ),
               ],
             ),
           ),
@@ -131,8 +143,12 @@ void main() {
               header: const Text('Header'),
               footer: const Text('Footer'),
               children: [
-                FSidebarItem(label: const Text('Item 1'), onPress: () {}),
-                FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                FSidebarGroup(
+                  children: [
+                    FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                    FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                  ],
+                ),
               ],
             ),
           ),
@@ -152,7 +168,12 @@ void main() {
               header: const Text('Header'),
               footer: const Text('Footer'),
               itemCount: 2,
-              itemBuilder: (context, index) => FSidebarItem(label: Text('Item ${index + 1}'), onPress: () {}),
+              itemBuilder: (context, index) => FSidebarGroup(
+                children: [
+                  FSidebarItem(label: Text('Item ${index + 1}'), onPress: () {}),
+                  FSidebarItem(label: Text('Item ${index + 1}'), onPress: () {}),
+                ],
+              ),
             ),
           ),
         );
@@ -172,8 +193,12 @@ void main() {
               footer: const Text('Footer'),
               child: ListView(
                 children: [
-                  FSidebarItem(label: const Text('Item 1'), onPress: () {}),
-                  FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                  FSidebarGroup(
+                    children: [
+                      FSidebarItem(label: const Text('Item 1'), onPress: () {}),
+                      FSidebarItem(label: const Text('Item 2'), onPress: () {}),
+                    ],
+                  ),
                 ],
               ),
             ),
