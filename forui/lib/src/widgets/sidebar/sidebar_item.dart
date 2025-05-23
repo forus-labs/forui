@@ -224,7 +224,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FWidgetStateMap<TextStyle> textStyle;
 
-  /// The spacing between the icon and label.
+  /// The spacing between the icon and label. Defaults to 8.
   @override
   final double iconSpacing;
 
@@ -234,25 +234,25 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
-  /// The spacing between the label and collapsible widget.
+  /// The spacing between the label and collapsible widget. Defaults to 8.
   @override
   final double collapsibleIconSpacing;
 
-  /// The collapsible style.
+  /// The collapsible icon's style.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
   final FWidgetStateMap<IconThemeData> collapsibleIconStyle;
 
-  /// The expand/collapse animation's duration.
+  /// The expand/collapse animation's duration. Defaults to 100ms.
   @override
   final Duration collapsibleAnimationDuration;
 
-  /// The spacing between child items.
+  /// The spacing between child items. Defaults to 2.
   @override
   final double childrenSpacing;
 
-  /// The padding around the children container.
+  /// The padding around the children container. Defaults to `EdgeInsets.only(left: 26, top: 2)`.
   @override
   final EdgeInsetsGeometry childrenPadding;
 
@@ -262,7 +262,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FWidgetStateMap<Color> backgroundColor;
 
-  /// The padding around the content.
+  /// The padding around the content. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 10)`.
   @override
   final EdgeInsetsGeometry padding;
 

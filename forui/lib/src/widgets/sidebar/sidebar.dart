@@ -32,7 +32,7 @@ part 'sidebar.style.dart';
 /// * https://forui.dev/docs/layout/sidebar for working examples.
 /// * [FSidebarStyle] for customizing a sidebar's appearance.
 class FSidebar extends StatelessWidget {
-  /// The sidebar's style.
+  /// The style.
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -134,40 +134,40 @@ class FSidebarData extends InheritedWidget {
 
 /// A [FSidebar]'s style.
 class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
-  /// The width of the sidebar.
+  /// The width of the sidebar. Defaults to 250.
   @override
   final double width;
 
-  /// The border color for the sidebar.
+  /// The border color.
   @override
   final Color borderColor;
 
-  /// The border width for the sidebar.
+  /// The border width.
   @override
   final double borderWidth;
 
-  /// The style for [FSidebarGroup]s.
+  /// The group's style.
   @override
   final FSidebarGroupStyle groupStyle;
 
-  /// The padding for the header section.
+  /// The padding for the header section. Defaults to `EdgeInsets.fromLTRB(16, 16, 16, 0)`.
   @override
   final EdgeInsetsGeometry headerPadding;
 
-  /// The padding for the content section.
+  /// The padding for the content section. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
   @override
   final EdgeInsetsGeometry contentPadding;
 
-  /// The padding for the footer section.
+  /// The padding for the footer section. Defaults to `EdgeInsets.fromLTRB(16, 0, 16, 16)`.
   @override
   final EdgeInsetsGeometry footerPadding;
 
   /// Creates a [FSidebarStyle].
   const FSidebarStyle({
-    required this.width,
     required this.borderColor,
     required this.borderWidth,
     required this.groupStyle,
+    this.width = 250,
     this.headerPadding = const EdgeInsets.fromLTRB(16, 16, 16, 0),
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
     this.footerPadding = const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -176,7 +176,6 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   /// Creates a [FSidebarStyle] that inherits its properties.
   FSidebarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        width: 250,
         borderColor: colors.border,
         borderWidth: style.borderWidth,
         groupStyle: FSidebarGroupStyle.inherit(colors: colors, typography: typography, style: style),

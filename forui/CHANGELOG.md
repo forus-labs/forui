@@ -8,6 +8,7 @@
 
 
 ### `FSidebar` (new)
+A sidebar widget that usually resides on the side of the screen for navigation.
 
 * Add `FSidebar`.
 * Add `FSidebarGroup`.

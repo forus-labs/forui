@@ -196,7 +196,7 @@ FSidebar(
   width: 250,
   header: const Text('Header'),
   footer: const Text('Footer'),
-  children: [],
+  children: [FSidebarGroup(...)],
 );
 ```
 
@@ -208,7 +208,7 @@ FSidebar.builder(
   header: const Text('Header'),
   footer: const Text('Footer'),
   itemCount: 5,
-  itemBuilder: (context, index) => FSidebarItem(),
+  itemBuilder: (context, index) => FSidebarGroup(...),
 );
 ```
 
@@ -230,7 +230,7 @@ FSidebarGroup(
   label: const Text('Group'),
   action: const Icon(FIcons.plus),
   onActionPress: () {},
-  children: [],
+  children: [FSidebarItem(...)],
 );
 ```
 
@@ -246,7 +246,7 @@ FSidebarItem(
   onLongPress: () {},
   onHoverChange: (hovered) {},
   onStateChange: (states) {},
-  children: [],
+  children: [FSidebarItem(...)],
 );
 ```
 

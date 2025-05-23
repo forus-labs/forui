@@ -143,31 +143,31 @@ class FSidebarGroupData extends InheritedWidget {
 
 /// The style for a [FSidebarGroup].
 class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
-  /// The spacing between the label and action in the header.
+  /// The spacing between the label and action in the header. Defaults to 8.
   @override
   final double headerSpacing;
 
-  /// The padding around the header.
+  /// The padding around the header. Defaults to `EdgeInsets.fromLTRB(12, 0, 8, 2)`.
   @override
   final EdgeInsetsGeometry headerPadding;
 
-  /// The text style for the label.
+  /// The label's text style.
   @override
   final TextStyle labelStyle;
 
-  /// The style for the action widget.
+  /// The action's style.
   @override
   final FWidgetStateMap<IconThemeData> actionStyle;
 
-  /// The spacing between children.
+  /// The spacing between children. Defaults to 2.
   @override
   final double childrenSpacing;
 
-  /// The padding around the children.
+  /// The padding around the children. Defaults to `EdgeInsets.fromLTRB(0, 0, 0, 24)`.
   @override
   final EdgeInsetsGeometry childrenPadding;
 
-  /// The tappable's style.
+  /// The tappable action's style.
   @override
   final FTappableStyle tappableStyle;
 
@@ -175,7 +175,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The style for [FSidebarItem]s.
+  /// The item's style.
   @override
   final FSidebarItemStyle itemStyle;
 

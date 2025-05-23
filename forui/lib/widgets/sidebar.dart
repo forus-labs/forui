@@ -1,6 +1,6 @@
 /// {@category Widgets}
 ///
-/// A sidebar widget that provides an opinionated layout.
+/// A sidebar widget that usually resides on the side of the screen for navigation.
 ///
 /// See:
 /// * https://forui.dev/docs/layout/sidebar for working examples of a sidebar.
