@@ -8,7 +8,7 @@ import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 An opinionated toast that temporarily displays a succinct message. 
 
 <Callout type="info">
-    To show a toast, use the `showFSonner(...)` or `showFRawSonner(...)` functions. The function must be called from a
+    To show a toast, use the `showFSonner(...)` or `showRawFSonner(...)` functions. The function must be called from a
     widget that is a descendant of a `FSonner` or `FScaffold` widget.
 </Callout>
 
@@ -22,80 +22,50 @@ An opinionated toast that temporarily displays a succinct message.
     <Widget name='sonner' query={{}} height={620}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {13, 37, 60} copy
+    ```dart copy
     class SonnerPage extends StatelessWidget {
+      SonnerPage({super.key});
+
       @override
-      Widget build(BuildContext context) {
-        final cardStyle = context.theme.cardStyle.copyWith(
-          contentStyle: context.theme.cardStyle.contentStyle.copyWith(
-            titleTextStyle: context.theme.typography.sm.copyWith(
-              color: context.theme.colors.primary,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        );
-
-        return FSonner(
-          child: Builder(
-            builder: (context) => Expanded(
-              child:
-               Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 5,
-                  children: [
-                    FButton(
-                      intrinsicWidth: true,
-                      onPress: () {
-                        Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
-                          child: FCard(
-                            style: cardStyle,
-                            title: const Text('Event has been created'),
-                            subtitle: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
-                              child: Text('This is a brief description that provides additional context.'),
-                            ),
-                            child: FButton(onPress: () => toast.dismiss(), child: const Text('Undo')),
+      Widget build(BuildContext context) => Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 5,
+          children: [
+            for (final (alignment, description) in [
+              (FSonnerAlignment.topLeft, 'Top Left'),
+              (FSonnerAlignment.topRight, 'Top Right'),
+              (FSonnerAlignment.bottomLeft, 'Bottom Left'),
+              (FSonnerAlignment.bottomRight, 'Bottom Right'),
+            ])
+              FButton(
+                onPress: () => showFSonner(
+                  context: context,
+                  alignment: alignment,
+                  title: const Text('Event has been created'),
+                  description: const Text('Friday, May 23, 2025 at 9:00 AM'),
+                  suffixBuilder: (context, entry, _) => IntrinsicHeight(
+                    child: FButton(
+                      style: context.theme.buttonStyles.primary.copyWith(
+                        contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
+                          textStyle: FWidgetStateMap.all(
+                            context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
                           ),
-                        );
-
-                        showFToast(context: context, builder: buildToast);
-                      },
-                      child: const Text('Show Small Toast'),
+                        ),
+                      ),
+                      onPress: entry.dismiss,
+                      child: const Text('Undo'),
                     ),
-                    FButton(
-                      intrinsicWidth: true,
-                      onPress: () {
-                        Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
-                          child: FCard(
-                            style: cardStyle,
-                            title: const Text('Event has been created'),
-                            subtitle: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5),
-                              child: Text(
-                                'This is a more detailed description that provides comprehensive context and additional '
-                                'information about the notification, explaining what happened and what the user might expect '
-                                'next.',
-                              ),
-                            ),
-                            child: FButton(onPress: () => toast.dismiss(), child: const Text('Undo')),
-                          ),
-                        );
-
-                        showFToast(context: context, builder: buildToast);
-                      },
-                      child: const Text('Show Large Toast'),
-                    ),
-                  ],
+                  ),
                 ),
+                child: Text('Show $description Toast'),
               ),
-            ),
-          ),
-        );
-      }
+          ],
+        ),
+      );
     }
     ```
-
   </Tabs.Tab>
 </Tabs>
 
@@ -109,6 +79,27 @@ dart run forui style create sonner
 
 ## Usage
 
+### `showFSonner(...)`
+
+```dart copy
+showRawFSonner(
+  context: context,
+  style: FSonnerStyle(...),
+  alignment: FSonnerAlignment.topRight,
+  duration: const Duration(seconds: 10),
+  onDismiss: () {},
+  icon: const Icon(FIcons.triangleAlert),
+  title: const Text('Download Complete'),
+  description: const Text('Your file has been downloaded.'),
+  suffix: FButton(
+    onPress: () => entry.dismiss(),
+    child: const Text('Undo'),
+  ),
+  showDismissButton: true,
+  onDismiss: () {},
+);
+```
+
 ### `showRawFSonner(...)`
 
 ```dart copy
@@ -117,6 +108,7 @@ showRawFSonner(
   style: FSonnerStyle(...),
   alignment: FSonnerAlignment.topRight,
   duration: const Duration(seconds: 10),
+  onDismiss: () {},
   builder: (context, entry) => FCard(
     title: Text('Download Complete'),
     subtitle: Column(
@@ -133,3 +125,154 @@ showRawFSonner(
   ),
 );
 ```
+
+## Examples
+
+### Appearance
+
+#### No Auto-Dismiss
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='sonner' variant='no-auto-dismiss' query={{}} height={620}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {11} copy
+    class NoAutoDismissSonnerPage extends StatelessWidget {
+      NoAutoDismissSonnerPage({@queryParam super.theme, super.key});
+
+      @override
+      Widget build(BuildContext context) => FSonner(
+        child: Center(
+          child: FButton(
+            intrinsicWidth: true,
+            onPress: () => showFSonner(
+              context: context,
+              duration: null,
+              icon: const Icon(FIcons.triangleAlert),
+              title: const Text('Event start time cannot be earlier than 8am'),
+            ),
+            child: const Text('Show Toast'),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Raw
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='sonner' variant='raw' query={{}} height={620}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class RawSonnerPage extends Sample {
+      RawSonnerPage({@queryParam super.theme, super.key});
+
+      @override
+      Widget sample(BuildContext context) {
+        final cardStyle = context.theme.cardStyle.copyWith(
+          contentStyle: context.theme.cardStyle.contentStyle.copyWith(
+            titleTextStyle: context.theme.typography.sm.copyWith(
+              color: context.theme.colors.primary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        );
+
+        return FSonner(
+          child: Center(
+            child: FButton(
+              intrinsicWidth: true,
+              onPress: () => showRawFSonner(
+                context: context,
+                duration: null,
+                builder: (context, toast) => FCard(
+                  style: cardStyle,
+                  title: const Text('Event has been created'),
+                  subtitle: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    child: Text(
+                      'This is a more detailed description that provides comprehensive context and additional information '
+                      'about the notification, explaining what happened and what the user might expect next.',
+                    ),
+                  ),
+                  child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
+                ),
+              ),
+              child: const Text('Show Toast'),
+            ),
+          )
+        );
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Behavior
+
+#### Always Expanded
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='sonner' variant='behavior' query={{behavior: 'always'}} height={620}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {8} copy
+    class SonnerPage extends StatelessWidget {
+      final FSonnerExpandBehavior behavior;
+
+      SonnerPage({super.key});
+
+      @override
+      Widget build(BuildContext context) => FScaffold(
+        sonnerStyle: context.theme.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.always),
+        child: Builder(
+          builder: (context) => Center(
+            child: FButton(
+              intrinsicWidth: true,
+              onPress: () => showFSonner(context: context, title: const Text('Event has been created')),
+              child: const Text('Show Toast'),
+            ),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Expansion Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='sonner' variant='behavior' query={{behavior: 'disabled'}} height={620}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {8} copy
+    class SonnerPage extends StatelessWidget {
+      final FSonnerExpandBehavior behavior;
+
+      SonnerPage({super.key});
+
+      @override
+      Widget build(BuildContext context) => FScaffold(
+        sonnerStyle: context.theme.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
+        child: Builder(
+          builder: (context) => Center(
+            child: FButton(
+              intrinsicWidth: true,
+              onPress: () => showFSonner(context: context, title: const Text('Event has been created')),
+              child: const Text('Show Toast'),
+            ),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

@@ -61,18 +61,24 @@ class _SandboxState extends State<Sandbox> {
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: 5,
       children: [
+        FSonnerToast(
+          icon: const Icon(FIcons.triangleAlert),
+          title: const Text('Event has been created'),
+          description: Text(
+            'This is a more detailed description that provides comprehensive context and additional information '
+            'about the notification, explaining what happened and what the user might expect next.',
+          ),
+          onDismiss: () {},
+        ),
         FButton(
           intrinsicWidth: true,
           onPress: () {
-            Widget buildToast(BuildContext context, FSonnerEntry toast) => IntrinsicHeight(
-              child: FCard(
-                style: cardStyle,
-                title: const Text('Event has been created'),
-                subtitle: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Text('This is a brief description that provides additional context.'),
-                ),
-                child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
+            Widget buildToast(BuildContext context, FSonnerEntry toast) => FSonnerToast(
+              icon: const Icon(FIcons.triangleAlert),
+              title: const Text('Event has been created'),
+              description: Text(
+                'This is a more detailed description that provides comprehensive context and additional information '
+                'about the notification, explaining what happened and what the user might expect next.',
               ),
             );
 

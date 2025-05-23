@@ -7,3 +7,4 @@ library forui.widgets.sonner;
 
 export '../src/widgets/sonner/sonner.dart' hide SonnerEntry;
 export '../src/widgets/sonner/sonner_style.dart';
+export '../src/widgets/sonner/toast.dart';

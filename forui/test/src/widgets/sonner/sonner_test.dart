@@ -12,29 +12,22 @@ Widget small(
   FSonnerAlignment alignment = FSonnerAlignment.bottomRight,
   Duration? duration = const Duration(seconds: 5),
 ]) => Builder(
-  builder:
-      (context) => FButton(
-        intrinsicWidth: true,
-        onPress:
-            () => showRawFSonner(
-              alignment: alignment,
-              context: context,
-              duration: duration,
-              builder:
-                  (_, _) => Container(
-                    width: 250,
-                    height: 143,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.blue,
-                    ),
-                    child: Text(text),
-                  ),
-            ),
+  builder: (context) => FButton(
+    intrinsicWidth: true,
+    onPress: () => showRawFSonner(
+      alignment: alignment,
+      context: context,
+      duration: duration,
+      builder: (_, _) => Container(
+        width: 250,
+        height: 143,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.blue),
         child: Text(text),
       ),
+    ),
+    child: Text(text),
+  ),
 );
 
 void main() {
@@ -44,8 +37,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FSonner(
-              style: FSonnerStyle(expandBehavior: behavior),
-              child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')])),
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: behavior),
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')]),
+              ),
             ),
           ),
         );
@@ -64,7 +59,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FSonner(
-              style: FSonnerStyle(expandBehavior: behavior),
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: behavior),
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -89,8 +84,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FSonner(
-              style: FSonnerStyle(expandBehavior: behavior),
-              child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')])),
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: behavior),
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')]),
+              ),
             ),
           ),
         );
@@ -116,7 +113,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FSonner(
-              style: FSonnerStyle(expandBehavior: behavior),
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: behavior),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), small('3')]),
               ),
@@ -145,4 +142,39 @@ void main() {
       });
     });
   }
+
+  group('showFSonner', () {
+    testWidgets('closes', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FSonner(
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Builder(
+                    builder: (context) => FButton(
+                      intrinsicWidth: true,
+                      onPress: () => showFSonner(context: context, title: const Text('body')),
+                      child: const Text('1'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('1'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('body'), findsOne);
+
+      await tester.tap(find.byType(FButton).last);
+      await tester.pumpAndSettle();
+
+      expect(find.text('body'), findsNothing);
+    });
+  });
 }

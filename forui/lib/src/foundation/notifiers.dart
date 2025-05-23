@@ -158,7 +158,7 @@ class _MultiNotifier<T> extends FMultiValueNotifier<T> {
 }
 
 class _RadioNotifier<T> extends FMultiValueNotifier<T> {
-  _RadioNotifier({T? value}) : super._({if (value != null) value});
+  _RadioNotifier({T? value}) : super._({?value});
 
   @override
   void update(T value, {required bool add}) {

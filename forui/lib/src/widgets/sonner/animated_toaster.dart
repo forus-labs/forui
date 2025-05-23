@@ -109,7 +109,7 @@ class RenderAnimatedToaster extends RenderBox
     // First pass: calculate the offset to move the toasts when expanded, relative to (0, 0).
     //
     // This is a simplified implementation that assumes toasts can only be vertically stacked.
-    // I'm not fucking doing this for every possible alignment. You're welcome to open a PR if you want it. >:(
+    // I'm not doing this for every possible alignment. You're welcome to open a PR if you want it. >:(
     while (current != null) {
       final data = current.parentData! as AnimatedToasterParentData;
       current.layout(constraints, parentUsesSize: true);
@@ -214,6 +214,11 @@ class RenderAnimatedToaster extends RenderBox
     var current = firstChild;
     while (current != null) {
       final data = current.parentData! as AnimatedToasterParentData;
+      if (current.size.isEmpty) {
+        current = data.nextSibling;
+        continue;
+      }
+
       // The following section is responsible for scaling the toast to match the size of the frontmost toast.
 
       // Each consecutive toast should be slightly smaller.

@@ -6,13 +6,76 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sonner/toaster.dart';
 
-/// Displays a toast in a sonner.
+/// Displays a [FSonnerToast] in a sonner.
 ///
-/// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to
-/// disable auto-closing.
+/// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
+/// auto-closing.
 ///
 /// ## Contract
 /// Throws [FlutterError] if there is no ancestor [FSonner] in the given [context].
+///
+/// See:
+/// * https://forui.dev/docs/overlay/sonner for working examples.
+/// * [showFSonner] for displaying a toast in a sonner.
+/// * [FSonnerStyle] for customizing a sonner's appearance.
+/// * [FSonnerToastStyle] for customizing a sonner toast's appearance.
+FSonnerEntry showFSonner({
+  required BuildContext context,
+  required Widget title,
+  FSonnerToastStyle? style,
+  Widget? icon,
+  Widget? description,
+  ValueWidgetBuilder<FSonnerEntry>? suffixBuilder,
+  FSonnerAlignment alignment = FSonnerAlignment.bottomEnd,
+  Duration? duration = const Duration(seconds: 5),
+  VoidCallback? onDismiss,
+}) {
+  final state = context.findAncestorStateOfType<FSonnerState>();
+  if (state == null) {
+    throw FlutterError.fromParts([
+      ErrorSummary('showFSonner(...) called with a context that does not contain a FSonner/FScaffold.'),
+      ErrorDescription(
+        'No FSonner/FScaffold ancestor could be found starting from the context that was passed to FSonner/FScaffold.of(). '
+            'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
+            'actually creates the FSonner/FScaffold widget being sought.',
+      ),
+      ErrorHint(
+        'There are several ways to avoid this problem. The simplest is to use a Builder to get a '
+            'context that is "under" the FSonner/FScaffold.',
+      ),
+      context.describeElement('The context used was'),
+    ]);
+  }
+
+  return state.show(
+    context: context,
+    builder: (context, entry) => FSonnerToast(
+      style: style,
+      icon: icon,
+      title: title,
+      description: description,
+      suffix: suffixBuilder?.call(context, entry, null),
+    ),
+    style: style,
+    alignment: alignment,
+    duration: duration,
+    onDismiss: onDismiss,
+  );
+}
+
+/// Displays a raw toast in a sonner.
+///
+/// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
+/// auto-closing.
+///
+/// ## Contract
+/// Throws [FlutterError] if there is no ancestor [FSonner] in the given [context].
+///
+/// See:
+/// * https://forui.dev/docs/overlay/sonner for working examples.
+/// * [showFSonner] for displaying a toast in a sonner.
+/// * [FSonnerStyle] for customizing a sonner's appearance.
+/// * [FSonnerToastStyle] for customizing a sonner toast's appearance.
 FSonnerEntry showRawFSonner({
   required BuildContext context,
   required Widget Function(BuildContext context, FSonnerEntry entry) builder,
@@ -24,7 +87,7 @@ FSonnerEntry showRawFSonner({
   final state = context.findAncestorStateOfType<FSonnerState>();
   if (state == null) {
     throw FlutterError.fromParts([
-      ErrorSummary('showFRawSonner(...) called with a context that does not contain a FSonner/FScaffold.'),
+      ErrorSummary('showRawFSonner(...) called with a context that does not contain a FSonner/FScaffold.'),
       ErrorDescription(
         'No FSonner/FScaffold ancestor could be found starting from the context that was passed to FSonner/FScaffold.of(). '
         'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
@@ -93,7 +156,8 @@ enum FSonnerAlignment {
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/sonner for working examples.
-/// * [showRawFSonner] for displaying a toast in a sonner.
+/// * [showFSonner] for displaying a toast in a sonner.
+/// * [showRawFSonner] for displaying a raw toast in a sonner.
 /// * [FSonnerStyle] for customizing a sonner's appearance.
 class FSonner extends StatefulWidget {
   /// The style.

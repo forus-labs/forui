@@ -515,7 +515,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       sheetStyle: sheetStyle ?? FSheetStyle.inherit(colors: colors),
       sidebarStyle: sidebarStyle ?? FSidebarStyle.inherit(colors: colors, typography: typography, style: style),
       sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
-      sonnerStyle: sonnerStyle ?? const FSonnerStyle(),
+      sonnerStyle: sonnerStyle ?? FSonnerStyle.inherit(colors: colors, typography: typography, style: style),
       switchStyle: switchStyle ?? FSwitchStyle.inherit(colors: colors, style: style),
       tabsStyle: tabsStyle ?? FTabsStyle.inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),

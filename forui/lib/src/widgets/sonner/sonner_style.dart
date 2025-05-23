@@ -77,6 +77,7 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
 
   /// Creates a [FSonnerStyle].
   const FSonnerStyle({
+    required this.toastStyle,
     this.max = 3,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     this.expandBehavior = FSonnerExpandBehavior.hoverOrPress,
@@ -88,8 +89,13 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
     this.expandCurve = Curves.easeInOutCubic,
     this.collapsedProtrusion = 12,
     this.collapsedScale = 0.9,
-    this.toastStyle = const FSonnerToastStyle(),
   });
+
+  /// Creates a [FSonnerStyle] that inherits its properties.
+  FSonnerStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        toastStyle: FSonnerToastStyle.inherit(colors: colors, typography: typography, style: style),
+      );
 }
 
 /// The sonner toast's style.
@@ -127,8 +133,44 @@ class FSonnerToastStyle with Diagnosticable, _$FSonnerToastStyleFunctions {
   @override
   final BoxConstraints constraints;
 
+  /// The toast's decoration.
+  @override
+  final BoxDecoration decoration;
+
+  /// The toast content's padding. Defaults to `EdgeInsets.all(16)`.
+  @override
+  final EdgeInsetsGeometry padding;
+
+  /// The style of the toast's prefix icon.
+  @override
+  final IconThemeData iconStyle;
+
+  /// The spacing between the icon and the title. Defaults to 10.0.
+  @override
+  final double iconSpacing;
+
+  /// The title's text style.
+  @override
+  final TextStyle titleTextStyle;
+
+  /// The spacing between the title and description Defaults to 5.0.
+  @override
+  final double titleSpacing;
+
+  /// The description's text style.
+  @override
+  final TextStyle descriptionTextStyle;
+
+  /// The spacing between the icon and the title. Defaults to 12.0.
+  @override
+  final double suffixSpacing;
+
   /// Creates a [FSonnerToastStyle].
-  const FSonnerToastStyle({
+  FSonnerToastStyle({
+    required this.decoration,
+    required this.iconStyle,
+    required this.titleTextStyle,
+    required this.descriptionTextStyle,
     this.enterExitDuration = const Duration(milliseconds: 400),
     this.enterCurve = Curves.easeOutCubic,
     this.exitCurve = Curves.easeOutCubic,
@@ -136,5 +178,23 @@ class FSonnerToastStyle with Diagnosticable, _$FSonnerToastStyleFunctions {
     this.transitionDuration = const Duration(milliseconds: 400),
     this.transitionCurve = Curves.easeOutCubic,
     this.constraints = const BoxConstraints(maxHeight: 250, maxWidth: 400),
+    this.padding = const EdgeInsets.all(16),
+    this.iconSpacing = 10,
+    this.titleSpacing = 1,
+    this.suffixSpacing = 12,
   });
+
+  /// Creates a [FSonnerToastStyle] that inherits its properties.
+  FSonnerToastStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        decoration: BoxDecoration(
+          border: Border.all(color: colors.border),
+          borderRadius: style.borderRadius,
+          color: colors.background,
+        ),
+        iconStyle: IconThemeData(color: colors.primary, size: 18),
+        titleTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+        titleSpacing: 5,
+        descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis),
+      );
 }

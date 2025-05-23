@@ -31,6 +31,8 @@ A sidebar widget that usually resides on the side of the screen for navigation.
 ### `FSonner` (new)
 An optional toast.
 
+* Add `showFSonner(...)`.
+* Add `showRawFSonner(...)`.
 * Add `FSonner`.
 * Add `FSonnerExpandBehavior`.
 * Add `FSonnerStyle`.

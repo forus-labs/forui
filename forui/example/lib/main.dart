@@ -44,7 +44,6 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     home: Builder(
       builder: (context) {
         return FScaffold(
-          sonnerStyle: context.theme.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.always),
           header: const FHeader(title: Text('Example')),
           footer: FBottomNavigationBar(
             index: index,
