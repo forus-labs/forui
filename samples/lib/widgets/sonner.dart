@@ -28,7 +28,7 @@ class SonnerPage extends Sample {
           FButton(
             intrinsicWidth: true,
             onPress: () {
-              Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
+              Widget buildToast(BuildContext context, FSonnerEntry toast) => IntrinsicHeight(
                 child: FCard(
                   style: cardStyle,
                   title: const Text('Event has been created'),
@@ -40,14 +40,14 @@ class SonnerPage extends Sample {
                 ),
               );
 
-              showFToast(context: context, builder: buildToast);
+              showRawFSonner(context: context, builder: buildToast);
             },
             child: const Text('Show Small Toast'),
           ),
           FButton(
             intrinsicWidth: true,
             onPress: () {
-              Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
+              Widget buildToast(BuildContext context, FSonnerEntry toast) => IntrinsicHeight(
                 child: FCard(
                   style: cardStyle,
                   title: const Text('Event has been created'),
@@ -63,7 +63,7 @@ class SonnerPage extends Sample {
                 ),
               );
 
-              showFToast(context: context, builder: buildToast);
+              showRawFSonner(context: context, builder: buildToast);
             },
             child: const Text('Show Large Toast'),
           ),

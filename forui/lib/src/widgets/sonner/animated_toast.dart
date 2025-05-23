@@ -8,7 +8,7 @@ import 'package:forui/src/widgets/sonner/animated_toaster_parent_data.dart';
 import 'package:meta/meta.dart';
 
 @internal
-class Toast extends StatefulWidget {
+class AnimatedToast extends StatefulWidget {
   /// The style.
   final FToastStyle style;
 
@@ -25,7 +25,7 @@ class Toast extends StatefulWidget {
   final int length;
 
   /// The toast's show duration.
-  final Duration duration;
+  final Duration? duration;
 
   /// The expansion animation, between `[0, 1]`.
   final double expand;
@@ -42,7 +42,7 @@ class Toast extends StatefulWidget {
   /// The content.
   final Widget child;
 
-  const Toast({
+  const AnimatedToast({
     required this.style,
     required this.alignTransform,
     required this.index,
@@ -57,7 +57,7 @@ class Toast extends StatefulWidget {
   });
 
   @override
-  State<Toast> createState() => _ToastState();
+  State<AnimatedToast> createState() => _AnimatedToastState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -75,8 +75,8 @@ class Toast extends StatefulWidget {
   }
 }
 
-class _ToastState extends State<Toast> with TickerProviderStateMixin {
-  late Timer _timer;
+class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateMixin {
+  Timer? _timer;
   late final AnimationController _entranceExitController;
   late CurvedAnimation _entranceExit;
   late final AnimationController _transitionController;
@@ -90,7 +90,14 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     widget.dismissing.addListener(_dismissing);
-    _timer = Timer(widget.duration, _dismissing);
+    if (widget.dismissing.value) {
+      _entranceExitController.value = 1;
+    }
+
+    if (widget.duration case final duration?) {
+      _timer = Timer(duration, _dismissing);
+    }
+
 
     _entranceExitController =
         AnimationController(vsync: this, duration: widget.style.enterExitDuration)
@@ -118,7 +125,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
   }
 
   @override
-  void didUpdateWidget(Toast old) {
+  void didUpdateWidget(AnimatedToast old) {
     super.didUpdateWidget(old);
     if (widget.dismissing != old.dismissing) {
       old.dismissing.removeListener(_dismissing);
@@ -148,7 +155,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
 
     if (widget.expand != old.expand) {
       if (0 < widget.expand) {
-        _timer.cancel();
+        _timer?.cancel();
       } else {
         _resume(Duration(milliseconds: (widget.length - widget.index - 1) * 300));
       }
@@ -168,8 +175,10 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
   }
 
   void _resume([Duration stagger = Duration.zero]) {
-    _timer.cancel();
-    _timer = Timer(widget.duration + stagger, _dismissing);
+    if (widget.duration case final duration?) {
+      _timer?.cancel();
+      _timer = Timer(duration + stagger, _dismissing);
+    }
   }
 
   @override
@@ -181,7 +190,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     _transitionController.dispose();
     _entranceExit.dispose();
     _entranceExitController.dispose();
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -193,7 +202,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
     // Gradually increase & decrease opacity during entrance & exit.
     final opacity = lerpDouble(widget.style.entranceExitOpacity, 1.0, _entranceExit.value)! * _visible.value;
 
-    return AnimatedToast(
+    return AnimatedToastData(
       index: widget.index,
       transition: _transition.value,
       visible: widget.visible,
@@ -203,7 +212,7 @@ class _ToastState extends State<Toast> with TickerProviderStateMixin {
         child: ConstrainedBox(
           constraints: widget.style.constraints,
           child: MouseRegion(
-            onEnter: (_) => _timer.cancel(),
+            onEnter: (_) => _timer?.cancel(),
             onExit: (_) => _resume(),
             child: FractionalTranslation(
               translation: entranceExit,

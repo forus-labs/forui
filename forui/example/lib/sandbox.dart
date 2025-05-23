@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
     intrinsicWidth: true,
-    onPress: () => showFToast(
+    onPress: () => showRawFSonner(
       alignment: alignment,
       context: context,
       builder: (_, _) => Container(
@@ -22,7 +22,7 @@ Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomR
 Widget big(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
     intrinsicWidth: true,
-    onPress: () => showFToast(
+    onPress: () => showRawFSonner(
       alignment: alignment,
       context: context,
       builder: (_, _) => Container(
@@ -64,7 +64,7 @@ class _SandboxState extends State<Sandbox> {
         FButton(
           intrinsicWidth: true,
           onPress: () {
-            Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
+            Widget buildToast(BuildContext context, FSonnerEntry toast) => IntrinsicHeight(
               child: FCard(
                 style: cardStyle,
                 title: const Text('Event has been created'),
@@ -76,7 +76,7 @@ class _SandboxState extends State<Sandbox> {
               ),
             );
 
-            showFToast(
+            showRawFSonner(
               context: context,
               builder: buildToast,
               alignment: FSonnerAlignment.bottomRight,
@@ -88,7 +88,7 @@ class _SandboxState extends State<Sandbox> {
         FButton(
           intrinsicWidth: true,
           onPress: () {
-            Widget buildToast(BuildContext context, FToast toast) => IntrinsicHeight(
+            Widget buildToast(BuildContext context, FSonnerEntry toast) => IntrinsicHeight(
               child: FCard(
                 style: cardStyle,
                 title: const Text('Event has been created'),
@@ -103,7 +103,7 @@ class _SandboxState extends State<Sandbox> {
               ),
             );
 
-            showFToast(
+            showRawFSonner(
               context: context,
               builder: buildToast,
               alignment: FSonnerAlignment.bottomRight,

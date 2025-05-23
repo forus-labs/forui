@@ -4,7 +4,7 @@ import 'package:forui/src/widgets/sonner/animated_toaster.dart';
 import 'package:meta/meta.dart';
 
 @internal
-class AnimatedToast extends ParentDataWidget<AnimatedToasterParentData> {
+class AnimatedToastData extends ParentDataWidget<AnimatedToasterParentData> {
   /// The index.
   final int index;
 
@@ -17,7 +17,7 @@ class AnimatedToast extends ParentDataWidget<AnimatedToasterParentData> {
   /// The signal to indicate that a widget update has occurred.
   final int signal;
 
-  const AnimatedToast({
+  const AnimatedToastData({
     required this.index,
     required this.transition,
     required this.visible,

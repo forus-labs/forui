@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sonner/toaster.dart';
@@ -7,20 +6,23 @@ import 'package:meta/meta.dart';
 
 /// Displays a toast in a sonner.
 ///
+/// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to
+/// disable auto-closing.
+///
 /// ## Contract
 /// Throws [FlutterError] if there is no ancestor [FSonner] in the given [context].
-FToast showFToast({
+FSonnerEntry showRawFSonner({
   required BuildContext context,
-  required Widget Function(BuildContext context, FToast entry) builder,
+  required Widget Function(BuildContext context, FSonnerEntry entry) builder,
   FToastStyle? style,
   FSonnerAlignment alignment = FSonnerAlignment.bottomEnd,
-  Duration duration = const Duration(seconds: 5),
+  Duration? duration = const Duration(seconds: 5),
   VoidCallback? onDismiss,
 }) {
   final state = context.findAncestorStateOfType<FSonnerState>();
   if (state == null) {
     throw FlutterError.fromParts([
-      ErrorSummary('showFSonner(...) called with a context that does not contain a FSonner/FScaffold.'),
+      ErrorSummary('showFRawSonner(...) called with a context that does not contain a FSonner/FScaffold.'),
       ErrorDescription(
         'No FSonner/FScaffold ancestor could be found starting from the context that was passed to FSonner/FScaffold.of(). '
         'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
@@ -34,7 +36,7 @@ FToast showFToast({
     ]);
   }
 
-  return state.showToast(
+  return state.show(
     context: context,
     builder: builder,
     style: style,
@@ -84,12 +86,12 @@ enum FSonnerAlignment {
 
 /// An opinionated toast widget.
 ///
-/// This widget manages a stack of toasts that can be added to using [showFToast]. It should be placed near the root
+/// This widget manages a stack of toasts that can be added to using [showRawFSonner]. It should be placed near the root
 /// of the widget tree. It is included in [FScaffold] by default.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/sonner for working examples.
-/// * [showFToast] for displaying a toast in a sonner.
+/// * [showRawFSonner] for displaying a toast in a sonner.
 /// * [FSonnerStyle] for customizing a sonner's appearance.
 class FSonner extends StatefulWidget {
   /// The style.
@@ -113,20 +115,20 @@ class FSonner extends StatefulWidget {
 
 /// A [FSonner]'s state.
 class FSonnerState extends State<FSonner> {
-  final Map<Alignment, (Alignment, List<ToastEntry>)> _entries = {};
+  final Map<Alignment, (Alignment, List<SonnerEntry>)> _entries = {};
 
   /// Displays a toast in this sonner.
   ///
-  /// It is generally recommend to use [showFToast] instead.
-  FToast showToast({
+  /// It is generally recommend to use [showFSonner] or [showRawFSonner] instead.
+  FSonnerEntry show({
     required BuildContext context,
-    required Widget Function(BuildContext context, FToast entry) builder,
+    required Widget Function(BuildContext context, FSonnerEntry entry) builder,
     FToastStyle? style,
     FSonnerAlignment alignment = FSonnerAlignment.bottomEnd,
-    Duration duration = const Duration(seconds: 5),
+    Duration? duration = const Duration(seconds: 5),
     VoidCallback? onDismiss,
   }) {
-    final entry = ToastEntry(style, alignment._alignment, duration, builder);
+    final entry = SonnerEntry(style, alignment._alignment, duration, builder);
     entry.onDismiss = () {
       entry.dismissing.value = true;
       _remove(entry);
@@ -137,7 +139,7 @@ class FSonnerState extends State<FSonner> {
     return entry;
   }
 
-  void _add(FSonnerAlignment alignment, ToastEntry entry) {
+  void _add(FSonnerAlignment alignment, SonnerEntry entry) {
     if (!mounted) {
       return;
     }
@@ -150,7 +152,7 @@ class FSonnerState extends State<FSonner> {
     });
   }
 
-  void _remove(ToastEntry entry) {
+  void _remove(SonnerEntry entry) {
     if (!mounted) {
       return;
     }
@@ -205,7 +207,7 @@ class FSonnerState extends State<FSonner> {
 }
 
 /// A toast in a sonner.
-mixin FToast {
+mixin FSonnerEntry {
   /// Dismisses the toast. Does nothing if the toast is already being dismissed or dismissed.
   void dismiss();
 
@@ -214,16 +216,16 @@ mixin FToast {
 }
 
 @internal
-class ToastEntry with FToast {
+class SonnerEntry with FSonnerEntry {
   final GlobalKey key = GlobalKey();
   final FToastStyle? style;
   final AlignmentGeometry alignment;
-  final Duration duration;
+  final Duration? duration;
   final ValueNotifier<bool> dismissing = ValueNotifier(false);
-  final Widget Function(BuildContext context, FToast entry) builder;
+  final Widget Function(BuildContext context, FSonnerEntry entry) builder;
   VoidCallback? onDismiss;
 
-  ToastEntry(this.style, this.alignment, this.duration, this.builder);
+  SonnerEntry(this.style, this.alignment, this.duration, this.builder);
 
   @override
   void dismiss() {

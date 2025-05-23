@@ -11,7 +11,7 @@ import 'package:meta/meta.dart';
 
 @internal
 class AnimatedToaster extends MultiChildRenderObjectWidget {
-  /// Tje sonner's style.
+  /// The sonner's style.
   final FSonnerStyle style;
 
   /// A unit vector indicating how a toasts should be aligned to the front-most toast when expanded

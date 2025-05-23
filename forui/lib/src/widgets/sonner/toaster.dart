@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sonner/animated_toaster.dart';
 import 'package:forui/src/widgets/sonner/sonner.dart';
-import 'package:forui/src/widgets/sonner/toast.dart';
+import 'package:forui/src/widgets/sonner/animated_toast.dart';
 import 'package:meta/meta.dart';
 
 /// A toaster is responsible for managing a stack of toasts, including the expanding animations.
@@ -15,7 +14,7 @@ class Toaster extends StatefulWidget {
   final FSonnerStyle style;
   final Offset expandedAlignTransform;
   final Offset collapsedAlignTransform;
-  final List<ToastEntry> entries;
+  final List<SonnerEntry> entries;
 
   const Toaster({
     required this.style,
@@ -79,7 +78,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
       expand: _expand.value,
       children: [
         for (final (index, entry) in widget.entries.indexed)
-          Toast(
+          AnimatedToast(
             key: entry.key,
             style: entry.style ?? widget.style.toastStyle,
             alignTransform: widget.collapsedAlignTransform,

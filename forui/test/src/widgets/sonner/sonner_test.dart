@@ -6,14 +6,19 @@ import 'package:forui/forui.dart';
 
 import '../../test_scaffold.dart';
 
-Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
+Widget small(
+  String text, [
+  FSonnerAlignment alignment = FSonnerAlignment.bottomRight,
+  Duration? duration = const Duration(seconds: 5),
+]) => Builder(
   builder:
       (context) => FButton(
         intrinsicWidth: true,
         onPress:
-            () => showFToast(
+            () => showRawFSonner(
               alignment: alignment,
               context: context,
+              duration: duration,
               builder:
                   (_, _) => Container(
                     width: 250,
@@ -57,6 +62,42 @@ void main() {
     expect(find.text('1'), findsOne);
     expect(find.text('2'), findsOne);
     expect(find.text('3'), findsOne);
+  });
+
+  testWidgets('does not auto-close', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSonner(
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                small('1', FSonnerAlignment.bottomRight, null),
+                small('2', FSonnerAlignment.bottomRight, null),
+                small('3', FSonnerAlignment.bottomRight, null),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('2'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('3'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('1'), findsExactly(2));
+    expect(find.text('2'), findsExactly(2));
+    expect(find.text('3'), findsExactly(2));
+
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    expect(find.text('1'), findsExactly(2));
+    expect(find.text('2'), findsExactly(2));
+    expect(find.text('3'), findsExactly(2));
   });
 
   testWidgets('hover expand stops auto-close', (tester) async {

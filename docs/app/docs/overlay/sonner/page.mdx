@@ -7,8 +7,11 @@ import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 An opinionated toast that temporarily displays a succinct message. 
 
-To show a toast, use the `showFToast(...)` function. The function must be called from a widget that is a descendant of a
-`FSonner` or `FScaffold` widget.
+<Callout type="info">
+    To show a toast, use the `showFSonner(...)` or `showFRawSonner(...)` functions. The function must be called from a
+    widget that is a descendant of a `FSonner` or `FScaffold` widget.
+</Callout>
+
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sonner/"/>
@@ -106,15 +109,15 @@ dart run forui style create sonner
 
 ## Usage
 
-### `showFToast(...)`
+### `showRawFSonner(...)`
 
 ```dart copy
-showFToast(
+showRawFSonner(
   context: context,
   style: FSonnerStyle(...),
-  alignment: FSonnerAlignment.,
+  alignment: FSonnerAlignment.topRight,
   duration: const Duration(seconds: 10),
-  builder: (context, toast) => FCard(
+  builder: (context, entry) => FCard(
     title: Text('Download Complete'),
     subtitle: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +125,7 @@ showFToast(
       children: [
         Text('Your file has been downloaded.'),
         FButton(
-          onPress: () => toast.dismiss(),
+          onPress: () => entry.dismiss(),
           child: const Text('Dismiss'),
         ),
       ],

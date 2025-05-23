@@ -12,7 +12,7 @@ Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomR
       (context) => FButton(
         intrinsicWidth: true,
         onPress:
-            () => showFToast(
+            () => showRawFSonner(
               alignment: alignment,
               context: context,
               builder:
@@ -37,7 +37,7 @@ Widget big(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRig
       (context) => FButton(
         intrinsicWidth: true,
         onPress:
-            () => showFToast(
+            () => showRawFSonner(
               alignment: alignment,
               context: context,
               builder:
@@ -62,7 +62,7 @@ Widget closeable(String text, [FSonnerAlignment alignment = FSonnerAlignment.bot
       (context) => FButton(
         intrinsicWidth: true,
         onPress:
-            () => showFToast(
+            () => showRawFSonner(
               alignment: alignment,
               context: context,
               builder:
@@ -96,7 +96,7 @@ void main() {
                 (context) => FButton(
                   style: TestScaffold.blueScreen.buttonStyles.primary,
                   onPress:
-                      () => showFToast(
+                      () => showRawFSonner(
                         context: context,
                         builder:
                             (_, _) =>
