@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'sonner_style.style.dart';
 
@@ -9,8 +11,10 @@ part 'sonner_style.style.dart';
 enum FSonnerExpandBehavior {
   /// The toasts are always expanded.
   always,
+
   /// The toasts are expanded when the sonner is hovered or pressed.
   hoverOrPress,
+
   /// The toasts are never expanded.
   disabled,
 }

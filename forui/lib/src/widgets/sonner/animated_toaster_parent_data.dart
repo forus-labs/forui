@@ -1,7 +1,9 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import 'package:forui/src/widgets/sonner/animated_toaster.dart';
+import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/src/widgets/sonner/animated_toaster.dart';
 
 @internal
 class AnimatedToastData extends ParentDataWidget<AnimatedToasterParentData> {
@@ -81,7 +83,7 @@ class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
   final AnimationTween<Size> scale = AnimationTween.size();
 
   final AnimationTween<Offset> alignment = AnimationTween.offset();
-  
+
   final AnimationTween<double> shift = AnimationTween.of();
 
   final AnimationTween<double> protrusion = AnimationTween.of();
