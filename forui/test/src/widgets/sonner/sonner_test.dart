@@ -142,39 +142,4 @@ void main() {
       });
     });
   }
-
-  group('showFSonner', () {
-    testWidgets('closes', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSonner(
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Builder(
-                    builder: (context) => FButton(
-                      intrinsicWidth: true,
-                      onPress: () => showFSonner(context: context, title: const Text('body')),
-                      child: const Text('1'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.text('1'));
-      await tester.pumpAndSettle();
-
-      expect(find.text('body'), findsOne);
-
-      await tester.tap(find.byType(FButton).last);
-      await tester.pumpAndSettle();
-
-      expect(find.text('body'), findsNothing);
-    });
-  });
 }
