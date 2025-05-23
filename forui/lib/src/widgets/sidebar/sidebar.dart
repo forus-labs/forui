@@ -9,8 +9,8 @@ part 'sidebar.style.dart';
 
 /// A sidebar widget that provides an opinionated layout on the side of the screen.
 ///
-/// The [FSidebar] widget is useful for creating navigation sidebars with
-/// a header (sticky), content (scrollable), and footer (sticky) sections.
+/// The [FSidebar] widget is useful for creating navigation sidebars with a header (sticky), content (scrollable), and 
+/// footer (sticky) sections.
 ///
 /// The layout structure is organized as follows:
 /// ```md
@@ -150,15 +150,24 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   @override
   final FSidebarGroupStyle groupStyle;
 
-  /// The padding for the header section. Defaults to `EdgeInsets.fromLTRB(16, 16, 16, 0)`.
+  /// The padding for the header section. Defaults to `EdgeInsets.fromLTRB(0, 16, 0, 0)`.
+  ///
+  /// It is recommended to set the horizontal padding to 0. This ensures that the elements such as the scrollbar is not 
+  /// overlapped by the content.
   @override
   final EdgeInsetsGeometry headerPadding;
 
-  /// The padding for the content section. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
+  /// The padding for the content section. Defaults to `EdgeInsets.symmetric(vertical: 12)`.
+  ///
+  /// It is recommended to set the horizontal padding to 0. This ensures that the elements such as the scrollbar is not 
+  /// overlapped by the content.
   @override
   final EdgeInsetsGeometry contentPadding;
 
-  /// The padding for the footer section. Defaults to `EdgeInsets.fromLTRB(16, 0, 16, 16)`.
+  /// The padding for the footer section. Defaults to `EdgeInsets.fromLTRB(0, 0, 0, 16)`.
+  ///
+  /// It is recommended to set the horizontal padding to 0. This ensures that the elements such as the scrollbar is not 
+  /// overlapped by the content.
   @override
   final EdgeInsetsGeometry footerPadding;
 
@@ -168,9 +177,9 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
     required this.borderWidth,
     required this.groupStyle,
     this.width = 250,
-    this.headerPadding = const EdgeInsets.fromLTRB(16, 16, 16, 0),
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-    this.footerPadding = const EdgeInsets.fromLTRB(16, 0, 16, 16),
+    this.headerPadding = const EdgeInsets.fromLTRB(0, 16, 0, 0),
+    this.contentPadding = const EdgeInsets.symmetric(vertical: 12),
+    this.footerPadding = const EdgeInsets.fromLTRB(0, 0, 0, 16),
   });
 
   /// Creates a [FSidebarStyle] that inherits its properties.

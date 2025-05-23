@@ -68,38 +68,41 @@ class FSidebarGroup extends StatelessWidget {
 
     return FSidebarGroupData(
       style: style,
-      child: Column(
-        children: [
-          if (label != null || action != null)
-            Padding(
-              padding: style.headerPadding,
-              child: Row(
-                spacing: style.headerSpacing,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (label != null)
-                    Expanded(child: DefaultTextStyle.merge(style: style.labelStyle, child: label!))
-                  else
-                    const SizedBox(),
-                  if (action != null)
-                    FTappable(
-                      style: style.tappableStyle,
-                      focusedOutlineStyle: style.focusedOutlineStyle,
-                      onHoverChange: onActionHoverChange,
-                      onStateChange: onActionStateChange,
-                      onPress: onActionPress,
-                      onLongPress: onActionLongPress,
-                      builder: (_, states, child) => IconTheme(data: style.actionStyle.resolve(states), child: child!),
-                      child: action!,
-                    )
-                  else
-                    const SizedBox(),
-                ],
+      child: Padding(
+        padding: style.padding,
+        child: Column(
+          children: [
+            if (label != null || action != null)
+              Padding(
+                padding: style.headerPadding,
+                child: Row(
+                  spacing: style.headerSpacing,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (label != null)
+                      Expanded(child: DefaultTextStyle.merge(style: style.labelStyle, child: label!))
+                    else
+                      const SizedBox(),
+                    if (action != null)
+                      FTappable(
+                        style: style.tappableStyle,
+                        focusedOutlineStyle: style.focusedOutlineStyle,
+                        onHoverChange: onActionHoverChange,
+                        onStateChange: onActionStateChange,
+                        onPress: onActionPress,
+                        onLongPress: onActionLongPress,
+                        builder: (_, states, child) => IconTheme(data: style.actionStyle.resolve(states), child: child!),
+                        child: action!,
+                      )
+                    else
+                      const SizedBox(),
+                  ],
+                ),
               ),
-            ),
-          SizedBox(height: style.childrenSpacing),
-          Padding(padding: style.childrenPadding, child: Column(spacing: style.childrenSpacing, children: children)),
-        ],
+            SizedBox(height: style.childrenSpacing),
+            Padding(padding: style.childrenPadding, child: Column(spacing: style.childrenSpacing, children: children)),
+          ],
+        ),
       ),
     );
   }
@@ -143,6 +146,10 @@ class FSidebarGroupData extends InheritedWidget {
 
 /// The style for a [FSidebarGroup].
 class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16)`.
+  @override
+  final EdgeInsets padding;
+
   /// The spacing between the label and action in the header. Defaults to 8.
   @override
   final double headerSpacing;
@@ -186,6 +193,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     required this.itemStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.headerSpacing = 8,
     this.headerPadding = const EdgeInsets.fromLTRB(12, 0, 8, 2),
     this.childrenSpacing = 2,

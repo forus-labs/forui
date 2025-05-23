@@ -14,51 +14,57 @@ class SidebarPage extends Sample {
   @override
   Widget sample(BuildContext context) => FScaffold(
     sidebar: FSidebar(
-      header: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-            child: SvgPicture.network(
-              theme.colors.brightness == Brightness.light
-                  ? 'https://forui.dev/light_logo.svg'
-                  : 'https://forui.dev/dark_logo.svg',
-              height: 24,
-              colorFilter: ColorFilter.mode(context.theme.colors.foreground, BlendMode.srcIn),
-            ),
-          ),
-          FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
-        ],
-      ),
-      footer: FCard.raw(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          child: Row(
-            spacing: 10,
-            children: [
-              FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 2,
-                  children: [
-                    Text(
-                      'Dash',
-                      style: context.theme.typography.sm.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: context.theme.colors.foreground,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      'dash@forui.dev',
-                      style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+      header: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+              child: SvgPicture.network(
+                theme.colors.brightness == Brightness.light
+                    ? 'https://forui.dev/light_logo.svg'
+                    : 'https://forui.dev/dark_logo.svg',
+                height: 24,
+                colorFilter: ColorFilter.mode(context.theme.colors.foreground, BlendMode.srcIn),
               ),
-            ],
+            ),
+            FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
+          ],
+        ),
+      ),
+      footer: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: FCard.raw(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            child: Row(
+              spacing: 10,
+              children: [
+                FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 2,
+                    children: [
+                      Text(
+                        'Dash',
+                        style: context.theme.typography.sm.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.theme.colors.foreground,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        'dash@forui.dev',
+                        style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -147,51 +153,57 @@ class SheetSidebarPage extends Sample {
     decoration: BoxDecoration(color: context.theme.colors.background),
     child: FSidebar(
       width: 300,
-      header: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-            child: SvgPicture.network(
-              theme.colors.brightness == Brightness.light
-                  ? 'https://forui.dev/light_logo.svg'
-                  : 'https://forui.dev/dark_logo.svg',
-              height: 24,
-              colorFilter: ColorFilter.mode(context.theme.colors.foreground, BlendMode.srcIn),
-            ),
-          ),
-          FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
-        ],
-      ),
-      footer: FCard.raw(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          child: Row(
-            spacing: 10,
-            children: [
-              FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 2,
-                  children: [
-                    Text(
-                      'Dash',
-                      style: context.theme.typography.sm.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: context.theme.colors.foreground,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      'dash@forui.dev',
-                      style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+      header: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+              child: SvgPicture.network(
+                theme.colors.brightness == Brightness.light
+                    ? 'https://forui.dev/light_logo.svg'
+                    : 'https://forui.dev/dark_logo.svg',
+                height: 24,
+                colorFilter: ColorFilter.mode(context.theme.colors.foreground, BlendMode.srcIn),
               ),
-            ],
+            ),
+            FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
+          ],
+        ),
+      ),
+      footer: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: FCard.raw(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            child: Row(
+              spacing: 10,
+              children: [
+                FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 2,
+                    children: [
+                      Text(
+                        'Dash',
+                        style: context.theme.typography.sm.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.theme.colors.foreground,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        'dash@forui.dev',
+                        style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
