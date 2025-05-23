@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 @internal
 class AnimatedToast extends StatefulWidget {
   /// The style.
-  final FToastStyle style;
+  final FSonnerToastStyle style;
 
   /// A unit vector indicating how a toast's protrusion should be aligned to the toast in front of it.
   ///
@@ -33,6 +33,9 @@ class AnimatedToast extends StatefulWidget {
   /// True if the toast is visible.
   final bool visible;
 
+  /// True if the toast should be auto dismissed.
+  final bool autoDismiss;
+
   /// A value that indicates whether the toast is dismissing.
   final ValueListenable<bool> dismissing;
 
@@ -50,6 +53,7 @@ class AnimatedToast extends StatefulWidget {
     required this.duration,
     required this.expand,
     required this.visible,
+    required this.autoDismiss,
     required this.dismissing,
     required this.onDismiss,
     required this.child,
@@ -70,6 +74,7 @@ class AnimatedToast extends StatefulWidget {
       ..add(DiagnosticsProperty('duration', duration))
       ..add(PercentProperty('expand', expand))
       ..add(FlagProperty('visible', value: visible, ifTrue: 'visible'))
+      ..add(FlagProperty('autoDismiss', value: autoDismiss, ifTrue: 'autoDismiss'))
       ..add(DiagnosticsProperty('dismissing', dismissing))
       ..add(ObjectFlagProperty.has('onDismiss', onDismiss));
   }
@@ -97,7 +102,6 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     if (widget.duration case final duration?) {
       _timer = Timer(duration, _dismissing);
     }
-
 
     _entranceExitController =
         AnimationController(vsync: this, duration: widget.style.enterExitDuration)
@@ -153,11 +157,11 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
       _signal++;
     }
 
-    if (widget.expand != old.expand) {
-      if (0 < widget.expand) {
-        _timer?.cancel();
-      } else {
+    if (widget.autoDismiss != old.autoDismiss) {
+      if (widget.autoDismiss) {
         _resume(Duration(milliseconds: (widget.length - widget.index - 1) * 300));
+      } else {
+        _timer?.cancel();
       }
     }
 

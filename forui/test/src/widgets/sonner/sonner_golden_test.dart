@@ -326,109 +326,194 @@ void main() {
   });
 
   group('gestures', () {
-    testWidgets('hover & press', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSonner(
-            child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')])),
+    group('always', () {
+      testWidgets('hovered', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.always),
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.text('1'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('3'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
 
-      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-      await gesture.addPointer(location: Offset.zero);
-      addTearDown(gesture.removePointer);
-      await tester.pump();
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/always.png'));
+      });
 
-      await gesture.moveTo(tester.getCenter(find.text('3').last));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+      testWidgets('hovered', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.always),
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
+          ),
+        );
 
-      await tester.tap(find.text('3').last, kind: PointerDeviceKind.mouse);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/hover-press.png'));
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        await gesture.addPointer(location: Offset.zero);
+        addTearDown(gesture.removePointer);
+        await tester.pump();
+
+        await gesture.moveTo(tester.getCenter(find.text('3').last));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/always-hovered.png'));
+      });
+
+      testWidgets('pressed', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('3'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('3').last);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/always-pressed.png'));
+      });
     });
 
-    testWidgets('press', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSonner(
-            child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')])),
+    group('hover or press', () {
+      testWidgets('hover & press', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.text('1'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('3'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('3'));
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.text('3').last);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/press-expands.png'));
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        await gesture.addPointer(location: Offset.zero);
+        addTearDown(gesture.removePointer);
+        await tester.pump();
 
-      await tester.tap(find.text('3').last);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/press-collapses.png'));
+        await gesture.moveTo(tester.getCenter(find.text('3').last));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await tester.tap(find.text('3').last, kind: PointerDeviceKind.mouse);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/hover-press.png'));
+      });
+
+      testWidgets('press', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('3'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('3').last);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/press-expands.png'));
+
+        await tester.tap(find.text('3').last);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/press-collapses.png'));
+      });
     });
 
-    testWidgets('expand disabled - hover', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSonner(
-            style: FThemes.zinc.light.sonnerStyle.copyWith(expandable: false),
-            child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')])),
+    group('disabled', () {
+      testWidgets('expand disabled - hover', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.text('1'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('3'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
 
-      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-      await gesture.addPointer(location: Offset.zero);
-      addTearDown(gesture.removePointer);
-      await tester.pump();
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        await gesture.addPointer(location: Offset.zero);
+        addTearDown(gesture.removePointer);
+        await tester.pump();
 
-      await gesture.moveTo(tester.getCenter(find.text('3').last));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+        await gesture.moveTo(tester.getCenter(find.text('3').last));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/expanded-disabled-hovered.png'));
-    });
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/disabled-hovered.png'));
+      });
 
-    testWidgets('expand disabled - pressed', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSonner(
-            style: FThemes.zinc.light.sonnerStyle.copyWith(expandable: false),
-            child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')])),
+      testWidgets('expand disabled - pressed', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.text('1'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('3'));
-      await tester.pumpAndSettle();
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('3'));
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.text('3').last);
-      await tester.pumpAndSettle(const Duration(seconds: 1));
+        await tester.tap(find.text('3').last);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/expanded-disabled-pressed.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/disabled-pressed.png'));
+      });
     });
   });
 }

@@ -43,22 +43,21 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
     home: Builder(
       builder: (context) {
-        return FSonner(
-          child: FScaffold(
-            header: const FHeader(title: Text('Example')),
-            footer: FBottomNavigationBar(
-              index: index,
-              onChange: (index) => setState(() => this.index = index),
-              children: const [
-                FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-                FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
-                FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
-                FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
-                FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
-              ],
-            ),
-            child: _pages[index],
+        return FScaffold(
+          sonnerStyle: context.theme.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.always),
+          header: const FHeader(title: Text('Example')),
+          footer: FBottomNavigationBar(
+            index: index,
+            onChange: (index) => setState(() => this.index = index),
+            children: const [
+              FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
+              FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
+            ],
           ),
+          child: _pages[index],
         );
       },
     ),

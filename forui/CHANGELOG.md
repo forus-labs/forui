@@ -34,8 +34,9 @@ A widget that collapses and expands its child.
 An optional toast.
 
 * Add `FSonner`.
+* Add `FSonnerExpandBehavior`.
 * Add `FSonnerStyle`.
-* Add `FToastStyle`.
+* Add `FSonnerToastStyle`.
 
 
 ### `FTabs`

@@ -80,7 +80,6 @@ class _SandboxState extends State<Sandbox> {
               context: context,
               builder: buildToast,
               alignment: FSonnerAlignment.bottomRight,
-              duration: const Duration(minutes: 1),
             );
           },
           child: Text('Small'),
@@ -107,7 +106,6 @@ class _SandboxState extends State<Sandbox> {
               context: context,
               builder: buildToast,
               alignment: FSonnerAlignment.bottomRight,
-              duration: const Duration(minutes: 1),
             );
           },
           child: Text('Large'),

@@ -5,6 +5,16 @@ import 'package:meta/meta.dart';
 
 part 'sonner_style.style.dart';
 
+/// A sonner's expansion behavior.
+enum FSonnerExpandBehavior {
+  /// The toasts are always expanded.
+  always,
+  /// The toasts are expanded when the sonner is hovered or pressed.
+  hoverOrPress,
+  /// The toasts are never expanded.
+  disabled,
+}
+
 /// [FSonner]'s style.
 class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
   /// The maximum number of entries shown per [FSonnerAlignment]. Defaults to to 3.
@@ -15,9 +25,9 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
-  /// True if the toasts should expand when hovered or pressed. Defaults to true.
+  /// The sonner's expansion behavior. Defaults to [FSonnerExpandBehavior.hoverOrPress].
   @override
-  final bool expandable;
+  final FSonnerExpandBehavior expandBehavior;
 
   /// The duration to wait after entering the sonner before expanding the toasts. Defaults to 200ms.
   @override
@@ -59,13 +69,13 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
 
   /// The sonner toasts' style.
   @override
-  final FToastStyle toastStyle;
+  final FSonnerToastStyle toastStyle;
 
   /// Creates a [FSonnerStyle].
   const FSonnerStyle({
     this.max = 3,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-    this.expandable = true,
+    this.expandBehavior = FSonnerExpandBehavior.hoverOrPress,
     this.expandHoverEnterDuration = const Duration(milliseconds: 200),
     this.expandHoverExitDuration = const Duration(milliseconds: 300),
     this.expandStartSpacing = 16,
@@ -74,12 +84,12 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
     this.expandCurve = Curves.easeInOutCubic,
     this.collapsedProtrusion = 12,
     this.collapsedScale = 0.9,
-    this.toastStyle = const FToastStyle(),
+    this.toastStyle = const FSonnerToastStyle(),
   });
 }
 
 /// The sonner toast's style.
-class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
+class FSonnerToastStyle with Diagnosticable, _$FSonnerToastStyleFunctions {
   /// The toast's entrance & exit animation duration. Defaults to 400ms.
   @override
   final Duration enterExitDuration;
@@ -113,8 +123,8 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   @override
   final BoxConstraints constraints;
 
-  /// Creates a [FToastStyle].
-  const FToastStyle({
+  /// Creates a [FSonnerToastStyle].
+  const FSonnerToastStyle({
     this.enterExitDuration = const Duration(milliseconds: 400),
     this.enterCurve = Curves.easeOutCubic,
     this.exitCurve = Curves.easeOutCubic,

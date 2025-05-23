@@ -14,7 +14,7 @@ import 'package:meta/meta.dart';
 FSonnerEntry showRawFSonner({
   required BuildContext context,
   required Widget Function(BuildContext context, FSonnerEntry entry) builder,
-  FToastStyle? style,
+  FSonnerToastStyle? style,
   FSonnerAlignment alignment = FSonnerAlignment.bottomEnd,
   Duration? duration = const Duration(seconds: 5),
   VoidCallback? onDismiss,
@@ -123,7 +123,7 @@ class FSonnerState extends State<FSonner> {
   FSonnerEntry show({
     required BuildContext context,
     required Widget Function(BuildContext context, FSonnerEntry entry) builder,
-    FToastStyle? style,
+    FSonnerToastStyle? style,
     FSonnerAlignment alignment = FSonnerAlignment.bottomEnd,
     Duration? duration = const Duration(seconds: 5),
     VoidCallback? onDismiss,
@@ -190,9 +190,9 @@ class FSonnerState extends State<FSonner> {
               child: Align(
                 alignment: alignment,
                 child: Toaster(
+                  style: style,
                   expandedAlignTransform: Offset(alignment.x, alignment.y),
                   collapsedAlignTransform: Offset(toastAlignment.x, toastAlignment.y),
-                  style: style,
                   entries: entries,
                 ),
               ),
@@ -218,7 +218,7 @@ mixin FSonnerEntry {
 @internal
 class SonnerEntry with FSonnerEntry {
   final GlobalKey key = GlobalKey();
-  final FToastStyle? style;
+  final FSonnerToastStyle? style;
   final AlignmentGeometry alignment;
   final Duration? duration;
   final ValueNotifier<bool> dismissing = ValueNotifier(false);

@@ -37,129 +37,111 @@ Widget small(
 );
 
 void main() {
-  testWidgets('auto-close', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSonner(
-          child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), small('3')])),
-        ),
-      ),
-    );
-
-    await tester.tap(find.text('1'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('2'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('3'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('1'), findsExactly(2));
-    expect(find.text('2'), findsExactly(2));
-    expect(find.text('3'), findsExactly(2));
-
-    await tester.pumpAndSettle(const Duration(seconds: 5));
-
-    expect(find.text('1'), findsOne);
-    expect(find.text('2'), findsOne);
-    expect(find.text('3'), findsOne);
-  });
-
-  testWidgets('does not auto-close', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSonner(
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                small('1', FSonnerAlignment.bottomRight, null),
-                small('2', FSonnerAlignment.bottomRight, null),
-                small('3', FSonnerAlignment.bottomRight, null),
-              ],
+  for (final behavior in FSonnerExpandBehavior.values) {
+    group('$behavior', () {
+      testWidgets('auto-close', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FSonnerStyle(expandBehavior: behavior),
+              child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')])),
             ),
           ),
-        ),
-      ),
-    );
+        );
 
-    await tester.tap(find.text('1'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('2'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('3'));
-    await tester.pumpAndSettle();
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
 
-    expect(find.text('1'), findsExactly(2));
-    expect(find.text('2'), findsExactly(2));
-    expect(find.text('3'), findsExactly(2));
+        expect(find.text('1'), findsExactly(2));
 
-    await tester.pumpAndSettle(const Duration(seconds: 10));
+        await tester.pumpAndSettle(const Duration(seconds: 5));
 
-    expect(find.text('1'), findsExactly(2));
-    expect(find.text('2'), findsExactly(2));
-    expect(find.text('3'), findsExactly(2));
-  });
+        expect(find.text('1'), findsOne);
+      });
 
-  testWidgets('hover expand stops auto-close', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSonner(
-          child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), small('3')])),
-        ),
-      ),
-    );
+      testWidgets('does not auto-close', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FSonnerStyle(expandBehavior: behavior),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [small('1', FSonnerAlignment.bottomRight, null)],
+                ),
+              ),
+            ),
+          ),
+        );
 
-    await tester.tap(find.text('1'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('2'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('3'));
-    await tester.pumpAndSettle();
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
 
-    expect(find.text('1'), findsExactly(2));
-    expect(find.text('2'), findsExactly(2));
-    expect(find.text('3'), findsExactly(2));
+        expect(find.text('1'), findsExactly(2));
 
-    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-    await gesture.addPointer(location: Offset.zero);
-    addTearDown(gesture.removePointer);
-    await tester.pump();
+        await tester.pumpAndSettle(const Duration(seconds: 10));
 
-    await gesture.moveTo(tester.getCenter(find.text('3').last));
-    await tester.pumpAndSettle(const Duration(seconds: 1));
-    await tester.pumpAndSettle(const Duration(seconds: 10));
+        expect(find.text('1'), findsExactly(2));
+      });
 
-    expect(find.text('1'), findsExactly(2));
-    expect(find.text('2'), findsExactly(2));
-    expect(find.text('3'), findsExactly(2));
-  });
+      testWidgets('hover stops auto-close', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FSonnerStyle(expandBehavior: behavior),
+              child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')])),
+            ),
+          ),
+        );
 
-  testWidgets('press expand stops auto-close', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FSonner(
-          child: Center(child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), small('3')])),
-        ),
-      ),
-    );
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
 
-    await tester.tap(find.text('1'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('2'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('3'));
-    await tester.pumpAndSettle();
+        expect(find.text('1'), findsExactly(2));
 
-    expect(find.text('1'), findsExactly(2));
-    expect(find.text('2'), findsExactly(2));
-    expect(find.text('3'), findsExactly(2));
+        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
+        await gesture.addPointer(location: Offset.zero);
+        addTearDown(gesture.removePointer);
+        await tester.pump();
 
-    await tester.tap(find.text('3').last);
-    await tester.pumpAndSettle();
-    await tester.pumpAndSettle(const Duration(seconds: 10));
+        await gesture.moveTo(tester.getCenter(find.text('1').last));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        await tester.pumpAndSettle(const Duration(seconds: 10));
 
-    expect(find.text('1'), findsExactly(2));
-    expect(find.text('2'), findsExactly(2));
-    expect(find.text('3'), findsExactly(2));
-  });
+        expect(find.text('1'), findsExactly(2));
+      });
+
+      testWidgets('press stops auto-close', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FSonner(
+              style: FSonnerStyle(expandBehavior: behavior),
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), small('3')]),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('3'));
+        await tester.pumpAndSettle();
+
+        expect(find.text('1'), findsExactly(2));
+        expect(find.text('2'), findsExactly(2));
+        expect(find.text('3'), findsExactly(2));
+
+        await tester.tap(find.text('3').last);
+        await tester.pumpAndSettle();
+        await tester.pumpAndSettle(const Duration(seconds: 10));
+
+        expect(find.text('1'), findsExactly(2));
+        expect(find.text('2'), findsExactly(2));
+        expect(find.text('3'), findsExactly(2));
+      });
+    });
+  }
 }
