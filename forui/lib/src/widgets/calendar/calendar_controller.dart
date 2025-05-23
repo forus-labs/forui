@@ -38,10 +38,9 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
     DateTime? initialSelection,
     Predicate<DateTime>? selectable,
     bool truncateAndStripTimezone = true,
-  }) =>
-      truncateAndStripTimezone
-          ? _AutoDateController(initialSelection: initialSelection, selectable: selectable)
-          : _DateController(initialSelection: initialSelection, selectable: selectable);
+  }) => truncateAndStripTimezone
+      ? _AutoDateController(initialSelection: initialSelection, selectable: selectable)
+      : _DateController(initialSelection: initialSelection, selectable: selectable);
 
   /// Creates a [FCalendarController] that allows multiple dates to be selected, with the given initial selected dates.
   ///
@@ -65,10 +64,9 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
     Set<DateTime> initialSelections = const {},
     Predicate<DateTime>? selectable,
     bool truncateAndStripTimezone = true,
-  }) =>
-      truncateAndStripTimezone
-          ? _AutoDatesController(initialSelections: initialSelections, selectable: selectable)
-          : _DatesController(initialSelections: initialSelections, selectable: selectable);
+  }) => truncateAndStripTimezone
+      ? _AutoDatesController(initialSelections: initialSelections, selectable: selectable)
+      : _DatesController(initialSelections: initialSelections, selectable: selectable);
 
   /// Creates a [FCalendarController] that allows a single range to be selected, with the given initial range.
   ///
@@ -96,10 +94,9 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
     (DateTime, DateTime)? initialSelection,
     Predicate<DateTime>? selectable,
     bool truncateAndStripTimezone = true,
-  }) =>
-      truncateAndStripTimezone
-          ? _AutoRangeController(initialSelection: initialSelection, selectable: selectable)
-          : _RangeController(initialSelection: initialSelection, selectable: selectable);
+  }) => truncateAndStripTimezone
+      ? _AutoRangeController(initialSelection: initialSelection, selectable: selectable)
+      : _RangeController(initialSelection: initialSelection, selectable: selectable);
 
   /// Creates a [FCalendarController] with the given initial [value].
   FCalendarController(super._value);
@@ -209,10 +206,9 @@ final class _AutoRangeController extends FCalendarController<(DateTime, DateTime
   _AutoRangeController({(DateTime, DateTime)? initialSelection, Predicate<DateTime>? selectable})
     : _selectable = selectable ?? _true,
       super(
-        initialSelection =
-            initialSelection == null
-                ? null
-                : (_truncateAndStripTimezone(initialSelection.$1), _truncateAndStripTimezone(initialSelection.$2)),
+        initialSelection = initialSelection == null
+            ? null
+            : (_truncateAndStripTimezone(initialSelection.$1), _truncateAndStripTimezone(initialSelection.$2)),
       ) {
     final range = value;
     assert(

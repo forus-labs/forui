@@ -26,7 +26,12 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField.calendar(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField.calendar(key: key),
+        ),
+      );
 
       await expectLater(
         find.byType(TestScaffold),
@@ -120,7 +125,10 @@ void main() {
 
     testWidgets('${theme.name} disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, child: FDateField.calendar(enabled: false, key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField.calendar(enabled: false, key: key),
+        ),
       );
 
       await tester.tap(find.byKey(key));

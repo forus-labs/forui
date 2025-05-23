@@ -26,7 +26,12 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField(key: key),
+        ),
+      );
 
       await expectLater(
         find.byType(TestScaffold),
@@ -71,7 +76,10 @@ void main() {
           theme: theme.data,
           locale: const Locale('hr'),
           alignment: Alignment.topCenter,
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          ),
         ),
       );
 
@@ -90,7 +98,10 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          ),
         ),
       );
 
@@ -109,7 +120,10 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          ),
         ),
       );
 
@@ -131,7 +145,10 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: Alignment.topCenter,
-          child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+          child: FDateField(
+            key: key,
+            calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          ),
         ),
       );
 
@@ -173,7 +190,12 @@ void main() {
     });
 
     testWidgets('${theme.name} disabled', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField(enabled: false, key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField(enabled: false, key: key),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -208,7 +230,11 @@ void main() {
 
     testWidgets('${theme.name} tap outside does not unfocus on Android/iOS', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField(key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FDateField(key: key),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -227,7 +253,11 @@ void main() {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, alignment: Alignment.topCenter, child: FDateField(key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FDateField(key: key),
+        ),
       );
 
       await tester.tap(find.byKey(key));

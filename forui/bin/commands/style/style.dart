@@ -348,6 +348,18 @@ enum Style {
     <String>['FSliderStyles', 'FSliderStyle', 'FTooltipStyle'],
     'FSliderStyles sliderStyles({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSliderStyles(\n  horizontalStyle: _sliderStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n    labelAnchor: Alignment.topCenter,\n    labelOffset: 10,\n    descriptionPadding: const EdgeInsets.only(top: 10),\n    childPadding: const EdgeInsets.only(\n      top: 10,\n      bottom: 20,\n      left: 10,\n      right: 10,\n    ),\n  ),\n  verticalStyle: _sliderStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n    labelAnchor: Alignment.centerRight,\n    labelOffset: -10,\n    tooltipTipAnchor: FTouch.primary\n        ? Alignment.bottomCenter\n        : Alignment.centerLeft,\n    tooltipThumbAnchor: FTouch.primary\n        ? Alignment.topCenter\n        : Alignment.centerRight,\n    descriptionPadding: const EdgeInsets.only(top: 5),\n    childPadding: const EdgeInsets.all(10),\n  ),\n);\n',
   ),
+  fsonnerstyle(
+    'FSonnerStyle',
+    <String>['sonner'],
+    <String>['FSonnerStyle', 'FSonnerToastStyle'],
+    'FSonnerStyle sonnerStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSonnerStyle(\n  toastStyle: _sonnerToastStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  max: 3,\n  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),\n  expandBehavior: FSonnerExpandBehavior.hoverOrPress,\n  expandHoverEnterDuration: const Duration(milliseconds: 200),\n  expandHoverExitDuration: const Duration(milliseconds: 300),\n  expandStartSpacing: 16,\n  expandSpacing: 10,\n  expandDuration: const Duration(milliseconds: 500),\n  expandCurve: Curves.easeInOutCubic,\n  collapsedProtrusion: 12,\n  collapsedScale: 0.9,\n);\n',
+  ),
+  fsonnertoaststyle(
+    'FSonnerToastStyle',
+    <String>['sonner-toast', 'sonnertoast'],
+    <String>['FSonnerToastStyle'],
+    'FSonnerToastStyle sonnerToastStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSonnerToastStyle(\n  decoration: BoxDecoration(\n    border: Border.all(color: colors.border),\n    borderRadius: style.borderRadius,\n    color: colors.background,\n  ),\n  iconStyle: IconThemeData(color: colors.primary, size: 18),\n  titleTextStyle: typography.sm.copyWith(\n    color: colors.primary,\n    fontWeight: FontWeight.w500,\n  ),\n  titleSpacing: 5,\n  descriptionTextStyle: typography.sm.copyWith(\n    color: colors.mutedForeground,\n    overflow: TextOverflow.ellipsis,\n  ),\n  enterExitDuration: const Duration(milliseconds: 400),\n  enterCurve: Curves.easeOutCubic,\n  exitCurve: Curves.easeOutCubic,\n  entranceExitOpacity: 0.0,\n  transitionDuration: const Duration(milliseconds: 400),\n  transitionCurve: Curves.easeOutCubic,\n  constraints: const BoxConstraints(maxHeight: 250, maxWidth: 400),\n  padding: const EdgeInsets.all(16),\n  iconSpacing: 10,\n  suffixSpacing: 12,\n);\n',
+  ),
   fswitchstyle(
     'FSwitchStyle',
     <String>['switch'],

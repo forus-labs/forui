@@ -71,10 +71,9 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
 
            return InheritedStates(
              states: states,
-             child:
-                 layout.vertical
-                     ? VerticalSliderRenderObject(children: children)
-                     : HorizontalSliderRenderObject(children: children),
+             child: layout.vertical
+                 ? VerticalSliderRenderObject(children: children)
+                 : HorizontalSliderRenderObject(children: children),
            );
          },
        );

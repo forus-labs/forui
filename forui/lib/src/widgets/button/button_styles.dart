@@ -73,7 +73,10 @@ class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
               borderRadius: style.borderRadius,
               color: colors.secondary,
             ),
-            WidgetState.any: BoxDecoration(border: Border.all(color: colors.border), borderRadius: style.borderRadius),
+            WidgetState.any: BoxDecoration(
+              border: Border.all(color: colors.border),
+              borderRadius: style.borderRadius,
+            ),
           }),
           focusedOutlineStyle: style.focusedOutlineStyle,
           contentStyle: FButtonContentStyle.inherit(

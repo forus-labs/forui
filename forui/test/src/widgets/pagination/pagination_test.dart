@@ -40,7 +40,11 @@ void main() {
         void onChange(int _) => count++;
 
         final firstController = autoDispose(FPaginationController(pages: 10));
-        await tester.pumpWidget(TestScaffold.app(child: FPagination(controller: firstController, onChange: onChange)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPagination(controller: firstController, onChange: onChange),
+          ),
+        );
 
         firstController.page = 1;
         await tester.pump();
@@ -48,7 +52,11 @@ void main() {
         expect(count, 1);
 
         final secondController = autoDispose(FPaginationController(pages: 10));
-        await tester.pumpWidget(TestScaffold.app(child: FPagination(controller: secondController, onChange: onChange)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPagination(controller: secondController, onChange: onChange),
+          ),
+        );
 
         firstController.page = 2;
         secondController.page = 3;
@@ -62,7 +70,11 @@ void main() {
         int second = 0;
 
         final controller = autoDispose(FPaginationController(pages: 10));
-        await tester.pumpWidget(TestScaffold.app(child: FPagination(controller: controller, onChange: (_) => first++)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPagination(controller: controller, onChange: (_) => first++),
+          ),
+        );
 
         controller.page = 1;
         await tester.pump();
@@ -70,7 +82,9 @@ void main() {
         expect(first, 1);
 
         await tester.pumpWidget(
-          TestScaffold.app(child: FPagination(controller: controller, onChange: (_) => second++)),
+          TestScaffold.app(
+            child: FPagination(controller: controller, onChange: (_) => second++),
+          ),
         );
 
         controller.page = 2;
@@ -86,7 +100,9 @@ void main() {
 
         final firstController = autoDispose(FPaginationController(pages: 10));
         await tester.pumpWidget(
-          TestScaffold.app(child: FPagination(controller: firstController, onChange: (_) => first++)),
+          TestScaffold.app(
+            child: FPagination(controller: firstController, onChange: (_) => first++),
+          ),
         );
 
         firstController.page = 1;
@@ -96,7 +112,9 @@ void main() {
 
         final secondController = autoDispose(FPaginationController(pages: 10));
         await tester.pumpWidget(
-          TestScaffold.app(child: FPagination(controller: secondController, onChange: (_) => second++)),
+          TestScaffold.app(
+            child: FPagination(controller: secondController, onChange: (_) => second++),
+          ),
         );
 
         firstController.page = 2;
@@ -111,7 +129,11 @@ void main() {
         int count = 0;
 
         final controller = autoDispose(FPaginationController(pages: 10));
-        await tester.pumpWidget(TestScaffold.app(child: FPagination(controller: controller, onChange: (_) => count++)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPagination(controller: controller, onChange: (_) => count++),
+          ),
+        );
 
         controller.page = 1;
         await tester.pump();

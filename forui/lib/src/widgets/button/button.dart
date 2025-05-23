@@ -144,11 +144,10 @@ class FButton extends StatelessWidget {
       onPress: onPress,
       onLongPress: onLongPress,
       selected: selected,
-      builder:
-          (_, states, _) => DecoratedBox(
-            decoration: style.decoration.resolve(states),
-            child: FButtonData(style: style, states: states, child: child),
-          ),
+      builder: (_, states, _) => DecoratedBox(
+        decoration: style.decoration.resolve(states),
+        child: FButtonData(style: style, states: states, child: child),
+      ),
     );
   }
 

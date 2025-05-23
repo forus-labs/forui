@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:dart_style/dart_style.dart';
 import 'package:yaml/yaml.dart';
 
-const defaults = '''
+const defaults =
+    '''
 cli:
   # The default file or directory to output generated snippets.
   snippet-output: ${Configuration.defaultSnippet}
@@ -75,26 +76,23 @@ class Configuration {
         snippet: switch (cli.nodes['snippet-output']) {
           null => defaultSnippet,
           YamlScalar(:final value) when value is String => value,
-          final node =>
-            throw FormatException(
-              'Could not read forui.$extension.\n\n${node.span.message('"snippet-output" must be a string.')}',
-            ),
+          final node => throw FormatException(
+            'Could not read forui.$extension.\n\n${node.span.message('"snippet-output" must be a string.')}',
+          ),
         },
         style: switch (cli.nodes['style-output']) {
           null => defaultStyle,
           YamlScalar(:final value) when value is String => value,
-          final node =>
-            throw FormatException(
-              'Could not read forui.$extension.\n\n${node.span.message('"style-output" must be a string.')}',
-            ),
+          final node => throw FormatException(
+            'Could not read forui.$extension.\n\n${node.span.message('"style-output" must be a string.')}',
+          ),
         },
         theme: switch (cli.nodes['theme-output']) {
           null => defaultTheme,
           YamlScalar(:final value) when value is String => value,
-          final node =>
-            throw FormatException(
-              'Could not read forui.$extension.\n\n${node.span.message('"theme-output" must be a string.')}',
-            ),
+          final node => throw FormatException(
+            'Could not read forui.$extension.\n\n${node.span.message('"theme-output" must be a string.')}',
+          ),
         },
       );
     } on FormatException catch (e) {

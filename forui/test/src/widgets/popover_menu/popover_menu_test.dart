@@ -21,8 +21,12 @@ void main() {
           child: FPopoverMenu(
             popoverController: controller,
             menu: [
-              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
-              FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 1'), onPress: () {})],
+              ),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 2'), onPress: () {})],
+              ),
             ],
             child: FButton(onPress: controller.toggle, child: const Text('target')),
           ),
@@ -47,8 +51,12 @@ void main() {
             popoverController: controller,
             hideOnTapOutside: FHidePopoverRegion.none,
             menu: [
-              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
-              FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 1'), onPress: () {})],
+              ),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 2'), onPress: () {})],
+              ),
             ],
             child: FButton(onPress: controller.toggle, child: const Text('target')),
           ),
@@ -72,8 +80,12 @@ void main() {
           child: FPopoverMenu(
             popoverController: controller,
             menu: [
-              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
-              FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 1'), onPress: () {})],
+              ),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 2'), onPress: () {})],
+              ),
             ],
             child: FButton(onPress: controller.toggle, child: const Text('target')),
           ),
@@ -98,8 +110,12 @@ void main() {
         TestScaffold.app(
           child: FPopoverMenu.automatic(
             menu: [
-              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
-              FTileGroup(children: [FTile(title: const Text('Group 2'), onPress: () {})]),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 1'), onPress: () {})],
+              ),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 2'), onPress: () {})],
+              ),
             ],
             child: Container(color: Colors.black, height: 10, width: 10),
           ),
@@ -121,7 +137,9 @@ void main() {
           child: FPopoverMenu(
             popoverController: first,
             menu: [
-              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 1'), onPress: () {})],
+              ),
             ],
             child: Container(color: Colors.black, height: 10, width: 10),
           ),
@@ -137,7 +155,9 @@ void main() {
           child: FPopoverMenu(
             popoverController: second,
             menu: [
-              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 1'), onPress: () {})],
+              ),
             ],
             child: Container(color: Colors.black, height: 10, width: 10),
           ),
@@ -157,7 +177,9 @@ void main() {
           child: FPopoverMenu(
             popoverController: controller,
             menu: [
-              FTileGroup(children: [FTile(title: const Text('Group 1'), onPress: () {})]),
+              FTileGroup(
+                children: [FTile(title: const Text('Group 1'), onPress: () {})],
+              ),
             ],
             child: Container(color: Colors.black, height: 10, width: 10),
           ),

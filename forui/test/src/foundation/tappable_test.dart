@@ -55,7 +55,9 @@ void main() {
 
       testWidgets('hovered - $enabled', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(child: FTappable(builder: (_, states, _) => Text('$states'), onPress: enabled ? () {} : null)),
+          TestScaffold(
+            child: FTappable(builder: (_, states, _) => Text('$states'), onPress: enabled ? () {} : null),
+          ),
         );
         expect(find.text(set(enabled).toString()), findsOneWidget);
 

@@ -71,7 +71,10 @@ abstract class InputController extends TextEditingController {
 
       case Many():
         final text = selector.join(parts);
-        return TextEditingValue(text: text, selection: TextSelection(baseOffset: 0, extentOffset: text.length));
+        return TextEditingValue(
+          text: text,
+          selection: TextSelection(baseOffset: 0, extentOffset: text.length),
+        );
     }
   }
 
@@ -88,10 +91,9 @@ abstract class InputController extends TextEditingController {
     if (text == placeholder) {
       final states = statesController.value;
       // TODO: explore custom widget states.
-      style =
-          states.contains(WidgetState.focused)
-              ? this.style.contentTextStyle.resolve(states)
-              : this.style.hintTextStyle.maybeResolve({}) ?? style;
+      style = states.contains(WidgetState.focused)
+          ? this.style.contentTextStyle.resolve(states)
+          : this.style.hintTextStyle.maybeResolve({}) ?? style;
     }
 
     return super.buildTextSpan(context: context, withComposing: withComposing, style: style);

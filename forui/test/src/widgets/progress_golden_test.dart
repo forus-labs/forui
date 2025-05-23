@@ -18,7 +18,12 @@ void main() {
     for (final theme in TestScaffold.themes) {
       for (final value in [0.0, 0.5, 1.0]) {
         testWidgets('${theme.name} - $value', (tester) async {
-          await tester.pumpWidget(TestScaffold(theme: theme.data, child: FProgress(value: value)));
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              child: FProgress(value: value),
+            ),
+          );
           await tester.pumpAndSettle();
 
           await expectLater(find.byType(TestScaffold), matchesGoldenFile('progress/linear/${theme.name}/$value.png'));

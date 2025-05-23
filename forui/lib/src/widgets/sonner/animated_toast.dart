@@ -105,28 +105,25 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
       _timer = Timer(duration, _dismissing);
     }
 
-    _entranceExitController =
-        AnimationController(vsync: this, duration: widget.style.enterExitDuration)
-          ..forward()
-          ..addListener(() => setState(() {}))
-          ..addStatusListener(_dismiss);
+    _entranceExitController = AnimationController(vsync: this, duration: widget.style.enterExitDuration)
+      ..forward()
+      ..addListener(() => setState(() {}))
+      ..addStatusListener(_dismiss);
     _entranceExit = CurvedAnimation(
       parent: _entranceExitController,
       curve: widget.style.enterCurve,
       reverseCurve: widget.style.exitCurve,
     );
 
-    _transitionController =
-        AnimationController(vsync: this, duration: widget.style.transitionDuration)
-          ..forward()
-          ..addListener(() => setState(() {}));
+    _transitionController = AnimationController(vsync: this, duration: widget.style.transitionDuration)
+      ..forward()
+      ..addListener(() => setState(() {}));
     _transition = CurvedAnimation(parent: _transitionController, curve: widget.style.transitionCurve);
     _transitionController.forward();
 
-    _visibleController =
-        AnimationController(vsync: this, duration: widget.style.transitionDuration)
-          ..value = widget.visible ? 1 : 0
-          ..addListener(() => setState(() {}));
+    _visibleController = AnimationController(vsync: this, duration: widget.style.transitionDuration)
+      ..value = widget.visible ? 1 : 0
+      ..addListener(() => setState(() {}));
     _visible = CurvedAnimation(parent: _visibleController, curve: widget.style.transitionCurve);
   }
 

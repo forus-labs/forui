@@ -17,7 +17,10 @@ void main() {
               FHeaderAction.back(onPress: () {}),
               const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
             ],
-            suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
+            suffixes: [
+              FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+              FHeaderAction.x(onPress: () {}),
+            ],
           ),
         ),
       );
@@ -36,7 +39,10 @@ void main() {
                 FHeaderAction.back(onPress: () {}),
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
-              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
+              suffixes: [
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+                FHeaderAction.x(onPress: () {}),
+              ],
             ),
           ),
         );
@@ -45,7 +51,12 @@ void main() {
       });
 
       testWidgets('${theme.name} with no FNestedHeader actions', (tester) async {
-        await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FHeader.nested(title: Text('Title'))));
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: const FHeader.nested(title: Text('Title')),
+          ),
+        );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-no-actions.png'));
       });
@@ -82,7 +93,10 @@ void main() {
                 FHeaderAction.back(onPress: () {}),
                 const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
               ],
-              suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}), FHeaderAction.x(onPress: () {})],
+              suffixes: [
+                FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+                FHeaderAction.x(onPress: () {}),
+              ],
             ),
           ),
         );

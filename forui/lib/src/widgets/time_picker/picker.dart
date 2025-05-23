@@ -36,19 +36,20 @@ abstract class TimePicker extends StatelessWidget {
     required int padding,
     required int hourInterval,
     required int minuteInterval,
-  }) => switch ((scriptNumerals.contains(format.locale), format.pattern!.contains('a'))) {
-    (false, true) => _Western12Picker.new,
-    (false, false) => _Western24Picker.new,
-    (true, true) => _Eastern12Picker.new,
-    (true, false) => _Eastern24Picker.new,
-  }(
-    controller: controller,
-    style: style,
-    format: format,
-    padding: padding,
-    hourInterval: hourInterval,
-    minuteInterval: minuteInterval,
-  );
+  }) =>
+      switch ((scriptNumerals.contains(format.locale), format.pattern!.contains('a'))) {
+        (false, true) => _Western12Picker.new,
+        (false, false) => _Western24Picker.new,
+        (true, true) => _Eastern12Picker.new,
+        (true, false) => _Eastern24Picker.new,
+      }(
+        controller: controller,
+        style: style,
+        format: format,
+        padding: padding,
+        hourInterval: hourInterval,
+        minuteInterval: minuteInterval,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -151,9 +152,8 @@ class _Western12Picker extends TimePicker {
       ),
       const Text(':'),
       FPickerWheel.builder(
-        builder:
-            (_, index) =>
-                Padding(padding: minutePadding, child: Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
+        builder: (_, index) =>
+            Padding(padding: minutePadding, child: Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
       ),
     ];
 
@@ -179,8 +179,8 @@ class _Western24Picker extends TimePicker {
     style: style,
     children: [
       FPickerWheel.builder(
-        builder:
-            (_, index) => Padding(padding: start, child: Text('${(index * hourInterval) % 24}'.padLeft(padding, '0'))),
+        builder: (_, index) =>
+            Padding(padding: start, child: Text('${(index * hourInterval) % 24}'.padLeft(padding, '0'))),
       ),
       const Text(':'),
       FPickerWheel.builder(

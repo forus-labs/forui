@@ -63,8 +63,10 @@ class ConstructorFragment {
     for (final invocation in visitor.constructorInvocations) {
       // Finds all optional named parameters that are not given in the invocation.
       final constructor = invocation.constructorName.element!;
-      final given =
-          invocation.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
+      final given = invocation.argumentList.arguments
+          .whereType<NamedExpression>()
+          .map((p) => p.name.label.name)
+          .toSet();
       final additional = [
         for (final p in constructor.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name3)))
           if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name3}: $defaultValue',
@@ -197,13 +199,9 @@ class ConstructorMatch {
     RegExp constructor,
     Set<String> roots,
   ) async {
-    final files =
-        Directory(library)
-            .listSync(recursive: true)
-            .whereType<File>()
-            .where((f) => f.path.endsWith('.dart'))
-            .map((f) => f.path)
-            .toList();
+    final files = Directory(
+      library,
+    ).listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart')).map((f) => f.path).toList();
 
     final visitor = _Visitor(type, constructor, roots);
     for (final file in files) {

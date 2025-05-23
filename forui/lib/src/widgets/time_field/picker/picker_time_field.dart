@@ -159,54 +159,50 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       initialTime: widget.initialTime,
-      builder:
-          (state) => FTextField(
-            focusNode: _focus,
-            controller: _textController,
-            style: style.textFieldStyle,
-            textAlign: widget.textAlign,
-            textAlignVertical: widget.textAlignVertical,
-            textDirection: widget.textDirection,
-            expands: widget.expands,
-            mouseCursor: widget.mouseCursor,
-            canRequestFocus: widget.canRequestFocus,
-            onTap: _onTap,
-            onTapAlwaysCalled: true,
-            hint: widget.hint ?? localizations.dateFieldHint,
-            readOnly: true,
-            enableInteractiveSelection: false,
-            prefixBuilder:
-                widget.prefixBuilder == null
-                    ? null
-                    : (context, styles, _) => MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-                    ),
-            suffixBuilder:
-                widget.suffixBuilder == null
-                    ? null
-                    : (context, styles, _) => MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-                    ),
-            label: widget.label,
-            description: widget.description,
-            enabled: widget.enabled,
-            error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
-            builder:
-                (context, styles, child) => _PickerPopover(
-                  controller: _controller,
-                  style: style,
-                  hour24: widget.hour24,
-                  properties: widget,
-                  autofocus: true,
-                  fieldFocusNode: _focus,
-                  child: CallbackShortcuts(
-                    bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
-                    child: widget.builder(context, (style, styles.$1, styles.$2), child),
-                  ),
-                ),
+      builder: (state) => FTextField(
+        focusNode: _focus,
+        controller: _textController,
+        style: style.textFieldStyle,
+        textAlign: widget.textAlign,
+        textAlignVertical: widget.textAlignVertical,
+        textDirection: widget.textDirection,
+        expands: widget.expands,
+        mouseCursor: widget.mouseCursor,
+        canRequestFocus: widget.canRequestFocus,
+        onTap: _onTap,
+        onTapAlwaysCalled: true,
+        hint: widget.hint ?? localizations.dateFieldHint,
+        readOnly: true,
+        enableInteractiveSelection: false,
+        prefixBuilder: widget.prefixBuilder == null
+            ? null
+            : (context, styles, _) => MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+              ),
+        suffixBuilder: widget.suffixBuilder == null
+            ? null
+            : (context, styles, _) => MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+              ),
+        label: widget.label,
+        description: widget.description,
+        enabled: widget.enabled,
+        error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
+        builder: (context, styles, child) => _PickerPopover(
+          controller: _controller,
+          style: style,
+          hour24: widget.hour24,
+          properties: widget,
+          autofocus: true,
+          fieldFocusNode: _focus,
+          child: CallbackShortcuts(
+            bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
+            child: widget.builder(context, (style, styles.$1, styles.$2), child),
           ),
+        ),
+      ),
     );
   }
 
@@ -264,19 +260,18 @@ class _PickerPopover extends StatelessWidget {
     hideOnTapOutside: properties.hideOnTapOutside,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-    popoverBuilder:
-        (_, _, _) => TextFieldTapRegion(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0),
-            child: FTimePicker(
-              controller: controller._picker,
-              style: style.pickerStyle,
-              hour24: hour24,
-              hourInterval: properties.hourInterval,
-              minuteInterval: properties.minuteInterval,
-            ),
-          ),
+    popoverBuilder: (_, _, _) => TextFieldTapRegion(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: FTimePicker(
+          controller: controller._picker,
+          style: style.pickerStyle,
+          hour24: hour24,
+          hourInterval: properties.hourInterval,
+          minuteInterval: properties.minuteInterval,
         ),
+      ),
+    ),
     child: child,
   );
 

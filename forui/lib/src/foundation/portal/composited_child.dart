@@ -31,11 +31,10 @@ class CompositedChild extends SingleChildRenderObjectWidget {
       RenderChildLayer(notifier: notifier, link: link, viewSize: MediaQuery.sizeOf(context));
 
   @override
-  void updateRenderObject(BuildContext context, RenderChildLayer renderObject) =>
-      renderObject
-        ..notifier = notifier
-        ..link = link
-        ..viewSize = MediaQuery.sizeOf(context);
+  void updateRenderObject(BuildContext context, RenderChildLayer renderObject) => renderObject
+    ..notifier = notifier
+    ..link = link
+    ..viewSize = MediaQuery.sizeOf(context);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

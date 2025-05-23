@@ -17,7 +17,12 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField.input(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField.input(key: key),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -57,7 +62,12 @@ void main() {
     });
 
     testWidgets('${theme.name} disabled', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField.input(enabled: false, key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField.input(enabled: false, key: key),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -67,7 +77,10 @@ void main() {
 
     testWidgets('${theme.name} error', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, child: FDateField.input(forceErrorText: 'Error', key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField.input(forceErrorText: 'Error', key: key),
+        ),
       );
       await tester.pumpAndSettle();
 
@@ -76,7 +89,11 @@ void main() {
 
     testWidgets('${theme.name} unsupported locale defaults to en_US', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, locale: const Locale('ar'), child: FDateField.input(key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('ar'),
+          child: FDateField.input(key: key),
+        ),
       );
 
       await tester.enterText(find.byKey(key), '1/14/2024');
@@ -89,7 +106,12 @@ void main() {
     });
 
     testWidgets('${theme.name} tap outside does not unfocus on Android/iOS', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField.input(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField.input(key: key),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -106,7 +128,12 @@ void main() {
     testWidgets('${theme.name} tap outside unfocuses on desktop', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField.input(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FDateField.input(key: key),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();

@@ -48,7 +48,9 @@ void main() {
       var press = 0;
       var longPress = 0;
       await tester.pumpWidget(
-        TestScaffold(child: FTile(title: const Text('Lorem'), onPress: () => press++, onLongPress: () => longPress++)),
+        TestScaffold(
+          child: FTile(title: const Text('Lorem'), onPress: () => press++, onLongPress: () => longPress++),
+        ),
       );
 
       await tester.longPress(find.byType(FTile));

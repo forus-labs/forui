@@ -86,8 +86,9 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
   void didUpdateWidget(covariant DateInput old) {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
-      localizations =
-          scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+      localizations = scriptNumerals.contains(widget.localizations.localeName)
+          ? FDefaultLocalizations()
+          : widget.localizations;
       controller.dispose();
       controller = createController();
     } else if (widget.calendarController != old.calendarController) {

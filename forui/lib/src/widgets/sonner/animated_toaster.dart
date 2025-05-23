@@ -48,12 +48,11 @@ class AnimatedToaster extends MultiChildRenderObjectWidget {
   );
 
   @override
-  void updateRenderObject(BuildContext context, covariant RenderAnimatedToaster renderObject) =>
-      renderObject
-        ..style = style
-        ..expandedAlignTransform = expandedAlignTransform
-        ..collapsedAlignTransform = collapsedAlignTransform
-        ..expand = expand;
+  void updateRenderObject(BuildContext context, covariant RenderAnimatedToaster renderObject) => renderObject
+    ..style = style
+    ..expandedAlignTransform = expandedAlignTransform
+    ..collapsedAlignTransform = collapsedAlignTransform
+    ..expand = expand;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -141,8 +140,8 @@ class RenderAnimatedToaster extends RenderBox
         }
 
         final front = current == lastChild ? Size.zero : lastChild!.size;
-        final begin =
-            data.shift.begin ??= accumulated - collapsedAlignTransform.dy * style.expandSpacing - front.height;
+        final begin = data.shift.begin ??=
+            accumulated - collapsedAlignTransform.dy * style.expandSpacing - front.height;
         final end = data.shift.end ??= accumulated;
         final value = data.shift.value = lerpDouble(begin, end, data.transition)! * expand;
 

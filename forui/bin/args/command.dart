@@ -54,14 +54,13 @@ class ForuiCommandRunner<T> extends CommandRunner<T> with _Usage {
   @override
   String get _usageWithoutDescription {
     const usagePrefix = 'Usage:';
-    final buffer =
-        StringBuffer()
-          ..writeln('$usagePrefix ${_wrap(invocation, hangingIndent: usagePrefix.length)}\n')
-          ..writeln(_wrap('Global options:'))
-          ..writeln('${argParser.usage}\n')
-          ..writeln('${_getCommandUsage(commands, lineLength: argParser.usageLineLength)}\n')
-          ..write(_wrap('Run "$executableName help <command>" for more information about a command.'))
-          ..write('\n${_wrap(usageFooter)}');
+    final buffer = StringBuffer()
+      ..writeln('$usagePrefix ${_wrap(invocation, hangingIndent: usagePrefix.length)}\n')
+      ..writeln(_wrap('Global options:'))
+      ..writeln('${argParser.usage}\n')
+      ..writeln('${_getCommandUsage(commands, lineLength: argParser.usageLineLength)}\n')
+      ..write(_wrap('Run "$executableName help <command>" for more information about a command.'))
+      ..write('\n${_wrap(usageFooter)}');
 
     return buffer.toString();
   }
@@ -89,10 +88,9 @@ abstract class ForuiCommand extends Command with _Usage {
   String get _usageWithoutDescription {
     final length = argParser.usageLineLength;
     const usagePrefix = 'Usage: ';
-    final buffer =
-        StringBuffer()
-          ..writeln(usagePrefix + _wrap(invocation, hangingIndent: usagePrefix.length))
-          ..writeln(argParser.usage);
+    final buffer = StringBuffer()
+      ..writeln(usagePrefix + _wrap(invocation, hangingIndent: usagePrefix.length))
+      ..writeln(argParser.usage);
 
     if (subcommands.isNotEmpty) {
       buffer

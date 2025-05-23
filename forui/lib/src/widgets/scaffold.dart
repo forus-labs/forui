@@ -97,8 +97,9 @@ class FScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = scaffoldStyle ?? context.theme.scaffoldStyle;
     var child = this.child;
-    final Widget footer =
-        this.footer != null ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!) : const SizedBox();
+    final Widget footer = this.footer != null
+        ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!)
+        : const SizedBox();
 
     if (childPad) {
       child = Padding(padding: style.childPadding, child: child);
@@ -189,7 +190,9 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
         sidebarBackgroundColor: colors.background,
         childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
         footerDecoration: BoxDecoration(
-          border: Border(top: BorderSide(color: colors.border, width: style.borderWidth)),
+          border: Border(
+            top: BorderSide(color: colors.border, width: style.borderWidth),
+          ),
         ),
       );
 }

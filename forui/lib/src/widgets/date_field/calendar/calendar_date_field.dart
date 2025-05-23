@@ -166,54 +166,50 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       onSaved: onSaved,
       validator: _controller.validator,
       initialValue: widget.initialDate,
-      builder:
-          (state) => FTextField(
-            focusNode: _focus,
-            controller: _textController,
-            style: style.textFieldStyle,
-            textAlign: widget.textAlign,
-            textAlignVertical: widget.textAlignVertical,
-            textDirection: widget.textDirection,
-            expands: widget.expands,
-            mouseCursor: widget.mouseCursor,
-            canRequestFocus: widget.canRequestFocus,
-            onTap: _onTap,
-            onTapAlwaysCalled: true,
-            hint: hint,
-            readOnly: true,
-            enableInteractiveSelection: false,
-            prefixBuilder:
-                widget.prefixBuilder == null
-                    ? null
-                    : (context, styles, _) => MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-                    ),
-            suffixBuilder:
-                widget.suffixBuilder == null
-                    ? null
-                    : (context, styles, _) => MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-                    ),
-            clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
-            label: widget.label,
-            description: widget.description,
-            error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
-            enabled: widget.enabled,
-            builder:
-                (context, data, child) => _CalendarPopover(
-                  controller: _controller,
-                  style: style,
-                  properties: widget,
-                  autofocus: true,
-                  fieldFocusNode: _focus,
-                  child: CallbackShortcuts(
-                    bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
-                    child: widget.builder(context, (style, data.$1, data.$2), child),
-                  ),
-                ),
+      builder: (state) => FTextField(
+        focusNode: _focus,
+        controller: _textController,
+        style: style.textFieldStyle,
+        textAlign: widget.textAlign,
+        textAlignVertical: widget.textAlignVertical,
+        textDirection: widget.textDirection,
+        expands: widget.expands,
+        mouseCursor: widget.mouseCursor,
+        canRequestFocus: widget.canRequestFocus,
+        onTap: _onTap,
+        onTapAlwaysCalled: true,
+        hint: hint,
+        readOnly: true,
+        enableInteractiveSelection: false,
+        prefixBuilder: widget.prefixBuilder == null
+            ? null
+            : (context, styles, _) => MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+              ),
+        suffixBuilder: widget.suffixBuilder == null
+            ? null
+            : (context, styles, _) => MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+              ),
+        clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
+        label: widget.label,
+        description: widget.description,
+        error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
+        enabled: widget.enabled,
+        builder: (context, data, child) => _CalendarPopover(
+          controller: _controller,
+          style: style,
+          properties: widget,
+          autofocus: true,
+          fieldFocusNode: _focus,
+          child: CallbackShortcuts(
+            bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
+            child: widget.builder(context, (style, data.$1, data.$2), child),
           ),
+        ),
+      ),
     );
   }
 
@@ -269,29 +265,27 @@ class _CalendarPopover extends StatelessWidget {
     hideOnTapOutside: properties.hideOnTapOutside,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-    popoverBuilder:
-        (_, _, _) => TextFieldTapRegion(
-          child: ValueListenableBuilder(
-            valueListenable: controller._calendar,
-            builder:
-                (_, value, _) => FCalendar(
-                  style: style.calendarStyle,
-                  controller: controller._calendar,
-                  initialMonth: switch (value) {
-                    null => null,
-                    _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
-                    _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
-                    _ => value,
-                  },
-                  onPress: properties.autoHide ? (_) => _hide() : null,
-                  dayBuilder: properties.dayBuilder,
-                  start: properties.start,
-                  end: properties.end,
-                  today: properties.today,
-                  initialType: properties.initialType,
-                ),
-          ),
+    popoverBuilder: (_, _, _) => TextFieldTapRegion(
+      child: ValueListenableBuilder(
+        valueListenable: controller._calendar,
+        builder: (_, value, _) => FCalendar(
+          style: style.calendarStyle,
+          controller: controller._calendar,
+          initialMonth: switch (value) {
+            null => null,
+            _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
+            _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
+            _ => value,
+          },
+          onPress: properties.autoHide ? (_) => _hide() : null,
+          dayBuilder: properties.dayBuilder,
+          start: properties.start,
+          end: properties.end,
+          today: properties.today,
+          initialType: properties.initialType,
         ),
+      ),
+    ),
     child: child,
   );
 

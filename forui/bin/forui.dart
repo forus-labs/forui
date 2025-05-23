@@ -14,12 +14,11 @@ import 'configuration.dart';
 Future<void> main(List<String> arguments) async {
   final configuration = Configuration.parse();
 
-  final runner =
-      ForuiCommandRunner('forui', 'Manage your Forui development environment.')
-        ..addCommand(InitCommand(configuration))
-        ..addCommand(SnippetCommand(configuration))
-        ..addCommand(StyleCommand(configuration))
-        ..addCommand(ThemeCommand(configuration));
+  final runner = ForuiCommandRunner('forui', 'Manage your Forui development environment.')
+    ..addCommand(InitCommand(configuration))
+    ..addCommand(SnippetCommand(configuration))
+    ..addCommand(StyleCommand(configuration))
+    ..addCommand(ThemeCommand(configuration));
 
   try {
     await runner.run(arguments);

@@ -54,19 +54,17 @@ class FTileContent extends StatelessWidget {
       children: [
         if (prefixIcon case final prefix?)
           Padding(
-            padding:
-                ltr
-                    ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
-                    : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
+            padding: ltr
+                ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
+                : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
             child: IconTheme(data: contentStyle.prefixIconStyle.resolve(states), child: prefix),
           )
         else
           const SizedBox(),
         Padding(
-          padding:
-              ltr
-                  ? EdgeInsets.only(right: contentStyle.middleSpacing)
-                  : EdgeInsets.only(left: contentStyle.middleSpacing),
+          padding: ltr
+              ? EdgeInsets.only(right: contentStyle.middleSpacing)
+              : EdgeInsets.only(left: contentStyle.middleSpacing),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -111,10 +109,9 @@ class FTileContent extends StatelessWidget {
           const SizedBox(),
         if (suffixIcon case final suffixIcon?)
           Padding(
-            padding:
-                ltr
-                    ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
-                    : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
+            padding: ltr
+                ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
+                : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
             child: IconTheme(data: contentStyle.suffixIconStyle.resolve(states), child: suffixIcon),
           )
         else

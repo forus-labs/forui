@@ -517,7 +517,10 @@ void main() {
 
       testWidgets('empty tile group - ${theme.name}', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(theme: theme.data, child: FTileGroup(label: const Text('Network'), children: const [])),
+          TestScaffold(
+            theme: theme.data,
+            child: FTileGroup(label: const Text('Network'), children: const []),
+          ),
         );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/${theme.name}/empty.png'));

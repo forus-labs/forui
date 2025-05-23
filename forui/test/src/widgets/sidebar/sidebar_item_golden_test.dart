@@ -95,7 +95,10 @@ void main() {
 
       testWidgets('disabled - ${theme.name}', (tester) async {
         await tester.pumpWidget(
-          TestScaffold(theme: theme.data, child: const FSidebarItem(icon: Icon(FIcons.box), label: Text('Item'))),
+          TestScaffold(
+            theme: theme.data,
+            child: const FSidebarItem(icon: Icon(FIcons.box), label: Text('Item')),
+          ),
         );
 
         await expectLater(
@@ -235,7 +238,11 @@ void main() {
     }
 
     testWidgets('minimal', (tester) async {
-      await tester.pumpWidget(TestScaffold(child: FSidebarItem(label: const Text('Item'), onPress: () {})));
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FSidebarItem(label: const Text('Item'), onPress: () {}),
+        ),
+      );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar_item/minimal.png'));
     });

@@ -160,13 +160,12 @@ class _RenderTile extends RenderBox
     defaultPaint(context, offset);
     if (_side case final side?) {
       final canvas = context.canvas;
-      final focusedOutline =
-          Paint()
-            ..color = side.color
-            ..style = PaintingStyle.stroke
-            ..isAntiAlias = false
-            ..blendMode = BlendMode.src
-            ..strokeWidth = 1;
+      final focusedOutline = Paint()
+        ..color = side.color
+        ..style = PaintingStyle.stroke
+        ..isAntiAlias = false
+        ..blendMode = BlendMode.src
+        ..strokeWidth = 1;
 
       if (!_first) {
         canvas.drawLine(

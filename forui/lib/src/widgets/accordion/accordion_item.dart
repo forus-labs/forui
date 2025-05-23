@@ -88,10 +88,9 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     controller.removeItem(index);
 
     _controller?.dispose();
-    _controller =
-        AnimationController(vsync: this)
-          ..value = widget.initiallyExpanded ? 1 : 0
-          ..duration = style.animationDuration;
+    _controller = AnimationController(vsync: this)
+      ..value = widget.initiallyExpanded ? 1 : 0
+      ..duration = style.animationDuration;
 
     _curved?.dispose();
     _curved = CurvedAnimation(curve: Curves.ease, parent: _controller!);
@@ -110,53 +109,51 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     final angle = ((Directionality.maybeOf(context) ?? TextDirection.ltr) == TextDirection.ltr) ? -180 : 180;
     return AnimatedBuilder(
       animation: _animation,
-      builder:
-          (_, _) => Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              FTappable(
-                style: style.tappableStyle,
-                autofocus: widget.autofocus,
-                focusNode: widget.focusNode,
-                onFocusChange: widget.onFocusChange,
-                onPress: () => controller.toggle(index),
-                builder:
-                    (_, states, _) => Padding(
-                      padding: style.titlePadding,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: DefaultTextStyle.merge(
-                              textHeightBehavior: const TextHeightBehavior(
-                                applyHeightToFirstAscent: false,
-                                applyHeightToLastDescent: false,
-                              ),
-                              style: style.titleTextStyle.resolve(states),
-                              child: widget.title,
-                            ),
-                          ),
-                          FFocusedOutline(
-                            style: style.focusedOutlineStyle,
-                            focused: states.contains(WidgetState.focused),
-                            child: Transform.rotate(
-                              angle: (_controller!.value * angle + 90) * math.pi / 180.0,
-                              child: IconTheme(data: style.iconStyle.resolve(states), child: widget.icon),
-                            ),
-                          ),
-                        ],
+      builder: (_, _) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          FTappable(
+            style: style.tappableStyle,
+            autofocus: widget.autofocus,
+            focusNode: widget.focusNode,
+            onFocusChange: widget.onFocusChange,
+            onPress: () => controller.toggle(index),
+            builder: (_, states, _) => Padding(
+              padding: style.titlePadding,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: DefaultTextStyle.merge(
+                      textHeightBehavior: const TextHeightBehavior(
+                        applyHeightToFirstAscent: false,
+                        applyHeightToLastDescent: false,
                       ),
+                      style: style.titleTextStyle.resolve(states),
+                      child: widget.title,
                     ),
+                  ),
+                  FFocusedOutline(
+                    style: style.focusedOutlineStyle,
+                    focused: states.contains(WidgetState.focused),
+                    child: Transform.rotate(
+                      angle: (_controller!.value * angle + 90) * math.pi / 180.0,
+                      child: IconTheme(data: style.iconStyle.resolve(states), child: widget.icon),
+                    ),
+                  ),
+                ],
               ),
-              FCollapsible(
-                value: _controller!.value,
-                child: Padding(
-                  padding: style.childPadding,
-                  child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
-                ),
-              ),
-              FDivider(style: style.dividerStyle),
-            ],
+            ),
           ),
+          FCollapsible(
+            value: _controller!.value,
+            child: Padding(
+              padding: style.childPadding,
+              child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
+            ),
+          ),
+          FDivider(style: style.dividerStyle),
+        ],
+      ),
     );
   }
 

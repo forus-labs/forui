@@ -139,70 +139,60 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
           style: style.tappableStyle,
           focusedOutlineStyle: style.focusedOutlineStyle,
           selected: widget.selected,
-          onPress:
-              hasChildren
-                  ? () {
-                    _toggle();
-                    widget.onPress?.call();
-                  }
-                  : widget.onPress,
+          onPress: hasChildren
+              ? () {
+                  _toggle();
+                  widget.onPress?.call();
+                }
+              : widget.onPress,
           onLongPress: widget.onLongPress,
           onHoverChange: widget.onHoverChange,
           onStateChange: widget.onStateChange,
-          builder:
-              (_, states, child) => Container(
-                padding: style.padding,
-                decoration: BoxDecoration(
-                  color: style.backgroundColor.resolve(states),
-                  borderRadius: style.borderRadius,
-                ),
-                child: Row(
-                  spacing: style.collapsibleIconSpacing,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Row(
-                        spacing: style.iconSpacing,
-                        children: [
-                          if (widget.icon != null)
-                            IconTheme(data: style.iconStyle.resolve(states), child: widget.icon!),
-                          if (widget.label != null)
-                            Expanded(
-                              child: DefaultTextStyle.merge(
-                                style: style.textStyle.resolve(states),
-                                child: widget.label!,
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                    if (hasChildren)
-                      IconTheme(
-                        data: style.collapsibleIconStyle.resolve(states),
-                        child: RotationTransition(
-                          turns: Tween(begin: 0.0, end: 0.25).animate(_curvedAnimation),
-                          child: const Icon(FIcons.chevronRight),
+          builder: (_, states, child) => Container(
+            padding: style.padding,
+            decoration: BoxDecoration(color: style.backgroundColor.resolve(states), borderRadius: style.borderRadius),
+            child: Row(
+              spacing: style.collapsibleIconSpacing,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Row(
+                    spacing: style.iconSpacing,
+                    children: [
+                      if (widget.icon != null) IconTheme(data: style.iconStyle.resolve(states), child: widget.icon!),
+                      if (widget.label != null)
+                        Expanded(
+                          child: DefaultTextStyle.merge(style: style.textStyle.resolve(states), child: widget.label!),
                         ),
-                      ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+                if (hasChildren)
+                  IconTheme(
+                    data: style.collapsibleIconStyle.resolve(states),
+                    child: RotationTransition(
+                      turns: Tween(begin: 0.0, end: 0.25).animate(_curvedAnimation),
+                      child: const Icon(FIcons.chevronRight),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ),
         if (hasChildren)
           AnimatedBuilder(
             animation: _curvedAnimation,
-            builder:
-                (_, _) => FCollapsible(
-                  value: _controller.value,
-                  child: Padding(
-                    padding: style.childrenPadding,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: style.childrenSpacing,
-                      children: widget.children!,
-                    ),
-                  ),
+            builder: (_, _) => FCollapsible(
+              value: _controller.value,
+              child: Padding(
+                padding: style.childrenPadding,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: style.childrenSpacing,
+                  children: widget.children!,
                 ),
+              ),
+            ),
           ),
       ],
     );

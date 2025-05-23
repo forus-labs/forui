@@ -191,27 +191,25 @@ void main() {
         );
       });
 
-      for (final (index, (value, to, expected))
-          in [
-            (value(0.25, 0.5), 20.0, value(0.25, 0.5)),
-            (value(0.25, 0.5), 30.0, value(0.25, 0.5)),
-            (value(0.25, 0.5), 13.0, value(0.125, 0.5)),
-            (value(0.25, 0.75), 40.0, value(0.5, 0.75)),
-            (value(0.25, 0.5), 5.0, value(0, 0.5)),
-            (value(0.25, 0.5), 10.0, value(0.125, 0.5)),
-          ].indexed) {
+      for (final (index, (value, to, expected)) in [
+        (value(0.25, 0.5), 20.0, value(0.25, 0.5)),
+        (value(0.25, 0.5), 30.0, value(0.25, 0.5)),
+        (value(0.25, 0.5), 13.0, value(0.125, 0.5)),
+        (value(0.25, 0.75), 40.0, value(0.5, 0.75)),
+        (value(0.25, 0.5), 5.0, value(0, 0.5)),
+        (value(0.25, 0.5), 10.0, value(0.125, 0.5)),
+      ].indexed) {
         test('[$index] min extend/shrink', () => expect(value.move(min: true, to: to), expected));
       }
 
-      for (final (index, (value, to, expected))
-          in [
-            (value(0.5, 0.75), 55.0, value(0.5, 0.75)),
-            (value(0.5, 0.75), 45.0, value(0.5, 0.75)),
-            (value(0.5, 0.75), 87.0, value(0.5, 0.875)),
-            (value(0.25, 0.75), 60.0, value(0.25, 0.5)),
-            (value(0.5, 0.75), 95.0, value(0.5, 1)),
-            (value(0.5, 0.75), 90.0, value(0.5, 0.875)),
-          ].indexed) {
+      for (final (index, (value, to, expected)) in [
+        (value(0.5, 0.75), 55.0, value(0.5, 0.75)),
+        (value(0.5, 0.75), 45.0, value(0.5, 0.75)),
+        (value(0.5, 0.75), 87.0, value(0.5, 0.875)),
+        (value(0.25, 0.75), 60.0, value(0.25, 0.5)),
+        (value(0.5, 0.75), 95.0, value(0.5, 1)),
+        (value(0.5, 0.75), 90.0, value(0.5, 0.875)),
+      ].indexed) {
         test('[$index] max extend/shrink', () => expect(value.move(min: false, to: to), expected));
       }
     });

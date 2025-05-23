@@ -54,45 +54,42 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => FTappable(
     focusedOutlineStyle: widget.style.focusedOutlineStyle,
-    onPress:
-        () =>
-            widget.type.value = switch (widget.type.value) {
-              FCalendarPickerType.day => FCalendarPickerType.yearMonth,
-              FCalendarPickerType.yearMonth => FCalendarPickerType.day,
-            },
+    onPress: () => widget.type.value = switch (widget.type.value) {
+      FCalendarPickerType.day => FCalendarPickerType.yearMonth,
+      FCalendarPickerType.yearMonth => FCalendarPickerType.day,
+    },
     excludeSemantics: true,
-    builder:
-        (_, states, _) => SizedBox(
-          height: Header.height,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
-                  style: widget.style.headerTextStyle,
-                ),
-                RotationTransition(
-                  turns: Tween(
-                    begin: 0.0,
-                    end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25,
-                  ).animate(_controller),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: IconTheme(
-                      data: widget.style.buttonStyle.iconContentStyle.iconStyle
-                          .resolve(states)
-                          .copyWith(color: widget.style.headerTextStyle.color),
-                      child: const Icon(FIcons.chevronRight, size: 15),
-                    ),
-                  ),
-                ),
-              ],
+    builder: (_, states, _) => SizedBox(
+      height: Header.height,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
+              style: widget.style.headerTextStyle,
             ),
-          ),
+            RotationTransition(
+              turns: Tween(
+                begin: 0.0,
+                end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25,
+              ).animate(_controller),
+              child: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: IconTheme(
+                  data: widget.style.buttonStyle.iconContentStyle.iconStyle
+                      .resolve(states)
+                      .copyWith(color: widget.style.headerTextStyle.color),
+                  child: const Icon(FIcons.chevronRight, size: 15),
+                ),
+              ),
+            ),
+          ],
         ),
+      ),
+    ),
   );
 
   @override

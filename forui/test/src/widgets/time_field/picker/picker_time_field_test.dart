@@ -14,7 +14,12 @@ void main() {
 
   for (final (index, (locale, date)) in const [(null, '10:00 AM'), (Locale('en', 'SG'), '10:00 am')].indexed) {
     testWidgets('formatted date - $index', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(locale: locale, child: const FTimeField.picker(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: locale,
+          child: const FTimeField.picker(key: key),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -31,7 +36,10 @@ void main() {
 
   testWidgets('24 hours', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.app(locale: const Locale('en', 'SG'), child: const FTimeField.picker(key: key, hour24: true)),
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: const FTimeField.picker(key: key, hour24: true),
+      ),
     );
 
     await tester.tap(find.byKey(key));
@@ -92,7 +100,11 @@ void main() {
     testWidgets('tap on text-field should refocus', (tester) async {
       final focus = autoDispose(FocusNode());
 
-      await tester.pumpWidget(TestScaffold.app(child: FTimeField.picker(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTimeField.picker(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -106,7 +118,11 @@ void main() {
     testWidgets('escape should refocus', (tester) async {
       final focus = autoDispose(FocusNode());
 
-      await tester.pumpWidget(TestScaffold.app(child: FTimeField.picker(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTimeField.picker(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -120,7 +136,11 @@ void main() {
     testWidgets('tap outside unfocuses on Android/iOS', (tester) async {
       final focus = autoDispose(FocusNode());
 
-      await tester.pumpWidget(TestScaffold.app(child: FTimeField.picker(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTimeField.picker(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -136,7 +156,11 @@ void main() {
 
       final focus = autoDispose(FocusNode());
 
-      await tester.pumpWidget(TestScaffold.app(child: FTimeField.picker(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTimeField.picker(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();

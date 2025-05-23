@@ -83,10 +83,9 @@ enum FHidePopoverRegion {
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
   /// The platform-specific default popover and child anchors.
-  static ({Alignment popover, Alignment child}) get defaultPlatform =>
-      FTouch.primary
-          ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
-          : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
+  static ({Alignment popover, Alignment child}) get defaultPlatform => FTouch.primary
+      ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
+      : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
 
   /// The controller that shows and hides the popover. It initially hides the popover.
   final FPopoverController? controller;
@@ -311,10 +310,9 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     final style = widget.style ?? context.theme.popoverStyle;
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
-    var child =
-        widget._automatic
-            ? GestureDetector(behavior: HitTestBehavior.translucent, onTap: _controller.toggle, child: widget.child)
-            : widget.child;
+    var child = widget._automatic
+        ? GestureDetector(behavior: HitTestBehavior.translucent, onTap: _controller.toggle, child: widget.child)
+        : widget.child;
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
       child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
@@ -329,33 +327,29 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       spacing: widget.spacing,
       shift: widget.shift,
       offset: widget.offset,
-      portalBuilder:
-          (context) => CallbackShortcuts(
-            bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-            child: Semantics(
-              label: widget.semanticsLabel,
-              container: true,
-              child: FocusScope(
-                autofocus: widget.autofocus,
-                node: widget.focusNode,
-                onFocusChange: widget.onFocusChange,
-                child: FadeTransition(
-                  opacity: _controller._fade,
-                  child: ScaleTransition(
-                    scale: _controller._scale,
-                    child: TapRegion(
-                      groupId: _groupId,
-                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
-                      child: DecoratedBox(
-                        decoration: style.decoration,
-                        child: widget.popoverBuilder(context, style, null),
-                      ),
-                    ),
-                  ),
+      portalBuilder: (context) => CallbackShortcuts(
+        bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
+        child: Semantics(
+          label: widget.semanticsLabel,
+          container: true,
+          child: FocusScope(
+            autofocus: widget.autofocus,
+            node: widget.focusNode,
+            onFocusChange: widget.onFocusChange,
+            child: FadeTransition(
+              opacity: _controller._fade,
+              child: ScaleTransition(
+                scale: _controller._scale,
+                child: TapRegion(
+                  groupId: _groupId,
+                  onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
+                  child: DecoratedBox(decoration: style.decoration, child: widget.popoverBuilder(context, style, null)),
                 ),
               ),
             ),
           ),
+        ),
+      ),
       child: child,
     );
   }

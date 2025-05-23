@@ -32,14 +32,9 @@ class Content extends StatelessWidget {
       image: image,
       semanticLabel: semanticsLabel,
       errorBuilder: (_, _, _) => fallback,
-      frameBuilder:
-          (_, child, frame, wasSynchronouslyLoaded) =>
-              wasSynchronouslyLoaded
-                  ? child
-                  : AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 500),
-                    child: frame == null ? fallback : child,
-                  ),
+      frameBuilder: (_, child, frame, wasSynchronouslyLoaded) => wasSynchronouslyLoaded
+          ? child
+          : AnimatedSwitcher(duration: const Duration(milliseconds: 500), child: frame == null ? fallback : child),
       loadingBuilder: (_, child, loadingProgress) => loadingProgress == null ? child : fallback,
       fit: BoxFit.cover,
     );

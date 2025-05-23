@@ -16,7 +16,9 @@ void main() {
 
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.blue(child: FPagination(style: TestScaffold.blueScreen.paginationStyle, controller: controller)),
+        TestScaffold.blue(
+          child: FPagination(style: TestScaffold.blueScreen.paginationStyle, controller: controller),
+        ),
       );
 
       await expectBlueScreen(find.byType(TestScaffold));
@@ -24,7 +26,12 @@ void main() {
 
     for (final theme in TestScaffold.themes) {
       testWidgets('default', (tester) async {
-        await tester.pumpWidget(TestScaffold(theme: theme.data, child: FPagination(controller: controller)));
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FPagination(controller: controller),
+          ),
+        );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/default.png'));
       });
@@ -32,7 +39,12 @@ void main() {
       testWidgets('hide edges', (tester) async {
         final controller = autoDispose(FPaginationController(pages: 10, showEdges: false));
 
-        await tester.pumpWidget(TestScaffold(theme: theme.data, child: FPagination(controller: controller)));
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FPagination(controller: controller),
+          ),
+        );
 
         await tester.tap(find.text('4'));
         await tester.pumpAndSettle(const Duration(milliseconds: 500));

@@ -11,22 +11,19 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Builder(
-            builder:
-                (context) => FButton.icon(
-                  child: const Icon(FIcons.chevronRight),
-                  onPress:
-                      () => showFSheet(
-                        context: context,
-                        side: FLayout.btt,
-                        builder:
-                            (context) => Container(
-                              height: double.infinity,
-                              width: double.infinity,
-                              color: context.theme.colors.background,
-                              child: const Center(child: Text('sheet')),
-                            ),
-                      ),
+            builder: (context) => FButton.icon(
+              child: const Icon(FIcons.chevronRight),
+              onPress: () => showFSheet(
+                context: context,
+                side: FLayout.btt,
+                builder: (context) => Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: context.theme.colors.background,
+                  child: const Center(child: Text('sheet')),
                 ),
+              ),
+            ),
           ),
         ),
       );
@@ -50,22 +47,19 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: Builder(
-              builder:
-                  (context) => FButton.icon(
-                    child: const Icon(FIcons.chevronRight),
-                    onPress:
-                        () => showFSheet(
-                          context: context,
-                          side: side,
-                          builder:
-                              (context) => Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                color: context.theme.colors.background,
-                                child: const Center(child: Text('sheet')),
-                              ),
-                        ),
+              builder: (context) => FButton.icon(
+                child: const Icon(FIcons.chevronRight),
+                onPress: () => showFSheet(
+                  context: context,
+                  side: side,
+                  builder: (context) => Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    color: context.theme.colors.background,
+                    child: const Center(child: Text('sheet')),
                   ),
+                ),
+              ),
             ),
           ),
         );
@@ -83,23 +77,20 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: Builder(
-              builder:
-                  (context) => FButton.icon(
-                    child: const Icon(FIcons.chevronRight),
-                    onPress:
-                        () => showFSheet(
-                          context: context,
-                          side: side,
-                          draggable: false,
-                          builder:
-                              (context) => Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                color: context.theme.colors.background,
-                                child: const Center(child: Text('sheet')),
-                              ),
-                        ),
+              builder: (context) => FButton.icon(
+                child: const Icon(FIcons.chevronRight),
+                onPress: () => showFSheet(
+                  context: context,
+                  side: side,
+                  draggable: false,
+                  builder: (context) => Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    color: context.theme.colors.background,
+                    child: const Center(child: Text('sheet')),
                   ),
+                ),
+              ),
             ),
           ),
         );

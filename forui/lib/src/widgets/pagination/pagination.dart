@@ -150,7 +150,10 @@ class _FPaginationState extends State<FPagination> {
       padding: style.itemPadding,
       child: ConstrainedBox(
         constraints: style.itemConstraints,
-        child: DefaultTextStyle(style: style.ellipsisTextStyle, child: const Center(child: Text('...'))),
+        child: DefaultTextStyle(
+          style: style.ellipsisTextStyle,
+          child: const Center(child: Text('...')),
+        ),
       ),
     );
 
@@ -251,17 +254,18 @@ class Action extends StatelessWidget {
       semanticsLabel: semanticsLabel,
       focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
       onPress: onPress,
-      builder:
-          (context, states, child) => DecoratedBox(
-            decoration: style.itemDecoration.resolve(states),
-            child: ConstrainedBox(
-              constraints: style.itemConstraints,
-              child: DefaultTextStyle(
-                style: style.itemTextStyle.resolve(states),
-                child: Center(child: IconTheme(data: style.itemIconStyle.resolve(states), child: child!)),
-              ),
+      builder: (context, states, child) => DecoratedBox(
+        decoration: style.itemDecoration.resolve(states),
+        child: ConstrainedBox(
+          constraints: style.itemConstraints,
+          child: DefaultTextStyle(
+            style: style.itemTextStyle.resolve(states),
+            child: Center(
+              child: IconTheme(data: style.itemIconStyle.resolve(states), child: child!),
             ),
           ),
+        ),
+      ),
       child: child,
     ),
   );
@@ -288,24 +292,22 @@ class _Page extends StatelessWidget {
       padding: style.itemPadding,
       child: ListenableBuilder(
         listenable: controller,
-        builder:
-            (_, _) => FTappable(
-              style: style.pageTappableStyle,
-              focusedOutlineStyle: focusedOutlineStyle,
-              selected: controller.page == page,
-              onPress: () => controller.page = page,
-              builder:
-                  (_, states, _) => DecoratedBox(
-                    decoration: style.itemDecoration.resolve(states),
-                    child: ConstrainedBox(
-                      constraints: style.itemConstraints,
-                      child: DefaultTextStyle(
-                        style: style.itemTextStyle.resolve(states),
-                        child: Center(child: Text('${page + 1}')),
-                      ),
-                    ),
-                  ),
+        builder: (_, _) => FTappable(
+          style: style.pageTappableStyle,
+          focusedOutlineStyle: focusedOutlineStyle,
+          selected: controller.page == page,
+          onPress: () => controller.page = page,
+          builder: (_, states, _) => DecoratedBox(
+            decoration: style.itemDecoration.resolve(states),
+            child: ConstrainedBox(
+              constraints: style.itemConstraints,
+              child: DefaultTextStyle(
+                style: style.itemTextStyle.resolve(states),
+                child: Center(child: Text('${page + 1}')),
+              ),
             ),
+          ),
+        ),
       ),
     );
   }

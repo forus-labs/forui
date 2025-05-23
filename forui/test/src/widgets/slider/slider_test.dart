@@ -69,7 +69,11 @@ void main() {
       void onChange(FSliderSelection _) => count++;
 
       final firstController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
-      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: firstController, onChange: onChange)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSlider(controller: firstController, onChange: onChange),
+        ),
+      );
 
       firstController.selection = FSliderSelection(max: 0.2);
       await tester.pump();
@@ -77,7 +81,11 @@ void main() {
       expect(count, 1);
 
       final secondController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
-      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: secondController, onChange: onChange)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSlider(controller: secondController, onChange: onChange),
+        ),
+      );
 
       firstController.selection = FSliderSelection(max: 0.3);
       secondController.selection = FSliderSelection(max: 0.4);
@@ -91,14 +99,22 @@ void main() {
       int second = 0;
 
       final controller = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
-      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => first++)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSlider(controller: controller, onChange: (_) => first++),
+        ),
+      );
 
       controller.selection = FSliderSelection(max: 0.2);
       await tester.pump();
 
       expect(first, 1);
 
-      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => second++)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSlider(controller: controller, onChange: (_) => second++),
+        ),
+      );
 
       controller.selection = FSliderSelection(max: 0.3);
       await tester.pump();
@@ -112,7 +128,11 @@ void main() {
       int second = 0;
 
       final firstController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
-      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: firstController, onChange: (_) => first++)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSlider(controller: firstController, onChange: (_) => first++),
+        ),
+      );
 
       firstController.selection = FSliderSelection(max: 0.2);
       await tester.pump();
@@ -121,7 +141,9 @@ void main() {
 
       final secondController = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
       await tester.pumpWidget(
-        TestScaffold.app(child: FSlider(controller: secondController, onChange: (_) => second++)),
+        TestScaffold.app(
+          child: FSlider(controller: secondController, onChange: (_) => second++),
+        ),
       );
 
       firstController.selection = FSliderSelection(max: 0.3);
@@ -136,7 +158,11 @@ void main() {
       int count = 0;
 
       final controller = autoDispose(FContinuousSliderController(selection: FSliderSelection(max: 0.1)));
-      await tester.pumpWidget(TestScaffold.app(child: FSlider(controller: controller, onChange: (_) => count++)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSlider(controller: controller, onChange: (_) => count++),
+        ),
+      );
 
       controller.selection = FSliderSelection(max: 0.2);
       await tester.pump();
@@ -414,8 +440,10 @@ void main() {
         });
       }
 
-      for (final (index, (constructor, minExpected, maxExpected))
-          in [(continuous, lessThan(0.25), greaterThan(0.75)), (discrete, 0, 1)].indexed) {
+      for (final (index, (constructor, minExpected, maxExpected)) in [
+        (continuous, lessThan(0.25), greaterThan(0.75)),
+        (discrete, 0, 1),
+      ].indexed) {
         testWidgets('tap inactive track - $index', (tester) async {
           final controller = constructor();
           await tester.pumpWidget(slider(controller));
@@ -434,11 +462,10 @@ void main() {
         });
       }
 
-      for (final (index, (constructor, minShrink, minExpand, maxExpand, maxShrink))
-          in [
-            (continuous, greaterThan(0.25), lessThan(0.25), greaterThan(0.75), lessThan(0.75)),
-            (discrete, 0.5, 0.25, 1, 0.75),
-          ].indexed) {
+      for (final (index, (constructor, minShrink, minExpand, maxExpand, maxShrink)) in [
+        (continuous, greaterThan(0.25), lessThan(0.25), greaterThan(0.75), lessThan(0.75)),
+        (discrete, 0.5, 0.25, 1, 0.75),
+      ].indexed) {
         testWidgets('drag thumbs - $index', (tester) async {
           final controller = constructor();
           await tester.pumpWidget(slider(controller));

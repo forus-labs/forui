@@ -1208,17 +1208,16 @@ class _State extends State<FTextField> {
     final states = _statesController.value;
 
     final suffixIcon = widget.suffixBuilder?.call(context, (style, states), null);
-    final clear =
-        widget.clearable(_controller.value)
-            ? Padding(
-              padding: style.clearButtonPadding,
-              child: FButton.icon(
-                style: style.clearButtonStyle,
-                onPress: () => _controller.text = '',
-                child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
-              ),
-            )
-            : null;
+    final clear = widget.clearable(_controller.value)
+        ? Padding(
+            padding: style.clearButtonPadding,
+            child: FButton.icon(
+              style: style.clearButtonStyle,
+              onPress: () => _controller.text = '',
+              child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
+            ),
+          )
+        : null;
 
     return InputDecoration(
       isDense: true,

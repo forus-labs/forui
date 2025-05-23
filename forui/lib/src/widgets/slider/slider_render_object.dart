@@ -155,14 +155,13 @@ class _RenderVerticalSlider extends _RenderSlider {
 
 class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
 
-typedef _Parts =
-    ({
-      RenderBox paddedTrack,
-      RenderBox label,
-      RenderBox description,
-      RenderBox error,
-      ({Map<RenderBox, Rect> marks, Size size}) slider,
-    });
+typedef _Parts = ({
+  RenderBox paddedTrack,
+  RenderBox label,
+  RenderBox description,
+  RenderBox error,
+  ({Map<RenderBox, Rect> marks, Size size}) slider,
+});
 
 abstract class _RenderSlider extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {

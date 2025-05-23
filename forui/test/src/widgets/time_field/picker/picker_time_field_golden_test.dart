@@ -90,7 +90,10 @@ void main() {
 
     testWidgets('${theme.name} disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, child: const FTimeField.picker(enabled: false, key: key)),
+        TestScaffold.app(
+          theme: theme.data,
+          child: const FTimeField.picker(enabled: false, key: key),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -115,7 +118,12 @@ void main() {
     });
 
     testWidgets('${theme.name} keyboard navigation', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FTimeField.picker(key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: const FTimeField.picker(key: key),
+        ),
+      );
 
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.sendKeyEvent(LogicalKeyboardKey.enter);

@@ -67,7 +67,9 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
       :tooltipBuilder,
       :semanticValueFormatterCallback,
       :enabled,
-    ) = InheritedData.of(context);
+    ) = InheritedData.of(
+      context,
+    );
 
     String? increasedValue;
     if (_controller.selection.step(min: widget.min, extend: !widget.min) case final selection

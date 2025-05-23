@@ -8,7 +8,11 @@ import '../../test_scaffold.dart';
 void main() {
   group('FLabel', () {
     testWidgets('renders child only when label, description, and error are null', (tester) async {
-      await tester.pumpWidget(TestScaffold(child: const FLabel(axis: Axis.horizontal, child: Text('Child'))));
+      await tester.pumpWidget(
+        TestScaffold(
+          child: const FLabel(axis: Axis.horizontal, child: Text('Child')),
+        ),
+      );
 
       expect(find.text('Child'), findsOneWidget);
     });
@@ -71,7 +75,9 @@ void main() {
 
     testWidgets('does not render error when state is not error', (tester) async {
       await tester.pumpWidget(
-        TestScaffold(child: const FLabel(axis: Axis.horizontal, error: Text('Error'), child: Text('Child'))),
+        TestScaffold(
+          child: const FLabel(axis: Axis.horizontal, error: Text('Error'), child: Text('Child')),
+        ),
       );
 
       expect(find.text('Child'), findsOneWidget);

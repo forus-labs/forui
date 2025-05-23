@@ -36,8 +36,10 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   );
 
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
-  static Widget defaultSearchLoadingBuilder(BuildContext _, FSelectSearchStyle style, Widget? _) =>
-      Padding(padding: const EdgeInsets.all(8.0), child: FProgress.circularIcon(style: style.loadingIndicatorStyle));
+  static Widget defaultSearchLoadingBuilder(BuildContext _, FSelectSearchStyle style, Widget? _) => Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: FProgress.circularIcon(style: style.loadingIndicatorStyle),
+  );
 
   /// The default empty builder that shows a localized message when there are no results.
   static Widget defaultEmptyBuilder(BuildContext context, FSelectStyle style, Widget? _) {
@@ -574,78 +576,73 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       onSaved: widget.onSaved,
       validator: widget.validator,
       initialValue: widget.initialValue,
-      builder:
-          (state) => FTextField(
-            focusNode: _focus,
-            controller: _textController,
-            style: style.selectFieldStyle,
-            textAlign: widget.textAlign,
-            textAlignVertical: widget.textAlignVertical,
-            textDirection: widget.textDirection,
-            expands: widget.expands,
-            mouseCursor: widget.mouseCursor,
-            canRequestFocus: widget.canRequestFocus,
-            onTap: _toggle,
-            onTapAlwaysCalled: true,
-            hint: widget.hint ?? localizations.selectHint,
-            readOnly: true,
-            enableInteractiveSelection: false,
-            prefixBuilder:
-                widget.prefixBuilder == null
-                    ? null
-                    : (context, styles, _) => MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-                    ),
-            suffixBuilder:
-                widget.suffixBuilder == null
-                    ? null
-                    : (context, styles, _) => MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-                    ),
-            clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
-            label: widget.label,
-            description: widget.description,
-            error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
-            enabled: widget.enabled,
-            builder:
-                (context, data, child) => FPopover(
-                  style: style.popoverStyle,
-                  controller: _controller.popover,
-                  constraints: widget.popoverConstraints,
-                  popoverAnchor: widget.anchor,
-                  childAnchor: widget.fieldAnchor,
-                  spacing: widget.spacing,
-                  shift: widget.shift,
-                  offset: widget.offset,
-                  hideOnTapOutside: widget.hideOnTapOutside,
-                  shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
-                  popoverBuilder:
-                      (_, _, _) => TextFieldTapRegion(
-                        child: SelectControllerData<T>(
-                          contains: (value) => _controller.value == value,
-                          onPress: (value) async {
-                            if (widget.autoHide) {
-                              _focus.requestFocus();
-                              await _controller.popover.hide();
-                            }
+      builder: (state) => FTextField(
+        focusNode: _focus,
+        controller: _textController,
+        style: style.selectFieldStyle,
+        textAlign: widget.textAlign,
+        textAlignVertical: widget.textAlignVertical,
+        textDirection: widget.textDirection,
+        expands: widget.expands,
+        mouseCursor: widget.mouseCursor,
+        canRequestFocus: widget.canRequestFocus,
+        onTap: _toggle,
+        onTapAlwaysCalled: true,
+        hint: widget.hint ?? localizations.selectHint,
+        readOnly: true,
+        enableInteractiveSelection: false,
+        prefixBuilder: widget.prefixBuilder == null
+            ? null
+            : (context, styles, _) => MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+              ),
+        suffixBuilder: widget.suffixBuilder == null
+            ? null
+            : (context, styles, _) => MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
+              ),
+        clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
+        label: widget.label,
+        description: widget.description,
+        error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
+        enabled: widget.enabled,
+        builder: (context, data, child) => FPopover(
+          style: style.popoverStyle,
+          controller: _controller.popover,
+          constraints: widget.popoverConstraints,
+          popoverAnchor: widget.anchor,
+          childAnchor: widget.fieldAnchor,
+          spacing: widget.spacing,
+          shift: widget.shift,
+          offset: widget.offset,
+          hideOnTapOutside: widget.hideOnTapOutside,
+          shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
+          popoverBuilder: (_, _, _) => TextFieldTapRegion(
+            child: SelectControllerData<T>(
+              contains: (value) => _controller.value == value,
+              onPress: (value) async {
+                if (widget.autoHide) {
+                  _focus.requestFocus();
+                  await _controller.popover.hide();
+                }
 
-                            _controller.value = value;
-                          },
-                          child: content(context, style),
-                        ),
-                      ),
-                  child: CallbackShortcuts(
-                    bindings: {
-                      const SingleActivator(LogicalKeyboardKey.enter): _toggle,
-                      // TODO: Remove once https://github.com/flutter/flutter/issues/161482 lands
-                      const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
-                    },
-                    child: widget.builder(context, (style, data.$1, data.$2), child),
-                  ),
-                ),
+                _controller.value = value;
+              },
+              child: content(context, style),
+            ),
           ),
+          child: CallbackShortcuts(
+            bindings: {
+              const SingleActivator(LogicalKeyboardKey.enter): _toggle,
+              // TODO: Remove once https://github.com/flutter/flutter/issues/161482 lands
+              const SingleActivator(LogicalKeyboardKey.tab): _focus.nextFocus,
+            },
+            child: widget.builder(context, (style, data.$1, data.$2), child),
+          ),
+        ),
+      ),
     );
   }
 

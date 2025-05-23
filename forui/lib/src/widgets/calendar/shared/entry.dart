@@ -9,8 +9,14 @@ import 'package:forui/forui.dart';
 part 'entry.style.dart';
 
 /// A calendar day's data.
-typedef FCalendarDayData =
-    ({FCalendarDayPickerStyle style, DateTime date, bool current, bool today, bool selectable, bool selected});
+typedef FCalendarDayData = ({
+  FCalendarDayPickerStyle style,
+  DateTime date,
+  bool current,
+  bool today,
+  bool selectable,
+  bool selected,
+});
 
 @internal
 abstract class Entry extends StatelessWidget {
@@ -60,15 +66,15 @@ abstract class Entry extends StatelessWidget {
 
     return canSelect
         ? _SelectableEntry(
-          focusNode: focusNode,
-          date: date,
-          semanticsLabel: localizations.fullDate(date.toNative()),
-          selected: isSelected,
-          onPress: onPress,
-          onLongPress: onLongPress,
-          style: entryStyle,
-          builder: builder,
-        )
+            focusNode: focusNode,
+            date: date,
+            semanticsLabel: localizations.fullDate(date.toNative()),
+            selected: isSelected,
+            onPress: onPress,
+            onLongPress: onLongPress,
+            style: entryStyle,
+            builder: builder,
+          )
         : _UnselectableEntry(selected: isSelected, style: entryStyle, builder: builder);
   }
 
@@ -91,14 +97,14 @@ abstract class Entry extends StatelessWidget {
 
     return selectable
         ? _SelectableEntry(
-          focusNode: focusNode,
-          date: date,
-          semanticsLabel: format(date),
-          selected: selectable,
-          onPress: onPress,
-          style: style,
-          builder: builder,
-        )
+            focusNode: focusNode,
+            date: date,
+            semanticsLabel: format(date),
+            selected: selectable,
+            onPress: onPress,
+            style: style,
+            builder: builder,
+          )
         : _UnselectableEntry(selected: selectable, style: style, builder: builder);
   }
 

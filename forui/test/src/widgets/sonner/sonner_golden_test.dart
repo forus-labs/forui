@@ -8,81 +8,60 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
-  builder:
-      (context) => FButton(
-        intrinsicWidth: true,
-        onPress:
-            () => showRawFSonner(
-              alignment: alignment,
-              context: context,
-              builder:
-                  (_, _) => Container(
-                    width: 250,
-                    height: 143,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.blue,
-                    ),
-                    child: Text(text),
-                  ),
-            ),
+  builder: (context) => FButton(
+    intrinsicWidth: true,
+    onPress: () => showRawFSonner(
+      alignment: alignment,
+      context: context,
+      builder: (_, _) => Container(
+        width: 250,
+        height: 143,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.blue),
         child: Text(text),
       ),
+    ),
+    child: Text(text),
+  ),
 );
 
 Widget big(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
-  builder:
-      (context) => FButton(
-        intrinsicWidth: true,
-        onPress:
-            () => showRawFSonner(
-              alignment: alignment,
-              context: context,
-              builder:
-                  (_, _) => Container(
-                    width: 312,
-                    height: 201,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      border: Border.all(),
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.red,
-                    ),
-                    child: Text(text),
-                  ),
-            ),
+  builder: (context) => FButton(
+    intrinsicWidth: true,
+    onPress: () => showRawFSonner(
+      alignment: alignment,
+      context: context,
+      builder: (_, _) => Container(
+        width: 312,
+        height: 201,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.red),
         child: Text(text),
       ),
+    ),
+    child: Text(text),
+  ),
 );
 
 Widget closeable(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
-  builder:
-      (context) => FButton(
-        intrinsicWidth: true,
-        onPress:
-            () => showRawFSonner(
-              alignment: alignment,
-              context: context,
-              builder:
-                  (_, entry) => GestureDetector(
-                    onTap: () => entry.dismiss(),
-                    child: Container(
-                      width: 312,
-                      height: 201,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.red,
-                      ),
-                      child: const Text('close'),
-                    ),
-                  ),
-            ),
-        child: Text(text),
+  builder: (context) => FButton(
+    intrinsicWidth: true,
+    onPress: () => showRawFSonner(
+      alignment: alignment,
+      context: context,
+      builder: (_, entry) => GestureDetector(
+        onTap: () => entry.dismiss(),
+        child: Container(
+          width: 312,
+          height: 201,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.red),
+          child: const Text('close'),
+        ),
       ),
+    ),
+    child: Text(text),
+  ),
 );
 
 void main() {
@@ -92,18 +71,14 @@ void main() {
         child: FSonner(
           style: TestScaffold.blueScreen.sonnerStyle,
           child: Builder(
-            builder:
-                (context) => FButton(
-                  style: TestScaffold.blueScreen.buttonStyles.primary,
-                  onPress:
-                      () => showRawFSonner(
-                        context: context,
-                        builder:
-                            (_, _) =>
-                                Container(color: TestScaffold.blueScreen.colors.foreground, width: 100, height: 100),
-                      ),
-                  child: const Text('blue'),
-                ),
+            builder: (context) => FButton(
+              style: TestScaffold.blueScreen.buttonStyles.primary,
+              onPress: () => showRawFSonner(
+                context: context,
+                builder: (_, _) => Container(color: TestScaffold.blueScreen.colors.foreground, width: 100, height: 100),
+              ),
+              child: const Text('blue'),
+            ),
           ),
         ),
       ),

@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -31,7 +32,7 @@ void main() {
           title: Text('Event has been created'),
           description: Text(
             'This is a more detailed description that provides comprehensive context and additional information '
-                'about the notification, explaining what happened and what the user might expect next.',
+            'about the notification, explaining what happened and what the user might expect next.',
           ),
         ),
       ),

@@ -24,8 +24,9 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
 Future<void> configureGoldenTests(double threshold) async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  final workingDirectory =
-      Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
+  final workingDirectory = Directory.current.path.contains('forui${Platform.pathSeparator}forui')
+      ? '.'
+      : '${Directory.current.path}/forui';
 
   final inter = FontLoader('packages/forui/Inter');
   final directory = Directory('$workingDirectory/assets/fonts/inter/');

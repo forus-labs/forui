@@ -217,7 +217,10 @@ class _CircularState extends State<_Circular> with SingleTickerProviderStateMixi
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),
-      child: IconTheme(data: style, child: Icon(FIcons.loaderCircle, semanticLabel: widget.semanticsLabel)),
+      child: IconTheme(
+        data: style,
+        child: Icon(FIcons.loaderCircle, semanticLabel: widget.semanticsLabel),
+      ),
     );
   }
 

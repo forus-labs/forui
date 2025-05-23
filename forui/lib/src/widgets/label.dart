@@ -141,7 +141,9 @@ class _FHorizontalLabel extends StatelessWidget {
     children: [
       TableRow(
         children: [
-          TableCell(child: Padding(padding: style.childPadding, child: child)),
+          TableCell(
+            child: Padding(padding: style.childPadding, child: child),
+          ),
           if (label != null)
             _buildCell(padding: style.labelPadding, textStyle: style.labelTextStyle.resolve(states), child: label)
           else
@@ -183,7 +185,12 @@ class _FHorizontalLabel extends StatelessWidget {
       return const TableCell(child: SizedBox());
     }
 
-    return TableCell(child: Padding(padding: padding, child: DefaultTextStyle(style: textStyle, child: child)));
+    return TableCell(
+      child: Padding(
+        padding: padding,
+        child: DefaultTextStyle(style: textStyle, child: child),
+      ),
+    );
   }
 
   @override

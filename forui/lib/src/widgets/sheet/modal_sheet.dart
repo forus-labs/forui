@@ -228,13 +228,12 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
       draggable: draggable,
       useSafeArea: useSafeArea,
       builder: builder,
-      onChange:
-          (size) => _didChangeBarrierSemanticsClip(switch (side) {
-            FLayout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
-            FLayout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
-            FLayout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
-            FLayout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
-          }),
+      onChange: (size) => _didChangeBarrierSemanticsClip(switch (side) {
+        FLayout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
+        FLayout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
+        FLayout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
+        FLayout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
+      }),
       onClosing: () {
         if (isCurrent) {
           Navigator.pop(context);

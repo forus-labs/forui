@@ -36,12 +36,12 @@ FSonnerEntry showFSonner({
       ErrorSummary('showFSonner(...) called with a context that does not contain a FSonner/FScaffold.'),
       ErrorDescription(
         'No FSonner/FScaffold ancestor could be found starting from the context that was passed to FSonner/FScaffold.of(). '
-            'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
-            'actually creates the FSonner/FScaffold widget being sought.',
+        'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
+        'actually creates the FSonner/FScaffold widget being sought.',
       ),
       ErrorHint(
         'There are several ways to avoid this problem. The simplest is to use a Builder to get a '
-            'context that is "under" the FSonner/FScaffold.',
+        'context that is "under" the FSonner/FScaffold.',
       ),
       context.describeElement('The context used was'),
     ]);

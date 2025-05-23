@@ -102,7 +102,10 @@ void main() {
     group('period first', () {
       testWidgets('12-hour time after noon', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('ko'), child: FTimePicker(controller: controller)),
+          TestScaffold.app(
+            locale: const Locale('ko'),
+            child: FTimePicker(controller: controller),
+          ),
         );
 
         expect(controller.encode(const FTime(13, 30)), [1, 13, 30]);
@@ -110,7 +113,10 @@ void main() {
 
       testWidgets('12-hour time before noon', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('ko'), child: FTimePicker(controller: controller)),
+          TestScaffold.app(
+            locale: const Locale('ko'),
+            child: FTimePicker(controller: controller),
+          ),
         );
 
         expect(controller.encode(const FTime(5, 30)), [0, 5, 30]);
@@ -118,7 +124,10 @@ void main() {
 
       testWidgets('24-hour time', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('ko'), child: FTimePicker(controller: controller, hour24: true)),
+          TestScaffold.app(
+            locale: const Locale('ko'),
+            child: FTimePicker(controller: controller, hour24: true),
+          ),
         );
 
         expect(controller.encode(const FTime(13, 30)), [13, 30]);
@@ -130,7 +139,10 @@ void main() {
     group('period first', () {
       testWidgets('12-hour time after noon', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('ko'), child: FTimePicker(controller: controller)),
+          TestScaffold.app(
+            locale: const Locale('ko'),
+            child: FTimePicker(controller: controller),
+          ),
         );
 
         controller
@@ -143,7 +155,10 @@ void main() {
 
       testWidgets('12-hour time before noon', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(locale: const Locale('ko'), child: FTimePicker(controller: controller)),
+          TestScaffold.app(
+            locale: const Locale('ko'),
+            child: FTimePicker(controller: controller),
+          ),
         );
 
         controller

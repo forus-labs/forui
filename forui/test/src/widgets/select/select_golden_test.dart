@@ -161,7 +161,10 @@ void main() {
             key: key,
             autoHide: false,
             children: [FSelectItem.text('A'), FSelectItem.text('B')],
-            builder: (_, _, child) => DecoratedBox(decoration: const BoxDecoration(color: Colors.red), child: child),
+            builder: (_, _, child) => DecoratedBox(
+              decoration: const BoxDecoration(color: Colors.red),
+              child: child,
+            ),
           ),
         ),
       );
