@@ -334,7 +334,7 @@ enum Style {
     'FSidebarStyle',
     <String>['sidebar'],
     <String>['FSidebarStyle', 'FSidebarGroupStyle', 'FSidebarItemStyle'],
-    'FSidebarStyle sidebarStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSidebarStyle(\n  width: 250,\n  borderColor: colors.border,\n  borderWidth: style.borderWidth,\n  groupStyle: _sidebarGroupStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  headerPadding: const EdgeInsets.fromLTRB(16, 16, 16, 0),\n  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),\n  footerPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),\n);\n',
+    'FSidebarStyle sidebarStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSidebarStyle(\n  borderColor: colors.border,\n  borderWidth: style.borderWidth,\n  groupStyle: _sidebarGroupStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  width: 250,\n  headerPadding: const EdgeInsets.fromLTRB(16, 16, 16, 0),\n  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),\n  footerPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),\n);\n',
   ),
   fsliderstyle(
     'FSliderStyle',
