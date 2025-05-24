@@ -31,17 +31,17 @@
 > [!IMPORTANT]
 > Forui 0.11.0+ requires Flutter **3.29.0+**. Run `flutter --version` to check your Flutter version.
 
+## Why Forui?
+
+* 🎨 Over 40+ beautifully crafted widgets.
+* ⚡ Bundled [CLI](https://forui.dev/docs/themes#cli) to generate themes & styling boilerplate.
+* ✅ [Well-tested](https://app.codecov.io/gh/forus-labs/forui).
+* 🌍 i10n support.
+* 🪝 First-class [Flutter Hooks](https://pub.dev/packages/flutter_hooks) integration via [`forui_hooks`](https://pub.dev/packages/forui_hooks).
+
 ## Documentation
 
 Visit [forui.dev/docs](https://forui.dev/docs) to view the documentation.
-
-## Flutter Hooks Integration
-
-<a href="https://github.com/forus-labs/forui/actions/workflows/forui_hooks_build.yaml"><img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/forus-labs/forui/forui_hooks_build.yaml?branch=main&style=flat&logo=github&label=forui_hooks"></a>
-<a href="https://pub.dev/packages/forui_hooks"><img alt="Pub Version" src="https://img.shields.io/pub/v/forui_hooks?style=flat&logo=dart&label=pub.dev: forui_hooks&color=00589B"></a>
-
-Forui provides first class integration with [Flutter Hooks](https://pub.dev/packages/flutter_hooks). All controllers
-are exposed as hooks in the companion `forui_hooks` package.
 
 ## Contributing
 
@@ -50,3 +50,47 @@ Please read the [contributing guide](https://github.com/forus-labs/forui/blob/ma
 ## License
 
 Licensed under the [MIT License](https://github.com/forus-labs/forui/blob/main/forui/LICENSE) and [Open Font License](https://github.com/forus-labs/forui/blob/main/forui/LICENSE).
+
+## Widgets
+
+Forui provides the following widgets:
+
+- accordion
+- alert
+- avatar
+- badge
+- bottom navigation bar
+- breadcrumb
+- button
+- calendar
+- card
+- checkbox
+- date field
+- dialog
+- divider
+- header
+- label
+- line calendar
+- pagination
+- picker
+- popover
+- popover menu
+- progress
+- radio
+- resizable
+- scaffold
+- select
+- select group
+- select menu tile
+- select tile group
+- sheet
+- sidebar
+- slider
+- sonner
+- switch
+- tabs
+- text field
+- tile
+- time field
+- time picker
+- tooltip
