@@ -2,6 +2,8 @@
 
 ### CLI
 
+* Add `icon-mapping` snippet.
+
 * **Breaking** Improve how style aliases are generated - Certain style aliases may be removed or renamed.
 
 * Fix style suggestions always displaying actual style name instead of alias.

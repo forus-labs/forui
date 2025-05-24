@@ -6,7 +6,7 @@ import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 
-import 'generate_snippets.dart';
+import 'snippets/generate_snippets.dart';
 import 'generate_styles.dart';
 import 'generate_themes.dart';
 
@@ -14,6 +14,8 @@ final library = p.join(Directory.current.parent.path, 'forui', 'lib');
 final _snippet = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'snippet', 'snippet.dart');
 final _style = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'style', 'style.dart');
 final _theme = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands', 'theme', 'theme.dart');
+
+final assetsLibrary = p.join(Directory.current.parent.path, 'forui_assets', 'lib', 'src');
 
 final emitter = DartEmitter();
 final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
@@ -32,11 +34,11 @@ const header = '''
 
 Future<void> main() async {
   final collection = AnalysisContextCollection(
-    includedPaths: [library],
+    includedPaths: [library, assetsLibrary],
     resourceProvider: PhysicalResourceProvider.INSTANCE,
   );
 
-  final snippets = mapSnippets(await traverseSnippets(collection));
+  final snippets = await mapSnippets(collection);
   File(_snippet).writeAsStringSync(generateSnippets(snippets));
 
   final styles = mapStyles(await traverseStyles(collection));
