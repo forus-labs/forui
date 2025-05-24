@@ -31,7 +31,9 @@ void main() {
 
         String? initial;
         await tester.pumpWidget(
-          TestScaffold.app(child: Form(key: key, child: field('initial', null, (value) => initial = value))),
+          TestScaffold.app(
+            child: Form(key: key, child: field('initial', null, (value) => initial = value)),
+          ),
         );
 
         key.currentState!.save();
@@ -69,7 +71,10 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: Form(key: key, child: FTextFormField(controller: controller, onChange: (value) => count++)),
+          child: Form(
+            key: key,
+            child: FTextFormField(controller: controller, onChange: (value) => count++),
+          ),
         ),
       );
 

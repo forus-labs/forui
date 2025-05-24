@@ -9,8 +9,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'threshold_file_comparator.dart';
 
-final relativePath =
-    Directory.current.path.contains('forui${Platform.pathSeparator}forui') ? '.' : '${Directory.current.path}/forui';
+final relativePath = Directory.current.path.contains('forui${Platform.pathSeparator}forui')
+    ? '.'
+    : '${Directory.current.path}/forui';
 
 MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
 
@@ -121,17 +122,16 @@ class TestScaffold extends StatelessWidget {
         locale: locale,
         localizationsDelegates: FLocalizations.localizationsDelegates,
         supportedLocales: FLocalizations.supportedLocales,
-        builder:
-            (context, child) => FTheme(
-              data: theme,
-              textDirection: textDirection,
-              child: Container(
-                color: background ?? theme.colors.background,
-                alignment: Alignment.center,
-                padding: padded ? const EdgeInsets.all(16) : null,
-                child: child!,
-              ),
-            ),
+        builder: (context, child) => FTheme(
+          data: theme,
+          textDirection: textDirection,
+          child: Container(
+            color: background ?? theme.colors.background,
+            alignment: Alignment.center,
+            padding: padded ? const EdgeInsets.all(16) : null,
+            child: child!,
+          ),
+        ),
         home: Align(alignment: alignment, child: child),
       );
     } else {

@@ -136,25 +136,24 @@ class FLineCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-    builder:
-        (context, constraints) => CalendarLayout(
-          controller: controller,
-          style: style ?? context.theme.lineCalendarStyle,
-          physics: physics,
-          cacheExtent: cacheExtent,
-          keyboardDismissBehavior: keyboardDismissBehavior,
-          scale: MediaQuery.textScalerOf(context),
-          textStyle: DefaultTextStyle.of(context).style,
-          onChange: onChange,
-          builder: builder,
-          start: _start,
-          end: _end,
-          initialScroll: _initialScroll,
-          initialSelection: _initialSelection,
-          today: _today,
-          constraints: constraints,
-          alignment: initialScrollAlignment,
-        ),
+    builder: (context, constraints) => CalendarLayout(
+      controller: controller,
+      style: style ?? context.theme.lineCalendarStyle,
+      physics: physics,
+      cacheExtent: cacheExtent,
+      keyboardDismissBehavior: keyboardDismissBehavior,
+      scale: MediaQuery.textScalerOf(context),
+      textStyle: DefaultTextStyle.of(context).style,
+      onChange: onChange,
+      builder: builder,
+      start: _start,
+      end: _end,
+      initialScroll: _initialScroll,
+      initialSelection: _initialSelection,
+      today: _today,
+      constraints: constraints,
+      alignment: initialScrollAlignment,
+    ),
   );
 
   @override

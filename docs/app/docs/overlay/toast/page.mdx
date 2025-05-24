@@ -1,0 +1,266 @@
+import { Callout, Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Toast
+
+An opinionated toast that temporarily displays a succinct message. 
+
+<Callout type="info">
+    To show a toast, use the `showFToast(...)` or `showRawFToast(...)` functions. The function must be called from a
+    widget that is a descendant of a `FToaster` or `FScaffold` widget.
+</Callout>
+
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.toast/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='toast' query={{}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class ToastPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FToaster(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 5,
+            children: [
+              for (final (alignment, description) in [
+                (FToastAlignment.topLeft, 'Top Left'),
+                (FToastAlignment.topRight, 'Top Right'),
+                (FToastAlignment.bottomLeft, 'Bottom Left'),
+                (FToastAlignment.bottomRight, 'Bottom Right'),
+              ])
+                FButton(
+                  onPress: () => showFToast(
+                    context: context,
+                    alignment: alignment,
+                    title: const Text('Event has been created'),
+                    description: const Text('Friday, May 23, 2025 at 9:00 AM'),
+                    suffixBuilder: (context, entry, _) => IntrinsicHeight(
+                      child: FButton(
+                        style: context.theme.buttonStyles.primary.copyWith(
+                          contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
+                            textStyle: FWidgetStateMap.all(
+                              context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
+                            ),
+                          ),
+                        ),
+                        onPress: entry.dismiss,
+                        child: const Text('Undo'),
+                      ),
+                    ),
+                  ),
+                  child: Text('Show $description Toast'),
+                ),
+            ],
+          ),
+        )
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create toast
+```
+
+## Usage
+
+### `showFToast(...)`
+
+```dart copy
+showRawFToast(
+  context: context,
+  style: FToastStyle(...),
+  alignment: FToastAlignment.topRight,
+  duration: const Duration(seconds: 10),
+  onDismiss: () {},
+  icon: const Icon(FIcons.triangleAlert),
+  title: const Text('Download Complete'),
+  description: const Text('Your file has been downloaded.'),
+  suffix: FButton(
+    onPress: () => entry.dismiss(),
+    child: const Text('Undo'),
+  ),
+  showDismissButton: true,
+  onDismiss: () {},
+);
+```
+
+### `showRawFToast(...)`
+
+```dart copy
+showRawFToast(
+  context: context,
+  style: FToastStyle(...),
+  alignment: FToastAlignment.topRight,
+  duration: const Duration(seconds: 10),
+  onDismiss: () {},
+  builder: (context, entry) => FCard(
+    title: Text('Download Complete'),
+    subtitle: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 10,
+      children: [
+        Text('Your file has been downloaded.'),
+        FButton(
+          onPress: () => entry.dismiss(),
+          child: const Text('Dismiss'),
+        ),
+      ],
+    ),
+  ),
+);
+```
+
+## Examples
+
+### Appearance
+
+#### No Auto-Dismiss
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='toast' variant='no-auto-dismiss' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {9} copy
+    class NoAutoDismissToastPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FToaster(
+        child: Center(
+          child: FButton(
+            intrinsicWidth: true,
+            onPress: () => showFToast(
+              context: context,
+              duration: null,
+              icon: const Icon(FIcons.triangleAlert),
+              title: const Text('Event start time cannot be earlier than 8am'),
+            ),
+            child: const Text('Show Toast'),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Raw
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='toast' variant='raw' query={{}} height={620}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class RawToastPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) {
+        final cardStyle = context.theme.cardStyle.copyWith(
+          contentStyle: context.theme.cardStyle.contentStyle.copyWith(
+            titleTextStyle: context.theme.typography.sm.copyWith(
+              color: context.theme.colors.primary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        );
+
+        return FToaster(
+          child: Center(
+            child: FButton(
+              intrinsicWidth: true,
+              onPress: () => showRawFToast(
+                context: context,
+                duration: null,
+                builder: (context, toast) => FCard(
+                  style: cardStyle,
+                  title: const Text('Event has been created'),
+                  subtitle: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    child: Text(
+                      'This is a more detailed description that provides comprehensive context and additional information '
+                      'about the notification, explaining what happened and what the user might expect next.',
+                    ),
+                  ),
+                  child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
+                ),
+              ),
+              child: const Text('Show Toast'),
+            ),
+          )
+        );
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Behavior
+
+#### Always Expanded
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='toast' variant='behavior' query={{behavior: 'always'}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4} copy
+    class ToastPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FScaffold(
+        toasterStyle: context.theme.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.always),
+        child: Builder(
+          builder: (context) => Center(
+            child: FButton(
+              intrinsicWidth: true,
+              onPress: () => showFToast(context: context, title: const Text('Event has been created')),
+              child: const Text('Show Toast'),
+            ),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Expansion Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='toast' variant='behavior' query={{behavior: 'disabled'}}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4} copy
+    class ToastPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FScaffold(
+        toasterStyle: context.theme.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
+        child: Builder(
+          builder: (context) => Center(
+            child: FButton(
+              intrinsicWidth: true,
+              onPress: () => showFToast(context: context, title: const Text('Event has been created')),
+              child: const Text('Show Toast'),
+            ),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

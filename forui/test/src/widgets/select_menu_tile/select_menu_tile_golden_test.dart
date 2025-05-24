@@ -67,7 +67,10 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
             ),
           ),
         );
@@ -90,7 +93,10 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
             ),
           ),
         );
@@ -145,7 +151,10 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
             ),
           ),
         );
@@ -166,7 +175,10 @@ void main() {
               title: const Text('Repeat'),
               subtitle: const Text('Fee, Fo, Fum'),
               details: const Text('None'),
-              menu: const [FSelectTile(title: Text('Item 1'), value: 1), FSelectTile(title: Text('Item 2'), value: 2)],
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
             ),
           ),
         );

@@ -79,10 +79,18 @@ class FDialog extends StatelessWidget {
     Axis direction = Axis.vertical,
     super.key,
   }) : builder = switch (direction) {
-         Axis.horizontal =>
-           (_, style) => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
-         Axis.vertical =>
-           (_, style) => VerticalContent(style: style.verticalStyle, title: title, body: body, actions: actions),
+         Axis.horizontal => (_, style) => HorizontalContent(
+           style: style.horizontalStyle,
+           title: title,
+           body: body,
+           actions: actions,
+         ),
+         Axis.vertical => (_, style) => VerticalContent(
+           style: style.verticalStyle,
+           title: title,
+           body: body,
+           actions: actions,
+         ),
        };
 
   /// Creates a adaptive [FDialog] that lays out the [actions] vertically on [FBreakpoints.sm] devices and
@@ -95,16 +103,15 @@ class FDialog extends StatelessWidget {
     Widget? title,
     Widget? body,
     super.key,
-  }) : builder =
-           ((context, style) => switch (MediaQuery.sizeOf(context).width) {
-             final width when width < context.theme.breakpoints.sm => VerticalContent(
-               style: style.verticalStyle,
-               title: title,
-               body: body,
-               actions: actions,
-             ),
-             _ => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
-           });
+  }) : builder = ((context, style) => switch (MediaQuery.sizeOf(context).width) {
+         final width when width < context.theme.breakpoints.sm => VerticalContent(
+           style: style.verticalStyle,
+           title: title,
+           body: body,
+           actions: actions,
+         ),
+         _ => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
+       });
 
   /// Creates a [FDialog] with a custom builder.
   const FDialog.raw({

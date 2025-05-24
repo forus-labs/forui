@@ -29,33 +29,32 @@ void main() {
 
   setUp(() => controller = FResizableController()..regions.addAll([left, right]));
 
-  for (final (index, constructor)
-      in [
-        () => HorizontalDivider(
-          controller: controller,
-          style: style,
-          type: FResizableDivider.divider,
-          left: -1,
-          right: 0,
-          crossAxisExtent: null,
-          hitRegionExtent: 100,
-          cursor: MouseCursor.defer,
-          resizePercentage: 0.1,
-          semanticFormatterCallback: (l, r) => '',
-        ),
-        () => HorizontalDivider(
-          controller: controller,
-          style: style,
-          type: FResizableDivider.divider,
-          left: 0,
-          right: 0,
-          crossAxisExtent: null,
-          hitRegionExtent: 100,
-          cursor: MouseCursor.defer,
-          resizePercentage: 0.1,
-          semanticFormatterCallback: (l, r) => '',
-        ),
-      ].indexed) {
+  for (final (index, constructor) in [
+    () => HorizontalDivider(
+      controller: controller,
+      style: style,
+      type: FResizableDivider.divider,
+      left: -1,
+      right: 0,
+      crossAxisExtent: null,
+      hitRegionExtent: 100,
+      cursor: MouseCursor.defer,
+      resizePercentage: 0.1,
+      semanticFormatterCallback: (l, r) => '',
+    ),
+    () => HorizontalDivider(
+      controller: controller,
+      style: style,
+      type: FResizableDivider.divider,
+      left: 0,
+      right: 0,
+      crossAxisExtent: null,
+      hitRegionExtent: 100,
+      cursor: MouseCursor.defer,
+      resizePercentage: 0.1,
+      semanticFormatterCallback: (l, r) => '',
+    ),
+  ].indexed) {
     test('[$index] constructor throws error', () => expect(constructor, throwsAssertionError));
   }
 }

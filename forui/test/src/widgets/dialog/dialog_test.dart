@@ -17,7 +17,9 @@ void main() {
               body: SingleChildScrollView(
                 child: Text.rich(
                   WidgetSpan(
-                    child: Stack(children: [Container(height: 200, width: double.infinity, color: Colors.red)]),
+                    child: Stack(
+                      children: [Container(height: 200, width: double.infinity, color: Colors.red)],
+                    ),
                   ),
                 ),
               ),

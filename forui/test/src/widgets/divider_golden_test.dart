@@ -43,10 +43,9 @@ void main() {
           await tester.pumpWidget(
             TestScaffold(
               theme: theme.data,
-              child:
-                  axis == Axis.vertical
-                      ? Row(mainAxisAlignment: MainAxisAlignment.center, children: children)
-                      : Column(mainAxisAlignment: MainAxisAlignment.center, children: children),
+              child: axis == Axis.vertical
+                  ? Row(mainAxisAlignment: MainAxisAlignment.center, children: children)
+                  : Column(mainAxisAlignment: MainAxisAlignment.center, children: children),
             ),
           );
 

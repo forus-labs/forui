@@ -185,82 +185,76 @@ class _FResizableState extends State<FResizable> {
       return SizedBox(
         height: widget.crossAxisExtent,
         child: LayoutBuilder(
-          builder:
-              (_, constraints) => ListenableBuilder(
-                listenable: _controller,
-                builder:
-                    (_, _) => Stack(
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            for (final (i, child) in widget.children.indexed)
-                              InheritedData(
-                                controller: _controller,
-                                axis: widget.axis,
-                                data: _controller.regions[i],
-                                child: child,
-                              ),
-                          ],
-                        ),
-                        for (var i = 0; i < widget.children.length - 1; i++)
-                          HorizontalDivider(
-                            controller: _controller,
-                            style: style.horizontalDividerStyle,
-                            type: widget.divider,
-                            left: i,
-                            right: i + 1,
-                            crossAxisExtent:
-                                constraints.maxHeight.isFinite ? constraints.maxHeight : widget.crossAxisExtent,
-                            hitRegionExtent: widget.hitRegionExtent,
-                            resizePercentage: widget.resizePercentage,
-                            cursor: SystemMouseCursors.resizeLeftRight,
-                            semanticFormatterCallback: widget.semanticFormatterCallback,
-                          ),
-                      ],
-                    ),
-              ),
+          builder: (_, constraints) => ListenableBuilder(
+            listenable: _controller,
+            builder: (_, _) => Stack(
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final (i, child) in widget.children.indexed)
+                      InheritedData(
+                        controller: _controller,
+                        axis: widget.axis,
+                        data: _controller.regions[i],
+                        child: child,
+                      ),
+                  ],
+                ),
+                for (var i = 0; i < widget.children.length - 1; i++)
+                  HorizontalDivider(
+                    controller: _controller,
+                    style: style.horizontalDividerStyle,
+                    type: widget.divider,
+                    left: i,
+                    right: i + 1,
+                    crossAxisExtent: constraints.maxHeight.isFinite ? constraints.maxHeight : widget.crossAxisExtent,
+                    hitRegionExtent: widget.hitRegionExtent,
+                    resizePercentage: widget.resizePercentage,
+                    cursor: SystemMouseCursors.resizeLeftRight,
+                    semanticFormatterCallback: widget.semanticFormatterCallback,
+                  ),
+              ],
+            ),
+          ),
         ),
       );
     } else {
       return SizedBox(
         width: widget.crossAxisExtent,
         child: LayoutBuilder(
-          builder:
-              (_, constraints) => ListenableBuilder(
-                listenable: _controller,
-                builder:
-                    (_, _) => Stack(
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            for (final (i, child) in widget.children.indexed)
-                              InheritedData(
-                                controller: _controller,
-                                axis: widget.axis,
-                                data: _controller.regions[i],
-                                child: child,
-                              ),
-                          ],
-                        ),
-                        for (var i = 0; i < widget.children.length - 1; i++)
-                          VerticalDivider(
-                            controller: _controller,
-                            style: style.verticalDividerStyle,
-                            type: widget.divider,
-                            left: i,
-                            right: i + 1,
-                            crossAxisExtent:
-                                constraints.maxWidth.isFinite ? constraints.maxWidth : widget.crossAxisExtent,
-                            hitRegionExtent: widget.hitRegionExtent,
-                            resizePercentage: widget.resizePercentage,
-                            cursor: SystemMouseCursors.resizeUpDown,
-                            semanticFormatterCallback: widget.semanticFormatterCallback,
-                          ),
-                      ],
-                    ),
-              ),
+          builder: (_, constraints) => ListenableBuilder(
+            listenable: _controller,
+            builder: (_, _) => Stack(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final (i, child) in widget.children.indexed)
+                      InheritedData(
+                        controller: _controller,
+                        axis: widget.axis,
+                        data: _controller.regions[i],
+                        child: child,
+                      ),
+                  ],
+                ),
+                for (var i = 0; i < widget.children.length - 1; i++)
+                  VerticalDivider(
+                    controller: _controller,
+                    style: style.verticalDividerStyle,
+                    type: widget.divider,
+                    left: i,
+                    right: i + 1,
+                    crossAxisExtent: constraints.maxWidth.isFinite ? constraints.maxWidth : widget.crossAxisExtent,
+                    hitRegionExtent: widget.hitRegionExtent,
+                    resizePercentage: widget.resizePercentage,
+                    cursor: SystemMouseCursors.resizeUpDown,
+                    semanticFormatterCallback: widget.semanticFormatterCallback,
+                  ),
+              ],
+            ),
+          ),
         ),
       );
     }

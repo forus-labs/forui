@@ -87,7 +87,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FPicker(controller: controller, children: const [FPickerWheel(flex: 3, children: months)]),
+            child: FPicker(
+              controller: controller,
+              children: const [FPickerWheel(flex: 3, children: months)],
+            ),
           ),
         );
 

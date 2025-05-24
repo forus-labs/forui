@@ -21,7 +21,10 @@ void main() {
       for (final variant in Variant.values) {
         testWidgets('${theme.name} with FBadgeContent', (tester) async {
           await tester.pumpWidget(
-            TestScaffold(theme: theme.data, child: FBadge(style: variant, child: const Text('Badge'))),
+            TestScaffold(
+              theme: theme.data,
+              child: FBadge(style: variant, child: const Text('Badge')),
+            ),
           );
 
           await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$variant-content.png'));
@@ -33,23 +36,22 @@ void main() {
               theme: theme.data,
               child: FBadge.raw(
                 style: variant,
-                builder:
-                    (_, style) => Padding(
-                      padding: const EdgeInsets.all(50),
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        color: Colors.blueAccent,
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: style.decoration.color,
-                            border: Border.all(color: Colors.blueAccent, width: 2),
-                          ),
-                        ),
+                builder: (_, style) => Padding(
+                  padding: const EdgeInsets.all(50),
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    color: Colors.blueAccent,
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: style.decoration.color,
+                        border: Border.all(color: Colors.blueAccent, width: 2),
                       ),
                     ),
+                  ),
+                ),
               ),
             ),
           );

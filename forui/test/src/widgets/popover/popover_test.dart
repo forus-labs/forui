@@ -69,7 +69,10 @@ void main() {
             hideOnTapOutside: FHidePopoverRegion.excludeTarget,
             popoverBuilder: (context, style, _) => const Text('popover'),
             child: Row(
-              children: [const Text('other'), FButton(onPress: controller.toggle, child: const Text('target'))],
+              children: [
+                const Text('other'),
+                FButton(onPress: controller.toggle, child: const Text('target')),
+              ],
             ),
           ),
         ),
@@ -98,7 +101,10 @@ void main() {
             controller: controller,
             popoverBuilder: (context, style, _) => const Text('follower'),
             child: Row(
-              children: [const Text('other'), FButton(onPress: controller.toggle, child: const Text('target'))],
+              children: [
+                const Text('other'),
+                FButton(onPress: controller.toggle, child: const Text('target')),
+              ],
             ),
           ),
         ),
@@ -147,14 +153,13 @@ void main() {
           child: Column(
             children: [
               FPopover.automatic(
-                popoverBuilder:
-                    (context, style, _) => Row(
-                      children: [
-                        FButton(onPress: () {}, child: const Text('1')),
-                        FButton(onPress: () {}, child: const Text('2')),
-                        FButton(onPress: () {}, child: const Text('3')),
-                      ],
-                    ),
+                popoverBuilder: (context, style, _) => Row(
+                  children: [
+                    FButton(onPress: () {}, child: const Text('1')),
+                    FButton(onPress: () {}, child: const Text('2')),
+                    FButton(onPress: () {}, child: const Text('3')),
+                  ],
+                ),
                 child: Container(color: Colors.black, height: 10, width: 10),
               ),
               Padding(

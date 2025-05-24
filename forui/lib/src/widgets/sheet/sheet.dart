@@ -149,25 +149,24 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
     return AnimatedBuilder(
       animation: _animation,
-      builder:
-          (context, child) => Semantics(
-            scopesRoute: true,
-            namesRoute: true,
-            label: switch (defaultTargetPlatform) {
-              TargetPlatform.iOS || TargetPlatform.macOS => null,
-              _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).dialogLabel,
-            },
-            explicitChildNodes: true,
-            child: ClipRect(
-              child: ShiftedSheet(
-                side: widget.side,
-                onChange: widget.onChange,
-                value: _curve.transform(_animation.value),
-                mainAxisMaxRatio: widget.mainAxisMaxRatio,
-                child: child,
-              ),
-            ),
+      builder: (context, child) => Semantics(
+        scopesRoute: true,
+        namesRoute: true,
+        label: switch (defaultTargetPlatform) {
+          TargetPlatform.iOS || TargetPlatform.macOS => null,
+          _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).dialogLabel,
+        },
+        explicitChildNodes: true,
+        child: ClipRect(
+          child: ShiftedSheet(
+            side: widget.side,
+            onChange: widget.onChange,
+            value: _curve.transform(_animation.value),
+            mainAxisMaxRatio: widget.mainAxisMaxRatio,
+            child: child,
           ),
+        ),
+      ),
       child: sheet,
     );
   }

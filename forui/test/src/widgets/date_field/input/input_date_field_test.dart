@@ -14,13 +14,12 @@ void main() {
     ('input only', FDateField.input(key: key)),
     ('input & calendar', FDateField(key: key)),
   ]) {
-    for (final (index, (locale, placeholder))
-        in const [
-          (null, 'MM/DD/YYYY'), // M/d/y
-          (Locale('en', 'SG'), 'DD/MM/YYYY'), // dd/MM/y
-          (Locale('hr'), 'DD. MM. YYYY.'),
-          (Locale('bg'), 'DD.MM.YYYY г.'),
-        ].indexed) {
+    for (final (index, (locale, placeholder)) in const [
+      (null, 'MM/DD/YYYY'), // M/d/y
+      (Locale('en', 'SG'), 'DD/MM/YYYY'), // dd/MM/y
+      (Locale('hr'), 'DD. MM. YYYY.'),
+      (Locale('bg'), 'DD.MM.YYYY г.'),
+    ].indexed) {
       testWidgets('placeholder - $description - $index', (tester) async {
         await tester.pumpWidget(TestScaffold.app(locale: locale, child: field));
 
@@ -178,7 +177,12 @@ void main() {
   }
 
   testWidgets('enter closes popover', (tester) async {
-    await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: FDateField(key: key)));
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FDateField(key: key),
+      ),
+    );
 
     await tester.tap(find.byKey(key));
     await tester.pumpAndSettle();

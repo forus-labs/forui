@@ -156,30 +156,29 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
     };
     final sliderStyle = style ?? (layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
     return LayoutBuilder(
-      builder:
-          (_, constraints) => _Slider(
-            controller: controller,
-            style: sliderStyle,
-            layout: layout,
-            label: label,
-            description: description,
-            errorBuilder: errorBuilder,
-            marks: marks,
-            textDirection: Directionality.maybeOf(context) ?? TextDirection.ltr,
-            constraints: constraints,
-            mainAxisExtent: trackMainAxisExtent,
-            trackHitRegionCrossExtent: trackHitRegionCrossExtent,
-            tooltipBuilder: tooltipBuilder,
-            semanticFormatterCallback: semanticFormatterCallback,
-            semanticValueFormatterCallback: semanticValueFormatterCallback,
-            initialSelection: initialSelection,
-            onSaved: onSaved,
-            validator: validator,
-            autovalidateMode: autovalidateMode,
-            forceErrorText: forceErrorText,
-            enabled: enabled,
-            onChange: onChange,
-          ),
+      builder: (_, constraints) => _Slider(
+        controller: controller,
+        style: sliderStyle,
+        layout: layout,
+        label: label,
+        description: description,
+        errorBuilder: errorBuilder,
+        marks: marks,
+        textDirection: Directionality.maybeOf(context) ?? TextDirection.ltr,
+        constraints: constraints,
+        mainAxisExtent: trackMainAxisExtent,
+        trackHitRegionCrossExtent: trackHitRegionCrossExtent,
+        tooltipBuilder: tooltipBuilder,
+        semanticFormatterCallback: semanticFormatterCallback,
+        semanticValueFormatterCallback: semanticValueFormatterCallback,
+        initialSelection: initialSelection,
+        onSaved: onSaved,
+        validator: validator,
+        autovalidateMode: autovalidateMode,
+        forceErrorText: forceErrorText,
+        enabled: enabled,
+        onChange: onChange,
+      ),
     );
   }
 
@@ -356,22 +355,21 @@ class _SliderState extends State<_Slider> {
     semanticValueFormatterCallback: widget.semanticValueFormatterCallback,
     child: ListenableBuilder(
       listenable: _controller,
-      builder:
-          (_, _) => InheritedController(
-            controller: _controller,
-            child: SliderFormField(
-              controller: _controller,
-              constraints: widget.constraints,
-              label: widget.label,
-              description: widget.description,
-              errorBuilder: widget.errorBuilder,
-              onSaved: widget.onSaved,
-              validator: widget.validator,
-              autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
-              forceErrorText: widget.forceErrorText,
-              enabled: widget.enabled,
-            ),
-          ),
+      builder: (_, _) => InheritedController(
+        controller: _controller,
+        child: SliderFormField(
+          controller: _controller,
+          constraints: widget.constraints,
+          label: widget.label,
+          description: widget.description,
+          errorBuilder: widget.errorBuilder,
+          onSaved: widget.onSaved,
+          validator: widget.validator,
+          autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
+          forceErrorText: widget.forceErrorText,
+          enabled: widget.enabled,
+        ),
+      ),
     ),
   );
 

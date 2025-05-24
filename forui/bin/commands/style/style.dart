@@ -415,6 +415,18 @@ enum Style {
     <String>['FTimePickerStyle'],
     'FTimePickerStyle timePickerStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FTimePickerStyle(\n  textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),\n  selectionBorderRadius: style.borderRadius,\n  selectionColor: colors.muted,\n  selectionHeightAdjustment: 5,\n  spacing: 2,\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  padding: const EdgeInsetsDirectional.only(start: 10, end: 10),\n  diameterRatio: 1.07,\n  squeeze: 1,\n  magnification: 1,\n  overAndUnderCenterOpacity: 0.25,\n  textHeightBehavior: const TextHeightBehavior(\n    applyHeightToFirstAscent: false,\n    applyHeightToLastDescent: false,\n  ),\n);\n',
   ),
+  ftoaststyle(
+    'FToastStyle',
+    <String>['toast'],
+    <String>['FToastStyle'],
+    'FToastStyle toastStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FToastStyle(\n  decoration: BoxDecoration(\n    border: Border.all(color: colors.border),\n    borderRadius: style.borderRadius,\n    color: colors.background,\n  ),\n  iconStyle: IconThemeData(color: colors.primary, size: 18),\n  titleTextStyle: typography.sm.copyWith(\n    color: colors.primary,\n    fontWeight: FontWeight.w500,\n  ),\n  titleSpacing: 5,\n  descriptionTextStyle: typography.sm.copyWith(\n    color: colors.mutedForeground,\n    overflow: TextOverflow.ellipsis,\n  ),\n  enterExitDuration: const Duration(milliseconds: 400),\n  enterCurve: Curves.easeOutCubic,\n  exitCurve: Curves.easeOutCubic,\n  entranceExitOpacity: 0.0,\n  transitionDuration: const Duration(milliseconds: 400),\n  transitionCurve: Curves.easeOutCubic,\n  constraints: const BoxConstraints(maxHeight: 250, maxWidth: 400),\n  padding: const EdgeInsets.all(16),\n  iconSpacing: 10,\n  suffixSpacing: 12,\n);\n',
+  ),
+  ftoasterstyle(
+    'FToasterStyle',
+    <String>['toaster'],
+    <String>['FToasterStyle', 'FToastStyle'],
+    'FToasterStyle toasterStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FToasterStyle(\n  toastStyle: _toastStyle(colors: colors, typography: typography, style: style),\n  max: 3,\n  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),\n  expandBehavior: FToasterExpandBehavior.hoverOrPress,\n  expandHoverEnterDuration: const Duration(milliseconds: 200),\n  expandHoverExitDuration: const Duration(milliseconds: 300),\n  expandStartSpacing: 16,\n  expandSpacing: 10,\n  expandDuration: const Duration(milliseconds: 500),\n  expandCurve: Curves.easeInOutCubic,\n  collapsedProtrusion: 12,\n  collapsedScale: 0.9,\n);\n',
+  ),
   ftooltipstyle(
     'FTooltipStyle',
     <String>['tooltip'],

@@ -127,10 +127,9 @@ void main() {
     });
 
     test('should initialize with given values', () {
-      final notifier =
-          FMultiValueNotifier(values: {1, 2, 3})
-            ..addListener(() => count++)
-            ..addUpdateListener((_) => changeCount++);
+      final notifier = FMultiValueNotifier(values: {1, 2, 3})
+        ..addListener(() => count++)
+        ..addUpdateListener((_) => changeCount++);
 
       expect(notifier.value, equals({1, 2, 3}));
       expect(count, 0);
@@ -139,10 +138,9 @@ void main() {
 
     test('should notify when added', () {
       (int, bool)? value;
-      final notifier =
-          FMultiValueNotifier<int>()
-            ..addListener(() => count++)
-            ..addUpdateListener((changed) => value = changed);
+      final notifier = FMultiValueNotifier<int>()
+        ..addListener(() => count++)
+        ..addUpdateListener((changed) => value = changed);
 
       final old = notifier.value;
 
@@ -156,10 +154,9 @@ void main() {
 
     test('should remove a value when removed', () {
       (int, bool)? value;
-      final notifier =
-          FMultiValueNotifier(values: {1, 2})
-            ..addListener(() => count++)
-            ..addUpdateListener((changed) => value = changed);
+      final notifier = FMultiValueNotifier(values: {1, 2})
+        ..addListener(() => count++)
+        ..addUpdateListener((changed) => value = changed);
 
       final old = notifier.value;
 
@@ -173,11 +170,10 @@ void main() {
 
     test('should not selected a value when max limit is reached', () {
       (int, bool)? value;
-      final notifier =
-          FMultiValueNotifier(max: 2, values: {1, 2})
-            ..addListener(() => count++)
-            ..addUpdateListener((changed) => value = changed)
-            ..update(3, add: true);
+      final notifier = FMultiValueNotifier(max: 2, values: {1, 2})
+        ..addListener(() => count++)
+        ..addUpdateListener((changed) => value = changed)
+        ..update(3, add: true);
 
       expect(notifier.value, equals({1, 2}));
       expect(count, 0);
@@ -186,11 +182,10 @@ void main() {
 
     test('should not remove a value when min limit is reached', () {
       (int, bool)? value;
-      final notifier =
-          FMultiValueNotifier(min: 2, values: {1, 2})
-            ..addListener(() => count++)
-            ..addUpdateListener((changed) => value = changed)
-            ..update(1, add: false);
+      final notifier = FMultiValueNotifier(min: 2, values: {1, 2})
+        ..addListener(() => count++)
+        ..addUpdateListener((changed) => value = changed)
+        ..update(1, add: false);
 
       expect(notifier.value, equals({1, 2}));
       expect(count, 0);
@@ -211,10 +206,9 @@ void main() {
       });
 
       test('should set the value', () {
-        final notifier =
-            FMultiValueNotifier<int>(min: 2, max: 2)
-              ..addListener(() => count++)
-              ..addUpdateListener((_) => changeCount++);
+        final notifier = FMultiValueNotifier<int>(min: 2, max: 2)
+          ..addListener(() => count++)
+          ..addUpdateListener((_) => changeCount++);
 
         final old = notifier.value;
         notifier.value = {1, 2};
@@ -241,20 +235,18 @@ void main() {
     });
 
     test('should initialize with a single value', () {
-      final notifier =
-          FMultiValueNotifier.radio(value: 1)
-            ..addListener(() => count++)
-            ..addUpdateListener((_) => changeCount++);
+      final notifier = FMultiValueNotifier.radio(value: 1)
+        ..addListener(() => count++)
+        ..addUpdateListener((_) => changeCount++);
 
       expect(notifier.value, {1});
       expect(count, 0);
     });
 
     test('should initialize with an empty set when no value is provided', () {
-      final notifier =
-          FMultiValueNotifier<int>.radio()
-            ..addListener(() => count++)
-            ..addUpdateListener((_) => changeCount++);
+      final notifier = FMultiValueNotifier<int>.radio()
+        ..addListener(() => count++)
+        ..addUpdateListener((_) => changeCount++);
 
       expect(notifier.value, isEmpty);
       expect(count, 0);
@@ -263,10 +255,9 @@ void main() {
 
     test('should change value when a new value is added', () {
       (int, bool)? value;
-      final notifier =
-          FMultiValueNotifier<int>.radio()
-            ..addListener(() => count++)
-            ..addUpdateListener((changed) => value = changed);
+      final notifier = FMultiValueNotifier<int>.radio()
+        ..addListener(() => count++)
+        ..addUpdateListener((changed) => value = changed);
 
       final old = notifier.value;
       notifier.update(1, add: true);
@@ -279,11 +270,10 @@ void main() {
 
     test('should not change value when the same value is added', () {
       (int, bool)? value;
-      final notifier =
-          FMultiValueNotifier.radio(value: 1)
-            ..addListener(() => count++)
-            ..addUpdateListener((changed) => value = changed)
-            ..update(1, add: true);
+      final notifier = FMultiValueNotifier.radio(value: 1)
+        ..addListener(() => count++)
+        ..addUpdateListener((changed) => value = changed)
+        ..update(1, add: true);
 
       expect(notifier.value, equals({1}));
       expect(value, null);
@@ -292,11 +282,10 @@ void main() {
 
     test('should not change value when trying to remove', () {
       (int, bool)? value;
-      final notifier =
-          FMultiValueNotifier.radio(value: 1)
-            ..addListener(() => count++)
-            ..addUpdateListener((changed) => value = changed)
-            ..update(1, add: false);
+      final notifier = FMultiValueNotifier.radio(value: 1)
+        ..addListener(() => count++)
+        ..addUpdateListener((changed) => value = changed)
+        ..update(1, add: false);
 
       expect(notifier.value, equals({1}));
       expect(value, null);
@@ -311,10 +300,9 @@ void main() {
       });
 
       test('should set the value when only one value is provided', () {
-        final notifier =
-            FMultiValueNotifier.radio()
-              ..addListener(() => count++)
-              ..addUpdateListener((_) => changeCount++);
+        final notifier = FMultiValueNotifier.radio()
+          ..addListener(() => count++)
+          ..addUpdateListener((_) => changeCount++);
 
         final old = notifier.value;
         notifier.value = {1};

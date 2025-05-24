@@ -11,12 +11,11 @@ import '../../../test_scaffold.dart';
 void main() {
   const key = Key('field');
 
-  for (final (index, (locale, placeholder))
-      in const [
-        (null, 'Pick a date'),
-        (Locale('en', 'SG'), 'Pick a date'),
-        (Locale('hr'), 'Odaberite datum'),
-      ].indexed) {
+  for (final (index, (locale, placeholder)) in const [
+    (null, 'Pick a date'),
+    (Locale('en', 'SG'), 'Pick a date'),
+    (Locale('hr'), 'Odaberite datum'),
+  ].indexed) {
     testWidgets('placeholder - $index', (tester) async {
       await tester.pumpWidget(TestScaffold.app(locale: locale, child: FDateField.calendar()));
 
@@ -24,15 +23,17 @@ void main() {
     });
   }
 
-  for (final (index, (locale, day, date))
-      in const [
-        (null, '15', 'Jan 15, 2025'), // M/d/y
-        (Locale('en', 'SG'), '15', '15 Jan 2025'), // dd/MM/y
-        (Locale('hr'), '15.', '15. sij 2025.'),
-      ].indexed) {
+  for (final (index, (locale, day, date)) in const [
+    (null, '15', 'Jan 15, 2025'), // M/d/y
+    (Locale('en', 'SG'), '15', '15 Jan 2025'), // dd/MM/y
+    (Locale('hr'), '15.', '15. sij 2025.'),
+  ].indexed) {
     testWidgets('formatted date - $index', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(locale: locale, child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15))),
+        TestScaffold.app(
+          locale: locale,
+          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -117,7 +118,11 @@ void main() {
 
   group('clearable', () {
     testWidgets('no clear icon', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -130,7 +135,9 @@ void main() {
 
     testWidgets('shows clear icon', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15), clearable: true)),
+        TestScaffold.app(
+          child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15), clearable: true),
+        ),
       );
       expect(find.bySemanticsLabel('Clear'), findsNothing);
 
@@ -148,7 +155,11 @@ void main() {
     testWidgets('tap on text-field should refocus', (tester) async {
       final focus = autoDispose(FocusNode());
 
-      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField.calendar(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -162,7 +173,11 @@ void main() {
     testWidgets('escape should refocus', (tester) async {
       final focus = autoDispose(FocusNode());
 
-      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField.calendar(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -176,7 +191,11 @@ void main() {
     testWidgets('tap outside unfocuses on Android/iOS', (tester) async {
       final focus = autoDispose(FocusNode());
 
-      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField.calendar(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -192,7 +211,11 @@ void main() {
 
       final focus = autoDispose(FocusNode());
 
-      await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField.calendar(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();

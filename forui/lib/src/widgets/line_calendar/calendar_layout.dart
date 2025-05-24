@@ -209,13 +209,12 @@ class _SpeculativeBox extends RenderBox
     final unselected = childAfter(selectedHovered)!;
     final unselectedHovered = childAfter(unselected)!;
 
-    final maxHeight =
-        [
-          selected.getDryLayout(constraints).height,
-          selectedHovered.getDryLayout(constraints).height,
-          unselected.getDryLayout(constraints).height,
-          unselectedHovered.getDryLayout(constraints).height,
-        ].max!;
+    final maxHeight = [
+      selected.getDryLayout(constraints).height,
+      selectedHovered.getDryLayout(constraints).height,
+      unselected.getDryLayout(constraints).height,
+      unselectedHovered.getDryLayout(constraints).height,
+    ].max!;
 
     final heightConstraints = constraints.copyWith(maxHeight: maxHeight);
     final viewport = childAfter(unselectedHovered)!..layout(heightConstraints, parentUsesSize: true);

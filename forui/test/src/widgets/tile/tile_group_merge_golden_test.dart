@@ -444,7 +444,11 @@ void main() {
       });
 
       testWidgets('empty tile group', (tester) async {
-        await tester.pumpWidget(TestScaffold(child: FTileGroup.merge(label: const Text('Network'), children: [])));
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FTileGroup.merge(label: const Text('Network'), children: []),
+          ),
+        );
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/empty.png'));
       });

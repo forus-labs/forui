@@ -69,22 +69,23 @@ class FBottomNavigationBarItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       selected: selected,
       onPress: () => onChange?.call(index),
-      builder:
-          (_, states, _) => Padding(
-            padding: style.padding,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              spacing: style.spacing,
-              children: [
-                ExcludeSemantics(child: IconTheme(data: style.iconStyle.resolve(states), child: icon)),
-                DefaultTextStyle.merge(
-                  style: style.textStyle.resolve(states),
-                  overflow: TextOverflow.ellipsis,
-                  child: label,
-                ),
-              ],
+      builder: (_, states, _) => Padding(
+        padding: style.padding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: style.spacing,
+          children: [
+            ExcludeSemantics(
+              child: IconTheme(data: style.iconStyle.resolve(states), child: icon),
             ),
-          ),
+            DefaultTextStyle.merge(
+              style: style.textStyle.resolve(states),
+              overflow: TextOverflow.ellipsis,
+              child: label,
+            ),
+          ],
+        ),
+      ),
     );
   }
 

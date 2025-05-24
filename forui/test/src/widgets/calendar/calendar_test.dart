@@ -17,14 +17,13 @@ void main() {
         TestScaffold.app(
           child: ValueListenableBuilder(
             valueListenable: type,
-            builder:
-                (context, value, _) => FCalendar(
-                  controller: controller,
-                  start: DateTime(1900, 1, 8),
-                  end: DateTime(2025, 7, 10),
-                  initialType: value,
-                  initialMonth: DateTime(2024, 7, 14),
-                ),
+            builder: (context, value, _) => FCalendar(
+              controller: controller,
+              start: DateTime(1900, 1, 8),
+              end: DateTime(2025, 7, 10),
+              initialType: value,
+              initialMonth: DateTime(2024, 7, 14),
+            ),
           ),
         ),
       );
@@ -44,13 +43,12 @@ void main() {
         TestScaffold.app(
           child: ValueListenableBuilder(
             valueListenable: controller,
-            builder:
-                (context, value, _) => FCalendar(
-                  controller: controller,
-                  start: DateTime(1900, 1, 8),
-                  end: DateTime(2025, 7, 10),
-                  initialMonth: value,
-                ),
+            builder: (context, value, _) => FCalendar(
+              controller: controller,
+              start: DateTime(1900, 1, 8),
+              end: DateTime(2025, 7, 10),
+              initialMonth: value,
+            ),
           ),
         ),
       );

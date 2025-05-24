@@ -155,19 +155,18 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     this.error,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
-       delegate =
-           ((style, {required enabled}) => SliverChildListDelegate([
-             for (final (index, child) in children.indexed)
-               FTileData(
-                 style: style,
-                 divider: divider,
-                 states: {if (!enabled) WidgetState.disabled},
-                 index: index,
-                 last: index == children.length - 1,
-                 pressable: true,
-                 child: child,
-               ),
-           ]));
+       delegate = ((style, {required enabled}) => SliverChildListDelegate([
+         for (final (index, child) in children.indexed)
+           FTileData(
+             style: style,
+             divider: divider,
+             states: {if (!enabled) WidgetState.disabled},
+             index: index,
+             last: index == children.length - 1,
+             pressable: true,
+             child: child,
+           ),
+       ]));
 
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
@@ -203,23 +202,22 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
        assert(count == null || 0 <= count, 'count must be non-negative.'),
-       delegate =
-           ((style, {required enabled}) => SliverChildBuilderDelegate((context, index) {
-             final tile = tileBuilder(context, index);
-             if (tile == null) {
-               return null;
-             }
+       delegate = ((style, {required enabled}) => SliverChildBuilderDelegate((context, index) {
+         final tile = tileBuilder(context, index);
+         if (tile == null) {
+           return null;
+         }
 
-             return FTileData(
-               style: style,
-               divider: divider,
-               states: {if (!enabled) WidgetState.disabled},
-               index: index,
-               last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
-               pressable: true,
-               child: tile,
-             );
-           }, childCount: count));
+         return FTileData(
+           style: style,
+           divider: divider,
+           states: {if (!enabled) WidgetState.disabled},
+           index: index,
+           last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
+           pressable: true,
+           child: tile,
+         );
+       }, childCount: count));
 
   @override
   Widget build(BuildContext context) {
@@ -453,11 +451,8 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
 
 /// Extracts the data from the given [FTileGroupData].
 @internal
-({int index, int length, FTileDivider divider}) extractTileGroup(FTileGroupData? data) => (
-  index: data?.index ?? 0,
-  length: data?.length ?? 1,
-  divider: data?.divider ?? FTileDivider.full,
-);
+({int index, int length, FTileDivider divider}) extractTileGroup(FTileGroupData? data) =>
+    (index: data?.index ?? 0, length: data?.length ?? 1, divider: data?.divider ?? FTileDivider.full);
 
 /// A tile group's data.
 class FTileGroupData extends InheritedWidget {

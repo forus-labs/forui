@@ -47,14 +47,22 @@ void main() {
 
   group('clearable', () {
     testWidgets('no icon when clearable return false', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: FThemes.zinc.light, child: FTextField(clearable: (_) => false)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: FThemes.zinc.light,
+          child: FTextField(clearable: (_) => false),
+        ),
+      );
 
       expect(find.bySemanticsLabel('Clear'), findsNothing);
     });
 
     testWidgets('no icon when disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: FThemes.zinc.light, child: FTextField(enabled: false, clearable: (_) => true)),
+        TestScaffold.app(
+          theme: FThemes.zinc.light,
+          child: FTextField(enabled: false, clearable: (_) => true),
+        ),
       );
       await tester.pumpAndSettle();
 
@@ -120,12 +128,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTextField(
-          builder:
-              (_, _, child) => FPopover(
-                controller: controller,
-                popoverBuilder: (_, _, _) => Container(height: 100, width: 100, color: Colors.blue),
-                child: child!,
-              ),
+          builder: (_, _, child) => FPopover(
+            controller: controller,
+            popoverBuilder: (_, _, _) => Container(height: 100, width: 100, color: Colors.blue),
+            child: child!,
+          ),
         ),
       ),
     );
@@ -137,12 +144,11 @@ void main() {
       TestScaffold.app(
         child: FTextField(
           error: Container(height: 100, width: 100, color: Colors.red),
-          builder:
-              (_, _, child) => FPopover(
-                controller: controller,
-                popoverBuilder: (_, _, _) => Container(height: 100, width: 100, color: Colors.blue),
-                child: child!,
-              ),
+          builder: (_, _, child) => FPopover(
+            controller: controller,
+            popoverBuilder: (_, _, _) => Container(height: 100, width: 100, color: Colors.blue),
+            child: child!,
+          ),
         ),
       ),
     );

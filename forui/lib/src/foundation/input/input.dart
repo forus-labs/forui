@@ -104,8 +104,9 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   @override
   void initState() {
     super.initState();
-    localizations =
-        scriptNumerals.contains(widget.localizations.localeName) ? FDefaultLocalizations() : widget.localizations;
+    localizations = scriptNumerals.contains(widget.localizations.localeName)
+        ? FDefaultLocalizations()
+        : widget.localizations;
     controller = createController();
   }
 
@@ -130,43 +131,41 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
         enabled: widget.enabled,
         onSaved: widget.onSaved,
         initialValue: widget.controller.value,
-        validator:
-            (value) => switch (this.value) {
-              null when controller.text == controller.placeholder => widget.validator(null),
-              null => errorMessage,
-              final value => widget.validator(value),
-            },
+        validator: (value) => switch (this.value) {
+          null when controller.text == controller.placeholder => widget.validator(null),
+          null => errorMessage,
+          final value => widget.validator(value),
+        },
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
-        builder:
-            (state) => FTextField(
-              controller: controller,
-              style: textFieldStyle,
-              statesController: controller.statesController,
-              builder: widget.builder,
-              autocorrect: false,
-              // We cannot use TextInputType.number as it does not contain a done button.
-              keyboardType: const TextInputType.numberWithOptions(signed: true),
-              minLines: 1,
-              label: widget.label,
-              description: widget.description,
-              error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
-              enabled: widget.enabled,
-              focusNode: widget.focusNode,
-              textInputAction: widget.textInputAction,
-              textAlign: widget.textAlign,
-              textAlignVertical: widget.textAlignVertical,
-              textDirection: widget.textDirection,
-              expands: widget.expands,
-              autofocus: widget.autofocus,
-              onEditingComplete: widget.onEditingComplete,
-              mouseCursor: widget.mouseCursor,
-              onTap: widget.onTap,
-              canRequestFocus: widget.canRequestFocus,
-              prefixBuilder: widget.prefixBuilder,
-              suffixBuilder: widget.suffixBuilder,
-              clearable: widget.clearable ? clearable : (_) => false,
-            ),
+        builder: (state) => FTextField(
+          controller: controller,
+          style: textFieldStyle,
+          statesController: controller.statesController,
+          builder: widget.builder,
+          autocorrect: false,
+          // We cannot use TextInputType.number as it does not contain a done button.
+          keyboardType: const TextInputType.numberWithOptions(signed: true),
+          minLines: 1,
+          label: widget.label,
+          description: widget.description,
+          error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
+          enabled: widget.enabled,
+          focusNode: widget.focusNode,
+          textInputAction: widget.textInputAction,
+          textAlign: widget.textAlign,
+          textAlignVertical: widget.textAlignVertical,
+          textDirection: widget.textDirection,
+          expands: widget.expands,
+          autofocus: widget.autofocus,
+          onEditingComplete: widget.onEditingComplete,
+          mouseCursor: widget.mouseCursor,
+          onTap: widget.onTap,
+          canRequestFocus: widget.canRequestFocus,
+          prefixBuilder: widget.prefixBuilder,
+          suffixBuilder: widget.suffixBuilder,
+          clearable: widget.clearable ? clearable : (_) => false,
+        ),
       ),
     ),
   );

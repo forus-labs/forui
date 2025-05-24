@@ -16,10 +16,13 @@ TextEditingValue _onFirst(TextEditingValue value, int first, int _, int _, int _
     value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
 
 TextEditingValue _onMiddle(TextEditingValue value, int first, int last, int _, int firstSeparator, int _) =>
-    value.copyWith(selection: TextSelection(baseOffset: first + firstSeparator, extentOffset: last));
+    value.copyWith(
+      selection: TextSelection(baseOffset: first + firstSeparator, extentOffset: last),
+    );
 
-TextEditingValue _onLast(TextEditingValue value, int _, int last, int end, int _, int lastSeparator) =>
-    value.copyWith(selection: TextSelection(baseOffset: last + lastSeparator, extentOffset: end));
+TextEditingValue _onLast(TextEditingValue value, int _, int last, int end, int _, int lastSeparator) => value.copyWith(
+  selection: TextSelection(baseOffset: last + lastSeparator, extentOffset: end),
+);
 
 @internal
 class Time12InputController extends TimeInputController {
@@ -77,14 +80,12 @@ class Time12Selector extends Selector {
   final String _last;
 
   Time12Selector(FLocalizations localizations, DateFormat format)
-    : _first =
-          format.pattern!.startsWith('a')
-              ? localizations.timeFieldPeriodSeparator
-              : localizations.timeFieldTimeSeparator,
-      _last =
-          format.pattern!.startsWith('a')
-              ? localizations.timeFieldTimeSeparator
-              : localizations.timeFieldPeriodSeparator,
+    : _first = format.pattern!.startsWith('a')
+          ? localizations.timeFieldPeriodSeparator
+          : localizations.timeFieldTimeSeparator,
+      _last = format.pattern!.startsWith('a')
+          ? localizations.timeFieldTimeSeparator
+          : localizations.timeFieldPeriodSeparator,
       super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
 
   @override
@@ -140,7 +141,10 @@ class Time12Selector extends Selector {
         end = start + parts[2].length;
     }
 
-    return TextEditingValue(text: join(parts), selection: TextSelection(baseOffset: start, extentOffset: end));
+    return TextEditingValue(
+      text: join(parts),
+      selection: TextSelection(baseOffset: start, extentOffset: end),
+    );
   }
 
   @override

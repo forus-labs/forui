@@ -159,7 +159,12 @@ void main() {
 
         final controller = TextEditingController(text: 'text');
 
-        await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FTextField(controller: controller)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FTextField(controller: controller),
+          ),
+        );
 
         await tester.tap(find.byType(FTextField));
         await tester.tap(find.byType(FTextField));
@@ -176,7 +181,12 @@ void main() {
 
       group('clearable', () {
         testWidgets('clear icon', (tester) async {
-          await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FTextField(clearable: (_) => true)));
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme.data,
+              child: FTextField(clearable: (_) => true),
+            ),
+          );
 
           final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
           await gesture.addPointer(location: Offset.zero);

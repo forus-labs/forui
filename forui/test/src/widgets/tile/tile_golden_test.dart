@@ -246,7 +246,11 @@ void main() {
     });
 
     testWidgets('minimal', (tester) async {
-      await tester.pumpWidget(TestScaffold(child: FTile(title: const Text('Bluetooth'), onPress: () {})));
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile(title: const Text('Bluetooth'), onPress: () {}),
+        ),
+      );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
     });

@@ -178,14 +178,12 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             contextMenuBuilder: widget.properties.contextMenuBuilder,
             undoController: widget.properties.undoController,
             spellCheckConfiguration: widget.properties.spellCheckConfiguration,
-            prefixBuilder:
-                prefix == null
-                    ? null
-                    : (context, style, child) => prefix(context, (widget.style.searchStyle, style.$1, style.$2), child),
-            suffixBuilder:
-                suffix == null
-                    ? null
-                    : (context, style, child) => suffix(context, (widget.style.searchStyle, style.$1, style.$2), child),
+            prefixBuilder: prefix == null
+                ? null
+                : (context, style, child) => prefix(context, (widget.style.searchStyle, style.$1, style.$2), child),
+            suffixBuilder: suffix == null
+                ? null
+                : (context, style, child) => suffix(context, (widget.style.searchStyle, style.$1, style.$2), child),
             clearable: widget.properties.clearable,
           ),
         ),
@@ -194,18 +192,15 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
           final FSelectSearchData<T> data => _content(context, data),
           final Future<FSelectSearchData<T>> future => FutureBuilder(
             future: future,
-            builder:
-                (context, snapshot) => switch (snapshot.connectionState) {
-                  ConnectionState.waiting => Center(
-                    child: widget.loadingBuilder(context, widget.style.searchStyle, null),
-                  ),
-                  _ when snapshot.hasError && widget.errorBuilder != null => widget.errorBuilder!.call(
-                    context,
-                    snapshot.error,
-                    snapshot.stackTrace!,
-                  ),
-                  _ => _content(context, snapshot.data ?? (query: '', values: [])),
-                },
+            builder: (context, snapshot) => switch (snapshot.connectionState) {
+              ConnectionState.waiting => Center(child: widget.loadingBuilder(context, widget.style.searchStyle, null)),
+              _ when snapshot.hasError && widget.errorBuilder != null => widget.errorBuilder!.call(
+                context,
+                snapshot.error,
+                snapshot.stackTrace!,
+              ),
+              _ => _content(context, snapshot.data ?? (query: '', values: [])),
+            },
           ),
         },
       ],

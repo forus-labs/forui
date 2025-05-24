@@ -236,8 +236,8 @@ void main() {
                   FPortal(
                     controller: controller,
                     spacing: const FPortalSpacing(5),
-                    portalBuilder:
-                        (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                    portalBuilder: (context) =>
+                        const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
@@ -266,8 +266,8 @@ void main() {
                   FPortal(
                     controller: controller,
                     spacing: const FPortalSpacing(5),
-                    portalBuilder:
-                        (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                    portalBuilder: (context) =>
+                        const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
@@ -296,8 +296,8 @@ void main() {
                   FPortal(
                     controller: controller,
                     spacing: const FPortalSpacing(5),
-                    portalBuilder:
-                        (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                    portalBuilder: (context) =>
+                        const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
                 ],
@@ -344,21 +344,20 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Builder(
-            builder:
-                (context) => MediaQuery(
-                  data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: FPortal(
-                      portalAnchor: Alignment.topLeft,
-                      childAnchor: Alignment.bottomRight,
-                      controller: controller,
-                      portalBuilder:
-                          (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                      child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                    ),
-                  ),
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FPortal(
+                  portalAnchor: Alignment.topLeft,
+                  childAnchor: Alignment.bottomRight,
+                  controller: controller,
+                  portalBuilder: (context) =>
+                      const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
+              ),
+            ),
           ),
         ),
       );
@@ -375,22 +374,21 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Builder(
-            builder:
-                (context) => MediaQuery(
-                  data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: FPortal(
-                      portalAnchor: Alignment.topLeft,
-                      childAnchor: Alignment.bottomRight,
-                      controller: controller,
-                      viewInsets: const EdgeInsets.all(50),
-                      portalBuilder:
-                          (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                      child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                    ),
-                  ),
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FPortal(
+                  portalAnchor: Alignment.topLeft,
+                  childAnchor: Alignment.bottomRight,
+                  controller: controller,
+                  viewInsets: const EdgeInsets.all(50),
+                  portalBuilder: (context) =>
+                      const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
+              ),
+            ),
           ),
         ),
       );
@@ -407,22 +405,21 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: Builder(
-            builder:
-                (context) => MediaQuery(
-                  data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: FPortal(
-                      portalAnchor: Alignment.topLeft,
-                      childAnchor: Alignment.bottomRight,
-                      controller: controller,
-                      viewInsets: EdgeInsets.zero,
-                      portalBuilder:
-                          (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                      child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                    ),
-                  ),
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(viewPadding: const EdgeInsets.all(100)),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FPortal(
+                  portalAnchor: Alignment.topLeft,
+                  childAnchor: Alignment.bottomRight,
+                  controller: controller,
+                  viewInsets: EdgeInsets.zero,
+                  portalBuilder: (context) =>
+                      const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
+              ),
+            ),
           ),
         ),
       );

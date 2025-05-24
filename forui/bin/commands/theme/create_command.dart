@@ -114,10 +114,9 @@ class ThemeCreateCommand extends ForuiCommand {
       ..writeln('${emoji ? '⏳' : '[Waiting]'} Creating themes...')
       ..writeln();
 
-    final buffer =
-        StringBuffer('$header\n')
-          ..writeln(theme)
-          ..writeln();
+    final buffer = StringBuffer('$header\n')
+      ..writeln(theme)
+      ..writeln();
 
     File(path)
       ..createSync(recursive: true)

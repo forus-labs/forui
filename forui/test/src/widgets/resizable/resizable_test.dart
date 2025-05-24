@@ -27,17 +27,18 @@ void main() {
 
   tearDown(() => FTouch.primary = null);
 
-  for (final (index, constructor)
-      in [
-        () => FResizable(crossAxisExtent: 0, axis: Axis.vertical, children: [top, bottom]),
-      ].indexed) {
+  for (final (index, constructor) in [
+    () => FResizable(crossAxisExtent: 0, axis: Axis.vertical, children: [top, bottom]),
+  ].indexed) {
     test('[$index] constructor throws error', () => expect(constructor, throwsAssertionError));
   }
 
   testWidgets('vertical drag downwards', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom])),
+        child: Center(
+          child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom]),
+        ),
       ),
     );
 
@@ -51,7 +52,9 @@ void main() {
   testWidgets('vertical drag upwards', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom])),
+        child: Center(
+          child: FResizable(crossAxisExtent: 50, axis: Axis.vertical, children: [top, bottom]),
+        ),
       ),
     );
 
@@ -65,7 +68,9 @@ void main() {
   testWidgets('horizontal drag right', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom])),
+        child: Center(
+          child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]),
+        ),
       ),
     );
 
@@ -79,7 +84,9 @@ void main() {
   testWidgets('horizontal drag left', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: Center(child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom])),
+        child: Center(
+          child: FResizable(crossAxisExtent: 50, axis: Axis.horizontal, children: [top, bottom]),
+        ),
       ),
     );
 

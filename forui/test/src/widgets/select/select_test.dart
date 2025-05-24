@@ -354,7 +354,10 @@ void main() {
             key: key,
             focusNode: focus,
             controller: controller,
-            children: [FSelectItem.text('A', key: itemKey), FSelectItem.text('B')],
+            children: [
+              FSelectItem.text('A', key: itemKey),
+              FSelectItem.text('B'),
+            ],
           ),
         ),
       );
@@ -372,7 +375,9 @@ void main() {
       final focus = autoDispose(FocusNode());
 
       await tester.pumpWidget(
-        TestScaffold.app(child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus)),
+        TestScaffold.app(
+          child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -388,7 +393,9 @@ void main() {
       final focus = autoDispose(FocusNode());
 
       await tester.pumpWidget(
-        TestScaffold.app(child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus)),
+        TestScaffold.app(
+          child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -404,7 +411,9 @@ void main() {
       final focus = autoDispose(FocusNode());
 
       await tester.pumpWidget(
-        TestScaffold.app(child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus)),
+        TestScaffold.app(
+          child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -422,7 +431,9 @@ void main() {
       final focus = autoDispose(FocusNode());
 
       await tester.pumpWidget(
-        TestScaffold.app(child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus)),
+        TestScaffold.app(
+          child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+        ),
       );
 
       await tester.tap(find.byKey(key));

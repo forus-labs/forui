@@ -93,19 +93,18 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   );
 
   @override
-  void updateRenderObject(BuildContext context, RenderPortalLayer renderObject) =>
-      renderObject
-        ..notifier = notifier
-        ..link = link
-        ..viewSize = MediaQuery.sizeOf(context)
-        ..showWhenUnlinked = showWhenUnlinked
-        ..portalConstraints = constraints
-        ..portalAnchor = portalAnchor
-        ..childAnchor = childAnchor
-        ..viewInsets = viewInsets
-        ..spacing = spacing
-        ..shift = shift
-        ..offset = offset;
+  void updateRenderObject(BuildContext context, RenderPortalLayer renderObject) => renderObject
+    ..notifier = notifier
+    ..link = link
+    ..viewSize = MediaQuery.sizeOf(context)
+    ..showWhenUnlinked = showWhenUnlinked
+    ..portalConstraints = constraints
+    ..portalAnchor = portalAnchor
+    ..childAnchor = childAnchor
+    ..viewInsets = viewInsets
+    ..spacing = spacing
+    ..shift = shift
+    ..offset = offset;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

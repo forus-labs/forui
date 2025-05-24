@@ -47,7 +47,7 @@ class Content extends StatelessWidget {
               child: subtitle,
             ),
           if (title != null && subtitle != null && image == null) SizedBox(height: style.subtitleSpacing),
-          if (child case final child?) child,
+          ?child,
         ],
       ),
     );

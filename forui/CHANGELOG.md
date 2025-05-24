@@ -7,19 +7,6 @@
 * Fix style suggestions always displaying actual style name instead of alias.
 
 
-### `FSidebar` (new)
-A sidebar widget that usually resides on the side of the screen for navigation.
-
-* Add `FSidebar`.
-* Add `FSidebarGroup`.
-* Add `FSidebarItem`.
-
-
-### `FTabs`
-
-* Add `FTabs.onPress`.
-
-
 ### `FCollapsible` (new)
 A widget that collapses and expands its child.
 
@@ -31,6 +18,30 @@ A widget that collapses and expands its child.
 * Enhance `FDateField.calendar`'s focus management.
 
 * Fix `FDateField` not closing calendar popover when enter is pressed.
+
+
+### `FSidebar` (new)
+A sidebar widget that usually resides on the side of the screen for navigation.
+
+* Add `FSidebar`.
+* Add `FSidebarGroup`.
+* Add `FSidebarItem`.
+
+
+### `FSonner` (new)
+An optional toast.
+
+* Add `showFSonner(...)`.
+* Add `showRawFSonner(...)`.
+* Add `FSonner`.
+* Add `FSonnerExpandBehavior`.
+* Add `FSonnerStyle`.
+* Add `FSonnerToastStyle`.
+
+
+### `FTabs`
+
+* Add `FTabs.onPress`.
 
 
 ### `FTextField` & `FTextFormField`

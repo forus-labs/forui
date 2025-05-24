@@ -54,10 +54,9 @@ extension FPortalShift on Never {
   }
 
   static Offset _flip(FPortalChildBox child, FPortalBox portal, {required bool x}) {
-    final (childAnchor, portalAnchor, portalOffset) =
-        x
-            ? (child.anchor.flipX(), portal.anchor.flipX(), portal.offset.scale(1, -1))
-            : (child.anchor.flipY(), portal.anchor.flipY(), portal.offset.scale(-1, 1));
+    final (childAnchor, portalAnchor, portalOffset) = x
+        ? (child.anchor.flipX(), portal.anchor.flipX(), portal.offset.scale(1, -1))
+        : (child.anchor.flipY(), portal.anchor.flipY(), portal.offset.scale(-1, 1));
 
     // This is fucked if we don't want to flip one axis.
     final anchor = childAnchor.relative(to: child.size) - portalAnchor.relative(to: portal.size, origin: portalOffset);

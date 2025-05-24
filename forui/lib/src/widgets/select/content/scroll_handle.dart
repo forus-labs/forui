@@ -100,7 +100,11 @@ class _ScrollHandleState extends State<ScrollHandle> {
 
     final ms = currentOffset / (widget.style.pixelsPerSecond / 1000);
 
-    await widget.controller.animateTo(0, duration: Duration(microseconds: (ms * 1000).round()), curve: Curves.linear);
+    await widget.controller.animateTo(
+      0,
+      duration: Duration(microseconds: (ms * 1000).round()),
+      curve: Curves.linear,
+    );
   }
 
   Future<void> _down() async {
@@ -158,5 +162,8 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
 
   /// Creates a [FSelectScrollHandleStyle] that inherits its properties.
   FSelectScrollHandleStyle.inherit({required FColors colors})
-    : this(iconStyle: IconThemeData(color: colors.primary, size: 17), background: colors.background);
+    : this(
+        iconStyle: IconThemeData(color: colors.primary, size: 17),
+        background: colors.background,
+      );
 }

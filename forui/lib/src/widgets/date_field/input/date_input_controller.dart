@@ -15,11 +15,13 @@ typedef Select = TextEditingValue Function(TextEditingValue, int first, int last
 TextEditingValue _first(TextEditingValue value, int first, int _, int _, int _) =>
     value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
 
-TextEditingValue _middle(TextEditingValue value, int first, int last, int _, int separator) =>
-    value.copyWith(selection: TextSelection(baseOffset: first + separator, extentOffset: last));
+TextEditingValue _middle(TextEditingValue value, int first, int last, int _, int separator) => value.copyWith(
+  selection: TextSelection(baseOffset: first + separator, extentOffset: last),
+);
 
-TextEditingValue _last(TextEditingValue value, int _, int last, int end, int separator) =>
-    value.copyWith(selection: TextSelection(baseOffset: last + separator, extentOffset: end));
+TextEditingValue _last(TextEditingValue value, int _, int last, int end, int separator) => value.copyWith(
+  selection: TextSelection(baseOffset: last + separator, extentOffset: end),
+);
 
 @internal
 class DateInputController extends InputController {
@@ -159,7 +161,10 @@ class DateSelector extends Selector {
       end = start + parts[i].length;
     }
 
-    return TextEditingValue(text: join(parts), selection: TextSelection(baseOffset: start, extentOffset: end));
+    return TextEditingValue(
+      text: join(parts),
+      selection: TextSelection(baseOffset: start, extentOffset: end),
+    );
   }
 
   @override

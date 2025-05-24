@@ -14,11 +14,17 @@ void main() {
             theme: theme.data,
             child: FScaffold(
               header: Row(
-                children: [Expanded(child: Container(decoration: const BoxDecoration(color: Colors.red), height: 100))],
+                children: [
+                  Expanded(
+                    child: Container(decoration: const BoxDecoration(color: Colors.red), height: 100),
+                  ),
+                ],
               ),
               footer: Row(
                 children: [
-                  Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
+                  Expanded(
+                    child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100),
+                  ),
                 ],
               ),
               child: const Placeholder(),
@@ -35,12 +41,18 @@ void main() {
             theme: theme.data,
             child: FScaffold(
               header: Row(
-                children: [Expanded(child: Container(decoration: const BoxDecoration(color: Colors.red), height: 100))],
+                children: [
+                  Expanded(
+                    child: Container(decoration: const BoxDecoration(color: Colors.red), height: 100),
+                  ),
+                ],
               ),
               sidebar: Container(decoration: const BoxDecoration(color: Colors.blue), width: 100),
               footer: Row(
                 children: [
-                  Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
+                  Expanded(
+                    child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100),
+                  ),
                 ],
               ),
               child: const Placeholder(),
@@ -60,36 +72,36 @@ void main() {
                 children: [
                   Expanded(
                     child: Builder(
-                      builder:
-                          (context) => FButton.icon(
-                            child: const Icon(FIcons.chevronRight),
-                            onPress: () {
-                              autoDispose(
-                                showFPersistentSheet(
-                                  context: context,
-                                  side: FLayout.ltr,
-                                  draggable: false,
-                                  builder:
-                                      (context, controller) => Container(
-                                        height: double.infinity,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: context.theme.colors.primary),
-                                          color: context.theme.colors.background,
-                                        ),
-                                        child: const Center(child: Text('sheet')),
-                                      ),
+                      builder: (context) => FButton.icon(
+                        child: const Icon(FIcons.chevronRight),
+                        onPress: () {
+                          autoDispose(
+                            showFPersistentSheet(
+                              context: context,
+                              side: FLayout.ltr,
+                              draggable: false,
+                              builder: (context, controller) => Container(
+                                height: double.infinity,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: context.theme.colors.primary),
+                                  color: context.theme.colors.background,
                                 ),
-                              );
-                            },
-                          ),
+                                child: const Center(child: Text('sheet')),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
               ),
               footer: Row(
                 children: [
-                  Expanded(child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100)),
+                  Expanded(
+                    child: Container(decoration: const BoxDecoration(color: Colors.green), height: 100),
+                  ),
                 ],
               ),
               child: const Placeholder(),

@@ -58,7 +58,11 @@ void main() {
     });
 
     testWidgets('inherit TextDirection from parent', (tester) async {
-      await tester.pumpWidget(MaterialApp(home: FTheme(data: FThemes.zinc.dark, child: const Text(''))));
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FTheme(data: FThemes.zinc.dark, child: const Text('')),
+        ),
+      );
 
       expect(tester.takeException(), null);
     });

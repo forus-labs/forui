@@ -217,17 +217,16 @@ class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderSt
       focusNode: widget.focusNode,
       onFocusChange: widget.onFocusChange,
       traversalEdgeBehavior: widget.traversalEdgeBehavior,
-      popoverBuilder:
-          (_, _, _) => FTileGroup.merge(
-            scrollController: widget.scrollController,
-            cacheExtent: widget.cacheExtent,
-            maxHeight: widget.maxHeight,
-            dragStartBehavior: widget.dragStartBehavior,
-            semanticsLabel: widget.semanticsLabel,
-            style: style.tileGroupStyle,
-            divider: widget.divider,
-            children: widget.menu,
-          ),
+      popoverBuilder: (_, _, _) => FTileGroup.merge(
+        scrollController: widget.scrollController,
+        cacheExtent: widget.cacheExtent,
+        maxHeight: widget.maxHeight,
+        dragStartBehavior: widget.dragStartBehavior,
+        semanticsLabel: widget.semanticsLabel,
+        style: style.tileGroupStyle,
+        divider: widget.divider,
+        children: widget.menu,
+      ),
       child: widget.child,
     );
   }

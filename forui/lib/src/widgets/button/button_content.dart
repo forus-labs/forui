@@ -35,7 +35,7 @@ class Content extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: intrinsicWidth ? MainAxisSize.min : MainAxisSize.max,
             spacing: 10,
-            children: [if (prefix case final prefix?) prefix, child, if (suffix case final suffix?) suffix],
+            children: [?prefix, child, ?suffix],
           ),
         ),
       ),

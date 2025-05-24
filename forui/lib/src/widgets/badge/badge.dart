@@ -47,7 +47,9 @@ class FBadge extends StatelessWidget {
     };
 
     return IntrinsicWidth(
-      child: IntrinsicHeight(child: DecoratedBox(decoration: style.decoration, child: builder(context, style))),
+      child: IntrinsicHeight(
+        child: DecoratedBox(decoration: style.decoration, child: builder(context, style)),
+      ),
     );
   }
 

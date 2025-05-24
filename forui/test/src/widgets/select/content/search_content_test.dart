@@ -56,7 +56,9 @@ void main() {
       expect(textController.hasListeners, true);
 
       await tester.pumpWidget(
-        TestScaffold.app(child: FSelect<String>.search(key: key, filter: (_) => [], contentBuilder: (_, _) => [])),
+        TestScaffold.app(
+          child: FSelect<String>.search(key: key, filter: (_) => [], contentBuilder: (_, _) => []),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -96,11 +98,8 @@ void main() {
             key: key,
             controller: controller,
             searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
-            filter:
-                (query) =>
-                    query.isEmpty
-                        ? fruits
-                        : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
+            filter: (query) =>
+                query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
           ),
         ),

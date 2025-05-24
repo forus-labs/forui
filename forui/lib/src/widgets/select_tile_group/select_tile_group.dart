@@ -177,10 +177,10 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
                return child == null
                    ? null
                    : FSelectTileData<T>(
-                     controller: selectController,
-                     selected: selectController.contains(child.value),
-                     child: child,
-                   );
+                       controller: selectController,
+                       selected: selectController.contains(child.value),
+                       child: child,
+                     );
              },
            );
          },

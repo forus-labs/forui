@@ -332,6 +332,16 @@ final class FThemeData with Diagnosticable, FTransformable {
   /// ```
   final FSliderStyles sliderStyles;
 
+  /// The toaster style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create toaster
+  /// ```
+  final FToasterStyle toasterStyle;
+
   /// The switch style.
   ///
   /// ## CLI
@@ -449,6 +459,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FSheetStyle? sheetStyle,
     FSidebarStyle? sidebarStyle,
     FSliderStyles? sliderStyles,
+    FToasterStyle? toasterStyle,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
@@ -504,6 +515,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       sheetStyle: sheetStyle ?? FSheetStyle.inherit(colors: colors),
       sidebarStyle: sidebarStyle ?? FSidebarStyle.inherit(colors: colors, typography: typography, style: style),
       sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
+      toasterStyle: toasterStyle ?? FToasterStyle.inherit(colors: colors, typography: typography, style: style),
       switchStyle: switchStyle ?? FSwitchStyle.inherit(colors: colors, style: style),
       tabsStyle: tabsStyle ?? FTabsStyle.inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
@@ -552,6 +564,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     required this.sheetStyle,
     required this.sidebarStyle,
     required this.sliderStyles,
+    required this.toasterStyle,
     required this.switchStyle,
     required this.tabsStyle,
     required this.tappableStyle,
@@ -982,6 +995,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     FSheetStyle? sheetStyle,
     FSidebarStyle? sidebarStyle,
     FSliderStyles? sliderStyles,
+    FToasterStyle? toasterStyle,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
@@ -1023,6 +1037,7 @@ final class FThemeData with Diagnosticable, FTransformable {
     sheetStyle: sheetStyle ?? this.sheetStyle,
     sidebarStyle: sidebarStyle ?? this.sidebarStyle,
     sliderStyles: sliderStyles ?? this.sliderStyles,
+    toasterStyle: toasterStyle ?? this.toasterStyle,
     switchStyle: switchStyle ?? this.switchStyle,
     tabsStyle: tabsStyle ?? this.tabsStyle,
     tappableStyle: tappableStyle ?? this.tappableStyle,
@@ -1071,6 +1086,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       ..add(DiagnosticsProperty('sheetStyle', sheetStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('sidebarStyle', sidebarStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('toasterStyle', toasterStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tappableStyle', tappableStyle, level: DiagnosticLevel.debug))
@@ -1120,6 +1136,7 @@ final class FThemeData with Diagnosticable, FTransformable {
           sheetStyle == other.sheetStyle &&
           sidebarStyle == other.sidebarStyle &&
           sliderStyles == other.sliderStyles &&
+          toasterStyle == other.toasterStyle &&
           switchStyle == other.switchStyle &&
           tabsStyle == other.tabsStyle &&
           tappableStyle == other.tappableStyle &&
@@ -1165,6 +1182,7 @@ final class FThemeData with Diagnosticable, FTransformable {
       sheetStyle.hashCode ^
       sidebarStyle.hashCode ^
       sliderStyles.hashCode ^
+      toasterStyle.hashCode ^
       switchStyle.hashCode ^
       tabsStyle.hashCode ^
       tappableStyle.hashCode ^

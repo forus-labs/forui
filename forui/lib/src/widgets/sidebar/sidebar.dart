@@ -83,14 +83,18 @@ class FSidebar extends StatelessWidget {
       style: style,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          border: BorderDirectional(end: BorderSide(color: style.borderColor, width: style.borderWidth)),
+          border: BorderDirectional(
+            end: BorderSide(color: style.borderColor, width: style.borderWidth),
+          ),
         ),
         child: SizedBox(
           width: width ?? style.width,
           child: Column(
             children: [
               if (header != null) Padding(padding: style.headerPadding, child: header!),
-              Expanded(child: Padding(padding: style.contentPadding, child: child)),
+              Expanded(
+                child: Padding(padding: style.contentPadding, child: child),
+              ),
               if (footer != null) Padding(padding: style.footerPadding, child: footer!),
             ],
           ),

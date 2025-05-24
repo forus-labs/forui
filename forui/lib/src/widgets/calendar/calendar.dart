@@ -151,37 +151,36 @@ class _State extends State<FCalendar> {
               ),
               ValueListenableBuilder(
                 valueListenable: _type,
-                builder:
-                    (_, value, _) => switch (value) {
-                      FCalendarPickerType.day => PagedDayPicker(
-                        style: style,
-                        dayBuilder: widget.dayBuilder,
-                        start: widget.start.toLocalDate(),
-                        end: widget.end.toLocalDate(),
-                        today: widget.today.toLocalDate(),
-                        initial: _month.value,
-                        selectable: (date) => widget.controller.selectable(date.toNative()),
-                        selected: (date) => widget.controller.selected(date.toNative()),
-                        onMonthChange: (date) {
-                          _month.value = date;
-                          widget.onMonthChange?.call(date.toNative());
-                        },
-                        onPress: (date) {
-                          final native = date.toNative();
-                          widget.controller.select(native);
-                          widget.onPress?.call(native);
-                        },
-                        onLongPress: (date) => widget.onLongPress?.call(date.toNative()),
-                      ),
-                      FCalendarPickerType.yearMonth => YearMonthPicker(
-                        style: style,
-                        start: widget.start.toLocalDate(),
-                        end: widget.end.toLocalDate(),
-                        today: widget.today.toLocalDate(),
-                        month: _month,
-                        type: _type,
-                      ),
+                builder: (_, value, _) => switch (value) {
+                  FCalendarPickerType.day => PagedDayPicker(
+                    style: style,
+                    dayBuilder: widget.dayBuilder,
+                    start: widget.start.toLocalDate(),
+                    end: widget.end.toLocalDate(),
+                    today: widget.today.toLocalDate(),
+                    initial: _month.value,
+                    selectable: (date) => widget.controller.selectable(date.toNative()),
+                    selected: (date) => widget.controller.selected(date.toNative()),
+                    onMonthChange: (date) {
+                      _month.value = date;
+                      widget.onMonthChange?.call(date.toNative());
                     },
+                    onPress: (date) {
+                      final native = date.toNative();
+                      widget.controller.select(native);
+                      widget.onPress?.call(native);
+                    },
+                    onLongPress: (date) => widget.onLongPress?.call(date.toNative()),
+                  ),
+                  FCalendarPickerType.yearMonth => YearMonthPicker(
+                    style: style,
+                    start: widget.start.toLocalDate(),
+                    end: widget.end.toLocalDate(),
+                    today: widget.today.toLocalDate(),
+                    month: _month,
+                    type: _type,
+                  ),
+                },
               ),
             ],
           ),

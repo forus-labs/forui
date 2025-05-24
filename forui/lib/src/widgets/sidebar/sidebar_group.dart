@@ -80,7 +80,9 @@ class FSidebarGroup extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     if (label != null)
-                      Expanded(child: DefaultTextStyle.merge(style: style.labelStyle, child: label!))
+                      Expanded(
+                        child: DefaultTextStyle.merge(style: style.labelStyle, child: label!),
+                      )
                     else
                       const SizedBox(),
                     if (action != null)
@@ -91,8 +93,8 @@ class FSidebarGroup extends StatelessWidget {
                         onStateChange: onActionStateChange,
                         onPress: onActionPress,
                         onLongPress: onActionLongPress,
-                        builder:
-                            (_, states, child) => IconTheme(data: style.actionStyle.resolve(states), child: child!),
+                        builder: (_, states, child) =>
+                            IconTheme(data: style.actionStyle.resolve(states), child: child!),
                         child: action!,
                       )
                     else
@@ -101,7 +103,10 @@ class FSidebarGroup extends StatelessWidget {
                 ),
               ),
             SizedBox(height: style.childrenSpacing),
-            Padding(padding: style.childrenPadding, child: Column(spacing: style.childrenSpacing, children: children)),
+            Padding(
+              padding: style.childrenPadding,
+              child: Column(spacing: style.childrenSpacing, children: children),
+            ),
           ],
         ),
       ),

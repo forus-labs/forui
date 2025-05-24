@@ -14,15 +14,14 @@ void main() {
 
   setUpAll(initializeDateFormatting);
 
-  for (final (index, (date, start, end, expected))
-      in [
-        ('01/01/1899', null, null, 'January 2025'),
-        ('01/01/1949', DateTime.utc(1950), null, 'January 2025'),
-        ('01/01/1951', DateTime.utc(1950), null, 'January 1951'),
-        ('01/01/2101', null, null, 'January 2025'),
-        ('01/01/2051', null, DateTime.utc(2050), 'January 2025'),
-        ('01/01/2049', null, DateTime.utc(2050), 'January 2049'),
-      ].indexed) {
+  for (final (index, (date, start, end, expected)) in [
+    ('01/01/1899', null, null, 'January 2025'),
+    ('01/01/1949', DateTime.utc(1950), null, 'January 2025'),
+    ('01/01/1951', DateTime.utc(1950), null, 'January 1951'),
+    ('01/01/2101', null, null, 'January 2025'),
+    ('01/01/2051', null, DateTime.utc(2050), 'January 2025'),
+    ('01/01/2049', null, DateTime.utc(2050), 'January 2049'),
+  ].indexed) {
     testWidgets('initial month - $index', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
@@ -48,7 +47,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FDateField(key: key, calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15))),
+        child: FDateField(
+          key: key,
+          calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+        ),
       ),
     );
 
@@ -101,7 +103,11 @@ void main() {
       final controller = FDateFieldController(vsync: tester);
 
       await tester.pumpWidget(
-        TestScaffold.app(child: LocaleScaffold(child: FDateField.input(controller: controller, key: key))),
+        TestScaffold.app(
+          child: LocaleScaffold(
+            child: FDateField.input(controller: controller, key: key),
+          ),
+        ),
       );
       expect(find.text('MM/DD/YYYY'), findsOneWidget);
       expect(find.text('YYYY. MM. DD.'), findsNothing);
@@ -117,7 +123,9 @@ void main() {
       final controller = FDateFieldController(vsync: tester);
 
       await tester.pumpWidget(
-        TestScaffold.app(child: LocaleScaffold(child: FDateField.calendar(controller: controller))),
+        TestScaffold.app(
+          child: LocaleScaffold(child: FDateField.calendar(controller: controller)),
+        ),
       );
       expect(find.text('Pick a date'), findsOneWidget);
       expect(find.text('날짜 선택'), findsNothing);

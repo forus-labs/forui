@@ -209,13 +209,12 @@ void main() {
         TestScaffold.app(
           child: FLineCalendar(
             controller: autoDispose(FCalendarController.date()),
-            builder:
-                (context, state, child) => Stack(
-                  children: [
-                    child!,
-                    Positioned(top: 5, left: 5, child: Container(width: 3, height: 3, color: const Color(0xFF00FF00))),
-                  ],
-                ),
+            builder: (context, state, child) => Stack(
+              children: [
+                child!,
+                Positioned(top: 5, left: 5, child: Container(width: 3, height: 3, color: const Color(0xFF00FF00))),
+              ],
+            ),
             today: DateTime(2024, 11, 28),
           ),
         ),
