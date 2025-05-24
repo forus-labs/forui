@@ -34,12 +34,12 @@
 > [!IMPORTANT]
 > Forui 0.11.0+ requires Flutter **3.29.0+**. Run `flutter --version` to check your Flutter version.
 
-## Why Forui?
+## Why Choose Forui?
 
 * 🎨 Over 40+ beautifully crafted widgets.
 * ⚡ Bundled [CLI](https://forui.dev/docs/themes#cli) to generate themes & styling boilerplate.
 * ✅ [Well-tested](https://app.codecov.io/gh/forus-labs/forui).
-* 🌍 i10n support.
+* 🌍 I10n support.
 * 🪝 First-class [Flutter Hooks](https://pub.dev/packages/flutter_hooks) integration via [`forui_hooks`](https://pub.dev/packages/forui_hooks).
 
 ## Documentation

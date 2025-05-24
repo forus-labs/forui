@@ -31,12 +31,12 @@
 > [!IMPORTANT]
 > Forui 0.11.0+ requires Flutter **3.29.0+**. Run `flutter --version` to check your Flutter version.
 
-## Why Forui?
+## Why Choose Forui?
 
 * 🎨 Over 40+ beautifully crafted widgets.
 * ⚡ Bundled [CLI](https://forui.dev/docs/themes#cli) to generate themes & styling boilerplate.
 * ✅ [Well-tested](https://app.codecov.io/gh/forus-labs/forui).
-* 🌍 i10n support.
+* 🌍 I10n support.
 * 🪝 First-class [Flutter Hooks](https://pub.dev/packages/flutter_hooks) integration via [`forui_hooks`](https://pub.dev/packages/forui_hooks).
 
 ## Documentation
@@ -63,42 +63,57 @@ Licensed under the [MIT License](https://github.com/forus-labs/forui/blob/main/f
 
 Forui provides the following widgets:
 
-- accordion
-- alert
-- avatar
-- badge
-- bottom navigation bar
-- breadcrumb
-- button
-- calendar
-- card
-- checkbox
-- date field
-- dialog
-- divider
-- header
-- label
-- line calendar
-- pagination
-- picker
-- popover
-- popover menu
-- progress
-- radio
-- resizable
-- scaffold
-- select
-- select group
-- select menu tile
-- select tile group
-- sheet
-- sidebar
-- slider
-- switch
-- tabs
-- text field
-- tile
-- time field
-- time picker
-- toast/sonner
-- tooltip
+- Layout
+  - Divider
+  - Resizable
+  - Scaffold
+- Form
+  - Button
+  - Checkbox
+  - Date Field
+  - Label
+  - Picker
+  - Radio
+  - Select
+  - Select Group
+  - Slider
+  - Switch
+  - Text Field
+  - Text Form Field
+  - Time Field
+  - Time Picker
+- Date Presentation
+  - Accordion
+  - Avatar
+  - Badge
+  - Calendar
+  - Card
+  - Line Calendar
+- Tile
+  - Tile
+  - Tile Group
+  - Select Tile Group
+  - Select Menu Tile
+- Navigation
+  - Bottom Navigation Bar
+  - Breadcrumb
+  - Header
+  - Pagination
+  - Sidebar
+  - Tabs
+- Feedback
+  - Alert
+  - Progress
+- Overlay
+  - Dialog
+  - Sheet
+  - Persistent Sheet
+  - Popover
+  - Popover Menu
+  - Tooltip
+  - Toast
+- Foundation
+  - Collapsible
+  - Focused Outline
+  - Portal
+  - Tappable
