@@ -7,7 +7,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../../test_scaffold.dart';
 
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+const letters = {
+  'A': 'A',
+  'B': 'B',
+  'C': 'C',
+  'D': 'D',
+  'E': 'E',
+  'F': 'F',
+  'G': 'G',
+  'H': 'H',
+  'I': 'I',
+  'J': 'J',
+  'K': 'K',
+  'L': 'L',
+  'M': 'M',
+  'N': 'N',
+  'O': 'O',
+};
 
 void main() {
   const key = ValueKey('select');
@@ -24,11 +40,7 @@ void main() {
     testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            key: key,
-            contentScrollController: scrollController,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
         ),
       );
 
@@ -37,11 +49,7 @@ void main() {
 
       expect(scrollController.hasListeners, true);
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(key: key, children: [for (final letter in letters) FSelectItem.text(letter)]),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(child: FSelect<String>.fromMap(letters, key: key)));
 
       expect(scrollController.dispose, returnsNormally);
     });
@@ -49,11 +57,7 @@ void main() {
     testWidgets('dispose() does not dispose external controller', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            key: key,
-            contentScrollController: scrollController,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
         ),
       );
 

@@ -28,12 +28,13 @@ void main() {
               alignment: Alignment.topCenter,
               child: FSelect<String>(
                 key: key,
+                format: (string) => string,
                 contentScrollController: scrollController,
                 contentScrollHandles: true,
                 children: [
                   FSelectSection(
                     label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem.text(letter)],
+                    children: [for (final letter in letters) FSelectItem(letter, letter)],
                   ),
                 ],
               ),
@@ -59,12 +60,13 @@ void main() {
               alignment: Alignment.topCenter,
               child: FSelect<String>(
                 key: key,
+                format: (string) => string,
                 contentScrollController: scrollController,
                 contentScrollHandles: true,
                 children: [
                   FSelectSection(
                     label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem.text(letter)],
+                    children: [for (final letter in letters) FSelectItem(letter, letter)],
                   ),
                 ],
               ),
@@ -87,12 +89,13 @@ void main() {
               alignment: Alignment.topCenter,
               child: FSelect<String>(
                 key: key,
+                format: (string) => string,
                 contentScrollController: scrollController,
                 contentScrollHandles: true,
                 children: [
                   FSelectSection(
                     label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem.text(letter)],
+                    children: [for (final letter in letters) FSelectItem(letter, letter)],
                   ),
                 ],
               ),
@@ -118,11 +121,12 @@ void main() {
               alignment: Alignment.topCenter,
               child: FSelect<String>(
                 key: key,
+                format: (string) => string,
                 contentScrollController: scrollController,
                 children: [
                   FSelectSection(
                     label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem.text(letter)],
+                    children: [for (final letter in letters) FSelectItem(letter, letter)],
                   ),
                 ],
               ),
@@ -148,10 +152,11 @@ void main() {
               alignment: Alignment.topCenter,
               child: FSelect<String>(
                 key: key,
+                format: (string) => string,
                 contentScrollController: scrollController,
                 contentScrollHandles: true,
                 children: [
-                  FSelectSection(label: const Text('Lorem'), children: [FSelectItem.text('1')]),
+                  FSelectSection(label: const Text('Lorem'), children: [FSelectItem('1', '1')]),
                 ],
               ),
             ),
@@ -179,12 +184,13 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>(
               key: key,
+              format: (string) => string,
               controller: controller,
               contentScrollController: scrollController,
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem.text(letter)],
+                  children: [for (final letter in letters) FSelectItem(letter, letter)],
                 ),
               ],
             ),

@@ -53,9 +53,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   static Widget _fieldBuilder(BuildContext _, (FSelectStyle, FTextFieldStyle, Set<WidgetState>) _, Widget? child) =>
       child!;
 
-  /// The default format function that converts the selected items to a comma separated string.
-  static String defaultFormat(Object? selected) => selected.toString();
-
   static String? _defaultValidator(Object? _) => null;
 
   /// The controller.
@@ -117,8 +114,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final FormFieldValidator<T> validator;
 
   /// The function that formats the selected items into a string. The items are sorted in order of selection.
-  ///
-  /// Defaults to [defaultFormat].
   final String Function(T) format;
 
   /// The [hint] that is displayed when the select is empty. Defaults to the current locale's
@@ -190,6 +185,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   /// Creates a select with a list of selectable items.
   const factory FSelect({
+    required String Function(T) format,
     required List<FSelectItemMixin> children,
     FSelectController<T>? controller,
     FSelectStyle? style,
@@ -207,7 +203,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     String? forceErrorText,
     FormFieldValidator<T> validator,
     Widget Function(BuildContext, String) errorBuilder,
-    String Function(T) format,
     String? hint,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -319,7 +314,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentPhysics: contentPhysics,
       initialValue: initialValue,
       key: key,
-      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(value: value, child: Text(key))],
+      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(key, value)],
     );
   }
 
@@ -333,6 +328,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// asynchronously by [filter].
   /// The [searchErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
   const factory FSelect.search({
+    required String Function(T) format,
     required FSelectSearchFilter<T> filter,
     required FSelectSearchContentBuilder<T> contentBuilder,
     FSelectSearchFieldProperties searchFieldProperties,
@@ -354,7 +350,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     String? forceErrorText,
     FormFieldValidator<T> validator,
     Widget Function(BuildContext, String) errorBuilder,
-    String Function(T) format,
     String? hint,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -380,6 +375,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   }) = _SearchSelect<T>;
 
   const FSelect._({
+    required this.format,
     this.controller,
     this.style,
     this.autofocus = false,
@@ -396,7 +392,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.forceErrorText,
     this.validator = _defaultValidator,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    this.format = defaultFormat,
     this.hint,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,

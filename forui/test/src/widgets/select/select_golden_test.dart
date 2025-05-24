@@ -14,10 +14,11 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             children: [
-              FSelectSection(label: const Text('A'), children: [FSelectItem.text('B')]),
-              for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
+              FSelectSection(label: const Text('A'), children: [FSelectItem('B', 'B')]),
+              for (int i = 0; i < 10; i++) FSelectItem('$i', '$i'),
             ],
           ),
         ),
@@ -32,7 +33,12 @@ void main() {
     testWidgets('basic - empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FSelect<String>(key: key, style: TestScaffold.blueScreen.selectStyle, children: const []),
+          child: FSelect<String>(
+            key: key,
+            style: TestScaffold.blueScreen.selectStyle,
+            format: (s) => s,
+            children: const [],
+          ),
         ),
       );
 
@@ -47,11 +53,12 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             children: [
-              FSelectSection(label: const Text('A'), children: [FSelectItem.text('B')]),
-              for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
+              FSelectSection(label: const Text('A'), children: [FSelectItem('B', 'B')]),
+              for (int i = 0; i < 10; i++) FSelectItem('$i', '$i'),
             ],
           ),
         ),
@@ -81,10 +88,11 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>.search(
             key: key,
+            format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             filter: (_) => [],
-            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem('$i', '$i')],
           ),
         ),
       );
@@ -100,13 +108,14 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>.search(
             key: key,
+            format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem('$i', '$i')],
           ),
         ),
       );
@@ -139,7 +148,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>(key: key, autoHide: false, children: [FSelectItem.text('A'), FSelectItem.text('B')]),
+          child: FSelect<String>.fromMap(const {'A': 'A', 'B': 'B'}, key: key, autoHide: false),
         ),
       );
 
@@ -159,8 +168,9 @@ void main() {
           alignment: Alignment.topCenter,
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             autoHide: false,
-            children: [FSelectItem.text('A'), FSelectItem.text('B')],
+            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
             builder: (_, _, child) => DecoratedBox(
               decoration: const BoxDecoration(color: Colors.red),
               child: child,
@@ -183,7 +193,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: const FSelect<String>(key: key, children: []),
+          child: FSelect<String>.fromMap(const {}, key: key),
         ),
       );
 

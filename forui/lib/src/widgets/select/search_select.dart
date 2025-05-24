@@ -10,6 +10,7 @@ class _SearchSelect<T> extends FSelect<T> {
   const _SearchSelect({
     required this.filter,
     required this.contentBuilder,
+    required super.format,
     this.searchFieldProperties = const FSelectSearchFieldProperties(),
     this.searchLoadingBuilder = FSelect.defaultSearchLoadingBuilder,
     this.searchErrorBuilder,
@@ -29,7 +30,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.forceErrorText,
     super.validator,
     super.errorBuilder,
-    super.format,
+
     super.hint,
     super.textAlign,
     super.textAlignVertical,

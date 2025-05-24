@@ -17,7 +17,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFSelectController();
-            return FSelect(controller: controller, children: const []);
+            return FSelect(controller: controller, format: (s) => s, children: const []);
           },
         ),
       ),

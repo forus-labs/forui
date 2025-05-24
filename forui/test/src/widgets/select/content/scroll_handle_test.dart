@@ -7,7 +7,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../../test_scaffold.dart';
 
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+const letters = {
+  'A': 'A',
+  'B': 'B',
+  'C': 'C',
+  'D': 'D',
+  'E': 'E',
+  'F': 'F',
+  'G': 'G',
+  'H': 'H',
+  'I': 'I',
+  'J': 'J',
+  'K': 'K',
+  'L': 'L',
+  'M': 'M',
+  'N': 'N',
+  'O': 'O',
+};
 
 void main() {
   final localizations = FDefaultLocalizations();
@@ -26,12 +42,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
+          child: FSelect<String>.fromMap(
+            letters,
             key: key,
             controller: controller,
             contentScrollController: scrollController,
             contentScrollHandles: true,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
           ),
         ),
       );
@@ -56,12 +72,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
+          child: FSelect<String>.fromMap(
+            letters,
             key: key,
             controller: controller,
             contentScrollController: scrollController,
             contentScrollHandles: true,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
           ),
         ),
       );
@@ -83,12 +99,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
+          child: FSelect<String>.fromMap(
+            letters,
             key: key,
             controller: controller,
             contentScrollController: scrollController,
             contentScrollHandles: true,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
           ),
         ),
       );
@@ -117,12 +133,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
+          child: FSelect<String>.fromMap(
+            letters,
             key: key,
             controller: controller,
             contentScrollController: scrollController,
             contentScrollHandles: true,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
           ),
         ),
       );
