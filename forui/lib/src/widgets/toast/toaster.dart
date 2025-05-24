@@ -192,7 +192,7 @@ class FToasterState extends State<FToaster> {
     FToastStyle? style,
     FToastAlignment alignment = FToastAlignment.bottomEnd,
     Duration? duration = const Duration(seconds: 5),
-    VoidCallback? onDismiss
+    VoidCallback? onDismiss,
   }) {
     final entry = ToasterEntry(style, alignment._alignment, duration, builder);
     entry.onDismiss = () {

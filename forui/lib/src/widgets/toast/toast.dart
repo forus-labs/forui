@@ -31,15 +31,7 @@ class FToast extends StatelessWidget {
   final VoidCallback? onDismiss;
 
   /// Creates a [FToast].
-  const FToast({
-    required this.title,
-    this.style,
-    this.icon,
-    this.description,
-    this.suffix,
-    this.onDismiss,
-    super.key,
-  });
+  const FToast({required this.title, this.style, this.icon, this.description, this.suffix, this.onDismiss, super.key});
 
   @override
   Widget build(BuildContext context) {
