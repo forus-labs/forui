@@ -7,10 +7,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
-Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
+Widget small(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
     intrinsicWidth: true,
-    onPress: () => showRawFSonner(
+    onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
       builder: (_, _) => Container(
@@ -25,10 +25,10 @@ Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomR
   ),
 );
 
-Widget big(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
+Widget big(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
     intrinsicWidth: true,
-    onPress: () => showRawFSonner(
+    onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
       builder: (_, _) => Container(
@@ -43,10 +43,10 @@ Widget big(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRig
   ),
 );
 
-Widget closeable(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
+Widget closeable(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
     intrinsicWidth: true,
-    onPress: () => showRawFSonner(
+    onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
       builder: (_, entry) => GestureDetector(
@@ -68,12 +68,12 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FSonner(
-          style: TestScaffold.blueScreen.sonnerStyle,
+        child: FToaster(
+          style: TestScaffold.blueScreen.toasterStyle,
           child: Builder(
             builder: (context) => FButton(
               style: TestScaffold.blueScreen.buttonStyles.primary,
-              onPress: () => showRawFSonner(
+              onPress: () => showRawFToast(
                 context: context,
                 builder: (_, _) => Container(color: TestScaffold.blueScreen.colors.foreground, width: 100, height: 100),
               ),
@@ -90,12 +90,12 @@ void main() {
     await expectBlueScreen(find.byType(TestScaffold));
   });
 
-  for (final alignment in FSonnerAlignment.values) {
+  for (final alignment in FToastAlignment.values) {
     group('collapsed - $alignment', () {
       testWidgets('simple', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
+            child: FToaster(
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -113,13 +113,13 @@ void main() {
         await tester.tap(find.text('3'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/collapsed/simple-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/simple-$alignment.png'));
       });
 
       testWidgets('big middle', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
+            child: FToaster(
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -137,13 +137,13 @@ void main() {
         await tester.tap(find.text('3'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/collapsed/big-middle-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/big-middle-$alignment.png'));
       });
 
       testWidgets('big front', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
+            child: FToaster(
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -161,7 +161,7 @@ void main() {
         await tester.tap(find.text('3'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/collapsed/big-front-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/big-front-$alignment.png'));
       });
     });
 
@@ -169,7 +169,7 @@ void main() {
       testWidgets('simple', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
+            child: FToaster(
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -190,13 +190,13 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/expanded/simple-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/simple-$alignment.png'));
       });
 
       testWidgets('big middle', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
+            child: FToaster(
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -217,13 +217,13 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/expanded/big-middle-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/big-middle-$alignment.png'));
       });
 
       testWidgets('big front', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
+            child: FToaster(
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -244,7 +244,7 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/expanded/big-front-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/big-front-$alignment.png'));
       });
     });
   }
@@ -252,7 +252,7 @@ void main() {
   testWidgets('limit to max', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: FSonner(
+        child: FToaster(
           child: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3'), small('4')]),
           ),
@@ -269,13 +269,13 @@ void main() {
     await tester.tap(find.text('4'));
     await tester.pumpAndSettle();
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/limit.png'));
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/limit.png'));
   });
 
   testWidgets('close', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: FSonner(
+        child: FToaster(
           child: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), closeable('3')]),
           ),
@@ -297,7 +297,7 @@ void main() {
     await tester.tap(find.text('close'));
     await tester.pumpAndSettle();
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/close.png'));
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/close.png'));
   });
 
   group('gestures', () {
@@ -305,8 +305,8 @@ void main() {
       testWidgets('hovered', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.always),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.always),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -319,14 +319,14 @@ void main() {
         await tester.tap(find.text('2'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/always.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/always.png'));
       });
 
       testWidgets('hovered', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.always),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.always),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -347,14 +347,14 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.text('3').last));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/always-hovered.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/always-hovered.png'));
       });
 
       testWidgets('pressed', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -372,7 +372,7 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/always-pressed.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/always-pressed.png'));
       });
     });
 
@@ -380,7 +380,7 @@ void main() {
       testWidgets('hover & press', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
+            child: FToaster(
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -405,13 +405,13 @@ void main() {
 
         await tester.tap(find.text('3').last, kind: PointerDeviceKind.mouse);
         await tester.pumpAndSettle(const Duration(seconds: 1));
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/hover-press.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/hover-press.png'));
       });
 
       testWidgets('press', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
+            child: FToaster(
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -428,11 +428,11 @@ void main() {
 
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/press-expands.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/press-expands.png'));
 
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/press-collapses.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/press-collapses.png'));
       });
     });
 
@@ -440,8 +440,8 @@ void main() {
       testWidgets('expand disabled - hover', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -462,14 +462,14 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.text('3').last));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/disabled-hovered.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/disabled-hovered.png'));
       });
 
       testWidgets('expand disabled - pressed', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -487,7 +487,7 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/disabled-pressed.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/disabled-pressed.png'));
       });
     });
   });

@@ -6,8 +6,8 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class SonnerPage extends Sample {
-  SonnerPage({@queryParam super.theme, super.key});
+class ToastPage extends Sample {
+  ToastPage({@queryParam super.theme, super.key});
 
   @override
   Widget sample(BuildContext context) => Center(
@@ -16,15 +16,15 @@ class SonnerPage extends Sample {
       spacing: 5,
       children: [
         for (final (alignment, description) in [
-          (FSonnerAlignment.topLeft, 'Top Left'),
-          (FSonnerAlignment.topCenter, 'Top Center'),
-          (FSonnerAlignment.topRight, 'Top Right'),
-          (FSonnerAlignment.bottomLeft, 'Bottom Left'),
-          (FSonnerAlignment.bottomCenter, 'Bottom Center'),
-          (FSonnerAlignment.bottomRight, 'Bottom Right'),
+          (FToastAlignment.topLeft, 'Top Left'),
+          (FToastAlignment.topCenter, 'Top Center'),
+          (FToastAlignment.topRight, 'Top Right'),
+          (FToastAlignment.bottomLeft, 'Bottom Left'),
+          (FToastAlignment.bottomCenter, 'Bottom Center'),
+          (FToastAlignment.bottomRight, 'Bottom Right'),
         ])
           FButton(
-            onPress: () => showFSonner(
+            onPress: () => showFToast(
               context: context,
               alignment: alignment,
               title: const Text('Event has been created'),
@@ -52,14 +52,14 @@ class SonnerPage extends Sample {
 }
 
 @RoutePage()
-class NoAutoDismissSonnerPage extends Sample {
-  NoAutoDismissSonnerPage({@queryParam super.theme, super.key});
+class NoAutoDismissToastPage extends Sample {
+  NoAutoDismissToastPage({@queryParam super.theme, super.key});
 
   @override
   Widget sample(BuildContext context) => Center(
     child: FButton(
       intrinsicWidth: true,
-      onPress: () => showFSonner(
+      onPress: () => showFToast(
         context: context,
         duration: null,
         icon: const Icon(FIcons.triangleAlert),
@@ -71,8 +71,8 @@ class NoAutoDismissSonnerPage extends Sample {
 }
 
 @RoutePage()
-class RawSonnerPage extends Sample {
-  RawSonnerPage({@queryParam super.theme, super.key});
+class RawToastPage extends Sample {
+  RawToastPage({@queryParam super.theme, super.key});
 
   @override
   Widget sample(BuildContext context) {
@@ -88,7 +88,7 @@ class RawSonnerPage extends Sample {
     return Center(
       child: FButton(
         intrinsicWidth: true,
-        onPress: () => showRawFSonner(
+        onPress: () => showRawFToast(
           context: context,
           duration: null,
           builder: (context, toast) => IntrinsicHeight(
@@ -113,19 +113,19 @@ class RawSonnerPage extends Sample {
 }
 
 @RoutePage()
-class BehaviorSonnerPage extends StatelessWidget {
+class BehaviorToastPage extends StatelessWidget {
   final FThemeData theme;
-  final FSonnerExpandBehavior behavior;
+  final FToasterExpandBehavior behavior;
 
-  BehaviorSonnerPage({@queryParam String theme = 'zinc-light', @queryParam String behavior = 'always', super.key})
+  BehaviorToastPage({@queryParam String theme = 'zinc-light', @queryParam String behavior = 'always', super.key})
     : theme = themes[theme]!,
-      behavior = behavior == 'always' ? FSonnerExpandBehavior.always : FSonnerExpandBehavior.disabled;
+      behavior = behavior == 'always' ? FToasterExpandBehavior.always : FToasterExpandBehavior.disabled;
 
   @override
   Widget build(BuildContext context) => FTheme(
     data: theme,
     child: FScaffold(
-      sonnerStyle: context.theme.sonnerStyle.copyWith(expandBehavior: behavior),
+      toasterStyle: context.theme.toasterStyle.copyWith(expandBehavior: behavior),
       child: Align(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 400),
@@ -133,7 +133,7 @@ class BehaviorSonnerPage extends StatelessWidget {
             builder: (context) => Center(
               child: FButton(
                 intrinsicWidth: true,
-                onPress: () => showFSonner(
+                onPress: () => showFToast(
                   context: context,
                   icon: const Icon(FIcons.info),
                   title: const Text('Event has been created'),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
+Widget small(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
     intrinsicWidth: true,
-    onPress: () => showRawFSonner(
+    onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
       builder: (_, _) => Container(
@@ -19,10 +19,10 @@ Widget small(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomR
   ),
 );
 
-Widget big(String text, [FSonnerAlignment alignment = FSonnerAlignment.bottomRight]) => Builder(
+Widget big(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
     intrinsicWidth: true,
-    onPress: () => showRawFSonner(
+    onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
       builder: (_, _) => Container(
@@ -61,7 +61,7 @@ class _SandboxState extends State<Sandbox> {
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: 5,
       children: [
-        FSonnerToast(
+        FToast(
           icon: const Icon(FIcons.triangleAlert),
           title: const Text('Event has been created'),
           description: Text(
@@ -73,7 +73,7 @@ class _SandboxState extends State<Sandbox> {
         FButton(
           intrinsicWidth: true,
           onPress: () {
-            Widget buildToast(BuildContext context, FSonnerEntry toast) => FSonnerToast(
+            Widget buildToast(BuildContext context, FToasterEntry toast) => FToast(
               icon: const Icon(FIcons.triangleAlert),
               title: const Text('Event has been created'),
               description: Text(
@@ -82,14 +82,14 @@ class _SandboxState extends State<Sandbox> {
               ),
             );
 
-            showRawFSonner(context: context, builder: buildToast, alignment: FSonnerAlignment.bottomRight);
+            showRawFToast(context: context, builder: buildToast, alignment: FToastAlignment.bottomRight);
           },
           child: Text('Small'),
         ),
         FButton(
           intrinsicWidth: true,
           onPress: () {
-            Widget buildToast(BuildContext context, FSonnerEntry toast) => IntrinsicHeight(
+            Widget buildToast(BuildContext context, FToasterEntry toast) => IntrinsicHeight(
               child: FCard(
                 style: cardStyle,
                 title: const Text('Event has been created'),
@@ -104,7 +104,7 @@ class _SandboxState extends State<Sandbox> {
               ),
             );
 
-            showRawFSonner(context: context, builder: buildToast, alignment: FSonnerAlignment.bottomRight);
+            showRawFToast(context: context, builder: buildToast, alignment: FToastAlignment.bottomRight);
           },
           child: Text('Large'),
         ),

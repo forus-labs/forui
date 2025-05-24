@@ -7,12 +7,12 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/sonner/animated_toaster_parent_data.dart';
+import 'package:forui/src/widgets/toast/animated_toaster_parent_data.dart';
 
 @internal
 class AnimatedToast extends StatefulWidget {
   /// The style.
-  final FSonnerToastStyle style;
+  final FToastStyle style;
 
   /// A unit vector indicating how a toast's protrusion should be aligned to the toast in front of it.
   ///

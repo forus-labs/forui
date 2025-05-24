@@ -3,66 +3,66 @@ import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
-# Sonner
+# Toast
 
 An opinionated toast that temporarily displays a succinct message. 
 
 <Callout type="info">
-    To show a toast, use the `showFSonner(...)` or `showRawFSonner(...)` functions. The function must be called from a
-    widget that is a descendant of a `FSonner` or `FScaffold` widget.
+    To show a toast, use the `showFToast(...)` or `showRawFToast(...)` functions. The function must be called from a
+    widget that is a descendant of a `FToaster` or `FScaffold` widget.
 </Callout>
 
 
 <LinkBadgeGroup>
-    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.sonner/"/>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.toast/"/>
 </LinkBadgeGroup>
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='sonner' query={{}} height={620}/>
+    <Widget name='toast' query={{}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    class SonnerPage extends StatelessWidget {
-      SonnerPage({super.key});
-
+    class ToastPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: 5,
-          children: [
-            for (final (alignment, description) in [
-              (FSonnerAlignment.topLeft, 'Top Left'),
-              (FSonnerAlignment.topRight, 'Top Right'),
-              (FSonnerAlignment.bottomLeft, 'Bottom Left'),
-              (FSonnerAlignment.bottomRight, 'Bottom Right'),
-            ])
-              FButton(
-                onPress: () => showFSonner(
-                  context: context,
-                  alignment: alignment,
-                  title: const Text('Event has been created'),
-                  description: const Text('Friday, May 23, 2025 at 9:00 AM'),
-                  suffixBuilder: (context, entry, _) => IntrinsicHeight(
-                    child: FButton(
-                      style: context.theme.buttonStyles.primary.copyWith(
-                        contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
-                          textStyle: FWidgetStateMap.all(
-                            context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
+      Widget build(BuildContext context) => FToaster(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 5,
+            children: [
+              for (final (alignment, description) in [
+                (FToastAlignment.topLeft, 'Top Left'),
+                (FToastAlignment.topRight, 'Top Right'),
+                (FToastAlignment.bottomLeft, 'Bottom Left'),
+                (FToastAlignment.bottomRight, 'Bottom Right'),
+              ])
+                FButton(
+                  onPress: () => showFToast(
+                    context: context,
+                    alignment: alignment,
+                    title: const Text('Event has been created'),
+                    description: const Text('Friday, May 23, 2025 at 9:00 AM'),
+                    suffixBuilder: (context, entry, _) => IntrinsicHeight(
+                      child: FButton(
+                        style: context.theme.buttonStyles.primary.copyWith(
+                          contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
+                            textStyle: FWidgetStateMap.all(
+                              context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
+                            ),
                           ),
                         ),
+                        onPress: entry.dismiss,
+                        child: const Text('Undo'),
                       ),
-                      onPress: entry.dismiss,
-                      child: const Text('Undo'),
                     ),
                   ),
+                  child: Text('Show $description Toast'),
                 ),
-                child: Text('Show $description Toast'),
-              ),
-          ],
-        ),
+            ],
+          ),
+        )
       );
     }
     ```
@@ -74,18 +74,18 @@ An opinionated toast that temporarily displays a succinct message.
 To generate and customize this style:
 
 ```shell copy
-dart run forui style create sonner 
+dart run forui style create toast
 ```
 
 ## Usage
 
-### `showFSonner(...)`
+### `showFToast(...)`
 
 ```dart copy
-showRawFSonner(
+showRawFToast(
   context: context,
-  style: FSonnerStyle(...),
-  alignment: FSonnerAlignment.topRight,
+  style: FToastStyle(...),
+  alignment: FToastAlignment.topRight,
   duration: const Duration(seconds: 10),
   onDismiss: () {},
   icon: const Icon(FIcons.triangleAlert),
@@ -100,13 +100,13 @@ showRawFSonner(
 );
 ```
 
-### `showRawFSonner(...)`
+### `showRawFToast(...)`
 
 ```dart copy
-showRawFSonner(
+showRawFToast(
   context: context,
-  style: FSonnerStyle(...),
-  alignment: FSonnerAlignment.topRight,
+  style: FToastStyle(...),
+  alignment: FToastAlignment.topRight,
   duration: const Duration(seconds: 10),
   onDismiss: () {},
   builder: (context, entry) => FCard(
@@ -134,19 +134,17 @@ showRawFSonner(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='sonner' variant='no-auto-dismiss' query={{}} height={620}/>
+    <Widget name='toast' variant='no-auto-dismiss' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {11} copy
-    class NoAutoDismissSonnerPage extends StatelessWidget {
-      NoAutoDismissSonnerPage({@queryParam super.theme, super.key});
-
+    ```dart {9} copy
+    class NoAutoDismissToastPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSonner(
+      Widget build(BuildContext context) => FToaster(
         child: Center(
           child: FButton(
             intrinsicWidth: true,
-            onPress: () => showFSonner(
+            onPress: () => showFToast(
               context: context,
               duration: null,
               icon: const Icon(FIcons.triangleAlert),
@@ -165,15 +163,13 @@ showRawFSonner(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='sonner' variant='raw' query={{}} height={620}/>
+    <Widget name='toast' variant='raw' query={{}} height={620}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    class RawSonnerPage extends Sample {
-      RawSonnerPage({@queryParam super.theme, super.key});
-
+    class RawToastPage extends StatelessWidget {
       @override
-      Widget sample(BuildContext context) {
+      Widget build(BuildContext context) {
         final cardStyle = context.theme.cardStyle.copyWith(
           contentStyle: context.theme.cardStyle.contentStyle.copyWith(
             titleTextStyle: context.theme.typography.sm.copyWith(
@@ -183,11 +179,11 @@ showRawFSonner(
           ),
         );
 
-        return FSonner(
+        return FToaster(
           child: Center(
             child: FButton(
               intrinsicWidth: true,
-              onPress: () => showRawFSonner(
+              onPress: () => showRawFToast(
                 context: context,
                 duration: null,
                 builder: (context, toast) => FCard(
@@ -219,23 +215,19 @@ showRawFSonner(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='sonner' variant='behavior' query={{behavior: 'always'}} height={620}/>
+    <Widget name='toast' variant='behavior' query={{behavior: 'always'}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {8} copy
-    class SonnerPage extends StatelessWidget {
-      final FSonnerExpandBehavior behavior;
-
-      SonnerPage({super.key});
-
+    ```dart {4} copy
+    class ToastPage extends StatelessWidget {
       @override
       Widget build(BuildContext context) => FScaffold(
-        sonnerStyle: context.theme.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.always),
+        toasterStyle: context.theme.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.always),
         child: Builder(
           builder: (context) => Center(
             child: FButton(
               intrinsicWidth: true,
-              onPress: () => showFSonner(context: context, title: const Text('Event has been created')),
+              onPress: () => showFToast(context: context, title: const Text('Event has been created')),
               child: const Text('Show Toast'),
             ),
           ),
@@ -250,23 +242,19 @@ showRawFSonner(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='sonner' variant='behavior' query={{behavior: 'disabled'}} height={620}/>
+    <Widget name='toast' variant='behavior' query={{behavior: 'disabled'}}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {8} copy
-    class SonnerPage extends StatelessWidget {
-      final FSonnerExpandBehavior behavior;
-
-      SonnerPage({super.key});
-
+    ```dart {4} copy
+    class ToastPage extends StatelessWidget {
       @override
       Widget build(BuildContext context) => FScaffold(
-        sonnerStyle: context.theme.sonnerStyle.copyWith(expandBehavior: FSonnerExpandBehavior.disabled),
+        toasterStyle: context.theme.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
         child: Builder(
           builder: (context) => Center(
             child: FButton(
               intrinsicWidth: true,
-              onPress: () => showFSonner(context: context, title: const Text('Event has been created')),
+              onPress: () => showFToast(context: context, title: const Text('Event has been created')),
               child: const Text('Show Toast'),
             ),
           ),

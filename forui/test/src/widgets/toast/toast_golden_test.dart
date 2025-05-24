@@ -9,7 +9,7 @@ void main() {
   testWidgets('everything', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: FSonnerToast(
+        child: FToast(
           icon: const Icon(FIcons.triangleAlert),
           title: const Text('Event has been created'),
           description: const Text(
@@ -22,13 +22,13 @@ void main() {
       ),
     );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/toast/everything.png'));
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/everything.png'));
   });
 
   testWidgets('title & description', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: const FSonnerToast(
+        child: const FToast(
           title: Text('Event has been created'),
           description: Text(
             'This is a more detailed description that provides comprehensive context and additional information '
@@ -38,6 +38,6 @@ void main() {
       ),
     );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('sonner/toast/title-description.png'));
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/title-description.png'));
   });
 }

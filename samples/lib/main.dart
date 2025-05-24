@@ -131,10 +131,6 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/slider/range', page: RangeSliderRoute.page),
     AutoRoute(path: '/slider/vertical', page: VerticalSliderRoute.page),
     AutoRoute(path: '/slider/form', page: SliderFormRoute.page),
-    AutoRoute(path: '/sonner/default', page: SonnerRoute.page),
-    AutoRoute(path: '/sonner/no-auto-dismiss', page: NoAutoDismissSonnerRoute.page),
-    AutoRoute(path: '/sonner/raw', page: RawSonnerRoute.page),
-    AutoRoute(path: '/sonner/behavior', page: BehaviorSonnerRoute.page),
     AutoRoute(path: '/switch/default', page: SwitchRoute.page),
     AutoRoute(path: '/switch/form', page: FormSwitchRoute.page),
     AutoRoute(path: '/tabs/default', page: TabsRoute.page),
@@ -159,7 +155,10 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/time-picker/default', page: TimePickerRoute.page),
     AutoRoute(path: '/time-picker/interval', page: IntervalTimePickerRoute.page),
     AutoRoute(path: '/time-picker/animated', page: AnimatedTimePickerRoute.page),
-
+    AutoRoute(path: '/toast/default', page: ToasterRoute.page),
+    AutoRoute(path: '/toast/no-auto-dismiss', page: NoAutoDismissToasterRoute.page),
+    AutoRoute(path: '/toast/raw', page: RawToasterRoute.page),
+    AutoRoute(path: '/toast/behavior', page: BehaviorToasterRoute.page),
     AutoRoute(path: '/tooltip/default', page: TooltipRoute.page),
   ];
 }

@@ -5,39 +5,39 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'sonner_style.style.dart';
+part 'toaster_style.style.dart';
 
-/// A sonner's expansion behavior.
-enum FSonnerExpandBehavior {
+/// A toaster's expansion behavior.
+enum FToasterExpandBehavior {
   /// The toasts are always expanded.
   always,
 
-  /// The toasts are expanded when the sonner is hovered or pressed.
+  /// The toasts are expanded when the toaster is hovered or pressed.
   hoverOrPress,
 
   /// The toasts are never expanded.
   disabled,
 }
 
-/// [FSonner]'s style.
-class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
-  /// The maximum number of entries shown per [FSonnerAlignment]. Defaults to to 3.
+/// [FToaster]'s style.
+class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
+  /// The maximum number of entries shown per [FToastAlignment]. Defaults to to 3.
   @override
   final double max;
 
-  /// The sonner's padding. Defaults to `EdgeInsets.symmetric(horizontal: 20, vertical: 15)`.
+  /// The toaster's padding. Defaults to `EdgeInsets.symmetric(horizontal: 20, vertical: 15)`.
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The sonner's expansion behavior. Defaults to [FSonnerExpandBehavior.hoverOrPress].
+  /// The toaster's expansion behavior. Defaults to [FToasterExpandBehavior.hoverOrPress].
   @override
-  final FSonnerExpandBehavior expandBehavior;
+  final FToasterExpandBehavior expandBehavior;
 
-  /// The duration to wait after entering the sonner before expanding the toasts. Defaults to 200ms.
+  /// The duration to wait after entering the toaster before expanding the toasts. Defaults to 200ms.
   @override
   final Duration expandHoverEnterDuration;
 
-  /// The duration to wait after exiting the sonner before collapsing the toasts. Defaults to 300ms.
+  /// The duration to wait after exiting the toaster before collapsing the toasts. Defaults to 300ms.
   @override
   final Duration expandHoverExitDuration;
 
@@ -71,16 +71,16 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
   @override
   final double collapsedScale;
 
-  /// The sonner toasts' style.
+  /// The contained toasts' style.
   @override
-  final FSonnerToastStyle toastStyle;
+  final FToastStyle toastStyle;
 
-  /// Creates a [FSonnerStyle].
-  const FSonnerStyle({
+  /// Creates a [FToasterStyle].
+  const FToasterStyle({
     required this.toastStyle,
     this.max = 3,
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-    this.expandBehavior = FSonnerExpandBehavior.hoverOrPress,
+    this.expandBehavior = FToasterExpandBehavior.hoverOrPress,
     this.expandHoverEnterDuration = const Duration(milliseconds: 200),
     this.expandHoverExitDuration = const Duration(milliseconds: 300),
     this.expandStartSpacing = 16,
@@ -91,15 +91,15 @@ class FSonnerStyle with Diagnosticable, _$FSonnerStyleFunctions {
     this.collapsedScale = 0.9,
   });
 
-  /// Creates a [FSonnerStyle] that inherits its properties.
-  FSonnerStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+  /// Creates a [FToasterStyle] that inherits its properties.
+  FToasterStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        toastStyle: FSonnerToastStyle.inherit(colors: colors, typography: typography, style: style),
+        toastStyle: FToastStyle.inherit(colors: colors, typography: typography, style: style),
       );
 }
 
-/// The sonner toast's style.
-class FSonnerToastStyle with Diagnosticable, _$FSonnerToastStyleFunctions {
+/// The toast's style.
+class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   /// The toast's entrance & exit animation duration. Defaults to 400ms.
   @override
   final Duration enterExitDuration;
@@ -165,8 +165,8 @@ class FSonnerToastStyle with Diagnosticable, _$FSonnerToastStyleFunctions {
   @override
   final double suffixSpacing;
 
-  /// Creates a [FSonnerToastStyle].
-  FSonnerToastStyle({
+  /// Creates a [FToastStyle].
+  FToastStyle({
     required this.decoration,
     required this.iconStyle,
     required this.titleTextStyle,
@@ -184,8 +184,8 @@ class FSonnerToastStyle with Diagnosticable, _$FSonnerToastStyleFunctions {
     this.suffixSpacing = 12,
   });
 
-  /// Creates a [FSonnerToastStyle] that inherits its properties.
-  FSonnerToastStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+  /// Creates a [FToastStyle] that inherits its properties.
+  FToastStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
           border: Border.all(color: colors.border),

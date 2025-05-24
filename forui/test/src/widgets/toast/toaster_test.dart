@@ -9,12 +9,12 @@ import '../../test_scaffold.dart';
 
 Widget small(
   String text, [
-  FSonnerAlignment alignment = FSonnerAlignment.bottomRight,
+  FToastAlignment alignment = FToastAlignment.bottomRight,
   Duration? duration = const Duration(seconds: 5),
 ]) => Builder(
   builder: (context) => FButton(
     intrinsicWidth: true,
-    onPress: () => showRawFSonner(
+    onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
       duration: duration,
@@ -31,13 +31,13 @@ Widget small(
 );
 
 void main() {
-  for (final behavior in FSonnerExpandBehavior.values) {
+  for (final behavior in FToasterExpandBehavior.values) {
     group('$behavior', () {
       testWidgets('auto-close', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: behavior),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')]),
               ),
@@ -58,12 +58,12 @@ void main() {
       testWidgets('does not auto-close', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: behavior),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
               child: Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [small('1', FSonnerAlignment.bottomRight, null)],
+                  children: [small('1', FToastAlignment.bottomRight, null)],
                 ),
               ),
             ),
@@ -83,8 +83,8 @@ void main() {
       testWidgets('hover stops auto-close', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: behavior),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1')]),
               ),
@@ -112,8 +112,8 @@ void main() {
       testWidgets('press stops auto-close', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
-            child: FSonner(
-              style: FThemes.zinc.light.sonnerStyle.copyWith(expandBehavior: behavior),
+            child: FToaster(
+              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
               child: Center(
                 child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), small('3')]),
               ),

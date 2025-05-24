@@ -3,16 +3,16 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-/// A toast in a sonner.
+/// A toast.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/sonner for working examples.
-/// * [showFSonner] for displaying a toast in a sonner.
-/// * [FSonnerStyle] for customizing a sonner's appearance.
-/// * [FSonnerToastStyle] for customizing a sonner toast's appearance.
-class FSonnerToast extends StatelessWidget {
+/// * https://forui.dev/docs/overlay/toast for working examples.
+/// * [showFToast] for displaying a toast.
+/// * [FToasterStyle] for customizing a toaster's appearance.
+/// * [FToastStyle] for customizing a toast's appearance.
+class FToast extends StatelessWidget {
   /// The toast's style.
-  final FSonnerToastStyle? style;
+  final FToastStyle? style;
 
   /// An optional icon displayed at the start.
   final Widget? icon;
@@ -30,8 +30,8 @@ class FSonnerToast extends StatelessWidget {
   /// toast if provided.
   final VoidCallback? onDismiss;
 
-  /// Creates a [FSonnerToast].
-  const FSonnerToast({
+  /// Creates a [FToast].
+  const FToast({
     required this.title,
     this.style,
     this.icon,
@@ -43,7 +43,7 @@ class FSonnerToast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.sonnerStyle.toastStyle;
+    final style = this.style ?? context.theme.toasterStyle.toastStyle;
     return Stack(
       children: [
         DecoratedBox(

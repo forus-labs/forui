@@ -46,15 +46,15 @@ class FScaffold extends StatelessWidget {
   /// ```
   final FScaffoldStyle? scaffoldStyle;
 
-  /// The sonner style.
+  /// The toaster style.
   ///
   /// ## CLI
   /// To generate and customize this style:
   ///
   /// ```shell
-  /// dart run forui style create sonner
+  /// dart run forui style create toast
   /// ```
-  final FSonnerStyle? sonnerStyle;
+  final FToasterStyle? toasterStyle;
 
   /// The main content area of the scaffold.
   final Widget child;
@@ -84,7 +84,7 @@ class FScaffold extends StatelessWidget {
   const FScaffold({
     required this.child,
     this.scaffoldStyle,
-    this.sonnerStyle,
+    this.toasterStyle,
     this.header,
     this.sidebar,
     this.footer,
@@ -106,8 +106,8 @@ class FScaffold extends StatelessWidget {
     }
 
     return FSheets(
-      child: FSonner(
-        style: sonnerStyle ?? context.theme.sonnerStyle,
+      child: FToaster(
+        style: toasterStyle ?? context.theme.toasterStyle,
         child: Row(
           children: [
             if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
@@ -139,7 +139,7 @@ class FScaffold extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', scaffoldStyle))
-      ..add(DiagnosticsProperty('sonnerStyle', sonnerStyle))
+      ..add(DiagnosticsProperty('toasterStyle', toasterStyle))
       ..add(FlagProperty('childPad', value: childPad, ifTrue: 'contentPad', defaultValue: true))
       ..add(
         FlagProperty(

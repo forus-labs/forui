@@ -9,12 +9,12 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
-import 'package:forui/src/widgets/sonner/animated_toaster_parent_data.dart';
+import 'package:forui/src/widgets/toast/animated_toaster_parent_data.dart';
 
 @internal
 class AnimatedToaster extends MultiChildRenderObjectWidget {
-  /// The sonner's style.
-  final FSonnerStyle style;
+  /// The toaster's style.
+  final FToasterStyle style;
 
   /// A unit vector indicating how a toasts should be aligned to the front-most toast when expanded
   ///
@@ -70,14 +70,14 @@ class RenderAnimatedToaster extends RenderBox
     with
         ContainerRenderObjectMixin<RenderBox, AnimatedToasterParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, AnimatedToasterParentData> {
-  FSonnerStyle _style;
+  FToasterStyle _style;
   Offset _expandedAlignTransform;
   Offset _collapsedAlignTransform;
   double _expand;
 
   /// Creates a [RenderAnimatedToaster].
   RenderAnimatedToaster({
-    required FSonnerStyle style,
+    required FToasterStyle style,
     required Offset expandedAlignTransform,
     required Offset collapsedAlignTransform,
     required double expand,
@@ -274,9 +274,9 @@ class RenderAnimatedToaster extends RenderBox
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
       defaultHitTestChildren(result, position: position);
 
-  FSonnerStyle get style => _style;
+  FToasterStyle get style => _style;
 
-  set style(FSonnerStyle value) {
+  set style(FToasterStyle value) {
     if (_style == value) {
       return;
     }

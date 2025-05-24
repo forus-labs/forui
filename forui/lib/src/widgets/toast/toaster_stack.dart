@@ -4,21 +4,21 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/sonner/animated_toast.dart';
-import 'package:forui/src/widgets/sonner/animated_toaster.dart';
-import 'package:forui/src/widgets/sonner/sonner.dart';
+import 'package:forui/src/widgets/toast/animated_toast.dart';
+import 'package:forui/src/widgets/toast/animated_toaster.dart';
+import 'package:forui/src/widgets/toast/toaster.dart';
 
-/// A toaster is responsible for managing a stack of toasts, including the expanding animations.
+/// A toaster stack is responsible for managing a stack of toasts, including the expanding animations.
 ///
 /// The actual positioning of toasts is delegated to [AnimatedToaster].
 @internal
-class Toaster extends StatefulWidget {
-  final FSonnerStyle style;
+class ToasterStack extends StatefulWidget {
+  final FToasterStyle style;
   final Offset expandedAlignTransform;
   final Offset collapsedAlignTransform;
-  final List<SonnerEntry> entries;
+  final List<ToasterEntry> entries;
 
-  const Toaster({
+  const ToasterStack({
     required this.style,
     required this.expandedAlignTransform,
     required this.collapsedAlignTransform,
@@ -27,7 +27,7 @@ class Toaster extends StatefulWidget {
   });
 
   @override
-  State<Toaster> createState() => _ToasterState();
+  State<ToasterStack> createState() => _ToasterStackState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -40,7 +40,7 @@ class Toaster extends StatefulWidget {
   }
 }
 
-class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
+class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _expand;
   bool _autoDismiss = true;
@@ -54,13 +54,13 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
       ..addListener(() => setState(() {}));
     _expand = _controller.drive(CurveTween(curve: widget.style.expandCurve));
 
-    if (widget.style.expandBehavior == FSonnerExpandBehavior.always) {
+    if (widget.style.expandBehavior == FToasterExpandBehavior.always) {
       _controller.value = 1;
     }
   }
 
   @override
-  void didUpdateWidget(Toaster old) {
+  void didUpdateWidget(ToasterStack old) {
     super.didUpdateWidget(old);
     if (old.style != widget.style) {
       _controller
@@ -70,9 +70,9 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
     }
 
     if (widget.style.expandBehavior != old.style.expandBehavior) {
-      if (widget.style.expandBehavior == FSonnerExpandBehavior.always) {
+      if (widget.style.expandBehavior == FToasterExpandBehavior.always) {
         _controller.value = 1;
-      } else if (widget.style.expandBehavior == FSonnerExpandBehavior.disabled) {
+      } else if (widget.style.expandBehavior == FToasterExpandBehavior.disabled) {
         _controller.value = 0;
       }
     }
@@ -92,7 +92,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
       onTap: () {
         if (!_hovered) {
           setState(() => _autoDismiss = !_autoDismiss);
-          if (widget.style.expandBehavior == FSonnerExpandBehavior.hoverOrPress) {
+          if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
             _controller.isForwardOrCompleted ? _controller.reverse() : _controller.forward();
           }
         }
@@ -130,7 +130,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
 
     if (fencingToken == _monotonic && mounted) {
       setState(() => _autoDismiss = false);
-      if (widget.style.expandBehavior == FSonnerExpandBehavior.hoverOrPress) {
+      if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
         await _controller.forward();
       }
     }
@@ -143,7 +143,7 @@ class _ToasterState extends State<Toaster> with SingleTickerProviderStateMixin {
 
     if (fencingToken == _monotonic && mounted) {
       setState(() => _autoDismiss = true);
-      if (widget.style.expandBehavior == FSonnerExpandBehavior.hoverOrPress) {
+      if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
         await _controller.reverse();
       }
     }

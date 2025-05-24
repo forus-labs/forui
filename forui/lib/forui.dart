@@ -37,7 +37,7 @@ export 'widgets/select_tile_group.dart';
 export 'widgets/sheet.dart';
 export 'widgets/sidebar.dart';
 export 'widgets/slider.dart';
-export 'widgets/sonner.dart';
+export 'widgets/toast.dart';
 export 'widgets/switch.dart';
 export 'widgets/tabs.dart';
 export 'widgets/text_field.dart';
