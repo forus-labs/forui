@@ -37,7 +37,7 @@
 ## Why Choose Forui?
 
 * 🎨 Over 40+ beautifully crafted widgets.
-* ⚡ Bundled [CLI](https://forui.dev/docs/themes#cli) to generate themes & styling boilerplate.
+* ⚡ Bundled [CLI](https://forui.dev/docs/themes#customize-themes) to generate themes & styling boilerplate.
 * ✅ [Well-tested](https://app.codecov.io/gh/forus-labs/forui).
 * 🌍 I10n support.
 * 🪝 First-class [Flutter Hooks](https://pub.dev/packages/flutter_hooks) integration via [`forui_hooks`](https://pub.dev/packages/forui_hooks).
