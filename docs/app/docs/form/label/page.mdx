@@ -48,12 +48,13 @@ dart run forui style create label
 
 ```dart copy
 FLabel(
-    axis: Axis.horizontal,
-    label: const Text('Accept terms and conditions'),
-    description: const Text('You agree to our terms and conditions.'),
-    error: const Text('Please accept the terms and conditions.'),
-    states: { WidgetState.error },
-    child: const Placeholder(),
+  style: FLabelStyle(...),
+  axis: Axis.horizontal,
+  label: const Text('Accept terms and conditions'),
+  description: const Text('You agree to our terms and conditions.'),
+  error: const Text('Please accept the terms and conditions.'),
+  states: { WidgetState.error },
+  child: const Placeholder(),
 );
 ```
 

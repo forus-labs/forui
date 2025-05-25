@@ -82,6 +82,7 @@ dart run forui style create select-menu-tile
 ```dart copy
 FSelectMenuTile<Value>(
   selectController: FSelectMenuTileController(), // or FSelectMenuTileController.radio()
+  style: FSelectMenuTileStyle(...),
   menuAnchor: Alignment.topRight,
   tileAnchor: Alignment.bottomRight,
   spacing: const FPortalSpacing(4),
@@ -119,6 +120,7 @@ FSelectMenuTile<Value>(
 ```dart copy
 FSelectMenuTile<Value>.builder(
   selectController: FSelectMenuTileController(), // or FSelectMenuTileController.radio()
+  style: FSelectMenuTileStyle(...),
   menuAnchor: Alignment.topRight,
   tileAnchor: Alignment.bottomRight,
   spacing: const FPortalSpacing(4),

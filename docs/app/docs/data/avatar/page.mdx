@@ -62,6 +62,7 @@ Display a user's profile picture with a fallback to their initials.
 
 ```dart copy
 FAvatar(
+  style: FAvatarStyle(...),
   image: const NetworkImage('https://example.com/profile.jpg'),
   fallback: const Text('JD'),
 );
@@ -73,6 +74,7 @@ Customize the fallback content that appears when the image fails to load.
 
 ```dart copy
 FAvatar(
+  style: FAvatarStyle(...),
   image: const NetworkImage('https://example.com/profile.jpg'),
   fallback: Icon(FIcons.user, color: context.theme.colors.mutedForeground),
 );
@@ -85,6 +87,7 @@ Use the raw constructor for complete customization of the avatar content.
 ```dart copy
 // Raw constructor with icon
 FAvatar.raw(
+  style: FAvatarStyle(...),
   child: Icon(FIcons.baby, color: theme.colors.mutedForeground),
 );
 

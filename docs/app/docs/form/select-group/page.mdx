@@ -63,6 +63,7 @@ dart run forui style create select-group
 ```dart copy
 FSelectGroup<Value>(
   controller: FSelectGroupController(), // or FSelectGroupController.radio()
+  style: FFSelectGroup(...),
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   onChange: (all) => print(all),

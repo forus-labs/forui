@@ -83,9 +83,11 @@ dart run forui style create headers
 
 ```dart copy
 FHeader(
+  style: FHeaderStyle(...),
   title: const Text('Title'),
   suffixes: [
     FHeaderAction(
+      style: FHeaderActionStyle(...),
       icon: Icon(FIcons.alarmClock),
       onPress: () {},
       onHoverChange: (hovered) {},
@@ -103,6 +105,7 @@ FHeader(
 
 ```dart copy
 FHeader.nested(
+  style: FHeaderStyle(...),
   title: const Text('Title'),
   titleAlignment: Alignment.center,
   prefixes: [
@@ -114,6 +117,7 @@ FHeader.nested(
   ],
   suffixes: [
     FHeaderAction(
+      style: FHeaderActionStyle(...),
       icon: Icon(FIcons.info),
       onPress: () {},
     ),

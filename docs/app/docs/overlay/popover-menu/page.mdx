@@ -109,6 +109,7 @@ dart run forui style create popover-menu
 FPopoverMenu(
   popoverController: FPopoverController(vsync: this),
   scrollController: ScrollController(),
+  style: FPopoverMenuStyle(...),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
@@ -135,6 +136,7 @@ FPopoverMenu(
 FPopoverMenu.automatic(
   popoverController: FPopoverController(vsync: this),
   scrollController: ScrollController(),
+  style: FPopoverMenuStyle(...),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
