@@ -59,6 +59,7 @@ class FLineCalendar extends StatelessWidget {
   /// The callback that is called when the date changes.
   final ValueChanged<DateTime?>? onChange;
 
+  final bool _toggleable;
   final LocalDate _start;
   final LocalDate? _end;
   final LocalDate? _initialScroll;
@@ -66,6 +67,9 @@ class FLineCalendar extends StatelessWidget {
   final LocalDate _today;
 
   /// Creates a [FLineCalendar].
+  ///
+  /// [toggleable] represents whether the calendar is togglable, meaning that it can be selected and unselected.
+  /// Defaults to false.
   ///
   /// [start] represents the start date, inclusive. It is truncated to the nearest date. Defaults to the
   /// [DateTime.utc(1900)].
@@ -82,6 +86,7 @@ class FLineCalendar extends StatelessWidget {
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * [controller] and [initialSelection] are both non-null.
+  /// * [controller] and [toggleable] are both non-null.
   /// * [end] <= [start].
   /// * [initialScroll] < [start] or [end] <= [initialScroll].
   /// * [initialSelection] < [start] or [end] <= [initialSelection].
@@ -95,17 +100,20 @@ class FLineCalendar extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.builder = _builder,
     this.onChange,
+    bool? toggleable,
     DateTime? start,
     DateTime? end,
     DateTime? initialScroll,
     DateTime? initialSelection,
     DateTime? today,
     super.key,
-  }) : _start = (start ?? DateTime.utc(1900)).toLocalDate(),
+  }) : _toggleable = toggleable ?? false,
+       _start = (start ?? DateTime.utc(1900)).toLocalDate(),
        _end = end?.toLocalDate(),
        _initialScroll = initialScroll?.toLocalDate(),
        _initialSelection = initialSelection?.toLocalDate(),
        _today = (today ?? DateTime.now()).toLocalDate(),
+       assert(controller == null || toggleable == null, 'controller and toggleable cannot be both non-null'),
        assert(
          start == null || end == null || start.toLocalDate() < end.toLocalDate(),
          'end date must be greater than start date',
@@ -146,6 +154,7 @@ class FLineCalendar extends StatelessWidget {
       textStyle: DefaultTextStyle.of(context).style,
       onChange: onChange,
       builder: builder,
+      toggleable: _toggleable,
       start: _start,
       end: _end,
       initialScroll: _initialScroll,

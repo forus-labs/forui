@@ -18,27 +18,27 @@ void main() {
     focus.dispose();
   });
 
-  group('FLineCalendar', () {
-    testWidgets('blue screen', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.blue(
-          child: Focus(
-            focusNode: focus,
-            child: FLineCalendar(
-              style: TestScaffold.blueScreen.lineCalendarStyle,
-              controller: autoDispose(FCalendarController.date()),
-            ),
+  testWidgets('blue screen', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.blue(
+        child: Focus(
+          focusNode: focus,
+          child: FLineCalendar(
+            style: TestScaffold.blueScreen.lineCalendarStyle,
+            controller: autoDispose(FCalendarController.date()),
           ),
         ),
-      );
+      ),
+    );
 
-      final nodes = focus.traversalDescendants.toList();
-      nodes[nodes.length ~/ 2 - 1].requestFocus();
-      await tester.pumpAndSettle();
+    final nodes = focus.traversalDescendants.toList();
+    nodes[nodes.length ~/ 2 - 1].requestFocus();
+    await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), isBlueScreen);
-    });
+    await expectLater(find.byType(TestScaffold), isBlueScreen);
+  });
 
+  group('states', () {
     for (final theme in TestScaffold.themes) {
       testWidgets('${theme.name} - default', (tester) async {
         await tester.pumpWidget(
@@ -163,77 +163,109 @@ void main() {
           matchesGoldenFile('line-calendar/${theme.name}/unselected-hovered.png'),
         );
       });
-    }
 
-    testWidgets('RTL locale', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          textDirection: TextDirection.rtl,
-          child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/rtl.png'));
-    });
-
-    testWidgets('align to start', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FLineCalendar(
-            controller: autoDispose(FCalendarController.date()),
-            initialScrollAlignment: AlignmentDirectional.bottomStart,
-            today: DateTime(2024, 11, 28),
+      testWidgets('${theme.name} - untogglable', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FLineCalendar(initialSelection: DateTime(2024, 11, 29), today: DateTime(2024, 11, 28)),
           ),
-        ),
-      );
+        );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/align-start.png'));
-    });
+        await tester.tap(find.text('29').last);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
 
-    testWidgets('align to end', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FLineCalendar(
-            controller: autoDispose(FCalendarController.date()),
-            initialScrollAlignment: AlignmentDirectional.bottomEnd,
-            today: DateTime(2024, 11, 28),
-          ),
-        ),
-      );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/untoggleable.png'));
+      });
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/align-end.png'));
-    });
-
-    testWidgets('custom item builder', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FLineCalendar(
-            controller: autoDispose(FCalendarController.date()),
-            builder: (context, state, child) => Stack(
-              children: [
-                child!,
-                Positioned(top: 5, left: 5, child: Container(width: 3, height: 3, color: const Color(0xFF00FF00))),
-              ],
+      testWidgets('${theme.name} - toggleable', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FLineCalendar(
+              toggleable: true,
+              initialSelection: DateTime(2024, 11, 29),
+              today: DateTime(2024, 11, 28),
             ),
-            today: DateTime(2024, 11, 28),
           ),
+        );
+
+        await tester.tap(find.text('29').last);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/${theme.name}/toggleable.png'));
+      });
+    }
+  });
+
+  testWidgets('RTL locale', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        textDirection: TextDirection.rtl,
+        child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/rtl.png'));
+  });
+
+  testWidgets('align to start', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FLineCalendar(
+          controller: autoDispose(FCalendarController.date()),
+          initialScrollAlignment: AlignmentDirectional.bottomStart,
+          today: DateTime(2024, 11, 28),
         ),
-      );
+      ),
+    );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/builder.png'));
-    });
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/align-start.png'));
+  });
 
-    testWidgets('retains same scrolled date when controller changes', (tester) async {
-      final first = autoDispose(FCalendarController.date(initialSelection: DateTime(2025, 4, 23)));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FLineCalendar(controller: first, initialScroll: DateTime(2025, 4, 25), today: DateTime(2025, 5, 21)),
+  testWidgets('align to end', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FLineCalendar(
+          controller: autoDispose(FCalendarController.date()),
+          initialScrollAlignment: AlignmentDirectional.bottomEnd,
+          today: DateTime(2024, 11, 28),
         ),
-      );
+      ),
+    );
 
-      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar()));
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/align-end.png'));
+  });
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/retains-scroll-offset.png'));
-    });
+  testWidgets('custom item builder', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FLineCalendar(
+          controller: autoDispose(FCalendarController.date()),
+          builder: (context, state, child) => Stack(
+            children: [
+              child!,
+              Positioned(top: 5, left: 5, child: Container(width: 3, height: 3, color: const Color(0xFF00FF00))),
+            ],
+          ),
+          today: DateTime(2024, 11, 28),
+        ),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/builder.png'));
+  });
+
+  testWidgets('retains same scrolled date when controller changes', (tester) async {
+    final first = autoDispose(FCalendarController.date(initialSelection: DateTime(2025, 4, 23)));
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FLineCalendar(controller: first, initialScroll: DateTime(2025, 4, 25), today: DateTime(2025, 5, 21)),
+      ),
+    );
+
+    await tester.pumpWidget(TestScaffold.app(child: FLineCalendar()));
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/retains-scroll-offset.png'));
   });
 }

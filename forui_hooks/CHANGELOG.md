@@ -1,4 +1,8 @@
-## 0.12.0 (Next)
+## 0.12.0
+
+Bumps minimum Flutter SDK version to 3.32.0.
+
+* Add `toggleable` parameter to `useFDateCalendarController`.
 
 
 ## 0.11.0

@@ -49,6 +49,7 @@ FLineCalendar(
   keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
   builder: (context, data, child) => child!,
   onChange: (date) => print('Selected date: $date'),
+  toggleable: true,
   start: DateTime(1900),
   end: DateTime(2050),
   initialScroll: DateTime.now(),

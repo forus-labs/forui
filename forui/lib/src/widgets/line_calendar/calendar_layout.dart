@@ -21,6 +21,7 @@ class CalendarLayout extends StatefulWidget {
   final TextStyle textStyle;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
   final ValueChanged<DateTime?>? onChange;
+  final bool toggleable;
   final LocalDate start;
   final LocalDate? end;
   final LocalDate? initialScroll;
@@ -39,6 +40,7 @@ class CalendarLayout extends StatefulWidget {
     required this.textStyle,
     required this.builder,
     required this.onChange,
+    required this.toggleable,
     required this.start,
     required this.end,
     required this.initialScroll,
@@ -65,6 +67,7 @@ class CalendarLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('onChange', onChange))
+      ..add(FlagProperty('toggleable', value: toggleable, ifTrue: 'toggleable'))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('initialScroll', initialScroll))
@@ -84,7 +87,9 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     super.initState();
     _width = _estimateWidth();
 
-    _controller = widget.controller ?? FCalendarController.date(initialSelection: widget.initialSelection?.toNative());
+    _controller =
+        widget.controller ??
+        FCalendarController.date(initialSelection: widget.initialSelection?.toNative(), toggleable: widget.toggleable);
     _controller.addValueListener(_onChange);
 
     final start = ((widget.initialScroll ?? widget.today).difference(widget.start).inDays) * _width;
@@ -111,7 +116,9 @@ class _CalendarLayoutState extends State<CalendarLayout> {
         _controller.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FCalendarController.date(initialSelection: _controller.value);
+      _controller =
+          widget.controller ??
+          FCalendarController.date(initialSelection: _controller.value, toggleable: widget.toggleable);
       _controller.addValueListener(_onChange);
     }
   }

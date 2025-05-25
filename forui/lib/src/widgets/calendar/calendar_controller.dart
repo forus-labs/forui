@@ -21,6 +21,8 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   ///
   /// [selectable] will always return true if not given.
   ///
+  /// [toggleable] determines whether the controller should unselect a date if it is already selected. Defaults to true.
+  ///
   /// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
   /// dates in UTC timezone. Defaults to true.
   ///
@@ -37,10 +39,11 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
   static FCalendarController<DateTime?> date({
     DateTime? initialSelection,
     Predicate<DateTime>? selectable,
+    bool toggleable = true,
     bool truncateAndStripTimezone = true,
   }) => truncateAndStripTimezone
-      ? _AutoDateController(initialSelection: initialSelection, selectable: selectable)
-      : _DateController(initialSelection: initialSelection, selectable: selectable);
+      ? _AutoDateController(initialSelection: initialSelection, selectable: selectable, toggleable: toggleable)
+      : _DateController(initialSelection: initialSelection, selectable: selectable, toggleable: toggleable);
 
   /// Creates a [FCalendarController] that allows multiple dates to be selected, with the given initial selected dates.
   ///
@@ -118,10 +121,14 @@ abstract class FCalendarController<T> extends FValueNotifier<T> {
 // The single date controllers.
 class _AutoDateController extends FCalendarController<DateTime?> {
   final Predicate<DateTime> _selectable;
+  final bool toggleable;
 
-  _AutoDateController({DateTime? initialSelection, Predicate<DateTime>? selectable})
-    : _selectable = selectable ?? _true,
-      super(initialSelection = initialSelection == null ? null : _truncateAndStripTimezone(initialSelection));
+  _AutoDateController({
+    required DateTime? initialSelection,
+    required Predicate<DateTime>? selectable,
+    required this.toggleable,
+  }) : _selectable = selectable ?? _true,
+       super(initialSelection = initialSelection == null ? null : _truncateAndStripTimezone(initialSelection));
 
   @override
   bool selectable(DateTime date) => _selectable(_truncateAndStripTimezone(date));
@@ -132,20 +139,30 @@ class _AutoDateController extends FCalendarController<DateTime?> {
   @override
   void select(DateTime date) {
     date = _truncateAndStripTimezone(date);
-    super.value = value == date ? null : date;
+    super.value = (toggleable && value == date) ? null : date;
   }
 
   @override
-  set value(DateTime? value) => super.value = value == null ? null : _truncateAndStripTimezone(value);
+  set value(DateTime? value) {
+    if (toggleable && super.value == value) {
+      super.value = null;
+    } else {
+      super.value = value == null ? null : _truncateAndStripTimezone(value);
+    }
+  }
 }
 
 class _DateController extends FCalendarController<DateTime?> {
   final Predicate<DateTime> _selectable;
+  final bool toggleable;
 
-  _DateController({DateTime? initialSelection, Predicate<DateTime>? selectable})
-    : assert(initialSelection?.isUtc ?? true, 'value must be in UTC timezone'),
-      _selectable = selectable ?? _true,
-      super(initialSelection);
+  _DateController({
+    required DateTime? initialSelection,
+    required Predicate<DateTime>? selectable,
+    required this.toggleable,
+  }) : assert(initialSelection?.isUtc ?? true, 'value must be in UTC timezone'),
+       _selectable = selectable ?? _true,
+       super(initialSelection);
 
   @override
   bool selectable(DateTime date) => _selectable(date);
@@ -154,7 +171,10 @@ class _DateController extends FCalendarController<DateTime?> {
   bool selected(DateTime date) => value == date;
 
   @override
-  void select(DateTime date) => value = value == date ? null : date;
+  void select(DateTime date) => value = (toggleable && value == date) ? null : date;
+
+  @override
+  set value(DateTime? value) => super.value = (toggleable && super.value == value) ? null : value;
 }
 
 // The multiple dates controllers.
