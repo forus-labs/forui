@@ -66,6 +66,9 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
 
   /// Returns a new [FWidgetStateMap] with the same constraints, but with different values produced by [map].
   ///
+  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)
+  /// and directly modify its `FWidgetStateMap` fields instead.
+  ///
   /// ## Example
   /// ```dart
   /// final property = FWidgetStateMap<double>({
@@ -87,6 +90,9 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   /// Unlike [replaceAllWhere], which modifies all matching values, this method only modifies the first matching value.
   ///
   /// To replace values associated with [WidgetState.any], pass in an empty set.
+  ///
+  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)
+  /// and directly modify its `FWidgetStateMap` fields instead.
   ///
   /// ## Example
   /// ```dart
@@ -122,6 +128,9 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   ///
   /// To replace values associated with [WidgetState.any], pass in an empty set.
   ///
+  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)
+  /// and directly modify its `FWidgetStateMap` fields instead.
+  ///
   /// ## Example
   /// ```dart
   /// final property = FWidgetStateMap<Color>({
@@ -152,6 +161,9 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
 
   /// Creates a new [FWidgetStateMap] where all values associated with constraints satisfied by [states] are
   /// replaced with the result of calling [replace] on the original value.
+  ///
+  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)
+  /// and directly modify its `FWidgetStateMap` fields instead.
   ///
   /// ## Example
   /// ```dart

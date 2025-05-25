@@ -79,7 +79,12 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
   return Method(
     (m) => m
       ..returns = refer(element.name)
-      ..docs.addAll(['/// Returns a copy of this [${element.name}] with the given properties replaced.'])
+      ..docs.addAll([
+        '/// Returns a copy of this [${element.name}] with the given properties replaced.',
+        '/// ',
+        '/// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)',
+        '/// and directly modify the style.'
+      ])
       ..annotations.add(refer('useResult'))
       ..name = 'copyWith'
       ..optionalParameters.addAll([
@@ -180,7 +185,7 @@ Method generateEquals(ClassElement element, List<FieldElement> fields) {
         ),
       )
       ..lambda = true
-      ..body = Code('identical(this, other) || (other is ${element.name} $comparisons)'),
+      ..body = Code('identical(this, other) || (other is ${element.name} $comparisons)\n'),
   );
 }
 
@@ -203,6 +208,6 @@ Method generateHashCode(ClassElement element, List<FieldElement> fields) {
       ..annotations.add(refer('override'))
       ..name = 'hashCode'
       ..lambda = true
-      ..body = Code(hash),
+      ..body = Code('$hash\n'),
   );
 }
