@@ -164,10 +164,10 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
 
   /// Creates a [FSelectItem].
   FSelectItem(String text, T value, {bool? enabled, Key? key})
-    : this.raw(key: key, value: value, enabled: enabled, child: Text(text));
+    : this.from(key: key, value: value, enabled: enabled, child: Text(text));
 
-  /// Creates a [FSelectItem] with a [child].
-  FSelectItem.raw({
+  /// Creates a [FSelectItem] with a custom child widget.
+  FSelectItem.from({
     required this.value,
     required this.child,
     this.style,

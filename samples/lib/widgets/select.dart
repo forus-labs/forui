@@ -131,8 +131,7 @@ class SyncSelectPage extends Sample {
     child: FSelect<String>.search(
       hint: 'Select a fruit',
       format: (s) => s,
-      filter: (query) =>
-          query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
+      filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
       contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
     ),
   );

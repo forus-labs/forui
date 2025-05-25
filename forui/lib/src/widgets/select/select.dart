@@ -374,6 +374,118 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Key? key,
   }) = _SearchSelect<T>;
 
+  /// Creates a searchable select with dynamic content based on the given [items] and search input.
+  ///
+  /// The [searchFieldProperties] can be used to customize the search field.
+  ///
+  /// The [filter] callback produces a list of items based on the search query. Defaults to returning items that start
+  /// with the query string.
+  /// The [searchLoadingBuilder] is used to show a loading indicator while the search results is processed
+  /// asynchronously by [filter].
+  /// The [searchErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
+  ///
+  /// ## Contract
+  /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
+  /// undefined behavior.
+  factory FSelect.searchFromMap(
+    Map<String, T> items, {
+    FSelectSearchFilter<T>? filter,
+    FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
+    ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder = FSelect.defaultSearchLoadingBuilder,
+    Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder,
+    FSelectController<T>? controller,
+    FSelectStyle? style,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder = defaultIconBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled = true,
+    ValueChanged<T?>? onChange,
+    FormFieldSetter<T>? onSaved,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
+    String? forceErrorText,
+    FormFieldValidator<T> validator = _defaultValidator,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    String? hint,
+    TextAlign textAlign = TextAlign.start,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands = false,
+    MouseCursor mouseCursor = SystemMouseCursors.click,
+    bool canRequestFocus = true,
+    bool clearable = false,
+    AlignmentGeometry anchor = Alignment.topLeft,
+    AlignmentGeometry fieldAnchor = Alignment.bottomLeft,
+    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing spacing = const FPortalSpacing(4),
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset offset = Offset.zero,
+    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    bool autoHide = true,
+    ValueWidgetBuilder<FSelectStyle> emptyBuilder = defaultEmptyBuilder,
+    ScrollController? contentScrollController,
+    bool contentScrollHandles = false,
+    ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
+    T? initialValue,
+    Key? key,
+  }) {
+    final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
+    return FSelect<T>.search(
+      format: (value) => inverse[value]!,
+      filter:
+          filter ??
+          (query) => items.entries
+              .where((entry) => entry.key.toLowerCase().startsWith(query.toLowerCase()))
+              .map((entry) => entry.value)
+              .toList(),
+      contentBuilder: (context, data) => [for (final value in data.values) FSelectItem<T>(inverse[value]!, value)],
+      searchFieldProperties: searchFieldProperties,
+      searchLoadingBuilder: searchLoadingBuilder,
+      searchErrorBuilder: searchErrorBuilder,
+      controller: controller,
+      style: style,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      builder: builder,
+      prefixBuilder: prefixBuilder,
+      suffixBuilder: suffixBuilder,
+      label: label,
+      description: description,
+      enabled: enabled,
+      onChange: onChange,
+      onSaved: onSaved,
+      autovalidateMode: autovalidateMode,
+      forceErrorText: forceErrorText,
+      validator: validator,
+      errorBuilder: errorBuilder,
+      hint: hint,
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      expands: expands,
+      mouseCursor: mouseCursor,
+      canRequestFocus: canRequestFocus,
+      clearable: clearable,
+      anchor: anchor,
+      fieldAnchor: fieldAnchor,
+      popoverConstraints: popoverConstraints,
+      spacing: spacing,
+      shift: shift,
+      offset: offset,
+      hideOnTapOutside: hideOnTapOutside,
+      autoHide: autoHide,
+      emptyBuilder: emptyBuilder,
+      contentScrollController: contentScrollController,
+      contentScrollHandles: contentScrollHandles,
+      contentPhysics: contentPhysics,
+      initialValue: initialValue,
+      key: key,
+    );
+  }
+
   const FSelect._({
     required this.format,
     this.controller,

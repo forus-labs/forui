@@ -5,6 +5,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
+const letters = {
+  'A': 'A',
+  'B': 'B',
+  'C': 'C',
+  'D': 'D',
+  'E': 'E',
+  'F': 'F',
+  'G': 'G',
+  'H': 'H',
+  'I': 'I',
+  'J': 'J',
+  'K': 'K',
+  'L': 'L',
+  'M': 'M',
+  'N': 'N',
+  'O': 'O',
+};
+
 void main() {
   const key = ValueKey('select');
 
@@ -125,6 +143,25 @@ void main() {
 
       await expectBlueScreen(find.byType(TestScaffold));
     });
+
+    testWidgets('searchFromMap', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelect<int>.searchFromMap(
+            {for (int i = 0; i < 10; i++) '$i': i},
+            key: key,
+            style: TestScaffold.blueScreen.selectStyle,
+            contentScrollHandles: true,
+            filter: (_) => [],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
   });
 
   for (final theme in TestScaffold.themes) {
@@ -141,6 +178,29 @@ void main() {
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/from-map.png'));
+    });
+
+    testWidgets('searchFromMap', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect<String>.searchFromMap(
+            letters,
+            key: key,
+            contentScrollHandles: true,
+            filter: (query) => letters.keys.where((l) => l.startsWith(query)),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(FTextField).last, 'C');
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search-from-map.png'));
     });
 
     testWidgets('auto-hide disabled', (tester) async {

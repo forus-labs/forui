@@ -89,7 +89,7 @@ FSelect<String>(
     FSelectSection(
       label: const Text('North American Countries'),
       children: [
-        FSelectItem.raw(
+        FSelectItem.from(
           child: const Text('United States'),
           value: 'us',
         ),
@@ -107,20 +107,20 @@ FSelect<String>(
 );
 ```
 
-### `FSelect.fromMap(...)`
+### `FSelect.searchFromMap(...)`
 
 ```dart copy
-FSelect<Locale>.fromMap(
+FSelect<Locale>.searchFromMap(
   {
     'United States': Locale('en', 'US'),
     'Canada': Locale('en', 'CA'),
     'jp': Locale('ja', 'JP'),
   },
-  initialValue: 'ca',
-  controller: FSelectController<Locale>(vsync: this),
+  controller: FSelectController<String>(vsync: this),
   label: const Text('Country'),
   description: const Text('Select your country of residence'),
   hint: 'Choose a country',
+  format: (value) => value.toUpperCase(),
   onChange: (value) => print('Selected country: $value'),
   onSaved: (value) => print('Saved country: $value'),
   style: FSelectStyle.inherit(...),
@@ -135,6 +135,42 @@ FSelect<Locale>.fromMap(
 ```
 
 ### `FSelect.search(...)`
+
+```dart copy
+FSelect<User>.search(
+  controller: FSelectController<User>(),
+  label: const Text('User'),
+  description: const Text('Search and select a user'),
+  builder: (context, styles, child) => child!,
+  format: (user) => '${user.firstName} ${user.lastName}',
+  hint: 'Search users...',
+  style: FSelectStyle.inherit(...),
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
+  clearable: true,
+  autoHide: false,
+  onChange: (value) => print('Selected country: $value'),
+  initialValue: 'value',
+  contentScrollHandles: false,
+  contentPhysics: const BouncingScrollPhysics(),
+  emptyBuilder: (context, style, _) => Text('No results'),
+  filter: (query) async {
+    // Fetch users based on search query
+    return fetchUsers(query);
+  },
+  contentBuilder: (context, users) => [
+    for (final user in users)
+      FSelectItem(value: user, child: Text('${user.firstName} ${user.lastName}')),
+  ],
+  searchFieldProperties: FSelectSearchFieldProperties(
+    autofocus: true,
+    hint: 'Type to search...',
+  ),
+  searchLoadingBuilder: (context, style, _) => Text('Loading...'),
+  searchErrorBuilder: (context, error, stackTrace) => Text('Error...'),
+);
+```
+
+### `FSelect.searchFromMap(...)`
 
 ```dart copy
 FSelect<User>.search(

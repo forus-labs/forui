@@ -24,6 +24,7 @@ A widget that collapses and expands its child.
 
 ### `FSelect`
 
+* Add `FSelect.searchFromMap(...)`.
 * Add `FSelectItem.raw(...)`.
 * Add `FSelectSection.fromMap(...)`.
 
