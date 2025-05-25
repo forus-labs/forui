@@ -44,7 +44,7 @@ class _VisualizerState extends State<Visualizer> {
           label: const Text('Shift'),
           onChange: (closure) => setState(() => _shift = closure ?? _shift),
           format: (closure) => _shifts[closure]!,
-          children: [for (final MapEntry(:key, :value) in _shifts.entries) FSelectItem(value: key, child: Text(value))],
+          children: [for (final MapEntry(:key, :value) in _shifts.entries) FSelectItem(value, key)],
         ),
         const SizedBox(height: 16),
         _Settings(
@@ -220,6 +220,7 @@ class _Settings extends StatelessWidget {
         FSelect<Alignment>(
           onChange: onAnchorChange,
           label: const Text('Anchor:'),
+          format: (s) => s.toString(),
           children: [
             for (final anchor in [
               Alignment.topLeft,
@@ -232,7 +233,7 @@ class _Settings extends StatelessWidget {
               Alignment.bottomCenter,
               Alignment.bottomRight,
             ])
-              FSelectItem(value: anchor, child: Text(anchor.toString().replaceAll('Alignment.', ''))),
+              FSelectItem(anchor.toString().replaceAll('Alignment.', ''), anchor),
           ],
         ),
       ],

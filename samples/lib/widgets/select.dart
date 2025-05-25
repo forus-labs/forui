@@ -30,7 +30,11 @@ class SelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(hint: 'Select a fruit', children: [for (final fruit in fruits) FSelectItem.text(fruit)]),
+    child: FSelect<String>(
+      hint: 'Select a fruit',
+      format: (s) => s,
+      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+    ),
   );
 }
 
@@ -43,58 +47,74 @@ class SectionSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>(
       hint: 'Select a timezone',
+      format: (s) => s,
       children: [
-        FSelectSection(
+        FSelectSection.fromMap(
           label: const Text('North America'),
-          children: [
-            FSelectItem.text('Eastern Standard Time (EST)'),
-            FSelectItem.text('Central Standard Time (CST)'),
-            FSelectItem.text('Mountain Standard Time (MST)'),
-            FSelectItem.text('Pacific Standard Time (PST)'),
-            FSelectItem.text('Alaska Standard Time (AKST)'),
-            FSelectItem.text('Hawaii Standard Time (HST)'),
-          ],
+          items: {
+            for (final item in [
+              'Eastern Standard Time (EST)',
+              'Central Standard Time (CST)',
+              'Mountain Standard Time (MST)',
+              'Pacific Standard Time (PST)',
+              'Alaska Standard Time (AKST)',
+              'Hawaii Standard Time (HST)',
+            ])
+              item: item,
+          },
         ),
-        FSelectSection(
+        FSelectSection.fromMap(
           label: const Text('South America'),
-          children: [
-            FSelectItem.text('Argentina Time (ART)'),
-            FSelectItem.text('Bolivia Time (BOT)'),
-            FSelectItem.text('Brasilia Time (BRT)'),
-            FSelectItem.text('Chile Standard Time (CLT)'),
-          ],
+          items: {
+            for (final item in [
+              'Argentina Time (ART)',
+              'Bolivia Time (BOT)',
+              'Brasilia Time (BRT)',
+              'Chile Standard Time (CLT)',
+            ])
+              item: item,
+          },
         ),
-        FSelectSection(
+        FSelectSection.fromMap(
           label: const Text('Europe & Africa'),
-          children: [
-            FSelectItem.text('Greenwich Mean Time (GMT)'),
-            FSelectItem.text('Central European Time (CET)'),
-            FSelectItem.text('Eastern European Time (EET)'),
-            FSelectItem.text('Western European Summer Time (WEST)'),
-            FSelectItem.text('Central Africa Time (CAT)'),
-            FSelectItem.text('Eastern Africa Time (EAT)'),
-          ],
+          items: {
+            for (final item in [
+              'Greenwich Mean Time (GMT)',
+              'Central European Time (CET)',
+              'Eastern European Time (EET)',
+              'Western European Summer Time (WEST)',
+              'Central Africa Time (CAT)',
+              'Eastern Africa Time (EAT)',
+            ])
+              item: item,
+          },
         ),
-        FSelectSection(
+        FSelectSection.fromMap(
           label: const Text('Asia'),
-          children: [
-            FSelectItem.text('Moscow Time (MSK)'),
-            FSelectItem.text('India Standard Time (IST)'),
-            FSelectItem.text('China Standard Time (CST)'),
-            FSelectItem.text('Japan Standard Time (JST)'),
-            FSelectItem.text('Korea Standard Time (KST)'),
-            FSelectItem.text('Indonesia Standard Time (IST)'),
-          ],
+          items: {
+            for (final item in [
+              'Moscow Time (MSK)',
+              'India Standard Time (IST)',
+              'China Standard Time (CST)',
+              'Japan Standard Time (JST)',
+              'Korea Standard Time (KST)',
+              'Indonesia Standard Time (IST)',
+            ])
+              item: item,
+          },
         ),
-        FSelectSection(
+        FSelectSection.fromMap(
           label: const Text('Australia & Pacific'),
-          children: [
-            FSelectItem.text('Australian Western Standard Time (AWST)'),
-            FSelectItem.text('Australian Central Standard Time (ACST)'),
-            FSelectItem.text('Australian Eastern Standard Time (AEST)'),
-            FSelectItem.text('New Zealand Standard Time (NZST)'),
-            FSelectItem.text('Fiji Time (FJT)'),
-          ],
+          items: {
+            for (final item in [
+              'Australian Western Standard Time (AWST)',
+              'Australian Central Standard Time (ACST)',
+              'Australian Eastern Standard Time (AEST)',
+              'New Zealand Standard Time (NZST)',
+              'Fiji Time (FJT)',
+            ])
+              item: item,
+          },
         ),
       ],
     ),
@@ -110,9 +130,9 @@ class SyncSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>.search(
       hint: 'Select a fruit',
-      filter: (query) =>
-          query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+      format: (s) => s,
+      filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
+      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
     ),
   );
 }
@@ -126,11 +146,12 @@ class AsyncSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>.search(
       hint: 'Select a fruit',
+      format: (s) => s,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
     ),
   );
 }
@@ -144,6 +165,7 @@ class AsyncLoadingSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>.search(
       hint: 'Select a fruit',
+      format: (s) => s,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
@@ -152,7 +174,7 @@ class AsyncLoadingSelectPage extends Sample {
         padding: const EdgeInsets.all(8.0),
         child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
       ),
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
     ),
   );
 }
@@ -166,11 +188,12 @@ class AsyncErrorSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>.search(
       hint: 'Select a fruit',
+      format: (s) => s,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         throw StateError('Error loading data');
       },
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
       searchErrorBuilder: (context, error, trace) {
         final style = context.theme.selectStyle.iconStyle;
         return Padding(
@@ -198,8 +221,9 @@ class ToggleableSelectPageState extends StatefulSampleState<ToggleableSelectPage
     padding: const EdgeInsets.only(top: 15.0),
     child: FSelect<String>(
       hint: 'Select a fruit',
+      format: (s) => s,
       controller: _controller,
-      children: [for (final fruit in fruits) FSelectItem.text(fruit)],
+      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
   );
 
@@ -219,8 +243,9 @@ class ClearableSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>(
       hint: 'Select a fruit',
+      format: (s) => s,
       clearable: true,
-      children: [for (final fruit in fruits) FSelectItem.text(fruit)],
+      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
   );
 }
@@ -242,7 +267,7 @@ class FormatSelectPage extends Sample {
     child: FSelect<({String firstName, String lastName})>(
       hint: 'Select a user',
       format: (user) => '${user.firstName} ${user.lastName}',
-      children: [for (final user in users) FSelectItem(value: user, child: Text(user.firstName))],
+      children: [for (final user in users) FSelectItem(user.firstName, user)],
     ),
   );
 }
@@ -256,8 +281,9 @@ class ScrollHandlesSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>(
       hint: 'Select a fruit',
+      format: (s) => s,
       contentScrollHandles: true,
-      children: [for (final fruit in fruits) FSelectItem.text(fruit)],
+      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
   );
 }
@@ -289,8 +315,9 @@ class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with Sing
             label: const Text('Department'),
             description: const Text('Choose your dream department'),
             hint: 'Select a department',
+            format: (s) => s,
             validator: _validateDepartment,
-            children: [for (final department in _departments) FSelectItem.text(department)],
+            children: [for (final department in _departments) FSelectItem(department, department)],
           ),
           const SizedBox(height: 25),
           FButton(

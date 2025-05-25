@@ -7,7 +7,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+const letters = {
+  'A': 'A',
+  'B': 'B',
+  'C': 'C',
+  'D': 'D',
+  'E': 'E',
+  'F': 'F',
+  'G': 'G',
+  'H': 'H',
+  'I': 'I',
+  'J': 'J',
+  'K': 'K',
+  'L': 'L',
+  'M': 'M',
+  'N': 'N',
+  'O': 'O',
+};
 
 void main() {
   const key = ValueKey('select');
@@ -29,12 +45,8 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>(
               key: key,
-              children: [
-                FSelectSection(
-                  label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem.text(letter)],
-                ),
-              ],
+              format: (s) => s,
+              children: [FSelectSection.fromMap(label: const Text('Lorem'), items: letters)],
             ),
           ),
         );
@@ -52,11 +64,12 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>(
               key: key,
+              format: (s) => s,
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
                   enabled: false,
-                  children: [FSelectItem.text('A'), FSelectItem.text('B'), FSelectItem.text('C', enabled: true)],
+                  children: [FSelectItem('A', 'A'), FSelectItem('B', 'B'), FSelectItem('C', 'C', enabled: true)],
                 ),
               ],
             ),
@@ -76,12 +89,8 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>(
               key: key,
-              children: [
-                FSelectSection(
-                  label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem.text(letter)],
-                ),
-              ],
+              format: (s) => s,
+              children: [FSelectSection.fromMap(label: const Text('Lorem'), items: letters)],
             ),
           ),
         );
@@ -106,11 +115,11 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.fromMap(
+              letters,
               key: key,
               controller: controller,
               contentScrollController: scrollController,
-              children: [for (final letter in letters) FSelectItem.text(letter)],
             ),
           ),
         );
@@ -137,8 +146,9 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>(
               key: key,
+              format: (s) => s,
               controller: controller..value = 'A',
-              children: [FSelectItem.text(letters.first, enabled: false)],
+              children: [FSelectItem(letters.keys.first, letters.keys.first, enabled: false)],
             ),
           ),
         );
@@ -157,7 +167,11 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(key: key, children: [FSelectItem.text(letters.first, enabled: false)]),
+            child: FSelect<String>(
+              key: key,
+              format: (s) => s,
+              children: [FSelectItem(letters.keys.first, letters.keys.first, enabled: false)],
+            ),
           ),
         );
 
@@ -175,7 +189,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(key: key, children: [FSelectItem.text(letters.first)]),
+            child: FSelect<String>.fromMap(const {'A': 'A'}, key: key),
           ),
         );
 
@@ -199,7 +213,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(key: key, children: [FSelectItem.text(letters.first)]),
+            child: FSelect<String>.fromMap(const {'A': 'A'}, key: key),
           ),
         );
 

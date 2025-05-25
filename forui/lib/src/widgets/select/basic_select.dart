@@ -5,6 +5,7 @@ class _BasicSelect<T> extends FSelect<T> {
 
   const _BasicSelect({
     required this.children,
+    required super.format,
     super.controller,
     super.style,
     super.autofocus,
@@ -21,7 +22,6 @@ class _BasicSelect<T> extends FSelect<T> {
     super.forceErrorText,
     super.validator,
     super.errorBuilder,
-    super.format,
     super.hint,
     super.textAlign,
     super.textAlignVertical,

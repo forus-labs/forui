@@ -22,6 +22,18 @@ A widget that collapses and expands its child.
 * Fix `FDateField` not closing calendar popover when enter is pressed.
 
 
+### `FSelect`
+
+* Add `FSelect.searchFromMap(...)`.
+* Add `FSelectItem.raw(...)`.
+* Add `FSelectSection.fromMap(...)`.
+
+* **Breaking** Change `format` in `FSelect.new(...)` to be required. 
+* **Breaking** Change `format` in `FSelect.search(...)` to be required.
+* **Breaking** Remove `FSelect.defaultFormat`.
+* **Breaking** Change `FSelectItem(...)` to require a String text instead of Widget child.
+
+
 ### `FSidebar` (new)
 A sidebar widget that usually resides on the side of the screen for navigation.
 

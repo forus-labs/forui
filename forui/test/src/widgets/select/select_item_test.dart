@@ -21,10 +21,11 @@ void main() {
         TestScaffold.app(
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             controller: controller,
             children: [
-              FSelectSection(label: const Text('1st'), children: [FSelectItem.text('A')]),
-              FSelectSection(label: const Text('2nd'), children: [FSelectItem.text('B')]),
+              FSelectSection(label: const Text('1st'), children: [FSelectItem('A', 'A')]),
+              FSelectSection(label: const Text('2nd'), children: [FSelectItem('B', 'B')]),
             ],
           ),
         ),
@@ -50,8 +51,9 @@ void main() {
         TestScaffold.app(
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             controller: controller,
-            children: [FSelectItem.text('A'), FSelectItem.text('B')],
+            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
           ),
         ),
       );

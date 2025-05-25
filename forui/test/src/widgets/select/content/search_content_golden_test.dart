@@ -15,7 +15,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>.search(key: key, filter: (_) => [], contentBuilder: (_, _) => []),
+            child: FSelect<String>.search(key: key, format: (s) => s, filter: (_) => [], contentBuilder: (_, _) => []),
           ),
         );
 
@@ -35,8 +35,9 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>.search(
               key: key,
+              format: (s) => s,
               filter: (_) => [],
-              contentBuilder: (_, _) => [FSelectItem.text('A')],
+              contentBuilder: (_, _) => [FSelectItem('A', 'A')],
             ),
           ),
         );
@@ -54,11 +55,12 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>.search(
               key: key,
+              format: (s) => s,
               filter: (_) async {
                 await Future.delayed(const Duration(seconds: 1));
                 return [];
               },
-              contentBuilder: (_, _) => [FSelectItem.text('A')],
+              contentBuilder: (_, _) => [FSelectItem('A', 'A')],
             ),
           ),
         );
@@ -79,11 +81,12 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>.search(
               key: key,
+              format: (s) => s,
               filter: (_) async {
                 await Future.delayed(const Duration(seconds: 5));
                 throw ArgumentError();
               },
-              contentBuilder: (_, _) => [FSelectItem.text('A')],
+              contentBuilder: (_, _) => [FSelectItem('A', 'A')],
               searchErrorBuilder: (_, error, trace) => Container(color: Colors.red, height: 10, width: 10),
             ),
           ),
@@ -107,11 +110,12 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>.search(
               key: key,
+              format: (s) => s,
               filter: (_) async {
                 await Future.delayed(const Duration(seconds: 5));
                 throw ArgumentError();
               },
-              contentBuilder: (_, data) => [for (final v in data.values) FSelectItem.text(v)],
+              contentBuilder: (_, data) => [for (final v in data.values) FSelectItem(v, v)],
             ),
           ),
         );
@@ -134,11 +138,12 @@ void main() {
             alignment: Alignment.topCenter,
             child: FSelect<String>.search(
               key: key,
+              format: (s) => s,
               filter: (_) async {
                 await Future.delayed(const Duration(seconds: 5));
                 return [];
               },
-              contentBuilder: (_, _) => [FSelectItem.text('A')],
+              contentBuilder: (_, _) => [FSelectItem('A', 'A')],
             ),
           ),
         );

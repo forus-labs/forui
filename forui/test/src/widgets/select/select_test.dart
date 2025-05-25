@@ -9,7 +9,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+const letters = {
+  'A': 'A',
+  'B': 'B',
+  'C': 'C',
+  'D': 'D',
+  'E': 'E',
+  'F': 'F',
+  'G': 'G',
+  'H': 'H',
+  'I': 'I',
+  'J': 'J',
+  'K': 'K',
+  'L': 'L',
+  'M': 'M',
+  'N': 'N',
+  'O': 'O',
+};
 
 void main() {
   const key = ValueKey('select');
@@ -33,7 +49,7 @@ void main() {
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
               initialValue: 'A',
-              children: [FSelectItem.text('A'), FSelectItem.text('B')],
+              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
             ),
           ),
         ),
@@ -59,7 +75,7 @@ void main() {
               controller: autoDispose(FSelectController(vsync: tester, value: 'A')),
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
-              children: [FSelectItem.text('A'), FSelectItem.text('B')],
+              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
             ),
           ),
         ),
@@ -82,7 +98,7 @@ void main() {
             key: key,
             format: (value) => '$value!',
             controller: controller,
-            children: [FSelectItem.text('A'), FSelectItem.text('B')],
+            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
           ),
         ),
       );
@@ -100,11 +116,7 @@ void main() {
     testWidgets('keyboard navigation', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            key: key,
-            controller: controller,
-            children: [FSelectItem.text('A'), FSelectItem.text('B')],
-          ),
+          child: FSelect<String>.fromMap(const {'A': 'A', 'B': 'B'}, key: key, controller: controller),
         ),
       );
 
@@ -131,11 +143,7 @@ void main() {
     testWidgets('update', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            key: key,
-            controller: controller,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, key: key, controller: controller),
         ),
       );
 
@@ -145,11 +153,7 @@ void main() {
       expect(controller.hasListeners, true);
       expect(controller.popover.hasListeners, false);
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(key: key, children: [for (final letter in letters) FSelectItem.text(letter)]),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(child: FSelect<String>.fromMap(letters, key: key)));
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
@@ -162,11 +166,7 @@ void main() {
     testWidgets('dispose', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            key: key,
-            controller: controller,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, key: key, controller: controller),
         ),
       );
 
@@ -192,11 +192,7 @@ void main() {
       final firstController = FSelectController<String>(vsync: const TestVSync());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            controller: firstController,
-            onChange: onChange,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, controller: firstController, onChange: onChange),
         ),
       );
 
@@ -208,11 +204,7 @@ void main() {
       final secondController = FSelectController<String>(vsync: const TestVSync());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            controller: secondController,
-            onChange: onChange,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, controller: secondController, onChange: onChange),
         ),
       );
 
@@ -230,11 +222,7 @@ void main() {
       final controller = FSelectController<String>(vsync: const TestVSync());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            controller: controller,
-            onChange: (_) => first++,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, controller: controller, onChange: (_) => first++),
         ),
       );
 
@@ -245,11 +233,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            controller: controller,
-            onChange: (_) => second++,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, controller: controller, onChange: (_) => second++),
         ),
       );
 
@@ -267,11 +251,7 @@ void main() {
       final firstController = FSelectController<String>(vsync: const TestVSync());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            controller: firstController,
-            onChange: (_) => first++,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, controller: firstController, onChange: (_) => first++),
         ),
       );
 
@@ -283,11 +263,7 @@ void main() {
       final secondController = FSelectController<String>(vsync: const TestVSync());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            controller: secondController,
-            onChange: (_) => second++,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, controller: secondController, onChange: (_) => second++),
         ),
       );
 
@@ -305,11 +281,7 @@ void main() {
       final controller = FSelectController<String>(vsync: const TestVSync());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            controller: controller,
-            onChange: (_) => count++,
-            children: [for (final letter in letters) FSelectItem.text(letter)],
-          ),
+          child: FSelect<String>.fromMap(letters, controller: controller, onChange: (_) => count++),
         ),
       );
 
@@ -332,11 +304,11 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
+          child: FSelect<String>.fromMap(
+            const {'A': 'A', 'B': 'B'},
             key: key,
             focusNode: focus,
             controller: controller,
-            children: [FSelectItem.text('A'), FSelectItem.text('B')],
           ),
         ),
       );
@@ -352,11 +324,12 @@ void main() {
         TestScaffold.app(
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             focusNode: focus,
             controller: controller,
             children: [
-              FSelectItem.text('A', key: itemKey),
-              FSelectItem.text('B'),
+              FSelectItem('A', 'A', key: itemKey),
+              FSelectItem('B', 'B'),
             ],
           ),
         ),

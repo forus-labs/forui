@@ -5,6 +5,24 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
+const letters = {
+  'A': 'A',
+  'B': 'B',
+  'C': 'C',
+  'D': 'D',
+  'E': 'E',
+  'F': 'F',
+  'G': 'G',
+  'H': 'H',
+  'I': 'I',
+  'J': 'J',
+  'K': 'K',
+  'L': 'L',
+  'M': 'M',
+  'N': 'N',
+  'O': 'O',
+};
+
 void main() {
   const key = ValueKey('select');
 
@@ -14,10 +32,11 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             children: [
-              FSelectSection(label: const Text('A'), children: [FSelectItem.text('B')]),
-              for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
+              FSelectSection(label: const Text('A'), children: [FSelectItem('B', 'B')]),
+              for (int i = 0; i < 10; i++) FSelectItem('$i', '$i'),
             ],
           ),
         ),
@@ -32,7 +51,12 @@ void main() {
     testWidgets('basic - empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FSelect<String>(key: key, style: TestScaffold.blueScreen.selectStyle, children: const []),
+          child: FSelect<String>(
+            key: key,
+            style: TestScaffold.blueScreen.selectStyle,
+            format: (s) => s,
+            children: const [],
+          ),
         ),
       );
 
@@ -47,11 +71,12 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             children: [
-              FSelectSection(label: const Text('A'), children: [FSelectItem.text('B')]),
-              for (int i = 0; i < 10; i++) FSelectItem.text('$i'),
+              FSelectSection(label: const Text('A'), children: [FSelectItem('B', 'B')]),
+              for (int i = 0; i < 10; i++) FSelectItem('$i', '$i'),
             ],
           ),
         ),
@@ -81,10 +106,11 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>.search(
             key: key,
+            format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             filter: (_) => [],
-            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem('$i', '$i')],
           ),
         ),
       );
@@ -100,13 +126,33 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>.search(
             key: key,
+            format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem.text('$i')],
+            contentBuilder: (_, _) => [for (int i = 0; i < 10; i++) FSelectItem('$i', '$i')],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectBlueScreen(find.byType(TestScaffold));
+    });
+
+    testWidgets('searchFromMap', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FSelect<int>.searchFromMap(
+            {for (int i = 0; i < 10; i++) '$i': i},
+            key: key,
+            style: TestScaffold.blueScreen.selectStyle,
+            contentScrollHandles: true,
+            filter: (_) => [],
           ),
         ),
       );
@@ -134,12 +180,35 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/from-map.png'));
     });
 
+    testWidgets('searchFromMap', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect<String>.searchFromMap(
+            letters,
+            key: key,
+            contentScrollHandles: true,
+            filter: (query) => letters.keys.where((l) => l.startsWith(query)),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(FTextField).last, 'C');
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search-from-map.png'));
+    });
+
     testWidgets('auto-hide disabled', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>(key: key, autoHide: false, children: [FSelectItem.text('A'), FSelectItem.text('B')]),
+          child: FSelect<String>.fromMap(const {'A': 'A', 'B': 'B'}, key: key, autoHide: false),
         ),
       );
 
@@ -159,8 +228,9 @@ void main() {
           alignment: Alignment.topCenter,
           child: FSelect<String>(
             key: key,
+            format: (s) => s,
             autoHide: false,
-            children: [FSelectItem.text('A'), FSelectItem.text('B')],
+            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
             builder: (_, _, child) => DecoratedBox(
               decoration: const BoxDecoration(color: Colors.red),
               child: child,
@@ -183,7 +253,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: const FSelect<String>(key: key, children: []),
+          child: FSelect<String>.fromMap(const {}, key: key),
         ),
       );
 

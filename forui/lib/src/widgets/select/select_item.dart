@@ -39,6 +39,21 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// Creates a [FSelectSection].
   const FSelectSection({required this.label, required this.children, this.style, this.enabled, super.key});
 
+  /// Creates a [FSelectSection] from the given items.
+  FSelectSection.fromMap({
+    required Widget label,
+    required Map<String, T> items,
+    FSelectSectionStyle? style,
+    bool? enabled,
+    Key? key,
+  }) : this(
+         label: label,
+         children: [for (final e in items.entries) FSelectItem<T>(e.key, e.value)],
+         style: style,
+         enabled: enabled,
+         key: key,
+       );
+
   @override
   Widget build(BuildContext context) {
     final content = SelectContentData.of<T>(context);
@@ -148,7 +163,11 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   final Widget selectedIcon;
 
   /// Creates a [FSelectItem].
-  FSelectItem({
+  FSelectItem(String text, T value, {bool? enabled, Key? key})
+    : this.from(key: key, value: value, enabled: enabled, child: Text(text));
+
+  /// Creates a [FSelectItem] with a custom child widget.
+  FSelectItem.from({
     required this.value,
     required this.child,
     this.style,
@@ -156,10 +175,6 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     this.selectedIcon = const Icon(FIcons.check),
     super.key,
   });
-
-  /// Creates a [FSelectItem] that displays the [value] as the a typography.
-  static FSelectItem<String> text(String value, {bool? enabled, Key? key}) =>
-      FSelectItem(key: key, value: value, enabled: enabled, child: Text(value));
 
   @override
   State<FSelectItem<T>> createState() => _FSelectItemState<T>();
