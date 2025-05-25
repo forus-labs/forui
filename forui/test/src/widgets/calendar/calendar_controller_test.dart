@@ -121,8 +121,7 @@ void main() {
           initialSelection: initial,
           truncateAndStripTimezone: false,
           toggleable: toggleable,
-        )
-        ..value = date;
+        )..value = date;
         expect(controller.value, expected);
       });
     }
