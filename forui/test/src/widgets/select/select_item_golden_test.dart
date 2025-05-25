@@ -46,12 +46,7 @@ void main() {
             child: FSelect<String>(
               key: key,
               format: (s) => s,
-              children: [
-                FSelectSection.fromMap(
-                  label: const Text('Lorem'),
-                  items: letters,
-                ),
-              ],
+              children: [FSelectSection.fromMap(label: const Text('Lorem'), items: letters)],
             ),
           ),
         );
@@ -95,12 +90,7 @@ void main() {
             child: FSelect<String>(
               key: key,
               format: (s) => s,
-              children: [
-                FSelectSection.fromMap(
-                  label: const Text('Lorem'),
-                  items: letters,
-                ),
-              ],
+              children: [FSelectSection.fromMap(label: const Text('Lorem'), items: letters)],
             ),
           ),
         );
