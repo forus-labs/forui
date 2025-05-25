@@ -15,7 +15,7 @@ Forui themes allow you to define a consistent visual style across your applicati
 to generate themes and styles that can be directly modified in your project.
 
 
-## Core Concepts
+## Overview
 
 ```mermaid
 ---
@@ -49,26 +49,20 @@ class FAccordionStyle {
 }
 note for FAccordionStyle "Each Forui widget has a corresponding style.\nWe use FAccordionStyle here as an example."
 
-class FWidgetStateMap {
-    +FWidgetStateMap(...)
-}
-
 FTheme --> FThemeData
 FThemeData --> FColors
 FThemeData --> FTypography
 FThemeData --> FStyle
 FThemeData --> FAccordionStyle
-FAccordionStyle --> FWidgetStateMap
 ```
 
-There are **6** core components in Forui's theming system.
+There are **5** core components in Forui's theming system.
 
 - **[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
 - **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds **individual widget styles** and the following:
   - **[`FColors`](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html)**: Color scheme including primary, foreground, and background colors.
   - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography settings including font family and text styles.
   - **[`FStyle`](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html)**: Misc. options such as border radius and icon size.
-- **[`FWidgetStateMap`](https://pub.dev/documentation/forui/latest/forui.theme/FWidgetStateMap-class.html)**: Allows you to define different values for different widget states (e.g. hovered, pressed).
 
 
 The included `BuildContext` extension allows `FThemeData` can be accessed via [`context.theme`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext.html):
@@ -83,149 +77,6 @@ Widget build(BuildContext context) {
   return const Placeholder();
 }
 ```
-
-### Colors
-
-<Callout type="info">
-  **Want to start using themes right away?** Jump to [Getting Started](#getting-started) to use predefined themes or
-  generate your own. The sections ahead explain the core components in detail.
-</Callout>
-
-The `FColors` class contains the theme's color scheme. Colors come in **pairs** - a main color and its corresponding
-foreground color for text and icons.
-
-For example:
-  * `primary` (background) + `primaryForeground` (text/icons)
-  * `secondary` (background) + `secondaryForeground` (text/icons)
-  * `destructive` (background) + `destructiveForeground` (text/icons)
-
-```dart {3, 8} copy
-@override
-Widget build(BuildContext context) {
-  final colors = context.theme.colors;
-  return ColoredBox(
-    color: colors.primary,
-    child: Text(
-      'Hello World!',
-      style: TextStyle(color: colors.primaryForeground),
-    ),
-  );
-}
-```
-
-#### Hovered and Disabled Colors
-
-To create hovered and disabled color variants, use the [`FColors.hover`](https://pub.dev/documentation/forui/latest/forui.theme/FColors/hover.html)
-and [`FColors.disable`](https://pub.dev/documentation/forui/latest/forui.theme/FColors/disable.html) methods.
-
-
-### Typography
-
-The `FTypography` class contains the theme's typography settings, including the default font family and various text
-styles.
-
-<Callout type="info">
-    The `TextStyle`s in `FTypography` are based on [Tailwind CSS Font Size](https://tailwindcss.com/docs/font-size).
-    For example, `FTypography.sm` is the equivalent of `text-sm` in Tailwind CSS.
-</Callout>
-
-`FTypography`'s text styles only specify `fontSize` and `height`. Use `copyWith()` to add colors and other properties:
-
-```dart {3, 7-10} copy
-@override
-Widget build(BuildContext context) {
-  final typography = context.theme.typography;
-
-  return Text(
-    'Hello World!',
-    style: typography.xs.copyWith(
-      color: context.theme.colors.primaryForeground,
-      fontWeight: FontWeight.bold,
-    ),
-  );
-}
-```
-
-#### Custom Font Family
-
-Use the `copyWith()` method to change the default font family. As some fonts may have different sizes, the `scale()`
-method is provided to quickly scale all the font sizes.
-
-```dart {5-7} copy
-@override
-Widget build(BuildContext context) => FTheme(
-  data: FThemeData(
-    colors: FThemes.zinc.light.colors,
-    typography: FThemes.zinc.light.typography.copyWith(
-      defaultFontFamily: 'Roboto',
-    ).scale(sizeScalar: 0.8),
-  ),
-  child: const FScaffold(...),
-);
-```
-
-### Style
-
-The `FStyle` class the theme's miscellaneous styling options such as the default border radius and icon size.
-
-```dart {4, 7-14} copy
-@override
-Widget build(BuildContext context) {
-  final colors = context.theme.colors;
-  final style = context.theme.style;
-
-  return DecoratedBox(
-    decoration: BoxDecoration(
-      border: Border.all(
-        color: colors.border,
-        width: style.borderWidth,
-      ),
-      borderRadius: style.borderRadius,
-      color: colors.primary,
-    ),
-    child: const Placeholder(),
-  );
-}
-```
-
-
-### `FWidgetStateMap`
-
-[`FWidgetStateMap`](https://pub.dev/documentation/forui/latest/forui.theme/FWidgetStateMap-class.html) lets you define
-different values based on [`WidgetState`](https://api.flutter.dev/flutter/widgets/WidgetState.html) combinations such as
-`hovered & pressed` and `focused | disabled`.
-
-This is useful for describing how widgets should respond to user interaction.
-
-Each combination is also known as a **constraint**. Constraints are evaluated from top to bottom. The first matching will
-be used. In general, more specific constraints should be placed above more general ones.
-
-In the following example, given the states `{hovered, pressed}`, the 1st constraint will **always** match.
-```dart
-FWidgetStateMap({
-  // ❌ Don't declare more general constraints above more specific ones!
-  // 1st constraint: applied when the accordion is hovered.
-  WidgetState.hovered: typography.base.copyWith(
-    fontWeight: FontWeight.w500,
-    color: colors.foreground,
-    decoration: TextDecoration.underline,
-  ),
-  // 2nd constraint: applied when the accordion is hovered OR pressed.
-  WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
-    fontWeight: FontWeight.w500,
-    color: colors.foreground,
-    decoration: TextDecoration.underline,
-  ),
-  // 3rd constraint: This text style is applied when the accordion is NOT hovered OR pressed.
-  WidgetState.any: typography.base.copyWith(
-    fontWeight: FontWeight.w500,
-    color: colors.foreground,
-  ),
-});
-```
-
-Most `FWidgetStateMap` fields only support a subset of states. For example, [`FButtonStyle.decoration`](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html)
-only supports the disabled, hovered, pressed and focused states. A field's supported states are documented in its [API docs](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html).
 
 
 ## Getting Started
@@ -261,6 +112,10 @@ Forui includes predefined themes that can be used out of the box. They are heavi
 | <Theme title="Violet" color="#7c3aed" /> | `FThemes.violet.light` | `FThemes.violet.dark` |
 
 ### Customize Themes
+
+<Callout type="info">
+  Want to customize **individual widget styles**? Jump to [Override Individual Widget Styles](#override-individual-widget-styles).
+</Callout>
 
 The following section demonstrates how to use the [CLI](cli) generate a **theme** and **widget style** that you can
 directly modify to fit your design needs.
@@ -423,6 +278,146 @@ FAccordionStyle accordionStyle({
 
 See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateMap`s.
 
+## Theme Components
+
+### `FWidgetStateMap`
+
+[`FWidgetStateMap`](https://pub.dev/documentation/forui/latest/forui.theme/FWidgetStateMap-class.html) lets you define
+different values based on [`WidgetState`](https://api.flutter.dev/flutter/widgets/WidgetState.html) combinations such as
+`hovered & pressed` and `focused | disabled`.
+
+This is useful for describing how widgets should respond to user interaction.
+
+Each combination is also known as a **constraint**. Constraints are evaluated from top to bottom. The first matching will
+be used. In general, more specific constraints should be placed above more general ones.
+
+In the following example, given the states `{hovered, pressed}`, the 1st constraint will **always** match.
+```dart
+FWidgetStateMap({
+  // ❌ Don't declare more general constraints above more specific ones!
+  // 1st constraint: applied when the accordion is hovered.
+  WidgetState.hovered: typography.base.copyWith(
+    fontWeight: FontWeight.w500,
+    color: colors.foreground,
+    decoration: TextDecoration.underline,
+  ),
+  // 2nd constraint: applied when the accordion is hovered OR pressed.
+  WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
+    fontWeight: FontWeight.w500,
+    color: colors.foreground,
+    decoration: TextDecoration.underline,
+  ),
+  // 3rd constraint: This text style is applied when the accordion is NOT hovered OR pressed.
+  WidgetState.any: typography.base.copyWith(
+    fontWeight: FontWeight.w500,
+    color: colors.foreground,
+  ),
+});
+```
+
+Most `FWidgetStateMap` fields only support a subset of states. For example, [`FButtonStyle.decoration`](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html)
+only supports the disabled, hovered, pressed and focused states. A field's supported states are documented in its [API docs](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html).
+
+### Colors
+
+The `FColors` class contains the theme's color scheme. Colors come in **pairs** - a main color and its corresponding
+foreground color for text and icons.
+
+For example:
+  * `primary` (background) + `primaryForeground` (text/icons)
+  * `secondary` (background) + `secondaryForeground` (text/icons)
+  * `destructive` (background) + `destructiveForeground` (text/icons)
+
+```dart {3, 8} copy
+@override
+Widget build(BuildContext context) {
+  final colors = context.theme.colors;
+  return ColoredBox(
+    color: colors.primary,
+    child: Text(
+      'Hello World!',
+      style: TextStyle(color: colors.primaryForeground),
+    ),
+  );
+}
+```
+
+#### Hovered and Disabled Colors
+
+To create hovered and disabled color variants, use the [`FColors.hover`](https://pub.dev/documentation/forui/latest/forui.theme/FColors/hover.html)
+and [`FColors.disable`](https://pub.dev/documentation/forui/latest/forui.theme/FColors/disable.html) methods.
+
+
+### Typography
+
+The `FTypography` class contains the theme's typography settings, including the default font family and various text
+styles.
+
+<Callout type="info">
+    The `TextStyle`s in `FTypography` are based on [Tailwind CSS Font Size](https://tailwindcss.com/docs/font-size).
+    For example, `FTypography.sm` is the equivalent of `text-sm` in Tailwind CSS.
+</Callout>
+
+`FTypography`'s text styles only specify `fontSize` and `height`. Use `copyWith()` to add colors and other properties:
+
+```dart {3, 7-10} copy
+@override
+Widget build(BuildContext context) {
+  final typography = context.theme.typography;
+
+  return Text(
+    'Hello World!',
+    style: typography.xs.copyWith(
+      color: context.theme.colors.primaryForeground,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+}
+```
+
+#### Custom Font Family
+
+Use the `copyWith()` method to change the default font family. As some fonts may have different sizes, the `scale()`
+method is provided to quickly scale all the font sizes.
+
+```dart {5-7} copy
+@override
+Widget build(BuildContext context) => FTheme(
+  data: FThemeData(
+    colors: FThemes.zinc.light.colors,
+    typography: FThemes.zinc.light.typography.copyWith(
+      defaultFontFamily: 'Roboto',
+    ).scale(sizeScalar: 0.8),
+  ),
+  child: const FScaffold(...),
+);
+```
+
+### Style
+
+The `FStyle` class the theme's miscellaneous styling options such as the default border radius and icon size.
+
+```dart {4, 7-14} copy
+@override
+Widget build(BuildContext context) {
+  final colors = context.theme.colors;
+  final style = context.theme.style;
+
+  return DecoratedBox(
+    decoration: BoxDecoration(
+      border: Border.all(
+        color: colors.border,
+        width: style.borderWidth,
+      ),
+      borderRadius: style.borderRadius,
+      color: colors.primary,
+    ),
+    child: const Placeholder(),
+  );
+}
+```
+
+
 ## Override Individual Widget Styles
 
 The following sections demonstrate how to override an accordion's style.
@@ -459,6 +454,8 @@ FAccordionStyle accordionStyle({
   ...
 );
 ```
+
+See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateMap`s.
 
 ### Pass the Style
 
