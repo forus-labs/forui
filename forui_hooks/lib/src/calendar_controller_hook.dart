@@ -10,6 +10,8 @@ typedef _Create<T> = FCalendarController<T> Function(_CalendarControllerHook<T>)
 ///
 /// [selectable] will always return true if not given.
 ///
+/// [toggleable] determines whether the controller should unselect a date if it is already selected. Defaults to true.
+///
 /// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
 /// dates in UTC timezone. Defaults to true.
 ///
@@ -26,16 +28,19 @@ typedef _Create<T> = FCalendarController<T> Function(_CalendarControllerHook<T>)
 FCalendarController<DateTime?> useFDateCalendarController({
   DateTime? initialSelection,
   bool Function(DateTime)? selectable,
+  bool toggleable = false,
   bool truncateAndStripTimezone = true,
   List<Object?>? keys,
 }) => use(
   _CalendarControllerHook<DateTime?>(
     value: initialSelection,
     selectable: selectable,
+    toggleable: toggleable,
     debugLabel: 'useFDateCalendarController',
     create: (hook) => FCalendarController.date(
       initialSelection: hook.value,
       selectable: hook.selectable,
+      toggleable: hook.toggleable,
       truncateAndStripTimezone: truncateAndStripTimezone,
     ),
   ),
@@ -121,6 +126,7 @@ FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
 class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
   final T value;
   final bool Function(DateTime)? selectable;
+  final bool toggleable;
   final String _debugLabel;
   final _Create<T> _create;
 
@@ -129,6 +135,7 @@ class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
     required this.selectable,
     required String debugLabel,
     required _Create<T> create,
+    this.toggleable = false,
     super.keys,
   }) : _create = create,
        _debugLabel = debugLabel;
@@ -141,7 +148,8 @@ class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('initialSelection', value))
-      ..add(ObjectFlagProperty.has('selectable', selectable));
+      ..add(ObjectFlagProperty.has('selectable', selectable))
+      ..add(FlagProperty('toggleable', value: toggleable, ifTrue: 'toggleable'));
   }
 }
 

@@ -28,14 +28,16 @@ void main() {
       });
     }
 
-    for (final (initial, date, expected) in [
-      (null, DateTime(2024), DateTime.utc(2024)),
-      (null, DateTime(2025), DateTime.utc(2025)),
-      (DateTime(2024), DateTime(2025), DateTime.utc(2025)),
-      (DateTime(2024), DateTime(2024), null),
+    for (final (toggleable, initial, date, expected) in [
+      (true, null, DateTime(2024), DateTime.utc(2024)),
+      (true, null, DateTime(2025), DateTime.utc(2025)),
+      (true, DateTime(2024), DateTime(2025), DateTime.utc(2025)),
+      (true, DateTime(2024), DateTime(2024), null),
+      (false, null, DateTime(2024), DateTime.utc(2024)),
+      (false, DateTime(2024), DateTime(2024), DateTime.utc(2024)),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarController.date(initialSelection: initial)..select(date);
+        final controller = FCalendarController.date(initialSelection: initial, toggleable: toggleable)..select(date);
         expect(controller.value, expected);
       });
     }
@@ -75,15 +77,20 @@ void main() {
       });
     }
 
-    for (final (initial, date, expected) in [
-      (null, DateTime.utc(2024), DateTime.utc(2024)),
-      (null, DateTime.utc(2025), DateTime.utc(2025)),
-      (DateTime.utc(2024), DateTime.utc(2025), DateTime.utc(2025)),
-      (DateTime.utc(2024), DateTime.utc(2024), null),
+    for (final (toggleable, initial, date, expected) in [
+      (true, null, DateTime.utc(2024), DateTime.utc(2024)),
+      (true, null, DateTime.utc(2025), DateTime.utc(2025)),
+      (true, DateTime.utc(2024), DateTime.utc(2025), DateTime.utc(2025)),
+      (true, DateTime.utc(2024), DateTime.utc(2024), null),
+      (false, null, DateTime.utc(2024), DateTime.utc(2024)),
+      (false, DateTime.utc(2024), DateTime.utc(2024), DateTime.utc(2024)),
     ]) {
       test('select(...)', () {
-        final controller = FCalendarController.date(initialSelection: initial, truncateAndStripTimezone: false)
-          ..select(date);
+        final controller = FCalendarController.date(
+          initialSelection: initial,
+          truncateAndStripTimezone: false,
+          toggleable: toggleable,
+        )..select(date);
         expect(controller.value, expected);
       });
     }

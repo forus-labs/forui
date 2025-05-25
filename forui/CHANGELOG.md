@@ -1,4 +1,6 @@
-## 0.12.0 (Next)
+## 0.12.0
+
+Bumps minimum Flutter SDK version to 3.32.0.
 
 ### CLI
 
@@ -22,6 +24,12 @@ A widget that collapses and expands its child.
 * Fix `FDateField` not closing calendar popover when enter is pressed.
 
 
+### `FScaffold`
+
+* Add `FScaffold.sidebar`.
+* Add `FScaffoldStyle.sidebarBackgroundColor`.
+
+
 ### `FSelect`
 
 * Add `FSelect.searchFromMap(...)`.
@@ -42,38 +50,33 @@ A sidebar widget that usually resides on the side of the screen for navigation.
 * Add `FSidebarItem`.
 
 
-### `FSonner` (new)
-An optional toast.
-
-* Add `showFSonner(...)`.
-* Add `showRawFSonner(...)`.
-* Add `FSonner`.
-* Add `FSonnerExpandBehavior`.
-* Add `FSonnerStyle`.
-* Add `FSonnerToastStyle`.
-
-
-### `FTabs`
-
-* Add `FTabs.onPress`.
-
-
 ### `FTextField` & `FTextFormField`
 
 * Add `FTextField.onTapOutside`.
 * Add `FTextFormField.onTapOutside`.
 
 
-### `FScaffold`
+### `FToast` & `FToaster` (new)
+An optional toast.
 
-* Add `FScaffold.sidebar`.
-* Add `FScaffoldStyle.sidebarBackgroundColor`.
+* Add `showFToast(...)`.
+* Add `showRawFToast(...)`.
+* Add `FToast`.
+* Add `FToastStyle`.
+* Add `FToaster`.
+* Add `FToasterEntry`.
+* Add `FToasterExpandBehavior`.
+* Add `FToasterStyle`.
 
 
 ### Others
 
+* Add `toggleable` parameter to `FCalendarController.date(...)`.
+* Add `toggleable` parameter to `FLineCalendar(...)`.
 * Add `FPopover.shortcuts`.
+* Add `FTabs.onPress`.
 
+* **Breaking** Change `FLineCalendar` to be un-toggleable by default.
 * **Breaking** Change `FThemeData.headerStyle` to `FThemeData.headerStyles`.
 * Enhance `FSelect`'s focus management.
 * Enhance `FTimeField.picker`'s focus management.
