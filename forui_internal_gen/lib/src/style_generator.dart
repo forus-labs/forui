@@ -83,7 +83,7 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
         '/// Returns a copy of this [${element.name}] with the given properties replaced.',
         '/// ',
         '/// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)',
-        '/// and directly modify the style.'
+        '/// and directly modify the style.',
       ])
       ..annotations.add(refer('useResult'))
       ..name = 'copyWith'
