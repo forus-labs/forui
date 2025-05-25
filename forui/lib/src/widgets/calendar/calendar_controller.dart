@@ -143,7 +143,13 @@ class _AutoDateController extends FCalendarController<DateTime?> {
   }
 
   @override
-  set value(DateTime? value) => super.value = (toggleable && value == null) ? null : _truncateAndStripTimezone(value!);
+  set value(DateTime? value) {
+    if (toggleable && super.value == value) {
+      super.value = null;
+    } else {
+      super.value = value == null ? null : _truncateAndStripTimezone(value);
+    }
+  }
 }
 
 class _DateController extends FCalendarController<DateTime?> {
@@ -166,6 +172,9 @@ class _DateController extends FCalendarController<DateTime?> {
 
   @override
   void select(DateTime date) => value = (toggleable && value == date) ? null : date;
+
+  @override
+  set value(DateTime? value) => super.value = (toggleable && super.value == value) ? null : value;
 }
 
 // The multiple dates controllers.

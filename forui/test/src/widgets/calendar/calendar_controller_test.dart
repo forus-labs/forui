@@ -42,10 +42,21 @@ void main() {
       });
     }
 
-    test('value', () {
-      final controller = FCalendarController.date()..value = DateTime(2024, 11, 30, 12);
-      expect(controller.value, DateTime.utc(2024, 11, 30));
-    });
+    for (final (toggleable, initial, date, expected) in [
+      (true, null, DateTime(2024), DateTime.utc(2024)),
+      (true, null, DateTime(2025), DateTime.utc(2025)),
+      (true, DateTime(2024), DateTime(2025), DateTime.utc(2025)),
+      (true, DateTime(2024), DateTime.utc(2024), null),
+      (false, null, DateTime(2024), DateTime.utc(2024)),
+      (false, null, null, null),
+      (false, DateTime(2024), null, null),
+      (false, DateTime(2024), DateTime(2024), DateTime.utc(2024)),
+    ]) {
+      test('value setter', () {
+        final controller = FCalendarController.date(initialSelection: initial, toggleable: toggleable)..value = date;
+        expect(controller.value, expected);
+      });
+    }
   });
 
   group('FCalendarController.date(...) no auto-convert', () {
@@ -91,6 +102,27 @@ void main() {
           truncateAndStripTimezone: false,
           toggleable: toggleable,
         )..select(date);
+        expect(controller.value, expected);
+      });
+    }
+
+    for (final (toggleable, initial, date, expected) in [
+      (true, null, DateTime.utc(2024), DateTime.utc(2024)),
+      (true, null, DateTime.utc(2025), DateTime.utc(2025)),
+      (true, DateTime.utc(2024), DateTime.utc(2025), DateTime.utc(2025)),
+      (true, DateTime.utc(2024), DateTime.utc(2024), null),
+      (false, null, DateTime.utc(2024), DateTime.utc(2024)),
+      (false, null, null, null),
+      (false, DateTime.utc(2024), null, null),
+      (false, DateTime.utc(2024), DateTime.utc(2024), DateTime.utc(2024)),
+    ]) {
+      test('value setter', () {
+        final controller = FCalendarController.date(
+          initialSelection: initial,
+          truncateAndStripTimezone: false,
+          toggleable: toggleable,
+        )
+        ..value = date;
         expect(controller.value, expected);
       });
     }
