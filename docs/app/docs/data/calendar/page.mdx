@@ -53,6 +53,7 @@ FCalendar(
     initialSelection: DateTime(2024, 9, 13),
     selectable: (date) => allowedDates.contains(date),
   ),
+  style: FCalendarStyle(...),
   dayBuilder: (context, data, child) => child!,
   start: DateTime(2024),
   end: DateTime(2030),

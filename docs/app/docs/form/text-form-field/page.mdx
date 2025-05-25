@@ -101,6 +101,7 @@ dart run forui style create text-field
 ```dart copy
 FTextFormField(
   controller: _controller, // TextEditingController
+  style: FTextFieldStyle(...),
   clearable: (value) => value.text.isNotEmpty,
   enabled: true,
   onSaved: (value) {},

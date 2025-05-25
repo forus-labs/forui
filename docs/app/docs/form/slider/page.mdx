@@ -41,6 +41,7 @@ dart run forui style create slider
 
 ```dart copy
 FSlider(
+  style: FSliderStyle(...),
   layout: FLayout.rtl,
   tooltipBuilder: (style, value) => Text('${value.toStringAsFixed(2)}%'),
   controller: FContinuousSliderController(

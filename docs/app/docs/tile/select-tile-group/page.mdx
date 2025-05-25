@@ -67,6 +67,7 @@ dart run forui style create select-tile-group
 FSelectTileGroup<Value>(
   selectController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
   scrollController: ScrollController(),
+  style: FSelectMenuTileStyle(...),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,
@@ -91,6 +92,7 @@ FSelectTileGroup<Value>(
 FSelectTileGroup<Value>.builder(
   selectController: FSelectTileGroupController(), // or FSelectTileGroupController.radio()
   scrollController: ScrollController(),
+  style: FSelectMenuTileStyle(...),
   cacheExtent: 100,
   maxHeight: 200,
   dragStartBehavior: DragStartBehavior.start,

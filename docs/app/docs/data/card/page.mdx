@@ -48,6 +48,7 @@ dart run forui style create card
 
 ```dart copy
 FCard(
+  style: FCardStyle(...),
   title: const Text('Notification'),
   subtitle: const Text('You have 3 unread messages.'),
   child: FButton(child: const Text('Read messages'), onPress: () {}),
@@ -58,6 +59,7 @@ FCard(
 
 ```dart copy
 FCard.raw(
+  style: FCardStyle(...),
   child: const Placeholder(),
 );
 ```

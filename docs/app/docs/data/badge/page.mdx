@@ -48,13 +48,19 @@ dart run forui style create badges
 ### `FBadge(...)`
 
 ```dart copy
-FBadge(child: const Text('Badge'));
+FBadge(
+  style: FBadgeStyle.primary,
+  child: const Text('Badge'),
+);
 ```
 
 ### `FBadge.raw(...)`
 
 ```dart copy
-FBadge.raw(builder: (context, style) => Text('Badge'));
+FBadge.raw(
+  style: FBadgeStyle.primary,
+  builder: (context, style) => Text('Badge'),
+);
 ```
 
 ## Examples

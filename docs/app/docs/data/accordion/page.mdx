@@ -59,6 +59,7 @@ dart run forui style create accordion
 ```dart copy
 FAccordion(
   controller: FAccordionController(min: 1, max: 2), // or FAccordionController.radio()
+  style: FAccordionStyle(...),
   children: [
     FAccordionItem(
       title: const Text('Is it accessible?'),

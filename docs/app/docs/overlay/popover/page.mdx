@@ -105,6 +105,7 @@ dart run forui style create popover
 ```dart copy
 FPopover(
   controller: FPopoverController(vsync: this),
+  style: FPopoverStyle(...),
   popoverAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   constraints: const FPortalConstraints(),
@@ -123,6 +124,7 @@ FPopover(
 ```dart copy
 FPopover.automatic(
   controller: FPopoverController(vsync: this),
+  style: FPopoverStyle(...),
   popoverAnchor: Alignment.topCenter,
   childAnchor: Alignment.bottomCenter,
   constraints: const FPortalConstraints(),

@@ -56,6 +56,7 @@ dart run forui style create dialog
 
 ```dart copy
 FDialog(
+  style: FDialogStyle(...),
   direction: Axis.horizontal,
   title: const Text('Are you absolutely sure?'),
   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
@@ -70,6 +71,7 @@ FDialog(
 
 ```dart copy
 FDialog.adaptive(
+  style: FDialogStyle(...),
   title: const Text('Are you absolutely sure?'),
   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
   actions: [
@@ -83,6 +85,7 @@ FDialog.adaptive(
 
 ```dart copy
 FDialog.raw(
+  style: FDialogStyle(...),
   builder: (context, style) => const Placeholder(),
 );
 ```

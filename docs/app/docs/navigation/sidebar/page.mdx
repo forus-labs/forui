@@ -198,6 +198,7 @@ Represents an item on the sidebar. May be nested in `FSidebarItem.children` to c
 
 ```dart copy
 FSidebar(
+  style: FSidebarStyle(...),
   width: 250,
   header: const Text('Header'),
   footer: const Text('Footer'),
@@ -209,6 +210,7 @@ FSidebar(
 
 ```dart copy
 FSidebar.builder(
+  style: FSidebarStyle(...),
   width: 250,
   header: const Text('Header'),
   footer: const Text('Footer'),
@@ -221,6 +223,7 @@ FSidebar.builder(
 
 ```dart copy
 FSidebar.raw(
+  style: FSidebarStyle(...),
   width: 250,
   header: const Text('Header'),
   footer: const Text('Footer'),
@@ -232,6 +235,7 @@ FSidebar.raw(
 
 ```dart copy
 FSidebarGroup(
+  style: FSidebarGroupStyle(...),
   label: const Text('Group'),
   action: const Icon(FIcons.plus),
   onActionPress: () {},
@@ -243,6 +247,7 @@ FSidebarGroup(
 
 ```dart copy
 FSidebarItem(
+  style: FSidebarItemStyle(...),
   icon: const Icon(FIcons.box),
   label: const Text('Item'),
   selected: false,
