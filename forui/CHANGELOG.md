@@ -1,3 +1,9 @@
+## 0.13.0 (Next)
+
+### Others
+* Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.
+
+
 ## 0.12.0
 
 Bumps minimum Flutter SDK version to 3.32.0.

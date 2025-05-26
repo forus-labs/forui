@@ -244,7 +244,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
             onPointerDown: (_) async {
               final count = ++_monotonic;
               if (!widget._disabled) {
-                onPointerDown();
+                onPressedStart();
               }
 
               await Future.delayed(style.pressedEnterDuration);
@@ -252,10 +252,21 @@ class _FTappableState<T extends FTappable> extends State<T> {
                 setState(() => _controller.update(WidgetState.pressed, true));
               }
             },
+            onPointerMove: (event) {
+              // The RenderObject should almost always be a [RenderBox] since it is wrapped in a Semantics which
+              // required the child to be a [RenderBox] as well. We use a pattern match anyways just to be safe.
+              if (context.findRenderObject() case final RenderBox box? when !box.size.contains(event.localPosition)) {
+                ++_monotonic;
+                if (!widget._disabled) {
+                  onPressedEnd();
+                }
+                setState(() => _controller.update(WidgetState.pressed, false));
+              }
+            },
             onPointerUp: (_) async {
               final count = ++_monotonic;
               if (!widget._disabled) {
-                onPointerUp();
+                onPressedEnd();
               }
 
               await Future.delayed(style.pressedExitDuration);
@@ -297,9 +308,9 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   Widget _decorate(BuildContext _, Widget child) => child;
 
-  void onPointerDown() {}
+  void onPressedStart() {}
 
-  void onPointerUp() {}
+  void onPressedEnd() {}
 
   @override
   void dispose() {
@@ -367,7 +378,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
 
   @override
-  void onPointerDown() {
+  void onPressedStart() {
     // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
     if (mounted) {
       controller.forward();
@@ -375,7 +386,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   @override
-  void onPointerUp() {
+  void onPressedEnd() {
     // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
     if (mounted) {
       controller.reverse();

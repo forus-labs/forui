@@ -22,8 +22,8 @@ class _StubTappable extends AnimatedTappable {
 
 class _StubTappableState extends AnimatedTappableState {
   @override
-  void onPointerUp() {
-    Future.delayed(const Duration(seconds: 1)).then((_) => super.onPointerUp());
+  void onPressedEnd() {
+    Future.delayed(const Duration(seconds: 1)).then((_) => super.onPressedEnd());
   }
 }
 
@@ -142,6 +142,29 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.text(set(enabled).toString()), findsOneWidget);
         expect(key.currentState!.animation.value, 1);
+      });
+
+      testWidgets('press, hold & move outside - $enabled', (tester) async {
+        final key = GlobalKey<AnimatedTappableState>();
+
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onPress: enabled ? () {} : null),
+          ),
+        );
+        expect(find.text(set(enabled).toString()), findsOneWidget);
+        expect(key.currentState!.animation.value, 1);
+
+        final gesture = await tester.press(find.byType(AnimatedTappable));
+        await tester.pumpAndSettle(const Duration(milliseconds: 200));
+        expect(find.text({...set(enabled), WidgetState.pressed}.toString()), findsOneWidget);
+        expect(key.currentState!.animation.value, enabled ? 0.97 : 1.0);
+
+        await gesture.moveTo(Offset.zero);
+        await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+        expect(find.text({...set(enabled)}.toString()), findsOneWidget);
+        expect(key.currentState!.animation.value, 1.0);
       });
 
       testWidgets('shortcut', (tester) async {
@@ -333,6 +356,23 @@ void main() {
         expect(find.text({...set(enabled), WidgetState.pressed}.toString()), findsOneWidget);
 
         await gesture.up();
+        await tester.pumpAndSettle();
+        expect(find.text(set(enabled).toString()), findsOneWidget);
+      });
+
+      testWidgets('press, hold & move outside - $enabled', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FTappable.static(builder: (_, states, _) => Text('$states'), onPress: enabled ? () {} : null),
+          ),
+        );
+        expect(find.text(set(enabled).toString()), findsOneWidget);
+
+        final gesture = await tester.press(find.byType(FTappable));
+        await tester.pumpAndSettle(const Duration(milliseconds: 200));
+        expect(find.text({...set(enabled), WidgetState.pressed}.toString()), findsOneWidget);
+
+        await gesture.moveTo(Offset.zero);
         await tester.pumpAndSettle();
         expect(find.text(set(enabled).toString()), findsOneWidget);
       });
