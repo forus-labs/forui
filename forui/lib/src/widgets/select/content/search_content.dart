@@ -23,7 +23,8 @@ typedef FSelectSearchContentBuilder<T> =
 
 @internal
 class SearchContent<T> extends StatefulWidget {
-  final ScrollController? controller;
+  final FSelectController<T> controller;
+  final ScrollController? scrollController;
   final FSelectStyle style;
   final FSelectSearchFieldProperties properties;
   final bool first;
@@ -38,6 +39,7 @@ class SearchContent<T> extends StatefulWidget {
 
   const SearchContent({
     required this.controller,
+    required this.scrollController,
     required this.style,
     required this.properties,
     required this.first,
@@ -60,6 +62,7 @@ class SearchContent<T> extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('first', first))
       ..add(DiagnosticsProperty('enabled', enabled))
@@ -213,11 +216,11 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       return widget.emptyBuilder(context, widget.style, null);
     }
 
-    return Expanded(
+    return Flexible(
       child: Content<T>(
-        controller: widget.controller,
+        controller: widget.scrollController,
         style: widget.style.contentStyle,
-        first: true,
+        first: widget.controller.value == null,
         enabled: widget.enabled,
         scrollHandles: widget.scrollHandles,
         physics: widget.physics,

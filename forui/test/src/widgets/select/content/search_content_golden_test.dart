@@ -28,6 +28,32 @@ void main() {
         );
       });
 
+      testWidgets('selected result', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>.search(
+              key: key,
+              format: (s) => s,
+              filter: (_) => [],
+              contentBuilder: (_, _) => [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('B'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search_content/selected-result.png'));
+      });
+
       testWidgets('sync', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
