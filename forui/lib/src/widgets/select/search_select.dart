@@ -74,7 +74,8 @@ class _SearchSelect<T> extends FSelect<T> {
 class _SearchSelectState<T> extends _State<_SearchSelect<T>, T> {
   @override
   Widget content(BuildContext context, FSelectStyle style) => SearchContent<T>(
-    controller: widget.contentScrollController,
+    controller: _controller,
+    scrollController: widget.contentScrollController,
     style: style,
     properties: widget.searchFieldProperties,
     scrollHandles: widget.contentScrollHandles,
