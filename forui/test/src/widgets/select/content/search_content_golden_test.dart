@@ -51,7 +51,10 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search_content/selected-result.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/search_content/selected-result.png'),
+        );
       });
 
       testWidgets('sync', (tester) async {
