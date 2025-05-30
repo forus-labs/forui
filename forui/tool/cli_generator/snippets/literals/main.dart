@@ -19,11 +19,13 @@ class Application extends StatelessWidget {
     final theme = FThemes.zinc.dark;
 
     return MaterialApp(
-      localizationsDelegates: FLocalizations.localizationsDelegates,
+      // TODO: replace with your application's supported locales.
       supportedLocales: FLocalizations.supportedLocales,
+      // TODO: add your application's localizations delegates.
+      localizationsDelegates: const [...FLocalizations.localizationsDelegates],
       builder: (_, child) => FTheme(data: theme, child: child!),
       theme: theme.toApproximateMaterialTheme(),
-      // You can replace FScaffold with Material's Scaffold.
+      // You can also replace FScaffold with Material Scaffold.
       home: const FScaffold(
         // TODO: replace with your widget.
         child: Example(),

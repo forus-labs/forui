@@ -8,7 +8,6 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/widgets/toast/animated_toaster_parent_data.dart';
 
 @internal
@@ -102,6 +101,9 @@ class RenderAnimatedToaster extends RenderBox
 
     var current = lastChild;
     var previousHeight = 0.0;
+
+    // We track the accumulated & visible accumulated heights separately so that the toaster will be displayed correctly
+    // when expanded & the toasts occupy more space than available.
     var accumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
     var visibleAccumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
 
@@ -129,7 +131,7 @@ class RenderAnimatedToaster extends RenderBox
         final end = data.shift.end ??= accumulated;
         final value = data.shift.value = lerpDouble(begin, end, data.transition)! * expand;
 
-        current.data.offset = Offset(current.data.offset.dx, value);
+        data.offset = Offset(data.offset.dx, value);
       } else {
         // Calculate the additional offset to move the current toast when expanded.
         // Bottom aligned toasts use the height of the toast in front as the offset.
@@ -145,7 +147,7 @@ class RenderAnimatedToaster extends RenderBox
         final end = data.shift.end ??= accumulated;
         final value = data.shift.value = lerpDouble(begin, end, data.transition)! * expand;
 
-        current.data.offset = Offset(current.data.offset.dx, value);
+        data.offset = Offset(data.offset.dx, value);
       }
 
       accumulated += collapsedAlignTransform.dy * style.expandSpacing;
