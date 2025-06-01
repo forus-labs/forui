@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -258,6 +260,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required this.tileGroupStyle,
     required super.decoration,
     this.maxWidth = 250,
+    super.backgroundFilter,
     super.viewInsets,
   }) : assert(0 < maxWidth, 'maxWidth must be positive');
 

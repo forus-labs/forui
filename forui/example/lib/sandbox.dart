@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -44,69 +46,69 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
-class _SandboxState extends State<Sandbox> {
+class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
+  late final controller = FPopoverController(vsync: this);
+
   @override
   Widget build(BuildContext context) {
-    final cardStyle = context.theme.cardStyle.copyWith(
-      contentStyle: context.theme.cardStyle.contentStyle.copyWith(
-        titleTextStyle: context.theme.typography.sm.copyWith(
-          color: context.theme.colors.primary,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-
     return Column(
-      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
-      spacing: 5,
       children: [
-        FToast(
-          icon: const Icon(FIcons.triangleAlert),
-          title: const Text('Event has been created'),
-          description: Text(
-            'This is a more detailed description that provides comprehensive context and additional information '
-            'about the notification, explaining what happened and what the user might expect next.',
-          ),
-          onDismiss: () {},
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 20),
+            const FTextField(initialText: 'Header Component'),
+            const SizedBox(height: 16),
+            const FTextField(initialText: 'Navigation Bar'),
+            const SizedBox(height: 30),
+          ],
         ),
-        FButton(
-          intrinsicWidth: true,
-          onPress: () {
-            Widget buildToast(BuildContext context, FToasterEntry toast) => FToast(
-              icon: const Icon(FIcons.triangleAlert),
-              title: const Text('Event has been created'),
-              description: Text(
-                'This is a more detailed description that provides comprehensive context and additional information '
-                'about the notification, explaining what happened and what the user might expect next.',
-              ),
-            );
-
-            showRawFToast(context: context, builder: buildToast, alignment: FToastAlignment.bottomRight);
-          },
-          child: Text('Small'),
-        ),
-        FButton(
-          intrinsicWidth: true,
-          onPress: () {
-            Widget buildToast(BuildContext context, FToasterEntry toast) => IntrinsicHeight(
-              child: FCard(
-                style: cardStyle,
-                title: const Text('Event has been created'),
-                subtitle: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Text(
-                    'This is a more detailed description that provides comprehensive context and additional information '
-                    'about the notification, explaining what happened and what the user might expect next.',
+        FPopover(
+          controller: controller,
+          barrier: ColorFilter.mode(Colors.red, BlendMode.srcOver),
+          popoverAnchor: Alignment.topCenter,
+          childAnchor: Alignment.bottomCenter,
+          popoverBuilder: (context, style, _) => Padding(
+            padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+            child: SizedBox(
+              width: 288,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Dimensions', style: context.theme.typography.base),
+                  const SizedBox(height: 7),
+                  Text(
+                    'Set the dimensions for the layer.',
+                    style: context.theme.typography.sm.copyWith(
+                      color: context.theme.colors.mutedForeground,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
-                ),
-                child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
+                  const SizedBox(height: 15),
+                  for (final (label, value) in [
+                    ('Width', '100%'),
+                    ('Max. Width', '300px'),
+                    ('Height', '25px'),
+                    ('Max. Height', 'none'),
+                  ]) ...[
+                    Row(
+                      children: [
+                        Expanded(child: Text(label, style: context.theme.typography.sm)),
+                        Expanded(flex: 2, child: FTextField(initialText: value)),
+                      ],
+                    ),
+                    const SizedBox(height: 7),
+                  ],
+                ],
               ),
-            );
-
-            showRawFToast(context: context, builder: buildToast, alignment: FToastAlignment.bottomRight);
-          },
-          child: Text('Large'),
+            ),
+          ),
+          child: IntrinsicWidth(
+            child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
+          ),
         ),
       ],
     );

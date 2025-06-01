@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui_example/sandbox.dart';
@@ -7,6 +8,8 @@ import 'package:wakelock_plus/wakelock_plus.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   WakelockPlus.enable();
+
+  timeDilation = 1;
 
   runApp(const Application());
 }

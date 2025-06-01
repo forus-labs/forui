@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -19,10 +21,14 @@ final class FPopoverController extends FChangeNotifier {
   late final Animation<double> _scale;
 
   /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
-  FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
+  FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 150)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _fade = _fadeTween.animate(_animation);
-    _scale = _scaleTween.animate(_animation);
+    _fade = _fadeTween.animate(
+      CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad),
+    );
+    _scale = _scaleTween.animate(
+      CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad),
+    );
   }
 
   /// Convenience method for toggling the current [shown] status.
@@ -164,6 +170,29 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   final FHidePopoverRegion hideOnTapOutside;
 
+  /// {@template forui.widgets.FPopover.barrier}
+  /// The popover's barrier. Defaults to null.
+  ///
+  /// ## Examples
+  /// ```dart
+  /// // Blurred
+  /// ImageFilter.blur(sigmaX: 5, sigmaY: 5);
+  ///
+  /// // Solid color
+  /// ColorFilter.mode(Colors.white, BlendMode.srcOver);
+  ///
+  /// // Tinted
+  /// ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver);
+  ///
+  /// // Blurred & tinted
+  /// ImageFilter.compose(
+  ///   outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver),
+  /// );
+  /// ```
+  /// {@endtemplate}
+  final ImageFilter? barrier;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -209,6 +238,7 @@ class FPopover extends StatefulWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.barrier,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -242,6 +272,7 @@ class FPopover extends StatefulWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.barrier,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -276,6 +307,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(DiagnosticsProperty('backdrop', barrier))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -318,39 +350,61 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
     }
 
-    return FPortal(
-      controller: _controller._overlay,
-      constraints: widget.constraints,
-      portalAnchor: widget.popoverAnchor,
-      childAnchor: widget.childAnchor,
-      viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
-      spacing: widget.spacing,
-      shift: widget.shift,
-      offset: widget.offset,
-      portalBuilder: (context) => CallbackShortcuts(
-        bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-        child: Semantics(
-          label: widget.semanticsLabel,
-          container: true,
-          child: FocusScope(
-            autofocus: widget.autofocus,
-            node: widget.focusNode,
-            onFocusChange: widget.onFocusChange,
+    return BackdropGroup(
+      child: FPortal(
+        controller: _controller._overlay,
+        constraints: widget.constraints,
+        portalAnchor: widget.popoverAnchor,
+        childAnchor: widget.childAnchor,
+        viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
+        spacing: widget.spacing,
+        shift: widget.shift,
+        offset: widget.offset,
+        barrier: widget.barrier == null
+            ? null
+            : BackdropFilter.grouped(
+              filter: widget.barrier!,
+              child: FadeTransition(
+                opacity: _controller._fade,
+                child: Container(color: Colors.transparent),
+              ),
+            ),
+        portalBuilder: (context) {
+          Widget popover = DecoratedBox(decoration: style.decoration, child: widget.popoverBuilder(context, style, null));
+          if (style.backgroundFilter case final backdrop?) {
+            popover = BackdropFilter.grouped(
+              filter: backdrop,
+              child: popover,
+            );
+          }
+
+          return CallbackShortcuts(
+            bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
             child: FadeTransition(
               opacity: _controller._fade,
               child: ScaleTransition(
+                alignment: widget.popoverAnchor.resolve(direction),
                 scale: _controller._scale,
-                child: TapRegion(
-                  groupId: _groupId,
-                  onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
-                  child: DecoratedBox(decoration: style.decoration, child: widget.popoverBuilder(context, style, null)),
+                child: Semantics(
+                  label: widget.semanticsLabel,
+                  container: true,
+                  child: FocusScope(
+                    autofocus: widget.autofocus,
+                    node: widget.focusNode,
+                    onFocusChange: widget.onFocusChange,
+                    child: TapRegion(
+                      groupId: _groupId,
+                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
+                      child: popover,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        },
+        child: child,
       ),
-      child: child,
     );
   }
 
@@ -377,6 +431,12 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final BoxDecoration decoration;
 
+  /// An optional background filter applied to the popover.
+  ///
+  /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
+  @override
+  final ImageFilter? backgroundFilter;
+
   /// The additional insets of the view. In other words, the minimum distance between the edges of the view and the
   /// edges of the popover. This applied in addition to the insets provided by [MediaQueryData.viewPadding].
   ///
@@ -385,7 +445,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final EdgeInsetsGeometry viewInsets;
 
   /// Creates a [FPopoverStyle].
-  const FPopoverStyle({required this.decoration, this.viewInsets = const EdgeInsets.all(5)});
+  const FPopoverStyle({required this.decoration, this.backgroundFilter, this.viewInsets = const EdgeInsets.all(5)});
 
   /// Creates a [FPopoverStyle] that inherits its properties.
   FPopoverStyle.inherit({required FColors colors, required FStyle style})

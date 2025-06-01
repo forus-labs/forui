@@ -1,6 +1,15 @@
 ## 0.13.0 (Next)
 
+### `FPopover`
+* Add `FPopover.barrier`.
+* Add `FPopoverStyle.backgroundFilter`.
+
+* Change `FPopover`'s animation to be origin aware.
+
+
 ### Others
+* Add `FPortal.barrier`.
+
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.
 * Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.

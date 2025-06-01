@@ -13,6 +13,7 @@ void main() {
       TestScaffold.app(
         child: FPortal(
           controller: controller,
+          barrier: Container(color: Colors.blue),
           portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
           child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
         ),
@@ -39,6 +40,26 @@ void main() {
     await tester.pumpAndSettle();
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shown.png'));
+  });
+
+  testWidgets('shown with barrier', (tester) async {
+    final controller = OverlayPortalController();
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FPortal(
+          controller: controller,
+          barrier: Container(color: Colors.blue),
+          portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+          child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+        ),
+      ),
+    );
+
+    controller.show();
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/barrier.png'));
   });
 
   group('constraints', () {

@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -41,16 +44,22 @@ class PopoverPage extends StatefulSample {
        );
 
   @override
-  State<PopoverPage> createState() => _State();
+  State<PopoverPage> createState() => _PopoverState();
 }
 
-class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderStateMixin {
+class _PopoverState extends StatefulSampleState<PopoverPage> with SingleTickerProviderStateMixin {
   late FPopoverController controller;
 
   @override
   void initState() {
     super.initState();
     controller = FPopoverController(vsync: this);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -106,10 +115,95 @@ class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderS
       ),
     ],
   );
+}
+
+@RoutePage()
+class BlurredPopoverPage extends StatefulSample {
+  BlurredPopoverPage({@queryParam super.theme});
+
+  @override
+  State<BlurredPopoverPage> createState() => _BlurredPopoverState();
+}
+
+class _BlurredPopoverState extends StatefulSampleState<BlurredPopoverPage> with SingleTickerProviderStateMixin {
+  late FPopoverController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FPopoverController(vsync: this);
+  }
 
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
   }
+
+  @override
+  Widget sample(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.end,
+    children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 20),
+          const FTextField(initialText: 'Header Component'),
+          const SizedBox(height: 16),
+          const FTextField(initialText: 'Navigation Bar'),
+          const SizedBox(height: 30),
+        ],
+      ),
+      FPopover(
+        controller: controller,
+        barrier: ImageFilter.compose(
+          outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          inner: ColorFilter.mode(Colors.black.withValues(alpha: 0.2), BlendMode.srcOver),
+        ),
+        popoverAnchor: Alignment.topCenter,
+        childAnchor: Alignment.bottomCenter,
+        popoverBuilder: (context, style, _) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                  ('Height', '25px'),
+                  ('Max. Height', 'none'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ],
+              ],
+            ),
+          ),
+        ),
+        child: IntrinsicWidth(
+          child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
+        ),
+      ),
+    ],
+  );
 }

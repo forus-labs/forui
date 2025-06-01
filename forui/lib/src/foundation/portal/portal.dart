@@ -1,4 +1,6 @@
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -63,6 +65,9 @@ class FPortal extends StatefulWidget {
   /// Set this to [EdgeInsets.zero] to disable the insets.
   final EdgeInsetsGeometry? viewInsets;
 
+  /// An optional barrier widget that is displayed behind the portal.
+  final Widget? barrier;
+
   /// The portal builder which returns the floating content.
   final WidgetBuilder portalBuilder;
 
@@ -81,6 +86,7 @@ class FPortal extends StatefulWidget {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.viewInsets,
+    this.barrier,
     super.key,
   });
 
@@ -108,35 +114,45 @@ class _State extends State<FPortal> {
   final _link = ChildLayerLink();
 
   @override
-  Widget build(BuildContext context) => RepaintBoundary(
-    child: CompositedChild(
-      notifier: _notifier,
-      link: _link,
-      child: OverlayPortal(
-        controller: widget.controller,
-        overlayChildBuilder: (context) {
-          final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
-          final portalAnchor = widget.portalAnchor.resolve(direction);
-          final childAnchor = widget.childAnchor.resolve(direction);
+  Widget build(BuildContext context) => Stack(
+    children: [
+      RepaintBoundary(
+        child: CompositedChild(
+          notifier: _notifier,
+          link: _link,
+          child: OverlayPortal(
+            controller: widget.controller,
+            overlayChildBuilder: (context) {
+              final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+              final portalAnchor = widget.portalAnchor.resolve(direction);
+              final childAnchor = widget.childAnchor.resolve(direction);
 
-          return CompositedPortal(
-            notifier: _notifier,
-            link: _link,
-            constraints: widget.constraints,
-            portalAnchor: portalAnchor,
-            childAnchor: childAnchor,
-            viewInsets:
-                widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
-                MediaQuery.viewPaddingOf(context),
-            spacing: widget.spacing.resolve(childAnchor, portalAnchor),
-            shift: widget.shift,
-            offset: widget.offset,
-            child: widget.portalBuilder(context),
-          );
-        },
-        child: RepaintBoundary(child: widget.child),
+              Widget portal = CompositedPortal(
+                notifier: _notifier,
+                link: _link,
+                constraints: widget.constraints,
+                portalAnchor: portalAnchor,
+                childAnchor: childAnchor,
+                viewInsets:
+                    widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
+                    MediaQuery.viewPaddingOf(context),
+                spacing: widget.spacing.resolve(childAnchor, portalAnchor),
+                shift: widget.shift,
+                offset: widget.offset,
+                child: widget.portalBuilder(context),
+              );
+
+              if (widget.barrier case final barrier?) {
+                portal = Stack(fit: StackFit.expand, children: [barrier, portal]);
+              }
+
+              return portal;
+            },
+            child: RepaintBoundary(child: widget.child),
+          ),
+        ),
       ),
-    ),
+    ],
   );
 
   @override
