@@ -30,6 +30,13 @@
   `Widget Function(BuildContext, FPortalController)`.
 
 
+### `FSelectMenuTile`
+* Add `FSelectMenuTile.barrier`.
+* Add `FSelectMenutile.detailsBuilder`.
+
+* Change `FSelectMenuTile.selectController` to be optional.
+
+
 ### Others
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.

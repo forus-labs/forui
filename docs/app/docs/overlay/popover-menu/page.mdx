@@ -40,7 +40,7 @@ A popover menu displays a menu in a portal aligned to a child.
                 ],
               ),
             ],
-            builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
+            builder: (context, controller, child) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
           ),
         ],
       );

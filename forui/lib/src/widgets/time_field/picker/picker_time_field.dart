@@ -260,7 +260,7 @@ class _PickerPopover extends StatelessWidget {
     hideOnTapOutside: properties.hideOnTapOutside,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-    popoverBuilder: (_, _, _) => TextFieldTapRegion(
+    popoverBuilder: (_, _) => TextFieldTapRegion(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: FTimePicker(

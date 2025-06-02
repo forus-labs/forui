@@ -8,18 +8,11 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FMultiValueNotifier<int> controller;
-
-  setUp(() => controller = FMultiValueNotifier.radio());
-
-  tearDown(() => controller.dispose());
-
   group('FSelectMenuTile', () {
     testWidgets('tap on tile opens menu', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile(
-            selectController: controller,
             prefixIcon: const Icon(FIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
@@ -48,7 +41,6 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile(
-            selectController: controller,
             prefixIcon: const Icon(FIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
@@ -80,7 +72,6 @@ void main() {
         TestScaffold.app(
           child: FSelectMenuTile(
             autoHide: true,
-            selectController: controller,
             prefixIcon: const Icon(FIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
@@ -109,29 +100,151 @@ void main() {
   });
 
   group('state', () {
-    testWidgets('set initial value', (tester) async {
-      final key = GlobalKey<FormState>();
+    group('FSelectMenuTile.new', () {
+      testWidgets('set initial value', (tester) async {
+        final key = GlobalKey<FormState>();
 
-      Set<int>? initial;
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: Form(
-            key: key,
+        Set<int>? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Form(
+              key: key,
+              child: FSelectMenuTile<int>(
+                autoHide: true,
+                initialValue: 1,
+                title: const Text('Repeat'),
+                onSaved: (value) => initial = value,
+                menu: const [FSelectTile(title: Text('1'), value: 1)],
+              ),
+            ),
+          ),
+        );
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, {1});
+      });
+
+      testWidgets('set initial value via controller', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        Set<int>? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Form(
+              key: key,
+              child: FSelectMenuTile<int>(
+                autoHide: true,
+                selectController: autoDispose(FMultiValueNotifier(values: {1})),
+                title: const Text('Repeat'),
+                onSaved: (value) => initial = value,
+                menu: const [FSelectTile(title: Text('1'), value: 1)],
+              ),
+            ),
+          ),
+        );
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, {1});
+      });
+
+      testWidgets('detailsBuilder updates when selecting value', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
             child: FSelectMenuTile<int>(
               autoHide: true,
-              selectController: autoDispose(FMultiValueNotifier(values: {1})),
               title: const Text('Repeat'),
-              onSaved: (value) => initial = value,
+              detailsBuilder: (_, value, _) => Text('Selected: ${value.firstOrNull}'),
               menu: const [FSelectTile(title: Text('1'), value: 1)],
             ),
           ),
-        ),
-      );
+        );
 
-      key.currentState!.save();
-      await tester.pumpAndSettle(const Duration(seconds: 5));
+        await tester.tap(find.byType(FSelectMenuTile<int>));
+        await tester.pumpAndSettle();
 
-      expect(initial, {1});
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+
+        expect(find.text('Selected: 1'), findsOne);
+      });
+    });
+
+    group('FSelectMenuTile.builder', () {
+      testWidgets('set initial value', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        Set<int>? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Form(
+              key: key,
+              child: FSelectMenuTile<int>.builder(
+                autoHide: true,
+                initialValue: 0,
+                title: const Text('Repeat'),
+                onSaved: (value) => initial = value,
+                menuBuilder: (context, index) => FSelectTile(title: Text('$index'), value: index),
+              ),
+            ),
+          ),
+        );
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, {0});
+      });
+
+      testWidgets('set initial value via controller', (tester) async {
+        final key = GlobalKey<FormState>();
+
+        Set<int>? initial;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Form(
+              key: key,
+              child: FSelectMenuTile<int>.builder(
+                selectController: autoDispose(FMultiValueNotifier(values: {0})),
+                autoHide: true,
+                title: const Text('Repeat'),
+                onSaved: (value) => initial = value,
+                menuBuilder: (context, index) => FSelectTile(title: Text('$index'), value: index),
+              ),
+            ),
+          ),
+        );
+
+        key.currentState!.save();
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(initial, {0});
+      });
+
+      testWidgets('detailsBuilder updates when selecting value', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelectMenuTile<int>.builder(
+              autoHide: true,
+              count: 1,
+              title: const Text('Repeat'),
+              detailsBuilder: (_, value, _) => Text('Selected: ${value.firstOrNull}'),
+              menuBuilder: (context, index) => FSelectTile(title: Text('$index'), value: index),
+            ),
+          ),
+        );
+
+        await tester.tap(find.byType(FSelectMenuTile<int>));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('0'));
+        await tester.pumpAndSettle();
+
+        expect(find.text('Selected: 0'), findsOne);
+      });
     });
 
     testWidgets('update callbacks', (tester) async {

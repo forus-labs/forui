@@ -726,7 +726,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
           offset: widget.offset,
           hideOnTapOutside: widget.hideOnTapOutside,
           shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
-          popoverBuilder: (_, _, _) => TextFieldTapRegion(
+          popoverBuilder: (_, _) => TextFieldTapRegion(
             child: SelectControllerData<T>(
               contains: (value) => _controller.value == value,
               onPress: (value) async {
