@@ -236,6 +236,11 @@ class FPopover extends StatefulWidget {
   final Widget? child;
 
   /// Creates a popover that only shows the popover when the controller is manually toggled.
+  ///
+  /// ## Contract
+  /// Throws an [AssertionError] if:
+  /// * [groupId] is not null and [hideOnTapOutside] is not set to [FHidePopoverRegion.excludeTarget].
+  /// * neither [builder] nor [child] is provided.
   FPopover({
     required this.popoverBuilder,
     this.controller,

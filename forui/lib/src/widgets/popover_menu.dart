@@ -130,8 +130,8 @@ class FPopoverMenu extends StatelessWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * both [builder] and [child] are provided.
-  /// * both [menuBuilder] and [menu] are null.
+  /// * neither [builder] nor [child] is provided.
+  /// * neither [menuBuilder] nor [menu] is provided.
   const FPopoverMenu({
     this.popoverController,
     this.scrollController,

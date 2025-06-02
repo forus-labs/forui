@@ -19,7 +19,7 @@ class InheritedData extends InheritedWidget {
   final List<FSliderMark> marks;
   final double? trackMainAxisExtent;
   final double? trackHitRegionCrossExtent;
-  final Widget Function(FTooltipStyle, double) tooltipBuilder;
+  final Widget Function(FTooltipController, double) tooltipBuilder;
   final String Function(FSliderSelection) semanticFormatterCallback;
   final String Function(double) semanticValueFormatterCallback;
   final bool enabled;

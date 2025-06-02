@@ -17,6 +17,7 @@
 * Add `FPopoverMenu.builder`.
 * Add `FPopoverMenu.menuBuilder`.
 
+* Change `FPopoverMenu`'s animation to be origin aware.
 * Change `FPopoverMenu(...)`'s `controller` to be optional.
 * **Breaking** Remove `FPopoverMenu.automatic` - This was a bad abstraction in hindsight, use `FPopoverMenu.new` instead.
 
@@ -35,6 +36,16 @@
 * Add `FSelectMenutile.detailsBuilder`.
 
 * Change `FSelectMenuTile.selectController` to be optional.
+
+
+### `FTooltip`
+* Add `FTooltip.builder`.
+* Add `FTooltipStyle.backgroundFilter`.
+
+* **Breaking** Replace `FTooltipStyle.margin` with `FTooltip.spacing`.
+* **Breaking** Change `FTooltip.tipBuilder`'s signature from `ValueWidgetBuilder<FTooltipStyle>` to
+  `Widget Function(BuildContext, FTooltipController)`.
+* Change `FTooltip`'s animation to be origin aware.
 
 
 ### Others

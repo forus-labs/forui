@@ -7,16 +7,6 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FTooltipController controller;
-
-  setUp(() {
-    controller = FTooltipController(vsync: const TestVSync());
-  });
-
-  tearDown(() {
-    controller.dispose();
-  });
-
   for (final theme in TestScaffold.themes) {
     group('FTooltip', () {
       testWidgets('${theme.name} hidden ', (tester) async {
@@ -24,8 +14,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FTooltip(
-              controller: controller,
-              tipBuilder: (context, style, _) => const Text('Lorem'),
+              tipBuilder: (context, _) => const Text('Lorem'),
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
@@ -39,8 +28,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FTooltip(
-              controller: controller,
-              tipBuilder: (context, style, _) => const Text('Lorem'),
+              tipBuilder: (context, _) => const Text('Lorem'),
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
             ),
           ),
