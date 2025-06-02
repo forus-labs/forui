@@ -223,11 +223,13 @@ class FPopover extends StatefulWidget {
   /// The popover builder.
   final Widget Function(BuildContext, FPopoverController) popoverBuilder;
 
+  /// {@template forui.widgets.FPopover.builder}
   /// An optional builder which returns the child widget that the popover is aligned to.
   ///
   /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
   ///
   /// This can be null if the entire widget subtree the [builder] builds doest not require the controller.
+  /// {@endtemplate}
   final ValueWidgetBuilder<FPopoverController> builder;
 
   /// The child which the popover is aligned to.

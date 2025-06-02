@@ -9,10 +9,11 @@ import 'package:forui/forui.dart';
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
 /// A [FThemeData] is composed of [colors], [typography], [style], and widget styles.
-///   * [colors] is a set of colors.
-///   * [typography] contains font and typography information.
-///   * [style] is a set of miscellaneous properties.
-///   * widget styles are used to style individual Forui widgets.
+///
+/// * [colors] is a set of colors.
+/// * [typography] contains font and typography information.
+/// * [style] is a set of miscellaneous properties.
+/// * widget styles are used to style individual Forui widgets.
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
 /// provided by the [colors], [typography], and [style].

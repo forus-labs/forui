@@ -8,18 +8,11 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FPopoverController controller;
-
-  setUp(() => controller = FPopoverController(vsync: const TestVSync()));
-
-  tearDown(() => controller.dispose());
-
   group('FPopover', () {
     testWidgets('tap outside hides popover', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopoverMenu(
-            popoverController: controller,
             menu: [
               FTileGroup(
                 children: [FTile(title: const Text('Group 1'), onPress: () {})],
@@ -28,7 +21,7 @@ void main() {
                 children: [FTile(title: const Text('Group 2'), onPress: () {})],
               ),
             ],
-            child: FButton(onPress: controller.toggle, child: const Text('target')),
+            builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
           ),
         ),
       );
@@ -48,7 +41,6 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopoverMenu(
-            popoverController: controller,
             hideOnTapOutside: FHidePopoverRegion.none,
             menu: [
               FTileGroup(
@@ -58,7 +50,7 @@ void main() {
                 children: [FTile(title: const Text('Group 2'), onPress: () {})],
               ),
             ],
-            child: FButton(onPress: controller.toggle, child: const Text('target')),
+            builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
           ),
         ),
       );
@@ -78,7 +70,6 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopoverMenu(
-            popoverController: controller,
             menu: [
               FTileGroup(
                 children: [FTile(title: const Text('Group 1'), onPress: () {})],
@@ -87,7 +78,7 @@ void main() {
                 children: [FTile(title: const Text('Group 2'), onPress: () {})],
               ),
             ],
-            child: FButton(onPress: controller.toggle, child: const Text('target')),
+            builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
           ),
         ),
       );
@@ -101,31 +92,6 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Group 1'), findsNothing);
-    });
-  });
-
-  group('FPopover.automatic', () {
-    testWidgets('shown', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FPopoverMenu.automatic(
-            menu: [
-              FTileGroup(
-                children: [FTile(title: const Text('Group 1'), onPress: () {})],
-              ),
-              FTileGroup(
-                children: [FTile(title: const Text('Group 2'), onPress: () {})],
-              ),
-            ],
-            child: Container(color: Colors.black, height: 10, width: 10),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byType(Container).last);
-      await tester.pumpAndSettle();
-
-      expect(find.text('Group 1'), findsOneWidget);
     });
   });
 

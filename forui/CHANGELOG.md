@@ -12,6 +12,15 @@
 * **Breaking** Remove `FPopover.automatic` - This was a bad abstraction in hindsight, use `FPopover.new` instead.
 
 
+### `FPopoverMenu`
+* Add `FPopoverMenu.barrier`.
+* Add `FPopoverMenu.builder`.
+* Add `FPopoverMenu.menuBuilder`.
+
+* Change `FPopoverMenu(...)`'s `controller` to be optional.
+* **Breaking** Remove `FPopoverMenu.automatic` - This was a bad abstraction in hindsight, use `FPopoverMenu.new` instead.
+
+
 ### `FPortal`
 * Add `FPortal.barrier`.
 * Add `FPortal.builder(...)`.

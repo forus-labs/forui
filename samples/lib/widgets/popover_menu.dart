@@ -6,22 +6,14 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class PopoverMenuPage extends StatefulSample {
+class PopoverMenuPage extends Sample {
   PopoverMenuPage({@queryParam super.theme = 'zinc-light'});
-
-  @override
-  State<PopoverMenuPage> createState() => _State();
-}
-
-class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProviderStateMixin {
-  late final controller = FPopoverController(vsync: this);
 
   @override
   Widget sample(BuildContext context) => FHeader(
     title: const Text('Edit Notes'),
     suffixes: [
       FPopoverMenu(
-        popoverController: controller,
         menuAnchor: Alignment.topRight,
         childAnchor: Alignment.bottomRight,
         menu: [
@@ -39,14 +31,8 @@ class _State extends StatefulSampleState<PopoverMenuPage> with SingleTickerProvi
             ],
           ),
         ],
-        child: FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
+        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
       ),
     ],
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }
