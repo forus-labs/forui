@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -11,7 +10,7 @@ import 'package:forui/src/foundation/portal/layer.dart';
 
 /// A portal renders a portal widget that "floats" on top of a child widget.
 ///
-/// Similar to an [OverlayPortal], it requires an [Overlay] ancestor. Unlike an [OverlayPortal], the Portal is aligned
+/// Similar to an [OverlayPortal], it requires an [Overlay] ancestor. Unlike an [OverlayPortal], the portal is aligned
 /// relative to the child.
 ///
 /// See:
@@ -19,8 +18,10 @@ import 'package:forui/src/foundation/portal/layer.dart';
 /// * [OverlayPortalController] for controlling the portal's visibility.
 /// * [OverlayPortal] for the underlying widget.
 class FPortal extends StatefulWidget {
+  static Widget _builder(BuildContext _, OverlayPortalController _, Widget? child) => child!;
+
   /// The controller that shows and hides the portal. It initially hides the portal.
-  final OverlayPortalController controller;
+  final OverlayPortalController? controller;
 
   /// The constraints.
   final FPortalConstraints constraints;
@@ -69,16 +70,25 @@ class FPortal extends StatefulWidget {
   final Widget? barrier;
 
   /// The portal builder which returns the floating content.
-  final WidgetBuilder portalBuilder;
+  final Widget Function(BuildContext, OverlayPortalController) portalBuilder;
+
+  /// An optional builder which returns the child widget that the portal is aligned to.
+  ///
+  /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
+  ///
+  /// This can be null if the entire widget subtree the [builder] builds doest not require the controller.
+  final ValueWidgetBuilder<OverlayPortalController> builder;
 
   /// The child which the portal is aligned to.
-  final Widget child;
+  final Widget? child;
 
   /// Creates a portal.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [builder] and [child] are both null.
   const FPortal({
-    required this.controller,
     required this.portalBuilder,
-    required this.child,
+    this.controller,
     this.constraints = const FPortalConstraints(),
     this.portalAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
@@ -87,8 +97,10 @@ class FPortal extends StatefulWidget {
     this.offset = Offset.zero,
     this.viewInsets,
     this.barrier,
+    this.builder = _builder,
+    this.child,
     super.key,
-  });
+  }): assert(builder != _builder || child != null, 'Either builder or child must be provided.');
 
   @override
   State<FPortal> createState() => _State();
@@ -105,13 +117,29 @@ class FPortal extends StatefulWidget {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('viewInsets', viewInsets))
-      ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder));
+      ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
 class _State extends State<FPortal> {
   final _notifier = FChangeNotifier();
   final _link = ChildLayerLink();
+  late OverlayPortalController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? OverlayPortalController();
+  }
+
+  @override
+  void didUpdateWidget(covariant FPortal old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      _controller = widget.controller ?? OverlayPortalController();
+    }
+  }
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -121,7 +149,7 @@ class _State extends State<FPortal> {
           notifier: _notifier,
           link: _link,
           child: OverlayPortal(
-            controller: widget.controller,
+            controller: _controller,
             overlayChildBuilder: (context) {
               final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
               final portalAnchor = widget.portalAnchor.resolve(direction);
@@ -139,7 +167,7 @@ class _State extends State<FPortal> {
                 spacing: widget.spacing.resolve(childAnchor, portalAnchor),
                 shift: widget.shift,
                 offset: widget.offset,
-                child: widget.portalBuilder(context),
+                child: widget.portalBuilder(context, _controller),
               );
 
               if (widget.barrier case final barrier?) {
@@ -148,7 +176,7 @@ class _State extends State<FPortal> {
 
               return portal;
             },
-            child: RepaintBoundary(child: widget.child),
+            child: RepaintBoundary(child: widget.builder(context, _controller, widget.child)),
           ),
         ),
       ),

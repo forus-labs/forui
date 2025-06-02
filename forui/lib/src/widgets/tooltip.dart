@@ -228,7 +228,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       childAnchor: widget.childAnchor,
       portalAnchor: widget.tipAnchor,
       shift: widget.shift,
-      portalBuilder: (context) => Semantics(
+      portalBuilder: (context, _) => Semantics(
         container: true,
         child: FadeTransition(
           opacity: _controller._fade,

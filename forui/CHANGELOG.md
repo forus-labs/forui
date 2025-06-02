@@ -2,14 +2,26 @@
 
 ### `FPopover`
 * Add `FPopover.barrier`.
+* Add `FPopover.builder`.
 * Add `FPopoverStyle.backgroundFilter`.
 
 * Change `FPopover`'s animation to be origin aware.
+* Change `FPopover(...)`'s `controller` to be optional.
+* **Breaking** Change `FPopover.popoverBuilder`'s signature from `ValueWidgetBuilder<FPopoverStyle>` to 
+  `Widget Function(BuildContext, FPopoverController)`.
+* **Breaking** Remove `FPopover.automatic` - This was a bad abstraction in hindsight, use `FPopover.new` instead.
+
+
+### `FPortal`
+* Add `FPortal.barrier`.
+* Add `FPortal.builder(...)`.
+
+* Change `FPortal.controller` to be optional.
+* **Breaking** Change `FPortal.portalBuilder`'s signature from `WidgetBuilder` to 
+  `Widget Function(BuildContext, FPortalController)`.
 
 
 ### Others
-* Add `FPortal.barrier`.
-
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.
 * Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.

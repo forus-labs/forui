@@ -16,7 +16,7 @@ void main() {
           portalAnchor: Alignment.topRight,
           childAnchor: Alignment.bottomLeft,
           controller: controller,
-          portalBuilder: (context) => Padding(
+          portalBuilder: (context, _) => Padding(
             padding: const EdgeInsets.all(5),
             child: ColoredBox(
               color: Colors.red,
@@ -41,6 +41,4 @@ void main() {
 
     expect(taps, 1);
   });
-
-
 }

@@ -20,7 +20,7 @@ void main() {
           theme: theme.data,
           child: FPopover(
             controller: controller,
-            popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+            popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),
@@ -37,7 +37,7 @@ void main() {
           theme: theme.data,
           child: FPopover(
             controller: controller,
-            popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+            popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),
@@ -57,7 +57,7 @@ void main() {
           theme: theme.data,
           child: FPopover(
             controller: controller,
-            popoverBuilder: (context, style, _) => const SizedBox.square(dimension: 100),
+            popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),
@@ -81,7 +81,7 @@ void main() {
           child: FPopover(
             controller: controller,
             barrier: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-            popoverBuilder: (context, _, _) => const SizedBox.square(dimension: 100),
+            popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
         ),

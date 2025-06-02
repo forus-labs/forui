@@ -93,6 +93,8 @@ class FPopover extends StatefulWidget {
       ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
       : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
 
+  static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
+
   /// The controller that shows and hides the popover. It initially hides the popover.
   final FPopoverController? controller;
 
@@ -218,19 +220,23 @@ class FPopover extends StatefulWidget {
   /// Defaults to closing the popover when the escape key is pressed.
   final Map<ShortcutActivator, VoidCallback>? shortcuts;
 
-  /// The popover builder. The child passed to [popoverBuilder] will always be null.
-  final ValueWidgetBuilder<FPopoverStyle> popoverBuilder;
+  /// The popover builder.
+  final Widget Function(BuildContext, FPopoverController) popoverBuilder;
 
-  /// The child.
-  final Widget child;
+  /// An optional builder which returns the child widget that the popover is aligned to.
+  ///
+  /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
+  ///
+  /// This can be null if the entire widget subtree the [builder] builds doest not require the controller.
+  final ValueWidgetBuilder<FPopoverController> builder;
 
-  final bool _automatic;
+  /// The child which the popover is aligned to.
+  final Widget? child;
 
   /// Creates a popover that only shows the popover when the controller is manually toggled.
   FPopover({
-    required FPopoverController this.controller,
     required this.popoverBuilder,
-    required this.child,
+    this.controller,
     this.style,
     this.constraints = const FPortalConstraints(),
     this.spacing = const FPortalSpacing(4),
@@ -245,6 +251,8 @@ class FPopover extends StatefulWidget {
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     this.semanticsLabel,
     this.shortcuts,
+    this.builder = _builder,
+    this.child,
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
     super.key,
@@ -252,43 +260,9 @@ class FPopover extends StatefulWidget {
          groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
          'groupId can only be used with FHidePopoverRegion.excludeTarget',
        ),
+       assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
        popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
-       childAnchor = childAnchor ?? defaultPlatform.child,
-       _automatic = false;
-
-  /// Creates a popover that is automatically shown when the [child] is tapped.
-  ///
-  /// It is not recommended for the [child] to contain a [GestureDetector], such as [FButton]. Only one
-  /// `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s, leading to unexpected
-  /// behavior.
-  FPopover.automatic({
-    required this.popoverBuilder,
-    required this.child,
-    this.controller,
-    this.style,
-    this.constraints = const FPortalConstraints(),
-    this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
-    this.offset = Offset.zero,
-    this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.barrier,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
-    this.semanticsLabel,
-    this.shortcuts,
-    AlignmentGeometry? popoverAnchor,
-    AlignmentGeometry? childAnchor,
-    super.key,
-  }) : assert(
-         groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
-         'groupId can only be used with FHidePopoverRegion.excludeTarget',
-       ),
-       popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
-       childAnchor = childAnchor ?? defaultPlatform.child,
-       _automatic = true;
+       childAnchor = childAnchor ?? defaultPlatform.child;
 
   @override
   State<FPopover> createState() => _State();
@@ -314,7 +288,8 @@ class FPopover extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
-      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -342,9 +317,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     final style = widget.style ?? context.theme.popoverStyle;
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
-    var child = widget._automatic
-        ? GestureDetector(behavior: HitTestBehavior.translucent, onTap: _controller.toggle, child: widget.child)
-        : widget.child;
+    var child = widget.builder(context, _controller, widget.child);
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
       child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
@@ -363,19 +336,20 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
         barrier: widget.barrier == null
             ? null
             : BackdropFilter.grouped(
-              filter: widget.barrier!,
-              child: FadeTransition(
-                opacity: _controller._fade,
-                child: Container(color: Colors.transparent),
+                filter: widget.barrier!,
+                child: FadeTransition(
+                  opacity: _controller._fade,
+                  child: Container(color: Colors.transparent),
+                ),
               ),
-            ),
-        portalBuilder: (context) {
-          Widget popover = DecoratedBox(decoration: style.decoration, child: widget.popoverBuilder(context, style, null));
+        portalBuilder: (context, _) {
+          Widget popover = DecoratedBox(
+            decoration: style.decoration,
+            child: widget.popoverBuilder(context, _controller),
+          );
+
           if (style.backgroundFilter case final backdrop?) {
-            popover = BackdropFilter.grouped(
-              filter: backdrop,
-              child: popover,
-            );
+            popover = BackdropFilter.grouped(filter: backdrop, child: popover);
           }
 
           return CallbackShortcuts(

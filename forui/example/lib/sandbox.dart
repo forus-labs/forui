@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -70,7 +68,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
           barrier: ColorFilter.mode(Colors.red, BlendMode.srcOver),
           popoverAnchor: Alignment.topCenter,
           childAnchor: Alignment.bottomCenter,
-          popoverBuilder: (context, style, _) => Padding(
+          popoverBuilder: (context, _) => Padding(
             padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
             child: SizedBox(
               width: 288,
@@ -106,7 +104,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
               ),
             ),
           ),
-          child: IntrinsicWidth(
+          builder: (_, controller, _) => IntrinsicWidth(
             child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
           ),
         ),

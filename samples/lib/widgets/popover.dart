@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
@@ -9,7 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class PopoverPage extends StatefulSample {
+class PopoverPage extends Sample {
   final Axis axis;
   final FHidePopoverRegion hideOnTapOutside;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
@@ -44,36 +43,16 @@ class PopoverPage extends StatefulSample {
        );
 
   @override
-  State<PopoverPage> createState() => _PopoverState();
-}
-
-class _PopoverState extends StatefulSampleState<PopoverPage> with SingleTickerProviderStateMixin {
-  late FPopoverController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = FPopoverController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget sample(BuildContext context) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       const SizedBox(height: 30),
       FPopover(
-        controller: controller,
-        popoverAnchor: widget.axis == Axis.horizontal ? Alignment.bottomLeft : Alignment.topCenter,
-        childAnchor: widget.axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
-        hideOnTapOutside: widget.hideOnTapOutside,
-        shift: widget.shift,
-        popoverBuilder: (context, style, _) => Padding(
+        popoverAnchor: axis == Axis.horizontal ? Alignment.bottomLeft : Alignment.topCenter,
+        childAnchor: axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
+        hideOnTapOutside: hideOnTapOutside,
+        shift: shift,
+        popoverBuilder: (context, _) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(
             width: 288,
@@ -109,7 +88,7 @@ class _PopoverState extends StatefulSampleState<PopoverPage> with SingleTickerPr
             ),
           ),
         ),
-        child: IntrinsicWidth(
+        builder: (_, controller, _) => IntrinsicWidth(
           child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
         ),
       ),
@@ -118,27 +97,8 @@ class _PopoverState extends StatefulSampleState<PopoverPage> with SingleTickerPr
 }
 
 @RoutePage()
-class BlurredPopoverPage extends StatefulSample {
+class BlurredPopoverPage extends Sample {
   BlurredPopoverPage({@queryParam super.theme});
-
-  @override
-  State<BlurredPopoverPage> createState() => _BlurredPopoverState();
-}
-
-class _BlurredPopoverState extends StatefulSampleState<BlurredPopoverPage> with SingleTickerProviderStateMixin {
-  late FPopoverController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = FPopoverController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -157,14 +117,13 @@ class _BlurredPopoverState extends StatefulSampleState<BlurredPopoverPage> with 
         ],
       ),
       FPopover(
-        controller: controller,
         barrier: ImageFilter.compose(
           outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
           inner: ColorFilter.mode(Colors.black.withValues(alpha: 0.2), BlendMode.srcOver),
         ),
         popoverAnchor: Alignment.topCenter,
         childAnchor: Alignment.bottomCenter,
-        popoverBuilder: (context, style, _) => Padding(
+        popoverBuilder: (context, _) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(
             width: 288,
@@ -200,7 +159,7 @@ class _BlurredPopoverState extends StatefulSampleState<BlurredPopoverPage> with 
             ),
           ),
         ),
-        child: IntrinsicWidth(
+        builder: (_, controller, _) => IntrinsicWidth(
           child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
         ),
       ),
