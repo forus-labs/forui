@@ -359,8 +359,20 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             child: widget.popoverBuilder(context, _controller),
           );
 
-          if (style.backgroundFilter case final backdrop?) {
-            popover = BackdropFilter.grouped(filter: backdrop, child: popover);
+          if (style.backgroundFilter case final background?) {
+            popover = Stack(
+              children: [
+                Positioned.fill(
+                  child: ClipRect(
+                    child: BackdropFilter(
+                      filter: background,
+                      child: Container(),
+                    ),
+                  ),
+                ),
+                popover,
+              ],
+            );
           }
 
           return CallbackShortcuts(

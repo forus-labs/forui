@@ -288,6 +288,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
     return true;
   }
 
+  /// Defaults to [Curves.easeOutQuad].
   @override
   Curve get barrierCurve => Curves.easeOutQuad;
 

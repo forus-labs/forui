@@ -87,7 +87,6 @@ FSelectMenuTile<Value>(
   detailsBuilder: (context, values, child) => Placeholder()m
   details: Text('All'),
   suffixIcon: Icon(FIcons.chevronsUpDown),
-  barrier: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
   initialValue: Value.something,
@@ -128,7 +127,6 @@ FSelectMenuTile<Value>.builder(
   detailsBuilder: (context, values, child) => Placeholder()m
   details: Text('All'),
   suffixIcon: Icon(FIcons.chevronsUpDown),
-  barrier: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
   menuBuilder: (context, index) => index < 10 ? FSelectTile(
     title: Text('Tile $index'),
     value: Value.something,

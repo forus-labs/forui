@@ -65,6 +65,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/date-field/validator', page: ValidatorDateFieldRoute.page),
     AutoRoute(path: '/date-field/form', page: FormDateFieldRoute.page),
     AutoRoute(path: '/dialog/default', page: DialogRoute.page),
+    AutoRoute(path: '/dialog/blurred', page: BlurredDialogRoute.page),
     AutoRoute(path: '/divider/default', page: DividerRoute.page),
     AutoRoute(path: '/focused-outline/default', page: FocusedOutlineRoute.page),
     AutoRoute(path: '/header/default', page: RootHeaderRoute.page),

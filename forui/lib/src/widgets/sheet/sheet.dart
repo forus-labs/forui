@@ -257,9 +257,6 @@ class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
   @override
   final ImageFilter Function(double animation)? barrierFilter;
 
-  /// The sheet's background filter.
-  @override
-  final ImageFilter? backgroundFilter;
   /// The entrance duration. Defaults to 200ms.
   @override
   final Duration enterDuration;
@@ -285,7 +282,6 @@ class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
   /// Creates a [FSheetStyle].
   const FSheetStyle({
     this.barrierFilter,
-    this.backgroundFilter,
     this.enterDuration = const Duration(milliseconds: 200),
     this.exitDuration = const Duration(milliseconds: 200),
     this.flingVelocity = 700,

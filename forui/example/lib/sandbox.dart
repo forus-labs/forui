@@ -50,7 +50,19 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late final controller = FPopoverController(vsync: this);
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final actions = [
+      FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+      FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+    ];
+
+    final _ = context.theme.dialogStyle;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -66,33 +78,38 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
           ],
         ),
         FButton(
-          child: const Text('Click me'),
-          onPress: () => showFSheet(
-            context: context,
-            side: FLayout.btt,
-            mainAxisMaxRatio: null,
-            builder: (context) => DraggableScrollableSheet(
-              expand: false,
-              builder: (context, controller) => ScrollConfiguration(
-                // This is required to enable dragging on desktop.
-                // See https://github.com/flutter/flutter/issues/101903 for more information.
-                behavior: ScrollConfiguration.of(
-                  context,
-                ).copyWith(dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad}),
-                child: FTileGroup.builder(
-                  count: 25,
-                  scrollController: controller,
-                  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
-                ),
+          intrinsicWidth: true,
+          onPress: () => showFDialog(
+            style: context.theme.dialogStyle.copyWith(
+              backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              decoration: BoxDecoration(
+                borderRadius: context.theme.style.borderRadius,
+                color: context.theme.colors.background.withValues(alpha: 0.2),
               ),
             ),
+            context: context,
+            builder: (context, style) => FDialog(
+              style: style,
+              direction: Axis.horizontal,
+              title: const Text('Are you absolutely sure?'),
+              body: const Text(
+                'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+              ),
+              actions: Axis.horizontal == Axis.vertical ? actions.reversed.toList() : actions,
+            ),
           ),
+          child: const Text('Show Dialog'),
         ),
         FPopover(
           style: context.theme.popoverStyle.copyWith(
-            barrierFilter: (animation) => ImageFilter.compose(
-              outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-              inner: ColorFilter.mode(Colors.black.withValues(alpha: animation * 0.2), BlendMode.srcOver),
+            backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            decoration: BoxDecoration(
+              color: context.theme.colors.background.withValues(alpha: 0.5),
+              borderRadius: context.theme.style.borderRadius,
+              border: Border.all(
+                width: context.theme.style.borderWidth,
+                color: context.theme.colors.border,
+              ),
             ),
           ),
           controller: controller,

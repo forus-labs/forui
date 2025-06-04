@@ -269,14 +269,14 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
             ),
           );
 
-          if (style.backgroundFilter case final backdrop?) {
+          if (style.backgroundFilter case final background?) {
             tooltip = Stack(
               children: [
                 Positioned.fill(
                   child: ClipRect(
                     child: BackdropFilter(
-                      filter: backdrop,
-                      child: Container(color: Colors.transparent),
+                      filter: background,
+                      child: Container(),
                     ),
                   ),
                 ),

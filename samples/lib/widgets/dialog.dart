@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -19,12 +21,11 @@ class DialogPage extends Sample {
       FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
     ];
 
-    final style = context.theme.dialogStyle;
     return FButton(
       intrinsicWidth: true,
-      onPress: () => showAdaptiveDialog(
+      onPress: () => showFDialog(
         context: context,
-        builder: (context) => FTheme(
+        builder: (context, style) => FTheme(
           data: theme,
           child: FDialog(
             style: style,
@@ -40,4 +41,39 @@ class DialogPage extends Sample {
       child: const Text('Show Dialog'),
     );
   }
+}
+
+@RoutePage()
+class BlurredDialogPage extends Sample {
+
+  BlurredDialogPage({@queryParam super.theme}): super(alignment: Alignment.topCenter);
+
+  @override
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 10.0),
+    child: FButton(
+        intrinsicWidth: true,
+        onPress: () => showFDialog(
+          context: context,
+          style: context.theme.dialogStyle.copyWith(
+            barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+          ),
+          builder: (context, style) => FTheme(
+            data: theme,
+            child: FDialog(
+              style: style,
+              title: const Text('Are you absolutely sure?'),
+              body: const Text(
+                'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+              ),
+              actions: [
+                FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+                FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+              ]
+            ),
+          ),
+        ),
+        child: const Text('Show Dialog'),
+      ),
+  );
 }

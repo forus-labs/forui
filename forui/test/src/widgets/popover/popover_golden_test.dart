@@ -13,6 +13,11 @@ void main() {
 
   setUp(() => controller = FPopoverController(vsync: const TestVSync()));
 
+  tearDown(() {
+    FTouch.primary = null;
+    controller.dispose();
+  });
+
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} hidden ', (tester) async {
       await tester.pumpWidget(
@@ -94,10 +99,40 @@ void main() {
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/barrier-${theme.name}.png'));
     });
-  }
 
-  tearDown(() {
-    FTouch.primary = null;
-    controller.dispose();
-  });
+    testWidgets('${theme.name} glassmorphic', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FButton(onPress: controller.toggle, child: const Text('Toggle Popover')),
+              FPopover(
+                controller: controller,
+                style: theme.data.popoverStyle.copyWith(
+                  backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  decoration: BoxDecoration(
+                    color: theme.data.colors.background.withValues(alpha: 0.5),
+                    borderRadius: theme.data.style.borderRadius,
+                    border: Border.all(
+                      width: theme.data.style.borderWidth,
+                      color: theme.data.colors.border,
+                    ),
+                  ),
+                ),
+                popoverBuilder: (_, _) => const SizedBox.square(dimension: 100),
+                child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/glassmorphic-${theme.name}.png'));
+    });
+  }
 }

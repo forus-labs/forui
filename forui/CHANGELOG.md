@@ -1,5 +1,12 @@
 ## 0.13.0 (Next)
 
+### `FDialog`
+* Add `showFDialog`.
+* Add `FDialogRoute`.
+* Add `FDialogStyle.barrierFilter`.
+* Add `FDialogStyle.backgroundFilter`.
+
+
 ### `FPopover`
 * Add `FPopover.barrierSemanticsLabel`.
 * Add `FPopover.barrierSemanticsDismissible`.

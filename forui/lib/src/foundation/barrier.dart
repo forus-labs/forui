@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
+// These widgets are difficult to test individually, we test them in combination with widgets that use them instead.
+
 /// A widget that prevents the user from interacting with widgets behind itself, and can be configured with an animated
 /// value.
 ///
