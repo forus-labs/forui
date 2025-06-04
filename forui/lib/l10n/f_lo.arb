@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "ຂໍ້ຄວາມ",
+  "dialogSemanticsLabel": "ຂໍ້ຄວາມ",
   "sheetSemanticsLabel": "ແຜ່ນ",
   "barrierOnTapHint": "ປິດ $modalRouteContentName",
   "barrierLabel": "Scrim",

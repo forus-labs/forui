@@ -79,6 +79,9 @@ class FLocalizationsRo extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Casetă de dialog';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Anterior';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsRo extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Oră invalidă.';
-
-  @override
-  String get dialogLabel => 'Casetă de dialog';
 }

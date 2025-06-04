@@ -79,6 +79,9 @@ class FLocalizationsFr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Boîte de dialogue';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Précédent';
 
   @override
@@ -122,9 +125,6 @@ class FLocalizationsFr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Heure invalide.';
-
-  @override
-  String get dialogLabel => 'Boîte de dialogue';
 }
 
 /// The translations for French, as used in Canada (`fr_CA`).
@@ -150,6 +150,9 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Boîte de dialogue';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Précédent';
@@ -195,7 +198,4 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get timeFieldInvalidDateError => 'Heure invalide.';
-
-  @override
-  String get dialogLabel => 'Boîte de dialogue';
 }

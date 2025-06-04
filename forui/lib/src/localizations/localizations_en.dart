@@ -79,6 +79,9 @@ class FLocalizationsEn extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialog';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -122,9 +125,6 @@ class FLocalizationsEn extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialog';
 }
 
 /// The translations for English, as used in Australia (`en_AU`).
@@ -152,6 +152,9 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialogue';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -195,9 +198,6 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialogue';
 }
 
 /// The translations for English, as used in Canada (`en_CA`).
@@ -225,6 +225,9 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialog';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -268,9 +271,6 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialog';
 }
 
 /// The translations for English, as used in the United Kingdom (`en_GB`).
@@ -298,6 +298,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialogue';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -341,9 +344,6 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialogue';
 }
 
 /// The translations for English, as used in Ireland (`en_IE`).
@@ -371,6 +371,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialogue';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -414,9 +417,6 @@ class FLocalizationsEnIe extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialogue';
 }
 
 /// The translations for English, as used in India (`en_IN`).
@@ -442,6 +442,9 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialogue';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -487,9 +490,6 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialogue';
 }
 
 /// The translations for English, as used in New Zealand (`en_NZ`).
@@ -515,6 +515,9 @@ class FLocalizationsEnNz extends FLocalizationsEn {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialogue';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -560,9 +563,6 @@ class FLocalizationsEnNz extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialogue';
 }
 
 /// The translations for English, as used in Singapore (`en_SG`).
@@ -588,6 +588,9 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialogue';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -633,9 +636,6 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialogue';
 }
 
 /// The translations for English, as used in South Africa (`en_ZA`).
@@ -661,6 +661,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialogue';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -706,7 +709,4 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
-
-  @override
-  String get dialogLabel => 'Dialogue';
 }

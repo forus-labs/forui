@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Hộp thoại",
+  "dialogSemanticsLabel": "Hộp thoại",
   "sheetSemanticsLabel": "Bảng",
   "barrierOnTapHint": "Đóng $modalRouteContentName",
   "barrierLabel": "Scrim",

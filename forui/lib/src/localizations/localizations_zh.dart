@@ -79,6 +79,9 @@ class FLocalizationsZh extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => '对话框';
+
+  @override
   String get paginationPreviousSemanticsLabel => '上一个';
 
   @override
@@ -122,9 +125,6 @@ class FLocalizationsZh extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '无效的时间。';
-
-  @override
-  String get dialogLabel => '对话框';
 }
 
 /// The translations for Chinese, as used in Hong Kong (`zh_HK`).
@@ -150,6 +150,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => '對話方塊';
 
   @override
   String get paginationPreviousSemanticsLabel => '上一個';
@@ -195,9 +198,6 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get timeFieldInvalidDateError => '無效的時間。';
-
-  @override
-  String get dialogLabel => '對話方塊';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -223,6 +223,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => '對話方塊';
 
   @override
   String get paginationPreviousSemanticsLabel => '上一個';
@@ -268,7 +271,4 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get timeFieldInvalidDateError => '無效的時間。';
-
-  @override
-  String get dialogLabel => '對話方塊';
 }

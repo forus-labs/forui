@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialogboks",
+  "dialogSemanticsLabel": "Dialogboks",
   "sheetSemanticsLabel": "Felt",
   "barrierOnTapHint": "Lukk $modalRouteContentName",
   "barrierLabel": "Vev",

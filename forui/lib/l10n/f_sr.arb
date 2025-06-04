@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Дијалог",
+  "dialogSemanticsLabel": "Дијалог",
   "sheetSemanticsLabel": "табела",
   "barrierOnTapHint": "Затвори: $modalRouteContentName",
   "barrierLabel": "Скрим",

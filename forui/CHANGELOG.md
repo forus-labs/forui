@@ -42,6 +42,13 @@
 * Change `FSelectMenuTile.selectController` to be optional.
 
 
+### `FSheet`
+
+* Change `FSSheet`'s transition animation.
+* **Breaking** Change `FSheetStyle.barrierColor` to `FSheetStyle.barrierFilter`.
+* **Breaking** Remove `FSheetStyle.backgroundColor`.
+
+
 ### `FTooltip`
 * Add `FTooltip.builder`.
 * Add `FTooltipStyle.backgroundFilter`.

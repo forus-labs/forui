@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "תיבת דו-שיח",
+  "dialogSemanticsLabel": "תיבת דו-שיח",
   "sheetSemanticsLabel": "גיליו ",
   "barrierOnTapHint": "סגירת $modalRouteContentName",
   "barrierLabel": "מיסוך",

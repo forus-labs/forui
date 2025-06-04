@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialog",
+  "dialogSemanticsLabel": "Dialog",
   "sheetSemanticsLabel": "Sheet",
   "barrierOnTapHint": "Tutup $modalRouteContentName",
   "barrierLabel": "Scrim",

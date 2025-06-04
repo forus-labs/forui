@@ -79,6 +79,9 @@ class FLocalizationsTr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'İletişim kutusu';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Önceki';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsTr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Geçersiz zaman.';
-
-  @override
-  String get dialogLabel => 'İletişim kutusu';
 }

@@ -81,7 +81,7 @@ class FDefaultLocalizations extends FLocalizations {
   String get barrierLabel => 'Barrier';
 
   @override
-  String get dialogLabel => 'Dialog';
+  String get dialogSemanticsLabel => 'Dialog';
 
   @override
   String get dateFieldHint => 'Pick a date';

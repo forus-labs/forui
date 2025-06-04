@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Cadro de diálogo",
+  "dialogSemanticsLabel": "Cadro de diálogo",
   "sheetSemanticsLabel": "Panel",
   "barrierOnTapHint": "Pechar $modalRouteContentName",
   "barrierLabel": "Sombreado",

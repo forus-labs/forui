@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Deialog",
+  "dialogSemanticsLabel": "Deialog",
   "sheetSemanticsLabel": "Taflen",
   "barrierOnTapHint": "Cau $modalRouteContentName",
   "barrierLabel": "Scrim",

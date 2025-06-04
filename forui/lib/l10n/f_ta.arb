@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "உரையாடல்",
+  "dialogSemanticsLabel": "உரையாடல்",
   "sheetSemanticsLabel": "திரை",
   "barrierOnTapHint": "$modalRouteContentName ஐ மூடுக",
   "barrierLabel": "ஸ்க்ரிம்",

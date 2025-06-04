@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "ଡାୟଲଗ୍",
+  "dialogSemanticsLabel": "ଡାୟଲଗ୍",
   "sheetSemanticsLabel": "ସିଟ",
   "barrierOnTapHint": "$modalRouteContentNameକୁ ବନ୍ଦ କରନ୍ତୁ",
   "barrierLabel": "ସ୍କ୍ରିମ",

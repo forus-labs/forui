@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialogruta",
+  "dialogSemanticsLabel": "Dialogruta",
   "sheetSemanticsLabel": "Ark",
   "barrierOnTapHint": "Stäng $modalRouteContentName",
   "barrierLabel": "Scrim",

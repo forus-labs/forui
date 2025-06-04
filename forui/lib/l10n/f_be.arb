@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Дыялогавае акно",
+  "dialogSemanticsLabel": "Дыялогавае акно",
   "sheetSemanticsLabel": "аркуш",
   "barrierOnTapHint": "Закрыць: $modalRouteContentName",
   "barrierLabel": "Палатно",

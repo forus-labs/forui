@@ -79,6 +79,9 @@ class FLocalizationsTe extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialog';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsTe extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'చెల్లని సమయం.';
-
-  @override
-  String get dialogLabel => 'డైలాగ్';
 }

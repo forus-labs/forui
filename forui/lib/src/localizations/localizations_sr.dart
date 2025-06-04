@@ -79,6 +79,9 @@ class FLocalizationsSr extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
+  String get dialogSemanticsLabel => 'Дијалог';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -122,9 +125,6 @@ class FLocalizationsSr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Неважеће време.';
-
-  @override
-  String get dialogLabel => 'Дијалог';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -150,6 +150,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get shortDateSuffix => '.';
+
+  @override
+  String get dialogSemanticsLabel => 'Dijalog';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Prethodno';
@@ -195,7 +198,4 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get timeFieldInvalidDateError => 'Nevažeće vreme.';
-
-  @override
-  String get dialogLabel => 'Dijalog';
 }

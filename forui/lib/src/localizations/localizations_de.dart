@@ -79,6 +79,9 @@ class FLocalizationsDe extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialogfeld';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Zurück';
 
   @override
@@ -122,9 +125,6 @@ class FLocalizationsDe extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ungültige Uhrzeit.';
-
-  @override
-  String get dialogLabel => 'Dialogfeld';
 }
 
 /// The translations for German, as used in Switzerland (`de_CH`).
@@ -142,6 +142,9 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialogfeld';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Zurück';
@@ -184,7 +187,4 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get timeFieldInvalidDateError => 'Ungültige Zeit.';
-
-  @override
-  String get dialogLabel => 'Dialogfeld';
 }

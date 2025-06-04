@@ -79,6 +79,9 @@ class FLocalizationsPt extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Caixa de diálogo';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -122,9 +125,6 @@ class FLocalizationsPt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Horário inválido.';
-
-  @override
-  String get dialogLabel => 'Caixa de diálogo';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -150,6 +150,9 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Caixa de diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Janela sobreposta';
@@ -183,7 +186,4 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Caixa de diálogo';
 }

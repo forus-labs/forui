@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Okno dialogowe",
+  "dialogSemanticsLabel": "Okno dialogowe",
   "sheetSemanticsLabel": "Plansza",
   "barrierOnTapHint": "Zamknij: $modalRouteContentName",
   "barrierLabel": "Siatka",

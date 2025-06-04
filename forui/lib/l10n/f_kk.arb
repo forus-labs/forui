@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Диалогтық терезе",
+  "dialogSemanticsLabel": "Диалогтық терезе",
   "sheetSemanticsLabel": "парақша",
   "barrierOnTapHint": "$modalRouteContentName жабу",
   "barrierLabel": "Кенеп",

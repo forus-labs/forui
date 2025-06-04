@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Valintaikkuna",
+  "dialogSemanticsLabel": "Valintaikkuna",
   "sheetSemanticsLabel": "arkki",
   "barrierOnTapHint": "Sulje $modalRouteContentName",
   "barrierLabel": "Sermi",

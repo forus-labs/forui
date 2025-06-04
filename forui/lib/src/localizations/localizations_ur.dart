@@ -79,6 +79,9 @@ class FLocalizationsUr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'ڈائلاگ';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'پچھلا';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsUr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'غلط وقت۔';
-
-  @override
-  String get dialogLabel => 'ڈائلاگ';
 }

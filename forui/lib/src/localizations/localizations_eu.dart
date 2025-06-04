@@ -79,6 +79,9 @@ class FLocalizationsEu extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Leihoa';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Aurrekoa';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsEu extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ordu baliogabea.';
-
-  @override
-  String get dialogLabel => 'Leihoa';
 }

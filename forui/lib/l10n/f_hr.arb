@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dijalog",
+  "dialogSemanticsLabel": "Dijalog",
   "sheetSemanticsLabel": "tablica",
   "barrierOnTapHint": "Zatvori $modalRouteContentName",
   "barrierLabel": "Rubno",

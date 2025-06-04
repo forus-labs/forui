@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Παράθυρο διαλόγου",
+  "dialogSemanticsLabel": "Παράθυρο διαλόγου",
   "sheetSemanticsLabel": "Φύλλο",
   "barrierOnTapHint": "Κλείσιμο $modalRouteContentName",
   "barrierLabel": "Επικάλυψη",

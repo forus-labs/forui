@@ -79,6 +79,9 @@ class FLocalizationsKo extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
+  String get dialogSemanticsLabel => '대화상자';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsKo extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '잘못된 시간입니다.';
-
-  @override
-  String get dialogLabel => '대화상자';
 }

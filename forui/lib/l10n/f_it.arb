@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Finestra di dialogo",
+  "dialogSemanticsLabel": "Finestra di dialogo",
   "sheetSemanticsLabel": "Riquadro",
   "barrierOnTapHint": "Chiudi $modalRouteContentName",
   "barrierLabel": "Rete",

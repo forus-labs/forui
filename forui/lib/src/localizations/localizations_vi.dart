@@ -79,6 +79,9 @@ class FLocalizationsVi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Hộp thoại';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Trước';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsVi extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Thời gian không hợp lệ.';
-
-  @override
-  String get dialogLabel => 'Hộp thoại';
 }

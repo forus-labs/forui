@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Gluggi",
+  "dialogSemanticsLabel": "Gluggi",
   "sheetSemanticsLabel": "Blað",
   "barrierOnTapHint": "Loka $modalRouteContentName",
   "barrierLabel": "Möskvi",

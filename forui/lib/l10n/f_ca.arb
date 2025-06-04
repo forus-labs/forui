@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Diàleg",
+  "dialogSemanticsLabel": "Diàleg",
   "sheetSemanticsLabel": "Full",
   "barrierOnTapHint": "Tanca $modalRouteContentName",
   "barrierLabel": "Fons atenuat",

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dijaloški okvir",
+  "dialogSemanticsLabel": "Dijaloški okvir",
   "sheetSemanticsLabel": "tabela",
   "barrierOnTapHint": "Zatvori: $modalRouteContentName",
   "barrierLabel": "Rubno",

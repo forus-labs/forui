@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialoglodziņš",
+  "dialogSemanticsLabel": "Dialoglodziņš",
   "sheetSemanticsLabel": "lapa",
   "barrierOnTapHint": "Aizvērt $modalRouteContentName",
   "barrierLabel": "Pārklājums",

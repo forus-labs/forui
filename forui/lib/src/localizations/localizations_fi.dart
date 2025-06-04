@@ -79,6 +79,9 @@ class FLocalizationsFi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Valintaikkuna';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Edellinen';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsFi extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Virheellinen aika.';
-
-  @override
-  String get dialogLabel => 'Valintaikkuna';
 }

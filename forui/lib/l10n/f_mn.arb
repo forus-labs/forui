@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Харилцах цонх",
+  "dialogSemanticsLabel": "Харилцах цонх",
   "sheetSemanticsLabel": "хүснэгт",
   "barrierOnTapHint": "$modalRouteContentName-г хаах",
   "barrierLabel": "Скрим",

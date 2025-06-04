@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialogu",
+  "dialogSemanticsLabel": "Dialogu",
   "sheetSemanticsLabel": "Fleta",
   "barrierOnTapHint": "Mbyll $modalRouteContentName",
   "barrierLabel": "Kanavacë",

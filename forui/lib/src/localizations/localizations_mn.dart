@@ -79,6 +79,9 @@ class FLocalizationsMn extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Харилцах цонх';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsMn extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Буруу цаг.';
-
-  @override
-  String get dialogLabel => 'Харилцах цонх';
 }

@@ -79,6 +79,9 @@ class FLocalizationsGsw extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialogfeld';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Vorig';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsGsw extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ungültigi Zyt.';
-
-  @override
-  String get dialogLabel => 'Dialogfeld';
 }

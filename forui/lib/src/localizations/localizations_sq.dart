@@ -79,6 +79,9 @@ class FLocalizationsSq extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialogu';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'E mëparshme';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsSq extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Orë e pavlefshme.';
-
-  @override
-  String get dialogLabel => 'Dialogu';
 }

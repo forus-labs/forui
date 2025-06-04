@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "ಡೈಲಾಗ್",
+  "dialogSemanticsLabel": "ಡೈಲಾಗ್",
   "sheetSemanticsLabel": "ಶೀಟ್",
   "barrierOnTapHint": "$modalRouteContentName ಅನ್ನು ಮುಚ್ಚಿರಿ",
   "barrierLabel": "ಸ್ಕ್ರಿಮ್",

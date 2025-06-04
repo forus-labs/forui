@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Kidirisha",
+  "dialogSemanticsLabel": "Kidirisha",
   "sheetSemanticsLabel": "Safu",
   "barrierOnTapHint": "Funga $modalRouteContentName",
   "barrierLabel": "Scrim",

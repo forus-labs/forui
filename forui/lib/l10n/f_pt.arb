@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Caixa de diálogo",
+  "dialogSemanticsLabel": "Caixa de diálogo",
   "sheetSemanticsLabel": "inferior",
   "barrierOnTapHint": "Fechar $modalRouteContentName",
   "barrierLabel": "Scrim",

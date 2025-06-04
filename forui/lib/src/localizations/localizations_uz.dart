@@ -79,6 +79,9 @@ class FLocalizationsUz extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Muloqot oynasi';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Oldingi';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsUz extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Yaroqsiz vaqt.';
-
-  @override
-  String get dialogLabel => 'Muloqot oynasi';
 }

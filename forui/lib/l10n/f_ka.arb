@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "დიალოგი",
+  "dialogSemanticsLabel": "დიალოგი",
   "sheetSemanticsLabel": "ფურცელი",
   "barrierOnTapHint": "$modalRouteContentName-ის დახურვა",
   "barrierLabel": "სკრიმი",

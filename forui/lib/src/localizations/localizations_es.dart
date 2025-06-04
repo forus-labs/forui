@@ -79,6 +79,9 @@ class FLocalizationsEs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Cuadro de diálogo';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -122,9 +125,6 @@ class FLocalizationsEs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Hora no válida.';
-
-  @override
-  String get dialogLabel => 'Cuadro de diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -150,6 +150,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -183,9 +186,6 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Argentina (`es_AR`).
@@ -211,6 +211,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -244,9 +247,6 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Bolivia (`es_BO`).
@@ -274,6 +274,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -305,9 +308,6 @@ class FLocalizationsEsBo extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Chile (`es_CL`).
@@ -335,6 +335,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -366,9 +369,6 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Colombia (`es_CO`).
@@ -396,6 +396,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -427,9 +430,6 @@ class FLocalizationsEsCo extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Costa Rica (`es_CR`).
@@ -457,6 +457,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -488,9 +491,6 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in the Dominican Republic (`es_DO`).
@@ -518,6 +518,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -549,9 +552,6 @@ class FLocalizationsEsDo extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Ecuador (`es_EC`).
@@ -579,6 +579,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -610,9 +613,6 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Guatemala (`es_GT`).
@@ -640,6 +640,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -671,9 +674,6 @@ class FLocalizationsEsGt extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Honduras (`es_HN`).
@@ -701,6 +701,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -732,9 +735,6 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -760,6 +760,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -793,9 +796,6 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Nicaragua (`es_NI`).
@@ -823,6 +823,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -854,9 +857,6 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Panama (`es_PA`).
@@ -884,6 +884,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -915,9 +918,6 @@ class FLocalizationsEsPa extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Peru (`es_PE`).
@@ -943,6 +943,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -976,9 +979,6 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Puerto Rico (`es_PR`).
@@ -1004,6 +1004,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1037,9 +1040,6 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Paraguay (`es_PY`).
@@ -1065,6 +1065,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1098,9 +1101,6 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in El Salvador (`es_SV`).
@@ -1126,6 +1126,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1159,9 +1162,6 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in the United States (`es_US`).
@@ -1187,6 +1187,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1220,9 +1223,6 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Uruguay (`es_UY`).
@@ -1248,6 +1248,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1281,9 +1284,6 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }
 
 /// The translations for Spanish Castilian, as used in Venezuela (`es_VE`).
@@ -1309,6 +1309,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diálogo';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1342,7 +1345,4 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
-
-  @override
-  String get dialogLabel => 'Diálogo';
 }

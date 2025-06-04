@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Ingxoxo",
+  "dialogSemanticsLabel": "Ingxoxo",
   "sheetSemanticsLabel": "Ishidi",
   "barrierOnTapHint": "Vala i-$modalRouteContentName",
   "barrierLabel": "I-Scrim",

@@ -79,6 +79,9 @@ class FLocalizationsCs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialogové okno';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Předchozí';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsCs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Neplatný čas.';
-
-  @override
-  String get dialogLabel => 'Dialogové okno';
 }

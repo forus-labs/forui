@@ -79,6 +79,9 @@ class FLocalizationsEt extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialoog';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Eelmine';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsEt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Vigane aeg.';
-
-  @override
-  String get dialogLabel => 'Dialoog';
 }

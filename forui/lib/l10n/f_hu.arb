@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Párbeszédablak",
+  "dialogSemanticsLabel": "Párbeszédablak",
   "sheetSemanticsLabel": "lap",
   "barrierOnTapHint": "$modalRouteContentName bezárása",
   "barrierLabel": "Borítás",

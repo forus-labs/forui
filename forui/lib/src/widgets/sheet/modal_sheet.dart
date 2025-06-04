@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
@@ -73,7 +72,6 @@ Future<T?> showFSheet<T>({
       barrierOnTapHint: localizations.barrierOnTapHint(localizations.sheetSemanticsLabel),
       barrierLabel: barrierLabel ?? localizations.barrierLabel,
       barrierDismissible: barrierDismissible,
-      barrierColor: (style ?? context.theme.sheetStyle).barrierColor,
       constraints: constraints,
       draggable: draggable,
       settings: routeSettings,
@@ -166,7 +164,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   ///
   /// See:
   ///  * [barrierDismissible], which controls the behavior of the barrier when tapped.
-  ///  * [ModalBarrier], which uses this field as onTapHint when it has an onTap action.
+  ///  * [FModalBarrier], which uses this field as onTapHint when it has an onTap action.
   final String? barrierOnTapHint;
 
   /// A builder for the contents of the sheet.
@@ -178,9 +176,6 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   @override
   final bool barrierDismissible;
 
-  @override
-  final Color barrierColor;
-
   final ValueNotifier<EdgeInsets> _clipDetailsNotifier = ValueNotifier<EdgeInsets>(EdgeInsets.zero);
 
   AnimationController? _animationController;
@@ -189,7 +184,6 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   FModalSheetRoute({
     required this.style,
     required this.side,
-    required this.barrierColor,
     required this.builder,
     this.mainAxisMaxRatio = 9 / 16,
     this.capturedThemes,
@@ -247,29 +241,38 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
 
   @override
   Widget buildModalBarrier() {
-    if (barrierColor.a != 0 && !offstage) {
-      return AnimatedModalBarrier(
-        color: animation!.drive(
-          ColorTween(
-            begin: barrierColor.withValues(alpha: 0.0),
-            end: barrierColor, // changedInternalState is called if barrierColor updates
-          ).chain(CurveTween(curve: barrierCurve)), // changedInternalState is called if barrierCurve updates
+    if (style.barrierFilter != null && !offstage) {
+      return Builder(
+        builder: (context) => FAnimatedModalBarrier(
+          animation: animation!.drive(CurveTween(curve: barrierCurve)),
+          filter: style.barrierFilter,
+          onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
+          semanticsLabel: barrierLabel,
+          // changedInternalState is called if barrierLabel updates
+          barrierSemanticsDismissible: semanticsDismissible,
+          clipDetailsNotifier: _clipDetailsNotifier,
+          semanticsOnTapHint: barrierOnTapHint,
         ),
-        dismissible: barrierDismissible, // changedInternalState is called if barrierDismissible updates
-        semanticsLabel: barrierLabel, // changedInternalState is called if barrierLabel updates
-        barrierSemanticsDismissible: semanticsDismissible,
-        clipDetailsNotifier: _clipDetailsNotifier,
-        semanticsOnTapHint: barrierOnTapHint,
       );
     } else {
-      return ModalBarrier(
-        dismissible: barrierDismissible, // changedInternalState is called if barrierDismissible updates
-        semanticsLabel: barrierLabel, // changedInternalState is called if barrierLabel updates
-        barrierSemanticsDismissible: semanticsDismissible,
-        clipDetailsNotifier: _clipDetailsNotifier,
-        semanticsOnTapHint: barrierOnTapHint,
+      return Builder(
+        builder: (context) => FModalBarrier(
+          filter: null,
+          onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
+          semanticsLabel: barrierLabel,
+          // changedInternalState is called if barrierLabel updates
+          barrierSemanticsDismissible: semanticsDismissible,
+          clipDetailsNotifier: _clipDetailsNotifier,
+          semanticsOnTapHint: barrierOnTapHint,
+        ),
       );
     }
+  }
+
+  @override
+  void dispose() {
+    _clipDetailsNotifier.dispose();
+    super.dispose();
   }
 
   /// Updates the details regarding how the [SemanticsNode.rect] (focus) of the barrier for this [FModalSheetRoute]
@@ -286,10 +289,10 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  void dispose() {
-    _clipDetailsNotifier.dispose();
-    super.dispose();
-  }
+  Curve get barrierCurve => Curves.easeOutQuad;
+
+  @override
+  Color get barrierColor => Colors.transparent;
 
   @override
   Duration get transitionDuration => style.enterDuration;

@@ -79,6 +79,9 @@ class FLocalizationsHu extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
+  String get dialogSemanticsLabel => 'Párbeszédablak';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Előző';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsHu extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Érvénytelen idő.';
-
-  @override
-  String get dialogLabel => 'Párbeszédablak';
 }

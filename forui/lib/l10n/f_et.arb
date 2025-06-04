@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialoog",
+  "dialogSemanticsLabel": "Dialoog",
   "sheetSemanticsLabel": "leht",
   "barrierOnTapHint": "Sule $modalRouteContentName",
   "barrierLabel": "Sirm",

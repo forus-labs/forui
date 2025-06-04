@@ -79,6 +79,9 @@ class FLocalizationsLt extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dialogSemanticsLabel => 'Dialogo langas';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Ankstesnis';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsLt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Neteisingas laikas.';
-
-  @override
-  String get dialogLabel => 'Dialogo langas';
 }

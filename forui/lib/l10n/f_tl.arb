@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialog",
+  "dialogSemanticsLabel": "Dialog",
   "sheetSemanticsLabel": "sheet",
   "barrierOnTapHint": "Isara ang $modalRouteContentName",
   "barrierLabel": "Scrim",

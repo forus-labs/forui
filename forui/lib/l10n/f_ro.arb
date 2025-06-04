@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Casetă de dialog",
+  "dialogSemanticsLabel": "Casetă de dialog",
   "sheetSemanticsLabel": "Foaie",
   "barrierOnTapHint": "Închideți $modalRouteContentName",
   "barrierLabel": "Material",

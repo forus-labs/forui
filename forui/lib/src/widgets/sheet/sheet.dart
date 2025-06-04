@@ -1,5 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'package:meta/meta.dart';
 
@@ -68,12 +70,10 @@ class Sheet extends StatefulWidget {
 }
 
 class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
-  static const _cubic = Cubic(0.0, 0.0, 0.2, 1.0);
-
   final GlobalKey _key = GlobalKey(debugLabel: 'Sheet child');
   late AnimationController _controller;
   late Animation<double> _animation;
-  ParametricCurve<double> _curve = _cubic;
+  ParametricCurve<double> _curve = Curves.easeOutQuad;
 
   @override
   void initState() {
@@ -154,7 +154,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         namesRoute: true,
         label: switch (defaultTargetPlatform) {
           TargetPlatform.iOS || TargetPlatform.macOS => null,
-          _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).dialogLabel,
+          _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).sheetSemanticsLabel,
         },
         explicitChildNodes: true,
         child: ClipRect(
@@ -227,7 +227,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       }
 
       // Allow the sheet to animate smoothly from its current position.
-      _curve = Split(_animation.value, endCurve: _cubic);
+      _curve = Split(_animation.value, endCurve: Curves.easeOutQuad);
       if (closing) {
         widget.onClosing();
       }
@@ -253,14 +253,13 @@ extension on GlobalKey {
 
 /// A sheet's style.
 class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
-  /// The barrier's color.
+  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
   @override
-  final Color barrierColor;
+  final ImageFilter Function(double animation)? barrierFilter;
 
-  /// The sheet's background color.
+  /// The sheet's background filter.
   @override
-  final Color backgroundColor;
-
+  final ImageFilter? backgroundFilter;
   /// The entrance duration. Defaults to 200ms.
   @override
   final Duration enterDuration;
@@ -285,8 +284,8 @@ class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
 
   /// Creates a [FSheetStyle].
   const FSheetStyle({
-    required this.barrierColor,
-    required this.backgroundColor,
+    this.barrierFilter,
+    this.backgroundFilter,
     this.enterDuration = const Duration(milliseconds: 200),
     this.exitDuration = const Duration(milliseconds: 200),
     this.flingVelocity = 700,
@@ -295,5 +294,7 @@ class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
 
   /// Creates a [FSheetStyle] that inherits its colors from the given [FColors].
   FSheetStyle.inherit({required FColors colors})
-    : this(barrierColor: colors.barrier, backgroundColor: colors.background);
+    : this(
+        barrierFilter: (v) => ColorFilter.mode(Color.lerp(Colors.transparent, colors.barrier, v)!, BlendMode.srcOver),
+      );
 }

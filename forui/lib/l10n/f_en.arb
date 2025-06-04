@@ -94,8 +94,8 @@
   },
 
 
-  "dialogLabel": "Dialog",
-  "@dialogLabel": {
+  "dialogSemanticsLabel": "Dialog",
+  "@dialogSemanticsLabel": {
     "description": "The sheet's label."
   },
 

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "대화상자",
+  "dialogSemanticsLabel": "대화상자",
   "sheetSemanticsLabel": "시트",
   "barrierOnTapHint": "$modalRouteContentName 닫기",
   "barrierLabel": "스크림",

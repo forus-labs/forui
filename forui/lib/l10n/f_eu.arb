@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Leihoa",
+  "dialogSemanticsLabel": "Leihoa",
   "sheetSemanticsLabel": "orria",
   "barrierOnTapHint": "Itxi $modalRouteContentName",
   "barrierLabel": "Barrera",

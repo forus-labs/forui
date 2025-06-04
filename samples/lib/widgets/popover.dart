@@ -120,7 +120,10 @@ class BlurredPopoverPage extends Sample {
         style: context.theme.popoverStyle.copyWith(
           barrierFilter: (animation) => ImageFilter.compose(
             outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-            inner: ColorFilter.mode(Colors.black.withValues(alpha: animation * 0.2), BlendMode.srcOver),
+            inner: ColorFilter.mode(
+              Color.lerp(Colors.transparent, Colors.black.withValues(alpha: 0.2), animation)!,
+              BlendMode.srcOver,
+            ),
           ),
         ),
         popoverAnchor: Alignment.topCenter,

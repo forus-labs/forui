@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "کادر گفتگو",
+  "dialogSemanticsLabel": "کادر گفتگو",
   "sheetSemanticsLabel": "برگ",
   "barrierOnTapHint": "بستن $modalRouteContentName",
   "barrierLabel": "رویه",

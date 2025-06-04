@@ -356,6 +356,12 @@ abstract class FLocalizations {
   /// **''**
   String get shortDateSuffix;
 
+  /// The sheet's label.
+  ///
+  /// In en, this message translates to:
+  /// **'Dialog'**
+  String get dialogSemanticsLabel;
+
   /// The label for the previous button in a pagination control.
   ///
   /// In en, this message translates to:
@@ -445,12 +451,6 @@ abstract class FLocalizations {
   /// In en, this message translates to:
   /// **'Invalid time.'**
   String get timeFieldInvalidDateError;
-
-  /// The sheet's label.
-  ///
-  /// In en, this message translates to:
-  /// **'Dialog'**
-  String get dialogLabel;
 }
 
 class _FLocalizationsDelegate extends LocalizationsDelegate<FLocalizations> {

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Pogovorno okno",
+  "dialogSemanticsLabel": "Pogovorno okno",
   "sheetSemanticsLabel": "Razdelek",
   "barrierOnTapHint": "Zapiranje »$modalRouteContentName«",
   "barrierLabel": "Scrim",

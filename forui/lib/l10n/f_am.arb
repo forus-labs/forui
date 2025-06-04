@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "መገናኛ",
+  "dialogSemanticsLabel": "መገናኛ",
   "sheetSemanticsLabel": "ሉህ",
   "barrierOnTapHint": "$modalRouteContentNameን ዝጋ",
   "barrierLabel": "ገዳቢ",

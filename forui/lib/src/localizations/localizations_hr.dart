@@ -79,6 +79,9 @@ class FLocalizationsHr extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
+  String get dialogSemanticsLabel => 'Dijalog';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Prethodno';
 
   @override
@@ -122,7 +125,4 @@ class FLocalizationsHr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Nevažeće vrijeme.';
-
-  @override
-  String get dialogLabel => 'Dijalog';
 }

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "İletişim kutusu",
+  "dialogSemanticsLabel": "İletişim kutusu",
   "sheetSemanticsLabel": "sayfa",
   "barrierOnTapHint": "$modalRouteContentName içeriğini kapat",
   "barrierLabel": "opaklık katmanı",

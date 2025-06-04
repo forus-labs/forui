@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "ഡയലോഗ്",
+  "dialogSemanticsLabel": "ഡയലോഗ്",
   "sheetSemanticsLabel": "ഷീറ്റ്",
   "barrierOnTapHint": "$modalRouteContentName അടയ്ക്കുക",
   "barrierLabel": "സ്ക്രിം",

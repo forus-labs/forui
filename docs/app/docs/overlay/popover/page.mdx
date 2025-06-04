@@ -229,7 +229,7 @@ You can change how the popover is aligned to the button.
     <Widget name='popover' variant='blurred' height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {19-24} copy
+    ```dart {19-26} copy
     class BlurredPopoverPage extends StatelessWidget {
       @override
       Widget build(BuildContext context) => Column(
@@ -249,9 +249,11 @@ You can change how the popover is aligned to the button.
           ),
           FPopover(
             style: context.theme.popoverStyle.copyWith(
-              barrierFilter: (animation) => ImageFilter.compose(
-                outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-                inner: ColorFilter.mode(Colors.black.withValues(alpha: animation * 0.2), BlendMode.srcOver),
+            barrierFilter: (animation) => ImageFilter.compose(
+              outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              inner: ColorFilter.mode(
+                Color.lerp(Colors.transparent, Colors.black.withValues(alpha: 0.2), animation)!,
+                BlendMode.srcOver,
               ),
             ),
             popoverAnchor: Alignment.topCenter,
