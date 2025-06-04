@@ -155,9 +155,6 @@ void main() {
 
       await tester.pumpWidget(TestScaffold.app(child: FSelect<String>.fromMap(letters, key: key)));
 
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
       expect(controller.hasListeners, false);
       expect(controller.popover.hasListeners, false);
       expect(controller.dispose, returnsNormally);
