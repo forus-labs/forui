@@ -106,10 +106,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
             decoration: BoxDecoration(
               color: context.theme.colors.background.withValues(alpha: 0.5),
               borderRadius: context.theme.style.borderRadius,
-              border: Border.all(
-                width: context.theme.style.borderWidth,
-                color: context.theme.colors.border,
-              ),
+              border: Border.all(width: context.theme.style.borderWidth, color: context.theme.colors.border),
             ),
           ),
           controller: controller,

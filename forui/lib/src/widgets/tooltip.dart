@@ -274,10 +274,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
               children: [
                 Positioned.fill(
                   child: ClipRect(
-                    child: BackdropFilter(
-                      filter: background,
-                      child: Container(),
-                    ),
+                    child: BackdropFilter(filter: background, child: Container()),
                   ),
                 ),
                 tooltip,

@@ -364,10 +364,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
               children: [
                 Positioned.fill(
                   child: ClipRect(
-                    child: BackdropFilter(
-                      filter: background,
-                      child: Container(),
-                    ),
+                    child: BackdropFilter(filter: background, child: Container()),
                   ),
                 ),
                 popover,

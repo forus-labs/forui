@@ -313,7 +313,9 @@ class FDialog extends StatelessWidget {
     if (style.backgroundFilter case final background?) {
       dialog = Stack(
         children: [
-          Positioned.fill(child: BackdropFilter(filter: background, child: Container())),
+          Positioned.fill(
+            child: BackdropFilter(filter: background, child: Container()),
+          ),
           dialog,
         ],
       );

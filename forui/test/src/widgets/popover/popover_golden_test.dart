@@ -115,10 +115,7 @@ void main() {
                   decoration: BoxDecoration(
                     color: theme.data.colors.background.withValues(alpha: 0.5),
                     borderRadius: theme.data.style.borderRadius,
-                    border: Border.all(
-                      width: theme.data.style.borderWidth,
-                      color: theme.data.colors.border,
-                    ),
+                    border: Border.all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
                   ),
                 ),
                 popoverBuilder: (_, _) => const SizedBox.square(dimension: 100),
