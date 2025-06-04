@@ -58,7 +58,11 @@ class ButtonCircularProgressPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => IntrinsicWidth(
-    child: FButton(style: context.theme.buttonStyles.primary.copyWith(),
-        prefix: const FProgress.circularIcon(), onPress: null, child: const Text('Please wait')),
+    child: FButton(
+      style: context.theme.buttonStyles.primary.copyWith(),
+      prefix: const FProgress.circularIcon(),
+      onPress: null,
+      child: const Text('Please wait'),
+    ),
   );
 }

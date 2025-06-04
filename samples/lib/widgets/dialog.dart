@@ -45,35 +45,38 @@ class DialogPage extends Sample {
 
 @RoutePage()
 class BlurredDialogPage extends Sample {
-
-  BlurredDialogPage({@queryParam super.theme}): super(alignment: Alignment.topCenter);
+  BlurredDialogPage({@queryParam super.theme}) : super(alignment: Alignment.topCenter);
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 10.0),
     child: FButton(
-        intrinsicWidth: true,
-        onPress: () => showFDialog(
-          context: context,
-          style: context.theme.dialogStyle.copyWith(
-            barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-          ),
-          builder: (context, style) => FTheme(
-            data: theme,
-            child: FDialog(
-              style: style,
-              title: const Text('Are you absolutely sure?'),
-              body: const Text(
-                'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-              ),
-              actions: [
-                FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-                FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
-              ]
+      intrinsicWidth: true,
+      onPress: () => showFDialog(
+        context: context,
+        style: context.theme.dialogStyle.copyWith(
+          barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+        ),
+        builder: (context, style) => FTheme(
+          data: theme,
+          child: FDialog(
+            style: style,
+            title: const Text('Are you absolutely sure?'),
+            body: const Text(
+              'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
             ),
+            actions: [
+              FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+              FButton(
+                style: FButtonStyle.outline,
+                child: const Text('Cancel'),
+                onPress: () => Navigator.of(context).pop(),
+              ),
+            ],
           ),
         ),
-        child: const Text('Show Dialog'),
       ),
+      child: const Text('Show Dialog'),
+    ),
   );
 }
