@@ -59,6 +59,35 @@ class FLocalizationsMy extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName ပိတ်ရန်';
+  }
+
+  @override
+  String get dateFieldHint => 'ရက်စွဲ ရွေးပါ';
+
+  @override
+  String get dateFieldInvalidDateError => 'ရက်စွဲ မမှန်ကန်ပါ။';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'ပေါ်လာသောဝင်းဒို';
+
+  @override
   String get selectHint => 'ပစ္စည်းတစ်ခုရွေးပါ';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsMy extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'အောက်သို့ပွတ်ဆွဲရန်';
 
   @override
+  String get sheetSemanticsLabel => 'ပိုဆောင်း စာမျက်နှာ';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'ရက်စွဲ ရွေးပါ';
-
-  @override
-  String get dateFieldInvalidDateError => 'ရက်စွဲ မမှန်ကန်ပါ။';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsMy extends FLocalizations {
 
   @override
   String get dialogLabel => 'ဒိုင်ယာလော့';
-
-  @override
-  String get sheetSemanticsLabel => 'ပိုဆောင်း စာမျက်နှာ';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName ပိတ်ရန်';
-  }
 }

@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Derulează în sus",
   "selectScrollDownSemanticsLabel": "Derulează în jos",
   "paginationPreviousSemanticsLabel": "Anterior",
-  "paginationNextSemanticsLabel": "Înainte"
+  "paginationNextSemanticsLabel": "Înainte",
+  "popoverSemanticsLabel": "Fereastră contextuală"
 }

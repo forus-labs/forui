@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Fletta upp",
   "selectScrollDownSemanticsLabel": "Fletta niður",
   "paginationPreviousSemanticsLabel": "Fyrri",
-  "paginationNextSemanticsLabel": "Næsta"
+  "paginationNextSemanticsLabel": "Næsta",
+  "popoverSemanticsLabel": "Sprettgluggi"
 }

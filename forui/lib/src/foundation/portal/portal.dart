@@ -171,7 +171,7 @@ class _State extends State<FPortal> {
               );
 
               if (widget.barrier case final barrier?) {
-                portal = Stack(fit: StackFit.expand, children: [barrier, portal]);
+                portal = Stack(children: [barrier, portal]);
               }
 
               return portal;

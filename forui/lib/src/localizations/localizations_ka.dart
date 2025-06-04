@@ -59,6 +59,35 @@ class FLocalizationsKa extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'სკრიმი';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName-ის დახურვა';
+  }
+
+  @override
+  String get dateFieldHint => 'აირჩიეთ თარიღი';
+
+  @override
+  String get dateFieldInvalidDateError => 'არასწორი თარიღი.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'ამომხტარი ფანჯარა';
+
+  @override
   String get selectHint => 'აირჩიეთ ელემენტი';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsKa extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'ქვემოთ გადაადგილება';
 
   @override
+  String get sheetSemanticsLabel => 'ფურცელი';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'აირჩიეთ თარიღი';
-
-  @override
-  String get dateFieldInvalidDateError => 'არასწორი თარიღი.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsKa extends FLocalizations {
 
   @override
   String get dialogLabel => 'დიალოგი';
-
-  @override
-  String get sheetSemanticsLabel => 'ფურცელი';
-
-  @override
-  String get barrierLabel => 'სკრიმი';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName-ის დახურვა';
-  }
 }

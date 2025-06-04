@@ -59,6 +59,35 @@ class FLocalizationsAz extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Kətan';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Bağlayın: \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Tarix seçin';
+
+  @override
+  String get dateFieldInvalidDateError => 'Yanlış tarix.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Əvvəlki';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Növbəti';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Element seçin';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsAz extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Aşağı sürüşdür';
 
   @override
+  String get sheetSemanticsLabel => 'Vərəq';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Təmizlə';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Əvvəlki';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Növbəti';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Tarix seçin';
-
-  @override
-  String get dateFieldInvalidDateError => 'Yanlış tarix.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsAz extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialoq';
-
-  @override
-  String get sheetSemanticsLabel => 'Vərəq';
-
-  @override
-  String get barrierLabel => 'Kətan';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Bağlayın: \$modalRouteContentName';
-  }
 }

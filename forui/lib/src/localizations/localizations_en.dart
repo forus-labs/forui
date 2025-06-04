@@ -59,6 +59,35 @@ class FLocalizationsEn extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Barrier';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close $modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsEn extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get sheetSemanticsLabel => 'Sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,22 +125,40 @@ class FLocalizationsEn extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialog';
-
-  @override
-  String get sheetSemanticsLabel => 'Sheet';
-
-  @override
-  String get barrierLabel => 'Barrier';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Close $modalRouteContentName';
-  }
 }
 
 /// The translations for English, as used in Australia (`en_AU`).
 class FLocalizationsEnAu extends FLocalizationsEn {
   FLocalizationsEnAu() : super('en_AU');
+
+  @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
 
   @override
   String get selectHint => 'Select an item';
@@ -144,25 +176,10 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get sheetSemanticsLabel => 'Sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -181,9 +198,11 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+}
 
-  @override
-  String get sheetSemanticsLabel => 'Sheet';
+/// The translations for English, as used in Canada (`en_CA`).
+class FLocalizationsEnCa extends FLocalizationsEn {
+  FLocalizationsEnCa() : super('en_CA');
 
   @override
   String get barrierLabel => 'Scrim';
@@ -192,35 +211,12 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Close \$modalRouteContentName';
   }
-}
-
-/// The translations for English, as used in Canada (`en_CA`).
-class FLocalizationsEnCa extends FLocalizationsEn {
-  FLocalizationsEnCa() : super('en_CA');
 
   @override
-  String get selectHint => 'Select an item';
+  String get dateFieldHint => 'Pick a date';
 
   @override
-  String get selectSearchHint => 'Search';
-
-  @override
-  String get selectNoResults => 'No matching results.';
-
-  @override
-  String get selectScrollUpSemanticsLabel => 'Scroll up';
-
-  @override
-  String get selectScrollDownSemanticsLabel => 'Scroll down';
-
-  @override
-  String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
+  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get shortDateSeparator => '-';
@@ -229,10 +225,34 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
-  String get dateFieldHint => 'Pick a date';
+  String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
+  String get selectHint => 'Select an item';
+
+  @override
+  String get selectSearchHint => 'Search';
+
+  @override
+  String get selectNoResults => 'No matching results.';
+
+  @override
+  String get selectScrollUpSemanticsLabel => 'Scroll up';
+
+  @override
+  String get selectScrollDownSemanticsLabel => 'Scroll down';
+
+  @override
+  String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -251,17 +271,6 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialog';
-
-  @override
-  String get sheetSemanticsLabel => 'Sheet';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Close \$modalRouteContentName';
-  }
 }
 
 /// The translations for English, as used in the United Kingdom (`en_GB`).
@@ -269,6 +278,35 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   FLocalizationsEnGb() : super('en_GB');
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -284,25 +322,10 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get sheetSemanticsLabel => 'sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -321,17 +344,6 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
-
-  @override
-  String get sheetSemanticsLabel => 'sheet';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Close \$modalRouteContentName';
-  }
 }
 
 /// The translations for English, as used in Ireland (`en_IE`).
@@ -339,6 +351,35 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   FLocalizationsEnIe() : super('en_IE');
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -354,25 +395,10 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get sheetSemanticsLabel => 'sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -391,17 +417,6 @@ class FLocalizationsEnIe extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
-
-  @override
-  String get sheetSemanticsLabel => 'sheet';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Close \$modalRouteContentName';
-  }
 }
 
 /// The translations for English, as used in India (`en_IN`).
@@ -409,6 +424,35 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   FLocalizationsEnIn() : super('en_IN');
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -424,25 +468,10 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get sheetSemanticsLabel => 'sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -461,17 +490,6 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
-
-  @override
-  String get sheetSemanticsLabel => 'sheet';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Close \$modalRouteContentName';
-  }
 }
 
 /// The translations for English, as used in New Zealand (`en_NZ`).
@@ -479,6 +497,35 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   FLocalizationsEnNz() : super('en_NZ');
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -494,25 +541,10 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get sheetSemanticsLabel => 'Sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -531,17 +563,6 @@ class FLocalizationsEnNz extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
-
-  @override
-  String get sheetSemanticsLabel => 'Sheet';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Close \$modalRouteContentName';
-  }
 }
 
 /// The translations for English, as used in Singapore (`en_SG`).
@@ -549,6 +570,35 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   FLocalizationsEnSg() : super('en_SG');
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Close \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -564,25 +614,10 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get sheetSemanticsLabel => 'sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -601,9 +636,11 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
+}
 
-  @override
-  String get sheetSemanticsLabel => 'sheet';
+/// The translations for English, as used in South Africa (`en_ZA`).
+class FLocalizationsEnZa extends FLocalizationsEn {
+  FLocalizationsEnZa() : super('en_ZA');
 
   @override
   String get barrierLabel => 'Scrim';
@@ -612,11 +649,27 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Close \$modalRouteContentName';
   }
-}
 
-/// The translations for English, as used in South Africa (`en_ZA`).
-class FLocalizationsEnZa extends FLocalizationsEn {
-  FLocalizationsEnZa() : super('en_ZA');
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
 
   @override
   String get selectHint => 'Select an item';
@@ -634,25 +687,10 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
+  String get sheetSemanticsLabel => 'sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -671,15 +709,4 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get dialogLabel => 'Dialogue';
-
-  @override
-  String get sheetSemanticsLabel => 'sheet';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Close \$modalRouteContentName';
-  }
 }

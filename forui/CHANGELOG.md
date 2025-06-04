@@ -1,8 +1,10 @@
 ## 0.13.0 (Next)
 
 ### `FPopover`
-* Add `FPopover.barrier`.
+* Add `FPopover.barrierSemanticsLabel`.
+* Add `FPopover.barrierSemanticsDismissible`.
 * Add `FPopover.builder`.
+* Add `FPopoverStyle.barrierFilter`.
 * Add `FPopoverStyle.backgroundFilter`.
 
 * Change `FPopover`'s animation to be origin aware.
@@ -13,7 +15,8 @@
 
 
 ### `FPopoverMenu`
-* Add `FPopoverMenu.barrier`.
+* Add `FPopoverMenu.barrierSemanticsLabel`.
+* Add `FPopoverMenu.barrierSemanticsDismissible`.
 * Add `FPopoverMenu.builder`.
 * Add `FPopoverMenu.menuBuilder`.
 
@@ -32,7 +35,8 @@
 
 
 ### `FSelectMenuTile`
-* Add `FSelectMenuTile.barrier`.
+* Add `FSelectMenutile.barrierSemanticsLabel`.
+* Add `FSelectMenutile.barrierSemanticsDismissible`.
 * Add `FSelectMenutile.detailsBuilder`.
 
 * Change `FSelectMenuTile.selectController` to be optional.
@@ -49,6 +53,10 @@
 
 
 ### Others
+* Add `FAnimatedModalBarrier`.
+* Add `FModalBrarrier`.
+* Add `FLocalizations.popoverSemanticsLabel`.
+
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.
 * Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.

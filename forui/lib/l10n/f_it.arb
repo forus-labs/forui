@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Scorri verso l'alto",
   "selectScrollDownSemanticsLabel": "Scorri verso il basso",
   "paginationPreviousSemanticsLabel": "Precedente",
-  "paginationNextSemanticsLabel": "Avanti"
+  "paginationNextSemanticsLabel": "Avanti",
+  "popoverSemanticsLabel": "Finestra di sovrapposizione"
 }

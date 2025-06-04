@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Omhoog scrollen",
   "selectScrollDownSemanticsLabel": "Omlaag scrollen",
   "paginationPreviousSemanticsLabel": "Vorige",
-  "paginationNextSemanticsLabel": "Volgende"
+  "paginationNextSemanticsLabel": "Volgende",
+  "popoverSemanticsLabel": "Popover"
 }

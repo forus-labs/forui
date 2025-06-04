@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Yuxarı sürüşdür",
   "selectScrollDownSemanticsLabel": "Aşağı sürüşdür",
   "paginationPreviousSemanticsLabel": "Əvvəlki",
-  "paginationNextSemanticsLabel": "Növbəti"
+  "paginationNextSemanticsLabel": "Növbəti",
+  "popoverSemanticsLabel": "Popover"
 }

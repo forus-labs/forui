@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Прокрутити вгору",
   "selectScrollDownSemanticsLabel": "Прокрутити вниз",
   "paginationPrevious": "Назад",
-  "paginationNext": "Далі"
+  "paginationNext": "Далі",
+  "popoverSemanticsLabel": "Спливаюче вікно"
 }

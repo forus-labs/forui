@@ -59,6 +59,35 @@ class FLocalizationsTh extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'ปิด \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'เลือกวันที่';
+
+  @override
+  String get dateFieldInvalidDateError => 'วันที่ไม่ถูกต้อง';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'ป๊อปโอเวอร์';
+
+  @override
   String get selectHint => 'เลือกรายการ';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsTh extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'เลื่อนลง';
 
   @override
+  String get sheetSemanticsLabel => 'Sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'ล้าง';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'เลือกวันที่';
-
-  @override
-  String get dateFieldInvalidDateError => 'วันที่ไม่ถูกต้อง';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsTh extends FLocalizations {
 
   @override
   String get dialogLabel => 'กล่องโต้ตอบ';
-
-  @override
-  String get sheetSemanticsLabel => 'Sheet';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'ปิด \$modalRouteContentName';
-  }
 }

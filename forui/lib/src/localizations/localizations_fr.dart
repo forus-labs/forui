@@ -59,6 +59,35 @@ class FLocalizationsFr extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Fond';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Fermer \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Sélectionner une date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Date non valide.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Précédent';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Suivant';
+
+  @override
+  String get popoverSemanticsLabel => 'Fenêtre contextuelle';
+
+  @override
   String get selectHint => 'Sélectionnez un élément';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsFr extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Faire défiler vers le bas';
 
   @override
+  String get sheetSemanticsLabel => 'sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Effacer';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Précédent';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Suivant';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Sélectionner une date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Date non valide.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,22 +125,40 @@ class FLocalizationsFr extends FLocalizations {
 
   @override
   String get dialogLabel => 'Boîte de dialogue';
-
-  @override
-  String get sheetSemanticsLabel => 'sheet';
-
-  @override
-  String get barrierLabel => 'Fond';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Fermer \$modalRouteContentName';
-  }
 }
 
 /// The translations for French, as used in Canada (`fr_CA`).
 class FLocalizationsFrCa extends FLocalizationsFr {
   FLocalizationsFrCa() : super('fr_CA');
+
+  @override
+  String get barrierLabel => 'Grille';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Fermer \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Sélectionner une date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Date non valide.';
+
+  @override
+  String get shortDateSeparator => '-';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Précédent';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Suivant';
+
+  @override
+  String get popoverSemanticsLabel => 'Fenêtre contextuelle';
 
   @override
   String get selectHint => 'Sélectionnez un élément';
@@ -144,25 +176,10 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   String get selectScrollDownSemanticsLabel => 'Faire défiler vers le bas';
 
   @override
+  String get sheetSemanticsLabel => 'Zone de contenu';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Effacer';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Précédent';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Suivant';
-
-  @override
-  String get shortDateSeparator => '-';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Sélectionner une date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Date non valide.';
 
   @override
   String get timeFieldTimeSeparator => ' h ';
@@ -181,15 +198,4 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get dialogLabel => 'Boîte de dialogue';
-
-  @override
-  String get sheetSemanticsLabel => 'Zone de contenu';
-
-  @override
-  String get barrierLabel => 'Grille';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Fermer \$modalRouteContentName';
-  }
 }

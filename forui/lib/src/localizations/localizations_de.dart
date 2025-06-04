@@ -59,6 +59,35 @@ class FLocalizationsDe extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Gitter';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName schließen';
+  }
+
+  @override
+  String get dateFieldHint => 'Datum auswählen';
+
+  @override
+  String get dateFieldInvalidDateError => 'Ungültiges Datum.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Zurück';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Weiter';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Wählen Sie ein Element';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsDe extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Nach unten scrollen';
 
   @override
+  String get sheetSemanticsLabel => 'Ansicht';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Löschen';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Zurück';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Weiter';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Datum auswählen';
-
-  @override
-  String get dateFieldInvalidDateError => 'Ungültiges Datum.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,22 +125,32 @@ class FLocalizationsDe extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialogfeld';
-
-  @override
-  String get sheetSemanticsLabel => 'Ansicht';
-
-  @override
-  String get barrierLabel => 'Gitter';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName schließen';
-  }
 }
 
 /// The translations for German, as used in Switzerland (`de_CH`).
 class FLocalizationsDeCh extends FLocalizationsDe {
   FLocalizationsDeCh() : super('de_CH');
+
+  @override
+  String get dateFieldHint => 'Datum auswählen';
+
+  @override
+  String get dateFieldInvalidDateError => 'Ungültiges Datum.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Zurück';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Weiter';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
 
   @override
   String get selectHint => 'Wählen Sie ein Element';
@@ -145,24 +169,6 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Löschen';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Zurück';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Weiter';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Datum auswählen';
-
-  @override
-  String get dateFieldInvalidDateError => 'Ungültiges Datum.';
 
   @override
   String get timeFieldTimeSeparator => ':';

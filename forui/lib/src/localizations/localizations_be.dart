@@ -59,6 +59,35 @@ class FLocalizationsBe extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Палатно';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Закрыць: \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Выберыце дату';
+
+  @override
+  String get dateFieldInvalidDateError => 'Няправільная дата.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Усплывальнае акно';
+
+  @override
   String get selectHint => 'Выберыце элемент';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsBe extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Прагартаць уніз';
 
   @override
+  String get sheetSemanticsLabel => 'аркуш';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Выберыце дату';
-
-  @override
-  String get dateFieldInvalidDateError => 'Няправільная дата.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsBe extends FLocalizations {
 
   @override
   String get dialogLabel => 'Дыялогавае акно';
-
-  @override
-  String get sheetSemanticsLabel => 'аркуш';
-
-  @override
-  String get barrierLabel => 'Палатно';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Закрыць: \$modalRouteContentName';
-  }
 }

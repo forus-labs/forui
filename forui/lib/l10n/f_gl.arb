@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Desprazarse cara arriba",
   "selectScrollDownSemanticsLabel": "Desprazarse cara abaixo",
   "paginationPrevious": "Anterior",
-  "paginationNext": "Seguinte"
+  "paginationNext": "Seguinte",
+  "popoverSemanticsLabel": "Xanela emerxente"
 }

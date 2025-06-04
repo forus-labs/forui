@@ -87,11 +87,8 @@ class FPopoverMenu extends StatelessWidget {
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
 
-  /// {@macro forui.widgets.FPopover.barrier}
-  final ImageFilter? barrier;
-
   /// {@macro forui.foundation.doc_templates.autofocus}
-  final bool autofocus;
+  final bool? autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusScopeNode? focusNode;
@@ -101,6 +98,12 @@ class FPopoverMenu extends StatelessWidget {
 
   /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
   final TraversalEdgeBehavior traversalEdgeBehavior;
+
+  /// {@macro forui.widgets.FPopover.barrierSemanticsLabel}
+  final String? barrierSemanticsLabel;
+
+  /// {@macro forui.widgets.FPopover.barrierSemanticsDismissible}
+  final bool barrierSemanticsDismissible;
 
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
@@ -147,9 +150,10 @@ class FPopoverMenu extends StatelessWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.barrier,
+    this.barrierSemanticsLabel,
+    this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
-    this.autofocus = false,
+    this.autofocus,
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
@@ -175,11 +179,12 @@ class FPopoverMenu extends StatelessWidget {
       offset: offset,
       groupId: groupId,
       hideOnTapOutside: hideOnTapOutside,
-      barrier: barrier,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       traversalEdgeBehavior: traversalEdgeBehavior,
+      barrierSemanticsLabel: barrierSemanticsLabel,
+      barrierSemanticsDismissible: barrierSemanticsDismissible,
       popoverBuilder: (context, controller) => FTileGroup.merge(
         scrollController: scrollController,
         cacheExtent: cacheExtent,
@@ -213,7 +218,14 @@ class FPopoverMenu extends StatelessWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(DiagnosticsProperty('barrier', barrier))
+      ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
+      ..add(
+        FlagProperty(
+          'barrierSemanticsDismissible',
+          value: barrierSemanticsDismissible,
+          ifTrue: 'barrier semantics dismissible',
+        ),
+      )
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -242,6 +254,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required this.tileGroupStyle,
     required super.decoration,
     this.maxWidth = 250,
+    super.barrierFilter,
     super.backgroundFilter,
     super.viewInsets,
   }) : assert(0 < maxWidth, 'maxWidth must be positive');

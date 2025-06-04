@@ -59,6 +59,35 @@ class FLocalizationsRo extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Material';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Închideți \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Selectați data';
+
+  @override
+  String get dateFieldInvalidDateError => 'Dată nevalidă.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Anterior';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Înainte';
+
+  @override
+  String get popoverSemanticsLabel => 'Fereastră contextuală';
+
+  @override
   String get selectHint => 'Selectați un element';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsRo extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Derulează în jos';
 
   @override
+  String get sheetSemanticsLabel => 'Foaie';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Ștergeți';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Anterior';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Înainte';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Selectați data';
-
-  @override
-  String get dateFieldInvalidDateError => 'Dată nevalidă.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsRo extends FLocalizations {
 
   @override
   String get dialogLabel => 'Casetă de dialog';
-
-  @override
-  String get sheetSemanticsLabel => 'Foaie';
-
-  @override
-  String get barrierLabel => 'Material';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Închideți \$modalRouteContentName';
-  }
 }

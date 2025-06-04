@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Ոլորել վերև",
   "selectScrollDownSemanticsLabel": "Ոլորել ներքև",
   "paginationPrevious": "Նախորդ",
-  "paginationNext": "Հաջորդը"
+  "paginationNext": "Հաջորդը",
+  "popoverSemanticsLabel": "Ելնող պատուհան"
 }

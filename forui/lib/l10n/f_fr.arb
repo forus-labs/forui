@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Faire défiler vers le haut",
   "selectScrollDownSemanticsLabel": "Faire défiler vers le bas",
   "paginationPreviousSemanticsLabel": "Précédent",
-  "paginationNextSemanticsLabel": "Suivant"
+  "paginationNextSemanticsLabel": "Suivant",
+  "popoverSemanticsLabel": "Fenêtre contextuelle"
 }

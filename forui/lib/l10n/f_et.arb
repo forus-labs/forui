@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Keri üles",
   "selectScrollDownSemanticsLabel": "Keri alla",
   "paginationPreviousSemanticsLabel": "Eelmine",
-  "paginationNextSemanticsLabel": "Järgmine"
+  "paginationNextSemanticsLabel": "Järgmine",
+  "popoverSemanticsLabel": "Hüpikaken"
 }

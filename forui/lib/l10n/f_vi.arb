@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Cuộn lên",
   "selectScrollDownSemanticsLabel": "Cuộn xuống",
   "paginationPreviousSemanticsLabel": "Trước",
-  "paginationNextSemanticsLabel": "Tiếp"
+  "paginationNextSemanticsLabel": "Tiếp",
+  "popoverSemanticsLabel": "Cửa sổ bật lên"
 }

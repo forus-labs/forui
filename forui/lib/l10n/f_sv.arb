@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Rulla uppåt",
   "selectScrollDownSemanticsLabel": "Rulla nedåt",
   "paginationPreviousSemanticsLabel": "Föregående",
-  "paginationNextSemanticsLabel": "Nästa"
+  "paginationNextSemanticsLabel": "Nästa",
+  "popoverSemanticsLabel": "Popover"
 }

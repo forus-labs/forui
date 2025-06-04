@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
@@ -105,12 +103,6 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   @override
   final Widget? description;
 
-  /// The menu's semantic label used by accessibility frameworks.
-  final String? semanticsLabel;
-
-  /// {@macro forui.widgets.FPopover.barrier}
-  final ImageFilter? barrier;
-
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -122,6 +114,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 
   /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
   final TraversalEdgeBehavior traversalEdgeBehavior;
+
+  /// {@macro forui.widgets.FPopover.barrierSemanticsLabel}
+  final String? barrierSemanticsLabel;
+
+  /// {@macro forui.widgets.FPopover.barrierSemanticsDismissible}
+  final bool barrierSemanticsDismissible;
+
+  /// The menu's semantic label used by accessibility frameworks.
+  final String? semanticsLabel;
 
   /// The prefix icon.
   final Widget? prefixIcon;
@@ -177,12 +178,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autoHide = false,
     this.label,
     this.description,
-    this.semanticsLabel,
-    this.barrier,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.barrierSemanticsLabel,
+    this.barrierSemanticsDismissible = true,
+    this.semanticsLabel,
     this.prefixIcon,
     this.subtitle,
     this.detailsBuilder = _builder,
@@ -237,7 +239,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              focusNode: focusNode,
              onFocusChange: onFocusChange,
              traversalEdgeBehavior: traversalEdgeBehavior,
-             barrier: barrier,
+             barrierSemanticsLabel: barrierSemanticsLabel,
+             barrierSemanticsDismissible: barrierSemanticsDismissible,
              popoverBuilder: (_, _) => ConstrainedBox(
                constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                child: FSelectTileGroup<T>(
@@ -330,12 +333,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autoHide = false,
     this.label,
     this.description,
-    this.semanticsLabel,
-    this.barrier,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.barrierSemanticsLabel,
+    this.barrierSemanticsDismissible = true,
+    this.semanticsLabel,
     this.prefixIcon,
     this.subtitle,
     this.detailsBuilder = _builder,
@@ -391,7 +395,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              focusNode: focusNode,
              onFocusChange: onFocusChange,
              traversalEdgeBehavior: traversalEdgeBehavior,
-             barrier: barrier,
+             barrierSemanticsLabel: barrierSemanticsLabel,
+             barrierSemanticsDismissible: barrierSemanticsDismissible,
              popoverBuilder: (_, _) => FSelectTileGroup<T>.builder(
                selectController: state._controller,
                scrollController: scrollController,
@@ -463,9 +468,16 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(DiagnosticsProperty('barrier', barrier))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
+      ..add(
+        FlagProperty(
+          'barrierSemanticsDismissible',
+          value: barrierSemanticsDismissible,
+          ifTrue: 'barrier semantics dismissible',
+        ),
+      )
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))

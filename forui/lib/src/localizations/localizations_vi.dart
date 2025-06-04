@@ -59,6 +59,35 @@ class FLocalizationsVi extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Đóng \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Chọn ngày';
+
+  @override
+  String get dateFieldInvalidDateError => 'Ngày không hợp lệ.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Trước';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Tiếp';
+
+  @override
+  String get popoverSemanticsLabel => 'Cửa sổ bật lên';
+
+  @override
   String get selectHint => 'Chọn một mục';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsVi extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Cuộn xuống';
 
   @override
+  String get sheetSemanticsLabel => 'Bảng';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Xóa';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Trước';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Tiếp';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Chọn ngày';
-
-  @override
-  String get dateFieldInvalidDateError => 'Ngày không hợp lệ.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsVi extends FLocalizations {
 
   @override
   String get dialogLabel => 'Hộp thoại';
-
-  @override
-  String get sheetSemanticsLabel => 'Bảng';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Đóng \$modalRouteContentName';
-  }
 }

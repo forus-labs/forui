@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Pomjerite prema gore",
   "selectScrollDownSemanticsLabel": "Pomjerite prema dolje",
   "paginationPreviousSemanticsLabel": "Prethodno",
-  "paginationNextSemanticsLabel": "Sljedeće"
+  "paginationNextSemanticsLabel": "Sljedeće",
+  "popoverSemanticsLabel": "Iskačući prozor"
 }

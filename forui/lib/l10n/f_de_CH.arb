@@ -17,5 +17,6 @@
   "selectScrollUpSemanticsLabel": "Nach oben scrollen",
   "selectScrollDownSemanticsLabel": "Nach unten scrollen",
   "paginationPreviousSemanticsLabel": "Zurück",
-  "paginationNextSemanticsLabel": "Weiter"
+  "paginationNextSemanticsLabel": "Weiter",
+  "popoverSemanticsLabel": "Popover"
 }

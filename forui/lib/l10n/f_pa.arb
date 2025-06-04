@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "ਉੱਪਰ ਸਕ੍ਰੋਲ ਕਰੋ",
   "selectScrollDownSemanticsLabel": "ਹੇਠਾਂ ਸਕ੍ਰੋਲ ਕਰੋ",
   "paginationPreviousSemanticsLabel": "ਪਿਛਲਾ",
-  "paginationNextSemanticsLabel": "ਅੱਗੇ"
+  "paginationNextSemanticsLabel": "ਅੱਗੇ",
+  "popoverSemanticsLabel": "ਪੌਪਓਵਰ"
 }

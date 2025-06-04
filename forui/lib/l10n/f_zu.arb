@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Skrola phezulu",
   "selectScrollDownSemanticsLabel": "Skrola phansi",
   "paginationPreviousSemanticsLabel": "Okwedlule",
-  "paginationNextSemanticsLabel": "Okulandelayo"
+  "paginationNextSemanticsLabel": "Okulandelayo",
+  "popoverSemanticsLabel": "Iwindi eliqhamukayo"
 }

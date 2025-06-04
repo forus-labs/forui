@@ -59,6 +59,35 @@ class FLocalizationsKo extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => '스크림';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName 닫기';
+  }
+
+  @override
+  String get dateFieldHint => '날짜 선택';
+
+  @override
+  String get dateFieldInvalidDateError => '날짜가 잘못되었습니다.';
+
+  @override
+  String get shortDateSeparator => '. ';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => '팝오버';
+
+  @override
   String get selectHint => '항목 선택';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsKo extends FLocalizations {
   String get selectScrollDownSemanticsLabel => '아래로 스크롤';
 
   @override
+  String get sheetSemanticsLabel => '시트';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '. ';
-
-  @override
-  String get shortDateSuffix => '.';
-
-  @override
-  String get dateFieldHint => '날짜 선택';
-
-  @override
-  String get dateFieldInvalidDateError => '날짜가 잘못되었습니다.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsKo extends FLocalizations {
 
   @override
   String get dialogLabel => '대화상자';
-
-  @override
-  String get sheetSemanticsLabel => '시트';
-
-  @override
-  String get barrierLabel => '스크림';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName 닫기';
-  }
 }

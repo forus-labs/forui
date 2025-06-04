@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Lëviz lart",
   "selectScrollDownSemanticsLabel": "Lëviz poshtë",
   "paginationPreviousSemanticsLabel": "E mëparshme",
-  "paginationNextSemanticsLabel": "Tjetër"
+  "paginationNextSemanticsLabel": "Tjetër",
+  "popoverSemanticsLabel": "Dritare kërcyese"
 }

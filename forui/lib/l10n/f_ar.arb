@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "التمرير لأعلى",
   "selectScrollDownSemanticsLabel": "التمرير لأسفل",
   "paginationPrevious": "السابق",
-  "paginationNext": "التالي"
+  "paginationNext": "التالي",
+  "popoverSemanticsLabel": "منبثقة"
 }

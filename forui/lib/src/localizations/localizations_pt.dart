@@ -59,6 +59,35 @@ class FLocalizationsPt extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Fechar \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Selecionar data';
+
+  @override
+  String get dateFieldInvalidDateError => 'Data inválida.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Janela sobreposta';
+
+  @override
   String get selectHint => 'Selecione um item';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsPt extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Rolar para baixo';
 
   @override
+  String get sheetSemanticsLabel => 'inferior';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Selecionar data';
-
-  @override
-  String get dateFieldInvalidDateError => 'Data inválida.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,9 +125,11 @@ class FLocalizationsPt extends FLocalizations {
 
   @override
   String get dialogLabel => 'Caixa de diálogo';
+}
 
-  @override
-  String get sheetSemanticsLabel => 'inferior';
+/// The translations for Portuguese, as used in Portugal (`pt_PT`).
+class FLocalizationsPtPt extends FLocalizationsPt {
+  FLocalizationsPtPt() : super('pt_PT');
 
   @override
   String get barrierLabel => 'Scrim';
@@ -122,11 +138,21 @@ class FLocalizationsPt extends FLocalizations {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Fechar \$modalRouteContentName';
   }
-}
 
-/// The translations for Portuguese, as used in Portugal (`pt_PT`).
-class FLocalizationsPtPt extends FLocalizationsPt {
-  FLocalizationsPtPt() : super('pt_PT');
+  @override
+  String get dateFieldHint => 'Selecionar data';
+
+  @override
+  String get dateFieldInvalidDateError => 'Data inválida.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get popoverSemanticsLabel => 'Janela sobreposta';
 
   @override
   String get selectHint => 'Selecione um item';
@@ -141,16 +167,7 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   String get selectScrollDownSemanticsLabel => 'Deslocar para baixo';
 
   @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Selecionar data';
-
-  @override
-  String get dateFieldInvalidDateError => 'Data inválida.';
+  String get sheetSemanticsLabel => 'Secção';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -169,15 +186,4 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get dialogLabel => 'Caixa de diálogo';
-
-  @override
-  String get sheetSemanticsLabel => 'Secção';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Fechar \$modalRouteContentName';
-  }
 }

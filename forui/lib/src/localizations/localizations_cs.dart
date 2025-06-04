@@ -59,6 +59,35 @@ class FLocalizationsCs extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Zavřít \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Vyberte datum';
+
+  @override
+  String get dateFieldInvalidDateError => 'Neplatné datum.';
+
+  @override
+  String get shortDateSeparator => '. ';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Předchozí';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Další';
+
+  @override
+  String get popoverSemanticsLabel => 'Vyskakovací okno';
+
+  @override
   String get selectHint => 'Vyberte položku';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsCs extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Posunout dolů';
 
   @override
+  String get sheetSemanticsLabel => 'tabulka';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Vymazat';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Předchozí';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Další';
-
-  @override
-  String get shortDateSeparator => '. ';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Vyberte datum';
-
-  @override
-  String get dateFieldInvalidDateError => 'Neplatné datum.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsCs extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialogové okno';
-
-  @override
-  String get sheetSemanticsLabel => 'tabulka';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Zavřít \$modalRouteContentName';
-  }
 }

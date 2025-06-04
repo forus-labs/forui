@@ -59,6 +59,35 @@ class FLocalizationsNo extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Vev';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Lukk \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Velg dato';
+
+  @override
+  String get dateFieldInvalidDateError => 'Ugyldig dato.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Forrige';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Neste';
+
+  @override
+  String get popoverSemanticsLabel => 'Hurtigvindu';
+
+  @override
   String get selectHint => 'Velg et element';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsNo extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Rull ned';
 
   @override
+  String get sheetSemanticsLabel => 'Felt';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Tøm';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Forrige';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Neste';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Velg dato';
-
-  @override
-  String get dateFieldInvalidDateError => 'Ugyldig dato.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsNo extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialogboks';
-
-  @override
-  String get sheetSemanticsLabel => 'Felt';
-
-  @override
-  String get barrierLabel => 'Vev';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Lukk \$modalRouteContentName';
-  }
 }

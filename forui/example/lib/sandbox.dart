@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -63,9 +65,37 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
             const SizedBox(height: 30),
           ],
         ),
+        FButton(
+          child: const Text('Click me'),
+          onPress: () => showFSheet(
+            context: context,
+            side: FLayout.btt,
+            mainAxisMaxRatio: null,
+            builder: (context) => DraggableScrollableSheet(
+              expand: false,
+              builder: (context, controller) => ScrollConfiguration(
+                // This is required to enable dragging on desktop.
+                // See https://github.com/flutter/flutter/issues/101903 for more information.
+                behavior: ScrollConfiguration.of(
+                  context,
+                ).copyWith(dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad}),
+                child: FTileGroup.builder(
+                  count: 25,
+                  scrollController: controller,
+                  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
+                ),
+              ),
+            ),
+          ),
+        ),
         FPopover(
+          style: context.theme.popoverStyle.copyWith(
+            barrierFilter: (animation) => ImageFilter.compose(
+              outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              inner: ColorFilter.mode(Colors.black.withValues(alpha: animation * 0.2), BlendMode.srcOver),
+            ),
+          ),
           controller: controller,
-          barrier: ColorFilter.mode(Colors.red, BlendMode.srcOver),
           popoverAnchor: Alignment.topCenter,
           childAnchor: Alignment.bottomCenter,
           popoverBuilder: (context, _) => Padding(

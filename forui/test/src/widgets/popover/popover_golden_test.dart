@@ -80,7 +80,9 @@ void main() {
           theme: theme.data,
           child: FPopover(
             controller: controller,
-            barrier: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+            style: theme.data.popoverStyle.copyWith(
+              barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            ),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
@@ -90,10 +92,7 @@ void main() {
       unawaited(controller.show());
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('popover/barrier-${theme.name}.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/barrier-${theme.name}.png'));
     });
   }
 

@@ -59,6 +59,35 @@ class FLocalizationsEt extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Sirm';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Sule \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Valige kuupäev';
+
+  @override
+  String get dateFieldInvalidDateError => 'Sobimatu kuupäev.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Eelmine';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Järgmine';
+
+  @override
+  String get popoverSemanticsLabel => 'Hüpikaken';
+
+  @override
   String get selectHint => 'Valige üksus';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsEt extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Keri alla';
 
   @override
+  String get sheetSemanticsLabel => 'leht';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Kustuta';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Eelmine';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Järgmine';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Valige kuupäev';
-
-  @override
-  String get dateFieldInvalidDateError => 'Sobimatu kuupäev.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsEt extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialoog';
-
-  @override
-  String get sheetSemanticsLabel => 'leht';
-
-  @override
-  String get barrierLabel => 'Sirm';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Sule \$modalRouteContentName';
-  }
 }

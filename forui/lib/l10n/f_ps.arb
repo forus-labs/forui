@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "پورته سکرول کړئ",
   "selectScrollDownSemanticsLabel": "ښکته سکرول کړئ",
   "paginationPrevious": "مخکینی",
-  "paginationNext": "راتلونکی"
+  "paginationNext": "راتلونکی",
+  "popoverSemanticsLabel": "پاپ اوور"
 }

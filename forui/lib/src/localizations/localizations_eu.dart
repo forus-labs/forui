@@ -59,6 +59,35 @@ class FLocalizationsEu extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Barrera';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Itxi \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Hautatu data';
+
+  @override
+  String get dateFieldInvalidDateError => 'Data baliogabea.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Aurrekoa';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Hurrengoa';
+
+  @override
+  String get popoverSemanticsLabel => 'Leiho emergentea';
+
+  @override
   String get selectHint => 'Hautatu elementu bat';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsEu extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Egin behera';
 
   @override
+  String get sheetSemanticsLabel => 'orria';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Garbitu';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Aurrekoa';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Hurrengoa';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Hautatu data';
-
-  @override
-  String get dateFieldInvalidDateError => 'Data baliogabea.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsEu extends FLocalizations {
 
   @override
   String get dialogLabel => 'Leihoa';
-
-  @override
-  String get sheetSemanticsLabel => 'orria';
-
-  @override
-  String get barrierLabel => 'Barrera';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Itxi \$modalRouteContentName';
-  }
 }

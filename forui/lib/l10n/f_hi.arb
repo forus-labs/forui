@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "ऊपर स्क्रॉल करें",
   "selectScrollDownSemanticsLabel": "नीचे स्क्रॉल करें",
   "paginationPrevious": "पिछला",
-  "paginationNext": "अगला"
+  "paginationNext": "अगला",
+  "popoverSemanticsLabel": "पॉपओवर"
 }

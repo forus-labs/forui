@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Жоғары айналдыру",
   "selectScrollDownSemanticsLabel": "Төмен айналдыру",
   "paginationPrevious": "Алдыңғы",
-  "paginationNext": "Келесі"
+  "paginationNext": "Келесі",
+  "popoverSemanticsLabel": "Қалқымалы терезе"
 }

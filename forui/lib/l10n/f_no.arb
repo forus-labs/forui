@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Rull opp",
   "selectScrollDownSemanticsLabel": "Rull ned",
   "paginationPreviousSemanticsLabel": "Forrige",
-  "paginationNextSemanticsLabel": "Neste"
+  "paginationNextSemanticsLabel": "Neste",
+  "popoverSemanticsLabel": "Hurtigvindu"
 }

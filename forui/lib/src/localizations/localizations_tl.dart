@@ -59,6 +59,35 @@ class FLocalizationsTl extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Isara ang \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Pumili ng petsa';
+
+  @override
+  String get dateFieldInvalidDateError => 'Hindi wastong petsa.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Nakaraan';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Susunod';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Pumili ng item';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsTl extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Mag-scroll pababa';
 
   @override
+  String get sheetSemanticsLabel => 'sheet';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'I-clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Nakaraan';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Susunod';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pumili ng petsa';
-
-  @override
-  String get dateFieldInvalidDateError => 'Hindi wastong petsa.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsTl extends FLocalizations {
 
   @override
   String get dialogLabel => 'Dialog';
-
-  @override
-  String get sheetSemanticsLabel => 'sheet';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Isara ang \$modalRouteContentName';
-  }
 }

@@ -59,6 +59,35 @@ class FLocalizationsMk extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Скрим';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Затворете ја \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Изберете датум';
+
+  @override
+  String get dateFieldInvalidDateError => 'Неважечки датум.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Скокачки прозорец';
+
+  @override
   String get selectHint => 'Изберете ставка';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsMk extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Лизгај надолу';
 
   @override
+  String get sheetSemanticsLabel => 'лист';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Изберете датум';
-
-  @override
-  String get dateFieldInvalidDateError => 'Неважечки датум.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsMk extends FLocalizations {
 
   @override
   String get dialogLabel => 'Дијалог';
-
-  @override
-  String get sheetSemanticsLabel => 'лист';
-
-  @override
-  String get barrierLabel => 'Скрим';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Затворете ја \$modalRouteContentName';
-  }
 }

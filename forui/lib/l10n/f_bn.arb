@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "উপরে স্ক্রোল করুন",
   "selectScrollDownSemanticsLabel": "নিচে স্ক্রোল করুন",
   "paginationPrevious": "পূর্ববর্তী",
-  "paginationNext": "পরবর্তী"
+  "paginationNext": "পরবর্তী",
+  "popoverSemanticsLabel": "পপওভার"
 }

@@ -59,6 +59,35 @@ class FLocalizationsEl extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Επικάλυψη';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Κλείσιμο \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Επιλέξτε ημερομηνία';
+
+  @override
+  String get dateFieldInvalidDateError => 'Μη έγκυρη ημερομηνία.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Αναδυόμενο παράθυρο';
+
+  @override
   String get selectHint => 'Επιλέξτε ένα στοιχείο';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsEl extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Κύλιση προς τα κάτω';
 
   @override
+  String get sheetSemanticsLabel => 'Φύλλο';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Επιλέξτε ημερομηνία';
-
-  @override
-  String get dateFieldInvalidDateError => 'Μη έγκυρη ημερομηνία.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsEl extends FLocalizations {
 
   @override
   String get dialogLabel => 'Παράθυρο διαλόγου';
-
-  @override
-  String get sheetSemanticsLabel => 'Φύλλο';
-
-  @override
-  String get barrierLabel => 'Επικάλυψη';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Κλείσιμο \$modalRouteContentName';
-  }
 }

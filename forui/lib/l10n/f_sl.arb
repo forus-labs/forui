@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Pomik navzgor",
   "selectScrollDownSemanticsLabel": "Pomik navzdol",
   "paginationPreviousSemanticsLabel": "Prejšnji",
-  "paginationNextSemanticsLabel": "Naprej"
+  "paginationNextSemanticsLabel": "Naprej",
+  "popoverSemanticsLabel": "Pojavno okno"
 }

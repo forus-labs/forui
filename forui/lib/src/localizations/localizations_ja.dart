@@ -59,6 +59,35 @@ class FLocalizationsJa extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'スクリム';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName を閉じる';
+  }
+
+  @override
+  String get dateFieldHint => '日付を選択';
+
+  @override
+  String get dateFieldInvalidDateError => '日付が無効です。';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => '前へ';
+
+  @override
+  String get paginationNextSemanticsLabel => '次へ';
+
+  @override
+  String get popoverSemanticsLabel => 'ポップオーバー';
+
+  @override
   String get selectHint => 'アイテムを選択';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsJa extends FLocalizations {
   String get selectScrollDownSemanticsLabel => '下にスクロール';
 
   @override
+  String get sheetSemanticsLabel => 'シート';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'クリア';
-
-  @override
-  String get paginationPreviousSemanticsLabel => '前へ';
-
-  @override
-  String get paginationNextSemanticsLabel => '次へ';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => '日付を選択';
-
-  @override
-  String get dateFieldInvalidDateError => '日付が無効です。';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsJa extends FLocalizations {
 
   @override
   String get dialogLabel => 'ダイアログ';
-
-  @override
-  String get sheetSemanticsLabel => 'シート';
-
-  @override
-  String get barrierLabel => 'スクリム';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName を閉じる';
-  }
 }

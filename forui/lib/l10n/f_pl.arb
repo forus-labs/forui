@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Przewiń w górę",
   "selectScrollDownSemanticsLabel": "Przewiń w dół",
   "paginationPreviousSemanticsLabel": "Poprzedni",
-  "paginationNextSemanticsLabel": "Dalej"
+  "paginationNextSemanticsLabel": "Dalej",
+  "popoverSemanticsLabel": "Okno wyskakujące"
 }

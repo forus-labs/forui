@@ -117,9 +117,11 @@ class BlurredPopoverPage extends Sample {
         ],
       ),
       FPopover(
-        barrier: ImageFilter.compose(
-          outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-          inner: ColorFilter.mode(Colors.black.withValues(alpha: 0.2), BlendMode.srcOver),
+        style: context.theme.popoverStyle.copyWith(
+          barrierFilter: (animation) => ImageFilter.compose(
+            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            inner: ColorFilter.mode(Colors.black.withValues(alpha: animation * 0.2), BlendMode.srcOver),
+          ),
         ),
         popoverAnchor: Alignment.topCenter,
         childAnchor: Alignment.bottomCenter,

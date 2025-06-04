@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "גלול למעלה",
   "selectScrollDownSemanticsLabel": "גלול למטה",
   "paginationPrevious": "הקודם",
-  "paginationNext": "הבא"
+  "paginationNext": "הבא",
+  "popoverSemanticsLabel": "חלון קופץ"
 }

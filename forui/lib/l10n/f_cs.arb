@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Posunout nahoru",
   "selectScrollDownSemanticsLabel": "Posunout dolů",
   "paginationPreviousSemanticsLabel": "Předchozí",
-  "paginationNextSemanticsLabel": "Další"
+  "paginationNextSemanticsLabel": "Další",
+  "popoverSemanticsLabel": "Vyskakovací okno"
 }

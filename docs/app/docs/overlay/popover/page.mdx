@@ -93,7 +93,6 @@ FPopover(
   offset: Offset.zero,
   groupId: 'popover-group',
   hideOnTapOutside: FHidePopoverRegion.excludeTarget,
-  barrier: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
   popoverBuilder: (context, controller) => const Placeholder(),
   builder: (context, controller, child) => const Placeholder(),
   child: const Placeholder(),
@@ -230,7 +229,7 @@ You can change how the popover is aligned to the button.
     <Widget name='popover' variant='blurred' height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {19-22} copy
+    ```dart {19-24} copy
     class BlurredPopoverPage extends StatelessWidget {
       @override
       Widget build(BuildContext context) => Column(
@@ -249,9 +248,11 @@ You can change how the popover is aligned to the button.
             ],
           ),
           FPopover(
-            barrier: ImageFilter.compose(
-              outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              inner: ColorFilter.mode(Colors.black.withValues(alpha: 0.2), BlendMode.srcOver),
+            style: context.theme.popoverStyle.copyWith(
+              barrierFilter: (animation) => ImageFilter.compose(
+                outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                inner: ColorFilter.mode(Colors.black.withValues(alpha: animation * 0.2), BlendMode.srcOver),
+              ),
             ),
             popoverAnchor: Alignment.topCenter,
             childAnchor: Alignment.bottomCenter,

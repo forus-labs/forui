@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Pomerite nagore",
   "selectScrollDownSemanticsLabel": "Pomerite nadole",
   "paginationPreviousSemanticsLabel": "Prethodno",
-  "paginationNextSemanticsLabel": "Sledeće"
+  "paginationNextSemanticsLabel": "Sledeće",
+  "popoverSemanticsLabel": "Iskačući prozor"
 }

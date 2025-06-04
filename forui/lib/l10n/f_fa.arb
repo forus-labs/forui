@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "پیمایش به بالا",
   "selectScrollDownSemanticsLabel": "پیمایش به پایین",
   "paginationPrevious": "قبلی",
-  "paginationNext": "بعدی"
+  "paginationNext": "بعدی",
+  "popoverSemanticsLabel": "پاپ‌اور"
 }

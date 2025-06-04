@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "اوپر سکرول کریں",
   "selectScrollDownSemanticsLabel": "نیچے سکرول کریں",
   "paginationPreviousSemanticsLabel": "پچھلا",
-  "paginationNextSemanticsLabel": "اگلا"
+  "paginationNextSemanticsLabel": "اگلا",
+  "popoverSemanticsLabel": "پاپ اوور"
 }

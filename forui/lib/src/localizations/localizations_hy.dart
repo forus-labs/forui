@@ -59,6 +59,35 @@ class FLocalizationsHy extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Դիմակ';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Փակել՝ \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Ընտրել ամսաթիվը';
+
+  @override
+  String get dateFieldInvalidDateError => 'Սխալ ամսաթիվ:';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Ելնող պատուհան';
+
+  @override
   String get selectHint => 'Ընտրեք տարր';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsHy extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Ոլորել ներքև';
 
   @override
+  String get sheetSemanticsLabel => 'էկրան';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Ընտրել ամսաթիվը';
-
-  @override
-  String get dateFieldInvalidDateError => 'Սխալ ամսաթիվ:';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsHy extends FLocalizations {
 
   @override
   String get dialogLabel => 'Երկխոսության պատուհան';
-
-  @override
-  String get sheetSemanticsLabel => 'էկրան';
-
-  @override
-  String get barrierLabel => 'Դիմակ';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Փակել՝ \$modalRouteContentName';
-  }
 }

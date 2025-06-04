@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Tepaga aylantirish",
   "selectScrollDownSemanticsLabel": "Pastga aylantirish",
   "paginationPreviousSemanticsLabel": "Oldingi",
-  "paginationNextSemanticsLabel": "Keyingi"
+  "paginationNextSemanticsLabel": "Keyingi",
+  "popoverSemanticsLabel": "Popover"
 }

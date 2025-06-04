@@ -59,6 +59,35 @@ class FLocalizationsNe extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'स्क्रिम';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName बन्द गर्नुहोस्';
+  }
+
+  @override
+  String get dateFieldHint => 'मिति चयन गर्नुहोस्';
+
+  @override
+  String get dateFieldInvalidDateError => 'अमान्य मिति।';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'पपओभर';
+
+  @override
   String get selectHint => 'वस्तु चयन गर्नुहोस्';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsNe extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'तल स्क्रोल गर्नुहोस्';
 
   @override
+  String get sheetSemanticsLabel => 'पाना';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'मिति चयन गर्नुहोस्';
-
-  @override
-  String get dateFieldInvalidDateError => 'अमान्य मिति।';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsNe extends FLocalizations {
 
   @override
   String get dialogLabel => 'संवाद';
-
-  @override
-  String get sheetSemanticsLabel => 'पाना';
-
-  @override
-  String get barrierLabel => 'स्क्रिम';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName बन्द गर्नुहोस्';
-  }
 }

@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Rolar para cima",
   "selectScrollDownSemanticsLabel": "Rolar para baixo",
   "paginationPrevious": "Anterior",
-  "paginationNext": "Próximo"
+  "paginationNext": "Próximo",
+  "popoverSemanticsLabel": "Janela sobreposta"
 }

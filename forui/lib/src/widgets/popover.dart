@@ -172,31 +172,10 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   final FHidePopoverRegion hideOnTapOutside;
 
-  /// {@template forui.widgets.FPopover.barrier}
-  /// The popover's barrier. Defaults to null.
-  ///
-  /// ## Examples
-  /// ```dart
-  /// // Blurred
-  /// ImageFilter.blur(sigmaX: 5, sigmaY: 5);
-  ///
-  /// // Solid color
-  /// ColorFilter.mode(Colors.white, BlendMode.srcOver);
-  ///
-  /// // Tinted
-  /// ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver);
-  ///
-  /// // Blurred & tinted
-  /// ImageFilter.compose(
-  ///   outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver),
-  /// );
-  /// ```
-  /// {@endtemplate}
-  final ImageFilter? barrier;
-
   /// {@macro forui.foundation.doc_templates.autofocus}
-  final bool autofocus;
+  ///
+  /// Auto-focuses if [autofocus] is null and a barrier is provided.
+  final bool? autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusScopeNode? focusNode;
@@ -211,6 +190,20 @@ class FPopover extends StatefulWidget {
   /// Changing this field value has no immediate effect on the UI.
   /// {@endtemplate}
   final TraversalEdgeBehavior traversalEdgeBehavior;
+
+  /// {@template forui.widgets.FPopover.barrierSemanticsLabel}
+  /// The popover's barrier label used by accessibility frameworks.
+  ///
+  /// Ignored if no barrier is provided.
+  /// {@endtemplate}
+  final String? barrierSemanticsLabel;
+
+  /// {@template forui.widgets.FPopover.barrierSemanticsDismissible}
+  /// Whether the barrier semantics are included in the semantics tree. Defaults to true.
+  ///
+  /// Ignored if no barrier is provided.
+  /// {@endtemplate}
+  final bool barrierSemanticsDismissible;
 
   /// The popover's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
@@ -251,11 +244,12 @@ class FPopover extends StatefulWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.barrier,
-    this.autofocus = false,
+    this.autofocus,
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.barrierSemanticsLabel,
+    this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
     this.shortcuts,
     this.builder = _builder,
@@ -288,7 +282,14 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(DiagnosticsProperty('backdrop', barrier))
+      ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
+      ..add(
+        FlagProperty(
+          'barrierSemanticsDismissible',
+          value: barrierSemanticsDismissible,
+          ifTrue: 'barrier semantics dismissible',
+        ),
+      )
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -323,6 +324,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     var child = widget.builder(context, _controller, widget.child);
 
@@ -340,14 +342,16 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
         spacing: widget.spacing,
         shift: widget.shift,
         offset: widget.offset,
-        barrier: widget.barrier == null
+        barrier: style.barrierFilter == null
             ? null
-            : BackdropFilter.grouped(
-                filter: widget.barrier!,
-                child: FadeTransition(
-                  opacity: _controller._fade,
-                  child: Container(color: Colors.transparent),
-                ),
+            : FAnimatedModalBarrier(
+                animation: _controller._fade,
+                filter: style.barrierFilter!,
+                semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
+                barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
+                semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
+                // The actual dismissal logic is handled in the TapRegion below.
+                onDismiss: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : () {},
               ),
         portalBuilder: (context, _) {
           Widget popover = DecoratedBox(
@@ -370,7 +374,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                   label: widget.semanticsLabel,
                   container: true,
                   child: FocusScope(
-                    autofocus: widget.autofocus,
+                    autofocus: widget.autofocus ?? (style.barrierFilter != null),
                     node: widget.focusNode,
                     onFocusChange: widget.onFocusChange,
                     child: TapRegion(
@@ -412,6 +416,31 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final BoxDecoration decoration;
 
+  /// {@template forui.widgets.FPopoverStyle.barrierFilter}
+  /// A callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter] that is
+  /// used as the barrier. Defaults to null.
+  ///
+  /// ## Examples
+  /// ```dart
+  /// // Blurred
+  /// (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5);
+  ///
+  /// // Solid color
+  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation), BlendMode.srcOver);
+  ///
+  /// // Tinted
+  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver);
+  ///
+  /// // Blurred & tinted
+  /// (animation) => ImageFilter.compose(
+  ///   outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver),
+  /// );
+  /// ```
+  /// {@endtemplate}
+  @override
+  final ImageFilter Function(double animation)? barrierFilter;
+
   /// An optional background filter applied to the popover.
   ///
   /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
@@ -426,7 +455,12 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final EdgeInsetsGeometry viewInsets;
 
   /// Creates a [FPopoverStyle].
-  const FPopoverStyle({required this.decoration, this.backgroundFilter, this.viewInsets = const EdgeInsets.all(5)});
+  const FPopoverStyle({
+    required this.decoration,
+    this.barrierFilter,
+    this.backgroundFilter,
+    this.viewInsets = const EdgeInsets.all(5),
+  });
 
   /// Creates a [FPopoverStyle] that inherits its properties.
   FPopoverStyle.inherit({required FColors colors, required FStyle style})

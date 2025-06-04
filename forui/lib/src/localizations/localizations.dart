@@ -320,6 +320,60 @@ abstract class FLocalizations {
   /// **'{date}'**
   String shortDate(DateTime date);
 
+  /// The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message).
+  ///
+  /// In en, this message translates to:
+  /// **'Barrier'**
+  String get barrierLabel;
+
+  /// The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.
+  ///
+  /// In en, this message translates to:
+  /// **'Close {modalRouteContentName}'**
+  String barrierOnTapHint(String modalRouteContentName);
+
+  /// The hint text for the calendar-only date field.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a date'**
+  String get dateFieldHint;
+
+  /// Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid date.'**
+  String get dateFieldInvalidDateError;
+
+  /// The short date's separator, typically /.
+  ///
+  /// In en, this message translates to:
+  /// **'/'**
+  String get shortDateSeparator;
+
+  /// The short date's suffix, typically empty.
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get shortDateSuffix;
+
+  /// The label for the previous button in a pagination control.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get paginationPreviousSemanticsLabel;
+
+  /// The label for the next button in a pagination control.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get paginationNextSemanticsLabel;
+
+  /// The semantic label for a popover.
+  ///
+  /// In en, this message translates to:
+  /// **'Popover'**
+  String get popoverSemanticsLabel;
+
   /// The hint text for the select field.
   ///
   /// In en, this message translates to:
@@ -350,47 +404,17 @@ abstract class FLocalizations {
   /// **'Scroll down'**
   String get selectScrollDownSemanticsLabel;
 
+  /// The semantic label for a sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Sheet'**
+  String get sheetSemanticsLabel;
+
   /// The semantic label for the clear button in a text field.
   ///
   /// In en, this message translates to:
   /// **'Clear'**
   String get textFieldClearButtonSemanticsLabel;
-
-  /// The label for the previous button in a pagination control.
-  ///
-  /// In en, this message translates to:
-  /// **'Previous'**
-  String get paginationPreviousSemanticsLabel;
-
-  /// The label for the next button in a pagination control.
-  ///
-  /// In en, this message translates to:
-  /// **'Next'**
-  String get paginationNextSemanticsLabel;
-
-  /// The short date's separator, typically /.
-  ///
-  /// In en, this message translates to:
-  /// **'/'**
-  String get shortDateSeparator;
-
-  /// The short date's suffix, typically empty.
-  ///
-  /// In en, this message translates to:
-  /// **''**
-  String get shortDateSuffix;
-
-  /// The hint text for the calendar-only date field.
-  ///
-  /// In en, this message translates to:
-  /// **'Pick a date'**
-  String get dateFieldHint;
-
-  /// Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid date.'**
-  String get dateFieldInvalidDateError;
 
   /// The time field's time separator, typically ':'.
   ///
@@ -427,24 +451,6 @@ abstract class FLocalizations {
   /// In en, this message translates to:
   /// **'Dialog'**
   String get dialogLabel;
-
-  /// No description provided for @sheetSemanticsLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Sheet'**
-  String get sheetSemanticsLabel;
-
-  /// The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message).
-  ///
-  /// In en, this message translates to:
-  /// **'Barrier'**
-  String get barrierLabel;
-
-  /// The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.
-  ///
-  /// In en, this message translates to:
-  /// **'Close {modalRouteContentName}'**
-  String barrierOnTapHint(String modalRouteContentName);
 }
 
 class _FLocalizationsDelegate extends LocalizationsDelegate<FLocalizations> {

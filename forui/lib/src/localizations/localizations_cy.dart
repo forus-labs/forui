@@ -59,6 +59,35 @@ class FLocalizationsCy extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Cau \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Dewiswch ddyddiad';
+
+  @override
+  String get dateFieldInvalidDateError => 'Dyddiad annilys.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Blaenorol';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Nesaf';
+
+  @override
+  String get popoverSemanticsLabel => 'Ffenestr naid';
+
+  @override
   String get selectHint => 'Dewiswch eitem';
 
   @override
@@ -74,25 +103,10 @@ class FLocalizationsCy extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Sgrolio i lawr';
 
   @override
+  String get sheetSemanticsLabel => 'Taflen';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clirio';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Blaenorol';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Nesaf';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Dewiswch ddyddiad';
-
-  @override
-  String get dateFieldInvalidDateError => 'Dyddiad annilys.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -111,15 +125,4 @@ class FLocalizationsCy extends FLocalizations {
 
   @override
   String get dialogLabel => 'Deialog';
-
-  @override
-  String get sheetSemanticsLabel => 'Taflen';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Cau \$modalRouteContentName';
-  }
 }

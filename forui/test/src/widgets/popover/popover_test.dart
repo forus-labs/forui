@@ -20,7 +20,9 @@ void main() {
           mainAxisSize: MainAxisSize.min,
           children: [
             FPopover(
-              barrier: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              style: FThemes.zinc.light.popoverStyle.copyWith(
+                barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              ),
               popoverBuilder: (context, _) => const Text('popover'),
               builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
             ),

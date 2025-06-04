@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Дээш гүйлгэх",
   "selectScrollDownSemanticsLabel": "Доош гүйлгэх",
   "paginationPrevious": "Өмнөх",
-  "paginationNext": "Дараах"
+  "paginationNext": "Дараах",
+  "popoverSemanticsLabel": "Товших цонх"
 }

@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Sgrolio i fyny",
   "selectScrollDownSemanticsLabel": "Sgrolio i lawr",
   "paginationPreviousSemanticsLabel": "Blaenorol",
-  "paginationNextSemanticsLabel": "Nesaf"
+  "paginationNextSemanticsLabel": "Nesaf",
+  "popoverSemanticsLabel": "Ffenestr naid"
 }

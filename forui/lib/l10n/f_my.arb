@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "အပေါ်သို့ပွတ်ဆွဲရန်",
   "selectScrollDownSemanticsLabel": "အောက်သို့ပွတ်ဆွဲရန်",
   "paginationPrevious": "ယခင်",
-  "paginationNext": "ရှေ့သို့"
+  "paginationNext": "ရှေ့သို့",
+  "popoverSemanticsLabel": "ပေါ်လာသောဝင်းဒို"
 }

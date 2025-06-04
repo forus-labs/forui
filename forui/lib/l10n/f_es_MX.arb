@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Desplazarse hacia arriba",
   "selectScrollDownSemanticsLabel": "Desplazarse hacia abajo",
   "paginationPrevious": "Anterior",
-  "paginationNext": "Siguiente"
+  "paginationNext": "Siguiente",
+  "popoverSemanticsLabel": "Ventana emergente"
 }

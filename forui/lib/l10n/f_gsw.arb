@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Nach obe scrolle",
   "selectScrollDownSemanticsLabel": "Nach unde scrolle",
   "paginationPreviousSemanticsLabel": "Vorig",
-  "paginationNextSemanticsLabel": "Witer"
+  "paginationNextSemanticsLabel": "Witer",
+  "popoverSemanticsLabel": "Popover"
 }
