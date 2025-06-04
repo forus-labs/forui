@@ -38,7 +38,7 @@ void main() {
 
     expect(find.text('popover'), findsOneWidget);
 
-    await tester.tap(find.text('outside'));
+    await tester.tap(find.text('outside'), warnIfMissed: false); // expected to miss
     await tester.pumpAndSettle();
 
     expect(outside, 0);

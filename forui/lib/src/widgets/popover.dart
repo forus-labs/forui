@@ -17,18 +17,18 @@ final class FPopoverController extends FChangeNotifier {
 
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
+  late final CurvedAnimation _curveFade;
+  late final CurvedAnimation _curveScale;
   late final Animation<double> _fade;
   late final Animation<double> _scale;
 
   /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
   FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 150)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _fade = _fadeTween.animate(
-      CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad),
-    );
-    _scale = _scaleTween.animate(
-      CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad),
-    );
+    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _fade = _fadeTween.animate(_curveFade);
+    _scale = _scaleTween.animate(_curveScale);
   }
 
   /// Convenience method for toggling the current [shown] status.
@@ -64,6 +64,8 @@ final class FPopoverController extends FChangeNotifier {
 
   @override
   void dispose() {
+    _curveFade.dispose();
+    _curveScale.dispose();
     _animation.dispose();
     super.dispose();
   }
