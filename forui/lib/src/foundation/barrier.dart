@@ -111,9 +111,11 @@ class FModalBarrier extends StatelessWidget {
   /// If non-null, applies the given [ImageFilter] to the barrier.
   final ImageFilter? filter;
 
+  /// {@template forui.foundation.FModalBarrier.onDismiss}
   /// Called when the barrier is being dismissed. Defaults to popping the current route from the ambient [Navigator].
   ///
   /// If [onDismiss] is null, tapping on the barrier will do nothing.
+  /// {@endtemplate}
   final VoidCallback? onDismiss;
 
   /// Whether the modal barrier semantics are included in the semantics tree.
