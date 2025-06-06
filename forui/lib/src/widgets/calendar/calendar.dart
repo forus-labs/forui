@@ -133,6 +133,13 @@ class _State extends State<FCalendar> {
   }
 
   @override
+  void dispose() {
+    _month.dispose();
+    _type.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.calendarStyle;
     return DecoratedBox(

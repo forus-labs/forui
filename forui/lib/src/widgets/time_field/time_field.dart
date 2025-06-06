@@ -57,6 +57,7 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
 
   @override
   void dispose() {
+    _picker.dispose();
     popover.dispose();
     super.dispose();
   }

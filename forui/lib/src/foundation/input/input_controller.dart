@@ -98,4 +98,10 @@ abstract class InputController extends TextEditingController {
 
     return super.buildTextSpan(context: context, withComposing: withComposing, style: style);
   }
+
+  @override
+  void dispose() {
+    statesController.dispose();
+    super.dispose();
+  }
 }

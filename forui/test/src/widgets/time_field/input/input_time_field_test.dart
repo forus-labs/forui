@@ -148,7 +148,7 @@ void main() {
     testWidgets('custom invalid time', (tester) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-      final controller = FTimeFieldController(
+      final controller = autoDispose(FTimeFieldController(
         vsync: const TestVSync(),
         validator: (time) {
           if (time == const FTime(12, 30)) {
@@ -157,7 +157,7 @@ void main() {
 
           return null;
         },
-      );
+      ));
 
       await tester.pumpWidget(
         TestScaffold.app(

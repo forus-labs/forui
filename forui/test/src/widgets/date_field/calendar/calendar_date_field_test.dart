@@ -47,7 +47,7 @@ void main() {
   }
 
   testWidgets('validator', (tester) async {
-    final controller = FDateFieldController(
+    final controller = autoDispose(FDateFieldController(
       vsync: const TestVSync(),
       validator: (date) {
         if (date == DateTime.utc(2025, 1, 16)) {
@@ -56,7 +56,7 @@ void main() {
 
         return null;
       },
-    );
+    ));
 
     await tester.pumpWidget(
       TestScaffold.app(

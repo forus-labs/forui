@@ -132,7 +132,7 @@ void main() {
       testWidgets('custom invalid date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
 
-        final controller = FDateFieldController(
+        final controller = autoDispose(FDateFieldController(
           vsync: const TestVSync(),
           validator: (date) {
             if (date == DateTime.utc(1984)) {
@@ -141,7 +141,7 @@ void main() {
 
             return null;
           },
-        );
+        ));
 
         await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field(controller)));
 

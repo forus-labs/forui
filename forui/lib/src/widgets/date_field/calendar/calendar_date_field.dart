@@ -227,6 +227,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       _controller.removeValueListener(_onChange);
     }
 
+    print('dispose');
     if (widget.focusNode == null) {
       _focus.dispose();
     }
