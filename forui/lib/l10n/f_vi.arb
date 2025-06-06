@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Hộp thoại",
+  "dialogSemanticsLabel": "Hộp thoại",
   "sheetSemanticsLabel": "Bảng",
   "barrierOnTapHint": "Đóng $modalRouteContentName",
   "barrierLabel": "Scrim",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Cuộn lên",
   "selectScrollDownSemanticsLabel": "Cuộn xuống",
   "paginationPreviousSemanticsLabel": "Trước",
-  "paginationNextSemanticsLabel": "Tiếp"
+  "paginationNextSemanticsLabel": "Tiếp",
+  "popoverSemanticsLabel": "Cửa sổ bật lên"
 }

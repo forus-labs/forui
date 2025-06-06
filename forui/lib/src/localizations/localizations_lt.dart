@@ -59,6 +59,38 @@ class FLocalizationsLt extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Užsklanda';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Uždaryti „\$modalRouteContentName“';
+  }
+
+  @override
+  String get dateFieldHint => 'Pasirinkti datą';
+
+  @override
+  String get dateFieldInvalidDateError => 'Netinkama data.';
+
+  @override
+  String get shortDateSeparator => '-';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialogo langas';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Ankstesnis';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Kitas';
+
+  @override
+  String get popoverSemanticsLabel => 'Išskleidžiamas langas';
+
+  @override
   String get selectHint => 'Pasirinkite elementą';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsLt extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Slinkti žemyn';
 
   @override
+  String get sheetSemanticsLabel => 'lapas';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Išvalyti';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Ankstesnis';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Kitas';
-
-  @override
-  String get shortDateSeparator => '-';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pasirinkti datą';
-
-  @override
-  String get dateFieldInvalidDateError => 'Netinkama data.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsLt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Neteisingas laikas.';
-
-  @override
-  String get dialogLabel => 'Dialogo langas';
-
-  @override
-  String get sheetSemanticsLabel => 'lapas';
-
-  @override
-  String get barrierLabel => 'Užsklanda';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Uždaryti „\$modalRouteContentName“';
-  }
 }

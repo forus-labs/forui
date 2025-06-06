@@ -8,81 +8,55 @@ import 'package:forui_samples/sample.dart';
 enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
 
 @RoutePage()
-class SelectMenuTilePage extends StatefulSample {
+class SelectMenuTilePage extends Sample {
   final bool autoHide;
 
   SelectMenuTilePage({@queryParam super.theme, @queryParam String autoHide = 'true'})
     : autoHide = bool.tryParse(autoHide) ?? true;
 
   @override
-  State<SelectMenuTilePage> createState() => _SelectMenuTilePageState();
-}
-
-class _SelectMenuTilePageState extends StatefulSampleState<SelectMenuTilePage> {
-  final controller = FSelectMenuTileController<Notification>.radio(value: Notification.all);
-
-  @override
   Widget sample(BuildContext context) => FSelectMenuTile(
-    selectController: controller,
-    autoHide: widget.autoHide,
+    initialValue: Notification.all,
+    autoHide: autoHide,
     validator: (value) => value == null ? 'Select an item' : null,
     prefixIcon: const Icon(FIcons.bell),
     title: const Text('Notifications'),
-    details: ListenableBuilder(
-      listenable: controller,
-      builder: (context, _) => Text(switch (controller.value.firstOrNull) {
-        Notification.all => 'All',
-        Notification.direct => 'Direct Messages',
-        _ => 'None',
-      }),
-    ),
+    detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
+      Notification.all => 'All',
+      Notification.direct => 'Direct Messages',
+      _ => 'None',
+    }),
     menu: const [
       FSelectTile(title: Text('All'), value: Notification.all),
       FSelectTile(title: Text('Direct Messages'), value: Notification.direct),
       FSelectTile(title: Text('None'), value: Notification.nothing),
     ],
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
-class ScrollableSelectMenuTilePage extends StatefulSample {
+class ScrollableSelectMenuTilePage extends Sample {
   final bool autoHide;
 
   ScrollableSelectMenuTilePage({@queryParam super.theme, @queryParam String autoHide = 'true'})
     : autoHide = bool.tryParse(autoHide) ?? true;
 
   @override
-  State<ScrollableSelectMenuTilePage> createState() => _ScrollableSelectMenuTilePageState();
-}
-
-class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableSelectMenuTilePage> {
-  final controller = FSelectMenuTileController<Notification>.radio(value: Notification.all);
-
-  @override
   Widget sample(BuildContext context) => FSelectMenuTile(
-    selectController: controller,
-    autoHide: widget.autoHide,
+    initialValue: Notification.all,
+    autoHide: autoHide,
     maxHeight: 150,
     validator: (value) => value == null ? 'Select an item' : null,
     prefixIcon: const Icon(FIcons.bell),
     title: const Text('Notifications'),
-    details: ListenableBuilder(
-      listenable: controller,
-      builder: (context, _) => Text(switch (controller.value.firstOrNull) {
-        Notification.all => 'All',
-        Notification.direct => 'Direct Messages',
-        Notification.limitedTime => 'Limited Time',
-        Notification.selectedApps => 'Selected Apps',
-        Notification.timeSensitive => 'Time Sensitive',
-        null || Notification.nothing => 'None',
-      }),
-    ),
+    detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
+      Notification.all => 'All',
+      Notification.direct => 'Direct Messages',
+      Notification.limitedTime => 'Limited Time',
+      Notification.selectedApps => 'Selected Apps',
+      Notification.timeSensitive => 'Time Sensitive',
+      null || Notification.nothing => 'None',
+    }),
     menu: const [
       FSelectTile(title: Text('All'), value: Notification.all),
       FSelectTile(title: Text('Direct Messages'), value: Notification.direct),
@@ -92,12 +66,6 @@ class _ScrollableSelectMenuTilePageState extends StatefulSampleState<ScrollableS
       FSelectTile(title: Text('None'), value: Notification.nothing),
     ],
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -145,7 +113,6 @@ class SelectMenuTileFormPage extends StatefulSample {
 
 class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFormPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final controller = FSelectMenuTileController<Notification>.radio(value: Notification.all);
 
   @override
   Widget sample(BuildContext context) => Form(
@@ -154,19 +121,16 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
       mainAxisSize: MainAxisSize.min,
       children: [
         FSelectMenuTile(
-          selectController: controller,
+          initialValue: Notification.all,
           autoHide: true,
           validator: (value) => value == null ? 'Select an item' : null,
           prefixIcon: const Icon(FIcons.bell),
           title: const Text('Notifications'),
-          details: ListenableBuilder(
-            listenable: controller,
-            builder: (context, _) => Text(switch (controller.value.firstOrNull) {
-              Notification.all => 'All',
-              Notification.direct => 'Direct Messages',
-              _ => 'None',
-            }),
-          ),
+          detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
+            Notification.all => 'All',
+            Notification.direct => 'Direct Messages',
+            _ => 'None',
+          }),
           menu: const [
             FSelectTile(title: Text('All'), value: Notification.all),
             FSelectTile(title: Text('Direct Messages'), value: Notification.direct),
@@ -189,10 +153,4 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
       ],
     ),
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }

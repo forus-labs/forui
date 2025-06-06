@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -6,6 +8,116 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  group('showFDialog', () {
+    for (final theme in TestScaffold.themes) {
+      testWidgets(theme.name, (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: Builder(
+              builder: (context) => FButton(
+                onPress: () => showFDialog(
+                  context: context,
+                  builder: (context, _) => FDialog(
+                    title: const Text('Are you absolutely sure?'),
+                    body: const Text(
+                      'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                    ),
+                    actions: [
+                      FButton(onPress: () {}, child: const Text('Continue')),
+                      FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
+                    ],
+                  ),
+                ),
+                child: const Text('button'),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('dialog/show/${theme.name}.png'));
+      });
+
+      testWidgets('${theme.name} - blurred barrier', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: Builder(
+              builder: (context) => FButton(
+                onPress: () => showFDialog(
+                  style: theme.data.dialogStyle.copyWith(
+                    barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                  ),
+                  context: context,
+                  builder: (context, _) => FDialog(
+                    title: const Text('Are you absolutely sure?'),
+                    body: const Text(
+                      'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                    ),
+                    actions: [
+                      FButton(onPress: () {}, child: const Text('Continue')),
+                      FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
+                    ],
+                  ),
+                ),
+                child: const Text('button'),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('dialog/show/${theme.name}-blurred.png'));
+      });
+
+      testWidgets('${theme.name} - glassmorphic', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: Builder(
+              builder: (context) => FButton(
+                onPress: () => showFDialog(
+                  style: theme.data.dialogStyle.copyWith(
+                    backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: theme.data.style.borderRadius,
+                      color: theme.data.colors.background.withValues(alpha: 0.5),
+                    ),
+                  ),
+                  context: context,
+                  builder: (context, style) => FDialog(
+                    style: style,
+                    title: const Text('Are you absolutely sure?'),
+                    body: const Text(
+                      'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                    ),
+                    actions: [
+                      FButton(onPress: () {}, child: const Text('Continue')),
+                      FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
+                    ],
+                  ),
+                ),
+                child: const Text('button'),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('dialog/show/${theme.name}-glassmorphic.png'));
+      });
+    }
+  });
+
   group('FDialog', () {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(

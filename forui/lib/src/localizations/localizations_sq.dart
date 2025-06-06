@@ -59,6 +59,38 @@ class FLocalizationsSq extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Kanavacë';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Mbyll \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Zgjidh datën';
+
+  @override
+  String get dateFieldInvalidDateError => 'Datë e pavlefshme.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialogu';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'E mëparshme';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Tjetër';
+
+  @override
+  String get popoverSemanticsLabel => 'Dritare kërcyese';
+
+  @override
   String get selectHint => 'Zgjidhni një artikull';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsSq extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Lëviz poshtë';
 
   @override
+  String get sheetSemanticsLabel => 'Fleta';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Pastro';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'E mëparshme';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Tjetër';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Zgjidh datën';
-
-  @override
-  String get dateFieldInvalidDateError => 'Datë e pavlefshme.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsSq extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Orë e pavlefshme.';
-
-  @override
-  String get dialogLabel => 'Dialogu';
-
-  @override
-  String get sheetSemanticsLabel => 'Fleta';
-
-  @override
-  String get barrierLabel => 'Kanavacë';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Mbyll \$modalRouteContentName';
-  }
 }

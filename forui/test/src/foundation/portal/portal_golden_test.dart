@@ -13,7 +13,8 @@ void main() {
       TestScaffold.app(
         child: FPortal(
           controller: controller,
-          portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+          barrier: Container(color: Colors.blue),
+          portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
           child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
         ),
       ),
@@ -29,7 +30,7 @@ void main() {
       TestScaffold.app(
         child: FPortal(
           controller: controller,
-          portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+          portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
           child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
         ),
       ),
@@ -41,6 +42,26 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shown.png'));
   });
 
+  testWidgets('shown with barrier', (tester) async {
+    final controller = OverlayPortalController();
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FPortal(
+          controller: controller,
+          barrier: Container(color: Colors.blue),
+          portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+          child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+        ),
+      ),
+    );
+
+    controller.show();
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/barrier.png'));
+  });
+
   group('constraints', () {
     testWidgets('fixed constraints', (tester) async {
       final controller = OverlayPortalController();
@@ -50,7 +71,7 @@ void main() {
           child: FPortal(
             constraints: const FPortalConstraints.tightFor(width: 25, height: 25),
             controller: controller,
-            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: GestureDetector(
               onTap: controller.toggle,
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
@@ -73,7 +94,7 @@ void main() {
           child: FPortal(
             constraints: const FAutoHeightPortalConstraints.tightFor(width: 100),
             controller: controller,
-            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: GestureDetector(
               onTap: controller.toggle,
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
@@ -96,7 +117,7 @@ void main() {
           child: FPortal(
             constraints: const FAutoWidthPortalConstraints.tightFor(height: 100),
             controller: controller,
-            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: GestureDetector(
               onTap: controller.toggle,
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
@@ -121,7 +142,7 @@ void main() {
           child: FPortal(
             controller: controller,
             spacing: const FPortalSpacing(5),
-            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
         ),
@@ -142,7 +163,8 @@ void main() {
             alignment: Alignment.bottomRight,
             child: FPortal(
               controller: controller,
-              portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
@@ -163,7 +185,7 @@ void main() {
           child: FPortal(
             offset: const Offset(50, 70),
             controller: controller,
-            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
         ),
@@ -185,7 +207,8 @@ void main() {
             child: FPortal(
               controller: controller,
               spacing: const FPortalSpacing(5),
-              portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
@@ -208,7 +231,8 @@ void main() {
             child: FPortal(
               controller: controller,
               offset: const Offset(30, 0),
-              portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
@@ -236,7 +260,7 @@ void main() {
                   FPortal(
                     controller: controller,
                     spacing: const FPortalSpacing(5),
-                    portalBuilder: (context) =>
+                    portalBuilder: (context, _) =>
                         const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
@@ -266,7 +290,7 @@ void main() {
                   FPortal(
                     controller: controller,
                     spacing: const FPortalSpacing(5),
-                    portalBuilder: (context) =>
+                    portalBuilder: (context, _) =>
                         const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
@@ -296,7 +320,7 @@ void main() {
                   FPortal(
                     controller: controller,
                     spacing: const FPortalSpacing(5),
-                    portalBuilder: (context) =>
+                    portalBuilder: (context, _) =>
                         const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                   ),
@@ -321,7 +345,7 @@ void main() {
           child: FPortal(
             controller: controller,
             spacing: const FPortalSpacing(5),
-            portalBuilder: (context) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+            portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: const Center(child: Expanding()),
           ),
         ),
@@ -352,7 +376,7 @@ void main() {
                   portalAnchor: Alignment.topLeft,
                   childAnchor: Alignment.bottomRight,
                   controller: controller,
-                  portalBuilder: (context) =>
+                  portalBuilder: (context, _) =>
                       const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                   child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
@@ -383,7 +407,7 @@ void main() {
                   childAnchor: Alignment.bottomRight,
                   controller: controller,
                   viewInsets: const EdgeInsets.all(50),
-                  portalBuilder: (context) =>
+                  portalBuilder: (context, _) =>
                       const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                   child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),
@@ -414,7 +438,7 @@ void main() {
                   childAnchor: Alignment.bottomRight,
                   controller: controller,
                   viewInsets: EdgeInsets.zero,
-                  portalBuilder: (context) =>
+                  portalBuilder: (context, _) =>
                       const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                   child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
                 ),

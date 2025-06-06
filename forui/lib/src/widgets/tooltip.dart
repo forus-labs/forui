@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -15,14 +17,18 @@ class FTooltipController extends FChangeNotifier {
 
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
+  late final CurvedAnimation _curveFade;
+  late final CurvedAnimation _curveScale;
   late final Animation<double> _fade;
   late final Animation<double> _scale;
 
   /// Creates a [FTooltipController] with the given [vsync] and animation [animationDuration].
   FTooltipController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _fade = _fadeTween.animate(_animation);
-    _scale = _scaleTween.animate(_animation);
+    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _fade = _fadeTween.animate(_curveFade);
+    _scale = _scaleTween.animate(_curveScale);
   }
 
   /// Convenience method for toggling the current [shown] status.
@@ -59,6 +65,8 @@ class FTooltipController extends FChangeNotifier {
 
   @override
   void dispose() {
+    _curveFade.dispose();
+    _curveScale.dispose();
     _animation.dispose();
     super.dispose();
   }
@@ -75,6 +83,8 @@ class FTooltipController extends FChangeNotifier {
 /// * [FTooltipController] for controlling a tooltip.
 /// * [FTooltipStyle] for customizing a tooltip's appearance.
 class FTooltip extends StatefulWidget {
+  static Widget _builder(BuildContext _, FTooltipController _, Widget? child) => child!;
+
   /// The tooltip's controller.
   final FTooltipController? controller;
 
@@ -93,6 +103,11 @@ class FTooltip extends StatefulWidget {
 
   /// The anchor of the target to which the [tipAnchor] is aligned. Defaults to [Alignment.topCenter].
   final AlignmentGeometry childAnchor;
+
+  /// The spacing between the child's anchor and tooltip's anchor. Defaults to `FPortalSpacing(4)`.
+  ///
+  /// It applied before [shift].
+  final FPortalSpacing spacing;
 
   /// The shifting strategy used to shift a tooltip's tip when it overflows out of the viewport. Defaults to
   /// [FPortalShift.flip].
@@ -117,27 +132,39 @@ class FTooltip extends StatefulWidget {
   final Duration longPressExitDuration;
 
   /// The tip builder. The child passed to [tipBuilder] will always be null.
-  final ValueWidgetBuilder<FTooltipStyle> tipBuilder;
+  final Widget Function(BuildContext, FTooltipController) tipBuilder;
 
-  /// The child.
-  final Widget child;
+  /// An optional builder which returns the child widget that the tooltip is aligned to.
+  ///
+  /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
+  ///
+  /// This can be null if the entire widget subtree the [builder] builds doest not require the controller.
+  final ValueWidgetBuilder<FTooltipController> builder;
+
+  /// The child tp which the tip is aligned to.
+  final Widget? child;
 
   /// Creates a tooltip.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if neither [builder] nor [child] is both provided.
   const FTooltip({
     required this.tipBuilder,
-    required this.child,
     this.controller,
     this.style,
     this.tipAnchor = Alignment.bottomCenter,
     this.childAnchor = Alignment.topCenter,
+    this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.hover = true,
     this.hoverEnterDuration = const Duration(milliseconds: 500),
     this.hoverExitDuration = Duration.zero,
     this.longPress = true,
     this.longPressExitDuration = const Duration(milliseconds: 1500),
+    this.builder = _builder,
+    this.child,
     super.key,
-  });
+  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.');
 
   @override
   State<FTooltip> createState() => _FTooltipState();
@@ -150,25 +177,21 @@ class FTooltip extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('tipAnchor', tipAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
+      ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
       ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
       ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
       ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
       ..add(DiagnosticsProperty('longPressExitDuration', longPressExitDuration))
-      ..add(ObjectFlagProperty.has('tipBuilder', tipBuilder));
+      ..add(ObjectFlagProperty.has('tipBuilder', tipBuilder))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
 class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
-  late FTooltipController _controller;
+  late FTooltipController _controller = widget.controller ?? FTooltipController(vsync: this);
   int _monotonic = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? FTooltipController(vsync: this);
-  }
 
   @override
   void didUpdateWidget(covariant FTooltip old) {
@@ -183,10 +206,19 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   }
 
   @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.tooltipStyle;
+    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
-    var child = widget.child;
+    var child = widget.builder(context, _controller, widget.child);
     if (widget.hover || widget.longPress) {
       child = CallbackShortcuts(
         bindings: {const SingleActivator(LogicalKeyboardKey.escape): _exit},
@@ -223,31 +255,49 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       );
     }
 
-    return FPortal(
-      controller: _controller._overlay,
-      childAnchor: widget.childAnchor,
-      portalAnchor: widget.tipAnchor,
-      shift: widget.shift,
-      portalBuilder: (context) => Semantics(
-        container: true,
-        child: FadeTransition(
-          opacity: _controller._fade,
-          child: ScaleTransition(
-            scale: _controller._scale,
+    return BackdropGroup(
+      child: FPortal(
+        controller: _controller._overlay,
+        spacing: widget.spacing,
+        childAnchor: widget.childAnchor,
+        portalAnchor: widget.tipAnchor,
+        shift: widget.shift,
+        portalBuilder: (context, _) {
+          Widget tooltip = DecoratedBox(
+            decoration: style.decoration,
             child: Padding(
-              padding: style.margin,
-              child: DecoratedBox(
-                decoration: style.decoration,
-                child: Padding(
-                  padding: style.padding,
-                  child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, style, null)),
+              padding: style.padding,
+              child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, _controller)),
+            ),
+          );
+
+          if (style.backgroundFilter case final background?) {
+            tooltip = Stack(
+              children: [
+                Positioned.fill(
+                  child: ClipRect(
+                    child: BackdropFilter(filter: background, child: Container()),
+                  ),
                 ),
+                tooltip,
+              ],
+            );
+          }
+
+          return Semantics(
+            container: true,
+            child: FadeTransition(
+              opacity: _controller._fade,
+              child: ScaleTransition(
+                alignment: widget.tipAnchor.resolve(direction),
+                scale: _controller._scale,
+                child: tooltip,
               ),
             ),
-          ),
-        ),
+          );
+        },
+        child: child,
       ),
-      child: child,
     );
   }
 
@@ -268,14 +318,6 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       await _controller.hide();
     }
   }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
-    super.dispose();
-  }
 }
 
 /// A [FTooltip]'s style.
@@ -290,9 +332,11 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   @override
   final BoxDecoration decoration;
 
-  /// The margin surrounding the tooltip.
+  /// An optional background filter applied to the tooltip.
+  ///
+  /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
   @override
-  final EdgeInsets margin;
+  final ImageFilter? backgroundFilter;
 
   /// The padding surrounding the tooltip's text.
   @override
@@ -306,7 +350,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   const FTooltipStyle({
     required this.decoration,
     required this.textStyle,
-    this.margin = const EdgeInsets.all(4),
+    this.backgroundFilter,
     this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
   });
 

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "대화상자",
+  "dialogSemanticsLabel": "대화상자",
   "sheetSemanticsLabel": "시트",
   "barrierOnTapHint": "$modalRouteContentName 닫기",
   "barrierLabel": "스크림",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "위로 스크롤",
   "selectScrollDownSemanticsLabel": "아래로 스크롤",
   "paginationPrevious": "이전",
-  "paginationNext": "다음"
+  "paginationNext": "다음",
+  "popoverSemanticsLabel": "팝오버"
 }

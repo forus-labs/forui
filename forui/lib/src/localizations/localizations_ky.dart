@@ -59,6 +59,38 @@ class FLocalizationsKy extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Кенеп';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName жабуу';
+  }
+
+  @override
+  String get dateFieldHint => 'Күндү тандоо';
+
+  @override
+  String get dateFieldInvalidDateError => 'Жараксыз күн.';
+
+  @override
+  String get shortDateSeparator => '-';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Калкып чыгуучу терезе';
+
+  @override
   String get selectHint => 'Элементти тандаңыз';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsKy extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Ылдый сыдыруу';
 
   @override
+  String get sheetSemanticsLabel => 'экран';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '-';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Күндү тандоо';
-
-  @override
-  String get dateFieldInvalidDateError => 'Жараксыз күн.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsKy extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Жараксыз убакыт.';
-
-  @override
-  String get dialogLabel => 'Диалог';
-
-  @override
-  String get sheetSemanticsLabel => 'экран';
-
-  @override
-  String get barrierLabel => 'Кенеп';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName жабуу';
-  }
 }

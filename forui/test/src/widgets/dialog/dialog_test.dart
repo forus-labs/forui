@@ -6,6 +6,79 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  group('showFDialog', () {
+    testWidgets('tap on barrier does not dismiss dialog', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          alignment: Alignment.topCenter,
+          child: Builder(
+            builder: (context) => FButton(
+              onPress: () => showFDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (context, _) => FDialog(
+                  title: const Text('Are you absolutely sure?'),
+                  body: const Text(
+                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                  ),
+                  actions: [
+                    FButton(onPress: () {}, child: const Text('Continue')),
+                    FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
+                  ],
+                ),
+              ),
+              child: const Text('button'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('button'));
+      await tester.pumpAndSettle();
+
+      await tester.tapAt(const Offset(20, 20));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Are you absolutely sure?'), findsOneWidget);
+    });
+
+    testWidgets('tap on barrier dismisses dialog', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          alignment: Alignment.topCenter,
+          child: Builder(
+            builder: (context) => FButton(
+              onPress: () => showFDialog(
+                context: context,
+                builder: (context, _) => FDialog(
+                  title: const Text('Are you absolutely sure?'),
+                  body: const Text(
+                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+                  ),
+                  actions: [
+                    FButton(onPress: () {}, child: const Text('Continue')),
+                    FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
+                  ],
+                ),
+              ),
+              child: const Text('button'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('button'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Are you absolutely sure?'), findsOneWidget);
+
+      await tester.tapAt(const Offset(20, 20));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Are you absolutely sure?'), findsNothing);
+    });
+  });
+
   group('FDialog', () {
     for (final direction in Axis.values) {
       testWidgets('$direction infinite sized child', (tester) async {

@@ -59,6 +59,38 @@ class FLocalizationsLv extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Pārklājums';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Aizvērt \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Atlasīt datumu';
+
+  @override
+  String get dateFieldInvalidDateError => 'Nederīgs datums.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialoglodziņš';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Iepriekšējais';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Tālāk';
+
+  @override
+  String get popoverSemanticsLabel => 'Izlecošs logs';
+
+  @override
   String get selectHint => 'Atlasiet vienumu';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsLv extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Ritināt uz leju';
 
   @override
+  String get sheetSemanticsLabel => 'lapa';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Notīrīt';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Iepriekšējais';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Tālāk';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '.';
-
-  @override
-  String get dateFieldHint => 'Atlasīt datumu';
-
-  @override
-  String get dateFieldInvalidDateError => 'Nederīgs datums.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsLv extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Nederīgs laiks.';
-
-  @override
-  String get dialogLabel => 'Dialoglodziņš';
-
-  @override
-  String get sheetSemanticsLabel => 'lapa';
-
-  @override
-  String get barrierLabel => 'Pārklājums';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Aizvērt \$modalRouteContentName';
-  }
 }

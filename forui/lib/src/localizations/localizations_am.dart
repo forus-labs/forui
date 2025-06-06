@@ -59,6 +59,38 @@ class FLocalizationsAm extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'ገዳቢ';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentNameን ዝጋ';
+  }
+
+  @override
+  String get dateFieldHint => 'ቀን ይምረጡ';
+
+  @override
+  String get dateFieldInvalidDateError => 'ልክ ያልሆነ ቀን።';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'መገናኛ';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'ቀዳሚ';
+
+  @override
+  String get paginationNextSemanticsLabel => 'ቀጣይ';
+
+  @override
+  String get popoverSemanticsLabel => 'ፖፖቨር';
+
+  @override
   String get selectHint => 'አንድ ንጥል ይምረጡ';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsAm extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'ወደ ታች ሸብልል';
 
   @override
+  String get sheetSemanticsLabel => 'ሉህ';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'አጽዳ';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'ቀዳሚ';
-
-  @override
-  String get paginationNextSemanticsLabel => 'ቀጣይ';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'ቀን ይምረጡ';
-
-  @override
-  String get dateFieldInvalidDateError => 'ልክ ያልሆነ ቀን።';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsAm extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'ልክ ያልሆነ ሰዓት።';
-
-  @override
-  String get dialogLabel => 'መገናኛ';
-
-  @override
-  String get sheetSemanticsLabel => 'ሉህ';
-
-  @override
-  String get barrierLabel => 'ገዳቢ';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentNameን ዝጋ';
-  }
 }

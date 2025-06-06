@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialogfeld",
+  "dialogSemanticsLabel": "Dialogfeld",
   "sheetSemanticsLabel": "Ansicht",
   "barrierOnTapHint": "$modalRouteContentName schließen",
   "barrierLabel": "Gitter",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Nach oben scrollen",
   "selectScrollDownSemanticsLabel": "Nach unten scrollen",
   "paginationPreviousSemanticsLabel": "Zurück",
-  "paginationNextSemanticsLabel": "Weiter"
+  "paginationNextSemanticsLabel": "Weiter",
+  "popoverSemanticsLabel": "Popover"
 }

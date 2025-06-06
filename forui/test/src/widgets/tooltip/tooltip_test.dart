@@ -9,16 +9,12 @@ import '../../test_scaffold.dart';
 void main() {
   group('FTooltip', () {
     testWidgets('does nothing', (tester) async {
-      final controller = FTooltipController(vsync: const TestVSync());
-      addTearDown(controller.dispose);
-
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTooltip(
-            controller: controller,
             hover: false,
             longPress: false,
-            tipBuilder: (context, style, _) => const Text('tip'),
+            tipBuilder: (context, _) => const Text('tip'),
             child: FButton(onPress: () {}, child: const Text('button')),
           ),
         ),
@@ -43,7 +39,7 @@ void main() {
           TestScaffold.app(
             child: FTooltip(
               longPressExitDuration: duration,
-              tipBuilder: (context, style, _) => const Text('tip'),
+              tipBuilder: (context, _) => const Text('tip'),
               child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
@@ -66,7 +62,7 @@ void main() {
           TestScaffold.app(
             child: FTooltip(
               longPressExitDuration: duration,
-              tipBuilder: (context, style, _) => const Text('tip'),
+              tipBuilder: (context, _) => const Text('tip'),
               child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
@@ -93,7 +89,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FTooltip(
-              tipBuilder: (context, style, _) => const Text('tip'),
+              tipBuilder: (context, _) => const Text('tip'),
               child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
@@ -120,7 +116,7 @@ void main() {
           TestScaffold.app(
             child: FTooltip(
               hoverEnterDuration: const Duration(seconds: 1),
-              tipBuilder: (context, style, _) => const Text('tip'),
+              tipBuilder: (context, _) => const Text('tip'),
               child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
@@ -153,7 +149,7 @@ void main() {
             child: FTooltip(
               hoverEnterDuration: Duration.zero,
               hoverExitDuration: const Duration(seconds: 1),
-              tipBuilder: (context, style, _) => const Text('tip'),
+              tipBuilder: (context, _) => const Text('tip'),
               child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
@@ -187,7 +183,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FTooltip(
-              tipBuilder: (context, style, _) => const Text('tip'),
+              tipBuilder: (context, _) => const Text('tip'),
               child: FButton(onPress: () {}, child: const Text('button')),
             ),
           ),
@@ -217,7 +213,7 @@ void main() {
         TestScaffold.app(
           child: FTooltip(
             controller: first,
-            tipBuilder: (context, style, _) => const Text('tip'),
+            tipBuilder: (context, _) => const Text('tip'),
             child: FButton(onPress: () {}, child: const Text('button')),
           ),
         ),
@@ -229,7 +225,7 @@ void main() {
         TestScaffold.app(
           child: FTooltip(
             controller: first,
-            tipBuilder: (context, style, _) => const Text('tip'),
+            tipBuilder: (context, _) => const Text('tip'),
             child: FButton(onPress: () {}, child: const Text('button')),
           ),
         ),

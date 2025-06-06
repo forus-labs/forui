@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "ଡାୟଲଗ୍",
+  "dialogSemanticsLabel": "ଡାୟଲଗ୍",
   "sheetSemanticsLabel": "ସିଟ",
   "barrierOnTapHint": "$modalRouteContentNameକୁ ବନ୍ଦ କରନ୍ତୁ",
   "barrierLabel": "ସ୍କ୍ରିମ",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "ଉପରକୁ ସ୍କ୍ରୋଲ କରନ୍ତୁ",
   "selectScrollDownSemanticsLabel": "ତଳକୁ ସ୍କ୍ରୋଲ କରନ୍ତୁ",
   "paginationPreviousSemanticsLabel": "ପୂର୍ବବର୍ତ୍ତୀ",
-  "paginationNextSemanticsLabel": "ପରବର୍ତ୍ତୀ"
+  "paginationNextSemanticsLabel": "ପରବର୍ତ୍ତୀ",
+  "popoverSemanticsLabel": "ପପଓଭର"
 }

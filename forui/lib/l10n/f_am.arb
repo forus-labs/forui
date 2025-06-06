@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "መገናኛ",
+  "dialogSemanticsLabel": "መገናኛ",
   "sheetSemanticsLabel": "ሉህ",
   "barrierOnTapHint": "$modalRouteContentNameን ዝጋ",
   "barrierLabel": "ገዳቢ",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "ወደ ላይ ሸብልል",
   "selectScrollDownSemanticsLabel": "ወደ ታች ሸብልል",
   "paginationPreviousSemanticsLabel": "ቀዳሚ",
-  "paginationNextSemanticsLabel": "ቀጣይ"
+  "paginationNextSemanticsLabel": "ቀጣይ",
+  "popoverSemanticsLabel": "ፖፖቨር"
 }

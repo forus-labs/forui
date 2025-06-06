@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "کادر گفتگو",
+  "dialogSemanticsLabel": "کادر گفتگو",
   "sheetSemanticsLabel": "برگ",
   "barrierOnTapHint": "بستن $modalRouteContentName",
   "barrierLabel": "رویه",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "پیمایش به بالا",
   "selectScrollDownSemanticsLabel": "پیمایش به پایین",
   "paginationPrevious": "قبلی",
-  "paginationNext": "بعدی"
+  "paginationNext": "بعدی",
+  "popoverSemanticsLabel": "پاپ‌اور"
 }

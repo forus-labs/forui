@@ -59,6 +59,38 @@ class FLocalizationsCa extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Fons atenuat';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Tanca \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Selecciona una data';
+
+  @override
+  String get dateFieldInvalidDateError => 'Data no vàlida.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Diàleg';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Finestra emergent';
+
+  @override
   String get selectHint => 'Selecciona un element';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsCa extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Desplaça avall';
 
   @override
+  String get sheetSemanticsLabel => 'Full';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Selecciona una data';
-
-  @override
-  String get dateFieldInvalidDateError => 'Data no vàlida.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsCa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Hora no vàlida.';
-
-  @override
-  String get dialogLabel => 'Diàleg';
-
-  @override
-  String get sheetSemanticsLabel => 'Full';
-
-  @override
-  String get barrierLabel => 'Fons atenuat';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Tanca \$modalRouteContentName';
-  }
 }

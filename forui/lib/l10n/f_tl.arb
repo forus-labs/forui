@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialog",
+  "dialogSemanticsLabel": "Dialog",
   "sheetSemanticsLabel": "sheet",
   "barrierOnTapHint": "Isara ang $modalRouteContentName",
   "barrierLabel": "Scrim",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Mag-scroll pataas",
   "selectScrollDownSemanticsLabel": "Mag-scroll pababa",
   "paginationPreviousSemanticsLabel": "Nakaraan",
-  "paginationNextSemanticsLabel": "Susunod"
+  "paginationNextSemanticsLabel": "Susunod",
+  "popoverSemanticsLabel": "Popover"
 }

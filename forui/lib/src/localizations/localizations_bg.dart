@@ -59,6 +59,38 @@ class FLocalizationsBg extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Скрим';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Затваряне на \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Изберете дата';
+
+  @override
+  String get dateFieldInvalidDateError => 'Невалидна дата.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => ' г.';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Изскачащ прозорец';
+
+  @override
   String get selectHint => 'Изберете елемент';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsBg extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Превъртане надолу';
 
   @override
+  String get sheetSemanticsLabel => 'лист';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => ' г.';
-
-  @override
-  String get dateFieldHint => 'Изберете дата';
-
-  @override
-  String get dateFieldInvalidDateError => 'Невалидна дата.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsBg extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Невалидно време.';
-
-  @override
-  String get dialogLabel => 'Диалогов прозорец';
-
-  @override
-  String get sheetSemanticsLabel => 'лист';
-
-  @override
-  String get barrierLabel => 'Скрим';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Затваряне на \$modalRouteContentName';
-  }
 }

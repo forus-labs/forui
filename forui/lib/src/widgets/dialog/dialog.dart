@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
@@ -9,10 +11,189 @@ import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
 part 'dialog.style.dart';
 
+/// Shows a dialog.
+///
+/// [context] is used to look up the [Navigator] and [FDialogStyle] for the dialog. It is only used when the method is
+/// called. Its corresponding widget can be safely removed from the tree before the sheet is closed.
+///
+/// [useRootNavigator] ensures that the root navigator displays the sheet when `true`. This is useful in the case that a
+/// modal sheet needs to be displayed above all other content but the caller is inside another [Navigator].
+///
+/// [style] defaults to [FDialogStyle] from the closest [FTheme] ancestor.
+///
+/// [barrierLabel] defaults to [FLocalizations.barrierLabel].
+///
+/// Returns a `Future` that resolves to the value (if any) that was passed to [Navigator.pop] when the modal sheet was
+/// closed.
+///
+/// ## CLI
+/// To generate and customize this widget's style:
+///
+/// ```shell
+/// dart run forui style create dialog
+/// ```
+///
+/// See:
+/// * https://forui.dev/docs/overlay/dialog for working examples.
+/// * [showAdaptiveDialog] for displaying a dialog with adaptive transitions depending on the platform.
+/// * [FDialogStyle] for customizing a switch's appearance.
+Future<T?> showFDialog<T>({
+  required BuildContext context,
+  required Widget Function(BuildContext, FDialogStyle) builder,
+  bool useRootNavigator = false,
+  FDialogStyle? style,
+  String? barrierLabel,
+  bool barrierDismissible = true,
+  RouteSettings? routeSettings,
+  AnimationController? transitionAnimationController,
+  Offset? anchorPoint,
+  bool useSafeArea = false,
+}) {
+  assert(debugCheckHasMediaQuery(context), '');
+
+  final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
+  final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+  style ??= context.theme.dialogStyle;
+
+  return navigator.push(
+    FDialogRoute<T>(
+      style: style,
+      builder: (context) => builder(context, style!),
+      capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
+      barrierDismissible: barrierDismissible,
+      barrierLabel: barrierLabel ?? localizations.barrierLabel,
+      barrierOnTapHint: localizations.barrierOnTapHint(localizations.dialogSemanticsLabel),
+      settings: routeSettings,
+      anchorPoint: anchorPoint,
+      useSafeArea: useSafeArea,
+    ),
+  );
+}
+
+/// A route that shows a dialog popup.
+///
+/// [showFDialog] should be preferred in most cases.
+class FDialogRoute<T> extends RawDialogRoute<T> {
+  static final _fadeTween = Tween<double>(begin: 0, end: 1);
+  static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
+
+  /// The dialog's style.
+  final FDialogStyle style;
+
+  @override
+  final bool barrierDismissible;
+
+  @override
+  final String? barrierLabel;
+
+  /// The semantic hint text that informs users what will happen if they tap on the widget. Announced in the format of
+  /// 'Double tap to ...'.
+  final String? barrierOnTapHint;
+
+  @override
+  final Duration transitionDuration;
+
+  CurvedAnimation? _fade;
+  CurvedAnimation? _scale;
+
+  /// Creates a [FDialogRoute].
+  FDialogRoute({
+    required this.style,
+    required WidgetBuilder builder,
+    this.barrierDismissible = true,
+    this.barrierLabel,
+    this.barrierOnTapHint,
+    this.transitionDuration = const Duration(milliseconds: 200),
+    CapturedThemes? capturedThemes,
+    bool useSafeArea = true,
+    super.settings,
+    super.requestFocus,
+    super.anchorPoint,
+    super.traversalEdgeBehavior,
+    super.directionalTraversalEdgeBehavior,
+  }) : super(
+         pageBuilder: (buildContext, animation, secondaryAnimation) {
+           final child = Builder(builder: builder);
+           Widget dialog = capturedThemes?.wrap(child) ?? child;
+           if (useSafeArea) {
+             dialog = SafeArea(child: dialog);
+           }
+           return dialog;
+         },
+       );
+
+  @override
+  Widget buildModalBarrier() {
+    if (style.barrierFilter != null && !offstage) {
+      return Builder(
+        builder: (context) => FAnimatedModalBarrier(
+          animation: animation!.drive(CurveTween(curve: barrierCurve)),
+          filter: style.barrierFilter,
+          onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
+          semanticsLabel: barrierLabel,
+          // changedInternalState is called if barrierLabel updates
+          barrierSemanticsDismissible: semanticsDismissible,
+          semanticsOnTapHint: barrierOnTapHint,
+        ),
+      );
+    } else {
+      return Builder(
+        builder: (context) => FModalBarrier(
+          filter: null,
+          onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
+          semanticsLabel: barrierLabel,
+          // changedInternalState is called if barrierLabel updates
+          barrierSemanticsDismissible: semanticsDismissible,
+          semanticsOnTapHint: barrierOnTapHint,
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    if (_fade?.parent != animation || _scale?.parent != animation) {
+      _fade?.dispose();
+      _scale?.dispose();
+      _fade = CurvedAnimation(parent: animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+      _scale = CurvedAnimation(parent: animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    }
+
+    final fade = _fade!.drive(_fadeTween);
+    final scale = _scale!.drive(_scaleTween);
+
+    return FadeTransition(
+      opacity: fade,
+      child: ScaleTransition(
+        scale: scale,
+        child: super.buildTransitions(context, animation, secondaryAnimation, child),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _fade?.dispose();
+    _scale?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Color? get barrierColor => Colors.transparent;
+}
+
 /// A modal dialog.
 ///
-/// A dialog interrupts the user with important content and expects a response. It is typically used with
-/// [showAdaptiveDialog] and [showDialog].
+/// A dialog interrupts the user with important content and expects a response.
+///
+/// Consider using with
+/// * [showFDialog] if you want to show a dialog with consistent Shadcn/ui-like transitions across platforms.
+/// * [showAdaptiveDialog] if you want to show a dialog with transitions.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/dialog for working examples.
@@ -126,11 +307,22 @@ class FDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     final style = this.style ?? theme.dialogStyle;
+    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+
+    Widget dialog = DecoratedBox(decoration: style.decoration, child: builder(context, style));
+    if (style.backgroundFilter case final background?) {
+      dialog = Stack(
+        children: [
+          Positioned.fill(
+            child: BackdropFilter(filter: background, child: Container()),
+          ),
+          dialog,
+        ],
+      );
+    }
 
     return AnimatedPadding(
-      padding:
-          MediaQuery.viewInsetsOf(context) +
-          style.insetPadding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr),
+      padding: MediaQuery.viewInsetsOf(context) + style.insetPadding.resolve(direction),
       duration: style.insetAnimationDuration,
       curve: style.insetAnimationCurve,
       child: MediaQuery.removeViewInsets(
@@ -147,10 +339,7 @@ class FDialog extends StatelessWidget {
               explicitChildNodes: true,
               namesRoute: true,
               label: semanticsLabel,
-              child: ConstrainedBox(
-                constraints: constraints,
-                child: DecoratedBox(decoration: style.decoration, child: builder(context, style)),
-              ),
+              child: ConstrainedBox(constraints: constraints, child: dialog),
             ),
           ),
         ),
@@ -171,6 +360,19 @@ class FDialog extends StatelessWidget {
 
 /// [FDialog]'s style.
 class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
+  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
+  ///
+  /// This is only supported by [showFDialog].
+  ///
+  /// ## Why isn't the [barrierFilter] being applied?
+  /// Make sure you are passing the [FDialogStyle] to the [showFDialog] method instead of the [FDialog].
+  @override
+  final ImageFilter Function(double animation)? barrierFilter;
+
+  /// The dialog's background filter.
+  @override
+  final ImageFilter? backgroundFilter;
+
   /// The decoration.
   @override
   final BoxDecoration decoration;
@@ -205,6 +407,8 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     required this.decoration,
     required this.horizontalStyle,
     required this.verticalStyle,
+    this.barrierFilter,
+    this.backgroundFilter,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,
     this.insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
@@ -215,6 +419,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     final title = typography.lg.copyWith(fontWeight: FontWeight.w600, color: colors.foreground);
     final body = typography.sm.copyWith(color: colors.mutedForeground);
     return FDialogStyle(
+      barrierFilter: (v) => ColorFilter.mode(Color.lerp(Colors.transparent, colors.barrier, v)!, BlendMode.srcOver),
       decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
       horizontalStyle: FDialogContentStyle(
         titleTextStyle: title,

@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "រមូរឡើងលើ",
   "selectScrollDownSemanticsLabel": "រមូរចុះក្រោម",
   "paginationPrevious": "មុន",
-  "paginationNext": "បន្ទាប់"
+  "paginationNext": "បន្ទាប់",
+  "popoverSemanticsLabel": "បង្អួចលេចឡើង"
 }

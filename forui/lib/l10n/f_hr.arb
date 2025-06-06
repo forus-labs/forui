@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dijalog",
+  "dialogSemanticsLabel": "Dijalog",
   "sheetSemanticsLabel": "tablica",
   "barrierOnTapHint": "Zatvori $modalRouteContentName",
   "barrierLabel": "Rubno",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Pomakni prema gore",
   "selectScrollDownSemanticsLabel": "Pomakni prema dolje",
   "paginationPreviousSemanticsLabel": "Prethodno",
-  "paginationNextSemanticsLabel": "Sljedeće"
+  "paginationNextSemanticsLabel": "Sljedeće",
+  "popoverSemanticsLabel": "Skočni prozor"
 }

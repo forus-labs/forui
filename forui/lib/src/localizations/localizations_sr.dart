@@ -59,6 +59,38 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Скрим';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Затвори: \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Изаберите датум';
+
+  @override
+  String get dateFieldInvalidDateError => 'Неважећи датум.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get dialogSemanticsLabel => 'Дијалог';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Искачући прозор';
+
+  @override
   String get selectHint => 'Изаберите ставку';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsSr extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Померите надоле';
 
   @override
+  String get sheetSemanticsLabel => 'табела';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '.';
-
-  @override
-  String get dateFieldHint => 'Изаберите датум';
-
-  @override
-  String get dateFieldInvalidDateError => 'Неважећи датум.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,25 +125,43 @@ class FLocalizationsSr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Неважеће време.';
-
-  @override
-  String get dialogLabel => 'Дијалог';
-
-  @override
-  String get sheetSemanticsLabel => 'табела';
-
-  @override
-  String get barrierLabel => 'Скрим';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Затвори: \$modalRouteContentName';
-  }
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
 class FLocalizationsSrLatn extends FLocalizationsSr {
   FLocalizationsSrLatn() : super('sr_Latn');
+
+  @override
+  String get barrierLabel => 'Skrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Zatvori: \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Izaberite datum';
+
+  @override
+  String get dateFieldInvalidDateError => 'Nevažeći datum.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get dialogSemanticsLabel => 'Dijalog';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Prethodno';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Sledeće';
+
+  @override
+  String get popoverSemanticsLabel => 'Iskačući prozor';
 
   @override
   String get selectHint => 'Izaberite stavku';
@@ -144,25 +179,10 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get selectScrollDownSemanticsLabel => 'Pomerite nadole';
 
   @override
+  String get sheetSemanticsLabel => 'tabela';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Obriši';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Prethodno';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Sledeće';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '.';
-
-  @override
-  String get dateFieldHint => 'Izaberite datum';
-
-  @override
-  String get dateFieldInvalidDateError => 'Nevažeći datum.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -178,18 +198,4 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get timeFieldInvalidDateError => 'Nevažeće vreme.';
-
-  @override
-  String get dialogLabel => 'Dijalog';
-
-  @override
-  String get sheetSemanticsLabel => 'tabela';
-
-  @override
-  String get barrierLabel => 'Skrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Zatvori: \$modalRouteContentName';
-  }
 }

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialoglodziņš",
+  "dialogSemanticsLabel": "Dialoglodziņš",
   "sheetSemanticsLabel": "lapa",
   "barrierOnTapHint": "Aizvērt $modalRouteContentName",
   "barrierLabel": "Pārklājums",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Ritināt uz augšu",
   "selectScrollDownSemanticsLabel": "Ritināt uz leju",
   "paginationPreviousSemanticsLabel": "Iepriekšējais",
-  "paginationNextSemanticsLabel": "Tālāk"
+  "paginationNextSemanticsLabel": "Tālāk",
+  "popoverSemanticsLabel": "Izlecošs logs"
 }

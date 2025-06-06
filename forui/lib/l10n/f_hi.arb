@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "डायलॉग",
+  "dialogSemanticsLabel": "डायलॉग",
   "sheetSemanticsLabel": "शीट",
   "barrierOnTapHint": "$modalRouteContentName को बंद करें",
   "barrierLabel": "स्क्रिम",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "ऊपर स्क्रॉल करें",
   "selectScrollDownSemanticsLabel": "नीचे स्क्रॉल करें",
   "paginationPrevious": "पिछला",
-  "paginationNext": "अगला"
+  "paginationNext": "अगला",
+  "popoverSemanticsLabel": "पॉपओवर"
 }

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Muloqot oynasi",
+  "dialogSemanticsLabel": "Muloqot oynasi",
   "sheetSemanticsLabel": "ekran",
   "barrierOnTapHint": "Yopish: $modalRouteContentName",
   "barrierLabel": "Kanop",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Tepaga aylantirish",
   "selectScrollDownSemanticsLabel": "Pastga aylantirish",
   "paginationPreviousSemanticsLabel": "Oldingi",
-  "paginationNextSemanticsLabel": "Keyingi"
+  "paginationNextSemanticsLabel": "Keyingi",
+  "popoverSemanticsLabel": "Popover"
 }

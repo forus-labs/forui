@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Okno dialogowe",
+  "dialogSemanticsLabel": "Okno dialogowe",
   "sheetSemanticsLabel": "Plansza",
   "barrierOnTapHint": "Zamknij: $modalRouteContentName",
   "barrierLabel": "Siatka",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Przewiń w górę",
   "selectScrollDownSemanticsLabel": "Przewiń w dół",
   "paginationPreviousSemanticsLabel": "Poprzedni",
-  "paginationNextSemanticsLabel": "Dalej"
+  "paginationNextSemanticsLabel": "Dalej",
+  "popoverSemanticsLabel": "Okno wyskakujące"
 }

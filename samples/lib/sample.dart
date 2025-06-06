@@ -9,9 +9,15 @@ abstract class Sample extends StatelessWidget {
   final FThemeData theme;
   final Alignment alignment;
   final double maxWidth;
+  final double maxHeight;
 
-  Sample({String theme = 'zinc-light', this.alignment = Alignment.center, this.maxWidth = 400, super.key})
-    : theme = themes[theme]!;
+  Sample({
+    String theme = 'zinc-light',
+    this.alignment = Alignment.center,
+    this.maxWidth = 400,
+    this.maxHeight = double.infinity,
+    super.key,
+  }) : theme = themes[theme]!;
 
   // In most cases, we should create FTheme inside MaterialApp.builder(...) instead. Otherwise FDialog will not inherit
   // from FTheme since it is in a different route.
@@ -28,7 +34,7 @@ abstract class Sample extends StatelessWidget {
       child: Align(
         alignment: alignment,
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: maxWidth),
+          constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
           child: Builder(builder: sample),
         ),
       ),

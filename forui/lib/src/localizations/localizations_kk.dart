@@ -59,6 +59,38 @@ class FLocalizationsKk extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Кенеп';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName жабу';
+  }
+
+  @override
+  String get dateFieldHint => 'Күнді таңдаңыз';
+
+  @override
+  String get dateFieldInvalidDateError => 'Жарамсыз күн.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Диалогтық терезе';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Қалқымалы терезе';
+
+  @override
   String get selectHint => 'Элементті таңдаңыз';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsKk extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Төмен айналдыру';
 
   @override
+  String get sheetSemanticsLabel => 'парақша';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Күнді таңдаңыз';
-
-  @override
-  String get dateFieldInvalidDateError => 'Жарамсыз күн.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsKk extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Жарамсыз уақыт.';
-
-  @override
-  String get dialogLabel => 'Диалогтық терезе';
-
-  @override
-  String get sheetSemanticsLabel => 'парақша';
-
-  @override
-  String get barrierLabel => 'Кенеп';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName жабу';
-  }
 }

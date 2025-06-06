@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "مربع حوار",
+  "dialogSemanticsLabel": "مربع حوار",
   "sheetSemanticsLabel": "بطاق ",
   "barrierOnTapHint": "إغلاق \"$modalRouteContentName\"",
   "barrierLabel": "تمويه",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "التمرير لأعلى",
   "selectScrollDownSemanticsLabel": "التمرير لأسفل",
   "paginationPrevious": "السابق",
-  "paginationNext": "التالي"
+  "paginationNext": "التالي",
+  "popoverSemanticsLabel": "منبثقة"
 }

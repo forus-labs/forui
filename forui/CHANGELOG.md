@@ -1,6 +1,76 @@
 ## 0.13.0 (Next)
 
+### `FDialog`
+* Add `showFDialog`.
+* Add `FDialogRoute`.
+* Add `FDialogStyle.barrierFilter`.
+* Add `FDialogStyle.backgroundFilter`.
+
+
+### `FPopover`
+* Add `FPopover.barrierSemanticsLabel`.
+* Add `FPopover.barrierSemanticsDismissible`.
+* Add `FPopover.builder`.
+* Add `FPopoverStyle.barrierFilter`.
+* Add `FPopoverStyle.backgroundFilter`.
+
+* Change `FPopover`'s animation to be origin aware.
+* Change `FPopover(...)`'s `controller` to be optional.
+* **Breaking** Change `FPopover.popoverBuilder`'s signature from `ValueWidgetBuilder<FPopoverStyle>` to 
+  `Widget Function(BuildContext, FPopoverController)`.
+* **Breaking** Remove `FPopover.automatic` - This was a bad abstraction in hindsight, use `FPopover.new` instead.
+
+
+### `FPopoverMenu`
+* Add `FPopoverMenu.barrierSemanticsLabel`.
+* Add `FPopoverMenu.barrierSemanticsDismissible`.
+* Add `FPopoverMenu.builder`.
+* Add `FPopoverMenu.menuBuilder`.
+
+* Change `FPopoverMenu`'s animation to be origin aware.
+* Change `FPopoverMenu(...)`'s `controller` to be optional.
+* **Breaking** Remove `FPopoverMenu.automatic` - This was a bad abstraction in hindsight, use `FPopoverMenu.new` instead.
+
+
+### `FPortal`
+* Add `FPortal.barrier`.
+* Add `FPortal.builder(...)`.
+
+* Change `FPortal.controller` to be optional.
+* **Breaking** Change `FPortal.portalBuilder`'s signature from `WidgetBuilder` to 
+  `Widget Function(BuildContext, FPortalController)`.
+
+
+### `FSelectMenuTile`
+* Add `FSelectMenutile.barrierSemanticsLabel`.
+* Add `FSelectMenutile.barrierSemanticsDismissible`.
+* Add `FSelectMenutile.detailsBuilder`.
+
+* Change `FSelectMenuTile.selectController` to be optional.
+
+
+### `FSheet`
+
+* Change `FSSheet`'s transition animation.
+* **Breaking** Change `FSheetStyle.barrierColor` to `FSheetStyle.barrierFilter`.
+* **Breaking** Remove `FSheetStyle.backgroundColor`.
+
+
+### `FTooltip`
+* Add `FTooltip.builder`.
+* Add `FTooltipStyle.backgroundFilter`.
+
+* **Breaking** Replace `FTooltipStyle.margin` with `FTooltip.spacing`.
+* **Breaking** Change `FTooltip.tipBuilder`'s signature from `ValueWidgetBuilder<FTooltipStyle>` to
+  `Widget Function(BuildContext, FTooltipController)`.
+* Change `FTooltip`'s animation to be origin aware.
+
+
 ### Others
+* Add `FAnimatedModalBarrier`.
+* Add `FModalBrarrier`.
+* Add `FLocalizations.popoverSemanticsLabel`.
+
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.
 * Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.

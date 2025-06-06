@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "對話方塊",
+  "dialogSemanticsLabel": "對話方塊",
   "sheetSemanticsLabel": "面板",
   "barrierOnTapHint": "關閉 $modalRouteContentName",
   "barrierLabel": "Scrim",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "向上捲動",
   "selectScrollDownSemanticsLabel": "向下捲動",
   "paginationPreviousSemanticsLabel": "上一個",
-  "paginationNextSemanticsLabel": "下一個"
+  "paginationNextSemanticsLabel": "下一個",
+  "popoverSemanticsLabel": "彈出視窗"
 }

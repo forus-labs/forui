@@ -140,7 +140,8 @@ import 'localizations_zu.dart';
 /// be consistent with the languages listed in the FLocalizations.supportedLocales
 /// property.
 abstract class FLocalizations {
-  FLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  FLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -148,7 +149,8 @@ abstract class FLocalizations {
     return Localizations.of<FLocalizations>(context, FLocalizations);
   }
 
-  static const LocalizationsDelegate<FLocalizations> delegate = _FLocalizationsDelegate();
+  static const LocalizationsDelegate<FLocalizations> delegate =
+      _FLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -160,12 +162,13 @@ abstract class FLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
@@ -320,6 +323,66 @@ abstract class FLocalizations {
   /// **'{date}'**
   String shortDate(DateTime date);
 
+  /// The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message).
+  ///
+  /// In en, this message translates to:
+  /// **'Barrier'**
+  String get barrierLabel;
+
+  /// The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.
+  ///
+  /// In en, this message translates to:
+  /// **'Close {modalRouteContentName}'**
+  String barrierOnTapHint(String modalRouteContentName);
+
+  /// The hint text for the calendar-only date field.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a date'**
+  String get dateFieldHint;
+
+  /// Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid date.'**
+  String get dateFieldInvalidDateError;
+
+  /// The short date's separator, typically /.
+  ///
+  /// In en, this message translates to:
+  /// **'/'**
+  String get shortDateSeparator;
+
+  /// The short date's suffix, typically empty.
+  ///
+  /// In en, this message translates to:
+  /// **''**
+  String get shortDateSuffix;
+
+  /// The sheet's label.
+  ///
+  /// In en, this message translates to:
+  /// **'Dialog'**
+  String get dialogSemanticsLabel;
+
+  /// The label for the previous button in a pagination control.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get paginationPreviousSemanticsLabel;
+
+  /// The label for the next button in a pagination control.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get paginationNextSemanticsLabel;
+
+  /// The semantic label for a popover.
+  ///
+  /// In en, this message translates to:
+  /// **'Popover'**
+  String get popoverSemanticsLabel;
+
   /// The hint text for the select field.
   ///
   /// In en, this message translates to:
@@ -350,47 +413,17 @@ abstract class FLocalizations {
   /// **'Scroll down'**
   String get selectScrollDownSemanticsLabel;
 
+  /// The semantic label for a sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Sheet'**
+  String get sheetSemanticsLabel;
+
   /// The semantic label for the clear button in a text field.
   ///
   /// In en, this message translates to:
   /// **'Clear'**
   String get textFieldClearButtonSemanticsLabel;
-
-  /// The label for the previous button in a pagination control.
-  ///
-  /// In en, this message translates to:
-  /// **'Previous'**
-  String get paginationPreviousSemanticsLabel;
-
-  /// The label for the next button in a pagination control.
-  ///
-  /// In en, this message translates to:
-  /// **'Next'**
-  String get paginationNextSemanticsLabel;
-
-  /// The short date's separator, typically /.
-  ///
-  /// In en, this message translates to:
-  /// **'/'**
-  String get shortDateSeparator;
-
-  /// The short date's suffix, typically empty.
-  ///
-  /// In en, this message translates to:
-  /// **''**
-  String get shortDateSuffix;
-
-  /// The hint text for the calendar-only date field.
-  ///
-  /// In en, this message translates to:
-  /// **'Pick a date'**
-  String get dateFieldHint;
-
-  /// Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid date.'**
-  String get dateFieldInvalidDateError;
 
   /// The time field's time separator, typically ':'.
   ///
@@ -421,30 +454,6 @@ abstract class FLocalizations {
   /// In en, this message translates to:
   /// **'Invalid time.'**
   String get timeFieldInvalidDateError;
-
-  /// The sheet's label.
-  ///
-  /// In en, this message translates to:
-  /// **'Dialog'**
-  String get dialogLabel;
-
-  /// No description provided for @sheetSemanticsLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Sheet'**
-  String get sheetSemanticsLabel;
-
-  /// The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message).
-  ///
-  /// In en, this message translates to:
-  /// **'Barrier'**
-  String get barrierLabel;
-
-  /// The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.
-  ///
-  /// In en, this message translates to:
-  /// **'Close {modalRouteContentName}'**
-  String barrierOnTapHint(String modalRouteContentName);
 }
 
 class _FLocalizationsDelegate extends LocalizationsDelegate<FLocalizations> {

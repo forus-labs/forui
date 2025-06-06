@@ -59,6 +59,38 @@ class FLocalizationsMl extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'സ്ക്രിം';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName അടയ്ക്കുക';
+  }
+
+  @override
+  String get dateFieldHint => 'തീയതി തിരഞ്ഞെടുക്കുക';
+
+  @override
+  String get dateFieldInvalidDateError => 'അസാധുവായ തീയതി.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'ഡയലോഗ്';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'പോപ്പോവർ';
+
+  @override
   String get selectHint => 'ഒരു ഇനം തിരഞ്ഞെടുക്കുക';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsMl extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'താഴേക്ക് സ്ക്രോൾ ചെയ്യുക';
 
   @override
+  String get sheetSemanticsLabel => 'ഷീറ്റ്';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'തീയതി തിരഞ്ഞെടുക്കുക';
-
-  @override
-  String get dateFieldInvalidDateError => 'അസാധുവായ തീയതി.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsMl extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'അസാധുവായ സമയം.';
-
-  @override
-  String get dialogLabel => 'ഡയലോഗ്';
-
-  @override
-  String get sheetSemanticsLabel => 'ഷീറ്റ്';
-
-  @override
-  String get barrierLabel => 'സ്ക്രിം';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName അടയ്ക്കുക';
-  }
 }

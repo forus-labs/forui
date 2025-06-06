@@ -10,31 +10,10 @@ class PortalPage extends Sample {
   PortalPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => const _Portal();
-}
-
-class _Portal extends StatefulWidget {
-  const _Portal();
-
-  @override
-  State<_Portal> createState() => _State();
-}
-
-class _State extends State<_Portal> with SingleTickerProviderStateMixin {
-  late OverlayPortalController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = OverlayPortalController();
-  }
-
-  @override
-  Widget build(BuildContext context) => FPortal(
-    controller: controller,
+  Widget sample(BuildContext context) => FPortal(
     spacing: const FPortalSpacing(8),
     viewInsets: const EdgeInsets.all(5),
-    portalBuilder: (context) => Container(
+    portalBuilder: (context, _) => Container(
       decoration: BoxDecoration(
         color: context.theme.colors.background,
         border: Border.all(color: context.theme.colors.border),
@@ -70,6 +49,6 @@ class _State extends State<_Portal> with SingleTickerProviderStateMixin {
         ),
       ),
     ),
-    child: FButton(child: const Text('Portal'), onPress: () => controller.toggle()),
+    builder: (context, controller, _) => FButton(onPress: controller.toggle, child: const Text('Portal')),
   );
 }

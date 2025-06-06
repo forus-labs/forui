@@ -59,6 +59,38 @@ class FLocalizationsSi extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'ස්ක්‍රිම්';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName වසන්න';
+  }
+
+  @override
+  String get dateFieldHint => 'දිනය තෝරන්න';
+
+  @override
+  String get dateFieldInvalidDateError => 'අවලංගු දිනයකි.';
+
+  @override
+  String get shortDateSeparator => '-';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'පොප්ඕවර්';
+
+  @override
   String get selectHint => 'අයිතමයක් තෝරන්න';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsSi extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'පහළට අනුචලනය කරන්න';
 
   @override
+  String get sheetSemanticsLabel => 'පත්‍රය';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '-';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'දිනය තෝරන්න';
-
-  @override
-  String get dateFieldInvalidDateError => 'අවලංගු දිනයකි.';
 
   @override
   String get timeFieldTimeSeparator => '.';
@@ -108,18 +125,4 @@ class FLocalizationsSi extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'අවලංගු වේලාවකි.';
-
-  @override
-  String get dialogLabel => 'සංවාදය';
-
-  @override
-  String get sheetSemanticsLabel => 'පත්‍රය';
-
-  @override
-  String get barrierLabel => 'ස්ක්‍රිම්';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName වසන්න';
-  }
 }

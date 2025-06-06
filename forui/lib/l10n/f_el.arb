@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Παράθυρο διαλόγου",
+  "dialogSemanticsLabel": "Παράθυρο διαλόγου",
   "sheetSemanticsLabel": "Φύλλο",
   "barrierOnTapHint": "Κλείσιμο $modalRouteContentName",
   "barrierLabel": "Επικάλυψη",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Κύλιση προς τα πάνω",
   "selectScrollDownSemanticsLabel": "Κύλιση προς τα κάτω",
   "paginationPrevious": "Προηγούμενο",
-  "paginationNext": "Επόμενο"
+  "paginationNext": "Επόμενο",
+  "popoverSemanticsLabel": "Αναδυόμενο παράθυρο"
 }

@@ -59,6 +59,38 @@ class FLocalizationsAf extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Skerm';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Maak \$modalRouteContentName toe';
+  }
+
+  @override
+  String get dateFieldHint => 'Kies \'n datum';
+
+  @override
+  String get dateFieldInvalidDateError => 'Ongeldige datum.';
+
+  @override
+  String get shortDateSeparator => '-';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialoog';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Vorige';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Volgende';
+
+  @override
+  String get popoverSemanticsLabel => 'Opspringer';
+
+  @override
   String get selectHint => 'Kies \'n item';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsAf extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Rol af';
 
   @override
+  String get sheetSemanticsLabel => 'blad';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Vee uit';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Vorige';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Volgende';
-
-  @override
-  String get shortDateSeparator => '-';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Kies \'n datum';
-
-  @override
-  String get dateFieldInvalidDateError => 'Ongeldige datum.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsAf extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ongeldige tyd.';
-
-  @override
-  String get dialogLabel => 'Dialoog';
-
-  @override
-  String get sheetSemanticsLabel => 'blad';
-
-  @override
-  String get barrierLabel => 'Skerm';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Maak \$modalRouteContentName toe';
-  }
 }

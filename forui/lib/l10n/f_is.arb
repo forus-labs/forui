@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Gluggi",
+  "dialogSemanticsLabel": "Gluggi",
   "sheetSemanticsLabel": "Blað",
   "barrierOnTapHint": "Loka $modalRouteContentName",
   "barrierLabel": "Möskvi",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Fletta upp",
   "selectScrollDownSemanticsLabel": "Fletta niður",
   "paginationPreviousSemanticsLabel": "Fyrri",
-  "paginationNextSemanticsLabel": "Næsta"
+  "paginationNextSemanticsLabel": "Næsta",
+  "popoverSemanticsLabel": "Sprettgluggi"
 }

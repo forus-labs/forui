@@ -59,6 +59,38 @@ class FLocalizationsSl extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Zapiranje »\$modalRouteContentName«';
+  }
+
+  @override
+  String get dateFieldHint => 'Izberite datum';
+
+  @override
+  String get dateFieldInvalidDateError => 'Neveljaven datum.';
+
+  @override
+  String get shortDateSeparator => '. ';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Pogovorno okno';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Prejšnji';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Naprej';
+
+  @override
+  String get popoverSemanticsLabel => 'Pojavno okno';
+
+  @override
   String get selectHint => 'Izberite element';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsSl extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Pomik navzdol';
 
   @override
+  String get sheetSemanticsLabel => 'Razdelek';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Počisti';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Prejšnji';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Naprej';
-
-  @override
-  String get shortDateSeparator => '. ';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Izberite datum';
-
-  @override
-  String get dateFieldInvalidDateError => 'Neveljaven datum.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsSl extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Neveljaven čas.';
-
-  @override
-  String get dialogLabel => 'Pogovorno okno';
-
-  @override
-  String get sheetSemanticsLabel => 'Razdelek';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Zapiranje »\$modalRouteContentName«';
-  }
 }

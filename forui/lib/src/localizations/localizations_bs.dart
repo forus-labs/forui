@@ -59,6 +59,38 @@ class FLocalizationsBs extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Rubno';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Zatvori: \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Odaberite datum';
+
+  @override
+  String get dateFieldInvalidDateError => 'Nevažeći datum.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get dialogSemanticsLabel => 'Dijaloški okvir';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Prethodno';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Sljedeće';
+
+  @override
+  String get popoverSemanticsLabel => 'Iskačući prozor';
+
+  @override
   String get selectHint => 'Odaberite stavku';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsBs extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Pomjerite prema dolje';
 
   @override
+  String get sheetSemanticsLabel => 'tabela';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Očisti';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Prethodno';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Sljedeće';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '.';
-
-  @override
-  String get dateFieldHint => 'Odaberite datum';
-
-  @override
-  String get dateFieldInvalidDateError => 'Nevažeći datum.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsBs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Nevažeće vrijeme.';
-
-  @override
-  String get dialogLabel => 'Dijaloški okvir';
-
-  @override
-  String get sheetSemanticsLabel => 'tabela';
-
-  @override
-  String get barrierLabel => 'Rubno';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Zatvori: \$modalRouteContentName';
-  }
 }

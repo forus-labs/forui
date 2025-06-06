@@ -17,76 +17,33 @@ A popover menu displays a menu in a portal aligned to a child.
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
-    class _PopoverMenu extends StatefulWidget {
-      @override
-      State<_PopoverMenu> createState() => _State();
-    }
-
-    class _State extends State<_PopoverMenu> with SingleTickerProviderStateMixin {
-      late FPopoverController controller;
-
-      @override
-      void initState() {
-        super.initState();
-        controller = FPopoverController(vsync: this);
-      }
-
+    class PopoverMenuPage extends StatelessWidget {
       @override
       Widget build(BuildContext context) => FHeader(
         title: const Text('Edit Notes'),
         suffixes: [
           FPopoverMenu(
-            popoverController: controller,
             menuAnchor: Alignment.topRight,
             childAnchor: Alignment.bottomRight,
             menu: [
               FTileGroup(
                 children: [
-                  FTile(
-                    prefixIcon: Icon(FIcons.user),
-                    title: const Text('Personalization'),
-                    onPress: () {},
-                  ),
-                  FTile(
-                    prefixIcon: Icon(FIcons.paperclip),
-                    title: const Text('Add attachments'),
-                    onPress: () {},
-                  ),
-                  FTile(
-                    prefixIcon: Icon(FIcons.qrCode),
-                    title: const Text('Scan Document'),
-                    onPress: () {},
-                  ),
+                  FTile(prefixIcon: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+                  FTile(prefixIcon: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+                  FTile(prefixIcon: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
                 ],
               ),
               FTileGroup(
                 children: [
-                  FTile(
-                    prefixIcon: Icon(FIcons.list),
-                    title: const Text('List View'),
-                    onPress: () {},
-                  ),
-                  FTile(
-                    prefixIcon: Icon(FIcons.layoutGrid),
-                    title: const Text('Grid View'),
-                    onPress: () {},
-                  ),
+                  FTile(prefixIcon: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+                  FTile(prefixIcon: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
                 ],
               ),
             ],
-            child: FHeaderAction(
-              icon: Icon(FIcons.ellipsis),
-              onPress: controller.toggle,
-            ),
+            builder: (context, controller, child) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
           ),
         ],
       );
-
-      @override
-      void dispose() {
-        controller.dispose();
-        super.dispose();
-      }
     }
     ```
 
@@ -121,38 +78,13 @@ FPopoverMenu(
   groupId: 'popover-menu-group',
   hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
+  menuBuilder: (context, controller, menu) => [FTileGroup(children: [])],
   menu: [
     FTileGroup(
       children: [],
     ),
   ],
-  child: const Placeholder(),
-);
-```
-
-### `FPopoverMenu.automatic()`
-
-```dart copy
-FPopoverMenu.automatic(
-  popoverController: FPopoverController(vsync: this),
-  scrollController: ScrollController(),
-  style: FPopoverMenuStyle(...),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  menuAnchor: Alignment.topCenter,
-  childAnchor: Alignment.bottomCenter,
-  spacing: FPortalSpacing.zero,
-  offset: Offset.zero,
-  groupId: 'popover-menu-group',
-  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
-  shift: FPortalShift.flip,
-  traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
-  menu: [
-    FTileGroup(
-      children: [],
-    ),
-  ],
+  builder: (context, controller, child) => const Placeholder(),
   child: const Placeholder(),
 );
 ```

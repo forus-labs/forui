@@ -59,6 +59,38 @@ class FLocalizationsFi extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Sermi';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Sulje \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Valitse päivämäärä';
+
+  @override
+  String get dateFieldInvalidDateError => 'Virheellinen päivämäärä.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Valintaikkuna';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Edellinen';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Seuraava';
+
+  @override
+  String get popoverSemanticsLabel => 'Ponnahdusikkuna';
+
+  @override
   String get selectHint => 'Valitse kohde';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsFi extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Vieritä alas';
 
   @override
+  String get sheetSemanticsLabel => 'arkki';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Tyhjennä';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Edellinen';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Seuraava';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Valitse päivämäärä';
-
-  @override
-  String get dateFieldInvalidDateError => 'Virheellinen päivämäärä.';
 
   @override
   String get timeFieldTimeSeparator => '.';
@@ -108,18 +125,4 @@ class FLocalizationsFi extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Virheellinen aika.';
-
-  @override
-  String get dialogLabel => 'Valintaikkuna';
-
-  @override
-  String get sheetSemanticsLabel => 'arkki';
-
-  @override
-  String get barrierLabel => 'Sermi';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Sulje \$modalRouteContentName';
-  }
 }

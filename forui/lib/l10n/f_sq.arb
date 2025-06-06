@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialogu",
+  "dialogSemanticsLabel": "Dialogu",
   "sheetSemanticsLabel": "Fleta",
   "barrierOnTapHint": "Mbyll $modalRouteContentName",
   "barrierLabel": "Kanavacë",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Lëviz lart",
   "selectScrollDownSemanticsLabel": "Lëviz poshtë",
   "paginationPreviousSemanticsLabel": "E mëparshme",
-  "paginationNextSemanticsLabel": "Tjetër"
+  "paginationNextSemanticsLabel": "Tjetër",
+  "popoverSemanticsLabel": "Dritare kërcyese"
 }

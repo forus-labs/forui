@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "תיבת דו-שיח",
+  "dialogSemanticsLabel": "תיבת דו-שיח",
   "sheetSemanticsLabel": "גיליו ",
   "barrierOnTapHint": "סגירת $modalRouteContentName",
   "barrierLabel": "מיסוך",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "גלול למעלה",
   "selectScrollDownSemanticsLabel": "גלול למטה",
   "paginationPrevious": "הקודם",
-  "paginationNext": "הבא"
+  "paginationNext": "הבא",
+  "popoverSemanticsLabel": "חלון קופץ"
 }

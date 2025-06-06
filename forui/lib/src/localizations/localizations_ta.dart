@@ -59,6 +59,38 @@ class FLocalizationsTa extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'ஸ்க்ரிம்';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName ஐ மூடுக';
+  }
+
+  @override
+  String get dateFieldHint => 'தேதியைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get dateFieldInvalidDateError => 'தவறான தேதி.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'உரையாடல்';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'பாப்ஓவர்';
+
+  @override
   String get selectHint => 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsTa extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'கீழே உருட்டு';
 
   @override
+  String get sheetSemanticsLabel => 'திரை';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'தேதியைத் தேர்ந்தெடுக்கவும்';
-
-  @override
-  String get dateFieldInvalidDateError => 'தவறான தேதி.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsTa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'தவறான நேரம்.';
-
-  @override
-  String get dialogLabel => 'உரையாடல்';
-
-  @override
-  String get sheetSemanticsLabel => 'திரை';
-
-  @override
-  String get barrierLabel => 'ஸ்க்ரிம்';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName ஐ மூடுக';
-  }
 }

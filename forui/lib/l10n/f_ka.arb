@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "დიალოგი",
+  "dialogSemanticsLabel": "დიალოგი",
   "sheetSemanticsLabel": "ფურცელი",
   "barrierOnTapHint": "$modalRouteContentName-ის დახურვა",
   "barrierLabel": "სკრიმი",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "ზემოთ გადაადგილება",
   "selectScrollDownSemanticsLabel": "ქვემოთ გადაადგილება",
   "paginationPrevious": "წინა",
-  "paginationNext": "შემდეგი"
+  "paginationNext": "შემდეგი",
+  "popoverSemanticsLabel": "ამომხტარი ფანჯარა"
 }

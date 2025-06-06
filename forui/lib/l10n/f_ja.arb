@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "上にスクロール",
   "selectScrollDownSemanticsLabel": "下にスクロール",
   "paginationPreviousSemanticsLabel": "前へ",
-  "paginationNextSemanticsLabel": "次へ"
+  "paginationNextSemanticsLabel": "次へ",
+  "popoverSemanticsLabel": "ポップオーバー"
 }

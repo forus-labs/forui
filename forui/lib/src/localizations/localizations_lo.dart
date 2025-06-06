@@ -59,6 +59,38 @@ class FLocalizationsLo extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Scrim';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'ປິດ \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'ເລືອກວັນທີ';
+
+  @override
+  String get dateFieldInvalidDateError => 'ວັນທີບໍ່ຖືກຕ້ອງ.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'ຂໍ້ຄວາມ';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'ປ໊ອບໂອເວີ';
+
+  @override
   String get selectHint => 'ເລືອກລາຍການ';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsLo extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'ເລື່ອນລົງ';
 
   @override
+  String get sheetSemanticsLabel => 'ແຜ່ນ';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'ເລືອກວັນທີ';
-
-  @override
-  String get dateFieldInvalidDateError => 'ວັນທີບໍ່ຖືກຕ້ອງ.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsLo extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'ເວລາບໍ່ຖືກຕ້ອງ.';
-
-  @override
-  String get dialogLabel => 'ຂໍ້ຄວາມ';
-
-  @override
-  String get sheetSemanticsLabel => 'ແຜ່ນ';
-
-  @override
-  String get barrierLabel => 'Scrim';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'ປິດ \$modalRouteContentName';
-  }
 }

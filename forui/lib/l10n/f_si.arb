@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "ඉහළට අනුචලනය කරන්න",
   "selectScrollDownSemanticsLabel": "පහළට අනුචලනය කරන්න",
   "paginationPrevious": "පෙර",
-  "paginationNext": "ඊළඟ"
+  "paginationNext": "ඊළඟ",
+  "popoverSemanticsLabel": "පොප්ඕවර්"
 }

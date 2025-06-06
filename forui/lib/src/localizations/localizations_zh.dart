@@ -59,6 +59,38 @@ class FLocalizationsZh extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => '纱罩';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '关闭 \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => '选择日期';
+
+  @override
+  String get dateFieldInvalidDateError => '日期无效。';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => '对话框';
+
+  @override
+  String get paginationPreviousSemanticsLabel => '上一个';
+
+  @override
+  String get paginationNextSemanticsLabel => '下一个';
+
+  @override
+  String get popoverSemanticsLabel => '弹出框';
+
+  @override
   String get selectHint => '选择项目';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsZh extends FLocalizations {
   String get selectScrollDownSemanticsLabel => '向下滚动';
 
   @override
+  String get sheetSemanticsLabel => '动作条';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => '清除';
-
-  @override
-  String get paginationPreviousSemanticsLabel => '上一个';
-
-  @override
-  String get paginationNextSemanticsLabel => '下一个';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => '选择日期';
-
-  @override
-  String get dateFieldInvalidDateError => '日期无效。';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,82 +125,11 @@ class FLocalizationsZh extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '无效的时间。';
-
-  @override
-  String get dialogLabel => '对话框';
-
-  @override
-  String get sheetSemanticsLabel => '动作条';
-
-  @override
-  String get barrierLabel => '纱罩';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '关闭 \$modalRouteContentName';
-  }
 }
 
 /// The translations for Chinese, as used in Hong Kong (`zh_HK`).
 class FLocalizationsZhHk extends FLocalizationsZh {
   FLocalizationsZhHk() : super('zh_HK');
-
-  @override
-  String get selectHint => '選擇項目';
-
-  @override
-  String get selectSearchHint => '搜尋';
-
-  @override
-  String get selectNoResults => '沒有匹配結果。';
-
-  @override
-  String get selectScrollUpSemanticsLabel => '向上捲動';
-
-  @override
-  String get selectScrollDownSemanticsLabel => '向下捲動';
-
-  @override
-  String get textFieldClearButtonSemanticsLabel => '清除';
-
-  @override
-  String get paginationPreviousSemanticsLabel => '上一個';
-
-  @override
-  String get paginationNextSemanticsLabel => '下一個';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => '選擇日期';
-
-  @override
-  String get dateFieldInvalidDateError => '日期無效。';
-
-  @override
-  String get timeFieldTimeSeparator => ':';
-
-  @override
-  String get timeFieldPeriodSeparator => '';
-
-  @override
-  String get timeFieldSuffix => '';
-
-  @override
-  String get timeFieldHint => '選擇時間';
-
-  @override
-  String get timeFieldInvalidDateError => '無效的時間。';
-
-  @override
-  String get dialogLabel => '對話方塊';
-
-  @override
-  String get sheetSemanticsLabel => '面板';
 
   @override
   String get barrierLabel => 'Scrim';
@@ -192,11 +138,30 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String barrierOnTapHint(String modalRouteContentName) {
     return '關閉 \$modalRouteContentName';
   }
-}
 
-/// The translations for Chinese, as used in Taiwan (`zh_TW`).
-class FLocalizationsZhTw extends FLocalizationsZh {
-  FLocalizationsZhTw() : super('zh_TW');
+  @override
+  String get dateFieldHint => '選擇日期';
+
+  @override
+  String get dateFieldInvalidDateError => '日期無效。';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => '對話方塊';
+
+  @override
+  String get paginationPreviousSemanticsLabel => '上一個';
+
+  @override
+  String get paginationNextSemanticsLabel => '下一個';
+
+  @override
+  String get popoverSemanticsLabel => '彈出視窗';
 
   @override
   String get selectHint => '選擇項目';
@@ -214,25 +179,10 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String get selectScrollDownSemanticsLabel => '向下捲動';
 
   @override
+  String get sheetSemanticsLabel => '面板';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => '清除';
-
-  @override
-  String get paginationPreviousSemanticsLabel => '上一個';
-
-  @override
-  String get paginationNextSemanticsLabel => '下一個';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => '選擇日期';
-
-  @override
-  String get dateFieldInvalidDateError => '日期無效。';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -248,12 +198,11 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get timeFieldInvalidDateError => '無效的時間。';
+}
 
-  @override
-  String get dialogLabel => '對話方塊';
-
-  @override
-  String get sheetSemanticsLabel => '功能表';
+/// The translations for Chinese, as used in Taiwan (`zh_TW`).
+class FLocalizationsZhTw extends FLocalizationsZh {
+  FLocalizationsZhTw() : super('zh_TW');
 
   @override
   String get barrierLabel => '紗罩';
@@ -262,4 +211,64 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String barrierOnTapHint(String modalRouteContentName) {
     return '關閉「\$modalRouteContentName」';
   }
+
+  @override
+  String get dateFieldHint => '選擇日期';
+
+  @override
+  String get dateFieldInvalidDateError => '日期無效。';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => '對話方塊';
+
+  @override
+  String get paginationPreviousSemanticsLabel => '上一個';
+
+  @override
+  String get paginationNextSemanticsLabel => '下一個';
+
+  @override
+  String get popoverSemanticsLabel => '彈出視窗';
+
+  @override
+  String get selectHint => '選擇項目';
+
+  @override
+  String get selectSearchHint => '搜尋';
+
+  @override
+  String get selectNoResults => '沒有匹配結果。';
+
+  @override
+  String get selectScrollUpSemanticsLabel => '向上捲動';
+
+  @override
+  String get selectScrollDownSemanticsLabel => '向下捲動';
+
+  @override
+  String get sheetSemanticsLabel => '功能表';
+
+  @override
+  String get textFieldClearButtonSemanticsLabel => '清除';
+
+  @override
+  String get timeFieldTimeSeparator => ':';
+
+  @override
+  String get timeFieldPeriodSeparator => '';
+
+  @override
+  String get timeFieldSuffix => '';
+
+  @override
+  String get timeFieldHint => '選擇時間';
+
+  @override
+  String get timeFieldInvalidDateError => '無效的時間。';
 }

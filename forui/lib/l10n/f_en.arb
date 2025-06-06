@@ -60,6 +60,62 @@
     }
   },
 
+
+  "barrierLabel": "Barrier",
+  "@barrierLabel": {
+    "description": "The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message)."
+  },
+  "barrierOnTapHint": "Close {modalRouteContentName}",
+  "@barrierOnTapHint": {
+    "description": "The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.",
+    "placeholders": {
+      "modalRouteContentName": {
+        "type": "String"
+      }
+    }
+  },
+
+
+  "dateFieldHint": "Pick a date",
+  "@dateFieldHint": {
+    "description": "The hint text for the calendar-only date field."
+  },
+  "dateFieldInvalidDateError": "Invalid date.",
+  "@dateFieldInvalidDateError": {
+    "description": "Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format."
+  },
+  "shortDateSeparator": "/",
+  "@shortDateSeparator": {
+    "description": "The short date's separator, typically /."
+  },
+  "shortDateSuffix": "",
+  "@shortDateSuffix": {
+    "description": "The short date's suffix, typically empty."
+  },
+
+
+  "dialogSemanticsLabel": "Dialog",
+  "@dialogSemanticsLabel": {
+    "description": "The sheet's label."
+  },
+
+
+  "paginationPreviousSemanticsLabel": "Previous",
+  "@paginationPreviousSemanticsLabel": {
+    "description": "The label for the previous button in a pagination control."
+  },
+  "paginationNextSemanticsLabel": "Next",
+  "@paginationNextSemanticsLabel": {
+    "description": "The label for the next button in a pagination control."
+  },
+
+
+  "popoverSemanticsLabel": "Popover",
+  "@popoverSemanticsLabel": {
+    "description": "The semantic label for a popover."
+  },
+
+
   "selectHint": "Select an item",
   "@selectHint": {
     "description": "The hint text for the select field."
@@ -77,41 +133,22 @@
     "description": "The semantic label for the scroll handle in a select field."
   },
   "selectScrollDownSemanticsLabel": "Scroll down",
-    "@selectScrollDownSemanticsLabel": {
-      "description": "The semantic label for the scroll handle in a select field."
-    },
+  "@selectScrollDownSemanticsLabel": {
+    "description": "The semantic label for the scroll handle in a select field."
+  },
+
+
+  "sheetSemanticsLabel": "Sheet",
+  "@sheetSemanticsLabel": {
+    "description": "The semantic label for a sheet."
+  },
+
 
   "textFieldClearButtonSemanticsLabel": "Clear",
   "@textFieldClearButtonSemanticsLabel": {
     "description": "The semantic label for the clear button in a text field."
   },
 
-  "paginationPreviousSemanticsLabel": "Previous",
-  "@paginationPreviousSemanticsLabel": {
-    "description": "The label for the previous button in a pagination control."
-  },
-  "paginationNextSemanticsLabel": "Next",
-  "@paginationNextSemanticsLabel": {
-    "description": "The label for the next button in a pagination control."
-  },
-
-  "shortDateSeparator": "/",
-  "@shortDateSeparator": {
-    "description": "The short date's separator, typically /."
-  },
-  "shortDateSuffix": "",
-  "@shortDateSuffix": {
-    "description": "The short date's suffix, typically empty."
-  },
-
-  "dateFieldHint": "Pick a date",
-  "@dateFieldHint": {
-    "description": "The hint text for the calendar-only date field."
-  },
-  "dateFieldInvalidDateError": "Invalid date.",
-  "@dateFieldInvalidDateError": {
-    "description": "Error message displayed to the user when they have entered a text string in a time field that is not in a valid time format."
-  },
 
   "timeFieldTimeSeparator": ":",
   "@timeFieldTimeSeparator": {
@@ -129,24 +166,5 @@
   "@timeFieldHint": {
     "description": "The hint text for the picker-only time field."
   },
-  "timeFieldInvalidDateError": "Invalid time.",
-  "dialogLabel": "Dialog",
-  "@dialogLabel": {
-    "description": "The sheet's label."
-  },
-
-  "sheetSemanticsLabel": "Sheet",
-  "barrierLabel": "Barrier",
-  "@barrierLabel": {
-    "description": "The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message)."
-  },
-  "barrierOnTapHint": "Close {modalRouteContentName}",
-  "@barrierOnTapHint": {
-    "description": "The onTapHint for the barrier rendered underneath the content of a modal route (especially a sheet) which users can tap to dismiss the content.",
-    "placeholders": {
-      "modalRouteContentName": {
-        "type": "String"
-      }
-    }
-  }
+  "timeFieldInvalidDateError": "Invalid time."
 }

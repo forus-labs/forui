@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Valintaikkuna",
+  "dialogSemanticsLabel": "Valintaikkuna",
   "sheetSemanticsLabel": "arkki",
   "barrierOnTapHint": "Sulje $modalRouteContentName",
   "barrierLabel": "Sermi",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Vieritä ylös",
   "selectScrollDownSemanticsLabel": "Vieritä alas",
   "paginationPreviousSemanticsLabel": "Edellinen",
-  "paginationNextSemanticsLabel": "Seuraava"
+  "paginationNextSemanticsLabel": "Seuraava",
+  "popoverSemanticsLabel": "Ponnahdusikkuna"
 }

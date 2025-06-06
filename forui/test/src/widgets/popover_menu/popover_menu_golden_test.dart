@@ -12,6 +12,8 @@ void main() {
 
   setUp(() => controller = FPopoverController(vsync: const TestVSync()));
 
+  tearDown(() => controller.dispose());
+
   for (final theme in TestScaffold.themes) {
     group('FPopoverMenu', () {
       testWidgets('${theme.name} hidden ', (tester) async {
@@ -19,7 +21,6 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FPopoverMenu(
-              popoverController: controller,
               menu: [
                 FTileGroup(
                   children: [FTile(title: const Text('Item 1'), onPress: () {})],
@@ -95,6 +96,4 @@ void main() {
       });
     });
   }
-
-  tearDown(() => controller.dispose());
 }

@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -15,14 +17,18 @@ final class FPopoverController extends FChangeNotifier {
 
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
+  late final CurvedAnimation _curveFade;
+  late final CurvedAnimation _curveScale;
   late final Animation<double> _fade;
   late final Animation<double> _scale;
 
   /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
-  FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
+  FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 150)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _fade = _fadeTween.animate(_animation);
-    _scale = _scaleTween.animate(_animation);
+    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _fade = _fadeTween.animate(_curveFade);
+    _scale = _scaleTween.animate(_curveScale);
   }
 
   /// Convenience method for toggling the current [shown] status.
@@ -58,6 +64,8 @@ final class FPopoverController extends FChangeNotifier {
 
   @override
   void dispose() {
+    _curveFade.dispose();
+    _curveScale.dispose();
     _animation.dispose();
     super.dispose();
   }
@@ -86,6 +94,8 @@ class FPopover extends StatefulWidget {
   static ({Alignment popover, Alignment child}) get defaultPlatform => FTouch.primary
       ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
       : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
+
+  static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
 
   /// The controller that shows and hides the popover. It initially hides the popover.
   final FPopoverController? controller;
@@ -165,7 +175,9 @@ class FPopover extends StatefulWidget {
   final FHidePopoverRegion hideOnTapOutside;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
-  final bool autofocus;
+  ///
+  /// Auto-focuses if [autofocus] is null and a barrier is provided.
+  final bool? autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusScopeNode? focusNode;
@@ -181,6 +193,20 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   final TraversalEdgeBehavior traversalEdgeBehavior;
 
+  /// {@template forui.widgets.FPopover.barrierSemanticsLabel}
+  /// The popover's barrier label used by accessibility frameworks.
+  ///
+  /// Ignored if no barrier is provided.
+  /// {@endtemplate}
+  final String? barrierSemanticsLabel;
+
+  /// {@template forui.widgets.FPopover.barrierSemanticsDismissible}
+  /// Whether the barrier semantics are included in the semantics tree. Defaults to true.
+  ///
+  /// Ignored if no barrier is provided.
+  /// {@endtemplate}
+  final bool barrierSemanticsDismissible;
+
   /// The popover's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
@@ -189,51 +215,29 @@ class FPopover extends StatefulWidget {
   /// Defaults to closing the popover when the escape key is pressed.
   final Map<ShortcutActivator, VoidCallback>? shortcuts;
 
-  /// The popover builder. The child passed to [popoverBuilder] will always be null.
-  final ValueWidgetBuilder<FPopoverStyle> popoverBuilder;
+  /// The popover builder.
+  final Widget Function(BuildContext, FPopoverController) popoverBuilder;
 
-  /// The child.
-  final Widget child;
+  /// {@template forui.widgets.FPopover.builder}
+  /// An optional builder which returns the child widget that the popover is aligned to.
+  ///
+  /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
+  ///
+  /// This can be null if the entire widget subtree the [builder] builds doest not require the controller.
+  /// {@endtemplate}
+  final ValueWidgetBuilder<FPopoverController> builder;
 
-  final bool _automatic;
+  /// The child which the popover is aligned to.
+  final Widget? child;
 
   /// Creates a popover that only shows the popover when the controller is manually toggled.
-  FPopover({
-    required FPopoverController this.controller,
-    required this.popoverBuilder,
-    required this.child,
-    this.style,
-    this.constraints = const FPortalConstraints(),
-    this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
-    this.offset = Offset.zero,
-    this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
-    this.semanticsLabel,
-    this.shortcuts,
-    AlignmentGeometry? popoverAnchor,
-    AlignmentGeometry? childAnchor,
-    super.key,
-  }) : assert(
-         groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
-         'groupId can only be used with FHidePopoverRegion.excludeTarget',
-       ),
-       popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
-       childAnchor = childAnchor ?? defaultPlatform.child,
-       _automatic = false;
-
-  /// Creates a popover that is automatically shown when the [child] is tapped.
   ///
-  /// It is not recommended for the [child] to contain a [GestureDetector], such as [FButton]. Only one
-  /// `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s, leading to unexpected
-  /// behavior.
-  FPopover.automatic({
+  /// ## Contract
+  /// Throws an [AssertionError] if:
+  /// * [groupId] is not null and [hideOnTapOutside] is not set to [FHidePopoverRegion.excludeTarget].
+  /// * neither [builder] nor [child] is provided.
+  FPopover({
     required this.popoverBuilder,
-    required this.child,
     this.controller,
     this.style,
     this.constraints = const FPortalConstraints(),
@@ -241,13 +245,17 @@ class FPopover extends StatefulWidget {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.autofocus = false,
+    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.autofocus,
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.barrierSemanticsLabel,
+    this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
     this.shortcuts,
+    this.builder = _builder,
+    this.child,
     AlignmentGeometry? popoverAnchor,
     AlignmentGeometry? childAnchor,
     super.key,
@@ -255,9 +263,9 @@ class FPopover extends StatefulWidget {
          groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
          'groupId can only be used with FHidePopoverRegion.excludeTarget',
        ),
+       assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
        popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
-       childAnchor = childAnchor ?? defaultPlatform.child,
-       _automatic = true;
+       childAnchor = childAnchor ?? defaultPlatform.child;
 
   @override
   State<FPopover> createState() => _State();
@@ -276,13 +284,22 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
+      ..add(
+        FlagProperty(
+          'barrierSemanticsDismissible',
+          value: barrierSemanticsDismissible,
+          ifTrue: 'barrier semantics dismissible',
+        ),
+      )
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
-      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -309,48 +326,81 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.popoverStyle;
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
-    var child = widget._automatic
-        ? GestureDetector(behavior: HitTestBehavior.translucent, onTap: _controller.toggle, child: widget.child)
-        : widget.child;
+    var child = widget.builder(context, _controller, widget.child);
 
     if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
       child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
     }
 
-    return FPortal(
-      controller: _controller._overlay,
-      constraints: widget.constraints,
-      portalAnchor: widget.popoverAnchor,
-      childAnchor: widget.childAnchor,
-      viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
-      spacing: widget.spacing,
-      shift: widget.shift,
-      offset: widget.offset,
-      portalBuilder: (context) => CallbackShortcuts(
-        bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-        child: Semantics(
-          label: widget.semanticsLabel,
-          container: true,
-          child: FocusScope(
-            autofocus: widget.autofocus,
-            node: widget.focusNode,
-            onFocusChange: widget.onFocusChange,
+    return BackdropGroup(
+      child: FPortal(
+        controller: _controller._overlay,
+        constraints: widget.constraints,
+        portalAnchor: widget.popoverAnchor,
+        childAnchor: widget.childAnchor,
+        viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
+        spacing: widget.spacing,
+        shift: widget.shift,
+        offset: widget.offset,
+        barrier: style.barrierFilter == null
+            ? null
+            : FAnimatedModalBarrier(
+                animation: _controller._fade,
+                filter: style.barrierFilter!,
+                semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
+                barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
+                semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
+                // The actual dismissal logic is handled in the TapRegion below.
+                onDismiss: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : () {},
+              ),
+        portalBuilder: (context, _) {
+          Widget popover = DecoratedBox(
+            decoration: style.decoration,
+            child: widget.popoverBuilder(context, _controller),
+          );
+
+          if (style.backgroundFilter case final background?) {
+            popover = Stack(
+              children: [
+                Positioned.fill(
+                  child: ClipRect(
+                    child: BackdropFilter(filter: background, child: Container()),
+                  ),
+                ),
+                popover,
+              ],
+            );
+          }
+
+          return CallbackShortcuts(
+            bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
             child: FadeTransition(
               opacity: _controller._fade,
               child: ScaleTransition(
+                alignment: widget.popoverAnchor.resolve(direction),
                 scale: _controller._scale,
-                child: TapRegion(
-                  groupId: _groupId,
-                  onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
-                  child: DecoratedBox(decoration: style.decoration, child: widget.popoverBuilder(context, style, null)),
+                child: Semantics(
+                  label: widget.semanticsLabel,
+                  container: true,
+                  child: FocusScope(
+                    autofocus: widget.autofocus ?? (style.barrierFilter != null),
+                    node: widget.focusNode,
+                    onFocusChange: widget.onFocusChange,
+                    child: TapRegion(
+                      groupId: _groupId,
+                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
+                      child: popover,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        },
+        child: child,
       ),
-      child: child,
     );
   }
 
@@ -377,6 +427,37 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final BoxDecoration decoration;
 
+  /// {@template forui.widgets.FPopoverStyle.barrierFilter}
+  /// A callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter] that is
+  /// used as the barrier. Defaults to null.
+  ///
+  /// ## Examples
+  /// ```dart
+  /// // Blurred
+  /// (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5);
+  ///
+  /// // Solid color
+  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation), BlendMode.srcOver);
+  ///
+  /// // Tinted
+  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver);
+  ///
+  /// // Blurred & tinted
+  /// (animation) => ImageFilter.compose(
+  ///   outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver),
+  /// );
+  /// ```
+  /// {@endtemplate}
+  @override
+  final ImageFilter Function(double animation)? barrierFilter;
+
+  /// An optional background filter applied to the popover.
+  ///
+  /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
+  @override
+  final ImageFilter? backgroundFilter;
+
   /// The additional insets of the view. In other words, the minimum distance between the edges of the view and the
   /// edges of the popover. This applied in addition to the insets provided by [MediaQueryData.viewPadding].
   ///
@@ -385,7 +466,12 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final EdgeInsetsGeometry viewInsets;
 
   /// Creates a [FPopoverStyle].
-  const FPopoverStyle({required this.decoration, this.viewInsets = const EdgeInsets.all(5)});
+  const FPopoverStyle({
+    required this.decoration,
+    this.barrierFilter,
+    this.backgroundFilter,
+    this.viewInsets = const EdgeInsets.all(5),
+  });
 
   /// Creates a [FPopoverStyle] that inherits its properties.
   FPopoverStyle.inherit({required FColors colors, required FStyle style})

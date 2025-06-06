@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "ഡയലോഗ്",
+  "dialogSemanticsLabel": "ഡയലോഗ്",
   "sheetSemanticsLabel": "ഷീറ്റ്",
   "barrierOnTapHint": "$modalRouteContentName അടയ്ക്കുക",
   "barrierLabel": "സ്ക്രിം",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "മുകളിലേക്ക് സ്ക്രോൾ ചെയ്യുക",
   "selectScrollDownSemanticsLabel": "താഴേക്ക് സ്ക്രോൾ ചെയ്യുക",
   "paginationPrevious": "മുമ്പത്തേത്",
-  "paginationNext": "അടുത്തത്"
+  "paginationNext": "അടുത്തത്",
+  "popoverSemanticsLabel": "പോപ്പോവർ"
 }

@@ -265,7 +265,7 @@ class _CalendarPopover extends StatelessWidget {
     hideOnTapOutside: properties.hideOnTapOutside,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-    popoverBuilder: (_, _, _) => TextFieldTapRegion(
+    popoverBuilder: (_, _) => TextFieldTapRegion(
       child: ValueListenableBuilder(
         valueListenable: controller._calendar,
         builder: (_, value, _) => FCalendar(

@@ -59,6 +59,38 @@ class FLocalizationsHe extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'מיסוך';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'סגירת \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'בחירת תאריך';
+
+  @override
+  String get dateFieldInvalidDateError => 'תאריך לא חוקי.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'תיבת דו-שיח';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'חלון קופץ';
+
+  @override
   String get selectHint => 'בחר פריט';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsHe extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'גלול למטה';
 
   @override
+  String get sheetSemanticsLabel => 'גיליו ';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'בחירת תאריך';
-
-  @override
-  String get dateFieldInvalidDateError => 'תאריך לא חוקי.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsHe extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'שעה לא חוקית.';
-
-  @override
-  String get dialogLabel => 'תיבת דו-שיח';
-
-  @override
-  String get sheetSemanticsLabel => 'גיליו ';
-
-  @override
-  String get barrierLabel => 'מיסוך';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'סגירת \$modalRouteContentName';
-  }
 }

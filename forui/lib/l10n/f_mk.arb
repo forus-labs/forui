@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Дијалог",
+  "dialogSemanticsLabel": "Дијалог",
   "sheetSemanticsLabel": "лист",
   "barrierOnTapHint": "Затворете ја $modalRouteContentName",
   "barrierLabel": "Скрим",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Лизгај нагоре",
   "selectScrollDownSemanticsLabel": "Лизгај надолу",
   "paginationPrevious": "Претходно",
-  "paginationNext": "Следно"
+  "paginationNext": "Следно",
+  "popoverSemanticsLabel": "Скокачки прозорец"
 }

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Leihoa",
+  "dialogSemanticsLabel": "Leihoa",
   "sheetSemanticsLabel": "orria",
   "barrierOnTapHint": "Itxi $modalRouteContentName",
   "barrierLabel": "Barrera",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Egin gora",
   "selectScrollDownSemanticsLabel": "Egin behera",
   "paginationPreviousSemanticsLabel": "Aurrekoa",
-  "paginationNextSemanticsLabel": "Hurrengoa"
+  "paginationNextSemanticsLabel": "Hurrengoa",
+  "popoverSemanticsLabel": "Leiho emergentea"
 }

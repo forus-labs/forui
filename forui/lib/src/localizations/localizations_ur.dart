@@ -59,6 +59,38 @@ class FLocalizationsUr extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'اسکریم';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName بند کریں';
+  }
+
+  @override
+  String get dateFieldHint => 'تاریخ منتخب کریں';
+
+  @override
+  String get dateFieldInvalidDateError => 'غلط تاریخ۔';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'ڈائلاگ';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'پچھلا';
+
+  @override
+  String get paginationNextSemanticsLabel => 'اگلا';
+
+  @override
+  String get popoverSemanticsLabel => 'پاپ اوور';
+
+  @override
   String get selectHint => 'آئٹم منتخب کریں';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsUr extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'نیچے سکرول کریں';
 
   @override
+  String get sheetSemanticsLabel => 'شیٹ';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'صاف کریں';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'پچھلا';
-
-  @override
-  String get paginationNextSemanticsLabel => 'اگلا';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'تاریخ منتخب کریں';
-
-  @override
-  String get dateFieldInvalidDateError => 'غلط تاریخ۔';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsUr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'غلط وقت۔';
-
-  @override
-  String get dialogLabel => 'ڈائلاگ';
-
-  @override
-  String get sheetSemanticsLabel => 'شیٹ';
-
-  @override
-  String get barrierLabel => 'اسکریم';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName بند کریں';
-  }
 }

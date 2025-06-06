@@ -59,6 +59,38 @@ class FLocalizationsDa extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Dæmpeskærm';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Luk \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Vælg en dato';
+
+  @override
+  String get dateFieldInvalidDateError => 'Ugyldig dato.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialogboks';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Forrige';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Næste';
+
+  @override
+  String get popoverSemanticsLabel => 'Pop op-vindue';
+
+  @override
   String get selectHint => 'Vælg et element';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsDa extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Rul ned';
 
   @override
+  String get sheetSemanticsLabel => 'Felt';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Ryd';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Forrige';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Næste';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Vælg en dato';
-
-  @override
-  String get dateFieldInvalidDateError => 'Ugyldig dato.';
 
   @override
   String get timeFieldTimeSeparator => '.';
@@ -108,18 +125,4 @@ class FLocalizationsDa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ugyldigt tidspunkt.';
-
-  @override
-  String get dialogLabel => 'Dialogboks';
-
-  @override
-  String get sheetSemanticsLabel => 'Felt';
-
-  @override
-  String get barrierLabel => 'Dæmpeskærm';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Luk \$modalRouteContentName';
-  }
 }

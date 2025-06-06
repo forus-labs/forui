@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "对话框",
+  "dialogSemanticsLabel": "对话框",
   "sheetSemanticsLabel": "动作条",
   "barrierOnTapHint": "关闭 $modalRouteContentName",
   "barrierLabel": "纱罩",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "向上滚动",
   "selectScrollDownSemanticsLabel": "向下滚动",
   "paginationPreviousSemanticsLabel": "上一个",
-  "paginationNextSemanticsLabel": "下一个"
+  "paginationNextSemanticsLabel": "下一个",
+  "popoverSemanticsLabel": "弹出框"
 }

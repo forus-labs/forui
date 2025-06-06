@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Cuadro de diálogo",
+  "dialogSemanticsLabel": "Cuadro de diálogo",
   "sheetSemanticsLabel": "Hoja",
   "barrierOnTapHint": "Cerrar $modalRouteContentName",
   "barrierLabel": "Sombreado",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Desplazarse hacia arriba",
   "selectScrollDownSemanticsLabel": "Desplazarse hacia abajo",
   "paginationPrevious": "Anterior",
-  "paginationNext": "Siguiente"
+  "paginationNext": "Siguiente",
+  "popoverSemanticsLabel": "Ventana emergente"
 }

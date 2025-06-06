@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "خبرې اترې",
+  "dialogSemanticsLabel": "خبرې اترې",
   "sheetSemanticsLabel": "Sheet",
   "barrierOnTapHint": "Close $modalRouteName",
   "barrierLabel": "Scrim",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "پورته سکرول کړئ",
   "selectScrollDownSemanticsLabel": "ښکته سکرول کړئ",
   "paginationPrevious": "مخکینی",
-  "paginationNext": "راتلونکی"
+  "paginationNext": "راتلونکی",
+  "popoverSemanticsLabel": "پاپ اوور"
 }

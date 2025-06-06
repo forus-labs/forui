@@ -59,6 +59,38 @@ class FLocalizationsHu extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Borítás';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return '\$modalRouteContentName bezárása';
+  }
+
+  @override
+  String get dateFieldHint => 'Válasszon dátumot';
+
+  @override
+  String get dateFieldInvalidDateError => 'Érvénytelen dátum.';
+
+  @override
+  String get shortDateSeparator => '. ';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get dialogSemanticsLabel => 'Párbeszédablak';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Előző';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Következő';
+
+  @override
+  String get popoverSemanticsLabel => 'Felugró ablak';
+
+  @override
   String get selectHint => 'Válasszon egy elemet';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsHu extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Görgetés lefelé';
 
   @override
+  String get sheetSemanticsLabel => 'lap';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Törlés';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Előző';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Következő';
-
-  @override
-  String get shortDateSeparator => '. ';
-
-  @override
-  String get shortDateSuffix => '.';
-
-  @override
-  String get dateFieldHint => 'Válasszon dátumot';
-
-  @override
-  String get dateFieldInvalidDateError => 'Érvénytelen dátum.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsHu extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Érvénytelen idő.';
-
-  @override
-  String get dialogLabel => 'Párbeszédablak';
-
-  @override
-  String get sheetSemanticsLabel => 'lap';
-
-  @override
-  String get barrierLabel => 'Borítás';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return '\$modalRouteContentName bezárása';
-  }
 }

@@ -1,6 +1,7 @@
 /// Low-level utilities and services.
 library forui.foundation;
 
+export 'src/foundation/barrier.dart';
 export 'src/foundation/border_radius.dart';
 export 'src/foundation/collapsible.dart';
 export 'src/foundation/doc_templates.dart' hide Focus, Scroll, Semantics, WidgetStates;

@@ -136,7 +136,7 @@ enum Style {
     'FDialogStyle',
     <String>['dialog'],
     <String>['FDialogStyle'],
-    'FDialogStyle dialogStyle({\n  required FStyle style,\n  required FColors colors,\n  required FTypography typography,\n}) {\n  final title = typography.lg.copyWith(\n    fontWeight: FontWeight.w600,\n    color: colors.foreground,\n  );\n  final body = typography.sm.copyWith(color: colors.mutedForeground);\n  return FDialogStyle(\n    decoration: BoxDecoration(\n      borderRadius: style.borderRadius,\n      color: colors.background,\n    ),\n    horizontalStyle: FDialogContentStyle(\n      titleTextStyle: title,\n      bodyTextStyle: body,\n      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),\n      actionSpacing: 7,\n    ),\n    verticalStyle: FDialogContentStyle(\n      titleTextStyle: title,\n      bodyTextStyle: body,\n      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),\n      actionSpacing: 8,\n    ),\n    insetAnimationDuration: const Duration(milliseconds: 100),\n    insetAnimationCurve: Curves.decelerate,\n    insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),\n  );\n}\n',
+    'FDialogStyle dialogStyle({\n  required FStyle style,\n  required FColors colors,\n  required FTypography typography,\n}) {\n  final title = typography.lg.copyWith(\n    fontWeight: FontWeight.w600,\n    color: colors.foreground,\n  );\n  final body = typography.sm.copyWith(color: colors.mutedForeground);\n  return FDialogStyle(\n    barrierFilter: (v) => ColorFilter.mode(\n      Color.lerp(Colors.transparent, colors.barrier, v)!,\n      BlendMode.srcOver,\n    ),\n    decoration: BoxDecoration(\n      borderRadius: style.borderRadius,\n      color: colors.background,\n    ),\n    horizontalStyle: FDialogContentStyle(\n      titleTextStyle: title,\n      bodyTextStyle: body,\n      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),\n      actionSpacing: 7,\n    ),\n    verticalStyle: FDialogContentStyle(\n      titleTextStyle: title,\n      bodyTextStyle: body,\n      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),\n      actionSpacing: 8,\n    ),\n    insetAnimationDuration: const Duration(milliseconds: 100),\n    insetAnimationCurve: Curves.decelerate,\n    insetPadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),\n  );\n}\n',
   ),
   fdividerstyles(
     'FDividerStyles',
@@ -316,7 +316,7 @@ enum Style {
     'FSheetStyle',
     <String>['sheet'],
     <String>['FSheetStyle'],
-    'FSheetStyle sheetStyle({required FColors colors}) => FSheetStyle(\n  barrierColor: colors.barrier,\n  backgroundColor: colors.background,\n  enterDuration: const Duration(milliseconds: 200),\n  exitDuration: const Duration(milliseconds: 200),\n  flingVelocity: 700,\n  closeProgressThreshold: 0.5,\n);\n',
+    'FSheetStyle sheetStyle({required FColors colors}) => FSheetStyle(\n  barrierFilter: (v) => ColorFilter.mode(\n    Color.lerp(Colors.transparent, colors.barrier, v)!,\n    BlendMode.srcOver,\n  ),\n  enterDuration: const Duration(milliseconds: 200),\n  exitDuration: const Duration(milliseconds: 200),\n  flingVelocity: 700,\n  closeProgressThreshold: 0.5,\n);\n',
   ),
   fsidebargroupstyle(
     'FSidebarGroupStyle',
@@ -431,7 +431,7 @@ enum Style {
     'FTooltipStyle',
     <String>['tooltip'],
     <String>['FTooltipStyle'],
-    'FTooltipStyle tooltipStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FTooltipStyle(\n  decoration: BoxDecoration(\n    color: colors.background,\n    borderRadius: style.borderRadius,\n    border: Border.all(width: style.borderWidth, color: colors.border),\n    boxShadow: FTooltipStyle.shadow,\n  ),\n  textStyle: typography.sm,\n  margin: const EdgeInsets.all(4),\n  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),\n);\n',
+    'FTooltipStyle tooltipStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FTooltipStyle(\n  decoration: BoxDecoration(\n    color: colors.background,\n    borderRadius: style.borderRadius,\n    border: Border.all(width: style.borderWidth, color: colors.border),\n    boxShadow: FTooltipStyle.shadow,\n  ),\n  textStyle: typography.sm,\n  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),\n);\n',
   );
 
   const Style(this.type, this.aliases, this.closure, this.source);

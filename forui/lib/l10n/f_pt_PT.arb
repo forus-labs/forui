@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Caixa de diálogo",
+  "dialogSemanticsLabel": "Caixa de diálogo",
   "sheetSemanticsLabel": "Secção",
   "barrierOnTapHint": "Fechar $modalRouteContentName",
   "barrierLabel": "Scrim",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Deslocar para cima",
   "selectScrollDownSemanticsLabel": "Deslocar para baixo",
   "paginationPrevious": "Anterior",
-  "paginationNext": "Seguinte"
+  "paginationNext": "Seguinte",
+  "popoverSemanticsLabel": "Janela sobreposta"
 }

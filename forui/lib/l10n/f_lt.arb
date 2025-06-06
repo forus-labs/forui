@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialogo langas",
+  "dialogSemanticsLabel": "Dialogo langas",
   "sheetSemanticsLabel": "lapas",
   "barrierOnTapHint": "Uždaryti „$modalRouteContentName“",
   "barrierLabel": "Užsklanda",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Slinkti aukštyn",
   "selectScrollDownSemanticsLabel": "Slinkti žemyn",
   "paginationPreviousSemanticsLabel": "Ankstesnis",
-  "paginationNextSemanticsLabel": "Kitas"
+  "paginationNextSemanticsLabel": "Kitas",
+  "popoverSemanticsLabel": "Išskleidžiamas langas"
 }

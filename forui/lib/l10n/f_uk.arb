@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Вікно",
+  "dialogSemanticsLabel": "Вікно",
   "sheetSemanticsLabel": "екран",
   "barrierOnTapHint": "Закрити: $modalRouteContentName",
   "barrierLabel": "Маскувальний фон",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Прокрутити вгору",
   "selectScrollDownSemanticsLabel": "Прокрутити вниз",
   "paginationPrevious": "Назад",
-  "paginationNext": "Далі"
+  "paginationNext": "Далі",
+  "popoverSemanticsLabel": "Спливаюче вікно"
 }

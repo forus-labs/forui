@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,15 @@ part 'popover_menu.style.dart';
 /// * [FPopoverController] for controlling a popover menu.
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
-class FPopoverMenu extends StatefulWidget {
+class FPopoverMenu extends StatelessWidget {
+  static List<FTileGroupMixin<FTileMixin>> _menuBuilder(
+    BuildContext context,
+    FPopoverController controller,
+    List<FTileGroupMixin<FTileMixin>>? menu,
+  ) => menu!;
+
+  static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
+
   /// The popover menu's style.
   ///
   /// ## CLI
@@ -78,7 +88,7 @@ class FPopoverMenu extends StatefulWidget {
   final FHidePopoverRegion hideOnTapOutside;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
-  final bool autofocus;
+  final bool? autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusScopeNode? focusNode;
@@ -89,22 +99,44 @@ class FPopoverMenu extends StatefulWidget {
   /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
   final TraversalEdgeBehavior traversalEdgeBehavior;
 
+  /// {@macro forui.widgets.FPopover.barrierSemanticsLabel}
+  final String? barrierSemanticsLabel;
+
+  /// {@macro forui.widgets.FPopover.barrierSemanticsDismissible}
+  final bool barrierSemanticsDismissible;
+
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
+  /// An optional builder which returns the menu that the popover is aligned to.
+  ///
+  /// Can incorporate a value-independent widget subtree from the [menu] into the returned widget tree.
+  ///
+  /// This can be null if the entire widget subtree the [menuBuilder] builds doest not require the controller.
+  final List<FTileGroupMixin<FTileMixin>> Function(BuildContext, FPopoverController, List<FTileGroupMixin<FTileMixin>>?)
+  menuBuilder;
+
   /// The menu.
-  final List<FTileGroupMixin<FTileMixin>> menu;
+  ///
+  /// Passed to [menuBuilder] if provided.
+  final List<FTileGroupMixin<FTileMixin>>? menu;
+
+  /// {@macro forui.widgets.FPopover.builder}
+  final ValueWidgetBuilder<FPopoverController> builder;
 
   /// The child.
-  final Widget child;
-
-  final bool _automatic;
+  ///
+  /// Passed to [builder] if provided.
+  final Widget? child;
 
   /// Creates a menu that only shows the menu when the controller is manually toggled.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * neither [builder] nor [child] is provided.
+  /// * neither [menuBuilder] nor [menu] is provided.
   const FPopoverMenu({
-    required FPopoverController this.popoverController,
-    required this.menu,
-    required this.child,
+    this.popoverController,
     this.scrollController,
     this.style,
     this.cacheExtent,
@@ -118,46 +150,55 @@ class FPopoverMenu extends StatefulWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.barrierSemanticsLabel,
+    this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
-    this.autofocus = false,
+    this.autofocus,
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.menuBuilder = _menuBuilder,
+    this.menu,
+    this.builder = _builder,
+    this.child,
     super.key,
-  }) : _automatic = false;
-
-  /// Creates a menu that is automatically shown when the [child] is tapped.
-  ///
-  /// It is not recommended for the [child] to contain a [GestureDetector], such as [FButton]. Only one
-  /// `GestureDetector` will be called if there are multiple overlapping `GestureDetector`s, leading to unexpected
-  /// behavior.
-  const FPopoverMenu.automatic({
-    required this.menu,
-    required this.child,
-    this.style,
-    this.popoverController,
-    this.scrollController,
-    this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FTileDivider.full,
-    this.menuAnchor = Alignment.topCenter,
-    this.childAnchor = Alignment.bottomCenter,
-    this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
-    this.offset = Offset.zero,
-    this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.semanticsLabel,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
-    super.key,
-  }) : _automatic = true;
+  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
+       assert(menuBuilder != _menuBuilder || menu != null, 'Either menuBuilder or menu must be provided.');
 
   @override
-  State<FPopoverMenu> createState() => _FPopoverMenuState();
+  Widget build(BuildContext context) {
+    final style = this.style ?? context.theme.popoverMenuStyle;
+    return FPopover(
+      controller: popoverController,
+      style: style,
+      constraints: FPortalConstraints(maxWidth: style.maxWidth),
+      popoverAnchor: menuAnchor,
+      childAnchor: childAnchor,
+      spacing: spacing,
+      shift: shift,
+      offset: offset,
+      groupId: groupId,
+      hideOnTapOutside: hideOnTapOutside,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      traversalEdgeBehavior: traversalEdgeBehavior,
+      barrierSemanticsLabel: barrierSemanticsLabel,
+      barrierSemanticsDismissible: barrierSemanticsDismissible,
+      popoverBuilder: (context, controller) => FTileGroup.merge(
+        scrollController: scrollController,
+        cacheExtent: cacheExtent,
+        maxHeight: maxHeight,
+        dragStartBehavior: dragStartBehavior,
+        semanticsLabel: semanticsLabel,
+        style: style.tileGroupStyle,
+        divider: divider,
+        children: menuBuilder(context, controller, menu),
+      ),
+      builder: builder,
+      child: child,
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -177,66 +218,21 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
+      ..add(
+        FlagProperty(
+          'barrierSemanticsDismissible',
+          value: barrierSemanticsDismissible,
+          ifTrue: 'barrier semantics dismissible',
+        ),
+      )
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
-      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior));
-  }
-}
-
-class _FPopoverMenuState extends State<FPopoverMenu> with SingleTickerProviderStateMixin {
-  late FPopoverController _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
-
-  @override
-  void didUpdateWidget(covariant FPopoverMenu old) {
-    super.didUpdateWidget(old);
-    if (widget.popoverController != old.popoverController) {
-      if (old.popoverController == null) {
-        _popoverController.dispose();
-      }
-      _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.popoverMenuStyle;
-    return (widget._automatic ? FPopover.automatic : FPopover.new)(
-      controller: _popoverController,
-      style: style,
-      constraints: FPortalConstraints(maxWidth: style.maxWidth),
-      popoverAnchor: widget.menuAnchor,
-      childAnchor: widget.childAnchor,
-      spacing: widget.spacing,
-      shift: widget.shift,
-      offset: widget.offset,
-      groupId: widget.groupId,
-      hideOnTapOutside: widget.hideOnTapOutside,
-      autofocus: widget.autofocus,
-      focusNode: widget.focusNode,
-      onFocusChange: widget.onFocusChange,
-      traversalEdgeBehavior: widget.traversalEdgeBehavior,
-      popoverBuilder: (_, _, _) => FTileGroup.merge(
-        scrollController: widget.scrollController,
-        cacheExtent: widget.cacheExtent,
-        maxHeight: widget.maxHeight,
-        dragStartBehavior: widget.dragStartBehavior,
-        semanticsLabel: widget.semanticsLabel,
-        style: style.tileGroupStyle,
-        divider: widget.divider,
-        children: widget.menu,
-      ),
-      child: widget.child,
-    );
-  }
-
-  @override
-  void dispose() {
-    if (widget.popoverController == null) {
-      _popoverController.dispose();
-    }
-    super.dispose();
+      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
+      ..add(ObjectFlagProperty.has('menuBuilder', menuBuilder))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -258,6 +254,8 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required this.tileGroupStyle,
     required super.decoration,
     this.maxWidth = 250,
+    super.barrierFilter,
+    super.backgroundFilter,
     super.viewInsets,
   }) : assert(0 < maxWidth, 'maxWidth must be positive');
 

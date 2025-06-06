@@ -59,6 +59,38 @@ class FLocalizationsUz extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Kanop';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Yopish: \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Sanani tanlang';
+
+  @override
+  String get dateFieldInvalidDateError => 'Sana yaroqsiz.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Muloqot oynasi';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Oldingi';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Keyingi';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Element tanlang';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsUz extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Pastga aylantirish';
 
   @override
+  String get sheetSemanticsLabel => 'ekran';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Tozalash';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Oldingi';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Keyingi';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Sanani tanlang';
-
-  @override
-  String get dateFieldInvalidDateError => 'Sana yaroqsiz.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsUz extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Yaroqsiz vaqt.';
-
-  @override
-  String get dialogLabel => 'Muloqot oynasi';
-
-  @override
-  String get sheetSemanticsLabel => 'ekran';
-
-  @override
-  String get barrierLabel => 'Kanop';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Yopish: \$modalRouteContentName';
-  }
 }

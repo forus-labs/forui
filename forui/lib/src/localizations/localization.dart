@@ -75,6 +75,36 @@ class FDefaultLocalizations extends FLocalizations {
   String shortDate(DateTime date) => DateFormat.yMd().format(date);
 
   @override
+  String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
+
+  @override
+  String get barrierLabel => 'Barrier';
+
+  @override
+  String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get dateFieldHint => 'Pick a date';
+
+  @override
+  String get dateFieldInvalidDateError => 'Invalid date.';
+
+  @override
+  String get shortDateSeparator => '/';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Popover';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -90,37 +120,10 @@ class FDefaultLocalizations extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Scroll down';
 
   @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get shortDateSeparator => '/';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Pick a date';
-
-  @override
-  String get dateFieldInvalidDateError => 'Invalid date.';
-
-  @override
-  String get dialogLabel => 'Dialog';
-
-  @override
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
-  String get barrierLabel => 'Barrier';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
+  String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
   String get timeFieldHint => 'Pick a time';

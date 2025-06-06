@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Өйдө сыдыруу",
   "selectScrollDownSemanticsLabel": "Ылдый сыдыруу",
   "paginationPrevious": "Мурунку",
-  "paginationNext": "Кийинки"
+  "paginationNext": "Кийинки",
+  "popoverSemanticsLabel": "Калкып чыгуучу терезе"
 }

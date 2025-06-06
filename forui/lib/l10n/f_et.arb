@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialoog",
+  "dialogSemanticsLabel": "Dialoog",
   "sheetSemanticsLabel": "leht",
   "barrierOnTapHint": "Sule $modalRouteContentName",
   "barrierLabel": "Sirm",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Keri üles",
   "selectScrollDownSemanticsLabel": "Keri alla",
   "paginationPreviousSemanticsLabel": "Eelmine",
-  "paginationNextSemanticsLabel": "Järgmine"
+  "paginationNextSemanticsLabel": "Järgmine",
+  "popoverSemanticsLabel": "Hüpikaken"
 }

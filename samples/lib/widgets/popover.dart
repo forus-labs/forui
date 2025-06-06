@@ -1,4 +1,6 @@
-import 'package:flutter/widgets.dart';
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
@@ -6,7 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class PopoverPage extends StatefulSample {
+class PopoverPage extends Sample {
   final Axis axis;
   final FHidePopoverRegion hideOnTapOutside;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
@@ -41,30 +43,16 @@ class PopoverPage extends StatefulSample {
        );
 
   @override
-  State<PopoverPage> createState() => _State();
-}
-
-class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderStateMixin {
-  late FPopoverController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = FPopoverController(vsync: this);
-  }
-
-  @override
   Widget sample(BuildContext context) => Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       const SizedBox(height: 30),
       FPopover(
-        controller: controller,
-        popoverAnchor: widget.axis == Axis.horizontal ? Alignment.bottomLeft : Alignment.topCenter,
-        childAnchor: widget.axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
-        hideOnTapOutside: widget.hideOnTapOutside,
-        shift: widget.shift,
-        popoverBuilder: (context, style, _) => Padding(
+        popoverAnchor: axis == Axis.horizontal ? Alignment.bottomLeft : Alignment.topCenter,
+        childAnchor: axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
+        hideOnTapOutside: hideOnTapOutside,
+        shift: shift,
+        popoverBuilder: (context, _) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(
             width: 288,
@@ -100,16 +88,86 @@ class _State extends StatefulSampleState<PopoverPage> with SingleTickerProviderS
             ),
           ),
         ),
-        child: IntrinsicWidth(
+        builder: (_, controller, _) => IntrinsicWidth(
           child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
         ),
       ),
     ],
   );
+}
+
+@RoutePage()
+class BlurredPopoverPage extends Sample {
+  BlurredPopoverPage({@queryParam super.theme});
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+  Widget sample(BuildContext context) => Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.end,
+    children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: FontWeight.bold)),
+          const SizedBox(height: 20),
+          const FTextField(initialText: 'Header Component'),
+          const SizedBox(height: 16),
+          const FTextField(initialText: 'Navigation Bar'),
+          const SizedBox(height: 30),
+        ],
+      ),
+      FPopover(
+        style: context.theme.popoverStyle.copyWith(
+          barrierFilter: (animation) => ImageFilter.compose(
+            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            inner: ColorFilter.mode(
+              Color.lerp(Colors.transparent, Colors.black.withValues(alpha: 0.2), animation)!,
+              BlendMode.srcOver,
+            ),
+          ),
+        ),
+        popoverAnchor: Alignment.topCenter,
+        childAnchor: Alignment.bottomCenter,
+        popoverBuilder: (context, _) => Padding(
+          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          child: SizedBox(
+            width: 288,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Dimensions', style: context.theme.typography.base),
+                const SizedBox(height: 7),
+                Text(
+                  'Set the dimensions for the layer.',
+                  style: context.theme.typography.sm.copyWith(
+                    color: context.theme.colors.mutedForeground,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                for (final (label, value) in [
+                  ('Width', '100%'),
+                  ('Max. Width', '300px'),
+                  ('Height', '25px'),
+                  ('Max. Height', 'none'),
+                ]) ...[
+                  Row(
+                    children: [
+                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                    ],
+                  ),
+                  const SizedBox(height: 7),
+                ],
+              ],
+            ),
+          ),
+        ),
+        builder: (_, controller, _) => IntrinsicWidth(
+          child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
+        ),
+      ),
+    ],
+  );
 }

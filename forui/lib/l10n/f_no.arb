@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialogboks",
+  "dialogSemanticsLabel": "Dialogboks",
   "sheetSemanticsLabel": "Felt",
   "barrierOnTapHint": "Lukk $modalRouteContentName",
   "barrierLabel": "Vev",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Rull opp",
   "selectScrollDownSemanticsLabel": "Rull ned",
   "paginationPreviousSemanticsLabel": "Forrige",
-  "paginationNextSemanticsLabel": "Neste"
+  "paginationNextSemanticsLabel": "Neste",
+  "popoverSemanticsLabel": "Hurtigvindu"
 }

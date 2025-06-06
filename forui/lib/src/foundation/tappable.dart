@@ -102,9 +102,9 @@ class FTappable extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   final ValueWidgetBuilder<Set<WidgetState>> builder;
 
-  /// The child.
+  /// An optional child.
   ///
-  /// This argument is optional and can be null if the entire widget subtree the [builder] builds reacts to focus and
+  /// This can be null if the entire widget subtree the [builder] builds reacts to focus and
   /// hover changes.
   final Widget? child;
 

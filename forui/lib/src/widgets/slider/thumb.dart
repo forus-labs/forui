@@ -129,7 +129,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
           controller: _tooltip,
           tipAnchor: tooltipTipAnchor,
           childAnchor: tooltipThumbAnchor,
-          tipBuilder: (_, style, _) => tooltipBuilder(style, _offset(_controller.selection)),
+          tipBuilder: (_, controller) => tooltipBuilder(controller, _offset(_controller.selection)),
           longPress: false,
           hover: false,
           child: thumb,

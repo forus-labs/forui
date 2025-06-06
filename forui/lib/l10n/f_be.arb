@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Дыялогавае акно",
+  "dialogSemanticsLabel": "Дыялогавае акно",
   "sheetSemanticsLabel": "аркуш",
   "barrierOnTapHint": "Закрыць: $modalRouteContentName",
   "barrierLabel": "Палатно",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Прагартаць уверх",
   "selectScrollDownSemanticsLabel": "Прагартаць уніз",
   "paginationPrevious": "Папярэдні",
-  "paginationNext": "Наступны"
+  "paginationNext": "Наступны",
+  "popoverSemanticsLabel": "Усплывальнае акно"
 }

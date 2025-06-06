@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "உரையாடல்",
+  "dialogSemanticsLabel": "உரையாடல்",
   "sheetSemanticsLabel": "திரை",
   "barrierOnTapHint": "$modalRouteContentName ஐ மூடுக",
   "barrierLabel": "ஸ்க்ரிம்",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "மேலே உருட்டு",
   "selectScrollDownSemanticsLabel": "கீழே உருட்டு",
   "paginationPrevious": "முந்தைய",
-  "paginationNext": "அடுத்து"
+  "paginationNext": "அடுத்து",
+  "popoverSemanticsLabel": "பாப்ஓவர்"
 }

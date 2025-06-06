@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Превъртане нагоре",
   "selectScrollDownSemanticsLabel": "Превъртане надолу",
   "paginationPrevious": "Предишен",
-  "paginationNext": "Напред"
+  "paginationNext": "Напред",
+  "popoverSemanticsLabel": "Изскачащ прозорец"
 }

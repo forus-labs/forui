@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Casetă de dialog",
+  "dialogSemanticsLabel": "Casetă de dialog",
   "sheetSemanticsLabel": "Foaie",
   "barrierOnTapHint": "Închideți $modalRouteContentName",
   "barrierLabel": "Material",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Derulează în sus",
   "selectScrollDownSemanticsLabel": "Derulează în jos",
   "paginationPreviousSemanticsLabel": "Anterior",
-  "paginationNextSemanticsLabel": "Înainte"
+  "paginationNextSemanticsLabel": "Înainte",
+  "popoverSemanticsLabel": "Fereastră contextuală"
 }

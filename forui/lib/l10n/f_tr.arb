@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "İletişim kutusu",
+  "dialogSemanticsLabel": "İletişim kutusu",
   "sheetSemanticsLabel": "sayfa",
   "barrierOnTapHint": "$modalRouteContentName içeriğini kapat",
   "barrierLabel": "opaklık katmanı",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Yukarı kaydır",
   "selectScrollDownSemanticsLabel": "Aşağı kaydır",
   "paginationPreviousSemanticsLabel": "Önceki",
-  "paginationNextSemanticsLabel": "İleri"
+  "paginationNextSemanticsLabel": "İleri",
+  "popoverSemanticsLabel": "Açılır pencere"
 }

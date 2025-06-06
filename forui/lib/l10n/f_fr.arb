@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Boîte de dialogue",
+  "dialogSemanticsLabel": "Boîte de dialogue",
   "sheetSemanticsLabel": "sheet",
   "barrierOnTapHint": "Fermer $modalRouteContentName",
   "barrierLabel": "Fond",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Faire défiler vers le haut",
   "selectScrollDownSemanticsLabel": "Faire défiler vers le bas",
   "paginationPreviousSemanticsLabel": "Précédent",
-  "paginationNextSemanticsLabel": "Suivant"
+  "paginationNextSemanticsLabel": "Suivant",
+  "popoverSemanticsLabel": "Fenêtre contextuelle"
 }

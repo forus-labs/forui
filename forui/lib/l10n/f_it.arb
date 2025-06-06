@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Finestra di dialogo",
+  "dialogSemanticsLabel": "Finestra di dialogo",
   "sheetSemanticsLabel": "Riquadro",
   "barrierOnTapHint": "Chiudi $modalRouteContentName",
   "barrierLabel": "Rete",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Scorri verso l'alto",
   "selectScrollDownSemanticsLabel": "Scorri verso il basso",
   "paginationPreviousSemanticsLabel": "Precedente",
-  "paginationNextSemanticsLabel": "Avanti"
+  "paginationNextSemanticsLabel": "Avanti",
+  "popoverSemanticsLabel": "Finestra di sovrapposizione"
 }

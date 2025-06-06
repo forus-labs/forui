@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "เลื่อนขึ้น",
   "selectScrollDownSemanticsLabel": "เลื่อนลง",
   "paginationPrevious": "ก่อนหน้า",
-  "paginationNext": "ถัดไป"
+  "paginationNext": "ถัดไป",
+  "popoverSemanticsLabel": "ป๊อปโอเวอร์"
 }

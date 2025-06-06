@@ -59,6 +59,38 @@ class FLocalizationsRu extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Маска';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Закрыть \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Выберите дату';
+
+  @override
+  String get dateFieldInvalidDateError => 'Недействительная дата.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Диалоговое окно';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Previous';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Next';
+
+  @override
+  String get popoverSemanticsLabel => 'Всплывающее окно';
+
+  @override
   String get selectHint => 'Выберите элемент';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsRu extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Прокрутить вниз';
 
   @override
+  String get sheetSemanticsLabel => 'экран';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Previous';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Next';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Выберите дату';
-
-  @override
-  String get dateFieldInvalidDateError => 'Недействительная дата.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsRu extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Недействительное время.';
-
-  @override
-  String get dialogLabel => 'Диалоговое окно';
-
-  @override
-  String get sheetSemanticsLabel => 'экран';
-
-  @override
-  String get barrierLabel => 'Маска';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Закрыть \$modalRouteContentName';
-  }
 }

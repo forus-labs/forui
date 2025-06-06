@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "ຂໍ້ຄວາມ",
+  "dialogSemanticsLabel": "ຂໍ້ຄວາມ",
   "sheetSemanticsLabel": "ແຜ່ນ",
   "barrierOnTapHint": "ປິດ $modalRouteContentName",
   "barrierLabel": "Scrim",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "ເລື່ອນຂຶ້ນ",
   "selectScrollDownSemanticsLabel": "ເລື່ອນລົງ",
   "paginationPrevious": "ກ່ອນໜ້າ",
-  "paginationNext": "ຕໍ່ໄປ"
+  "paginationNext": "ຕໍ່ໄປ",
+  "popoverSemanticsLabel": "ປ໊ອບໂອເວີ"
 }

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Pogovorno okno",
+  "dialogSemanticsLabel": "Pogovorno okno",
   "sheetSemanticsLabel": "Razdelek",
   "barrierOnTapHint": "Zapiranje »$modalRouteContentName«",
   "barrierLabel": "Scrim",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Pomik navzgor",
   "selectScrollDownSemanticsLabel": "Pomik navzdol",
   "paginationPreviousSemanticsLabel": "Prejšnji",
-  "paginationNextSemanticsLabel": "Naprej"
+  "paginationNextSemanticsLabel": "Naprej",
+  "popoverSemanticsLabel": "Pojavno okno"
 }

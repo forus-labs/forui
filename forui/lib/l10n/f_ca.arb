@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Diàleg",
+  "dialogSemanticsLabel": "Diàleg",
   "sheetSemanticsLabel": "Full",
   "barrierOnTapHint": "Tanca $modalRouteContentName",
   "barrierLabel": "Fons atenuat",
@@ -19,5 +19,6 @@
   "selectScrollUpSemanticsLabel": "Desplaça amunt",
   "selectScrollDownSemanticsLabel": "Desplaça avall",
   "paginationPrevious": "Anterior",
-  "paginationNext": "Següent"
+  "paginationNext": "Següent",
+  "popoverSemanticsLabel": "Finestra emergent"
 }

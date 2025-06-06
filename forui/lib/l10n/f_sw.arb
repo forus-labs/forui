@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Kidirisha",
+  "dialogSemanticsLabel": "Kidirisha",
   "sheetSemanticsLabel": "Safu",
   "barrierOnTapHint": "Funga $modalRouteContentName",
   "barrierLabel": "Scrim",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Sogeza juu",
   "selectScrollDownSemanticsLabel": "Sogeza chini",
   "paginationPreviousSemanticsLabel": "Iliyotangulia",
-  "paginationNextSemanticsLabel": "Inayofuata"
+  "paginationNextSemanticsLabel": "Inayofuata",
+  "popoverSemanticsLabel": "Dirisha la haraka"
 }

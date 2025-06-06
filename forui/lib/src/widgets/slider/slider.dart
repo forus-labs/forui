@@ -20,7 +20,7 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 /// * [FDiscreteSliderController.range] for selecting a discrete range.
 /// * [FSliderStyles] for customizing a slider's appearance.
 class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection> {
-  static Widget _tooltipBuilder(FTooltipStyle _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
+  static Widget _tooltipBuilder(FTooltipController _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
 
   static String _semanticValueFormatter(double value) => '${(value * 100).toStringAsFixed(0)}%';
 
@@ -72,7 +72,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   final double? trackHitRegionCrossExtent;
 
   /// A builder that creates the tooltip. Defaults to printing the current percentage.
-  final Widget Function(FTooltipStyle, double) tooltipBuilder;
+  final Widget Function(FTooltipController, double) tooltipBuilder;
 
   /// A callback that formats the semantic label for the slider. Defaults to announcing the percentages the active track
   /// occupies.
@@ -219,7 +219,7 @@ class _Slider extends StatefulWidget {
   final BoxConstraints constraints;
   final double? mainAxisExtent;
   final double? trackHitRegionCrossExtent;
-  final Widget Function(FTooltipStyle, double) tooltipBuilder;
+  final Widget Function(FTooltipController, double) tooltipBuilder;
   final String Function(FSliderSelection)? semanticFormatterCallback;
   final String Function(double) semanticValueFormatterCallback;
   final ValueChanged<FSliderSelection>? onChange;

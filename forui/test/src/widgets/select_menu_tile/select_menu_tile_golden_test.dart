@@ -6,17 +6,13 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FMultiValueNotifier<int> controller;
-
-  setUp(() => controller = FMultiValueNotifier.radio(value: 1));
-
   group('FSelectMenuTile', () {
     group('blue screen', () {
       testWidgets('enabled', (tester) async {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectMenuTile(
-              selectController: controller,
+              initialValue: 1,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
               prefixIcon: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
@@ -36,7 +32,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FSelectMenuTile(
-              selectController: controller,
+              initialValue: 1,
               enabled: false,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
               prefixIcon: const Icon(FIcons.bluetooth),
@@ -60,7 +56,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectController: controller,
+              initialValue: 1,
               prefixIcon: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -86,7 +82,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectController: controller,
+              selectController: autoDispose(FMultiValueNotifier.radio(value: 1)),
               prefixIcon: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -115,7 +111,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectController: controller,
+              initialValue: 1,
               maxHeight: 150,
               title: const Text('Title'),
               menu: const [
@@ -143,7 +139,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectController: controller,
+              initialValue: 1,
               enabled: false,
               prefixIcon: const Icon(FIcons.calendar),
               label: const Text('Label'),
@@ -167,7 +163,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectController: controller,
+              initialValue: 1,
               prefixIcon: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -193,7 +189,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectController: controller,
+            initialValue: 1,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 250,
@@ -213,7 +209,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectController: controller,
+            initialValue: 1,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
@@ -234,7 +230,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile.builder(
-            selectController: controller,
+            initialValue: 1,
             label: const Text('Network'),
             description: const Text('Description'),
             maxHeight: 500,
@@ -251,6 +247,4 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/null-limited.png'));
     });
   });
-
-  tearDown(() => controller.dispose());
 }

@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialógové okno",
+  "dialogSemanticsLabel": "Dialógové okno",
   "sheetSemanticsLabel": "hárok",
   "barrierOnTapHint": "Zavrieť $modalRouteContentName",
   "barrierLabel": "Scrim",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Posunúť nahor",
   "selectScrollDownSemanticsLabel": "Posunúť nadol",
   "paginationPreviousSemanticsLabel": "Predchádzajúce",
-  "paginationNextSemanticsLabel": "Ďalej"
+  "paginationNextSemanticsLabel": "Ďalej",
+  "popoverSemanticsLabel": "Vyskakovacie okno"
 }

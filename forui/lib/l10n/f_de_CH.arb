@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialogfeld",
+  "dialogSemanticsLabel": "Dialogfeld",
   "shortDateSeparator": ".",
   "shortDateSuffix": "",
   "dateFieldHint": "Datum auswählen",
@@ -17,5 +17,6 @@
   "selectScrollUpSemanticsLabel": "Nach oben scrollen",
   "selectScrollDownSemanticsLabel": "Nach unten scrollen",
   "paginationPreviousSemanticsLabel": "Zurück",
-  "paginationNextSemanticsLabel": "Weiter"
+  "paginationNextSemanticsLabel": "Weiter",
+  "popoverSemanticsLabel": "Popover"
 }

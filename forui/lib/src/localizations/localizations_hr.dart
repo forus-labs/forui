@@ -59,6 +59,38 @@ class FLocalizationsHr extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Rubno';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Zatvori \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Odaberite datum';
+
+  @override
+  String get dateFieldInvalidDateError => 'Nevažeći datum.';
+
+  @override
+  String get shortDateSeparator => '. ';
+
+  @override
+  String get shortDateSuffix => '.';
+
+  @override
+  String get dialogSemanticsLabel => 'Dijalog';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Prethodno';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Sljedeće';
+
+  @override
+  String get popoverSemanticsLabel => 'Skočni prozor';
+
+  @override
   String get selectHint => 'Odaberite stavku';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsHr extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Pomakni prema dolje';
 
   @override
+  String get sheetSemanticsLabel => 'tablica';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Očisti';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Prethodno';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Sljedeće';
-
-  @override
-  String get shortDateSeparator => '. ';
-
-  @override
-  String get shortDateSuffix => '.';
-
-  @override
-  String get dateFieldHint => 'Odaberite datum';
-
-  @override
-  String get dateFieldInvalidDateError => 'Nevažeći datum.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsHr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Nevažeće vrijeme.';
-
-  @override
-  String get dialogLabel => 'Dijalog';
-
-  @override
-  String get sheetSemanticsLabel => 'tablica';
-
-  @override
-  String get barrierLabel => 'Rubno';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Zatvori \$modalRouteContentName';
-  }
 }

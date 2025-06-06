@@ -59,6 +59,38 @@ class FLocalizationsIs extends FLocalizations {
   }
 
   @override
+  String get barrierLabel => 'Möskvi';
+
+  @override
+  String barrierOnTapHint(String modalRouteContentName) {
+    return 'Loka \$modalRouteContentName';
+  }
+
+  @override
+  String get dateFieldHint => 'Veldu dagsetningu';
+
+  @override
+  String get dateFieldInvalidDateError => 'Ógild dagsetning.';
+
+  @override
+  String get shortDateSeparator => '.';
+
+  @override
+  String get shortDateSuffix => '';
+
+  @override
+  String get dialogSemanticsLabel => 'Gluggi';
+
+  @override
+  String get paginationPreviousSemanticsLabel => 'Fyrri';
+
+  @override
+  String get paginationNextSemanticsLabel => 'Næsta';
+
+  @override
+  String get popoverSemanticsLabel => 'Sprettgluggi';
+
+  @override
   String get selectHint => 'Veldu atriði';
 
   @override
@@ -74,25 +106,10 @@ class FLocalizationsIs extends FLocalizations {
   String get selectScrollDownSemanticsLabel => 'Fletta niður';
 
   @override
+  String get sheetSemanticsLabel => 'Blað';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Hreinsa';
-
-  @override
-  String get paginationPreviousSemanticsLabel => 'Fyrri';
-
-  @override
-  String get paginationNextSemanticsLabel => 'Næsta';
-
-  @override
-  String get shortDateSeparator => '.';
-
-  @override
-  String get shortDateSuffix => '';
-
-  @override
-  String get dateFieldHint => 'Veldu dagsetningu';
-
-  @override
-  String get dateFieldInvalidDateError => 'Ógild dagsetning.';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -108,18 +125,4 @@ class FLocalizationsIs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ógildur tími.';
-
-  @override
-  String get dialogLabel => 'Gluggi';
-
-  @override
-  String get sheetSemanticsLabel => 'Blað';
-
-  @override
-  String get barrierLabel => 'Möskvi';
-
-  @override
-  String barrierOnTapHint(String modalRouteContentName) {
-    return 'Loka \$modalRouteContentName';
-  }
 }

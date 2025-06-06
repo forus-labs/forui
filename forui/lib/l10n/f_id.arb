@@ -1,5 +1,5 @@
 {
-  "dialogLabel": "Dialog",
+  "dialogSemanticsLabel": "Dialog",
   "sheetSemanticsLabel": "Sheet",
   "barrierOnTapHint": "Tutup $modalRouteContentName",
   "barrierLabel": "Scrim",
@@ -20,5 +20,6 @@
   "selectScrollUpSemanticsLabel": "Gulir ke atas",
   "selectScrollDownSemanticsLabel": "Gulir ke bawah",
   "paginationPreviousSemanticsLabel": "Sebelumnya",
-  "paginationNextSemanticsLabel": "Berikutnya"
+  "paginationNextSemanticsLabel": "Berikutnya",
+  "popoverSemanticsLabel": "Popover"
 }
