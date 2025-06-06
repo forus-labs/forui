@@ -6,10 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 
-import 'threshold_file_comparator.dart';
-
-const _kGoldenTestsThreshold = 0.01 / 100;
-
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   LeakTesting.enable();
   LeakTesting.settings = LeakTesting.settings.withIgnored(
@@ -17,11 +13,11 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
     classes: ['Image', 'ImageInfo', 'ImageStreamCompleterHandle', '_CachedImage'],
   );
 
-  await configureGoldenTests(_kGoldenTestsThreshold);
+  await configureGoldenTests();
   await testMain();
 }
 
-Future<void> configureGoldenTests(double threshold) async {
+Future<void> configureGoldenTests() async {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final workingDirectory = Directory.current.path.contains('forui${Platform.pathSeparator}forui')
@@ -41,17 +37,15 @@ Future<void> configureGoldenTests(double threshold) async {
 
   await lucide.load();
 
-  if (goldenFileComparator case final LocalFileComparator _) {
-    goldenFileComparator = ThresholdComparator(
+  if (goldenFileComparator is LocalFileComparator) {
+    goldenFileComparator = LocalFileComparator(
       // flutter_test's LocalFileComparator expects the test's URI to be passed
       // as an argument, but it only uses it to parse the baseDir in order to
       // obtain the directory where the golden images will be placed.
       // As such, we use the default `testUrl`, which is only the `baseDir` and
       // append a generically named `test.dart` so that the `baseDir` is
       // properly extracted.
-      Uri.parse('$workingDirectory/test/golden/test.dart'),
-      // Uri.parse('$workingDirectory/test/golden/${Platform.operatingSystem}/test.dart'),
-      threshold,
+      Uri.parse('$workingDirectory/test/golden/${Platform.operatingSystem}/test.dart'),
     );
   }
 }

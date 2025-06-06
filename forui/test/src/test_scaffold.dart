@@ -7,13 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'threshold_file_comparator.dart';
 
 final relativePath = Directory.current.path.contains('forui${Platform.pathSeparator}forui')
     ? '.'
     : '${Directory.current.path}/forui';
 
-MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath(blueScreen, null);
+MatchesGoldenFile get isBlueScreen => MatchesGoldenFile.forStringPath('blue-screen.png', null);
 
 Future<void> expectBlueScreen(dynamic actual) => expectLater(actual, isBlueScreen);
 
