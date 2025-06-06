@@ -75,6 +75,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/label/horizontal', page: HorizontalLabelRoute.page),
     AutoRoute(path: '/line-calendar/default', page: LineCalendarRoute.page),
     AutoRoute(path: '/modal-sheet/default', page: ModalSheetRoute.page),
+    AutoRoute(path: '/modal-sheet/blurred', page: BlurredModalSheetRoute.page),
     AutoRoute(path: '/modal-sheet/draggable', page: DraggableModalSheetRoute.page),
     AutoRoute(path: '/pagination/default', page: PaginationRoute.page),
     AutoRoute(path: '/pagination/custom-icon', page: PaginationCustomIconRoute.page),

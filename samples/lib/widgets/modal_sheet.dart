@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -51,6 +53,29 @@ class ModalSheetPage extends Sample {
         ),
       ),
     ],
+  );
+}
+
+@RoutePage()
+class BlurredModalSheetPage extends Sample {
+  BlurredModalSheetPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext context) => Center(
+    child: FButton(
+      child: const Text('Open'),
+      onPress: () => showFSheet(
+        style: context.theme.sheetStyle.copyWith(
+          barrierFilter: (animation) => ImageFilter.compose(
+            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
+          ),
+        ),
+        context: context,
+        side: FLayout.ltr,
+        builder: (context) => const Form(side: FLayout.ltr),
+      ),
+    ),
   );
 }
 
