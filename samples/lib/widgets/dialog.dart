@@ -55,7 +55,10 @@ class BlurredDialogPage extends Sample {
       onPress: () => showFDialog(
         context: context,
         style: context.theme.dialogStyle.copyWith(
-          barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+          barrierFilter: (animation) => ImageFilter.compose(
+            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
+          ),
         ),
         builder: (context, style) => FTheme(
           data: theme,

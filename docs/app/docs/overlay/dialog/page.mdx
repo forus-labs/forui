@@ -168,7 +168,7 @@ We recommend using the vertical layout on mobile devices.
     <Widget name='dialog' variant='blurred' height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-      ```dart {7-9, 12} copy
+      ```dart {7-12, 15} copy
       Column(
         children: [
           IntrinsicWidth(
@@ -176,7 +176,10 @@ We recommend using the vertical layout on mobile devices.
               child: const Text('Show Dialog'),
               onPress: () => showFDialog(
                 style: context.theme.dialogStyle.copyWith(
-                  barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                  barrierFilter: (animation) => ImageFilter.compose(
+                    outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                    inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
+                  ),
                 ),
                 context: context,
                 builder: (context, style) => FDialog(
