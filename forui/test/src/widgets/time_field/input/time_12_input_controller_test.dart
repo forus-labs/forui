@@ -68,14 +68,16 @@ void main() {
       ),
     ].indexed) {
       test('single separator - $index', () {
-        final controller = autoDispose(TimeInputController.test(
-          FLocalizationsEnSg(),
-          autoDispose(FTimeFieldController(vsync: const TestVSync())),
-          DateFormat.jm('en_SG'),
-          TestScaffold.blueScreen.textFieldStyle,
-          'HH:MM --',
-          old,
-        ))..value = value;
+        final controller = autoDispose(
+          TimeInputController.test(
+            FLocalizationsEnSg(),
+            autoDispose(FTimeFieldController(vsync: const TestVSync())),
+            DateFormat.jm('en_SG'),
+            TestScaffold.blueScreen.textFieldStyle,
+            'HH:MM --',
+            old,
+          ),
+        )..value = value;
 
         expect(controller.value, expected);
       });
@@ -173,14 +175,16 @@ void main() {
     ),
   ].indexed) {
     testWidgets('adjust - $index', (tester) async {
-      final controller = autoDispose(TimeInputController.test(
-        FLocalizationsEnSg(),
-        autoDispose(FTimeFieldController(vsync: const TestVSync())),
-        DateFormat.jm('en_SG'),
-        TestScaffold.blueScreen.textFieldStyle,
-        'HH:MM --',
-        value,
-      ))..adjust(amount);
+      final controller = autoDispose(
+        TimeInputController.test(
+          FLocalizationsEnSg(),
+          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          DateFormat.jm('en_SG'),
+          TestScaffold.blueScreen.textFieldStyle,
+          'HH:MM --',
+          value,
+        ),
+      )..adjust(amount);
 
       expect(controller.value, expectedText);
     });
