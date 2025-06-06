@@ -8,7 +8,7 @@ import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 
 import 'threshold_file_comparator.dart';
 
-const _kGoldenTestsThreshold = 0.5 / 100;
+const _kGoldenTestsThreshold = 0.01 / 100;
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   LeakTesting.enable();
@@ -50,6 +50,7 @@ Future<void> configureGoldenTests(double threshold) async {
       // append a generically named `test.dart` so that the `baseDir` is
       // properly extracted.
       Uri.parse('$workingDirectory/test/golden/test.dart'),
+      // Uri.parse('$workingDirectory/test/golden/${Platform.operatingSystem}/test.dart'),
       threshold,
     );
   }
