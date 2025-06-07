@@ -159,14 +159,16 @@ void main() {
     ),
   ].indexed) {
     testWidgets('adjust - $index', (tester) async {
-      final controller = autoDispose(TimeInputController.test(
-        FLocalizationsFrCa(),
-        autoDispose(FTimeFieldController(vsync: const TestVSync())),
-        DateFormat.jm('fr_CA'),
-        TestScaffold.blueScreen.textFieldStyle,
-        'HH h MM',
-        value,
-      ))..adjust(amount);
+      final controller = autoDispose(
+        TimeInputController.test(
+          FLocalizationsFrCa(),
+          autoDispose(FTimeFieldController(vsync: const TestVSync())),
+          DateFormat.jm('fr_CA'),
+          TestScaffold.blueScreen.textFieldStyle,
+          'HH h MM',
+          value,
+        ),
+      )..adjust(amount);
 
       expect(controller.value, expectedText);
     });
