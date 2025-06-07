@@ -82,7 +82,7 @@ void main() {
     });
 
     testWidgets('clears text-field', (tester) async {
-      final controller = TextEditingController(text: 'Testing');
+      final controller = autoDispose(TextEditingController(text: 'Testing'));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -100,7 +100,7 @@ void main() {
     });
 
     testWidgets('suffix & clears text-field', (tester) async {
-      final controller = TextEditingController(text: 'Testing');
+      final controller = autoDispose(TextEditingController(text: 'Testing'));
 
       await tester.pumpWidget(
         TestScaffold.app(

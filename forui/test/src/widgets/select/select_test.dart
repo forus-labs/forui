@@ -36,6 +36,8 @@ void main() {
     controller = FSelectController<String>(vsync: const TestVSync());
   });
 
+  tearDown(() => controller.dispose());
+
   group('form', () {
     testWidgets('set initial value using initialValue', (tester) async {
       final key = GlobalKey<FormState>();
@@ -141,6 +143,8 @@ void main() {
 
   group('controller', () {
     testWidgets('update', (tester) async {
+      final controller = FSelectController<String>(vsync: const TestVSync());
+
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.fromMap(letters, key: key, controller: controller),
@@ -161,6 +165,8 @@ void main() {
     });
 
     testWidgets('dispose', (tester) async {
+      final controller = FSelectController<String>(vsync: const TestVSync());
+
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.fromMap(letters, key: key, controller: controller),
@@ -186,7 +192,7 @@ void main() {
       int count = 0;
       void onChange(String? _) => count++;
 
-      final firstController = FSelectController<String>(vsync: const TestVSync());
+      final firstController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.fromMap(letters, controller: firstController, onChange: onChange),
@@ -198,7 +204,7 @@ void main() {
 
       expect(count, 1);
 
-      final secondController = FSelectController<String>(vsync: const TestVSync());
+      final secondController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.fromMap(letters, controller: secondController, onChange: onChange),
@@ -216,7 +222,7 @@ void main() {
       int first = 0;
       int second = 0;
 
-      final controller = FSelectController<String>(vsync: const TestVSync());
+      final controller = autoDispose(FSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.fromMap(letters, controller: controller, onChange: (_) => first++),
@@ -245,7 +251,7 @@ void main() {
       int first = 0;
       int second = 0;
 
-      final firstController = FSelectController<String>(vsync: const TestVSync());
+      final firstController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.fromMap(letters, controller: firstController, onChange: (_) => first++),
@@ -257,7 +263,7 @@ void main() {
 
       expect(first, 1);
 
-      final secondController = FSelectController<String>(vsync: const TestVSync());
+      final secondController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.fromMap(letters, controller: secondController, onChange: (_) => second++),
@@ -275,7 +281,7 @@ void main() {
     testWidgets('disposed when controller is external', (tester) async {
       int count = 0;
 
-      final controller = FSelectController<String>(vsync: const TestVSync());
+      final controller = autoDispose(FSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.fromMap(letters, controller: controller, onChange: (_) => count++),

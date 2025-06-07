@@ -16,7 +16,8 @@ void main() {
   ]) {
     group('$name - constructor', () {
       testWidgets('cannot provide both controller and initialTime', (tester) async {
-        expect(() => constructor(FTimeFieldController(vsync: tester), const FTime()), throwsAssertionError);
+        final controller = autoDispose(FTimeFieldController(vsync: tester));
+        expect(() => constructor(controller, const FTime()), throwsAssertionError);
       });
     });
   }
@@ -79,13 +80,13 @@ void main() {
   ]) {
     group(name, () {
       testWidgets('update controller', (tester) async {
-        final first = FTimeFieldController(vsync: tester);
+        final first = autoDispose(FTimeFieldController(vsync: tester));
 
         await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
 
         expect(first.disposed, false);
 
-        final second = FTimeFieldController(vsync: tester);
+        final second = autoDispose(FTimeFieldController(vsync: tester));
 
         await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second, null))));
 
@@ -99,7 +100,7 @@ void main() {
       });
 
       testWidgets('dispose controller', (tester) async {
-        final controller = FTimeFieldController(vsync: tester);
+        final controller = autoDispose(FTimeFieldController(vsync: tester));
 
         await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(controller, null))));
 
@@ -117,13 +118,13 @@ void main() {
       });
 
       testWidgets('update focus', (tester) async {
-        final first = FocusNode();
+        final first = autoDispose(FocusNode());
 
         await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
 
         expect(first.hasListeners, true);
 
-        final second = FocusNode();
+        final second = autoDispose(FocusNode());
 
         await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, second))));
 
@@ -132,7 +133,7 @@ void main() {
       });
 
       testWidgets('dispose focus', (tester) async {
-        final first = FocusNode();
+        final first = autoDispose(FocusNode());
 
         await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
         expect(first.hasListeners, true);
@@ -152,7 +153,7 @@ void main() {
         int count = 0;
         void onChange(FTime? _) => count++;
 
-        final firstController = FTimeFieldController(vsync: tester);
+        final firstController = autoDispose(FTimeFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(firstController, onChange)));
 
         firstController.value = const FTime(1);
@@ -160,7 +161,7 @@ void main() {
 
         expect(count, 1);
 
-        final secondController = FTimeFieldController(vsync: tester);
+        final secondController = autoDispose(FTimeFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(secondController, onChange)));
 
         secondController.value = const FTime(2);
@@ -173,7 +174,7 @@ void main() {
         int first = 0;
         int second = 0;
 
-        final controller = FTimeFieldController(vsync: tester);
+        final controller = autoDispose(FTimeFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => first++)));
 
         controller.value = const FTime(1);
@@ -194,14 +195,14 @@ void main() {
         int first = 0;
         int second = 0;
 
-        final firstController = FTimeFieldController(vsync: tester);
+        final firstController = autoDispose(FTimeFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(firstController, (_) => first++)));
 
         firstController.value = const FTime(1);
         await tester.pump();
         expect(first, 1);
 
-        final secondController = FTimeFieldController(vsync: tester);
+        final secondController = autoDispose(FTimeFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(secondController, (_) => second++)));
 
         secondController.value = const FTime(2);
@@ -217,7 +218,7 @@ void main() {
       testWidgets('disposed when controller is external', (tester) async {
         int count = 0;
 
-        final controller = FTimeFieldController(vsync: tester);
+        final controller = autoDispose(FTimeFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => count++)));
 
         controller.value = const FTime(1);

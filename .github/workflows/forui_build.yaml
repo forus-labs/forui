@@ -19,7 +19,7 @@ jobs:
         working-directory: forui
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [macos-latest, windows-latest]
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
               echo "$output"
               exit 1
           fi
-        if: runner.os == 'Linux'
+        if: runner.os == 'macOS'
       - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

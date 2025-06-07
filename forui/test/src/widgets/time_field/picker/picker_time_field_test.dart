@@ -51,15 +51,17 @@ void main() {
   });
 
   testWidgets('validator', (tester) async {
-    final controller = FTimeFieldController(
-      vsync: tester,
-      validator: (date) {
-        if (date == const FTime(10)) {
-          return 'Custom error.';
-        }
+    final controller = autoDispose(
+      FTimeFieldController(
+        vsync: tester,
+        validator: (date) {
+          if (date == const FTime(10)) {
+            return 'Custom error.';
+          }
 
-        return null;
-      },
+          return null;
+        },
+      ),
     );
 
     await tester.pumpWidget(

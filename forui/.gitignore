@@ -29,7 +29,8 @@ migrate_working_dir/
 .flutter-plugins
 .flutter-plugins-dependencies
 build/
-test/golden/failures/
+test/golden/macos/failures/
+test/golden/windows/failures/
 test/**/*_test.mocks.dart
 /.temp/
 .i10n.txt

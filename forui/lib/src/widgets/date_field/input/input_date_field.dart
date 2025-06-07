@@ -175,7 +175,9 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
 
   @override
   void dispose() {
-    _focus.dispose();
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
 
     if (widget.controller == null) {
       _controller.dispose();

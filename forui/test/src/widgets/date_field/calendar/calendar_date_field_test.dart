@@ -47,15 +47,17 @@ void main() {
   }
 
   testWidgets('validator', (tester) async {
-    final controller = FDateFieldController(
-      vsync: const TestVSync(),
-      validator: (date) {
-        if (date == DateTime.utc(2025, 1, 16)) {
-          return 'Custom error.';
-        }
+    final controller = autoDispose(
+      FDateFieldController(
+        vsync: const TestVSync(),
+        validator: (date) {
+          if (date == DateTime.utc(2025, 1, 16)) {
+            return 'Custom error.';
+          }
 
-        return null;
-      },
+          return null;
+        },
+      ),
     );
 
     await tester.pumpWidget(
