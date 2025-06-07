@@ -35,7 +35,7 @@ void main() {
     nodes[nodes.length ~/ 2 - 1].requestFocus();
     await tester.pumpAndSettle();
 
-    await expectLater(find.byType(TestScaffold), isBlueScreen);
+    await expectBlueScreen(find.byType(TestScaffold));
   });
 
   group('states', () {

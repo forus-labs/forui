@@ -43,6 +43,7 @@ dev_dependencies:
     sdk: flutter
   forui_internal_gen:
   http: ^1.2.2
+  image: ^4.5.4
   leak_tracker_flutter_testing: any
   mockito: ^5.4.6
   path: ^1.9.1

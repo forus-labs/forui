@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -21,9 +20,7 @@ void main() {
       ),
     );
 
-    final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-    await gesture.addPointer(location: Offset.zero);
-    addTearDown(gesture.removePointer);
+    final gesture = await tester.createPointerGesture();
     await tester.pump();
 
     await gesture.moveTo(tester.getCenter(find.text('Button')));

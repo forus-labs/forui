@@ -4,6 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/alert.dart';
+import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
+import 'package:meta/meta.dart';
 import '../test_scaffold.dart';
 
 void main() {
@@ -19,7 +21,7 @@ void main() {
         ),
       );
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
 
     for (final theme in TestScaffold.themes) {
