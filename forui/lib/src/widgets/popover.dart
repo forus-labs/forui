@@ -428,8 +428,8 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final BoxDecoration decoration;
 
   /// {@template forui.widgets.FPopoverStyle.barrierFilter}
-  /// A callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter] that is
-  /// used as the barrier. Defaults to null.
+  /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
+  /// that is used as the barrier. Defaults to null.
   ///
   /// ## Examples
   /// ```dart
@@ -452,9 +452,30 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final ImageFilter Function(double animation)? barrierFilter;
 
-  /// An optional background filter applied to the popover.
+  /// {@template forui.widgets.FPopoverStyle.backgroundFilter}
+  /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
+  /// that is used as the background. Defaults to null.
   ///
-  /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
+  /// This is typically combined with a transparent/translucent background to create a glassmorphic effect.
+  ///
+  /// ## Examples
+  /// ```dart
+  /// // Blurred
+  /// (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5);
+  ///
+  /// // Solid color
+  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation), BlendMode.srcOver);
+  ///
+  /// // Tinted
+  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver);
+  ///
+  /// // Blurred & tinted
+  /// (animation) => ImageFilter.compose(
+  ///   outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver),
+  /// );
+  /// ```
+  /// {@endtemplate}
   @override
   final ImageFilter? backgroundFilter;
 

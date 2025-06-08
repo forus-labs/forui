@@ -5,6 +5,11 @@
 * Add `FDialogRoute`.
 * Add `FDialogStyle.barrierFilter`.
 * Add `FDialogStyle.backgroundFilter`.
+* Add `FDialogStyle.entranceExitDuration`.
+* Add `FDialogStyle.entranceCurve`.
+* Add `FDialogStyle.exitCurve`.
+* Add `FDialogStyle.fadeTween`.
+* Add `FDialogStyle.scaleTween`.
 
 
 ### `FPopover`

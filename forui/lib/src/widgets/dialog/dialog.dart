@@ -74,9 +74,6 @@ Future<T?> showFDialog<T>({
 ///
 /// [showFDialog] should be preferred in most cases.
 class FDialogRoute<T> extends RawDialogRoute<T> {
-  static final _fadeTween = Tween<double>(begin: 0, end: 1);
-  static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
-
   /// The dialog's style.
   final FDialogStyle style;
 
@@ -90,9 +87,6 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   /// 'Double tap to ...'.
   final String? barrierOnTapHint;
 
-  @override
-  final Duration transitionDuration;
-
   CurvedAnimation? _fade;
   CurvedAnimation? _scale;
 
@@ -103,7 +97,6 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
     this.barrierDismissible = true,
     this.barrierLabel,
     this.barrierOnTapHint,
-    this.transitionDuration = const Duration(milliseconds: 200),
     CapturedThemes? capturedThemes,
     bool useSafeArea = true,
     super.settings,
@@ -160,18 +153,18 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
     if (_fade?.parent != animation || _scale?.parent != animation) {
       _fade?.dispose();
       _scale?.dispose();
-      _fade = CurvedAnimation(parent: animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
-      _scale = CurvedAnimation(parent: animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+      _fade = CurvedAnimation(parent: animation, curve: style.entranceCurve, reverseCurve: style.exitCurve);
+      _scale = CurvedAnimation(parent: animation, curve: style.entranceCurve, reverseCurve: style.exitCurve);
     }
 
-    final fade = _fade!.drive(_fadeTween);
-    final scale = _scale!.drive(_scaleTween);
+    final fade = _fade!.drive(style.fadeTween);
+    final scale = _scale!.drive(style.scaleTween);
 
     return FadeTransition(
       opacity: fade,
       child: ScaleTransition(
         scale: scale,
-        child: super.buildTransitions(context, animation, secondaryAnimation, child),
+        child: child,
       ),
     );
   }
@@ -185,6 +178,9 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
 
   @override
   Color? get barrierColor => Colors.transparent;
+
+  @override
+  Duration get transitionDuration => style.entranceExitDuration;
 }
 
 /// A modal dialog.
@@ -310,11 +306,11 @@ class FDialog extends StatelessWidget {
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
     Widget dialog = DecoratedBox(decoration: style.decoration, child: builder(context, style));
-    if (style.backgroundFilter case final background?) {
+    if (style.backgroundFilter case final filter?) {
       dialog = Stack(
         children: [
           Positioned.fill(
-            child: BackdropFilter(filter: background, child: Container()),
+            child: ClipRect(child: BackdropFilter(filter: filter, child: Container())),
           ),
           dialog,
         ],
@@ -373,6 +369,36 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   @override
   final ImageFilter? backgroundFilter;
 
+  /// The dialog's entrance/exit animation duration. Defaults to 200ms.
+  ///
+  /// This is only supported by [showFDialog].
+  @override
+  final Duration entranceExitDuration;
+
+  /// The dialog's entrance animation curve. Defaults to [Curves.easeOutQuad].
+  ///
+  /// This is only supported by [showFDialog].
+  @override
+  final Curve entranceCurve;
+
+  /// The dialog's entrance animation curve. Defaults to [Curves.easeInQuad].
+  ///
+  /// This is only supported by [showFDialog].
+  @override
+  final Curve exitCurve;
+
+  /// The tween used to animate the dialog's fade in and out. Defaults to `[0, 1]`.
+  ///
+  /// This is only supported by [showFDialog].
+  @override
+  final Tween<double> fadeTween;
+
+  /// The tween used to animate the dialog's scale in and out. Defaults to `[0.95, 1]`.
+  ///
+  /// This is only supported by [showFDialog].
+  @override
+  final Tween<double> scaleTween;
+
   /// The decoration.
   @override
   final BoxDecoration decoration;
@@ -403,16 +429,22 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   final FDialogContentStyle verticalStyle;
 
   /// Creates a [FDialogStyle].
-  const FDialogStyle({
+  FDialogStyle({
     required this.decoration,
     required this.horizontalStyle,
     required this.verticalStyle,
     this.barrierFilter,
+    this.entranceExitDuration = const Duration(milliseconds: 200),
+    this.entranceCurve = Curves.easeOutQuad,
+    this.exitCurve = Curves.easeInQuad,
     this.backgroundFilter,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,
     this.insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
-  });
+    Tween<double>? fadeTween,
+    Tween<double>? scaleTween,
+  }) : fadeTween = fadeTween ?? Tween<double>(begin: 0, end: 1),
+       scaleTween = scaleTween ?? Tween<double>(begin: 0.95, end: 1);
 
   /// Creates a [FDialogStyle] that inherits its properties.
   factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {

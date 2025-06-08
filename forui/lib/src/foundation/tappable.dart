@@ -353,8 +353,8 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    animation = (widget.style?.animationTween ?? Tween(begin: 1.0, end: 0.97)).animate(controller);
+    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 150));
+    animation = (widget.style?.animationTween ?? FTappableAnimations.bounce).animate(controller);
   }
 
   @override

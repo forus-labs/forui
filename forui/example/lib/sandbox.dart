@@ -1,3 +1,4 @@
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -84,7 +85,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
               backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               decoration: BoxDecoration(
                 borderRadius: context.theme.style.borderRadius,
-                color: context.theme.colors.background.withValues(alpha: 0.2),
+                color: context.theme.colors.background.withValues(alpha: 0.5),
               ),
             ),
             context: context,
