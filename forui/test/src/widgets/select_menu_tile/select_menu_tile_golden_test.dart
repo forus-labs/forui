@@ -25,7 +25,7 @@ void main() {
           ),
         );
 
-        await expectBlueScreen(find.byType(TestScaffold));
+        await expectBlueScreen();
       });
 
       testWidgets('disabled', (tester) async {
@@ -46,7 +46,7 @@ void main() {
           ),
         );
 
-        await expectBlueScreen(find.byType(TestScaffold));
+        await expectBlueScreen();
       });
     });
 

@@ -179,9 +179,17 @@ It is recommended to wrap disposable objects created in tests with `autoDispose(
 
 ## Writing Golden Tests
 
-Golden images are generated in the `test/golden` directory instead of relative to the test file. 
+Golden images are generated in the `test/golden` directory instead of relative to the test file.
 
-Only the `Inter` font is loaded by default.
+Golden tests should follow these guidelines:
+* Golden test files should be suffixed with `golden_test`, i.e. `button_golden_test.dart`.
+* Widgets under test should be tested against all themes specified in `TestScaffold.themes`.
+* Widgets under test should be wrapped in a `TestScaffold`.
+
+See [button_golden_test.dart](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/forui/test/src/widgets/button/button_golden_test.dart).
+
+The CI pipeline will automatically generate golden images for all golden tests on Windows & macOS. Contributors on Linux
+should *not** commit locally generated golden images.
 
 ### Blue Screen Tests
 
@@ -207,36 +215,6 @@ testWidgets('blue screen', (tester) async {
   await expectBlueScreen(find.byType(TestScaffold));
 });
 ```
-
-### Configuring Golden Test Threshold
-
-By default, `matchesGoldenFile(...)` has a 0.5% threshold. In other words, images that differ by 0.5% or less will be 
-considered a match. Due to how different platforms render the images differently, this threshold may need to be adjusted.
-
-To adjust the threshold, move the golden test file into a nested folder if it is in `test/src/widgets/` and place a 
-`flutter_test_config.dart` file beside the golden test file.
-
-Copy the following code into the `flutter_test_config.dart` file:
-```dart
-import 'dart:async';
-
-import '../../flutter_test_config.dart'; // Adjust path based on the location of the `test/flutter_test_config.dart`. 
-
-const _kGoldenTestsThreshold = 7 / 100; // Adjust the threshold as necessary, i.e. 7%.
-
-Future<void> testExecutable(FutureOr<void> Function() testMain) async {
-  await configureGoldenTests(_kGoldenTestsThreshold);
-  await testMain();
-}
-```
-
-Golden tests should follow these guidelines:
-* Golden test files should be suffixed with `golden_test`, i.e. `button_golden_test.dart`.
-* Widgets under test should be tested against all themes specified in `TestScaffold.themes`.
-* Widgets under test should be wrapped in a `TestScaffold`.
-
-See [button_golden_test.dart](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/forui/test/src/widgets/button/button_golden_test.dart).
-
 
 ## Writing Documentation
 

@@ -73,7 +73,7 @@ void main() {
 
   group('controller', () {
     testWidgets('old controller is not disposed', (tester) async {
-      final first = FDateFieldController(vsync: tester);
+      final first = autoDispose(FDateFieldController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FDateField(
@@ -84,7 +84,7 @@ void main() {
         ),
       );
 
-      final second = FDateFieldController(vsync: tester);
+      final second = autoDispose(FDateFieldController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold.app(
           child: FDateField(
@@ -100,7 +100,7 @@ void main() {
     });
 
     testWidgets('input only - change locale without changing controller', (tester) async {
-      final controller = FDateFieldController(vsync: tester);
+      final controller = autoDispose(FDateFieldController(vsync: tester));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -120,7 +120,7 @@ void main() {
     });
 
     testWidgets('calendar only - change locale without changing controller', (tester) async {
-      final controller = FDateFieldController(vsync: tester);
+      final controller = autoDispose(FDateFieldController(vsync: tester));
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -144,14 +144,14 @@ void main() {
     ]) {
       group(name, () {
         testWidgets('update controller', (tester) async {
-          final first = FDateFieldController(vsync: tester);
+          final first = autoDispose(FDateFieldController(vsync: tester));
 
           await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
 
           expect(first.hasListeners, true);
           expect(first.disposed, false);
 
-          final second = FDateFieldController(vsync: tester);
+          final second = autoDispose(FDateFieldController(vsync: tester));
 
           await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second, null))));
 
@@ -163,7 +163,7 @@ void main() {
         });
 
         testWidgets('dispose controller', (tester) async {
-          final controller = FDateFieldController(vsync: tester);
+          final controller = autoDispose(FDateFieldController(vsync: tester));
 
           await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(controller, null))));
 
@@ -178,13 +178,13 @@ void main() {
         });
 
         testWidgets('update focus', (tester) async {
-          final first = FocusNode();
+          final first = autoDispose(FocusNode());
 
           await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
 
           expect(first.hasListeners, true);
 
-          final second = FocusNode();
+          final second = autoDispose(FocusNode());
 
           await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, second))));
 
@@ -193,7 +193,7 @@ void main() {
         });
 
         testWidgets('dispose focus', (tester) async {
-          final first = FocusNode();
+          final first = autoDispose(FocusNode());
 
           await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
           expect(first.hasListeners, true);
@@ -228,7 +228,7 @@ void main() {
         int count = 0;
         void onChange(DateTime? _) => count++;
 
-        final firstController = FDateFieldController(vsync: tester);
+        final firstController = autoDispose(FDateFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(firstController, onChange)));
 
         firstController.value = DateTime.utc(2023);
@@ -236,7 +236,7 @@ void main() {
 
         expect(count, 1);
 
-        final secondController = FDateFieldController(vsync: tester);
+        final secondController = autoDispose(FDateFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(secondController, onChange)));
 
         firstController.value = DateTime.utc(2024);
@@ -250,7 +250,7 @@ void main() {
         int first = 0;
         int second = 0;
 
-        final controller = FDateFieldController(vsync: tester);
+        final controller = autoDispose(FDateFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => first++)));
 
         controller.value = DateTime.utc(2023);
@@ -271,14 +271,14 @@ void main() {
         int first = 0;
         int second = 0;
 
-        final firstController = FDateFieldController(vsync: tester);
+        final firstController = autoDispose(FDateFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(firstController, (_) => first++)));
 
         firstController.value = DateTime.utc(2023);
         await tester.pump();
         expect(first, 1);
 
-        final secondController = FDateFieldController(vsync: tester);
+        final secondController = autoDispose(FDateFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(secondController, (_) => second++)));
 
         secondController.value = DateTime.utc(2024);
@@ -294,7 +294,7 @@ void main() {
       testWidgets('disposed when controller is external', (tester) async {
         int count = 0;
 
-        final controller = FDateFieldController(vsync: tester);
+        final controller = autoDispose(FDateFieldController(vsync: tester));
         await tester.pumpWidget(TestScaffold.app(child: field(controller, (_) => count++)));
 
         controller.value = DateTime.utc(2023);

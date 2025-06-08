@@ -134,7 +134,7 @@ void main() {
         ),
       );
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
 
     for (final theme in TestScaffold.themes) {

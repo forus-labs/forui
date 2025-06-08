@@ -42,15 +42,52 @@ jobs:
           cache: true
 
       - run: flutter pub get
-      - run: dart run ../tool/sort.dart forui
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: dart run ./tool/cli_generator/main.dart
-      - run: dart format .
+      - run: dart run ../tool/sort.dart forui
       - run: dart fix --apply
-        # We format the code again since the required trailing comma lint fixes causes code to be formatted differently
       - run: dart format .
 
       - uses: EndBug/add-and-commit@v9
         with:
           pull: '--rebase --autostash'
+          message: 'Prepare PR for review'
           add: '*'
+
+  generate-goldens:
+    name: Generate goldens
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: forui
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest ]
+        flutter-version: [ 3.x ]
+
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: subosito/flutter-action@v2.19.0
+        with:
+          cache: true
+
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+      - run: flutter test --update-goldens
+
+      - uses: EndBug/add-and-commit@v9
+        with:
+          pull: '--rebase --autostash'
+          message: 'Update ${{ matrix.os }} goldens'
+          add: 'test/golden/**/*'

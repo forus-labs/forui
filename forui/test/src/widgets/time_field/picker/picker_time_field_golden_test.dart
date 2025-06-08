@@ -22,7 +22,7 @@ void main() {
 
     await tester.tap(find.byKey(key));
 
-    await expectBlueScreen(find.byType(TestScaffold));
+    await expectBlueScreen();
   });
 
   for (final theme in TestScaffold.themes) {

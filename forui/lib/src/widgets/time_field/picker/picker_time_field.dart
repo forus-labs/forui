@@ -147,6 +147,22 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   }
 
   @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller._picker.removeListener(_updateTextController);
+      _controller.removeValueListener(_onChange);
+    }
+
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.timeFieldStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
@@ -209,22 +225,6 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   void _onTap() {
     _controller.popover.shown ? _focus.requestFocus() : _focus.unfocus();
     _controller.popover.toggle();
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller._picker.removeListener(_updateTextController);
-      _controller.removeValueListener(_onChange);
-    }
-
-    if (widget.focusNode == null) {
-      _focus.dispose();
-    }
-    _textController.dispose();
-    super.dispose();
   }
 }
 

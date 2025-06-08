@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -97,9 +95,7 @@ void main() {
 
         expect(find.text('1'), findsExactly(2));
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.text('1').last));

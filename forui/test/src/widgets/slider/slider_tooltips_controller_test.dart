@@ -1,145 +1,162 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import 'package:forui/forui.dart';
-import 'slider_tooltips_controller_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<FTooltipController>()])
 void main() {
   final key1 = UniqueKey();
   final key2 = UniqueKey();
 
   group('FSliderTooltipsController', () {
     late FSliderTooltipsController controller;
-    late MockFTooltipController tooltip1;
-    late MockFTooltipController tooltip2;
+    late FTooltipController tooltip1;
+    late FTooltipController tooltip2;
 
     group('enabled', () {
       setUp(() {
         controller = FSliderTooltipsController(enabled: true);
-        tooltip1 = MockFTooltipController();
-        tooltip2 = MockFTooltipController();
+        tooltip1 = FTooltipController(vsync: const TestVSync());
+        tooltip2 = FTooltipController(vsync: const TestVSync());
 
         controller
           ..add(key1, tooltip1)
           ..add(key2, tooltip2);
       });
 
-      test('toggle', () {
-        controller.toggle();
+      testWidgets('toggle', (tester) async {
+        unawaited(controller.toggle());
+        await tester.pumpAndSettle();
 
-        verify(tooltip1.toggle()).called(1);
-        verify(tooltip2.toggle()).called(1);
+        expect(tooltip1.shown, true);
+        expect(tooltip2.shown, true);
       });
 
-      test('toggle single', () {
-        controller.toggle(key1);
+      testWidgets('toggle single', (tester) async {
+        unawaited(controller.toggle(key1));
+        await tester.pumpAndSettle();
 
-        verify(tooltip1.toggle()).called(1);
-        verifyNever(tooltip2.toggle());
+        expect(tooltip1.shown, true);
+        expect(tooltip2.shown, false);
       });
 
-      test('show', () {
-        controller.show();
+      testWidgets('show', (tester) async {
+        unawaited(controller.show());
+        await tester.pumpAndSettle();
 
-        verify(tooltip1.show()).called(1);
-        verify(tooltip2.show()).called(1);
+        expect(tooltip1.shown, true);
+        expect(tooltip2.shown, true);
       });
 
-      test('show single', () {
-        controller.show(key1);
+      testWidgets('show single', (tester) async {
+        unawaited(controller.show(key1));
+        await tester.pumpAndSettle();
 
-        verify(tooltip1.show()).called(1);
-        verifyNever(tooltip2.show());
+        expect(tooltip1.shown, true);
+        expect(tooltip2.shown, false);
       });
 
-      test('hide', () {
-        controller.hide();
+      testWidgets('hide', (tester) async {
+        unawaited(controller.show());
+        await tester.pumpAndSettle();
 
-        verify(tooltip1.hide()).called(1);
-        verify(tooltip2.hide()).called(1);
+        unawaited(controller.hide());
+        await tester.pumpAndSettle();
+
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, false);
+      });
+      testWidgets('hide single', (tester) async {
+        unawaited(controller.show());
+        await tester.pumpAndSettle();
+
+        unawaited(controller.hide(key1));
+        await tester.pumpAndSettle();
+
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, true);
       });
 
-      test('hide single', () {
-        controller.hide(key1);
+      testWidgets('remove', (tester) async {
+        controller.remove(key2);
 
-        verify(tooltip1.hide()).called(1);
-        verifyNever(tooltip2.hide());
-      });
+        unawaited(controller.toggle());
+        await tester.pumpAndSettle();
 
-      test('remove', () {
-        controller
-          ..remove(key2)
-          ..toggle();
-
-        verify(tooltip1.toggle()).called(1);
-        verifyNever(tooltip2.toggle());
+        expect(tooltip1.shown, true);
+        expect(tooltip2.shown, false);
       });
     });
 
     group('disabled', () {
       setUp(() {
         controller = FSliderTooltipsController(enabled: false);
-        tooltip1 = MockFTooltipController();
-        tooltip2 = MockFTooltipController();
+        tooltip1 = FTooltipController(vsync: const TestVSync());
+        tooltip2 = FTooltipController(vsync: const TestVSync());
 
         controller
           ..add(key1, tooltip1)
           ..add(key2, tooltip2);
       });
 
-      test('toggle', () {
-        controller.toggle();
+      testWidgets('toggle', (tester) async {
+        unawaited(controller.toggle());
+        await tester.pumpAndSettle();
 
-        verifyNever(tooltip1.toggle());
-        verifyNever(tooltip2.toggle());
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, false);
       });
 
-      test('toggle single', () {
-        controller.toggle(key1);
+      testWidgets('toggle single', (tester) async {
+        unawaited(controller.toggle(key1));
+        await tester.pumpAndSettle();
 
-        verifyNever(tooltip1.toggle());
-        verifyNever(tooltip2.toggle());
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, false);
       });
 
-      test('show', () {
-        controller.show();
+      testWidgets('show', (tester) async {
+        unawaited(controller.show());
+        await tester.pumpAndSettle();
 
-        verifyNever(tooltip1.show());
-        verifyNever(tooltip2.show());
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, false);
       });
 
-      test('show single', () {
-        controller.show(key1);
+      testWidgets('show single', (tester) async {
+        unawaited(controller.show(key1));
+        await tester.pumpAndSettle();
 
-        verifyNever(tooltip1.show());
-        verifyNever(tooltip2.show());
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, false);
       });
 
-      test('hide', () {
-        controller.hide();
+      testWidgets('hide', (tester) async {
+        unawaited(controller.hide());
+        await tester.pumpAndSettle();
 
-        verifyNever(tooltip1.hide());
-        verifyNever(tooltip2.hide());
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, false);
       });
 
-      test('hide single', () {
-        controller.hide(key1);
+      testWidgets('hide single', (tester) async {
+        unawaited(controller.hide(key1));
+        await tester.pumpAndSettle();
 
-        verifyNever(tooltip1.hide());
-        verifyNever(tooltip2.hide());
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, false);
       });
 
-      test('remove', () {
-        controller
-          ..remove(key2)
-          ..toggle();
+      testWidgets('remove', (tester) async {
+        controller.remove(key2);
 
-        verifyNever(tooltip1.toggle());
-        verifyNever(tooltip2.toggle());
+        unawaited(controller.toggle());
+        await tester.pumpAndSettle();
+
+        expect(tooltip1.shown, false);
+        expect(tooltip2.shown, false);
       });
     });
   });

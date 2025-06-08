@@ -12,7 +12,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(TestScaffold.blue(child: FDateField.input(style: TestScaffold.blueScreen.dateFieldStyle)));
 
-    await expectBlueScreen(find.byType(TestScaffold));
+    await expectBlueScreen();
   });
 
   for (final theme in TestScaffold.themes) {
