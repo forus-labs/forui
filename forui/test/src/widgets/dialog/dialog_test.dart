@@ -16,7 +16,8 @@ void main() {
               onPress: () => showFDialog(
                 barrierDismissible: false,
                 context: context,
-                builder: (context, _) => FDialog(
+                builder: (context, _, animation) => FDialog(
+                  animation: animation,
                   title: const Text('Are you absolutely sure?'),
                   body: const Text(
                     'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
@@ -50,7 +51,8 @@ void main() {
             builder: (context) => FButton(
               onPress: () => showFDialog(
                 context: context,
-                builder: (context, _) => FDialog(
+                builder: (context, _, animation) => FDialog(
+                  animation: animation,
                   title: const Text('Are you absolutely sure?'),
                   body: const Text(
                     'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',

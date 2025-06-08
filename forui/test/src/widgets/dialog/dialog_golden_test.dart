@@ -19,7 +19,8 @@ void main() {
               builder: (context) => FButton(
                 onPress: () => showFDialog(
                   context: context,
-                  builder: (context, _) => FDialog(
+                  builder: (context, _, animation) => FDialog(
+                    animation: animation,
                     title: const Text('Are you absolutely sure?'),
                     body: const Text(
                       'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
@@ -54,7 +55,8 @@ void main() {
                     barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
                   ),
                   context: context,
-                  builder: (context, _) => FDialog(
+                  builder: (context, _, animation) => FDialog(
+                    animation: animation,
                     title: const Text('Are you absolutely sure?'),
                     body: const Text(
                       'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
@@ -85,15 +87,16 @@ void main() {
               builder: (context) => FButton(
                 onPress: () => showFDialog(
                   style: theme.data.dialogStyle.copyWith(
-                    backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                    backgroundFilter: (v) => ImageFilter.blur(sigmaX: v * 5, sigmaY: v * 5),
                     decoration: BoxDecoration(
                       borderRadius: theme.data.style.borderRadius,
                       color: theme.data.colors.background.withValues(alpha: 0.5),
                     ),
                   ),
                   context: context,
-                  builder: (context, style) => FDialog(
+                  builder: (context, style, animation) => FDialog(
                     style: style,
+                    animation: animation,
                     title: const Text('Are you absolutely sure?'),
                     body: const Text(
                       'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',

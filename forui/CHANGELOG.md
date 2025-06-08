@@ -2,6 +2,7 @@
 
 ### `FDialog`
 * Add `showFDialog`.
+* Add `FDialog.animation`.
 * Add `FDialogRoute`.
 * Add `FDialogStyle.barrierFilter`.
 * Add `FDialogStyle.backgroundFilter`.
@@ -10,6 +11,8 @@
 * Add `FDialogStyle.exitCurve`.
 * Add `FDialogStyle.fadeTween`.
 * Add `FDialogStyle.scaleTween`.
+
+* Change `FDialog` from a stateless to a stateful widget.
 
 
 ### `FPopover`

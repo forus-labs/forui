@@ -25,10 +25,11 @@ class DialogPage extends Sample {
       intrinsicWidth: true,
       onPress: () => showFDialog(
         context: context,
-        builder: (context, style) => FTheme(
+        builder: (context, style, animation) => FTheme(
           data: theme,
           child: FDialog(
             style: style,
+            animation: animation,
             direction: direction,
             title: const Text('Are you absolutely sure?'),
             body: const Text(
@@ -60,10 +61,11 @@ class BlurredDialogPage extends Sample {
             inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
           ),
         ),
-        builder: (context, style) => FTheme(
+        builder: (context, style, animation) => FTheme(
           data: theme,
           child: FDialog(
             style: style,
+            animation: animation,
             title: const Text('Are you absolutely sure?'),
             body: const Text(
               'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
