@@ -25,8 +25,8 @@ class FTooltipController extends FChangeNotifier {
   /// Creates a [FTooltipController] with the given [vsync] and animation [animationDuration].
   FTooltipController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
-    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeOutCubic);
+    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeOutCubic);
     _fade = _fadeTween.animate(_curveFade);
     _scale = _scaleTween.animate(_curveScale);
   }

@@ -161,7 +161,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.primary, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
-        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
       );
 }
 

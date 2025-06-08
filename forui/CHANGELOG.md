@@ -1,5 +1,10 @@
 ## 0.13.0 (Next)
 
+### Animations
+We've updated the animations in Forui to feel more nature and be origin aware. This should make the animations feel more
+natural and less jarring.
+
+
 ### `FDialog`
 * Add `showFDialog`.
 * Add `FDialog.animation`.
@@ -62,6 +67,16 @@
 * Change `FSSheet`'s transition animation.
 * **Breaking** Change `FSheetStyle.barrierColor` to `FSheetStyle.barrierFilter`.
 * **Breaking** Remove `FSheetStyle.backgroundColor`.
+
+
+### `FTappable`
+* Add `FTappableStyle.bounceDuration`.
+* Add `FTappableStyle.bounceDownCurve`.
+* Add `FTappableStyle.bounceUpCurve`.
+
+* **Breaking** Rename `FTappableStyle.animationTween` to `FTappableStyle.bounceTween`.
+* **Breaking** Remove `FTappableAnimations` - use `FTappableStyle.defaultBounceTween` and `FTappableStyle.noBounceTween`
+  instead.
 
 
 ### `FTooltip`

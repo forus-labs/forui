@@ -317,6 +317,6 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
           WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
           WidgetState.any: IconThemeData(color: colors.primary, size: 15),
         }),
-        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
       );
 }

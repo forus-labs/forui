@@ -412,19 +412,19 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   @override
   final ImageFilter Function(double animation)? backgroundFilter;
 
-  /// The dialog's entrance/exit animation duration. Defaults to 200ms.
+  /// The dialog's entrance/exit animation duration. Defaults to 150ms.
   ///
   /// This requires [FDialog.animation] to be non-null.
   @override
   final Duration entranceExitDuration;
 
-  /// The dialog's entrance animation curve. Defaults to [Curves.easeOutQuad].
+  /// The dialog's entrance animation curve. Defaults to [Curves.easeOutCubic].
   ///
   /// This requires [FDialog.animation] to be non-null.
   @override
   final Curve entranceCurve;
 
-  /// The dialog's entrance animation curve. Defaults to [Curves.easeInQuad].
+  /// The dialog's entrance animation curve. Defaults to [Curves.easeInCubic].
   ///
   /// This requires [FDialog.animation] to be non-null.
   @override
@@ -477,9 +477,9 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     required this.horizontalStyle,
     required this.verticalStyle,
     this.barrierFilter,
-    this.entranceExitDuration = const Duration(milliseconds: 200),
-    this.entranceCurve = Curves.easeOutQuad,
-    this.exitCurve = Curves.easeInQuad,
+    this.entranceExitDuration = const Duration(milliseconds: 150),
+    this.entranceCurve = Curves.easeOutCubic,
+    this.exitCurve = Curves.easeInCubic,
     this.backgroundFilter,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,

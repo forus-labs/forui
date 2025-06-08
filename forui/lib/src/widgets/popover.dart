@@ -25,8 +25,8 @@ final class FPopoverController extends FChangeNotifier {
   /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
   FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 150)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
-    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeInCubic);
+    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeInCubic);
     _fade = _fadeTween.animate(_curveFade);
     _scale = _scaleTween.animate(_curveScale);
   }
