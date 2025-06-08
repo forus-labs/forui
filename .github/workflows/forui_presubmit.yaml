@@ -42,11 +42,11 @@ jobs:
           cache: true
 
       - run: flutter pub get
-      - run: dart run ../tool/sort.dart forui
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: dart run ./tool/cli_generator/main.dart
-      - run: dart format .
+      - run: dart run ../tool/sort.dart forui
       - run: dart fix --apply
+      - run: dart format .
 
       - uses: EndBug/add-and-commit@v9
         with:
@@ -84,7 +84,7 @@ jobs:
 
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
-      - run: flutter test --update-goldens
+      - run: flutter test **/*_golden_test.dart --update-goldens {};
 
       - uses: EndBug/add-and-commit@v9
         with:
