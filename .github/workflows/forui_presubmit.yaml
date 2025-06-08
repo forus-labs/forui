@@ -90,4 +90,4 @@ jobs:
         with:
           pull: '--rebase --autostash'
           message: 'Update ${{ matrix.os }} goldens'
-          add: '*'
+          add: 'test/golden/**/*'
