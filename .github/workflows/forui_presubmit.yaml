@@ -84,7 +84,7 @@ jobs:
 
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
-      - run: flutter test **/*_golden_test.dart --update-goldens;
+      - run: flutter test **/*_golden_test.dart --update-goldens
 
       - uses: EndBug/add-and-commit@v9
         with:
