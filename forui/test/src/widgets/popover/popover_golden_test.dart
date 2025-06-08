@@ -111,7 +111,7 @@ void main() {
               FPopover(
                 controller: controller,
                 style: theme.data.popoverStyle.copyWith(
-                  backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  backgroundFilter: (v) => ImageFilter.blur(sigmaX: v * 5, sigmaY: v * 5),
                   decoration: BoxDecoration(
                     color: theme.data.colors.background.withValues(alpha: 0.5),
                     borderRadius: theme.data.style.borderRadius,

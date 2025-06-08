@@ -356,17 +356,40 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                 onDismiss: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : () {},
               ),
         portalBuilder: (context, _) {
-          Widget popover = DecoratedBox(
-            decoration: style.decoration,
-            child: widget.popoverBuilder(context, _controller),
+          Widget popover = ScaleTransition(
+            alignment: widget.popoverAnchor.resolve(direction),
+            scale: _controller._scale,
+            child: FadeTransition(
+              opacity: _controller._fade,
+              child: Semantics(
+                label: widget.semanticsLabel,
+                container: true,
+                child: FocusScope(
+                  autofocus: widget.autofocus ?? (style.barrierFilter != null),
+                  node: widget.focusNode,
+                  onFocusChange: widget.onFocusChange,
+                  child: TapRegion(
+                    groupId: _groupId,
+                    onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
+                    child: DecoratedBox(
+                      decoration: style.decoration,
+                      child: widget.popoverBuilder(context, _controller),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           );
 
-          if (style.backgroundFilter case final background?) {
+          if (style.backgroundFilter case final filter?) {
             popover = Stack(
               children: [
                 Positioned.fill(
                   child: ClipRect(
-                    child: BackdropFilter(filter: background, child: Container()),
+                    child: AnimatedBuilder(
+                      animation: _controller._fade,
+                      builder: (_, _) => BackdropFilter(filter: filter(_controller._fade.value), child: Container()),
+                    ),
                   ),
                 ),
                 popover,
@@ -376,27 +399,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
           return CallbackShortcuts(
             bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-            child: FadeTransition(
-              opacity: _controller._fade,
-              child: ScaleTransition(
-                alignment: widget.popoverAnchor.resolve(direction),
-                scale: _controller._scale,
-                child: Semantics(
-                  label: widget.semanticsLabel,
-                  container: true,
-                  child: FocusScope(
-                    autofocus: widget.autofocus ?? (style.barrierFilter != null),
-                    node: widget.focusNode,
-                    onFocusChange: widget.onFocusChange,
-                    child: TapRegion(
-                      groupId: _groupId,
-                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
-                      child: popover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            child: popover,
           );
         },
         child: child,
@@ -477,7 +480,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// ```
   /// {@endtemplate}
   @override
-  final ImageFilter? backgroundFilter;
+  final ImageFilter Function(double animation)? backgroundFilter;
 
   /// The additional insets of the view. In other words, the minimum distance between the edges of the view and the
   /// edges of the popover. This applied in addition to the insets provided by [MediaQueryData.viewPadding].
