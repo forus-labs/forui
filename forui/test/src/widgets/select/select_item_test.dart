@@ -15,6 +15,10 @@ void main() {
     controller = FSelectController<String>(vsync: const TestVSync());
   });
 
+  tearDown(() {
+    controller.dispose();
+  });
+
   group('FSelectSection', () {
     testWidgets('focus skips title', (tester) async {
       await tester.pumpWidget(
@@ -70,9 +74,5 @@ void main() {
       expect(find.text('B'), findsOne);
       expect(controller.value, 'B');
     });
-  });
-
-  tearDown(() {
-    controller.dispose();
   });
 }

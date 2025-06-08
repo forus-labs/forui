@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -61,9 +60,7 @@ void main() {
         );
         expect(find.text(set(enabled).toString()), findsOneWidget);
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.byType(AnimatedTappable)));
@@ -218,9 +215,7 @@ void main() {
 
       expect(find.text(set(true).toString()), findsOneWidget);
 
-      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-      await gesture.addPointer(location: Offset.zero);
-      addTearDown(gesture.removePointer);
+      final gesture = await tester.createPointerGesture();
 
       await gesture.moveTo(tester.getCenter(find.byType(AnimatedTappable)));
       await tester.pumpAndSettle();
@@ -243,9 +238,7 @@ void main() {
         ),
       );
 
-      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-      await gesture.addPointer(location: Offset.zero);
-      addTearDown(gesture.removePointer);
+      final gesture = await tester.createPointerGesture();
       await tester.pump();
 
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
@@ -282,9 +275,7 @@ void main() {
         );
         expect(find.text(set(enabled).toString()), findsOneWidget);
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.byType(FTappable)));
@@ -417,9 +408,7 @@ void main() {
 
       expect(find.text(set(true).toString()), findsOneWidget);
 
-      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-      await gesture.addPointer(location: Offset.zero);
-      addTearDown(gesture.removePointer);
+      final gesture = await tester.createPointerGesture();
 
       await gesture.moveTo(tester.getCenter(find.byType(FTappable)));
       await tester.pumpAndSettle();
@@ -444,9 +433,7 @@ void main() {
         ),
       );
 
-      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-      await gesture.addPointer(location: Offset.zero);
-      addTearDown(gesture.removePointer);
+      final gesture = await tester.createPointerGesture();
       await tester.pump();
 
       await gesture.moveTo(tester.getCenter(find.text('tappable')));

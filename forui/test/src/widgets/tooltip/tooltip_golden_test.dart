@@ -34,9 +34,7 @@ void main() {
         ),
       );
 
-      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-      await gesture.addPointer(location: Offset.zero);
-      addTearDown(gesture.removePointer);
+      final gesture = await tester.createPointerGesture();
       await tester.pump();
 
       await gesture.moveTo(tester.getCenter(find.byType(ColoredBox).first));
@@ -71,9 +69,7 @@ void main() {
         ),
       );
 
-      final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-      await gesture.addPointer(location: Offset.zero);
-      addTearDown(gesture.removePointer);
+      final gesture = await tester.createPointerGesture();
       await tester.pump();
 
       await gesture.moveTo(tester.getCenter(find.byType(ColoredBox).first));

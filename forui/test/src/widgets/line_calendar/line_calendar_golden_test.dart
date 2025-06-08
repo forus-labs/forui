@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
 
@@ -35,7 +34,7 @@ void main() {
     nodes[nodes.length ~/ 2 - 1].requestFocus();
     await tester.pumpAndSettle();
 
-    await expectBlueScreen(find.byType(TestScaffold));
+    await expectBlueScreen();
   });
 
   group('states', () {
@@ -128,9 +127,7 @@ void main() {
         await tester.tap(find.text('28').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.text('28').last));
@@ -150,9 +147,7 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.text('28').last));

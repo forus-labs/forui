@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -11,6 +10,8 @@ void main() {
   late FMultiValueNotifier<int> controller;
 
   setUp(() => controller = FMultiValueNotifier.radio(value: 1));
+
+  tearDown(() => controller.dispose());
 
   group('FTSelectTile', () {
     group('blue screen', () {
@@ -32,7 +33,7 @@ void main() {
           ),
         );
 
-        await expectBlueScreen(find.byType(TestScaffold));
+        await expectBlueScreen();
       });
 
       testWidgets('hovered', (tester) async {
@@ -53,15 +54,13 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>)));
         await tester.pumpAndSettle();
 
-        await expectBlueScreen(find.byType(TestScaffold));
+        await expectBlueScreen();
       });
 
       testWidgets('selected', (tester) async {
@@ -83,7 +82,7 @@ void main() {
           ),
         );
 
-        await expectBlueScreen(find.byType(TestScaffold));
+        await expectBlueScreen();
       });
 
       testWidgets('disabled', (tester) async {
@@ -105,7 +104,7 @@ void main() {
           ),
         );
 
-        await expectBlueScreen(find.byType(TestScaffold));
+        await expectBlueScreen();
       });
     });
 
@@ -152,9 +151,7 @@ void main() {
           ),
         );
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
 
         await gesture.moveTo(tester.getCenter(find.byType(FSelectTile<int>)));
         await tester.pumpAndSettle();
@@ -263,6 +260,4 @@ void main() {
       });
     }
   });
-
-  tearDown(() => controller.dispose());
 }

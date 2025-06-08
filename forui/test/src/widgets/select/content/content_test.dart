@@ -36,44 +36,42 @@ void main() {
     scrollController = ScrollController();
   });
 
-  group('Content', () {
-    testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(scrollController.hasListeners, true);
-
-      await tester.pumpWidget(TestScaffold.app(child: FSelect<String>.fromMap(letters, key: key)));
-
-      expect(scrollController.dispose, returnsNormally);
-    });
-
-    testWidgets('dispose() does not dispose external controller', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(scrollController.hasListeners, true);
-
-      await tester.pumpWidget(const SizedBox());
-
-      expect(scrollController.hasListeners, false);
-      expect(scrollController.dispose, returnsNormally);
-    });
-  });
-
   tearDown(() {
     controller.dispose();
+  });
+
+  testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(scrollController.hasListeners, true);
+
+    await tester.pumpWidget(TestScaffold.app(child: FSelect<String>.fromMap(letters, key: key)));
+
+    expect(scrollController.dispose, returnsNormally);
+  });
+
+  testWidgets('dispose() does not dispose external controller', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(scrollController.hasListeners, true);
+
+    await tester.pumpWidget(const SizedBox());
+
+    expect(scrollController.hasListeners, false);
+    expect(scrollController.dispose, returnsNormally);
   });
 }

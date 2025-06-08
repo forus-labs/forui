@@ -45,7 +45,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
 
     testWidgets('basic - empty', (tester) async {
@@ -63,7 +63,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
 
     testWidgets('handles', (tester) async {
@@ -85,7 +85,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
 
     testWidgets('fromMap', (tester) async {
@@ -98,7 +98,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
 
     testWidgets('search', (tester) async {
@@ -118,7 +118,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
 
     testWidgets('search - waiting', (tester) async {
@@ -141,7 +141,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
 
     testWidgets('searchFromMap', (tester) async {
@@ -160,7 +160,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectBlueScreen(find.byType(TestScaffold));
+      await expectBlueScreen();
     });
   });
 

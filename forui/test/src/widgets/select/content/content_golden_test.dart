@@ -18,166 +18,14 @@ void main() {
     scrollController = ScrollController();
   });
 
+  tearDown(() {
+    scrollController.dispose();
+    controller.dispose();
+  });
+
   for (final theme in TestScaffold.themes) {
-    group('Content', () {
-      group('scroll handles', () {
-        testWidgets('show both', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold.app(
-              theme: theme.data,
-              alignment: Alignment.topCenter,
-              child: FSelect<String>(
-                key: key,
-                format: (string) => string,
-                contentScrollController: scrollController,
-                contentScrollHandles: true,
-                children: [
-                  FSelectSection(
-                    label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem(letter, letter)],
-                  ),
-                ],
-              ),
-            ),
-          );
-
-          await tester.tap(find.byKey(key));
-          await tester.pumpAndSettle();
-
-          scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/both_scroll_handles.png'),
-          );
-        });
-
-        testWidgets('hide starting scroll handle', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold.app(
-              theme: theme.data,
-              alignment: Alignment.topCenter,
-              child: FSelect<String>(
-                key: key,
-                format: (string) => string,
-                contentScrollController: scrollController,
-                contentScrollHandles: true,
-                children: [
-                  FSelectSection(
-                    label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem(letter, letter)],
-                  ),
-                ],
-              ),
-            ),
-          );
-
-          await tester.tap(find.byKey(key));
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/hide_start_scroll_handle.png'),
-          );
-        });
-
-        testWidgets('hide ending scroll handle', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold.app(
-              theme: theme.data,
-              alignment: Alignment.topCenter,
-              child: FSelect<String>(
-                key: key,
-                format: (string) => string,
-                contentScrollController: scrollController,
-                contentScrollHandles: true,
-                children: [
-                  FSelectSection(
-                    label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem(letter, letter)],
-                  ),
-                ],
-              ),
-            ),
-          );
-
-          await tester.tap(find.byKey(key));
-          await tester.pumpAndSettle();
-
-          scrollController.jumpTo(scrollController.position.maxScrollExtent);
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/hide_end_scroll_handle.png'),
-          );
-        });
-
-        testWidgets('hide scroll handles when handles disabled', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold.app(
-              theme: theme.data,
-              alignment: Alignment.topCenter,
-              child: FSelect<String>(
-                key: key,
-                format: (string) => string,
-                contentScrollController: scrollController,
-                children: [
-                  FSelectSection(
-                    label: const Text('Lorem'),
-                    children: [for (final letter in letters) FSelectItem(letter, letter)],
-                  ),
-                ],
-              ),
-            ),
-          );
-
-          await tester.tap(find.byKey(key));
-          await tester.pumpAndSettle();
-
-          scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/no_scroll_handles.png'),
-          );
-        });
-
-        testWidgets('hide scroll handles when all items visible', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold.app(
-              theme: theme.data,
-              alignment: Alignment.topCenter,
-              child: FSelect<String>(
-                key: key,
-                format: (string) => string,
-                contentScrollController: scrollController,
-                contentScrollHandles: true,
-                children: [
-                  FSelectSection(label: const Text('Lorem'), children: [FSelectItem('1', '1')]),
-                ],
-              ),
-            ),
-          );
-
-          await tester.tap(find.byKey(key));
-          await tester.pumpAndSettle();
-
-          scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('select/${theme.name}/content/all_items_visible.png'),
-          );
-        });
-      });
-
-      testWidgets('focus on selected item', (tester) async {
-        controller.value = 'O';
-
+    group('scroll handles', () {
+      testWidgets('show both', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
@@ -185,8 +33,40 @@ void main() {
             child: FSelect<String>(
               key: key,
               format: (string) => string,
-              controller: controller,
               contentScrollController: scrollController,
+              contentScrollHandles: true,
+              children: [
+                FSelectSection(
+                  label: const Text('Lorem'),
+                  children: [for (final letter in letters) FSelectItem(letter, letter)],
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/content/both_scroll_handles.png'),
+        );
+      });
+
+      testWidgets('hide starting scroll handle', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>(
+              key: key,
+              format: (string) => string,
+              contentScrollController: scrollController,
+              contentScrollHandles: true,
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
@@ -202,14 +82,132 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/content/focused_selected_item.png'),
+          matchesGoldenFile('select/${theme.name}/content/hide_start_scroll_handle.png'),
+        );
+      });
+
+      testWidgets('hide ending scroll handle', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>(
+              key: key,
+              format: (string) => string,
+              contentScrollController: scrollController,
+              contentScrollHandles: true,
+              children: [
+                FSelectSection(
+                  label: const Text('Lorem'),
+                  children: [for (final letter in letters) FSelectItem(letter, letter)],
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        scrollController.jumpTo(scrollController.position.maxScrollExtent);
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/content/hide_end_scroll_handle.png'),
+        );
+      });
+
+      testWidgets('hide scroll handles when handles disabled', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>(
+              key: key,
+              format: (string) => string,
+              contentScrollController: scrollController,
+              children: [
+                FSelectSection(
+                  label: const Text('Lorem'),
+                  children: [for (final letter in letters) FSelectItem(letter, letter)],
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/content/no_scroll_handles.png'),
+        );
+      });
+
+      testWidgets('hide scroll handles when all items visible', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>(
+              key: key,
+              format: (string) => string,
+              contentScrollController: scrollController,
+              contentScrollHandles: true,
+              children: [
+                FSelectSection(label: const Text('Lorem'), children: [FSelectItem('1', '1')]),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        scrollController.jumpTo(scrollController.position.maxScrollExtent / 2);
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/content/all_items_visible.png'),
         );
       });
     });
-  }
 
-  tearDown(() {
-    scrollController.dispose();
-    controller.dispose();
-  });
+    testWidgets('focus on selected item', (tester) async {
+      controller.value = 'O';
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect<String>(
+            key: key,
+            format: (string) => string,
+            controller: controller,
+            contentScrollController: scrollController,
+            children: [
+              FSelectSection(
+                label: const Text('Lorem'),
+                children: [for (final letter in letters) FSelectItem(letter, letter)],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select/${theme.name}/content/focused_selected_item.png'),
+      );
+    });
+  }
 }

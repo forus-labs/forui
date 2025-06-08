@@ -87,7 +87,7 @@ void main() {
     await tester.tap(find.text('blue'));
     await tester.pumpAndSettle();
 
-    await expectBlueScreen(find.byType(TestScaffold));
+    await expectBlueScreen();
   });
 
   for (final alignment in FToastAlignment.values) {
@@ -339,9 +339,7 @@ void main() {
         await tester.tap(find.text('2'));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.text('3').last));
@@ -395,9 +393,7 @@ void main() {
         await tester.tap(find.text('3'));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.text('3').last));
@@ -454,9 +450,7 @@ void main() {
         await tester.tap(find.text('2'));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
         await tester.pump();
 
         await gesture.moveTo(tester.getCenter(find.text('3').last));

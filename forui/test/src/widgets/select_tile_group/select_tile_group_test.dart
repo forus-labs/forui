@@ -12,123 +12,121 @@ void main() {
 
   tearDown(() => controller.dispose());
 
-  group('FSelectTileGroup', () {
-    testWidgets('press select tile with prefix check icon', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSelectTileGroup(
-            selectController: controller,
-            children: const [
-              FSelectTile(title: Text('1'), value: 1),
-              FSelectTile(title: Text('2'), value: 2),
-            ],
-          ),
+  testWidgets('press select tile with prefix check icon', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup(
+          selectController: controller,
+          children: const [
+            FSelectTile(title: Text('1'), value: 1),
+            FSelectTile(title: Text('2'), value: 2),
+          ],
         ),
-      );
-      expect(controller.value, <int>{});
+      ),
+    );
+    expect(controller.value, <int>{});
 
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('2'));
+    await tester.pumpAndSettle();
 
-      expect(controller.value, {2});
-    });
+    expect(controller.value, {2});
+  });
 
-    testWidgets('press select tile with suffix check icon', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSelectTileGroup(
-            selectController: controller,
-            children: const [
-              FSelectTile.suffix(title: Text('1'), value: 1),
-              FSelectTile.suffix(title: Text('2'), value: 2),
-            ],
-          ),
+  testWidgets('press select tile with suffix check icon', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup(
+          selectController: controller,
+          children: const [
+            FSelectTile.suffix(title: Text('1'), value: 1),
+            FSelectTile.suffix(title: Text('2'), value: 2),
+          ],
         ),
-      );
-      expect(controller.value, <int>{});
+      ),
+    );
+    expect(controller.value, <int>{});
 
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('2'));
+    await tester.pumpAndSettle();
 
-      expect(controller.value, {2});
-    });
+    expect(controller.value, {2});
+  });
 
-    testWidgets('press already selected tile', (tester) async {
-      final controller = autoDispose(FMultiValueNotifier<int>.radio(value: 2));
+  testWidgets('press already selected tile', (tester) async {
+    final controller = autoDispose(FMultiValueNotifier<int>.radio(value: 2));
 
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSelectTileGroup(
-            selectController: controller,
-            children: const [
-              FSelectTile.suffix(title: Text('1'), value: 1),
-              FSelectTile.suffix(title: Text('2'), value: 2),
-            ],
-          ),
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup(
+          selectController: controller,
+          children: const [
+            FSelectTile.suffix(title: Text('1'), value: 1),
+            FSelectTile.suffix(title: Text('2'), value: 2),
+          ],
         ),
-      );
-      expect(controller.value, {2});
+      ),
+    );
+    expect(controller.value, {2});
 
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('2'));
+    await tester.pumpAndSettle();
 
-      expect(controller.value, {2});
-    });
+    expect(controller.value, {2});
+  });
 
-    testWidgets('press tile hides error', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FSelectTileGroup(
-            selectController: controller,
-            autovalidateMode: AutovalidateMode.always,
-            validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
-            children: const [
-              FSelectTile.suffix(title: Text('1'), value: 1),
-              FSelectTile.suffix(title: Text('2'), value: 2),
-            ],
-          ),
+  testWidgets('press tile hides error', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FSelectTileGroup(
+          selectController: controller,
+          autovalidateMode: AutovalidateMode.always,
+          validator: (values) => values?.isEmpty ?? true ? 'error message' : null,
+          children: const [
+            FSelectTile.suffix(title: Text('1'), value: 1),
+            FSelectTile.suffix(title: Text('2'), value: 2),
+          ],
         ),
-      );
+      ),
+    );
 
-      expect(find.text('error message'), findsOneWidget);
-      expect(controller.value, <int>{});
+    expect(find.text('error message'), findsOneWidget);
+    expect(controller.value, <int>{});
 
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('2'));
+    await tester.pumpAndSettle();
 
-      expect(find.text('error message'), findsNothing);
-      expect(controller.value, {2});
-    });
+    expect(find.text('error message'), findsNothing);
+    expect(controller.value, {2});
+  });
 
-    testWidgets('press nested select tile', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FTileGroup.merge(
-            children: [
-              FTileGroup(
-                children: [
-                  FTile(title: const Text('A')),
-                  FTile(title: const Text('B')),
-                ],
-              ),
-              FSelectTileGroup(
-                selectController: controller,
-                children: const [
-                  FSelectTile(title: Text('1'), value: 1),
-                  FSelectTile(title: Text('2'), value: 2),
-                ],
-              ),
-            ],
-          ),
+  testWidgets('press nested select tile', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FTileGroup.merge(
+          children: [
+            FTileGroup(
+              children: [
+                FTile(title: const Text('A')),
+                FTile(title: const Text('B')),
+              ],
+            ),
+            FSelectTileGroup(
+              selectController: controller,
+              children: const [
+                FSelectTile(title: Text('1'), value: 1),
+                FSelectTile(title: Text('2'), value: 2),
+              ],
+            ),
+          ],
         ),
-      );
-      expect(controller.value, <int>{});
+      ),
+    );
+    expect(controller.value, <int>{});
 
-      await tester.tap(find.text('2'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('2'));
+    await tester.pumpAndSettle();
 
-      expect(controller.value, {2});
-    });
+    expect(controller.value, {2});
   });
 
   testWidgets('set initial value', (tester) async {

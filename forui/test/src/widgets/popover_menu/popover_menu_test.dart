@@ -8,91 +8,89 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  group('FPopover', () {
-    testWidgets('tap outside hides popover', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FPopoverMenu(
-            menu: [
-              FTileGroup(
-                children: [FTile(title: const Text('Group 1'), onPress: () {})],
-              ),
-              FTileGroup(
-                children: [FTile(title: const Text('Group 2'), onPress: () {})],
-              ),
-            ],
-            builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
-          ),
+  testWidgets('tap outside hides popover', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FPopoverMenu(
+          menu: [
+            FTileGroup(
+              children: [FTile(title: const Text('Group 1'), onPress: () {})],
+            ),
+            FTileGroup(
+              children: [FTile(title: const Text('Group 2'), onPress: () {})],
+            ),
+          ],
+          builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
-      );
+      ),
+    );
 
-      await tester.tap(find.text('target'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('target'));
+    await tester.pumpAndSettle();
 
-      expect(find.text('Group 1'), findsOneWidget);
+    expect(find.text('Group 1'), findsOneWidget);
 
-      await tester.tapAt(Offset.zero);
-      await tester.pumpAndSettle();
+    await tester.tapAt(Offset.zero);
+    await tester.pumpAndSettle();
 
-      expect(find.text('Group 1'), findsNothing);
-    });
+    expect(find.text('Group 1'), findsNothing);
+  });
 
-    testWidgets('tap outside does not hide popover', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FPopoverMenu(
-            hideOnTapOutside: FHidePopoverRegion.none,
-            menu: [
-              FTileGroup(
-                children: [FTile(title: const Text('Group 1'), onPress: () {})],
-              ),
-              FTileGroup(
-                children: [FTile(title: const Text('Group 2'), onPress: () {})],
-              ),
-            ],
-            builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
-          ),
+  testWidgets('tap outside does not hide popover', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FPopoverMenu(
+          hideOnTapOutside: FHidePopoverRegion.none,
+          menu: [
+            FTileGroup(
+              children: [FTile(title: const Text('Group 1'), onPress: () {})],
+            ),
+            FTileGroup(
+              children: [FTile(title: const Text('Group 2'), onPress: () {})],
+            ),
+          ],
+          builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
-      );
+      ),
+    );
 
-      await tester.tap(find.text('target'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('target'));
+    await tester.pumpAndSettle();
 
-      expect(find.text('Group 1'), findsOneWidget);
+    expect(find.text('Group 1'), findsOneWidget);
 
-      await tester.tapAt(Offset.zero);
-      await tester.pumpAndSettle();
+    await tester.tapAt(Offset.zero);
+    await tester.pumpAndSettle();
 
-      expect(find.text('Group 1'), findsOneWidget);
-    });
+    expect(find.text('Group 1'), findsOneWidget);
+  });
 
-    testWidgets('tap button when popover is open closes it', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FPopoverMenu(
-            menu: [
-              FTileGroup(
-                children: [FTile(title: const Text('Group 1'), onPress: () {})],
-              ),
-              FTileGroup(
-                children: [FTile(title: const Text('Group 2'), onPress: () {})],
-              ),
-            ],
-            builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
-          ),
+  testWidgets('tap button when popover is open closes it', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FPopoverMenu(
+          menu: [
+            FTileGroup(
+              children: [FTile(title: const Text('Group 1'), onPress: () {})],
+            ),
+            FTileGroup(
+              children: [FTile(title: const Text('Group 2'), onPress: () {})],
+            ),
+          ],
+          builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
-      );
+      ),
+    );
 
-      await tester.tap(find.text('target'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('target'));
+    await tester.pumpAndSettle();
 
-      expect(find.text('Group 1'), findsOneWidget);
+    expect(find.text('Group 1'), findsOneWidget);
 
-      await tester.tap(find.text('target'));
-      await tester.pumpAndSettle();
+    await tester.tap(find.text('target'));
+    await tester.pumpAndSettle();
 
-      expect(find.text('Group 1'), findsNothing);
-    });
+    expect(find.text('Group 1'), findsNothing);
   });
 
   group('state', () {

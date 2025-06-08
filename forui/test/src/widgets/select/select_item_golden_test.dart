@@ -36,6 +36,11 @@ void main() {
     scrollController = ScrollController();
   });
 
+  tearDown(() {
+    scrollController.dispose();
+    controller.dispose();
+  });
+
   for (final theme in TestScaffold.themes) {
     group('FSelectSection', () {
       testWidgets('default', (tester) async {
@@ -98,9 +103,7 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
 
         await gesture.moveTo(tester.getCenter(find.text('Lorem')));
         await tester.pump();
@@ -196,9 +199,7 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createGesture(kind: PointerDeviceKind.mouse);
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
+        final gesture = await tester.createPointerGesture();
 
         await gesture.moveTo(tester.getCenter(find.text('A')));
         await tester.pump();
@@ -220,10 +221,7 @@ void main() {
         await tester.tap(find.byKey(key));
         await tester.pumpAndSettle();
 
-        final gesture = await tester.createGesture();
-        await gesture.addPointer(location: Offset.zero);
-        addTearDown(gesture.removePointer);
-
+        final gesture = await tester.createPointerGesture(kind: PointerDeviceKind.touch);
         await gesture.down(tester.getCenter(find.text('A')));
         await tester.pumpAndSettle();
 
@@ -233,9 +231,4 @@ void main() {
       });
     });
   }
-
-  tearDown(() {
-    scrollController.dispose();
-    controller.dispose();
-  });
 }
