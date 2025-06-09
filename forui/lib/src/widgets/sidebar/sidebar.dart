@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -71,24 +73,20 @@ class FSidebar extends StatelessWidget {
 
   /// Creates a sidebar with a custom content widget.
   ///
-  /// Use this constructor when you want to provide your own scrollable content widget
-  /// instead of using the default [ListView].
+  /// Use this constructor when you want to provide your own scrollable content widget instead of using the default
+  /// [ListView].
   const FSidebar.raw({required this.child, this.header, this.footer, this.style, this.width, super.key});
 
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.sidebarStyle;
 
-    return FSidebarData(
+    Widget sidebar = FSidebarData(
       style: style,
       child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: BorderDirectional(
-            end: BorderSide(color: style.borderColor, width: style.borderWidth),
-          ),
-        ),
-        child: SizedBox(
-          width: width ?? style.width,
+        decoration: style.decoration,
+        child: ConstrainedBox(
+          constraints: style.constraints,
           child: Column(
             children: [
               if (header != null) Padding(padding: style.headerPadding, child: header!),
@@ -101,6 +99,21 @@ class FSidebar extends StatelessWidget {
         ),
       ),
     );
+
+    if (style.backgroundFilter case final filter?) {
+      sidebar = Stack(
+        children: [
+          Positioned.fill(
+            child: ClipRect(
+              child: BackdropFilter(filter: filter, child: Container()),
+            ),
+          ),
+          sidebar,
+        ],
+      );
+    }
+
+    return sidebar;
   }
 
   @override
@@ -138,17 +151,19 @@ class FSidebarData extends InheritedWidget {
 
 /// A [FSidebar]'s style.
 class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
-  /// The width of the sidebar. Defaults to 250.
+  /// The decoration.
   @override
-  final double width;
+  final BoxDecoration decoration;
 
-  /// The border color.
+  /// An optional background filter applied to the sidebar.
+  ///
+  /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
   @override
-  final Color borderColor;
+  final ImageFilter? backgroundFilter;
 
-  /// The border width.
+  /// The sidebar's width. Defaults to `BoxConstraints.tightFor(width: 250)`.
   @override
-  final double borderWidth;
+  final BoxConstraints constraints;
 
   /// The group's style.
   @override
@@ -177,10 +192,10 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
 
   /// Creates a [FSidebarStyle].
   const FSidebarStyle({
-    required this.borderColor,
-    required this.borderWidth,
+    required this.decoration,
     required this.groupStyle,
-    this.width = 250,
+    this.constraints = const BoxConstraints.tightFor(width: 250),
+    this.backgroundFilter,
     this.headerPadding = const EdgeInsets.fromLTRB(0, 16, 0, 0),
     this.contentPadding = const EdgeInsets.symmetric(vertical: 12),
     this.footerPadding = const EdgeInsets.fromLTRB(0, 0, 0, 16),
@@ -189,8 +204,12 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   /// Creates a [FSidebarStyle] that inherits its properties.
   FSidebarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        borderColor: colors.border,
-        borderWidth: style.borderWidth,
+        decoration: BoxDecoration(
+          color: colors.background,
+          border: BorderDirectional(
+            end: BorderSide(color: colors.border, width: style.borderWidth),
+          ),
+        ),
         groupStyle: FSidebarGroupStyle.inherit(colors: colors, typography: typography, style: style),
       );
 }

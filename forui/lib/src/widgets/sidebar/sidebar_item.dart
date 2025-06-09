@@ -10,9 +10,8 @@ part 'sidebar_item.style.dart';
 
 /// A sidebar item.
 ///
-/// The [FSidebarItem] widget is useful for creating interactive items in a sidebar.
-/// It can display an icon, label, and optional action, with support for selected and
-/// enabled states.
+/// The [FSidebarItem] widget is useful for creating interactive items in a sidebar. It can display an icon, label, and
+/// optional action, with support for selected and enabled states.
 ///
 /// See:
 /// * https://forui.dev/docs/layout/sidebar for working examples.
@@ -54,8 +53,8 @@ class FSidebarItem extends StatefulWidget {
   /// Called when the state changes.
   final ValueChanged<Set<WidgetState>>? onStateChange;
 
-  /// The children of this sidebar item.
-  final List<Widget>? children;
+  /// The sidebar item's children.
+  final List<Widget> children;
 
   /// Creates a [FSidebarItem].
   const FSidebarItem({
@@ -68,7 +67,7 @@ class FSidebarItem extends StatefulWidget {
     this.onLongPress,
     this.onHoverChange,
     this.onStateChange,
-    this.children,
+    this.children = const [],
     super.key,
   });
 
@@ -91,118 +90,126 @@ class FSidebarItem extends StatefulWidget {
 }
 
 class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final CurvedAnimation _curvedAnimation;
+  FSidebarItemStyle? _style;
+  AnimationController? _controller;
+  CurvedAnimation? _curvedAnimation;
+  Animation<double>? _icon;
   late bool _expanded;
-
-  void _toggle() {
-    _controller.toggle();
-    setState(() {
-      _expanded = !_expanded;
-    });
-  }
-
-  FSidebarItemStyle _style(BuildContext context) {
-    final groupData = FSidebarGroupData.maybeOf(context);
-    final sidebarData = FSidebarData.maybeOf(context);
-
-    return widget.style ??
-        groupData?.style.itemStyle ??
-        sidebarData?.style.groupStyle.itemStyle ??
-        context.theme.sidebarStyle.groupStyle.itemStyle;
-  }
 
   @override
   void initState() {
     super.initState();
-
     _expanded = widget.initiallyExpanded;
-    _controller = AnimationController(vsync: this, value: _expanded ? 1.0 : 0.0);
-    _curvedAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _controller.duration = _style(context).collapsibleAnimationDuration;
-  }
+    final groupData = FSidebarGroupData.maybeOf(context);
+    final sidebarData = FSidebarData.maybeOf(context);
+    final style =
+        widget.style ??
+        groupData?.style.itemStyle ??
+        sidebarData?.style.groupStyle.itemStyle ??
+        context.theme.sidebarStyle.groupStyle.itemStyle;
 
-  @override
-  Widget build(BuildContext context) {
-    final style = _style(context);
-    final hasChildren = widget.children != null && widget.children!.isNotEmpty;
+    if (_style != style) {
+      _style = style;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        FTappable(
-          style: style.tappableStyle,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          selected: widget.selected,
-          onPress: hasChildren
-              ? () {
-                  _toggle();
-                  widget.onPress?.call();
-                }
-              : widget.onPress,
-          onLongPress: widget.onLongPress,
-          onHoverChange: widget.onHoverChange,
-          onStateChange: widget.onStateChange,
-          builder: (_, states, child) => Container(
-            padding: style.padding,
-            decoration: BoxDecoration(color: style.backgroundColor.resolve(states), borderRadius: style.borderRadius),
-            child: Row(
-              spacing: style.collapsibleIconSpacing,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
-                    spacing: style.iconSpacing,
-                    children: [
-                      if (widget.icon != null) IconTheme(data: style.iconStyle.resolve(states), child: widget.icon!),
-                      if (widget.label != null)
-                        Expanded(
-                          child: DefaultTextStyle.merge(style: style.textStyle.resolve(states), child: widget.label!),
-                        ),
-                    ],
-                  ),
-                ),
-                if (hasChildren)
-                  IconTheme(
-                    data: style.collapsibleIconStyle.resolve(states),
-                    child: RotationTransition(
-                      turns: Tween(begin: 0.0, end: 0.25).animate(_curvedAnimation),
-                      child: const Icon(FIcons.chevronRight),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ),
-        if (hasChildren)
-          AnimatedBuilder(
-            animation: _curvedAnimation,
-            builder: (_, _) => FCollapsible(
-              value: _controller.value,
-              child: Padding(
-                padding: style.childrenPadding,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: style.childrenSpacing,
-                  children: widget.children!,
-                ),
-              ),
-            ),
-          ),
-      ],
-    );
+      _controller?.dispose();
+      _curvedAnimation?.dispose();
+
+      _controller = AnimationController(
+        vsync: this,
+        value: _expanded ? 1.0 : 0.0,
+        duration: style.expandDuration,
+        reverseDuration: style.collapseDuration,
+      );
+      _curvedAnimation = CurvedAnimation(
+        parent: _controller!,
+        curve: style.expandCurve,
+        reverseCurve: style.collapseCurve,
+      );
+      _icon = Tween<double>(begin: 0.0, end: 0.25).animate(_curvedAnimation!);
+    }
   }
 
   @override
   void dispose() {
-    _curvedAnimation.dispose();
-    _controller.dispose();
+    _curvedAnimation?.dispose();
+    _controller?.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      FTappable(
+        style: _style!.tappableStyle,
+        focusedOutlineStyle: _style!.focusedOutlineStyle,
+        selected: widget.selected,
+        onPress: widget.children.isNotEmpty
+            ? () {
+                _toggle();
+                widget.onPress?.call();
+              }
+            : widget.onPress,
+        onLongPress: widget.onLongPress,
+        onHoverChange: widget.onHoverChange,
+        onStateChange: widget.onStateChange,
+        builder: (_, states, child) => Container(
+          padding: _style!.padding,
+          decoration: BoxDecoration(color: _style!.backgroundColor.resolve(states), borderRadius: _style!.borderRadius),
+          child: Row(
+            spacing: _style!.collapsibleIconSpacing,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Row(
+                  spacing: _style!.iconSpacing,
+                  children: [
+                    if (widget.icon != null) IconTheme(data: _style!.iconStyle.resolve(states), child: widget.icon!),
+                    if (widget.label != null)
+                      Expanded(
+                        child: DefaultTextStyle.merge(style: _style!.textStyle.resolve(states), child: widget.label!),
+                      ),
+                  ],
+                ),
+              ),
+              if (widget.children.isNotEmpty)
+                IconTheme(
+                  data: _style!.collapsibleIconStyle.resolve(states),
+                  child: RotationTransition(turns: _icon!, child: const Icon(FIcons.chevronRight)),
+                ),
+            ],
+          ),
+        ),
+      ),
+      if (widget.children.isNotEmpty)
+        AnimatedBuilder(
+          animation: _curvedAnimation!,
+          builder: (_, _) => FCollapsible(
+            value: _curvedAnimation!.value,
+            child: Padding(
+              padding: _style!.childrenPadding,
+              child: FadeTransition(
+                opacity: _curvedAnimation!,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: _style!.childrenSpacing,
+                  children: widget.children,
+                ),
+              ),
+            ),
+          ),
+        ),
+    ],
+  );
+
+  void _toggle() {
+    _controller?.toggle();
+    setState(() => _expanded = !_expanded);
   }
 }
 
@@ -234,9 +241,21 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FWidgetStateMap<IconThemeData> collapsibleIconStyle;
 
-  /// The expand/collapse animation's duration. Defaults to 100ms.
+  /// The expand animation's duration. Defaults to 150ms.
   @override
-  final Duration collapsibleAnimationDuration;
+  final Duration expandDuration;
+
+  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve expandCurve;
+
+  /// The collapse animation's duration. Defaults to 100ms.
+  @override
+  final Duration collapseDuration;
+
+  /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
+  @override
+  final Curve collapseCurve;
 
   /// The spacing between child items. Defaults to 2.
   @override
@@ -279,10 +298,13 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
     required this.focusedOutlineStyle,
     this.iconSpacing = 8,
     this.collapsibleIconSpacing = 8,
+    this.expandDuration = const Duration(milliseconds: 150),
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseDuration = const Duration(milliseconds: 100),
+    this.collapseCurve = Curves.easeInCubic,
     this.childrenSpacing = 2,
     this.childrenPadding = const EdgeInsets.only(left: 26, top: 2),
     this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-    this.collapsibleAnimationDuration = const Duration(milliseconds: 100),
   });
 
   /// Creates a [FSidebarItemStyle] that inherits its properties.
@@ -310,11 +332,11 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
         }),
         backgroundColor: FWidgetStateMap({
           WidgetState.disabled: Colors.transparent,
-          WidgetState.selected | WidgetState.hovered | WidgetState.pressed: colors.primary.withValues(alpha: 0.03),
+          WidgetState.selected | WidgetState.hovered | WidgetState.pressed: colors.hover(colors.secondary),
           WidgetState.any: Colors.transparent,
         }),
         borderRadius: style.borderRadius,
-        tappableStyle: style.tappableStyle,
+        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

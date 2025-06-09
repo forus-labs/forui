@@ -70,11 +70,26 @@ polished.
 
 
 ### `FSheet`
-
 * Change `FSSheet`'s transition animation.
 * **Breaking** Change `FSheetStyle.barrierColor` to `FSheetStyle.barrierFilter`.
 * **Breaking** Remove `FSheetStyle.backgroundColor`.
 
+
+### `FSidebar`
+* Add `FSidebarStyle.backgroundFilter`.
+* Add `FSidebarStyle.decoration`.
+* Add `FSidebarItemStyle.expandDuration`.
+* Add `FSidebarItemStyle.expandCurve`.
+* Add `FSidebarItemStyle.collapseDuration`.
+* Add `FSidebarItemStyle.collapseCurve`.
+
+* Refine `FSidebar`'s collapsible animation.
+* **Breaking** Change `FSidebar` to not bounce.
+* **Breaking** Change `FSidebar.child` to be non-nullable.
+* **Breaking** Change `FSidebarStyle.width` to `FSidebarStyle.constraints`.
+* **Breaking** Remove `FSidebarStyle.bordeColor` - use `FSidebarStyle.decoration` instead.
+* **Breaking** Remove `FSidebarStyle.bordeWidth` - use `FSidebarStyle.decoration` instead.
+* **Breaking** Remove `FSidebarItemStyle.collapsibleAnimationDuration` - use `FSidebarItemStyle.expandDuration` instead.
 
 ### `FTappable`
 * Add `FTappableStyle.bounceDuration`.
