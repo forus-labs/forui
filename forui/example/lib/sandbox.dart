@@ -109,7 +109,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
         ),
         FPopover(
           style: context.theme.popoverStyle.copyWith(
-    backgroundFilter: (f) => ImageFilter.blur(sigmaX: f * 5, sigmaY: f * 5),
+            backgroundFilter: (f) => ImageFilter.blur(sigmaX: f * 5, sigmaY: f * 5),
             decoration: BoxDecoration(
               color: context.theme.colors.background.withValues(alpha: 0.5),
               borderRadius: context.theme.style.borderRadius,

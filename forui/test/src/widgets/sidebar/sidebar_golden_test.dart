@@ -236,7 +236,9 @@ void main() {
                   ),
                   FSidebarGroup(
                     label: const Text('Group 2'),
-                    children: [FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {})],
+                    children: [
+                      FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {}),
+                    ],
                   ),
                 ],
               ),

@@ -64,9 +64,7 @@ void main() {
                   FHeader.nested(
                     style: theme.data.headerStyles.nestedStyle.copyWith(
                       backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      decoration: BoxDecoration(
-                        color: theme.data.colors.background.withValues(alpha: 0.5),
-                      ),
+                      decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
                     ),
                     title: const Text('Title'),
                     prefixes: [

@@ -60,9 +60,7 @@ void main() {
                   FHeader(
                     style: theme.data.headerStyles.rootStyle.copyWith(
                       backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      decoration: BoxDecoration(
-                        color: theme.data.colors.background.withValues(alpha: 0.5),
-                      ),
+                      decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
                     ),
                     title: const Text('Title'),
                     suffixes: [
