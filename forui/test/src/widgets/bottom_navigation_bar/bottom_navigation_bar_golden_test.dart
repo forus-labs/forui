@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -44,6 +46,43 @@ void main() {
       await expectLater(
         find.byType(TestScaffold),
         matchesGoldenFile('bottom-navigation-bar/${theme.name}-forui-icon.png'),
+      );
+    });
+
+    testWidgets('${theme.name} with decoration & background filter', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Stack(
+                children: [
+                  const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+                  FBottomNavigationBar(
+                    style: theme.data.bottomNavigationBarStyle.copyWith(
+                      backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
+                    ),
+                    index: 2,
+                    children: const [
+                      FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+                      FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
+                      FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
+                      FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Library')),
+                      FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Search')),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('bottom-navigation-bar/${theme.name}-decorated.png'),
       );
     });
 

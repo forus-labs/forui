@@ -203,7 +203,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
     : this(
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: colors.border)),
-          color: colors.background.withValues(alpha: 0.5),
+          color: colors.background,
         ),
         itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, typography: typography, style: style),
       );

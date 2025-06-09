@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -115,6 +117,43 @@ class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
 
 /// A header's style.
 class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
+  /// The decoration.
+  @override
+  final BoxDecoration decoration;
+
+  /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
+  /// background color.
+  ///
+  /// This is typically combined with a transparent/translucent background to create a glassmorphic effect.
+  ///
+  /// ## Examples
+  /// ```dart
+  /// // Blurred
+  /// ImageFilter.blur(sigmaX: 5, sigmaY: 5);
+  ///
+  /// // Solid color
+  /// ColorFilter.mode(Colors.white, BlendMode.srcOver);
+  ///
+  /// // Tinted
+  /// ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver);
+  ///
+  /// // Blurred & tinted
+  /// ImageFilter.compose(
+  ///   outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver),
+  /// );
+  /// ```
+  @override
+  final ImageFilter? backgroundFilter;
+
+  /// The padding.
+  @override
+  final EdgeInsetsGeometry padding;
+
+  /// The spacing between [FHeaderAction]s. Defaults to 10.
+  @override
+  final double actionSpacing;
+
   /// The title's [TextStyle].
   @override
   final TextStyle titleTextStyle;
@@ -123,19 +162,13 @@ class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
   @override
   final FHeaderActionStyle actionStyle;
 
-  /// The spacing between [FHeaderAction]s. Defaults to 10.
-  @override
-  final double actionSpacing;
-
-  /// The padding.
-  @override
-  final EdgeInsetsGeometry padding;
-
   /// Creates a [FHeaderStyle].
   const FHeaderStyle({
     required this.titleTextStyle,
     required this.actionStyle,
     required this.padding,
+    this.decoration = const BoxDecoration(),
+    this.backgroundFilter,
     this.actionSpacing = 10,
   });
 }

@@ -84,16 +84,34 @@ class _FNestedHeader extends FHeader {
             );
     }
 
-    return SafeArea(
+    Widget header = SafeArea(
       bottom: false,
       child: Semantics(
         header: true,
-        child: Padding(
-          padding: style.padding,
-          child: FHeaderData(actionStyle: style.actionStyle, child: title),
+        child: DecoratedBox(
+          decoration: style.decoration,
+          child: Padding(
+            padding: style.padding,
+            child: FHeaderData(actionStyle: style.actionStyle, child: title),
+          ),
         ),
       ),
     );
+
+    if (style.backgroundFilter case final filter?) {
+      header = Stack(
+        children: [
+          Positioned.fill(
+            child: ClipRect(
+              child: BackdropFilter(filter: filter, child: Container()),
+            ),
+          ),
+          header,
+        ],
+      );
+    }
+
+    return header;
   }
 
   @override

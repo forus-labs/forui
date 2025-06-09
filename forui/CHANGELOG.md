@@ -21,7 +21,10 @@ polished.
 * Add `FDialogStyle.fadeTween`.
 * Add `FDialogStyle.scaleTween`.
 
-* Change `FDialog` from a stateless to a stateful widget.
+
+### `FHeader`
+* Add `FHeaderStyle.backgroundFilter`.
+* Add `FHeaderStyle.decoration`.
 
 
 ### `FPopover`

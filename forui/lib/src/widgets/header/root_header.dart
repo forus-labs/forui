@@ -22,7 +22,7 @@ class _FRootHeader extends FHeader {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.headerStyles.rootStyle;
-    return SafeArea(
+    Widget header = SafeArea(
       bottom: false,
       child: Semantics(
         header: true,
@@ -51,6 +51,21 @@ class _FRootHeader extends FHeader {
         ),
       ),
     );
+
+    if (style.backgroundFilter case final filter?) {
+      header = Stack(
+        children: [
+          Positioned.fill(
+            child: ClipRect(
+              child: BackdropFilter(filter: filter, child: Container()),
+            ),
+          ),
+          header,
+        ],
+      );
+    }
+
+    return header;
   }
 
   @override
