@@ -13,11 +13,10 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   prepare:
-    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false
+    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false && !contains(github.event.head_commit.message, 'Prepare Forui for review')
     name: Prepare PR for review
     runs-on: ubuntu-latest
     defaults:
@@ -51,7 +50,7 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           pull: '--rebase --autostash'
-          message: 'Prepare PR for review'
+          message: 'Prepare Forui for review'
           add: '*'
 
   generate-goldens:

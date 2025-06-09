@@ -1,7 +1,7 @@
 name: Forui Samples Presubmit
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch: { }
   pull_request:
     branches: [ main ]
     paths:
@@ -13,11 +13,10 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   prepare:
-    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false
+    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false && !contains(github.event.head_commit.message, 'Prepare samples for review')
     name: Prepare PR for review
     runs-on: ubuntu-latest
     defaults:
@@ -41,7 +40,7 @@ jobs:
         with:
           cache: true
 
-      - working-directory: forui
+      - working-directory: samples
         run: |
           flutter pub get
           dart run build_runner build --delete-conflicting-outputs
@@ -49,12 +48,11 @@ jobs:
       - run: flutter pub get
       - run: dart run ../tool/sort.dart forui_samples
       - run: dart run build_runner build --delete-conflicting-outputs
-      - run: dart format .
       - run: dart fix --apply
-        # We format the code again since the required trailing comma lint fixes causes code to be formatted differently
       - run: dart format .
 
       - uses: EndBug/add-and-commit@v9
         with:
           pull: '--rebase --autostash'
+          message: 'Prepare samples for review'
           add: '*'
