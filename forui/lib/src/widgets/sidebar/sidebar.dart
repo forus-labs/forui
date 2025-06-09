@@ -31,7 +31,7 @@ part 'sidebar.style.dart';
 /// ```
 ///
 /// See:
-/// * https://forui.dev/docs/layout/sidebar for working examples.
+/// * https://forui.dev/docs/navigation/sidebar for working examples.
 /// * [FSidebarStyle] for customizing a sidebar's appearance.
 class FSidebar extends StatelessWidget {
   /// The style.

@@ -13,7 +13,7 @@ part 'sidebar_group.style.dart';
 /// action. The label is typically used to describe the group, while the action can be used for group-level operations.
 ///
 /// See:
-/// * https://forui.dev/docs/layout/sidebar for working examples.
+/// * https://forui.dev/docs/navigation/sidebar for working examples.
 /// * [FSidebarGroupStyle] for customizing a sidebar group's appearance.
 class FSidebarGroup extends StatelessWidget {
   /// The sidebar group's style.
