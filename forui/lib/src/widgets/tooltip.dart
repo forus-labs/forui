@@ -263,14 +263,25 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         portalAnchor: widget.tipAnchor,
         shift: widget.shift,
         portalBuilder: (context, _) {
-          Widget tooltip = DecoratedBox(
-            decoration: style.decoration,
-            child: Padding(
-              padding: style.padding,
-              child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, _controller)),
+          Widget tooltip =  Semantics(
+            container: true,
+            child: FadeTransition(
+              opacity: _controller._fade,
+              child: ScaleTransition(
+                alignment: widget.tipAnchor.resolve(direction),
+                scale: _controller._scale,
+                child: DecoratedBox(
+                  decoration: style.decoration,
+                  child: Padding(
+                    padding: style.padding,
+                    child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, _controller)),
+                  ),
+                ),
+              ),
             ),
           );
 
+          // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
           if (style.backgroundFilter case final background?) {
             tooltip = Stack(
               children: [
@@ -284,17 +295,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
             );
           }
 
-          return Semantics(
-            container: true,
-            child: FadeTransition(
-              opacity: _controller._fade,
-              child: ScaleTransition(
-                alignment: widget.tipAnchor.resolve(direction),
-                scale: _controller._scale,
-                child: tooltip,
-              ),
-            ),
-          );
+          return tooltip;
         },
         child: child,
       ),

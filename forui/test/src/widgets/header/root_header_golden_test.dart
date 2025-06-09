@@ -47,7 +47,7 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}.png'));
     });
 
-    testWidgets('${theme.name} with decoration & background filter', (tester) async {
+    testWidgets('${theme.name} glassmorphic', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
@@ -77,7 +77,7 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-decorated.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-glassmorphic.png'));
     });
 
     testWidgets('${theme.name} with focused FRootHeader actions', (tester) async {

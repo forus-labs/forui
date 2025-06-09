@@ -49,7 +49,7 @@ void main() {
       );
     });
 
-    testWidgets('${theme.name} with decoration & background filter', (tester) async {
+    testWidgets('${theme.name} glassmorphic', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
@@ -82,7 +82,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('bottom-navigation-bar/${theme.name}-decorated.png'),
+        matchesGoldenFile('bottom-navigation-bar/${theme.name}-glassmorphic.png'),
       );
     });
 

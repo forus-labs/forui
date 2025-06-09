@@ -381,6 +381,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
             ),
           );
 
+          // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
           if (style.backgroundFilter case final filter?) {
             popover = Stack(
               children: [
