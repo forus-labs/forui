@@ -40,7 +40,7 @@ jobs:
         with:
           cache: true
 
-      - working-directory: samples
+      - working-directory: forui
         run: |
           flutter pub get
           dart run build_runner build --delete-conflicting-outputs
@@ -55,4 +55,4 @@ jobs:
         with:
           pull: '--rebase --autostash'
           message: 'Prepare samples for review'
-          add: '*'
+          add: '.'
