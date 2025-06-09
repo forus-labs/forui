@@ -1,4 +1,6 @@
+// dart format off
 // coverage:ignore-file
+
 
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;

@@ -1,4 +1,6 @@
+// dart format off
 // coverage:ignore-file
+
 
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
@@ -129,7 +131,7 @@ class FLocalizationsDe extends FLocalizations {
 
 /// The translations for German, as used in Switzerland (`de_CH`).
 class FLocalizationsDeCh extends FLocalizationsDe {
-  FLocalizationsDeCh() : super('de_CH');
+  FLocalizationsDeCh(): super('de_CH');
 
   @override
   String get dateFieldHint => 'Datum auswählen';
