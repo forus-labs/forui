@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -46,7 +48,7 @@ class FBottomNavigationBar extends StatelessWidget {
     final style = this.style ?? context.theme.bottomNavigationBarStyle;
     final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
 
-    return DecoratedBox(
+    Widget bar = DecoratedBox(
       decoration: style.decoration,
       child: SafeArea(
         top: false,
@@ -71,6 +73,21 @@ class FBottomNavigationBar extends StatelessWidget {
         ),
       ),
     );
+
+    if (style.backgroundFilter case final filter?) {
+      bar = Stack(
+        children: [
+          Positioned.fill(
+            child: ClipRect(
+              child: BackdropFilter(filter: filter, child: Container()),
+            ),
+          ),
+          bar,
+        ],
+      );
+    }
+
+    return bar;
   }
 
   @override
@@ -140,6 +157,31 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   @override
   final BoxDecoration decoration;
 
+  /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
+  /// background color.
+  ///
+  /// This is typically combined with a transparent/translucent background to create a glassmorphic effect.
+  ///
+  /// ## Examples
+  /// ```dart
+  /// // Blurred
+  /// ImageFilter.blur(sigmaX: 5, sigmaY: 5);
+  ///
+  /// // Solid color
+  /// ColorFilter.mode(Colors.white, BlendMode.srcOver);
+  ///
+  /// // Tinted
+  /// ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver);
+  ///
+  /// // Blurred & tinted
+  /// ImageFilter.compose(
+  ///   outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver),
+  /// );
+  /// ```
+  @override
+  final ImageFilter? backgroundFilter;
+
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   @override
   final EdgeInsetsGeometry padding;
@@ -152,6 +194,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   const FBottomNavigationBarStyle({
     required this.decoration,
     required this.itemStyle,
+    this.backgroundFilter,
     this.padding = const EdgeInsets.all(5),
   });
 
@@ -160,7 +203,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
     : this(
         decoration: BoxDecoration(
           border: Border(top: BorderSide(color: colors.border)),
-          color: colors.background,
+          color: colors.background.withValues(alpha: 0.5),
         ),
         itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, typography: typography, style: style),
       );

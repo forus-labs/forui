@@ -227,7 +227,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       }
 
       // Allow the sheet to animate smoothly from its current position.
-      _curve = Split(_animation.value, endCurve: Curves.easeOutCubic);
+      _curve = Split(_animation.value);
       if (closing) {
         widget.onClosing();
       }

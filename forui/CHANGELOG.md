@@ -2,7 +2,11 @@
 
 ### Animations
 We've updated the animations in Forui to feel more nature and be origin aware. This should make the animations feel more
-natural and less jarring.
+polished.
+
+
+### `FBottomNavigationBar`
+* Add `FBottomNavigationBarStyle.backgroundFilter`.
 
 
 ### `FDialog`

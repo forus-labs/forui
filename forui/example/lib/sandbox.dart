@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -48,7 +47,13 @@ class Sandbox extends StatefulWidget {
 }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  late final controller = FPopoverController(vsync: this);
+  late final FPopoverController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = FPopoverController(vsync: this);
+  }
 
   @override
   void dispose() {
@@ -82,15 +87,16 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
           intrinsicWidth: true,
           onPress: () => showFDialog(
             style: context.theme.dialogStyle.copyWith(
-              backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              backgroundFilter: (f) => ImageFilter.blur(sigmaX: f * 5, sigmaY: f * 5),
               decoration: BoxDecoration(
                 borderRadius: context.theme.style.borderRadius,
                 color: context.theme.colors.background.withValues(alpha: 0.5),
               ),
             ),
             context: context,
-            builder: (context, style) => FDialog(
+            builder: (context, style, animation) => FDialog(
               style: style,
+              animation: animation,
               direction: Axis.horizontal,
               title: const Text('Are you absolutely sure?'),
               body: const Text(
@@ -103,7 +109,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
         ),
         FPopover(
           style: context.theme.popoverStyle.copyWith(
-            backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+    backgroundFilter: (f) => ImageFilter.blur(sigmaX: f * 5, sigmaY: f * 5),
             decoration: BoxDecoration(
               color: context.theme.colors.background.withValues(alpha: 0.5),
               borderRadius: context.theme.style.borderRadius,

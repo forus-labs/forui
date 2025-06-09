@@ -362,7 +362,11 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
       _curvedBounce?.dispose();
       _bounceController?.dispose();
 
-      _bounceController = AnimationController(vsync: this, duration: style.bounceDuration);
+      _bounceController = AnimationController(
+        vsync: this,
+        duration: style.bounceDownDuration,
+        reverseDuration: style.bounceUpDuration,
+      );
       _curvedBounce = CurvedAnimation(
         parent: _bounceController!,
         curve: style.bounceDownCurve,
@@ -381,7 +385,11 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
       _curvedBounce?.dispose();
       _bounceController?.dispose();
 
-      _bounceController = AnimationController(vsync: this, duration: style.bounceDuration);
+      _bounceController = AnimationController(
+        vsync: this,
+        duration: style.bounceDownDuration,
+        reverseDuration: style.bounceUpDuration,
+      );
       _curvedBounce = CurvedAnimation(
         parent: _bounceController!,
         curve: style.bounceDownCurve,
@@ -451,15 +459,19 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   @override
   final Duration pressedExitDuration;
 
-  /// The bounce's animation duration when the tappable is pressed. Defaults to 150ms.
+  /// The bounce's animation duration when the tappable is pressed down. Defaults to 100ms.
   @override
-  final Duration bounceDuration;
+  final Duration bounceDownDuration;
 
-  /// The curve used to animate the scale of the tappable when pressed. Defaults to [Curves.easeOutQuart].
+  /// The bounce's animation duration when the tappable is released (up). Defaults to 120ms.
+  @override
+  final Duration bounceUpDuration;
+
+  /// The curve used to animate the scale of the tappable when pressed (down). Defaults to [Curves.easeOutQuart].
   @override
   final Curve bounceDownCurve;
 
-  /// The curve used to animate the scale of the tappable when released. Defaults to [Curves.easeOutCubic].
+  /// The curve used to animate the scale of the tappable when released (up). Defaults to [Curves.easeOutCubic].
   @override
   final Curve bounceUpCurve;
 
@@ -477,7 +489,8 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
     }),
     this.pressedEnterDuration = const Duration(milliseconds: 200),
     this.pressedExitDuration = Duration.zero,
-    this.bounceDuration = const Duration(milliseconds: 150),
+    this.bounceDownDuration = const Duration(milliseconds: 100),
+    this.bounceUpDuration = const Duration(milliseconds: 120),
     this.bounceDownCurve = Curves.easeOutQuart,
     this.bounceUpCurve = Curves.easeOutCubic,
     Tween<double>? bounceTween,
