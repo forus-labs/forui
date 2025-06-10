@@ -241,7 +241,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FWidgetStateMap<IconThemeData> collapsibleIconStyle;
 
-  /// The expand animation's duration. Defaults to 150ms.
+  /// The expand animation's duration. Defaults to 200ms.
   @override
   final Duration expandDuration;
 
@@ -249,7 +249,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final Curve expandCurve;
 
-  /// The collapse animation's duration. Defaults to 100ms.
+  /// The collapse animation's duration. Defaults to 150ms.
   @override
   final Duration collapseDuration;
 
@@ -298,9 +298,9 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
     required this.focusedOutlineStyle,
     this.iconSpacing = 8,
     this.collapsibleIconSpacing = 8,
-    this.expandDuration = const Duration(milliseconds: 150),
+    this.expandDuration = const Duration(milliseconds: 200),
     this.expandCurve = Curves.easeOutCubic,
-    this.collapseDuration = const Duration(milliseconds: 100),
+    this.collapseDuration = const Duration(milliseconds: 150),
     this.collapseCurve = Curves.easeInCubic,
     this.childrenSpacing = 2,
     this.childrenPadding = const EdgeInsets.only(left: 26, top: 2),

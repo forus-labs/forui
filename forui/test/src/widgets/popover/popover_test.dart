@@ -140,7 +140,6 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
-          hideOnTapOutside: FHidePopoverRegion.excludeTarget,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => Row(
             children: [
@@ -172,6 +171,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
+          hideOnTapOutside: FHidePopoverRegion.anywhere,
           popoverBuilder: (context, _) => const Text('follower'),
           builder: (_, controller, _) => Row(
             children: [

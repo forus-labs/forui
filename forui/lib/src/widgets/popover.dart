@@ -13,7 +13,7 @@ part 'popover.style.dart';
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
-  static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
+  static final _scaleTween = Tween<double>(begin: 0.80, end: 1);
 
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
@@ -172,6 +172,8 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.hideOnTapOutside}
   /// The region that can be tapped to hide the popover.
   /// {@endtemplate}
+  ///
+  /// Defaults to [FHidePopoverRegion.excludeTarget].
   final FHidePopoverRegion hideOnTapOutside;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
@@ -245,7 +247,7 @@ class FPopover extends StatefulWidget {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.autofocus,
     this.focusNode,
     this.onFocusChange,

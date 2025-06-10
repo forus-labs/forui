@@ -13,7 +13,7 @@ part 'tooltip.style.dart';
 /// A controller that controls whether a [FTooltip] is shown or hidden.
 class FTooltipController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
-  static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
+  static final _scaleTween = Tween<double>(begin: 0.80, end: 1);
 
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
