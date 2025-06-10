@@ -5,6 +5,17 @@ We've updated the animations in Forui to feel more nature and be origin aware. T
 polished.
 
 
+### `FAccordion`
+* Add `FAccordionItemStyle.expandDuration`.
+* Add `FAccordionItemStyle.expandCurve`.
+* Add `FAccordionItemStyle.collapseDuration`.
+* Add `FAccordionItemStyle.collapseCurve`.
+
+* Refine `FAccordion`'s collapsible animation.
+* **Breaking** Change `FAccordionStyle.iconStyle`'s default icon color from `primary` to `mutedForeground`.
+* **Breaking** Remove `FAccordionItemStyle.animationDuration` - use `FAccordionItemStyle.expandDuration` instead.
+
+
 ### `FBottomNavigationBar`
 * Add `FBottomNavigationBarStyle.backgroundFilter`.
 
@@ -34,8 +45,11 @@ polished.
 * Add `FPopoverStyle.barrierFilter`.
 * Add `FPopoverStyle.backgroundFilter`.
 
+
 * Change `FPopover`'s animation to be origin aware.
 * Change `FPopover(...)`'s `controller` to be optional.
+* **Breaking** Change `FPopover.hideOnTapOutside` default value from `FHidePopoverRegion.anywhere` to 
+  `FHidePopoverRegion.excludeTarget`.
 * **Breaking** Change `FPopover.popoverBuilder`'s signature from `ValueWidgetBuilder<FPopoverStyle>` to 
   `Widget Function(BuildContext, FPopoverController)`.
 * **Breaking** Remove `FPopover.automatic` - This was a bad abstraction in hindsight, use `FPopover.new` instead.
