@@ -106,7 +106,6 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   Widget build(BuildContext context) {
     final FAccordionItemData(:index, :controller, style: inheritedStyle) = FAccordionItemData.of(context);
     final style = widget.style ?? inheritedStyle;
-    final angle = ((Directionality.maybeOf(context) ?? TextDirection.ltr) == TextDirection.ltr) ? -180 : 180;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
