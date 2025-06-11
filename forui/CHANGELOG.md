@@ -1,10 +1,41 @@
 ## 0.13.0 (Next)
 
+### Animations
+We've updated the animations in Forui to feel more nature and be origin aware. This should make the animations feel more
+polished.
+
+
+### `FAccordion`
+* Add `FAccordionItemStyle.expandDuration`.
+* Add `FAccordionItemStyle.expandCurve`.
+* Add `FAccordionItemStyle.collapseDuration`.
+* Add `FAccordionItemStyle.collapseCurve`.
+
+* Refine `FAccordion`'s collapsible animation.
+* **Breaking** Change `FAccordionStyle.iconStyle`'s default icon color from `primary` to `mutedForeground`.
+* **Breaking** Remove `FAccordionItemStyle.animationDuration` - use `FAccordionItemStyle.expandDuration` instead.
+
+
+### `FBottomNavigationBar`
+* Add `FBottomNavigationBarStyle.backgroundFilter`.
+
+
 ### `FDialog`
 * Add `showFDialog`.
+* Add `FDialog.animation`.
 * Add `FDialogRoute`.
 * Add `FDialogStyle.barrierFilter`.
 * Add `FDialogStyle.backgroundFilter`.
+* Add `FDialogStyle.entranceExitDuration`.
+* Add `FDialogStyle.entranceCurve`.
+* Add `FDialogStyle.exitCurve`.
+* Add `FDialogStyle.fadeTween`.
+* Add `FDialogStyle.scaleTween`.
+
+
+### `FHeader`
+* Add `FHeaderStyle.backgroundFilter`.
+* Add `FHeaderStyle.decoration`.
 
 
 ### `FPopover`
@@ -14,8 +45,11 @@
 * Add `FPopoverStyle.barrierFilter`.
 * Add `FPopoverStyle.backgroundFilter`.
 
+
 * Change `FPopover`'s animation to be origin aware.
 * Change `FPopover(...)`'s `controller` to be optional.
+* **Breaking** Change `FPopover.hideOnTapOutside` default value from `FHidePopoverRegion.anywhere` to 
+  `FHidePopoverRegion.excludeTarget`.
 * **Breaking** Change `FPopover.popoverBuilder`'s signature from `ValueWidgetBuilder<FPopoverStyle>` to 
   `Widget Function(BuildContext, FPopoverController)`.
 * **Breaking** Remove `FPopover.automatic` - This was a bad abstraction in hindsight, use `FPopover.new` instead.
@@ -50,10 +84,35 @@
 
 
 ### `FSheet`
-
 * Change `FSSheet`'s transition animation.
 * **Breaking** Change `FSheetStyle.barrierColor` to `FSheetStyle.barrierFilter`.
 * **Breaking** Remove `FSheetStyle.backgroundColor`.
+
+
+### `FSidebar`
+* Add `FSidebarStyle.backgroundFilter`.
+* Add `FSidebarStyle.decoration`.
+* Add `FSidebarItemStyle.expandDuration`.
+* Add `FSidebarItemStyle.expandCurve`.
+* Add `FSidebarItemStyle.collapseDuration`.
+* Add `FSidebarItemStyle.collapseCurve`.
+
+* Refine `FSidebar`'s collapsible animation.
+* **Breaking** Change `FSidebar` to not bounce.
+* **Breaking** Change `FSidebar.child` to be non-nullable.
+* **Breaking** Change `FSidebarStyle.width` to `FSidebarStyle.constraints`.
+* **Breaking** Remove `FSidebarStyle.bordeColor` - use `FSidebarStyle.decoration` instead.
+* **Breaking** Remove `FSidebarStyle.bordeWidth` - use `FSidebarStyle.decoration` instead.
+* **Breaking** Remove `FSidebarItemStyle.collapsibleAnimationDuration` - use `FSidebarItemStyle.expandDuration` instead.
+
+### `FTappable`
+* Add `FTappableStyle.bounceDuration`.
+* Add `FTappableStyle.bounceDownCurve`.
+* Add `FTappableStyle.bounceUpCurve`.
+
+* **Breaking** Rename `FTappableStyle.animationTween` to `FTappableStyle.bounceTween`.
+* **Breaking** Remove `FTappableAnimations` - use `FTappableStyle.defaultBounceTween` and `FTappableStyle.noBounceTween`
+  instead.
 
 
 ### `FTooltip`

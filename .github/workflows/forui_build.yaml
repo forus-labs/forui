@@ -13,13 +13,12 @@ on:
 jobs:
   test:
     name: Build & test
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     defaults:
       run:
         working-directory: forui
     strategy:
       matrix:
-        os: [macos-latest, windows-latest]
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v4
@@ -46,7 +45,6 @@ jobs:
               echo "$output"
               exit 1
           fi
-        if: runner.os == 'macOS'
       - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

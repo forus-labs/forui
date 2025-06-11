@@ -319,7 +319,7 @@ class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
         dividerStyle: divider,
         contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
-          animationTween: FTappableAnimations.none,
+          bounceTween: FTappableStyle.noBounceTween,
           pressedEnterDuration: Duration.zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),
@@ -335,7 +335,7 @@ class FTileStyle with Diagnosticable, _$FTileStyleFunctions {
         contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
           cursor: FWidgetStateMap.all(MouseCursor.defer),
-          animationTween: FTappableAnimations.none,
+          bounceTween: FTappableStyle.noBounceTween,
           pressedEnterDuration: Duration.zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),

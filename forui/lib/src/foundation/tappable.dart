@@ -207,6 +207,12 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void _onChange() => widget.onStateChange?.call(_controller.value);
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.tappableStyle;
     // TODO: https://github.com/flutter/flutter/issues/167916
@@ -311,12 +317,6 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void onPressedStart() {}
 
   void onPressedEnd() {}
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 }
 
 @internal
@@ -346,42 +346,80 @@ class AnimatedTappable extends FTappable {
 
 @internal
 class AnimatedTappableState extends _FTappableState<AnimatedTappable> with SingleTickerProviderStateMixin {
-  late final AnimationController controller;
-  late Animation<double> animation;
-  late FTappableStyle style;
+  @visibleForTesting
+  Animation<double>? bounce;
 
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
-    animation = (widget.style?.animationTween ?? Tween(begin: 1.0, end: 0.97)).animate(controller);
-  }
+  FTappableStyle? _style;
+  AnimationController? _bounceController;
+  CurvedAnimation? _curvedBounce;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    style = widget.style ?? context.theme.tappableStyle;
-    animation = style.animationTween.animate(controller);
+    final style = widget.style ?? context.theme.tappableStyle;
+    if (_style != style) {
+      _style = style;
+      _curvedBounce?.dispose();
+      _bounceController?.dispose();
+
+      _bounceController = AnimationController(
+        vsync: this,
+        duration: style.bounceDownDuration,
+        reverseDuration: style.bounceUpDuration,
+      );
+      _curvedBounce = CurvedAnimation(
+        parent: _bounceController!,
+        curve: style.bounceDownCurve,
+        reverseCurve: style.bounceUpCurve,
+      );
+      bounce = style.bounceTween.animate(_curvedBounce!);
+    }
   }
 
   @override
   void didUpdateWidget(covariant AnimatedTappable old) {
     super.didUpdateWidget(old);
-    style = widget.style ?? context.theme.tappableStyle;
+    final style = widget.style ?? context.theme.tappableStyle;
+    if (_style != style) {
+      _style = style;
+      _curvedBounce?.dispose();
+      _bounceController?.dispose();
 
-    if (widget.style != old.style) {
-      animation = style.animationTween.animate(controller);
+      _bounceController = AnimationController(
+        vsync: this,
+        duration: style.bounceDownDuration,
+        reverseDuration: style.bounceUpDuration,
+      );
+      _curvedBounce = CurvedAnimation(
+        parent: _bounceController!,
+        curve: style.bounceDownCurve,
+        reverseCurve: style.bounceUpCurve,
+      );
+      bounce = style.bounceTween.animate(_curvedBounce!);
     }
   }
 
   @override
-  Widget _decorate(BuildContext _, Widget child) => ScaleTransition(scale: animation, child: child);
+  void dispose() {
+    _curvedBounce?.dispose();
+    _bounceController?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget _decorate(BuildContext _, Widget child) {
+    if (bounce case final bounce?) {
+      return ScaleTransition(scale: bounce, child: child);
+    } else {
+      return child;
+    }
+  }
 
   @override
   void onPressedStart() {
     // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
     if (mounted) {
-      controller.forward();
+      _bounceController?.forward();
     }
   }
 
@@ -389,37 +427,26 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   void onPressedEnd() {
     // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
     if (mounted) {
-      controller.reverse();
+      _bounceController?.reverse();
     }
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('animation', animation))
-      ..add(DiagnosticsProperty('style', style));
+    properties.add(DiagnosticsProperty('bounce', bounce));
   }
-}
-
-/// Defines different animation styles for [FTappable] widgets.
-extension FTappableAnimations on Never {
-  /// No animation will be applied.
-  static final Tween<double> none = Tween(begin: 1.0, end: 1.0);
-
-  /// A bounce animation that scales the widget down and back up.
-  static final Tween<double> bounce = Tween(begin: 1.0, end: 0.97);
 }
 
 /// A custom [FTappable] style.
 class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
+  /// The default bounce tween used by [FTappableStyle]. It scales the widget down to 0.97 on tap down and back to 1.0
+  /// on tap up.
+  static final Tween<double> defaultBounceTween = Tween(begin: 1.0, end: 0.97);
+
+  /// A tween that does not animate the scale of the tappable. It is used to disable the bounce effect.
+  static final Tween<double> noBounceTween = Tween(begin: 1.0, end: 1.0);
+
   /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [SystemMouseCursors.click].
   @override
   final FWidgetStateMap<MouseCursor> cursor;
@@ -432,9 +459,27 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   @override
   final Duration pressedExitDuration;
 
-  /// The tween used to animate the scale of the tappable. Defaults to a scale of 0.97.
+  /// The bounce's animation duration when the tappable is pressed down. Defaults to 100ms.
   @override
-  final Tween<double> animationTween;
+  final Duration bounceDownDuration;
+
+  /// The bounce's animation duration when the tappable is released (up). Defaults to 120ms.
+  @override
+  final Duration bounceUpDuration;
+
+  /// The curve used to animate the scale of the tappable when pressed (down). Defaults to [Curves.easeOutQuart].
+  @override
+  final Curve bounceDownCurve;
+
+  /// The curve used to animate the scale of the tappable when released (up). Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve bounceUpCurve;
+
+  /// The tween used to animate the scale of the tappable. Defaults to [defaultBounceTween].
+  ///
+  /// Set to [noBounceTween] to disable the bounce effect.
+  @override
+  final Tween<double> bounceTween;
 
   /// Creates a [FTappableStyle].
   FTappableStyle({
@@ -444,6 +489,10 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
     }),
     this.pressedEnterDuration = const Duration(milliseconds: 200),
     this.pressedExitDuration = Duration.zero,
-    Tween<double>? animationTween,
-  }) : animationTween = animationTween ?? FTappableAnimations.bounce;
+    this.bounceDownDuration = const Duration(milliseconds: 100),
+    this.bounceUpDuration = const Duration(milliseconds: 120),
+    this.bounceDownCurve = Curves.easeOutQuart,
+    this.bounceUpCurve = Curves.easeOutCubic,
+    Tween<double>? bounceTween,
+  }) : bounceTween = bounceTween ?? defaultBounceTween;
 }

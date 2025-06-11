@@ -2,7 +2,9 @@ arb-dir: lib/l10n
 template-arb-file: f_en.arb
 synthetic-package: false
 format: true
-header: '// coverage:ignore-file'
+header: |
+  // dart format off
+  // coverage:ignore-file
 output-dir: lib/src/localizations
 output-localization-file: localizations.dart
 output-class: FLocalizations

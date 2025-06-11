@@ -13,7 +13,7 @@ part 'popover.style.dart';
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
-  static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
+  static final _scaleTween = Tween<double>(begin: 0.80, end: 1);
 
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
@@ -25,8 +25,8 @@ final class FPopoverController extends FChangeNotifier {
   /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
   FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 150)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
-    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeInCubic);
+    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeInCubic);
     _fade = _fadeTween.animate(_curveFade);
     _scale = _scaleTween.animate(_curveScale);
   }
@@ -172,6 +172,8 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.hideOnTapOutside}
   /// The region that can be tapped to hide the popover.
   /// {@endtemplate}
+  ///
+  /// Defaults to [FHidePopoverRegion.excludeTarget].
   final FHidePopoverRegion hideOnTapOutside;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
@@ -245,7 +247,7 @@ class FPopover extends StatefulWidget {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.autofocus,
     this.focusNode,
     this.onFocusChange,
@@ -356,17 +358,41 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                 onDismiss: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : () {},
               ),
         portalBuilder: (context, _) {
-          Widget popover = DecoratedBox(
-            decoration: style.decoration,
-            child: widget.popoverBuilder(context, _controller),
+          Widget popover = ScaleTransition(
+            alignment: widget.popoverAnchor.resolve(direction),
+            scale: _controller._scale,
+            child: FadeTransition(
+              opacity: _controller._fade,
+              child: Semantics(
+                label: widget.semanticsLabel,
+                container: true,
+                child: FocusScope(
+                  autofocus: widget.autofocus ?? (style.barrierFilter != null),
+                  node: widget.focusNode,
+                  onFocusChange: widget.onFocusChange,
+                  child: TapRegion(
+                    groupId: _groupId,
+                    onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
+                    child: DecoratedBox(
+                      decoration: style.decoration,
+                      child: widget.popoverBuilder(context, _controller),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           );
 
-          if (style.backgroundFilter case final background?) {
+          // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
+          if (style.backgroundFilter case final filter?) {
             popover = Stack(
               children: [
                 Positioned.fill(
                   child: ClipRect(
-                    child: BackdropFilter(filter: background, child: Container()),
+                    child: AnimatedBuilder(
+                      animation: _controller._fade,
+                      builder: (_, _) => BackdropFilter(filter: filter(_controller._fade.value), child: Container()),
+                    ),
                   ),
                 ),
                 popover,
@@ -376,27 +402,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
           return CallbackShortcuts(
             bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-            child: FadeTransition(
-              opacity: _controller._fade,
-              child: ScaleTransition(
-                alignment: widget.popoverAnchor.resolve(direction),
-                scale: _controller._scale,
-                child: Semantics(
-                  label: widget.semanticsLabel,
-                  container: true,
-                  child: FocusScope(
-                    autofocus: widget.autofocus ?? (style.barrierFilter != null),
-                    node: widget.focusNode,
-                    onFocusChange: widget.onFocusChange,
-                    child: TapRegion(
-                      groupId: _groupId,
-                      onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
-                      child: popover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            child: popover,
           );
         },
         child: child,
@@ -428,8 +434,8 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final BoxDecoration decoration;
 
   /// {@template forui.widgets.FPopoverStyle.barrierFilter}
-  /// A callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter] that is
-  /// used as the barrier. Defaults to null.
+  /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
+  /// that is used as the barrier. Defaults to null.
   ///
   /// ## Examples
   /// ```dart
@@ -452,11 +458,32 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final ImageFilter Function(double animation)? barrierFilter;
 
-  /// An optional background filter applied to the popover.
+  /// {@template forui.widgets.FPopoverStyle.backgroundFilter}
+  /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
+  /// that is used as the background. Defaults to null.
   ///
-  /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
+  /// This is typically combined with a transparent/translucent background to create a glassmorphic effect.
+  ///
+  /// ## Examples
+  /// ```dart
+  /// // Blurred
+  /// (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5);
+  ///
+  /// // Solid color
+  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation), BlendMode.srcOver);
+  ///
+  /// // Tinted
+  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver);
+  ///
+  /// // Blurred & tinted
+  /// (animation) => ImageFilter.compose(
+  ///   outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver),
+  /// );
+  /// ```
+  /// {@endtemplate}
   @override
-  final ImageFilter? backgroundFilter;
+  final ImageFilter Function(double animation)? backgroundFilter;
 
   /// The additional insets of the view. In other words, the minimum distance between the edges of the view and the
   /// edges of the popover. This applied in addition to the insets provided by [MediaQueryData.viewPadding].

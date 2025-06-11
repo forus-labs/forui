@@ -24,7 +24,9 @@ A modal dialog interrupts the user with important content and expects a response
           intrinsicWidth: true,
           onPress: () => showFDialog(
             context: context,
-            builder: (context, style) => FDialog(
+            builder: (context, style, animation) => FDialog(
+              style: style,
+              animation: animation,
               direction: Axis.horizontal,
               title: const Text('Are you absolutely sure?'),
               body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
@@ -52,11 +54,29 @@ dart run forui style create dialog
 
 ## Usage
 
+### `showFDialog(...)`
+
+```dart copy
+showFDialog<T>(
+  context: context,
+  builder: (context, style, animation) => FDialog(...),
+  useRootNavigator: false,
+  style: FDialogStyle(...),
+  barrierLabel: 'Label',
+  barrierDismissible: true,
+  routeSettings: RouteSettings(...),
+  transitionAnimationController: AnimationController(...),
+  anchorPoint: Offset.zero,
+  useSafeArea: false,
+);
+```
+
 ### `FDialog(...)`
 
 ```dart copy
 FDialog(
   style: FDialogStyle(...),
+  animation: Animation<double>(...),
   direction: Axis.horizontal,
   title: const Text('Are you absolutely sure?'),
   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
@@ -72,6 +92,7 @@ FDialog(
 ```dart copy
 FDialog.adaptive(
   style: FDialogStyle(...),
+  animation: Animation<double>(...),
   title: const Text('Are you absolutely sure?'),
   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
   actions: [
@@ -86,6 +107,7 @@ FDialog.adaptive(
 ```dart copy
 FDialog.raw(
   style: FDialogStyle(...),
+  animation: Animation<double>(...),
   builder: (context, style) => const Placeholder(),
 );
 ```
@@ -99,7 +121,7 @@ FDialog.raw(
     <Widget name='dialog' query={{vertical: "false"}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {10} copy
+    ```dart {12} copy
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -108,7 +130,9 @@ FDialog.raw(
             child: const Text('Show Dialog'),
             onPress: () => showFDialog(
               context: context,
-              builder: (context, style) => FDialog(
+              builder: (context, style, animation) => FDialog(
+                style: style,
+                animation: animation,
                 direction: Axis.horizontal,
                 title: const Text('Are you absolutely sure?'),
                 body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
@@ -144,7 +168,9 @@ We recommend using the vertical layout on mobile devices.
               child: const Text('Show Dialog'),
               onPress: () => showFDialog(
                 context: context,
-                builder: (context, style) => FDialog(
+                builder: (context, style, animation) => FDialog(
+                  style: style,
+                  animation: animation,
                   title: const Text('Are you absolutely sure?'),
                   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
                   actions: [
@@ -182,8 +208,9 @@ We recommend using the vertical layout on mobile devices.
                   ),
                 ),
                 context: context,
-                builder: (context, style) => FDialog(
+                builder: (context, style, animation) => FDialog(
                   style: style,
+                  animation: animation,
                   title: const Text('Are you absolutely sure?'),
                   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
                   actions: [

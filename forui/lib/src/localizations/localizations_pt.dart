@@ -1,4 +1,6 @@
+// dart format off
 // coverage:ignore-file
+
 
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
@@ -129,7 +131,7 @@ class FLocalizationsPt extends FLocalizations {
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
 class FLocalizationsPtPt extends FLocalizationsPt {
-  FLocalizationsPtPt() : super('pt_PT');
+  FLocalizationsPtPt(): super('pt_PT');
 
   @override
   String get barrierLabel => 'Scrim';

@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -52,7 +50,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
     required this.title,
     required this.child,
     this.style,
-    this.icon = const Icon(FIcons.chevronRight),
+    this.icon = const Icon(FIcons.chevronDown),
     this.initiallyExpanded = false,
     this.autofocus = false,
     this.focusNode,
@@ -77,8 +75,8 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
 
 class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStateMixin {
   AnimationController? _controller;
-  CurvedAnimation? _curved;
-  late Animation<double> _animation;
+  CurvedAnimation? _body;
+  Animation<double>? _icon;
 
   @override
   void didChangeDependencies() {
@@ -88,14 +86,16 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     controller.removeItem(index);
 
     _controller?.dispose();
-    _controller = AnimationController(vsync: this)
-      ..value = widget.initiallyExpanded ? 1 : 0
-      ..duration = style.animationDuration;
+    _body?.dispose();
 
-    _curved?.dispose();
-    _curved = CurvedAnimation(curve: Curves.ease, parent: _controller!);
-
-    _animation = Tween<double>(begin: 0, end: 100).animate(_curved!);
+    _controller = AnimationController(
+      vsync: this,
+      value: widget.initiallyExpanded ? 1 : 0,
+      duration: style.expandDuration,
+      reverseDuration: style.collapseDuration,
+    );
+    _body = CurvedAnimation(curve: style.expandCurve, reverseCurve: style.collapseCurve, parent: _controller!);
+    _icon = Tween<double>(begin: 0, end: 0.5).animate(_body!);
 
     if (!controller.addItem(index, _controller!)) {
       throw StateError('Number of expanded items must be within the min and max.');
@@ -106,60 +106,60 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   Widget build(BuildContext context) {
     final FAccordionItemData(:index, :controller, style: inheritedStyle) = FAccordionItemData.of(context);
     final style = widget.style ?? inheritedStyle;
-    final angle = ((Directionality.maybeOf(context) ?? TextDirection.ltr) == TextDirection.ltr) ? -180 : 180;
-    return AnimatedBuilder(
-      animation: _animation,
-      builder: (_, _) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          FTappable(
-            style: style.tappableStyle,
-            autofocus: widget.autofocus,
-            focusNode: widget.focusNode,
-            onFocusChange: widget.onFocusChange,
-            onPress: () => controller.toggle(index),
-            builder: (_, states, _) => Padding(
-              padding: style.titlePadding,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: DefaultTextStyle.merge(
-                      textHeightBehavior: const TextHeightBehavior(
-                        applyHeightToFirstAscent: false,
-                        applyHeightToLastDescent: false,
-                      ),
-                      style: style.titleTextStyle.resolve(states),
-                      child: widget.title,
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        FTappable(
+          style: style.tappableStyle,
+          autofocus: widget.autofocus,
+          focusNode: widget.focusNode,
+          onFocusChange: widget.onFocusChange,
+          onPress: () => controller.toggle(index),
+          builder: (_, states, _) => Padding(
+            padding: style.titlePadding,
+            child: Row(
+              children: [
+                Expanded(
+                  child: DefaultTextStyle.merge(
+                    textHeightBehavior: const TextHeightBehavior(
+                      applyHeightToFirstAscent: false,
+                      applyHeightToLastDescent: false,
                     ),
+                    style: style.titleTextStyle.resolve(states),
+                    child: widget.title,
                   ),
-                  FFocusedOutline(
-                    style: style.focusedOutlineStyle,
-                    focused: states.contains(WidgetState.focused),
-                    child: Transform.rotate(
-                      angle: (_controller!.value * angle + 90) * math.pi / 180.0,
-                      child: IconTheme(data: style.iconStyle.resolve(states), child: widget.icon),
-                    ),
+                ),
+                FFocusedOutline(
+                  style: style.focusedOutlineStyle,
+                  focused: states.contains(WidgetState.focused),
+                  child: RotationTransition(
+                    turns: _icon!,
+                    child: IconTheme(data: style.iconStyle.resolve(states), child: widget.icon),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          FCollapsible(
-            value: _controller!.value,
+        ),
+        AnimatedBuilder(
+          animation: _body!,
+          builder: (_, _) => FCollapsible(
+            value: _body!.value,
             child: Padding(
               padding: style.childPadding,
               child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
             ),
           ),
-          FDivider(style: style.dividerStyle),
-        ],
-      ),
+        ),
+        FDivider(style: style.dividerStyle),
+      ],
     );
   }
 
   @override
   void dispose() {
-    _curved?.dispose();
+    _body?.dispose();
     _controller?.dispose();
     super.dispose();
   }

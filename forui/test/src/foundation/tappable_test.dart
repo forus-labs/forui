@@ -128,17 +128,17 @@ void main() {
           ),
         );
         expect(find.text(set(enabled).toString()), findsOneWidget);
-        expect(key.currentState!.animation.value, 1);
+        expect(key.currentState?.bounce?.value, 1);
 
         final gesture = await tester.press(find.byType(AnimatedTappable));
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
         expect(find.text({...set(enabled), WidgetState.pressed}.toString()), findsOneWidget);
-        expect(key.currentState!.animation.value, enabled ? 0.97 : 1.0);
+        expect(key.currentState?.bounce?.value, enabled ? 0.97 : 1.0);
 
         await gesture.up();
         await tester.pumpAndSettle();
         expect(find.text(set(enabled).toString()), findsOneWidget);
-        expect(key.currentState!.animation.value, 1);
+        expect(key.currentState?.bounce?.value, 1);
       });
 
       testWidgets('press, hold & move outside - $enabled', (tester) async {
@@ -150,18 +150,18 @@ void main() {
           ),
         );
         expect(find.text(set(enabled).toString()), findsOneWidget);
-        expect(key.currentState!.animation.value, 1);
+        expect(key.currentState?.bounce?.value, 1);
 
         final gesture = await tester.press(find.byType(AnimatedTappable));
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
         expect(find.text({...set(enabled), WidgetState.pressed}.toString()), findsOneWidget);
-        expect(key.currentState!.animation.value, enabled ? 0.97 : 1.0);
+        expect(key.currentState?.bounce?.value, enabled ? 0.97 : 1.0);
 
         await gesture.moveTo(Offset.zero);
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
         expect(find.text({...set(enabled)}.toString()), findsOneWidget);
-        expect(key.currentState!.animation.value, 1.0);
+        expect(key.currentState?.bounce?.value, 1.0);
       });
 
       testWidgets('shortcut', (tester) async {

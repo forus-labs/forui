@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -43,6 +45,37 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}.png'));
+    });
+
+    testWidgets('${theme.name} glassmorphic', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Stack(
+                children: [
+                  const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+                  FHeader(
+                    style: theme.data.headerStyles.rootStyle.copyWith(
+                      backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
+                    ),
+                    title: const Text('Title'),
+                    suffixes: [
+                      FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+                      FHeaderAction.x(onPress: () {}),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-glassmorphic.png'));
     });
 
     testWidgets('${theme.name} with focused FRootHeader actions', (tester) async {

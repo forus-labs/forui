@@ -1,4 +1,6 @@
+// dart format off
 // coverage:ignore-file
+
 
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
@@ -129,7 +131,7 @@ class FLocalizationsFr extends FLocalizations {
 
 /// The translations for French, as used in Canada (`fr_CA`).
 class FLocalizationsFrCa extends FLocalizationsFr {
-  FLocalizationsFrCa() : super('fr_CA');
+  FLocalizationsFrCa(): super('fr_CA');
 
   @override
   String get barrierLabel => 'Grille';

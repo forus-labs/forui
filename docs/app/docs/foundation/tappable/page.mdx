@@ -88,15 +88,15 @@ FTappable.static(
 );
 ```
 
-## Custom scale animation
+## Custom Bounce Animation
 
 ```dart copy
 // Default animation.
-FTappableStyle(animationTween: FTappableAnimations.bounce);
+FTappableStyle(bounceTween: FTappableStyle.defaultBounceTween);
 
 // No animation.
-FTappableStyle(animationTween: FTappableAnimations.none);
+FTappableStyle(bounceTween: FTappableStyle.noBounceTween);
 
 // Custom tween.
-FTappableStyle(animationTween: Tween(begin: 1.0, end: 0.97));
+FTappableStyle(bounceTween: Tween(begin: 1.0, end: 0.97));
 ```

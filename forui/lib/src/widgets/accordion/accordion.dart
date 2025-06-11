@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -69,6 +70,14 @@ class _FAccordionState extends State<FAccordion> {
   }
 
   @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style ?? context.theme.accordionStyle;
     return Column(
@@ -80,14 +89,6 @@ class _FAccordionState extends State<FAccordion> {
             child,
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
-    super.dispose();
   }
 }
 
@@ -117,6 +118,22 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
+  /// The expand animation's duration. Defaults to 200ms.
+  @override
+  final Duration expandDuration;
+
+  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve expandCurve;
+
+  /// The collapse animation's duration. Defaults to 150ms.
+  @override
+  final Duration collapseDuration;
+
+  /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
+  @override
+  final Curve collapseCurve;
+
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
@@ -124,10 +141,6 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The divider's color.
   @override
   final FDividerStyle dividerStyle;
-
-  /// The expanding/collapsing animation duration. Defaults to 200ms.
-  @override
-  final Duration animationDuration;
 
   /// The tappable's style.
   @override
@@ -143,7 +156,10 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     required this.tappableStyle,
     this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
     this.childPadding = const EdgeInsets.only(bottom: 15),
-    this.animationDuration = const Duration(milliseconds: 200),
+    this.expandDuration = const Duration(milliseconds: 200),
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseDuration = const Duration(milliseconds: 150),
+    this.collapseCurve = Curves.easeInCubic,
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
@@ -158,10 +174,10 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
           WidgetState.any: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground),
         }),
         childTextStyle: typography.sm.copyWith(color: colors.foreground),
-        iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.primary, size: 20)),
+        iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.mutedForeground, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
-        tappableStyle: style.tappableStyle.copyWith(animationTween: FTappableAnimations.none),
+        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
       );
 }
 

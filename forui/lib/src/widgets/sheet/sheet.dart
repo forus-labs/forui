@@ -73,7 +73,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   final GlobalKey _key = GlobalKey(debugLabel: 'Sheet child');
   late AnimationController _controller;
   late Animation<double> _animation;
-  ParametricCurve<double> _curve = Curves.easeOutQuad;
+  ParametricCurve<double> _curve = Curves.easeOutCubic;
 
   @override
   void initState() {
@@ -227,7 +227,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       }
 
       // Allow the sheet to animate smoothly from its current position.
-      _curve = Split(_animation.value, endCurve: Curves.easeOutQuad);
+      _curve = Split(_animation.value);
       if (closing) {
         widget.onClosing();
       }

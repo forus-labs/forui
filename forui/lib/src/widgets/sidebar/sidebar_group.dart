@@ -9,12 +9,11 @@ part 'sidebar_group.style.dart';
 
 /// A group of [FSidebarItem]s.
 ///
-/// The [FSidebarGroup] widget is useful for organizing sidebar items into logical sections
-/// with an optional label and action. The label is typically used to describe the group,
-/// while the action can be used for group-level operations.
+/// The [FSidebarGroup] widget is useful for organizing sidebar items into logical sections with an optional label and
+/// action. The label is typically used to describe the group, while the action can be used for group-level operations.
 ///
 /// See:
-/// * https://forui.dev/docs/layout/sidebar for working examples.
+/// * https://forui.dev/docs/navigation/sidebar for working examples.
 /// * [FSidebarGroupStyle] for customizing a sidebar group's appearance.
 class FSidebarGroup extends StatelessWidget {
   /// The sidebar group's style.

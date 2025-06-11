@@ -39,7 +39,7 @@ part 'dialog.style.dart';
 /// * [FDialogStyle] for customizing a switch's appearance.
 Future<T?> showFDialog<T>({
   required BuildContext context,
-  required Widget Function(BuildContext, FDialogStyle) builder,
+  required Widget Function(BuildContext, FDialogStyle, Animation<double>) builder,
   bool useRootNavigator = false,
   FDialogStyle? style,
   String? barrierLabel,
@@ -58,7 +58,7 @@ Future<T?> showFDialog<T>({
   return navigator.push(
     FDialogRoute<T>(
       style: style,
-      builder: (context) => builder(context, style!),
+      builder: (context, animation) => builder(context, style!, animation),
       capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierLabel ?? localizations.barrierLabel,
@@ -74,9 +74,6 @@ Future<T?> showFDialog<T>({
 ///
 /// [showFDialog] should be preferred in most cases.
 class FDialogRoute<T> extends RawDialogRoute<T> {
-  static final _fadeTween = Tween<double>(begin: 0, end: 1);
-  static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
-
   /// The dialog's style.
   final FDialogStyle style;
 
@@ -90,20 +87,13 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   /// 'Double tap to ...'.
   final String? barrierOnTapHint;
 
-  @override
-  final Duration transitionDuration;
-
-  CurvedAnimation? _fade;
-  CurvedAnimation? _scale;
-
   /// Creates a [FDialogRoute].
   FDialogRoute({
     required this.style,
-    required WidgetBuilder builder,
+    required Widget Function(BuildContext, Animation<double>) builder,
     this.barrierDismissible = true,
     this.barrierLabel,
     this.barrierOnTapHint,
-    this.transitionDuration = const Duration(milliseconds: 200),
     CapturedThemes? capturedThemes,
     bool useSafeArea = true,
     super.settings,
@@ -112,8 +102,8 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
     super.traversalEdgeBehavior,
     super.directionalTraversalEdgeBehavior,
   }) : super(
-         pageBuilder: (buildContext, animation, secondaryAnimation) {
-           final child = Builder(builder: builder);
+         pageBuilder: (context, animation, secondaryAnimation) {
+           final child = Builder(builder: (context) => builder(context, animation));
            Widget dialog = capturedThemes?.wrap(child) ?? child;
            if (useSafeArea) {
              dialog = SafeArea(child: dialog);
@@ -156,35 +146,13 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
     Animation<double> animation,
     Animation<double> secondaryAnimation,
     Widget child,
-  ) {
-    if (_fade?.parent != animation || _scale?.parent != animation) {
-      _fade?.dispose();
-      _scale?.dispose();
-      _fade = CurvedAnimation(parent: animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
-      _scale = CurvedAnimation(parent: animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
-    }
-
-    final fade = _fade!.drive(_fadeTween);
-    final scale = _scale!.drive(_scaleTween);
-
-    return FadeTransition(
-      opacity: fade,
-      child: ScaleTransition(
-        scale: scale,
-        child: super.buildTransitions(context, animation, secondaryAnimation, child),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _fade?.dispose();
-    _scale?.dispose();
-    super.dispose();
-  }
+  ) => child;
 
   @override
   Color? get barrierColor => Colors.transparent;
+
+  @override
+  Duration get transitionDuration => style.entranceExitDuration;
 }
 
 /// A modal dialog.
@@ -198,7 +166,7 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
 /// See:
 /// * https://forui.dev/docs/overlay/dialog for working examples.
 /// * [FDialogStyle] for customizing a dialog's appearance.
-class FDialog extends StatelessWidget {
+class FDialog extends StatefulWidget {
   /// The dialog's style. Defaults to [FThemeData.dialogStyle].
   ///
   /// ## CLI
@@ -208,6 +176,13 @@ class FDialog extends StatelessWidget {
   /// dart run forui style create dialog
   /// ```
   final FDialogStyle? style;
+
+  /// The animation used to animate the dialog's entrance and exit. Settings this to null will disable the animation.
+  ///
+  /// It is the responsibility of the caller to manage & dispose the given [animation].
+  ///
+  /// Defaults to null.
+  final Animation<double>? animation;
 
   /// The semantic label of the dialog used by accessibility frameworks to announce screen transitions when the dialog
   /// is opened and closed.
@@ -253,6 +228,7 @@ class FDialog extends StatelessWidget {
   FDialog({
     required List<Widget> actions,
     this.style,
+    this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
     Widget? title,
@@ -279,6 +255,7 @@ class FDialog extends StatelessWidget {
   FDialog.adaptive({
     required List<Widget> actions,
     this.style,
+    this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
     Widget? title,
@@ -298,27 +275,97 @@ class FDialog extends StatelessWidget {
   const FDialog.raw({
     required this.builder,
     this.style,
+    this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
     super.key,
   });
 
   @override
+  State<FDialog> createState() => _FDialogState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('animation', animation))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DiagnosticsProperty('constraints', constraints))
+      ..add(ObjectFlagProperty.has('builder', builder));
+  }
+}
+
+class _FDialogState extends State<FDialog> {
+  CurvedAnimation? _curvedScale;
+  CurvedAnimation? _curvedFade;
+  Animation<double>? _scale;
+  Animation<double>? _fade;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final style = widget.style ?? context.theme.dialogStyle;
+
+    if (_curvedScale?.parent != widget.animation || _curvedFade?.parent != widget.animation) {
+      _curvedScale?.dispose();
+      _curvedFade?.dispose();
+
+      if (widget.animation case final animation?) {
+        _curvedScale = CurvedAnimation(parent: animation, curve: style.entranceCurve, reverseCurve: style.exitCurve);
+        _curvedFade = CurvedAnimation(parent: animation, curve: style.entranceCurve, reverseCurve: style.exitCurve);
+        _scale = style.scaleTween.animate(_curvedScale!);
+        _fade = style.fadeTween.animate(_curvedFade!);
+      } else {
+        _curvedScale = null;
+        _curvedFade = null;
+        _scale = null;
+        _fade = null;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _curvedFade?.dispose();
+    _curvedScale?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final style = this.style ?? theme.dialogStyle;
+    final style = widget.style ?? theme.dialogStyle;
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
-    Widget dialog = DecoratedBox(decoration: style.decoration, child: builder(context, style));
-    if (style.backgroundFilter case final background?) {
+    Widget dialog = DecoratedBox(decoration: style.decoration, child: widget.builder(context, style));
+
+    // We cannot handle the transition in [FDialogRoute] because of https://github.com/flutter/flutter/issues/31706.
+    if (_fade case final fade?) {
+      dialog = FadeTransition(opacity: fade, child: dialog);
+    }
+
+    if (style.backgroundFilter case final filter?) {
       dialog = Stack(
         children: [
           Positioned.fill(
-            child: BackdropFilter(filter: background, child: Container()),
+            child: ClipRect(
+              child: _fade == null
+                  ? BackdropFilter(filter: filter(1), child: Container())
+                  : AnimatedBuilder(
+                      animation: _fade!,
+                      builder: (_, _) => BackdropFilter(filter: filter(_fade!.value), child: Container()),
+                    ),
+            ),
           ),
           dialog,
         ],
       );
+    }
+
+    // We want to scale the dialog, including the background filter.
+    if (_scale case final scale?) {
+      dialog = ScaleTransition(scale: scale, child: dialog);
     }
 
     return AnimatedPadding(
@@ -338,23 +385,13 @@ class FDialog extends StatelessWidget {
               scopesRoute: true,
               explicitChildNodes: true,
               namesRoute: true,
-              label: semanticsLabel,
-              child: ConstrainedBox(constraints: constraints, child: dialog),
+              label: widget.semanticsLabel,
+              child: ConstrainedBox(constraints: widget.constraints, child: dialog),
             ),
           ),
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(DiagnosticsProperty('constraints', constraints))
-      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -369,9 +406,41 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   @override
   final ImageFilter Function(double animation)? barrierFilter;
 
-  /// The dialog's background filter.
+  /// {@macro forui.widgets.FPopoverStyle.backgroundFilter}
+  ///
+  /// This requires [FDialog.animation] to be non-null.
   @override
-  final ImageFilter? backgroundFilter;
+  final ImageFilter Function(double animation)? backgroundFilter;
+
+  /// The dialog's entrance/exit animation duration. Defaults to 150ms.
+  ///
+  /// This requires [FDialog.animation] to be non-null.
+  @override
+  final Duration entranceExitDuration;
+
+  /// The dialog's entrance animation curve. Defaults to [Curves.easeOutCubic].
+  ///
+  /// This requires [FDialog.animation] to be non-null.
+  @override
+  final Curve entranceCurve;
+
+  /// The dialog's entrance animation curve. Defaults to [Curves.easeInCubic].
+  ///
+  /// This requires [FDialog.animation] to be non-null.
+  @override
+  final Curve exitCurve;
+
+  /// The tween used to animate the dialog's fade in and out. Defaults to `[0, 1]`.
+  ///
+  /// This requires [FDialog.animation] to be non-null.
+  @override
+  final Tween<double> fadeTween;
+
+  /// The tween used to animate the dialog's scale in and out. Defaults to `[0.95, 1]`.
+  ///
+  /// This requires [FDialog.animation] to be non-null.
+  @override
+  final Tween<double> scaleTween;
 
   /// The decoration.
   @override
@@ -403,16 +472,22 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   final FDialogContentStyle verticalStyle;
 
   /// Creates a [FDialogStyle].
-  const FDialogStyle({
+  FDialogStyle({
     required this.decoration,
     required this.horizontalStyle,
     required this.verticalStyle,
     this.barrierFilter,
+    this.entranceExitDuration = const Duration(milliseconds: 150),
+    this.entranceCurve = Curves.easeOutCubic,
+    this.exitCurve = Curves.easeInCubic,
     this.backgroundFilter,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,
     this.insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
-  });
+    Tween<double>? fadeTween,
+    Tween<double>? scaleTween,
+  }) : fadeTween = fadeTween ?? Tween<double>(begin: 0, end: 1),
+       scaleTween = scaleTween ?? Tween<double>(begin: 0.95, end: 1);
 
   /// Creates a [FDialogStyle] that inherits its properties.
   factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {

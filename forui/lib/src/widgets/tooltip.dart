@@ -13,7 +13,7 @@ part 'tooltip.style.dart';
 /// A controller that controls whether a [FTooltip] is shown or hidden.
 class FTooltipController extends FChangeNotifier {
   static final _fadeTween = Tween<double>(begin: 0, end: 1);
-  static final _scaleTween = Tween<double>(begin: 0.95, end: 1);
+  static final _scaleTween = Tween<double>(begin: 0.80, end: 1);
 
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
@@ -25,8 +25,8 @@ class FTooltipController extends FChangeNotifier {
   /// Creates a [FTooltipController] with the given [vsync] and animation [animationDuration].
   FTooltipController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
     _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
-    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutQuad, reverseCurve: Curves.easeInQuad);
+    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeOutCubic);
+    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeOutCubic);
     _fade = _fadeTween.animate(_curveFade);
     _scale = _scaleTween.animate(_curveScale);
   }
@@ -263,14 +263,25 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         portalAnchor: widget.tipAnchor,
         shift: widget.shift,
         portalBuilder: (context, _) {
-          Widget tooltip = DecoratedBox(
-            decoration: style.decoration,
-            child: Padding(
-              padding: style.padding,
-              child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, _controller)),
+          Widget tooltip = Semantics(
+            container: true,
+            child: FadeTransition(
+              opacity: _controller._fade,
+              child: ScaleTransition(
+                alignment: widget.tipAnchor.resolve(direction),
+                scale: _controller._scale,
+                child: DecoratedBox(
+                  decoration: style.decoration,
+                  child: Padding(
+                    padding: style.padding,
+                    child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, _controller)),
+                  ),
+                ),
+              ),
             ),
           );
 
+          // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
           if (style.backgroundFilter case final background?) {
             tooltip = Stack(
               children: [
@@ -284,17 +295,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
             );
           }
 
-          return Semantics(
-            container: true,
-            child: FadeTransition(
-              opacity: _controller._fade,
-              child: ScaleTransition(
-                alignment: widget.tipAnchor.resolve(direction),
-                scale: _controller._scale,
-                child: tooltip,
-              ),
-            ),
-          );
+          return tooltip;
         },
         child: child,
       ),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -203,6 +205,49 @@ void main() {
         find.byType(TestScaffold),
         matchesGoldenFile('sidebar/sidebar/${theme.name}/with-raw-content.png'),
       );
+    });
+
+    testWidgets('${theme.name} - glassmorphic', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: Stack(
+            children: [
+              const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+              FSidebar(
+                style: theme.data.sidebarStyle.copyWith(
+                  backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  decoration: BoxDecoration(
+                    color: theme.data.colors.background.withValues(alpha: 0.5),
+                    borderRadius: theme.data.style.borderRadius,
+                  ),
+                ),
+                header: const Text('Header'),
+                footer: const Text('Footer'),
+                children: [
+                  FSidebarGroup(
+                    label: const Text('Group 1'),
+                    action: const Icon(FIcons.plus),
+                    onActionPress: () {},
+                    children: [
+                      FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
+                      FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+                    ],
+                  ),
+                  FSidebarGroup(
+                    label: const Text('Group 2'),
+                    children: [
+                      FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {}),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar/${theme.name}/glassmorphic.png'));
     });
 
     testWidgets('RTL - ${theme.name}', (tester) async {

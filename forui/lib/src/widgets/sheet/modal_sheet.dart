@@ -288,9 +288,9 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
     return true;
   }
 
-  /// Defaults to [Curves.easeOutQuad].
+  /// Defaults to [Curves.easeOutCubic].
   @override
-  Curve get barrierCurve => Curves.easeOutQuad;
+  Curve get barrierCurve => Curves.easeOutCubic;
 
   @override
   Color get barrierColor => Colors.transparent;
