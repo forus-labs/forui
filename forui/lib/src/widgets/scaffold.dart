@@ -226,10 +226,8 @@ class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {
   }
 }
 
-class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
-
 class _RenderScaffold extends RenderBox
-    with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
+    with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
   bool _resizeToAvoidBottomInset;
   EdgeInsets _insets;
 
@@ -238,7 +236,7 @@ class _RenderScaffold extends RenderBox
       _insets = insets;
 
   @override
-  void setupParentData(covariant RenderObject child) => child.parentData = _Data();
+  void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();
 
   @override
   void performLayout() {

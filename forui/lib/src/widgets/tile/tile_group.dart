@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -241,16 +242,16 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin<FTileMixin> {
           label: semanticsLabel,
           child: ConstrainedBox(
             constraints: BoxConstraints(maxHeight: maxHeight),
-            child: ClipRRect(
-              borderRadius: style.borderRadius,
-              child: FFocusedOutline(
-                focused: true,
-                style: FFocusedOutlineStyle(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
                   color: style.borderColor,
                   width: style.borderWidth,
-                  borderRadius: style.borderRadius,
-                  spacing: 0,
                 ),
+                borderRadius: style.borderRadius,
+              ),
+              child: ClipRRect(
+                borderRadius: style.borderRadius,
                 child: CustomScrollView(
                   controller: scrollController,
                   cacheExtent: cacheExtent,
@@ -337,32 +338,23 @@ class _MergeTileGroups extends StatelessWidget with FTileGroupMixin<FTileGroupMi
           constraints: BoxConstraints(maxHeight: maxHeight),
           child: ClipRRect(
             borderRadius: style.borderRadius,
-            child: FFocusedOutline(
-              focused: true,
-              style: FFocusedOutlineStyle(
-                color: style.borderColor,
-                width: style.borderWidth,
-                borderRadius: style.borderRadius,
-                spacing: 0,
-              ),
-              child: CustomScrollView(
-                controller: scrollController,
-                cacheExtent: cacheExtent,
-                dragStartBehavior: dragStartBehavior,
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                slivers: [
-                  for (final (index, child) in children.indexed)
-                    FTileGroupData(
-                      style: style,
-                      divider: divider,
-                      states: states,
-                      index: index,
-                      length: children.length,
-                      child: child,
-                    ),
-                ],
-              ),
+            child: CustomScrollView(
+              controller: scrollController,
+              cacheExtent: cacheExtent,
+              dragStartBehavior: dragStartBehavior,
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              slivers: [
+                for (final (index, child) in children.indexed)
+                  FTileGroupData(
+                    style: style,
+                    divider: divider,
+                    states: states,
+                    index: index,
+                    length: children.length,
+                    child: child,
+                  ),
+              ],
             ),
           ),
         ),

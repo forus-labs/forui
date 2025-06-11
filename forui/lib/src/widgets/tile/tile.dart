@@ -166,31 +166,44 @@ class FTile extends StatelessWidget with FTileMixin {
       onLongPress: enabled ? (onLongPress ?? () {}) : null,
       builder: (_, states, _) {
         final border = stateStyle.border.resolve(states);
-        return DecoratedBox(
-          decoration: BoxDecoration(
-            color: stateStyle.backgroundColor.resolve(states),
-            border: Border(
-              top: curveTop ? border.top : BorderSide.none,
-              left: border.left,
-              right: border.right,
-              bottom: curveBottom ? border.top : BorderSide.none,
+        return Stack(
+          children: [
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: stateStyle.backgroundColor.resolve(states),
+                // border: Border(
+                //   top: curveTop ? border.top : BorderSide.none,
+                //   left: border.left,
+                //   right: border.right,
+                //   bottom: curveBottom ? border.top : BorderSide.none,
+                // ),
+                // borderRadius: BorderRadius.only(
+                //   topLeft: curveTop ? stateStyle.borderRadius.topLeft : Radius.zero,
+                //   topRight: curveTop ? stateStyle.borderRadius.topRight : Radius.zero,
+                //   bottomLeft: curveBottom ? stateStyle.borderRadius.bottomLeft : Radius.zero,
+                //   bottomRight: curveBottom ? stateStyle.borderRadius.bottomRight : Radius.zero,
+                // ),
+              ),
+              child: FTileData(
+                style: style,
+                divider: tile.divider,
+                states: states,
+                index: tile.index,
+                last: tile.last,
+                pressable: pressable,
+                child: child,
+              ),
             ),
-            borderRadius: BorderRadius.only(
-              topLeft: curveTop ? stateStyle.borderRadius.topLeft : Radius.zero,
-              topRight: curveTop ? stateStyle.borderRadius.topRight : Radius.zero,
-              bottomLeft: curveBottom ? stateStyle.borderRadius.bottomLeft : Radius.zero,
-              bottomRight: curveBottom ? stateStyle.borderRadius.bottomLeft : Radius.zero,
-            ),
-          ),
-          child: FTileData(
-            style: style,
-            divider: tile.divider,
-            states: states,
-            index: tile.index,
-            last: tile.last,
-            pressable: pressable,
-            child: child,
-          ),
+            if (states.contains(WidgetState.focused))
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: border,
+                    borderRadius: stateStyle.borderRadius,
+                  ),
+                ),
+              ),
+          ],
         );
       },
     );
