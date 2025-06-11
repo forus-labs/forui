@@ -1,7 +1,6 @@
-// ignore_for_file: avoid_positional_boolean_parameters
-
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -14,23 +13,12 @@ import 'package:forui/src/foundation/rendering.dart';
 class TileRenderObject extends MultiChildRenderObjectWidget {
   final FTileContentStyle style;
   final FTileDivider divider;
-  final bool first;
-  final bool last;
-  final BorderSide? side;
 
-  const TileRenderObject({
-    required this.style,
-    required this.divider,
-    required this.first,
-    required this.last,
-    required this.side,
-    super.key,
-    super.children,
-  });
+  const TileRenderObject({required this.style, required this.divider, super.key, super.children});
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      _RenderTile(style, divider, first, last, side, Directionality.maybeOf(context) ?? TextDirection.ltr);
+      _RenderTile(style, divider, Directionality.maybeOf(context) ?? TextDirection.ltr);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -38,9 +26,6 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
     tile
       ..style = style
       ..divider = divider
-      ..first = first
-      ..last = last
-      ..side = side
       ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
   }
 
@@ -49,10 +34,7 @@ class TileRenderObject extends MultiChildRenderObjectWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('divider', divider))
-      ..add(FlagProperty('first', value: first, ifTrue: 'first'))
-      ..add(FlagProperty('last', value: last, ifTrue: 'last'))
-      ..add(DiagnosticsProperty('side', side));
+      ..add(EnumProperty('divider', divider));
   }
 }
 
@@ -62,12 +44,9 @@ class _RenderTile extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
   FTileContentStyle _style;
   FTileDivider _divider;
-  bool _first;
-  bool _last;
-  BorderSide? _side;
   TextDirection _textDirection;
 
-  _RenderTile(this._style, this._divider, this._first, this._last, this._side, this._textDirection);
+  _RenderTile(this._style, this._divider, this._textDirection);
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = _Data();
@@ -75,115 +54,63 @@ class _RenderTile extends RenderBox
   @override
   void performLayout() {
     final EdgeInsets(:left, :top, :right, :bottom) = _style.padding.resolve(_textDirection);
-    var constraints = this.constraints.loosen().copyWith(maxWidth: this.constraints.maxWidth - left - right);
-    var height = 0.0;
-
     final prefix = firstChild!;
     final column = childAfter(prefix)!;
     final details = childAfter(column)!;
     final suffix = childAfter(details)!;
     final divider = childAfter(suffix)!;
 
-    // Layout all children
-    prefix.layout(constraints, parentUsesSize: true);
-    constraints = constraints.copyWith(maxWidth: constraints.maxWidth - prefix.size.width);
-    height = prefix.size.height;
+    // Layout children.
+    var contentConstraints = constraints.loosen().copyWith(maxWidth: constraints.maxWidth - left - right);
 
-    suffix.layout(constraints, parentUsesSize: true);
-    constraints = constraints.copyWith(maxWidth: constraints.maxWidth - suffix.size.width);
-    height = max(height, suffix.size.height);
+    prefix.layout(contentConstraints, parentUsesSize: true);
+    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - prefix.size.width);
 
-    // Details take priority if it is not text, i.e. a checkbox/switch. Otherwise, if details is text, we always try to
-    // shrink it first.
-    if (details is RenderParagraph) {
-      column.layout(constraints, parentUsesSize: true);
-      constraints = constraints.copyWith(maxWidth: constraints.maxWidth - column.size.width);
-      details.layout(constraints, parentUsesSize: true);
-    } else {
-      details.layout(constraints, parentUsesSize: true);
-      constraints = constraints.copyWith(maxWidth: constraints.maxWidth - details.size.width);
-      column.layout(constraints, parentUsesSize: true);
-    }
+    suffix.layout(contentConstraints, parentUsesSize: true);
+    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - suffix.size.width);
 
+    // Column takes priority if details is text, and vice-versa.
+    final (first, last) = details is RenderParagraph ? (column, details) : (details, column);
+
+    first.layout(contentConstraints, parentUsesSize: true);
+    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - first.size.width);
+    last.layout(contentConstraints, parentUsesSize: true);
+
+    // Layout divider based on the type.
     switch (_divider) {
       case FTileDivider.none || FTileDivider.full:
-        divider.layout(this.constraints.loosen(), parentUsesSize: true);
+        divider.layout(constraints.loosen(), parentUsesSize: true);
 
       case FTileDivider.indented:
-        final constraints = this.constraints.loosen();
-        final width = constraints.maxWidth - left - prefix.size.width;
-        divider.layout(constraints.copyWith(maxWidth: width), parentUsesSize: true);
+        final spacing = _textDirection == TextDirection.ltr ? left : right;
+        final width = constraints.maxWidth - spacing - prefix.size.width;
+        divider.layout(constraints.loosen().copyWith(maxWidth: width), parentUsesSize: true);
     }
 
-    height = max(height, column.size.height);
-    height = max(height, details.size.height);
+    final height = [prefix.size.height, suffix.size.height, column.size.height, details.size.height].max;
+    size = Size(constraints.maxWidth, height + top + bottom);
 
-    // Position all children
-    if (textDirection == TextDirection.ltr) {
-      prefix.data.offset = Offset(left, top + (height - prefix.size.height) / 2);
-      column.data.offset = Offset(left + prefix.size.width, top + (height - column.size.height) / 2);
+    // Position all children.
+    final (l, ml, mr, r) = _textDirection == TextDirection.ltr
+        ? (prefix, column, details, suffix)
+        : (suffix, details, column, prefix);
 
-      details.data.offset = Offset(
-        this.constraints.maxWidth - right - suffix.size.width - details.size.width,
-        top + (height - details.size.height) / 2,
-      );
-      suffix.data.offset = Offset(
-        this.constraints.maxWidth - right - suffix.size.width,
-        top + (height - suffix.size.height) / 2,
-      );
+    l.data.offset = Offset(left, top + (height - l.size.height) / 2);
+    ml.data.offset = Offset(left + l.size.width, top + (height - ml.size.height) / 2);
+    mr.data.offset = Offset(
+      constraints.maxWidth - right - r.size.width - mr.size.width,
+      top + (height - mr.size.height) / 2,
+    );
+    r.data.offset = Offset(constraints.maxWidth - right - r.size.width, top + (height - r.size.height) / 2);
 
-      divider.data.offset = Offset(
-        _divider == FTileDivider.indented ? left + prefix.size.width : 0,
-        top + height + bottom - divider.size.height,
-      );
-    } else {
-      suffix.data.offset = Offset(left, top + (height - suffix.size.height) / 2);
-      details.data.offset = Offset(left + suffix.size.width, top + (height - details.size.height) / 2);
-
-      column.data.offset = Offset(
-        this.constraints.maxWidth - right - prefix.size.width - column.size.width,
-        top + (height - column.size.height) / 2,
-      );
-      prefix.data.offset = Offset(
-        this.constraints.maxWidth - right - prefix.size.width,
-        top + (height - prefix.size.height) / 2,
-      );
-
-      divider.data.offset = Offset(0, top + height + bottom - divider.size.height);
-    }
-
-    size = Size(this.constraints.maxWidth, height + top + bottom);
+    divider.data.offset = Offset(
+      textDirection == TextDirection.ltr && _divider == FTileDivider.indented ? left + prefix.size.width : 0,
+      top + height + bottom - divider.size.height
+    );
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
-    defaultPaint(context, offset);
-    if (_side case final side?) {
-      final canvas = context.canvas;
-      final focusedOutline = Paint()
-        ..color = side.color
-        ..style = PaintingStyle.stroke
-        ..isAntiAlias = false
-        ..blendMode = BlendMode.src
-        ..strokeWidth = 1;
-
-      if (!_first) {
-        canvas.drawLine(
-          Offset(offset.dx, offset.dy + 1),
-          Offset(offset.dx + size.width, offset.dy + 1),
-          focusedOutline,
-        );
-      }
-
-      if (!_last) {
-        canvas.drawLine(
-          Offset(offset.dx, offset.dy + size.height - 1),
-          Offset(offset.dx + size.width, offset.dy + size.height - 1),
-          focusedOutline,
-        );
-      }
-    }
-  }
+  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
@@ -195,75 +122,33 @@ class _RenderTile extends RenderBox
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(EnumProperty('divider', divider))
-      ..add(FlagProperty('first', value: first, ifTrue: 'first'))
-      ..add(FlagProperty('last', value: last, ifTrue: 'last'))
-      ..add(DiagnosticsProperty('side', side))
       ..add(EnumProperty('textDirection', textDirection));
   }
 
   FTileContentStyle get style => _style;
 
   set style(FTileContentStyle value) {
-    if (_style == value) {
-      return;
+    if (_style != value) {
+      _style = value;
+      markNeedsLayout();
     }
-
-    _style = value;
-    markNeedsLayout();
   }
 
   FTileDivider get divider => _divider;
 
   set divider(FTileDivider value) {
-    if (_divider == value) {
-      return;
+    if (_divider != value) {
+      _divider = value;
+      markNeedsLayout();
     }
-
-    _divider = value;
-    markNeedsLayout();
-  }
-
-  bool get first => _first;
-
-  set first(bool value) {
-    if (_first == value) {
-      return;
-    }
-
-    _first = value;
-    markNeedsPaint();
-  }
-
-  bool get last => _last;
-
-  set last(bool value) {
-    if (_last == value) {
-      return;
-    }
-
-    _last = value;
-    markNeedsPaint();
-  }
-
-  BorderSide? get side => _side;
-
-  set side(BorderSide? value) {
-    if (_side == value) {
-      return;
-    }
-
-    _side = value;
-    markNeedsLayout();
   }
 
   TextDirection get textDirection => _textDirection;
 
   set textDirection(TextDirection value) {
-    if (_textDirection == value) {
-      return;
+    if (_textDirection != value) {
+      _textDirection = value;
+      markNeedsLayout();
     }
-
-    _textDirection = value;
-    markNeedsLayout();
   }
 }

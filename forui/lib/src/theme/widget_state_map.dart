@@ -182,4 +182,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   FWidgetStateMap<T> replaceAllWhere(Set<WidgetState> states, T Function(T) replace) => FWidgetStateMap({
     for (final e in _constraints.entries) e.key: e.key.isSatisfiedBy(states) ? replace(e.value) : e.value,
   });
+
+  @override
+  String toString() => 'FWidgetStateMap{$_constraints}';
 }
