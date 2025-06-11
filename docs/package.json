@@ -15,7 +15,7 @@
     "@theguild/remark-mermaid": "^0.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.513.0",
+    "lucide-react": "^0.514.0",
     "next": "15.3.3",
     "nextra": "^4.2.17",
     "nextra-theme-docs": "^4.2.17",
