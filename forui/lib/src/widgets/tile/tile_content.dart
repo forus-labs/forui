@@ -1,12 +1,12 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/rendering.dart';
 
+import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/rendering.dart';
 
 part 'tile_content.style.dart';
 
