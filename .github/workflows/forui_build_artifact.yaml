@@ -46,6 +46,6 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           pull: '--rebase --autostash'
-          add: '*'
+          add: '--force **/*.style.dart'
           new_branch: 'build-artifacts'
           push: 'origin build-artifacts --set-upstream --force'
