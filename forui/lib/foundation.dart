@@ -8,7 +8,7 @@ export 'src/foundation/doc_templates.dart' hide Focus, Scroll, Semantics, Widget
 export 'src/foundation/focused_outline.dart';
 export 'src/foundation/form_field_properties.dart';
 export 'src/foundation/notifiers.dart';
-export 'src/foundation/rendering.dart' hide Alignments, RenderBoxes;
+export 'src/foundation/rendering.dart' hide Alignments, DefaultData, RenderBoxes;
 export 'src/foundation/tappable.dart' show FTappable, FTappableStyle, FTouch;
 export 'src/foundation/time.dart';
 export 'src/foundation/transform.dart';

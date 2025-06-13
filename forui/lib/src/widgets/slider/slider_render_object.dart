@@ -153,8 +153,6 @@ class _RenderVerticalSlider extends _RenderSlider {
   }
 }
 
-class _Data extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
-
 typedef _Parts = ({
   RenderBox paddedTrack,
   RenderBox label,
@@ -164,7 +162,7 @@ typedef _Parts = ({
 });
 
 abstract class _RenderSlider extends RenderBox
-    with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
+    with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
   FSliderStyle _style;
   FLayout _layout;
   TextDirection _textDirection;
@@ -177,7 +175,7 @@ abstract class _RenderSlider extends RenderBox
   }
 
   @override
-  void setupParentData(covariant RenderObject child) => child.parentData = _Data();
+  void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();
 
   _Parts layoutParts(BoxConstraints constraints, BoxConstraints trackMainAxis) {
     final paddedTrack = firstChild!..layout(trackMainAxis, parentUsesSize: true);
@@ -280,7 +278,7 @@ abstract class _RenderSlider extends RenderBox
     // We paint the labels first, then the track so that the thumb is painted on top of the labels.
     var child = lastChild;
     while (child != null) {
-      final childParentData = child.parentData! as _Data;
+      final childParentData = child.parentData! as DefaultData;
       context.paintChild(child, childParentData.offset + offset);
       child = childParentData.previousSibling;
     }

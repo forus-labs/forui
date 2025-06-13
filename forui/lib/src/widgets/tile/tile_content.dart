@@ -2,16 +2,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/tile/tile_group.dart';
-import 'package:forui/src/widgets/tile/tile_render_object.dart';
+import 'package:forui/src/foundation/rendering.dart';
 
 part 'tile_content.style.dart';
 
 @internal
 class FTileContent extends StatelessWidget {
+  final FTileContentStyle style;
+  final FWidgetStateMap<FDividerStyle> dividerStyle;
+  final FTileDivider dividerType;
+  final Set<WidgetState> states;
   final Widget? prefixIcon;
   final Widget title;
   final Widget? subtitle;
@@ -19,6 +23,10 @@ class FTileContent extends StatelessWidget {
   final Widget? suffixIcon;
 
   const FTileContent({
+    required this.style,
+    required this.dividerStyle,
+    required this.dividerType,
+    required this.states,
     required this.title,
     required this.prefixIcon,
     required this.subtitle,
@@ -28,97 +36,218 @@ class FTileContent extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final ltr = Directionality.maybeOf(context) == TextDirection.ltr;
-
-    final tile = FTileData.maybeOf(context)!;
-    final FTileData(style: tileStyle, :states, :pressable) = tile;
-
-    final group = extractTileGroup(FTileGroupData.maybeOf(context));
-
-    final stateStyle = pressable ? tileStyle.pressable : tileStyle.unpressable;
-    final FTileStateStyle(:contentStyle, :dividerStyle) = stateStyle;
-    final dividerType = switch (tile.last) {
-      false => tile.divider,
-      true when group.index == group.length - 1 => FTileDivider.none,
-      true => group.divider,
-    };
-
-    return TileRenderObject(
-      style: contentStyle,
-      divider: dividerType,
-      first: tile.index == 0 && group.index == 0,
-      last: tile.last && group.index == group.length - 1,
-      // We use the left side of the border to draw the focused outline.
-      side: states.contains(WidgetState.focused) ? stateStyle.border.resolve(states).left : null,
-      children: [
-        if (prefixIcon case final prefix?)
-          Padding(
-            padding: ltr
-                ? EdgeInsets.only(right: contentStyle.prefixIconSpacing)
-                : EdgeInsets.only(left: contentStyle.prefixIconSpacing),
-            child: IconTheme(data: contentStyle.prefixIconStyle.resolve(states), child: prefix),
-          )
-        else
-          const SizedBox(),
+  Widget build(BuildContext context) => _TileContent(
+    style: style,
+    dividerType: dividerType,
+    children: [
+      if (prefixIcon case final prefix?)
         Padding(
-          padding: ltr
-              ? EdgeInsets.only(right: contentStyle.middleSpacing)
-              : EdgeInsets.only(left: contentStyle.middleSpacing),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+          padding: EdgeInsetsDirectional.only(end: style.prefixIconSpacing),
+          child: IconTheme(data: style.prefixIconStyle.resolve(states), child: prefix),
+        )
+      else
+        const SizedBox(),
+      Padding(
+        padding: EdgeInsetsDirectional.only(end: style.middleSpacing),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: style.titleSpacing,
+          children: [
+            DefaultTextStyle.merge(
+              style: style.titleTextStyle.resolve(states),
+              textHeightBehavior: const TextHeightBehavior(
+                applyHeightToFirstAscent: false,
+                applyHeightToLastDescent: false,
+              ),
+              overflow: TextOverflow.ellipsis,
+              child: title,
+            ),
+            if (subtitle case final subtitle?)
               DefaultTextStyle.merge(
-                style: contentStyle.titleTextStyle.resolve(states),
+                style: style.subtitleTextStyle.resolve(states),
                 textHeightBehavior: const TextHeightBehavior(
                   applyHeightToFirstAscent: false,
                   applyHeightToLastDescent: false,
                 ),
                 overflow: TextOverflow.ellipsis,
-                child: title,
+                child: subtitle,
               ),
-              if (subtitle case final subtitle?)
-                Padding(
-                  padding: EdgeInsets.only(top: contentStyle.titleSpacing),
-                  child: DefaultTextStyle.merge(
-                    style: contentStyle.subtitleTextStyle.resolve(states),
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    child: subtitle,
-                  ),
-                ),
-            ],
-          ),
+          ],
         ),
-        if (details case final details?)
-          DefaultTextStyle.merge(
-            style: contentStyle.detailsTextStyle.resolve(states),
-            textHeightBehavior: const TextHeightBehavior(
-              applyHeightToFirstAscent: false,
-              applyHeightToLastDescent: false,
-            ),
-            overflow: TextOverflow.ellipsis,
-            child: details,
-          )
-        else
-          const SizedBox(),
-        if (suffixIcon case final suffixIcon?)
-          Padding(
-            padding: ltr
-                ? EdgeInsets.only(left: contentStyle.suffixIconSpacing)
-                : EdgeInsets.only(right: contentStyle.suffixIconSpacing),
-            child: IconTheme(data: contentStyle.suffixIconStyle.resolve(states), child: suffixIcon),
-          )
-        else
-          const SizedBox(),
-        if (dividerType != FTileDivider.none) FDivider(style: dividerStyle.resolve(states)) else const SizedBox(),
-      ],
+      ),
+      if (details case final details?)
+        DefaultTextStyle.merge(
+          style: style.detailsTextStyle.resolve(states),
+          textHeightBehavior: const TextHeightBehavior(
+            applyHeightToFirstAscent: false,
+            applyHeightToLastDescent: false,
+          ),
+          overflow: TextOverflow.ellipsis,
+          child: details,
+        )
+      else
+        const SizedBox(),
+      if (suffixIcon case final suffixIcon?)
+        Padding(
+          padding: EdgeInsetsDirectional.only(start: style.suffixIconSpacing),
+          child: IconTheme(data: style.suffixIconStyle.resolve(states), child: suffixIcon),
+        )
+      else
+        const SizedBox(),
+      if (dividerType == FTileDivider.none) const SizedBox() else FDivider(style: dividerStyle.resolve(states)),
+    ],
+  );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
+      ..add(DiagnosticsProperty('dividerType', dividerType))
+      ..add(IterableProperty('states', states));
+  }
+}
+
+class _TileContent extends MultiChildRenderObjectWidget {
+  final FTileContentStyle style;
+  final FTileDivider dividerType;
+
+  const _TileContent({required this.style, required this.dividerType, super.children});
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderTileContent(style, dividerType, Directionality.maybeOf(context) ?? TextDirection.ltr);
+
+  @override
+  void updateRenderObject(BuildContext context, covariant _RenderTileContent content) {
+    content
+      ..style = style
+      ..dividerType = dividerType
+      ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('dividerType', dividerType));
+  }
+}
+
+class _RenderTileContent extends RenderBox
+    with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
+  FTileContentStyle _style;
+  FTileDivider _dividerType;
+  TextDirection _textDirection;
+
+  _RenderTileContent(this._style, this._dividerType, this._textDirection);
+
+  @override
+  void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();
+
+  @override
+  void performLayout() {
+    final EdgeInsets(:left, :top, :right, :bottom) = _style.padding.resolve(_textDirection);
+    final prefix = firstChild!;
+    final column = childAfter(prefix)!;
+    final details = childAfter(column)!;
+    final suffix = childAfter(details)!;
+    final divider = childAfter(suffix)!;
+
+    // Layout children.
+    var contentConstraints = constraints.loosen().copyWith(maxWidth: constraints.maxWidth - left - right);
+
+    prefix.layout(contentConstraints, parentUsesSize: true);
+    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - prefix.size.width);
+
+    suffix.layout(contentConstraints, parentUsesSize: true);
+    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - suffix.size.width);
+
+    // Column takes priority if details is text, and vice-versa.
+    final (first, last) = details is RenderParagraph ? (column, details) : (details, column);
+
+    first.layout(contentConstraints, parentUsesSize: true);
+    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - first.size.width);
+    last.layout(contentConstraints, parentUsesSize: true);
+
+    // Layout divider based on the type.
+    switch (_dividerType) {
+      case FTileDivider.none || FTileDivider.full:
+        divider.layout(constraints.loosen(), parentUsesSize: true);
+
+      case FTileDivider.indented:
+        final spacing = _textDirection == TextDirection.ltr ? left : right;
+        final width = constraints.maxWidth - spacing - prefix.size.width;
+        divider.layout(constraints.loosen().copyWith(maxWidth: width), parentUsesSize: true);
+    }
+
+    final height = [prefix.size.height, suffix.size.height, column.size.height, details.size.height].max;
+    size = Size(constraints.maxWidth, height + top + bottom);
+
+    // Position children.
+    final (l, ml, mr, r) = _textDirection == TextDirection.ltr
+        ? (prefix, column, details, suffix)
+        : (suffix, details, column, prefix);
+
+    l.data.offset = Offset(left, top + (height - l.size.height) / 2);
+    ml.data.offset = Offset(left + l.size.width, top + (height - ml.size.height) / 2);
+    mr.data.offset = Offset(
+      constraints.maxWidth - right - r.size.width - mr.size.width,
+      top + (height - mr.size.height) / 2,
     );
+    r.data.offset = Offset(constraints.maxWidth - right - r.size.width, top + (height - r.size.height) / 2);
+
+    divider.data.offset = Offset(
+      textDirection == TextDirection.ltr && _dividerType == FTileDivider.indented ? left + prefix.size.width : 0,
+      top + height + bottom - divider.size.height,
+    );
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
+
+  @override
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
+      defaultHitTestChildren(result, position: position);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('dividerType', dividerType))
+      ..add(EnumProperty('textDirection', textDirection));
+  }
+
+  FTileContentStyle get style => _style;
+
+  set style(FTileContentStyle value) {
+    if (_style != value) {
+      _style = value;
+      markNeedsLayout();
+    }
+  }
+
+  FTileDivider get dividerType => _dividerType;
+
+  set dividerType(FTileDivider value) {
+    if (_dividerType != value) {
+      _dividerType = value;
+      markNeedsLayout();
+    }
+  }
+
+  TextDirection get textDirection => _textDirection;
+
+  set textDirection(TextDirection value) {
+    if (_textDirection != value) {
+      _textDirection = value;
+      markNeedsLayout();
+    }
   }
 }
 

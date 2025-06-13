@@ -23,6 +23,9 @@ enum FLayout {
 }
 
 @internal
+class DefaultData extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
+
+@internal
 extension RenderBoxes on RenderBox {
   BoxParentData get data => parentData! as BoxParentData;
 }

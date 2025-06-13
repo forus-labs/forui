@@ -202,12 +202,10 @@ class SpeculativeLayout extends MultiChildRenderObjectWidget {
   RenderObject createRenderObject(BuildContext _) => _SpeculativeBox();
 }
 
-class _Data extends ContainerBoxParentData<RenderBox> {}
-
 class _SpeculativeBox extends RenderBox
-    with ContainerRenderObjectMixin<RenderBox, _Data>, RenderBoxContainerDefaultsMixin<RenderBox, _Data> {
+    with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
   @override
-  void setupParentData(RenderObject child) => child.parentData = _Data();
+  void setupParentData(RenderObject child) => child.parentData = DefaultData();
 
   @override
   void performLayout() {

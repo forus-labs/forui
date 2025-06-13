@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
             prefixIcon: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -30,7 +30,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
             prefixIcon: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
             enabled: false,
             prefixIcon: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
@@ -247,7 +247,6 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
   });
 
-  // TODO: There is something seriously wrong with tiles. It does not render suffix icon deterministically.
   testWidgets('no subtitle', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
@@ -263,7 +262,7 @@ void main() {
     await tester.pumpAndSettle();
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
-  }, skip: true);
+  });
 
   testWidgets('no suffix icon', (tester) async {
     await tester.pumpWidget(
@@ -277,8 +276,8 @@ void main() {
       ),
     );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
-  }, skip: true);
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-suffix.png'));
+  });
 
   testWidgets('prioritize title', (tester) async {
     await tester.pumpWidget(
