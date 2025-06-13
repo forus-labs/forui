@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
             prefixIcon: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -30,7 +30,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
             prefixIcon: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
             enabled: false,
             prefixIcon: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),

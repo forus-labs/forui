@@ -105,6 +105,7 @@ polished.
 * **Breaking** Remove `FSidebarStyle.bordeWidth` - use `FSidebarStyle.decoration` instead.
 * **Breaking** Remove `FSidebarItemStyle.collapsibleAnimationDuration` - use `FSidebarItemStyle.expandDuration` instead.
 
+
 ### `FTappable`
 * Add `FTappableStyle.bounceDuration`.
 * Add `FTappableStyle.bounceDownCurve`.
@@ -113,6 +114,37 @@ polished.
 * **Breaking** Rename `FTappableStyle.animationTween` to `FTappableStyle.bounceTween`.
 * **Breaking** Remove `FTappableAnimations` - use `FTappableStyle.defaultBounceTween` and `FTappableStyle.noBounceTween`
   instead.
+
+
+## `FTile`
+We have refactored `FTile`'s implementation to be simpler & its styling to be easier to understand & use.
+
+* Add `FTileGroupStyle.border`.
+* Add `FTileGroupData.enabled`.
+* Add `FTileGroupItemData`.
+* Add `FTileStyle`
+* Add `FTileStyle.decoration`.
+* Add `FTileStyle.focusedOutlineStyle`.
+
+* **Breaking** Change `FTileGroup` to render the border even if it contains no groups/tiles - while this isn't desirable
+  this allows us to draw the border in a single pass rather than having each tile draw its part of the border and stitching
+  the results.
+* **Breaking** Remove `FTileGroupData.states`.
+* **Breaking** Remove `FTileGroupStyle.borderColor` - use `FTileGroupStyle.border` instead.
+* **Breaking** Remove `FTileGroupStyle.borderWidth` - use `FTileGroupStyle.border` instead.
+* **Breaking** Change `FTile` to ignore `WidgetState`s when neither `onPress` nor `orLongPress` is given.
+* Change `FTile`'s focused outline to be a rounded rectangle even if the tile is inside a `FTileGroup`.
+* Change `FTile` to no longer wrap its content inside a `FTileData` if it is not part of a `FTileGroup`.
+* **Breaking** Remove `FTileData` - use `FTileGroupItemData`.
+* **Breaking** Move `FTileStyle.pressable` to `FTileGroupStyle.tappableTileStyle`.
+* **Breaking** Move `FTileStyle.unpressable` to `FTileGroupStyle.untappableTileStyle`.
+* **Breaking** Remove `FTileStateStyle` - the properties have been moved into `FTileStyle`.
+* **Breaking** Remove `FTileStateStyle.backgroundColor` - use `FTileStyle.decoration` instead.
+* **Breaking** Remove `FTileStateStyle.borderColor` - use `FTileStyle.decoration` instead.
+* **Breaking** Remove `FTileStateStyle.borderRadius` - use `FTileStyle.decoration` instead.
+
+* Fix `FTileGroup.merge(...)` ignoring `physics` property.
+* Fix `FTile`'s focused outline being drawn even when explicitly disabled.
 
 
 ### `FTooltip`

@@ -3,42 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-Widget small(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
-  builder: (context) => FButton(
-    intrinsicWidth: true,
-    onPress: () => showRawFToast(
-      alignment: alignment,
-      context: context,
-      builder: (_, _) => Container(
-        width: 250,
-        height: 143,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.blue),
-        child: Text(text),
-      ),
-    ),
-    child: Text(text),
-  ),
-);
-
-Widget big(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
-  builder: (context) => FButton(
-    intrinsicWidth: true,
-    onPress: () => showRawFToast(
-      alignment: alignment,
-      context: context,
-      builder: (_, _) => Container(
-        width: 312,
-        height: 201,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(8), color: Colors.red),
-        child: Text(text),
-      ),
-    ),
-    child: Text(text),
-  ),
-);
-
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 

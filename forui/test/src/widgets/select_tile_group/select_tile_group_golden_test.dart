@@ -353,7 +353,7 @@ void main() {
                 value: 1,
               ),
               FSelectTile(
-                style: FThemes.blue.dark.tileGroupStyle.tileStyle,
+                style: FThemes.blue.dark.tileGroupStyle.tappableTileStyle,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
                 details: const Text('FL (5G)'),

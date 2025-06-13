@@ -211,11 +211,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          builder: (field) {
            final state = field as _State<T>;
            final groupData = FTileGroupData.maybeOf(state.context);
-           final tileData = FTileData.maybeOf(state.context);
+           final tileData = FTileGroupItemData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
            final menuStyle = style?.menuStyle ?? global.menuStyle;
-           final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
+           final tileStyle =
+               style?.tileStyle ??
+               tileData?.style.tappableTileStyle ??
+               groupData?.style.tappableTileStyle ??
+               global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -295,7 +299,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuBuilder] is called for each tile that should be built. [FTileData] is **not** visible to
+  /// The [menuBuilder] is called for each tile that should be built. [FTileGroupItemData] is **not** visible to
   /// `menuTileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -366,11 +370,15 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          builder: (field) {
            final state = field as _State<T>;
            final groupData = FTileGroupData.maybeOf(state.context);
-           final tileData = FTileData.maybeOf(state.context);
+           final tileData = FTileGroupItemData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
            final menuStyle = style?.menuStyle ?? global.menuStyle;
-           final tileStyle = style?.tileStyle ?? tileData?.style ?? groupData?.style.tileStyle ?? global.tileStyle;
+           final tileStyle =
+               style?.tileStyle ??
+               tileData?.style.tappableTileStyle ??
+               groupData?.style.tappableTileStyle ??
+               global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -679,7 +687,7 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
     final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography);
     return FSelectMenuTileStyle(
       menuStyle: FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
-      tileStyle: groupStyle.tileStyle,
+      tileStyle: groupStyle.tappableTileStyle,
       labelTextStyle: groupStyle.labelTextStyle,
       descriptionTextStyle: groupStyle.descriptionTextStyle,
       errorTextStyle: groupStyle.errorTextStyle,
