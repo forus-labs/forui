@@ -637,7 +637,10 @@ class _FormField extends FormField<String> {
               showCursor: field.showCursor,
               maxLength: field.maxLength,
               maxLengthEnforcement: field.maxLengthEnforcement,
-              onChange: field.onChange,
+              onChange: (value) {
+                state.didChange(value);
+                field.onChange?.call(value);
+              },
               onTap: field.onTap,
               onTapAlwaysCalled: field.onTapAlwaysCalled,
               onEditingComplete: field.onEditingComplete,
