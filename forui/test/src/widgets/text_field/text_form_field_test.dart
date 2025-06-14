@@ -98,7 +98,7 @@ void main() {
                 null,
                 autoDispose(TextEditingController(text: 'initial')),
                 AutovalidateMode.always,
-                    (value) => value == 'some-value' ? null : 'Invalid value',
+                (value) => value == 'some-value' ? null : 'Invalid value',
                 null,
               ),
             ),
