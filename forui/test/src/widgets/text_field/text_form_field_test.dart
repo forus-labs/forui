@@ -10,20 +10,43 @@ void main() {
     for (final (type, field) in [
       (
         'normal',
-        (text, controller, saved) => FTextFormField(initialText: text, controller: controller, onSaved: saved),
+        (text, controller, autovalidate, validator, saved) => FTextFormField(
+          initialText: text,
+          controller: controller,
+          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          validator: validator,
+          onSaved: saved,
+        ),
       ),
       (
         'email',
-        (text, controller, saved) => FTextFormField.email(initialText: text, controller: controller, onSaved: saved),
+        (text, controller, autovalidate, validator, saved) => FTextFormField.email(
+          initialText: text,
+          controller: controller,
+          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          validator: validator,
+          onSaved: saved,
+        ),
       ),
       (
         'password',
-        (text, controller, saved) => FTextFormField.password(initialText: text, controller: controller, onSaved: saved),
+        (text, controller, autovalidate, validator, saved) => FTextFormField.password(
+          initialText: text,
+          controller: controller,
+          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          validator: validator,
+          onSaved: saved,
+        ),
       ),
       (
         'multiline',
-        (text, controller, saved) =>
-            FTextFormField.multiline(initialText: text, controller: controller, onSaved: saved),
+        (text, controller, autovalidate, validator, saved) => FTextFormField.multiline(
+          initialText: text,
+          controller: controller,
+          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          validator: validator,
+          onSaved: saved,
+        ),
       ),
     ]) {
       testWidgets('$type - set initial text using initialText', (tester) async {
@@ -32,7 +55,7 @@ void main() {
         String? initial;
         await tester.pumpWidget(
           TestScaffold.app(
-            child: Form(key: key, child: field('initial', null, (value) => initial = value)),
+            child: Form(key: key, child: field('initial', null, null, null, (value) => initial = value)),
           ),
         );
 
@@ -50,7 +73,13 @@ void main() {
           TestScaffold.app(
             child: Form(
               key: key,
-              child: field(null, autoDispose(TextEditingController(text: 'initial')), (value) => initial = value),
+              child: field(
+                null,
+                autoDispose(TextEditingController(text: 'initial')),
+                null,
+                null,
+                (value) => initial = value,
+              ),
             ),
           ),
         );
@@ -59,6 +88,58 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 5));
 
         expect(initial, 'initial');
+      });
+
+      testWidgets('$type - with controller, validator called with correct value', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Form(
+              child: field(
+                null,
+                autoDispose(TextEditingController(text: 'initial')),
+                AutovalidateMode.always,
+                (value) => value == 'some-value' ? null : 'Invalid value',
+                null,
+              ),
+            ),
+          ),
+        );
+
+        await tester.enterText(find.byType(FTextFormField), 'other-value');
+        await tester.pumpAndSettle();
+
+        expect(find.text('Invalid value'), findsOneWidget);
+
+        await tester.enterText(find.byType(FTextFormField), 'some-value');
+        await tester.pumpAndSettle();
+
+        expect(find.text('Invalid value'), findsNothing);
+      });
+
+      testWidgets('$type - without controller, validator called with correct value', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Form(
+              child: field(
+                null,
+                null,
+                AutovalidateMode.always,
+                (value) => value == 'some-value' ? null : 'Invalid value',
+                null,
+              ),
+            ),
+          ),
+        );
+
+        await tester.enterText(find.byType(FTextFormField), 'other-value');
+        await tester.pumpAndSettle();
+
+        expect(find.text('Invalid value'), findsOneWidget);
+
+        await tester.enterText(find.byType(FTextFormField), 'some-value');
+        await tester.pumpAndSettle();
+
+        expect(find.text('Invalid value'), findsNothing);
       });
     }
   });

@@ -165,6 +165,7 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.
 * Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.
+* Fix `FTextFormField` not passing correct value to validator when no controller is provided.
 
 
 ## 0.12.0
