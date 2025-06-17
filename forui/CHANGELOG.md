@@ -154,6 +154,7 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Add `FToasterStyle.swipeCompletionCurve`.
 
 * Fix `FToaster` auto-dismissing when hovering over non-first toast when expanded.
+* Fix `FToaster` expanded state persisting after all toasts has been dismissed on touch devices.
 
 
 ### `FTooltip`

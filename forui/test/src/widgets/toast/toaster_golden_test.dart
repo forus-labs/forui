@@ -483,6 +483,39 @@ void main() {
         await tester.pumpAndSettle(const Duration(seconds: 1));
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/touch-swipe-dismiss.png'));
       });
+
+      testWidgets('touch expanded state does not persist', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FToaster(
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2')]),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('2').last);
+        await tester.pumpAndSettle();
+
+        await tester.timedDrag(find.text('1').last, const Offset(-200, 0), const Duration(seconds: 1));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await tester.timedDrag(find.text('2').last, const Offset(-200, 0), const Duration(seconds: 1));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/touch-expanded-cleared.png'));
+      });
     });
 
     group('disabled', () {

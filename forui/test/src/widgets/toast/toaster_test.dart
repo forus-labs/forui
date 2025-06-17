@@ -189,8 +189,6 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.text('2')));
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('lol.png'));
-
     expect(find.text('1'), findsOne);
     expect(find.text('2'), findsOne);
     expect(find.text('3'), findsOne);
