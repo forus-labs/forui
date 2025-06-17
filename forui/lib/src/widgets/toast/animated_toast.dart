@@ -3,13 +3,13 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/toast/animated_toaster.dart';
-import 'package:forui/src/widgets/toast/toaster_stack.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/toast/animated_toaster.dart';
 import 'package:forui/src/widgets/toast/animated_toaster_parent_data.dart';
+import 'package:forui/src/widgets/toast/toaster_stack.dart';
 
 @internal
 class AnimatedToast extends StatefulWidget {
@@ -255,7 +255,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     // Gradually increase & decrease opacity during entrance & exit.
     var opacity = lerpDouble(widget.style.entranceExitOpacity, 1.0, _entranceExit.value)! * _visible.value;
     // Gradually decrease opacity during swiping to dismiss.
-    opacity *= 1- _swipeFraction.distance.abs();
+    opacity *= 1 - _swipeFraction.distance.abs();
 
     return AnimatedToastData(
       index: widget.index,

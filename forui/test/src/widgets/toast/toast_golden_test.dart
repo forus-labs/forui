@@ -55,13 +55,16 @@ void main() {
                 decoration: BoxDecoration(
                   color: FThemes.zinc.light.colors.background.withValues(alpha: 0.5),
                   borderRadius: FThemes.zinc.light.style.borderRadius,
-                  border: Border.all(width: FThemes.zinc.light.style.borderWidth, color: FThemes.zinc.light.colors.border),
+                  border: Border.all(
+                    width: FThemes.zinc.light.style.borderWidth,
+                    color: FThemes.zinc.light.colors.border,
+                  ),
                 ),
               ),
               title: const Text('Event has been created'),
               description: const Text(
                 'This is a more detailed description that provides comprehensive context and additional information '
-                    'about the notification, explaining what happened and what the user might expect next.',
+                'about the notification, explaining what happened and what the user might expect next.',
               ),
             ),
           ],
