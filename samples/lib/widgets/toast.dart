@@ -154,8 +154,8 @@ class SwipeToastPage extends StatelessWidget {
   final Axis? axis;
 
   SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam String? axis, super.key})
-      : theme = themes[theme]!,
-        axis = axis == 'vertical' ? Axis.vertical : null;
+    : theme = themes[theme]!,
+      axis = axis == 'vertical' ? Axis.vertical : null;
 
   @override
   Widget build(BuildContext context) => FTheme(
