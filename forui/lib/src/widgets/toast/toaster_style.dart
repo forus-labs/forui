@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -145,6 +147,34 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   @override
   final BoxDecoration decoration;
 
+  /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
+  /// background color.
+  ///
+  /// This is typically combined with a transparent/translucent background to create a glassmorphic effect.
+  ///
+  /// There will be a flicker after the toast's fade-in entrance when a blur background filter is applied. This is due to
+  /// https://github.com/flutter/flutter/issues/31706.
+  ///
+  /// ## Examples
+  /// ```dart
+  /// // Blurred
+  /// ImageFilter.blur(sigmaX: 5, sigmaY: 5);
+  ///
+  /// // Solid color
+  /// ColorFilter.mode(Colors.white, BlendMode.srcOver);
+  ///
+  /// // Tinted
+  /// ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver);
+  ///
+  /// // Blurred & tinted
+  /// ImageFilter.compose(
+  ///   outer: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+  ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver),
+  /// );
+  /// ```
+  @override
+  final ImageFilter? backgroundFilter;
+
   /// The toast content's padding. Defaults to `EdgeInsets.all(16)`.
   @override
   final EdgeInsetsGeometry padding;
@@ -189,6 +219,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     this.swipeCompletionCurve = Curves.easeInCubic,
     this.constraints = const BoxConstraints(maxHeight: 250, maxWidth: 400),
     this.padding = const EdgeInsets.all(16),
+    this.backgroundFilter,
     this.iconSpacing = 10,
     this.titleSpacing = 1,
     this.suffixSpacing = 12,

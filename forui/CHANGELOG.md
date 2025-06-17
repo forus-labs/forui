@@ -149,6 +149,7 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 
 ### `FToaster`
 * Add `FToaster.swipeToDismiss`.
+* Add `FToastStyle.backgroundFilter`.
 * Add `FToasterStyle.swipeCompletionDuration`.
 * Add `FToasterStyle.swipeCompletionCurve`.
 
