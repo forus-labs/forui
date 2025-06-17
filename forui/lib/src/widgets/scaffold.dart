@@ -169,7 +169,7 @@ class FScaffold extends StatelessWidget {
 class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// The fallback system overlay style.
   ///
-  /// This is used as a fallback when no other widgets override [AnnotatedRegion<SystemUiOverlayStyle>]. Typically, the 
+  /// This is used as a fallback when no other widgets override [AnnotatedRegion<SystemUiOverlayStyle>]. Typically, the
   /// [SystemUiOverlayStyle] property is overridden by [FHeader].
   @override
   final SystemUiOverlayStyle systemOverlayStyle;

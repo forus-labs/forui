@@ -232,7 +232,7 @@ enum Style {
     'FScaffoldStyle',
     <String>['scaffold'],
     <String>['FScaffoldStyle'],
-    'FScaffoldStyle scaffoldStyle({\n  required FColors colors,\n  required FStyle style,\n}) => FScaffoldStyle(\n  backgroundColor: colors.background,\n  sidebarBackgroundColor: colors.background,\n  childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),\n  footerDecoration: BoxDecoration(\n    border: Border(\n      top: BorderSide(color: colors.border, width: style.borderWidth),\n    ),\n  ),\n  headerDecoration: const BoxDecoration(),\n);\n',
+    'FScaffoldStyle scaffoldStyle({\n  required FColors colors,\n  required FStyle style,\n}) => FScaffoldStyle(\n  systemOverlayStyle: colors.systemOverlayStyle,\n  backgroundColor: colors.background,\n  sidebarBackgroundColor: colors.background,\n  childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),\n  footerDecoration: BoxDecoration(\n    border: Border(\n      top: BorderSide(color: colors.border, width: style.borderWidth),\n    ),\n  ),\n  headerDecoration: const BoxDecoration(),\n);\n',
   ),
   fselectcontentstyle(
     'FSelectContentStyle',
