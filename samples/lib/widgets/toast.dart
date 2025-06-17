@@ -183,4 +183,3 @@ class SwipeToastPage extends StatelessWidget {
     ),
   );
 }
-
