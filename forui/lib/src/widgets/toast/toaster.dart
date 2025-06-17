@@ -9,7 +9,7 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 /// Displays a [FToast] in a toaster.
 ///
 /// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
-/// auto-closing.
+/// auto-dismissing.
 ///
 /// ## Contract
 /// Throws [FlutterError] if there is no ancestor [FToaster] in the given [context].
@@ -163,11 +163,16 @@ class FToaster extends StatefulWidget {
   /// The style.
   final FToasterStyle? style;
 
+  /// The axis in which to swipe to dismiss a toast. Defaults to [Axis.horizontal].
+  ///
+  /// Set to null to disable swiping to dismiss.
+  final Axis? swipeToDismiss;
+
   /// The child.
   final Widget child;
 
   /// Creates a [FToaster] widget.
-  const FToaster({required this.child, this.style, super.key});
+  const FToaster({required this.child, this.style, this.swipeToDismiss = Axis.horizontal, super.key});
 
   @override
   State<FToaster> createState() => FToasterState();
@@ -175,7 +180,9 @@ class FToaster extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('swipeToDismiss', swipeToDismiss, defaultValue: Axis.horizontal));
   }
 }
 
@@ -259,6 +266,7 @@ class FToasterState extends State<FToaster> {
                   style: style,
                   expandedAlignTransform: Offset(alignment.x, alignment.y),
                   collapsedAlignTransform: Offset(toastAlignment.x, toastAlignment.y),
+                  swipeToDismiss: widget.swipeToDismiss,
                   entries: entries,
                 ),
               ),

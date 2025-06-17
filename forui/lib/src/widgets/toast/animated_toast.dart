@@ -3,6 +3,8 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/toast/animated_toaster.dart';
+import 'package:forui/src/widgets/toast/toaster_stack.dart';
 
 import 'package:meta/meta.dart';
 
@@ -26,6 +28,9 @@ class AnimatedToast extends StatefulWidget {
   /// The total number of toasts.
   final int length;
 
+  /// The direction which to swipe to dismiss the toast.
+  final Axis? swipeToDismiss;
+
   /// The toast's show duration.
   final Duration? duration;
 
@@ -37,6 +42,9 @@ class AnimatedToast extends StatefulWidget {
 
   /// True if the toast should be auto dismissed.
   final bool autoDismiss;
+
+  /// A value that indicates whether a toast is current being swiping.
+  final ValueNotifier<Swipe> swiping;
 
   /// A value that indicates whether the toast is dismissing.
   final ValueListenable<bool> dismissing;
@@ -52,10 +60,12 @@ class AnimatedToast extends StatefulWidget {
     required this.alignTransform,
     required this.index,
     required this.length,
+    required this.swipeToDismiss,
     required this.duration,
     required this.expand,
     required this.visible,
     required this.autoDismiss,
+    required this.swiping,
     required this.dismissing,
     required this.onDismiss,
     required this.child,
@@ -73,10 +83,12 @@ class AnimatedToast extends StatefulWidget {
       ..add(DiagnosticsProperty('alignTransform', alignTransform))
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length))
+      ..add(EnumProperty('swipe', swipeToDismiss))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(PercentProperty('expand', expand))
       ..add(FlagProperty('visible', value: visible, ifTrue: 'visible'))
       ..add(FlagProperty('autoDismiss', value: autoDismiss, ifTrue: 'autoDismiss'))
+      ..add(DiagnosticsProperty('swiping', swiping))
       ..add(DiagnosticsProperty('dismissing', dismissing))
       ..add(ObjectFlagProperty.has('onDismiss', onDismiss));
   }
@@ -90,19 +102,32 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   late CurvedAnimation _transition;
   late final AnimationController _visibleController;
   late CurvedAnimation _visible;
+  late final AnimationController _swipeCompletionController;
+  late CurvedAnimation _swipeCompletion;
 
-  int _signal = 0; // Used to signal to [RenderAnimatedToaster] that a toast has been updated.
+  /// The current offset of the toast when swiping, normalized as a fraction of the toast's height/width. It is always
+  /// in the range [-1, 1].
+  ///
+  /// If the toast is swiped to the left/top, it will be negative, and if it is swiped to the right/bottom, it will be
+  /// positive.
+  Offset _swipeFraction = Offset.zero;
+
+  /// The offset that the toast should be at when the swipe animation is completed.
+  Offset _swipeFractionEnd = Offset.zero;
+
+  /// Used to signal to [RenderAnimatedToaster] that a toast has been updated.
+  int _signal = 0;
 
   @override
   void initState() {
     super.initState();
-    widget.dismissing.addListener(_dismissing);
+    widget.dismissing.addListener(_startDismissing);
     if (widget.dismissing.value) {
       _entranceExitController.value = 1;
     }
 
     if (widget.duration case final duration?) {
-      _timer = Timer(duration, _dismissing);
+      _timer = Timer(duration, _startDismissing);
     }
 
     _entranceExitController = AnimationController(vsync: this, duration: widget.style.enterExitDuration)
@@ -125,14 +150,19 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
       ..value = widget.visible ? 1 : 0
       ..addListener(() => setState(() {}));
     _visible = CurvedAnimation(parent: _visibleController, curve: widget.style.transitionCurve);
+
+    _swipeCompletionController = AnimationController(vsync: this, duration: widget.style.swipeCompletionDuration)
+      ..addListener(() => setState(() {}))
+      ..addStatusListener(_completeSwipe);
+    _swipeCompletion = CurvedAnimation(parent: _swipeCompletionController, curve: widget.style.swipeCompletionCurve);
   }
 
   @override
   void didUpdateWidget(AnimatedToast old) {
     super.didUpdateWidget(old);
     if (widget.dismissing != old.dismissing) {
-      old.dismissing.removeListener(_dismissing);
-      widget.dismissing.addListener(_dismissing);
+      old.dismissing.removeListener(_startDismissing);
+      widget.dismissing.addListener(_startDismissing);
     }
 
     if (widget.style != old.style) {
@@ -158,7 +188,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
 
     if (widget.autoDismiss != old.autoDismiss) {
       if (widget.autoDismiss) {
-        _resume(Duration(milliseconds: (widget.length - widget.index - 1) * 300));
+        _resumeDismissing(Duration(milliseconds: (widget.length - widget.index - 1) * 300));
       } else {
         _timer?.cancel();
       }
@@ -169,7 +199,30 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     }
   }
 
-  void _dismissing() => _entranceExitController.reverse();
+  void _completeSwipe(AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      // Reset the swipe fraction to zero if the swipe was not completed.
+      if (_swipeFractionEnd == Offset.zero) {
+        setState(() {
+          _swipeFraction = Offset.zero;
+          _swipeCompletionController.reset();
+          _resumeDismissing();
+        });
+      } else {
+        // If the swipe was completed, we need to dismiss the toast.
+        widget.onDismiss();
+      }
+    }
+  }
+
+  void _startDismissing() => _entranceExitController.reverse();
+
+  void _resumeDismissing([Duration stagger = Duration.zero]) {
+    if (widget.duration case final duration?) {
+      _timer?.cancel();
+      _timer = Timer(duration + stagger, _startDismissing);
+    }
+  }
 
   void _dismiss(AnimationStatus status) {
     if (status == AnimationStatus.dismissed) {
@@ -177,16 +230,11 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     }
   }
 
-  void _resume([Duration stagger = Duration.zero]) {
-    if (widget.duration case final duration?) {
-      _timer?.cancel();
-      _timer = Timer(duration + stagger, _dismissing);
-    }
-  }
-
   @override
   void dispose() {
-    widget.dismissing.removeListener(_dismissing);
+    widget.dismissing.removeListener(_startDismissing);
+    _swipeCompletion.dispose();
+    _swipeCompletionController.dispose();
     _visible.dispose();
     _visibleController.dispose();
     _transition.dispose();
@@ -200,10 +248,14 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     // Slide in & out during entrance & exit.
-    final entranceExit = -widget.alignTransform * (1.0 - _entranceExit.value);
+    var translation = -widget.alignTransform * (1.0 - _entranceExit.value);
+    // Slide out during swiping to dismiss.
+    translation += Offset.lerp(_swipeFraction, _swipeFractionEnd, _swipeCompletion.value)!;
 
     // Gradually increase & decrease opacity during entrance & exit.
-    final opacity = lerpDouble(widget.style.entranceExitOpacity, 1.0, _entranceExit.value)! * _visible.value;
+    var opacity = lerpDouble(widget.style.entranceExitOpacity, 1.0, _entranceExit.value)! * _visible.value;
+    // Gradually decrease opacity during swiping to dismiss.
+    opacity *= 1- _swipeFraction.distance.abs();
 
     return AnimatedToastData(
       index: widget.index,
@@ -216,10 +268,60 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
           constraints: widget.style.constraints,
           child: MouseRegion(
             onEnter: (_) => _timer?.cancel(),
-            onExit: (_) => _resume(),
-            child: FractionalTranslation(
-              translation: entranceExit,
-              child: Opacity(opacity: opacity, child: widget.child),
+            onExit: (_) {
+              if (widget.autoDismiss) {
+                _resumeDismissing();
+              }
+            },
+            child: GestureDetector(
+              onHorizontalDragStart: (_) {
+                if (widget.swipeToDismiss == Axis.horizontal) {
+                  _timer?.cancel();
+                  widget.swiping.value = widget.swiping.value.start();
+                }
+              },
+              onHorizontalDragUpdate: (details) {
+                if (widget.swipeToDismiss == Axis.horizontal) {
+                  setState(() => _swipeFraction += Offset(details.primaryDelta! / context.size!.width, 0));
+                }
+              },
+              onHorizontalDragEnd: (_) {
+                if (widget.swipeToDismiss == Axis.horizontal) {
+                  _swipeFractionEnd = switch (_swipeFraction.dx) {
+                    < -0.5 => const Offset(-1, 0),
+                    > 0.5 => const Offset(1, 0),
+                    _ => Offset.zero,
+                  };
+                  _swipeCompletionController.forward();
+                  widget.swiping.value = widget.swiping.value.end();
+                }
+              },
+              onVerticalDragStart: (_) {
+                if (widget.swipeToDismiss == Axis.vertical) {
+                  _timer?.cancel();
+                  widget.swiping.value = widget.swiping.value.start();
+                }
+              },
+              onVerticalDragUpdate: (details) {
+                if (widget.swipeToDismiss == Axis.vertical) {
+                  setState(() => _swipeFraction += Offset(0, details.primaryDelta! / context.size!.height));
+                }
+              },
+              onVerticalDragEnd: (_) {
+                if (widget.swipeToDismiss == Axis.vertical) {
+                  _swipeFractionEnd = switch (_swipeFraction.dy) {
+                    < -0.5 => const Offset(0, -1),
+                    > 0.5 => const Offset(0, 1),
+                    _ => Offset.zero,
+                  };
+                  _swipeCompletionController.forward();
+                  widget.swiping.value = widget.swiping.value.end();
+                }
+              },
+              child: FractionalTranslation(
+                translation: translation,
+                child: Opacity(opacity: opacity.clamp(0, 1), child: widget.child),
+              ),
             ),
           ),
         ),

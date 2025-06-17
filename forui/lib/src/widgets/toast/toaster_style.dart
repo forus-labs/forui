@@ -129,6 +129,14 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   @override
   final Curve transitionCurve;
 
+  /// The toast's swipe completion animation duration. Defaults to 150ms.
+  @override
+  final Duration swipeCompletionDuration;
+
+  /// The toast's swipe completion animation curve. Defaults to [Curves.easeInCubic].
+  @override
+  final Curve swipeCompletionCurve;
+
   /// The toast's constraints. Defaults to `BoxConstraints(maxHeight: 250, maxWidth: 400)`.
   @override
   final BoxConstraints constraints;
@@ -177,6 +185,8 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     this.entranceExitOpacity = 0.0,
     this.transitionDuration = const Duration(milliseconds: 400),
     this.transitionCurve = Curves.easeOutCubic,
+    this.swipeCompletionDuration = const Duration(milliseconds: 150),
+    this.swipeCompletionCurve = Curves.easeInCubic,
     this.constraints = const BoxConstraints(maxHeight: 250, maxWidth: 400),
     this.padding = const EdgeInsets.all(16),
     this.iconSpacing = 10,

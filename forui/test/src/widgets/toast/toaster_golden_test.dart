@@ -300,7 +300,7 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/close.png'));
   });
 
-  group('gestures', () {
+  group('behavior', () {
     group('always', () {
       testWidgets('hovered', (tester) async {
         await tester.pumpWidget(
@@ -429,6 +429,59 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/press-collapses.png'));
+      });
+
+      testWidgets('mouse drag outside does not collapse toaster', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FToaster(
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('3'));
+        await tester.pumpAndSettle();
+
+        final gesture = await tester.createPointerGesture();
+        await gesture.moveTo(tester.getCenter(find.text('3').last));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await tester.drag(find.text('2').last, const Offset(-200, 0), kind: PointerDeviceKind.mouse);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/mouse-swipe-dismiss.png'));
+      });
+
+      testWidgets('touch drag outside does not collapse toaster', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FToaster(
+              child: Center(
+                child: Column(mainAxisSize: MainAxisSize.min, children: [small('1'), small('2'), big('3')]),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('3'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('3').last);
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await tester.timedDrag(find.text('2').last, const Offset(-200, 0), const Duration(seconds: 1));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/touch-swipe-dismiss.png'));
       });
     });
 

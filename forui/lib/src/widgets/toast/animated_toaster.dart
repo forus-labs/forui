@@ -10,6 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/toast/animated_toaster_parent_data.dart';
 
+/// The [AnimatedToaster] that is responsible for coordinating the animation, layout and painting of toasts.
 @internal
 class AnimatedToaster extends MultiChildRenderObjectWidget {
   /// The toaster's style.
@@ -92,6 +93,22 @@ class RenderAnimatedToaster extends RenderBox
     }
   }
 
+  /// Performs the layout of all toast children, handling both collapsed and expanded states.
+  ///
+  /// This method orchestrates a complex two-phase layout process:
+  ///
+  /// **Phase 1: Calculate vertical positioning and spacing**
+  /// - Iterates through toasts from back to front (lastChild to firstChild)
+  /// - Calculates accumulated heights for proper vertical stacking
+  /// - Handles different alignment modes (top-aligned vs bottom-aligned toasts)
+  /// - Computes smooth transitions between collapsed and expanded positions
+  /// - Maintains separate tracking for visible vs all toasts to handle proper spacing
+  ///
+  /// **Phase 2: Calculate final positions and container size**
+  /// - Transitions between previous front toast and current front toast sizes
+  /// - Interpolates between collapsed size (based on front toast) and expanded size (includes all visible toast heights)
+  /// - Applies horizontal alignment transformations (left/center/right positioning)
+  /// - Sets final offsets for each toast child
   @override
   void performLayout() {
     if (childCount == 0) {
@@ -103,7 +120,7 @@ class RenderAnimatedToaster extends RenderBox
     var previousHeight = 0.0;
 
     // We track the accumulated & visible accumulated heights separately so that the toaster will be displayed correctly
-    // when expanded & the toasts occupy more space than available.
+    // when expanded & the toasts will not occupy more space than available.
     var accumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
     var visibleAccumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
 

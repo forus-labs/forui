@@ -16,12 +16,14 @@ class ToasterStack extends StatefulWidget {
   final FToasterStyle style;
   final Offset expandedAlignTransform;
   final Offset collapsedAlignTransform;
+  final Axis? swipeToDismiss;
   final List<ToasterEntry> entries;
 
   const ToasterStack({
     required this.style,
     required this.expandedAlignTransform,
     required this.collapsedAlignTransform,
+    required this.swipeToDismiss,
     required this.entries,
     super.key,
   });
@@ -36,6 +38,7 @@ class ToasterStack extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('expandedAlignTransform', expandedAlignTransform))
       ..add(DiagnosticsProperty('collapsedAlignTransform', collapsedAlignTransform))
+      ..add(EnumProperty('swipeToDismiss', swipeToDismiss))
       ..add(IterableProperty('entries', entries));
   }
 }
@@ -43,6 +46,7 @@ class ToasterStack extends StatefulWidget {
 class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _expand;
+  final ValueNotifier<Swipe> _swiping = ValueNotifier(const Unswiped());
   bool _autoDismiss = true;
   bool _hovered = false;
   int _monotonic = 0;
@@ -53,6 +57,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
     _controller = AnimationController(vsync: this, duration: widget.style.expandDuration)
       ..addListener(() => setState(() {}));
     _expand = _controller.drive(CurveTween(curve: widget.style.expandCurve));
+    _swiping.addListener(_collapseAfterSwipe);
 
     if (widget.style.expandBehavior == FToasterExpandBehavior.always) {
       _controller.value = 1;
@@ -78,8 +83,22 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
     }
   }
 
+  // Handles cases where user is using a mouse & moves outside of the toaster's expanded region when swiping to dismiss.
+  void _collapseAfterSwipe() {
+    if (mounted && _swiping.value is ExternalEndSwipe) {
+      setState(() {
+        _autoDismiss = true;
+        _swiping.value = _swiping.value.end();
+      });
+      if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
+        _controller.reverse();
+      }
+    }
+  }
+
   @override
   void dispose() {
+    _swiping.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -111,9 +130,11 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
               index: widget.entries.length - 1 - index,
               length: widget.entries.length,
               duration: entry.duration,
+              swipeToDismiss: widget.swipeToDismiss,
               expand: _expand.value,
               visible: (widget.entries.length - 1 - index) < (widget.style.max),
               autoDismiss: _autoDismiss,
+              swiping: _swiping,
               dismissing: entry.dismissing,
               onDismiss: entry.onDismiss!,
               child: entry.builder(context, entry),
@@ -126,6 +147,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
   Future<void> _enter() async {
     final fencingToken = ++_monotonic;
     _hovered = true;
+    _swiping.value = _swiping.value.enter();
     await Future.delayed(widget.style.expandHoverEnterDuration);
 
     if (fencingToken == _monotonic && mounted) {
@@ -139,13 +161,74 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
   Future<void> _exit() async {
     final fencingToken = ++_monotonic;
     _hovered = false;
+    _swiping.value = _swiping.value.exit();
+
     await Future.delayed(widget.style.expandHoverExitDuration);
 
-    if (fencingToken == _monotonic && mounted) {
+    if (fencingToken == _monotonic && mounted && _swiping.value is! ExternalSwipe) {
       setState(() => _autoDismiss = true);
       if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
         await _controller.reverse();
       }
     }
   }
+}
+
+/// A state machine which describes a toast's swipe to dismiss state.
+@internal
+sealed class Swipe {
+  const Swipe();
+
+  // ignore: avoid_returning_this
+  Swipe start() => this;
+
+  // ignore: avoid_returning_this
+  Swipe end() => this;
+
+  // ignore: avoid_returning_this
+  Swipe enter() => this;
+
+  // ignore: avoid_returning_this
+  Swipe exit() => this;
+}
+
+@internal
+class Unswiped extends Swipe {
+  const Unswiped();
+
+  @override
+  Swipe start() => const InternalSwipe();
+}
+
+@internal
+class InternalSwipe extends Swipe {
+  const InternalSwipe();
+
+  @override
+  Swipe end() => const Unswiped();
+
+  @override
+  Swipe exit() => const ExternalSwipe();
+}
+
+@internal
+class ExternalSwipe extends Swipe {
+  const ExternalSwipe();
+
+  @override
+  Swipe end() => const ExternalEndSwipe();
+
+  @override
+  Swipe enter() => const InternalSwipe();
+}
+
+@internal
+class ExternalEndSwipe extends Swipe {
+  const ExternalEndSwipe();
+
+  @override
+  Swipe end() => const Unswiped();
+
+  @override
+  Swipe enter() => this;
 }
