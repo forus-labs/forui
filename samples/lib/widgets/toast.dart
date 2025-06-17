@@ -151,17 +151,16 @@ class BehaviorToastPage extends StatelessWidget {
 @RoutePage()
 class SwipeToastPage extends StatelessWidget {
   final FThemeData theme;
-  final Axis? axis;
+  final List<AxisDirection> directions;
 
-  SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam String? axis, super.key})
+  SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam bool down = false, super.key})
     : theme = themes[theme]!,
-      axis = axis == 'vertical' ? Axis.vertical : null;
+      directions = [if (down) AxisDirection.down];
 
   @override
   Widget build(BuildContext context) => FTheme(
     data: theme,
     child: FScaffold(
-      toasterSwipeToDismiss: axis,
       child: Align(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 400),
@@ -171,6 +170,7 @@ class SwipeToastPage extends StatelessWidget {
                 intrinsicWidth: true,
                 onPress: () => showFToast(
                   context: context,
+                  swipeToDismiss: directions,
                   icon: const Icon(FIcons.info),
                   title: const Text('Event has been created'),
                 ),

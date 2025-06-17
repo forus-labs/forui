@@ -148,7 +148,8 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 
 
 ### `FToaster`
-* Add `FToaster.swipeToDismiss`.
+* Add `swipeToDismiss` to `showFToast(...)`.
+* Add `swipeToDismiss` to `showRawFToast(...)`.
 * Add `FToastStyle.backgroundFilter`.
 * Add `FToasterStyle.swipeCompletionDuration`.
 * Add `FToasterStyle.swipeCompletionCurve`.
@@ -171,7 +172,6 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Add `FAnimatedModalBarrier`.
 * Add `FModalBrarrier`.
 * Add `FLocalizations.popoverSemanticsLabel`.
-* Add `FScaffold.toasterSwipeToDismiss`.
 
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.

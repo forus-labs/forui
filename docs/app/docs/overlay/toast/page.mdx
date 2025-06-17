@@ -86,6 +86,7 @@ showRawFToast(
   context: context,
   style: FToastStyle(...),
   alignment: FToastAlignment.topRight,
+  swipeToDismiss: [AxisDirection.left, AxisDirection.down],
   duration: const Duration(seconds: 10),
   onDismiss: () {},
   icon: const Icon(FIcons.triangleAlert),
@@ -107,6 +108,7 @@ showRawFToast(
   context: context,
   style: FToastStyle(...),
   alignment: FToastAlignment.topRight,
+  swipeToDismiss: [AxisDirection.left, AxisDirection.down],
   duration: const Duration(seconds: 10),
   onDismiss: () {},
   builder: (context, entry) => FCard(
@@ -267,26 +269,29 @@ showRawFToast(
 
 ### Swipe to Dismiss
 
-By default, toasts are dismissible by horizontally swiping them.
+By default, toasts are dismissible by horizontally swiping towards the closest edge of the screen.
 
 
-#### Vertical
+#### Down
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='toast' variant='swipe' query={{axis: 'vertical'}} height={300}/>
+    <Widget name='toast' variant='swipe' query={{down: true}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4} copy
+    ```dart {10} copy
     class ToastPage extends StatelessWidget {
       @override
       Widget build(BuildContext context) => FScaffold(
-        toasterSwipeToDismiss: Axis.vertical,
         child: Builder(
           builder: (context) => Center(
             child: FButton(
               intrinsicWidth: true,
-              onPress: () => showFToast(context: context, title: const Text('Event has been created')),
+              onPress: () => showFToast(
+                context: context,
+                swipeToDismiss: [AxisDirection.down],
+                title: const Text('Event has been created'),
+              ),
               child: const Text('Show Toast'),
             ),
           ),
@@ -305,16 +310,19 @@ By default, toasts are dismissible by horizontally swiping them.
     <Widget name='toast' variant='swipe' query={{}} height={300}/>
   </Tabs.Tab>
   <Tabs.Tab>
-    ```dart {4} copy
+    ```dart {11} copy
     class ToastPage extends StatelessWidget {
       @override
       Widget build(BuildContext context) => FScaffold(
-        toasterSwipeToDismiss: null,
         child: Builder(
           builder: (context) => Center(
             child: FButton(
               intrinsicWidth: true,
-              onPress: () => showFToast(context: context, title: const Text('Event has been created')),
+              onPress: () => showFToast(
+                context: context,
+                swipeToDismiss: [],
+                title: const Text('Event has been created'),
+              ),
               child: const Text('Show Toast'),
             ),
           ),
