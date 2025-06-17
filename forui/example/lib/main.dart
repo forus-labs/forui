@@ -40,7 +40,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     localizationsDelegates: FLocalizations.localizationsDelegates,
     supportedLocales: FLocalizations.supportedLocales,
     theme: FThemes.zinc.light.toApproximateMaterialTheme(),
-    builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
+    builder: (context, child) => FTheme(data: FThemes.zinc.dark, child: child!),
     home: Builder(
       builder: (context) {
         return FScaffold(

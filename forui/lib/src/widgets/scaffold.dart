@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -56,6 +57,9 @@ class FScaffold extends StatelessWidget {
   /// ```
   final FToasterStyle? toasterStyle;
 
+  /// The system overlay style. Defaults to [FColors.systemOverlayStyle].
+  final SystemUiOverlayStyle? systemOverlayStyle;
+
   /// The main content area of the scaffold.
   final Widget child;
 
@@ -85,6 +89,7 @@ class FScaffold extends StatelessWidget {
     required this.child,
     this.scaffoldStyle,
     this.toasterStyle,
+    this.systemOverlayStyle,
     this.header,
     this.sidebar,
     this.footer,
@@ -95,7 +100,8 @@ class FScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = scaffoldStyle ?? context.theme.scaffoldStyle;
+    final theme = context.theme;
+    final style = scaffoldStyle ?? theme.scaffoldStyle;
     var child = this.child;
     final Widget footer = this.footer != null
         ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!)
@@ -105,30 +111,33 @@ class FScaffold extends StatelessWidget {
       child = Padding(padding: style.childPadding, child: child);
     }
 
-    return FSheets(
-      child: FToaster(
-        style: toasterStyle ?? context.theme.toasterStyle,
-        child: Row(
-          children: [
-            if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
-            Expanded(
-              child: ColoredBox(
-                color: style.backgroundColor,
-                child: _RenderScaffoldWidget(
-                  resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-                  children: [
-                    Column(
-                      children: [
-                        if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-                        Expanded(child: child),
-                      ],
-                    ),
-                    footer,
-                  ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: systemOverlayStyle ?? theme.colors.systemOverlayStyle,
+      child: FSheets(
+        child: FToaster(
+          style: toasterStyle ?? context.theme.toasterStyle,
+          child: Row(
+            children: [
+              if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
+              Expanded(
+                child: ColoredBox(
+                  color: style.backgroundColor,
+                  child: _RenderScaffoldWidget(
+                    resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+                    children: [
+                      Column(
+                        children: [
+                          if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                          Expanded(child: child),
+                        ],
+                      ),
+                      footer,
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -140,6 +149,7 @@ class FScaffold extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', scaffoldStyle))
       ..add(DiagnosticsProperty('toasterStyle', toasterStyle))
+      ..add(DiagnosticsProperty('systemOverlayStyle', systemOverlayStyle))
       ..add(FlagProperty('childPad', value: childPad, ifTrue: 'contentPad', defaultValue: true))
       ..add(
         FlagProperty(
