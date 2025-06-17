@@ -147,6 +147,16 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Fix `FTile`'s focused outline being drawn even when explicitly disabled.
 
 
+### `FToaster`
+* Add `FToaster.swipeToDismiss`.
+* Add `FToastStyle.backgroundFilter`.
+* Add `FToasterStyle.swipeCompletionDuration`.
+* Add `FToasterStyle.swipeCompletionCurve`.
+
+* Fix `FToaster` auto-dismissing when hovering over non-first toast when expanded.
+* Fix `FToaster` expanded state persisting after all toasts has been dismissed on touch devices.
+
+
 ### `FTooltip`
 * Add `FTooltip.builder`.
 * Add `FTooltipStyle.backgroundFilter`.
@@ -161,6 +171,7 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Add `FAnimatedModalBarrier`.
 * Add `FModalBrarrier`.
 * Add `FLocalizations.popoverSemanticsLabel`.
+* Add `FScaffold.toasterSwipeToDismiss`.
 
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.
@@ -197,6 +208,7 @@ A widget that collapses and expands its child.
 ### `FScaffold`
 
 * Add `FScaffold.sidebar`.
+* add `FScaffold.toasterSwipeToDismiss`.
 * Add `FScaffoldStyle.sidebarBackgroundColor`.
 
 

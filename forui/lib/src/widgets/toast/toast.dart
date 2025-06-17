@@ -36,38 +36,49 @@ class FToast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style ?? context.theme.toasterStyle.toastStyle;
-    return Stack(
-      children: [
-        DecoratedBox(
-          decoration: style.decoration,
-          child: Padding(
-            padding: style.padding,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (icon case final icon?) ...[
-                  IconTheme(data: style.iconStyle, child: icon),
-                  SizedBox(width: style.iconSpacing),
+    Widget toast = DecoratedBox(
+      decoration: style.decoration,
+      child: Padding(
+        padding: style.padding,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (icon case final icon?) ...[
+              IconTheme(data: style.iconStyle, child: icon),
+              SizedBox(width: style.iconSpacing),
+            ],
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                spacing: style.titleSpacing,
+                children: [
+                  DefaultTextStyle(style: style.titleTextStyle, maxLines: 100, child: title),
+                  if (description case final description?)
+                    DefaultTextStyle(style: style.descriptionTextStyle, maxLines: 100, child: description),
                 ],
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: style.titleSpacing,
-                    children: [
-                      DefaultTextStyle(style: style.titleTextStyle, maxLines: 100, child: title),
-                      if (description case final description?)
-                        DefaultTextStyle(style: style.descriptionTextStyle, maxLines: 100, child: description),
-                    ],
-                  ),
-                ),
-                if (suffix case final suffix?) ...[SizedBox(width: style.suffixSpacing), suffix],
-              ],
+              ),
+            ),
+            if (suffix case final suffix?) ...[SizedBox(width: style.suffixSpacing), suffix],
+          ],
+        ),
+      ),
+    );
+
+    if (style.backgroundFilter case final background?) {
+      toast = Stack(
+        children: [
+          Positioned.fill(
+            child: ClipRect(
+              child: BackdropFilter(filter: background, child: Container()),
             ),
           ),
-        ),
-      ],
-    );
+          toast,
+        ],
+      );
+    }
+
+    return toast;
   }
 
   @override

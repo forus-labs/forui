@@ -264,3 +264,63 @@ showRawFToast(
     ```
   </Tabs.Tab>
 </Tabs>
+
+### Swipe to Dismiss
+
+By default, toasts are dismissible by horizontally swiping them.
+
+
+#### Vertical
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='toast' variant='swipe' query={{axis: 'vertical'}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4} copy
+    class ToastPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FScaffold(
+        toasterSwipeToDismiss: Axis.vertical,
+        child: Builder(
+          builder: (context) => Center(
+            child: FButton(
+              intrinsicWidth: true,
+              onPress: () => showFToast(context: context, title: const Text('Event has been created')),
+              child: const Text('Show Toast'),
+            ),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
+#### Disabled
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='toast' variant='swipe' query={{}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {4} copy
+    class ToastPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FScaffold(
+        toasterSwipeToDismiss: null,
+        child: Builder(
+          builder: (context) => Center(
+            child: FButton(
+              intrinsicWidth: true,
+              onPress: () => showFToast(context: context, title: const Text('Event has been created')),
+              child: const Text('Show Toast'),
+            ),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

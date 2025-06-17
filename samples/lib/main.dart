@@ -162,6 +162,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/toast/no-auto-dismiss', page: NoAutoDismissToastRoute.page),
     AutoRoute(path: '/toast/raw', page: RawToastRoute.page),
     AutoRoute(path: '/toast/behavior', page: BehaviorToastRoute.page),
+    AutoRoute(path: '/toast/swipe', page: SwipeToastRoute.page),
     AutoRoute(path: '/tooltip/default', page: TooltipRoute.page),
   ];
 }

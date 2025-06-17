@@ -147,3 +147,39 @@ class BehaviorToastPage extends StatelessWidget {
     ),
   );
 }
+
+@RoutePage()
+class SwipeToastPage extends StatelessWidget {
+  final FThemeData theme;
+  final Axis? axis;
+
+  SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam String? axis, super.key})
+    : theme = themes[theme]!,
+      axis = axis == 'vertical' ? Axis.vertical : null;
+
+  @override
+  Widget build(BuildContext context) => FTheme(
+    data: theme,
+    child: FScaffold(
+      toasterSwipeToDismiss: axis,
+      child: Align(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: Builder(
+            builder: (context) => Center(
+              child: FButton(
+                intrinsicWidth: true,
+                onPress: () => showFToast(
+                  context: context,
+                  icon: const Icon(FIcons.info),
+                  title: const Text('Event has been created'),
+                ),
+                child: const Text('Show Toast'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
