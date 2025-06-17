@@ -65,9 +65,15 @@ Extension generateExtension(ClassElement element) {
 /// Generates a `copyWith` method using the given [element] and [fields].
 @visibleForTesting
 Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
-  final assignments = fields.map((f) => '${f.name}: ${f.name} ?? this.${f.name},').join();
+  // Check if a field is a complex type.
+  bool complex(DartType type) {
+    final typeName = type.getDisplayString();
+    return typeName.startsWith('F') && (typeName.endsWith('Style') || typeName.endsWith('Styles')) ||
+           typeName.contains('FWidgetStateMap') ||
+           typeName.contains('BoxDecoration') ||
+           typeName.contains('TextStyle');
+  }
 
-  // Collect field documentation
   final docs = [
     for (final field in fields)
       if (field.documentationComment case final comment?  when comment.isNotEmpty)
@@ -77,6 +83,15 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
           '/// '
         ]
   ];
+
+  // Generate assignments for the copyWith method body
+  final assignments = fields.map((f) {
+    if (complex(f.type)) {
+      return '${f.name}: ${f.name} != null ? ${f.name}(this.${f.name}) : this.${f.name},';
+    } else {
+      return '${f.name}: ${f.name} ?? this.${f.name},';
+    }
+  }).join();
 
   return Method(
         (m) => m
@@ -92,23 +107,25 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
       ..annotations.add(refer('useResult'))
       ..name = 'copyWith'
       ..optionalParameters.addAll([
-        // For fields with complex types, we need special handling:
-        // If the field is a F*Style, FWidgetStateMap, BoxDecoration or TextStyle:
-        //   Replace with a function parameter instead in the form: T Function(T) <fieldName>
-        //   where T is the field's type. This allows for nested modifications of these complex objects
-        //   without having to recreate the entire object structure manually.
-        // This approach enables more flexible and intuitive style customization through the copyWith method.
         for (final field in fields)
-          Parameter(
-                (p) => p
-              ..name = field.name
-              ..type = refer(
-                field.type.getDisplayString().endsWith('?')
-                    ? field.type.getDisplayString()
-                    : '${field.type.getDisplayString()}?',
-              )
-              ..named = true,
-          ),
+          if (complex(field.type))
+            Parameter(
+                  (p) => p
+                ..name = field.name
+                ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()})?')
+                ..named = true,
+            )
+          else
+            Parameter(
+                  (p) => p
+                ..name = field.name
+                ..type = refer(
+                  field.type.getDisplayString().endsWith('?')
+                      ? field.type.getDisplayString()
+                      : '${field.type.getDisplayString()}?',
+                )
+                ..named = true,
+            ),
       ])
       ..lambda = true
       ..body = Code('${element.name}($assignments)\n'),
