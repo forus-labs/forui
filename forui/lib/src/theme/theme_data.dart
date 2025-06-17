@@ -17,7 +17,7 @@ import 'package:forui/forui.dart';
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
 /// provided by the [colors], [typography], and [style].
-final class FThemeData with Diagnosticable, FTransformable {
+final class FThemeData with Diagnosticable {
   /// A label that is used in the [toString] output. Intended to aid with identifying themes in debug output.
   final String? debugLabel;
 

@@ -12,7 +12,7 @@ import 'package:forui/forui.dart';
 ///
 /// The scaling is applied automatically in all Forui widgets while the labelled font sizes are used as the defaults
 /// for the corresponding properties of widget styles configured via `inherit(...)` constructors.
-final class FTypography with Diagnosticable, FTransformable {
+final class FTypography with Diagnosticable {
   /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   ///
   /// ## Contract:

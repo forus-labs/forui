@@ -11,7 +11,6 @@ export 'src/foundation/notifiers.dart';
 export 'src/foundation/rendering.dart' hide Alignments, DefaultData, RenderBoxes;
 export 'src/foundation/tappable.dart' show FTappable, FTappableStyle, FTouch;
 export 'src/foundation/time.dart';
-export 'src/foundation/transform.dart';
 export 'src/foundation/portal/portal.dart';
 export 'src/foundation/portal/portal_constraints.dart' hide FixedConstraints;
 export 'src/foundation/portal/portal_shift.dart';

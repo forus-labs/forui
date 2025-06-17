@@ -182,6 +182,8 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Add `FModalBarrier`.
 * Add `FLocalizations.popoverSemanticsLabel`.
 
+* **Breaking** Remove `FTransformable`.
+
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.
 * Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.
