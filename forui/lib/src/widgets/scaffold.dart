@@ -109,6 +109,7 @@ class FScaffold extends StatelessWidget {
     final theme = context.theme;
     final style = scaffoldStyle ?? context.theme.scaffoldStyle;
     var child = this.child;
+
     final Widget footer = this.footer != null
         ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!)
         : const SizedBox();

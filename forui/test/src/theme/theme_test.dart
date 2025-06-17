@@ -22,7 +22,7 @@ void main() {
       expect(find.text('true'), findsOneWidget);
     });
 
-    testWidgets('Changes to ThemData is propagated to children widgets', (tester) async {
+    testWidgets('Changes to ThemeData is propagated to children widgets', (tester) async {
       const key = ValueKey('dependent');
 
       await tester.pumpWidget(

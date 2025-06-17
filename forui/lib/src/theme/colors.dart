@@ -217,7 +217,7 @@ final class FColors with Diagnosticable, FTransformable {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty('brightness', brightness))
-      ..add(ObjectFlagProperty('systemOverlayStyle', systemOverlayStyle))
+      ..add(DiagnosticsProperty('systemOverlayStyle', systemOverlayStyle))
       ..add(ColorProperty('barrier', barrier))
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('foreground', foreground))

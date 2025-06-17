@@ -80,6 +80,7 @@ void main() {
         builder.properties.map((p) => p.toString()),
         [
           EnumProperty('brightness', Brightness.light),
+          DiagnosticsProperty('systemOverlayStyle', SystemUiOverlayStyle.dark),
           ColorProperty('barrier', const Color(0xFF03A9F4)),
           ColorProperty('background', Colors.black),
           ColorProperty('foreground', Colors.black12),

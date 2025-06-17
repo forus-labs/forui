@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -104,11 +105,13 @@ class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   /// Creates a [FHeaderStyles] that inherits its properties.
   FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : rootStyle = FHeaderStyle(
+        systemOverlayStyle: colors.systemOverlayStyle,
         titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: FontWeight.w700, height: 1),
         actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 30),
         padding: style.pagePadding.copyWith(bottom: 15),
       ),
       nestedStyle = FHeaderStyle(
+        systemOverlayStyle: colors.systemOverlayStyle,
         titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: FontWeight.w600, height: 1),
         actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 25),
         padding: style.pagePadding.copyWith(bottom: 15),
@@ -117,6 +120,10 @@ class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
 
 /// A header's style.
 class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
+  /// The system overlay style.
+  @override
+  final SystemUiOverlayStyle systemOverlayStyle;
+
   /// The decoration.
   @override
   final BoxDecoration decoration;
@@ -164,6 +171,7 @@ class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
 
   /// Creates a [FHeaderStyle].
   const FHeaderStyle({
+    required this.systemOverlayStyle,
     required this.titleTextStyle,
     required this.actionStyle,
     required this.padding,
