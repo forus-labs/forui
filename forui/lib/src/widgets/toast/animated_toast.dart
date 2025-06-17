@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
+import 'package:sugar/collection.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/toast/animated_toaster.dart';
@@ -28,8 +29,8 @@ class AnimatedToast extends StatefulWidget {
   /// The total number of toasts.
   final int length;
 
-  /// The direction which to swipe to dismiss the toast.
-  final Axis? swipeToDismiss;
+  /// The directions which to swipe to dismiss the toast.
+  final List<AxisDirection> swipeToDismiss;
 
   /// The toast's show duration.
   final Duration? duration;
@@ -83,7 +84,7 @@ class AnimatedToast extends StatefulWidget {
       ..add(DiagnosticsProperty('alignTransform', alignTransform))
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length))
-      ..add(EnumProperty('swipe', swipeToDismiss))
+      ..add(IterableProperty('swipeToDismiss', swipeToDismiss))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(PercentProperty('expand', expand))
       ..add(FlagProperty('visible', value: visible, ifTrue: 'visible'))
@@ -95,6 +96,9 @@ class AnimatedToast extends StatefulWidget {
 }
 
 class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateMixin {
+  static const _horizontal = [AxisDirection.left, AxisDirection.right];
+  static const _vertical = [AxisDirection.up, AxisDirection.down];
+
   Timer? _timer;
   late final AnimationController _entranceExitController;
   late CurvedAnimation _entranceExit;
@@ -275,18 +279,26 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
             },
             child: GestureDetector(
               onHorizontalDragStart: (_) {
-                if (widget.swipeToDismiss == Axis.horizontal) {
+                if (!disjoint(widget.swipeToDismiss, _horizontal)) {
                   _timer?.cancel();
                   widget.swiping.value = widget.swiping.value.start();
                 }
               },
               onHorizontalDragUpdate: (details) {
-                if (widget.swipeToDismiss == Axis.horizontal) {
-                  setState(() => _swipeFraction += Offset(details.primaryDelta! / context.size!.width, 0));
+                if (widget.swipeToDismiss.contains(AxisDirection.left)) {
+                  setState(() {
+                    final offset = _swipeFraction + Offset(details.primaryDelta! / context.size!.width, 0);
+                    _swipeFraction = Offset(offset.dx.clamp(-1.1, 0.05), offset.dy);
+                  });
+                } else if (widget.swipeToDismiss.contains(AxisDirection.right)) {
+                  setState(() {
+                    final offset = _swipeFraction + Offset(details.primaryDelta! / context.size!.width, 0);
+                    _swipeFraction = Offset(offset.dx.clamp(-0.05, 1.1), offset.dy);
+                  });
                 }
               },
               onHorizontalDragEnd: (_) {
-                if (widget.swipeToDismiss == Axis.horizontal) {
+                if (!disjoint(widget.swipeToDismiss, _horizontal)) {
                   _swipeFractionEnd = switch (_swipeFraction.dx) {
                     < -0.5 => const Offset(-1, 0),
                     > 0.5 => const Offset(1, 0),
@@ -297,18 +309,26 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
                 }
               },
               onVerticalDragStart: (_) {
-                if (widget.swipeToDismiss == Axis.vertical) {
+                if (!disjoint(widget.swipeToDismiss, _vertical)) {
                   _timer?.cancel();
                   widget.swiping.value = widget.swiping.value.start();
                 }
               },
               onVerticalDragUpdate: (details) {
-                if (widget.swipeToDismiss == Axis.vertical) {
-                  setState(() => _swipeFraction += Offset(0, details.primaryDelta! / context.size!.height));
+                if (widget.swipeToDismiss.contains(AxisDirection.up)) {
+                  setState(() {
+                    final offset = _swipeFraction + Offset(0, details.primaryDelta! / context.size!.height);
+                    _swipeFraction = Offset(offset.dx, offset.dy.clamp(-1.1, 0.05));
+                  });
+                } else if (widget.swipeToDismiss.contains(AxisDirection.down)) {
+                  setState(() {
+                    final offset = _swipeFraction + Offset(0, details.primaryDelta! / context.size!.height);
+                    _swipeFraction = Offset(offset.dx, offset.dy.clamp(-0.05, 1.1));
+                  });
                 }
               },
               onVerticalDragEnd: (_) {
-                if (widget.swipeToDismiss == Axis.vertical) {
+                if (!disjoint(widget.swipeToDismiss, _vertical)) {
                   _swipeFractionEnd = switch (_swipeFraction.dy) {
                     < -0.5 => const Offset(0, -1),
                     > 0.5 => const Offset(0, 1),

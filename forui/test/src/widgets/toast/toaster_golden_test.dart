@@ -453,7 +453,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.text('3').last));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.drag(find.text('2').last, const Offset(-200, 0), kind: PointerDeviceKind.mouse);
+        await tester.drag(find.text('2').last, const Offset(200, 0), kind: PointerDeviceKind.mouse);
         await tester.pumpAndSettle(const Duration(seconds: 1));
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/mouse-swipe-dismiss.png'));
       });
@@ -479,7 +479,7 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.timedDrag(find.text('2').last, const Offset(-200, 0), const Duration(seconds: 1));
+        await tester.timedDrag(find.text('2').last, const Offset(200, 0), const Duration(seconds: 1));
         await tester.pumpAndSettle(const Duration(seconds: 1));
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/touch-swipe-dismiss.png'));
       });
@@ -503,10 +503,10 @@ void main() {
         await tester.tap(find.text('2').last);
         await tester.pumpAndSettle();
 
-        await tester.timedDrag(find.text('1').last, const Offset(-200, 0), const Duration(seconds: 1));
+        await tester.timedDrag(find.text('1').last, const Offset(200, 0), const Duration(seconds: 1));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.timedDrag(find.text('2').last, const Offset(-200, 0), const Duration(seconds: 1));
+        await tester.timedDrag(find.text('2').last, const Offset(200, 0), const Duration(seconds: 1));
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
         await tester.tap(find.text('1'));
