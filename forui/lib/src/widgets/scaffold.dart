@@ -62,9 +62,6 @@ class FScaffold extends StatelessWidget {
   /// Set to null to disable swiping to dismiss.
   final Axis? toasterSwipeToDismiss;
 
-  /// The system overlay style. Defaults to [FColors.systemOverlayStyle].
-  final SystemUiOverlayStyle? systemOverlayStyle;
-
   /// The main content area of the scaffold.
   final Widget child;
 
@@ -95,7 +92,6 @@ class FScaffold extends StatelessWidget {
     this.scaffoldStyle,
     this.toasterStyle,
     this.toasterSwipeToDismiss = Axis.horizontal,
-    this.systemOverlayStyle,
     this.header,
     this.sidebar,
     this.footer,
@@ -106,7 +102,6 @@ class FScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.theme;
     final style = scaffoldStyle ?? context.theme.scaffoldStyle;
     var child = this.child;
 
@@ -119,7 +114,7 @@ class FScaffold extends StatelessWidget {
     }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: systemOverlayStyle ?? theme.colors.systemOverlayStyle,
+      value: style.systemOverlayStyle,
       child: FSheets(
         child: FToaster(
           style: toasterStyle ?? context.theme.toasterStyle,
@@ -158,7 +153,6 @@ class FScaffold extends StatelessWidget {
       ..add(DiagnosticsProperty('style', scaffoldStyle))
       ..add(DiagnosticsProperty('toasterStyle', toasterStyle))
       ..add(DiagnosticsProperty('toasterSwipeToDismiss', toasterSwipeToDismiss))
-      ..add(DiagnosticsProperty('systemOverlayStyle', systemOverlayStyle))
       ..add(FlagProperty('childPad', value: childPad, ifTrue: 'contentPad', defaultValue: true))
       ..add(
         FlagProperty(
@@ -173,6 +167,13 @@ class FScaffold extends StatelessWidget {
 
 /// The scaffold style.
 class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
+  /// The fallback system overlay style.
+  ///
+  /// This is used as a fallback when no other widgets override [AnnotatedRegion<SystemUiOverlayStyle>]. Typically, the 
+  /// [SystemUiOverlayStyle] property is overridden by [FHeader].
+  @override
+  final SystemUiOverlayStyle systemOverlayStyle;
+
   /// The background color.
   @override
   final Color backgroundColor;
@@ -195,6 +196,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
 
   /// Creates a [FScaffoldStyle].
   FScaffoldStyle({
+    required this.systemOverlayStyle,
     required this.backgroundColor,
     required this.sidebarBackgroundColor,
     required this.childPadding,
@@ -205,6 +207,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// Creates a [FScaffoldStyle] that inherits its properties.
   FScaffoldStyle.inherit({required FColors colors, required FStyle style})
     : this(
+        systemOverlayStyle: colors.systemOverlayStyle,
         backgroundColor: colors.background,
         sidebarBackgroundColor: colors.background,
         childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),
