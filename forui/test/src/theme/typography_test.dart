@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -52,6 +53,7 @@ void main() {
     group('inherit constructor', () {
       const colors = FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Colors.black12,
         background: Colors.black,
         foreground: Colors.black12,

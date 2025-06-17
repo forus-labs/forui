@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -29,6 +30,11 @@ final class FColors with Diagnosticable, FTransformable {
   ///
   /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
   final Brightness brightness;
+
+  /// The system overlay style.
+  ///
+  /// This is typically used to determine the appearance of native system overlays such as status bars.
+  final SystemUiOverlayStyle systemOverlayStyle;
 
   /// The barrier color.
   ///
@@ -116,6 +122,7 @@ final class FColors with Diagnosticable, FTransformable {
   /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
   const FColors({
     required this.brightness,
+    required this.systemOverlayStyle,
     required this.barrier,
     required this.background,
     required this.foreground,
@@ -167,6 +174,7 @@ final class FColors with Diagnosticable, FTransformable {
   @useResult
   FColors copyWith({
     Brightness? brightness,
+    SystemUiOverlayStyle? systemOverlayStyle,
     Color? barrier,
     Color? background,
     Color? foreground,
@@ -185,6 +193,7 @@ final class FColors with Diagnosticable, FTransformable {
     double? disabledOpacity,
   }) => FColors(
     brightness: brightness ?? this.brightness,
+    systemOverlayStyle: systemOverlayStyle ?? this.systemOverlayStyle,
     barrier: barrier ?? this.barrier,
     background: background ?? this.background,
     foreground: foreground ?? this.foreground,
@@ -208,6 +217,7 @@ final class FColors with Diagnosticable, FTransformable {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty('brightness', brightness))
+      ..add(ObjectFlagProperty('systemOverlayStyle', systemOverlayStyle))
       ..add(ColorProperty('barrier', barrier))
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('foreground', foreground))
@@ -231,6 +241,7 @@ final class FColors with Diagnosticable, FTransformable {
       identical(this, other) ||
       other is FColors &&
           brightness == other.brightness &&
+          systemOverlayStyle == other.systemOverlayStyle &&
           barrier == other.barrier &&
           background == other.background &&
           foreground == other.foreground &&
@@ -251,6 +262,7 @@ final class FColors with Diagnosticable, FTransformable {
   @override
   int get hashCode =>
       brightness.hashCode ^
+      systemOverlayStyle.hashCode ^
       barrier.hashCode ^
       background.hashCode ^
       foreground.hashCode ^

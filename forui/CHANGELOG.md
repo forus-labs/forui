@@ -5,6 +5,10 @@ We've updated the animations in Forui to feel more nature and be origin aware. T
 polished.
 
 
+### `FThemeData`
+* Add `FColors.systemOverlayStyle`.
+
+
 ### `FAccordion`
 * Add `FAccordionItemStyle.expandDuration`.
 * Add `FAccordionItemStyle.expandCurve`.
@@ -167,11 +171,15 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Change `FTooltip`'s animation to be origin aware.
 
 
+### `FScaffold`
+* Add `FScaffold.toasterSwipeToDismiss`.
+* Add `FScaffold.systemOverlayStyle`.
+
+
 ### Others
 * Add `FAnimatedModalBarrier`.
-* Add `FModalBrarrier`.
+* Add `FModalBarrier`.
 * Add `FLocalizations.popoverSemanticsLabel`.
-* Add `FScaffold.toasterSwipeToDismiss`.
 
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.
