@@ -8,6 +8,12 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 
 /// Displays a [FToast] in a toaster.
 ///
+/// [swipeToDismiss] represents axes in which to swipe to dismiss a toast. Defaults to horizontally towards the closest
+/// edge of the screen with a left bias. For example, if [alignment] is [FToastAlignment.bottomRight], the default swipe
+/// direction is [AxisDirection.right].
+///
+/// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
+///
 /// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
 /// auto-dismissing.
 ///
@@ -27,6 +33,7 @@ FToasterEntry showFToast({
   Widget? description,
   ValueWidgetBuilder<FToasterEntry>? suffixBuilder,
   FToastAlignment alignment = FToastAlignment.bottomEnd,
+  List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
   VoidCallback? onDismiss,
 }) {
@@ -58,12 +65,20 @@ FToasterEntry showFToast({
     ),
     style: style,
     alignment: alignment,
+    swipeToDismiss: swipeToDismiss,
     duration: duration,
     onDismiss: onDismiss,
   );
 }
 
 /// Displays a raw toast in a toaster.
+///
+///
+/// [swipeToDismiss] represents axes in which to swipe to dismiss a toast. Defaults to horizontally towards the closest
+/// edge of the screen with a left bias. For example, if [alignment] is [FToastAlignment.bottomRight], the default swipe
+/// direction is [AxisDirection.right].
+///
+/// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
 ///
 /// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
 /// auto-closing.
@@ -81,6 +96,7 @@ FToasterEntry showRawFToast({
   required Widget Function(BuildContext context, FToasterEntry entry) builder,
   FToastStyle? style,
   FToastAlignment alignment = FToastAlignment.bottomEnd,
+  List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
   VoidCallback? onDismiss,
 }) {
@@ -106,6 +122,7 @@ FToasterEntry showRawFToast({
     builder: builder,
     style: style,
     alignment: alignment,
+    swipeToDismiss: swipeToDismiss,
     duration: duration,
     onDismiss: onDismiss,
   );
@@ -163,16 +180,11 @@ class FToaster extends StatefulWidget {
   /// The style.
   final FToasterStyle? style;
 
-  /// The axis in which to swipe to dismiss a toast. Defaults to [Axis.horizontal].
-  ///
-  /// Set to null to disable swiping to dismiss.
-  final Axis? swipeToDismiss;
-
   /// The child.
   final Widget child;
 
   /// Creates a [FToaster] widget.
-  const FToaster({required this.child, this.style, this.swipeToDismiss = Axis.horizontal, super.key});
+  const FToaster({required this.child, this.style, super.key});
 
   @override
   State<FToaster> createState() => FToasterState();
@@ -180,9 +192,7 @@ class FToaster extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('swipeToDismiss', swipeToDismiss, defaultValue: Axis.horizontal));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -198,31 +208,30 @@ class FToasterState extends State<FToaster> {
     required Widget Function(BuildContext context, FToasterEntry entry) builder,
     FToastStyle? style,
     FToastAlignment alignment = FToastAlignment.bottomEnd,
+    List<AxisDirection>? swipeToDismiss,
     Duration? duration = const Duration(seconds: 5),
     VoidCallback? onDismiss,
   }) {
-    final entry = ToasterEntry(style, alignment._alignment, duration, builder);
+    final resolved = alignment._alignment.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+    final directions = swipeToDismiss ?? [if (resolved.x < 1) AxisDirection.left else AxisDirection.right];
+
+    final entry = ToasterEntry(style, resolved, directions, duration, builder);
     entry.onDismiss = () {
       entry.dismissing.value = true;
       _remove(entry);
       onDismiss?.call();
     };
 
-    _add(alignment, entry);
-    return entry;
-  }
-
-  void _add(FToastAlignment alignment, ToasterEntry entry) {
     if (!mounted) {
-      return;
+      return entry;
     }
 
-    final FToastAlignment(:_alignment, :_toastAlignment) = alignment;
-    final resolved = _alignment.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
     setState(() {
-      final (_, entries) = _entries[resolved] ??= (_toastAlignment, []);
+      final (_, entries) = _entries[resolved] ??= (alignment._toastAlignment, []);
       entries.add(entry);
     });
+
+    return entry;
   }
 
   void _remove(ToasterEntry entry) {
@@ -266,7 +275,6 @@ class FToasterState extends State<FToaster> {
                   style: style,
                   expandedAlignTransform: Offset(alignment.x, alignment.y),
                   collapsedAlignTransform: Offset(toastAlignment.x, toastAlignment.y),
-                  swipeToDismiss: widget.swipeToDismiss,
                   entries: entries,
                 ),
               ),
@@ -293,13 +301,14 @@ mixin FToasterEntry {
 class ToasterEntry with FToasterEntry {
   final GlobalKey key = GlobalKey();
   final FToastStyle? style;
-  final AlignmentGeometry alignment;
+  final Alignment alignment;
+  List<AxisDirection> swipeToDismiss;
   final Duration? duration;
   final ValueNotifier<bool> dismissing = ValueNotifier(false);
   final Widget Function(BuildContext context, FToasterEntry entry) builder;
   VoidCallback? onDismiss;
 
-  ToasterEntry(this.style, this.alignment, this.duration, this.builder);
+  ToasterEntry(this.style, this.alignment, this.swipeToDismiss, this.duration, this.builder);
 
   @override
   void dismiss() {

@@ -57,11 +57,6 @@ class FScaffold extends StatelessWidget {
   /// ```
   final FToasterStyle? toasterStyle;
 
-  /// The axis in which to swipe to dismiss a toast. Defaults to [Axis.horizontal].
-  ///
-  /// Set to null to disable swiping to dismiss.
-  final Axis? toasterSwipeToDismiss;
-
   /// The main content area of the scaffold.
   final Widget child;
 
@@ -91,7 +86,6 @@ class FScaffold extends StatelessWidget {
     required this.child,
     this.scaffoldStyle,
     this.toasterStyle,
-    this.toasterSwipeToDismiss = Axis.horizontal,
     this.header,
     this.sidebar,
     this.footer,
@@ -118,7 +112,6 @@ class FScaffold extends StatelessWidget {
       child: FSheets(
         child: FToaster(
           style: toasterStyle ?? context.theme.toasterStyle,
-          swipeToDismiss: toasterSwipeToDismiss,
           child: Row(
             children: [
               if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
@@ -152,7 +145,6 @@ class FScaffold extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', scaffoldStyle))
       ..add(DiagnosticsProperty('toasterStyle', toasterStyle))
-      ..add(DiagnosticsProperty('toasterSwipeToDismiss', toasterSwipeToDismiss))
       ..add(FlagProperty('childPad', value: childPad, ifTrue: 'contentPad', defaultValue: true))
       ..add(
         FlagProperty(

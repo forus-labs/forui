@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -31,6 +32,7 @@ Widget small(
 
 Widget button([
   FToastAlignment alignment = FToastAlignment.bottomRight,
+  List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
 ]) => Builder(
   builder: (context) => FButton(
@@ -39,6 +41,7 @@ Widget button([
       for (var i = 1; i <= 3; i++) {
         showRawFToast(
           alignment: alignment,
+          swipeToDismiss: swipeToDismiss,
           context: context,
           duration: duration,
           builder: (_, _) => Container(
@@ -195,182 +198,149 @@ void main() {
   });
 
   group('swipe to dismiss', () {
-    group('horizontal', () {
-      testWidgets('dismiss', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: FToaster(
-              child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [button()]),
+    const offsets = [
+      Offset(-200, 0), // left
+      Offset(200, 0), // right
+      Offset(0, -100), // up
+      Offset(0, 100), // down
+    ];
+
+    for (final (direction, offset) in [
+      (AxisDirection.left, const Offset(-200, 0)),
+      (AxisDirection.right, const Offset(200, 0)),
+      (AxisDirection.up, const Offset(0, -100)),
+      (AxisDirection.down, const Offset(0, 100)),
+    ]) {
+      group('$direction', () {
+        testWidgets('dismiss', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              child: FToaster(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      button(FToastAlignment.bottomCenter, [direction]),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        );
+          );
 
-        await tester.tap(find.text('button'));
-        await tester.pumpAndSettle();
+          await tester.tap(find.text('button'));
+          await tester.pumpAndSettle();
 
-        final gesture = await tester.createPointerGesture();
-        await tester.pump();
+          final gesture = await tester.createPointerGesture();
+          await tester.pump();
 
-        await gesture.moveTo(tester.getCenter(find.text('3')));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
+          await gesture.moveTo(tester.getCenter(find.text('3')));
+          await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.timedDrag(find.text('2'), const Offset(-200, 0), const Duration(seconds: 1));
-        await tester.pumpAndSettle();
+          await tester.timedDrag(find.text('2'), offset, const Duration(seconds: 1));
+          await tester.pumpAndSettle();
 
-        expect(find.text('1'), findsOne);
-        expect(find.text('2'), findsNothing);
-        expect(find.text('3'), findsOne);
-      });
+          expect(find.text('1'), findsOne);
+          expect(find.text('2'), findsNothing);
+          expect(find.text('3'), findsOne);
+        });
 
-      testWidgets('does not dismiss', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: FToaster(
-              child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [button()]),
+        testWidgets('same direction does not dismiss', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              child: FToaster(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      button(FToastAlignment.bottomCenter, [direction]),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-        );
+          );
 
-        await tester.tap(find.text('button'));
-        await tester.pumpAndSettle();
+          await tester.tap(find.text('button'));
+          await tester.pumpAndSettle();
 
-        final gesture = await tester.createPointerGesture();
-        await tester.pump();
+          final gesture = await tester.createPointerGesture();
+          await tester.pump();
 
-        await gesture.moveTo(tester.getCenter(find.text('3')));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
+          await gesture.moveTo(tester.getCenter(find.text('3')));
+          await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.timedDrag(find.text('2'), const Offset(-100, 0), const Duration(seconds: 1));
-        await tester.pumpAndSettle();
+          await tester.timedDrag(find.text('2'), offset * 0.5, const Duration(seconds: 1));
+          await tester.pumpAndSettle();
 
-        expect(find.text('1'), findsOne);
-        expect(find.text('2'), findsOne);
-        expect(find.text('3'), findsOne);
-      });
-    });
+          expect(find.text('1'), findsOne);
+          expect(find.text('2'), findsOne);
+          expect(find.text('3'), findsOne);
+        });
 
-    group('vertical', () {
-      testWidgets('dismiss', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: FToaster(
-              swipeToDismiss: Axis.vertical,
-              child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [button()]),
+        testWidgets('disabled does not dismiss', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              child: FToaster(
+                child: Center(
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [button(FToastAlignment.bottomCenter, [])]),
+                ),
               ),
             ),
-          ),
-        );
+          );
 
-        await tester.tap(find.text('button'));
-        await tester.pumpAndSettle();
+          await tester.tap(find.text('button'));
+          await tester.pumpAndSettle();
 
-        final gesture = await tester.createPointerGesture();
-        await tester.pump();
+          final gesture = await tester.createPointerGesture();
+          await tester.pump();
 
-        await gesture.moveTo(tester.getCenter(find.text('3')));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
+          await gesture.moveTo(tester.getCenter(find.text('3')));
+          await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.timedDrag(find.text('2'), const Offset(0, -100), const Duration(seconds: 1));
-        await tester.pumpAndSettle();
+          await tester.timedDrag(find.text('2'), offset, const Duration(seconds: 1));
+          await tester.pumpAndSettle();
 
-        expect(find.text('1'), findsOne);
-        expect(find.text('2'), findsNothing);
-        expect(find.text('3'), findsOne);
-      });
+          expect(find.text('1'), findsOne);
+          expect(find.text('2'), findsOne);
+          expect(find.text('3'), findsOne);
+        });
 
-      testWidgets('does not dismiss', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: FToaster(
-              swipeToDismiss: Axis.vertical,
-              child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [button()]),
+        for (final offset in offsets.whereNot((o) => o == offset)) {
+          testWidgets('$offset - different direction - does not dismiss', (tester) async {
+            await tester.pumpWidget(
+              TestScaffold(
+                child: FToaster(
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        button(FToastAlignment.bottomCenter, [direction]),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
-        );
+            );
 
-        await tester.tap(find.text('button'));
-        await tester.pumpAndSettle();
+            await tester.tap(find.text('button'));
+            await tester.pumpAndSettle();
 
-        final gesture = await tester.createPointerGesture();
-        await tester.pump();
+            final gesture = await tester.createPointerGesture();
+            await tester.pump();
 
-        await gesture.moveTo(tester.getCenter(find.text('3')));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
+            await gesture.moveTo(tester.getCenter(find.text('3')));
+            await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await tester.timedDrag(find.text('2'), const Offset(0, -50), const Duration(seconds: 1));
-        await tester.pumpAndSettle();
+            await tester.timedDrag(find.text('2'), offset, const Duration(seconds: 1));
+            await tester.pumpAndSettle();
 
-        expect(find.text('1'), findsOne);
-        expect(find.text('2'), findsOne);
-        expect(find.text('3'), findsOne);
+            expect(find.text('1'), findsOne);
+            expect(find.text('2'), findsOne);
+            expect(find.text('3'), findsOne);
+          });
+        }
       });
-    });
-
-    group('disabled', () {
-      testWidgets('horizontal', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: FToaster(
-              swipeToDismiss: null,
-              child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [button()]),
-              ),
-            ),
-          ),
-        );
-
-        await tester.tap(find.text('button'));
-        await tester.pumpAndSettle();
-
-        final gesture = await tester.createPointerGesture();
-        await tester.pump();
-
-        await gesture.moveTo(tester.getCenter(find.text('3')));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-
-        await tester.timedDrag(find.text('2'), const Offset(-200, 0), const Duration(seconds: 1));
-        await tester.pumpAndSettle();
-
-        expect(find.text('1'), findsOne);
-        expect(find.text('2'), findsOne);
-        expect(find.text('3'), findsOne);
-      });
-
-      testWidgets('vertical', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: FToaster(
-              swipeToDismiss: null,
-              child: Center(
-                child: Column(mainAxisSize: MainAxisSize.min, children: [button()]),
-              ),
-            ),
-          ),
-        );
-
-        await tester.tap(find.text('button'));
-        await tester.pumpAndSettle();
-
-        final gesture = await tester.createPointerGesture();
-        await tester.pump();
-
-        await gesture.moveTo(tester.getCenter(find.text('3')));
-        await tester.pumpAndSettle(const Duration(seconds: 1));
-
-        await tester.timedDrag(find.text('2'), const Offset(0, -200), const Duration(seconds: 1));
-        await tester.pumpAndSettle();
-
-        expect(find.text('1'), findsOne);
-        expect(find.text('2'), findsOne);
-        expect(find.text('3'), findsOne);
-      });
-    });
+    }
   });
 }

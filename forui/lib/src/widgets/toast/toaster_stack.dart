@@ -16,14 +16,12 @@ class ToasterStack extends StatefulWidget {
   final FToasterStyle style;
   final Offset expandedAlignTransform;
   final Offset collapsedAlignTransform;
-  final Axis? swipeToDismiss;
   final List<ToasterEntry> entries;
 
   const ToasterStack({
     required this.style,
     required this.expandedAlignTransform,
     required this.collapsedAlignTransform,
-    required this.swipeToDismiss,
     required this.entries,
     super.key,
   });
@@ -38,7 +36,6 @@ class ToasterStack extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('expandedAlignTransform', expandedAlignTransform))
       ..add(DiagnosticsProperty('collapsedAlignTransform', collapsedAlignTransform))
-      ..add(EnumProperty('swipeToDismiss', swipeToDismiss))
       ..add(IterableProperty('entries', entries));
   }
 }
@@ -130,7 +127,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
               index: widget.entries.length - 1 - index,
               length: widget.entries.length,
               duration: entry.duration,
-              swipeToDismiss: widget.swipeToDismiss,
+              swipeToDismiss: entry.swipeToDismiss,
               expand: _expand.value,
               visible: (widget.entries.length - 1 - index) < (widget.style.max),
               autoDismiss: _autoDismiss,
