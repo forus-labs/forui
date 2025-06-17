@@ -1,6 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -283,12 +283,7 @@ void main() {
             TestScaffold(
               child: FToaster(
                 child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      button(FToastAlignment.bottomCenter, []),
-                    ],
-                  ),
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [button(FToastAlignment.bottomCenter, [])]),
                 ),
               ),
             ),
