@@ -65,7 +65,7 @@ class _FRootHeader extends FHeader {
       );
     }
 
-    return header;
+    return AnnotatedRegion<SystemUiOverlayStyle>(value: style.systemOverlayStyle, child: header);
   }
 
   @override

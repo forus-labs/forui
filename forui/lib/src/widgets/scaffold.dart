@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -97,6 +98,7 @@ class FScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = scaffoldStyle ?? context.theme.scaffoldStyle;
     var child = this.child;
+
     final Widget footer = this.footer != null
         ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!)
         : const SizedBox();
@@ -105,30 +107,33 @@ class FScaffold extends StatelessWidget {
       child = Padding(padding: style.childPadding, child: child);
     }
 
-    return FSheets(
-      child: FToaster(
-        style: toasterStyle ?? context.theme.toasterStyle,
-        child: Row(
-          children: [
-            if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
-            Expanded(
-              child: ColoredBox(
-                color: style.backgroundColor,
-                child: _RenderScaffoldWidget(
-                  resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-                  children: [
-                    Column(
-                      children: [
-                        if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-                        Expanded(child: child),
-                      ],
-                    ),
-                    footer,
-                  ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: style.systemOverlayStyle,
+      child: FSheets(
+        child: FToaster(
+          style: toasterStyle ?? context.theme.toasterStyle,
+          child: Row(
+            children: [
+              if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
+              Expanded(
+                child: ColoredBox(
+                  color: style.backgroundColor,
+                  child: _RenderScaffoldWidget(
+                    resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+                    children: [
+                      Column(
+                        children: [
+                          if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                          Expanded(child: child),
+                        ],
+                      ),
+                      footer,
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -154,6 +159,13 @@ class FScaffold extends StatelessWidget {
 
 /// The scaffold style.
 class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
+  /// The fallback system overlay style.
+  ///
+  /// This is used as a fallback when no other widgets override [AnnotatedRegion<SystemUiOverlayStyle>]. Typically, the
+  /// [SystemUiOverlayStyle] property is overridden by [FHeader].
+  @override
+  final SystemUiOverlayStyle systemOverlayStyle;
+
   /// The background color.
   @override
   final Color backgroundColor;
@@ -176,6 +188,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
 
   /// Creates a [FScaffoldStyle].
   FScaffoldStyle({
+    required this.systemOverlayStyle,
     required this.backgroundColor,
     required this.sidebarBackgroundColor,
     required this.childPadding,
@@ -186,6 +199,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// Creates a [FScaffoldStyle] that inherits its properties.
   FScaffoldStyle.inherit({required FColors colors, required FStyle style})
     : this(
+        systemOverlayStyle: colors.systemOverlayStyle,
         backgroundColor: colors.background,
         sidebarBackgroundColor: colors.background,
         childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),

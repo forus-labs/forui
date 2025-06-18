@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
 
@@ -11,6 +10,7 @@ extension FThemes on Never {
       debugLabel: 'Zinc Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
@@ -31,6 +31,7 @@ extension FThemes on Never {
       debugLabel: 'Zinc Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF09090B),
         foreground: Color(0xFFFAFAFA),
@@ -55,6 +56,7 @@ extension FThemes on Never {
       debugLabel: 'Slate Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF020817),
@@ -75,6 +77,7 @@ extension FThemes on Never {
       debugLabel: 'Slate Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF020817),
         foreground: Color(0xFFF8FAFC),
@@ -99,6 +102,7 @@ extension FThemes on Never {
       debugLabel: 'Red Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
@@ -119,6 +123,7 @@ extension FThemes on Never {
       debugLabel: 'Red Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0A0A0A),
         foreground: Color(0xFFFAFAFA),
@@ -143,6 +148,7 @@ extension FThemes on Never {
       debugLabel: 'Rose Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
@@ -163,6 +169,7 @@ extension FThemes on Never {
       debugLabel: 'Rose Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFF2F2F2),
@@ -187,6 +194,7 @@ extension FThemes on Never {
       debugLabel: 'Orange Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF0C0A09),
@@ -207,6 +215,7 @@ extension FThemes on Never {
       debugLabel: 'Orange Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFFAFAF9),
@@ -231,6 +240,7 @@ extension FThemes on Never {
       debugLabel: 'Green Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
@@ -251,6 +261,7 @@ extension FThemes on Never {
       debugLabel: 'Green Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFF2F2F2),
@@ -275,6 +286,7 @@ extension FThemes on Never {
       debugLabel: 'Blue Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF020817),
@@ -295,6 +307,7 @@ extension FThemes on Never {
       debugLabel: 'Blue Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF020817),
         foreground: Color(0xFFF8FAFC),
@@ -319,6 +332,7 @@ extension FThemes on Never {
       debugLabel: 'Yellow Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF0C0A09),
@@ -339,6 +353,7 @@ extension FThemes on Never {
       debugLabel: 'Yellow Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFFAFAF9),
@@ -363,6 +378,7 @@ extension FThemes on Never {
       debugLabel: 'Violet Light ThemeData',
       colors: const FColors(
         brightness: Brightness.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF030712),
@@ -383,6 +399,7 @@ extension FThemes on Never {
       debugLabel: 'Violet Dark ThemeData',
       colors: const FColors(
         brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         barrier: Color(0x7A000000),
         background: Color(0xFF030712),
         foreground: Color(0xFFF9FAFB),

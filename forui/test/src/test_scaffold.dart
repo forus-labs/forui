@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -36,6 +37,7 @@ class TestScaffold extends StatelessWidget {
   static final blueScreen = () {
     const colors = FColors(
       brightness: Brightness.light,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
       barrier: Color(0xFF03A9F4),
       background: Color(0xFF03A9F4),
       foreground: Color(0xFF03A9F4),

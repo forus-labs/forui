@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,6 +10,7 @@ void main() {
   group('FColorScheme', () {
     const scheme = FColors(
       brightness: Brightness.light,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
       barrier: Color(0xFF03A9F4),
       background: Colors.black,
       foreground: Colors.black12,
@@ -31,6 +33,7 @@ void main() {
       test('all arguments', () {
         final copy = scheme.copyWith(
           brightness: Brightness.dark,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
           barrier: Colors.red,
           background: Colors.red,
           foreground: Colors.greenAccent,
@@ -77,6 +80,7 @@ void main() {
         builder.properties.map((p) => p.toString()),
         [
           EnumProperty('brightness', Brightness.light),
+          DiagnosticsProperty('systemOverlayStyle', SystemUiOverlayStyle.dark),
           ColorProperty('barrier', const Color(0xFF03A9F4)),
           ColorProperty('background', Colors.black),
           ColorProperty('foreground', Colors.black12),

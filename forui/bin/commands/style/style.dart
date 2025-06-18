@@ -160,7 +160,7 @@ enum Style {
     'FHeaderStyles',
     <String>['headers'],
     <String>['FHeaderStyles', 'FHeaderActionStyle'],
-    'FHeaderStyles headerStyles({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FHeaderStyles(\n  rootStyle: FHeaderStyle(\n    titleTextStyle: typography.xl3.copyWith(\n      color: colors.foreground,\n      fontWeight: FontWeight.w700,\n      height: 1,\n    ),\n    actionStyle: _headerActionStyle(colors: colors, style: style, size: 30),\n    padding: style.pagePadding.copyWith(bottom: 15),\n  ),\n  nestedStyle: FHeaderStyle(\n    titleTextStyle: typography.xl.copyWith(\n      color: colors.foreground,\n      fontWeight: FontWeight.w600,\n      height: 1,\n    ),\n    actionStyle: _headerActionStyle(colors: colors, style: style, size: 25),\n    padding: style.pagePadding.copyWith(bottom: 15),\n  ),\n);\n',
+    'FHeaderStyles headerStyles({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FHeaderStyles(\n  rootStyle: FHeaderStyle(\n    systemOverlayStyle: colors.systemOverlayStyle,\n    titleTextStyle: typography.xl3.copyWith(\n      color: colors.foreground,\n      fontWeight: FontWeight.w700,\n      height: 1,\n    ),\n    actionStyle: _headerActionStyle(colors: colors, style: style, size: 30),\n    padding: style.pagePadding.copyWith(bottom: 15),\n  ),\n  nestedStyle: FHeaderStyle(\n    systemOverlayStyle: colors.systemOverlayStyle,\n    titleTextStyle: typography.xl.copyWith(\n      color: colors.foreground,\n      fontWeight: FontWeight.w600,\n      height: 1,\n    ),\n    actionStyle: _headerActionStyle(colors: colors, style: style, size: 25),\n    padding: style.pagePadding.copyWith(bottom: 15),\n  ),\n);\n',
   ),
   flabelstyle(
     'FLabelStyle',
@@ -232,7 +232,7 @@ enum Style {
     'FScaffoldStyle',
     <String>['scaffold'],
     <String>['FScaffoldStyle'],
-    'FScaffoldStyle scaffoldStyle({\n  required FColors colors,\n  required FStyle style,\n}) => FScaffoldStyle(\n  backgroundColor: colors.background,\n  sidebarBackgroundColor: colors.background,\n  childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),\n  footerDecoration: BoxDecoration(\n    border: Border(\n      top: BorderSide(color: colors.border, width: style.borderWidth),\n    ),\n  ),\n  headerDecoration: const BoxDecoration(),\n);\n',
+    'FScaffoldStyle scaffoldStyle({\n  required FColors colors,\n  required FStyle style,\n}) => FScaffoldStyle(\n  systemOverlayStyle: colors.systemOverlayStyle,\n  backgroundColor: colors.background,\n  sidebarBackgroundColor: colors.background,\n  childPadding: style.pagePadding.copyWith(top: 0, bottom: 0),\n  footerDecoration: BoxDecoration(\n    border: Border(\n      top: BorderSide(color: colors.border, width: style.borderWidth),\n    ),\n  ),\n  headerDecoration: const BoxDecoration(),\n);\n',
   ),
   fselectcontentstyle(
     'FSelectContentStyle',
