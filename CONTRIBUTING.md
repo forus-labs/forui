@@ -166,6 +166,32 @@ They should:
 
 Lastly, the order of the fields and methods should be as shown above.
 
+### Hide, not Show
+
+Prefer hiding internal members (blacklisting) rather than showing public members (whitelisting) in [barrel files](https://medium.com/@ugamakelechi501/barrel-files-in-dart-and-flutter-a-guide-to-simplifying-imports-9b245dbe516a).
+
+✅ Prefer this:
+```dart
+library forui.widgets.calendar;
+
+export '../src/widgets/calendar/calendar.dart';
+export '../src/widgets/calendar/day/day_picker.dart' hide DayPicker;
+export '../src/widgets/calendar/shared/entry.dart' hide Entry;
+export '../src/widgets/calendar/shared/header.dart' hide Header, Navigation;
+export '../src/widgets/calendar/calendar_controller.dart';
+```
+
+❌ Instead of:
+```dart
+export '../src/widgets/calendar/calendar.dart';
+export '../src/widgets/calendar/day/day_picker.dart' show FCalendarDayPickerStyle;
+export '../src/widgets/calendar/shared/entry.dart' show FCalendarDayData, FCalendarEntryStyle;
+export '../src/widgets/calendar/shared/header.dart' show FCalendarHeaderStyle, FCalendarPickerType;
+export '../src/widgets/calendar/calendar_controller.dart';
+```
+
+This prevents accidental omission of generated public members.
+
 
 ## Leak Tracking
 
