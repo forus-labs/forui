@@ -17,7 +17,7 @@ class DialogPage extends Sample {
   @override
   Widget sample(BuildContext context) {
     final actions = [
-      FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+      FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
       FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
     ];
 
@@ -73,7 +73,7 @@ class BlurredDialogPage extends Sample {
             actions: [
               FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
               FButton(
-                style: FButtonStyle.outline,
+                style: FButtonStyle.outline(),
                 child: const Text('Cancel'),
                 onPress: () => Navigator.of(context).pop(),
               ),

@@ -23,7 +23,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// ```shell
   /// dart run forui style create select-section
   /// ```
-  final FSelectSectionStyle? style;
+  final FSelectSectionStyle Function(FSelectSectionStyle)? style;
 
   /// True if the section is enabled. Disabled sections cannot be selected, and is skipped during traversal.
   ///
@@ -43,7 +43,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   FSelectSection.fromMap({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyle? style,
+    FSelectSectionStyle Function(FSelectSectionStyle)? style,
     bool? enabled,
     Key? key,
   }) : this(
@@ -58,7 +58,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   Widget build(BuildContext context) {
     final content = SelectContentData.of<T>(context);
     final enabled = this.enabled ?? content.enabled;
-    final style = this.style ?? content.style;
+    final style = this.style?.call(content.style) ?? content.style;
 
     return SelectContentData<T>(
       style: style,
@@ -146,7 +146,7 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// ```shell
   /// dart run forui style create select-item
   /// ```
-  final FSelectItemStyle? style;
+  final FSelectItemStyle Function(FSelectItemStyle)? style;
 
   /// The value.
   final T value;
@@ -216,7 +216,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
     final selected = contains(widget.value);
     final enabled = widget.enabled ?? content.enabled;
-    final style = widget.style ?? content.style.itemStyle;
+    final style = widget.style?.call(content.style.itemStyle) ?? content.style.itemStyle;
     final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
 
     Widget item = FTappable(

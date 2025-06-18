@@ -29,7 +29,7 @@ class FPagination extends StatefulWidget {
   /// ```shell
   /// dart run forui style create pagination
   /// ```
-  final FPaginationStyle? style;
+  final FPaginationStyle Function(FPaginationStyle)? style;
 
   /// The previous button placed at the beginning of the pagination.
   ///
@@ -124,7 +124,7 @@ class _FPaginationState extends State<FPagination> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.paginationStyle;
+    final style = widget.style?.call(context.theme.paginationStyle) ?? context.theme.paginationStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     final previous =
@@ -286,15 +286,13 @@ class _Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FPaginationItemData(:page, :controller, :style) = FPaginationItemData.of(context);
-    final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
-
     return Padding(
       padding: style.itemPadding,
       child: ListenableBuilder(
         listenable: controller,
         builder: (_, _) => FTappable(
           style: style.pageTappableStyle,
-          focusedOutlineStyle: focusedOutlineStyle,
+          focusedOutlineStyle: style.focusedOutlineStyle,
           selected: controller.page == page,
           onPress: () => controller.page = page,
           builder: (_, states, _) => DecoratedBox(

@@ -24,7 +24,7 @@ void main() {
                   ),
                   actions: [
                     FButton(onPress: () {}, child: const Text('Continue')),
-                    FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
+                    FButton(style: FButtonStyle.outline(), onPress: () {}, child: const Text('Cancel')),
                   ],
                 ),
               ),
@@ -59,7 +59,7 @@ void main() {
                   ),
                   actions: [
                     FButton(onPress: () {}, child: const Text('Continue')),
-                    FButton(style: FButtonStyle.outline, onPress: () {}, child: const Text('Cancel')),
+                    FButton(style: FButtonStyle.outline(), onPress: () {}, child: const Text('Cancel')),
                   ],
                 ),
               ),
@@ -100,7 +100,7 @@ void main() {
               ),
               actions: [
                 FButton(child: const Text('Continue'), onPress: () {}),
-                FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () {}),
+                FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () {}),
               ],
             ),
           ),

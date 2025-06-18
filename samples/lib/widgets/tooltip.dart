@@ -45,7 +45,7 @@ class TooltipPage extends StatelessWidget {
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: IntrinsicWidth(
                     child: FButton(
-                      style: FButtonStyle.outline,
+                      style: FButtonStyle.outline(),
                       onPress: () {},
                       child: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
                     ),

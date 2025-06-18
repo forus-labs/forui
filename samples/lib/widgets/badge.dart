@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_use_of_internal_member, implementation_imports
+// ignore_for_file: implementation_imports
 
 import 'package:flutter/material.dart';
 
@@ -9,9 +9,14 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class BadgePage extends Sample {
-  static final styles = {for (final value in Variant.values) value.name: value};
+  static final styles = {
+    'primary': FBadgeStyle.primary(),
+    'secondary': FBadgeStyle.secondary(),
+    'destructive': FBadgeStyle.destructive(),
+    'outline': FBadgeStyle.outline(),
+  };
 
-  final FBaseBadgeStyle style;
+  final FBaseBadgeStyle Function(FBadgeStyle) style;
 
   BadgePage({@queryParam super.theme, @queryParam String style = 'primary'}) : style = styles[style]!;
 

@@ -54,7 +54,7 @@ class FTextField extends StatefulWidget {
   /// dart run forui style create text-field
   /// ```
   /// {@endtemplate}
-  final FTextFieldStyle? style;
+  final FTextFieldStyle Function(FTextFieldStyle)? style;
 
   /// {@template forui.text_field.builder}
   /// The builder used to decorate the text-field. It should use the given child.
@@ -1085,7 +1085,7 @@ class _State extends State<FTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.textFieldStyle;
+    final style = widget.style?.call(context.theme.textFieldStyle) ?? context.theme.textFieldStyle;
     final states = {..._statesController.value};
 
     final textfield = TextField(

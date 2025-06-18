@@ -61,7 +61,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// ```shell
   /// dart run forui style create select-menu-tile
   /// ```
-  final FSelectMenuTileStyle? style;
+  final FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style;
 
   /// The divider between select tiles. Defaults to [FTileDivider.indented].
   final FTileDivider divider;
@@ -214,9 +214,11 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
            final tileData = FTileGroupItemData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
-           final menuStyle = style?.menuStyle ?? global.menuStyle;
+           final selectMenuTileStyle = style?.call(global);
+
+           final menuStyle = selectMenuTileStyle?.menuStyle ?? global.menuStyle;
            final tileStyle =
-               style?.tileStyle ??
+               selectMenuTileStyle?.tileStyle ??
                tileData?.style.tappableTileStyle ??
                groupData?.style.tappableTileStyle ??
                global.tileStyle;
@@ -284,7 +286,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 
              tile = FLabel(
                axis: Axis.vertical,
-               style: style ?? global,
+               style: selectMenuTileStyle ?? global,
                states: states,
                label: label,
                description: description,
@@ -373,12 +375,14 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
            final tileData = FTileGroupItemData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
-           final menuStyle = style?.menuStyle ?? global.menuStyle;
+           final selectMenuTileStyle = style?.call(global);
+
+           final menuStyle = selectMenuTileStyle?.menuStyle ?? global.menuStyle;
            final tileStyle =
-               style?.tileStyle ??
-               tileData?.style.tappableTileStyle ??
-               groupData?.style.tappableTileStyle ??
-               global.tileStyle;
+               selectMenuTileStyle?.tileStyle ??
+                   tileData?.style.tappableTileStyle ??
+                   groupData?.style.tappableTileStyle ??
+                   global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.

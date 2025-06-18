@@ -24,7 +24,7 @@ class FCheckbox extends StatelessWidget {
   /// ```shell
   /// dart run forui style create checkbox
   /// ```
-  final FCheckboxStyle? style;
+  final FCheckboxStyle Function(FCheckboxStyle)? style;
 
   /// The label displayed next to the checkbox.
   final Widget? label;
@@ -101,7 +101,7 @@ class FCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.checkboxStyle;
+    final style = this.style?.call(context.theme.checkboxStyle) ?? context.theme.checkboxStyle;
     final formStates = {
       if (!enabled) WidgetState.disabled,
       if (error != null) WidgetState.error,

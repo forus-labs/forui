@@ -421,9 +421,47 @@ See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateM
 
 ### Individual Widget Styles
 
+You can customize a widget's style in **2** ways:
+* Use `copyWith()` - Best for minor adjustments to existing styles.
+* Generate via CLI - Best for major style overhauls.
+
+
+#### `copyWith(...)`
+
+All widgets and style `copyWith(...)`s accept style builder functions.
+
+To change an accordion's focused outline color:
+```dart copy
+FAccordion(
+  style: (style) => style.copyWith(
+    focusedOutlineStyle: (style) => style.copyWith(
+      color: context.theme.colors.background,
+    ),
+  ),
+);
+```
+
+All styles implement the [`call` function](https://dart.dev/language/callable-objects). This allows a style object to be
+passed directly to a widget or style's `copyWith(...)` as a shortcut.
+
+Both are equivalent:
+```dart copy
+// Long-form
+FAccordion(
+  style: (style) => FAccordionStyle(...),
+);
+
+// Short-form
+FAccordion(
+  style: FAccordionStyle(...),
+);
+```
+
+#### CLI
+
 The following sections demonstrate how to override an accordion's style.
 
-#### Generate the Style
+##### Generate the Style
 
 Run to generate a widget style:
 ```shell copy
@@ -434,7 +472,7 @@ dart run forui style create accordion
     Tip: Run `dart run forui style ls` to see all available styles.
 </Callout>
 
-#### Modify the Style
+##### Modify the Style
 
 This example shows how to add underlining when the accordion title is focused, in addition to the existing hover and press states:
 ```dart filename="lib/theme/accordion_style.dart" {8} copy
@@ -462,7 +500,7 @@ FAccordionStyle accordionStyle({
 
 See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateMap`s.
 
-#### Pass the Style
+##### Pass the Style
 
 ```dart filename="main.dart" {1, 6-10} copy
 import 'lib/theme/accordion_style.dart';

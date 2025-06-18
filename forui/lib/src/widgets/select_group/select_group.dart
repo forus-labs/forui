@@ -33,13 +33,6 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   final FSelectGroupController<T> controller;
 
   /// The style.
-  ///
-  /// ## CLI
-  /// To generate and customize this style:
-  ///
-  /// ```shell
-  /// dart run forui style create select-group
-  /// ```
   final FSelectGroupStyle style;
 
   /// True if the item is selected.
@@ -82,7 +75,14 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   final FSelectGroupController<T> controller;
 
   /// The style. Defaults to [FThemeData.selectGroupStyle].
-  final FSelectGroupStyle? style;
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select-group
+  /// ```
+  final FSelectGroupStyle Function(FSelectGroupStyle)? style;
 
   @override
   final Widget? label;
@@ -120,7 +120,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State;
-           final groupStyle = style ?? state.context.theme.selectGroupStyle;
+           final groupStyle = style?.call(state.context.theme.selectGroupStyle) ?? state.context.theme.selectGroupStyle;
            final formStates = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
 
            return FLabel(

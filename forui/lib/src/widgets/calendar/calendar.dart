@@ -36,7 +36,7 @@ class FCalendar extends StatefulWidget {
   /// ```shell
   /// dart run forui style create calendar
   /// ```
-  final FCalendarStyle? style;
+  final FCalendarStyle Function(FCalendarStyle)? style;
 
   /// A controller that determines if a date is selected.
   final FCalendarController controller;
@@ -141,7 +141,7 @@ class _State extends State<FCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.calendarStyle;
+    final style = widget.style?.call(context.theme.calendarStyle) ?? context.theme.calendarStyle;
     return DecoratedBox(
       decoration: style.decoration,
       child: Padding(

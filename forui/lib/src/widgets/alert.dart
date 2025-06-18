@@ -15,6 +15,8 @@ part 'alert.style.dart';
 /// * https://forui.dev/docs/feedback/alert for working examples.
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
+  static _Resolve _primary(FAlertStyle _) => _Resolve((context) => context.theme.alertStyles.primary);
+
   /// The style. Defaults to [FAlertStyle.primary].
   ///
   /// Although typically one of the pre-defined styles in [FBaseAlertStyle], it can also be a [FAlertStyle]
@@ -25,7 +27,7 @@ class FAlert extends StatelessWidget {
   /// ```shell
   /// dart run forui style create alert
   /// ```
-  final FBaseAlertStyle style;
+  final FBaseAlertStyle Function(FAlertStyle) style;
 
   /// The title of the alert.
   final Widget title;
@@ -49,16 +51,15 @@ class FAlert extends StatelessWidget {
     required this.title,
     this.icon = const Icon(FIcons.circleAlert),
     this.subtitle,
-    this.style = FAlertStyle.primary,
+    this.style = _primary,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final style = switch (this.style) {
+    final style = switch (this.style(context.theme.alertStyles.primary)) {
       final FAlertStyle style => style,
-      Variant.primary => context.theme.alertStyles.primary,
-      Variant.destructive => context.theme.alertStyles.destructive,
+      final _Resolve resolver => resolver._resolve(context),
     };
 
     return DecoratedBox(
@@ -148,8 +149,11 @@ class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
 /// A style can be either one of the pre-defined styles in [FAlertStyle] or an [FAlertStyle] itself.
 sealed class FBaseAlertStyle {}
 
-@internal
-enum Variant implements FBaseAlertStyle { primary, destructive }
+class _Resolve extends FBaseAlertStyle {
+  final FAlertStyle Function(BuildContext context) _resolve;
+
+  _Resolve(this._resolve);
+}
 
 /// A custom [FAlert] style.
 ///
@@ -157,13 +161,17 @@ enum Variant implements FBaseAlertStyle { primary, destructive }
 final class FAlertStyle extends FBaseAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
   /// The alert's primary style.
   ///
-  /// Shorthand for the current context's [FAlertStyle.primary] style.
-  static const FBaseAlertStyle primary = Variant.primary;
+  /// Shorthand for the current context's [FAlertStyles.primary] style.
+  static FBaseAlertStyle Function(FAlertStyle) primary([FAlertStyle Function(FAlertStyle)? style]) =>
+      (_) => _Resolve((context) => style?.call(context.theme.alertStyles.primary) ?? context.theme.alertStyles.primary);
 
   /// The alert's destructive style.
   ///
-  /// Shorthand for the current context's [FAlertStyle.destructive] style.
-  static const FBaseAlertStyle destructive = Variant.destructive;
+  /// Shorthand for the current context's [FAlertStyles.destructive] style.
+  static FBaseAlertStyle Function(FAlertStyle) destructive([FAlertStyle Function(FAlertStyle)? style]) =>
+      (_) => _Resolve(
+        (context) => style?.call(context.theme.alertStyles.destructive) ?? context.theme.alertStyles.destructive,
+      );
 
   /// The decoration.
   @override

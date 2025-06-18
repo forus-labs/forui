@@ -47,6 +47,10 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   @override
   final FTappableStyle pageTappableStyle;
 
+  /// The pagination item's focused outline style.
+  @override
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
   /// Creates a [FPaginationStyle].
   FPaginationStyle({
     required this.itemIconStyle,
@@ -55,6 +59,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     required this.ellipsisTextStyle,
     required this.actionTappableStyle,
     required this.pageTappableStyle,
+    required this.focusedOutlineStyle,
     this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
     this.itemConstraints = const BoxConstraints.tightFor(width: 40.0, height: 40.0),
   });
@@ -79,5 +84,6 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
         ellipsisTextStyle: typography.sm.copyWith(color: colors.primary),
         actionTappableStyle: style.tappableStyle,
         pageTappableStyle: style.tappableStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

@@ -17,7 +17,12 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final variant in Variant.values) {
+    for (final (name, variant) in [
+      ('primary', FBadgeStyle.primary()),
+      ('secondary', FBadgeStyle.secondary()),
+      ('destructive', FBadgeStyle.destructive()),
+      ('outline', FBadgeStyle.outline()),
+    ]) {
       testWidgets('${theme.name} with FBadgeContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -26,7 +31,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$variant-content.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$name-content.png'));
       });
 
       testWidgets('${theme.name} with raw content', (tester) async {
@@ -55,7 +60,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$variant-raw.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('badge/${theme.name}/$name-raw.png'));
       });
     }
   }

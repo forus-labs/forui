@@ -81,7 +81,7 @@ FDialog(
   title: const Text('Are you absolutely sure?'),
   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
   actions: [
-    FButton(style: FButtonStyle.outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+    FButton(style: FButtonStyle.outline(), onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
     FButton(onPress: () => Navigator.of(context).pop(), child: const Text('Continue')),
   ],
 );
@@ -96,7 +96,7 @@ FDialog.adaptive(
   title: const Text('Are you absolutely sure?'),
   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
   actions: [
-    FButton(style: FButtonStyle.outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+    FButton(style: FButtonStyle.outline(), onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
     FButton(onPress: () => Navigator.of(context).pop(), child: const Text('Continue')),
   ],
 );
@@ -137,7 +137,7 @@ FDialog.raw(
                 title: const Text('Are you absolutely sure?'),
                 body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
                 actions: [
-                  FButton(style: FButtonStyle.outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                  FButton(style: FButtonStyle.outline(), onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
                   FButton(onPress: () => Navigator.of(context).pop(), child: const Text('Continue')),
                 ],
               ),
@@ -175,7 +175,7 @@ We recommend using the vertical layout on mobile devices.
                   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
                   actions: [
                     FButton(onPress: () => Navigator.of(context).pop(), child: const Text('Continue')),
-                    FButton(style: FButtonStyle.outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                    FButton(style: FButtonStyle.outline(), onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
                   ],
                 ),
               ),
@@ -215,7 +215,7 @@ We recommend using the vertical layout on mobile devices.
                   body: const Text('This action cannot be undone. This will permanently delete your account and remove your data from our servers.'),
                   actions: [
                     FButton(onPress: () => Navigator.of(context).pop(), child: const Text('Continue')),
-                    FButton(style: FButtonStyle.outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                    FButton(style: FButtonStyle.outline(), onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
                   ],
                 ),
               ),

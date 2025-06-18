@@ -33,7 +33,7 @@ class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FTile
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.tileGroupStyle;
+    final style = this.style?.call(context.theme.tileGroupStyle) ?? context.theme.tileGroupStyle;
     final enabled = this.enabled ?? true;
 
     return _label(context, style, true, enabled, [
@@ -66,7 +66,7 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
   /// All group labels will be ignored.
   static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
     required List<FTileGroupMixin<FTileMixin>> children,
-    FTileGroupStyle? style,
+    FTileGroupStyle Function(FTileGroupStyle)? style,
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = double.infinity,
@@ -176,7 +176,8 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
   @override
   Widget build(BuildContext context) {
     final data = FTileGroupData.maybeOf(context);
-    final style = this.style ?? data?.style ?? context.theme.tileGroupStyle;
+    final inheritedStyle = data?.style ?? context.theme.tileGroupStyle;
+    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
     final enabled = this.enabled ?? data?.enabled ?? true;
 
     final sliver = SliverList(delegate: _delegate(style, enabled));
@@ -193,7 +194,7 @@ abstract class _Group extends StatelessWidget {
   /// ```shell
   /// dart run forui style create tile-group
   /// ```
-  final FTileGroupStyle? style;
+  final FTileGroupStyle Function(FTileGroupStyle)? style;
 
   /// {@template forui.widgets.FTileGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.

@@ -27,7 +27,7 @@ class FBreadcrumb extends StatelessWidget {
   /// ```shell
   /// dart run forui style create breadcrumb
   /// ```
-  final FBreadcrumbStyle? style;
+  final FBreadcrumbStyle Function(FBreadcrumbStyle)? style;
 
   /// A list of breadcrumb items representing the navigation path.
   ///
@@ -45,7 +45,7 @@ class FBreadcrumb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.breadcrumbStyle;
+    final style = this.style?.call(context.theme.breadcrumbStyle) ?? context.theme.breadcrumbStyle;
     final divider = IconTheme(data: style.iconStyle, child: this.divider ?? const Icon(FIcons.chevronRight));
 
     return Row(
@@ -115,7 +115,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsed({
     required List<FTileGroup> menu,
-    FPopoverMenuStyle? popoverMenuStyle,
+    FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle,
     FPopoverController? popoverController,
     ScrollController? scrollController,
     double? cacheExtent,
@@ -194,7 +194,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 // ignore: avoid_implementing_value_types
 class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup> menu;
-  final FPopoverMenuStyle? popoverMenuStyle;
+  final FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle;
   final FPopoverController? popoverController;
   final ScrollController? scrollController;
   final double? cacheExtent;
@@ -290,7 +290,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
     final style = FBreadcrumbItemData.of(context).style;
     return FPopoverMenu(
       popoverController: _popoverController,
-      style: widget.popoverMenuStyle,
+      style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
       menuAnchor: widget.menuAnchor,
       childAnchor: widget.childAnchor,
       spacing: widget.spacing,

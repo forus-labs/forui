@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/alert.dart';
 import '../test_scaffold.dart';
 
 void main() {
@@ -22,7 +21,10 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final variant in Variant.values) {
+    for (final (name, variant) in [
+      ('primary', FAlertStyle.primary()),
+      ('destructive', FAlertStyle.destructive()),
+    ]) {
       testWidgets('${theme.name} with default icon', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -37,7 +39,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('alert/${theme.name}/$variant-default-icon.png'),
+          matchesGoldenFile('alert/${theme.name}/$name-default-icon.png'),
         );
       });
 
@@ -54,7 +56,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/${theme.name}/$variant-user-icon.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/${theme.name}/$name-user-icon.png'));
       });
     }
   }

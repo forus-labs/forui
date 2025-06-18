@@ -40,7 +40,7 @@ abstract class FProgress extends StatefulWidget {
   /// dart run forui style create progresses
   /// ```
   const factory FProgress({
-    FLinearProgressStyle? style,
+    FLinearProgressStyle Function(FLinearProgressStyle)? style,
     String? semanticsLabel,
     double? value,
     Duration duration,
@@ -48,8 +48,12 @@ abstract class FProgress extends StatefulWidget {
   }) = _Linear;
 
   /// Creates an indeterminate circular [FProgress].
-  const factory FProgress.circularIcon({IconThemeData? style, Duration duration, String? semanticsLabel, Key? key}) =
-      _Circular;
+  const factory FProgress.circularIcon({
+    IconThemeData Function(IconThemeData)? style,
+    Duration duration,
+    String? semanticsLabel,
+    Key? key,
+  }) = _Circular;
 
   const FProgress._({this.semanticsLabel, this.value, super.key})
     : assert(value == null || value >= 0.0, 'The value must be greater than or equal to 0.0'),
@@ -68,7 +72,7 @@ class _Linear extends FProgress {
   static const _infinite = Duration(milliseconds: 1500);
   static const _finite = Duration(milliseconds: 500);
 
-  final FLinearProgressStyle? style;
+  final FLinearProgressStyle Function(FLinearProgressStyle)? style;
   final Duration duration;
 
   const _Linear({this.style, Duration? duration, super.semanticsLabel, super.value, super.key})
@@ -102,7 +106,10 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final style = widget.style ?? context.theme.progressStyles.linearProgressStyle;
+    final style =
+        widget.style?.call(context.theme.progressStyles.linearProgressStyle) ??
+        context.theme.progressStyles.linearProgressStyle;
+
     _curve = CurvedAnimation(parent: _controller, curve: style.curve);
     _animation = Tween(begin: _previous, end: widget.value ?? 1).animate(_curve);
   }
@@ -122,7 +129,10 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
     }
 
     if (widget.style != old.style) {
-      final style = widget.style ?? context.theme.progressStyles.linearProgressStyle;
+      final style =
+          widget.style?.call(context.theme.progressStyles.linearProgressStyle) ??
+          context.theme.progressStyles.linearProgressStyle;
+
       _curve = CurvedAnimation(parent: _controller, curve: style.curve);
       reanimate = true;
     }
@@ -141,7 +151,10 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.progressStyles.linearProgressStyle;
+    final style =
+        widget.style?.call(context.theme.progressStyles.linearProgressStyle) ??
+        context.theme.progressStyles.linearProgressStyle;
+
     return ConstrainedBox(
       constraints: style.constraints,
       child: Semantics(
@@ -170,7 +183,7 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
 }
 
 class _Circular extends FProgress {
-  final IconThemeData? style;
+  final IconThemeData Function(IconThemeData)? style;
   final Duration duration;
 
   const _Circular({this.style, this.duration = const Duration(seconds: 1), super.semanticsLabel, super.key})
@@ -209,8 +222,7 @@ class _CircularState extends State<_Circular> with SingleTickerProviderStateMixi
 
   @override
   Widget build(BuildContext context) {
-    final style =
-        widget.style ??
+    final inheritedStyle =
         context.dependOnInheritedWidgetOfExactType<IconTheme>()?.data ??
         context.theme.progressStyles.circularIconProgressStyle;
 
@@ -218,7 +230,7 @@ class _CircularState extends State<_Circular> with SingleTickerProviderStateMixi
       animation: _animation,
       builder: (_, child) => Transform.rotate(angle: _controller.value * 2 * math.pi, child: child),
       child: IconTheme(
-        data: style,
+        data: widget.style?.call(inheritedStyle) ?? inheritedStyle,
         child: Icon(FIcons.loaderCircle, semanticLabel: widget.semanticsLabel),
       ),
     );

@@ -101,7 +101,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.dateFieldStyle;
+    final style = widget.style?.call(context.theme.dateFieldStyle) ?? context.theme.dateFieldStyle;
 
     final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefix = switch (widget.prefixBuilder) {
       null => null,

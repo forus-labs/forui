@@ -42,7 +42,7 @@ class FSidebar extends StatelessWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarStyle? style;
+  final FSidebarStyle Function(FSidebarStyle)? style;
 
   /// The optional sticky header widget.
   final Widget? header;
@@ -79,7 +79,7 @@ class FSidebar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.sidebarStyle;
+    final style = this.style?.call(context.theme.sidebarStyle) ?? context.theme.sidebarStyle;
 
     Widget sidebar = FSidebarData(
       style: style,

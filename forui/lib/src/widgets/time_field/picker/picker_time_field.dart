@@ -164,7 +164,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.timeFieldStyle;
+    final style = widget.style?.call(context.theme.timeFieldStyle) ?? context.theme.timeFieldStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     return PickerFormField(
