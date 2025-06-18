@@ -120,7 +120,11 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
             ),
           ),
           builder: (_, controller, _) => IntrinsicWidth(
-            child: FButton(style: FButtonStyle.outline(), onPress: controller.toggle, child: const Text('Open popover')),
+            child: FButton(
+              style: FButtonStyle.outline(),
+              onPress: controller.toggle,
+              child: const Text('Open popover'),
+            ),
           ),
         ),
       ],

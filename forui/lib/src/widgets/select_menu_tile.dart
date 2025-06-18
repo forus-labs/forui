@@ -380,9 +380,9 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
            final menuStyle = selectMenuTileStyle?.menuStyle ?? global.menuStyle;
            final tileStyle =
                selectMenuTileStyle?.tileStyle ??
-                   tileData?.style.tappableTileStyle ??
-                   groupData?.style.tappableTileStyle ??
-                   global.tileStyle;
+               tileData?.style.tappableTileStyle ??
+               groupData?.style.tappableTileStyle ??
+               global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.

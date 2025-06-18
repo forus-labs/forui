@@ -21,10 +21,7 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, variant) in [
-      ('primary', FAlertStyle.primary()),
-      ('destructive', FAlertStyle.destructive()),
-    ]) {
+    for (final (name, variant) in [('primary', FAlertStyle.primary()), ('destructive', FAlertStyle.destructive())]) {
       testWidgets('${theme.name} with default icon', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -37,10 +34,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('alert/${theme.name}/$name-default-icon.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/${theme.name}/$name-default-icon.png'));
       });
 
       testWidgets('${theme.name} with user icon', (tester) async {

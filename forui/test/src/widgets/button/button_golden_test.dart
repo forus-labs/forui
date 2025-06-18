@@ -205,10 +205,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$name/enabled-raw.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$name/enabled-raw.png'));
       });
 
       testWidgets('${theme.name} disabled with raw content', (tester) async {
@@ -238,10 +235,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$name/disabled-raw.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$name/disabled-raw.png'));
       });
 
       testWidgets('${theme.name} with enabled icon', (tester) async {
@@ -266,10 +260,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$name/icon-disabled.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$name/icon-disabled.png'));
       });
 
       testWidgets('${theme.name} with enabled circular progress', (tester) async {
