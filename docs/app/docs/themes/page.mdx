@@ -176,7 +176,7 @@ Widget build(BuildContext context) => FTheme(
   data: FThemeData(
     colors: FThemes.zinc.light.colors,
     typography: FThemes.zinc.light.typography.copyWith(
-      defaultFontFamily: 'Roboto',
+      xs: const TextStyle(fontSize: 12, height: 1),
     ).scale(sizeScalar: 0.8),
   ),
   child: const FScaffold(...),

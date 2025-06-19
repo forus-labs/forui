@@ -242,6 +242,7 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Add `FPaginationStyle.focusedOutlineStyle`.
 * Add `FLocalizations.popoverSemanticsLabel`.
 
+* **Breaking** Remove `defaultFontFamily` from `FTypography.copyWith(...)`.
 * **Breaking** Remove `FTransformable`.
 
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.

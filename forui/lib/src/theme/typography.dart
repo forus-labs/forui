@@ -13,6 +13,8 @@ import 'package:forui/forui.dart';
 /// The scaling is applied automatically in all Forui widgets while the labelled font sizes are used as the defaults
 /// for the corresponding properties of widget styles configured via `inherit(...)` constructors.
 final class FTypography with Diagnosticable {
+  static const _defaultFontFamily = 'packages/forui/Inter';
+
   /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   ///
   /// ## Contract:
@@ -105,7 +107,7 @@ final class FTypography with Diagnosticable {
 
   /// Creates a [FTypography].
   const FTypography({
-    this.defaultFontFamily = 'packages/forui/Inter',
+    this.defaultFontFamily = _defaultFontFamily,
     this.xs = const TextStyle(fontSize: 12, height: 1),
     this.sm = const TextStyle(fontSize: 14, height: 1.25),
     this.base = const TextStyle(fontSize: 16, height: 1.5),
@@ -121,7 +123,7 @@ final class FTypography with Diagnosticable {
   }) : assert(0 < defaultFontFamily.length, 'The defaultFontFamily should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
-  FTypography.inherit({required FColors colors, this.defaultFontFamily = 'packages/forui/Inter'})
+  FTypography.inherit({required FColors colors, this.defaultFontFamily = _defaultFontFamily})
     : xs = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
       sm = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
       base = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),
@@ -172,6 +174,8 @@ final class FTypography with Diagnosticable {
 
   /// Returns a copy of this [FTypography] with the given properties replaced.
   ///
+  /// To change the [defaultFontFamily], create a [FTypography] via its constructors instead.
+  ///
   /// ```dart
   /// const typography = FTypography(
   ///   defaultFontFamily: 'packages/forui/my-font',
@@ -187,7 +191,6 @@ final class FTypography with Diagnosticable {
   /// ```
   @useResult
   FTypography copyWith({
-    String? defaultFontFamily,
     TextStyle? xs,
     TextStyle? sm,
     TextStyle? base,
@@ -201,7 +204,7 @@ final class FTypography with Diagnosticable {
     TextStyle? xl7,
     TextStyle? xl8,
   }) => FTypography(
-    defaultFontFamily: defaultFontFamily ?? this.defaultFontFamily,
+    defaultFontFamily: defaultFontFamily,
     xs: xs ?? this.xs,
     sm: sm ?? this.sm,
     base: base ?? this.base,
