@@ -153,7 +153,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.dateFieldStyle;
+    final style = widget.style?.call(context.theme.dateFieldStyle) ?? context.theme.dateFieldStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final hint = widget.hint ?? localizations.dateFieldHint;
     final onSaved = widget.onSaved;

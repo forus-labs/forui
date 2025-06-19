@@ -24,7 +24,7 @@ class FSidebarGroup extends StatelessWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarGroupStyle? style;
+  final FSidebarGroupStyle Function(FSidebarGroupStyle)? style;
 
   /// The label of the group.
   final Widget? label;
@@ -63,7 +63,8 @@ class FSidebarGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sidebarData = FSidebarData.maybeOf(context);
-    final style = this.style ?? sidebarData?.style.groupStyle ?? context.theme.sidebarStyle.groupStyle;
+    final inheritedStyle = sidebarData?.style.groupStyle ?? context.theme.sidebarStyle.groupStyle;
+    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
 
     return FSidebarGroupData(
       style: style,

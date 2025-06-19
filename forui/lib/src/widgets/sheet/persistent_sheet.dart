@@ -59,7 +59,7 @@ FPersistentSheetController showFPersistentSheet({
   required BuildContext context,
   required FLayout side,
   required Widget Function(BuildContext, FPersistentSheetController) builder,
-  FSheetStyle? style,
+  FSheetStyle Function(FSheetStyle)? style,
   double? mainAxisMaxRatio = 9 / 16,
   BoxConstraints constraints = const BoxConstraints(),
   bool draggable = true,
@@ -86,11 +86,11 @@ FPersistentSheetController showFPersistentSheet({
   }
 
   key ??= ValueKey(Random().nextInt(2147483647));
-  style ??= context.theme.sheetStyle;
+  final sheetStyle = style?.call(context.theme.sheetStyle) ?? context.theme.sheetStyle;
 
   final controller = FPersistentSheetController._(
     vsync: state,
-    style: style,
+    style: sheetStyle,
     key: key,
     keepAliveOffstage: keepAliveOffstage,
     setState: (function) {
@@ -107,7 +107,7 @@ FPersistentSheetController showFPersistentSheet({
       controller,
       Sheet(
         controller: controller._controller,
-        style: style,
+        style: sheetStyle,
         side: side,
         mainAxisMaxRatio: mainAxisMaxRatio,
         constraints: constraints,

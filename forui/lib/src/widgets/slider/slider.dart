@@ -39,7 +39,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   /// ```shell
   /// dart run forui style create sliders
   /// ```
-  final FSliderStyle? style;
+  final FSliderStyle Function(FSliderStyle)? style;
 
   /// The layout. Defaults to the current [TextDirection].
   final FLayout? layout;
@@ -148,13 +148,16 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
 
   @override
   Widget build(BuildContext context) {
-    final styles = context.theme.sliderStyles;
     final layout = switch (this.layout) {
       final layout? => layout,
       _ when Directionality.maybeOf(context) == TextDirection.rtl => FLayout.rtl,
       _ => FLayout.ltr,
     };
-    final sliderStyle = style ?? (layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
+
+    final styles = context.theme.sliderStyles;
+    final inheritedStyle = (layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
+    final sliderStyle = style?.call(inheritedStyle) ?? inheritedStyle;
+
     return LayoutBuilder(
       builder: (_, constraints) => _Slider(
         controller: controller,

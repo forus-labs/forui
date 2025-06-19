@@ -127,7 +127,7 @@ abstract class FTimeField extends StatefulWidget {
   /// ```shell
   /// dart run forui style create time-field
   /// ```
-  final FTimeFieldStyle? style;
+  final FTimeFieldStyle Function(FTimeFieldStyle)? style;
 
   /// The initial time.
   ///
@@ -247,7 +247,7 @@ abstract class FTimeField extends StatefulWidget {
   /// * [FTimeField.picker] - Creates a time field with only a picker.
   const factory FTimeField({
     FTimeFieldController? controller,
-    FTimeFieldStyle? style,
+    FTimeFieldStyle Function(FTimeFieldStyle)? style,
     FTime? initialTime,
     bool hour24,
     bool autofocus,
@@ -317,7 +317,7 @@ abstract class FTimeField extends StatefulWidget {
   /// * [FTimeField.new] - Creates a time field with only an input field.
   const factory FTimeField.picker({
     FTimeFieldController? controller,
-    FTimeFieldStyle? style,
+    FTimeFieldStyle Function(FTimeFieldStyle)? style,
     FTime? initialTime,
     bool hour24,
     DateFormat? format,

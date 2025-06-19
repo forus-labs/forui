@@ -49,7 +49,7 @@ class FTabs extends StatefulWidget {
   /// ```shell
   /// dart run forui style create tabs
   /// ```
-  final FTabsStyle? style;
+  final FTabsStyle Function(FTabsStyle)? style;
 
   /// The initial tab that is selected.
   ///
@@ -162,7 +162,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final style = widget.style ?? context.theme.tabsStyle;
+    final style = widget.style?.call(context.theme.tabsStyle) ?? context.theme.tabsStyle;
     final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
     final tabs = Material(

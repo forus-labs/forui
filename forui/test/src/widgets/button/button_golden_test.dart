@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/button/button.dart';
 import '../../test_scaffold.dart';
 
 void main() {
@@ -41,7 +40,13 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final variant in Variant.values) {
+    for (final (name, variant) in [
+      ('primary', FButtonStyle.primary()),
+      ('secondary', FButtonStyle.secondary()),
+      ('destructive', FButtonStyle.destructive()),
+      ('outline', FButtonStyle.outline()),
+      ('ghost', FButtonStyle.ghost()),
+    ]) {
       testWidgets('${theme.name} enabled with FButtonContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -58,7 +63,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/enabled-content.png'),
+          matchesGoldenFile('button/${theme.name}/$name/enabled-content.png'),
         );
       });
 
@@ -79,7 +84,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/intrinsic-width.png'),
+          matchesGoldenFile('button/${theme.name}/$name/intrinsic-width.png'),
         );
       });
 
@@ -105,7 +110,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/enabled-hovered.png'),
+          matchesGoldenFile('button/${theme.name}/$name/enabled-hovered.png'),
         );
       });
 
@@ -131,7 +136,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/enabled-long-pressed.png'),
+          matchesGoldenFile('button/${theme.name}/$name/enabled-long-pressed.png'),
         );
       });
 
@@ -150,7 +155,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$variant/focused.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$name/focused.png'));
       });
 
       testWidgets('${theme.name} disabled with FButtonContent', (tester) async {
@@ -169,7 +174,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/disabled-content.png'),
+          matchesGoldenFile('button/${theme.name}/$name/disabled-content.png'),
         );
       });
 
@@ -200,10 +205,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/enabled-raw.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$name/enabled-raw.png'));
       });
 
       testWidgets('${theme.name} disabled with raw content', (tester) async {
@@ -233,10 +235,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/disabled-raw.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$name/disabled-raw.png'));
       });
 
       testWidgets('${theme.name} with enabled icon', (tester) async {
@@ -249,7 +248,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/icon-enabled-button.png'),
+          matchesGoldenFile('button/${theme.name}/$name/icon-enabled-button.png'),
         );
       });
 
@@ -261,10 +260,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/icon-disabled.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$name/icon-disabled.png'));
       });
 
       testWidgets('${theme.name} with enabled circular progress', (tester) async {
@@ -282,7 +278,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/circular-progress-enabled-button.png'),
+          matchesGoldenFile('button/${theme.name}/$name/circular-progress-enabled-button.png'),
         );
       });
 
@@ -301,7 +297,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('button/${theme.name}/$variant/circular-progress-disabled-button.png'),
+          matchesGoldenFile('button/${theme.name}/$name/circular-progress-disabled-button.png'),
         );
       });
     }

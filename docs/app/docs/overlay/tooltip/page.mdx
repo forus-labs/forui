@@ -20,7 +20,7 @@ A tooltip displays information related to a widget when focused, hovered over, o
       tipBuilder: (context, controller) => const Text('Add to library'),
       child: IntrinsicWidth(
         child: FButton(
-          style: FButtonStyle.outline,
+          style: FButtonStyle.outline(),
           onPress: () {},
           child: Text('Long press/Hover'),
         ),
@@ -75,7 +75,7 @@ You can change how the tooltip is aligned to the button.
       tipBuilder: (context, controller) => const Text('Add to library'),
       child: IntrinsicWidth(
         child: FButton(
-          style: FButtonStyle.outline,
+          style: FButtonStyle.outline(),
           onPress: () {},
           child: Text('Long press/Hover'),
         ),
@@ -99,7 +99,7 @@ You can change how the tooltip is aligned to the button.
       tipBuilder: (context, controller) => const Text('Add to library'),
       child: IntrinsicWidth(
         child: FButton(
-          style: FButtonStyle.outline,
+          style: FButtonStyle.outline(),
           onPress: () {},
           child: Text('Long press'),
         ),

@@ -96,7 +96,7 @@ class FTooltip extends StatefulWidget {
   /// ```shell
   /// dart run forui style create tooltip
   /// ```
-  final FTooltipStyle? style;
+  final FTooltipStyle Function(FTooltipStyle)? style;
 
   /// The anchor of the follower to which the [childAnchor] is aligned. Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry tipAnchor;
@@ -215,7 +215,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.tooltipStyle;
+    final style = widget.style?.call(context.theme.tooltipStyle) ?? context.theme.tooltipStyle;
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
     var child = widget.builder(context, _controller, widget.child);

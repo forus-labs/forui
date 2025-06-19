@@ -9,7 +9,7 @@ part of 'header.dart';
 /// * https://forui.dev/docs/navigation/header for working examples.
 class _FRootHeader extends FHeader {
   /// The header's style.
-  final FHeaderStyle? style;
+  final FHeaderStyle Function(FHeaderStyle)? style;
 
   /// The actions, aligned to the right in LTR locales. Defaults to an empty list.
   ///
@@ -21,7 +21,7 @@ class _FRootHeader extends FHeader {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.headerStyles.rootStyle;
+    final style = this.style?.call(context.theme.headerStyles.rootStyle) ?? context.theme.headerStyles.rootStyle;
     Widget header = SafeArea(
       bottom: false,
       child: Semantics(

@@ -26,7 +26,7 @@ A badge draws attention to specific information, such as labels and counts. Use 
           FBadge(child: const Text('New')),
           const SizedBox(width: 8),
           FBadge(
-            style: FBadgeStyle.secondary,
+            style: FBadgeStyle.secondary(),
             child: const Text('3'),
           ),
         ],
@@ -49,7 +49,7 @@ dart run forui style create badges
 
 ```dart copy
 FBadge(
-  style: FBadgeStyle.primary,
+  style: FBadgeStyle.primary(),
   child: const Text('Badge'),
 );
 ```
@@ -58,7 +58,7 @@ FBadge(
 
 ```dart copy
 FBadge.raw(
-  style: FBadgeStyle.primary,
+  style: FBadgeStyle.primary(),
   builder: (context, style) => Text('Badge'),
 );
 ```
@@ -86,7 +86,7 @@ FBadge.raw(
       ```dart {3} copy
       FBadge(
         label: const Text('Badge'),
-        style: FBadgeStyle.secondary,
+        style: FBadgeStyle.secondary(),
       );
       ```
   </Tabs.Tab>
@@ -101,7 +101,7 @@ FBadge.raw(
       ```dart {3} copy
       FBadge(
         label: const Text('Badge'),
-        style: FBadgeStyle.outline,
+        style: FBadgeStyle.outline(),
       );
       ```
   </Tabs.Tab>
@@ -116,7 +116,7 @@ FBadge.raw(
       ```dart {3} copy
       FBadge(
         label: const Text('Badge'),
-        style: FBadgeStyle.destructive,
+        style: FBadgeStyle.destructive(),
       );
       ```
   </Tabs.Tab>

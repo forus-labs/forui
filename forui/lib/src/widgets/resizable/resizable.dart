@@ -35,7 +35,7 @@ class FResizable extends StatefulWidget {
   /// ```shell
   /// dart run forui style create resizable
   /// ```
-  final FResizableStyle? style;
+  final FResizableStyle Function(FResizableStyle)? style;
 
   /// The main axis along which the [children] can be resized.
   final Axis axis;
@@ -106,7 +106,7 @@ class FResizable extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
+      ..add(ObjectFlagProperty.has('style', style))
       ..add(EnumProperty('axis', axis))
       ..add(EnumProperty('divider', divider))
       ..add(DoubleProperty('crossAxisExtent', crossAxisExtent))
@@ -180,7 +180,7 @@ class _FResizableState extends State<FResizable> {
       'The number of FResizableData should be equal to the number of children.',
     );
 
-    final style = widget.style ?? context.theme.resizableStyle;
+    final style = widget.style?.call(context.theme.resizableStyle) ?? context.theme.resizableStyle;
     if (widget.axis == Axis.horizontal) {
       return SizedBox(
         height: widget.crossAxisExtent,

@@ -54,7 +54,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// ```shell
   /// dart run forui style create tile
   /// ```
-  final FTileStyle? style;
+  final FTileStyle Function(FTileStyle)? style;
 
   /// Whether the tile is enabled. Defaults to true.
   final bool? enabled;
@@ -143,7 +143,8 @@ class FTile extends StatelessWidget with FTileMixin {
     final item = FTileGroupItemData.of(context);
     final enabled = this.enabled ?? item.enabled;
     final tappable = onPress != null || onLongPress != null;
-    final style = this.style ?? (tappable ? item.style.tappableTileStyle : item.style.untappableTileStyle);
+    final stateStyle = tappable ? item.style.tappableTileStyle : item.style.untappableTileStyle;
+    final style = this.style?.call(stateStyle) ?? stateStyle;
     final divider = switch (group.index) {
       final i when i < group.length - 1 && item.last => group.divider,
       final i when i == group.length - 1 && item.last => FTileDivider.none,

@@ -28,7 +28,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final actions = [
-      FButton(style: FButtonStyle.outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+      FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
       FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
     ];
 
@@ -120,7 +120,11 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
             ),
           ),
           builder: (_, controller, _) => IntrinsicWidth(
-            child: FButton(style: FButtonStyle.outline, onPress: controller.toggle, child: const Text('Open popover')),
+            child: FButton(
+              style: FButtonStyle.outline(),
+              onPress: controller.toggle,
+              child: const Text('Open popover'),
+            ),
           ),
         ),
       ],

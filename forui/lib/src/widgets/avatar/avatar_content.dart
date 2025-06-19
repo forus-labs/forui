@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 
 @internal
 class Content extends StatelessWidget {
-  final FAvatarStyle? style;
+  final FAvatarStyle Function(FAvatarStyle)? style;
   final double size;
   final ImageProvider image;
   final String? semanticsLabel;
@@ -24,7 +24,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fallback = this.fallback ?? PlaceholderContent(style: style ?? context.theme.avatarStyle, size: size);
+    final fallback = this.fallback ?? PlaceholderContent(style: style, size: size);
 
     return Image(
       height: size,
@@ -53,14 +53,17 @@ class Content extends StatelessWidget {
 
 @internal
 class PlaceholderContent extends StatelessWidget {
-  final FAvatarStyle? style;
+  final FAvatarStyle Function(FAvatarStyle)? style;
   final double size;
 
   const PlaceholderContent({required this.size, this.style, super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      Icon(FIcons.userRound, size: size / 2, color: (style ?? context.theme.avatarStyle).foregroundColor);
+  Widget build(BuildContext context) => Icon(
+    FIcons.userRound,
+    size: size / 2,
+    color: (style?.call(context.theme.avatarStyle) ?? context.theme.avatarStyle).foregroundColor,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

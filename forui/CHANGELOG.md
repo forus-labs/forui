@@ -5,6 +5,44 @@ We've updated the animations in Forui to feel more nature and be origin aware. T
 polished.
 
 
+### Styles
+We've updated styles to be easier to configure and use without the CLI. All widgets now accept a style builder function
+rather than a style object. Similarly, all nested styles inside styles have been replaced with style builder functions.
+This makes it easier to customize styles based on the existing styles.
+
+Previously:
+```dart
+FFCheckbox(
+  style: context.theme.checkBoxStyle.copyWith(
+    tappableStyle: context.theme.checkBoxStyle.copyWith(...),
+  ),
+);
+```
+
+Now:
+```dart
+FFCheckbox(
+  style: (style) => style.copyWith(
+    tappableStyle: (style) => style.copyWith(...),
+  ),
+);
+```
+
+In most cases, this is **not** a breaking change. Styles have been updated to implement the `call` function. This means
+that you can still pass in a style object as before.
+```dart
+// Long-form
+FFCheckbox(
+  style: (style) => FCheckBoxStyle(...),
+);
+
+// Short-form
+FFCheckbox(
+  style: FCheckBoxStyle(...),
+);
+```
+
+
 ### `FThemeData`
 * Add `FColors.systemOverlayStyle`.
 
@@ -20,8 +58,28 @@ polished.
 * **Breaking** Remove `FAccordionItemStyle.animationDuration` - use `FAccordionItemStyle.expandDuration` instead.
 
 
+### `FAlert`
+* **Breaking** Change `FAlertStyle.primary`'s signature - pass `FAlertStyle.primary()` instead of `FAlert.primary` to `FAlert`.
+* **Breaking** Change `FAlertStyle.destructive`'s signature - pass `FAlertStyle.destructive()` instead of `FAlert.destructive` to `FAlert`.
+
+
+### `FBadge`
+* **Breaking** Change `FBadgeStyle.primary`'s signature - pass `FBadgeStyle.primary()` instead of `FBadgeStyle.primary` to `FBadgeStyle`.
+* **Breaking** Change `FBadgeStyle.secondary`'s signature - pass `FBadgeStyle.secondary()` instead of `FBadgeStyle.secondary` to `FBadgeStyle`.
+* **Breaking** Change `FBadgeStyle.destructive`'s signature - pass `FBadgeStyle.destructive()` instead of `FBadgeStyle.destructive` to `FBadgeStyle`.
+* **Breaking** Change `FBadgeStyle.outline`'s signature - pass `FBadgeStyle.outline()` instead of `FBadgeStyle.outline` to `FBadgeStyle`.
+
+
 ### `FBottomNavigationBar`
 * Add `FBottomNavigationBarStyle.backgroundFilter`.
+
+
+### `FButton`
+* **Breaking** Change `FButtonStyle.primary`'s signature - pass `FButtonStyle.primary()` instead of `FButtonStyle.primary` to `FButtonStyle`.
+* **Breaking** Change `FButtonStyle.secondary`'s signature - pass `FButtonStyle.secondary()` instead of `FButtonStyle.secondary` to `FButtonStyle`.
+* **Breaking** Change `FButtonStyle.destructive`'s signature - pass `FButtonStyle.destructive()` instead of `FButtonStyle.destructive` to `FButtonStyle`.
+* **Breaking** Change `FButtonStyle.outline`'s signature - pass `FButtonStyle.outline()` instead of `FButtonStyle.outline` to `FButtonStyle`.
+* **Breaking** Change `FButtonStyle.ghost`'s signature - pass `FButtonStyle.ghost()` instead of `FButtonStyle.ghost` to `FButtonStyle`.
 
 
 ### `FDialog`
@@ -151,7 +209,7 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Fix `FTile`'s focused outline being drawn even when explicitly disabled.
 
 
-### `FToaster`
+### `FToast`
 * Add `swipeToDismiss` to `showFToast(...)`.
 * Add `swipeToDismiss` to `showRawFToast(...)`.
 * Add `FToastStyle.backgroundFilter`.
@@ -160,6 +218,7 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 
 * Fix `FToaster` auto-dismissing when hovering over non-first toast when expanded.
 * Fix `FToaster` expanded state persisting after all toasts has been dismissed on touch devices.
+* Fix `showFToast` & `showRawFToast` not using custom style passed to `FToaster`.
 
 
 ### `FTooltip`
@@ -180,7 +239,11 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 ### Others
 * Add `FAnimatedModalBarrier`.
 * Add `FModalBarrier`.
+* Add `FPaginationStyle.focusedOutlineStyle`.
 * Add `FLocalizations.popoverSemanticsLabel`.
+
+* **Breaking** Remove `defaultFontFamily` from `FTypography.copyWith(...)`.
+* **Breaking** Remove `FTransformable`.
 
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
 * Fix `FSelect.search(...)` expanding items unnecessarily.

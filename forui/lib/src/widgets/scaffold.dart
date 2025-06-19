@@ -45,7 +45,7 @@ class FScaffold extends StatelessWidget {
   /// ```shell
   /// dart run forui style create scaffold
   /// ```
-  final FScaffoldStyle? scaffoldStyle;
+  final FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle;
 
   /// The toaster style.
   ///
@@ -55,7 +55,7 @@ class FScaffold extends StatelessWidget {
   /// ```shell
   /// dart run forui style create toast
   /// ```
-  final FToasterStyle? toasterStyle;
+  final FToasterStyle Function(FToasterStyle)? toasterStyle;
 
   /// The main content area of the scaffold.
   final Widget child;
@@ -96,7 +96,7 @@ class FScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = scaffoldStyle ?? context.theme.scaffoldStyle;
+    final style = scaffoldStyle?.call(context.theme.scaffoldStyle) ?? context.theme.scaffoldStyle;
     var child = this.child;
 
     final Widget footer = this.footer != null
@@ -111,7 +111,7 @@ class FScaffold extends StatelessWidget {
       value: style.systemOverlayStyle,
       child: FSheets(
         child: FToaster(
-          style: toasterStyle ?? context.theme.toasterStyle,
+          style: toasterStyle?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle,
           child: Row(
             children: [
               if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),

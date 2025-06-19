@@ -190,7 +190,6 @@ void main() {
 
       test('all arguments', () {
         final typography = const FTypography().copyWith(
-          defaultFontFamily: 'AnotherFont',
           xs: const TextStyle(fontSize: 1),
           sm: const TextStyle(fontSize: 2),
           base: const TextStyle(fontSize: 3),
@@ -205,7 +204,7 @@ void main() {
           xl8: const TextStyle(fontSize: 12),
         );
 
-        expect(typography.defaultFontFamily, 'AnotherFont');
+        expect(typography.defaultFontFamily, 'packages/forui/Inter');
         expect(typography.xs, const TextStyle(fontSize: 1));
         expect(typography.sm, const TextStyle(fontSize: 2));
         expect(typography.base, const TextStyle(fontSize: 3));
@@ -253,7 +252,7 @@ void main() {
       });
 
       test('not equal', () {
-        final copy = typography.copyWith(defaultFontFamily: 'Else');
+        final copy = typography.copyWith(xs: const TextStyle(fontSize: 100));
         expect(copy, isNot(typography));
         expect(copy.hashCode, isNot(typography.hashCode));
       });

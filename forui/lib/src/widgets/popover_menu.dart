@@ -34,7 +34,7 @@ class FPopoverMenu extends StatelessWidget {
   /// ```shell
   /// dart run forui style create popover-menu
   /// ```
-  final FPopoverMenuStyle? style;
+  final FPopoverMenuStyle Function(FPopoverMenuStyle)? style;
 
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
@@ -167,7 +167,7 @@ class FPopoverMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.popoverMenuStyle;
+    final style = this.style?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle;
     return FPopover(
       controller: popoverController,
       style: style,

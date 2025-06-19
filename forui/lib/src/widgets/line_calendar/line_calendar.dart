@@ -32,7 +32,7 @@ class FLineCalendar extends StatelessWidget {
   /// ```shell
   /// dart run forui style create line-calendar
   /// ```
-  final FLineCalendarStyle? style;
+  final FLineCalendarStyle Function(FLineCalendarStyle)? style;
 
   /// The alignment to which the initially scrolled date will be aligned. Defaults to [Alignment.center].
   final AlignmentDirectional initialScrollAlignment;
@@ -146,7 +146,7 @@ class FLineCalendar extends StatelessWidget {
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) => CalendarLayout(
       controller: controller,
-      style: style ?? context.theme.lineCalendarStyle,
+      style: style?.call(context.theme.lineCalendarStyle) ?? context.theme.lineCalendarStyle,
       physics: physics,
       cacheExtent: cacheExtent,
       keyboardDismissBehavior: keyboardDismissBehavior,

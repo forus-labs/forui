@@ -27,7 +27,7 @@ class FBottomNavigationBar extends StatelessWidget {
   /// ```shell
   /// dart run forui style create bottom-navigation-bar
   /// ```
-  final FBottomNavigationBarStyle? style;
+  final FBottomNavigationBarStyle Function(FBottomNavigationBarStyle)? style;
 
   /// A callback for when an item is selected.
   final ValueChanged<int>? onChange;
@@ -45,7 +45,7 @@ class FBottomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.bottomNavigationBarStyle;
+    final style = this.style?.call(context.theme.bottomNavigationBarStyle) ?? context.theme.bottomNavigationBarStyle;
     final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
 
     Widget bar = DecoratedBox(

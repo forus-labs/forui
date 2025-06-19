@@ -37,10 +37,10 @@ class FTappable extends StatefulWidget {
   static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) => child!;
 
   /// The style.
-  final FTappableStyle? style;
+  final FTappableStyle Function(FTappableStyle)? style;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
-  final FFocusedOutlineStyle? focusedOutlineStyle;
+  final FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
@@ -113,8 +113,8 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const factory FTappable({
-    FTappableStyle? style,
-    FFocusedOutlineStyle? focusedOutlineStyle,
+    FTappableStyle Function(FTappableStyle)? style,
+    FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,
     String? semanticsLabel,
     bool excludeSemantics,
     bool autofocus,
@@ -214,7 +214,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.tappableStyle;
+    final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
     // TODO: https://github.com/flutter/flutter/issues/167916
     var tappable = widget.builder(context, {..._controller.value}, widget.child);
 
@@ -356,7 +356,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final style = widget.style ?? context.theme.tappableStyle;
+    final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
     if (_style != style) {
       _style = style;
       _curvedBounce?.dispose();
@@ -379,7 +379,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   @override
   void didUpdateWidget(covariant AnimatedTappable old) {
     super.didUpdateWidget(old);
-    final style = widget.style ?? context.theme.tappableStyle;
+    final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
     if (_style != style) {
       _style = style;
       _curvedBounce?.dispose();

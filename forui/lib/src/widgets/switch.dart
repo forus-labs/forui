@@ -25,7 +25,7 @@ class FSwitch extends StatelessWidget {
   /// ```shell
   /// dart run forui style create switch
   /// ```
-  final FSwitchStyle? style;
+  final FSwitchStyle Function(FSwitchStyle)? style;
 
   /// The label displayed next to the switch.
   final Widget? label;
@@ -95,7 +95,7 @@ class FSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.switchStyle;
+    final style = this.style?.call(context.theme.switchStyle) ?? context.theme.switchStyle;
     final formStates = {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error};
     final states = {if (value) WidgetState.selected, ...formStates};
 

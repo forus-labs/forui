@@ -13,34 +13,21 @@ const _list = TypeChecker.fromUrl('dart:core#List');
 const _set = TypeChecker.fromUrl('dart:core#Set');
 const _map = TypeChecker.fromUrl('dart:core#Map');
 
-/// Generates corresponding style mixins that implement several commonly used operations.
+/// Generates corresponding style mixins and extensions that implement several commonly used operations.
 class StyleGenerator extends Generator {
   final _emitter = DartEmitter(orderDirectives: true, useNullSafetySyntax: true);
 
   @override
-  Future<String?> generate(LibraryReader library, BuildStep step) async => library.classes
-      .where((type) => _style.hasMatch(type.name) && !type.isSealed && !type.isAbstract)
-      .map((type) => _emitter.visitMixin(generateMixin(type)).toString())
-      .join('\n');
-}
+  Future<String?> generate(LibraryReader library, BuildStep step) async {
+    final classes = library.classes
+        .where((type) => _style.hasMatch(type.name) && !type.isSealed && !type.isAbstract)
+        .toList();
 
-/// Generates a mixin for the given [element].
-Mixin generateMixin(ClassElement element) {
-  final fields = _collectFields(element);
+    final extensions = classes.map((type) => _emitter.visitExtension(generateExtension(type)).toString());
+    final mixins = classes.map((type) => _emitter.visitMixin(generateMixin(type)).toString());
 
-  final type = MixinBuilder()
-    ..name = '_\$${element.name}Functions'
-    ..implements.add(refer('FTransformable'))
-    ..on = refer('Diagnosticable')
-    ..methods.addAll([
-      ...getters(fields),
-      generateCopyWith(element, fields),
-      generateDebugFillProperties(element, fields),
-      generateEquals(element, fields),
-      generateHashCode(element, fields),
-    ]);
-
-  return type.build();
+    return [...extensions, ...mixins].join('\n');
+  }
 }
 
 List<FieldElement> _collectFields(ClassElement element) {
@@ -59,6 +46,106 @@ List<FieldElement> _collectFields(ClassElement element) {
   return fields.toSet().toList();
 }
 
+/// Generates an extension for the given [element].
+///
+/// The copyWith function is generated in an extension rather than on a mixin/augmentation to make the function
+/// non-virtual. This prevents conflicts between base and subclasses.
+Extension generateExtension(ClassElement element) {
+  final fields = _collectFields(element);
+
+  final type = ExtensionBuilder()
+    ..docs.addAll(['/// Provides a `copyWith` method.'])
+    ..name = '\$${element.name}CopyWith'
+    ..on = refer(element.name)
+    ..methods.add(generateCopyWith(element, fields));
+
+  return type.build();
+}
+
+/// Generates a `copyWith` method using the given [element] and [fields].
+@visibleForTesting
+Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
+  // Check if a field is a complex type.
+  bool complex(DartType type) {
+    final typeName = type.getDisplayString();
+    return typeName.startsWith('F') && (typeName.endsWith('Style') || typeName.endsWith('Styles'));
+  }
+
+  final docs = [
+    for (final field in fields)
+      if (field.documentationComment case final comment? when comment.isNotEmpty) ...[
+        '/// # [${field.name}]',
+        comment,
+        '/// ',
+      ],
+  ];
+
+  // Generate assignments for the copyWith method body
+  final assignments = fields.map((f) {
+    if (complex(f.type)) {
+      return '${f.name}: ${f.name} != null ? ${f.name}(this.${f.name}) : this.${f.name},';
+    } else {
+      return '${f.name}: ${f.name} ?? this.${f.name},';
+    }
+  }).join();
+
+  return Method(
+    (m) => m
+      ..returns = refer(element.name)
+      ..docs.addAll([
+        '/// Returns a copy of this [${element.name}] with the given properties replaced.',
+        '///',
+        '/// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)',
+        '/// and directly modify the style.',
+        '///',
+        ...docs,
+      ])
+      ..annotations.add(refer('useResult'))
+      ..name = 'copyWith'
+      ..optionalParameters.addAll([
+        for (final field in fields)
+          if (complex(field.type))
+            Parameter(
+              (p) => p
+                ..name = field.name
+                ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()})?')
+                ..named = true,
+            )
+          else
+            Parameter(
+              (p) => p
+                ..name = field.name
+                ..type = refer(
+                  field.type.getDisplayString().endsWith('?')
+                      ? field.type.getDisplayString()
+                      : '${field.type.getDisplayString()}?',
+                )
+                ..named = true,
+            ),
+      ])
+      ..lambda = true
+      ..body = Code('${element.name}($assignments)\n'),
+  );
+}
+
+/// Generates a mixin for the given [element].
+Mixin generateMixin(ClassElement element) {
+  final fields = _collectFields(element);
+
+  final type = MixinBuilder()
+    ..name = '_\$${element.name}Functions'
+    ..on = refer('Diagnosticable')
+    ..methods.addAll([
+      ...getters(fields),
+      generateCall(element),
+      generateDebugFillProperties(element, fields),
+      generateEquals(element, fields),
+      generateHashCode(element, fields),
+    ]);
+
+  return type.build();
+}
+
 /// Generates getters for the given [fields].
 @visibleForTesting
 List<Method> getters(List<FieldElement> fields) => fields
@@ -72,38 +159,46 @@ List<Method> getters(List<FieldElement> fields) => fields
     )
     .toList();
 
-/// Generates a `copyWith` method using the given [element] and [fields].
+/// Generates a special `call` method that allows styles to be used directly.
 @visibleForTesting
-Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
-  final assignments = fields.map((f) => '${f.name}: ${f.name} ?? this.${f.name},').join();
-  return Method(
-    (m) => m
-      ..returns = refer(element.name)
-      ..docs.addAll([
-        '/// Returns a copy of this [${element.name}] with the given properties replaced.',
-        '/// ',
-        '/// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)',
-        '/// and directly modify the style.',
-      ])
-      ..annotations.add(refer('useResult'))
-      ..name = 'copyWith'
-      ..optionalParameters.addAll([
-        for (final field in fields)
-          Parameter(
-            (p) => p
-              ..name = field.name
-              ..type = refer(
-                field.type.getDisplayString().endsWith('?')
-                    ? field.type.getDisplayString()
-                    : '${field.type.getDisplayString()}?',
-              )
-              ..named = true,
-          ),
-      ])
-      ..lambda = true
-      ..body = Code('${element.name}($assignments)\n'),
-  );
-}
+Method generateCall(ClassElement element) => Method(
+  (m) => m
+    ..docs.addAll([
+      '/// Returns itself.',
+      '/// ',
+      "/// Allows [${element.name}] to replace functions that accept and return a [${element.name}], such as a style's",
+      '/// `copyWith(...)` function.',
+      '/// ',
+      '/// ## Example',
+      '/// ',
+      '/// Given:',
+      '/// ```dart',
+      '/// void copyWith(${element.name} Function(${element.name}) nestedStyle) {}',
+      '/// ```',
+      '/// ',
+      '/// The following:',
+      '/// ```dart',
+      '/// copyWith((style) => ${element.name}(...));',
+      '/// ```',
+      '/// ',
+      '/// Can be replaced with:',
+      '/// ```dart',
+      '/// copyWith(${element.name}(...));',
+      '/// ```',
+    ])
+    ..annotations.add(refer('useResult'))
+    ..returns = refer(element.name)
+    ..name = 'call'
+    ..requiredParameters.add(
+      Parameter(
+        (p) => p
+          ..type = refer('Object?')
+          ..name = '_',
+      ),
+    )
+    ..lambda = true
+    ..body = Code('this as ${element.name}'),
+);
 
 /// Generates a `debugFillProperties` method using the given [element] and [fields].
 @visibleForTesting
@@ -185,7 +280,7 @@ Method generateEquals(ClassElement element, List<FieldElement> fields) {
         ),
       )
       ..lambda = true
-      ..body = Code('identical(this, other) || (other is ${element.name} $comparisons)\n'),
+      ..body = Code('identical(this, other) || (other is ${element.name} $comparisons)'),
   );
 }
 
@@ -208,6 +303,6 @@ Method generateHashCode(ClassElement element, List<FieldElement> fields) {
       ..annotations.add(refer('override'))
       ..name = 'hashCode'
       ..lambda = true
-      ..body = Code('$hash\n'),
+      ..body = Code(hash),
   );
 }

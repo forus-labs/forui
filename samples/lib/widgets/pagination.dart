@@ -81,7 +81,7 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
             child: ConstrainedBox(
               constraints: style.itemConstraints,
               child: FButton.icon(
-                style: FButtonStyle.ghost,
+                style: FButtonStyle.ghost(),
                 onPress: _controller.next,
                 child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.bird)),
               ),
@@ -92,7 +92,7 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
             child: ConstrainedBox(
               constraints: style.itemConstraints,
               child: FButton.icon(
-                style: FButtonStyle.ghost,
+                style: FButtonStyle.ghost(),
                 onPress: _controller.previous,
                 child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.anchor)),
               ),

@@ -87,7 +87,7 @@ class FPicker extends StatefulWidget {
   /// ```shell
   /// dart run forui style create picker
   /// ```
-  final FPickerStyle? style;
+  final FPickerStyle Function(FPickerStyle)? style;
 
   /// Handler called when the picker indexes change.
   ///
@@ -177,7 +177,7 @@ class _FPickerState extends State<FPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.pickerStyle;
+    final style = widget.style?.call(context.theme.pickerStyle) ?? context.theme.pickerStyle;
     final selectionExtent =
         FPickerWheel.estimateExtent(style, context) * style.magnification + style.selectionHeightAdjustment;
 

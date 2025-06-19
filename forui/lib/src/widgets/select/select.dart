@@ -38,7 +38,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultSearchLoadingBuilder(BuildContext _, FSelectSearchStyle style, Widget? _) => Padding(
     padding: const EdgeInsets.all(8.0),
-    child: FProgress.circularIcon(style: style.loadingIndicatorStyle),
+    child: FProgress.circularIcon(style: (s) => style.loadingIndicatorStyle),
   );
 
   /// The default empty builder that shows a localized message when there are no results.
@@ -66,7 +66,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// ```shell
   /// dart run forui style create select
   /// ```
-  final FSelectStyle? style;
+  final FSelectStyle Function(FSelectStyle)? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -188,7 +188,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required String Function(T) format,
     required List<FSelectItemMixin> children,
     FSelectController<T>? controller,
-    FSelectStyle? style,
+    FSelectStyle Function(FSelectStyle)? style,
     bool autofocus,
     FocusNode? focusNode,
     ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder,
@@ -235,7 +235,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   factory FSelect.fromMap(
     Map<String, T> items, {
     FSelectController<T>? controller,
-    FSelectStyle? style,
+    FSelectStyle Function(FSelectStyle)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
@@ -335,7 +335,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder,
     Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder,
     FSelectController<T>? controller,
-    FSelectStyle? style,
+    FSelectStyle Function(FSelectStyle)? style,
     bool autofocus,
     FocusNode? focusNode,
     ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder,
@@ -394,7 +394,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder = FSelect.defaultSearchLoadingBuilder,
     Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder,
     FSelectController<T>? controller,
-    FSelectStyle? style,
+    FSelectStyle Function(FSelectStyle)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
@@ -672,7 +672,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.selectStyle;
+    final style = widget.style?.call(context.theme.selectStyle) ?? context.theme.selectStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     return Field(

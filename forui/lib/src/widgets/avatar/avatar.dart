@@ -27,7 +27,7 @@ class FAvatar extends StatelessWidget {
   /// ```shell
   /// dart run forui style create accordion
   /// ```
-  final FAvatarStyle? style;
+  final FAvatarStyle Function(FAvatarStyle)? style;
 
   /// The circle's size. Defaults to 40.
   final double size;
@@ -51,7 +51,7 @@ class FAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.avatarStyle;
+    final style = this.style?.call(context.theme.avatarStyle) ?? context.theme.avatarStyle;
     return Container(
       alignment: Alignment.center,
       height: size,

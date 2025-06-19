@@ -12,7 +12,7 @@ import 'package:forui/forui.dart';
 /// * [FToastStyle] for customizing a toast's appearance.
 class FToast extends StatelessWidget {
   /// The toast's style.
-  final FToastStyle? style;
+  final FToastStyle Function(FToastStyle)? style;
 
   /// An optional icon displayed at the start.
   final Widget? icon;
@@ -35,7 +35,7 @@ class FToast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? context.theme.toasterStyle.toastStyle;
+    final style = this.style?.call(context.theme.toasterStyle.toastStyle) ?? context.theme.toasterStyle.toastStyle;
     Widget toast = DecoratedBox(
       decoration: style.decoration,
       child: Padding(

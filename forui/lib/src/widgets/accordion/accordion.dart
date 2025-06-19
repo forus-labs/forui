@@ -31,7 +31,7 @@ class FAccordion extends StatefulWidget {
   /// ```shell
   /// dart run forui style create accordion
   /// ```
-  final FAccordionStyle? style;
+  final FAccordionStyle Function(FAccordionStyle)? style;
 
   /// The individual accordion items and separators.
   ///
@@ -79,7 +79,7 @@ class _FAccordionState extends State<FAccordion> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style ?? context.theme.accordionStyle;
+    final style = widget.style?.call(context.theme.accordionStyle) ?? context.theme.accordionStyle;
     return Column(
       children: [
         for (final (index, child) in widget.children.indexed)

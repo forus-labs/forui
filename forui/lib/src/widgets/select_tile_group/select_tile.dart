@@ -20,7 +20,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// ```shell
   /// dart run forui style create tile
   /// ```
-  final FTileStyle? style;
+  final FTileStyle Function(FTileStyle)? style;
 
   /// The checked icon. Defaults to `FIcon(FIcons.check)`.
   final Widget? checkedIcon;

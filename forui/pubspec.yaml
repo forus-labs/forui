@@ -21,7 +21,7 @@ workspace:
 dependencies:
   args: ^2.7.0
   collection: ^1.18.0
-  dart_style: ^3.0.1
+  dart_style: ^3.1.0
   flutter:
     sdk: flutter
   flutter_localizations:

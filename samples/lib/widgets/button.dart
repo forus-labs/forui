@@ -2,21 +2,24 @@ import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/button/button.dart';
 
 import 'package:forui_samples/sample.dart';
 
-// ignore_for_file: invalid_use_of_internal_member, implementation_imports
-
-final variants = {for (final value in Variant.values) value.name: value};
+final variants = {
+  'primary': FButtonStyle.primary(),
+  'secondary': FButtonStyle.secondary(),
+  'destructive': FButtonStyle.destructive(),
+  'ghost': FButtonStyle.ghost(),
+  'outline': FButtonStyle.outline(),
+};
 
 @RoutePage()
 class ButtonTextPage extends Sample {
-  final Variant variant;
+  final FBaseButtonStyle Function(FButtonStyle) variant;
   final String label;
 
   ButtonTextPage({@queryParam super.theme, @queryParam String style = 'primary', @queryParam this.label = 'Button'})
-    : variant = variants[style] ?? Variant.primary;
+    : variant = variants[style]!;
 
   @override
   Widget sample(BuildContext context) => IntrinsicWidth(
@@ -26,7 +29,7 @@ class ButtonTextPage extends Sample {
 
 @RoutePage()
 class ButtonIconPage extends Sample {
-  final Variant variant;
+  final FBaseButtonStyle Function(FButtonStyle) variant;
 
   ButtonIconPage({@queryParam super.theme = 'zinc-light', @queryParam String variant = 'primary'})
     : variant = variants[variant]!;

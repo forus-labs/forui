@@ -41,7 +41,7 @@ Future<T?> showFDialog<T>({
   required BuildContext context,
   required Widget Function(BuildContext, FDialogStyle, Animation<double>) builder,
   bool useRootNavigator = false,
-  FDialogStyle? style,
+  FDialogStyle Function(FDialogStyle)? style,
   String? barrierLabel,
   bool barrierDismissible = true,
   RouteSettings? routeSettings,
@@ -53,12 +53,12 @@ Future<T?> showFDialog<T>({
 
   final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
   final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-  style ??= context.theme.dialogStyle;
+  final dialogStyle = style?.call(context.theme.dialogStyle) ?? context.theme.dialogStyle;
 
   return navigator.push(
     FDialogRoute<T>(
-      style: style,
-      builder: (context, animation) => builder(context, style!, animation),
+      style: dialogStyle,
+      builder: (context, animation) => builder(context, dialogStyle, animation),
       capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierLabel ?? localizations.barrierLabel,
@@ -175,7 +175,7 @@ class FDialog extends StatefulWidget {
   /// ```shell
   /// dart run forui style create dialog
   /// ```
-  final FDialogStyle? style;
+  final FDialogStyle Function(FDialogStyle)? style;
 
   /// The animation used to animate the dialog's entrance and exit. Settings this to null will disable the animation.
   ///
@@ -305,7 +305,7 @@ class _FDialogState extends State<FDialog> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final style = widget.style ?? context.theme.dialogStyle;
+    final style = widget.style?.call(context.theme.dialogStyle) ?? context.theme.dialogStyle;
 
     if (_curvedScale?.parent != widget.animation || _curvedFade?.parent != widget.animation) {
       _curvedScale?.dispose();
@@ -335,7 +335,7 @@ class _FDialogState extends State<FDialog> {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final style = widget.style ?? theme.dialogStyle;
+    final style = widget.style?.call(context.theme.dialogStyle) ?? context.theme.dialogStyle;
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
     Widget dialog = DecoratedBox(decoration: style.decoration, child: widget.builder(context, style));

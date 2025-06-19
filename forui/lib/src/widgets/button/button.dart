@@ -19,6 +19,10 @@ part 'button.style.dart';
 /// * https://forui.dev/docs/form/button for working examples.
 /// * [FButtonStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
+  static _Resolve _primary(FButtonStyle? _) => _Resolve((context) => context.theme.buttonStyles.primary);
+
+  static _Resolve _outline(FButtonStyle? _) => _Resolve((context) => context.theme.buttonStyles.outline);
+
   /// The style. Defaults to [FButtonStyle.primary].
   ///
   /// Although typically one of the pre-defined styles in [FBaseButtonStyle], it can also be a [FButtonStyle].
@@ -29,7 +33,7 @@ class FButton extends StatelessWidget {
   /// ```shell
   /// dart run forui style create buttons
   /// ```
-  final FBaseButtonStyle style;
+  final FBaseButtonStyle Function(FButtonStyle) style;
 
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
@@ -76,7 +80,7 @@ class FButton extends StatelessWidget {
   FButton({
     required this.onPress,
     required Widget child,
-    this.style = Variant.primary,
+    this.style = _primary,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
@@ -96,7 +100,7 @@ class FButton extends StatelessWidget {
   FButton.icon({
     required this.onPress,
     required Widget child,
-    this.style = Variant.outline,
+    this.style = _outline,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
@@ -111,7 +115,7 @@ class FButton extends StatelessWidget {
   const FButton.raw({
     required this.onPress,
     required this.child,
-    this.style = Variant.primary,
+    this.style = _primary,
     this.onLongPress,
     this.autofocus = false,
     this.focusNode,
@@ -124,13 +128,9 @@ class FButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = switch (this.style) {
+    final style = switch (this.style(context.theme.buttonStyles.primary)) {
       final FButtonStyle style => style,
-      Variant.primary => context.theme.buttonStyles.primary,
-      Variant.secondary => context.theme.buttonStyles.secondary,
-      Variant.destructive => context.theme.buttonStyles.destructive,
-      Variant.outline => context.theme.buttonStyles.outline,
-      Variant.ghost => context.theme.buttonStyles.ghost,
+      final _Resolve resolver => resolver._resolve(context),
     };
 
     return FTappable(
@@ -172,8 +172,11 @@ class FButton extends StatelessWidget {
 /// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonStyle] itself.
 sealed class FBaseButtonStyle {}
 
-@internal
-enum Variant implements FBaseButtonStyle { primary, secondary, destructive, outline, ghost }
+class _Resolve extends FBaseButtonStyle {
+  final FButtonStyle Function(BuildContext context) _resolve;
+
+  _Resolve(this._resolve);
+}
 
 /// A [FButton]'s style.
 ///
@@ -183,27 +186,38 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   /// The button's primary style.
   ///
   /// Shorthand for the current context's [FButtonStyles.primary] style.
-  static const FBaseButtonStyle primary = Variant.primary;
+  static FBaseButtonStyle Function(FButtonStyle) primary([FButtonStyle Function(FButtonStyle)? style]) =>
+      (_) =>
+          _Resolve((context) => style?.call(context.theme.buttonStyles.primary) ?? context.theme.buttonStyles.primary);
 
   /// The button's secondary style.
   ///
   /// Shorthand for the current context's [FButtonStyles.secondary] style.
-  static const FBaseButtonStyle secondary = Variant.secondary;
+  static FBaseButtonStyle Function(FButtonStyle) secondary([FButtonStyle Function(FButtonStyle)? style]) =>
+      (_) => _Resolve(
+        (context) => style?.call(context.theme.buttonStyles.secondary) ?? context.theme.buttonStyles.secondary,
+      );
 
   /// The button's destructive style.
   ///
   /// Shorthand for the current context's [FButtonStyles.destructive] style.
-  static const FBaseButtonStyle destructive = Variant.destructive;
+  static FBaseButtonStyle Function(FButtonStyle) destructive([FButtonStyle Function(FButtonStyle)? style]) =>
+      (_) => _Resolve(
+        (context) => style?.call(context.theme.buttonStyles.destructive) ?? context.theme.buttonStyles.destructive,
+      );
 
   /// The button's outline style.
   ///
   /// Shorthand for the current context's [FButtonStyles.outline] style.
-  static const FBaseButtonStyle outline = Variant.outline;
+  static FBaseButtonStyle Function(FButtonStyle) outline([FButtonStyle Function(FButtonStyle)? style]) =>
+      (_) =>
+          _Resolve((context) => style?.call(context.theme.buttonStyles.outline) ?? context.theme.buttonStyles.outline);
 
   /// The button's ghost style.
   ///
   /// Shorthand for the current context's [FButtonStyles.ghost] style.
-  static const FBaseButtonStyle ghost = Variant.ghost;
+  static FBaseButtonStyle Function(FButtonStyle) ghost([FButtonStyle Function(FButtonStyle)? style]) =>
+      (_) => _Resolve((context) => style?.call(context.theme.buttonStyles.ghost) ?? context.theme.buttonStyles.ghost);
 
   /// The box decoration.
   ///

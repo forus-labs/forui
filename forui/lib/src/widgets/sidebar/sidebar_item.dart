@@ -25,7 +25,7 @@ class FSidebarItem extends StatefulWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarItemStyle? style;
+  final FSidebarItemStyle Function(FSidebarItemStyle)? style;
 
   /// The icon to display before the label.
   final Widget? icon;
@@ -107,11 +107,11 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
     super.didChangeDependencies();
     final groupData = FSidebarGroupData.maybeOf(context);
     final sidebarData = FSidebarData.maybeOf(context);
-    final style =
-        widget.style ??
+    final inheritedStyle =
         groupData?.style.itemStyle ??
         sidebarData?.style.groupStyle.itemStyle ??
         context.theme.sidebarStyle.groupStyle.itemStyle;
+    final style = widget.style?.call(inheritedStyle) ?? inheritedStyle;
 
     if (_style != style) {
       _style = style;
