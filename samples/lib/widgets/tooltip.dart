@@ -43,12 +43,11 @@ class TooltipPage extends StatelessWidget {
                   tipAnchor: axis == Axis.horizontal ? Alignment.topLeft : Alignment.bottomCenter,
                   childAnchor: axis == Axis.horizontal ? Alignment.topRight : Alignment.topCenter,
                   tipBuilder: (context, _) => const Text('Add to library'),
-                  child: IntrinsicWidth(
-                    child: FButton(
-                      style: FButtonStyle.outline(),
-                      onPress: () {},
-                      child: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
-                    ),
+                  child: FButton(
+                    style: FButtonStyle.outline(),
+                    intrinsicWidth: true,
+                    onPress: () {},
+                    child: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
                   ),
                 ),
               ],

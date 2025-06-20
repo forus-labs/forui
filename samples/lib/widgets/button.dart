@@ -22,9 +22,8 @@ class ButtonTextPage extends Sample {
     : variant = variants[style]!;
 
   @override
-  Widget sample(BuildContext context) => IntrinsicWidth(
-    child: FButton(style: variant, onPress: () {}, child: Text(label)),
-  );
+  Widget sample(BuildContext context) =>
+      FButton(style: variant, intrinsicWidth: true, onPress: () {}, child: Text(label));
 }
 
 @RoutePage()
@@ -35,13 +34,12 @@ class ButtonIconPage extends Sample {
     : variant = variants[variant]!;
 
   @override
-  Widget sample(BuildContext context) => IntrinsicWidth(
-    child: FButton(
-      prefix: const Icon(FIcons.mail),
-      style: variant,
-      onPress: () {},
-      child: const Text('Login with Email'),
-    ),
+  Widget sample(BuildContext context) => FButton(
+    style: variant,
+    intrinsicWidth: true,
+    prefix: const Icon(FIcons.mail),
+    onPress: () {},
+    child: const Text('Login with Email'),
   );
 }
 
@@ -50,9 +48,7 @@ class ButtonOnlyIconPage extends Sample {
   ButtonOnlyIconPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => IntrinsicWidth(
-    child: FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {}),
-  );
+  Widget sample(BuildContext context) => FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {});
 }
 
 @RoutePage()
@@ -60,12 +56,10 @@ class ButtonCircularProgressPage extends Sample {
   ButtonCircularProgressPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => IntrinsicWidth(
-    child: FButton(
-      style: context.theme.buttonStyles.primary.copyWith(),
-      prefix: const FProgress.circularIcon(),
-      onPress: null,
-      child: const Text('Please wait'),
-    ),
+  Widget sample(BuildContext context) => FButton(
+    intrinsicWidth: true,
+    prefix: const FProgress.circularIcon(),
+    onPress: null,
+    child: const Text('Please wait'),
   );
 }

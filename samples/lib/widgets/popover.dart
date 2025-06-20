@@ -88,8 +88,11 @@ class PopoverPage extends Sample {
             ),
           ),
         ),
-        builder: (_, controller, _) => IntrinsicWidth(
-          child: FButton(style: FButtonStyle.outline(), onPress: controller.toggle, child: const Text('Open popover')),
+        builder: (_, controller, _) => FButton(
+          style: FButtonStyle.outline(),
+          intrinsicWidth: true,
+          onPress: controller.toggle,
+          child: const Text('Open popover'),
         ),
       ),
     ],
@@ -164,8 +167,11 @@ class BlurredPopoverPage extends Sample {
             ),
           ),
         ),
-        builder: (_, controller, _) => IntrinsicWidth(
-          child: FButton(style: FButtonStyle.outline(), onPress: controller.toggle, child: const Text('Open popover')),
+        builder: (_, controller, _) => FButton(
+          style: FButtonStyle.outline(),
+          intrinsicWidth: true,
+          onPress: controller.toggle,
+          child: const Text('Open popover'),
         ),
       ),
     ],
