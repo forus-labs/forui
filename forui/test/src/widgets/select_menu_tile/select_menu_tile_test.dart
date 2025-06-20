@@ -12,7 +12,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelectMenuTile(
-          prefixIcon: const Icon(FIcons.calendar),
+          prefix: const Icon(FIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),
@@ -40,7 +40,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelectMenuTile(
-          prefixIcon: const Icon(FIcons.calendar),
+          prefix: const Icon(FIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),
@@ -71,7 +71,7 @@ void main() {
       TestScaffold.app(
         child: FSelectMenuTile(
           autoHide: true,
-          prefixIcon: const Icon(FIcons.calendar),
+          prefix: const Icon(FIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),

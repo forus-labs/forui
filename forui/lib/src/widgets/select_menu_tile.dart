@@ -124,8 +124,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
-  /// The prefix icon.
-  final Widget? prefixIcon;
+  /// The prefix.
+  final Widget? prefix;
 
   /// The title.
   final Widget title;
@@ -143,8 +143,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// The details.
   final Widget? details;
 
-  /// The suffix icon. Defaults to `FIcons.chevronsUpDown`.
-  final Widget? suffixIcon;
+  /// The suffix. Defaults to `Icon(FIcons.chevronsUpDown)`.
+  final Widget? suffix;
 
   /// The callback that is called when the value changes.
   final ValueChanged<Set<T>>? onChange;
@@ -152,7 +152,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// The callback that is called when an item is selected.
   final ValueChanged<(T, bool)>? onSelect;
 
-  /// Creates a [FSelectMenuTile] that easterly builds the menu.
+  /// Creates a [FSelectMenuTile] that eagerly builds the menu.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
@@ -185,11 +185,11 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
-    this.prefixIcon,
+    this.prefix,
     this.subtitle,
     this.detailsBuilder = _builder,
     this.details,
-    this.suffixIcon,
+    this.suffix,
     this.onChange,
     this.onSelect,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -264,7 +264,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              ),
              child: FTile(
                style: tileStyle,
-               prefixIcon: prefixIcon,
+               prefix: prefix,
                enabled: enabled,
                title: title,
                subtitle: subtitle,
@@ -273,7 +273,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                  builder: detailsBuilder,
                  child: details,
                ),
-               suffixIcon: suffixIcon ?? const Icon(FIcons.chevronsUpDown),
+               suffix: suffix ?? const Icon(FIcons.chevronsUpDown),
                onPress: state._controller._popover.toggle,
              ),
            );
@@ -346,11 +346,11 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
-    this.prefixIcon,
+    this.prefix,
     this.subtitle,
     this.detailsBuilder = _builder,
     this.details,
-    this.suffixIcon,
+    this.suffix,
     this.onChange,
     this.onSelect,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -424,7 +424,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              ),
              child: FTile(
                style: tileStyle,
-               prefixIcon: prefixIcon,
+               prefix: prefix,
                enabled: enabled,
                title: title,
                subtitle: subtitle,
@@ -433,7 +433,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                  builder: detailsBuilder,
                  child: details,
                ),
-               suffixIcon: suffixIcon ?? const Icon(FIcons.chevronsUpDown),
+               suffix: suffix ?? const Icon(FIcons.chevronsUpDown),
                onPress: state._controller._popover.toggle,
              ),
            );

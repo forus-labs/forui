@@ -19,7 +19,7 @@ class SelectMenuTilePage extends Sample {
     initialValue: Notification.all,
     autoHide: autoHide,
     validator: (value) => value == null ? 'Select an item' : null,
-    prefixIcon: const Icon(FIcons.bell),
+    prefix: const Icon(FIcons.bell),
     title: const Text('Notifications'),
     detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
       Notification.all => 'All',
@@ -47,7 +47,7 @@ class ScrollableSelectMenuTilePage extends Sample {
     autoHide: autoHide,
     maxHeight: 150,
     validator: (value) => value == null ? 'Select an item' : null,
-    prefixIcon: const Icon(FIcons.bell),
+    prefix: const Icon(FIcons.bell),
     title: const Text('Notifications'),
     detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
       Notification.all => 'All',
@@ -87,7 +87,7 @@ class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTil
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectMenuTile.builder(
           selectController: controller,
-          prefixIcon: const Icon(FIcons.variable),
+          prefix: const Icon(FIcons.variable),
           title: const Text('Applicable values'),
           maxHeight: 200,
           menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
@@ -124,7 +124,7 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
           initialValue: Notification.all,
           autoHide: true,
           validator: (value) => value == null ? 'Select an item' : null,
-          prefixIcon: const Icon(FIcons.bell),
+          prefix: const Icon(FIcons.bell),
           title: const Text('Notifications'),
           detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
             Notification.all => 'All',

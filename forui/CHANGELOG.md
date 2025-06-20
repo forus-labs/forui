@@ -194,6 +194,8 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * **Breaking** Remove `FTileGroupData.states`.
 * **Breaking** Remove `FTileGroupStyle.borderColor` - use `FTileGroupStyle.border` instead.
 * **Breaking** Remove `FTileGroupStyle.borderWidth` - use `FTileGroupStyle.border` instead.
+* **Breaking** Change `prefixIcon` to `prefix` in FTile(...)`.
+* **Breaking** Change `suffixIcon` to `suffix` in FTile(...)`.
 * **Breaking** Change `FTile` to ignore `WidgetState`s when neither `onPress` nor `orLongPress` is given.
 * Change `FTile`'s focused outline to be a rounded rectangle even if the tile is inside a `FTileGroup`.
 * Change `FTile` to no longer wrap its content inside a `FTileData` if it is not part of a `FTileGroup`.
@@ -234,6 +236,16 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 ### `FScaffold`
 * Add `FScaffold.toasterSwipeToDismiss`.
 * Add `FScaffold.systemOverlayStyle`.
+
+
+### `FSelectMenuTile`
+* **Breaking** Change `FSelectMenuTile.prefixIcon` to `FSelectMenuTile.suffix`.
+* **Breaking** Change `FSelectMenuTile.suffixIcon` to `FSelectMenuTile.suffix`.
+
+
+### `FSelectTile`
+* **Breaking** Change `prefixIcon` to `prefix` in FSelectTile.suffix(...)`.
+* **Breaking** Change `suffixIcon` to `suffix` in FSelectTile(...)`.
 
 
 ### Others

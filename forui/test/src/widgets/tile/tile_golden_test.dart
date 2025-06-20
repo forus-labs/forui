@@ -13,11 +13,11 @@ void main() {
         TestScaffold.blue(
           child: FTile(
             style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('Forus Labs (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -31,11 +31,11 @@ void main() {
         TestScaffold.blue(
           child: FTile(
             style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('Forus Labs (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -56,11 +56,11 @@ void main() {
           child: FTile(
             style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
             enabled: false,
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('Forus Labs (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -76,11 +76,11 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FTile(
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -94,11 +94,11 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FTile(
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -120,11 +120,11 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FTile(
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -145,11 +145,11 @@ void main() {
           textDirection: TextDirection.rtl,
           child: FTile(
             autofocus: true,
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -164,11 +164,11 @@ void main() {
           theme: theme.data,
           child: FTile(
             autofocus: true,
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -183,11 +183,11 @@ void main() {
           theme: theme.data,
           child: FTile(
             enabled: false,
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -201,10 +201,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FTile(
-          prefixIcon: const Icon(FIcons.bluetooth),
+          prefix: const Icon(FIcons.bluetooth),
           title: const Text('Bluetooth'),
           details: const Text('FL (5G)'),
-          suffixIcon: const Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
         ),
       ),
     );
@@ -224,10 +224,10 @@ void main() {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 225),
           child: FTile(
-            prefixIcon: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             details: const Text('FL (5G)'),
-            suffixIcon: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -251,10 +251,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FTile(
-          prefixIcon: const Icon(FIcons.bluetooth),
+          prefix: const Icon(FIcons.bluetooth),
           title: const Text('Bluetooth'),
           details: const Text('FL (5G)'),
-          suffixIcon: const Icon(FIcons.chevronRight),
+          suffix: const Icon(FIcons.chevronRight),
           onPress: () {},
         ),
       ),
@@ -268,7 +268,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FTile(
-          prefixIcon: const Icon(FIcons.bluetooth),
+          prefix: const Icon(FIcons.bluetooth),
           title: const Text('Bluetooth'),
           details: const Text('FL (5G)'),
           onPress: () {},
@@ -287,10 +287,10 @@ void main() {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTile(
-              prefixIcon: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FIcons.bluetooth),
               title: const Text('L                               ong'),
               details: const Text('FL (5G)'),
-              suffixIcon: const Icon(FIcons.chevronRight),
+              suffix: const Icon(FIcons.chevronRight),
               onPress: () {},
             ),
           ),
@@ -309,11 +309,11 @@ void main() {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTile(
-              prefixIcon: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FIcons.bluetooth),
               title: const Text('Title'),
               subtitle: const Text('L                                     ong'),
               details: const Text('FL (5G)'),
-              suffixIcon: const Icon(FIcons.chevronRight),
+              suffix: const Icon(FIcons.chevronRight),
               onPress: () {},
             ),
           ),
@@ -332,11 +332,11 @@ void main() {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: FTile(
-              prefixIcon: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FIcons.bluetooth),
               title: const Text('Title'),
               subtitle: const Text('L                                     ong'),
               details: const FSwitch(),
-              suffixIcon: const Icon(FIcons.chevronRight),
+              suffix: const Icon(FIcons.chevronRight),
               onPress: () {},
             ),
           ),

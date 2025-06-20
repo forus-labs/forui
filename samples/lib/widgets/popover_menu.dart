@@ -19,15 +19,15 @@ class PopoverMenuPage extends Sample {
         menu: [
           FTileGroup(
             children: [
-              FTile(prefixIcon: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-              FTile(prefixIcon: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-              FTile(prefixIcon: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+              FTile(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+              FTile(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              FTile(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
             ],
           ),
           FTileGroup(
             children: [
-              FTile(prefixIcon: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-              FTile(prefixIcon: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+              FTile(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+              FTile(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
             ],
           ),
         ],

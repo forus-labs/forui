@@ -81,10 +81,10 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.onFocusChange,
     this.onHoverChange,
     this.onStatesChange,
-    Widget? suffixIcon,
+    Widget? suffix,
     super.key,
   }) : _suffix = false,
-       _icon = suffixIcon;
+       _icon = suffix;
 
   /// Creates a [FSelectTile] with a suffix check icon.
   const FSelectTile.suffix({
@@ -102,9 +102,9 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.onFocusChange,
     this.onHoverChange,
     this.onStatesChange,
-    Widget? prefixIcon,
+    Widget? prefix,
     super.key,
-  }) : _icon = prefixIcon,
+  }) : _icon = prefix,
        _suffix = true;
 
   @override
@@ -123,11 +123,11 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     };
 
     return FTile(
-      prefixIcon: prefix,
+      prefix: prefix,
       title: title,
       subtitle: subtitle,
       details: details,
-      suffixIcon: suffix,
+      suffix: suffix,
       style: style,
       semanticsLabel: semanticsLabel,
       enabled: enabled,

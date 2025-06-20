@@ -15,9 +15,9 @@ class TilePage extends Sample {
   @override
   Widget sample(BuildContext context) => FTile(
     enabled: enabled,
-    prefixIcon: const Icon(FIcons.user),
+    prefix: const Icon(FIcons.user),
     title: const Text('Personalization'),
-    suffixIcon: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FIcons.chevronRight),
     onPress: tappable ? () {} : null,
   );
 }
@@ -28,10 +28,10 @@ class TileSubtitlePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTile(
-    prefixIcon: const Icon(FIcons.bell),
+    prefix: const Icon(FIcons.bell),
     title: const Text('Notifications'),
     subtitle: const Text('Banners, Sounds, Badges'),
-    suffixIcon: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FIcons.chevronRight),
     onPress: () {},
   );
 }
@@ -42,10 +42,10 @@ class TileDetailsPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTile(
-    prefixIcon: const Icon(FIcons.wifi),
+    prefix: const Icon(FIcons.wifi),
     title: const Text('WiFi'),
     details: const Text('Forus Labs (5G)'),
-    suffixIcon: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FIcons.chevronRight),
     onPress: () {},
   );
 }

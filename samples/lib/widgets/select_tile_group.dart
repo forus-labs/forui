@@ -41,11 +41,11 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
           description: const Text('These will be shown in the sidebar.'),
           divider: widget.divider,
           children: const [
-            FSelectTile(title: Text('Recents'), suffixIcon: Icon(FIcons.timer), value: Sidebar.recents),
-            FSelectTile(title: Text('Home'), suffixIcon: Icon(FIcons.house), value: Sidebar.home),
+            FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
+            FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
             FSelectTile(
               title: Text('Applications'),
-              suffixIcon: Icon(FIcons.appWindowMac),
+              suffix: Icon(FIcons.appWindowMac),
               value: Sidebar.applications,
             ),
           ],
@@ -84,11 +84,11 @@ class _ScrollableSelectTileGroupPageState extends StatefulSampleState<Scrollable
           description: const Text('These will be shown in the sidebar.'),
           maxHeight: 100,
           children: const [
-            FSelectTile(title: Text('Recents'), suffixIcon: Icon(FIcons.timer), value: Sidebar.recents),
-            FSelectTile(title: Text('Home'), suffixIcon: Icon(FIcons.house), value: Sidebar.home),
+            FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
+            FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
             FSelectTile(
               title: Text('Applications'),
-              suffixIcon: Icon(FIcons.appWindowMac),
+              suffix: Icon(FIcons.appWindowMac),
               value: Sidebar.applications,
             ),
           ],
@@ -268,8 +268,8 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
           selectController: controller,
           label: const Text('Settings'),
           children: const [
-            FSelectTile.suffix(prefixIcon: Icon(FIcons.list), title: Text('List View'), value: 'List'),
-            FSelectTile.suffix(prefixIcon: Icon(FIcons.layoutGrid), title: Text('Grid View'), value: 'Grid'),
+            FSelectTile.suffix(prefix: Icon(FIcons.list), title: Text('List View'), value: 'List'),
+            FSelectTile.suffix(prefix: Icon(FIcons.layoutGrid), title: Text('Grid View'), value: 'Grid'),
           ],
         ),
       ),

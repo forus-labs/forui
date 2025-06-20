@@ -14,7 +14,7 @@ void main() {
             child: FSelectMenuTile(
               initialValue: 1,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
-              prefixIcon: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Bluetooth'),
@@ -35,7 +35,7 @@ void main() {
               initialValue: 1,
               enabled: false,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
-              prefixIcon: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Bluetooth'),
@@ -57,7 +57,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               initialValue: 1,
-              prefixIcon: const Icon(FIcons.calendar),
+              prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -83,7 +83,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               selectController: autoDispose(FMultiValueNotifier.radio(value: 1)),
-              prefixIcon: const Icon(FIcons.calendar),
+              prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -141,7 +141,7 @@ void main() {
             child: FSelectMenuTile(
               initialValue: 1,
               enabled: false,
-              prefixIcon: const Icon(FIcons.calendar),
+              prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -164,7 +164,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               initialValue: 1,
-              prefixIcon: const Icon(FIcons.calendar),
+              prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               forceErrorText: 'This should appear',
