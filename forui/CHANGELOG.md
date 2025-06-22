@@ -75,6 +75,13 @@ FFCheckbox(
 
 
 ### `FButton`
+* Add `mainAxisAlignment` to `FButton(...)`.
+* Add `crossAxisAlignment` to `FButton(...)`.
+* Add `textBaseline` to `FButton(...)`.
+* Add `FButtonContentStyle.spacing`.
+
+
+* **Breaking** Change `instrinicWidth` in `FButton(...)` to `mainAxisSize`.
 * **Breaking** Change `FButtonStyle.primary`'s signature - pass `FButtonStyle.primary()` instead of `FButtonStyle.primary` to `FButtonStyle`.
 * **Breaking** Change `FButtonStyle.secondary`'s signature - pass `FButtonStyle.secondary()` instead of `FButtonStyle.secondary` to `FButtonStyle`.
 * **Breaking** Change `FButtonStyle.destructive`'s signature - pass `FButtonStyle.destructive()` instead of `FButtonStyle.destructive` to `FButtonStyle`.

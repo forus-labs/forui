@@ -48,7 +48,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
           ],
         ),
         FButton(
-          intrinsicWidth: true,
+          mainAxisSize: MainAxisSize.min,
           onPress: () => showFDialog(
             style: context.theme.dialogStyle.copyWith(
               backgroundFilter: (f) => ImageFilter.blur(sigmaX: f * 5, sigmaY: f * 5),

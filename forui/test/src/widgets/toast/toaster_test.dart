@@ -13,7 +13,7 @@ Widget small(
   Duration? duration = const Duration(seconds: 5),
 ]) => Builder(
   builder: (context) => FButton(
-    intrinsicWidth: true,
+    mainAxisSize: MainAxisSize.min,
     onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
@@ -36,7 +36,7 @@ Widget button([
   Duration? duration = const Duration(seconds: 5),
 ]) => Builder(
   builder: (context) => FButton(
-    intrinsicWidth: true,
+    mainAxisSize: MainAxisSize.min,
     onPress: () {
       for (var i = 1; i <= 3; i++) {
         showRawFToast(

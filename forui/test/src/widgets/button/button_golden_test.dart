@@ -73,7 +73,7 @@ void main() {
             theme: theme.data,
             child: FButton(
               style: variant,
-              intrinsicWidth: true,
+              mainAxisSize: MainAxisSize.min,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},

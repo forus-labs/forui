@@ -56,7 +56,7 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onStateChange}
   final ValueChanged<Set<WidgetState>>? onStateChange;
 
-  /// True if this tappable is currently selected. Defaults to false.
+  /// True if this button is currently selected. Defaults to false.
   final bool selected;
 
   /// The child.
@@ -64,15 +64,20 @@ class FButton extends StatelessWidget {
 
   /// Creates a [FButton] that contains a [prefix], [child], and [suffix].
   ///
-  /// [intrinsicWidth] is used to determine if the button should take up the minimum width required to fit its content.
-  /// Defaults to false.
+  /// [mainAxisSize] determines how the button's width is sized.
+  ///
+  /// [mainAxisAlignment] and [crossAxisAlignment] determine how the button's content is aligned horizontally and
+  /// vertically, respectively.
+  ///
+  /// [textBaseline] is used to align the [prefix], [child] and [suffix] if [crossAxisAlignment] is
+  /// [CrossAxisAlignment.baseline].
   ///
   /// [prefix] and [suffix] are wrapped in [IconThemeData].
   ///
   /// The button layout is as follows, assuming the locale is LTR:
   /// ```diagram
   /// |---------------------------------------|
-  /// |  [prefixIcon]  [child]  [suffixIcon]  |
+  /// |  [prefix]  [child]  [suffix]  |
   /// |---------------------------------------|
   /// ```
   ///
@@ -88,11 +93,22 @@ class FButton extends StatelessWidget {
     this.onHoverChange,
     this.onStateChange,
     this.selected = false,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.center,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+    TextBaseline? textBaseline,
     Widget? prefix,
     Widget? suffix,
-    bool intrinsicWidth = false,
     super.key,
-  }) : child = Content(prefix: prefix, suffix: suffix, intrinsicWidth: intrinsicWidth, child: child);
+  }) : child = Content(
+         mainAxisSize: mainAxisSize,
+         mainAxisAlignment: mainAxisAlignment,
+         crossAxisAlignment: crossAxisAlignment,
+         textBaseline: textBaseline,
+         prefix: prefix,
+         suffix: suffix,
+         child: child,
+       );
 
   /// Creates a [FButton] that contains only an icon.
   ///

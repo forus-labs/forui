@@ -9,16 +9,22 @@ part 'button_content.style.dart';
 
 @internal
 class Content extends StatelessWidget {
+  final MainAxisSize mainAxisSize;
+  final MainAxisAlignment mainAxisAlignment;
+  final CrossAxisAlignment crossAxisAlignment;
+  final TextBaseline? textBaseline;
   final Widget? prefix;
   final Widget? suffix;
   final Widget child;
-  final bool intrinsicWidth;
 
   const Content({
+    required this.mainAxisSize,
+    required this.mainAxisAlignment,
+    required this.crossAxisAlignment,
+    required this.textBaseline,
     required this.prefix,
     required this.suffix,
     required this.child,
-    required this.intrinsicWidth,
     super.key,
   });
 
@@ -32,9 +38,11 @@ class Content extends StatelessWidget {
         child: IconTheme(
           data: contentStyle.iconStyle.resolve(states),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: intrinsicWidth ? MainAxisSize.min : MainAxisSize.max,
-            spacing: 10,
+            mainAxisAlignment: mainAxisAlignment,
+            mainAxisSize: mainAxisSize,
+            crossAxisAlignment: crossAxisAlignment,
+            textBaseline: textBaseline,
+            spacing: contentStyle.spacing,
             children: [?prefix, child, ?suffix],
           ),
         ),
@@ -45,7 +53,11 @@ class Content extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'));
+    properties
+      ..add(EnumProperty('mainAxisSize', mainAxisSize, defaultValue: MainAxisSize.max))
+      ..add(EnumProperty('mainAxisAlignment', mainAxisAlignment))
+      ..add(EnumProperty('crossAxisAlignment', crossAxisAlignment))
+      ..add(EnumProperty('textBaseline', textBaseline));
   }
 }
 
@@ -84,11 +96,16 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
+  /// The spacing between prefix, child, and suffix. Defaults to 10.
+  @override
+  final double spacing;
+
   /// Creates a [FButtonContentStyle].
   const FButtonContentStyle({
     required this.textStyle,
     required this.iconStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
+    this.spacing = 10,
   });
 
   /// Creates a [FButtonContentStyle] that inherits its properties.
