@@ -94,7 +94,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
 
-  /// True if the menu should be automatically hidden after a menu option is selected. Defaults to false.
+  /// True if the menu should be automatically hidden after a menu option is selected. Defaults to true.
   final bool autoHide;
 
   @override
@@ -175,7 +175,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.autoHide = false,
+    this.autoHide = true,
     this.label,
     this.description,
     this.autofocus = false,
@@ -336,7 +336,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.autoHide = false,
+    this.autoHide = true,
     this.label,
     this.description,
     this.autofocus = false,

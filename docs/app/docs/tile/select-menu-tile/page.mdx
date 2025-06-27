@@ -18,7 +18,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select-menu-tile' variant='default' query={{autoHide: 'false'}} height={400}/>
+    <Widget name='select-menu-tile' variant='default' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
@@ -28,7 +28,6 @@ A tile that, when triggered, displays a list of options for the user to pick fro
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
         initialValue: Notification.all,
-        autoHide: true,
         validator: (value) => value == null ? 'Select an item' : null,
         prefix: const Icon(FIcons.bell),
         title: const Text('Notifications'),
@@ -140,11 +139,11 @@ FSelectMenuTile<Value>.builder(
 
 ## Examples
 
-### Auto Hide
+### No Auto Hide
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select-menu-tile' variant='default' query={{autoHide: 'true'}} height={400}/>
+    <Widget name='select-menu-tile' variant='default' query={{autoHide: 'false'}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {6} copy
@@ -154,7 +153,7 @@ FSelectMenuTile<Value>.builder(
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
         initialValue: Notification.all,
-        autoHide: true,
+        autoHide: false,
         validator: (value) => value == null ? 'Select an item' : null,
         prefix: const Icon(FIcons.bell),
         title: const Text('Notifications'),
@@ -235,7 +234,6 @@ FSelectMenuTile<Value>.builder(
       @override
       Widget build(BuildContext context) => FSelectMenuTile.builder(
         selectController: controller,
-        autoHide: true,
         maxHeight: 200,
         validator: (value) => value == null ? 'Select an item' : null,
         prefix: Icon(FIcons.variable),
@@ -283,7 +281,6 @@ FSelectMenuTile<Value>.builder(
            children: [
              FSelectMenuTile(
                initialValue: Notification.all,
-               autoHide: true,
                validator: (value) => value == null ? 'Select an item' : null,
                prefix: const Icon(FIcons.bell),
                title: const Text('Notifications'),

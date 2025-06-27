@@ -122,7 +122,6 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
       children: [
         FSelectMenuTile(
           initialValue: Notification.all,
-          autoHide: true,
           validator: (value) => value == null ? 'Select an item' : null,
           prefix: const Icon(FIcons.bell),
           title: const Text('Notifications'),

@@ -185,7 +185,7 @@ FFCheckbox(
   instead.
 
 
-## `FTile`
+### `FTile`
 We have refactored `FTile`'s implementation to be simpler & its styling to be easier to understand & use.
 
 * Add `FTileGroupStyle.border`.
@@ -262,6 +262,7 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Add `FLocalizations.popoverSemanticsLabel`.
 
 * **Breaking** Remove `defaultFontFamily` from `FTypography.copyWith(...)`.
+* **Breaking** Change `FSelectMenuTile.autoHide` default value from `false` to `true`.
 * **Breaking** Remove `FTransformable`.
 
 * Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
