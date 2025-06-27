@@ -12,7 +12,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelectMenuTile(
-          prefixIcon: const Icon(FIcons.calendar),
+          prefix: const Icon(FIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),
@@ -40,7 +40,8 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelectMenuTile(
-          prefixIcon: const Icon(FIcons.calendar),
+          autoHide: false,
+          prefix: const Icon(FIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),
@@ -70,8 +71,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelectMenuTile(
-          autoHide: true,
-          prefixIcon: const Icon(FIcons.calendar),
+          prefix: const Icon(FIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),
@@ -108,7 +108,6 @@ void main() {
             child: Form(
               key: key,
               child: FSelectMenuTile<int>(
-                autoHide: true,
                 initialValue: 1,
                 title: const Text('Repeat'),
                 onSaved: (value) => initial = value,
@@ -133,7 +132,6 @@ void main() {
             child: Form(
               key: key,
               child: FSelectMenuTile<int>(
-                autoHide: true,
                 selectController: autoDispose(FMultiValueNotifier(values: {1})),
                 title: const Text('Repeat'),
                 onSaved: (value) => initial = value,
@@ -153,7 +151,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FSelectMenuTile<int>(
-              autoHide: true,
               title: const Text('Repeat'),
               detailsBuilder: (_, value, _) => Text('Selected: ${value.firstOrNull}'),
               menu: const [FSelectTile(title: Text('1'), value: 1)],
@@ -181,7 +178,6 @@ void main() {
             child: Form(
               key: key,
               child: FSelectMenuTile<int>.builder(
-                autoHide: true,
                 initialValue: 0,
                 title: const Text('Repeat'),
                 onSaved: (value) => initial = value,
@@ -207,7 +203,6 @@ void main() {
               key: key,
               child: FSelectMenuTile<int>.builder(
                 selectController: autoDispose(FMultiValueNotifier(values: {0})),
-                autoHide: true,
                 title: const Text('Repeat'),
                 onSaved: (value) => initial = value,
                 menuBuilder: (context, index) => FSelectTile(title: Text('$index'), value: index),
@@ -226,7 +221,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FSelectMenuTile<int>.builder(
-              autoHide: true,
               count: 1,
               title: const Text('Repeat'),
               detailsBuilder: (_, value, _) => Text('Selected: ${value.firstOrNull}'),
@@ -255,7 +249,6 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile<int>(
-            autoHide: true,
             selectController: controller,
             title: const Text('Repeat'),
             onChange: (_) => firstChanges++,
@@ -284,7 +277,6 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile<int>(
-            autoHide: true,
             selectController: controller,
             title: const Text('Repeat'),
             onChange: (_) => secondChanges++,
@@ -317,7 +309,6 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile<int>(
-            autoHide: true,
             selectController: firstController,
             popoverController: firstPopoverController,
             title: const Text('Repeat'),
@@ -339,7 +330,6 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile<int>(
-            autoHide: true,
             selectController: secondController,
             popoverController: secondPopoverController,
             title: const Text('Repeat'),
@@ -367,7 +357,6 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelectMenuTile<int>(
-            autoHide: true,
             selectController: controller,
             popoverController: popoverController,
             title: const Text('Repeat'),

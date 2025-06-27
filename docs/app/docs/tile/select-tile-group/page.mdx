@@ -31,17 +31,17 @@ A group of tiles that allow users to make a selection from a set of options.
       children: [
         FSelectTile(
           title: const Text('Recents'),
-          suffixIcon: Icon(FIcons.timer),
+          suffix: Icon(FIcons.timer),
           value: Sidebar.recents,
         ),
         FSelectTile(
           title: const Text('Home'),
-          suffixIcon: Icon(FIcons.house),
+          suffix: Icon(FIcons.house),
           value: Sidebar.home,
         ),
         FSelectTile(
           title: const Text('Applications'),
-          suffixIcon: Icon(FIcons.appWindowMac),
+          suffix: Icon(FIcons.appWindowMac),
           value: Sidebar.applications,
         ),
       ],
@@ -131,17 +131,17 @@ FSelectTileGroup<Value>.builder(
       children: [
         FSelectTile(
           title: const Text('Recents'),
-          suffixIcon: Icon(FIcons.timer),
+          suffix: Icon(FIcons.timer),
           value: Sidebar.recents,
         ),
         FSelectTile(
           title: const Text('Home'),
-          suffixIcon: Icon(FIcons.house),
+          suffix: Icon(FIcons.house),
           value: Sidebar.home,
         ),
         FSelectTile(
           title: const Text('Applications'),
-          suffixIcon: Icon(FIcons.appWindowMac),
+          suffix: Icon(FIcons.appWindowMac),
           value: Sidebar.applications,
         ),
       ],
@@ -165,7 +165,7 @@ FSelectTileGroup<Value>.builder(
       maxHeight: 200,
       count: 200,
       tileBuilder:
-          (context, index) => FSelectTile(title: Text('Tile $index'), suffixIcon: Icon(FIcons.chevronRight), value: 1),
+          (context, index) => FSelectTile(title: Text('Tile $index'), suffix: Icon(FIcons.chevronRight), value: 1),
     );
     ```
   </Tabs.Tab>
@@ -329,12 +329,12 @@ FSelectTileGroup<Value>.builder(
       label: const Text('Settings'),
       children: [
         FSelectTile.suffix(
-          prefixIcon: Icon(FIcons.list),
+          prefix: Icon(FIcons.list),
           title: const Text('List View'),
           value: 'List',
         ),
         FSelectTile.suffix(
-          prefixIcon: Icon(FIcons.layoutGrid),
+          prefix: Icon(FIcons.layoutGrid),
           title: const Text('Grid View'),
           value: 'Grid',
         ),
@@ -362,17 +362,17 @@ FSelectTileGroup<Value>.builder(
       children: [
         FSelectTile(
           title: const Text('Recents'),
-          suffixIcon: Icon(FIcons.timer),
+          suffix: Icon(FIcons.timer),
           value: Sidebar.recents,
         ),
         FSelectTile(
           title: const Text('Home'),
-          suffixIcon: Icon(FIcons.house),
+          suffix: Icon(FIcons.house),
           value: Sidebar.home,
         ),
         FSelectTile(
           title: const Text('Applications'),
-          suffixIcon: Icon(FIcons.appWindowMac),
+          suffix: Icon(FIcons.appWindowMac),
           value: Sidebar.applications,
         ),
       ],
@@ -400,17 +400,17 @@ FSelectTileGroup<Value>.builder(
       children: [
         FSelectTile(
           title: const Text('Recents'),
-          suffixIcon: Icon(FIcons.timer),
+          suffix: Icon(FIcons.timer),
           value: Sidebar.recents,
         ),
         FSelectTile(
           title: const Text('Home'),
-          suffixIcon: Icon(FIcons.house),
+          suffix: Icon(FIcons.house),
           value: Sidebar.home,
         ),
         FSelectTile(
           title: const Text('Applications'),
-          suffixIcon: Icon(FIcons.appWindowMac),
+          suffix: Icon(FIcons.appWindowMac),
           value: Sidebar.applications,
         ),
       ],

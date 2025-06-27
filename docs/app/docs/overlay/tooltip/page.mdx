@@ -18,12 +18,11 @@ A tooltip displays information related to a widget when focused, hovered over, o
     ```dart copy
     FTooltip(
       tipBuilder: (context, controller) => const Text('Add to library'),
-      child: IntrinsicWidth(
-        child: FButton(
-          style: FButtonStyle.outline(),
-          onPress: () {},
-          child: Text('Long press/Hover'),
-        ),
+      child: FButton(
+        style: FButtonStyle.outline(),
+        mainAxisSize: MainAxisSize.min,
+        onPress: () {},
+        child: Text('Long press/Hover'),
       ),
     );
     ```
@@ -73,12 +72,11 @@ You can change how the tooltip is aligned to the button.
       tipAnchor: Alignment.topLeft,
       childAnchor: Alignment.topRight,
       tipBuilder: (context, controller) => const Text('Add to library'),
-      child: IntrinsicWidth(
-        child: FButton(
-          style: FButtonStyle.outline(),
-          onPress: () {},
-          child: Text('Long press/Hover'),
-        ),
+      child: FButton(
+        style: FButtonStyle.outline(),
+        mainAxisSize: MainAxisSize.min,
+        onPress: () {},
+        child: Text('Long press/Hover'),
       ),
     );
     ```
@@ -97,12 +95,11 @@ You can change how the tooltip is aligned to the button.
       hover: false,
       longPress: true,
       tipBuilder: (context, controller) => const Text('Add to library'),
-      child: IntrinsicWidth(
-        child: FButton(
-          style: FButtonStyle.outline(),
-          onPress: () {},
-          child: Text('Long press'),
-        ),
+      child: FButton(
+        style: FButtonStyle.outline(),
+        mainAxisSize: MainAxisSize.min,
+        onPress: () {},
+        child: Text('Long press'),
       ),
     );
     ```

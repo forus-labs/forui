@@ -216,75 +216,83 @@ class _FTappableState<T extends FTappable> extends State<T> {
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
     // TODO: https://github.com/flutter/flutter/issues/167916
-    var tappable = widget.builder(context, {..._controller.value}, widget.child);
-
-    tappable = _decorate(context, tappable);
-    tappable = Semantics(
-      enabled: !widget._disabled,
-      label: widget.semanticsLabel,
-      container: true,
-      button: true,
-      selected: widget.selected,
-      excludeSemantics: widget.excludeSemantics,
-      child: Focus(
-        autofocus: widget.autofocus,
-        focusNode: widget.focusNode,
-        onFocusChange: (focused) {
-          setState(() => _controller.update(WidgetState.focused, focused));
-          widget.onFocusChange?.call(focused);
+    var tappable = _decorate(context, widget.builder(context, {..._controller.value}, widget.child));
+    tappable = Shortcuts(
+      shortcuts: {if (widget.onPress != null) const SingleActivator(LogicalKeyboardKey.enter): const ActivateIntent()},
+      child: Actions(
+        actions: {
+          if (widget.onPress != null)
+            ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!.call()),
         },
-        child: MouseRegion(
-          cursor: style.cursor.resolve(_controller.value),
-          onEnter: (_) {
-            setState(() => _controller.update(WidgetState.hovered, true));
-            widget.onHoverChange?.call(true);
-          },
-          onExit: (_) => setState(() {
-            _controller.update(WidgetState.hovered, false);
-            widget.onHoverChange?.call(false);
-          }),
-          // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
-          // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
-          // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
-          child: Listener(
-            onPointerDown: (_) async {
-              final count = ++_monotonic;
-              if (!widget._disabled) {
-                onPressedStart();
-              }
+        child: Semantics(
+          enabled: !widget._disabled,
+          label: widget.semanticsLabel,
+          container: true,
+          button: true,
+          selected: widget.selected,
+          excludeSemantics: widget.excludeSemantics,
+          child: Focus(
+            autofocus: widget.autofocus,
+            focusNode: widget.focusNode,
+            onFocusChange: (focused) {
+              setState(() => _controller.update(WidgetState.focused, focused));
+              widget.onFocusChange?.call(focused);
+            },
+            child: MouseRegion(
+              cursor: style.cursor.resolve(_controller.value),
+              onEnter: (_) {
+                setState(() => _controller.update(WidgetState.hovered, true));
+                widget.onHoverChange?.call(true);
+              },
+              onExit: (_) => setState(() {
+                _controller.update(WidgetState.hovered, false);
+                widget.onHoverChange?.call(false);
+              }),
+              // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
+              // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
+              // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
+              child: Listener(
+                onPointerDown: (_) async {
+                  final count = ++_monotonic;
+                  if (!widget._disabled) {
+                    onPressedStart();
+                  }
 
-              await Future.delayed(style.pressedEnterDuration);
-              if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
-                setState(() => _controller.update(WidgetState.pressed, true));
-              }
-            },
-            onPointerMove: (event) {
-              // The RenderObject should almost always be a [RenderBox] since it is wrapped in a Semantics which
-              // required the child to be a [RenderBox] as well. We use a pattern match anyways just to be safe.
-              if (context.findRenderObject() case final RenderBox box? when !box.size.contains(event.localPosition)) {
-                ++_monotonic;
-                if (!widget._disabled) {
-                  onPressedEnd();
-                }
-                setState(() => _controller.update(WidgetState.pressed, false));
-              }
-            },
-            onPointerUp: (_) async {
-              final count = ++_monotonic;
-              if (!widget._disabled) {
-                onPressedEnd();
-              }
+                  await Future.delayed(style.pressedEnterDuration);
+                  if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
+                    setState(() => _controller.update(WidgetState.pressed, true));
+                  }
+                },
+                onPointerMove: (event) {
+                  // The RenderObject should almost always be a [RenderBox] since it is wrapped in a Semantics which
+                  // required the child to be a [RenderBox] as well. We use a pattern match anyways just to be safe.
+                  if (context.findRenderObject() case final RenderBox box?
+                      when !box.size.contains(event.localPosition)) {
+                    ++_monotonic;
+                    if (!widget._disabled) {
+                      onPressedEnd();
+                    }
+                    setState(() => _controller.update(WidgetState.pressed, false));
+                  }
+                },
+                onPointerUp: (_) async {
+                  final count = ++_monotonic;
+                  if (!widget._disabled) {
+                    onPressedEnd();
+                  }
 
-              await Future.delayed(style.pressedExitDuration);
-              if (mounted && count == _monotonic && _controller.value.contains(WidgetState.pressed)) {
-                setState(() => _controller.update(WidgetState.pressed, false));
-              }
-            },
-            child: GestureDetector(
-              behavior: widget.behavior,
-              onTap: widget.onPress,
-              onLongPress: widget.onLongPress,
-              child: tappable,
+                  await Future.delayed(style.pressedExitDuration);
+                  if (mounted && count == _monotonic && _controller.value.contains(WidgetState.pressed)) {
+                    setState(() => _controller.update(WidgetState.pressed, false));
+                  }
+                },
+                child: GestureDetector(
+                  behavior: widget.behavior,
+                  onTap: widget.onPress,
+                  onLongPress: widget.onLongPress,
+                  child: tappable,
+                ),
+              ),
             ),
           ),
         ),
@@ -296,16 +304,6 @@ class _FTappableState<T extends FTappable> extends State<T> {
         focused: _controller.value.contains(WidgetState.focused),
         style: style,
         child: tappable,
-      );
-    }
-
-    if (widget.onPress case final onPress?) {
-      tappable = Shortcuts(
-        shortcuts: const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-        child: Actions(
-          actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => onPress())},
-          child: tappable,
-        ),
       );
     }
 

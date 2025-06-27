@@ -16,11 +16,11 @@ class FTileContent extends StatelessWidget {
   final FWidgetStateMap<FDividerStyle> dividerStyle;
   final FTileDivider dividerType;
   final Set<WidgetState> states;
-  final Widget? prefixIcon;
+  final Widget? prefix;
   final Widget title;
   final Widget? subtitle;
   final Widget? details;
-  final Widget? suffixIcon;
+  final Widget? suffix;
 
   const FTileContent({
     required this.style,
@@ -28,10 +28,10 @@ class FTileContent extends StatelessWidget {
     required this.dividerType,
     required this.states,
     required this.title,
-    required this.prefixIcon,
+    required this.prefix,
     required this.subtitle,
     required this.details,
-    required this.suffixIcon,
+    required this.suffix,
     super.key,
   });
 
@@ -40,7 +40,7 @@ class FTileContent extends StatelessWidget {
     style: style,
     dividerType: dividerType,
     children: [
-      if (prefixIcon case final prefix?)
+      if (prefix case final prefix?)
         Padding(
           padding: EdgeInsetsDirectional.only(end: style.prefixIconSpacing),
           child: IconTheme(data: style.prefixIconStyle.resolve(states), child: prefix),
@@ -89,7 +89,7 @@ class FTileContent extends StatelessWidget {
         )
       else
         const SizedBox(),
-      if (suffixIcon case final suffixIcon?)
+      if (suffix case final suffixIcon?)
         Padding(
           padding: EdgeInsetsDirectional.only(start: style.suffixIconSpacing),
           child: IconTheme(data: style.suffixIconStyle.resolve(states), child: suffixIcon),

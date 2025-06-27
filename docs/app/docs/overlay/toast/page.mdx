@@ -145,7 +145,7 @@ showRawFToast(
       Widget build(BuildContext context) => FToaster(
         child: Center(
           child: FButton(
-            intrinsicWidth: true,
+            mainAxisSize: MainAxisSize.min,
             onPress: () => showFToast(
               context: context,
               duration: null,
@@ -184,7 +184,7 @@ showRawFToast(
         return FToaster(
           child: Center(
             child: FButton(
-              intrinsicWidth: true,
+              mainAxisSize: MainAxisSize.min,
               onPress: () => showRawFToast(
                 context: context,
                 duration: null,
@@ -228,7 +228,7 @@ showRawFToast(
         child: Builder(
           builder: (context) => Center(
             child: FButton(
-              intrinsicWidth: true,
+              mainAxisSize: MainAxisSize.min,
               onPress: () => showFToast(context: context, title: const Text('Event has been created')),
               child: const Text('Show Toast'),
             ),
@@ -255,7 +255,7 @@ showRawFToast(
         child: Builder(
           builder: (context) => Center(
             child: FButton(
-              intrinsicWidth: true,
+              mainAxisSize: MainAxisSize.min,
               onPress: () => showFToast(context: context, title: const Text('Event has been created')),
               child: const Text('Show Toast'),
             ),
@@ -286,7 +286,7 @@ By default, toasts are dismissible by horizontally swiping towards the closest e
         child: Builder(
           builder: (context) => Center(
             child: FButton(
-              intrinsicWidth: true,
+              mainAxisSize: MainAxisSize.min,
               onPress: () => showFToast(
                 context: context,
                 swipeToDismiss: [AxisDirection.down],
@@ -317,7 +317,7 @@ By default, toasts are dismissible by horizontally swiping towards the closest e
         child: Builder(
           builder: (context) => Center(
             child: FButton(
-              intrinsicWidth: true,
+              mainAxisSize: MainAxisSize.min,
               onPress: () => showFToast(
                 context: context,
                 swipeToDismiss: [],

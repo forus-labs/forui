@@ -9,7 +9,7 @@ import '../../test_scaffold.dart';
 
 Widget small(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
-    intrinsicWidth: true,
+    mainAxisSize: MainAxisSize.min,
     onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
@@ -27,7 +27,7 @@ Widget small(String text, [FToastAlignment alignment = FToastAlignment.bottomRig
 
 Widget big(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
-    intrinsicWidth: true,
+    mainAxisSize: MainAxisSize.min,
     onPress: () => showRawFToast(
       alignment: alignment,
       context: context,
@@ -45,7 +45,7 @@ Widget big(String text, [FToastAlignment alignment = FToastAlignment.bottomRight
 
 Widget closeable(String text, [FToastAlignment alignment = FToastAlignment.bottomRight]) => Builder(
   builder: (context) => FButton(
-    intrinsicWidth: true,
+    mainAxisSize: MainAxisSize.min,
     onPress: () => showRawFToast(
       alignment: alignment,
       context: context,

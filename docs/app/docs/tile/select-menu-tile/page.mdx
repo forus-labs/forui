@@ -18,7 +18,7 @@ A tile that, when triggered, displays a list of options for the user to pick fro
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select-menu-tile' variant='default' query={{autoHide: 'false'}} height={400}/>
+    <Widget name='select-menu-tile' variant='default' query={{}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart copy
@@ -28,9 +28,8 @@ A tile that, when triggered, displays a list of options for the user to pick fro
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
         initialValue: Notification.all,
-        autoHide: true,
         validator: (value) => value == null ? 'Select an item' : null,
-        prefixIcon: const Icon(FIcons.bell),
+        prefix: const Icon(FIcons.bell),
         title: const Text('Notifications'),
         detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
           Notification.all => 'All',
@@ -81,12 +80,12 @@ FSelectMenuTile<Value>(
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   errorBuilder: (context, error) => Text(error),
-  prefixIcon: Icon(FIcons.bell),
+  prefix: Icon(FIcons.bell),
   title: Text('Notifications'),
   subtitle: Text('subtitle'),
   detailsBuilder: (context, values, child) => Placeholder()m
   details: Text('All'),
-  suffixIcon: Icon(FIcons.chevronsUpDown),
+  suffix: Icon(FIcons.chevronsUpDown),
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
   initialValue: Value.something,
@@ -121,12 +120,12 @@ FSelectMenuTile<Value>.builder(
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
   errorBuilder: (context, error) => Text(error),
-  prefixIcon: Icon(FIcons.bell),
+  prefix: Icon(FIcons.bell),
   title: Text('Notifications'),
   subtitle: Text('subtitle'),
   detailsBuilder: (context, values, child) => Placeholder()m
   details: Text('All'),
-  suffixIcon: Icon(FIcons.chevronsUpDown),
+  suffix: Icon(FIcons.chevronsUpDown),
   menuBuilder: (context, index) => index < 10 ? FSelectTile(
     title: Text('Tile $index'),
     value: Value.something,
@@ -140,11 +139,11 @@ FSelectMenuTile<Value>.builder(
 
 ## Examples
 
-### Auto Hide
+### No Auto Hide
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='select-menu-tile' variant='default' query={{autoHide: 'true'}} height={400}/>
+    <Widget name='select-menu-tile' variant='default' query={{autoHide: 'false'}} height={400}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {6} copy
@@ -154,9 +153,9 @@ FSelectMenuTile<Value>.builder(
       @override
       Widget build(BuildContext context) => FSelectMenuTile(
         initialValue: Notification.all,
-        autoHide: true,
+        autoHide: false,
         validator: (value) => value == null ? 'Select an item' : null,
-        prefixIcon: const Icon(FIcons.bell),
+        prefix: const Icon(FIcons.bell),
         title: const Text('Notifications'),
         detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
           Notification.all => 'All',
@@ -191,7 +190,7 @@ FSelectMenuTile<Value>.builder(
         initialValue: Notification.all,
         maxHeight: 150,
         validator: (value) => value == null ? 'Select an item' : null,
-        prefixIcon: const Icon(FIcons.bell),
+        prefix: const Icon(FIcons.bell),
         title: const Text('Notifications'),
         detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
           Notification.all => 'All',
@@ -235,10 +234,9 @@ FSelectMenuTile<Value>.builder(
       @override
       Widget build(BuildContext context) => FSelectMenuTile.builder(
         selectController: controller,
-        autoHide: true,
         maxHeight: 200,
         validator: (value) => value == null ? 'Select an item' : null,
-        prefixIcon: Icon(FIcons.variable),
+        prefix: Icon(FIcons.variable),
         title: const Text('Applicable values'),
         menuBuilder: (context, index) => FSelectTile(
           title: Text('Tile $index'),
@@ -283,9 +281,8 @@ FSelectMenuTile<Value>.builder(
            children: [
              FSelectMenuTile(
                initialValue: Notification.all,
-               autoHide: true,
                validator: (value) => value == null ? 'Select an item' : null,
-               prefixIcon: const Icon(FIcons.bell),
+               prefix: const Icon(FIcons.bell),
                title: const Text('Notifications'),
                detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
                  Notification.all => 'All',

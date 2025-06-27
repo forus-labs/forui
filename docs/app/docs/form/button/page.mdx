@@ -40,7 +40,7 @@ dart run forui style create button
 ```dart copy
 FButton(
   style: FButtonStyle(...),
-  intrinsicWidth:true,
+  mainAxisSize: MainAxisSize.min,
   onPress: () {},
   child: const Text('Button'),
 );
@@ -183,7 +183,7 @@ FButton.raw(
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='button' variant='spinner' query={{}}/>
+    <Widget name='button' variant='circular-progress' query={{}}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {2} copy

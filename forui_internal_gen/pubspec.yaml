@@ -24,7 +24,6 @@ dependencies:
   source_gen: ^2.0.0
 
 dev_dependencies:
-  build_test: ^2.2.3
   flint: ^2.8.1
   flutter_test:
     sdk: flutter

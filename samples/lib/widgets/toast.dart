@@ -58,7 +58,7 @@ class NoAutoDismissToastPage extends Sample {
   @override
   Widget sample(BuildContext context) => Center(
     child: FButton(
-      intrinsicWidth: true,
+      mainAxisSize: MainAxisSize.min,
       onPress: () => showFToast(
         context: context,
         duration: null,
@@ -87,7 +87,7 @@ class RawToastPage extends Sample {
 
     return Center(
       child: FButton(
-        intrinsicWidth: true,
+        mainAxisSize: MainAxisSize.min,
         onPress: () => showRawFToast(
           context: context,
           duration: null,
@@ -132,7 +132,7 @@ class BehaviorToastPage extends StatelessWidget {
           child: Builder(
             builder: (context) => Center(
               child: FButton(
-                intrinsicWidth: true,
+                mainAxisSize: MainAxisSize.min,
                 onPress: () => showFToast(
                   context: context,
                   icon: const Icon(FIcons.info),
@@ -167,7 +167,7 @@ class SwipeToastPage extends StatelessWidget {
           child: Builder(
             builder: (context) => Center(
               child: FButton(
-                intrinsicWidth: true,
+                mainAxisSize: MainAxisSize.min,
                 onPress: () => showFToast(
                   context: context,
                   swipeToDismiss: directions,

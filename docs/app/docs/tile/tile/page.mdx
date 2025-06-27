@@ -23,9 +23,9 @@ A tile that is typically used to group related information together.
   <Tabs.Tab>
     ```dart copy
     FTile(
-      prefixIcon: Icon(FIcons.user),
+      prefix: Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffixIcon: Icon(FIcons.chevronRight),
+      suffix: Icon(FIcons.chevronRight),
       onPress: () { },
     );
     ```
@@ -47,11 +47,11 @@ dart run forui style create tile
 ```dart copy
 FTile(
   style: FTileStyle(...),
-  prefixIcon: Icon(FIcons.user),
+  prefix: Icon(FIcons.user),
   title: const Text('Title'),
   subtitle: const Text('Subtitle'),
   details: const Text('Details'),
-  suffixIcon: Icon(FIcons.chevronRight),
+  suffix: Icon(FIcons.chevronRight),
   semanticsLabel: 'Label',
   enabled: true,
   selected: false,
@@ -74,9 +74,9 @@ FTile(
   <Tabs.Tab>
     ```dart copy
     FTile(
-      prefixIcon: Icon(FIcons.user),
+      prefix: Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffixIcon: Icon(FIcons.chevronRight),
+      suffix: Icon(FIcons.chevronRight),
     );
     ```
   </Tabs.Tab>
@@ -92,9 +92,9 @@ FTile(
     ```dart {2} copy
     FTile(
       enabled: false,
-      prefixIcon: Icon(FIcons.user),
+      prefix: Icon(FIcons.user),
       title: const Text('Personalization'),
-      suffixIcon: Icon(FIcons.chevronRight),
+      suffix: Icon(FIcons.chevronRight),
       onPress: () { },
     );
     ```
@@ -110,10 +110,10 @@ FTile(
   <Tabs.Tab>
     ```dart {4} copy
     FTile(
-      prefixIcon: Icon(FIcons.bell),
+      prefix: Icon(FIcons.bell),
       title: const Text('Notifications'),
       subtitle: const Text('Banners, Sounds, Badges'),
-      suffixIcon: Icon(FIcons.chevronRight),
+      suffix: Icon(FIcons.chevronRight),
       onPress: () {},
     );
     ```
@@ -129,10 +129,10 @@ FTile(
   <Tabs.Tab>
     ```dart {4} copy
     FTile(
-      prefixIcon: Icon(FIcons.wifi),
+      prefix: Icon(FIcons.wifi),
       title: const Text('WiFi'),
       details: const Text('Forus Labs (5G)'),
-      suffixIcon: Icon(FIcons.chevronRight),
+      suffix: Icon(FIcons.chevronRight),
       onPress: () {},
     );
     ```

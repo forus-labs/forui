@@ -22,7 +22,7 @@ class DialogPage extends Sample {
     ];
 
     return FButton(
-      intrinsicWidth: true,
+      mainAxisSize: MainAxisSize.min,
       onPress: () => showFDialog(
         context: context,
         builder: (context, style, animation) => FTheme(
@@ -52,7 +52,7 @@ class BlurredDialogPage extends Sample {
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 10.0),
     child: FButton(
-      intrinsicWidth: true,
+      mainAxisSize: MainAxisSize.min,
       onPress: () => showFDialog(
         context: context,
         style: context.theme.dialogStyle.copyWith(

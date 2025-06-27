@@ -21,7 +21,7 @@ A modal dialog interrupts the user with important content and expects a response
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         FButton(
-          intrinsicWidth: true,
+          mainAxisSize: MainAxisSize.min,
           onPress: () => showFDialog(
             context: context,
             builder: (context, style, animation) => FDialog(

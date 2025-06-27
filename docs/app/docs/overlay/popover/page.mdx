@@ -358,8 +358,11 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
             ),
           ),
         ),
-        builder: (context, controller, child) => IntrinsicWidth(
-          child: FButton(style: FButtonStyle.outline(), onPress: controller.toggle, child: const Text('Open popover')),
+        builder: (context, controller, child) => FButton(
+          style: FButtonStyle.outline(),
+          mainAxisSize: MainAxisSize.min,
+          onPress: controller.toggle,
+          child: const Text('Open popover'),
         ),
       );
     }
@@ -419,8 +422,11 @@ The popover can be shifted along the overflowing axis to stay within the viewpor
             ),
           ),
         ),
-        builder: (context, controller, child) => IntrinsicWidth(
-          child: FButton(style: FButtonStyle.outline(), onPress: controller.toggle, child: const Text('Open popover')),
+        builder: (context, controller, child) => FButton(
+          style: FButtonStyle.outline(),
+          mainAxisSize: MainAxisSize.min,
+          onPress: controller.toggle,
+          child: const Text('Open popover'),
         ),
       );
     }
@@ -480,8 +486,11 @@ The popover is not shifted to stay within the viewport boundaries, even if it ov
             ),
           ),
         ),
-        builder: (context, controller, child) => IntrinsicWidth(
-          child: FButton(style: FButtonStyle.outline(), onPress: controller.toggle, child: const Text('Open popover')),
+        builder: (context, controller, child) => FButton(
+          style: FButtonStyle.outline(),
+          mainAxisSize: MainAxisSize.min,
+          onPress: controller.toggle,
+          child: const Text('Open popover'),
         ),
       );
     }

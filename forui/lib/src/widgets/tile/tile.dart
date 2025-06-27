@@ -20,8 +20,8 @@ enum FTileDivider {
   /// the title of the tile above the divider.
   /// ```diagram
   /// -----------------------------
-  /// | [prefixIcon] [title]      | <- Tile A
-  /// |              ------------ |
+  /// | [prefix] [title]          | <- Tile A
+  /// |          ---------------- |
   /// | [title]                   | <- Tile B
   /// -----------------------------
   /// ```
@@ -97,9 +97,9 @@ class FTile extends StatelessWidget with FTileMixin {
   /// Assuming LTR locale:
   /// ```diagram
   /// -----------------------------------------------------
-  /// | [prefixIcon] [title]       [details] [suffixIcon] |
-  /// |              [subtitle]                           |
-  /// ----------------------------------------------------
+  /// | [prefix] [title]       [details] [suffix]         |
+  /// |          [subtitle]                               |
+  /// -----------------------------------------------------
   /// ```
   ///
   /// The order is reversed for RTL locales.
@@ -120,10 +120,10 @@ class FTile extends StatelessWidget with FTileMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
-    Widget? prefixIcon,
+    Widget? prefix,
     Widget? subtitle,
     Widget? details,
-    Widget? suffixIcon,
+    Widget? suffix,
     super.key,
   }) : _builder = ((context, style, states, divider) => FTileContent(
          style: style.contentStyle,
@@ -131,10 +131,10 @@ class FTile extends StatelessWidget with FTileMixin {
          dividerType: divider,
          states: states,
          title: title,
-         prefixIcon: prefixIcon,
+         prefix: prefix,
          subtitle: subtitle,
          details: details,
-         suffixIcon: suffixIcon,
+         suffix: suffix,
        ));
 
   @override
