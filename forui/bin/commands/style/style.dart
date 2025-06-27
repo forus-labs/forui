@@ -55,7 +55,7 @@ enum Style {
     'FButtonContentStyle',
     <String>['button-content', 'buttoncontent'],
     <String>['FButtonContentStyle'],
-    'FButtonContentStyle buttonContentStyle({\n  required FTypography typography,\n  required Color enabled,\n  required Color disabled,\n}) => FButtonContentStyle(\n  textStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.base.copyWith(\n      color: disabled,\n      fontWeight: FontWeight.w500,\n      height: 1,\n    ),\n    WidgetState.any: typography.base.copyWith(\n      color: enabled,\n      fontWeight: FontWeight.w500,\n      height: 1,\n    ),\n  }),\n  iconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(color: disabled, size: 20),\n    WidgetState.any: IconThemeData(color: enabled, size: 20),\n  }),\n  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),\n);\n',
+    'FButtonContentStyle buttonContentStyle({\n  required FTypography typography,\n  required Color enabled,\n  required Color disabled,\n}) => FButtonContentStyle(\n  textStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.base.copyWith(\n      color: disabled,\n      fontWeight: FontWeight.w500,\n      height: 1,\n    ),\n    WidgetState.any: typography.base.copyWith(\n      color: enabled,\n      fontWeight: FontWeight.w500,\n      height: 1,\n    ),\n  }),\n  iconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(color: disabled, size: 20),\n    WidgetState.any: IconThemeData(color: enabled, size: 20),\n  }),\n  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),\n  spacing: 10,\n);\n',
   ),
   fbuttoniconcontentstyle(
     'FButtonIconContentStyle',

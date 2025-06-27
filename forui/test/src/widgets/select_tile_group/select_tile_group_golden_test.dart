@@ -128,12 +128,7 @@ void main() {
                     suffix: Icon(FIcons.chevronRight),
                     value: 1,
                   ),
-                  FSelectTile(
-                    title: Text('Mail'),
-                    details: Text('42'),
-                    suffix: Icon(FIcons.chevronRight),
-                    value: 2,
-                  ),
+                  FSelectTile(title: Text('Mail'), details: Text('42'), suffix: Icon(FIcons.chevronRight), value: 2),
                   FSelectTile(
                     title: Text('Bluetooth'),
                     subtitle: Text('Fee, Fo'),
@@ -304,12 +299,7 @@ void main() {
               selectController: controller,
               label: const Text('Network'),
               children: const [
-                FSelectTile(
-                  title: Text('WiFi'),
-                  details: Text('FL (5G)'),
-                  suffix: Icon(FIcons.chevronRight),
-                  value: 1,
-                ),
+                FSelectTile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
               ],
             ),
           ),
