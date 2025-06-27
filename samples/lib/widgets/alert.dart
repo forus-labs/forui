@@ -5,17 +5,13 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
-final variants = {
-  'primary': FAlertStyle.primary(),
-  'destructive': FAlertStyle.destructive(),
-};
+final variants = {'primary': FAlertStyle.primary(), 'destructive': FAlertStyle.destructive()};
 
 @RoutePage()
 class AlertPage extends Sample {
   final FBaseAlertStyle Function(FAlertStyle) variant;
 
-  AlertPage({@queryParam super.theme, @queryParam String style = 'primary'})
-    : variant = variants[style]!;
+  AlertPage({@queryParam super.theme, @queryParam String style = 'primary'}) : variant = variants[style]!;
 
   @override
   Widget sample(BuildContext context) => Column(
