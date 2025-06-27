@@ -43,11 +43,7 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
           children: const [
             FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
             FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
-            FSelectTile(
-              title: Text('Applications'),
-              suffix: Icon(FIcons.appWindowMac),
-              value: Sidebar.applications,
-            ),
+            FSelectTile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: Sidebar.applications),
           ],
         ),
       ),
@@ -86,11 +82,7 @@ class _ScrollableSelectTileGroupPageState extends StatefulSampleState<Scrollable
           children: const [
             FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
             FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
-            FSelectTile(
-              title: Text('Applications'),
-              suffix: Icon(FIcons.appWindowMac),
-              value: Sidebar.applications,
-            ),
+            FSelectTile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: Sidebar.applications),
           ],
         ),
       ),
