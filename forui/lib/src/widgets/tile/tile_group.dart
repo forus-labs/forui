@@ -11,7 +11,7 @@ part 'tile_group.style.dart';
 /// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [FTileGroup.merge].
 mixin FTileGroupMixin<T extends Widget> on Widget {}
 
-class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
+class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FItemMixin>> {
   final List<FTileGroupMixin> children;
 
   const _MergeTileGroups({
@@ -36,36 +36,45 @@ class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FTile
     final style = this.style?.call(context.theme.tileGroupStyle) ?? context.theme.tileGroupStyle;
     final enabled = this.enabled ?? true;
 
-    return _label(context, style, true, enabled, [
-      for (final (index, child) in children.indexed)
-        FTileGroupData(
-          style: style,
-          divider: divider,
-          enabled: enabled,
-          index: index,
-          length: children.length,
-          child: child,
-        ),
-    ]);
+    return _label(
+      context,
+      style,
+      true,
+      enabled,
+      _GroupStyle(
+        style: style,
+        child: _scrollView([
+          for (final (index, child) in children.indexed)
+            FItemContainerData(
+              dividerStyle: style.dividerStyle,
+              divider: divider,
+              enabled: enabled,
+              index: index,
+              length: children.length,
+              child: child,
+            ),
+        ]),
+      ),
+    );
   }
 }
 
-/// A tile group that groups multiple [FTileMixin]s and [FTileGroupMixin]s together.
+/// A tile group that groups multiple [FItemMixin]s and [FTileGroupMixin]s together.
 ///
 /// Tiles grouped together will be separated by a divider, specified by [divider].
 ///
 /// See:
 /// * https://forui.dev/docs/tile/tile-group for working examples.
 /// * [FTileGroupStyle] for customizing a tile's appearance.
-class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
-  // ignore: avoid_positional_boolean_parameters
-  final SliverChildDelegate Function(FTileGroupStyle styles, bool enabled) _delegate;
+class FTileGroup extends _Group with FTileGroupMixin<FItemMixin> {
+  /// The delegate that builds the sliver children.
+  final SliverChildDelegate Function(FTileGroupStyle) _delegate;
 
   /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
   ///
   /// All group labels will be ignored.
-  static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
-    required List<FTileGroupMixin<FTileMixin>> children,
+  static FTileGroupMixin<FTileGroupMixin<FItemMixin>> merge({
+    required List<FTileGroupMixin<FItemMixin>> children,
     FTileGroupStyle Function(FTileGroupStyle)? style,
     ScrollController? scrollController,
     double? cacheExtent,
@@ -73,7 +82,7 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
     bool enabled = true,
-    FTileDivider divider = FTileDivider.full,
+    FItemDivider divider = FItemDivider.full,
     String? semanticsLabel,
     Widget? label,
     Widget? description,
@@ -98,7 +107,7 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
 
   /// Creates a [FTileGroup].
   FTileGroup({
-    required List<FTileMixin> children,
+    required List<FItemMixin> children,
     super.style,
     super.scrollController,
     super.cacheExtent,
@@ -106,19 +115,18 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
     super.dragStartBehavior = DragStartBehavior.start,
     super.physics = const ClampingScrollPhysics(),
     super.enabled,
-    super.divider = FTileDivider.indented,
+    super.divider = FItemDivider.indented,
     super.semanticsLabel,
     super.label,
     super.description,
     super.error,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
-       _delegate = ((style, enabled) => SliverChildListDelegate([
+       _delegate = ((style) => SliverChildListDelegate([
          for (final (index, child) in children.indexed)
-           FTileGroupItemData(
-             style: style,
+           FItemContainerItemData(
+             style: style.tileStyle,
              divider: divider,
-             enabled: enabled,
              index: index,
              last: index == children.length - 1,
              child: child,
@@ -128,7 +136,7 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
   /// {@template forui.widgets.FTileGroup.builder}
-  /// The [tileBuilder] is called for each tile that should be built. [FTileGroupItemData] is **not** visible to `tileBuilder`.
+  /// The [tileBuilder] is called for each tile that should be built. [FItemContainerItemData] is **not** visible to `tileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
   /// * It will be called only for indices <= [count] if [count] is given.
@@ -151,7 +159,7 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
     super.dragStartBehavior = DragStartBehavior.start,
     super.physics = const ClampingScrollPhysics(),
     super.enabled,
-    super.divider = FTileDivider.indented,
+    super.divider = FItemDivider.indented,
     super.semanticsLabel,
     super.label,
     super.description,
@@ -159,14 +167,13 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
        assert(count == null || 0 <= count, 'count must be non-negative.'),
-       _delegate = ((style, enabled) => SliverChildBuilderDelegate((context, index) {
+       _delegate = ((style) => SliverChildBuilderDelegate((context, index) {
          final tile = tileBuilder(context, index);
          return tile == null
              ? null
-             : FTileGroupItemData(
-                 style: style,
+             : FItemContainerItemData(
+                 style: style.tileStyle,
                  divider: divider,
-                 enabled: enabled,
                  index: index,
                  last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
                  child: tile,
@@ -175,13 +182,24 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
 
   @override
   Widget build(BuildContext context) {
-    final data = FTileGroupData.maybeOf(context);
-    final inheritedStyle = data?.style ?? context.theme.tileGroupStyle;
+    final data = FItemContainerData.maybeOf(context);
+    final inheritedStyle = _GroupStyle.maybeOf(context)?.style ?? context.theme.tileGroupStyle;
     final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
     final enabled = this.enabled ?? data?.enabled ?? true;
 
-    final sliver = SliverList(delegate: _delegate(style, enabled));
-    return data == null ? _label(context, style, data == null, enabled, [sliver]) : sliver;
+    Widget sliver = SliverList(delegate: _delegate(style));
+    if (data == null || this.style != null || (this.enabled != null && this.enabled != data.enabled)) {
+      sliver = FItemContainerData(
+        dividerStyle: style.dividerStyle,
+        divider: data?.divider ?? FItemDivider.none,
+        enabled: enabled,
+        index: data?.index ?? 0,
+        length: data?.length ?? 1,
+        child: sliver,
+      );
+    }
+
+    return data == null ? _label(context, style, data == null, enabled, _scrollView([sliver])) : sliver;
   }
 }
 
@@ -241,8 +259,8 @@ abstract class _Group extends StatelessWidget {
   /// The divider between tiles.
   /// {@endtemplate}
   ///
-  /// Defaults to [FTileDivider.indented].
-  final FTileDivider divider;
+  /// Defaults to [FItemDivider.indented].
+  final FItemDivider divider;
 
   /// True if the group is enabled. Defaults to true.
   final bool? enabled;
@@ -275,7 +293,7 @@ abstract class _Group extends StatelessWidget {
     this.dragStartBehavior = DragStartBehavior.start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
-    this.divider = FTileDivider.indented,
+    this.divider = FItemDivider.indented,
     this.semanticsLabel,
     this.label,
     this.description,
@@ -283,7 +301,7 @@ abstract class _Group extends StatelessWidget {
     super.key,
   });
 
-  Widget _label(BuildContext context, FTileGroupStyle style, bool root, bool enabled, List<Widget> slivers) => FLabel(
+  Widget _label(BuildContext context, FTileGroupStyle style, bool root, bool enabled, Widget child) => FLabel(
     style: style,
     axis: Axis.vertical,
     states: {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error},
@@ -299,20 +317,19 @@ abstract class _Group extends StatelessWidget {
         // ignore: use_decorated_box
         child: Container(
           decoration: root ? BoxDecoration(border: style.border, borderRadius: style.borderRadius) : null,
-          child: ClipRRect(
-            borderRadius: style.borderRadius,
-            child: CustomScrollView(
-              controller: scrollController,
-              cacheExtent: cacheExtent,
-              dragStartBehavior: dragStartBehavior,
-              shrinkWrap: true,
-              physics: physics,
-              slivers: slivers,
-            ),
-          ),
+          child: ClipRRect(borderRadius: style.borderRadius, child: child),
         ),
       ),
     ),
+  );
+
+  Widget _scrollView(List<Widget> slivers) => CustomScrollView(
+    controller: scrollController,
+    cacheExtent: cacheExtent,
+    dragStartBehavior: dragStartBehavior,
+    shrinkWrap: true,
+    physics: physics,
+    slivers: slivers,
   );
 
   @override
@@ -331,6 +348,23 @@ abstract class _Group extends StatelessWidget {
   }
 }
 
+class _GroupStyle extends InheritedWidget {
+  static _GroupStyle? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<_GroupStyle>();
+
+  final FTileGroupStyle style;
+
+  const _GroupStyle({required this.style, required super.child});
+
+  @override
+  bool updateShouldNotify(_GroupStyle old) => style != old.style;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
+  }
+}
+
 /// A [FTileGroup]'s style.
 class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   /// The group's border.
@@ -344,20 +378,20 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   @override
   final BorderRadiusGeometry borderRadius;
 
-  /// The untappable tile's style.
+  /// The tile's style.
   @override
-  final FTileStyle untappableTileStyle;
+  final FTileStyle tileStyle;
 
-  /// The tappable tile's style.
+  /// The tile's divider.
   @override
-  final FTileStyle tappableTileStyle;
+  final FWidgetStateMap<FDividerStyle> dividerStyle;
 
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
     required this.border,
     required this.borderRadius,
-    required this.untappableTileStyle,
-    required this.tappableTileStyle,
+    required this.tileStyle,
+    required this.dividerStyle,
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
@@ -369,58 +403,24 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
   factory FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
-    final dividerStyle = FWidgetStateMap.all(
-      FDividerStyle(color: colors.border, width: style.borderWidth, padding: EdgeInsets.zero),
-    );
-    final tappableStyle = style.tappableStyle.copyWith(
-      bounceTween: FTappableStyle.noBounceTween,
-      pressedEnterDuration: Duration.zero,
-      pressedExitDuration: const Duration(milliseconds: 25),
-    );
-
+    final tileStyle = FTileStyle.inherit(colors: colors, typography: typography, style: style);
     return FTileGroupStyle(
       border: Border.all(color: colors.border, width: style.borderWidth),
       borderRadius: style.borderRadius,
-      untappableTileStyle: FTileStyle(
-        decoration: FWidgetStateMap({
-          WidgetState.disabled: BoxDecoration(
-            color: colors.disable(colors.secondary),
-            border: Border.all(color: colors.border),
-            borderRadius: style.borderRadius,
+      tileStyle: tileStyle.copyWith(
+        decoration: tileStyle.decoration.map(
+          (d) => BoxDecoration(
+            color: d.color,
+            image: d.image,
+            boxShadow: d.boxShadow,
+            gradient: d.gradient,
+            backgroundBlendMode: d.backgroundBlendMode,
+            shape: d.shape,
           ),
-          WidgetState.any: BoxDecoration(
-            color: colors.background,
-            border: Border.all(color: colors.border),
-            borderRadius: style.borderRadius,
-          ),
-        }),
-        dividerStyle: dividerStyle,
-        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
-        tappableStyle: tappableStyle,
-        focusedOutlineStyle: style.focusedOutlineStyle,
+        ),
       ),
-      tappableTileStyle: FTileStyle(
-        decoration: FWidgetStateMap({
-          WidgetState.disabled: BoxDecoration(
-            color: colors.disable(colors.secondary),
-            border: Border.all(color: colors.border),
-            borderRadius: style.borderRadius,
-          ),
-          WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-            color: colors.secondary,
-            border: Border.all(color: colors.border),
-            borderRadius: style.borderRadius,
-          ),
-          WidgetState.any: BoxDecoration(
-            color: colors.background,
-            border: Border.all(color: colors.border),
-            borderRadius: style.borderRadius,
-          ),
-        }),
-        dividerStyle: dividerStyle,
-        contentStyle: FTileContentStyle.inherit(colors: colors, typography: typography),
-        tappableStyle: tappableStyle,
-        focusedOutlineStyle: style.focusedOutlineStyle,
+      dividerStyle: FWidgetStateMap.all(
+        FDividerStyle(color: colors.border, width: style.borderWidth, padding: EdgeInsets.zero),
       ),
       labelTextStyle: FWidgetStateMap({
         WidgetState.error: typography.base.copyWith(

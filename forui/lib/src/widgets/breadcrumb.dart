@@ -121,7 +121,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     double? cacheExtent,
     double maxHeight,
     DragStartBehavior dragStartBehavior,
-    FTileDivider divider,
+    FItemDivider divider,
     AlignmentGeometry menuAnchor,
     AlignmentGeometry childAnchor,
     FPortalSpacing spacing,
@@ -200,7 +200,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final double? cacheExtent;
   final double maxHeight;
   final DragStartBehavior dragStartBehavior;
-  final FTileDivider divider;
+  final FItemDivider divider;
   final AlignmentGeometry menuAnchor;
   final AlignmentGeometry childAnchor;
   final FPortalSpacing spacing;
@@ -223,7 +223,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FTileDivider.full,
+    this.divider = FItemDivider.full,
     this.menuAnchor = Alignment.topLeft,
     this.childAnchor = Alignment.bottomLeft,
     this.spacing = const FPortalSpacing(4),

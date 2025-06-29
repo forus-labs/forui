@@ -146,7 +146,7 @@ void main() {
     });
 
     for (final theme in TestScaffold.themes) {
-      for (final divider in FTileDivider.values) {
+      for (final divider in FItemDivider.values) {
         testWidgets('enabled - ${theme.name} - $divider', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -536,7 +536,7 @@ void main() {
                 onPress: () {},
               ),
               FTile(
-                style: FThemes.blue.dark.tileGroupStyle.untappableTileStyle,
+                style: FThemes.blue.dark.tileGroupStyle.tileStyle,
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),

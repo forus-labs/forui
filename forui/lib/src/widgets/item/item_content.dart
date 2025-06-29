@@ -8,13 +8,13 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 
-part 'tile_content.style.dart';
+part 'item_content.style.dart';
 
 @internal
-class FTileContent extends StatelessWidget {
-  final FTileContentStyle style;
-  final FWidgetStateMap<FDividerStyle> dividerStyle;
-  final FTileDivider dividerType;
+class FItemContent extends StatelessWidget {
+  final FItemContentStyle style;
+  final FWidgetStateMap<FDividerStyle>? dividerStyle;
+  final FItemDivider dividerType;
   final Set<WidgetState> states;
   final Widget? prefix;
   final Widget title;
@@ -22,7 +22,7 @@ class FTileContent extends StatelessWidget {
   final Widget? details;
   final Widget? suffix;
 
-  const FTileContent({
+  const FItemContent({
     required this.style,
     required this.dividerStyle,
     required this.dividerType,
@@ -33,10 +33,14 @@ class FTileContent extends StatelessWidget {
     required this.details,
     required this.suffix,
     super.key,
-  });
+  }) : assert(
+         dividerStyle != null || dividerType == FItemDivider.none,
+         "dividerStyle must be provided if dividerType is not FItemDivider.none. This is a bug unless you're creating your "
+         'own custom item container.',
+       );
 
   @override
-  Widget build(BuildContext context) => _TileContent(
+  Widget build(BuildContext context) => _ItemContent(
     style: style,
     dividerType: dividerType,
     children: [
@@ -96,7 +100,7 @@ class FTileContent extends StatelessWidget {
         )
       else
         const SizedBox(),
-      if (dividerType == FTileDivider.none) const SizedBox() else FDivider(style: dividerStyle.resolve(states)),
+      if (dividerType == FItemDivider.none) const SizedBox() else FDivider(style: dividerStyle!.resolve(states)),
     ],
   );
 
@@ -111,18 +115,18 @@ class FTileContent extends StatelessWidget {
   }
 }
 
-class _TileContent extends MultiChildRenderObjectWidget {
-  final FTileContentStyle style;
-  final FTileDivider dividerType;
+class _ItemContent extends MultiChildRenderObjectWidget {
+  final FItemContentStyle style;
+  final FItemDivider dividerType;
 
-  const _TileContent({required this.style, required this.dividerType, super.children});
+  const _ItemContent({required this.style, required this.dividerType, super.children});
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
-      _RenderTileContent(style, dividerType, Directionality.maybeOf(context) ?? TextDirection.ltr);
+      _RenderItemContent(style, dividerType, Directionality.maybeOf(context) ?? TextDirection.ltr);
 
   @override
-  void updateRenderObject(BuildContext context, covariant _RenderTileContent content) {
+  void updateRenderObject(BuildContext context, covariant _RenderItemContent content) {
     content
       ..style = style
       ..dividerType = dividerType
@@ -138,13 +142,13 @@ class _TileContent extends MultiChildRenderObjectWidget {
   }
 }
 
-class _RenderTileContent extends RenderBox
+class _RenderItemContent extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
-  FTileContentStyle _style;
-  FTileDivider _dividerType;
+  FItemContentStyle _style;
+  FItemDivider _dividerType;
   TextDirection _textDirection;
 
-  _RenderTileContent(this._style, this._dividerType, this._textDirection);
+  _RenderItemContent(this._style, this._dividerType, this._textDirection);
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();
@@ -176,10 +180,10 @@ class _RenderTileContent extends RenderBox
 
     // Layout divider based on the type.
     switch (_dividerType) {
-      case FTileDivider.none || FTileDivider.full:
+      case FItemDivider.none || FItemDivider.full:
         divider.layout(constraints.loosen(), parentUsesSize: true);
 
-      case FTileDivider.indented:
+      case FItemDivider.indented:
         final spacing = _textDirection == TextDirection.ltr ? left : right;
         final width = constraints.maxWidth - spacing - prefix.size.width;
         divider.layout(constraints.loosen().copyWith(maxWidth: width), parentUsesSize: true);
@@ -202,7 +206,7 @@ class _RenderTileContent extends RenderBox
     r.data.offset = Offset(constraints.maxWidth - right - r.size.width, top + (height - r.size.height) / 2);
 
     divider.data.offset = Offset(
-      textDirection == TextDirection.ltr && _dividerType == FTileDivider.indented ? left + prefix.size.width : 0,
+      textDirection == TextDirection.ltr && _dividerType == FItemDivider.indented ? left + prefix.size.width : 0,
       top + height + bottom - divider.size.height,
     );
   }
@@ -223,18 +227,18 @@ class _RenderTileContent extends RenderBox
       ..add(EnumProperty('textDirection', textDirection));
   }
 
-  FTileContentStyle get style => _style;
+  FItemContentStyle get style => _style;
 
-  set style(FTileContentStyle value) {
+  set style(FItemContentStyle value) {
     if (_style != value) {
       _style = value;
       markNeedsLayout();
     }
   }
 
-  FTileDivider get dividerType => _dividerType;
+  FItemDivider get dividerType => _dividerType;
 
-  set dividerType(FTileDivider value) {
+  set dividerType(FItemDivider value) {
     if (_dividerType != value) {
       _dividerType = value;
       markNeedsLayout();
@@ -251,8 +255,8 @@ class _RenderTileContent extends RenderBox
   }
 }
 
-/// A [FTile] content's style.
-class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions {
+/// An [FItem] content's style.
+class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   /// The content's padding. Defaults to `EdgeInsetsDirectional.only(15, 13, 10, 13)`.
   @override
   final EdgeInsetsGeometry padding;
@@ -305,8 +309,8 @@ class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions {
   @override
   final double suffixIconSpacing;
 
-  /// Creates a [FTileContentStyle].
-  FTileContentStyle({
+  /// Creates a [FItemContentStyle].
+  FItemContentStyle({
     required this.prefixIconStyle,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
@@ -322,8 +326,8 @@ class FTileContentStyle with Diagnosticable, _$FTileContentStyleFunctions {
        assert(0 <= middleSpacing, 'middleSpacing must be non-negative.'),
        assert(0 <= suffixIconSpacing, 'suffixIconSpacing must be non-negative.');
 
-  /// Creates a [FTileContentStyle] that inherits its properties.
-  FTileContentStyle.inherit({required FColors colors, required FTypography typography})
+  /// Creates a [FItemContentStyle] that inherits its properties.
+  FItemContentStyle.inherit({required FColors colors, required FTypography typography})
     : this(
         prefixIconStyle: FWidgetStateMap({
           WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),

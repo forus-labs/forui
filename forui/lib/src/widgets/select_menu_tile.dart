@@ -21,7 +21,7 @@ typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select menu tile's appearance.
-class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldProperties<Set<T>> {
+class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldProperties<Set<T>> {
   static Widget _builder<T>(BuildContext _, Set<dynamic>? _, Widget? child) => child ?? const SizedBox();
 
   /// The controller that controls the selected tiles. Defaults to `FSelectMenuTileController.radio`.
@@ -63,8 +63,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// ```
   final FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style;
 
-  /// The divider between select tiles. Defaults to [FTileDivider.indented].
-  final FTileDivider divider;
+  /// The divider between select tiles. Defaults to [FItemDivider.indented].
+  final FItemDivider divider;
 
   /// The point on the menu (floating content) that connects with the tile at the tile's anchor.
   ///
@@ -168,7 +168,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.physics = const ClampingScrollPhysics(),
-    this.divider = FTileDivider.full,
+    this.divider = FItemDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
     this.spacing = const FPortalSpacing(4),
@@ -210,18 +210,14 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State<T>;
-           final groupData = FTileGroupData.maybeOf(state.context);
-           final tileData = FTileGroupItemData.maybeOf(state.context);
+           final groupData = FItemContainerData.maybeOf(state.context);
+           final tileData = FItemContainerItemData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
            final selectMenuTileStyle = style?.call(global);
 
            final menuStyle = selectMenuTileStyle?.menuStyle ?? global.menuStyle;
-           final tileStyle =
-               selectMenuTileStyle?.tileStyle ??
-               tileData?.style.tappableTileStyle ??
-               groupData?.style.tappableTileStyle ??
-               global.tileStyle;
+           final tileStyle = selectMenuTileStyle?.tileStyle ?? tileData?.style ?? global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -301,7 +297,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuBuilder] is called for each tile that should be built. [FTileGroupItemData] is **not** visible to
+  /// The [menuBuilder] is called for each tile that should be built. [FItemContainerItemData] is **not** visible to
   /// `menuTileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -329,7 +325,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.physics = const ClampingScrollPhysics(),
-    this.divider = FTileDivider.full,
+    this.divider = FItemDivider.full,
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
     this.spacing = const FPortalSpacing(4),
@@ -371,18 +367,14 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State<T>;
-           final groupData = FTileGroupData.maybeOf(state.context);
-           final tileData = FTileGroupItemData.maybeOf(state.context);
+           final groupData = FItemContainerData.maybeOf(state.context);
+           final tileData = FItemContainerItemData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
            final selectMenuTileStyle = style?.call(global);
 
            final menuStyle = selectMenuTileStyle?.menuStyle ?? global.menuStyle;
-           final tileStyle =
-               selectMenuTileStyle?.tileStyle ??
-               tileData?.style.tappableTileStyle ??
-               groupData?.style.tappableTileStyle ??
-               global.tileStyle;
+           final tileStyle = selectMenuTileStyle?.tileStyle ?? tileData?.style ?? global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -691,7 +683,7 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
     final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography);
     return FSelectMenuTileStyle(
       menuStyle: FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
-      tileStyle: groupStyle.tappableTileStyle,
+      tileStyle: FTileStyle.inherit(colors: colors, typography: typography, style: style),
       labelTextStyle: groupStyle.labelTextStyle,
       descriptionTextStyle: groupStyle.descriptionTextStyle,
       errorTextStyle: groupStyle.errorTextStyle,

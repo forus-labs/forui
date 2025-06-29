@@ -11,7 +11,7 @@ import 'package:forui/forui.dart';
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
 /// * [FSelectTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a select tile's appearance.
-class FSelectTile<T> extends StatelessWidget with FTileMixin {
+class FSelectTile<T> extends StatelessWidget with FItemMixin {
   /// The style.
   ///
   /// ## CLI
@@ -20,7 +20,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// ```shell
   /// dart run forui style create tile
   /// ```
-  final FTileStyle Function(FTileStyle)? style;
+  final FItemStyle Function(FItemStyle)? style;
 
   /// The checked icon. Defaults to `FIcon(FIcons.check)`.
   final Widget? checkedIcon;
@@ -110,25 +110,21 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   @override
   Widget build(BuildContext context) {
     final FSelectTileData(:controller, :selected) = FSelectTileData.of<T>(context);
-    final prefix = switch ((_suffix, selected)) {
-      (true, _) => _icon,
-      (false, true) => checkedIcon,
-      (false, false) => uncheckedIcon,
-    };
-
-    final suffix = switch ((_suffix, selected)) {
-      (false, _) => _icon,
-      (true, true) => checkedIcon,
-      (true, false) => uncheckedIcon,
-    };
-
     return FTile(
-      prefix: prefix,
+      style: style,
+      prefix: switch ((_suffix, selected)) {
+        (true, _) => _icon,
+        (false, true) => checkedIcon,
+        (false, false) => uncheckedIcon,
+      },
       title: title,
       subtitle: subtitle,
       details: details,
-      suffix: suffix,
-      style: style,
+      suffix: switch ((_suffix, selected)) {
+        (false, _) => _icon,
+        (true, true) => checkedIcon,
+        (true, false) => uncheckedIcon,
+      },
       semanticsLabel: semanticsLabel,
       enabled: enabled,
       selected: selected,
@@ -157,7 +153,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
 }
 
 @internal
-class FSelectTileData<T> extends InheritedWidget with FTileMixin {
+class FSelectTileData<T> extends InheritedWidget with FItemMixin {
   static FSelectTileData<T> of<T>(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>();
     assert(

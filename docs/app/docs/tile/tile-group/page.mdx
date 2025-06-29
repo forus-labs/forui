@@ -64,7 +64,7 @@ FTileGroup(
   label: const Text('Settings'),
   description: const Text('Personalize your experience'),
   semanticsLabel: 'Settings',
-  divider: FTileDivider.indented,
+  divider: FItemDivider.indented,
   children: [],
 );
 ```
@@ -82,7 +82,7 @@ FTileGroup.builder(
   label: const Text('Settings'),
   description: const Text('Personalize your experience'),
   semanticsLabel: 'Settings',
-  divider: FTileDivider.indented,
+  divider: FItemDivider.indented,
   tileBuilder: (context, index) => index < 10 ? FTile(title: Text('Tile $index')) : null,
   count: 100,
 );
@@ -99,7 +99,7 @@ FTileGroup.merge(
   physics: const ClampingScrollPhysics(),
   label: const Text('Settings'),
   semanticsLabel: 'Settings',
-  divider: FTileDivider.indented,
+  divider: FItemDivider.indented,
   children: [],
 );
 ```
@@ -241,7 +241,7 @@ several sections.
     ```dart {3} copy
     FTileGroup(
       label: const Text('Settings'),
-      divider: FTileDivider.full,
+      divider: FItemDivider.full,
       children: [
         FTile(
           prefix: Icon(FIcons.user),
@@ -272,7 +272,7 @@ several sections.
     ```dart {3} copy
     FTileGroup(
       label: const Text('Settings'),
-      divider: FTileDivider.none,
+      divider: FItemDivider.none,
       children: [
         FTile(
           prefix: Icon(FIcons.user),

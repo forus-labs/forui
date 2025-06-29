@@ -110,7 +110,7 @@ void main() {
     });
 
     for (final theme in TestScaffold.themes) {
-      for (final divider in FTileDivider.values) {
+      for (final divider in FItemDivider.values) {
         testWidgets('enabled - ${theme.name} - $divider', (tester) async {
           await tester.pumpWidget(
             TestScaffold(
@@ -343,7 +343,7 @@ void main() {
                 value: 1,
               ),
               FSelectTile(
-                style: FThemes.blue.dark.tileGroupStyle.tappableTileStyle,
+                style: FThemes.blue.dark.tileGroupStyle.tileStyle,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
                 details: const Text('FL (5G)'),

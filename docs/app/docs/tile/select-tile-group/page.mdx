@@ -74,7 +74,7 @@ FSelectTileGroup<Value>(
   physics: const ClampingScrollPhysics(),
   label: const Text('Sidebar'),
   description: const Text('Select the items you want to display in the sidebar.'),
-  divider: FTileDivider.indented,
+  divider: FItemDivider.indented,
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
   children: [
@@ -100,7 +100,7 @@ FSelectTileGroup<Value>.builder(
   label: const Text('Settings'),
   description: const Text('Personalize your experience'),
   semanticsLabel: 'Settings',
-  divider: FTileDivider.indented,
+  divider: FItemDivider.indented,
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
   tileBuilder: (context, index) => index < 10 ? FSelectTile(
@@ -356,7 +356,7 @@ FSelectTileGroup<Value>.builder(
 
     FSelectTileGroup<Sidebar>(
       selectController: FSelectTileGroupController(values: {Sidebar.recents}),
-      divider: FTileDivider.full,
+      divider: FItemDivider.full,
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [
@@ -394,7 +394,7 @@ FSelectTileGroup<Value>.builder(
 
     FSelectTileGroup<Sidebar>(
       selectController: FSelectTileGroupController(values: {Sidebar.recents}),
-      divider: FTileDivider.none,
+      divider: FItemDivider.none,
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [

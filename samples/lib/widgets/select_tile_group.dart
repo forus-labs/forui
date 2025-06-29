@@ -13,13 +13,13 @@ enum Notification { all, direct, nothing }
 
 @RoutePage()
 class SelectTileGroupPage extends StatefulSample {
-  final FTileDivider divider;
+  final FItemDivider divider;
 
   SelectTileGroupPage({@queryParam super.theme, @queryParam String divider = 'indented'})
     : divider = switch (divider) {
-        'indented' => FTileDivider.indented,
-        'none' => FTileDivider.none,
-        _ => FTileDivider.full,
+        'indented' => FItemDivider.indented,
+        'none' => FItemDivider.none,
+        _ => FItemDivider.full,
       };
 
   @override

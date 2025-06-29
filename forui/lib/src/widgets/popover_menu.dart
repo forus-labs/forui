@@ -18,10 +18,10 @@ part 'popover_menu.style.dart';
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
 class FPopoverMenu extends StatelessWidget {
-  static List<FTileGroupMixin<FTileMixin>> _menuBuilder(
+  static List<FTileGroupMixin<FItemMixin>> _menuBuilder(
     BuildContext context,
     FPopoverController controller,
-    List<FTileGroupMixin<FTileMixin>>? menu,
+    List<FTileGroupMixin<FItemMixin>>? menu,
   ) => menu!;
 
   static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
@@ -53,8 +53,8 @@ class FPopoverMenu extends StatelessWidget {
 
   /// {@macro forui.widgets.FTileGroup.divider}
   ///
-  /// Defaults to [FTileDivider.full].
-  final FTileDivider divider;
+  /// Defaults to [FItemDivider.full].
+  final FItemDivider divider;
 
   /// The point on the menu (floating content) that connects with the child at the child's anchor.
   ///
@@ -113,13 +113,13 @@ class FPopoverMenu extends StatelessWidget {
   /// Can incorporate a value-independent widget subtree from the [menu] into the returned widget tree.
   ///
   /// This can be null if the entire widget subtree the [menuBuilder] builds doest not require the controller.
-  final List<FTileGroupMixin<FTileMixin>> Function(BuildContext, FPopoverController, List<FTileGroupMixin<FTileMixin>>?)
+  final List<FTileGroupMixin<FItemMixin>> Function(BuildContext, FPopoverController, List<FTileGroupMixin<FItemMixin>>?)
   menuBuilder;
 
   /// The menu.
   ///
   /// Passed to [menuBuilder] if provided.
-  final List<FTileGroupMixin<FTileMixin>>? menu;
+  final List<FTileGroupMixin<FItemMixin>>? menu;
 
   /// {@macro forui.widgets.FPopover.builder}
   final ValueWidgetBuilder<FPopoverController> builder;
@@ -142,7 +142,7 @@ class FPopoverMenu extends StatelessWidget {
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FTileDivider.full,
+    this.divider = FItemDivider.full,
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.spacing = const FPortalSpacing(4),
