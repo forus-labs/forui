@@ -409,7 +409,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
       borderRadius: style.borderRadius,
       tileStyle: tileStyle.copyWith(
         decoration: tileStyle.decoration.map(
-          (d) => BoxDecoration(
+          (d) => d == null ? null : BoxDecoration(
             color: d.color,
             image: d.image,
             boxShadow: d.boxShadow,

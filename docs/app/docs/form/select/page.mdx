@@ -215,6 +215,45 @@ FSelect<User>.searchFromMap(
 
 ## Examples
 
+### Detailed
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select' variant='detailed' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class DetailedSelectPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FSelect<String>(
+        hint: 'Type',
+        format: (s) => s,
+        children: [
+          FSelectItem.from(
+            prefix: const Icon(FIcons.bug),
+            title: const Text('Bug'),
+            subtitle: const Text('An unexpected problem or behavior'),
+            value: 'Bug',
+          ),
+          FSelectItem.from(
+            prefix: const Icon(FIcons.filePlus2),
+            title: const Text('Feature'),
+            subtitle: const Text('A new feature or enhancement'),
+            value: 'Feature',
+          ),
+          FSelectItem.from(
+            prefix: const Icon(FIcons.messageCircleQuestion),
+            title: const Text('Question'),
+            subtitle: const Text('A question or clarification'),
+            value: 'Question',
+          ),
+        ],
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 ### Sections
 
 <Tabs items={['Preview', 'Code']}>

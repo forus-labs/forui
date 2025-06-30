@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -138,6 +137,8 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 
 /// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].
 class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
+  static Widget? _defaultSuffixBuilder(BuildContext _, bool selected) => selected ? const Icon(FIcons.check) : null;
+
   /// The style. Defaults to the [FSelectItemStyle] inherited from the parent [FSelectSection] or [FSelect].
   ///
   /// ## CLI
@@ -156,23 +157,32 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// Defaults to the value inherited from the parent [FSelectSection] or [FSelect].
   final bool? enabled;
 
+  /// A prefix.
+  final Widget? prefix;
+
+  /// The subtitle.
+  final Widget? subtitle;
+
   /// The child.
-  final Widget child;
+  final Widget title;
 
   /// The icon displayed when the item is selected. Defaults to a check icon.
-  final Widget selectedIcon;
+  // ignore: avoid_positional_boolean_parameters
+  final Widget? Function(BuildContext, bool) suffixBuilder;
 
   /// Creates a [FSelectItem].
   FSelectItem(String text, T value, {bool? enabled, Key? key})
-    : this.from(key: key, value: value, enabled: enabled, child: Text(text));
+    : this.from(key: key, value: value, enabled: enabled, title: Text(text));
 
   /// Creates a [FSelectItem] with a custom child widget.
   FSelectItem.from({
     required this.value,
-    required this.child,
+    required this.title,
     this.style,
     this.enabled,
-    this.selectedIcon = const Icon(FIcons.check),
+    this.prefix,
+    this.subtitle,
+    this.suffixBuilder = _defaultSuffixBuilder,
     super.key,
   });
 
@@ -185,7 +195,8 @@ class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('value', value))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder));
   }
 }
 
@@ -214,46 +225,40 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
     final SelectControllerData(:contains, :onPress) = SelectControllerData.of<T>(context);
     final content = SelectContentData.of<T>(context);
 
-    final selected = contains(widget.value);
     final enabled = widget.enabled ?? content.enabled;
+    final selected = contains(widget.value);
     final style = widget.style?.call(content.style.itemStyle) ?? content.style.itemStyle;
-    final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
 
-    Widget item = FTappable(
-      style: style.tappableStyle,
+    return FItem(
+      style: FItemStyle(
+        decoration: style.decoration,
+        margin: style.margin,
+        contentStyle: FItemContentStyle.inherit(colors: context.theme.colors, typography: context.theme.typography)
+            .copyWith(
+              padding: style.padding,
+              prefixIconStyle: style.prefixIconStyle,
+              prefixIconSpacing: style.prefixIconSpacing,
+              titleTextStyle: style.titleTextStyle,
+              titleSpacing: style.titleSpacing,
+              subtitleTextStyle: style.subtitleTextStyle,
+              suffixIconStyle: style.suffixIconStyle,
+            ),
+        rawItemContentStyle: context.theme.itemStyle.rawItemContentStyle,
+        // This isn't ever used.
+        tappableStyle: style.tappableStyle,
+        focusedOutlineStyle: null,
+      ),
+      enabled: enabled,
+      selected: selected,
       autofocus: selected || content.first,
       focusNode: _focus,
-      behavior: HitTestBehavior.opaque,
-      selected: selected,
-      onPress: enabled ? () => onPress(widget.value) : null,
-      builder: (_, states, _) {
-        final child = Semantics(
-          selected: selected,
-          child: Padding(
-            padding: padding.copyWith(left: padding.left - 4, right: padding.right - 4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                DefaultTextStyle(style: style.textStyle.resolve(states), child: widget.child),
-                if (selected) IconTheme(data: style.iconStyle.resolve(states), child: widget.selectedIcon),
-              ],
-            ),
-          ),
-        );
-
-        if (style.decoration.resolve(states) case final decoration?) {
-          return DecoratedBox(decoration: decoration, child: child);
-        }
-
-        return child;
-      },
+      onPress: () => onPress(widget.value),
+      onHoverChange: (hover) => hover ? _focus.requestFocus() : _focus.unfocus(),
+      prefix: widget.prefix,
+      title: widget.title,
+      subtitle: widget.subtitle,
+      suffix: widget.suffixBuilder(context, selected),
     );
-
-    if (enabled) {
-      item = MouseRegion(onEnter: (_) => _focus.requestFocus(), onExit: (_) => _focus.unfocus(), child: item);
-    }
-
-    return Padding(padding: const EdgeInsetsDirectional.only(start: 4, end: 4), child: item);
   }
 
   @override
@@ -265,6 +270,10 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
 /// A [FSelectItem]'s style.
 class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
+  /// The margin around the image. Defaults to `EdgeInsets.symmetric(horizontal: 4)`.
+  @override
+  final EdgeInsetsGeometry margin;
+
   /// The padding around the item. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
   final EdgeInsetsGeometry padding;
@@ -275,17 +284,37 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   @override
   final FWidgetStateMap<BoxDecoration?> decoration;
 
-  /// The default text style for the child.
+  /// The icon style for an item's prefix.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<TextStyle> textStyle;
+  final FWidgetStateMap<IconThemeData> prefixIconStyle;
 
-  /// The icon style for a checked item.
+  // The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
+  @override
+  final double prefixIconSpacing;
+
+  /// The default text style for the title.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<IconThemeData> iconStyle;
+  final FWidgetStateMap<TextStyle> titleTextStyle;
+
+  /// The vertical spacing between the title and the subtitle. Defaults to 4.
+  @override
+  final double titleSpacing;
+
+  /// The default text style for the subtitle.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  @override
+  final FWidgetStateMap<TextStyle> subtitleTextStyle;
+
+  /// The icon style for an item's suffix.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  @override
+  final FWidgetStateMap<IconThemeData> suffixIconStyle;
 
   /// The tappable style for the item.
   @override
@@ -294,10 +323,15 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
   /// Creates a [FSelectItemStyle].
   FSelectItemStyle({
     required this.decoration,
-    required this.textStyle,
-    required this.iconStyle,
+    required this.prefixIconStyle,
+    required this.titleTextStyle,
+    required this.subtitleTextStyle,
+    required this.suffixIconStyle,
     required this.tappableStyle,
-    this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.margin = const EdgeInsets.symmetric(horizontal: 4),
+    this.padding = const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6),
+    this.prefixIconSpacing = 10,
+    this.titleSpacing = 4,
   });
 
   /// Creates a [FSelectItemStyle] that inherits its properties.
@@ -309,11 +343,19 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
             borderRadius: style.borderRadius,
           ),
         }),
-        textStyle: FWidgetStateMap({
+        prefixIconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
+          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
+        }),
+        titleTextStyle: FWidgetStateMap({
           WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
           WidgetState.any: typography.sm.copyWith(color: colors.primary),
         }),
-        iconStyle: FWidgetStateMap({
+        subtitleTextStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
+          WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
+        }),
+        suffixIconStyle: FWidgetStateMap({
           WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
           WidgetState.any: IconThemeData(color: colors.primary, size: 15),
         }),

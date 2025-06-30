@@ -111,7 +111,7 @@ class FItem extends StatelessWidget with FItemMixin {
          style: style.contentStyle,
          dividerStyle: dividerStyle,
          dividerType: divider,
-         padding: style.padding,
+         margin: style.margin,
          states: states,
          prefix: prefix,
          title: title,
@@ -149,7 +149,7 @@ class FItem extends StatelessWidget with FItemMixin {
          style: style.rawItemContentStyle,
          dividerStyle: dividerStyle,
          dividerType: divider,
-         padding: style.padding,
+         margin: style.margin,
          states: states,
          prefix: prefix,
          child: child,
@@ -171,16 +171,16 @@ class FItem extends StatelessWidget with FItemMixin {
     if (onPress == null && onLongPress == null) {
       final states = {if (!enabled) WidgetState.disabled};
       return Padding(
-        padding: style.padding,
+        padding: style.margin,
         child: DecoratedBox(
-          decoration: style.decoration.resolve(states),
+          decoration: style.decoration.resolve(states) ?? const BoxDecoration(),
           child: _builder(context, style, states, container.dividerStyle, divider),
         ),
       );
     }
 
     return Padding(
-      padding: style.padding,
+      padding: style.margin,
       child: FTappable(
         style: style.tappableStyle,
         semanticsLabel: semanticsLabel,
@@ -195,15 +195,15 @@ class FItem extends StatelessWidget with FItemMixin {
         builder: (context, states, _) => Stack(
           children: [
             DecoratedBox(
-              decoration: style.decoration.resolve(states),
+              decoration: style.decoration.maybeResolve(states) ?? const BoxDecoration(),
               child: _builder(context, style, states, container.dividerStyle, divider),
             ),
-            if (states.contains(WidgetState.focused))
+            if (style.focusedOutlineStyle case final outline? when states.contains(WidgetState.focused))
               Positioned.fill(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: Border.all(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
-                    borderRadius: style.focusedOutlineStyle.borderRadius,
+                    border: Border.all(color: outline.color, width: outline.width),
+                    borderRadius: outline.borderRadius,
                   ),
                 ),
               ),
@@ -246,11 +246,11 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   /// The supported states if the item is untappable:
   /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<BoxDecoration> decoration;
+  final FWidgetStateMap<BoxDecoration?> decoration;
 
-  /// The padding around the item. Defaults to `EdgeInsets.zero`.
+  /// The margin around the item. Defaults to `EdgeInsets.zero`.
   @override
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry margin;
 
   /// The default item content's style.
   @override
@@ -266,7 +266,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
 
   /// The focused outline style.
   @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  final FFocusedOutlineStyle? focusedOutlineStyle;
 
   /// Creates a [FItemStyle].
   FItemStyle({
@@ -275,7 +275,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     required this.rawItemContentStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.padding = EdgeInsets.zero,
+    this.margin = EdgeInsets.zero,
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.

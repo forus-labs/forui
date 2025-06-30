@@ -7,14 +7,14 @@ import 'package:meta/meta.dart';
 
 @internal
 class ItemContentLayout extends MultiChildRenderObjectWidget {
-  final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry padding;
   final FDividerStyle? dividerStyle;
   final FItemDivider dividerType;
 
   const ItemContentLayout({
-    required this.padding,
     required this.margin,
+    required this.padding,
     required this.dividerStyle,
     required this.dividerType,
     super.children,
@@ -25,8 +25,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
   RenderObject createRenderObject(BuildContext context) {
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     return _RenderItemContent(
-      padding.resolve(direction),
       margin.resolve(direction),
+      padding.resolve(direction),
       dividerStyle,
       dividerType,
       direction,
@@ -38,8 +38,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
   void updateRenderObject(BuildContext context, covariant _RenderItemContent content) {
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     content
-      ..padding = padding.resolve(direction)
       ..margin = margin.resolve(direction)
+      ..padding = padding.resolve(direction)
       ..dividerStyle = dividerStyle
       ..dividerType = dividerType
       ..textDirection = direction;
@@ -58,20 +58,20 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
 
 class _RenderItemContent extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
-  EdgeInsets _padding;
   EdgeInsets _margin;
+  EdgeInsets _padding;
   FDividerStyle? _dividerStyle;
   FItemDivider _dividerType;
   TextDirection _textDirection;
 
-  _RenderItemContent(this._padding, this._margin, this._dividerStyle, this._dividerType, this._textDirection);
+  _RenderItemContent(this._margin, this._padding, this._dividerStyle, this._dividerType, this._textDirection);
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();
 
   @override
   void performLayout() {
-    final EdgeInsets(:left, :top, :right, :bottom) = _margin;
+    final EdgeInsets(:left, :top, :right, :bottom) = _padding;
     final prefix = firstChild!;
     final column = childAfter(prefix)!;
     final details = childAfter(column)!;
@@ -117,9 +117,9 @@ class _RenderItemContent extends RenderBox
       return;
     }
 
-    final EdgeInsets(:left, :top, :right, :bottom) = _margin;
+    final EdgeInsets(:left, :top, :right, :bottom) = _padding;
     // We offset the divider by 0.5 to avoid a gap between the line and the tile below.
-    final y = offset.dy + size.height + _padding.vertical - _dividerStyle!.width + 0.5;
+    final y = offset.dy + size.height + _margin.vertical - _dividerStyle!.width + 0.5;
     final paint = Paint()
       ..isAntiAlias = false
       ..color = _dividerStyle!.color
@@ -132,20 +132,20 @@ class _RenderItemContent extends RenderBox
       if (_textDirection == TextDirection.ltr) {
         context.canvas.drawLine(
           Offset(offset.dx + spacing + prefix.size.width, y),
-          Offset(offset.dx + size.width + _padding.right, y),
+          Offset(offset.dx + size.width + _margin.right, y),
           paint,
         );
       } else {
         context.canvas.drawLine(
-          Offset(offset.dx - _padding.left, y),
+          Offset(offset.dx - _margin.left, y),
           Offset(offset.dx + size.width - spacing - prefix.size.width, y),
           paint,
         );
       }
     } else {
       context.canvas.drawLine(
-        Offset(offset.dx - _padding.left, y),
-        Offset(offset.dx + size.width + _padding.right, y),
+        Offset(offset.dx - _margin.left, y),
+        Offset(offset.dx + size.width + _margin.right, y),
         paint,
       );
     }
@@ -153,7 +153,7 @@ class _RenderItemContent extends RenderBox
 
   @override
   Rect get paintBounds =>
-      Offset(_padding.left, _padding.top) & Size(size.width + _padding.horizontal, size.height + _padding.vertical);
+      Offset(_margin.left, _margin.top) & Size(size.width + _margin.horizontal, size.height + _margin.vertical);
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
@@ -163,8 +163,8 @@ class _RenderItemContent extends RenderBox
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('margin', margin))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
       ..add(EnumProperty('dividerType', dividerType))
       ..add(EnumProperty('textDirection', textDirection));

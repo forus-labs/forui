@@ -39,6 +39,40 @@ class SelectPage extends Sample {
 }
 
 @RoutePage()
+class DetailedSelectPage extends Sample {
+  DetailedSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+
+  @override
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 15),
+    child: FSelect<String>(
+      hint: 'Type',
+      format: (s) => s,
+      children: [
+        FSelectItem.from(
+          prefix: const Icon(FIcons.bug),
+          title: const Text('Bug'),
+          subtitle: const Text('An unexpected problem or behavior'),
+          value: 'Bug',
+        ),
+        FSelectItem.from(
+          prefix: const Icon(FIcons.filePlus2),
+          title: const Text('Feature'),
+          subtitle: const Text('A new feature or enhancement'),
+          value: 'Feature',
+        ),
+        FSelectItem.from(
+          prefix: const Icon(FIcons.messageCircleQuestion),
+          title: const Text('Question'),
+          subtitle: const Text('A question or clarification'),
+          value: 'Question',
+        ),
+      ],
+    ),
+  );
+}
+
+@RoutePage()
 class SectionSelectPage extends Sample {
   SectionSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 

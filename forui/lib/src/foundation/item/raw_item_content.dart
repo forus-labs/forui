@@ -11,7 +11,7 @@ class RawItemContent extends StatelessWidget {
   final FRawItemContentStyle style;
   final FWidgetStateMap<FDividerStyle>? dividerStyle;
   final FItemDivider dividerType;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry margin;
   final Set<WidgetState> states;
   final Widget? prefix;
   final Widget child;
@@ -20,7 +20,7 @@ class RawItemContent extends StatelessWidget {
     required this.style,
     required this.dividerStyle,
     required this.dividerType,
-    required this.padding,
+    required this.margin,
     required this.states,
     required this.prefix,
     required this.child,
@@ -33,8 +33,8 @@ class RawItemContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ItemContentLayout(
-    padding: padding,
-    margin: style.padding,
+    margin: margin,
+    padding: style.padding,
     dividerStyle: dividerStyle?.resolve(states),
     dividerType: dividerType,
     children: [
@@ -63,7 +63,7 @@ class RawItemContent extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
       ..add(DiagnosticsProperty('dividerType', dividerType))
-      ..add(DiagnosticsProperty('padding', padding))
+      ..add(DiagnosticsProperty('margin', margin))
       ..add(IterableProperty('states', states));
   }
 }

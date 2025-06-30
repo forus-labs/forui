@@ -1,9 +1,13 @@
 ## 0.13.0 (Next)
+This update focuses on polishing & improving the usability of existing widgets.
 
 ### Animations
 We've updated the animations in Forui to feel more nature and be origin aware. This should make the animations feel more
 polished.
 
+### Blur & glassmorphic support
+We've updated most overlay widgets to support background blur & glassmorphic styles. This is disabled by default. It can
+be enabled by setting a `barrierFilter` & `backgroundFilter` in the widget's style.
 
 ### Styles
 We've updated styles to be easier to configure and use without the CLI. All widgets now accept a style builder function
@@ -107,8 +111,8 @@ FFCheckbox(
 
 
 ### `FItem` (new)
-An `FItem` is typically used to group related information together. It is a more generic version of `FTile` which is
-a specialized `FItem` for touch devices.
+An `FItem` is typically used to group related information together. It is a more generic version of `FTile` that is used
+to build more complex widgets.
 
 * Add `FItem`.
 * Add `FItemDivider`.
@@ -152,6 +156,23 @@ a specialized `FItem` for touch devices.
 * Change `FPortal.controller` to be optional.
 * **Breaking** Change `FPortal.portalBuilder`'s signature from `WidgetBuilder` to 
   `Widget Function(BuildContext, FPortalController)`.
+
+### `FSelect`
+We've updated `FSelectItem` to support prefixes & subtitles.
+
+* Add `FSelectItem.prefix`.
+* Add `FSelectItem.subtitle`.
+* Add `FSelectItemStyle.prefixIconStyle`.
+* Add `FSelectItemStyle.prefixIconSpacing`.
+* Add `FSelectItemStyle.titleSpacing`
+* Add `FSelectItemStyle.subtitleStyle`.
+
+* **Breaking** Rename `FSelectItem.child` to `FSelectItem.title`.
+* **Breaking** Rename `FSelectItemStyle.textStyle` to `FSelectItem.titleTextStyle`.
+* **Breaking** Rename `FSelectItemStyle.iconStyle` to `FSelectItem.suffixIconStyle`.
+
+* Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
+* Fix `FSelect.search(...)` expanding items unnecessarily.
 
 
 ### `FSelectMenuTile`
@@ -228,6 +249,8 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 
 
 ### `FToast`
+We've made toasts dismissable by swiping.
+
 * Add `swipeToDismiss` to `showFToast(...)`.
 * Add `swipeToDismiss` to `showRawFToast(...)`.
 * Add `FToastStyle.backgroundFilter`.
@@ -276,8 +299,6 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * **Breaking** Change `FSelectMenuTile.divider` from `FTileDivider` to `FItemDivider`.
 * **Breaking** Remove `FTransformable`.
 
-* Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
-* Fix `FSelect.search(...)` expanding items unnecessarily.
 * Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.
 * Fix `FTextFormField` not passing correct value to validator when no controller is provided.
 

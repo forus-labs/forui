@@ -101,6 +101,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/resizable/no-divider', page: NoDividerResizableRoute.page),
     AutoRoute(path: '/scaffold/default', page: ScaffoldRoute.page),
     AutoRoute(path: '/select/default', page: SelectRoute.page),
+    AutoRoute(path: '/select/detailed', page: DetailedSelectRoute.page),
     AutoRoute(path: '/select/section', page: SectionSelectRoute.page),
     AutoRoute(path: '/select/sync', page: SyncSelectRoute.page),
     AutoRoute(path: '/select/async', page: AsyncSelectRoute.page),

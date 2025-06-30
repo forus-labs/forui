@@ -209,7 +209,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
     required super.rawItemContentStyle,
     required super.tappableStyle,
     required super.focusedOutlineStyle,
-    super.padding,
+    super.margin,
   });
 
   /// Creates a [FTileStyle].

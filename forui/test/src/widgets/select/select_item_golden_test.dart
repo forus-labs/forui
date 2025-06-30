@@ -113,6 +113,32 @@ void main() {
     });
 
     group('FSelectItem - ${theme.name}', () {
+      testWidgets('has everything', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>(
+              key: key,
+              format: (s) => s,
+              children: [
+                FSelectItem.from(
+                  value: 'v',
+                  prefix: const Icon(FIcons.circle),
+                  title: const Text('Title'),
+                  subtitle: const Text('subtitle'),
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/everything.png'));
+      });
+
       testWidgets('selects item & ensure visible', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
