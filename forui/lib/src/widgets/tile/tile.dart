@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 part 'tile.style.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FTileGroup].
-mixin FTileMixin implements FItemMixin {}
+mixin FTileMixin on Widget {}
 
 /// A specialized [FItem] for touch devices.
 ///
@@ -84,8 +84,14 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The order is reversed for RTL locales.
   ///
   /// ## Overflow behavior
-  /// If the tile's content overflows and `details` is text, `details` will be truncated first. Otherwise, `title` and
-  /// `subtitle` will be truncated first.
+  /// [FTile] has custom layout behavior to handle overflow of its content. If [details] is text, it is truncated,
+  /// else [title] and [subtitle] are truncated.
+  ///
+  /// ## Why isn't my [title] [subtitle], or [details] rendered?
+  /// Using widgets that try to fill the available space, such as [Expanded] or [FTextField], as [details] will cause
+  /// the [title] and [subtitle] to never be rendered.
+  ///
+  /// Use [FTile.raw] in these cases.
   FTile({
     required Widget title,
     this.style,
@@ -121,6 +127,47 @@ class FTile extends StatelessWidget with FTileMixin {
          subtitle: subtitle,
          details: details,
          suffix: suffix,
+       );
+
+  /// Creates a [FTile] without custom layout behavior.
+  ///
+  /// Assuming LTR locale:
+  /// ```diagram
+  /// ----------------------------------------
+  /// | [prefix] [child]                     |
+  /// ----------------------------------------
+  /// ```
+  ///
+  /// The order is reversed for RTL locales.
+  FTile.raw({
+    required Widget child,
+    this.style,
+    this.enabled,
+    this.selected = false,
+    this.semanticsLabel,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    this.onHoverChange,
+    this.onStateChange,
+    this.onPress,
+    this.onLongPress,
+    Widget? prefix,
+    super.key,
+  }) : _child = FItem.raw(
+         style: style,
+         enabled: enabled,
+         selected: selected,
+         semanticsLabel: semanticsLabel,
+         autofocus: autofocus,
+         focusNode: focusNode,
+         onFocusChange: onFocusChange,
+         onHoverChange: onHoverChange,
+         onStateChange: onStateChange,
+         onPress: onPress,
+         onLongPress: onLongPress,
+         prefix: prefix,
+         child: child,
        );
 
   @override
@@ -159,37 +206,71 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   FTileStyle({
     required super.decoration,
     required super.contentStyle,
+    required super.rawItemContentStyle,
     required super.tappableStyle,
     required super.focusedOutlineStyle,
+    super.padding,
   });
 
   /// Creates a [FTileStyle].
-  FTileStyle.inherit({
-    required FColors colors, required FTypography typography, required FStyle style,
-  }): this(
-      decoration: FWidgetStateMap({
-        WidgetState.disabled: BoxDecoration(
-          color: colors.disable(colors.secondary),
-          border: Border.all(color: colors.border),
-          borderRadius: style.borderRadius,
+  FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        decoration: FWidgetStateMap({
+          WidgetState.disabled: BoxDecoration(
+            color: colors.disable(colors.secondary),
+            border: Border.all(color: colors.border),
+            borderRadius: style.borderRadius,
+          ),
+          WidgetState.hovered | WidgetState.pressed: BoxDecoration(
+            color: colors.secondary,
+            border: Border.all(color: colors.border),
+            borderRadius: style.borderRadius,
+          ),
+          WidgetState.any: BoxDecoration(
+            color: colors.background,
+            border: Border.all(color: colors.border),
+            borderRadius: style.borderRadius,
+          ),
+        }),
+        contentStyle: FItemContentStyle(
+          padding: const EdgeInsetsDirectional.fromSTEB(15, 13, 10, 13),
+          prefixIconStyle: FWidgetStateMap({
+            WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
+            WidgetState.any: IconThemeData(color: colors.primary, size: 18),
+          }),
+          titleTextStyle: FWidgetStateMap({
+            WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.primary)),
+            WidgetState.any: typography.base,
+          }),
+          subtitleTextStyle: FWidgetStateMap({
+            WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
+            WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
+          }),
+          detailsTextStyle: FWidgetStateMap({
+            WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.mutedForeground)),
+            WidgetState.any: typography.base.copyWith(color: colors.mutedForeground),
+          }),
+          suffixIconStyle: FWidgetStateMap({
+            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 18),
+            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
+          }),
         ),
-        WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-          color: colors.secondary,
-          border: Border.all(color: colors.border),
-          borderRadius: style.borderRadius,
+        rawItemContentStyle: FRawItemContentStyle(
+          padding: const EdgeInsetsDirectional.fromSTEB(15, 13, 10, 13),
+          prefixIconStyle: FWidgetStateMap({
+            WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
+            WidgetState.any: IconThemeData(color: colors.primary, size: 18),
+          }),
+          childTextStyle: FWidgetStateMap({
+            WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.primary)),
+            WidgetState.any: typography.base,
+          }),
         ),
-        WidgetState.any: BoxDecoration(
-          color: colors.background,
-          border: Border.all(color: colors.border),
-          borderRadius: style.borderRadius,
+        tappableStyle: style.tappableStyle.copyWith(
+          bounceTween: FTappableStyle.noBounceTween,
+          pressedEnterDuration: Duration.zero,
+          pressedExitDuration: const Duration(milliseconds: 25),
         ),
-      }),
-      contentStyle: FItemContentStyle.inherit(colors: colors, typography: typography),
-      tappableStyle: style.tappableStyle.copyWith(
-        bounceTween: FTappableStyle.noBounceTween,
-        pressedEnterDuration: Duration.zero,
-        pressedExitDuration: const Duration(milliseconds: 25),
-      ),
-      focusedOutlineStyle: style.focusedOutlineStyle
-  );
+        focusedOutlineStyle: style.focusedOutlineStyle,
+      );
 }

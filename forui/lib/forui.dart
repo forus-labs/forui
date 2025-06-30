@@ -20,7 +20,6 @@ export 'widgets/date_field.dart';
 export 'widgets/dialog.dart';
 export 'widgets/divider.dart';
 export 'widgets/header.dart';
-export 'widgets/item.dart';
 export 'widgets/label.dart';
 export 'widgets/line_calendar.dart';
 export 'widgets/pagination.dart';

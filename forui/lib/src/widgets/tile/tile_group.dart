@@ -11,7 +11,7 @@ part 'tile_group.style.dart';
 /// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [FTileGroup.merge].
 mixin FTileGroupMixin<T extends Widget> on Widget {}
 
-class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FItemMixin>> {
+class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
   final List<FTileGroupMixin> children;
 
   const _MergeTileGroups({
@@ -59,22 +59,22 @@ class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FItem
   }
 }
 
-/// A tile group that groups multiple [FItemMixin]s and [FTileGroupMixin]s together.
+/// A tile group that groups multiple [FTileMixin]s and [FTileGroupMixin]s together.
 ///
 /// Tiles grouped together will be separated by a divider, specified by [divider].
 ///
 /// See:
 /// * https://forui.dev/docs/tile/tile-group for working examples.
 /// * [FTileGroupStyle] for customizing a tile's appearance.
-class FTileGroup extends _Group with FTileGroupMixin<FItemMixin> {
+class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
   /// The delegate that builds the sliver children.
   final SliverChildDelegate Function(FTileGroupStyle) _delegate;
 
   /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
   ///
   /// All group labels will be ignored.
-  static FTileGroupMixin<FTileGroupMixin<FItemMixin>> merge({
-    required List<FTileGroupMixin<FItemMixin>> children,
+  static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
+    required List<FTileGroupMixin<FTileMixin>> children,
     FTileGroupStyle Function(FTileGroupStyle)? style,
     ScrollController? scrollController,
     double? cacheExtent,
@@ -107,7 +107,7 @@ class FTileGroup extends _Group with FTileGroupMixin<FItemMixin> {
 
   /// Creates a [FTileGroup].
   FTileGroup({
-    required List<FItemMixin> children,
+    required List<FTileMixin> children,
     super.style,
     super.scrollController,
     super.cacheExtent,

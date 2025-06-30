@@ -21,9 +21,16 @@ enum FItemDivider {
   /// |          ---------------- |
   /// | [title]                   | <- Item B
   /// -----------------------------
-  ///
-  /// // TODO: FItem.raw
   /// ```
+  ///
+  /// For [FItem.raw], the divider spans from the child's left edge to the item's right edge. It is always aligned to
+  /// the child of the item above the divider.
+  /// ```diagram
+  /// -----------------------------
+  /// | [prefix] [child]          | <- Item A
+  /// |          ---------------- |
+  /// | [child]                   | <- Item B
+  /// -----------------------------
   indented,
 
   /// No divider between items.
@@ -40,6 +47,8 @@ final class FItemContainerData extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType<FItemContainerData>();
 
   /// The divider's style.
+  ///
+  /// [FDividerStyle.padding] is ignored.
   final FWidgetStateMap<FDividerStyle>? dividerStyle;
 
   /// The divider used to visually separate the different item containers.

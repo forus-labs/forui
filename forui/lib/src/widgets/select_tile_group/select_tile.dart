@@ -153,7 +153,7 @@ class FSelectTile<T> extends StatelessWidget with FItemMixin {
 }
 
 @internal
-class FSelectTileData<T> extends InheritedWidget with FItemMixin {
+class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   static FSelectTileData<T> of<T>(BuildContext context) {
     final result = context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>();
     assert(

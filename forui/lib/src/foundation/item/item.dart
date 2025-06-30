@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/item/item_content.dart';
+import 'package:forui/src/foundation/item/raw_item_content.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/item/item_content.dart';
 
 part 'item.style.dart';
 
@@ -83,11 +84,11 @@ class FItem extends StatelessWidget with FItemMixin {
   /// [FItem] has custom layout behavior to handle overflow of its content. If [details] is text, it is truncated,
   /// else [title] and [subtitle] are truncated.
   ///
-  /// ## Why isn't my [title] or [subtitle] rendered?
+  /// ## Why isn't my [title] [subtitle], or [details] rendered?
   /// Using widgets that try to fill the available space, such as [Expanded] or [FTextField], as [details] will cause
   /// the [title] and [subtitle] to never be rendered.
   ///
-  /// It is recommended to use [FItem.raw] in these cases.
+  /// Use [FItem.raw] in these cases.
   FItem({
     required Widget title,
     this.style,
@@ -106,16 +107,52 @@ class FItem extends StatelessWidget with FItemMixin {
     Widget? details,
     Widget? suffix,
     super.key,
-  }) : _builder = ((context, style, states, dividerStyle, divider) => FItemContent(
+  }) : _builder = ((context, style, states, dividerStyle, divider) => ItemContent(
          style: style.contentStyle,
          dividerStyle: dividerStyle,
          dividerType: divider,
+         padding: style.padding,
          states: states,
-         title: title,
          prefix: prefix,
+         title: title,
          subtitle: subtitle,
          details: details,
          suffix: suffix,
+       ));
+
+  /// Creates a [FItem] without custom layout behavior.
+  ///
+  /// Assuming LTR locale:
+  /// ```diagram
+  /// ----------------------------------------
+  /// | [prefix] [child]                     |
+  /// ----------------------------------------
+  /// ```
+  ///
+  /// The order is reversed for RTL locales.
+  FItem.raw({
+    required Widget child,
+    this.style,
+    this.enabled,
+    this.selected = false,
+    this.semanticsLabel,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    this.onHoverChange,
+    this.onStateChange,
+    this.onPress,
+    this.onLongPress,
+    Widget? prefix,
+    super.key,
+  }) : _builder = ((context, style, states, dividerStyle, divider) => RawItemContent(
+         style: style.rawItemContentStyle,
+         dividerStyle: dividerStyle,
+         dividerType: divider,
+         padding: style.padding,
+         states: states,
+         prefix: prefix,
+         child: child,
        ));
 
   @override
@@ -131,42 +168,47 @@ class FItem extends StatelessWidget with FItemMixin {
       _ => item.divider,
     };
 
-
     if (onPress == null && onLongPress == null) {
       final states = {if (!enabled) WidgetState.disabled};
-      return DecoratedBox(
-        decoration: style.decoration.resolve(states),
-        child: _builder(context, style, states, container.dividerStyle, divider),
+      return Padding(
+        padding: style.padding,
+        child: DecoratedBox(
+          decoration: style.decoration.resolve(states),
+          child: _builder(context, style, states, container.dividerStyle, divider),
+        ),
       );
     }
 
-    return FTappable(
-      style: style.tappableStyle,
-      semanticsLabel: semanticsLabel,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      onHoverChange: onHoverChange,
-      onStateChange: onStateChange,
-      selected: selected,
-      onPress: enabled ? (onPress ?? () {}) : null,
-      onLongPress: enabled ? (onLongPress ?? () {}) : null,
-      builder: (context, states, _) => Stack(
-        children: [
-          DecoratedBox(
-            decoration: style.decoration.resolve(states),
-            child: _builder(context, style, states, container.dividerStyle, divider),
-          ),
-          if (states.contains(WidgetState.focused))
-            Positioned.fill(
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
-                  borderRadius: style.focusedOutlineStyle.borderRadius,
+    return Padding(
+      padding: style.padding,
+      child: FTappable(
+        style: style.tappableStyle,
+        semanticsLabel: semanticsLabel,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        onHoverChange: onHoverChange,
+        onStateChange: onStateChange,
+        selected: selected,
+        onPress: enabled ? (onPress ?? () {}) : null,
+        onLongPress: enabled ? (onLongPress ?? () {}) : null,
+        builder: (context, states, _) => Stack(
+          children: [
+            DecoratedBox(
+              decoration: style.decoration.resolve(states),
+              child: _builder(context, style, states, container.dividerStyle, divider),
+            ),
+            if (states.contains(WidgetState.focused))
+              Positioned.fill(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
+                    borderRadius: style.focusedOutlineStyle.borderRadius,
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -206,9 +248,17 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   @override
   final FWidgetStateMap<BoxDecoration> decoration;
 
+  /// The padding around the item. Defaults to `EdgeInsets.zero`.
+  @override
+  final EdgeInsetsGeometry padding;
+
   /// The default item content's style.
   @override
   final FItemContentStyle contentStyle;
+
+  /// THe default raw item content's style.
+  @override
+  final FRawItemContentStyle rawItemContentStyle;
 
   /// The tappable style.
   @override
@@ -222,8 +272,10 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   FItemStyle({
     required this.decoration,
     required this.contentStyle,
+    required this.rawItemContentStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
+    this.padding = EdgeInsets.zero,
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
@@ -241,6 +293,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
           WidgetState.any: BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
         }),
         contentStyle: FItemContentStyle.inherit(colors: colors, typography: typography),
+        rawItemContentStyle: FRawItemContentStyle.inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
           bounceTween: FTappableStyle.noBounceTween,
           pressedEnterDuration: Duration.zero,

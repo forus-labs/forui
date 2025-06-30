@@ -199,6 +199,7 @@ a specialized `FItem` for touch devices.
 We have refactored `FTile`'s implementation to be simpler & its styling to be easier to understand & use. It now uses
 `FItem` internally.
 
+* Add `FTile.raw`.
 * Add `FTileGroupStyle.border`.
 
 * **Breaking** Change `FTileGroup` to render the border even if it contains no groups/tiles - while this isn't desirable

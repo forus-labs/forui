@@ -6,7 +6,7 @@ import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Tile
 
-A tile that is typically used to group related information together.
+A specialized [Item](/docs/foundation/item) for touch devices, typically used to group related information together.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tile/"/>
@@ -52,6 +52,24 @@ FTile(
   subtitle: const Text('Subtitle'),
   details: const Text('Details'),
   suffix: Icon(FIcons.chevronRight),
+  semanticsLabel: 'Label',
+  enabled: true,
+  selected: false,
+  onFocusChange: (focused) {},
+  onHoverChange: (hovered) {},
+  onStateChange: (states) {},
+  onPress: () {},
+  onLongPress: () {},
+);
+```
+
+### `FTile.raw(...)`
+
+```dart copy
+FTile.raw(
+  style: FTileStyle(...),
+  prefix: Icon(FIcons.user),
+  child: const Text('Title'),
   semanticsLabel: 'Label',
   enabled: true,
   selected: false,

@@ -1,20 +1,20 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/item/render_item_content.dart';
 
-import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/rendering.dart';
 
 part 'item_content.style.dart';
 
 @internal
-class FItemContent extends StatelessWidget {
+class ItemContent extends StatelessWidget {
   final FItemContentStyle style;
   final FWidgetStateMap<FDividerStyle>? dividerStyle;
   final FItemDivider dividerType;
+  final EdgeInsetsGeometry padding;
   final Set<WidgetState> states;
   final Widget? prefix;
   final Widget title;
@@ -22,10 +22,11 @@ class FItemContent extends StatelessWidget {
   final Widget? details;
   final Widget? suffix;
 
-  const FItemContent({
+  const ItemContent({
     required this.style,
     required this.dividerStyle,
     required this.dividerType,
+    required this.padding,
     required this.states,
     required this.title,
     required this.prefix,
@@ -40,8 +41,10 @@ class FItemContent extends StatelessWidget {
        );
 
   @override
-  Widget build(BuildContext context) => _ItemContent(
-    style: style,
+  Widget build(BuildContext context) => ItemContentLayout(
+    padding: padding,
+    margin: style.padding,
+    dividerStyle: dividerStyle?.resolve(states),
     dividerType: dividerType,
     children: [
       if (prefix case final prefix?)
@@ -100,7 +103,6 @@ class FItemContent extends StatelessWidget {
         )
       else
         const SizedBox(),
-      if (dividerType == FItemDivider.none) const SizedBox() else FDivider(style: dividerStyle!.resolve(states)),
     ],
   );
 
@@ -111,147 +113,8 @@ class FItemContent extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
       ..add(DiagnosticsProperty('dividerType', dividerType))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(IterableProperty('states', states));
-  }
-}
-
-class _ItemContent extends MultiChildRenderObjectWidget {
-  final FItemContentStyle style;
-  final FItemDivider dividerType;
-
-  const _ItemContent({required this.style, required this.dividerType, super.children});
-
-  @override
-  RenderObject createRenderObject(BuildContext context) =>
-      _RenderItemContent(style, dividerType, Directionality.maybeOf(context) ?? TextDirection.ltr);
-
-  @override
-  void updateRenderObject(BuildContext context, covariant _RenderItemContent content) {
-    content
-      ..style = style
-      ..dividerType = dividerType
-      ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('dividerType', dividerType));
-  }
-}
-
-class _RenderItemContent extends RenderBox
-    with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
-  FItemContentStyle _style;
-  FItemDivider _dividerType;
-  TextDirection _textDirection;
-
-  _RenderItemContent(this._style, this._dividerType, this._textDirection);
-
-  @override
-  void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();
-
-  @override
-  void performLayout() {
-    final EdgeInsets(:left, :top, :right, :bottom) = _style.padding.resolve(_textDirection);
-    final prefix = firstChild!;
-    final column = childAfter(prefix)!;
-    final details = childAfter(column)!;
-    final suffix = childAfter(details)!;
-    final divider = childAfter(suffix)!;
-
-    // Layout children.
-    var contentConstraints = constraints.loosen().copyWith(maxWidth: constraints.maxWidth - left - right);
-
-    prefix.layout(contentConstraints, parentUsesSize: true);
-    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - prefix.size.width);
-
-    suffix.layout(contentConstraints, parentUsesSize: true);
-    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - suffix.size.width);
-
-    // Column takes priority if details is text, and vice-versa.
-    final (first, last) = details is RenderParagraph ? (column, details) : (details, column);
-
-    first.layout(contentConstraints, parentUsesSize: true);
-    contentConstraints = contentConstraints.copyWith(maxWidth: contentConstraints.maxWidth - first.size.width);
-    last.layout(contentConstraints, parentUsesSize: true);
-
-    // Layout divider based on the type.
-    switch (_dividerType) {
-      case FItemDivider.none || FItemDivider.full:
-        divider.layout(constraints.loosen(), parentUsesSize: true);
-
-      case FItemDivider.indented:
-        final spacing = _textDirection == TextDirection.ltr ? left : right;
-        final width = constraints.maxWidth - spacing - prefix.size.width;
-        divider.layout(constraints.loosen().copyWith(maxWidth: width), parentUsesSize: true);
-    }
-
-    final height = [prefix.size.height, suffix.size.height, column.size.height, details.size.height].max;
-    size = Size(constraints.maxWidth, height + top + bottom);
-
-    // Position children.
-    final (l, ml, mr, r) = _textDirection == TextDirection.ltr
-        ? (prefix, column, details, suffix)
-        : (suffix, details, column, prefix);
-
-    l.data.offset = Offset(left, top + (height - l.size.height) / 2);
-    ml.data.offset = Offset(left + l.size.width, top + (height - ml.size.height) / 2);
-    mr.data.offset = Offset(
-      constraints.maxWidth - right - r.size.width - mr.size.width,
-      top + (height - mr.size.height) / 2,
-    );
-    r.data.offset = Offset(constraints.maxWidth - right - r.size.width, top + (height - r.size.height) / 2);
-
-    divider.data.offset = Offset(
-      textDirection == TextDirection.ltr && _dividerType == FItemDivider.indented ? left + prefix.size.width : 0,
-      top + height + bottom - divider.size.height,
-    );
-  }
-
-  @override
-  void paint(PaintingContext context, Offset offset) => defaultPaint(context, offset);
-
-  @override
-  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
-      defaultHitTestChildren(result, position: position);
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('dividerType', dividerType))
-      ..add(EnumProperty('textDirection', textDirection));
-  }
-
-  FItemContentStyle get style => _style;
-
-  set style(FItemContentStyle value) {
-    if (_style != value) {
-      _style = value;
-      markNeedsLayout();
-    }
-  }
-
-  FItemDivider get dividerType => _dividerType;
-
-  set dividerType(FItemDivider value) {
-    if (_dividerType != value) {
-      _dividerType = value;
-      markNeedsLayout();
-    }
-  }
-
-  TextDirection get textDirection => _textDirection;
-
-  set textDirection(TextDirection value) {
-    if (_textDirection != value) {
-      _textDirection = value;
-      markNeedsLayout();
-    }
   }
 }
 
@@ -316,7 +179,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    this.padding = const EdgeInsetsDirectional.fromSTEB(15, 13, 10, 13),
+    this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
     this.prefixIconSpacing = 10,
     this.titleSpacing = 3,
     this.middleSpacing = 4,
@@ -330,24 +193,24 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   FItemContentStyle.inherit({required FColors colors, required FTypography typography})
     : this(
         prefixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
-          WidgetState.any: IconThemeData(color: colors.primary, size: 18),
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
+          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
         }),
         titleTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.primary)),
-          WidgetState.any: typography.base,
+          WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
+          WidgetState.any: typography.sm,
         }),
         subtitleTextStyle: FWidgetStateMap({
           WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
           WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
         }),
         detailsTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.mutedForeground)),
-          WidgetState.any: typography.base.copyWith(color: colors.mutedForeground),
+          WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
+          WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
         }),
         suffixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 18),
-          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 15),
+          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 15),
         }),
       );
 }
