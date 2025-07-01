@@ -204,6 +204,7 @@ class FTile extends StatelessWidget with FTileMixin {
 class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
   FTileStyle({
+    required super.backgroundColor,
     required super.decoration,
     required super.contentStyle,
     required super.rawItemContentStyle,
@@ -215,6 +216,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
   FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
+        backgroundColor: FWidgetStateMap.all(colors.background),
         decoration: FWidgetStateMap({
           WidgetState.disabled: BoxDecoration(
             color: colors.disable(colors.secondary),

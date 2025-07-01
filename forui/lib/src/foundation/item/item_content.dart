@@ -12,7 +12,8 @@ part 'item_content.style.dart';
 @internal
 class ItemContent extends StatelessWidget {
   final FItemContentStyle style;
-  final FWidgetStateMap<FDividerStyle>? dividerStyle;
+  final FWidgetStateMap<Color>? dividerColor;
+  final double? dividerWidth;
   final FItemDivider dividerType;
   final EdgeInsetsGeometry margin;
   final Set<WidgetState> states;
@@ -24,7 +25,8 @@ class ItemContent extends StatelessWidget {
 
   const ItemContent({
     required this.style,
-    required this.dividerStyle,
+    required this.dividerColor,
+    required this.dividerWidth,
     required this.dividerType,
     required this.margin,
     required this.states,
@@ -35,16 +37,17 @@ class ItemContent extends StatelessWidget {
     required this.suffix,
     super.key,
   }) : assert(
-         dividerStyle != null || dividerType == FItemDivider.none,
-         "dividerStyle must be provided if dividerType is not FItemDivider.none. This is a bug unless you're creating your "
-         'own custom item container.',
+         (dividerColor != null && dividerWidth != null) || dividerType == FItemDivider.none,
+         'dividerColor and dividerWidth must be provided if dividerType is not FItemDivider.none. This is a bug unless '
+         "you're creating your own custom item container.",
        );
 
   @override
   Widget build(BuildContext context) => ItemContentLayout(
     margin: margin,
     padding: style.padding,
-    dividerStyle: dividerStyle?.resolve(states),
+    dividerColor: dividerColor?.resolve(states),
+    dividerWidth: dividerWidth,
     dividerType: dividerType,
     children: [
       if (prefix case final prefix?)
@@ -111,7 +114,8 @@ class ItemContent extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
+      ..add(DiagnosticsProperty('dividerColor', dividerColor))
+      ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(DiagnosticsProperty('dividerType', dividerType))
       ..add(DiagnosticsProperty('margin', margin))
       ..add(IterableProperty('states', states));

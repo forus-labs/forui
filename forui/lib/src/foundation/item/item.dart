@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:forui/src/foundation/item/item_content.dart';
 import 'package:forui/src/foundation/item/raw_item_content.dart';
 
@@ -65,7 +65,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// The item is not hoverable if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
 
-  final Widget Function(BuildContext, FItemStyle, Set<WidgetState>, FWidgetStateMap<FDividerStyle>?, FItemDivider)
+  final Widget Function(BuildContext, FItemStyle, Set<WidgetState>, FWidgetStateMap<Color>?, double?, FItemDivider)
   _builder;
 
   /// Creates a [FItem].
@@ -107,9 +107,10 @@ class FItem extends StatelessWidget with FItemMixin {
     Widget? details,
     Widget? suffix,
     super.key,
-  }) : _builder = ((context, style, states, dividerStyle, divider) => ItemContent(
+  }) : _builder = ((context, style, states, color, width, divider) => ItemContent(
          style: style.contentStyle,
-         dividerStyle: dividerStyle,
+         dividerColor: color,
+         dividerWidth: width,
          dividerType: divider,
          margin: style.margin,
          states: states,
@@ -145,9 +146,10 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onLongPress,
     Widget? prefix,
     super.key,
-  }) : _builder = ((context, style, states, dividerStyle, divider) => RawItemContent(
+  }) : _builder = ((context, style, states, color, width, divider) => RawItemContent(
          style: style.rawItemContentStyle,
-         dividerStyle: dividerStyle,
+         dividerColor: color,
+         dividerWidth: width,
          dividerType: divider,
          margin: style.margin,
          states: states,
@@ -162,52 +164,65 @@ class FItem extends StatelessWidget with FItemMixin {
 
     final style = this.style?.call(item.style) ?? item.style;
     final enabled = this.enabled ?? container.enabled;
+    final states = {if (!enabled) WidgetState.disabled};
     final divider = switch (container.index) {
       final i when i < container.length - 1 && item.last => container.divider,
       final i when i == container.length - 1 && item.last => FItemDivider.none,
       _ => item.divider,
     };
 
+    // We increase the bottom margin to draw the divider.
+    var margin = style.margin.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+    if (divider != FItemDivider.none) {
+      final width = container.dividerWidth ?? 0;
+      margin = margin.copyWith(bottom: margin.bottom + width);
+    }
+
     if (onPress == null && onLongPress == null) {
-      final states = {if (!enabled) WidgetState.disabled};
-      return Padding(
-        padding: style.margin,
-        child: DecoratedBox(
-          decoration: style.decoration.resolve(states) ?? const BoxDecoration(),
-          child: _builder(context, style, states, container.dividerStyle, divider),
+      return ColoredBox(
+        color: style.backgroundColor.resolve(states) ?? Colors.transparent,
+        child: Padding(
+          padding: margin,
+          child: DecoratedBox(
+            decoration: style.decoration.resolve(states) ?? const BoxDecoration(),
+            child: _builder(context, style, states, container.dividerColor, container.dividerWidth, divider),
+          ),
         ),
       );
     }
 
-    return Padding(
-      padding: style.margin,
-      child: FTappable(
-        style: style.tappableStyle,
-        semanticsLabel: semanticsLabel,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        onHoverChange: onHoverChange,
-        onStateChange: onStateChange,
-        selected: selected,
-        onPress: enabled ? (onPress ?? () {}) : null,
-        onLongPress: enabled ? (onLongPress ?? () {}) : null,
-        builder: (context, states, _) => Stack(
-          children: [
-            DecoratedBox(
-              decoration: style.decoration.maybeResolve(states) ?? const BoxDecoration(),
-              child: _builder(context, style, states, container.dividerStyle, divider),
-            ),
-            if (style.focusedOutlineStyle case final outline? when states.contains(WidgetState.focused))
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: outline.color, width: outline.width),
-                    borderRadius: outline.borderRadius,
+    return ColoredBox(
+      color: style.backgroundColor.resolve(states) ?? Colors.transparent,
+      child: Padding(
+        padding: margin,
+        child: FTappable(
+          style: style.tappableStyle,
+          semanticsLabel: semanticsLabel,
+          autofocus: autofocus,
+          focusNode: focusNode,
+          onFocusChange: onFocusChange,
+          onHoverChange: onHoverChange,
+          onStateChange: onStateChange,
+          selected: selected,
+          onPress: enabled ? (onPress ?? () {}) : null,
+          onLongPress: enabled ? (onLongPress ?? () {}) : null,
+          builder: (context, states, _) => Stack(
+            children: [
+              DecoratedBox(
+                decoration: style.decoration.maybeResolve(states) ?? const BoxDecoration(),
+                child: _builder(context, style, states, container.dividerColor, container.dividerWidth, divider),
+              ),
+              if (style.focusedOutlineStyle case final outline? when states.contains(WidgetState.focused))
+                Positioned.fill(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: outline.color, width: outline.width),
+                      borderRadius: outline.borderRadius,
+                    ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -233,6 +248,22 @@ class FItem extends StatelessWidget with FItemMixin {
 
 /// A [FItem]'s style.
 class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
+  /// The item's background color.
+  ///
+  /// It is applied to the entire item, including [margin]. Since it is applied before [decoration] in the z-layer,
+  /// it is not visible if [decoration] has a background color.
+  ///
+  /// This is useful for setting a background color when [margin] is not zero.
+  ///
+  /// Supported states:
+  /// * [WidgetState.disabled]
+  @override
+  final FWidgetStateMap<Color?> backgroundColor;
+
+  /// The margin around the item, including the [decoration]. Defaults to `EdgeInsets.zero`.
+  @override
+  final EdgeInsetsGeometry margin;
+
   /// The item's decoration.
   ///
   /// An [FItem] is considered tappable if [FItem.onPress] or [FItem.onLongPress] is not null.
@@ -247,10 +278,6 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   /// * [WidgetState.disabled]
   @override
   final FWidgetStateMap<BoxDecoration?> decoration;
-
-  /// The margin around the item. Defaults to `EdgeInsets.zero`.
-  @override
-  final EdgeInsetsGeometry margin;
 
   /// The default item content's style.
   @override
@@ -270,6 +297,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
 
   /// Creates a [FItemStyle].
   FItemStyle({
+    required this.backgroundColor,
     required this.decoration,
     required this.contentStyle,
     required this.rawItemContentStyle,
@@ -281,6 +309,10 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
   FItemStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
+        backgroundColor: FWidgetStateMap({
+          WidgetState.disabled: colors.disable(colors.secondary),
+          WidgetState.any: colors.background,
+        }),
         decoration: FWidgetStateMap({
           WidgetState.disabled: BoxDecoration(
             color: colors.disable(colors.secondary),

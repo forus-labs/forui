@@ -47,9 +47,10 @@ final class FItemContainerData extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType<FItemContainerData>();
 
   /// The divider's style.
-  ///
-  /// [FDividerStyle.padding] is ignored.
-  final FWidgetStateMap<FDividerStyle>? dividerStyle;
+  final FWidgetStateMap<Color>? dividerColor;
+
+  /// The divider's width.
+  final double? dividerWidth;
 
   /// The divider used to visually separate the different item containers.
   final FItemDivider divider;
@@ -67,7 +68,8 @@ final class FItemContainerData extends InheritedWidget {
   factory FItemContainerData.of(BuildContext context) =>
       maybeOf(context) ??
       const FItemContainerData(
-        dividerStyle: null,
+        dividerColor: null,
+        dividerWidth: null,
         divider: FItemDivider.none,
         enabled: true,
         index: 0,
@@ -77,7 +79,8 @@ final class FItemContainerData extends InheritedWidget {
 
   /// Creates a [FItemContainerData].
   const FItemContainerData({
-    required this.dividerStyle,
+    required this.dividerColor,
+    required this.dividerWidth,
     required this.divider,
     required this.enabled,
     required this.index,
@@ -94,7 +97,8 @@ final class FItemContainerData extends InheritedWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
+      ..add(DiagnosticsProperty('dividerColor', dividerColor))
+      ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('divider', divider))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(IntProperty('index', index))

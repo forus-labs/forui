@@ -9,13 +9,15 @@ import 'package:meta/meta.dart';
 class ItemContentLayout extends MultiChildRenderObjectWidget {
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
-  final FDividerStyle? dividerStyle;
+  final Color? dividerColor;
+  final double? dividerWidth;
   final FItemDivider dividerType;
 
   const ItemContentLayout({
     required this.margin,
     required this.padding,
-    required this.dividerStyle,
+    required this.dividerColor,
+    required this.dividerWidth,
     required this.dividerType,
     super.children,
     super.key,
@@ -27,7 +29,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
     return _RenderItemContent(
       margin.resolve(direction),
       padding.resolve(direction),
-      dividerStyle,
+      dividerColor,
+      dividerWidth,
       dividerType,
       direction,
     );
@@ -40,7 +43,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
     content
       ..margin = margin.resolve(direction)
       ..padding = padding.resolve(direction)
-      ..dividerStyle = dividerStyle
+      ..dividerColor = dividerColor
+      ..dividerWidth = dividerWidth
       ..dividerType = dividerType
       ..textDirection = direction;
   }
@@ -51,7 +55,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
     properties
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('margin', margin))
-      ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
+      ..add(ColorProperty('dividerColor', dividerColor))
+      ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('dividerType', dividerType));
   }
 }
@@ -60,11 +65,19 @@ class _RenderItemContent extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
   EdgeInsets _margin;
   EdgeInsets _padding;
-  FDividerStyle? _dividerStyle;
+  Color? _dividerColor;
+  double? _dividerWidth;
   FItemDivider _dividerType;
   TextDirection _textDirection;
 
-  _RenderItemContent(this._margin, this._padding, this._dividerStyle, this._dividerType, this._textDirection);
+  _RenderItemContent(
+    this._margin,
+    this._padding,
+    this._dividerColor,
+    this._dividerWidth,
+    this._dividerType,
+    this._textDirection,
+  );
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();
@@ -118,12 +131,17 @@ class _RenderItemContent extends RenderBox
     }
 
     final EdgeInsets(:left, :top, :right, :bottom) = _padding;
-    // We offset the divider by 0.5 to avoid a gap between the line and the tile below.
-    final y = offset.dy + size.height + _margin.vertical - _dividerStyle!.width + 0.5;
+    // The divider is offset by 0.5 instead of 1.0 due to some weird rendering bug/oddity where part of the line is
+    // clipped when rendered exactly on the edge. This is reproducible on an iOS simulator & in golden tests.
+    //
+    // The divider's width doesn't need to be added as it isn't reflected in _margin but is is reflected in the FItem's
+    // margin.
+    final y = offset.dy + size.height + _margin.bottom + 0.5;
+
     final paint = Paint()
       ..isAntiAlias = false
-      ..color = _dividerStyle!.color
-      ..strokeWidth = _dividerStyle!.width;
+      ..color = _dividerColor!
+      ..strokeWidth = _dividerWidth!;
 
     if (_dividerType == FItemDivider.indented) {
       final prefix = firstChild!;
@@ -153,7 +171,8 @@ class _RenderItemContent extends RenderBox
 
   @override
   Rect get paintBounds =>
-      Offset(_margin.left, _margin.top) & Size(size.width + _margin.horizontal, size.height + _margin.vertical);
+      Offset(_margin.left, _margin.top) &
+      Size(size.width + _margin.horizontal, size.height + _margin.vertical + (dividerWidth ?? 0));
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
@@ -165,7 +184,8 @@ class _RenderItemContent extends RenderBox
     properties
       ..add(DiagnosticsProperty('margin', margin))
       ..add(DiagnosticsProperty('padding', padding))
-      ..add(DiagnosticsProperty('dividerStyle', dividerStyle))
+      ..add(ColorProperty('dividerColor', dividerColor))
+      ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('dividerType', dividerType))
       ..add(EnumProperty('textDirection', textDirection));
   }
@@ -184,16 +204,25 @@ class _RenderItemContent extends RenderBox
   set margin(EdgeInsets value) {
     if (_margin != value) {
       _margin = value;
-      markNeedsLayout();
+      markNeedsPaint();
     }
   }
 
-  FDividerStyle? get dividerStyle => _dividerStyle;
+  Color? get dividerColor => _dividerColor;
 
-  set dividerStyle(FDividerStyle? value) {
-    if (_dividerStyle != value) {
-      _dividerStyle = value;
-      markNeedsLayout();
+  set dividerColor(Color? value) {
+    if (_dividerColor != value) {
+      _dividerColor = value;
+      markNeedsPaint();
+    }
+  }
+
+  double? get dividerWidth => _dividerWidth;
+
+  set dividerWidth(double? value) {
+    if (_dividerWidth != value) {
+      _dividerWidth = value;
+      markNeedsPaint();
     }
   }
 
@@ -202,7 +231,7 @@ class _RenderItemContent extends RenderBox
   set dividerType(FItemDivider value) {
     if (_dividerType != value) {
       _dividerType = value;
-      markNeedsLayout();
+      markNeedsPaint();
     }
   }
 

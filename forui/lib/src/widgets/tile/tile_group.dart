@@ -46,7 +46,8 @@ class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FTile
         child: _scrollView([
           for (final (index, child) in children.indexed)
             FItemContainerData(
-              dividerStyle: style.dividerStyle,
+              dividerColor: style.dividerColor,
+              dividerWidth: style.dividerWidth,
               divider: divider,
               enabled: enabled,
               index: index,
@@ -190,7 +191,8 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
     Widget sliver = SliverList(delegate: _delegate(style));
     if (data == null || this.style != null || (this.enabled != null && this.enabled != data.enabled)) {
       sliver = FItemContainerData(
-        dividerStyle: style.dividerStyle,
+        dividerColor: style.dividerColor,
+        dividerWidth: style.dividerWidth,
         divider: data?.divider ?? FItemDivider.none,
         enabled: enabled,
         index: data?.index ?? 0,
@@ -382,16 +384,21 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   @override
   final FTileStyle tileStyle;
 
-  /// The tile's divider.
+  /// The divider's style.
   @override
-  final FWidgetStateMap<FDividerStyle> dividerStyle;
+  final FWidgetStateMap<Color>? dividerColor;
+
+  /// The divider's width.
+  @override
+  final double? dividerWidth;
 
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
     required this.border,
     required this.borderRadius,
     required this.tileStyle,
-    required this.dividerStyle,
+    required this.dividerColor,
+    required this.dividerWidth,
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
@@ -419,9 +426,8 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
           ),
         ),
       ),
-      dividerStyle: FWidgetStateMap.all(
-        FDividerStyle(color: colors.border, width: style.borderWidth, padding: EdgeInsets.zero),
-      ),
+      dividerColor: FWidgetStateMap.all(colors.border),
+      dividerWidth: style.borderWidth,
       labelTextStyle: FWidgetStateMap({
         WidgetState.error: typography.base.copyWith(
           color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
