@@ -119,8 +119,8 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
     final sidebarData = FSidebarData.maybeOf(context);
     final inheritedStyle =
         groupData?.style.itemStyle ??
-            sidebarData?.style.groupStyle.itemStyle ??
-            context.theme.sidebarStyle.groupStyle.itemStyle;
+        sidebarData?.style.groupStyle.itemStyle ??
+        context.theme.sidebarStyle.groupStyle.itemStyle;
     final style = widget.style?.call(inheritedStyle) ?? inheritedStyle;
 
     if (_style != style) {

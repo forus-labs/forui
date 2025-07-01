@@ -252,7 +252,10 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.text('1B')));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/content/dividers-hover.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select/${theme.name}/content/dividers-hover.png'),
+      );
     });
 
     testWidgets('focus on selected item', (tester) async {

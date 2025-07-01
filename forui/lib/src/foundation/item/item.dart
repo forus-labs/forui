@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:forui/src/foundation/item/item_content.dart';
-import 'package:forui/src/foundation/item/raw_item_content.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/item/item_content.dart';
+import 'package:forui/src/foundation/item/raw_item_content.dart';
 
 part 'item.style.dart';
 

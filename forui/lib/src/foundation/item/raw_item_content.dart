@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/item/render_item_content.dart';
-import 'package:meta/meta.dart';
 
 part 'raw_item_content.style.dart';
 

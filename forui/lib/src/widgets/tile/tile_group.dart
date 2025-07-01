@@ -419,14 +419,16 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
       borderRadius: style.borderRadius,
       tileStyle: tileStyle.copyWith(
         decoration: tileStyle.decoration.map(
-          (d) => d == null ? null : BoxDecoration(
-            color: d.color,
-            image: d.image,
-            boxShadow: d.boxShadow,
-            gradient: d.gradient,
-            backgroundBlendMode: d.backgroundBlendMode,
-            shape: d.shape,
-          ),
+          (d) => d == null
+              ? null
+              : BoxDecoration(
+                  color: d.color,
+                  image: d.image,
+                  boxShadow: d.boxShadow,
+                  gradient: d.gradient,
+                  backgroundBlendMode: d.backgroundBlendMode,
+                  shape: d.shape,
+                ),
         ),
       ),
       dividerColor: FWidgetStateMap.all(colors.border),

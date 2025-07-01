@@ -373,10 +373,7 @@ void main() {
     testWidgets('expanded child', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FItem.raw(
-            prefix: const Icon(FIcons.bluetooth),
-            child: const FTextField(),
-          ),
+          child: FItem.raw(prefix: const Icon(FIcons.bluetooth), child: const FTextField()),
         ),
       );
 
