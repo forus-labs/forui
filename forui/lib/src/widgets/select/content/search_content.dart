@@ -31,6 +31,7 @@ class SearchContent<T> extends StatefulWidget {
   final bool enabled;
   final bool scrollHandles;
   final ScrollPhysics physics;
+  final FItemDivider divider;
   final FSelectSearchFilter<T> filter;
   final ValueWidgetBuilder<FSelectSearchStyle> loadingBuilder;
   final FSelectSearchContentBuilder<T> builder;
@@ -46,6 +47,7 @@ class SearchContent<T> extends StatefulWidget {
     required this.enabled,
     required this.scrollHandles,
     required this.physics,
+    required this.divider,
     required this.filter,
     required this.loadingBuilder,
     required this.builder,
@@ -68,6 +70,7 @@ class SearchContent<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('enabled', enabled))
       ..add(DiagnosticsProperty('scrollHandles', scrollHandles))
       ..add(DiagnosticsProperty('physics', physics))
+      ..add(EnumProperty('divider', divider))
       ..add(ObjectFlagProperty.has('filter', filter))
       ..add(ObjectFlagProperty.has('loadingBuilder', loadingBuilder))
       ..add(ObjectFlagProperty.has('builder', builder))
@@ -224,6 +227,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
         enabled: widget.enabled,
         scrollHandles: widget.scrollHandles,
         physics: widget.physics,
+        divider: widget.divider,
         children: children,
       ),
     );

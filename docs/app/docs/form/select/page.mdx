@@ -342,6 +342,44 @@ FSelect<User>.searchFromMap(
   </Tabs.Tab>
 </Tabs>
 
+### Dividers
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='select' variant='divider' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {5, 10} copy
+    class DividerSelectPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FSelect<String>(
+        hint: 'Select a level',
+        divider: FItemDivider.full,
+        format: (s) => s,
+        children: [
+          FSelectSection.fromMap(
+            label: const Text('Level 1'),
+            divider: FItemDivider.indented,
+            items: {
+              for (final item in ['A', 'B']) item: '1$item',
+            },
+          ),
+          FSelectSection.fromMap(
+            label: const Text('Level 2'),
+            items: {
+              for (final item in ['A', 'B']) item: '2$item',
+            },
+          ),
+          FSelectItem('Level 3', '3'),
+          FSelectItem('Level 4', '4'),
+        ],
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+
 ### Searchable
 
 #### Sync

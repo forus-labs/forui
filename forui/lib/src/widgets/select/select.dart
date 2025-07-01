@@ -177,6 +177,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The content's scroll physics. Defaults to [ClampingScrollPhysics].
   final ScrollPhysics contentPhysics;
 
+  /// The divider used to separate the content items. Defaults to [FItemDivider.none].
+  final FItemDivider divider;
+
   /// The initial value.
   ///
   /// ## Contract
@@ -223,6 +226,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
+    FItemDivider divider,
     T? initialValue,
     Key? key,
   }) = _BasicSelect<T>;
@@ -270,6 +274,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
+    FItemDivider divider = FItemDivider.none,
     T? initialValue,
     Key? key,
   }) {
@@ -312,6 +317,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
+      divider: divider,
       initialValue: initialValue,
       key: key,
       children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(key, value)],
@@ -370,6 +376,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
+    FItemDivider divider,
     T? initialValue,
     Key? key,
   }) = _SearchSelect<T>;
@@ -429,6 +436,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
+    FItemDivider divider = FItemDivider.none,
     T? initialValue,
     Key? key,
   }) {
@@ -481,6 +489,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
+      divider: divider,
       initialValue: initialValue,
       key: key,
     );
@@ -524,6 +533,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentScrollController,
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
+    this.divider = FItemDivider.none,
     this.initialValue,
     super.key,
   }) : assert(
@@ -571,6 +581,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
+      ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('initialValue', initialValue));
   }
 }

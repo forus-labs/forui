@@ -158,8 +158,10 @@ to build more complex widgets.
   `Widget Function(BuildContext, FPortalController)`.
 
 ### `FSelect`
-We've updated `FSelectItem` to support prefixes & subtitles.
+We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes & subtitles.
 
+* Add `FSelect.divider`.
+* Add `FSelectSection.divider`.
 * Add `FSelectItem.prefix`.
 * Add `FSelectItem.subtitle`.
 * Add `FSelectItemStyle.prefixIconStyle`.
@@ -222,6 +224,8 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 
 * Add `FTile.raw`.
 * Add `FTileGroupStyle.border`.
+* Add `FTileGroupStyle.divierColor`.
+* Add `FTileGroupStyle.dividerWidth`.
 
 * **Breaking** Change `FTileGroup` to render the border even if it contains no groups/tiles - while this isn't desirable
   this allows us to draw the border in a single pass rather than having each tile draw its part of the border and stitching

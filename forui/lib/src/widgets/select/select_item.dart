@@ -29,6 +29,10 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// Defaults to inheriting from the [FSelect].
   final bool? enabled;
 
+  /// The divider style. Defaults to the [FItemDivider] inherited from the parent [FSelect]. Defaults to
+  /// [FItemDivider.none].
+  final FItemDivider divider;
+
   /// The label.
   final Widget label;
 
@@ -36,7 +40,14 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   final List<FSelectItem<T>> children;
 
   /// Creates a [FSelectSection].
-  const FSelectSection({required this.label, required this.children, this.style, this.enabled, super.key});
+  const FSelectSection({
+    required this.label,
+    required this.children,
+    this.style,
+    this.enabled,
+    this.divider = FItemDivider.none,
+    super.key,
+  });
 
   /// Creates a [FSelectSection] from the given items.
   FSelectSection.fromMap({
@@ -44,12 +55,14 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
     required Map<String, T> items,
     FSelectSectionStyle Function(FSelectSectionStyle)? style,
     bool? enabled,
+    FItemDivider divider = FItemDivider.none,
     Key? key,
   }) : this(
          label: label,
          children: [for (final e in items.entries) FSelectItem<T>(e.key, e.value)],
          style: style,
          enabled: enabled,
+         divider: divider,
          key: key,
        );
 
@@ -58,6 +71,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
     final content = SelectContentData.of<T>(context);
     final enabled = this.enabled ?? content.enabled;
     final style = this.style?.call(content.style) ?? content.style;
+    final itemStyle = style.itemStyle.toFItemStyle(context);
 
     return SelectContentData<T>(
       style: style,
@@ -68,8 +82,8 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DefaultTextStyle(
-            style: enabled ? style.enabledLabelTextStyle : style.disabledLabelTextStyle,
+          DefaultTextStyle.merge(
+            style: style.labelTextStyle.resolve({if (!enabled) WidgetState.disabled}),
             child: Padding(padding: style.labelPadding, child: label),
           ),
           // There is an edge case where a non-first, enabled child of a disabled section will not be auto-focused.
@@ -80,9 +94,22 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
               first: content.first,
               enabled: enabled,
               ensureVisible: content.ensureVisible,
-              child: first,
+              child: FItemContainerItemData(
+                style: itemStyle,
+                divider: divider,
+                index: 0,
+                last: children.length == 1,
+                child: first,
+              ),
             ),
-          ...children.skip(1),
+          for (final (i, child) in children.indexed.skip(1))
+            FItemContainerItemData(
+              style: itemStyle,
+              divider: divider,
+              index: i,
+              last: i == children.length - 1,
+              child: child,
+            ),
         ],
       ),
     );
@@ -93,23 +120,34 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(EnumProperty('divider', divider));
   }
 }
 
 /// A [FSelectSection]'s style.
 class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   /// The enabled label's text style.
+  ///
+  /// Supported states:
+  /// * [WidgetState.disabled]
   @override
-  final TextStyle enabledLabelTextStyle;
-
-  /// The disabled label's text style.
-  @override
-  final TextStyle disabledLabelTextStyle;
+  final FWidgetStateMap<TextStyle> labelTextStyle;
 
   /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
   final EdgeInsetsGeometry labelPadding;
+
+  /// The divider's style.
+  ///
+  /// Supported states:
+  /// * [WidgetState.disabled]
+  @override
+  final FWidgetStateMap<Color>? dividerColor;
+
+  /// The divider's width.
+  @override
+  final double? dividerWidth;
 
   /// The section's items' style.
   @override
@@ -117,8 +155,9 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 
   /// Creates a [FSelectSectionStyle].
   FSelectSectionStyle({
-    required this.enabledLabelTextStyle,
-    required this.disabledLabelTextStyle,
+    required this.labelTextStyle,
+    required this.dividerColor,
+    required this.dividerWidth,
     required this.itemStyle,
     this.labelPadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
@@ -126,11 +165,15 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   /// Creates a [FSelectSectionStyle] that inherits its properties.
   FSelectSectionStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        enabledLabelTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-        disabledLabelTextStyle: typography.sm.copyWith(
-          color: colors.disable(colors.primary),
-          fontWeight: FontWeight.w600,
-        ),
+        labelTextStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.sm.copyWith(
+            color: colors.disable(colors.primary),
+            fontWeight: FontWeight.w600,
+          ),
+          WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        }),
+        dividerColor: FWidgetStateMap.all(colors.border),
+        dividerWidth: style.borderWidth,
         itemStyle: FSelectItemStyle.inherit(colors: colors, style: style, typography: typography),
       );
 }
@@ -227,27 +270,10 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
     final enabled = widget.enabled ?? content.enabled;
     final selected = contains(widget.value);
-    final style = widget.style?.call(content.style.itemStyle) ?? content.style.itemStyle;
+    final style = widget.style?.call(content.style.itemStyle).toFItemStyle(context);
 
     return FItem(
-      style: FItemStyle(
-        decoration: style.decoration,
-        margin: style.margin,
-        contentStyle: FItemContentStyle.inherit(colors: context.theme.colors, typography: context.theme.typography)
-            .copyWith(
-              padding: style.padding,
-              prefixIconStyle: style.prefixIconStyle,
-              prefixIconSpacing: style.prefixIconSpacing,
-              titleTextStyle: style.titleTextStyle,
-              titleSpacing: style.titleSpacing,
-              subtitleTextStyle: style.subtitleTextStyle,
-              suffixIconStyle: style.suffixIconStyle,
-            ),
-        rawItemContentStyle: context.theme.itemStyle.rawItemContentStyle,
-        // This isn't ever used.
-        tappableStyle: style.tappableStyle,
-        focusedOutlineStyle: null,
-      ),
+      style: style?.call,
       enabled: enabled,
       selected: selected,
       autofocus: selected || content.first,
@@ -270,7 +296,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
 /// A [FSelectItem]'s style.
 class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
-  /// The margin around the image. Defaults to `EdgeInsets.symmetric(horizontal: 4)`.
+  /// The margin around the image. Defaults to `EdgeInsets.symmetric(horizontal: 4, vertical: 2)`.
   @override
   final EdgeInsetsGeometry margin;
 
@@ -328,7 +354,7 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
     required this.subtitleTextStyle,
     required this.suffixIconStyle,
     required this.tappableStyle,
-    this.margin = const EdgeInsets.symmetric(horizontal: 4),
+    this.margin = const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
     this.padding = const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6),
     this.prefixIconSpacing = 10,
     this.titleSpacing = 4,
@@ -361,4 +387,27 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
         }),
         tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
       );
+}
+
+@internal
+extension FSelectItemStyles on FSelectItemStyle {
+  FItemStyle toFItemStyle(BuildContext context) => FItemStyle(
+    backgroundColor: FWidgetStateMap.all(null),
+    decoration: decoration,
+    margin: margin,
+    contentStyle: FItemContentStyle.inherit(colors: context.theme.colors, typography: context.theme.typography)
+        .copyWith(
+          padding: padding,
+          prefixIconStyle: prefixIconStyle,
+          prefixIconSpacing: prefixIconSpacing,
+          titleTextStyle: titleTextStyle,
+          titleSpacing: titleSpacing,
+          subtitleTextStyle: subtitleTextStyle,
+          suffixIconStyle: suffixIconStyle,
+        ),
+    rawItemContentStyle: context.theme.itemStyle.rawItemContentStyle,
+    // This isn't ever used.
+    tappableStyle: tappableStyle,
+    focusedOutlineStyle: null,
+  );
 }

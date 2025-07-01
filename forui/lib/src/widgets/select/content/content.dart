@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:forui/src/widgets/select/select_item.dart';
 
 import 'package:meta/meta.dart';
 
@@ -56,6 +57,7 @@ class Content<T> extends StatefulWidget {
   final bool enabled;
   final bool scrollHandles;
   final ScrollPhysics physics;
+  final FItemDivider divider;
   final List<FSelectItemMixin> children;
 
   const Content({
@@ -65,6 +67,7 @@ class Content<T> extends StatefulWidget {
     required this.enabled,
     required this.scrollHandles,
     required this.physics,
+    required this.divider,
     required this.children,
     super.key,
   });
@@ -81,7 +84,8 @@ class Content<T> extends StatefulWidget {
       ..add(FlagProperty('first', value: first, ifTrue: 'first'))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(FlagProperty('scrollHandles', value: scrollHandles, ifTrue: 'scroll handles'))
-      ..add(DiagnosticsProperty('physics', physics));
+      ..add(DiagnosticsProperty('physics', physics))
+      ..add(EnumProperty('divider', divider));
   }
 }
 
@@ -128,43 +132,59 @@ class _ContentState<T> extends State<Content<T>> {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = FItemContainerData(
-      dividerColor: FWidgetStateMap.all(Colors.black),
-      dividerWidth: 1,
-      divider: FItemDivider.indented,
-      enabled: true,
-      index: 0,
-      length: 1,
-      child: FItemContainerItemData(
-        style: context.theme.itemStyle,
-        divider: FItemDivider.indented,
-        index: 0,
-        last: false,
-        child: SelectContentData<T>(
-          style: widget.style.sectionStyle,
-          first: false,
-          enabled: widget.enabled,
-          ensureVisible: _ensureVisible,
-          child: Padding(
-            padding: widget.style.padding,
-            child: ListView(
-              controller: _controller,
-              padding: EdgeInsets.zero,
-              physics: widget.physics,
-              shrinkWrap: true,
-              children: [
-                if (widget.children.firstOrNull case final first?)
-                  SelectContentData<T>(
-                    style: widget.style.sectionStyle,
-                    first: widget.first,
-                    enabled: widget.enabled,
-                    ensureVisible: _ensureVisible,
+    final style = widget.style.sectionStyle.itemStyle.toFItemStyle(context);
+    Widget content = SelectContentData<T>(
+      style: widget.style.sectionStyle,
+      first: false,
+      enabled: widget.enabled,
+      ensureVisible: _ensureVisible,
+      child: Padding(
+        padding: widget.style.padding,
+        child: ListView(
+          controller: _controller,
+          padding: EdgeInsets.zero,
+          physics: widget.physics,
+          shrinkWrap: true,
+          children: [
+            if (widget.children.firstOrNull case final first?)
+              SelectContentData<T>(
+                style: widget.style.sectionStyle,
+                first: widget.first,
+                enabled: widget.enabled,
+                ensureVisible: _ensureVisible,
+                child: FItemContainerData(
+                  dividerColor: widget.style.sectionStyle.dividerColor,
+                  dividerWidth: widget.style.sectionStyle.dividerWidth,
+                  divider: widget.divider,
+                  enabled: widget.enabled,
+                  index: 0,
+                  length: widget.children.length,
+                  child: FItemContainerItemData(
+                    style: style,
+                    divider: widget.divider,
+                    index: 0,
+                    last: true,
                     child: first,
                   ),
-                ...widget.children.skip(1),
-              ],
-            ),
-          ),
+                ),
+              ),
+            for (final (i, child) in widget.children.indexed.skip(1))
+              FItemContainerData(
+                dividerColor: widget.style.sectionStyle.dividerColor,
+                dividerWidth: widget.style.sectionStyle.dividerWidth,
+                divider: widget.divider,
+                enabled: widget.enabled,
+                index: i,
+                length: widget.children.length,
+                child: FItemContainerItemData(
+                  style: style,
+                  divider: widget.divider,
+                  index: 0,
+                  last: true,
+                  child: child,
+                ),
+              ),
+          ],
         ),
       ),
     );

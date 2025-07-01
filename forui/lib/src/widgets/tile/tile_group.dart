@@ -385,6 +385,9 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   final FTileStyle tileStyle;
 
   /// The divider's style.
+  ///
+  /// Supported states:
+  /// * [WidgetState.disabled]
   @override
   final FWidgetStateMap<Color>? dividerColor;
 
