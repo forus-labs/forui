@@ -75,6 +75,7 @@ FSelect<String>(
   description: const Text('Select your country of residence'),
   hint: 'Choose a country',
   format: (value) => value.toUpperCase(),
+  divider: FItemDivider.none,
   onChange: (value) => print('Selected country: $value'),
   onSaved: (value) => print('Saved country: $value'),
   style: FSelectStyle.inherit(...),
@@ -89,9 +90,11 @@ FSelect<String>(
   children: [
     FSelectSection(
       label: const Text('North American Countries'),
+      divider: FItemDivider.none,
       children: [
         FSelectItem.from(
           child: const Text('United States'),
+          divider: FItemDivider.none,
           value: 'us',
         ),
         FSelectItem(
@@ -145,6 +148,7 @@ FSelect<User>.search(
   description: const Text('Search and select a user'),
   builder: (context, styles, child) => child!,
   format: (user) => '${user.firstName} ${user.lastName}',
+  divider: FItemDivider.none,
   hint: 'Search users...',
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
@@ -187,6 +191,7 @@ FSelect<User>.searchFromMap(
   description: const Text('Search and select a user'),
   builder: (context, styles, child) => child!,
   format: (user) => '${user.firstName} ${user.lastName}',
+  divider: FItemDivider.none,
   hint: 'Search users...',
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
