@@ -207,6 +207,8 @@ We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes 
 * **Breaking** Remove `FSidebarStyle.bordeWidth` - use `FSidebarStyle.decoration` instead.
 * **Breaking** Remove `FSidebarItemStyle.collapsibleAnimationDuration` - use `FSidebarItemStyle.expandDuration` instead.
 
+* Fix `FSidebarItem`'s style not updating when passed in style changes.
+
 
 ### `FTappable`
 * Add `FTappableStyle.bounceDuration`.
