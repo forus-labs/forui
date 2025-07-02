@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
@@ -27,105 +25,31 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final actions = [
-      FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
-      FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-    ];
-
-    final _ = context.theme.dialogStyle;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 10,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        FTileGroup.merge(
           children: [
-            Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 20),
-            const FTextField(initialText: 'Header Component'),
-            const SizedBox(height: 16),
-            const FTextField(initialText: 'Navigation Bar'),
-            const SizedBox(height: 30),
+            FTileGroup(
+              style: FThemes.green.dark.tileGroupStyle,
+              children: [
+                FTile(
+                  prefix: const Icon(FIcons.wifi),
+                  title: const Text('WiFi'),
+                  details: const Text('FL (5G)'),
+                  suffix: const Icon(FIcons.chevronRight),
+                  onPress: () {},
+                ),
+                FTile(
+                  prefix: const Icon(FIcons.bluetooth),
+                  title: const Text('Bluetooth'),
+                  subtitle: const Text('Fee, Fo'),
+                  details: const Text('FL (5G)'),
+                  suffix: const Icon(FIcons.chevronRight),
+                ),
+              ],
+            ),
           ],
-        ),
-        FButton(
-          mainAxisSize: MainAxisSize.min,
-          onPress: () => showFDialog(
-            style: context.theme.dialogStyle.copyWith(
-              backgroundFilter: (f) => ImageFilter.blur(sigmaX: f * 5, sigmaY: f * 5),
-              decoration: BoxDecoration(
-                borderRadius: context.theme.style.borderRadius,
-                color: context.theme.colors.background.withValues(alpha: 0.5),
-              ),
-            ),
-            context: context,
-            builder: (context, style, animation) => FDialog(
-              style: style,
-              animation: animation,
-              direction: Axis.horizontal,
-              title: const Text('Are you absolutely sure?'),
-              body: const Text(
-                'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-              ),
-              actions: Axis.horizontal == Axis.vertical ? actions.reversed.toList() : actions,
-            ),
-          ),
-          child: const Text('Show Dialog'),
-        ),
-        FPopover(
-          style: context.theme.popoverStyle.copyWith(
-            backgroundFilter: (f) => ImageFilter.blur(sigmaX: f * 5, sigmaY: f * 5),
-            decoration: BoxDecoration(
-              color: context.theme.colors.background.withValues(alpha: 0.5),
-              borderRadius: context.theme.style.borderRadius,
-              border: Border.all(width: context.theme.style.borderWidth, color: context.theme.colors.border),
-            ),
-          ),
-          controller: controller,
-          popoverAnchor: Alignment.topCenter,
-          childAnchor: Alignment.bottomCenter,
-          popoverBuilder: (context, _) => Padding(
-            padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-            child: SizedBox(
-              width: 288,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Dimensions', style: context.theme.typography.base),
-                  const SizedBox(height: 7),
-                  Text(
-                    'Set the dimensions for the layer.',
-                    style: context.theme.typography.sm.copyWith(
-                      color: context.theme.colors.mutedForeground,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  for (final (label, value) in [
-                    ('Width', '100%'),
-                    ('Max. Width', '300px'),
-                    ('Height', '25px'),
-                    ('Max. Height', 'none'),
-                  ]) ...[
-                    Row(
-                      children: [
-                        Expanded(child: Text(label, style: context.theme.typography.sm)),
-                        Expanded(flex: 2, child: FTextField(initialText: value)),
-                      ],
-                    ),
-                    const SizedBox(height: 7),
-                  ],
-                ],
-              ),
-            ),
-          ),
-          builder: (_, controller, _) => IntrinsicWidth(
-            child: FButton(
-              style: FButtonStyle.outline(),
-              onPress: controller.toggle,
-              child: const Text('Open popover'),
-            ),
-          ),
         ),
       ],
     );

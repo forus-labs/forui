@@ -173,6 +173,15 @@ final class FThemeData with Diagnosticable {
   /// ```
   final FHeaderStyles headerStyles;
 
+  /// The item style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  /// ```shell
+  /// dart run forui style create item
+  /// ```
+  final FItemStyle itemStyle;
+
   /// The label styles.
   ///
   /// ## CLI
@@ -383,6 +392,16 @@ final class FThemeData with Diagnosticable {
   /// ```
   final FTextFieldStyle textFieldStyle;
 
+  /// The tile's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tile
+  /// ```
+  final FTileStyle tileStyle;
+
   /// The tile group's style.
   ///
   /// ## CLI
@@ -444,6 +463,7 @@ final class FThemeData with Diagnosticable {
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyles,
+    FItemStyle? itemStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
     FPaginationStyle? paginationStyle,
@@ -465,6 +485,7 @@ final class FThemeData with Diagnosticable {
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
     FTextFieldStyle? textFieldStyle,
+    FTileStyle? tileStyle,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
     FTimePickerStyle? timePickerStyle,
@@ -495,6 +516,7 @@ final class FThemeData with Diagnosticable {
       dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
       headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
+      itemStyle: itemStyle ?? FItemStyle.inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
       lineCalendarStyle:
           lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
@@ -521,6 +543,7 @@ final class FThemeData with Diagnosticable {
       tabsStyle: tabsStyle ?? FTabsStyle.inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
       textFieldStyle: textFieldStyle ?? FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
+      tileStyle: tileStyle ?? FTileStyle.inherit(colors: colors, typography: typography, style: style),
       tileGroupStyle: tileGroupStyle ?? FTileGroupStyle.inherit(colors: colors, typography: typography, style: style),
       timeFieldStyle: timeFieldStyle ?? FTimeFieldStyle.inherit(colors: colors, typography: typography, style: style),
       timePickerStyle:
@@ -549,6 +572,7 @@ final class FThemeData with Diagnosticable {
     required this.dialogStyle,
     required this.dividerStyles,
     required this.headerStyles,
+    required this.itemStyle,
     required this.labelStyles,
     required this.lineCalendarStyle,
     required this.paginationStyle,
@@ -570,6 +594,7 @@ final class FThemeData with Diagnosticable {
     required this.tabsStyle,
     required this.tappableStyle,
     required this.textFieldStyle,
+    required this.tileStyle,
     required this.tileGroupStyle,
     required this.timeFieldStyle,
     required this.timePickerStyle,
@@ -980,6 +1005,7 @@ final class FThemeData with Diagnosticable {
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyles,
+    FItemStyle? itemStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
     FPaginationStyle? paginationStyle,
@@ -1001,6 +1027,7 @@ final class FThemeData with Diagnosticable {
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
     FTextFieldStyle? textFieldStyle,
+    FTileStyle? tileStyle,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
     FTooltipStyle? tooltipStyle,
@@ -1022,6 +1049,7 @@ final class FThemeData with Diagnosticable {
     dialogStyle: dialogStyle ?? this.dialogStyle,
     dividerStyles: dividerStyles ?? this.dividerStyles,
     headerStyles: headerStyles ?? this.headerStyles,
+    itemStyle: itemStyle ?? this.itemStyle,
     labelStyles: labelStyles ?? this.labelStyles,
     lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
     paginationStyle: paginationStyle ?? this.paginationStyle,
@@ -1043,6 +1071,7 @@ final class FThemeData with Diagnosticable {
     tabsStyle: tabsStyle ?? this.tabsStyle,
     tappableStyle: tappableStyle ?? this.tappableStyle,
     textFieldStyle: textFieldStyle ?? this.textFieldStyle,
+    tileStyle: tileStyle ?? this.tileStyle,
     tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
     timeFieldStyle: timeFieldStyle ?? this.timeFieldStyle,
     tooltipStyle: tooltipStyle ?? this.tooltipStyle,
@@ -1071,6 +1100,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyles', headerStyles, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('itemStyle', itemStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('paginationStyle', paginationStyle, level: DiagnosticLevel.debug))
@@ -1092,6 +1122,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tappableStyle', tappableStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('tileStyle', tileStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('tileGroupStyle', tileGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('timeFieldStyle', timeFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('timePickerStyle', timePickerStyle, level: DiagnosticLevel.debug))
@@ -1121,6 +1152,7 @@ final class FThemeData with Diagnosticable {
           dialogStyle == other.dialogStyle &&
           dividerStyles == other.dividerStyles &&
           headerStyles == other.headerStyles &&
+          itemStyle == other.itemStyle &&
           labelStyles == other.labelStyles &&
           lineCalendarStyle == other.lineCalendarStyle &&
           paginationStyle == other.paginationStyle &&
@@ -1142,6 +1174,7 @@ final class FThemeData with Diagnosticable {
           tabsStyle == other.tabsStyle &&
           tappableStyle == other.tappableStyle &&
           textFieldStyle == other.textFieldStyle &&
+          tileStyle == other.tileStyle &&
           tileGroupStyle == other.tileGroupStyle &&
           timeFieldStyle == other.timeFieldStyle &&
           timePickerStyle == other.timePickerStyle &&
@@ -1167,6 +1200,7 @@ final class FThemeData with Diagnosticable {
       dialogStyle.hashCode ^
       dividerStyles.hashCode ^
       headerStyles.hashCode ^
+      itemStyle.hashCode ^
       labelStyles.hashCode ^
       lineCalendarStyle.hashCode ^
       paginationStyle.hashCode ^
@@ -1188,6 +1222,7 @@ final class FThemeData with Diagnosticable {
       tabsStyle.hashCode ^
       tappableStyle.hashCode ^
       textFieldStyle.hashCode ^
+      tileStyle.hashCode ^
       tileGroupStyle.hashCode ^
       timeFieldStyle.hashCode ^
       timePickerStyle.hashCode ^

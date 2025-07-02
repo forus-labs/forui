@@ -1,9 +1,13 @@
 ## 0.13.0 (Next)
+This update focuses on polishing & improving the usability of existing widgets.
 
 ### Animations
 We've updated the animations in Forui to feel more nature and be origin aware. This should make the animations feel more
 polished.
 
+### Blur & glassmorphic support
+We've updated most overlay widgets to support background blur & glassmorphic styles. This is disabled by default. It can
+be enabled by setting a `barrierFilter` & `backgroundFilter` in the widget's style.
 
 ### Styles
 We've updated styles to be easier to configure and use without the CLI. All widgets now accept a style builder function
@@ -80,7 +84,6 @@ FFCheckbox(
 * Add `textBaseline` to `FButton(...)`.
 * Add `FButtonContentStyle.spacing`.
 
-
 * **Breaking** Change `instrinicWidth` in `FButton(...)` to `mainAxisSize`.
 * **Breaking** Change `FButtonStyle.primary`'s signature - pass `FButtonStyle.primary()` instead of `FButtonStyle.primary` to `FButtonStyle`.
 * **Breaking** Change `FButtonStyle.secondary`'s signature - pass `FButtonStyle.secondary()` instead of `FButtonStyle.secondary` to `FButtonStyle`.
@@ -107,13 +110,24 @@ FFCheckbox(
 * Add `FHeaderStyle.decoration`.
 
 
+### `FItem` (new)
+An `FItem` is typically used to group related information together. It is a more generic version of `FTile` that is used
+to build more complex widgets.
+
+* Add `FItem`.
+* Add `FItemDivider`.
+* Add `FItemStyle`.
+* Add `FItemContentStyle`.
+* Add `FItemContainerData`.
+* Add `FItemContainerItemData`.
+
+
 ### `FPopover`
 * Add `FPopover.barrierSemanticsLabel`.
 * Add `FPopover.barrierSemanticsDismissible`.
 * Add `FPopover.builder`.
 * Add `FPopoverStyle.barrierFilter`.
 * Add `FPopoverStyle.backgroundFilter`.
-
 
 * Change `FPopover`'s animation to be origin aware.
 * Change `FPopover(...)`'s `controller` to be optional.
@@ -142,6 +156,25 @@ FFCheckbox(
 * Change `FPortal.controller` to be optional.
 * **Breaking** Change `FPortal.portalBuilder`'s signature from `WidgetBuilder` to 
   `Widget Function(BuildContext, FPortalController)`.
+
+### `FSelect`
+We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes & subtitles.
+
+* Add `FSelect.divider`.
+* Add `FSelectSection.divider`.
+* Add `FSelectItem.prefix`.
+* Add `FSelectItem.subtitle`.
+* Add `FSelectItemStyle.prefixIconStyle`.
+* Add `FSelectItemStyle.prefixIconSpacing`.
+* Add `FSelectItemStyle.titleSpacing`
+* Add `FSelectItemStyle.subtitleStyle`.
+
+* **Breaking** Rename `FSelectItem.child` to `FSelectItem.title`.
+* **Breaking** Rename `FSelectItemStyle.textStyle` to `FSelectItem.titleTextStyle`.
+* **Breaking** Rename `FSelectItemStyle.iconStyle` to `FSelectItem.suffixIconStyle`.
+
+* Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
+* Fix `FSelect.search(...)` expanding items unnecessarily.
 
 
 ### `FSelectMenuTile`
@@ -174,6 +207,8 @@ FFCheckbox(
 * **Breaking** Remove `FSidebarStyle.bordeWidth` - use `FSidebarStyle.decoration` instead.
 * **Breaking** Remove `FSidebarItemStyle.collapsibleAnimationDuration` - use `FSidebarItemStyle.expandDuration` instead.
 
+* Fix `FSidebarItem`'s style not updating when passed in style changes.
+
 
 ### `FTappable`
 * Add `FTappableStyle.bounceDuration`.
@@ -186,19 +221,19 @@ FFCheckbox(
 
 
 ### `FTile`
-We have refactored `FTile`'s implementation to be simpler & its styling to be easier to understand & use.
+We have refactored `FTile`'s implementation to be simpler & its styling to be easier to understand & use. It now uses
+`FItem` internally.
 
+* Add `FTile.raw`.
 * Add `FTileGroupStyle.border`.
-* Add `FTileGroupData.enabled`.
-* Add `FTileGroupItemData`.
-* Add `FTileStyle`
-* Add `FTileStyle.decoration`.
-* Add `FTileStyle.focusedOutlineStyle`.
+* Add `FTileGroupStyle.divierColor`.
+* Add `FTileGroupStyle.dividerWidth`.
 
 * **Breaking** Change `FTileGroup` to render the border even if it contains no groups/tiles - while this isn't desirable
   this allows us to draw the border in a single pass rather than having each tile draw its part of the border and stitching
   the results.
-* **Breaking** Remove `FTileGroupData.states`.
+* **Breaking** Change `FTile` to default to `FThemeData.tileStyle` instead of `FThemeData.tileGroupStyle.tileStyle` when
+  `FTile` is not inside a `FTileGroup`.
 * **Breaking** Remove `FTileGroupStyle.borderColor` - use `FTileGroupStyle.border` instead.
 * **Breaking** Remove `FTileGroupStyle.borderWidth` - use `FTileGroupStyle.border` instead.
 * **Breaking** Change `prefixIcon` to `prefix` in FTile(...)`.
@@ -206,10 +241,11 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * **Breaking** Change `FTile` to ignore `WidgetState`s when neither `onPress` nor `orLongPress` is given.
 * Change `FTile`'s focused outline to be a rounded rectangle even if the tile is inside a `FTileGroup`.
 * Change `FTile` to no longer wrap its content inside a `FTileData` if it is not part of a `FTileGroup`.
-* **Breaking** Remove `FTileData` - use `FTileGroupItemData`.
-* **Breaking** Move `FTileStyle.pressable` to `FTileGroupStyle.tappableTileStyle`.
-* **Breaking** Move `FTileStyle.unpressable` to `FTileGroupStyle.untappableTileStyle`.
-* **Breaking** Remove `FTileStateStyle` - the properties have been moved into `FTileStyle`.
+* **Breaking** Remove `FTileDivider` - use `FItemDivider` instead.
+* **Breaking** Remove `FTileData` - use `FItemContainerItemData` instead.
+* **Breaking** Remove `FTileGroupData` - use `FItemContainerData`s instead.
+* **Breaking** Change `FTileStyle` to extend `FItemStyle`.
+* **Breaking** Remove `FTileStateStyle`.
 * **Breaking** Remove `FTileStateStyle.backgroundColor` - use `FTileStyle.decoration` instead.
 * **Breaking** Remove `FTileStateStyle.borderColor` - use `FTileStyle.decoration` instead.
 * **Breaking** Remove `FTileStateStyle.borderRadius` - use `FTileStyle.decoration` instead.
@@ -219,6 +255,8 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 
 
 ### `FToast`
+We've made toasts dismissable by swiping.
+
 * Add `swipeToDismiss` to `showFToast(...)`.
 * Add `swipeToDismiss` to `showRawFToast(...)`.
 * Add `FToastStyle.backgroundFilter`.
@@ -262,11 +300,11 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Add `FLocalizations.popoverSemanticsLabel`.
 
 * **Breaking** Remove `defaultFontFamily` from `FTypography.copyWith(...)`.
+* **Breaking** Change `FSelectTileGroup.divider` from `FTileDivider` to `FItemDivider`.
 * **Breaking** Change `FSelectMenuTile.autoHide` default value from `false` to `true`.
+* **Breaking** Change `FSelectMenuTile.divider` from `FTileDivider` to `FItemDivider`.
 * **Breaking** Remove `FTransformable`.
 
-* Fix `FSelect.search(...)` always focusing on 1st item even when there is a selected item.
-* Fix `FSelect.search(...)` expanding items unnecessarily.
 * Fix `FTappable` persisting pressed effect even after pointer is moved outside the widget.
 * Fix `FTextFormField` not passing correct value to validator when no controller is provided.
 

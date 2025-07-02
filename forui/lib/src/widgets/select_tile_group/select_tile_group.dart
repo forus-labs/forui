@@ -42,8 +42,8 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
 
   /// {@macro forui.widgets.FTileGroup.divider}
   ///
-  /// Defaults to [FTileDivider.indented].
-  final FTileDivider divider;
+  /// Defaults to [FItemDivider.indented].
+  final FItemDivider divider;
 
   /// The label displayed above the group.
   ///
@@ -76,7 +76,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.physics = const ClampingScrollPhysics(),
-    this.divider = FTileDivider.indented,
+    this.divider = FItemDivider.indented,
     this.label,
     this.description,
     this.semanticsLabel,
@@ -135,7 +135,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin<FTileMi
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
     this.physics = const ClampingScrollPhysics(),
-    this.divider = FTileDivider.indented,
+    this.divider = FItemDivider.indented,
     this.label,
     this.description,
     this.semanticsLabel,

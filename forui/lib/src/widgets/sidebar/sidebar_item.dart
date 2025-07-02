@@ -89,7 +89,7 @@ class FSidebarItem extends StatefulWidget {
   }
 }
 
-class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderStateMixin {
+class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMixin {
   FSidebarItemStyle? _style;
   AnimationController? _controller;
   CurvedAnimation? _curvedAnimation;
@@ -105,6 +105,16 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _update();
+  }
+
+  @override
+  void didUpdateWidget(FSidebarItem old) {
+    super.didUpdateWidget(old);
+    _update();
+  }
+
+  void _update() {
     final groupData = FSidebarGroupData.maybeOf(context);
     final sidebarData = FSidebarData.maybeOf(context);
     final inheritedStyle =
@@ -116,8 +126,8 @@ class _FSidebarItemState extends State<FSidebarItem> with SingleTickerProviderSt
     if (_style != style) {
       _style = style;
 
-      _controller?.dispose();
       _curvedAnimation?.dispose();
+      _controller?.dispose();
 
       _controller = AnimationController(
         vsync: this,

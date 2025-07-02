@@ -69,7 +69,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('sidebar/sidebar_group/${theme.name}/default.png'),
+        matchesGoldenFile('sidebar/sidebar-group/${theme.name}/default.png'),
       );
     });
 
@@ -89,7 +89,7 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar_group/${theme.name}/action.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar-group/${theme.name}/action.png'));
     });
 
     testWidgets('action hovered - ${theme.name}', (tester) async {
@@ -116,7 +116,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('sidebar/sidebar_group/${theme.name}/action-hovered.png'),
+        matchesGoldenFile('sidebar/sidebar-group/${theme.name}/action-hovered.png'),
       );
     });
 
@@ -147,7 +147,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('sidebar/sidebar_group/${theme.name}/with-nested-items.png'),
+        matchesGoldenFile('sidebar/sidebar-group/${theme.name}/with-nested-items.png'),
       );
     });
 
@@ -172,7 +172,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('sidebar/sidebar_group/${theme.name}/long-label.png'),
+        matchesGoldenFile('sidebar/sidebar-group/${theme.name}/long-label.png'),
       );
     });
 
@@ -193,7 +193,7 @@ void main() {
         ),
       );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar_group/${theme.name}/rtl.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('sidebar/sidebar-group/${theme.name}/rtl.png'));
     });
   }
 }

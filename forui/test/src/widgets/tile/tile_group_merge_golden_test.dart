@@ -110,7 +110,7 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final divider in FTileDivider.values) {
+    for (final divider in FItemDivider.values) {
       testWidgets('enabled - ${theme.name} - $divider', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -452,10 +452,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FTileGroup.merge(
-          divider: FTileDivider.indented,
+          divider: FItemDivider.indented,
           children: [
             FTileGroup(
-              divider: FTileDivider.none,
+              divider: FItemDivider.none,
               children: [
                 FTile(
                   prefix: const Icon(FIcons.list, color: Colors.transparent),
@@ -472,7 +472,7 @@ void main() {
               ],
             ),
             FTileGroup(
-              divider: FTileDivider.none,
+              divider: FItemDivider.none,
               children: [
                 FTile(
                   prefix: const Icon(FIcons.list, color: Colors.transparent),
@@ -582,7 +582,7 @@ void main() {
                   onPress: () {},
                 ),
                 FTile(
-                  style: FThemes.blue.dark.tileGroupStyle.untappableTileStyle,
+                  style: FThemes.blue.dark.tileGroupStyle.tileStyle,
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),

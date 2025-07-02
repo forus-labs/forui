@@ -179,6 +179,85 @@ void main() {
       });
     });
 
+    testWidgets('dividers', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect<String>(
+            key: key,
+            divider: FItemDivider.full,
+            format: (s) => s,
+            children: [
+              FSelectSection.fromMap(
+                label: const Text('Group 1'),
+                divider: FItemDivider.indented,
+                items: {
+                  for (final item in ['1A', '1B']) item: item,
+                },
+              ),
+              FSelectSection.fromMap(
+                label: const Text('Group 2'),
+                items: {
+                  for (final item in ['2A', '2B']) item: item,
+                },
+              ),
+              FSelectItem('Item 3', 'Item 3'),
+              FSelectItem('Item 4', 'Item 4'),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/content/dividers.png'));
+    });
+
+    testWidgets('hover with dividers', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect<String>(
+            key: key,
+            divider: FItemDivider.full,
+            format: (s) => s,
+            children: [
+              FSelectSection.fromMap(
+                label: const Text('Group 1'),
+                divider: FItemDivider.indented,
+                items: {
+                  for (final item in ['1A', '1B']) item: item,
+                },
+              ),
+              FSelectSection.fromMap(
+                label: const Text('Group 2'),
+                items: {
+                  for (final item in ['2A', '2B']) item: item,
+                },
+              ),
+              FSelectItem('Item 3', 'Item 3'),
+              FSelectItem('Item 4', 'Item 4'),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      final gesture = await tester.createPointerGesture();
+      await gesture.moveTo(tester.getCenter(find.text('1B')));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select/${theme.name}/content/dividers-hover.png'),
+      );
+    });
+
     testWidgets('focus on selected item', (tester) async {
       controller.value = 'O';
 

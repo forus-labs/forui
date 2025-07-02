@@ -1,11 +1,11 @@
 /// {@category Widgets}
 ///
-/// A tile is typically used to group related information together.
+/// A specialized [FItem] for touch devices.
 ///
 /// See https://forui.dev/docs/tile/tile for working examples.
 library forui.widgets.tile;
 
+import 'package:forui/forui.dart';
+
 export '../src/widgets/tile/tile.dart';
-export '../src/widgets/tile/tile_content.dart' hide FTileContent;
 export '../src/widgets/tile/tile_group.dart';
-export '../src/widgets/tile/tile_group_data.dart';

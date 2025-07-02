@@ -53,8 +53,8 @@ class FPopoverMenu extends StatelessWidget {
 
   /// {@macro forui.widgets.FTileGroup.divider}
   ///
-  /// Defaults to [FTileDivider.full].
-  final FTileDivider divider;
+  /// Defaults to [FItemDivider.full].
+  final FItemDivider divider;
 
   /// The point on the menu (floating content) that connects with the child at the child's anchor.
   ///
@@ -142,7 +142,7 @@ class FPopoverMenu extends StatelessWidget {
     this.cacheExtent,
     this.maxHeight = double.infinity,
     this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FTileDivider.full,
+    this.divider = FItemDivider.full,
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.spacing = const FPortalSpacing(4),

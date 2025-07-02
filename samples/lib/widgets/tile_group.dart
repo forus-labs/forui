@@ -7,13 +7,13 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TileGroupPage extends Sample {
-  final FTileDivider divider;
+  final FItemDivider divider;
 
   TileGroupPage({@queryParam super.theme, @queryParam String divider = 'indented'})
     : divider = switch (divider) {
-        'indented' => FTileDivider.indented,
-        'none' => FTileDivider.none,
-        _ => FTileDivider.full,
+        'indented' => FItemDivider.indented,
+        'none' => FItemDivider.none,
+        _ => FItemDivider.full,
       };
 
   @override

@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
+            style: TestScaffold.blueScreen.tileStyle,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -30,7 +30,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
+            style: TestScaffold.blueScreen.tileStyle,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileGroupStyle.tappableTileStyle,
+            style: TestScaffold.blueScreen.tileStyle,
             enabled: false,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
@@ -218,11 +218,39 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/unhoverable.png'));
   });
 
-  testWidgets('utilize all space', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 225),
+  group('FTile', () {
+    testWidgets('utilize all space', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 225),
+            child: FTile(
+              prefix: const Icon(FIcons.bluetooth),
+              title: const Text('Bluetooth'),
+              details: const Text('FL (5G)'),
+              suffix: const Icon(FIcons.chevronRight),
+              onPress: () {},
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/utilize-all-space.png'));
+    });
+
+    testWidgets('minimal', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile(title: const Text('Bluetooth'), onPress: () {}),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
+    });
+
+    testWidgets('no subtitle', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
           child: FTile(
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
@@ -231,119 +259,125 @@ void main() {
             onPress: () {},
           ),
         ),
-      ),
-    );
+      );
+      await tester.pumpAndSettle();
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/utilize-all-space.png'));
-  });
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
+    });
 
-  testWidgets('minimal', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FTile(title: const Text('Bluetooth'), onPress: () {}),
-      ),
-    );
-
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/minimal.png'));
-  });
-
-  testWidgets('no subtitle', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FTile(
-          prefix: const Icon(FIcons.bluetooth),
-          title: const Text('Bluetooth'),
-          details: const Text('FL (5G)'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
+    testWidgets('no suffix icon', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile(
+            prefix: const Icon(FIcons.bluetooth),
+            title: const Text('Bluetooth'),
+            details: const Text('FL (5G)'),
+            onPress: () {},
+          ),
         ),
-      ),
-    );
-    await tester.pumpAndSettle();
+      );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-subtitle.png'));
-  });
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-suffix.png'));
+    });
 
-  testWidgets('no suffix icon', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FTile(
-          prefix: const Icon(FIcons.bluetooth),
-          title: const Text('Bluetooth'),
-          details: const Text('FL (5G)'),
-          onPress: () {},
-        ),
-      ),
-    );
-
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/no-suffix.png'));
-  });
-
-  testWidgets('prioritize title', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: SizedBox(
-          width: 300,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTile(
-              prefix: const Icon(FIcons.bluetooth),
-              title: const Text('L                               ong'),
-              details: const Text('FL (5G)'),
-              suffix: const Icon(FIcons.chevronRight),
-              onPress: () {},
+    testWidgets('prioritize title', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: SizedBox(
+            width: 300,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTile(
+                prefix: const Icon(FIcons.bluetooth),
+                title: const Text('L                               ong'),
+                details: const Text('FL (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-title.png'));
-  });
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-title.png'));
+    });
 
-  testWidgets('prioritize subtitle', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: SizedBox(
-          width: 300,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTile(
-              prefix: const Icon(FIcons.bluetooth),
-              title: const Text('Title'),
-              subtitle: const Text('L                                     ong'),
-              details: const Text('FL (5G)'),
-              suffix: const Icon(FIcons.chevronRight),
-              onPress: () {},
+    testWidgets('prioritize subtitle', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: SizedBox(
+            width: 300,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTile(
+                prefix: const Icon(FIcons.bluetooth),
+                title: const Text('Title'),
+                subtitle: const Text('L                                     ong'),
+                details: const Text('FL (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-subtitle.png'));
-  });
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-subtitle.png'));
+    });
 
-  testWidgets('prioritize details', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: SizedBox(
-          width: 300,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FTile(
-              prefix: const Icon(FIcons.bluetooth),
-              title: const Text('Title'),
-              subtitle: const Text('L                                     ong'),
-              details: const FSwitch(),
-              suffix: const Icon(FIcons.chevronRight),
-              onPress: () {},
+    testWidgets('prioritize details', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: SizedBox(
+            width: 300,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FTile(
+                prefix: const Icon(FIcons.bluetooth),
+                title: const Text('Title'),
+                subtitle: const Text('L                                     ong'),
+                details: const FSwitch(),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-details.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/prioritize-details.png'));
+    });
+  });
+
+  group('FTile.raw', () {
+    testWidgets('minimal', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile.raw(child: const Text('Bluetooth'), onPress: () {}),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/raw/minimal.png'));
+    });
+
+    testWidgets('all', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile.raw(prefix: const Icon(FIcons.bluetooth), child: const Text('Bluetooth'), onPress: () {}),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/raw/all.png'));
+    });
+
+    testWidgets('expanded child', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTile.raw(prefix: const Icon(FIcons.bluetooth), child: const FTextField()),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/raw/expanded.png'));
+    });
   });
 }
