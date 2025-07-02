@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/item/render_item_content.dart';
+import 'package:forui/src/widgets/item/render_item_content.dart';
 
 part 'item_content.style.dart';
 
