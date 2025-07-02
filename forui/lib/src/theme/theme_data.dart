@@ -182,6 +182,15 @@ final class FThemeData with Diagnosticable {
   /// ```
   final FItemStyle itemStyle;
 
+  /// The item group style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  /// ```shell
+  /// dart run forui style create item-group
+  /// ```
+  final FItemGroupStyle itemGroupStyle;
+
   /// The label styles.
   ///
   /// ## CLI
@@ -464,6 +473,7 @@ final class FThemeData with Diagnosticable {
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyles,
     FItemStyle? itemStyle,
+    FItemGroupStyle? itemGroupStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
     FPaginationStyle? paginationStyle,
@@ -517,6 +527,7 @@ final class FThemeData with Diagnosticable {
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
       headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
       itemStyle: itemStyle ?? FItemStyle.inherit(colors: colors, typography: typography, style: style),
+      itemGroupStyle: itemGroupStyle ?? FItemGroupStyle.inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
       lineCalendarStyle:
           lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
@@ -573,6 +584,7 @@ final class FThemeData with Diagnosticable {
     required this.dividerStyles,
     required this.headerStyles,
     required this.itemStyle,
+    required this.itemGroupStyle,
     required this.labelStyles,
     required this.lineCalendarStyle,
     required this.paginationStyle,
@@ -1006,6 +1018,7 @@ final class FThemeData with Diagnosticable {
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyles,
     FItemStyle? itemStyle,
+    FItemGroupStyle? itemGroupStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
     FPaginationStyle? paginationStyle,
@@ -1050,6 +1063,7 @@ final class FThemeData with Diagnosticable {
     dividerStyles: dividerStyles ?? this.dividerStyles,
     headerStyles: headerStyles ?? this.headerStyles,
     itemStyle: itemStyle ?? this.itemStyle,
+    itemGroupStyle: itemGroupStyle ?? this.itemGroupStyle,
     labelStyles: labelStyles ?? this.labelStyles,
     lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
     paginationStyle: paginationStyle ?? this.paginationStyle,
@@ -1101,6 +1115,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('headerStyles', headerStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('itemStyle', itemStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('itemGroupStyle', itemGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('paginationStyle', paginationStyle, level: DiagnosticLevel.debug))
@@ -1153,6 +1168,7 @@ final class FThemeData with Diagnosticable {
           dividerStyles == other.dividerStyles &&
           headerStyles == other.headerStyles &&
           itemStyle == other.itemStyle &&
+          itemGroupStyle == other.itemGroupStyle &&
           labelStyles == other.labelStyles &&
           lineCalendarStyle == other.lineCalendarStyle &&
           paginationStyle == other.paginationStyle &&
@@ -1201,6 +1217,7 @@ final class FThemeData with Diagnosticable {
       dividerStyles.hashCode ^
       headerStyles.hashCode ^
       itemStyle.hashCode ^
+      itemGroupStyle.hashCode ^
       labelStyles.hashCode ^
       lineCalendarStyle.hashCode ^
       paginationStyle.hashCode ^

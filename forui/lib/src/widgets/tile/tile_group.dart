@@ -112,11 +112,11 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
     super.style,
     super.scrollController,
     super.cacheExtent,
-    super.maxHeight = double.infinity,
-    super.dragStartBehavior = DragStartBehavior.start,
-    super.physics = const ClampingScrollPhysics(),
+    super.maxHeight,
+    super.dragStartBehavior,
+    super.physics,
     super.enabled,
-    super.divider = FItemDivider.indented,
+    super.divider,
     super.semanticsLabel,
     super.label,
     super.description,
@@ -156,11 +156,11 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
     super.style,
     super.scrollController,
     super.cacheExtent,
-    super.maxHeight = double.infinity,
-    super.dragStartBehavior = DragStartBehavior.start,
-    super.physics = const ClampingScrollPhysics(),
+    super.maxHeight,
+    super.dragStartBehavior,
+    super.physics,
     super.enabled,
-    super.divider = FItemDivider.indented,
+    super.divider,
     super.semanticsLabel,
     super.label,
     super.description,
@@ -169,16 +169,17 @@ class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
   }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
        assert(count == null || 0 <= count, 'count must be non-negative.'),
        _delegate = ((style) => SliverChildBuilderDelegate((context, index) {
-         final tile = tileBuilder(context, index);
-         return tile == null
-             ? null
-             : FItemContainerItemData(
-                 style: style.tileStyle,
-                 divider: divider,
-                 index: index,
-                 last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
-                 child: tile,
-               );
+         if (tileBuilder(context, index) case final tile?) {
+           return FItemContainerItemData(
+             style: style.tileStyle,
+             divider: divider,
+             index: index,
+             last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
+             child: tile,
+           );
+         }
+
+         return null;
        }, childCount: count));
 
   @override

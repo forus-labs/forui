@@ -8,4 +8,5 @@ library forui.widgets.item;
 export '../src/widgets/item/item.dart';
 export '../src/widgets/item/item_container_data.dart';
 export '../src/widgets/item/item_content.dart' hide ItemContent;
+export '../src/widgets/item/item_group.dart';
 export '../src/widgets/item/raw_item_content.dart' hide RawItemContent;
