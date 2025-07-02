@@ -390,11 +390,11 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   /// Supported states:
   /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<Color>? dividerColor;
+  final FWidgetStateMap<Color> dividerColor;
 
   /// The divider's width.
   @override
-  final double? dividerWidth;
+  final double dividerWidth;
 
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({

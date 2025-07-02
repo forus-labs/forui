@@ -251,11 +251,11 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   /// Supported states:
   /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<Color>? dividerColor;
+  final FWidgetStateMap<Color> dividerColor;
 
   /// The divider's width.
   @override
-  final double? dividerWidth;
+  final double dividerWidth;
 
   /// The tile's style.
   @override

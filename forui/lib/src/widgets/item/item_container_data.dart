@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
@@ -42,15 +42,11 @@ enum FItemDivider {
 /// Users that wish to create their own custom container should pass additional data to the children using a separate
 /// inherited widget.
 final class FItemContainerData extends InheritedWidget {
-  /// Returns the [FItemContainerData] in the given [context].
-  static FItemContainerData? maybeOf(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<FItemContainerData>();
-
   /// The divider's style.
-  final FWidgetStateMap<Color>? dividerColor;
+  final FWidgetStateMap<Color> dividerColor;
 
   /// The divider's width.
-  final double? dividerWidth;
+  final double dividerWidth;
 
   /// The divider used to visually separate the different item containers.
   final FItemDivider divider;
@@ -64,19 +60,6 @@ final class FItemContainerData extends InheritedWidget {
   /// The number of item containers.
   final int length;
 
-  /// Returns the [FItemContainerData] in the given [context], or a default [FItemContainerData] if none is found.
-  factory FItemContainerData.of(BuildContext context) =>
-      maybeOf(context) ??
-      const FItemContainerData(
-        dividerColor: null,
-        dividerWidth: null,
-        divider: FItemDivider.none,
-        enabled: true,
-        index: 0,
-        length: 1,
-        child: SizedBox(),
-      );
-
   /// Creates a [FItemContainerData].
   const FItemContainerData({
     required this.dividerColor,
@@ -88,6 +71,47 @@ final class FItemContainerData extends InheritedWidget {
     required super.child,
     super.key,
   });
+
+  /// Creates a [FItemContainerData] that merges the given fields with the current [FItemContainerData].
+  static Widget merge({
+    required Widget child,
+    FWidgetStateMap<Color>? dividerColor,
+    double? dividerWidth,
+    FItemDivider? divider,
+    bool? enabled,
+    int? index,
+    int? length,
+  }) => Builder(
+    builder: (context) {
+      final FItemContainerData? parent = maybeOf(context);
+      return FItemContainerData(
+        dividerColor: dividerColor ?? parent?.dividerColor ?? FWidgetStateMap.all(Colors.transparent),
+        dividerWidth: dividerWidth ?? parent?.dividerWidth ?? 0,
+        divider: divider ?? parent?.divider ?? FItemDivider.none,
+        enabled: enabled ?? parent?.enabled ?? true,
+        index: index ?? parent?.index ?? 0,
+        length: length ?? parent?.length ?? 1,
+        child: child,
+      );
+    },
+  );
+
+  /// Returns the [FItemContainerData] in the given [context].
+  static FItemContainerData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FItemContainerData>();
+
+  /// Returns the [FItemContainerData] in the given [context], or a default [FItemContainerData] if none is found.
+  factory FItemContainerData.of(BuildContext context) =>
+      maybeOf(context) ??
+      FItemContainerData(
+        dividerColor: FWidgetStateMap.all(Colors.transparent),
+        dividerWidth: 0,
+        divider: FItemDivider.none,
+        enabled: true,
+        index: 0,
+        length: 1,
+        child: const SizedBox(),
+      );
 
   @override
   bool updateShouldNotify(FItemContainerData old) =>

@@ -143,11 +143,11 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   /// Supported states:
   /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<Color>? dividerColor;
+  final FWidgetStateMap<Color> dividerColor;
 
   /// The divider's width.
   @override
-  final double? dividerWidth;
+  final double dividerWidth;
 
   /// The section's items' style.
   @override
