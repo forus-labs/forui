@@ -388,11 +388,7 @@ void main() {
     });
 
     testWidgets('empty item group', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FItemGroup.merge(children: const []),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold(child: FItemGroup.merge(children: const [])));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/group/merge/empty.png'));
     });

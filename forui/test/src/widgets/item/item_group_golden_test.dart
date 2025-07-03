@@ -517,10 +517,7 @@ void main() {
     testWidgets('lazily built', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FItemGroup.builder(
-            maxHeight: 250,
-            itemBuilder: (context, index) => FItem(title: Text('Item $index')),
-          ),
+          child: FItemGroup.builder(maxHeight: 250, itemBuilder: (context, index) => FItem(title: Text('Item $index'))),
         ),
       );
 

@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'item_group.style.dart';
 
@@ -300,8 +302,10 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
     : this(
         dividerColor: FWidgetStateMap.all(colors.border),
         dividerWidth: style.borderWidth,
-        itemStyle: FItemStyle.inherit(colors: colors, typography: typography, style: style).copyWith(
-          margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-        ),
+        itemStyle: FItemStyle.inherit(
+          colors: colors,
+          typography: typography,
+          style: style,
+        ).copyWith(margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2)),
       );
 }
