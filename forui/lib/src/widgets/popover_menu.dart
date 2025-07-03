@@ -18,10 +18,10 @@ part 'popover_menu.style.dart';
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
 class FPopoverMenu extends StatelessWidget {
-  static List<FTileGroupMixin<FTileMixin>> _menuBuilder(
+  static List<FTileGroupMixin> _menuBuilder(
     BuildContext context,
     FPopoverController controller,
-    List<FTileGroupMixin<FTileMixin>>? menu,
+    List<FTileGroupMixin>? menu,
   ) => menu!;
 
   static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
@@ -113,13 +113,12 @@ class FPopoverMenu extends StatelessWidget {
   /// Can incorporate a value-independent widget subtree from the [menu] into the returned widget tree.
   ///
   /// This can be null if the entire widget subtree the [menuBuilder] builds doest not require the controller.
-  final List<FTileGroupMixin<FTileMixin>> Function(BuildContext, FPopoverController, List<FTileGroupMixin<FTileMixin>>?)
-  menuBuilder;
+  final List<FTileGroupMixin> Function(BuildContext, FPopoverController, List<FTileGroupMixin>?) menuBuilder;
 
   /// The menu.
   ///
   /// Passed to [menuBuilder] if provided.
-  final List<FTileGroupMixin<FTileMixin>>? menu;
+  final List<FTileGroupMixin>? menu;
 
   /// {@macro forui.widgets.FPopover.builder}
   final ValueWidgetBuilder<FPopoverController> builder;

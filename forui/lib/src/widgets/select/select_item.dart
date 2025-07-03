@@ -94,7 +94,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
               first: content.first,
               enabled: enabled,
               ensureVisible: content.ensureVisible,
-              child: FItemContainerItemData(
+              child: FItemData.merge(
                 style: itemStyle,
                 divider: divider,
                 index: 0,
@@ -103,7 +103,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
               ),
             ),
           for (final (i, child) in children.indexed.skip(1))
-            FItemContainerItemData(
+            FItemData.merge(
               style: itemStyle,
               divider: divider,
               index: i,

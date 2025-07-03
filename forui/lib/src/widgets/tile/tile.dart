@@ -172,14 +172,9 @@ class FTile extends StatelessWidget with FTileMixin {
 
   @override
   Widget build(BuildContext context) {
-    final data = FItemContainerItemData.maybeOf(context);
-    return FItemContainerItemData(
-      style: data?.style ?? context.theme.tileStyle,
-      divider: data?.divider ?? FItemDivider.none,
-      index: data?.index ?? 0,
-      last: data?.last ?? true,
-      child: _child,
-    );
+    final parent = FItemData.maybeOf(context);
+    final style = parent == null ? this.style?.call(context.theme.tileStyle) ?? context.theme.tileStyle : null;
+    return FItemData.merge(style: style, last: true, child: _child);
   }
 
   @override

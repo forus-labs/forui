@@ -19,9 +19,9 @@ mixin FItemMixin on Widget {}
 /// * [FTile] for a specialized item for touch devices.
 /// * [FItemStyle] for customizing an item's appearance.
 class FItem extends StatelessWidget with FItemMixin {
-  /// The item's style. Defaults to [FItemContainerItemData.style] if present.
+  /// The item's style. Defaults to [FItemData.style] if present.
   ///
-  /// Provide a style to prevent inheritance from [FItemContainerItemData].
+  /// Provide a style to prevent inheritance from [FItemData].
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -159,22 +159,18 @@ class FItem extends StatelessWidget with FItemMixin {
 
   @override
   Widget build(BuildContext context) {
-    final container = FItemContainerData.of(context);
-    final item = FItemContainerItemData.of(context);
+    final data = FItemData.of(context);
+    final inheritedStyle = data.style ?? context.theme.itemStyle;
 
-    final style = this.style?.call(item.style) ?? item.style;
-    final enabled = this.enabled ?? container.enabled;
+    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
+    final enabled = this.enabled ?? data.enabled;
     final states = {if (!enabled) WidgetState.disabled};
-    final divider = switch (container.index) {
-      final i when i < container.length - 1 && item.last => container.divider,
-      final i when i == container.length - 1 && item.last => FItemDivider.none,
-      _ => item.divider,
-    };
+    final divider = data.divider;
 
     // We increase the bottom margin to draw the divider.
     var margin = style.margin.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
     if (divider != FItemDivider.none) {
-      final width = container.dividerWidth ?? 0;
+      final width = data.dividerWidth;
       margin = margin.copyWith(bottom: margin.bottom + width);
     }
 
@@ -185,7 +181,7 @@ class FItem extends StatelessWidget with FItemMixin {
           padding: margin,
           child: DecoratedBox(
             decoration: style.decoration.resolve(states) ?? const BoxDecoration(),
-            child: _builder(context, style, states, container.dividerColor, container.dividerWidth, divider),
+            child: _builder(context, style, states, data.dividerColor, data.dividerWidth, divider),
           ),
         ),
       );
@@ -210,7 +206,7 @@ class FItem extends StatelessWidget with FItemMixin {
             children: [
               DecoratedBox(
                 decoration: style.decoration.maybeResolve(states) ?? const BoxDecoration(),
-                child: _builder(context, style, states, container.dividerColor, container.dividerWidth, divider),
+                child: _builder(context, style, states, data.dividerColor, data.dividerWidth, divider),
               ),
               if (style.focusedOutlineStyle case final outline? when states.contains(WidgetState.focused))
                 Positioned.fill(

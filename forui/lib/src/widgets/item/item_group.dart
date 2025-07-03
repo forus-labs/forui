@@ -6,116 +6,17 @@ import 'package:meta/meta.dart';
 
 part 'item_group.style.dart';
 
-/// A marker interface which denotes that mixed-in widgets can group items and be used in a [FTileGroup.merge].
-mixin FItemGroupMixin<T extends Widget> on Widget {}
+/// A marker interface which denotes that mixed-in widgets can group items and be used in a [FItemGroup.merge].
+mixin FItemGroupMixin on Widget {}
 
-/// A item group that groups multiple [FItemMixin]s and [FItemGroupMixin]s together.
+/// An item group that groups multiple [FItemMixin]s together.
 ///
 /// Items grouped together will be separated by a divider, specified by [divider].
 ///
 /// See:
 /// * https://forui.dev/docs/data/item-group for working examples.
-/// * [FItemStyle] for customizing a tile's appearance.
-class FItemGroup extends _Group {
-  /// The delegate that builds the sliver children.
-  final SliverChildDelegate Function(FItemGroupStyle) _delegate;
-
-  /// Creates a [FItemGroup].
-  FItemGroup({
-    required List<FTileMixin> children,
-    super.style,
-    super.scrollController,
-    super.cacheExtent,
-    super.maxHeight,
-    super.dragStartBehavior,
-    super.physics,
-    super.enabled,
-    super.divider,
-    super.semanticsLabel,
-    super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
-       _delegate = ((style) => SliverChildListDelegate([
-         for (final (index, child) in children.indexed)
-           FItemContainerItemData(
-             style: style.itemStyle,
-             divider: divider,
-             index: index,
-             last: index == children.length - 1,
-             child: child,
-           ),
-       ]));
-
-  /// Creates a [FItemGroup] that lazily builds its children.
-  ///
-  /// {@template forui.widgets.FTileGroup.builder}
-  /// The [itemBuilder] is called for each tile that should be built. [FItemContainerItemData] is **not** visible to
-  /// `itemBuilder`.
-  /// * It may return null to signify the end of the group.
-  /// * It may be called more than once for the same index.
-  /// * It will be called only for indices <= [count] if [count] is given.
-  ///
-  /// The [count] is the number of tiles to build. If null, [itemBuilder] will be called until it returns null.
-  ///
-  /// ## Notes
-  /// May result in an infinite loop or run out of memory if:
-  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
-  /// * [count] is null and [itemBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
-  ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
-  /// {@endtemplate}
-  FItemGroup.builder({
-    required NullableIndexedWidgetBuilder itemBuilder,
-    int? count,
-    super.style,
-    super.scrollController,
-    super.cacheExtent,
-    super.maxHeight,
-    super.dragStartBehavior,
-    super.physics,
-    super.enabled,
-    super.divider,
-    super.semanticsLabel,
-    super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
-       assert(count == null || 0 <= count, 'count must be non-negative.'),
-       _delegate = ((style) => SliverChildBuilderDelegate((context, index) {
-         if (itemBuilder(context, index) case final item?) {
-           return FItemContainerItemData(
-             style: style.itemStyle,
-             divider: divider,
-             index: index,
-             last: (count != null && index == count - 1) || itemBuilder(context, index + 1) == null,
-             child: item,
-           );
-         }
-
-         return null;
-       }, childCount: count));
-
-  @override
-  Widget build(BuildContext context) {
-    final data = FItemContainerData.maybeOf(context);
-    final inheritedStyle = _GroupStyle.maybeOf(context)?.style ?? context.theme.itemGroupStyle;
-    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
-    final enabled = this.enabled ?? data?.enabled ?? true;
-
-    Widget sliver = SliverList(delegate: _delegate(style));
-    if (data == null || this.style != null || (this.enabled != null && this.enabled != data.enabled)) {
-      sliver = FItemContainerData(
-        dividerColor: style.dividerColor,
-        dividerWidth: style.dividerWidth,
-        divider: data?.divider ?? FItemDivider.none,
-        enabled: enabled,
-        index: data?.index ?? 0,
-        length: data?.length ?? 1,
-        child: sliver,
-      );
-    }
-
-    return data == null ? _scrollView(enabled, [sliver]) : sliver;
-  }
-}
-
-abstract class _Group extends StatelessWidget {
+/// * [FItemGroupStyle] for customizing a item group's appearance.
+class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// The style.
   ///
   /// ## CLI
@@ -168,10 +69,10 @@ abstract class _Group extends StatelessWidget {
   final ScrollPhysics physics;
 
   /// {@template forui.widgets.FItemGroup.divider}
-  /// The divider between tiles.
+  /// The divider between items.
   /// {@endtemplate}
   ///
-  /// Defaults to [FItemDivider.none].
+  /// Defaults to [FItemDivider.indented].
   final FItemDivider divider;
 
   /// True if the group is enabled. Defaults to true.
@@ -182,7 +83,13 @@ abstract class _Group extends StatelessWidget {
   /// It is ignored if the group is part of a merged [FItemGroup].
   final String? semanticsLabel;
 
-  const _Group({
+  /// The delegate that builds the sliver children.
+  // ignore: avoid_positional_boolean_parameters
+  final Widget Function(FItemGroupStyle, bool) _builder;
+
+  /// Creates a [FItemGroup].
+  FItemGroup({
+    required List<FItemMixin> children,
     this.style,
     this.scrollController,
     this.cacheExtent,
@@ -193,23 +100,138 @@ abstract class _Group extends StatelessWidget {
     this.divider = FItemDivider.none,
     this.semanticsLabel,
     super.key,
-  });
+  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+       _builder = ((style, enabled) => SliverList.list(
+         children: [
+           for (final (index, child) in children.indexed)
+             FItemData.merge(
+               style: style.itemStyle,
+               enabled: enabled,
+               dividerColor: style.dividerColor,
+               dividerWidth: style.dividerWidth,
+               divider: divider,
+               index: index,
+               last: index == children.length - 1,
+               child: child,
+             ),
+         ],
+       ));
 
-  Widget _scrollView(bool enabled, List<Widget> slivers) => Semantics(
-    container: true,
-    label: semanticsLabel,
-    child: ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: maxHeight),
-      child: CustomScrollView(
-        controller: scrollController,
-        cacheExtent: cacheExtent,
-        dragStartBehavior: dragStartBehavior,
-        shrinkWrap: true,
-        physics: physics,
-        slivers: slivers,
+  /// Creates a [FItemGroup] that lazily builds its children.
+  ///
+  /// {@template forui.widgets.FItemGroup.builder}
+  /// The [itemBuilder] is called for each item that should be built. The current level's [FItemData] is **not**
+  /// visible to `itemBuilder`.
+  /// * It may return null to signify the end of the group.
+  /// * It may be called more than once for the same index.
+  /// * It will be called only for indices <= [count] if [count] is given.
+  ///
+  /// The [count] is the number of items to build. If null, [itemBuilder] will be called until it returns null.
+  ///
+  /// ## Notes
+  /// May result in an infinite loop or run out of memory if:
+  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
+  /// * [count] is null and [itemBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
+  ///   items with non-zero size, return null from builder, or set [count] to non-null.
+  /// {@endtemplate}
+  FItemGroup.builder({
+    required NullableIndexedWidgetBuilder itemBuilder,
+    int? count,
+    this.style,
+    this.scrollController,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
+    this.enabled,
+    this.divider = FItemDivider.none,
+    this.semanticsLabel,
+    super.key,
+  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+       assert(count == null || 0 <= count, 'count must be non-negative.'),
+       _builder = ((style, enabled) => SliverList.builder(
+         itemCount: count,
+         itemBuilder: (context, index) {
+           if (itemBuilder(context, index) case final item?) {
+             return FItemData.merge(
+               style: style.itemStyle,
+               enabled: enabled,
+               dividerColor: style.dividerColor,
+               dividerWidth: style.dividerWidth,
+               divider: divider,
+               index: index,
+               last: (count != null && index == count - 1) || itemBuilder(context, index + 1) == null,
+               child: item,
+             );
+           }
+
+           return null;
+         },
+       ));
+
+  /// Creates a [FItemGroup] that merges multiple [FItemGroupMixin]s together.
+  ///
+  /// All group labels will be ignored.
+  FItemGroup.merge({
+    required List<FItemGroupMixin> children,
+    this.style,
+    this.scrollController,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
+    this.enabled,
+    this.divider = FItemDivider.full,
+    this.semanticsLabel,
+    super.key,
+  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+       _builder = ((style, enabled) => SliverMainAxisGroup(
+         slivers: [
+           for (final (index, child) in children.indexed)
+             FItemData.merge(
+               style: style.itemStyle,
+               enabled: enabled,
+               dividerColor: style.dividerColor,
+               dividerWidth: style.dividerWidth,
+               divider: divider,
+               index: index,
+               last: index == children.length - 1,
+               child: child,
+             ),
+         ],
+       ));
+
+  @override
+  Widget build(BuildContext context) {
+    final data = FItemData.maybeOf(context);
+    final inheritedStyle = FItemGroupStyleData.of(context);
+    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
+    final enabled = this.enabled ?? data?.enabled ?? true;
+
+    final sliver = _builder(style, enabled);
+    if (data != null) {
+      return sliver;
+    }
+
+    return Semantics(
+      container: true,
+      label: semanticsLabel,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxHeight: maxHeight),
+        child: FItemGroupStyleData(
+          style: style,
+          child: CustomScrollView(
+            controller: scrollController,
+            cacheExtent: cacheExtent,
+            dragStartBehavior: dragStartBehavior,
+            shrinkWrap: true,
+            physics: physics,
+            slivers: [sliver],
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -227,15 +249,24 @@ abstract class _Group extends StatelessWidget {
   }
 }
 
-class _GroupStyle extends InheritedWidget {
-  static _GroupStyle? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<_GroupStyle>();
+/// An inherited widget that provides the [FItemGroupStyle] to its descendants.
+class FItemGroupStyleData extends InheritedWidget {
+  /// Returns the [FItemGroupStyle] in the given [context], or null if none is found.
+  static FItemGroupStyle? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FItemGroupStyleData>()?.style;
 
+  /// Returns the [FItemGroupStyle] in the given [context].
+  static FItemGroupStyle of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FItemGroupStyleData>()?.style ?? context.theme.itemGroupStyle;
+
+  /// The style of the group.
   final FItemGroupStyle style;
 
-  const _GroupStyle({required this.style, required super.child});
+  /// Creates a [FItemGroupStyleData].
+  const FItemGroupStyleData({required this.style, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(_GroupStyle old) => style != old.style;
+  bool updateShouldNotify(FItemGroupStyleData old) => style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -257,7 +288,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   @override
   final double dividerWidth;
 
-  /// The tile's style.
+  /// The item's style.
   @override
   final FItemStyle itemStyle;
 
@@ -269,6 +300,8 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
     : this(
         dividerColor: FWidgetStateMap.all(colors.border),
         dividerWidth: style.borderWidth,
-        itemStyle: FItemStyle.inherit(colors: colors, typography: typography, style: style),
+        itemStyle: FItemStyle.inherit(colors: colors, typography: typography, style: style).copyWith(
+          margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+        ),
       );
 }
