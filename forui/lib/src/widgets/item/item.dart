@@ -65,6 +65,12 @@ class FItem extends StatelessWidget with FItemMixin {
   /// The item is not hoverable if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
 
+  /// {@macro forui.foundation.FTappable.shortcuts}
+  final Map<ShortcutActivator, Intent>? shortcuts;
+
+  /// {@macro forui.foundation.FTappable.actions}
+  final Map<Type, Action<Intent>>? actions;
+
   final Widget Function(BuildContext, FItemStyle, Set<WidgetState>, FWidgetStateMap<Color>?, double?, FItemDivider)
   _builder;
 
@@ -102,6 +108,8 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.shortcuts,
+    this.actions,
     Widget? prefix,
     Widget? subtitle,
     Widget? details,
@@ -144,6 +152,8 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.shortcuts,
+    this.actions,
     Widget? prefix,
     super.key,
   }) : _builder = ((context, style, states, color, width, divider) => RawItemContent(
@@ -202,6 +212,8 @@ class FItem extends StatelessWidget with FItemMixin {
           selected: selected,
           onPress: enabled ? (onPress ?? () {}) : null,
           onLongPress: enabled ? (onLongPress ?? () {}) : null,
+          shortcuts: shortcuts,
+          actions: actions,
           builder: (context, states, _) => Stack(
             children: [
               DecoratedBox(
@@ -231,14 +243,16 @@ class FItem extends StatelessWidget with FItemMixin {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
-      ..add(StringProperty('semanticsLabel', semanticsLabel, defaultValue: null, quoted: false))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions));
   }
 }
 

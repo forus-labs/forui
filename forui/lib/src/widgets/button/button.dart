@@ -56,6 +56,12 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onStateChange}
   final ValueChanged<Set<WidgetState>>? onStateChange;
 
+  /// {@macro forui.foundation.FTappable.shortcuts}
+  final Map<ShortcutActivator, Intent>? shortcuts;
+
+  /// {@macro forui.foundation.FTappable.actions}
+  final Map<Type, Action<Intent>>? actions;
+
   /// True if this button is currently selected. Defaults to false.
   final bool selected;
 
@@ -93,6 +99,8 @@ class FButton extends StatelessWidget {
     this.onHoverChange,
     this.onStateChange,
     this.selected = false,
+    this.shortcuts,
+    this.actions,
     MainAxisSize mainAxisSize = MainAxisSize.max,
     MainAxisAlignment mainAxisAlignment = MainAxisAlignment.center,
     CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
@@ -124,6 +132,8 @@ class FButton extends StatelessWidget {
     this.onHoverChange,
     this.onStateChange,
     this.selected = false,
+    this.shortcuts,
+    this.actions,
     super.key,
   }) : child = IconContent(child: child);
 
@@ -139,6 +149,8 @@ class FButton extends StatelessWidget {
     this.onHoverChange,
     this.onStateChange,
     this.selected = false,
+    this.shortcuts,
+    this.actions,
     super.key,
   });
 
@@ -179,6 +191,8 @@ class FButton extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions))
       ..add(FlagProperty('selected', value: selected, defaultValue: false, ifTrue: 'selected'));
   }
 }

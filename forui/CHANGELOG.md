@@ -79,6 +79,8 @@ FFCheckbox(
 
 
 ### `FButton`
+* Add `FButton.actions`.
+* Add `FButton.shortcuts`.
 * Add `mainAxisAlignment` to `FButton(...)`.
 * Add `crossAxisAlignment` to `FButton(...)`.
 * Add `textBaseline` to `FButton(...)`.
@@ -178,9 +180,11 @@ We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes 
 
 
 ### `FSelectMenuTile`
-* Add `FSelectMenutile.barrierSemanticsLabel`.
-* Add `FSelectMenutile.barrierSemanticsDismissible`.
-* Add `FSelectMenutile.detailsBuilder`.
+* Add `FSelectMenuTile.actions`.
+* Add `FSelectMenuTile.barrierSemanticsLabel`.
+* Add `FSelectMenuTile.barrierSemanticsDismissible`.
+* Add `FSelectMenuTile.detailsBuilder`.
+* Add `FSelectMenuTile.shortcuts`.
 
 * Change `FSelectMenuTile.selectController` to be optional.
 
@@ -211,6 +215,8 @@ We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes 
 
 
 ### `FTappable`
+* Add `FTappable.actions`.
+* Add `FTappable.shortcuts`.
 * Add `FTappableStyle.bounceDuration`.
 * Add `FTappableStyle.bounceDownCurve`.
 * Add `FTappableStyle.bounceUpCurve`.
@@ -224,7 +230,9 @@ We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes 
 We have refactored `FTile`'s implementation to be simpler & its styling to be easier to understand & use. It now uses
 `FItem` internally.
 
-* Add `FTile.raw`.
+* Add `FTile.actions`.
+* Add `FTile.shortcuts`.
+* Add `FTile.raw(...)`.
 * Add `FTileGroupStyle.border`.
 * Add `FTileGroupStyle.divierColor`.
 * Add `FTileGroupStyle.dividerWidth`.
@@ -298,6 +306,8 @@ We've made toasts dismissable by swiping.
 * Add `FModalBarrier`.
 * Add `FPaginationStyle.focusedOutlineStyle`.
 * Add `FLocalizations.popoverSemanticsLabel`.
+* Add `FSelectTile.actions`.
+* Add `FSelectTile.shortcuts`.
 
 * **Breaking** Remove `defaultFontFamily` from `FTypography.copyWith(...)`.
 * **Breaking** Change `FSelectTileGroup.divider` from `FTileDivider` to `FItemDivider`.

@@ -146,6 +146,12 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
   /// The suffix. Defaults to `Icon(FIcons.chevronsUpDown)`.
   final Widget? suffix;
 
+  /// {@macro forui.foundation.FTappable.shortcuts}
+  final Map<ShortcutActivator, Intent>? shortcuts;
+
+  /// {@macro forui.foundation.FTappable.actions}
+  final Map<Type, Action<Intent>>? actions;
+
   /// The callback that is called when the value changes.
   final ValueChanged<Set<T>>? onChange;
 
@@ -190,6 +196,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
     this.detailsBuilder = _builder,
     this.details,
     this.suffix,
+    this.shortcuts,
+    this.actions,
     this.onChange,
     this.onSelect,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -270,6 +278,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
                  child: details,
                ),
                suffix: suffix ?? const Icon(FIcons.chevronsUpDown),
+               shortcuts: shortcuts,
+               actions: actions,
                onPress: state._controller._popover.toggle,
              ),
            );
@@ -345,6 +355,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
     this.detailsBuilder = _builder,
     this.details,
     this.suffix,
+    this.shortcuts,
+    this.actions,
     this.onChange,
     this.onSelect,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -424,6 +436,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
                  child: details,
                ),
                suffix: suffix ?? const Icon(FIcons.chevronsUpDown),
+               shortcuts: shortcuts,
+               actions: actions,
                onPress: state._controller._popover.toggle,
              ),
            );

@@ -216,6 +216,44 @@ void main() {
           );
         });
 
+        testWidgets('hover', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              child: FItemGroup(
+                divider: divider,
+                children: [
+                  FItem(
+                    prefix: const Icon(FIcons.wifi),
+                    title: const Text('WiFi'),
+                    details: const Text('Forus Labs (5G)'),
+                    suffix: const Icon(FIcons.chevronRight),
+                    onPress: () {},
+                  ),
+                  FItem(
+                    prefix: const Icon(FIcons.bluetooth),
+                    title: const Text('Bluetooth'),
+                    subtitle: const Text('Fee, Fo, Fum'),
+                    details: const Text('Forus Labs (5G)'),
+                    suffix: const Icon(FIcons.chevronRight),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+            ),
+          );
+
+          final gesture = await tester.createPointerGesture();
+          await tester.pump();
+
+          await gesture.moveTo(tester.getCenter(find.byType(FItem).first));
+          await tester.pumpAndSettle();
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('item/group/${theme.name}/hover/$divider.png'),
+          );
+        });
+
         testWidgets('focused on non-first bottom viewport - ${theme.name} - $divider', (tester) async {
           final focusNode = autoDispose(FocusNode());
 

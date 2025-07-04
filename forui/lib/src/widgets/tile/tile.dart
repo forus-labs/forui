@@ -59,6 +59,12 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@macro forui.foundation.FTappable.onStateChange}
   final ValueChanged<Set<WidgetState>>? onStateChange;
 
+  /// {@macro forui.foundation.FTappable.shortcuts}
+  final Map<ShortcutActivator, Intent>? shortcuts;
+
+  /// {@macro forui.foundation.FTappable.actions}
+  final Map<Type, Action<Intent>>? actions;
+
   /// A callback for when the tile is pressed.
   ///
   /// The tile is not hoverable if both [onPress] and [onLongPress] are null.
@@ -105,6 +111,8 @@ class FTile extends StatelessWidget with FTileMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.shortcuts,
+    this.actions,
     Widget? prefix,
     Widget? subtitle,
     Widget? details,
@@ -123,6 +131,8 @@ class FTile extends StatelessWidget with FTileMixin {
          onStateChange: onStateChange,
          onPress: onPress,
          onLongPress: onLongPress,
+         shortcuts: shortcuts,
+         actions: actions,
          prefix: prefix,
          subtitle: subtitle,
          details: details,
@@ -152,6 +162,8 @@ class FTile extends StatelessWidget with FTileMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.shortcuts,
+    this.actions,
     Widget? prefix,
     super.key,
   }) : _child = FItem.raw(
@@ -166,6 +178,8 @@ class FTile extends StatelessWidget with FTileMixin {
          onStateChange: onStateChange,
          onPress: onPress,
          onLongPress: onLongPress,
+         shortcuts: shortcuts,
+         actions: actions,
          prefix: prefix,
          child: child,
        );
@@ -191,7 +205,9 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions));
   }
 }
 
