@@ -71,7 +71,16 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@macro forui.foundation.FTappable.actions}
   final Map<Type, Action<Intent>>? actions;
 
-  final Widget Function(BuildContext, FItemStyle, Set<WidgetState>, FWidgetStateMap<Color>?, double?, FItemDivider)
+  final Widget Function(
+    BuildContext,
+    FItemStyle,
+    double,
+    double,
+    Set<WidgetState>,
+    FWidgetStateMap<Color>?,
+    double?,
+    FItemDivider,
+  )
   _builder;
 
   /// Creates a [FItem].
@@ -115,13 +124,15 @@ class FItem extends StatelessWidget with FItemMixin {
     Widget? details,
     Widget? suffix,
     super.key,
-  }) : _builder = ((context, style, states, color, width, divider) => ItemContent(
+  }) : _builder = ((context, style, top, bottom, states, color, width, divider) => ItemContent(
          style: style.contentStyle,
+         margin: style.margin,
+         top: top,
+         bottom: bottom,
+         states: states,
          dividerColor: color,
          dividerWidth: width,
          dividerType: divider,
-         margin: style.margin,
-         states: states,
          prefix: prefix,
          title: title,
          subtitle: subtitle,
@@ -156,13 +167,15 @@ class FItem extends StatelessWidget with FItemMixin {
     this.actions,
     Widget? prefix,
     super.key,
-  }) : _builder = ((context, style, states, color, width, divider) => RawItemContent(
+  }) : _builder = ((context, style, top, bottom, states, color, width, divider) => RawItemContent(
          style: style.rawItemContentStyle,
+         margin: style.margin,
+         top: top,
+         bottom: bottom,
+         states: states,
          dividerColor: color,
          dividerWidth: width,
          dividerType: divider,
-         margin: style.margin,
-         states: states,
          prefix: prefix,
          child: child,
        ));
@@ -178,11 +191,14 @@ class FItem extends StatelessWidget with FItemMixin {
     final divider = data.divider;
 
     // We increase the bottom margin to draw the divider.
+    final top = data.index == 0 ? data.spacing : 0.0;
+    final bottom = data.last ? data.spacing : 0.0;
+
     var margin = style.margin.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
-    if (divider != FItemDivider.none) {
-      final width = data.dividerWidth;
-      margin = margin.copyWith(bottom: margin.bottom + width);
-    }
+    margin = margin.copyWith(
+      top: margin.top + top,
+      bottom: margin.bottom + bottom + (divider == FItemDivider.none ? 0 : data.dividerWidth),
+    );
 
     if (onPress == null && onLongPress == null) {
       return ColoredBox(
@@ -191,7 +207,7 @@ class FItem extends StatelessWidget with FItemMixin {
           padding: margin,
           child: DecoratedBox(
             decoration: style.decoration.resolve(states) ?? const BoxDecoration(),
-            child: _builder(context, style, states, data.dividerColor, data.dividerWidth, divider),
+            child: _builder(context, style, top, bottom, states, data.dividerColor, data.dividerWidth, divider),
           ),
         ),
       );
@@ -218,7 +234,7 @@ class FItem extends StatelessWidget with FItemMixin {
             children: [
               DecoratedBox(
                 decoration: style.decoration.maybeResolve(states) ?? const BoxDecoration(),
-                child: _builder(context, style, states, data.dividerColor, data.dividerWidth, divider),
+                child: _builder(context, style, top, bottom, states, data.dividerColor, data.dividerWidth, divider),
               ),
               if (style.focusedOutlineStyle case final outline? when states.contains(WidgetState.focused))
                 Positioned.fill(

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -44,6 +46,9 @@ final class FItemData extends InheritedWidget {
   /// The item's style.
   final FItemStyle? style;
 
+  /// The vertical spacing at the top and bottom of each level.
+  final double spacing;
+
   /// The divider's style.
   final FWidgetStateMap<Color> dividerColor;
 
@@ -59,18 +64,23 @@ final class FItemData extends InheritedWidget {
   /// The item's index in the current nesting level.
   final int index;
 
-  /// True if the item is the last item across all levels.
+  /// True if the item is the last item in the current nesting level.
   final bool last;
+
+  /// True if the item is the last item across all levels.
+  final bool globalLast;
 
   /// Creates a [FItemData].
   const FItemData({
     required this.style,
+    required this.spacing,
     required this.dividerColor,
     required this.dividerWidth,
     required this.divider,
     required this.enabled,
     required this.index,
     required this.last,
+    required this.globalLast,
     required super.child,
     super.key,
   });
@@ -80,6 +90,7 @@ final class FItemData extends InheritedWidget {
     required bool last,
     required Widget child,
     FItemStyle? style,
+    double? spacing,
     FItemDivider? divider,
     FWidgetStateMap<Color>? dividerColor,
     double? dividerWidth,
@@ -88,13 +99,14 @@ final class FItemData extends InheritedWidget {
   }) => Builder(
     builder: (context) {
       final parent = context.dependOnInheritedWidgetOfExactType<FItemData>();
-      final propagatedLast = last && (parent?.last ?? true);
+      final globalLast = last && (parent?.globalLast ?? true);
 
       return FItemData(
         style: style ?? parent?.style,
+        spacing: max(spacing ?? 0, parent?.spacing ?? 0),
         dividerColor: dividerColor ?? parent?.dividerColor ?? FWidgetStateMap.all(Colors.transparent),
         dividerWidth: dividerWidth ?? parent?.dividerWidth ?? 0,
-        divider: switch ((last, propagatedLast)) {
+        divider: switch ((last, globalLast)) {
           // The first/middle items of a group.
           (false, false) => divider ?? FItemDivider.none,
           // Last of a group which itself isn't the last.
@@ -106,7 +118,8 @@ final class FItemData extends InheritedWidget {
         },
         enabled: enabled ?? parent?.enabled ?? true,
         index: index ?? parent?.index ?? 0,
-        last: propagatedLast,
+        last: last,
+        globalLast: globalLast,
         child: child,
       );
     },
@@ -120,12 +133,14 @@ final class FItemData extends InheritedWidget {
       maybeOf(context) ??
       FItemData(
         style: null,
+        spacing: 0,
         dividerColor: FWidgetStateMap.all(Colors.transparent),
         dividerWidth: 0,
         divider: FItemDivider.none,
         enabled: true,
         index: 0,
         last: true,
+        globalLast: true,
         child: const SizedBox(),
       );
 
@@ -137,18 +152,21 @@ final class FItemData extends InheritedWidget {
       divider != old.divider ||
       enabled != old.enabled ||
       index != old.index ||
-      last != old.last;
+      last != old.last ||
+      globalLast != old.globalLast;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(DoubleProperty('spacing', spacing))
       ..add(DiagnosticsProperty('dividerColor', dividerColor))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('divider', divider))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(IntProperty('index', index))
-      ..add(FlagProperty('last', value: last, ifTrue: 'last'));
+      ..add(FlagProperty('last', value: last, ifTrue: 'last'))
+      ..add(FlagProperty('globalLast', value: globalLast, ifTrue: 'globalLast'));
   }
 }

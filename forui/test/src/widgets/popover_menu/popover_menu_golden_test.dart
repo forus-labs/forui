@@ -28,7 +28,10 @@ void main() {
                 children: [FItem(title: const Text('Item 1'), onPress: () {})],
               ),
             ],
-            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+            child: ColoredBox(
+              color: TestScaffold.blueScreen.colors.border,
+              child: const SizedBox.square(dimension: 50),
+            ),
           ),
         ),
       );
@@ -49,7 +52,10 @@ void main() {
                 children: [FTile(title: const Text('Item 1'), onPress: () {})],
               ),
             ],
-            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+            child: ColoredBox(
+              color: TestScaffold.blueScreen.colors.border,
+              child: const SizedBox.square(dimension: 50),
+            ),
           ),
         ),
       );

@@ -185,7 +185,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FItemGroup.merge(
-              maxHeight: 100,
+              maxHeight: 120,
               divider: divider,
               children: [
                 FItemGroup(
@@ -229,7 +229,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FItemGroup.merge(
-              maxHeight: 100,
+              maxHeight: 120,
               divider: divider,
               children: [
                 FItemGroup(

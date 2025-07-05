@@ -152,7 +152,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FItemGroup(
-                maxHeight: 100,
+                maxHeight: 120,
                 divider: divider,
                 children: [
                   FItem(
@@ -187,7 +187,7 @@ void main() {
               theme: theme.data,
               child: FItemGroup(
                 scrollController: controller,
-                maxHeight: 100,
+                maxHeight: 120,
                 divider: divider,
                 children: [
                   FItem(
