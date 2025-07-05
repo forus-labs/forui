@@ -272,7 +272,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.onStateChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     super.key,
-  }): itemMenu = menu, tileMenu = null;
+  }) : itemMenu = menu,
+       tileMenu = null;
 
   const _CollapsedCrumb.tiles({
     required List<FTileGroup> menu,
@@ -297,7 +298,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.onStateChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     super.key,
-  }): itemMenu = null, tileMenu = menu;
+  }) : itemMenu = null,
+       tileMenu = menu;
 
   @override
   State<_CollapsedCrumb> createState() => _CollapsedCrumbState();

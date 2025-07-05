@@ -320,10 +320,6 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
     : this(
         dividerColor: FWidgetStateMap.all(colors.border),
         dividerWidth: style.borderWidth,
-        itemStyle: FItemStyle.inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
-        ),
+        itemStyle: FItemStyle.inherit(colors: colors, typography: typography, style: style),
       );
 }
