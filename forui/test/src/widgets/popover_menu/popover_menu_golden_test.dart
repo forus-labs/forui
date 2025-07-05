@@ -36,7 +36,7 @@ void main() {
       await expectBlueScreen();
     });
 
-    testWidgets('tils ', (tester) async {
+    testWidgets('tiles ', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FPopoverMenu.tiles(
