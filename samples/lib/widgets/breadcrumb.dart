@@ -18,6 +18,35 @@ class BreadcrumbPage extends Sample {
           FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
           FBreadcrumbItem.collapsed(
             menu: [
+              FItemGroup(
+                children: [
+                  FItem(title: const Text('Documentation'), onPress: () {}),
+                  FItem(title: const Text('Themes'), onPress: () {}),
+                ],
+              ),
+            ],
+          ),
+          FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
+          const FBreadcrumbItem(current: true, child: Text('Widgets')),
+        ],
+      ),
+    ],
+  );
+}
+
+@RoutePage()
+class BreadcrumbTilesPage extends Sample {
+  BreadcrumbTilesPage({@queryParam super.theme});
+
+  @override
+  Widget sample(BuildContext context) => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      FBreadcrumb(
+        children: [
+          FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+          FBreadcrumbItem.collapsedTiles(
+            menu: [
               FTileGroup(
                 children: [
                   FTile(title: const Text('Documentation'), onPress: () {}),
@@ -48,10 +77,10 @@ class BreadcrumbDividerPage extends Sample {
           FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
           FBreadcrumbItem.collapsed(
             menu: [
-              FTileGroup(
+              FItemGroup(
                 children: [
-                  FTile(title: const Text('Documentation'), onPress: () {}),
-                  FTile(title: const Text('Themes'), onPress: () {}),
+                  FItem(title: const Text('Documentation'), onPress: () {}),
+                  FItem(title: const Text('Themes'), onPress: () {}),
                 ],
               ),
             ],

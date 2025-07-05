@@ -110,10 +110,10 @@ class SidebarPage extends Sample {
               FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
               FBreadcrumbItem.collapsed(
                 menu: [
-                  FTileGroup(
+                  FItemGroup(
                     children: [
-                      FTile(title: const Text('Documentation'), onPress: () {}),
-                      FTile(title: const Text('Themes'), onPress: () {}),
+                      FItem(title: const Text('Documentation'), onPress: () {}),
+                      FItem(title: const Text('Themes'), onPress: () {}),
                     ],
                   ),
                 ],

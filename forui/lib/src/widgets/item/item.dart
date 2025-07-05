@@ -270,7 +270,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   @override
   final FWidgetStateMap<Color?> backgroundColor;
 
-  /// The margin around the item, including the [decoration]. Defaults to `EdgeInsets.zero`.
+  /// The margin around the item, including the [decoration]. Defaults to `const EdgeInsets.all(4)`.
   @override
   final EdgeInsetsGeometry margin;
 
@@ -313,7 +313,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     required this.rawItemContentStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.margin = EdgeInsets.zero,
+    this.margin = const EdgeInsets.all(4),
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.

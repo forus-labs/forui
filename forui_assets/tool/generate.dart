@@ -87,7 +87,7 @@ void generate(List<(String, String, String)> icons) {
             ..fields.addAll([
               for (final icon in icons)
                 (FieldBuilder()
-                      ..docs.addAll(['/// An [`${icon.$2}`](https://lucide.dev/icons/${icon.$2}) icon.'])
+                      ..docs.addAll(['/// A [`${icon.$2}`](https://lucide.dev/icons/${icon.$2}) icon.'])
                       ..static = true
                       ..modifier = FieldModifier.constant
                       ..type

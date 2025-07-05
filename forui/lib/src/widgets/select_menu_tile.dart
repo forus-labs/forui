@@ -499,7 +499,9 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(ObjectFlagProperty.has('detailsBuilder', detailsBuilder))
       ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(ObjectFlagProperty.has('onSelect', onSelect));
+      ..add(ObjectFlagProperty.has('onSelect', onSelect))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions));
   }
 }
 

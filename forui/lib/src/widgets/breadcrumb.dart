@@ -109,12 +109,14 @@ abstract interface class FBreadcrumbItem extends Widget {
     Key? key,
   }) = _Crumb;
 
-  /// Creates a collapsed crumb.
+  /// Creates a collapsed crumb using [FItem]s.
+  ///
+  /// Recommended for desktops & web.
   ///
   /// It is typically used to keep the breadcrumb compact and reduce the number of items displayed. When tapped, it
   /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsed({
-    required List<FTileGroup> menu,
+    required List<FItemGroup> menu,
     FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle,
     FPopoverController? popoverController,
     ScrollController? scrollController,
@@ -137,6 +139,37 @@ abstract interface class FBreadcrumbItem extends Widget {
     String? semanticsLabel,
     Key? key,
   }) = _CollapsedCrumb;
+
+  /// Creates a collapsed crumb using [FTile]s.
+  ///
+  /// Recommended for touch devices.
+  ///
+  /// It is typically used to keep the breadcrumb compact and reduce the number of items displayed. When tapped, it
+  /// displays a popover menu with the collapsed items.
+  const factory FBreadcrumbItem.collapsedTiles({
+    required List<FTileGroup> menu,
+    FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle,
+    FPopoverController? popoverController,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double maxHeight,
+    DragStartBehavior dragStartBehavior,
+    FItemDivider divider,
+    AlignmentGeometry menuAnchor,
+    AlignmentGeometry childAnchor,
+    FPortalSpacing spacing,
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset offset,
+    FHidePopoverRegion hideOnTapOutside,
+    bool autofocus,
+    FocusScopeNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<Set<WidgetState>>? onStateChange,
+    TraversalEdgeBehavior traversalEdgeBehavior,
+    String? semanticsLabel,
+    Key? key,
+  }) = _CollapsedCrumb.tiles;
 }
 
 // ignore: avoid_implementing_value_types
@@ -193,7 +226,8 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 
 // ignore: avoid_implementing_value_types
 class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
-  final List<FTileGroup> menu;
+  final List<FTileGroup>? tileMenu;
+  final List<FItemGroup>? itemMenu;
   final FPopoverMenuStyle Function(FPopoverMenuStyle)? popoverMenuStyle;
   final FPopoverController? popoverController;
   final ScrollController? scrollController;
@@ -216,7 +250,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final String? semanticsLabel;
 
   const _CollapsedCrumb({
-    required this.menu,
+    required List<FItemGroup> menu,
     this.popoverMenuStyle,
     this.popoverController,
     this.scrollController,
@@ -238,7 +272,32 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.onStateChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
     super.key,
-  });
+  }): itemMenu = menu, tileMenu = null;
+
+  const _CollapsedCrumb.tiles({
+    required List<FTileGroup> menu,
+    this.popoverMenuStyle,
+    this.popoverController,
+    this.scrollController,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.divider = FItemDivider.full,
+    this.menuAnchor = Alignment.topLeft,
+    this.childAnchor = Alignment.bottomLeft,
+    this.spacing = const FPortalSpacing(4),
+    this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.semanticsLabel,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    this.onHoverChange,
+    this.onStateChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    super.key,
+  }): itemMenu = null, tileMenu = menu;
 
   @override
   State<_CollapsedCrumb> createState() => _CollapsedCrumbState();
@@ -288,35 +347,67 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
   @override
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;
-    return FPopoverMenu(
-      popoverController: _popoverController,
-      style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
-      menuAnchor: widget.menuAnchor,
-      childAnchor: widget.childAnchor,
-      spacing: widget.spacing,
-      shift: widget.shift,
-      offset: widget.offset,
-      hideOnTapOutside: widget.hideOnTapOutside,
-      autofocus: widget.autofocus,
-      focusNode: widget.focusNode,
-      onFocusChange: widget.onFocusChange,
-      traversalEdgeBehavior: widget.traversalEdgeBehavior,
-      scrollController: widget.scrollController,
-      cacheExtent: widget.cacheExtent,
-      maxHeight: widget.maxHeight,
-      dragStartBehavior: widget.dragStartBehavior,
-      semanticsLabel: widget.semanticsLabel,
-      divider: widget.divider,
-      menu: widget.menu,
-      child: FTappable(
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        onPress: _popoverController.toggle,
-        child: Padding(
-          padding: style.padding,
-          child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
+    if (widget.itemMenu case final menu?) {
+      return FPopoverMenu(
+        popoverController: _popoverController,
+        style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
+        menuAnchor: widget.menuAnchor,
+        childAnchor: widget.childAnchor,
+        spacing: widget.spacing,
+        shift: widget.shift,
+        offset: widget.offset,
+        hideOnTapOutside: widget.hideOnTapOutside,
+        autofocus: widget.autofocus,
+        focusNode: widget.focusNode,
+        onFocusChange: widget.onFocusChange,
+        traversalEdgeBehavior: widget.traversalEdgeBehavior,
+        scrollController: widget.scrollController,
+        cacheExtent: widget.cacheExtent,
+        maxHeight: widget.maxHeight,
+        dragStartBehavior: widget.dragStartBehavior,
+        semanticsLabel: widget.semanticsLabel,
+        divider: widget.divider,
+        menu: menu,
+        child: FTappable(
+          focusedOutlineStyle: style.focusedOutlineStyle,
+          onPress: _popoverController.toggle,
+          child: Padding(
+            padding: style.padding,
+            child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return FPopoverMenu.tiles(
+        popoverController: _popoverController,
+        style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
+        menuAnchor: widget.menuAnchor,
+        childAnchor: widget.childAnchor,
+        spacing: widget.spacing,
+        shift: widget.shift,
+        offset: widget.offset,
+        hideOnTapOutside: widget.hideOnTapOutside,
+        autofocus: widget.autofocus,
+        focusNode: widget.focusNode,
+        onFocusChange: widget.onFocusChange,
+        traversalEdgeBehavior: widget.traversalEdgeBehavior,
+        scrollController: widget.scrollController,
+        cacheExtent: widget.cacheExtent,
+        maxHeight: widget.maxHeight,
+        dragStartBehavior: widget.dragStartBehavior,
+        semanticsLabel: widget.semanticsLabel,
+        divider: widget.divider,
+        menu: widget.tileMenu!,
+        child: FTappable(
+          focusedOutlineStyle: style.focusedOutlineStyle,
+          onPress: _popoverController.toggle,
+          child: Padding(
+            padding: style.padding,
+            child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
+          ),
+        ),
+      );
+    }
   }
 
   @override

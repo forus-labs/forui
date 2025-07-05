@@ -220,15 +220,25 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
       label: semanticsLabel,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: maxHeight),
-        child: FItemGroupStyleData(
-          style: style,
-          child: CustomScrollView(
-            controller: scrollController,
-            cacheExtent: cacheExtent,
-            dragStartBehavior: dragStartBehavior,
-            shrinkWrap: true,
-            physics: physics,
-            slivers: [sliver],
+        // We use a Container instead of DecoratedBox as using a DecoratedBox will cause the border to be clipped.
+        // ignore: use_decorated_box
+        child: Container(
+          decoration: style.decoration,
+          child: ClipRRect(
+            borderRadius:
+                style.decoration.borderRadius?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
+                BorderRadius.zero,
+            child: FItemGroupStyleData(
+              style: style,
+              child: CustomScrollView(
+                controller: scrollController,
+                cacheExtent: cacheExtent,
+                dragStartBehavior: dragStartBehavior,
+                shrinkWrap: true,
+                physics: physics,
+                slivers: [sliver],
+              ),
+            ),
           ),
         ),
       ),
@@ -279,6 +289,9 @@ class FItemGroupStyleData extends InheritedWidget {
 
 /// An [FItemGroup]'s style.
 class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
+  @override
+  final BoxDecoration decoration;
+
   /// The divider's style.
   ///
   /// Supported states:
@@ -295,7 +308,12 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   final FItemStyle itemStyle;
 
   /// Creates a [FItemGroupStyle].
-  FItemGroupStyle({required this.itemStyle, required this.dividerColor, required this.dividerWidth});
+  FItemGroupStyle({
+    required this.itemStyle,
+    required this.dividerColor,
+    required this.dividerWidth,
+    this.decoration = const BoxDecoration(),
+  });
 
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
@@ -306,6 +324,6 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
           colors: colors,
           typography: typography,
           style: style,
-        ).copyWith(margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2)),
+        ),
       );
 }

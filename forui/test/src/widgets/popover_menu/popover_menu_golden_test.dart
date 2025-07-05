@@ -14,12 +14,56 @@ void main() {
 
   tearDown(() => controller.dispose());
 
+  group('blue screen', () {
+    testWidgets('items ', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FPopoverMenu(
+            style: TestScaffold.blueScreen.popoverMenuStyle,
+            menu: [
+              FItemGroup(
+                children: [FItem(title: const Text('Item 1'), onPress: () {})],
+              ),
+              FItemGroup(
+                children: [FItem(title: const Text('Item 1'), onPress: () {})],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+          ),
+        ),
+      );
+
+      await expectBlueScreen();
+    });
+
+    testWidgets('tils ', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.blue(
+          child: FPopoverMenu.tiles(
+            style: TestScaffold.blueScreen.popoverMenuStyle,
+            menu: [
+              FTileGroup(
+                children: [FTile(title: const Text('Item 1'), onPress: () {})],
+              ),
+              FTileGroup(
+                children: [FTile(title: const Text('Item 1'), onPress: () {})],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+          ),
+        ),
+      );
+
+      await expectBlueScreen();
+    });
+  });
+
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} hidden ', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FPopoverMenu(
+          child: FPopoverMenu.tiles(
             menu: [
               FTileGroup(
                 children: [FTile(title: const Text('Item 1'), onPress: () {})],
@@ -36,11 +80,42 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/hidden-${theme.name}.png'));
     });
 
-    testWidgets('${theme.name} shown', (tester) async {
+    testWidgets('${theme.name} items shown', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
           child: FPopoverMenu(
+            popoverController: controller,
+            menu: [
+              FItemGroup(
+                children: [
+                  FItem(title: const Text('Group 1 - Tile 1'), onPress: () {}),
+                  FItem(title: const Text('Group 1 - Tile 2'), onPress: () {}),
+                ],
+              ),
+              FItemGroup(
+                children: [
+                  FItem(title: const Text('Group 2 - Tile 1'), onPress: () {}),
+                  FItem(title: const Text('Group 2 - Tile 2'), onPress: () {}),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/items-shown-${theme.name}.png'));
+    });
+
+    testWidgets('${theme.name} tiles shown', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FPopoverMenu.tiles(
             popoverController: controller,
             menu: [
               FTileGroup(
@@ -58,14 +133,14 @@ void main() {
       unawaited(controller.show());
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/shown-${theme.name}.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/tiles-shown-${theme.name}.png'));
     });
 
     testWidgets('${theme.name} scrollable', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FPopoverMenu(
+          child: FPopoverMenu.tiles(
             popoverController: controller,
             maxHeight: 200,
             menu: [
