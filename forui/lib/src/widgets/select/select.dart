@@ -20,6 +20,10 @@ part 'select.style.dart';
 ///
 /// It is a [FormField] and therefore can be used in a [Form] widget.
 ///
+/// ## Why am I getting "No FSelect<$T> found in context..." assertion errors?
+/// This is likely because Dart could not infer [FSelect]'s type parameter. Try specifying the type parameter for
+/// `FSelect`, `FSelectSection`, and `FSelectItem` (e.g., `FSelect<MyType>`).
+///
 /// See:
 /// * https://forui.dev/docs/form/select for working examples.
 /// * [FSelectController] for customizing the behavior of a select.
