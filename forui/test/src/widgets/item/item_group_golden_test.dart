@@ -152,7 +152,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FItemGroup(
-                maxHeight: 100,
+                maxHeight: 120,
                 divider: divider,
                 children: [
                   FItem(
@@ -187,7 +187,7 @@ void main() {
               theme: theme.data,
               child: FItemGroup(
                 scrollController: controller,
-                maxHeight: 100,
+                maxHeight: 120,
                 divider: divider,
                 children: [
                   FItem(
@@ -213,6 +213,44 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('item/group/${theme.name}/constrained-first/$divider.png'),
+          );
+        });
+
+        testWidgets('hover', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              child: FItemGroup(
+                divider: divider,
+                children: [
+                  FItem(
+                    prefix: const Icon(FIcons.wifi),
+                    title: const Text('WiFi'),
+                    details: const Text('Forus Labs (5G)'),
+                    suffix: const Icon(FIcons.chevronRight),
+                    onPress: () {},
+                  ),
+                  FItem(
+                    prefix: const Icon(FIcons.bluetooth),
+                    title: const Text('Bluetooth'),
+                    subtitle: const Text('Fee, Fo, Fum'),
+                    details: const Text('Forus Labs (5G)'),
+                    suffix: const Icon(FIcons.chevronRight),
+                    onPress: () {},
+                  ),
+                ],
+              ),
+            ),
+          );
+
+          final gesture = await tester.createPointerGesture();
+          await tester.pump();
+
+          await gesture.moveTo(tester.getCenter(find.byType(FItem).first));
+          await tester.pumpAndSettle();
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('item/group/${theme.name}/hover/$divider.png'),
           );
         });
 

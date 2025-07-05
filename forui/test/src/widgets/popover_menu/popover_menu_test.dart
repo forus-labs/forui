@@ -11,7 +11,7 @@ void main() {
   testWidgets('tap outside hides popover', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FPopoverMenu(
+        child: FPopoverMenu.tiles(
           menu: [
             FTileGroup(
               children: [FTile(title: const Text('Group 1'), onPress: () {})],
@@ -39,7 +39,7 @@ void main() {
   testWidgets('tap outside does not hide popover', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FPopoverMenu(
+        child: FPopoverMenu.tiles(
           hideOnTapOutside: FHidePopoverRegion.none,
           menu: [
             FTileGroup(
@@ -68,7 +68,7 @@ void main() {
   testWidgets('tap button when popover is open closes it', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FPopoverMenu(
+        child: FPopoverMenu.tiles(
           menu: [
             FTileGroup(
               children: [FTile(title: const Text('Group 1'), onPress: () {})],
@@ -98,7 +98,7 @@ void main() {
       final first = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
-          child: FPopoverMenu(
+          child: FPopoverMenu.tiles(
             popoverController: first,
             menu: [
               FTileGroup(
@@ -116,7 +116,7 @@ void main() {
       final second = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
-          child: FPopoverMenu(
+          child: FPopoverMenu.tiles(
             popoverController: second,
             menu: [
               FTileGroup(
@@ -138,7 +138,7 @@ void main() {
       final controller = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
-          child: FPopoverMenu(
+          child: FPopoverMenu.tiles(
             popoverController: controller,
             menu: [
               FTileGroup(

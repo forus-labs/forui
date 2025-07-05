@@ -254,9 +254,9 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
           // We use a Container instead of DecoratedBox as using a DecoratedBox will cause the border to be clipped.
           // ignore: use_decorated_box
           child: Container(
-            decoration: BoxDecoration(border: style.border, borderRadius: style.borderRadius),
+            decoration: style.decoration,
             child: ClipRRect(
-              borderRadius: style.borderRadius,
+              borderRadius: style.decoration.borderRadius ?? BorderRadius.zero,
               child: FTileGroupStyleData(
                 style: style,
                 child: CustomScrollView(
@@ -319,16 +319,9 @@ class FTileGroupStyleData extends InheritedWidget {
 
 /// A [FTileGroup]'s style.
 class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
-  /// The group's border.
-  ///
-  /// ## Note
-  /// This [border] is ignored if wrapped in a another [FTileGroup]. Configure the nesting [FTileGroupStyle] instead.
+  /// The group's decoration.
   @override
-  final Border border;
-
-  /// The group's border radius.
-  @override
-  final BorderRadiusGeometry borderRadius;
+  final BoxDecoration decoration;
 
   /// The tile's style.
   @override
@@ -347,8 +340,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
 
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
-    required this.border,
-    required this.borderRadius,
+    required this.decoration,
     required this.tileStyle,
     required this.dividerColor,
     required this.dividerWidth,
@@ -365,8 +357,11 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   factory FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final tileStyle = FTileStyle.inherit(colors: colors, typography: typography, style: style);
     return FTileGroupStyle(
-      border: Border.all(color: colors.border, width: style.borderWidth),
-      borderRadius: style.borderRadius,
+      decoration: BoxDecoration(
+        border: Border.all(color: colors.border, width: style.borderWidth),
+        borderRadius: style.borderRadius,
+      ),
+
       tileStyle: tileStyle.copyWith(
         decoration: tileStyle.decoration.map(
           (d) => d == null

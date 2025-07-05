@@ -97,6 +97,16 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final VoidCallback? onLongPress;
 
+  /// {@template forui.foundation.FTappable.shortcuts}
+  /// The shortcuts. Defaults to calling [ActivateIntent] if [onPress] is not null.
+  /// {@endtemplate}
+  final Map<ShortcutActivator, Intent> shortcuts;
+
+  /// {@template forui.foundation.FTappable.shortcuts}
+  /// The actions. Defaults to calling [onPress] when [ActivateIntent] is invoked and [onPress] is not null.
+  /// {@endtemplate}
+  final Map<Type, Action<Intent>>? actions;
+
   /// The builder used to create a child with the current state.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
@@ -126,6 +136,8 @@ class FTappable extends StatefulWidget {
     HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
+    Map<ShortcutActivator, Intent>? shortcuts,
+    Map<Type, Action<Intent>>? actions,
     ValueWidgetBuilder<Set<WidgetState>> builder,
     Widget? child,
     Key? key,
@@ -149,10 +161,15 @@ class FTappable extends StatefulWidget {
     this.behavior = HitTestBehavior.translucent,
     this.onPress,
     this.onLongPress,
+    this.actions,
     this.builder = _builder,
     this.child,
+    Map<ShortcutActivator, Intent>? shortcuts,
     super.key,
-  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.');
+  }) : shortcuts =
+           shortcuts ??
+           (onPress == null ? const {} : const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()}),
+       assert(builder != _builder || child != null, 'Either builder or child must be provided.');
 
   @override
   State<FTappable> createState() => _FTappableState<FTappable>();
@@ -174,6 +191,8 @@ class FTappable extends StatefulWidget {
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 
@@ -218,12 +237,14 @@ class _FTappableState<T extends FTappable> extends State<T> {
     // TODO: https://github.com/flutter/flutter/issues/167916
     var tappable = _decorate(context, widget.builder(context, {..._controller.value}, widget.child));
     tappable = Shortcuts(
-      shortcuts: {if (widget.onPress != null) const SingleActivator(LogicalKeyboardKey.enter): const ActivateIntent()},
+      shortcuts: widget.shortcuts,
       child: Actions(
-        actions: {
-          if (widget.onPress != null)
-            ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!.call()),
-        },
+        actions:
+            widget.actions ??
+            {
+              if (widget.onPress != null)
+                ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!.call()),
+            },
         child: Semantics(
           enabled: !widget._disabled,
           label: widget.semanticsLabel,
@@ -333,6 +354,8 @@ class AnimatedTappable extends FTappable {
     super.behavior,
     super.onPress,
     super.onLongPress,
+    super.shortcuts,
+    super.actions,
     super.builder,
     super.child,
     super.key,

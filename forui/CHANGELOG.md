@@ -1,4 +1,4 @@
-## 0.13.0 (Next)
+## 0.13.0
 This update focuses on polishing & improving the usability of existing widgets.
 
 ### Animations
@@ -78,7 +78,19 @@ FFCheckbox(
 * Add `FBottomNavigationBarStyle.backgroundFilter`.
 
 
+### `FBreadcrumb`
+We've added support for an alternative popover menu which uses `FItem` and more closely resembles Shadcn/ui's popover
+menu suited for desktop.
+
+* Add `FBreadcrumbItem.collapsedTiles(...)`.
+
+* **Breaking** Change `FBreadcrumbItem.collapsed` to use `FItem` instead of `FTile` - use `FBreadcrumb.collapsedTiles(...)`
+  instead.
+
+
 ### `FButton`
+* Add `FButton.actions`.
+* Add `FButton.shortcuts`.
 * Add `mainAxisAlignment` to `FButton(...)`.
 * Add `crossAxisAlignment` to `FButton(...)`.
 * Add `textBaseline` to `FButton(...)`.
@@ -139,6 +151,10 @@ to build more complex widgets.
 
 
 ### `FPopoverMenu`
+We've added support for an alternative popover menu which uses `FItem` and more closely resembles Shadcn/ui's popover
+menu suited for desktop.
+
+* Add `FPopoverMenu.tiles(...)`
 * Add `FPopoverMenu.barrierSemanticsLabel`.
 * Add `FPopoverMenu.barrierSemanticsDismissible`.
 * Add `FPopoverMenu.builder`.
@@ -147,6 +163,7 @@ to build more complex widgets.
 * Change `FPopoverMenu`'s animation to be origin aware.
 * Change `FPopoverMenu(...)`'s `controller` to be optional.
 * **Breaking** Remove `FPopoverMenu.automatic` - This was a bad abstraction in hindsight, use `FPopoverMenu.new` instead.
+* **Breaking** Change `FPopoverMenu(...)` to use `FItem`s instead of `FTile`s - use `FPopoverMenu.tiles(...)` instead.
 
 
 ### `FPortal`
@@ -178,9 +195,11 @@ We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes 
 
 
 ### `FSelectMenuTile`
-* Add `FSelectMenutile.barrierSemanticsLabel`.
-* Add `FSelectMenutile.barrierSemanticsDismissible`.
-* Add `FSelectMenutile.detailsBuilder`.
+* Add `FSelectMenuTile.actions`.
+* Add `FSelectMenuTile.barrierSemanticsLabel`.
+* Add `FSelectMenuTile.barrierSemanticsDismissible`.
+* Add `FSelectMenuTile.detailsBuilder`.
+* Add `FSelectMenuTile.shortcuts`.
 
 * Change `FSelectMenuTile.selectController` to be optional.
 
@@ -211,6 +230,8 @@ We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes 
 
 
 ### `FTappable`
+* Add `FTappable.actions`.
+* Add `FTappable.shortcuts`.
 * Add `FTappableStyle.bounceDuration`.
 * Add `FTappableStyle.bounceDownCurve`.
 * Add `FTappableStyle.bounceUpCurve`.
@@ -224,7 +245,9 @@ We've updated `FSelect` to support dividers & `FSelectItem` to support prefixes 
 We have refactored `FTile`'s implementation to be simpler & its styling to be easier to understand & use. It now uses
 `FItem` internally.
 
-* Add `FTile.raw`.
+* Add `FTile.actions`.
+* Add `FTile.shortcuts`.
+* Add `FTile.raw(...)`.
 * Add `FTileGroupStyle.border`.
 * Add `FTileGroupStyle.divierColor`.
 * Add `FTileGroupStyle.dividerWidth`.
@@ -298,6 +321,8 @@ We've made toasts dismissable by swiping.
 * Add `FModalBarrier`.
 * Add `FPaginationStyle.focusedOutlineStyle`.
 * Add `FLocalizations.popoverSemanticsLabel`.
+* Add `FSelectTile.actions`.
+* Add `FSelectTile.shortcuts`.
 
 * **Breaking** Remove `defaultFontFamily` from `FTypography.copyWith(...)`.
 * **Breaking** Change `FSelectTileGroup.divider` from `FTileDivider` to `FItemDivider`.

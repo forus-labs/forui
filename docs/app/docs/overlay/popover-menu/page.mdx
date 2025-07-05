@@ -26,17 +26,17 @@ A popover menu displays a menu in a portal aligned to a child.
             menuAnchor: Alignment.topRight,
             childAnchor: Alignment.bottomRight,
             menu: [
-              FTileGroup(
+              FItemGroup(
                 children: [
-                  FTile(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-                  FTile(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-                  FTile(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+                  FItem(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+                  FItem(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+                  FItem(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
                 ],
               ),
-              FTileGroup(
+              FItemGroup(
                 children: [
-                  FTile(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-                  FTile(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+                  FItem(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+                  FItem(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
                 ],
               ),
             ],
@@ -78,6 +78,35 @@ FPopoverMenu(
   groupId: 'popover-menu-group',
   hideOnTapOutside: FHidePopoverRegion.excludeTarget,
   traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
+  menuBuilder: (context, controller, menu) => [FItemGroup(children: [])],
+  menu: [
+    FItemGroup(
+      children: [],
+    ),
+  ],
+  builder: (context, controller, child) => const Placeholder(),
+  child: const Placeholder(),
+);
+```
+
+### `FPopoverMenu.tiles(...)`
+
+```dart copy
+FPopoverMenu.tiles(
+  popoverController: FPopoverController(vsync: this),
+  scrollController: ScrollController(),
+  style: FPopoverMenuStyle(...),
+  cacheExtent: 100,
+  maxHeight: 200,
+  dragStartBehavior: DragStartBehavior.start,
+  menuAnchor: Alignment.topCenter,
+  childAnchor: Alignment.bottomCenter,
+  spacing: FPortalSpacing.zero,
+  shift: FPortalShift.flip,
+  offset: Offset.zero,
+  groupId: 'popover-menu-group',
+  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
+  traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
   menuBuilder: (context, controller, menu) => [FTileGroup(children: [])],
   menu: [
     FTileGroup(
@@ -88,3 +117,46 @@ FPopoverMenu(
   child: const Placeholder(),
 );
 ```
+
+## Examples
+
+### Tiles
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='popover-menu' variant='tiles' query={{}} height={500}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {6} copy
+    class PopoverMenuPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FHeader(
+        title: const Text('Edit Notes'),
+        suffixes: [
+          FPopoverMenu.tiles(
+            menuAnchor: Alignment.topRight,
+            childAnchor: Alignment.bottomRight,
+            menu: [
+              FTileGroup(
+                children: [
+                  FTile(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+                  FTile(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+                  FTile(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+                ],
+              ),
+              FTileGroup(
+                children: [
+                  FTile(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+                  FTile(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+                ],
+              ),
+            ],
+            builder: (context, controller, child) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
+          ),
+        ],
+      );
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>

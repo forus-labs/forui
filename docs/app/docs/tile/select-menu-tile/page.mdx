@@ -88,6 +88,8 @@ FSelectMenuTile<Value>(
   suffix: Icon(FIcons.chevronsUpDown),
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
+  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
+  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
   initialValue: Value.something,
   menu: [
     FSelectTile(
@@ -134,6 +136,8 @@ FSelectMenuTile<Value>.builder(
   count: 100,
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
+  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
+  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
 );
 ```
 

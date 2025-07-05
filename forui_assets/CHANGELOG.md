@@ -1,3 +1,8 @@
+## 0.13.0
+
+* Update icons to Lucide 0.525.0.
+
+
 ## 0.12.0
 
 Bumps minimum Flutter SDK version to 3.32.0.

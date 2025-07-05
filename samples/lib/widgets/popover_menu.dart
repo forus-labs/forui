@@ -17,6 +17,38 @@ class PopoverMenuPage extends Sample {
         menuAnchor: Alignment.topRight,
         childAnchor: Alignment.bottomRight,
         menu: [
+          FItemGroup(
+            children: [
+              FItem(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+              FItem(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              FItem(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+            ],
+          ),
+          FItemGroup(
+            children: [
+              FItem(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+              FItem(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+            ],
+          ),
+        ],
+        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
+      ),
+    ],
+  );
+}
+
+@RoutePage()
+class TilePopoverMenuPage extends Sample {
+  TilePopoverMenuPage({@queryParam super.theme = 'zinc-light'});
+
+  @override
+  Widget sample(BuildContext context) => FHeader(
+    title: const Text('Edit Notes'),
+    suffixes: [
+      FPopoverMenu.tiles(
+        menuAnchor: Alignment.topRight,
+        childAnchor: Alignment.bottomRight,
+        menu: [
           FTileGroup(
             children: [
               FTile(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),

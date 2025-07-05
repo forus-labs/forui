@@ -18,7 +18,13 @@ part 'popover_menu.style.dart';
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
 class FPopoverMenu extends StatelessWidget {
-  static List<FTileGroupMixin> _menuBuilder(
+  static List<FItemGroupMixin> _defaultItemBuilder(
+    BuildContext context,
+    FPopoverController controller,
+    List<FItemGroupMixin>? menu,
+  ) => menu!;
+
+  static List<FTileGroupMixin> _defaultTileBuilder(
     BuildContext context,
     FPopoverController controller,
     List<FTileGroupMixin>? menu,
@@ -108,18 +114,6 @@ class FPopoverMenu extends StatelessWidget {
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
-  /// An optional builder which returns the menu that the popover is aligned to.
-  ///
-  /// Can incorporate a value-independent widget subtree from the [menu] into the returned widget tree.
-  ///
-  /// This can be null if the entire widget subtree the [menuBuilder] builds doest not require the controller.
-  final List<FTileGroupMixin> Function(BuildContext, FPopoverController, List<FTileGroupMixin>?) menuBuilder;
-
-  /// The menu.
-  ///
-  /// Passed to [menuBuilder] if provided.
-  final List<FTileGroupMixin>? menu;
-
   /// {@macro forui.widgets.FPopover.builder}
   final ValueWidgetBuilder<FPopoverController> builder;
 
@@ -128,13 +122,24 @@ class FPopoverMenu extends StatelessWidget {
   /// Passed to [builder] if provided.
   final Widget? child;
 
-  /// Creates a menu that only shows the menu when the controller is manually toggled.
+  final Widget Function(BuildContext, FPopoverController, FPopoverMenuStyle) _menuBuilder;
+
+  /// Creates a menu of [FItem]s that is only shown when toggled.
+  ///
+  /// Recommended for desktops & web.
+  ///
+  /// [menuBuilder] is an optional builder which returns the menu that the popover is aligned to. It can incorporate a
+  /// value-independent widget subtree from the [menu] into the returned widget tree. It can be null if the entire
+  /// widget subtree the [menuBuilder] builds doest not require the controller.
+  ///
+  /// [menu] is an optional list of [FItemMixin]s that will be used as the menu items. If provided, it will be
+  /// passed to [menuBuilder].
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * neither [builder] nor [child] is provided.
   /// * neither [menuBuilder] nor [menu] is provided.
-  const FPopoverMenu({
+  FPopoverMenu({
     this.popoverController,
     this.scrollController,
     this.style,
@@ -156,13 +161,80 @@ class FPopoverMenu extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
-    this.menuBuilder = _menuBuilder,
-    this.menu,
+    List<FItemGroupMixin> Function(BuildContext, FPopoverController, List<FItemGroupMixin>?) menuBuilder =
+        _defaultItemBuilder,
+    List<FItemGroupMixin>? menu,
     this.builder = _builder,
     this.child,
     super.key,
-  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
-       assert(menuBuilder != _menuBuilder || menu != null, 'Either menuBuilder or menu must be provided.');
+  }) : _menuBuilder = ((context, controller, style) => FItemGroup.merge(
+         scrollController: scrollController,
+         cacheExtent: cacheExtent,
+         maxHeight: maxHeight,
+         dragStartBehavior: dragStartBehavior,
+         semanticsLabel: semanticsLabel,
+         style: style.itemGroupStyle,
+         divider: divider,
+         children: menuBuilder(context, controller, menu),
+       )),
+       assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
+       assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided.');
+
+  /// Creates a menu of [FTile]s that is only shown when toggled.
+  ///
+  /// Recommended for touch devices.
+  ///
+  /// [menuBuilder] is an optional builder which returns the menu that the popover is aligned to. It can incorporate a
+  /// value-independent widget subtree from the [menu] into the returned widget tree. It can be null if the entire
+  /// widget subtree the [menuBuilder] builds doest not require the controller.
+  ///
+  /// [menu] is an optional list of [FTileGroupMixin]s that will be used as the menu items. If provided, it will be
+  /// passed to [menuBuilder].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * neither [builder] nor [child] is provided.
+  /// * neither [menuBuilder] nor [menu] is provided.
+  FPopoverMenu.tiles({
+    this.popoverController,
+    this.scrollController,
+    this.style,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.divider = FItemDivider.full,
+    this.menuAnchor = Alignment.topCenter,
+    this.childAnchor = Alignment.bottomCenter,
+    this.spacing = const FPortalSpacing(4),
+    this.shift = FPortalShift.flip,
+    this.offset = Offset.zero,
+    this.groupId,
+    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.barrierSemanticsLabel,
+    this.barrierSemanticsDismissible = true,
+    this.semanticsLabel,
+    this.autofocus,
+    this.focusNode,
+    this.onFocusChange,
+    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    List<FTileGroupMixin> Function(BuildContext, FPopoverController, List<FTileGroupMixin>?) menuBuilder =
+        _defaultTileBuilder,
+    List<FTileGroupMixin>? menu,
+    this.builder = _builder,
+    this.child,
+    super.key,
+  }) : _menuBuilder = ((context, controller, style) => FTileGroup.merge(
+         scrollController: scrollController,
+         cacheExtent: cacheExtent,
+         maxHeight: maxHeight,
+         dragStartBehavior: dragStartBehavior,
+         semanticsLabel: semanticsLabel,
+         style: style.tileGroupStyle,
+         divider: divider,
+         children: menuBuilder(context, controller, menu),
+       )),
+       assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
+       assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided.');
 
   @override
   Widget build(BuildContext context) {
@@ -184,16 +256,7 @@ class FPopoverMenu extends StatelessWidget {
       traversalEdgeBehavior: traversalEdgeBehavior,
       barrierSemanticsLabel: barrierSemanticsLabel,
       barrierSemanticsDismissible: barrierSemanticsDismissible,
-      popoverBuilder: (context, controller) => FTileGroup.merge(
-        scrollController: scrollController,
-        cacheExtent: cacheExtent,
-        maxHeight: maxHeight,
-        dragStartBehavior: dragStartBehavior,
-        semanticsLabel: semanticsLabel,
-        style: style.tileGroupStyle,
-        divider: divider,
-        children: menuBuilder(context, controller, menu),
-      ),
+      popoverBuilder: (context, controller) => _menuBuilder(context, controller, style),
       builder: builder,
       child: child,
     );
@@ -230,13 +293,17 @@ class FPopoverMenu extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
-      ..add(ObjectFlagProperty.has('menuBuilder', menuBuilder))
+      ..add(ObjectFlagProperty.has('menuBuilder', _menuBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
 /// A [FPopoverMenuStyle]'s style.
 class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions {
+  /// The item group's style.
+  @override
+  final FItemGroupStyle itemGroupStyle;
+
   /// The tile group's style.
   @override
   final FTileGroupStyle tileGroupStyle;
@@ -250,6 +317,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
 
   /// Creates a [FPopoverMenuStyle].
   const FPopoverMenuStyle({
+    required this.itemGroupStyle,
     required this.tileGroupStyle,
     required super.decoration,
     this.maxWidth = 250,
@@ -260,7 +328,13 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
   FPopoverMenuStyle.inherit({required super.colors, required super.style, required FTypography typography})
-    : tileGroupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography),
+    : itemGroupStyle = FItemGroupStyle.inherit(colors: colors, style: style, typography: typography).copyWith(
+        decoration: BoxDecoration(
+          border: Border.all(color: colors.border, width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+      ),
+      tileGroupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography),
       maxWidth = 250,
       super.inherit();
 }
