@@ -9,203 +9,16 @@ import 'package:forui/forui.dart';
 part 'tile_group.style.dart';
 
 /// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [FTileGroup.merge].
-mixin FTileGroupMixin<T extends Widget> on Widget {}
+mixin FTileGroupMixin on Widget {}
 
-class _MergeTileGroups extends _Group with FTileGroupMixin<FTileGroupMixin<FTileMixin>> {
-  final List<FTileGroupMixin> children;
-
-  const _MergeTileGroups({
-    required this.children,
-    required super.style,
-    required super.scrollController,
-    required super.cacheExtent,
-    required super.maxHeight,
-    required super.dragStartBehavior,
-    required super.physics,
-    required super.enabled,
-    required super.divider,
-    required super.semanticsLabel,
-    required super.label,
-    required super.description,
-    required super.error,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final style = this.style?.call(context.theme.tileGroupStyle) ?? context.theme.tileGroupStyle;
-    final enabled = this.enabled ?? true;
-
-    return _label(
-      context,
-      style,
-      true,
-      enabled,
-      _GroupStyle(
-        style: style,
-        child: _scrollView([
-          for (final (index, child) in children.indexed)
-            FItemContainerData(
-              dividerColor: style.dividerColor,
-              dividerWidth: style.dividerWidth,
-              divider: divider,
-              enabled: enabled,
-              index: index,
-              length: children.length,
-              child: child,
-            ),
-        ]),
-      ),
-    );
-  }
-}
-
-/// A tile group that groups multiple [FTileMixin]s and [FTileGroupMixin]s together.
+/// A tile group that groups multiple [FTileMixin]s together.
 ///
 /// Tiles grouped together will be separated by a divider, specified by [divider].
 ///
 /// See:
 /// * https://forui.dev/docs/tile/tile-group for working examples.
-/// * [FTileGroupStyle] for customizing a tile's appearance.
-class FTileGroup extends _Group with FTileGroupMixin<FTileMixin> {
-  /// The delegate that builds the sliver children.
-  final SliverChildDelegate Function(FTileGroupStyle) _delegate;
-
-  /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
-  ///
-  /// All group labels will be ignored.
-  static FTileGroupMixin<FTileGroupMixin<FTileMixin>> merge({
-    required List<FTileGroupMixin<FTileMixin>> children,
-    FTileGroupStyle Function(FTileGroupStyle)? style,
-    ScrollController? scrollController,
-    double? cacheExtent,
-    double maxHeight = double.infinity,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
-    ScrollPhysics physics = const ClampingScrollPhysics(),
-    bool enabled = true,
-    FItemDivider divider = FItemDivider.full,
-    String? semanticsLabel,
-    Widget? label,
-    Widget? description,
-    Widget? error,
-    Key? key,
-  }) => _MergeTileGroups(
-    key: key,
-    style: style,
-    scrollController: scrollController,
-    cacheExtent: cacheExtent,
-    maxHeight: maxHeight,
-    dragStartBehavior: dragStartBehavior,
-    physics: physics,
-    enabled: enabled,
-    divider: divider,
-    semanticsLabel: semanticsLabel,
-    label: label,
-    description: description,
-    error: error,
-    children: children,
-  );
-
-  /// Creates a [FTileGroup].
-  FTileGroup({
-    required List<FTileMixin> children,
-    super.style,
-    super.scrollController,
-    super.cacheExtent,
-    super.maxHeight = double.infinity,
-    super.dragStartBehavior = DragStartBehavior.start,
-    super.physics = const ClampingScrollPhysics(),
-    super.enabled,
-    super.divider = FItemDivider.indented,
-    super.semanticsLabel,
-    super.label,
-    super.description,
-    super.error,
-    super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
-       _delegate = ((style) => SliverChildListDelegate([
-         for (final (index, child) in children.indexed)
-           FItemContainerItemData(
-             style: style.tileStyle,
-             divider: divider,
-             index: index,
-             last: index == children.length - 1,
-             child: child,
-           ),
-       ]));
-
-  /// Creates a [FTileGroup] that lazily builds its children.
-  ///
-  /// {@template forui.widgets.FTileGroup.builder}
-  /// The [tileBuilder] is called for each tile that should be built. [FItemContainerItemData] is **not** visible to `tileBuilder`.
-  /// * It may return null to signify the end of the group.
-  /// * It may be called more than once for the same index.
-  /// * It will be called only for indices <= [count] if [count] is given.
-  ///
-  /// The [count] is the number of tiles to build. If null, [tileBuilder] will be called until it returns null.
-  ///
-  /// ## Notes
-  /// May result in an infinite loop or run out of memory if:
-  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
-  /// * [count] is null and [tileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
-  ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
-  /// {@endtemplate}
-  FTileGroup.builder({
-    required NullableIndexedWidgetBuilder tileBuilder,
-    int? count,
-    super.style,
-    super.scrollController,
-    super.cacheExtent,
-    super.maxHeight = double.infinity,
-    super.dragStartBehavior = DragStartBehavior.start,
-    super.physics = const ClampingScrollPhysics(),
-    super.enabled,
-    super.divider = FItemDivider.indented,
-    super.semanticsLabel,
-    super.label,
-    super.description,
-    super.error,
-    super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
-       assert(count == null || 0 <= count, 'count must be non-negative.'),
-       _delegate = ((style) => SliverChildBuilderDelegate((context, index) {
-         final tile = tileBuilder(context, index);
-         return tile == null
-             ? null
-             : FItemContainerItemData(
-                 style: style.tileStyle,
-                 divider: divider,
-                 index: index,
-                 last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
-                 child: tile,
-               );
-       }, childCount: count));
-
-  @override
-  Widget build(BuildContext context) {
-    final data = FItemContainerData.maybeOf(context);
-    final inheritedStyle = _GroupStyle.maybeOf(context)?.style ?? context.theme.tileGroupStyle;
-    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
-    final enabled = this.enabled ?? data?.enabled ?? true;
-
-    Widget sliver = SliverList(delegate: _delegate(style));
-    if (data == null || this.style != null || (this.enabled != null && this.enabled != data.enabled)) {
-      sliver = FItemContainerData(
-        dividerColor: style.dividerColor,
-        dividerWidth: style.dividerWidth,
-        divider: data?.divider ?? FItemDivider.none,
-        enabled: enabled,
-        index: data?.index ?? 0,
-        length: data?.length ?? 1,
-        child: sliver,
-      );
-    }
-
-    return data == null ? _label(context, style, data == null, enabled, _scrollView([sliver])) : sliver;
-  }
-}
-
-abstract class _Group extends StatelessWidget {
+/// * [FTileGroupStyle] for customizing a tile group's appearance.
+class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// The style.
   ///
   /// ## CLI
@@ -287,7 +100,13 @@ abstract class _Group extends StatelessWidget {
   /// It is not rendered if the group is disabled or part of a merged [FTileGroup].
   final Widget? error;
 
-  const _Group({
+  /// The delegate that builds the sliver children.
+  // ignore: avoid_positional_boolean_parameters
+  final Widget Function(FTileGroupStyle, bool) _builder;
+
+  /// Creates a [FTileGroup].
+  FTileGroup({
+    required List<FTileMixin> children,
     this.style,
     this.scrollController,
     this.cacheExtent,
@@ -301,38 +120,160 @@ abstract class _Group extends StatelessWidget {
     this.description,
     this.error,
     super.key,
-  });
+  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+       _builder = ((style, enabled) => SliverList.list(
+         children: [
+           for (final (index, child) in children.indexed)
+             FItemData.merge(
+               style: style.tileStyle,
+               enabled: enabled,
+               dividerColor: style.dividerColor,
+               dividerWidth: style.dividerWidth,
+               divider: divider,
+               index: index,
+               last: index == children.length - 1,
+               child: child,
+             ),
+         ],
+       ));
 
-  Widget _label(BuildContext context, FTileGroupStyle style, bool root, bool enabled, Widget child) => FLabel(
-    style: style,
-    axis: Axis.vertical,
-    states: {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error},
-    label: label,
-    description: description,
-    error: error,
-    child: Semantics(
-      container: true,
-      label: semanticsLabel,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: maxHeight),
-        // We use a Container instead of DecoratedBox as using a DecoratedBox will cause the border to be clipped.
-        // ignore: use_decorated_box
-        child: Container(
-          decoration: root ? BoxDecoration(border: style.border, borderRadius: style.borderRadius) : null,
-          child: ClipRRect(borderRadius: style.borderRadius, child: child),
+  /// Creates a [FTileGroup] that lazily builds its children.
+  ///
+  /// {@template forui.widgets.FTileGroup.builder}
+  /// The [tileBuilder] is called for each tile that should be built. The current level's [FItemData] is **not**
+  /// visible to `tileBuilder`.
+  /// * It may return null to signify the end of the group.
+  /// * It may be called more than once for the same index.
+  /// * It will be called only for indices <= [count] if [count] is given.
+  ///
+  /// The [count] is the number of tiles to build. If null, [tileBuilder] will be called until it returns null.
+  ///
+  /// ## Notes
+  /// May result in an infinite loop or run out of memory if:
+  /// * Placed in a parent widget that does not constrain its size, i.e. [Column].
+  /// * [count] is null and [tileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
+  ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
+  /// {@endtemplate}
+  FTileGroup.builder({
+    required NullableIndexedWidgetBuilder tileBuilder,
+    int? count,
+    this.style,
+    this.scrollController,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
+    this.enabled,
+    this.divider = FItemDivider.indented,
+    this.semanticsLabel,
+    this.label,
+    this.description,
+    this.error,
+    super.key,
+  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+       assert(count == null || 0 <= count, 'count must be non-negative.'),
+       _builder = ((style, enabled) => SliverList.builder(
+         itemCount: count,
+         itemBuilder: (context, index) {
+           if (tileBuilder(context, index) case final tile?) {
+             return FItemData.merge(
+               style: style.tileStyle,
+               enabled: enabled,
+               dividerColor: style.dividerColor,
+               dividerWidth: style.dividerWidth,
+               divider: divider,
+               index: index,
+               last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
+               child: tile,
+             );
+           }
+
+           return null;
+         },
+       ));
+
+  /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
+  ///
+  /// All group labels will be ignored.
+  FTileGroup.merge({
+    required List<FTileGroupMixin> children,
+    this.style,
+    this.scrollController,
+    this.cacheExtent,
+    this.maxHeight = double.infinity,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.physics = const ClampingScrollPhysics(),
+    this.enabled,
+    this.divider = FItemDivider.full,
+    this.semanticsLabel,
+    this.label,
+    this.description,
+    this.error,
+    super.key,
+  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+       _builder = ((style, enabled) => SliverMainAxisGroup(
+         slivers: [
+           for (final (index, child) in children.indexed)
+             FItemData.merge(
+               style: style.tileStyle,
+               enabled: enabled,
+               dividerColor: style.dividerColor,
+               dividerWidth: style.dividerWidth,
+               divider: divider,
+               index: index,
+               last: index == children.length - 1,
+               child: child,
+             ),
+         ],
+       ));
+
+  @override
+  Widget build(BuildContext context) {
+    final data = FItemData.maybeOf(context);
+    final inheritedStyle = FTileGroupStyleData.of(context);
+    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
+    final enabled = this.enabled ?? data?.enabled ?? true;
+
+    final sliver = _builder(style, enabled);
+    if (data != null) {
+      return sliver;
+    }
+
+    return FLabel(
+      style: style,
+      axis: Axis.vertical,
+      states: {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error},
+      label: label,
+      description: description,
+      error: error,
+      child: Semantics(
+        container: true,
+        label: semanticsLabel,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: maxHeight),
+          // We use a Container instead of DecoratedBox as using a DecoratedBox will cause the border to be clipped.
+          // ignore: use_decorated_box
+          child: Container(
+            decoration: BoxDecoration(border: style.border, borderRadius: style.borderRadius),
+            child: ClipRRect(
+              borderRadius: style.borderRadius,
+              child: FTileGroupStyleData(
+                style: style,
+                child: CustomScrollView(
+                  controller: scrollController,
+                  cacheExtent: cacheExtent,
+                  dragStartBehavior: dragStartBehavior,
+                  shrinkWrap: true,
+                  physics: physics,
+                  slivers: [sliver],
+                ),
+              ),
+            ),
+          ),
         ),
       ),
-    ),
-  );
-
-  Widget _scrollView(List<Widget> slivers) => CustomScrollView(
-    controller: scrollController,
-    cacheExtent: cacheExtent,
-    dragStartBehavior: dragStartBehavior,
-    shrinkWrap: true,
-    physics: physics,
-    slivers: slivers,
-  );
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -350,15 +291,24 @@ abstract class _Group extends StatelessWidget {
   }
 }
 
-class _GroupStyle extends InheritedWidget {
-  static _GroupStyle? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<_GroupStyle>();
+/// An inherited widget that provides the [FTileGroupStyle] to its descendants.
+class FTileGroupStyleData extends InheritedWidget {
+  /// Returns the [FTileGroupStyle] in the given [context], or null if none is found.
+  static FTileGroupStyle? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FTileGroupStyleData>()?.style;
 
+  /// Returns the [FTileGroupStyle] in the given [context].
+  static FTileGroupStyle of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FTileGroupStyleData>()?.style ?? context.theme.tileGroupStyle;
+
+  /// The style of the group.
   final FTileGroupStyle style;
 
-  const _GroupStyle({required this.style, required super.child});
+  /// Creates a [FTileGroupStyleData].
+  const FTileGroupStyleData({required this.style, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(_GroupStyle old) => style != old.style;
+  bool updateShouldNotify(FTileGroupStyleData old) => style != old.style;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -372,7 +322,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   /// The group's border.
   ///
   /// ## Note
-  /// If wrapped in a [FTileGroup], this [border] is ignored. Configure the nesting [FTileGroupStyle] instead.
+  /// This [border] is ignored if wrapped in a another [FTileGroup]. Configure the nesting [FTileGroupStyle] instead.
   @override
   final Border border;
 
@@ -389,11 +339,11 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   /// Supported states:
   /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<Color>? dividerColor;
+  final FWidgetStateMap<Color> dividerColor;
 
   /// The divider's width.
   @override
-  final double? dividerWidth;
+  final double dividerWidth;
 
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({

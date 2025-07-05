@@ -210,14 +210,14 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State<T>;
-           final groupData = FItemContainerData.maybeOf(state.context);
-           final tileData = FItemContainerItemData.maybeOf(state.context);
+           final data = FItemData.maybeOf(state.context);
+           final inheritedStyle = FTileGroupStyleData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
            final selectMenuTileStyle = style?.call(global);
 
            final menuStyle = selectMenuTileStyle?.menuStyle ?? global.menuStyle;
-           final tileStyle = selectMenuTileStyle?.tileStyle ?? tileData?.style ?? global.tileStyle;
+           final tileStyle = selectMenuTileStyle?.tileStyle ?? inheritedStyle?.tileStyle ?? global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -274,9 +274,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
              ),
            );
 
-           if (groupData == null &&
-               tileData == null &&
-               (label != null || description != null || state.errorText != null)) {
+           if (data == null && (label != null || description != null || state.errorText != null)) {
              final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
              final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
 
@@ -297,8 +295,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
 
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuBuilder] is called for each tile that should be built. [FItemContainerItemData] is **not** visible to
-  /// `menuTileBuilder`.
+  /// The [menuBuilder] is called for each tile that should be built. The current level's [FItemData] is **not**
+  /// visible to `menuBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
   /// * It will be called only for indices <= [count] if [count] is given.
@@ -367,14 +365,14 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State<T>;
-           final groupData = FItemContainerData.maybeOf(state.context);
-           final tileData = FItemContainerItemData.maybeOf(state.context);
+           final data = FItemData.maybeOf(state.context);
+           final inheritedStyle = FTileGroupStyleData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
            final selectMenuTileStyle = style?.call(global);
 
            final menuStyle = selectMenuTileStyle?.menuStyle ?? global.menuStyle;
-           final tileStyle = selectMenuTileStyle?.tileStyle ?? tileData?.style ?? global.tileStyle;
+           final tileStyle = selectMenuTileStyle?.tileStyle ?? inheritedStyle?.tileStyle ?? global.tileStyle;
 
            Widget tile = FPopover(
              // A GlobalObjectKey is used to work around Flutter not recognizing how widgets move inside the widget tree.
@@ -430,9 +428,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
              ),
            );
 
-           if (groupData == null &&
-               tileData == null &&
-               (label != null || description != null || state.errorText != null)) {
+           if (data == null && (label != null || description != null || state.errorText != null)) {
              final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
              final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
              tile = FLabel(

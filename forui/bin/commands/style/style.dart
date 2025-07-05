@@ -168,6 +168,12 @@ enum Style {
     <String>['FItemContentStyle'],
     'FItemContentStyle itemContentStyle({\n  required FColors colors,\n  required FTypography typography,\n}) => FItemContentStyle(\n  prefixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  }),\n  titleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n    ),\n    WidgetState.any: typography.sm,\n  }),\n  subtitleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.xs.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),\n  }),\n  detailsTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.xs.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),\n  }),\n  suffixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.mutedForeground),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 15),\n  }),\n  padding: const EdgeInsetsDirectional.only(\n    start: 15,\n    top: 7.5,\n    bottom: 7.5,\n    end: 10,\n  ),\n  prefixIconSpacing: 10,\n  titleSpacing: 3,\n  middleSpacing: 4,\n  suffixIconSpacing: 5,\n);\n',
   ),
+  fitemgroupstyle(
+    'FItemGroupStyle',
+    <String>['item-group', 'itemgroup'],
+    <String>['FItemGroupStyle', 'FItemStyle', 'FItemContentStyle', 'FRawItemContentStyle'],
+    'FItemGroupStyle itemGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FItemGroupStyle(\n  dividerColor: FWidgetStateMap.all(colors.border),\n  dividerWidth: style.borderWidth,\n  itemStyle: _itemStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ).copyWith(margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2)),\n);\n',
+  ),
   fitemstyle(
     'FItemStyle',
     <String>['item'],

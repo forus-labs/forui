@@ -115,11 +115,11 @@ An `FItem` is typically used to group related information together. It is a more
 to build more complex widgets.
 
 * Add `FItem`.
+* Add `FItemData`.
 * Add `FItemDivider`.
+* Add `FItemGroup`.
 * Add `FItemStyle`.
 * Add `FItemContentStyle`.
-* Add `FItemContainerData`.
-* Add `FItemContainerItemData`.
 
 
 ### `FPopover`
@@ -242,8 +242,8 @@ We have refactored `FTile`'s implementation to be simpler & its styling to be ea
 * Change `FTile`'s focused outline to be a rounded rectangle even if the tile is inside a `FTileGroup`.
 * Change `FTile` to no longer wrap its content inside a `FTileData` if it is not part of a `FTileGroup`.
 * **Breaking** Remove `FTileDivider` - use `FItemDivider` instead.
-* **Breaking** Remove `FTileData` - use `FItemContainerItemData` instead.
-* **Breaking** Remove `FTileGroupData` - use `FItemContainerData`s instead.
+* **Breaking** Remove `FTileData` - use `FItemData` instead.
+* **Breaking** Remove `FTileGroupData` - use `FItemData`s instead.
 * **Breaking** Change `FTileStyle` to extend `FItemStyle`.
 * **Breaking** Remove `FTileStateStyle`.
 * **Breaking** Remove `FTileStateStyle.backgroundColor` - use `FTileStyle.decoration` instead.

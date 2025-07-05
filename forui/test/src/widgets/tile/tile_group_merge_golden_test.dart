@@ -440,7 +440,7 @@ void main() {
     testWidgets('empty tile group', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTileGroup.merge(label: const Text('Network'), children: []),
+          child: FTileGroup.merge(label: const Text('Network'), children: const []),
         ),
       );
 
