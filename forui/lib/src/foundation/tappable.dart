@@ -102,7 +102,7 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final Map<ShortcutActivator, Intent> shortcuts;
 
-  /// {@template forui.foundation.FTappable.shortcuts}
+  /// {@template forui.foundation.FTappable.actions}
   /// The actions. Defaults to calling [onPress] when [ActivateIntent] is invoked and [onPress] is not null.
   /// {@endtemplate}
   final Map<Type, Action<Intent>>? actions;
