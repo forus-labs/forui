@@ -296,7 +296,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   @override
   final BoxDecoration decoration;
 
-  /// The vertical spacing at the top and bottom of each group.
+  /// The vertical spacing at the top and bottom of each group. Defaults to 4.
   @override
   final double spacing;
 

@@ -132,7 +132,7 @@ class ItemContent extends StatelessWidget {
 
 /// An [FItem] content's style.
 class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
-  /// The content's padding. Defaults to `EdgeInsetsDirectional.only(15, 13, 10, 13)`.
+  /// The content's padding. Defaults to `const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -191,7 +191,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.padding = const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6),
     this.prefixIconSpacing = 10,
     this.titleSpacing = 3,
     this.middleSpacing = 4,
