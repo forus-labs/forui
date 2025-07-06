@@ -61,10 +61,10 @@ class FSelectTile<T> extends StatelessWidget with FItemMixin {
   /// {@macro forui.foundation.FTappable.onStateChange}
   final ValueChanged<Set<WidgetState>>? onStatesChange;
 
-  /// {@macro forui.foundation.FTappable.shortcuts}
+  /// The shortcuts. Defaults to calling [ActivateIntent].
   final Map<ShortcutActivator, Intent>? shortcuts;
 
-  /// {@macro forui.foundation.FTappable.actions}
+  /// The actions. Defaults to selecting a tile when [ActivateIntent] is invoked.
   final Map<Type, Action<Intent>>? actions;
 
   final Widget? _icon;

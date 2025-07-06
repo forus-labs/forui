@@ -146,10 +146,10 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldPr
   /// The suffix. Defaults to `Icon(FIcons.chevronsUpDown)`.
   final Widget? suffix;
 
-  /// {@macro forui.foundation.FTappable.shortcuts}
+  /// The shortcuts. Defaults to calling [ActivateIntent].
   final Map<ShortcutActivator, Intent>? shortcuts;
 
-  /// {@macro forui.foundation.FTappable.actions}
+  /// The actions. Defaults to selecting a tile when [ActivateIntent] is invoked.
   final Map<Type, Action<Intent>>? actions;
 
   /// The callback that is called when the value changes.
