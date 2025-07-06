@@ -21,7 +21,7 @@ typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select menu tile's appearance.
-class FSelectMenuTile<T> extends FormField<Set<T>> with FItemMixin, FFormFieldProperties<Set<T>> {
+class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldProperties<Set<T>> {
   static Widget _builder<T>(BuildContext _, Set<dynamic>? _, Widget? child) => child ?? const SizedBox();
 
   /// The controller that controls the selected tiles. Defaults to `FSelectMenuTileController.radio`.

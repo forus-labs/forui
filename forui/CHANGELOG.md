@@ -1,3 +1,9 @@
+## 0.13.1
+
+* Fix `FSelectTile` mixing in `FItemMixin` instead of `FTileMixin`.
+* Fix `SelectMenuTile` mixing in `FItemMixin` instead of `FTileMixin`.
+
+
 ## 0.13.0
 This update focuses on polishing & improving the usability of existing widgets.
 

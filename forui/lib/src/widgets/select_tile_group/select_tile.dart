@@ -11,7 +11,7 @@ import 'package:forui/forui.dart';
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
 /// * [FSelectTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a select tile's appearance.
-class FSelectTile<T> extends StatelessWidget with FItemMixin {
+class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// The style.
   ///
   /// ## CLI
