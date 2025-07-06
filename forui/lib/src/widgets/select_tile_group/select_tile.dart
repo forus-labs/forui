@@ -61,6 +61,12 @@ class FSelectTile<T> extends StatelessWidget with FItemMixin {
   /// {@macro forui.foundation.FTappable.onStateChange}
   final ValueChanged<Set<WidgetState>>? onStatesChange;
 
+  /// The shortcuts. Defaults to calling [ActivateIntent].
+  final Map<ShortcutActivator, Intent>? shortcuts;
+
+  /// The actions. Defaults to selecting a tile when [ActivateIntent] is invoked.
+  final Map<Type, Action<Intent>>? actions;
+
   final Widget? _icon;
 
   final bool _suffix;
@@ -81,6 +87,8 @@ class FSelectTile<T> extends StatelessWidget with FItemMixin {
     this.onFocusChange,
     this.onHoverChange,
     this.onStatesChange,
+    this.shortcuts,
+    this.actions,
     Widget? suffix,
     super.key,
   }) : _suffix = false,
@@ -102,6 +110,8 @@ class FSelectTile<T> extends StatelessWidget with FItemMixin {
     this.onFocusChange,
     this.onHoverChange,
     this.onStatesChange,
+    this.shortcuts,
+    this.actions,
     Widget? prefix,
     super.key,
   }) : _icon = prefix,
@@ -134,6 +144,8 @@ class FSelectTile<T> extends StatelessWidget with FItemMixin {
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
       onStateChange: onStatesChange,
+      shortcuts: shortcuts,
+      actions: actions,
     );
   }
 
@@ -148,7 +160,9 @@ class FSelectTile<T> extends StatelessWidget with FItemMixin {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStatesChange', onStatesChange));
+      ..add(ObjectFlagProperty.has('onStatesChange', onStatesChange))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions));
   }
 }
 

@@ -166,19 +166,19 @@ enum Style {
     'FItemContentStyle',
     <String>['item-content', 'itemcontent'],
     <String>['FItemContentStyle'],
-    'FItemContentStyle itemContentStyle({\n  required FColors colors,\n  required FTypography typography,\n}) => FItemContentStyle(\n  prefixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  }),\n  titleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n    ),\n    WidgetState.any: typography.sm,\n  }),\n  subtitleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.xs.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),\n  }),\n  detailsTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.xs.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),\n  }),\n  suffixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.mutedForeground),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 15),\n  }),\n  padding: const EdgeInsetsDirectional.only(\n    start: 15,\n    top: 7.5,\n    bottom: 7.5,\n    end: 10,\n  ),\n  prefixIconSpacing: 10,\n  titleSpacing: 3,\n  middleSpacing: 4,\n  suffixIconSpacing: 5,\n);\n',
+    'FItemContentStyle itemContentStyle({\n  required FColors colors,\n  required FTypography typography,\n}) => FItemContentStyle(\n  prefixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  }),\n  titleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n    ),\n    WidgetState.any: typography.sm,\n  }),\n  subtitleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.xs.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),\n  }),\n  detailsTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.xs.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),\n  }),\n  suffixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.mutedForeground),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 15),\n  }),\n  padding: const EdgeInsetsDirectional.only(\n    start: 11,\n    top: 7.5,\n    bottom: 7.5,\n    end: 6,\n  ),\n  prefixIconSpacing: 10,\n  titleSpacing: 3,\n  middleSpacing: 4,\n  suffixIconSpacing: 5,\n);\n',
   ),
   fitemgroupstyle(
     'FItemGroupStyle',
     <String>['item-group', 'itemgroup'],
     <String>['FItemGroupStyle', 'FItemStyle', 'FItemContentStyle', 'FRawItemContentStyle'],
-    'FItemGroupStyle itemGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FItemGroupStyle(\n  dividerColor: FWidgetStateMap.all(colors.border),\n  dividerWidth: style.borderWidth,\n  itemStyle: _itemStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ).copyWith(margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2)),\n);\n',
+    'FItemGroupStyle itemGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FItemGroupStyle(\n  itemStyle: _itemStyle(colors: colors, typography: typography, style: style),\n  dividerColor: FWidgetStateMap.all(colors.border),\n  dividerWidth: style.borderWidth,\n  decoration: const BoxDecoration(),\n  spacing: 4,\n);\n',
   ),
   fitemstyle(
     'FItemStyle',
     <String>['item'],
     <String>['FItemStyle', 'FItemContentStyle', 'FRawItemContentStyle'],
-    'FItemStyle itemStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FItemStyle(\n  backgroundColor: FWidgetStateMap({\n    WidgetState.disabled: colors.disable(colors.secondary),\n    WidgetState.any: colors.background,\n  }),\n  decoration: FWidgetStateMap({\n    WidgetState.disabled: BoxDecoration(\n      color: colors.disable(colors.secondary),\n      borderRadius: style.borderRadius,\n    ),\n    WidgetState.hovered | WidgetState.pressed: BoxDecoration(\n      color: colors.secondary,\n      borderRadius: style.borderRadius,\n    ),\n    WidgetState.any: BoxDecoration(\n      color: colors.background,\n      borderRadius: style.borderRadius,\n    ),\n  }),\n  contentStyle: _itemContentStyle(colors: colors, typography: typography),\n  rawItemContentStyle: _rawItemContentStyle(\n    colors: colors,\n    typography: typography,\n  ),\n  tappableStyle: style.tappableStyle.copyWith(\n    bounceTween: FTappableStyle.noBounceTween,\n    pressedEnterDuration: Duration.zero,\n    pressedExitDuration: const Duration(milliseconds: 25),\n  ),\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  margin: EdgeInsets.zero,\n);\n',
+    'FItemStyle itemStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FItemStyle(\n  backgroundColor: FWidgetStateMap({\n    WidgetState.disabled: colors.disable(colors.secondary),\n    WidgetState.any: colors.background,\n  }),\n  decoration: FWidgetStateMap({\n    WidgetState.disabled: BoxDecoration(\n      color: colors.disable(colors.secondary),\n      borderRadius: style.borderRadius,\n    ),\n    WidgetState.hovered | WidgetState.pressed: BoxDecoration(\n      color: colors.secondary,\n      borderRadius: style.borderRadius,\n    ),\n    WidgetState.any: BoxDecoration(\n      color: colors.background,\n      borderRadius: style.borderRadius,\n    ),\n  }),\n  contentStyle: _itemContentStyle(colors: colors, typography: typography),\n  rawItemContentStyle: _rawItemContentStyle(\n    colors: colors,\n    typography: typography,\n  ),\n  tappableStyle: style.tappableStyle.copyWith(\n    bounceTween: FTappableStyle.noBounceTween,\n    pressedEnterDuration: Duration.zero,\n    pressedExitDuration: const Duration(milliseconds: 25),\n  ),\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),\n);\n',
   ),
   flabelstyle(
     'FLabelStyle',
@@ -219,7 +219,15 @@ enum Style {
   fpopovermenustyle(
     'FPopoverMenuStyle',
     <String>['popover-menu', 'popovermenu'],
-    <String>['FPopoverMenuStyle', 'FTileGroupStyle', 'FTileStyle'],
+    <String>[
+      'FPopoverMenuStyle',
+      'FItemGroupStyle',
+      'FItemStyle',
+      'FItemContentStyle',
+      'FRawItemContentStyle',
+      'FTileGroupStyle',
+      'FTileStyle',
+    ],
     'FPopoverMenuStyle popoverMenuStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FPopoverMenuStyle.inherit(\n  colors: colors,\n  style: style,\n  typography: typography,\n);\n',
   ),
   fpopoverstyle(
@@ -279,7 +287,16 @@ enum Style {
   fselectmenutilestyle(
     'FSelectMenuTileStyle',
     <String>['select-menu-tile', 'selectmenutile'],
-    <String>['FSelectMenuTileStyle', 'FPopoverMenuStyle', 'FTileGroupStyle', 'FTileStyle'],
+    <String>[
+      'FSelectMenuTileStyle',
+      'FPopoverMenuStyle',
+      'FItemGroupStyle',
+      'FItemStyle',
+      'FItemContentStyle',
+      'FRawItemContentStyle',
+      'FTileGroupStyle',
+      'FTileStyle',
+    ],
     'FSelectMenuTileStyle selectMenuTileStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final groupStyle = _tileGroupStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  );\n  return FSelectMenuTileStyle(\n    menuStyle: _popoverMenuStyle(\n      colors: colors,\n      style: style,\n      typography: typography,\n    ),\n    tileStyle: _tileStyle(colors: colors, typography: typography, style: style),\n    labelTextStyle: groupStyle.labelTextStyle,\n    descriptionTextStyle: groupStyle.descriptionTextStyle,\n    errorTextStyle: groupStyle.errorTextStyle,\n    labelPadding: groupStyle.labelPadding,\n    descriptionPadding: groupStyle.descriptionPadding,\n    errorPadding: groupStyle.errorPadding,\n  );\n}\n',
   ),
   fselectscrollhandlestyle(
@@ -402,7 +419,7 @@ enum Style {
     'FTileGroupStyle',
     <String>['tile-group', 'tilegroup'],
     <String>['FTileGroupStyle', 'FTileStyle'],
-    'FTileGroupStyle tileGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final tileStyle = _tileStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  );\n  return FTileGroupStyle(\n    border: Border.all(color: colors.border, width: style.borderWidth),\n    borderRadius: style.borderRadius,\n    tileStyle: tileStyle.copyWith(\n      decoration: tileStyle.decoration.map(\n        (d) => d == null\n            ? null\n            : BoxDecoration(\n                color: d.color,\n                image: d.image,\n                boxShadow: d.boxShadow,\n                gradient: d.gradient,\n                backgroundBlendMode: d.backgroundBlendMode,\n                shape: d.shape,\n              ),\n      ),\n    ),\n    dividerColor: FWidgetStateMap.all(colors.border),\n    dividerWidth: style.borderWidth,\n    labelTextStyle: FWidgetStateMap({\n      WidgetState.error: typography.base.copyWith(\n        color:\n            style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ??\n            colors.primary,\n        fontWeight: FontWeight.w600,\n      ),\n      WidgetState.disabled: typography.base.copyWith(\n        color:\n            style.formFieldStyle.labelTextStyle.maybeResolve({\n              WidgetState.disabled,\n            })?.color ??\n            colors.disable(colors.primary),\n        fontWeight: FontWeight.w600,\n      ),\n      WidgetState.any: typography.base.copyWith(\n        color:\n            style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ??\n            colors.primary,\n        fontWeight: FontWeight.w600,\n      ),\n    }),\n    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.map(\n      (s) => typography.xs.copyWith(color: s.color),\n    ),\n    errorTextStyle: typography.xs.copyWith(\n      color: style.formFieldStyle.errorTextStyle.color,\n    ),\n    labelPadding: const EdgeInsets.symmetric(vertical: 7.7),\n    descriptionPadding: const EdgeInsets.only(top: 7.5),\n    errorPadding: const EdgeInsets.only(top: 5),\n    childPadding: EdgeInsets.zero,\n  );\n}\n',
+    'FTileGroupStyle tileGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final tileStyle = _tileStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  );\n  return FTileGroupStyle(\n    decoration: BoxDecoration(\n      border: Border.all(color: colors.border, width: style.borderWidth),\n      borderRadius: style.borderRadius,\n    ),\n    tileStyle: tileStyle.copyWith(\n      decoration: tileStyle.decoration.map(\n        (d) => d == null\n            ? null\n            : BoxDecoration(\n                color: d.color,\n                image: d.image,\n                boxShadow: d.boxShadow,\n                gradient: d.gradient,\n                backgroundBlendMode: d.backgroundBlendMode,\n                shape: d.shape,\n              ),\n      ),\n    ),\n    dividerColor: FWidgetStateMap.all(colors.border),\n    dividerWidth: style.borderWidth,\n    labelTextStyle: FWidgetStateMap({\n      WidgetState.error: typography.base.copyWith(\n        color:\n            style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ??\n            colors.primary,\n        fontWeight: FontWeight.w600,\n      ),\n      WidgetState.disabled: typography.base.copyWith(\n        color:\n            style.formFieldStyle.labelTextStyle.maybeResolve({\n              WidgetState.disabled,\n            })?.color ??\n            colors.disable(colors.primary),\n        fontWeight: FontWeight.w600,\n      ),\n      WidgetState.any: typography.base.copyWith(\n        color:\n            style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ??\n            colors.primary,\n        fontWeight: FontWeight.w600,\n      ),\n    }),\n    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.map(\n      (s) => typography.xs.copyWith(color: s.color),\n    ),\n    errorTextStyle: typography.xs.copyWith(\n      color: style.formFieldStyle.errorTextStyle.color,\n    ),\n    labelPadding: const EdgeInsets.symmetric(vertical: 7.7),\n    descriptionPadding: const EdgeInsets.only(top: 7.5),\n    errorPadding: const EdgeInsets.only(top: 5),\n    childPadding: EdgeInsets.zero,\n  );\n}\n',
   ),
   ftilestyle(
     'FTileStyle',

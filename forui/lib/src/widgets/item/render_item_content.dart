@@ -11,6 +11,8 @@ import 'package:forui/src/foundation/rendering.dart';
 class ItemContentLayout extends MultiChildRenderObjectWidget {
   final EdgeInsetsGeometry margin;
   final EdgeInsetsGeometry padding;
+  final double top;
+  final double bottom;
   final Color? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
@@ -18,6 +20,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
   const ItemContentLayout({
     required this.margin,
     required this.padding,
+    required this.top,
+    required this.bottom,
     required this.dividerColor,
     required this.dividerWidth,
     required this.dividerType,
@@ -31,6 +35,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
     return _RenderItemContent(
       margin.resolve(direction),
       padding.resolve(direction),
+      top,
+      bottom,
       dividerColor,
       dividerWidth,
       dividerType,
@@ -45,6 +51,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
     content
       ..margin = margin.resolve(direction)
       ..padding = padding.resolve(direction)
+      ..top = top
+      ..bottom = bottom
       ..dividerColor = dividerColor
       ..dividerWidth = dividerWidth
       ..dividerType = dividerType
@@ -57,6 +65,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
     properties
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('margin', margin))
+      ..add(DoubleProperty('top', top))
+      ..add(DoubleProperty('bottom', bottom))
       ..add(ColorProperty('dividerColor', dividerColor))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('dividerType', dividerType));
@@ -67,6 +77,8 @@ class _RenderItemContent extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
   EdgeInsets _margin;
   EdgeInsets _padding;
+  double _top;
+  double _bottom;
   Color? _dividerColor;
   double? _dividerWidth;
   FItemDivider _dividerType;
@@ -75,6 +87,8 @@ class _RenderItemContent extends RenderBox
   _RenderItemContent(
     this._margin,
     this._padding,
+    this._top,
+    this._bottom,
     this._dividerColor,
     this._dividerWidth,
     this._dividerType,
@@ -138,7 +152,7 @@ class _RenderItemContent extends RenderBox
     //
     // The divider's width doesn't need to be added as it isn't reflected in _margin but is is reflected in the FItem's
     // margin.
-    final y = offset.dy + size.height + _margin.bottom + 0.5;
+    final y = offset.dy + size.height + _margin.bottom + _bottom + 0.5;
 
     final paint = Paint()
       ..isAntiAlias = false
@@ -173,8 +187,8 @@ class _RenderItemContent extends RenderBox
 
   @override
   Rect get paintBounds =>
-      Offset(_margin.left, _margin.top) &
-      Size(size.width + _margin.horizontal, size.height + _margin.vertical + (dividerWidth ?? 0));
+      Offset(_margin.left, _margin.top + _top) &
+      Size(size.width + _margin.horizontal, size.height + _margin.vertical + _top + _bottom + (dividerWidth ?? 0));
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
@@ -186,6 +200,8 @@ class _RenderItemContent extends RenderBox
     properties
       ..add(DiagnosticsProperty('margin', margin))
       ..add(DiagnosticsProperty('padding', padding))
+      ..add(DoubleProperty('top', top))
+      ..add(DoubleProperty('bottom', bottom))
       ..add(ColorProperty('dividerColor', dividerColor))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('dividerType', dividerType))
@@ -206,6 +222,24 @@ class _RenderItemContent extends RenderBox
   set margin(EdgeInsets value) {
     if (_margin != value) {
       _margin = value;
+      markNeedsPaint();
+    }
+  }
+
+  double get top => _top;
+
+  set top(double value) {
+    if (_top != value) {
+      _top = value;
+      markNeedsPaint();
+    }
+  }
+
+  double get bottom => _bottom;
+
+  set bottom(double value) {
+    if (_bottom != value) {
+      _bottom = value;
       markNeedsPaint();
     }
   }

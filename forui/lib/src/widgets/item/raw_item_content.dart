@@ -11,21 +11,26 @@ part 'raw_item_content.style.dart';
 @internal
 class RawItemContent extends StatelessWidget {
   final FRawItemContentStyle style;
+  final EdgeInsetsGeometry margin;
+
+  final double top;
+  final double bottom;
+  final Set<WidgetState> states;
   final FWidgetStateMap<Color>? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
-  final EdgeInsetsGeometry margin;
-  final Set<WidgetState> states;
   final Widget? prefix;
   final Widget child;
 
   const RawItemContent({
     required this.style,
+    required this.margin,
+    required this.bottom,
+    required this.top,
+    required this.states,
     required this.dividerColor,
     required this.dividerWidth,
     required this.dividerType,
-    required this.margin,
-    required this.states,
     required this.prefix,
     required this.child,
     super.key,
@@ -39,6 +44,8 @@ class RawItemContent extends StatelessWidget {
   Widget build(BuildContext context) => ItemContentLayout(
     margin: margin,
     padding: style.padding,
+    top: top,
+    bottom: bottom,
     dividerColor: dividerColor?.resolve(states),
     dividerWidth: dividerWidth,
     dividerType: dividerType,
@@ -66,11 +73,13 @@ class RawItemContent extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('margin', margin))
+      ..add(IterableProperty('states', states))
+      ..add(DoubleProperty('top', top))
+      ..add(DoubleProperty('bottom', bottom))
       ..add(DiagnosticsProperty('dividerColor', dividerColor))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
-      ..add(DiagnosticsProperty('dividerType', dividerType))
-      ..add(DiagnosticsProperty('margin', margin))
-      ..add(IterableProperty('states', states));
+      ..add(DiagnosticsProperty('dividerType', dividerType));
   }
 }
 

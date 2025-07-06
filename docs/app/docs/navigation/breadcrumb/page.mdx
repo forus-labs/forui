@@ -23,13 +23,13 @@ It allows navigation up to any of the ancestors.
             FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
             FBreadcrumbItem.collapsed(
               menu: [
-                FTileGroup(
+                FItemGroup(
                   children: [
-                    FTile(
+                    FItem(
                       title: const Text('Documentation'),
                       onPress: () {},
                     ),
-                    FTile(
+                    FItem(
                       title: const Text('Themes'),
                       onPress: () {},
                     ),
@@ -89,6 +89,41 @@ FBreadcrumb(
 
 ## Examples
 
+### Tiles
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='breadcrumb' variant='tiles' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+        ```dart {4} copy
+        FBreadcrumb(
+          children: [
+            FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+            FBreadcrumbItem.collapsedTiles(
+              menu: [
+                FTileGroup(
+                  children: [
+                    FTile(
+                      title: const Text('Documentation'),
+                      onPress: () {},
+                    ),
+                    FTile(
+                      title: const Text('Themes'),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
+            FBreadcrumbItem(current: true, child: const Text('Widgets')),
+          ],
+        );
+        ```
+    </Tabs.Tab>
+</Tabs>
+
 ### Custom Divider
 
 <Tabs items={['Preview', 'Code']}>
@@ -109,13 +144,13 @@ FBreadcrumb(
             FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
             FBreadcrumbItem.collapsed(
               menu: [
-                FTileGroup(
+                FItemGroup(
                   children: [
-                    FTile(
+                    FItem(
                       title: const Text('Documentation'),
                       onPress: () {},
                     ),
-                    FTile(
+                    FItem(
                       title: const Text('Themes'),
                       onPress: () {},
                     ),

@@ -33,10 +33,10 @@ void main() {
               FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
               FBreadcrumbItem.collapsed(
                 menu: [
-                  FTileGroup(
+                  FItemGroup(
                     children: [
-                      FTile(title: const Text('Documentation'), onPress: () {}),
-                      FTile(title: const Text('Themes'), onPress: () {}),
+                      FItem(title: const Text('Documentation'), onPress: () {}),
+                      FItem(title: const Text('Themes'), onPress: () {}),
                     ],
                   ),
                 ],
@@ -60,7 +60,7 @@ void main() {
       );
     });
 
-    testWidgets('${theme.name} with hovered breadcrumb', (tester) async {
+    testWidgets('${theme.name} with focused breadcrumb', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
@@ -69,10 +69,10 @@ void main() {
               FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
               FBreadcrumbItem.collapsed(
                 menu: [
-                  FTileGroup(
+                  FItemGroup(
                     children: [
-                      FTile(title: const Text('Documentation'), onPress: () {}),
-                      FTile(title: const Text('Themes'), onPress: () {}),
+                      FItem(title: const Text('Documentation'), onPress: () {}),
+                      FItem(title: const Text('Themes'), onPress: () {}),
                     ],
                   ),
                 ],
@@ -102,10 +102,10 @@ void main() {
               FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
               FBreadcrumbItem.collapsed(
                 menu: [
-                  FTileGroup(
+                  FItemGroup(
                     children: [
-                      FTile(title: const Text('Documentation'), onPress: () {}),
-                      FTile(title: const Text('Themes'), onPress: () {}),
+                      FItem(title: const Text('Documentation'), onPress: () {}),
+                      FItem(title: const Text('Themes'), onPress: () {}),
                     ],
                   ),
                 ],
@@ -123,13 +123,13 @@ void main() {
       );
     });
 
-    testWidgets('${theme.name} with uncollapsed breadcrumb', (tester) async {
+    testWidgets('${theme.name} with uncollapsed item breadcrumb', (tester) async {
       final menu = [
-        FTileGroup(
+        FItemGroup(
           key: const Key('menu'),
           children: [
-            FTile(title: const Text('Documentation'), onPress: () {}),
-            FTile(title: const Text('Themes'), onPress: () {}),
+            FItem(title: const Text('Documentation'), onPress: () {}),
+            FItem(title: const Text('Themes'), onPress: () {}),
           ],
         ),
       ];
@@ -153,7 +153,41 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('breadcrumb/${theme.name}/shown-collapsed-breadcrumb.png'),
+        matchesGoldenFile('breadcrumb/${theme.name}/shown-item-breadcrumb.png'),
+      );
+    });
+
+    testWidgets('${theme.name} with uncollapsed tile breadcrumb', (tester) async {
+      final menu = [
+        FTileGroup(
+          key: const Key('menu'),
+          children: [
+            FTile(title: const Text('Documentation'), onPress: () {}),
+            FTile(title: const Text('Themes'), onPress: () {}),
+          ],
+        ),
+      ];
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+              FBreadcrumbItem.collapsedTiles(menu: menu),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Core')),
+              const FBreadcrumbItem(current: true, child: Text('Components')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.descendant(of: find.byType(FBreadcrumb), matching: find.byType(FPopoverMenu)));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('breadcrumb/${theme.name}/shown-tile-breadcrumb.png'),
       );
     });
   }

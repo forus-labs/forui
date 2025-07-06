@@ -62,7 +62,7 @@ class DetailedSelectPage extends Sample {
           value: 'Feature',
         ),
         FSelectItem.from(
-          prefix: const Icon(FIcons.messageCircleQuestion),
+          prefix: const Icon(FIcons.messageCircleQuestionMark),
           title: const Text('Question'),
           subtitle: const Text('A question or clarification'),
           value: 'Question',

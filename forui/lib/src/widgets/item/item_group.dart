@@ -108,6 +108,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
            for (final (index, child) in children.indexed)
              FItemData.merge(
                style: style.itemStyle,
+               spacing: style.spacing,
                enabled: enabled,
                dividerColor: style.dividerColor,
                dividerWidth: style.dividerWidth,
@@ -157,6 +158,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
            if (itemBuilder(context, index) case final item?) {
              return FItemData.merge(
                style: style.itemStyle,
+               spacing: style.spacing,
                enabled: enabled,
                dividerColor: style.dividerColor,
                dividerWidth: style.dividerWidth,
@@ -192,6 +194,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
            for (final (index, child) in children.indexed)
              FItemData.merge(
                style: style.itemStyle,
+               spacing: style.spacing,
                enabled: enabled,
                dividerColor: style.dividerColor,
                dividerWidth: style.dividerWidth,
@@ -220,15 +223,25 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
       label: semanticsLabel,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: maxHeight),
-        child: FItemGroupStyleData(
-          style: style,
-          child: CustomScrollView(
-            controller: scrollController,
-            cacheExtent: cacheExtent,
-            dragStartBehavior: dragStartBehavior,
-            shrinkWrap: true,
-            physics: physics,
-            slivers: [sliver],
+        // We use a Container instead of DecoratedBox as using a DecoratedBox will cause the border to be clipped.
+        // ignore: use_decorated_box
+        child: Container(
+          decoration: style.decoration,
+          child: ClipRRect(
+            borderRadius:
+                style.decoration.borderRadius?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
+                BorderRadius.zero,
+            child: FItemGroupStyleData(
+              style: style,
+              child: CustomScrollView(
+                controller: scrollController,
+                cacheExtent: cacheExtent,
+                dragStartBehavior: dragStartBehavior,
+                shrinkWrap: true,
+                physics: physics,
+                slivers: [sliver],
+              ),
+            ),
           ),
         ),
       ),
@@ -279,6 +292,14 @@ class FItemGroupStyleData extends InheritedWidget {
 
 /// An [FItemGroup]'s style.
 class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
+  /// The group's decoration.
+  @override
+  final BoxDecoration decoration;
+
+  /// The vertical spacing at the top and bottom of each group. Defaults to 4.
+  @override
+  final double spacing;
+
   /// The divider's style.
   ///
   /// Supported states:
@@ -295,17 +316,19 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   final FItemStyle itemStyle;
 
   /// Creates a [FItemGroupStyle].
-  FItemGroupStyle({required this.itemStyle, required this.dividerColor, required this.dividerWidth});
+  FItemGroupStyle({
+    required this.dividerColor,
+    required this.dividerWidth,
+    required this.itemStyle,
+    this.decoration = const BoxDecoration(),
+    this.spacing = 4,
+  });
 
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
+        itemStyle: FItemStyle.inherit(colors: colors, typography: typography, style: style),
         dividerColor: FWidgetStateMap.all(colors.border),
         dividerWidth: style.borderWidth,
-        itemStyle: FItemStyle.inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
-        ).copyWith(margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2)),
       );
 }

@@ -60,6 +60,8 @@ const FTappable(
   behavior: HitTestBehavior.translucent,
   onPress: () {},
   onLongPress: () {},
+  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
+  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
   builder: (context, state, child) => child!,
   child: const Text('Tappable'),
 );
@@ -83,6 +85,8 @@ FTappable.static(
   behavior: HitTestBehavior.translucent,
   onPress: () {},
   onLongPress: () {},
+  shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
+  actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
   builder: (context, state, child) => child!,
   child: const Text('Tappable'),
 );

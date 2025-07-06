@@ -1,3 +1,8 @@
+## 0.13.0
+
+Bump Forui dependency from `0.12.0` to `0.13.0`.
+
+
 ## 0.12.0
 
 Bumps minimum Flutter SDK version to 3.32.0.

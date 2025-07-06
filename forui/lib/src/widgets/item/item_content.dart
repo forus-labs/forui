@@ -12,11 +12,13 @@ part 'item_content.style.dart';
 @internal
 class ItemContent extends StatelessWidget {
   final FItemContentStyle style;
+  final EdgeInsetsGeometry margin;
+  final double top;
+  final double bottom;
+  final Set<WidgetState> states;
   final FWidgetStateMap<Color>? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
-  final EdgeInsetsGeometry margin;
-  final Set<WidgetState> states;
   final Widget? prefix;
   final Widget title;
   final Widget? subtitle;
@@ -25,11 +27,13 @@ class ItemContent extends StatelessWidget {
 
   const ItemContent({
     required this.style,
+    required this.margin,
+    required this.bottom,
+    required this.top,
+    required this.states,
     required this.dividerColor,
     required this.dividerWidth,
     required this.dividerType,
-    required this.margin,
-    required this.states,
     required this.title,
     required this.prefix,
     required this.subtitle,
@@ -46,6 +50,8 @@ class ItemContent extends StatelessWidget {
   Widget build(BuildContext context) => ItemContentLayout(
     margin: margin,
     padding: style.padding,
+    top: top,
+    bottom: bottom,
     dividerColor: dividerColor?.resolve(states),
     dividerWidth: dividerWidth,
     dividerType: dividerType,
@@ -114,17 +120,19 @@ class ItemContent extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('margin', margin))
+      ..add(DoubleProperty('top', top))
+      ..add(DoubleProperty('bottom', bottom))
+      ..add(IterableProperty('states', states))
       ..add(DiagnosticsProperty('dividerColor', dividerColor))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
-      ..add(DiagnosticsProperty('dividerType', dividerType))
-      ..add(DiagnosticsProperty('margin', margin))
-      ..add(IterableProperty('states', states));
+      ..add(DiagnosticsProperty('dividerType', dividerType));
   }
 }
 
 /// An [FItem] content's style.
 class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
-  /// The content's padding. Defaults to `EdgeInsetsDirectional.only(15, 13, 10, 13)`.
+  /// The content's padding. Defaults to `const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -183,7 +191,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.padding = const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6),
     this.prefixIconSpacing = 10,
     this.titleSpacing = 3,
     this.middleSpacing = 4,

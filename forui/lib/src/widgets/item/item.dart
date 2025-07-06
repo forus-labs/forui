@@ -65,7 +65,22 @@ class FItem extends StatelessWidget with FItemMixin {
   /// The item is not hoverable if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
 
-  final Widget Function(BuildContext, FItemStyle, Set<WidgetState>, FWidgetStateMap<Color>?, double?, FItemDivider)
+  /// {@macro forui.foundation.FTappable.shortcuts}
+  final Map<ShortcutActivator, Intent>? shortcuts;
+
+  /// {@macro forui.foundation.FTappable.actions}
+  final Map<Type, Action<Intent>>? actions;
+
+  final Widget Function(
+    BuildContext,
+    FItemStyle,
+    double,
+    double,
+    Set<WidgetState>,
+    FWidgetStateMap<Color>?,
+    double?,
+    FItemDivider,
+  )
   _builder;
 
   /// Creates a [FItem].
@@ -102,18 +117,22 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.shortcuts,
+    this.actions,
     Widget? prefix,
     Widget? subtitle,
     Widget? details,
     Widget? suffix,
     super.key,
-  }) : _builder = ((context, style, states, color, width, divider) => ItemContent(
+  }) : _builder = ((context, style, top, bottom, states, color, width, divider) => ItemContent(
          style: style.contentStyle,
+         margin: style.margin,
+         top: top,
+         bottom: bottom,
+         states: states,
          dividerColor: color,
          dividerWidth: width,
          dividerType: divider,
-         margin: style.margin,
-         states: states,
          prefix: prefix,
          title: title,
          subtitle: subtitle,
@@ -144,15 +163,19 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.shortcuts,
+    this.actions,
     Widget? prefix,
     super.key,
-  }) : _builder = ((context, style, states, color, width, divider) => RawItemContent(
+  }) : _builder = ((context, style, top, bottom, states, color, width, divider) => RawItemContent(
          style: style.rawItemContentStyle,
+         margin: style.margin,
+         top: top,
+         bottom: bottom,
+         states: states,
          dividerColor: color,
          dividerWidth: width,
          dividerType: divider,
-         margin: style.margin,
-         states: states,
          prefix: prefix,
          child: child,
        ));
@@ -168,11 +191,14 @@ class FItem extends StatelessWidget with FItemMixin {
     final divider = data.divider;
 
     // We increase the bottom margin to draw the divider.
+    final top = data.index == 0 ? data.spacing : 0.0;
+    final bottom = data.last ? data.spacing : 0.0;
+
     var margin = style.margin.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
-    if (divider != FItemDivider.none) {
-      final width = data.dividerWidth;
-      margin = margin.copyWith(bottom: margin.bottom + width);
-    }
+    margin = margin.copyWith(
+      top: margin.top + top,
+      bottom: margin.bottom + bottom + (divider == FItemDivider.none ? 0 : data.dividerWidth),
+    );
 
     if (onPress == null && onLongPress == null) {
       return ColoredBox(
@@ -181,7 +207,7 @@ class FItem extends StatelessWidget with FItemMixin {
           padding: margin,
           child: DecoratedBox(
             decoration: style.decoration.resolve(states) ?? const BoxDecoration(),
-            child: _builder(context, style, states, data.dividerColor, data.dividerWidth, divider),
+            child: _builder(context, style, top, bottom, states, data.dividerColor, data.dividerWidth, divider),
           ),
         ),
       );
@@ -202,11 +228,13 @@ class FItem extends StatelessWidget with FItemMixin {
           selected: selected,
           onPress: enabled ? (onPress ?? () {}) : null,
           onLongPress: enabled ? (onLongPress ?? () {}) : null,
+          shortcuts: shortcuts,
+          actions: actions,
           builder: (context, states, _) => Stack(
             children: [
               DecoratedBox(
                 decoration: style.decoration.maybeResolve(states) ?? const BoxDecoration(),
-                child: _builder(context, style, states, data.dividerColor, data.dividerWidth, divider),
+                child: _builder(context, style, top, bottom, states, data.dividerColor, data.dividerWidth, divider),
               ),
               if (style.focusedOutlineStyle case final outline? when states.contains(WidgetState.focused))
                 Positioned.fill(
@@ -231,14 +259,16 @@ class FItem extends StatelessWidget with FItemMixin {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
-      ..add(StringProperty('semanticsLabel', semanticsLabel, defaultValue: null, quoted: false))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions));
   }
 }
 
@@ -256,7 +286,9 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   @override
   final FWidgetStateMap<Color?> backgroundColor;
 
-  /// The margin around the item, including the [decoration]. Defaults to `EdgeInsets.zero`.
+  /// The margin around the item, including the [decoration].
+  ///
+  /// Defaults to `const EdgeInsets.symmetric(vertical: 2, horizontal: 4)`.
   @override
   final EdgeInsetsGeometry margin;
 
@@ -299,7 +331,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     required this.rawItemContentStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.margin = EdgeInsets.zero,
+    this.margin = const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
