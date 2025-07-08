@@ -1,9 +1,12 @@
 ## 0.14.0 (Next)
 
+### `FButton`
+* Add `FButton.onSecondaryPress`.
+* Add `FButton.onSecondaryLongPress`.
+
 ### `FTappable`
 * Add `FTappable.onSecondaryPress`.
 * Add `FTappable.onSecondaryLongPress`.
-
 
 
 ## 0.13.1

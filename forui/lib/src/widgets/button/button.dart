@@ -41,6 +41,12 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onLongPress}
   final VoidCallback? onLongPress;
 
+  /// {@macro forui.foundation.FTappable.onSecondaryPress}
+  final VoidCallback? onSecondaryPress;
+
+  /// {@macro forui.foundation.FTappable.onSecondaryLongPress}
+  final VoidCallback? onSecondaryLongPress;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -93,6 +99,8 @@ class FButton extends StatelessWidget {
     required Widget child,
     this.style = _primary,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -126,6 +134,8 @@ class FButton extends StatelessWidget {
     required Widget child,
     this.style = _outline,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -143,6 +153,8 @@ class FButton extends StatelessWidget {
     required this.child,
     this.style = _primary,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -171,6 +183,8 @@ class FButton extends StatelessWidget {
       onStateChange: onStateChange,
       onPress: onPress,
       onLongPress: onLongPress,
+      onSecondaryPress: onSecondaryPress,
+      onSecondaryLongPress: onSecondaryLongPress,
       selected: selected,
       builder: (_, states, _) => DecoratedBox(
         decoration: style.decoration.resolve(states),
@@ -186,6 +200,8 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

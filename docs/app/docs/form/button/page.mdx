@@ -42,6 +42,8 @@ FButton(
   style: FButtonStyle(...),
   mainAxisSize: MainAxisSize.min,
   onPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
   shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
   actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
   child: const Text('Button'),
@@ -54,6 +56,8 @@ FButton(
 FButton.raw(
   style: FButtonStyle(...),
   onPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
   shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
   actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
   child: const Text('Button'),
