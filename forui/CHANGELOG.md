@@ -1,3 +1,11 @@
+## 0.14.0 (Next)
+
+### `FTappable`
+* Add `FTappable.onSecondaryPress`.
+* Add `FTappable.onSecondaryLongPress`.
+
+
+
 ## 0.13.1
 
 * Fix `FSelectTile` mixing in `FItemMixin` instead of `FTileMixin`.

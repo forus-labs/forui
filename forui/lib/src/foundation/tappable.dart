@@ -86,16 +86,46 @@ class FTappable extends StatefulWidget {
   /// {@template forui.foundation.FTappable.onPress}
   /// A callback for when the widget is pressed.
   ///
-  /// The widget will be disabled if both [onPress] and [onLongPress] are null.
+  /// The widget will be disabled if the following are null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
   /// {@endtemplate}
   final VoidCallback? onPress;
 
   /// {@template forui.foundation.FTappable.onLongPress}
   /// A callback for when the widget is long pressed.
   ///
-  /// The widget will be disabled if both [onPress] and [onLongPress] are null.
+  /// The widget will be disabled if the following are null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
   /// {@endtemplate}
   final VoidCallback? onLongPress;
+
+  /// {@template forui.foundation.FTappable.onSecondaryPress}
+  /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
+  ///
+  /// The widget will be disabled if the following are null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
+  /// {@endtemplate}
+  final VoidCallback? onSecondaryPress;
+
+  /// {@template forui.foundation.FTappable.onSecondaryLongPress}
+  /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
+  ///
+  /// The widget will be disabled if the following are null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
+  /// {@endtemplate}
+  final VoidCallback? onSecondaryLongPress;
 
   /// {@template forui.foundation.FTappable.shortcuts}
   /// The shortcuts. Defaults to calling [ActivateIntent] if [onPress] is not null.
@@ -136,6 +166,8 @@ class FTappable extends StatefulWidget {
     HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
+    VoidCallback? onSecondaryPress,
+    VoidCallback? onSecondaryLongPress,
     Map<ShortcutActivator, Intent>? shortcuts,
     Map<Type, Action<Intent>>? actions,
     ValueWidgetBuilder<Set<WidgetState>> builder,
@@ -161,6 +193,8 @@ class FTappable extends StatefulWidget {
     this.behavior = HitTestBehavior.translucent,
     this.onPress,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
     this.actions,
     this.builder = _builder,
     this.child,
@@ -191,12 +225,15 @@ class FTappable extends StatefulWidget {
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 
-  bool get _disabled => onPress == null && onLongPress == null;
+  bool get _disabled =>
+      onPress == null && onLongPress == null && onSecondaryPress == null && onSecondaryLongPress == null;
 }
 
 class _FTappableState<T extends FTappable> extends State<T> {
@@ -311,6 +348,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
                   behavior: widget.behavior,
                   onTap: widget.onPress,
                   onLongPress: widget.onLongPress,
+                  onSecondaryTap: widget.onSecondaryPress,
+                  onSecondaryLongPress: widget.onSecondaryLongPress,
                   child: tappable,
                 ),
               ),
@@ -354,6 +393,8 @@ class AnimatedTappable extends FTappable {
     super.behavior,
     super.onPress,
     super.onLongPress,
+    super.onSecondaryPress,
+    super.onSecondaryLongPress,
     super.shortcuts,
     super.actions,
     super.builder,

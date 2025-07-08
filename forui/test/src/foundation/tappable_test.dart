@@ -187,6 +187,33 @@ void main() {
       });
     }
 
+    testWidgets('disabled when no press callbacks given', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(
+            focusNode: focusNode,
+            builder: (_, states, _) => Text('$states'),
+          ),
+        ),
+      );
+
+      expect(find.text(set(false).toString()), findsOneWidget);
+    });
+
+    testWidgets('enabled when secondary press given', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(
+            focusNode: focusNode,
+            builder: (_, states, _) => Text('$states'),
+            onSecondaryPress: () {},
+          ),
+        ),
+      );
+
+      expect(find.text(set(true).toString()), findsOneWidget);
+    });
+
     testWidgets('simulated race condition between animation and unmounting of widget', (tester) async {
       await tester.pumpWidget(TestScaffold(child: const _StubTappable()));
 
