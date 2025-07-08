@@ -4,9 +4,22 @@
 * Add `FButton.onSecondaryPress`.
 * Add `FButton.onSecondaryLongPress`.
 
+
+### `FHeaderAction`
+* Add `FHeaderAction.onSecondaryPress`.
+* Add `FHeaderAction.onSecondaryLongPress`.
+* Add `FHeaderAction.actions`.
+* Add `FHeaderAction.shortcuts`.
+
+
 ### `FTappable`
 * Add `FTappable.onSecondaryPress`.
 * Add `FTappable.onSecondaryLongPress`.
+
+
+### `FTile`
+* Add `FTile.onSecondaryPress`.
+* Add `FTile.onSecondaryLongPress`.
 
 
 ## 0.13.1

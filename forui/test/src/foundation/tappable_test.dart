@@ -418,6 +418,33 @@ void main() {
       });
     }
 
+    testWidgets('disabled when no press callbacks given', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable.static(
+            focusNode: focusNode,
+            builder: (_, states, _) => Text('$states'),
+          ),
+        ),
+      );
+
+      expect(find.text(set(false).toString()), findsOneWidget);
+    });
+
+    testWidgets('enabled when secondary press given', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable.static(
+            focusNode: focusNode,
+            builder: (_, states, _) => Text('$states'),
+            onSecondaryPress: () {},
+          ),
+        ),
+      );
+
+      expect(find.text(set(true).toString()), findsOneWidget);
+    });
+
     testWidgets('resets hover and touch states when enabled state changes', (tester) async {
       late StateSetter setState;
       VoidCallback? onPress = () {};

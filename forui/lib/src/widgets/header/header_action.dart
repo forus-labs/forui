@@ -44,6 +44,18 @@ class FHeaderAction extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onLongPress}
   final VoidCallback? onLongPress;
 
+  /// {@macro forui.foundation.FTappable.onSecondaryPress}
+  final VoidCallback? onSecondaryPress;
+
+  /// {@macro forui.foundation.FTappable.onSecondaryLongPress}
+  final VoidCallback? onSecondaryLongPress;
+
+  /// {@macro forui.foundation.FTappable.shortcuts}
+  final Map<ShortcutActivator, Intent>? shortcuts;
+
+  /// {@macro forui.foundation.FTappable.actions}
+  final Map<Type, Action<Intent>>? actions;
+
   /// Creates a [FHeaderAction] from the given SVG [icon].
   const FHeaderAction({
     required this.icon,
@@ -57,6 +69,10 @@ class FHeaderAction extends StatelessWidget {
     this.onHoverChange,
     this.onStateChange,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
+    this.shortcuts,
+    this.actions,
     super.key,
   });
 
@@ -71,6 +87,10 @@ class FHeaderAction extends StatelessWidget {
     ValueChanged<bool>? onHoverChange,
     ValueChanged<Set<WidgetState>>? onStateChange,
     VoidCallback? onLongPress,
+    VoidCallback? onSecondaryPress,
+    VoidCallback? onSecondaryLongPress,
+    Map<ShortcutActivator, Intent>? shortcuts,
+    Map<Type, Action<Intent>>? actions,
     Key? key,
   }) => FHeaderAction(
     icon: const Icon(FIcons.arrowLeft),
@@ -83,6 +103,10 @@ class FHeaderAction extends StatelessWidget {
     onHoverChange: onHoverChange,
     onStateChange: onStateChange,
     onLongPress: onLongPress,
+    onSecondaryPress: onSecondaryPress,
+    onSecondaryLongPress: onSecondaryLongPress,
+    shortcuts: shortcuts,
+    actions: actions,
     key: key,
   );
 
@@ -96,6 +120,10 @@ class FHeaderAction extends StatelessWidget {
     ValueChanged<bool>? onHoverChange,
     ValueChanged<Set<WidgetState>>? onStateChange,
     VoidCallback? onLongPress,
+    VoidCallback? onSecondaryPress,
+    VoidCallback? onSecondaryLongPress,
+    Map<ShortcutActivator, Intent>? shortcuts,
+    Map<Type, Action<Intent>>? actions,
     Key? key,
   }) => FHeaderAction(
     icon: const Icon(FIcons.x),
@@ -107,6 +135,10 @@ class FHeaderAction extends StatelessWidget {
     onHoverChange: onHoverChange,
     onStateChange: onStateChange,
     onLongPress: onLongPress,
+    onSecondaryPress: onSecondaryPress,
+    onSecondaryLongPress: onSecondaryLongPress,
+    shortcuts: shortcuts,
+    actions: actions,
     key: key,
   );
 
@@ -124,6 +156,10 @@ class FHeaderAction extends StatelessWidget {
       semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,
+      onSecondaryPress: onSecondaryPress,
+      onSecondaryLongPress: onSecondaryLongPress,
+      shortcuts: shortcuts,
+      actions: actions,
       builder: (_, states, child) => IconTheme(data: style.iconStyle.resolve(states), child: child!),
       child: icon,
     );
@@ -143,7 +179,11 @@ class FHeaderAction extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions));
   }
 }
 

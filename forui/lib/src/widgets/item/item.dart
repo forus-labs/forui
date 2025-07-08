@@ -57,13 +57,39 @@ class FItem extends StatelessWidget with FItemMixin {
 
   /// A callback for when the item is pressed.
   ///
-  /// The item is not hoverable if both [onPress] and [onLongPress] are null.
+  /// The item is not interactable if the following are all null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
   final VoidCallback? onPress;
 
   /// A callback for when the item is long pressed.
   ///
-  /// The item is not hoverable if both [onPress] and [onLongPress] are null.
+  /// The item is not interactable if the following are all null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
   final VoidCallback? onLongPress;
+
+  /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
+  ///
+  /// The item is not interactable if the following are all null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
+  final VoidCallback? onSecondaryPress;
+
+  /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
+  ///
+  /// The item is not interactable if the following are all null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
+  final VoidCallback? onSecondaryLongPress;
 
   /// {@macro forui.foundation.FTappable.shortcuts}
   final Map<ShortcutActivator, Intent>? shortcuts;
@@ -117,6 +143,8 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
     this.shortcuts,
     this.actions,
     Widget? prefix,
@@ -163,6 +191,8 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
     this.shortcuts,
     this.actions,
     Widget? prefix,
@@ -200,7 +230,7 @@ class FItem extends StatelessWidget with FItemMixin {
       bottom: margin.bottom + bottom + (divider == FItemDivider.none ? 0 : data.dividerWidth),
     );
 
-    if (onPress == null && onLongPress == null) {
+    if (onPress == null && onLongPress == null && onSecondaryPress == null && onSecondaryLongPress == null) {
       return ColoredBox(
         color: style.backgroundColor.resolve(states) ?? Colors.transparent,
         child: Padding(
@@ -228,6 +258,8 @@ class FItem extends StatelessWidget with FItemMixin {
           selected: selected,
           onPress: enabled ? (onPress ?? () {}) : null,
           onLongPress: enabled ? (onLongPress ?? () {}) : null,
+          onSecondaryPress: enabled ? (onSecondaryPress ?? () {}) : null,
+          onSecondaryLongPress: enabled ? (onSecondaryLongPress ?? () {}) : null,
           shortcuts: shortcuts,
           actions: actions,
           builder: (context, states, _) => Stack(
@@ -267,6 +299,8 @@ class FItem extends StatelessWidget with FItemMixin {
       ..add(ObjectFlagProperty.has('onChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions));
   }
