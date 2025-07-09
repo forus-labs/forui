@@ -303,7 +303,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          },
        );
 
-  /// Creates a [FSelect] from the given [menu].
+  /// Creates a [FSelectMenuTile] with the given [menu].
   ///
   /// ## Contract
   /// Each key in [menu] must map to a unique value. Having multiple keys map to the same value will result in

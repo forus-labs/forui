@@ -46,6 +46,7 @@
 
 ### Others
 * Add `FSelectMenuTile.fromMap(...)`.
+* Add `FToasterStyle.toastAlignment`.
 
 * **Breaking** Change `FPersistentSheetController.shown` to `FPersistentSheetController.status`.
 * **Breaking** Change `FTooltipController.shown` to `FTooltipController.status`.
