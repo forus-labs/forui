@@ -460,7 +460,7 @@ enum Style {
     'FToasterStyle',
     <String>['toaster'],
     <String>['FToasterStyle', 'FToastStyle'],
-    'FToasterStyle toasterStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FToasterStyle(\n  toastStyle: _toastStyle(colors: colors, typography: typography, style: style),\n  max: 3,\n  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),\n  expandBehavior: FToasterExpandBehavior.hoverOrPress,\n  expandHoverEnterDuration: const Duration(milliseconds: 200),\n  expandHoverExitDuration: const Duration(milliseconds: 300),\n  expandStartSpacing: 16,\n  expandSpacing: 10,\n  expandDuration: const Duration(milliseconds: 500),\n  expandCurve: Curves.easeInOutCubic,\n  collapsedProtrusion: 12,\n  collapsedScale: 0.9,\n);\n',
+    'FToasterStyle toasterStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FToasterStyle(\n  toastStyle: _toastStyle(colors: colors, typography: typography, style: style),\n  max: 3,\n  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),\n  expandBehavior: FToasterExpandBehavior.hoverOrPress,\n  expandHoverEnterDuration: const Duration(milliseconds: 200),\n  expandHoverExitDuration: const Duration(milliseconds: 300),\n  expandStartSpacing: 16,\n  expandSpacing: 10,\n  expandDuration: const Duration(milliseconds: 500),\n  expandCurve: Curves.easeInOutCubic,\n  collapsedProtrusion: 12,\n  collapsedScale: 0.9,\n  toastAlignment: FToastAlignment.bottomEnd,\n);\n',
   ),
   ftooltipstyle(
     'FTooltipStyle',
