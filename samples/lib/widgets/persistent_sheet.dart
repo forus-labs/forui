@@ -23,7 +23,7 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
   Widget sample(BuildContext context) {
     VoidCallback onPress(FLayout side) => () {
       for (final MapEntry(:key, :value) in _controllers.entries) {
-        if (key != side && value.shown) {
+        if (key != side && value.status.isCompleted) {
           return;
         }
       }

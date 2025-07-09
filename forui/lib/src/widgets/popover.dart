@@ -34,11 +34,12 @@ final class FPopoverController extends FChangeNotifier {
   /// Convenience method for showing/hiding the popover.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async => _overlay.isShowing ? hide() : show();
+  Future<void> toggle() async =>
+      const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_animation.status) ? hide() : show();
 
   /// Shows the popover.
   ///
-  /// If already shown is already true, calling this method brings the popover to the top.
+  /// If already shown, calling this method brings the popover to the top.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
