@@ -12,6 +12,13 @@
 * Add `FHeaderAction.shortcuts`.
 
 
+### `FSelect`
+
+* Fix `FSelect` flickering when selecting an item on desktop.
+* Fix `FSelect` not scrolling to selected item when opened if the item is really far down the list.
+* Fix `FSelect` layout shifting when scrolling through a long list of items.
+
+
 ### `FTappable`
 * Add `FTappable.onSecondaryPress`.
 * Add `FTappable.onSecondaryLongPress`.
@@ -20,6 +27,10 @@
 ### `FTile`
 * Add `FTile.onSecondaryPress`.
 * Add `FTile.onSecondaryLongPress`.
+
+
+### Others
+* **Breaking** Change `FPopoverController.shown` to `FPopoverController.status`.
 
 
 ## 0.13.1

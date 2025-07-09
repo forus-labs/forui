@@ -25,33 +25,37 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 10,
-      children: [
-        FTileGroup.merge(
-          children: [
-            FTileGroup(
-              style: FThemes.green.dark.tileGroupStyle,
-              children: [
-                FTile(
-                  prefix: const Icon(FIcons.wifi),
-                  title: const Text('WiFi'),
-                  details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
-                  onPress: () {},
-                ),
-                FTile(
-                  prefix: const Icon(FIcons.bluetooth),
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo'),
-                  details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
+    return Material(
+      child: Column(
+        spacing: 10,
+        children: [
+          TextField(),
+          FSelect.fromMap(const {
+            'Option 1': '1',
+            'Option 2': '2',
+            'Option 3': '3',
+            'Option 4': '4',
+            'Option 5': '5',
+            'Option 6': '6',
+            'Option 7': '7',
+            'Option 8': '8',
+            'Option 9': '9',
+            'Option 10': '10',
+            'Option 11': '11',
+            'Option 12': '12',
+            'Option 13': '13',
+            'Option 14': '14',
+            'Option 15': '15',
+            'Option 16': '16',
+            'Option 17': '17',
+            'Option 18': '18',
+            'Option 19': '19',
+            'Option 20': '20',
+          },
+          ),
+          TextField(),
+        ],
+      ),
     );
   }
 }

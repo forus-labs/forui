@@ -616,7 +616,7 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
 
   @override
   Future<void> update(T value, {required bool add}) async {
-    if (autoHide && _popover.shown) {
+    if (autoHide && _popover.status.isForwardOrCompleted) {
       await _popover.hide();
     }
 

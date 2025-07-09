@@ -223,7 +223,9 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   }
 
   void _onTap() {
-    _controller.popover.shown ? _focus.requestFocus() : _focus.unfocus();
+    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_controller.popover.status)
+        ? _focus.requestFocus()
+        : _focus.unfocus();
     _controller.popover.toggle();
   }
 }

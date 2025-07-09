@@ -141,41 +141,48 @@ class _ContentState<T> extends State<Content<T>> {
       ensureVisible: _ensureVisible,
       child: Padding(
         padding: widget.style.padding,
-        child: ListView(
+        // We use a SingleChildScrollView instead of a ListView as the latter lazily builds its children. Although great
+        // for performance, this means that:
+        // * The select will not scroll to the selected item if it far down the list when the select is opened.
+        // * There is layout shifting when scrolling.
+        //
+        // Giving a ListView an increased cacheExtent did not fix the issue.
+        child: SingleChildScrollView(
           controller: _controller,
           padding: EdgeInsets.zero,
           physics: widget.physics,
-          shrinkWrap: true,
-          children: [
-            if (widget.children.firstOrNull case final first?)
-              SelectContentData<T>(
-                style: widget.style.sectionStyle,
-                first: widget.first,
-                enabled: widget.enabled,
-                ensureVisible: _ensureVisible,
-                child: FItemData.merge(
+          child: Column(
+            children: [
+              if (widget.children.firstOrNull case final first?)
+                SelectContentData<T>(
+                  style: widget.style.sectionStyle,
+                  first: widget.first,
+                  enabled: widget.enabled,
+                  ensureVisible: _ensureVisible,
+                  child: FItemData.merge(
+                    style: style,
+                    dividerColor: widget.style.sectionStyle.dividerColor,
+                    dividerWidth: widget.style.sectionStyle.dividerWidth,
+                    divider: widget.divider,
+                    enabled: widget.enabled,
+                    index: 0,
+                    last: widget.children.length == 1,
+                    child: first,
+                  ),
+                ),
+              for (final (i, child) in widget.children.indexed.skip(1))
+                FItemData.merge(
                   style: style,
                   dividerColor: widget.style.sectionStyle.dividerColor,
                   dividerWidth: widget.style.sectionStyle.dividerWidth,
                   divider: widget.divider,
                   enabled: widget.enabled,
-                  index: 0,
-                  last: widget.children.length == 1,
-                  child: first,
+                  index: i,
+                  last: i == widget.children.length - 1,
+                  child: child,
                 ),
-              ),
-            for (final (i, child) in widget.children.indexed.skip(1))
-              FItemData.merge(
-                style: style,
-                dividerColor: widget.style.sectionStyle.dividerColor,
-                dividerWidth: widget.style.sectionStyle.dividerWidth,
-                divider: widget.divider,
-                enabled: widget.enabled,
-                index: i,
-                last: i == widget.children.length - 1,
-                child: child,
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
