@@ -40,14 +40,6 @@ void main() {
     controller.dispose();
   });
 
-  testWidgets('', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
-      ),
-    );
-  });
-
   testWidgets('scrolls to item at the end of very long list', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
