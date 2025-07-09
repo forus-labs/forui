@@ -15,7 +15,12 @@ class SelectMenuTilePage extends Sample {
     : autoHide = bool.tryParse(autoHide) ?? true;
 
   @override
-  Widget sample(BuildContext context) => FSelectMenuTile(
+  Widget sample(BuildContext context) => FSelectMenuTile.fromMap(
+    const {
+      'All': Notification.all,
+      'Direct Messages': Notification.direct,
+      'None': Notification.nothing,
+    },
     initialValue: Notification.all,
     autoHide: autoHide,
     validator: (value) => value == null ? 'Select an item' : null,
@@ -26,11 +31,6 @@ class SelectMenuTilePage extends Sample {
       Notification.direct => 'Direct Messages',
       _ => 'None',
     }),
-    menu: const [
-      FSelectTile(title: Text('All'), value: Notification.all),
-      FSelectTile(title: Text('Direct Messages'), value: Notification.direct),
-      FSelectTile(title: Text('None'), value: Notification.nothing),
-    ],
   );
 }
 

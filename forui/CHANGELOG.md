@@ -29,6 +29,8 @@
 
 
 ### Others
+* Add `FSelectMenuTile.fromMap(...)`.
+
 * **Breaking** Change `FPersistentSheetController.shown` to `FPersistentSheetController.status`.
 * **Breaking** Change `FPopoverController.shown` to `FPopoverController.status`.
 * **Breaking** Change `FTooltipController.shown` to `FTooltipController.status`.
@@ -37,7 +39,7 @@
 ## 0.13.1
 
 * Fix `FSelectTile` mixing in `FItemMixin` instead of `FTileMixin`.
-* Fix `SelectMenuTile` mixing in `FItemMixin` instead of `FTileMixin`.
+* Fix `FSelectMenuTile` mixing in `FItemMixin` instead of `FTileMixin`.
 
 
 ## 0.13.0

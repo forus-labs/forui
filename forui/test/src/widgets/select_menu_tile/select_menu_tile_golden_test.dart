@@ -247,4 +247,34 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/builder/null-limited.png'));
     });
   });
+
+  group('FSelectMenuTile.fromMap', () {
+    testWidgets('enabled', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelectMenuTile.fromMap(
+            const {
+              'Item 1': 1,
+              'Item 2': 2,
+            },
+            selectController: autoDispose(FMultiValueNotifier.radio(value: 1)),
+            prefix: const Icon(FIcons.calendar),
+            label: const Text('Label'),
+            description: const Text('Description'),
+            title: const Text('Repeat'),
+            subtitle: const Text('Fee, Fo, Fum'),
+            details: const Text('None'),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(FSelectMenuTile<int>));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select-menu-tile/from-map.png'),
+      );
+    });
+  });
 }
