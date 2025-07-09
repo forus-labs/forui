@@ -190,10 +190,7 @@ void main() {
     testWidgets('disabled when no press callbacks given', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTappable(
-            focusNode: focusNode,
-            builder: (_, states, _) => Text('$states'),
-          ),
+          child: FTappable(focusNode: focusNode, builder: (_, states, _) => Text('$states')),
         ),
       );
 
@@ -203,11 +200,7 @@ void main() {
     testWidgets('enabled when secondary press given', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTappable(
-            focusNode: focusNode,
-            builder: (_, states, _) => Text('$states'),
-            onSecondaryPress: () {},
-          ),
+          child: FTappable(focusNode: focusNode, builder: (_, states, _) => Text('$states'), onSecondaryPress: () {}),
         ),
       );
 
@@ -421,10 +414,7 @@ void main() {
     testWidgets('disabled when no press callbacks given', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTappable.static(
-            focusNode: focusNode,
-            builder: (_, states, _) => Text('$states'),
-          ),
+          child: FTappable.static(focusNode: focusNode, builder: (_, states, _) => Text('$states')),
         ),
       );
 

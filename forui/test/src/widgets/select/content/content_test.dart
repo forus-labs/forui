@@ -39,7 +39,7 @@ void main() {
   tearDown(() {
     controller.dispose();
   });
-  
+
   testWidgets('', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
@@ -51,10 +51,11 @@ void main() {
   testWidgets('scrolls to item at the end of very long list', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<int>.fromMap({
-          for (var i = 0; i < 20; i++)
-            i.toString(): i,
-        }, key: key, contentScrollController: scrollController),
+        child: FSelect<int>.fromMap(
+          {for (var i = 0; i < 20; i++) i.toString(): i},
+          key: key,
+          contentScrollController: scrollController,
+        ),
       ),
     );
 

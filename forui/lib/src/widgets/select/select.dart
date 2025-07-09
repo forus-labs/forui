@@ -757,9 +757,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
             ),
           ),
           child: CallbackShortcuts(
-            bindings: {
-              const SingleActivator(LogicalKeyboardKey.enter): _toggle,
-            },
+            bindings: {const SingleActivator(LogicalKeyboardKey.enter): _toggle},
             child: widget.builder(context, (style, data.$1, data.$2), child),
           ),
         ),

@@ -25,15 +25,6 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Column(
-        spacing: 10,
-        children: const [
-          TextField(),
-          FTimeField.picker(),
-          TextField(),
-        ],
-      ),
-    );
+    return Material(child: Column(spacing: 10, children: const [TextField(), FTimeField.picker(), TextField()]));
   }
 }

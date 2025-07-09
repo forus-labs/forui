@@ -84,10 +84,7 @@ void main() {
     var states = <WidgetState>{};
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(
-          title: const Text('item'),
-          onStateChange: (s) => states = s,
-        ),
+        child: FItem(title: const Text('item'), onStateChange: (s) => states = s),
       ),
     );
 
@@ -103,11 +100,7 @@ void main() {
     var states = <WidgetState>{};
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(
-          title: const Text('item'),
-          onSecondaryPress: () {},
-          onStateChange: (s) => states = s,
-        ),
+        child: FItem(title: const Text('item'), onSecondaryPress: () {}, onStateChange: (s) => states = s),
       ),
     );
 
@@ -123,11 +116,7 @@ void main() {
     var states = <WidgetState>{};
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(
-          title: const Text('item'),
-          onSecondaryLongPress: () {},
-          onStateChange: (s) => states = s,
-        ),
+        child: FItem(title: const Text('item'), onSecondaryLongPress: () {}, onStateChange: (s) => states = s),
       ),
     );
 
