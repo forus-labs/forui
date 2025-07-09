@@ -152,6 +152,7 @@ class _ContentState<T> extends State<Content<T>> {
           padding: EdgeInsets.zero,
           physics: widget.physics,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.children.firstOrNull case final first?)
                 SelectContentData<T>(

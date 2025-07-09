@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -239,9 +240,146 @@ void main() {
 
       expect(Focus.of(tester.element(find.text('3'))).hasFocus, true);
     });
+
+    testWidgets('shift focus outside', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester));
+      final first = autoDispose(FocusNode());
+      final second = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FPopover(
+                controller: controller,
+                traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+                popoverBuilder: (_, _) => SizedBox.square(dimension: 100, child: FTextField(focusNode: first)),
+                child: Container(color: Colors.black, height: 10, width: 10),
+              ),
+              FTextField(focusNode: second),
+            ],
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      first.requestFocus();
+      await tester.pumpAndSettle();
+
+      expect(first.hasFocus, true);
+      expect(second.hasFocus, false);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      expect(first.hasFocus, false);
+      expect(second.hasFocus, true);
+    });
+
+    testWidgets('does not shift focus outside', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester));
+      final first = autoDispose(FocusNode());
+      final second = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FPopover(
+                controller: controller,
+                popoverBuilder: (_, _) => SizedBox.square(dimension: 100, child: FTextField(focusNode: first)),
+                child: Container(color: Colors.black, height: 10, width: 10),
+              ),
+              FTextField(focusNode: second),
+            ],
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      first.requestFocus();
+      await tester.pumpAndSettle();
+
+      expect(first.hasFocus, true);
+      expect(second.hasFocus, false);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+
+      expect(first.hasFocus, true);
+      expect(second.hasFocus, false);
+    });
   });
 
   group('state', () {
+    testWidgets('update focusNode', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester));
+
+      final first = autoDispose(FocusScopeNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopover(
+            controller: controller,
+            focusNode: first,
+            popoverBuilder: (_, _) => const SizedBox(),
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      expect(first.context, isNotNull);
+
+      final second = autoDispose(FocusScopeNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopover(
+            controller: controller,
+            focusNode: second,
+            popoverBuilder: (_, _) => const SizedBox(),
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      expect(first.context, isNotNull);
+      expect(second.context, isNotNull);
+    });
+
+    testWidgets('dispose focusNode', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester));
+      final node = autoDispose(FocusScopeNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopover(
+            controller: controller,
+            focusNode: node,
+            popoverBuilder: (_, _) => const SizedBox(),
+            child: Container(color: Colors.black, height: 10, width: 10),
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      expect(node.context, isNotNull);
+
+      await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+
+      expect(node.context, isNotNull);
+    });
+
     testWidgets('update controller', (tester) async {
       final first = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(

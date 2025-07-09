@@ -12,10 +12,26 @@
 * Add `FHeaderAction.shortcuts`.
 
 
+### `FPopover`
+* **Breaking** Change `FPopoverController.shown` to `FPopoverController.status`.
+
+* Fix `FPopover` not respecting `FPopover.traversalEdgeBehavior`.
+
+
 ### `FSelect`
 * Fix `FSelect` flickering when selecting an item on desktop.
 * Fix `FSelect` not scrolling to selected item when opened if the item is really far down the list.
 * Fix `FSelect` layout shifting when scrolling through a long list of items.
+
+
+### `FSidebar`
+* Add `FSidebar.focusNode`.
+* Add `FSidebar.traversalEdgeBehavior`.
+
+* Change `FSidebarItemStyle.focusedOutlineStyle.spacing` from 3 to 0.
+* Convert `FSidebar` from a stateless to a stateful widget.
+
+* Fix `FSidebar`'s focus traversal behavior.
 
 
 ### `FTappable`
@@ -29,15 +45,17 @@
 
 
 ### Others
+* Add `FSelectMenuTile.fromMap(...)`.
+* Add `FToasterStyle.toastAlignment`.
+
 * **Breaking** Change `FPersistentSheetController.shown` to `FPersistentSheetController.status`.
-* **Breaking** Change `FPopoverController.shown` to `FPopoverController.status`.
 * **Breaking** Change `FTooltipController.shown` to `FTooltipController.status`.
 
 
 ## 0.13.1
 
 * Fix `FSelectTile` mixing in `FItemMixin` instead of `FTileMixin`.
-* Fix `SelectMenuTile` mixing in `FItemMixin` instead of `FTileMixin`.
+* Fix `FSelectMenuTile` mixing in `FItemMixin` instead of `FTileMixin`.
 
 
 ## 0.13.0

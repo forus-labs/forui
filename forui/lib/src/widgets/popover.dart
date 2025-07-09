@@ -197,9 +197,10 @@ class FPopover extends StatefulWidget {
   /// Controls the transfer of focus beyond the first and the last items in a popover. Defaults to
   /// [TraversalEdgeBehavior.closedLoop].
   ///
-  /// Changing this field value has no immediate effect on the UI.
+  /// ## Contract
+  /// Throws [AssertionError] if both [focusNode] and [traversalEdgeBehavior] are not null.
   /// {@endtemplate}
-  final TraversalEdgeBehavior traversalEdgeBehavior;
+  final TraversalEdgeBehavior? traversalEdgeBehavior;
 
   /// {@template forui.widgets.FPopover.barrierSemanticsLabel}
   /// The popover's barrier label used by accessibility frameworks.
@@ -257,7 +258,7 @@ class FPopover extends StatefulWidget {
     this.autofocus,
     this.focusNode,
     this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
@@ -270,6 +271,10 @@ class FPopover extends StatefulWidget {
   }) : assert(
          groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
          'groupId can only be used with FHidePopoverRegion.excludeTarget',
+       ),
+       assert(
+         focusNode == null || traversalEdgeBehavior == null,
+         'focusNode and traversalEdgeBehavior cannot both be set.',
        ),
        assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
        popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
@@ -314,6 +319,15 @@ class FPopover extends StatefulWidget {
 class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   late Object? _groupId = widget.groupId ?? UniqueKey();
   late FPopoverController _controller = widget.controller ?? FPopoverController(vsync: this);
+  FocusScopeNode? _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode =
+        widget.focusNode ??
+        FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop);
+  }
 
   @override
   void didUpdateWidget(covariant FPopover old) {
@@ -322,12 +336,34 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       _groupId = widget.groupId ?? UniqueKey();
     }
 
+    if (widget.focusNode != old.focusNode || widget.traversalEdgeBehavior != old.traversalEdgeBehavior) {
+      if (old.focusNode == null) {
+        _focusNode?.dispose();
+      }
+
+      _focusNode =
+          widget.focusNode ??
+          FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop);
+    }
+
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
       }
       _controller = widget.controller ?? FPopoverController(vsync: this);
     }
+  }
+
+  @override
+  void dispose() {
+    if (widget.focusNode == null) {
+      _focusNode?.dispose();
+    }
+
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -374,7 +410,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                 container: true,
                 child: FocusScope(
                   autofocus: widget.autofocus ?? (style.barrierFilter != null),
-                  node: widget.focusNode,
+                  node: _focusNode,
                   onFocusChange: widget.onFocusChange,
                   child: TapRegion(
                     groupId: _groupId,
@@ -422,14 +458,6 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     if (_controller.status.isForwardOrCompleted) {
       _controller.hide();
     }
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
-    super.dispose();
   }
 }
 

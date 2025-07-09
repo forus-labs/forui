@@ -73,6 +73,10 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   @override
   final double collapsedScale;
 
+  /// The toast's alignment relative to a [FToaster]. Defaults to [FToastAlignment.bottomEnd].
+  @override
+  final FToastAlignment toastAlignment;
+
   /// The contained toasts' style.
   @override
   final FToastStyle toastStyle;
@@ -91,6 +95,7 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
     this.expandCurve = Curves.easeInOutCubic,
     this.collapsedProtrusion = 12,
     this.collapsedScale = 0.9,
+    this.toastAlignment = FToastAlignment.bottomEnd,
   });
 
   /// Creates a [FToasterStyle] that inherits its properties.

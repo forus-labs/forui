@@ -8,6 +8,8 @@ class Sandbox extends StatefulWidget {
   State<Sandbox> createState() => _SandboxState();
 }
 
+enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
+
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late final FPopoverController controller;
 

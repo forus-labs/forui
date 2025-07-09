@@ -8,6 +8,8 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 
 /// Displays a [FToast] in a toaster.
 ///
+/// [alignment] defaults to [FToasterStyle.toastAlignment].
+///
 /// [swipeToDismiss] represents axes in which to swipe to dismiss a toast. Defaults to horizontally towards the closest
 /// edge of the screen with a left bias. For example, if [alignment] is [FToastAlignment.bottomRight], the default swipe
 /// direction is [AxisDirection.right].
@@ -32,7 +34,7 @@ FToasterEntry showFToast({
   Widget? icon,
   Widget? description,
   ValueWidgetBuilder<FToasterEntry>? suffixBuilder,
-  FToastAlignment alignment = FToastAlignment.bottomEnd,
+  FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
   VoidCallback? onDismiss,
@@ -73,6 +75,7 @@ FToasterEntry showFToast({
 
 /// Displays a raw toast in a toaster.
 ///
+/// [alignment] defaults to [FToasterStyle.toastAlignment].
 ///
 /// [swipeToDismiss] represents axes in which to swipe to dismiss a toast. Defaults to horizontally towards the closest
 /// edge of the screen with a left bias. For example, if [alignment] is [FToastAlignment.bottomRight], the default swipe
@@ -95,7 +98,7 @@ FToasterEntry showRawFToast({
   required BuildContext context,
   required Widget Function(BuildContext context, FToasterEntry entry) builder,
   FToastStyle Function(FToastStyle)? style,
-  FToastAlignment alignment = FToastAlignment.bottomEnd,
+  FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
   VoidCallback? onDismiss,
@@ -207,14 +210,15 @@ class FToasterState extends State<FToaster> {
     required BuildContext context,
     required Widget Function(BuildContext context, FToasterEntry entry) builder,
     FToastStyle Function(FToastStyle)? style,
-    FToastAlignment alignment = FToastAlignment.bottomEnd,
+    FToastAlignment? alignment,
     List<AxisDirection>? swipeToDismiss,
     Duration? duration = const Duration(seconds: 5),
     VoidCallback? onDismiss,
   }) {
-    final resolved = alignment._alignment.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
-    final directions = swipeToDismiss ?? [if (resolved.x < 1) AxisDirection.left else AxisDirection.right];
+    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final toasterStyle = widget.style?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle;
+    final resolved = (alignment ?? toasterStyle.toastAlignment)._alignment.resolve(direction);
+    final directions = swipeToDismiss ?? [if (resolved.x < 1) AxisDirection.left else AxisDirection.right];
 
     final entry = ToasterEntry(
       style?.call(toasterStyle.toastStyle) ?? toasterStyle.toastStyle,
@@ -234,7 +238,7 @@ class FToasterState extends State<FToaster> {
     }
 
     setState(() {
-      final (_, entries) = _entries[resolved] ??= (alignment._toastAlignment, []);
+      final (_, entries) = _entries[resolved] ??= ((alignment ?? toasterStyle.toastAlignment)._toastAlignment, []);
       entries.add(entry);
     });
 

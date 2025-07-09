@@ -39,6 +39,12 @@ class FSidebarItem extends StatefulWidget {
   /// Whether this item is initially expanded.
   final bool initiallyExpanded;
 
+  /// {@macro forui.foundation.doc_templates.autofocus}
+  final bool autofocus;
+
+  /// {@macro forui.foundation.doc_templates.focusNode}
+  final FocusNode? focusNode;
+
   /// Called when the item is pressed.
   ///
   /// The method will run concurrently with animations if [children] is non-null.
@@ -63,6 +69,8 @@ class FSidebarItem extends StatefulWidget {
     this.label,
     this.selected = false,
     this.initiallyExpanded = false,
+    this.autofocus = false,
+    this.focusNode,
     this.onPress,
     this.onLongPress,
     this.onHoverChange,
@@ -81,6 +89,8 @@ class FSidebarItem extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(FlagProperty('initiallyExpanded', value: initiallyExpanded, ifTrue: 'initiallyExpanded'))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
@@ -159,6 +169,8 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
         style: _style!.tappableStyle,
         focusedOutlineStyle: _style!.focusedOutlineStyle,
         selected: widget.selected,
+        autofocus: widget.autofocus,
+        focusNode: widget.focusNode,
         onPress: widget.children.isNotEmpty
             ? () {
                 _toggle();
@@ -347,6 +359,6 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
         }),
         borderRadius: style.borderRadius,
         tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
-        focusedOutlineStyle: style.focusedOutlineStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: 0),
       );
 }

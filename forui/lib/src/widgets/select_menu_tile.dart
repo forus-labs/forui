@@ -113,7 +113,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   final ValueChanged<bool>? onFocusChange;
 
   /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
-  final TraversalEdgeBehavior traversalEdgeBehavior;
+  final TraversalEdgeBehavior? traversalEdgeBehavior;
 
   /// {@macro forui.widgets.FPopover.barrierSemanticsLabel}
   final String? barrierSemanticsLabel;
@@ -187,7 +187,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
@@ -303,6 +303,107 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          },
        );
 
+  /// Creates a [FSelectMenuTile] with the given [menu].
+  ///
+  /// ## Contract
+  /// Each key in [menu] must map to a unique value. Having multiple keys map to the same value will result in
+  /// undefined behavior.
+  ///
+  /// Throws [AssertionError] if both [selectController] and [initialValue] are provided.
+  factory FSelectMenuTile.fromMap(
+    Map<String, T> menu, {
+    required Text title,
+    FSelectMenuTileController<T>? selectController,
+    FPopoverController? popoverController,
+    ScrollController? scrollController,
+    FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style,
+    double? cacheExtent,
+    double maxHeight = double.infinity,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    FItemDivider divider = FItemDivider.full,
+    AlignmentGeometry menuAnchor = Alignment.topRight,
+    AlignmentGeometry tileAnchor = Alignment.bottomRight,
+    FPortalSpacing spacing = const FPortalSpacing(4),
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset offset = Offset.zero,
+    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    bool autoHide = true,
+    Widget? label,
+    Widget? description,
+    bool autofocus = false,
+    FocusScopeNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    TraversalEdgeBehavior? traversalEdgeBehavior,
+    String? barrierSemanticsLabel,
+    bool barrierSemanticsDismissible = true,
+    String? semanticsLabel,
+    Widget? prefix,
+    Widget? subtitle,
+    ValueWidgetBuilder<Set<T>> detailsBuilder = _builder,
+    Widget? details,
+    Widget? suffix,
+    Map<ShortcutActivator, Intent>? shortcuts,
+    Map<Type, Action<Intent>>? actions,
+    ValueChanged<Set<T>>? onChange,
+    ValueChanged<(T, bool)>? onSelect,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    T? initialValue,
+    FormFieldSetter<Set<T>>? onSaved,
+    FormFieldValidator<Set<T>>? validator,
+    String? forceErrorText,
+    bool enabled = true,
+    AutovalidateMode? autovalidateMode,
+    String? restorationId,
+    Key? key,
+  }) => FSelectMenuTile<T>(
+    title: title,
+    menu: [for (final MapEntry(:key, :value) in menu.entries) FSelectTile<T>(title: Text(key), value: value)],
+    selectController: selectController,
+    popoverController: popoverController,
+    scrollController: scrollController,
+    style: style,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    divider: divider,
+    menuAnchor: menuAnchor,
+    tileAnchor: tileAnchor,
+    spacing: spacing,
+    shift: shift,
+    offset: offset,
+    hideOnTapOutside: hideOnTapOutside,
+    autoHide: autoHide,
+    label: label,
+    description: description,
+    autofocus: autofocus,
+    focusNode: focusNode,
+    onFocusChange: onFocusChange,
+    traversalEdgeBehavior: traversalEdgeBehavior,
+    barrierSemanticsLabel: barrierSemanticsLabel,
+    barrierSemanticsDismissible: barrierSemanticsDismissible,
+    semanticsLabel: semanticsLabel,
+    prefix: prefix,
+    subtitle: subtitle,
+    detailsBuilder: detailsBuilder,
+    details: details,
+    suffix: suffix,
+    shortcuts: shortcuts,
+    actions: actions,
+    onChange: onChange,
+    onSelect: onSelect,
+    errorBuilder: errorBuilder,
+    initialValue: initialValue,
+    onSaved: onSaved,
+    validator: validator,
+    forceErrorText: forceErrorText,
+    enabled: enabled,
+    autovalidateMode: autovalidateMode,
+    restorationId: restorationId,
+    key: key,
+  );
+
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
   /// The [menuBuilder] is called for each tile that should be built. The current level's [FItemData] is **not**
@@ -346,7 +447,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,

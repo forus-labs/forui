@@ -33,7 +33,7 @@ part 'sidebar.style.dart';
 /// See:
 /// * https://forui.dev/docs/navigation/sidebar for working examples.
 /// * [FSidebarStyle] for customizing a sidebar's appearance.
-class FSidebar extends StatelessWidget {
+class FSidebar extends StatefulWidget {
   /// The style.
   ///
   /// ## CLI
@@ -44,21 +44,47 @@ class FSidebar extends StatelessWidget {
   /// ```
   final FSidebarStyle Function(FSidebarStyle)? style;
 
-  /// The optional sticky header widget.
+  /// An optional sticky header.
   final Widget? header;
 
-  /// The main scrollable content widget.
+  /// The main scrollable content.
   final Widget child;
 
-  /// The optional sticky footer widget.
+  /// An optional sticky footer.
   final Widget? footer;
+
+  /// {@macro forui.foundation.doc_templates.autofocus}
+  final bool autofocus;
+
+  /// {@macro forui.foundation.doc_templates.focusNode}
+  final FocusScopeNode? focusNode;
+
+  /// Controls the transfer of focus beyond the first and the last items in the sidebar. Defaults to
+  /// [TraversalEdgeBehavior.parentScope].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if both [focusNode] and [traversalEdgeBehavior] are not null.
+  final TraversalEdgeBehavior? traversalEdgeBehavior;
 
   /// The optional width of the sidebar. If not provided, the width from the style will be used.
   final double? width;
 
   /// Creates a sidebar with a list of children that will be wrapped in a [ListView].
-  FSidebar({required List<Widget> children, this.header, this.footer, this.style, this.width, super.key})
-    : child = ListView(children: children);
+  FSidebar({
+    required List<Widget> children,
+    this.header,
+    this.footer,
+    this.style,
+    this.autofocus = false,
+    this.focusNode,
+    this.traversalEdgeBehavior,
+    this.width,
+    super.key,
+  }) : assert(
+         focusNode == null || traversalEdgeBehavior == null,
+         'focusNode and traversalEdgeBehavior cannot both be set.',
+       ),
+       child = ListView(children: children);
 
   /// Creates a sidebar with a builder function that will be wrapped in a [ListView.builder].
   FSidebar.builder({
@@ -67,34 +93,107 @@ class FSidebar extends StatelessWidget {
     this.style,
     this.header,
     this.footer,
+    this.autofocus = false,
+    this.focusNode,
+    this.traversalEdgeBehavior,
     this.width,
     super.key,
-  }) : child = ListView.builder(itemBuilder: itemBuilder, itemCount: itemCount);
+  }) : assert(
+         focusNode == null || traversalEdgeBehavior == null,
+         'focusNode and traversalEdgeBehavior cannot both be set.',
+       ),
+       child = ListView.builder(itemBuilder: itemBuilder, itemCount: itemCount);
 
   /// Creates a sidebar with a custom content widget.
   ///
   /// Use this constructor when you want to provide your own scrollable content widget instead of using the default
   /// [ListView].
-  const FSidebar.raw({required this.child, this.header, this.footer, this.style, this.width, super.key});
+  const FSidebar.raw({
+    required this.child,
+    this.header,
+    this.footer,
+    this.style,
+    this.autofocus = false,
+    this.focusNode,
+    this.traversalEdgeBehavior,
+    this.width,
+    super.key,
+  }) : assert(
+         focusNode == null || traversalEdgeBehavior == null,
+         'focusNode and traversalEdgeBehavior cannot both be set.',
+       );
+
+  @override
+  State<FSidebar> createState() => _FSidebarState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('autofocus', value: autofocus))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
+      ..add(DoubleProperty('width', width));
+  }
+}
+
+class _FSidebarState extends State<FSidebar> {
+  FocusScopeNode? _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode =
+        widget.focusNode ??
+        FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope);
+  }
+
+  @override
+  void didUpdateWidget(covariant FSidebar old) {
+    super.didUpdateWidget(old);
+
+    if (widget.focusNode != old.focusNode || widget.traversalEdgeBehavior != old.traversalEdgeBehavior) {
+      if (old.focusNode == null) {
+        _focusNode?.dispose();
+      }
+
+      _focusNode =
+          widget.focusNode ??
+          FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope);
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.focusNode == null) {
+      _focusNode?.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style?.call(context.theme.sidebarStyle) ?? context.theme.sidebarStyle;
+    final style = widget.style?.call(context.theme.sidebarStyle) ?? context.theme.sidebarStyle;
 
-    Widget sidebar = FSidebarData(
-      style: style,
-      child: DecoratedBox(
-        decoration: style.decoration,
-        child: ConstrainedBox(
-          constraints: style.constraints,
-          child: Column(
-            children: [
-              if (header != null) Padding(padding: style.headerPadding, child: header!),
-              Expanded(
-                child: Padding(padding: style.contentPadding, child: child),
-              ),
-              if (footer != null) Padding(padding: style.footerPadding, child: footer!),
-            ],
+    Widget sidebar = FocusScope(
+      autofocus: widget.autofocus,
+      node: _focusNode,
+      child: FSidebarData(
+        style: style,
+        child: DecoratedBox(
+          decoration: style.decoration,
+          child: ConstrainedBox(
+            constraints: style.constraints,
+            child: Column(
+              children: [
+                if (widget.header != null) Padding(padding: style.headerPadding, child: widget.header!),
+                Expanded(
+                  child: Padding(padding: style.contentPadding, child: widget.child),
+                ),
+                if (widget.footer != null) Padding(padding: style.footerPadding, child: widget.footer!),
+              ],
+            ),
           ),
         ),
       ),
@@ -114,14 +213,6 @@ class FSidebar extends StatelessWidget {
     }
 
     return sidebar;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('width', width));
   }
 }
 
