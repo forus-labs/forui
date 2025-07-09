@@ -113,7 +113,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   final ValueChanged<bool>? onFocusChange;
 
   /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
-  final TraversalEdgeBehavior traversalEdgeBehavior;
+  final TraversalEdgeBehavior? traversalEdgeBehavior;
 
   /// {@macro forui.widgets.FPopover.barrierSemanticsLabel}
   final String? barrierSemanticsLabel;
@@ -187,7 +187,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
@@ -334,7 +334,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     bool autofocus = false,
     FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,
-    TraversalEdgeBehavior traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    TraversalEdgeBehavior? traversalEdgeBehavior,
     String? barrierSemanticsLabel,
     bool barrierSemanticsDismissible = true,
     String? semanticsLabel,
@@ -447,7 +447,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,

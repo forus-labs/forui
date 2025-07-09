@@ -103,7 +103,7 @@ class FPopoverMenu extends StatelessWidget {
   final ValueChanged<bool>? onFocusChange;
 
   /// {@macro forui.widgets.FPopover.traversalEdgeBehavior}
-  final TraversalEdgeBehavior traversalEdgeBehavior;
+  final TraversalEdgeBehavior? traversalEdgeBehavior;
 
   /// {@macro forui.widgets.FPopover.barrierSemanticsLabel}
   final String? barrierSemanticsLabel;
@@ -160,7 +160,7 @@ class FPopoverMenu extends StatelessWidget {
     this.autofocus,
     this.focusNode,
     this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior,
     List<FItemGroupMixin> Function(BuildContext, FPopoverController, List<FItemGroupMixin>?) menuBuilder =
         _defaultItemBuilder,
     List<FItemGroupMixin>? menu,
@@ -216,7 +216,7 @@ class FPopoverMenu extends StatelessWidget {
     this.autofocus,
     this.focusNode,
     this.onFocusChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior,
     List<FTileGroupMixin> Function(BuildContext, FPopoverController, List<FTileGroupMixin>?) menuBuilder =
         _defaultTileBuilder,
     List<FTileGroupMixin>? menu,

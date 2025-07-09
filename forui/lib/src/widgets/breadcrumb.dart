@@ -246,7 +246,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final ValueChanged<bool>? onFocusChange;
   final ValueChanged<bool>? onHoverChange;
   final ValueChanged<Set<WidgetState>>? onStateChange;
-  final TraversalEdgeBehavior traversalEdgeBehavior;
+  final TraversalEdgeBehavior? traversalEdgeBehavior;
   final String? semanticsLabel;
 
   const _CollapsedCrumb({
@@ -270,7 +270,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.onFocusChange,
     this.onHoverChange,
     this.onStateChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior,
     super.key,
   }) : itemMenu = menu,
        tileMenu = null;
