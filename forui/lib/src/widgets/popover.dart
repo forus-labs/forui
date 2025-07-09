@@ -341,9 +341,9 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
         _focusNode?.dispose();
       }
 
-      _focusNode = widget.focusNode ?? FocusScopeNode(
-        traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop,
-      );
+      _focusNode =
+          widget.focusNode ??
+          FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop);
     }
 
     if (widget.controller != old.controller) {

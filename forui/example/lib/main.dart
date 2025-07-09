@@ -150,10 +150,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
                   flex: 3,
                   child: FPopover(
                     controller: controller,
-                    popoverBuilder: (context, _) => SizedBox.square(
-                      dimension: 100,
-                      child: FTextField(),
-                    ),
+                    popoverBuilder: (context, _) => SizedBox.square(dimension: 100, child: FTextField()),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
                   ),
                 ),
