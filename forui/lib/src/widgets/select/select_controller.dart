@@ -7,10 +7,17 @@ import 'package:forui/forui.dart';
 
 @internal
 class SelectControllerData<T> extends InheritedWidget {
+  final FPopoverController popoverController;
   final bool Function(T) contains;
   final ValueChanged<T> onPress;
 
-  const SelectControllerData({required this.contains, required this.onPress, required super.child, super.key});
+  const SelectControllerData({
+    required this.popoverController,
+    required this.contains,
+    required this.onPress,
+    required super.child,
+    super.key,
+  });
 
   static SelectControllerData<T> of<T>(BuildContext context) {
     final SelectControllerData<T>? result = context.dependOnInheritedWidgetOfExactType<SelectControllerData<T>>();
@@ -23,12 +30,14 @@ class SelectControllerData<T> extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(SelectControllerData<T> old) => contains != old.contains || onPress != old.onPress;
+  bool updateShouldNotify(SelectControllerData<T> old) =>
+      popoverController != old.popoverController || contains != old.contains || onPress != old.onPress;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('popoverController', popoverController))
       ..add(ObjectFlagProperty.has('contains', contains))
       ..add(ObjectFlagProperty.has('onPress', onPress));
   }

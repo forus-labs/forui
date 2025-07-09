@@ -30,32 +30,32 @@ void main() {
         unawaited(controller.toggle());
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, true);
-        expect(tooltip2.shown, true);
+        expect(tooltip1.status.isForwardOrCompleted, true);
+        expect(tooltip2.status.isForwardOrCompleted, true);
       });
 
       testWidgets('toggle single', (tester) async {
         unawaited(controller.toggle(key1));
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, true);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, true);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
 
       testWidgets('show', (tester) async {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, true);
-        expect(tooltip2.shown, true);
+        expect(tooltip1.status.isForwardOrCompleted, true);
+        expect(tooltip2.status.isForwardOrCompleted, true);
       });
 
       testWidgets('show single', (tester) async {
         unawaited(controller.show(key1));
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, true);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, true);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
 
       testWidgets('hide', (tester) async {
@@ -65,8 +65,8 @@ void main() {
         unawaited(controller.hide());
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
       testWidgets('hide single', (tester) async {
         unawaited(controller.show());
@@ -75,8 +75,8 @@ void main() {
         unawaited(controller.hide(key1));
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, true);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, true);
       });
 
       testWidgets('remove', (tester) async {
@@ -85,8 +85,8 @@ void main() {
         unawaited(controller.toggle());
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, true);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, true);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
     });
 
@@ -105,48 +105,48 @@ void main() {
         unawaited(controller.toggle());
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
 
       testWidgets('toggle single', (tester) async {
         unawaited(controller.toggle(key1));
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
 
       testWidgets('show', (tester) async {
         unawaited(controller.show());
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
 
       testWidgets('show single', (tester) async {
         unawaited(controller.show(key1));
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
 
       testWidgets('hide', (tester) async {
         unawaited(controller.hide());
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
 
       testWidgets('hide single', (tester) async {
         unawaited(controller.hide(key1));
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
 
       testWidgets('remove', (tester) async {
@@ -155,8 +155,8 @@ void main() {
         unawaited(controller.toggle());
         await tester.pumpAndSettle();
 
-        expect(tooltip1.shown, false);
-        expect(tooltip2.shown, false);
+        expect(tooltip1.status.isForwardOrCompleted, false);
+        expect(tooltip2.status.isForwardOrCompleted, false);
       });
     });
   });

@@ -243,6 +243,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
   @override
   void initState() {
     super.initState();
+
     // This is hacky but I'm not sure how to properly do this.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) {
@@ -259,7 +260,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final SelectControllerData(:contains, :onPress) = SelectControllerData.of<T>(context);
+    final SelectControllerData(:popoverController, :contains, :onPress) = SelectControllerData.of<T>(context);
     final content = SelectContentData.of<T>(context);
 
     final enabled = widget.enabled ?? content.enabled;
@@ -273,7 +274,11 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
       autofocus: selected || content.first,
       focusNode: _focus,
       onPress: () => onPress(widget.value),
-      onHoverChange: (hover) => hover ? _focus.requestFocus() : _focus.unfocus(),
+      onHoverChange: (hover) {
+        if (popoverController.status.isCompleted) {
+          hover ? _focus.requestFocus() : _focus.unfocus();
+        }
+      },
       prefix: widget.prefix,
       title: widget.title,
       subtitle: widget.subtitle,

@@ -25,33 +25,6 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 10,
-      children: [
-        FTileGroup.merge(
-          children: [
-            FTileGroup(
-              style: FThemes.green.dark.tileGroupStyle,
-              children: [
-                FTile(
-                  prefix: const Icon(FIcons.wifi),
-                  title: const Text('WiFi'),
-                  details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
-                  onPress: () {},
-                ),
-                FTile(
-                  prefix: const Icon(FIcons.bluetooth),
-                  title: const Text('Bluetooth'),
-                  subtitle: const Text('Fee, Fo'),
-                  details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
+    return Material(child: Column(spacing: 10, children: const [TextField(), FTimeField.picker(), TextField()]));
   }
 }

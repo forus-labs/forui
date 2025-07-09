@@ -60,6 +60,8 @@ FTile(
   onStateChange: (states) {},
   onPress: () {},
   onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
   shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
   actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
 );
@@ -80,6 +82,8 @@ FTile.raw(
   onStateChange: (states) {},
   onPress: () {},
   onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
   shortcuts: { SingleActivator(LogicalKeyboardKey.enter): ActivateIntent() },
   actions: { ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {}) },
 );

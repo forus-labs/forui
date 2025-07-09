@@ -31,15 +31,15 @@ class FTooltipController extends FChangeNotifier {
     _scale = _scaleTween.animate(_curveScale);
   }
 
-  /// Convenience method for toggling the current [shown] status.
+  /// Convenience method for showing/hiding the tooltip.
   ///
-  /// This method should typically not be called while the widget tree is being
-  /// rebuilt.
-  Future<void> toggle() async => shown ? hide() : show();
+  /// This method should typically not be called while the widget tree is being rebuilt.
+  Future<void> toggle() async =>
+      const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_animation.status) ? hide() : show();
 
   /// Shows the tooltip.
   ///
-  /// If [shown] is already true, calling this method brings the tooltip to the top.
+  /// If already shown, calling this method brings the tooltip to the top.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
@@ -60,8 +60,13 @@ class FTooltipController extends FChangeNotifier {
     notifyListeners();
   }
 
-  /// True if the tooltip is currently being shown. False if it is hidden.
-  bool get shown => _overlay.isShowing;
+  /// The current status.
+  ///
+  /// [AnimationStatus.dismissed] - The tooltip is hidden.
+  /// [AnimationStatus.forward] - The tooltip is transitioning from hidden to shown.
+  /// [AnimationStatus.completed] - The tooltip is shown.
+  /// [AnimationStatus.reverse] - The tooltip is transitioning from shown to hidden.
+  AnimationStatus get status => _animation.status;
 
   @override
   void dispose() {

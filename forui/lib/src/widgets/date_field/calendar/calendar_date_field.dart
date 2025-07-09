@@ -214,7 +214,9 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   }
 
   void _onTap() {
-    _controller.calendar.shown ? _focus.requestFocus() : _focus.unfocus();
+    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_controller.calendar.status)
+        ? _focus.requestFocus()
+        : _focus.unfocus();
     _controller.calendar.toggle();
   }
 

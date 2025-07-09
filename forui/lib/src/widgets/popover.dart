@@ -31,14 +31,15 @@ final class FPopoverController extends FChangeNotifier {
     _scale = _scaleTween.animate(_curveScale);
   }
 
-  /// Convenience method for toggling the current [shown] status.
+  /// Convenience method for showing/hiding the popover.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async => shown ? hide() : show();
+  Future<void> toggle() async =>
+      const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_animation.status) ? hide() : show();
 
   /// Shows the popover.
   ///
-  /// If [shown] is already true, calling this method brings the popover to the top.
+  /// If already shown, calling this method brings the popover to the top.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
@@ -59,8 +60,13 @@ final class FPopoverController extends FChangeNotifier {
     notifyListeners();
   }
 
-  /// True if the popover is currently being shown. False if it is hidden.
-  bool get shown => _overlay.isShowing;
+  /// The current status.
+  ///
+  /// [AnimationStatus.dismissed] - The popover is hidden.
+  /// [AnimationStatus.forward] - The popover is transitioning from hidden to shown.
+  /// [AnimationStatus.completed] - The popover is shown.
+  /// [AnimationStatus.reverse] - The popover is transitioning from shown to hidden.
+  AnimationStatus get status => _animation.status;
 
   @override
   void dispose() {
@@ -413,7 +419,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   void _hide() {
     // We need to check if it is shown first, otherwise it will fire even when hidden. This messes with the focus
     // when there are multiple FSelects/other widgets.
-    if (_controller.shown) {
+    if (_controller.status.isForwardOrCompleted) {
       _controller.hide();
     }
   }

@@ -171,8 +171,13 @@ class FPersistentSheetController {
   /// Hides the sheet if it is shown.
   TickerFuture hide() => _controller.reverse();
 
-  /// True if the sheet is shown.
-  bool get shown => _controller.value != 0;
+  /// The current status.
+  ///
+  /// [AnimationStatus.dismissed] - The sheet is hidden.
+  /// [AnimationStatus.forward] - The sheet is transitioning from hidden to shown.
+  /// [AnimationStatus.completed] - The sheet is shown.
+  /// [AnimationStatus.reverse] - The sheet is transitioning from shown to hidden.
+  AnimationStatus get status => _controller.status;
 
   /// Disposes of the controller.
   void dispose() {
@@ -220,12 +225,12 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
     children: [
       widget.child,
       for (final (controller, sheet) in sheets.values)
-        if (controller.shown || controller.keepAliveOffstage || controller._controller.status.isAnimating)
+        if (controller.keepAliveOffstage || controller.status.isAnimating || controller.status.isCompleted)
           CallbackShortcuts(
             bindings: {const SingleActivator(LogicalKeyboardKey.escape): controller._controller.reverse},
             child: FocusTraversalGroup(
-              descendantsAreFocusable: controller.shown,
-              descendantsAreTraversable: controller.shown,
+              descendantsAreFocusable: controller.status.isCompleted,
+              descendantsAreTraversable: controller.status.isCompleted,
               child: sheet,
             ),
           ),

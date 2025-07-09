@@ -75,6 +75,24 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The tile is not hoverable if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
 
+  /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
+  ///
+  /// The item is not interactable if the following are all null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
+  final VoidCallback? onSecondaryPress;
+
+  /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
+  ///
+  /// The item is not interactable if the following are all null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
+  final VoidCallback? onSecondaryLongPress;
+
   final Widget _child;
 
   /// Creates a [FTile].
@@ -111,6 +129,8 @@ class FTile extends StatelessWidget with FTileMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
     this.shortcuts,
     this.actions,
     Widget? prefix,
@@ -131,6 +151,8 @@ class FTile extends StatelessWidget with FTileMixin {
          onStateChange: onStateChange,
          onPress: onPress,
          onLongPress: onLongPress,
+         onSecondaryPress: onSecondaryPress,
+         onSecondaryLongPress: onSecondaryLongPress,
          shortcuts: shortcuts,
          actions: actions,
          prefix: prefix,
@@ -162,6 +184,8 @@ class FTile extends StatelessWidget with FTileMixin {
     this.onStateChange,
     this.onPress,
     this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
     this.shortcuts,
     this.actions,
     Widget? prefix,
@@ -178,6 +202,8 @@ class FTile extends StatelessWidget with FTileMixin {
          onStateChange: onStateChange,
          onPress: onPress,
          onLongPress: onLongPress,
+         onSecondaryPress: onSecondaryPress,
+         onSecondaryLongPress: onSecondaryLongPress,
          shortcuts: shortcuts,
          actions: actions,
          prefix: prefix,
@@ -206,6 +232,8 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(ObjectFlagProperty.has('onChange', onStateChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions));
   }

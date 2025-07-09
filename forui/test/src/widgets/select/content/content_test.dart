@@ -40,6 +40,32 @@ void main() {
     controller.dispose();
   });
 
+  testWidgets('scrolls to item at the end of very long list', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelect<int>.fromMap(
+          {for (var i = 0; i < 20; i++) i.toString(): i},
+          key: key,
+          contentScrollController: scrollController,
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    scrollController.jumpTo(scrollController.position.maxScrollExtent);
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('19'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(find.text('19'), findsNWidgets(2));
+  });
+
   testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
