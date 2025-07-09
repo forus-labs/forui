@@ -16,11 +16,7 @@ class SelectMenuTilePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile.fromMap(
-    const {
-      'All': Notification.all,
-      'Direct Messages': Notification.direct,
-      'None': Notification.nothing,
-    },
+    const {'All': Notification.all, 'Direct Messages': Notification.direct, 'None': Notification.nothing},
     initialValue: Notification.all,
     autoHide: autoHide,
     validator: (value) => value == null ? 'Select an item' : null,
