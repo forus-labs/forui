@@ -19,6 +19,9 @@
 
 
 ### `FSelect`
+* Change `FSelect.anchor`'s default value from `Alignment.topLeft` to `AlignmentDirectional.topStart`.
+* Change `FSelect.fieldAnchor`'s default value from `Alignment.bottomLeft` to `AlignmentDirectional.bottomStart`.
+
 * Fix `FSelect` flickering when selecting an item on desktop.
 * Fix `FSelect` not scrolling to selected item when opened if the item is really far down the list.
 * Fix `FSelect` layout shifting when scrolling through a long list of items.
