@@ -19,6 +19,7 @@
 
 
 ### `FSelect`
+* Change `FSelect`'s default popover animation duration from `50s` to `100s`.
 * Change `FSelect.anchor`'s default value from `Alignment.topLeft` to `AlignmentDirectional.topStart`.
 * Change `FSelect.fieldAnchor`'s default value from `Alignment.bottomLeft` to `AlignmentDirectional.bottomStart`.
 
@@ -53,6 +54,8 @@
 
 * **Breaking** Change `FPersistentSheetController.shown` to `FPersistentSheetController.status`.
 * **Breaking** Change `FTooltipController.shown` to `FTooltipController.status`.
+
+* Fix `FTextField` applying different padding on mobile & desktop.
 
 
 ## 0.13.1
