@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -96,6 +98,23 @@ void main() {
     );
 
     expect(find.text('12:00:00 am'), findsOneWidget);
+  });
+
+  testWidgets('holding & releasing on time field does not cause calendar to disappear & reappear', (tester) async {
+    await tester.pumpWidget(TestScaffold.app(child: const FTimeField.picker(key: key)));
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    final gesture = await tester.startGesture(tester.getCenter(find.byKey(key)), kind: PointerDeviceKind.mouse);
+    await tester.pumpAndSettle();
+
+    expect(find.text('1'), findsOneWidget);
+
+    await gesture.up();
+    await tester.pumpAndSettle();
+
+    expect(find.text('1'), findsNothing);
   });
 
   group('focus', () {

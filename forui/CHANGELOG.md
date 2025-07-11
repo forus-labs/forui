@@ -19,6 +19,10 @@
 
 
 ### `FSelect`
+* Change `FSelect`'s default popover animation duration from `50ms` to `100ms`.
+* Change `FSelect.anchor`'s default value from `Alignment.topLeft` to `AlignmentDirectional.topStart`.
+* Change `FSelect.fieldAnchor`'s default value from `Alignment.bottomLeft` to `AlignmentDirectional.bottomStart`.
+
 * Fix `FSelect` flickering when selecting an item on desktop.
 * Fix `FSelect` not scrolling to selected item when opened if the item is really far down the list.
 * Fix `FSelect` layout shifting when scrolling through a long list of items.
@@ -48,8 +52,12 @@
 * Add `FSelectMenuTile.fromMap(...)`.
 * Add `FToasterStyle.toastAlignment`.
 
+* Change default `hideOnTapOutside` in `FDateField.calendar(...)` from `FHidePopoverRegion.anywhere` to `FHidePopoverRegion.excludeTarget`.
+* Change default `hideOnTapOutside` in `FTimeField.picker(...)` from `FHidePopoverRegion.anywhere` to `FHidePopoverRegion.excludeTarget`.
 * **Breaking** Change `FPersistentSheetController.shown` to `FPersistentSheetController.status`.
 * **Breaking** Change `FTooltipController.shown` to `FTooltipController.status`.
+
+* Fix `FTextField` applying different padding on mobile & desktop.
 
 
 ## 0.13.1

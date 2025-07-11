@@ -7,13 +7,37 @@ import 'package:forui/forui.dart';
 
 @internal
 class FTimeFieldPickerProperties with Diagnosticable {
+  /// The alignment point on the picker popover. Defaults to [Alignment.topLeft].
   final AlignmentGeometry anchor;
+
+  /// The alignment point on the input field. Defaults to [Alignment.bottomLeft].
   final AlignmentGeometry inputAnchor;
+
+  /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
+
+  /// {@macro forui.widgets.FPopover.shift}
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+
+  /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
+
+  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
+  ///
+  /// Defaults to [FHidePopoverRegion.excludeTarget].
+  ///
+  /// Setting [hideOnTapOutside] to [FHidePopoverRegion.anywhere] may result in the calendar disappearing and reappearing
+  /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
   final FHidePopoverRegion hideOnTapOutside;
+
+  /// The interval between hours shown in the time picker. Defaults to 1.
+  ///
+  /// For example, setting this to 6 will show hours like 0, 6, 12, and 18.
   final int hourInterval;
+
+  /// The interval between minutes shown in the time picker. Defaults to 1.
+  ///
+  /// For example, setting this to 15 will show minutes like 0, 15, 30, and 45.
   final int minuteInterval;
 
   const FTimeFieldPickerProperties({

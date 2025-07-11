@@ -350,7 +350,7 @@ abstract class FDateField extends StatefulWidget {
   /// The [offset] property controls the offset of the picker popover. Defaults to [Offset.zero].
   ///
   /// [hideOnTapOutside] controls the region that can be tapped to hide the popover. Defaults to
-  /// [FHidePopoverRegion.anywhere].
+  /// [FHidePopoverRegion.excludeTarget].
   ///
   /// See also:
   /// * [FDateField] - Creates a date field with both input field and calendar.

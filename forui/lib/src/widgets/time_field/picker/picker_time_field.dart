@@ -41,7 +41,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.hourInterval = 1,
     this.minuteInterval = 1,
     super.controller,

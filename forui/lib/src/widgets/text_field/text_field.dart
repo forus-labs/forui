@@ -1170,6 +1170,7 @@ class _State extends State<FTextField> {
           // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
           // for overriding selectionHandleColor.
           data: Theme.of(context).copyWith(
+            visualDensity: VisualDensity.standard,
             textSelectionTheme: TextSelectionThemeData(
               cursorColor: style.cursorColor,
               selectionColor: style.cursorColor.withValues(alpha: 0.4),

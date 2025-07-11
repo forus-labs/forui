@@ -109,7 +109,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     this.cursorColor = CupertinoColors.activeBlue,
     this.fillColor,
     this.filled = false,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
     this.clearButtonPadding = const EdgeInsetsDirectional.only(end: 4),
     this.scrollPadding = const EdgeInsets.all(20),
     super.labelPadding,

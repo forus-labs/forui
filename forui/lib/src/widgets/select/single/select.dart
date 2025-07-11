@@ -145,10 +145,10 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// True if a clear button should be shown. Defaults to false.
   final bool clearable;
 
-  /// The alignment point on the popover. Defaults to [Alignment.topLeft].
+  /// The alignment point on the popover. Defaults to [AlignmentDirectional.topStart].
   final AlignmentGeometry anchor;
 
-  /// The alignment point on the select's field. Defaults to [Alignment.bottomLeft].
+  /// The alignment point on the select's field. Defaults to [AlignmentDirectional.bottomStart].
   final AlignmentGeometry fieldAnchor;
 
   /// The constraints to apply to the popover. Defaults to `const FAutoWidthPortalConstraints(maxHeight: 300)`.
@@ -266,8 +266,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = SystemMouseCursors.click,
     bool canRequestFocus = true,
     bool clearable = false,
-    AlignmentGeometry anchor = Alignment.topLeft,
-    AlignmentGeometry fieldAnchor = Alignment.bottomLeft,
+    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
@@ -428,8 +428,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = SystemMouseCursors.click,
     bool canRequestFocus = true,
     bool clearable = false,
-    AlignmentGeometry anchor = Alignment.topLeft,
-    AlignmentGeometry fieldAnchor = Alignment.bottomLeft,
+    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
@@ -525,8 +525,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.mouseCursor = SystemMouseCursors.click,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.anchor = Alignment.topLeft,
-    this.fieldAnchor = Alignment.bottomLeft,
+    this.anchor = AlignmentDirectional.topStart,
+    this.fieldAnchor = AlignmentDirectional.bottomStart,
     this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,

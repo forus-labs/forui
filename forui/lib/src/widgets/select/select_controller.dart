@@ -59,7 +59,7 @@ class FSelectController<T> extends FValueNotifier<T?> {
     required TickerProvider vsync,
     T? value,
     this.toggleable = false,
-    Duration popoverAnimationDuration = const Duration(milliseconds: 50),
+    Duration popoverAnimationDuration = const Duration(milliseconds: 100),
   }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
        super(value);
 

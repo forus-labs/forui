@@ -51,7 +51,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
