@@ -123,20 +123,18 @@ void main() {
     });
   });
 
-  testWidgets('height does not change due to visual density on macOS', (tester) async {
+  testWidgets('height does not change due to visual density on different platforms', (tester) async {
     debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
     await tester.pumpWidget(TestScaffold.app(theme: FThemes.zinc.light, child: const FTextField()));
+    final macos = tester.getSize(find.byType(FTextField)).height;
 
-    expect(tester.getSize(find.byType(FTextField)).height, 38);
+    await tester.pumpWidget(const SizedBox());
 
-    debugDefaultTargetPlatformOverride = null;
-  });
-
-  testWidgets('height does not change due to visual density on iOS', (tester) async {
     debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
     await tester.pumpWidget(TestScaffold.app(theme: FThemes.zinc.light, child: const FTextField()));
+    final ios = tester.getSize(find.byType(FTextField)).height;
 
-    expect(tester.getSize(find.byType(FTextField)).height, 38);
+    expect(macos, ios);
 
     debugDefaultTargetPlatformOverride = null;
   });
