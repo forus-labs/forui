@@ -121,7 +121,11 @@ void main() {
   });
 
   testWidgets('holding & releasing on date field does not cause calendar to disappear & reappear', (tester) async {
-    await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15))));
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15)),
+      ),
+    );
 
     await tester.tap(find.byKey(key));
     await tester.pumpAndSettle();
