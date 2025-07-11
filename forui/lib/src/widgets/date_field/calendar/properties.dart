@@ -21,6 +21,11 @@ class FDateFieldCalendarProperties with Diagnosticable {
   final Offset offset;
 
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
+  ///
+  /// Defaults to [FHidePopoverRegion.excludeTarget].
+  ///
+  /// Setting [hideOnTapOutside] to [FHidePopoverRegion.anywhere] may result in the calendar disappearing and reappearing
+  /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
   final FHidePopoverRegion hideOnTapOutside;
 
   /// Customizes the appearance of calendar days.

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -116,6 +118,23 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 3));
 
     expect(find.text('15 January 2025'), findsOneWidget);
+  });
+
+  testWidgets('holding & releasing on date field does not cause calendar to disappear & reappear', (tester) async {
+    await tester.pumpWidget(TestScaffold.app(child: FDateField.calendar(key: key, today: DateTime.utc(2025, 1, 15))));
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    final gesture = await tester.startGesture(tester.getCenter(find.byKey(key)), kind: PointerDeviceKind.mouse);
+    await tester.pumpAndSettle();
+
+    expect(find.text('15'), findsOneWidget);
+
+    await gesture.up();
+    await tester.pumpAndSettle();
+
+    expect(find.text('15'), findsNothing);
   });
 
   group('clearable', () {

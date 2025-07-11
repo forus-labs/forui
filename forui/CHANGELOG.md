@@ -52,6 +52,8 @@
 * Add `FSelectMenuTile.fromMap(...)`.
 * Add `FToasterStyle.toastAlignment`.
 
+* Change default `hideOnTapOutside` in `FDateField.calendar(...)` from `FHidePopoverRegion.anywhere` to `FHidePopoverRegion.excludeTarget`.
+* Change default `hideOnTapOutside` in `FTimeField.picker(...)` from `FHidePopoverRegion.anywhere` to `FHidePopoverRegion.excludeTarget`.
 * **Breaking** Change `FPersistentSheetController.shown` to `FPersistentSheetController.status`.
 * **Breaking** Change `FTooltipController.shown` to `FTooltipController.status`.
 

@@ -88,6 +88,8 @@ Forui provides the following widgets:
   - Badge
   - Calendar
   - Card
+  - Item
+  - Item Group
   - Line Calendar
 - Tile
   - Tile
@@ -111,7 +113,7 @@ Forui provides the following widgets:
   - Popover
   - Popover Menu
   - Tooltip
-  - Toast
+  - Toast/Sonner
 - Foundation
   - Collapsible
   - Focused Outline
