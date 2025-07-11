@@ -19,7 +19,7 @@
 
 
 ### `FSelect`
-* Change `FSelect`'s default popover animation duration from `50s` to `100s`.
+* Change `FSelect`'s default popover animation duration from `50ms` to `100ms`.
 * Change `FSelect.anchor`'s default value from `Alignment.topLeft` to `AlignmentDirectional.topStart`.
 * Change `FSelect.fieldAnchor`'s default value from `Alignment.bottomLeft` to `AlignmentDirectional.bottomStart`.
 

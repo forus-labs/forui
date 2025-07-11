@@ -100,7 +100,7 @@ void main() {
     expect(find.text('12:00:00 am'), findsOneWidget);
   });
 
-  testWidgets('holding & releasing on date field does not cause calendar to disappear & reappear', (tester) async {
+  testWidgets('holding & releasing on time field does not cause calendar to disappear & reappear', (tester) async {
     await tester.pumpWidget(TestScaffold.app(child: const FTimeField.picker(key: key)));
 
     await tester.tap(find.byKey(key));
