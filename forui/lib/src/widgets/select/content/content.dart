@@ -167,7 +167,6 @@ class _ContentState<T> extends State<Content<T>> {
                       dividerWidth: widget.style.sectionStyle.dividerWidth,
                       divider: widget.divider,
                       enabled: widget.enabled,
-                      index: 0,
                       last: widget.children.length == 1,
                     ),
                     child: first,

@@ -17,18 +17,12 @@ class PopoverItem extends StatelessWidget with FItemMixin {
     menu: [
       FItemGroup(
         children: [
-          FItem(
-            title: const Text('Group 1'),
-            onPress: () {},
-          ),
-          FItem(
-            title: const Text('Group 2'),
-            onPress: () {},
-          ),
+          FItem(title: const Text('Group 1'), onPress: () {}),
+          FItem(title: const Text('Group 2'), onPress: () {}),
         ],
       ),
     ],
-    builder: (_, controller, _) =>  FItem(title: const Text('Tap me'), onPress: controller.toggle),
+    builder: (_, controller, _) => FItem(title: const Text('Tap me'), onPress: controller.toggle),
   );
 }
 
@@ -37,34 +31,23 @@ class PopoverTile extends StatelessWidget with FTileMixin {
 
   @override
   Widget build(BuildContext context) => FPopoverMenu.tiles(
-      menu: [
-        FTileGroup(
-          children: [
-            FTile(
-              title: const Text('Group 1'),
-              onPress: () {},
-            ),
-            FTile(
-              title: const Text('Group 2'),
-              onPress: () {},
-            ),
-          ],
-        ),
-      ],
-    builder: (_, controller, _) =>  FTile(title: const Text('Tap me'), onPress: controller.toggle),
-    );
+    menu: [
+      FTileGroup(
+        children: [
+          FTile(title: const Text('Group 1'), onPress: () {}),
+          FTile(title: const Text('Group 2'), onPress: () {}),
+        ],
+      ),
+    ],
+    builder: (_, controller, _) => FTile(title: const Text('Tap me'), onPress: controller.toggle),
+  );
 }
-
 
 void main() {
   testWidgets('leaky inherited FItemData does not affect popover with items', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FItemGroup(
-          children: const [
-            PopoverItem(key: key),
-          ],
-        ),
+        child: FItemGroup(children: const [PopoverItem(key: key)]),
       ),
     );
 
@@ -77,11 +60,7 @@ void main() {
   testWidgets('leaky inherited FItemData does not affect popover with tiles', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FTileGroup(
-          children: const [
-            PopoverTile(key: key),
-          ],
-        ),
+        child: FTileGroup(children: const [PopoverTile(key: key)]),
       ),
     );
 

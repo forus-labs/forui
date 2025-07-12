@@ -103,7 +103,13 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
               ),
             ),
           for (final (i, child) in children.indexed.skip(1))
-            FInheritedItemData.merge(style: itemStyle, divider: divider, index: i, last: i == children.length - 1, child: child),
+            FInheritedItemData.merge(
+              style: itemStyle,
+              divider: divider,
+              index: i,
+              last: i == children.length - 1,
+              child: child,
+            ),
         ],
       ),
     );
