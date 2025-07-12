@@ -1,3 +1,9 @@
+## 0.14.0
+
+Bump to remain consistent with the `forui` package.
+
+
+
 ## 0.13.0
 
 * Update icons to Lucide 0.525.0.

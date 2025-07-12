@@ -1,3 +1,8 @@
+## 0.14.0
+
+Bump Forui dependency from `0.13.0` to `0.14.0`.
+
+
 ## 0.13.0
 
 Bump Forui dependency from `0.12.0` to `0.13.0`.
