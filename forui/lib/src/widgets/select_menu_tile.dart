@@ -218,7 +218,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State<T>;
-           final data = FItemData.maybeOf(state.context);
+           final data = FInheritedItemData.maybeOf(state.context);
            final inheritedStyle = FTileGroupStyleData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;
@@ -253,17 +253,19 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              barrierSemanticsDismissible: barrierSemanticsDismissible,
              popoverBuilder: (_, _) => ConstrainedBox(
                constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
-               child: FSelectTileGroup<T>(
-                 selectController: state._controller,
-                 scrollController: scrollController,
-                 cacheExtent: cacheExtent,
-                 maxHeight: maxHeight,
-                 dragStartBehavior: dragStartBehavior,
-                 physics: physics,
-                 style: menuStyle.tileGroupStyle,
-                 semanticsLabel: semanticsLabel,
-                 divider: divider,
-                 children: menu,
+               child: FInheritedItemData(
+                 child: FSelectTileGroup<T>(
+                   selectController: state._controller,
+                   scrollController: scrollController,
+                   cacheExtent: cacheExtent,
+                   maxHeight: maxHeight,
+                   dragStartBehavior: dragStartBehavior,
+                   physics: physics,
+                   style: menuStyle.tileGroupStyle,
+                   semanticsLabel: semanticsLabel,
+                   divider: divider,
+                   children: menu,
+                 ),
                ),
              ),
              child: FTile(
@@ -406,7 +408,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
 
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuBuilder] is called for each tile that should be built. The current level's [FItemData] is **not**
+  /// The [menuBuilder] is called for each tile that should be built. The current level's [FInheritedItemData] is **not**
   /// visible to `menuBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -478,7 +480,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State<T>;
-           final data = FItemData.maybeOf(state.context);
+           final data = FInheritedItemData.maybeOf(state.context);
            final inheritedStyle = FTileGroupStyleData.maybeOf(state.context);
 
            final global = state.context.theme.selectMenuTileStyle;

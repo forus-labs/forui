@@ -160,26 +160,30 @@ class _ContentState<T> extends State<Content<T>> {
                   first: widget.first,
                   enabled: widget.enabled,
                   ensureVisible: _ensureVisible,
-                  child: FItemData.merge(
+                  child: FInheritedItemData(
+                    data: FItemData(
+                      style: style,
+                      dividerColor: widget.style.sectionStyle.dividerColor,
+                      dividerWidth: widget.style.sectionStyle.dividerWidth,
+                      divider: widget.divider,
+                      enabled: widget.enabled,
+                      index: 0,
+                      last: widget.children.length == 1,
+                    ),
+                    child: first,
+                  ),
+                ),
+              for (final (i, child) in widget.children.indexed.skip(1))
+                FInheritedItemData(
+                  data: FItemData(
                     style: style,
                     dividerColor: widget.style.sectionStyle.dividerColor,
                     dividerWidth: widget.style.sectionStyle.dividerWidth,
                     divider: widget.divider,
                     enabled: widget.enabled,
-                    index: 0,
-                    last: widget.children.length == 1,
-                    child: first,
+                    index: i,
+                    last: i == widget.children.length - 1,
                   ),
-                ),
-              for (final (i, child) in widget.children.indexed.skip(1))
-                FItemData.merge(
-                  style: style,
-                  dividerColor: widget.style.sectionStyle.dividerColor,
-                  dividerWidth: widget.style.sectionStyle.dividerWidth,
-                  divider: widget.divider,
-                  enabled: widget.enabled,
-                  index: i,
-                  last: i == widget.children.length - 1,
                   child: child,
                 ),
             ],

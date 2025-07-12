@@ -224,15 +224,15 @@ class FPopoverMenu extends StatelessWidget {
     this.child,
     super.key,
   }) : _menuBuilder = ((context, controller, style) => FTileGroup.merge(
-         scrollController: scrollController,
-         cacheExtent: cacheExtent,
-         maxHeight: maxHeight,
-         dragStartBehavior: dragStartBehavior,
-         semanticsLabel: semanticsLabel,
-         style: style.tileGroupStyle,
-         divider: divider,
-         children: menuBuilder(context, controller, menu),
-       )),
+    scrollController: scrollController,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    semanticsLabel: semanticsLabel,
+    style: style.tileGroupStyle,
+    divider: divider,
+    children: menuBuilder(context, controller, menu),
+  )),
        assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
        assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided.');
 
@@ -256,7 +256,7 @@ class FPopoverMenu extends StatelessWidget {
       traversalEdgeBehavior: traversalEdgeBehavior,
       barrierSemanticsLabel: barrierSemanticsLabel,
       barrierSemanticsDismissible: barrierSemanticsDismissible,
-      popoverBuilder: (context, controller) => _menuBuilder(context, controller, style),
+      popoverBuilder: (context, controller) => FInheritedItemData(child: _menuBuilder(context, controller, style)),
       builder: builder,
       child: child,
     );

@@ -15,6 +15,33 @@ mixin FTileMixin on Widget {}
 /// Multiple tiles can be grouped together in a [FTileGroup]. Tiles grouped together will be separated by a divider,
 /// specified by a [FItemDivider].
 ///
+/// ## Using [FTile] in a [FPopover] when wrapped in a [FTileGroup]
+/// When a [FPopover] is used inside an [FTileGroup], tiles & groups inside the popover will inherit styling from the
+/// parent group. This happens because [FPopover]'s content shares the same `BuildContext` as its child, causing data
+/// inheritance that may lead to unexpected rendering issues.
+///
+/// To prevent this styling inheritance, wrap the popover in a [FInheritedItemData] with null data to reset the
+/// inherited data:
+/// ```dart
+/// FTileGroup(
+///   children: [
+///     FTile(title: Text('Tile with popover')),
+///     FPopoverWrapperTile(
+///       popoverBuilder: (_, _) => FInheritedItemData(
+///         child: FTileGroup(
+///           children: [
+///             FTile(title: Text('Popover Tile 1')),
+///             FTile(title: Text('Popover Tile 2')),
+///           ],
+///         ),
+///       ),
+///       child: FButton(child: Text('Open Popover')),
+///     ),
+///   ],
+/// );
+/// ```
+///
+///
 /// See:
 /// * https://forui.dev/docs/tile/tile for working examples.
 /// * [FItem] for a more generic item that can be used in any context.
@@ -212,9 +239,9 @@ class FTile extends StatelessWidget with FTileMixin {
 
   @override
   Widget build(BuildContext context) {
-    final parent = FItemData.maybeOf(context);
+    final parent = FInheritedItemData.maybeOf(context);
     final style = parent == null ? this.style?.call(context.theme.tileStyle) ?? context.theme.tileStyle : null;
-    return FItemData.merge(style: style, last: true, child: _child);
+    return FInheritedItemData.merge(style: style, last: true, child: _child);
   }
 
   @override

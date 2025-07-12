@@ -14,6 +14,32 @@ mixin FItemMixin on Widget {}
 
 /// An item that is typically used to group related information together.
 ///
+/// ## Using [FItem] in a [FPopover] when wrapped in a [FItemGroup]
+/// When a [FPopover] is used inside an [FItemGroup], items inside the popover will inherit styling from the parent group.
+/// This happens because [FPopover]'s content shares the same `BuildContext` as its child, causing data inheritance
+/// that may lead to unexpected rendering issues.
+///
+/// To prevent this styling inheritance, wrap the popover in a [FInheritedItemData] with null data to reset the
+/// inherited data:
+/// ```dart
+/// FItemGroup(
+///   children: [
+///     FItem(title: Text('Item with popover')),
+///     FPopoverWrapperItem(
+///       popoverBuilder: (_, _) => FInheritedItemData(
+///         child: FItemGroup(
+///           children: [
+///             FItem(title: Text('Popover Item 1')),
+///             FItem(title: Text('Popover Item 2')),
+///           ],
+///         ),
+///       ),
+///       child: FButton(child: Text('Open Popover')),
+///     ),
+///   ],
+/// );
+/// ```
+///
 /// See:
 /// * https://forui.dev/docs/data/item for working examples.
 /// * [FTile] for a specialized item for touch devices.
@@ -21,7 +47,7 @@ mixin FItemMixin on Widget {}
 class FItem extends StatelessWidget with FItemMixin {
   /// The item's style. Defaults to [FItemData.style] if present.
   ///
-  /// Provide a style to prevent inheritance from [FItemData].
+  /// Provide a style to prevent inheritance from [FInheritedItemData].
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -212,7 +238,7 @@ class FItem extends StatelessWidget with FItemMixin {
 
   @override
   Widget build(BuildContext context) {
-    final data = FItemData.of(context);
+    final data = FInheritedItemData.maybeOf(context) ?? const FItemData();
     final inheritedStyle = data.style ?? context.theme.itemStyle;
 
     final style = this.style?.call(inheritedStyle) ?? inheritedStyle;

@@ -7,6 +7,24 @@ import '../../../test_scaffold.dart';
 
 const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
 
+class ItemWrapper extends StatelessWidget with FItemMixin {
+  const ItemWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.all(5.0),
+    child: Center(
+      child: FSelect<String>(
+        format: (s) => s,
+        children: [
+          FSelectSection(label: const Text('Section 1'), children: [FSelectItem<String>('Item 1', 'item 1')]),
+          FSelectSection(label: const Text('Section 2'), children: [FSelectItem<String>('Item 2', 'item 2')]),
+        ],
+      ),
+    ),
+  );
+}
+
 void main() {
   const key = ValueKey('select');
 
@@ -289,4 +307,23 @@ void main() {
       );
     });
   }
+
+  testWidgets('leaky inherited FItemData does not affect FSelect', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FItemGroup(
+          divider: FItemDivider.indented,
+          children: [
+            FItem(title: const Text('2nd')),
+            const ItemWrapper(key: key),
+          ],
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(TestScaffold), matchesGoldenFile('select/content/leaky_inherited_fitemdata.png'));
+  });
 }
