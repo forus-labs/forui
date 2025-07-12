@@ -38,11 +38,75 @@ enum FItemDivider {
   none,
 }
 
-/// An [FItemData] is used to provide data about the item's position in the current nesting level, i.e. [FTileGroup].
+/// An [FInheritedItemData] is used to provide data about the item's position in the current nesting level, i.e. [FTileGroup].
 ///
 /// Users that wish to create their own custom group should pass additional data to the children using a separate
 /// inherited widget.
-final class FItemData extends InheritedWidget {
+final class FInheritedItemData extends InheritedWidget {
+  /// Returns the [FItemData] in the given [context].
+  static FItemData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FInheritedItemData>()?.data;
+
+  /// The item's properties.
+  final FItemData? data;
+
+  /// Creates a [FInheritedItemData].
+  const FInheritedItemData({required super.child, this.data, super.key});
+
+  /// Creates a [FInheritedItemData] that merges the given fields with the current [FInheritedItemData].
+  static Widget merge({
+    required bool last,
+    required Widget child,
+    FItemStyle? style,
+    double? spacing,
+    FItemDivider? divider,
+    FWidgetStateMap<Color>? dividerColor,
+    double? dividerWidth,
+    bool? enabled,
+    int? index,
+  }) => Builder(
+    builder: (context) {
+      final parent = maybeOf(context);
+      final globalLast = last && (parent?.globalLast ?? true);
+
+      return FInheritedItemData(
+        data: FItemData(
+          style: style ?? parent?.style,
+          spacing: max(spacing ?? 0, parent?.spacing ?? 0),
+          dividerColor: dividerColor ?? parent?.dividerColor ?? FWidgetStateMap.all(Colors.transparent),
+          dividerWidth: dividerWidth ?? parent?.dividerWidth ?? 0,
+          divider: switch ((last, globalLast)) {
+            // The first/middle items of a group.
+            (false, false) => divider ?? FItemDivider.none,
+            // Last of a group which itself isn't the last.
+            // propagatedLast can only be false if parent?.last is false since last must always be true.
+            // Hence, parent!.divider can never be null.
+            (true, false) => parent!.divider,
+            // The last item in the last group.
+            (_, true) => FItemDivider.none,
+          },
+          enabled: enabled ?? parent?.enabled ?? true,
+          index: index ?? parent?.index ?? 0,
+          last: last,
+          globalLast: globalLast,
+        ),
+        child: child,
+      );
+    },
+  );
+
+  @override
+  bool updateShouldNotify(FInheritedItemData old) => data != old.data;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('data', data));
+  }
+}
+
+/// The item's data.
+final class FItemData with Diagnosticable {
   /// The item's style.
   final FItemStyle? style;
 
@@ -70,90 +134,18 @@ final class FItemData extends InheritedWidget {
   /// True if the item is the last item across all levels.
   final bool globalLast;
 
-  /// Creates a [FItemData].
+  /// Creates a new [FItemData].
   const FItemData({
-    required this.style,
-    required this.spacing,
-    required this.dividerColor,
-    required this.dividerWidth,
-    required this.divider,
-    required this.enabled,
-    required this.index,
-    required this.last,
-    required this.globalLast,
-    required super.child,
-    super.key,
+    this.style,
+    this.spacing = 0,
+    this.dividerColor = const FWidgetStateMap({WidgetState.any: Colors.transparent}),
+    this.dividerWidth = 0,
+    this.divider = FItemDivider.none,
+    this.enabled = true,
+    this.index = 0,
+    this.last = true,
+    this.globalLast = true,
   });
-
-  /// Creates a [FItemData] that merges the given fields with the current [FItemData].
-  static Widget merge({
-    required bool last,
-    required Widget child,
-    FItemStyle? style,
-    double? spacing,
-    FItemDivider? divider,
-    FWidgetStateMap<Color>? dividerColor,
-    double? dividerWidth,
-    bool? enabled,
-    int? index,
-  }) => Builder(
-    builder: (context) {
-      final parent = context.dependOnInheritedWidgetOfExactType<FItemData>();
-      final globalLast = last && (parent?.globalLast ?? true);
-
-      return FItemData(
-        style: style ?? parent?.style,
-        spacing: max(spacing ?? 0, parent?.spacing ?? 0),
-        dividerColor: dividerColor ?? parent?.dividerColor ?? FWidgetStateMap.all(Colors.transparent),
-        dividerWidth: dividerWidth ?? parent?.dividerWidth ?? 0,
-        divider: switch ((last, globalLast)) {
-          // The first/middle items of a group.
-          (false, false) => divider ?? FItemDivider.none,
-          // Last of a group which itself isn't the last.
-          // propagatedLast can only be false if parent?.last is false since last must always be true.
-          // Hence, parent!.divider can never be null.
-          (true, false) => parent!.divider,
-          // The last item in the last group.
-          (_, true) => FItemDivider.none,
-        },
-        enabled: enabled ?? parent?.enabled ?? true,
-        index: index ?? parent?.index ?? 0,
-        last: last,
-        globalLast: globalLast,
-        child: child,
-      );
-    },
-  );
-
-  /// Returns the [FItemData] in the given [context].
-  static FItemData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FItemData>();
-
-  /// Returns the [FItemData] in the given [context], or a default [FItemData] if none is found.
-  factory FItemData.of(BuildContext context) =>
-      maybeOf(context) ??
-      FItemData(
-        style: null,
-        spacing: 0,
-        dividerColor: FWidgetStateMap.all(Colors.transparent),
-        dividerWidth: 0,
-        divider: FItemDivider.none,
-        enabled: true,
-        index: 0,
-        last: true,
-        globalLast: true,
-        child: const SizedBox(),
-      );
-
-  @override
-  bool updateShouldNotify(FItemData old) =>
-      style != old.style ||
-      dividerColor != old.dividerColor ||
-      dividerWidth != old.dividerWidth ||
-      divider != old.divider ||
-      enabled != old.enabled ||
-      index != old.index ||
-      last != old.last ||
-      globalLast != old.globalLast;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -169,4 +161,23 @@ final class FItemData extends InheritedWidget {
       ..add(FlagProperty('last', value: last, ifTrue: 'last'))
       ..add(FlagProperty('globalLast', value: globalLast, ifTrue: 'globalLast'));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FItemData &&
+          runtimeType == other.runtimeType &&
+          style == other.style &&
+          spacing == other.spacing &&
+          dividerColor == other.dividerColor &&
+          dividerWidth == other.dividerWidth &&
+          divider == other.divider &&
+          enabled == other.enabled &&
+          index == other.index &&
+          last == other.last &&
+          globalLast == other.globalLast;
+
+  @override
+  int get hashCode =>
+      Object.hash(style, spacing, dividerColor, dividerWidth, divider, enabled, index, last, globalLast);
 }

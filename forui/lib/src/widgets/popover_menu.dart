@@ -256,7 +256,7 @@ class FPopoverMenu extends StatelessWidget {
       traversalEdgeBehavior: traversalEdgeBehavior,
       barrierSemanticsLabel: barrierSemanticsLabel,
       barrierSemanticsDismissible: barrierSemanticsDismissible,
-      popoverBuilder: (context, controller) => _menuBuilder(context, controller, style),
+      popoverBuilder: (context, controller) => FInheritedItemData(child: _menuBuilder(context, controller, style)),
       builder: builder,
       child: child,
     );

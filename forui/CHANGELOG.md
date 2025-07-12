@@ -1,4 +1,4 @@
-## 0.14.0 (Next)
+## 0.14.0
 
 ### `FButton`
 * Add `FButton.onSecondaryPress`.
@@ -10,6 +10,12 @@
 * Add `FHeaderAction.onSecondaryLongPress`.
 * Add `FHeaderAction.actions`.
 * Add `FHeaderAction.shortcuts`.
+
+
+### `FItemData` 
+
+* **Breaking** Change `FItemData` to store fields in separate data class instead of directly in an inherited widget.
+* **Breaking** Rename `FItemData` to `FInheritedItemData`.
 
 
 ### `FPopover`
@@ -28,12 +34,17 @@
 * Fix `FSelect` layout shifting when scrolling through a long list of items.
 
 
+### `FSelectMenuTile`
+* Add `FSelectMenuTile.fromMap(...)`.
+
+* Fix `FSelectMenuTile` throwing an error when wrapped in a `FTileGroup`.
+
+
 ### `FSidebar`
 * Add `FSidebar.focusNode`.
 * Add `FSidebar.traversalEdgeBehavior`.
 
 * Change `FSidebarItemStyle.focusedOutlineStyle.spacing` from 3 to 0.
-* Convert `FSidebar` from a stateless to a stateful widget.
 
 * Fix `FSidebar`'s focus traversal behavior.
 
@@ -49,7 +60,6 @@
 
 
 ### Others
-* Add `FSelectMenuTile.fromMap(...)`.
 * Add `FToasterStyle.toastAlignment`.
 
 * Change default `hideOnTapOutside` in `FDateField.calendar(...)` from `FHidePopoverRegion.anywhere` to `FHidePopoverRegion.excludeTarget`.
@@ -57,6 +67,7 @@
 * **Breaking** Change `FPersistentSheetController.shown` to `FPersistentSheetController.status`.
 * **Breaking** Change `FTooltipController.shown` to `FTooltipController.status`.
 
+* Fix `FPopoverMenu` throwing an error when wrapped in a `FTileGroup`.
 * Fix `FTextField` applying different padding on mobile & desktop.
 
 

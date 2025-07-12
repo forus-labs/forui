@@ -7,7 +7,38 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
+const key = Key('key');
+
 void main() {
+  testWidgets('leaky inherited FItemData does not affect popover', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTileGroup(
+          children: [
+            FSelectMenuTile(
+              key: key,
+              prefix: const Icon(FIcons.calendar),
+              label: const Text('Label'),
+              description: const Text('Description'),
+              title: const Text('Repeat'),
+              subtitle: const Text('Fee, Fo, Fum'),
+              details: const Text('None'),
+              menu: const [
+                FSelectTile(title: Text('Item 1'), value: 1),
+                FSelectTile(title: Text('Item 2'), value: 2),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), null);
+  });
+
   testWidgets('tap on tile opens menu', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(

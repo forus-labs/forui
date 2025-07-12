@@ -15,6 +15,33 @@ mixin FTileGroupMixin on Widget {}
 ///
 /// Tiles grouped together will be separated by a divider, specified by [divider].
 ///
+/// ## Using [FTileGroup] in a [FPopover] when wrapped in a [FTileGroup]
+/// When a [FPopover] is used inside an [FTileGroup], tiles & groups inside the popover will inherit styling from the
+/// parent group. This happens because [FPopover]'s content shares the same `BuildContext` as its child, causing data
+/// inheritance that may lead to unexpected rendering issues.
+///
+/// To prevent this styling inheritance, wrap the popover in a [FInheritedItemData] with null data to reset the
+/// inherited data:
+/// ```dart
+/// FTileGroup(
+///   children: [
+///     FTile(title: Text('Tile with popover')),
+///     FPopoverWrapperTile(
+///       popoverBuilder: (_, _) => FInheritedItemData(
+///         child: FTileGroup(
+///           children: [
+///             FTile(title: Text('Popover Tile 1')),
+///             FTile(title: Text('Popover Tile 2')),
+///           ],
+///         ),
+///       ),
+///       child: FButton(child: Text('Open Popover')),
+///     ),
+///   ],
+/// );
+/// ```
+///
+///
 /// See:
 /// * https://forui.dev/docs/tile/tile-group for working examples.
 /// * [FTileGroupStyle] for customizing a tile group's appearance.
@@ -124,7 +151,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
        _builder = ((style, enabled) => SliverList.list(
          children: [
            for (final (index, child) in children.indexed)
-             FItemData.merge(
+             FInheritedItemData.merge(
                style: style.tileStyle,
                enabled: enabled,
                dividerColor: style.dividerColor,
@@ -140,7 +167,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
   /// {@template forui.widgets.FTileGroup.builder}
-  /// The [tileBuilder] is called for each tile that should be built. The current level's [FItemData] is **not**
+  /// The [tileBuilder] is called for each tile that should be built. The current level's [FInheritedItemData] is **not**
   /// visible to `tileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -176,7 +203,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
          itemCount: count,
          itemBuilder: (context, index) {
            if (tileBuilder(context, index) case final tile?) {
-             return FItemData.merge(
+             return FInheritedItemData.merge(
                style: style.tileStyle,
                enabled: enabled,
                dividerColor: style.dividerColor,
@@ -214,7 +241,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
        _builder = ((style, enabled) => SliverMainAxisGroup(
          slivers: [
            for (final (index, child) in children.indexed)
-             FItemData.merge(
+             FInheritedItemData.merge(
                style: style.tileStyle,
                enabled: enabled,
                dividerColor: style.dividerColor,
@@ -229,7 +256,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
 
   @override
   Widget build(BuildContext context) {
-    final data = FItemData.maybeOf(context);
+    final data = FInheritedItemData.maybeOf(context);
     final inheritedStyle = FTileGroupStyleData.of(context);
     final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
     final enabled = this.enabled ?? data?.enabled ?? true;

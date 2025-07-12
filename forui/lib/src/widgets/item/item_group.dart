@@ -15,6 +15,33 @@ mixin FItemGroupMixin on Widget {}
 ///
 /// Items grouped together will be separated by a divider, specified by [divider].
 ///
+/// ## Using [FItemGroup] in a [FPopover] when wrapped in a [FItemGroup]
+/// When a [FPopover] is used inside an [FItemGroup], items & groups inside the popover will inherit styling from the
+/// parent group. This happens because [FPopover]'s content shares the same `BuildContext` as its child, causing data
+/// inheritance that may lead to unexpected rendering issues.
+///
+/// To prevent this styling inheritance, wrap the popover in a [FInheritedItemData] with null data to reset the
+/// inherited data:
+/// ```dart
+/// FItemGroup(
+///   children: [
+///     FItem(title: Text('Item with popover')),
+///     FPopoverWrapperItem(
+///       popoverBuilder: (_, _) => FInheritedItemData(
+///         child: FItemGroup(
+///           children: [
+///             FItem(title: Text('Popover Item 1')),
+///             FItem(title: Text('Popover Item 2')),
+///           ],
+///         ),
+///       ),
+///       child: FButton(child: Text('Open Popover')),
+///     ),
+///   ],
+/// );
+/// ```
+///
+///
 /// See:
 /// * https://forui.dev/docs/data/item-group for working examples.
 /// * [FItemGroupStyle] for customizing a item group's appearance.
@@ -106,7 +133,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
        _builder = ((style, enabled) => SliverList.list(
          children: [
            for (final (index, child) in children.indexed)
-             FItemData.merge(
+             FInheritedItemData.merge(
                style: style.itemStyle,
                spacing: style.spacing,
                enabled: enabled,
@@ -123,7 +150,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// Creates a [FItemGroup] that lazily builds its children.
   ///
   /// {@template forui.widgets.FItemGroup.builder}
-  /// The [itemBuilder] is called for each item that should be built. The current level's [FItemData] is **not**
+  /// The [itemBuilder] is called for each item that should be built. The current level's [FInheritedItemData] is **not**
   /// visible to `itemBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -156,7 +183,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          itemCount: count,
          itemBuilder: (context, index) {
            if (itemBuilder(context, index) case final item?) {
-             return FItemData.merge(
+             return FInheritedItemData.merge(
                style: style.itemStyle,
                spacing: style.spacing,
                enabled: enabled,
@@ -192,7 +219,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
        _builder = ((style, enabled) => SliverMainAxisGroup(
          slivers: [
            for (final (index, child) in children.indexed)
-             FItemData.merge(
+             FInheritedItemData.merge(
                style: style.itemStyle,
                spacing: style.spacing,
                enabled: enabled,
@@ -208,7 +235,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
 
   @override
   Widget build(BuildContext context) {
-    final data = FItemData.maybeOf(context);
+    final data = FInheritedItemData.maybeOf(context);
     final inheritedStyle = FItemGroupStyleData.of(context);
     final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
     final enabled = this.enabled ?? data?.enabled ?? true;
