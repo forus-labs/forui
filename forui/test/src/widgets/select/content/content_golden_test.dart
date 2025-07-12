@@ -233,6 +233,29 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/content/dividers.png'));
     });
 
+    testWidgets('dividers with single item', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect<String>(
+            key: key,
+            divider: FItemDivider.full,
+            format: (s) => s,
+            children: [FSelectItem('Item 1', 'Item 1')],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select/${theme.name}/content/dividers-single-item.png'),
+      );
+    });
+
     testWidgets('hover with dividers', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
