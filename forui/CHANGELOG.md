@@ -1,6 +1,8 @@
 ## 0.15.0
 
-### `FAccordionController`
+### `FAccordion`
+* Add `FAccordionItem.onHoverChange`
+* Add `FAccordionItem.onStateChange`
 
 * **Breaking** Make `FAccordionController.controllers` private.
 * **Breaking** Remove `FAccordionController.radio(...)` - use `FAccrdionController(max: 1)` instead.
