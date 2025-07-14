@@ -1,3 +1,7 @@
+### 0.14.1
+* Fix `FToaster`sometimes crashing due to an incorrect update of a late final variable.
+
+
 ## 0.14.0
 
 ### `FButton`
