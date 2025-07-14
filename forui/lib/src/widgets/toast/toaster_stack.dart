@@ -41,9 +41,9 @@ class ToasterStack extends StatefulWidget {
 }
 
 class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _expand;
   final ValueNotifier<Swipe> _swiping = ValueNotifier(const Unswiped());
+  late AnimationController _controller;
+  late Animation<double> _expand;
   bool _autoDismiss = true;
   bool _hovered = false;
   int _monotonic = 0;
