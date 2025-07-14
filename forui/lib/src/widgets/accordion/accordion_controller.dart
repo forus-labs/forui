@@ -4,54 +4,46 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A controller that controls which sections are shown and hidden.
+/// A controller shows and hides items in an [FAccordion].
 class FAccordionController extends FChangeNotifier {
-  /// The animation controllers for each of the sections in the accordion.
-  ///
-  /// ## Contract
-  /// Modifying this map directly will result in undefined behavior.
-  final Map<int, AnimationController> controllers;
+  final Map<int, AnimationController> _controllers;
   final Set<int> _expanded;
   final int _min;
   final int? _max;
 
   /// Creates a [FAccordionController].
   ///
-  /// The [min] and [max] values define the minimum and maximum number of expanded sections allowed.
-  ///
-  /// Defaults to no minimum and maximum.
+  /// [min] and [max] define the minimum and maximum number of expanded items allowed.
   ///
   /// # Contract:
   /// * Throws [AssertionError] if [min] < 0.
   /// * Throws [AssertionError] if [max] < [min].
   FAccordionController({int min = 0, int? max})
-    : _min = min,
-      _max = max,
-      controllers = {},
+    : _controllers = {},
       _expanded = {},
+      _min = min,
+      _max = max,
       assert(min >= 0, 'The min value must be greater than or equal to 0.'),
       assert(max == null || 0 <= max, 'The max value must be greater than or equal to 0.'),
       assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
 
-  /// Creates an [FAccordionController] that allows only one section to be expanded at a time.
-  FAccordionController.radio() : this(max: 1);
-
-  /// Convenience method for toggling the current expansion status.
+  /// Toggles the item at the given [index], expanding it if successfully expanded or collapsed.
   ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<bool> toggle(int index) async => switch (controllers[index]?.value) {
+  /// This method should not be called while the widget tree is being rebuilt.
+  Future<bool> toggle(int index) async => switch (_controllers[index]?.status) {
     null => false,
-    1 => await collapse(index),
+    final status when status.isForwardOrCompleted => await collapse(index),
     _ => await expand(index),
   };
 
-  /// Expands the item at the given [index], returning true if expanded.
+  /// Expands the item at the given [index], returning true if expanded. It collapses the least recently expanded item
+  /// if the maximum number of expanded items is reached.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> expand(int index) async {
-    final controller = controllers[index];
+    final controller = _controllers[index];
     if (_expanded.contains(index) || controller == null) {
-      return false;
+      return _expanded.contains(index);
     }
 
     final futures = <Future<void>>[];
@@ -62,7 +54,7 @@ class FAccordionController extends FChangeNotifier {
       }
 
       _expanded.remove(collapsing);
-      futures.add(controllers[collapsing]!.reverse());
+      futures.add(_controllers[collapsing]!.reverse());
     }
 
     _expanded.add(index);
@@ -78,34 +70,35 @@ class FAccordionController extends FChangeNotifier {
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> collapse(int index) async {
-    if (_expanded.length <= _min || !_expanded.contains(index)) {
+    if (controllers[index] == null) {
       return false;
     }
 
+    if (_expanded.length <= _min || !_expanded.contains(index)) {
+      return !_expanded.contains(index);
+    }
+
     _expanded.remove(index);
-    await controllers[index]!.reverse();
+    await _controllers[index]!.reverse();
 
     notifyListeners();
 
     return true;
   }
 
-  /// Returns true if the number of expanded items is within the allowed range.
-  bool validate(int length) => _min <= length && (_max == null || length <= _max);
-
   /// The indexes of the currently expanded items.
   Set<int> get expanded => {..._expanded};
 }
 
 @internal
-extension FAccordionControllers on FAccordionController {
+extension InternalAccordionController on FAccordionController {
   /// Adds an item at the given [index], returning true if added.
-  bool addItem(int index, AnimationController controller) {
+  bool add(int index, AnimationController controller) {
     if (controller.value == 1 && _max != null && _max <= _expanded.length) {
       return false;
     }
 
-    controllers[index] = controller;
+    _controllers[index] = controller;
     if (controller.value == 1) {
       _expanded.add(index);
     }
@@ -114,13 +107,16 @@ extension FAccordionControllers on FAccordionController {
   }
 
   /// Removes the item at the given [index], returning true if removed.
-  bool removeItem(int index) {
+  bool remove(int index) {
     if (_expanded.length <= _min && _expanded.contains(index)) {
       return false;
     }
 
-    final removed = controllers.remove(index);
+    final removed = _controllers.remove(index);
     _expanded.remove(index);
     return removed != null;
   }
+
+  @visibleForTesting
+  Map<int, AnimationController> get controllers => _controllers;
 }

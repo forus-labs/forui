@@ -17,10 +17,6 @@ part 'accordion.style.dart';
 /// * [FAccordionStyle] for customizing an accordion's appearance.
 class FAccordion extends StatefulWidget {
   /// The controller. Defaults to [FAccordionController.new].
-  ///
-  /// See:
-  /// * [FAccordionController] for multiple selections.
-  /// * [FAccordionController.radio] for a radio-like selection.
   final FAccordionController? controller;
 
   /// The style. Defaults to [FThemeData.accordionStyle].
@@ -84,7 +80,7 @@ class _FAccordionState extends State<FAccordion> {
       children: [
         for (final (index, child) in widget.children.indexed)
           if (child is FAccordionItemMixin)
-            FAccordionItemData(index: index, controller: _controller, style: style, child: child)
+            InheritedAccordionData(index: index, controller: _controller, style: style, child: child)
           else
             child,
       ],
@@ -182,36 +178,41 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 }
 
 @internal
-class FAccordionItemData extends InheritedWidget {
+class InheritedAccordionData extends InheritedWidget {
   @useResult
-  static FAccordionItemData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FAccordionItemData>();
-    assert(data != null, 'No FAccordionItemData found in context.');
+  static InheritedAccordionData of(BuildContext context) {
+    final data = context.dependOnInheritedWidgetOfExactType<InheritedAccordionData>();
+    assert(
+      data != null,
+      'No InheritedAccordionData found in context. '
+      'This is likely because you used an FAccordionItem outside of an FAccordion. To fix, ensure all FAccordionItems '
+      'are children of an FAccordion.',
+    );
     return data!;
   }
 
-  final int index;
   final FAccordionController controller;
   final FAccordionStyle style;
+  final int index;
 
-  const FAccordionItemData({
-    required this.index,
+  const InheritedAccordionData({
     required this.controller,
     required this.style,
+    required this.index,
     required super.child,
     super.key,
   });
 
   @override
-  bool updateShouldNotify(covariant FAccordionItemData old) =>
-      index != old.index || controller != old.controller || style != old.style;
+  bool updateShouldNotify(covariant InheritedAccordionData old) =>
+      controller != old.controller || style != old.style || index != old.index;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IntProperty('index', index))
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(IntProperty('index', index));
   }
 }
