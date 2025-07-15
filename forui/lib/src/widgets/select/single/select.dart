@@ -182,7 +182,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final ScrollPhysics contentPhysics;
 
   /// The divider used to separate the content items. Defaults to [FItemDivider.none].
-  final FItemDivider divider;
+  final FItemDivider contentDivider;
 
   /// The initial value.
   ///
@@ -230,7 +230,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
-    FItemDivider divider,
+    FItemDivider contentDivider,
     T? initialValue,
     Key? key,
   }) = _BasicSelect<T>;
@@ -278,7 +278,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
-    FItemDivider divider = FItemDivider.none,
+    FItemDivider contentDivider = FItemDivider.none,
     T? initialValue,
     Key? key,
   }) {
@@ -321,7 +321,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
-      divider: divider,
+      contentDivider: contentDivider,
       initialValue: initialValue,
       key: key,
       children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(key, value)],
@@ -380,7 +380,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
-    FItemDivider divider,
+    FItemDivider contentDivider,
     T? initialValue,
     Key? key,
   }) = _SearchSelect<T>;
@@ -440,7 +440,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
-    FItemDivider divider = FItemDivider.none,
+    FItemDivider contentDivider = FItemDivider.none,
     T? initialValue,
     Key? key,
   }) {
@@ -493,7 +493,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
-      divider: divider,
+      contentDivider: contentDivider,
       initialValue: initialValue,
       key: key,
     );
@@ -537,7 +537,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentScrollController,
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
-    this.divider = FItemDivider.none,
+    this.contentDivider = FItemDivider.none,
     this.initialValue,
     super.key,
   }) : assert(
@@ -585,7 +585,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
-      ..add(EnumProperty('divider', divider))
+      ..add(EnumProperty('contentDivider', contentDivider))
       ..add(DiagnosticsProperty('initialValue', initialValue));
   }
 }
@@ -731,8 +731,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
         enabled: widget.enabled,
         builder: (context, data, child) => FPopover(
-          style: style.popoverStyle,
           controller: _controller.popover,
+          style: style.popoverStyle,
           constraints: widget.popoverConstraints,
           popoverAnchor: widget.anchor,
           childAnchor: widget.fieldAnchor,
@@ -742,9 +742,10 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
           hideOnTapOutside: widget.hideOnTapOutside,
           shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
           popoverBuilder: (_, popoverController) => TextFieldTapRegion(
-            child: SelectControllerData<T>(
-              popoverController: popoverController,
+            child: InheritedSelectController<T>(
+              popover: popoverController,
               contains: (value) => _controller.value == value,
+              focus: (value) => _controller.value == value,
               onPress: (value) async {
                 if (widget.autoHide) {
                   _focus.requestFocus();
@@ -812,7 +813,7 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   @override
   final FSelectContentStyle contentStyle;
 
-  ///The default text style when there are no results.
+  /// The default text style when there are no results.
   @override
   final TextStyle emptyTextStyle;
 

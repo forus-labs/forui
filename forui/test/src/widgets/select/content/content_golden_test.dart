@@ -204,7 +204,7 @@ void main() {
           alignment: Alignment.topCenter,
           child: FSelect<String>(
             key: key,
-            divider: FItemDivider.full,
+            contentDivider: FItemDivider.full,
             format: (s) => s,
             children: [
               FSelectSection.fromMap(
@@ -240,7 +240,7 @@ void main() {
           alignment: Alignment.topCenter,
           child: FSelect<String>(
             key: key,
-            divider: FItemDivider.full,
+            contentDivider: FItemDivider.full,
             format: (s) => s,
             children: [FSelectItem('Item 1', 'Item 1')],
           ),
@@ -263,7 +263,7 @@ void main() {
           alignment: Alignment.topCenter,
           child: FSelect<String>(
             key: key,
-            divider: FItemDivider.full,
+            contentDivider: FItemDivider.full,
             format: (s) => s,
             children: [
               FSelectSection.fromMap(

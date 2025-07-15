@@ -50,7 +50,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.contentScrollController,
     super.contentScrollHandles,
     super.contentPhysics,
-    super.divider,
+    super.contentDivider,
     super.initialValue,
     super.key,
   }) : super._();
@@ -82,7 +82,7 @@ class _SearchSelectState<T> extends _State<_SearchSelect<T>, T> {
     first: _controller.value == null,
     enabled: widget.enabled,
     physics: widget.contentPhysics,
-    divider: widget.divider,
+    divider: widget.contentDivider,
     filter: widget.filter,
     builder: widget.contentBuilder,
     emptyBuilder: widget.emptyBuilder,

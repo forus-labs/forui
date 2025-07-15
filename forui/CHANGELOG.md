@@ -1,3 +1,14 @@
+## 0.15.0
+
+### `FMultiSelect` (new)
+* Add `FMultiSelectController`.
+
+
+### Others
+* Rename `FSelect.divider` to `FSelect.contentDivider`.
+* Change `FMultiValueNotifier` to be non-abstract.
+
+
 ### 0.14.1
 * Fix `FToaster`sometimes crashing due to an incorrect update of a late final variable.
 

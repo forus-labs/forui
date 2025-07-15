@@ -164,7 +164,7 @@ class DividerSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>(
       hint: 'Select a level',
-      divider: FItemDivider.full,
+      contentDivider: FItemDivider.full,
       format: (s) => s,
       children: [
         FSelectSection.fromMap(

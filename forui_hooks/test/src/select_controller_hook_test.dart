@@ -27,4 +27,23 @@ void main() {
 
     await tester.pumpAndSettle();
   });
+
+  testWidgets('useFMultiSelectController', (tester) async {
+    late FMultiSelectController<String> controller;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFMultiSelectController();
+            return FMultiSelect(controller: controller, children: const []);
+          },
+        ),
+      ),
+    );
+
+    unawaited(controller.popover.show());
+
+    await tester.pumpAndSettle();
+  });
 }

@@ -6,21 +6,9 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 @internal
-class SelectControllerData<T> extends InheritedWidget {
-  final FPopoverController popoverController;
-  final bool Function(T) contains;
-  final ValueChanged<T> onPress;
-
-  const SelectControllerData({
-    required this.popoverController,
-    required this.contains,
-    required this.onPress,
-    required super.child,
-    super.key,
-  });
-
-  static SelectControllerData<T> of<T>(BuildContext context) {
-    final SelectControllerData<T>? result = context.dependOnInheritedWidgetOfExactType<SelectControllerData<T>>();
+class InheritedSelectController<T> extends InheritedWidget {
+  static InheritedSelectController<T> of<T>(BuildContext context) {
+    final result = context.dependOnInheritedWidgetOfExactType<InheritedSelectController<T>>();
     assert(
       result != null,
       "No FSelect<$T> found in context. This is likely because Dart could not infer FSelect's type parameter. "
@@ -29,23 +17,38 @@ class SelectControllerData<T> extends InheritedWidget {
     return result!;
   }
 
+  final FPopoverController popover;
+  final bool Function(T) contains;
+  final bool Function(T) focus;
+  final ValueChanged<T> onPress;
+
+  const InheritedSelectController({
+    required this.popover,
+    required this.contains,
+    required this.focus,
+    required this.onPress,
+    required super.child,
+    super.key,
+  });
+
   @override
-  bool updateShouldNotify(SelectControllerData<T> old) =>
-      popoverController != old.popoverController || contains != old.contains || onPress != old.onPress;
+  bool updateShouldNotify(InheritedSelectController<T> old) =>
+      popover != old.popover || contains != old.contains || focus != old.focus || onPress != old.onPress;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('popoverController', popoverController))
+      ..add(DiagnosticsProperty('popover', popover))
       ..add(ObjectFlagProperty.has('contains', contains))
+      ..add(ObjectFlagProperty.has('focus', focus))
       ..add(ObjectFlagProperty.has('onPress', onPress));
   }
 }
 
 /// The [FSelect]'s controller.
 class FSelectController<T> extends FValueNotifier<T?> {
-  /// The controller for the popover. Does nothing if the time field is input only.
+  /// The controller for the popover.
   ///
   /// ## Contract
   /// Manually disposing this controller is undefined behavior. Dispose this [FSelectController] instead.
@@ -65,6 +68,30 @@ class FSelectController<T> extends FValueNotifier<T?> {
 
   @override
   set value(T? value) => super.value = toggleable && super.value == value ? null : value;
+
+  @override
+  void dispose() {
+    popover.dispose();
+    super.dispose();
+  }
+}
+
+/// The [FMultiSelect]'s controller.
+class FMultiSelectController<T> extends FMultiValueNotifier<T> {
+  /// The controller for the popover.
+  ///
+  /// ## Contract
+  /// Manually disposing this controller is undefined behavior. Dispose this [FSelectController] instead.
+  final FPopoverController popover;
+
+  /// Creates a [FMultiSelectController].
+  FMultiSelectController({
+    required TickerProvider vsync,
+    super.min,
+    super.max,
+    super.values,
+    Duration popoverAnimationDuration = const Duration(milliseconds: 100),
+  }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration);
 
   @override
   void dispose() {
