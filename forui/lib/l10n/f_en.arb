@@ -116,6 +116,11 @@
   },
 
 
+  "multiSelectHint": "Select items",
+  "@multiSelectHint": {
+    "description": "The hint text for the multi-select field."
+  },
+
   "selectHint": "Select an item",
   "@selectHint": {
     "description": "The hint text for the select field."

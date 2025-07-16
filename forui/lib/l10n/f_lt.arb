@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Slinkti žemyn",
   "paginationPreviousSemanticsLabel": "Ankstesnis",
   "paginationNextSemanticsLabel": "Kitas",
-  "popoverSemanticsLabel": "Išskleidžiamas langas"
+  "popoverSemanticsLabel": "Išskleidžiamas langas",
+  "multiSelectHint": "Pasirinkite elementus"
 }

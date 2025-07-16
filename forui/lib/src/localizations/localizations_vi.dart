@@ -93,6 +93,9 @@ class FLocalizationsVi extends FLocalizations {
   String get popoverSemanticsLabel => 'Cửa sổ bật lên';
 
   @override
+  String get multiSelectHint => 'Chọn các mục';
+
+  @override
   String get selectHint => 'Chọn một mục';
 
   @override

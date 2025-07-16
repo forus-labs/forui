@@ -93,6 +93,9 @@ class FLocalizationsCy extends FLocalizations {
   String get popoverSemanticsLabel => 'Ffenestr naid';
 
   @override
+  String get multiSelectHint => 'Dewis eitemau';
+
+  @override
   String get selectHint => 'Dewiswch eitem';
 
   @override

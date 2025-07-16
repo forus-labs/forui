@@ -26,7 +26,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       (FMultiSelectStyle, Set<WidgetState>) styles,
       Widget? _,
       ) => Padding(
-    padding: const EdgeInsetsDirectional.only(end: 8.0),
+    padding: const EdgeInsetsDirectional.only(start: 4, end: 8.0),
     child: IconTheme(data: styles.$1.fieldStyle.iconStyle, child: const Icon(FIcons.chevronDown)),
   );
 
@@ -109,9 +109,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// The text direction of the select.
   final TextDirection? textDirection;
 
-  /// Whether the field can request focus. Defaults to true.
-  final bool canRequestFocus;
-
   /// True if a clear button should be shown. Defaults to false.
   final bool clearable;
 
@@ -178,7 +175,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? hint,
     TextAlign textAlign,
     TextDirection? textDirection,
-    bool canRequestFocus,
     bool clearable,
     AlignmentGeometry anchor,
     AlignmentGeometry fieldAnchor,
@@ -221,7 +217,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
         Widget? hint,
         TextAlign textAlign = TextAlign.start,
         TextDirection? textDirection,
-        bool canRequestFocus = true,
         bool clearable = false,
         AlignmentGeometry anchor = AlignmentDirectional.topStart,
         AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
@@ -258,7 +253,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       hint: hint,
       textAlign: textAlign,
       textDirection: textDirection,
-      canRequestFocus: canRequestFocus,
       clearable: clearable,
       anchor: anchor,
       fieldAnchor: fieldAnchor,
@@ -297,7 +291,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.hint,
     this.textAlign = TextAlign.start,
     this.textDirection,
-    this.canRequestFocus = true,
     this.clearable = false,
     this.anchor = AlignmentDirectional.topStart,
     this.fieldAnchor = AlignmentDirectional.bottomStart,
@@ -333,7 +326,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       hint: hint,
       textAlign: textAlign,
       textDirection: textDirection,
-      canRequestFocus: canRequestFocus,
       clearable: clearable,
       anchor: anchor,
       fieldAnchor: fieldAnchor,
@@ -374,7 +366,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(EnumProperty('textAlign', textAlign))
       ..add(EnumProperty('textDirection', textDirection))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
       ..add(DiagnosticsProperty('anchor', anchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
@@ -415,7 +406,6 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     super.hint,
     super.textAlign,
     super.textDirection,
-    super.canRequestFocus,
     super.clearable,
     super.anchor,
     super.fieldAnchor,
@@ -458,6 +448,10 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   @override
   final FMultiSelectFieldStyle fieldStyle;
 
+  /// The tag's style.
+  @override
+  final FMultiSelectTagStyle tagStyle;
+
   /// The popover's style.
   @override
   final FPopoverStyle popoverStyle;
@@ -477,6 +471,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   /// Creates a [FMultiSelectStyle].
   FMultiSelectStyle({
     required this.fieldStyle,
+    required this.tagStyle,
     required this.popoverStyle,
     required this.searchStyle,
     required this.contentStyle,
@@ -487,6 +482,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   FMultiSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         fieldStyle: FMultiSelectFieldStyle.inherit(colors: colors, typography: typography, style: style),
+        tagStyle: FMultiSelectTagStyle.inherit(colors: colors, typography: typography, style: style),
         popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
         searchStyle: FSelectSearchStyle.inherit(colors: colors, typography: typography, style: style),
         contentStyle: FSelectContentStyle.inherit(colors: colors, typography: typography, style: style),

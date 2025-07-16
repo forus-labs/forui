@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "ତଳକୁ ସ୍କ୍ରୋଲ କରନ୍ତୁ",
   "paginationPreviousSemanticsLabel": "ପୂର୍ବବର୍ତ୍ତୀ",
   "paginationNextSemanticsLabel": "ପରବର୍ତ୍ତୀ",
-  "popoverSemanticsLabel": "ପପଓଭର"
+  "popoverSemanticsLabel": "ପପଓଭର",
+  "multiSelectHint": "ଆଇଟମ୍ ବାଛନ୍ତୁ"
 }

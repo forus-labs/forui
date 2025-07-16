@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Pomerite nadole",
   "paginationPreviousSemanticsLabel": "Prethodno",
   "paginationNextSemanticsLabel": "Sledeće",
-  "popoverSemanticsLabel": "Iskačući prozor"
+  "popoverSemanticsLabel": "Iskačući prozor",
+  "multiSelectHint": "Izaberite stavke"
 }

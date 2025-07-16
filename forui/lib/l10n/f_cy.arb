@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Sgrolio i lawr",
   "paginationPreviousSemanticsLabel": "Blaenorol",
   "paginationNextSemanticsLabel": "Nesaf",
-  "popoverSemanticsLabel": "Ffenestr naid"
+  "popoverSemanticsLabel": "Ffenestr naid",
+  "multiSelectHint": "Dewis eitemau"
 }

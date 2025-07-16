@@ -93,6 +93,9 @@ class FLocalizationsSq extends FLocalizations {
   String get popoverSemanticsLabel => 'Dritare kërcyese';
 
   @override
+  String get multiSelectHint => 'Zgjidh elementet';
+
+  @override
   String get selectHint => 'Zgjidhni një artikull';
 
   @override

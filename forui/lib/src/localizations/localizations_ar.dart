@@ -93,6 +93,9 @@ class FLocalizationsAr extends FLocalizations {
   String get popoverSemanticsLabel => 'منبثقة';
 
   @override
+  String get multiSelectHint => 'حدد العناصر';
+
+  @override
   String get selectHint => 'حدد عنصرا';
 
   @override

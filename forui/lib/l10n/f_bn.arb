@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "নিচে স্ক্রোল করুন",
   "paginationPrevious": "পূর্ববর্তী",
   "paginationNext": "পরবর্তী",
-  "popoverSemanticsLabel": "পপওভার"
+  "popoverSemanticsLabel": "পপওভার",
+  "multiSelectHint": "আইটেম নির্বাচন করুন"
 }

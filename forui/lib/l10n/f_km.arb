@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "រមូរចុះក្រោម",
   "paginationPrevious": "មុន",
   "paginationNext": "បន្ទាប់",
-  "popoverSemanticsLabel": "បង្អួចលេចឡើង"
+  "popoverSemanticsLabel": "បង្អួចលេចឡើង",
+  "multiSelectHint": "ជ្រើសរើសធាតុ"
 }

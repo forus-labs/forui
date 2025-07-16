@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Scorri verso il basso",
   "paginationPreviousSemanticsLabel": "Precedente",
   "paginationNextSemanticsLabel": "Avanti",
-  "popoverSemanticsLabel": "Finestra di sovrapposizione"
+  "popoverSemanticsLabel": "Finestra di sovrapposizione",
+  "multiSelectHint": "Seleziona elementi"
 }

@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "아래로 스크롤",
   "paginationPrevious": "이전",
   "paginationNext": "다음",
-  "popoverSemanticsLabel": "팝오버"
+  "popoverSemanticsLabel": "팝오버",
+  "multiSelectHint": "항목 선택"
 }

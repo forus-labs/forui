@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Przewiń w dół",
   "paginationPreviousSemanticsLabel": "Poprzedni",
   "paginationNextSemanticsLabel": "Dalej",
-  "popoverSemanticsLabel": "Okno wyskakujące"
+  "popoverSemanticsLabel": "Okno wyskakujące",
+  "multiSelectHint": "Wybierz elementy"
 }

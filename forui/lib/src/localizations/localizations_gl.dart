@@ -93,6 +93,9 @@ class FLocalizationsGl extends FLocalizations {
   String get popoverSemanticsLabel => 'Xanela emerxente';
 
   @override
+  String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override

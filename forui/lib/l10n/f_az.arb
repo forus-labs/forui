@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Aşağı sürüşdür",
   "paginationPreviousSemanticsLabel": "Əvvəlki",
   "paginationNextSemanticsLabel": "Növbəti",
-  "popoverSemanticsLabel": "Popover"
+  "popoverSemanticsLabel": "Popover",
+  "multiSelectHint": "Elementləri seçin"
 }

@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Scroll down",
   "paginationPreviousSemanticsLabel": "Previous",
   "paginationNextSemanticsLabel": "Next",
-  "popoverSemanticsLabel": "Popover"
+  "popoverSemanticsLabel": "Popover",
+  "multiSelectHint": "Select items"
 }

@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Posunúť nadol",
   "paginationPreviousSemanticsLabel": "Predchádzajúce",
   "paginationNextSemanticsLabel": "Ďalej",
-  "popoverSemanticsLabel": "Vyskakovacie okno"
+  "popoverSemanticsLabel": "Vyskakovacie okno",
+  "multiSelectHint": "Vybrať položky"
 }

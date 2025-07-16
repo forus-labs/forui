@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Gulir ke bawah",
   "paginationPreviousSemanticsLabel": "Sebelumnya",
   "paginationNextSemanticsLabel": "Berikutnya",
-  "popoverSemanticsLabel": "Popover"
+  "popoverSemanticsLabel": "Popover",
+  "multiSelectHint": "Pilih item"
 }

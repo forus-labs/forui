@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Desprazarse cara abaixo",
   "paginationPrevious": "Anterior",
   "paginationNext": "Seguinte",
-  "popoverSemanticsLabel": "Xanela emerxente"
+  "popoverSemanticsLabel": "Xanela emerxente",
+  "multiSelectHint": "Seleccionar elementos"
 }

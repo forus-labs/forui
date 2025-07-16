@@ -93,6 +93,9 @@ class FLocalizationsAm extends FLocalizations {
   String get popoverSemanticsLabel => 'ፖፖቨር';
 
   @override
+  String get multiSelectHint => 'ንጥሎች ይምረጡ';
+
+  @override
   String get selectHint => 'አንድ ንጥል ይምረጡ';
 
   @override

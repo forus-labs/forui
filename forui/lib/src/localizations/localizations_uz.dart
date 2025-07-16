@@ -93,6 +93,9 @@ class FLocalizationsUz extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get multiSelectHint => 'Elementlarni tanlang';
+
+  @override
   String get selectHint => 'Element tanlang';
 
   @override

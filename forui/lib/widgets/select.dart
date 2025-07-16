@@ -13,4 +13,5 @@ export '../src/widgets/select/content/search_content.dart' hide SearchContent;
 export '../src/widgets/select/content/search_field_properties.dart';
 export '../src/widgets/select/multi/field.dart' hide Field;
 export '../src/widgets/select/multi/select.dart';
+export '../src/widgets/select/multi/tag.dart';
 export '../src/widgets/select/single/select.dart';

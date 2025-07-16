@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Прокрутити вниз",
   "paginationPrevious": "Назад",
   "paginationNext": "Далі",
-  "popoverSemanticsLabel": "Спливаюче вікно"
+  "popoverSemanticsLabel": "Спливаюче вікно",
+  "multiSelectHint": "Виберіть елементи"
 }

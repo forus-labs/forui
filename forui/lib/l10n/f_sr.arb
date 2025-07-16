@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Померите надоле",
   "paginationPrevious": "Претходно",
   "paginationNext": "Следеће",
-  "popoverSemanticsLabel": "Искачући прозор"
+  "popoverSemanticsLabel": "Искачући прозор",
+  "multiSelectHint": "Изаберите ставке"
 }

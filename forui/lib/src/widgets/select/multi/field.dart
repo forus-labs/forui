@@ -18,11 +18,9 @@ class Field<T> extends FormField<Set<T>> {
   final ValueWidgetBuilder<(FMultiSelectStyle, Set<WidgetState>)>? suffixBuilder;
   final Widget? label;
   final Widget? description;
-  final ValueChanged<Set<T>>? onChange;
   final Widget? hint;
   final TextAlign textAlign;
   final TextDirection? textDirection;
-  final bool canRequestFocus;
   final bool clearable;
   final AlignmentGeometry anchor;
   final AlignmentGeometry fieldAnchor;
@@ -31,6 +29,7 @@ class Field<T> extends FormField<Set<T>> {
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   final Offset offset;
   final FHidePopoverRegion hideOnTapOutside;
+  final ValueChanged<Set<T>>? onChange;
   final Widget Function(BuildContext, FMultiSelectController<T>) popoverBuilder;
 
   Field({
@@ -42,11 +41,9 @@ class Field<T> extends FormField<Set<T>> {
     required this.suffixBuilder,
     required this.label,
     required this.description,
-    required this.onChange,
     required this.hint,
     required this.textAlign,
     required this.textDirection,
-    required this.canRequestFocus,
     required this.clearable,
     required this.anchor,
     required this.fieldAnchor,
@@ -55,6 +52,7 @@ class Field<T> extends FormField<Set<T>> {
     required this.shift,
     required this.offset,
     required this.hideOnTapOutside,
+    required this.onChange,
     required this.popoverBuilder,
     required super.enabled,
     required super.autovalidateMode,
@@ -70,6 +68,8 @@ class Field<T> extends FormField<Set<T>> {
          initialValue: initialValue ?? controller?.value,
          builder: (formField) {
            final state = formField as _State<T>;
+           final localizations = FLocalizations.of(state.context) ?? FDefaultLocalizations();
+
            return Directionality(
              textDirection: textDirection ?? TextDirection.ltr,
              child: FLabel(
@@ -110,21 +110,35 @@ class Field<T> extends FormField<Set<T>> {
                      builder: (context, states, child) => DecoratedBox(
                        decoration: style.fieldStyle.decoration.resolve(states),
                        child: Padding(
-                         padding: style.fieldStyle.padding,
+                         padding: style.fieldStyle.contentPadding,
                          child: DefaultTextStyle.merge(
                            textAlign: textAlign,
                            child: Row(
                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                              children: [
-                               Wrap(
-                                 // TODO: Add pills
-                                 children: [
-                                   DefaultTextStyle.merge(
-                                     style: style.fieldStyle.hintTextStyle.resolve(states),
-                                     child: hint ?? const Text('TODO'),
-                                   ),
-                                 ],
+                               if (prefixBuilder case final prefix?) prefix(context, (style, states), null),
+                               Expanded(
+                                 child: Wrap(
+                                   crossAxisAlignment: WrapCrossAlignment.center,
+                                   spacing: style.fieldStyle.spacing,
+                                   runSpacing: style.fieldStyle.runSpacing,
+                                   children: [
+                                     for (final value in state._controller.value)
+                                       FMultiSelectTag(
+                                         label: Text(value.toString()),
+                                         onPress: () => state._controller.update(value, add: false),
+                                       ),
+                                     Padding(
+                                       padding: style.fieldStyle.hintPadding,
+                                       child: DefaultTextStyle.merge(
+                                         style: style.fieldStyle.hintTextStyle.resolve(states),
+                                         child: hint ?? Text(localizations.multiSelectHint),
+                                       ),
+                                     ),
+                                   ],
+                                 ),
                                ),
+                               if (suffixBuilder case final suffix?) suffix(context, (style, states), null),
                              ],
                            ),
                          ),
@@ -161,7 +175,6 @@ class Field<T> extends FormField<Set<T>> {
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(EnumProperty('textAlign', textAlign))
       ..add(EnumProperty('textDirection', textDirection))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
       ..add(DiagnosticsProperty('anchor', anchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
@@ -272,17 +285,25 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   @override
   final FWidgetStateMap<BoxDecoration> decoration;
 
-  /// The multi-select field's padding. Defaults to `const EdgeInsets.only(left: 14, top: 10, bottom: 10, right: 8)`.
+  /// The multi-select field's padding. Defaults to `const EdgeInsets.only(left: 14, top: 6, bottom: 6, right: 8)`.
   @override
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry contentPadding;
+
+  /// The spacing between tags. Defaults to 4.
+  @override
+  final double spacing;
+
+  /// The spacing between the rows of tags. Defaults to 4.
+  @override
+  final double runSpacing;
 
   /// The multi-select field hint's text style.
   @override
   final FWidgetStateMap<TextStyle> hintTextStyle;
 
-  /// The multi-select field's icon padding. Defaults to `EdgeInsets.zero`.
+  /// The multi-select field's hint padding. Defaults to `const EdgeInsets.symmetric(horizontal: 4, vertical: 4)`.
   @override
-  final EdgeInsetsGeometry iconPadding;
+  final EdgeInsetsGeometry hintPadding;
 
   /// The multi-select field's icon style.
   @override
@@ -301,8 +322,10 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
-    this.padding = const EdgeInsets.only(left: 14, top: 10, bottom: 10, right: 8),
-    this.iconPadding = EdgeInsets.zero,
+    this.contentPadding = const EdgeInsets.only(left: 10, top: 6, bottom: 6, right: 8),
+    this.hintPadding = const EdgeInsetsGeometry.directional(start: 4, top: 4, bottom: 4),
+    this.spacing = 4,
+    this.runSpacing = 4,
     super.labelPadding,
     super.descriptionPadding,
     super.errorPadding,

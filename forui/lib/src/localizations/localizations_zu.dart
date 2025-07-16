@@ -93,6 +93,9 @@ class FLocalizationsZu extends FLocalizations {
   String get popoverSemanticsLabel => 'Iwindi eliqhamukayo';
 
   @override
+  String get multiSelectHint => 'Khetha izinto';
+
+  @override
   String get selectHint => 'Khetha into';
 
   @override

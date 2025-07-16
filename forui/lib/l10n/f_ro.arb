@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Derulează în jos",
   "paginationPreviousSemanticsLabel": "Anterior",
   "paginationNextSemanticsLabel": "Înainte",
-  "popoverSemanticsLabel": "Fereastră contextuală"
+  "popoverSemanticsLabel": "Fereastră contextuală",
+  "multiSelectHint": "Selectează elemente"
 }

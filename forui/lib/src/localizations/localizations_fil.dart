@@ -93,6 +93,9 @@ class FLocalizationsFil extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get multiSelectHint => 'Pumili ng mga item';
+
+  @override
   String get selectHint => 'Pumili ng item';
 
   @override

@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "向下捲動",
   "paginationPreviousSemanticsLabel": "上一個",
   "paginationNextSemanticsLabel": "下一個",
-  "popoverSemanticsLabel": "彈出視窗"
+  "popoverSemanticsLabel": "彈出視窗",
+  "multiSelectHint": "選擇項目"
 }

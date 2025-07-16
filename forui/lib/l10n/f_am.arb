@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "ወደ ታች ሸብልል",
   "paginationPreviousSemanticsLabel": "ቀዳሚ",
   "paginationNextSemanticsLabel": "ቀጣይ",
-  "popoverSemanticsLabel": "ፖፖቨር"
+  "popoverSemanticsLabel": "ፖፖቨር",
+  "multiSelectHint": "ንጥሎች ይምረጡ"
 }

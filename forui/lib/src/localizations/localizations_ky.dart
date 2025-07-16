@@ -93,6 +93,9 @@ class FLocalizationsKy extends FLocalizations {
   String get popoverSemanticsLabel => 'Калкып чыгуучу терезе';
 
   @override
+  String get multiSelectHint => 'Элементтерди тандоо';
+
+  @override
   String get selectHint => 'Элементти тандаңыз';
 
   @override

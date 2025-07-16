@@ -93,6 +93,9 @@ class FLocalizationsNb extends FLocalizations {
   String get popoverSemanticsLabel => 'Hurtigvindu';
 
   @override
+  String get multiSelectHint => 'Velg elementer';
+
+  @override
   String get selectHint => 'Velg et element';
 
   @override

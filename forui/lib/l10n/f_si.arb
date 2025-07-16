@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "පහළට අනුචලනය කරන්න",
   "paginationPrevious": "පෙර",
   "paginationNext": "ඊළඟ",
-  "popoverSemanticsLabel": "පොප්ඕවර්"
+  "popoverSemanticsLabel": "පොප්ඕවර්",
+  "multiSelectHint": "අයිතම තෝරන්න"
 }

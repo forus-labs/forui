@@ -93,6 +93,9 @@ class FLocalizationsPl extends FLocalizations {
   String get popoverSemanticsLabel => 'Okno wyskakujące';
 
   @override
+  String get multiSelectHint => 'Wybierz elementy';
+
+  @override
   String get selectHint => 'Wybierz element';
 
   @override

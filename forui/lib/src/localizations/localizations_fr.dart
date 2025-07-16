@@ -93,6 +93,9 @@ class FLocalizationsFr extends FLocalizations {
   String get popoverSemanticsLabel => 'Fenêtre contextuelle';
 
   @override
+  String get multiSelectHint => 'Sélectionner des éléments';
+
+  @override
   String get selectHint => 'Sélectionnez un élément';
 
   @override
@@ -164,6 +167,9 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get popoverSemanticsLabel => 'Fenêtre contextuelle';
+
+  @override
+  String get multiSelectHint => 'Sélectionner des éléments';
 
   @override
   String get selectHint => 'Sélectionnez un élément';

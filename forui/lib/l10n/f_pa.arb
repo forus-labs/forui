@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "ਹੇਠਾਂ ਸਕ੍ਰੋਲ ਕਰੋ",
   "paginationPreviousSemanticsLabel": "ਪਿਛਲਾ",
   "paginationNextSemanticsLabel": "ਅੱਗੇ",
-  "popoverSemanticsLabel": "ਪੌਪਓਵਰ"
+  "popoverSemanticsLabel": "ਪੌਪਓਵਰ",
+  "multiSelectHint": "ਆਈਟਮਾਂ ਚੁਣੋ"
 }

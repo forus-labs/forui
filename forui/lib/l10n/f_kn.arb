@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "ಕೆಳಗೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ",
   "paginationPrevious": "ಹಿಂದಿನ",
   "paginationNext": "ಮುಂದಿನ",
-  "popoverSemanticsLabel": "ಪಾಪ್‌ಓವರ್"
+  "popoverSemanticsLabel": "ಪಾಪ್‌ಓವರ್",
+  "multiSelectHint": "ಐಟಮ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ"
 }

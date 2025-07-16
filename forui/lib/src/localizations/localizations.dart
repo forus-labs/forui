@@ -382,6 +382,12 @@ abstract class FLocalizations {
   /// **'Popover'**
   String get popoverSemanticsLabel;
 
+  /// The hint text for the multi-select field.
+  ///
+  /// In en, this message translates to:
+  /// **'Select items'**
+  String get multiSelectHint;
+
   /// The hint text for the select field.
   ///
   /// In en, this message translates to:

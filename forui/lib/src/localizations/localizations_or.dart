@@ -93,6 +93,9 @@ class FLocalizationsOr extends FLocalizations {
   String get popoverSemanticsLabel => 'ପପଓଭର';
 
   @override
+  String get multiSelectHint => 'ଆଇଟମ୍ ବାଛନ୍ତୁ';
+
+  @override
   String get selectHint => 'ଏକ ଆଇଟମ୍ ଚୟନ କରନ୍ତୁ';
 
   @override

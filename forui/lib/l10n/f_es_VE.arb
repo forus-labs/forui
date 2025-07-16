@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Desplazarse hacia abajo",
   "paginationPrevious": "Anterior",
   "paginationNext": "Siguiente",
-  "popoverSemanticsLabel": "Ventana emergente"
+  "popoverSemanticsLabel": "Ventana emergente",
+  "multiSelectHint": "Seleccionar elementos"
 }

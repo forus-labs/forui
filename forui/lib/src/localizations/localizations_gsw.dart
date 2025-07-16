@@ -93,6 +93,9 @@ class FLocalizationsGsw extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get multiSelectHint => 'Elemente uswähle';
+
+  @override
   String get selectHint => 'Wähle e Element';
 
   @override

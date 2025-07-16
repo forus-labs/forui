@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "גלול למטה",
   "paginationPrevious": "הקודם",
   "paginationNext": "הבא",
-  "popoverSemanticsLabel": "חלון קופץ"
+  "popoverSemanticsLabel": "חלון קופץ",
+  "multiSelectHint": "בחר פריטים"
 }

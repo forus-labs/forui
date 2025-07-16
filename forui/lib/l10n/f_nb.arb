@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Rull ned",
   "paginationPreviousSemanticsLabel": "Forrige",
   "paginationNextSemanticsLabel": "Neste",
-  "popoverSemanticsLabel": "Hurtigvindu"
+  "popoverSemanticsLabel": "Hurtigvindu",
+  "multiSelectHint": "Velg elementer"
 }

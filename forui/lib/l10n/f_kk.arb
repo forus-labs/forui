@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Төмен айналдыру",
   "paginationPrevious": "Алдыңғы",
   "paginationNext": "Келесі",
-  "popoverSemanticsLabel": "Қалқымалы терезе"
+  "popoverSemanticsLabel": "Қалқымалы терезе",
+  "multiSelectHint": "Элементтерді таңдаңыз"
 }
