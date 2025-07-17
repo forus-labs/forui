@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -122,14 +121,7 @@ void main() {
 
     testWidgets('disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(
-          child: FMultiSelect.fromMap(
-            letters,
-            enabled: false,
-            clearable: true,
-            key: key,
-          ),
-        ),
+        TestScaffold.app(child: FMultiSelect.fromMap(letters, enabled: false, clearable: true, key: key)),
       );
 
       await tester.tap(find.byKey(key));
@@ -137,7 +129,6 @@ void main() {
 
       expect(find.text('A'), findsNothing);
     });
-
 
     testWidgets('tag clears itself', (tester) async {
       await tester.pumpWidget(

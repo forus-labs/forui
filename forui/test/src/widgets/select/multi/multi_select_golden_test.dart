@@ -253,7 +253,10 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.byIcon(FIcons.x).last));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/${theme.name}/clearable-hovered.png'));
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('multi-select/${theme.name}/clearable-hovered.png'),
+      );
     });
 
     testWidgets('enabled', (tester) async {

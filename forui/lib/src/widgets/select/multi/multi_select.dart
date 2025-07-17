@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/multi/field.dart';
-import 'package:meta/meta.dart';
 
 part 'multi_select.style.dart';
 

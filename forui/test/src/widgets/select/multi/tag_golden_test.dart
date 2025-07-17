@@ -47,11 +47,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FMultiSelectTag(
-            label: const Text('Tag'),
-            onPress: () {},
-            key: key,
-          ),
+          child: FMultiSelectTag(label: const Text('Tag'), onPress: () {}, key: key),
         ),
       );
 
@@ -64,12 +60,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FMultiSelectTag(
-            focusNode: focus,
-            label: const Text('Tag'),
-            onPress: () {},
-            key: key,
-          ),
+          child: FMultiSelectTag(focusNode: focus, label: const Text('Tag'), onPress: () {}, key: key),
         ),
       );
 
