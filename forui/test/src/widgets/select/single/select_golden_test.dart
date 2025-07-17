@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import '../../test_scaffold.dart';
+import '../../../test_scaffold.dart';
 
 const letters = {
   'A': 'A',
@@ -261,6 +261,84 @@ void main() {
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/empty.png'));
+    });
+
+    testWidgets('enabled', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect<String>.fromMap(
+            letters,
+            initialValue: 'A',
+            label: const Text('Letters'),
+            description: const Text('Select your favorite letters'),
+            clearable: true,
+            key: key,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/enabled.png'));
+    });
+
+    testWidgets('disabled', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect.fromMap(
+            letters,
+            enabled: false,
+            initialValue: 'A',
+            label: const Text('Letters'),
+            description: const Text('Select your favorite letters'),
+            clearable: true,
+            key: key,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/disabled.png'));
+    });
+
+    testWidgets('error', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FSelect.fromMap(
+            letters,
+            initialValue: 'A',
+            label: const Text('Letters'),
+            description: const Text('Select your favorite letters'),
+            autovalidateMode: AutovalidateMode.always,
+            validator: (value) => value == null ? null : 'Too many letters',
+            clearable: true,
+            key: key,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/error.png'));
     });
   }
 }

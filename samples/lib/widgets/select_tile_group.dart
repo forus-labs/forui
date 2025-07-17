@@ -27,7 +27,7 @@ class SelectTileGroupPage extends StatefulSample {
 }
 
 class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage> {
-  final controller = FSelectTileGroupController(values: {Sidebar.recents});
+  final controller = FSelectTileGroupController(value: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -66,7 +66,7 @@ class ScrollableSelectTileGroupPage extends StatefulSample {
 }
 
 class _ScrollableSelectTileGroupPageState extends StatefulSampleState<ScrollableSelectTileGroupPage> {
-  final controller = FSelectTileGroupController(values: {Sidebar.recents});
+  final controller = FSelectTileGroupController(value: {Sidebar.recents});
 
   @override
   Widget sample(BuildContext context) => Column(
@@ -105,7 +105,7 @@ class LazySelectTileGroupPage extends StatefulSample {
 }
 
 class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGroupPage> {
-  final controller = FMultiValueNotifier(values: {1});
+  final controller = FMultiValueNotifier(value: {1});
 
   @override
   Widget sample(BuildContext context) => Column(

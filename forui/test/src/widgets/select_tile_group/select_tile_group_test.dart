@@ -138,7 +138,7 @@ void main() {
         child: Form(
           key: key,
           child: FSelectTileGroup<int>(
-            selectController: autoDispose(FMultiValueNotifier(values: {1})),
+            selectController: autoDispose(FMultiValueNotifier(value: {1})),
             children: const [FSelectTile(title: Text('1'), value: 1)],
             onSaved: (value) => initial = value,
           ),

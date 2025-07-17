@@ -61,7 +61,7 @@ void main() {
 
   group('FMultiSelectController', () {
     test('dispose', () {
-      final controller = FMultiSelectController(vsync: const TestVSync(), values: {1})..dispose();
+      final controller = FMultiSelectController(vsync: const TestVSync(), value: {1})..dispose();
 
       expect(controller.popover.disposed, true);
     });

@@ -36,7 +36,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFMultiSelectController();
-            return FMultiSelect(controller: controller, children: const []);
+            return FMultiSelect(controller: controller, format: (v) => const SizedBox(), children: const []);
           },
         ),
       ),

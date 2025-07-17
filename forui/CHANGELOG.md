@@ -1,7 +1,10 @@
 ## 0.15.0
 
 ### `FMultiSelect` (new)
+* Add `FMultiSelect`.
 * Add `FMultiSelectController`.
+* Add `FMultiSelectStyle`.
+* Add `FMultiSelectTag`.
 
 
 ### Others

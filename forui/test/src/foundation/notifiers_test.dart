@@ -110,7 +110,7 @@ void main() {
 
   group('FMultiValueNotifier - multi', () {
     test('contains(...)', () {
-      final notifier = FMultiValueNotifier(values: {1});
+      final notifier = FMultiValueNotifier(value: {1});
 
       expect(notifier.contains(1), true);
       expect(notifier.contains(2), false);
@@ -127,7 +127,7 @@ void main() {
     });
 
     test('should initialize with given values', () {
-      final notifier = FMultiValueNotifier(values: {1, 2, 3})
+      final notifier = FMultiValueNotifier(value: {1, 2, 3})
         ..addListener(() => count++)
         ..addUpdateListener((_) => changeCount++);
 
@@ -154,7 +154,7 @@ void main() {
 
     test('should remove a value when removed', () {
       (int, bool)? value;
-      final notifier = FMultiValueNotifier(values: {1, 2})
+      final notifier = FMultiValueNotifier(value: {1, 2})
         ..addListener(() => count++)
         ..addUpdateListener((changed) => value = changed);
 
@@ -170,7 +170,7 @@ void main() {
 
     test('should not selected a value when max limit is reached', () {
       (int, bool)? value;
-      final notifier = FMultiValueNotifier(max: 2, values: {1, 2})
+      final notifier = FMultiValueNotifier(max: 2, value: {1, 2})
         ..addListener(() => count++)
         ..addUpdateListener((changed) => value = changed)
         ..update(3, add: true);
@@ -182,7 +182,7 @@ void main() {
 
     test('should not remove a value when min limit is reached', () {
       (int, bool)? value;
-      final notifier = FMultiValueNotifier(min: 2, values: {1, 2})
+      final notifier = FMultiValueNotifier(min: 2, value: {1, 2})
         ..addListener(() => count++)
         ..addUpdateListener((changed) => value = changed)
         ..update(1, add: false);

@@ -79,13 +79,13 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   /// * [min] < 0.
   /// * [max] < 0.
   /// * [min] > [max].
-  FMultiValueNotifier({int min = 0, int? max, Set<T>? values})
+  FMultiValueNotifier({int min = 0, int? max, Set<T>? value})
     : _min = min,
       _max = max,
       assert(min >= 0, 'The min must be greater than or equal to 0.'),
       assert(max == null || max >= 0, 'The max must be greater than or equal to 0.'),
       assert(max == null || min <= max, 'The max must be greater than or equal to the min.'),
-      super(values ?? {});
+      super(value ?? {});
 
   /// Creates a [FMultiValueNotifier] that allows only one element at a time.
   factory FMultiValueNotifier.radio({T? value}) = _RadioNotifier<T>;
@@ -158,7 +158,7 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
 }
 
 class _RadioNotifier<T> extends FMultiValueNotifier<T> {
-  _RadioNotifier({T? value}) : super(values: {?value});
+  _RadioNotifier({T? value}) : super(value: {?value});
 
   @override
   void update(T value, {required bool add}) {

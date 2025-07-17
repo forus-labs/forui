@@ -89,7 +89,7 @@ class FMultiSelectController<T> extends FMultiValueNotifier<T> {
     required TickerProvider vsync,
     super.min,
     super.max,
-    super.values,
+    super.value,
     Duration popoverAnimationDuration = const Duration(milliseconds: 100),
   }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration);
 

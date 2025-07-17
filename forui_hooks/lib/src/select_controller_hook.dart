@@ -70,7 +70,7 @@ class _SelectHookState<T> extends HookState<FSelectController<T>, _SelectHook<T>
 /// Creates a [FMultiSelectController] that allows an item to be selected.
 FMultiSelectController<T> useFMultiSelectController<T>({
   TickerProvider? vsync,
-  Set<T>? values,
+  Set<T>? value,
   int min = 0,
   int? max,
   Duration popoverAnimationDuration = const Duration(milliseconds: 100),
@@ -78,7 +78,7 @@ FMultiSelectController<T> useFMultiSelectController<T>({
 }) => use(
   _MultiSelectHook(
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
-    values: values ?? {},
+    value: value ?? {},
     min: min,
     max: max,
     popoverAnimationDuration: popoverAnimationDuration,
@@ -89,7 +89,7 @@ FMultiSelectController<T> useFMultiSelectController<T>({
 
 class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
   final TickerProvider vsync;
-  final Set<T> values;
+  final Set<T> value;
   final int min;
   final int? max;
   final Duration popoverAnimationDuration;
@@ -97,7 +97,7 @@ class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
 
   const _MultiSelectHook({
     required this.vsync,
-    required this.values,
+    required this.value,
     required this.min,
     required this.max,
     required this.popoverAnimationDuration,
@@ -113,7 +113,7 @@ class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('vsync', vsync))
-      ..add(IterableProperty('values', values))
+      ..add(IterableProperty('value', value))
       ..add(IntProperty('min', min))
       ..add(IntProperty('max', max))
       ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
@@ -123,7 +123,7 @@ class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
 class _MultiSelectHookState<T> extends HookState<FMultiSelectController<T>, _MultiSelectHook<T>> {
   late final FMultiSelectController<T> _controller = FMultiSelectController<T>(
     vsync: hook.vsync,
-    values: hook.values,
+    value: hook.value,
     min: hook.min,
     max: hook.max,
     popoverAnimationDuration: hook.popoverAnimationDuration,

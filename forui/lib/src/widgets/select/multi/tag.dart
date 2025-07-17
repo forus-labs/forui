@@ -7,17 +7,19 @@ part 'tag.style.dart';
 
 /// A tag in a [FMultiSelect].
 class FMultiSelectTag extends StatelessWidget {
-  /// The
+  /// The style.
   final FMultiSelectTagStyle Function(FMultiSelectTagStyle)? style;
 
   /// The label.
   final Widget label;
 
   /// The callback when the tag is pressed.
-  final VoidCallback onPress;
+  final VoidCallback? onPress;
+
+  // TODO: Add more fields
 
   /// Creates a [FMultiSelectTag].
-  const FMultiSelectTag({required this.label, required this.onPress, this.style, super.key});
+  const FMultiSelectTag({required this.label, this.onPress, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,10 +56,14 @@ class FMultiSelectTag extends StatelessWidget {
 /// A [FMultiSelectTag]'s style.
 class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions {
   /// The decoration.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
   final FWidgetStateMap<Decoration> decoration;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(vertical: 4, horizontal: 8)`.
+  ///
+  /// The vertical padding should typically be the same as the [FMultiSelectFieldStyle.hintPadding].
   @override
   final EdgeInsets padding;
 
@@ -66,10 +72,14 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   final double spacing;
 
   /// The label's text style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
   final FWidgetStateMap<TextStyle> labelTextStyle;
 
   /// The icon's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
