@@ -17,7 +17,7 @@ part 'multi_select.style.dart';
 /// `FMultiSelect`, `FSelectSection`, and `FSelectItem` (e.g., `FMultiSelect<MyType>`).
 ///
 /// See:
-/// * https://forui.dev/docs/form/select for working examples.
+/// * https://forui.dev/docs/form/multi-select for working examples.
 /// * [FMultiSelectController] for customizing the behavior of a select.
 /// * [FMultiSelectStyle] for customizing the appearance of a select.
 abstract class FMultiSelect<T> extends StatelessWidget {

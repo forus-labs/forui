@@ -24,30 +24,30 @@ const fruits = [
 ];
 
 @RoutePage()
-class SelectPage extends Sample {
-  SelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class MultiSelectPage extends Sample {
+  MultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
-      hint: 'Select a fruit',
-      format: (s) => s,
+    child: FMultiSelect<String>(
+      hint: const Text('Select a fruit'),
+      format: Text.new,
       children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
   );
 }
 
 @RoutePage()
-class DetailedSelectPage extends Sample {
-  DetailedSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class DetailedMultiSelectPage extends Sample {
+  DetailedMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
-      hint: 'Type',
-      format: (s) => s,
+    child: FMultiSelect<String>(
+      hint: const Text('Type'),
+      format: Text.new,
       children: [
         FSelectItem.from(
           prefix: const Icon(FIcons.bug),
@@ -73,15 +73,28 @@ class DetailedSelectPage extends Sample {
 }
 
 @RoutePage()
-class SectionSelectPage extends Sample {
-  SectionSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class SortedMultiSelectPage extends Sample {
+  SortedMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+
+  @override
+  Widget sample(BuildContext context) => FMultiSelect<String>(
+    hint: const Text('Select favorite fruits'),
+    format: Text.new,
+    sort: (a, b) => a.compareTo(b),
+    children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+  );
+}
+
+@RoutePage()
+class SectionMultiSelectPage extends Sample {
+  SectionMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
-      hint: 'Select a timezone',
-      format: (s) => s,
+    child: FMultiSelect<String>(
+      hint: const Text('Select a timezone'),
+      format: Text.new,
       children: [
         FSelectSection.fromMap(
           label: const Text('North America'),
@@ -156,16 +169,16 @@ class SectionSelectPage extends Sample {
 }
 
 @RoutePage()
-class DividerSelectPage extends Sample {
-  DividerSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class DividerMultiSelectPage extends Sample {
+  DividerMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
-      hint: 'Select a level',
+    child: FMultiSelect<String>(
+      hint: const Text('Select a level'),
       contentDivider: FItemDivider.full,
-      format: (s) => s,
+      format: Text.new,
       children: [
         FSelectSection.fromMap(
           label: const Text('Level 1'),
@@ -188,15 +201,15 @@ class DividerSelectPage extends Sample {
 }
 
 @RoutePage()
-class SyncSelectPage extends Sample {
-  SyncSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class SyncMultiSelectPage extends Sample {
+  SyncMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>.search(
-      hint: 'Select a fruit',
-      format: (s) => s,
+    child: FMultiSelect<String>.search(
+      hint: const Text('Select a fruit'),
+      format: Text.new,
       filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
       contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
     ),
@@ -204,15 +217,15 @@ class SyncSelectPage extends Sample {
 }
 
 @RoutePage()
-class AsyncSelectPage extends Sample {
-  AsyncSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class AsyncMultiSelectPage extends Sample {
+  AsyncMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>.search(
-      hint: 'Select a fruit',
-      format: (s) => s,
+    child: FMultiSelect<String>.search(
+      hint: const Text('Select a fruit'),
+      format: Text.new,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
@@ -223,15 +236,15 @@ class AsyncSelectPage extends Sample {
 }
 
 @RoutePage()
-class AsyncLoadingSelectPage extends Sample {
-  AsyncLoadingSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class AsyncLoadingMultiSelectPage extends Sample {
+  AsyncLoadingMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>.search(
-      hint: 'Select a fruit',
-      format: (s) => s,
+    child: FMultiSelect<String>.search(
+      hint: const Text('Select a fruit'),
+      format: Text.new,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
@@ -246,15 +259,15 @@ class AsyncLoadingSelectPage extends Sample {
 }
 
 @RoutePage()
-class AsyncErrorSelectPage extends Sample {
-  AsyncErrorSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class AsyncErrorMultiSelectPage extends Sample {
+  AsyncErrorMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>.search(
-      hint: 'Select a fruit',
-      format: (s) => s,
+    child: FMultiSelect<String>.search(
+      hint: const Text('Select a fruit'),
+      format: Text.new,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         throw StateError('Error loading data');
@@ -272,44 +285,15 @@ class AsyncErrorSelectPage extends Sample {
 }
 
 @RoutePage()
-class ToggleableSelectPage extends StatefulSample {
-  ToggleableSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
-
-  @override
-  State<ToggleableSelectPage> createState() => ToggleableSelectPageState();
-}
-
-class ToggleableSelectPageState extends StatefulSampleState<ToggleableSelectPage> with SingleTickerProviderStateMixin {
-  late final _controller = FSelectController(vsync: this, value: 'Apple', toggleable: true);
-
-  @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15.0),
-    child: FSelect<String>(
-      hint: 'Select a fruit',
-      format: (s) => s,
-      controller: _controller,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
-    ),
-  );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-}
-
-@RoutePage()
-class ClearableSelectPage extends Sample {
-  ClearableSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class ClearableMultiSelectPage extends Sample {
+  ClearableMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
-      hint: 'Select a fruit',
-      format: (s) => s,
+    child: FMultiSelect<String>(
+      hint: const Text('Select a fruit'),
+      format: Text.new,
       clearable: true,
       children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
@@ -317,7 +301,7 @@ class ClearableSelectPage extends Sample {
 }
 
 @RoutePage()
-class FormatSelectPage extends Sample {
+class FormatMultiSelectPage extends Sample {
   static const users = [
     (firstName: 'Bob', lastName: 'Ross'),
     (firstName: 'John', lastName: 'Doe'),
@@ -325,29 +309,29 @@ class FormatSelectPage extends Sample {
     (firstName: 'Peter', lastName: 'Parker'),
   ];
 
-  FormatSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+  FormatMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<({String firstName, String lastName})>(
-      hint: 'Select a user',
-      format: (user) => '${user.firstName} ${user.lastName}',
+    child: FMultiSelect<({String firstName, String lastName})>(
+      hint: const Text('Select a user'),
+      format: (user) => Text('${user.firstName} ${user.lastName}'),
       children: [for (final user in users) FSelectItem(user.firstName, user)],
     ),
   );
 }
 
 @RoutePage()
-class ScrollHandlesSelectPage extends Sample {
-  ScrollHandlesSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class ScrollHandlesMultiSelectPage extends Sample {
+  ScrollHandlesMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
-      hint: 'Select a fruit',
-      format: (s) => s,
+    child: FMultiSelect<String>(
+      hint: const Text('Select a fruit'),
+      format: Text.new,
       contentScrollHandles: true,
       children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
@@ -355,18 +339,18 @@ class ScrollHandlesSelectPage extends Sample {
 }
 
 @RoutePage()
-class FormSelectPage extends StatefulSample {
-  FormSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+class FormMultiSelectPage extends StatefulSample {
+  FormMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
-  State<FormSelectPage> createState() => _FormSelectPageState();
+  State<FormMultiSelectPage> createState() => _FormMultiSelectPageState();
 }
 
-class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with SingleTickerProviderStateMixin {
+class _FormMultiSelectPageState extends StatefulSampleState<FormMultiSelectPage> with SingleTickerProviderStateMixin {
   static const _departments = ['Engineering', 'Marketing', 'Sales', 'Human Resources', 'Finance'];
 
   final _formKey = GlobalKey<FormState>();
-  late final _departmentController = FSelectController<String>(vsync: this);
+  late final _departmentController = FMultiSelectController<String>(vsync: this);
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -376,12 +360,12 @@ class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with Sing
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FSelect<String>(
+          FMultiSelect<String>(
             controller: _departmentController,
             label: const Text('Department'),
-            description: const Text('Choose your dream department'),
-            hint: 'Select a department',
-            format: (s) => s,
+            description: const Text('Choose your dream department(s)'),
+            hint: const Text('Select departments'),
+            format: Text.new,
             validator: _validateDepartment,
             children: [for (final department in _departments) FSelectItem(department, department)],
           ),
@@ -390,7 +374,7 @@ class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with Sing
             child: const Text('Submit'),
             onPress: () {
               if (_formKey.currentState!.validate()) {
-                // Form is valid, do something with department.
+                // Form is valid, do something with departments
               }
             },
           ),
@@ -399,9 +383,9 @@ class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with Sing
     ),
   );
 
-  String? _validateDepartment(String? department) {
-    if (department == null) {
-      return 'Please select a department';
+  String? _validateDepartment(Set<String> departments) {
+    if (departments.isEmpty) {
+      return 'Please select departments';
     }
     return null;
   }
