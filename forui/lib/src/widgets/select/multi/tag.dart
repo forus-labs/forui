@@ -10,23 +10,76 @@ class FMultiSelectTag extends StatelessWidget {
   /// The style.
   final FMultiSelectTagStyle Function(FMultiSelectTagStyle)? style;
 
+  /// {@macro forui.foundation.doc_templates.autofocus}
+  final bool autofocus;
+
+  /// {@macro forui.foundation.doc_templates.focusNode}
+  final FocusNode? focusNode;
+
+  /// {@macro forui.foundation.doc_templates.onFocusChange}
+  final ValueChanged<bool>? onFocusChange;
+
+  /// {@macro forui.foundation.FTappable.onHoverChange}
+  final ValueChanged<bool>? onHoverChange;
+
+  /// {@macro forui.foundation.FTappable.onStateChange}
+  final ValueChanged<Set<WidgetState>>? onStateChange;
+
   /// The label.
   final Widget label;
 
-  /// The callback when the tag is pressed.
+  /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
 
-  // TODO: Add more fields
+  /// {@macro forui.foundation.FTappable.onLongPress}
+  final VoidCallback? onLongPress;
+
+  /// {@macro forui.foundation.FTappable.onSecondaryPress}
+  final VoidCallback? onSecondaryPress;
+
+  /// {@macro forui.foundation.FTappable.onSecondaryLongPress}
+  final VoidCallback? onSecondaryLongPress;
+
+  /// {@macro forui.foundation.FTappable.shortcuts}
+  final Map<ShortcutActivator, Intent>? shortcuts;
+
+  /// {@macro forui.foundation.FTappable.actions}
+  final Map<Type, Action<Intent>>? actions;
 
   /// Creates a [FMultiSelectTag].
-  const FMultiSelectTag({required this.label, this.onPress, this.style, super.key});
+  const FMultiSelectTag({
+    required this.label,
+    this.style,
+    this.autofocus = false,
+    this.focusNode,
+    this.onFocusChange,
+    this.onHoverChange,
+    this.onStateChange,
+    this.onPress,
+    this.onLongPress,
+    this.onSecondaryPress,
+    this.onSecondaryLongPress,
+    this.shortcuts,
+    this.actions,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.multiSelectStyle.tagStyle) ?? context.theme.multiSelectStyle.tagStyle;
     return FTappable(
       style: style.tappableStyle,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      onHoverChange: onHoverChange,
+      onStateChange: onStateChange,
       onPress: onPress,
+      onLongPress: onLongPress,
+      onSecondaryPress: onSecondaryPress,
+      onSecondaryLongPress: onSecondaryLongPress,
+      shortcuts: shortcuts,
+      actions: actions,
       builder: (context, states, child) => DecoratedBox(
         decoration: style.decoration.resolve(states),
         child: Padding(
@@ -36,7 +89,10 @@ class FMultiSelectTag extends StatelessWidget {
             spacing: style.spacing,
             children: [
               DefaultTextStyle(style: style.labelTextStyle.resolve(states), child: label),
-              IconTheme(data: style.iconStyle.resolve(states), child: const Icon(FIcons.x)),
+              FFocusedOutline(
+                focused: states.contains(WidgetState.focused),
+                child: IconTheme(data: style.iconStyle.resolve(states), child: const Icon(FIcons.x)),
+              ),
             ],
           ),
         ),
@@ -49,7 +105,17 @@ class FMultiSelectTag extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty.has('style', style))
-      ..add(ObjectFlagProperty.has('onPress', onPress));
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
+      ..add(DiagnosticsProperty('shortcuts', shortcuts))
+      ..add(DiagnosticsProperty('actions', actions));
   }
 }
 
@@ -83,8 +149,13 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
+  /// The tappable style.
   @override
   final FTappableStyle tappableStyle;
+
+  /// The focused outline style.
+  @override
+  final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FMultiSelectTagStyle].
   FMultiSelectTagStyle({
@@ -92,6 +163,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
     required this.labelTextStyle,
     required this.iconStyle,
     required this.tappableStyle,
+    required this.focusedOutlineStyle,
     this.padding = const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
     this.spacing = 4,
   });
@@ -119,5 +191,6 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
           WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 15),
         }),
         tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+        focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

@@ -321,7 +321,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   /// * [WidgetState.hovered]
   /// * [WidgetState.pressed]
   @override
-  final FWidgetStateMap<BoxDecoration> decoration;
+  final FWidgetStateMap<Decoration> decoration;
 
   /// The multi-select field's padding. Defaults to `EdgeInsets.only(start: 10, top: 6, bottom: 6, end: 8)`.
   @override
