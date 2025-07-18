@@ -82,7 +82,7 @@ FMultiSelectController<T> useFMultiSelectController<T>({
     min: min,
     max: max,
     popoverAnimationDuration: popoverAnimationDuration,
-    debugLabel: 'useFSelectController',
+    debugLabel: 'useFMultiSelectController',
     keys: keys,
   ),
 );
