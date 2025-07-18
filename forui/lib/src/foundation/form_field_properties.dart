@@ -31,6 +31,7 @@ mixin FFormFieldProperties<T> {
   /// {@endtemplate}
   FormFieldSetter<T>? get onSaved;
 
+  /// {@template forui.foundation.form_field_properties.validator}
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.
   ///
@@ -40,8 +41,10 @@ mixin FFormFieldProperties<T> {
   /// Alternating between error and normal states can cause the height of the [FTextField] to change if no other
   /// subtext decoration is set on the field. To create a field whose height is fixed regardless of whether or not an
   /// error is displayed, wrap the [FTextField] in a fixed height parent like [SizedBox].
+  /// {@endtemplate}
   FormFieldValidator<T>? get validator;
 
+  /// {@template forui.foundation.form_field_properties.autovalidateMode}
   /// Used to enable/disable this form field's auto validation and update its error text.
   ///
   /// Defaults to [AutovalidateMode.disabled].
@@ -49,6 +52,7 @@ mixin FFormFieldProperties<T> {
   /// If [AutovalidateMode.onUserInteraction], this form field will only auto-validate after its content changes. If
   /// [AutovalidateMode.always], it will auto-validate even without user interaction. If [AutovalidateMode.disabled],
   /// auto-validation will be disabled.
+  /// {@endtemplate}
   AutovalidateMode get autovalidateMode;
 
   /// {@template forui.foundation.form_field_properties.forceErrorText}

@@ -93,6 +93,9 @@ class FLocalizationsUk extends FLocalizations {
   String get popoverSemanticsLabel => 'Спливаюче вікно';
 
   @override
+  String get multiSelectHint => 'Виберіть елементи';
+
+  @override
   String get selectHint => 'Виберіть елемент';
 
   @override

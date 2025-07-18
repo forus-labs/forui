@@ -93,6 +93,9 @@ class FLocalizationsEl extends FLocalizations {
   String get popoverSemanticsLabel => 'Αναδυόμενο παράθυρο';
 
   @override
+  String get multiSelectHint => 'Επιλέξτε στοιχεία';
+
+  @override
   String get selectHint => 'Επιλέξτε ένα στοιχείο';
 
   @override

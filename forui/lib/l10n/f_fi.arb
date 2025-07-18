@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Vieritä alas",
   "paginationPreviousSemanticsLabel": "Edellinen",
   "paginationNextSemanticsLabel": "Seuraava",
-  "popoverSemanticsLabel": "Ponnahdusikkuna"
+  "popoverSemanticsLabel": "Ponnahdusikkuna",
+  "multiSelectHint": "Valitse kohteet"
 }

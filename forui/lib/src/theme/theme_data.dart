@@ -211,6 +211,15 @@ final class FThemeData with Diagnosticable {
   /// ```
   final FLineCalendarStyle lineCalendarStyle;
 
+  /// The multi-select style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  /// ```shell
+  /// dart run forui style create multi-select
+  /// ```
+  final FMultiSelectStyle multiSelectStyle;
+
   /// The pagination style.
   ///
   /// ## CLI
@@ -476,6 +485,7 @@ final class FThemeData with Diagnosticable {
     FItemGroupStyle? itemGroupStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
+    FMultiSelectStyle? multiSelectStyle,
     FPaginationStyle? paginationStyle,
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
@@ -531,6 +541,8 @@ final class FThemeData with Diagnosticable {
       labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
       lineCalendarStyle:
           lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
+      multiSelectStyle:
+          multiSelectStyle ?? FMultiSelectStyle.inherit(colors: colors, typography: typography, style: style),
       paginationStyle:
           paginationStyle ?? FPaginationStyle.inherit(colors: colors, typography: typography, style: style),
       pickerStyle: pickerStyle ?? FPickerStyle.inherit(colors: colors, style: style, typography: typography),
@@ -587,6 +599,7 @@ final class FThemeData with Diagnosticable {
     required this.itemGroupStyle,
     required this.labelStyles,
     required this.lineCalendarStyle,
+    required this.multiSelectStyle,
     required this.paginationStyle,
     required this.pickerStyle,
     required this.popoverStyle,
@@ -1021,6 +1034,7 @@ final class FThemeData with Diagnosticable {
     FItemGroupStyle? itemGroupStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
+    FMultiSelectStyle? multiSelectStyle,
     FPaginationStyle? paginationStyle,
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
@@ -1066,6 +1080,7 @@ final class FThemeData with Diagnosticable {
     itemGroupStyle: itemGroupStyle ?? this.itemGroupStyle,
     labelStyles: labelStyles ?? this.labelStyles,
     lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
+    multiSelectStyle: multiSelectStyle ?? this.multiSelectStyle,
     paginationStyle: paginationStyle ?? this.paginationStyle,
     pickerStyle: pickerStyle ?? this.pickerStyle,
     popoverStyle: popoverStyle ?? this.popoverStyle,
@@ -1118,6 +1133,7 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('itemGroupStyle', itemGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('multiSelectStyle', multiSelectStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('paginationStyle', paginationStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('pickerStyle', pickerStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
@@ -1171,6 +1187,7 @@ final class FThemeData with Diagnosticable {
           itemGroupStyle == other.itemGroupStyle &&
           labelStyles == other.labelStyles &&
           lineCalendarStyle == other.lineCalendarStyle &&
+          multiSelectStyle == other.multiSelectStyle &&
           paginationStyle == other.paginationStyle &&
           pickerStyle == other.pickerStyle &&
           popoverStyle == other.popoverStyle &&
@@ -1220,6 +1237,7 @@ final class FThemeData with Diagnosticable {
       itemGroupStyle.hashCode ^
       labelStyles.hashCode ^
       lineCalendarStyle.hashCode ^
+      multiSelectStyle.hashCode ^
       paginationStyle.hashCode ^
       pickerStyle.hashCode ^
       popoverStyle.hashCode ^

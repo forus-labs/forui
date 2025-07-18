@@ -31,7 +31,7 @@ class _MultiNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
 }
 
 class _MultiNotifierHookState<T> extends HookState<FMultiValueNotifier<T>, _MultiNotifierHook<T>> {
-  late final _controller = FMultiValueNotifier(values: hook.values, min: hook.min, max: hook.max);
+  late final _controller = FMultiValueNotifier(value: hook.values, min: hook.min, max: hook.max);
 
   @override
   FMultiValueNotifier<T> build(BuildContext context) => _controller;

@@ -23,9 +23,9 @@ typedef FSelectSearchContentBuilder<T> =
 
 @internal
 class SearchContent<T> extends StatefulWidget {
-  final FSelectController<T> controller;
   final ScrollController? scrollController;
-  final FSelectStyle style;
+  final FSelectSearchStyle searchStyle;
+  final FSelectContentStyle contentStyle;
   final FSelectSearchFieldProperties properties;
   final bool first;
   final bool enabled;
@@ -35,13 +35,13 @@ class SearchContent<T> extends StatefulWidget {
   final FSelectSearchFilter<T> filter;
   final ValueWidgetBuilder<FSelectSearchStyle> loadingBuilder;
   final FSelectSearchContentBuilder<T> builder;
-  final ValueWidgetBuilder<FSelectStyle> emptyBuilder;
+  final WidgetBuilder emptyBuilder;
   final Widget Function(BuildContext, Object?, StackTrace)? errorBuilder;
 
   const SearchContent({
-    required this.controller,
     required this.scrollController,
-    required this.style,
+    required this.searchStyle,
+    required this.contentStyle,
     required this.properties,
     required this.first,
     required this.enabled,
@@ -63,10 +63,10 @@ class SearchContent<T> extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('scrollController', scrollController))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('first', first))
+      ..add(DiagnosticsProperty('searchStyle', searchStyle))
+      ..add(DiagnosticsProperty('contentStyle', contentStyle))
+      ..add(FlagProperty('first', value: first, ifTrue: 'first'))
       ..add(DiagnosticsProperty('enabled', enabled))
       ..add(DiagnosticsProperty('scrollHandles', scrollHandles))
       ..add(DiagnosticsProperty('physics', physics))
@@ -142,7 +142,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
           child: FTextField(
             controller: _controller,
             focusNode: _focus,
-            style: widget.style.searchStyle.textFieldStyle,
+            style: widget.searchStyle.textFieldStyle,
             hint: widget.properties.hint ?? localizations.selectSearchHint,
             magnifierConfiguration: widget.properties.magnifierConfiguration,
             keyboardType: widget.properties.keyboardType,
@@ -186,20 +186,20 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             spellCheckConfiguration: widget.properties.spellCheckConfiguration,
             prefixBuilder: prefix == null
                 ? null
-                : (context, style, child) => prefix(context, (widget.style.searchStyle, style.$1, style.$2), child),
+                : (context, style, child) => prefix(context, (widget.searchStyle, style.$1, style.$2), child),
             suffixBuilder: suffix == null
                 ? null
-                : (context, style, child) => suffix(context, (widget.style.searchStyle, style.$1, style.$2), child),
+                : (context, style, child) => suffix(context, (widget.searchStyle, style.$1, style.$2), child),
             clearable: widget.properties.clearable,
           ),
         ),
-        FDivider(style: widget.style.searchStyle.dividerStyle),
+        FDivider(style: widget.searchStyle.dividerStyle),
         switch (_data) {
           final FSelectSearchData<T> data => _content(context, data),
           final Future<FSelectSearchData<T>> future => FutureBuilder(
             future: future,
             builder: (context, snapshot) => switch (snapshot.connectionState) {
-              ConnectionState.waiting => Center(child: widget.loadingBuilder(context, widget.style.searchStyle, null)),
+              ConnectionState.waiting => Center(child: widget.loadingBuilder(context, widget.searchStyle, null)),
               _ when snapshot.hasError && widget.errorBuilder != null => widget.errorBuilder!.call(
                 context,
                 snapshot.error,
@@ -216,14 +216,14 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   Widget _content(BuildContext context, FSelectSearchData<T> data) {
     final children = widget.builder(context, data);
     if (children.isEmpty) {
-      return widget.emptyBuilder(context, widget.style, null);
+      return widget.emptyBuilder(context);
     }
 
     return Flexible(
       child: Content<T>(
         controller: widget.scrollController,
-        style: widget.style.contentStyle,
-        first: widget.controller.value == null,
+        style: widget.contentStyle,
+        first: widget.first,
         enabled: widget.enabled,
         scrollHandles: widget.scrollHandles,
         physics: widget.physics,

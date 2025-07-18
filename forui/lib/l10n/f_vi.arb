@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Cuộn xuống",
   "paginationPreviousSemanticsLabel": "Trước",
   "paginationNextSemanticsLabel": "Tiếp",
-  "popoverSemanticsLabel": "Cửa sổ bật lên"
+  "popoverSemanticsLabel": "Cửa sổ bật lên",
+  "multiSelectHint": "Chọn các mục"
 }

@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Mag-scroll pababa",
   "paginationPreviousSemanticsLabel": "Nakaraan",
   "paginationNextSemanticsLabel": "Susunod",
-  "popoverSemanticsLabel": "Popover"
+  "popoverSemanticsLabel": "Popover",
+  "multiSelectHint": "Pumili ng mga item"
 }

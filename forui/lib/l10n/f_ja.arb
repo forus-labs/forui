@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "下にスクロール",
   "paginationPreviousSemanticsLabel": "前へ",
   "paginationNextSemanticsLabel": "次へ",
-  "popoverSemanticsLabel": "ポップオーバー"
+  "popoverSemanticsLabel": "ポップオーバー",
+  "multiSelectHint": "アイテムを選択"
 }

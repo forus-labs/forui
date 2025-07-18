@@ -93,6 +93,9 @@ class FLocalizationsEt extends FLocalizations {
   String get popoverSemanticsLabel => 'Hüpikaken';
 
   @override
+  String get multiSelectHint => 'Valige üksused';
+
+  @override
   String get selectHint => 'Valige üksus';
 
   @override

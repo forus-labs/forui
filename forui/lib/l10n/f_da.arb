@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Rul ned",
   "paginationPreviousSemanticsLabel": "Forrige",
   "paginationNextSemanticsLabel": "Næste",
-  "popoverSemanticsLabel": "Pop op-vindue"
+  "popoverSemanticsLabel": "Pop op-vindue",
+  "multiSelectHint": "Vælg elementer"
 }

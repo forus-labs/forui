@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Доош гүйлгэх",
   "paginationPrevious": "Өмнөх",
   "paginationNext": "Дараах",
-  "popoverSemanticsLabel": "Товших цонх"
+  "popoverSemanticsLabel": "Товших цонх",
+  "multiSelectHint": "Зүйлсийг сонгох"
 }

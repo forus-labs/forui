@@ -15,7 +15,7 @@ void main() {
         child: Form(
           key: key,
           child: FSelectGroup<int>(
-            controller: autoDispose(FMultiValueNotifier(values: {1})),
+            controller: autoDispose(FMultiValueNotifier(value: {1})),
             children: [FRadio.grouped(label: const Text('1'), value: 1)],
             onSaved: (value) => initial = value,
           ),

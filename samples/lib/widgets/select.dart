@@ -164,7 +164,7 @@ class DividerSelectPage extends Sample {
     padding: const EdgeInsets.only(top: 15),
     child: FSelect<String>(
       hint: 'Select a level',
-      divider: FItemDivider.full,
+      contentDivider: FItemDivider.full,
       format: (s) => s,
       children: [
         FSelectSection.fromMap(
@@ -390,7 +390,7 @@ class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with Sing
             child: const Text('Submit'),
             onPress: () {
               if (_formKey.currentState!.validate()) {
-                // Form is valid, do something with department.e
+                // Form is valid, do something with department.
               }
             },
           ),

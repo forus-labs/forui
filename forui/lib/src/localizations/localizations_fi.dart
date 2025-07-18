@@ -93,6 +93,9 @@ class FLocalizationsFi extends FLocalizations {
   String get popoverSemanticsLabel => 'Ponnahdusikkuna';
 
   @override
+  String get multiSelectHint => 'Valitse kohteet';
+
+  @override
   String get selectHint => 'Valitse kohde';
 
   @override

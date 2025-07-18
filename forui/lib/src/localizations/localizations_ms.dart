@@ -93,6 +93,9 @@ class FLocalizationsMs extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get multiSelectHint => 'Pilih item';
+
+  @override
   String get selectHint => 'Pilih item';
 
   @override

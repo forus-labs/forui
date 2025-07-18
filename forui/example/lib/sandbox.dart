@@ -27,28 +27,6 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FSelect<String>(
-        divider: FItemDivider.full,
-        format: (s) => s,
-        children: [
-          FSelectSection.fromMap(
-            label: const Text('Group 1'),
-            divider: FItemDivider.indented,
-            items: {
-              for (final item in ['1A', '1B']) item: item,
-            },
-          ),
-          FSelectSection.fromMap(
-            label: const Text('Group 2'),
-            items: {
-              for (final item in ['2A', '2B']) item: item,
-            },
-          ),
-          FSelectItem('Item 3', 'Item 3'),
-          FSelectItem('Item 4', 'Item 4'),
-        ],
-      ),
-    );
+    return Center(child: FMultiSelect<String>.fromMap(const {'1': '1', '2': '2', '3': '3', '4': '4'}));
   }
 }

@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "खाली स्क्रोल करा",
   "paginationPrevious": "मागील",
   "paginationNext": "पुढील",
-  "popoverSemanticsLabel": "पॉपओव्हर"
+  "popoverSemanticsLabel": "पॉपओव्हर",
+  "multiSelectHint": "आयटम निवडा"
 }

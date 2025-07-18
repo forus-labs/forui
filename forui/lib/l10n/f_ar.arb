@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "التمرير لأسفل",
   "paginationPrevious": "السابق",
   "paginationNext": "التالي",
-  "popoverSemanticsLabel": "منبثقة"
+  "popoverSemanticsLabel": "منبثقة",
+  "multiSelectHint": "حدد العناصر"
 }

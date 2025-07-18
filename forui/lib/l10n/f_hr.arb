@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Pomakni prema dolje",
   "paginationPreviousSemanticsLabel": "Prethodno",
   "paginationNextSemanticsLabel": "Sljedeće",
-  "popoverSemanticsLabel": "Skočni prozor"
+  "popoverSemanticsLabel": "Skočni prozor",
+  "multiSelectHint": "Odaberite stavke"
 }

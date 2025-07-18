@@ -93,6 +93,9 @@ class FLocalizationsPs extends FLocalizations {
   String get popoverSemanticsLabel => 'پاپ اوور';
 
   @override
+  String get multiSelectHint => 'توکي غوره کړئ';
+
+  @override
   String get selectHint => 'یو توکی وټاکئ';
 
   @override

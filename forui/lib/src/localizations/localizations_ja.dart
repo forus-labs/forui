@@ -93,6 +93,9 @@ class FLocalizationsJa extends FLocalizations {
   String get popoverSemanticsLabel => 'ポップオーバー';
 
   @override
+  String get multiSelectHint => 'アイテムを選択';
+
+  @override
   String get selectHint => 'アイテムを選択';
 
   @override

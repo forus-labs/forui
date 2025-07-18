@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Egin behera",
   "paginationPreviousSemanticsLabel": "Aurrekoa",
   "paginationNextSemanticsLabel": "Hurrengoa",
-  "popoverSemanticsLabel": "Leiho emergentea"
+  "popoverSemanticsLabel": "Leiho emergentea",
+  "multiSelectHint": "Hautatu elementuak"
 }

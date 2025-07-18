@@ -93,6 +93,9 @@ class FLocalizationsKo extends FLocalizations {
   String get popoverSemanticsLabel => '팝오버';
 
   @override
+  String get multiSelectHint => '항목 선택';
+
+  @override
   String get selectHint => '항목 선택';
 
   @override

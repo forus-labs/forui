@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import '../../test_scaffold.dart';
+import '../../../test_scaffold.dart';
 
 const letters = {
   'A': 'A',
@@ -30,10 +30,10 @@ const letters = {
 void main() {
   const key = ValueKey('select');
 
-  late FSelectController<String> controller;
+  late FMultiSelectController<String> controller;
 
   setUp(() {
-    controller = FSelectController<String>(vsync: const TestVSync());
+    controller = FMultiSelectController<String>(vsync: const TestVSync());
   });
 
   tearDown(() => controller.dispose());
@@ -42,63 +42,67 @@ void main() {
     testWidgets('set initial value using initialValue', (tester) async {
       final key = GlobalKey<FormState>();
 
-      String? initial;
+      Set<String> initial = {'A', 'B'};
       await tester.pumpWidget(
         TestScaffold.app(
           child: Form(
             key: key,
-            child: FSelect<String>(
-              format: (value) => '$value!',
+            child: FMultiSelect<String>(
+              format: (value) => Text('$value!'),
               onSaved: (value) => initial = value,
-              initialValue: 'A',
-              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+              initialValue: initial,
+              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B'), FSelectItem('C', 'C')],
             ),
           ),
         ),
       );
 
       expect(find.text('A!'), findsOneWidget);
+      expect(find.text('B!'), findsOneWidget);
 
       key.currentState!.save();
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      expect(initial, 'A');
+      expect(initial, {'A', 'B'});
     });
 
     testWidgets('controller provided', (tester) async {
       final key = GlobalKey<FormState>();
 
-      String? initial;
+      Set<String> initial = {};
       await tester.pumpWidget(
         TestScaffold.app(
           child: Form(
             key: key,
-            child: FSelect<String>(
-              controller: autoDispose(FSelectController(vsync: tester, value: 'A')),
-              format: (value) => '$value!',
-              onSaved: (value) => initial = value,
-              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            child: FMultiSelect<String>(
+              controller: autoDispose(FMultiSelectController(vsync: tester, value: {'A', 'B'})),
+              format: (value) => Text('$value!'),
+              onSaved: (value) {
+                initial = value;
+              },
+              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B'), FSelectItem('C', 'C')],
             ),
           ),
         ),
       );
 
       expect(find.text('A!'), findsOneWidget);
+      expect(find.text('B!'), findsOneWidget);
 
       key.currentState!.save();
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      expect(initial, 'A');
+      expect(initial, {'A', 'B'});
     });
   });
 
-  group('FSelect', () {
+  group('FMultiSelect', () {
     testWidgets('custom format', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
+          child: FMultiSelect<String>(
             key: key,
-            format: (value) => '$value!',
+            format: (value) => Text('$value!'),
             controller: controller,
             children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
           ),
@@ -106,19 +110,92 @@ void main() {
       );
 
       await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
       await tester.tap(find.text('A'));
-      await tester.pumpAndSettle();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
 
       expect(find.text('A!'), findsOne);
-      expect(controller.value, 'A');
+      expect(controller.value, {'A'});
+    });
+
+    testWidgets('disabled', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(child: FMultiSelect.fromMap(letters, enabled: false, clearable: true, key: key)),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('A'), findsNothing);
+    });
+
+    testWidgets('tag clears itself', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            format: (value) => Text('$value!'),
+            controller: controller,
+            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('A!'), findsOne);
+      expect(find.byIcon(FIcons.check), findsNWidgets(1));
+      expect(controller.value, {'A'});
+
+      await tester.tap(find.text('A!'));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('A!'), findsNothing);
+      expect(find.byIcon(FIcons.check), findsNothing);
+      expect(controller.value, <String>{});
+    });
+
+    testWidgets('clear button clears everything', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            format: (value) => Text('$value!'),
+            controller: controller,
+            clearable: true,
+            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+          ),
+        ),
+      );
+
+      expect(find.byIcon(FIcons.x), findsNothing);
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      controller.value = {'A', 'B'};
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('A!'), findsOne);
+      expect(find.text('B!'), findsOne);
+
+      await tester.tap(find.byIcon(FIcons.x).last);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('A!'), findsNothing);
+      expect(find.text('B!'), findsNothing);
+      expect(controller.value, <String>{});
     });
 
     testWidgets('keyboard navigation', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(const {'A': 'A', 'B': 'B'}, key: key, controller: controller),
+          child: FMultiSelect<String>.fromMap(const {'A': 'A', 'B': 'B'}, key: key, controller: controller),
         ),
       );
 
@@ -137,17 +214,17 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.enter);
       await tester.pumpAndSettle();
 
-      expect(controller.value, 'B');
+      expect(controller.value, {'B'});
     });
   });
 
   group('controller', () {
     testWidgets('update', (tester) async {
-      final controller = FSelectController<String>(vsync: const TestVSync());
+      final controller = FMultiSelectController<String>(vsync: const TestVSync());
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, key: key, controller: controller),
+          child: FMultiSelect<String>.fromMap(letters, key: key, controller: controller),
         ),
       );
 
@@ -157,7 +234,7 @@ void main() {
       expect(controller.hasListeners, true);
       expect(controller.popover.hasListeners, false);
 
-      await tester.pumpWidget(TestScaffold.app(child: FSelect<String>.fromMap(letters, key: key)));
+      await tester.pumpWidget(TestScaffold.app(child: FMultiSelect<String>.fromMap(letters, key: key)));
 
       expect(controller.hasListeners, false);
       expect(controller.popover.hasListeners, false);
@@ -165,11 +242,11 @@ void main() {
     });
 
     testWidgets('dispose', (tester) async {
-      final controller = FSelectController<String>(vsync: const TestVSync());
+      final controller = FMultiSelectController<String>(vsync: const TestVSync());
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, key: key, controller: controller),
+          child: FMultiSelect<String>.fromMap(letters, key: key, controller: controller),
         ),
       );
 
@@ -190,29 +267,29 @@ void main() {
   group('onChange', () {
     testWidgets('when controller changes but onChange callback is the same', (tester) async {
       int count = 0;
-      void onChange(String? _) => count++;
+      void onChange(Set<String> _) => count++;
 
-      final firstController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
+      final firstController = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, controller: firstController, onChange: onChange),
+          child: FMultiSelect<String>.fromMap(letters, controller: firstController, onChange: onChange),
         ),
       );
 
-      firstController.value = 'A';
+      firstController.value = {'A'};
       await tester.pump();
 
       expect(count, 1);
 
-      final secondController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
+      final secondController = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, controller: secondController, onChange: onChange),
+          child: FMultiSelect<String>.fromMap(letters, controller: secondController, onChange: onChange),
         ),
       );
 
-      firstController.value = 'B';
-      secondController.value = 'C';
+      firstController.value = {'B'};
+      secondController.value = {'C'};
       await tester.pump();
 
       expect(count, 2);
@@ -222,25 +299,25 @@ void main() {
       int first = 0;
       int second = 0;
 
-      final controller = autoDispose(FSelectController<String>(vsync: const TestVSync()));
+      final controller = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, controller: controller, onChange: (_) => first++),
+          child: FMultiSelect<String>.fromMap(letters, controller: controller, onChange: (_) => first++),
         ),
       );
 
-      controller.value = 'A';
+      controller.value = {'A'};
       await tester.pump();
 
       expect(first, 1);
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, controller: controller, onChange: (_) => second++),
+          child: FMultiSelect<String>.fromMap(letters, controller: controller, onChange: (_) => second++),
         ),
       );
 
-      controller.value = 'B';
+      controller.value = {'B'};
       await tester.pump();
 
       expect(first, 1);
@@ -251,27 +328,27 @@ void main() {
       int first = 0;
       int second = 0;
 
-      final firstController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
+      final firstController = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, controller: firstController, onChange: (_) => first++),
+          child: FMultiSelect<String>.fromMap(letters, controller: firstController, onChange: (_) => first++),
         ),
       );
 
-      firstController.value = 'A';
+      firstController.value = {'A'};
       await tester.pump();
 
       expect(first, 1);
 
-      final secondController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
+      final secondController = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, controller: secondController, onChange: (_) => second++),
+          child: FMultiSelect<String>.fromMap(letters, controller: secondController, onChange: (_) => second++),
         ),
       );
 
-      firstController.value = 'B';
-      secondController.value = 'C';
+      firstController.value = {'B'};
+      secondController.value = {'C'};
       await tester.pump();
 
       expect(first, 1);
@@ -281,21 +358,21 @@ void main() {
     testWidgets('disposed when controller is external', (tester) async {
       int count = 0;
 
-      final controller = autoDispose(FSelectController<String>(vsync: const TestVSync()));
+      final controller = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(letters, controller: controller, onChange: (_) => count++),
+          child: FMultiSelect<String>.fromMap(letters, controller: controller, onChange: (_) => count++),
         ),
       );
 
-      controller.value = 'A';
+      controller.value = {'A'};
       await tester.pump();
 
       expect(count, 1);
 
       await tester.pumpWidget(TestScaffold.app(child: const SizedBox()));
 
-      controller.value = 'B';
+      controller.value = {'B'};
       await tester.pump();
 
       expect(count, 1);
@@ -307,7 +384,7 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>.fromMap(
+          child: FMultiSelect<String>.fromMap(
             const {'A': 'A', 'B': 'B'},
             key: key,
             focusNode: focus,
@@ -319,40 +396,12 @@ void main() {
       expect(tester.takeException(), null);
     });
 
-    testWidgets('refocus after selection', (tester) async {
-      final focus = autoDispose(FocusNode());
-      const itemKey = ValueKey('item');
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(
-            key: key,
-            format: (s) => s,
-            focusNode: focus,
-            controller: controller,
-            children: [
-              FSelectItem('A', 'A', key: itemKey),
-              FSelectItem('B', 'B'),
-            ],
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.byKey(itemKey));
-      await tester.pumpAndSettle();
-
-      expect(focus.hasFocus, true);
-    });
-
-    testWidgets('tap on text-field should refocus', (tester) async {
+    testWidgets('tap on field should refocus', (tester) async {
       final focus = autoDispose(FocusNode());
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+          child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );
 
@@ -370,7 +419,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+          child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );
 
@@ -388,7 +437,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+          child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );
 
@@ -408,7 +457,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+          child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );
 

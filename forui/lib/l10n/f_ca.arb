@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Desplaça avall",
   "paginationPrevious": "Anterior",
   "paginationNext": "Següent",
-  "popoverSemanticsLabel": "Finestra emergent"
+  "popoverSemanticsLabel": "Finestra emergent",
+  "multiSelectHint": "Selecciona elements"
 }

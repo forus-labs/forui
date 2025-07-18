@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "เลื่อนลง",
   "paginationPrevious": "ก่อนหน้า",
   "paginationNext": "ถัดไป",
-  "popoverSemanticsLabel": "ป๊อปโอเวอร์"
+  "popoverSemanticsLabel": "ป๊อปโอเวอร์",
+  "multiSelectHint": "เลือกรายการ"
 }

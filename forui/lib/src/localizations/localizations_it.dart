@@ -93,6 +93,9 @@ class FLocalizationsIt extends FLocalizations {
   String get popoverSemanticsLabel => 'Finestra di sovrapposizione';
 
   @override
+  String get multiSelectHint => 'Seleziona elementi';
+
+  @override
   String get selectHint => 'Seleziona un elemento';
 
   @override

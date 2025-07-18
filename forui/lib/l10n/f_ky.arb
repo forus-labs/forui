@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Ылдый сыдыруу",
   "paginationPrevious": "Мурунку",
   "paginationNext": "Кийинки",
-  "popoverSemanticsLabel": "Калкып чыгуучу терезе"
+  "popoverSemanticsLabel": "Калкып чыгуучу терезе",
+  "multiSelectHint": "Элементтерди тандоо"
 }

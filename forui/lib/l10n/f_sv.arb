@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Rulla nedåt",
   "paginationPreviousSemanticsLabel": "Föregående",
   "paginationNextSemanticsLabel": "Nästa",
-  "popoverSemanticsLabel": "Popover"
+  "popoverSemanticsLabel": "Popover",
+  "multiSelectHint": "Välj objekt"
 }

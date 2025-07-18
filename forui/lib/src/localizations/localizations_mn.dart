@@ -93,6 +93,9 @@ class FLocalizationsMn extends FLocalizations {
   String get popoverSemanticsLabel => 'Товших цонх';
 
   @override
+  String get multiSelectHint => 'Зүйлсийг сонгох';
+
+  @override
   String get selectHint => 'Зүйл сонгох';
 
   @override

@@ -93,6 +93,9 @@ class FLocalizationsEu extends FLocalizations {
   String get popoverSemanticsLabel => 'Leiho emergentea';
 
   @override
+  String get multiSelectHint => 'Hautatu elementuak';
+
+  @override
   String get selectHint => 'Hautatu elementu bat';
 
   @override

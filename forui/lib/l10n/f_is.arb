@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Fletta niður",
   "paginationPreviousSemanticsLabel": "Fyrri",
   "paginationNextSemanticsLabel": "Næsta",
-  "popoverSemanticsLabel": "Sprettgluggi"
+  "popoverSemanticsLabel": "Sprettgluggi",
+  "multiSelectHint": "Veldu hluti"
 }

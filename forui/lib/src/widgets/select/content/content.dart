@@ -29,8 +29,9 @@ class SelectContentData<T> extends InheritedWidget {
     final result = context.dependOnInheritedWidgetOfExactType<SelectContentData<T>>();
     assert(
       result != null,
-      "No FSelect<$T> found in context. This is likely because Dart could not infer FSelect's type parameter. "
-      'Try specifying the type parameter for FSelect, FSelectSection, and FSelectItem (e.g., FSelect<MyType>).',
+      "No FSelect<$T>/FMultiSelect<$T> found in context. This is likely because Dart could not infer FSelect/FMultiSelect's "
+      'type parameter. Try specifying the type parameter for FSelect/FMultiSelect, FSelectSection, and FSelectItem '
+      '(e.g., FSelect<MyType>).',
     );
     return result!;
   }

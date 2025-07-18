@@ -14,7 +14,7 @@ void main() {
             style: TestScaffold.blueScreen.selectGroupStyle,
             label: const Text('Select Group'),
             description: const Text('Select Group Description'),
-            controller: autoDispose(FMultiValueNotifier(values: {1})),
+            controller: autoDispose(FMultiValueNotifier(value: {1})),
             children: [
               FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
               FRadio.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
@@ -34,7 +34,7 @@ void main() {
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
-              controller: autoDispose(FMultiValueNotifier(values: {1})),
+              controller: autoDispose(FMultiValueNotifier(value: {1})),
               children: [
                 FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
                 FCheckbox.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
@@ -55,7 +55,7 @@ void main() {
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
               forceErrorText: 'Some error message.',
-              controller: autoDispose(FMultiValueNotifier(values: {1})),
+              controller: autoDispose(FMultiValueNotifier(value: {1})),
               children: [
                 FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
                 FCheckbox.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),

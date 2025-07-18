@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "નીચે સ્ક્રોલ કરો",
   "paginationPrevious": "પહેલાંનું",
   "paginationNext": "આગળ",
-  "popoverSemanticsLabel": "પોપઓવર"
+  "popoverSemanticsLabel": "પોપઓવર",
+  "multiSelectHint": "આઇટમ્સ પસંદ કરો"
 }

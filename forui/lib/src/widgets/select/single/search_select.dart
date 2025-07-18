@@ -50,7 +50,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.contentScrollController,
     super.contentScrollHandles,
     super.contentPhysics,
-    super.divider,
+    super.contentDivider,
     super.initialValue,
     super.key,
   }) : super._();
@@ -74,18 +74,18 @@ class _SearchSelect<T> extends FSelect<T> {
 class _SearchSelectState<T> extends _State<_SearchSelect<T>, T> {
   @override
   Widget content(BuildContext context, FSelectStyle style) => SearchContent<T>(
-    controller: _controller,
     scrollController: widget.contentScrollController,
-    style: style,
+    searchStyle: style.searchStyle,
+    contentStyle: style.contentStyle,
     properties: widget.searchFieldProperties,
     scrollHandles: widget.contentScrollHandles,
     first: _controller.value == null,
     enabled: widget.enabled,
     physics: widget.contentPhysics,
-    divider: widget.divider,
+    divider: widget.contentDivider,
     filter: widget.filter,
     builder: widget.contentBuilder,
-    emptyBuilder: widget.emptyBuilder,
+    emptyBuilder: (context) => widget.emptyBuilder(context, style, null),
     loadingBuilder: widget.searchLoadingBuilder,
     errorBuilder: widget.searchErrorBuilder,
   );

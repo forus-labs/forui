@@ -20,7 +20,7 @@ class SelectGroupPage extends Sample {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       FSelectGroup(
-        controller: FSelectGroupController(values: {Sidebar.recents}),
+        controller: FSelectGroupController(value: {Sidebar.recents}),
         label: const Text('Sidebar'),
         description: const Text('These will be shown in the sidebar.'),
         children: [

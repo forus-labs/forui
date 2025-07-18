@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "向下滚动",
   "paginationPreviousSemanticsLabel": "上一个",
   "paginationNextSemanticsLabel": "下一个",
-  "popoverSemanticsLabel": "弹出框"
+  "popoverSemanticsLabel": "弹出框",
+  "multiSelectHint": "选择项目"
 }

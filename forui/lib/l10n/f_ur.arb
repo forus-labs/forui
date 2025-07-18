@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "نیچے سکرول کریں",
   "paginationPreviousSemanticsLabel": "پچھلا",
   "paginationNextSemanticsLabel": "اگلا",
-  "popoverSemanticsLabel": "پاپ اوور"
+  "popoverSemanticsLabel": "پاپ اوور",
+  "multiSelectHint": "آئٹمز منتخب کریں"
 }

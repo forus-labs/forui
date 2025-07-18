@@ -163,7 +163,7 @@ void main() {
             child: Form(
               key: key,
               child: FSelectMenuTile<int>(
-                selectController: autoDispose(FMultiValueNotifier(values: {1})),
+                selectController: autoDispose(FMultiValueNotifier(value: {1})),
                 title: const Text('Repeat'),
                 onSaved: (value) => initial = value,
                 menu: const [FSelectTile(title: Text('1'), value: 1)],
@@ -233,7 +233,7 @@ void main() {
             child: Form(
               key: key,
               child: FSelectMenuTile<int>.builder(
-                selectController: autoDispose(FMultiValueNotifier(values: {0})),
+                selectController: autoDispose(FMultiValueNotifier(value: {0})),
                 title: const Text('Repeat'),
                 onSaved: (value) => initial = value,
                 menuBuilder: (context, index) => FSelectTile(title: Text('$index'), value: index),
@@ -355,7 +355,7 @@ void main() {
       expect(firstPopoverController.hasListeners, false);
       expect(firstPopoverController.disposed, false);
 
-      final secondController = autoDispose(FMultiValueNotifier<int>(values: {1}));
+      final secondController = autoDispose(FMultiValueNotifier<int>(value: {1}));
       final secondPopoverController = autoDispose(FPopoverController(vsync: tester));
 
       await tester.pumpWidget(

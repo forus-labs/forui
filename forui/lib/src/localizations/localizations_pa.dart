@@ -93,6 +93,9 @@ class FLocalizationsPa extends FLocalizations {
   String get popoverSemanticsLabel => 'ਪੌਪਓਵਰ';
 
   @override
+  String get multiSelectHint => 'ਆਈਟਮਾਂ ਚੁਣੋ';
+
+  @override
   String get selectHint => 'ਇੱਕ ਆਈਟਮ ਚੁਣੋ';
 
   @override

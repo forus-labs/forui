@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Posunout dolů",
   "paginationPreviousSemanticsLabel": "Předchozí",
   "paginationNextSemanticsLabel": "Další",
-  "popoverSemanticsLabel": "Vyskakovací okno"
+  "popoverSemanticsLabel": "Vyskakovací okno",
+  "multiSelectHint": "Vyberte položky"
 }

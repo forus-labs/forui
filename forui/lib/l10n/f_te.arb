@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "క్రిందికి స్క్రోల్ చేయండి",
   "paginationPrevious": "మునుపటి",
   "paginationNext": "తదుపరి",
-  "popoverSemanticsLabel": "పాప్‌ఓవర్"
+  "popoverSemanticsLabel": "పాప్‌ఓవర్",
+  "multiSelectHint": "అంశాలను ఎంచుకోండి"
 }

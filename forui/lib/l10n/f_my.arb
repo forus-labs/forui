@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "အောက်သို့ပွတ်ဆွဲရန်",
   "paginationPrevious": "ယခင်",
   "paginationNext": "ရှေ့သို့",
-  "popoverSemanticsLabel": "ပေါ်လာသောဝင်းဒို"
+  "popoverSemanticsLabel": "ပေါ်လာသောဝင်းဒို",
+  "multiSelectHint": "အရာများကို ရွေးချယ်ပါ"
 }

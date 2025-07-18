@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Прокрутить вниз",
   "paginationPrevious": "Предыдущий",
   "paginationNext": "Далее",
-  "popoverSemanticsLabel": "Всплывающее окно"
+  "popoverSemanticsLabel": "Всплывающее окно",
+  "multiSelectHint": "Выберите элементы"
 }

@@ -93,6 +93,9 @@ class FLocalizationsHu extends FLocalizations {
   String get popoverSemanticsLabel => 'Felugró ablak';
 
   @override
+  String get multiSelectHint => 'Elemek kiválasztása';
+
+  @override
   String get selectHint => 'Válasszon egy elemet';
 
   @override

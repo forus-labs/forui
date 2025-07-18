@@ -256,9 +256,9 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
         return;
       }
 
-      final SelectControllerData(:contains, :onPress) = SelectControllerData.of<T>(context);
+      final InheritedSelectController(:focus, :onPress) = InheritedSelectController.of<T>(context);
       final content = SelectContentData.of<T>(context);
-      if (contains(widget.value)) {
+      if (focus(widget.value)) {
         content.ensureVisible(context);
       }
     });
@@ -266,22 +266,23 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final SelectControllerData(:popoverController, :contains, :onPress) = SelectControllerData.of<T>(context);
+    final InheritedSelectController(:popover, :contains, :focus, :onPress) = InheritedSelectController.of<T>(context);
     final content = SelectContentData.of<T>(context);
 
     final enabled = widget.enabled ?? content.enabled;
     final selected = contains(widget.value);
+    final focused = focus(widget.value);
     final style = widget.style?.call(content.style.itemStyle).toFItemStyle(context);
 
     return FItem(
       style: style?.call,
       enabled: enabled,
       selected: selected,
-      autofocus: selected || content.first,
+      autofocus: focused || content.first,
       focusNode: _focus,
       onPress: () => onPress(widget.value),
       onHoverChange: (hover) {
-        if (popoverController.status.isCompleted) {
+        if (popover.status.isCompleted) {
           hover ? _focus.requestFocus() : _focus.unfocus();
         }
       },

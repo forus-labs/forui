@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Превъртане надолу",
   "paginationPrevious": "Предишен",
   "paginationNext": "Напред",
-  "popoverSemanticsLabel": "Изскачащ прозорец"
+  "popoverSemanticsLabel": "Изскачащ прозорец",
+  "multiSelectHint": "Изберете елементи"
 }

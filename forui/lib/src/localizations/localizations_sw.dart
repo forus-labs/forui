@@ -93,6 +93,9 @@ class FLocalizationsSw extends FLocalizations {
   String get popoverSemanticsLabel => 'Dirisha la haraka';
 
   @override
+  String get multiSelectHint => 'Chagua vipengee';
+
+  @override
   String get selectHint => 'Chagua kipengee';
 
   @override

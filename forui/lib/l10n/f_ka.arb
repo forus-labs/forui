@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "ქვემოთ გადაადგილება",
   "paginationPrevious": "წინა",
   "paginationNext": "შემდეგი",
-  "popoverSemanticsLabel": "ამომხტარი ფანჯარა"
+  "popoverSemanticsLabel": "ამომხტარი ფანჯარა",
+  "multiSelectHint": "ელემენტების არჩევა"
 }

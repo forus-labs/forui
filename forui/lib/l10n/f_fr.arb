@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Faire défiler vers le bas",
   "paginationPreviousSemanticsLabel": "Précédent",
   "paginationNextSemanticsLabel": "Suivant",
-  "popoverSemanticsLabel": "Fenêtre contextuelle"
+  "popoverSemanticsLabel": "Fenêtre contextuelle",
+  "multiSelectHint": "Sélectionner des éléments"
 }

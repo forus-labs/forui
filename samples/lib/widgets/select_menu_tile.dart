@@ -73,7 +73,7 @@ class LazySelectMenuTilePage extends StatefulSample {
 }
 
 class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTilePage> {
-  final controller = FSelectMenuTileController(values: {1});
+  final controller = FSelectMenuTileController(value: {1});
 
   @override
   Widget sample(BuildContext context) => Column(

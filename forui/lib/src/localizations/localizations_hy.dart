@@ -93,6 +93,9 @@ class FLocalizationsHy extends FLocalizations {
   String get popoverSemanticsLabel => 'Ելնող պատուհան';
 
   @override
+  String get multiSelectHint => 'Ընտրել տարրեր';
+
+  @override
   String get selectHint => 'Ընտրեք տարր';
 
   @override

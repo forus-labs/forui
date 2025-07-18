@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Aşağı kaydır",
   "paginationPreviousSemanticsLabel": "Önceki",
   "paginationNextSemanticsLabel": "İleri",
-  "popoverSemanticsLabel": "Açılır pencere"
+  "popoverSemanticsLabel": "Açılır pencere",
+  "multiSelectHint": "Öğeleri seç"
 }

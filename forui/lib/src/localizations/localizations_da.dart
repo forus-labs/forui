@@ -93,6 +93,9 @@ class FLocalizationsDa extends FLocalizations {
   String get popoverSemanticsLabel => 'Pop op-vindue';
 
   @override
+  String get multiSelectHint => 'Vælg elementer';
+
+  @override
   String get selectHint => 'Vælg et element';
 
   @override

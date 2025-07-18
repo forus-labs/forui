@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Rol af",
   "paginationPreviousSemanticsLabel": "Vorige",
   "paginationNextSemanticsLabel": "Volgende",
-  "popoverSemanticsLabel": "Opspringer"
+  "popoverSemanticsLabel": "Opspringer",
+  "multiSelectHint": "Kies items"
 }

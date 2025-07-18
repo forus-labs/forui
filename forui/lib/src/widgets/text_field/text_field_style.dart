@@ -62,6 +62,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// * [WidgetState.error]
   /// * [WidgetState.focused]
   /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
   @override
   final FWidgetStateMap<TextStyle> contentTextStyle;
 
@@ -72,6 +73,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// * [WidgetState.error]
   /// * [WidgetState.focused]
   /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
   @override
   final FWidgetStateMap<TextStyle> hintTextStyle;
 
@@ -82,6 +84,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// * [WidgetState.error]
   /// * [WidgetState.focused]
   /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
   @override
   final FWidgetStateMap<TextStyle> counterTextStyle;
 
@@ -92,6 +95,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// * [WidgetState.error]
   /// * [WidgetState.focused]
   /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
   @override
   final FWidgetStateMap<InputBorder> border;
 

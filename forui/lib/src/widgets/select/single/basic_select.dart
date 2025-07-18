@@ -42,7 +42,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.contentScrollController,
     super.contentScrollHandles,
     super.contentPhysics,
-    super.divider,
+    super.contentDivider,
     super.initialValue,
     super.key,
   }) : super._();
@@ -65,7 +65,7 @@ class _BasicSelectState<T> extends _State<_BasicSelect<T>, T> {
       enabled: widget.enabled,
       scrollHandles: widget.contentScrollHandles,
       physics: widget.contentPhysics,
-      divider: widget.divider,
+      divider: widget.contentDivider,
       children: widget.children,
     );
   }

@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "তললৈ স্ক্ৰল কৰক",
   "paginationPrevious": "পূৰ্বৱৰ্তী",
   "paginationNext": "পৰৱৰ্তী",
-  "popoverSemanticsLabel": "পপঅভাৰ"
+  "popoverSemanticsLabel": "পপঅভাৰ",
+  "multiSelectHint": "বস্তুসমূহ বাছক"
 }

@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Görgetés lefelé",
   "paginationPreviousSemanticsLabel": "Előző",
   "paginationNextSemanticsLabel": "Következő",
-  "popoverSemanticsLabel": "Felugró ablak"
+  "popoverSemanticsLabel": "Felugró ablak",
+  "multiSelectHint": "Elemek kiválasztása"
 }

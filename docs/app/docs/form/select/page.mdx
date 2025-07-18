@@ -14,6 +14,8 @@ It is a form-field and can therefore be used in a form.
 </LinkBadgeGroup>
 
 <Callout type="info">
+    For multi selections, consider using a [multi select](/docs/form/multi-select).
+
     For touch devices, a [select tile group](/docs/tile/select-tile-group) or
     [select menu tile](/docs/tile/select-menu-tile) is generally recommended over this.
 </Callout>
@@ -75,16 +77,15 @@ FSelect<String>(
   description: const Text('Select your country of residence'),
   hint: 'Choose a country',
   format: (value) => value.toUpperCase(),
-  divider: FItemDivider.none,
   onChange: (value) => print('Selected country: $value'),
   onSaved: (value) => print('Saved country: $value'),
-  style: FSelectStyle.inherit(...),
   autovalidateMode: AutovalidateMode.onUserInteraction,
   builder: (context, styles, child) => child!,
   prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
   suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
+  contentDivider: FItemDivider.none,
   contentScrollHandles: true,
   initialValue: 'ca',
   children: [
@@ -148,13 +149,13 @@ FSelect<User>.search(
   description: const Text('Search and select a user'),
   builder: (context, styles, child) => child!,
   format: (user) => '${user.firstName} ${user.lastName}',
-  divider: FItemDivider.none,
   hint: 'Search users...',
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   autoHide: false,
   onChange: (value) => print('Selected country: $value'),
   initialValue: 'value',
+  contentDivider: FItemDivider.none,
   contentScrollHandles: false,
   contentPhysics: const BouncingScrollPhysics(),
   emptyBuilder: (context, style, _) => Text('No results'),
@@ -191,13 +192,13 @@ FSelect<User>.searchFromMap(
   description: const Text('Search and select a user'),
   builder: (context, styles, child) => child!,
   format: (user) => '${user.firstName} ${user.lastName}',
-  divider: FItemDivider.none,
   hint: 'Search users...',
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   autoHide: false,
   onChange: (value) => print('Selected country: $value'),
   initialValue: 'value',
+  contentDivider: FItemDivider.none,
   contentScrollHandles: false,
   contentPhysics: const BouncingScrollPhysics(),
   emptyBuilder: (context, style, _) => Text('No results'),
@@ -359,7 +360,7 @@ FSelect<User>.searchFromMap(
       @override
       Widget build(BuildContext context) => FSelect<String>(
         hint: 'Select a level',
-        divider: FItemDivider.full,
+        contentDivider: FItemDivider.none,
         format: (s) => s,
         children: [
           FSelectSection.fromMap(
@@ -639,7 +640,7 @@ FSelect<User>.searchFromMap(
                 child: const Text('Submit'),
                 onPress: () {
                   if (_formKey.currentState!.validate()) {
-                    // Form is valid, do something with department.e
+                    // Form is valid, do something with department.
                   }
                 },
               ),

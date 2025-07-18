@@ -93,6 +93,9 @@ class FLocalizationsTe extends FLocalizations {
   String get popoverSemanticsLabel => 'పాప్‌ఓవర్';
 
   @override
+  String get multiSelectHint => 'అంశాలను ఎంచుకోండి';
+
+  @override
   String get selectHint => 'ఒక అంశాన్ని ఎంచుకోండి';
 
   @override

@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Deslocar para baixo",
   "paginationPrevious": "Anterior",
   "paginationNext": "Seguinte",
-  "popoverSemanticsLabel": "Janela sobreposta"
+  "popoverSemanticsLabel": "Janela sobreposta",
+  "multiSelectHint": "Selecionar itens"
 }

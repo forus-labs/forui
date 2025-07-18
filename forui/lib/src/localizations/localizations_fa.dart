@@ -93,6 +93,9 @@ class FLocalizationsFa extends FLocalizations {
   String get popoverSemanticsLabel => 'پاپ‌اور';
 
   @override
+  String get multiSelectHint => 'انتخاب آیتم‌ها';
+
+  @override
   String get selectHint => 'یک مورد را انتخاب کنید';
 
   @override

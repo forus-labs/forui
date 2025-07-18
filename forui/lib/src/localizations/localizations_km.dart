@@ -93,6 +93,9 @@ class FLocalizationsKm extends FLocalizations {
   String get popoverSemanticsLabel => 'បង្អួចលេចឡើង';
 
   @override
+  String get multiSelectHint => 'ជ្រើសរើសធាតុ';
+
+  @override
   String get selectHint => 'ជ្រើសរើសធាតុមួយ';
 
   @override

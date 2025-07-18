@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Skrola phansi",
   "paginationPreviousSemanticsLabel": "Okwedlule",
   "paginationNextSemanticsLabel": "Okulandelayo",
-  "popoverSemanticsLabel": "Iwindi eliqhamukayo"
+  "popoverSemanticsLabel": "Iwindi eliqhamukayo",
+  "multiSelectHint": "Khetha izinto"
 }

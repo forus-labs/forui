@@ -93,6 +93,9 @@ class FLocalizationsRo extends FLocalizations {
   String get popoverSemanticsLabel => 'Fereastră contextuală';
 
   @override
+  String get multiSelectHint => 'Selectează elemente';
+
+  @override
   String get selectHint => 'Selectați un element';
 
   @override

@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "ເລື່ອນລົງ",
   "paginationPrevious": "ກ່ອນໜ້າ",
   "paginationNext": "ຕໍ່ໄປ",
-  "popoverSemanticsLabel": "ປ໊ອບໂອເວີ"
+  "popoverSemanticsLabel": "ປ໊ອບໂອເວີ",
+  "multiSelectHint": "ເລືອກລາຍການ"
 }

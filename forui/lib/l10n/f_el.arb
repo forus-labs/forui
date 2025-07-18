@@ -20,5 +20,6 @@
   "selectScrollDownSemanticsLabel": "Κύλιση προς τα κάτω",
   "paginationPrevious": "Προηγούμενο",
   "paginationNext": "Επόμενο",
-  "popoverSemanticsLabel": "Αναδυόμενο παράθυρο"
+  "popoverSemanticsLabel": "Αναδυόμενο παράθυρο",
+  "multiSelectHint": "Επιλέξτε στοιχεία"
 }

@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "Keri alla",
   "paginationPreviousSemanticsLabel": "Eelmine",
   "paginationNextSemanticsLabel": "Järgmine",
-  "popoverSemanticsLabel": "Hüpikaken"
+  "popoverSemanticsLabel": "Hüpikaken",
+  "multiSelectHint": "Valige üksused"
 }

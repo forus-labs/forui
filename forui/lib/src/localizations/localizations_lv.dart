@@ -93,6 +93,9 @@ class FLocalizationsLv extends FLocalizations {
   String get popoverSemanticsLabel => 'Izlecošs logs';
 
   @override
+  String get multiSelectHint => 'Atlasiet vienumus';
+
+  @override
   String get selectHint => 'Atlasiet vienumu';
 
   @override

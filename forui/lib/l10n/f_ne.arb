@@ -21,5 +21,6 @@
   "selectScrollDownSemanticsLabel": "तल स्क्रोल गर्नुहोस्",
   "paginationPrevious": "अघिल्लो",
   "paginationNext": "अर्को",
-  "popoverSemanticsLabel": "पपओभर"
+  "popoverSemanticsLabel": "पपओभर",
+  "multiSelectHint": "वस्तुहरू चयन गर्नुहोस्"
 }

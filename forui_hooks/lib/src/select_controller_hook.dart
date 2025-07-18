@@ -66,3 +66,78 @@ class _SelectHookState<T> extends HookState<FSelectController<T>, _SelectHook<T>
   @override
   String get debugLabel => hook._debugLabel;
 }
+
+/// Creates a [FMultiSelectController] that allows an item to be selected.
+FMultiSelectController<T> useFMultiSelectController<T>({
+  TickerProvider? vsync,
+  Set<T>? value,
+  int min = 0,
+  int? max,
+  Duration popoverAnimationDuration = const Duration(milliseconds: 100),
+  List<Object?>? keys,
+}) => use(
+  _MultiSelectHook(
+    vsync: vsync ?? useSingleTickerProvider(keys: keys),
+    value: value ?? {},
+    min: min,
+    max: max,
+    popoverAnimationDuration: popoverAnimationDuration,
+    debugLabel: 'useFMultiSelectController',
+    keys: keys,
+  ),
+);
+
+class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
+  final TickerProvider vsync;
+  final Set<T> value;
+  final int min;
+  final int? max;
+  final Duration popoverAnimationDuration;
+  final String _debugLabel;
+
+  const _MultiSelectHook({
+    required this.vsync,
+    required this.value,
+    required this.min,
+    required this.max,
+    required this.popoverAnimationDuration,
+    required String debugLabel,
+    super.keys,
+  }) : _debugLabel = debugLabel;
+
+  @override
+  _MultiSelectHookState<T> createState() => _MultiSelectHookState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('vsync', vsync))
+      ..add(IterableProperty('value', value))
+      ..add(IntProperty('min', min))
+      ..add(IntProperty('max', max))
+      ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
+  }
+}
+
+class _MultiSelectHookState<T> extends HookState<FMultiSelectController<T>, _MultiSelectHook<T>> {
+  late final FMultiSelectController<T> _controller = FMultiSelectController<T>(
+    vsync: hook.vsync,
+    value: hook.value,
+    min: hook.min,
+    max: hook.max,
+    popoverAnimationDuration: hook.popoverAnimationDuration,
+  );
+
+  @override
+  FMultiSelectController<T> build(BuildContext context) => _controller;
+
+  @override
+  void dispose() => _controller.dispose();
+
+  @override
+  bool get debugHasShortDescription => false;
+
+  @override
+  String get debugLabel => hook._debugLabel;
+}

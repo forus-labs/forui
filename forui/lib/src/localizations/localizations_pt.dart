@@ -93,6 +93,9 @@ class FLocalizationsPt extends FLocalizations {
   String get popoverSemanticsLabel => 'Janela sobreposta';
 
   @override
+  String get multiSelectHint => 'Selecionar itens';
+
+  @override
   String get selectHint => 'Selecione um item';
 
   @override
@@ -158,6 +161,9 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get popoverSemanticsLabel => 'Janela sobreposta';
+
+  @override
+  String get multiSelectHint => 'Selecionar itens';
 
   @override
   String get selectHint => 'Selecione um item';
