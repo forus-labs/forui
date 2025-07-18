@@ -36,6 +36,8 @@ class Field<T> extends FormField<Set<T>> {
   final FHidePopoverRegion hideOnTapOutside;
   final ValueChanged<Set<T>>? onChange;
   final Widget Function(BuildContext, FMultiSelectController<T>) popoverBuilder;
+  final int min;
+  final int? max;
 
   Field({
     required this.controller,
@@ -62,6 +64,8 @@ class Field<T> extends FormField<Set<T>> {
     required this.hideOnTapOutside,
     required this.onChange,
     required this.popoverBuilder,
+    required this.min,
+    required this.max,
     required super.enabled,
     required super.autovalidateMode,
     required super.forceErrorText,
@@ -208,7 +212,9 @@ class Field<T> extends FormField<Set<T>> {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
+      ..add(IntProperty('min', min, defaultValue: 0))
+      ..add(IntProperty('max', max, defaultValue: 0));
   }
 }
 
@@ -219,7 +225,9 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FMultiSelectController(vsync: this, value: widget.initialValue);
+    _controller =
+        widget.controller ??
+        FMultiSelectController(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue);
     _controller
       ..addListener(_handleChange)
       ..addValueListener(_onChange);
@@ -249,7 +257,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       if (widget.controller case final controller?) {
         _controller = controller;
       } else {
-        _controller = FMultiSelectController(vsync: this, value: widget.initialValue);
+        _controller = FMultiSelectController(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue);
       }
 
       _controller

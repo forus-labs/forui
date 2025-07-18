@@ -164,10 +164,22 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// The divider used to separate the content items. Defaults to [FItemDivider.none].
   final FItemDivider contentDivider;
 
+  /// The minimum number of items that needs to be selected. Defaults to 0.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if both the [controller] and [min] are provided.
+  final int min;
+
+  /// The maximum number of items that can be selected. Defaults to null.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if both the [controller] and [max] are provided.
+  final int? max;
+
   /// The initial value.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if both the controller and initialValue are provided.
+  /// Throws [AssertionError] if both the [controller] and [initialValue] are provided.
   final Set<T> initialValue;
 
   /// Creates a select with a list of selectable items.
@@ -207,6 +219,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
+    int min,
+    int? max,
     Set<T>? initialValue,
     Key? key,
   }) = _BasicSelect<T>;
@@ -251,6 +265,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = FItemDivider.none,
+    int min = 0,
+    int? max,
     Set<T>? initialValue,
     Key? key,
   }) {
@@ -290,6 +306,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
+      min: min,
+      max: max,
       initialValue: initialValue,
       key: key,
       children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(key, value)],
@@ -345,6 +363,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
+    int min,
+    int? max,
     Set<T>? initialValue,
     Key? key,
   }) = _SearchSelect<T>;
@@ -401,6 +421,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = FItemDivider.none,
+    int min = 0,
+    int? max,
     Set<T>? initialValue,
     Key? key,
   }) {
@@ -450,6 +472,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
+      min: min,
+      max: max,
       initialValue: initialValue,
       key: key,
     );
@@ -489,11 +513,26 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = FItemDivider.none,
+    this.min = 0,
+    this.max,
     Widget Function(BuildContext, FMultiSelectController<T>, FMultiSelectStyle, T, Widget)? tagBuilder,
     Set<T>? initialValue,
     super.key,
   }) : tagBuilder = tagBuilder ?? defaultTagBuilder,
        initialValue = initialValue ?? controller?.value ?? {},
+       assert(0 <= min, 'The minimum number of items that can be selected must be greater than or equal to 0.'),
+       assert(
+         controller == null || min == 0,
+         'Cannot provide both a controller and a minimum number of items that can be selected.',
+       ),
+       assert(
+         max == null || max >= min,
+         'The maximum number of items that can be selected must be greater than or equal to the minimum.',
+       ),
+       assert(
+         controller == null || max == null,
+         'Cannot provide both a controller and a maximum number of items that can be selected.',
+       ),
        assert(controller == null || initialValue == null, 'Cannot provide both a controller and an initial value.');
 
   @override
@@ -531,6 +570,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       errorBuilder: errorBuilder,
       onSaved: onSaved,
       validator: validator,
+      min: min,
+      max: max,
       initialValue: initialValue,
     );
   }
@@ -572,6 +613,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
       ..add(EnumProperty('contentDivider', contentDivider))
+      ..add(IntProperty('min', min, defaultValue: 0))
+      ..add(IntProperty('max', max, defaultValue: null))
       ..add(IterableProperty('initialValue', initialValue));
   }
 }
@@ -615,6 +658,8 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     super.contentPhysics,
     super.contentDivider,
     super.tagBuilder,
+    super.min,
+    super.max,
     super.initialValue,
     super.key,
   }) : super._();
@@ -685,6 +730,8 @@ class _SearchSelect<T> extends FMultiSelect<T> {
     super.contentPhysics,
     super.contentDivider,
     super.tagBuilder,
+    super.min,
+    super.max,
     super.initialValue,
     super.key,
   }) : super._();

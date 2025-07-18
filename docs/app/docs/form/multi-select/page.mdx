@@ -88,6 +88,8 @@ FMultiSelect<String>(
   clearable: true,
   contentDivider: FItemDivider.none,
   contentScrollHandles: true,
+  min: 1,
+  max: 2,
   initialValue: {'ca'},
   children: [
     FSelectSection(
@@ -138,6 +140,8 @@ FMultiSelect<Locale>.fromMap(
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   contentScrollHandles: true,
+  min: 1,
+  max: 2,
   initialValue: {Locale('en', 'US')},
 );
 ```
@@ -157,6 +161,8 @@ FMultiSelect<User>.search(
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   onChange: (value) => print('Selected country: $value'),
+  min: 1,
+  max: 2,
   initialValue: {'value'},
   contentDivider: FItemDivider.none,
   contentScrollHandles: false,
@@ -200,6 +206,8 @@ FMultiSelect<User>.searchFromMap(
   clearable: true,
   onChange: (value) => print('Selected country: $value'),
   tagBuilder: (context, controller, styles, value, label) => FMultiSelectTag( label: label),
+  min: 1,
+  max: 2,
   initialValue: {'value'},
   contentDivider: FItemDivider.none,
   contentScrollHandles: false,
@@ -258,45 +266,6 @@ FMultiSelect<User>.searchFromMap(
           ),
         ],
       );
-    }
-    ```
-  </Tabs.Tab>
-</Tabs>
-
-### Sorted
-
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name='multi-select' variant='sorted' query={{}} height={400}/>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart {24} copy
-    const fruits = [
-      'Apple',
-      'Banana',
-      'Blueberry',
-      'Grapes',
-      'Lemon',
-      'Mango',
-      'Kiwi',
-      'Orange',
-      'Peach',
-      'Pear',
-      'Pineapple',
-      'Plum',
-      'Raspberry',
-      'Strawberry',
-      'Watermelon',
-    ];
-
-    class SortedMultiSelectPage extends StatelessWidget {
-      @override
-      Widget build(BuildContext context) => FMultiSelect<String>(
-          hint: 'Select favorite fruits',
-          format: (s) => Text(s),
-          sort: (a, b) => a.compareTo(b),
-          children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
-        );
     }
     ```
   </Tabs.Tab>
@@ -585,6 +554,28 @@ FMultiSelect<User>.searchFromMap(
   </Tabs.Tab>
 </Tabs>
 
+#### Min & Max
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='multi-select' variant='min-max' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {6} copy
+    class MinMaxMultiSelectPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FMultiSelect<String>(
+        hint: Text('Select a fruit'),
+        format: (s) => Text(s),
+        min: 1,
+        max: 3
+        children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 #### With Scroll Handles
 
 <Tabs items={['Preview', 'Code']}>
@@ -601,6 +592,45 @@ FMultiSelect<User>.searchFromMap(
         contentScrollHandles: true,
         children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
       );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Sorted
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='multi-select' variant='sorted' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {24} copy
+    const fruits = [
+      'Apple',
+      'Banana',
+      'Blueberry',
+      'Grapes',
+      'Lemon',
+      'Mango',
+      'Kiwi',
+      'Orange',
+      'Peach',
+      'Pear',
+      'Pineapple',
+      'Plum',
+      'Raspberry',
+      'Strawberry',
+      'Watermelon',
+    ];
+
+    class SortedMultiSelectPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FMultiSelect<String>(
+          hint: 'Select favorite fruits',
+          format: (s) => Text(s),
+          sort: (a, b) => a.compareTo(b),
+          children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        );
     }
     ```
   </Tabs.Tab>

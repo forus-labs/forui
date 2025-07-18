@@ -73,19 +73,6 @@ class DetailedMultiSelectPage extends Sample {
 }
 
 @RoutePage()
-class SortedMultiSelectPage extends Sample {
-  SortedMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
-
-  @override
-  Widget sample(BuildContext context) => FMultiSelect<String>(
-    hint: const Text('Select favorite fruits'),
-    format: Text.new,
-    sort: (a, b) => a.compareTo(b),
-    children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
-  );
-}
-
-@RoutePage()
 class SectionMultiSelectPage extends Sample {
   SectionMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
@@ -323,6 +310,23 @@ class FormatMultiSelectPage extends Sample {
 }
 
 @RoutePage()
+class MinMaxMultiSelectPage extends Sample {
+  MinMaxMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+
+  @override
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 15),
+    child: FMultiSelect<String>(
+      hint: const Text('Select favorite fruits'),
+      format: Text.new,
+      min: 1,
+      max: 3,
+      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+    ),
+  );
+}
+
+@RoutePage()
 class ScrollHandlesMultiSelectPage extends Sample {
   ScrollHandlesMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
@@ -333,6 +337,22 @@ class ScrollHandlesMultiSelectPage extends Sample {
       hint: const Text('Select a fruit'),
       format: Text.new,
       contentScrollHandles: true,
+      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+    ),
+  );
+}
+
+@RoutePage()
+class SortedMultiSelectPage extends Sample {
+  SortedMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+
+  @override
+  Widget sample(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 15),
+    child: FMultiSelect<String>(
+      hint: const Text('Select favorite fruits'),
+      format: Text.new,
+      sort: (a, b) => a.compareTo(b),
       children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
   );
