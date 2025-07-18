@@ -77,7 +77,7 @@ FMultiSelectController<T> useFMultiSelectController<T>({
   List<Object?>? keys,
 }) => use(
   _MultiSelectHook(
-    vsync: vsync ??= useSingleTickerProvider(keys: keys),
+    vsync: vsync ?? useSingleTickerProvider(keys: keys),
     value: value ?? {},
     min: min,
     max: max,

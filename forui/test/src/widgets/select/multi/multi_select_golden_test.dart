@@ -285,7 +285,7 @@ void main() {
           alignment: Alignment.topCenter,
           child: FMultiSelect.fromMap(
             letters,
-            initialValue: const {'A', 'B'},
+            initialValue: const {'Apple', 'Banana'},
             enabled: false,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
