@@ -117,5 +117,5 @@ class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
 
   /// Creates a [FDividerStyle].
   FDividerStyle({required this.color, required this.padding, this.width = 1})
-    : assert(0 < width, 'width ($width) must be < 0');
+    : assert(0 < width, 'width ($width) must be > 0');
 }
