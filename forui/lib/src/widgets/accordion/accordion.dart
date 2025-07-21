@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 
@@ -32,7 +33,7 @@ class FAccordion extends StatefulWidget {
   /// The individual accordion items and separators.
   ///
   /// ## Contract
-  /// A accordion item must mix-in [FAccordionItemMixin]. Not doing so will result in the item being treated as a
+  /// An accordion item must mix-in [FAccordionItemMixin]. Not doing so will result in the item being treated as a
   /// separator and cause undefined behavior.
   final List<Widget> children;
 
@@ -181,14 +182,8 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 class InheritedAccordionData extends InheritedWidget {
   @useResult
   static InheritedAccordionData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<InheritedAccordionData>();
-    assert(
-      data != null,
-      'No InheritedAccordionData found in context. '
-      'This is likely because you used an FAccordionItem outside of an FAccordion. To fix, ensure all FAccordionItems '
-      'are children of an FAccordion.',
-    );
-    return data!;
+    assert(debugCheckHasAncestor<InheritedAccordionData>('$FAccordion', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedAccordionData>()!;
   }
 
   final FAccordionController controller;

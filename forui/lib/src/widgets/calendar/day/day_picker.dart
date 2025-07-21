@@ -220,9 +220,9 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     this.tileSize = 42,
   }) : assert(
          startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
-         'startDayOfWeek must be between DateTime.monday (1) and DateTime.sunday (7).',
+         'startDayOfWeek ($startDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
        ),
-       assert(0 < tileSize, 'tileSize must be positive.');
+       assert(0 < tileSize, 'tileSize ($tileSize) must be positive');
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
   factory FCalendarDayPickerStyle.inherit({required FColors colors, required FTypography typography}) {

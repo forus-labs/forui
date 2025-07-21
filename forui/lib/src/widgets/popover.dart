@@ -274,9 +274,9 @@ class FPopover extends StatefulWidget {
        ),
        assert(
          focusNode == null || traversalEdgeBehavior == null,
-         'focusNode and traversalEdgeBehavior cannot both be set.',
+         'focusNode and traversalEdgeBehavior cannot both be non-null',
        ),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
+       assert(builder != _builder || child != null, 'Either builder or child must be provided'),
        popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
        childAnchor = childAnchor ?? defaultPlatform.child;
 

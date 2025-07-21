@@ -28,7 +28,7 @@ abstract class InputController extends TextEditingController {
     }
 
     final TextSelection(:baseOffset, :extentOffset) = value.selection;
-    // Selected everything without doing anything else.
+    // Selected the entire text without doing anything else.
     if (baseOffset == 0 && extentOffset == value.text.length && text == value.text) {
       super.value = value;
       return;

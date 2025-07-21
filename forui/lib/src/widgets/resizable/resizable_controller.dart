@@ -12,7 +12,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   /// axis.
   ///
   /// ## Contract
-  /// Modifying the regions outside of [update] and [end] will result in undefined behaviour.
+  /// Modifying the regions outside of [update] and [end] will result in undefined behavior.
   final List<FResizableRegionData> regions = [];
 
   /// The minimum velocity, inclusive, of a drag gesture for haptic feedback to be performed on collision between two
@@ -23,7 +23,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   ///
   /// ## Contract
   /// [_hapticFeedbackVelocity] should be a positive, finite number. It will otherwise
-  /// result in undefined behaviour.
+  /// result in undefined behavior.
   final double _hapticFeedbackVelocity = 6.5; // ignore: unused_field, TODO: haptic feedback
 
   bool _haptic = false;
@@ -33,7 +33,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   /// Creates a [FResizableController].
   ///
   /// [onResizeUpdate] is called **while** a resizable region and its neighbours are being resized. Most users should
-  /// prefer [onResizeEnd], which is called only after the regions have bee resized.
+  /// prefer [onResizeEnd], which is called only after the regions have been resized.
   ///
   /// [onResizeEnd] is called after a resizable region and its neighbours have been resized.
   ///
@@ -43,10 +43,10 @@ abstract interface class FResizableController extends FChangeNotifier {
     void Function(List<FResizableRegionData> resized)? onResizeEnd,
   }) = _ResizableController;
 
-  /// Creates a [FResizableController] that cascades shrinking of a region below their minimum extents to its neighbours.
+  /// Creates a [FResizableController] that cascades shrinking of a region below its minimum extent to its neighbours.
   ///
   /// [onResizeUpdate] is called **while** a resizable region and its neighbours are being resized. Most users should
-  /// prefer [onResizeEnd], which is called only after the regions have bee resized.
+  /// prefer [onResizeEnd], which is called only after the regions have been resized.
   ///
   /// [onResizeEnd] is called after a resizable region and its neighbours have been resized.
   ///

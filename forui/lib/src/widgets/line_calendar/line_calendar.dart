@@ -113,16 +113,16 @@ class FLineCalendar extends StatelessWidget {
        _initialScroll = initialScroll?.toLocalDate(),
        _initialSelection = initialSelection?.toLocalDate(),
        _today = (today ?? DateTime.now()).toLocalDate(),
-       assert(controller == null || toggleable == null, 'controller and toggleable cannot be both non-null'),
+       assert(controller == null || toggleable == null, 'controller and toggleable cannot both be non-null'),
        assert(
          start == null || end == null || start.toLocalDate() < end.toLocalDate(),
-         'end date must be greater than start date',
+         'start ($start) must be < end ($end)',
        ),
        assert(
          initialScroll == null ||
              start == null ||
              (initialScroll.toLocalDate() >= start.toLocalDate() && initialScroll.toLocalDate() < end!.toLocalDate()),
-         'initial scrolled date must be greater than or equal to start date',
+         'initialScroll ($initialScroll) must be >= start ($start)',
        ),
        assert(
          controller == null || initialSelection == null,
@@ -133,13 +133,13 @@ class FLineCalendar extends StatelessWidget {
              start == null ||
              (initialSelection.toLocalDate() >= start.toLocalDate() &&
                  initialSelection.toLocalDate() < end!.toLocalDate()),
-         'initial selection date must be greater than or equal to start date',
+         'initialSelection ($initialSelection) must be >= start ($start) and < end ($end)',
        ),
        assert(
          today == null ||
              start == null ||
              (today.toLocalDate() >= start.toLocalDate() && today.toLocalDate() < end!.toLocalDate()),
-         'today must be greater than or equal to start date',
+         'today ($today) must be >= start ($start) and < end ($end)',
        );
 
   @override

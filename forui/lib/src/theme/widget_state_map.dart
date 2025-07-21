@@ -66,7 +66,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
 
   /// Returns a new [FWidgetStateMap] with the same constraints, but with different values produced by [map].
   ///
-  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)
+  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/docs/themes#customization)
   /// and directly modify its `FWidgetStateMap` fields instead.
   ///
   /// ## Example
@@ -91,7 +91,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   ///
   /// To replace values associated with [WidgetState.any], pass in an empty set.
   ///
-  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)
+  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/docs/themes#customization)
   /// and directly modify its `FWidgetStateMap` fields instead.
   ///
   /// ## Example
@@ -128,7 +128,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   ///
   /// To replace values associated with [WidgetState.any], pass in an empty set.
   ///
-  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)
+  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/docs/themes#customization)
   /// and directly modify its `FWidgetStateMap` fields instead.
   ///
   /// ## Example
@@ -162,7 +162,7 @@ class FWidgetStateMap<T> implements WidgetStateProperty<T> {
   /// Creates a new [FWidgetStateMap] where all values associated with constraints satisfied by [states] are
   /// replaced with the result of calling [replace] on the original value.
   ///
-  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)
+  /// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/docs/themes#customization)
   /// and directly modify its `FWidgetStateMap` fields instead.
   ///
   /// ## Example

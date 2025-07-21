@@ -160,7 +160,7 @@ class _DateController extends FCalendarController<DateTime?> {
     required DateTime? initialSelection,
     required Predicate<DateTime>? selectable,
     required this.toggleable,
-  }) : assert(initialSelection?.isUtc ?? true, 'value must be in UTC timezone'),
+  }) : assert(initialSelection?.isUtc ?? true, 'initialSelection ($initialSelection) must be in UTC timezone'),
        _selectable = selectable ?? _true,
        super(initialSelection);
 
@@ -205,7 +205,7 @@ final class _DatesController extends FCalendarController<Set<DateTime>> {
   final Predicate<DateTime> _selectable;
 
   _DatesController({Set<DateTime> initialSelections = const {}, Predicate<DateTime>? selectable})
-    : assert(initialSelections.every((d) => d.isUtc), 'dates must be in UTC timezone'),
+    : assert(initialSelections.every((d) => d.isUtc), 'initialSelections ($initialSelections) must be in UTC timezone'),
       _selectable = selectable ?? _true,
       super(initialSelections);
 
@@ -233,7 +233,7 @@ final class _AutoRangeController extends FCalendarController<(DateTime, DateTime
     final range = value;
     assert(
       range == null || (range.$1.isBefore(range.$2) || range.$1.isAtSameMomentAs(range.$2)),
-      'end date must be greater than or equal to start date',
+      'start (${range.$1}) must be <= end (${range.$2})',
     );
   }
 

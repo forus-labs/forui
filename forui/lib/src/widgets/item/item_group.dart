@@ -59,7 +59,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@template forui.widgets.FItemGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
   ///
-  /// Scrolling past the end of the group using the controller will result in undefined behaviour.
+  /// Scrolling past the end of the group using the controller will result in undefined behavior.
   ///
   /// It is ignored if the group is part of a merged [FItemGroup].
   /// {@endtemplate}

@@ -56,8 +56,7 @@ abstract class FProgress extends StatefulWidget {
   }) = _Circular;
 
   const FProgress._({this.semanticsLabel, this.value, super.key})
-    : assert(value == null || value >= 0.0, 'The value must be greater than or equal to 0.0'),
-      assert(value == null || value <= 1.0, 'The value must be less than or equal to 1.0');
+    : assert(value == null || (value >= 0.0 && value <= 1.0), 'value ($value) must be between 0.0 and 1.0');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

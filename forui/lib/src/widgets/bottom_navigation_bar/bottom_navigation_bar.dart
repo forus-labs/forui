@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 
@@ -100,18 +101,13 @@ class FBottomNavigationBar extends StatelessWidget {
   }
 }
 
-/// A FBottomNavigationBar]'s data.
+/// A [FBottomNavigationBar]'s data.
 class FBottomNavigationBarData extends InheritedWidget {
-  /// Returns the [FBottomNavigationBarItemStyle] and current states of the [FBottomNavigationBar] in the given
-  /// [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FBottomNavigationBar] in the given [context].
+  /// Returns the [FBottomNavigationBarItemStyle] and current states of the [FBottomNavigationBar] in the given [context].
   @useResult
   static FBottomNavigationBarData of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FBottomNavigationBarData>();
-    assert(result != null, 'No FBottomNavigationBarData found in context');
-    return result!;
+    assert(debugCheckHasAncestor<FBottomNavigationBarData>('$FBottomNavigationBar', context));
+    return context.dependOnInheritedWidgetOfExactType<FBottomNavigationBarData>()!;
   }
 
   /// The item's style.

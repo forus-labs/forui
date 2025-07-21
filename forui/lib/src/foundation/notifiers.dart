@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 // ignore_for_file: always_call_super_dispose_last
 
@@ -74,17 +75,12 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
 
   /// Creates a [FMultiValueNotifier] with a [min] and [max] number of elements allowed. Defaults to no min and max.
   ///
-  /// ## Contract:
-  /// Throws [AssertionError] if:
-  /// * [min] < 0.
-  /// * [max] < 0.
-  /// * [min] > [max].
+  /// # Contract:
+  /// [min] and [max] must be: `0 <= min <= max`.
   FMultiValueNotifier({int min = 0, int? max, Set<T>? value})
     : _min = min,
       _max = max,
-      assert(min >= 0, 'The min must be greater than or equal to 0.'),
-      assert(max == null || max >= 0, 'The max must be greater than or equal to 0.'),
-      assert(max == null || min <= max, 'The max must be greater than or equal to the min.'),
+      assert(debugCheckInclusiveRange<FMultiValueNotifier<T>>(min, max)),
       super(value ?? {});
 
   /// Creates a [FMultiValueNotifier] that allows only one element at a time.

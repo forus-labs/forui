@@ -60,7 +60,7 @@ class FTappable extends StatefulWidget {
   /// {@template forui.foundation.FTappable.onHoverChange}
   /// Handler called when the hover changes.
   ///
-  /// Called with true if this widget's node gains focus, and false if it loses focus.
+  /// Called with true if this widget's node gains hover, and false if it loses hover.
   /// {@endtemplate}
   final ValueChanged<bool>? onHoverChange;
 
@@ -545,10 +545,7 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
 
   /// Creates a [FTappableStyle].
   FTappableStyle({
-    this.cursor = const FWidgetStateMap({
-      WidgetState.disabled: MouseCursor.defer,
-      WidgetState.any: SystemMouseCursors.click,
-    }),
+    this.cursor = const FWidgetStateMap({WidgetState.any: MouseCursor.defer}),
     this.pressedEnterDuration = const Duration(milliseconds: 200),
     this.pressedExitDuration = Duration.zero,
     this.bounceDownDuration = const Duration(milliseconds: 100),

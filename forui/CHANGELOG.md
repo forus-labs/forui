@@ -12,7 +12,6 @@
 * Fix `FAccordionController.collapse(...)` wrongly returning false if the item is already collapsed.
 
 
-
 ### `FMultiSelect` (new)
 * Add `FMultiSelect`.
 * Add `FMultiSelectController`.
@@ -23,6 +22,8 @@
 ### Others
 * Rename `FSelect.divider` to `FSelect.contentDivider`.
 * Change `FMultiValueNotifier` to be non-abstract.
+* Change `FTappableStyle.mouseCursor` to `MouseCursor.defer`. See https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
+  for our rationale behind this change.
 
 
 ### 0.14.1

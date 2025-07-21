@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 
@@ -14,9 +15,8 @@ class InheritedController extends InheritedModel<UniqueKey> {
   static final rawExtent = UniqueKey();
 
   static FSliderController of(BuildContext context, [UniqueKey? aspect]) {
-    final result = InheritedModel.inheritFrom<InheritedController>(context, aspect: aspect);
-    assert(result != null, 'No InheritedController found in context');
-    return result!.controller;
+    assert(debugCheckHasAncestor<InheritedController>('$FSlider', context));
+    return InheritedModel.inheritFrom<InheritedController>(context, aspect: aspect)!.controller;
   }
 
   final FSliderController controller;

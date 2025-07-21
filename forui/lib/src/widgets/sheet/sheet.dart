@@ -45,7 +45,7 @@ class Sheet extends StatefulWidget {
     this.onChange,
     this.onClosing = _onClosing,
     super.key,
-  }) : assert(!draggable || controller != null, 'Draggable sheets must have a controller.');
+  }) : assert(!draggable || controller != null, 'Draggable sheets must have a controller');
 
   @override
   State<Sheet> createState() => _SheetState();
@@ -96,7 +96,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    assert(debugCheckHasMediaQuery(context), '');
+    assert(debugCheckHasMediaQuery(context));
 
     Widget sheet = DisplayFeatureSubScreen(
       anchorPoint: widget.anchorPoint,

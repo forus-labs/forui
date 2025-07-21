@@ -120,7 +120,7 @@ final class FTypography with Diagnosticable {
     this.xl6 = const TextStyle(fontSize: 60, height: 1),
     this.xl7 = const TextStyle(fontSize: 72, height: 1),
     this.xl8 = const TextStyle(fontSize: 96, height: 1),
-  }) : assert(0 < defaultFontFamily.length, 'The defaultFontFamily should not be empty.');
+  }) : assert(0 < defaultFontFamily.length, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
   FTypography.inherit({required FColors colors, this.defaultFontFamily = _defaultFontFamily})
@@ -136,7 +136,7 @@ final class FTypography with Diagnosticable {
       xl6 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 60, height: 1),
       xl7 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 72, height: 1),
       xl8 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 96, height: 1),
-      assert(defaultFontFamily.isNotEmpty, 'The defaultFontFamily should not be empty.');
+      assert(defaultFontFamily.isNotEmpty, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
 
   /// Scales the fields of this [FTypography] by the given fields.
   ///

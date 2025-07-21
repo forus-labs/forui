@@ -12,7 +12,7 @@ part 'resizable.style.dart';
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
 ///
 /// Each child is a [FResizableRegion] that has an initial and minimum extent. Setting an initial extent less than the
-/// minimum extent will result in undefined behaviour. The children are arranged from top to bottom, or left to right,
+/// minimum extent will result in undefined behavior. The children are arranged from top to bottom, or left to right,
 /// depending on the main [axis].
 ///
 /// It is recommended that a [FResizable] contains at least 2 [FResizableRegion]s.
@@ -90,11 +90,11 @@ class FResizable extends StatefulWidget {
     super.key,
   }) : assert(
          crossAxisExtent == null || 0 < crossAxisExtent,
-         'The crossAxisExtent should be positive, but is $crossAxisExtent.',
+         'crossAxisExtent ($crossAxisExtent) must be > 0',
        ),
        assert(
          hitRegionExtent == null || 0 < hitRegionExtent,
-         'The hitRegionExtent should be positive, but is $hitRegionExtent.',
+         'hitRegionExtent ($hitRegionExtent) must be > 0',
        ),
        hitRegionExtent = hitRegionExtent ?? (FTouch.primary ? 60 : 10);
 

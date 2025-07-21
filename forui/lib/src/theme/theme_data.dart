@@ -133,7 +133,7 @@ final class FThemeData with Diagnosticable {
   /// ```
   final FCheckboxStyle checkboxStyle;
 
-  /// The date picker style.
+  /// The date field style.
   ///
   /// ## CLI
   /// To generate and customize this style:

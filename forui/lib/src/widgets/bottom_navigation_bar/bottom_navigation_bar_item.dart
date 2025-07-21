@@ -120,7 +120,7 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The spacing between the icon and the label. Defaults to `2`.
+  /// The spacing between the icon and the label. Defaults to 2.
   @override
   final double spacing;
 

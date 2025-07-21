@@ -2,6 +2,7 @@ include: package:flint/analysis_options.flutter.yaml
 analyzer:
   errors:
     implicit_call_tearoffs: ignore
+    prefer_asserts_with_message: ignore
     unused_result: ignore
 
 linter:

@@ -72,7 +72,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   @override
   final double crossAxisExtent;
 
-  /// The thumb's size, inclusive of . Defaults to `25` on touch platforms and `20` on non-touch platforms.
+  /// The thumb's size. Defaults to `25` on touch platforms and `20` on non-touch platforms.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [thumbSize] is not positive.
@@ -96,14 +96,14 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   @override
   final FTooltipStyle tooltipStyle;
 
-  /// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned to.
+  /// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned.
   ///
   /// Defaults to [Alignment.bottomCenter] on primarily touch devices and [Alignment.centerLeft] on non-primarily touch
   /// devices.
   @override
   final AlignmentGeometry tooltipTipAnchor;
 
-  /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned to.
+  /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned.
   ///
   /// Defaults to [Alignment.topCenter] on primarily touch devices and [Alignment.centerRight] on non-primarily touch
   /// devices.
@@ -129,7 +129,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     super.descriptionPadding,
     super.errorPadding = const EdgeInsets.only(top: 5),
     super.childPadding,
-  }) : assert(thumbSize == null || 0 < thumbSize, 'The thumb size must be positive'),
+  }) : assert(thumbSize == null || 0 < thumbSize, 'thumbSize ($thumbSize) must be > 0'),
        thumbSize = thumbSize ?? (FTouch.primary ? 25 : 20);
 
   /// Creates a [FSliderStyle] that inherits its properties.

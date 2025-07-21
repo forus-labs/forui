@@ -57,7 +57,7 @@ Future<T?> showFSheet<T>({
   Offset? anchorPoint,
   bool useSafeArea = false,
 }) {
-  assert(debugCheckHasMediaQuery(context), '');
+  assert(debugCheckHasMediaQuery(context));
 
   final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
   final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();

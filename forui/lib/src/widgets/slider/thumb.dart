@@ -264,7 +264,7 @@ class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
     required this.borderColor,
     required this.focusedOutlineStyle,
     this.borderWidth = 2,
-  }) : assert(0 < borderWidth, 'The border width must be positive');
+  }) : assert(0 < borderWidth, 'borderWidth ($borderWidth) must be > 0');
 }
 
 @internal

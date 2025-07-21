@@ -97,7 +97,7 @@ class FTabs extends StatefulWidget {
     this.onChange,
     this.onPress,
     super.key,
-  }) : assert(children.isNotEmpty, 'Must have at least 1 tab provided.'),
+  }) : assert(children.isNotEmpty, 'Must provide at least 1 tab.'),
        assert(0 <= initialIndex && initialIndex < children.length, 'initialIndex must be within the range of tabs.'),
        assert(controller == null || controller.index == initialIndex, "Controller's index must match initialIndex."),
        assert(

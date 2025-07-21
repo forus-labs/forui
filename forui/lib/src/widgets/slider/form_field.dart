@@ -111,7 +111,7 @@ class _State extends FormFieldState<FSliderSelection> {
   void didChange(FSliderSelection? value) {
     // This is not 100% accurate since a controller's selection can never be null. However, users will have to go out
     // of their way to obtain a FormFieldState<FSliderSelection> via a GlobalKey AND call didChange(null).
-    assert(value != null, "A slider's selection cannot be null.");
+    assert(value != null, "slider's selection cannot be null");
     super.didChange(value);
     if (widget.controller.selection != value) {
       widget.controller.selection = value;

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
+import 'package:forui/src/foundation/debug.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -9,9 +10,8 @@ import 'package:forui/forui.dart';
 @internal
 class InheritedData extends InheritedWidget {
   static InheritedData of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
-    assert(result != null, 'No InheritedData found in context');
-    return result!;
+    assert(debugCheckHasAncestor<InheritedData>('$FSlider', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedData>()!;
   }
 
   final FSliderStyle style;

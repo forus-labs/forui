@@ -70,7 +70,7 @@ class _ShiftedSheet extends RenderShiftedBox {
 
     if (child case final child?) {
       final childConstraints = constrainChild(constraints);
-      assert(childConstraints.debugAssertIsValid(isAppliedConstraint: true), '');
+      assert(childConstraints.debugAssertIsValid(isAppliedConstraint: true));
 
       child.layout(childConstraints, parentUsesSize: !childConstraints.isTight);
 

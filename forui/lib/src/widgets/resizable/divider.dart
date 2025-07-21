@@ -43,7 +43,7 @@ sealed class Divider extends StatefulWidget {
     required this.cursor,
     required this.semanticFormatterCallback,
     super.key,
-  }) : assert(0 <= left, 'Left child should be non-negative, but is $left.'),
+  }) : assert(0 <= left, 'left ($left) must be >= 0'),
        assert(left + 1 == right, 'Left and right should be next to each other.');
 
   Widget focusableActionDetector({

@@ -1,10 +1,17 @@
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
 /// A controller shows and hides items in an [FAccordion].
+///
+/// When the maximum number of expanded items is reached, it automatically collapses the least recently expanded item
+/// to make room for new expansions.
+///
+/// Methods like [toggle], [expand], and [collapse] will not work during [State.initState] or before the accordion
+/// items are built. Use [FAccordionItem.initiallyExpanded] instead.
 class FAccordionController extends FChangeNotifier {
   final Map<int, AnimationController> _controllers;
   final Set<int> _expanded;
@@ -16,16 +23,13 @@ class FAccordionController extends FChangeNotifier {
   /// [min] and [max] define the minimum and maximum number of expanded items allowed.
   ///
   /// # Contract:
-  /// * Throws [AssertionError] if [min] < 0.
-  /// * Throws [AssertionError] if [max] < [min].
+  /// [min] and [max] must be: `0 <= min <= max`.
   FAccordionController({int min = 0, int? max})
     : _controllers = {},
       _expanded = {},
       _min = min,
       _max = max,
-      assert(min >= 0, 'The min value must be greater than or equal to 0.'),
-      assert(max == null || 0 <= max, 'The max value must be greater than or equal to 0.'),
-      assert(max == null || min <= max, 'The max value must be greater than or equal to the min value.');
+      assert(debugCheckInclusiveRange<FAccordionController>(min, max));
 
   /// Toggles the item at the given [index], expanding it if successfully expanded or collapsed.
   ///

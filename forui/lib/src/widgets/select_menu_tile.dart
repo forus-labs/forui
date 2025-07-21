@@ -211,7 +211,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     super.key,
   }) : assert(
          selectController == null || initialValue == null,
-         'Cannot provide both selectController and initialValue.',
+         'Cannot provide both selectController and initialValue',
        ),
        super(
          initialValue: {?initialValue, ...?selectController?.value},
@@ -473,7 +473,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     super.key,
   }) : assert(
          selectController == null || initialValue == null,
-         'Cannot provide both selectController and initialValue.',
+         'Cannot provide both selectController and initialValue',
        ),
        super(
          initialValue: {?initialValue, ...?selectController?.value},
