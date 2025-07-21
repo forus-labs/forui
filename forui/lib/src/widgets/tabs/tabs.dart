@@ -89,21 +89,25 @@ class FTabs extends StatefulWidget {
   /// * [controller] index does not match the [initialIndex].
   FTabs({
     required this.children,
-    this.initialIndex = 0,
     this.scrollable = false,
     this.physics,
     this.controller,
     this.style,
     this.onChange,
     this.onPress,
+    int? initialIndex,
     super.key,
   }) : assert(children.isNotEmpty, 'Must provide at least 1 tab.'),
-       assert(0 <= initialIndex && initialIndex < children.length, 'initialIndex must be within the range of tabs.'),
-       assert(controller == null || controller.index == initialIndex, "Controller's index must match initialIndex."),
+       assert(
+         0 <= (initialIndex ?? 0) && (initialIndex ?? 0) < children.length,
+         'initialIndex must be within the range of tabs.',
+       ),
+       assert(controller == null || initialIndex == null, 'Cannot provide both controller and initialIndex.'),
        assert(
          controller == null || controller.length == children.length,
          'Controller length must match the number of tabs.',
-       );
+       ),
+       initialIndex = initialIndex ?? 0;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

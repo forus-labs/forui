@@ -47,6 +47,36 @@ void main() {
     expect(tester.takeException(), null);
   });
 
+  testWidgets('controller with non-first index', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTabs(
+          controller: autoDispose(FTabController(initialIndex: 1, length: 2, vsync: tester)),
+          children: [
+            FTabEntry(
+              label: const Text('Account'),
+              child: FCard(
+                title: const Text('Account'),
+                subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+                child: Container(color: Colors.blue, height: 100),
+              ),
+            ),
+            FTabEntry(
+              label: const Text('Password'),
+              child: FCard(
+                title: const Text('Password'),
+                subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+                child: Container(color: Colors.red, height: 100),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    expect(tester.takeException(), null);
+  });
+
   testWidgets('non-English Locale', (tester) async {
     await tester.pumpWidget(
       Localizations(
