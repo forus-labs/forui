@@ -196,10 +196,10 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     this.titleSpacing = 3,
     this.middleSpacing = 4,
     this.suffixIconSpacing = 5,
-  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing must be non-negative.'),
-       assert(0 <= titleSpacing, 'titleSpacing must be non-negative.'),
-       assert(0 <= middleSpacing, 'middleSpacing must be non-negative.'),
-       assert(0 <= suffixIconSpacing, 'suffixIconSpacing must be non-negative.');
+  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0'),
+       assert(0 <= titleSpacing, 'titleSpacing ($titleSpacing) must be >= 0'),
+       assert(0 <= middleSpacing, 'middleSpacing ($middleSpacing) must be >= 0'),
+       assert(0 <= suffixIconSpacing, 'suffixIconSpacing ($suffixIconSpacing) must be >= 0');
 
   /// Creates a [FItemContentStyle] that inherits its properties.
   FItemContentStyle.inherit({required FColors colors, required FTypography typography})

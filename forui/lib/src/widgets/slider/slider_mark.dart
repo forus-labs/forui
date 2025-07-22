@@ -28,7 +28,7 @@ class FSliderMark with Diagnosticable {
 
   /// Creates a [FSliderMark] at the given percentage in a slider.
   const FSliderMark({required this.value, this.style, this.tick = true, this.label})
-    : assert(0 <= value && value <= 1, 'offset must be between 0 and 1, but is $value.');
+    : assert(0 <= value && value <= 1, 'value ($value) must be between 0.0 and 1.0, inclusive.');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -115,5 +115,5 @@ class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
     required this.labelAnchor,
     required this.labelOffset,
     this.tickSize = 3,
-  }) : assert(0 < tickSize, 'tickDimension must be positive, but is $tickSize.');
+  }) : assert(0 < tickSize, 'tickSize ($tickSize) must be > 0');
 }

@@ -3,12 +3,14 @@ import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
+import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
+
 @internal
 class InheritedStates extends InheritedWidget {
   static InheritedStates of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<InheritedStates>();
-    assert(result != null, 'No InheritedStates found in context');
-    return result!;
+    assert(debugCheckHasAncestor<InheritedStates>('$FSlider', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedStates>()!;
   }
 
   final Set<WidgetState> states;

@@ -72,14 +72,14 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
       applyHeightToLastDescent: false,
     ),
     this.selectionHeightAdjustment = 0,
-  }) : assert(0 < diameterRatio, 'The diameter ratio must be greater than 0.'),
-       assert(0 < squeeze, 'The squeeze must be greater than 0.'),
-       assert(0 < magnification, 'The magnification must be greater than 0.'),
+  }) : assert(0 < diameterRatio, 'diameterRatio ($diameterRatio) must be > 0'),
+       assert(0 < squeeze, 'squeeze ($squeeze) must be > 0'),
+       assert(0 < magnification, 'magnification ($magnification) must be > 0'),
        assert(
          0 <= overAndUnderCenterOpacity && overAndUnderCenterOpacity <= 1,
-         'The over and under center opacity must be between 0 and 1.',
+         'overAndUnderCenterOpacity ($overAndUnderCenterOpacity) must be between 0 and 1',
        ),
-       assert(spacing >= 0, 'The spacing must be greater than or equal to 0.');
+       assert(spacing >= 0, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FPickerStyle] that inherits its properties.
   FPickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})

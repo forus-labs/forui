@@ -34,11 +34,11 @@ class FResizableRegion extends StatelessWidget {
 
   /// Creates a [FResizableRegion].
   FResizableRegion({required this.initialExtent, required this.builder, this.minExtent, this.child, super.key})
-    : assert(0 < initialExtent, 'The initial extent should be positive, but it is $initialExtent.'),
-      assert(minExtent == null || 0 < minExtent, 'The min extent should be positive, but it is $minExtent.'),
+    : assert(0 < initialExtent, 'initialExtent ($initialExtent) must be > 0'),
+      assert(minExtent == null || 0 < minExtent, 'minExtent ($minExtent) must be > 0'),
       assert(
         minExtent == null || minExtent.lessOrAround(initialExtent),
-        'The initial extent, $initialExtent is less than the min extent, $minExtent.',
+        'minExtent ($minExtent) must be < initialExtent ($initialExtent)',
       );
 
   @override

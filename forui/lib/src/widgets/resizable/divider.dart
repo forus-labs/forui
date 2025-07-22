@@ -43,7 +43,7 @@ sealed class Divider extends StatefulWidget {
     required this.cursor,
     required this.semanticFormatterCallback,
     super.key,
-  }) : assert(0 <= left, 'Left child should be non-negative, but is $left.'),
+  }) : assert(0 <= left, 'left ($left) must be >= 0'),
        assert(left + 1 == right, 'Left and right should be next to each other.');
 
   Widget focusableActionDetector({
@@ -274,7 +274,7 @@ class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFuncti
     required this.focusedOutlineStyle,
     required this.thumbStyle,
     this.width = 0.5,
-  }) : assert(0 < width, 'Thickness should be positive, but is $width.');
+  }) : assert(0 < width, 'width ($width) must be > 0');
 }
 
 /// The style of the dividers' thumbs between [FResizableRegion]s.
@@ -307,6 +307,6 @@ class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbS
     required this.foregroundColor,
     required this.height,
     required this.width,
-  }) : assert(0 < height, 'Height should be positive, but is $height.'),
-       assert(0 < width, 'Width should be positive, but is $width.');
+  }) : assert(0 < height, 'height ($height) must be > 0'),
+       assert(0 < width, 'width ($width) must be > 0');
 }

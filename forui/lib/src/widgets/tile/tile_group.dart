@@ -59,7 +59,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@template forui.widgets.FTileGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
   ///
-  /// Scrolling past the end of the group using the controller will result in undefined behaviour.
+  /// Scrolling past the end of the group using the controller will result in undefined behavior.
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
   /// {@endtemplate}
@@ -147,7 +147,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     this.description,
     this.error,
     super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+  }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
        _builder = ((style, enabled) => SliverList.list(
          children: [
            for (final (index, child) in children.indexed)
@@ -197,8 +197,8 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     this.description,
     this.error,
     super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
-       assert(count == null || 0 <= count, 'count must be non-negative.'),
+  }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
+       assert(count == null || 0 <= count, 'count ($count) must be >= 0'),
        _builder = ((style, enabled) => SliverList.builder(
          itemCount: count,
          itemBuilder: (context, index) {
@@ -237,7 +237,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     this.description,
     this.error,
     super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+  }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
        _builder = ((style, enabled) => SliverMainAxisGroup(
          slivers: [
            for (final (index, child) in children.indexed)

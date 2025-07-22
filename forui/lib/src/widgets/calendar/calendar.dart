@@ -99,7 +99,7 @@ class FCalendar extends StatefulWidget {
        today = today ?? DateTime.now(),
        _initialType = initialType,
        _initialMonth = (initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months) {
-    assert(this.start.toLocalDate() < this.end.toLocalDate(), 'end date must be greater than start date');
+    assert(this.start.toLocalDate() < this.end.toLocalDate(), 'start ($start) must be < end ($end)');
   }
 
   @override

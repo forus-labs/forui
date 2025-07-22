@@ -110,7 +110,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required this.childTextStyle,
     this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
     this.prefixIconSpacing = 10,
-  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing must be non-negative.');
+  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
   /// Creates a [FRawItemContentStyle] that inherits its properties.
   FRawItemContentStyle.inherit({required FColors colors, required FTypography typography})

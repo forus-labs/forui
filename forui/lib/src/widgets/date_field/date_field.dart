@@ -232,8 +232,7 @@ abstract class FDateField extends StatefulWidget {
     super.key,
   }) : assert(
          controller == null || initialDate == null,
-         'Cannot provide both a controller and an initialDate. '
-         'To fix, set the initial date directly in the controller.',
+         'Cannot provide both a controller and an initialDate. To fix, set the date directly in the controller.',
        ),
        initialDate = initialDate?.toLocalDate().toNative();
 

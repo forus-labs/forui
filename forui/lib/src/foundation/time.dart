@@ -16,8 +16,8 @@ final class FTime implements Comparable<FTime> {
 
   /// Creates a [FTime].
   const FTime([this.hour = 0, this.minute = 0])
-    : assert(hour >= 0 && hour <= 23, 'hour must be between 0 and 23'),
-      assert(minute >= 0 && minute <= 59, 'minute must be between 0 and 59');
+    : assert(hour >= 0 && hour <= 23, 'hour ($hour) must be between 0 and 23'),
+      assert(minute >= 0 && minute <= 59, 'minute ($minute) must be between 0 and 59');
 
   /// Creates a [FTime] based on the given [DateTime].
   FTime.fromDateTime(DateTime dateTime) : this(dateTime.hour, dateTime.minute);

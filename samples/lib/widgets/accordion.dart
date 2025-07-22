@@ -5,11 +5,7 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
-final controllers = {
-  'default': FAccordionController(),
-  'default-max': FAccordionController(max: 2),
-  'radio': FAccordionController.radio(),
-};
+final controllers = {'default': FAccordionController(max: 1), 'max': FAccordionController(max: 2)};
 
 @RoutePage()
 class AccordionPage extends Sample {

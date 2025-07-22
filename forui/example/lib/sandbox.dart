@@ -11,22 +11,45 @@ class Sandbox extends StatefulWidget {
 enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  late final FPopoverController controller;
+  late final FTabController c;
 
   @override
   void initState() {
     super.initState();
-    controller = FPopoverController(vsync: this);
+    c = FTabController(vsync: this, length: 2, initialIndex: 1);
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    c.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: FMultiSelect<String>.fromMap(const {'1': '1', '2': '2', '3': '3', '4': '4'}));
+    return Center(
+      child: FTabs(
+        controller: c,
+        initialIndex: 0,
+        children: [
+          FTabEntry(
+            label: const Text('Account'),
+            child: FCard(
+              title: const Text('Account'),
+              subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+              child: Container(color: Colors.blue, height: 100),
+            ),
+          ),
+          FTabEntry(
+            label: const Text('Password'),
+            child: FCard(
+              title: const Text('Password'),
+              subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+              child: Container(color: Colors.red, height: 100),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

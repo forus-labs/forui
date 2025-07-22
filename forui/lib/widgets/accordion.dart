@@ -5,6 +5,6 @@
 /// See https://forui.dev/docs/data/accordion for working examples.
 library forui.widgets.accordion;
 
-export '../src/widgets/accordion/accordion.dart' hide FAccordionItemData;
-export '../src/widgets/accordion/accordion_controller.dart' hide FAccordionControllers;
+export '../src/widgets/accordion/accordion.dart' hide InheritedAccordionData;
+export '../src/widgets/accordion/accordion_controller.dart' hide InternalAccordionController;
 export '../src/widgets/accordion/accordion_item.dart';

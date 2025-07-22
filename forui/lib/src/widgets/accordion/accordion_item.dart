@@ -42,6 +42,12 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
+  /// {@macro forui.foundation.FTappable.onHoverChange}
+  final ValueChanged<bool>? onHoverChange;
+
+  /// {@macro forui.foundation.FTappable.onStateChange}
+  final ValueChanged<Set<WidgetState>>? onStateChange;
+
   /// The child.
   final Widget child;
 
@@ -55,6 +61,8 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
+    this.onHoverChange,
+    this.onStateChange,
     super.key,
   });
 
@@ -69,7 +77,9 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
       ..add(FlagProperty('initiallyExpanded', value: initiallyExpanded, ifTrue: 'Initially expanded'))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
+      ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
+      ..add(ObjectFlagProperty.has('onStateChange', onStateChange));
   }
 }
 
@@ -82,8 +92,8 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    final FAccordionItemData(:index, :controller, :style) = FAccordionItemData.of(context);
-    controller.removeItem(index);
+    final InheritedAccordionData(:index, :controller, :style) = InheritedAccordionData.of(context);
+    controller.remove(index);
 
     _controller?.dispose();
     _body?.dispose();
@@ -97,14 +107,21 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     _body = CurvedAnimation(curve: style.expandCurve, reverseCurve: style.collapseCurve, parent: _controller!);
     _icon = Tween<double>(begin: 0, end: 0.5).animate(_body!);
 
-    if (!controller.addItem(index, _controller!)) {
+    if (!controller.add(index, _controller!)) {
       throw StateError('Number of expanded items must be within the min and max.');
     }
   }
 
   @override
+  void dispose() {
+    _body?.dispose();
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final FAccordionItemData(:index, :controller, style: inheritedStyle) = FAccordionItemData.of(context);
+    final InheritedAccordionData(:index, :controller, style: inheritedStyle) = InheritedAccordionData.of(context);
     final style = widget.style ?? inheritedStyle;
 
     return Column(
@@ -115,6 +132,8 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
           autofocus: widget.autofocus,
           focusNode: widget.focusNode,
           onFocusChange: widget.onFocusChange,
+          onHoverChange: widget.onHoverChange,
+          onStateChange: widget.onStateChange,
           onPress: () => controller.toggle(index),
           builder: (_, states, _) => Padding(
             padding: style.titlePadding,
@@ -155,12 +174,5 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
         FDivider(style: style.dividerStyle),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    _body?.dispose();
-    _controller?.dispose();
-    super.dispose();
   }
 }

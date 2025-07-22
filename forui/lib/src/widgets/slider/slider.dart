@@ -134,7 +134,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
     super.key,
   }) : assert(
          controller == null || initialSelection == null,
-         'Cannot provide both controller and initialSelection at the same time.',
+         'Cannot provide both controller and initialSelection at the same time',
        ) {
     if (trackMainAxisExtent == null &&
         (label != null || description != null || forceErrorText != null) &&

@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 part 'breadcrumb.style.dart';
 
@@ -68,14 +69,10 @@ class FBreadcrumb extends StatelessWidget {
 /// The [FBreadcrumbItem] data.
 class FBreadcrumbItemData extends InheritedWidget {
   /// Returns the [FBreadcrumbItemData] of the [FBreadcrumb] in the given [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FBreadcrumb] in the given [context].
   @useResult
   static FBreadcrumbItemData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FBreadcrumbItemData>();
-    assert(data != null, 'No FBreadcrumbData found in context');
-    return data!;
+    assert(debugCheckHasAncestor<FBreadcrumbItemData>('$FBreadcrumb', context));
+    return context.dependOnInheritedWidgetOfExactType<FBreadcrumbItemData>()!;
   }
 
   /// The breadcrumb's style.

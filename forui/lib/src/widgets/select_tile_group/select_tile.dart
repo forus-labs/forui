@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 /// A tile that represents a selection in a [FSelectTileGroup]. It should only be used in a [FSelectTileGroup].
 ///
@@ -169,14 +170,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
 @internal
 class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   static FSelectTileData<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>();
-    assert(
-      result != null,
-      "No FSelectTileData found in context. This likely because FSelectTileGroup's type parameter could not be inferred. "
-      'It is currently inferred as FSelectTileGroup<$T>. To fix this, provide the type parameter explicitly, i.e. '
-      'FSelectTileGroup<MyType>.',
-    );
-    return result!;
+    assert(debugCheckHasAncestor<FSelectTileData<T>>('${FSelectTileGroup<T>}', context, generic: true));
+    return context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>()!;
   }
 
   final FSelectTileGroupController<T> controller;

@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 part 'select_group.style.dart';
 
@@ -20,13 +21,8 @@ mixin FSelectGroupItem<T> on Widget {
 class FSelectGroupItemData<T> extends InheritedWidget {
   /// Return the [FSelectGroup]'s item data.
   static FSelectGroupItemData<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>();
-    assert(
-      result != null,
-      "No FSelectGroupItemData<$T> found in context. This likely because FSelectGroup's type parameter could not be inferred. "
-      'It is currently inferred as FSelectGroup<$T>. To fix this, provide the type parameter explicitly, i.e. FSelectGroup<MyType>.',
-    );
-    return result!;
+    assert(debugCheckHasAncestor<FSelectGroupItemData<T>>('${FSelectGroup<T>}', context, generic: true));
+    return context.dependOnInheritedWidgetOfExactType<FSelectGroupItemData<T>>()!;
   }
 
   /// The controller.

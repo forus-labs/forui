@@ -25,17 +25,17 @@ void main() {
     second.dispose();
   });
 
-  group('addItem(...)', () {
+  group('add(...)', () {
     test('expanded', () {
       first.value = 1;
 
-      expect(controller.addItem(2, first), true);
+      expect(controller.add(2, first), true);
       expect(controller.controllers.length, 1);
       expect(controller.expanded.length, 1);
     });
 
     test('not expanded', () {
-      expect(controller.addItem(2, first), true);
+      expect(controller.add(2, first), true);
       expect(controller.controllers.length, 1);
       expect(controller.expanded.length, 0);
     });
@@ -44,7 +44,7 @@ void main() {
       final controller = FAccordionController(max: 0);
       first.value = 1;
 
-      expect(controller.addItem(2, first), false);
+      expect(controller.add(2, first), false);
       expect(controller.controllers.length, 0);
       expect(controller.expanded.length, 0);
     });
@@ -52,52 +52,52 @@ void main() {
     test('over max - not expanded', () {
       final controller = FAccordionController(max: 0);
 
-      expect(controller.addItem(2, first), true);
+      expect(controller.add(2, first), true);
       expect(controller.controllers.length, 1);
       expect(controller.expanded.length, 0);
     });
   });
 
-  group('removeItem(...)', () {
+  group('remove(...)', () {
     test('unknown index', () {
       first.value = 1;
-      final controller = FAccordionController()..addItem(2, first);
+      final controller = FAccordionController()..add(2, first);
 
-      expect(controller.removeItem(3), false);
+      expect(controller.remove(3), false);
       expect(controller.controllers.length, 1);
       expect(controller.expanded.length, 1);
     });
 
     test('expanded', () {
       first.value = 1;
-      final controller = FAccordionController()..addItem(2, first);
+      final controller = FAccordionController()..add(2, first);
 
-      expect(controller.removeItem(2), true);
+      expect(controller.remove(2), true);
       expect(controller.controllers.length, 0);
       expect(controller.expanded.length, 0);
     });
 
     test('not expanded', () {
-      final controller = FAccordionController()..addItem(2, first);
+      final controller = FAccordionController()..add(2, first);
 
-      expect(controller.removeItem(2), true);
+      expect(controller.remove(2), true);
       expect(controller.controllers.length, 0);
       expect(controller.expanded.length, 0);
     });
 
     test('under min - expanded', () {
       first.value = 1;
-      final controller = FAccordionController(min: 1)..addItem(2, first);
+      final controller = FAccordionController(min: 1)..add(2, first);
 
-      expect(controller.removeItem(2), false);
+      expect(controller.remove(2), false);
       expect(controller.controllers.length, 1);
       expect(controller.expanded.length, 1);
     });
 
     test('under min - not expanded', () {
-      final controller = FAccordionController(min: 1)..addItem(2, first);
+      final controller = FAccordionController(min: 1)..add(2, first);
 
-      expect(controller.removeItem(2), true);
+      expect(controller.remove(2), true);
       expect(controller.controllers.length, 0);
       expect(controller.expanded.length, 0);
     });
@@ -105,7 +105,7 @@ void main() {
 
   group('expand(...)', () {
     test('unknown index', () async {
-      controller.addItem(2, first);
+      controller.add(2, first);
 
       expect(await controller.expand(3), false);
       expect(first.value, 0);
@@ -114,7 +114,7 @@ void main() {
 
     test('already expanded', () async {
       first.value = 1;
-      controller.addItem(2, first);
+      controller.add(2, first);
 
       expect(await controller.expand(2), false);
       expect(first.value, 1);
@@ -122,7 +122,7 @@ void main() {
     });
 
     test('max reached, cannot collapse', () async {
-      final controller = FAccordionController(max: 0)..addItem(2, first);
+      final controller = FAccordionController(max: 0)..add(2, first);
 
       expect(await controller.expand(2), false);
       expect(first.value, 0);
@@ -137,8 +137,8 @@ void main() {
 
       final controller = autoDispose(FAccordionController(min: 1, max: 1))
         ..addListener(() => count++)
-        ..addItem(0, first)
-        ..addItem(1, second);
+        ..add(0, first)
+        ..add(1, second);
 
       final future = controller.expand(0);
       await tester.pumpAndSettle();
@@ -151,7 +151,7 @@ void main() {
 
     testWidgets('collapsed', (tester) async {
       first.duration = const Duration(milliseconds: 1);
-      controller.addItem(2, first);
+      controller.add(2, first);
 
       final future = controller.expand(2);
       await tester.pumpAndSettle();
@@ -165,7 +165,7 @@ void main() {
   group('collapse(...)', () {
     test('unknown index', () async {
       first.value = 1;
-      controller.addItem(2, first);
+      controller.add(2, first);
 
       expect(await controller.collapse(0), false);
       expect(first.value, 1);
@@ -174,7 +174,7 @@ void main() {
 
     test('already collapsed', () async {
       first.value = 0;
-      controller.addItem(2, first);
+      controller.add(2, first);
 
       expect(await controller.collapse(2), false);
       expect(first.value, 0);
@@ -185,7 +185,7 @@ void main() {
       first.value = 1;
       final controller = FAccordionController(min: 1)
         ..addListener(() => count++)
-        ..addItem(2, first);
+        ..add(2, first);
 
       expect(await controller.collapse(2), false);
       expect(first.value, 1);
@@ -197,7 +197,7 @@ void main() {
         ..value = 1
         ..duration = const Duration(milliseconds: 1);
 
-      controller.addItem(2, first);
+      controller.add(2, first);
 
       final future = controller.collapse(2);
       await tester.pumpAndSettle();
@@ -207,8 +207,4 @@ void main() {
       expect(count, 1);
     });
   });
-
-  for (final (length, expected) in [(-1, false), (0, true), (1, true), (2, true), (3, false)]) {
-    test('validate $length', () => expect(controller.validate(length), expected));
-  }
 }

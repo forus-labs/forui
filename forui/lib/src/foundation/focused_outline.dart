@@ -131,7 +131,7 @@ class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions 
   /// The outline's width. Defaults to 1.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if the width is not positive.
+  /// Must be > 0.
   @override
   final double width;
 
@@ -141,5 +141,5 @@ class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions 
 
   /// Creates a [FFocusedOutlineStyle].
   const FFocusedOutlineStyle({required this.color, required this.borderRadius, this.width = 1, this.spacing = 3})
-    : assert(0 < width, 'The width must be greater than 0.');
+    : assert(0 < width, 'width ($width) must be > 0.');
 }

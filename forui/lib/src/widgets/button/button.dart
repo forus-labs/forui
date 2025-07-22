@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
 
 part 'button.style.dart';
@@ -334,14 +335,10 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
 /// A button's data.
 class FButtonData extends InheritedWidget {
   /// Returns the [FButtonData] of the [FButton] in the given [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FButton] in the given [context].
   @useResult
   static FButtonData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FButtonData>();
-    assert(data != null, 'No FButtonData found in context');
-    return data!;
+    assert(debugCheckHasAncestor<FButtonData>('$FButton', context));
+    return context.dependOnInheritedWidgetOfExactType<FButtonData>()!;
   }
 
   /// The button's style.

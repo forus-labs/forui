@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/select/content/scroll_handle.dart';
 import 'package:forui/src/widgets/select/select_item.dart';
 
@@ -26,14 +27,8 @@ class SelectContentData<T> extends InheritedWidget {
   });
 
   static SelectContentData<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<SelectContentData<T>>();
-    assert(
-      result != null,
-      "No FSelect<$T>/FMultiSelect<$T> found in context. This is likely because Dart could not infer FSelect/FMultiSelect's "
-      'type parameter. Try specifying the type parameter for FSelect/FMultiSelect, FSelectSection, and FSelectItem '
-      '(e.g., FSelect<MyType>).',
-    );
-    return result!;
+    assert(debugCheckHasAncestor<SelectContentData<T>>('${FSelect<T>}/${FMultiSelect<T>}', context, generic: true));
+    return context.dependOnInheritedWidgetOfExactType<SelectContentData<T>>()!;
   }
 
   @override

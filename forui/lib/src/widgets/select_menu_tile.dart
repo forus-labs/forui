@@ -211,7 +211,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     super.key,
   }) : assert(
          selectController == null || initialValue == null,
-         'Cannot provide both selectController and initialValue.',
+         'Cannot provide both selectController and initialValue',
        ),
        super(
          initialValue: {?initialValue, ...?selectController?.value},
@@ -473,7 +473,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     super.key,
   }) : assert(
          selectController == null || initialValue == null,
-         'Cannot provide both selectController and initialValue.',
+         'Cannot provide both selectController and initialValue',
        ),
        super(
          initialValue: {?initialValue, ...?selectController?.value},
@@ -616,7 +616,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     super.initState();
     _controller =
         _Notifier(
-            widget.selectController ?? FSelectMenuTileController<T>.radio(value: widget.initialValue?.firstOrNull),
+            widget.selectController ?? FSelectMenuTileController<T>.radio(widget.initialValue?.firstOrNull),
             widget.popoverController ?? FPopoverController(vsync: this),
             autoHide: widget.autoHide,
           )
@@ -650,7 +650,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       }
 
       _controller.delegate =
-          widget.selectController ?? FSelectMenuTileController<T>.radio(value: widget.initialValue?.firstOrNull);
+          widget.selectController ?? FSelectMenuTileController<T>.radio(widget.initialValue?.firstOrNull);
     }
 
     _controller

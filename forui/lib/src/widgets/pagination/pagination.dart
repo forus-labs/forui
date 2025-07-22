@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 
 /// A pagination allows the user to select a specific page from a range of pages.
@@ -72,11 +73,20 @@ class FPagination extends StatefulWidget {
     this.pages,
     this.onChange,
     super.key,
-  }) : assert(controller == null || initialPage == null, 'Cannot provide both controller and initialPage'),
-       assert(controller == null || pages == null, 'Cannot provide both controller and pages'),
-       assert(initialPage == null || initialPage >= 0, 'initialPage must be >= 0'),
-       assert(initialPage == null || pages == null || initialPage < pages, 'initialPage must be < pages'),
-       assert(pages == null || pages > 0, 'pages must be > 0');
+  }) : assert(
+         controller == null || initialPage == null,
+         'Cannot provide both controller and initialPage. To fix, set the page directly in the controller.',
+       ),
+       assert(
+         controller == null || pages == null,
+         'Cannot provide both controller and pages. To fix, set the pages directly in the controller.',
+       ),
+       assert(initialPage == null || initialPage >= 0, 'initialPage ($initialPage) must be >= 0'),
+       assert(
+         initialPage == null || pages == null || initialPage < pages,
+         'initialPage ($initialPage) must be < pages ($pages)',
+       ),
+       assert(pages == null || pages > 0, 'pages ($pages) must be > 0');
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -200,9 +210,8 @@ class _FPaginationState extends State<FPagination> {
 class FPaginationItemData extends InheritedWidget {
   @useResult
   static FPaginationItemData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FPaginationItemData>();
-    assert(data != null, 'No FPaginationItemData found in context.');
-    return data!;
+    assert(debugCheckHasAncestor<FPaginationItemData>('$FPagination', context));
+    return context.dependOnInheritedWidgetOfExactType<FPaginationItemData>()!;
   }
 
   final int page;

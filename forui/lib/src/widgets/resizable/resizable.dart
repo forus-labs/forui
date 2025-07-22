@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 
 part 'resizable.style.dart';
@@ -12,7 +13,7 @@ part 'resizable.style.dart';
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
 ///
 /// Each child is a [FResizableRegion] that has an initial and minimum extent. Setting an initial extent less than the
-/// minimum extent will result in undefined behaviour. The children are arranged from top to bottom, or left to right,
+/// minimum extent will result in undefined behavior. The children are arranged from top to bottom, or left to right,
 /// depending on the main [axis].
 ///
 /// It is recommended that a [FResizable] contains at least 2 [FResizableRegion]s.
@@ -88,14 +89,8 @@ class FResizable extends StatefulWidget {
     this.onChange,
     double? hitRegionExtent,
     super.key,
-  }) : assert(
-         crossAxisExtent == null || 0 < crossAxisExtent,
-         'The crossAxisExtent should be positive, but is $crossAxisExtent.',
-       ),
-       assert(
-         hitRegionExtent == null || 0 < hitRegionExtent,
-         'The hitRegionExtent should be positive, but is $hitRegionExtent.',
-       ),
+  }) : assert(crossAxisExtent == null || 0 < crossAxisExtent, 'crossAxisExtent ($crossAxisExtent) must be > 0'),
+       assert(hitRegionExtent == null || 0 < hitRegionExtent, 'hitRegionExtent ($hitRegionExtent) must be > 0'),
        hitRegionExtent = hitRegionExtent ?? (FTouch.primary ? 60 : 10);
 
   @override
@@ -313,9 +308,8 @@ class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
 @internal
 class InheritedData extends InheritedWidget {
   static InheritedData of(BuildContext context) {
-    final InheritedData? result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
-    assert(result != null, 'No InheritedData found in context. Is there a parent FResizableBox?');
-    return result!;
+    assert(debugCheckHasAncestor<InheritedData>('$FResizable', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedData>()!;
   }
 
   final FResizableController controller;

@@ -82,7 +82,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             child: FSelectMenuTile(
-              selectController: autoDispose(FMultiValueNotifier.radio(value: 1)),
+              selectController: autoDispose(FMultiValueNotifier.radio(1)),
               prefix: const Icon(FIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -254,7 +254,7 @@ void main() {
         TestScaffold.app(
           child: FSelectMenuTile.fromMap(
             const {'Item 1': 1, 'Item 2': 2},
-            selectController: autoDispose(FMultiValueNotifier.radio(value: 1)),
+            selectController: autoDispose(FMultiValueNotifier.radio(1)),
             prefix: const Icon(FIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),

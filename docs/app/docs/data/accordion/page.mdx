@@ -13,7 +13,7 @@ A vertically stacked set of interactive headings that reveal associated content 
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='accordion' query={{controller: 'default-max'}} height={500}/>
+        <Widget name='accordion' query={{controller: 'default'}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
@@ -21,7 +21,7 @@ A vertically stacked set of interactive headings that reveal associated content 
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FAccordion(
-              controller: FAccordionController(max: 2),
+              controller: FAccordionController(),
               children: [
                 FAccordionItem(
                   title: const Text('Is it accessible?'),
@@ -58,7 +58,7 @@ dart run forui style create accordion
 
 ```dart copy
 FAccordion(
-  controller: FAccordionController(min: 1, max: 2), // or FAccordionController.radio()
+  controller: FAccordionController(min: 1, max: 2),
   style: FAccordionStyle(...),
   children: [
     FAccordionItem(
@@ -69,48 +69,11 @@ FAccordion(
 );
 ```
 
-## Examples
-
-### With Radio Behaviour
-
-<Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='accordion' query={{controller: 'radio'}} height={500}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart {5} copy
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FAccordion(
-              controller: FAccordionController.radio(),
-              children: [
-                FAccordionItem(
-                  title: const Text('Is it accessible?'),
-                  child: const Text('Yes. It follows WAI-ARIA design patterns.'),
-                ),
-                FAccordionItem(
-                  initiallyExpanded: true,
-                  title: const Text('Is it Styled?'),
-                  child: const Text('Yes. It includes default styles matching other components.'),
-                ),
-                FAccordionItem(
-                  title: const Text('Is it Animated?'),
-                  child: const Text('Yes. Animations are enabled by default but can be disabled.'),
-                ),
-              ],
-            ),
-          ],
-        );
-        ```
-    </Tabs.Tab>
-</Tabs>
-
 ### With Multi-select Behaviour
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='accordion' query={{controller: 'default'}} height={500}/>
+        <Widget name='accordion' query={{controller: 'max'}} height={500}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {5} copy

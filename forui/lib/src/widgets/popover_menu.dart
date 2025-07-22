@@ -177,8 +177,8 @@ class FPopoverMenu extends StatelessWidget {
          divider: divider,
          children: menuBuilder(context, controller, menu),
        )),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
-       assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided.');
+       assert(builder != _builder || child != null, 'Either builder or child must be provided'),
+       assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided');
 
   /// Creates a menu of [FTile]s that is only shown when toggled.
   ///
@@ -233,8 +233,8 @@ class FPopoverMenu extends StatelessWidget {
          divider: divider,
          children: menuBuilder(context, controller, menu),
        )),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided.'),
-       assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided.');
+       assert(builder != _builder || child != null, 'Either builder or child must be provided'),
+       assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided');
 
   @override
   Widget build(BuildContext context) {
@@ -324,7 +324,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     super.barrierFilter,
     super.backgroundFilter,
     super.viewInsets,
-  }) : assert(0 < maxWidth, 'maxWidth must be positive');
+  }) : assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
   FPopoverMenuStyle.inherit({required super.colors, required super.style, required FTypography typography})

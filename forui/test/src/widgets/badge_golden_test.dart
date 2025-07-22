@@ -50,7 +50,7 @@ void main() {
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: style.decoration.color,
+                      color: (style.decoration as dynamic).color,
                       border: Border.all(color: Colors.blueAccent, width: 2),
                     ),
                   ),

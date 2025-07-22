@@ -15,8 +15,8 @@ abstract class Parser {
 
   /// Updates the [current] input based on the [current] and [previous] input.
   (List<String>, Changes) update(List<String> previous, List<String> current) {
-    assert(previous.length == pattern.length, 'previous must have ${pattern.length} parts');
-    assert(current.length == pattern.length, 'current must have ${pattern.length} parts');
+    assert(previous.length == pattern.length, 'previous must have ${pattern.length} parts.');
+    assert(current.length == pattern.length, 'current must have ${pattern.length} parts.');
 
     Changes changes = const None();
     for (int i = 0; i < pattern.length; i++) {

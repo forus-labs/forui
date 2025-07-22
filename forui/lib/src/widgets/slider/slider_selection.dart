@@ -49,12 +49,12 @@ sealed class FSliderSelection with Diagnosticable {
        );
 
   FSliderSelection._copy({required this.extent, required this.offset, required this.rawExtent, required this.rawOffset})
-    : assert(extent.min >= 0, 'Min extent must be >= 0, but is ${extent.min}.'),
-      assert(extent.max >= extent.min, 'Max extent must be > min extent, but is ${extent.max}.'),
-      assert(extent.max <= 1, 'Max extent must be <= 1, but is ${extent.max}.'),
-      assert(offset.min >= 0, 'Min offset must be >= 0, but is ${offset.min}.'),
-      assert(offset.max >= offset.min, 'Max offset must be > min offset, but is ${offset.max} and ${offset.min}.'),
-      assert(offset.max <= 1, 'Max offset must be <=> 1, but is ${offset.max}.');
+    : assert(extent.min >= 0, 'extent.min (${extent.min}) must be >= 0'),
+      assert(extent.max >= extent.min, 'extent.min (${extent.min}) must be <= extent.max (${extent.max})'),
+      assert(extent.max <= 1, 'extent.max (${extent.max}) must be <= 1'),
+      assert(offset.min >= 0, 'offset.min (${offset.min}) must be >= 0'),
+      assert(offset.max >= offset.min, 'offset.min (${offset.min}) must be <= offset.max (${offset.max})'),
+      assert(offset.max <= 1, 'offset.max (${offset.max}) must be <= 1');
 
   /// Returns a [FSliderSelection] which [min] edge is extended/shrunk to the previous/next step.
   @useResult

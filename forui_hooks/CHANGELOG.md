@@ -1,5 +1,10 @@
 ### 0.15.0
-* Add `FMultiSelectController`.
+* Add `useFMultiSelectController`.
+
+* **Breaking** Change `useFMultiValueNotifier({Set<T> values})` to `useFMultiValueNotifier({Set<T> value})`.
+* **Breaking** Change `useFSelectGroupController({Set<T> values})` to `useFSelectGroupController({Set<T> value})`.
+* **Breaking** Change `useFSelectTileGroupController({Set<T> values})` to `useFSelectTileGroupController({Set<T> value})`.
+* **Breaking** Change `useFSelectMenuTileController({Set<T> values})` to `useFSelectMenuTileController({Set<T> value})`.
 
 
 ## 0.14.0

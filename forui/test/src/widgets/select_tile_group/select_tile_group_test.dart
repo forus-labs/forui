@@ -53,7 +53,7 @@ void main() {
   });
 
   testWidgets('press already selected tile', (tester) async {
-    final controller = autoDispose(FMultiValueNotifier<int>.radio(value: 2));
+    final controller = autoDispose(FMultiValueNotifier<int>.radio(2));
 
     await tester.pumpWidget(
       TestScaffold(

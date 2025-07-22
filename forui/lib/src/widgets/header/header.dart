@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:sugar/collection.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 part 'header.style.dart';
 
@@ -28,7 +29,7 @@ sealed class FHeader extends StatelessWidget {
 
   const FHeader._({this.title = const SizedBox(), super.key});
 
-  /// Creates a header which title is aligned to the start.
+  /// Creates a header whose title is aligned to the start.
   ///
   /// It is typically used on pages at the root of the navigation stack.
   ///
@@ -41,7 +42,7 @@ sealed class FHeader extends StatelessWidget {
   const factory FHeader({Widget title, FHeaderStyle Function(FHeaderStyle)? style, List<Widget> suffixes, Key? key}) =
       _FRootHeader;
 
-  /// Creates a nested header which title is aligned to the center.
+  /// Creates a nested header whose title is aligned to the center.
   ///
   /// It is typically used on pages NOT at the root of the navigation stack.
   ///
@@ -69,9 +70,8 @@ class FHeaderData extends InheritedWidget {
   /// Throws [AssertionError] if there is no ancestor [FHeader] in the given [context].
   @useResult
   static FHeaderData of(BuildContext context) {
-    final data = context.dependOnInheritedWidgetOfExactType<FHeaderData>();
-    assert(data != null, 'No FHeaderActionData found in context');
-    return data!;
+    assert(debugCheckHasAncestor<FHeaderData>('$FHeader', context));
+    return context.dependOnInheritedWidgetOfExactType<FHeaderData>()!;
   }
 
   /// The action's style.

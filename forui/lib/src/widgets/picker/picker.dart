@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 /// A picker's controller.
 ///
@@ -251,9 +252,8 @@ class _FPickerState extends State<FPicker> {
 @internal
 class PickerData extends InheritedWidget {
   static PickerData of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<PickerData>();
-    assert(result != null, 'No parent FPicker found in context');
-    return result!;
+    assert(debugCheckHasAncestor<PickerData>('$FPicker', context));
+    return context.dependOnInheritedWidgetOfExactType<PickerData>()!;
   }
 
   final FixedExtentScrollController controller;

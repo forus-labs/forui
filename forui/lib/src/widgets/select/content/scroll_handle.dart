@@ -158,7 +158,7 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
     required this.iconStyle,
     this.enterDuration = const Duration(milliseconds: 200),
     this.pixelsPerSecond = 200,
-  }) : assert(0 < pixelsPerSecond, 'The pixels per second must be greater than 0.');
+  }) : assert(0 < pixelsPerSecond, 'pixelsPerSecond ($pixelsPerSecond) must be > 0');
 
   /// Creates a [FSelectScrollHandleStyle] that inherits its properties.
   FSelectScrollHandleStyle.inherit({required FColors colors})
