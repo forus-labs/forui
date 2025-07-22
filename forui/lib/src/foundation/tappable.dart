@@ -203,7 +203,7 @@ class FTappable extends StatefulWidget {
   }) : shortcuts =
            shortcuts ??
            (onPress == null ? const {} : const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()}),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided.');
+       assert(builder != _builder || child != null, 'Either builder or child must be provided');
 
   @override
   State<FTappable> createState() => _FTappableState<FTappable>();

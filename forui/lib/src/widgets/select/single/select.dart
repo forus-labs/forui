@@ -542,8 +542,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     super.key,
   }) : assert(
          controller == null || initialValue == null,
-         'Cannot provide both a controller and an initialValue. '
-         'To fix, set the initial value directly in the controller.',
+         'Cannot provide both a controller and initialValue. To fix, set the initial value directly in the controller.',
        );
 
   @override

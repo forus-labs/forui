@@ -129,7 +129,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     this.divider = FItemDivider.none,
     this.semanticsLabel,
     super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+  }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
        _builder = ((style, enabled) => SliverList.list(
          children: [
            for (final (index, child) in children.indexed)
@@ -177,8 +177,8 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     this.divider = FItemDivider.none,
     this.semanticsLabel,
     super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
-       assert(count == null || 0 <= count, 'count must be non-negative.'),
+  }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
+       assert(count == null || 0 <= count, 'count ($count) must be >= 0'),
        _builder = ((style, enabled) => SliverList.builder(
          itemCount: count,
          itemBuilder: (context, index) {
@@ -215,7 +215,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     this.divider = FItemDivider.full,
     this.semanticsLabel,
     super.key,
-  }) : assert(0 < maxHeight, 'maxHeight must be positive.'),
+  }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
        _builder = ((style, enabled) => SliverMainAxisGroup(
          slivers: [
            for (final (index, child) in children.indexed)

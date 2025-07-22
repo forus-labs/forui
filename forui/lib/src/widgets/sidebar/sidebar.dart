@@ -82,7 +82,7 @@ class FSidebar extends StatefulWidget {
     super.key,
   }) : assert(
          focusNode == null || traversalEdgeBehavior == null,
-         'focusNode and traversalEdgeBehavior cannot both be set.',
+         'Cannot provide both a focusNode and traversalEdgeBehavior',
        ),
        child = ListView(children: children);
 
@@ -100,7 +100,7 @@ class FSidebar extends StatefulWidget {
     super.key,
   }) : assert(
          focusNode == null || traversalEdgeBehavior == null,
-         'focusNode and traversalEdgeBehavior cannot both be set.',
+         'Cannot provide both a focusNode and traversalEdgeBehavior',
        ),
        child = ListView.builder(itemBuilder: itemBuilder, itemCount: itemCount);
 
@@ -120,7 +120,7 @@ class FSidebar extends StatefulWidget {
     super.key,
   }) : assert(
          focusNode == null || traversalEdgeBehavior == null,
-         'focusNode and traversalEdgeBehavior cannot both be set.',
+         'Cannot provide both a focusNode and traversalEdgeBehavior',
        );
 
   @override

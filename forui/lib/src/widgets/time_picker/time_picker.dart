@@ -65,8 +65,8 @@ class FTimePicker extends StatefulWidget {
     this.minuteInterval = 1,
     this.onChange,
     super.key,
-  }) : assert(0 < hourInterval, 'hourInterval cannot be less than 1'),
-       assert(0 < minuteInterval, 'minuteInterval cannot be less than 1');
+  }) : assert(0 < hourInterval, 'hourInterval ($hourInterval) must be > 0'),
+       assert(0 < minuteInterval, 'minuteInterval ($minuteInterval) must be > 0');
 
   @override
   State<FTimePicker> createState() => _FTimePickerState();

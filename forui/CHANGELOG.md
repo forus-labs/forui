@@ -15,9 +15,6 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Remove `FAccordionController.radio(...)` - use `FAccrdionController(max: 1)` instead.
 * **Breaking** Remove `FAccordionController.validate(...)`.
 
-* Fix `FAccordionController.expand(...)` wrongly returning false if the item is already expanded.
-* Fix `FAccordionController.collapse(...)` wrongly returning false if the item is already collapsed.
-
 
 ### `FMultiSelect` (new)
 * Add `FMultiSelect`.

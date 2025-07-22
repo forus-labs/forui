@@ -107,8 +107,8 @@ extension UpdatableResizableRegionData on FResizableRegionData {
     lhs ? min += delta : max += delta;
     final newExtent = max - min;
 
-    assert(0 <= min, '$min should be non-negative.');
-    assert(newExtent.lessOrAround(extent.max), '$newExtent should be less than ${extent.max}.');
+    assert(0 <= min, 'min ($min) must be >= 0');
+    assert(newExtent.lessOrAround(extent.max), '$newExtent must be < ${extent.max}.');
 
     if (extent.min <= newExtent) {
       return (copyWith(minOffset: min, maxOffset: max), delta);

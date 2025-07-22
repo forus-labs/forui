@@ -116,7 +116,7 @@ void main() {
       first.value = 1;
       controller.add(2, first);
 
-      expect(await controller.expand(2), true);
+      expect(await controller.expand(2), false);
       expect(first.value, 1);
       expect(count, 0);
     });
@@ -176,7 +176,7 @@ void main() {
       first.value = 0;
       controller.add(2, first);
 
-      expect(await controller.collapse(2), true);
+      expect(await controller.collapse(2), false);
       expect(first.value, 0);
       expect(count, 0);
     });

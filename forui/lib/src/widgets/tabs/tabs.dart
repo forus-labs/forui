@@ -100,12 +100,15 @@ class FTabs extends StatefulWidget {
   }) : assert(children.isNotEmpty, 'Must provide at least 1 tab.'),
        assert(
          0 <= (initialIndex ?? 0) && (initialIndex ?? 0) < children.length,
-         'initialIndex must be within the range of tabs.',
+         'initialIndex ($initialIndex) must be between 0 and the number of children (${children.length})',
        ),
-       assert(controller == null || initialIndex == null, 'Cannot provide both controller and initialIndex.'),
+       assert(
+         controller == null || initialIndex == null,
+         'Cannot provide both controller and initialIndex. To fix, set the initialIndex on the controller.',
+       ),
        assert(
          controller == null || controller.length == children.length,
-         'Controller length must match the number of tabs.',
+         "Controller's number of tabs (${controller.length} must match the number of children (${children.length}).",
        ),
        initialIndex = initialIndex ?? 0;
 

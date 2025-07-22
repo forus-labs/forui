@@ -113,7 +113,10 @@ class FLineCalendar extends StatelessWidget {
        _initialScroll = initialScroll?.toLocalDate(),
        _initialSelection = initialSelection?.toLocalDate(),
        _today = (today ?? DateTime.now()).toLocalDate(),
-       assert(controller == null || toggleable == null, 'controller and toggleable cannot both be non-null'),
+       assert(
+         controller == null || toggleable == null,
+         'controller and toggleable cannot both be non-null. To fix, set the toggleable field directly in the controller.',
+       ),
        assert(
          start == null || end == null || start.toLocalDate() < end.toLocalDate(),
          'start ($start) must be < end ($end)',
@@ -126,7 +129,7 @@ class FLineCalendar extends StatelessWidget {
        ),
        assert(
          controller == null || initialSelection == null,
-         'controller and initial selection cannot be both non-null',
+         'controller and initial selection cannot be both non-null. To fix, set the date field directly in the controller.',
        ),
        assert(
          initialSelection == null ||

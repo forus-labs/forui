@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
@@ -313,9 +314,8 @@ class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
 @internal
 class InheritedData extends InheritedWidget {
   static InheritedData of(BuildContext context) {
-    final InheritedData? result = context.dependOnInheritedWidgetOfExactType<InheritedData>();
-    assert(result != null, 'No InheritedData found in context. Is there a parent FResizableBox?');
-    return result!;
+    assert(debugCheckHasAncestor<InheritedData>('$FResizable', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedData>()!;
   }
 
   final FResizableController controller;

@@ -218,8 +218,7 @@ abstract class FTimeField extends StatefulWidget {
     super.key,
   }) : assert(
          controller == null || initialTime == null,
-         'Cannot provide both a controller and an initialTime. '
-         'To fix, set the initial time directly in the controller.',
+         'Cannot provide both a controller and initialTime. To fix, set the initial time directly in the controller.',
        );
 
   /// Creates a time field that wraps a text input field.

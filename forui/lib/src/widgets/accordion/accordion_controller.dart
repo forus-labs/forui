@@ -31,7 +31,7 @@ class FAccordionController extends FChangeNotifier {
       _max = max,
       assert(debugCheckInclusiveRange<FAccordionController>(min, max));
 
-  /// Toggles the item at the given [index], expanding it if successfully expanded or collapsed.
+  /// Toggles the item at the given [index], expanding it if it is collapsed and vice versa.
   ///
   /// This method should not be called while the widget tree is being rebuilt.
   Future<bool> toggle(int index) async => switch (_controllers[index]?.status) {
@@ -40,14 +40,14 @@ class FAccordionController extends FChangeNotifier {
     _ => await expand(index),
   };
 
-  /// Expands the item at the given [index], returning true if expanded. It collapses the least recently expanded item
-  /// if the maximum number of expanded items is reached.
+  /// Expands the item at the given [index], returning true if succesfully expanded. It collapses the least recently
+  /// expanded item if the maximum number of expanded items is reached.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> expand(int index) async {
     final controller = _controllers[index];
     if (_expanded.contains(index) || controller == null) {
-      return _expanded.contains(index);
+      return false;
     }
 
     final futures = <Future<void>>[];
@@ -70,16 +70,12 @@ class FAccordionController extends FChangeNotifier {
     return true;
   }
 
-  /// Collapses the item at the given [index], returning true if collapsed.
+  /// Collapses the item at the given [index], returning true if successfully collapsed.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<bool> collapse(int index) async {
-    if (controllers[index] == null) {
+    if (controllers[index] == null || _expanded.length <= _min || !_expanded.contains(index)) {
       return false;
-    }
-
-    if (_expanded.length <= _min || !_expanded.contains(index)) {
-      return !_expanded.contains(index);
     }
 
     _expanded.remove(index);

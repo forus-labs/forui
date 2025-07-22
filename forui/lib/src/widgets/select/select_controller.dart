@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 
@@ -8,14 +9,10 @@ import 'package:forui/forui.dart';
 @internal
 class InheritedSelectController<T> extends InheritedWidget {
   static InheritedSelectController<T> of<T>(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<InheritedSelectController<T>>();
     assert(
-      result != null,
-      "No FSelect<$T>/FMultiSelect<$T> found in context. This is likely because Dart could not infer FSelect/FMultiSelect's "
-      'type parameter. Try specifying the type parameter for FSelect/FMultiSelect, FSelectSection, and FSelectItem '
-      '(e.g., FSelect<MyType>).',
+      debugCheckHasAncestor<InheritedSelectController<T>>('${FSelect<T>}/${FMultiSelect<T>}', context, generic: true),
     );
-    return result!;
+    return context.dependOnInheritedWidgetOfExactType<InheritedSelectController<T>>()!;
   }
 
   final FPopoverController popover;

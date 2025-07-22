@@ -100,7 +100,7 @@ class FPortal extends StatefulWidget {
     this.builder = _builder,
     this.child,
     super.key,
-  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.');
+  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided');
 
   @override
   State<FPortal> createState() => _State();

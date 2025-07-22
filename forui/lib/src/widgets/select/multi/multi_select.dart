@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 
@@ -513,27 +514,27 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = FItemDivider.none,
-    this.min = 0,
     this.max,
+    int? min,
     Widget Function(BuildContext, FMultiSelectController<T>, FMultiSelectStyle, T, Widget)? tagBuilder,
     Set<T>? initialValue,
     super.key,
-  }) : tagBuilder = tagBuilder ?? defaultTagBuilder,
+  }) : min = min ?? 0,
+       tagBuilder = tagBuilder ?? defaultTagBuilder,
        initialValue = initialValue ?? controller?.value ?? {},
-       assert(0 <= min, 'The minimum number of items that can be selected must be greater than or equal to 0.'),
+       assert(debugCheckInclusiveRange(min ?? 0, max)),
        assert(
          controller == null || min == 0,
-         'Cannot provide both a controller and a minimum number of items that can be selected.',
-       ),
-       assert(
-         max == null || max >= min,
-         'The maximum number of items that can be selected must be greater than or equal to the minimum.',
+         'Cannot provide both a controller and min. To fix, set the min directly in the controller.',
        ),
        assert(
          controller == null || max == null,
-         'Cannot provide both a controller and a maximum number of items that can be selected.',
+         'Cannot provide both a controller and max. To fix, set the max directly in the controller.',
        ),
-       assert(controller == null || initialValue == null, 'Cannot provide both a controller and an initial value.');
+       assert(
+         controller == null || initialValue == null,
+         'Cannot provide both a controller and initialValue. To fix, set the initial Value directly in the controller.',
+       );
 
   @override
   Widget build(BuildContext context) {
