@@ -223,7 +223,7 @@ void main() {
 
   group('FMultiValueNotifier - radio', () {
     test('contains(...)', () {
-      final notifier = FMultiValueNotifier.radio(value: 1);
+      final notifier = FMultiValueNotifier.radio(1);
 
       expect(notifier.contains(1), true);
       expect(notifier.contains(2), false);
@@ -235,7 +235,7 @@ void main() {
     });
 
     test('should initialize with a single value', () {
-      final notifier = FMultiValueNotifier.radio(value: 1)
+      final notifier = FMultiValueNotifier.radio(1)
         ..addListener(() => count++)
         ..addUpdateListener((_) => changeCount++);
 
@@ -270,7 +270,7 @@ void main() {
 
     test('should not change value when the same value is added', () {
       (int, bool)? value;
-      final notifier = FMultiValueNotifier.radio(value: 1)
+      final notifier = FMultiValueNotifier.radio(1)
         ..addListener(() => count++)
         ..addUpdateListener((changed) => value = changed)
         ..update(1, add: true);
@@ -282,7 +282,7 @@ void main() {
 
     test('should not change value when trying to remove', () {
       (int, bool)? value;
-      final notifier = FMultiValueNotifier.radio(value: 1)
+      final notifier = FMultiValueNotifier.radio(1)
         ..addListener(() => count++)
         ..addUpdateListener((changed) => value = changed)
         ..update(1, add: false);

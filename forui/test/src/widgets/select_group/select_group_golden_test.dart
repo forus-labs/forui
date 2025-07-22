@@ -82,7 +82,7 @@ void main() {
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
-              controller: autoDispose(FMultiValueNotifier.radio(value: 1)),
+              controller: autoDispose(FMultiValueNotifier.radio(1)),
               children: [
                 FRadio.grouped(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
                 FRadio.grouped(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
@@ -103,7 +103,7 @@ void main() {
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
               forceErrorText: 'Some error message.',
-              controller: autoDispose(FMultiValueNotifier.radio(value: 1)),
+              controller: autoDispose(FMultiValueNotifier.radio(1)),
               children: [
                 FRadio.grouped(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
                 FRadio.grouped(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),

@@ -1,5 +1,12 @@
 ## 0.15.0
 
+### Consistent Controllers
+We've done a pass over the controllers in Forui to make them more consistent and easier to use.
+
+* **Breaking** Change `FMultiValueNotifier({Set<T> value})` to `FMultiValueNotifier({Set<T> values})`.
+* **Breaking** Change `FMultiValueNotifier.radio({T? value})` to `FMultiValueNotifier.radio([T? value])`.
+
+
 ### `FAccordion`
 * Add `FAccordionItem.onHoverChange`
 * Add `FAccordionItem.onStateChange`

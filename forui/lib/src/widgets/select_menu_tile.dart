@@ -616,7 +616,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     super.initState();
     _controller =
         _Notifier(
-            widget.selectController ?? FSelectMenuTileController<T>.radio(value: widget.initialValue?.firstOrNull),
+            widget.selectController ?? FSelectMenuTileController<T>.radio(widget.initialValue?.firstOrNull),
             widget.popoverController ?? FPopoverController(vsync: this),
             autoHide: widget.autoHide,
           )
@@ -650,7 +650,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       }
 
       _controller.delegate =
-          widget.selectController ?? FSelectMenuTileController<T>.radio(value: widget.initialValue?.firstOrNull);
+          widget.selectController ?? FSelectMenuTileController<T>.radio(widget.initialValue?.firstOrNull);
     }
 
     _controller

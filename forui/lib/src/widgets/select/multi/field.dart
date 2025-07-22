@@ -227,7 +227,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     super.initState();
     _controller =
         widget.controller ??
-        FMultiSelectController(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue);
+        FMultiSelectController(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue ?? {});
     _controller
       ..addListener(_handleChange)
       ..addValueListener(_onChange);
@@ -257,7 +257,12 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       if (widget.controller case final controller?) {
         _controller = controller;
       } else {
-        _controller = FMultiSelectController(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue);
+        _controller = FMultiSelectController(
+          vsync: this,
+          min: widget.min,
+          max: widget.max,
+          value: widget.initialValue ?? {},
+        );
       }
 
       _controller

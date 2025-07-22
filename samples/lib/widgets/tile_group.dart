@@ -115,7 +115,7 @@ class _MergeTileGroup extends StatefulWidget {
 }
 
 class _MergeTileGroupState extends State<_MergeTileGroup> {
-  late final controller = FMultiValueNotifier.radio(value: 'List');
+  late final controller = FMultiValueNotifier.radio('List');
 
   @override
   Widget build(BuildContext context) => FTileGroup.merge(

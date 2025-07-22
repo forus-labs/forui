@@ -4,11 +4,11 @@ import 'package:forui_hooks/forui_hooks.dart';
 
 /// Creates a [FSelectMenuTileController] that manages a set of elements and is automatically disposed.
 FSelectMenuTileController<T> useFSelectMenuTileController<T>({
-  Set<T>? values,
+  Set<T> value = const {},
   int min = 0,
   int? max,
   List<Object?>? keys,
-}) => useFMultiValueNotifier<T>(values: values, min: min, max: max, keys: keys);
+}) => useFMultiValueNotifier<T>(value: value, min: min, max: max, keys: keys);
 
 /// Creates a [FSelectMenuTileController] that allows only one element at a time.
 FSelectMenuTileController<T> useFRadioSelectMenuTileController<T>({T? value, List<Object?>? keys}) =>

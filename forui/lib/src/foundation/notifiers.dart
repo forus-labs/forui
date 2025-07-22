@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:forui/src/foundation/debug.dart';
 
-// ignore_for_file: always_call_super_dispose_last
-
 /// A [ChangeNotifier] that provides additional life-cycle tracking capabilities.
 class FChangeNotifier with ChangeNotifier {
   bool _disposed = false;
@@ -77,14 +75,14 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   ///
   /// # Contract:
   /// [min] and [max] must be: `0 <= min <= max`.
-  FMultiValueNotifier({int min = 0, int? max, Set<T>? value})
+  FMultiValueNotifier({Set<T> value = const {}, int min = 0, int? max})
     : _min = min,
       _max = max,
       assert(debugCheckInclusiveRange<FMultiValueNotifier<T>>(min, max)),
-      super(value ?? {});
+      super(value);
 
   /// Creates a [FMultiValueNotifier] that allows only one element at a time.
-  factory FMultiValueNotifier.radio({T? value}) = _RadioNotifier<T>;
+  factory FMultiValueNotifier.radio([T? value]) = _RadioNotifier<T>;
 
   /// Returns true if the notifier contains the [value].
   bool contains(T value) => super.value.contains(value);
@@ -154,7 +152,7 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
 }
 
 class _RadioNotifier<T> extends FMultiValueNotifier<T> {
-  _RadioNotifier({T? value}) : super(value: {?value});
+  _RadioNotifier([T? value]) : super(value: {?value});
 
   @override
   void update(T value, {required bool add}) {
