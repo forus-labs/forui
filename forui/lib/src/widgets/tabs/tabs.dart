@@ -95,22 +95,21 @@ class FTabs extends StatefulWidget {
     this.style,
     this.onChange,
     this.onPress,
-    int? initialIndex,
+    this.initialIndex = 0,
     super.key,
   }) : assert(children.isNotEmpty, 'Must provide at least 1 tab.'),
        assert(
-         0 <= (initialIndex ?? 0) && (initialIndex ?? 0) < children.length,
+         0 <= initialIndex && initialIndex < children.length,
          'initialIndex ($initialIndex) must be between 0 and the number of children (${children.length})',
        ),
        assert(
-         controller == null || initialIndex == null,
+         controller == null || initialIndex == 0,
          'Cannot provide both controller and initialIndex. To fix, set the initialIndex on the controller.',
        ),
        assert(
          controller == null || controller.length == children.length,
          "Controller's number of tabs (${controller.length} must match the number of children (${children.length}).",
-       ),
-       initialIndex = initialIndex ?? 0;
+       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
