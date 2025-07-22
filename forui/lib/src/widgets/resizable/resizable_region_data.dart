@@ -48,7 +48,7 @@ final class FResizableRegionData with Diagnosticable {
        assert(offset.min < offset.max, 'offset.min (${offset.min}) must be < offset.max (${offset.max})'),
        assert(
          0.0.lessOrAround(offset.max - offset.min) && (offset.max - offset.min).lessOrAround(extent.max),
-         'Current extent (${offset.max - offset.min}) must be >= 0 and <= extent.max (${extent.max})'
+         'Current extent (${offset.max - offset.min}) must be >= 0 and <= extent.max (${extent.max})',
        ),
        extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
 

@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 /// A controller shows and hides items in an [FAccordion].
 ///

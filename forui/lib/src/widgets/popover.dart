@@ -98,7 +98,6 @@ enum FHidePopoverRegion {
 class FPopover extends StatefulWidget {
   /// The platform-specific default popover and child anchors.
   static ({Alignment popover, Alignment child}) get defaultPlatform => FTouch.primary
-
       ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
       : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
 

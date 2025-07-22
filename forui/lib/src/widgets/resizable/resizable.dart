@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 
 part 'resizable.style.dart';
@@ -89,14 +89,8 @@ class FResizable extends StatefulWidget {
     this.onChange,
     double? hitRegionExtent,
     super.key,
-  }) : assert(
-         crossAxisExtent == null || 0 < crossAxisExtent,
-         'crossAxisExtent ($crossAxisExtent) must be > 0',
-       ),
-       assert(
-         hitRegionExtent == null || 0 < hitRegionExtent,
-         'hitRegionExtent ($hitRegionExtent) must be > 0',
-       ),
+  }) : assert(crossAxisExtent == null || 0 < crossAxisExtent, 'crossAxisExtent ($crossAxisExtent) must be > 0'),
+       assert(hitRegionExtent == null || 0 < hitRegionExtent, 'hitRegionExtent ($hitRegionExtent) must be > 0'),
        hitRegionExtent = hitRegionExtent ?? (FTouch.primary ? 60 : 10);
 
   @override

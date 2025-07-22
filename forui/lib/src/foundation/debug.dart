@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+
 import 'package:meta/meta.dart';
 
 @internal
@@ -14,7 +15,7 @@ bool debugCheckHasAncestor<T extends InheritedWidget>(String ancestor, BuildCont
         if (generic)
           ErrorHint(
             "This is likely because $ancestor's type parameter could not be inferred. To fix this, wrap "
-            '${context.widget.runtimeType} in a $ancestor widget and explicitly specify the type parameter.'
+            '${context.widget.runtimeType} in a $ancestor widget and explicitly specify the type parameter.',
           )
         else
           ErrorHint('To fix this, wrap ${context.widget.runtimeType} in a $ancestor widget.'),

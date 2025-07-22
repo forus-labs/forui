@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+
 import 'package:forui/src/foundation/debug.dart';
 
 /// A [ChangeNotifier] that provides additional life-cycle tracking capabilities.
