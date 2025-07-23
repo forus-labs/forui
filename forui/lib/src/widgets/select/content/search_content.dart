@@ -14,7 +14,7 @@ part 'search_content.style.dart';
 /// A [FSelect] search field's query and results.
 typedef FSelectSearchData<T> = ({String query, Iterable<T> values});
 
-/// A [FSelect] search field's filter.
+/// A [FSelect] search result's filter.
 typedef FSelectSearchFilter<T> = FutureOr<Iterable<T>> Function(String query);
 
 /// A builder for [FSelect] search results.

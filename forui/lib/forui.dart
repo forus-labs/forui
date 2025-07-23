@@ -7,6 +7,7 @@ export 'localizations.dart';
 export 'theme.dart';
 
 export 'widgets/accordion.dart';
+export 'widgets/autocomplete.dart';
 export 'widgets/alert.dart';
 export 'widgets/avatar.dart';
 export 'widgets/badge.dart';
