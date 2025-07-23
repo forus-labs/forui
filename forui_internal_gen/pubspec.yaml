@@ -21,7 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
   meta: ^1.11.0
-  source_gen: ^2.0.0
+  source_gen: ^3.0.0
 
 dev_dependencies:
   flint: ^2.8.1
