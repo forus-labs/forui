@@ -129,6 +129,16 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   };
 
   @override
+  void dispose() {
+    _controller.removeListener(_update);
+    if (widget.properties.controller == null) {
+      _controller.dispose();
+    }
+    _focus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final prefix = widget.properties.prefixBuilder;
@@ -231,16 +241,6 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
         children: children,
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.removeListener(_update);
-    if (widget.properties.controller == null) {
-      _controller.dispose();
-    }
-    _focus.dispose();
-    super.dispose();
   }
 }
 

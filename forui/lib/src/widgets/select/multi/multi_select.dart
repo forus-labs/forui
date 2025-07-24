@@ -522,7 +522,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   }) :
        tagBuilder = tagBuilder ?? defaultTagBuilder,
        initialValue = initialValue ?? controller?.value ?? {},
-       assert(debugCheckInclusiveRange(min ?? 0, max)),
+       assert(debugCheckInclusiveRange(min, max)),
        assert(
          controller == null || min == 0,
          'Cannot provide both a controller and min. To fix, set the min directly in the controller.',

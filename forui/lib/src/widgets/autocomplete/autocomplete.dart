@@ -4,12 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/select/select_controller.dart';
 
 part 'autocomplete.style.dart';
 
@@ -33,14 +33,13 @@ typedef FAutoCompleteContentBuilder =
 /// * [FAutocompleteStyle] for customizing the appearance of an autocomplete.
 class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
-  static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteStyle style, Widget? _) => Padding(
+  static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style, Widget? _) => Padding(
     padding: const EdgeInsets.all(8.0),
-    // TODO: add after styling added.
-    // child: FProgress.circularIcon(style: style.contentStyle.loadingIndicatorStyle),
+    child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
   );
 
   /// The default empty builder that shows a localized message when there are no results.
-  static Widget defaultContentEmptyBuilder(BuildContext context, FAutocompleteStyle style, Widget? _) {
+  static Widget defaultContentEmptyBuilder(BuildContext context, FAutocompleteContentStyle style, Widget? _) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
@@ -284,10 +283,10 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)> builder;
 
   /// A callback that produces a list of items based on the query either synchronously or asynchronously.
-  final FAutocompleteFilter contentFilter;
+  final FAutocompleteFilter filter;
 
   /// The builder that is called when the select is empty. Defaults to [defaultContentEmptyBuilder].
-  final ValueWidgetBuilder<FAutocompleteStyle> contentEmptyBuilder;
+  final ValueWidgetBuilder<FAutocompleteContentStyle> contentEmptyBuilder;
 
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
@@ -301,18 +300,18 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The divider used to separate the content items. Defaults to [FItemDivider.none].
   final FItemDivider contentDivider;
 
-  /// A callback builds the list of items based on search results returned by [contentFilter].
+  /// A callback builds the list of items based on search results returned by [filter].
   final FAutoCompleteContentBuilder contentBuilder;
 
   /// A callback that is used to show a loading indicator while the results is processed.
-  final ValueWidgetBuilder<FAutocompleteStyle> contentLoadingBuilder;
+  final ValueWidgetBuilder<FAutocompleteContentStyle> contentLoadingBuilder;
 
-  /// A callback that is used to show an error message when [contentFilter] is asynchronous and fails.
+  /// A callback that is used to show an error message when [filter] is asynchronous and fails.
   final Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder;
 
   /// Creates a [FAutocomplete].
   const FAutocomplete({
-    required this.contentFilter,
+    required this.filter,
     required this.contentBuilder,
     this.style,
     this.label,
@@ -488,7 +487,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(ObjectFlagProperty.has('contentFilter', contentFilter))
+      ..add(ObjectFlagProperty.has('contentFilter', filter))
       ..add(ObjectFlagProperty.has('contentEmptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
@@ -538,13 +537,10 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.autocompleteStyle) ?? context.theme.autocompleteStyle;
-    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-
     return FTextFormField(
       style: style.fieldStyle,
       label: widget.label,
-      // TODO: add localizations later
-      hint: widget.hint ?? localizations.selectHint,
+      hint: widget.hint,
       description: widget.description,
       magnifierConfiguration: widget.magnifierConfiguration,
       groupId: widget.groupId,
@@ -572,7 +568,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       maxLength: widget.maxLength,
       maxLengthEnforcement: widget.maxLengthEnforcement,
       onChange: widget.onChange,
-      onTap: _toggle,
+      onTap: _controller.popover.show,
       onTapOutside: widget.onTapOutside,
       onTapAlwaysCalled: widget.onTapAlwaysCalled,
       onEditingComplete: widget.onEditingComplete,
@@ -620,7 +616,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         shift: widget.shift,
         offset: widget.offset,
         hideOnTapOutside: widget.hideOnTapOutside,
-        shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
+        shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide},
         popoverBuilder: (_, popoverController) => TextFieldTapRegion(
           child: InheritedAutocompleteController(
             popover: popoverController,
@@ -630,26 +626,36 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
                 await _controller.popover.hide();
               }
 
-              _controller.text = value;
+              _controller.value = TextEditingValue(
+                text: value,
+                selection: TextSelection.collapsed(offset: value.length),
+              );
             },
-            child: content(context, style),
+            child: Content(
+              controller: _controller,
+              style: style.contentStyle,
+              enabled: widget.enabled,
+              scrollController: widget.contentScrollController,
+              physics: widget.contentPhysics,
+              divider: widget.contentDivider,
+              filter: widget.filter,
+              loadingBuilder: widget.contentLoadingBuilder,
+              builder: widget.contentBuilder,
+              emptyBuilder: widget.contentEmptyBuilder,
+              errorBuilder: widget.contentErrorBuilder,
+            ),
           ),
         ),
         child: InheritedAutocompleteStyle(
           style: style,
           states: data.$2,
-          child: widget.builder(context, (style, data.$2), child),
+          child: CallbackShortcuts(
+            bindings: {const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide},
+            child: widget.builder(context, (style, data.$2), child),
+          ),
         ),
       ),
     );
-  }
-
-  // TODO: Implement the content builder.
-  Widget content(BuildContext context, FAutocompleteStyle style) => Placeholder();
-
-  void _toggle() {
-    _controller.popover.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
-    _controller.popover.toggle();
   }
 
   @override
@@ -667,6 +673,10 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
 
 /// An [FAutocomplete]'s style.
 class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
+  /// The select field's style.
+  @override
+  final FTextFieldStyle fieldStyle;
+
   /// The typeahead's [TextStyle]. It is strongly recommended that [typeaheadTextStyle] and
   /// [FTextFieldStyle.contentTextStyle] are the same size to prevent visual discrepancies between the actual and
   /// typeahead text.
@@ -680,21 +690,13 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   @override
   final FWidgetStateMap<TextStyle> typeaheadTextStyle;
 
-  /// The select field's style.
-  @override
-  final FTextFieldStyle fieldStyle;
-
   /// The popover's style.
   @override
   final FPopoverStyle popoverStyle;
 
   /// The content's style.
   @override
-  final FSelectContentStyle contentStyle;
-
-  /// The default text style when there are no results.
-  @override
-  final TextStyle emptyTextStyle;
+  final FAutocompleteContentStyle contentStyle;
 
   /// Creates a [FAutocompleteStyle].
   FAutocompleteStyle({
@@ -702,7 +704,6 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
     required this.typeaheadTextStyle,
     required this.popoverStyle,
     required this.contentStyle,
-    required this.emptyTextStyle,
   });
 
   /// Creates a [FAutocompleteStyle] that inherits its properties.
@@ -711,7 +712,6 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
         fieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
         typeaheadTextStyle: FWidgetStateMap.all(typography.sm.copyWith(color: colors.mutedForeground)),
         popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
-        contentStyle: FSelectContentStyle.inherit(colors: colors, typography: typography, style: style),
-        emptyTextStyle: typography.sm,
+        contentStyle: FAutocompleteContentStyle.inherit(colors: colors, typography: typography, style: style),
       );
 }

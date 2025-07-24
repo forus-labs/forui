@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
+const fruits = [
+  'Apple',
+  'Banana',
+  'Blueberry',
+  'Grapes',
+  'Lemon',
+  'Mango',
+  'Kiwi',
+  'Orange',
+  'Peach',
+  'Pear',
+  'Pineapple',
+  'Plum',
+  'Raspberry',
+  'Strawberry',
+  'Watermelon',
+];
+
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -28,28 +46,14 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FTabs(
-        controller: c,
-        initialIndex: 0,
-        children: [
-          FTabEntry(
-            label: const Text('Account'),
-            child: FCard(
-              title: const Text('Account'),
-              subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-              child: Container(color: Colors.blue, height: 100),
-            ),
-          ),
-          FTabEntry(
-            label: const Text('Password'),
-            child: FCard(
-              title: const Text('Password'),
-              subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-              child: Container(color: Colors.red, height: 100),
-            ),
-          ),
-        ],
-      ),
+      child: FAutocomplete(
+        hint: 'Select a fruit',
+        filter: (query) async {
+          await Future.delayed(const Duration(seconds: 1));
+          return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
+        },
+        contentBuilder: (context, data) => [for (final fruit in data.values) FAutocompleteItem(fruit)],
+      )
     );
   }
 }

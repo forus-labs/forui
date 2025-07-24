@@ -11,13 +11,18 @@ import 'package:forui/src/widgets/select/select_item.dart';
 part 'content.style.dart';
 
 @internal
-class SelectContentData<T> extends InheritedWidget {
+class ContentData<T> extends InheritedWidget {
+  static ContentData<T> of<T>(BuildContext context) {
+    assert(debugCheckHasAncestor<ContentData<T>>('${FSelect<T>}/${FMultiSelect<T>}', context, generic: true));
+    return context.dependOnInheritedWidgetOfExactType<ContentData<T>>()!;
+  }
+
   final FSelectSectionStyle style;
   final bool enabled;
   final bool first;
   final ValueChanged<BuildContext> ensureVisible;
 
-  const SelectContentData({
+  const ContentData({
     required this.style,
     required this.enabled,
     required this.first,
@@ -26,13 +31,8 @@ class SelectContentData<T> extends InheritedWidget {
     super.key,
   });
 
-  static SelectContentData<T> of<T>(BuildContext context) {
-    assert(debugCheckHasAncestor<SelectContentData<T>>('${FSelect<T>}/${FMultiSelect<T>}', context, generic: true));
-    return context.dependOnInheritedWidgetOfExactType<SelectContentData<T>>()!;
-  }
-
   @override
-  bool updateShouldNotify(SelectContentData<T> old) =>
+  bool updateShouldNotify(ContentData<T> old) =>
       style != old.style || first != old.first || enabled != old.enabled || ensureVisible != old.ensureVisible;
 
   @override
@@ -130,7 +130,7 @@ class _ContentState<T> extends State<Content<T>> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style.sectionStyle.itemStyle.toFItemStyle(context);
-    Widget content = SelectContentData<T>(
+    Widget content = ContentData<T>(
       style: widget.style.sectionStyle,
       first: false,
       enabled: widget.enabled,
@@ -151,7 +151,7 @@ class _ContentState<T> extends State<Content<T>> {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.children.firstOrNull case final first?)
-                SelectContentData<T>(
+                ContentData<T>(
                   style: widget.style.sectionStyle,
                   first: widget.first,
                   enabled: widget.enabled,
@@ -252,7 +252,7 @@ class FSelectContentStyle with Diagnosticable, _$FSelectContentStyleFunctions {
     this.padding = const EdgeInsets.symmetric(vertical: 5),
   });
 
-  /// Creates a [FSelectContentStyle] that inherits from the given [FColors], [FStyle], and [FTypography].
+  /// Creates a [FSelectContentStyle] that inherits its properties.
   FSelectContentStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
         sectionStyle: FSelectSectionStyle.inherit(colors: colors, style: style, typography: typography),
