@@ -56,20 +56,20 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
     FItemDivider divider = FItemDivider.none,
     Key? key,
   }) : this(
-    label: label,
-    children: [for (final e in items.entries) FAutocompleteItem(e.key, value: e.value)],
-    style: style,
-    enabled: enabled,
-    divider: divider,
-    key: key,
-  );
+         label: label,
+         children: [for (final e in items.entries) FAutocompleteItem(e.key, value: e.value)],
+         style: style,
+         enabled: enabled,
+         divider: divider,
+         key: key,
+       );
 
   @override
   Widget build(BuildContext context) {
     final content = ContentData.of(context);
     final enabled = this.enabled ?? content.enabled;
     final style = this.style?.call(content.style) ?? content.style;
-    final itemStyle = style.itemStyle;
+    final itemStyle = style.itemStyle.toFItemStyle(context);
 
     return ContentData(
       style: style,
@@ -143,7 +143,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
 
   /// The section's items' style.
   @override
-  final FItemStyle itemStyle;
+  final FAutocompleteItemStyle itemStyle;
 
   /// Creates a [FAutocompleteSectionStyle].
   FAutocompleteSectionStyle({
@@ -156,18 +156,18 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
 
   /// Creates a [FAutocompleteSectionStyle] that inherits its properties.
   FAutocompleteSectionStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
-      : this(
-    labelTextStyle: FWidgetStateMap({
-      WidgetState.disabled: typography.sm.copyWith(
-        color: colors.disable(colors.primary),
-        fontWeight: FontWeight.w600,
-      ),
-      WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-    }),
-    dividerColor: FWidgetStateMap.all(colors.border),
-    dividerWidth: style.borderWidth,
-    itemStyle: FItemStyle.inherit(colors: colors, style: style, typography: typography),
-  );
+    : this(
+        labelTextStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.sm.copyWith(
+            color: colors.disable(colors.primary),
+            fontWeight: FontWeight.w600,
+          ),
+          WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        }),
+        dividerColor: FWidgetStateMap.all(colors.border),
+        dividerWidth: style.borderWidth,
+        itemStyle: FAutocompleteItemStyle.inherit(colors: colors, style: style, typography: typography),
+      );
 }
 
 /// A suggestion in a [FAutocomplete] that can optionally be nested in a [FAutocompleteSection].
@@ -180,7 +180,7 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
   /// ```shell
   /// dart run forui style create item
   /// ```
-  final FItemStyle Function(FItemStyle)? style;
+  final FAutocompleteItemStyle Function(FAutocompleteItemStyle)? style;
 
   /// The value.
   final String value;
@@ -204,7 +204,7 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
 
   /// Creates a [FAutocompleteItem].
   FAutocompleteItem(String text, {String? value, bool? enabled, Key? key})
-      : this.from(key: key, value: value ?? text, enabled: enabled, title: Text(text));
+    : this.from(key: key, value: value ?? text, enabled: enabled, title: Text(text));
 
   /// Creates a [FAutocompleteItem] with a custom child widget.
   FAutocompleteItem.from({
@@ -224,7 +224,7 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;
-    final style = this.style?.call(content.style.itemStyle);
+    final style = this.style?.call(content.style.itemStyle).toFItemStyle(context);
 
     return FItem(
       style: style?.call,
@@ -247,3 +247,120 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
   }
 }
 
+/// A [FAutocompleteItem]'s style.
+class FAutocompleteItemStyle with Diagnosticable, _$FAutocompleteItemStyleFunctions {
+  /// The margin around the item. Defaults to `EdgeInsets.symmetric(horizontal: 4, vertical: 2)`.
+  @override
+  final EdgeInsetsGeometry margin;
+
+  /// The padding around the item. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
+  @override
+  final EdgeInsetsGeometry padding;
+
+  /// The decoration.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  @override
+  final FWidgetStateMap<BoxDecoration?> decoration;
+
+  /// The icon style for an item's prefix.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  @override
+  final FWidgetStateMap<IconThemeData> prefixIconStyle;
+
+  // The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
+  @override
+  final double prefixIconSpacing;
+
+  /// The default text style for the title.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  @override
+  final FWidgetStateMap<TextStyle> titleTextStyle;
+
+  /// The vertical spacing between the title and the subtitle. Defaults to 4.
+  @override
+  final double titleSpacing;
+
+  /// The default text style for the subtitle.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  @override
+  final FWidgetStateMap<TextStyle> subtitleTextStyle;
+
+  /// The icon style for an item's suffix.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  @override
+  final FWidgetStateMap<IconThemeData> suffixIconStyle;
+
+  /// The tappable style for the item.
+  @override
+  final FTappableStyle tappableStyle;
+
+  /// Creates a [FAutocompleteItemStyle].
+  FAutocompleteItemStyle({
+    required this.decoration,
+    required this.prefixIconStyle,
+    required this.titleTextStyle,
+    required this.subtitleTextStyle,
+    required this.suffixIconStyle,
+    required this.tappableStyle,
+    this.margin = const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+    this.padding = const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6),
+    this.prefixIconSpacing = 10,
+    this.titleSpacing = 4,
+  });
+
+  /// Creates a [FAutocompleteItemStyle] that inherits its properties.
+  FAutocompleteItemStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
+    : this(
+        decoration: FWidgetStateMap({
+          ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
+            color: colors.secondary,
+            borderRadius: style.borderRadius,
+          ),
+        }),
+        prefixIconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
+          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
+        }),
+        titleTextStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
+          WidgetState.any: typography.sm.copyWith(color: colors.primary),
+        }),
+        subtitleTextStyle: FWidgetStateMap({
+          WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
+          WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
+        }),
+        suffixIconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
+          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
+        }),
+        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+      );
+}
+
+@internal
+extension InternalFAutocompleteItemStyletyle on FAutocompleteItemStyle {
+  FItemStyle toFItemStyle(BuildContext context) => FItemStyle(
+    backgroundColor: FWidgetStateMap.all(null),
+    decoration: decoration,
+    margin: margin,
+    contentStyle: FItemContentStyle.inherit(colors: context.theme.colors, typography: context.theme.typography)
+        .copyWith(
+          padding: padding,
+          prefixIconStyle: prefixIconStyle,
+          prefixIconSpacing: prefixIconSpacing,
+          titleTextStyle: titleTextStyle,
+          titleSpacing: titleSpacing,
+          subtitleTextStyle: subtitleTextStyle,
+          suffixIconStyle: suffixIconStyle,
+        ),
+    rawItemContentStyle: context.theme.itemStyle.rawItemContentStyle,
+    // This isn't ever used.
+    tappableStyle: tappableStyle,
+    focusedOutlineStyle: null,
+  );
+}

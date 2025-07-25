@@ -5,38 +5,17 @@ import 'package:forui/src/foundation/debug.dart';
 import 'package:meta/meta.dart';
 
 /// A controller for managing the state of an autocomplete input field.
-class FAutocompleteController extends TextEditingController {
+class FAutocompleteController extends FTypeaheadController {
   /// The popover controller used to manage the autocomplete suggestions.
   final FPopoverController popover;
 
-  String _suggestion;
-
   /// Creates a [FAutocompleteController] with an optional initial text.
-  FAutocompleteController({required TickerProvider vsync, super.text})
+  FAutocompleteController({required TickerProvider vsync, super.text, super.completion})
     : popover = FPopoverController(vsync: vsync),
-      _suggestion = '';
-
-  @override
-  TextSpan buildTextSpan({required BuildContext context, TextStyle? style, bool? withComposing}) {
-    final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
-    return TextSpan(
-      children: [
-        TextSpan(text: text, style: style.fieldStyle.contentTextStyle.resolve(states)),
-        TextSpan(text: _suggestion, style: style.typeaheadTextStyle.resolve(states)),
-      ],
-    );
-  }
-
-  /// Returns the current suggested remaining text.
-  String get suggestion => _suggestion;
-
-  /// Sets the suggested remaining text.
-  set suggestion(String value) {
-    if (_suggestion != value) {
-      _suggestion = value;
-      notifyListeners();
-    }
-  }
+      super(styles: (context) {
+        final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
+        return (style.fieldStyle.contentTextStyle.resolve(states), style.typeaheadTextStyle.resolve(states));
+      });
 }
 
 @internal

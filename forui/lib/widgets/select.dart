@@ -6,7 +6,7 @@
 library forui.widgets.select;
 
 export '../src/widgets/select/select_controller.dart' hide InheritedSelectController;
-export '../src/widgets/select/select_item.dart' hide FSelectItemStyles;
+export '../src/widgets/select/select_item.dart' hide InternalFSelectItemStyle;
 export '../src/widgets/select/content/content.dart' hide Content, ContentData;
 export '../src/widgets/select/content/scroll_handle.dart' hide ScrollHandle;
 export '../src/widgets/select/content/search_content.dart' hide SearchContent;

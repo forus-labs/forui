@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
+import 'package:forui/src/widgets/autocomplete/autocomplete_item.dart';
 import 'package:meta/meta.dart';
 
 part 'autocomplete_content.style.dart';
@@ -33,14 +34,14 @@ class ContentData extends InheritedWidget {
 }
 
 @internal
-class Content extends StatefulWidget {
+class Content extends StatelessWidget {
   final FAutocompleteController controller;
   final FAutocompleteContentStyle style;
   final bool enabled;
   final ScrollController? scrollController;
   final ScrollPhysics physics;
   final FItemDivider divider;
-  final FAutocompleteFilter filter;
+  final FutureOr<FAutocompleteContentData> data;
   final ValueWidgetBuilder<FAutocompleteContentStyle> loadingBuilder;
   final FAutoCompleteContentBuilder builder;
   final ValueWidgetBuilder<FAutocompleteContentStyle> emptyBuilder;
@@ -53,7 +54,7 @@ class Content extends StatefulWidget {
     required this.scrollController,
     required this.physics,
     required this.divider,
-    required this.filter,
+    required this.data,
     required this.loadingBuilder,
     required this.builder,
     required this.emptyBuilder,
@@ -62,84 +63,16 @@ class Content extends StatefulWidget {
   });
 
   @override
-  State<Content> createState() => _State();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
-      ..add(DiagnosticsProperty('scrollController', scrollController))
-      ..add(DiagnosticsProperty('physics', physics))
-      ..add(EnumProperty('divider', divider))
-      ..add(ObjectFlagProperty.has('filter', filter))
-      ..add(ObjectFlagProperty.has('loadingBuilder', loadingBuilder))
-      ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
-  }
-}
-
-class _State extends State<Content> {
-  late String _previous;
-  late FutureOr<FAutocompleteContentData> _data;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.controller.addListener(_update);
-
-    _previous = widget.controller.text;
-    _data = _filter(widget.controller.text);
-  }
-
-  @override
-  void didUpdateWidget(covariant Content old) {
-    super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      old.controller.removeListener(_update);
-      widget.controller.addListener(_update);
-
-      _previous = widget.controller.text;
-      _data = _filter(widget.controller.text);
-    }
-  }
-
-  void _update() {
-    if (_previous != widget.controller.text) {
-      _previous = widget.controller.text;
-      setState(() {
-        // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
-        // results in an assertion error being thrown.
-        _data = _filter(widget.controller.text);
-      });
-    }
-  }
-
-  FutureOr<FAutocompleteContentData> _filter(String query) => switch (widget.filter(query)) {
-    final Future<Iterable<String>> values => values.then((values) => (query: query, values: values)),
-    final values => (query: query, values: values),
-  };
-
-  @override
-  void dispose() {
-    widget.controller.removeListener(_update);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) => Column(
     mainAxisSize: MainAxisSize.min,
     children: [
-      switch (_data) {
+      switch (data) {
         final FAutocompleteContentData data => _content(context, data),
         final Future<FAutocompleteContentData> future => FutureBuilder(
           future: future,
           builder: (context, snapshot) => switch (snapshot.connectionState) {
-            ConnectionState.waiting => Center(child: widget.loadingBuilder(context, widget.style, null)),
-            _ when snapshot.hasError && widget.errorBuilder != null => widget.errorBuilder!.call(
+            ConnectionState.waiting => Center(child: loadingBuilder(context, style, null)),
+            _ when snapshot.hasError && errorBuilder != null => errorBuilder!.call(
               context,
               snapshot.error,
               snapshot.stackTrace!,
@@ -152,24 +85,24 @@ class _State extends State<Content> {
   );
 
   Widget _content(BuildContext context, FAutocompleteContentData data) {
-    final children = widget.builder(context, data);
+    final children = builder(context, data);
     if (children.isEmpty) {
-      return Center(child: widget.emptyBuilder(context, widget.style, null));
+      return Center(child: emptyBuilder(context, style, null));
     }
 
-    final sectionStyle = widget.style.sectionStyle;
-    final itemStyle = widget.style.sectionStyle.itemStyle;
+    final sectionStyle = style.sectionStyle;
+    final itemStyle = style.sectionStyle.itemStyle.toFItemStyle(context);
 
     return Flexible(
       child: ContentData(
         style: sectionStyle,
-        enabled: widget.enabled,
+        enabled: enabled,
         child: Padding(
-          padding: widget.style.padding,
+          padding: style.padding,
           child: ListView(
-            controller: widget.scrollController,
+            controller: scrollController,
             padding: EdgeInsets.zero,
-            physics: widget.physics,
+            physics: physics,
             shrinkWrap: true,
             children: [
               for (final (i, child) in children.indexed)
@@ -178,8 +111,8 @@ class _State extends State<Content> {
                     style: itemStyle,
                     dividerColor: sectionStyle.dividerColor,
                     dividerWidth: sectionStyle.dividerWidth,
-                    divider: i == children.length - 1 ? FItemDivider.none : widget.divider,
-                    enabled: widget.enabled,
+                    divider: i == children.length - 1 ? FItemDivider.none : divider,
+                    enabled: enabled,
                     index: i,
                     last: i == children.length - 1,
                     globalLast: i == children.length - 1,
@@ -191,6 +124,23 @@ class _State extends State<Content> {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
+      ..add(DiagnosticsProperty('scrollController', scrollController))
+      ..add(DiagnosticsProperty('physics', physics))
+      ..add(EnumProperty('divider', divider))
+      ..add(ObjectFlagProperty.has('data', data))
+      ..add(ObjectFlagProperty.has('loadingBuilder', loadingBuilder))
+      ..add(ObjectFlagProperty.has('builder', builder))
+      ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
 }
 

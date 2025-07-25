@@ -302,7 +302,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
 /// A [FSelectItem]'s style.
 class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
-  /// The margin around the image. Defaults to `EdgeInsets.symmetric(horizontal: 4, vertical: 2)`.
+  /// The margin around the item. Defaults to `EdgeInsets.symmetric(horizontal: 4, vertical: 2)`.
   @override
   final EdgeInsetsGeometry margin;
 
@@ -396,7 +396,7 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
 }
 
 @internal
-extension FSelectItemStyles on FSelectItemStyle {
+extension InternalFSelectItemStyle on FSelectItemStyle {
   FItemStyle toFItemStyle(BuildContext context) => FItemStyle(
     backgroundColor: FWidgetStateMap.all(null),
     decoration: decoration,

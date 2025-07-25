@@ -9,4 +9,4 @@ export '../src/widgets/autocomplete/autocomplete.dart';
 export '../src/widgets/autocomplete/autocomplete_content.dart' hide Content, ContentData;
 export '../src/widgets/autocomplete/autocomplete_controller.dart'
     hide InheritedAutocompleteController, InheritedAutocompleteStyle;
-export '../src/widgets/autocomplete/autocomplete_item.dart';
+export '../src/widgets/autocomplete/autocomplete_item.dart' hide InternalFAutocompleteItemStyletyle;
