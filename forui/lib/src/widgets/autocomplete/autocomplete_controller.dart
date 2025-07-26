@@ -16,6 +16,12 @@ class FAutocompleteController extends FTypeaheadController {
         final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
         return (style.fieldStyle.contentTextStyle.resolve(states), style.typeaheadTextStyle.resolve(states));
       });
+
+  @override
+  void dispose() {
+    popover.dispose();
+    super.dispose();
+  }
 }
 
 @internal

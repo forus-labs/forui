@@ -32,7 +32,7 @@ class FTypeaheadController extends TextEditingController {
       final full = text + completion;
       _completion = null;
       value = TextEditingValue(
-        text: completion,
+        text: full,
         selection: TextSelection.collapsed(offset: full.length),
       );
     }

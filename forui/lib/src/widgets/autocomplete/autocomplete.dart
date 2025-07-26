@@ -582,9 +582,10 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   /// A monotonic counter to ensure that only latest [_data] is processed. This prevents stale data from being processed
   /// and causing the typeahead to rapidly change when the user types quickly & the filtering is async.
   int _monotonic = 0;
+  bool _completing = false;
   late FAutocompleteController _controller;
   late FAutocompleteTypeahead _typeahead;
-  late FocusNode _focus;
+  late FocusNode _fieldFocus;
   late FutureOr<FAutocompleteContentData> _data;
   late String _previous;
 
@@ -594,7 +595,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
     _controller = widget.controller ?? FAutocompleteController(vsync: this, text: widget.initialText);
     _controller.addListener(_update);
     _typeahead = widget.typeahead ?? FDefaultAutocompleteTypeahead().call;
-    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete');
+    _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
     _previous = _controller.text;
     _data = _filter(_controller.text);
     _complete();
@@ -610,9 +611,9 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
 
     if (widget.focusNode != old.focusNode) {
       if (old.focusNode == null) {
-        _focus.dispose();
+        _fieldFocus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete');
+      _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete');
     }
 
     if (widget.controller != old.controller) {
@@ -636,7 +637,11 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   }
 
   void _update() {
-    if (_previous != _controller.text) {
+    if (_previous != _controller.text && !_completing) {
+      if (!_controller.popover.status.isForwardOrCompleted) {
+        _controller.popover.show();
+      }
+
       _previous = _controller.text;
       setState(() {
         // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
@@ -671,14 +676,14 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
+    if (widget.focusNode == null) {
+      _fieldFocus.dispose();
+    }
+
     if (widget.controller == null) {
       _controller.dispose();
     } else {
       _controller.removeListener(_update);
-    }
-
-    if (widget.focusNode == null) {
-      _focus.dispose();
     }
     super.dispose();
   }
@@ -694,7 +699,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       magnifierConfiguration: widget.magnifierConfiguration,
       groupId: widget.groupId,
       controller: _controller,
-      focusNode: _focus,
+      focusNode: _fieldFocus,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       textCapitalization: widget.textCapitalization,
@@ -718,8 +723,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       maxLengthEnforcement: widget.maxLengthEnforcement,
       onChange: widget.onChange,
       onTap: _controller.popover.show,
-      onTapOutside: widget.onTapOutside,
-      onTapAlwaysCalled: widget.onTapAlwaysCalled,
+      onTapAlwaysCalled: true,
       onEditingComplete: widget.onEditingComplete,
       onSubmit: widget.onSubmit,
       onAppPrivateCommand: widget.onAppPrivateCommand,
@@ -769,16 +773,21 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         popoverBuilder: (_, popoverController) => TextFieldTapRegion(
           child: InheritedAutocompleteController(
             popover: popoverController,
-            onPress: (value) async {
+            onPress: (value) {
+              _completing = true;
               if (widget.autoHide) {
-                _focus.requestFocus();
-                await _controller.popover.hide();
+                _fieldFocus.requestFocus();
+                _controller.popover.hide();
               }
 
-              _controller.value = TextEditingValue(
-                text: value,
-                selection: TextSelection.collapsed(offset: value.length),
-              );
+              _controller
+                ..completion = null
+                ..value = TextEditingValue(
+                  text: value,
+                  selection: TextSelection.collapsed(offset: value.length),
+                );
+
+              _completing = false;
             },
             child: Content(
               controller: _controller,
@@ -799,7 +808,16 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
           style: style,
           states: data.$2,
           child: CallbackShortcuts(
-            bindings: {const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide},
+            bindings: {
+              const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
+              if (_controller.completion != null)
+                const SingleActivator(LogicalKeyboardKey.tab): () {
+                  _completing = true;
+                  _controller.popover.hide();
+                  _controller.accept();
+                  _completing = false;
+                },
+            },
             child: widget.builder(context, (style, data.$2), child),
           ),
         ),
