@@ -586,6 +586,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   late FAutocompleteController _controller;
   late FAutocompleteTypeahead _typeahead;
   late FocusNode _fieldFocus;
+  late FocusScopeNode _popoverFocus;
   late FutureOr<FAutocompleteContentData> _data;
   late String _previous;
 
@@ -596,6 +597,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
     _controller.addListener(_update);
     _typeahead = widget.typeahead ?? FDefaultAutocompleteTypeahead().call;
     _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
+    _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
     _previous = _controller.text;
     _data = _filter(_controller.text);
     _complete();
@@ -638,6 +640,9 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
 
   void _update() {
     if (_previous != _controller.text && !_completing) {
+      print('_update');
+      print(_previous);
+      print(_controller.text);
       if (!_controller.popover.status.isForwardOrCompleted) {
         _controller.popover.show();
       }
@@ -676,6 +681,8 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
+    _popoverFocus.dispose();
+
     if (widget.focusNode == null) {
       _fieldFocus.dispose();
     }
@@ -769,6 +776,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         shift: widget.shift,
         offset: widget.offset,
         hideOnTapOutside: widget.hideOnTapOutside,
+        focusNode: _popoverFocus,
         shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide},
         popoverBuilder: (_, popoverController) => TextFieldTapRegion(
           child: InheritedAutocompleteController(
@@ -787,6 +795,20 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
                   selection: TextSelection.collapsed(offset: value.length),
                 );
 
+              // Since we unfocus the textfield when using the keyboard to navigate the completions in the popover, the
+              // entire text will be selected when the user taps on a completion & focus is returned to the textfield.
+              // This is desirable in most cases except for this.
+              // TODO: To fix this, we need to wait for https://github.com/flutter/flutter/issues/163399 to land in stable.
+              _completing = false;
+            },
+            onFocus: (value) {
+              _completing = true;
+              _controller
+                ..completion = null
+                ..value = TextEditingValue(
+                  text: value,
+                  selection: TextSelection.collapsed(offset: value.length),
+                );
               _completing = false;
             },
             child: Content(
@@ -813,9 +835,14 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
               if (_controller.completion != null)
                 const SingleActivator(LogicalKeyboardKey.tab): () {
                   _completing = true;
-                  _controller.popover.hide();
                   _controller.accept();
+                  _previous = _controller.text;
+                  _controller.popover.hide();
                   _completing = false;
+                },
+              if (_controller.popover.status.isForwardOrCompleted && _fieldFocus.hasFocus)
+                const SingleActivator(LogicalKeyboardKey.arrowDown): () {
+                  _popoverFocus.descendants.firstOrNull?.requestFocus();
                 },
             },
             child: widget.builder(context, (style, data.$2), child),

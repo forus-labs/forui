@@ -220,7 +220,7 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedAutocompleteController(:popover, :onPress) = InheritedAutocompleteController.of(context);
+    final InheritedAutocompleteController(:popover, :onPress, :onFocus) = InheritedAutocompleteController.of(context);
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;
@@ -230,6 +230,11 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
       style: style?.call,
       enabled: enabled,
       onPress: () => onPress(value),
+      onFocusChange: (focused) {
+        if (focused) {
+          onFocus(value);
+        }
+      },
       prefix: prefix,
       title: title,
       subtitle: subtitle,

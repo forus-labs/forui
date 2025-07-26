@@ -61,10 +61,12 @@ class InheritedAutocompleteController extends InheritedWidget {
 
   final FPopoverController popover;
   final ValueChanged<String> onPress;
+  final ValueChanged<String> onFocus;
 
   const InheritedAutocompleteController({
     required this.popover,
     required this.onPress,
+    required this.onFocus,
     required super.child,
     super.key,
   });
@@ -77,6 +79,7 @@ class InheritedAutocompleteController extends InheritedWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('popover', popover))
-      ..add(ObjectFlagProperty.has('onPress', onPress));
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onFocus', onFocus));
   }
 }
