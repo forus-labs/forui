@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -9,6 +11,11 @@ class FTypeaheadController extends TextEditingController {
   final (TextStyle, TextStyle, TextStyle) Function(BuildContext) _textStyles;
   List<String> _suggestions;
   ({String completion, String replacement})? _current;
+
+  /// A monotonic counter to ensure that only latest suggestions are processed. This prevents stale data from being
+  /// processed when the suggestions are provided async.
+  int _monotonic = 0;
+  bool _disposed = false;
 
   /// Creates a [FTypeaheadController] with an optional initial text and completion.
   FTypeaheadController({
@@ -24,21 +31,20 @@ class FTypeaheadController extends TextEditingController {
   @override
   TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
     assert(!value.composing.isValid || !withComposing || value.isComposingRangeValid);
-    // If the composing range is out of range for the current text, ignore it to
-    // preserve the tree integrity, otherwise in release mode a RangeError will
-    // be thrown and this EditableText will be built with a broken subtree.
+    // If the composing range is out of range for the current text, ignore it to preserve the tree integrity, otherwise
+    // in release mode a RangeError will be thrown and this EditableText will be built with a broken subtree.
     final bool composingRegionOutOfRange = !value.isComposingRangeValid || !withComposing;
-
-    if (composingRegionOutOfRange) {
-      return TextSpan(style: style, text: text);
-    }
-
     final (textStyle, composingStyle, completionStyle) = _textStyles(context);
+
     return TextSpan(
       children: [
-        TextSpan(text: value.composing.textBefore(value.text), style: style),
-        TextSpan(text: value.composing.textInside(value.text), style: composingStyle),
-        TextSpan(text: value.composing.textAfter(value.text), style: style),
+        if (composingRegionOutOfRange)
+          TextSpan(text: text, style: style)
+        else ...[
+          TextSpan(text: value.composing.textBefore(value.text), style: style),
+          TextSpan(text: value.composing.textInside(value.text), style: composingStyle),
+          TextSpan(text: value.composing.textAfter(value.text), style: style),
+        ],
         if (current case (:final completion, replacement: final _)) TextSpan(text: completion, style: completionStyle),
       ],
     );
@@ -65,7 +71,8 @@ class FTypeaheadController extends TextEditingController {
   /// If a match is found, [current] is set with the completion text and full replacement.
   /// If no match is found or text is empty, [current] is set to null to disable typeahead.
   @visibleForOverriding
-  void findCompletion() {
+  void findCompletion([String? text]) {
+    text ??= this.text;
     if (text.isEmpty) {
       current = null;
       return;
@@ -81,13 +88,28 @@ class FTypeaheadController extends TextEditingController {
     current = null;
   }
 
-  @override
-  set value(TextEditingValue newValue) {
-    // notifyListeners will always be called if text changes.
-    if (text != newValue.text) {
-      findCompletion();
+  /// Loads suggestions from a [Future] or an [Iterable].
+  Future<void> loadSuggestions(FutureOr<Iterable<String>> suggestions) async {
+    final monotonic = ++_monotonic;
+    switch (suggestions) {
+      case final Future<Iterable<String>> future:
+        final iterable = await future;
+        if (!_disposed && monotonic == _monotonic) {
+          _loadSuggestions(iterable);
+        }
+
+      case final Iterable<String> iterable:
+        _loadSuggestions(iterable);
     }
-    super.value = newValue;
+  }
+
+  void _loadSuggestions(Iterable<String> iterable) {
+    final suggestions = [...iterable];
+    if (!listEquals(_suggestions, suggestions)) {
+      _suggestions = suggestions;
+      findCompletion();
+      notifyListeners();
+    }
   }
 
   /// The suggestions from which a completion is derived.
@@ -95,12 +117,31 @@ class FTypeaheadController extends TextEditingController {
   /// For example, if the user types "appl", the suggestions might include "apple", "application", etc.
   List<String> get suggestions => _suggestions;
 
-  set suggestions(List<String> value) {
-    if (!listEquals(_suggestions, value)) {
-      _suggestions = value;
-      findCompletion();
-      notifyListeners();
+  /// Updates the current [text] to the given `newText`, and removes existing selection and composing range held by the
+  /// controller.
+  ///
+  /// Unlike [TextEditingController.text], this setter sets the selection to the end of the new text rather than selecting
+  /// the entire text.
+  @override
+  set text(String newText) {
+    if (text != newText) {
+      value = value.copyWith(
+        text: newText,
+        selection: TextSelection.collapsed(offset: newText.length),
+        composing: TextRange.empty,
+      );
     }
+  }
+
+  @override
+  set value(TextEditingValue newValue) {
+    // notifyListeners will always be called if text changes.
+    if (text != newValue.text) {
+      // We have to call [findCompletion] before setting the value to ensure listeners will see the correct completion.
+      // We have to pass in the new text since value is not updated yet.
+      findCompletion(newValue.text);
+    }
+    super.value = newValue;
   }
 
   /// The current completion and corresponding replacement text, or null if no completion is available.
@@ -110,5 +151,15 @@ class FTypeaheadController extends TextEditingController {
   @nonVirtual
   set current(({String completion, String replacement})? value) {
     _current = value;
+  }
+
+  @override
+  @mustCallSuper
+  void dispose() {
+    try {
+      super.dispose();
+    } finally {
+      _disposed = true;
+    }
   }
 }

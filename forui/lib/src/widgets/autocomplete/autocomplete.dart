@@ -13,78 +13,12 @@ import 'package:forui/forui.dart';
 
 part 'autocomplete.style.dart';
 
-/// A [FAutocomplete]'s query and results.
-typedef FAutocompleteContentData = ({String query, Iterable<String> values});
-
-/// A [FAutocomplete]'s typeahead completion function.
-///
-/// [values] is null if the results are being fetched asynchronously.
-typedef FAutocompleteTypeahead = String? Function(String query, Iterable<String>? values);
-
 /// A [FAutocomplete]'s results filter.
 typedef FAutocompleteFilter = FutureOr<Iterable<String>> Function(String query);
 
 /// A builder for [FAutocomplete]'s results.
 typedef FAutoCompleteContentBuilder =
-    List<FAutocompleteItemMixin> Function(BuildContext context, FAutocompleteContentData data);
-
-/// A default typeahead function that returns the first result that starts with the query, ignoring case. It caches and
-/// reuses the previous result while the asynchronously fetched results are pending.
-///
-/// ## Warning
-/// [FDefaultAutocompleteTypeahead] maintains internal state and must be reused across rebuilds.
-/// Creating a new instance on each build will lose the cached typeahead state.
-///
-/// ❌ Bad - creates new instance each time
-/// ```dart
-/// FAutocomplete(
-///   typeahead: FDefaultAutocompleteTypeahead(),
-///   // ...
-/// )
-/// ```
-///
-/// ✅ Good - reuse the same instance in a StatefulWidget
-/// ```dart
-/// class MyWidget extends StatefulWidget {
-///   @override
-///   State<MyWidget> createState() => _MyWidgetState();
-/// }
-///
-/// class _MyWidgetState extends State<MyWidget> {
-///   final _typeahead = FDefaultAutocompleteTypeahead();
-///
-///   @override
-///   Widget build(BuildContext context) {
-///     return FAutocomplete(
-///       typeahead: _typeahead,
-///       // ...
-///     );
-///   }
-/// }
-/// ```
-class FDefaultAutocompleteTypeahead {
-  List<String> _previous = const [];
-
-  /// Return a completion.
-  String? call(String query, Iterable<String>? values) {
-    // Populate cache regardless of whether query is empty.
-    if (values case final values?) {
-      _previous = [...values];
-    }
-
-    if (query.isEmpty) {
-      return null;
-    }
-
-    for (final value in (values ?? _previous)) {
-      if (value.toLowerCase().startsWith(query.toLowerCase())) {
-        return value.substring(query.length);
-      }
-    }
-
-    return null;
-  }
-}
+    List<FAutocompleteItemMixin> Function(BuildContext context, String query, Iterable<String> values);
 
 /// An autocomplete provides a list of suggestions based on the user's input.
 ///
@@ -348,20 +282,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// A callback that produces a list of items based on the query either synchronously or asynchronously.
   final FAutocompleteFilter filter;
 
-  /// A callback that provides a completion based on the current query and results.
-  ///
-  /// Defaults to [FDefaultAutocompleteTypeahead], which returns the first result that starts with the query, ignoring
-  /// case.
-  ///
-  /// To not show a completion while the results are being fetched, return null while pending is true.
-  /// ```dart
-  /// (query, values) => values == null ? null : 'my-completion`;
-  /// ```
-  ///
-  /// ## Contract
-  /// It should always return null if the query is empty and [hint] is provided.
-  final FAutocompleteTypeahead? typeahead;
-
   /// The builder that is called when the select is empty. Defaults to [defaultContentEmptyBuilder].
   final ValueWidgetBuilder<FAutocompleteContentStyle> contentEmptyBuilder;
 
@@ -463,7 +383,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
     this.autoHide = true,
     this.builder = _builder,
-    this.typeahead,
     this.contentScrollController,
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
@@ -566,7 +485,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('filter', filter))
-      ..add(ObjectFlagProperty.has('typeahead', typeahead))
       ..add(ObjectFlagProperty.has('contentEmptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
@@ -579,15 +497,10 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
 }
 
 class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
-  /// A monotonic counter to ensure that only latest [_data] is processed. This prevents stale data from being processed
-  /// and causing the typeahead to rapidly change when the user types quickly & the filtering is async.
-  int _monotonic = 0;
-  bool _completing = false;
   late FAutocompleteController _controller;
-  late FAutocompleteTypeahead _typeahead;
   late FocusNode _fieldFocus;
   late FocusScopeNode _popoverFocus;
-  late FutureOr<FAutocompleteContentData> _data;
+  late FutureOr<Iterable<String>> _data;
   late String _previous;
 
   @override
@@ -595,22 +508,16 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
     super.initState();
     _controller = widget.controller ?? FAutocompleteController(vsync: this, text: widget.initialText);
     _controller.addListener(_update);
-    _typeahead = widget.typeahead ?? FDefaultAutocompleteTypeahead().call;
     _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
     _previous = _controller.text;
-    _data = _filter(_controller.text);
-    _complete();
+    _controller.loadSuggestions(_data = widget.filter(_controller.text));
   }
 
   @override
   void didUpdateWidget(covariant FAutocomplete old) {
     super.didUpdateWidget(old);
     // DO NOT REORDER
-    if (widget.typeahead != old.typeahead) {
-      _typeahead = widget.typeahead ?? FDefaultAutocompleteTypeahead().call;
-    }
-
     if (widget.focusNode != old.focusNode) {
       if (old.focusNode == null) {
         _fieldFocus.dispose();
@@ -633,50 +540,23 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
 
       _controller.addListener(_update);
       _previous = _controller.text;
-      _data = _filter(_controller.text);
-      _complete();
+      _controller.loadSuggestions(widget.filter(_controller.text));
     }
   }
 
   void _update() {
-    if (_previous != _controller.text && !_completing) {
-      print('_update');
-      print(_previous);
-      print(_controller.text);
-      if (!_controller.popover.status.isForwardOrCompleted) {
-        _controller.popover.show();
-      }
+    if (_previous == _controller.text) {
+      return;
+    }
 
+    if (!_controller.popover.status.isForwardOrCompleted) {
+      _controller.popover.show();
+    }
+
+    setState(() {
       _previous = _controller.text;
-      setState(() {
-        // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
-        // results in an assertion error being thrown.
-        _data = _filter(_controller.text);
-      });
-
-      _complete();
-    }
-  }
-
-  FutureOr<FAutocompleteContentData> _filter(String query) => switch (widget.filter(query)) {
-    final Future<Iterable<String>> values => values.then((values) => (query: query, values: values)),
-    final values => (query: query, values: values),
-  };
-
-  void _complete() {
-    final monotonic = ++_monotonic;
-    switch (_data) {
-      case final Future<FAutocompleteContentData> future:
-        _controller.completion = _typeahead(_controller.text, null);
-        future.then((data) {
-          if (mounted && monotonic == _monotonic) {
-            _controller.completion = _typeahead(data.query, data.values);
-          }
-        });
-
-      case final FAutocompleteContentData data:
-        _controller.completion = _typeahead(data.query, data.values);
-    }
+      _controller.loadSuggestions(_data = widget.filter(_controller.text));
+    });
   }
 
   @override
@@ -782,34 +662,21 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
           child: InheritedAutocompleteController(
             popover: popoverController,
             onPress: (value) {
-              _completing = true;
               if (widget.autoHide) {
                 _fieldFocus.requestFocus();
                 _controller.popover.hide();
               }
 
-              _controller
-                ..completion = null
-                ..value = TextEditingValue(
-                  text: value,
-                  selection: TextSelection.collapsed(offset: value.length),
-                );
-
               // Since we unfocus the textfield when using the keyboard to navigate the completions in the popover, the
               // entire text will be selected when the user taps on a completion & focus is returned to the textfield.
               // This is desirable in most cases except for this.
               // TODO: To fix this, we need to wait for https://github.com/flutter/flutter/issues/163399 to land in stable.
-              _completing = false;
+              _previous = value;
+              _controller.text = value;
             },
             onFocus: (value) {
-              _completing = true;
-              _controller
-                ..completion = null
-                ..value = TextEditingValue(
-                  text: value,
-                  selection: TextSelection.collapsed(offset: value.length),
-                );
-              _completing = false;
+              _previous = value;
+              _controller.text = value;
             },
             child: Content(
               controller: _controller,
@@ -832,15 +699,13 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
           child: CallbackShortcuts(
             bindings: {
               const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
-              if (_controller.completion != null)
+              if (_controller.current case (:final replacement, completion :final _))
                 const SingleActivator(LogicalKeyboardKey.tab): () {
-                  _completing = true;
-                  _controller.accept();
-                  _previous = _controller.text;
+                  _previous = replacement;
+                  _controller.complete();
                   _controller.popover.hide();
-                  _completing = false;
                 },
-              if (_controller.popover.status.isForwardOrCompleted && _fieldFocus.hasFocus)
+              if (_controller.popover.status.isForwardOrCompleted)
                 const SingleActivator(LogicalKeyboardKey.arrowDown): () {
                   _popoverFocus.descendants.firstOrNull?.requestFocus();
                 },
@@ -859,9 +724,11 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   @override
   final FTextFieldStyle fieldStyle;
 
-  /// The typeahead's [TextStyle]. It is strongly recommended that [typeaheadTextStyle] and
-  /// [FTextFieldStyle.contentTextStyle] are the same size to prevent visual discrepancies between the actual and
-  /// typeahead text.
+  /// The composing text's [TextStyle].
+  ///
+  /// {@template forui.text_field.composingTextStyle}
+  /// It is strongly recommended that FTextFieldStyle.contentTextStyle], [composingTextStyle] and [typeaheadTextStyle]
+  /// are the same size to prevent visual discrepancies between the actual and typeahead text.
   ///
   /// The supported states are:
   /// * [WidgetState.disabled]
@@ -869,6 +736,13 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   /// * [WidgetState.focused]
   /// * [WidgetState.hovered]
   /// * [WidgetState.pressed]
+  /// {@endtemplate}
+  @override
+  final FWidgetStateMap<TextStyle> composingTextStyle;
+
+  /// The typeahead's [TextStyle].
+  ///
+  /// {@macro forui.text_field.composingTextStyle}
   @override
   final FWidgetStateMap<TextStyle> typeaheadTextStyle;
 
@@ -883,17 +757,26 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   /// Creates a [FAutocompleteStyle].
   FAutocompleteStyle({
     required this.fieldStyle,
+    required this.composingTextStyle,
     required this.typeaheadTextStyle,
     required this.popoverStyle,
     required this.contentStyle,
   });
 
   /// Creates a [FAutocompleteStyle] that inherits its properties.
-  FAutocompleteStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        fieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
-        typeaheadTextStyle: FWidgetStateMap.all(typography.sm.copyWith(color: colors.mutedForeground)),
-        popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
-        contentStyle: FAutocompleteContentStyle.inherit(colors: colors, typography: typography, style: style),
-      );
+  factory FAutocompleteStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
+    final field = FTextFieldStyle.inherit(colors: colors, typography: typography, style: style);
+
+    return FAutocompleteStyle(
+      fieldStyle: field,
+      composingTextStyle: field.contentTextStyle.map((s) => s.copyWith(decoration: TextDecoration.underline)),
+      typeaheadTextStyle: field.contentTextStyle.map((s) => s.copyWith(color: colors.mutedForeground)),
+      popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
+      contentStyle: FAutocompleteContentStyle.inherit(colors: colors, typography: typography, style: style),
+    );
+  }
 }

@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-const fruits = [
-  'Apple',
-  'Banana',
-  'Blueberry',
-  'Grapes',
-  'Lemon',
-  'Mango',
-  'Kiwi',
-  'Orange',
-  'Peach',
-  'Pear',
-  'Pineapple',
-  'Plum',
-  'Raspberry',
-  'Strawberry',
-  'Watermelon',
+const music = [
+  'Rock',
+  'Pop',
+  'Jazz',
+  'Classical',
+  'Hip Hop',
+  'Country',
+  'Reggae',
+  'Blues',
+  'Electronic',
 ];
 
 class Sandbox extends StatefulWidget {
@@ -47,12 +41,12 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Center(
       child: FAutocomplete(
-        hint: 'Select a fruit',
+        hint: 'Select a music genre',
         filter: (query) async {
           await Future.delayed(const Duration(seconds: 1));
-          return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
+          return query.isEmpty ? music : music.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        contentBuilder: (context, data) => [for (final fruit in data.values) FAutocompleteItem(fruit)],
+        contentBuilder: (context, query, values) => [for (final fruit in values) FAutocompleteItem(fruit)],
       )
     );
   }

@@ -4,18 +4,24 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:meta/meta.dart';
 
-/// A controller for managing the state of an autocomplete input field.
+/// A controller for managing autocomplete functionality in a text field.
 class FAutocompleteController extends FTypeaheadController {
-  /// The popover controller used to manage the autocomplete suggestions.
+  /// The popover controller used to show all autocomplete suggestions.
   final FPopoverController popover;
 
-  /// Creates a [FAutocompleteController] with an optional initial text.
-  FAutocompleteController({required TickerProvider vsync, super.text, super.completion})
+  /// Creates a [FAutocompleteController] with an optional initial text and suggestions.
+  FAutocompleteController({required TickerProvider vsync, super.text, super.suggestions})
     : popover = FPopoverController(vsync: vsync),
-      super(styles: (context) {
-        final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
-        return (style.fieldStyle.contentTextStyle.resolve(states), style.typeaheadTextStyle.resolve(states));
-      });
+      super(
+        textStyles: (context) {
+          final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
+          return (
+            style.fieldStyle.contentTextStyle.resolve(states),
+            style.composingTextStyle.resolve(states),
+            style.typeaheadTextStyle.resolve(states),
+          );
+        },
+      );
 
   @override
   void dispose() {
