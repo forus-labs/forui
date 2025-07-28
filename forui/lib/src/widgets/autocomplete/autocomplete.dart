@@ -31,7 +31,7 @@ typedef FAutoCompleteContentBuilder =
 class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style, Widget? _) => Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.all(13),
     child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
   );
 
@@ -39,7 +39,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   static Widget defaultContentEmptyBuilder(BuildContext context, FAutocompleteContentStyle style, Widget? _) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14),
       child: Text(localizations.selectNoResults, style: style.emptyTextStyle), // TODO: localization
     );
   }
@@ -498,20 +498,22 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
 
 class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   late FAutocompleteController _controller;
+  late FutureOr<Iterable<String>> _data;
   late FocusNode _fieldFocus;
   late FocusScopeNode _popoverFocus;
-  late FutureOr<Iterable<String>> _data;
-  late String _previous;
+  String? _previous;
+  String? _restore;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? FAutocompleteController(vsync: this, text: widget.initialText);
-    _controller.addListener(_update);
+    _controller
+      ..addListener(_update)
+      ..loadSuggestions(_data = widget.filter(_controller.text));
     _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
+    _fieldFocus.addListener(_focus);
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
-    _previous = _controller.text;
-    _controller.loadSuggestions(_data = widget.filter(_controller.text));
   }
 
   @override
@@ -522,7 +524,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       if (old.focusNode == null) {
         _fieldFocus.dispose();
       }
-      _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete');
+      _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
     }
 
     if (widget.controller != old.controller) {
@@ -532,15 +534,10 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         _controller.removeListener(_update);
       }
 
-      if (widget.controller case final controller?) {
-        _controller = controller;
-      } else {
-        _controller = FAutocompleteController(vsync: this, text: widget.initialText);
-      }
-
-      _controller.addListener(_update);
-      _previous = _controller.text;
-      _controller.loadSuggestions(widget.filter(_controller.text));
+      _controller = widget.controller ?? FAutocompleteController(vsync: this, text: widget.initialText);
+      _controller
+        ..addListener(_update)
+        ..loadSuggestions(widget.filter(_controller.text));
     }
   }
 
@@ -549,7 +546,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       return;
     }
 
-    if (!_controller.popover.status.isForwardOrCompleted) {
+    if (_fieldFocus.hasFocus && !_controller.popover.status.isForwardOrCompleted) {
       _controller.popover.show();
     }
 
@@ -557,6 +554,14 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       _previous = _controller.text;
       _controller.loadSuggestions(_data = widget.filter(_controller.text));
     });
+  }
+
+  void _focus() {
+    if (_fieldFocus.hasFocus && _restore == null) {
+      _controller.popover.show();
+    }
+
+    _restore = null;
   }
 
   @override
@@ -656,25 +661,29 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         shift: widget.shift,
         offset: widget.offset,
         hideOnTapOutside: widget.hideOnTapOutside,
+        onTapOutsideHide: () {
+          if (_restore case final restore?) {
+            _previous = restore;
+            _controller.text = restore;
+          }
+        },
         focusNode: _popoverFocus,
-        shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide},
         popoverBuilder: (_, popoverController) => TextFieldTapRegion(
           child: InheritedAutocompleteController(
             popover: popoverController,
             onPress: (value) {
-              if (widget.autoHide) {
-                _fieldFocus.requestFocus();
-                _controller.popover.hide();
-              }
-
               // Since we unfocus the textfield when using the keyboard to navigate the completions in the popover, the
               // entire text will be selected when the user taps on a completion & focus is returned to the textfield.
               // This is desirable in most cases except for this.
               // TODO: To fix this, we need to wait for https://github.com/flutter/flutter/issues/163399 to land in stable.
+              if (widget.autoHide) {
+                _controller.popover.hide();
+              }
               _previous = value;
               _controller.text = value;
             },
             onFocus: (value) {
+              _restore ??= _controller.text;
               _previous = value;
               _controller.text = value;
             },
@@ -698,16 +707,16 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
           states: data.$2,
           child: CallbackShortcuts(
             bindings: {
-              const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
-              if (_controller.current case (:final replacement, completion :final _))
+              const SingleActivator(LogicalKeyboardKey.escape): () => _controller.popover.hide(),
+              const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
+                  _popoverFocus.descendants.firstOrNull?.requestFocus(),
+              if (_controller.current case (:final replacement, completion: final _))
                 const SingleActivator(LogicalKeyboardKey.tab): () {
+                  if (widget.autoHide) {
+                    _controller.popover.hide();
+                  }
                   _previous = replacement;
                   _controller.complete();
-                  _controller.popover.hide();
-                },
-              if (_controller.popover.status.isForwardOrCompleted)
-                const SingleActivator(LogicalKeyboardKey.arrowDown): () {
-                  _popoverFocus.descendants.firstOrNull?.requestFocus();
                 },
             },
             child: widget.builder(context, (style, data.$2), child),
