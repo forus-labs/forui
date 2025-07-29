@@ -77,6 +77,7 @@ FPopoverMenu(
   offset: Offset.zero,
   groupId: 'popover-menu-group',
   hideOnTapOutside: FHidePopoverRegion.excludeTarget,
+  onTapHide: () {},
   traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
   menuBuilder: (context, controller, menu) => [FItemGroup(children: [])],
   menu: [

@@ -185,10 +185,9 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.onTapOutsideHide}
   /// A callback that is called when the popover is hidden by tapping outside of it.
   ///
-  /// This is only called if [hideOnTapOutside] is set to [FHidePopoverRegion.anywhere] or
-  /// [FHidePopoverRegion.excludeTarget].
+  /// This is only called if [hideOnTapOutside] is set to [FHidePopoverRegion.anywhere] or [FHidePopoverRegion.excludeTarget].
   /// {@endtemplate
-  final VoidCallback? onTapOutsideHide;
+  final VoidCallback? onTapHide;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   ///
@@ -263,7 +262,7 @@ class FPopover extends StatefulWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    this.onTapOutsideHide,
+    this.onTapHide,
     this.autofocus,
     this.focusNode,
     this.onFocusChange,
@@ -306,7 +305,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
-      ..add(ObjectFlagProperty.has('onTapOutsideHide', onTapOutsideHide))
+      ..add(ObjectFlagProperty.has('onTapOutsideHide', onTapHide))
       ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
       ..add(
         FlagProperty(
@@ -467,7 +466,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     // when there are multiple FSelects/other widgets.
     if (_controller.status.isForwardOrCompleted) {
       _controller.hide();
-      widget.onTapOutsideHide?.call();
+      widget.onTapHide?.call();
     }
   }
 }

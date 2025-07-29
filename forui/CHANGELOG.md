@@ -25,7 +25,8 @@ We've done a pass over the controllers in Forui to make them more consistent and
 
 ### Others
 * Add `FTypeaheadController`.
-* Add `FPopover.onTapOutsideHide`.
+* Add `FPopover.onTapHide`.
+* Add `FPopoverMenu.onTapHide`.
 
 * Rename `FSelect.divider` to `FSelect.contentDivider`.
 * Change `FMultiValueNotifier` to be non-abstract.

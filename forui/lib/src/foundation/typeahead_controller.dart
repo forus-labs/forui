@@ -54,12 +54,11 @@ class FTypeaheadController extends TextEditingController {
   void complete() {
     if (current case (completion: final _, :final replacement)) {
       current = null;
+      // We call super.value to avoid finding completions.
       super.value = TextEditingValue(
-        // We call super.value to avoid
         text: replacement,
         selection: TextSelection.collapsed(offset: replacement.length),
       );
-      notifyListeners();
     }
   }
 
@@ -71,6 +70,7 @@ class FTypeaheadController extends TextEditingController {
   /// If a match is found, [current] is set with the completion text and full replacement.
   /// If no match is found or text is empty, [current] is set to null to disable typeahead.
   @visibleForOverriding
+  @visibleForTesting
   void findCompletion([String? text]) {
     text ??= this.text;
     if (text.isEmpty) {
@@ -120,8 +120,8 @@ class FTypeaheadController extends TextEditingController {
   /// Updates the current [text] to the given `newText`, and removes existing selection and composing range held by the
   /// controller.
   ///
-  /// Unlike [TextEditingController.text], this setter sets the selection to the end of the new text rather than selecting
-  /// the entire text.
+  /// Unlike [TextEditingController.text], [FTypeaheadController.text] sets the selection to the end of the new text
+  /// rather than selecting the entire text.
   @override
   set text(String newText) {
     if (text != newText) {

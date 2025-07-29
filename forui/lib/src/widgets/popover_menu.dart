@@ -93,6 +93,9 @@ class FPopoverMenu extends StatelessWidget {
   /// {@macro forui.widgets.FPopover.hideOnTapOutside}
   final FHidePopoverRegion hideOnTapOutside;
 
+  /// {@macro forui.widgets.FPopover.onTapOutsideHide}
+  final VoidCallback? onTapHide;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool? autofocus;
 
@@ -154,6 +157,7 @@ class FPopoverMenu extends StatelessWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.onTapHide,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
@@ -210,6 +214,7 @@ class FPopoverMenu extends StatelessWidget {
     this.offset = Offset.zero,
     this.groupId,
     this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.onTapHide,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
@@ -250,6 +255,7 @@ class FPopoverMenu extends StatelessWidget {
       offset: offset,
       groupId: groupId,
       hideOnTapOutside: hideOnTapOutside,
+      onTapHide: onTapHide,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -280,6 +286,7 @@ class FPopoverMenu extends StatelessWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
       ..add(
         FlagProperty(

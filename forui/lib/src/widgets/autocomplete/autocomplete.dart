@@ -661,7 +661,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         shift: widget.shift,
         offset: widget.offset,
         hideOnTapOutside: widget.hideOnTapOutside,
-        onTapOutsideHide: () {
+        onTapHide: () {
           if (_restore case final restore?) {
             _previous = restore;
             _controller.text = restore;
