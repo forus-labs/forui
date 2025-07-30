@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Edellinen",
   "paginationNextSemanticsLabel": "Seuraava",
   "popoverSemanticsLabel": "Ponnahdusikkuna",
-  "multiSelectHint": "Valitse kohteet"
+  "multiSelectHint": "Valitse kohteet",
+  "autocompleteNoResults": "Ei osumia löytynyt"
 }

@@ -69,6 +69,9 @@ class FLocalizationsKm extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'រកមិនឃើញការផ្គូផ្គង';
+
+  @override
   String get dateFieldHint => 'ជ្រើសរើស​កាលបរិច្ឆេទ';
 
   @override

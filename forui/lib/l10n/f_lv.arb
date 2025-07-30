@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Iepriekšējais",
   "paginationNextSemanticsLabel": "Tālāk",
   "popoverSemanticsLabel": "Izlecošs logs",
-  "multiSelectHint": "Atlasiet vienumus"
+  "multiSelectHint": "Atlasiet vienumus",
+  "autocompleteNoResults": "Nav atrasts neviens atbilstošs rezultāts"
 }

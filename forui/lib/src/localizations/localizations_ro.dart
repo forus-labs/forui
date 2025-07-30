@@ -69,6 +69,9 @@ class FLocalizationsRo extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Nu s-au găsit potriviri';
+
+  @override
   String get dateFieldHint => 'Selectați data';
 
   @override

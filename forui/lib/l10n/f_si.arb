@@ -21,5 +21,6 @@
   "paginationPrevious": "පෙර",
   "paginationNext": "ඊළඟ",
   "popoverSemanticsLabel": "පොප්ඕවර්",
-  "multiSelectHint": "අයිතම තෝරන්න"
+  "multiSelectHint": "අයිතම තෝරන්න",
+  "autocompleteNoResults": "ගැලපීම් හමු නොවීය"
 }

@@ -21,5 +21,6 @@
   "paginationPrevious": "Նախորդ",
   "paginationNext": "Հաջորդը",
   "popoverSemanticsLabel": "Ելնող պատուհան",
-  "multiSelectHint": "Ընտրել տարրեր"
+  "multiSelectHint": "Ընտրել տարրեր",
+  "autocompleteNoResults": "Համընկնումներ չեն գտնվել"
 }

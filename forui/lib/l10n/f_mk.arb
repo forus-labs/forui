@@ -21,5 +21,6 @@
   "paginationPrevious": "Претходно",
   "paginationNext": "Следно",
   "popoverSemanticsLabel": "Скокачки прозорец",
-  "multiSelectHint": "Изберете елементи"
+  "multiSelectHint": "Изберете елементи",
+  "autocompleteNoResults": "Не се пронајдени совпаѓања"
 }

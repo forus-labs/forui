@@ -69,6 +69,9 @@ class FLocalizationsHr extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Nisu pronađena poklapanja';
+
+  @override
   String get dateFieldHint => 'Odaberite datum';
 
   @override

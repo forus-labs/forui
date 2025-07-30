@@ -21,5 +21,6 @@
   "paginationPrevious": "Anterior",
   "paginationNext": "Seguinte",
   "popoverSemanticsLabel": "Xanela emerxente",
-  "multiSelectHint": "Seleccionar elementos"
+  "multiSelectHint": "Seleccionar elementos",
+  "autocompleteNoResults": "Non se atoparon coincidencias"
 }

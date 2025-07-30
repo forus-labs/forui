@@ -69,6 +69,9 @@ class FLocalizationsOr extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'କୌଣସି ମେଳ ମିଳିଲା ନାହିଁ';
+
+  @override
   String get dateFieldHint => 'ତାରିଖ ଚୟନ କରନ୍ତୁ';
 
   @override

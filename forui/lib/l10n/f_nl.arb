@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Vorige",
   "paginationNextSemanticsLabel": "Volgende",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Selecteer items"
+  "multiSelectHint": "Selecteer items",
+  "autocompleteNoResults": "Geen overeenkomsten gevonden"
 }

@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Okwedlule",
   "paginationNextSemanticsLabel": "Okulandelayo",
   "popoverSemanticsLabel": "Iwindi eliqhamukayo",
-  "multiSelectHint": "Khetha izinto"
+  "multiSelectHint": "Khetha izinto",
+  "autocompleteNoResults": "Akukho ukufana okutholiwe"
 }

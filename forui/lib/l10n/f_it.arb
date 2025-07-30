@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Precedente",
   "paginationNextSemanticsLabel": "Avanti",
   "popoverSemanticsLabel": "Finestra di sovrapposizione",
-  "multiSelectHint": "Seleziona elementi"
+  "multiSelectHint": "Seleziona elementi",
+  "autocompleteNoResults": "Nessuna corrispondenza trovata"
 }

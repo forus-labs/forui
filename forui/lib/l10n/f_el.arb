@@ -21,5 +21,6 @@
   "paginationPrevious": "Προηγούμενο",
   "paginationNext": "Επόμενο",
   "popoverSemanticsLabel": "Αναδυόμενο παράθυρο",
-  "multiSelectHint": "Επιλέξτε στοιχεία"
+  "multiSelectHint": "Επιλέξτε στοιχεία",
+  "autocompleteNoResults": "Δεν βρέθηκαν αντιστοιχίες"
 }

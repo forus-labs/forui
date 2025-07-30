@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Sebelumnya",
   "paginationNextSemanticsLabel": "Berikutnya",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Pilih item"
+  "multiSelectHint": "Pilih item",
+  "autocompleteNoResults": "Tidak ada hasil yang cocok"
 }

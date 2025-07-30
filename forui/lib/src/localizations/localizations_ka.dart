@@ -69,6 +69,9 @@ class FLocalizationsKa extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'შესაბამისობები ვერ იქნა ნაპოვნი';
+
+  @override
   String get dateFieldHint => 'აირჩიეთ თარიღი';
 
   @override

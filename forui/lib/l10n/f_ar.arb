@@ -21,5 +21,6 @@
   "paginationPrevious": "السابق",
   "paginationNext": "التالي",
   "popoverSemanticsLabel": "منبثقة",
-  "multiSelectHint": "حدد العناصر"
+  "multiSelectHint": "حدد العناصر",
+  "autocompleteNoResults": "لم يتم العثور على أي تطابقات"
 }

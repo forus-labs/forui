@@ -69,6 +69,9 @@ class FLocalizationsKy extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Эч кандай дал келүү табылган жок';
+
+  @override
   String get dateFieldHint => 'Күндү тандоо';
 
   @override

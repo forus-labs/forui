@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Əvvəlki",
   "paginationNextSemanticsLabel": "Növbəti",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Elementləri seçin"
+  "multiSelectHint": "Elementləri seçin",
+  "autocompleteNoResults": "Heç bir uyğunluq tapılmadı"
 }

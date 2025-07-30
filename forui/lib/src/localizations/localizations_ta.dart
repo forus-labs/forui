@@ -69,6 +69,9 @@ class FLocalizationsTa extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'பொருத்தங்கள் எதுவும் கிடைக்கவில்லை';
+
+  @override
   String get dateFieldHint => 'தேதியைத் தேர்ந்தெடுக்கவும்';
 
   @override

@@ -69,6 +69,9 @@ class FLocalizationsHu extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Nincs találat';
+
+  @override
   String get dateFieldHint => 'Válasszon dátumot';
 
   @override

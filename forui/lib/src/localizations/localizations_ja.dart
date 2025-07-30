@@ -69,6 +69,9 @@ class FLocalizationsJa extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => '一致するものが見つかりません';
+
+  @override
   String get dateFieldHint => '日付を選択';
 
   @override

@@ -21,5 +21,6 @@
   "paginationPrevious": "మునుపటి",
   "paginationNext": "తదుపరి",
   "popoverSemanticsLabel": "పాప్‌ఓవర్",
-  "multiSelectHint": "అంశాలను ఎంచుకోండి"
+  "multiSelectHint": "అంశాలను ఎంచుకోండి",
+  "autocompleteNoResults": "సరిపోలినవి ఏవీ కనుగొనబడలేదు"
 }

@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Forrige",
   "paginationNextSemanticsLabel": "Næste",
   "popoverSemanticsLabel": "Pop op-vindue",
-  "multiSelectHint": "Vælg elementer"
+  "multiSelectHint": "Vælg elementer",
+  "autocompleteNoResults": "Ingen resultater fundet"
 }

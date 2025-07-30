@@ -69,6 +69,9 @@ class FLocalizationsCa extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'No s\'han trobat coincidències';
+
+  @override
   String get dateFieldHint => 'Selecciona una data';
 
   @override

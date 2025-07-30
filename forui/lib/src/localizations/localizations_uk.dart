@@ -69,6 +69,9 @@ class FLocalizationsUk extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Збігів не знайдено';
+
+  @override
   String get dateFieldHint => 'Виберіть дату';
 
   @override

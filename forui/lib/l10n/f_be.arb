@@ -21,5 +21,6 @@
   "paginationPrevious": "Папярэдні",
   "paginationNext": "Наступны",
   "popoverSemanticsLabel": "Усплывальнае акно",
-  "multiSelectHint": "Выберыце элементы"
+  "multiSelectHint": "Выберыце элементы",
+  "autocompleteNoResults": "Няма знойдзеных супадзенняў"
 }

@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Poprzedni",
   "paginationNextSemanticsLabel": "Dalej",
   "popoverSemanticsLabel": "Okno wyskakujące",
-  "multiSelectHint": "Wybierz elementy"
+  "multiSelectHint": "Wybierz elementy",
+  "autocompleteNoResults": "Nie znaleziono dopasowań"
 }

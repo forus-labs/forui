@@ -21,5 +21,6 @@
   "paginationPrevious": "הקודם",
   "paginationNext": "הבא",
   "popoverSemanticsLabel": "חלון קופץ",
-  "multiSelectHint": "בחר פריטים"
+  "multiSelectHint": "בחר פריטים",
+  "autocompleteNoResults": "לא נמצאו התאמות"
 }

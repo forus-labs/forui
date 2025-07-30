@@ -21,5 +21,6 @@
   "paginationPrevious": "Претходно",
   "paginationNext": "Следеће",
   "popoverSemanticsLabel": "Искачући прозор",
-  "multiSelectHint": "Изаберите ставке"
+  "multiSelectHint": "Изаберите ставке",
+  "autocompleteNoResults": "Није пронађено подударање"
 }

@@ -69,6 +69,9 @@ class FLocalizationsIt extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Nessuna corrispondenza trovata';
+
+  @override
   String get dateFieldHint => 'Seleziona data';
 
   @override

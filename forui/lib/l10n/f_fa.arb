@@ -21,5 +21,6 @@
   "paginationPrevious": "قبلی",
   "paginationNext": "بعدی",
   "popoverSemanticsLabel": "پاپ‌اور",
-  "multiSelectHint": "انتخاب آیتم‌ها"
+  "multiSelectHint": "انتخاب آیتم‌ها",
+  "autocompleteNoResults": "هیچ تطبیقی یافت نشد"
 }

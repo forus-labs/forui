@@ -21,5 +21,6 @@
   "paginationPrevious": "પહેલાંનું",
   "paginationNext": "આગળ",
   "popoverSemanticsLabel": "પોપઓવર",
-  "multiSelectHint": "આઇટમ્સ પસંદ કરો"
+  "multiSelectHint": "આઇટમ્સ પસંદ કરો",
+  "autocompleteNoResults": "કોઈ મેળ મળ્યો નહીં"
 }

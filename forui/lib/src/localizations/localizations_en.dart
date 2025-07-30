@@ -69,6 +69,9 @@ class FLocalizationsEn extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'No matches found.';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -143,6 +146,9 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Close \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No matches found';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -221,6 +227,9 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   }
 
   @override
+  String get autocompleteNoResults => 'No matches found';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -295,6 +304,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Close \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No matches found';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -373,6 +385,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   }
 
   @override
+  String get autocompleteNoResults => 'No matches found';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -447,6 +462,9 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Close \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No matches found';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -525,6 +543,9 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   }
 
   @override
+  String get autocompleteNoResults => 'No matches found';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -601,6 +622,9 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   }
 
   @override
+  String get autocompleteNoResults => 'No matches found';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -675,6 +699,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Close \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No matches found';
 
   @override
   String get dateFieldHint => 'Pick a date';

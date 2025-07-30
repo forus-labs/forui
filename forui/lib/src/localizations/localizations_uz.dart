@@ -69,6 +69,9 @@ class FLocalizationsUz extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Hech qanday moslik topilmadi';
+
+  @override
   String get dateFieldHint => 'Sanani tanlang';
 
   @override

@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Oldingi",
   "paginationNextSemanticsLabel": "Keyingi",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Elementlarni tanlang"
+  "multiSelectHint": "Elementlarni tanlang",
+  "autocompleteNoResults": "Hech qanday moslik topilmadi"
 }

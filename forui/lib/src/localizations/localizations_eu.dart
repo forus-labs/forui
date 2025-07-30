@@ -69,6 +69,9 @@ class FLocalizationsEu extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Ez da bat-etortzerik aurkitu';
+
+  @override
   String get dateFieldHint => 'Hautatu data';
 
   @override

@@ -69,6 +69,9 @@ class FLocalizationsGsw extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Kei Überiistimmige gfunde';
+
+  @override
   String get dateFieldHint => 'Datum uswähle';
 
   @override

@@ -69,6 +69,9 @@ class FLocalizationsLo extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'ບໍ່ພົບການຈັບຄູ່';
+
+  @override
   String get dateFieldHint => 'ເລືອກວັນທີ';
 
   @override
