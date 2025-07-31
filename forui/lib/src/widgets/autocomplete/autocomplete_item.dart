@@ -37,8 +37,29 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   /// The nested [FAutocompleteItem]s.
   final List<FAutocompleteItem> children;
 
+  /// Creates a [FAutocompleteSection] from the given items.
+  ///
+  /// For more control over the appearance of individual items, use [FAutocompleteSection.custom].
+  FAutocompleteSection({
+    required Widget label,
+    required List<String> items,
+    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle)? style,
+    bool? enabled,
+    FItemDivider divider = FItemDivider.none,
+    Key? key,
+  }) : this.custom(
+         label: label,
+         children: [for (final item in items) FAutocompleteItem(item)],
+         style: style,
+         enabled: enabled,
+         divider: divider,
+         key: key,
+       );
+
   /// Creates a [FAutocompleteSection].
-  const FAutocompleteSection({
+  ///
+  /// For a convenient way to create a section with a list of items, use [FAutocompleteSection.new].
+  const FAutocompleteSection.custom({
     required this.label,
     required this.children,
     this.style,
@@ -46,23 +67,6 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
     this.divider = FItemDivider.none,
     super.key,
   });
-
-  /// Creates a [FAutocompleteSection] from the given items.
-  FAutocompleteSection.fromMap({
-    required Widget label,
-    required Map<String, String> items,
-    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle)? style,
-    bool? enabled,
-    FItemDivider divider = FItemDivider.none,
-    Key? key,
-  }) : this(
-         label: label,
-         children: [for (final e in items.entries) FAutocompleteItem(e.key, value: e.value)],
-         style: style,
-         enabled: enabled,
-         divider: divider,
-         key: key,
-       );
 
   @override
   Widget build(BuildContext context) {
@@ -203,20 +207,17 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
   final Widget? suffix;
 
   /// Creates a [FAutocompleteItem].
-  FAutocompleteItem(String text, {String? value, bool? enabled, Key? key})
-    : this.from(key: key, value: value ?? text, enabled: enabled, title: Text(text));
-
-  /// Creates a [FAutocompleteItem] with a custom child widget.
-  FAutocompleteItem.from({
-    required this.value,
-    required this.title,
+  ///
+  /// To customize the text shown, provide a [title]. Default to [value].
+  FAutocompleteItem(this.value, {
     this.style,
     this.enabled,
     this.prefix,
     this.subtitle,
     this.suffix,
+    Widget? title,
     super.key,
-  });
+  }): title = title ?? Text(value);
 
   @override
   Widget build(BuildContext context) {

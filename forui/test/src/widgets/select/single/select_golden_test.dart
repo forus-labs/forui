@@ -308,9 +308,6 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/disabled.png'));
     });
 

@@ -32,7 +32,7 @@ void main() {
       ),
     );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('typeahead_controller/no_completion.png'));
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('typeahead-controller/no-completion.png'));
   });
 
   testWidgets('no completion', (tester) async {
@@ -44,7 +44,7 @@ void main() {
       ),
     );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('typeahead_controller/completion.png'));
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('typeahead-controller/completion.png'));
   });
 
   testWidgets('with composing range', (tester) async {
@@ -61,6 +61,6 @@ void main() {
       ),
     );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('typeahead_controller/composing.png'));
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('typeahead-controller/composing.png'));
   });
 }

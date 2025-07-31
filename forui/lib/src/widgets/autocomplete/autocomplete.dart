@@ -288,9 +288,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
 
-  /// True if the content should show scroll handles instead of a scrollbar. Defaults to false.
-  final bool contentScrollHandles;
-
   /// The content's scroll physics. Defaults to [ClampingScrollPhysics].
   final ScrollPhysics contentPhysics;
 
@@ -306,8 +303,180 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// A callback that is used to show an error message when [filter] is asynchronous and fails.
   final Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder;
 
-  /// Creates a [FAutocomplete].
-  const FAutocomplete({
+  /// Creates a [FAutocomplete] from the given [items].
+  FAutocomplete({
+    required List<String> items,
+    FAutocompleteStyle Function(FAutocompleteStyle)? style,
+    Widget? label,
+    String? hint,
+    Widget? description,
+    TextMagnifierConfiguration? magnifierConfiguration,
+    Object groupId = EditableText,
+    FAutocompleteController? controller,
+    FocusNode? focusNode,
+    TextInputType? keyboardType,
+    TextInputAction? textInputAction,
+    TextCapitalization textCapitalization = TextCapitalization.none,
+    TextAlign textAlign = TextAlign.start,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool autofocus = false,
+    WidgetStatesController? statesController,
+    String obscuringCharacter = '•',
+    bool obscureText = false,
+    bool autocorrect = true,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
+    bool enableSuggestions = true,
+    int? minLines,
+    int? maxLines = 1,
+    bool expands = false,
+    bool readOnly = false,
+    bool? showCursor,
+    int? maxLength,
+    MaxLengthEnforcement? maxLengthEnforcement,
+    ValueChanged<String>? onChange,
+    GestureTapCallback? onTap,
+    TapRegionCallback? onTapOutside,
+    bool onTapAlwaysCalled = false,
+    VoidCallback? onEditingComplete,
+    ValueChanged<String>? onSubmit,
+    AppPrivateCommandCallback? onAppPrivateCommand,
+    List<TextInputFormatter>? inputFormatters,
+    bool enabled = true,
+    bool? ignorePointers,
+    bool enableInteractiveSelection = true,
+    TextSelectionControls? selectionControls,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    MouseCursor? mouseCursor,
+    FTextFieldCounterBuilder? counterBuilder,
+    ScrollPhysics? scrollPhysics,
+    ScrollController? scrollController,
+    Iterable<String>? autofillHints,
+    String? restorationId,
+    bool stylusHandwritingEnabled = true,
+    bool enableIMEPersonalizedLearning = true,
+    ContentInsertionConfiguration? contentInsertionConfiguration,
+    EditableTextContextMenuBuilder? contextMenuBuilder,
+    bool canRequestFocus = true,
+    UndoHistoryController? undoController,
+    SpellCheckConfiguration? spellCheckConfiguration,
+    ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)>? prefixBuilder,
+    ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)>? suffixBuilder,
+    bool Function(TextEditingValue) clearable = _clearable,
+    FormFieldSetter<String>? onSaved,
+    FormFieldValidator<String>? validator,
+    String? initialText,
+    AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
+    String? forceErrorText,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
+    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing spacing = const FPortalSpacing(4),
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset offset = Offset.zero,
+    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    bool autoHide = true,
+    ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)> builder = _builder,
+    FutureOr<Iterable<String>> Function(String)? filter,
+    FAutoCompleteContentBuilder? contentBuilder,
+    ScrollController? contentScrollController,
+    ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
+    FItemDivider contentDivider = FItemDivider.none,
+    ValueWidgetBuilder<FAutocompleteContentStyle> contentEmptyBuilder = defaultContentEmptyBuilder,
+    ValueWidgetBuilder<FAutocompleteContentStyle> contentLoadingBuilder = defaultContentLoadingBuilder,
+    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    Key? key,
+  }) : this.builder(
+    filter: filter ?? (query) => items.where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
+    contentBuilder:
+    contentBuilder ?? (context, query, values) => [for (final value in values) FAutocompleteItem(value)],
+    style: style,
+    label: label,
+    hint: hint,
+    description: description,
+    magnifierConfiguration: magnifierConfiguration,
+    groupId: groupId,
+    controller: controller,
+    focusNode: focusNode,
+    keyboardType: keyboardType,
+    textInputAction: textInputAction,
+    textCapitalization: textCapitalization,
+    textAlign: textAlign,
+    textAlignVertical: textAlignVertical,
+    textDirection: textDirection,
+    autofocus: autofocus,
+    statesController: statesController,
+    obscuringCharacter: obscuringCharacter,
+    obscureText: obscureText,
+    autocorrect: autocorrect,
+    smartDashesType: smartDashesType,
+    smartQuotesType: smartQuotesType,
+    enableSuggestions: enableSuggestions,
+    minLines: minLines,
+    maxLines: maxLines,
+    expands: expands,
+    readOnly: readOnly,
+    showCursor: showCursor,
+    maxLength: maxLength,
+    maxLengthEnforcement: maxLengthEnforcement,
+    onChange: onChange,
+    onTap: onTap,
+    onTapOutside: onTapOutside,
+    onTapAlwaysCalled: onTapAlwaysCalled,
+    onEditingComplete: onEditingComplete,
+    onSubmit: onSubmit,
+    onAppPrivateCommand: onAppPrivateCommand,
+    inputFormatters: inputFormatters,
+    enabled: enabled,
+    ignorePointers: ignorePointers,
+    enableInteractiveSelection: enableInteractiveSelection,
+    selectionControls: selectionControls,
+    dragStartBehavior: dragStartBehavior,
+    mouseCursor: mouseCursor,
+    counterBuilder: counterBuilder,
+    scrollPhysics: scrollPhysics,
+    scrollController: scrollController,
+    autofillHints: autofillHints,
+    restorationId: restorationId,
+    stylusHandwritingEnabled: stylusHandwritingEnabled,
+    enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+    contentInsertionConfiguration: contentInsertionConfiguration,
+    contextMenuBuilder: contextMenuBuilder,
+    canRequestFocus: canRequestFocus,
+    undoController: undoController,
+    spellCheckConfiguration: spellCheckConfiguration,
+    prefixBuilder: prefixBuilder,
+    suffixBuilder: suffixBuilder,
+    clearable: clearable,
+    onSaved: onSaved,
+    validator: validator,
+    initialText: initialText,
+    autovalidateMode: autovalidateMode,
+    forceErrorText: forceErrorText,
+    errorBuilder: errorBuilder,
+    anchor: anchor,
+    fieldAnchor: fieldAnchor,
+    popoverConstraints: popoverConstraints,
+    spacing: spacing,
+    shift: shift,
+    offset: offset,
+    hideOnTapOutside: hideOnTapOutside,
+    autoHide: autoHide,
+    builder: builder,
+    contentScrollController: contentScrollController,
+    contentPhysics: contentPhysics,
+    contentDivider: contentDivider,
+    contentEmptyBuilder: contentEmptyBuilder,
+    contentLoadingBuilder: contentLoadingBuilder,
+    contentErrorBuilder: contentErrorBuilder,
+    key: key,
+  );
+
+  /// Creates a [FAutocomplete] that uses the given [filter] to determine the results and the [contentBuilder] to build
+  /// the content.
+  const FAutocomplete.builder({
     required this.filter,
     required this.contentBuilder,
     this.style,
@@ -384,7 +553,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.autoHide = true,
     this.builder = _builder,
     this.contentScrollController,
-    this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = FItemDivider.none,
     this.contentEmptyBuilder = defaultContentEmptyBuilder,
@@ -487,7 +655,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('filter', filter))
       ..add(ObjectFlagProperty.has('contentEmptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
-      ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
       ..add(EnumProperty('contentDivider', contentDivider))
       ..add(ObjectFlagProperty.has('contentBuilder', contentBuilder))
@@ -507,12 +674,12 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
+    _fieldFocus.addListener(_focus);
     _controller = widget.controller ?? FAutocompleteController(vsync: this, text: widget.initialText);
     _controller
       ..addListener(_update)
       ..loadSuggestions(_data = widget.filter(_controller.text));
-    _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
-    _fieldFocus.addListener(_focus);
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
   }
 
