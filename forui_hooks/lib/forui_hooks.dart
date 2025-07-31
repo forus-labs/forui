@@ -1,4 +1,5 @@
 export '/src/accordion_controller_hook.dart';
+export '/src/autocomplete_controller_hook.dart';
 export '/src/calendar_controller_hook.dart';
 export '/src/date_field_controller_hook.dart';
 export '/src/multi_value_notifier_hook.dart';
