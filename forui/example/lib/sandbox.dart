@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-const features = [
-  'Keyboard navigation',
-  'Typeahead suggestions',
-  'Tab to complete',
-];
+const features = ['Keyboard navigation', 'Typeahead suggestions', 'Tab to complete'];
 
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
@@ -34,11 +30,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FAutocomplete(
-        label: Text('Autocomplete'),
-        hint: 'What can it do?',
-        items: features,
-      )
+      child: FAutocomplete(label: Text('Autocomplete'), hint: 'What can it do?', items: features),
     );
   }
 }

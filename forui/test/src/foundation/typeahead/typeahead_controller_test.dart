@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -210,7 +211,7 @@ void main() {
     test('same text', () {
       controller.text = 'm';
 
-      expect(controller.text,  'm');
+      expect(controller.text, 'm');
     });
 
     test('updates completion', () {

@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
-import 'package:meta/meta.dart';
 
 part 'autocomplete_item.style.dart';
 
@@ -209,7 +211,8 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
   /// Creates a [FAutocompleteItem].
   ///
   /// To customize the text shown, provide a [title]. Default to [value].
-  FAutocompleteItem(this.value, {
+  FAutocompleteItem(
+    this.value, {
     this.style,
     this.enabled,
     this.prefix,
@@ -217,7 +220,7 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
     this.suffix,
     Widget? title,
     super.key,
-  }): title = title ?? Text(value);
+  }) : title = title ?? Text(value);
 
   @override
   Widget build(BuildContext context) {

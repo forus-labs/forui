@@ -269,11 +269,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(
-          key: key,
-          hint: 'Type to search',
-          items: fruits,
-        ),
+        child: FAutocomplete(key: key, hint: 'Type to search', items: fruits),
       ),
     );
 
@@ -287,12 +283,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(
-          key: key,
-          hint: 'Type to search',
-          initialText: 'App',
-          items: fruits,
-        ),
+        child: FAutocomplete(key: key, hint: 'Type to search', initialText: 'App', items: fruits),
       ),
     );
 
@@ -309,11 +300,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(
-          key: key,
-          initialText: 'B',
-          items: fruits,
-        ),
+        child: FAutocomplete(key: key, initialText: 'B', items: fruits),
       ),
     );
 
@@ -331,11 +318,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(
-          key: key,
-          focusNode: focus,
-          items: fruits,
-        ),
+        child: FAutocomplete(key: key, focusNode: focus, items: fruits),
       ),
     );
 
@@ -358,11 +341,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(
-          key: key,
-          focusNode: focus,
-          items: fruits,
-        ),
+        child: FAutocomplete(key: key, focusNode: focus, items: fruits),
       ),
     );
 

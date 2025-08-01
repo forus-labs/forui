@@ -519,8 +519,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget Function(BuildContext, FMultiSelectController<T>, FMultiSelectStyle, T, Widget)? tagBuilder,
     Set<T>? initialValue,
     super.key,
-  }) :
-       tagBuilder = tagBuilder ?? defaultTagBuilder,
+  }) : tagBuilder = tagBuilder ?? defaultTagBuilder,
        initialValue = initialValue ?? controller?.value ?? {},
        assert(debugCheckInclusiveRange(min, max)),
        assert(

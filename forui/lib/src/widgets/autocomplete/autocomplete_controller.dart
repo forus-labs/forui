@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-import 'package:meta/meta.dart';
 
 /// A controller for managing autocomplete functionality in a text field.
 class FAutocompleteController extends FTypeaheadController {
