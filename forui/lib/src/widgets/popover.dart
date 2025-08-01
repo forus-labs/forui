@@ -186,7 +186,7 @@ class FPopover extends StatefulWidget {
   /// A callback that is called when the popover is hidden by tapping outside of it.
   ///
   /// This is only called if [hideOnTapOutside] is set to [FHidePopoverRegion.anywhere] or [FHidePopoverRegion.excludeTarget].
-  /// {@endtemplate
+  /// {@endtemplate}
   final VoidCallback? onTapHide;
 
   /// {@macro forui.foundation.doc_templates.autofocus}

@@ -352,7 +352,7 @@ class FAutocompleteItemStyle with Diagnosticable, _$FAutocompleteItemStyleFuncti
 }
 
 @internal
-extension InternalFAutocompleteItemStyletyle on FAutocompleteItemStyle {
+extension InternalFAutocompleteItemStyle on FAutocompleteItemStyle {
   FItemStyle toFItemStyle(BuildContext context) => FItemStyle(
     backgroundColor: FWidgetStateMap.all(null),
     decoration: decoration,
