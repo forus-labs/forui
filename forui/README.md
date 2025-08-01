@@ -68,12 +68,14 @@ Forui provides the following widgets:
   - Resizable
   - Scaffold
 - Form
+  - Autocomplete 
   - Button
   - Checkbox
   - Date Field
   - Label
   - Picker
   - Radio
+  - Multi-select
   - Select
   - Select Group
   - Slider
