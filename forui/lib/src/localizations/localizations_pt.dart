@@ -69,7 +69,7 @@ class FLocalizationsPt extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Nenhuma correspondência encontrada';
+  String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
 
   @override
   String get dateFieldHint => 'Selecionar data';
@@ -148,7 +148,7 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   }
 
   @override
-  String get autocompleteNoResults => 'Nenhuma correspondência encontrada';
+  String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
 
   @override
   String get dateFieldHint => 'Selecionar data';

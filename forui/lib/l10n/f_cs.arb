@@ -23,5 +23,5 @@
   "paginationNextSemanticsLabel": "Další",
   "popoverSemanticsLabel": "Vyskakovací okno",
   "multiSelectHint": "Vyberte položky",
-  "autocompleteNoResults": "Nebyly nalezeny žádné shody"
+  "autocompleteNoResults": "Nebyly nalezeny žádné shody."
 }

@@ -69,7 +69,7 @@ class FLocalizationsSl extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Ni ujemanj';
+  String get autocompleteNoResults => 'Ni ujemanj.';
 
   @override
   String get dateFieldHint => 'Izberite datum';

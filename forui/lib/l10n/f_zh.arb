@@ -23,5 +23,5 @@
   "paginationNextSemanticsLabel": "下一个",
   "popoverSemanticsLabel": "弹出框",
   "multiSelectHint": "选择项目",
-  "autocompleteNoResults": "未找到匹配项"
+  "autocompleteNoResults": "未找到匹配项."
 }

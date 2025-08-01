@@ -69,7 +69,7 @@ class FLocalizationsHe extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'לא נמצאו התאמות';
+  String get autocompleteNoResults => 'לא נמצאו התאמות.';
 
   @override
   String get dateFieldHint => 'בחירת תאריך';

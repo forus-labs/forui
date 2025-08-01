@@ -69,7 +69,7 @@ class FLocalizationsSq extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Nuk u gjetën përputhje';
+  String get autocompleteNoResults => 'Nuk u gjetën përputhje.';
 
   @override
   String get dateFieldHint => 'Zgjidh datën';

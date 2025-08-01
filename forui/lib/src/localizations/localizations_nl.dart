@@ -69,7 +69,7 @@ class FLocalizationsNl extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Geen overeenkomsten gevonden';
+  String get autocompleteNoResults => 'Geen overeenkomsten gevonden.';
 
   @override
   String get dateFieldHint => 'Datum selecteren';

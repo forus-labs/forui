@@ -69,7 +69,7 @@ class FLocalizationsSw extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Hakuna mechi zilizopatikana';
+  String get autocompleteNoResults => 'Hakuna mechi zilizopatikana.';
 
   @override
   String get dateFieldHint => 'Chagua tarehe';

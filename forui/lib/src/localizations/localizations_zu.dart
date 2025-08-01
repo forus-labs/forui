@@ -69,7 +69,7 @@ class FLocalizationsZu extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Akukho ukufana okutholiwe';
+  String get autocompleteNoResults => 'Akukho ukufana okutholiwe.';
 
   @override
   String get dateFieldHint => 'Khetha usuku';

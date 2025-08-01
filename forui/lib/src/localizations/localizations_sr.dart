@@ -69,7 +69,7 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Није пронађено подударање';
+  String get autocompleteNoResults => 'Није пронађено подударање.';
 
   @override
   String get dateFieldHint => 'Изаберите датум';
@@ -148,7 +148,7 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   }
 
   @override
-  String get autocompleteNoResults => 'Nije pronađeno podudaranje';
+  String get autocompleteNoResults => 'Nije pronađeno podudaranje.';
 
   @override
   String get dateFieldHint => 'Izaberite datum';

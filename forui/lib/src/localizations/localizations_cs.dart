@@ -69,7 +69,7 @@ class FLocalizationsCs extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Nebyly nalezeny žádné shody';
+  String get autocompleteNoResults => 'Nebyly nalezeny žádné shody.';
 
   @override
   String get dateFieldHint => 'Vyberte datum';

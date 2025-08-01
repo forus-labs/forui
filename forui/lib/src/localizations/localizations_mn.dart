@@ -69,7 +69,7 @@ class FLocalizationsMn extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Тохирох зүйл олдсонгүй';
+  String get autocompleteNoResults => 'Тохирох зүйл олдсонгүй.';
 
   @override
   String get dateFieldHint => 'Огноо сонгох';

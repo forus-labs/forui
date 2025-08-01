@@ -69,7 +69,7 @@ class FLocalizationsFil extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Walang nahanap na tugma';
+  String get autocompleteNoResults => 'Walang nahanap na tugma.';
 
   @override
   String get dateFieldHint => 'Pumili ng petsa';

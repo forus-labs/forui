@@ -69,7 +69,7 @@ class FLocalizationsPs extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'هیڅ میچ ونه موندل شو';
+  String get autocompleteNoResults => 'هیڅ میچ ونه موندل شو.';
 
   @override
   String get dateFieldHint => 'نېټه وټاکئ';

@@ -69,7 +69,7 @@ class FLocalizationsDa extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Ingen resultater fundet';
+  String get autocompleteNoResults => 'Ingen resultater fundet.';
 
   @override
   String get dateFieldHint => 'Vælg en dato';

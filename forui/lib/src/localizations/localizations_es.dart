@@ -69,7 +69,7 @@ class FLocalizationsEs extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -148,7 +148,7 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -215,7 +215,7 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -282,7 +282,7 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -349,7 +349,7 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -416,7 +416,7 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -483,7 +483,7 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -550,7 +550,7 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -617,7 +617,7 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -684,7 +684,7 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -751,7 +751,7 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -818,7 +818,7 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -885,7 +885,7 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -952,7 +952,7 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1019,7 +1019,7 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1086,7 +1086,7 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1153,7 +1153,7 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1220,7 +1220,7 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1287,7 +1287,7 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1354,7 +1354,7 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1421,7 +1421,7 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   }
 
   @override
-  String get autocompleteNoResults => 'No se encontraron coincidencias';
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';

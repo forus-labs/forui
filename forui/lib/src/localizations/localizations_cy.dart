@@ -69,7 +69,7 @@ class FLocalizationsCy extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Dim cydweddiadau wedi\'u canfod';
+  String get autocompleteNoResults => 'Dim cydweddiadau wedi\'u canfod.';
 
   @override
   String get dateFieldHint => 'Dewiswch ddyddiad';

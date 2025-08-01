@@ -69,7 +69,7 @@ class FLocalizationsAf extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Geen resultate gevind nie';
+  String get autocompleteNoResults => 'Geen resultate gevind nie.';
 
   @override
   String get dateFieldHint => 'Kies \'n datum';

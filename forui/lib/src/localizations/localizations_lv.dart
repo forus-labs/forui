@@ -69,7 +69,7 @@ class FLocalizationsLv extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Nav atrasts neviens atbilstošs rezultāts';
+  String get autocompleteNoResults => 'Nav atrasts neviens atbilstošs rezultāts.';
 
   @override
   String get dateFieldHint => 'Atlasīt datumu';

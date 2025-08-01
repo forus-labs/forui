@@ -69,7 +69,7 @@ class FLocalizationsTr extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Eşleşme bulunamadı';
+  String get autocompleteNoResults => 'Eşleşme bulunamadı.';
 
   @override
   String get dateFieldHint => 'Tarih seçin';

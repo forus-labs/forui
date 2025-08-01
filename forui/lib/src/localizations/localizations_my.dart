@@ -69,7 +69,7 @@ class FLocalizationsMy extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'ကိုက်ညီသောရလဒ်များ မတွေ့ရှိပါ';
+  String get autocompleteNoResults => 'ကိုက်ညီသောရလဒ်များ မတွေ့ရှိပါ.';
 
   @override
   String get dateFieldHint => 'ရက်စွဲ ရွေးပါ';

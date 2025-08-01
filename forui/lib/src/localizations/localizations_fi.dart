@@ -69,7 +69,7 @@ class FLocalizationsFi extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Ei osumia löytynyt';
+  String get autocompleteNoResults => 'Ei osumia löytynyt.';
 
   @override
   String get dateFieldHint => 'Valitse päivämäärä';

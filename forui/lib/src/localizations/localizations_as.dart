@@ -69,7 +69,7 @@ class FLocalizationsAs extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'কোনো মিল পোৱা নগল';
+  String get autocompleteNoResults => 'কোনো মিল পোৱা নগল.';
 
   @override
   String get dateFieldHint => 'তাৰিখ বাছনি কৰক';

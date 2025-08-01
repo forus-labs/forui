@@ -69,7 +69,7 @@ class FLocalizationsHi extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'कोई मिलान नहीं मिला';
+  String get autocompleteNoResults => 'कोई मिलान नहीं मिला.';
 
   @override
   String get dateFieldHint => 'तारीख़ चुनें';

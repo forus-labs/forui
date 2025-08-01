@@ -69,7 +69,7 @@ class FLocalizationsIs extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Engar niðurstöður fundust';
+  String get autocompleteNoResults => 'Engar niðurstöður fundust.';
 
   @override
   String get dateFieldHint => 'Veldu dagsetningu';

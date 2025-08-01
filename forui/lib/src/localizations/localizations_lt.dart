@@ -69,7 +69,7 @@ class FLocalizationsLt extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Nerasta atitikmenų';
+  String get autocompleteNoResults => 'Nerasta atitikmenų.';
 
   @override
   String get dateFieldHint => 'Pasirinkti datą';

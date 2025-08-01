@@ -69,7 +69,7 @@ class FLocalizationsPa extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ';
+  String get autocompleteNoResults => 'ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ.';
 
   @override
   String get dateFieldHint => 'ਤਾਰੀਖ ਚੁਣੋ';

@@ -69,7 +69,7 @@ class FLocalizationsAz extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Heç bir uyğunluq tapılmadı';
+  String get autocompleteNoResults => 'Heç bir uyğunluq tapılmadı.';
 
   @override
   String get dateFieldHint => 'Tarix seçin';

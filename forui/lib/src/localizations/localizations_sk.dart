@@ -69,7 +69,7 @@ class FLocalizationsSk extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Nenašli sa žiadne zhody';
+  String get autocompleteNoResults => 'Nenašli sa žiadne zhody.';
 
   @override
   String get dateFieldHint => 'Vyberte dátum';

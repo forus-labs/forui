@@ -69,7 +69,7 @@ class FLocalizationsMk extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Не се пронајдени совпаѓања';
+  String get autocompleteNoResults => 'Не се пронајдени совпаѓања.';
 
   @override
   String get dateFieldHint => 'Изберете датум';

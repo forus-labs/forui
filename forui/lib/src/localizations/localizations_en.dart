@@ -148,7 +148,7 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   }
 
   @override
-  String get autocompleteNoResults => 'No matches found';
+  String get autocompleteNoResults => 'No matches found.';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -227,7 +227,7 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   }
 
   @override
-  String get autocompleteNoResults => 'No matches found';
+  String get autocompleteNoResults => 'No matches found.';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -306,7 +306,7 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   }
 
   @override
-  String get autocompleteNoResults => 'No matches found';
+  String get autocompleteNoResults => 'No matches found.';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -385,7 +385,7 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   }
 
   @override
-  String get autocompleteNoResults => 'No matches found';
+  String get autocompleteNoResults => 'No matches found.';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -464,7 +464,7 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   }
 
   @override
-  String get autocompleteNoResults => 'No matches found';
+  String get autocompleteNoResults => 'No matches found.';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -543,7 +543,7 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   }
 
   @override
-  String get autocompleteNoResults => 'No matches found';
+  String get autocompleteNoResults => 'No matches found.';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -622,7 +622,7 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   }
 
   @override
-  String get autocompleteNoResults => 'No matches found';
+  String get autocompleteNoResults => 'No matches found.';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -701,7 +701,7 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   }
 
   @override
-  String get autocompleteNoResults => 'No matches found';
+  String get autocompleteNoResults => 'No matches found.';
 
   @override
   String get dateFieldHint => 'Pick a date';

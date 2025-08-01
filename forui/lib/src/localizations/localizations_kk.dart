@@ -69,7 +69,7 @@ class FLocalizationsKk extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => 'Ешқандай сәйкестік табылмады';
+  String get autocompleteNoResults => 'Ешқандай сәйкестік табылмады.';
 
   @override
   String get dateFieldHint => 'Күнді таңдаңыз';

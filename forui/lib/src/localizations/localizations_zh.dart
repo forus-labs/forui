@@ -69,7 +69,7 @@ class FLocalizationsZh extends FLocalizations {
   }
 
   @override
-  String get autocompleteNoResults => '未找到匹配项';
+  String get autocompleteNoResults => '未找到匹配项.';
 
   @override
   String get dateFieldHint => '选择日期';
@@ -148,7 +148,7 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   }
 
   @override
-  String get autocompleteNoResults => '未找到匹配項';
+  String get autocompleteNoResults => '未找到匹配項.';
 
   @override
   String get dateFieldHint => '選擇日期';
@@ -227,7 +227,7 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   }
 
   @override
-  String get autocompleteNoResults => '未找到匹配項';
+  String get autocompleteNoResults => '未找到匹配項.';
 
   @override
   String get dateFieldHint => '選擇日期';

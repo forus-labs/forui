@@ -23,5 +23,5 @@
   "paginationNextSemanticsLabel": "Suivant",
   "popoverSemanticsLabel": "Fenêtre contextuelle",
   "multiSelectHint": "Sélectionner des éléments",
-  "autocompleteNoResults": "Aucune correspondance trouvée"
+  "autocompleteNoResults": "Aucune correspondance trouvée."
 }
