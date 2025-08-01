@@ -20,9 +20,12 @@ typedef FAutocompleteFilter = FutureOr<Iterable<String>> Function(String query);
 typedef FAutoCompleteContentBuilder =
     List<FAutocompleteItemMixin> Function(BuildContext context, String query, Iterable<String> values);
 
-/// An autocomplete provides a list of suggestions based on the user's input.
+/// An autocomplete provides a list of suggestions based on the user's input and shows typeahead text for the first match.
 ///
 /// It is a [FormField] and therefore can be used in a [Form] widget.
+///
+/// ## Note
+/// The autocomplete does not support using arrow keys to navigate the suggestions on web.
 ///
 /// See:
 /// * https://forui.dev/docs/form/autocomplete for working examples.

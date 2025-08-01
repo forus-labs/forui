@@ -34,14 +34,10 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FAutocomplete.builder(
+      child: FAutocomplete(
         label: Text('Autocomplete'),
         hint: 'What can it do?',
-        filter: (query) async {
-          await Future.delayed(const Duration(seconds: 1));
-          return query.isEmpty ? features : features.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
-        },
-        contentBuilder: (context, query, values) => [for (final fruit in values) FAutocompleteItem(fruit)],
+        items: features,
       )
     );
   }

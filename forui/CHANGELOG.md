@@ -16,6 +16,14 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Remove `FAccordionController.validate(...)`.
 
 
+## `FAutocomplete` (new)
+* Add `FAutocomplete`.
+* Add `FAutocompleteController`.
+* Add `FAutocompleteStyle`.
+* Add `FAutocompleteSection`.
+* Add `FAutocompleteItem`.
+
+
 ### `FMultiSelect` (new)
 * Add `FMultiSelect`.
 * Add `FMultiSelectController`.
