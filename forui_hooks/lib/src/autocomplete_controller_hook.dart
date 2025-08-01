@@ -10,26 +10,14 @@ FAutocompleteController useFAutocompleteController({
   String? text,
   List<String> suggestions = const [],
   List<Object?>? keys,
-}) => use(
-  _AutocompleteControllerHook(
-    vsync: vsync,
-    text: text,
-    suggestions: suggestions,
-    keys: keys,
-  ),
-);
+}) => use(_AutocompleteControllerHook(vsync: vsync, text: text, suggestions: suggestions, keys: keys));
 
 class _AutocompleteControllerHook extends Hook<FAutocompleteController> {
   final TickerProvider vsync;
   final String? text;
   final List<String> suggestions;
 
-  const _AutocompleteControllerHook({
-    required this.vsync,
-    required this.text,
-    required this.suggestions,
-    super.keys,
-  });
+  const _AutocompleteControllerHook({required this.vsync, required this.text, required this.suggestions, super.keys});
 
   @override
   _AutocompleteControllerHookState createState() => _AutocompleteControllerHookState();
