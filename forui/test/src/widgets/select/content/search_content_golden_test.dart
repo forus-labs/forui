@@ -186,7 +186,8 @@ void main() {
         matchesGoldenFile('select/${theme.name}/search_content/async_loading.png'),
       );
 
-      await tester.pumpAndSettle();
+      completer.complete();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
     });
   }
 }
