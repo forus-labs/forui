@@ -69,6 +69,9 @@ class FLocalizationsTh extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'ไม่พบรายการที่ตรงกัน.';
+
+  @override
   String get dateFieldHint => 'เลือกวันที่';
 
   @override

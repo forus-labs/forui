@@ -21,5 +21,6 @@
   "paginationPrevious": "ಹಿಂದಿನ",
   "paginationNext": "ಮುಂದಿನ",
   "popoverSemanticsLabel": "ಪಾಪ್‌ಓವರ್",
-  "multiSelectHint": "ಐಟಮ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+  "multiSelectHint": "ಐಟಮ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+  "autocompleteNoResults": "ಯಾವುದೇ ಹೊಂದಾಣಿಕೆ ಕಂಡುಬಂದಿಲ್ಲ."
 }

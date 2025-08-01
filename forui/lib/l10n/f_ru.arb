@@ -21,5 +21,6 @@
   "paginationPrevious": "Предыдущий",
   "paginationNext": "Далее",
   "popoverSemanticsLabel": "Всплывающее окно",
-  "multiSelectHint": "Выберите элементы"
+  "multiSelectHint": "Выберите элементы",
+  "autocompleteNoResults": "Совпадений не найдено."
 }

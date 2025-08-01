@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "ቀዳሚ",
   "paginationNextSemanticsLabel": "ቀጣይ",
   "popoverSemanticsLabel": "ፖፖቨር",
-  "multiSelectHint": "ንጥሎች ይምረጡ"
+  "multiSelectHint": "ንጥሎች ይምረጡ",
+  "autocompleteNoResults": "ማንኛውም ውጤት አልተገኘም."
 }

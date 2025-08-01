@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Önceki",
   "paginationNextSemanticsLabel": "İleri",
   "popoverSemanticsLabel": "Açılır pencere",
-  "multiSelectHint": "Öğeleri seç"
+  "multiSelectHint": "Öğeleri seç",
+  "autocompleteNoResults": "Eşleşme bulunamadı."
 }

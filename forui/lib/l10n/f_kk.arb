@@ -21,5 +21,6 @@
   "paginationPrevious": "Алдыңғы",
   "paginationNext": "Келесі",
   "popoverSemanticsLabel": "Қалқымалы терезе",
-  "multiSelectHint": "Элементтерді таңдаңыз"
+  "multiSelectHint": "Элементтерді таңдаңыз",
+  "autocompleteNoResults": "Ешқандай сәйкестік табылмады."
 }

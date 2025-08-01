@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Vorige",
   "paginationNextSemanticsLabel": "Volgende",
   "popoverSemanticsLabel": "Opspringer",
-  "multiSelectHint": "Kies items"
+  "multiSelectHint": "Kies items",
+  "autocompleteNoResults": "Geen resultate gevind nie."
 }

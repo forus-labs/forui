@@ -22,5 +22,6 @@
   "paginationPrevious": "ก่อนหน้า",
   "paginationNext": "ถัดไป",
   "popoverSemanticsLabel": "ป๊อปโอเวอร์",
-  "multiSelectHint": "เลือกรายการ"
+  "multiSelectHint": "เลือกรายการ",
+  "autocompleteNoResults": "ไม่พบรายการที่ตรงกัน."
 }

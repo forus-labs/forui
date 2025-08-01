@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -157,6 +159,8 @@ void main() {
     });
 
     testWidgets('async loading', (tester) async {
+      final completer = Completer<void>();
+
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
@@ -165,7 +169,7 @@ void main() {
             key: key,
             format: (s) => s,
             filter: (_) async {
-              await Future.delayed(const Duration(seconds: 5));
+              await completer.future;
               return [];
             },
             contentBuilder: (_, _) => [FSelectItem('A', 'A')],
@@ -182,7 +186,8 @@ void main() {
         matchesGoldenFile('select/${theme.name}/search_content/async_loading.png'),
       );
 
-      await tester.pumpAndSettle();
+      completer.complete();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
     });
   }
 }

@@ -69,6 +69,9 @@ class FLocalizationsEs extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -145,6 +148,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -207,6 +213,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -273,6 +282,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -335,6 +347,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -401,6 +416,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -463,6 +481,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -529,6 +550,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -591,6 +615,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -657,6 +684,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -719,6 +749,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -785,6 +818,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -847,6 +883,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -913,6 +952,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -975,6 +1017,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1041,6 +1086,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -1103,6 +1151,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1169,6 +1220,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -1231,6 +1285,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1297,6 +1354,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   }
 
   @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -1359,6 +1419,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Cerrar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';

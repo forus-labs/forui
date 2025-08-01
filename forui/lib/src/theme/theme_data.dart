@@ -43,6 +43,16 @@ final class FThemeData with Diagnosticable {
   /// ```
   final FAccordionStyle accordionStyle;
 
+  /// The autocomplete style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create autocomplete
+  /// ```
+  final FAutocompleteStyle autocompleteStyle;
+
   /// The alert styles.
   ///
   /// ## CLI
@@ -468,6 +478,7 @@ final class FThemeData with Diagnosticable {
     FTypography? typography,
     FStyle? style,
     FAccordionStyle? accordionStyle,
+    FAutocompleteStyle? autocompleteStyle,
     FAlertStyles? alertStyles,
     FAvatarStyle? avatarStyle,
     FBadgeStyles? badgeStyles,
@@ -520,6 +531,8 @@ final class FThemeData with Diagnosticable {
       typography: typography,
       style: style,
       accordionStyle: accordionStyle ?? FAccordionStyle.inherit(colors: colors, typography: typography, style: style),
+      autocompleteStyle:
+          autocompleteStyle ?? FAutocompleteStyle.inherit(colors: colors, typography: typography, style: style),
       alertStyles: alertStyles ?? FAlertStyles.inherit(colors: colors, typography: typography, style: style),
       avatarStyle: avatarStyle ?? FAvatarStyle.inherit(colors: colors, typography: typography),
       badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colors: colors, typography: typography, style: style),
@@ -582,6 +595,7 @@ final class FThemeData with Diagnosticable {
     required this.typography,
     required this.style,
     required this.accordionStyle,
+    required this.autocompleteStyle,
     required this.alertStyles,
     required this.avatarStyle,
     required this.badgeStyles,
@@ -1017,6 +1031,7 @@ final class FThemeData with Diagnosticable {
   @useResult
   FThemeData copyWith({
     FAccordionStyle? accordionStyle,
+    FAutocompleteStyle? autocompleteStyle,
     FAlertStyles? alertStyles,
     FAvatarStyle? avatarStyle,
     FBadgeStyles? badgeStyles,
@@ -1063,6 +1078,7 @@ final class FThemeData with Diagnosticable {
     typography: typography,
     style: style,
     accordionStyle: accordionStyle ?? this.accordionStyle,
+    autocompleteStyle: autocompleteStyle ?? this.autocompleteStyle,
     alertStyles: alertStyles ?? this.alertStyles,
     avatarStyle: avatarStyle ?? this.avatarStyle,
     badgeStyles: badgeStyles ?? this.badgeStyles,
@@ -1115,7 +1131,8 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('color', colors))
       ..add(DiagnosticsProperty('text', typography))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('accordionStyle', accordionStyle))
+      ..add(DiagnosticsProperty('accordionStyle', accordionStyle, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('autocompleteStyle', autocompleteStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('alertStyles', alertStyles, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('avatarStyle', avatarStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
@@ -1170,6 +1187,7 @@ final class FThemeData with Diagnosticable {
           typography == other.typography &&
           style == other.style &&
           accordionStyle == other.accordionStyle &&
+          autocompleteStyle == other.autocompleteStyle &&
           alertStyles == other.alertStyles &&
           avatarStyle == other.avatarStyle &&
           badgeStyles == other.badgeStyles &&
@@ -1220,6 +1238,7 @@ final class FThemeData with Diagnosticable {
       typography.hashCode ^
       style.hashCode ^
       accordionStyle.hashCode ^
+      autocompleteStyle.hashCode ^
       alertStyles.hashCode ^
       avatarStyle.hashCode ^
       badgeStyles.hashCode ^

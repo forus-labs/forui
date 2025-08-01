@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Forrige",
   "paginationNextSemanticsLabel": "Neste",
   "popoverSemanticsLabel": "Hurtigvindu",
-  "multiSelectHint": "Velg elementer"
+  "multiSelectHint": "Velg elementer",
+  "autocompleteNoResults": "Ingen treff funnet."
 }

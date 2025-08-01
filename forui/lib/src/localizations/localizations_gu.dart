@@ -69,6 +69,9 @@ class FLocalizationsGu extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'કોઈ મેળ મળ્યો નહીં.';
+
+  @override
   String get dateFieldHint => 'તારીખ પસંદ કરો';
 
   @override

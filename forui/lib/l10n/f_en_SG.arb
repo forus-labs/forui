@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Previous",
   "paginationNextSemanticsLabel": "Next",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Select items"
+  "multiSelectHint": "Select items",
+  "autocompleteNoResults": "No matches found."
 }

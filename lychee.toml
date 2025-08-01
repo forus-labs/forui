@@ -12,3 +12,7 @@ exclude_path = [
     "samples/web/**",
     "samples/lib/**",
 ]
+
+exclude = [
+    "https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default"
+]

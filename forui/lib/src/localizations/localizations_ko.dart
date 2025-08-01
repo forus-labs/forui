@@ -69,6 +69,9 @@ class FLocalizationsKo extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => '일치하는 항목이 없습니다.';
+
+  @override
   String get dateFieldHint => '날짜 선택';
 
   @override

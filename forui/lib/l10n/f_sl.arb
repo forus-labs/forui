@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Prejšnji",
   "paginationNextSemanticsLabel": "Naprej",
   "popoverSemanticsLabel": "Pojavno okno",
-  "multiSelectHint": "Izberi elemente"
+  "multiSelectHint": "Izberi elemente",
+  "autocompleteNoResults": "Ni ujemanj."
 }

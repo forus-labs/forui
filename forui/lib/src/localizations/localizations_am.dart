@@ -69,6 +69,9 @@ class FLocalizationsAm extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'ማንኛውም ውጤት አልተገኘም.';
+
+  @override
   String get dateFieldHint => 'ቀን ይምረጡ';
 
   @override

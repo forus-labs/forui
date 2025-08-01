@@ -68,12 +68,12 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 
   @override
   Widget build(BuildContext context) {
-    final content = SelectContentData.of<T>(context);
+    final content = ContentData.of<T>(context);
     final enabled = this.enabled ?? content.enabled;
     final style = this.style?.call(content.style) ?? content.style;
     final itemStyle = style.itemStyle.toFItemStyle(context);
 
-    return SelectContentData<T>(
+    return ContentData<T>(
       style: style,
       enabled: enabled,
       first: false,
@@ -89,7 +89,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
           // There is an edge case where a non-first, enabled child of a disabled section will not be auto-focused.
           // No feasible solution that doesn't involve a lot of complexity exists.
           if (children.firstOrNull case final first?)
-            SelectContentData<T>(
+            ContentData<T>(
               style: style,
               first: content.first,
               enabled: enabled,
@@ -257,7 +257,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
       }
 
       final InheritedSelectController(:focus, :onPress) = InheritedSelectController.of<T>(context);
-      final content = SelectContentData.of<T>(context);
+      final content = ContentData.of<T>(context);
       if (focus(widget.value)) {
         content.ensureVisible(context);
       }
@@ -267,7 +267,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
   @override
   Widget build(BuildContext context) {
     final InheritedSelectController(:popover, :contains, :focus, :onPress) = InheritedSelectController.of<T>(context);
-    final content = SelectContentData.of<T>(context);
+    final content = ContentData.of<T>(context);
 
     final enabled = widget.enabled ?? content.enabled;
     final selected = contains(widget.value);
@@ -302,7 +302,7 @@ class _FSelectItemState<T> extends State<FSelectItem<T>> {
 
 /// A [FSelectItem]'s style.
 class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
-  /// The margin around the image. Defaults to `EdgeInsets.symmetric(horizontal: 4, vertical: 2)`.
+  /// The margin around the item. Defaults to `EdgeInsets.symmetric(horizontal: 4, vertical: 2)`.
   @override
   final EdgeInsetsGeometry margin;
 
@@ -396,7 +396,7 @@ class FSelectItemStyle with Diagnosticable, _$FSelectItemStyleFunctions {
 }
 
 @internal
-extension FSelectItemStyles on FSelectItemStyle {
+extension InternalFSelectItemStyle on FSelectItemStyle {
   FItemStyle toFItemStyle(BuildContext context) => FItemStyle(
     backgroundColor: FWidgetStateMap.all(null),
     decoration: decoration,

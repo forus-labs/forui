@@ -69,6 +69,9 @@ class FLocalizationsPl extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Nie znaleziono dopasowań.';
+
+  @override
   String get dateFieldHint => 'Wybierz datę';
 
   @override

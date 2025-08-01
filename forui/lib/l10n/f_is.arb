@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Fyrri",
   "paginationNextSemanticsLabel": "Næsta",
   "popoverSemanticsLabel": "Sprettgluggi",
-  "multiSelectHint": "Veldu hluti"
+  "multiSelectHint": "Veldu hluti",
+  "autocompleteNoResults": "Engar niðurstöður fundust."
 }

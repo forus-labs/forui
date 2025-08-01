@@ -69,6 +69,9 @@ class FLocalizationsPt extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
+
+  @override
   String get dateFieldHint => 'Selecionar data';
 
   @override
@@ -143,6 +146,9 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Fechar \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
 
   @override
   String get dateFieldHint => 'Selecionar data';

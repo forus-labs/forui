@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Iliyotangulia",
   "paginationNextSemanticsLabel": "Inayofuata",
   "popoverSemanticsLabel": "Dirisha la haraka",
-  "multiSelectHint": "Chagua vipengee"
+  "multiSelectHint": "Chagua vipengee",
+  "autocompleteNoResults": "Hakuna mechi zilizopatikana."
 }

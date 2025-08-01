@@ -1,4 +1,5 @@
 ### 0.15.0
+* Add `useFAutocompleteController`.
 * Add `useFMultiSelectController`.
 
 * **Breaking** Change `useFMultiValueNotifier({Set<T> values})` to `useFMultiValueNotifier({Set<T> value})`.

@@ -69,6 +69,9 @@ class FLocalizationsSv extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Inga träffar hittades.';
+
+  @override
   String get dateFieldHint => 'Välj datum';
 
   @override

@@ -46,9 +46,11 @@ void main() {
   });
 
   testWidgets('tap outside hides popover', (tester) async {
+    var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
+          onTapHide: () => count++,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
@@ -63,16 +65,19 @@ void main() {
     await tester.tapAt(Offset.zero);
     await tester.pumpAndSettle();
 
+    expect(count, 1);
     expect(find.text('popover'), findsNothing);
   });
 
   testWidgets('tap outside with barrier hides popover', (tester) async {
+    var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
           style: FThemes.zinc.light.popoverStyle.copyWith(
             barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
+          onTapHide: () => count++,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
@@ -87,16 +92,19 @@ void main() {
     await tester.tapAt(Offset.zero);
     await tester.pumpAndSettle();
 
+    expect(count, 1);
     expect(find.text('popover'), findsNothing);
   });
 
   testWidgets('tap outside does not hide popover', (tester) async {
+    var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
           style: FThemes.zinc.light.popoverStyle.copyWith(
             barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
+          onTapHide: () => count++,
           hideOnTapOutside: FHidePopoverRegion.none,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
@@ -112,13 +120,16 @@ void main() {
     await tester.tapAt(Offset.zero);
     await tester.pumpAndSettle();
 
+    expect(count, 0);
     expect(find.text('popover'), findsOneWidget);
   });
 
   testWidgets('tap outside does not hide popover', (tester) async {
+    var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
+          onTapHide: () => count++,
           hideOnTapOutside: FHidePopoverRegion.none,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
@@ -134,13 +145,16 @@ void main() {
     await tester.tapAt(Offset.zero);
     await tester.pumpAndSettle();
 
+    expect(count, 0);
     expect(find.text('popover'), findsOneWidget);
   });
 
   testWidgets('tap button when popover is open and FHidePopoverRegion.excludeTarget remains open', (tester) async {
+    var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
+          onTapHide: () => count++,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => Row(
             children: [
@@ -165,13 +179,16 @@ void main() {
     await tester.tapAt(Offset.zero);
     await tester.pumpAndSettle();
 
+    expect(count, 1);
     expect(find.text('popover'), findsNothing);
   });
 
   testWidgets('tap button when popover is open and FHidePopoverRegion.anywhere closes it', (tester) async {
+    var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
+          onTapHide: () => count++,
           hideOnTapOutside: FHidePopoverRegion.anywhere,
           popoverBuilder: (context, _) => const Text('follower'),
           builder: (_, controller, _) => Row(
@@ -192,6 +209,7 @@ void main() {
     await tester.tap(find.text('other'));
     await tester.pumpAndSettle();
 
+    expect(count, 1);
     expect(find.text('follower'), findsNothing);
   });
 

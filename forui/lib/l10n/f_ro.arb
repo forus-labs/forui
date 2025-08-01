@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Anterior",
   "paginationNextSemanticsLabel": "Înainte",
   "popoverSemanticsLabel": "Fereastră contextuală",
-  "multiSelectHint": "Selectează elemente"
+  "multiSelectHint": "Selectează elemente",
+  "autocompleteNoResults": "Nu s-au găsit potriviri."
 }

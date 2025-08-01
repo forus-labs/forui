@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "ପୂର୍ବବର୍ତ୍ତୀ",
   "paginationNextSemanticsLabel": "ପରବର୍ତ୍ତୀ",
   "popoverSemanticsLabel": "ପପଓଭର",
-  "multiSelectHint": "ଆଇଟମ୍ ବାଛନ୍ତୁ"
+  "multiSelectHint": "ଆଇଟମ୍ ବାଛନ୍ତୁ",
+  "autocompleteNoResults": "କୌଣସି ମେଳ ମିଳିଲା ନାହିଁ."
 }

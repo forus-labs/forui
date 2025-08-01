@@ -21,5 +21,6 @@
   "paginationPrevious": "മുമ്പത്തേത്",
   "paginationNext": "അടുത്തത്",
   "popoverSemanticsLabel": "പോപ്പോവർ",
-  "multiSelectHint": "ഇനങ്ങൾ തിരഞ്ഞെടുക്കുക"
+  "multiSelectHint": "ഇനങ്ങൾ തിരഞ്ഞെടുക്കുക",
+  "autocompleteNoResults": "പൊരുത്തങ്ങളൊന്നും കണ്ടെത്തിയില്ല."
 }

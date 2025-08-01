@@ -69,6 +69,9 @@ class FLocalizationsBn extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'কোনো মিল পাওয়া যায়নি.';
+
+  @override
   String get dateFieldHint => 'তারিখ বেছে নিন';
 
   @override

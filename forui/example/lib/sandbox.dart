@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
+const features = ['Keyboard navigation', 'Typeahead suggestions', 'Tab to complete'];
+
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -28,28 +30,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FTabs(
-        controller: c,
-        initialIndex: 0,
-        children: [
-          FTabEntry(
-            label: const Text('Account'),
-            child: FCard(
-              title: const Text('Account'),
-              subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-              child: Container(color: Colors.blue, height: 100),
-            ),
-          ),
-          FTabEntry(
-            label: const Text('Password'),
-            child: FCard(
-              title: const Text('Password'),
-              subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-              child: Container(color: Colors.red, height: 100),
-            ),
-          ),
-        ],
-      ),
+      child: FAutocomplete(label: Text('Autocomplete'), hint: 'What can it do?', items: features),
     );
   }
 }

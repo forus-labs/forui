@@ -21,5 +21,6 @@
   "paginationPrevious": "ກ່ອນໜ້າ",
   "paginationNext": "ຕໍ່ໄປ",
   "popoverSemanticsLabel": "ປ໊ອບໂອເວີ",
-  "multiSelectHint": "ເລືອກລາຍການ"
+  "multiSelectHint": "ເລືອກລາຍການ",
+  "autocompleteNoResults": "ບໍ່ພົບການຈັບຄູ່."
 }

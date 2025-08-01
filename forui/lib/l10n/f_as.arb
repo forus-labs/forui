@@ -22,5 +22,6 @@
   "paginationPrevious": "পূৰ্বৱৰ্তী",
   "paginationNext": "পৰৱৰ্তী",
   "popoverSemanticsLabel": "পপঅভাৰ",
-  "multiSelectHint": "বস্তুসমূহ বাছক"
+  "multiSelectHint": "বস্তুসমূহ বাছক",
+  "autocompleteNoResults": "কোনো মিল পোৱা নগল."
 }

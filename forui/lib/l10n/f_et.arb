@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Eelmine",
   "paginationNextSemanticsLabel": "Järgmine",
   "popoverSemanticsLabel": "Hüpikaken",
-  "multiSelectHint": "Valige üksused"
+  "multiSelectHint": "Valige üksused",
+  "autocompleteNoResults": "Vasteid ei leitud."
 }

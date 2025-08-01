@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Ankstesnis",
   "paginationNextSemanticsLabel": "Kitas",
   "popoverSemanticsLabel": "Išskleidžiamas langas",
-  "multiSelectHint": "Pasirinkite elementus"
+  "multiSelectHint": "Pasirinkite elementus",
+  "autocompleteNoResults": "Nerasta atitikmenų."
 }

@@ -69,6 +69,9 @@ class FLocalizationsZh extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => '未找到匹配项.';
+
+  @override
   String get dateFieldHint => '选择日期';
 
   @override
@@ -145,6 +148,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   }
 
   @override
+  String get autocompleteNoResults => '未找到匹配項.';
+
+  @override
   String get dateFieldHint => '選擇日期';
 
   @override
@@ -219,6 +225,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String barrierOnTapHint(String modalRouteContentName) {
     return '關閉「\$modalRouteContentName」';
   }
+
+  @override
+  String get autocompleteNoResults => '未找到匹配項.';
 
   @override
   String get dateFieldHint => '選擇日期';

@@ -21,5 +21,6 @@
   "paginationPrevious": "Мурунку",
   "paginationNext": "Кийинки",
   "popoverSemanticsLabel": "Калкып чыгуучу терезе",
-  "multiSelectHint": "Элементтерди тандоо"
+  "multiSelectHint": "Элементтерди тандоо",
+  "autocompleteNoResults": "Эч кандай дал келүү табылган жок."
 }

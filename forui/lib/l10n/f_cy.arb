@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Blaenorol",
   "paginationNextSemanticsLabel": "Nesaf",
   "popoverSemanticsLabel": "Ffenestr naid",
-  "multiSelectHint": "Dewis eitemau"
+  "multiSelectHint": "Dewis eitemau",
+  "autocompleteNoResults": "Dim cydweddiadau wedi'u canfod."
 }

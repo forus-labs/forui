@@ -334,6 +334,12 @@ abstract class FLocalizations {
   /// **'Close {modalRouteContentName}'**
   String barrierOnTapHint(String modalRouteContentName);
 
+  /// The message displayed when there are no matching results.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches found.'**
+  String get autocompleteNoResults;
+
   /// The hint text for the calendar-only date field.
   ///
   /// In en, this message translates to:

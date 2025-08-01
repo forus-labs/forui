@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Föregående",
   "paginationNextSemanticsLabel": "Nästa",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Välj objekt"
+  "multiSelectHint": "Välj objekt",
+  "autocompleteNoResults": "Inga träffar hittades."
 }

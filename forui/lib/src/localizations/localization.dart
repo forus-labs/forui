@@ -57,6 +57,9 @@ class FDefaultLocalizations extends FLocalizations {
   FDefaultLocalizations._() : super('en_US');
 
   @override
+  String get autocompleteNoResults => 'No matches found.';
+
+  @override
   String fullDate(DateTime date) => DateFormat.yMMMMd().format(date);
 
   @override

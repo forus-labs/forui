@@ -21,5 +21,6 @@
   "paginationPrevious": "مخکینی",
   "paginationNext": "راتلونکی",
   "popoverSemanticsLabel": "پاپ اوور",
-  "multiSelectHint": "توکي غوره کړئ"
+  "multiSelectHint": "توکي غوره کړئ",
+  "autocompleteNoResults": "هیڅ میچ ونه موندل شو."
 }

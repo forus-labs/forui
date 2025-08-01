@@ -69,6 +69,9 @@ class FLocalizationsDe extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Keine Übereinstimmungen gefunden.';
+
+  @override
   String get dateFieldHint => 'Datum auswählen';
 
   @override
@@ -135,6 +138,9 @@ class FLocalizationsDe extends FLocalizations {
 /// The translations for German, as used in Switzerland (`de_CH`).
 class FLocalizationsDeCh extends FLocalizationsDe {
   FLocalizationsDeCh(): super('de_CH');
+
+  @override
+  String get autocompleteNoResults => 'Keine Übereinstimmungen gefunden.';
 
   @override
   String get dateFieldHint => 'Datum auswählen';

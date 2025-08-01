@@ -69,6 +69,9 @@ class FLocalizationsMs extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Tiada padanan ditemui.';
+
+  @override
   String get dateFieldHint => 'Pilih tarikh';
 
   @override

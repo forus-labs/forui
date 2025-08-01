@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Zurück",
   "paginationNextSemanticsLabel": "Weiter",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Elemente auswählen"
+  "multiSelectHint": "Elemente auswählen",
+  "autocompleteNoResults": "Keine Übereinstimmungen gefunden."
 }

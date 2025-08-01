@@ -69,6 +69,9 @@ class FLocalizationsHy extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Համընկնումներ չեն գտնվել.';
+
+  @override
   String get dateFieldHint => 'Ընտրել ամսաթիվը';
 
   @override

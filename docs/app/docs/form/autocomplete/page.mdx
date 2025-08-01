@@ -1,0 +1,448 @@
+import {Callout, Tabs} from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Autocomplete
+
+An autocomplete provides a list of suggestions based on the user's input and shows typeahead text for the first match.
+
+It is a form-field and can therefore be used in a form.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    const features = [
+      'Keyboard navigation',
+      'Typeahead suggestions',
+      'Tab to complete',
+    ];
+
+    class AutocompletePage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FAutocomplete(
+        label: Text('Autocomplete'),
+        hint: 'What can it do?',
+        items: features,
+      );
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>
+
+## CLI
+
+To generate and customize this style:
+
+```shell copy
+dart run forui style create autocomplete
+```
+
+## Usage
+
+### `FAutocomplete(...)`
+
+```dart copy
+FAutocomplete(
+  controller: FAutocompleteController(vsync: this),
+  style: (style) => style,
+  label: const Text('Country'),
+  description: const Text('Select your country of residence'),
+  hint: 'Type to search countries',
+  onChange: (value) => print('Selected country: $value'),
+  onSaved: (value) => print('Saved country: $value'),
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  builder: (context, styles, child) => child!,
+  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
+  suffixBuilder: (context, styles, _) => Icon(FIcons.search),
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
+  clearable: (value) => value.text.isNotEmpty,
+  initialText: 'Canada',
+  items: [
+    'United States',
+    'Canada', 
+    'Japan',
+    'United Kingdom',
+    'Germany',
+    'France',
+    'Australia',
+  ],
+);
+```
+
+### `FAutocomplete.builder(...)`
+
+```dart copy
+FAutocomplete.builder(
+  filter: (query) async {
+    const countries = ['United States', 'Canada', 'Japan'];
+    return countries.where((country) => country.toLowerCase().contains(query.toLowerCase()));
+  },
+  contentBuilder: (context, query, suggestions) => [
+    for (final suggestion in suggestions) FAutocompleteItem(suggestion)
+  ],
+  controller: FAutocompleteController(vsync: this),
+  style: (style) => style,
+  label: const Text('Country'),
+  description: const Text('Select your country of residence'),
+  hint: 'Type to search countries',
+  onChange: (value) => print('Selected country: $value'),
+  onSaved: (value) => print('Saved country: $value'),
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  builder: (context, styles, child) => child!,
+  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
+  suffixBuilder: (context, styles, _) => Icon(FIcons.search),
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
+  clearable: (value) => value.text.isNotEmpty,
+);
+```
+
+## Examples
+
+### Detailed
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' variant='detailed' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class DetailedAutocompletePage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FAutocomplete.builder(
+        hint: 'Type to search',
+        filter: (query) {
+          const items = ['Bug', 'Feature', 'Question'];
+          return items.where((item) => item.toLowerCase().contains(query.toLowerCase()));
+        },
+        contentBuilder: (context, query, suggestions) => [
+          for (final suggestion in suggestions)
+            switch (value) {
+              'Bug' => FAutocompleteItem(
+                'Bug',
+                prefix: const Icon(FIcons.bug),
+                title: const Text('Bug'),
+                subtitle: const Text('An unexpected problem or behavior'),
+              ),
+              'Feature' => FAutocompleteItem(
+                'Feature',
+                prefix: const Icon(FIcons.filePlus2),
+                title: const Text('Feature'),
+                subtitle: const Text('A new feature or enhancement'),
+              ),
+              'Question' => FAutocompleteItem(
+                'Question',
+                prefix: const Icon(FIcons.messageCircleQuestionMark),
+                title: const Text('Question'),
+                subtitle: const Text('A question or clarification'),
+              ),
+              _ => FAutocompleteItem(value),
+            }
+        ],
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Sections
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' variant='section' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class SectionAutocompletePage extends StatelessWidget {
+      static const _timezones = {
+        'North America': [
+          'Eastern Standard Time (EST)',
+          'Central Standard Time (CST)',
+          'Mountain Standard Time (MST)',
+          'Pacific Standard Time (PST)',
+          'Alaska Standard Time (AKST)',
+          'Hawaii Standard Time (HST)',
+        ],
+        'South America': [
+          'Argentina Time (ART)',
+          'Bolivia Time (BOT)',
+          'Brasilia Time (BRT)',
+          'Chile Standard Time (CLT)',
+        ],
+        'Europe & Africa': [
+          'Greenwich Mean Time (GMT)',
+          'Central European Time (CET)',
+          'Eastern European Time (EET)',
+          'Western European Summer Time (WEST)',
+          'Central Africa Time (CAT)',
+          'Eastern Africa Time (EAT)',
+        ],
+        'Asia': [
+          'Moscow Time (MSK)',
+          'India Standard Time (IST)',
+          'China Standard Time (CST)',
+          'Japan Standard Time (JST)',
+          'Korea Standard Time (KST)',
+          'Indonesia Standard Time (IST)',
+        ],
+        'Australia & Pacific': [
+          'Australian Western Standard Time (AWST)',
+          'Australian Central Standard Time (ACST)',
+          'Australian Eastern Standard Time (AEST)',
+          'New Zealand Standard Time (NZST)',
+          'Fiji Time (FJT)',
+        ],
+      };
+
+      @override
+      Widget build(BuildContext context) => FAutocomplete.builder(
+        hint: 'Type to search timezones',
+        filter: (query) => timezones.values
+            .expand((list) => list)
+            .where((timezone) => timezone.toLowerCase().contains(query.toLowerCase())),
+        contentBuilder: (context, query, suggestions) {
+          final sections = <FAutocompleteSection>[];
+
+          for (final MapEntry(key: label, value: zones) in timezones.entries) {
+            final items = zones.where(suggestions.contains).toList();
+            if (items.isNotEmpty) {
+              sections.add(FAutocompleteSection(label: Text(label), items: items));
+            }
+          }
+
+          return sections;
+        },
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Dividers
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' variant='divider' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {5} copy
+    class DividerAutocompletePage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FAutocomplete.builder(
+        hint: 'Type to search levels',
+        contentDivider: FItemDivider.none,
+        filter: (query) {
+          final items = ['1A', '1B', '2A', '2B', '3', '4'];
+          return items.where((item) => item.toLowerCase().contains(query.toLowerCase()));
+        },
+        contentBuilder: (context, query, suggestions) => <FAutocompleteItemMixin>[
+          FAutocompleteSection.custom(
+            label: const Text('Level 1'),
+            divider: FItemDivider.indented,
+            children: [
+              if (suggestions.contains('1A')) FAutocompleteItem('1A'),
+              if (suggestions.contains('1B')) FAutocompleteItem('1B'),
+            ],
+          ),
+          FAutocompleteSection(
+            label: const Text('Level 2'),
+            items: ['2A', '2B'].where(suggestions.contains).toList(),
+          ),
+          if (suggestions.contains('3')) FAutocompleteItem('3'),
+          if (suggestions.contains('4')) FAutocompleteItem('4'),
+        ].where((item) => 
+          item is FAutocompleteSection ? item.children.isNotEmpty : true
+        ).toList(),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Behavior
+
+#### Async
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' variant='async' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class AsyncAutocompletePage extends StatelessWidget {
+      static const fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Pineapple'];
+
+      @override
+      Widget build(BuildContext context) => FAutocomplete.builder(
+        hint: 'Type to search fruits',
+        filter: (query) async {
+          await Future.delayed(const Duration(seconds: 3));
+          return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
+        },
+        contentBuilder: (context, query, suggestions) => [
+          for (final suggestion in suggestions) FAutocompleteItem(suggestion)
+        ],
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Async with Custom Loading
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' variant='async-loading' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {11-14} copy
+    class AsyncLoadingAutocompletePage extends StatelessWidget {
+      static const fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Pineapple'];
+
+      @override
+      Widget build(BuildContext context) => FAutocomplete.builder(
+        hint: 'Type to search fruits',
+        filter: (query) async {
+          await Future.delayed(const Duration(seconds: 3));
+          return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
+        },
+        contentLoadingBuilder: (context, style, _) => Padding(
+          padding: const EdgeInsets.all(14.0),
+          child: Text('Here be dragons...', style: style.emptyTextStyle),
+        ),
+        contentBuilder: (context, query, suggestions) => [
+          for (final suggestion in suggestions) FAutocompleteItem(suggestion)
+        ],
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Async with Custom Error Handling
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' variant='async-error' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {12-17} copy
+    class AsyncErrorAutocompletePage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FAutocomplete.builder(
+        hint: 'Type to search fruits',
+        filter: (query) async {
+          await Future.delayed(const Duration(seconds: 3));
+          throw StateError('Error loading data');
+        },
+        contentBuilder: (context, query, suggestions) => [
+          for (final suggestion in suggestions) FAutocompleteItem(suggestion)
+        ],
+        contentErrorBuilder: (context, error, trace) {
+          return Padding(
+            padding: const EdgeInsets.all(14.0),
+            child: Icon(FIcons.circleX, size: 15, color: context.theme.colors.primary),
+          );
+        },
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+#### Clearable
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' variant='clearable' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {7} copy
+    class ClearableAutocompletePage extends StatelessWidget {
+      static const fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Pineapple'];
+
+      @override
+      Widget build(BuildContext context) => FAutocomplete(
+        hint: 'Type to search fruits',
+        clearable: (value) => value.text.isNotEmpty,
+        items: fruits,
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='autocomplete' variant='form' query={{}} height={400}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart copy
+    class FormAutocompletePage extends StatefulWidget {
+
+      @override
+      State<FormAutocompletePage> createState() => _FormAutocompletePageState();
+    }
+
+    class _FormAutocompletePageState extends State<FormAutocompletePage> with SingleTickerProviderStateMixin {
+      static const _departments = ['Engineering', 'Marketing', 'Sales', 'Human Resources', 'Finance'];
+
+      final _formKey = GlobalKey<FormState>();
+      late final _departmentController = FAutocompleteController(vsync: this);
+
+      @override
+      Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FAutocomplete(
+                controller: _departmentController,
+                label: const Text('Department'),
+                description: const Text('Type to search your dream department'),
+                hint: 'Search departments',
+                validator: _validateDepartment,
+                items: _departments,
+              ),
+              const SizedBox(height: 25),
+              FButton(
+                child: const Text('Submit'),
+                onPress: () {
+                  if (_formKey.currentState!.validate()) {
+                    // Form is valid, do something with department.
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      );
+
+      String? _validateDepartment(String? department) {
+        if (department == null || department.isEmpty) {
+          return 'Please select a department';
+        }
+        return null;
+      }
+
+      @override
+      void dispose() {
+        _departmentController.dispose();
+        super.dispose();
+      }
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>

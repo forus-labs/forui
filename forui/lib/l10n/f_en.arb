@@ -76,6 +76,12 @@
   },
 
 
+  "autocompleteNoResults": "No matches found.",
+  "@autocompleteNoResults": {
+    "description": "The message displayed when there are no matching results."
+  },
+
+
   "dateFieldHint": "Pick a date",
   "@dateFieldHint": {
     "description": "The hint text for the calendar-only date field."

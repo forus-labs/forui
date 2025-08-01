@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "前へ",
   "paginationNextSemanticsLabel": "次へ",
   "popoverSemanticsLabel": "ポップオーバー",
-  "multiSelectHint": "アイテムを選択"
+  "multiSelectHint": "アイテムを選択",
+  "autocompleteNoResults": "一致するものが見つかりません."
 }

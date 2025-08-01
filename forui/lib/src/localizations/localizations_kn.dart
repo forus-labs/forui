@@ -69,6 +69,9 @@ class FLocalizationsKn extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'ಯಾವುದೇ ಹೊಂದಾಣಿಕೆ ಕಂಡುಬಂದಿಲ್ಲ.';
+
+  @override
   String get dateFieldHint => 'ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ';
 
   @override

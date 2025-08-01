@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Vorig",
   "paginationNextSemanticsLabel": "Witer",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Elemente uswähle"
+  "multiSelectHint": "Elemente uswähle",
+  "autocompleteNoResults": "Kei Überiistimmige gfunde."
 }

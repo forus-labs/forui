@@ -21,5 +21,6 @@
   "paginationPrevious": "이전",
   "paginationNext": "다음",
   "popoverSemanticsLabel": "팝오버",
-  "multiSelectHint": "항목 선택"
+  "multiSelectHint": "항목 선택",
+  "autocompleteNoResults": "일치하는 항목이 없습니다."
 }

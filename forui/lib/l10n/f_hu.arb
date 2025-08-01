@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Előző",
   "paginationNextSemanticsLabel": "Következő",
   "popoverSemanticsLabel": "Felugró ablak",
-  "multiSelectHint": "Elemek kiválasztása"
+  "multiSelectHint": "Elemek kiválasztása",
+  "autocompleteNoResults": "Nincs találat."
 }

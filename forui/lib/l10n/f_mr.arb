@@ -21,5 +21,6 @@
   "paginationPrevious": "मागील",
   "paginationNext": "पुढील",
   "popoverSemanticsLabel": "पॉपओव्हर",
-  "multiSelectHint": "आयटम निवडा"
+  "multiSelectHint": "आयटम निवडा",
+  "autocompleteNoResults": "कोणतेही जुळणारे आढळले नाही."
 }

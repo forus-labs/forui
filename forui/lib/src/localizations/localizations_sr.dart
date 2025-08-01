@@ -69,6 +69,9 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Није пронађено подударање.';
+
+  @override
   String get dateFieldHint => 'Изаберите датум';
 
   @override
@@ -143,6 +146,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String barrierOnTapHint(String modalRouteContentName) {
     return 'Zatvori: \$modalRouteContentName';
   }
+
+  @override
+  String get autocompleteNoResults => 'Nije pronađeno podudaranje.';
 
   @override
   String get dateFieldHint => 'Izaberite datum';

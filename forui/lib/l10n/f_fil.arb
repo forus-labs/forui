@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Nakaraan",
   "paginationNextSemanticsLabel": "Susunod",
   "popoverSemanticsLabel": "Popover",
-  "multiSelectHint": "Pumili ng mga item"
+  "multiSelectHint": "Pumili ng mga item",
+  "autocompleteNoResults": "Walang nahanap na tugma."
 }

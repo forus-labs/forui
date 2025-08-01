@@ -69,6 +69,9 @@ class FLocalizationsEl extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Δεν βρέθηκαν αντιστοιχίες.';
+
+  @override
   String get dateFieldHint => 'Επιλέξτε ημερομηνία';
 
   @override

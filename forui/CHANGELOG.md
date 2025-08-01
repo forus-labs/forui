@@ -1,4 +1,4 @@
-## 0.15.0
+## 0.15.0 (Next)
 
 ### Consistent Controllers
 We've done a pass over the controllers in Forui to make them more consistent and easier to use.
@@ -16,6 +16,14 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Remove `FAccordionController.validate(...)`.
 
 
+## `FAutocomplete` (new)
+* Add `FAutocomplete`.
+* Add `FAutocompleteController`.
+* Add `FAutocompleteStyle`.
+* Add `FAutocompleteSection`.
+* Add `FAutocompleteItem`.
+
+
 ### `FMultiSelect` (new)
 * Add `FMultiSelect`.
 * Add `FMultiSelectController`.
@@ -24,15 +32,19 @@ We've done a pass over the controllers in Forui to make them more consistent and
 
 
 ### Others
+* Add `FTypeaheadController`.
+* Add `FPopover.onTapHide`.
+* Add `FPopoverMenu.onTapHide`.
+
 * Rename `FSelect.divider` to `FSelect.contentDivider`.
 * Change `FMultiValueNotifier` to be non-abstract.
-* Change `FTappableStyle.mouseCursor` to `MouseCursor.defer`. See https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
+* **Breaking** Change `FTappableStyle.mouseCursor` to `MouseCursor.defer`. See https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
   for our rationale behind this change.
 
 * Fix `FTabs` throwing an assertion error if `FTabController` is provided with a `initialIndex` > 0.
 
 
-### 0.14.1
+## 0.14.1
 * Fix `FToaster`sometimes crashing due to an incorrect update of a late final variable.
 
 

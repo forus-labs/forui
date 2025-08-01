@@ -69,6 +69,9 @@ class FLocalizationsAr extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'لم يتم العثور على أي تطابقات.';
+
+  @override
   String get dateFieldHint => 'اختر تاريخًا';
 
   @override

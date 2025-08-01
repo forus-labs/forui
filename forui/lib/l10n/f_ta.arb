@@ -21,5 +21,6 @@
   "paginationPrevious": "முந்தைய",
   "paginationNext": "அடுத்து",
   "popoverSemanticsLabel": "பாப்ஓவர்",
-  "multiSelectHint": "உருப்படிகளைத் தேர்ந்தெடுக்கவும்"
+  "multiSelectHint": "உருப்படிகளைத் தேர்ந்தெடுக்கவும்",
+  "autocompleteNoResults": "பொருத்தங்கள் எதுவும் கிடைக்கவில்லை."
 }

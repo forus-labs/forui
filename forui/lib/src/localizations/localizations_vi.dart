@@ -69,6 +69,9 @@ class FLocalizationsVi extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'Không tìm thấy kết quả phù hợp.';
+
+  @override
   String get dateFieldHint => 'Chọn ngày';
 
   @override

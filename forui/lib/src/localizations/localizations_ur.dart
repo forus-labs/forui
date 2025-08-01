@@ -69,6 +69,9 @@ class FLocalizationsUr extends FLocalizations {
   }
 
   @override
+  String get autocompleteNoResults => 'کوئی میچ نہیں ملا.';
+
+  @override
   String get dateFieldHint => 'تاریخ منتخب کریں';
 
   @override

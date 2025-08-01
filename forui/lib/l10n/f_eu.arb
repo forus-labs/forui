@@ -22,5 +22,6 @@
   "paginationPreviousSemanticsLabel": "Aurrekoa",
   "paginationNextSemanticsLabel": "Hurrengoa",
   "popoverSemanticsLabel": "Leiho emergentea",
-  "multiSelectHint": "Hautatu elementuak"
+  "multiSelectHint": "Hautatu elementuak",
+  "autocompleteNoResults": "Ez da bat-etortzerik aurkitu."
 }
