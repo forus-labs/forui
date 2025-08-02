@@ -42,7 +42,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   static Widget defaultContentEmptyBuilder(BuildContext context, FAutocompleteContentStyle style, Widget? _) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
       child: Text(localizations.autocompleteNoResults, style: style.emptyTextStyle),
     );
   }

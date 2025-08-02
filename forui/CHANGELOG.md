@@ -36,7 +36,10 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * Add `FPopover.onTapHide`.
 * Add `FPopoverMenu.onTapHide`.
 
+Change vertical padding
+
 * Rename `FSelect.divider` to `FSelect.contentDivider`.
+* Change `FSelect`'s vertical padding for default loading and empty indicators to be the same height.
 * Change `FMultiValueNotifier` to be non-abstract.
 * **Breaking** Change `FTappableStyle.mouseCursor` to `MouseCursor.defer`. See https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
   for our rationale behind this change.

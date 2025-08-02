@@ -41,15 +41,15 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultSearchLoadingBuilder(BuildContext _, FSelectSearchStyle style, Widget? _) => Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: FProgress.circularIcon(style: (s) => style.loadingIndicatorStyle),
+    padding: const EdgeInsets.all(13),
+    child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
   );
 
   /// The default empty builder that shows a localized message when there are no results.
   static Widget defaultEmptyBuilder(BuildContext context, FSelectStyle style, Widget? _) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
       child: Text(localizations.selectNoResults, style: style.emptyTextStyle),
     );
   }
