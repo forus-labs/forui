@@ -594,6 +594,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))

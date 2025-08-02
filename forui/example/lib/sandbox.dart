@@ -29,6 +29,12 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: const FProgress.circularIcon());
+    return Center(
+      child: FSelect<String>(
+        hint: 'Select a fruit',
+        format: (s) => s,
+        children: [for (final fruit in features) FSelectItem(fruit, fruit)],
+      ),
+    );
   }
 }

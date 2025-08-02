@@ -509,7 +509,7 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   /// A tween that does not animate the scale of the tappable. It is used to disable the bounce effect.
   static final Tween<double> noBounceTween = Tween(begin: 1.0, end: 1.0);
 
-  /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [SystemMouseCursors.click].
+  /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [MouseCursor.defer].
   @override
   final FWidgetStateMap<MouseCursor> cursor;
 

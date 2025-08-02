@@ -7,6 +7,12 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Change `FMultiValueNotifier.radio({T? value})` to `FMultiValueNotifier.radio([T? value])`.
 
 
+## Cursors
+We've changed the default cursor for many widgets from `MouseCursor.click` to `MouseCursor.defer`. This is in line with 
+[native desktop behavior](https://medium.com/simple-human/buttons-shouldnt-have-a-hand-cursor-b11e99ca374b) and 
+[W3C User Interface guidelines](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer).
+
+
 ### `FAccordion`
 * Add `FAccordionItem.onHoverChange`
 * Add `FAccordionItem.onStateChange`
@@ -77,8 +83,6 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * Add `FTypeaheadController`.
 
 * Change `FMultiValueNotifier` to be non-abstract.
-* **Breaking** Change `FTappableStyle.mouseCursor` to `MouseCursor.defer`. See https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
-  for our rationale behind this change.
 
 * Fix `FProgress.circularIcon()` using incorrect color.
 * Fix `FScaffold` not propagating `IconTheme` from `FStyle.iconStyle`.

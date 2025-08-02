@@ -263,7 +263,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool expands = false,
-    MouseCursor mouseCursor = SystemMouseCursors.click,
+    MouseCursor mouseCursor = SystemMouseCursors.text,
     bool canRequestFocus = true,
     bool clearable = false,
     AlignmentGeometry anchor = AlignmentDirectional.topStart,
@@ -522,7 +522,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = SystemMouseCursors.click,
+    this.mouseCursor = SystemMouseCursors.text,
     this.canRequestFocus = true,
     this.clearable = false,
     this.anchor = AlignmentDirectional.topStart,
@@ -714,16 +714,10 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
         enableInteractiveSelection: false,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, styles, _) => widget.prefixBuilder!(context, (style, styles.$1, styles.$2), null),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, styles, _) => widget.suffixBuilder!(context, (style, styles.$1, styles.$2), null),
         clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
         label: widget.label,
         description: widget.description,

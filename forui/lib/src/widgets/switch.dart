@@ -107,7 +107,6 @@ class FSwitch extends StatelessWidget {
         autofocus: autofocus,
         focusNode: focusNode,
         onFocusChange: onFocusChange,
-        mouseCursor: enabled ? SystemMouseCursors.click : MouseCursor.defer,
         child: Semantics(
           label: semanticsLabel,
           enabled: enabled,

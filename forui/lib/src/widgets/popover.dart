@@ -305,7 +305,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideRegion', hideRegion))
-      ..add(ObjectFlagProperty.has('onTapOutsideHide', onTapHide))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
       ..add(
         FlagProperty(

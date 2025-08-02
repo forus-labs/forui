@@ -45,7 +45,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = SystemMouseCursors.click,
+    this.mouseCursor = SystemMouseCursors.text,
     this.canRequestFocus = true,
     this.clearable = false,
     this.anchor = Alignment.topLeft,
@@ -187,16 +187,10 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         enableInteractiveSelection: false,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, styles, _) => widget.prefixBuilder!(context, (style, styles.$1, styles.$2), null),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, styles, _) => widget.suffixBuilder!(context, (style, styles.$1, styles.$2), null),
         clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
         label: widget.label,
         description: widget.description,

@@ -36,7 +36,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = SystemMouseCursors.click,
+    this.mouseCursor = SystemMouseCursors.text,
     this.canRequestFocus = true,
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
@@ -195,16 +195,10 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         enableInteractiveSelection: false,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, styles, _) => widget.prefixBuilder!(context, (style, styles.$1, styles.$2), null),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, styles, _) => widget.suffixBuilder!(context, (style, styles.$1, styles.$2), null),
         label: widget.label,
         description: widget.description,
         enabled: widget.enabled,
