@@ -150,11 +150,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.text_field.onChange}
   final ValueChanged<String>? onChange;
 
-  /// {@macro forui.text_field.onTap}
-  final GestureTapCallback? onTap;
-
-  /// {@macro forui.text_field.onTapAlwaysCalled}
-  final TapRegionCallback? onTapOutside;
 
   /// {@macro forui.text_field.onTap}
   final bool onTapAlwaysCalled;
@@ -271,8 +266,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
-  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
-  final FHidePopoverRegion hideOnTapOutside;
+  /// {@macro forui.widgets.FPopover.hideRegion}
+  final FPopoverHideRegion hideRegion;
 
   /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
@@ -339,8 +334,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     int? maxLength,
     MaxLengthEnforcement? maxLengthEnforcement,
     ValueChanged<String>? onChange,
-    GestureTapCallback? onTap,
-    TapRegionCallback? onTapOutside,
     bool onTapAlwaysCalled = false,
     VoidCallback? onEditingComplete,
     ValueChanged<String>? onSubmit,
@@ -379,7 +372,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
-    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
     ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)> builder = _builder,
     FutureOr<Iterable<String>> Function(String)? filter,
@@ -425,8 +418,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          maxLength: maxLength,
          maxLengthEnforcement: maxLengthEnforcement,
          onChange: onChange,
-         onTap: onTap,
-         onTapOutside: onTapOutside,
          onTapAlwaysCalled: onTapAlwaysCalled,
          onEditingComplete: onEditingComplete,
          onSubmit: onSubmit,
@@ -465,7 +456,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          spacing: spacing,
          shift: shift,
          offset: offset,
-         hideOnTapOutside: hideOnTapOutside,
+         hideRegion: hideRegion,
          autoHide: autoHide,
          builder: builder,
          contentScrollController: contentScrollController,
@@ -512,8 +503,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.maxLength,
     this.maxLengthEnforcement,
     this.onChange,
-    this.onTap,
-    this.onTapOutside,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -552,7 +541,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.autoHide = true,
     this.builder = _builder,
     this.contentScrollController,
@@ -602,8 +591,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(IntProperty('maxLength', maxLength))
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
       ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(ObjectFlagProperty.has('onTap', onTap))
-      ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
       ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
@@ -652,7 +639,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('filter', filter))
@@ -830,7 +817,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         spacing: widget.spacing,
         shift: widget.shift,
         offset: widget.offset,
-        hideOnTapOutside: widget.hideOnTapOutside,
+        hideRegion: widget.hideRegion,
         onTapHide: () {
           if (_restore case final restore?) {
             _previous = restore;

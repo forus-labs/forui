@@ -348,8 +348,8 @@ abstract class FDateField extends StatefulWidget {
   ///
   /// The [offset] property controls the offset of the picker popover. Defaults to [Offset.zero].
   ///
-  /// [hideOnTapOutside] controls the region that can be tapped to hide the popover. Defaults to
-  /// [FHidePopoverRegion.excludeTarget].
+  /// [hideRegion] controls the region that can be tapped to hide the popover. Defaults to
+  /// [FPopoverHideRegion.excludeChild].
   ///
   /// See also:
   /// * [FDateField] - Creates a date field with both input field and calendar.
@@ -380,7 +380,7 @@ abstract class FDateField extends StatefulWidget {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,

@@ -78,12 +78,12 @@ final class FPopoverController extends FChangeNotifier {
 }
 
 /// The regions that can be tapped to hide a popover.
-enum FHidePopoverRegion {
+enum FPopoverHideRegion {
   /// The entire screen, excluding the popover.
   anywhere,
 
-  /// The entire screen, excluding the target and popover.
-  excludeTarget,
+  /// The entire screen, excluding the child and popover.
+  excludeChild,
 
   /// Disables tapping outside of the popover to hide it.
   none,
@@ -170,22 +170,22 @@ class FPopover extends StatefulWidget {
   /// If the group id is null, then only this region is hit tested.
   ///
   /// ## Contract
-  /// Throws an [AssertionError] if the group id is not null and [hideOnTapOutside] is not set to
-  /// [FHidePopoverRegion.excludeTarget].
+  /// Throws an [AssertionError] if the group id is not null and [hideRegion] is not set to
+  /// [FPopoverHideRegion.excludeChild].
   /// {@endtemplate}
   final Object? groupId;
 
-  /// {@template forui.widgets.FPopover.hideOnTapOutside}
+  /// {@template forui.widgets.FPopover.hideRegion}
   /// The region that can be tapped to hide the popover.
   /// {@endtemplate}
   ///
-  /// Defaults to [FHidePopoverRegion.excludeTarget].
-  final FHidePopoverRegion hideOnTapOutside;
+  /// Defaults to [FPopoverHideRegion.excludeChild].
+  final FPopoverHideRegion hideRegion;
 
   /// {@template forui.widgets.FPopover.onTapOutsideHide}
   /// A callback that is called when the popover is hidden by tapping outside of it.
   ///
-  /// This is only called if [hideOnTapOutside] is set to [FHidePopoverRegion.anywhere] or [FHidePopoverRegion.excludeTarget].
+  /// This is only called if [hideRegion] is set to [FPopoverHideRegion.anywhere] or [FPopoverHideRegion.excludeChild].
   /// {@endtemplate}
   final VoidCallback? onTapHide;
 
@@ -250,7 +250,7 @@ class FPopover extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws an [AssertionError] if:
-  /// * [groupId] is not null and [hideOnTapOutside] is not set to [FHidePopoverRegion.excludeTarget].
+  /// * [groupId] is not null and [hideRegion] is not set to [FPopoverHideRegion.excludeChild].
   /// * neither [builder] nor [child] is provided.
   FPopover({
     required this.popoverBuilder,
@@ -261,7 +261,7 @@ class FPopover extends StatefulWidget {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.onTapHide,
     this.autofocus,
     this.focusNode,
@@ -277,8 +277,8 @@ class FPopover extends StatefulWidget {
     AlignmentGeometry? childAnchor,
     super.key,
   }) : assert(
-         groupId == null || hideOnTapOutside == FHidePopoverRegion.excludeTarget,
-         'groupId can only be used with FHidePopoverRegion.excludeTarget',
+         groupId == null || hideRegion == FPopoverHideRegion.excludeChild,
+         'groupId can only be used with FPopoverHideRegion.excludeChild',
        ),
        assert(
          focusNode == null || traversalEdgeBehavior == null,
@@ -304,7 +304,7 @@ class FPopover extends StatefulWidget {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('onTapOutsideHide', onTapHide))
       ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
       ..add(
@@ -383,7 +383,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
     var child = widget.builder(context, _controller, widget.child);
 
-    if (widget.hideOnTapOutside == FHidePopoverRegion.excludeTarget) {
+    if (widget.hideRegion == FPopoverHideRegion.excludeChild) {
       child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
     }
 
@@ -406,7 +406,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                 barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
                 semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
                 // The actual dismissal logic is handled in the TapRegion below.
-                onDismiss: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : () {},
+                onDismiss: widget.hideRegion == FPopoverHideRegion.none ? null : () {},
               ),
         portalBuilder: (context, _) {
           Widget popover = ScaleTransition(
@@ -423,7 +423,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                   onFocusChange: widget.onFocusChange,
                   child: TapRegion(
                     groupId: _groupId,
-                    onTapOutside: widget.hideOnTapOutside == FHidePopoverRegion.none ? null : (_) => _hide(),
+                    onTapOutside: widget.hideRegion == FPopoverHideRegion.none ? null : (_) => _hide(),
                     child: DecoratedBox(
                       decoration: style.decoration,
                       child: widget.popoverBuilder(context, _controller),

@@ -102,7 +102,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopoverMenu.tiles(
-          hideOnTapOutside: FHidePopoverRegion.none,
+          hideRegion: FPopoverHideRegion.none,
           menu: [
             FTileGroup(
               children: [FTile(title: const Text('Group 1'), onPress: () {})],

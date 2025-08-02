@@ -21,7 +21,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final Offset offset;
   @override
-  final FHidePopoverRegion hideOnTapOutside;
+  final FPopoverHideRegion hideRegion;
   @override
   final int hourInterval;
   @override
@@ -41,7 +41,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.hourInterval = 1,
     this.minuteInterval = 1,
     super.controller,
@@ -259,7 +259,7 @@ class _PickerPopover extends StatelessWidget {
     spacing: properties.spacing,
     shift: properties.shift,
     offset: properties.offset,
-    hideOnTapOutside: properties.hideOnTapOutside,
+    hideRegion: properties.hideRegion,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
     popoverBuilder: (_, _) => TextFieldTapRegion(

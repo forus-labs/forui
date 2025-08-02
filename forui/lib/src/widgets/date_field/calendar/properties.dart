@@ -20,13 +20,13 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
-  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
+  /// {@macro forui.widgets.FPopover.hideRegion}
   ///
-  /// Defaults to [FHidePopoverRegion.excludeTarget].
+  /// Defaults to [FPopoverHideRegion.excludeChild].
   ///
-  /// Setting [hideOnTapOutside] to [FHidePopoverRegion.anywhere] may result in the calendar disappearing and reappearing
+  /// Setting [hideRegion] to [FPopoverHideRegion.anywhere] may result in the calendar disappearing and reappearing
   /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
-  final FHidePopoverRegion hideOnTapOutside;
+  final FPopoverHideRegion hideRegion;
 
   /// Customizes the appearance of calendar days.
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
@@ -53,7 +53,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -71,7 +71,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
@@ -90,7 +90,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
           spacing == other.spacing &&
           shift == other.shift &&
           offset == other.offset &&
-          hideOnTapOutside == other.hideOnTapOutside &&
+          hideRegion == other.hideRegion &&
           dayBuilder == other.dayBuilder &&
           start == other.start &&
           end == other.end &&
@@ -105,7 +105,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
       spacing.hashCode ^
       shift.hashCode ^
       offset.hashCode ^
-      hideOnTapOutside.hashCode ^
+      hideRegion.hashCode ^
       dayBuilder.hashCode ^
       start.hashCode ^
       end.hashCode ^

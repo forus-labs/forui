@@ -22,7 +22,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final Offset offset;
   @override
-  final FHidePopoverRegion hideOnTapOutside;
+  final FPopoverHideRegion hideRegion;
   @override
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
   @override
@@ -51,7 +51,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -264,7 +264,7 @@ class _CalendarPopover extends StatelessWidget {
     spacing: properties.spacing,
     shift: properties.shift,
     offset: properties.offset,
-    hideOnTapOutside: properties.hideOnTapOutside,
+    hideRegion: properties.hideRegion,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
     popoverBuilder: (_, _) => TextFieldTapRegion(

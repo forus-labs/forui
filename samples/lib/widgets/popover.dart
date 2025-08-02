@@ -10,23 +10,23 @@ import 'package:forui_samples/sample.dart';
 @RoutePage()
 class PopoverPage extends Sample {
   final Axis axis;
-  final FHidePopoverRegion hideOnTapOutside;
+  final FPopoverHideRegion hideRegion;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
 
   PopoverPage({
     @queryParam String alignment = 'center',
     @queryParam String axis = 'vertical',
-    @queryParam String hideOnTapOutside = 'anywhere',
+    @queryParam String hideRegion = 'anywhere',
     @queryParam String shift = 'flip',
     @queryParam super.theme,
   }) : axis = switch (axis) {
          'horizontal' => Axis.horizontal,
          _ => Axis.vertical,
        },
-       hideOnTapOutside = switch (hideOnTapOutside) {
-         'anywhere' => FHidePopoverRegion.anywhere,
-         'excludeTarget' => FHidePopoverRegion.excludeTarget,
-         _ => FHidePopoverRegion.none,
+       hideRegion = switch (hideRegion) {
+         'anywhere' => FPopoverHideRegion.anywhere,
+         'excludeChild' => FPopoverHideRegion.excludeChild,
+         _ => FPopoverHideRegion.none,
        },
        shift = switch (shift) {
          'flip' => FPortalShift.flip,
@@ -50,7 +50,7 @@ class PopoverPage extends Sample {
       FPopover(
         popoverAnchor: axis == Axis.horizontal ? Alignment.bottomLeft : Alignment.topCenter,
         childAnchor: axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
-        hideOnTapOutside: hideOnTapOutside,
+        hideRegion: hideRegion,
         shift: shift,
         popoverBuilder: (context, _) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),

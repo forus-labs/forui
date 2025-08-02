@@ -147,8 +147,8 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
-  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
-  final FHidePopoverRegion hideOnTapOutside;
+  /// {@macro forui.widgets.FPopover.hideRegion}
+  final FPopoverHideRegion hideRegion;
 
   /// The builder that is called when the select is empty. Defaults to [FSelect.defaultEmptyBuilder].
   final ValueWidgetBuilder<FMultiSelectStyle> emptyBuilder;
@@ -214,7 +214,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
     ValueWidgetBuilder<FMultiSelectStyle> emptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
@@ -260,7 +260,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
-    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     ValueWidgetBuilder<FMultiSelectStyle> emptyBuilder = FMultiSelect.defaultEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
@@ -301,7 +301,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       spacing: spacing,
       shift: shift,
       offset: offset,
-      hideOnTapOutside: hideOnTapOutside,
+      hideRegion: hideRegion,
       emptyBuilder: emptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
@@ -358,7 +358,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
     ValueWidgetBuilder<FMultiSelectStyle> emptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
@@ -416,7 +416,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
-    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     ValueWidgetBuilder<FMultiSelectStyle> emptyBuilder = defaultEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
@@ -467,7 +467,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       spacing: spacing,
       shift: shift,
       offset: offset,
-      hideOnTapOutside: hideOnTapOutside,
+      hideRegion: hideRegion,
       emptyBuilder: emptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
@@ -508,7 +508,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.emptyBuilder = FMultiSelect.defaultEmptyBuilder,
     this.contentScrollController,
     this.contentScrollHandles = false,
@@ -562,7 +562,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       spacing: spacing,
       shift: shift,
       offset: offset,
-      hideOnTapOutside: hideOnTapOutside,
+      hideRegion: hideRegion,
       popoverBuilder: (context, controller) => _content(context, controller, style),
       enabled: enabled,
       autovalidateMode: autovalidateMode,
@@ -607,7 +607,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
@@ -651,7 +651,7 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     super.spacing,
     super.shift,
     super.offset,
-    super.hideOnTapOutside,
+    super.hideRegion,
     super.emptyBuilder,
     super.contentScrollController,
     super.contentScrollHandles,
@@ -723,7 +723,7 @@ class _SearchSelect<T> extends FMultiSelect<T> {
     super.spacing,
     super.shift,
     super.offset,
-    super.hideOnTapOutside,
+    super.hideRegion,
     super.emptyBuilder,
     super.contentScrollController,
     super.contentScrollHandles,

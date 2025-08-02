@@ -306,8 +306,8 @@ abstract class FTimeField extends StatefulWidget {
   ///
   /// The [offset] property controls the offset of the picker popover. Defaults to [Offset.zero].
   ///
-  /// [hideOnTapOutside] controls the region that can be tapped to hide the popover. Defaults to
-  /// [FHidePopoverRegion.anywhere].
+  /// [hideRegion] controls the region that can be tapped to hide the popover. Defaults to
+  /// [FPopoverHideRegion.anywhere].
   ///
   /// [hourInterval] and [minuteInterval] control the increment/decrement interval of the hour and minute respectively.
   /// Default to 1.
@@ -334,7 +334,7 @@ abstract class FTimeField extends StatefulWidget {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
     int hourInterval,
     int minuteInterval,
     ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,

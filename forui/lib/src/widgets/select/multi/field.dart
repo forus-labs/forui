@@ -33,7 +33,7 @@ class Field<T> extends FormField<Set<T>> {
   final FPortalSpacing spacing;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   final Offset offset;
-  final FHidePopoverRegion hideOnTapOutside;
+  final FPopoverHideRegion hideRegion;
   final ValueChanged<Set<T>>? onChange;
   final Widget Function(BuildContext, FMultiSelectController<T>) popoverBuilder;
   final int min;
@@ -61,7 +61,7 @@ class Field<T> extends FormField<Set<T>> {
     required this.spacing,
     required this.shift,
     required this.offset,
-    required this.hideOnTapOutside,
+    required this.hideRegion,
     required this.onChange,
     required this.popoverBuilder,
     required this.min,
@@ -106,7 +106,7 @@ class Field<T> extends FormField<Set<T>> {
                  spacing: spacing,
                  shift: shift,
                  offset: offset,
-                 hideOnTapOutside: hideOnTapOutside,
+                 hideRegion: hideRegion,
                  shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): state._toggle},
                  popoverBuilder: (context, controller) => InheritedSelectController<T>(
                    popover: state._controller.popover,
@@ -211,7 +211,7 @@ class Field<T> extends FormField<Set<T>> {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(IntProperty('min', min, defaultValue: 0))
       ..add(IntProperty('max', max, defaultValue: 0));

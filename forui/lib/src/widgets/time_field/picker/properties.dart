@@ -22,13 +22,13 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
-  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
+  /// {@macro forui.widgets.FPopover.hideRegion}
   ///
-  /// Defaults to [FHidePopoverRegion.excludeTarget].
+  /// Defaults to [FPopoverHideRegion.excludeChild].
   ///
-  /// Setting [hideOnTapOutside] to [FHidePopoverRegion.anywhere] may result in the calendar disappearing and reappearing
+  /// Setting [hideRegion] to [FPopoverHideRegion.anywhere] may result in the calendar disappearing and reappearing
   /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
-  final FHidePopoverRegion hideOnTapOutside;
+  final FPopoverHideRegion hideRegion;
 
   /// The interval between hours shown in the time picker. Defaults to 1.
   ///
@@ -46,7 +46,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.hourInterval = 1,
     this.minuteInterval = 1,
   });
@@ -60,7 +60,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(IntProperty('hourInterval', hourInterval))
       ..add(IntProperty('minuteInterval', minuteInterval));
   }
@@ -75,7 +75,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
           spacing == other.spacing &&
           shift == other.shift &&
           offset == other.offset &&
-          hideOnTapOutside == other.hideOnTapOutside &&
+          hideRegion == other.hideRegion &&
           hourInterval == other.hourInterval &&
           minuteInterval == other.minuteInterval;
 
@@ -86,7 +86,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
       spacing.hashCode ^
       shift.hashCode ^
       offset.hashCode ^
-      hideOnTapOutside.hashCode ^
+      hideRegion.hashCode ^
       hourInterval.hashCode ^
       minuteInterval.hashCode;
 }

@@ -163,8 +163,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
-  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
-  final FHidePopoverRegion hideOnTapOutside;
+  /// {@macro forui.widgets.FPopover.hideRegion}
+  final FPopoverHideRegion hideRegion;
 
   /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
@@ -224,7 +224,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
     bool autoHide,
     ValueWidgetBuilder<FSelectStyle> emptyBuilder,
     ScrollController? contentScrollController,
@@ -272,7 +272,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
-    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
     ValueWidgetBuilder<FSelectStyle> emptyBuilder = defaultEmptyBuilder,
     ScrollController? contentScrollController,
@@ -315,7 +315,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       spacing: spacing,
       shift: shift,
       offset: offset,
-      hideOnTapOutside: hideOnTapOutside,
+      hideRegion: hideRegion,
       autoHide: autoHide,
       emptyBuilder: emptyBuilder,
       contentScrollController: contentScrollController,
@@ -374,7 +374,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
     bool autoHide,
     ValueWidgetBuilder<FSelectStyle> emptyBuilder,
     ScrollController? contentScrollController,
@@ -434,7 +434,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
-    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
     ValueWidgetBuilder<FSelectStyle> emptyBuilder = defaultEmptyBuilder,
     ScrollController? contentScrollController,
@@ -487,7 +487,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       spacing: spacing,
       shift: shift,
       offset: offset,
-      hideOnTapOutside: hideOnTapOutside,
+      hideRegion: hideRegion,
       autoHide: autoHide,
       emptyBuilder: emptyBuilder,
       contentScrollController: contentScrollController,
@@ -531,7 +531,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.autoHide = true,
     this.emptyBuilder = defaultEmptyBuilder,
     this.contentScrollController,
@@ -578,7 +578,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
@@ -738,7 +738,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
           spacing: widget.spacing,
           shift: widget.shift,
           offset: widget.offset,
-          hideOnTapOutside: widget.hideOnTapOutside,
+          hideRegion: widget.hideRegion,
           shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
           popoverBuilder: (_, popoverController) => TextFieldTapRegion(
             child: InheritedSelectController<T>(

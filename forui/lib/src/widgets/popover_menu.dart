@@ -90,8 +90,8 @@ class FPopoverMenu extends StatelessWidget {
   /// {@macro forui.widgets.FPopover.groupId}
   final Object? groupId;
 
-  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
-  final FHidePopoverRegion hideOnTapOutside;
+  /// {@macro forui.widgets.FPopover.hideRegion}
+  final FPopoverHideRegion hideRegion;
 
   /// {@macro forui.widgets.FPopover.onTapOutsideHide}
   final VoidCallback? onTapHide;
@@ -156,7 +156,7 @@ class FPopoverMenu extends StatelessWidget {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.hideRegion = FPopoverHideRegion.anywhere,
     this.onTapHide,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
@@ -213,7 +213,7 @@ class FPopoverMenu extends StatelessWidget {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.groupId,
-    this.hideOnTapOutside = FHidePopoverRegion.anywhere,
+    this.hideRegion = FPopoverHideRegion.anywhere,
     this.onTapHide,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
@@ -254,7 +254,7 @@ class FPopoverMenu extends StatelessWidget {
       shift: shift,
       offset: offset,
       groupId: groupId,
-      hideOnTapOutside: hideOnTapOutside,
+      hideRegion: hideRegion,
       onTapHide: onTapHide,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -285,7 +285,7 @@ class FPopoverMenu extends StatelessWidget {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))
       ..add(

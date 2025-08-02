@@ -36,7 +36,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.spacing,
     super.shift,
     super.offset,
-    super.hideOnTapOutside,
+    super.hideRegion,
     super.autoHide,
     super.emptyBuilder,
     super.contentScrollController,
