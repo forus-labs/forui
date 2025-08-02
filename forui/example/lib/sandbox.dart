@@ -29,8 +29,6 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FAutocomplete(label: Text('Autocomplete'), hint: 'What can it do?', items: features),
-    );
+    return Center(child: const FProgress.circularIcon());
   }
 }

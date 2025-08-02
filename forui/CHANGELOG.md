@@ -41,6 +41,8 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Change `FTappableStyle.mouseCursor` to `MouseCursor.defer`. See https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
   for our rationale behind this change.
 
+* Fix `FProgress.circularIcon()` using incorrect color.
+* Fix `FScaffold` not propagating `IconTheme` from `FStyle.iconStyle`.
 * Fix `FTabs` throwing an assertion error if `FTabController` is provided with a `initialIndex` > 0.
 
 
