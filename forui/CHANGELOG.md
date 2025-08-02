@@ -16,12 +16,25 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Remove `FAccordionController.validate(...)`.
 
 
-## `FAutocomplete` (new)
+### `FAutocomplete` (new)
 * Add `FAutocomplete`.
 * Add `FAutocompleteController`.
 * Add `FAutocompleteStyle`.
 * Add `FAutocompleteSection`.
 * Add `FAutocompleteItem`.
+
+
+### `FBreadcrumb`
+* Add `FBreadcrumb.collapsed(onTapHide: ...)`.
+
+* **Breaking** Change `FBreadcrumb.hideOnTapOutside` to `FBreadcrumb.hideRegion`.
+
+
+### `FDateField`
+* Add `FDateField.calendar(onTapHide: ...)`.
+* Add `FDateFieldCalendarProperties.onTapHide`.
+
+* **Breaking** Change `FDateField.hideOnTapOutside` to `FDateField.hideRegion`.
 
 
 ### `FMultiSelect` (new)
@@ -31,15 +44,38 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * Add `FMultiSelectTag`.
 
 
-### Others
-* Add `FTypeaheadController`.
+### `FPopover` & `FPopoverMenu`
 * Add `FPopover.onTapHide`.
 * Add `FPopoverMenu.onTapHide`.
 
-Change vertical padding
+* **Breaking** Change `FPopover.hideOnTapOutside` to `FPopover.hideRegion`.
+* **Breaking** Change `FPopoverMenu.hideOnTapOutside` to `FPopoverMenu.hideRegion`.
+* **Breaking** Change `FHidePopoverRegion` to `FPopoverHideRegion`.
+* **Breaking** Change `FHidePopoverRegion.excludeTarget` to `FHidePopoverRegion.excludeChild`.
 
+
+### `FSelect`
 * Rename `FSelect.divider` to `FSelect.contentDivider`.
 * Change `FSelect`'s vertical padding for default loading and empty indicators to be the same height.
+* **Breaking** Change `FSelect.hideOnTapOutside` to `FSelect.hideRegion`.
+
+
+### `FSelectMenuTile`
+* Add `FSelectMenuTile.onTapHide`.
+
+* **Breaking** Change `FSelectMenuTile.hideOnTapOutside` to `FSelectMenuTile.hideRegion`.
+
+
+### `FTimeField`
+* Add `FTimeField.picker(onTapHide: ...)`.
+
+* **Breaking** Change `FTimeField.hideOnTapOutside` to `FTimeField.hideRegion`.
+
+
+### Others
+* Add `FSelectMenuTile.onTapHide`.
+* Add `FTypeaheadController`.
+
 * Change `FMultiValueNotifier` to be non-abstract.
 * **Breaking** Change `FTappableStyle.mouseCursor` to `MouseCursor.defer`. See https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
   for our rationale behind this change.
