@@ -42,6 +42,7 @@ We've done a pass over the controllers in Forui to make them more consistent and
   for our rationale behind this change.
 
 * Fix `FTabs` throwing an assertion error if `FTabController` is provided with a `initialIndex` > 0.
+* Fix `FScaffold` not propagating `IconTheme` from `FStyle.iconStyle`.
 
 
 ## 0.14.1
