@@ -109,30 +109,33 @@ class FScaffold extends StatelessWidget {
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: style.systemOverlayStyle,
-      child: FSheets(
-        child: FToaster(
-          style: toasterStyle?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle,
-          child: Row(
-            children: [
-              if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
-              Expanded(
-                child: ColoredBox(
-                  color: style.backgroundColor,
-                  child: _RenderScaffoldWidget(
-                    resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-                    children: [
-                      Column(
-                        children: [
-                          if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-                          Expanded(child: child),
-                        ],
-                      ),
-                      footer,
-                    ],
+      child: IconTheme( // TODO: Move to ForuiApp.
+        data: context.theme.style.iconStyle,
+        child: FSheets(
+          child: FToaster(
+            style: toasterStyle?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle,
+            child: Row(
+              children: [
+                if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
+                Expanded(
+                  child: ColoredBox(
+                    color: style.backgroundColor,
+                    child: _RenderScaffoldWidget(
+                      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+                      children: [
+                        Column(
+                          children: [
+                            if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                            Expanded(child: child),
+                          ],
+                        ),
+                        footer,
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
