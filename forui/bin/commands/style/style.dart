@@ -331,7 +331,7 @@ enum Style {
     'FProgressStyles',
     <String>['progresses'],
     <String>['FProgressStyles', 'FLinearProgressStyle'],
-    'FProgressStyles progressStyles({\n  required FColors colors,\n  required FStyle style,\n}) => FProgressStyles(\n  linearProgressStyle: _linearProgressStyle(colors: colors, style: style),\n  circularIconProgressStyle: IconThemeData(\n    color: colors.mutedForeground,\n    size: 20,\n  ),\n);\n',
+    'FProgressStyles progressStyles({\n  required FColors colors,\n  required FStyle style,\n}) => FProgressStyles(\n  linearProgressStyle: _linearProgressStyle(colors: colors, style: style),\n  circularIconProgressStyle: IconThemeData(\n    color: style.iconStyle.color,\n    size: 20,\n  ),\n);\n',
   ),
   fradiostyle(
     'FRadioStyle',
