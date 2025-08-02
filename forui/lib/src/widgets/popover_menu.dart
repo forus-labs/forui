@@ -93,7 +93,9 @@ class FPopoverMenu extends StatelessWidget {
   /// {@macro forui.widgets.FPopover.hideRegion}
   final FPopoverHideRegion hideRegion;
 
-  /// {@macro forui.widgets.FPopover.onTapOutsideHide}
+  /// {@macro forui.widgets.FPopover.onTapHide}
+  ///
+  /// This is only called if [hideRegion] is set to [FPopoverHideRegion.anywhere] or [FPopoverHideRegion.excludeChild].
   final VoidCallback? onTapHide;
 
   /// {@macro forui.foundation.doc_templates.autofocus}

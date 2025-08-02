@@ -381,6 +381,7 @@ abstract class FDateField extends StatefulWidget {
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
+    VoidCallback? onTapHide,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
     ValueWidgetBuilder<(FDateFieldStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,

@@ -30,6 +30,9 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
   final FPopoverHideRegion hideRegion;
 
+  /// Callback that is called when the time picker is tapped to hide it.
+  final VoidCallback? onTapHide;
+
   /// The interval between hours shown in the time picker. Defaults to 1.
   ///
   /// For example, setting this to 6 will show hours like 0, 6, 12, and 18.
@@ -47,6 +50,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.onTapHide,
     this.hourInterval = 1,
     this.minuteInterval = 1,
   });
@@ -61,6 +65,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(IntProperty('hourInterval', hourInterval))
       ..add(IntProperty('minuteInterval', minuteInterval));
   }
@@ -76,6 +81,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
           shift == other.shift &&
           offset == other.offset &&
           hideRegion == other.hideRegion &&
+          onTapHide == other.onTapHide &&
           hourInterval == other.hourInterval &&
           minuteInterval == other.minuteInterval;
 
@@ -87,6 +93,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
       shift.hashCode ^
       offset.hashCode ^
       hideRegion.hashCode ^
+      onTapHide.hashCode ^
       hourInterval.hashCode ^
       minuteInterval.hashCode;
 }

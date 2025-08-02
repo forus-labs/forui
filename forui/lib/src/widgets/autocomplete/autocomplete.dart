@@ -269,6 +269,9 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.widgets.FPopover.hideRegion}
   final FPopoverHideRegion hideRegion;
 
+  /// {@macro forui.widgets.FPopover.onTapHide}
+  final VoidCallback? onTapHide;
+
   /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
@@ -318,6 +321,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     TextAlign textAlign = TextAlign.start,
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
+    VoidCallback? onTapHide,
     bool autofocus = false,
     WidgetStatesController? statesController,
     String obscuringCharacter = '•',
@@ -402,6 +406,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          textAlign: textAlign,
          textAlignVertical: textAlignVertical,
          textDirection: textDirection,
+         onTapHide: onTapHide,
          autofocus: autofocus,
          statesController: statesController,
          obscuringCharacter: obscuringCharacter,
@@ -487,6 +492,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
     this.textDirection,
+    this.onTapHide,
     this.autofocus = false,
     this.statesController,
     this.obscuringCharacter = '•',
@@ -640,6 +646,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('filter', filter))
@@ -823,6 +830,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
             _previous = restore;
             _controller.text = restore;
           }
+          widget.onTapHide?.call();
         },
         focusNode: _popoverFocus,
         popoverBuilder: (_, popoverController) => TextFieldTapRegion(

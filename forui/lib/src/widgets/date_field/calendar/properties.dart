@@ -28,6 +28,11 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// when pressing and holding the input field, due to the popover being hidden and then immediately shown again.
   final FPopoverHideRegion hideRegion;
 
+  /// {@macro forui.widgets.FPopover.onTapHide}
+  ///
+  /// This is only called if [hideRegion] is set to [FPopoverHideRegion.anywhere] or [FPopoverHideRegion.excludeChild].
+  final VoidCallback? onTapHide;
+
   /// Customizes the appearance of calendar days.
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
 
@@ -54,6 +59,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.onTapHide,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -72,6 +78,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
@@ -91,6 +98,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
           shift == other.shift &&
           offset == other.offset &&
           hideRegion == other.hideRegion &&
+          onTapHide == other.onTapHide &&
           dayBuilder == other.dayBuilder &&
           start == other.start &&
           end == other.end &&
@@ -106,6 +114,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
       shift.hashCode ^
       offset.hashCode ^
       hideRegion.hashCode ^
+      onTapHide.hashCode ^
       dayBuilder.hashCode ^
       start.hashCode ^
       end.hashCode ^

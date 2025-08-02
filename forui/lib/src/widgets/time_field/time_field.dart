@@ -335,6 +335,7 @@ abstract class FTimeField extends StatefulWidget {
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
+    VoidCallback? onTapHide,
     int hourInterval,
     int minuteInterval,
     ValueWidgetBuilder<(FTimeFieldStyle, FTextFieldStyle, Set<WidgetState>)> builder,

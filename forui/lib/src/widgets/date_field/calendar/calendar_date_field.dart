@@ -24,6 +24,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final FPopoverHideRegion hideRegion;
   @override
+  final VoidCallback? onTapHide;
+  @override
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
   @override
   final DateTime? start;
@@ -52,6 +54,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.onTapHide,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -90,6 +93,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
