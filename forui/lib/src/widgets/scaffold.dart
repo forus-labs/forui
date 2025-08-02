@@ -109,7 +109,8 @@ class FScaffold extends StatelessWidget {
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: style.systemOverlayStyle,
-      child: IconTheme( // TODO: Move to ForuiApp.
+      child: IconTheme(
+        // TODO: Move to ForuiApp.
         data: context.theme.style.iconStyle,
         child: FSheets(
           child: FToaster(
