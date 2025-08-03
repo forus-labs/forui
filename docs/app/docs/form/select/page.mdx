@@ -80,9 +80,9 @@ FSelect<String>(
   onChange: (value) => print('Selected country: $value'),
   onSaved: (value) => print('Saved country: $value'),
   autovalidateMode: AutovalidateMode.onUserInteraction,
-  builder: (context, styles, child) => child!,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
-  suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
+  builder: (context, style, state, child) => child,
+  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
+  suffixBuilder: (context, style, states) => Icon(FIcons.arrowDown),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   contentDivider: FItemDivider.none,
@@ -130,9 +130,9 @@ FSelect<Locale>.fromMap(
   onChange: (value) => print('Selected country: $value'),
   onSaved: (value) => print('Saved country: $value'),
   autovalidateMode: AutovalidateMode.onUserInteraction,
-  builder: (context, styles, child) => child!,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
-  suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
+  builder: (context, style, state, child) => child,
+  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
+  suffixBuilder: (context, style, states) => Icon(FIcons.arrowDown),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
   contentScrollHandles: true,
@@ -158,7 +158,7 @@ FSelect<User>.search(
   contentDivider: FItemDivider.none,
   contentScrollHandles: false,
   contentPhysics: const BouncingScrollPhysics(),
-  emptyBuilder: (context, style, _) => Text('No results'),
+  contentEmptyBuilder: (context, style) => Text('No results'),
   filter: (query) async {
     // Fetch users based on search query
     return fetchUsers(query);
@@ -171,8 +171,8 @@ FSelect<User>.search(
     autofocus: true,
     hint: 'Type to search...',
   ),
-  searchLoadingBuilder: (context, style, _) => Text('Loading...'),
-  searchErrorBuilder: (context, error, stackTrace) => Text('Error...'),
+  contentLoadingBuilder: (context, style) => Text('Loading...'),
+  contentErrorBuilder: (context, error, stackTrace) => Text('Error...'),
 );
 ```
 
@@ -201,12 +201,12 @@ FSelect<User>.searchFromMap(
   contentDivider: FItemDivider.none,
   contentScrollHandles: false,
   contentPhysics: const BouncingScrollPhysics(),
-  emptyBuilder: (context, style, _) => Text('No results'),
+  contentEmptyBuilder: (context, style) => Text('No results'),
   filter: (query) async {
     // Fetch users based on search query
     return fetchUsers(query);
   },
-  contentBuilder: (context, users) => [
+  contentBuilder: (context, style, users) => [
     for (final user in users)
       FSelectItem(value: user, child: Text('${user.firstName} ${user.lastName}')),
   ],
@@ -214,8 +214,8 @@ FSelect<User>.searchFromMap(
     autofocus: true,
     hint: 'Type to search...',
   ),
-  searchLoadingBuilder: (context, style, _) => Text('Loading...'),
-  searchErrorBuilder: (context, error, stackTrace) => Text('Error...'),
+  contentLoadingBuilder: (context, style) => Text('Loading...'),
+  contentErrorBuilder: (context, error, stackTrace) => Text('Error...'),
 );
 ```
 
@@ -402,7 +402,7 @@ FSelect<User>.searchFromMap(
         hint: 'Select a fruit',
         format: (s) => s,
         filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem.text(fruit)],
       );
     }
     ```
@@ -426,7 +426,7 @@ FSelect<User>.searchFromMap(
           await Future.delayed(const Duration(seconds: 1));
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
       );
     }
     ```
@@ -450,11 +450,11 @@ FSelect<User>.searchFromMap(
           await Future.delayed(const Duration(seconds: 1));
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        searchLoadingBuilder: (context, style, _) => Padding(
+        contentLoadingBuilder: (context, style) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.maybeResolve({})),
         ),
-        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
       );
     }
     ```
@@ -478,8 +478,8 @@ FSelect<User>.searchFromMap(
           await Future.delayed(const Duration(seconds: 1));
           throw StateError('Error loading data');
         },
-        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
-        searchErrorBuilder: (context, error, trace) {
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        contentErrorBuilder: (context, error, trace) {
           final style = context.theme.selectStyle.iconStyle;
           return Padding(
             padding: const EdgeInsets.all(8.0),

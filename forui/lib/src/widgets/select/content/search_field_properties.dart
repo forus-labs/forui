@@ -9,17 +9,10 @@ import 'package:forui/forui.dart';
 /// The search field's properties.
 class FSelectSearchFieldProperties with Diagnosticable {
   /// The search field's default prefix builder that displays a search icon.
-  static Widget defaultIconBuilder(
-    BuildContext _,
-    (FSelectSearchStyle, FTextFieldStyle, Set<WidgetState>) styles,
-    Widget? _,
-  ) {
-    final style = styles.$1.iconStyle;
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(start: 10.0, end: 4.0),
-      child: Icon(FIcons.search, size: style.size, color: style.color),
-    );
-  }
+  static Widget defaultIconBuilder(BuildContext _, FSelectSearchStyle style, Set<WidgetState> states) => Padding(
+    padding: const EdgeInsetsDirectional.only(start: 10.0, end: 4.0),
+    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.search)),
+  );
 
   static bool _clearable(TextEditingValue _) => false;
 
@@ -176,10 +169,10 @@ class FSelectSearchFieldProperties with Diagnosticable {
   final SpellCheckConfiguration? spellCheckConfiguration;
 
   /// The prefix builder. Defaults to a search icon.
-  final ValueWidgetBuilder<(FSelectSearchStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
+  final FFieldIconBuilder<FSelectSearchStyle>? prefixBuilder;
 
   /// {@macro forui.text_field.suffixBuilder}
-  final ValueWidgetBuilder<(FSelectSearchStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
+  final FFieldIconBuilder<FSelectSearchStyle>? suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue) clearable;

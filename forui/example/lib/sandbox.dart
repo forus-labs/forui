@@ -29,12 +29,15 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: FSelect<String>(
-        hint: 'Select a fruit',
-        format: (s) => s,
-        children: [for (final fruit in features) FSelectItem(fruit, fruit)],
-      ),
+    return Column(
+      spacing: 5,
+      children: [
+        FMultiSelect<String>(format: Text.new, children: [for (final fruit in features) FSelectItem(fruit, fruit)]),
+        FButton(onPress: () {}, child: Text('Button')),
+        FButton(style: FButtonStyle.ghost(), onPress: () {}, child: Text('Button')),
+        FButton(style: FButtonStyle.secondary(), onPress: () {}, child: Text('Button')),
+        FButton(style: FButtonStyle.outline(), onPress: () {}, child: Text('Button')),
+      ],
     );
   }
 }

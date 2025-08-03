@@ -185,7 +185,7 @@ class AsyncLoadingAutocompletePage extends Sample {
         await Future.delayed(const Duration(seconds: 3));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      contentLoadingBuilder: (context, style, _) => Padding(
+      contentLoadingBuilder: (context, style) => Padding(
         padding: const EdgeInsets.all(14.0),
         child: Text('Here be dragons...', style: style.emptyTextStyle),
       ),

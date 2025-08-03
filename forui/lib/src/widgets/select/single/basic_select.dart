@@ -38,7 +38,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.offset,
     super.hideRegion,
     super.autoHide,
-    super.emptyBuilder,
+    super.contentEmptyBuilder,
     super.contentScrollController,
     super.contentScrollHandles,
     super.contentPhysics,
@@ -55,7 +55,7 @@ class _BasicSelectState<T> extends _State<_BasicSelect<T>, T> {
   @override
   Widget content(BuildContext context, FSelectStyle style) {
     if (widget.children.isEmpty) {
-      return widget.emptyBuilder(context, style, null);
+      return widget.contentEmptyBuilder(context, style);
     }
 
     return Content<T>(

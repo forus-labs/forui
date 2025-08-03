@@ -102,29 +102,6 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.dateFieldStyle) ?? context.theme.dateFieldStyle;
-
-    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefix = switch (widget.prefixBuilder) {
-      null => null,
-      final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
-    };
-
-    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffix = switch (widget.suffixBuilder) {
-      null => null,
-      final builder => (context, styles, child) => builder(context, (style, styles.$1, styles.$2), child),
-    };
-
-    final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder = switch (widget.calendar) {
-      null => (context, data, child) => widget.builder(context, (style, data.$1, data.$2), child!),
-      final properties => (context, data, child) => _CalendarPopover(
-        controller: _controller,
-        style: style,
-        properties: properties,
-        autofocus: false,
-        fieldFocusNode: null,
-        child: widget.builder(context, (style, data.$1, data.$2), child!),
-      ),
-    };
-
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(LogicalKeyboardKey.enter): () {
@@ -156,11 +133,25 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         onEditingComplete: widget.onEditingComplete,
         mouseCursor: widget.mouseCursor,
         canRequestFocus: widget.canRequestFocus,
-        prefixBuilder: prefix,
-        suffixBuilder: suffix,
+        prefixBuilder: widget.prefixBuilder == null
+            ? null
+            : (context, _, states) => widget.prefixBuilder!(context, style, states),
+        suffixBuilder: widget.suffixBuilder == null
+            ? null
+            : (context, _, states) => widget.suffixBuilder!(context, style, states),
         localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
         baselineYear: widget.baselineInputYear,
-        builder: builder,
+        builder: switch (widget.calendar) {
+          null => (context, _, states, child) => widget.builder(context, style, states, child),
+          final properties => (context, _, states, child) => _CalendarPopover(
+            controller: _controller,
+            style: style,
+            properties: properties,
+            autofocus: false,
+            fieldFocusNode: null,
+            child: widget.builder(context, style, states, child),
+          ),
+        },
       ),
     );
   }

@@ -198,7 +198,7 @@ class SyncSelectPage extends Sample {
       hint: 'Select a fruit',
       format: (s) => s,
       filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
   );
 }
@@ -217,7 +217,7 @@ class AsyncSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
   );
 }
@@ -236,11 +236,11 @@ class AsyncLoadingSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      searchLoadingBuilder: (context, style, _) => Padding(
+      contentLoadingBuilder: (context, style) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
       ),
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
     ),
   );
 }
@@ -259,8 +259,8 @@ class AsyncErrorSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         throw StateError('Error loading data');
       },
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
-      searchErrorBuilder: (context, error, trace) {
+      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      contentErrorBuilder: (context, error, trace) {
         final style = context.theme.selectStyle.iconStyle;
         return Padding(
           padding: const EdgeInsets.all(8.0),

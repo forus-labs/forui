@@ -11,15 +11,9 @@ import 'package:forui/src/widgets/select/content/content.dart';
 
 part 'search_content.style.dart';
 
-/// A [FSelect] search field's query and results.
-typedef FSelectSearchData<T> = ({String query, Iterable<T> values});
-
-/// A [FSelect] search result's filter.
-typedef FSelectSearchFilter<T> = FutureOr<Iterable<T>> Function(String query);
-
 /// A builder for [FSelect] search results.
 typedef FSelectSearchContentBuilder<T> =
-    List<FSelectItemMixin> Function(BuildContext context, FSelectSearchData<T> data);
+    List<FSelectItemMixin> Function(BuildContext context, String query, Iterable<T> values);
 
 @internal
 class SearchContent<T> extends StatefulWidget {
@@ -32,8 +26,8 @@ class SearchContent<T> extends StatefulWidget {
   final bool scrollHandles;
   final ScrollPhysics physics;
   final FItemDivider divider;
-  final FSelectSearchFilter<T> filter;
-  final ValueWidgetBuilder<FSelectSearchStyle> loadingBuilder;
+  final FutureOr<Iterable<T>> Function(String) filter;
+  final Widget Function(BuildContext, FSelectSearchStyle) loadingBuilder;
   final FSelectSearchContentBuilder<T> builder;
   final WidgetBuilder emptyBuilder;
   final Widget Function(BuildContext, Object?, StackTrace)? errorBuilder;
@@ -83,7 +77,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   final FocusNode _focus = FocusNode(debugLabel: 'search field');
   late TextEditingController _controller;
   late String _previous;
-  late FutureOr<FSelectSearchData<T>> _data;
+  late FutureOr<Iterable<T>> _data;
 
   @override
   void initState() {
@@ -92,7 +86,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     _controller.addListener(_update);
 
     _previous = _controller.text;
-    _data = _filter(_controller.text);
+    _data = widget.filter(_controller.text);
   }
 
   @override
@@ -108,7 +102,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       _controller.addListener(_update);
 
       _previous = _controller.text;
-      _data = _filter(_controller.text);
+      _data = widget.filter(_controller.text);
     }
   }
 
@@ -118,15 +112,10 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       setState(() {
         // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
         // results in an assertion error being thrown.
-        _data = _filter(_controller.text);
+        _data = widget.filter(_controller.text);
       });
     }
   }
-
-  FutureOr<FSelectSearchData<T>> _filter(String query) => switch (widget.filter(query)) {
-    final Future<Iterable<T>> values => values.then((values) => (query: query, values: values)),
-    final values => (query: query, values: values),
-  };
 
   @override
   void dispose() {
@@ -141,9 +130,6 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   @override
   Widget build(BuildContext context) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    final prefix = widget.properties.prefixBuilder;
-    final suffix = widget.properties.suffixBuilder;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -194,28 +180,28 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             contextMenuBuilder: widget.properties.contextMenuBuilder,
             undoController: widget.properties.undoController,
             spellCheckConfiguration: widget.properties.spellCheckConfiguration,
-            prefixBuilder: prefix == null
+            prefixBuilder: widget.properties.prefixBuilder == null
                 ? null
-                : (context, style, child) => prefix(context, (widget.searchStyle, style.$1, style.$2), child),
-            suffixBuilder: suffix == null
+                : (context, _, states) => widget.properties.prefixBuilder!(context, widget.searchStyle, states),
+            suffixBuilder: widget.properties.suffixBuilder == null
                 ? null
-                : (context, style, child) => suffix(context, (widget.searchStyle, style.$1, style.$2), child),
+                : (context, _, states) => widget.properties.suffixBuilder!(context, widget.searchStyle, states),
             clearable: widget.properties.clearable,
           ),
         ),
         FDivider(style: widget.searchStyle.dividerStyle),
         switch (_data) {
-          final FSelectSearchData<T> data => _content(context, data),
-          final Future<FSelectSearchData<T>> future => FutureBuilder(
+          final Iterable<T> data => _content(context, data),
+          final Future<Iterable<T>> future => FutureBuilder(
             future: future,
             builder: (context, snapshot) => switch (snapshot.connectionState) {
-              ConnectionState.waiting => Center(child: widget.loadingBuilder(context, widget.searchStyle, null)),
+              ConnectionState.waiting => Center(child: widget.loadingBuilder(context, widget.searchStyle)),
               _ when snapshot.hasError && widget.errorBuilder != null => widget.errorBuilder!.call(
                 context,
                 snapshot.error,
                 snapshot.stackTrace!,
               ),
-              _ => _content(context, snapshot.data ?? (query: '', values: [])),
+              _ => _content(context, snapshot.data ?? []),
             },
           ),
         },
@@ -223,8 +209,8 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     );
   }
 
-  Widget _content(BuildContext context, FSelectSearchData<T> data) {
-    final children = widget.builder(context, data);
+  Widget _content(BuildContext context, Iterable<T> data) {
+    final children = widget.builder(context, _controller.text, data);
     if (children.isEmpty) {
       return widget.emptyBuilder(context);
     }

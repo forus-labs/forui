@@ -49,7 +49,7 @@ void main() {
           format: (s) => s,
           searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
           filter: (_) => [],
-          contentBuilder: (_, _) => [],
+          contentBuilder: (_, _, _) => [],
         ),
       ),
     );
@@ -61,7 +61,7 @@ void main() {
 
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<String>.search(key: key, format: (s) => s, filter: (_) => [], contentBuilder: (_, _) => []),
+        child: FSelect<String>.search(key: key, format: (s) => s, filter: (_) => [], contentBuilder: (_, _, _) => []),
       ),
     );
 
@@ -80,7 +80,7 @@ void main() {
           format: (s) => s,
           searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
           filter: (_) => [],
-          contentBuilder: (_, _) => [],
+          contentBuilder: (_, _, _) => [],
         ),
       ),
     );
@@ -106,7 +106,7 @@ void main() {
           searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
           filter: (query) =>
               query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
-          contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+          contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
         ),
       ),
     );

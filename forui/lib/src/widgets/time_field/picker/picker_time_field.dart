@@ -195,15 +195,15 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         enableInteractiveSelection: false,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, styles, _) => widget.prefixBuilder!(context, (style, styles.$1, styles.$2), null),
+            : (context, _, states) => widget.prefixBuilder!(context, style, states),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, styles, _) => widget.suffixBuilder!(context, (style, styles.$1, styles.$2), null),
+            : (context, _, states) => widget.suffixBuilder!(context, style, states),
         label: widget.label,
         description: widget.description,
         enabled: widget.enabled,
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
-        builder: (context, styles, child) => _PickerPopover(
+        builder: (context, _, states, field) => _PickerPopover(
           controller: _controller,
           style: style,
           hour24: widget.hour24,
@@ -212,7 +212,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
           fieldFocusNode: _focus,
           child: CallbackShortcuts(
             bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
-            child: widget.builder(context, (style, styles.$1, styles.$2), child),
+            child: widget.builder(context, style, states, field),
           ),
         ),
       ),

@@ -13,9 +13,6 @@ import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 
 part 'autocomplete.style.dart';
 
-/// A [FAutocomplete]'s results filter.
-typedef FAutocompleteFilter = FutureOr<Iterable<String>> Function(String query);
-
 /// A builder for [FAutocomplete]'s results.
 typedef FAutoCompleteContentBuilder =
     List<FAutocompleteItemMixin> Function(BuildContext context, String query, Iterable<String> values);
@@ -33,13 +30,13 @@ typedef FAutoCompleteContentBuilder =
 /// * [FAutocompleteStyle] for customizing the appearance of an autocomplete.
 class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
-  static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style, Widget? _) => Padding(
+  static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style) => Padding(
     padding: const EdgeInsets.all(13),
     child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
   );
 
   /// The default empty builder that shows a localized message when there are no results.
-  static Widget defaultContentEmptyBuilder(BuildContext context, FAutocompleteContentStyle style, Widget? _) {
+  static Widget defaultContentEmptyBuilder(BuildContext context, FAutocompleteContentStyle style) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
@@ -49,7 +46,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
 
   static bool _clearable(TextEditingValue _) => false;
 
-  static Widget _builder(BuildContext _, (FAutocompleteStyle, Set<WidgetState>) _, Widget? child) => child!;
+  static Widget _builder(BuildContext _, FAutocompleteStyle _, Set<WidgetState> _, Widget? child) => child!;
 
   /// The controller.
   final FAutocompleteController? controller;
@@ -150,7 +147,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.text_field.onChange}
   final ValueChanged<String>? onChange;
 
-
   /// {@macro forui.text_field.onTap}
   final bool onTapAlwaysCalled;
 
@@ -222,10 +218,10 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final SpellCheckConfiguration? spellCheckConfiguration;
 
   /// {@macro forui.text_field.prefixBuilder}
-  final ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)>? prefixBuilder;
+  final FFieldIconBuilder<FAutocompleteStyle>? prefixBuilder;
 
   /// {@macro forui.text_field.suffixBuilder}
-  final ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)>? suffixBuilder;
+  final FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue) clearable;
@@ -278,13 +274,13 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The builder used to decorate the autocomplete. It should always use the given child.
   ///
   /// Defaults to returning the given child.
-  final ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)> builder;
+  final FFieldBuilder<FAutocompleteStyle> builder;
 
   /// A callback that produces a list of items based on the query either synchronously or asynchronously.
-  final FAutocompleteFilter filter;
+  final FutureOr<Iterable<String>> Function(String text) filter;
 
   /// The builder that is called when the select is empty. Defaults to [defaultContentEmptyBuilder].
-  final ValueWidgetBuilder<FAutocompleteContentStyle> contentEmptyBuilder;
+  final Widget Function(BuildContext, FAutocompleteContentStyle) contentEmptyBuilder;
 
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
@@ -299,7 +295,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FAutoCompleteContentBuilder contentBuilder;
 
   /// A callback that is used to show a loading indicator while the results is processed.
-  final ValueWidgetBuilder<FAutocompleteContentStyle> contentLoadingBuilder;
+  final Widget Function(BuildContext, FAutocompleteContentStyle) contentLoadingBuilder;
 
   /// A callback that is used to show an error message when [filter] is asynchronous and fails.
   final Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder;
@@ -361,8 +357,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     bool canRequestFocus = true,
     UndoHistoryController? undoController,
     SpellCheckConfiguration? spellCheckConfiguration,
-    ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)>? prefixBuilder,
-    ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)>? suffixBuilder,
+    FFieldIconBuilder<FAutocompleteStyle>? prefixBuilder,
+    FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder,
     bool Function(TextEditingValue) clearable = _clearable,
     FormFieldSetter<String>? onSaved,
     FormFieldValidator<String>? validator,
@@ -378,14 +374,14 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
-    ValueWidgetBuilder<(FAutocompleteStyle, Set<WidgetState>)> builder = _builder,
+    FFieldBuilder<FAutocompleteStyle> builder = _builder,
     FutureOr<Iterable<String>> Function(String)? filter,
     FAutoCompleteContentBuilder? contentBuilder,
     ScrollController? contentScrollController,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = FItemDivider.none,
-    ValueWidgetBuilder<FAutocompleteContentStyle> contentEmptyBuilder = defaultContentEmptyBuilder,
-    ValueWidgetBuilder<FAutocompleteContentStyle> contentLoadingBuilder = defaultContentLoadingBuilder,
+    Widget Function(BuildContext, FAutocompleteContentStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
+    Widget Function(BuildContext, FAutocompleteContentStyle) contentLoadingBuilder = defaultContentLoadingBuilder,
     Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
     Key? key,
   }) : this.builder(
@@ -804,10 +800,10 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       spellCheckConfiguration: widget.spellCheckConfiguration,
       prefixBuilder: widget.prefixBuilder == null
           ? null
-          : (context, styles, _) => widget.prefixBuilder!(context, (style, styles.$2), null),
+          : (context, _, states) => widget.prefixBuilder!(context, style, states),
       suffixBuilder: widget.suffixBuilder == null
           ? null
-          : (context, styles, _) => widget.suffixBuilder!(context, (style, styles.$2), null),
+          : (context, _, states) => widget.suffixBuilder!(context, style, states),
       clearable: widget.clearable,
       onSaved: widget.onSaved,
       validator: widget.validator,
@@ -815,7 +811,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       errorBuilder: widget.errorBuilder,
-      builder: (context, data, child) => FPopover(
+      builder: (context, _, states, field) => FPopover(
         controller: _controller.popover,
         style: style.popoverStyle,
         constraints: widget.popoverConstraints,
@@ -869,10 +865,10 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         ),
         child: InheritedAutocompleteStyle(
           style: style,
-          states: data.$2,
+          states: states,
           child: CallbackShortcuts(
             bindings: {
-              const SingleActivator(LogicalKeyboardKey.escape): () => _controller.popover.hide(),
+              const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
               const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
                   _popoverFocus.descendants.firstOrNull?.requestFocus(),
               if (_controller.current case (:final replacement, completion: final _))
@@ -884,7 +880,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
                   _controller.complete();
                 },
             },
-            child: widget.builder(context, (style, data.$2), child),
+            child: widget.builder(context, style, states, field),
           ),
         ),
       ),

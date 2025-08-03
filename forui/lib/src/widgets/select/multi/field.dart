@@ -16,14 +16,14 @@ class Field<T> extends FormField<Set<T>> {
   final FMultiSelectStyle style;
   final bool autofocus;
   final FocusNode? focusNode;
-  final ValueWidgetBuilder<(FMultiSelectStyle, Set<WidgetState>)>? prefixBuilder;
-  final ValueWidgetBuilder<(FMultiSelectStyle, Set<WidgetState>)>? suffixBuilder;
+  final FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder;
+  final FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder;
   final Widget? label;
   final Widget? description;
   final Widget? hint;
   final int Function(T, T)? sort;
   final Widget Function(T) format;
-  final Widget Function(BuildContext, FMultiSelectController<T>, FMultiSelectStyle, T, Widget) tagBuilder;
+  final FMultiSelectTagBuilder<T> tagBuilder;
   final TextAlign textAlign;
   final TextDirection? textDirection;
   final bool clearable;
@@ -130,7 +130,7 @@ class Field<T> extends FormField<Set<T>> {
                            child: Row(
                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                              children: [
-                               if (prefixBuilder case final prefix?) prefix(context, (style, states), null),
+                               if (prefixBuilder case final prefix?) prefix(context, style, states),
                                Expanded(
                                  child: Padding(
                                    padding: padding.copyWith(left: 0, right: 0),
@@ -164,7 +164,7 @@ class Field<T> extends FormField<Set<T>> {
                                      ),
                                    ),
                                  ),
-                               if (suffixBuilder case final suffix?) suffix(context, (style, states), null),
+                               if (suffixBuilder case final suffix?) suffix(context, style, states),
                              ],
                            ),
                          ),

@@ -31,16 +31,22 @@ We've changed the default cursor for many widgets from `MouseCursor.click` to `M
 
 
 ### `FBreadcrumb`
-* Add `FBreadcrumb.collapsed(onTapHide: ...)`.
+* Add `onTapHide` to `FBreadcrumb.collapsed(...)`.
 
 * **Breaking** Change `FBreadcrumb.hideOnTapOutside` to `FBreadcrumb.hideRegion`.
 
 
 ### `FDateField`
-* Add `FDateField.calendar(onTapHide: ...)`.
+* Add `onTapHide` to `FDateField.calendar(...)`.
 * Add `FDateFieldCalendarProperties.onTapHide`.
 
 * **Breaking** Change `FDateField.hideOnTapOutside` to `FDateField.hideRegion`.
+* **Breaking** Change `FDateField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FDateFieldStyle>`.
+* **Breaking** Change `FDateField.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FDateFieldStyle>`.
+* **Breaking** Change `FDateField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FDateFieldStyle>`.
 
 
 ### `FMultiSelect` (new)
@@ -61,9 +67,34 @@ We've changed the default cursor for many widgets from `MouseCursor.click` to `M
 
 
 ### `FSelect`
-* Rename `FSelect.divider` to `FSelect.contentDivider`.
+* Add `FSelect.contentEmptyBuilder`.
+
 * Change `FSelect`'s vertical padding for default loading and empty indicators to be the same height.
+* **Breaking** Rename `FSelect.divider` to `FSelect.contentDivider`.
 * **Breaking** Change `FSelect.hideOnTapOutside` to `FSelect.hideRegion`.
+* **Breaking** Change `FSelect.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FTextFieldStyle>`.
+* **Breaking** Change `FSelect.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> prefixBuilder`.
+* **Breaking** Change `FSelect.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
+* **Breaking** Change `FSelectSearchFieldProperties.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FTextFieldStyle>`.
+* **Breaking** Change `FSelectSearchFieldProperties.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> prefixBuilder`.
+* **Breaking** Change `FSelectSearchFieldProperties.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
+* Change `FSelectSearchContentBuilder` from `List<FSelectItemMixin> Function(BuildContext context, FSelectSearchData<T> data);`
+  to `List<FSelectItemMixin> Function(BuildContext context, String query, Iterable<T> values)`.
+* **Breaking** Remove `FSelectSearchFilter<T>` typedef - use the literal function signature instead.
+* **Breaking** Remove `FSelectSearchData<T>` typedef.
+* **Breaking** Replace `FSelect.emptyBuilder` with `FSelect.contentEmptyBuilder`.
+* **Breaking** Replace `FSelect.searchLoadingBuilder` with `FSelect.contentLoadingBuilder`.
+* **Breaking** Replace `FSelect.searchErrorBuilder` with `FSelect.contentErrorBuilder`.
+* **Breaking** Replace `FSelect.defaultEmptyBuilder` with `FSelect.defaultContentEmptyBuilder`.
+* **Breaking** Replace `FSelect.defaultSearchLoadingBuilder` with `FSelect.defaultContentLoadingBuilder`.
+* **Breaking** Replace `FMultiSelect.defaultEmptyBuilder` with `FMultiSelect.defaultContentEmptyBuilder`.
+* **Breaking** Replace `FMultiSelect.defaultSearchLoadingBuilder` with `FMultiSelect.defaultContentLoadingBuilder`.
 
 
 ### `FSelectMenuTile`
@@ -72,10 +103,34 @@ We've changed the default cursor for many widgets from `MouseCursor.click` to `M
 * **Breaking** Change `FSelectMenuTile.hideOnTapOutside` to `FSelectMenuTile.hideRegion`.
 
 
+### `FTextField` & `FTextFormField`
+* Add `FFieldBuilder.`
+* Add `FFieldIconBuilder.
+
+* **Breaking** Change `FTextField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to 
+  `FFieldBuilder<FTextFieldStyle>`.
+* **Breaking** Change `FTextField.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> prefixBuilder`.
+* **Breaking** Change `FTextField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
+* **Breaking** Change `FTextFormField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FTextFieldStyle>`.
+* **Breaking** Change `FTextFormField.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> prefixBuilder`.
+* **Breaking** Change `FTextFormField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
+
+
 ### `FTimeField`
-* Add `FTimeField.picker(onTapHide: ...)`.
+* Add `onTapHide` to `FTimeField.picker(...)`.
 
 * **Breaking** Change `FTimeField.hideOnTapOutside` to `FTimeField.hideRegion`.
+* **Breaking** Change `FTimeField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FDateFieldStyle>`.
+* **Breaking** Change `FTimeField.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FDateFieldStyle>`.
+* **Breaking** Change `FTimeField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FDateFieldStyle>`.
 
 
 ### Others
@@ -83,6 +138,8 @@ We've changed the default cursor for many widgets from `MouseCursor.click` to `M
 * Add `FTypeaheadController`.
 
 * Change `FMultiValueNotifier` to be non-abstract.
+* **Breaking** Change `ValueWidgetBuilder<FToasterEntry>? suffixBuilder` to `Widget Function(BuildContext, FToasterEntry)? suffixBuilder` 
+  in `showFToast(...)`.
 
 * Fix `FProgress.circularIcon()` using incorrect color.
 * Fix `FScaffold` not propagating `IconTheme` from `FStyle.iconStyle`.

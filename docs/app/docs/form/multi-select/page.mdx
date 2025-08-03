@@ -81,8 +81,8 @@ FMultiSelect<String>(
   onChange: (value) => print('Selected country: $value'),
   onSaved: (value) => print('Saved country: $value'),
   autovalidateMode: AutovalidateMode.onUserInteraction,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
-  suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
+  prefixBuilder: (context, styles) => Icon(FIcons.globe),
+  suffixBuilder: (context, styles) => Icon(FIcons.arrowDown),
   tagBuilder: (context, controller, styles, value, label) => FMultiSelectTag( label: label),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
@@ -134,8 +134,8 @@ FMultiSelect<Locale>.fromMap(
   onChange: (value) => print('Selected country: $value'),
   onSaved: (value) => print('Saved country: $value'),
   autovalidateMode: AutovalidateMode.onUserInteraction,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
-  suffixBuilder: (context, styles, _) => Icon(FIcons.arrowDown),
+  prefixBuilder: (context, styles) => Icon(FIcons.globe),
+  suffixBuilder: (context, styles) => Icon(FIcons.arrowDown),
   tagBuilder: (context, controller, styles, value, label) => FMultiSelectTag( label: label),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: true,
@@ -167,12 +167,12 @@ FMultiSelect<User>.search(
   contentDivider: FItemDivider.none,
   contentScrollHandles: false,
   contentPhysics: const BouncingScrollPhysics(),
-  emptyBuilder: (context, style, _) => Text('No results'),
+  contentEmptyBuilder: (context, style) => Text('No results'),
   filter: (query) async {
     // Fetch users based on search query
     return fetchUsers(query);
   },
-  contentBuilder: (context, users) => [
+  contentBuilder: (context, _, users) => [
     for (final user in users)
       FSelectItem(value: user, child: Text('${user.firstName} ${user.lastName}')),
   ],
@@ -180,8 +180,8 @@ FMultiSelect<User>.search(
     autofocus: true,
     hint: 'Type to search...',
   ),
-  searchLoadingBuilder: (context, style, _) => Text('Loading...'),
-  searchErrorBuilder: (context, error, stackTrace) => Text('Error...'),
+  contentLoadingBuilder: (context, style) => Text('Loading...'),
+  contentErrorBuilder: (context, error, stackTrace) => Text('Error...'),
 );
 ```
 
@@ -212,12 +212,12 @@ FMultiSelect<User>.searchFromMap(
   contentDivider: FItemDivider.none,
   contentScrollHandles: false,
   contentPhysics: const BouncingScrollPhysics(),
-  emptyBuilder: (context, style, _) => Text('No results'),
+  contentEmptyBuilder: (context, style) => Text('No results'),
   filter: (query) async {
     // Fetch users based on search query
     return fetchUsers(query);
   },
-  contentBuilder: (context, users) => [
+  contentBuilder: (context, _, users) => [
     for (final user in users)
       FSelectItem(value: user, child: Text('${user.firstName} ${user.lastName}')),
   ],
@@ -225,8 +225,8 @@ FMultiSelect<User>.searchFromMap(
     autofocus: true,
     hint: 'Type to search...',
   ),
-  searchLoadingBuilder: (context, style, _) => Text('Loading...'),
-  searchErrorBuilder: (context, error, stackTrace) => Text('Error...'),
+  contentLoadingBuilder: (context, style) => Text('Loading...'),
+  contentErrorBuilder: (context, error, stackTrace) => Text('Error...'),
 );
 ```
 
@@ -413,7 +413,7 @@ FMultiSelect<User>.searchFromMap(
         hint: Text('Select a fruit'),
         format: (s) => Text(s),
         filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem.text(fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem.text(fruit)],
       );
     }
     ```
@@ -437,7 +437,7 @@ FMultiSelect<User>.searchFromMap(
           await Future.delayed(const Duration(seconds: 1));
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
       );
     }
     ```
@@ -461,11 +461,11 @@ FMultiSelect<User>.searchFromMap(
           await Future.delayed(const Duration(seconds: 1));
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        searchLoadingBuilder: (context, style, _) => Padding(
+        contentLoadingBuilder: (context, style) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.maybeResolve({})),
         ),
-        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
       );
     }
     ```
@@ -489,8 +489,8 @@ FMultiSelect<User>.searchFromMap(
           await Future.delayed(const Duration(seconds: 1));
           throw StateError('Error loading data');
         },
-        contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
-        searchErrorBuilder: (context, error, trace) {
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        contentErrorBuilder: (context, error, trace) {
           final style = context.theme.selectStyle.iconStyle;
           return Padding(
             padding: const EdgeInsets.all(8.0),

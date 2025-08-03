@@ -2,18 +2,18 @@ part of 'select.dart';
 
 class _SearchSelect<T> extends FSelect<T> {
   final FSelectSearchFieldProperties searchFieldProperties;
-  final FSelectSearchFilter<T> filter;
+  final FutureOr<Iterable<T>> Function(String) filter;
   final FSelectSearchContentBuilder<T> contentBuilder;
-  final ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder;
-  final Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder;
+  final Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder;
+  final Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder;
 
   const _SearchSelect({
     required this.filter,
     required this.contentBuilder,
     required super.format,
     this.searchFieldProperties = const FSelectSearchFieldProperties(),
-    this.searchLoadingBuilder = FSelect.defaultSearchLoadingBuilder,
-    this.searchErrorBuilder,
+    this.contentLoadingBuilder = FSelect.defaultContentLoadingBuilder,
+    this.contentErrorBuilder,
     super.controller,
     super.style,
     super.autofocus,
@@ -46,7 +46,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.offset,
     super.hideRegion,
     super.autoHide,
-    super.emptyBuilder,
+    super.contentEmptyBuilder,
     super.contentScrollController,
     super.contentScrollHandles,
     super.contentPhysics,
@@ -66,8 +66,8 @@ class _SearchSelect<T> extends FSelect<T> {
       ..add(DiagnosticsProperty('filter', filter))
       ..add(DiagnosticsProperty('builder', builder))
       ..add(ObjectFlagProperty.has('contentBuilder', contentBuilder))
-      ..add(ObjectFlagProperty('searchLoadingBuilder', searchLoadingBuilder, ifPresent: 'searchLoadingBuilder'))
-      ..add(ObjectFlagProperty('searchErrorBuilder', searchErrorBuilder, ifPresent: 'searchErrorBuilder'));
+      ..add(ObjectFlagProperty('searchLoadingBuilder', contentLoadingBuilder, ifPresent: 'searchLoadingBuilder'))
+      ..add(ObjectFlagProperty('searchErrorBuilder', contentErrorBuilder, ifPresent: 'searchErrorBuilder'));
   }
 }
 
@@ -85,8 +85,8 @@ class _SearchSelectState<T> extends _State<_SearchSelect<T>, T> {
     divider: widget.contentDivider,
     filter: widget.filter,
     builder: widget.contentBuilder,
-    emptyBuilder: (context) => widget.emptyBuilder(context, style, null),
-    loadingBuilder: widget.searchLoadingBuilder,
-    errorBuilder: widget.searchErrorBuilder,
+    emptyBuilder: (context) => widget.contentEmptyBuilder(context, style),
+    loadingBuilder: widget.contentLoadingBuilder,
+    errorBuilder: widget.contentErrorBuilder,
   );
 }

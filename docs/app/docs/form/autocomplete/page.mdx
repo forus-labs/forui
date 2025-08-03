@@ -61,8 +61,8 @@ FAutocomplete(
   onSaved: (value) => print('Saved country: $value'),
   autovalidateMode: AutovalidateMode.onUserInteraction,
   builder: (context, styles, child) => child!,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
-  suffixBuilder: (context, styles, _) => Icon(FIcons.search),
+  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
+  suffixBuilder: (context, style, states) => Icon(FIcons.search),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: (value) => value.text.isNotEmpty,
   initialText: 'Canada',
@@ -82,11 +82,11 @@ FAutocomplete(
 
 ```dart copy
 FAutocomplete.builder(
-  filter: (query) async {
+  filter: (text) async {
     const countries = ['United States', 'Canada', 'Japan'];
     return countries.where((country) => country.toLowerCase().contains(query.toLowerCase()));
   },
-  contentBuilder: (context, query, suggestions) => [
+  contentBuilder: (context, text, suggestions) => [
     for (final suggestion in suggestions) FAutocompleteItem(suggestion)
   ],
   controller: FAutocompleteController(vsync: this),
@@ -98,8 +98,8 @@ FAutocomplete.builder(
   onSaved: (value) => print('Saved country: $value'),
   autovalidateMode: AutovalidateMode.onUserInteraction,
   builder: (context, styles, child) => child!,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
-  suffixBuilder: (context, styles, _) => Icon(FIcons.search),
+  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
+  suffixBuilder: (context, style, states) => Icon(FIcons.search),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   clearable: (value) => value.text.isNotEmpty,
 );
@@ -314,7 +314,7 @@ FAutocomplete.builder(
           await Future.delayed(const Duration(seconds: 3));
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        contentLoadingBuilder: (context, style, _) => Padding(
+        contentLoadingBuilder: (context, style) => Padding(
           padding: const EdgeInsets.all(14.0),
           child: Text('Here be dragons...', style: style.emptyTextStyle),
         ),
