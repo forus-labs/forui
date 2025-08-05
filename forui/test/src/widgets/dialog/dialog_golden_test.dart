@@ -185,7 +185,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FDialog.adaptive(
+            child: FDialog(
               title: const Text('Are you absolutely sure?'),
               body: const Text(
                 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
@@ -208,7 +208,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FDialog.adaptive(
+            child: FDialog(
               title: const Text('Are you absolutely sure?'),
               body: const Text(
                 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',

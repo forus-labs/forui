@@ -35,8 +35,7 @@ part 'dialog.style.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/dialog for working examples.
-/// * [showAdaptiveDialog] for displaying a dialog with adaptive transitions depending on the platform.
-/// * [FDialogStyle] for customizing a switch's appearance.
+/// * [FDialogStyle] for customizing a dialog's appearance.
 Future<T?> showFDialog<T>({
   required BuildContext context,
   required Widget Function(BuildContext, FDialogStyle, Animation<double>) builder,
@@ -159,9 +158,7 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
 ///
 /// A dialog interrupts the user with important content and expects a response.
 ///
-/// Consider using with
-/// * [showFDialog] if you want to show a dialog with consistent Shadcn/ui-like transitions across platforms.
-/// * [showAdaptiveDialog] if you want to show a dialog with transitions.
+/// Consider using with [showFDialog] if you want to show a dialog.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/dialog for working examples.
@@ -201,8 +198,9 @@ class FDialog extends StatefulWidget {
   ///
   /// The [semanticsLabel] defaults to [title] if it is not provided.
   ///
-  /// The [direction] determines the layout of the actions. It is recommended to use [Axis.vertical] on smaller devices,
-  /// such as mobile phones, and [Axis.horizontal] on larger devices, such as tablets and desktops.
+  /// The [direction] determines the layout of the actions. When null, the dialog will use adaptive layout - 
+  /// vertical on [FBreakpoints.sm] devices and horizontal on larger devices. It is recommended to use [Axis.vertical] 
+  /// on smaller devices, such as mobile phones, and [Axis.horizontal] on larger devices, such as tablets and desktops.
   ///
   /// The [Axis.vertical] layout with two possibles actions is:
   /// ```diagram
@@ -233,43 +231,33 @@ class FDialog extends StatefulWidget {
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
     Widget? title,
     Widget? body,
-    Axis direction = Axis.vertical,
+    Axis? direction,
     super.key,
-  }) : builder = switch (direction) {
-         Axis.horizontal => (_, style) => HorizontalContent(
-           style: style.horizontalStyle,
-           title: title,
-           body: body,
-           actions: actions,
-         ),
-         Axis.vertical => (_, style) => VerticalContent(
-           style: style.verticalStyle,
-           title: title,
-           body: body,
-           actions: actions,
-         ),
-       };
+  }) : builder = direction == null
+           ? ((context, style) => switch (MediaQuery.sizeOf(context).width) {
+               final width when width < context.theme.breakpoints.sm => VerticalContent(
+                 style: style.verticalStyle,
+                 title: title,
+                 body: body,
+                 actions: actions,
+               ),
+               _ => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
+             })
+           : switch (direction) {
+               Axis.horizontal => (_, style) => HorizontalContent(
+                 style: style.horizontalStyle,
+                 title: title,
+                 body: body,
+                 actions: actions,
+               ),
+               Axis.vertical => (_, style) => VerticalContent(
+                 style: style.verticalStyle,
+                 title: title,
+                 body: body,
+                 actions: actions,
+               ),
+             };
 
-  /// Creates a adaptive [FDialog] that lays out the [actions] vertically on [FBreakpoints.sm] devices and
-  /// horizontally on larger devices.
-  FDialog.adaptive({
-    required List<Widget> actions,
-    this.style,
-    this.animation,
-    this.semanticsLabel,
-    this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
-    Widget? title,
-    Widget? body,
-    super.key,
-  }) : builder = ((context, style) => switch (MediaQuery.sizeOf(context).width) {
-         final width when width < context.theme.breakpoints.sm => VerticalContent(
-           style: style.verticalStyle,
-           title: title,
-           body: body,
-           actions: actions,
-         ),
-         _ => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
-       });
 
   /// Creates a [FDialog] with a custom builder.
   const FDialog.raw({
