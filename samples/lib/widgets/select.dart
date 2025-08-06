@@ -33,7 +33,7 @@ class SelectPage extends Sample {
     child: FSelect<String>.rich(
       hint: 'Select a fruit',
       format: (s) => s,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -180,8 +180,8 @@ class DividerSelectPage extends Sample {
             for (final item in ['A', 'B']) item: '2$item',
           },
         ),
-        const FSelectItem(title: Text('Level 3'), value:  '3'),
-        const FSelectItem(title: Text('Level 4'), value:  '4'),
+        const FSelectItem(title: Text('Level 3'), value: '3'),
+        const FSelectItem(title: Text('Level 4'), value: '4'),
       ],
     ),
   );
@@ -198,7 +198,9 @@ class SyncSelectPage extends Sample {
       hint: 'Select a fruit',
       format: (s) => s,
       filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -217,7 +219,9 @@ class AsyncSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -240,7 +244,9 @@ class AsyncLoadingSelectPage extends Sample {
         padding: const EdgeInsets.all(8.0),
         child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
       ),
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -259,7 +265,9 @@ class AsyncErrorSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         throw StateError('Error loading data');
       },
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
       contentErrorBuilder: (context, error, trace) {
         final style = context.theme.selectStyle.iconStyle;
         return Padding(
@@ -289,7 +297,7 @@ class ToggleableSelectPageState extends StatefulSampleState<ToggleableSelectPage
       hint: 'Select a fruit',
       format: (s) => s,
       controller: _controller,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 
@@ -311,7 +319,7 @@ class ClearableSelectPage extends Sample {
       hint: 'Select a fruit',
       format: (s) => s,
       clearable: true,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -333,7 +341,7 @@ class FormatSelectPage extends Sample {
     child: FSelect<({String firstName, String lastName})>.rich(
       hint: 'Select a user',
       format: (user) => '${user.firstName} ${user.lastName}',
-      children: [for (final user in users) FSelectItem(title: Text(user.firstName), value:  user)],
+      children: [for (final user in users) FSelectItem(title: Text(user.firstName), value: user)],
     ),
   );
 }
@@ -349,7 +357,7 @@ class ScrollHandlesSelectPage extends Sample {
       hint: 'Select a fruit',
       format: (s) => s,
       contentScrollHandles: true,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -383,7 +391,7 @@ class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with Sing
             hint: 'Select a department',
             format: (s) => s,
             validator: _validateDepartment,
-            children: [for (final department in _departments) FSelectItem(title: Text(department), value:  department)],
+            children: [for (final department in _departments) FSelectItem(title: Text(department), value: department)],
           ),
           const SizedBox(height: 25),
           FButton(

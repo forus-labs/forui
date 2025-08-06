@@ -33,7 +33,7 @@ class MultiSelectPage extends Sample {
     child: FMultiSelect<String>.rich(
       hint: const Text('Select a fruit'),
       format: Text.new,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -180,8 +180,8 @@ class DividerMultiSelectPage extends Sample {
             for (final item in ['A', 'B']) item: '2$item',
           },
         ),
-        const FSelectItem(title: Text('Level 3'), value:  '3'),
-        const FSelectItem(title: Text('Level 4'), value:  '4'),
+        const FSelectItem(title: Text('Level 3'), value: '3'),
+        const FSelectItem(title: Text('Level 4'), value: '4'),
       ],
     ),
   );
@@ -198,7 +198,9 @@ class SyncMultiSelectPage extends Sample {
       hint: const Text('Select a fruit'),
       format: Text.new,
       filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -217,7 +219,9 @@ class AsyncMultiSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -240,7 +244,9 @@ class AsyncLoadingMultiSelectPage extends Sample {
         padding: const EdgeInsets.all(8.0),
         child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
       ),
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -259,7 +265,9 @@ class AsyncErrorMultiSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         throw StateError('Error loading data');
       },
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
       contentErrorBuilder: (context, error, trace) {
         final style = context.theme.selectStyle.iconStyle;
         return Padding(
@@ -282,7 +290,7 @@ class ClearableMultiSelectPage extends Sample {
       hint: const Text('Select a fruit'),
       format: Text.new,
       clearable: true,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -304,7 +312,7 @@ class FormatMultiSelectPage extends Sample {
     child: FMultiSelect<({String firstName, String lastName})>.rich(
       hint: const Text('Select a user'),
       format: (user) => Text('${user.firstName} ${user.lastName}'),
-      children: [for (final user in users) FSelectItem(title: Text(user.firstName), value:  user)],
+      children: [for (final user in users) FSelectItem(title: Text(user.firstName), value: user)],
     ),
   );
 }
@@ -321,7 +329,7 @@ class MinMaxMultiSelectPage extends Sample {
       format: Text.new,
       min: 1,
       max: 3,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -337,7 +345,7 @@ class ScrollHandlesMultiSelectPage extends Sample {
       hint: const Text('Select a fruit'),
       format: Text.new,
       contentScrollHandles: true,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -353,7 +361,7 @@ class SortedMultiSelectPage extends Sample {
       hint: const Text('Select favorite fruits'),
       format: Text.new,
       sort: (a, b) => a.compareTo(b),
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -387,7 +395,7 @@ class _FormMultiSelectPageState extends StatefulSampleState<FormMultiSelectPage>
             hint: const Text('Select departments'),
             format: Text.new,
             validator: _validateDepartment,
-            children: [for (final department in _departments) FSelectItem(title: Text(department), value:  department)],
+            children: [for (final department in _departments) FSelectItem(title: Text(department), value: department)],
           ),
           const SizedBox(height: 25),
           FButton(
