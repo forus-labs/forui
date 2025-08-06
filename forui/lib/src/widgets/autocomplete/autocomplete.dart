@@ -389,7 +389,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   }) : this.builder(
          filter: filter ?? (query) => items.where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
          contentBuilder:
-             contentBuilder ?? (context, query, values) => [for (final value in values) FAutocompleteItem(value: value)],
+             contentBuilder ??
+             (context, query, values) => [for (final value in values) FAutocompleteItem(value: value)],
          style: style,
          label: label,
          hint: hint,

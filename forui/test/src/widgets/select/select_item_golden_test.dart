@@ -126,12 +126,7 @@ void main() {
               key: key,
               format: (s) => s,
               children: const [
-                FSelectItem(
-                  value: 'v',
-                  prefix: Icon(FIcons.circle),
-                  title: Text('Title'),
-                  subtitle: Text('subtitle'),
-                ),
+                FSelectItem(value: 'v', prefix: Icon(FIcons.circle), title: Text('Title'), subtitle: Text('subtitle')),
               ],
             ),
           ),

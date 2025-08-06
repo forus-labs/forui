@@ -51,7 +51,11 @@ void main() {
               format: (value) => Text('$value!'),
               onSaved: (value) => initial = value,
               initialValue: initial,
-              children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B'), FSelectItem(title: Text('C'), value:  'C')],
+              children: const [
+                FSelectItem(title: Text('A'), value: 'A'),
+                FSelectItem(title: Text('B'), value: 'B'),
+                FSelectItem(title: Text('C'), value: 'C'),
+              ],
             ),
           ),
         ),
@@ -80,7 +84,11 @@ void main() {
               onSaved: (value) {
                 initial = value;
               },
-              children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B'), FSelectItem(title: Text('C'), value:  'C')],
+              children: const [
+                FSelectItem(title: Text('A'), value: 'A'),
+                FSelectItem(title: Text('B'), value: 'B'),
+                FSelectItem(title: Text('C'), value: 'C'),
+              ],
             ),
           ),
         ),
@@ -104,7 +112,10 @@ void main() {
             key: key,
             format: (value) => Text('$value!'),
             controller: controller,
-            children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B')],
+            children: const [
+              FSelectItem(title: Text('A'), value: 'A'),
+              FSelectItem(title: Text('B'), value: 'B'),
+            ],
           ),
         ),
       );
@@ -121,7 +132,9 @@ void main() {
 
     testWidgets('disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(child: FMultiSelect(items: letters, enabled: false, clearable: true, key: key)),
+        TestScaffold.app(
+          child: FMultiSelect(items: letters, enabled: false, clearable: true, key: key),
+        ),
       );
 
       await tester.tap(find.byKey(key));
@@ -137,7 +150,10 @@ void main() {
             key: key,
             format: (value) => Text('$value!'),
             controller: controller,
-            children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B')],
+            children: const [
+              FSelectItem(title: Text('A'), value: 'A'),
+              FSelectItem(title: Text('B'), value: 'B'),
+            ],
           ),
         ),
       );
@@ -168,7 +184,10 @@ void main() {
             format: (value) => Text('$value!'),
             controller: controller,
             clearable: true,
-            children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B')],
+            children: const [
+              FSelectItem(title: Text('A'), value: 'A'),
+              FSelectItem(title: Text('B'), value: 'B'),
+            ],
           ),
         ),
       );
@@ -234,7 +253,11 @@ void main() {
       expect(controller.hasListeners, true);
       expect(controller.popover.hasListeners, false);
 
-      await tester.pumpWidget(TestScaffold.app(child: FMultiSelect<String>(items: letters, key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(items: letters, key: key),
+        ),
+      );
 
       expect(controller.hasListeners, false);
       expect(controller.popover.hasListeners, false);

@@ -166,7 +166,11 @@ void main() {
       expect(controller.hasListeners, true);
       expect(controller.popover.hasListeners, false);
 
-      await tester.pumpWidget(TestScaffold.app(child: FSelect<String>(items: letters, key: key)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(items: letters, key: key),
+        ),
+      );
 
       expect(controller.hasListeners, false);
       expect(controller.popover.hasListeners, false);
@@ -316,12 +320,7 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
-            items: const {'A': 'A', 'B': 'B'},
-            key: key,
-            focusNode: focus,
-            controller: controller,
-          ),
+          child: FSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key, focusNode: focus, controller: controller),
         ),
       );
 

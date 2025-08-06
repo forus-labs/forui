@@ -78,7 +78,11 @@ void main() {
 
     expect(scrollController.hasListeners, true);
 
-    await tester.pumpWidget(TestScaffold.app(child: FSelect<String>(items: letters, key: key)));
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelect<String>(items: letters, key: key),
+      ),
+    );
 
     expect(scrollController.dispose, returnsNormally);
   });

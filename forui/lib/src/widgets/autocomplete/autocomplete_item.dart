@@ -50,13 +50,13 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
     FItemDivider divider = FItemDivider.none,
     Key? key,
   }) : this.rich(
-    label: label,
-    children: [for (final item in items) FAutocompleteItem(value: item)],
-    style: style,
-    enabled: enabled,
-    divider: divider,
-    key: key,
-  );
+         label: label,
+         children: [for (final item in items) FAutocompleteItem(value: item)],
+         style: style,
+         enabled: enabled,
+         divider: divider,
+         key: key,
+       );
 
   /// Creates a [FAutocompleteSection] with the given [children].
   const FAutocompleteSection.rich({

@@ -35,7 +35,10 @@ void main() {
             format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             children: [
-              const FSelectSection.rich(label: Text('A'), children: [FSelectItem(title: Text('B'), value: 'B')]),
+              const FSelectSection.rich(
+                label: Text('A'),
+                children: [FSelectItem(title: Text('B'), value: 'B')],
+              ),
               for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
             ],
           ),

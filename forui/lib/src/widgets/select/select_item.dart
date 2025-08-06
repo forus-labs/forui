@@ -50,13 +50,13 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
     FItemDivider divider = FItemDivider.none,
     Key? key,
   }) : this.rich(
-    label: label,
-    children: [for (final e in items.entries) FSelectItem<T>(title: Text(e.key), value: e.value)],
-    style: style,
-    enabled: enabled,
-    divider: divider,
-    key: key,
-  );
+         label: label,
+         children: [for (final e in items.entries) FSelectItem<T>(title: Text(e.key), value: e.value)],
+         style: style,
+         enabled: enabled,
+         divider: divider,
+         key: key,
+       );
 
   /// Creates a [FSelectSection] with the given [children].
   const FSelectSection.rich({

@@ -29,21 +29,15 @@ enum Style {
       'FProgressStyles',
       'FLinearProgressStyle',
       'FAutocompleteSectionStyle',
-      'FAutocompleteItemStyle',
+      'FItemContentStyle',
     ],
     'FAutocompleteContentStyle autocompleteContentStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FAutocompleteContentStyle(\n  loadingIndicatorStyle: _progressStyles(\n    colors: colors,\n    style: style,\n  ).circularIconProgressStyle,\n  sectionStyle: _autocompleteSectionStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  ),\n  emptyTextStyle: typography.sm,\n  padding: const EdgeInsets.symmetric(vertical: 5),\n);\n',
-  ),
-  fautocompleteitemstyle(
-    'FAutocompleteItemStyle',
-    <String>['autocomplete-item', 'autocompleteitem'],
-    <String>['FAutocompleteItemStyle'],
-    'FAutocompleteItemStyle autocompleteItemStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FAutocompleteItemStyle(\n  decoration: FWidgetStateMap({\n    ~WidgetState.disabled &\n        (WidgetState.focused |\n            WidgetState.hovered |\n            WidgetState.pressed): BoxDecoration(\n      color: colors.secondary,\n      borderRadius: style.borderRadius,\n    ),\n  }),\n  prefixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  }),\n  titleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n    ),\n    WidgetState.any: typography.sm.copyWith(color: colors.primary),\n  }),\n  subtitleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.xs.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),\n  }),\n  suffixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  }),\n  tappableStyle: style.tappableStyle.copyWith(\n    bounceTween: FTappableStyle.noBounceTween,\n  ),\n  margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),\n  padding: const EdgeInsetsDirectional.only(\n    start: 11,\n    top: 7.5,\n    bottom: 7.5,\n    end: 6,\n  ),\n  prefixIconSpacing: 10,\n  titleSpacing: 4,\n);\n',
   ),
   fautocompletesectionstyle(
     'FAutocompleteSectionStyle',
     <String>['autocomplete-section', 'autocompletesection'],
-    <String>['FAutocompleteSectionStyle', 'FAutocompleteItemStyle'],
-    'FAutocompleteSectionStyle autocompleteSectionStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FAutocompleteSectionStyle(\n  labelTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n      fontWeight: FontWeight.w600,\n    ),\n    WidgetState.any: typography.sm.copyWith(\n      color: colors.primary,\n      fontWeight: FontWeight.w600,\n    ),\n  }),\n  dividerColor: FWidgetStateMap.all(colors.border),\n  dividerWidth: style.borderWidth,\n  itemStyle: _autocompleteItemStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  ),\n  labelPadding: const EdgeInsetsDirectional.only(\n    start: 15,\n    top: 7.5,\n    bottom: 7.5,\n    end: 10,\n  ),\n);\n',
+    <String>['FAutocompleteSectionStyle', 'FItemContentStyle'],
+    'FAutocompleteSectionStyle autocompleteSectionStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) {\n  const padding = EdgeInsetsDirectional.only(\n    start: 11,\n    top: 7.5,\n    bottom: 7.5,\n    end: 6,\n  );\n  final iconStyle = FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  });\n  final textStyle = FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n    ),\n    WidgetState.any: typography.sm.copyWith(color: colors.primary),\n  });\n  return FAutocompleteSectionStyle(\n    labelTextStyle: FWidgetStateMap({\n      WidgetState.disabled: typography.sm.copyWith(\n        color: colors.disable(colors.primary),\n        fontWeight: FontWeight.w600,\n      ),\n      WidgetState.any: typography.sm.copyWith(\n        color: colors.primary,\n        fontWeight: FontWeight.w600,\n      ),\n    }),\n    dividerColor: FWidgetStateMap.all(colors.border),\n    dividerWidth: style.borderWidth,\n    itemStyle: FItemStyle(\n      backgroundColor: FWidgetStateMap.all(null),\n      decoration: FWidgetStateMap({\n        ~WidgetState.disabled &\n            (WidgetState.focused |\n                WidgetState.hovered |\n                WidgetState.pressed): BoxDecoration(\n          color: colors.secondary,\n          borderRadius: style.borderRadius,\n        ),\n      }),\n      contentStyle: _itemContentStyle(colors: colors, typography: typography)\n          .copyWith(\n            padding: padding,\n            prefixIconStyle: iconStyle,\n            prefixIconSpacing: 10,\n            titleTextStyle: textStyle,\n            titleSpacing: 4,\n            subtitleTextStyle: FWidgetStateMap({\n              WidgetState.disabled: typography.xs.copyWith(\n                color: colors.disable(colors.mutedForeground),\n              ),\n              WidgetState.any: typography.xs.copyWith(\n                color: colors.mutedForeground,\n              ),\n            }),\n            suffixIconStyle: FWidgetStateMap({\n              WidgetState.disabled: IconThemeData(\n                color: colors.disable(colors.primary),\n                size: 15,\n              ),\n              WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n            }),\n          ),\n      rawItemContentStyle: FRawItemContentStyle(\n        padding: padding,\n        prefixIconStyle: iconStyle,\n        childTextStyle: textStyle,\n      ),\n      tappableStyle: style.tappableStyle.copyWith(\n        bounceTween: FTappableStyle.noBounceTween,\n      ),\n      focusedOutlineStyle: null,\n    ),\n  );\n}\n',
   ),
   fautocompletestyle(
     'FAutocompleteStyle',
@@ -62,7 +56,7 @@ enum Style {
       'FProgressStyles',
       'FLinearProgressStyle',
       'FAutocompleteSectionStyle',
-      'FAutocompleteItemStyle',
+      'FItemContentStyle',
     ],
     'FAutocompleteStyle autocompleteStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final field = _textFieldStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  );\n  return FAutocompleteStyle(\n    fieldStyle: field,\n    composingTextStyle: field.contentTextStyle.map(\n      (s) => s.copyWith(decoration: TextDecoration.underline),\n    ),\n    typeaheadTextStyle: field.contentTextStyle.map(\n      (s) => s.copyWith(color: colors.mutedForeground),\n    ),\n    popoverStyle: _popoverStyle(colors: colors, style: style),\n    contentStyle: _autocompleteContentStyle(\n      colors: colors,\n      typography: typography,\n      style: style,\n    ),\n  );\n}\n',
   ),
@@ -284,7 +278,7 @@ enum Style {
       'FLinearProgressStyle',
       'FSelectContentStyle',
       'FSelectSectionStyle',
-      'FSelectItemStyle',
+      'FItemContentStyle',
       'FSelectScrollHandleStyle',
     ],
     'FMultiSelectStyle multiSelectStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FMultiSelectStyle(\n  fieldStyle: _multiSelectFieldStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  tagStyle: _multiSelectTagStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  popoverStyle: _popoverStyle(colors: colors, style: style),\n  searchStyle: _selectSearchStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  contentStyle: _selectContentStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  emptyTextStyle: typography.sm,\n);\n',
@@ -331,7 +325,7 @@ enum Style {
     'FProgressStyles',
     <String>['progresses'],
     <String>['FProgressStyles', 'FLinearProgressStyle'],
-    'FProgressStyles progressStyles({\n  required FColors colors,\n  required FStyle style,\n}) => FProgressStyles(\n  linearProgressStyle: _linearProgressStyle(colors: colors, style: style),\n  circularIconProgressStyle: IconThemeData(\n    color: style.iconStyle.color,\n    size: 20,\n  ),\n);\n',
+    'FProgressStyles progressStyles({\n  required FColors colors,\n  required FStyle style,\n}) => FProgressStyles(\n  linearProgressStyle: _linearProgressStyle(colors: colors, style: style),\n  circularIconProgressStyle: IconThemeData(\n    color: colors.mutedForeground,\n    size: 20,\n  ),\n);\n',
   ),
   fradiostyle(
     'FRadioStyle',
@@ -360,7 +354,7 @@ enum Style {
   fselectcontentstyle(
     'FSelectContentStyle',
     <String>['select-content', 'selectcontent'],
-    <String>['FSelectContentStyle', 'FSelectSectionStyle', 'FSelectItemStyle', 'FSelectScrollHandleStyle'],
+    <String>['FSelectContentStyle', 'FSelectSectionStyle', 'FItemContentStyle', 'FSelectScrollHandleStyle'],
     'FSelectContentStyle selectContentStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FSelectContentStyle(\n  sectionStyle: _selectSectionStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  ),\n  scrollHandleStyle: _selectScrollHandleStyle(colors: colors),\n  padding: const EdgeInsets.symmetric(vertical: 5),\n);\n',
   ),
   fselectgroupstyle(
@@ -368,12 +362,6 @@ enum Style {
     <String>['select-group', 'selectgroup'],
     <String>['FSelectGroupStyle', 'FCheckboxStyle', 'FRadioStyle', 'FLabelStyles', 'FLabelStyle'],
     'FSelectGroupStyle selectGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final vertical = _labelStyles(style: style).verticalStyle;\n  final labelTextStyle = FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n      fontWeight: FontWeight.w500,\n    ),\n    WidgetState.any: typography.sm.copyWith(\n      color: colors.primary,\n      fontWeight: FontWeight.w500,\n    ),\n  });\n  final descriptionTextStyle = FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),\n  });\n  final errorTextStyle = typography.sm.copyWith(\n    color: colors.error,\n    fontWeight: FontWeight.w500,\n  );\n  return FSelectGroupStyle(\n    checkboxStyle: _checkboxStyle(colors: colors, style: style).copyWith(\n      labelTextStyle: labelTextStyle,\n      descriptionTextStyle: descriptionTextStyle,\n      errorTextStyle: errorTextStyle,\n    ),\n    radioStyle: _radioStyle(colors: colors, style: style).copyWith(\n      labelTextStyle: labelTextStyle,\n      descriptionTextStyle: descriptionTextStyle,\n      errorTextStyle: errorTextStyle,\n    ),\n    labelTextStyle: style.formFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,\n    errorTextStyle: style.formFieldStyle.errorTextStyle,\n    labelPadding: vertical.labelPadding,\n    descriptionPadding: vertical.descriptionPadding,\n    errorPadding: vertical.errorPadding,\n    childPadding: vertical.childPadding,\n  );\n}\n',
-  ),
-  fselectitemstyle(
-    'FSelectItemStyle',
-    <String>['select-item', 'selectitem'],
-    <String>['FSelectItemStyle'],
-    'FSelectItemStyle selectItemStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FSelectItemStyle(\n  decoration: FWidgetStateMap({\n    ~WidgetState.disabled &\n        (WidgetState.focused |\n            WidgetState.hovered |\n            WidgetState.pressed): BoxDecoration(\n      color: colors.secondary,\n      borderRadius: style.borderRadius,\n    ),\n  }),\n  prefixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  }),\n  titleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n    ),\n    WidgetState.any: typography.sm.copyWith(color: colors.primary),\n  }),\n  subtitleTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.xs.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),\n  }),\n  suffixIconStyle: FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  }),\n  tappableStyle: style.tappableStyle.copyWith(\n    bounceTween: FTappableStyle.noBounceTween,\n  ),\n  margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),\n  padding: const EdgeInsetsDirectional.only(\n    start: 11,\n    top: 7.5,\n    bottom: 7.5,\n    end: 6,\n  ),\n  prefixIconSpacing: 10,\n  titleSpacing: 4,\n);\n',
   ),
   fselectmenutilestyle(
     'FSelectMenuTileStyle',
@@ -417,8 +405,8 @@ enum Style {
   fselectsectionstyle(
     'FSelectSectionStyle',
     <String>['select-section', 'selectsection'],
-    <String>['FSelectSectionStyle', 'FSelectItemStyle'],
-    'FSelectSectionStyle selectSectionStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FSelectSectionStyle(\n  labelTextStyle: FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n      fontWeight: FontWeight.w600,\n    ),\n    WidgetState.any: typography.sm.copyWith(\n      color: colors.primary,\n      fontWeight: FontWeight.w600,\n    ),\n  }),\n  dividerColor: FWidgetStateMap.all(colors.border),\n  dividerWidth: style.borderWidth,\n  itemStyle: _selectItemStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  ),\n  labelPadding: const EdgeInsetsDirectional.only(\n    start: 15,\n    top: 7.5,\n    bottom: 7.5,\n    end: 10,\n  ),\n);\n',
+    <String>['FSelectSectionStyle', 'FItemContentStyle'],
+    'FSelectSectionStyle selectSectionStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) {\n  const padding = EdgeInsetsDirectional.only(\n    start: 11,\n    top: 7.5,\n    bottom: 7.5,\n    end: 6,\n  );\n  final iconStyle = FWidgetStateMap({\n    WidgetState.disabled: IconThemeData(\n      color: colors.disable(colors.primary),\n      size: 15,\n    ),\n    WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n  });\n  final textStyle = FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n    ),\n    WidgetState.any: typography.sm.copyWith(color: colors.primary),\n  });\n  return FSelectSectionStyle(\n    labelTextStyle: FWidgetStateMap({\n      WidgetState.disabled: typography.sm.copyWith(\n        color: colors.disable(colors.primary),\n        fontWeight: FontWeight.w600,\n      ),\n      WidgetState.any: typography.sm.copyWith(\n        color: colors.primary,\n        fontWeight: FontWeight.w600,\n      ),\n    }),\n    dividerColor: FWidgetStateMap.all(colors.border),\n    dividerWidth: style.borderWidth,\n    itemStyle: FItemStyle(\n      backgroundColor: FWidgetStateMap.all(null),\n      decoration: FWidgetStateMap({\n        ~WidgetState.disabled &\n            (WidgetState.focused |\n                WidgetState.hovered |\n                WidgetState.pressed): BoxDecoration(\n          color: colors.secondary,\n          borderRadius: style.borderRadius,\n        ),\n      }),\n      contentStyle: _itemContentStyle(colors: colors, typography: typography)\n          .copyWith(\n            padding: padding,\n            prefixIconStyle: iconStyle,\n            prefixIconSpacing: 10,\n            titleTextStyle: textStyle,\n            titleSpacing: 4,\n            subtitleTextStyle: FWidgetStateMap({\n              WidgetState.disabled: typography.xs.copyWith(\n                color: colors.disable(colors.mutedForeground),\n              ),\n              WidgetState.any: typography.xs.copyWith(\n                color: colors.mutedForeground,\n              ),\n            }),\n            suffixIconStyle: FWidgetStateMap({\n              WidgetState.disabled: IconThemeData(\n                color: colors.disable(colors.primary),\n                size: 15,\n              ),\n              WidgetState.any: IconThemeData(color: colors.primary, size: 15),\n            }),\n          ),\n      rawItemContentStyle: FRawItemContentStyle(\n        padding: padding,\n        prefixIconStyle: iconStyle,\n        childTextStyle: textStyle,\n      ),\n      tappableStyle: style.tappableStyle.copyWith(\n        bounceTween: FTappableStyle.noBounceTween,\n      ),\n      focusedOutlineStyle: null,\n    ),\n  );\n}\n',
   ),
   fselectstyle(
     'FSelectStyle',
@@ -439,7 +427,7 @@ enum Style {
       'FLinearProgressStyle',
       'FSelectContentStyle',
       'FSelectSectionStyle',
-      'FSelectItemStyle',
+      'FItemContentStyle',
       'FSelectScrollHandleStyle',
     ],
     'FSelectStyle selectStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FSelectStyle(\n  selectFieldStyle: _textFieldStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),\n  popoverStyle: _popoverStyle(colors: colors, style: style),\n  searchStyle: _selectSearchStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  contentStyle: _selectContentStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ),\n  emptyTextStyle: typography.sm,\n);\n',
