@@ -39,29 +39,10 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   /// The nested [FAutocompleteItem]s.
   final List<FAutocompleteItem> children;
 
-  /// Creates a [FAutocompleteSection] from the given items.
-  ///
-  /// For more control over the appearance of individual items, use [FAutocompleteSection.custom].
-  FAutocompleteSection({
-    required Widget label,
-    required List<String> items,
-    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle)? style,
-    bool? enabled,
-    FItemDivider divider = FItemDivider.none,
-    Key? key,
-  }) : this.custom(
-         label: label,
-         children: [for (final item in items) FAutocompleteItem(item)],
-         style: style,
-         enabled: enabled,
-         divider: divider,
-         key: key,
-       );
-
   /// Creates a [FAutocompleteSection].
   ///
-  /// For a convenient way to create a section with a list of items, use [FAutocompleteSection.new].
-  const FAutocompleteSection.custom({
+  /// For a convenient way to create a section with a list of items, use [FAutocompleteSection.fromList].
+  const FAutocompleteSection({
     required this.label,
     required this.children,
     this.style,
@@ -70,12 +51,31 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
     super.key,
   });
 
+  /// Creates a [FAutocompleteSection] from the given items.
+  ///
+  /// For more control over the appearance of individual items, use [FAutocompleteSection].
+  FAutocompleteSection.fromList({
+    required Widget label,
+    required List<String> items,
+    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle)? style,
+    bool? enabled,
+    FItemDivider divider = FItemDivider.none,
+    Key? key,
+  }) : this(
+         label: label,
+         children: [for (final item in items) FAutocompleteItem(value: item)],
+         style: style,
+         enabled: enabled,
+         divider: divider,
+         key: key,
+       );
+
   @override
   Widget build(BuildContext context) {
     final content = ContentData.of(context);
     final enabled = this.enabled ?? content.enabled;
     final style = this.style?.call(content.style) ?? content.style;
-    final itemStyle = style.itemStyle.toFItemStyle(context);
+    final itemStyle = style.itemStyle;
 
     return ContentData(
       style: style,
@@ -149,7 +149,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
 
   /// The section's items' style.
   @override
-  final FAutocompleteItemStyle itemStyle;
+  final FItemStyle itemStyle;
 
   /// Creates a [FAutocompleteSectionStyle].
   FAutocompleteSectionStyle({
@@ -161,32 +161,77 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
   });
 
   /// Creates a [FAutocompleteSectionStyle] that inherits its properties.
-  FAutocompleteSectionStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
-    : this(
-        labelTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.sm.copyWith(
-            color: colors.disable(colors.primary),
-            fontWeight: FontWeight.w600,
+  factory FAutocompleteSectionStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required FTypography typography,
+  }) {
+    const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
+    final iconStyle = FWidgetStateMap({
+      WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
+      WidgetState.any: IconThemeData(color: colors.primary, size: 15),
+    });
+    final textStyle = FWidgetStateMap({
+      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
+      WidgetState.any: typography.sm.copyWith(color: colors.primary),
+    });
+
+    return FAutocompleteSectionStyle(
+      labelTextStyle: FWidgetStateMap({
+        WidgetState.disabled: typography.sm.copyWith(
+          color: colors.disable(colors.primary),
+          fontWeight: FontWeight.w600,
+        ),
+        WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+      }),
+      dividerColor: FWidgetStateMap.all(colors.border),
+      dividerWidth: style.borderWidth,
+      itemStyle: FItemStyle(
+        backgroundColor: FWidgetStateMap.all(null),
+        decoration: FWidgetStateMap({
+          ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
+            color: colors.secondary,
+            borderRadius: style.borderRadius,
           ),
-          WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
         }),
-        dividerColor: FWidgetStateMap.all(colors.border),
-        dividerWidth: style.borderWidth,
-        itemStyle: FAutocompleteItemStyle.inherit(colors: colors, style: style, typography: typography),
-      );
+        contentStyle: FItemContentStyle.inherit(colors: colors, typography: typography).copyWith(
+          padding: padding,
+          prefixIconStyle: iconStyle,
+          prefixIconSpacing: 10,
+          titleTextStyle: textStyle,
+          titleSpacing: 4,
+          subtitleTextStyle: FWidgetStateMap({
+            WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
+            WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
+          }),
+          suffixIconStyle: FWidgetStateMap({
+            WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
+            WidgetState.any: IconThemeData(color: colors.primary, size: 15),
+          }),
+        ),
+        rawItemContentStyle: FRawItemContentStyle(
+          padding: padding,
+          prefixIconStyle: iconStyle,
+          childTextStyle: textStyle,
+        ),
+        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+        focusedOutlineStyle: null,
+      ),
+    );
+  }
 }
 
 /// A suggestion in a [FAutocomplete] that can optionally be nested in a [FAutocompleteSection].
-class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
+abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
   /// The style. Defaults to the [FItemStyle] inherited from the parent [FAutocompleteSection] or [FAutocomplete].
   ///
   /// ## CLI
   /// To generate and customize this style:
   ///
   /// ```shell
-  /// dart run forui style create item
+  /// dart run forui style create autocomplete-section
   /// ```
-  final FAutocompleteItemStyle Function(FAutocompleteItemStyle)? style;
+  final FItemStyle Function(FItemStyle)? style;
 
   /// The value.
   final String value;
@@ -199,28 +244,61 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
   /// A prefix.
   final Widget? prefix;
 
-  /// The subtitle.
+  /// Creates a [FAutocompleteItem] with a custom [title] and value.
+  ///
+  /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
+  factory FAutocompleteItem({
+    required String value,
+    FItemStyle Function(FItemStyle)? style,
+    bool? enabled,
+    Widget? prefix,
+    Widget? title,
+    Widget? subtitle,
+    Widget? suffix,
+    Key? key,
+  }) = _AutocompleteItem;
+
+  /// Creates a [FAutocompleteItem] with raw layout that delegates to [FItem.raw].
+  ///
+  /// This provides full control over the item's layout without the structured
+  /// title/subtitle/prefix/suffix layout of the default constructor.
+  factory FAutocompleteItem.raw({
+    required Widget child,
+    required String value,
+    FItemStyle Function(FItemStyle)? style,
+    bool? enabled,
+    Widget? prefix,
+    Key? key,
+  }) = _RawAutocompleteItem;
+
+  const FAutocompleteItem._({required this.value, this.style, this.enabled, this.prefix, super.key});
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('value', value))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+  }
+}
+
+class _AutocompleteItem extends FAutocompleteItem {
   final Widget? subtitle;
-
-  /// The child.
   final Widget title;
-
-  /// The suffix.
   final Widget? suffix;
 
-  /// Creates a [FAutocompleteItem].
-  ///
-  /// To customize the text shown, provide a [title]. Default to [value].
-  FAutocompleteItem(
-    this.value, {
-    this.style,
-    this.enabled,
-    this.prefix,
+  _AutocompleteItem({
+    required super.value,
+    super.style,
+    super.enabled,
+    super.prefix,
     this.subtitle,
     this.suffix,
     Widget? title,
     super.key,
-  }) : title = title ?? Text(value);
+  }) : title = title ?? Text(value),
+       super._();
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +306,7 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;
-    final style = this.style?.call(content.style.itemStyle).toFItemStyle(context);
+    final style = this.style?.call(content.style.itemStyle);
 
     return FItem(
       style: style?.call,
@@ -245,131 +323,39 @@ class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
       suffix: suffix,
     );
   }
+}
+
+class _RawAutocompleteItem extends FAutocompleteItem {
+  final Widget child;
+
+  const _RawAutocompleteItem({
+    required this.child,
+    required super.value,
+    super.style,
+    super.enabled,
+    super.prefix,
+    super.key,
+  }) : super._();
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('value', value))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+  Widget build(BuildContext context) {
+    final InheritedAutocompleteController(:popover, :onPress, :onFocus) = InheritedAutocompleteController.of(context);
+    final content = ContentData.of(context);
+
+    final enabled = this.enabled ?? content.enabled;
+    final style = this.style?.call(content.style.itemStyle);
+
+    return FItem.raw(
+      style: style?.call,
+      enabled: enabled,
+      onPress: () => onPress(value),
+      onFocusChange: (focused) {
+        if (focused) {
+          onFocus(value);
+        }
+      },
+      prefix: prefix,
+      child: child,
+    );
   }
-}
-
-/// A [FAutocompleteItem]'s style.
-class FAutocompleteItemStyle with Diagnosticable, _$FAutocompleteItemStyleFunctions {
-  /// The margin around the item. Defaults to `EdgeInsets.symmetric(horizontal: 4, vertical: 2)`.
-  @override
-  final EdgeInsetsGeometry margin;
-
-  /// The padding around the item. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
-  /// The decoration.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  @override
-  final FWidgetStateMap<BoxDecoration?> decoration;
-
-  /// The icon style for an item's prefix.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  @override
-  final FWidgetStateMap<IconThemeData> prefixIconStyle;
-
-  // The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
-  @override
-  final double prefixIconSpacing;
-
-  /// The default text style for the title.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  @override
-  final FWidgetStateMap<TextStyle> titleTextStyle;
-
-  /// The vertical spacing between the title and the subtitle. Defaults to 4.
-  @override
-  final double titleSpacing;
-
-  /// The default text style for the subtitle.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  @override
-  final FWidgetStateMap<TextStyle> subtitleTextStyle;
-
-  /// The icon style for an item's suffix.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  @override
-  final FWidgetStateMap<IconThemeData> suffixIconStyle;
-
-  /// The tappable style for the item.
-  @override
-  final FTappableStyle tappableStyle;
-
-  /// Creates a [FAutocompleteItemStyle].
-  FAutocompleteItemStyle({
-    required this.decoration,
-    required this.prefixIconStyle,
-    required this.titleTextStyle,
-    required this.subtitleTextStyle,
-    required this.suffixIconStyle,
-    required this.tappableStyle,
-    this.margin = const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-    this.padding = const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6),
-    this.prefixIconSpacing = 10,
-    this.titleSpacing = 4,
-  });
-
-  /// Creates a [FAutocompleteItemStyle] that inherits its properties.
-  FAutocompleteItemStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
-    : this(
-        decoration: FWidgetStateMap({
-          ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
-            color: colors.secondary,
-            borderRadius: style.borderRadius,
-          ),
-        }),
-        prefixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-        }),
-        titleTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
-          WidgetState.any: typography.sm.copyWith(color: colors.primary),
-        }),
-        subtitleTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
-          WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
-        }),
-        suffixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-        }),
-        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
-      );
-}
-
-@internal
-extension InternalFAutocompleteItemStyle on FAutocompleteItemStyle {
-  FItemStyle toFItemStyle(BuildContext context) => FItemStyle(
-    backgroundColor: FWidgetStateMap.all(null),
-    decoration: decoration,
-    margin: margin,
-    contentStyle: FItemContentStyle.inherit(colors: context.theme.colors, typography: context.theme.typography)
-        .copyWith(
-          padding: padding,
-          prefixIconStyle: prefixIconStyle,
-          prefixIconSpacing: prefixIconSpacing,
-          titleTextStyle: titleTextStyle,
-          titleSpacing: titleSpacing,
-          subtitleTextStyle: subtitleTextStyle,
-          suffixIconStyle: suffixIconStyle,
-        ),
-    rawItemContentStyle: context.theme.itemStyle.rawItemContentStyle,
-    // This isn't ever used.
-    tappableStyle: tappableStyle,
-    focusedOutlineStyle: null,
-  );
 }

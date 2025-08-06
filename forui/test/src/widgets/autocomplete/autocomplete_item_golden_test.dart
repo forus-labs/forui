@@ -40,8 +40,8 @@ void main() {
             ),
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
-              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              FAutocompleteSection.fromList(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
+              FAutocompleteSection.fromList(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),
@@ -66,8 +66,8 @@ void main() {
             initialText: 'App',
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
-              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              FAutocompleteSection.fromList(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
+              FAutocompleteSection.fromList(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),
@@ -91,12 +91,12 @@ void main() {
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentDivider: FItemDivider.full,
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection(
+              FAutocompleteSection.fromList(
                 divider: FItemDivider.indented,
                 label: const Text('Most popular'),
                 items: const ['Apple', 'Kiwi'],
               ),
-              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              FAutocompleteSection.fromList(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),
@@ -149,6 +149,27 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/item/${theme.name}/press.png'));
 
       debugDefaultTargetPlatformOverride = null;
+    });
+
+    testWidgets('raw', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FAutocomplete.builder(
+            key: key,
+            filter: (query) => ['v'],
+            contentBuilder: (_, _, _) => [
+              FAutocompleteItem(prefix: const Icon(FIcons.circle), title: const Text('Title'), value: 'v'),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/${theme.name}/item/raw.png'));
     });
   }
 }

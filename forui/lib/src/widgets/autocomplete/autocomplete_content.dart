@@ -7,7 +7,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-import 'package:forui/src/widgets/autocomplete/autocomplete_item.dart';
 
 part 'autocomplete_content.style.dart';
 
@@ -93,7 +92,7 @@ class Content extends StatelessWidget {
     }
 
     final sectionStyle = style.sectionStyle;
-    final itemStyle = style.sectionStyle.itemStyle.toFItemStyle(context);
+    final itemStyle = style.sectionStyle.itemStyle;
 
     return Flexible(
       child: ContentData(
