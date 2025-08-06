@@ -258,7 +258,7 @@ class FProgressStyles with Diagnosticable, _$FProgressStylesFunctions {
   /// Creates a [FProgressStyles] that inherits its properties.
   FProgressStyles.inherit({required FColors colors, required FStyle style})
     : linearProgressStyle = FLinearProgressStyle.inherit(colors: colors, style: style),
-      circularIconProgressStyle = IconThemeData(color: style.iconStyle.color, size: 20);
+      circularIconProgressStyle = IconThemeData(color: colors.mutedForeground, size: 20);
 }
 
 /// A linear [FProgress]'s style.
