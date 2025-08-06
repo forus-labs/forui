@@ -91,8 +91,11 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
-  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
-  final FHidePopoverRegion hideOnTapOutside;
+  /// {@macro forui.widgets.FPopover.hideRegion}
+  final FPopoverHideRegion hideRegion;
+
+  /// {@macro forui.widgets.FPopover.onTapHide}
+  final VoidCallback? onTapHide;
 
   /// True if the menu should be automatically hidden after a menu option is selected. Defaults to true.
   final bool autoHide;
@@ -180,7 +183,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.onTapHide,
     this.autoHide = true,
     this.label,
     this.description,
@@ -244,7 +248,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              spacing: spacing,
              shift: shift,
              offset: offset,
-             hideOnTapOutside: hideOnTapOutside,
+             hideRegion: hideRegion,
+             onTapHide: onTapHide,
              autofocus: autofocus,
              focusNode: focusNode,
              onFocusChange: onFocusChange,
@@ -329,7 +334,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
-    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
+    VoidCallback? onTapHide,
     bool autoHide = true,
     Widget? label,
     Widget? description,
@@ -375,7 +381,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     spacing: spacing,
     shift: shift,
     offset: offset,
-    hideOnTapOutside: hideOnTapOutside,
+    hideRegion: hideRegion,
+    onTapHide: onTapHide,
     autoHide: autoHide,
     label: label,
     description: description,
@@ -442,7 +449,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.onTapHide,
     this.autoHide = true,
     this.label,
     this.description,
@@ -507,7 +515,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              spacing: spacing,
              shift: shift,
              offset: offset,
-             hideOnTapOutside: hideOnTapOutside,
+             hideRegion: hideRegion,
+             onTapHide: onTapHide,
              autofocus: autofocus,
              focusNode: focusNode,
              onFocusChange: onFocusChange,
@@ -584,7 +593,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('barrierSemanticsLabel', barrierSemanticsLabel))

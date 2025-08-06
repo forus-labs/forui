@@ -51,7 +51,7 @@ void main() {
           theme: theme.data,
           child: FDateField.calendar(
             key: key,
-            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+            builder: (context, _, _, child) => ColoredBox(color: context.theme.colors.destructive, child: child),
             today: DateTime(2025, 4),
           ),
         ),

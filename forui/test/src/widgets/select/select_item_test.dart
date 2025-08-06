@@ -23,13 +23,19 @@ void main() {
     testWidgets('focus skips title', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
+          child: FSelect<String>.rich(
             key: key,
             format: (s) => s,
             controller: controller,
-            children: [
-              FSelectSection(label: const Text('1st'), children: [FSelectItem('A', 'A')]),
-              FSelectSection(label: const Text('2nd'), children: [FSelectItem('B', 'B')]),
+            children: const [
+              FSelectSection.rich(
+                label: Text('1st'),
+                children: [FSelectItem(title: Text('A'), value: 'A')],
+              ),
+              FSelectSection.rich(
+                label: Text('2nd'),
+                children: [FSelectItem(title: Text('B'), value: 'B')],
+              ),
             ],
           ),
         ),
@@ -53,11 +59,14 @@ void main() {
     testWidgets('focus changes', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(
+          child: FSelect<String>.rich(
             key: key,
             format: (s) => s,
             controller: controller,
-            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            children: const [
+              FSelectItem(title: Text('A'), value: 'A'),
+              FSelectItem(title: Text('B'), value: 'B'),
+            ],
           ),
         ),
       );

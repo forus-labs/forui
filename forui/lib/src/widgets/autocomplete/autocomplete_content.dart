@@ -7,7 +7,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-import 'package:forui/src/widgets/autocomplete/autocomplete_item.dart';
 
 part 'autocomplete_content.style.dart';
 
@@ -44,9 +43,9 @@ class Content extends StatelessWidget {
   final ScrollPhysics physics;
   final FItemDivider divider;
   final FutureOr<Iterable<String>> data;
-  final ValueWidgetBuilder<FAutocompleteContentStyle> loadingBuilder;
+  final Widget Function(BuildContext, FAutocompleteContentStyle) loadingBuilder;
   final FAutoCompleteContentBuilder builder;
-  final ValueWidgetBuilder<FAutocompleteContentStyle> emptyBuilder;
+  final Widget Function(BuildContext, FAutocompleteContentStyle) emptyBuilder;
   final Widget Function(BuildContext, Object?, StackTrace)? errorBuilder;
 
   const Content({
@@ -73,7 +72,7 @@ class Content extends StatelessWidget {
         final Future<Iterable<String>> future => FutureBuilder(
           future: future,
           builder: (context, snapshot) => switch (snapshot.connectionState) {
-            ConnectionState.waiting => Center(child: loadingBuilder(context, style, null)),
+            ConnectionState.waiting => Center(child: loadingBuilder(context, style)),
             _ when snapshot.hasError && errorBuilder != null => errorBuilder!.call(
               context,
               snapshot.error,
@@ -89,11 +88,11 @@ class Content extends StatelessWidget {
   Widget _content(BuildContext context, Iterable<String> values) {
     final children = builder(context, controller.text, values);
     if (children.isEmpty) {
-      return Center(child: emptyBuilder(context, style, null));
+      return Center(child: emptyBuilder(context, style));
     }
 
     final sectionStyle = style.sectionStyle;
-    final itemStyle = style.sectionStyle.itemStyle.toFItemStyle(context);
+    final itemStyle = style.sectionStyle.itemStyle;
 
     return Flexible(
       child: ContentData(

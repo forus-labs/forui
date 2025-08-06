@@ -30,10 +30,10 @@ class SelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
+    child: FSelect<String>.rich(
       hint: 'Select a fruit',
       format: (s) => s,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -45,26 +45,26 @@ class DetailedSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
+    child: FSelect<String>.rich(
       hint: 'Type',
       format: (s) => s,
-      children: [
-        FSelectItem.from(
-          prefix: const Icon(FIcons.bug),
-          title: const Text('Bug'),
-          subtitle: const Text('An unexpected problem or behavior'),
+      children: const [
+        FSelectItem(
+          prefix: Icon(FIcons.bug),
+          title: Text('Bug'),
+          subtitle: Text('An unexpected problem or behavior'),
           value: 'Bug',
         ),
-        FSelectItem.from(
-          prefix: const Icon(FIcons.filePlus2),
-          title: const Text('Feature'),
-          subtitle: const Text('A new feature or enhancement'),
+        FSelectItem(
+          prefix: Icon(FIcons.filePlus2),
+          title: Text('Feature'),
+          subtitle: Text('A new feature or enhancement'),
           value: 'Feature',
         ),
-        FSelectItem.from(
-          prefix: const Icon(FIcons.messageCircleQuestionMark),
-          title: const Text('Question'),
-          subtitle: const Text('A question or clarification'),
+        FSelectItem(
+          prefix: Icon(FIcons.messageCircleQuestionMark),
+          title: Text('Question'),
+          subtitle: Text('A question or clarification'),
           value: 'Question',
         ),
       ],
@@ -79,11 +79,11 @@ class SectionSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
+    child: FSelect<String>.rich(
       hint: 'Select a timezone',
       format: (s) => s,
       children: [
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('North America'),
           items: {
             for (final item in [
@@ -97,7 +97,7 @@ class SectionSelectPage extends Sample {
               item: item,
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('South America'),
           items: {
             for (final item in [
@@ -109,7 +109,7 @@ class SectionSelectPage extends Sample {
               item: item,
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Europe & Africa'),
           items: {
             for (final item in [
@@ -123,7 +123,7 @@ class SectionSelectPage extends Sample {
               item: item,
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Asia'),
           items: {
             for (final item in [
@@ -137,7 +137,7 @@ class SectionSelectPage extends Sample {
               item: item,
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Australia & Pacific'),
           items: {
             for (final item in [
@@ -162,26 +162,26 @@ class DividerSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
+    child: FSelect<String>.rich(
       hint: 'Select a level',
       contentDivider: FItemDivider.full,
       format: (s) => s,
       children: [
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Level 1'),
           divider: FItemDivider.indented,
           items: {
             for (final item in ['A', 'B']) item: '1$item',
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Level 2'),
           items: {
             for (final item in ['A', 'B']) item: '2$item',
           },
         ),
-        FSelectItem('Level 3', '3'),
-        FSelectItem('Level 4', '4'),
+        const FSelectItem(title: Text('Level 3'), value: '3'),
+        const FSelectItem(title: Text('Level 4'), value: '4'),
       ],
     ),
   );
@@ -194,11 +194,13 @@ class SyncSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>.search(
+    child: FSelect<String>.searchBuilder(
       hint: 'Select a fruit',
       format: (s) => s,
       filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -210,14 +212,16 @@ class AsyncSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>.search(
+    child: FSelect<String>.searchBuilder(
       hint: 'Select a fruit',
       format: (s) => s,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -229,18 +233,20 @@ class AsyncLoadingSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>.search(
+    child: FSelect<String>.searchBuilder(
       hint: 'Select a fruit',
       format: (s) => s,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      searchLoadingBuilder: (context, style, _) => Padding(
+      contentLoadingBuilder: (context, style) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
       ),
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
     ),
   );
 }
@@ -252,15 +258,17 @@ class AsyncErrorSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>.search(
+    child: FSelect<String>.searchBuilder(
       hint: 'Select a fruit',
       format: (s) => s,
       filter: (query) async {
         await Future.delayed(const Duration(seconds: 1));
         throw StateError('Error loading data');
       },
-      contentBuilder: (context, data) => [for (final fruit in data.values) FSelectItem(fruit, fruit)],
-      searchErrorBuilder: (context, error, trace) {
+      contentBuilder: (context, _, fruits) => [
+        for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit),
+      ],
+      contentErrorBuilder: (context, error, trace) {
         final style = context.theme.selectStyle.iconStyle;
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -285,11 +293,11 @@ class ToggleableSelectPageState extends StatefulSampleState<ToggleableSelectPage
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15.0),
-    child: FSelect<String>(
+    child: FSelect<String>.rich(
       hint: 'Select a fruit',
       format: (s) => s,
       controller: _controller,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 
@@ -307,11 +315,11 @@ class ClearableSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
+    child: FSelect<String>.rich(
       hint: 'Select a fruit',
       format: (s) => s,
       clearable: true,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -330,10 +338,10 @@ class FormatSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<({String firstName, String lastName})>(
+    child: FSelect<({String firstName, String lastName})>.rich(
       hint: 'Select a user',
       format: (user) => '${user.firstName} ${user.lastName}',
-      children: [for (final user in users) FSelectItem(user.firstName, user)],
+      children: [for (final user in users) FSelectItem(title: Text(user.firstName), value: user)],
     ),
   );
 }
@@ -345,11 +353,11 @@ class ScrollHandlesSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FSelect<String>(
+    child: FSelect<String>.rich(
       hint: 'Select a fruit',
       format: (s) => s,
       contentScrollHandles: true,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
     ),
   );
 }
@@ -376,14 +384,14 @@ class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with Sing
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FSelect<String>(
+          FSelect<String>.rich(
             controller: _departmentController,
             label: const Text('Department'),
             description: const Text('Choose your dream department'),
             hint: 'Select a department',
             format: (s) => s,
             validator: _validateDepartment,
-            children: [for (final department in _departments) FSelectItem(department, department)],
+            children: [for (final department in _departments) FSelectItem(title: Text(department), value: department)],
           ),
           const SizedBox(height: 25),
           FButton(

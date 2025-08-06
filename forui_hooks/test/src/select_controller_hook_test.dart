@@ -17,7 +17,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFSelectController();
-            return FSelect(controller: controller, format: (s) => s, children: const []);
+            return FSelect.rich(controller: controller, format: (s) => s, children: const []);
           },
         ),
       ),
@@ -36,7 +36,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFMultiSelectController();
-            return FMultiSelect(controller: controller, format: (v) => const SizedBox(), children: const []);
+            return FMultiSelect.rich(controller: controller, format: (v) => const SizedBox(), children: const []);
           },
         ),
       ),

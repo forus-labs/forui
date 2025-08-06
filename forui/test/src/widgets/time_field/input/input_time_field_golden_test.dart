@@ -42,7 +42,7 @@ void main() {
           theme: theme.data,
           child: FTimeField(
             key: key,
-            builder: (context, data, child) => ColoredBox(color: context.theme.colors.destructive, child: child!),
+            builder: (context, _, _, child) => ColoredBox(color: context.theme.colors.destructive, child: child),
           ),
         ),
       );

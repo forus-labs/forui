@@ -43,8 +43,8 @@ void main() {
   testWidgets('scrolls to item at the end of very long list', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<int>.fromMap(
-          {for (var i = 0; i < 20; i++) i.toString(): i},
+        child: FSelect<int>(
+          items: {for (var i = 0; i < 20; i++) i.toString(): i},
           key: key,
           contentScrollController: scrollController,
         ),
@@ -69,7 +69,7 @@ void main() {
   testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
+        child: FSelect<String>(items: letters, key: key, contentScrollController: scrollController),
       ),
     );
 
@@ -78,7 +78,11 @@ void main() {
 
     expect(scrollController.hasListeners, true);
 
-    await tester.pumpWidget(TestScaffold.app(child: FSelect<String>.fromMap(letters, key: key)));
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelect<String>(items: letters, key: key),
+      ),
+    );
 
     expect(scrollController.dispose, returnsNormally);
   });
@@ -86,7 +90,7 @@ void main() {
   testWidgets('dispose() does not dispose external controller', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<String>.fromMap(letters, key: key, contentScrollController: scrollController),
+        child: FSelect<String>(items: letters, key: key, contentScrollController: scrollController),
       ),
     );
 

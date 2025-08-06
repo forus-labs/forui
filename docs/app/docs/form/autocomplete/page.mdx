@@ -61,8 +61,8 @@ FAutocomplete(
   onSaved: (value) => print('Saved country: $value'),
   autovalidateMode: AutovalidateMode.onUserInteraction,
   builder: (context, styles, child) => child!,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
-  suffixBuilder: (context, styles, _) => Icon(FIcons.search),
+  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
+  suffixBuilder: (context, style, states) => Icon(FIcons.search),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: (value) => value.text.isNotEmpty,
   initialText: 'Canada',
@@ -82,12 +82,12 @@ FAutocomplete(
 
 ```dart copy
 FAutocomplete.builder(
-  filter: (query) async {
+  filter: (text) async {
     const countries = ['United States', 'Canada', 'Japan'];
     return countries.where((country) => country.toLowerCase().contains(query.toLowerCase()));
   },
-  contentBuilder: (context, query, suggestions) => [
-    for (final suggestion in suggestions) FAutocompleteItem(suggestion)
+  contentBuilder: (context, text, suggestions) => [
+    for (final suggestion in suggestions) FAutocompleteItem(value: suggestion)
   ],
   controller: FAutocompleteController(vsync: this),
   style: (style) => style,
@@ -98,8 +98,8 @@ FAutocomplete.builder(
   onSaved: (value) => print('Saved country: $value'),
   autovalidateMode: AutovalidateMode.onUserInteraction,
   builder: (context, styles, child) => child!,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.globe),
-  suffixBuilder: (context, styles, _) => Icon(FIcons.search),
+  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
+  suffixBuilder: (context, style, states) => Icon(FIcons.search),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   clearable: (value) => value.text.isNotEmpty,
 );
@@ -125,26 +125,26 @@ FAutocomplete.builder(
         },
         contentBuilder: (context, query, suggestions) => [
           for (final suggestion in suggestions)
-            switch (value) {
+            switch (suggestion) {
               'Bug' => FAutocompleteItem(
-                'Bug',
+                value: 'Bug',
                 prefix: const Icon(FIcons.bug),
                 title: const Text('Bug'),
                 subtitle: const Text('An unexpected problem or behavior'),
               ),
               'Feature' => FAutocompleteItem(
-                'Feature',
+                value: 'Feature',
                 prefix: const Icon(FIcons.filePlus2),
                 title: const Text('Feature'),
                 subtitle: const Text('A new feature or enhancement'),
               ),
               'Question' => FAutocompleteItem(
-                'Question',
+                value: 'Question',
                 prefix: const Icon(FIcons.messageCircleQuestionMark),
                 title: const Text('Question'),
                 subtitle: const Text('A question or clarification'),
               ),
-              _ => FAutocompleteItem(value),
+              _ => FAutocompleteItem(suggestion),
             }
         ],
       );
@@ -244,20 +244,20 @@ FAutocomplete.builder(
           return items.where((item) => item.toLowerCase().contains(query.toLowerCase()));
         },
         contentBuilder: (context, query, suggestions) => <FAutocompleteItemMixin>[
-          FAutocompleteSection.custom(
+          FAutocompleteSection.rich(
             label: const Text('Level 1'),
             divider: FItemDivider.indented,
             children: [
-              if (suggestions.contains('1A')) FAutocompleteItem('1A'),
-              if (suggestions.contains('1B')) FAutocompleteItem('1B'),
+              if (suggestions.contains('1A')) FAutocompleteItem(value: '1A'),
+              if (suggestions.contains('1B')) FAutocompleteItem(value: ''1B'),
             ],
           ),
           FAutocompleteSection(
             label: const Text('Level 2'),
             items: ['2A', '2B'].where(suggestions.contains).toList(),
           ),
-          if (suggestions.contains('3')) FAutocompleteItem('3'),
-          if (suggestions.contains('4')) FAutocompleteItem('4'),
+          if (suggestions.contains('3')) FAutocompleteItem(value: ''3'),
+          if (suggestions.contains('4')) FAutocompleteItem(value: ''4'),
         ].where((item) => 
           item is FAutocompleteSection ? item.children.isNotEmpty : true
         ).toList(),
@@ -288,7 +288,7 @@ FAutocomplete.builder(
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
         contentBuilder: (context, query, suggestions) => [
-          for (final suggestion in suggestions) FAutocompleteItem(suggestion)
+          for (final suggestion in suggestions) FAutocompleteItem(value: suggestion)
         ],
       );
     }
@@ -314,12 +314,12 @@ FAutocomplete.builder(
           await Future.delayed(const Duration(seconds: 3));
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        contentLoadingBuilder: (context, style, _) => Padding(
+        contentLoadingBuilder: (context, style) => Padding(
           padding: const EdgeInsets.all(14.0),
           child: Text('Here be dragons...', style: style.emptyTextStyle),
         ),
         contentBuilder: (context, query, suggestions) => [
-          for (final suggestion in suggestions) FAutocompleteItem(suggestion)
+          for (final suggestion in suggestions) FAutocompleteItem(value: suggestion)
         ],
       );
     }
@@ -344,7 +344,7 @@ FAutocomplete.builder(
           throw StateError('Error loading data');
         },
         contentBuilder: (context, query, suggestions) => [
-          for (final suggestion in suggestions) FAutocompleteItem(suggestion)
+          for (final suggestion in suggestions) FAutocompleteItem(value: suggestion)
         ],
         contentErrorBuilder: (context, error, trace) {
           return Padding(

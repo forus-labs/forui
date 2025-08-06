@@ -125,7 +125,6 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
             setState(() => _focused = focused);
           }
         },
-        mouseCursor: SystemMouseCursors.click,
         shortcuts: const {
           SingleActivator(LogicalKeyboardKey.arrowUp): ScrollIntent(direction: AxisDirection.up),
           SingleActivator(LogicalKeyboardKey.arrowDown): ScrollIntent(direction: AxisDirection.down),

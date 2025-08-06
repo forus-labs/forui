@@ -126,7 +126,8 @@ abstract interface class FBreadcrumbItem extends Widget {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
+    VoidCallback? onTapHide,
     bool autofocus,
     FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -157,7 +158,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
     bool autofocus,
     FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -237,7 +238,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final FPortalSpacing spacing;
   final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   final Offset offset;
-  final FHidePopoverRegion hideOnTapOutside;
+  final FPopoverHideRegion hideRegion;
+  final VoidCallback? onTapHide;
   final bool autofocus;
   final FocusScopeNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
@@ -260,7 +262,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.onTapHide,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -286,7 +289,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.onTapHide,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -317,7 +321,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
@@ -355,7 +360,8 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         spacing: widget.spacing,
         shift: widget.shift,
         offset: widget.offset,
-        hideOnTapOutside: widget.hideOnTapOutside,
+        hideRegion: widget.hideRegion,
+        onTapHide: widget.onTapHide,
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
         onFocusChange: widget.onFocusChange,
@@ -385,7 +391,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         spacing: widget.spacing,
         shift: widget.shift,
         offset: widget.offset,
-        hideOnTapOutside: widget.hideOnTapOutside,
+        hideRegion: widget.hideRegion,
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
         onFocusChange: widget.onFocusChange,

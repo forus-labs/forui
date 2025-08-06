@@ -48,10 +48,10 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [FSelectSection.fromMap(label: const Text('Lorem'), items: letters)],
+              children: [FSelectSection(label: const Text('Lorem'), items: letters)],
             ),
           ),
         );
@@ -67,14 +67,18 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [
-                FSelectSection(
-                  label: const Text('Lorem'),
+              children: const [
+                FSelectSection.rich(
+                  label: Text('Lorem'),
                   enabled: false,
-                  children: [FSelectItem('A', 'A'), FSelectItem('B', 'B'), FSelectItem('C', 'C', enabled: true)],
+                  children: [
+                    FSelectItem(title: Text('A'), value: 'A'),
+                    FSelectItem(title: Text('B'), value: 'B'),
+                    FSelectItem(title: Text('C'), value: 'C', enabled: true),
+                  ],
                 ),
               ],
             ),
@@ -92,10 +96,10 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [FSelectSection.fromMap(label: const Text('Lorem'), items: letters)],
+              children: [FSelectSection(label: const Text('Lorem'), items: letters)],
             ),
           ),
         );
@@ -118,16 +122,11 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [
-                FSelectItem.from(
-                  value: 'v',
-                  prefix: const Icon(FIcons.circle),
-                  title: const Text('Title'),
-                  subtitle: const Text('subtitle'),
-                ),
+              children: const [
+                FSelectItem(value: 'v', prefix: Icon(FIcons.circle), title: Text('Title'), subtitle: Text('subtitle')),
               ],
             ),
           ),
@@ -144,8 +143,8 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>.fromMap(
-              letters,
+            child: FSelect<String>(
+              items: letters,
               key: key,
               controller: controller,
               contentScrollController: scrollController,
@@ -173,11 +172,11 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
               controller: controller..value = 'A',
-              children: [FSelectItem(letters.keys.first, letters.keys.first, enabled: false)],
+              children: [FSelectItem(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
             ),
           ),
         );
@@ -196,10 +195,10 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [FSelectItem(letters.keys.first, letters.keys.first, enabled: false)],
+              children: [FSelectItem(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
             ),
           ),
         );
@@ -218,7 +217,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>.fromMap(const {'A': 'A'}, key: key),
+            child: FSelect<String>(items: const {'A': 'A'}, key: key),
           ),
         );
 
@@ -240,7 +239,7 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>.fromMap(const {'A': 'A'}, key: key),
+            child: FSelect<String>(items: const {'A': 'A'}, key: key),
           ),
         );
 
@@ -254,6 +253,25 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/press.png'));
 
         debugDefaultTargetPlatformOverride = null;
+      });
+
+      testWidgets('raw', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>.rich(
+              key: key,
+              format: (s) => s,
+              children: const [FSelectItem.raw(value: 'v', prefix: Icon(FIcons.circle), child: Text('Title'))],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/raw.png'));
       });
     });
   }

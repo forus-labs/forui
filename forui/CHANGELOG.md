@@ -7,6 +7,12 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Change `FMultiValueNotifier.radio({T? value})` to `FMultiValueNotifier.radio([T? value])`.
 
 
+### Cursors
+We've changed the default cursor for many widgets from `MouseCursor.click` to `MouseCursor.defer`. This is in line with 
+[native desktop behavior](https://medium.com/simple-human/buttons-shouldnt-have-a-hand-cursor-b11e99ca374b) and 
+[W3C User Interface guidelines](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer).
+
+
 ### `FAccordion`
 * Add `FAccordionItem.onHoverChange`
 * Add `FAccordionItem.onStateChange`
@@ -16,12 +22,31 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Remove `FAccordionController.validate(...)`.
 
 
-## `FAutocomplete` (new)
+### `FAutocomplete` (new)
 * Add `FAutocomplete`.
 * Add `FAutocompleteController`.
 * Add `FAutocompleteStyle`.
 * Add `FAutocompleteSection`.
 * Add `FAutocompleteItem`.
+
+
+### `FBreadcrumb`
+* Add `onTapHide` to `FBreadcrumb.collapsed(...)`.
+
+* **Breaking** Change `FBreadcrumb.hideOnTapOutside` to `FBreadcrumb.hideRegion`.
+
+
+### `FDateField`
+* Add `onTapHide` to `FDateField.calendar(...)`.
+* Add `FDateFieldCalendarProperties.onTapHide`.
+
+* **Breaking** Change `FDateField.hideOnTapOutside` to `FDateField.hideRegion`.
+* **Breaking** Change `FDateField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FDateFieldStyle>`.
+* **Breaking** Change `FDateField.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FDateFieldStyle>`.
+* **Breaking** Change `FDateField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FDateFieldStyle>`.
 
 
 ### `FMultiSelect` (new)
@@ -31,15 +56,99 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * Add `FMultiSelectTag`.
 
 
-### Others
-* Add `FTypeaheadController`.
+### `FPopover` & `FPopoverMenu`
 * Add `FPopover.onTapHide`.
 * Add `FPopoverMenu.onTapHide`.
 
-* Rename `FSelect.divider` to `FSelect.contentDivider`.
+* **Breaking** Change `FPopover.hideOnTapOutside` to `FPopover.hideRegion`.
+* **Breaking** Change `FPopoverMenu.hideOnTapOutside` to `FPopoverMenu.hideRegion`.
+* **Breaking** Change `FHidePopoverRegion` to `FPopoverHideRegion`.
+* **Breaking** Change `FHidePopoverRegion.excludeTarget` to `FHidePopoverRegion.excludeChild`.
+
+
+### `FSelect`
+We've done an overhaul of `FSelect` to make it more consistent and easier to use.
+
+* Add `FSelect.contentEmptyBuilder`.
+* Add `FSelectItem.raw(...)`
+
+* Change `FSelect`'s vertical padding for default loading and empty indicators to be the same height.
+* **Breaking** Rename `FSelect.divider` to `FSelect.contentDivider`.
+* **Breaking** Replace `FSelect.hideOnTapOutside` with `FSelect.hideRegion`.
+* **Breaking** Change `FSelect.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FTextFieldStyle>`.
+* **Breaking** Change `FSelect.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> prefixBuilder`.
+* **Breaking** Change `FSelect.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
+* **Breaking** Change `FSelectSearchFieldProperties.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FTextFieldStyle>`.
+* **Breaking** Change `FSelectSearchFieldProperties.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> prefixBuilder`.
+* **Breaking** Change `FSelectSearchFieldProperties.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
+* Change `FSelectSearchContentBuilder` from `List<FSelectItemMixin> Function(BuildContext context, FSelectSearchData<T> data);`
+  to `List<FSelectItemMixin> Function(BuildContext context, String query, Iterable<T> values)`.
+* **Breaking** Remove `FSelectSearchFilter<T>` typedef - use the literal function signature instead.
+* **Breaking** Remove `FSelectSearchData<T>` typedef.
+* **Breaking** Replace `FSelect.emptyBuilder` with `FSelect.contentEmptyBuilder`.
+* **Breaking** Replace `FSelect.searchLoadingBuilder` with `FSelect.contentLoadingBuilder`.
+* **Breaking** Replace `FSelect.searchErrorBuilder` with `FSelect.contentErrorBuilder`.
+* **Breaking** Replace `FSelect.defaultEmptyBuilder` with `FSelect.defaultContentEmptyBuilder`.
+* **Breaking** Replace `FSelect.defaultSearchLoadingBuilder` with `FSelect.defaultContentLoadingBuilder`.
+* **Breaking** Replace `FSelect.fromMap(...)` with `FSelectSection.new(...)`.
+* **Breaking** Replace `FSelect(...)` with `FSelectSection.rich(...)`.
+* **Breaking** Replace `FSelect.searchFromMap(...)` with `FSelectSection.search(...)`.
+* **Breaking** Replace `FSelect.search(...)` with `FSelectSection.searchBuilder(...)`.
+* **Breaking** Replace `FSelectSection.new(...)` with `FSelectSection.rich(...)`
+* **Breaking** Replace `FSelectSection.fromMap(...)` with `FSelectSection.new(...)`.
+* **Breaking** Change `FSelectItem(...)`'s parameters to no longer accept string parameter.
+* **Breaking** Replace `FSelectItemStyle` with underlying `FItemStyle`.
+
+
+### `FSelectMenuTile`
+* Add `FSelectMenuTile.onTapHide`.
+
+* **Breaking** Change `FSelectMenuTile.hideOnTapOutside` to `FSelectMenuTile.hideRegion`.
+
+
+### `FTextField` & `FTextFormField`
+* Add `FFieldBuilder.`
+* Add `FFieldIconBuilder.
+
+* **Breaking** Change `FTextField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to 
+  `FFieldBuilder<FTextFieldStyle>`.
+* **Breaking** Change `FTextField.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> prefixBuilder`.
+* **Breaking** Change `FTextField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
+* **Breaking** Change `FTextFormField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FTextFieldStyle>`.
+* **Breaking** Change `FTextFormField.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> prefixBuilder`.
+* **Breaking** Change `FTextFormField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
+
+
+### `FTimeField`
+* Add `onTapHide` to `FTimeField.picker(...)`.
+
+* **Breaking** Change `FTimeField.hideOnTapOutside` to `FTimeField.hideRegion`.
+* **Breaking** Change `FTimeField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldBuilder<FDateFieldStyle>`.
+* **Breaking** Change `FTimeField.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FDateFieldStyle>`.
+* **Breaking** Change `FTimeField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
+  `FFieldIconBuilder<FDateFieldStyle>`.
+
+
+### Others
+* Add `FSelectMenuTile.onTapHide`.
+* Add `FTypeaheadController`.
+
 * Change `FMultiValueNotifier` to be non-abstract.
-* **Breaking** Change `FTappableStyle.mouseCursor` to `MouseCursor.defer`. See https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
-  for our rationale behind this change.
+* **Breaking** Change `ValueWidgetBuilder<FToasterEntry>? suffixBuilder` to `Widget Function(BuildContext, FToasterEntry)? suffixBuilder` 
+  in `showFToast(...)`.
 
 * Fix `FProgress.circularIcon()` using incorrect color.
 * Fix `FScaffold` not propagating `IconTheme` from `FStyle.iconStyle`.

@@ -40,11 +40,11 @@ class _VisualizerState extends State<Visualizer> {
           portalAnchor: _portalAnchor,
         ),
         const SizedBox(height: 16),
-        FSelect<Offset Function(Size, FPortalChildBox, FPortalBox)>(
+        FSelect<Offset Function(Size, FPortalChildBox, FPortalBox)>.rich(
           label: const Text('Shift'),
           onChange: (closure) => setState(() => _shift = closure ?? _shift),
           format: (closure) => _shifts[closure]!,
-          children: [for (final MapEntry(:key, :value) in _shifts.entries) FSelectItem(value, key)],
+          children: [for (final MapEntry(:key, :value) in _shifts.entries) FSelectItem(title: Text(value), value: key)],
         ),
         const SizedBox(height: 16),
         _Settings(
@@ -217,7 +217,7 @@ class _Settings extends StatelessWidget {
             ),
           ],
         ),
-        FSelect<Alignment>(
+        FSelect<Alignment>.rich(
           onChange: onAnchorChange,
           label: const Text('Anchor:'),
           format: (s) => s.toString(),
@@ -233,7 +233,7 @@ class _Settings extends StatelessWidget {
               Alignment.bottomCenter,
               Alignment.bottomRight,
             ])
-              FSelectItem(anchor.toString().replaceAll('Alignment.', ''), anchor),
+              FSelectItem(title: Text(anchor.toString().replaceAll('Alignment.', '')), value: anchor),
           ],
         ),
       ],

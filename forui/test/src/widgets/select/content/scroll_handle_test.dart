@@ -45,8 +45,8 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FSelect<String>.fromMap(
-          letters,
+        child: FSelect<String>(
+          items: letters,
           key: key,
           controller: controller,
           contentScrollController: scrollController,
@@ -73,8 +73,8 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FSelect<String>.fromMap(
-          letters,
+        child: FSelect<String>(
+          items: letters,
           key: key,
           controller: controller,
           contentScrollController: scrollController,
@@ -98,8 +98,8 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FSelect<String>.fromMap(
-          letters,
+        child: FSelect<String>(
+          items: letters,
           key: key,
           controller: controller,
           contentScrollController: scrollController,
@@ -130,8 +130,8 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FSelect<String>.fromMap(
-          letters,
+        child: FSelect<String>(
+          items: letters,
           key: key,
           controller: controller,
           contentScrollController: scrollController,

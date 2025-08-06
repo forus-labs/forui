@@ -10,19 +10,33 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// The [FTextField.counterBuilder] callback.
+/// A callback for building a custom counter for a text field.
 ///
-/// [currentLength] represents the length of the text field's input.
-/// [maxLength] represents the maximum length of the text field's input.
-/// [focused] represents whether the text field is currently focused.
+/// [currentLength] is the length of the text field's input.
+/// [maxLength] is the maximum length of the text field's input.
+/// [focused] is whether the text field is currently focused.
+///
+/// See [FTextField.counterBuilder].
 typedef FTextFieldCounterBuilder =
-    Widget? Function(
-      BuildContext context,
-      int currentLength,
-      int? maxLength,
-      // ignore: avoid_positional_boolean_parameters
-      bool focused,
-    );
+    // ignore: avoid_positional_boolean_parameters
+    Widget? Function(BuildContext context, int currentLength, int? maxLength, bool focused);
+
+/// A callback for decorating a field. It should always use the given field.
+///
+/// [style] is the field's style.
+/// [states] is the current states of the widget.
+/// [field] is the field that will be decorated.
+///
+/// See [FTextField.builder].
+typedef FFieldBuilder<T> = Widget Function(BuildContext context, T style, Set<WidgetState> states, Widget field);
+
+/// A callback for building a field's icon.
+///
+/// [style] is the field's style.
+/// [states] is the current states of the widget.
+///
+/// See [FTextField.prefixBuilder] and [FTextField.suffixBuilder].
+typedef FFieldIconBuilder<T> = Widget Function(BuildContext context, T style, Set<WidgetState> states);
 
 @internal
 extension Defaults on Never {
@@ -31,7 +45,7 @@ extension Defaults on Never {
   static Widget contextMenuBuilder(BuildContext _, EditableTextState state) =>
       AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
 
-  static Widget builder(BuildContext _, (FTextFieldStyle, Set<WidgetState>) _, Widget? child) => child!;
+  static Widget builder(BuildContext _, FTextFieldStyle _, Set<WidgetState> _, Widget child) => child;
 }
 
 /// A text field.
@@ -57,11 +71,11 @@ class FTextField extends StatefulWidget {
   final FTextFieldStyle Function(FTextFieldStyle)? style;
 
   /// {@template forui.text_field.builder}
-  /// The builder used to decorate the text-field. It should use the given child.
+  /// The builder used to decorate the text-field. It should always use the given child.
   ///
   /// Defaults to returning the given child.
   /// {@endtemplate}
-  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder;
+  final FFieldBuilder<FTextFieldStyle> builder;
 
   /// {@template forui.text_field.label}
   /// A builder that creates a widget to display validation errors.
@@ -644,14 +658,14 @@ class FTextField extends StatefulWidget {
   ///
   /// See [InputDecoration.prefixIcon] for more information.
   /// {@endtemplate}
-  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
 
   /// {@template forui.text_field.suffixBuilder}
   /// The suffix's builder.
   ///
   /// See [InputDecoration.suffixIcon] for more information.
   /// {@endtemplate}
-  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
 
   /// {@template forui.text_field.clearable}
   /// A predicate that returns true if a clear icon should be shown at the end when the text field is not empty.
@@ -1160,7 +1174,7 @@ class _State extends State<FTextField> {
       // Error should never be null as doing so causes the widget tree to change. This causes overlays attached to
       // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.
       error: widget.error ?? const SizedBox(),
-      child: widget.builder(context, (style, states), textfield),
+      child: widget.builder(context, style, states, textfield),
     );
 
     field = MergeSemantics(
@@ -1208,7 +1222,7 @@ class _State extends State<FTextField> {
     final padding = style.contentPadding.resolve(textDirection);
     final states = _statesController.value;
 
-    final suffixIcon = widget.suffixBuilder?.call(context, (style, states), null);
+    final suffixIcon = widget.suffixBuilder?.call(context, style, states);
     final clear = widget.clearable(_controller.value)
         ? Padding(
             padding: style.clearButtonPadding,
@@ -1222,7 +1236,7 @@ class _State extends State<FTextField> {
 
     return InputDecoration(
       isDense: true,
-      prefixIcon: widget.prefixBuilder?.call(context, (style, states), null),
+      prefixIcon: widget.prefixBuilder?.call(context, style, states),
       suffixIcon: switch ((suffixIcon, clear)) {
         (final icon?, final clear?) when !states.contains(WidgetState.disabled) => Row(
           mainAxisAlignment: MainAxisAlignment.end,

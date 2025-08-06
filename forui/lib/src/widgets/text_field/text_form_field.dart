@@ -22,7 +22,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final FTextFieldStyle Function(FTextFieldStyle)? style;
 
   /// {@macro forui.text_field.builder}
-  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)> builder;
+  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder;
 
   /// {@macro forui.text_field.label}
   @override
@@ -190,10 +190,10 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final SpellCheckConfiguration? spellCheckConfiguration;
 
   /// {@macro forui.text_field.prefixBuilder}
-  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
+  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder;
 
   /// {@macro forui.text_field.suffixBuilder}
-  final ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
+  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue) clearable;

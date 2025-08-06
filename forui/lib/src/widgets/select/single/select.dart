@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -30,32 +32,27 @@ part 'select.style.dart';
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(
-    BuildContext _,
-    (FSelectStyle, FTextFieldStyle, Set<WidgetState>) styles,
-    Widget? _,
-  ) => Padding(
+  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<WidgetState> _) => Padding(
     padding: const EdgeInsetsDirectional.only(end: 8.0),
-    child: IconTheme(data: styles.$1.iconStyle, child: const Icon(FIcons.chevronDown)),
+    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.chevronDown)),
   );
 
-  /// The default loading builder that shows a spinner when an asynchronous search is pending.
-  static Widget defaultSearchLoadingBuilder(BuildContext _, FSelectSearchStyle style, Widget? _) => Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: FProgress.circularIcon(style: (s) => style.loadingIndicatorStyle),
+  /// The default content loading builder that shows a spinner when an asynchronous search is pending.
+  static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
+    padding: const EdgeInsets.all(13),
+    child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
   );
 
-  /// The default empty builder that shows a localized message when there are no results.
-  static Widget defaultEmptyBuilder(BuildContext context, FSelectStyle style, Widget? _) {
+  /// The default content empty builder that shows a localized message when there are no results.
+  static Widget defaultContentEmptyBuilder(BuildContext context, FSelectStyle style) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
-      child: Text(localizations.selectNoResults, style: style.emptyTextStyle),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+      child: Text(localizations.selectNoResults, style: style.emptyTextStyle, textAlign: TextAlign.center),
     );
   }
 
-  static Widget _fieldBuilder(BuildContext _, (FSelectStyle, FTextFieldStyle, Set<WidgetState>) _, Widget? child) =>
-      child!;
+  static Widget _fieldBuilder(BuildContext _, FSelectStyle _, Set<WidgetState> _, Widget child) => child;
 
   static String? _defaultValidator(Object? _) => null;
 
@@ -81,14 +78,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The builder used to decorate the select. It should use the given child.
   ///
   /// Defaults to returning the given child.
-  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder;
+  final FFieldBuilder<FSelectStyle> builder;
 
   /// Builds a widget at the start of the select that can be pressed to toggle the popover. Defaults to no icon.
-  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder;
+  final FFieldIconBuilder<FSelectStyle>? prefixBuilder;
 
   /// Builds a widget at the end of the select that can be pressed to toggle the popover. Defaults to
   /// [defaultIconBuilder].
-  final ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder;
+  final FFieldIconBuilder<FSelectStyle>? suffixBuilder;
 
   @override
   final Widget? label;
@@ -163,14 +160,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
-  /// {@macro forui.widgets.FPopover.hideOnTapOutside}
-  final FHidePopoverRegion hideOnTapOutside;
+  /// {@macro forui.widgets.FPopover.hideRegion}
+  final FPopoverHideRegion hideRegion;
 
   /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
-  /// The builder that is called when the select is empty. Defaults to [defaultEmptyBuilder].
-  final ValueWidgetBuilder<FSelectStyle> emptyBuilder;
+  /// The builder that is called when the select's content is empty. Defaults to [defaultContentEmptyBuilder].
+  final Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder;
 
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
@@ -190,65 +187,22 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// Throws [AssertionError] if both the controller and initialValue are provided.
   final T? initialValue;
 
-  /// Creates a select with a list of selectable items.
-  const factory FSelect({
-    required String Function(T) format,
-    required List<FSelectItemMixin> children,
-    FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
-    bool autofocus,
-    FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
-    Widget? label,
-    Widget? description,
-    bool enabled,
-    ValueChanged<T?>? onChange,
-    FormFieldSetter<T>? onSaved,
-    AutovalidateMode autovalidateMode,
-    String? forceErrorText,
-    FormFieldValidator<T> validator,
-    Widget Function(BuildContext, String) errorBuilder,
-    String? hint,
-    TextAlign textAlign,
-    TextAlignVertical? textAlignVertical,
-    TextDirection? textDirection,
-    bool expands,
-    MouseCursor mouseCursor,
-    bool canRequestFocus,
-    bool clearable,
-    AlignmentGeometry anchor,
-    AlignmentGeometry fieldAnchor,
-    FPortalConstraints popoverConstraints,
-    FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
-    Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
-    bool autoHide,
-    ValueWidgetBuilder<FSelectStyle> emptyBuilder,
-    ScrollController? contentScrollController,
-    bool contentScrollHandles,
-    ScrollPhysics contentPhysics,
-    FItemDivider contentDivider,
-    T? initialValue,
-    Key? key,
-  }) = _BasicSelect<T>;
-
   /// Creates a [FSelect] from the given [items].
+  ///
+  /// For more control over the appearance of items, use [FSelect.rich].
   ///
   /// ## Contract
   /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
   /// undefined behavior.
-  factory FSelect.fromMap(
-    Map<String, T> items, {
+  factory FSelect({
+    required Map<String, T> items,
     FSelectController<T>? controller,
     FSelectStyle Function(FSelectStyle)? style,
     bool autofocus = false,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder = defaultIconBuilder,
+    FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
+    FFieldIconBuilder<FSelectStyle>? prefixBuilder,
+    FFieldIconBuilder<FSelectStyle>? suffixBuilder = defaultIconBuilder,
     Widget? label,
     Widget? description,
     bool enabled = true,
@@ -272,9 +226,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalSpacing spacing = const FPortalSpacing(4),
     Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
-    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
-    ValueWidgetBuilder<FSelectStyle> emptyBuilder = defaultEmptyBuilder,
+    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
@@ -283,7 +237,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
-    return FSelect<T>(
+    return FSelect<T>.rich(
       controller: controller,
       style: style,
       autofocus: autofocus,
@@ -315,16 +269,179 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       spacing: spacing,
       shift: shift,
       offset: offset,
-      hideOnTapOutside: hideOnTapOutside,
+      hideRegion: hideRegion,
       autoHide: autoHide,
-      emptyBuilder: emptyBuilder,
+      contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
       initialValue: initialValue,
       key: key,
-      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(key, value)],
+      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(title: Text(key), value: value)],
+    );
+  }
+
+  /// Creates a select with the given [children].
+  const factory FSelect.rich({
+    required String Function(T) format,
+    required List<FSelectItemMixin> children,
+    FSelectController<T>? controller,
+    FSelectStyle Function(FSelectStyle)? style,
+    bool autofocus,
+    FocusNode? focusNode,
+    FFieldBuilder<FSelectStyle> builder,
+    FFieldIconBuilder<FSelectStyle>? prefixBuilder,
+    FFieldIconBuilder<FSelectStyle>? suffixBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled,
+    ValueChanged<T?>? onChange,
+    FormFieldSetter<T>? onSaved,
+    AutovalidateMode autovalidateMode,
+    String? forceErrorText,
+    FormFieldValidator<T> validator,
+    Widget Function(BuildContext, String) errorBuilder,
+    String? hint,
+    TextAlign textAlign,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands,
+    MouseCursor mouseCursor,
+    bool canRequestFocus,
+    bool clearable,
+    AlignmentGeometry anchor,
+    AlignmentGeometry fieldAnchor,
+    FPortalConstraints popoverConstraints,
+    FPortalSpacing spacing,
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset offset,
+    FPopoverHideRegion hideRegion,
+    bool autoHide,
+    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder,
+    ScrollController? contentScrollController,
+    bool contentScrollHandles,
+    ScrollPhysics contentPhysics,
+    FItemDivider contentDivider,
+    T? initialValue,
+    Key? key,
+  }) = _BasicSelect<T>;
+
+  /// Creates a searchable select with dynamic content based on the given [items] and search input.
+  ///
+  /// The [searchFieldProperties] can be used to customize the search field.
+  ///
+  /// The [filter] callback produces a list of items based on the search query. Defaults to returning items that start
+  /// with the query string.
+  /// The [contentLoadingBuilder] is used to show a loading indicator while the search results is processed
+  /// asynchronously by [filter].
+  /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
+  ///
+  /// For more control over the appearance of items, use [FSelect.searchBuilder].
+  ///
+  /// ## Contract
+  /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
+  /// undefined behavior.
+  factory FSelect.search({
+    required Map<String, T> items,
+    FutureOr<Iterable<T>> Function(String query)? filter,
+    FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
+    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder = FSelect.defaultContentLoadingBuilder,
+    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    FSelectController<T>? controller,
+    FSelectStyle Function(FSelectStyle)? style,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
+    FFieldIconBuilder<FSelectStyle>? prefixBuilder,
+    FFieldIconBuilder<FSelectStyle>? suffixBuilder = defaultIconBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled = true,
+    ValueChanged<T?>? onChange,
+    FormFieldSetter<T>? onSaved,
+    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
+    String? forceErrorText,
+    FormFieldValidator<T> validator = _defaultValidator,
+    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    String? hint,
+    TextAlign textAlign = TextAlign.start,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool expands = false,
+    MouseCursor mouseCursor = SystemMouseCursors.click,
+    bool canRequestFocus = true,
+    bool clearable = false,
+    AlignmentGeometry anchor = AlignmentDirectional.topStart,
+    AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
+    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+    FPortalSpacing spacing = const FPortalSpacing(4),
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset offset = Offset.zero,
+    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
+    bool autoHide = true,
+    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
+    ScrollController? contentScrollController,
+    bool contentScrollHandles = false,
+    ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
+    FItemDivider contentDivider = FItemDivider.none,
+    T? initialValue,
+    Key? key,
+  }) {
+    final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
+    return FSelect<T>.searchBuilder(
+      format: (value) => inverse[value]!,
+      filter:
+          filter ??
+          (query) => items.entries
+              .where((entry) => entry.key.toLowerCase().startsWith(query.toLowerCase()))
+              .map((entry) => entry.value)
+              .toList(),
+      contentBuilder: (context, _, values) => [
+        for (final value in values) FSelectItem<T>(title: Text(inverse[value]!), value: value),
+      ],
+      searchFieldProperties: searchFieldProperties,
+      contentLoadingBuilder: contentLoadingBuilder,
+      contentErrorBuilder: contentErrorBuilder,
+      controller: controller,
+      style: style,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      builder: builder,
+      prefixBuilder: prefixBuilder,
+      suffixBuilder: suffixBuilder,
+      label: label,
+      description: description,
+      enabled: enabled,
+      onChange: onChange,
+      onSaved: onSaved,
+      autovalidateMode: autovalidateMode,
+      forceErrorText: forceErrorText,
+      validator: validator,
+      errorBuilder: errorBuilder,
+      hint: hint,
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      expands: expands,
+      mouseCursor: mouseCursor,
+      canRequestFocus: canRequestFocus,
+      clearable: clearable,
+      anchor: anchor,
+      fieldAnchor: fieldAnchor,
+      popoverConstraints: popoverConstraints,
+      spacing: spacing,
+      shift: shift,
+      offset: offset,
+      hideRegion: hideRegion,
+      autoHide: autoHide,
+      contentEmptyBuilder: contentEmptyBuilder,
+      contentScrollController: contentScrollController,
+      contentScrollHandles: contentScrollHandles,
+      contentPhysics: contentPhysics,
+      contentDivider: contentDivider,
+      initialValue: initialValue,
+      key: key,
     );
   }
 
@@ -334,23 +451,23 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   ///
   /// The [filter] callback produces a list of items based on the search query either synchronously or asynchronously.
   /// The [contentBuilder] callback builds the list of items based on search results returned by [filter].
-  /// The [searchLoadingBuilder] is used to show a loading indicator while the search results is processed
+  /// The [contentLoadingBuilder] is used to show a loading indicator while the search results is processed
   /// asynchronously by [filter].
-  /// The [searchErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
-  const factory FSelect.search({
+  /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
+  const factory FSelect.searchBuilder({
     required String Function(T) format,
-    required FSelectSearchFilter<T> filter,
+    required FutureOr<Iterable<T>> Function(String query) filter,
     required FSelectSearchContentBuilder<T> contentBuilder,
     FSelectSearchFieldProperties searchFieldProperties,
-    ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder,
+    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder,
+    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
     FSelectController<T>? controller,
     FSelectStyle Function(FSelectStyle)? style,
     bool autofocus,
     FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder,
+    FFieldBuilder<FSelectStyle> builder,
+    FFieldIconBuilder<FSelectStyle>? prefixBuilder,
+    FFieldIconBuilder<FSelectStyle>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -374,9 +491,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalSpacing spacing,
     Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
-    FHidePopoverRegion hideOnTapOutside,
+    FPopoverHideRegion hideRegion,
     bool autoHide,
-    ValueWidgetBuilder<FSelectStyle> emptyBuilder,
+    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
@@ -384,120 +501,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     T? initialValue,
     Key? key,
   }) = _SearchSelect<T>;
-
-  /// Creates a searchable select with dynamic content based on the given [items] and search input.
-  ///
-  /// The [searchFieldProperties] can be used to customize the search field.
-  ///
-  /// The [filter] callback produces a list of items based on the search query. Defaults to returning items that start
-  /// with the query string.
-  /// The [searchLoadingBuilder] is used to show a loading indicator while the search results is processed
-  /// asynchronously by [filter].
-  /// The [searchErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
-  ///
-  /// ## Contract
-  /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
-  /// undefined behavior.
-  factory FSelect.searchFromMap(
-    Map<String, T> items, {
-    FSelectSearchFilter<T>? filter,
-    FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
-    ValueWidgetBuilder<FSelectSearchStyle> searchLoadingBuilder = FSelect.defaultSearchLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? searchErrorBuilder,
-    FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
-    bool autofocus = false,
-    FocusNode? focusNode,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)> builder = _fieldBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? prefixBuilder,
-    ValueWidgetBuilder<(FSelectStyle, FTextFieldStyle, Set<WidgetState>)>? suffixBuilder = defaultIconBuilder,
-    Widget? label,
-    Widget? description,
-    bool enabled = true,
-    ValueChanged<T?>? onChange,
-    FormFieldSetter<T>? onSaved,
-    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
-    String? forceErrorText,
-    FormFieldValidator<T> validator = _defaultValidator,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    String? hint,
-    TextAlign textAlign = TextAlign.start,
-    TextAlignVertical? textAlignVertical,
-    TextDirection? textDirection,
-    bool expands = false,
-    MouseCursor mouseCursor = SystemMouseCursors.click,
-    bool canRequestFocus = true,
-    bool clearable = false,
-    AlignmentGeometry anchor = AlignmentDirectional.topStart,
-    AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
-    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
-    Offset offset = Offset.zero,
-    FHidePopoverRegion hideOnTapOutside = FHidePopoverRegion.excludeTarget,
-    bool autoHide = true,
-    ValueWidgetBuilder<FSelectStyle> emptyBuilder = defaultEmptyBuilder,
-    ScrollController? contentScrollController,
-    bool contentScrollHandles = false,
-    ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
-    FItemDivider contentDivider = FItemDivider.none,
-    T? initialValue,
-    Key? key,
-  }) {
-    final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
-    return FSelect<T>.search(
-      format: (value) => inverse[value]!,
-      filter:
-          filter ??
-          (query) => items.entries
-              .where((entry) => entry.key.toLowerCase().startsWith(query.toLowerCase()))
-              .map((entry) => entry.value)
-              .toList(),
-      contentBuilder: (context, data) => [for (final value in data.values) FSelectItem<T>(inverse[value]!, value)],
-      searchFieldProperties: searchFieldProperties,
-      searchLoadingBuilder: searchLoadingBuilder,
-      searchErrorBuilder: searchErrorBuilder,
-      controller: controller,
-      style: style,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      builder: builder,
-      prefixBuilder: prefixBuilder,
-      suffixBuilder: suffixBuilder,
-      label: label,
-      description: description,
-      enabled: enabled,
-      onChange: onChange,
-      onSaved: onSaved,
-      autovalidateMode: autovalidateMode,
-      forceErrorText: forceErrorText,
-      validator: validator,
-      errorBuilder: errorBuilder,
-      hint: hint,
-      textAlign: textAlign,
-      textAlignVertical: textAlignVertical,
-      textDirection: textDirection,
-      expands: expands,
-      mouseCursor: mouseCursor,
-      canRequestFocus: canRequestFocus,
-      clearable: clearable,
-      anchor: anchor,
-      fieldAnchor: fieldAnchor,
-      popoverConstraints: popoverConstraints,
-      spacing: spacing,
-      shift: shift,
-      offset: offset,
-      hideOnTapOutside: hideOnTapOutside,
-      autoHide: autoHide,
-      emptyBuilder: emptyBuilder,
-      contentScrollController: contentScrollController,
-      contentScrollHandles: contentScrollHandles,
-      contentPhysics: contentPhysics,
-      contentDivider: contentDivider,
-      initialValue: initialValue,
-      key: key,
-    );
-  }
 
   const FSelect._({
     required this.format,
@@ -531,9 +534,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
     this.autoHide = true,
-    this.emptyBuilder = defaultEmptyBuilder,
+    this.contentEmptyBuilder = defaultContentEmptyBuilder,
     this.contentScrollController,
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
@@ -578,9 +581,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('shift', shift))
       ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideOnTapOutside', hideOnTapOutside))
+      ..add(EnumProperty('hideRegion', hideRegion))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
-      ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
+      ..add(ObjectFlagProperty.has('emptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
@@ -714,22 +717,16 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
         enableInteractiveSelection: false,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, _, states) => widget.prefixBuilder!(context, style, states),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, _, states) => widget.suffixBuilder!(context, style, states),
         clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
         label: widget.label,
         description: widget.description,
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
         enabled: widget.enabled,
-        builder: (context, data, child) => FPopover(
+        builder: (context, _, states, field) => FPopover(
           controller: _controller.popover,
           style: style.popoverStyle,
           constraints: widget.popoverConstraints,
@@ -738,7 +735,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
           spacing: widget.spacing,
           shift: widget.shift,
           offset: widget.offset,
-          hideOnTapOutside: widget.hideOnTapOutside,
+          hideRegion: widget.hideRegion,
           shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
           popoverBuilder: (_, popoverController) => TextFieldTapRegion(
             child: InheritedSelectController<T>(
@@ -758,7 +755,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
           ),
           child: CallbackShortcuts(
             bindings: {const SingleActivator(LogicalKeyboardKey.enter): _toggle},
-            child: widget.builder(context, (style, data.$1, data.$2), child),
+            child: widget.builder(context, style, states, field),
           ),
         ),
       ),

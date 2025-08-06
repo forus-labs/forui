@@ -105,7 +105,7 @@ void main() {
             barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
           onTapHide: () => count++,
-          hideOnTapOutside: FHidePopoverRegion.none,
+          hideRegion: FPopoverHideRegion.none,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
@@ -130,7 +130,7 @@ void main() {
       TestScaffold.app(
         child: FPopover(
           onTapHide: () => count++,
-          hideOnTapOutside: FHidePopoverRegion.none,
+          hideRegion: FPopoverHideRegion.none,
           popoverBuilder: (context, _) => const Text('popover'),
           builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
         ),
@@ -149,7 +149,7 @@ void main() {
     expect(find.text('popover'), findsOneWidget);
   });
 
-  testWidgets('tap button when popover is open and FHidePopoverRegion.excludeTarget remains open', (tester) async {
+  testWidgets('tap button when popover is open and FPopoverHideRegion.excludeChild remains open', (tester) async {
     var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
@@ -183,13 +183,13 @@ void main() {
     expect(find.text('popover'), findsNothing);
   });
 
-  testWidgets('tap button when popover is open and FHidePopoverRegion.anywhere closes it', (tester) async {
+  testWidgets('tap button when popover is open and FPopoverHideRegion.anywhere closes it', (tester) async {
     var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
           onTapHide: () => count++,
-          hideOnTapOutside: FHidePopoverRegion.anywhere,
+          hideRegion: FPopoverHideRegion.anywhere,
           popoverBuilder: (context, _) => const Text('follower'),
           builder: (_, controller, _) => Row(
             children: [

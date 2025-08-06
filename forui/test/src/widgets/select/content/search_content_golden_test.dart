@@ -16,7 +16,12 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(key: key, format: (s) => s, filter: (_) => [], contentBuilder: (_, _) => []),
+          child: FSelect<String>.searchBuilder(
+            key: key,
+            format: (s) => s,
+            filter: (_) => [],
+            contentBuilder: (_, _, _) => [],
+          ),
         ),
       );
 
@@ -34,11 +39,14 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) => [],
-            contentBuilder: (_, _) => [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            contentBuilder: (_, _, _) => [
+              const FSelectItem(title: Text('A'), value: 'A'),
+              const FSelectItem(title: Text('B'), value: 'B'),
+            ],
           ),
         ),
       );
@@ -63,11 +71,11 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) => [],
-            contentBuilder: (_, _) => [FSelectItem('A', 'A')],
+            contentBuilder: (_, _, _) => [const FSelectItem(title: Text('A'), value: 'A')],
           ),
         ),
       );
@@ -83,14 +91,14 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _) => [FSelectItem('A', 'A')],
+            contentBuilder: (_, _, _) => [const FSelectItem(title: Text('A'), value: 'A')],
           ),
         ),
       );
@@ -106,15 +114,15 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 5));
               throw ArgumentError();
             },
-            contentBuilder: (_, _) => [FSelectItem('A', 'A')],
-            searchErrorBuilder: (_, error, trace) => Container(color: Colors.red, height: 10, width: 10),
+            contentBuilder: (_, _, _) => [const FSelectItem(title: Text('A'), value: 'A')],
+            contentErrorBuilder: (_, error, trace) => Container(color: Colors.red, height: 10, width: 10),
           ),
         ),
       );
@@ -135,14 +143,14 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 5));
               throw ArgumentError();
             },
-            contentBuilder: (_, data) => [for (final v in data.values) FSelectItem(v, v)],
+            contentBuilder: (_, _, values) => [for (final v in values) FSelectItem(title: Text(v), value: v)],
           ),
         ),
       );
@@ -165,14 +173,14 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) async {
               await completer.future;
               return [];
             },
-            contentBuilder: (_, _) => [FSelectItem('A', 'A')],
+            contentBuilder: (_, _, _) => [const FSelectItem(title: Text('A'), value: 'A')],
           ),
         ),
       );

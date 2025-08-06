@@ -29,7 +29,7 @@ class ToastPage extends Sample {
               alignment: alignment,
               title: const Text('Event has been created'),
               description: const Text('Friday, May 23, 2025 at 9:00 AM'),
-              suffixBuilder: (context, entry, _) => IntrinsicHeight(
+              suffixBuilder: (context, entry) => IntrinsicHeight(
                 child: FButton(
                   style: context.theme.buttonStyles.primary.copyWith(
                     contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(

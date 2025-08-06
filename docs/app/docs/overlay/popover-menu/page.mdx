@@ -76,7 +76,7 @@ FPopoverMenu(
   shift: FPortalShift.flip,
   offset: Offset.zero,
   groupId: 'popover-menu-group',
-  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
+  hideRegion: FPopoverHideRegion.excludeChild,
   onTapHide: () {},
   traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
   menuBuilder: (context, controller, menu) => [FItemGroup(children: [])],
@@ -106,7 +106,7 @@ FPopoverMenu.tiles(
   shift: FPortalShift.flip,
   offset: Offset.zero,
   groupId: 'popover-menu-group',
-  hideOnTapOutside: FHidePopoverRegion.excludeTarget,
+  hideRegion: FPopoverHideRegion.excludeChild,
   traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
   menuBuilder: (context, controller, menu) => [FTileGroup(children: [])],
   menu: [

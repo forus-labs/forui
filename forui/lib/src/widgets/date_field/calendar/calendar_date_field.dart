@@ -22,7 +22,9 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final Offset offset;
   @override
-  final FHidePopoverRegion hideOnTapOutside;
+  final FPopoverHideRegion hideRegion;
+  @override
+  final VoidCallback? onTapHide;
   @override
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
   @override
@@ -43,7 +45,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = SystemMouseCursors.click,
+    this.mouseCursor = MouseCursor.defer,
     this.canRequestFocus = true,
     this.clearable = false,
     this.anchor = Alignment.topLeft,
@@ -51,7 +53,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.spacing = const FPortalSpacing(4),
     this.shift = FPortalShift.flip,
     this.offset = Offset.zero,
-    this.hideOnTapOutside = FHidePopoverRegion.excludeTarget,
+    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.onTapHide,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -90,6 +93,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
@@ -183,22 +187,16 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         enableInteractiveSelection: false,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.prefixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, _, states) => widget.prefixBuilder!(context, style, states),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, styles, _) => MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: widget.suffixBuilder?.call(context, (style, styles.$1, styles.$2), null),
-              ),
+            : (context, _, states) => widget.suffixBuilder!(context, style, states),
         clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
         label: widget.label,
         description: widget.description,
         error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
         enabled: widget.enabled,
-        builder: (context, data, child) => _CalendarPopover(
+        builder: (context, _, states, field) => _CalendarPopover(
           controller: _controller,
           style: style,
           properties: widget,
@@ -206,7 +204,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
           fieldFocusNode: _focus,
           child: CallbackShortcuts(
             bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
-            child: widget.builder(context, (style, data.$1, data.$2), child),
+            child: widget.builder(context, style, states, field),
           ),
         ),
       ),
@@ -264,7 +262,7 @@ class _CalendarPopover extends StatelessWidget {
     spacing: properties.spacing,
     shift: properties.shift,
     offset: properties.offset,
-    hideOnTapOutside: properties.hideOnTapOutside,
+    hideRegion: properties.hideRegion,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
     popoverBuilder: (_, _) => TextFieldTapRegion(

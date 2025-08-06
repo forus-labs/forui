@@ -58,7 +58,7 @@ void main() {
               fieldStyle: (s) => s.copyWith(cursorColor: const Color(0xFF03A9F4)),
             ),
             filter: (_) => [],
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FAutocompleteItem('$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FAutocompleteItem(value: '$i')],
           ),
         ),
       );
@@ -81,7 +81,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FAutocompleteItem('$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FAutocompleteItem(value: '$i')],
           ),
         ),
       );

@@ -150,5 +150,26 @@ void main() {
 
       debugDefaultTargetPlatformOverride = null;
     });
+
+    testWidgets('raw', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          alignment: Alignment.topCenter,
+          child: FAutocomplete.builder(
+            key: key,
+            filter: (query) => ['v'],
+            contentBuilder: (_, _, _) => [
+              FAutocompleteItem(prefix: const Icon(FIcons.circle), title: const Text('Title'), value: 'v'),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/${theme.name}/item/raw.png'));
+    });
   }
 }
