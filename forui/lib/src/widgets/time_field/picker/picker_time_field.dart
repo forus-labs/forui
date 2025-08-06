@@ -36,7 +36,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = SystemMouseCursors.text,
+    this.mouseCursor = MouseCursor.defer,
     this.canRequestFocus = true,
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,

@@ -45,7 +45,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = SystemMouseCursors.text,
+    this.mouseCursor = MouseCursor.defer,
     this.canRequestFocus = true,
     this.clearable = false,
     this.anchor = Alignment.topLeft,
