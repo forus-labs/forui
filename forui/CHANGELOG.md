@@ -67,11 +67,14 @@ We've changed the default cursor for many widgets from `MouseCursor.click` to `M
 
 
 ### `FSelect`
+We've done an overhaul of `FSelect` to make it more consistent and easier to use.
+
 * Add `FSelect.contentEmptyBuilder`.
+* Add `FSelectItem.raw(...)`
 
 * Change `FSelect`'s vertical padding for default loading and empty indicators to be the same height.
 * **Breaking** Rename `FSelect.divider` to `FSelect.contentDivider`.
-* **Breaking** Change `FSelect.hideOnTapOutside` to `FSelect.hideRegion`.
+* **Breaking** Replace `FSelect.hideOnTapOutside` with `FSelect.hideRegion`.
 * **Breaking** Change `FSelect.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
   `FFieldBuilder<FTextFieldStyle>`.
 * **Breaking** Change `FSelect.prefixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
@@ -93,8 +96,8 @@ We've changed the default cursor for many widgets from `MouseCursor.click` to `M
 * **Breaking** Replace `FSelect.searchErrorBuilder` with `FSelect.contentErrorBuilder`.
 * **Breaking** Replace `FSelect.defaultEmptyBuilder` with `FSelect.defaultContentEmptyBuilder`.
 * **Breaking** Replace `FSelect.defaultSearchLoadingBuilder` with `FSelect.defaultContentLoadingBuilder`.
-* **Breaking** Replace `FMultiSelect.defaultEmptyBuilder` with `FMultiSelect.defaultContentEmptyBuilder`.
-* **Breaking** Replace `FMultiSelect.defaultSearchLoadingBuilder` with `FMultiSelect.defaultContentLoadingBuilder`.
+* **Breaking** Change `FSelectItem(...)`'s parameters to no longer accept string parameter.
+* **Breaking** Replace `FSelectItemStyle` with underlying `FItemStyle`.
 
 
 ### `FSelectMenuTile`

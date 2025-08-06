@@ -35,8 +35,8 @@ void main() {
             format: (s) => s,
             style: TestScaffold.blueScreen.selectStyle,
             children: [
-              FSelectSection(label: const Text('A'), children: [FSelectItem('B', 'B')]),
-              for (int i = 0; i < 10; i++) FSelectItem('$i', '$i'),
+              const FSelectSection(label: Text('A'), children: [FSelectItem(title: Text('B'), value: 'B')]),
+              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
             ],
           ),
         ),
@@ -75,8 +75,11 @@ void main() {
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             children: [
-              FSelectSection(label: const Text('A'), children: [FSelectItem('B', 'B')]),
-              for (int i = 0; i < 10; i++) FSelectItem('$i', '$i'),
+              const FSelectSection(
+                label: Text('A'),
+                children: [FSelectItem(title: Text('B'), value: 'B')],
+              ),
+              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
             ],
           ),
         ),
@@ -110,7 +113,7 @@ void main() {
             style: TestScaffold.blueScreen.selectStyle,
             contentScrollHandles: true,
             filter: (_) => [],
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem('$i', '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
           ),
         ),
       );
@@ -133,7 +136,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem('$i', '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
           ),
         ),
       );
@@ -230,7 +233,10 @@ void main() {
             key: key,
             format: (s) => s,
             autoHide: false,
-            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            children: const [
+              FSelectItem(title: Text('A'), value: 'A'),
+              FSelectItem(title: Text('B'), value: 'B'),
+            ],
             builder: (_, _, _, child) => DecoratedBox(
               decoration: const BoxDecoration(color: Colors.red),
               child: child,

@@ -33,7 +33,7 @@ class MultiSelectPage extends Sample {
     child: FMultiSelect<String>(
       hint: const Text('Select a fruit'),
       format: Text.new,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
     ),
   );
 }
@@ -48,23 +48,23 @@ class DetailedMultiSelectPage extends Sample {
     child: FMultiSelect<String>(
       hint: const Text('Type'),
       format: Text.new,
-      children: [
-        FSelectItem.from(
-          prefix: const Icon(FIcons.bug),
-          title: const Text('Bug'),
-          subtitle: const Text('An unexpected problem or behavior'),
+      children: const [
+        FSelectItem(
+          prefix: Icon(FIcons.bug),
+          title: Text('Bug'),
+          subtitle: Text('An unexpected problem or behavior'),
           value: 'Bug',
         ),
-        FSelectItem.from(
-          prefix: const Icon(FIcons.filePlus2),
-          title: const Text('Feature'),
-          subtitle: const Text('A new feature or enhancement'),
+        FSelectItem(
+          prefix: Icon(FIcons.filePlus2),
+          title: Text('Feature'),
+          subtitle: Text('A new feature or enhancement'),
           value: 'Feature',
         ),
-        FSelectItem.from(
-          prefix: const Icon(FIcons.messageCircleQuestionMark),
-          title: const Text('Question'),
-          subtitle: const Text('A question or clarification'),
+        FSelectItem(
+          prefix: Icon(FIcons.messageCircleQuestionMark),
+          title: Text('Question'),
+          subtitle: Text('A question or clarification'),
           value: 'Question',
         ),
       ],
@@ -180,8 +180,8 @@ class DividerMultiSelectPage extends Sample {
             for (final item in ['A', 'B']) item: '2$item',
           },
         ),
-        FSelectItem('Level 3', '3'),
-        FSelectItem('Level 4', '4'),
+        const FSelectItem(title: Text('Level 3'), value:  '3'),
+        const FSelectItem(title: Text('Level 4'), value:  '4'),
       ],
     ),
   );
@@ -198,7 +198,7 @@ class SyncMultiSelectPage extends Sample {
       hint: const Text('Select a fruit'),
       format: Text.new,
       filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
     ),
   );
 }
@@ -217,7 +217,7 @@ class AsyncMultiSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
     ),
   );
 }
@@ -240,7 +240,7 @@ class AsyncLoadingMultiSelectPage extends Sample {
         padding: const EdgeInsets.all(8.0),
         child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
       ),
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
     ),
   );
 }
@@ -259,7 +259,7 @@ class AsyncErrorMultiSelectPage extends Sample {
         await Future.delayed(const Duration(seconds: 1));
         throw StateError('Error loading data');
       },
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
       contentErrorBuilder: (context, error, trace) {
         final style = context.theme.selectStyle.iconStyle;
         return Padding(
@@ -282,7 +282,7 @@ class ClearableMultiSelectPage extends Sample {
       hint: const Text('Select a fruit'),
       format: Text.new,
       clearable: true,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
     ),
   );
 }
@@ -304,7 +304,7 @@ class FormatMultiSelectPage extends Sample {
     child: FMultiSelect<({String firstName, String lastName})>(
       hint: const Text('Select a user'),
       format: (user) => Text('${user.firstName} ${user.lastName}'),
-      children: [for (final user in users) FSelectItem(user.firstName, user)],
+      children: [for (final user in users) FSelectItem(title: Text(user.firstName), value:  user)],
     ),
   );
 }
@@ -321,7 +321,7 @@ class MinMaxMultiSelectPage extends Sample {
       format: Text.new,
       min: 1,
       max: 3,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
     ),
   );
 }
@@ -337,7 +337,7 @@ class ScrollHandlesMultiSelectPage extends Sample {
       hint: const Text('Select a fruit'),
       format: Text.new,
       contentScrollHandles: true,
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
     ),
   );
 }
@@ -353,7 +353,7 @@ class SortedMultiSelectPage extends Sample {
       hint: const Text('Select favorite fruits'),
       format: Text.new,
       sort: (a, b) => a.compareTo(b),
-      children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
     ),
   );
 }
@@ -387,7 +387,7 @@ class _FormMultiSelectPageState extends StatefulSampleState<FormMultiSelectPage>
             hint: const Text('Select departments'),
             format: Text.new,
             validator: _validateDepartment,
-            children: [for (final department in _departments) FSelectItem(department, department)],
+            children: [for (final department in _departments) FSelectItem(title: Text(department), value:  department)],
           ),
           const SizedBox(height: 25),
           FButton(

@@ -3,6 +3,8 @@ import 'package:forui/forui.dart';
 
 const features = ['Keyboard navigation', 'Typeahead suggestions', 'Tab to complete'];
 
+const fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Pineapple'];
+
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -32,11 +34,28 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
     return Column(
       spacing: 5,
       children: [
-        FMultiSelect<String>(format: Text.new, children: [for (final fruit in features) FSelectItem(fruit, fruit)]),
-        FButton(onPress: () {}, child: Text('Button')),
-        FButton(style: FButtonStyle.ghost(), onPress: () {}, child: Text('Button')),
-        FButton(style: FButtonStyle.secondary(), onPress: () {}, child: Text('Button')),
-        FButton(style: FButtonStyle.outline(), onPress: () {}, child: Text('Button')),
+        FAutocomplete.builder(
+          hint: 'Type to search fruits',
+          filter: (query) async {
+            await Future.delayed(const Duration(seconds: 1));
+            return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
+          },
+          contentBuilder: (context, query, suggestions) => [
+            for (final suggestion in suggestions) FAutocompleteItem(suggestion),
+          ],
+        ),
+        FMultiSelect<String>(format: Text.new, children: const [
+          FSelectItem(title: Text('Apple'), value:  'Apple'),
+          FSelectItem(title: Text('Banana'), value:  'Banana'),
+          FSelectItem(title: Text('Cherry'), value:  'Cherry'),
+          FSelectItem(title: Text('Date'), value:  'Date'),
+        ]),
+        FMultiSelect<String>(format: Text.new, children: const [
+          FSelectItem(title: Text('Apple'), value:  'Apple'),
+          FSelectItem(title: Text('Banana'), value:  'Banana'),
+          FSelectItem(title: Text('Cherry'), value:  'Cherry'),
+          FSelectItem(title: Text('Date'), value:  'Date'),
+        ])
       ],
     );
   }

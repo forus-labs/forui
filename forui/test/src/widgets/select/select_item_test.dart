@@ -27,9 +27,15 @@ void main() {
             key: key,
             format: (s) => s,
             controller: controller,
-            children: [
-              FSelectSection(label: const Text('1st'), children: [FSelectItem('A', 'A')]),
-              FSelectSection(label: const Text('2nd'), children: [FSelectItem('B', 'B')]),
+            children: const [
+              FSelectSection(
+                label: Text('1st'),
+                children: [FSelectItem(title: Text('A'), value: 'A')],
+              ),
+              FSelectSection(
+                label: Text('2nd'),
+                children: [FSelectItem(title: Text('B'), value: 'B')],
+              ),
             ],
           ),
         ),
@@ -57,7 +63,10 @@ void main() {
             key: key,
             format: (s) => s,
             controller: controller,
-            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            children: const [
+              FSelectItem(title: Text('A'), value: 'A'),
+              FSelectItem(title: Text('B'), value: 'B'),
+            ],
           ),
         ),
       );

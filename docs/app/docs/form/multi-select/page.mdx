@@ -49,7 +49,7 @@ It is a form-field and can therefore be used in a form.
       Widget build(BuildContext context) => FMultiSelect<String>(
           hint: 'Select favorite fruits',
           format: (s) => Text(s),
-          children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+          children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
         );
     }
     ```
@@ -96,21 +96,14 @@ FMultiSelect<String>(
       label: const Text('North American Countries'),
       divider: FItemDivider.none,
       children: [
-        FSelectItem.from(
+        FSelectItem(
           child: const Text('United States'),
-          divider: FItemDivider.none,
           value: 'us',
         ),
-        FSelectItem(
-          'Canada'
-          value: 'ca',
-        ),
+        FSelectItem(title: Text('Canada'), value: 'ca'),
       ],
     ),
-    FSelectItem(
-      'Japan',
-      value: 'jp',
-    ),
+    FSelectItem(title: Text('Japan'), value: 'jp'),
   ],
 );
 ```
@@ -174,7 +167,7 @@ FMultiSelect<User>.search(
   },
   contentBuilder: (context, _, users) => [
     for (final user in users)
-      FSelectItem(value: user, child: Text('${user.firstName} ${user.lastName}')),
+      FSelectItem(title: Text('${user.firstName} ${user.lastName}'), value: user),
   ],
   searchFieldProperties: FSelectSearchFieldProperties(
     autofocus: true,
@@ -219,7 +212,7 @@ FMultiSelect<User>.searchFromMap(
   },
   contentBuilder: (context, _, users) => [
     for (final user in users)
-      FSelectItem(value: user, child: Text('${user.firstName} ${user.lastName}')),
+      FSelectItem(title: Text('${user.firstName} ${user.lastName}'), value: user),
   ],
   searchFieldProperties: FSelectSearchFieldProperties(
     autofocus: true,
@@ -246,19 +239,19 @@ FMultiSelect<User>.searchFromMap(
         hint: Text('Type'),
         format: (s) => Text(s),
         children: [
-          FSelectItem.from(
+          FSelectItem(
             prefix: const Icon(FIcons.bug),
             title: const Text('Bug'),
             subtitle: const Text('An unexpected problem or behavior'),
             value: 'Bug',
           ),
-          FSelectItem.from(
+          FSelectItem(
             prefix: const Icon(FIcons.filePlus2),
             title: const Text('Feature'),
             subtitle: const Text('A new feature or enhancement'),
             value: 'Feature',
           ),
-          FSelectItem.from(
+          FSelectItem(
             prefix: const Icon(FIcons.messageCircleQuestionMark),
             title: const Text('Question'),
             subtitle: const Text('A question or clarification'),
@@ -387,8 +380,8 @@ FMultiSelect<User>.searchFromMap(
               for (final item in ['A', 'B']) item: '2$item',
             },
           ),
-          FSelectItem('Level 3', '3'),
-          FSelectItem('Level 4', '4'),
+          FSelectItem(title: Text('Level 3'), value: '3'),
+          FSelectItem(title: Text('Level 4'), value: '4'),
         ],
       );
     }
@@ -413,7 +406,7 @@ FMultiSelect<User>.searchFromMap(
         hint: Text('Select a fruit'),
         format: (s) => Text(s),
         filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem.text(fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
       );
     }
     ```
@@ -437,7 +430,7 @@ FMultiSelect<User>.searchFromMap(
           await Future.delayed(const Duration(seconds: 1));
           return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
         },
-        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
       );
     }
     ```
@@ -465,7 +458,7 @@ FMultiSelect<User>.searchFromMap(
           padding: const EdgeInsets.all(8.0),
           child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.maybeResolve({})),
         ),
-        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
       );
     }
     ```
@@ -489,7 +482,7 @@ FMultiSelect<User>.searchFromMap(
           await Future.delayed(const Duration(seconds: 1));
           throw StateError('Error loading data');
         },
-        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
         contentErrorBuilder: (context, error, trace) {
           final style = context.theme.selectStyle.iconStyle;
           return Padding(
@@ -519,7 +512,7 @@ FMultiSelect<User>.searchFromMap(
         hint: Text('Select a fruit'),
         format: (s) => Text(s),
         clearable: true, 
-        children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
       );
     }
     ```
@@ -547,7 +540,7 @@ FMultiSelect<User>.searchFromMap(
         hint: Text('Select a user'),
         format: (s) => Text(s),
         format: (user) => '${user.firstName} ${user.lastName}',
-        children: [for (final user in users) FSelectItem(user.firstName, user)],
+        children: [for (final user in users) FSelectItem(title: Text(user.firstName), value: user)],
       );
     }
     ```
@@ -569,7 +562,7 @@ FMultiSelect<User>.searchFromMap(
         format: (s) => Text(s),
         min: 1,
         max: 3
-        children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
       );
     }
     ```
@@ -590,7 +583,7 @@ FMultiSelect<User>.searchFromMap(
         hint: Text('Select a fruit'),
         format: (s) => Text(s),
         contentScrollHandles: true,
-        children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+        children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
       );
     }
     ```
@@ -629,7 +622,7 @@ FMultiSelect<User>.searchFromMap(
           hint: 'Select favorite fruits',
           format: (s) => Text(s),
           sort: (a, b) => a.compareTo(b),
-          children: [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+          children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
         );
     }
     ```
@@ -671,7 +664,7 @@ FMultiSelect<User>.searchFromMap(
                 hint: const Text('Select departments'),
                 format: (s) => Text(s),
                 validator: _validateDepartment,
-                children: [for (final department in _departments) FSelectItem(department, department)],
+                children: [for (final department in _departments) FSelectItem(title: Text(department), value: department)],
               ),
               const SizedBox(height: 25),
               FButton(

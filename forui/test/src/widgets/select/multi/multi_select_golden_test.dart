@@ -35,8 +35,8 @@ void main() {
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle,
             children: [
-              FSelectSection(label: const Text('A'), children: [FSelectItem('B', 'B')]),
-              for (int i = 0; i < 10; i++) FSelectItem('$i', '$i'),
+              const FSelectSection(label: Text('A'), children: [FSelectItem(title: Text('B'), value:  'B')]),
+              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value:  '$i'),
             ],
           ),
         ),
@@ -75,8 +75,8 @@ void main() {
             style: TestScaffold.blueScreen.multiSelectStyle,
             contentScrollHandles: true,
             children: [
-              FSelectSection(label: const Text('A'), children: [FSelectItem('B', 'B')]),
-              for (int i = 0; i < 10; i++) FSelectItem('$i', '$i'),
+              const FSelectSection(label: Text('A'), children: [FSelectItem(title: Text('B'), value:  'B')]),
+              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value:  '$i'),
             ],
           ),
         ),
@@ -114,7 +114,7 @@ void main() {
             style: TestScaffold.blueScreen.multiSelectStyle,
             contentScrollHandles: true,
             filter: (_) => [],
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem('$i', '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value:  '$i')],
           ),
         ),
       );
@@ -137,7 +137,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem('$i', '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value:  '$i')],
           ),
         ),
       );

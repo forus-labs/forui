@@ -51,7 +51,10 @@ void main() {
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
               initialValue: 'A',
-              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+              children: const [
+                FSelectItem(title: Text('A'), value: 'A'),
+                FSelectItem(title: Text('B'), value: 'B'),
+              ],
             ),
           ),
         ),
@@ -77,7 +80,10 @@ void main() {
               controller: autoDispose(FSelectController(vsync: tester, value: 'A')),
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
-              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+              children: const [
+                FSelectItem(title: Text('A'), value: 'A'),
+                FSelectItem(title: Text('B'), value: 'B'),
+              ],
             ),
           ),
         ),
@@ -100,7 +106,10 @@ void main() {
             key: key,
             format: (value) => '$value!',
             controller: controller,
-            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            children: const [
+              FSelectItem(title: Text('A'), value: 'A'),
+              FSelectItem(title: Text('B'), value: 'B'),
+            ],
           ),
         ),
       );
@@ -330,9 +339,9 @@ void main() {
             format: (s) => s,
             focusNode: focus,
             controller: controller,
-            children: [
-              FSelectItem('A', 'A', key: itemKey),
-              FSelectItem('B', 'B'),
+            children: const [
+              FSelectItem(title: Text('A'), value: 'A', key: itemKey),
+              FSelectItem(title: Text('B'), value: 'B'),
             ],
           ),
         ),

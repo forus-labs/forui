@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/select/content/scroll_handle.dart';
-import 'package:forui/src/widgets/select/select_item.dart';
 
 part 'content.style.dart';
 
@@ -129,7 +128,7 @@ class _ContentState<T> extends State<Content<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style.sectionStyle.itemStyle.toFItemStyle(context);
+    final style = widget.style.sectionStyle.itemStyle;
     Widget content = ContentData<T>(
       style: widget.style.sectionStyle,
       first: false,

@@ -51,7 +51,7 @@ void main() {
               format: (value) => Text('$value!'),
               onSaved: (value) => initial = value,
               initialValue: initial,
-              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B'), FSelectItem('C', 'C')],
+              children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B'), FSelectItem(title: Text('C'), value:  'C')],
             ),
           ),
         ),
@@ -80,7 +80,7 @@ void main() {
               onSaved: (value) {
                 initial = value;
               },
-              children: [FSelectItem('A', 'A'), FSelectItem('B', 'B'), FSelectItem('C', 'C')],
+              children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B'), FSelectItem(title: Text('C'), value:  'C')],
             ),
           ),
         ),
@@ -104,7 +104,7 @@ void main() {
             key: key,
             format: (value) => Text('$value!'),
             controller: controller,
-            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B')],
           ),
         ),
       );
@@ -137,7 +137,7 @@ void main() {
             key: key,
             format: (value) => Text('$value!'),
             controller: controller,
-            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B')],
           ),
         ),
       );
@@ -168,7 +168,7 @@ void main() {
             format: (value) => Text('$value!'),
             controller: controller,
             clearable: true,
-            children: [FSelectItem('A', 'A'), FSelectItem('B', 'B')],
+            children: const [FSelectItem(title: Text('A'), value:  'A'), FSelectItem(title: Text('B'), value:  'B')],
           ),
         ),
       );

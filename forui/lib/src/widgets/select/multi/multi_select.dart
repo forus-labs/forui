@@ -323,7 +323,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       max: max,
       initialValue: initialValue,
       key: key,
-      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(key, value)],
+      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(title: Text(key), value:  value)],
     );
   }
 
@@ -448,7 +448,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
               .where((entry) => entry.key.toLowerCase().startsWith(query.toLowerCase()))
               .map((entry) => entry.value)
               .toList(),
-      contentBuilder: (context, _, values) => [for (final value in values) FSelectItem<T>(inverse[value]!, value)],
+      contentBuilder: (context, _, values) => [for (final value in values) FSelectItem<T>(title: Text(inverse[value]!), value: value)],
       searchFieldProperties: searchFieldProperties,
       contentLoadingBuilder: contentLoadingBuilder,
       contentErrorBuilder: contentErrorBuilder,

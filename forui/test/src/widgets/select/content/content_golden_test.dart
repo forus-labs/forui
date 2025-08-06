@@ -16,9 +16,15 @@ class ItemWrapper extends StatelessWidget with FItemMixin {
     child: Center(
       child: FSelect<String>(
         format: (s) => s,
-        children: [
-          FSelectSection(label: const Text('Section 1'), children: [FSelectItem<String>('Item 1', 'item 1')]),
-          FSelectSection(label: const Text('Section 2'), children: [FSelectItem<String>('Item 2', 'item 2')]),
+        children: const [
+          FSelectSection(
+            label: Text('Section 1'),
+            children: [FSelectItem<String>(title: Text('Item 1'), value: 'item 1')],
+          ),
+          FSelectSection(
+            label: Text('Section 2'),
+            children: [FSelectItem<String>(title: Text('Item 2'), value: 'item 2')],
+          ),
         ],
       ),
     ),
@@ -56,7 +62,7 @@ void main() {
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem(letter, letter)],
+                  children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
                 ),
               ],
             ),
@@ -88,7 +94,7 @@ void main() {
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem(letter, letter)],
+                  children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
                 ),
               ],
             ),
@@ -117,7 +123,7 @@ void main() {
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem(letter, letter)],
+                  children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
                 ),
               ],
             ),
@@ -148,7 +154,7 @@ void main() {
               children: [
                 FSelectSection(
                   label: const Text('Lorem'),
-                  children: [for (final letter in letters) FSelectItem(letter, letter)],
+                  children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
                 ),
               ],
             ),
@@ -177,8 +183,11 @@ void main() {
               format: (string) => string,
               contentScrollController: scrollController,
               contentScrollHandles: true,
-              children: [
-                FSelectSection(label: const Text('Lorem'), children: [FSelectItem('1', '1')]),
+              children: const [
+                FSelectSection(
+                  label: Text('Lorem'),
+                  children: [FSelectItem(title: Text('1'), value: '1')],
+                ),
               ],
             ),
           ),
@@ -220,8 +229,8 @@ void main() {
                   for (final item in ['2A', '2B']) item: item,
                 },
               ),
-              FSelectItem('Item 3', 'Item 3'),
-              FSelectItem('Item 4', 'Item 4'),
+              const FSelectItem(title: Text('Item 3'), value: 'Item 3'),
+              const FSelectItem(title: Text('Item 4'), value: 'Item 4'),
             ],
           ),
         ),
@@ -242,7 +251,7 @@ void main() {
             key: key,
             contentDivider: FItemDivider.full,
             format: (s) => s,
-            children: [FSelectItem('Item 1', 'Item 1')],
+            children: const [FSelectItem(title: Text('Item 1'), value: 'Item 1')],
           ),
         ),
       );
@@ -279,8 +288,8 @@ void main() {
                   for (final item in ['2A', '2B']) item: item,
                 },
               ),
-              FSelectItem('Item 3', 'Item 3'),
-              FSelectItem('Item 4', 'Item 4'),
+              const FSelectItem(title: Text('Item 3'), value: 'Item 3'),
+              const FSelectItem(title: Text('Item 4'), value: 'Item 4'),
             ],
           ),
         ),
@@ -314,7 +323,7 @@ void main() {
             children: [
               FSelectSection(
                 label: const Text('Lorem'),
-                children: [for (final letter in letters) FSelectItem(letter, letter)],
+                children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
               ),
             ],
           ),

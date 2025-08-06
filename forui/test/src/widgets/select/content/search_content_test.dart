@@ -106,7 +106,7 @@ void main() {
           searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
           filter: (query) =>
               query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
-          contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(fruit, fruit)],
+          contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
         ),
       ),
     );

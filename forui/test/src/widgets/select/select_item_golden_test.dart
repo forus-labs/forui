@@ -70,11 +70,15 @@ void main() {
             child: FSelect<String>(
               key: key,
               format: (s) => s,
-              children: [
+              children: const [
                 FSelectSection(
-                  label: const Text('Lorem'),
+                  label: Text('Lorem'),
                   enabled: false,
-                  children: [FSelectItem('A', 'A'), FSelectItem('B', 'B'), FSelectItem('C', 'C', enabled: true)],
+                  children: [
+                    FSelectItem(title: Text('A'), value: 'A'),
+                    FSelectItem(title: Text('B'), value: 'B'),
+                    FSelectItem(title: Text('C'), value: 'C', enabled: true),
+                  ],
                 ),
               ],
             ),
@@ -121,12 +125,12 @@ void main() {
             child: FSelect<String>(
               key: key,
               format: (s) => s,
-              children: [
-                FSelectItem.from(
+              children: const [
+                FSelectItem(
                   value: 'v',
-                  prefix: const Icon(FIcons.circle),
-                  title: const Text('Title'),
-                  subtitle: const Text('subtitle'),
+                  prefix: Icon(FIcons.circle),
+                  title: Text('Title'),
+                  subtitle: Text('subtitle'),
                 ),
               ],
             ),
@@ -177,7 +181,7 @@ void main() {
               key: key,
               format: (s) => s,
               controller: controller..value = 'A',
-              children: [FSelectItem(letters.keys.first, letters.keys.first, enabled: false)],
+              children: [FSelectItem(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
             ),
           ),
         );
@@ -199,7 +203,7 @@ void main() {
             child: FSelect<String>(
               key: key,
               format: (s) => s,
-              children: [FSelectItem(letters.keys.first, letters.keys.first, enabled: false)],
+              children: [FSelectItem(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
             ),
           ),
         );
@@ -254,6 +258,25 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/press.png'));
 
         debugDefaultTargetPlatformOverride = null;
+      });
+
+      testWidgets('raw', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: Alignment.topCenter,
+            child: FSelect<String>(
+              key: key,
+              format: (s) => s,
+              children: const [FSelectItem.raw(value: 'v', prefix: Icon(FIcons.circle), child: Text('Title'))],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/item/raw.png'));
       });
     });
   }

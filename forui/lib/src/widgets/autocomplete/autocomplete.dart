@@ -301,6 +301,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder;
 
   /// Creates a [FAutocomplete] from the given [items].
+  ///
+  /// For more control over the appearance of items, use [FAutocomplete.builder].
   FAutocomplete({
     required List<String> items,
     FAutocompleteStyle Function(FAutocompleteStyle)? style,
@@ -471,6 +473,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
 
   /// Creates a [FAutocomplete] that uses the given [filter] to determine the results and the [contentBuilder] to build
   /// the content.
+  ///
+  /// For a convenient way to create an autocomplete with a list of items, use [FAutocomplete.new].
   const FAutocomplete.builder({
     required this.filter,
     required this.contentBuilder,
