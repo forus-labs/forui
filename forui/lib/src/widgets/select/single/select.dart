@@ -217,7 +217,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool expands = false,
-    MouseCursor mouseCursor = SystemMouseCursors.text,
+    MouseCursor mouseCursor = SystemMouseCursors.click,
     bool canRequestFocus = true,
     bool clearable = false,
     AlignmentGeometry anchor = AlignmentDirectional.topStart,
