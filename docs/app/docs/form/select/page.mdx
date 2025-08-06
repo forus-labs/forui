@@ -46,7 +46,7 @@ It is a form-field and can therefore be used in a form.
 
     class SelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>(
+      Widget build(BuildContext context) => FSelect<String>.rich(
           hint: 'Select a fruit',
           format: (s) => s,
           children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
@@ -70,7 +70,34 @@ dart run forui style create select
 ### `FSelect(...)`
 
 ```dart copy
-FSelect<String>(
+FSelect<Locale>(
+  items: {
+    'United States': Locale('en', 'US'),
+    'Canada': Locale('en', 'CA'),
+    'Japan': Locale('ja', 'JP'),
+  },
+  controller: FSelectController<Locale>(vsync: this),
+  style: FSelectStyle.inherit(...),
+  label: const Text('Country'),
+  description: const Text('Select your country of residence'),
+  hint: 'Choose a country',
+  format: (value) => value.toUpperCase(),
+  onChange: (value) => print('Selected country: $value'),
+  onSaved: (value) => print('Saved country: $value'),
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  builder: (context, style, state, child) => child,
+  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
+  suffixBuilder: (context, style, states) => Icon(FIcons.arrowDown),
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
+  clearable: true,
+  contentScrollHandles: true,
+);
+```
+
+### `FSelect.rich(...)`
+
+```dart copy
+FSelect<String>.rich(
   controller: FSelectController<String>(vsync: this),
   style: FSelectStyle(...),
   label: const Text('Country'),
@@ -112,75 +139,11 @@ FSelect<String>(
 );
 ```
 
-### `FSelect.fromMap(...)`
-
-```dart copy
-FSelect<Locale>.fromMap(
-  {
-    'United States': Locale('en', 'US'),
-    'Canada': Locale('en', 'CA'),
-    'Japan': Locale('ja', 'JP'),
-  },
-  controller: FSelectController<Locale>(vsync: this),
-  style: FSelectStyle.inherit(...),
-  label: const Text('Country'),
-  description: const Text('Select your country of residence'),
-  hint: 'Choose a country',
-  format: (value) => value.toUpperCase(),
-  onChange: (value) => print('Selected country: $value'),
-  onSaved: (value) => print('Saved country: $value'),
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  builder: (context, style, state, child) => child,
-  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
-  suffixBuilder: (context, style, states) => Icon(FIcons.arrowDown),
-  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
-  clearable: true,
-  contentScrollHandles: true,
-);
-```
-
 ### `FSelect.search(...)`
 
 ```dart copy
 FSelect<User>.search(
-  controller: FSelectController<User>(),
-  style: FSelectStyle.inherit(...),
-  label: const Text('User'),
-  description: const Text('Search and select a user'),
-  builder: (context, styles, child) => child!,
-  format: (user) => '${user.firstName} ${user.lastName}',
-  hint: 'Search users...',
-  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
-  clearable: true,
-  autoHide: false,
-  onChange: (value) => print('Selected country: $value'),
-  initialValue: 'value',
-  contentDivider: FItemDivider.none,
-  contentScrollHandles: false,
-  contentPhysics: const BouncingScrollPhysics(),
-  contentEmptyBuilder: (context, style) => Text('No results'),
-  filter: (query) async {
-    // Fetch users based on search query
-    return fetchUsers(query);
-  },
-  contentBuilder: (context, users) => [
-    for (final user in users)
-      FSelectItem(title: Text('${user.firstName} ${user.lastName}'), value: user),
-  ],
-  searchFieldProperties: FSelectSearchFieldProperties(
-    autofocus: true,
-    hint: 'Type to search...',
-  ),
-  contentLoadingBuilder: (context, style) => Text('Loading...'),
-  contentErrorBuilder: (context, error, stackTrace) => Text('Error...'),
-);
-```
-
-### `FSelect.searchFromMap(...)`
-
-```dart copy
-FSelect<User>.searchFromMap(
-  {
+  items: {
     'Bob Ross': User(firstName: 'Bob', lastName: 'Ross'),
     'John Doe': User(firstName: 'John', lastName: 'Doe'),
     'Mary Jane': User(firstName: 'Mary', lastName: 'Jane'),
@@ -219,6 +182,43 @@ FSelect<User>.searchFromMap(
 );
 ```
 
+### `FSelect.searchBuilder(...)`
+
+```dart copy
+FSelect<User>.searchBuilder(
+  controller: FSelectController<User>(),
+  style: FSelectStyle.inherit(...),
+  label: const Text('User'),
+  description: const Text('Search and select a user'),
+  builder: (context, styles, child) => child!,
+  format: (user) => '${user.firstName} ${user.lastName}',
+  hint: 'Search users...',
+  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
+  clearable: true,
+  autoHide: false,
+  onChange: (value) => print('Selected country: $value'),
+  initialValue: 'value',
+  contentDivider: FItemDivider.none,
+  contentScrollHandles: false,
+  contentPhysics: const BouncingScrollPhysics(),
+  contentEmptyBuilder: (context, style) => Text('No results'),
+  filter: (query) async {
+    // Fetch users based on search query
+    return fetchUsers(query);
+  },
+  contentBuilder: (context, users) => [
+    for (final user in users)
+      FSelectItem(title: Text('${user.firstName} ${user.lastName}'), value: user),
+  ],
+  searchFieldProperties: FSelectSearchFieldProperties(
+    autofocus: true,
+    hint: 'Type to search...',
+  ),
+  contentLoadingBuilder: (context, style) => Text('Loading...'),
+  contentErrorBuilder: (context, error, stackTrace) => Text('Error...'),
+);
+```
+
 ## Examples
 
 ### Detailed
@@ -235,19 +235,19 @@ FSelect<User>.searchFromMap(
         hint: 'Type',
         format: (s) => s,
         children: [
-          FSelectItem(
+          FSelectItem.rich(
             prefix: const Icon(FIcons.bug),
             title: const Text('Bug'),
             subtitle: const Text('An unexpected problem or behavior'),
             value: 'Bug',
           ),
-          FSelectItem(
+          FSelectItem.rich(
             prefix: const Icon(FIcons.filePlus2),
             title: const Text('Feature'),
             subtitle: const Text('A new feature or enhancement'),
             value: 'Feature',
           ),
-          FSelectItem(
+          FSelectItem.rich(
             prefix: const Icon(FIcons.messageCircleQuestionMark),
             title: const Text('Question'),
             subtitle: const Text('A question or clarification'),
@@ -270,11 +270,11 @@ FSelect<User>.searchFromMap(
     ```dart copy
     class SectionSelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>(
+      Widget build(BuildContext context) => FSelect<String>.rich(
         hint: 'Select a timezone',
         format: (s) => s,
         children: [
-          FSelectSection.fromMap(
+          FSelectSection(
             label: const Text('North America'),
             items: {
               for (final item in [
@@ -288,7 +288,7 @@ FSelect<User>.searchFromMap(
                 item: item,
             },
           ),
-          FSelectSection.fromMap(
+          FSelectSection(
             label: const Text('South America'),
             items: {
               for (final item in [
@@ -300,7 +300,7 @@ FSelect<User>.searchFromMap(
                 item: item,
             },
           ),
-          FSelectSection.fromMap(
+          FSelectSection(
             label: const Text('Europe & Africa'),
             items: {
               for (final item in [
@@ -314,7 +314,7 @@ FSelect<User>.searchFromMap(
                 item: item,
             },
           ),
-          FSelectSection.fromMap(
+          FSelectSection(
             label: const Text('Asia'),
             items: {
               for (final item in [
@@ -328,7 +328,7 @@ FSelect<User>.searchFromMap(
                 item: item,
             },
           ),
-          FSelectSection.fromMap(
+          FSelectSection(
             label: const Text('Australia & Pacific'),
             items: {
               for (final item in [
@@ -358,19 +358,19 @@ FSelect<User>.searchFromMap(
     ```dart {5, 10} copy
     class DividerSelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>(
+      Widget build(BuildContext context) => FSelect<String>.rich(
         hint: 'Select a level',
         contentDivider: FItemDivider.none,
         format: (s) => s,
         children: [
-          FSelectSection.fromMap(
+          FSelectSection(
             label: const Text('Level 1'),
             divider: FItemDivider.indented,
             items: {
               for (final item in ['A', 'B']) item: '1$item',
             },
           ),
-          FSelectSection.fromMap(
+          FSelectSection(
             label: const Text('Level 2'),
             items: {
               for (final item in ['A', 'B']) item: '2$item',
@@ -398,7 +398,7 @@ FSelect<User>.searchFromMap(
     ```dart copy
     class SyncSelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>.search(
+      Widget build(BuildContext context) => FSelect<String>.searchBuilder(
         hint: 'Select a fruit',
         format: (s) => s,
         filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
@@ -419,7 +419,7 @@ FSelect<User>.searchFromMap(
     ```dart copy
     class AsyncSelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>.search(
+      Widget build(BuildContext context) => FSelect<String>.searchBuilder(
         hint: 'Select a fruit',
         format: (s) => s,
         filter: (query) async {
@@ -443,7 +443,7 @@ FSelect<User>.searchFromMap(
     ```dart {10-13} copy
     class AsyncLoadingSelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>.search(
+      Widget build(BuildContext context) => FSelect<String>.searchBuilder(
         hint: 'Select a fruit',
         format: (s) => s,
         filter: (query) async {
@@ -471,7 +471,7 @@ FSelect<User>.searchFromMap(
     ```dart {11-17} copy
     class AsyncErrorSelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>.search(
+      Widget build(BuildContext context) => FSelect<String>.searchBuilder(
         hint: 'Select a fruit',
         format: (s) => s,
         filter: (query) async {
@@ -511,7 +511,7 @@ FSelect<User>.searchFromMap(
       late final _controller = FSelectController(vsync: this, value: 'Apple', toggleable: true);
 
       @override
-      Widget build(BuildContext context) => FSelect<String>(
+      Widget build(BuildContext context) => FSelect<String>.rich(
         hint: 'Select a fruit',
         format: (s) => s,
         controller: _controller,
@@ -539,7 +539,7 @@ FSelect<User>.searchFromMap(
     ```dart {6} copy
     class ClearableSelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>(
+      Widget build(BuildContext context) => FSelect<String>.rich(
         hint: 'Select a fruit',
         format: (s) => s,
         clearable: true, 
@@ -567,7 +567,7 @@ FSelect<User>.searchFromMap(
       ];
 
       @override
-      Widget build(BuildContext context) => FSelect<({String firstName, String lastName})>(
+      Widget build(BuildContext context) => FSelect<({String firstName, String lastName})>.rich(
         hint: 'Select a user',
         format: (s) => s,
         format: (user) => '${user.firstName} ${user.lastName}',
@@ -588,7 +588,7 @@ FSelect<User>.searchFromMap(
     ```dart {6} copy
     class ScrollHandlesSelectPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FSelect<String>(
+      Widget build(BuildContext context) => FSelect<String>.rich(
         hint: 'Select a fruit',
         format: (s) => s,
         contentScrollHandles: true,
@@ -627,7 +627,7 @@ FSelect<User>.searchFromMap(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              FSelect<String>(
+              FSelect<String>.rich(
                 controller: _departmentController,
                 label: const Text('Department'),
                 description: const Text('Choose your dream department'),

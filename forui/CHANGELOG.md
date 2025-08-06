@@ -7,7 +7,7 @@ We've done a pass over the controllers in Forui to make them more consistent and
 * **Breaking** Change `FMultiValueNotifier.radio({T? value})` to `FMultiValueNotifier.radio([T? value])`.
 
 
-## Cursors
+### Cursors
 We've changed the default cursor for many widgets from `MouseCursor.click` to `MouseCursor.defer`. This is in line with 
 [native desktop behavior](https://medium.com/simple-human/buttons-shouldnt-have-a-hand-cursor-b11e99ca374b) and 
 [W3C User Interface guidelines](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer).
@@ -96,6 +96,12 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
 * **Breaking** Replace `FSelect.searchErrorBuilder` with `FSelect.contentErrorBuilder`.
 * **Breaking** Replace `FSelect.defaultEmptyBuilder` with `FSelect.defaultContentEmptyBuilder`.
 * **Breaking** Replace `FSelect.defaultSearchLoadingBuilder` with `FSelect.defaultContentLoadingBuilder`.
+* **Breaking** Replace `FSelect.fromMap(...)` with `FSelectSection.new(...)`.
+* **Breaking** Replace `FSelect(...)` with `FSelectSection.rich(...)`.
+* **Breaking** Replace `FSelect.searchFromMap(...)` with `FSelectSection.search(...)`.
+* **Breaking** Replace `FSelect.search(...)` with `FSelectSection.searchBuilder(...)`.
+* **Breaking** Replace `FSelectSection.new(...)` with `FSelectSection.rich(...)`
+* **Breaking** Replace `FSelectSection.fromMap(...)` with `FSelectSection.new(...)`.
 * **Breaking** Change `FSelectItem(...)`'s parameters to no longer accept string parameter.
 * **Breaking** Replace `FSelectItemStyle` with underlying `FItemStyle`.
 

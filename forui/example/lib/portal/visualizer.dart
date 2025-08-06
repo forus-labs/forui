@@ -40,7 +40,7 @@ class _VisualizerState extends State<Visualizer> {
           portalAnchor: _portalAnchor,
         ),
         const SizedBox(height: 16),
-        FSelect<Offset Function(Size, FPortalChildBox, FPortalBox)>(
+        FSelect<Offset Function(Size, FPortalChildBox, FPortalBox)>.rich(
           label: const Text('Shift'),
           onChange: (closure) => setState(() => _shift = closure ?? _shift),
           format: (closure) => _shifts[closure]!,
@@ -217,7 +217,7 @@ class _Settings extends StatelessWidget {
             ),
           ],
         ),
-        FSelect<Alignment>(
+        FSelect<Alignment>.rich(
           onChange: onAnchorChange,
           label: const Text('Anchor:'),
           format: (s) => s.toString(),

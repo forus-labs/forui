@@ -16,7 +16,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(key: key, format: (s) => s, filter: (_) => [], contentBuilder: (_, _, _) => []),
+          child: FSelect<String>.searchBuilder(key: key, format: (s) => s, filter: (_) => [], contentBuilder: (_, _, _) => []),
         ),
       );
 
@@ -34,7 +34,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) => [],
@@ -63,7 +63,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) => [],
@@ -83,7 +83,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) async {
@@ -106,7 +106,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) async {
@@ -135,7 +135,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) async {
@@ -165,7 +165,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>.search(
+          child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
             filter: (_) async {

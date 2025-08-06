@@ -14,14 +14,14 @@ class ItemWrapper extends StatelessWidget with FItemMixin {
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.all(5.0),
     child: Center(
-      child: FSelect<String>(
+      child: FSelect<String>.rich(
         format: (s) => s,
         children: const [
-          FSelectSection(
+          FSelectSection.rich(
             label: Text('Section 1'),
             children: [FSelectItem<String>(title: Text('Item 1'), value: 'item 1')],
           ),
-          FSelectSection(
+          FSelectSection.rich(
             label: Text('Section 2'),
             children: [FSelectItem<String>(title: Text('Item 2'), value: 'item 2')],
           ),
@@ -54,13 +54,13 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               contentScrollHandles: true,
               children: [
-                FSelectSection(
+                FSelectSection.rich(
                   label: const Text('Lorem'),
                   children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
                 ),
@@ -86,13 +86,13 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               contentScrollHandles: true,
               children: [
-                FSelectSection(
+                FSelectSection.rich(
                   label: const Text('Lorem'),
                   children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
                 ),
@@ -115,13 +115,13 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               contentScrollHandles: true,
               children: [
-                FSelectSection(
+                FSelectSection.rich(
                   label: const Text('Lorem'),
                   children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
                 ),
@@ -147,12 +147,12 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               children: [
-                FSelectSection(
+                FSelectSection.rich(
                   label: const Text('Lorem'),
                   children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
                 ),
@@ -178,13 +178,13 @@ void main() {
           TestScaffold.app(
             theme: theme.data,
             alignment: Alignment.topCenter,
-            child: FSelect<String>(
+            child: FSelect<String>.rich(
               key: key,
               format: (string) => string,
               contentScrollController: scrollController,
               contentScrollHandles: true,
               children: const [
-                FSelectSection(
+                FSelectSection.rich(
                   label: Text('Lorem'),
                   children: [FSelectItem(title: Text('1'), value: '1')],
                 ),
@@ -211,19 +211,19 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
+          child: FSelect<String>.rich(
             key: key,
             contentDivider: FItemDivider.full,
             format: (s) => s,
             children: [
-              FSelectSection.fromMap(
+              FSelectSection(
                 label: const Text('Group 1'),
                 divider: FItemDivider.indented,
                 items: {
                   for (final item in ['1A', '1B']) item: item,
                 },
               ),
-              FSelectSection.fromMap(
+              FSelectSection(
                 label: const Text('Group 2'),
                 items: {
                   for (final item in ['2A', '2B']) item: item,
@@ -247,7 +247,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
+          child: FSelect<String>.rich(
             key: key,
             contentDivider: FItemDivider.full,
             format: (s) => s,
@@ -270,19 +270,19 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
+          child: FSelect<String>.rich(
             key: key,
             contentDivider: FItemDivider.full,
             format: (s) => s,
             children: [
-              FSelectSection.fromMap(
+              FSelectSection(
                 label: const Text('Group 1'),
                 divider: FItemDivider.indented,
                 items: {
                   for (final item in ['1A', '1B']) item: item,
                 },
               ),
-              FSelectSection.fromMap(
+              FSelectSection(
                 label: const Text('Group 2'),
                 items: {
                   for (final item in ['2A', '2B']) item: item,
@@ -315,13 +315,13 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FSelect<String>(
+          child: FSelect<String>.rich(
             key: key,
             format: (string) => string,
             controller: controller,
             contentScrollController: scrollController,
             children: [
-              FSelectSection(
+              FSelectSection.rich(
                 label: const Text('Lorem'),
                 children: [for (final letter in letters) FSelectItem(title: Text(letter), value: letter)],
               ),

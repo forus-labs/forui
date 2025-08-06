@@ -39,10 +39,27 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// The nested [FSelectItem]s.
   final List<FSelectItem<T>> children;
 
-  /// Creates a [FSelectSection].
+  /// Creates a [FSelectSection] from the given [items].
   ///
-  /// For a convenient way to create a section, use [FSelectSection.fromMap].
-  const FSelectSection({
+  /// For more control over the items' appearances, use [FSelectSection.rich].
+  FSelectSection({
+    required Widget label,
+    required Map<String, T> items,
+    FSelectSectionStyle Function(FSelectSectionStyle)? style,
+    bool? enabled,
+    FItemDivider divider = FItemDivider.none,
+    Key? key,
+  }) : this.rich(
+    label: label,
+    children: [for (final e in items.entries) FSelectItem<T>(title: Text(e.key), value: e.value)],
+    style: style,
+    enabled: enabled,
+    divider: divider,
+    key: key,
+  );
+
+  /// Creates a [FSelectSection] with the given [children].
+  const FSelectSection.rich({
     required this.label,
     required this.children,
     this.style,
@@ -50,25 +67,6 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
     this.divider = FItemDivider.none,
     super.key,
   });
-
-  /// Creates a [FSelectSection] from the given [items].
-  ///
-  /// For more control over the items' appearances, use [FSelectSection].
-  FSelectSection.fromMap({
-    required Widget label,
-    required Map<String, T> items,
-    FSelectSectionStyle Function(FSelectSectionStyle)? style,
-    bool? enabled,
-    FItemDivider divider = FItemDivider.none,
-    Key? key,
-  }) : this(
-         label: label,
-         children: [for (final e in items.entries) FSelectItem<T>(title: Text(e.key), value: e.value)],
-         style: style,
-         enabled: enabled,
-         divider: divider,
-         key: key,
-       );
 
   @override
   Widget build(BuildContext context) {
@@ -251,8 +249,6 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   final Widget? prefix;
 
   /// Creates a [FSelectItem] with a custom [title] and value.
-  ///
-  /// For even more control over the item's appearance, use [FSelectItem.raw].
   const factory FSelectItem({
     required Widget title,
     required T value,

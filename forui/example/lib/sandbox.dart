@@ -41,20 +41,20 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
             return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
           },
           contentBuilder: (context, query, suggestions) => [
-            for (final suggestion in suggestions) FAutocompleteItem(suggestion),
+            for (final suggestion in suggestions) FAutocompleteItem(value: suggestion),
           ],
         ),
-        FMultiSelect<String>(format: Text.new, children: const [
+        FMultiSelect<String>.rich(format: Text.new, children: const [
           FSelectItem(title: Text('Apple'), value:  'Apple'),
           FSelectItem(title: Text('Banana'), value:  'Banana'),
           FSelectItem(title: Text('Cherry'), value:  'Cherry'),
           FSelectItem(title: Text('Date'), value:  'Date'),
         ]),
-        FMultiSelect<String>(format: Text.new, children: const [
-          FSelectItem(title: Text('Apple'), value:  'Apple'),
-          FSelectItem(title: Text('Banana'), value:  'Banana'),
-          FSelectItem(title: Text('Cherry'), value:  'Cherry'),
-          FSelectItem(title: Text('Date'), value:  'Date'),
+        FSelect<String>.rich(format: (s) => s, children: const [
+          // FSelectItem(title: Text('Apple'), value:  'Apple'),
+          // FSelectItem(title: Text('Banana'), value:  'Banana'),
+          // FSelectItem(title: Text('Cherry'), value:  'Cherry'),
+          // FSelectItem(title: Text('Date'), value:  'Date'),
         ])
       ],
     );

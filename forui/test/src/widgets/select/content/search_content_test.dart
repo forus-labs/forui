@@ -44,7 +44,7 @@ void main() {
   testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<String>.search(
+        child: FSelect<String>.searchBuilder(
           key: key,
           format: (s) => s,
           searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
@@ -61,7 +61,7 @@ void main() {
 
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<String>.search(key: key, format: (s) => s, filter: (_) => [], contentBuilder: (_, _, _) => []),
+        child: FSelect<String>.searchBuilder(key: key, format: (s) => s, filter: (_) => [], contentBuilder: (_, _, _) => []),
       ),
     );
 
@@ -75,7 +75,7 @@ void main() {
   testWidgets('dispose() does not dispose external controller', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<String>.search(
+        child: FSelect<String>.searchBuilder(
           key: key,
           format: (s) => s,
           searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
@@ -99,7 +99,7 @@ void main() {
   testWidgets('keyboard navigation', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FSelect<String>.search(
+        child: FSelect<String>.searchBuilder(
           key: key,
           format: (s) => s,
           controller: controller,

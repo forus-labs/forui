@@ -40,8 +40,8 @@ void main() {
             ),
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection.fromList(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
-              FAutocompleteSection.fromList(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              FAutocompleteSection(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
+              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),
@@ -66,8 +66,8 @@ void main() {
             initialText: 'App',
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection.fromList(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
-              FAutocompleteSection.fromList(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              FAutocompleteSection(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
+              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),
@@ -91,12 +91,12 @@ void main() {
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentDivider: FItemDivider.full,
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection.fromList(
+              FAutocompleteSection(
                 divider: FItemDivider.indented,
                 label: const Text('Most popular'),
                 items: const ['Apple', 'Kiwi'],
               ),
-              FAutocompleteSection.fromList(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),

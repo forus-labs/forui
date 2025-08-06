@@ -30,7 +30,7 @@ class MultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>(
+    child: FMultiSelect<String>.rich(
       hint: const Text('Select a fruit'),
       format: Text.new,
       children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value:  fruit)],
@@ -45,7 +45,7 @@ class DetailedMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>(
+    child: FMultiSelect<String>.rich(
       hint: const Text('Type'),
       format: Text.new,
       children: const [
@@ -79,11 +79,11 @@ class SectionMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>(
+    child: FMultiSelect<String>.rich(
       hint: const Text('Select a timezone'),
       format: Text.new,
       children: [
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('North America'),
           items: {
             for (final item in [
@@ -97,7 +97,7 @@ class SectionMultiSelectPage extends Sample {
               item: item,
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('South America'),
           items: {
             for (final item in [
@@ -109,7 +109,7 @@ class SectionMultiSelectPage extends Sample {
               item: item,
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Europe & Africa'),
           items: {
             for (final item in [
@@ -123,7 +123,7 @@ class SectionMultiSelectPage extends Sample {
               item: item,
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Asia'),
           items: {
             for (final item in [
@@ -137,7 +137,7 @@ class SectionMultiSelectPage extends Sample {
               item: item,
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Australia & Pacific'),
           items: {
             for (final item in [
@@ -162,19 +162,19 @@ class DividerMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>(
+    child: FMultiSelect<String>.rich(
       hint: const Text('Select a level'),
       contentDivider: FItemDivider.full,
       format: Text.new,
       children: [
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Level 1'),
           divider: FItemDivider.indented,
           items: {
             for (final item in ['A', 'B']) item: '1$item',
           },
         ),
-        FSelectSection.fromMap(
+        FSelectSection(
           label: const Text('Level 2'),
           items: {
             for (final item in ['A', 'B']) item: '2$item',
@@ -194,7 +194,7 @@ class SyncMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>.search(
+    child: FMultiSelect<String>.searchBuilder(
       hint: const Text('Select a fruit'),
       format: Text.new,
       filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
@@ -210,7 +210,7 @@ class AsyncMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>.search(
+    child: FMultiSelect<String>.searchBuilder(
       hint: const Text('Select a fruit'),
       format: Text.new,
       filter: (query) async {
@@ -229,7 +229,7 @@ class AsyncLoadingMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>.search(
+    child: FMultiSelect<String>.searchBuilder(
       hint: const Text('Select a fruit'),
       format: Text.new,
       filter: (query) async {
@@ -252,7 +252,7 @@ class AsyncErrorMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>.search(
+    child: FMultiSelect<String>.searchBuilder(
       hint: const Text('Select a fruit'),
       format: Text.new,
       filter: (query) async {
@@ -278,7 +278,7 @@ class ClearableMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>(
+    child: FMultiSelect<String>.rich(
       hint: const Text('Select a fruit'),
       format: Text.new,
       clearable: true,
@@ -301,7 +301,7 @@ class FormatMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<({String firstName, String lastName})>(
+    child: FMultiSelect<({String firstName, String lastName})>.rich(
       hint: const Text('Select a user'),
       format: (user) => Text('${user.firstName} ${user.lastName}'),
       children: [for (final user in users) FSelectItem(title: Text(user.firstName), value:  user)],
@@ -316,7 +316,7 @@ class MinMaxMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>(
+    child: FMultiSelect<String>.rich(
       hint: const Text('Select favorite fruits'),
       format: Text.new,
       min: 1,
@@ -333,7 +333,7 @@ class ScrollHandlesMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>(
+    child: FMultiSelect<String>.rich(
       hint: const Text('Select a fruit'),
       format: Text.new,
       contentScrollHandles: true,
@@ -349,7 +349,7 @@ class SortedMultiSelectPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.only(top: 15),
-    child: FMultiSelect<String>(
+    child: FMultiSelect<String>.rich(
       hint: const Text('Select favorite fruits'),
       format: Text.new,
       sort: (a, b) => a.compareTo(b),
@@ -380,7 +380,7 @@ class _FormMultiSelectPageState extends StatefulSampleState<FormMultiSelectPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FMultiSelect<String>(
+          FMultiSelect<String>.rich(
             controller: _departmentController,
             label: const Text('Department'),
             description: const Text('Choose your dream department(s)'),

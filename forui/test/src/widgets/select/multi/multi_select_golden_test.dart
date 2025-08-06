@@ -30,13 +30,16 @@ void main() {
     testWidgets('basic', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FMultiSelect<String>(
+          child: FMultiSelect<String>.rich(
             key: key,
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle,
             children: [
-              const FSelectSection(label: Text('A'), children: [FSelectItem(title: Text('B'), value:  'B')]),
-              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value:  '$i'),
+              const FSelectSection.rich(
+                label: Text('A'),
+                children: [FSelectItem(title: Text('B'), value: 'B')],
+              ),
+              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
             ],
           ),
         ),
@@ -51,7 +54,7 @@ void main() {
     testWidgets('basic - empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FMultiSelect<String>(
+          child: FMultiSelect<String>.rich(
             key: key,
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle,
@@ -69,14 +72,17 @@ void main() {
     testWidgets('handles', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FMultiSelect<String>(
+          child: FMultiSelect<String>.rich(
             key: key,
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle,
             contentScrollHandles: true,
             children: [
-              const FSelectSection(label: Text('A'), children: [FSelectItem(title: Text('B'), value:  'B')]),
-              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value:  '$i'),
+              const FSelectSection.rich(
+                label: Text('A'),
+                children: [FSelectItem(title: Text('B'), value: 'B')],
+              ),
+              for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i'),
             ],
           ),
         ),
@@ -91,9 +97,9 @@ void main() {
     testWidgets('fromMap', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FMultiSelect<int>.fromMap(
-            const {'A': 1, 'B': 2},
+          child: FMultiSelect<int>(
             key: key,
+            items: const {'A': 1, 'B': 2},
             style: TestScaffold.blueScreen.multiSelectStyle,
           ),
         ),
@@ -108,13 +114,13 @@ void main() {
     testWidgets('search', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FMultiSelect<String>.search(
+          child: FMultiSelect<String>.searchBuilder(
             key: key,
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle,
             contentScrollHandles: true,
             filter: (_) => [],
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value:  '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
           ),
         ),
       );
@@ -128,7 +134,7 @@ void main() {
     testWidgets('search - waiting', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FMultiSelect<String>.search(
+          child: FMultiSelect<String>.searchBuilder(
             key: key,
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle,
@@ -137,7 +143,7 @@ void main() {
               await Future.delayed(const Duration(seconds: 1));
               return [];
             },
-            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value:  '$i')],
+            contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
           ),
         ),
       );
@@ -151,7 +157,7 @@ void main() {
     testWidgets('searchFromMap', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FMultiSelect<int>.searchFromMap(
+          child: FMultiSelect<int>.search(
             {for (int i = 0; i < 10; i++) '$i': i},
             key: key,
             style: TestScaffold.blueScreen.multiSelectStyle,
@@ -169,12 +175,12 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    testWidgets('fromMap', (tester) async {
+    testWidgets('constructor', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect.fromMap(letters, initialValue: const {'Apple', 'Banana'}, key: key),
+          child: FMultiSelect(items: letters, initialValue: const {'Apple', 'Banana'}, key: key),
         ),
       );
 
@@ -184,12 +190,12 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/${theme.name}/from-map.png'));
     });
 
-    testWidgets('searchFromMap', (tester) async {
+    testWidgets('search', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect<String>.searchFromMap(
+          child: FMultiSelect<String>.search(
             letters,
             key: key,
             contentScrollHandles: true,
@@ -212,7 +218,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect<String>.fromMap(const {}, key: key),
+          child: FMultiSelect<String>(items: const {}, key: key),
         ),
       );
 
@@ -227,7 +233,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect.fromMap(letters, initialValue: const {'Apple', 'Banana'}, clearable: true, key: key),
+          child: FMultiSelect(items: letters, initialValue: const {'Apple', 'Banana'}, clearable: true, key: key),
         ),
       );
 
@@ -242,7 +248,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect.fromMap(letters, initialValue: const {'Apple', 'Banana'}, clearable: true, key: key),
+          child: FMultiSelect(items: letters, initialValue: const {'Apple', 'Banana'}, clearable: true, key: key),
         ),
       );
 
@@ -264,9 +270,9 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect.fromMap(
-            letters,
+          child: FMultiSelect(
             initialValue: const {'Apple', 'Banana'},
+            items: letters,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
             clearable: true,
@@ -283,9 +289,9 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect.fromMap(
-            letters,
+          child: FMultiSelect(
             initialValue: const {'Apple', 'Banana'},
+            items: letters,
             enabled: false,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -303,8 +309,8 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect.fromMap(
-            letters,
+          child: FMultiSelect(
+            items: letters,
             initialValue: const {'Apple', 'Banana'},
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -331,7 +337,7 @@ void main() {
       TestScaffold.app(
         locale: const Locale('fr'),
         alignment: Alignment.topCenter,
-        child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key),
+        child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, key: key),
       ),
     );
 
@@ -345,8 +351,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FMultiSelect<String>.fromMap(
-          letters,
+        child: FMultiSelect<String>(
           initialValue: const {
             'Apple',
             'Banana',
@@ -358,6 +363,7 @@ void main() {
             'Honeydew',
             'Italian plum',
           },
+          items: letters,
           key: key,
         ),
       ),
@@ -373,9 +379,9 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FMultiSelect<String>.fromMap(
-          letters,
+        child: FMultiSelect<String>(
           initialValue: const {'Apple', 'Banana', 'Cherry', 'Dragonfruit', 'Elderberry', 'Fig', 'Grape', 'Honeydew'},
+          items: letters,
           key: key,
         ),
       ),
@@ -391,9 +397,9 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FMultiSelect<String>.fromMap(
-          letters,
+        child: FMultiSelect<String>(
           initialValue: const {'Apple', 'Banana', 'Cherry'},
+          items: letters,
           tagBuilder: (context, _, _, _, child) => child,
           key: key,
         ),
@@ -410,7 +416,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FMultiSelect<String>.fromMap(letters, initialValue: const {'Grape', 'Apple', 'Banana'}, key: key),
+        child: FMultiSelect<String>(items: letters, initialValue: const {'Grape', 'Apple', 'Banana'}, key: key),
       ),
     );
 
@@ -424,10 +430,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FMultiSelect<String>.fromMap(
-          letters,
-          sort: (a, b) => a.compareTo(b),
+        child: FMultiSelect<String>(
           initialValue: const {'Grape', 'Apple', 'Banana'},
+          items: letters,
+          sort: (a, b) => a.compareTo(b),
           key: key,
         ),
       ),

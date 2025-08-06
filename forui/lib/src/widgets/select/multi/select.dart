@@ -195,56 +195,15 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// Throws [AssertionError] if both the [controller] and [initialValue] are provided.
   final Set<T> initialValue;
 
-  /// Creates a select with a list of selectable items.
-  factory FMultiSelect({
-    required Widget Function(T) format,
-    required List<FSelectItemMixin> children,
-    FMultiSelectController<T>? controller,
-    FMultiSelectStyle Function(FMultiSelectStyle)? style,
-    bool autofocus,
-    FocusNode? focusNode,
-    FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder,
-    Widget? label,
-    Widget? description,
-    bool enabled,
-    ValueChanged<Set<T>>? onChange,
-    void Function(Set<T>)? onSaved,
-    AutovalidateMode autovalidateMode,
-    String? forceErrorText,
-    String? Function(Set<T>) validator,
-    Widget Function(BuildContext, String) errorBuilder,
-    Widget? hint,
-    int Function(T, T)? sort,
-    FMultiSelectTagBuilder<T>? tagBuilder,
-    TextAlign textAlign,
-    TextDirection? textDirection,
-    bool clearable,
-    AlignmentGeometry anchor,
-    AlignmentGeometry fieldAnchor,
-    FPortalConstraints popoverConstraints,
-    FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
-    Offset offset,
-    FPopoverHideRegion hideRegion,
-    Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder,
-    ScrollController? contentScrollController,
-    bool contentScrollHandles,
-    ScrollPhysics contentPhysics,
-    FItemDivider contentDivider,
-    int min,
-    int? max,
-    Set<T>? initialValue,
-    Key? key,
-  }) = _BasicSelect<T>;
-
   /// Creates a [FMultiSelect] from the given [items].
+  ///
+  /// For more control over the appearance of items, use [FMultiSelect.rich].
   ///
   /// ## Contract
   /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
   /// undefined behavior.
-  factory FMultiSelect.fromMap(
-    Map<String, T> items, {
+  factory FMultiSelect({
+    required Map<String, T> items,
     FMultiSelectController<T>? controller,
     FMultiSelectStyle Function(FMultiSelectStyle)? style,
     bool autofocus = false,
@@ -284,7 +243,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
-    return FMultiSelect<T>(
+    return FMultiSelect<T>.rich(
       controller: controller,
       style: style,
       autofocus: autofocus,
@@ -327,22 +286,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     );
   }
 
-  /// Creates a searchable select with dynamic content based on search input.
-  ///
-  /// The [searchFieldProperties] can be used to customize the search field.
-  ///
-  /// The [filter] callback produces a list of items based on the search query either synchronously or asynchronously.
-  /// The [contentBuilder] callback builds the list of items based on search results returned by [filter].
-  /// The [contentLoadingBuilder] is used to show a loading indicator while the search results is processed
-  /// asynchronously by [filter].
-  /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
-  factory FMultiSelect.search({
+  /// Creates a [FMultiSelect] with the given [children].
+  factory FMultiSelect.rich({
     required Widget Function(T) format,
-    required FutureOr<Iterable<T>> Function(String) filter,
-    required FSelectSearchContentBuilder<T> contentBuilder,
-    FSelectSearchFieldProperties searchFieldProperties,
-    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    required List<FSelectItemMixin> children,
     FMultiSelectController<T>? controller,
     FMultiSelectStyle Function(FMultiSelectStyle)? style,
     bool autofocus,
@@ -380,7 +327,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     int? max,
     Set<T>? initialValue,
     Key? key,
-  }) = _SearchSelect<T>;
+  }) = _BasicSelect<T>;
 
   /// Creates a searchable select with dynamic content based on the given [items] and search input.
   ///
@@ -392,59 +339,61 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// asynchronously by [filter].
   /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
   ///
+  /// For more control over the appearance of items, use [FMultiSelect.searchBuilder].
+  ///
   /// ## Contract
   /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
   /// undefined behavior.
-  factory FMultiSelect.searchFromMap(
-    Map<String, T> items, {
-    FutureOr<Iterable<T>> Function(String)? filter,
-    FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
-    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder = FMultiSelect.defaultContentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
-    FMultiSelectController<T>? controller,
-    FMultiSelectStyle Function(FMultiSelectStyle)? style,
-    bool autofocus = false,
-    FocusNode? focusNode,
-    FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder = defaultIconBuilder,
-    Widget? label,
-    Widget? description,
-    bool enabled = true,
-    ValueChanged<Set<T>>? onChange,
-    void Function(Set<T>)? onSaved,
-    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
-    String? forceErrorText,
-    String? Function(Set<T>) validator = _defaultValidator,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    Widget? hint,
-    int Function(T, T)? sort,
-    FMultiSelectTagBuilder<T>? tagBuilder,
-    TextAlign textAlign = TextAlign.start,
-    TextDirection? textDirection,
-    bool clearable = false,
-    AlignmentGeometry anchor = AlignmentDirectional.topStart,
-    AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
-    FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
-    Offset offset = Offset.zero,
-    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
-    Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
-    ScrollController? contentScrollController,
-    bool contentScrollHandles = false,
-    ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
-    FItemDivider contentDivider = FItemDivider.none,
-    int min = 0,
-    int? max,
-    Set<T>? initialValue,
-    Key? key,
-  }) {
+  factory FMultiSelect.search(
+      Map<String, T> items, {
+        FutureOr<Iterable<T>> Function(String)? filter,
+        FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
+        Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder = FMultiSelect.defaultContentLoadingBuilder,
+        Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+        FMultiSelectController<T>? controller,
+        FMultiSelectStyle Function(FMultiSelectStyle)? style,
+        bool autofocus = false,
+        FocusNode? focusNode,
+        FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
+        FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder = defaultIconBuilder,
+        Widget? label,
+        Widget? description,
+        bool enabled = true,
+        ValueChanged<Set<T>>? onChange,
+        void Function(Set<T>)? onSaved,
+        AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
+        String? forceErrorText,
+        String? Function(Set<T>) validator = _defaultValidator,
+        Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+        Widget? hint,
+        int Function(T, T)? sort,
+        FMultiSelectTagBuilder<T>? tagBuilder,
+        TextAlign textAlign = TextAlign.start,
+        TextDirection? textDirection,
+        bool clearable = false,
+        AlignmentGeometry anchor = AlignmentDirectional.topStart,
+        AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
+        FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
+        FPortalSpacing spacing = const FPortalSpacing(4),
+        Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+        Offset offset = Offset.zero,
+        FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
+        Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
+        ScrollController? contentScrollController,
+        bool contentScrollHandles = false,
+        ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
+        FItemDivider contentDivider = FItemDivider.none,
+        int min = 0,
+        int? max,
+        Set<T>? initialValue,
+        Key? key,
+      }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
-    return FMultiSelect<T>.search(
+    return FMultiSelect<T>.searchBuilder(
       format: (value) => Text(inverse[value] ?? ''),
       filter:
-          filter ??
-          (query) => items.entries
+      filter ??
+              (query) => items.entries
               .where((entry) => entry.key.toLowerCase().startsWith(query.toLowerCase()))
               .map((entry) => entry.value)
               .toList(),
@@ -493,6 +442,61 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       key: key,
     );
   }
+
+  /// Creates a searchable select with dynamic content based on search input.
+  ///
+  /// The [searchFieldProperties] can be used to customize the search field.
+  ///
+  /// The [filter] callback produces a list of items based on the search query either synchronously or asynchronously.
+  /// The [contentBuilder] callback builds the list of items based on search results returned by [filter].
+  /// The [contentLoadingBuilder] is used to show a loading indicator while the search results is processed
+  /// asynchronously by [filter].
+  /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
+  factory FMultiSelect.searchBuilder({
+    required Widget Function(T) format,
+    required FutureOr<Iterable<T>> Function(String) filter,
+    required FSelectSearchContentBuilder<T> contentBuilder,
+    FSelectSearchFieldProperties searchFieldProperties,
+    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder,
+    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    FMultiSelectController<T>? controller,
+    FMultiSelectStyle Function(FMultiSelectStyle)? style,
+    bool autofocus,
+    FocusNode? focusNode,
+    FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
+    FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder,
+    Widget? label,
+    Widget? description,
+    bool enabled,
+    ValueChanged<Set<T>>? onChange,
+    void Function(Set<T>)? onSaved,
+    AutovalidateMode autovalidateMode,
+    String? forceErrorText,
+    String? Function(Set<T>) validator,
+    Widget Function(BuildContext, String) errorBuilder,
+    Widget? hint,
+    int Function(T, T)? sort,
+    FMultiSelectTagBuilder<T>? tagBuilder,
+    TextAlign textAlign,
+    TextDirection? textDirection,
+    bool clearable,
+    AlignmentGeometry anchor,
+    AlignmentGeometry fieldAnchor,
+    FPortalConstraints popoverConstraints,
+    FPortalSpacing spacing,
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset offset,
+    FPopoverHideRegion hideRegion,
+    Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder,
+    ScrollController? contentScrollController,
+    bool contentScrollHandles,
+    ScrollPhysics contentPhysics,
+    FItemDivider contentDivider,
+    int min,
+    int? max,
+    Set<T>? initialValue,
+    Key? key,
+  }) = _SearchSelect<T>;
 
   FMultiSelect._({
     required this.format,

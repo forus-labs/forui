@@ -244,7 +244,7 @@ FAutocomplete.builder(
           return items.where((item) => item.toLowerCase().contains(query.toLowerCase()));
         },
         contentBuilder: (context, query, suggestions) => <FAutocompleteItemMixin>[
-          FAutocompleteSection(
+          FAutocompleteSection.rich(
             label: const Text('Level 1'),
             divider: FItemDivider.indented,
             children: [

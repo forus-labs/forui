@@ -39,10 +39,27 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   /// The nested [FAutocompleteItem]s.
   final List<FAutocompleteItem> children;
 
-  /// Creates a [FAutocompleteSection].
+  /// Creates a [FAutocompleteSection] from the given items.
   ///
-  /// For a convenient way to create a section with a list of items, use [FAutocompleteSection.fromList].
-  const FAutocompleteSection({
+  /// For more control over the appearance of individual items, use [FAutocompleteSection.rich].
+  FAutocompleteSection({
+    required Widget label,
+    required List<String> items,
+    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle)? style,
+    bool? enabled,
+    FItemDivider divider = FItemDivider.none,
+    Key? key,
+  }) : this.rich(
+    label: label,
+    children: [for (final item in items) FAutocompleteItem(value: item)],
+    style: style,
+    enabled: enabled,
+    divider: divider,
+    key: key,
+  );
+
+  /// Creates a [FAutocompleteSection] with the given [children].
+  const FAutocompleteSection.rich({
     required this.label,
     required this.children,
     this.style,
@@ -50,25 +67,6 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
     this.divider = FItemDivider.none,
     super.key,
   });
-
-  /// Creates a [FAutocompleteSection] from the given items.
-  ///
-  /// For more control over the appearance of individual items, use [FAutocompleteSection].
-  FAutocompleteSection.fromList({
-    required Widget label,
-    required List<String> items,
-    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle)? style,
-    bool? enabled,
-    FItemDivider divider = FItemDivider.none,
-    Key? key,
-  }) : this(
-         label: label,
-         children: [for (final item in items) FAutocompleteItem(value: item)],
-         style: style,
-         enabled: enabled,
-         divider: divider,
-         key: key,
-       );
 
   @override
   Widget build(BuildContext context) {

@@ -47,7 +47,7 @@ void main() {
         TestScaffold.app(
           child: Form(
             key: key,
-            child: FMultiSelect<String>(
+            child: FMultiSelect<String>.rich(
               format: (value) => Text('$value!'),
               onSaved: (value) => initial = value,
               initialValue: initial,
@@ -74,7 +74,7 @@ void main() {
         TestScaffold.app(
           child: Form(
             key: key,
-            child: FMultiSelect<String>(
+            child: FMultiSelect<String>.rich(
               controller: autoDispose(FMultiSelectController(vsync: tester, value: {'A', 'B'})),
               format: (value) => Text('$value!'),
               onSaved: (value) {
@@ -100,7 +100,7 @@ void main() {
     testWidgets('custom format', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>(
+          child: FMultiSelect<String>.rich(
             key: key,
             format: (value) => Text('$value!'),
             controller: controller,
@@ -121,7 +121,7 @@ void main() {
 
     testWidgets('disabled', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(child: FMultiSelect.fromMap(letters, enabled: false, clearable: true, key: key)),
+        TestScaffold.app(child: FMultiSelect(items: letters, enabled: false, clearable: true, key: key)),
       );
 
       await tester.tap(find.byKey(key));
@@ -133,7 +133,7 @@ void main() {
     testWidgets('tag clears itself', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>(
+          child: FMultiSelect<String>.rich(
             key: key,
             format: (value) => Text('$value!'),
             controller: controller,
@@ -163,7 +163,7 @@ void main() {
     testWidgets('clear button clears everything', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>(
+          child: FMultiSelect<String>.rich(
             key: key,
             format: (value) => Text('$value!'),
             controller: controller,
@@ -195,7 +195,7 @@ void main() {
     testWidgets('keyboard navigation', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(const {'A': 'A', 'B': 'B'}, key: key, controller: controller),
+          child: FMultiSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key, controller: controller),
         ),
       );
 
@@ -224,7 +224,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, key: key, controller: controller),
+          child: FMultiSelect<String>(items: letters, key: key, controller: controller),
         ),
       );
 
@@ -234,7 +234,7 @@ void main() {
       expect(controller.hasListeners, true);
       expect(controller.popover.hasListeners, false);
 
-      await tester.pumpWidget(TestScaffold.app(child: FMultiSelect<String>.fromMap(letters, key: key)));
+      await tester.pumpWidget(TestScaffold.app(child: FMultiSelect<String>(items: letters, key: key)));
 
       expect(controller.hasListeners, false);
       expect(controller.popover.hasListeners, false);
@@ -246,7 +246,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, key: key, controller: controller),
+          child: FMultiSelect<String>(items: letters, key: key, controller: controller),
         ),
       );
 
@@ -272,7 +272,7 @@ void main() {
       final firstController = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, controller: firstController, onChange: onChange),
+          child: FMultiSelect<String>(items: letters, controller: firstController, onChange: onChange),
         ),
       );
 
@@ -284,7 +284,7 @@ void main() {
       final secondController = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, controller: secondController, onChange: onChange),
+          child: FMultiSelect<String>(items: letters, controller: secondController, onChange: onChange),
         ),
       );
 
@@ -302,7 +302,7 @@ void main() {
       final controller = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, controller: controller, onChange: (_) => first++),
+          child: FMultiSelect<String>(items: letters, controller: controller, onChange: (_) => first++),
         ),
       );
 
@@ -313,7 +313,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, controller: controller, onChange: (_) => second++),
+          child: FMultiSelect<String>(items: letters, controller: controller, onChange: (_) => second++),
         ),
       );
 
@@ -331,7 +331,7 @@ void main() {
       final firstController = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, controller: firstController, onChange: (_) => first++),
+          child: FMultiSelect<String>(items: letters, controller: firstController, onChange: (_) => first++),
         ),
       );
 
@@ -343,7 +343,7 @@ void main() {
       final secondController = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, controller: secondController, onChange: (_) => second++),
+          child: FMultiSelect<String>(items: letters, controller: secondController, onChange: (_) => second++),
         ),
       );
 
@@ -361,7 +361,7 @@ void main() {
       final controller = autoDispose(FMultiSelectController<String>(vsync: const TestVSync()));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(letters, controller: controller, onChange: (_) => count++),
+          child: FMultiSelect<String>(items: letters, controller: controller, onChange: (_) => count++),
         ),
       );
 
@@ -384,8 +384,8 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>.fromMap(
-            const {'A': 'A', 'B': 'B'},
+          child: FMultiSelect<String>(
+            items: const {'A': 'A', 'B': 'B'},
             key: key,
             focusNode: focus,
             controller: controller,
@@ -401,7 +401,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+          child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );
 
@@ -419,7 +419,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+          child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );
 
@@ -437,7 +437,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+          child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );
 
@@ -457,7 +457,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<int>.fromMap(const {'1': 1, '2': 2}, key: key, focusNode: focus),
+          child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );
 

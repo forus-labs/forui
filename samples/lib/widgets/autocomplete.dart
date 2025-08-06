@@ -114,7 +114,7 @@ class SectionAutocompletePage extends Sample {
         for (final MapEntry(key: label, value: zones) in timezones.entries) {
           final items = zones.where(suggestions.contains).toList();
           if (items.isNotEmpty) {
-            sections.add(FAutocompleteSection.fromList(label: Text(label), items: items));
+            sections.add(FAutocompleteSection(label: Text(label), items: items));
           }
         }
 
@@ -138,7 +138,7 @@ class DividerAutocompletePage extends Sample {
         return items.where((item) => item.toLowerCase().contains(query.toLowerCase()));
       },
       contentBuilder: (context, query, suggestions) => <FAutocompleteItemMixin>[
-        FAutocompleteSection(
+        FAutocompleteSection.rich(
           label: const Text('Level 1'),
           divider: FItemDivider.indented,
           children: [
@@ -146,7 +146,7 @@ class DividerAutocompletePage extends Sample {
             if (suggestions.contains('1B')) FAutocompleteItem(value: '1B'),
           ],
         ),
-        FAutocompleteSection.fromList(label: const Text('Level 2'), items: ['2A', '2B'].where(suggestions.contains).toList()),
+        FAutocompleteSection(label: const Text('Level 2'), items: ['2A', '2B'].where(suggestions.contains).toList()),
         if (suggestions.contains('3')) FAutocompleteItem(value: '3'),
         if (suggestions.contains('4')) FAutocompleteItem(value: '4'),
       ].where((item) => item is! FAutocompleteSection || item.children.isNotEmpty).toList(),
