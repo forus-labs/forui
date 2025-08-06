@@ -43,12 +43,12 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
   );
 
-  /// The default content empty  builder that shows a localized message when there are no results.
+  /// The default content empty builder that shows a localized message when there are no results.
   static Widget defaultContentEmptyBuilder(BuildContext context, FSelectStyle style) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
-      child: Text(localizations.selectNoResults, style: style.emptyTextStyle),
+      child: Text(localizations.selectNoResults, style: style.emptyTextStyle, textAlign: TextAlign.center),
     );
   }
 

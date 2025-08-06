@@ -11,7 +11,7 @@ import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/multi/field.dart';
 
-part 'multi_select.style.dart';
+part 'select.style.dart';
 
 /// A function that builds a tag in a [FMultiSelect].
 typedef FMultiSelectTagBuilder<T> =
@@ -62,7 +62,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
-      child: Text(localizations.selectNoResults, style: style.emptyTextStyle),
+      child: Text(localizations.selectNoResults, style: style.emptyTextStyle, textAlign: TextAlign.center),
     );
   }
 
@@ -323,7 +323,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       max: max,
       initialValue: initialValue,
       key: key,
-      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(title: Text(key), value:  value)],
+      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(title: Text(key), value: value)],
     );
   }
 
@@ -448,7 +448,9 @@ abstract class FMultiSelect<T> extends StatelessWidget {
               .where((entry) => entry.key.toLowerCase().startsWith(query.toLowerCase()))
               .map((entry) => entry.value)
               .toList(),
-      contentBuilder: (context, _, values) => [for (final value in values) FSelectItem<T>(title: Text(inverse[value]!), value: value)],
+      contentBuilder: (context, _, values) => [
+        for (final value in values) FSelectItem<T>(title: Text(inverse[value]!), value: value),
+      ],
       searchFieldProperties: searchFieldProperties,
       contentLoadingBuilder: contentLoadingBuilder,
       contentErrorBuilder: contentErrorBuilder,
