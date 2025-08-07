@@ -12,6 +12,7 @@ final separator = RegExp('_|-');
 const header = '''
 import 'package:forui/forui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // ignore_for_file: avoid_redundant_argument_values
 
