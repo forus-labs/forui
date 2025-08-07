@@ -180,12 +180,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
-                key: key,
-                controller: controller,
-                focusNode: autocompleteFocus,
-                items: fruits,
-              ),
+              FAutocomplete(key: key, controller: controller, focusNode: autocompleteFocus, items: fruits),
               FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
             ],
           ),

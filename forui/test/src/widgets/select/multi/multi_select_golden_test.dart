@@ -351,12 +351,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FMultiSelect<int>(
-          items: const {'1': 1, '2': 2},
-          hint: const Text('hint'),
-          keepHint: false,
-          key: key,
-        ),
+        child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, hint: const Text('hint'), keepHint: false, key: key),
       ),
     );
 
@@ -370,12 +365,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FMultiSelect<int>(
-            items: const {'1': 1, '2': 2},
-            hint: const Text('hint'),
-            keepHint: false,
-            key: key,
-        ),
+        child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, hint: const Text('hint'), keepHint: false, key: key),
       ),
     );
 

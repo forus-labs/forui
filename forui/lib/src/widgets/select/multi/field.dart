@@ -143,14 +143,14 @@ class Field<T> extends FormField<Set<T>> {
                                      children: [
                                        for (final value in values)
                                          tagBuilder(context, state._controller, style, value, format(value)),
-                                     if (keepHint || state._controller.value.isEmpty)
-                                       Padding(
-                                         padding: style.fieldStyle.hintPadding,
-                                         child: DefaultTextStyle.merge(
-                                           style: style.fieldStyle.hintTextStyle.resolve(states),
-                                           child: hint ?? Text(localizations.multiSelectHint),
+                                       if (keepHint || state._controller.value.isEmpty)
+                                         Padding(
+                                           padding: style.fieldStyle.hintPadding,
+                                           child: DefaultTextStyle.merge(
+                                             style: style.fieldStyle.hintTextStyle.resolve(states),
+                                             child: hint ?? Text(localizations.multiSelectHint),
+                                           ),
                                          ),
-                                       ),
                                      ],
                                    ),
                                  ),
