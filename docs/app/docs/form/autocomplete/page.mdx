@@ -65,6 +65,7 @@ FAutocomplete(
   suffixBuilder: (context, style, states) => Icon(FIcons.search),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
   clearable: (value) => value.text.isNotEmpty,
+  rightArrowToComplete: true,
   initialText: 'Canada',
   items: [
     'United States',
@@ -101,6 +102,7 @@ FAutocomplete.builder(
   prefixBuilder: (context, style, states) => Icon(FIcons.globe),
   suffixBuilder: (context, style, states) => Icon(FIcons.search),
   popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
+  rightArrowToComplete: true,
   clearable: (value) => value.text.isNotEmpty,
 );
 ```

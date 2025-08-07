@@ -171,6 +171,73 @@ void main() {
     });
   });
 
+  group('right arrow completion', () {
+    testWidgets('right arrow does nothing', (tester) async {
+      final autocompleteFocus = autoDispose(FocusNode());
+      final buttonFocus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FAutocomplete(
+                key: key,
+                controller: controller,
+                focusNode: autocompleteFocus,
+                items: fruits,
+              ),
+              FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'b');
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+      await tester.pumpAndSettle();
+
+      expect(controller.popover.status.isForwardOrCompleted, true);
+      expect(autocompleteFocus.hasFocus, true);
+      expect(buttonFocus.hasFocus, false);
+      expect(find.text('b'), findsOne);
+    });
+
+    testWidgets('right arrow when completion available completes text', (tester) async {
+      final autocompleteFocus = autoDispose(FocusNode());
+      final buttonFocus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FAutocomplete(
+                key: key,
+                controller: controller,
+                focusNode: autocompleteFocus,
+                rightArrowToComplete: true,
+                items: fruits,
+              ),
+              FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'b');
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
+      await tester.pumpAndSettle();
+
+      expect(controller.popover.status.isForwardOrCompleted, false);
+      expect(autocompleteFocus.hasFocus, true);
+      expect(buttonFocus.hasFocus, false);
+      expect(find.text('Banana'), findsOne);
+    });
+  });
+
   group('keyboard navigation', () {
     testWidgets('arrow key navigation & selection', (tester) async {
       final focus = autoDispose(FocusNode());
