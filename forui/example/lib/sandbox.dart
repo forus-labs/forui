@@ -34,35 +34,25 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
     return Column(
       spacing: 5,
       children: [
-        FAutocomplete.builder(
-          hint: 'Type to search fruits',
-          filter: (query) async {
-            await Future.delayed(const Duration(seconds: 1));
-            return query.isEmpty
-                ? fruits
-                : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
-          },
-          contentBuilder: (context, query, suggestions) => [
-            for (final suggestion in suggestions) FAutocompleteItem(value: suggestion),
-          ],
+        FButton(
+          style: FButtonStyle.primary(),
+          onPress: () {},
+          child: Text('Primary'),
         ),
-        FMultiSelect<String>.rich(
-          format: Text.new,
-          children: const [
-            FSelectItem(title: Text('Apple'), value: 'Apple'),
-            FSelectItem(title: Text('Banana'), value: 'Banana'),
-            FSelectItem(title: Text('Cherry'), value: 'Cherry'),
-            FSelectItem(title: Text('Date'), value: 'Date'),
-          ],
+        FButton(
+          style: FButtonStyle.secondary(),
+          onPress: () {},
+          child: Text('Secondary'),
         ),
-        FSelect<String>.rich(
-          format: (s) => s,
-          children: const [
-            // FSelectItem(title: Text('Apple'), value:  'Apple'),
-            // FSelectItem(title: Text('Banana'), value:  'Banana'),
-            // FSelectItem(title: Text('Cherry'), value:  'Cherry'),
-            // FSelectItem(title: Text('Date'), value:  'Date'),
-          ],
+        FButton(
+          style: FButtonStyle.ghost(),
+          onPress: () {},
+          child: Text('Ghost'),
+        ),
+        FButton(
+          style: FButtonStyle.destructive(),
+          onPress: () {},
+          child: Text('Destructive'),
         ),
       ],
     );
