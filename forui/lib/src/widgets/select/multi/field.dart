@@ -21,6 +21,7 @@ class Field<T> extends FormField<Set<T>> {
   final Widget? label;
   final Widget? description;
   final Widget? hint;
+  final bool keepHint;
   final int Function(T, T)? sort;
   final Widget Function(T) format;
   final FMultiSelectTagBuilder<T> tagBuilder;
@@ -49,6 +50,7 @@ class Field<T> extends FormField<Set<T>> {
     required this.label,
     required this.description,
     required this.hint,
+    required this.keepHint,
     required this.sort,
     required this.format,
     required this.tagBuilder,
@@ -141,13 +143,14 @@ class Field<T> extends FormField<Set<T>> {
                                      children: [
                                        for (final value in values)
                                          tagBuilder(context, state._controller, style, value, format(value)),
-                                       Padding(
-                                         padding: style.fieldStyle.hintPadding,
-                                         child: DefaultTextStyle.merge(
-                                           style: style.fieldStyle.hintTextStyle.resolve(states),
-                                           child: hint ?? Text(localizations.multiSelectHint),
+                                       if (keepHint || state._controller.value.isEmpty)
+                                         Padding(
+                                           padding: style.fieldStyle.hintPadding,
+                                           child: DefaultTextStyle.merge(
+                                             style: style.fieldStyle.hintTextStyle.resolve(states),
+                                             child: hint ?? Text(localizations.multiSelectHint),
+                                           ),
                                          ),
-                                       ),
                                      ],
                                    ),
                                  ),
@@ -199,6 +202,7 @@ class Field<T> extends FormField<Set<T>> {
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('validator', validator))
+      ..add(FlagProperty('keepHint', value: keepHint, ifTrue: 'keepHint'))
       ..add(ObjectFlagProperty.has('sort', sort))
       ..add(ObjectFlagProperty.has('format', format))
       ..add(ObjectFlagProperty.has('tagBuilder', tagBuilder))

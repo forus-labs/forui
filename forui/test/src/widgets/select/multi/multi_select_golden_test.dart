@@ -347,6 +347,37 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/locale.png'));
   });
 
+  testWidgets('show hint when no items selected', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        alignment: Alignment.topCenter,
+        child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, hint: const Text('hint'), keepHint: false, key: key),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/hide-hint-unselected.png'));
+  });
+
+  testWidgets('hide hint when items selected', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        alignment: Alignment.topCenter,
+        child: FMultiSelect<int>(items: const {'1': 1, '2': 2}, hint: const Text('hint'), keepHint: false, key: key),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/hide-hint-selected.png'));
+  });
+
   testWidgets('automatically wraps tag', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(

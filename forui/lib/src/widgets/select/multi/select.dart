@@ -123,6 +123,9 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// The hint.
   final Widget? hint;
 
+  /// Whether to keep the hint visible when there are selected items. Defaults to true.
+  final bool keepHint;
+
   /// The function used to sort the selected items. Defaults to the order in which they were selected.
   final int Function(T, T)? sort;
 
@@ -220,6 +223,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     String? Function(Set<T>) validator = _defaultValidator,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Widget? hint,
+    bool keepHint = true,
     int Function(T, T)? sort,
     Widget Function(BuildContext, FMultiSelectController<T>, FMultiSelectStyle, T, Widget)? tagBuilder,
     TextAlign textAlign = TextAlign.start,
@@ -263,6 +267,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       validator: validator,
       errorBuilder: errorBuilder,
       hint: hint,
+      keepHint: keepHint,
       textAlign: textAlign,
       textDirection: textDirection,
       clearable: clearable,
@@ -306,6 +311,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     String? Function(Set<T>) validator,
     Widget Function(BuildContext, String) errorBuilder,
     Widget? hint,
+    bool keepHint,
     int Function(T, T)? sort,
     FMultiSelectTagBuilder<T>? tagBuilder,
     TextAlign textAlign,
@@ -366,6 +372,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     String? Function(Set<T>) validator = _defaultValidator,
     Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Widget? hint,
+    bool keepHint = true,
     int Function(T, T)? sort,
     FMultiSelectTagBuilder<T>? tagBuilder,
     TextAlign textAlign = TextAlign.start,
@@ -419,6 +426,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       validator: validator,
       errorBuilder: errorBuilder,
       hint: hint,
+      keepHint: keepHint,
       sort: sort,
       tagBuilder: tagBuilder,
       textAlign: textAlign,
@@ -475,6 +483,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     String? Function(Set<T>) validator,
     Widget Function(BuildContext, String) errorBuilder,
     Widget? hint,
+    bool keepHint,
     int Function(T, T)? sort,
     FMultiSelectTagBuilder<T>? tagBuilder,
     TextAlign textAlign,
@@ -516,6 +525,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.validator = _defaultValidator,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.hint,
+    this.keepHint = true,
     this.sort,
     this.textAlign = TextAlign.start,
     this.textDirection,
@@ -568,6 +578,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       description: description,
       onChange: onChange,
       hint: hint,
+      keepHint: keepHint,
       sort: sort,
       format: format,
       tagBuilder: tagBuilder,
@@ -615,6 +626,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       ..add(ObjectFlagProperty.has('sort', sort))
       ..add(ObjectFlagProperty.has('tagBuilder', tagBuilder))
       ..add(StringProperty('forceErrorText', forceErrorText))
+      ..add(FlagProperty('keepHint', value: keepHint, ifTrue: 'keepHint'))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(EnumProperty('textAlign', textAlign))
       ..add(EnumProperty('textDirection', textDirection))
@@ -659,6 +671,7 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     super.validator,
     super.errorBuilder,
     super.hint,
+    super.keepHint,
     super.sort,
     super.textAlign,
     super.textDirection,
@@ -731,6 +744,7 @@ class _SearchSelect<T> extends FMultiSelect<T> {
     super.validator,
     super.errorBuilder,
     super.hint,
+    super.keepHint,
     super.sort,
     super.textAlign,
     super.textDirection,

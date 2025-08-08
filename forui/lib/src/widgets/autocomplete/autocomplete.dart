@@ -276,6 +276,10 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// Defaults to returning the given child.
   final FFieldBuilder<FAutocompleteStyle> builder;
 
+  /// Whether the autocomplete should complete the text when a completion is available and the user presses right arrow.
+  /// Defaults to false.
+  final bool rightArrowToComplete;
+
   /// A callback that produces a list of items based on the query either synchronously or asynchronously.
   final FutureOr<Iterable<String>> Function(String text) filter;
 
@@ -377,6 +381,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
     FFieldBuilder<FAutocompleteStyle> builder = _builder,
+    bool rightArrowToComplete = false,
     FutureOr<Iterable<String>> Function(String)? filter,
     FAutoCompleteContentBuilder? contentBuilder,
     ScrollController? contentScrollController,
@@ -463,6 +468,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          hideRegion: hideRegion,
          autoHide: autoHide,
          builder: builder,
+         rightArrowToComplete: rightArrowToComplete,
          contentScrollController: contentScrollController,
          contentPhysics: contentPhysics,
          contentDivider: contentDivider,
@@ -549,6 +555,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.autoHide = true,
     this.builder = _builder,
+    this.rightArrowToComplete = false,
     this.contentScrollController,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = FItemDivider.none,
@@ -648,6 +655,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('builder', builder))
+      ..add(FlagProperty('rightArrowToComplete', value: rightArrowToComplete, ifTrue: 'rightArrowToComplete'))
       ..add(ObjectFlagProperty.has('filter', filter))
       ..add(ObjectFlagProperty.has('contentEmptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
@@ -875,19 +883,23 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
               const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
                   _popoverFocus.descendants.firstOrNull?.requestFocus(),
               if (_controller.current case (:final replacement, completion: final _))
-                const SingleActivator(LogicalKeyboardKey.tab): () {
-                  if (widget.autoHide) {
-                    _controller.popover.hide();
-                  }
-                  _previous = replacement;
-                  _controller.complete();
-                },
+                const SingleActivator(LogicalKeyboardKey.tab): () => _complete(replacement),
+              if (_controller.current case (:final replacement, completion: final _) when widget.rightArrowToComplete)
+                const SingleActivator(LogicalKeyboardKey.arrowRight): () => _complete(replacement),
             },
             child: widget.builder(context, style, states, field),
           ),
         ),
       ),
     );
+  }
+
+  void _complete(String replacement) {
+    if (widget.autoHide) {
+      _controller.popover.hide();
+    }
+    _previous = replacement;
+    _controller.complete();
   }
 }
 
