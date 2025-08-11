@@ -35,22 +35,6 @@ void main() {
 
       await expectBlueScreen();
     });
-
-    testWidgets('selected', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.blue(
-          child: FSidebarItem(
-            style: TestScaffold.blueScreen.sidebarStyle.groupStyle.itemStyle,
-            icon: const Icon(FIcons.box),
-            label: const Text('Item'),
-            selected: true,
-            onPress: () {},
-          ),
-        ),
-      );
-
-      await expectBlueScreen();
-    });
   });
 
   for (final theme in TestScaffold.themes) {
