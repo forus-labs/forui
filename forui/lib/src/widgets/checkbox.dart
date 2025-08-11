@@ -136,10 +136,7 @@ class FCheckbox extends StatelessWidget {
               duration: style.animationDuration,
               switchInCurve: style.curve,
               // This transition builder is necessary because of https://github.com/flutter/flutter/issues/121336#issuecomment-1482620874
-              transitionBuilder: (child, opacity) => FadeTransition(
-                opacity: opacity,
-                child: child,
-              ),
+              transitionBuilder: (child, opacity) => FadeTransition(opacity: opacity, child: child),
               child: SizedBox.square(
                 key: SetKey(states),
                 dimension: style.size,
