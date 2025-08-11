@@ -159,6 +159,7 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
 
 * Fix `FProgress.circularIcon()` using incorrect color.
 * Fix `FScaffold` not propagating `IconTheme` from `FStyle.iconStyle`.
+* Fix `FSelectGroup` throwing a duplicate error when rapidly hovering over several `FCheckbox`es. 
 * Fix `FTabs` throwing an assertion error if `FTabController` is provided with a `initialIndex` > 0.
 
 
