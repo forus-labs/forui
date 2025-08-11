@@ -14,8 +14,8 @@ We've changed the default cursor for many widgets from `MouseCursor.click` to `M
 
 
 ### `FThemeData`
-"Hover colors now use lightness-based adjustments rather than alpha blending, providing better visual feedback across all 
-color variants, specially `FColors.secondary`.
+Hover colors now use lightness-based adjustments rather than alpha blending, providing better visual feedback across all 
+color variants, especially `FColors.secondary`
 
 * Remove `foreground` parameter from `FColors.hover(...)`.
 
