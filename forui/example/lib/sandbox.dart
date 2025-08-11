@@ -34,26 +34,10 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
     return Column(
       spacing: 5,
       children: [
-        FButton(
-          style: FButtonStyle.primary(),
-          onPress: () {},
-          child: Text('Primary'),
-        ),
-        FButton(
-          style: FButtonStyle.secondary(),
-          onPress: () {},
-          child: Text('Secondary'),
-        ),
-        FButton(
-          style: FButtonStyle.ghost(),
-          onPress: () {},
-          child: Text('Ghost'),
-        ),
-        FButton(
-          style: FButtonStyle.destructive(),
-          onPress: () {},
-          child: Text('Destructive'),
-        ),
+        FButton(style: FButtonStyle.primary(), onPress: () {}, child: Text('Primary')),
+        FButton(style: FButtonStyle.secondary(), onPress: () {}, child: Text('Secondary')),
+        FButton(style: FButtonStyle.ghost(), onPress: () {}, child: Text('Ghost')),
+        FButton(style: FButtonStyle.destructive(), onPress: () {}, child: Text('Destructive')),
       ],
     );
   }

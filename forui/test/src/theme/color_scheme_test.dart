@@ -48,7 +48,8 @@ void main() {
           error: Colors.blueAccent,
           errorForeground: Colors.blueGrey,
           border: Colors.lime,
-          hoverLightness: (min: 0.5, max: -0.5, threshold: 0.1),
+          hoverLighten: 0.3,
+          hoverDarken: 0.2,
           disabledOpacity: 0.1,
         );
 
@@ -67,7 +68,8 @@ void main() {
         expect(copy.error, equals(Colors.blueAccent));
         expect(copy.errorForeground, equals(Colors.blueGrey));
         expect(copy.border, equals(Colors.lime));
-        expect(copy.hoverLightness, (min: 0.5, max: -0.5, threshold: 0.1));
+        expect(copy.hoverLighten, 0.3);
+        expect(copy.hoverDarken, 0.2);
         expect(copy.disabledOpacity, 0.1);
       });
     });
@@ -95,10 +97,8 @@ void main() {
           ColorProperty('error', Colors.red),
           ColorProperty('errorForeground', Colors.redAccent),
           ColorProperty('border', Colors.lightBlue),
-          StringProperty(
-            'hoverLightness',
-            (min: 0.15, max: -0.075, threshold: 0.05).toString(),
-          ),
+          PercentProperty('hoverLighten', 0.075),
+          PercentProperty('hoverDarken', 0.05),
           PercentProperty('disabledOpacity', 0.5),
         ].map((p) => p.toString()),
       );
