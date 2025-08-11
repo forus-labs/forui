@@ -1,6 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -21,8 +23,11 @@ import 'package:forui/forui.dart';
 /// Each color group includes a `-Foreground` suffixed color, i.e. [primaryForeground], used to color text and other
 /// visual elements on top of their respective background colors.
 ///
-/// Hovered and disabled colors are derived by adjusting the opacity. To derive these colors, use the [hover] and
-/// [disable] methods. The opacity can be adjusted with [enabledHoveredOpacity] and [disabledOpacity].
+/// Hovered colors are derived by adjusting the lightness of the original color. To derive these colors, use the [hover]
+/// method. The lightness can be adjusted with [hoverLighten].
+///
+/// Disabled colors are derived by adjusting the opacity. To derive these colors, use the [disable] method. The opacity
+/// can be adjusted with [disabledOpacity].
 ///
 /// See [FThemes] for predefined themes and color schemes.
 final class FColors with Diagnosticable {
@@ -104,11 +109,21 @@ final class FColors with Diagnosticable {
   /// The border color.
   final Color border;
 
-  /// The opacity of the foreground color when a widget is hovered and enabled. Defaults to 0.9.
+  /// The percentage to lighten dark colors by. A higher value will result in a more pronounced lightening effect.
+  ///
+  /// Defaults to 0.075.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if the value is less than 0 or greater than 1.
-  final double enabledHoveredOpacity;
+  /// `0.0 <= hoverLighten <= 1.0`
+  final double hoverLighten;
+
+  /// The percentage to darken light colors by. A higher value will result in a more pronounced darkening effect.
+  ///
+  /// Defaults to 0.05.
+  ///
+  /// ## Contract
+  /// `0.0 <= hoverDarken <= 1.0`
+  final double hoverDarken;
 
   /// The opacity of the foreground color when a widget is disabled. Defaults to 0.5.
   ///
@@ -137,19 +152,31 @@ final class FColors with Diagnosticable {
     required this.error,
     required this.errorForeground,
     required this.border,
-    this.enabledHoveredOpacity = 0.9,
+    this.hoverLighten = 0.075,
+    this.hoverDarken = 0.05,
     this.disabledOpacity = 0.5,
-  }) : assert(
-         0 <= enabledHoveredOpacity && enabledHoveredOpacity <= 1,
-         'The enabledHoveredOpacity must be between 0 and 1.',
-       ),
+  }) : assert(0.0 <= hoverLighten && hoverLighten <= 1.0, 'The hoverLighten must be between 0 and 1.'),
+       assert(0.0 <= hoverDarken && hoverDarken <= 1.0, 'The hoverDarken must be between 0 and 1.'),
        assert(0 <= disabledOpacity && disabledOpacity <= 1, 'The disabledOpacity must be between 0 and 1.');
 
-  /// Returns a hovered color for the [foreground] on the [background].
+  /// Generates a hovered variant of the given [color] by darkening light colors and lighting dark colors based on their
+  /// HSL lightness.
   ///
-  /// [FColors.background] is used if [background] is not given.
-  Color hover(Color foreground, [Color? background]) =>
-      Color.alphaBlend(foreground.withValues(alpha: enabledHoveredOpacity), background ?? this.background);
+  /// Colors at the extremes (very light or very dark) will be adjusted more aggressively than colors in the middle.
+  ///
+  /// The lightening and darkening are controlled by [hoverLighten] and [hoverDarken].
+  Color hover(Color color) {
+    final hsl = HSLColor.fromColor(color);
+    final l = hsl.lightness;
+
+    // More aggressive color change when close to extremes & less when in the middle.
+    final (space, factor, sign) = l > 0.5 ? (1.0 - l, hoverDarken, -1) : (l, hoverLighten, 1);
+    final aggressiveness = 1 + ((0.5 - space) / 0.5);
+    final adjustment = factor * aggressiveness * sign;
+    final lightness = clampDouble(l + adjustment, 0, 1);
+
+    return hsl.withLightness(lightness).toColor();
+  }
 
   /// Returns a disabled color for the [foreground] on the [background].
   ///
@@ -189,7 +216,8 @@ final class FColors with Diagnosticable {
     Color? error,
     Color? errorForeground,
     Color? border,
-    double? enabledHoveredOpacity,
+    double? hoverLighten,
+    double? hoverDarken,
     double? disabledOpacity,
   }) => FColors(
     brightness: brightness ?? this.brightness,
@@ -208,7 +236,8 @@ final class FColors with Diagnosticable {
     error: error ?? this.error,
     errorForeground: errorForeground ?? this.errorForeground,
     border: border ?? this.border,
-    enabledHoveredOpacity: enabledHoveredOpacity ?? this.enabledHoveredOpacity,
+    hoverLighten: hoverLighten ?? this.hoverLighten,
+    hoverDarken: hoverDarken ?? this.hoverDarken,
     disabledOpacity: disabledOpacity ?? this.disabledOpacity,
   );
 
@@ -232,7 +261,8 @@ final class FColors with Diagnosticable {
       ..add(ColorProperty('error', error))
       ..add(ColorProperty('errorForeground', errorForeground))
       ..add(ColorProperty('border', border))
-      ..add(PercentProperty('enabledHoveredOpacity', enabledHoveredOpacity))
+      ..add(PercentProperty('hoverLighten', hoverLighten))
+      ..add(PercentProperty('hoverDarken', hoverDarken))
       ..add(PercentProperty('disabledOpacity', disabledOpacity));
   }
 
@@ -256,7 +286,8 @@ final class FColors with Diagnosticable {
           error == other.error &&
           errorForeground == other.errorForeground &&
           border == other.border &&
-          enabledHoveredOpacity == other.enabledHoveredOpacity &&
+          hoverLighten == other.hoverLighten &&
+          hoverDarken == other.hoverDarken &&
           disabledOpacity == other.disabledOpacity;
 
   @override
@@ -277,6 +308,7 @@ final class FColors with Diagnosticable {
       error.hashCode ^
       errorForeground.hashCode ^
       border.hashCode ^
-      enabledHoveredOpacity.hashCode ^
+      hoverLighten.hashCode ^
+      hoverDarken.hashCode ^
       disabledOpacity.hashCode;
 }

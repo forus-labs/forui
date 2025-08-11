@@ -13,6 +13,13 @@ We've changed the default cursor for many widgets from `MouseCursor.click` to `M
 [W3C User Interface guidelines](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer).
 
 
+### `FThemeData`
+Hover colors now use lightness-based adjustments rather than alpha blending, providing better visual feedback across all 
+color variants, especially `FColors.secondary`
+
+* Remove `foreground` parameter from `FColors.hover(...)`.
+
+
 ### `FAccordion`
 * Add `FAccordionItem.onHoverChange`
 * Add `FAccordionItem.onStateChange`
