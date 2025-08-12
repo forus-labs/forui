@@ -14,7 +14,7 @@ import 'package:forui/forui.dart';
 /// * [typography] contains font and typography information.
 /// * [style] is a set of miscellaneous properties.
 /// * widget styles are used to style individual Forui widgets.
-/// * [extensions] are arbitrary additions to this theme. They typically used to define properties specific to your
+/// * [extensions] are arbitrary additions to this theme. They are typically used to define properties specific to your
 ///   application.
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
