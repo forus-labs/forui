@@ -8,12 +8,14 @@ import 'package:forui/forui.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
-/// A [FThemeData] is composed of [colors], [typography], [style], and widget styles.
+/// A [FThemeData] is composed of [colors], [typography], [style], widget styles, and [extensions].
 ///
 /// * [colors] is a set of colors.
 /// * [typography] contains font and typography information.
 /// * [style] is a set of miscellaneous properties.
 /// * widget styles are used to style individual Forui widgets.
+/// * [extensions] are arbitrary additions to this theme. They are typically used to define properties specific to your
+///   application.
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
 /// provided by the [colors], [typography], and [style].
@@ -470,6 +472,8 @@ final class FThemeData with Diagnosticable {
   /// ```
   final FTooltipStyle tooltipStyle;
 
+  final Map<Object, ThemeExtension<dynamic>> _extensions;
+
   /// Creates a [FThemeData] that configures the widget styles using the given properties if not given.
   factory FThemeData({
     required FColors colors,
@@ -521,6 +525,7 @@ final class FThemeData with Diagnosticable {
     FTimeFieldStyle? timeFieldStyle,
     FTimePickerStyle? timePickerStyle,
     FTooltipStyle? tooltipStyle,
+    Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
     typography = typography ?? FTypography.inherit(colors: colors);
     style = style ?? FStyle.inherit(colors: colors, typography: typography);
@@ -585,6 +590,7 @@ final class FThemeData with Diagnosticable {
       timePickerStyle:
           timePickerStyle ?? FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
       tooltipStyle: tooltipStyle ?? FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
+      extensions: Map.unmodifiable({for (final extension in extensions) extension.type: extension}),
     );
   }
 
@@ -638,7 +644,61 @@ final class FThemeData with Diagnosticable {
     required this.timeFieldStyle,
     required this.timePickerStyle,
     required this.tooltipStyle,
-  });
+    required Map<Object, ThemeExtension<dynamic>> extensions,
+  }) : _extensions = extensions;
+
+  /// Obtains a particular [ThemeExtension].
+  ///
+  /// {@template forui.theme.FThemeData.extension}
+  /// ## Creating and passing a [ThemeExtension] to [FThemeData]
+  /// ```dart
+  /// class BrandColor extends ThemeExtension<BrandColor> {
+  ///   final Color color;
+  ///
+  ///   BrandColor(this.color);
+  ///
+  ///   @override
+  ///   BrandColor copyWith({Color? color}) => BrandColor(color ?? this.color);
+  ///
+  ///   @override
+  ///   BrandColor lerp(BrandColor? other, double t) {
+  ///     if (other is! BrandColor) return this;
+  ///
+  ///    return BrandColor(Color.lerp(color, other.color, t)!);
+  ///   }
+  /// }
+  /// ```
+  ///
+  /// Passing it via constructor:
+  /// ```dart
+  /// final theme = FThemeData(
+  ///   extensions: [BrandColor(Colors.blue)],
+  ///   ... // other fields omitted for brevity
+  /// );
+  /// ```
+  ///
+  /// Passing it via [copyWith]:
+  /// ```dart
+  /// theme.copyWith(extensions: [BrandColor(Colors.blue)]);
+  /// ```
+  ///
+  /// ## Accessing the extension
+  /// ```dart
+  /// final brandColor = context.theme.extension<BrandColor>();
+  /// ```
+  ///
+  /// It is recommended to define a getter for your [ThemeExtension]:
+  /// ```extension FThemeDataBrandColor on FThemeData {
+  ///  BrandColor get brandColor => extension<BrandColor>();
+  ///  }
+  ///  ```
+  /// {@endtemplate}
+  T extension<T extends Object>() => _extensions[T]! as T;
+
+  /// All [ThemeExtension]s defined in this theme.
+  ///
+  /// {@macro forui.theme.FThemeData.extension}
+  Iterable<ThemeExtension<dynamic>> get extensions => _extensions.values;
 
   /// Converts this [FThemeData] to a Material [ThemeData] on a best-effort basis.
   ///
@@ -1073,6 +1133,7 @@ final class FThemeData with Diagnosticable {
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
     FTooltipStyle? tooltipStyle,
+    Iterable<ThemeExtension<dynamic>>? extensions,
   }) => FThemeData(
     colors: colors,
     typography: typography,
@@ -1120,6 +1181,7 @@ final class FThemeData with Diagnosticable {
     tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
     timeFieldStyle: timeFieldStyle ?? this.timeFieldStyle,
     tooltipStyle: tooltipStyle ?? this.tooltipStyle,
+    extensions: extensions ?? this.extensions,
   );
 
   @override
@@ -1174,7 +1236,8 @@ final class FThemeData with Diagnosticable {
       ..add(DiagnosticsProperty('tileGroupStyle', tileGroupStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('timeFieldStyle', timeFieldStyle, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('timePickerStyle', timePickerStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
+      ..add(IterableProperty('extensions', extensions, level: DiagnosticLevel.debug));
   }
 
   @override
@@ -1229,7 +1292,8 @@ final class FThemeData with Diagnosticable {
           tileGroupStyle == other.tileGroupStyle &&
           timeFieldStyle == other.timeFieldStyle &&
           timePickerStyle == other.timePickerStyle &&
-          tooltipStyle == other.tooltipStyle;
+          tooltipStyle == other.tooltipStyle &&
+          mapEquals(_extensions, other._extensions);
 
   @override
   int get hashCode =>
@@ -1280,5 +1344,6 @@ final class FThemeData with Diagnosticable {
       tileGroupStyle.hashCode ^
       timeFieldStyle.hashCode ^
       timePickerStyle.hashCode ^
-      tooltipStyle.hashCode;
+      tooltipStyle.hashCode ^
+      _extensions.hashCode;
 }

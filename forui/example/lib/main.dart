@@ -39,7 +39,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     locale: const Locale('en', 'US'),
     localizationsDelegates: FLocalizations.localizationsDelegates,
     supportedLocales: FLocalizations.supportedLocales,
-    // theme: FThemes.zinc.light.toApproximateMaterialTheme(),
+    theme: FThemes.zinc.light.toApproximateMaterialTheme(),
     builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
     home: Builder(
       builder: (context) {

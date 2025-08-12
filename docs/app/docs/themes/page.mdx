@@ -88,10 +88,11 @@ FThemeData --> FAccordionStyle
 There are **5** core components in Forui's theming system.
 
 - **[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
-- **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds **individual widget styles** and the following:
+- **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds:
   - **[`FColors`](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html)**: Color scheme including primary, foreground, and background colors.
   - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography settings including font family and text styles.
   - **[`FStyle`](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html)**: Misc. options such as border radius and icon size.
+  - **Individual widget styles**.
 
 
 The included `BuildContext` extension allows `FThemeData` can be accessed via [`context.theme`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext.html):
@@ -247,6 +248,10 @@ only supports the disabled, hovered, pressed and focused states. A field's suppo
 
 
 ## Customization
+
+Forui provides **2** ways to customize themes and widget styles.
+- [**CLI**](#themes) - major and reusable style changes, such as creating your own design system.
+- [**`copyWith(...)`**](#copywith) method - minor and one-off adjustments to existing styles.
 
 ### Themes
 
@@ -520,6 +525,78 @@ Widget build(BuildContext context) => FAccordion(
     ),
   ],
 );
+```
+
+## Custom Properties
+
+Forui themes can be extended with your own application-specific properties using Flutter's [`ThemeExtension`](https://api.flutter.dev/flutter/material/ThemeExtension-class.html)
+system.
+
+### Create a Theme Extension
+
+Theme extensions must extend `ThemeExtension` and implement `copyWith()` and `lerp()`.
+```dart filename="lib/theme/brand_color.dart" copy
+import 'package:flutter/material.dart';
+
+class BrandColor extends ThemeExtension<BrandColor> {
+  final Color color;
+
+  const BrandColor({
+    required this.color,
+  });
+
+  @override
+  BrandColor copyWith({Color? color}) => BrandColor(color: color ?? this.color);
+
+  @override
+  BrandColor lerp(BrandColor? other, double t) {
+    if (other is! BrandColor) {
+      return this;
+    }
+
+    return BrandColor(color: Color.lerp(color, other.color, t)!);
+  }
+}
+```
+
+Add the extension to `FThemeData(...)` via its `extensions` parameter:
+```dart copy
+import 'brand_theme.dart';
+
+FThemeData(
+  // ... other theme properties
+  extensions: [
+    BrandColor(color: const Color(0xFF6366F1)),
+  ],
+);
+```
+
+You can also add extensions to existing themes using `copyWith(...)`:
+```dart copy
+final theme = FThemes.zinc.light.copyWith(
+  extensions: [
+    BrandColor(color: const Color(0xFF6366F1)),
+  ],
+);
+```
+
+### Accessing the Properties
+
+Retrieve your custom theme extension via [`extension<T>()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/extension.html):
+```dart {3} copy
+@override
+Widget build(BuildContext context) {
+  final brand = context.theme.extension<BrandColor>();
+  return ColoredBox(color: brand.color);
+}
+```
+
+Optionally, we recommend creating a getter on `FThemeData`:
+
+```dart filename="lib/theme/theme_extensions.dart" copy
+extension BrandColorExtension on FThemeData {
+  BrandColor get brand => extension<BrandColor>();
+}
 ```
 
 ## Material Interoperability
