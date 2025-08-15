@@ -154,6 +154,8 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
 * **Breaking** Change `FTimeField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
   `FFieldIconBuilder<FDateFieldStyle>`.
 
+* Fix regression in Flutter 3.35.2 by reducing `FTextFieldStyle.contentPadding` from `EdgeInsets.symmetric(horizontal: 14, vertical: 10)` 
+  to `EdgeInsets.symmetric(horizontal: 10, vertical: 10)`.
 
 ### Others
 * Add `FSelectMenuTile.onTapHide`.

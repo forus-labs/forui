@@ -111,7 +111,12 @@ enum Style {
   fbuttonstyles(
     'FButtonStyles',
     <String>['buttons'],
-    <String>['FButtonStyles', 'FButtonStyle', 'FButtonContentStyle', 'FButtonIconContentStyle'],
+    <String>[
+      'FButtonStyles',
+      'FButtonStyle',
+      'FButtonContentStyle',
+      'FButtonIconContentStyle',
+    ],
     'FButtonStyles buttonStyles({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FButtonStyles(\n  primary: _buttonStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n    color: colors.primary,\n    foregroundColor: colors.primaryForeground,\n  ),\n  secondary: _buttonStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n    color: colors.secondary,\n    foregroundColor: colors.secondaryForeground,\n  ),\n  destructive: _buttonStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n    color: colors.destructive,\n    foregroundColor: colors.destructiveForeground,\n  ),\n  outline: FButtonStyle(\n    decoration: FWidgetStateMap({\n      WidgetState.disabled: BoxDecoration(\n        border: Border.all(color: colors.disable(colors.border)),\n        borderRadius: style.borderRadius,\n      ),\n      WidgetState.hovered | WidgetState.pressed: BoxDecoration(\n        border: Border.all(color: colors.border),\n        borderRadius: style.borderRadius,\n        color: colors.secondary,\n      ),\n      WidgetState.any: BoxDecoration(\n        border: Border.all(color: colors.border),\n        borderRadius: style.borderRadius,\n      ),\n    }),\n    focusedOutlineStyle: style.focusedOutlineStyle,\n    contentStyle: _buttonContentStyle(\n      typography: typography,\n      enabled: colors.secondaryForeground,\n      disabled: colors.disable(colors.secondaryForeground),\n    ),\n    iconContentStyle: _buttonIconContentStyle(\n      enabled: colors.secondaryForeground,\n      disabled: colors.disable(colors.secondaryForeground),\n    ),\n    tappableStyle: style.tappableStyle,\n  ),\n  ghost: FButtonStyle(\n    decoration: FWidgetStateMap({\n      WidgetState.disabled: BoxDecoration(borderRadius: style.borderRadius),\n      WidgetState.hovered | WidgetState.pressed: BoxDecoration(\n        borderRadius: style.borderRadius,\n        color: colors.secondary,\n      ),\n      WidgetState.any: BoxDecoration(borderRadius: style.borderRadius),\n    }),\n    focusedOutlineStyle: style.focusedOutlineStyle,\n    contentStyle: _buttonContentStyle(\n      typography: typography,\n      enabled: colors.secondaryForeground,\n      disabled: colors.disable(colors.secondaryForeground),\n    ),\n    iconContentStyle: _buttonIconContentStyle(\n      enabled: colors.secondaryForeground,\n      disabled: colors.disable(colors.secondaryForeground),\n    ),\n    tappableStyle: style.tappableStyle,\n  ),\n);\n',
   ),
   fcalendardaypickerstyle(
@@ -123,7 +128,13 @@ enum Style {
   fcalendarheaderstyle(
     'FCalendarHeaderStyle',
     <String>['calendar-header', 'calendarheader'],
-    <String>['FCalendarHeaderStyle', 'FButtonStyles', 'FButtonStyle', 'FButtonContentStyle', 'FButtonIconContentStyle'],
+    <String>[
+      'FCalendarHeaderStyle',
+      'FButtonStyles',
+      'FButtonStyle',
+      'FButtonContentStyle',
+      'FButtonIconContentStyle',
+    ],
     'FCalendarHeaderStyle calendarHeaderStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final outline = _buttonStyles(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ).outline;\n  return FCalendarHeaderStyle(\n    focusedOutlineStyle: style.focusedOutlineStyle,\n    buttonStyle: outline.copyWith(\n      decoration: outline.decoration.map(\n        (d) => d.copyWith(borderRadius: BorderRadius.circular(4)),\n      ),\n      iconContentStyle: FButtonIconContentStyle(\n        iconStyle: FWidgetStateMap({\n          WidgetState.disabled: IconThemeData(\n            color: colors.disable(colors.mutedForeground),\n            size: 17,\n          ),\n          WidgetState.any: IconThemeData(\n            color: colors.mutedForeground,\n            size: 17,\n          ),\n        }),\n      ),\n    ),\n    headerTextStyle: typography.base.copyWith(\n      color: colors.primary,\n      fontWeight: FontWeight.w600,\n    ),\n    animationDuration: const Duration(milliseconds: 200),\n  );\n}\n',
   ),
   fcalendarstyle(
@@ -210,7 +221,12 @@ enum Style {
   fitemgroupstyle(
     'FItemGroupStyle',
     <String>['item-group', 'itemgroup'],
-    <String>['FItemGroupStyle', 'FItemStyle', 'FItemContentStyle', 'FRawItemContentStyle'],
+    <String>[
+      'FItemGroupStyle',
+      'FItemStyle',
+      'FItemContentStyle',
+      'FRawItemContentStyle',
+    ],
     'FItemGroupStyle itemGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FItemGroupStyle(\n  itemStyle: _itemStyle(colors: colors, typography: typography, style: style),\n  dividerColor: FWidgetStateMap.all(colors.border),\n  dividerWidth: style.borderWidth,\n  decoration: const BoxDecoration(),\n  spacing: 4,\n);\n',
   ),
   fitemstyle(
@@ -354,13 +370,24 @@ enum Style {
   fselectcontentstyle(
     'FSelectContentStyle',
     <String>['select-content', 'selectcontent'],
-    <String>['FSelectContentStyle', 'FSelectSectionStyle', 'FItemContentStyle', 'FSelectScrollHandleStyle'],
+    <String>[
+      'FSelectContentStyle',
+      'FSelectSectionStyle',
+      'FItemContentStyle',
+      'FSelectScrollHandleStyle',
+    ],
     'FSelectContentStyle selectContentStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FSelectContentStyle(\n  sectionStyle: _selectSectionStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  ),\n  scrollHandleStyle: _selectScrollHandleStyle(colors: colors),\n  padding: const EdgeInsets.symmetric(vertical: 5),\n);\n',
   ),
   fselectgroupstyle(
     'FSelectGroupStyle',
     <String>['select-group', 'selectgroup'],
-    <String>['FSelectGroupStyle', 'FCheckboxStyle', 'FRadioStyle', 'FLabelStyles', 'FLabelStyle'],
+    <String>[
+      'FSelectGroupStyle',
+      'FCheckboxStyle',
+      'FRadioStyle',
+      'FLabelStyles',
+      'FLabelStyle',
+    ],
     'FSelectGroupStyle selectGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final vertical = _labelStyles(style: style).verticalStyle;\n  final labelTextStyle = FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.primary),\n      fontWeight: FontWeight.w500,\n    ),\n    WidgetState.any: typography.sm.copyWith(\n      color: colors.primary,\n      fontWeight: FontWeight.w500,\n    ),\n  });\n  final descriptionTextStyle = FWidgetStateMap({\n    WidgetState.disabled: typography.sm.copyWith(\n      color: colors.disable(colors.mutedForeground),\n    ),\n    WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),\n  });\n  final errorTextStyle = typography.sm.copyWith(\n    color: colors.error,\n    fontWeight: FontWeight.w500,\n  );\n  return FSelectGroupStyle(\n    checkboxStyle: _checkboxStyle(colors: colors, style: style).copyWith(\n      labelTextStyle: labelTextStyle,\n      descriptionTextStyle: descriptionTextStyle,\n      errorTextStyle: errorTextStyle,\n    ),\n    radioStyle: _radioStyle(colors: colors, style: style).copyWith(\n      labelTextStyle: labelTextStyle,\n      descriptionTextStyle: descriptionTextStyle,\n      errorTextStyle: errorTextStyle,\n    ),\n    labelTextStyle: style.formFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,\n    errorTextStyle: style.formFieldStyle.errorTextStyle,\n    labelPadding: vertical.labelPadding,\n    descriptionPadding: vertical.descriptionPadding,\n    errorPadding: vertical.errorPadding,\n    childPadding: vertical.childPadding,\n  );\n}\n',
   ),
   fselectmenutilestyle(
@@ -492,7 +519,7 @@ enum Style {
       'FButtonContentStyle',
       'FButtonIconContentStyle',
     ],
-    'FTextFieldStyle textFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final label = _labelStyles(style: style).verticalStyle;\n  final ghost = _buttonStyles(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ).ghost;\n  final textStyle = typography.sm.copyWith(\n    fontFamily: typography.defaultFontFamily,\n  );\n  return FTextFieldStyle(\n    keyboardAppearance: colors.brightness,\n    clearButtonStyle: ghost.copyWith(\n      iconContentStyle: ghost.iconContentStyle.copyWith(\n        iconStyle: FWidgetStateMap({\n          WidgetState.disabled: IconThemeData(\n            color: colors.disable(colors.mutedForeground),\n            size: 17,\n          ),\n          WidgetState.any: IconThemeData(\n            color: colors.mutedForeground,\n            size: 17,\n          ),\n        }),\n      ),\n    ),\n    contentTextStyle: FWidgetStateMap({\n      WidgetState.disabled: textStyle.copyWith(\n        color: colors.disable(colors.primary),\n      ),\n      WidgetState.any: textStyle.copyWith(color: colors.primary),\n    }),\n    hintTextStyle: FWidgetStateMap({\n      WidgetState.disabled: textStyle.copyWith(\n        color: colors.disable(colors.border),\n      ),\n      WidgetState.any: textStyle.copyWith(color: colors.mutedForeground),\n    }),\n    counterTextStyle: FWidgetStateMap({\n      WidgetState.disabled: textStyle.copyWith(\n        color: colors.disable(colors.primary),\n      ),\n      WidgetState.any: textStyle.copyWith(color: colors.primary),\n    }),\n    border: FWidgetStateMap({\n      WidgetState.error: OutlineInputBorder(\n        borderSide: BorderSide(color: colors.error, width: style.borderWidth),\n        borderRadius: style.borderRadius,\n      ),\n      WidgetState.disabled: OutlineInputBorder(\n        borderSide: BorderSide(\n          color: colors.disable(colors.border),\n          width: style.borderWidth,\n        ),\n        borderRadius: style.borderRadius,\n      ),\n      WidgetState.focused: OutlineInputBorder(\n        borderSide: BorderSide(color: colors.primary, width: style.borderWidth),\n        borderRadius: style.borderRadius,\n      ),\n      WidgetState.any: OutlineInputBorder(\n        borderSide: BorderSide(color: colors.border, width: style.borderWidth),\n        borderRadius: style.borderRadius,\n      ),\n    }),\n    labelTextStyle: style.formFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,\n    errorTextStyle: style.formFieldStyle.errorTextStyle,\n    labelPadding: label.labelPadding,\n    descriptionPadding: label.descriptionPadding,\n    errorPadding: label.errorPadding,\n    childPadding: label.childPadding,\n    cursorColor: CupertinoColors.activeBlue,\n    filled: false,\n    contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),\n    clearButtonPadding: const EdgeInsetsDirectional.only(end: 4),\n    scrollPadding: const EdgeInsets.all(20),\n  );\n}\n',
+    'FTextFieldStyle textFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final label = _labelStyles(style: style).verticalStyle;\n  final ghost = _buttonStyles(\n    colors: colors,\n    typography: typography,\n    style: style,\n  ).ghost;\n  final textStyle = typography.sm.copyWith(\n    fontFamily: typography.defaultFontFamily,\n  );\n  return FTextFieldStyle(\n    keyboardAppearance: colors.brightness,\n    clearButtonStyle: ghost.copyWith(\n      iconContentStyle: ghost.iconContentStyle.copyWith(\n        iconStyle: FWidgetStateMap({\n          WidgetState.disabled: IconThemeData(\n            color: colors.disable(colors.mutedForeground),\n            size: 17,\n          ),\n          WidgetState.any: IconThemeData(\n            color: colors.mutedForeground,\n            size: 17,\n          ),\n        }),\n      ),\n    ),\n    contentTextStyle: FWidgetStateMap({\n      WidgetState.disabled: textStyle.copyWith(\n        color: colors.disable(colors.primary),\n      ),\n      WidgetState.any: textStyle.copyWith(color: colors.primary),\n    }),\n    hintTextStyle: FWidgetStateMap({\n      WidgetState.disabled: textStyle.copyWith(\n        color: colors.disable(colors.border),\n      ),\n      WidgetState.any: textStyle.copyWith(color: colors.mutedForeground),\n    }),\n    counterTextStyle: FWidgetStateMap({\n      WidgetState.disabled: textStyle.copyWith(\n        color: colors.disable(colors.primary),\n      ),\n      WidgetState.any: textStyle.copyWith(color: colors.primary),\n    }),\n    border: FWidgetStateMap({\n      WidgetState.error: OutlineInputBorder(\n        borderSide: BorderSide(color: colors.error, width: style.borderWidth),\n        borderRadius: style.borderRadius,\n      ),\n      WidgetState.disabled: OutlineInputBorder(\n        borderSide: BorderSide(\n          color: colors.disable(colors.border),\n          width: style.borderWidth,\n        ),\n        borderRadius: style.borderRadius,\n      ),\n      WidgetState.focused: OutlineInputBorder(\n        borderSide: BorderSide(color: colors.primary, width: style.borderWidth),\n        borderRadius: style.borderRadius,\n      ),\n      WidgetState.any: OutlineInputBorder(\n        borderSide: BorderSide(color: colors.border, width: style.borderWidth),\n        borderRadius: style.borderRadius,\n      ),\n    }),\n    labelTextStyle: style.formFieldStyle.labelTextStyle,\n    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,\n    errorTextStyle: style.formFieldStyle.errorTextStyle,\n    labelPadding: label.labelPadding,\n    descriptionPadding: label.descriptionPadding,\n    errorPadding: label.errorPadding,\n    childPadding: label.childPadding,\n    cursorColor: CupertinoColors.activeBlue,\n    filled: false,\n    contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),\n    clearButtonPadding: const EdgeInsetsDirectional.only(end: 4),\n    scrollPadding: const EdgeInsets.all(20),\n  );\n}\n',
   ),
   ftilegroupstyle(
     'FTileGroupStyle',
