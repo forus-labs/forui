@@ -672,6 +672,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   late FutureOr<Iterable<String>> _data;
   late FocusNode _fieldFocus;
   late FocusScopeNode _popoverFocus;
+  bool _tapFocus = false;
   String? _previous;
   String? _restore;
 
@@ -728,7 +729,13 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   }
 
   void _focus() {
+    // Check if the field gained focus because of the user tapping/tabbing into the autocomplete while completions are
+    // hidden.
     if (_fieldFocus.hasFocus && _restore == null) {
+      if (!_tapFocus) {
+        _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
+      }
+      _tapFocus = false;
       _controller.popover.show();
     }
 
@@ -754,140 +761,153 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.autocompleteStyle) ?? context.theme.autocompleteStyle;
-    return FTextFormField(
-      style: style.fieldStyle,
-      label: widget.label,
-      hint: widget.hint,
-      description: widget.description,
-      magnifierConfiguration: widget.magnifierConfiguration,
-      groupId: widget.groupId,
-      controller: _controller,
-      focusNode: _fieldFocus,
-      keyboardType: widget.keyboardType,
-      textInputAction: widget.textInputAction,
-      textCapitalization: widget.textCapitalization,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      textDirection: widget.textDirection,
-      autofocus: widget.autofocus,
-      statesController: widget.statesController,
-      obscuringCharacter: widget.obscuringCharacter,
-      obscureText: widget.obscureText,
-      autocorrect: widget.autocorrect,
-      smartDashesType: widget.smartDashesType,
-      smartQuotesType: widget.smartQuotesType,
-      enableSuggestions: widget.enableSuggestions,
-      minLines: widget.minLines,
-      maxLines: widget.maxLines,
-      expands: widget.expands,
-      readOnly: widget.readOnly,
-      showCursor: widget.showCursor,
-      maxLength: widget.maxLength,
-      maxLengthEnforcement: widget.maxLengthEnforcement,
-      onChange: widget.onChange,
-      onTap: _controller.popover.show,
-      onTapAlwaysCalled: true,
-      onEditingComplete: widget.onEditingComplete,
-      onSubmit: widget.onSubmit,
-      onAppPrivateCommand: widget.onAppPrivateCommand,
-      inputFormatters: widget.inputFormatters,
-      enabled: widget.enabled,
-      ignorePointers: widget.ignorePointers,
-      enableInteractiveSelection: widget.enableInteractiveSelection,
-      selectionControls: widget.selectionControls,
-      dragStartBehavior: widget.dragStartBehavior,
-      mouseCursor: widget.mouseCursor,
-      counterBuilder: widget.counterBuilder,
-      scrollPhysics: widget.scrollPhysics,
-      scrollController: widget.scrollController,
-      autofillHints: widget.autofillHints,
-      restorationId: widget.restorationId,
-      stylusHandwritingEnabled: widget.stylusHandwritingEnabled,
-      enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
-      contentInsertionConfiguration: widget.contentInsertionConfiguration,
-      contextMenuBuilder: widget.contextMenuBuilder,
-      canRequestFocus: widget.canRequestFocus,
-      undoController: widget.undoController,
-      spellCheckConfiguration: widget.spellCheckConfiguration,
-      prefixBuilder: widget.prefixBuilder == null
-          ? null
-          : (context, _, states) => widget.prefixBuilder!(context, style, states),
-      suffixBuilder: widget.suffixBuilder == null
-          ? null
-          : (context, _, states) => widget.suffixBuilder!(context, style, states),
-      clearable: widget.clearable,
-      onSaved: widget.onSaved,
-      validator: widget.validator,
-      initialText: widget.initialText,
-      autovalidateMode: widget.autovalidateMode,
-      forceErrorText: widget.forceErrorText,
-      errorBuilder: widget.errorBuilder,
-      builder: (context, _, states, field) => FPopover(
-        controller: _controller.popover,
-        style: style.popoverStyle,
-        constraints: widget.popoverConstraints,
-        popoverAnchor: widget.anchor,
-        childAnchor: widget.fieldAnchor,
-        spacing: widget.spacing,
-        shift: widget.shift,
-        offset: widget.offset,
-        hideRegion: widget.hideRegion,
-        onTapHide: () {
-          if (_restore case final restore?) {
-            _previous = restore;
-            _controller.text = restore;
-          }
-          widget.onTapHide?.call();
-        },
-        focusNode: _popoverFocus,
-        popoverBuilder: (_, popoverController) => TextFieldTapRegion(
-          child: InheritedAutocompleteController(
-            popover: popoverController,
-            onPress: (value) {
-              // Since we unfocus the textfield when using the keyboard to navigate the completions in the popover, the
-              // entire text will be selected when the user taps on a completion & focus is returned to the textfield.
-              // This is desirable in most cases except for this.
-              // TODO: To fix this, we need to wait for https://github.com/flutter/flutter/issues/163399 to land in stable.
-              if (widget.autoHide) {
-                _controller.popover.hide();
-              }
-              _previous = value;
-              _controller.text = value;
-            },
-            onFocus: (value) {
-              _restore ??= _controller.text;
-              _previous = value;
-              _controller.text = value;
-            },
-            child: Content(
-              controller: _controller,
-              style: style.contentStyle,
-              enabled: widget.enabled,
-              scrollController: widget.contentScrollController,
-              physics: widget.contentPhysics,
-              divider: widget.contentDivider,
-              data: _data,
-              loadingBuilder: widget.contentLoadingBuilder,
-              builder: widget.contentBuilder,
-              emptyBuilder: widget.contentEmptyBuilder,
-              errorBuilder: widget.contentErrorBuilder,
+    // On desktop, the textfield selects the entire text when focused (except when tapped). However, refocusing on the
+    // textfield after keyboard navigation of completions should NOT select the entire text.
+    //
+    // To work around this, we disable the default behavior by setting selectAllOnFocus to false and manging the focus
+    // behavior ourselves.
+    //
+    // Focus gained by taps are tracked using this Listener. We cannot use FTextField's onTap method since it is called
+    // AFTER its focus change callback. Subsequently the entire text is selected in the focus change callback only if
+    // it is not caused by tapping.
+    return Listener(
+      onPointerDown: (_) {
+        if (!_fieldFocus.hasFocus) {
+          _tapFocus = true;
+        }
+      },
+      child: FTextFormField(
+        style: style.fieldStyle,
+        label: widget.label,
+        hint: widget.hint,
+        description: widget.description,
+        magnifierConfiguration: widget.magnifierConfiguration,
+        groupId: widget.groupId,
+        controller: _controller,
+        focusNode: _fieldFocus,
+        keyboardType: widget.keyboardType,
+        textInputAction: widget.textInputAction,
+        textCapitalization: widget.textCapitalization,
+        textAlign: widget.textAlign,
+        textAlignVertical: widget.textAlignVertical,
+        textDirection: widget.textDirection,
+        autofocus: widget.autofocus,
+        statesController: widget.statesController,
+        obscuringCharacter: widget.obscuringCharacter,
+        obscureText: widget.obscureText,
+        autocorrect: widget.autocorrect,
+        smartDashesType: widget.smartDashesType,
+        smartQuotesType: widget.smartQuotesType,
+        enableSuggestions: widget.enableSuggestions,
+        minLines: widget.minLines,
+        maxLines: widget.maxLines,
+        expands: widget.expands,
+        readOnly: widget.readOnly,
+        showCursor: widget.showCursor,
+        maxLength: widget.maxLength,
+        maxLengthEnforcement: widget.maxLengthEnforcement,
+        onChange: widget.onChange,
+        onTap: () => _controller.popover.show,
+        onTapAlwaysCalled: true,
+        onEditingComplete: widget.onEditingComplete,
+        onSubmit: widget.onSubmit,
+        onAppPrivateCommand: widget.onAppPrivateCommand,
+        inputFormatters: widget.inputFormatters,
+        enabled: widget.enabled,
+        ignorePointers: widget.ignorePointers,
+        enableInteractiveSelection: widget.enableInteractiveSelection,
+        selectAllOnFocus: false,
+        selectionControls: widget.selectionControls,
+        dragStartBehavior: widget.dragStartBehavior,
+        mouseCursor: widget.mouseCursor,
+        counterBuilder: widget.counterBuilder,
+        scrollPhysics: widget.scrollPhysics,
+        scrollController: widget.scrollController,
+        autofillHints: widget.autofillHints,
+        restorationId: widget.restorationId,
+        stylusHandwritingEnabled: widget.stylusHandwritingEnabled,
+        enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
+        contentInsertionConfiguration: widget.contentInsertionConfiguration,
+        contextMenuBuilder: widget.contextMenuBuilder,
+        canRequestFocus: widget.canRequestFocus,
+        undoController: widget.undoController,
+        spellCheckConfiguration: widget.spellCheckConfiguration,
+        prefixBuilder: widget.prefixBuilder == null
+            ? null
+            : (context, _, states) => widget.prefixBuilder!(context, style, states),
+        suffixBuilder: widget.suffixBuilder == null
+            ? null
+            : (context, _, states) => widget.suffixBuilder!(context, style, states),
+        clearable: widget.clearable,
+        onSaved: widget.onSaved,
+        validator: widget.validator,
+        initialText: widget.initialText,
+        autovalidateMode: widget.autovalidateMode,
+        forceErrorText: widget.forceErrorText,
+        errorBuilder: widget.errorBuilder,
+        builder: (context, _, states, field) => FPopover(
+          controller: _controller.popover,
+          style: style.popoverStyle,
+          constraints: widget.popoverConstraints,
+          popoverAnchor: widget.anchor,
+          childAnchor: widget.fieldAnchor,
+          spacing: widget.spacing,
+          shift: widget.shift,
+          offset: widget.offset,
+          hideRegion: widget.hideRegion,
+          onTapHide: () {
+            if (_restore case final restore?) {
+              _previous = restore;
+              _controller.text = restore;
+            }
+            widget.onTapHide?.call();
+          },
+          focusNode: _popoverFocus,
+          popoverBuilder: (_, popoverController) => TextFieldTapRegion(
+            child: InheritedAutocompleteController(
+              popover: popoverController,
+              onPress: (value) {
+                if (widget.autoHide) {
+                  _controller.popover.hide();
+                }
+                _previous = value;
+                _controller.text = value;
+              },
+              onFocus: (value) {
+                _restore ??= _controller.text;
+                _previous = value;
+                _controller.text = value;
+              },
+              child: Content(
+                controller: _controller,
+                style: style.contentStyle,
+                enabled: widget.enabled,
+                scrollController: widget.contentScrollController,
+                physics: widget.contentPhysics,
+                divider: widget.contentDivider,
+                data: _data,
+                loadingBuilder: widget.contentLoadingBuilder,
+                builder: widget.contentBuilder,
+                emptyBuilder: widget.contentEmptyBuilder,
+                errorBuilder: widget.contentErrorBuilder,
+              ),
             ),
           ),
-        ),
-        child: InheritedAutocompleteStyle(
-          style: style,
-          states: states,
-          child: CallbackShortcuts(
-            bindings: {
-              const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
-              const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
-                  _popoverFocus.descendants.firstOrNull?.requestFocus(),
-              if (_controller.current case (:final replacement, completion: final _))
-                const SingleActivator(LogicalKeyboardKey.tab): () => _complete(replacement),
-              if (_controller.current case (:final replacement, completion: final _) when widget.rightArrowToComplete)
-                const SingleActivator(LogicalKeyboardKey.arrowRight): () => _complete(replacement),
-            },
-            child: widget.builder(context, style, states, field),
+          child: InheritedAutocompleteStyle(
+            style: style,
+            states: states,
+            child: CallbackShortcuts(
+              bindings: {
+                const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
+                const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
+                    _popoverFocus.descendants.firstOrNull?.requestFocus(),
+                if (_controller.current case (:final replacement, completion: final _))
+                  const SingleActivator(LogicalKeyboardKey.tab): () => _complete(replacement),
+                if (_controller.current case (:final replacement, completion: final _) when widget.rightArrowToComplete)
+                  const SingleActivator(LogicalKeyboardKey.arrowRight): () => _complete(replacement),
+              },
+              child: widget.builder(context, style, states, field),
+            ),
           ),
         ),
       ),

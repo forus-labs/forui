@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart' hide Matrix4;
 import 'package:flutter/scheduler.dart';
 
-import 'package:meta/meta.dart';
 import 'package:vector_math/vector_math_64.dart';
 
 import 'package:forui/src/foundation/portal/composited_child.dart';

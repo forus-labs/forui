@@ -144,6 +144,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// {@macro forui.text_field.enableInteractiveSelection}
   final bool enableInteractiveSelection;
 
+  /// {@macro forui.text_field.selectAllOnFocus}
+  final bool? selectAllOnFocus;
+
   /// {@macro forui.text_field.selectionControls}
   final TextSelectionControls? selectionControls;
 
@@ -259,6 +262,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.enabled = true,
     this.ignorePointers,
     this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -329,6 +333,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.enabled = true,
     this.ignorePointers,
     this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -402,6 +407,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.enabled = true,
     this.ignorePointers,
     this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -476,6 +482,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.enabled = true,
     this.ignorePointers,
     this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -551,6 +558,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(
         FlagProperty('enableInteractSelection', value: enableInteractiveSelection, ifTrue: 'enableInteractSelection'),
       )
+      ..add(FlagProperty('selectAllOnFocus', value: selectAllOnFocus, ifTrue: 'selectAllOnFocus'))
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
@@ -651,6 +659,7 @@ class _FormField extends FormField<String> {
               ignorePointers: field.ignorePointers,
               enableInteractiveSelection: field.enableInteractiveSelection,
               selectionControls: field.selectionControls,
+              selectAllOnFocus: field.selectAllOnFocus,
               dragStartBehavior: field.dragStartBehavior,
               mouseCursor: field.mouseCursor,
               counterBuilder: field.counterBuilder,

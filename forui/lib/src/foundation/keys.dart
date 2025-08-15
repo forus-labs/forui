@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:meta/meta.dart';
 
 @internal
 class ListKey<T> extends LocalKey {
