@@ -104,7 +104,9 @@ jobs:
 
   build-ios:
     name: Build iOS
-    runs-on: macos-latest
+    # TODO: Revert to macos-latest after Sept 12025.
+    # github.blog/changelog/2025-07-11-upcoming-changes-to-macos-hosted-runners-macos-latest-migration-and-xcode-support-policy-updates/
+    runs-on: macos-15
     defaults:
       run:
         working-directory: forui/example
