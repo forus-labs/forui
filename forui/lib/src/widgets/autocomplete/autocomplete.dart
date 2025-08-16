@@ -813,7 +813,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         maxLength: widget.maxLength,
         maxLengthEnforcement: widget.maxLengthEnforcement,
         onChange: widget.onChange,
-        onTap: () => _controller.popover.show,
+        onTap: _controller.popover.show,
         onTapAlwaysCalled: true,
         onEditingComplete: widget.onEditingComplete,
         onSubmit: widget.onSubmit,

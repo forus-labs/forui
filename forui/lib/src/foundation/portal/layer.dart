@@ -132,7 +132,7 @@ class ChildLayer extends ContainerLayer {
   @override
   void applyTransform(Layer? child, Matrix4 transform) {
     if (localOffset != Offset.zero) {
-      transform.translateByDouble(localOffset.dx, localOffset.dy, 0, 1.0);
+      transform.translateByDouble(localOffset.dx, localOffset.dy, 0.0, 1.0);
     }
   }
 
