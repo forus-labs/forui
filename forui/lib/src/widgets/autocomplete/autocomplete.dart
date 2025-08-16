@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.dart';
 
 import 'package:meta/meta.dart';
 
@@ -674,6 +675,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   late FocusScopeNode _popoverFocus;
   bool _tapFocus = false;
   String? _previous;
+  /// The original text used to restore the textfield when navigating but not selecting any completion using a keyboard.
   String? _restore;
 
   @override
@@ -737,6 +739,10 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       }
       _tapFocus = false;
       _controller.popover.show();
+    // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
+    // in the empty popover.
+    } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
+      _controller.popover.hide();
     }
 
     _restore = null;
@@ -764,12 +770,12 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
     // On desktop, the textfield selects the entire text when focused (except when tapped). However, refocusing on the
     // textfield after keyboard navigation of completions should NOT select the entire text.
     //
-    // To work around this, we disable the default behavior by setting selectAllOnFocus to false and manging the focus
+    // To work around this, we disable the default behavior by setting selectAllOnFocus to false and manage the focus
     // behavior ourselves.
     //
     // Focus gained by taps are tracked using this Listener. We cannot use FTextField's onTap method since it is called
     // AFTER its focus change callback. Subsequently the entire text is selected in the focus change callback only if
-    // it is not caused by tapping.
+    // it is not caused by a tap.
     return Listener(
       onPointerDown: (_) {
         if (!_fieldFocus.hasFocus) {
@@ -845,68 +851,71 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
         errorBuilder: widget.errorBuilder,
-        builder: (context, _, states, field) => FPopover(
-          controller: _controller.popover,
-          style: style.popoverStyle,
-          constraints: widget.popoverConstraints,
-          popoverAnchor: widget.anchor,
-          childAnchor: widget.fieldAnchor,
-          spacing: widget.spacing,
-          shift: widget.shift,
-          offset: widget.offset,
-          hideRegion: widget.hideRegion,
-          onTapHide: () {
-            if (_restore case final restore?) {
-              _previous = restore;
-              _controller.text = restore;
-            }
-            widget.onTapHide?.call();
-          },
-          focusNode: _popoverFocus,
-          popoverBuilder: (_, popoverController) => TextFieldTapRegion(
-            child: InheritedAutocompleteController(
-              popover: popoverController,
-              onPress: (value) {
-                if (widget.autoHide) {
-                  _controller.popover.hide();
-                }
-                _previous = value;
-                _controller.text = value;
-              },
-              onFocus: (value) {
-                _restore ??= _controller.text;
-                _previous = value;
-                _controller.text = value;
-              },
-              child: Content(
-                controller: _controller,
-                style: style.contentStyle,
-                enabled: widget.enabled,
-                scrollController: widget.contentScrollController,
-                physics: widget.contentPhysics,
-                divider: widget.contentDivider,
-                data: _data,
-                loadingBuilder: widget.contentLoadingBuilder,
-                builder: widget.contentBuilder,
-                emptyBuilder: widget.contentEmptyBuilder,
-                errorBuilder: widget.contentErrorBuilder,
+        builder: (context, _, states, field) => FocusTraversalGroup(
+          policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
+          child: FPopover(
+            controller: _controller.popover,
+            style: style.popoverStyle,
+            constraints: widget.popoverConstraints,
+            popoverAnchor: widget.anchor,
+            childAnchor: widget.fieldAnchor,
+            spacing: widget.spacing,
+            shift: widget.shift,
+            offset: widget.offset,
+            hideRegion: widget.hideRegion,
+            onTapHide: () {
+              if (_restore case final restore?) {
+                _previous = restore;
+                _controller.text = restore;
+              }
+              widget.onTapHide?.call();
+            },
+            focusNode: _popoverFocus,
+            popoverBuilder: (_, popoverController) => TextFieldTapRegion(
+              child: InheritedAutocompleteController(
+                popover: popoverController,
+                onPress: (value) {
+                  if (widget.autoHide) {
+                    _controller.popover.hide();
+                  }
+                  _previous = value;
+                  _controller.text = value;
+                },
+                onFocus: (value) {
+                  _restore ??= _controller.text;
+                  _previous = value;
+                  _controller.text = value;
+                },
+                child: Content(
+                  controller: _controller,
+                  style: style.contentStyle,
+                  enabled: widget.enabled,
+                  scrollController: widget.contentScrollController,
+                  physics: widget.contentPhysics,
+                  divider: widget.contentDivider,
+                  data: _data,
+                  loadingBuilder: widget.contentLoadingBuilder,
+                  builder: widget.contentBuilder,
+                  emptyBuilder: widget.contentEmptyBuilder,
+                  errorBuilder: widget.contentErrorBuilder,
+                ),
               ),
             ),
-          ),
-          child: InheritedAutocompleteStyle(
-            style: style,
-            states: states,
-            child: CallbackShortcuts(
-              bindings: {
-                const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
-                const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
-                    _popoverFocus.descendants.firstOrNull?.requestFocus(),
-                if (_controller.current case (:final replacement, completion: final _))
-                  const SingleActivator(LogicalKeyboardKey.tab): () => _complete(replacement),
-                if (_controller.current case (:final replacement, completion: final _) when widget.rightArrowToComplete)
-                  const SingleActivator(LogicalKeyboardKey.arrowRight): () => _complete(replacement),
-              },
-              child: widget.builder(context, style, states, field),
+            child: InheritedAutocompleteStyle(
+              style: style,
+              states: states,
+              child: CallbackShortcuts(
+                bindings: {
+                  const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
+                  const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
+                      _popoverFocus.descendants.firstOrNull?.requestFocus(),
+                  if (_controller.current case (:final replacement, completion: final _))
+                    const SingleActivator(LogicalKeyboardKey.tab): () => _complete(replacement),
+                  if (_controller.current case (:final replacement, completion: final _) when widget.rightArrowToComplete)
+                    const SingleActivator(LogicalKeyboardKey.arrowRight): () => _complete(replacement),
+                },
+                child: widget.builder(context, style, states, field),
+              ),
             ),
           ),
         ),

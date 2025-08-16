@@ -132,7 +132,7 @@ class ChildLayer extends ContainerLayer {
   @override
   void applyTransform(Layer? child, Matrix4 transform) {
     if (localOffset != Offset.zero) {
-      transform.translate(localOffset.dx, localOffset.dy);
+      transform.translateByDouble(localOffset.dx, localOffset.dy, 0, 1.0);
     }
   }
 
@@ -412,7 +412,7 @@ class PortalLayer extends ContainerLayer {
     // of the leader layer, to account for the leader's additional paint offset
     // and layer offset (ChildLayer.offset).
     leader.applyTransform(null, forwardTransform);
-    forwardTransform.translate(linkedOffset!.dx, linkedOffset!.dy);
+    forwardTransform.translateByDouble(linkedOffset!.dx, linkedOffset!.dy, 0.0, 1.0);
 
     final Matrix4 inverseTransform = _collectTransformForLayerChain(inverseLayers);
 
