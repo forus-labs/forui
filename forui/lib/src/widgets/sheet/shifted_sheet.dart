@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/src/foundation/rendering.dart';
 
 /// This is based on Material's _BottomSheetLayoutWithSizeListener.

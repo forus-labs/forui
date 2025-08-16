@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:meta/meta.dart';
-
 @internal
 bool debugCheckHasAncestor<T extends InheritedWidget>(String ancestor, BuildContext context, {bool generic = false}) {
   assert(() {

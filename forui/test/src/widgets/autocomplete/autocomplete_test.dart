@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -152,7 +153,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(key: key, focusNode: autocompleteFocus, items: fruits),
+              FAutocomplete(key: key, controller: controller, focusNode: autocompleteFocus, items: fruits),
               FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
             ],
           ),
@@ -233,86 +234,99 @@ void main() {
     });
   });
 
-  group('keyboard navigation', () {
-    testWidgets('arrow key navigation & selection', (tester) async {
-      final focus = autoDispose(FocusNode());
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
-        ),
-      );
+  for (final platform in [TargetPlatform.macOS, TargetPlatform.iOS]) {
+    group('keyboard navigation on $platform', () {
+      testWidgets('arrow key navigation & selection', (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
 
-      await tester.enterText(find.byKey(key), 'app');
-      await tester.pumpAndSettle();
+        final focus = autoDispose(FocusNode());
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
+          ),
+        );
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
-      await tester.pumpAndSettle();
+        await tester.enterText(find.byKey(key), 'app');
+        await tester.pumpAndSettle();
 
-      expect(find.text('app'), findsNothing);
-      expect(find.text('Apple'), findsNWidgets(2));
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.pumpAndSettle();
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
-      await tester.pumpAndSettle();
+        expect(find.text('app'), findsNothing);
+        expect(find.text('Apple'), findsNWidgets(2));
 
-      expect(focus.hasFocus, true);
-      expect(controller.popover.status.isForwardOrCompleted, false);
-      expect(find.text('app'), findsNothing);
-      expect(find.text('Apple'), findsOne);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.pumpAndSettle();
+
+        expect(focus.hasFocus, true);
+        expect(controller.selection, const TextSelection.collapsed(offset: 5));
+        expect(controller.popover.status.isForwardOrCompleted, false);
+        expect(find.text('app'), findsNothing);
+        expect(find.text('Apple'), findsOne);
+
+        debugDefaultTargetPlatformOverride = null;
+      });
+
+      testWidgets('arrow key navigation and escape', (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+
+        final focus = autoDispose(FocusNode());
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
+          ),
+        );
+
+        await tester.enterText(find.byKey(key), 'app');
+        await tester.pumpAndSettle();
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.pumpAndSettle();
+
+        expect(find.text('app'), findsNothing);
+        expect(find.text('Apple'), findsNWidgets(2));
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+        await tester.pumpAndSettle();
+
+        expect(focus.hasFocus, true);
+        expect(controller.selection, const TextSelection.collapsed(offset: 3));
+        expect(controller.popover.status.isForwardOrCompleted, false);
+        expect(find.text('app'), findsOne);
+        expect(find.text('Apple'), findsNothing);
+
+        debugDefaultTargetPlatformOverride = null;
+      });
+
+      testWidgets('arrow key navigation and tap outside', (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+
+        final focus = autoDispose(FocusNode());
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
+          ),
+        );
+
+        await tester.enterText(find.byKey(key), 'app');
+        await tester.pumpAndSettle();
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
+        await tester.pumpAndSettle();
+
+        expect(find.text('app'), findsNothing);
+        expect(find.text('Apple'), findsNWidgets(2));
+
+        await tester.tapAt(Offset.zero);
+        await tester.pumpAndSettle();
+
+        expect(focus.hasFocus, true);
+        expect(controller.popover.status.isForwardOrCompleted, false);
+        expect(find.text('app'), findsOne);
+        expect(find.text('Apple'), findsNothing);
+
+        debugDefaultTargetPlatformOverride = null;
+      });
     });
-
-    testWidgets('arrow key navigation and escape', (tester) async {
-      final focus = autoDispose(FocusNode());
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
-        ),
-      );
-
-      await tester.enterText(find.byKey(key), 'app');
-      await tester.pumpAndSettle();
-
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
-      await tester.pumpAndSettle();
-
-      expect(find.text('app'), findsNothing);
-      expect(find.text('Apple'), findsNWidgets(2));
-
-      await tester.sendKeyEvent(LogicalKeyboardKey.escape);
-      await tester.pumpAndSettle();
-
-      expect(focus.hasFocus, true);
-      expect(controller.popover.status.isForwardOrCompleted, false);
-      expect(find.text('app'), findsOne);
-      expect(find.text('Apple'), findsNothing);
-    });
-
-    testWidgets('arrow key navigation and tap outside', (tester) async {
-      final focus = autoDispose(FocusNode());
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
-        ),
-      );
-
-      await tester.enterText(find.byKey(key), 'app');
-      await tester.pumpAndSettle();
-
-      await tester.sendKeyEvent(LogicalKeyboardKey.arrowDown);
-      await tester.pumpAndSettle();
-
-      expect(find.text('app'), findsNothing);
-      expect(find.text('Apple'), findsNWidgets(2));
-
-      await tester.tapAt(Offset.zero);
-      await tester.pumpAndSettle();
-
-      expect(focus.hasFocus, true);
-      expect(controller.popover.status.isForwardOrCompleted, false);
-      expect(find.text('app'), findsOne);
-      expect(find.text('Apple'), findsNothing);
-    });
-  });
-
-  // TODO: Add tests for - not selecting entire text on focus after using arrow key navigation & enter on desktop & mobile.
-  // Requires features only available in Flutter 3.35.
+  }
 }

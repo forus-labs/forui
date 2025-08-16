@@ -6,7 +6,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
@@ -508,6 +507,15 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final bool enableInteractiveSelection;
 
+  /// {@template forui.text_field.selectAllOnFocus}
+  /// Whether this field should select all text when gaining focus.
+  ///
+  /// When false, focusing this text field will leave its existing text selection unchanged.
+  ///
+  /// Defaults to true on web and desktop platforms, and false on mobile platforms.
+  /// {@endtemplate}
+  final bool? selectAllOnFocus;
+
   /// {@template forui.text_field.selectionControls}
   /// Optional delegate for building the text selection handles.
   ///
@@ -728,6 +736,7 @@ class FTextField extends StatefulWidget {
     this.enabled = true,
     this.ignorePointers,
     this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -798,6 +807,7 @@ class FTextField extends StatefulWidget {
     this.enabled = true,
     this.ignorePointers,
     this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -871,6 +881,7 @@ class FTextField extends StatefulWidget {
     this.enabled = true,
     this.ignorePointers,
     this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -945,6 +956,7 @@ class FTextField extends StatefulWidget {
     this.enabled = true,
     this.ignorePointers,
     this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
     this.selectionControls,
     this.dragStartBehavior = DragStartBehavior.start,
     this.mouseCursor,
@@ -1019,6 +1031,7 @@ class FTextField extends StatefulWidget {
       ..add(
         FlagProperty('enableInteractSelection', value: enableInteractiveSelection, ifTrue: 'enableInteractSelection'),
       )
+      ..add(FlagProperty('selectAllOnFocus', value: selectAllOnFocus, ifTrue: 'selectAllOnFocus'))
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
@@ -1150,6 +1163,7 @@ class _State extends State<FTextField> {
             ? null
             : DefaultTextStyle.merge(style: style.counterTextStyle.resolve(states), child: counter);
       },
+      selectAllOnFocus: widget.selectAllOnFocus,
       selectionControls: widget.selectionControls,
       scrollController: widget.scrollController,
       scrollPhysics: widget.scrollPhysics,

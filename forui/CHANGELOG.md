@@ -1,12 +1,5 @@
 ## 0.15.0 (Next)
 
-### Consistent Controllers
-We've done a pass over the controllers in Forui to make them more consistent and easier to use.
-
-* **Breaking** Change `FMultiValueNotifier({Set<T> value})` to `FMultiValueNotifier({Set<T> values})`.
-* **Breaking** Change `FMultiValueNotifier.radio({T? value})` to `FMultiValueNotifier.radio([T? value])`.
-
-
 ### Cursors
 We've changed the default cursor for many widgets from `MouseCursor.click` to `MouseCursor.defer`. This is in line with 
 [native desktop behavior](https://medium.com/simple-human/buttons-shouldnt-have-a-hand-cursor-b11e99ca374b) and 
@@ -128,6 +121,8 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
 ### `FTextField` & `FTextFormField`
 * Add `FFieldBuilder.`
 * Add `FFieldIconBuilder.
+* Add `FTextField.selectAllOnFocus`.
+* Add `FTextFormField.selectAllOnFocus`.
 
 * **Breaking** Change `FTextField.builder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to 
   `FFieldBuilder<FTextFieldStyle>`.
@@ -154,12 +149,15 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
 * **Breaking** Change `FTimeField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
   `FFieldIconBuilder<FDateFieldStyle>`.
 
+* Fix regression in Flutter 3.35.2 by reducing `FTextFieldStyle.contentPadding` from `EdgeInsets.symmetric(horizontal: 14, vertical: 10)` 
+  to `EdgeInsets.symmetric(horizontal: 10, vertical: 10)`.
 
 ### Others
 * Add `FSelectMenuTile.onTapHide`.
 * Add `FTypeaheadController`.
 
 * Change `FMultiValueNotifier` to be non-abstract.
+* **Breaking** Change `FMultiValueNotifier.radio({T? value})` to `FMultiValueNotifier.radio([T? value])`.
 * **Breaking** Change `ValueWidgetBuilder<FToasterEntry>? suffixBuilder` to `Widget Function(BuildContext, FToasterEntry)? suffixBuilder` 
   in `showFToast(...)`.
 

@@ -15,7 +15,7 @@ export const metadata = {
   },
 };
 
-const banner = <Banner storageKey="some-key">Forui 0.14.0 is released 🎉</Banner>;
+const banner = <Banner storageKey="some-key">Forui 0.15.0 is released 🎉</Banner>;
 const navbar = (
   <Navbar logo={<Logo />} projectLink="https://github.com/forus-labs/forui" chatLink="https://discord.gg/jrw3qHksjE" />
 );

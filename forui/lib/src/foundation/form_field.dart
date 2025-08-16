@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 @internal
 class Field<T> extends FormField<T> {
   final ValueNotifier<T?> controller;
