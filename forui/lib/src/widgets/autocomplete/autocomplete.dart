@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
+import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.dart';
 
 part 'autocomplete.style.dart';
 
@@ -675,6 +675,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   late FocusScopeNode _popoverFocus;
   bool _tapFocus = false;
   String? _previous;
+
   /// The original text used to restore the textfield when navigating but not selecting any completion using a keyboard.
   String? _restore;
 
@@ -739,8 +740,8 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       }
       _tapFocus = false;
       _controller.popover.show();
-    // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
-    // in the empty popover.
+      // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
+      // in the empty popover.
     } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
       _controller.popover.hide();
     }
@@ -911,7 +912,10 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
                       _popoverFocus.descendants.firstOrNull?.requestFocus(),
                   if (_controller.current case (:final replacement, completion: final _))
                     const SingleActivator(LogicalKeyboardKey.tab): () => _complete(replacement),
-                  if (_controller.current case (:final replacement, completion: final _) when widget.rightArrowToComplete)
+                  if (_controller.current case (
+                    :final replacement,
+                    completion: final _,
+                  ) when widget.rightArrowToComplete)
                     const SingleActivator(LogicalKeyboardKey.arrowRight): () => _complete(replacement),
                 },
                 child: widget.builder(context, style, states, field),
