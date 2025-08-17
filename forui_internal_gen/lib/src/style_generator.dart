@@ -1,7 +1,4 @@
-// ignore_for_file: deprecated_member_use - Wait for changes to stabilize before migrating.
-// https://github.com/dart-lang/sdk/blob/main/pkg/analyzer/doc/element_model_migration_guide.md
-
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
@@ -20,7 +17,7 @@ class StyleGenerator extends Generator {
   @override
   Future<String?> generate(LibraryReader library, BuildStep step) async {
     final classes = library.classes
-        .where((type) => _style.hasMatch(type.name) && !type.isSealed && !type.isAbstract)
+        .where((type) => type.name3 != null && _style.hasMatch(type.name3!) && !type.isSealed && !type.isAbstract)
         .toList();
 
     final extensions = classes.map((type) => _emitter.visitExtension(generateExtension(type)).toString());
@@ -30,33 +27,17 @@ class StyleGenerator extends Generator {
   }
 }
 
-List<FieldElement> _collectFields(ClassElement element) {
-  final fields = <FieldElement>[];
-
-  void addFieldsFromType(ClassElement element) {
-    fields.addAll(element.fields.where((f) => !f.isStatic && (f.getter?.isSynthetic ?? true)));
-    if (element.supertype?.element case final ClassElement supertype) {
-      addFieldsFromType(supertype);
-    }
-  }
-
-  addFieldsFromType(element);
-
-  // Remove duplicates (in case a field is overridden)
-  return fields.toSet().toList();
-}
-
 /// Generates an extension for the given [element].
 ///
 /// The copyWith function is generated in an extension rather than on a mixin/augmentation to make the function
 /// non-virtual. This prevents conflicts between base and subclasses.
-Extension generateExtension(ClassElement element) {
+Extension generateExtension(ClassElement2 element) {
   final fields = _collectFields(element);
 
   final type = ExtensionBuilder()
     ..docs.addAll(['/// Provides a `copyWith` method.'])
-    ..name = '\$${element.name}CopyWith'
-    ..on = refer(element.name)
+    ..name = '\$${element.name3!}CopyWith'
+    ..on = refer(element.name3!)
     ..methods.add(generateCopyWith(element, fields));
 
   return type.build();
@@ -64,7 +45,7 @@ Extension generateExtension(ClassElement element) {
 
 /// Generates a `copyWith` method using the given [element] and [fields].
 @visibleForTesting
-Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
+Method generateCopyWith(ClassElement2 element, List<FieldElement2> fields) {
   // Check if a field is a complex type.
   bool complex(DartType type) {
     final typeName = type.getDisplayString();
@@ -74,7 +55,7 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
   final docs = [
     for (final field in fields)
       if (field.documentationComment case final comment? when comment.isNotEmpty) ...[
-        '/// # [${field.name}]',
+        '/// # [${field.name3}]',
         comment,
         '/// ',
       ],
@@ -83,17 +64,17 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
   // Generate assignments for the copyWith method body
   final assignments = fields.map((f) {
     if (complex(f.type)) {
-      return '${f.name}: ${f.name} != null ? ${f.name}(this.${f.name}) : this.${f.name},';
+      return '${f.name3}: ${f.name3} != null ? ${f.name3}(this.${f.name3}) : this.${f.name3},';
     } else {
-      return '${f.name}: ${f.name} ?? this.${f.name},';
+      return '${f.name3}: ${f.name3} ?? this.${f.name3},';
     }
   }).join();
 
   return Method(
     (m) => m
-      ..returns = refer(element.name)
+      ..returns = refer(element.name3!)
       ..docs.addAll([
-        '/// Returns a copy of this [${element.name}] with the given properties replaced.',
+        '/// Returns a copy of this [${element.name3!}] with the given properties replaced.',
         '///',
         '/// Where possible, it is **strongly** recommended to [use the CLI to generate a style](https://forui.dev/themes#customization)',
         '/// and directly modify the style.',
@@ -107,14 +88,14 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
           if (complex(field.type))
             Parameter(
               (p) => p
-                ..name = field.name
+                ..name = field.name3!
                 ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()})?')
                 ..named = true,
             )
           else
             Parameter(
               (p) => p
-                ..name = field.name
+                ..name = field.name3!
                 ..type = refer(
                   field.type.getDisplayString().endsWith('?')
                       ? field.type.getDisplayString()
@@ -124,16 +105,16 @@ Method generateCopyWith(ClassElement element, List<FieldElement> fields) {
             ),
       ])
       ..lambda = true
-      ..body = Code('${element.name}($assignments)\n'),
+      ..body = Code('${element.name3!}($assignments)\n'),
   );
 }
 
 /// Generates a mixin for the given [element].
-Mixin generateMixin(ClassElement element) {
+Mixin generateMixin(ClassElement2 element) {
   final fields = _collectFields(element);
 
   final type = MixinBuilder()
-    ..name = '_\$${element.name}Functions'
+    ..name = '_\$${element.name3}Functions'
     ..on = refer('Diagnosticable')
     ..methods.addAll([
       ...getters(fields),
@@ -146,48 +127,64 @@ Mixin generateMixin(ClassElement element) {
   return type.build();
 }
 
+List<FieldElement2> _collectFields(ClassElement2 element) {
+  final fields = <FieldElement2>[];
+
+  void addFieldsFromType(ClassElement2 element) {
+    fields.addAll(element.fields2.where((f) => !f.isStatic && (f.getter2?.isSynthetic ?? true)));
+    if (element.supertype?.element3 case final ClassElement2 supertype) {
+      addFieldsFromType(supertype);
+    }
+  }
+
+  addFieldsFromType(element);
+
+  // Remove duplicates (in case a field is overridden)
+  return fields.toSet().toList();
+}
+
 /// Generates getters for the given [fields].
 @visibleForTesting
-List<Method> getters(List<FieldElement> fields) => fields
+List<Method> getters(List<FieldElement2> fields) => fields
     .map(
       (field) => Method(
         (m) => m
           ..returns = refer(field.type.getDisplayString())
           ..type = MethodType.getter
-          ..name = field.name,
+          ..name = field.name3,
       ),
     )
     .toList();
 
 /// Generates a special `call` method that allows styles to be used directly.
 @visibleForTesting
-Method generateCall(ClassElement element) => Method(
+Method generateCall(ClassElement2 element) => Method(
   (m) => m
     ..docs.addAll([
       '/// Returns itself.',
       '/// ',
-      "/// Allows [${element.name}] to replace functions that accept and return a [${element.name}], such as a style's",
+      "/// Allows [${element.name3}] to replace functions that accept and return a [${element.name3}], such as a style's",
       '/// `copyWith(...)` function.',
       '/// ',
       '/// ## Example',
       '/// ',
       '/// Given:',
       '/// ```dart',
-      '/// void copyWith(${element.name} Function(${element.name}) nestedStyle) {}',
+      '/// void copyWith(${element.name3} Function(${element.name3}) nestedStyle) {}',
       '/// ```',
       '/// ',
       '/// The following:',
       '/// ```dart',
-      '/// copyWith((style) => ${element.name}(...));',
+      '/// copyWith((style) => ${element.name3}(...));',
       '/// ```',
       '/// ',
       '/// Can be replaced with:',
       '/// ```dart',
-      '/// copyWith(${element.name}(...));',
+      '/// copyWith(${element.name3}(...));',
       '/// ```',
     ])
     ..annotations.add(refer('useResult'))
-    ..returns = refer(element.name)
+    ..returns = refer(element.name3!)
     ..name = 'call'
     ..requiredParameters.add(
       Parameter(
@@ -197,12 +194,12 @@ Method generateCall(ClassElement element) => Method(
       ),
     )
     ..lambda = true
-    ..body = Code('this as ${element.name}'),
+    ..body = Code('this as ${element.name3}'),
 );
 
 /// Generates a `debugFillProperties` method using the given [element] and [fields].
 @visibleForTesting
-Method generateDebugFillProperties(ClassElement element, List<FieldElement> fields) {
+Method generateDebugFillProperties(ClassElement2 element, List<FieldElement2> fields) {
   const string = TypeChecker.fromUrl('dart:core#String');
   const int = TypeChecker.fromUrl('dart:core#int');
   const double = TypeChecker.fromUrl('dart:core#double');
@@ -215,18 +212,18 @@ Method generateDebugFillProperties(ClassElement element, List<FieldElement> fiel
   final properties = fields
       .map(
         (field) => switch (field.type) {
-          _ when string.isAssignableFromType(field.type) => "StringProperty('${field.name}', ${field.name})",
-          _ when int.isAssignableFromType(field.type) => "IntProperty('${field.name}', ${field.name})",
-          _ when double.isAssignableFromType(field.type) => "DoubleProperty('${field.name}', ${field.name})",
-          _ when color.isAssignableFromType(field.type) => "ColorProperty('${field.name}', ${field.name})",
-          _ when iconData.isAssignableFromType(field.type) => "IconDataProperty('${field.name}', ${field.name})",
-          _ when enumeration.isAssignableFromType(field.type) => "EnumProperty('${field.name}', ${field.name})",
-          _ when iterable.isAssignableFromType(field.type) => "IterableProperty('${field.name}', ${field.name})",
+          _ when string.isAssignableFromType(field.type) => "StringProperty('${field.name3}', ${field.name3})",
+          _ when int.isAssignableFromType(field.type) => "IntProperty('${field.name3}', ${field.name3})",
+          _ when double.isAssignableFromType(field.type) => "DoubleProperty('${field.name3}', ${field.name3})",
+          _ when color.isAssignableFromType(field.type) => "ColorProperty('${field.name3}', ${field.name3})",
+          _ when iconData.isAssignableFromType(field.type) => "IconDataProperty('${field.name3}', ${field.name3})",
+          _ when enumeration.isAssignableFromType(field.type) => "EnumProperty('${field.name3}', ${field.name3})",
+          _ when iterable.isAssignableFromType(field.type) => "IterableProperty('${field.name3}', ${field.name3})",
           _ when bool.isAssignableFromType(field.type) =>
-            "FlagProperty('${field.name}', value: ${field.name}, ifTrue: '${field.name}')",
-          _ when field.type.isDartCoreFunction => "ObjectFlagProperty.has('${field.name}', ${field.name})",
-          _ when field.type is RecordType => "StringProperty('${field.name}', ${field.name}.toString())",
-          _ => "DiagnosticsProperty('${field.name}', ${field.name})",
+            "FlagProperty('${field.name3}', value: ${field.name3}, ifTrue: '${field.name3}')",
+          _ when field.type.isDartCoreFunction => "ObjectFlagProperty.has('${field.name3}', ${field.name3})",
+          _ when field.type is RecordType => "StringProperty('${field.name3}', ${field.name3}.toString())",
+          _ => "DiagnosticsProperty('${field.name3}', ${field.name3})",
         },
       )
       .toList();
@@ -258,12 +255,12 @@ Method generateDebugFillProperties(ClassElement element, List<FieldElement> fiel
 
 /// Generates an `operator==` method using the given [element] and [fields].
 @visibleForTesting
-Method generateEquals(ClassElement element, List<FieldElement> fields) {
-  String generate(FieldElement field) => switch (field.type) {
-    _ when _list.isAssignableFromType(field.type) => 'listEquals(${field.name}, other.${field.name})',
-    _ when _set.isAssignableFromType(field.type) => 'setEquals(${field.name}, other.${field.name})',
-    _ when _map.isAssignableFromType(field.type) => 'mapEquals(${field.name}, other.${field.name})',
-    _ => '${field.name} == other.${field.name}',
+Method generateEquals(ClassElement2 element, List<FieldElement2> fields) {
+  String generate(FieldElement2 field) => switch (field.type) {
+    _ when _list.isAssignableFromType(field.type) => 'listEquals(${field.name3}, other.${field.name3})',
+    _ when _set.isAssignableFromType(field.type) => 'setEquals(${field.name3}, other.${field.name3})',
+    _ when _map.isAssignableFromType(field.type) => 'mapEquals(${field.name3}, other.${field.name3})',
+    _ => '${field.name3} == other.${field.name3}',
   };
 
   final comparisons = fields.isEmpty ? '' : '&& ${fields.map(generate).join(' && ')}';
@@ -280,18 +277,18 @@ Method generateEquals(ClassElement element, List<FieldElement> fields) {
         ),
       )
       ..lambda = true
-      ..body = Code('identical(this, other) || (other is ${element.name} $comparisons)'),
+      ..body = Code('identical(this, other) || (other is ${element.name3} $comparisons)'),
   );
 }
 
 /// Generates a `hashCode` method using the given [element] and [fields].
 @visibleForTesting
-Method generateHashCode(ClassElement element, List<FieldElement> fields) {
-  String generate(FieldElement field) => switch (field.type) {
-    _ when _list.isAssignableFromType(field.type) => 'const ListEquality().hash(${field.name})',
-    _ when _set.isAssignableFromType(field.type) => 'const SetEquality().hash(${field.name})',
-    _ when _map.isAssignableFromType(field.type) => 'const MapEquality().hash(${field.name})',
-    _ => '${field.name}.hashCode',
+Method generateHashCode(ClassElement2 element, List<FieldElement2> fields) {
+  String generate(FieldElement2 field) => switch (field.type) {
+    _ when _list.isAssignableFromType(field.type) => 'const ListEquality().hash(${field.name3})',
+    _ when _set.isAssignableFromType(field.type) => 'const SetEquality().hash(${field.name3})',
+    _ when _map.isAssignableFromType(field.type) => 'const MapEquality().hash(${field.name3})',
+    _ => '${field.name3}.hashCode',
   };
 
   final hash = fields.isEmpty ? '0' : fields.map(generate).join(' ^ ');
