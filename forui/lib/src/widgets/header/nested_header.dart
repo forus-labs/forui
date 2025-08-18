@@ -65,23 +65,33 @@ class _FNestedHeader extends FHeader {
         children: separate(this.suffixes, by: [spacing]),
       );
 
-      // We use a stack as a row could result in the title being off centered if the icon on the left or right is
-      // missing/different sizes.
-      title = alignment.x == 0
-          ? Stack(
-              children: [
-                title,
-                Align(alignment: Alignment.centerLeft, child: prefixes),
-                Align(alignment: Alignment.centerRight, child: suffixes),
-              ],
-            )
-          : Row(
-              children: [
-                prefixes,
-                Expanded(child: title),
-                suffixes,
-              ],
-            );
+      // Layout title with prefixes/suffixes based on alignment.
+      // - Horizontal center (x == 0) uses Stack for perfect centering.
+      // - Other horizontal positions use Row with vertical alignment determined by y.
+      if (alignment.x == 0 || ![-1, 0, 1].contains(alignment.y)) {
+        title = IntrinsicHeight(
+          child: Stack(
+            children: [
+              title,
+              Align(alignment: Alignment.centerLeft, child: prefixes),
+              Align(alignment: Alignment.centerRight, child: suffixes),
+            ],
+          ),
+        );
+      } else {
+        // Determine vertical alignment for Row using a Map
+        const verticalMap = {-1: CrossAxisAlignment.start, 0: CrossAxisAlignment.center, 1: CrossAxisAlignment.end};
+        final crossAxis = verticalMap[alignment.y] ?? CrossAxisAlignment.center;
+
+        title = Row(
+          crossAxisAlignment: crossAxis,
+          children: [
+            prefixes,
+            Expanded(child: title),
+            suffixes,
+          ],
+        );
+      }
     }
 
     Widget header = SafeArea(
