@@ -13,7 +13,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  analyzer: ^7.4.0
+  analyzer: ^8.0.0
   build: ^3.0.0
   code_builder: ^4.10.0
   collection: ^1.18.0
