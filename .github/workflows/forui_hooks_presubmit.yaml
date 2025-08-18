@@ -31,7 +31,7 @@ jobs:
           app_id: ${{ secrets.AUTO_MAID_APP_ID }}
           private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ steps.generate-token.outputs.token }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
