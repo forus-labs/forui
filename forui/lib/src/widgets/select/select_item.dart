@@ -320,6 +320,9 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
       widget.enabled ?? content.enabled,
       contains(widget.value),
       focus(widget.value) || content.first,
+      (states) {
+        // TODO;
+      },
       () => onPress(widget.value),
       (hover) {
         if (popover.status.isCompleted) {
@@ -334,6 +337,7 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
     bool enabled,
     bool selected,
     bool focused,
+    ValueChanged<FWidgetStatesDelta> onStateChange,
     VoidCallback onPress,
     ValueChanged<bool> onHover,
   );
@@ -376,6 +380,7 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
     bool enabled,
     bool selected,
     bool focused,
+    ValueChanged<FWidgetStatesDelta> onStateChange,
     VoidCallback onPress,
     ValueChanged<bool> onHover,
   ) => FItem(
@@ -384,6 +389,7 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
     selected: selected,
     autofocus: focused,
     focusNode: _focus,
+    onStateChange: onStateChange,
     onPress: onPress,
     onHoverChange: onHover,
     prefix: widget.prefix,
@@ -410,6 +416,7 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     bool enabled,
     bool selected,
     bool focused,
+    ValueChanged<FWidgetStatesDelta> onStateChange,
     VoidCallback onPress,
     ValueChanged<bool> onHover,
   ) => FItem.raw(
@@ -418,6 +425,7 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     selected: selected,
     autofocus: focused,
     focusNode: _focus,
+    onStateChange: onStateChange,
     onPress: onPress,
     onHoverChange: onHover,
     prefix: widget.prefix,

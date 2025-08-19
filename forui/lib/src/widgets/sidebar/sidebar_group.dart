@@ -36,7 +36,7 @@ class FSidebarGroup extends StatelessWidget {
   final ValueChanged<bool>? onActionHoverChange;
 
   /// Called when the action's state changes.
-  final ValueChanged<Set<WidgetState>>? onActionStateChange;
+  final ValueChanged<FWidgetStatesDelta>? onActionStateChange;
 
   /// Called when the action is pressed.
   final VoidCallback? onActionPress;

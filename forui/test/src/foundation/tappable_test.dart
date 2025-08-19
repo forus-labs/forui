@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:forui/forui.dart';
 
 import 'package:forui/src/foundation/tappable.dart';
 import '../test_scaffold.dart';
@@ -247,7 +248,7 @@ void main() {
     });
 
     testWidgets('onStateChange callback called', (tester) async {
-      Set<WidgetState>? states;
+      FWidgetStatesDelta? states;
       await tester.pumpWidget(
         TestScaffold(
           child: FTappable(
@@ -264,7 +265,39 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
       await tester.pumpAndSettle();
 
-      expect(states, {WidgetState.hovered});
+      expect(states, FWidgetStatesDelta({}, {WidgetState.hovered}));
+    });
+
+    testWidgets('onStateChange throwing error does not corrupt state', (tester) async {
+      FWidgetStatesDelta? delta;
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(
+            builder: (_, _, _) => const Text('tappable'),
+            onStateChange: (v) {
+              delta = v;
+              throw Exception('Error in onStateChange');
+            },
+            onPress: () {},
+          ),
+        ),
+      );
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+
+      await gesture.moveTo(tester.getCenter(find.text('tappable')));
+      await tester.pumpAndSettle();
+
+      expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
+      expect(tester.takeException(), isNotNull);
+
+      await gesture.moveTo(Offset.zero);
+      await tester.pumpAndSettle();
+
+      expect(delta, FWidgetStatesDelta({WidgetState.hovered}, {}));
+      expect(tester.takeException(), isNotNull);
     });
   });
 
@@ -464,13 +497,13 @@ void main() {
     });
 
     testWidgets('onStateChange & onHoverChange callback called', (tester) async {
-      Set<WidgetState>? states;
+      FWidgetStatesDelta? delta;
       bool? hovered;
       await tester.pumpWidget(
         TestScaffold(
           child: FTappable.static(
             builder: (_, _, _) => const Text('tappable'),
-            onStateChange: (v) => states = v,
+            onStateChange: (v) => delta = v,
             onHoverChange: (v) => hovered = v,
             onPress: () {},
           ),
@@ -483,13 +516,13 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
       await tester.pumpAndSettle();
 
-      expect(states, {WidgetState.hovered});
+      expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
       expect(hovered, true);
 
       await gesture.moveTo(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(states, <WidgetState>{});
+      expect(delta, FWidgetStatesDelta({WidgetState.hovered}, {}));
       expect(hovered, false);
     });
   });

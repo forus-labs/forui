@@ -12,6 +12,7 @@ export 'src/foundation/rendering.dart' hide Alignments, DefaultData, RenderBoxes
 export 'src/foundation/tappable.dart' hide AnimatedTappable, AnimatedTappableState;
 export 'src/foundation/time.dart';
 export 'src/foundation/typeahead_controller.dart';
+export 'src/foundation/widget_states_delta.dart';
 export 'src/foundation/portal/portal.dart';
 export 'src/foundation/portal/portal_constraints.dart' hide FixedConstraints;
 export 'src/foundation/portal/portal_shift.dart';

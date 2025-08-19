@@ -61,7 +61,7 @@ class FButton extends StatelessWidget {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<Set<WidgetState>>? onStateChange;
+  final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
   /// {@macro forui.foundation.FTappable.shortcuts}
   final Map<ShortcutActivator, Intent>? shortcuts;

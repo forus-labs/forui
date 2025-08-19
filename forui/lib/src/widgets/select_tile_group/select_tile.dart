@@ -58,7 +58,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<Set<WidgetState>>? onStatesChange;
+  final ValueChanged<FWidgetStatesDelta>? onStatesChange;
 
   /// The shortcuts. Defaults to calling [ActivateIntent].
   final Map<ShortcutActivator, Intent>? shortcuts;
