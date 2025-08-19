@@ -130,6 +130,8 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
 * **Breaking** Change `FSelectItem.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
 * **Breaking** Replace `FSelectItemStyle` with underlying `FItemStyle`.
 
+* Fix first focused item not unfocusing when other items are pressed on mobile.
+
 
 ### `FSelectMenuTile`
 * Add `FSelectMenuTile.onTapHide`.

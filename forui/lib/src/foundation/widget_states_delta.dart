@@ -6,23 +6,23 @@ import 'package:flutter/widgets.dart';
 ///
 /// ## Contract
 /// The given collections should not be modified. Doing so will result in undefined behavior.
-class FWidgetStatesDelta {
+final class FWidgetStatesDelta {
   /// The previous widget states.
   final Set<WidgetState> previous;
 
   /// The current widget states.
   final Set<WidgetState> current;
-
-  /// The set of widget states that were added to the [previous].
-  final Set<WidgetState> added;
-
-  /// The set of widget states that were removed from the [previous].
-  final Set<WidgetState> removed;
+  Set<WidgetState>? _added;
+  Set<WidgetState>? _removed;
 
   /// Creates a [FWidgetStatesDelta].
-  FWidgetStatesDelta(this.previous, this.current)
-    : added = current.difference(previous),
-      removed = previous.difference(current);
+  FWidgetStatesDelta(this.previous, this.current);
+
+  /// The set of widget states that were added to the [previous].
+  Set<WidgetState> get added => _added ??= current.difference(previous);
+
+  /// The set of widget states that were removed from the [previous].
+  Set<WidgetState> get removed => _removed ??= previous.difference(current);
 
   @override
   bool operator ==(Object other) =>
@@ -30,17 +30,13 @@ class FWidgetStatesDelta {
       other is FWidgetStatesDelta &&
           runtimeType == other.runtimeType &&
           setEquals(previous, other.previous) &&
-          setEquals(current, other.current) &&
-          setEquals(added, other.added) &&
-          setEquals(removed, other.removed);
+          setEquals(current, other.current);
 
   @override
   int get hashCode =>
       const SetEquality().hash(previous) ^
-      const SetEquality().hash(current) ^
-      const SetEquality().hash(added) ^
-      const SetEquality().hash(removed);
+      const SetEquality().hash(current);
 
   @override
-  String toString() => 'FWidgetStatesDelta{previous: $previous, current: $current, added: $added, removed: $removed}';
+  String toString() => 'FWidgetStatesDelta{previous: $previous, current: $current}';
 }

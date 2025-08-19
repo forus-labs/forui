@@ -238,7 +238,7 @@ class FTappable extends StatefulWidget {
 
 class _FTappableState<T extends FTappable> extends State<T> {
   late final WidgetStatesController _controller;
-  late Set<WidgetState> _previous;
+  late Set<WidgetState> _current;
   int _monotonic = 0;
 
   @override
@@ -249,7 +249,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       if (widget.autofocus) WidgetState.focused,
       if (widget._disabled) WidgetState.disabled,
     });
-    _previous = {..._controller.value};
+    _current = {..._controller.value};
     _controller.addListener(_onChange);
   }
 
@@ -262,11 +262,12 @@ class _FTappableState<T extends FTappable> extends State<T> {
   }
 
   void _onChange() {
+    // We need to create a new set because of https://github.com/flutter/flutter/issues/167916
     final current = {..._controller.value};
-    final previous = _previous;
+    final previous = _current;
 
-    // We set _previous before onStateChange to prevent exceptions thrown by it from corrupting the state.
-    _previous = current;
+    // We set _current before onStateChange to prevent exceptions thrown by it from corrupting the state.
+    _current = current;
     if (widget.onStateChange case final onStateChange?) {
       onStateChange(FWidgetStatesDelta(previous, current));
     }
@@ -281,8 +282,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
-    // TODO: https://github.com/flutter/flutter/issues/167916
-    var tappable = _decorate(context, widget.builder(context, {..._controller.value}, widget.child));
+    var tappable = _decorate(context, widget.builder(context, _current, widget.child));
     tappable = Shortcuts(
       shortcuts: widget.shortcuts,
       child: Actions(
