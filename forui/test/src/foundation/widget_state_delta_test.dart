@@ -28,7 +28,7 @@ void main() {
       final delta1 = FWidgetStatesDelta({WidgetState.focused}, {WidgetState.focused, WidgetState.pressed});
       final delta2 = FWidgetStatesDelta({WidgetState.focused, WidgetState.pressed}, {WidgetState.focused});
 
-      expect(delta1.hashCode, isNot(delta2));
+      expect(delta1.hashCode, isNot(delta2.hashCode));
       expect(delta1, isNot(delta2));
     });
   });
