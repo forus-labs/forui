@@ -53,7 +53,7 @@ void main() {
 
     await tester.tap(find.byKey(key));
     await tester.pumpAndSettle();
-    
+
     expect(Focus.of(tester.element(find.text('A'))).hasFocus, true);
 
     await tester.press(find.text('C'));

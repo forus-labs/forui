@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable.dart';
 import '../test_scaffold.dart';
 
@@ -285,7 +285,6 @@ void main() {
 
       final gesture = await tester.createPointerGesture();
       await tester.pump();
-
 
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
       await tester.pumpAndSettle();

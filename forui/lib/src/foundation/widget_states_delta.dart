@@ -1,6 +1,7 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:collection/collection.dart';
 
 /// The delta between two widget states, containing both the previous and current states along with the differences.
 ///
@@ -33,9 +34,7 @@ final class FWidgetStatesDelta {
           setEquals(current, other.current);
 
   @override
-  int get hashCode =>
-      const SetEquality().hash(previous) ^
-      const SetEquality().hash(current);
+  int get hashCode => const SetEquality().hash(previous) ^ const SetEquality().hash(current);
 
   @override
   String toString() => 'FWidgetStatesDelta{previous: $previous, current: $current}';
