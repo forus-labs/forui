@@ -38,7 +38,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<Set<WidgetState>>? onStateChange;
+  final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
   /// Creates a [FBottomNavigationBarItem].
   const FBottomNavigationBarItem({

@@ -36,7 +36,7 @@ class FHeaderAction extends StatelessWidget {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<Set<WidgetState>>? onStateChange;
+  final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
@@ -85,7 +85,7 @@ class FHeaderAction extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<Set<WidgetState>>? onStateChange,
+    ValueChanged<FWidgetStatesDelta>? onStateChange,
     VoidCallback? onLongPress,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,
@@ -118,7 +118,7 @@ class FHeaderAction extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<Set<WidgetState>>? onStateChange,
+    ValueChanged<FWidgetStatesDelta>? onStateChange,
     VoidCallback? onLongPress,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,

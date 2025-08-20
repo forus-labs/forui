@@ -320,12 +320,16 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
       widget.enabled ?? content.enabled,
       contains(widget.value),
       focus(widget.value) || content.first,
-      () => onPress(widget.value),
-      (hover) {
-        if (popover.status.isCompleted) {
-          hover ? _focus.requestFocus() : _focus.unfocus();
+      (delta) {
+        if (delta.added.contains(WidgetState.hovered) ||
+            (!delta.previous.contains(WidgetState.hovered) && delta.added.contains(WidgetState.pressed))) {
+          _focus.requestFocus();
+        } else if (delta.removed.contains(WidgetState.hovered) ||
+            (!delta.current.contains(WidgetState.hovered) && delta.removed.contains(WidgetState.pressed))) {
+          _focus.unfocus();
         }
       },
+      () => onPress(widget.value),
     );
   }
 
@@ -334,8 +338,8 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
     bool enabled,
     bool selected,
     bool focused,
+    ValueChanged<FWidgetStatesDelta> onStateChange,
     VoidCallback onPress,
-    ValueChanged<bool> onHover,
   );
 }
 
@@ -376,16 +380,16 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
     bool enabled,
     bool selected,
     bool focused,
+    ValueChanged<FWidgetStatesDelta> onStateChange,
     VoidCallback onPress,
-    ValueChanged<bool> onHover,
   ) => FItem(
     style: widget.style?.call,
     enabled: enabled,
     selected: selected,
     autofocus: focused,
     focusNode: _focus,
+    onStateChange: onStateChange,
     onPress: onPress,
-    onHoverChange: onHover,
     prefix: widget.prefix,
     title: widget.title,
     subtitle: widget.subtitle,
@@ -410,16 +414,16 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     bool enabled,
     bool selected,
     bool focused,
+    ValueChanged<FWidgetStatesDelta> onStateChange,
     VoidCallback onPress,
-    ValueChanged<bool> onHover,
   ) => FItem.raw(
     style: widget.style?.call,
     enabled: enabled,
     selected: selected,
     autofocus: focused,
     focusNode: _focus,
+    onStateChange: onStateChange,
     onPress: onPress,
-    onHoverChange: onHover,
     prefix: widget.prefix,
     child: widget.child,
   );

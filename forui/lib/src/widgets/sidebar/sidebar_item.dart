@@ -57,7 +57,7 @@ class FSidebarItem extends StatefulWidget {
   final ValueChanged<bool>? onHoverChange;
 
   /// Called when the state changes.
-  final ValueChanged<Set<WidgetState>>? onStateChange;
+  final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
   /// The sidebar item's children.
   final List<Widget> children;

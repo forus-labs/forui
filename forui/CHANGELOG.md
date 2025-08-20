@@ -24,6 +24,7 @@ without having to manage them around separately.
 * Add `FAccordionItem.onStateChange`
 
 * **Breaking** Make `FAccordionController.controllers` private.
+* **Breaking** Change `FAccordionItem.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
 * **Breaking** Remove `FAccordionController.radio(...)` - use `FAccrdionController(max: 1)` instead.
 * **Breaking** Remove `FAccordionController.validate(...)`.
 
@@ -34,6 +35,14 @@ without having to manage them around separately.
 * Add `FAutocompleteStyle`.
 * Add `FAutocompleteSection`.
 * Add `FAutocompleteItem`.
+
+
+### `FBottomNavigationBar`
+* **Breaking** Change `FBottomNavigationBarItem.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
+
+
+### `FButton`
+* **Breaking** Change `FButton.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
 
 
 ### `FBreadcrumb`
@@ -53,6 +62,15 @@ without having to manage them around separately.
   `FFieldIconBuilder<FDateFieldStyle>`.
 * **Breaking** Change `FDateField.suffixBuilder` from `ValueWidgetBuilder<(FTextFieldStyle, Set<WidgetState>)>` to
   `FFieldIconBuilder<FDateFieldStyle>`.
+
+
+### `FHeader`
+* **Breaking** Change `FHeaderAction.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
+
+
+### `FItem`
+* **Breaking** Change `FItem.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
+
 
 
 ### `FMultiSelect` (new)
@@ -109,13 +127,29 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
 * **Breaking** Replace `FSelectSection.new(...)` with `FSelectSection.rich(...)`
 * **Breaking** Replace `FSelectSection.fromMap(...)` with `FSelectSection.new(...)`.
 * **Breaking** Change `FSelectItem(...)`'s parameters to no longer accept string parameter.
+* **Breaking** Change `FSelectItem.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
 * **Breaking** Replace `FSelectItemStyle` with underlying `FItemStyle`.
+
+* Fix first focused item not unfocusing when other items are pressed on touch devices.
 
 
 ### `FSelectMenuTile`
 * Add `FSelectMenuTile.onTapHide`.
 
 * **Breaking** Change `FSelectMenuTile.hideOnTapOutside` to `FSelectMenuTile.hideRegion`.
+
+
+### `FSelectTileGroup`
+* **Breaking** Change `FSelectTile.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
+
+
+### `FSidebar`
+* **Breaking** Change `FSidebarGroup.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
+* **Breaking** Change `FSidebarItem.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
+
+
+### `FTappable`
+* **Breaking** Change `FTappable.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
 
 
 ### `FTextField` & `FTextFormField`
@@ -138,6 +172,10 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
   `FFieldIconBuilder<FTextFieldStyle> suffixBuilder`.
 
 
+### `FTile`
+* **Breaking** Change `FTile.onStateChange` from `ValueChanged<Set<WidgetState>>` to `ValueChanged<FWidgetStatesDelta>`.
+
+
 ### `FTimeField`
 * Add `onTapHide` to `FTimeField.picker(...)`.
 
@@ -152,9 +190,11 @@ We've done an overhaul of `FSelect` to make it more consistent and easier to use
 * Fix regression in Flutter 3.35.2 by reducing `FTextFieldStyle.contentPadding` from `EdgeInsets.symmetric(horizontal: 14, vertical: 10)` 
   to `EdgeInsets.symmetric(horizontal: 10, vertical: 10)`.
 
+
 ### Others
 * Add `FSelectMenuTile.onTapHide`.
 * Add `FTypeaheadController`.
+* Add `FWidgetStatesDelta`.
 
 * Change `FMultiValueNotifier` to be non-abstract.
 * **Breaking** Change `FMultiValueNotifier.radio({T? value})` to `FMultiValueNotifier.radio([T? value])`.

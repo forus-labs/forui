@@ -75,7 +75,7 @@ class FTappable extends StatefulWidget {
   /// * [onFocusChange] for focus changes.
   /// * [onHoverChange] for hover changes.
   /// {@endtemplate}
-  final ValueChanged<Set<WidgetState>>? onStateChange;
+  final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
   /// True if this tappable is currently selected. Defaults to false.
   final bool selected;
@@ -161,7 +161,7 @@ class FTappable extends StatefulWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<Set<WidgetState>>? onStateChange,
+    ValueChanged<FWidgetStatesDelta>? onStateChange,
     bool selected,
     HitTestBehavior behavior,
     VoidCallback? onPress,
@@ -238,6 +238,7 @@ class FTappable extends StatefulWidget {
 
 class _FTappableState<T extends FTappable> extends State<T> {
   late final WidgetStatesController _controller;
+  late Set<WidgetState> _current;
   int _monotonic = 0;
 
   @override
@@ -248,7 +249,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       if (widget.autofocus) WidgetState.focused,
       if (widget._disabled) WidgetState.disabled,
     });
-
+    _current = {..._controller.value};
     _controller.addListener(_onChange);
   }
 
@@ -260,7 +261,17 @@ class _FTappableState<T extends FTappable> extends State<T> {
       ..update(WidgetState.disabled, widget._disabled);
   }
 
-  void _onChange() => widget.onStateChange?.call(_controller.value);
+  void _onChange() {
+    // We need to create a new set because of https://github.com/flutter/flutter/issues/167916
+    final current = {..._controller.value};
+    final previous = _current;
+
+    // We set _current before onStateChange to prevent exceptions thrown by it from corrupting the state.
+    _current = current;
+    if (widget.onStateChange case final onStateChange?) {
+      onStateChange(FWidgetStatesDelta(previous, current));
+    }
+  }
 
   @override
   void dispose() {
@@ -271,8 +282,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
-    // TODO: https://github.com/flutter/flutter/issues/167916
-    var tappable = _decorate(context, widget.builder(context, {..._controller.value}, widget.child));
+    var tappable = _decorate(context, widget.builder(context, _current, widget.child));
     tappable = Shortcuts(
       shortcuts: widget.shortcuts,
       child: Actions(

@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -38,6 +39,30 @@ void main() {
 
   tearDown(() {
     controller.dispose();
+  });
+
+  testWidgets('focus changes when pressed on mobile', (tester) async {
+    debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        alignment: Alignment.topCenter,
+        child: FSelect<String>(key: key, items: letters),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(Focus.of(tester.element(find.text('A'))).hasFocus, true);
+
+    await tester.press(find.text('C'));
+    await tester.pumpAndSettle();
+
+    expect(Focus.of(tester.element(find.text('A'))).hasFocus, false);
+    expect(Focus.of(tester.element(find.text('C'))).hasFocus, true);
+
+    debugDefaultTargetPlatformOverride = null;
   });
 
   testWidgets('scrolls to item at the end of very long list', (tester) async {

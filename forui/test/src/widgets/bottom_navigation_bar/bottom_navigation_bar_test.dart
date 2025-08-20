@@ -7,7 +7,7 @@ import '../../test_scaffold.dart';
 
 void main() {
   testWidgets('onStateChange & onHoverChange callback called', (tester) async {
-    Set<WidgetState>? states;
+    FWidgetStatesDelta? delta;
     bool? hovered;
     await tester.pumpWidget(
       TestScaffold(
@@ -16,7 +16,7 @@ void main() {
             FBottomNavigationBarItem(
               icon: const Icon(FIcons.house),
               label: const Text('Home'),
-              onStateChange: (v) => states = v,
+              onStateChange: (v) => delta = v,
               onHoverChange: (v) => hovered = v,
             ),
           ],
@@ -30,13 +30,13 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.text('Home')));
     await tester.pumpAndSettle();
 
-    expect(states, {WidgetState.hovered});
+    expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
     expect(hovered, true);
 
     await gesture.moveTo(Offset.zero);
     await tester.pumpAndSettle();
 
-    expect(states, <WidgetState>{});
+    expect(delta, FWidgetStatesDelta({WidgetState.hovered}, {}));
     expect(hovered, false);
   });
 }

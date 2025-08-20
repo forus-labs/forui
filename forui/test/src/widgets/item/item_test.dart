@@ -81,10 +81,10 @@ void main() {
   });
 
   testWidgets('disabled when no press callbacks given', (tester) async {
-    var states = <WidgetState>{};
+    FWidgetStatesDelta? delta;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onStateChange: (s) => states = s),
+        child: FItem(title: const Text('item'), onStateChange: (s) => delta = s),
       ),
     );
 
@@ -93,14 +93,14 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FItem)));
     await tester.pumpAndSettle();
 
-    expect(states, <WidgetState>{});
+    expect(delta, null);
   });
 
   testWidgets('enabled when secondary press given', (tester) async {
-    var states = <WidgetState>{};
+    FWidgetStatesDelta? delta;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onSecondaryPress: () {}, onStateChange: (s) => states = s),
+        child: FItem(title: const Text('item'), onSecondaryPress: () {}, onStateChange: (s) => delta = s),
       ),
     );
 
@@ -109,14 +109,14 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FItem)));
     await tester.pumpAndSettle();
 
-    expect(states, {WidgetState.hovered});
+    expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
   });
 
   testWidgets('enabled when secondary long press given', (tester) async {
-    var states = <WidgetState>{};
+    FWidgetStatesDelta? delta;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onSecondaryLongPress: () {}, onStateChange: (s) => states = s),
+        child: FItem(title: const Text('item'), onSecondaryLongPress: () {}, onStateChange: (s) => delta = s),
       ),
     );
 
@@ -125,7 +125,7 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FItem)));
     await tester.pumpAndSettle();
 
-    expect(states, {WidgetState.hovered});
+    expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
   });
 
   testWidgets('child hit test', (tester) async {

@@ -46,7 +46,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<Set<WidgetState>>? onStateChange;
+  final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
   /// The child.
   final Widget child;

@@ -7,12 +7,12 @@ import '../../test_scaffold.dart';
 
 void main() {
   testWidgets('onStateChange & onHoverChange callback called', (tester) async {
-    Set<WidgetState>? states;
+    FWidgetStatesDelta? delta;
     bool? hovered;
     await tester.pumpWidget(
       TestScaffold(
         child: FButton(
-          onStateChange: (v) => states = v,
+          onStateChange: (v) => delta = v,
           onHoverChange: (v) => hovered = v,
           onPress: () {},
           child: const Text('Button'),
@@ -26,13 +26,13 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.text('Button')));
     await tester.pumpAndSettle();
 
-    expect(states, {WidgetState.hovered});
+    expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
     expect(hovered, true);
 
     await gesture.moveTo(Offset.zero);
     await tester.pumpAndSettle();
 
-    expect(states, <WidgetState>{});
+    expect(delta, FWidgetStatesDelta({WidgetState.hovered}, {}));
     expect(hovered, false);
   });
 }

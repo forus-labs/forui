@@ -79,7 +79,7 @@ class FItem extends StatelessWidget with FItemMixin {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<Set<WidgetState>>? onStateChange;
+  final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
   /// A callback for when the item is pressed.
   ///
