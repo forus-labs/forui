@@ -34,7 +34,7 @@ final class FWidgetStatesDelta {
           setEquals(current, other.current);
 
   @override
-  int get hashCode => const SetEquality().hash(previous) ^ const SetEquality().hash(current);
+  int get hashCode => Object.hash(const SetEquality().hash(previous), const SetEquality().hash(current));
 
   @override
   String toString() => 'FWidgetStatesDelta{previous: $previous, current: $current}';
