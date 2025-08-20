@@ -26,7 +26,7 @@ String generateSnippets(Map<String, String> mapped) {
           .build(),
     ]);
 
-  return formatter.format(library.build().accept(emitter).toString());
+  return metaFormatter.format(library.build().accept(emitter).toString());
 }
 
 /// Traverses & maps the library and finds all targets to convert into snippets.

@@ -72,7 +72,7 @@ String generateStyles(Map<String, ConstructorFragment> fragments) {
           .build(),
     ]);
 
-  return formatter.format(registry.build().accept(emitter).toString());
+  return metaFormatter.format(registry.build().accept(emitter).toString());
 }
 
 List<String> _aliases(ConstructorFragment fragment) {

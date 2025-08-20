@@ -49,7 +49,7 @@ import 'package:forui/forui.dart';
 
 ${library.build().accept(emitter)}
 ''';
-  return formatter.format(code);
+  return fragmentFormatter.format(code);
 }
 
 /// A visitor that finds all static const fields in a class.

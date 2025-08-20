@@ -5,7 +5,7 @@ import '../main.dart';
 
 const materialThemeMapping = 'material-mapping';
 
-String mapMaterialThemeMapping(String method) => formatter.format('''
+String mapMaterialThemeMapping(String method) => fragmentFormatter.format('''
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
