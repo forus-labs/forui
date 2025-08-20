@@ -13,8 +13,6 @@ import 'package:forui/forui.dart';
 /// The scaling is applied automatically in all Forui widgets while the labelled font sizes are used as the defaults
 /// for the corresponding properties of widget styles configured via `inherit(...)` constructors.
 final class FTypography with Diagnosticable {
-  static const _defaultFontFamily = 'packages/forui/Inter';
-
   /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   ///
   /// ## Contract:
@@ -107,7 +105,7 @@ final class FTypography with Diagnosticable {
 
   /// Creates a [FTypography].
   const FTypography({
-    this.defaultFontFamily = _defaultFontFamily,
+    this.defaultFontFamily = 'packages/forui/Inter',
     this.xs = const TextStyle(fontSize: 12, height: 1),
     this.sm = const TextStyle(fontSize: 14, height: 1.25),
     this.base = const TextStyle(fontSize: 16, height: 1.5),
@@ -123,7 +121,7 @@ final class FTypography with Diagnosticable {
   }) : assert(0 < defaultFontFamily.length, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
-  FTypography.inherit({required FColors colors, this.defaultFontFamily = _defaultFontFamily})
+  FTypography.inherit({required FColors colors, this.defaultFontFamily = 'packages/forui/Inter'})
     : xs = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
       sm = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
       base = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),

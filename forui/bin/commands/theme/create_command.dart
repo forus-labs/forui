@@ -36,7 +36,7 @@ class ThemeCreateCommand extends ForuiCommand {
   final aliases = ['c'];
 
   @override
-  final description = 'Creates a Forui theme file.';
+  final description = 'Creates a Forui theme file.\n\nRun "dart run forui theme ls" to see all themes.';
 
   @override
   final arguments = '[theme]';

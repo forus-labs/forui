@@ -21,7 +21,7 @@ class StyleCreateCommand extends ForuiCommand {
   final aliases = ['c'];
 
   @override
-  final description = 'Create Forui widget style file(s).';
+  final description = 'Create Forui widget style file(s).\n\nRun "dart run forui style ls" to see all themes.';
 
   @override
   final arguments = '[styles]';

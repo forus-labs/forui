@@ -15,7 +15,7 @@ class SnippetCreateCommand extends ForuiCommand {
   final aliases = ['c'];
 
   @override
-  final description = 'Create code snippet files.';
+  final description = 'Create code snippet files.\n\nRun "dart run forui snippet ls" to see all snippets.';
 
   @override
   final arguments = '[snippets]';

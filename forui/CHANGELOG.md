@@ -1,9 +1,13 @@
+## 0.15.1
+* Fix CLI generating incorrect icon mappings.
+* Fix CLI generating theme that references private constant.
+
+
 ## 0.15.0
 
 ### Cursors
 We've changed the default cursor for many widgets from `MouseCursor.click` to `MouseCursor.defer`. This is in line with 
-[native desktop behavior](https://medium.com/simple-human/buttons-shouldnt-have-a-hand-cursor-b11e99ca374b) and 
-[W3C User Interface guidelines](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer).
+[native desktop behavior](https://medium.com/simple-human/buttons-shouldnt-have-a-hand-cursor-b11e99ca374b) and [W3C User Interface guidelines](https://www.w3.org/TR/css-ui-3/#valdef-cursor-pointer).
 
 
 ### `FThemeData`
