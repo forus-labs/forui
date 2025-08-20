@@ -32,7 +32,7 @@
 </div>
 
 > [!IMPORTANT]
-> Forui 0.12.0+ requires Flutter **3.32.0+**. Run `flutter --version` to check your Flutter version.
+> Forui 0.15.0+ requires Flutter **3.35.0+**. Run `flutter --version` to check your Flutter version.
 
 ## Why Choose Forui?
 

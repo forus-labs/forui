@@ -1,4 +1,4 @@
-## 0.15.0 (Next)
+## 0.15.0
 
 ### Cursors
 We've changed the default cursor for many widgets from `MouseCursor.click` to `MouseCursor.defer`. This is in line with 

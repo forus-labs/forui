@@ -1,6 +1,6 @@
 name: forui_assets
 description: Companion assets for Forui, a set of beautifully designed, minimalistic widgets for desktop & touch devices.
-version: 0.14.0
+version: 0.15.0
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
 repository: https://github.com/forus-labs/forui/tree/main/forui_assets
@@ -11,8 +11,8 @@ topics:
   - widget
 
 environment:
-  sdk: '>=3.8.0 <4.0.0'
-  flutter: ">=3.32.0"
+  sdk: '>=3.9.0 <4.0.0'
+  flutter: ">=3.35.0"
 resolution: workspace
 
 dependencies:
