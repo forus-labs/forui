@@ -18,7 +18,12 @@ final _theme = p.join(Directory.current.parent.path, 'forui', 'bin', 'commands',
 final assetsLibrary = p.join(Directory.current.parent.path, 'forui_assets', 'lib', 'src');
 
 final emitter = DartEmitter();
-final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
+
+/// The formatter used to format the generated fragments actually seen & used by end-users.
+final fragmentFormatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
+
+/// The formatter to used format the generated code used in the CLI.
+final metaFormatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion, pageWidth: 120);
 
 const header = '''
 // GENERATED CODE - DO NOT MODIFY BY HAND

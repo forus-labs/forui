@@ -65,7 +65,7 @@ String generateThemes(Map<(String, String?), String> fragments) {
           .build(),
     ]);
 
-  return formatter.format(registry.build().accept(emitter).toString());
+  return metaFormatter.format(registry.build().accept(emitter).toString());
 }
 
 Map<(String, String?), String> mapThemes(ThemesConstructors themes) {
@@ -104,7 +104,7 @@ Map<(String, String?), String> mapThemes(ThemesConstructors themes) {
       ..write('_')
       ..writeln(style.source.substring(style.type.length + 1));
 
-    fragments[key] = formatter.format(buffer.toString());
+    fragments[key] = fragmentFormatter.format(buffer.toString());
   }
 
   return fragments;

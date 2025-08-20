@@ -21,7 +21,7 @@ class ConstructorFragment {
         root: match.root,
         type: key,
         closure: _closure(key, matches),
-        source: formatter.format(switch (match.constructor) {
+        source: fragmentFormatter.format(switch (match.constructor) {
           final constructor when constructor.factoryKeyword != null => _factory(key, pattern, match),
           final constructor when constructor.initializers.singleOrNull is RedirectingConstructorInvocation =>
             _redirecting(key, pattern, match),
