@@ -24,7 +24,7 @@ class FCheckbox extends StatelessWidget {
   /// ```shell
   /// dart run forui style create checkbox
   /// ```
-  final FCheckboxStyle Function(FCheckboxStyle)? style;
+  final FCheckboxStyle Function(FCheckboxStyle style)? style;
 
   /// The label displayed next to the checkbox.
   final Widget? label;

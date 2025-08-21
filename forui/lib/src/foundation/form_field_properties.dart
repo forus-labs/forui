@@ -16,7 +16,7 @@ mixin FFormFieldProperties<T> {
   /// {@template forui.foundation.form_field_properties.errorBuilder}
   /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
   /// {@endtemplate}
-  Widget Function(BuildContext, String)? get errorBuilder;
+  Widget Function(BuildContext context, String message)? get errorBuilder;
 
   /// {@template forui.foundation.form_field_properties.enabled}
   /// Whether the form is able to receive user input.

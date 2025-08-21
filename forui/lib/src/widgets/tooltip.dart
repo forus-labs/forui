@@ -101,7 +101,7 @@ class FTooltip extends StatefulWidget {
   /// ```shell
   /// dart run forui style create tooltip
   /// ```
-  final FTooltipStyle Function(FTooltipStyle)? style;
+  final FTooltipStyle Function(FTooltipStyle style)? style;
 
   /// The anchor of the follower to which the [childAnchor] is aligned. Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry tipAnchor;
@@ -118,7 +118,7 @@ class FTooltip extends StatefulWidget {
   /// [FPortalShift.flip].
   ///
   /// See [FPortalShift] for more information on the different shifting strategies.
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// True if the tooltip should be shown when hovered over. Defaults to true.
   final bool hover;
@@ -137,7 +137,7 @@ class FTooltip extends StatefulWidget {
   final Duration longPressExitDuration;
 
   /// The tip builder. The child passed to [tipBuilder] will always be null.
-  final Widget Function(BuildContext, FTooltipController) tipBuilder;
+  final Widget Function(BuildContext context, FTooltipController controller) tipBuilder;
 
   /// An optional builder which returns the child widget that the tooltip is aligned to.
   ///

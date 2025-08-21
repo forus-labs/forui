@@ -45,7 +45,7 @@ class FScaffold extends StatelessWidget {
   /// ```shell
   /// dart run forui style create scaffold
   /// ```
-  final FScaffoldStyle Function(FScaffoldStyle)? scaffoldStyle;
+  final FScaffoldStyle Function(FScaffoldStyle style)? scaffoldStyle;
 
   /// The toaster style.
   ///
@@ -55,7 +55,7 @@ class FScaffold extends StatelessWidget {
   /// ```shell
   /// dart run forui style create toast
   /// ```
-  final FToasterStyle Function(FToasterStyle)? toasterStyle;
+  final FToasterStyle Function(FToasterStyle style)? toasterStyle;
 
   /// The main content area of the scaffold.
   final Widget child;

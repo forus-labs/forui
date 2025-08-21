@@ -36,7 +36,7 @@ class FCalendar extends StatefulWidget {
   /// ```shell
   /// dart run forui style create calendar
   /// ```
-  final FCalendarStyle Function(FCalendarStyle)? style;
+  final FCalendarStyle Function(FCalendarStyle style)? style;
 
   /// A controller that determines if a date is selected.
   final FCalendarController controller;

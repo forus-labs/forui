@@ -1,0 +1,1243 @@
+{
+  "af": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "am": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "ar": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "as": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel"
+  ],
+
+  "az": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "be": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "bg": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "bn": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel"
+  ],
+
+  "bs": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "ca": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "cs": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "cy": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "da": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "de": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "de_CH": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "barrierLabel",
+    "barrierOnTapHint",
+    "sheetSemanticsLabel"
+  ],
+
+  "el": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "en_AU": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "en_CA": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "en_GB": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "en_IE": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "en_IN": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "en_NZ": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "en_SG": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "en_ZA": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "es": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_419": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_AR": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_BO": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_CL": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_CO": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_CR": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_DO": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_EC": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_GT": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_HN": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_MX": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_NI": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_PA": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_PE": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_PR": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_PY": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_SV": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_US": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_UY": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "es_VE": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "et": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "eu": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "fa": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "fi": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "fil": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "fr": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "fr_CA": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "gl": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "gsw": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "gu": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "he": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "hi": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "hr": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "hu": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "hy": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "id": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "is": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "it": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "ja": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel"
+  ],
+
+  "ka": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "kk": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "km": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "kn": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "ko": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "ky": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "lo": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "lt": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "lv": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "mk": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "ml": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "mn": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "mr": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "ms": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "my": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "nb": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "ne": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "nl": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "no": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "or": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "pa": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "pl": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "ps": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "pt": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "pt_PT": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "ro": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "ru": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "si": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "sk": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "sl": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "sq": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "sr": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "sr_Latn": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "sv": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "sw": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "ta": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "te": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "th": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "dialogSemanticsLabel",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel"
+  ],
+
+  "tl": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "tr": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "uk": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate",
+    "paginationPreviousSemanticsLabel",
+    "paginationNextSemanticsLabel",
+    "selectNoResults",
+    "textFieldClearButtonSemanticsLabel"
+  ],
+
+  "ur": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "uz": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "vi": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "zh": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "zh_HK": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "zh_TW": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ],
+
+  "zu": [
+    "fullDate",
+    "year",
+    "yearMonth",
+    "abbreviatedMonth",
+    "day",
+    "shortDate"
+  ]
+}

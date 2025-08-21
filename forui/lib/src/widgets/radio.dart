@@ -24,7 +24,7 @@ class FRadio extends StatelessWidget {
   /// ```shell
   /// dart run forui style create radio
   /// ```
-  final FRadioStyle Function(FRadioStyle)? style;
+  final FRadioStyle Function(FRadioStyle style)? style;
 
   /// The label displayed next to the radio.
   final Widget? label;

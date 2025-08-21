@@ -25,7 +25,7 @@ class FSwitch extends StatelessWidget {
   /// ```shell
   /// dart run forui style create switch
   /// ```
-  final FSwitchStyle Function(FSwitchStyle)? style;
+  final FSwitchStyle Function(FSwitchStyle style)? style;
 
   /// The label displayed next to the switch.
   final Widget? label;

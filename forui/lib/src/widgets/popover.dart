@@ -114,7 +114,7 @@ class FPopover extends StatefulWidget {
   /// ```shell
   /// dart run forui style create popover
   /// ```
-  final FPopoverStyle Function(FPopoverStyle)? style;
+  final FPopoverStyle Function(FPopoverStyle style)? style;
 
   /// The constraints.
   final FPortalConstraints constraints;
@@ -154,7 +154,7 @@ class FPopover extends StatefulWidget {
   ///
   /// See [FPortalShift] for more information on the different shifting strategies.
   /// {@endtemplate}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// {@template forui.widgets.FPopover.offset}
   /// The offset to adjust the popover by. Defaults to [Offset.zero].
@@ -232,7 +232,7 @@ class FPopover extends StatefulWidget {
   final Map<ShortcutActivator, VoidCallback>? shortcuts;
 
   /// The popover builder.
-  final Widget Function(BuildContext, FPopoverController) popoverBuilder;
+  final Widget Function(BuildContext context, FPopoverController controller) popoverBuilder;
 
   /// {@template forui.widgets.FPopover.builder}
   /// An optional builder which returns the child widget that the popover is aligned to.

@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 
 @internal
 class Content extends StatelessWidget {
-  final FAvatarStyle Function(FAvatarStyle)? style;
+  final FAvatarStyle Function(FAvatarStyle style)? style;
   final double size;
   final ImageProvider image;
   final String? semanticsLabel;
@@ -51,7 +51,7 @@ class Content extends StatelessWidget {
 
 @internal
 class PlaceholderContent extends StatelessWidget {
-  final FAvatarStyle Function(FAvatarStyle)? style;
+  final FAvatarStyle Function(FAvatarStyle style)? style;
   final double size;
 
   const PlaceholderContent({required this.size, this.style, super.key});

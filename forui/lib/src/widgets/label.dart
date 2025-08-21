@@ -42,7 +42,7 @@ class FLabel extends StatelessWidget {
   /// dart run forui style create labels
   /// ```
   // ignore: diagnostic_describe_all_properties
-  final FLabelStyle Function(FLabelStyle)? style;
+  final FLabelStyle Function(FLabelStyle style)? style;
 
   /// The label that describes the form field.
   final Widget? label;

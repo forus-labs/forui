@@ -28,7 +28,7 @@ class FAccordion extends StatefulWidget {
   /// ```shell
   /// dart run forui style create accordion
   /// ```
-  final FAccordionStyle Function(FAccordionStyle)? style;
+  final FAccordionStyle Function(FAccordionStyle style)? style;
 
   /// The individual accordion items and separators.
   ///

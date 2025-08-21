@@ -19,7 +19,7 @@ class FTypeaheadController extends TextEditingController {
 
   /// Creates a [FTypeaheadController] with an optional initial text and completion.
   FTypeaheadController({
-    required (TextStyle textStyle, TextStyle composingStyle, TextStyle completionStyle) Function(BuildContext)
+    required (TextStyle textStyle, TextStyle composingStyle, TextStyle completionStyle) Function(BuildContext context)
     textStyles,
     List<String> suggestions = const [],
     super.text,

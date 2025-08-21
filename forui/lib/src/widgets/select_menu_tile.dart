@@ -61,7 +61,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// ```shell
   /// dart run forui style create select-menu-tile
   /// ```
-  final FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style;
+  final FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style;
 
   /// The divider between select tiles. Defaults to [FItemDivider.indented].
   final FItemDivider divider;
@@ -86,7 +86,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -204,7 +204,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.actions,
     this.onChange,
     this.onSelect,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     T? initialValue,
     super.onSaved,
     super.validator,
@@ -323,7 +323,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     FSelectMenuTileController<T>? selectController,
     FPopoverController? popoverController,
     ScrollController? scrollController,
-    FSelectMenuTileStyle Function(FSelectMenuTileStyle)? style,
+    FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style,
     double? cacheExtent,
     double maxHeight = double.infinity,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
@@ -332,7 +332,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     AlignmentGeometry menuAnchor = Alignment.topRight,
     AlignmentGeometry tileAnchor = Alignment.bottomRight,
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     VoidCallback? onTapHide,
@@ -355,7 +355,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     Map<Type, Action<Intent>>? actions,
     ValueChanged<Set<T>>? onChange,
     ValueChanged<(T, bool)>? onSelect,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     T? initialValue,
     FormFieldSetter<Set<T>>? onSaved,
     FormFieldValidator<Set<T>>? validator,
@@ -433,7 +433,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   ///   tiles with non-zero size, return null from the builder, or set [count] to non-null.
   FSelectMenuTile.builder({
     required this.title,
-    required FSelectTile<T>? Function(BuildContext, int) menuBuilder,
+    required FSelectTile<T>? Function(BuildContext context, int index) menuBuilder,
     int? count,
     this.selectController,
     this.popoverController,
@@ -470,7 +470,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.actions,
     this.onChange,
     this.onSelect,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     T? initialValue,
     super.onSaved,
     super.validator,

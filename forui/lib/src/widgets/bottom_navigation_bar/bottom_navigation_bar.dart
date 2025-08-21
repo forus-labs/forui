@@ -28,7 +28,7 @@ class FBottomNavigationBar extends StatelessWidget {
   /// ```shell
   /// dart run forui style create bottom-navigation-bar
   /// ```
-  final FBottomNavigationBarStyle Function(FBottomNavigationBarStyle)? style;
+  final FBottomNavigationBarStyle Function(FBottomNavigationBarStyle style)? style;
 
   /// A callback for when an item is selected.
   final ValueChanged<int>? onChange;

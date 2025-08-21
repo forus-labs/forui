@@ -85,7 +85,7 @@ abstract class Entry extends StatelessWidget {
     required bool current,
     required bool selectable,
     required ValueChanged<LocalDate> onPress,
-    required String Function(LocalDate) format,
+    required String Function(LocalDate date) format,
   }) {
     Widget builder(BuildContext _, Set<WidgetState> states, Widget? _) => _Content(
       style: style,

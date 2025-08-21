@@ -34,7 +34,7 @@ class FButton extends StatelessWidget {
   /// ```shell
   /// dart run forui style create buttons
   /// ```
-  final FBaseButtonStyle Function(FButtonStyle) style;
+  final FBaseButtonStyle Function(FButtonStyle style) style;
 
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;

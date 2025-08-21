@@ -40,7 +40,7 @@ abstract class FProgress extends StatefulWidget {
   /// dart run forui style create progresses
   /// ```
   const factory FProgress({
-    FLinearProgressStyle Function(FLinearProgressStyle)? style,
+    FLinearProgressStyle Function(FLinearProgressStyle style)? style,
     String? semanticsLabel,
     double? value,
     Duration duration,
@@ -49,7 +49,7 @@ abstract class FProgress extends StatefulWidget {
 
   /// Creates an indeterminate circular [FProgress].
   const factory FProgress.circularIcon({
-    IconThemeData Function(IconThemeData)? style,
+    IconThemeData Function(IconThemeData style)? style,
     Duration duration,
     String? semanticsLabel,
     Key? key,
@@ -71,7 +71,7 @@ class _Linear extends FProgress {
   static const _infinite = Duration(milliseconds: 1500);
   static const _finite = Duration(milliseconds: 500);
 
-  final FLinearProgressStyle Function(FLinearProgressStyle)? style;
+  final FLinearProgressStyle Function(FLinearProgressStyle style)? style;
   final Duration duration;
 
   const _Linear({this.style, Duration? duration, super.semanticsLabel, super.value, super.key})
@@ -182,7 +182,7 @@ class _LinearState extends State<_Linear> with SingleTickerProviderStateMixin {
 }
 
 class _Circular extends FProgress {
-  final IconThemeData Function(IconThemeData)? style;
+  final IconThemeData Function(IconThemeData style)? style;
   final Duration duration;
 
   const _Circular({this.style, this.duration = const Duration(seconds: 1), super.semanticsLabel, super.key})

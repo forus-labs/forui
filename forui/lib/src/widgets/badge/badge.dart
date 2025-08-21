@@ -26,10 +26,10 @@ class FBadge extends StatelessWidget {
   /// ```shell
   /// dart run forui style create badges
   /// ```
-  final FBaseBadgeStyle Function(FBadgeStyle) style;
+  final FBaseBadgeStyle Function(FBadgeStyle style) style;
 
   /// The builder used to build the badge's content.
-  final Widget Function(BuildContext, FBadgeStyle) builder;
+  final Widget Function(BuildContext context, FBadgeStyle style) builder;
 
   /// Creates a [FBadge].
   FBadge({required Widget child, this.style = _primary, super.key})

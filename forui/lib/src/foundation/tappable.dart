@@ -37,10 +37,10 @@ class FTappable extends StatefulWidget {
   static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) => child!;
 
   /// The style.
-  final FTappableStyle Function(FTappableStyle)? style;
+  final FTappableStyle Function(FTappableStyle style)? style;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
-  final FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle;
+  final FFocusedOutlineStyle Function(FFocusedOutlineStyle style)? focusedOutlineStyle;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
@@ -153,8 +153,8 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const factory FTappable({
-    FTappableStyle Function(FTappableStyle)? style,
-    FFocusedOutlineStyle Function(FFocusedOutlineStyle)? focusedOutlineStyle,
+    FTappableStyle Function(FTappableStyle style)? style,
+    FFocusedOutlineStyle Function(FFocusedOutlineStyle style)? focusedOutlineStyle,
     String? semanticsLabel,
     bool excludeSemantics,
     bool autofocus,

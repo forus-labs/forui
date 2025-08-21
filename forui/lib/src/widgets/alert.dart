@@ -27,7 +27,7 @@ class FAlert extends StatelessWidget {
   /// ```shell
   /// dart run forui style create alert
   /// ```
-  final FBaseAlertStyle Function(FAlertStyle) style;
+  final FBaseAlertStyle Function(FAlertStyle style) style;
 
   /// The title of the alert.
   final Widget title;
