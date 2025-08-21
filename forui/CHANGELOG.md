@@ -1,3 +1,13 @@
+## 0.16.0 (Next)
+
+### `FWidgetStateMap`
+* Add `FWidgetStateMap.lerpBoxDecoration(...)`.
+* Add `FWidgetStateMap.lerpColor(...)`.
+* Add `FWidgetStateMap.lerpIconThemeData(...)`.
+* Add `FWidgetStateMap.lerpTextStyle(...)`.
+* Add `FWidgetStateMap.lerpWhere(...)`.
+
+
 ## 0.15.1
 * Fix CLI generating incorrect icon mappings.
 * Fix CLI generating theme that references private constant.
