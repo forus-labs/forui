@@ -1,13 +1,41 @@
 import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:source_gen/source_gen.dart';
 
 final _style = RegExp(r'^F.*(Style|Styles)$');
+
+const _bool = TypeChecker.fromUrl('dart:core#bool');
+const _int = TypeChecker.fromUrl('dart:core#int');
+const _double = TypeChecker.fromUrl('dart:core#double');
+const _string = TypeChecker.fromUrl('dart:core#String');
+const _enumeration = TypeChecker.fromUrl('dart:core#Enum');
+
+const _iterable = TypeChecker.fromUrl('dart:core#Iterable');
 const _list = TypeChecker.fromUrl('dart:core#List');
 const _set = TypeChecker.fromUrl('dart:core#Set');
 const _map = TypeChecker.fromUrl('dart:core#Map');
+
+const _color = TypeChecker.fromUrl('dart:ui#Color');
+
+const _alignment = TypeChecker.fromUrl('package:flutter#Alignment');
+const _alignmentGeometry = TypeChecker.fromUrl('package:flutter#AlignmentGeometry');
+const _borderRadius = TypeChecker.fromUrl('package:flutter#BorderRadius');
+const _borderRadiusGeometry = TypeChecker.fromUrl('package:flutter#BorderRadiusGeometry');
+const _boxConstraints = TypeChecker.fromUrl('package:flutter#BoxConstraints');
+const _boxDecoration = TypeChecker.fromUrl('package:flutter#BoxDecoration');
+const _decoration = TypeChecker.fromUrl('package:flutter#Decoration');
+const _edgeInsets = TypeChecker.fromUrl('package:flutter#EdgeInsets');
+const _edgeInsetsGeometry = TypeChecker.fromUrl('package:flutter#EdgeInsetsGeometry');
+const _iconData = TypeChecker.fromUrl('package:flutter#IconData');
+const _iconThemeData = TypeChecker.fromUrl('package:flutter#IconThemeData');
+const _textStyle = TypeChecker.fromUrl('package:flutter#TextStyle');
+const _boxShadow = TypeChecker.fromUrl('package:flutter#BoxShadow');
+const _shadow = TypeChecker.fromUrl('package:flutter#Shadow');
+
+const _fWidgetStateMap = TypeChecker.fromUrl('package:forui#FWidgetStateMap');
 
 /// Generates corresponding style mixins and extensions that implement several commonly used operations.
 class StyleGenerator extends Generator {
@@ -54,19 +82,109 @@ class _Extension {
 
   Extension generate() =>
       (ExtensionBuilder()
-            ..docs.addAll(['/// Provides a `copyWith` method.'])
-            ..name = '\$${_element.name3!}CopyWith'
+            ..docs.addAll(['/// Provides [copyWith] and [lerp] methods.'])
+            ..name = '\$${_element.name3!}NonVirtual'
             ..on = refer(_element.name3!)
-            ..methods.add(_copyWith))
+            ..methods.addAll([_copyWith, _lerp]))
           .build();
 
-  Method get _copyWith {
-    // Check if a field is a complex type.
-    bool complex(DartType type) {
-      final typeName = type.getDisplayString();
-      return typeName.startsWith('F') && (typeName.endsWith('Style') || typeName.endsWith('Styles'));
+  Method get _lerp {
+    String invocation(FieldElement2 field) {
+      final type = field.type;
+      final name = field.name3!;
+
+      return switch (type) {
+        _ when _double.isAssignableFromType(type) => 'lerpDouble($name, other.$name, t) ?? $name',
+        //
+        _ when _alignment.isAssignableFromType(type) => 'Alignment.lerp($name, other.$name, t) ?? $name',
+        _ when _alignmentGeometry.isAssignableFromType(type) =>
+          'AlignmentGeometry.lerp($name, other.$name, t) ?? $name',
+        //
+        _ when _borderRadius.isAssignableFromType(type) => 'BorderRadius.lerp($name, other.$name, t) ?? $name',
+        _ when _borderRadiusGeometry.isAssignableFromType(type) =>
+          'BorderRadiusGeometry.lerp($name, other.$name, t) ?? $name',
+        //
+        _ when _boxConstraints.isAssignableFromType(type) => 'BoxConstraints.lerp($name, other.$name, t) ?? $name',
+        //
+        _ when _boxDecoration.isAssignableFromType(type) => 'BoxDecoration.lerp($name, other.$name, t) ?? $name',
+        _ when _decoration.isAssignableFromType(type) => 'Decoration.lerp($name, other.$name, t) ?? $name',
+        //
+        _ when _color.isAssignableFromType(type) => 'Color.lerp($name, other.$name, t) ?? $name',
+        //
+        _ when _edgeInsets.isAssignableFromType(type) => 'EdgeInsets.lerp($name, other.$name, t) ?? $name',
+        _ when _edgeInsetsGeometry.isAssignableFromType(type) =>
+          'EdgeInsetsGeometry.lerp($name, other.$name, t) ?? $name',
+        //
+        _ when _iconThemeData.isAssignableFromType(type) => 'IconThemeData.lerp($name, other.$name, t) ?? $name',
+        _ when _textStyle.isAssignableFromType(type) => 'TextStyle.lerp($name, other.$name, t) ?? $name',
+        // List<BoxShadow>/List<Shadow>
+        _ when _list.isAssignableFromType(type) && type is ParameterizedType => switch (type.typeArguments.single) {
+          final t when _boxShadow.isAssignableFromType(t) => 'BoxShadow.lerpList($name, other.$name, t) ?? $name',
+          final t when _shadow.isAssignableFromType(t) => 'Shadow.lerpList($name, other.$name, t) ?? $name',
+          _ => name,
+        },
+        // FWidgetStateMap<T>/FWidgetStateMap<T?>
+        _ when _fWidgetStateMap.isAssignableFromType(type) && type is ParameterizedType =>
+          switch (type.typeArguments.single) {
+            final t when _boxDecoration.isAssignableFromType(t) && t.nullabilitySuffix == NullabilitySuffix.none =>
+              'FWidgetStateMap.lerpBoxDecoration($name, other.$name, t)',
+            final t when _boxDecoration.isAssignableFromType(t) =>
+              'FWidgetStateMap.lerpWhere($name, other.$name, Color.lerp)',
+            //
+            final t when _color.isAssignableFromType(t) && t.nullabilitySuffix == NullabilitySuffix.none =>
+              'FWidgetStateMap.lerpColor($name, other.$name, t)',
+            final t when _color.isAssignableFromType(t) => 'FWidgetStateMap.lerpWhere($name, other.$name, Color.lerp)',
+            //
+            final t when _iconThemeData.isAssignableFromType(t) && t.nullabilitySuffix == NullabilitySuffix.none =>
+              'FWidgetStateMap.lerpIconThemeData($name, other.$name, t)',
+            final t when _iconThemeData.isAssignableFromType(t) =>
+              'FWidgetStateMap.lerpWhere($name, other.$name, IconThemeData.lerp)',
+            //
+            final t when _textStyle.isAssignableFromType(t) && t.nullabilitySuffix == NullabilitySuffix.none =>
+              'FWidgetStateMap.lerpTextStyle($name, other.$name, t)',
+            final t when _textStyle.isAssignableFromType(t) =>
+              'FWidgetStateMap.lerpWhere($name, other.$name, TextStyle.lerp)',
+            //
+            _ => name,
+          },
+        // Nested styles
+        _ when _nestedStyle(type) => '$name.lerp(other.$name, t)',
+        _ => name,
+      };
+
+      // TODO: we can do better. check if type has lerp static function or instance function
     }
 
+    // Generate field assignments for the lerp method body
+    final assignments = [for (final field in _fields) '${field.name3}: ${invocation(field)},'].join();
+
+    return Method(
+      (m) => m
+        ..returns = refer(_element.name3!)
+        ..docs.addAll([
+          '/// Linearly interpolate between this and another [${_element.name3!}] using the given factor [t].',
+        ])
+        ..annotations.add(refer('useResult'))
+        ..name = 'lerp'
+        ..requiredParameters.addAll([
+          Parameter(
+            (p) => p
+              ..name = 'other'
+              ..type = refer(_element.name3!),
+          ),
+          Parameter(
+            (p) => p
+              ..name = 't'
+              ..type = refer('double'),
+          ),
+        ])
+        ..lambda = true
+        ..body = Code('${_element.name3!}($assignments)\n'),
+    );
+  }
+
+  Method get _copyWith {
+    // Copy the documentation comments from the fields.
     final docs = [
       for (final field in _fields)
         if (field.documentationComment case final comment? when comment.isNotEmpty) ...[
@@ -78,7 +196,7 @@ class _Extension {
 
     // Generate assignments for the copyWith method body
     final assignments = _fields.map((f) {
-      if (complex(f.type)) {
+      if (_nestedStyle(f.type)) {
         return '${f.name3}: ${f.name3} != null ? ${f.name3}(this.${f.name3}) : this.${f.name3},';
       } else {
         return '${f.name3}: ${f.name3} ?? this.${f.name3},';
@@ -99,7 +217,7 @@ class _Extension {
         ..name = 'copyWith'
         ..optionalParameters.addAll([
           for (final field in _fields)
-            if (complex(field.type))
+            if (_nestedStyle(field.type))
               Parameter(
                 (p) => p
                   ..name = field.name3!
@@ -121,6 +239,11 @@ class _Extension {
         ..lambda = true
         ..body = Code('${_element.name3!}($assignments)\n'),
     );
+  }
+
+  bool _nestedStyle(DartType type) {
+    final typeName = type.getDisplayString();
+    return typeName.startsWith('F') && (typeName.endsWith('Style') || typeName.endsWith('Styles'));
   }
 }
 
@@ -192,26 +315,17 @@ class _Mixin {
 
   /// Generates a `debugFillProperties` method.
   Method get _debugFillProperties {
-    const string = TypeChecker.fromUrl('dart:core#String');
-    const int = TypeChecker.fromUrl('dart:core#int');
-    const double = TypeChecker.fromUrl('dart:core#double');
-    const color = TypeChecker.fromUrl('dart:ui#Color');
-    const iconData = TypeChecker.fromUrl('package:flutter#IconData');
-    const enumeration = TypeChecker.fromUrl('dart:core#Enum');
-    const iterable = TypeChecker.fromUrl('dart:core#Iterable');
-    const bool = TypeChecker.fromUrl('dart:core#bool');
-
     final properties = _fields
         .map(
           (field) => switch (field.type) {
-            _ when string.isAssignableFromType(field.type) => "StringProperty('${field.name3}', ${field.name3})",
-            _ when int.isAssignableFromType(field.type) => "IntProperty('${field.name3}', ${field.name3})",
-            _ when double.isAssignableFromType(field.type) => "DoubleProperty('${field.name3}', ${field.name3})",
-            _ when color.isAssignableFromType(field.type) => "ColorProperty('${field.name3}', ${field.name3})",
-            _ when iconData.isAssignableFromType(field.type) => "IconDataProperty('${field.name3}', ${field.name3})",
-            _ when enumeration.isAssignableFromType(field.type) => "EnumProperty('${field.name3}', ${field.name3})",
-            _ when iterable.isAssignableFromType(field.type) => "IterableProperty('${field.name3}', ${field.name3})",
-            _ when bool.isAssignableFromType(field.type) =>
+            _ when _string.isAssignableFromType(field.type) => "StringProperty('${field.name3}', ${field.name3})",
+            _ when _int.isAssignableFromType(field.type) => "IntProperty('${field.name3}', ${field.name3})",
+            _ when _double.isAssignableFromType(field.type) => "DoubleProperty('${field.name3}', ${field.name3})",
+            _ when _color.isAssignableFromType(field.type) => "ColorProperty('${field.name3}', ${field.name3})",
+            _ when _iconData.isAssignableFromType(field.type) => "IconDataProperty('${field.name3}', ${field.name3})",
+            _ when _enumeration.isAssignableFromType(field.type) => "EnumProperty('${field.name3}', ${field.name3})",
+            _ when _iterable.isAssignableFromType(field.type) => "IterableProperty('${field.name3}', ${field.name3})",
+            _ when _bool.isAssignableFromType(field.type) =>
               "FlagProperty('${field.name3}', value: ${field.name3}, ifTrue: '${field.name3}')",
             _ when field.type.isDartCoreFunction => "ObjectFlagProperty.has('${field.name3}', ${field.name3})",
             _ when field.type is RecordType => "StringProperty('${field.name3}', ${field.name3}.toString())",
