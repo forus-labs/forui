@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 part 'alert.style.dart';
 
@@ -13,6 +15,8 @@ part 'alert.style.dart';
 /// * https://forui.dev/docs/feedback/alert for working examples.
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
+  static _Resolve _primary(FAlertStyle _) => _Resolve((context) => context.theme.alertStyles.primary);
+
   /// The style. Defaults to [FAlertStyle.primary].
   ///
   /// Although typically one of the pre-defined styles in [FBaseAlertStyle], it can also be a [FAlertStyle]
@@ -99,56 +103,6 @@ class FAlert extends StatelessWidget {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('style', style));
   }
-
-  static _Resolve _primary(FAlertStyle _) => _Resolve((context) => context.theme.alertStyles.primary);
-}
-
-/// A custom [FAlert] style.
-///
-/// The pre-defined styles are a convenient shorthand for the various [FAlertStyle]s in the current context.
-final class FAlertStyle extends FBaseAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
-  /// The decoration.
-  @override
-  final BoxDecoration decoration;
-
-  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 12)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
-  /// The icon's style.
-  @override
-  final IconThemeData iconStyle;
-
-  /// The title's [TextStyle].
-  @override
-  final TextStyle titleTextStyle;
-
-  /// The subtitle's [TextStyle].
-  @override
-  final TextStyle subtitleTextStyle;
-
-  /// Creates a [FAlertStyle].
-  FAlertStyle({
-    required this.decoration,
-    required this.iconStyle,
-    required this.titleTextStyle,
-    required this.subtitleTextStyle,
-    this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 12),
-  });
-
-  /// The alert's destructive style.
-  ///
-  /// Shorthand for the current context's [FAlertStyles.destructive] style.
-  static FBaseAlertStyle Function(FAlertStyle style) destructive([FAlertStyle Function(FAlertStyle style)? style]) =>
-      (_) => _Resolve(
-        (context) => style?.call(context.theme.alertStyles.destructive) ?? context.theme.alertStyles.destructive,
-      );
-
-  /// The alert's primary style.
-  ///
-  /// Shorthand for the current context's [FAlertStyles.primary] style.
-  static FBaseAlertStyle Function(FAlertStyle style) primary([FAlertStyle Function(FAlertStyle style)? style]) =>
-      (_) => _Resolve((context) => style?.call(context.theme.alertStyles.primary) ?? context.theme.alertStyles.primary);
 }
 
 /// The alert styles.
@@ -199,4 +153,52 @@ class _Resolve extends FBaseAlertStyle {
   final FAlertStyle Function(BuildContext context) _resolve;
 
   _Resolve(this._resolve);
+}
+
+/// A custom [FAlert] style.
+///
+/// The pre-defined styles are a convenient shorthand for the various [FAlertStyle]s in the current context.
+final class FAlertStyle extends FBaseAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
+  /// The alert's primary style.
+  ///
+  /// Shorthand for the current context's [FAlertStyles.primary] style.
+  static FBaseAlertStyle Function(FAlertStyle style) primary([FAlertStyle Function(FAlertStyle style)? style]) =>
+      (_) => _Resolve((context) => style?.call(context.theme.alertStyles.primary) ?? context.theme.alertStyles.primary);
+
+  /// The alert's destructive style.
+  ///
+  /// Shorthand for the current context's [FAlertStyles.destructive] style.
+  static FBaseAlertStyle Function(FAlertStyle style) destructive([FAlertStyle Function(FAlertStyle style)? style]) =>
+      (_) => _Resolve(
+        (context) => style?.call(context.theme.alertStyles.destructive) ?? context.theme.alertStyles.destructive,
+      );
+
+  /// The decoration.
+  @override
+  final BoxDecoration decoration;
+
+  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 12)`.
+  @override
+  final EdgeInsetsGeometry padding;
+
+  /// The icon's style.
+  @override
+  final IconThemeData iconStyle;
+
+  /// The title's [TextStyle].
+  @override
+  final TextStyle titleTextStyle;
+
+  /// The subtitle's [TextStyle].
+  @override
+  final TextStyle subtitleTextStyle;
+
+  /// Creates a [FAlertStyle].
+  FAlertStyle({
+    required this.decoration,
+    required this.iconStyle,
+    required this.titleTextStyle,
+    required this.subtitleTextStyle,
+    this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 12),
+  });
 }
