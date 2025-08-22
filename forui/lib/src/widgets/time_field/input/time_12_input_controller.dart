@@ -1,16 +1,14 @@
 import 'package:flutter/services.dart';
-
-import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/input/parser.dart';
 import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
+import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
 ///
 @internal
 typedef Select12 =
-    TextEditingValue Function(TextEditingValue, int first, int last, int end, int firstSeparator, int lastSeparator);
+    TextEditingValue Function(TextEditingValue value, int first, int last, int end, int firstSeparator, int lastSeparator);
 
 TextEditingValue _onFirst(TextEditingValue value, int first, int _, int _, int _, int _) =>
     value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));

@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 
@@ -19,7 +18,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// ```shell
   /// dart run forui style create tile
   /// ```
-  final FItemStyle Function(FItemStyle)? style;
+  final FItemStyle Function(FItemStyle style)? style;
 
   /// The checked icon. Defaults to `FIcon(FIcons.check)`.
   final Widget? checkedIcon;
@@ -167,18 +166,10 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
 
 @internal
 class FSelectTileData<T> extends InheritedWidget with FTileMixin {
-  static FSelectTileData<T> of<T>(BuildContext context) {
-    assert(debugCheckHasAncestor<FSelectTileData<T>>('${FSelectTileGroup<T>}', context, generic: true));
-    return context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>()!;
-  }
-
   final FSelectTileGroupController<T> controller;
+
   final bool selected;
-
   const FSelectTileData({required this.controller, required this.selected, required super.child, super.key});
-
-  @override
-  bool updateShouldNotify(FSelectTileData old) => controller != old.controller || selected != old.selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -186,5 +177,13 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'));
+  }
+
+  @override
+  bool updateShouldNotify(FSelectTileData old) => controller != old.controller || selected != old.selected;
+
+  static FSelectTileData<T> of<T>(BuildContext context) {
+    assert(debugCheckHasAncestor<FSelectTileData<T>>('${FSelectTileGroup<T>}', context, generic: true));
+    return context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>()!;
   }
 }

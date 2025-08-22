@@ -1,14 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-import 'package:forui/forui.dart';
-
 part 'tile.style.dart';
-
-/// A marker interface which denotes that mixed-in widgets can be used in a [FTileGroup].
-mixin FTileMixin on Widget {}
 
 /// A specialized [FItem] for touch devices.
 ///
@@ -60,7 +55,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// ```shell
   /// dart run forui style create tile
   /// ```
-  final FItemStyle Function(FItemStyle)? style;
+  final FItemStyle Function(FItemStyle style)? style;
 
   /// Whether the tile is enabled. Defaults to true.
   final bool? enabled;
@@ -265,6 +260,9 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('actions', actions));
   }
 }
+
+/// A marker interface which denotes that mixed-in widgets can be used in a [FTileGroup].
+mixin FTileMixin on Widget {}
 
 /// A [FTile]'s style.
 class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {

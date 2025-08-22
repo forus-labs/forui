@@ -1,13 +1,69 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
+import 'package:meta/meta.dart';
 
 part 'select_item.style.dart';
+
+/// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].
+abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
+  /// The style. Defaults to the [FItemStyle] inherited from the parent [FSelectSection] or [FSelect].
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create select-section
+  /// ```
+  final FItemStyle Function(FItemStyle)? style;
+
+  /// The value.
+  final T value;
+
+  /// True if the item is enabled. Disabled items cannot be selected, and is skipped during traversal.
+  ///
+  /// Defaults to the value inherited from the parent [FSelectSection] or [FSelect].
+  final bool? enabled;
+
+  /// A prefix.
+  final Widget? prefix;
+
+  /// Creates a [FSelectItem] with a custom [title] and value.
+  const factory FSelectItem({
+    required Widget title,
+    required T value,
+    FItemStyle Function(FItemStyle)? style,
+    bool? enabled,
+    Widget? prefix,
+    Widget? subtitle,
+    // ignore: avoid_positional_boolean_parameters
+    Widget? Function(BuildContext context, bool selected) suffixBuilder,
+    Key? key,
+  }) = _SelectItem<T>;
+
+  /// Creates a [FSelectItem] with a raw layout.
+  const factory FSelectItem.raw({
+    required Widget child,
+    required T value,
+    FItemStyle Function(FItemStyle)? style,
+    bool? enabled,
+    Widget? prefix,
+    Key? key,
+  }) = _RawSelectItem<T>;
+
+  const FSelectItem._({required this.value, this.style, this.enabled, this.prefix, super.key});
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('value', value))
+      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+  }
+}
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FSelect].
 mixin FSelectItemMixin on Widget {}
@@ -225,178 +281,6 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   }
 }
 
-/// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].
-abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
-  /// The style. Defaults to the [FItemStyle] inherited from the parent [FSelectSection] or [FSelect].
-  ///
-  /// ## CLI
-  /// To generate and customize this style:
-  ///
-  /// ```shell
-  /// dart run forui style create select-section
-  /// ```
-  final FItemStyle Function(FItemStyle)? style;
-
-  /// The value.
-  final T value;
-
-  /// True if the item is enabled. Disabled items cannot be selected, and is skipped during traversal.
-  ///
-  /// Defaults to the value inherited from the parent [FSelectSection] or [FSelect].
-  final bool? enabled;
-
-  /// A prefix.
-  final Widget? prefix;
-
-  /// Creates a [FSelectItem] with a custom [title] and value.
-  const factory FSelectItem({
-    required Widget title,
-    required T value,
-    FItemStyle Function(FItemStyle)? style,
-    bool? enabled,
-    Widget? prefix,
-    Widget? subtitle,
-    // ignore: avoid_positional_boolean_parameters
-    Widget? Function(BuildContext, bool) suffixBuilder,
-    Key? key,
-  }) = _SelectItem<T>;
-
-  /// Creates a [FSelectItem] with a raw layout.
-  const factory FSelectItem.raw({
-    required Widget child,
-    required T value,
-    FItemStyle Function(FItemStyle)? style,
-    bool? enabled,
-    Widget? prefix,
-    Key? key,
-  }) = _RawSelectItem<T>;
-
-  const FSelectItem._({required this.value, this.style, this.enabled, this.prefix, super.key});
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('value', value))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
-  }
-}
-
-abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
-  late final _focus = FocusNode(debugLabel: widget.value.toString());
-
-  @override
-  void initState() {
-    super.initState();
-
-    // This is hacky but I'm not sure how to properly do this.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) {
-        return;
-      }
-
-      final InheritedSelectController(:focus, :onPress) = InheritedSelectController.of<T>(context);
-      final content = ContentData.of<T>(context);
-      if (focus(widget.value)) {
-        content.ensureVisible(context);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _focus.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final InheritedSelectController(:popover, :contains, :focus, :onPress) = InheritedSelectController.of<T>(context);
-    final content = ContentData.of<T>(context);
-
-    return _item(
-      context,
-      widget.enabled ?? content.enabled,
-      contains(widget.value),
-      focus(widget.value) || content.first,
-      (delta) {
-        if (delta.added.contains(WidgetState.hovered) ||
-            (!delta.previous.contains(WidgetState.hovered) && delta.added.contains(WidgetState.pressed))) {
-          _focus.requestFocus();
-        } else if (delta.removed.contains(WidgetState.hovered) ||
-            (!delta.current.contains(WidgetState.hovered) && delta.removed.contains(WidgetState.pressed))) {
-          _focus.unfocus();
-        }
-      },
-      () => onPress(widget.value),
-    );
-  }
-
-  Widget _item(
-    BuildContext context,
-    bool enabled,
-    bool selected,
-    bool focused,
-    ValueChanged<FWidgetStatesDelta> onStateChange,
-    VoidCallback onPress,
-  );
-}
-
-class _SelectItem<T> extends FSelectItem<T> {
-  static Widget? _defaultSuffixBuilder(BuildContext _, bool selected) => selected ? const Icon(FIcons.check) : null;
-
-  final Widget? subtitle;
-  final Widget title;
-
-  // ignore: avoid_positional_boolean_parameters
-  final Widget? Function(BuildContext, bool) suffixBuilder;
-
-  const _SelectItem({
-    required this.title,
-    required super.value,
-    this.subtitle,
-    this.suffixBuilder = _defaultSuffixBuilder,
-    super.style,
-    super.enabled,
-    super.prefix,
-    super.key,
-  }) : super._();
-
-  @override
-  State<_SelectItem<T>> createState() => _SelectItemState<T>();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder));
-  }
-}
-
-class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
-  @override
-  Widget _item(
-    BuildContext context,
-    bool enabled,
-    bool selected,
-    bool focused,
-    ValueChanged<FWidgetStatesDelta> onStateChange,
-    VoidCallback onPress,
-  ) => FItem(
-    style: widget.style?.call,
-    enabled: enabled,
-    selected: selected,
-    autofocus: focused,
-    focusNode: _focus,
-    onStateChange: onStateChange,
-    onPress: onPress,
-    prefix: widget.prefix,
-    title: widget.title,
-    subtitle: widget.subtitle,
-    suffix: widget.suffixBuilder(context, selected),
-  );
-}
-
 class _RawSelectItem<T> extends FSelectItem<T> {
   final Widget child;
 
@@ -426,5 +310,120 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     onPress: onPress,
     prefix: widget.prefix,
     child: widget.child,
+  );
+}
+
+class _SelectItem<T> extends FSelectItem<T> {
+  final Widget? subtitle;
+
+  final Widget title;
+  // ignore: avoid_positional_boolean_parameters
+  final Widget? Function(BuildContext context, bool selected) suffixBuilder;
+
+  const _SelectItem({
+    required this.title,
+    required super.value,
+    this.subtitle,
+    this.suffixBuilder = _defaultSuffixBuilder,
+    super.style,
+    super.enabled,
+    super.prefix,
+    super.key,
+  }) : super._();
+
+  @override
+  State<_SelectItem<T>> createState() => _SelectItemState<T>();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder));
+  }
+
+  static Widget? _defaultSuffixBuilder(BuildContext context, bool selected) =>
+      selected ? const Icon(FIcons.check) : null;
+}
+
+class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
+  @override
+  Widget _item(
+    BuildContext context,
+    bool enabled,
+    bool selected,
+    bool focused,
+    ValueChanged<FWidgetStatesDelta> onStateChange,
+    VoidCallback onPress,
+  ) => FItem(
+    style: widget.style?.call,
+    enabled: enabled,
+    selected: selected,
+    autofocus: focused,
+    focusNode: _focus,
+    onStateChange: onStateChange,
+    onPress: onPress,
+    prefix: widget.prefix,
+    title: widget.title,
+    subtitle: widget.subtitle,
+    suffix: widget.suffixBuilder(context, selected),
+  );
+}
+
+abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
+  late final _focus = FocusNode(debugLabel: widget.value.toString());
+
+  @override
+  Widget build(BuildContext context) {
+    final InheritedSelectController(:popover, :contains, :focus, :onPress) = InheritedSelectController.of<T>(context);
+    final content = ContentData.of<T>(context);
+
+    return _item(
+      context,
+      widget.enabled ?? content.enabled,
+      contains(widget.value),
+      focus(widget.value) || content.first,
+      (delta) {
+        if (delta.added.contains(WidgetState.hovered) ||
+            (!delta.previous.contains(WidgetState.hovered) && delta.added.contains(WidgetState.pressed))) {
+          _focus.requestFocus();
+        } else if (delta.removed.contains(WidgetState.hovered) ||
+            (!delta.current.contains(WidgetState.hovered) && delta.removed.contains(WidgetState.pressed))) {
+          _focus.unfocus();
+        }
+      },
+      () => onPress(widget.value),
+    );
+  }
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // This is hacky but I'm not sure how to properly do this.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+
+      final InheritedSelectController(:focus, :onPress) = InheritedSelectController.of<T>(context);
+      final content = ContentData.of<T>(context);
+      if (focus(widget.value)) {
+        content.ensureVisible(context);
+      }
+    });
+  }
+
+  Widget _item(
+    BuildContext context,
+    bool enabled,
+    bool selected,
+    bool focused,
+    ValueChanged<FWidgetStatesDelta> onStateChange,
+    VoidCallback onPress,
   );
 }

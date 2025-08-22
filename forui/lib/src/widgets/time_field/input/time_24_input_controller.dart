@@ -1,14 +1,8 @@
 import 'package:flutter/services.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/input/parser.dart';
 import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
-
-///
-@internal
-typedef Select24 = TextEditingValue Function(TextEditingValue, int only, int end, int separator);
+import 'package:meta/meta.dart';
 
 TextEditingValue _first(TextEditingValue value, int only, int _, int _) =>
     value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: only));
@@ -16,6 +10,10 @@ TextEditingValue _first(TextEditingValue value, int only, int _, int _) =>
 TextEditingValue _last(TextEditingValue value, int only, int end, int separator) => value.copyWith(
   selection: TextSelection(baseOffset: only + separator, extentOffset: end),
 );
+
+///
+@internal
+typedef Select24 = TextEditingValue Function(TextEditingValue value, int only, int end, int separator);
 
 @internal
 class Time24InputController extends TimeInputController {
@@ -34,16 +32,6 @@ class Time24InputController extends TimeInputController {
       super.fromValue();
 
   @override
-  void traverse({required bool forward}) {
-    try {
-      mutating = true;
-      rawValue = (forward ? selector.resolve(value, onFirst: _last) : selector.resolve(value, onLast: _first)) ?? value;
-    } finally {
-      mutating = false;
-    }
-  }
-
-  @override
   void adjust(int amount) {
     try {
       mutating = true;
@@ -60,12 +48,26 @@ class Time24InputController extends TimeInputController {
       mutating = false;
     }
   }
+
+  @override
+  void traverse({required bool forward}) {
+    try {
+      mutating = true;
+      rawValue = (forward ? selector.resolve(value, onFirst: _last) : selector.resolve(value, onLast: _first)) ?? value;
+    } finally {
+      mutating = false;
+    }
+  }
 }
 
 @internal
 class Time24Selector extends Selector {
   Time24Selector(FLocalizations localizations)
     : super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
+
+  @override
+  String join(List<String> parts) =>
+      parts[0] + localizations.timeFieldTimeSeparator + parts[1] + localizations.timeFieldSuffix;
 
   @override
   TextEditingValue? resolve(TextEditingValue value, {Select24 onFirst = _first, Select24 onLast = _last}) {
@@ -103,8 +105,4 @@ class Time24Selector extends Selector {
 
   @override
   List<String> split(String raw) => raw.replaceAll(suffix, '').split(localizations.timeFieldTimeSeparator);
-
-  @override
-  String join(List<String> parts) =>
-      parts[0] + localizations.timeFieldTimeSeparator + parts[1] + localizations.timeFieldSuffix;
 }

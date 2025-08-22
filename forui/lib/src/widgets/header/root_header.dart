@@ -9,7 +9,7 @@ part of 'header.dart';
 /// * https://forui.dev/docs/navigation/header for working examples.
 class _FRootHeader extends FHeader {
   /// The header's style.
-  final FHeaderStyle Function(FHeaderStyle)? style;
+  final FHeaderStyle Function(FHeaderStyle style)? style;
 
   /// The actions, aligned to the right in LTR locales. Defaults to an empty list.
   ///

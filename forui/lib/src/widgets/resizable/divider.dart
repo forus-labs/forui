@@ -3,10 +3,8 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 part 'divider.style.dart';
 
@@ -29,7 +27,7 @@ sealed class Divider extends StatefulWidget {
   final double hitRegionExtent;
   final double resizePercentage;
   final MouseCursor cursor;
-  final String Function(FResizableRegionData, FResizableRegionData) semanticFormatterCallback;
+  final String Function(FResizableRegionData first, FResizableRegionData second) semanticFormatterCallback;
 
   const Divider({
     required this.controller,

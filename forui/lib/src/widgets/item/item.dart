@@ -55,7 +55,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// ```shell
   /// dart run forui style create item
   /// ```
-  final FItemStyle Function(FItemStyle)? style;
+  final FItemStyle Function(FItemStyle style)? style;
 
   /// Whether the item is enabled. Defaults to true.
   final bool? enabled;
@@ -124,14 +124,14 @@ class FItem extends StatelessWidget with FItemMixin {
   final Map<Type, Action<Intent>>? actions;
 
   final Widget Function(
-    BuildContext,
-    FItemStyle,
-    double,
-    double,
-    Set<WidgetState>,
-    FWidgetStateMap<Color>?,
-    double?,
-    FItemDivider,
+    BuildContext context,
+    FItemStyle style,
+    double top,
+    double bottom,
+    Set<WidgetState> states,
+    FWidgetStateMap<Color>? color,
+    double? width,
+    FItemDivider divider,
   )
   _builder;
 

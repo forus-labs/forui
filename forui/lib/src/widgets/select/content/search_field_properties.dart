@@ -175,7 +175,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
   final FFieldIconBuilder<FSelectSearchStyle>? suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
-  final bool Function(TextEditingValue) clearable;
+  final bool Function(TextEditingValue value) clearable;
 
   /// Creates a [FSelectSearchFieldProperties].
   const FSelectSearchFieldProperties({

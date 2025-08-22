@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:forui/src/widgets/toast/animated_toaster.dart';
 
 @internal
@@ -124,7 +123,7 @@ class AnimationTween<T> {
   T? begin;
   T? end;
   T? _value;
-  final bool Function(T, T) _equal;
+  final bool Function(T a, T b) _equal;
 
   static AnimationTween<double> of({double? begin, double? end}) =>
       AnimationTween<double>(equal: (a, b) => (a - b).abs() < epsilon, begin: begin, end: end);
@@ -135,7 +134,7 @@ class AnimationTween<T> {
   static AnimationTween<Size> size({Size? begin, Size? end}) =>
       AnimationTween<Size>(equal: _size, begin: begin, end: end);
 
-  AnimationTween({required bool Function(T, T) equal, this.begin, this.end}) : _equal = equal;
+  AnimationTween({required bool Function(T a, T b) equal, this.begin, this.end}) : _equal = equal;
 
   void mark() {
     begin = value;

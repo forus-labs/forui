@@ -1,12 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 part 'resizable.style.dart';
 
@@ -22,9 +20,6 @@ part 'resizable.style.dart';
 /// * https://forui.dev/docs/layout/resizable for working examples.
 /// * [FResizableStyle] for customizing a resizable's appearance.
 class FResizable extends StatefulWidget {
-  static String _label(FResizableRegionData left, FResizableRegionData right) =>
-      '${left.extent.current}, ${right.extent.current}';
-
   /// The controller that manages the resizing of regions. Defaults to [FResizableController.cascade].
   final FResizableController? controller;
 
@@ -36,7 +31,7 @@ class FResizable extends StatefulWidget {
   /// ```shell
   /// dart run forui style create resizable
   /// ```
-  final FResizableStyle Function(FResizableStyle)? style;
+  final FResizableStyle Function(FResizableStyle style)? style;
 
   /// The main axis along which the [children] can be resized.
   final Axis axis;
@@ -68,7 +63,7 @@ class FResizable extends StatefulWidget {
   final double resizePercentage;
 
   /// A callback that formats the semantic label for the resizable. Defaults to announcing the extents of both regions.
-  final String Function(FResizableRegionData, FResizableRegionData) semanticFormatterCallback;
+  final String Function(FResizableRegionData left, FResizableRegionData right) semanticFormatterCallback;
 
   /// Handler called when the resizable regions change.
   final ValueChanged<List<FResizableRegionData>>? onChange;
@@ -111,62 +106,84 @@ class FResizable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(IterableProperty('children', children));
   }
+
+  static String _label(FResizableRegionData left, FResizableRegionData right) =>
+      '${left.extent.current}, ${right.extent.current}';
+}
+
+/// A [FResizable]'s style.
+class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
+  /// The horizontal divider style.
+  @override
+  final FResizableDividerStyle horizontalDividerStyle;
+
+  /// The vertical divider style.
+  @override
+  final FResizableDividerStyle verticalDividerStyle;
+
+  /// Creates a [FResizableStyle].
+  FResizableStyle({required this.horizontalDividerStyle, required this.verticalDividerStyle});
+
+  /// Creates a [FResizableStyle] that inherits its properties.
+  FResizableStyle.inherit({required FColors colors, required FStyle style})
+    : this(
+        horizontalDividerStyle: FResizableDividerStyle(
+          color: colors.border,
+          focusedOutlineStyle: style.focusedOutlineStyle,
+          thumbStyle: FResizableDividerThumbStyle(
+            decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
+            foregroundColor: colors.foreground,
+            height: 20,
+            width: 10,
+          ),
+        ),
+        verticalDividerStyle: FResizableDividerStyle(
+          color: colors.border,
+          focusedOutlineStyle: style.focusedOutlineStyle,
+          thumbStyle: FResizableDividerThumbStyle(
+            decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
+            foregroundColor: colors.foreground,
+            height: 10,
+            width: 20,
+          ),
+        ),
+      );
+}
+
+@internal
+class InheritedData extends InheritedWidget {
+  final FResizableController controller;
+
+  final Axis axis;
+  final FResizableRegionData data;
+  const InheritedData({
+    required this.controller,
+    required this.axis,
+    required this.data,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(EnumProperty('axis', axis))
+      ..add(DiagnosticsProperty('data', data));
+  }
+
+  @override
+  bool updateShouldNotify(InheritedData old) => controller != old.controller || axis != old.axis || data != old.data;
+
+  static InheritedData of(BuildContext context) {
+    assert(debugCheckHasAncestor<InheritedData>('$FResizable', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedData>()!;
+  }
 }
 
 class _FResizableState extends State<FResizable> {
   late FResizableController _controller = widget.controller ?? FResizableController.cascade();
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _update();
-    _controller.addListener(_onChange);
-  }
-
-  @override
-  void didUpdateWidget(FResizable old) {
-    super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeListener(_onChange);
-      }
-
-      _controller = widget.controller ?? FResizableController.cascade();
-      _controller.addListener(_onChange);
-    }
-
-    if (widget.axis != old.axis ||
-        widget.crossAxisExtent != old.crossAxisExtent ||
-        widget.controller != old.controller ||
-        !widget.children.equals(old.children)) {
-      _update();
-    }
-  }
-
-  void _update() {
-    var minOffset = 0.0;
-    final minTotalExtent = widget.children.sum((c) => max(c.minExtent ?? 0, widget.hitRegionExtent), initial: 0.0);
-    final totalExtent = widget.children.sum((c) => c.initialExtent, initial: 0.0);
-    final regions = [
-      for (final (index, region) in widget.children.indexed)
-        FResizableRegionData(
-          index: index,
-          extent: (
-            min: region.minExtent ?? widget.hitRegionExtent,
-            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
-            total: totalExtent,
-          ),
-          offset: (min: minOffset, max: minOffset += region.initialExtent),
-        ),
-    ];
-
-    _controller.regions.clear();
-    _controller.regions.addAll(regions);
-  }
-
-  void _onChange() => widget.onChange?.call(_controller.regions);
 
   @override
   Widget build(BuildContext context) {
@@ -256,6 +273,35 @@ class _FResizableState extends State<FResizable> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _update();
+    _controller.addListener(_onChange);
+  }
+
+  @override
+  void didUpdateWidget(FResizable old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        old.controller?.removeListener(_onChange);
+      }
+
+      _controller = widget.controller ?? FResizableController.cascade();
+      _controller.addListener(_onChange);
+    }
+
+    if (widget.axis != old.axis ||
+        widget.crossAxisExtent != old.crossAxisExtent ||
+        widget.controller != old.controller ||
+        !widget.children.equals(old.children)) {
+      _update();
+    }
+  }
+
+  @override
   void dispose() {
     if (widget.controller == null) {
       _controller.dispose();
@@ -264,75 +310,27 @@ class _FResizableState extends State<FResizable> {
     }
     super.dispose();
   }
-}
 
-/// A [FResizable]'s style.
-class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
-  /// The horizontal divider style.
-  @override
-  final FResizableDividerStyle horizontalDividerStyle;
+  void _onChange() => widget.onChange?.call(_controller.regions);
 
-  /// The vertical divider style.
-  @override
-  final FResizableDividerStyle verticalDividerStyle;
-
-  /// Creates a [FResizableStyle].
-  FResizableStyle({required this.horizontalDividerStyle, required this.verticalDividerStyle});
-
-  /// Creates a [FResizableStyle] that inherits its properties.
-  FResizableStyle.inherit({required FColors colors, required FStyle style})
-    : this(
-        horizontalDividerStyle: FResizableDividerStyle(
-          color: colors.border,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          thumbStyle: FResizableDividerThumbStyle(
-            decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
-            foregroundColor: colors.foreground,
-            height: 20,
-            width: 10,
+  void _update() {
+    var minOffset = 0.0;
+    final minTotalExtent = widget.children.sum((c) => max(c.minExtent ?? 0, widget.hitRegionExtent), initial: 0.0);
+    final totalExtent = widget.children.sum((c) => c.initialExtent, initial: 0.0);
+    final regions = [
+      for (final (index, region) in widget.children.indexed)
+        FResizableRegionData(
+          index: index,
+          extent: (
+            min: region.minExtent ?? widget.hitRegionExtent,
+            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
+            total: totalExtent,
           ),
+          offset: (min: minOffset, max: minOffset += region.initialExtent),
         ),
-        verticalDividerStyle: FResizableDividerStyle(
-          color: colors.border,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          thumbStyle: FResizableDividerThumbStyle(
-            decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
-            foregroundColor: colors.foreground,
-            height: 10,
-            width: 20,
-          ),
-        ),
-      );
-}
+    ];
 
-@internal
-class InheritedData extends InheritedWidget {
-  static InheritedData of(BuildContext context) {
-    assert(debugCheckHasAncestor<InheritedData>('$FResizable', context));
-    return context.dependOnInheritedWidgetOfExactType<InheritedData>()!;
-  }
-
-  final FResizableController controller;
-  final Axis axis;
-  final FResizableRegionData data;
-
-  const InheritedData({
-    required this.controller,
-    required this.axis,
-    required this.data,
-    required super.child,
-    super.key,
-  });
-
-  @override
-  bool updateShouldNotify(InheritedData old) => controller != old.controller || axis != old.axis || data != old.data;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(EnumProperty('axis', axis))
-      ..add(DiagnosticsProperty('data', data));
+    _controller.regions.clear();
+    _controller.regions.addAll(regions);
   }
 }

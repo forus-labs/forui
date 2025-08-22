@@ -2,10 +2,10 @@ part of 'select.dart';
 
 class _SearchSelect<T> extends FSelect<T> {
   final FSelectSearchFieldProperties searchFieldProperties;
-  final FutureOr<Iterable<T>> Function(String) filter;
+  final FutureOr<Iterable<T>> Function(String query) filter;
   final FSelectSearchContentBuilder<T> contentBuilder;
-  final Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder;
-  final Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder;
+  final Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder;
+  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder;
 
   const _SearchSelect({
     required this.filter,

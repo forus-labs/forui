@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/text_field/text_field.dart';
 
@@ -16,13 +15,11 @@ import 'package:forui/src/widgets/text_field/text_field.dart';
 /// * [FTextField] for creating a text field that can be used in a form.
 /// * [TextField] for more details about working with a text field.
 class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
-  static Widget _errorBuilder(BuildContext _, String text) => Text(text);
-
   /// {@macro forui.text_field.style}
-  final FTextFieldStyle Function(FTextFieldStyle)? style;
+  final FTextFieldStyle Function(FTextFieldStyle style)? style;
 
   /// {@macro forui.text_field.builder}
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states, Widget child) builder;
 
   /// {@macro forui.text_field.label}
   @override
@@ -193,10 +190,10 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final SpellCheckConfiguration? spellCheckConfiguration;
 
   /// {@macro forui.text_field.prefixBuilder}
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states)? prefixBuilder;
 
   /// {@macro forui.text_field.suffixBuilder}
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states)? suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue) clearable;
@@ -217,7 +214,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final String? forceErrorText;
 
   @override
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   /// Creates a [FTextFormField].
   const FTextFormField({
@@ -361,80 +358,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     super.key,
   });
 
-  /// Creates a [FTextFormField] configured for passwords.
-  ///
-  /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
-  /// when handling the creation of new passwords.
-  const FTextFormField.password({
-    this.style,
-    this.builder = Defaults.builder,
-    this.label = const Text('Password'),
-    this.hint,
-    this.description,
-    this.magnifierConfiguration,
-    this.groupId = EditableText,
-    this.controller,
-    this.focusNode,
-    this.keyboardType,
-    this.textInputAction = TextInputAction.next,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
-    this.textAlignVertical,
-    this.textDirection,
-    this.autofocus = false,
-    this.statesController,
-    this.obscuringCharacter = '•',
-    this.obscureText = true,
-    this.autocorrect = false,
-    this.smartDashesType,
-    this.smartQuotesType,
-    this.enableSuggestions = true,
-    this.minLines,
-    this.maxLines = 1,
-    this.expands = false,
-    this.readOnly = false,
-    this.showCursor,
-    this.maxLength,
-    this.maxLengthEnforcement,
-    this.onChange,
-    this.onTap,
-    this.onTapOutside,
-    this.onTapAlwaysCalled = false,
-    this.onEditingComplete,
-    this.onSubmit,
-    this.onAppPrivateCommand,
-    this.inputFormatters,
-    this.enabled = true,
-    this.ignorePointers,
-    this.enableInteractiveSelection = true,
-    this.selectAllOnFocus,
-    this.selectionControls,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.mouseCursor,
-    this.counterBuilder,
-    this.scrollPhysics,
-    this.scrollController,
-    this.autofillHints = const [AutofillHints.password],
-    this.restorationId,
-    this.stylusHandwritingEnabled = true,
-    this.enableIMEPersonalizedLearning = true,
-    this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
-    this.canRequestFocus = true,
-    this.undoController,
-    this.spellCheckConfiguration,
-    this.prefixBuilder,
-    this.suffixBuilder,
-    this.clearable = Defaults.clearable,
-    this.onSaved,
-    this.validator,
-    this.initialText,
-    this.autovalidateMode = AutovalidateMode.disabled,
-    this.forceErrorText,
-    this.errorBuilder = _errorBuilder,
-    super.key,
-  });
-
   /// Creates a [FTextFormField] configured for multiline inputs.
   ///
   /// The text field's height can be configured by adjusting [minLines]. By default, the text field will expand every
@@ -490,6 +413,80 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints,
+    this.restorationId,
+    this.stylusHandwritingEnabled = true,
+    this.enableIMEPersonalizedLearning = true,
+    this.contentInsertionConfiguration,
+    this.contextMenuBuilder = Defaults.contextMenuBuilder,
+    this.canRequestFocus = true,
+    this.undoController,
+    this.spellCheckConfiguration,
+    this.prefixBuilder,
+    this.suffixBuilder,
+    this.clearable = Defaults.clearable,
+    this.onSaved,
+    this.validator,
+    this.initialText,
+    this.autovalidateMode = AutovalidateMode.disabled,
+    this.forceErrorText,
+    this.errorBuilder = _errorBuilder,
+    super.key,
+  });
+
+  /// Creates a [FTextFormField] configured for passwords.
+  ///
+  /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
+  /// when handling the creation of new passwords.
+  const FTextFormField.password({
+    this.style,
+    this.builder = Defaults.builder,
+    this.label = const Text('Password'),
+    this.hint,
+    this.description,
+    this.magnifierConfiguration,
+    this.groupId = EditableText,
+    this.controller,
+    this.focusNode,
+    this.keyboardType,
+    this.textInputAction = TextInputAction.next,
+    this.textCapitalization = TextCapitalization.none,
+    this.textAlign = TextAlign.start,
+    this.textAlignVertical,
+    this.textDirection,
+    this.autofocus = false,
+    this.statesController,
+    this.obscuringCharacter = '•',
+    this.obscureText = true,
+    this.autocorrect = false,
+    this.smartDashesType,
+    this.smartQuotesType,
+    this.enableSuggestions = true,
+    this.minLines,
+    this.maxLines = 1,
+    this.expands = false,
+    this.readOnly = false,
+    this.showCursor,
+    this.maxLength,
+    this.maxLengthEnforcement,
+    this.onChange,
+    this.onTap,
+    this.onTapOutside,
+    this.onTapAlwaysCalled = false,
+    this.onEditingComplete,
+    this.onSubmit,
+    this.onAppPrivateCommand,
+    this.inputFormatters,
+    this.enabled = true,
+    this.ignorePointers,
+    this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
+    this.selectionControls,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.mouseCursor,
+    this.counterBuilder,
+    this.scrollPhysics,
+    this.scrollController,
+    this.autofillHints = const [AutofillHints.password],
     this.restorationId,
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
@@ -592,6 +589,8 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
+
+  static Widget _errorBuilder(BuildContext _, String text) => Text(text);
 }
 
 class _FormField extends FormField<String> {
@@ -692,31 +691,15 @@ class _State extends FormFieldState<String> {
   RestorableTextEditingController? _controller;
 
   @override
-  void initState() {
-    super.initState();
-    if (widget.field.controller case final controller?) {
-      controller.addListener(_handleTextEditingChange);
-    } else {
-      _registerController(RestorableTextEditingController(text: widget.initialValue));
-    }
-  }
+  _FormField get widget => super.widget as _FormField;
+
+  TextEditingController get _effectiveController => widget.field.controller ?? _controller!.value;
 
   @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    super.restoreState(oldBucket, initialRestore);
-    if (_controller case final controller?) {
-      registerForRestoration(controller, 'controller');
-    }
-
-    // Make sure to update the internal [FormFieldState] value to sync up with text editing controller value.
-    setValue(_effectiveController.text);
-  }
-
-  void _registerController(RestorableTextEditingController controller) {
-    assert(_controller == null, '_controller is already initialized.');
-    _controller = controller;
-    if (!restorePending) {
-      registerForRestoration(controller, 'controller');
+  void didChange(String? value) {
+    super.didChange(value);
+    if (_effectiveController.text != value) {
+      _effectiveController.text = value ?? '';
     }
   }
 
@@ -752,10 +735,12 @@ class _State extends FormFieldState<String> {
   }
 
   @override
-  void didChange(String? value) {
-    super.didChange(value);
-    if (_effectiveController.text != value) {
-      _effectiveController.text = value ?? '';
+  void initState() {
+    super.initState();
+    if (widget.field.controller case final controller?) {
+      controller.addListener(_handleTextEditingChange);
+    } else {
+      _registerController(RestorableTextEditingController(text: widget.initialValue));
     }
   }
 
@@ -764,6 +749,17 @@ class _State extends FormFieldState<String> {
     // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
     _effectiveController.text = widget.initialValue ?? '';
     super.reset();
+  }
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    super.restoreState(oldBucket, initialRestore);
+    if (_controller case final controller?) {
+      registerForRestoration(controller, 'controller');
+    }
+
+    // Make sure to update the internal [FormFieldState] value to sync up with text editing controller value.
+    setValue(_effectiveController.text);
   }
 
   // Suppress changes that originated from within this class.
@@ -777,8 +773,11 @@ class _State extends FormFieldState<String> {
     }
   }
 
-  @override
-  _FormField get widget => super.widget as _FormField;
-
-  TextEditingController get _effectiveController => widget.field.controller ?? _controller!.value;
+  void _registerController(RestorableTextEditingController controller) {
+    assert(_controller == null, '_controller is already initialized.');
+    _controller = controller;
+    if (!restorePending) {
+      registerForRestoration(controller, 'controller');
+    }
+  }
 }

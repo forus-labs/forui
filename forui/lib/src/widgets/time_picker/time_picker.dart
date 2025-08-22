@@ -1,12 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
-import 'package:intl/intl.dart';
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_picker/picker.dart';
 import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
+import 'package:intl/intl.dart';
+import 'package:meta/meta.dart';
 
 part 'time_picker.style.dart';
 
@@ -34,7 +32,7 @@ class FTimePicker extends StatefulWidget {
   /// ```shell
   /// dart run forui style create time-picker
   /// ```
-  final FTimePickerStyle Function(FTimePickerStyle)? style;
+  final FTimePickerStyle Function(FTimePickerStyle style)? style;
 
   /// True if the time picker should use the 24-hour format.
   ///

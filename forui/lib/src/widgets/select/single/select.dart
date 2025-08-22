@@ -3,19 +3,15 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form_field.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
+import 'package:meta/meta.dart';
 
 part 'basic_select.dart';
-
 part 'search_select.dart';
-
 part 'select.style.dart';
 
 /// A select displays a list of options for the user to pick from.
@@ -31,31 +27,6 @@ part 'select.style.dart';
 /// * [FSelectController] for customizing the behavior of a select.
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
-  /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<WidgetState> _) => Padding(
-    padding: const EdgeInsetsDirectional.only(end: 8.0),
-    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.chevronDown)),
-  );
-
-  /// The default content loading builder that shows a spinner when an asynchronous search is pending.
-  static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
-    padding: const EdgeInsets.all(13),
-    child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
-  );
-
-  /// The default content empty builder that shows a localized message when there are no results.
-  static Widget defaultContentEmptyBuilder(BuildContext context, FSelectStyle style) {
-    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
-      child: Text(localizations.selectNoResults, style: style.emptyTextStyle, textAlign: TextAlign.center),
-    );
-  }
-
-  static Widget _fieldBuilder(BuildContext _, FSelectStyle _, Set<WidgetState> _, Widget child) => child;
-
-  static String? _defaultValidator(Object? _) => null;
-
   /// The controller.
   final FSelectController<T>? controller;
 
@@ -67,7 +38,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// ```shell
   /// dart run forui style create select
   /// ```
-  final FSelectStyle Function(FSelectStyle)? style;
+  final FSelectStyle Function(FSelectStyle style)? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -94,7 +65,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final Widget? description;
 
   @override
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   @override
   final bool enabled;
@@ -155,7 +126,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size targetSize, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -167,7 +138,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final bool autoHide;
 
   /// The builder that is called when the select's content is empty. Defaults to [defaultContentEmptyBuilder].
-  final Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder;
+  final Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder;
 
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
@@ -197,7 +168,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   factory FSelect({
     required Map<String, T> items,
     FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
+    FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
@@ -211,7 +182,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     FormFieldValidator<T> validator = _defaultValidator,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     String? hint,
     TextAlign textAlign = TextAlign.start,
     TextAlignVertical? textAlignVertical,
@@ -224,11 +195,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset Function(Size targetSize, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
-    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
+    Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
@@ -287,7 +258,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required String Function(T) format,
     required List<FSelectItemMixin> children,
     FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
+    FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
@@ -314,7 +285,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset Function(Size targetSize, FPortalChildBox childBox, FPortalBox portalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool autoHide,
@@ -346,10 +317,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required Map<String, T> items,
     FutureOr<Iterable<T>> Function(String query)? filter,
     FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
-    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder = FSelect.defaultContentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder =
+        FSelect.defaultContentLoadingBuilder,
+    Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
+    FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
@@ -376,7 +348,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset Function(Size targetSize, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
@@ -460,9 +432,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required FSelectSearchContentBuilder<T> contentBuilder,
     FSelectSearchFieldProperties searchFieldProperties,
     Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
+    FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
@@ -489,7 +461,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset Function(Size targetSize, FPortalChildBox childBox, FPortalBox portalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool autoHide,
@@ -590,6 +562,79 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(EnumProperty('contentDivider', contentDivider))
       ..add(DiagnosticsProperty('initialValue', initialValue));
   }
+
+  /// The default content empty builder that shows a localized message when there are no results.
+  static Widget defaultContentEmptyBuilder(BuildContext context, FSelectStyle style) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+      child: Text(localizations.selectNoResults, style: style.emptyTextStyle, textAlign: TextAlign.center),
+    );
+  }
+
+  /// The default content loading builder that shows a spinner when an asynchronous search is pending.
+  static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
+    padding: const EdgeInsets.all(13),
+    child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
+  );
+
+  /// The default suffix builder that shows a upward and downward facing chevron icon.
+  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<WidgetState> _) => Padding(
+    padding: const EdgeInsetsDirectional.only(end: 8.0),
+    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.chevronDown)),
+  );
+
+  static String? _defaultValidator(Object? _) => null;
+
+  static Widget _fieldBuilder(BuildContext _, FSelectStyle _, Set<WidgetState> _, Widget child) => child;
+}
+
+/// A [FSelect]'s style.
+class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
+  /// The select field's style.
+  @override
+  final FTextFieldStyle selectFieldStyle;
+
+  /// The select field's icon style.
+  @override
+  final IconThemeData iconStyle;
+
+  /// The popover's style.
+  @override
+  final FPopoverStyle popoverStyle;
+
+  /// The search's style.
+  @override
+  final FSelectSearchStyle searchStyle;
+
+  /// The content's style.
+  @override
+  final FSelectContentStyle contentStyle;
+
+  /// The default text style when there are no results.
+  @override
+  final TextStyle emptyTextStyle;
+
+  /// Creates a [FSelectStyle].
+  FSelectStyle({
+    required this.selectFieldStyle,
+    required this.iconStyle,
+    required this.popoverStyle,
+    required this.searchStyle,
+    required this.contentStyle,
+    required this.emptyTextStyle,
+  });
+
+  /// Creates a [FSelectStyle] that inherits its properties.
+  FSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        selectFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
+        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
+        popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
+        searchStyle: FSelectSearchStyle.inherit(colors: colors, typography: typography, style: style),
+        contentStyle: FSelectContentStyle.inherit(colors: colors, typography: typography, style: style),
+        emptyTextStyle: typography.sm,
+      );
 }
 
 abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTickerProviderStateMixin {
@@ -598,19 +643,6 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
   late FocusNode _focus;
   bool _mutating = false;
 
-  @override
-  void initState() {
-    super.initState();
-    _textController = TextEditingController(text: _initialText);
-    _controller = widget.controller ?? FSelectController(vsync: this, value: widget.initialValue);
-    _controller.addValueListener(_onChange);
-
-    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
-
-    _textController.addListener(_updateSelectController);
-    _controller.addListener(_updateTextController);
-  }
-
   String get _initialText {
     if (widget.initialValue case final value?) {
       return widget.format(value);
@@ -618,72 +650,6 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       return widget.format(value);
     } else {
       return '';
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant S old) {
-    super.didUpdateWidget(old);
-    // DO NOT REORDER
-    if (widget.focusNode != old.focusNode) {
-      if (old.focusNode == null) {
-        _focus.dispose();
-      }
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
-    }
-
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeValueListener(_onChange);
-        old.controller?.removeListener(_updateTextController);
-      }
-
-      if (widget.controller case final controller?) {
-        _controller = controller;
-      } else {
-        _textController.text = widget.initialValue == null ? '' : widget.format(widget.initialValue as T);
-        _controller = FSelectController(vsync: this, value: widget.initialValue);
-      }
-
-      _controller
-        ..addValueListener(_onChange)
-        ..addListener(_updateTextController);
-      _updateTextController();
-    }
-  }
-
-  void _onChange(T? value) => widget.onChange?.call(value);
-
-  void _updateSelectController() {
-    if (_mutating) {
-      return;
-    }
-
-    try {
-      _mutating = true;
-      if (_textController.text.isEmpty) {
-        _controller.value = null;
-      }
-    } finally {
-      _mutating = false;
-    }
-  }
-
-  void _updateTextController() {
-    if (_mutating) {
-      return;
-    }
-
-    try {
-      _mutating = true;
-      _textController.text = switch (_controller.value) {
-        null => '',
-        final value => widget.format(value),
-      };
-    } finally {
-      _mutating = false;
     }
   }
 
@@ -764,9 +730,37 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
   Widget content(BuildContext context, FSelectStyle style);
 
-  void _toggle() {
-    _controller.popover.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
-    _controller.popover.toggle();
+  @override
+  void didUpdateWidget(covariant S old) {
+    super.didUpdateWidget(old);
+    // DO NOT REORDER
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focus.dispose();
+      }
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
+    }
+
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        old.controller?.removeValueListener(_onChange);
+        old.controller?.removeListener(_updateTextController);
+      }
+
+      if (widget.controller case final controller?) {
+        _controller = controller;
+      } else {
+        _textController.text = widget.initialValue == null ? '' : widget.format(widget.initialValue as T);
+        _controller = FSelectController(vsync: this, value: widget.initialValue);
+      }
+
+      _controller
+        ..addValueListener(_onChange)
+        ..addListener(_updateTextController);
+      _updateTextController();
+    }
   }
 
   @override
@@ -785,52 +779,55 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     }
     super.dispose();
   }
-}
 
-/// A [FSelect]'s style.
-class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
-  /// The select field's style.
   @override
-  final FTextFieldStyle selectFieldStyle;
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(text: _initialText);
+    _controller = widget.controller ?? FSelectController(vsync: this, value: widget.initialValue);
+    _controller.addValueListener(_onChange);
 
-  /// The select field's icon style.
-  @override
-  final IconThemeData iconStyle;
+    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FSelect');
 
-  /// The popover's style.
-  @override
-  final FPopoverStyle popoverStyle;
+    _textController.addListener(_updateSelectController);
+    _controller.addListener(_updateTextController);
+  }
 
-  /// The search's style.
-  @override
-  final FSelectSearchStyle searchStyle;
+  void _onChange(T? value) => widget.onChange?.call(value);
 
-  /// The content's style.
-  @override
-  final FSelectContentStyle contentStyle;
+  void _toggle() {
+    _controller.popover.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
+    _controller.popover.toggle();
+  }
 
-  /// The default text style when there are no results.
-  @override
-  final TextStyle emptyTextStyle;
+  void _updateSelectController() {
+    if (_mutating) {
+      return;
+    }
 
-  /// Creates a [FSelectStyle].
-  FSelectStyle({
-    required this.selectFieldStyle,
-    required this.iconStyle,
-    required this.popoverStyle,
-    required this.searchStyle,
-    required this.contentStyle,
-    required this.emptyTextStyle,
-  });
+    try {
+      _mutating = true;
+      if (_textController.text.isEmpty) {
+        _controller.value = null;
+      }
+    } finally {
+      _mutating = false;
+    }
+  }
 
-  /// Creates a [FSelectStyle] that inherits its properties.
-  FSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        selectFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
-        iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
-        popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
-        searchStyle: FSelectSearchStyle.inherit(colors: colors, typography: typography, style: style),
-        contentStyle: FSelectContentStyle.inherit(colors: colors, typography: typography, style: style),
-        emptyTextStyle: typography.sm,
-      );
+  void _updateTextController() {
+    if (_mutating) {
+      return;
+    }
+
+    try {
+      _mutating = true;
+      _textController.text = switch (_controller.value) {
+        null => '',
+        final value => widget.format(value),
+      };
+    } finally {
+      _mutating = false;
+    }
+  }
 }

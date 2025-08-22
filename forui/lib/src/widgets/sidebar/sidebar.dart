@@ -2,10 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 part 'sidebar.style.dart';
 
@@ -42,7 +40,7 @@ class FSidebar extends StatefulWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarStyle Function(FSidebarStyle)? style;
+  final FSidebarStyle Function(FSidebarStyle style)? style;
 
   /// An optional sticky header.
   final Widget? header;
@@ -88,7 +86,7 @@ class FSidebar extends StatefulWidget {
 
   /// Creates a sidebar with a builder function that will be wrapped in a [ListView.builder].
   FSidebar.builder({
-    required Widget Function(BuildContext, int) itemBuilder,
+    required Widget Function(BuildContext context, int index) itemBuilder,
     required int itemCount,
     this.style,
     this.header,
@@ -138,92 +136,8 @@ class FSidebar extends StatefulWidget {
   }
 }
 
-class _FSidebarState extends State<FSidebar> {
-  FocusScopeNode? _focusNode;
-
-  @override
-  void initState() {
-    super.initState();
-    _focusNode =
-        widget.focusNode ??
-        FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope);
-  }
-
-  @override
-  void didUpdateWidget(covariant FSidebar old) {
-    super.didUpdateWidget(old);
-
-    if (widget.focusNode != old.focusNode || widget.traversalEdgeBehavior != old.traversalEdgeBehavior) {
-      if (old.focusNode == null) {
-        _focusNode?.dispose();
-      }
-
-      _focusNode =
-          widget.focusNode ??
-          FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope);
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.focusNode == null) {
-      _focusNode?.dispose();
-    }
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.sidebarStyle) ?? context.theme.sidebarStyle;
-
-    Widget sidebar = FocusScope(
-      autofocus: widget.autofocus,
-      node: _focusNode,
-      child: FSidebarData(
-        style: style,
-        child: DecoratedBox(
-          decoration: style.decoration,
-          child: ConstrainedBox(
-            constraints: style.constraints,
-            child: Column(
-              children: [
-                if (widget.header != null) Padding(padding: style.headerPadding, child: widget.header!),
-                Expanded(
-                  child: Padding(padding: style.contentPadding, child: widget.child),
-                ),
-                if (widget.footer != null) Padding(padding: style.footerPadding, child: widget.footer!),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-
-    if (style.backgroundFilter case final filter?) {
-      sidebar = Stack(
-        children: [
-          Positioned.fill(
-            child: ClipRect(
-              child: BackdropFilter(filter: filter, child: Container()),
-            ),
-          ),
-          sidebar,
-        ],
-      );
-    }
-
-    return sidebar;
-  }
-}
-
 /// A [FSidebar]'s data.
 class FSidebarData extends InheritedWidget {
-  /// Returns the [FSidebarData] of the [FSidebar] in the given [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FSidebar] in the given [context].
-  static FSidebarData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FSidebarData>();
-
   /// The [FSidebar]'s style.
   final FSidebarStyle style;
 
@@ -231,13 +145,19 @@ class FSidebarData extends InheritedWidget {
   const FSidebarData({required this.style, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(FSidebarData old) => style != old.style;
-
-  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('style', style));
   }
+
+  @override
+  bool updateShouldNotify(FSidebarData old) => style != old.style;
+
+  /// Returns the [FSidebarData] of the [FSidebar] in the given [context].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FSidebar] in the given [context].
+  static FSidebarData? maybeOf(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FSidebarData>();
 }
 
 /// A [FSidebar]'s style.
@@ -303,4 +223,82 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
         ),
         groupStyle: FSidebarGroupStyle.inherit(colors: colors, typography: typography, style: style),
       );
+}
+
+class _FSidebarState extends State<FSidebar> {
+  FocusScopeNode? _focusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style?.call(context.theme.sidebarStyle) ?? context.theme.sidebarStyle;
+
+    Widget sidebar = FocusScope(
+      autofocus: widget.autofocus,
+      node: _focusNode,
+      child: FSidebarData(
+        style: style,
+        child: DecoratedBox(
+          decoration: style.decoration,
+          child: ConstrainedBox(
+            constraints: style.constraints,
+            child: Column(
+              children: [
+                if (widget.header != null) Padding(padding: style.headerPadding, child: widget.header!),
+                Expanded(
+                  child: Padding(padding: style.contentPadding, child: widget.child),
+                ),
+                if (widget.footer != null) Padding(padding: style.footerPadding, child: widget.footer!),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    if (style.backgroundFilter case final filter?) {
+      sidebar = Stack(
+        children: [
+          Positioned.fill(
+            child: ClipRect(
+              child: BackdropFilter(filter: filter, child: Container()),
+            ),
+          ),
+          sidebar,
+        ],
+      );
+    }
+
+    return sidebar;
+  }
+
+  @override
+  void didUpdateWidget(covariant FSidebar old) {
+    super.didUpdateWidget(old);
+
+    if (widget.focusNode != old.focusNode || widget.traversalEdgeBehavior != old.traversalEdgeBehavior) {
+      if (old.focusNode == null) {
+        _focusNode?.dispose();
+      }
+
+      _focusNode =
+          widget.focusNode ??
+          FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope);
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.focusNode == null) {
+      _focusNode?.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode =
+        widget.focusNode ??
+        FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope);
+  }
 }

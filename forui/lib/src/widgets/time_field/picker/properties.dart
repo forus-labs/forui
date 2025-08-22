@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:forui/forui.dart';
 
 @internal
@@ -15,7 +14,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -54,19 +53,16 @@ class FTimeFieldPickerProperties with Diagnosticable {
   });
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('anchor', anchor))
-      ..add(DiagnosticsProperty('inputAnchor', inputAnchor))
-      ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(EnumProperty('hideRegion', hideRegion))
-      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
-      ..add(IntProperty('hourInterval', hourInterval))
-      ..add(IntProperty('minuteInterval', minuteInterval));
-  }
+  int get hashCode =>
+      anchor.hashCode ^
+      inputAnchor.hashCode ^
+      spacing.hashCode ^
+      shift.hashCode ^
+      offset.hashCode ^
+      hideRegion.hashCode ^
+      onTapHide.hashCode ^
+      hourInterval.hashCode ^
+      minuteInterval.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -84,14 +80,17 @@ class FTimeFieldPickerProperties with Diagnosticable {
           minuteInterval == other.minuteInterval;
 
   @override
-  int get hashCode =>
-      anchor.hashCode ^
-      inputAnchor.hashCode ^
-      spacing.hashCode ^
-      shift.hashCode ^
-      offset.hashCode ^
-      hideRegion.hashCode ^
-      onTapHide.hashCode ^
-      hourInterval.hashCode ^
-      minuteInterval.hashCode;
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('anchor', anchor))
+      ..add(DiagnosticsProperty('inputAnchor', inputAnchor))
+      ..add(DiagnosticsProperty('spacing', spacing))
+      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(DiagnosticsProperty('offset', offset))
+      ..add(EnumProperty('hideRegion', hideRegion))
+      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
+      ..add(IntProperty('hourInterval', hourInterval))
+      ..add(IntProperty('minuteInterval', minuteInterval));
+  }
 }

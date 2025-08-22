@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 
@@ -82,7 +81,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
     this.semanticsLabel,
     this.onChange,
     this.onSelect,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
@@ -127,7 +126,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
   /// {@macro forui.widgets.FTileGroup.builder}
   FSelectTileGroup.builder({
     required this.selectController,
-    required FSelectTile<T>? Function(BuildContext, int) tileBuilder,
+    required FSelectTile<T>? Function(BuildContext context, int index) tileBuilder,
     int? count,
     this.scrollController,
     this.style,
@@ -141,7 +140,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
     this.semanticsLabel,
     this.onChange,
     this.onSelect,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,

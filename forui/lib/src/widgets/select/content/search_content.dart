@@ -3,17 +3,56 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
+import 'package:meta/meta.dart';
 
 part 'search_content.style.dart';
 
 /// A builder for [FSelect] search results.
 typedef FSelectSearchContentBuilder<T> =
     List<FSelectItemMixin> Function(BuildContext context, String query, Iterable<T> values);
+
+/// A [FSelect]'s search field style.
+class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
+  /// The search field's style.
+  @override
+  final FTextFieldStyle textFieldStyle;
+
+  /// The search icon's style.
+  @override
+  final IconThemeData iconStyle;
+
+  /// The style of the divider between the search field and results.
+  @override
+  final FDividerStyle dividerStyle;
+
+  /// The loading indicators style.
+  @override
+  final IconThemeData loadingIndicatorStyle;
+
+  /// Creates a [FSelectSearchStyle].
+  FSelectSearchStyle({
+    required this.textFieldStyle,
+    required this.iconStyle,
+    required this.dividerStyle,
+    required this.loadingIndicatorStyle,
+  });
+
+  /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
+  FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style).copyWith(
+          border: FWidgetStateMap.all(const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))),
+        ),
+        iconStyle: IconThemeData(size: 15, color: colors.mutedForeground),
+        dividerStyle: FDividerStyles.inherit(
+          colors: colors,
+          style: style,
+        ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
+        loadingIndicatorStyle: FProgressStyles.inherit(colors: colors, style: style).circularIconProgressStyle,
+      );
+}
 
 @internal
 class SearchContent<T> extends StatefulWidget {
@@ -26,11 +65,11 @@ class SearchContent<T> extends StatefulWidget {
   final bool scrollHandles;
   final ScrollPhysics physics;
   final FItemDivider divider;
-  final FutureOr<Iterable<T>> Function(String) filter;
-  final Widget Function(BuildContext, FSelectSearchStyle) loadingBuilder;
+  final FutureOr<Iterable<T>> Function(String query) filter;
+  final Widget Function(BuildContext context, FSelectSearchStyle style) loadingBuilder;
   final FSelectSearchContentBuilder<T> builder;
   final WidgetBuilder emptyBuilder;
-  final Widget Function(BuildContext, Object?, StackTrace)? errorBuilder;
+  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? errorBuilder;
 
   const SearchContent({
     required this.scrollController,
@@ -78,54 +117,6 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   late TextEditingController _controller;
   late String _previous;
   late FutureOr<Iterable<T>> _data;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.properties.controller ?? TextEditingController();
-    _controller.addListener(_update);
-
-    _previous = _controller.text;
-    _data = widget.filter(_controller.text);
-  }
-
-  @override
-  void didUpdateWidget(covariant SearchContent<T> old) {
-    super.didUpdateWidget(old);
-    if (widget.properties.controller != old.properties.controller) {
-      old.properties.controller?.removeListener(_update);
-      if (old.properties.controller == null) {
-        _controller.dispose();
-      }
-
-      _controller = widget.properties.controller ?? TextEditingController();
-      _controller.addListener(_update);
-
-      _previous = _controller.text;
-      _data = widget.filter(_controller.text);
-    }
-  }
-
-  void _update() {
-    if (_previous != _controller.text) {
-      _previous = _controller.text;
-      setState(() {
-        // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
-        // results in an assertion error being thrown.
-        _data = widget.filter(_controller.text);
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller.removeListener(_update);
-    if (widget.properties.controller == null) {
-      _controller.dispose();
-    }
-    _focus.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,6 +200,43 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     );
   }
 
+  @override
+  void didUpdateWidget(covariant SearchContent<T> old) {
+    super.didUpdateWidget(old);
+    if (widget.properties.controller != old.properties.controller) {
+      old.properties.controller?.removeListener(_update);
+      if (old.properties.controller == null) {
+        _controller.dispose();
+      }
+
+      _controller = widget.properties.controller ?? TextEditingController();
+      _controller.addListener(_update);
+
+      _previous = _controller.text;
+      _data = widget.filter(_controller.text);
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_update);
+    if (widget.properties.controller == null) {
+      _controller.dispose();
+    }
+    _focus.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.properties.controller ?? TextEditingController();
+    _controller.addListener(_update);
+
+    _previous = _controller.text;
+    _data = widget.filter(_controller.text);
+  }
+
   Widget _content(BuildContext context, Iterable<T> data) {
     final children = widget.builder(context, _controller.text, data);
     if (children.isEmpty) {
@@ -228,45 +256,15 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       ),
     );
   }
-}
 
-/// A [FSelect]'s search field style.
-class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
-  /// The search field's style.
-  @override
-  final FTextFieldStyle textFieldStyle;
-
-  /// The search icon's style.
-  @override
-  final IconThemeData iconStyle;
-
-  /// The style of the divider between the search field and results.
-  @override
-  final FDividerStyle dividerStyle;
-
-  /// The loading indicators style.
-  @override
-  final IconThemeData loadingIndicatorStyle;
-
-  /// Creates a [FSelectSearchStyle].
-  FSelectSearchStyle({
-    required this.textFieldStyle,
-    required this.iconStyle,
-    required this.dividerStyle,
-    required this.loadingIndicatorStyle,
-  });
-
-  /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
-  FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style).copyWith(
-          border: FWidgetStateMap.all(const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))),
-        ),
-        iconStyle: IconThemeData(size: 15, color: colors.mutedForeground),
-        dividerStyle: FDividerStyles.inherit(
-          colors: colors,
-          style: style,
-        ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
-        loadingIndicatorStyle: FProgressStyles.inherit(colors: colors, style: style).circularIconProgressStyle,
-      );
+  void _update() {
+    if (_previous != _controller.text) {
+      _previous = _controller.text;
+      setState(() {
+        // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
+        // results in an assertion error being thrown.
+        _data = widget.filter(_controller.text);
+      });
+    }
+  }
 }

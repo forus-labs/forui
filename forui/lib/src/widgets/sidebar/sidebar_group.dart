@@ -1,9 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 part 'sidebar_group.style.dart';
 
@@ -24,7 +22,7 @@ class FSidebarGroup extends StatelessWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarGroupStyle Function(FSidebarGroupStyle)? style;
+  final FSidebarGroupStyle Function(FSidebarGroupStyle style)? style;
 
   /// The label of the group.
   final Widget? label;
@@ -127,13 +125,6 @@ class FSidebarGroup extends StatelessWidget {
 
 /// A [FSidebarGroup]'s data.
 class FSidebarGroupData extends InheritedWidget {
-  /// Returns the [FSidebarGroupData] of the [FSidebarGroup] in the given [context].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if there is no ancestor [FSidebarGroup] in the given [context].
-  static FSidebarGroupData? maybeOf(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<FSidebarGroupData>();
-
   /// The [FSidebarGroup]'s style.
   final FSidebarGroupStyle style;
 
@@ -141,13 +132,20 @@ class FSidebarGroupData extends InheritedWidget {
   const FSidebarGroupData({required this.style, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(FSidebarGroupData old) => style != old.style;
-
-  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('style', style));
   }
+
+  @override
+  bool updateShouldNotify(FSidebarGroupData old) => style != old.style;
+
+  /// Returns the [FSidebarGroupData] of the [FSidebarGroup] in the given [context].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if there is no ancestor [FSidebarGroup] in the given [context].
+  static FSidebarGroupData? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FSidebarGroupData>();
 }
 
 /// The style for a [FSidebarGroup].

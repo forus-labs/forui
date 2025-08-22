@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
@@ -21,7 +20,7 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
     required this.constraints,
     required this.label,
     required this.description,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
     super.validator,
     super.forceErrorText,
