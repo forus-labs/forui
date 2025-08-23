@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 /// The copyWith function is generated in an extension rather than on a mixin/augmentation to make the function
 /// non-virtual. This prevents conflicts between base and subclasses.
 @internal
-class NonVirtualExtension {
+class TransformationsExtension {
   /// The type.
   @protected
   final ClassElement2 element;
@@ -22,14 +22,14 @@ class NonVirtualExtension {
   @protected
   final List<String> copyWithDocsHeader;
 
-  /// Creates a [NonVirtualExtension].
-  NonVirtualExtension(this.element, this.copyWithDocsHeader) : fields = instanceFields(element);
+  /// Creates a [TransformationsExtension].
+  TransformationsExtension(this.element, {required this.copyWithDocsHeader}) : fields = instanceFields(element);
 
-  /// Generates an extension that provides non virtual methods.
+  /// Generates an extension that provides non virtual transforming methods.
   Extension generate() =>
       (ExtensionBuilder()
             ..docs.addAll(['/// Provides a [copyWith] method.'])
-            ..name = '\$${element.name3!}NonVirtual'
+            ..name = '\$${element.name3!}Transformations'
             ..on = refer(element.name3!)
             ..methods.addAll([copyWith]))
           .build();
@@ -39,12 +39,12 @@ class NonVirtualExtension {
   Method get copyWith {
     // Copy the documentation comments from the fields.
     final docs = [
+      '/// ## Parameters',
       for (final field in fields)
-        if (field.documentationComment case final comment? when comment.isNotEmpty) ...[
-          '/// # [${field.name3}]',
-          comment,
-          '/// ',
-        ],
+        if (field.documentationComment?.split('.').firstOrNull case final comment?)
+          '/// * [${element.name3}.${field.name3}] - ${comment.replaceFirst('/// ', '')}.'
+        else
+          '/// * [${element.name3}.${field.name3}]',
     ];
 
     // Generate assignments for the copyWith method body
@@ -59,10 +59,7 @@ class NonVirtualExtension {
     return Method(
       (m) => m
         ..returns = refer(element.name3!)
-        ..docs.addAll([
-          ...copyWithDocsHeader,
-          ...docs,
-        ])
+        ..docs.addAll([...copyWithDocsHeader, ...docs])
         ..annotations.add(refer('useResult'))
         ..name = 'copyWith'
         ..optionalParameters.addAll([
@@ -71,7 +68,7 @@ class NonVirtualExtension {
               Parameter(
                 (p) => p
                   ..name = field.name3!
-                  ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()})?')
+                  ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()} style)?')
                   ..named = true,
               )
             else

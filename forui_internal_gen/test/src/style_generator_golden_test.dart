@@ -4,12 +4,18 @@ import 'package:forui_internal_gen/forui_internal_gen.dart';
 import 'package:test/test.dart';
 
 const _source = r'''
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
+import 'dart:ui';
 
 part 'sample.style.dart';
 
-class FGoldenStyle with _$FGoldenStyleFunctions {
+class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
+  /// This is a field's summary.
+  ///
+  /// This is more information about a field.
   final double someDouble;
   final Alignment alignment;
   final AlignmentGeometry alignmentGeometry;
@@ -34,7 +40,11 @@ class FGoldenStyle with _$FGoldenStyleFunctions {
   final FWidgetStateMap<IconThemeData?> nullableIconThemeDataMap;
   final FWidgetStateMap<TextStyle> textStyleMap;
   final FWidgetStateMap<TextStyle?> nullableTextStyleMap;
-  FGoldenNestedStyle nestedStyle;
+  final FGoldenNestedStyle nestedStyle;
+  final List<String> list;
+  final Set<String> set;
+  final Map<String, int> map;
+  late final Color? _private;
 
   FGoldenStyle({
     required this.someDouble,
@@ -62,10 +72,13 @@ class FGoldenStyle with _$FGoldenStyleFunctions {
     required this.textStyleMap,
     required this.nullableTextStyleMap,
     required this.nestedStyle,
+    required this.list,
+    required this.set,
+    required this.map,
   });
 }
 
-class FGoldenNestedStyle with _$FGoldenNestedStyleFunctions {}
+class FGoldenNestedStyle with Diagnosticable, _$FGoldenNestedStyleFunctions {}
 ''';
 
 const _golden = r'''
@@ -81,11 +94,40 @@ part of 'sample.dart';
 // **************************************************************************
 
 /// Provides [copyWith] and [lerp] methods.
-extension $FGoldenStyleNonVirtual on FGoldenStyle {
+extension $FGoldenStyleTransformations on FGoldenStyle {
   /// Returns a copy of this [FGoldenStyle] with the given properties replaced.
   ///
-  /// Consider [using the CLI to generate a style](https://forui.dev/themes#customization).
+  /// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).
   ///
+  /// ## Parameters
+  /// * [FGoldenStyle.someDouble] - This is a field's summary.
+  /// * [FGoldenStyle.alignment]
+  /// * [FGoldenStyle.alignmentGeometry]
+  /// * [FGoldenStyle.borderRadius]
+  /// * [FGoldenStyle.borderRadiusGeometry]
+  /// * [FGoldenStyle.boxConstraints]
+  /// * [FGoldenStyle.boxDecoration]
+  /// * [FGoldenStyle.decoration]
+  /// * [FGoldenStyle.color]
+  /// * [FGoldenStyle.edgeInsets]
+  /// * [FGoldenStyle.edgeInsetsDirectional]
+  /// * [FGoldenStyle.edgeInsetsGeometry]
+  /// * [FGoldenStyle.iconThemeData]
+  /// * [FGoldenStyle.textStyle]
+  /// * [FGoldenStyle.boxShadows]
+  /// * [FGoldenStyle.shadows]
+  /// * [FGoldenStyle.boxDecorationMap]
+  /// * [FGoldenStyle.nullableBoxDecorationMap]
+  /// * [FGoldenStyle.colorMap]
+  /// * [FGoldenStyle.nullableColorMap]
+  /// * [FGoldenStyle.iconThemeDataMap]
+  /// * [FGoldenStyle.nullableIconThemeDataMap]
+  /// * [FGoldenStyle.textStyleMap]
+  /// * [FGoldenStyle.nullableTextStyleMap]
+  /// * [FGoldenStyle.nestedStyle]
+  /// * [FGoldenStyle.list]
+  /// * [FGoldenStyle.set]
+  /// * [FGoldenStyle.map]
   @useResult
   FGoldenStyle copyWith({
     double? someDouble,
@@ -112,7 +154,10 @@ extension $FGoldenStyleNonVirtual on FGoldenStyle {
     FWidgetStateMap<IconThemeData?>? nullableIconThemeDataMap,
     FWidgetStateMap<TextStyle>? textStyleMap,
     FWidgetStateMap<TextStyle?>? nullableTextStyleMap,
-    FGoldenNestedStyle Function(FGoldenNestedStyle)? nestedStyle,
+    FGoldenNestedStyle Function(FGoldenNestedStyle style)? nestedStyle,
+    List<String>? list,
+    Set<String>? set,
+    Map<String, int>? map,
   }) => FGoldenStyle(
     someDouble: someDouble ?? this.someDouble,
     alignment: alignment ?? this.alignment,
@@ -139,6 +184,9 @@ extension $FGoldenStyleNonVirtual on FGoldenStyle {
     textStyleMap: textStyleMap ?? this.textStyleMap,
     nullableTextStyleMap: nullableTextStyleMap ?? this.nullableTextStyleMap,
     nestedStyle: nestedStyle != null ? nestedStyle(this.nestedStyle) : this.nestedStyle,
+    list: list ?? this.list,
+    set: set ?? this.set,
+    map: map ?? this.map,
   );
 
   /// Linearly interpolate between this and another [FGoldenStyle] using the given factor [t].
@@ -186,21 +234,10 @@ extension $FGoldenStyleNonVirtual on FGoldenStyle {
       TextStyle.lerp,
     ),
     nestedStyle: nestedStyle.lerp(other.nestedStyle, t),
+    list: t < 0.5 ? list : other.list,
+    set: t < 0.5 ? set : other.set,
+    map: t < 0.5 ? map : other.map,
   );
-}
-
-/// Provides [copyWith] and [lerp] methods.
-extension $FGoldenNestedStyleNonVirtual on FGoldenNestedStyle {
-  /// Returns a copy of this [FGoldenNestedStyle] with the given properties replaced.
-  ///
-  /// Consider [using the CLI to generate a style](https://forui.dev/themes#customization).
-  ///
-  @useResult
-  FGoldenNestedStyle copyWith() => FGoldenNestedStyle();
-
-  /// Linearly interpolate between this and another [FGoldenNestedStyle] using the given factor [t].
-  @useResult
-  FGoldenNestedStyle lerp(FGoldenNestedStyle other, double t) => FGoldenNestedStyle();
 }
 
 mixin _$FGoldenStyleFunctions on Diagnosticable {
@@ -229,6 +266,9 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
   FWidgetStateMap<TextStyle> get textStyleMap;
   FWidgetStateMap<TextStyle?> get nullableTextStyleMap;
   FGoldenNestedStyle get nestedStyle;
+  List<String> get list;
+  Set<String> get set;
+  Map<String, int> get map;
 
   /// Returns itself.
   ///
@@ -257,31 +297,34 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('someDouble', someDouble))
-      ..add(DiagnosticsProperty('alignment', alignment))
-      ..add(DiagnosticsProperty('alignmentGeometry', alignmentGeometry))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius))
-      ..add(DiagnosticsProperty('borderRadiusGeometry', borderRadiusGeometry))
-      ..add(DiagnosticsProperty('boxConstraints', boxConstraints))
-      ..add(DiagnosticsProperty('boxDecoration', boxDecoration))
-      ..add(DiagnosticsProperty('decoration', decoration))
-      ..add(ColorProperty('color', color))
-      ..add(DiagnosticsProperty('edgeInsets', edgeInsets))
-      ..add(DiagnosticsProperty('edgeInsetsDirectional', edgeInsetsDirectional))
-      ..add(DiagnosticsProperty('edgeInsetsGeometry', edgeInsetsGeometry))
-      ..add(DiagnosticsProperty('iconThemeData', iconThemeData))
-      ..add(DiagnosticsProperty('textStyle', textStyle))
-      ..add(IterableProperty('boxShadows', boxShadows))
-      ..add(IterableProperty('shadows', shadows))
-      ..add(DiagnosticsProperty('boxDecorationMap', boxDecorationMap))
-      ..add(DiagnosticsProperty('nullableBoxDecorationMap', nullableBoxDecorationMap))
-      ..add(DiagnosticsProperty('colorMap', colorMap))
-      ..add(DiagnosticsProperty('nullableColorMap', nullableColorMap))
-      ..add(DiagnosticsProperty('iconThemeDataMap', iconThemeDataMap))
-      ..add(DiagnosticsProperty('nullableIconThemeDataMap', nullableIconThemeDataMap))
-      ..add(DiagnosticsProperty('textStyleMap', textStyleMap))
-      ..add(DiagnosticsProperty('nullableTextStyleMap', nullableTextStyleMap))
-      ..add(DiagnosticsProperty('nestedStyle', nestedStyle));
+      ..add(DoubleProperty('someDouble', someDouble, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('alignment', alignment, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('alignmentGeometry', alignmentGeometry, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('borderRadius', borderRadius, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('borderRadiusGeometry', borderRadiusGeometry, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('boxConstraints', boxConstraints, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('boxDecoration', boxDecoration, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('decoration', decoration, level: DiagnosticLevel.debug))
+      ..add(ColorProperty('color', color, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('edgeInsets', edgeInsets, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('edgeInsetsDirectional', edgeInsetsDirectional, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('edgeInsetsGeometry', edgeInsetsGeometry, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('iconThemeData', iconThemeData, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('textStyle', textStyle, level: DiagnosticLevel.debug))
+      ..add(IterableProperty('boxShadows', boxShadows, level: DiagnosticLevel.debug))
+      ..add(IterableProperty('shadows', shadows, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('boxDecorationMap', boxDecorationMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('nullableBoxDecorationMap', nullableBoxDecorationMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('colorMap', colorMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('nullableColorMap', nullableColorMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('iconThemeDataMap', iconThemeDataMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('nullableIconThemeDataMap', nullableIconThemeDataMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('textStyleMap', textStyleMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('nullableTextStyleMap', nullableTextStyleMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('nestedStyle', nestedStyle, level: DiagnosticLevel.debug))
+      ..add(IterableProperty('list', list, level: DiagnosticLevel.debug))
+      ..add(IterableProperty('set', set, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('map', map, level: DiagnosticLevel.debug));
   }
 
   @override
@@ -312,7 +355,10 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
           nullableIconThemeDataMap == other.nullableIconThemeDataMap &&
           textStyleMap == other.textStyleMap &&
           nullableTextStyleMap == other.nullableTextStyleMap &&
-          nestedStyle == other.nestedStyle);
+          nestedStyle == other.nestedStyle &&
+          listEquals(list, other.list) &&
+          setEquals(set, other.set) &&
+          mapEquals(map, other.map));
   @override
   int get hashCode =>
       someDouble.hashCode ^
@@ -339,8 +385,27 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
       nullableIconThemeDataMap.hashCode ^
       textStyleMap.hashCode ^
       nullableTextStyleMap.hashCode ^
-      nestedStyle.hashCode;
+      nestedStyle.hashCode ^
+      const ListEquality().hash(list) ^
+      const SetEquality().hash(set) ^
+      const MapEquality().hash(map);
 }
+
+/// Provides [copyWith] and [lerp] methods.
+extension $FGoldenNestedStyleTransformations on FGoldenNestedStyle {
+  /// Returns a copy of this [FGoldenNestedStyle] with the given properties replaced.
+  ///
+  /// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).
+  ///
+  /// ## Parameters
+  @useResult
+  FGoldenNestedStyle copyWith() => FGoldenNestedStyle();
+
+  /// Linearly interpolate between this and another [FGoldenNestedStyle] using the given factor [t].
+  @useResult
+  FGoldenNestedStyle lerp(FGoldenNestedStyle other, double t) => FGoldenNestedStyle();
+}
+
 mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
   /// Returns itself.
   ///
@@ -378,7 +443,7 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
 ''';
 
 void main() {
-  test('StyleGenerator', () async {
+  test('style', () async {
     final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
     await readerWriter.testing.loadIsolateSources();
 

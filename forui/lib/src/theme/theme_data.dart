@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+
+part 'theme_data.style.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
@@ -19,20 +22,25 @@ import 'package:forui/forui.dart';
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
 /// provided by the [colors], [typography], and [style].
-final class FThemeData with Diagnosticable {
+final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// A label that is used in the [toString] output. Intended to aid with identifying themes in debug output.
+  @override
   final String? debugLabel;
 
   /// The responsive breakpoints.
+  @override
   final FBreakpoints breakpoints;
 
   /// The color scheme. It is used to configure the colors of Forui widgets.
+  @override
   final FColors colors;
 
   /// The typography data. It is used to configure the [TextStyle]s of Forui widgets.
+  @override
   final FTypography typography;
 
   /// The style. It is used to configure the miscellaneous properties, such as border radii, of Forui widgets.
+  @override
   final FStyle style;
 
   /// The accordion style.
@@ -43,6 +51,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create accordion
   /// ```
+  @override
   final FAccordionStyle accordionStyle;
 
   /// The autocomplete style.
@@ -53,6 +62,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create autocomplete
   /// ```
+  @override
   final FAutocompleteStyle autocompleteStyle;
 
   /// The alert styles.
@@ -63,6 +73,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create alerts
   /// ```
+  @override
   final FAlertStyles alertStyles;
 
   /// The avatar style.
@@ -73,6 +84,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create avatar
   /// ```
+  @override
   final FAvatarStyle avatarStyle;
 
   /// The badge styles.
@@ -83,6 +95,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create badges
   /// ```
+  @override
   final FBadgeStyles badgeStyles;
 
   /// The bottom navigation bar style.
@@ -93,6 +106,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create bottom-navigation-bar
   /// ```
+  @override
   final FBottomNavigationBarStyle bottomNavigationBarStyle;
 
   /// The breadcrumb style.
@@ -103,6 +117,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create breadcrumb
   /// ```
+  @override
   final FBreadcrumbStyle breadcrumbStyle;
 
   /// The button styles.
@@ -113,6 +128,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create buttons
   /// ```
+  @override
   final FButtonStyles buttonStyles;
 
   /// The calendar style.
@@ -123,6 +139,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create calendar
   /// ```
+  @override
   final FCalendarStyle calendarStyle;
 
   /// The card style.
@@ -133,6 +150,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create card
   /// ```
+  @override
   final FCardStyle cardStyle;
 
   /// The checkbox style.
@@ -143,6 +161,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create checkbox
   /// ```
+  @override
   final FCheckboxStyle checkboxStyle;
 
   /// The date field style.
@@ -153,6 +172,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create date-field
   /// ```
+  @override
   final FDateFieldStyle dateFieldStyle;
 
   /// The dialog style.
@@ -163,6 +183,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create dialog
   /// ```
+  @override
   final FDialogStyle dialogStyle;
 
   /// The divider styles.
@@ -173,6 +194,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create dividers
   /// ```
+  @override
   final FDividerStyles dividerStyles;
 
   /// The header styles.
@@ -183,6 +205,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create headers
   /// ```
+  @override
   final FHeaderStyles headerStyles;
 
   /// The item style.
@@ -192,6 +215,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create item
   /// ```
+  @override
   final FItemStyle itemStyle;
 
   /// The item group style.
@@ -201,6 +225,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create item-group
   /// ```
+  @override
   final FItemGroupStyle itemGroupStyle;
 
   /// The label styles.
@@ -211,6 +236,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create labels
   /// ```
+  @override
   final FLabelStyles labelStyles;
 
   /// The line calendar style.
@@ -221,6 +247,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create line-calendar
   /// ```
+  @override
   final FLineCalendarStyle lineCalendarStyle;
 
   /// The multi-select style.
@@ -230,6 +257,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create multi-select
   /// ```
+  @override
   final FMultiSelectStyle multiSelectStyle;
 
   /// The pagination style.
@@ -240,6 +268,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create pagination
   /// ```
+  @override
   final FPaginationStyle paginationStyle;
 
   /// The picker's style.
@@ -250,6 +279,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create picker
   /// ```
+  @override
   final FPickerStyle pickerStyle;
 
   /// The popover's style.
@@ -260,6 +290,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create popover
   /// ```
+  @override
   final FPopoverStyle popoverStyle;
 
   /// The popover menu's style.
@@ -270,6 +301,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create popover-menu
   /// ```
+  @override
   final FPopoverMenuStyle popoverMenuStyle;
 
   /// The progress styles.
@@ -280,6 +312,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create progresses
   /// ```
+  @override
   final FProgressStyles progressStyles;
 
   /// The radio style.
@@ -290,6 +323,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create radio
   /// ```
+  @override
   final FRadioStyle radioStyle;
 
   /// The resizable style.
@@ -300,6 +334,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create resizable
   /// ```
+  @override
   final FResizableStyle resizableStyle;
 
   /// The scaffold style.
@@ -310,6 +345,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create scaffold
   /// ```
+  @override
   final FScaffoldStyle scaffoldStyle;
 
   /// The select style.
@@ -320,6 +356,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create select
   /// ```
+  @override
   final FSelectStyle selectStyle;
 
   /// The select group style.
@@ -330,6 +367,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create select-group
   /// ```
+  @override
   final FSelectGroupStyle selectGroupStyle;
 
   /// The select menu tile style.
@@ -340,6 +378,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create select-menu-tile
   /// ```
+  @override
   final FSelectMenuTileStyle selectMenuTileStyle;
 
   /// The sheet style.
@@ -350,6 +389,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create sheet
   /// ```
+  @override
   final FSheetStyle sheetStyle;
 
   /// The sidebar style.
@@ -360,6 +400,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
+  @override
   final FSidebarStyle sidebarStyle;
 
   /// The slider styles.
@@ -370,6 +411,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create sliders
   /// ```
+  @override
   final FSliderStyles sliderStyles;
 
   /// The toaster style.
@@ -380,6 +422,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create toaster
   /// ```
+  @override
   final FToasterStyle toasterStyle;
 
   /// The switch style.
@@ -390,6 +433,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create switch
   /// ```
+  @override
   final FSwitchStyle switchStyle;
 
   /// The tabs styles.
@@ -400,6 +444,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create tabs
   /// ```
+  @override
   final FTabsStyle tabsStyle;
 
   /// The tappable style.
@@ -410,6 +455,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create tappable
   /// ```
+  @override
   final FTappableStyle tappableStyle;
 
   /// The text field style.
@@ -420,6 +466,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create text-field
   /// ```
+  @override
   final FTextFieldStyle textFieldStyle;
 
   /// The tile's style.
@@ -430,6 +477,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create tile
   /// ```
+  @override
   final FTileStyle tileStyle;
 
   /// The tile group's style.
@@ -440,6 +488,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create tile-group
   /// ```
+  @override
   final FTileGroupStyle tileGroupStyle;
 
   /// The time field's style.
@@ -450,6 +499,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create time-field
   /// ```
+  @override
   final FTimeFieldStyle timeFieldStyle;
 
   /// The time picker style.
@@ -460,6 +510,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create time-picker
   /// ```
+  @override
   final FTimePickerStyle timePickerStyle;
 
   /// The tooltip style.
@@ -470,6 +521,7 @@ final class FThemeData with Diagnosticable {
   /// ```shell
   /// dart run forui style create tooltip
   /// ```
+  @override
   final FTooltipStyle tooltipStyle;
 
   final Map<Object, ThemeExtension<dynamic>> _extensions;
@@ -527,8 +579,8 @@ final class FThemeData with Diagnosticable {
     FTooltipStyle? tooltipStyle,
     Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
-    typography = typography ?? FTypography.inherit(colors: colors);
-    style = style ?? FStyle.inherit(colors: colors, typography: typography);
+    typography ??= FTypography.inherit(colors: colors);
+    style ??= FStyle.inherit(colors: colors, typography: typography);
     return FThemeData._(
       debugLabel: debugLabel,
       breakpoints: breakpoints,
@@ -593,6 +645,63 @@ final class FThemeData with Diagnosticable {
       extensions: Map.unmodifiable({for (final extension in extensions) extension.type: extension}),
     );
   }
+
+  /// Creates a linear interpolation between two [FThemeData] using the given factor [t].
+  factory FThemeData.lerp(FThemeData a, FThemeData b, double t) => FThemeData(
+    debugLabel: t < 0.5 ? a.debugLabel : b.debugLabel,
+    breakpoints: t < 0.5 ? a.breakpoints : b.breakpoints,
+    colors: FColors.lerp(a.colors, b.colors, t),
+    typography: FTypography.lerp(a.typography, b.typography, t),
+    style: a.style.lerp(b.style, t),
+    accordionStyle: a.accordionStyle.lerp(b.accordionStyle, t),
+    autocompleteStyle: a.autocompleteStyle.lerp(b.autocompleteStyle, t),
+    alertStyles: a.alertStyles.lerp(b.alertStyles, t),
+    avatarStyle: a.avatarStyle.lerp(b.avatarStyle, t),
+    badgeStyles: a.badgeStyles.lerp(b.badgeStyles, t),
+    bottomNavigationBarStyle: a.bottomNavigationBarStyle.lerp(b.bottomNavigationBarStyle, t),
+    breadcrumbStyle: a.breadcrumbStyle.lerp(b.breadcrumbStyle, t),
+    buttonStyles: a.buttonStyles.lerp(b.buttonStyles, t),
+    calendarStyle: a.calendarStyle.lerp(b.calendarStyle, t),
+    cardStyle: a.cardStyle.lerp(b.cardStyle, t),
+    checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
+    dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
+    dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
+    dividerStyles: a.dividerStyles.lerp(b.dividerStyles, t),
+    headerStyles: a.headerStyles.lerp(b.headerStyles, t),
+    itemStyle: a.itemStyle.lerp(b.itemStyle, t),
+    itemGroupStyle: a.itemGroupStyle.lerp(b.itemGroupStyle, t),
+    labelStyles: a.labelStyles.lerp(b.labelStyles, t),
+    lineCalendarStyle: a.lineCalendarStyle.lerp(b.lineCalendarStyle, t),
+    multiSelectStyle: a.multiSelectStyle.lerp(b.multiSelectStyle, t),
+    paginationStyle: a.paginationStyle.lerp(b.paginationStyle, t),
+    pickerStyle: a.pickerStyle.lerp(b.pickerStyle, t),
+    popoverStyle: a.popoverStyle.lerp(b.popoverStyle, t),
+    popoverMenuStyle: a.popoverMenuStyle.lerp(b.popoverMenuStyle, t),
+    progressStyles: a.progressStyles.lerp(b.progressStyles, t),
+    radioStyle: a.radioStyle.lerp(b.radioStyle, t),
+    resizableStyle: a.resizableStyle.lerp(b.resizableStyle, t),
+    scaffoldStyle: a.scaffoldStyle.lerp(b.scaffoldStyle, t),
+    selectStyle: a.selectStyle.lerp(b.selectStyle, t),
+    selectGroupStyle: a.selectGroupStyle.lerp(b.selectGroupStyle, t),
+    selectMenuTileStyle: a.selectMenuTileStyle.lerp(b.selectMenuTileStyle, t),
+    sheetStyle: a.sheetStyle.lerp(b.sheetStyle, t),
+    sidebarStyle: a.sidebarStyle.lerp(b.sidebarStyle, t),
+    sliderStyles: a.sliderStyles.lerp(b.sliderStyles, t),
+    toasterStyle: a.toasterStyle.lerp(b.toasterStyle, t),
+    switchStyle: a.switchStyle.lerp(b.switchStyle, t),
+    tabsStyle: a.tabsStyle.lerp(b.tabsStyle, t),
+    tappableStyle: a.tappableStyle.lerp(b.tappableStyle, t),
+    textFieldStyle: a.textFieldStyle.lerp(b.textFieldStyle, t),
+    tileStyle: a.tileStyle.lerp(b.tileStyle, t),
+    tileGroupStyle: a.tileGroupStyle.lerp(b.tileGroupStyle, t),
+    timeFieldStyle: a.timeFieldStyle.lerp(b.timeFieldStyle, t),
+    timePickerStyle: a.timePickerStyle.lerp(b.timePickerStyle, t),
+    tooltipStyle: a.tooltipStyle.lerp(b.tooltipStyle, t),
+    // Copied from Flutter's [ThemeData].
+    extensions: (a._extensions.map(
+      (id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)),
+    )..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key)))).values,
+  );
 
   FThemeData._({
     required this.debugLabel,
@@ -698,7 +807,8 @@ final class FThemeData with Diagnosticable {
   /// All [ThemeExtension]s defined in this theme.
   ///
   /// {@macro forui.theme.FThemeData.extension}
-  Iterable<ThemeExtension<dynamic>> get extensions => _extensions.values;
+  @override
+  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 
   /// Converts this [FThemeData] to a Material [ThemeData] on a best-effort basis.
   ///
@@ -1090,260 +1200,110 @@ final class FThemeData with Diagnosticable {
   ///```
   @useResult
   FThemeData copyWith({
-    FAccordionStyle? accordionStyle,
-    FAutocompleteStyle? autocompleteStyle,
-    FAlertStyles? alertStyles,
-    FAvatarStyle? avatarStyle,
-    FBadgeStyles? badgeStyles,
-    FBottomNavigationBarStyle? bottomNavigationBarStyle,
-    FBreadcrumbStyle? breadcrumbStyle,
-    FButtonStyles? buttonStyles,
-    FCalendarStyle? calendarStyle,
-    FCardStyle? cardStyle,
-    FCheckboxStyle? checkboxStyle,
-    FDateFieldStyle? dateFieldStyle,
-    FDialogStyle? dialogStyle,
-    FDividerStyles? dividerStyles,
-    FHeaderStyles? headerStyles,
-    FItemStyle? itemStyle,
-    FItemGroupStyle? itemGroupStyle,
-    FLabelStyles? labelStyles,
-    FLineCalendarStyle? lineCalendarStyle,
-    FMultiSelectStyle? multiSelectStyle,
-    FPaginationStyle? paginationStyle,
-    FPickerStyle? pickerStyle,
-    FPopoverStyle? popoverStyle,
-    FPopoverMenuStyle? popoverMenuStyle,
-    FProgressStyles? progressStyles,
-    FRadioStyle? radioStyle,
-    FResizableStyle? resizableStyle,
-    FScaffoldStyle? scaffoldStyle,
-    FSelectStyle? selectStyle,
-    FSelectGroupStyle? selectGroupStyle,
-    FSelectMenuTileStyle? selectMenuTileStyle,
-    FSheetStyle? sheetStyle,
-    FSidebarStyle? sidebarStyle,
-    FSliderStyles? sliderStyles,
-    FToasterStyle? toasterStyle,
-    FSwitchStyle? switchStyle,
-    FTabsStyle? tabsStyle,
-    FTappableStyle? tappableStyle,
-    FTextFieldStyle? textFieldStyle,
-    FTileStyle? tileStyle,
-    FTileGroupStyle? tileGroupStyle,
-    FTimeFieldStyle? timeFieldStyle,
-    FTooltipStyle? tooltipStyle,
+    String? debugLabel,
+    FBreakpoints? breakpoints,
+    FColors? colors,
+    FTypography? typography,
+    FStyle Function(FStyle style)? style,
+    FAccordionStyle Function(FAccordionStyle style)? accordionStyle,
+    FAutocompleteStyle Function(FAutocompleteStyle style)? autocompleteStyle,
+    FAlertStyles Function(FAlertStyles style)? alertStyles,
+    FAvatarStyle Function(FAvatarStyle style)? avatarStyle,
+    FBadgeStyles Function(FBadgeStyles style)? badgeStyles,
+    FBottomNavigationBarStyle Function(FBottomNavigationBarStyle style)? bottomNavigationBarStyle,
+    FBreadcrumbStyle Function(FBreadcrumbStyle style)? breadcrumbStyle,
+    FButtonStyles Function(FButtonStyles style)? buttonStyles,
+    FCalendarStyle Function(FCalendarStyle style)? calendarStyle,
+    FCardStyle Function(FCardStyle style)? cardStyle,
+    FCheckboxStyle Function(FCheckboxStyle style)? checkboxStyle,
+    FDateFieldStyle Function(FDateFieldStyle style)? dateFieldStyle,
+    FDialogStyle Function(FDialogStyle style)? dialogStyle,
+    FDividerStyles Function(FDividerStyles style)? dividerStyles,
+    FHeaderStyles Function(FHeaderStyles style)? headerStyles,
+    FItemStyle Function(FItemStyle style)? itemStyle,
+    FItemGroupStyle Function(FItemGroupStyle style)? itemGroupStyle,
+    FLabelStyles Function(FLabelStyles style)? labelStyles,
+    FLineCalendarStyle Function(FLineCalendarStyle style)? lineCalendarStyle,
+    FMultiSelectStyle Function(FMultiSelectStyle style)? multiSelectStyle,
+    FPaginationStyle Function(FPaginationStyle style)? paginationStyle,
+    FPickerStyle Function(FPickerStyle style)? pickerStyle,
+    FPopoverStyle Function(FPopoverStyle style)? popoverStyle,
+    FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
+    FProgressStyles Function(FProgressStyles style)? progressStyles,
+    FRadioStyle Function(FRadioStyle style)? radioStyle,
+    FResizableStyle Function(FResizableStyle style)? resizableStyle,
+    FScaffoldStyle Function(FScaffoldStyle style)? scaffoldStyle,
+    FSelectStyle Function(FSelectStyle style)? selectStyle,
+    FSelectGroupStyle Function(FSelectGroupStyle style)? selectGroupStyle,
+    FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? selectMenuTileStyle,
+    FSheetStyle Function(FSheetStyle style)? sheetStyle,
+    FSidebarStyle Function(FSidebarStyle style)? sidebarStyle,
+    FSliderStyles Function(FSliderStyles style)? sliderStyles,
+    FToasterStyle Function(FToasterStyle style)? toasterStyle,
+    FSwitchStyle Function(FSwitchStyle style)? switchStyle,
+    FTabsStyle Function(FTabsStyle style)? tabsStyle,
+    FTappableStyle Function(FTappableStyle style)? tappableStyle,
+    FTextFieldStyle Function(FTextFieldStyle style)? textFieldStyle,
+    FTileStyle Function(FTileStyle style)? tileStyle,
+    FTileGroupStyle Function(FTileGroupStyle style)? tileGroupStyle,
+    FTimeFieldStyle Function(FTimeFieldStyle style)? timeFieldStyle,
+    FTimePickerStyle Function(FTimePickerStyle style)? timePickerStyle,
+    FTooltipStyle Function(FTooltipStyle style)? tooltipStyle,
     Iterable<ThemeExtension<dynamic>>? extensions,
   }) => FThemeData(
-    colors: colors,
-    typography: typography,
-    style: style,
-    accordionStyle: accordionStyle ?? this.accordionStyle,
-    autocompleteStyle: autocompleteStyle ?? this.autocompleteStyle,
-    alertStyles: alertStyles ?? this.alertStyles,
-    avatarStyle: avatarStyle ?? this.avatarStyle,
-    badgeStyles: badgeStyles ?? this.badgeStyles,
-    bottomNavigationBarStyle: bottomNavigationBarStyle ?? this.bottomNavigationBarStyle,
-    breadcrumbStyle: breadcrumbStyle ?? this.breadcrumbStyle,
-    buttonStyles: buttonStyles ?? this.buttonStyles,
-    calendarStyle: calendarStyle ?? this.calendarStyle,
-    cardStyle: cardStyle ?? this.cardStyle,
-    checkboxStyle: checkboxStyle ?? this.checkboxStyle,
-    dateFieldStyle: dateFieldStyle ?? this.dateFieldStyle,
-    dialogStyle: dialogStyle ?? this.dialogStyle,
-    dividerStyles: dividerStyles ?? this.dividerStyles,
-    headerStyles: headerStyles ?? this.headerStyles,
-    itemStyle: itemStyle ?? this.itemStyle,
-    itemGroupStyle: itemGroupStyle ?? this.itemGroupStyle,
-    labelStyles: labelStyles ?? this.labelStyles,
-    lineCalendarStyle: lineCalendarStyle ?? this.lineCalendarStyle,
-    multiSelectStyle: multiSelectStyle ?? this.multiSelectStyle,
-    paginationStyle: paginationStyle ?? this.paginationStyle,
-    pickerStyle: pickerStyle ?? this.pickerStyle,
-    popoverStyle: popoverStyle ?? this.popoverStyle,
-    popoverMenuStyle: popoverMenuStyle ?? this.popoverMenuStyle,
-    progressStyles: progressStyles ?? this.progressStyles,
-    radioStyle: radioStyle ?? this.radioStyle,
-    resizableStyle: resizableStyle ?? this.resizableStyle,
-    scaffoldStyle: scaffoldStyle ?? this.scaffoldStyle,
-    selectStyle: selectStyle ?? this.selectStyle,
-    selectGroupStyle: selectGroupStyle ?? this.selectGroupStyle,
-    selectMenuTileStyle: selectMenuTileStyle ?? this.selectMenuTileStyle,
-    sheetStyle: sheetStyle ?? this.sheetStyle,
-    sidebarStyle: sidebarStyle ?? this.sidebarStyle,
-    sliderStyles: sliderStyles ?? this.sliderStyles,
-    toasterStyle: toasterStyle ?? this.toasterStyle,
-    switchStyle: switchStyle ?? this.switchStyle,
-    tabsStyle: tabsStyle ?? this.tabsStyle,
-    tappableStyle: tappableStyle ?? this.tappableStyle,
-    textFieldStyle: textFieldStyle ?? this.textFieldStyle,
-    tileStyle: tileStyle ?? this.tileStyle,
-    tileGroupStyle: tileGroupStyle ?? this.tileGroupStyle,
-    timeFieldStyle: timeFieldStyle ?? this.timeFieldStyle,
-    tooltipStyle: tooltipStyle ?? this.tooltipStyle,
+    debugLabel: debugLabel ?? this.debugLabel,
+    breakpoints: breakpoints ?? this.breakpoints,
+    colors: colors ?? this.colors,
+    typography: typography ?? this.typography,
+    style: style != null ? style(this.style) : this.style,
+    accordionStyle: accordionStyle != null ? accordionStyle(this.accordionStyle) : this.accordionStyle,
+    autocompleteStyle: autocompleteStyle != null ? autocompleteStyle(this.autocompleteStyle) : this.autocompleteStyle,
+    alertStyles: alertStyles != null ? alertStyles(this.alertStyles) : this.alertStyles,
+    avatarStyle: avatarStyle != null ? avatarStyle(this.avatarStyle) : this.avatarStyle,
+    badgeStyles: badgeStyles != null ? badgeStyles(this.badgeStyles) : this.badgeStyles,
+    bottomNavigationBarStyle: bottomNavigationBarStyle != null
+        ? bottomNavigationBarStyle(this.bottomNavigationBarStyle)
+        : this.bottomNavigationBarStyle,
+    breadcrumbStyle: breadcrumbStyle != null ? breadcrumbStyle(this.breadcrumbStyle) : this.breadcrumbStyle,
+    buttonStyles: buttonStyles != null ? buttonStyles(this.buttonStyles) : this.buttonStyles,
+    calendarStyle: calendarStyle != null ? calendarStyle(this.calendarStyle) : this.calendarStyle,
+    cardStyle: cardStyle != null ? cardStyle(this.cardStyle) : this.cardStyle,
+    checkboxStyle: checkboxStyle != null ? checkboxStyle(this.checkboxStyle) : this.checkboxStyle,
+    dateFieldStyle: dateFieldStyle != null ? dateFieldStyle(this.dateFieldStyle) : this.dateFieldStyle,
+    dialogStyle: dialogStyle != null ? dialogStyle(this.dialogStyle) : this.dialogStyle,
+    dividerStyles: dividerStyles != null ? dividerStyles(this.dividerStyles) : this.dividerStyles,
+    headerStyles: headerStyles != null ? headerStyles(this.headerStyles) : this.headerStyles,
+    itemStyle: itemStyle != null ? itemStyle(this.itemStyle) : this.itemStyle,
+    itemGroupStyle: itemGroupStyle != null ? itemGroupStyle(this.itemGroupStyle) : this.itemGroupStyle,
+    labelStyles: labelStyles != null ? labelStyles(this.labelStyles) : this.labelStyles,
+    lineCalendarStyle: lineCalendarStyle != null ? lineCalendarStyle(this.lineCalendarStyle) : this.lineCalendarStyle,
+    multiSelectStyle: multiSelectStyle != null ? multiSelectStyle(this.multiSelectStyle) : this.multiSelectStyle,
+    paginationStyle: paginationStyle != null ? paginationStyle(this.paginationStyle) : this.paginationStyle,
+    pickerStyle: pickerStyle != null ? pickerStyle(this.pickerStyle) : this.pickerStyle,
+    popoverStyle: popoverStyle != null ? popoverStyle(this.popoverStyle) : this.popoverStyle,
+    popoverMenuStyle: popoverMenuStyle != null ? popoverMenuStyle(this.popoverMenuStyle) : this.popoverMenuStyle,
+    progressStyles: progressStyles != null ? progressStyles(this.progressStyles) : this.progressStyles,
+    radioStyle: radioStyle != null ? radioStyle(this.radioStyle) : this.radioStyle,
+    resizableStyle: resizableStyle != null ? resizableStyle(this.resizableStyle) : this.resizableStyle,
+    scaffoldStyle: scaffoldStyle != null ? scaffoldStyle(this.scaffoldStyle) : this.scaffoldStyle,
+    selectStyle: selectStyle != null ? selectStyle(this.selectStyle) : this.selectStyle,
+    selectGroupStyle: selectGroupStyle != null ? selectGroupStyle(this.selectGroupStyle) : this.selectGroupStyle,
+    selectMenuTileStyle: selectMenuTileStyle != null
+        ? selectMenuTileStyle(this.selectMenuTileStyle)
+        : this.selectMenuTileStyle,
+    sheetStyle: sheetStyle != null ? sheetStyle(this.sheetStyle) : this.sheetStyle,
+    sidebarStyle: sidebarStyle != null ? sidebarStyle(this.sidebarStyle) : this.sidebarStyle,
+    sliderStyles: sliderStyles != null ? sliderStyles(this.sliderStyles) : this.sliderStyles,
+    toasterStyle: toasterStyle != null ? toasterStyle(this.toasterStyle) : this.toasterStyle,
+    switchStyle: switchStyle != null ? switchStyle(this.switchStyle) : this.switchStyle,
+    tabsStyle: tabsStyle != null ? tabsStyle(this.tabsStyle) : this.tabsStyle,
+    tappableStyle: tappableStyle != null ? tappableStyle(this.tappableStyle) : this.tappableStyle,
+    textFieldStyle: textFieldStyle != null ? textFieldStyle(this.textFieldStyle) : this.textFieldStyle,
+    tileStyle: tileStyle != null ? tileStyle(this.tileStyle) : this.tileStyle,
+    tileGroupStyle: tileGroupStyle != null ? tileGroupStyle(this.tileGroupStyle) : this.tileGroupStyle,
+    timeFieldStyle: timeFieldStyle != null ? timeFieldStyle(this.timeFieldStyle) : this.timeFieldStyle,
+    timePickerStyle: timePickerStyle != null ? timePickerStyle(this.timePickerStyle) : this.timePickerStyle,
+    tooltipStyle: tooltipStyle != null ? tooltipStyle(this.tooltipStyle) : this.tooltipStyle,
     extensions: extensions ?? this.extensions,
   );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(StringProperty('debugLabel', debugLabel, showName: false))
-      ..add(DiagnosticsProperty('breakpoints', breakpoints))
-      ..add(DiagnosticsProperty('color', colors))
-      ..add(DiagnosticsProperty('text', typography))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('accordionStyle', accordionStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('autocompleteStyle', autocompleteStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('alertStyles', alertStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('avatarStyle', avatarStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('badgeStyles', badgeStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('bottomNavigationBarStyle', bottomNavigationBarStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('breadcrumbStyle', breadcrumbStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('buttonStyles', buttonStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('calendarStyle', calendarStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('cardStyle', cardStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('checkboxStyle', checkboxStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('dateFieldStyle', dateFieldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('dialogStyle', dialogStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('dividerStyles', dividerStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('headerStyles', headerStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('itemStyle', itemStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('itemGroupStyle', itemGroupStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('labelStyles', labelStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('lineCalendarStyle', lineCalendarStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('multiSelectStyle', multiSelectStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('paginationStyle', paginationStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('pickerStyle', pickerStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('popoverStyle', popoverStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('progressStyles', progressStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('radioStyle', radioStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('resizableStyle', resizableStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('scaffoldStyle', scaffoldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('selectStyle', selectStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('selectGroupStyle', selectGroupStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('selectMenuTileStyle', selectMenuTileStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('sheetStyle', sheetStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('sliderStyles', sliderStyles, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('sidebarStyle', sidebarStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('toasterStyle', toasterStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('switchStyle', switchStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tabsStyle', tabsStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tappableStyle', tappableStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tileStyle', tileStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tileGroupStyle', tileGroupStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('timeFieldStyle', timeFieldStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('timePickerStyle', timePickerStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('tooltipStyle', tooltipStyle, level: DiagnosticLevel.debug))
-      ..add(IterableProperty('extensions', extensions, level: DiagnosticLevel.debug));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FThemeData &&
-          runtimeType == other.runtimeType &&
-          breakpoints == other.breakpoints &&
-          colors == other.colors &&
-          typography == other.typography &&
-          style == other.style &&
-          accordionStyle == other.accordionStyle &&
-          autocompleteStyle == other.autocompleteStyle &&
-          alertStyles == other.alertStyles &&
-          avatarStyle == other.avatarStyle &&
-          badgeStyles == other.badgeStyles &&
-          bottomNavigationBarStyle == other.bottomNavigationBarStyle &&
-          breadcrumbStyle == other.breadcrumbStyle &&
-          buttonStyles == other.buttonStyles &&
-          calendarStyle == other.calendarStyle &&
-          cardStyle == other.cardStyle &&
-          checkboxStyle == other.checkboxStyle &&
-          dateFieldStyle == other.dateFieldStyle &&
-          dialogStyle == other.dialogStyle &&
-          dividerStyles == other.dividerStyles &&
-          headerStyles == other.headerStyles &&
-          itemStyle == other.itemStyle &&
-          itemGroupStyle == other.itemGroupStyle &&
-          labelStyles == other.labelStyles &&
-          lineCalendarStyle == other.lineCalendarStyle &&
-          multiSelectStyle == other.multiSelectStyle &&
-          paginationStyle == other.paginationStyle &&
-          pickerStyle == other.pickerStyle &&
-          popoverStyle == other.popoverStyle &&
-          popoverMenuStyle == other.popoverMenuStyle &&
-          progressStyles == other.progressStyles &&
-          radioStyle == other.radioStyle &&
-          resizableStyle == other.resizableStyle &&
-          scaffoldStyle == other.scaffoldStyle &&
-          selectStyle == other.selectStyle &&
-          selectGroupStyle == other.selectGroupStyle &&
-          selectMenuTileStyle == other.selectMenuTileStyle &&
-          sheetStyle == other.sheetStyle &&
-          sidebarStyle == other.sidebarStyle &&
-          sliderStyles == other.sliderStyles &&
-          toasterStyle == other.toasterStyle &&
-          switchStyle == other.switchStyle &&
-          tabsStyle == other.tabsStyle &&
-          tappableStyle == other.tappableStyle &&
-          textFieldStyle == other.textFieldStyle &&
-          tileStyle == other.tileStyle &&
-          tileGroupStyle == other.tileGroupStyle &&
-          timeFieldStyle == other.timeFieldStyle &&
-          timePickerStyle == other.timePickerStyle &&
-          tooltipStyle == other.tooltipStyle &&
-          mapEquals(_extensions, other._extensions);
-
-  @override
-  int get hashCode =>
-      breakpoints.hashCode ^
-      colors.hashCode ^
-      typography.hashCode ^
-      style.hashCode ^
-      accordionStyle.hashCode ^
-      autocompleteStyle.hashCode ^
-      alertStyles.hashCode ^
-      avatarStyle.hashCode ^
-      badgeStyles.hashCode ^
-      bottomNavigationBarStyle.hashCode ^
-      breadcrumbStyle.hashCode ^
-      buttonStyles.hashCode ^
-      calendarStyle.hashCode ^
-      cardStyle.hashCode ^
-      checkboxStyle.hashCode ^
-      dateFieldStyle.hashCode ^
-      dialogStyle.hashCode ^
-      dividerStyles.hashCode ^
-      headerStyles.hashCode ^
-      itemStyle.hashCode ^
-      itemGroupStyle.hashCode ^
-      labelStyles.hashCode ^
-      lineCalendarStyle.hashCode ^
-      multiSelectStyle.hashCode ^
-      paginationStyle.hashCode ^
-      pickerStyle.hashCode ^
-      popoverStyle.hashCode ^
-      popoverMenuStyle.hashCode ^
-      progressStyles.hashCode ^
-      radioStyle.hashCode ^
-      resizableStyle.hashCode ^
-      scaffoldStyle.hashCode ^
-      selectStyle.hashCode ^
-      selectGroupStyle.hashCode ^
-      selectMenuTileStyle.hashCode ^
-      sheetStyle.hashCode ^
-      sidebarStyle.hashCode ^
-      sliderStyles.hashCode ^
-      toasterStyle.hashCode ^
-      switchStyle.hashCode ^
-      tabsStyle.hashCode ^
-      tappableStyle.hashCode ^
-      textFieldStyle.hashCode ^
-      tileStyle.hashCode ^
-      tileGroupStyle.hashCode ^
-      timeFieldStyle.hashCode ^
-      timePickerStyle.hashCode ^
-      tooltipStyle.hashCode ^
-      _extensions.hashCode;
 }

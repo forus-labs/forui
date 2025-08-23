@@ -66,18 +66,27 @@ class FunctionsMixin {
     final properties = fields
         .map(
           (field) => switch (field.type) {
-            _ when intType.isAssignableFromType(field.type) => "IntProperty('${field.name3}', ${field.name3})",
-            _ when doubleType.isAssignableFromType(field.type) => "DoubleProperty('${field.name3}', ${field.name3})",
+            _ when intType.isAssignableFromType(field.type) =>
+              "IntProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+            _ when doubleType.isAssignableFromType(field.type) =>
+              "DoubleProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
             _ when boolType.isAssignableFromType(field.type) =>
-              "FlagProperty('${field.name3}', value: ${field.name3}, ifTrue: '${field.name3}')",
-            _ when string.isAssignableFromType(field.type) => "StringProperty('${field.name3}', ${field.name3})",
-            _ when color.isAssignableFromType(field.type) => "ColorProperty('${field.name3}', ${field.name3})",
-            _ when iconData.isAssignableFromType(field.type) => "IconDataProperty('${field.name3}', ${field.name3})",
-            _ when enumeration.isAssignableFromType(field.type) => "EnumProperty('${field.name3}', ${field.name3})",
-            _ when iterable.isAssignableFromType(field.type) => "IterableProperty('${field.name3}', ${field.name3})",
-            _ when field.type.isDartCoreFunction => "ObjectFlagProperty.has('${field.name3}', ${field.name3})",
-            _ when field.type is RecordType => "StringProperty('${field.name3}', ${field.name3}.toString())",
-            _ => "DiagnosticsProperty('${field.name3}', ${field.name3})",
+              "FlagProperty('${field.name3}', value: ${field.name3}, ifTrue: '${field.name3}', level: DiagnosticLevel.debug)",
+            _ when string.isAssignableFromType(field.type) =>
+              "StringProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+            _ when color.isAssignableFromType(field.type) =>
+              "ColorProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+            _ when iconData.isAssignableFromType(field.type) =>
+              "IconDataProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+            _ when enumeration.isAssignableFromType(field.type) =>
+              "EnumProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+            _ when iterable.isAssignableFromType(field.type) =>
+              "IterableProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+            _ when field.type.isDartCoreFunction =>
+              "ObjectFlagProperty.has('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+            _ when field.type is RecordType =>
+              "StringProperty('${field.name3}', ${field.name3}.toString(), level: DiagnosticLevel.debug)",
+            _ => "DiagnosticsProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
           },
         )
         .toList();
@@ -109,6 +118,7 @@ class FunctionsMixin {
 
   /// Generates an `operator==` method.
   Method get _equals {
+    // DO NOT REORDER, we need the list/set pattern to dominate the iterable pattern.
     String generate(FieldElement2 field) => switch (field.type) {
       _ when list.isAssignableFromType(field.type) => 'listEquals(${field.name3}, other.${field.name3})',
       _ when set.isAssignableFromType(field.type) => 'setEquals(${field.name3}, other.${field.name3})',
@@ -136,6 +146,7 @@ class FunctionsMixin {
 
   /// Generates a `hashCode` getter.
   Method get _hashCode {
+    // DO NOT REORDER, we need the list/set pattern to dominate the iterable pattern.
     String generate(FieldElement2 field) => switch (field.type) {
       _ when list.isAssignableFromType(field.type) => 'const ListEquality().hash(${field.name3})',
       _ when set.isAssignableFromType(field.type) => 'const SetEquality().hash(${field.name3})',

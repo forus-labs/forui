@@ -4,7 +4,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:forui_internal_gen/src/source/functions_mixin.dart';
-import 'package:forui_internal_gen/src/source/non_virtual_extension.dart';
+import 'package:forui_internal_gen/src/source/transformations_extension.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -16,64 +16,78 @@ class StyleGenerator extends Generator {
 
   @override
   Future<String?> generate(LibraryReader library, BuildStep step) async {
-    final classes = library.classes
-        .where((type) => type.name3 != null && _style.hasMatch(type.name3!) && !type.isSealed && !type.isAbstract)
-        .toList();
+    final generated = <String>[];
+    for (final type in library.classes) {
+      if (type.name3 == null && type.isSealed || type.isAbstract) {
+        continue;
+      }
 
-    final extensions = classes.map(
-      (type) => _emitter.visitExtension(StyleNonVirtualExtension(type).generate()).toString(),
-    );
-    final mixins = classes.map(
-      (type) => _emitter
-          .visitMixin(
-            FunctionsMixin(type, [
-              '/// Returns itself.',
-              '/// ',
-              "/// Allows [${type.name3}] to replace functions that accept and return a [${type.name3}], such as a style's",
-              '/// `copyWith(...)` function.',
-              '/// ',
-              '/// ## Example',
-              '/// ',
-              '/// Given:',
-              '/// ```dart',
-              '/// void copyWith(${type.name3} Function(${type.name3}) nestedStyle) {}',
-              '/// ```',
-              '/// ',
-              '/// The following:',
-              '/// ```dart',
-              '/// copyWith((style) => ${type.name3}(...));',
-              '/// ```',
-              '/// ',
-              '/// Can be replaced with:',
-              '/// ```dart',
-              '/// copyWith(${type.name3}(...));',
-              '/// ```',
-            ]).generate(),
+      if (_style.hasMatch(type.name3!)) {
+        generated
+          ..add(
+            _emitter
+                .visitExtension(
+                  StyleTransformExtension(
+                    type,
+                    copyWithDocsHeader: [
+                      '/// Returns a copy of this [${type.name3!}] with the given properties replaced.',
+                      '///',
+                      '/// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).',
+                      '///',
+                    ],
+                  ).generate(),
+                )
+                .toString(),
           )
-          .toString(),
-    );
+          ..add(
+            _emitter
+                .visitMixin(
+                  FunctionsMixin(type, [
+                    '/// Returns itself.',
+                    '/// ',
+                    "/// Allows [${type.name3}] to replace functions that accept and return a [${type.name3}], such as a style's",
+                    '/// `copyWith(...)` function.',
+                    '/// ',
+                    '/// ## Example',
+                    '/// ',
+                    '/// Given:',
+                    '/// ```dart',
+                    '/// void copyWith(${type.name3} Function(${type.name3}) nestedStyle) {}',
+                    '/// ```',
+                    '/// ',
+                    '/// The following:',
+                    '/// ```dart',
+                    '/// copyWith((style) => ${type.name3}(...));',
+                    '/// ```',
+                    '/// ',
+                    '/// Can be replaced with:',
+                    '/// ```dart',
+                    '/// copyWith(${type.name3}(...));',
+                    '/// ```',
+                  ]).generate(),
+                )
+                .toString(),
+          );
+      } else if (type.name3 == 'FThemeData') {
+        generated.add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
+      }
+    }
 
-    return [...extensions, ...mixins].join('\n');
+    return generated.join('\n');
   }
 }
 
 /// Generates a style non virtual extension.
-class StyleNonVirtualExtension extends NonVirtualExtension {
-  /// Creates a [StyleNonVirtualExtension].
-  StyleNonVirtualExtension(ClassElement2 element)
-    : super(element, [
-        '/// Returns a copy of this [${element.name3!}] with the given properties replaced.',
-        '///',
-        '/// Consider [using the CLI to generate a style](https://forui.dev/themes#customization).',
-        '///',
-      ]);
+class StyleTransformExtension extends TransformationsExtension {
+  /// Creates a [StyleTransformExtension].
+  StyleTransformExtension(super.element, {required super.copyWithDocsHeader});
 
   /// Generates an extension that provides non virtual methods.
   @override
   Extension generate() =>
       (ExtensionBuilder()
             ..docs.addAll(['/// Provides [copyWith] and [lerp] methods.'])
-            ..name = '\$${element.name3!}NonVirtual'
+            ..name = '\$${element.name3!}Transformations'
             ..on = refer(element.name3!)
             ..methods.addAll([copyWith, _lerp]))
           .build();
@@ -83,6 +97,7 @@ class StyleNonVirtualExtension extends NonVirtualExtension {
       final type = field.type;
       final name = field.name3!;
 
+      // DO NOT REORDER, we need the subclass (Alignment) to dominate the superclass (AlignmentGeometry) pattern.
       return switch (type) {
         _ when doubleType.isAssignableFromType(type) => 'lerpDouble($name, other.$name, t) ?? $name',
         //
@@ -112,7 +127,7 @@ class StyleNonVirtualExtension extends NonVirtualExtension {
         _ when list.isAssignableFromType(type) && type is ParameterizedType => switch (type.typeArguments.single) {
           final t when boxShadow.isAssignableFromType(t) => 'BoxShadow.lerpList($name, other.$name, t) ?? $name',
           final t when shadow.isAssignableFromType(t) => 'Shadow.lerpList($name, other.$name, t) ?? $name',
-          _ => name,
+          _ => 't < 0.5 ? $name : other.$name',
         },
         // FWidgetStateMap<T>/FWidgetStateMap<T?>
         _ when fWidgetStateMap.isAssignableFromType(type) && type is ParameterizedType => switch (type
@@ -137,15 +152,15 @@ class StyleNonVirtualExtension extends NonVirtualExtension {
           final t when textStyle.isAssignableFromType(t) =>
             'FWidgetStateMap.lerpWhere($name, other.$name, t, TextStyle.lerp)',
           //
-          _ => name,
+          _ => 't < 0.5 ? $name : other.$name',
         },
         // Nested styles
         _ when nestedStyle(type) => '$name.lerp(other.$name, t)',
-        _ => name,
+        _ => 't < 0.5 ? $name : other.$name',
       };
     }
 
-    // Generate field assignments for the lerp method body
+    // Generate field assignments for the lerp method body.
     final assignments = [for (final field in fields) '${field.name3}: ${invocation(field)},'].join();
 
     return Method(

@@ -257,5 +257,61 @@ void main() {
         expect(copy.hashCode, isNot(typography.hashCode));
       });
     });
+
+    group('lerp(...)', () {
+      const typographyB = FTypography(
+        defaultFontFamily: 'Arial',
+        xs: TextStyle(fontSize: 10, height: 1.5, color: Colors.red),
+        sm: TextStyle(fontSize: 12, height: 1.75, color: Colors.green),
+        base: TextStyle(fontSize: 14, height: 2.0, color: Colors.blue),
+        lg: TextStyle(fontSize: 16, height: 2.25, color: Colors.yellow),
+        xl: TextStyle(fontSize: 18, height: 2.5, color: Colors.orange),
+        xl2: TextStyle(fontSize: 20, height: 2.75, color: Colors.purple),
+        xl3: TextStyle(fontSize: 22, height: 3.0, color: Colors.pink),
+        xl4: TextStyle(fontSize: 24, height: 3.25, color: Colors.brown),
+        xl5: TextStyle(fontSize: 26, height: 3.5, color: Colors.grey),
+        xl6: TextStyle(fontSize: 28, height: 3.75, color: Colors.teal),
+        xl7: TextStyle(fontSize: 30, height: 4.0, color: Colors.indigo),
+        xl8: TextStyle(fontSize: 32, height: 4.25, color: Colors.lime),
+      );
+
+      test('identical objects', () {
+        final result = FTypography.lerp(typography, typography, 0.5);
+        expect(result, typography);
+      });
+
+      test('interpolation at t=0', () {
+        final result = FTypography.lerp(typography, typographyB, 0.0);
+        expect(result.defaultFontFamily, typography.defaultFontFamily);
+        expect(result.xs, typography.xs);
+        expect(result.sm, typography.sm);
+        expect(result.base, typography.base);
+      });
+
+      test('interpolation at t=1', () {
+        final result = FTypography.lerp(typography, typographyB, 1.0);
+        expect(result.defaultFontFamily, typographyB.defaultFontFamily);
+        expect(result.xs, typographyB.xs);
+        expect(result.sm, typographyB.sm);
+        expect(result.base, typographyB.base);
+      });
+
+      test('interpolation at t=0.5', () {
+        final result = FTypography.lerp(typography, typographyB, 0.5);
+        expect(result.defaultFontFamily, typography.defaultFontFamily); // threshold-based
+        expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 0.5));
+        expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 0.5));
+        expect(result.base, TextStyle.lerp(typography.base, typographyB.base, 0.5));
+        expect(result.lg, TextStyle.lerp(typography.lg, typographyB.lg, 0.5));
+        expect(result.xl, TextStyle.lerp(typography.xl, typographyB.xl, 0.5));
+        expect(result.xl2, TextStyle.lerp(typography.xl2, typographyB.xl2, 0.5));
+        expect(result.xl3, TextStyle.lerp(typography.xl3, typographyB.xl3, 0.5));
+        expect(result.xl4, TextStyle.lerp(typography.xl4, typographyB.xl4, 0.5));
+        expect(result.xl5, TextStyle.lerp(typography.xl5, typographyB.xl5, 0.5));
+        expect(result.xl6, TextStyle.lerp(typography.xl6, typographyB.xl6, 0.5));
+        expect(result.xl7, TextStyle.lerp(typography.xl7, typographyB.xl7, 0.5));
+        expect(result.xl8, TextStyle.lerp(typography.xl8, typographyB.xl8, 0.5));
+      });
+    });
   });
 }

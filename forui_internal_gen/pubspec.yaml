@@ -18,8 +18,6 @@ dependencies:
   code_builder: ^4.10.0
   collection: ^1.18.0
   dart_style: ^3.0.1
-  flutter:
-    sdk: flutter
   meta: ^1.16.0
   source_gen: ^3.0.0
 

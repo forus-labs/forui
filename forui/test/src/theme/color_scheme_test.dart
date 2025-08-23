@@ -117,5 +117,67 @@ void main() {
         expect(copy.hashCode, isNot(scheme.hashCode));
       });
     });
+
+    group('lerp(...)', () {
+      const schemeB = FColors(
+        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        barrier: Colors.red,
+        background: Colors.white,
+        foreground: Colors.white70,
+        primary: Colors.blue,
+        primaryForeground: Colors.white,
+        secondary: Colors.green,
+        secondaryForeground: Colors.white60,
+        muted: Colors.grey,
+        mutedForeground: Colors.white54,
+        destructive: Colors.orange,
+        destructiveForeground: Colors.white38,
+        error: Colors.yellow,
+        errorForeground: Colors.white30,
+        border: Colors.purple,
+        hoverLighten: 0.1,
+        hoverDarken: 0.08,
+        disabledOpacity: 0.3,
+      );
+
+      test('identical objects', () {
+        final result = FColors.lerp(scheme, scheme, 0.5);
+        expect(result, scheme);
+      });
+
+      test('interpolation at t=0', () {
+        final result = FColors.lerp(scheme, schemeB, 0.0);
+        expect(result.brightness, scheme.brightness);
+        expect(result.systemOverlayStyle, scheme.systemOverlayStyle);
+        expect(result.background, scheme.background);
+        expect(result.foreground, scheme.foreground);
+        expect(result.hoverLighten, scheme.hoverLighten);
+        expect(result.hoverDarken, scheme.hoverDarken);
+        expect(result.disabledOpacity, scheme.disabledOpacity);
+      });
+
+      test('interpolation at t=1', () {
+        final result = FColors.lerp(scheme, schemeB, 1.0);
+        expect(result.brightness, schemeB.brightness);
+        expect(result.systemOverlayStyle, schemeB.systemOverlayStyle);
+        expect(result.background, schemeB.background);
+        expect(result.foreground, schemeB.foreground);
+        expect(result.hoverLighten, schemeB.hoverLighten);
+        expect(result.hoverDarken, schemeB.hoverDarken);
+        expect(result.disabledOpacity, schemeB.disabledOpacity);
+      });
+
+      test('interpolation at t=0.5', () {
+        final result = FColors.lerp(scheme, schemeB, 0.5);
+        expect(result.brightness, scheme.brightness); // threshold-based
+        expect(result.systemOverlayStyle, scheme.systemOverlayStyle); // threshold-based
+        expect(result.background, Color.lerp(scheme.background, schemeB.background, 0.5));
+        expect(result.foreground, Color.lerp(scheme.foreground, schemeB.foreground, 0.5));
+        expect(result.hoverLighten, closeTo(0.0875, 0.001)); // (0.075 + 0.1) / 2
+        expect(result.hoverDarken, closeTo(0.065, 0.001)); // (0.05 + 0.08) / 2
+        expect(result.disabledOpacity, closeTo(0.4, 0.001)); // (0.5 + 0.3) / 2
+      });
+    });
   });
 }
