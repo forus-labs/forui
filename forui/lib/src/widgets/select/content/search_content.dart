@@ -26,11 +26,11 @@ class SearchContent<T> extends StatefulWidget {
   final bool scrollHandles;
   final ScrollPhysics physics;
   final FItemDivider divider;
-  final FutureOr<Iterable<T>> Function(String) filter;
-  final Widget Function(BuildContext, FSelectSearchStyle) loadingBuilder;
+  final FutureOr<Iterable<T>> Function(String query) filter;
+  final Widget Function(BuildContext context, FSelectSearchStyle style) loadingBuilder;
   final FSelectSearchContentBuilder<T> builder;
   final WidgetBuilder emptyBuilder;
-  final Widget Function(BuildContext, Object?, StackTrace)? errorBuilder;
+  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? errorBuilder;
 
   const SearchContent({
     required this.scrollController,

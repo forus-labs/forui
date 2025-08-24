@@ -19,10 +19,10 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   static Widget _errorBuilder(BuildContext _, String text) => Text(text);
 
   /// {@macro forui.text_field.style}
-  final FTextFieldStyle Function(FTextFieldStyle)? style;
+  final FTextFieldStyle Function(FTextFieldStyle style)? style;
 
   /// {@macro forui.text_field.builder}
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states, Widget field) builder;
 
   /// {@macro forui.text_field.label}
   @override
@@ -193,10 +193,10 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final SpellCheckConfiguration? spellCheckConfiguration;
 
   /// {@macro forui.text_field.prefixBuilder}
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states)? prefixBuilder;
 
   /// {@macro forui.text_field.suffixBuilder}
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states)? suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue) clearable;
@@ -217,7 +217,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final String? forceErrorText;
 
   @override
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   /// Creates a [FTextFormField].
   const FTextFormField({

@@ -27,7 +27,7 @@ class FAlert extends StatelessWidget {
   /// ```shell
   /// dart run forui style create alert
   /// ```
-  final FBaseAlertStyle Function(FAlertStyle) style;
+  final FBaseAlertStyle Function(FAlertStyle style) style;
 
   /// The title of the alert.
   final Widget title;
@@ -162,13 +162,13 @@ final class FAlertStyle extends FBaseAlertStyle with Diagnosticable, _$FAlertSty
   /// The alert's primary style.
   ///
   /// Shorthand for the current context's [FAlertStyles.primary] style.
-  static FBaseAlertStyle Function(FAlertStyle) primary([FAlertStyle Function(FAlertStyle)? style]) =>
+  static FBaseAlertStyle Function(FAlertStyle style) primary([FAlertStyle Function(FAlertStyle style)? style]) =>
       (_) => _Resolve((context) => style?.call(context.theme.alertStyles.primary) ?? context.theme.alertStyles.primary);
 
   /// The alert's destructive style.
   ///
   /// Shorthand for the current context's [FAlertStyles.destructive] style.
-  static FBaseAlertStyle Function(FAlertStyle) destructive([FAlertStyle Function(FAlertStyle)? style]) =>
+  static FBaseAlertStyle Function(FAlertStyle style) destructive([FAlertStyle Function(FAlertStyle style)? style]) =>
       (_) => _Resolve(
         (context) => style?.call(context.theme.alertStyles.destructive) ?? context.theme.alertStyles.destructive,
       );

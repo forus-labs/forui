@@ -43,10 +43,10 @@ class Content extends StatelessWidget {
   final ScrollPhysics physics;
   final FItemDivider divider;
   final FutureOr<Iterable<String>> data;
-  final Widget Function(BuildContext, FAutocompleteContentStyle) loadingBuilder;
+  final Widget Function(BuildContext context, FAutocompleteContentStyle style) loadingBuilder;
   final FAutoCompleteContentBuilder builder;
-  final Widget Function(BuildContext, FAutocompleteContentStyle) emptyBuilder;
-  final Widget Function(BuildContext, Object?, StackTrace)? errorBuilder;
+  final Widget Function(BuildContext context, FAutocompleteContentStyle style) emptyBuilder;
+  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? errorBuilder;
 
   const Content({
     required this.controller,

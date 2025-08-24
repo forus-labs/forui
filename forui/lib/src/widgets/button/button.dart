@@ -34,7 +34,7 @@ class FButton extends StatelessWidget {
   /// ```shell
   /// dart run forui style create buttons
   /// ```
-  final FBaseButtonStyle Function(FButtonStyle) style;
+  final FBaseButtonStyle Function(FButtonStyle style) style;
 
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
@@ -233,14 +233,14 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   /// The button's primary style.
   ///
   /// Shorthand for the current context's [FButtonStyles.primary] style.
-  static FBaseButtonStyle Function(FButtonStyle) primary([FButtonStyle Function(FButtonStyle)? style]) =>
+  static FBaseButtonStyle Function(FButtonStyle style) primary([FButtonStyle Function(FButtonStyle style)? style]) =>
       (_) =>
           _Resolve((context) => style?.call(context.theme.buttonStyles.primary) ?? context.theme.buttonStyles.primary);
 
   /// The button's secondary style.
   ///
   /// Shorthand for the current context's [FButtonStyles.secondary] style.
-  static FBaseButtonStyle Function(FButtonStyle) secondary([FButtonStyle Function(FButtonStyle)? style]) =>
+  static FBaseButtonStyle Function(FButtonStyle style) secondary([FButtonStyle Function(FButtonStyle style)? style]) =>
       (_) => _Resolve(
         (context) => style?.call(context.theme.buttonStyles.secondary) ?? context.theme.buttonStyles.secondary,
       );
@@ -248,7 +248,9 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   /// The button's destructive style.
   ///
   /// Shorthand for the current context's [FButtonStyles.destructive] style.
-  static FBaseButtonStyle Function(FButtonStyle) destructive([FButtonStyle Function(FButtonStyle)? style]) =>
+  static FBaseButtonStyle Function(FButtonStyle style) destructive([
+    FButtonStyle Function(FButtonStyle style)? style,
+  ]) =>
       (_) => _Resolve(
         (context) => style?.call(context.theme.buttonStyles.destructive) ?? context.theme.buttonStyles.destructive,
       );
@@ -256,14 +258,14 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   /// The button's outline style.
   ///
   /// Shorthand for the current context's [FButtonStyles.outline] style.
-  static FBaseButtonStyle Function(FButtonStyle) outline([FButtonStyle Function(FButtonStyle)? style]) =>
+  static FBaseButtonStyle Function(FButtonStyle style) outline([FButtonStyle Function(FButtonStyle style)? style]) =>
       (_) =>
           _Resolve((context) => style?.call(context.theme.buttonStyles.outline) ?? context.theme.buttonStyles.outline);
 
   /// The button's ghost style.
   ///
   /// Shorthand for the current context's [FButtonStyles.ghost] style.
-  static FBaseButtonStyle Function(FButtonStyle) ghost([FButtonStyle Function(FButtonStyle)? style]) =>
+  static FBaseButtonStyle Function(FButtonStyle style) ghost([FButtonStyle Function(FButtonStyle style)? style]) =>
       (_) => _Resolve((context) => style?.call(context.theme.buttonStyles.ghost) ?? context.theme.buttonStyles.ghost);
 
   /// The box decoration.

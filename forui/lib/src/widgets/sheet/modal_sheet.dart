@@ -46,7 +46,7 @@ Future<T?> showFSheet<T>({
   required WidgetBuilder builder,
   required FLayout side,
   bool useRootNavigator = false,
-  FSheetStyle Function(FSheetStyle)? style,
+  FSheetStyle Function(FSheetStyle style)? style,
   double? mainAxisMaxRatio = 9 / 16,
   String? barrierLabel,
   bool barrierDismissible = true,

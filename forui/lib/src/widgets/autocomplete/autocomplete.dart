@@ -60,7 +60,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// ```shell
   /// dart run forui style create autocomplete
   /// ```
-  final FAutocompleteStyle Function(FAutocompleteStyle)? style;
+  final FAutocompleteStyle Function(FAutocompleteStyle style)? style;
 
   /// {@macro forui.text_field.label}
   @override
@@ -225,7 +225,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
-  final bool Function(TextEditingValue) clearable;
+  final bool Function(TextEditingValue value) clearable;
 
   @override
   final FormFieldSetter<String>? onSaved;
@@ -243,7 +243,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final String? forceErrorText;
 
   @override
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   /// The alignment point on the popover. Defaults to [AlignmentDirectional.topStart].
   final AlignmentGeometry anchor;
@@ -258,7 +258,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -285,7 +285,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FutureOr<Iterable<String>> Function(String text) filter;
 
   /// The builder that is called when the select is empty. Defaults to [defaultContentEmptyBuilder].
-  final Widget Function(BuildContext, FAutocompleteContentStyle) contentEmptyBuilder;
+  final Widget Function(BuildContext context, FAutocompleteContentStyle style) contentEmptyBuilder;
 
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
@@ -300,17 +300,17 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FAutoCompleteContentBuilder contentBuilder;
 
   /// A callback that is used to show a loading indicator while the results is processed.
-  final Widget Function(BuildContext, FAutocompleteContentStyle) contentLoadingBuilder;
+  final Widget Function(BuildContext context, FAutocompleteContentStyle style) contentLoadingBuilder;
 
   /// A callback that is used to show an error message when [filter] is asynchronous and fails.
-  final Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder;
+  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder;
 
   /// Creates a [FAutocomplete] from the given [items].
   ///
   /// For more control over the appearance of items, use [FAutocomplete.builder].
   FAutocomplete({
     required List<String> items,
-    FAutocompleteStyle Function(FAutocompleteStyle)? style,
+    FAutocompleteStyle Function(FAutocompleteStyle style)? style,
     Widget? label,
     String? hint,
     Widget? description,
@@ -366,31 +366,33 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     SpellCheckConfiguration? spellCheckConfiguration,
     FFieldIconBuilder<FAutocompleteStyle>? prefixBuilder,
     FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder,
-    bool Function(TextEditingValue) clearable = _clearable,
+    bool Function(TextEditingValue value) clearable = _clearable,
     FormFieldSetter<String>? onSaved,
     FormFieldValidator<String>? validator,
     String? initialText,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
     String? forceErrorText,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     AlignmentGeometry anchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
     FFieldBuilder<FAutocompleteStyle> builder = _builder,
     bool rightArrowToComplete = false,
-    FutureOr<Iterable<String>> Function(String)? filter,
+    FutureOr<Iterable<String>> Function(String query)? filter,
     FAutoCompleteContentBuilder? contentBuilder,
     ScrollController? contentScrollController,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = FItemDivider.none,
-    Widget Function(BuildContext, FAutocompleteContentStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
-    Widget Function(BuildContext, FAutocompleteContentStyle) contentLoadingBuilder = defaultContentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    Widget Function(BuildContext context, FAutocompleteContentStyle style) contentEmptyBuilder =
+        defaultContentEmptyBuilder,
+    Widget Function(BuildContext context, FAutocompleteContentStyle style) contentLoadingBuilder =
+        defaultContentLoadingBuilder,
+    Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     Key? key,
   }) : this.builder(
          filter: filter ?? (query) => items.where((item) => item.toLowerCase().startsWith(query.toLowerCase())),

@@ -34,7 +34,7 @@ class FTimePicker extends StatefulWidget {
   /// ```shell
   /// dart run forui style create time-picker
   /// ```
-  final FTimePickerStyle Function(FTimePickerStyle)? style;
+  final FTimePickerStyle Function(FTimePickerStyle style)? style;
 
   /// True if the time picker should use the 24-hour format.
   ///

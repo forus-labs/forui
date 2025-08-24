@@ -13,7 +13,7 @@ class Content extends StatelessWidget {
   final Widget? title;
   final Widget? subtitle;
   final Widget? child;
-  final FCardStyle Function(FCardStyle)? style;
+  final FCardStyle Function(FCardStyle style)? style;
 
   const Content({this.image, this.title, this.subtitle, this.child, this.style, super.key});
 

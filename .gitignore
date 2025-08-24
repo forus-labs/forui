@@ -2,6 +2,7 @@
 *.class
 *.log
 *.pyc
+.i10n.txt
 *.swp
 .DS_Store
 .atom/

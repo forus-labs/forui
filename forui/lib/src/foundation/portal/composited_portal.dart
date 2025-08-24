@@ -52,7 +52,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   /// It is applied after [spacing].
   ///
   /// See [FPortalShift] for the different shifting strategies.
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// The additional offset to apply to the [childAnchor] of the linked [CompositedChild] to obtain this widget's
   /// [portalAnchor] position.
@@ -138,7 +138,7 @@ class RenderPortalLayer extends RenderProxyBox {
   Alignment _childAnchor;
   EdgeInsets _viewInsets;
   Offset _spacing;
-  Offset Function(Size, FPortalChildBox, FPortalBox) _shift;
+  Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) _shift;
   Offset _offset;
 
   RenderPortalLayer({
@@ -151,7 +151,7 @@ class RenderPortalLayer extends RenderProxyBox {
     required Alignment childAnchor,
     required EdgeInsets viewInsets,
     required Offset spacing,
-    required Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    required Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
     required Offset offset,
     RenderBox? child,
   }) : _notifier = notifier,

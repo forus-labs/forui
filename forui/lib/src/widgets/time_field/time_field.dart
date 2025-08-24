@@ -121,7 +121,7 @@ abstract class FTimeField extends StatefulWidget {
   /// ```shell
   /// dart run forui style create time-field
   /// ```
-  final FTimeFieldStyle Function(FTimeFieldStyle)? style;
+  final FTimeFieldStyle Function(FTimeFieldStyle style)? style;
 
   /// The initial time.
   ///
@@ -161,7 +161,7 @@ abstract class FTimeField extends StatefulWidget {
   final Widget? description;
 
   /// {@macro forui.foundation.form_field_properties.errorBuilder}
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
@@ -240,7 +240,7 @@ abstract class FTimeField extends StatefulWidget {
   /// * [FTimeField.picker] - Creates a time field with only a picker.
   const factory FTimeField({
     FTimeFieldController? controller,
-    FTimeFieldStyle Function(FTimeFieldStyle)? style,
+    FTimeFieldStyle Function(FTimeFieldStyle style)? style,
     FTime? initialTime,
     bool hour24,
     bool autofocus,
@@ -264,7 +264,7 @@ abstract class FTimeField extends StatefulWidget {
     FormFieldSetter<FTime>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
-    Widget Function(BuildContext, String) errorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder,
     Key? key,
   }) = _InputTimeField;
 
@@ -310,7 +310,7 @@ abstract class FTimeField extends StatefulWidget {
   /// * [FTimeField.new] - Creates a time field with only an input field.
   const factory FTimeField.picker({
     FTimeFieldController? controller,
-    FTimeFieldStyle Function(FTimeFieldStyle)? style,
+    FTimeFieldStyle Function(FTimeFieldStyle style)? style,
     FTime? initialTime,
     bool hour24,
     DateFormat? format,
@@ -342,7 +342,7 @@ abstract class FTimeField extends StatefulWidget {
     FormFieldSetter<FTime>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
-    Widget Function(BuildContext, String) errorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder,
     Key? key,
   }) = _PickerTimeField;
 

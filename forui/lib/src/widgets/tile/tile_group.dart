@@ -54,7 +54,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// ```shell
   /// dart run forui style create tile-group
   /// ```
-  final FTileGroupStyle Function(FTileGroupStyle)? style;
+  final FTileGroupStyle Function(FTileGroupStyle style)? style;
 
   /// {@template forui.widgets.FTileGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
@@ -129,7 +129,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
 
   /// The delegate that builds the sliver children.
   // ignore: avoid_positional_boolean_parameters
-  final Widget Function(FTileGroupStyle, bool) _builder;
+  final Widget Function(FTileGroupStyle style, bool scrollable) _builder;
 
   /// Creates a [FTileGroup].
   FTileGroup({

@@ -10,7 +10,7 @@ import 'package:forui/src/widgets/date_field/input/date_parser.dart';
 
 ///
 @internal
-typedef Select = TextEditingValue Function(TextEditingValue, int first, int last, int end, int separator);
+typedef Select = TextEditingValue Function(TextEditingValue value, int first, int last, int end, int separator);
 
 TextEditingValue _first(TextEditingValue value, int first, int _, int _, int _) =>
     value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));

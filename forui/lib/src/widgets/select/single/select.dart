@@ -67,7 +67,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// ```shell
   /// dart run forui style create select
   /// ```
-  final FSelectStyle Function(FSelectStyle)? style;
+  final FSelectStyle Function(FSelectStyle style)? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -94,7 +94,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final Widget? description;
 
   @override
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   @override
   final bool enabled;
@@ -115,7 +115,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final FormFieldValidator<T> validator;
 
   /// The function that formats the selected items into a string. The items are sorted in order of selection.
-  final String Function(T) format;
+  final String Function(T value) format;
 
   /// The [hint] that is displayed when the select is empty. Defaults to the current locale's
   /// [FLocalizations.selectHint].
@@ -155,7 +155,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -167,7 +167,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final bool autoHide;
 
   /// The builder that is called when the select's content is empty. Defaults to [defaultContentEmptyBuilder].
-  final Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder;
+  final Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder;
 
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
@@ -197,7 +197,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   factory FSelect({
     required Map<String, T> items,
     FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
+    FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
@@ -211,7 +211,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     FormFieldValidator<T> validator = _defaultValidator,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     String? hint,
     TextAlign textAlign = TextAlign.start,
     TextAlignVertical? textAlignVertical,
@@ -224,11 +224,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
-    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
+    Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
@@ -284,10 +284,10 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   /// Creates a select with the given [children].
   const factory FSelect.rich({
-    required String Function(T) format,
+    required String Function(T value) format,
     required List<FSelectItemMixin> children,
     FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
+    FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
@@ -301,7 +301,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     FormFieldValidator<T> validator,
-    Widget Function(BuildContext, String) errorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder,
     String? hint,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -314,11 +314,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool autoHide,
-    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder,
+    Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
@@ -346,10 +346,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required Map<String, T> items,
     FutureOr<Iterable<T>> Function(String query)? filter,
     FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
-    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder = FSelect.defaultContentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder =
+        FSelect.defaultContentLoadingBuilder,
+    Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
+    FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
@@ -363,7 +364,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     FormFieldValidator<T> validator = _defaultValidator,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     String? hint,
     TextAlign textAlign = TextAlign.start,
     TextAlignVertical? textAlignVertical,
@@ -376,11 +377,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
-    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
+    Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
@@ -455,14 +456,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// asynchronously by [filter].
   /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
   const factory FSelect.searchBuilder({
-    required String Function(T) format,
+    required String Function(T value) format,
     required FutureOr<Iterable<T>> Function(String query) filter,
     required FSelectSearchContentBuilder<T> contentBuilder,
     FSelectSearchFieldProperties searchFieldProperties,
-    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder,
+    Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectController<T>? controller,
-    FSelectStyle Function(FSelectStyle)? style,
+    FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
@@ -476,7 +477,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     FormFieldValidator<T> validator,
-    Widget Function(BuildContext, String) errorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder,
     String? hint,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -489,11 +490,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool autoHide,
-    Widget Function(BuildContext, FSelectStyle) contentEmptyBuilder,
+    Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,

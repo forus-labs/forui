@@ -40,7 +40,7 @@ class FPopoverMenu extends StatelessWidget {
   /// ```shell
   /// dart run forui style create popover-menu
   /// ```
-  final FPopoverMenuStyle Function(FPopoverMenuStyle)? style;
+  final FPopoverMenuStyle Function(FPopoverMenuStyle style)? style;
 
   /// The controller that shows and hides the menu. It initially hides the menu.
   final FPopoverController? popoverController;
@@ -82,7 +82,7 @@ class FPopoverMenu extends StatelessWidget {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -127,7 +127,7 @@ class FPopoverMenu extends StatelessWidget {
   /// Passed to [builder] if provided.
   final Widget? child;
 
-  final Widget Function(BuildContext, FPopoverController, FPopoverMenuStyle) _menuBuilder;
+  final Widget Function(BuildContext context, FPopoverController controller, FPopoverMenuStyle style) _menuBuilder;
 
   /// Creates a menu of [FItem]s that is only shown when toggled.
   ///
@@ -167,7 +167,8 @@ class FPopoverMenu extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
-    List<FItemGroupMixin> Function(BuildContext, FPopoverController, List<FItemGroupMixin>?) menuBuilder =
+    List<FItemGroupMixin> Function(BuildContext context, FPopoverController controller, List<FItemGroupMixin>? menu)
+        menuBuilder =
         _defaultItemBuilder,
     List<FItemGroupMixin>? menu,
     this.builder = _builder,
@@ -224,7 +225,8 @@ class FPopoverMenu extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
-    List<FTileGroupMixin> Function(BuildContext, FPopoverController, List<FTileGroupMixin>?) menuBuilder =
+    List<FTileGroupMixin> Function(BuildContext context, FPopoverController controller, List<FTileGroupMixin>? menu)
+        menuBuilder =
         _defaultTileBuilder,
     List<FTileGroupMixin>? menu,
     this.builder = _builder,

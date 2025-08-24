@@ -140,7 +140,7 @@ abstract class FDateField extends StatefulWidget {
   /// ```shell
   /// dart run forui style create date-field
   /// ```
-  final FDateFieldStyle Function(FDateFieldStyle)? style;
+  final FDateFieldStyle Function(FDateFieldStyle style)? style;
 
   /// The initial date.
   ///
@@ -175,7 +175,7 @@ abstract class FDateField extends StatefulWidget {
   final Widget? description;
 
   /// {@macro forui.foundation.form_field_properties.errorBuilder}
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
@@ -268,7 +268,7 @@ abstract class FDateField extends StatefulWidget {
   /// * [FDateField.input] - Creates a date field with only an input field.
   factory FDateField({
     FDateFieldController? controller,
-    FDateFieldStyle Function(FDateFieldStyle)? style,
+    FDateFieldStyle Function(FDateFieldStyle style)? style,
     DateTime? initialDate,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
@@ -294,7 +294,7 @@ abstract class FDateField extends StatefulWidget {
     FormFieldSetter<DateTime>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
-    Widget Function(BuildContext, String) errorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder,
     Key? key,
   }) = _InputDateField;
 
@@ -351,7 +351,7 @@ abstract class FDateField extends StatefulWidget {
   /// * [FDateField.input] - Creates a date field with only an input field.
   factory FDateField.calendar({
     FDateFieldController? controller,
-    FDateFieldStyle Function(FDateFieldStyle)? style,
+    FDateFieldStyle Function(FDateFieldStyle style)? style,
     DateTime? initialDate,
     DateFormat? format,
     TextAlign textAlign,
@@ -387,7 +387,7 @@ abstract class FDateField extends StatefulWidget {
     FormFieldSetter<DateTime>? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
-    Widget Function(BuildContext, String) errorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder,
     Key? key,
   }) = _CalendarDateField;
 
@@ -422,7 +422,7 @@ abstract class FDateField extends StatefulWidget {
   /// * [FDateField.calendar] - Creates a date field with only a calendar.
   factory FDateField.input({
     FDateFieldController? controller,
-    FDateFieldStyle Function(FDateFieldStyle)? style,
+    FDateFieldStyle Function(FDateFieldStyle style)? style,
     DateTime? initialDate,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -447,7 +447,7 @@ abstract class FDateField extends StatefulWidget {
     FormFieldSetter<DateTime>? onSaved,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Key? key,
   }) => _InputDateField(
     controller: controller,

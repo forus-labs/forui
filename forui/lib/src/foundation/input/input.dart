@@ -10,10 +10,10 @@ import 'package:forui/src/localizations/localization.dart';
 @internal
 abstract class Input<T> extends StatefulWidget {
   final ValueNotifier<T?> controller;
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>, Widget) builder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> state, Widget child) builder;
   final Widget? label;
   final Widget? description;
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
   final bool enabled;
   final FormFieldSetter<T>? onSaved;
   final FormFieldValidator<T> validator;
@@ -30,8 +30,8 @@ abstract class Input<T> extends StatefulWidget {
   final MouseCursor? mouseCursor;
   final VoidCallback? onTap;
   final bool canRequestFocus;
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? prefixBuilder;
-  final Widget Function(BuildContext, FTextFieldStyle, Set<WidgetState>)? suffixBuilder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> state)? prefixBuilder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> state)? suffixBuilder;
   final bool clearable;
   final FLocalizations localizations;
 

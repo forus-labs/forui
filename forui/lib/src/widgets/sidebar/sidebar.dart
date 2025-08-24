@@ -42,7 +42,7 @@ class FSidebar extends StatefulWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarStyle Function(FSidebarStyle)? style;
+  final FSidebarStyle Function(FSidebarStyle style)? style;
 
   /// An optional sticky header.
   final Widget? header;
@@ -88,7 +88,7 @@ class FSidebar extends StatefulWidget {
 
   /// Creates a sidebar with a builder function that will be wrapped in a [ListView.builder].
   FSidebar.builder({
-    required Widget Function(BuildContext, int) itemBuilder,
+    required Widget Function(BuildContext context, int index) itemBuilder,
     required int itemCount,
     this.style,
     this.header,

@@ -18,7 +18,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final FPortalSpacing spacing;
   @override
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
   @override
   final Offset offset;
   @override

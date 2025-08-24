@@ -58,7 +58,7 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 FPersistentSheetController showFPersistentSheet({
   required BuildContext context,
   required FLayout side,
-  required Widget Function(BuildContext, FPersistentSheetController) builder,
+  required Widget Function(BuildContext context, FPersistentSheetController controller) builder,
   FSheetStyle Function(FSheetStyle)? style,
   double? mainAxisMaxRatio = 9 / 16,
   BoxConstraints constraints = const BoxConstraints(),

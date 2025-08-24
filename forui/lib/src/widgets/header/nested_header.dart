@@ -10,7 +10,7 @@ part of 'header.dart';
 /// * [FHeaderStyle] for customizing a header's appearance.
 class _FNestedHeader extends FHeader {
   /// The style.
-  final FHeaderStyle Function(FHeaderStyle)? style;
+  final FHeaderStyle Function(FHeaderStyle style)? style;
 
   /// The actions, aligned to the left in LTR locales. Defaults to an empty list.
   ///

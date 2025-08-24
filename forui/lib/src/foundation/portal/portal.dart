@@ -53,7 +53,7 @@ class FPortal extends StatefulWidget {
   /// It is applied after [spacing] and before [offset].
   ///
   /// See [FPortalShift] for the different shifting strategies.
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// The offset to adjust the portal by. Defaults to [Offset.zero].
   ///
@@ -70,7 +70,7 @@ class FPortal extends StatefulWidget {
   final Widget? barrier;
 
   /// The portal builder which returns the floating content.
-  final Widget Function(BuildContext, OverlayPortalController) portalBuilder;
+  final Widget Function(BuildContext context, OverlayPortalController controller) portalBuilder;
 
   /// An optional builder which returns the child widget that the portal is aligned to.
   ///

@@ -29,7 +29,7 @@ sealed class Divider extends StatefulWidget {
   final double hitRegionExtent;
   final double resizePercentage;
   final MouseCursor cursor;
-  final String Function(FResizableRegionData, FResizableRegionData) semanticFormatterCallback;
+  final String Function(FResizableRegionData first, FResizableRegionData second) semanticFormatterCallback;
 
   const Divider({
     required this.controller,

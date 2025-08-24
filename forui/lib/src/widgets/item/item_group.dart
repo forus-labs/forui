@@ -54,7 +54,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// ```shell
   /// dart run forui style create item-group
   /// ```
-  final FItemGroupStyle Function(FItemGroupStyle)? style;
+  final FItemGroupStyle Function(FItemGroupStyle style)? style;
 
   /// {@template forui.widgets.FItemGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
@@ -114,7 +114,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
 
   /// The delegate that builds the sliver children.
   // ignore: avoid_positional_boolean_parameters
-  final Widget Function(FItemGroupStyle, bool) _builder;
+  final Widget Function(FItemGroupStyle style, bool enabled) _builder;
 
   /// Creates a [FItemGroup].
   FItemGroup({

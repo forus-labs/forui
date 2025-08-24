@@ -39,9 +39,9 @@ part 'dialog.style.dart';
 /// * [FDialogStyle] for customizing a switch's appearance.
 Future<T?> showFDialog<T>({
   required BuildContext context,
-  required Widget Function(BuildContext, FDialogStyle, Animation<double>) builder,
+  required Widget Function(BuildContext context, FDialogStyle style, Animation<double> animation) builder,
   bool useRootNavigator = false,
-  FDialogStyle Function(FDialogStyle)? style,
+  FDialogStyle Function(FDialogStyle style)? style,
   String? barrierLabel,
   bool barrierDismissible = true,
   RouteSettings? routeSettings,
@@ -90,7 +90,7 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   /// Creates a [FDialogRoute].
   FDialogRoute({
     required this.style,
-    required Widget Function(BuildContext, Animation<double>) builder,
+    required Widget Function(BuildContext context, Animation<double> animation) builder,
     this.barrierDismissible = true,
     this.barrierLabel,
     this.barrierOnTapHint,
@@ -175,7 +175,7 @@ class FDialog extends StatefulWidget {
   /// ```shell
   /// dart run forui style create dialog
   /// ```
-  final FDialogStyle Function(FDialogStyle)? style;
+  final FDialogStyle Function(FDialogStyle style)? style;
 
   /// The animation used to animate the dialog's entrance and exit. Settings this to null will disable the animation.
   ///
@@ -195,7 +195,7 @@ class FDialog extends StatefulWidget {
   final BoxConstraints constraints;
 
   /// The builder for the dialog's content.
-  final Widget Function(BuildContext, FDialogStyle) builder;
+  final Widget Function(BuildContext context, FDialogStyle style) builder;
 
   /// Creates a [FDialog] with a title, subtitle, and possible actions.
   ///

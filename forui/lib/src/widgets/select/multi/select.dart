@@ -44,7 +44,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
 
   /// The default tag builder that builds a [FMultiSelectTag] with the given value.
   static Widget defaultTagBuilder<T>(
-    BuildContext _,
+    BuildContext context,
     FMultiSelectController<T> controller,
     FMultiSelectStyle style,
     T value,
@@ -79,7 +79,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// ```shell
   /// dart run forui style create multi-select
   /// ```
-  final FMultiSelectStyle Function(FMultiSelectStyle)? style;
+  final FMultiSelectStyle Function(FMultiSelectStyle style)? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -100,7 +100,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   final Widget? description;
 
   /// {@macro forui.foundation.form_field_properties.errorBuilder}
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
@@ -109,10 +109,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   final ValueChanged<Set<T>>? onChange;
 
   /// {@macro forui.foundation.form_field_properties.onSaved}
-  final void Function(Set<T>)? onSaved;
+  final void Function(Set<T> values)? onSaved;
 
   /// {@macro forui.foundation.form_field_properties.validator}
-  final String? Function(Set<T>) validator;
+  final String? Function(Set<T> values) validator;
 
   /// {@macro forui.foundation.form_field_properties.autovalidateMode}
   final AutovalidateMode autovalidateMode;
@@ -127,10 +127,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   final bool keepHint;
 
   /// The function used to sort the selected items. Defaults to the order in which they were selected.
-  final int Function(T, T)? sort;
+  final int Function(T a, T b)? sort;
 
   /// The function formats the value for display in the select's field.
-  final Widget Function(T) format;
+  final Widget Function(T value) format;
 
   /// The function used to build the tags for selected items.
   final FMultiSelectTagBuilder<T> tagBuilder;
@@ -157,7 +157,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -166,7 +166,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   final FPopoverHideRegion hideRegion;
 
   /// The builder that is called when the select is empty. Defaults to [FSelect.defaultContentEmptyBuilder].
-  final Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder;
+  final Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder;
 
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
@@ -208,7 +208,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   factory FMultiSelect({
     required Map<String, T> items,
     FMultiSelectController<T>? controller,
-    FMultiSelectStyle Function(FMultiSelectStyle)? style,
+    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -217,15 +217,22 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? description,
     bool enabled = true,
     ValueChanged<Set<T>>? onChange,
-    void Function(Set<T>)? onSaved,
+    void Function(Set<T> values)? onSaved,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
-    String? Function(Set<T>) validator = _defaultValidator,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    String? Function(Set<T> values) validator = _defaultValidator,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Widget? hint,
     bool keepHint = true,
-    int Function(T, T)? sort,
-    Widget Function(BuildContext, FMultiSelectController<T>, FMultiSelectStyle, T, Widget)? tagBuilder,
+    int Function(T a, T b)? sort,
+    Widget Function(
+      BuildContext context,
+      FMultiSelectController<T> controller,
+      FMultiSelectStyle style,
+      T value,
+      Widget label,
+    )?
+    tagBuilder,
     TextAlign textAlign = TextAlign.start,
     TextDirection? textDirection,
     bool clearable = false,
@@ -233,10 +240,11 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
-    Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder = FMultiSelect.defaultContentEmptyBuilder,
+    Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder =
+        FMultiSelect.defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
@@ -293,10 +301,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
 
   /// Creates a [FMultiSelect] with the given [children].
   factory FMultiSelect.rich({
-    required Widget Function(T) format,
+    required Widget Function(T value) format,
     required List<FSelectItemMixin> children,
     FMultiSelectController<T>? controller,
-    FMultiSelectStyle Function(FMultiSelectStyle)? style,
+    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -305,11 +313,11 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? description,
     bool enabled,
     ValueChanged<Set<T>>? onChange,
-    void Function(Set<T>)? onSaved,
+    void Function(Set<T> values)? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
-    String? Function(Set<T>) validator,
-    Widget Function(BuildContext, String) errorBuilder,
+    String? Function(Set<T> values) validator,
+    Widget Function(BuildContext context, String message) errorBuilder,
     Widget? hint,
     bool keepHint,
     int Function(T, T)? sort,
@@ -321,10 +329,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
-    Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder,
+    Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
@@ -352,12 +360,13 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// undefined behavior.
   factory FMultiSelect.search(
     Map<String, T> items, {
-    FutureOr<Iterable<T>> Function(String)? filter,
+    FutureOr<Iterable<T>> Function(String query)? filter,
     FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
-    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder = FMultiSelect.defaultContentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder =
+        FMultiSelect.defaultContentLoadingBuilder,
+    Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FMultiSelectController<T>? controller,
-    FMultiSelectStyle Function(FMultiSelectStyle)? style,
+    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -366,11 +375,11 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? description,
     bool enabled = true,
     ValueChanged<Set<T>>? onChange,
-    void Function(Set<T>)? onSaved,
+    void Function(Set<T> values)? onSaved,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
-    String? Function(Set<T>) validator = _defaultValidator,
-    Widget Function(BuildContext, String) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    String? Function(Set<T> values) validator = _defaultValidator,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Widget? hint,
     bool keepHint = true,
     int Function(T, T)? sort,
@@ -382,10 +391,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
-    Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder = defaultContentEmptyBuilder,
+    Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
@@ -462,13 +471,13 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
   factory FMultiSelect.searchBuilder({
     required Widget Function(T) format,
-    required FutureOr<Iterable<T>> Function(String) filter,
+    required FutureOr<Iterable<T>> Function(String query) filter,
     required FSelectSearchContentBuilder<T> contentBuilder,
     FSelectSearchFieldProperties searchFieldProperties,
-    Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder,
-    Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder,
+    Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder,
+    Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FMultiSelectController<T>? controller,
-    FMultiSelectStyle Function(FMultiSelectStyle)? style,
+    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -477,11 +486,11 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? description,
     bool enabled,
     ValueChanged<Set<T>>? onChange,
-    void Function(Set<T>)? onSaved,
+    void Function(Set<T> values)? onSaved,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
-    String? Function(Set<T>) validator,
-    Widget Function(BuildContext, String) errorBuilder,
+    String? Function(Set<T> values) validator,
+    Widget Function(BuildContext context, String message) errorBuilder,
     Widget? hint,
     bool keepHint,
     int Function(T, T)? sort,
@@ -493,10 +502,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
-    Widget Function(BuildContext, FMultiSelectStyle) contentEmptyBuilder,
+    Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
@@ -544,7 +553,14 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.contentDivider = FItemDivider.none,
     this.min = 0,
     this.max,
-    Widget Function(BuildContext, FMultiSelectController<T>, FMultiSelectStyle, T, Widget)? tagBuilder,
+    Widget Function(
+      BuildContext context,
+      FMultiSelectController<T> controller,
+      FMultiSelectStyle style,
+      T value,
+      Widget label,
+    )?
+    tagBuilder,
     Set<T>? initialValue,
     super.key,
   }) : tagBuilder = tagBuilder ?? defaultTagBuilder,
@@ -716,10 +732,10 @@ class _BasicSelect<T> extends FMultiSelect<T> {
 
 class _SearchSelect<T> extends FMultiSelect<T> {
   final FSelectSearchFieldProperties searchFieldProperties;
-  final FutureOr<Iterable<T>> Function(String) filter;
+  final FutureOr<Iterable<T>> Function(String query) filter;
   final FSelectSearchContentBuilder<T> contentBuilder;
-  final Widget Function(BuildContext, FSelectSearchStyle) contentLoadingBuilder;
-  final Widget Function(BuildContext, Object?, StackTrace)? contentErrorBuilder;
+  final Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder;
+  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder;
 
   _SearchSelect({
     required this.filter,

@@ -28,10 +28,10 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 FToasterEntry showFToast({
   required BuildContext context,
   required Widget title,
-  FToastStyle Function(FToastStyle)? style,
+  FToastStyle Function(FToastStyle style)? style,
   Widget? icon,
   Widget? description,
-  Widget Function(BuildContext, FToasterEntry)? suffixBuilder,
+  Widget Function(BuildContext context, FToasterEntry entry)? suffixBuilder,
   FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
@@ -95,7 +95,7 @@ FToasterEntry showFToast({
 FToasterEntry showRawFToast({
   required BuildContext context,
   required Widget Function(BuildContext context, FToasterEntry entry) builder,
-  FToastStyle Function(FToastStyle)? style,
+  FToastStyle Function(FToastStyle style)? style,
   FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
@@ -179,7 +179,7 @@ enum FToastAlignment {
 /// * [FToasterStyle] for customizing a toaster's appearance.
 class FToaster extends StatefulWidget {
   /// The style.
-  final FToasterStyle Function(FToasterStyle)? style;
+  final FToasterStyle Function(FToasterStyle style)? style;
 
   /// The child.
   final Widget child;
@@ -207,7 +207,7 @@ class FToasterState extends State<FToaster> {
   FToasterEntry show({
     required BuildContext context,
     required Widget Function(BuildContext context, FToasterEntry entry) builder,
-    FToastStyle Function(FToastStyle)? style,
+    FToastStyle Function(FToastStyle style)? style,
     FToastAlignment? alignment,
     List<AxisDirection>? swipeToDismiss,
     Duration? duration = const Duration(seconds: 5),

@@ -22,8 +22,8 @@ class Field<T> extends FormField<Set<T>> {
   final Widget? description;
   final Widget? hint;
   final bool keepHint;
-  final int Function(T, T)? sort;
-  final Widget Function(T) format;
+  final int Function(T a, T b)? sort;
+  final Widget Function(T value) format;
   final FMultiSelectTagBuilder<T> tagBuilder;
   final TextAlign textAlign;
   final TextDirection? textDirection;
@@ -36,7 +36,7 @@ class Field<T> extends FormField<Set<T>> {
   final Offset offset;
   final FPopoverHideRegion hideRegion;
   final ValueChanged<Set<T>>? onChange;
-  final Widget Function(BuildContext, FMultiSelectController<T>) popoverBuilder;
+  final Widget Function(BuildContext context, FMultiSelectController<T> controller) popoverBuilder;
   final int min;
   final int? max;
 
@@ -72,8 +72,8 @@ class Field<T> extends FormField<Set<T>> {
     required super.autovalidateMode,
     required super.forceErrorText,
     required super.errorBuilder,
-    required void Function(Set<T>)? onSaved,
-    required String? Function(Set<T>)? validator,
+    required void Function(Set<T> values)? onSaved,
+    required String? Function(Set<T> values)? validator,
     required super.initialValue,
     super.key,
   }) : super(

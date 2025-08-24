@@ -39,7 +39,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   /// ```shell
   /// dart run forui style create sliders
   /// ```
-  final FSliderStyle Function(FSliderStyle)? style;
+  final FSliderStyle Function(FSliderStyle style)? style;
 
   /// The layout. Defaults to the current [TextDirection].
   final FLayout? layout;
@@ -72,7 +72,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   final double? trackHitRegionCrossExtent;
 
   /// A builder that creates the tooltip. Defaults to printing the current percentage.
-  final Widget Function(FTooltipController, double) tooltipBuilder;
+  final Widget Function(FTooltipController controller, double value) tooltipBuilder;
 
   /// A callback that formats the semantic label for the slider. Defaults to announcing the percentages the active track
   /// occupies.
@@ -90,7 +90,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   final Widget? description;
 
   @override
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
   @override
   final bool enabled;
@@ -215,14 +215,14 @@ class _Slider extends StatefulWidget {
   final FLayout layout;
   final Widget? label;
   final Widget? description;
-  final Widget Function(BuildContext, String) errorBuilder;
+  final Widget Function(BuildContext context, String message) errorBuilder;
   final List<FSliderMark> marks;
   final FSliderSelection? initialSelection;
   final TextDirection textDirection;
   final BoxConstraints constraints;
   final double? mainAxisExtent;
   final double? trackHitRegionCrossExtent;
-  final Widget Function(FTooltipController, double) tooltipBuilder;
+  final Widget Function(FTooltipController controller, double value) tooltipBuilder;
   final String Function(FSliderSelection)? semanticFormatterCallback;
   final String Function(double) semanticValueFormatterCallback;
   final ValueChanged<FSliderSelection>? onChange;

@@ -6,11 +6,9 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'tabs.style.dart';
-
-part 'tabs_style.dart';
-
 part 'tab_controller.dart';
+part 'tabs.style.dart';
+part 'tabs_style.dart';
 
 /// An object that represents a tab entry in a group of tabs.
 class FTabEntry {
@@ -49,7 +47,7 @@ class FTabs extends StatefulWidget {
   /// ```shell
   /// dart run forui style create tabs
   /// ```
-  final FTabsStyle Function(FTabsStyle)? style;
+  final FTabsStyle Function(FTabsStyle style)? style;
 
   /// The initial tab that is selected.
   ///

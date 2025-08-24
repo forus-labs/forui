@@ -10,7 +10,7 @@ part 'tag.style.dart';
 /// A tag in a [FMultiSelect].
 class FMultiSelectTag extends StatelessWidget {
   /// The style.
-  final FMultiSelectTagStyle Function(FMultiSelectTagStyle)? style;
+  final FMultiSelectTagStyle Function(FMultiSelectTagStyle style)? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
