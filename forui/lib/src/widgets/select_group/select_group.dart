@@ -78,7 +78,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   /// ```shell
   /// dart run forui style create select-group
   /// ```
-  final FSelectGroupStyle Function(FSelectGroupStyle)? style;
+  final FSelectGroupStyle Function(FSelectGroupStyle style)? style;
 
   @override
   final Widget? label;

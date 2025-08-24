@@ -19,7 +19,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   static Widget _errorBuilder(BuildContext _, String text) => Text(text);
 
   /// {@macro forui.text_field.style}
-  final FTextFieldStyle Function(FTextFieldStyle)? style;
+  final FTextFieldStyle Function(FTextFieldStyle style)? style;
 
   /// {@macro forui.text_field.builder}
   final Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states, Widget field) builder;

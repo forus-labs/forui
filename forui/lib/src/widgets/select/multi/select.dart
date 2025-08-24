@@ -107,10 +107,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   final ValueChanged<Set<T>>? onChange;
 
   /// {@macro forui.foundation.form_field_properties.onSaved}
-  final void Function(Set<T>)? onSaved;
+  final void Function(Set<T> values)? onSaved;
 
   /// {@macro forui.foundation.form_field_properties.validator}
-  final String? Function(Set<T>) validator;
+  final String? Function(Set<T> values) validator;
 
   /// {@macro forui.foundation.form_field_properties.autovalidateMode}
   final AutovalidateMode autovalidateMode;
@@ -206,7 +206,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   factory FMultiSelect({
     required Map<String, T> items,
     FMultiSelectController<T>? controller,
-    FMultiSelectStyle Function(FMultiSelectStyle)? style,
+    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -215,7 +215,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? description,
     bool enabled = true,
     ValueChanged<Set<T>>? onChange,
-    void Function(Set<T>)? onSaved,
+    void Function(Set<T> values)? onSaved,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     String? Function(Set<T> values) validator = _defaultValidator,

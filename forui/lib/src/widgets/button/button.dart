@@ -1,16 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
-import 'package:meta/meta.dart';
 
 part 'button.style.dart';
-
-/// A [FButton]'s style.
-///
-/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonStyle] itself.
-sealed class FBaseButtonStyle {}
 
 /// A button.
 ///
@@ -23,6 +20,10 @@ sealed class FBaseButtonStyle {}
 /// * https://forui.dev/docs/form/button for working examples.
 /// * [FButtonStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
+  static _Resolve _primary(FButtonStyle? _) => _Resolve((context) => context.theme.buttonStyles.primary);
+
+  static _Resolve _outline(FButtonStyle? _) => _Resolve((context) => context.theme.buttonStyles.outline);
+
   /// The style. Defaults to [FButtonStyle.primary].
   ///
   /// Although typically one of the pre-defined styles in [FBaseButtonStyle], it can also be a [FButtonStyle].
@@ -211,40 +212,17 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('actions', actions))
       ..add(FlagProperty('selected', value: selected, defaultValue: false, ifTrue: 'selected'));
   }
-
-  static _Resolve _outline(FButtonStyle? _) => _Resolve((context) => context.theme.buttonStyles.outline);
-
-  static _Resolve _primary(FButtonStyle? _) => _Resolve((context) => context.theme.buttonStyles.primary);
 }
 
-/// A button's data.
-class FButtonData extends InheritedWidget {
-  /// The button's style.
-  final FButtonStyle style;
+/// A [FButton]'s style.
+///
+/// A style can be either one of the pre-defined styles in [FButtonStyle] or a [FButtonStyle] itself.
+sealed class FBaseButtonStyle {}
 
-  /// The current states.
-  final Set<WidgetState> states;
+class _Resolve extends FBaseButtonStyle {
+  final FButtonStyle Function(BuildContext context) _resolve;
 
-  /// Creates a [FButtonData].
-  const FButtonData({required this.style, required this.states, required super.child, super.key});
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(IterableProperty('states', states));
-  }
-
-  @override
-  bool updateShouldNotify(covariant FButtonData old) => style != old.style || !setEquals(states, old.states);
-
-  /// Returns the [FButtonData] of the [FButton] in the given [context].
-  @useResult
-  static FButtonData of(BuildContext context) {
-    assert(debugCheckHasAncestor<FButtonData>('$FButton', context));
-    return context.dependOnInheritedWidgetOfExactType<FButtonData>()!;
-  }
+  _Resolve(this._resolve);
 }
 
 /// A [FButton]'s style.
@@ -252,6 +230,42 @@ class FButtonData extends InheritedWidget {
 /// The pre-defined styles are a convenient shorthand for the various [FButtonStyle]s in the current context's
 /// [FButtonStyles].
 class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
+  /// The button's primary style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.primary] style.
+  static FBaseButtonStyle Function(FButtonStyle style) primary([FButtonStyle Function(FButtonStyle style)? style]) =>
+      (_) =>
+          _Resolve((context) => style?.call(context.theme.buttonStyles.primary) ?? context.theme.buttonStyles.primary);
+
+  /// The button's secondary style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.secondary] style.
+  static FBaseButtonStyle Function(FButtonStyle style) secondary([FButtonStyle Function(FButtonStyle style)? style]) =>
+      (_) => _Resolve(
+        (context) => style?.call(context.theme.buttonStyles.secondary) ?? context.theme.buttonStyles.secondary,
+      );
+
+  /// The button's destructive style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.destructive] style.
+  static FBaseButtonStyle Function(FButtonStyle style) destructive([FButtonStyle Function(FButtonStyle style)? style]) =>
+      (_) => _Resolve(
+        (context) => style?.call(context.theme.buttonStyles.destructive) ?? context.theme.buttonStyles.destructive,
+      );
+
+  /// The button's outline style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.outline] style.
+  static FBaseButtonStyle Function(FButtonStyle style) outline([FButtonStyle Function(FButtonStyle style)? style]) =>
+      (_) =>
+          _Resolve((context) => style?.call(context.theme.buttonStyles.outline) ?? context.theme.buttonStyles.outline);
+
+  /// The button's ghost style.
+  ///
+  /// Shorthand for the current context's [FButtonStyles.ghost] style.
+  static FBaseButtonStyle Function(FButtonStyle style) ghost([FButtonStyle Function(FButtonStyle style)? style]) =>
+      (_) => _Resolve((context) => style?.call(context.theme.buttonStyles.ghost) ?? context.theme.buttonStyles.ghost);
+
   /// The box decoration.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
@@ -316,48 +330,34 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
          ),
          tappableStyle: style.tappableStyle,
        );
-
-  /// The button's destructive style.
-  ///
-  /// Shorthand for the current context's [FButtonStyles.destructive] style.
-  static FBaseButtonStyle Function(FButtonStyle style) destructive([
-    FButtonStyle Function(FButtonStyle style)? style,
-  ]) =>
-      (_) => _Resolve(
-        (context) => style?.call(context.theme.buttonStyles.destructive) ?? context.theme.buttonStyles.destructive,
-      );
-
-  /// The button's ghost style.
-  ///
-  /// Shorthand for the current context's [FButtonStyles.ghost] style.
-  static FBaseButtonStyle Function(FButtonStyle style) ghost([FButtonStyle Function(FButtonStyle style)? style]) =>
-      (_) => _Resolve((context) => style?.call(context.theme.buttonStyles.ghost) ?? context.theme.buttonStyles.ghost);
-
-  /// The button's outline style.
-  ///
-  /// Shorthand for the current context's [FButtonStyles.outline] style.
-  static FBaseButtonStyle Function(FButtonStyle style) outline([FButtonStyle Function(FButtonStyle style)? style]) =>
-      (_) =>
-          _Resolve((context) => style?.call(context.theme.buttonStyles.outline) ?? context.theme.buttonStyles.outline);
-
-  /// The button's primary style.
-  ///
-  /// Shorthand for the current context's [FButtonStyles.primary] style.
-  static FBaseButtonStyle Function(FButtonStyle style) primary([FButtonStyle Function(FButtonStyle style)? style]) =>
-      (_) =>
-          _Resolve((context) => style?.call(context.theme.buttonStyles.primary) ?? context.theme.buttonStyles.primary);
-
-  /// The button's secondary style.
-  ///
-  /// Shorthand for the current context's [FButtonStyles.secondary] style.
-  static FBaseButtonStyle Function(FButtonStyle style) secondary([FButtonStyle Function(FButtonStyle style)? style]) =>
-      (_) => _Resolve(
-        (context) => style?.call(context.theme.buttonStyles.secondary) ?? context.theme.buttonStyles.secondary,
-      );
 }
 
-class _Resolve extends FBaseButtonStyle {
-  final FButtonStyle Function(BuildContext context) _resolve;
+/// A button's data.
+class FButtonData extends InheritedWidget {
+  /// Returns the [FButtonData] of the [FButton] in the given [context].
+  @useResult
+  static FButtonData of(BuildContext context) {
+    assert(debugCheckHasAncestor<FButtonData>('$FButton', context));
+    return context.dependOnInheritedWidgetOfExactType<FButtonData>()!;
+  }
 
-  _Resolve(this._resolve);
+  /// The button's style.
+  final FButtonStyle style;
+
+  /// The current states.
+  final Set<WidgetState> states;
+
+  /// Creates a [FButtonData].
+  const FButtonData({required this.style, required this.states, required super.child, super.key});
+
+  @override
+  bool updateShouldNotify(covariant FButtonData old) => style != old.style || !setEquals(states, old.states);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(IterableProperty('states', states));
+  }
 }

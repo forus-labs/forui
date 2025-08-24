@@ -127,7 +127,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
 
   /// The delegate that builds the sliver children.
   // ignore: avoid_positional_boolean_parameters
-  final Widget Function(FTileGroupStyle style, bool isScrollable) _builder;
+  final Widget Function(FTileGroupStyle style, bool scrollable) _builder;
 
   /// Creates a [FTileGroup].
   FTileGroup({
