@@ -39,8 +39,12 @@ sealed class FHeader extends StatelessWidget {
   /// ```shell
   /// dart run forui style create headers
   /// ```
-  const factory FHeader({Widget title, FHeaderStyle Function(FHeaderStyle style)? style, List<Widget> suffixes, Key? key}) =
-      _FRootHeader;
+  const factory FHeader({
+    Widget title,
+    FHeaderStyle Function(FHeaderStyle style)? style,
+    List<Widget> suffixes,
+    Key? key,
+  }) = _FRootHeader;
 
   /// Creates a nested header whose title is aligned to the center.
   ///

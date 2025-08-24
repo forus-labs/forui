@@ -167,7 +167,8 @@ class FPopoverMenu extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
-    List<FItemGroupMixin> Function(BuildContext context, FPopoverController controller, List<FItemGroupMixin>? menu) menuBuilder =
+    List<FItemGroupMixin> Function(BuildContext context, FPopoverController controller, List<FItemGroupMixin>? menu)
+        menuBuilder =
         _defaultItemBuilder,
     List<FItemGroupMixin>? menu,
     this.builder = _builder,
@@ -224,7 +225,8 @@ class FPopoverMenu extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
-    List<FTileGroupMixin> Function(BuildContext context, FPopoverController controller, List<FTileGroupMixin>? menu) menuBuilder =
+    List<FTileGroupMixin> Function(BuildContext context, FPopoverController controller, List<FTileGroupMixin>? menu)
+        menuBuilder =
         _defaultTileBuilder,
     List<FTileGroupMixin>? menu,
     this.builder = _builder,

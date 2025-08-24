@@ -388,8 +388,10 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     ScrollController? contentScrollController,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = FItemDivider.none,
-    Widget Function(BuildContext context, FAutocompleteContentStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
-    Widget Function(BuildContext context, FAutocompleteContentStyle style) contentLoadingBuilder = defaultContentLoadingBuilder,
+    Widget Function(BuildContext context, FAutocompleteContentStyle style) contentEmptyBuilder =
+        defaultContentEmptyBuilder,
+    Widget Function(BuildContext context, FAutocompleteContentStyle style) contentLoadingBuilder =
+        defaultContentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     Key? key,
   }) : this.builder(

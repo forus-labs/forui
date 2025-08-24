@@ -45,7 +45,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   FSelectSection({
     required Widget label,
     required Map<String, T> items,
-  FSelectSectionStyle Function(FSelectSectionStyle style)? style,
+    FSelectSectionStyle Function(FSelectSectionStyle style)? style,
     bool? enabled,
     FItemDivider divider = FItemDivider.none,
     Key? key,
@@ -252,7 +252,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   const factory FSelectItem({
     required Widget title,
     required T value,
-  FItemStyle Function(FItemStyle style)? style,
+    FItemStyle Function(FItemStyle style)? style,
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -265,7 +265,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   const factory FSelectItem.raw({
     required Widget child,
     required T value,
-  FItemStyle Function(FItemStyle style)? style,
+    FItemStyle Function(FItemStyle style)? style,
     bool? enabled,
     Widget? prefix,
     Key? key,

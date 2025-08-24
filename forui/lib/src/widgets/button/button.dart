@@ -248,7 +248,9 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
   /// The button's destructive style.
   ///
   /// Shorthand for the current context's [FButtonStyles.destructive] style.
-  static FBaseButtonStyle Function(FButtonStyle style) destructive([FButtonStyle Function(FButtonStyle style)? style]) =>
+  static FBaseButtonStyle Function(FButtonStyle style) destructive([
+    FButtonStyle Function(FButtonStyle style)? style,
+  ]) =>
       (_) => _Resolve(
         (context) => style?.call(context.theme.buttonStyles.destructive) ?? context.theme.buttonStyles.destructive,
       );
