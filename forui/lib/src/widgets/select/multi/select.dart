@@ -42,7 +42,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
 
   /// The default tag builder that builds a [FMultiSelectTag] with the given value.
   static Widget defaultTagBuilder<T>(
-    BuildContext _,
+    BuildContext context,
     FMultiSelectController<T> controller,
     FMultiSelectStyle style,
     T value,
@@ -318,7 +318,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget Function(BuildContext context, String message) errorBuilder,
     Widget? hint,
     bool keepHint,
-    int Function(T a, T b)? sort,
+    int Function(T, T)? sort,
     FMultiSelectTagBuilder<T>? tagBuilder,
     TextAlign textAlign,
     TextDirection? textDirection,
@@ -380,7 +380,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Widget? hint,
     bool keepHint = true,
-    int Function(T a, T b)? sort,
+    int Function(T, T)? sort,
     FMultiSelectTagBuilder<T>? tagBuilder,
     TextAlign textAlign = TextAlign.start,
     TextDirection? textDirection,
@@ -468,7 +468,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// asynchronously by [filter].
   /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
   factory FMultiSelect.searchBuilder({
-    required Widget Function(T value) format,
+    required Widget Function(T) format,
     required FutureOr<Iterable<T>> Function(String query) filter,
     required FSelectSearchContentBuilder<T> contentBuilder,
     FSelectSearchFieldProperties searchFieldProperties,
@@ -491,7 +491,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget Function(BuildContext context, String message) errorBuilder,
     Widget? hint,
     bool keepHint,
-    int Function(T a, T b)? sort,
+    int Function(T, T)? sort,
     FMultiSelectTagBuilder<T>? tagBuilder,
     TextAlign textAlign,
     TextDirection? textDirection,
@@ -551,7 +551,14 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.contentDivider = FItemDivider.none,
     this.min = 0,
     this.max,
-    Widget Function(BuildContext, FMultiSelectController<T>, FMultiSelectStyle, T, Widget)? tagBuilder,
+    Widget Function(
+      BuildContext context,
+      FMultiSelectController<T> controller,
+      FMultiSelectStyle style,
+      T value,
+      Widget label,
+    )?
+    tagBuilder,
     Set<T>? initialValue,
     super.key,
   }) : tagBuilder = tagBuilder ?? defaultTagBuilder,

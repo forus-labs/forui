@@ -1,71 +1,5 @@
 part of '../time_field.dart';
 
-class _PickerPopover extends StatelessWidget {
-  final FTimeFieldController controller;
-  final FTimeFieldStyle style;
-  final FTimeFieldPickerProperties properties;
-  final bool hour24;
-  final bool autofocus;
-  final FocusNode? fieldFocusNode;
-  final Widget child;
-
-  const _PickerPopover({
-    required this.controller,
-    required this.style,
-    required this.properties,
-    required this.hour24,
-    required this.autofocus,
-    required this.fieldFocusNode,
-    required this.child,
-  });
-
-  @override
-  Widget build(BuildContext _) => FPopover(
-    style: style.popoverStyle,
-    controller: controller.popover,
-    constraints: style.popoverConstraints,
-    popoverAnchor: properties.anchor,
-    childAnchor: properties.inputAnchor,
-    spacing: properties.spacing,
-    shift: properties.shift,
-    offset: properties.offset,
-    hideRegion: properties.hideRegion,
-    onTapHide: properties.onTapHide,
-    autofocus: autofocus,
-    shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
-    popoverBuilder: (_, _) => TextFieldTapRegion(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-        child: FTimePicker(
-          controller: controller._picker,
-          style: style.pickerStyle,
-          hour24: hour24,
-          hourInterval: properties.hourInterval,
-          minuteInterval: properties.minuteInterval,
-        ),
-      ),
-    ),
-    child: child,
-  );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('properties', this.properties))
-      ..add(DiagnosticsProperty('hour24', hour24))
-      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('fieldFocusNode', fieldFocusNode));
-  }
-
-  void _hide() {
-    fieldFocusNode?.requestFocus();
-    controller.popover.hide();
-  }
-}
-
 // ignore: avoid_implementing_value_types
 class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties {
   final DateFormat? format;
@@ -83,7 +17,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final FPortalSpacing spacing;
   @override
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   @override
   final Offset offset;
   @override
@@ -157,6 +91,81 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   DateFormat? _format;
 
   @override
+  void initState() {
+    super.initState();
+    _controller._picker.addListener(_updateTextController);
+    _controller.addValueListener(_onChange);
+  }
+
+  @override
+  void didUpdateWidget(covariant _PickerTimeField old) {
+    super.didUpdateWidget(old);
+    // DO NOT REORDER
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focus.dispose();
+      }
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTimeField');
+    }
+
+    if (widget.hour24 != old.hour24) {
+      final localizations = FLocalizations.of(context)?.localeName;
+      _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
+    }
+
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        _controller._picker.removeListener(_updateTextController);
+        _controller.removeValueListener(_onChange);
+      }
+
+      _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
+      _controller._picker.addListener(_updateTextController);
+      _controller.addValueListener(_onChange);
+      _updateTextController();
+    }
+  }
+
+  void _onChange(FTime? time) => widget.onChange?.call(time);
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final localizations = FLocalizations.of(context)?.localeName;
+    _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
+
+    _updateTextController();
+  }
+
+  void _updateTextController() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (_controller._picker.value case final value) {
+        final time = value.withDate(DateTime(1970));
+        _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller._picker.removeListener(_updateTextController);
+      _controller.removeValueListener(_onChange);
+    }
+
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.timeFieldStyle) ?? context.theme.timeFieldStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
@@ -210,85 +219,76 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     );
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final localizations = FLocalizations.of(context)?.localeName;
-    _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
-
-    _updateTextController();
-  }
-
-  @override
-  void didUpdateWidget(covariant _PickerTimeField old) {
-    super.didUpdateWidget(old);
-    // DO NOT REORDER
-    if (widget.focusNode != old.focusNode) {
-      if (old.focusNode == null) {
-        _focus.dispose();
-      }
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTimeField');
-    }
-
-    if (widget.hour24 != old.hour24) {
-      final localizations = FLocalizations.of(context)?.localeName;
-      _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
-    }
-
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller._picker.removeListener(_updateTextController);
-        _controller.removeValueListener(_onChange);
-      }
-
-      _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
-      _controller._picker.addListener(_updateTextController);
-      _controller.addValueListener(_onChange);
-      _updateTextController();
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller._picker.removeListener(_updateTextController);
-      _controller.removeValueListener(_onChange);
-    }
-
-    if (widget.focusNode == null) {
-      _focus.dispose();
-    }
-    _textController.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _controller._picker.addListener(_updateTextController);
-    _controller.addValueListener(_onChange);
-  }
-
-  void _onChange(FTime? time) => widget.onChange?.call(time);
-
   void _onTap() {
     const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_controller.popover.status)
         ? _focus.requestFocus()
         : _focus.unfocus();
     _controller.popover.toggle();
   }
+}
 
-  void _updateTextController() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (_controller._picker.value case final value) {
-        final time = value.withDate(DateTime(1970));
-        _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
-      }
-    });
+class _PickerPopover extends StatelessWidget {
+  final FTimeFieldController controller;
+  final FTimeFieldStyle style;
+  final FTimeFieldPickerProperties properties;
+  final bool hour24;
+  final bool autofocus;
+  final FocusNode? fieldFocusNode;
+  final Widget child;
+
+  const _PickerPopover({
+    required this.controller,
+    required this.style,
+    required this.properties,
+    required this.hour24,
+    required this.autofocus,
+    required this.fieldFocusNode,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext _) => FPopover(
+    style: style.popoverStyle,
+    controller: controller.popover,
+    constraints: style.popoverConstraints,
+    popoverAnchor: properties.anchor,
+    childAnchor: properties.inputAnchor,
+    spacing: properties.spacing,
+    shift: properties.shift,
+    offset: properties.offset,
+    hideRegion: properties.hideRegion,
+    onTapHide: properties.onTapHide,
+    autofocus: autofocus,
+    shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
+    popoverBuilder: (_, _) => TextFieldTapRegion(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: FTimePicker(
+          controller: controller._picker,
+          style: style.pickerStyle,
+          hour24: hour24,
+          hourInterval: properties.hourInterval,
+          minuteInterval: properties.minuteInterval,
+        ),
+      ),
+    ),
+    child: child,
+  );
+
+  void _hide() {
+    fieldFocusNode?.requestFocus();
+    controller.popover.hide();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('properties', this.properties))
+      ..add(DiagnosticsProperty('hour24', hour24))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('fieldFocusNode', fieldFocusNode));
   }
 }

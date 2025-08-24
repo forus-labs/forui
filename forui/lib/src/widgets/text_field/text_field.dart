@@ -4,8 +4,21 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:forui/forui.dart';
+
+/// A callback for building a custom counter for a text field.
+///
+/// [currentLength] is the length of the text field's input.
+/// [maxLength] is the maximum length of the text field's input.
+/// [focused] is whether the text field is currently focused.
+///
+/// See [FTextField.counterBuilder].
+typedef FTextFieldCounterBuilder =
+    // ignore: avoid_positional_boolean_parameters
+    Widget? Function(BuildContext context, int currentLength, int? maxLength, bool focused);
 
 /// A callback for decorating a field. It should always use the given field.
 ///
@@ -24,16 +37,15 @@ typedef FFieldBuilder<T> = Widget Function(BuildContext context, T style, Set<Wi
 /// See [FTextField.prefixBuilder] and [FTextField.suffixBuilder].
 typedef FFieldIconBuilder<T> = Widget Function(BuildContext context, T style, Set<WidgetState> states);
 
-/// A callback for building a custom counter for a text field.
-///
-/// [currentLength] is the length of the text field's input.
-/// [maxLength] is the maximum length of the text field's input.
-/// [focused] is whether the text field is currently focused.
-///
-/// See [FTextField.counterBuilder].
-typedef FTextFieldCounterBuilder =
-    // ignore: avoid_positional_boolean_parameters
-    Widget? Function(BuildContext context, int currentLength, int? maxLength, bool focused);
+@internal
+extension Defaults on Never {
+  static bool clearable(TextEditingValue _) => false;
+
+  static Widget contextMenuBuilder(BuildContext _, EditableTextState state) =>
+      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+
+  static Widget builder(BuildContext _, FTextFieldStyle _, Set<WidgetState> _, Widget child) => child;
+}
 
 /// A text field.
 ///
@@ -55,7 +67,7 @@ class FTextField extends StatefulWidget {
   /// dart run forui style create text-field
   /// ```
   /// {@endtemplate}
-  final FTextFieldStyle Function(FTextFieldStyle style)? style;
+  final FTextFieldStyle Function(FTextFieldStyle)? style;
 
   /// {@template forui.text_field.builder}
   /// The builder used to decorate the text-field. It should always use the given child.
@@ -670,7 +682,7 @@ class FTextField extends StatefulWidget {
   ///
   /// Defaults to always returning false.
   /// {@endtemplate}
-  final bool Function(TextEditingValue value) clearable;
+  final bool Function(TextEditingValue) clearable;
 
   /// {@template forui.text_field.initialValue}
   /// The initial text.
@@ -822,6 +834,80 @@ class FTextField extends StatefulWidget {
          'To fix, set the initial text directly in the controller.',
        );
 
+  /// Creates a [FTextField] configured for passwords.
+  ///
+  /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
+  /// when handling the creation of new passwords.
+  const FTextField.password({
+    this.style,
+    this.builder = Defaults.builder,
+    this.label = const Text('Password'),
+    this.hint,
+    this.description,
+    this.error,
+    this.magnifierConfiguration,
+    this.groupId = EditableText,
+    this.controller,
+    this.focusNode,
+    this.keyboardType,
+    this.textInputAction = TextInputAction.next,
+    this.textCapitalization = TextCapitalization.none,
+    this.textAlign = TextAlign.start,
+    this.textAlignVertical,
+    this.textDirection,
+    this.autofocus = false,
+    this.statesController,
+    this.obscuringCharacter = '•',
+    this.obscureText = true,
+    this.autocorrect = false,
+    this.smartDashesType,
+    this.smartQuotesType,
+    this.enableSuggestions = true,
+    this.minLines,
+    this.maxLines = 1,
+    this.expands = false,
+    this.readOnly = false,
+    this.showCursor,
+    this.maxLength,
+    this.maxLengthEnforcement,
+    this.onChange,
+    this.onTap,
+    this.onTapOutside,
+    this.onTapAlwaysCalled = false,
+    this.onEditingComplete,
+    this.onSubmit,
+    this.onAppPrivateCommand,
+    this.inputFormatters,
+    this.enabled = true,
+    this.ignorePointers,
+    this.enableInteractiveSelection = true,
+    this.selectAllOnFocus,
+    this.selectionControls,
+    this.dragStartBehavior = DragStartBehavior.start,
+    this.mouseCursor,
+    this.counterBuilder,
+    this.scrollPhysics,
+    this.scrollController,
+    this.autofillHints = const [AutofillHints.password],
+    this.restorationId,
+    this.stylusHandwritingEnabled = true,
+    this.enableIMEPersonalizedLearning = true,
+    this.contentInsertionConfiguration,
+    this.contextMenuBuilder = Defaults.contextMenuBuilder,
+    this.canRequestFocus = true,
+    this.undoController,
+    this.spellCheckConfiguration,
+    this.prefixBuilder,
+    this.suffixBuilder,
+    this.clearable = Defaults.clearable,
+    this.initialText,
+    super.key,
+  }) : assert(
+         controller == null || initialText == null,
+         'Cannot provide both a controller and an initialText. '
+         'To fix, set the initial text directly in the controller.',
+       );
+
   /// Creates a [FTextField] configured for multiline inputs.
   ///
   /// The text field's height can be configured by adjusting [minLines]. By default, the text field will expand every
@@ -878,80 +964,6 @@ class FTextField extends StatefulWidget {
     this.scrollPhysics,
     this.scrollController,
     this.autofillHints,
-    this.restorationId,
-    this.stylusHandwritingEnabled = true,
-    this.enableIMEPersonalizedLearning = true,
-    this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
-    this.canRequestFocus = true,
-    this.undoController,
-    this.spellCheckConfiguration,
-    this.prefixBuilder,
-    this.suffixBuilder,
-    this.clearable = Defaults.clearable,
-    this.initialText,
-    super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and an initialText. '
-         'To fix, set the initial text directly in the controller.',
-       );
-
-  /// Creates a [FTextField] configured for passwords.
-  ///
-  /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
-  /// when handling the creation of new passwords.
-  const FTextField.password({
-    this.style,
-    this.builder = Defaults.builder,
-    this.label = const Text('Password'),
-    this.hint,
-    this.description,
-    this.error,
-    this.magnifierConfiguration,
-    this.groupId = EditableText,
-    this.controller,
-    this.focusNode,
-    this.keyboardType,
-    this.textInputAction = TextInputAction.next,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
-    this.textAlignVertical,
-    this.textDirection,
-    this.autofocus = false,
-    this.statesController,
-    this.obscuringCharacter = '•',
-    this.obscureText = true,
-    this.autocorrect = false,
-    this.smartDashesType,
-    this.smartQuotesType,
-    this.enableSuggestions = true,
-    this.minLines,
-    this.maxLines = 1,
-    this.expands = false,
-    this.readOnly = false,
-    this.showCursor,
-    this.maxLength,
-    this.maxLengthEnforcement,
-    this.onChange,
-    this.onTap,
-    this.onTapOutside,
-    this.onTapAlwaysCalled = false,
-    this.onEditingComplete,
-    this.onSubmit,
-    this.onAppPrivateCommand,
-    this.inputFormatters,
-    this.enabled = true,
-    this.ignorePointers,
-    this.enableInteractiveSelection = true,
-    this.selectAllOnFocus,
-    this.selectionControls,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.mouseCursor,
-    this.counterBuilder,
-    this.scrollPhysics,
-    this.scrollController,
-    this.autofillHints = const [AutofillHints.password],
     this.restorationId,
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
@@ -1053,6 +1065,50 @@ class FTextField extends StatefulWidget {
 class _State extends State<FTextField> {
   late TextEditingController _controller;
   late WidgetStatesController _statesController;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+    _controller.addListener(_handleOnChange);
+
+    _statesController = widget.statesController ?? WidgetStatesController();
+    _statesController.addListener(_handleStatesChange);
+  }
+
+  @override
+  void didUpdateWidget(covariant FTextField old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        _controller.removeListener(_handleOnChange);
+      }
+
+      _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+      _controller.addListener(_handleOnChange);
+    }
+
+    if (widget.statesController != old.statesController) {
+      if (old.statesController == null) {
+        _statesController.dispose();
+      } else {
+        _statesController.removeListener(_handleStatesChange);
+      }
+
+      _statesController = widget.statesController ?? WidgetStatesController();
+      _statesController.addListener(_handleStatesChange);
+    }
+  }
+
+  void _handleOnChange() => widget.onChange?.call(_controller.text);
+
+  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
+    if (mounted) {
+      setState(() {});
+    }
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -1174,58 +1230,6 @@ class _State extends State<FTextField> {
     return field;
   }
 
-  @override
-  void didUpdateWidget(covariant FTextField old) {
-    super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller.removeListener(_handleOnChange);
-      }
-
-      _controller = widget.controller ?? TextEditingController(text: widget.initialText);
-      _controller.addListener(_handleOnChange);
-    }
-
-    if (widget.statesController != old.statesController) {
-      if (old.statesController == null) {
-        _statesController.dispose();
-      } else {
-        _statesController.removeListener(_handleStatesChange);
-      }
-
-      _statesController = widget.statesController ?? WidgetStatesController();
-      _statesController.addListener(_handleStatesChange);
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.statesController == null) {
-      _statesController.dispose();
-    } else {
-      _statesController.removeListener(_handleStatesChange);
-    }
-
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_handleOnChange);
-    }
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? TextEditingController(text: widget.initialText);
-    _controller.addListener(_handleOnChange);
-
-    _statesController = widget.statesController ?? WidgetStatesController();
-    _statesController.addListener(_handleStatesChange);
-  }
-
   InputDecoration _decoration(FTextFieldStyle style) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
@@ -1279,21 +1283,19 @@ class _State extends State<FTextField> {
     );
   }
 
-  void _handleOnChange() => widget.onChange?.call(_controller.text);
-
-  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
-    if (mounted) {
-      setState(() {});
+  @override
+  void dispose() {
+    if (widget.statesController == null) {
+      _statesController.dispose();
+    } else {
+      _statesController.removeListener(_handleStatesChange);
     }
-  });
-}
 
-@internal
-extension Defaults on Never {
-  static Widget builder(BuildContext _, FTextFieldStyle _, Set<WidgetState> _, Widget child) => child;
-
-  static bool clearable(TextEditingValue _) => false;
-
-  static Widget contextMenuBuilder(BuildContext _, EditableTextState state) =>
-      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller.removeListener(_handleOnChange);
+    }
+    super.dispose();
+  }
 }

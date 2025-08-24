@@ -1,10 +1,12 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:collection/collection.dart';
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
-import 'package:meta/meta.dart';
 
 part 'field.style.dart';
 
@@ -30,7 +32,7 @@ class Field<T> extends FormField<Set<T>> {
   final AlignmentGeometry fieldAnchor;
   final FPortalConstraints popoverConstraints;
   final FPortalSpacing spacing;
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
   final Offset offset;
   final FPopoverHideRegion hideRegion;
   final ValueChanged<Set<T>>? onChange;
@@ -70,8 +72,8 @@ class Field<T> extends FormField<Set<T>> {
     required super.autovalidateMode,
     required super.forceErrorText,
     required super.errorBuilder,
-    required void Function(Set<T> values)? onSaved,
-    required String? Function(Set<T> values)? validator,
+    required void Function(Set<T>)? onSaved,
+    required String? Function(Set<T>)? validator,
     required super.initialValue,
     super.key,
   }) : super(
@@ -220,6 +222,112 @@ class Field<T> extends FormField<Set<T>> {
   }
 }
 
+class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMixin {
+  late FMultiSelectController<T> _controller;
+  late final FocusNode _focus;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller =
+        widget.controller ??
+        FMultiSelectController(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue ?? {});
+    _controller
+      ..addListener(_handleChange)
+      ..addValueListener(_onChange);
+
+    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
+  }
+
+  @override
+  void didUpdateWidget(covariant Field<T> old) {
+    super.didUpdateWidget(old);
+    // DO NOT REORDER
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focus.dispose();
+      }
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
+    }
+
+    if (widget.controller != old.controller) {
+      if (old.controller == null) {
+        _controller.dispose();
+      } else {
+        old.controller?.removeListener(_handleChange);
+        old.controller?.removeValueListener(_onChange);
+      }
+
+      if (widget.controller case final controller?) {
+        _controller = controller;
+      } else {
+        _controller = FMultiSelectController(
+          vsync: this,
+          min: widget.min,
+          max: widget.max,
+          value: widget.initialValue ?? {},
+        );
+      }
+
+      _controller
+        ..addListener(_handleChange)
+        ..addValueListener(_onChange);
+    }
+  }
+
+  void _onChange(Set<T> value) => widget.onChange?.call(value);
+
+  // Suppress changes that originated from within this class.
+  //
+  // In the case where a controller has been passed in to this widget, we register this change listener. In these
+  // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
+  // reset() method. In such cases, the FormField value will already have been set.
+  void _handleChange() {
+    if (!setEquals(_controller.value, value)) {
+      didChange(_controller.value);
+    }
+  }
+
+  void _toggle() {
+    _controller.popover.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
+    _controller.popover.toggle();
+  }
+
+  @override
+  void didChange(Set<T>? value) {
+    super.didChange(value);
+    if (!setEquals(_controller.value, value)) {
+      _controller.value = value ?? {};
+    }
+  }
+
+  @override
+  void reset() {
+    // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
+    _controller.value = widget.initialValue ?? {};
+    super.reset();
+  }
+
+  @override
+  Field<T> get widget => super.widget as Field<T>;
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _controller.dispose();
+    } else {
+      _controller
+        ..removeListener(_handleChange)
+        ..removeValueListener(_onChange);
+    }
+
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
+    super.dispose();
+  }
+}
+
 /// A [FMultiSelectFieldStyle]'s style.
 class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
   /// The multi-select field's decoration.
@@ -349,111 +457,5 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       errorPadding: label.errorPadding,
       childPadding: label.childPadding,
     );
-  }
-}
-
-class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMixin {
-  late FMultiSelectController<T> _controller;
-  late final FocusNode _focus;
-
-  @override
-  Field<T> get widget => super.widget as Field<T>;
-
-  @override
-  void didChange(Set<T>? value) {
-    super.didChange(value);
-    if (!setEquals(_controller.value, value)) {
-      _controller.value = value ?? {};
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant Field<T> old) {
-    super.didUpdateWidget(old);
-    // DO NOT REORDER
-    if (widget.focusNode != old.focusNode) {
-      if (old.focusNode == null) {
-        _focus.dispose();
-      }
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
-    }
-
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeListener(_handleChange);
-        old.controller?.removeValueListener(_onChange);
-      }
-
-      if (widget.controller case final controller?) {
-        _controller = controller;
-      } else {
-        _controller = FMultiSelectController(
-          vsync: this,
-          min: widget.min,
-          max: widget.max,
-          value: widget.initialValue ?? {},
-        );
-      }
-
-      _controller
-        ..addListener(_handleChange)
-        ..addValueListener(_onChange);
-    }
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller
-        ..removeListener(_handleChange)
-        ..removeValueListener(_onChange);
-    }
-
-    if (widget.focusNode == null) {
-      _focus.dispose();
-    }
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _controller =
-        widget.controller ??
-        FMultiSelectController(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue ?? {});
-    _controller
-      ..addListener(_handleChange)
-      ..addValueListener(_onChange);
-
-    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
-  }
-
-  @override
-  void reset() {
-    // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
-    _controller.value = widget.initialValue ?? {};
-    super.reset();
-  }
-
-  // Suppress changes that originated from within this class.
-  //
-  // In the case where a controller has been passed in to this widget, we register this change listener. In these
-  // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
-  // reset() method. In such cases, the FormField value will already have been set.
-  void _handleChange() {
-    if (!setEquals(_controller.value, value)) {
-      didChange(_controller.value);
-    }
-  }
-
-  void _onChange(Set<T> value) => widget.onChange?.call(value);
-
-  void _toggle() {
-    _controller.popover.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
-    _controller.popover.toggle();
   }
 }

@@ -4,9 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
-import 'package:meta/meta.dart';
 
 /// Shows a persistent sheet that appears above the current widget. It should have a [FSheets] or [FScaffold] ancestor.
 ///
@@ -57,7 +59,7 @@ FPersistentSheetController showFPersistentSheet({
   required BuildContext context,
   required FLayout side,
   required Widget Function(BuildContext context, FPersistentSheetController controller) builder,
-  FSheetStyle Function(FSheetStyle style)? style,
+  FSheetStyle Function(FSheetStyle)? style,
   double? mainAxisMaxRatio = 9 / 16,
   BoxConstraints constraints = const BoxConstraints(),
   bool draggable = true,
@@ -160,6 +162,15 @@ class FPersistentSheetController {
     _controller.addStatusListener((status) => setState(() {}));
   }
 
+  /// Shows the sheet if it is hidden.
+  TickerFuture show() => _controller.forward();
+
+  /// Shows the sheet if it is hidden and hides it if it is shown.
+  TickerFuture toggle() => _controller.toggle();
+
+  /// Hides the sheet if it is shown.
+  TickerFuture hide() => _controller.reverse();
+
   /// The current status.
   ///
   /// [AnimationStatus.dismissed] - The sheet is hidden.
@@ -176,15 +187,6 @@ class FPersistentSheetController {
       FlutterMemoryAllocations.instance.dispatchObjectDisposed(object: this);
     }
   }
-
-  /// Hides the sheet if it is shown.
-  TickerFuture hide() => _controller.reverse();
-
-  /// Shows the sheet if it is hidden.
-  TickerFuture show() => _controller.forward();
-
-  /// Shows the sheet if it is hidden and hides it if it is shown.
-  TickerFuture toggle() => _controller.toggle();
 }
 
 /// Sheets that are displayed above its [child]. It is part of [FScaffold], which should be preferred in most cases.
@@ -235,12 +237,6 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
     ],
   );
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('sheets', sheets));
-  }
-
   void _add(FPersistentSheetController controller, Sheet sheet) {
     if (!mounted) {
       return;
@@ -275,5 +271,11 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
         }
       });
     }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('sheets', sheets));
   }
 }

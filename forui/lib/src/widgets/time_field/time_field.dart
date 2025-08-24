@@ -2,14 +2,74 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:intl/intl.dart' hide TextDirection;
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_field/input/time_input.dart';
 import 'package:forui/src/widgets/time_field/picker/picker_form_field.dart';
 import 'package:forui/src/widgets/time_field/picker/properties.dart';
-import 'package:intl/intl.dart' hide TextDirection;
 
 part 'input/input_time_field.dart';
+
 part 'picker/picker_time_field.dart';
+
+/// The time field's controller.
+class FTimeFieldController extends FValueNotifier<FTime?> {
+  static String? _defaultValidator(FTime? _) => null;
+
+  /// The controller for the popover. Does nothing if the time field is input only.
+  ///
+  /// ## Contract
+  /// Manually disposing this controller is undefined behavior. Dispose this [FTimeFieldController] instead.
+  final FPopoverController popover;
+
+  /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
+  /// whether a time in a picker is selectable.
+  ///
+  /// Defaults to always returning null.
+  final FormFieldValidator<FTime> validator;
+
+  final FTimePickerController _picker;
+  bool _mutating = false;
+
+  /// Creates a [FTimeFieldController].
+  FTimeFieldController({
+    required TickerProvider vsync,
+    this.validator = _defaultValidator,
+    FTime? initialTime,
+    Duration popoverAnimationDuration = const Duration(milliseconds: 100),
+  }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
+       _picker = FTimePickerController(initial: initialTime ?? const FTime()),
+       super(initialTime) {
+    _picker.addValueListener((time) {
+      try {
+        _mutating = true;
+        value = time;
+      } finally {
+        _mutating = false;
+      }
+    });
+
+    addValueListener(update);
+  }
+
+  @override
+  void dispose() {
+    _picker.dispose();
+    popover.dispose();
+    super.dispose();
+  }
+}
+
+@internal
+extension FTimeFieldControllers on FTimeFieldController {
+  void update(FTime? time) {
+    if (!_mutating && time != null) {
+      _picker.value = time;
+    }
+  }
+}
 
 /// A time field allows a time to be selected from a picker or input field.
 ///
@@ -38,6 +98,14 @@ part 'picker/picker_time_field.dart';
 /// * [FTimeFieldController] for controlling a time field.
 /// * [FTimeFieldStyle] for customizing a time field's appearance.
 abstract class FTimeField extends StatefulWidget {
+  /// The default prefix builder that shows a clock icon.
+  static Widget defaultIconBuilder(BuildContext _, FTimeFieldStyle style, Set<WidgetState> states) => Padding(
+    padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
+    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.clock4)),
+  );
+
+  static Widget _fieldBuilder(BuildContext _, FTimeFieldStyle _, Set<WidgetState> _, Widget child) => child;
+
   /// The controller.
   ///
   /// ## Contract
@@ -53,7 +121,7 @@ abstract class FTimeField extends StatefulWidget {
   /// ```shell
   /// dart run forui style create time-field
   /// ```
-  final FTimeFieldStyle Function(FTimeFieldStyle style)? style;
+  final FTimeFieldStyle Function(FTimeFieldStyle)? style;
 
   /// The initial time.
   ///
@@ -123,6 +191,30 @@ abstract class FTimeField extends StatefulWidget {
   /// [FTimeFieldController.validator] will not be called unless [forceErrorText] is null.
   final String? forceErrorText;
 
+  const FTimeField._({
+    this.controller,
+    this.style,
+    this.initialTime,
+    this.hour24 = false,
+    this.autofocus = false,
+    this.focusNode,
+    this.builder = _fieldBuilder,
+    this.prefixBuilder = defaultIconBuilder,
+    this.suffixBuilder,
+    this.label,
+    this.description,
+    this.enabled = true,
+    this.onChange,
+    this.onSaved,
+    this.autovalidateMode = AutovalidateMode.onUnfocus,
+    this.forceErrorText,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    super.key,
+  }) : assert(
+         controller == null || initialTime == null,
+         'Cannot provide both a controller and initialTime. To fix, set the initial time directly in the controller.',
+       );
+
   /// Creates a time field that wraps a text input field.
   ///
   /// The [textInputAction] property can be used to specify the action button on the soft keyboard. The [textAlign]
@@ -148,7 +240,7 @@ abstract class FTimeField extends StatefulWidget {
   /// * [FTimeField.picker] - Creates a time field with only a picker.
   const factory FTimeField({
     FTimeFieldController? controller,
-    FTimeFieldStyle Function(FTimeFieldStyle style)? style,
+    FTimeFieldStyle Function(FTimeFieldStyle)? style,
     FTime? initialTime,
     bool hour24,
     bool autofocus,
@@ -218,7 +310,7 @@ abstract class FTimeField extends StatefulWidget {
   /// * [FTimeField.new] - Creates a time field with only an input field.
   const factory FTimeField.picker({
     FTimeFieldController? controller,
-    FTimeFieldStyle Function(FTimeFieldStyle style)? style,
+    FTimeFieldStyle Function(FTimeFieldStyle)? style,
     FTime? initialTime,
     bool hour24,
     DateFormat? format,
@@ -234,7 +326,7 @@ abstract class FTimeField extends StatefulWidget {
     Alignment anchor,
     Alignment inputAnchor,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
+    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
     Offset offset,
     FPopoverHideRegion hideRegion,
     VoidCallback? onTapHide,
@@ -253,30 +345,6 @@ abstract class FTimeField extends StatefulWidget {
     Widget Function(BuildContext context, String message) errorBuilder,
     Key? key,
   }) = _PickerTimeField;
-
-  const FTimeField._({
-    this.controller,
-    this.style,
-    this.initialTime,
-    this.hour24 = false,
-    this.autofocus = false,
-    this.focusNode,
-    this.builder = _fieldBuilder,
-    this.prefixBuilder = defaultIconBuilder,
-    this.suffixBuilder,
-    this.label,
-    this.description,
-    this.enabled = true,
-    this.onChange,
-    this.onSaved,
-    this.autovalidateMode = AutovalidateMode.onUnfocus,
-    this.forceErrorText,
-    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    super.key,
-  }) : assert(
-         controller == null || initialTime == null,
-         'Cannot provide both a controller and initialTime. To fix, set the initial time directly in the controller.',
-       );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -298,75 +366,9 @@ abstract class FTimeField extends StatefulWidget {
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText));
   }
-
-  /// The default prefix builder that shows a clock icon.
-  static Widget defaultIconBuilder(BuildContext _, FTimeFieldStyle style, Set<WidgetState> states) => Padding(
-    padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
-    child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.clock4)),
-  );
-
-  static Widget _fieldBuilder(BuildContext _, FTimeFieldStyle _, Set<WidgetState> _, Widget child) => child;
-}
-
-/// The time field's controller.
-class FTimeFieldController extends FValueNotifier<FTime?> {
-  /// The controller for the popover. Does nothing if the time field is input only.
-  ///
-  /// ## Contract
-  /// Manually disposing this controller is undefined behavior. Dispose this [FTimeFieldController] instead.
-  final FPopoverController popover;
-
-  /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
-  /// whether a time in a picker is selectable.
-  ///
-  /// Defaults to always returning null.
-  final FormFieldValidator<FTime> validator;
-
-  final FTimePickerController _picker;
-
-  bool _mutating = false;
-
-  /// Creates a [FTimeFieldController].
-  FTimeFieldController({
-    required TickerProvider vsync,
-    this.validator = _defaultValidator,
-    FTime? initialTime,
-    Duration popoverAnimationDuration = const Duration(milliseconds: 100),
-  }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
-       _picker = FTimePickerController(initial: initialTime ?? const FTime()),
-       super(initialTime) {
-    _picker.addValueListener((time) {
-      try {
-        _mutating = true;
-        value = time;
-      } finally {
-        _mutating = false;
-      }
-    });
-
-    addValueListener(update);
-  }
-
-  @override
-  void dispose() {
-    _picker.dispose();
-    popover.dispose();
-    super.dispose();
-  }
-
-  static String? _defaultValidator(FTime? _) => null;
 }
 
 abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with SingleTickerProviderStateMixin {
   late FTimeFieldController _controller =
       widget.controller ?? FTimeFieldController(vsync: this, initialTime: widget.initialTime);
-}
-
-@internal
-extension FTimeFieldControllers on FTimeFieldController {
-  void update(FTime? time) {
-    if (!_mutating && time != null) {
-      _picker.value = time;
-    }
-  }
 }

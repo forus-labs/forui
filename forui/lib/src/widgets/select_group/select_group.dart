@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-import 'package:meta/meta.dart';
 
 part 'select_group.style.dart';
 
@@ -76,7 +78,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   /// ```shell
   /// dart run forui style create select-group
   /// ```
-  final FSelectGroupStyle Function(FSelectGroupStyle style)? style;
+  final FSelectGroupStyle Function(FSelectGroupStyle)? style;
 
   @override
   final Widget? label;
