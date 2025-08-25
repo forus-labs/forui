@@ -248,7 +248,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       current: FCalendarEntryStyle(
         backgroundColor: FWidgetStateMap({
           ...background,
-          WidgetState.selected: colors.primary,
+          WidgetState.selected: colors.foreground,
           ~WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): colors.secondary,
           WidgetState.any: colors.background,
         }),

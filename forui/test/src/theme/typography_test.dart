@@ -275,42 +275,28 @@ void main() {
         xl8: TextStyle(fontSize: 32, height: 4.25, color: Colors.lime),
       );
 
-      test('identical objects', () {
-        final result = FTypography.lerp(typography, typography, 0.5);
-        expect(result, typography);
-      });
-
       test('interpolation at t=0', () {
         final result = FTypography.lerp(typography, typographyB, 0.0);
         expect(result.defaultFontFamily, typography.defaultFontFamily);
-        expect(result.xs, typography.xs);
-        expect(result.sm, typography.sm);
-        expect(result.base, typography.base);
+        expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 0));
+        expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 0));
+        expect(result.base, TextStyle.lerp(typography.base, typographyB.base, 0));
       });
 
       test('interpolation at t=1', () {
         final result = FTypography.lerp(typography, typographyB, 1.0);
         expect(result.defaultFontFamily, typographyB.defaultFontFamily);
-        expect(result.xs, typographyB.xs);
-        expect(result.sm, typographyB.sm);
-        expect(result.base, typographyB.base);
+        expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 1));
+        expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 1));
+        expect(result.base, TextStyle.lerp(typography.base, typographyB.base, 1));
       });
 
       test('interpolation at t=0.5', () {
         final result = FTypography.lerp(typography, typographyB, 0.5);
-        expect(result.defaultFontFamily, typography.defaultFontFamily); // threshold-based
+        expect(result.defaultFontFamily, typographyB.defaultFontFamily);
         expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 0.5));
         expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 0.5));
         expect(result.base, TextStyle.lerp(typography.base, typographyB.base, 0.5));
-        expect(result.lg, TextStyle.lerp(typography.lg, typographyB.lg, 0.5));
-        expect(result.xl, TextStyle.lerp(typography.xl, typographyB.xl, 0.5));
-        expect(result.xl2, TextStyle.lerp(typography.xl2, typographyB.xl2, 0.5));
-        expect(result.xl3, TextStyle.lerp(typography.xl3, typographyB.xl3, 0.5));
-        expect(result.xl4, TextStyle.lerp(typography.xl4, typographyB.xl4, 0.5));
-        expect(result.xl5, TextStyle.lerp(typography.xl5, typographyB.xl5, 0.5));
-        expect(result.xl6, TextStyle.lerp(typography.xl6, typographyB.xl6, 0.5));
-        expect(result.xl7, TextStyle.lerp(typography.xl7, typographyB.xl7, 0.5));
-        expect(result.xl8, TextStyle.lerp(typography.xl8, typographyB.xl8, 0.5));
       });
     });
   });

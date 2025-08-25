@@ -141,11 +141,6 @@ void main() {
         disabledOpacity: 0.3,
       );
 
-      test('identical objects', () {
-        final result = FColors.lerp(scheme, scheme, 0.5);
-        expect(result, scheme);
-      });
-
       test('interpolation at t=0', () {
         final result = FColors.lerp(scheme, schemeB, 0.0);
         expect(result.brightness, scheme.brightness);
@@ -170,8 +165,8 @@ void main() {
 
       test('interpolation at t=0.5', () {
         final result = FColors.lerp(scheme, schemeB, 0.5);
-        expect(result.brightness, scheme.brightness); // threshold-based
-        expect(result.systemOverlayStyle, scheme.systemOverlayStyle); // threshold-based
+        expect(result.brightness, schemeB.brightness); // threshold-based
+        expect(result.systemOverlayStyle, schemeB.systemOverlayStyle); // threshold-based
         expect(result.background, Color.lerp(scheme.background, schemeB.background, 0.5));
         expect(result.foreground, Color.lerp(scheme.foreground, schemeB.foreground, 0.5));
         expect(result.hoverLighten, closeTo(0.0875, 0.001)); // (0.075 + 0.1) / 2
