@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 
 /// An animated version of [FTheme] which automatically transitions the colors, typography, and other properties over a

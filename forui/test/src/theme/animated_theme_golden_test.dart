@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
-import 'dart:ui';
 
 import 'package:forui/forui.dart';
 
@@ -10,9 +10,7 @@ void main() {
     final sheet = AnimationSheetBuilder(frameSize: const Size(200, 200));
     addTearDown(sheet.dispose);
 
-    await tester.pumpWidget(
-      sheet.record(Application(data: FThemes.zinc.light, key: const ValueKey('key'))),
-    );
+    await tester.pumpWidget(sheet.record(Application(data: FThemes.zinc.light, key: const ValueKey('key'))));
     await tester.pumpFrames(
       sheet.record(Application(data: FThemes.zinc.dark, key: const ValueKey('key'))),
       const Duration(milliseconds: 250),

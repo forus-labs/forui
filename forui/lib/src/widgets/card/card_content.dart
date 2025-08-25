@@ -1,7 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-
-import 'dart:ui';
 
 import 'package:meta/meta.dart';
 

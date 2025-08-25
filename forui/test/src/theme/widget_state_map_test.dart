@@ -24,11 +24,7 @@ void main() {
 
         expect(
           result.resolve({WidgetState.pressed}),
-          BoxDecoration.lerp(
-            const BoxDecoration(color: Colors.red),
-            const BoxDecoration(color: Colors.blue),
-            0.5,
-          ),
+          BoxDecoration.lerp(const BoxDecoration(color: Colors.red), const BoxDecoration(color: Colors.blue), 0.5),
         );
         expect(
           result.resolve({WidgetState.hovered}),
