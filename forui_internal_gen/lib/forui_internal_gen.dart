@@ -12,7 +12,7 @@ $defaultFileHeader
 ''';
 
 /// Builds generators for `build_runner` to run
-Builder styleBuilder(BuilderOptions options) => PartBuilder(
+Builder styleBuilder(BuilderOptions _) => PartBuilder(
   [StyleGenerator()],
   '.style.dart',
   header: _header,

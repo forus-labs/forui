@@ -1,3 +1,25 @@
+## 0.16.0 (Next)
+
+### Better Generated Documentation
+
+We've improved the generated documentation for styles. They should be much easier to navigate and understand.
+
+
+### `FThemeData`
+We've added support for animated theme transitions. This should make transitions between themes gradual instead of abrupt.
+
+* Add `FThemeData.lerp(...)`.
+* Change `FThemeData.copyWith(...)` to accept style builder functions.
+
+
+### `FWidgetStateMap`
+* Add `FWidgetStateMap.lerpBoxDecoration(...)`.
+* Add `FWidgetStateMap.lerpColor(...)`.
+* Add `FWidgetStateMap.lerpIconThemeData(...)`.
+* Add `FWidgetStateMap.lerpTextStyle(...)`.
+* Add `FWidgetStateMap.lerpWhere(...)`.
+
+
 ## 0.15.1
 * Fix CLI generating incorrect icon mappings.
 * Fix CLI generating theme that references private constant.

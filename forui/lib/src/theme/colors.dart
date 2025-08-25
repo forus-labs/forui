@@ -159,6 +159,29 @@ final class FColors with Diagnosticable {
        assert(0.0 <= hoverDarken && hoverDarken <= 1.0, 'The hoverDarken must be between 0 and 1.'),
        assert(0 <= disabledOpacity && disabledOpacity <= 1, 'The disabledOpacity must be between 0 and 1.');
 
+  /// Creates a linear interpolation between two [FColors] using the given factor [t].
+  factory FColors.lerp(FColors a, FColors b, double t) => FColors(
+    brightness: t < 0.5 ? a.brightness : b.brightness,
+    systemOverlayStyle: t < 0.5 ? a.systemOverlayStyle : b.systemOverlayStyle,
+    barrier: Color.lerp(a.barrier, b.barrier, t)!,
+    background: Color.lerp(a.background, b.background, t)!,
+    foreground: Color.lerp(a.foreground, b.foreground, t)!,
+    primary: Color.lerp(a.primary, b.primary, t)!,
+    primaryForeground: Color.lerp(a.primaryForeground, b.primaryForeground, t)!,
+    secondary: Color.lerp(a.secondary, b.secondary, t)!,
+    secondaryForeground: Color.lerp(a.secondaryForeground, b.secondaryForeground, t)!,
+    muted: Color.lerp(a.muted, b.muted, t)!,
+    mutedForeground: Color.lerp(a.mutedForeground, b.mutedForeground, t)!,
+    destructive: Color.lerp(a.destructive, b.destructive, t)!,
+    destructiveForeground: Color.lerp(a.destructiveForeground, b.destructiveForeground, t)!,
+    error: Color.lerp(a.error, b.error, t)!,
+    errorForeground: Color.lerp(a.errorForeground, b.errorForeground, t)!,
+    border: Color.lerp(a.border, b.border, t)!,
+    hoverLighten: lerpDouble(a.hoverLighten, b.hoverLighten, t)!,
+    hoverDarken: lerpDouble(a.hoverDarken, b.hoverDarken, t)!,
+    disabledOpacity: lerpDouble(a.disabledOpacity, b.disabledOpacity, t)!,
+  );
+
   /// Generates a hovered variant of the given [color] by darkening light colors and lighting dark colors based on their
   /// HSL lightness.
   ///

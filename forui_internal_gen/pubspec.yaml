@@ -18,13 +18,12 @@ dependencies:
   code_builder: ^4.10.0
   collection: ^1.18.0
   dart_style: ^3.0.1
-  flutter:
-    sdk: flutter
-  meta: ^1.11.0
+  meta: ^1.16.0
   source_gen: ^3.0.0
 
 dev_dependencies:
+  build_test: ^3.3.2
   flint: ^2.8.1
-  flutter_test:
-    sdk: flutter
+  forui: ^0.15.0
   source_gen_test: ^1.1.1
+  test: ^1.26.2

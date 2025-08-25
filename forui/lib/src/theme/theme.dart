@@ -31,7 +31,9 @@ import 'package:forui/forui.dart';
 ///  }
 /// ```
 ///
-/// See [FThemeData] which describes of the actual configuration of a theme.
+/// See:
+/// * [FAnimatedTheme] which is an animated version of [FTheme].
+/// * [FThemeData] which describes the actual configuration of a theme.
 class FTheme extends StatelessWidget {
   /// Returns the current [FThemeData], or `FThemes.zinc.light` if there is no ancestor [FTheme].
   ///
