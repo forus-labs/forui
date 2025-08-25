@@ -925,22 +925,22 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       splashFactory: NoSplash.splashFactory,
       useMaterial3: true,
 
-      //// Navigation Bar
+      // Navigation Bar
       navigationBarTheme: NavigationBarThemeData(
         indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
-      //// Navigation Drawer
+      // Navigation Drawer
       navigationDrawerTheme: NavigationDrawerThemeData(
         indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
-      //// Navigation Rail
+      // Navigation Rail
       navigationRailTheme: NavigationRailThemeData(
         indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
-      //// Card
+      // Card
       cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -949,10 +949,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         ),
       ),
 
-      //// Chip
+      // Chip
       chipTheme: ChipThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
 
-      //// Input
+      // Input
       inputDecorationTheme: InputDecorationTheme(
         border: WidgetStateInputBorder.resolveWith(textFieldStyle.border.resolve),
         labelStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
@@ -964,14 +964,14 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         contentPadding: textFieldStyle.contentPadding,
       ),
 
-      //// Date Picker
+      // Date Picker
       datePickerTheme: DatePickerThemeData(
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
         dayShape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         rangePickerShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
-      //// Time Picker
+      // Time Picker
       timePickerTheme: TimePickerThemeData(
         hourMinuteTextColor: colors.secondaryForeground,
         hourMinuteColor: colors.secondary,
@@ -1004,14 +1004,14 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         valueIndicatorTextStyle: sliderStyles.horizontalStyle.tooltipStyle.textStyle,
       ),
 
-      //// Switch
+      // Switch
       switchTheme: SwitchThemeData(
         thumbColor: switchStyle.thumbColor,
         trackColor: switchStyle.trackColor,
         trackOutlineColor: switchStyle.trackColor,
       ),
 
-      //// Buttons
+      // Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           textStyle: buttonStyles.secondary.contentStyle.textStyle,

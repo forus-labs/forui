@@ -50,7 +50,7 @@ class FCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-    decoration: (style?.call(context.theme.cardStyle) ?? context.theme.cardStyle).decoration,
+    decoration: context.theme.cardStyle.decoration,
     child: child,
   );
 

@@ -12,7 +12,7 @@ MaterialApp(
   supportedLocales: [
     // Add locales supported by your application here.
   ],
-  builder: (context, child) => FTheme(
+  builder: (context, child) => FAnimatedTheme(
     data: FThemes.zinc.light,
     child: child!,
   ),
@@ -27,7 +27,7 @@ these instead of providing them manually if your application doesn't have any ot
 MaterialApp(
   localizationsDelegates: FLocalizations.localizationsDelegates,
   supportedLocales: FLocalizations.supportedLocales,
-  builder: (context, child) => FTheme(
+  builder: (context, child) => FAnimatedTheme(
     data: FThemes.zinc.light,
     child: child!,
   ),

@@ -18,11 +18,11 @@ to generate themes and styles that can be directly modified in your project.
 
 <Callout type="info">
     Forui does not manage the theme brightness (light or dark) automatically.
-    You need to specify the theme explicitly in `FTheme(...)`.
+    You need to specify the theme explicitly in `FAnimatedTheme(...)`.
 
     ```dart filename="main.dart" {3} copy
     @override
-    Widget build(BuildContext context) => FTheme(
+    Widget build(BuildContext context) => FAnimatedTheme(
       data: FThemes.zinc.light, // or FThemes.zinc.dark
       child: FScaffold(...),
     );
@@ -51,8 +51,8 @@ Forui includes predefined themes that can be used out of the box. They are heavi
 title: Forui Theming System
 ---
 classDiagram
-class FTheme {
-    +FTheme(...)
+class FAnimatedTheme {
+    +FAnimatedTheme(...)
 }
 
 class FThemeData {
@@ -78,7 +78,7 @@ class FAccordionStyle {
 }
 note for FAccordionStyle "Each Forui widget has a corresponding style.\nWe use FAccordionStyle here as an example."
 
-FTheme --> FThemeData
+FAnimatedTheme --> FThemeData
 FThemeData --> FColors
 FThemeData --> FTypography
 FThemeData --> FStyle
@@ -87,7 +87,7 @@ FThemeData --> FAccordionStyle
 
 There are **5** core components in Forui's theming system.
 
-- **[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
+- **[`FAnimatedTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FAnimatedTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
 - **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds:
   - **[`FColors`](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html)**: Color scheme including primary, foreground, and background colors.
   - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography settings including font family and text styles.
@@ -173,7 +173,7 @@ method is provided to quickly scale all the font sizes.
 
 ```dart {5-7} copy
 @override
-Widget build(BuildContext context) => FTheme(
+Widget build(BuildContext context) => FAnimatedTheme(
   data: FThemeData(
     colors: FThemes.zinc.light.colors,
     typography: FThemes.zinc.light.typography.copyWith(
@@ -290,7 +290,7 @@ class Application extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: FLocalizations.localizationsDelegates,
       supportedLocales: FLocalizations.supportedLocales,
-      builder: (_, child) => FTheme(data: theme, child: child!),
+      builder: (_, child) => FAnimatedTheme(data: theme, child: child!),
       theme: theme.toApproximateMaterialTheme(),
       home: const FScaffold(
         // TODO: replace with your widget.
