@@ -450,9 +450,7 @@ void main() {
     await testBuilder(
       styleBuilder(BuilderOptions.empty),
       {'forui_internal_gen|test/src/sample.dart': _source},
-      outputs: {
-        'forui_internal_gen|test/src/sample.style.dart': _golden,
-      },
+      outputs: {'forui_internal_gen|test/src/sample.style.dart': _golden},
       readerWriter: readerWriter,
     );
   });
