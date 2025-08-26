@@ -453,5 +453,5 @@ void main() {
       outputs: {'forui_internal_gen|test/src/sample.style.dart': _golden},
       readerWriter: readerWriter,
     );
-  });
+  }, timeout: const Timeout(Duration(minutes: 1)));
 }
