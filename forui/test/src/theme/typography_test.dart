@@ -257,5 +257,47 @@ void main() {
         expect(copy.hashCode, isNot(typography.hashCode));
       });
     });
+
+    group('lerp(...)', () {
+      const typographyB = FTypography(
+        defaultFontFamily: 'Arial',
+        xs: TextStyle(fontSize: 10, height: 1.5, color: Colors.red),
+        sm: TextStyle(fontSize: 12, height: 1.75, color: Colors.green),
+        base: TextStyle(fontSize: 14, height: 2.0, color: Colors.blue),
+        lg: TextStyle(fontSize: 16, height: 2.25, color: Colors.yellow),
+        xl: TextStyle(fontSize: 18, height: 2.5, color: Colors.orange),
+        xl2: TextStyle(fontSize: 20, height: 2.75, color: Colors.purple),
+        xl3: TextStyle(fontSize: 22, height: 3.0, color: Colors.pink),
+        xl4: TextStyle(fontSize: 24, height: 3.25, color: Colors.brown),
+        xl5: TextStyle(fontSize: 26, height: 3.5, color: Colors.grey),
+        xl6: TextStyle(fontSize: 28, height: 3.75, color: Colors.teal),
+        xl7: TextStyle(fontSize: 30, height: 4.0, color: Colors.indigo),
+        xl8: TextStyle(fontSize: 32, height: 4.25, color: Colors.lime),
+      );
+
+      test('interpolation at t=0', () {
+        final result = FTypography.lerp(typography, typographyB, 0.0);
+        expect(result.defaultFontFamily, typography.defaultFontFamily);
+        expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 0));
+        expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 0));
+        expect(result.base, TextStyle.lerp(typography.base, typographyB.base, 0));
+      });
+
+      test('interpolation at t=1', () {
+        final result = FTypography.lerp(typography, typographyB, 1.0);
+        expect(result.defaultFontFamily, typographyB.defaultFontFamily);
+        expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 1));
+        expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 1));
+        expect(result.base, TextStyle.lerp(typography.base, typographyB.base, 1));
+      });
+
+      test('interpolation at t=0.5', () {
+        final result = FTypography.lerp(typography, typographyB, 0.5);
+        expect(result.defaultFontFamily, typographyB.defaultFontFamily);
+        expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 0.5));
+        expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 0.5));
+        expect(result.base, TextStyle.lerp(typography.base, typographyB.base, 0.5));
+      });
+    });
   });
 }

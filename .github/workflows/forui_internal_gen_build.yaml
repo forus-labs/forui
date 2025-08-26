@@ -27,6 +27,7 @@ jobs:
         with:
           flutter-version: ${{ matrix.flutter-version }}
           cache: true
-      - run: flutter pub get
+      - run: dart pub get
       - run: dart run build_runner build --delete-conflicting-outputs
-      - run: flutter analyze
+      - run: dart analyze
+      - run: dart test

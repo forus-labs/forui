@@ -43,6 +43,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   forui_internal_gen:
+    git: https://github.com/forus-labs/forui.git
   http: ^1.2.2
   leak_tracker_flutter_testing: any
   path: ^1.9.1
