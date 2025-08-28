@@ -202,7 +202,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     nullableIconThemeDataMap: nullableIconThemeDataMap ?? this.nullableIconThemeDataMap,
     textStyleMap: textStyleMap ?? this.textStyleMap,
     nullableTextStyleMap: nullableTextStyleMap ?? this.nullableTextStyleMap,
-    nestedMotion: nestedMotion ?? this.nestedMotion,
+    nestedMotion: nestedMotion != null ? nestedMotion(this.nestedMotion) : this.nestedMotion,
     nestedStyle: nestedStyle != null ? nestedStyle(this.nestedStyle) : this.nestedStyle,
     list: list ?? this.list,
     set: set ?? this.set,

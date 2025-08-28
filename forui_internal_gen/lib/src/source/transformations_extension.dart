@@ -49,7 +49,7 @@ class TransformationsExtension {
 
     // Generate assignments for the copyWith method body
     final assignments = fields.map((f) {
-      if (nestedStyle(f.type)) {
+      if (nestedMotion(f.type) || nestedStyle(f.type)) {
         return '${f.name3}: ${f.name3} != null ? ${f.name3}(this.${f.name3}) : this.${f.name3},';
       } else {
         return '${f.name3}: ${f.name3} ?? this.${f.name3},';
