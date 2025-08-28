@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 
-part 'autocomplete_item.style.dart';
+part 'autocomplete_item.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FAutocomplete].
 mixin FAutocompleteItemMixin on Widget {}

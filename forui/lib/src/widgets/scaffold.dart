@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 
-part 'scaffold.style.dart';
+part 'scaffold.design.dart';
 
 /// A layout structure that contains a header, content, and footer.
 ///

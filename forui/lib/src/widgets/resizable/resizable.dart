@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 
-part 'resizable.style.dart';
+part 'resizable.design.dart';
 
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
 ///

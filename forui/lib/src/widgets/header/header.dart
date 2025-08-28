@@ -10,7 +10,7 @@ import 'package:sugar/collection.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 
-part 'header.style.dart';
+part 'header.design.dart';
 
 part 'header_action.dart';
 

@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 
-part 'bottom_navigation_bar.style.dart';
+part 'bottom_navigation_bar.design.dart';
 
 /// A bottom navigation bar.
 ///

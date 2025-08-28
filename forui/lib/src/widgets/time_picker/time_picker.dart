@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_picker/picker.dart';
 import 'package:forui/src/widgets/time_picker/time_picker_controller.dart';
 
-part 'time_picker.style.dart';
+part 'time_picker.design.dart';
 
 /// A time picker that allows a time to be selected.
 ///

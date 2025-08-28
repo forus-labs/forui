@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'toaster_style.style.dart';
+part 'toaster_style.design.dart';
 
 /// A toaster's expansion behavior.
 enum FToasterExpandBehavior {

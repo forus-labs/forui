@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'bottom_navigation_bar_item.style.dart';
+part 'bottom_navigation_bar_item.design.dart';
 
 /// A [FBottomNavigationBar] item.
 class FBottomNavigationBarItem extends StatelessWidget {

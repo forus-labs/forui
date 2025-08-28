@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'text_field_style.style.dart';
+part 'text_field_style.design.dart';
 
 /// The text field style.
 class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {

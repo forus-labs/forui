@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'sidebar_group.style.dart';
+part 'sidebar_group.design.dart';
 
 /// A group of [FSidebarItem]s.
 ///

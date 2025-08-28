@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'dialog_content.style.dart';
+part 'dialog_content.design.dart';
 
 @internal
 sealed class Content extends StatelessWidget {

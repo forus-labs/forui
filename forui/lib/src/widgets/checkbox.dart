@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/keys.dart';
 
-part 'checkbox.style.dart';
+part 'checkbox.design.dart';
 
 /// A checkbox control that allows the user to toggle between checked and not checked.
 ///

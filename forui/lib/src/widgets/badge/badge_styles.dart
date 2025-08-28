@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'badge_styles.style.dart';
+part 'badge_styles.design.dart';
 
 /// The [FBadgeStyle]s.
 class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {

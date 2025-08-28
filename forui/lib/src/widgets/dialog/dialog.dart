@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
-part 'dialog.style.dart';
+part 'dialog.design.dart';
 
 /// Shows a dialog.
 ///

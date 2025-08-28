@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 import 'dart:ui';
 
-part 'sample.style.dart';
+part 'sample.design.dart';
 
 class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   /// This is a field's summary.
@@ -40,6 +40,7 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   final FWidgetStateMap<IconThemeData?> nullableIconThemeDataMap;
   final FWidgetStateMap<TextStyle> textStyleMap;
   final FWidgetStateMap<TextStyle?> nullableTextStyleMap;
+  final FGoldenNestedMotion nestedMotion;
   final FGoldenNestedStyle nestedStyle;
   final List<String> list;
   final Set<String> set;
@@ -71,10 +72,26 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
     required this.nullableIconThemeDataMap,
     required this.textStyleMap,
     required this.nullableTextStyleMap,
+    required this.nestedMotion,
     required this.nestedStyle,
     required this.list,
     required this.set,
     required this.map,
+  });
+}
+
+class FGoldenNestedMotion with Diagnosticable, _$FGoldenMotionFunctions {
+  /// This is a field's summary.
+  ///
+  /// This is more information about a field.
+  final double someDouble;
+  final Duration duration;
+  final Curve curve;
+
+  FGoldenNestedMotion({
+    required this.someDouble,
+    required this.duration,
+    required this.curve,
   });
 }
 
@@ -90,7 +107,7 @@ const _golden = r'''
 part of 'sample.dart';
 
 // **************************************************************************
-// StyleGenerator
+// DesignGenerator
 // **************************************************************************
 
 /// Provides [copyWith] and [lerp] methods.
@@ -124,6 +141,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
   /// * [FGoldenStyle.nullableIconThemeDataMap]
   /// * [FGoldenStyle.textStyleMap]
   /// * [FGoldenStyle.nullableTextStyleMap]
+  /// * [FGoldenStyle.nestedMotion]
   /// * [FGoldenStyle.nestedStyle]
   /// * [FGoldenStyle.list]
   /// * [FGoldenStyle.set]
@@ -154,6 +172,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     FWidgetStateMap<IconThemeData?>? nullableIconThemeDataMap,
     FWidgetStateMap<TextStyle>? textStyleMap,
     FWidgetStateMap<TextStyle?>? nullableTextStyleMap,
+    FGoldenNestedMotion Function(FGoldenNestedMotion motion)? nestedMotion,
     FGoldenNestedStyle Function(FGoldenNestedStyle style)? nestedStyle,
     List<String>? list,
     Set<String>? set,
@@ -183,6 +202,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     nullableIconThemeDataMap: nullableIconThemeDataMap ?? this.nullableIconThemeDataMap,
     textStyleMap: textStyleMap ?? this.textStyleMap,
     nullableTextStyleMap: nullableTextStyleMap ?? this.nullableTextStyleMap,
+    nestedMotion: nestedMotion ?? this.nestedMotion,
     nestedStyle: nestedStyle != null ? nestedStyle(this.nestedStyle) : this.nestedStyle,
     list: list ?? this.list,
     set: set ?? this.set,
@@ -233,6 +253,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
       t,
       TextStyle.lerp,
     ),
+    nestedMotion: nestedMotion.lerp(other.nestedMotion, t),
     nestedStyle: nestedStyle.lerp(other.nestedStyle, t),
     list: t < 0.5 ? list : other.list,
     set: t < 0.5 ? set : other.set,
@@ -265,6 +286,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
   FWidgetStateMap<IconThemeData?> get nullableIconThemeDataMap;
   FWidgetStateMap<TextStyle> get textStyleMap;
   FWidgetStateMap<TextStyle?> get nullableTextStyleMap;
+  FGoldenNestedMotion get nestedMotion;
   FGoldenNestedStyle get nestedStyle;
   List<String> get list;
   Set<String> get set;
@@ -321,6 +343,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
       ..add(DiagnosticsProperty('nullableIconThemeDataMap', nullableIconThemeDataMap, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('textStyleMap', textStyleMap, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('nullableTextStyleMap', nullableTextStyleMap, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('nestedMotion', nestedMotion, level: DiagnosticLevel.debug))
       ..add(DiagnosticsProperty('nestedStyle', nestedStyle, level: DiagnosticLevel.debug))
       ..add(IterableProperty('list', list, level: DiagnosticLevel.debug))
       ..add(IterableProperty('set', set, level: DiagnosticLevel.debug))
@@ -355,6 +378,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
           nullableIconThemeDataMap == other.nullableIconThemeDataMap &&
           textStyleMap == other.textStyleMap &&
           nullableTextStyleMap == other.nullableTextStyleMap &&
+          nestedMotion == other.nestedMotion &&
           nestedStyle == other.nestedStyle &&
           listEquals(list, other.list) &&
           setEquals(set, other.set) &&
@@ -385,10 +409,63 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
       nullableIconThemeDataMap.hashCode ^
       textStyleMap.hashCode ^
       nullableTextStyleMap.hashCode ^
+      nestedMotion.hashCode ^
       nestedStyle.hashCode ^
       const ListEquality().hash(list) ^
       const SetEquality().hash(set) ^
       const MapEquality().hash(map);
+}
+
+/// Provides [copyWith] and [lerp] methods.
+extension $FGoldenNestedMotionTransformations on FGoldenNestedMotion {
+  /// Returns a copy of this [FGoldenNestedMotion] with the given properties replaced.
+  ///
+  /// ## Parameters
+  /// * [FGoldenNestedMotion.someDouble] - This is a field's summary.
+  /// * [FGoldenNestedMotion.duration]
+  /// * [FGoldenNestedMotion.curve]
+  @useResult
+  FGoldenNestedMotion copyWith({double? someDouble, Duration? duration, Curve? curve}) => FGoldenNestedMotion(
+    someDouble: someDouble ?? this.someDouble,
+    duration: duration ?? this.duration,
+    curve: curve ?? this.curve,
+  );
+
+  /// Linearly interpolate between this and another [FGoldenNestedMotion] using the given factor [t].
+  @useResult
+  FGoldenNestedMotion lerp(FGoldenNestedMotion other, double t) => FGoldenNestedMotion(
+    someDouble: lerpDouble(someDouble, other.someDouble, t) ?? someDouble,
+    duration: t < 0.5 ? duration : other.duration,
+    curve: t < 0.5 ? curve : other.curve,
+  );
+}
+
+mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
+  double get someDouble;
+  Duration get duration;
+  Curve get curve;
+
+  /// Returns itself.
+  @useResult
+  FGoldenNestedMotion call(Object? _) => this as FGoldenNestedMotion;
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('someDouble', someDouble, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('duration', duration, level: DiagnosticLevel.debug))
+      ..add(DiagnosticsProperty('curve', curve, level: DiagnosticLevel.debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FGoldenNestedMotion &&
+          someDouble == other.someDouble &&
+          duration == other.duration &&
+          curve == other.curve);
+  @override
+  int get hashCode => someDouble.hashCode ^ duration.hashCode ^ curve.hashCode;
 }
 
 /// Provides [copyWith] and [lerp] methods.
@@ -443,14 +520,14 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
 ''';
 
 void main() {
-  test('style', () async {
+  test('design', () async {
     final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
     await readerWriter.testing.loadIsolateSources();
 
     await testBuilder(
-      styleBuilder(BuilderOptions.empty),
+      designBuilder(BuilderOptions.empty),
       {'forui_internal_gen|test/src/sample.dart': _source},
-      outputs: {'forui_internal_gen|test/src/sample.style.dart': _golden},
+      outputs: {'forui_internal_gen|test/src/sample.design.dart': _golden},
       readerWriter: readerWriter,
     );
   }, timeout: const Timeout(Duration(minutes: 1)));

@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 part 'tab_controller.dart';
-part 'tabs.style.dart';
+part 'tabs.design.dart';
 part 'tabs_style.dart';
 
 /// An object that represents a tab entry in a group of tabs.

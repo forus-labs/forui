@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'alert.style.dart';
+part 'alert.design.dart';
 
 /// A visual element displaying status information (info, warning, success, or error).
 ///

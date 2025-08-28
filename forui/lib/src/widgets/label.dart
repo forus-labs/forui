@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'label.style.dart';
+part 'label.design.dart';
 
 /// A component that describes a form field with a label, description, and error message (if any).
 ///

@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'date_field_style.style.dart';
+part 'date_field_style.design.dart';
 
 /// A date field's style.
 class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {

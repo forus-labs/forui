@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 
-part 'accordion.style.dart';
+part 'accordion.design.dart';
 
 /// A vertically stacked set of interactive headings, each revealing a section of content.
 ///
@@ -155,7 +155,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     this.childPadding = const EdgeInsets.only(bottom: 15),
     this.expandDuration = const Duration(milliseconds: 200),
     this.expandCurve = Curves.easeOutCubic,
-    this.collapseDuration = const Duration(milliseconds: 150),
+    this.collapseDuration = const Duration(milliseconds: 200),
     this.collapseCurve = Curves.easeInCubic,
   });
 

@@ -16,7 +16,7 @@ part 'basic_select.dart';
 
 part 'search_select.dart';
 
-part 'select.style.dart';
+part 'select.design.dart';
 
 /// A select displays a list of options for the user to pick from.
 ///

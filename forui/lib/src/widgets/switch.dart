@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'switch.style.dart';
+part 'switch.design.dart';
 
 /// A control that allows the user to toggle between checked and unchecked.
 ///

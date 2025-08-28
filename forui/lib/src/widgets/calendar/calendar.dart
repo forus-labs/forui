@@ -10,7 +10,7 @@ import 'package:forui/src/widgets/calendar/day/paged_day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/header.dart';
 import 'package:forui/src/widgets/calendar/year_month_picker.dart';
 
-part 'calendar.style.dart';
+part 'calendar.design.dart';
 
 /// A calendar.
 ///

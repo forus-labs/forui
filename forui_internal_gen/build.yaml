@@ -3,7 +3,7 @@
 targets:
   $default:
     builders:
-      styleBuilder:
+      designBuilder:
         enabled: true
         generate_for:
           exclude:
@@ -15,9 +15,9 @@ targets:
             - "type=lint"
 
 builders:
-  styleBuilder:
+  designBuilder:
     import: "package:forui_internal_gen/forui_internal_gen.dart"
-    builder_factories: [ "styleBuilder" ]
-    build_extensions: { ".dart": [".style.dart"] }
+    builder_factories: [ "designBuilder" ]
+    build_extensions: { ".dart": [".design.dart"] }
     auto_apply: dependents
     build_to: source

@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'tooltip.style.dart';
+part 'tooltip.design.dart';
 
 /// A controller that controls whether a [FTooltip] is shown or hidden.
 class FTooltipController extends FChangeNotifier {

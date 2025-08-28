@@ -10,7 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
 
-part 'field.style.dart';
+part 'field.design.dart';
 
 @internal
 class Field<T> extends FormField<Set<T>> {

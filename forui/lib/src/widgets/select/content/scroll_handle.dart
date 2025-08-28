@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'scroll_handle.style.dart';
+part 'scroll_handle.design.dart';
 
 @internal
 class ScrollHandle extends StatefulWidget {

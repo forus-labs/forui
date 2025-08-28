@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/avatar/avatar_content.dart';
 
-part 'avatar.style.dart';
+part 'avatar.design.dart';
 
 /// An image element with a fallback for representing the user.
 ///

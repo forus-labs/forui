@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'button_styles.style.dart';
+part 'button_styles.design.dart';
 
 /// [FButtonStyle]'s style.
 class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {

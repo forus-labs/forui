@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'focused_outline.style.dart';
+part 'focused_outline.design.dart';
 
 /// An outline around a focused widget that does not affect its layout.
 ///
