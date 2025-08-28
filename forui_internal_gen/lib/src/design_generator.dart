@@ -74,26 +74,17 @@ class DesignGenerator extends Generator {
           ..add(
             _emitter
                 .visitExtension(
-              DesignTransformationsExtension(
-                type,
-                copyWithDocsHeader: [
-                  '/// Returns a copy of this [${type.name3!}] with the given properties replaced.',
-                  '///',
-                ],
-              ).generate(),
-            )
+                  DesignTransformationsExtension(
+                    type,
+                    copyWithDocsHeader: [
+                      '/// Returns a copy of this [${type.name3!}] with the given properties replaced.',
+                      '///',
+                    ],
+                  ).generate(),
+                )
                 .toString(),
           )
-          ..add(
-            _emitter
-                .visitMixin(
-              FunctionsMixin(type, [
-                '/// Returns itself.',
-              ]).generate(),
-            )
-                .toString(),
-          );
-
+          ..add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
       } else if (type.name3 == 'FThemeData') {
         generated.add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
       }
