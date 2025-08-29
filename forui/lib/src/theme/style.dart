@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'style.style.dart';
+part 'style.design.dart';
 
 /// A set of miscellaneous properties that is part of a [FThemeData].
 ///

@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'progress.style.dart';
+part 'progress.design.dart';
 
 /// A progress indicator that shows the completion progress of a task.
 ///

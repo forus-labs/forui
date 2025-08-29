@@ -36,4 +36,4 @@ test/**/*_test.mocks.dart
 .i10n.txt
 
 ## Generated Dart files
-**.style.dart
+**.design.dart

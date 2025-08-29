@@ -11,7 +11,7 @@ import 'package:sugar/sugar.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/shared/entry.dart';
 
-part 'day_picker.style.dart';
+part 'day_picker.design.dart';
 
 @internal
 class DayPicker extends StatefulWidget {

@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
 
-part 'button.style.dart';
+part 'button.design.dart';
 
 /// A button.
 ///

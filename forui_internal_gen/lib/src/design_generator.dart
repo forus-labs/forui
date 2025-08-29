@@ -9,9 +9,10 @@ import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:source_gen/source_gen.dart';
 
 final _style = RegExp(r'^F.*(Style|Styles)$');
+final _motion = RegExp(r'^F.*(Motion)$');
 
-/// Generates corresponding style mixins and extensions that implement several commonly used operations.
-class StyleGenerator extends Generator {
+/// Generates corresponding style/motion mixins and extensions that implement several commonly used operations.
+class DesignGenerator extends Generator {
   final _emitter = DartEmitter(orderDirectives: true, useNullSafetySyntax: true);
 
   @override
@@ -27,7 +28,7 @@ class StyleGenerator extends Generator {
           ..add(
             _emitter
                 .visitExtension(
-                  StyleTransformExtension(
+                  DesignTransformationsExtension(
                     type,
                     copyWithDocsHeader: [
                       '/// Returns a copy of this [${type.name3!}] with the given properties replaced.',
@@ -68,6 +69,22 @@ class StyleGenerator extends Generator {
                 )
                 .toString(),
           );
+      } else if (_motion.hasMatch(type.name3!)) {
+        generated
+          ..add(
+            _emitter
+                .visitExtension(
+                  DesignTransformationsExtension(
+                    type,
+                    copyWithDocsHeader: [
+                      '/// Returns a copy of this [${type.name3!}] with the given properties replaced.',
+                      '///',
+                    ],
+                  ).generate(),
+                )
+                .toString(),
+          )
+          ..add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
       } else if (type.name3 == 'FThemeData') {
         generated.add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
       }
@@ -77,12 +94,12 @@ class StyleGenerator extends Generator {
   }
 }
 
-/// Generates a style non virtual extension.
-class StyleTransformExtension extends TransformationsExtension {
-  /// Creates a [StyleTransformExtension].
-  StyleTransformExtension(super.element, {required super.copyWithDocsHeader});
+/// Generates a `TransformationsExtension` that provides `copyWith` and `lerp` methods.
+class DesignTransformationsExtension extends TransformationsExtension {
+  /// Creates a [DesignTransformationsExtension].
+  DesignTransformationsExtension(super.element, {required super.copyWithDocsHeader});
 
-  /// Generates an extension that provides non virtual methods.
+  /// Generates an extension that provides non virtual transforming methods.
   @override
   Extension generate() =>
       (ExtensionBuilder()
@@ -154,8 +171,8 @@ class StyleTransformExtension extends TransformationsExtension {
           //
           _ => 't < 0.5 ? $name : other.$name',
         },
-        // Nested styles
-        _ when nestedStyle(type) => '$name.lerp(other.$name, t)',
+        // Nested motion/style
+        _ when nestedMotion(type) || nestedStyle(type) => '$name.lerp(other.$name, t)',
         _ => 't < 0.5 ? $name : other.$name',
       };
     }

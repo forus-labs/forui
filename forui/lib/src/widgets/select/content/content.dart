@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/select/content/scroll_handle.dart';
 
-part 'content.style.dart';
+part 'content.design.dart';
 
 @internal
 class ContentData<T> extends InheritedWidget {

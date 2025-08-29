@@ -11,7 +11,7 @@ import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/multi/field.dart';
 
-part 'select.style.dart';
+part 'select.design.dart';
 
 /// A function that builds a tag in a [FMultiSelect].
 typedef FMultiSelectTagBuilder<T> =

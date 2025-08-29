@@ -6,7 +6,7 @@ import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 
-part 'header.style.dart';
+part 'header.design.dart';
 
 /// The current picker type.
 enum FCalendarPickerType {

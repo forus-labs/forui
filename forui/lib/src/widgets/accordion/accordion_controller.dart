@@ -40,7 +40,7 @@ class FAccordionController extends FChangeNotifier {
     _ => await expand(index),
   };
 
-  /// Expands the item at the given [index], returning true if succesfully expanded. It collapses the least recently
+  /// Expands the item at the given [index], returning true if successfully expanded. It collapses the least recently
   /// expanded item if the maximum number of expanded items is reached.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.

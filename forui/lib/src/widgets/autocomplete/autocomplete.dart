@@ -12,7 +12,7 @@ import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.dart';
 
-part 'autocomplete.style.dart';
+part 'autocomplete.design.dart';
 
 /// A builder for [FAutocomplete]'s results.
 typedef FAutoCompleteContentBuilder =

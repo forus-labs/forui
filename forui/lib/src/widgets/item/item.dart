@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/item/item_content.dart';
 import 'package:forui/src/widgets/item/raw_item_content.dart';
 
-part 'item.style.dart';
+part 'item.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets is an item.
 mixin FItemMixin on Widget {}

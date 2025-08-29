@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'slider_mark.style.dart';
+part 'slider_mark.design.dart';
 
 /// A mark in a [FSlider]. It is a combination of a tick - a visual indicator along the track, and a label.
 class FSliderMark with Diagnosticable {

@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'form_field_style.style.dart';
+part 'form_field_style.design.dart';
 
 /// A form field state's style.
 class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {

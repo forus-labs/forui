@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'divider.style.dart';
+part 'divider.design.dart';
 
 /// A visual separator used to create division between content.
 ///

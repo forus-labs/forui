@@ -19,17 +19,14 @@ class FCollapsible extends StatelessWidget {
   /// Creates a [FCollapsible].
   const FCollapsible({required this.value, required this.child, super.key});
 
+  // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
+  // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
+  // child to layout at a smaller size while the amount of padding remains the same.
   @override
-  // ignore: prefer_expression_function_bodies
-  Widget build(BuildContext context) {
-    // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
-    // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
-    // child to layout at a smaller size while the amount of padding remains the same.
-    return _Expandable(
-      value: value,
-      child: ClipRect(clipper: _Clipper(value), child: child),
-    );
-  }
+  Widget build(BuildContext context) => _Expandable(
+    value: value,
+    child: ClipRect(clipper: _Clipper(value), child: child),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

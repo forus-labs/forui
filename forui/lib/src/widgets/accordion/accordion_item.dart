@@ -105,7 +105,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       reverseDuration: style.collapseDuration,
     );
     _body = CurvedAnimation(curve: style.expandCurve, reverseCurve: style.collapseCurve, parent: _controller!);
-    _icon = Tween<double>(begin: 0, end: 0.5).animate(_body!);
+    _icon = Tween(begin: 0.0, end: 0.5).animate(_body!);
 
     if (!controller.add(index, _controller!)) {
       throw StateError('Number of expanded items must be within the min and max.');

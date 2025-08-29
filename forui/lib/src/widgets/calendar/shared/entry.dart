@@ -6,7 +6,7 @@ import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 
-part 'entry.style.dart';
+part 'entry.design.dart';
 
 /// A calendar day's data.
 typedef FCalendarDayData = ({

@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'item_group.style.dart';
+part 'item_group.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can group items and be used in a [FItemGroup.merge].
 mixin FItemGroupMixin on Widget {}

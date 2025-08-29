@@ -11,7 +11,7 @@ import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/inherited_state.dart';
 
-part 'thumb.style.dart';
+part 'thumb.design.dart';
 
 class _ShrinkIntent extends Intent {
   const _ShrinkIntent();

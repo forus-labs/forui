@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'slider_styles.style.dart';
+part 'slider_styles.design.dart';
 
 /// A slider's styles.
 class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {

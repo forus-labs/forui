@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'picker_style.style.dart';
+part 'picker_style.design.dart';
 
 /// [FPickerStyle]'s style.
 class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {

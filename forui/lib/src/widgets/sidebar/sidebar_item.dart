@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'sidebar_item.style.dart';
+part 'sidebar_item.design.dart';
 
 /// A sidebar item.
 ///

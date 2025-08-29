@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/gesture_detector.dart';
 import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
-part 'sheet.style.dart';
+part 'sheet.design.dart';
 
 @internal
 class Sheet extends StatefulWidget {

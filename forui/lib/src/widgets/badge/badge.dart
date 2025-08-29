@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/badge/badge_content.dart';
 
-part 'badge.style.dart';
+part 'badge.design.dart';
 
 /// A badge. Badges are typically used to draw attention to specific information, such as labels and counts.
 ///
