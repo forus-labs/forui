@@ -3,7 +3,7 @@
 targets:
   $default:
     builders:
-      forui_internal_gen:styleBuilder:
+      forui_internal_gen:designBuilder:
         generate_for:
           - lib/src/foundation/**.dart
           - lib/src/theme/**.dart

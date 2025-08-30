@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'button_content.style.dart';
+part 'button_content.design.dart';
 
 @internal
 class Content extends StatelessWidget {

@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'theme_data.style.dart';
+part 'theme_data.design.dart';
 
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///

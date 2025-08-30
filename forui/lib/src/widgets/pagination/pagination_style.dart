@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'pagination_style.style.dart';
+part 'pagination_style.design.dart';
 
 /// The [FPagination] styles.
 class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {

@@ -49,7 +49,7 @@ class TransformationsExtension {
 
     // Generate assignments for the copyWith method body
     final assignments = fields.map((f) {
-      if (nestedStyle(f.type)) {
+      if (nestedMotion(f.type) || nestedStyle(f.type)) {
         return '${f.name3}: ${f.name3} != null ? ${f.name3}(this.${f.name3}) : this.${f.name3},';
       } else {
         return '${f.name3}: ${f.name3} ?? this.${f.name3},';
@@ -64,7 +64,14 @@ class TransformationsExtension {
         ..name = 'copyWith'
         ..optionalParameters.addAll([
           for (final field in fields)
-            if (nestedStyle(field.type))
+            if (nestedMotion(field.type))
+              Parameter(
+                (p) => p
+                  ..name = field.name3!
+                  ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()} motion)?')
+                  ..named = true,
+              )
+            else if (nestedStyle(field.type))
               Parameter(
                 (p) => p
                   ..name = field.name3!
@@ -86,6 +93,13 @@ class TransformationsExtension {
         ..lambda = true
         ..body = Code('${element.name3!}($assignments)\n'),
     );
+  }
+
+  /// Checks if the type is a nested motion.
+  @protected
+  bool nestedMotion(DartType type) {
+    final typeName = type.getDisplayString();
+    return typeName.startsWith('F') && typeName.endsWith('Motion');
   }
 
   /// Checks if the type is a nested style.

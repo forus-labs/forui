@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'tappable.style.dart';
+part 'tappable.design.dart';
 
 /// Utilities for retrieving information about the current platform.
 extension FTouch on Never {

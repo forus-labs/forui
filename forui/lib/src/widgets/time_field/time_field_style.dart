@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'time_field_style.style.dart';
+part 'time_field_style.design.dart';
 
 /// A time field's style.
 class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {

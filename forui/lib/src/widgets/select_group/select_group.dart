@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 
-part 'select_group.style.dart';
+part 'select_group.design.dart';
 
 /// A [FSelectGroup]'s controller.
 typedef FSelectGroupController<T> = FMultiValueNotifier<T>;

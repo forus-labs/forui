@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'tag.style.dart';
+part 'tag.design.dart';
 
 /// A tag in a [FMultiSelect].
 class FMultiSelectTag extends StatelessWidget {

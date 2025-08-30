@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'popover_menu.style.dart';
+part 'popover_menu.design.dart';
 
 /// A popover menu displays a menu in a portal aligned to a child.
 ///

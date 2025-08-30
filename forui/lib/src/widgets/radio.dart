@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'radio.style.dart';
+part 'radio.design.dart';
 
 /// A radio button that typically allows the user to choose only one of a predefined set of options.
 ///

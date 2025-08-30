@@ -9,7 +9,7 @@ import 'package:sugar/sugar.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/line_calendar/calendar_layout.dart';
 
-part 'line_calendar.style.dart';
+part 'line_calendar.design.dart';
 
 /// A line calendar displays dates in a single horizontal, scrollable line.
 ///

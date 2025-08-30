@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'badge_content.style.dart';
+part 'badge_content.design.dart';
 
 @internal
 class Content extends StatelessWidget {

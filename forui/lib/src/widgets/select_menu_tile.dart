@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'select_menu_tile.style.dart';
+part 'select_menu_tile.design.dart';
 
 /// A [FSelectMenuTile]'s controller.
 typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;

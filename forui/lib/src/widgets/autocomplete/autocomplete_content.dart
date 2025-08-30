@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 
-part 'autocomplete_content.style.dart';
+part 'autocomplete_content.design.dart';
 
 @internal
 class ContentData extends InheritedWidget {

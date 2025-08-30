@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 
-part 'search_content.style.dart';
+part 'search_content.design.dart';
 
 /// A builder for [FSelect] search results.
 typedef FSelectSearchContentBuilder<T> =

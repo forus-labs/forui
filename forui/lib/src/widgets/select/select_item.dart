@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/select_controller.dart';
 
-part 'select_item.style.dart';
+part 'select_item.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FSelect].
 mixin FSelectItemMixin on Widget {}

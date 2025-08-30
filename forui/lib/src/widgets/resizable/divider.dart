@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'divider.style.dart';
+part 'divider.design.dart';
 
 class _Up extends Intent {
   const _Up();

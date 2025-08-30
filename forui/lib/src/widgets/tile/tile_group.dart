@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'tile_group.style.dart';
+part 'tile_group.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [FTileGroup.merge].
 mixin FTileGroupMixin on Widget {}

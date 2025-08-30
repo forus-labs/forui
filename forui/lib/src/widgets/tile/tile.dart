@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-part 'tile.style.dart';
+part 'tile.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FTileGroup].
 mixin FTileMixin on Widget {}
