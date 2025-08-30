@@ -1191,7 +1191,7 @@ class FTextField extends StatefulWidget {
 
 /// A password field with visibility toggle functionality.
 ///
-/// This is an internal widget used by [FTextField.passwordWithToggle] to provide
+/// This is an internal widget used by [FTextField.password] to provide
 /// password visibility toggle functionality while maintaining compatibility with
 /// the existing [FTextField] API.
 class _PasswordFieldWithToggle extends StatefulWidget {
@@ -1429,7 +1429,7 @@ class _PasswordFieldWithToggleState extends State<_PasswordFieldWithToggle> {
         _visibilityController = widget.visibilityController!;
         _shouldDisposeController = false;
       } else {
-        _visibilityController = FValueNotifier<bool>(true);
+        _visibilityController = FValueNotifier<bool>(false);
         _shouldDisposeController = true;
       }
     }
