@@ -37,6 +37,17 @@ typedef FFieldBuilder<T> = Widget Function(BuildContext context, T style, Set<Wi
 /// See [FTextField.prefixBuilder] and [FTextField.suffixBuilder].
 typedef FFieldIconBuilder<T> = Widget Function(BuildContext context, T style, Set<WidgetState> states);
 
+/// A callback for building a password visibility toggle button.
+///
+/// [style] is the field's style.
+/// [states] is the current states of the widget.
+///
+/// The builder should use the provided `visibilityController` to toggle visibility
+/// and listen to visibility state changes.
+///
+/// See [FTextField.password].
+typedef FPasswordToggleBuilder = Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states);
+
 @internal
 extension Defaults on Never {
   static bool clearable(TextEditingValue _) => false;
@@ -834,79 +845,6 @@ class FTextField extends StatefulWidget {
          'To fix, set the initial text directly in the controller.',
        );
 
-  /// Creates a [FTextField] configured for passwords.
-  ///
-  /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
-  /// when handling the creation of new passwords.
-  const FTextField.password({
-    this.style,
-    this.builder = Defaults.builder,
-    this.label = const Text('Password'),
-    this.hint,
-    this.description,
-    this.error,
-    this.magnifierConfiguration,
-    this.groupId = EditableText,
-    this.controller,
-    this.focusNode,
-    this.keyboardType,
-    this.textInputAction = TextInputAction.next,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
-    this.textAlignVertical,
-    this.textDirection,
-    this.autofocus = false,
-    this.statesController,
-    this.obscuringCharacter = '•',
-    this.obscureText = true,
-    this.autocorrect = false,
-    this.smartDashesType,
-    this.smartQuotesType,
-    this.enableSuggestions = true,
-    this.minLines,
-    this.maxLines = 1,
-    this.expands = false,
-    this.readOnly = false,
-    this.showCursor,
-    this.maxLength,
-    this.maxLengthEnforcement,
-    this.onChange,
-    this.onTap,
-    this.onTapOutside,
-    this.onTapAlwaysCalled = false,
-    this.onEditingComplete,
-    this.onSubmit,
-    this.onAppPrivateCommand,
-    this.inputFormatters,
-    this.enabled = true,
-    this.ignorePointers,
-    this.enableInteractiveSelection = true,
-    this.selectAllOnFocus,
-    this.selectionControls,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.mouseCursor,
-    this.counterBuilder,
-    this.scrollPhysics,
-    this.scrollController,
-    this.autofillHints = const [AutofillHints.password],
-    this.restorationId,
-    this.stylusHandwritingEnabled = true,
-    this.enableIMEPersonalizedLearning = true,
-    this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
-    this.canRequestFocus = true,
-    this.undoController,
-    this.spellCheckConfiguration,
-    this.prefixBuilder,
-    this.suffixBuilder,
-    this.clearable = Defaults.clearable,
-    this.initialText,
-    super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and an initialText. '
-         'To fix, set the initial text directly in the controller.',
-       );
 
   /// Creates a [FTextField] configured for multiline inputs.
   ///
@@ -982,6 +920,194 @@ class FTextField extends StatefulWidget {
          'Cannot provide both a controller and an initialText. '
          'To fix, set the initial text directly in the controller.',
        );
+
+  // Default toggle builder for password visibility
+  static Widget _defaultToggleBuilder(BuildContext context, FTextFieldStyle style, Set<WidgetState> states) {
+    // This should not be called directly since it requires a controller
+    throw StateError(
+      'Default toggle builder should not be called without a visibility controller. '
+      'This is an internal implementation error.',
+    );
+  }
+
+  /// Creates a [FTextField] configured for passwords with a visibility toggle.
+  ///
+  /// This creates a password field with an eye icon that allows users to toggle
+  /// between showing and hiding the password text. The toggle is enabled by default
+  /// but can be disabled by setting [toggleBuilder] to null.
+  ///
+  /// [visibilityController] controls the password visibility state. If not provided,
+  /// an internal controller will be created and managed automatically. When using
+  /// a custom [toggleBuilder], you must provide your own [visibilityController]
+  /// since the custom builder needs to manage the visibility state.
+  ///
+  /// [toggleBuilder] builds the toggle button for password visibility. If null,
+  /// no toggle will be shown and the password will remain obscured. If not provided
+  /// (defaults to not null), a default eye icon toggle will be shown.
+  ///
+  /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden
+  /// with [AutofillHints.newPassword] when handling the creation of new passwords.
+  ///
+  /// Example:
+  /// ```dart
+  /// // Basic usage with automatic toggle
+  /// FTextField.password()
+  ///
+  /// // With custom controller (required for custom toggle)
+  /// final controller = ValueNotifier<bool>(false);
+  /// FTextField.password(
+  ///   visibilityController: controller,
+  ///   toggleBuilder: (context, style, states) => IconButton(
+  ///     onPressed: () => controller.value = !controller.value,
+  ///     icon: Icon(controller.value ? Icons.visibility_off : Icons.visibility),
+  ///   ),
+  /// )
+  ///
+  /// // Disable toggle completely
+  /// FTextField.password(
+  ///   toggleBuilder: null,
+  /// )
+  /// ```
+  static Widget password({
+    FTextFieldStyle Function(FTextFieldStyle style)? style,
+    FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
+    Widget label = const Text('Password'),
+    String? hint,
+    Widget? description,
+    Widget? error,
+    TextMagnifierConfiguration? magnifierConfiguration,
+    Object groupId = EditableText,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    TextInputType? keyboardType,
+    TextInputAction textInputAction = TextInputAction.next,
+    TextCapitalization textCapitalization = TextCapitalization.none,
+    TextAlign textAlign = TextAlign.start,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool autofocus = false,
+    WidgetStatesController? statesController,
+    String obscuringCharacter = '•',
+    bool autocorrect = false,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
+    bool enableSuggestions = true,
+    int? minLines,
+    int maxLines = 1,
+    bool expands = false,
+    bool readOnly = false,
+    bool? showCursor,
+    int? maxLength,
+    MaxLengthEnforcement? maxLengthEnforcement,
+    ValueChanged<String>? onChange,
+    GestureTapCallback? onTap,
+    TapRegionCallback? onTapOutside,
+    bool onTapAlwaysCalled = false,
+    VoidCallback? onEditingComplete,
+    ValueChanged<String>? onSubmit,
+    AppPrivateCommandCallback? onAppPrivateCommand,
+    List<TextInputFormatter>? inputFormatters,
+    bool enabled = true,
+    bool? ignorePointers,
+    bool enableInteractiveSelection = true,
+    bool? selectAllOnFocus,
+    TextSelectionControls? selectionControls,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    MouseCursor? mouseCursor,
+    FTextFieldCounterBuilder? counterBuilder,
+    ScrollPhysics? scrollPhysics,
+    ScrollController? scrollController,
+    Iterable<String> autofillHints = const [AutofillHints.password],
+    String? restorationId,
+    bool stylusHandwritingEnabled = true,
+    bool enableIMEPersonalizedLearning = true,
+    ContentInsertionConfiguration? contentInsertionConfiguration,
+    EditableTextContextMenuBuilder contextMenuBuilder = Defaults.contextMenuBuilder,
+    bool canRequestFocus = true,
+    UndoHistoryController? undoController,
+    SpellCheckConfiguration? spellCheckConfiguration,
+    FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
+    bool Function(TextEditingValue) clearable = Defaults.clearable,
+    String? initialText,
+    FPasswordToggleBuilder? toggleBuilder = _defaultToggleBuilder,
+    FValueNotifier<bool>? visibilityController,
+    Key? key,
+  }) {
+    // Validate that custom toggle builders require a visibility controller
+    assert(
+      toggleBuilder == null || toggleBuilder == _defaultToggleBuilder || visibilityController != null,
+      'When using a custom toggleBuilder, you must provide a visibilityController. '
+      'The custom toggle builder needs access to the controller to manage visibility state.',
+    );
+
+    return _PasswordFieldWithToggle(
+      style: style,
+      builder: builder,
+      label: label,
+      hint: hint,
+      description: description,
+      error: error,
+      magnifierConfiguration: magnifierConfiguration,
+      groupId: groupId,
+      controller: controller,
+      focusNode: focusNode,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      textCapitalization: textCapitalization,
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      autofocus: autofocus,
+      statesController: statesController,
+      obscuringCharacter: obscuringCharacter,
+      autocorrect: autocorrect,
+      smartDashesType: smartDashesType,
+      smartQuotesType: smartQuotesType,
+      enableSuggestions: enableSuggestions,
+      minLines: minLines,
+      maxLines: maxLines,
+      expands: expands,
+      readOnly: readOnly,
+      showCursor: showCursor,
+      maxLength: maxLength,
+      maxLengthEnforcement: maxLengthEnforcement,
+      onChange: onChange,
+      onTap: onTap,
+      onTapOutside: onTapOutside,
+      onTapAlwaysCalled: onTapAlwaysCalled,
+      onEditingComplete: onEditingComplete,
+      onSubmit: onSubmit,
+      onAppPrivateCommand: onAppPrivateCommand,
+      inputFormatters: inputFormatters,
+      enabled: enabled,
+      ignorePointers: ignorePointers,
+      enableInteractiveSelection: enableInteractiveSelection,
+      selectAllOnFocus: selectAllOnFocus,
+      selectionControls: selectionControls,
+      dragStartBehavior: dragStartBehavior,
+      mouseCursor: mouseCursor,
+      counterBuilder: counterBuilder,
+      scrollPhysics: scrollPhysics,
+      scrollController: scrollController,
+      autofillHints: autofillHints,
+      restorationId: restorationId,
+      stylusHandwritingEnabled: stylusHandwritingEnabled,
+      enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+      contentInsertionConfiguration: contentInsertionConfiguration,
+      contextMenuBuilder: contextMenuBuilder,
+      canRequestFocus: canRequestFocus,
+      undoController: undoController,
+      spellCheckConfiguration: spellCheckConfiguration,
+      prefixBuilder: prefixBuilder,
+      suffixBuilder: suffixBuilder,
+      clearable: clearable,
+      initialText: initialText,
+      toggleBuilder: toggleBuilder,
+      visibilityController: visibilityController,
+      key: key,
+    );
+  }
 
   @override
   State<FTextField> createState() => _State();
@@ -1060,6 +1186,359 @@ class FTextField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('clearable', clearable))
       ..add(StringProperty('initialText', initialText));
   }
+}
+
+/// A password field with visibility toggle functionality.
+///
+/// This is an internal widget used by [FTextField.passwordWithToggle] to provide
+/// password visibility toggle functionality while maintaining compatibility with
+/// the existing [FTextField] API.
+class _PasswordFieldWithToggle extends StatefulWidget {
+  final FTextFieldStyle Function(FTextFieldStyle style)? style;
+  final FFieldBuilder<FTextFieldStyle> builder;
+  final Widget label;
+  final String? hint;
+  final Widget? description;
+  final Widget? error;
+  final TextMagnifierConfiguration? magnifierConfiguration;
+  final Object groupId;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final TextInputType? keyboardType;
+  final TextInputAction textInputAction;
+  final TextCapitalization textCapitalization;
+  final TextAlign textAlign;
+  final TextAlignVertical? textAlignVertical;
+  final TextDirection? textDirection;
+  final bool autofocus;
+  final WidgetStatesController? statesController;
+  final String obscuringCharacter;
+  final bool autocorrect;
+  final SmartDashesType? smartDashesType;
+  final SmartQuotesType? smartQuotesType;
+  final bool enableSuggestions;
+  final int? minLines;
+  final int maxLines;
+  final bool expands;
+  final bool readOnly;
+  final bool? showCursor;
+  final int? maxLength;
+  final MaxLengthEnforcement? maxLengthEnforcement;
+  final ValueChanged<String>? onChange;
+  final GestureTapCallback? onTap;
+  final TapRegionCallback? onTapOutside;
+  final bool onTapAlwaysCalled;
+  final VoidCallback? onEditingComplete;
+  final ValueChanged<String>? onSubmit;
+  final AppPrivateCommandCallback? onAppPrivateCommand;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool enabled;
+  final bool? ignorePointers;
+  final bool enableInteractiveSelection;
+  final bool? selectAllOnFocus;
+  final TextSelectionControls? selectionControls;
+  final DragStartBehavior dragStartBehavior;
+  final MouseCursor? mouseCursor;
+  final FTextFieldCounterBuilder? counterBuilder;
+  final ScrollPhysics? scrollPhysics;
+  final ScrollController? scrollController;
+  final Iterable<String> autofillHints;
+  final String? restorationId;
+  final bool stylusHandwritingEnabled;
+  final bool enableIMEPersonalizedLearning;
+  final ContentInsertionConfiguration? contentInsertionConfiguration;
+  final EditableTextContextMenuBuilder contextMenuBuilder;
+  final bool canRequestFocus;
+  final UndoHistoryController? undoController;
+  final SpellCheckConfiguration? spellCheckConfiguration;
+  final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
+  final bool Function(TextEditingValue value) clearable;
+  final String? initialText;
+  final FPasswordToggleBuilder? toggleBuilder;
+  final FValueNotifier<bool>? visibilityController;
+
+  const _PasswordFieldWithToggle({
+    required this.style,
+    required this.builder,
+    required this.label,
+    required this.hint,
+    required this.description,
+    required this.error,
+    required this.magnifierConfiguration,
+    required this.groupId,
+    required this.controller,
+    required this.focusNode,
+    required this.keyboardType,
+    required this.textInputAction,
+    required this.textCapitalization,
+    required this.textAlign,
+    required this.textAlignVertical,
+    required this.textDirection,
+    required this.autofocus,
+    required this.statesController,
+    required this.obscuringCharacter,
+    required this.autocorrect,
+    required this.smartDashesType,
+    required this.smartQuotesType,
+    required this.enableSuggestions,
+    required this.minLines,
+    required this.maxLines,
+    required this.expands,
+    required this.readOnly,
+    required this.showCursor,
+    required this.maxLength,
+    required this.maxLengthEnforcement,
+    required this.onChange,
+    required this.onTap,
+    required this.onTapOutside,
+    required this.onTapAlwaysCalled,
+    required this.onEditingComplete,
+    required this.onSubmit,
+    required this.onAppPrivateCommand,
+    required this.inputFormatters,
+    required this.enabled,
+    required this.ignorePointers,
+    required this.enableInteractiveSelection,
+    required this.selectAllOnFocus,
+    required this.selectionControls,
+    required this.dragStartBehavior,
+    required this.mouseCursor,
+    required this.counterBuilder,
+    required this.scrollPhysics,
+    required this.scrollController,
+    required this.autofillHints,
+    required this.restorationId,
+    required this.stylusHandwritingEnabled,
+    required this.enableIMEPersonalizedLearning,
+    required this.contentInsertionConfiguration,
+    required this.contextMenuBuilder,
+    required this.canRequestFocus,
+    required this.undoController,
+    required this.spellCheckConfiguration,
+    required this.prefixBuilder,
+    required this.suffixBuilder,
+    required this.clearable,
+    required this.initialText,
+    required this.toggleBuilder,
+    required this.visibilityController,
+    super.key,
+  });
+
+  @override
+  State<_PasswordFieldWithToggle> createState() => _PasswordFieldWithToggleState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty<FTextFieldStyle Function(FTextFieldStyle style)?>.has('style', style))
+      ..add(ObjectFlagProperty<FFieldBuilder<FTextFieldStyle>>.has('builder', builder))
+      ..add(StringProperty('hint', hint))
+      ..add(DiagnosticsProperty<TextMagnifierConfiguration?>('magnifierConfiguration', magnifierConfiguration))
+      ..add(DiagnosticsProperty<Object>('groupId', groupId))
+      ..add(DiagnosticsProperty<TextEditingController?>('controller', controller))
+      ..add(DiagnosticsProperty<FocusNode?>('focusNode', focusNode))
+      ..add(DiagnosticsProperty<TextInputType?>('keyboardType', keyboardType))
+      ..add(EnumProperty<TextInputAction>('textInputAction', textInputAction))
+      ..add(EnumProperty<TextCapitalization>('textCapitalization', textCapitalization))
+      ..add(EnumProperty<TextAlign>('textAlign', textAlign))
+      ..add(DiagnosticsProperty<TextAlignVertical?>('textAlignVertical', textAlignVertical))
+      ..add(EnumProperty<TextDirection?>('textDirection', textDirection))
+      ..add(DiagnosticsProperty<bool>('autofocus', autofocus))
+      ..add(DiagnosticsProperty<WidgetStatesController?>('statesController', statesController))
+      ..add(StringProperty('obscuringCharacter', obscuringCharacter))
+      ..add(DiagnosticsProperty<bool>('autocorrect', autocorrect))
+      ..add(EnumProperty<SmartDashesType?>('smartDashesType', smartDashesType))
+      ..add(EnumProperty<SmartQuotesType?>('smartQuotesType', smartQuotesType))
+      ..add(DiagnosticsProperty<bool>('enableSuggestions', enableSuggestions))
+      ..add(IntProperty('minLines', minLines))
+      ..add(IntProperty('maxLines', maxLines))
+      ..add(DiagnosticsProperty<bool>('expands', expands))
+      ..add(DiagnosticsProperty<bool>('readOnly', readOnly))
+      ..add(DiagnosticsProperty<bool?>('showCursor', showCursor))
+      ..add(IntProperty('maxLength', maxLength))
+      ..add(EnumProperty<MaxLengthEnforcement?>('maxLengthEnforcement', maxLengthEnforcement))
+      ..add(ObjectFlagProperty<ValueChanged<String>?>.has('onChange', onChange))
+      ..add(ObjectFlagProperty<GestureTapCallback?>.has('onTap', onTap))
+      ..add(ObjectFlagProperty<TapRegionCallback?>.has('onTapOutside', onTapOutside))
+      ..add(DiagnosticsProperty<bool>('onTapAlwaysCalled', onTapAlwaysCalled))
+      ..add(ObjectFlagProperty<VoidCallback?>.has('onEditingComplete', onEditingComplete))
+      ..add(ObjectFlagProperty<ValueChanged<String>?>.has('onSubmit', onSubmit))
+      ..add(ObjectFlagProperty<AppPrivateCommandCallback?>.has('onAppPrivateCommand', onAppPrivateCommand))
+      ..add(IterableProperty<TextInputFormatter>('inputFormatters', inputFormatters))
+      ..add(DiagnosticsProperty<bool>('enabled', enabled))
+      ..add(DiagnosticsProperty<bool?>('ignorePointers', ignorePointers))
+      ..add(DiagnosticsProperty<bool>('enableInteractiveSelection', enableInteractiveSelection))
+      ..add(DiagnosticsProperty<bool?>('selectAllOnFocus', selectAllOnFocus))
+      ..add(DiagnosticsProperty<TextSelectionControls?>('selectionControls', selectionControls))
+      ..add(EnumProperty<DragStartBehavior>('dragStartBehavior', dragStartBehavior))
+      ..add(DiagnosticsProperty<MouseCursor?>('mouseCursor', mouseCursor))
+      ..add(ObjectFlagProperty<FTextFieldCounterBuilder?>.has('counterBuilder', counterBuilder))
+      ..add(DiagnosticsProperty<ScrollPhysics?>('scrollPhysics', scrollPhysics))
+      ..add(DiagnosticsProperty<ScrollController?>('scrollController', scrollController))
+      ..add(IterableProperty<String>('autofillHints', autofillHints))
+      ..add(StringProperty('restorationId', restorationId))
+      ..add(DiagnosticsProperty<bool>('stylusHandwritingEnabled', stylusHandwritingEnabled))
+      ..add(DiagnosticsProperty<bool>('enableIMEPersonalizedLearning', enableIMEPersonalizedLearning))
+      ..add(
+        DiagnosticsProperty<ContentInsertionConfiguration?>(
+          'contentInsertionConfiguration',
+          contentInsertionConfiguration,
+        ),
+      )
+      ..add(ObjectFlagProperty<EditableTextContextMenuBuilder>.has('contextMenuBuilder', contextMenuBuilder))
+      ..add(DiagnosticsProperty<bool>('canRequestFocus', canRequestFocus))
+      ..add(DiagnosticsProperty<UndoHistoryController?>('undoController', undoController))
+      ..add(DiagnosticsProperty<SpellCheckConfiguration?>('spellCheckConfiguration', spellCheckConfiguration))
+      ..add(ObjectFlagProperty<FFieldIconBuilder<FTextFieldStyle>?>.has('prefixBuilder', prefixBuilder))
+      ..add(ObjectFlagProperty<FFieldIconBuilder<FTextFieldStyle>?>.has('suffixBuilder', suffixBuilder))
+      ..add(ObjectFlagProperty<bool Function(TextEditingValue p1)>.has('clearable', clearable))
+      ..add(StringProperty('initialText', initialText))
+      ..add(DiagnosticsProperty<FValueNotifier<bool>?>('visibilityController', visibilityController))
+      ..add(ObjectFlagProperty<FPasswordToggleBuilder?>.has('toggleBuilder', toggleBuilder));
+  }
+}
+
+class _PasswordFieldWithToggleState extends State<_PasswordFieldWithToggle> {
+  late FValueNotifier<bool> _visibilityController;
+  bool _shouldDisposeController = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.visibilityController != null) {
+      _visibilityController = widget.visibilityController!;
+      _shouldDisposeController = false;
+    } else {
+      _visibilityController = FValueNotifier<bool>(false);
+      _shouldDisposeController = true;
+    }
+  }
+
+  @override
+  void didUpdateWidget(_PasswordFieldWithToggle oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.visibilityController != oldWidget.visibilityController) {
+      if (_shouldDisposeController) {
+        _visibilityController.dispose();
+      }
+
+      if (widget.visibilityController != null) {
+        _visibilityController = widget.visibilityController!;
+        _shouldDisposeController = false;
+      } else {
+        _visibilityController = FValueNotifier<bool>(true);
+        _shouldDisposeController = true;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    if (_shouldDisposeController) {
+      _visibilityController.dispose();
+    }
+    super.dispose();
+  }
+
+  Widget _buildToggleWidget(BuildContext context, FTextFieldStyle style, Set<WidgetState> states, bool isVisible) {
+    if (widget.toggleBuilder == FTextField._defaultToggleBuilder) {
+      // Use internal default implementation
+      final icon = isVisible ? FIcons.eyeOff : FIcons.eye;
+
+      return FButton.icon(
+        onPress: () => _visibilityController.value = !_visibilityController.value,
+        style: FButtonStyle.ghost(),
+        child: Icon(icon, semanticLabel: isVisible ? 'Hide password' : 'Show password'),
+      );
+    } else {
+      // Use custom toggle builder - user must manage controller themselves
+      // Note: This approach requires users to provide their own controller if using custom toggle
+      return widget.toggleBuilder!(context, style, states);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => ValueListenableBuilder<bool>(
+    valueListenable: _visibilityController,
+    builder: (context, isVisible, child) {
+      // Determine the suffix builder based on priority:
+      // 1. Custom suffixBuilder (highest priority - disables toggle)
+      // 2. toggleBuilder (if not null, shows toggle using internal controller for default, requires external controller for custom)
+      // 3. null (no suffix)
+      final FFieldIconBuilder<FTextFieldStyle>? effectiveSuffixBuilder =
+          widget.suffixBuilder ??
+          (widget.toggleBuilder != null
+              ? (context, style, states) => _buildToggleWidget(context, style, states, isVisible)
+              : null);
+
+      return FTextField(
+        style: widget.style,
+        builder: widget.builder,
+        label: widget.label,
+        hint: widget.hint,
+        description: widget.description,
+        error: widget.error,
+        magnifierConfiguration: widget.magnifierConfiguration,
+        groupId: widget.groupId,
+        controller: widget.controller,
+        focusNode: widget.focusNode,
+        keyboardType: widget.keyboardType,
+        textInputAction: widget.textInputAction,
+        textCapitalization: widget.textCapitalization,
+        textAlign: widget.textAlign,
+        textAlignVertical: widget.textAlignVertical,
+        textDirection: widget.textDirection,
+        autofocus: widget.autofocus,
+        statesController: widget.statesController,
+        obscuringCharacter: widget.obscuringCharacter,
+        obscureText: !isVisible, // Toggle based on visibility state
+        autocorrect: widget.autocorrect,
+        smartDashesType: widget.smartDashesType,
+        smartQuotesType: widget.smartQuotesType,
+        enableSuggestions: widget.enableSuggestions,
+        minLines: widget.minLines,
+        maxLines: widget.maxLines,
+        expands: widget.expands,
+        readOnly: widget.readOnly,
+        showCursor: widget.showCursor,
+        maxLength: widget.maxLength,
+        maxLengthEnforcement: widget.maxLengthEnforcement,
+        onChange: widget.onChange,
+        onTap: widget.onTap,
+        onTapOutside: widget.onTapOutside,
+        onTapAlwaysCalled: widget.onTapAlwaysCalled,
+        onEditingComplete: widget.onEditingComplete,
+        onSubmit: widget.onSubmit,
+        onAppPrivateCommand: widget.onAppPrivateCommand,
+        inputFormatters: widget.inputFormatters,
+        enabled: widget.enabled,
+        ignorePointers: widget.ignorePointers,
+        enableInteractiveSelection: widget.enableInteractiveSelection,
+        selectAllOnFocus: widget.selectAllOnFocus,
+        selectionControls: widget.selectionControls,
+        dragStartBehavior: widget.dragStartBehavior,
+        mouseCursor: widget.mouseCursor,
+        counterBuilder: widget.counterBuilder,
+        scrollPhysics: widget.scrollPhysics,
+        scrollController: widget.scrollController,
+        autofillHints: widget.autofillHints,
+        restorationId: widget.restorationId,
+        stylusHandwritingEnabled: widget.stylusHandwritingEnabled,
+        enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
+        contentInsertionConfiguration: widget.contentInsertionConfiguration,
+        contextMenuBuilder: widget.contextMenuBuilder,
+        canRequestFocus: widget.canRequestFocus,
+        undoController: widget.undoController,
+        spellCheckConfiguration: widget.spellCheckConfiguration,
+        prefixBuilder: widget.prefixBuilder,
+        suffixBuilder: effectiveSuffixBuilder,
+        clearable: widget.clearable,
+        initialText: widget.initialText,
+      );
+    },
+  );
 }
 
 class _State extends State<FTextField> {
