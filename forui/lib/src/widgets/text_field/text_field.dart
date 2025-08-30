@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/text_field/text_field.dart' show FTextField;
+import 'package:forui/widgets/text_field.dart' show FTextField;
 
 /// A callback for building a custom counter for a text field.
 ///
@@ -844,7 +846,6 @@ class FTextField extends StatefulWidget {
          'Cannot provide both a controller and an initialText. '
          'To fix, set the initial text directly in the controller.',
        );
-
 
   /// Creates a [FTextField] configured for multiline inputs.
   ///
