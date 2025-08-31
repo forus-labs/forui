@@ -124,10 +124,7 @@ void main() {
   });
 
   testWidgets('expands', (tester) async {
-    await tester.pumpWidget(TestScaffold.app(child: const FTextField(
-      maxLines: null,
-      expands: true,
-    )));
+    await tester.pumpWidget(TestScaffold.app(child: const FTextField(maxLines: null, expands: true)));
 
     expect(tester.takeException(), null);
   });
