@@ -155,9 +155,9 @@ final class FColors with Diagnosticable {
     this.hoverLighten = 0.075,
     this.hoverDarken = 0.05,
     this.disabledOpacity = 0.5,
-  }) : assert(0.0 <= hoverLighten && hoverLighten <= 1.0, 'The hoverLighten must be between 0 and 1.'),
-       assert(0.0 <= hoverDarken && hoverDarken <= 1.0, 'The hoverDarken must be between 0 and 1.'),
-       assert(0 <= disabledOpacity && disabledOpacity <= 1, 'The disabledOpacity must be between 0 and 1.');
+  }) : assert(0.0 <= hoverLighten && hoverLighten <= 1.0, 'hoverLighten must be between 0 and 1.'),
+       assert(0.0 <= hoverDarken && hoverDarken <= 1.0, 'hoverDarken must be between 0 and 1.'),
+       assert(0 <= disabledOpacity && disabledOpacity <= 1, 'disabledOpacity must be between 0 and 1.');
 
   /// Creates a linear interpolation between two [FColors] using the given factor [t].
   factory FColors.lerp(FColors a, FColors b, double t) => FColors(
