@@ -20,6 +20,11 @@ We've added support for animated theme transitions. This should make transitions
 * Add `FWidgetStateMap.lerpWhere(...)`.
 
 
+## Others
+* Add `FLabel.expands`.
+* Fix `FTextField.expands` causing a render error.
+
+
 ## 0.15.1
 * Fix CLI generating incorrect icon mappings.
 * Fix CLI generating theme that references private constant.

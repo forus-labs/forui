@@ -1188,6 +1188,7 @@ class _State extends State<FTextField> {
       // Error should never be null as doing so causes the widget tree to change. This causes overlays attached to
       // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.
       error: widget.error ?? const SizedBox(),
+      expands: widget.expands,
       child: widget.builder(context, style, states, textfield),
     );
 
