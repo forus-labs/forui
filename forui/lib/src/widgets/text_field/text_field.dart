@@ -913,8 +913,8 @@ class FTextField extends StatefulWidget {
   static Widget _defaultToggleBuilder(BuildContext context, FTextFieldStyle style, Set<WidgetState> states) {
     // This should not be called directly since it requires a controller
     throw StateError(
-  'Default toggle builder should not be called without an obscureTextController. '
-  'This is an internal implementation error.',
+      'Default toggle builder should not be called without an obscureTextController. '
+      'This is an internal implementation error.',
     );
   }
 
