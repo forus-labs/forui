@@ -6,6 +6,24 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('vertical and expands', (tester) async {
+    expect(
+      () => TestScaffold(
+        child: const FLabel(axis: Axis.vertical, expands: true, child: Text('Child')),
+      ),
+      returnsNormally,
+    );
+  });
+
+  testWidgets('horizontal and expands', (tester) async {
+    expect(
+      () => TestScaffold(
+        child: FLabel(axis: Axis.horizontal, expands: true, child: const Text('Child')),
+      ),
+      throwsAssertionError,
+    );
+  });
+
   testWidgets('renders child only when label, description, and error are null', (tester) async {
     await tester.pumpWidget(
       TestScaffold(

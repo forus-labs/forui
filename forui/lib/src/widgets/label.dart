@@ -56,6 +56,12 @@ class FLabel extends StatelessWidget {
   /// The axis that determines the layout direction.
   final Axis axis;
 
+  /// Whether the child should expand to fill the available space. Defaults to false.
+  ///
+  /// ## Contract
+  /// Only applicable when [axis] is [Axis.vertical].
+  final bool expands;
+
   /// The label's states.
   final Set<WidgetState> states;
 
@@ -70,9 +76,10 @@ class FLabel extends StatelessWidget {
     this.label,
     this.description,
     this.error,
+    this.expands = false,
     this.states = const {},
     super.key,
-  });
+  }) : assert(axis == Axis.vertical || !expands, 'expands can only be true when axis is vertical');
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +107,7 @@ class FLabel extends StatelessWidget {
         label: label,
         description: description,
         error: error,
+        expands: expands,
         states: states,
         child: child,
       ),
@@ -111,6 +119,7 @@ class FLabel extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(EnumProperty('axis', axis))
+      ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(IterableProperty('states', states));
   }
 }
@@ -206,6 +215,7 @@ class _FVerticalLabel extends StatelessWidget {
   final Widget? label;
   final Widget? description;
   final Widget? error;
+  final bool expands;
   final Set<WidgetState> states;
   final Widget child;
 
@@ -214,6 +224,7 @@ class _FVerticalLabel extends StatelessWidget {
     required this.label,
     required this.description,
     required this.error,
+    required this.expands,
     required this.states,
     required this.child,
   });
@@ -232,7 +243,12 @@ class _FVerticalLabel extends StatelessWidget {
             child: label!,
           ),
         ),
-      Padding(padding: style.childPadding, child: child),
+      if (expands)
+        Expanded(
+          child: Padding(padding: style.childPadding, child: child),
+        )
+      else
+        Padding(padding: style.childPadding, child: child),
       if (description != null)
         Padding(
           padding: style.descriptionPadding,
@@ -259,6 +275,7 @@ class _FVerticalLabel extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('style', style.toString()))
+      ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(IterableProperty('states', states));
   }
 }

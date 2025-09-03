@@ -123,6 +123,12 @@ void main() {
     });
   });
 
+  testWidgets('expands', (tester) async {
+    await tester.pumpWidget(TestScaffold.app(child: const FTextField(maxLines: null, expands: true)));
+
+    expect(tester.takeException(), null);
+  });
+
   testWidgets('height does not change due to visual density on different platforms', (tester) async {
     debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
     await tester.pumpWidget(TestScaffold.app(theme: FThemes.zinc.light, child: const FTextField()));
