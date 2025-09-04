@@ -111,7 +111,7 @@ void main() {
             matchesGoldenFile('text-field/${theme.name}/password-$focused${text == null ? '-no-text' : ''}.png'),
           );
         });
-        
+
         testWidgets('password-visible - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
           final controller = text == null ? null : autoDispose(TextEditingController(text: text));
           final obscure = autoDispose(ValueNotifier<bool>(false));

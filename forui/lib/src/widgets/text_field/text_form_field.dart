@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/text_field/text_field.dart';
 import 'package:forui/src/widgets/text_field/password_form_field.dart';
+import 'package:forui/src/widgets/text_field/text_field.dart';
 
 /// A text field that is wrapped is a [FormField] for convenience.
 ///
