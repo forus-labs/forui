@@ -89,6 +89,40 @@ class _FAccordionState extends State<FAccordion> {
   }
 }
 
+@internal
+class InheritedAccordionData extends InheritedWidget {
+  @useResult
+  static InheritedAccordionData of(BuildContext context) {
+    assert(debugCheckHasAncestor<InheritedAccordionData>('$FAccordion', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedAccordionData>()!;
+  }
+
+  final FAccordionController controller;
+  final FAccordionStyle style;
+  final int index;
+
+  const InheritedAccordionData({
+    required this.controller,
+    required this.style,
+    required this.index,
+    required super.child,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(covariant InheritedAccordionData old) =>
+      controller != old.controller || style != old.style || index != old.index;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(IntProperty('index', index));
+  }
+}
+
 /// The [FAccordion]'s style.
 class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The title's text style.
@@ -174,40 +208,6 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.mutedForeground, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
-        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       );
-}
-
-@internal
-class InheritedAccordionData extends InheritedWidget {
-  @useResult
-  static InheritedAccordionData of(BuildContext context) {
-    assert(debugCheckHasAncestor<InheritedAccordionData>('$FAccordion', context));
-    return context.dependOnInheritedWidgetOfExactType<InheritedAccordionData>()!;
-  }
-
-  final FAccordionController controller;
-  final FAccordionStyle style;
-  final int index;
-
-  const InheritedAccordionData({
-    required this.controller,
-    required this.style,
-    required this.index,
-    required super.child,
-    super.key,
-  });
-
-  @override
-  bool updateShouldNotify(covariant InheritedAccordionData old) =>
-      controller != old.controller || style != old.style || index != old.index;
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(IntProperty('index', index));
-  }
 }

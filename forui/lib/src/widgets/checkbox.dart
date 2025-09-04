@@ -296,7 +296,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   factory FCheckboxStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return FCheckboxStyle(
-      tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: BorderRadius.circular(4)),
       iconStyle: FWidgetStateMap({
         WidgetState.selected & WidgetState.error: IconThemeData(color: colors.errorForeground, size: 14),

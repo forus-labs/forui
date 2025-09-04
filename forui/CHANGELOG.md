@@ -2,7 +2,13 @@
 
 ### Better Generated Documentation
 
-We've improved the generated documentation for styles. They should be much easier to navigate and understand.
+We've improved the styles' generated documentation. They should be much easier to navigate and understand.
+
+
+### `FTappable`
+
+* Add `FTappableMotion`.
+* **Breaking** Move animation related fields from `FTappableStyle to `FTappableMotion`.
 
 
 ### `FThemeData`
