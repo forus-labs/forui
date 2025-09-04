@@ -16,6 +16,7 @@ enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedAp
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   late final FTabController c;
+  final obscureNotifier = ValueNotifier<bool>(false);
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     c.dispose();
+    obscureNotifier.dispose();
     super.dispose();
   }
 
@@ -38,6 +40,26 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
         FButton(style: FButtonStyle.secondary(), onPress: () {}, child: Text('Secondary')),
         FButton(style: FButtonStyle.ghost(), onPress: () {}, child: Text('Ghost')),
         FButton(style: FButtonStyle.destructive(), onPress: () {}, child: Text('Destructive')),
+        FTextField.password(label: Text('FTextField Password'), hint: 'Enter password'),
+        SizedBox(height: 20),
+
+        // Test FTextFormField.password
+        FTextFormField.password(label: Text('FTextFormField Password'), hint: 'Enter password'),
+
+        SizedBox(height: 20),
+
+        // Test with custom obscureText notifier
+        FTextField.password(
+          label: Text('FTextField Password (starts visible)'),
+          hint: 'Enter password',
+          obscureText: obscureNotifier,
+        ),
+        SizedBox(height: 20),
+        FTextFormField.password(
+          label: Text('FTextFormField Password (starts visible)'),
+          hint: 'Enter password',
+          obscureText: obscureNotifier,
+        ),
       ],
     );
   }

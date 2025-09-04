@@ -6,31 +6,32 @@ import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/text_field/text_field.dart';
 
-/// Internal password field implementation used by [FTextField.password].
+/// Internal password form field implementation used by [FTextFormField.password].
 ///
-/// This widget wraps a regular [FTextField] and wires a visibility toggle.
+/// This widget wraps a regular [FTextFormField] and wires a visibility toggle.
 /// It exposes an optional [obscureTextNotifier] ([ValueNotifier<bool>]) that
 /// when non-null lets external code observe and control whether the password
 /// is obscured. The controller's value mirrors [obscureText] directly
 /// (true = obscured/hidden).
 @internal
-class PasswordField extends FTextField {
+class PasswordFormField extends FTextFormField {
+  static Widget _defaultErrorBuilder(BuildContext _, String text) => Text(text);
+
   final ValueNotifier<bool>? obscureTextNotifier;
 
-  PasswordField({
+  PasswordFormField({
     super.style,
-    FFieldBuilder<FTextFieldStyle>? builder,
+    Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states, Widget field)? builder,
     // TODO: Localize
     super.label = const Text('Password'),
     super.hint,
     super.description,
-    super.error,
     super.magnifierConfiguration,
     Object? groupId,
     super.controller,
     super.focusNode,
     super.keyboardType,
-    super.textInputAction = TextInputAction.next,
+    TextInputAction? textInputAction,
     TextCapitalization? textCapitalization,
     TextAlign? textAlign,
     super.textAlignVertical,
@@ -79,17 +80,24 @@ class PasswordField extends FTextField {
     super.prefixBuilder,
     super.suffixBuilder = _defaultToggleBuilder,
     bool Function(TextEditingValue)? clearable,
+    super.onSaved,
+    super.validator,
     super.initialText,
+    AutovalidateMode? autovalidateMode,
+    super.forceErrorText,
+    Widget Function(BuildContext context, String message)? errorBuilder,
     ValueNotifier<bool>? obscureText,
     super.key,
   }) : obscureTextNotifier = obscureText,
        super(
          builder: builder ?? Defaults.builder,
          groupId: groupId ?? EditableText,
+         textInputAction: textInputAction ?? TextInputAction.next,
          textCapitalization: textCapitalization ?? TextCapitalization.none,
          textAlign: textAlign ?? TextAlign.start,
          autofocus: autofocus ?? false,
          obscuringCharacter: obscuringCharacter ?? '•',
+         obscureText: true,
          autocorrect: autocorrect ?? false,
          enableSuggestions: enableSuggestions ?? false,
          maxLines: maxLines ?? 1,
@@ -105,7 +113,8 @@ class PasswordField extends FTextField {
          contextMenuBuilder: contextMenuBuilder ?? Defaults.contextMenuBuilder,
          canRequestFocus: canRequestFocus ?? true,
          clearable: clearable ?? Defaults.clearable,
-         obscureText: true,
+         autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
+         errorBuilder: errorBuilder ?? _defaultErrorBuilder,
        );
 
   // Default toggle builder for password visibility
@@ -118,7 +127,7 @@ class PasswordField extends FTextField {
   }
 
   @override
-  State<PasswordField> createState() => _PasswordFieldWithToggleState();
+  Widget build(BuildContext context) => _PasswordFormFieldWithToggleState(this);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -127,14 +136,24 @@ class PasswordField extends FTextField {
   }
 }
 
-class _PasswordFieldWithToggleState extends State<PasswordField> {
+/// State widget for the password form field with toggle functionality
+class _PasswordFormFieldWithToggleState extends StatefulWidget {
+  final PasswordFormField field;
+
+  const _PasswordFormFieldWithToggleState(this.field);
+
+  @override
+  State<_PasswordFormFieldWithToggleState> createState() => _PasswordFormFieldWithToggleStateImpl();
+}
+
+class _PasswordFormFieldWithToggleStateImpl extends State<_PasswordFormFieldWithToggleState> {
   late ValueNotifier<bool> _obscureController;
 
   @override
   void initState() {
     super.initState();
-    if (widget.obscureTextNotifier != null) {
-      _obscureController = widget.obscureTextNotifier!;
+    if (widget.field.obscureTextNotifier != null) {
+      _obscureController = widget.field.obscureTextNotifier!;
     } else {
       // default: start obscured
       _obscureController = ValueNotifier<bool>(true);
@@ -142,15 +161,15 @@ class _PasswordFieldWithToggleState extends State<PasswordField> {
   }
 
   @override
-  void didUpdateWidget(PasswordField oldWidget) {
+  void didUpdateWidget(_PasswordFormFieldWithToggleState oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.obscureTextNotifier != oldWidget.obscureTextNotifier) {
-      if (oldWidget.obscureTextNotifier == null) {
+    if (widget.field.obscureTextNotifier != oldWidget.field.obscureTextNotifier) {
+      if (oldWidget.field.obscureTextNotifier == null) {
         _obscureController.dispose();
       }
 
-      if (widget.obscureTextNotifier != null) {
-        _obscureController = widget.obscureTextNotifier!;
+      if (widget.field.obscureTextNotifier != null) {
+        _obscureController = widget.field.obscureTextNotifier!;
       } else {
         _obscureController = ValueNotifier<bool>(true);
       }
@@ -159,7 +178,7 @@ class _PasswordFieldWithToggleState extends State<PasswordField> {
 
   @override
   void dispose() {
-    if (widget.obscureTextNotifier == null) {
+    if (widget.field.obscureTextNotifier == null) {
       _obscureController.dispose();
     }
     super.dispose();
@@ -181,73 +200,77 @@ class _PasswordFieldWithToggleState extends State<PasswordField> {
     valueListenable: _obscureController,
     builder: (context, isObscured, child) {
       final FFieldIconBuilder<FTextFieldStyle>? effectiveSuffixBuilder =
-          widget.suffixBuilder == PasswordField._defaultToggleBuilder
+          widget.field.suffixBuilder == PasswordFormField._defaultToggleBuilder
           ? (context, style, states) => _buildToggleWidget(context, style, states, isObscured)
-          : widget.suffixBuilder;
+          : widget.field.suffixBuilder;
 
-      return FTextField(
-        style: widget.style,
-        builder: widget.builder,
-        label: widget.label,
-        hint: widget.hint,
-        description: widget.description,
-        error: widget.error,
-        magnifierConfiguration: widget.magnifierConfiguration,
-        groupId: widget.groupId,
-        controller: widget.controller,
-        focusNode: widget.focusNode,
-        keyboardType: widget.keyboardType,
-        textInputAction: widget.textInputAction,
-        textCapitalization: widget.textCapitalization,
-        textAlign: widget.textAlign,
-        textAlignVertical: widget.textAlignVertical,
-        textDirection: widget.textDirection,
-        autofocus: widget.autofocus,
-        statesController: widget.statesController,
-        obscuringCharacter: widget.obscuringCharacter,
+      return FTextFormField(
+        style: widget.field.style,
+        builder: widget.field.builder,
+        label: widget.field.label,
+        hint: widget.field.hint,
+        description: widget.field.description,
+        magnifierConfiguration: widget.field.magnifierConfiguration,
+        groupId: widget.field.groupId,
+        controller: widget.field.controller,
+        focusNode: widget.field.focusNode,
+        keyboardType: widget.field.keyboardType,
+        textInputAction: widget.field.textInputAction,
+        textCapitalization: widget.field.textCapitalization,
+        textAlign: widget.field.textAlign,
+        textAlignVertical: widget.field.textAlignVertical,
+        textDirection: widget.field.textDirection,
+        autofocus: widget.field.autofocus,
+        statesController: widget.field.statesController,
+        obscuringCharacter: widget.field.obscuringCharacter,
         obscureText: isObscured,
-        autocorrect: widget.autocorrect,
-        smartDashesType: widget.smartDashesType,
-        smartQuotesType: widget.smartQuotesType,
-        enableSuggestions: widget.enableSuggestions,
-        minLines: widget.minLines,
-        maxLines: widget.maxLines,
-        expands: widget.expands,
-        readOnly: widget.readOnly,
-        showCursor: widget.showCursor,
-        maxLength: widget.maxLength,
-        maxLengthEnforcement: widget.maxLengthEnforcement,
-        onChange: widget.onChange,
-        onTap: widget.onTap,
-        onTapOutside: widget.onTapOutside,
-        onTapAlwaysCalled: widget.onTapAlwaysCalled,
-        onEditingComplete: widget.onEditingComplete,
-        onSubmit: widget.onSubmit,
-        onAppPrivateCommand: widget.onAppPrivateCommand,
-        inputFormatters: widget.inputFormatters,
-        enabled: widget.enabled,
-        ignorePointers: widget.ignorePointers,
-        enableInteractiveSelection: widget.enableInteractiveSelection,
-        selectAllOnFocus: widget.selectAllOnFocus,
-        selectionControls: widget.selectionControls,
-        dragStartBehavior: widget.dragStartBehavior,
-        mouseCursor: widget.mouseCursor,
-        counterBuilder: widget.counterBuilder,
-        scrollPhysics: widget.scrollPhysics,
-        scrollController: widget.scrollController,
-        autofillHints: widget.autofillHints,
-        restorationId: widget.restorationId,
-        stylusHandwritingEnabled: widget.stylusHandwritingEnabled,
-        enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
-        contentInsertionConfiguration: widget.contentInsertionConfiguration,
-        contextMenuBuilder: widget.contextMenuBuilder,
-        canRequestFocus: widget.canRequestFocus,
-        undoController: widget.undoController,
-        spellCheckConfiguration: widget.spellCheckConfiguration,
-        prefixBuilder: widget.prefixBuilder,
+        autocorrect: widget.field.autocorrect,
+        smartDashesType: widget.field.smartDashesType,
+        smartQuotesType: widget.field.smartQuotesType,
+        enableSuggestions: widget.field.enableSuggestions,
+        minLines: widget.field.minLines,
+        maxLines: widget.field.maxLines,
+        expands: widget.field.expands,
+        readOnly: widget.field.readOnly,
+        showCursor: widget.field.showCursor,
+        maxLength: widget.field.maxLength,
+        maxLengthEnforcement: widget.field.maxLengthEnforcement,
+        onChange: widget.field.onChange,
+        onTap: widget.field.onTap,
+        onTapOutside: widget.field.onTapOutside,
+        onTapAlwaysCalled: widget.field.onTapAlwaysCalled,
+        onEditingComplete: widget.field.onEditingComplete,
+        onSubmit: widget.field.onSubmit,
+        onAppPrivateCommand: widget.field.onAppPrivateCommand,
+        inputFormatters: widget.field.inputFormatters,
+        enabled: widget.field.enabled,
+        ignorePointers: widget.field.ignorePointers,
+        enableInteractiveSelection: widget.field.enableInteractiveSelection,
+        selectAllOnFocus: widget.field.selectAllOnFocus,
+        selectionControls: widget.field.selectionControls,
+        dragStartBehavior: widget.field.dragStartBehavior,
+        mouseCursor: widget.field.mouseCursor,
+        counterBuilder: widget.field.counterBuilder,
+        scrollPhysics: widget.field.scrollPhysics,
+        scrollController: widget.field.scrollController,
+        autofillHints: widget.field.autofillHints,
+        restorationId: widget.field.restorationId,
+        stylusHandwritingEnabled: widget.field.stylusHandwritingEnabled,
+        enableIMEPersonalizedLearning: widget.field.enableIMEPersonalizedLearning,
+        contentInsertionConfiguration: widget.field.contentInsertionConfiguration,
+        contextMenuBuilder: widget.field.contextMenuBuilder,
+        canRequestFocus: widget.field.canRequestFocus,
+        undoController: widget.field.undoController,
+        spellCheckConfiguration: widget.field.spellCheckConfiguration,
+        prefixBuilder: widget.field.prefixBuilder,
         suffixBuilder: effectiveSuffixBuilder,
-        clearable: widget.clearable,
-        initialText: widget.initialText,
+        clearable: widget.field.clearable,
+        onSaved: widget.field.onSaved,
+        validator: widget.field.validator,
+        initialText: widget.field.initialText,
+        autovalidateMode: widget.field.autovalidateMode,
+        forceErrorText: widget.field.forceErrorText,
+        errorBuilder: widget.field.errorBuilder,
       );
     },
   );

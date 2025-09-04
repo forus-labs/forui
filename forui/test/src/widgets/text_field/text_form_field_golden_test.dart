@@ -111,6 +111,32 @@ void main() {
             matchesGoldenFile('text-form-field/${theme.name}/password-$focused${text == null ? '-no-text' : ''}.png'),
           );
         });
+
+        testWidgets('password-visible - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
+          final controller = text == null ? null : autoDispose(TextEditingController(text: text));
+          final obscure = autoDispose(ValueNotifier<bool>(false));
+
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme.data,
+              child: FTextFormField.password(
+                controller: controller,
+                autofocus: focused_,
+                hint: 'password',
+                obscureText: obscure,
+              ),
+            ),
+          );
+
+          await tester.pumpAndSettle();
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile(
+              'text-form-field/${theme.name}/password-visible-$focused${text == null ? '-no-text' : ''}.png',
+            ),
+          );
+        });
       }
 
       for (final (text) in [_longText, null]) {
