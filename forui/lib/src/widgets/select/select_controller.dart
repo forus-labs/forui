@@ -58,8 +58,8 @@ class FSelectController<T> extends FValueNotifier<T?> {
     required TickerProvider vsync,
     T? value,
     this.toggleable = false,
-    Duration popoverAnimationDuration = const Duration(milliseconds: 100),
-  }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
+    FPopoverMotion popoverMotion = const FPopoverMotion(),
+  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion),
        super(value);
 
   @override
@@ -86,8 +86,8 @@ class FMultiSelectController<T> extends FMultiValueNotifier<T> {
     super.min,
     super.max,
     super.value,
-    Duration popoverAnimationDuration = const Duration(milliseconds: 100),
-  }) : popover = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration);
+    FPopoverMotion popoverMotion = const FPopoverMotion(),
+  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion);
 
   @override
   void dispose() {

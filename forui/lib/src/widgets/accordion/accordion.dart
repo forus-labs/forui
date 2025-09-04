@@ -203,31 +203,32 @@ class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
   @override
   final Duration expandDuration;
 
-  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
-  ///
-  /// It is recommended to change this and [Curves
-  @override
-  final Curve expandCurve;
-
   /// The collapse animation's duration. Defaults to 150ms.
   @override
   final Duration collapseDuration;
+
+  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
+  ///
+  /// It is recommended to change this and [collapseCurve] to [Curves.linear] if there is a max number of items shown
+  /// at once to avoid the height jumping effect.
+  @override
+  final Curve expandCurve;
 
   /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
   @override
   final Curve collapseCurve;
 
-  /// The icon rotation animation's curve. Defaults to [Curves.easeOut].
+  /// The icon's animation curve when expanding. Defaults to [Curves.easeOut].
   @override
-  final Curve iconRotationCurve;
+  final Curve iconExpandCurve;
 
-  /// The icon rotation animation's reverse curve. Defaults to [Curves.easeOut].
+  /// The icon's animation curve when collapsing. Defaults to [Curves.easeOut].
   @override
-  final Curve iconRotationReverseCurve;
+  final Curve iconCollapseCurve;
 
-  /// The icon rotation animation's tween. Defaults to `Tween(begin: 0.0, end: 0.5)`.
+  /// The icon animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 0.5)`.
   @override
-  final Animatable<double> iconRotationTween;
+  final Animatable<double> iconTween;
 
   /// Creates a [FAccordionMotion].
   const FAccordionMotion({
@@ -235,8 +236,8 @@ class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
     this.expandCurve = Curves.easeOutCubic,
     this.collapseDuration = const Duration(milliseconds: 200),
     this.collapseCurve = Curves.easeInCubic,
-    this.iconRotationCurve = Curves.easeOut,
-    this.iconRotationReverseCurve = Curves.easeOut,
-    this.iconRotationTween = const FImmutableTween(begin: 0.0, end: 0.50),
+    this.iconExpandCurve = Curves.easeOut,
+    this.iconCollapseCurve = Curves.easeOut,
+    this.iconTween = const FImmutableTween(begin: 0.0, end: 0.50),
   });
 }

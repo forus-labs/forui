@@ -538,11 +538,11 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   /// A [FTappableMotion] with no motion effects.
   static const FTappableMotion none = FTappableMotion(bounceTween: noBounceTween);
 
-  /// The bounce's animation duration when the tappable is pressed down. Defaults to 100ms.
+  /// The bounce animation's duration when the tappable is pressed down. Defaults to 100ms.
   @override
   final Duration bounceDownDuration;
 
-  /// The bounce's animation duration when the tappable is released (up). Defaults to 120ms.
+  /// The bounce animation's duration when the tappable is released (up). Defaults to 120ms.
   @override
   final Duration bounceUpDuration;
 
@@ -554,7 +554,7 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   @override
   final Curve bounceUpCurve;
 
-  /// The tween used to animate the scale of the tappable. Defaults to [defaultBounceTween].
+  /// The bounce's tween. Defaults to [defaultBounceTween].
   ///
   /// Set to [noBounceTween] to disable the bounce effect.
   @override

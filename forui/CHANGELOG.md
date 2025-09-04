@@ -11,6 +11,23 @@ We've improved the styles' generated documentation. They should be much easier t
 * **Breaking** Move animation related fields from `FAccordionStyle` to `FAccordionMoton`.
 
 
+### `FDateField`
+
+* Replace `FDateFieldController(animationDuration: ...)` with `FDateFieldController(popoverMotion: ...)`.
+
+
+### `FPopover`
+
+* Add `FPopoverMotion`.
+* **Breaking** Replace `FPopoverController(animationDuration: ...)` with `FPopoverController(motion: ...)`.
+
+
+### `FSelect` & `FMultiSelect`
+
+* **Breaking** Replace `FSelectController(animationDuration: ...)` with `FSelectController(popoverMotion: ...)`.
+* **Breaking** Replace `FMultiSelectController(animationDuration: ...)` with `FMultiSelectController(popoverMotion: ...)`.
+
+
 ### `FTappable`
 
 * Add `FTappableMotion`.
@@ -22,6 +39,11 @@ We've added support for animated theme transitions. This should make transitions
 
 * Add `FThemeData.lerp(...)`.
 * Change `FThemeData.copyWith(...)` to accept style builder functions.
+
+
+### `FTimeField`
+
+* **Breaking** Replace `FTimeFieldController(animationDuration: ...)` with `FTimeFieldController(popoverMotion: ...)`.
 
 
 ### `FWidgetStateMap`
