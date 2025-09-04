@@ -128,9 +128,13 @@ class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
 /// The regions that can be tapped to hide a popover.
 enum FPopoverHideRegion {
   /// The entire screen, excluding the popover.
+  ///
+  /// This is recommended when tapping in the child does not toggle the popover.
   anywhere,
 
   /// The entire screen, excluding the child and popover.
+  ///
+  /// This is recommended when tapping anywhere in the child toggles the popover, i.e. when the child is a button.
   excludeChild,
 
   /// Disables tapping outside of the popover to hide it.
