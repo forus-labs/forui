@@ -5,10 +5,16 @@
 We've improved the styles' generated documentation. They should be much easier to navigate and understand.
 
 
+### `FAccordion`
+
+* Add `FAccordionMotion`.
+* **Breaking** Move animation related fields from `FAccordionStyle` to `FAccordionMoton`.
+
+
 ### `FTappable`
 
 * Add `FTappableMotion`.
-* **Breaking** Move animation related fields from `FTappableStyle to `FTappableMotion`.
+* **Breaking** Move animation related fields from `FTappableStyle` to `FTappableMotion`.
 
 
 ### `FThemeData`
@@ -27,6 +33,7 @@ We've added support for animated theme transitions. This should make transitions
 
 
 ## Others
+* Add `FImmutableTween`.
 * Add `FLabel.expands`.
 * Fix `FTextField.expands` causing a render error.
 

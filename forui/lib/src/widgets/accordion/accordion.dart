@@ -149,22 +149,6 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
-  /// The expand animation's duration. Defaults to 200ms.
-  @override
-  final Duration expandDuration;
-
-  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
-
-  /// The collapse animation's duration. Defaults to 150ms.
-  @override
-  final Duration collapseDuration;
-
-  /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
-  @override
-  final Curve collapseCurve;
-
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
@@ -177,6 +161,10 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   @override
   final FTappableStyle tappableStyle;
 
+  /// The motion-related properties.
+  @override
+  final FAccordionMotion motion;
+
   /// Creates a [FAccordionStyle].
   const FAccordionStyle({
     required this.titleTextStyle,
@@ -187,10 +175,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     required this.tappableStyle,
     this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
     this.childPadding = const EdgeInsets.only(bottom: 15),
-    this.expandDuration = const Duration(milliseconds: 200),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseDuration = const Duration(milliseconds: 200),
-    this.collapseCurve = Curves.easeInCubic,
+    this.motion = const FAccordionMotion(),
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
@@ -210,4 +195,48 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       );
+}
+
+/// Motion-related properties for [FAccordion].
+class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
+  /// The expand animation's duration. Defaults to 200ms.
+  @override
+  final Duration expandDuration;
+
+  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
+  ///
+  /// It is recommended to change this and [Curves
+  @override
+  final Curve expandCurve;
+
+  /// The collapse animation's duration. Defaults to 150ms.
+  @override
+  final Duration collapseDuration;
+
+  /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
+  @override
+  final Curve collapseCurve;
+
+  /// The icon rotation animation's curve. Defaults to [Curves.easeOut].
+  @override
+  final Curve iconRotationCurve;
+
+  /// The icon rotation animation's reverse curve. Defaults to [Curves.easeOut].
+  @override
+  final Curve iconRotationReverseCurve;
+
+  /// The icon rotation animation's tween. Defaults to `Tween(begin: 0.0, end: 0.5)`.
+  @override
+  final Animatable<double> iconRotationTween;
+
+  /// Creates a [FAccordionMotion].
+  const FAccordionMotion({
+    this.expandDuration = const Duration(milliseconds: 200),
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseDuration = const Duration(milliseconds: 200),
+    this.collapseCurve = Curves.easeInCubic,
+    this.iconRotationCurve = Curves.easeOut,
+    this.iconRotationReverseCurve = Curves.easeOut,
+    this.iconRotationTween = const FImmutableTween(begin: 0.0, end: 0.50),
+  });
 }

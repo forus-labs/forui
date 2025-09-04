@@ -85,8 +85,9 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
 
 class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStateMixin {
   AnimationController? _controller;
-  CurvedAnimation? _body;
-  Animation<double>? _icon;
+  CurvedAnimation? _reveal;
+  CurvedAnimation? _curvedIconRotation;
+  Animation<double>? _iconRotation;
 
   @override
   void didChangeDependencies() {
@@ -96,16 +97,25 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     controller.remove(index);
 
     _controller?.dispose();
-    _body?.dispose();
+    _reveal?.dispose();
 
     _controller = AnimationController(
       vsync: this,
       value: widget.initiallyExpanded ? 1 : 0,
-      duration: style.expandDuration,
-      reverseDuration: style.collapseDuration,
+      duration: style.motion.expandDuration,
+      reverseDuration: style.motion.collapseDuration,
     );
-    _body = CurvedAnimation(curve: style.expandCurve, reverseCurve: style.collapseCurve, parent: _controller!);
-    _icon = Tween(begin: 0.0, end: 0.5).animate(_body!);
+    _reveal = CurvedAnimation(
+      curve: style.motion.expandCurve,
+      reverseCurve: style.motion.collapseCurve,
+      parent: _controller!,
+    );
+    _curvedIconRotation = CurvedAnimation(
+      curve: style.motion.iconRotationCurve,
+      reverseCurve: style.motion.iconRotationReverseCurve,
+      parent: _controller!,
+    );
+    _iconRotation = style.motion.iconRotationTween.animate(_curvedIconRotation!);
 
     if (!controller.add(index, _controller!)) {
       throw StateError('Number of expanded items must be within the min and max.');
@@ -114,7 +124,8 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
 
   @override
   void dispose() {
-    _body?.dispose();
+    _curvedIconRotation?.dispose();
+    _reveal?.dispose();
     _controller?.dispose();
     super.dispose();
   }
@@ -153,7 +164,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                   style: style.focusedOutlineStyle,
                   focused: states.contains(WidgetState.focused),
                   child: RotationTransition(
-                    turns: _icon!,
+                    turns: _iconRotation!,
                     child: IconTheme(data: style.iconStyle.resolve(states), child: widget.icon),
                   ),
                 ),
@@ -162,9 +173,9 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
           ),
         ),
         AnimatedBuilder(
-          animation: _body!,
+          animation: _reveal!,
           builder: (_, _) => FCollapsible(
-            value: _body!.value,
+            value: _reveal!.value,
             child: Padding(
               padding: style.childPadding,
               child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),
