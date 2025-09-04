@@ -13,12 +13,13 @@ We've improved the styles' generated documentation. They should be much easier t
 
 ### `FDateField`
 
-* Replace `FDateFieldController(animationDuration: ...)` with `FDateFieldController(popoverMotion: ...)`.
+* **Breaking** Replace `FDateFieldController(animationDuration: ...)` with `FDateFieldController(popoverMotion: ...)`.
 
 
 ### `FPopover`
 
 * Add `FPopoverMotion`.
+* Change default animations to be more subtle.
 * **Breaking** Replace `FPopoverController(animationDuration: ...)` with `FPopoverController(motion: ...)`.
 
 

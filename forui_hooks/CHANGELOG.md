@@ -1,4 +1,13 @@
-### 0.15.0
+## 0.16.0 (Next)
+
+* **Breaking** Replace `useFDateFieldController(animationDuration: ...)` with `useFDateFieldController(popoverMotion: ...)`.
+* **Breaking** Replace `useFPopoverController(animationDuration: ...)` with `useFPopoverController(motion: ...)`.
+* **Breaking** Replace `useFSelectController(animationDuration: ...)` with `useFSelectController(popoverMotion: ...)`.
+* **Breaking** Replace `useFSMultiSelectController(animationDuration: ...)` with `useFSMultiSelectController(popoverMotion: ...)`.
+* **Breaking** Replace `useFTimeFieldController(animationDuration: ...)` with `useFTimeFieldController(popoverMotion: ...)`.
+
+
+## 0.15.0
 * Add `useFAutocompleteController`.
 * Add `useFMultiSelectController`.
 

@@ -7,21 +7,21 @@ import 'package:forui/forui.dart';
 /// Creates a [FPopoverController] that is automatically disposed.
 FPopoverController useFPopoverController({
   TickerProvider? vsync,
-  Duration animationDuration = const Duration(milliseconds: 100),
+  FPopoverMotion motion = const FPopoverMotion(),
   List<Object?>? keys,
 }) => use(
   _PopoverControllerHook(
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
-    animationDuration: animationDuration,
+    motion: motion,
     keys: keys,
   ),
 );
 
 class _PopoverControllerHook extends Hook<FPopoverController> {
   final TickerProvider vsync;
-  final Duration animationDuration;
+  final FPopoverMotion motion;
 
-  const _PopoverControllerHook({required this.vsync, required this.animationDuration, super.keys});
+  const _PopoverControllerHook({required this.vsync, required this.motion, super.keys});
 
   @override
   _PopoverControllerHookState createState() => _PopoverControllerHookState();
@@ -31,14 +31,14 @@ class _PopoverControllerHook extends Hook<FPopoverController> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('vsync', vsync))
-      ..add(DiagnosticsProperty('duration', animationDuration));
+      ..add(DiagnosticsProperty('motion', motion));
   }
 }
 
 class _PopoverControllerHookState extends HookState<FPopoverController, _PopoverControllerHook> {
   late final FPopoverController _controller = FPopoverController(
     vsync: hook.vsync,
-    animationDuration: hook.animationDuration,
+    motion: hook.motion,
   );
 
   @override
