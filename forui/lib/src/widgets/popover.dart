@@ -80,6 +80,12 @@ final class FPopoverController extends FChangeNotifier {
 
 /// Motion-related properties for [FPopover].
 class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
+  /// A [FPopoverMotion] with no motion effects.
+  static const FPopoverMotion none = FPopoverMotion(
+    scaleTween: FImmutableTween(begin: 1, end: 1),
+    fadeTween: FImmutableTween(begin: 1, end: 1),
+  );
+
   /// The popover's entrance duration. Defaults to 120ms.
   @override
   final Duration entranceDuration;

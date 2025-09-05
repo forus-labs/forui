@@ -85,8 +85,9 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
 
 class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStateMixin {
   AnimationController? _controller;
-  CurvedAnimation? _reveal;
+  CurvedAnimation? _curvedReveal;
   CurvedAnimation? _curvedIconRotation;
+  Animation<double>? _reveal;
   Animation<double>? _iconRotation;
 
   @override
@@ -97,7 +98,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     controller.remove(index);
 
     _controller?.dispose();
-    _reveal?.dispose();
+    _curvedReveal?.dispose();
 
     _controller = AnimationController(
       vsync: this,
@@ -105,7 +106,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       duration: style.motion.expandDuration,
       reverseDuration: style.motion.collapseDuration,
     );
-    _reveal = CurvedAnimation(
+    _curvedReveal = CurvedAnimation(
       curve: style.motion.expandCurve,
       reverseCurve: style.motion.collapseCurve,
       parent: _controller!,
@@ -115,6 +116,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       reverseCurve: style.motion.iconCollapseCurve,
       parent: _controller!,
     );
+    _reveal = style.motion.revealTween.animate(_curvedReveal!);
     _iconRotation = style.motion.iconTween.animate(_curvedIconRotation!);
 
     if (!controller.add(index, _controller!)) {
@@ -125,7 +127,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   @override
   void dispose() {
     _curvedIconRotation?.dispose();
-    _reveal?.dispose();
+    _curvedReveal?.dispose();
     _controller?.dispose();
     super.dispose();
   }
@@ -173,9 +175,9 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
           ),
         ),
         AnimatedBuilder(
-          animation: _reveal!,
+          animation: _curvedReveal!,
           builder: (_, _) => FCollapsible(
-            value: _reveal!.value,
+            value: _curvedReveal!.value,
             child: Padding(
               padding: style.childPadding,
               child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),

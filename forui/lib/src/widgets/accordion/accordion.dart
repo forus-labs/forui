@@ -199,6 +199,12 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 
 /// Motion-related properties for [FAccordion].
 class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
+  /// A [FAccordionMotion] with no motion effects.
+  static const FAccordionMotion none = FAccordionMotion(
+    revealTween: FImmutableTween(begin: 1, end: 1),
+    iconTween: FImmutableTween(begin: 1, end: 1),
+  );
+
   /// The expand animation's duration. Defaults to 200ms.
   @override
   final Duration expandDuration;
@@ -226,6 +232,10 @@ class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
   @override
   final Curve iconCollapseCurve;
 
+  /// The reveal animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 1.0)`.
+  @override
+  final Animatable<double> revealTween;
+
   /// The icon animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 0.5)`.
   @override
   final Animatable<double> iconTween;
@@ -238,6 +248,7 @@ class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
     this.collapseCurve = Curves.easeInCubic,
     this.iconExpandCurve = Curves.easeOut,
     this.iconCollapseCurve = Curves.easeOut,
+    this.revealTween = const FImmutableTween(begin: 0.0, end: 1.0),
     this.iconTween = const FImmutableTween(begin: 0.0, end: 0.50),
   });
 }

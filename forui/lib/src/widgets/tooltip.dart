@@ -80,6 +80,12 @@ final class FTooltipController extends FChangeNotifier {
 
 /// Motion-related properties for [FTooltip].
 class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
+  /// A [FTooltipMotion] with no motion effects.
+  static const FTooltipMotion none = FTooltipMotion(
+    scaleTween: FImmutableTween(begin: 1, end: 1),
+    fadeTween: FImmutableTween(begin: 1, end: 1),
+  );
+
   /// The tooltip's entrance duration. Defaults to 100ms.
   @override
   final Duration entranceDuration;
