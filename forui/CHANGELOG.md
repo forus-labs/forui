@@ -16,11 +16,12 @@ We've improved the styles' generated documentation. They should be much easier t
 * **Breaking** Replace `FDateFieldController(animationDuration: ...)` with `FDateFieldController(popoverMotion: ...)`.
 
 
-### `FPopover`
+### `FPopover` & `FPopoverMenu`
 
 * Add `FPopoverMotion`.
 * Change default animations to be more subtle.
 * **Breaking** Replace `FPopoverController(animationDuration: ...)` with `FPopoverController(motion: ...)`.
+* **Breaking** Change `FPopoverMenu.hideRegion`'s default value from `FHidePopoverRegion.anywhere` to `FHidePopoverRegion.excludeChild`.
 
 
 ### `FSelect` & `FMultiSelect`
@@ -45,6 +46,12 @@ We've added support for animated theme transitions. This should make transitions
 ### `FTimeField`
 
 * **Breaking** Replace `FTimeFieldController(animationDuration: ...)` with `FTimeFieldController(popoverMotion: ...)`.
+
+
+### `FTooltip`
+
+* Add `FTooltipMotion`.
+* **Breaking** Replace `FTooltipController(animationDuration: ...)` with `FTooltipController(motion: ...)`.
 
 
 ### `FWidgetStateMap`
