@@ -164,6 +164,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FCheckboxStyle checkboxStyle;
 
+  /// The circular progress style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create circular-progress
+  /// ```
+  @override
+  final FCircularProgressStyle circularProgressStyle;
+
   /// The date field style.
   ///
   /// ## CLI
@@ -303,6 +314,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```
   @override
   final FPopoverMenuStyle popoverMenuStyle;
+
+  /// The progress style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create progress
+  /// ```
+  @override
+  final FProgressStyle progressStyle;
 
   /// The progress styles.
   ///
@@ -544,6 +566,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
+    FCircularProgressStyle? circularProgressStyle,
     FDateFieldStyle? dateFieldStyle,
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
@@ -557,6 +580,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
+    FProgressStyle? progressStyle,
     FProgressStyles? progressStyles,
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
@@ -602,6 +626,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       calendarStyle: calendarStyle ?? FCalendarStyle.inherit(colors: colors, typography: typography, style: style),
       cardStyle: cardStyle ?? FCardStyle.inherit(colors: colors, typography: typography, style: style),
       checkboxStyle: checkboxStyle ?? FCheckboxStyle.inherit(colors: colors, style: style),
+      circularProgressStyle:
+          circularProgressStyle ?? FCircularProgressStyle.inherit(colors: colors),
       dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, typography: typography, style: style),
       dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
@@ -619,6 +645,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colors: colors, style: style),
       popoverMenuStyle:
           popoverMenuStyle ?? FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
+      progressStyle: progressStyle ?? FProgressStyle.inherit(colors: colors, style: style),
       progressStyles: progressStyles ?? FProgressStyles.inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? FRadioStyle.inherit(colors: colors, style: style),
       resizableStyle: resizableStyle ?? FResizableStyle.inherit(colors: colors, style: style),
@@ -664,6 +691,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     calendarStyle: a.calendarStyle.lerp(b.calendarStyle, t),
     cardStyle: a.cardStyle.lerp(b.cardStyle, t),
     checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
+    circularProgressStyle: a.circularProgressStyle.lerp(b.circularProgressStyle, t),
     dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
     dividerStyles: a.dividerStyles.lerp(b.dividerStyles, t),
@@ -677,6 +705,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     pickerStyle: a.pickerStyle.lerp(b.pickerStyle, t),
     popoverStyle: a.popoverStyle.lerp(b.popoverStyle, t),
     popoverMenuStyle: a.popoverMenuStyle.lerp(b.popoverMenuStyle, t),
+    progressStyle: a.progressStyle.lerp(b.progressStyle, t),
     progressStyles: a.progressStyles.lerp(b.progressStyles, t),
     radioStyle: a.radioStyle.lerp(b.radioStyle, t),
     resizableStyle: a.resizableStyle.lerp(b.resizableStyle, t),
@@ -720,6 +749,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.calendarStyle,
     required this.cardStyle,
     required this.checkboxStyle,
+    required this.circularProgressStyle,
     required this.dateFieldStyle,
     required this.dialogStyle,
     required this.dividerStyles,
@@ -733,6 +763,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.pickerStyle,
     required this.popoverStyle,
     required this.popoverMenuStyle,
+    required this.progressStyle,
     required this.progressStyles,
     required this.radioStyle,
     required this.resizableStyle,
@@ -1216,6 +1247,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FCalendarStyle Function(FCalendarStyle style)? calendarStyle,
     FCardStyle Function(FCardStyle style)? cardStyle,
     FCheckboxStyle Function(FCheckboxStyle style)? checkboxStyle,
+    FCircularProgressStyle Function(FCircularProgressStyle style)? circularProgressStyle,
     FDateFieldStyle Function(FDateFieldStyle style)? dateFieldStyle,
     FDialogStyle Function(FDialogStyle style)? dialogStyle,
     FDividerStyles Function(FDividerStyles style)? dividerStyles,
@@ -1229,6 +1261,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPickerStyle Function(FPickerStyle style)? pickerStyle,
     FPopoverStyle Function(FPopoverStyle style)? popoverStyle,
     FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
+    FProgressStyle Function(FProgressStyle style)? progressStyle,
     FProgressStyles Function(FProgressStyles style)? progressStyles,
     FRadioStyle Function(FRadioStyle style)? radioStyle,
     FResizableStyle Function(FResizableStyle style)? resizableStyle,
@@ -1269,6 +1302,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     calendarStyle: calendarStyle != null ? calendarStyle(this.calendarStyle) : this.calendarStyle,
     cardStyle: cardStyle != null ? cardStyle(this.cardStyle) : this.cardStyle,
     checkboxStyle: checkboxStyle != null ? checkboxStyle(this.checkboxStyle) : this.checkboxStyle,
+    circularProgressStyle:
+        circularProgressStyle != null ? circularProgressStyle(this.circularProgressStyle) : this.circularProgressStyle,
     dateFieldStyle: dateFieldStyle != null ? dateFieldStyle(this.dateFieldStyle) : this.dateFieldStyle,
     dialogStyle: dialogStyle != null ? dialogStyle(this.dialogStyle) : this.dialogStyle,
     dividerStyles: dividerStyles != null ? dividerStyles(this.dividerStyles) : this.dividerStyles,
@@ -1282,6 +1317,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     pickerStyle: pickerStyle != null ? pickerStyle(this.pickerStyle) : this.pickerStyle,
     popoverStyle: popoverStyle != null ? popoverStyle(this.popoverStyle) : this.popoverStyle,
     popoverMenuStyle: popoverMenuStyle != null ? popoverMenuStyle(this.popoverMenuStyle) : this.popoverMenuStyle,
+    progressStyle: progressStyle != null ? progressStyle(this.progressStyle) : this.progressStyle,
     progressStyles: progressStyles != null ? progressStyles(this.progressStyles) : this.progressStyles,
     radioStyle: radioStyle != null ? radioStyle(this.radioStyle) : this.radioStyle,
     resizableStyle: resizableStyle != null ? resizableStyle(this.resizableStyle) : this.resizableStyle,

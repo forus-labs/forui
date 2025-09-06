@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Next",
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Select items",
-  "autocompleteNoResults": "No matches found."
+  "autocompleteNoResults": "No matches found.",
+  "progressSemanticsLabel": "Loading"
 }

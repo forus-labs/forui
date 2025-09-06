@@ -96,6 +96,9 @@ class FLocalizationsAm extends FLocalizations {
   String get popoverSemanticsLabel => 'ፖፖቨር';
 
   @override
+  String get progressSemanticsLabel => 'በመጫን ላይ';
+
+  @override
   String get multiSelectHint => 'ንጥሎች ይምረጡ';
 
   @override

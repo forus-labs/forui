@@ -22,5 +22,6 @@
   "paginationNext": "अगला",
   "popoverSemanticsLabel": "पॉपओवर",
   "multiSelectHint": "आइटम चुनें",
-  "autocompleteNoResults": "कोई मिलान नहीं मिला."
+  "autocompleteNoResults": "कोई मिलान नहीं मिला.",
+  "progressSemanticsLabel": "लोड हो रहा है"
 }

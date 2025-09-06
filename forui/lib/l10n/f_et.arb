@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Järgmine",
   "popoverSemanticsLabel": "Hüpikaken",
   "multiSelectHint": "Valige üksused",
-  "autocompleteNoResults": "Vasteid ei leitud."
+  "autocompleteNoResults": "Vasteid ei leitud.",
+  "progressSemanticsLabel": "Laadimine"
 }

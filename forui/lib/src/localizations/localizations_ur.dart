@@ -96,6 +96,9 @@ class FLocalizationsUr extends FLocalizations {
   String get popoverSemanticsLabel => 'پاپ اوور';
 
   @override
+  String get progressSemanticsLabel => 'لوڈ ہو رہا ہے';
+
+  @override
   String get multiSelectHint => 'آئٹمز منتخب کریں';
 
   @override

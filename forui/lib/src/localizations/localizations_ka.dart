@@ -96,6 +96,9 @@ class FLocalizationsKa extends FLocalizations {
   String get popoverSemanticsLabel => 'ამომხტარი ფანჯარა';
 
   @override
+  String get progressSemanticsLabel => 'იტვირთება';
+
+  @override
   String get multiSelectHint => 'ელემენტების არჩევა';
 
   @override

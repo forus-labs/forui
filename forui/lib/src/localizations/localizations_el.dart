@@ -96,6 +96,9 @@ class FLocalizationsEl extends FLocalizations {
   String get popoverSemanticsLabel => 'Αναδυόμενο παράθυρο';
 
   @override
+  String get progressSemanticsLabel => 'Φόρτωση';
+
+  @override
   String get multiSelectHint => 'Επιλέξτε στοιχεία';
 
   @override

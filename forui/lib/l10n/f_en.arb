@@ -122,6 +122,12 @@
   },
 
 
+  "progressSemanticsLabel": "Loading",
+  "@progressSemanticsLabel": {
+    "description": "The default semantics label for a progress indicator."
+  },
+
+
   "multiSelectHint": "Select items",
   "@multiSelectHint": {
     "description": "The hint text for the multi-select field."

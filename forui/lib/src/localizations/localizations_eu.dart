@@ -96,6 +96,9 @@ class FLocalizationsEu extends FLocalizations {
   String get popoverSemanticsLabel => 'Leiho emergentea';
 
   @override
+  String get progressSemanticsLabel => 'Kargatzen';
+
+  @override
   String get multiSelectHint => 'Hautatu elementuak';
 
   @override

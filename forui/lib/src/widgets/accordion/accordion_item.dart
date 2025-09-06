@@ -175,9 +175,9 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
           ),
         ),
         AnimatedBuilder(
-          animation: _curvedReveal!,
+          animation: _reveal!,
           builder: (_, _) => FCollapsible(
-            value: _curvedReveal!.value,
+            value: _reveal!.value,
             child: Padding(
               padding: style.childPadding,
               child: DefaultTextStyle(style: style.childTextStyle, child: widget.child),

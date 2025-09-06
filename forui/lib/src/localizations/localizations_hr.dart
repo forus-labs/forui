@@ -96,6 +96,9 @@ class FLocalizationsHr extends FLocalizations {
   String get popoverSemanticsLabel => 'Skočni prozor';
 
   @override
+  String get progressSemanticsLabel => 'Učitavanje';
+
+  @override
   String get multiSelectHint => 'Odaberite stavke';
 
   @override

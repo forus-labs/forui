@@ -96,6 +96,9 @@ class FLocalizationsDe extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Wird geladen';
+
+  @override
   String get multiSelectHint => 'Elemente auswählen';
 
   @override
@@ -165,6 +168,9 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get popoverSemanticsLabel => 'Popover';
+
+  @override
+  String get progressSemanticsLabel => 'Wird geladen';
 
   @override
   String get multiSelectHint => 'Elemente auswählen';

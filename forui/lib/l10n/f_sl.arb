@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Naprej",
   "popoverSemanticsLabel": "Pojavno okno",
   "multiSelectHint": "Izberi elemente",
-  "autocompleteNoResults": "Ni ujemanj."
+  "autocompleteNoResults": "Ni ujemanj.",
+  "progressSemanticsLabel": "Nalaganje"
 }

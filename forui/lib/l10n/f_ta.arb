@@ -22,5 +22,6 @@
   "paginationNext": "அடுத்து",
   "popoverSemanticsLabel": "பாப்ஓவர்",
   "multiSelectHint": "உருப்படிகளைத் தேர்ந்தெடுக்கவும்",
-  "autocompleteNoResults": "பொருத்தங்கள் எதுவும் கிடைக்கவில்லை."
+  "autocompleteNoResults": "பொருத்தங்கள் எதுவும் கிடைக்கவில்லை.",
+  "progressSemanticsLabel": "ஏற்றுகிறது"
 }

@@ -22,5 +22,6 @@
   "paginationNext": "הבא",
   "popoverSemanticsLabel": "חלון קופץ",
   "multiSelectHint": "בחר פריטים",
-  "autocompleteNoResults": "לא נמצאו התאמות."
+  "autocompleteNoResults": "לא נמצאו התאמות.",
+  "progressSemanticsLabel": "טוען"
 }

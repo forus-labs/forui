@@ -23,5 +23,6 @@
   "paginationNext": "ถัดไป",
   "popoverSemanticsLabel": "ป๊อปโอเวอร์",
   "multiSelectHint": "เลือกรายการ",
-  "autocompleteNoResults": "ไม่พบรายการที่ตรงกัน."
+  "autocompleteNoResults": "ไม่พบรายการที่ตรงกัน.",
+  "progressSemanticsLabel": "กำลังโหลด"
 }

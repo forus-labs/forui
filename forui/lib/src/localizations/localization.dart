@@ -108,6 +108,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Loading';
+
+  @override
   String get multiSelectHint => 'Select items';
 
   @override

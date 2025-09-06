@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Ďalej",
   "popoverSemanticsLabel": "Vyskakovacie okno",
   "multiSelectHint": "Vybrať položky",
-  "autocompleteNoResults": "Nenašli sa žiadne zhody."
+  "autocompleteNoResults": "Nenašli sa žiadne zhody.",
+  "progressSemanticsLabel": "Načítava sa"
 }

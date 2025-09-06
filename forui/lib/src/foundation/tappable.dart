@@ -528,15 +528,15 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
 
 /// Motion-related properties for [FTappable].
 class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
+  /// A [FTappableMotion] with no motion effects.
+  static const FTappableMotion none = FTappableMotion(bounceTween: noBounceTween);
+
   /// The default bounce tween used by [FTappableStyle]. It scales the widget down to 0.97 on tap down and back to 1.0
   /// on tap up.
   static const FImmutableTween<double> defaultBounceTween = FImmutableTween(begin: 1.0, end: 0.97);
 
   /// A tween that does not animate the scale of the tappable. It is used to disable the bounce effect.
   static const FImmutableTween<double> noBounceTween = FImmutableTween(begin: 1.0, end: 1.0);
-
-  /// A [FTappableMotion] with no motion effects.
-  static const FTappableMotion none = FTappableMotion(bounceTween: noBounceTween);
 
   /// The bounce animation's duration when the tappable is pressed down. Defaults to 100ms.
   @override

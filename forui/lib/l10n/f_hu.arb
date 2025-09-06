@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Következő",
   "popoverSemanticsLabel": "Felugró ablak",
   "multiSelectHint": "Elemek kiválasztása",
-  "autocompleteNoResults": "Nincs találat."
+  "autocompleteNoResults": "Nincs találat.",
+  "progressSemanticsLabel": "Betöltés"
 }

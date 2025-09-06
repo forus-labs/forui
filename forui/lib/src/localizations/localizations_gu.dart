@@ -96,6 +96,9 @@ class FLocalizationsGu extends FLocalizations {
   String get popoverSemanticsLabel => 'પોપઓવર';
 
   @override
+  String get progressSemanticsLabel => 'લોડ કરી રહ્યું છે';
+
+  @override
   String get multiSelectHint => 'આઇટમ્સ પસંદ કરો';
 
   @override

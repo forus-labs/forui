@@ -96,6 +96,9 @@ class FLocalizationsMk extends FLocalizations {
   String get popoverSemanticsLabel => 'Скокачки прозорец';
 
   @override
+  String get progressSemanticsLabel => 'Се вчитува';
+
+  @override
   String get multiSelectHint => 'Изберете елементи';
 
   @override

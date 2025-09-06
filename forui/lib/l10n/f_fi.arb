@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Seuraava",
   "popoverSemanticsLabel": "Ponnahdusikkuna",
   "multiSelectHint": "Valitse kohteet",
-  "autocompleteNoResults": "Ei osumia löytynyt."
+  "autocompleteNoResults": "Ei osumia löytynyt.",
+  "progressSemanticsLabel": "Ladataan"
 }

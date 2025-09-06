@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "ਅੱਗੇ",
   "popoverSemanticsLabel": "ਪੌਪਓਵਰ",
   "multiSelectHint": "ਆਈਟਮਾਂ ਚੁਣੋ",
-  "autocompleteNoResults": "ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ."
+  "autocompleteNoResults": "ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ.",
+  "progressSemanticsLabel": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ"
 }

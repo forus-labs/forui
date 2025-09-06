@@ -96,6 +96,9 @@ class FLocalizationsMy extends FLocalizations {
   String get popoverSemanticsLabel => 'ပေါ်လာသောဝင်းဒို';
 
   @override
+  String get progressSemanticsLabel => 'ဖွင့်နေသည်';
+
+  @override
   String get multiSelectHint => 'အရာများကို ရွေးချယ်ပါ';
 
   @override

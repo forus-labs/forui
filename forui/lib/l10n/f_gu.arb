@@ -22,5 +22,6 @@
   "paginationNext": "આગળ",
   "popoverSemanticsLabel": "પોપઓવર",
   "multiSelectHint": "આઇટમ્સ પસંદ કરો",
-  "autocompleteNoResults": "કોઈ મેળ મળ્યો નહીં."
+  "autocompleteNoResults": "કોઈ મેળ મળ્યો નહીં.",
+  "progressSemanticsLabel": "લોડ કરી રહ્યું છે"
 }

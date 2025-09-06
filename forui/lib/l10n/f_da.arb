@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Næste",
   "popoverSemanticsLabel": "Pop op-vindue",
   "multiSelectHint": "Vælg elementer",
-  "autocompleteNoResults": "Ingen resultater fundet."
+  "autocompleteNoResults": "Ingen resultater fundet.",
+  "progressSemanticsLabel": "Indlæser"
 }
