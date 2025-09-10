@@ -8,34 +8,35 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class LinearProgressPage extends StatefulSample {
-  LinearProgressPage({@queryParam super.theme});
+class ProgressPage extends Sample {
+  ProgressPage({@queryParam super.theme});
 
-  @override
-  State<LinearProgressPage> createState() => _LinearProgressPageState();
-}
-
-class _LinearProgressPageState extends StatefulSampleState<LinearProgressPage> {
   @override
   Widget sample(BuildContext context) => const FProgress();
 }
 
 @RoutePage()
-class DeterminateLinearProgressPage extends StatefulSample {
-  DeterminateLinearProgressPage({@queryParam super.theme});
+class DeterminateProgressPage extends StatefulSample {
+  DeterminateProgressPage({@queryParam super.theme});
 
   @override
-  State<DeterminateLinearProgressPage> createState() => _DeterminateLinearProgressPageState();
+  State<DeterminateProgressPage> createState() => _DeterminateProgressPageState();
 }
 
-class _DeterminateLinearProgressPageState extends StatefulSampleState<DeterminateLinearProgressPage> {
+class _DeterminateProgressPageState extends StatefulSampleState<DeterminateProgressPage> {
   late Timer timer;
   double value = 0.2;
 
   @override
   void initState() {
     super.initState();
-    timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+    timer = Timer(const Duration(seconds: 1), () => setState(() => value = 0.7));
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -43,34 +44,31 @@ class _DeterminateLinearProgressPageState extends StatefulSampleState<Determinat
     mainAxisAlignment: MainAxisAlignment.center,
     spacing: 20,
     children: [
-      FProgress(value: value),
+      FDeterminateProgress(value: value),
       FButton(
         child: const Text('Reset'),
         onPress: () => setState(() {
           value = 0.2;
           timer.cancel();
-          timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
+          timer = Timer(const Duration(seconds: 1), () => setState(() => value = 0.7));
         }),
       ),
     ],
   );
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
 }
 
 @RoutePage()
-class CircularProgressPage extends StatefulSample {
+class CircularProgressPage extends Sample {
   CircularProgressPage({@queryParam super.theme});
 
   @override
-  State<CircularProgressPage> createState() => _CircularProgressPageState();
-}
-
-class _CircularProgressPageState extends StatefulSampleState<CircularProgressPage> {
-  @override
-  Widget sample(BuildContext context) => const FProgress.circularIcon();
+  Widget sample(BuildContext context) => const Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    spacing: 25,
+    children: [
+      FCircularProgress(),
+      FCircularProgress.loader(),
+      FCircularProgress.pinwheel(),
+    ],
+  );
 }
