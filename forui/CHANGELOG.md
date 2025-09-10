@@ -11,6 +11,11 @@ We've improved the styles' generated documentation. They should be much easier t
 * **Breaking** Move animation related fields from `FAccordionStyle` to `FAccordionMoton`.
 
 
+### `FAutocomplete`
+
+* **Breaking** Change `FAutocompleteContentStyle.loadingIndicatorStyle` to `FAutocompleteContentStyle.progressStyle`.
+
+
 ### `FDateField`
 
 * **Breaking** Replace `FDateFieldController(animationDuration: ...)` with `FDateFieldController(popoverMotion: ...)`.
@@ -24,8 +29,17 @@ We've improved the styles' generated documentation. They should be much easier t
 * **Breaking** Change `FPopoverMenu.hideRegion`'s default value from `FHidePopoverRegion.anywhere` to `FHidePopoverRegion.excludeChild`.
 
 
+### `FProgress`
+We've reworked `FProgress` to be more customizable and easier to use.
+
+* Add `FCircularProgress` which represents indeterminate circular progress.
+* Add `FDeterminateProgress` which represents determinate linear progress.
+* **Breaking** Change `FProgress` to represent indeterminate linear progress.
+
+
 ### `FSelect` & `FMultiSelect`
 
+* **Breaking** Rename `FSelectSearchStyle.loadingIndicatorStyle` to `FSelectSearchStyle.progressStyle`.
 * **Breaking** Replace `FSelectController(animationDuration: ...)` with `FSelectController(popoverMotion: ...)`.
 * **Breaking** Replace `FMultiSelectController(animationDuration: ...)` with `FMultiSelectController(popoverMotion: ...)`.
 

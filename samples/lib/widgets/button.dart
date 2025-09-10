@@ -58,7 +58,7 @@ class ButtonCircularProgressPage extends Sample {
   @override
   Widget sample(BuildContext context) => FButton(
     mainAxisSize: MainAxisSize.min,
-    prefix: const FProgress.circularIcon(),
+    prefix: const FCircularProgress(),
     onPress: null,
     child: const Text('Please wait'),
   );

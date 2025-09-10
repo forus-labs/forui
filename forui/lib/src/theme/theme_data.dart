@@ -186,6 +186,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FDateFieldStyle dateFieldStyle;
 
+  /// The determinate progress style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create determinate-progress
+  /// ```
+  @override
+  final FDeterminateProgressStyle determinateProgressStyle;
+
   /// The dialog style.
   ///
   /// ## CLI
@@ -325,17 +336,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```
   @override
   final FProgressStyle progressStyle;
-
-  /// The progress styles.
-  ///
-  /// ## CLI
-  /// To generate and customize this style:
-  ///
-  /// ```shell
-  /// dart run forui style create progresses
-  /// ```
-  @override
-  final FProgressStyles progressStyles;
 
   /// The radio style.
   ///
@@ -568,6 +568,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FCheckboxStyle? checkboxStyle,
     FCircularProgressStyle? circularProgressStyle,
     FDateFieldStyle? dateFieldStyle,
+    FDeterminateProgressStyle? determinateProgressStyle,
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyles,
@@ -581,7 +582,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
     FProgressStyle? progressStyle,
-    FProgressStyles? progressStyles,
     FRadioStyle? radioStyle,
     FResizableStyle? resizableStyle,
     FScaffoldStyle? scaffoldStyle,
@@ -626,9 +626,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       calendarStyle: calendarStyle ?? FCalendarStyle.inherit(colors: colors, typography: typography, style: style),
       cardStyle: cardStyle ?? FCardStyle.inherit(colors: colors, typography: typography, style: style),
       checkboxStyle: checkboxStyle ?? FCheckboxStyle.inherit(colors: colors, style: style),
-      circularProgressStyle:
-          circularProgressStyle ?? FCircularProgressStyle.inherit(colors: colors),
+      circularProgressStyle: circularProgressStyle ?? FCircularProgressStyle.inherit(colors: colors),
       dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, typography: typography, style: style),
+      determinateProgressStyle:
+          determinateProgressStyle ?? FDeterminateProgressStyle.inherit(colors: colors, style: style),
       dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
       headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
@@ -646,7 +647,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       popoverMenuStyle:
           popoverMenuStyle ?? FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
       progressStyle: progressStyle ?? FProgressStyle.inherit(colors: colors, style: style),
-      progressStyles: progressStyles ?? FProgressStyles.inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? FRadioStyle.inherit(colors: colors, style: style),
       resizableStyle: resizableStyle ?? FResizableStyle.inherit(colors: colors, style: style),
       scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colors: colors, style: style),
@@ -693,6 +693,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
     circularProgressStyle: a.circularProgressStyle.lerp(b.circularProgressStyle, t),
     dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
+    determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
     dividerStyles: a.dividerStyles.lerp(b.dividerStyles, t),
     headerStyles: a.headerStyles.lerp(b.headerStyles, t),
@@ -706,7 +707,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     popoverStyle: a.popoverStyle.lerp(b.popoverStyle, t),
     popoverMenuStyle: a.popoverMenuStyle.lerp(b.popoverMenuStyle, t),
     progressStyle: a.progressStyle.lerp(b.progressStyle, t),
-    progressStyles: a.progressStyles.lerp(b.progressStyles, t),
     radioStyle: a.radioStyle.lerp(b.radioStyle, t),
     resizableStyle: a.resizableStyle.lerp(b.resizableStyle, t),
     scaffoldStyle: a.scaffoldStyle.lerp(b.scaffoldStyle, t),
@@ -751,6 +751,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.checkboxStyle,
     required this.circularProgressStyle,
     required this.dateFieldStyle,
+    required this.determinateProgressStyle,
     required this.dialogStyle,
     required this.dividerStyles,
     required this.headerStyles,
@@ -764,7 +765,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.popoverStyle,
     required this.popoverMenuStyle,
     required this.progressStyle,
-    required this.progressStyles,
     required this.radioStyle,
     required this.resizableStyle,
     required this.scaffoldStyle,
@@ -1249,6 +1249,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FCheckboxStyle Function(FCheckboxStyle style)? checkboxStyle,
     FCircularProgressStyle Function(FCircularProgressStyle style)? circularProgressStyle,
     FDateFieldStyle Function(FDateFieldStyle style)? dateFieldStyle,
+    FDeterminateProgressStyle Function(FDeterminateProgressStyle style)? determinateProgressStyle,
     FDialogStyle Function(FDialogStyle style)? dialogStyle,
     FDividerStyles Function(FDividerStyles style)? dividerStyles,
     FHeaderStyles Function(FHeaderStyles style)? headerStyles,
@@ -1262,7 +1263,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPopoverStyle Function(FPopoverStyle style)? popoverStyle,
     FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
     FProgressStyle Function(FProgressStyle style)? progressStyle,
-    FProgressStyles Function(FProgressStyles style)? progressStyles,
     FRadioStyle Function(FRadioStyle style)? radioStyle,
     FResizableStyle Function(FResizableStyle style)? resizableStyle,
     FScaffoldStyle Function(FScaffoldStyle style)? scaffoldStyle,
@@ -1302,9 +1302,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     calendarStyle: calendarStyle != null ? calendarStyle(this.calendarStyle) : this.calendarStyle,
     cardStyle: cardStyle != null ? cardStyle(this.cardStyle) : this.cardStyle,
     checkboxStyle: checkboxStyle != null ? checkboxStyle(this.checkboxStyle) : this.checkboxStyle,
-    circularProgressStyle:
-        circularProgressStyle != null ? circularProgressStyle(this.circularProgressStyle) : this.circularProgressStyle,
+    circularProgressStyle: circularProgressStyle != null
+        ? circularProgressStyle(this.circularProgressStyle)
+        : this.circularProgressStyle,
     dateFieldStyle: dateFieldStyle != null ? dateFieldStyle(this.dateFieldStyle) : this.dateFieldStyle,
+    determinateProgressStyle: determinateProgressStyle != null
+        ? determinateProgressStyle(this.determinateProgressStyle)
+        : this.determinateProgressStyle,
     dialogStyle: dialogStyle != null ? dialogStyle(this.dialogStyle) : this.dialogStyle,
     dividerStyles: dividerStyles != null ? dividerStyles(this.dividerStyles) : this.dividerStyles,
     headerStyles: headerStyles != null ? headerStyles(this.headerStyles) : this.headerStyles,
@@ -1318,7 +1322,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     popoverStyle: popoverStyle != null ? popoverStyle(this.popoverStyle) : this.popoverStyle,
     popoverMenuStyle: popoverMenuStyle != null ? popoverMenuStyle(this.popoverMenuStyle) : this.popoverMenuStyle,
     progressStyle: progressStyle != null ? progressStyle(this.progressStyle) : this.progressStyle,
-    progressStyles: progressStyles != null ? progressStyles(this.progressStyles) : this.progressStyles,
     radioStyle: radioStyle != null ? radioStyle(this.radioStyle) : this.radioStyle,
     resizableStyle: resizableStyle != null ? resizableStyle(this.resizableStyle) : this.resizableStyle,
     scaffoldStyle: scaffoldStyle != null ? scaffoldStyle(this.scaffoldStyle) : this.scaffoldStyle,
