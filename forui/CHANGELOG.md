@@ -33,8 +33,12 @@ We've improved the styles' generated documentation. They should be much easier t
 We've reworked `FProgress` to be more customizable and easier to use.
 
 * Add `FCircularProgress` which represents indeterminate circular progress.
+* Add `FCircularProgressStyle`.
+* Add `FInheritedCircularProgressStyle`.
 * Add `FDeterminateProgress` which represents determinate linear progress.
+* Add `FDeterminateProgressStyle`.
 * **Breaking** Change `FProgress` to represent indeterminate linear progress.
+* **Breaking** Remove `FProgressStyles`.
 
 
 ### `FSelect` & `FMultiSelect`

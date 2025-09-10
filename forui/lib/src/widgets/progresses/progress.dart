@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
+import 'dart:ui';
+
 part 'progress.design.dart';
 
 /// Am indeterminate linear progress indicator.

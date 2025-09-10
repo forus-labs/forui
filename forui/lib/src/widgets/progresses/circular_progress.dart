@@ -64,7 +64,8 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
   }
 
   void _setup() {
-    final style = widget.style?.call(context.theme.circularProgressStyle) ?? context.theme.circularProgressStyle;
+    final inherited = FInheritedCircularProgressStyle.of(context);
+    final style = widget.style?.call(inherited) ?? inherited;
     if (_style != style) {
       _style = style;
       _curveRotation?.dispose();
@@ -98,6 +99,29 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
   }
 }
 
+/// An inherited widget that provides [FCircularProgressStyle] to its descendants.
+class FInheritedCircularProgressStyle extends InheritedWidget {
+  /// The circular progress's style.
+  final FCircularProgressStyle style;
+
+  /// Returns the current [FCircularProgressStyle].
+  static FCircularProgressStyle of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FInheritedCircularProgressStyle>()?.style ??
+      context.theme.circularProgressStyle;
+
+  /// Creates a [FInheritedCircularProgressStyle].
+  const FInheritedCircularProgressStyle({required this.style, required super.child, super.key});
+
+  @override
+  bool updateShouldNotify(FInheritedCircularProgressStyle old) => style != old.style;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
+  }
+}
+
 /// The style for [FCircularProgress].
 class FCircularProgressStyle with Diagnosticable, _$FCircularProgressStyleFunctions {
   /// The circular progress's style.
@@ -113,7 +137,7 @@ class FCircularProgressStyle with Diagnosticable, _$FCircularProgressStyleFuncti
 
   /// Creates a [FCircularProgressStyle].
   FCircularProgressStyle.inherit({required FColors colors})
-      : this(iconStyle: IconThemeData(color: colors.mutedForeground, size: 20));
+    : this(iconStyle: IconThemeData(color: colors.mutedForeground, size: 20));
 }
 
 /// Motion-related properties for [FCircularProgress].

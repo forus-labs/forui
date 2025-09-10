@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -26,4 +25,17 @@ void main() {
       await expectLater(sheet.collate(10), matchesGoldenFile('progresses/circular/$name.png'));
     });
   }
+
+  testWidgets('inherit style', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FInheritedCircularProgressStyle(
+          style: FCircularProgressStyle(iconStyle: const IconThemeData(color: Colors.red, size: 40)),
+          child: const FCircularProgress(),
+        ),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('progresses/circular/inherit-style.png'));
+  });
 }

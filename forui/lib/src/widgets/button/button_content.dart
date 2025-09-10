@@ -39,13 +39,16 @@ class Content extends StatelessWidget {
         style: contentStyle.textStyle.resolve(states),
         child: IconTheme(
           data: contentStyle.iconStyle.resolve(states),
-          child: Row(
-            mainAxisAlignment: mainAxisAlignment,
-            mainAxisSize: mainAxisSize,
-            crossAxisAlignment: crossAxisAlignment,
-            textBaseline: textBaseline,
-            spacing: contentStyle.spacing,
-            children: [?prefix, child, ?suffix],
+          child: FInheritedCircularProgressStyle(
+            style: contentStyle.circularProgressStyle.resolve(states),
+            child: Row(
+              mainAxisAlignment: mainAxisAlignment,
+              mainAxisSize: mainAxisSize,
+              crossAxisAlignment: crossAxisAlignment,
+              textBaseline: textBaseline,
+              spacing: contentStyle.spacing,
+              children: [?prefix, child, ?suffix],
+            ),
           ),
         ),
       ),
@@ -94,6 +97,12 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   @override
   final FWidgetStateMap<IconThemeData> iconStyle;
 
+  /// The circular progress's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  @override
+  final FWidgetStateMap<FCircularProgressStyle> circularProgressStyle;
+
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12.5)`.
   @override
   final EdgeInsetsGeometry padding;
@@ -106,6 +115,7 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   const FButtonContentStyle({
     required this.textStyle,
     required this.iconStyle,
+    required this.circularProgressStyle,
     this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
     this.spacing = 10,
   });
@@ -120,6 +130,10 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
         iconStyle: FWidgetStateMap({
           WidgetState.disabled: IconThemeData(color: disabled, size: 20),
           WidgetState.any: IconThemeData(color: enabled, size: 20),
+        }),
+        circularProgressStyle: FWidgetStateMap({
+          WidgetState.disabled: FCircularProgressStyle(iconStyle: IconThemeData(color: disabled, size: 20)),
+          WidgetState.any: FCircularProgressStyle(iconStyle: IconThemeData(color: enabled, size: 20)),
         }),
       );
 }

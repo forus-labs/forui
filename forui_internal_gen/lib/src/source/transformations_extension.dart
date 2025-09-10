@@ -106,6 +106,6 @@ class TransformationsExtension {
   @protected
   bool nestedStyle(DartType type) {
     final typeName = type.getDisplayString();
-    return typeName.startsWith('F') && (typeName.endsWith('Style') || typeName.endsWith('Styles'));
+    return (typeName.startsWith('F') && !typeName.startsWith('FInherited')) && (typeName.endsWith('Style') || typeName.endsWith('Styles'));
   }
 }
