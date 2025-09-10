@@ -181,7 +181,7 @@ class FToaster extends StatefulWidget {
   /// The state from the closest instance of this class that encloses the given
   /// context.
   static FToasterState of(BuildContext context) => context.findAncestorStateOfType<FToasterState>()!;
-  
+
   /// The style.
   final FToasterStyle Function(FToasterStyle style)? style;
 
@@ -218,7 +218,7 @@ class FToasterState extends State<FToaster> {
     VoidCallback? onDismiss,
   }) {
     context ??= context;
-    
+
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final toasterStyle = widget.style?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle;
     final resolved = (alignment ?? toasterStyle.toastAlignment)._alignment.resolve(direction);
