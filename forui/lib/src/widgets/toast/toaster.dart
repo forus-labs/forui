@@ -178,6 +178,8 @@ enum FToastAlignment {
 /// * [showRawFToast] for displaying a raw toast in a toaster.
 /// * [FToasterStyle] for customizing a toaster's appearance.
 class FToaster extends StatefulWidget {
+  static FToasterState of(BuildContext context) => context.findAncestorStateOfType<FToasterState>()!;
+  
   /// The style.
   final FToasterStyle Function(FToasterStyle style)? style;
 
@@ -205,14 +207,16 @@ class FToasterState extends State<FToaster> {
   ///
   /// It is generally recommend to use [showFToast] or [showRawFToast] instead.
   FToasterEntry show({
-    required BuildContext context,
     required Widget Function(BuildContext context, FToasterEntry entry) builder,
+    BuildContext? context,
     FToastStyle Function(FToastStyle style)? style,
     FToastAlignment? alignment,
     List<AxisDirection>? swipeToDismiss,
     Duration? duration = const Duration(seconds: 5),
     VoidCallback? onDismiss,
   }) {
+    context ??= context;
+    
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final toasterStyle = widget.style?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle;
     final resolved = (alignment ?? toasterStyle.toastAlignment)._alignment.resolve(direction);
