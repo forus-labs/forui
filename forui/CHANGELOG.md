@@ -61,6 +61,13 @@ We've added support for animated theme transitions. This should make transitions
 * Change `FThemeData.copyWith(...)` to accept style builder functions.
 
 
+### `FTextField` & `FTextFormField`
+We've added password visibility toggle functionality to password fields.
+
+* Add password visibility toggle to `FTextField.password(...)`.
+* Add password visibility toggle to `FTextFormField.password(...)`.
+
+
 ### `FTimeField`
 
 * **Breaking** Replace `FTimeFieldController(animationDuration: ...)` with `FTimeFieldController(popoverMotion: ...)`.
