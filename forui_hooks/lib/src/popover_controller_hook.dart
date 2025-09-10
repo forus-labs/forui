@@ -36,10 +36,7 @@ class _PopoverControllerHook extends Hook<FPopoverController> {
 }
 
 class _PopoverControllerHookState extends HookState<FPopoverController, _PopoverControllerHook> {
-  late final FPopoverController _controller = FPopoverController(
-    vsync: hook.vsync,
-    motion: hook.motion,
-  );
+  late final FPopoverController _controller = FPopoverController(vsync: hook.vsync, motion: hook.motion);
 
   @override
   FPopoverController build(BuildContext context) => _controller;

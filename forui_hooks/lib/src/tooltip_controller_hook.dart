@@ -36,10 +36,7 @@ class _TooltipControllerHook extends Hook<FTooltipController> {
 }
 
 class _TooltipControllerHookState extends HookState<FTooltipController, _TooltipControllerHook> {
-  late final FTooltipController _controller = FTooltipController(
-    vsync: hook.vsync,
-    motion: hook.motion,
-  );
+  late final FTooltipController _controller = FTooltipController(vsync: hook.vsync, motion: hook.motion);
 
   @override
   FTooltipController build(BuildContext context) => _controller;
