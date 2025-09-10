@@ -2,7 +2,56 @@
 
 ### Better Generated Documentation
 
-We've improved the generated documentation for styles. They should be much easier to navigate and understand.
+We've improved the styles' generated documentation. They should be much easier to navigate and understand.
+
+
+### `FAccordion`
+
+* Add `FAccordionMotion`.
+* **Breaking** Move animation related fields from `FAccordionStyle` to `FAccordionMoton`.
+
+
+### `FAutocomplete`
+
+* **Breaking** Change `FAutocompleteContentStyle.loadingIndicatorStyle` to `FAutocompleteContentStyle.progressStyle`.
+
+
+### `FDateField`
+
+* **Breaking** Replace `FDateFieldController(animationDuration: ...)` with `FDateFieldController(popoverMotion: ...)`.
+
+
+### `FPopover` & `FPopoverMenu`
+
+* Add `FPopoverMotion`.
+* Change default animations to be more subtle.
+* **Breaking** Replace `FPopoverController(animationDuration: ...)` with `FPopoverController(motion: ...)`.
+* **Breaking** Change `FPopoverMenu.hideRegion`'s default value from `FHidePopoverRegion.anywhere` to `FHidePopoverRegion.excludeChild`.
+
+
+### `FProgress`
+We've reworked `FProgress` to be more customizable and easier to use.
+
+* Add `FCircularProgress` which represents indeterminate circular progress.
+* Add `FCircularProgressStyle`.
+* Add `FInheritedCircularProgressStyle`.
+* Add `FDeterminateProgress` which represents determinate linear progress.
+* Add `FDeterminateProgressStyle`.
+* **Breaking** Change `FProgress` to represent indeterminate linear progress.
+* **Breaking** Remove `FProgressStyles`.
+
+
+### `FSelect` & `FMultiSelect`
+
+* **Breaking** Rename `FSelectSearchStyle.loadingIndicatorStyle` to `FSelectSearchStyle.progressStyle`.
+* **Breaking** Replace `FSelectController(animationDuration: ...)` with `FSelectController(popoverMotion: ...)`.
+* **Breaking** Replace `FMultiSelectController(animationDuration: ...)` with `FMultiSelectController(popoverMotion: ...)`.
+
+
+### `FTappable`
+
+* Add `FTappableMotion`.
+* **Breaking** Move animation related fields from `FTappableStyle` to `FTappableMotion`.
 
 
 ### `FThemeData`
@@ -10,6 +59,17 @@ We've added support for animated theme transitions. This should make transitions
 
 * Add `FThemeData.lerp(...)`.
 * Change `FThemeData.copyWith(...)` to accept style builder functions.
+
+
+### `FTimeField`
+
+* **Breaking** Replace `FTimeFieldController(animationDuration: ...)` with `FTimeFieldController(popoverMotion: ...)`.
+
+
+### `FTooltip`
+
+* Add `FTooltipMotion`.
+* **Breaking** Replace `FTooltipController(animationDuration: ...)` with `FTooltipController(motion: ...)`.
 
 
 ### `FWidgetStateMap`
@@ -21,6 +81,7 @@ We've added support for animated theme transitions. This should make transitions
 
 
 ## Others
+* Add `FImmutableTween`.
 * Add `FLabel.expands`.
 * Fix `FTextField.expands` causing a render error.
 

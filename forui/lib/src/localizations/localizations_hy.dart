@@ -96,6 +96,9 @@ class FLocalizationsHy extends FLocalizations {
   String get popoverSemanticsLabel => 'Ելնող պատուհան';
 
   @override
+  String get progressSemanticsLabel => 'Բեռնում';
+
+  @override
   String get multiSelectHint => 'Ընտրել տարրեր';
 
   @override

@@ -96,6 +96,9 @@ class FLocalizationsAf extends FLocalizations {
   String get popoverSemanticsLabel => 'Opspringer';
 
   @override
+  String get progressSemanticsLabel => 'Besig om te laai';
+
+  @override
   String get multiSelectHint => 'Kies items';
 
   @override

@@ -96,6 +96,9 @@ class FLocalizationsTh extends FLocalizations {
   String get popoverSemanticsLabel => 'ป๊อปโอเวอร์';
 
   @override
+  String get progressSemanticsLabel => 'กำลังโหลด';
+
+  @override
   String get multiSelectHint => 'เลือกรายการ';
 
   @override

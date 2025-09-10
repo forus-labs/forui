@@ -22,5 +22,6 @@
   "paginationNext": "Далі",
   "popoverSemanticsLabel": "Спливаюче вікно",
   "multiSelectHint": "Виберіть елементи",
-  "autocompleteNoResults": "Збігів не знайдено."
+  "autocompleteNoResults": "Збігів не знайдено.",
+  "progressSemanticsLabel": "Завантаження"
 }

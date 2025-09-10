@@ -360,7 +360,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
           WidgetState.any: Colors.transparent,
         }),
         borderRadius: style.borderRadius,
-        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: 0),
       );
 }

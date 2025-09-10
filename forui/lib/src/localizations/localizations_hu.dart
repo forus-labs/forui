@@ -96,6 +96,9 @@ class FLocalizationsHu extends FLocalizations {
   String get popoverSemanticsLabel => 'Felugró ablak';
 
   @override
+  String get progressSemanticsLabel => 'Betöltés';
+
+  @override
   String get multiSelectHint => 'Elemek kiválasztása';
 
   @override

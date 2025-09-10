@@ -23,5 +23,6 @@
   "paginationNext": "अर्को",
   "popoverSemanticsLabel": "पपओभर",
   "multiSelectHint": "वस्तुहरू चयन गर्नुहोस्",
-  "autocompleteNoResults": "कुनै मिल्दो फेला परेन."
+  "autocompleteNoResults": "कुनै मिल्दो फेला परेन.",
+  "progressSemanticsLabel": "लोड हुँदै"
 }

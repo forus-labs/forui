@@ -220,7 +220,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
           prefixIconStyle: iconStyle,
           childTextStyle: textStyle,
         ),
-        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: null,
       ),
     );

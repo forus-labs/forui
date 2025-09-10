@@ -96,6 +96,9 @@ class FLocalizationsBe extends FLocalizations {
   String get popoverSemanticsLabel => 'Усплывальнае акно';
 
   @override
+  String get progressSemanticsLabel => 'Загрузка';
+
+  @override
   String get multiSelectHint => 'Выберыце элементы';
 
   @override

@@ -96,6 +96,9 @@ class FLocalizationsId extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Memuat';
+
+  @override
   String get multiSelectHint => 'Pilih item';
 
   @override

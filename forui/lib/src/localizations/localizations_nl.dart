@@ -96,6 +96,9 @@ class FLocalizationsNl extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Laden';
+
+  @override
   String get multiSelectHint => 'Selecteer items';
 
   @override

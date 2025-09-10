@@ -96,6 +96,9 @@ class FLocalizationsTa extends FLocalizations {
   String get popoverSemanticsLabel => 'பாப்ஓவர்';
 
   @override
+  String get progressSemanticsLabel => 'ஏற்றுகிறது';
+
+  @override
   String get multiSelectHint => 'உருப்படிகளைத் தேர்ந்தெடுக்கவும்';
 
   @override

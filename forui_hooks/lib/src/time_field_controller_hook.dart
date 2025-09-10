@@ -15,15 +15,15 @@ FTimeFieldController useFTimeFieldController({
   TickerProvider? vsync,
   FTime? initialTime,
   FormFieldValidator<FTime> validator = _defaultValidator,
-  Duration popoverAnimationDuration = const Duration(milliseconds: 100),
+  FPopoverMotion popoverMotion = const FPopoverMotion(),
   List<Object?>? keys,
 }) => use(
   _TimeFieldHook(
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
     initialTime: initialTime,
     validator: validator,
-    popoverAnimationDuration: popoverAnimationDuration,
-    debugLabel: 'useFDatePickerController',
+    popoverMotion: popoverMotion,
+    debugLabel: 'useFTimeFieldController',
     keys: keys,
   ),
 );
@@ -32,14 +32,14 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
   final TickerProvider vsync;
   final FTime? initialTime;
   final FormFieldValidator<FTime> validator;
-  final Duration popoverAnimationDuration;
+  final FPopoverMotion popoverMotion;
   final String _debugLabel;
 
   const _TimeFieldHook({
     required this.vsync,
     required this.initialTime,
     required this.validator,
-    required this.popoverAnimationDuration,
+    required this.popoverMotion,
     required String debugLabel,
     super.keys,
   }) : _debugLabel = debugLabel;
@@ -54,7 +54,7 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
       ..add(DiagnosticsProperty('vsync', vsync))
       ..add(DiagnosticsProperty('initialTime', initialTime))
       ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
+      ..add(DiagnosticsProperty('popoverMotion', popoverMotion));
   }
 }
 
@@ -63,7 +63,7 @@ class _TimeFieldHookState extends HookState<FTimeFieldController, _TimeFieldHook
     vsync: hook.vsync,
     initialTime: hook.initialTime,
     validator: hook.validator,
-    popoverAnimationDuration: hook.popoverAnimationDuration,
+    popoverMotion: hook.popoverMotion,
   );
 
   @override

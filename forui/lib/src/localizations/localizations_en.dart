@@ -96,6 +96,9 @@ class FLocalizationsEn extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Loading';
+
+  @override
   String get multiSelectHint => 'Select items';
 
   @override
@@ -173,6 +176,9 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get popoverSemanticsLabel => 'Popover';
+
+  @override
+  String get progressSemanticsLabel => 'Loading';
 
   @override
   String get multiSelectHint => 'Select items';
@@ -254,6 +260,9 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Loading';
+
+  @override
   String get multiSelectHint => 'Select items';
 
   @override
@@ -331,6 +340,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get popoverSemanticsLabel => 'Popover';
+
+  @override
+  String get progressSemanticsLabel => 'Loading';
 
   @override
   String get multiSelectHint => 'Select items';
@@ -412,6 +424,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Loading';
+
+  @override
   String get multiSelectHint => 'Select items';
 
   @override
@@ -489,6 +504,9 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get popoverSemanticsLabel => 'Popover';
+
+  @override
+  String get progressSemanticsLabel => 'Loading';
 
   @override
   String get multiSelectHint => 'Select items';
@@ -570,6 +588,9 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Loading';
+
+  @override
   String get multiSelectHint => 'Select items';
 
   @override
@@ -649,6 +670,9 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Loading';
+
+  @override
   String get multiSelectHint => 'Select items';
 
   @override
@@ -726,6 +750,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get popoverSemanticsLabel => 'Popover';
+
+  @override
+  String get progressSemanticsLabel => 'Loading';
 
   @override
   String get multiSelectHint => 'Select items';

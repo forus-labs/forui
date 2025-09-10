@@ -12,23 +12,24 @@ part 'popover.design.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends FChangeNotifier {
-  static final _fadeTween = Tween<double>(begin: 0, end: 1);
-  static final _scaleTween = Tween<double>(begin: 0.80, end: 1);
-
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
-  late final CurvedAnimation _curveFade;
   late final CurvedAnimation _curveScale;
-  late final Animation<double> _fade;
+  late final CurvedAnimation _curveFade;
   late final Animation<double> _scale;
+  late final Animation<double> _fade;
 
-  /// Creates a [FPopoverController] with the given [vsync] and animation [animationDuration].
-  FPopoverController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 150)}) {
-    _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeInCubic);
-    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeInCubic);
-    _fade = _fadeTween.animate(_curveFade);
-    _scale = _scaleTween.animate(_curveScale);
+  /// Creates a [FPopoverController] with the given [vsync] and [motion].
+  FPopoverController({required TickerProvider vsync, FPopoverMotion motion = const FPopoverMotion()}) {
+    _animation = AnimationController(
+      vsync: vsync,
+      duration: motion.entranceDuration,
+      reverseDuration: motion.exitDuration,
+    );
+    _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
+    _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
+    _scale = motion.scaleTween.animate(_curveScale);
+    _fade = motion.fadeTween.animate(_curveFade);
   }
 
   /// Convenience method for showing/hiding the popover.
@@ -77,15 +78,75 @@ final class FPopoverController extends FChangeNotifier {
   }
 }
 
+/// Motion-related properties for [FPopover].
+class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
+  /// A [FPopoverMotion] with no motion effects.
+  static const FPopoverMotion none = FPopoverMotion(
+    scaleTween: FImmutableTween(begin: 1, end: 1),
+    fadeTween: FImmutableTween(begin: 1, end: 1),
+  );
+
+  /// The popover's entrance duration. Defaults to 120ms.
+  @override
+  final Duration entranceDuration;
+
+  /// The popover's exit duration. Defaults to 100ms.
+  @override
+  final Duration exitDuration;
+
+  /// The curve used for the popover's expansion animation when entering. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve expandCurve;
+
+  /// The curve used for the popover's collapse animation when exiting. Defaults to [Curves.easeInCubic].
+  @override
+  final Curve collapseCurve;
+
+  /// The curve used for the popover's fade-in animation when entering. Defaults to [Curves.linear].
+  @override
+  final Curve fadeInCurve;
+
+  /// The curve used for the popover's fade-out animation when exiting. Defaults to [Curves.linear].
+  @override
+  final Curve fadeOutCurve;
+
+  /// The popover's scale tween. Defaults to a tween from 0.93 to 1.
+  @override
+  final Animatable<double> scaleTween;
+
+  /// The popover's fade tween. Defaults to a tween from 0 to 1.
+  @override
+  final Animatable<double> fadeTween;
+
+  /// Creates a [FPopoverMotion].
+  const FPopoverMotion({
+    this.entranceDuration = const Duration(milliseconds: 100),
+    this.exitDuration = const Duration(milliseconds: 100),
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseCurve = Curves.easeInCubic,
+    this.fadeInCurve = Curves.linear,
+    this.fadeOutCurve = Curves.linear,
+    this.scaleTween = const FImmutableTween(begin: 0.93, end: 1),
+    this.fadeTween = const FImmutableTween(begin: 0, end: 1),
+  });
+}
+
 /// The regions that can be tapped to hide a popover.
 enum FPopoverHideRegion {
-  /// The entire screen, excluding the popover.
+  /// Tapping anywhere outside the popover (including the child widget) will hide the popover.
+  ///
+  /// Use this when the child does not toggle the popover itself, such as when the child is a static element or label.
   anywhere,
 
   /// The entire screen, excluding the child and popover.
+  ///
+  /// Use this when the child toggles the popover, such as when the child is a button or interactive element.
   excludeChild,
 
   /// Disables tapping outside of the popover to hide it.
+  ///
+  /// Use this when you want the popover to only be dismissed programmatically, such as via a close button inside the
+  /// popover or a controller.
   none,
 }
 

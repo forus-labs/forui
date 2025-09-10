@@ -11,10 +11,7 @@ import 'package:forui/forui.dart';
 part 'tooltip.design.dart';
 
 /// A controller that controls whether a [FTooltip] is shown or hidden.
-class FTooltipController extends FChangeNotifier {
-  static final _fadeTween = Tween<double>(begin: 0, end: 1);
-  static final _scaleTween = Tween<double>(begin: 0.80, end: 1);
-
+final class FTooltipController extends FChangeNotifier {
   final OverlayPortalController _overlay = OverlayPortalController();
   late final AnimationController _animation;
   late final CurvedAnimation _curveFade;
@@ -22,13 +19,17 @@ class FTooltipController extends FChangeNotifier {
   late final Animation<double> _fade;
   late final Animation<double> _scale;
 
-  /// Creates a [FTooltipController] with the given [vsync] and animation [animationDuration].
-  FTooltipController({required TickerProvider vsync, Duration animationDuration = const Duration(milliseconds: 100)}) {
-    _animation = AnimationController(vsync: vsync, duration: animationDuration);
-    _curveFade = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeOutCubic);
-    _curveScale = CurvedAnimation(parent: _animation, curve: Curves.easeOutCubic, reverseCurve: Curves.easeOutCubic);
-    _fade = _fadeTween.animate(_curveFade);
-    _scale = _scaleTween.animate(_curveScale);
+  /// Creates a [FTooltipController] with the given [vsync] and [motion].
+  FTooltipController({required TickerProvider vsync, FTooltipMotion motion = const FTooltipMotion()}) {
+    _animation = AnimationController(
+      vsync: vsync,
+      duration: motion.entranceDuration,
+      reverseDuration: motion.exitDuration,
+    );
+    _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
+    _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
+    _fade = motion.fadeTween.animate(_curveFade);
+    _scale = motion.scaleTween.animate(_curveScale);
   }
 
   /// Convenience method for showing/hiding the tooltip.
@@ -75,6 +76,59 @@ class FTooltipController extends FChangeNotifier {
     _animation.dispose();
     super.dispose();
   }
+}
+
+/// Motion-related properties for [FTooltip].
+class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
+  /// A [FTooltipMotion] with no motion effects.
+  static const FTooltipMotion none = FTooltipMotion(
+    scaleTween: FImmutableTween(begin: 1, end: 1),
+    fadeTween: FImmutableTween(begin: 1, end: 1),
+  );
+
+  /// The tooltip's entrance duration. Defaults to 100ms.
+  @override
+  final Duration entranceDuration;
+
+  /// The tooltip's exit duration. Defaults to 100ms.
+  @override
+  final Duration exitDuration;
+
+  /// The curve used for the tooltip's expansion animation when entering. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve expandCurve;
+
+  /// The curve used for the tooltip's collapse animation when exiting. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve collapseCurve;
+
+  /// The curve used for the tooltip's fade-in animation when entering. Defaults to [Curves.linear].
+  @override
+  final Curve fadeInCurve;
+
+  /// The curve used for the tooltip's fade-out animation when exiting. Defaults to [Curves.linear].
+  @override
+  final Curve fadeOutCurve;
+
+  /// The tooltip's scale tween. Defaults to a tween from 0.93 to 1.
+  @override
+  final Animatable<double> scaleTween;
+
+  /// The tooltip's fade tween. Defaults to a tween from 0 to 1.
+  @override
+  final Animatable<double> fadeTween;
+
+  /// Creates a [FTooltipMotion].
+  const FTooltipMotion({
+    this.entranceDuration = const Duration(milliseconds: 100),
+    this.exitDuration = const Duration(milliseconds: 100),
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseCurve = Curves.easeOutCubic,
+    this.fadeInCurve = Curves.linear,
+    this.fadeOutCurve = Curves.linear,
+    this.scaleTween = const FImmutableTween(begin: 0.93, end: 1),
+    this.fadeTween = const FImmutableTween(begin: 0, end: 1),
+  });
 }
 
 /// A tooltip displays information related to a widget when focused, hovered over, or long pressed.

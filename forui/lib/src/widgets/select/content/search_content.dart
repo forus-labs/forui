@@ -244,16 +244,16 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   @override
   final FDividerStyle dividerStyle;
 
-  /// The loading indicators style.
+  /// The loading progress's style.
   @override
-  final IconThemeData loadingIndicatorStyle;
+  final FCircularProgressStyle progressStyle;
 
   /// Creates a [FSelectSearchStyle].
   FSelectSearchStyle({
     required this.textFieldStyle,
     required this.iconStyle,
     required this.dividerStyle,
-    required this.loadingIndicatorStyle,
+    required this.progressStyle,
   });
 
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
@@ -267,6 +267,6 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
           colors: colors,
           style: style,
         ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
-        loadingIndicatorStyle: FProgressStyles.inherit(colors: colors, style: style).circularIconProgressStyle,
+        progressStyle: FCircularProgressStyle.inherit(colors: colors),
       );
 }

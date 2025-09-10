@@ -96,6 +96,9 @@ class FLocalizationsSi extends FLocalizations {
   String get popoverSemanticsLabel => 'පොප්ඕවර්';
 
   @override
+  String get progressSemanticsLabel => 'පූරණය වෙමින්';
+
+  @override
   String get multiSelectHint => 'අයිතම තෝරන්න';
 
   @override

@@ -96,6 +96,9 @@ class FLocalizationsLt extends FLocalizations {
   String get popoverSemanticsLabel => 'Išskleidžiamas langas';
 
   @override
+  String get progressSemanticsLabel => 'Įkeliama';
+
+  @override
   String get multiSelectHint => 'Pasirinkite elementus';
 
   @override

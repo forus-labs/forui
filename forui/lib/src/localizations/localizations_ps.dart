@@ -96,6 +96,9 @@ class FLocalizationsPs extends FLocalizations {
   String get popoverSemanticsLabel => 'پاپ اوور';
 
   @override
+  String get progressSemanticsLabel => 'د بارولو په حال کې';
+
+  @override
   String get multiSelectHint => 'توکي غوره کړئ';
 
   @override

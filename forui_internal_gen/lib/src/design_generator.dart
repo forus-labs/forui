@@ -8,7 +8,7 @@ import 'package:forui_internal_gen/src/source/transformations_extension.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:source_gen/source_gen.dart';
 
-final _style = RegExp(r'^F.*(Style|Styles)$');
+final _style = RegExp(r'^F(?!Inherited).*(Style|Styles)$');
 final _motion = RegExp(r'^F.*(Motion)$');
 
 /// Generates corresponding style/motion mixins and extensions that implement several commonly used operations.

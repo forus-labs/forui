@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Witer",
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Elemente uswähle",
-  "autocompleteNoResults": "Kei Überiistimmige gfunde."
+  "autocompleteNoResults": "Kei Überiistimmige gfunde.",
+  "progressSemanticsLabel": "Ladet"
 }

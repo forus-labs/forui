@@ -96,6 +96,9 @@ class FLocalizationsHe extends FLocalizations {
   String get popoverSemanticsLabel => 'חלון קופץ';
 
   @override
+  String get progressSemanticsLabel => 'טוען';
+
+  @override
   String get multiSelectHint => 'בחר פריטים';
 
   @override

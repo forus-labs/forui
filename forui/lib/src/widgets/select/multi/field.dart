@@ -450,7 +450,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           }),
         ),
       ),
-      tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
       errorTextStyle: style.formFieldStyle.errorTextStyle,

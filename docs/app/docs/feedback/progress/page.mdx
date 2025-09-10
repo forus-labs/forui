@@ -5,7 +5,7 @@ import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
 # Progress
 
-Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.
+Displays an indeterminate linear indicator showing the completion progress of a task.
 
 <LinkBadgeGroup>
     <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.progress/"/>
@@ -27,7 +27,7 @@ Displays an indicator showing the completion progress of a task, typically displ
 To generate and customize this style:
 
 ```shell copy
-dart run forui style create progresses
+dart run forui style create progress
 ```
 
 ## Usage
@@ -36,84 +36,7 @@ dart run forui style create progresses
 
 ```dart copy
 FProgress(
-  style: FLinearProgressStyle(...),
+  style: FProgressStyle(...),
   semanticsLabel: 'Label',
-  value: 0.6,
-  duration: const Duration(milliseconds: 500),
 );
 ```
-
-### `FProgress.circularIcon(...)`
-
-```dart copy
-FProgress.circularIcon(
-  style: (style) => IconThemeData(...),
-  semanticsLabel: 'Label',
-  duration: const Duration(milliseconds: 500),
-);
-```
-
-## Examples
-
-### Determinate Linear Progress
-
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name='progress' variant='linear'/>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart copy
-    class LinearProgress extends StatefulWidget {
-      @override
-      State<LinearProgress> createState() => _State();
-    }
-
-    class _State extends State<LinearProgress> {
-      late Timer timer;
-      double value = 0.2;
-
-      @override
-      void initState() {
-        super.initState();
-        timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
-      }
-
-      @override
-      Widget build(BuildContext context) => Column(
-        children: [
-          FProgress(value: value),
-          FButton(
-            onPress:
-                () => setState(() {
-                  value = 0.2;
-                  timer.cancel();
-                  timer = Timer(const Duration(milliseconds: 800), () => setState(() => value = 0.7));
-                }),
-            child: const Text('Reset'),
-          ),
-        ],
-      );
-
-      @override
-      void dispose() {
-        timer.cancel();
-        super.dispose();
-      }
-    }
-    ```
-
-  </Tabs.Tab>
-</Tabs>
-
-### Circular Icon Progress
-
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget name='progress' variant='circular'/>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart copy
-    const FProgress.circularIcon();
-    ```
-  </Tabs.Tab>
-</Tabs>

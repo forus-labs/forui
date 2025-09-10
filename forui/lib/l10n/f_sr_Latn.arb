@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Sledeće",
   "popoverSemanticsLabel": "Iskačući prozor",
   "multiSelectHint": "Izaberite stavke",
-  "autocompleteNoResults": "Nije pronađeno podudaranje."
+  "autocompleteNoResults": "Nije pronađeno podudaranje.",
+  "progressSemanticsLabel": "Učitavanje"
 }

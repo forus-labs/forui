@@ -96,6 +96,9 @@ class FLocalizationsIs extends FLocalizations {
   String get popoverSemanticsLabel => 'Sprettgluggi';
 
   @override
+  String get progressSemanticsLabel => 'Hleður';
+
+  @override
   String get multiSelectHint => 'Veldu hluti';
 
   @override

@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import '../test_scaffold.dart';
 
 void main() {
   testWidgets('FAnimatedTheme', (tester) async {
-    final sheet = AnimationSheetBuilder(frameSize: const Size(200, 200));
-    addTearDown(sheet.dispose);
+    final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(200, 200)));
 
     await tester.pumpWidget(sheet.record(Application(data: FThemes.zinc.light, key: const ValueKey('key'))));
     await tester.pumpFrames(

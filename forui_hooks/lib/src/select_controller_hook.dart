@@ -8,13 +8,13 @@ import 'package:forui/forui.dart';
 FSelectController<T> useFSelectController<T>({
   TickerProvider? vsync,
   T? value,
-  Duration popoverAnimationDuration = const Duration(milliseconds: 100),
+  FPopoverMotion popoverMotion = const FPopoverMotion(),
   List<Object?>? keys,
 }) => use(
   _SelectHook(
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
     value: value,
-    popoverAnimationDuration: popoverAnimationDuration,
+    popoverMotion: popoverMotion,
     debugLabel: 'useFSelectController',
     keys: keys,
   ),
@@ -23,13 +23,13 @@ FSelectController<T> useFSelectController<T>({
 class _SelectHook<T> extends Hook<FSelectController<T>> {
   final TickerProvider vsync;
   final T? value;
-  final Duration popoverAnimationDuration;
+  final FPopoverMotion popoverMotion;
   final String _debugLabel;
 
   const _SelectHook({
     required this.vsync,
     required this.value,
-    required this.popoverAnimationDuration,
+    required this.popoverMotion,
     required String debugLabel,
     super.keys,
   }) : _debugLabel = debugLabel;
@@ -43,7 +43,7 @@ class _SelectHook<T> extends Hook<FSelectController<T>> {
     properties
       ..add(DiagnosticsProperty('vsync', vsync))
       ..add(DiagnosticsProperty('value', value))
-      ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
+      ..add(DiagnosticsProperty('popoverMotion', popoverMotion));
   }
 }
 
@@ -51,7 +51,7 @@ class _SelectHookState<T> extends HookState<FSelectController<T>, _SelectHook<T>
   late final FSelectController<T> _controller = FSelectController<T>(
     vsync: hook.vsync,
     value: hook.value,
-    popoverAnimationDuration: hook.popoverAnimationDuration,
+    popoverMotion: hook.popoverMotion,
   );
 
   @override
@@ -73,7 +73,7 @@ FMultiSelectController<T> useFMultiSelectController<T>({
   Set<T>? value,
   int min = 0,
   int? max,
-  Duration popoverAnimationDuration = const Duration(milliseconds: 100),
+  FPopoverMotion popoverMotion = const FPopoverMotion(),
   List<Object?>? keys,
 }) => use(
   _MultiSelectHook(
@@ -81,7 +81,7 @@ FMultiSelectController<T> useFMultiSelectController<T>({
     value: value ?? {},
     min: min,
     max: max,
-    popoverAnimationDuration: popoverAnimationDuration,
+    popoverMotion: popoverMotion,
     debugLabel: 'useFMultiSelectController',
     keys: keys,
   ),
@@ -92,7 +92,7 @@ class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
   final Set<T> value;
   final int min;
   final int? max;
-  final Duration popoverAnimationDuration;
+  final FPopoverMotion popoverMotion;
   final String _debugLabel;
 
   const _MultiSelectHook({
@@ -100,7 +100,7 @@ class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
     required this.value,
     required this.min,
     required this.max,
-    required this.popoverAnimationDuration,
+    required this.popoverMotion,
     required String debugLabel,
     super.keys,
   }) : _debugLabel = debugLabel;
@@ -116,7 +116,7 @@ class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
       ..add(IterableProperty('value', value))
       ..add(IntProperty('min', min))
       ..add(IntProperty('max', max))
-      ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
+      ..add(DiagnosticsProperty('popoverMotion', popoverMotion));
   }
 }
 
@@ -126,7 +126,7 @@ class _MultiSelectHookState<T> extends HookState<FMultiSelectController<T>, _Mul
     value: hook.value,
     min: hook.min,
     max: hook.max,
-    popoverAnimationDuration: hook.popoverAnimationDuration,
+    popoverMotion: hook.popoverMotion,
   );
 
   @override

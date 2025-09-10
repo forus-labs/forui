@@ -53,8 +53,8 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
     this.validator = _defaultValidator,
     this.truncateAndStripTimezone = true,
     DateTime? initialDate,
-    Duration popoverAnimationDuration = const Duration(milliseconds: 100),
-  }) : calendar = FPopoverController(vsync: vsync, animationDuration: popoverAnimationDuration),
+    FPopoverMotion popoverMotion = const FPopoverMotion(),
+  }) : calendar = FPopoverController(vsync: vsync, motion: popoverMotion),
        _calendar = FCalendarController.date(
          initialSelection: initialDate,
          selectable: (date) => validator(date) == null,

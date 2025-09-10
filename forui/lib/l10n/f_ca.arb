@@ -22,5 +22,6 @@
   "paginationNext": "Següent",
   "popoverSemanticsLabel": "Finestra emergent",
   "multiSelectHint": "Selecciona elements",
-  "autocompleteNoResults": "No s'han trobat coincidències."
+  "autocompleteNoResults": "No s'han trobat coincidències.",
+  "progressSemanticsLabel": "Carregant"
 }

@@ -96,6 +96,9 @@ class FLocalizationsKk extends FLocalizations {
   String get popoverSemanticsLabel => 'Қалқымалы терезе';
 
   @override
+  String get progressSemanticsLabel => 'Жүктелуде';
+
+  @override
   String get multiSelectHint => 'Элементтерді таңдаңыз';
 
   @override

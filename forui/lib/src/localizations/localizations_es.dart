@@ -96,6 +96,9 @@ class FLocalizationsEs extends FLocalizations {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -169,6 +172,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -234,6 +240,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -303,6 +312,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -368,6 +380,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -437,6 +452,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -502,6 +520,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -571,6 +592,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -636,6 +660,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -705,6 +732,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -770,6 +800,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -839,6 +872,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -904,6 +940,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -973,6 +1012,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -1038,6 +1080,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -1107,6 +1152,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -1172,6 +1220,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -1241,6 +1292,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -1306,6 +1360,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
@@ -1375,6 +1432,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
@@ -1440,6 +1500,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
+
+  @override
+  String get progressSemanticsLabel => 'Cargando';
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
