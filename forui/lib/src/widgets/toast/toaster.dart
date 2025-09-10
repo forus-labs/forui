@@ -178,6 +178,8 @@ enum FToastAlignment {
 /// * [showRawFToast] for displaying a raw toast in a toaster.
 /// * [FToasterStyle] for customizing a toaster's appearance.
 class FToaster extends StatefulWidget {
+  /// The state from the closest instance of this class that encloses the given
+  /// context.
   static FToasterState of(BuildContext context) => context.findAncestorStateOfType<FToasterState>()!;
   
   /// The style.
