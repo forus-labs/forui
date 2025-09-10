@@ -209,7 +209,7 @@ class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
   @override
   final Duration expandDuration;
 
-  /// The collapse animation's duration. Defaults to 150ms.
+  /// The collapse animation's duration. Defaults to 200ms.
   @override
   final Duration collapseDuration;
 
