@@ -217,7 +217,7 @@ class FToasterState extends State<FToaster> {
     Duration? duration = const Duration(seconds: 5),
     VoidCallback? onDismiss,
   }) {
-    context ??= context;
+    context ??= this.context;
 
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
     final toasterStyle = widget.style?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle;
