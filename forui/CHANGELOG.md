@@ -86,6 +86,10 @@ We've added password visibility toggle functionality to password fields.
 * Add `FWidgetStateMap.lerpTextStyle(...)`.
 * Add `FWidgetStateMap.lerpWhere(...)`.
 
+### `FToaster`
+* Add `FToaster.of(...)`.
+* Make `context` optional in `FToasterState.show(...)`.
+
 
 ## Others
 * Add `FImmutableTween`.
