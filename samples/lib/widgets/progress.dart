@@ -65,10 +65,6 @@ class CircularProgressPage extends Sample {
   Widget sample(BuildContext context) => const Row(
     mainAxisAlignment: MainAxisAlignment.center,
     spacing: 25,
-    children: [
-      FCircularProgress(),
-      FCircularProgress.loader(),
-      FCircularProgress.pinwheel(),
-    ],
+    children: [FCircularProgress(), FCircularProgress.loader(), FCircularProgress.pinwheel()],
   );
 }
