@@ -388,6 +388,12 @@ abstract class FLocalizations {
   /// **'Popover'**
   String get popoverSemanticsLabel;
 
+  /// The default semantics label for a progress indicator.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get progressSemanticsLabel;
+
   /// The hint text for the multi-select field.
   ///
   /// In en, this message translates to:

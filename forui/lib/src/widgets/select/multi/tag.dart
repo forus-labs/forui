@@ -194,7 +194,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
           WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 15),
           WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 15),
         }),
-        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

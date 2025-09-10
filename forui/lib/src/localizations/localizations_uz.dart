@@ -96,6 +96,9 @@ class FLocalizationsUz extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Yuklanmoqda';
+
+  @override
   String get multiSelectHint => 'Elementlarni tanlang';
 
   @override

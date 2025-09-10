@@ -147,10 +147,6 @@ class Content extends StatelessWidget {
 
 /// An [FAutocomplete]'s content style.
 class FAutocompleteContentStyle with Diagnosticable, _$FAutocompleteContentStyleFunctions {
-  /// The loading indicators style.
-  @override
-  final IconThemeData loadingIndicatorStyle;
-
   /// The default text style when there are no results.
   @override
   final TextStyle emptyTextStyle;
@@ -159,14 +155,18 @@ class FAutocompleteContentStyle with Diagnosticable, _$FAutocompleteContentStyle
   @override
   final EdgeInsetsGeometry padding;
 
+  /// The loading progress's style.
+  @override
+  final FCircularProgressStyle progressStyle;
+
   /// The section's style.
   @override
   final FAutocompleteSectionStyle sectionStyle;
 
   /// Creates an [FAutocompleteContentStyle].
   FAutocompleteContentStyle({
-    required this.loadingIndicatorStyle,
     required this.emptyTextStyle,
+    required this.progressStyle,
     required this.sectionStyle,
     this.padding = const EdgeInsets.symmetric(vertical: 5),
   });
@@ -174,8 +174,8 @@ class FAutocompleteContentStyle with Diagnosticable, _$FAutocompleteContentStyle
   /// Creates a [FAutocompleteContentStyle] that inherits its properties.
   FAutocompleteContentStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        loadingIndicatorStyle: FProgressStyles.inherit(colors: colors, style: style).circularIconProgressStyle,
-        sectionStyle: FAutocompleteSectionStyle.inherit(colors: colors, style: style, typography: typography),
         emptyTextStyle: typography.sm,
+        progressStyle: FCircularProgressStyle.inherit(colors: colors),
+        sectionStyle: FAutocompleteSectionStyle.inherit(colors: colors, style: style, typography: typography),
       );
 }

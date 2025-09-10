@@ -428,29 +428,16 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
-    if (_style != style) {
-      _style = style;
-      _curvedBounce?.dispose();
-      _bounceController?.dispose();
-
-      _bounceController = AnimationController(
-        vsync: this,
-        duration: style.bounceDownDuration,
-        reverseDuration: style.bounceUpDuration,
-      );
-      _curvedBounce = CurvedAnimation(
-        parent: _bounceController!,
-        curve: style.bounceDownCurve,
-        reverseCurve: style.bounceUpCurve,
-      );
-      bounce = style.bounceTween.animate(_curvedBounce!);
-    }
+    _setupBounceAnimation();
   }
 
   @override
   void didUpdateWidget(covariant AnimatedTappable old) {
     super.didUpdateWidget(old);
+    _setupBounceAnimation();
+  }
+
+  void _setupBounceAnimation() {
     final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
     if (_style != style) {
       _style = style;
@@ -459,15 +446,15 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 
       _bounceController = AnimationController(
         vsync: this,
-        duration: style.bounceDownDuration,
-        reverseDuration: style.bounceUpDuration,
+        duration: style.motion.bounceDownDuration,
+        reverseDuration: style.motion.bounceUpDuration,
       );
       _curvedBounce = CurvedAnimation(
         parent: _bounceController!,
-        curve: style.bounceDownCurve,
-        reverseCurve: style.bounceUpCurve,
+        curve: style.motion.bounceDownCurve,
+        reverseCurve: style.motion.bounceUpCurve,
       );
-      bounce = style.bounceTween.animate(_curvedBounce!);
+      bounce = style.motion.bounceTween.animate(_curvedBounce!);
     }
   }
 
@@ -510,15 +497,8 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 }
 
-/// A custom [FTappable] style.
+/// A [FTappable]'s style.
 class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
-  /// The default bounce tween used by [FTappableStyle]. It scales the widget down to 0.97 on tap down and back to 1.0
-  /// on tap up.
-  static final Tween<double> defaultBounceTween = Tween(begin: 1.0, end: 0.97);
-
-  /// A tween that does not animate the scale of the tappable. It is used to disable the bounce effect.
-  static final Tween<double> noBounceTween = Tween(begin: 1.0, end: 1.0);
-
   /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [MouseCursor.defer].
   @override
   final FWidgetStateMap<MouseCursor> cursor;
@@ -531,11 +511,38 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   @override
   final Duration pressedExitDuration;
 
-  /// The bounce's animation duration when the tappable is pressed down. Defaults to 100ms.
+  /// Motion-related properties for the tappable.
+  ///
+  /// Set this to [FTappableMotion.none] to disable the bounce effect.
+  @override
+  final FTappableMotion motion;
+
+  /// Creates a [FTappableStyle].
+  FTappableStyle({
+    this.cursor = const FWidgetStateMap({WidgetState.any: MouseCursor.defer}),
+    this.pressedEnterDuration = const Duration(milliseconds: 200),
+    this.pressedExitDuration = Duration.zero,
+    this.motion = const FTappableMotion(),
+  });
+}
+
+/// Motion-related properties for [FTappable].
+class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
+  /// A [FTappableMotion] with no motion effects.
+  static const FTappableMotion none = FTappableMotion(bounceTween: noBounceTween);
+
+  /// The default bounce tween used by [FTappableStyle]. It scales the widget down to 0.97 on tap down and back to 1.0
+  /// on tap up.
+  static const FImmutableTween<double> defaultBounceTween = FImmutableTween(begin: 1.0, end: 0.97);
+
+  /// A tween that does not animate the scale of the tappable. It is used to disable the bounce effect.
+  static const FImmutableTween<double> noBounceTween = FImmutableTween(begin: 1.0, end: 1.0);
+
+  /// The bounce animation's duration when the tappable is pressed down. Defaults to 100ms.
   @override
   final Duration bounceDownDuration;
 
-  /// The bounce's animation duration when the tappable is released (up). Defaults to 120ms.
+  /// The bounce animation's duration when the tappable is released (up). Defaults to 120ms.
   @override
   final Duration bounceUpDuration;
 
@@ -547,21 +554,18 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   @override
   final Curve bounceUpCurve;
 
-  /// The tween used to animate the scale of the tappable. Defaults to [defaultBounceTween].
+  /// The bounce's tween. Defaults to [defaultBounceTween].
   ///
   /// Set to [noBounceTween] to disable the bounce effect.
   @override
-  final Tween<double> bounceTween;
+  final Animatable<double> bounceTween;
 
-  /// Creates a [FTappableStyle].
-  FTappableStyle({
-    this.cursor = const FWidgetStateMap({WidgetState.any: MouseCursor.defer}),
-    this.pressedEnterDuration = const Duration(milliseconds: 200),
-    this.pressedExitDuration = Duration.zero,
+  /// Creates a [FTappableMotion].
+  const FTappableMotion({
     this.bounceDownDuration = const Duration(milliseconds: 100),
     this.bounceUpDuration = const Duration(milliseconds: 120),
     this.bounceDownCurve = Curves.easeOutQuart,
     this.bounceUpCurve = Curves.easeOutCubic,
-    Tween<double>? bounceTween,
-  }) : bounceTween = bounceTween ?? defaultBounceTween;
+    this.bounceTween = defaultBounceTween,
+  });
 }

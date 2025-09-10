@@ -96,6 +96,9 @@ class FLocalizationsSk extends FLocalizations {
   String get popoverSemanticsLabel => 'Vyskakovacie okno';
 
   @override
+  String get progressSemanticsLabel => 'Načítava sa';
+
+  @override
   String get multiSelectHint => 'Vybrať položky';
 
   @override

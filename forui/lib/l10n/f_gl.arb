@@ -22,5 +22,6 @@
   "paginationNext": "Seguinte",
   "popoverSemanticsLabel": "Xanela emerxente",
   "multiSelectHint": "Seleccionar elementos",
-  "autocompleteNoResults": "Non se atoparon coincidencias."
+  "autocompleteNoResults": "Non se atoparon coincidencias.",
+  "progressSemanticsLabel": "Cargando"
 }

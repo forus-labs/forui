@@ -31,7 +31,7 @@ FDateFieldController useFDateFieldController({
   DateTime? initialDate,
   FormFieldValidator<DateTime> validator = _defaultValidator,
   bool truncateAndStripTimezone = true,
-  Duration popoverAnimationDuration = const Duration(milliseconds: 100),
+  FPopoverMotion popoverMotion = const FPopoverMotion(),
   List<Object?>? keys,
 }) => use(
   _DateFieldHook(
@@ -39,7 +39,7 @@ FDateFieldController useFDateFieldController({
     initialDate: initialDate,
     validator: validator,
     truncateAndStripTimezone: truncateAndStripTimezone,
-    popoverAnimationDuration: popoverAnimationDuration,
+    popoverMotion: popoverMotion,
     debugLabel: 'useFDatePickerController',
     keys: keys,
   ),
@@ -50,7 +50,7 @@ class _DateFieldHook extends Hook<FDateFieldController> {
   final DateTime? initialDate;
   final FormFieldValidator<DateTime> validator;
   final bool truncateAndStripTimezone;
-  final Duration popoverAnimationDuration;
+  final FPopoverMotion popoverMotion;
   final String _debugLabel;
 
   const _DateFieldHook({
@@ -58,7 +58,7 @@ class _DateFieldHook extends Hook<FDateFieldController> {
     required this.initialDate,
     required this.validator,
     required this.truncateAndStripTimezone,
-    required this.popoverAnimationDuration,
+    required this.popoverMotion,
     required String debugLabel,
     super.keys,
   }) : _debugLabel = debugLabel;
@@ -76,7 +76,7 @@ class _DateFieldHook extends Hook<FDateFieldController> {
       ..add(
         FlagProperty('truncateAndStripTimezone', value: truncateAndStripTimezone, ifTrue: 'truncateAndStripTimezone'),
       )
-      ..add(DiagnosticsProperty('popoverAnimationDuration', popoverAnimationDuration));
+      ..add(DiagnosticsProperty('popoverMotion', popoverMotion));
   }
 }
 
@@ -86,7 +86,7 @@ class _DateFieldHookState extends HookState<FDateFieldController, _DateFieldHook
     initialDate: hook.initialDate,
     validator: hook.validator,
     truncateAndStripTimezone: hook.truncateAndStripTimezone,
-    popoverAnimationDuration: hook.popoverAnimationDuration,
+    popoverMotion: hook.popoverMotion,
   );
 
   @override

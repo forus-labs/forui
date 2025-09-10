@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Seterusnya",
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Pilih item",
-  "autocompleteNoResults": "Tiada padanan ditemui."
+  "autocompleteNoResults": "Tiada padanan ditemui.",
+  "progressSemanticsLabel": "Memuatkan"
 }

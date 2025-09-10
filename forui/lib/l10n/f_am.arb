@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "ቀጣይ",
   "popoverSemanticsLabel": "ፖፖቨር",
   "multiSelectHint": "ንጥሎች ይምረጡ",
-  "autocompleteNoResults": "ማንኛውም ውጤት አልተገኘም."
+  "autocompleteNoResults": "ማንኛውም ውጤት አልተገኘም.",
+  "progressSemanticsLabel": "በመጫን ላይ"
 }

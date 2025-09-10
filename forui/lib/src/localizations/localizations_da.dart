@@ -96,6 +96,9 @@ class FLocalizationsDa extends FLocalizations {
   String get popoverSemanticsLabel => 'Pop op-vindue';
 
   @override
+  String get progressSemanticsLabel => 'Indlæser';
+
+  @override
   String get multiSelectHint => 'Vælg elementer';
 
   @override

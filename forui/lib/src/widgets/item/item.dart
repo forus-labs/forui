@@ -415,7 +415,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
         contentStyle: FItemContentStyle.inherit(colors: colors, typography: typography),
         rawItemContentStyle: FRawItemContentStyle.inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
-          bounceTween: FTappableStyle.noBounceTween,
+          motion: FTappableMotion.none,
           pressedEnterDuration: Duration.zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),

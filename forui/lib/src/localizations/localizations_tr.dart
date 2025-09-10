@@ -96,6 +96,9 @@ class FLocalizationsTr extends FLocalizations {
   String get popoverSemanticsLabel => 'Açılır pencere';
 
   @override
+  String get progressSemanticsLabel => 'Yükleniyor';
+
+  @override
   String get multiSelectHint => 'Öğeleri seç';
 
   @override

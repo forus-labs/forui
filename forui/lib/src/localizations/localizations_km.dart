@@ -96,6 +96,9 @@ class FLocalizationsKm extends FLocalizations {
   String get popoverSemanticsLabel => 'បង្អួចលេចឡើង';
 
   @override
+  String get progressSemanticsLabel => 'កំពុងផ្ទុក';
+
+  @override
   String get multiSelectHint => 'ជ្រើសរើសធាតុ';
 
   @override

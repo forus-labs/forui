@@ -45,7 +45,7 @@ jobs:
           command: pages deploy ./samples/build/web --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=main
 
       # Publish docs
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - uses: pnpm/action-setup@v4
@@ -85,6 +85,6 @@ jobs:
           edit-mode: replace
 
       # Check that all relative URLs are working. We don't check external links due to rate limiting.
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
       - run: go install github.com/raviqqe/muffet/v2@latest
       - run: muffet ${{ steps.publish-docs.outputs.deployment-url }} --buffer-size=32768 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)|(shadcn.com)"

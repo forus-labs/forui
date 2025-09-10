@@ -96,6 +96,9 @@ class FLocalizationsFil extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Naglo-load';
+
+  @override
   String get multiSelectHint => 'Pumili ng mga item';
 
   @override

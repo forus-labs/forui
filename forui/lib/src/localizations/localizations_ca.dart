@@ -96,6 +96,9 @@ class FLocalizationsCa extends FLocalizations {
   String get popoverSemanticsLabel => 'Finestra emergent';
 
   @override
+  String get progressSemanticsLabel => 'Carregant';
+
+  @override
   String get multiSelectHint => 'Selecciona elements';
 
   @override

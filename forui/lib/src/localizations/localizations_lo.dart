@@ -96,6 +96,9 @@ class FLocalizationsLo extends FLocalizations {
   String get popoverSemanticsLabel => 'ປ໊ອບໂອເວີ';
 
   @override
+  String get progressSemanticsLabel => 'ກຳລັງໂຫລດ';
+
+  @override
   String get multiSelectHint => 'ເລືອກລາຍການ';
 
   @override

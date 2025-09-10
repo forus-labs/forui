@@ -96,6 +96,9 @@ class FLocalizationsSv extends FLocalizations {
   String get popoverSemanticsLabel => 'Popover';
 
   @override
+  String get progressSemanticsLabel => 'Laddar';
+
+  @override
   String get multiSelectHint => 'Välj objekt';
 
   @override

@@ -96,6 +96,9 @@ class FLocalizationsGl extends FLocalizations {
   String get popoverSemanticsLabel => 'Xanela emerxente';
 
   @override
+  String get progressSemanticsLabel => 'Cargando';
+
+  @override
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override

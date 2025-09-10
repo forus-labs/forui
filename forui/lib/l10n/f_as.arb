@@ -23,5 +23,6 @@
   "paginationNext": "পৰৱৰ্তী",
   "popoverSemanticsLabel": "পপঅভাৰ",
   "multiSelectHint": "বস্তুসমূহ বাছক",
-  "autocompleteNoResults": "কোনো মিল পোৱা নগল."
+  "autocompleteNoResults": "কোনো মিল পোৱা নগল.",
+  "progressSemanticsLabel": "লোড হৈ আছে"
 }

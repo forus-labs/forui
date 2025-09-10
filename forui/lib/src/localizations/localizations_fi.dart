@@ -96,6 +96,9 @@ class FLocalizationsFi extends FLocalizations {
   String get popoverSemanticsLabel => 'Ponnahdusikkuna';
 
   @override
+  String get progressSemanticsLabel => 'Ladataan';
+
+  @override
   String get multiSelectHint => 'Valitse kohteet';
 
   @override

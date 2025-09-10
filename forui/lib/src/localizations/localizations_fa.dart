@@ -96,6 +96,9 @@ class FLocalizationsFa extends FLocalizations {
   String get popoverSemanticsLabel => 'پاپ‌اور';
 
   @override
+  String get progressSemanticsLabel => 'در حال بارگیری';
+
+  @override
   String get multiSelectHint => 'انتخاب آیتم‌ها';
 
   @override

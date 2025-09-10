@@ -7,21 +7,21 @@ import 'package:forui/forui.dart';
 /// Creates a [FTooltipController] that is automatically disposed.
 FTooltipController useFTooltipController({
   TickerProvider? vsync,
-  Duration animationDuration = const Duration(milliseconds: 100),
+  FTooltipMotion motion = const FTooltipMotion(),
   List<Object?>? keys,
 }) => use(
   _TooltipControllerHook(
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
-    animationDuration: animationDuration,
+    motion: motion,
     keys: keys,
   ),
 );
 
 class _TooltipControllerHook extends Hook<FTooltipController> {
   final TickerProvider vsync;
-  final Duration animationDuration;
+  final FTooltipMotion motion;
 
-  const _TooltipControllerHook({required this.vsync, required this.animationDuration, super.keys});
+  const _TooltipControllerHook({required this.vsync, required this.motion, super.keys});
 
   @override
   _TooltipControllerHookState createState() => _TooltipControllerHookState();
@@ -31,15 +31,12 @@ class _TooltipControllerHook extends Hook<FTooltipController> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('vsync', vsync))
-      ..add(DiagnosticsProperty('duration', animationDuration));
+      ..add(DiagnosticsProperty('motion', motion));
   }
 }
 
 class _TooltipControllerHookState extends HookState<FTooltipController, _TooltipControllerHook> {
-  late final FTooltipController _controller = FTooltipController(
-    vsync: hook.vsync,
-    animationDuration: hook.animationDuration,
-  );
+  late final FTooltipController _controller = FTooltipController(vsync: hook.vsync, motion: hook.motion);
 
   @override
   FTooltipController build(BuildContext context) => _controller;

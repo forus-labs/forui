@@ -20,5 +20,6 @@
   "paginationNextSemanticsLabel": "Weiter",
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Elemente auswählen",
-  "autocompleteNoResults": "Keine Übereinstimmungen gefunden."
+  "autocompleteNoResults": "Keine Übereinstimmungen gefunden.",
+  "progressSemanticsLabel": "Wird geladen"
 }

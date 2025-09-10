@@ -96,6 +96,9 @@ class FLocalizationsAr extends FLocalizations {
   String get popoverSemanticsLabel => 'منبثقة';
 
   @override
+  String get progressSemanticsLabel => 'جاري التحميل';
+
+  @override
   String get multiSelectHint => 'حدد العناصر';
 
   @override

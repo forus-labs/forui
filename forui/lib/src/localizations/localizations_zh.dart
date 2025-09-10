@@ -96,6 +96,9 @@ class FLocalizationsZh extends FLocalizations {
   String get popoverSemanticsLabel => '弹出框';
 
   @override
+  String get progressSemanticsLabel => '加载中';
+
+  @override
   String get multiSelectHint => '选择项目';
 
   @override
@@ -175,6 +178,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get popoverSemanticsLabel => '彈出視窗';
 
   @override
+  String get progressSemanticsLabel => '載入中';
+
+  @override
   String get multiSelectHint => '選擇項目';
 
   @override
@@ -252,6 +258,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get popoverSemanticsLabel => '彈出視窗';
+
+  @override
+  String get progressSemanticsLabel => '載入中';
 
   @override
   String get multiSelectHint => '選擇項目';

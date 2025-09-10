@@ -96,6 +96,9 @@ class FLocalizationsKn extends FLocalizations {
   String get popoverSemanticsLabel => 'ಪಾಪ್‌ಓವರ್';
 
   @override
+  String get progressSemanticsLabel => 'ಲೋಡ್ ಆಗುತ್ತಿದೆ';
+
+  @override
   String get multiSelectHint => 'ಐಟಮ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ';
 
   @override

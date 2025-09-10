@@ -33,7 +33,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style) => Padding(
     padding: const EdgeInsets.all(13),
-    child: FProgress.circularIcon(style: (_) => style.loadingIndicatorStyle),
+    child: FCircularProgress(style: style.progressStyle),
   );
 
   /// The default empty builder that shows a localized message when there are no results.

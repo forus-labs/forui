@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Nesaf",
   "popoverSemanticsLabel": "Ffenestr naid",
   "multiSelectHint": "Dewis eitemau",
-  "autocompleteNoResults": "Dim cydweddiadau wedi'u canfod."
+  "autocompleteNoResults": "Dim cydweddiadau wedi'u canfod.",
+  "progressSemanticsLabel": "Yn llwytho"
 }

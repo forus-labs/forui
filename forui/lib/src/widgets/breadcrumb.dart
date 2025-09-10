@@ -38,7 +38,7 @@ class FBreadcrumb extends StatelessWidget {
 
   /// The divider placed between the children.
   ///
-  /// Defaults to an `FIcons.chevronRight` icon.
+  /// Defaults to [FIcons.chevronRight].
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
@@ -476,7 +476,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
           WidgetState.any: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.mutedForeground),
         }),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
-        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

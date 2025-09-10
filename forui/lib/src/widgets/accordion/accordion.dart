@@ -89,95 +89,6 @@ class _FAccordionState extends State<FAccordion> {
   }
 }
 
-/// The [FAccordion]'s style.
-class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
-  /// The title's text style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
-  @override
-  final FWidgetStateMap<TextStyle> titleTextStyle;
-
-  /// The child's default text style.
-  @override
-  final TextStyle childTextStyle;
-
-  /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 15)`.
-  @override
-  final EdgeInsetsGeometry titlePadding;
-
-  /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 15)`.
-  @override
-  final EdgeInsetsGeometry childPadding;
-
-  /// The icon's style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
-  @override
-  final FWidgetStateMap<IconThemeData> iconStyle;
-
-  /// The expand animation's duration. Defaults to 200ms.
-  @override
-  final Duration expandDuration;
-
-  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
-
-  /// The collapse animation's duration. Defaults to 150ms.
-  @override
-  final Duration collapseDuration;
-
-  /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
-  @override
-  final Curve collapseCurve;
-
-  /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
-  /// The divider's color.
-  @override
-  final FDividerStyle dividerStyle;
-
-  /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
-
-  /// Creates a [FAccordionStyle].
-  const FAccordionStyle({
-    required this.titleTextStyle,
-    required this.childTextStyle,
-    required this.iconStyle,
-    required this.focusedOutlineStyle,
-    required this.dividerStyle,
-    required this.tappableStyle,
-    this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
-    this.childPadding = const EdgeInsets.only(bottom: 15),
-    this.expandDuration = const Duration(milliseconds: 200),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseDuration = const Duration(milliseconds: 200),
-    this.collapseCurve = Curves.easeInCubic,
-  });
-
-  /// Creates a [FDividerStyles] that inherits its properties.
-  FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        titleTextStyle: FWidgetStateMap({
-          WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
-            fontWeight: FontWeight.w500,
-            color: colors.foreground,
-            decoration: TextDecoration.underline,
-          ),
-          WidgetState.any: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground),
-        }),
-        childTextStyle: typography.sm.copyWith(color: colors.foreground),
-        iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.mutedForeground, size: 20)),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
-        tappableStyle: style.tappableStyle.copyWith(bounceTween: FTappableStyle.noBounceTween),
-      );
-}
-
 @internal
 class InheritedAccordionData extends InheritedWidget {
   @useResult
@@ -210,4 +121,134 @@ class InheritedAccordionData extends InheritedWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(IntProperty('index', index));
   }
+}
+
+/// The [FAccordion]'s style.
+class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
+  /// The title's text style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  @override
+  final FWidgetStateMap<TextStyle> titleTextStyle;
+
+  /// The child's default text style.
+  @override
+  final TextStyle childTextStyle;
+
+  /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 15)`.
+  @override
+  final EdgeInsetsGeometry titlePadding;
+
+  /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 15)`.
+  @override
+  final EdgeInsetsGeometry childPadding;
+
+  /// The icon's style.
+  ///
+  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  @override
+  final FWidgetStateMap<IconThemeData> iconStyle;
+
+  /// The focused outline style.
+  @override
+  final FFocusedOutlineStyle focusedOutlineStyle;
+
+  /// The divider's color.
+  @override
+  final FDividerStyle dividerStyle;
+
+  /// The tappable's style.
+  @override
+  final FTappableStyle tappableStyle;
+
+  /// The motion-related properties.
+  @override
+  final FAccordionMotion motion;
+
+  /// Creates a [FAccordionStyle].
+  const FAccordionStyle({
+    required this.titleTextStyle,
+    required this.childTextStyle,
+    required this.iconStyle,
+    required this.focusedOutlineStyle,
+    required this.dividerStyle,
+    required this.tappableStyle,
+    this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
+    this.childPadding = const EdgeInsets.only(bottom: 15),
+    this.motion = const FAccordionMotion(),
+  });
+
+  /// Creates a [FDividerStyles] that inherits its properties.
+  FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        titleTextStyle: FWidgetStateMap({
+          WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
+            fontWeight: FontWeight.w500,
+            color: colors.foreground,
+            decoration: TextDecoration.underline,
+          ),
+          WidgetState.any: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground),
+        }),
+        childTextStyle: typography.sm.copyWith(color: colors.foreground),
+        iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.mutedForeground, size: 20)),
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      );
+}
+
+/// Motion-related properties for [FAccordion].
+class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
+  /// A [FAccordionMotion] with no motion effects.
+  static const FAccordionMotion none = FAccordionMotion(
+    revealTween: FImmutableTween(begin: 1, end: 1),
+    iconTween: FImmutableTween(begin: 1, end: 1),
+  );
+
+  /// The expand animation's duration. Defaults to 200ms.
+  @override
+  final Duration expandDuration;
+
+  /// The collapse animation's duration. Defaults to 200ms.
+  @override
+  final Duration collapseDuration;
+
+  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
+  ///
+  /// It is recommended to change this and [collapseCurve] to [Curves.linear] if there is a max number of items shown
+  /// at once to avoid the height jumping effect.
+  @override
+  final Curve expandCurve;
+
+  /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
+  @override
+  final Curve collapseCurve;
+
+  /// The icon's animation curve when expanding. Defaults to [Curves.easeOut].
+  @override
+  final Curve iconExpandCurve;
+
+  /// The icon's animation curve when collapsing. Defaults to [Curves.easeOut].
+  @override
+  final Curve iconCollapseCurve;
+
+  /// The reveal animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 1.0)`.
+  @override
+  final Animatable<double> revealTween;
+
+  /// The icon animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 0.5)`.
+  @override
+  final Animatable<double> iconTween;
+
+  /// Creates a [FAccordionMotion].
+  const FAccordionMotion({
+    this.expandDuration = const Duration(milliseconds: 200),
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseDuration = const Duration(milliseconds: 200),
+    this.collapseCurve = Curves.easeInCubic,
+    this.iconExpandCurve = Curves.easeOut,
+    this.iconCollapseCurve = Curves.easeOut,
+    this.revealTween = const FImmutableTween(begin: 0.0, end: 1.0),
+    this.iconTween = const FImmutableTween(begin: 0.0, end: 0.50),
+  });
 }

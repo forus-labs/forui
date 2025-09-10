@@ -23,5 +23,6 @@
   "paginationNextSemanticsLabel": "Dalej",
   "popoverSemanticsLabel": "Okno wyskakujące",
   "multiSelectHint": "Wybierz elementy",
-  "autocompleteNoResults": "Nie znaleziono dopasowań."
+  "autocompleteNoResults": "Nie znaleziono dopasowań.",
+  "progressSemanticsLabel": "Ładowanie"
 }
