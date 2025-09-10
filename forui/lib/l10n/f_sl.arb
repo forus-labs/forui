@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Pojavno okno",
   "multiSelectHint": "Izberi elemente",
   "autocompleteNoResults": "Ni ujemanj.",
-  "progressSemanticsLabel": "Nalaganje"
+  "progressSemanticsLabel": "Nalaganje",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Skrij geslo",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Prikaži geslo"
 }

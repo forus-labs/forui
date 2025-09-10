@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "ປ໊ອບໂອເວີ",
   "multiSelectHint": "ເລືອກລາຍການ",
   "autocompleteNoResults": "ບໍ່ພົບການຈັບຄູ່.",
-  "progressSemanticsLabel": "ກຳລັງໂຫລດ"
+  "progressSemanticsLabel": "ກຳລັງໂຫລດ",
+  "passwordFieldObscureTextButtonSemanticsLabel": "ເຊື່ອງລະຫັດຜ່ານ",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ສະແດງລະຫັດຜ່ານ"
 }

@@ -123,6 +123,12 @@ class FLocalizationsGsw extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Lösche';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Passwort verberge';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Passwort zeige';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

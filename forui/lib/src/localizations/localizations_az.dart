@@ -123,6 +123,12 @@ class FLocalizationsAz extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Təmizlə';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Parolu gizlə';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Parolu göstər';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

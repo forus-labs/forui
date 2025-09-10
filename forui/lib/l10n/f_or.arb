@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "ପପଓଭର",
   "multiSelectHint": "ଆଇଟମ୍ ବାଛନ୍ତୁ",
   "autocompleteNoResults": "କୌଣସି ମେଳ ମିଳିଲା ନାହିଁ.",
-  "progressSemanticsLabel": "ଲୋଡ଼ ହେଉଛି"
+  "progressSemanticsLabel": "ଲୋଡ଼ ହେଉଛି",
+  "passwordFieldObscureTextButtonSemanticsLabel": "ପାସୱାର୍ଡ ଲୁଚାନ୍ତୁ",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ପାସୱାର୍ଡ ଦେଖାନ୍ତୁ"
 }

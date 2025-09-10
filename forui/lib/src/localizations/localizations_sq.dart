@@ -123,6 +123,12 @@ class FLocalizationsSq extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Pastro';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Fshih fjalëkalimin';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Shfaq fjalëkalimin';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

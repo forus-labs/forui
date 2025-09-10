@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Skočni prozor",
   "multiSelectHint": "Odaberite stavke",
   "autocompleteNoResults": "Nisu pronađena poklapanja.",
-  "progressSemanticsLabel": "Učitavanje"
+  "progressSemanticsLabel": "Učitavanje",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Sakrij lozinku",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Prikaži lozinku"
 }

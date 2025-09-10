@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Қалқымалы терезе",
   "multiSelectHint": "Элементтерді таңдаңыз",
   "autocompleteNoResults": "Ешқандай сәйкестік табылмады.",
-  "progressSemanticsLabel": "Жүктелуде"
+  "progressSemanticsLabel": "Жүктелуде",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Құпия сөзді жасыру",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Құпия сөзді көрсету"
 }

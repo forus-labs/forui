@@ -123,6 +123,12 @@ class FLocalizationsIs extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Hreinsa';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Fela lykilorð';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Sýna lykilorð';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

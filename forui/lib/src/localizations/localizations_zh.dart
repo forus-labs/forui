@@ -123,6 +123,12 @@ class FLocalizationsZh extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => '清除';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => '隐藏密码';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => '显示密码';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -205,6 +211,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get textFieldClearButtonSemanticsLabel => '清除';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => '隱藏密碼';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => '顯示密碼';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -285,6 +297,12 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get textFieldClearButtonSemanticsLabel => '清除';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => '隱藏密碼';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => '顯示密碼';
 
   @override
   String get timeFieldTimeSeparator => ':';

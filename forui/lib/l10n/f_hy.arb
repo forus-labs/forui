@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Ելնող պատուհան",
   "multiSelectHint": "Ընտրել տարրեր",
   "autocompleteNoResults": "Համընկնումներ չեն գտնվել.",
-  "progressSemanticsLabel": "Բեռնում"
+  "progressSemanticsLabel": "Բեռնում",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Թաքցնել գաղտնաբառը",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Ցույց տալ գաղտնաբառը"
 }

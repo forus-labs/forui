@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "منبثقة",
   "multiSelectHint": "حدد العناصر",
   "autocompleteNoResults": "لم يتم العثور على أي تطابقات.",
-  "progressSemanticsLabel": "جاري التحميل"
+  "progressSemanticsLabel": "جاري التحميل",
+  "passwordFieldObscureTextButtonSemanticsLabel": "إخفاء كلمة المرور",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "إظهار كلمة المرور"
 }

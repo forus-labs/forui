@@ -123,6 +123,12 @@ class FLocalizationsTe extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'పాస్‌వర్డ్‌ను దాచండి';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'పాస్‌వర్డ్ చూపించు';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

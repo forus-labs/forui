@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "ป๊อปโอเวอร์",
   "multiSelectHint": "เลือกรายการ",
   "autocompleteNoResults": "ไม่พบรายการที่ตรงกัน.",
-  "progressSemanticsLabel": "กำลังโหลด"
+  "progressSemanticsLabel": "กำลังโหลด",
+  "passwordFieldObscureTextButtonSemanticsLabel": "ซ่อนรหัสผ่าน",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "แสดงรหัสผ่าน"
 }

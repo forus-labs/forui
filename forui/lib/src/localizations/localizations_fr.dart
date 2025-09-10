@@ -123,6 +123,12 @@ class FLocalizationsFr extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Effacer';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Masquer le mot de passe';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Afficher le mot de passe';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -203,6 +209,12 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Effacer';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Masquer le mot de passe';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Afficher le mot de passe';
 
   @override
   String get timeFieldTimeSeparator => ' h ';

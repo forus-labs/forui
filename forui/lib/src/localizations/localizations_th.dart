@@ -123,6 +123,12 @@ class FLocalizationsTh extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'ล้าง';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'ซ่อนรหัสผ่าน';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'แสดงรหัสผ่าน';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

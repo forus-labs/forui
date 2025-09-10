@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Скокачки прозорец",
   "multiSelectHint": "Изберете елементи",
   "autocompleteNoResults": "Не се пронајдени совпаѓања.",
-  "progressSemanticsLabel": "Се вчитува"
+  "progressSemanticsLabel": "Се вчитува",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Сокриј лозинка",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Прикажи лозинка"
 }

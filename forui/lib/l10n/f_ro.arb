@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Fereastră contextuală",
   "multiSelectHint": "Selectează elemente",
   "autocompleteNoResults": "Nu s-au găsit potriviri.",
-  "progressSemanticsLabel": "Se încarcă"
+  "progressSemanticsLabel": "Se încarcă",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Ascunde parola",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Afișează parola"
 }

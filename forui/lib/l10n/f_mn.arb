@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Товших цонх",
   "multiSelectHint": "Зүйлсийг сонгох",
   "autocompleteNoResults": "Тохирох зүйл олдсонгүй.",
-  "progressSemanticsLabel": "Ачааллаж байна"
+  "progressSemanticsLabel": "Ачааллаж байна",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Нууц үгийг нуух",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Нууц үгийг харуулах"
 }

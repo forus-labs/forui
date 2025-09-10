@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Cửa sổ bật lên",
   "multiSelectHint": "Chọn các mục",
   "autocompleteNoResults": "Không tìm thấy kết quả phù hợp.",
-  "progressSemanticsLabel": "Đang tải"
+  "progressSemanticsLabel": "Đang tải",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Ẩn mật khẩu",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Hiển thị mật khẩu"
 }

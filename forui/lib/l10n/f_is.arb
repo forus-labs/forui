@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Sprettgluggi",
   "multiSelectHint": "Veldu hluti",
   "autocompleteNoResults": "Engar niðurstöður fundust.",
-  "progressSemanticsLabel": "Hleður"
+  "progressSemanticsLabel": "Hleður",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Fela lykilorð",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Sýna lykilorð"
 }

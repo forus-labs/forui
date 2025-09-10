@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Açılır pencere",
   "multiSelectHint": "Öğeleri seç",
   "autocompleteNoResults": "Eşleşme bulunamadı.",
-  "progressSemanticsLabel": "Yükleniyor"
+  "progressSemanticsLabel": "Yükleniyor",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Şifreyi gizle",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Şifreyi göster"
 }

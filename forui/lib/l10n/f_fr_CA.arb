@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Fenêtre contextuelle",
   "multiSelectHint": "Sélectionner des éléments",
   "autocompleteNoResults": "Aucune correspondance trouvée.",
-  "progressSemanticsLabel": "Chargement"
+  "progressSemanticsLabel": "Chargement",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Masquer le mot de passe",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Afficher le mot de passe"
 }

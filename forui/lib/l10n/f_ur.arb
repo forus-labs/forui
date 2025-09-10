@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "پاپ اوور",
   "multiSelectHint": "آئٹمز منتخب کریں",
   "autocompleteNoResults": "کوئی میچ نہیں ملا.",
-  "progressSemanticsLabel": "لوڈ ہو رہا ہے"
+  "progressSemanticsLabel": "لوڈ ہو رہا ہے",
+  "passwordFieldObscureTextButtonSemanticsLabel": "پاس ورڈ چھپائیں",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "پاس ورڈ دکھائیں"
 }

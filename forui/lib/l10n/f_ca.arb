@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Finestra emergent",
   "multiSelectHint": "Selecciona elements",
   "autocompleteNoResults": "No s'han trobat coincidències.",
-  "progressSemanticsLabel": "Carregant"
+  "progressSemanticsLabel": "Carregant",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Amaga la contrasenya",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostra la contrasenya"
 }

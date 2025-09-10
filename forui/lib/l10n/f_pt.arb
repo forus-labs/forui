@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Janela sobreposta",
   "multiSelectHint": "Selecionar itens",
   "autocompleteNoResults": "Nenhuma correspondência encontrada.",
-  "progressSemanticsLabel": "Carregando"
+  "progressSemanticsLabel": "Carregando",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Ocultar senha",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar senha"
 }

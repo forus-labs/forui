@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "ამომხტარი ფანჯარა",
   "multiSelectHint": "ელემენტების არჩევა",
   "autocompleteNoResults": "შესაბამისობები ვერ იქნა ნაპოვნი.",
-  "progressSemanticsLabel": "იტვირთება"
+  "progressSemanticsLabel": "იტვირთება",
+  "passwordFieldObscureTextButtonSemanticsLabel": "პაროლის დამალვა",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "პაროლის ჩვენება"
 }

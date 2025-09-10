@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "חלון קופץ",
   "multiSelectHint": "בחר פריטים",
   "autocompleteNoResults": "לא נמצאו התאמות.",
-  "progressSemanticsLabel": "טוען"
+  "progressSemanticsLabel": "טוען",
+  "passwordFieldObscureTextButtonSemanticsLabel": "הסתר סיסמה",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "הראה סיסמה"
 }

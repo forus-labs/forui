@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "पपओभर",
   "multiSelectHint": "वस्तुहरू चयन गर्नुहोस्",
   "autocompleteNoResults": "कुनै मिल्दो फेला परेन.",
-  "progressSemanticsLabel": "लोड हुँदै"
+  "progressSemanticsLabel": "लोड हुँदै",
+  "passwordFieldObscureTextButtonSemanticsLabel": "पासवर्ड लुकाउनुहोस्",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड देखाउनुहोस्"
 }

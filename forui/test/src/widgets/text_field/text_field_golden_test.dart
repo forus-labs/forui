@@ -112,7 +112,7 @@ void main() {
           );
         });
 
-        testWidgets('password-visible - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
+        testWidgets('password - unobscured - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
           final controller = text == null ? null : autoDispose(TextEditingController(text: text));
           final obscure = autoDispose(ValueNotifier<bool>(false));
 
@@ -123,7 +123,7 @@ void main() {
                 controller: controller,
                 autofocus: focused_,
                 hint: 'password',
-                obscureText: obscure,
+                obscureTextController: obscure,
               ),
             ),
           );

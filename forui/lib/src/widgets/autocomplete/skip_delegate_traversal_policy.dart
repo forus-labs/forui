@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+/// A [FocusTraversalPolicy] that delegates to another policy but skips [FocusScopeNode] descendants that have no
+/// traversal descendants themselves.
 @internal
 class SkipDelegateTraversalPolicy with Diagnosticable implements FocusTraversalPolicy {
   final FocusTraversalPolicy _delegate;

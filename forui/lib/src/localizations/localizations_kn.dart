@@ -123,6 +123,12 @@ class FLocalizationsKn extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'ಪಾಸ್‌ವರ್ಡ್ ಮರೆಮಾಡು';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'ಪಾಸ್‌ವರ್ಡ್ ತೋರಿಸು';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "ಪಾಪ್‌ಓವರ್",
   "multiSelectHint": "ಐಟಮ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ",
   "autocompleteNoResults": "ಯಾವುದೇ ಹೊಂದಾಣಿಕೆ ಕಂಡುಬಂದಿಲ್ಲ.",
-  "progressSemanticsLabel": "ಲೋಡ್ ಆಗುತ್ತಿದೆ"
+  "progressSemanticsLabel": "ಲೋಡ್ ಆಗುತ್ತಿದೆ",
+  "passwordFieldObscureTextButtonSemanticsLabel": "ಪಾಸ್‌ವರ್ಡ್ ಮರೆಮಾಡು",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ಪಾಸ್‌ವರ್ಡ್ ತೋರಿಸು"
 }

@@ -123,6 +123,12 @@ class FLocalizationsUr extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'صاف کریں';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'پاس ورڈ چھپائیں';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'پاس ورڈ دکھائیں';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

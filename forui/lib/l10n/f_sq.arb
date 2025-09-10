@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Dritare kërcyese",
   "multiSelectHint": "Zgjidh elementet",
   "autocompleteNoResults": "Nuk u gjetën përputhje.",
-  "progressSemanticsLabel": "Po ngarkohet"
+  "progressSemanticsLabel": "Po ngarkohet",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Fshih fjalëkalimin",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Shfaq fjalëkalimin"
 }

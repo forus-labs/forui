@@ -123,6 +123,12 @@ class FLocalizationsCy extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clirio';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Cuddio cyfrinair';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Dangos cyfrinair';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

@@ -123,6 +123,12 @@ class FLocalizationsRo extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Ștergeți';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ascunde parola';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Afișează parola';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

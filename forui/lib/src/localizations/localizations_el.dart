@@ -123,6 +123,12 @@ class FLocalizationsEl extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Απόκρυψη κωδικού';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Εμφάνιση κωδικού';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

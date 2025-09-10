@@ -123,6 +123,12 @@ class FLocalizationsEs extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -191,6 +197,12 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -263,6 +275,12 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -331,6 +349,12 @@ class FLocalizationsEsBo extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -403,6 +427,12 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -471,6 +501,12 @@ class FLocalizationsEsCo extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -543,6 +579,12 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -611,6 +653,12 @@ class FLocalizationsEsDo extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -683,6 +731,12 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -751,6 +805,12 @@ class FLocalizationsEsGt extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -823,6 +883,12 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -891,6 +957,12 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -963,6 +1035,12 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -1031,6 +1109,12 @@ class FLocalizationsEsPa extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -1103,6 +1187,12 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -1171,6 +1261,12 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -1243,6 +1339,12 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'inferior';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -1311,6 +1413,12 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -1383,6 +1491,12 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -1453,6 +1567,12 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -1521,6 +1641,12 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contraseña';
 
   @override
   String get timeFieldTimeSeparator => ':';

@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Ventana emergente",
   "multiSelectHint": "Seleccionar elementos",
   "autocompleteNoResults": "No se encontraron coincidencias.",
-  "progressSemanticsLabel": "Cargando"
+  "progressSemanticsLabel": "Cargando",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Ocultar contraseña",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar contraseña"
 }

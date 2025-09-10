@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Select items",
   "autocompleteNoResults": "No matches found.",
-  "progressSemanticsLabel": "Loading"
+  "progressSemanticsLabel": "Loading",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Hide password",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Show password"
 }

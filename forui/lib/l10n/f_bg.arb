@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Изскачащ прозорец",
   "multiSelectHint": "Изберете елементи",
   "autocompleteNoResults": "Няма намерени съвпадения.",
-  "progressSemanticsLabel": "Зареждане"
+  "progressSemanticsLabel": "Зареждане",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Скрий парола",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Покажи парола"
 }

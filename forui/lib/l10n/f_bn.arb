@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "পপওভার",
   "multiSelectHint": "আইটেম নির্বাচন করুন",
   "autocompleteNoResults": "কোনো মিল পাওয়া যায়নি.",
-  "progressSemanticsLabel": "লোড হচ্ছে"
+  "progressSemanticsLabel": "লোড হচ্ছে",
+  "passwordFieldObscureTextButtonSemanticsLabel": "পাসওয়ার্ড লুকান",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "পাসওয়ার্ড দেখান"
 }

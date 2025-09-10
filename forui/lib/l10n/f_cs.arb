@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Vyskakovací okno",
   "multiSelectHint": "Vyberte položky",
   "autocompleteNoResults": "Nebyly nalezeny žádné shody.",
-  "progressSemanticsLabel": "Načítání"
+  "progressSemanticsLabel": "Načítání",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Skrýt heslo",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Zobrazit heslo"
 }
