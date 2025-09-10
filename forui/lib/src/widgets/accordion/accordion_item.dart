@@ -99,6 +99,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
 
     _controller?.dispose();
     _curvedReveal?.dispose();
+    _curvedIconRotation?.dispose();
 
     _controller = AnimationController(
       vsync: this,

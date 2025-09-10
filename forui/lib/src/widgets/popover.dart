@@ -133,17 +133,20 @@ class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
 
 /// The regions that can be tapped to hide a popover.
 enum FPopoverHideRegion {
-  /// The entire screen, excluding the popover.
+  /// Tapping anywhere outside the popover (including the child widget) will hide the popover.
   ///
-  /// This is recommended when tapping in the child does not toggle the popover.
+  /// Use this when the child does not toggle the popover itself, such as when the child is a static element or label.
   anywhere,
 
   /// The entire screen, excluding the child and popover.
   ///
-  /// This is recommended when tapping anywhere in the child toggles the popover, i.e. when the child is a button.
+  /// Use this when the child toggles the popover, such as when the child is a button or interactive element.
   excludeChild,
 
   /// Disables tapping outside of the popover to hide it.
+  ///
+  /// Use this when you want the popover to only be dismissed programmatically, such as via a close button inside the
+  /// popover or a controller.
   none,
 }
 

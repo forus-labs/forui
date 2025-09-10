@@ -173,5 +173,5 @@ class FProgressMotion with Diagnosticable, _$FProgressMotionFunctions {
     this.interval = const Duration(milliseconds: 500),
     this.curve = Curves.ease,
     this.value = 0.4,
-  }) : assert(value >= 0.0 && value <= 1.0, 'value must be between 0.0 and 1.0');
+  }) : assert(value >= 0.0 && value <= 1.0, 'value ($value) must be between 0.0 and 1.0');
 }
