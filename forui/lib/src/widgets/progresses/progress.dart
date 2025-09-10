@@ -1,9 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
 
-import 'dart:ui';
+import 'package:forui/forui.dart';
 
 part 'progress.design.dart';
 
@@ -171,6 +173,5 @@ class FProgressMotion with Diagnosticable, _$FProgressMotionFunctions {
     this.interval = const Duration(milliseconds: 500),
     this.curve = Curves.ease,
     this.value = 0.4,
-  }):
-    assert(value >= 0.0 && value <= 1.0, 'value must be between 0.0 and 1.0');
+  }) : assert(value >= 0.0 && value <= 1.0, 'value must be between 0.0 and 1.0');
 }
