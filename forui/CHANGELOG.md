@@ -88,7 +88,7 @@ We've added password visibility toggle functionality to password fields.
 
 ### `FToaster`
 * Add `FToaster.of(...)`.
-* Make `context` optional in `FToasterState.show(...)`.
+* Make `FToasterState.show(context: ...)` optional.
 
 
 ## Others
