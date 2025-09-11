@@ -123,6 +123,12 @@ class FLocalizationsPs extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'پټنوم پټول';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'پټنوم ښودل';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

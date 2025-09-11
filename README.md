@@ -58,6 +58,21 @@ are exposed as hooks in the companion `forui_hooks` package.
 
 Please read the [contributing guide](/CONTRIBUTING.md).
 
+## Nightly Builds
+
+Nightly builds are available on the `nightly` branch. To use the latest nightly build, add the following to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  forui:
+    git:
+      url: https://github.com/forus-labs/forui.git
+      ref: nightly
+```
+
+Nightly builds are not guaranteed to be stable. Use at your own risk.
+
+
 ## License
 
 Code is licensed under the [MIT License](LICENSE). Fonts are licensed under [Open Font License](LICENSE). Icons are licensed under [ISC License](https://github.com/forus-labs/forui/blob/main/LICENSE).

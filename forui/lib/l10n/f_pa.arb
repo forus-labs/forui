@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "ਪੌਪਓਵਰ",
   "multiSelectHint": "ਆਈਟਮਾਂ ਚੁਣੋ",
   "autocompleteNoResults": "ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ.",
-  "progressSemanticsLabel": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ"
+  "progressSemanticsLabel": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
+  "passwordFieldObscureTextButtonSemanticsLabel": "ਪਾਸਵਰਡ ਲੁਕਾਓ",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ਪਾਸਵਰਡ ਦਿਖਾਓ"
 }

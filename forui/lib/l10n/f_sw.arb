@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Dirisha la haraka",
   "multiSelectHint": "Chagua vipengee",
   "autocompleteNoResults": "Hakuna mechi zilizopatikana.",
-  "progressSemanticsLabel": "Inapakia"
+  "progressSemanticsLabel": "Inapakia",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Ficha nenosiri",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Onyesha nenosiri"
 }

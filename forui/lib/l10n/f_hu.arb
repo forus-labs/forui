@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Felugró ablak",
   "multiSelectHint": "Elemek kiválasztása",
   "autocompleteNoResults": "Nincs találat.",
-  "progressSemanticsLabel": "Betöltés"
+  "progressSemanticsLabel": "Betöltés",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Jelszó elrejtése",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Jelszó megjelenítése"
 }

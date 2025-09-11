@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "ပေါ်လာသောဝင်းဒို",
   "multiSelectHint": "အရာများကို ရွေးချယ်ပါ",
   "autocompleteNoResults": "ကိုက်ညီသောရလဒ်များ မတွေ့ရှိပါ.",
-  "progressSemanticsLabel": "ဖွင့်နေသည်"
+  "progressSemanticsLabel": "ဖွင့်နေသည်",
+  "passwordFieldObscureTextButtonSemanticsLabel": "စကားဝှက်ကိုဝှက်မည်",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "စကားဝှက်ကိုပြမည်"
 }

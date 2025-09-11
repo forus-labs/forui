@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Αναδυόμενο παράθυρο",
   "multiSelectHint": "Επιλέξτε στοιχεία",
   "autocompleteNoResults": "Δεν βρέθηκαν αντιστοιχίες.",
-  "progressSemanticsLabel": "Φόρτωση"
+  "progressSemanticsLabel": "Φόρτωση",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Απόκρυψη κωδικού",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Εμφάνιση κωδικού"
 }

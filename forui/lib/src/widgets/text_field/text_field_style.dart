@@ -36,9 +36,13 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   @override
   final EdgeInsetsGeometry contentPadding;
 
-  /// The padding surrounding the clear button. Defaults to `EdgeInsetsDirectional.only(end: 2)`.
+  /// The padding surrounding the clear button. Defaults to `EdgeInsetsDirectional.only(end: 4)`.
   @override
   final EdgeInsetsGeometry clearButtonPadding;
+
+  /// The padding surrounding the obscured text toggle. Defaults to `EdgeInsetsDirectional.only(end: 4)`.
+  @override
+  final EdgeInsetsGeometry obscureButtonPadding;
 
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
   ///
@@ -54,6 +58,10 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// The clear button's style when [FTextField.clearable] is true.
   @override
   final FButtonStyle clearButtonStyle;
+
+  /// The obscured text toggle's style when enabled in [FTextField.password].
+  @override
+  final FButtonStyle obscureButtonStyle;
 
   /// The content's [TextStyle].
   ///
@@ -103,6 +111,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   FTextFieldStyle({
     required this.keyboardAppearance,
     required this.clearButtonStyle,
+    required this.obscureButtonStyle,
     required this.contentTextStyle,
     required this.hintTextStyle,
     required this.counterTextStyle,
@@ -115,6 +124,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     this.filled = false,
     this.contentPadding = const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     this.clearButtonPadding = const EdgeInsetsDirectional.only(end: 4),
+    this.obscureButtonPadding = const EdgeInsetsDirectional.only(end: 4),
     this.scrollPadding = const EdgeInsets.all(20),
     super.labelPadding,
     super.descriptionPadding,
@@ -127,17 +137,19 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
     final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
+    final buttonStyle = ghost.copyWith(
+      iconContentStyle: ghost.iconContentStyle.copyWith(
+        iconStyle: FWidgetStateMap({
+          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
+        }),
+      ),
+    );
 
     return FTextFieldStyle(
       keyboardAppearance: colors.brightness,
-      clearButtonStyle: ghost.copyWith(
-        iconContentStyle: ghost.iconContentStyle.copyWith(
-          iconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
-          }),
-        ),
-      ),
+      clearButtonStyle: buttonStyle,
+      obscureButtonStyle: buttonStyle,
       contentTextStyle: FWidgetStateMap({
         WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.primary)),
         WidgetState.any: textStyle.copyWith(color: colors.primary),

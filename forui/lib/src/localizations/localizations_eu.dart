@@ -123,6 +123,12 @@ class FLocalizationsEu extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Garbitu';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ezkutatu pasahitza';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Erakutsi pasahitza';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

@@ -123,6 +123,12 @@ class FLocalizationsHy extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Թաքցնել գաղտնաբառը';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Ցույց տալ գաղտնաբառը';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

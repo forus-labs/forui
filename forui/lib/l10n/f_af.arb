@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Opspringer",
   "multiSelectHint": "Kies items",
   "autocompleteNoResults": "Geen resultate gevind nie.",
-  "progressSemanticsLabel": "Besig om te laai"
+  "progressSemanticsLabel": "Besig om te laai",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Versteek wagwoord",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Wys wagwoord"
 }

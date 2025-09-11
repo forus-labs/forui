@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Selecteer items",
   "autocompleteNoResults": "Geen overeenkomsten gevonden.",
-  "progressSemanticsLabel": "Laden"
+  "progressSemanticsLabel": "Laden",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Wachtwoord verbergen",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Wachtwoord tonen"
 }

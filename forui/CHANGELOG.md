@@ -62,7 +62,7 @@ We've added support for animated theme transitions. This should make transitions
 
 
 ### `FTextField` & `FTextFormField`
-We've added password visibility toggle functionality to password fields.
+We've added a password visibility toggle to password fields.
 
 * Add password visibility toggle to `FTextField.password(...)`.
 * Add password visibility toggle to `FTextFormField.password(...)`.

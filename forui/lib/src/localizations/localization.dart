@@ -135,6 +135,12 @@ class FDefaultLocalizations extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
+
+  @override
   String get timeFieldHint => 'Pick a time';
 
   @override

@@ -105,12 +105,12 @@ void main() {
           ),
         );
 
-        await tester.enterText(find.byType(FTextFormField), 'other-value');
+        await tester.enterText(find.byType(EditableText), 'other-value');
         await tester.pumpAndSettle();
 
         expect(find.text('Invalid value'), findsOneWidget);
 
-        await tester.enterText(find.byType(FTextFormField), 'some-value');
+        await tester.enterText(find.byType(EditableText), 'some-value');
         await tester.pumpAndSettle();
 
         expect(find.text('Invalid value'), findsNothing);
@@ -131,12 +131,12 @@ void main() {
           ),
         );
 
-        await tester.enterText(find.byType(FTextFormField), 'other-value');
+        await tester.enterText(find.byType(EditableText), 'other-value');
         await tester.pumpAndSettle();
 
         expect(find.text('Invalid value'), findsOneWidget);
 
-        await tester.enterText(find.byType(FTextFormField), 'some-value');
+        await tester.enterText(find.byType(EditableText), 'some-value');
         await tester.pumpAndSettle();
 
         expect(find.text('Invalid value'), findsNothing);

@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Elementləri seçin",
   "autocompleteNoResults": "Heç bir uyğunluq tapılmadı.",
-  "progressSemanticsLabel": "Yüklənir"
+  "progressSemanticsLabel": "Yüklənir",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Parolu gizlə",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolu göstər"
 }

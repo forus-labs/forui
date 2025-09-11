@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Iwindi eliqhamukayo",
   "multiSelectHint": "Khetha izinto",
   "autocompleteNoResults": "Akukho ukufana okutholiwe.",
-  "progressSemanticsLabel": "Iyalayisha"
+  "progressSemanticsLabel": "Iyalayisha",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Fihla iphasiwedi",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Bonisa iphasiwedi"
 }

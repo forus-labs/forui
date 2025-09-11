@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Hüpikaken",
   "multiSelectHint": "Valige üksused",
   "autocompleteNoResults": "Vasteid ei leitud.",
-  "progressSemanticsLabel": "Laadimine"
+  "progressSemanticsLabel": "Laadimine",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Peida parool",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Näita parooli"
 }

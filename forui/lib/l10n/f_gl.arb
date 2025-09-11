@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Xanela emerxente",
   "multiSelectHint": "Seleccionar elementos",
   "autocompleteNoResults": "Non se atoparon coincidencias.",
-  "progressSemanticsLabel": "Cargando"
+  "progressSemanticsLabel": "Cargando",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Ocultar contrasinal",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar contrasinal"
 }

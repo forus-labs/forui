@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "پاپ‌اور",
   "multiSelectHint": "انتخاب آیتم‌ها",
   "autocompleteNoResults": "هیچ تطبیقی یافت نشد.",
-  "progressSemanticsLabel": "در حال بارگیری"
+  "progressSemanticsLabel": "در حال بارگیری",
+  "passwordFieldObscureTextButtonSemanticsLabel": "مخفی کردن رمز عبور",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "نمایش رمز عبور"
 }

@@ -123,6 +123,12 @@ class FLocalizationsPa extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'ਕਲੀਅਰ ਕਰੋ';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'ਪਾਸਵਰਡ ਲੁਕਾਓ';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'ਪਾਸਵਰਡ ਦਿਖਾਓ';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

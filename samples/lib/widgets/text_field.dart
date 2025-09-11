@@ -65,7 +65,7 @@ class PasswordTextFieldPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.password(initialText: 'My password', obscuringCharacter: '*'),
+    child: FTextField.password(initialText: 'My password'),
   );
 }
 

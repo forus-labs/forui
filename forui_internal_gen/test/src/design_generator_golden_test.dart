@@ -315,6 +315,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
   /// ```
   @useResult
   FGoldenStyle call(Object? _) => this as FGoldenStyle;
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -383,6 +384,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
           listEquals(list, other.list) &&
           setEquals(set, other.set) &&
           mapEquals(map, other.map));
+
   @override
   int get hashCode =>
       someDouble.hashCode ^
@@ -448,6 +450,7 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
   /// Returns itself.
   @useResult
   FGoldenNestedMotion call(Object? _) => this as FGoldenNestedMotion;
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -464,6 +467,7 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
           someDouble == other.someDouble &&
           duration == other.duration &&
           curve == other.curve);
+
   @override
   int get hashCode => someDouble.hashCode ^ duration.hashCode ^ curve.hashCode;
 }
@@ -507,6 +511,7 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
   /// ```
   @useResult
   FGoldenNestedStyle call(Object? _) => this as FGoldenNestedStyle;
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -514,6 +519,7 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
 
   @override
   bool operator ==(Object other) => identical(this, other) || (other is FGoldenNestedStyle);
+
   @override
   int get hashCode => 0;
 }

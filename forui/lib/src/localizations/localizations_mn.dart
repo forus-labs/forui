@@ -123,6 +123,12 @@ class FLocalizationsMn extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Нууц үгийг нуух';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Нууц үгийг харуулах';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

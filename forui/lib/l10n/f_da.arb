@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Pop op-vindue",
   "multiSelectHint": "Vælg elementer",
   "autocompleteNoResults": "Ingen resultater fundet.",
-  "progressSemanticsLabel": "Indlæser"
+  "progressSemanticsLabel": "Indlæser",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Skjul adgangskode",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Vis adgangskode"
 }

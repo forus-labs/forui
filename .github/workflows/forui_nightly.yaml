@@ -1,0 +1,53 @@
+name: Forui Nightly
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [ main ]
+    paths:
+      - forui_nightly.yaml
+      - forui/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-artifact:
+    if: github.actor != 'auto-maid[bot]'
+    name: Build Nightly Artifacts
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: forui
+
+    steps:
+      - uses: tibdex/github-app-token@v2
+        id: generate-token
+        with:
+          app_id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private_key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - uses: subosito/flutter-action@v2.21.0
+        with:
+          cache: true
+
+      - run: flutter pub get
+      - run: dart run build_runner build --delete-conflicting-outputs
+
+      - run: |
+          git fetch origin main
+          git checkout -B nightly origin/main
+          git push origin nightly --force
+
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: '--force **/*.design.dart'
+          new_branch: 'nightly'
+          push: 'origin nightly --set-upstream --force'

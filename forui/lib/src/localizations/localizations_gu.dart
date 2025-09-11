@@ -123,6 +123,12 @@ class FLocalizationsGu extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'પાસવર્ડ છુપાવો';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'પાસવર્ડ બતાવો';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

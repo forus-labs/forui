@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Finestra di sovrapposizione",
   "multiSelectHint": "Seleziona elementi",
   "autocompleteNoResults": "Nessuna corrispondenza trovata.",
-  "progressSemanticsLabel": "Caricamento"
+  "progressSemanticsLabel": "Caricamento",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Nascondi password",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostra password"
 }

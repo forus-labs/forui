@@ -123,6 +123,12 @@ class FLocalizationsPt extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar senha';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar senha';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -191,6 +197,12 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get sheetSemanticsLabel => 'Secção';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar palavra-passe';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar palavra-passe';
 
   @override
   String get timeFieldTimeSeparator => ':';

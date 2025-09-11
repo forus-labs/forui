@@ -123,6 +123,12 @@ class FLocalizationsSw extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Futa';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ficha nenosiri';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Onyesha nenosiri';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

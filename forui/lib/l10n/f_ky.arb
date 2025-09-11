@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Калкып чыгуучу терезе",
   "multiSelectHint": "Элементтерди тандоо",
   "autocompleteNoResults": "Эч кандай дал келүү табылган жок.",
-  "progressSemanticsLabel": "Жүктөлүүдө"
+  "progressSemanticsLabel": "Жүктөлүүдө",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Сырсөздү жашыруу",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Сырсөздү көрсөтүү"
 }

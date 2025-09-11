@@ -123,6 +123,12 @@ class FLocalizationsTa extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'கடவுச்சொல்லை மறைக்கவும்';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'கடவுச்சொல்லைக் காட்டு';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

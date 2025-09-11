@@ -165,6 +165,14 @@
   "@textFieldClearButtonSemanticsLabel": {
     "description": "The semantic label for the clear button in a text field."
   },
+  "passwordFieldObscureTextButtonSemanticsLabel": "Hide password",
+  "@passwordFieldObscureTextButtonSemanticsLabel": {
+    "description": "The semantic label for the obscure text button in a text field when the text is unobscured."
+  },
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Show password",
+  "@passwordFieldObscureTextButtonSemanticsLabel": {
+    "description": "The semantic label for the unobscure text button in a text field when the text is obscured."
+  },
 
 
   "timeFieldTimeSeparator": ":",

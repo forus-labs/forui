@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "పాప్‌ఓవర్",
   "multiSelectHint": "అంశాలను ఎంచుకోండి",
   "autocompleteNoResults": "సరిపోలినవి ఏవీ కనుగొనబడలేదు.",
-  "progressSemanticsLabel": "లోడ్ అవుతోంది"
+  "progressSemanticsLabel": "లోడ్ అవుతోంది",
+  "passwordFieldObscureTextButtonSemanticsLabel": "పాస్‌వర్డ్‌ను దాచండి",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "పాస్‌వర్డ్ చూపించు"
 }

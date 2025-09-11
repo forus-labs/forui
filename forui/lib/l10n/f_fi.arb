@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Ponnahdusikkuna",
   "multiSelectHint": "Valitse kohteet",
   "autocompleteNoResults": "Ei osumia löytynyt.",
-  "progressSemanticsLabel": "Ladataan"
+  "progressSemanticsLabel": "Ladataan",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Piilota salasana",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Näytä salasana"
 }

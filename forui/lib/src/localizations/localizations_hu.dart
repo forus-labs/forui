@@ -123,6 +123,12 @@ class FLocalizationsHu extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Törlés';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Jelszó elrejtése';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Jelszó megjelenítése';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

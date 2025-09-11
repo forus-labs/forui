@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Hurtigvindu",
   "multiSelectHint": "Velg elementer",
   "autocompleteNoResults": "Ingen treff funnet.",
-  "progressSemanticsLabel": "Laster"
+  "progressSemanticsLabel": "Laster",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Skjul passord",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Vis passord"
 }

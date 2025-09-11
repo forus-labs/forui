@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Ffenestr naid",
   "multiSelectHint": "Dewis eitemau",
   "autocompleteNoResults": "Dim cydweddiadau wedi'u canfod.",
-  "progressSemanticsLabel": "Yn llwytho"
+  "progressSemanticsLabel": "Yn llwytho",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Cuddio cyfrinair",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Dangos cyfrinair"
 }

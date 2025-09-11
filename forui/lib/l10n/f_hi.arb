@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "पॉपओवर",
   "multiSelectHint": "आइटम चुनें",
   "autocompleteNoResults": "कोई मिलान नहीं मिला.",
-  "progressSemanticsLabel": "लोड हो रहा है"
+  "progressSemanticsLabel": "लोड हो रहा है",
+  "passwordFieldObscureTextButtonSemanticsLabel": "पासवर्ड छुपाएं",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड दिखाएं"
 }

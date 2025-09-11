@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Leiho emergentea",
   "multiSelectHint": "Hautatu elementuak",
   "autocompleteNoResults": "Ez da bat-etortzerik aurkitu.",
-  "progressSemanticsLabel": "Kargatzen"
+  "progressSemanticsLabel": "Kargatzen",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Ezkutatu pasahitza",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Erakutsi pasahitza"
 }

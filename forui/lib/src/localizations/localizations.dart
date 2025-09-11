@@ -442,6 +442,18 @@ abstract class FLocalizations {
   /// **'Clear'**
   String get textFieldClearButtonSemanticsLabel;
 
+  /// The semantic label for the unobscure text button in a text field when the text is obscured.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get passwordFieldObscureTextButtonSemanticsLabel;
+
+  /// No description provided for @passwordFieldUnobscureTextButtonSemanticsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get passwordFieldUnobscureTextButtonSemanticsLabel;
+
   /// The time field's time separator, typically ':'.
   ///
   /// In en, this message translates to:

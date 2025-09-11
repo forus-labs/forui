@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Pumili ng mga item",
   "autocompleteNoResults": "Walang nahanap na tugma.",
-  "progressSemanticsLabel": "Naglo-load"
+  "progressSemanticsLabel": "Naglo-load",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Itago ang password",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Ipakita ang password"
 }

@@ -55,6 +55,20 @@ are exposed as hooks in the companion `forui_hooks` package.
 
 Please read the [contributing guide](https://github.com/forus-labs/forui/blob/main/CONTRIBUTING.md).
 
+## Nightly Builds
+
+Nightly builds are available on the `nightly` branch. To use the latest nightly build, add the following to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  forui:
+    git:
+      url: https://github.com/forus-labs/forui.git
+      ref: nightly
+```
+
+Nightly builds are not guaranteed to be stable. Use at your own risk.
+
 ## License
 
 Licensed under the [MIT License](https://github.com/forus-labs/forui/blob/main/forui/LICENSE) and [Open Font License](https://github.com/forus-labs/forui/blob/main/forui/LICENSE).

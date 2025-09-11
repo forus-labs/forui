@@ -123,6 +123,12 @@ class FLocalizationsFi extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Tyhjennä';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Piilota salasana';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Näytä salasana';
+
+  @override
   String get timeFieldTimeSeparator => '.';
 
   @override

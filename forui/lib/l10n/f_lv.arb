@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Izlecošs logs",
   "multiSelectHint": "Atlasiet vienumus",
   "autocompleteNoResults": "Nav atrasts neviens atbilstošs rezultāts.",
-  "progressSemanticsLabel": "Ielādē"
+  "progressSemanticsLabel": "Ielādē",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Paslēpt paroli",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Rādīt paroli"
 }

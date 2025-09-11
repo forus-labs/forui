@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "Спливаюче вікно",
   "multiSelectHint": "Виберіть елементи",
   "autocompleteNoResults": "Збігів не знайдено.",
-  "progressSemanticsLabel": "Завантаження"
+  "progressSemanticsLabel": "Завантаження",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Приховати пароль",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Показати пароль"
 }

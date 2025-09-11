@@ -123,6 +123,12 @@ class FLocalizationsMk extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Сокриј лозинка';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Прикажи лозинка';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

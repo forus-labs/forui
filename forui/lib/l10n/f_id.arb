@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Pilih item",
   "autocompleteNoResults": "Tidak ada hasil yang cocok.",
-  "progressSemanticsLabel": "Memuat"
+  "progressSemanticsLabel": "Memuat",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Sembunyikan kata sandi",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Tampilkan kata sandi"
 }

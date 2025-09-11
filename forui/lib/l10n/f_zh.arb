@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "弹出框",
   "multiSelectHint": "选择项目",
   "autocompleteNoResults": "未找到匹配项.",
-  "progressSemanticsLabel": "加载中"
+  "progressSemanticsLabel": "加载中",
+  "passwordFieldObscureTextButtonSemanticsLabel": "隐藏密码",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "显示密码"
 }

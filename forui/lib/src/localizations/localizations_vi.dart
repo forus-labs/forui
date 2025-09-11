@@ -123,6 +123,12 @@ class FLocalizationsVi extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Xóa';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ẩn mật khẩu';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Hiển thị mật khẩu';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Elemente uswähle",
   "autocompleteNoResults": "Kei Überiistimmige gfunde.",
-  "progressSemanticsLabel": "Ladet"
+  "progressSemanticsLabel": "Ladet",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Passwort verberge",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Passwort zeige"
 }

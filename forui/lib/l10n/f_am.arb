@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "ፖፖቨር",
   "multiSelectHint": "ንጥሎች ይምረጡ",
   "autocompleteNoResults": "ማንኛውም ውጤት አልተገኘም.",
-  "progressSemanticsLabel": "በመጫን ላይ"
+  "progressSemanticsLabel": "በመጫን ላይ",
+  "passwordFieldObscureTextButtonSemanticsLabel": "ይለፍ ቃል ደብቅ",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ይለፍ ቃል አሳይ"
 }

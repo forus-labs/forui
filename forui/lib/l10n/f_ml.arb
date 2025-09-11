@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "പോപ്പോവർ",
   "multiSelectHint": "ഇനങ്ങൾ തിരഞ്ഞെടുക്കുക",
   "autocompleteNoResults": "പൊരുത്തങ്ങളൊന്നും കണ്ടെത്തിയില്ല.",
-  "progressSemanticsLabel": "ലോഡ് ചെയ്യുന്നു"
+  "progressSemanticsLabel": "ലോഡ് ചെയ്യുന്നു",
+  "passwordFieldObscureTextButtonSemanticsLabel": "പാസ്‌വേഡ് മറയ്ക്കുക",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "പാസ്‌വേഡ് കാണിക്കുക"
 }

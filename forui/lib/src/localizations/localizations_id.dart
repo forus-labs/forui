@@ -123,6 +123,12 @@ class FLocalizationsId extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Hapus';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Sembunyikan kata sandi';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Tampilkan kata sandi';
+
+  @override
   String get timeFieldTimeSeparator => '.';
 
   @override

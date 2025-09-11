@@ -21,5 +21,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Elemente auswählen",
   "autocompleteNoResults": "Keine Übereinstimmungen gefunden.",
-  "progressSemanticsLabel": "Wird geladen"
+  "progressSemanticsLabel": "Wird geladen",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Passwort ausblenden",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Passwort anzeigen"
 }

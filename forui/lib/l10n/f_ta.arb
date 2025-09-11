@@ -23,5 +23,7 @@
   "popoverSemanticsLabel": "பாப்ஓவர்",
   "multiSelectHint": "உருப்படிகளைத் தேர்ந்தெடுக்கவும்",
   "autocompleteNoResults": "பொருத்தங்கள் எதுவும் கிடைக்கவில்லை.",
-  "progressSemanticsLabel": "ஏற்றுகிறது"
+  "progressSemanticsLabel": "ஏற்றுகிறது",
+  "passwordFieldObscureTextButtonSemanticsLabel": "கடவுச்சொல்லை மறைக்கவும்",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "கடவுச்சொல்லைக் காட்டு"
 }

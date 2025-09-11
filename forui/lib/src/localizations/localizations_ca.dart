@@ -123,6 +123,12 @@ class FLocalizationsCa extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Amaga la contrasenya';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostra la contrasenya';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override

@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Pilih item",
   "autocompleteNoResults": "Tiada padanan ditemui.",
-  "progressSemanticsLabel": "Memuatkan"
+  "progressSemanticsLabel": "Memuatkan",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Sembunyikan kata laluan",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Tunjukkan kata laluan"
 }

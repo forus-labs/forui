@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Okno wyskakujące",
   "multiSelectHint": "Wybierz elementy",
   "autocompleteNoResults": "Nie znaleziono dopasowań.",
-  "progressSemanticsLabel": "Ładowanie"
+  "progressSemanticsLabel": "Ładowanie",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Ukryj hasło",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Pokaż hasło"
 }

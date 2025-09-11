@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Välj objekt",
   "autocompleteNoResults": "Inga träffar hittades.",
-  "progressSemanticsLabel": "Laddar"
+  "progressSemanticsLabel": "Laddar",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Dölj lösenord",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Visa lösenord"
 }

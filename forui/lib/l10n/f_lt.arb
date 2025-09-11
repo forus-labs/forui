@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Išskleidžiamas langas",
   "multiSelectHint": "Pasirinkite elementus",
   "autocompleteNoResults": "Nerasta atitikmenų.",
-  "progressSemanticsLabel": "Įkeliama"
+  "progressSemanticsLabel": "Įkeliama",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Slėpti slaptažodį",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Rodyti slaptažodį"
 }

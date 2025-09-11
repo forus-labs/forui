@@ -24,5 +24,7 @@
   "popoverSemanticsLabel": "Popover",
   "multiSelectHint": "Elementlarni tanlang",
   "autocompleteNoResults": "Hech qanday moslik topilmadi.",
-  "progressSemanticsLabel": "Yuklanmoqda"
+  "progressSemanticsLabel": "Yuklanmoqda",
+  "passwordFieldObscureTextButtonSemanticsLabel": "Parolni yashirish",
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolni koʻrsatish"
 }

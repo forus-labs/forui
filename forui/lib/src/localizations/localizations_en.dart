@@ -123,6 +123,12 @@ class FLocalizationsEn extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -203,6 +209,12 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -287,6 +299,12 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -367,6 +385,12 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -451,6 +475,12 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -531,6 +561,12 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
 
   @override
   String get timeFieldTimeSeparator => ':';
@@ -615,6 +651,12 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -697,6 +739,12 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
@@ -777,6 +825,12 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Show password';
 
   @override
   String get timeFieldTimeSeparator => ':';

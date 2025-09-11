@@ -123,6 +123,12 @@ class FLocalizationsGl extends FLocalizations {
   String get textFieldClearButtonSemanticsLabel => 'Clear';
 
   @override
+  String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contrasinal';
+
+  @override
+  String get passwordFieldUnobscureTextButtonSemanticsLabel => 'Mostrar contrasinal';
+
+  @override
   String get timeFieldTimeSeparator => ':';
 
   @override
