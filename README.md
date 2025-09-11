@@ -68,6 +68,7 @@ dependencies:
     git:
       url: https://github.com/forus-labs/forui.git
       ref: nightly
+      path: forui
 ```
 
 Nightly builds are not guaranteed to be stable. Use at your own risk.
