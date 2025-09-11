@@ -108,7 +108,6 @@ class FieldState extends FormFieldState<String> {
     // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
     effectiveController.text = widget.initialValue ?? '';
     super.reset();
-
   }
 
   // Suppress changes that originated from within this class.

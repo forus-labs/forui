@@ -57,9 +57,7 @@ void main() {
 
   testWidgets('custom suffix disables toggle', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTextFormField.password(suffixBuilder: (_, _, _, _) => const Icon(Icons.lock)),
-      ),
+      TestScaffold.app(child: FTextFormField.password(suffixBuilder: (_, _, _, _) => const Icon(Icons.lock))),
     );
 
     await tester.pumpAndSettle();
