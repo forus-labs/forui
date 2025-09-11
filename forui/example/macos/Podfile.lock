@@ -28,7 +28,7 @@ SPEC CHECKSUMS:
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
   package_info_plus: f0052d280d17aa382b932f399edf32507174e870
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
-  wakelock_plus: 21ddc249ac4b8d018838dbdabd65c5976c308497
+  wakelock_plus: 917609be14d812ddd9e9528876538b2263aaa03b
 
 PODFILE CHECKSUM: 9ebaf0ce3d369aaa26a9ea0e159195ed94724cf3
 

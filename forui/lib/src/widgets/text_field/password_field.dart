@@ -16,29 +16,7 @@ typedef FPasswordFieldIconBuilder<T> =
     Widget Function(BuildContext context, T style, ValueNotifier<bool> obscure, Set<WidgetState> states);
 
 @internal
-class PasswordField extends StatefulWidget {
-  static Widget defaultToggleBuilder(
-    BuildContext context,
-    FTextFieldStyle style,
-    ValueNotifier<bool> obscure,
-    Set<WidgetState> states,
-  ) {
-    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    return Padding(
-      padding: style.obscureButtonPadding,
-      child: FButton.icon(
-        style: style.obscureButtonStyle,
-        onPress: () => obscure.value = !obscure.value,
-        child: Icon(
-          obscure.value ? FIcons.eye : FIcons.eyeClosed,
-          semanticLabel: obscure.value
-              ? localizations.passwordFieldUnobscureTextButtonSemanticsLabel
-              : localizations.passwordFieldObscureTextButtonSemanticsLabel,
-        ),
-      ),
-    );
-  }
-
+class PasswordFieldProperties with Diagnosticable {
   final FTextFieldStyle Function(FTextFieldStyle style)? style;
   final FFieldBuilder<FTextFieldStyle> builder;
   final Widget? label;
@@ -102,7 +80,7 @@ class PasswordField extends StatefulWidget {
   final String? initialText;
   final ValueNotifier<bool>? obscureTextController;
 
-  const PasswordField({
+  PasswordFieldProperties({
     required this.style,
     required this.builder,
     required this.label,
@@ -165,11 +143,7 @@ class PasswordField extends StatefulWidget {
     required this.clearable,
     required this.initialText,
     required this.obscureTextController,
-    super.key,
   });
-
-  @override
-  State<PasswordField> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -247,23 +221,61 @@ class PasswordField extends StatefulWidget {
   }
 }
 
+@internal
+class PasswordField extends StatefulWidget {
+  static Widget defaultToggleBuilder(
+    BuildContext context,
+    FTextFieldStyle style,
+    ValueNotifier<bool> obscure,
+    Set<WidgetState> states,
+  ) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return Padding(
+      padding: style.obscureButtonPadding,
+      child: FButton.icon(
+        style: style.obscureButtonStyle,
+        onPress: () => obscure.value = !obscure.value,
+        child: Icon(
+          obscure.value ? FIcons.eye : FIcons.eyeClosed,
+          semanticLabel: obscure.value
+              ? localizations.passwordFieldUnobscureTextButtonSemanticsLabel
+              : localizations.passwordFieldObscureTextButtonSemanticsLabel,
+        ),
+      ),
+    );
+  }
+
+  final PasswordFieldProperties properties;
+
+  const PasswordField({required this.properties, super.key});
+
+  @override
+  State<PasswordField> createState() => _State();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('properties', properties));
+  }
+}
+
 class _State extends State<PasswordField> {
-  late ValueNotifier<bool> _controller = widget.obscureTextController ?? ValueNotifier(true);
+  late ValueNotifier<bool> _controller = widget.properties.obscureTextController ?? ValueNotifier(true);
 
   @override
   void didUpdateWidget(PasswordField old) {
     super.didUpdateWidget(old);
-    if (widget.obscureTextController != old.obscureTextController) {
-      if (old.obscureTextController == null) {
+    if (widget.properties.obscureTextController != old.properties.obscureTextController) {
+      if (old.properties.obscureTextController == null) {
         _controller.dispose();
       }
-      _controller = widget.obscureTextController ?? ValueNotifier(true);
+      _controller = widget.properties.obscureTextController ?? ValueNotifier(true);
     }
   }
 
   @override
   void dispose() {
-    if (widget.obscureTextController == null) {
+    if (widget.properties.obscureTextController == null) {
       _controller.dispose();
     }
     super.dispose();
@@ -273,72 +285,72 @@ class _State extends State<PasswordField> {
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: _controller,
     builder: (context, obscured, child) => FTextField(
-      style: widget.style,
-      builder: widget.builder,
-      label: widget.label,
-      hint: widget.hint,
-      description: widget.description,
-      error: widget.error,
-      magnifierConfiguration: widget.magnifierConfiguration,
-      groupId: widget.groupId,
-      controller: widget.controller,
-      focusNode: widget.focusNode,
-      keyboardType: widget.keyboardType,
-      textInputAction: widget.textInputAction,
-      textCapitalization: widget.textCapitalization,
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      textDirection: widget.textDirection,
-      autofocus: widget.autofocus,
-      statesController: widget.statesController,
-      obscuringCharacter: widget.obscuringCharacter,
+      style: widget.properties.style,
+      builder: widget.properties.builder,
+      label: widget.properties.label,
+      hint: widget.properties.hint,
+      description: widget.properties.description,
+      error: widget.properties.error,
+      magnifierConfiguration: widget.properties.magnifierConfiguration,
+      groupId: widget.properties.groupId,
+      controller: widget.properties.controller,
+      focusNode: widget.properties.focusNode,
+      keyboardType: widget.properties.keyboardType,
+      textInputAction: widget.properties.textInputAction,
+      textCapitalization: widget.properties.textCapitalization,
+      textAlign: widget.properties.textAlign,
+      textAlignVertical: widget.properties.textAlignVertical,
+      textDirection: widget.properties.textDirection,
+      autofocus: widget.properties.autofocus,
+      statesController: widget.properties.statesController,
+      obscuringCharacter: widget.properties.obscuringCharacter,
       obscureText: obscured,
-      autocorrect: widget.autocorrect,
-      smartDashesType: widget.smartDashesType,
-      smartQuotesType: widget.smartQuotesType,
-      enableSuggestions: widget.enableSuggestions,
-      minLines: widget.minLines,
-      maxLines: widget.maxLines,
-      expands: widget.expands,
-      readOnly: widget.readOnly,
-      showCursor: widget.showCursor,
-      maxLength: widget.maxLength,
-      maxLengthEnforcement: widget.maxLengthEnforcement,
-      onChange: widget.onChange,
-      onTap: widget.onTap,
-      onTapOutside: widget.onTapOutside,
-      onTapAlwaysCalled: widget.onTapAlwaysCalled,
-      onEditingComplete: widget.onEditingComplete,
-      onSubmit: widget.onSubmit,
-      onAppPrivateCommand: widget.onAppPrivateCommand,
-      inputFormatters: widget.inputFormatters,
-      enabled: widget.enabled,
-      ignorePointers: widget.ignorePointers,
-      enableInteractiveSelection: widget.enableInteractiveSelection,
-      selectAllOnFocus: widget.selectAllOnFocus,
-      selectionControls: widget.selectionControls,
-      dragStartBehavior: widget.dragStartBehavior,
-      mouseCursor: widget.mouseCursor,
-      counterBuilder: widget.counterBuilder,
-      scrollPhysics: widget.scrollPhysics,
-      scrollController: widget.scrollController,
-      autofillHints: widget.autofillHints,
-      restorationId: widget.restorationId,
-      stylusHandwritingEnabled: widget.stylusHandwritingEnabled,
-      enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
-      contentInsertionConfiguration: widget.contentInsertionConfiguration,
-      contextMenuBuilder: widget.contextMenuBuilder,
-      canRequestFocus: widget.canRequestFocus,
-      undoController: widget.undoController,
-      spellCheckConfiguration: widget.spellCheckConfiguration,
-      prefixBuilder: widget.prefixBuilder == null
+      autocorrect: widget.properties.autocorrect,
+      smartDashesType: widget.properties.smartDashesType,
+      smartQuotesType: widget.properties.smartQuotesType,
+      enableSuggestions: widget.properties.enableSuggestions,
+      minLines: widget.properties.minLines,
+      maxLines: widget.properties.maxLines,
+      expands: widget.properties.expands,
+      readOnly: widget.properties.readOnly,
+      showCursor: widget.properties.showCursor,
+      maxLength: widget.properties.maxLength,
+      maxLengthEnforcement: widget.properties.maxLengthEnforcement,
+      onChange: widget.properties.onChange,
+      onTap: widget.properties.onTap,
+      onTapOutside: widget.properties.onTapOutside,
+      onTapAlwaysCalled: widget.properties.onTapAlwaysCalled,
+      onEditingComplete: widget.properties.onEditingComplete,
+      onSubmit: widget.properties.onSubmit,
+      onAppPrivateCommand: widget.properties.onAppPrivateCommand,
+      inputFormatters: widget.properties.inputFormatters,
+      enabled: widget.properties.enabled,
+      ignorePointers: widget.properties.ignorePointers,
+      enableInteractiveSelection: widget.properties.enableInteractiveSelection,
+      selectAllOnFocus: widget.properties.selectAllOnFocus,
+      selectionControls: widget.properties.selectionControls,
+      dragStartBehavior: widget.properties.dragStartBehavior,
+      mouseCursor: widget.properties.mouseCursor,
+      counterBuilder: widget.properties.counterBuilder,
+      scrollPhysics: widget.properties.scrollPhysics,
+      scrollController: widget.properties.scrollController,
+      autofillHints: widget.properties.autofillHints,
+      restorationId: widget.properties.restorationId,
+      stylusHandwritingEnabled: widget.properties.stylusHandwritingEnabled,
+      enableIMEPersonalizedLearning: widget.properties.enableIMEPersonalizedLearning,
+      contentInsertionConfiguration: widget.properties.contentInsertionConfiguration,
+      contextMenuBuilder: widget.properties.contextMenuBuilder,
+      canRequestFocus: widget.properties.canRequestFocus,
+      undoController: widget.properties.undoController,
+      spellCheckConfiguration: widget.properties.spellCheckConfiguration,
+      prefixBuilder: widget.properties.prefixBuilder == null
           ? null
-          : (context, style, states) => widget.prefixBuilder!(context, style, _controller, states),
-      suffixBuilder: widget.suffixBuilder == null
+          : (context, style, states) => widget.properties.prefixBuilder!(context, style, _controller, states),
+      suffixBuilder: widget.properties.suffixBuilder == null
           ? null
-          : (context, style, states) => widget.suffixBuilder!(context, style, _controller, states),
-      clearable: widget.clearable,
-      initialText: widget.initialText,
+          : (context, style, states) => widget.properties.suffixBuilder!(context, style, _controller, states),
+      clearable: widget.properties.clearable,
+      initialText: widget.properties.initialText,
     ),
   );
 }

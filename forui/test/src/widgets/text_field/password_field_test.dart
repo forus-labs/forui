@@ -6,142 +6,112 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  group('FTextField.password', () {
-    testWidgets('password toggle changes from unobscured to obscured state', (tester) async {
+  testWidgets('hide', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(child: FTextField.password(obscureTextController: autoDispose(ValueNotifier(false)))),
+    );
+
+    expect(find.bySemanticsLabel('Hide password'), findsOne);
+    expect(find.byIcon(FIcons.eyeClosed), findsOne);
+
+    expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, false);
+
+    await tester.tap(find.byIcon(FIcons.eyeClosed));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    expect(find.bySemanticsLabel('Show password'), findsOne);
+    expect(find.byIcon(FIcons.eye), findsOne);
+    expect(find.bySemanticsLabel('Hide password'), findsNothing);
+    expect(find.byIcon(FIcons.eyeClosed), findsNothing);
+
+    expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, true);
+  });
+
+  testWidgets('multiple fields', (tester) async {
+    final controller = autoDispose(ValueNotifier(true));
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: Column(
+          children: [
+            FTextField.password(obscureTextController: controller),
+            FTextField.password(obscureTextController: controller, suffixBuilder: null),
+          ],
+        ),
+      ),
+    );
+
+    var fields = tester.widgetList<EditableText>(find.byType(EditableText)).toList();
+    expect(fields[0].obscureText, true);
+    expect(fields[1].obscureText, true);
+
+    expect(find.byIcon(FIcons.eye), findsOneWidget);
+
+    controller.value = false;
+    await tester.pumpAndSettle();
+
+    fields = tester.widgetList<EditableText>(find.byType(EditableText)).toList();
+    expect(fields[0].obscureText, false);
+    expect(fields[1].obscureText, false);
+  });
+
+  group('obscureTextController', () {
+    const key = Key('field');
+
+    testWidgets('set value', (tester) async {
       final controller = autoDispose(ValueNotifier(false));
 
       await tester.pumpWidget(TestScaffold.app(child: FTextField.password(obscureTextController: controller)));
 
-      await tester.pumpAndSettle();
-
-      // Initial state: password is unobscured, eye-off icon shows 'Hide password' label
-      expect(find.bySemanticsLabel('Hide password'), findsOneWidget);
-      expect(find.byIcon(FIcons.eyeClosed), findsOneWidget);
+      expect(find.bySemanticsLabel('Hide password'), findsOne);
+      expect(find.byIcon(FIcons.eyeClosed), findsOne);
       expect(find.bySemanticsLabel('Show password'), findsNothing);
       expect(find.byIcon(FIcons.eye), findsNothing);
 
-      final editableText = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editableText.obscureText, false);
+      expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, false);
 
-      // Change to obscured programmatically
       controller.value = true;
       await tester.pumpAndSettle();
 
-      // Should now be obscured, eye icon shows 'Show password' label
-      expect(find.bySemanticsLabel('Show password'), findsOneWidget);
-      expect(find.byIcon(FIcons.eye), findsOneWidget);
+      expect(find.bySemanticsLabel('Show password'), findsOne);
+      expect(find.byIcon(FIcons.eye), findsOne);
       expect(find.bySemanticsLabel('Hide password'), findsNothing);
       expect(find.byIcon(FIcons.eyeClosed), findsNothing);
 
-      final editableTextAfter = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editableTextAfter.obscureText, true);
+      expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, true);
     });
 
-    testWidgets('pressing toggle button when password is visible hides it', (tester) async {
-      final obscure = autoDispose(ValueNotifier<bool>(false)); // Start unobscured
-
-      await tester.pumpWidget(TestScaffold.app(child: FTextField.password(obscureTextController: obscure)));
-
-      await tester.pumpAndSettle();
-
-      // Initial state: password is visible, hide button is available
-      expect(find.bySemanticsLabel('Hide password'), findsOneWidget);
-      expect(find.byIcon(FIcons.eyeClosed), findsOneWidget);
-
-      final editableText = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editableText.obscureText, false);
-
-      // Tap the hide button
-      await tester.tap(find.bySemanticsLabel('Hide password'));
-      await tester.pump(const Duration(milliseconds: 300)); // Wait for FTappable timer
-
-      // Password should now be hidden
-      expect(find.bySemanticsLabel('Show password'), findsOneWidget);
-      expect(find.byIcon(FIcons.eye), findsOneWidget);
-      expect(find.bySemanticsLabel('Hide password'), findsNothing);
-      expect(find.byIcon(FIcons.eyeClosed), findsNothing);
-
-      final editableTextAfter = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editableTextAfter.obscureText, true);
-    });
-
-    testWidgets('multiple password fields share same obscure state', (tester) async {
-      final obscure = autoDispose(ValueNotifier(true));
-
+    testWidgets('old controller is not disposed', (tester) async {
+      final first = autoDispose(FValueNotifier(false));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: Column(
-            children: [
-              FTextField.password(obscureTextController: obscure),
-              FTextField.password(obscureTextController: obscure, suffixBuilder: null, label: const Text('Confirm')),
-            ],
-          ),
+          child: FTextField.password(key: key, obscureTextController: first),
         ),
       );
 
-      await tester.pumpAndSettle();
+      final second = autoDispose(FValueNotifier(true));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField.password(key: key, obscureTextController: first),
+        ),
+      );
 
-      // Both fields start obscured
-      final editableTexts = tester.widgetList<EditableText>(find.byType(EditableText)).toList();
-      expect(editableTexts.length, 2);
-      expect(editableTexts[0].obscureText, true);
-      expect(editableTexts[1].obscureText, true);
-
-      // Only one toggle button should exist (the confirm field has no suffix)
-      expect(find.byType(FButton), findsOneWidget);
-
-      // Change visibility programmatically
-      obscure.value = false;
-      await tester.pumpAndSettle();
-
-      // Both fields should now be unobscured
-      final editableTextsAfter = tester.widgetList<EditableText>(find.byType(EditableText)).toList();
-      expect(editableTextsAfter[0].obscureText, false);
-      expect(editableTextsAfter[1].obscureText, false);
-
-      // Change back to obscured
-      obscure.value = true;
-      await tester.pumpAndSettle();
-
-      // Both fields should be obscured again
-      final editableTextsFinal = tester.widgetList<EditableText>(find.byType(EditableText)).toList();
-      expect(editableTextsFinal[0].obscureText, true);
-      expect(editableTextsFinal[1].obscureText, true);
+      expect(first.disposed, false);
+      expect(second.disposed, false);
     });
 
-    testWidgets('password field with default obscure notifier starts obscured and toggles correctly', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(child: FTextField.password()));
+    testWidgets('dispose controller', (tester) async {
+      final controller = autoDispose(FValueNotifier(false));
 
-      await tester.pumpAndSettle();
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField.password(key: key, obscureTextController: controller),
+        ),
+      );
+      expect(controller.disposed, false);
 
-      // Initial state: password should be obscured by default
-      expect(find.bySemanticsLabel('Show password'), findsOneWidget);
-      expect(find.byIcon(FIcons.eye), findsOneWidget);
-
-      final editableText = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editableText.obscureText, true);
-
-      // Tap the toggle button to show password
-      await tester.tap(find.bySemanticsLabel('Show password'));
-      await tester.pump(const Duration(milliseconds: 300));
-
-      // Password should now be visible
-      expect(find.bySemanticsLabel('Hide password'), findsOneWidget);
-      expect(find.byIcon(FIcons.eyeClosed), findsOneWidget);
-
-      final editableTextAfter = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editableTextAfter.obscureText, false);
-
-      // Tap again to hide password
-      await tester.tap(find.bySemanticsLabel('Hide password'));
-      await tester.pump(const Duration(milliseconds: 300));
-
-      // Back to obscured state
-      expect(find.bySemanticsLabel('Show password'), findsOneWidget);
-      expect(find.byIcon(FIcons.eye), findsOneWidget);
-
-      final editableTextFinal = tester.widget<EditableText>(find.byType(EditableText));
-      expect(editableTextFinal.obscureText, true);
+      await tester.pumpWidget(TestScaffold.app(child: const SizedBox()));
+      expect(controller.disposed, false);
     });
   });
 }

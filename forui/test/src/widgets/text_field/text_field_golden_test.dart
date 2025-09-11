@@ -133,7 +133,7 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile(
-              'text-field/${theme.name}/password-visible-$focused${text == null ? '-no-text' : ''}.png',
+              'text-field/${theme.name}/password-unobscured-$focused${text == null ? '-no-text' : ''}.png',
             ),
           );
         });

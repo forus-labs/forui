@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/text_field/field.dart';
+import 'package:forui/src/widgets/text_field/password_field.dart';
 import 'package:forui/src/widgets/text_field/password_form_field.dart';
 import 'package:forui/src/widgets/text_field/text_field.dart';
 
@@ -17,6 +19,156 @@ import 'package:forui/src/widgets/text_field/text_field.dart';
 /// * [FTextField] for creating a text field that can be used in a form.
 /// * [TextField] for more details about working with a text field.
 class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
+  /// Creates a [FTextFormField] configured for password entry with a visibility toggle.
+  ///
+  /// By default, [suffixBuilder] is an eye icon that toggles showing and hiding the password. Replace the toggle by
+  /// providing a custom [suffixBuilder], or disable it by setting it to `null`.
+  ///
+  /// The [obscureTextController] parameter is a [ValueNotifier] that controls the obscuring state.
+  ///
+  /// [autofillHints] defaults to [AutofillHints.password]. Use [AutofillHints.newPassword] for new-password inputs.
+  static Widget password({
+    FTextFieldStyle Function(FTextFieldStyle style)? style,
+    FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
+    Widget? label,
+    String? hint,
+    Widget? description,
+    Widget? error,
+    TextMagnifierConfiguration? magnifierConfiguration,
+    Object groupId = EditableText,
+    TextEditingController? controller,
+    FocusNode? focusNode,
+    TextInputType? keyboardType,
+    TextInputAction textInputAction = TextInputAction.next,
+    TextCapitalization textCapitalization = TextCapitalization.none,
+    TextAlign textAlign = TextAlign.start,
+    TextAlignVertical? textAlignVertical,
+    TextDirection? textDirection,
+    bool autofocus = false,
+    WidgetStatesController? statesController,
+    String obscuringCharacter = '•',
+    bool autocorrect = false,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
+    bool enableSuggestions = false,
+    int? minLines,
+    int maxLines = 1,
+    bool expands = false,
+    bool readOnly = false,
+    bool? showCursor,
+    int? maxLength,
+    MaxLengthEnforcement? maxLengthEnforcement,
+    ValueChanged<String>? onChange,
+    GestureTapCallback? onTap,
+    TapRegionCallback? onTapOutside,
+    bool onTapAlwaysCalled = false,
+    VoidCallback? onEditingComplete,
+    ValueChanged<String>? onSubmit,
+    AppPrivateCommandCallback? onAppPrivateCommand,
+    List<TextInputFormatter>? inputFormatters,
+    bool enabled = true,
+    bool? ignorePointers,
+    bool enableInteractiveSelection = true,
+    bool? selectAllOnFocus,
+    TextSelectionControls? selectionControls,
+    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    MouseCursor? mouseCursor,
+    FTextFieldCounterBuilder? counterBuilder,
+    ScrollPhysics? scrollPhysics,
+    ScrollController? scrollController,
+    Iterable<String> autofillHints = const [AutofillHints.password],
+    String? restorationId,
+    bool stylusHandwritingEnabled = true,
+    bool enableIMEPersonalizedLearning = true,
+    ContentInsertionConfiguration? contentInsertionConfiguration,
+    EditableTextContextMenuBuilder contextMenuBuilder = Defaults.contextMenuBuilder,
+    bool canRequestFocus = true,
+    UndoHistoryController? undoController,
+    SpellCheckConfiguration? spellCheckConfiguration,
+    FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
+    bool Function(TextEditingValue) clearable = Defaults.clearable,
+    ValueNotifier<bool>? obscureTextController,
+    FormFieldSetter<String>? onSaved,
+    FormFieldValidator<String>? validator,
+    String? initialText,
+    AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
+    String? forceErrorText,
+    Widget Function(BuildContext context, String message) errorBuilder = _errorBuilder,
+    Key? key,
+  }) => PasswordFormField(
+    properties: PasswordFieldProperties(
+      style: style,
+      builder: builder,
+      label: label,
+      hint: hint,
+      description: description,
+      error: null,
+      magnifierConfiguration: magnifierConfiguration,
+      groupId: groupId,
+      controller: controller,
+      focusNode: focusNode,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      textCapitalization: textCapitalization,
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      autofocus: autofocus,
+      statesController: statesController,
+      obscuringCharacter: obscuringCharacter,
+      autocorrect: autocorrect,
+      smartDashesType: smartDashesType,
+      smartQuotesType: smartQuotesType,
+      enableSuggestions: enableSuggestions,
+      minLines: minLines,
+      maxLines: maxLines,
+      expands: expands,
+      readOnly: readOnly,
+      showCursor: showCursor,
+      maxLength: maxLength,
+      maxLengthEnforcement: maxLengthEnforcement,
+      onChange: onChange,
+      onTap: onTap,
+      onTapOutside: onTapOutside,
+      onTapAlwaysCalled: onTapAlwaysCalled,
+      onEditingComplete: onEditingComplete,
+      onSubmit: onSubmit,
+      onAppPrivateCommand: onAppPrivateCommand,
+      inputFormatters: inputFormatters,
+      enabled: enabled,
+      ignorePointers: ignorePointers,
+      enableInteractiveSelection: enableInteractiveSelection,
+      selectAllOnFocus: selectAllOnFocus,
+      selectionControls: selectionControls,
+      dragStartBehavior: dragStartBehavior,
+      mouseCursor: mouseCursor,
+      counterBuilder: counterBuilder,
+      scrollPhysics: scrollPhysics,
+      scrollController: scrollController,
+      autofillHints: autofillHints,
+      restorationId: restorationId,
+      stylusHandwritingEnabled: stylusHandwritingEnabled,
+      enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+      contentInsertionConfiguration: contentInsertionConfiguration,
+      contextMenuBuilder: contextMenuBuilder,
+      canRequestFocus: canRequestFocus,
+      undoController: undoController,
+      spellCheckConfiguration: spellCheckConfiguration,
+      prefixBuilder: prefixBuilder,
+      suffixBuilder: suffixBuilder,
+      clearable: clearable,
+      initialText: initialText,
+      obscureTextController: obscureTextController,
+    ),
+    onSaved: onSaved,
+    validator: validator,
+    autovalidateMode: autovalidateMode,
+    forceErrorText: forceErrorText,
+    errorBuilder: errorBuilder,
+    key: key,
+  );
+
   static Widget _errorBuilder(BuildContext _, String text) => Text(text);
 
   /// {@macro forui.text_field.style}
@@ -362,121 +514,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     super.key,
   });
 
-  /// Creates a [FTextFormField] configured for passwords.
-  ///
-  /// By default the field renders an eye icon suffix that toggles showing and
-  /// hiding the password. Replace the toggle by providing a custom
-  /// `suffixBuilder`, or disable it entirely with `suffixBuilder: null`.
-  ///
-  /// The `obscureText` parameter is a [ValueNotifier<bool>] that represents and
-  /// controls the obscuring state:
-  ///
-  /// * `true`  -> text is obscured (hidden)
-  /// * `false` -> text is visible
-  ///
-  /// If `obscureText` is `null`, the widget creates and manages an internal
-  /// [ValueNotifier<bool>] which starts as `true` (text hidden).
-  ///
-  /// When writing a custom `suffixBuilder` that needs to read or toggle the
-  /// obscuring state, pass your own `obscureText` notifier so the builder can
-  /// observe and modify the value.
-  ///
-  /// [autofillHints] defaults to [AutofillHints.password]. It should be overridden with [AutofillHints.newPassword]
-  /// when handling the creation of new passwords.
-  ///
-  /// Examples:
-  ///
-  /// ```dart
-  /// // Basic usage: text starts hidden and the default toggle is shown
-  /// FTextFormField.password()
-  ///
-  /// // Start with password visible
-  /// final obscure = ValueNotifier<bool>(false);
-  /// FTextFormField.password(obscureText: obscure)
-  ///
-  /// // Custom suffix that reads/toggles the notifier (notifier required)
-  /// final obscure = ValueNotifier<bool>(false);
-  /// FTextFormField.password(
-  ///   obscureText: obscure,
-  ///   suffixBuilder: (context, style, states) => IconButton(
-  ///     onPressed: () => obscure.value = !obscure.value,
-  ///     icon: Icon(obscure.value ? Icons.visibility : Icons.visibility_off),
-  ///   ),
-  /// )
-  ///
-  /// // Disable the toggle completely
-  /// FTextFormField.password(suffixBuilder: null)
-  /// ```
-  factory FTextFormField.password({
-    FTextFieldStyle Function(FTextFieldStyle style)? style,
-    Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states, Widget field)? builder,
-    Widget? label,
-    String? hint,
-    Widget? description,
-    TextMagnifierConfiguration? magnifierConfiguration,
-    Object? groupId,
-    TextEditingController? controller,
-    FocusNode? focusNode,
-    TextInputType? keyboardType,
-    TextInputAction? textInputAction,
-    TextCapitalization? textCapitalization,
-    TextAlign? textAlign,
-    TextAlignVertical? textAlignVertical,
-    TextDirection? textDirection,
-    bool? autofocus,
-    WidgetStatesController? statesController,
-    String? obscuringCharacter,
-    bool? autocorrect,
-    SmartDashesType? smartDashesType,
-    SmartQuotesType? smartQuotesType,
-    bool? enableSuggestions,
-    int? minLines,
-    int? maxLines,
-    bool? expands,
-    bool? readOnly,
-    bool? showCursor,
-    int? maxLength,
-    MaxLengthEnforcement? maxLengthEnforcement,
-    ValueChanged<String>? onChange,
-    GestureTapCallback? onTap,
-    TapRegionCallback? onTapOutside,
-    bool? onTapAlwaysCalled,
-    VoidCallback? onEditingComplete,
-    ValueChanged<String>? onSubmit,
-    AppPrivateCommandCallback? onAppPrivateCommand,
-    List<TextInputFormatter>? inputFormatters,
-    bool? enabled,
-    bool? ignorePointers,
-    bool? enableInteractiveSelection,
-    bool? selectAllOnFocus,
-    TextSelectionControls? selectionControls,
-    DragStartBehavior? dragStartBehavior,
-    MouseCursor? mouseCursor,
-    FTextFieldCounterBuilder? counterBuilder,
-    ScrollPhysics? scrollPhysics,
-    ScrollController? scrollController,
-    Iterable<String>? autofillHints,
-    String? restorationId,
-    bool? stylusHandwritingEnabled,
-    bool? enableIMEPersonalizedLearning,
-    ContentInsertionConfiguration? contentInsertionConfiguration,
-    EditableTextContextMenuBuilder? contextMenuBuilder,
-    bool? canRequestFocus,
-    UndoHistoryController? undoController,
-    SpellCheckConfiguration? spellCheckConfiguration,
-    Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states)? prefixBuilder,
-    Widget Function(BuildContext context, FTextFieldStyle style, Set<WidgetState> states)? suffixBuilder,
-    bool Function(TextEditingValue)? clearable,
-    FormFieldSetter<String>? onSaved,
-    FormFieldValidator<String>? validator,
-    String? initialText,
-    AutovalidateMode? autovalidateMode,
-    String? forceErrorText,
-    Widget Function(BuildContext context, String message)? errorBuilder,
-    ValueNotifier<bool>? obscureText,
-    Key? key,
-  }) = PasswordFormField;
-
   /// Creates a [FTextFormField] configured for multiline inputs.
   ///
   /// The text field's height can be configured by adjusting [minLines]. By default, the text field will expand every
@@ -553,7 +590,85 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   });
 
   @override
-  Widget build(BuildContext context) => _FormField(this, key: key);
+  Widget build(BuildContext context) => Field(
+    controller: controller,
+    onSaved: onSaved,
+    validator: validator,
+    initialValue: controller?.text ?? initialText,
+    enabled: enabled,
+    autovalidateMode: autovalidateMode,
+    forceErrorText: forceErrorText,
+    restorationId: restorationId,
+    builder: (state) => FTextField(
+      style: style,
+      builder: builder,
+      label: label,
+      hint: hint,
+      description: description,
+      error: switch (state.errorText) {
+        null => null,
+        final error => errorBuilder(state.context, error),
+      },
+      magnifierConfiguration: magnifierConfiguration,
+      groupId: groupId,
+      controller: state.effectiveController,
+      focusNode: focusNode,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      textCapitalization: textCapitalization,
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      autofocus: autofocus,
+      statesController: statesController,
+      obscuringCharacter: obscuringCharacter,
+      obscureText: obscureText,
+      autocorrect: autocorrect,
+      smartDashesType: smartDashesType,
+      smartQuotesType: smartQuotesType,
+      enableSuggestions: enableSuggestions,
+      minLines: minLines,
+      maxLines: maxLines,
+      expands: expands,
+      readOnly: readOnly,
+      showCursor: showCursor,
+      maxLength: maxLength,
+      maxLengthEnforcement: maxLengthEnforcement,
+      onChange: (value) {
+        state.didChange(value);
+        onChange?.call(value);
+      },
+      onTap: onTap,
+      onTapAlwaysCalled: onTapAlwaysCalled,
+      onEditingComplete: onEditingComplete,
+      onSubmit: onSubmit,
+      onAppPrivateCommand: onAppPrivateCommand,
+      inputFormatters: inputFormatters,
+      enabled: enabled,
+      ignorePointers: ignorePointers,
+      enableInteractiveSelection: enableInteractiveSelection,
+      selectionControls: selectionControls,
+      selectAllOnFocus: selectAllOnFocus,
+      dragStartBehavior: dragStartBehavior,
+      mouseCursor: mouseCursor,
+      counterBuilder: counterBuilder,
+      scrollPhysics: scrollPhysics,
+      scrollController: scrollController,
+      autofillHints: autofillHints,
+      restorationId: restorationId,
+      stylusHandwritingEnabled: stylusHandwritingEnabled,
+      enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+      contentInsertionConfiguration: contentInsertionConfiguration,
+      contextMenuBuilder: contextMenuBuilder,
+      canRequestFocus: canRequestFocus,
+      undoController: undoController,
+      spellCheckConfiguration: spellCheckConfiguration,
+      prefixBuilder: prefixBuilder,
+      suffixBuilder: suffixBuilder,
+      clearable: clearable,
+      key: key,
+    ),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -634,193 +749,4 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
-}
-
-class _FormField extends FormField<String> {
-  final FTextFormField field;
-
-  _FormField(this.field, {super.key})
-    : super(
-        onSaved: field.onSaved,
-        validator: field.validator,
-        initialValue: field.controller?.text ?? field.initialText,
-        enabled: field.enabled,
-        autovalidateMode: field.autovalidateMode,
-        forceErrorText: field.forceErrorText,
-        restorationId: field.restorationId,
-        builder: (formField) {
-          final state = formField as _State;
-          return UnmanagedRestorationScope(
-            bucket: state.bucket,
-            child: FTextField(
-              style: field.style,
-              builder: field.builder,
-              label: field.label,
-              hint: field.hint,
-              description: field.description,
-              error: switch (state.errorText) {
-                null => null,
-                final error => field.errorBuilder(state.context, error),
-              },
-              magnifierConfiguration: field.magnifierConfiguration,
-              groupId: field.groupId,
-              controller: state._effectiveController,
-              focusNode: field.focusNode,
-              keyboardType: field.keyboardType,
-              textInputAction: field.textInputAction,
-              textCapitalization: field.textCapitalization,
-              textAlign: field.textAlign,
-              textAlignVertical: field.textAlignVertical,
-              textDirection: field.textDirection,
-              autofocus: field.autofocus,
-              statesController: field.statesController,
-              obscuringCharacter: field.obscuringCharacter,
-              obscureText: field.obscureText,
-              autocorrect: field.autocorrect,
-              smartDashesType: field.smartDashesType,
-              smartQuotesType: field.smartQuotesType,
-              enableSuggestions: field.enableSuggestions,
-              minLines: field.minLines,
-              maxLines: field.maxLines,
-              expands: field.expands,
-              readOnly: field.readOnly,
-              showCursor: field.showCursor,
-              maxLength: field.maxLength,
-              maxLengthEnforcement: field.maxLengthEnforcement,
-              onChange: (value) {
-                state.didChange(value);
-                field.onChange?.call(value);
-              },
-              onTap: field.onTap,
-              onTapAlwaysCalled: field.onTapAlwaysCalled,
-              onEditingComplete: field.onEditingComplete,
-              onSubmit: field.onSubmit,
-              onAppPrivateCommand: field.onAppPrivateCommand,
-              inputFormatters: field.inputFormatters,
-              enabled: field.enabled,
-              ignorePointers: field.ignorePointers,
-              enableInteractiveSelection: field.enableInteractiveSelection,
-              selectionControls: field.selectionControls,
-              selectAllOnFocus: field.selectAllOnFocus,
-              dragStartBehavior: field.dragStartBehavior,
-              mouseCursor: field.mouseCursor,
-              counterBuilder: field.counterBuilder,
-              scrollPhysics: field.scrollPhysics,
-              scrollController: field.scrollController,
-              autofillHints: field.autofillHints,
-              restorationId: field.restorationId,
-              stylusHandwritingEnabled: field.stylusHandwritingEnabled,
-              enableIMEPersonalizedLearning: field.enableIMEPersonalizedLearning,
-              contentInsertionConfiguration: field.contentInsertionConfiguration,
-              contextMenuBuilder: field.contextMenuBuilder,
-              canRequestFocus: field.canRequestFocus,
-              undoController: field.undoController,
-              spellCheckConfiguration: field.spellCheckConfiguration,
-              prefixBuilder: field.prefixBuilder,
-              suffixBuilder: field.suffixBuilder,
-              clearable: field.clearable,
-              key: key,
-            ),
-          );
-        },
-      );
-
-  @override
-  FormFieldState<String> createState() => _State();
-}
-
-// This class is based on Material's _TextFormFieldState implementation.
-class _State extends FormFieldState<String> {
-  RestorableTextEditingController? _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.field.controller case final controller?) {
-      controller.addListener(_handleTextEditingChange);
-    } else {
-      _registerController(RestorableTextEditingController(text: widget.initialValue));
-    }
-  }
-
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    super.restoreState(oldBucket, initialRestore);
-    if (_controller case final controller?) {
-      registerForRestoration(controller, 'controller');
-    }
-
-    // Make sure to update the internal [FormFieldState] value to sync up with text editing controller value.
-    setValue(_effectiveController.text);
-  }
-
-  void _registerController(RestorableTextEditingController controller) {
-    assert(_controller == null, '_controller is already initialized.');
-    _controller = controller;
-    if (!restorePending) {
-      registerForRestoration(controller, 'controller');
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant _FormField old) {
-    super.didUpdateWidget(old);
-    if (widget.field.controller == old.field.controller) {
-      return;
-    }
-
-    widget.field.controller?.addListener(_handleTextEditingChange);
-    old.field.controller?.removeListener(_handleTextEditingChange);
-
-    switch ((widget.field.controller, old.field.controller)) {
-      case (final current?, _):
-        setValue(current.text);
-        if (_controller != null) {
-          unregisterFromRestoration(_controller!);
-          _controller?.dispose();
-          _controller = null;
-        }
-
-      case (null, final old?):
-        _registerController(RestorableTextEditingController.fromValue(old.value));
-    }
-  }
-
-  @override
-  void dispose() {
-    widget.field.controller?.removeListener(_handleTextEditingChange);
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  @override
-  void didChange(String? value) {
-    super.didChange(value);
-    if (_effectiveController.text != value) {
-      _effectiveController.text = value ?? '';
-    }
-  }
-
-  @override
-  void reset() {
-    // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
-    _effectiveController.text = widget.initialValue ?? '';
-    super.reset();
-  }
-
-  // Suppress changes that originated from within this class.
-  //
-  // In the case where a controller has been passed in to this widget, we register this change listener. In these
-  // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
-  // reset() method. In such cases, the FormField value will already have been set.
-  void _handleTextEditingChange() {
-    if (_effectiveController.text != value) {
-      didChange(_effectiveController.text);
-    }
-  }
-
-  @override
-  _FormField get widget => super.widget as _FormField;
-
-  TextEditingController get _effectiveController => widget.field.controller ?? _controller!.value;
 }
