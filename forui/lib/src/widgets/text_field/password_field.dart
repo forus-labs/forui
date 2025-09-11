@@ -255,7 +255,7 @@ class PasswordField extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('properties', properties));
+    properties.add(DiagnosticsProperty('properties', this.properties));
   }
 }
 
