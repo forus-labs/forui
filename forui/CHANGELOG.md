@@ -13,12 +13,23 @@ We've improved the styles' generated documentation. They should be much easier t
 
 ### `FAutocomplete`
 
+* Add `FAutocompletController(popoverMotion: ...)`.
 * **Breaking** Change `FAutocompleteContentStyle.loadingIndicatorStyle` to `FAutocompleteContentStyle.progressStyle`.
 
 
 ### `FDateField`
 
 * **Breaking** Replace `FDateFieldController(animationDuration: ...)` with `FDateFieldController(popoverMotion: ...)`.
+
+
+### `FDialog`
+* Add `FDialogRouteStyle`.
+* Add `FDialogRouteMotion`.
+* Add `showFDialog(routeStyle: ...)`.
+* Add `FDialogMotion`.
+
+* **Breaking** Move barrier related fields from `FDialogStyle` to `FDialogRouteStyle`.
+* **Breaking** Move animation related fields from `FDialogStyle` to `FDialogMotion`.
 
 
 ### `FPopover` & `FPopoverMenu`

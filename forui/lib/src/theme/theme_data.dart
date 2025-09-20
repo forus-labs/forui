@@ -197,6 +197,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FDeterminateProgressStyle determinateProgressStyle;
 
+  /// The dialog route's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create dialog-route
+  /// ```
+  @override
+  final FDialogRouteStyle dialogRouteStyle;
+
   /// The dialog style.
   ///
   /// ## CLI
@@ -569,6 +580,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FCircularProgressStyle? circularProgressStyle,
     FDateFieldStyle? dateFieldStyle,
     FDeterminateProgressStyle? determinateProgressStyle,
+    FDialogRouteStyle? dialogRouteStyle,
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyles,
@@ -630,6 +642,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, typography: typography, style: style),
       determinateProgressStyle:
           determinateProgressStyle ?? FDeterminateProgressStyle.inherit(colors: colors, style: style),
+      dialogRouteStyle: dialogRouteStyle ?? FDialogRouteStyle.inherit(colors: colors),
       dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
       headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
@@ -694,6 +707,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     circularProgressStyle: a.circularProgressStyle.lerp(b.circularProgressStyle, t),
     dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
     determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
+    dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
     dividerStyles: a.dividerStyles.lerp(b.dividerStyles, t),
     headerStyles: a.headerStyles.lerp(b.headerStyles, t),
@@ -752,6 +766,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.circularProgressStyle,
     required this.dateFieldStyle,
     required this.determinateProgressStyle,
+    required this.dialogRouteStyle,
     required this.dialogStyle,
     required this.dividerStyles,
     required this.headerStyles,
@@ -1250,6 +1265,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FCircularProgressStyle Function(FCircularProgressStyle style)? circularProgressStyle,
     FDateFieldStyle Function(FDateFieldStyle style)? dateFieldStyle,
     FDeterminateProgressStyle Function(FDeterminateProgressStyle style)? determinateProgressStyle,
+    FDialogRouteStyle Function(FDialogRouteStyle style)? dialogRouteStyle,
     FDialogStyle Function(FDialogStyle style)? dialogStyle,
     FDividerStyles Function(FDividerStyles style)? dividerStyles,
     FHeaderStyles Function(FHeaderStyles style)? headerStyles,
@@ -1309,6 +1325,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     determinateProgressStyle: determinateProgressStyle != null
         ? determinateProgressStyle(this.determinateProgressStyle)
         : this.determinateProgressStyle,
+    dialogRouteStyle: dialogRouteStyle != null ? dialogRouteStyle(this.dialogRouteStyle) : this.dialogRouteStyle,
     dialogStyle: dialogStyle != null ? dialogStyle(this.dialogStyle) : this.dialogStyle,
     dividerStyles: dividerStyles != null ? dividerStyles(this.dividerStyles) : this.dividerStyles,
     headerStyles: headerStyles != null ? headerStyles(this.headerStyles) : this.headerStyles,

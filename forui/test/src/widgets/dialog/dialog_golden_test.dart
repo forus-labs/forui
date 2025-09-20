@@ -51,7 +51,7 @@ void main() {
             child: Builder(
               builder: (context) => FButton(
                 onPress: () => showFDialog(
-                  style: theme.data.dialogStyle.copyWith(
+                  routeStyle: theme.data.dialogRouteStyle.copyWith(
                     barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
                   ),
                   context: context,

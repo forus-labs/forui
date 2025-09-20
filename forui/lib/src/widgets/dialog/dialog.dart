@@ -19,7 +19,7 @@ part 'dialog.design.dart';
 /// [useRootNavigator] ensures that the root navigator displays the sheet when `true`. This is useful in the case that a
 /// modal sheet needs to be displayed above all other content but the caller is inside another [Navigator].
 ///
-/// [style] defaults to [FDialogStyle] from the closest [FTheme] ancestor.
+/// [routeStyle] defaults to [FDialogStyle] from the closest [FTheme] ancestor.
 ///
 /// [barrierLabel] defaults to [FLocalizations.barrierLabel].
 ///
@@ -41,6 +41,7 @@ Future<T?> showFDialog<T>({
   required BuildContext context,
   required Widget Function(BuildContext context, FDialogStyle style, Animation<double> animation) builder,
   bool useRootNavigator = false,
+  FDialogRouteStyle Function(FDialogRouteStyle style)? routeStyle,
   FDialogStyle Function(FDialogStyle style)? style,
   String? barrierLabel,
   bool barrierDismissible = true,
@@ -53,11 +54,12 @@ Future<T?> showFDialog<T>({
 
   final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
   final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+  final dialogRouteStyle = routeStyle?.call(context.theme.dialogRouteStyle) ?? context.theme.dialogRouteStyle;
   final dialogStyle = style?.call(context.theme.dialogStyle) ?? context.theme.dialogStyle;
 
   return navigator.push(
     FDialogRoute<T>(
-      style: dialogStyle,
+      style: dialogRouteStyle,
       builder: (context, animation) => builder(context, dialogStyle, animation),
       capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
       barrierDismissible: barrierDismissible,
@@ -74,8 +76,8 @@ Future<T?> showFDialog<T>({
 ///
 /// [showFDialog] should be preferred in most cases.
 class FDialogRoute<T> extends RawDialogRoute<T> {
-  /// The dialog's style.
-  final FDialogStyle style;
+  /// The dialog route's style.
+  final FDialogRouteStyle style;
 
   @override
   final bool barrierDismissible;
@@ -152,7 +154,59 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   Color? get barrierColor => Colors.transparent;
 
   @override
-  Duration get transitionDuration => style.entranceExitDuration;
+  Curve get barrierCurve => style.motion.barrierCurve;
+
+  @override
+  Duration get transitionDuration => style.motion.entranceDuration;
+
+  @override
+  Duration get reverseTransitionDuration => style.motion.exitDuration;
+}
+
+/// [FDialogRoute]'s style.
+class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
+  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
+  @override
+  final ImageFilter Function(double animation)? barrierFilter;
+
+  /// Motion-related properties.
+  @override
+  final FDialogRouteMotion motion;
+
+  /// Creates a [FDialogRouteStyle].
+  const FDialogRouteStyle({this.barrierFilter, this.motion = const FDialogRouteMotion()});
+
+  /// Creates a [FDialogRouteStyle] that inherits its properties.
+  FDialogRouteStyle.inherit({required FColors colors})
+    : this(
+        barrierFilter: (v) => ColorFilter.mode(Color.lerp(Colors.transparent, colors.barrier, v)!, BlendMode.srcOver),
+      );
+}
+
+/// Motion-related properties for [FDialogRoute].
+class FDialogRouteMotion with Diagnosticable, _$FDialogRouteMotionFunctions {
+  /// The amount of time the entrance animation takes. Defaults to 150ms.
+  ///
+  /// The dialog's animation and curve is managed by [FDialogMotion].
+  @override
+  final Duration entranceDuration;
+
+  /// The amount of time the exit animation takes. Defaults to 150ms.
+  ///
+  /// The dialog's animation and curve is managed by [FDialogMotion].
+  @override
+  final Duration exitDuration;
+
+  /// The curve used for the barrier's entrance and exit. Defaults to [Curves.ease].
+  @override
+  final Curve barrierCurve;
+
+  /// Creates a [FDialogRouteMotion].
+  const FDialogRouteMotion({
+    this.entranceDuration = const Duration(milliseconds: 150),
+    this.exitDuration = const Duration(milliseconds: 150),
+    this.barrierCurve = Curves.ease,
+  });
 }
 
 /// A modal dialog.
@@ -312,10 +366,18 @@ class _FDialogState extends State<FDialog> {
       _curvedFade?.dispose();
 
       if (widget.animation case final animation?) {
-        _curvedScale = CurvedAnimation(parent: animation, curve: style.entranceCurve, reverseCurve: style.exitCurve);
-        _curvedFade = CurvedAnimation(parent: animation, curve: style.entranceCurve, reverseCurve: style.exitCurve);
-        _scale = style.scaleTween.animate(_curvedScale!);
-        _fade = style.fadeTween.animate(_curvedFade!);
+        _curvedScale = CurvedAnimation(
+          parent: animation,
+          curve: style.motion.expandCurve,
+          reverseCurve: style.motion.collapseCurve,
+        );
+        _curvedFade = CurvedAnimation(
+          parent: animation,
+          curve: style.motion.fadeInCurve,
+          reverseCurve: style.motion.fadeOutCurve,
+        );
+        _scale = style.motion.scaleTween.animate(_curvedScale!);
+        _fade = style.motion.fadeTween.animate(_curvedFade!);
       } else {
         _curvedScale = null;
         _curvedFade = null;
@@ -370,8 +432,8 @@ class _FDialogState extends State<FDialog> {
 
     return AnimatedPadding(
       padding: MediaQuery.viewInsetsOf(context) + style.insetPadding.resolve(direction),
-      duration: style.insetAnimationDuration,
-      curve: style.insetAnimationCurve,
+      duration: style.motion.insetDuration,
+      curve: style.motion.insetCurve,
       child: MediaQuery.removeViewInsets(
         removeLeft: true,
         removeTop: true,
@@ -397,67 +459,15 @@ class _FDialogState extends State<FDialog> {
 
 /// [FDialog]'s style.
 class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
-  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
-  ///
-  /// This is only supported by [showFDialog].
-  ///
-  /// ## Why isn't the [barrierFilter] being applied?
-  /// Make sure you are passing the [FDialogStyle] to the [showFDialog] method instead of the [FDialog].
-  @override
-  final ImageFilter Function(double animation)? barrierFilter;
-
   /// {@macro forui.widgets.FPopoverStyle.backgroundFilter}
   ///
   /// This requires [FDialog.animation] to be non-null.
   @override
   final ImageFilter Function(double animation)? backgroundFilter;
 
-  /// The dialog's entrance/exit animation duration. Defaults to 150ms.
-  ///
-  /// This requires [FDialog.animation] to be non-null.
-  @override
-  final Duration entranceExitDuration;
-
-  /// The dialog's entrance animation curve. Defaults to [Curves.easeOutCubic].
-  ///
-  /// This requires [FDialog.animation] to be non-null.
-  @override
-  final Curve entranceCurve;
-
-  /// The dialog's entrance animation curve. Defaults to [Curves.easeInCubic].
-  ///
-  /// This requires [FDialog.animation] to be non-null.
-  @override
-  final Curve exitCurve;
-
-  /// The tween used to animate the dialog's fade in and out. Defaults to `[0, 1]`.
-  ///
-  /// This requires [FDialog.animation] to be non-null.
-  @override
-  final Tween<double> fadeTween;
-
-  /// The tween used to animate the dialog's scale in and out. Defaults to `[0.95, 1]`.
-  ///
-  /// This requires [FDialog.animation] to be non-null.
-  @override
-  final Tween<double> scaleTween;
-
   /// The decoration.
   @override
   final BoxDecoration decoration;
-
-  /// The duration of the animation to show when the system keyboard intrudes into the space that the dialog is placed in.
-  ///
-  /// Defaults to 100 milliseconds.
-  @override
-  final Duration insetAnimationDuration;
-
-  /// The curve to use for the animation shown when the system keyboard intrudes into the space that the dialog is
-  /// placed in.
-  ///
-  /// Defaults to [Curves.decelerate].
-  @override
-  final Curve insetAnimationCurve;
 
   /// The inset padding. Defaults to `EdgeInsets.symmetric(horizontal: 40, vertical: 24)`.
   @override
@@ -471,30 +481,25 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   @override
   final FDialogContentStyle verticalStyle;
 
+  /// Motion-related properties.
+  @override
+  final FDialogMotion motion;
+
   /// Creates a [FDialogStyle].
   FDialogStyle({
     required this.decoration,
     required this.horizontalStyle,
     required this.verticalStyle,
-    this.barrierFilter,
-    this.entranceExitDuration = const Duration(milliseconds: 150),
-    this.entranceCurve = Curves.easeOutCubic,
-    this.exitCurve = Curves.easeInCubic,
     this.backgroundFilter,
-    this.insetAnimationDuration = const Duration(milliseconds: 100),
-    this.insetAnimationCurve = Curves.decelerate,
     this.insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
-    Tween<double>? fadeTween,
-    Tween<double>? scaleTween,
-  }) : fadeTween = fadeTween ?? Tween<double>(begin: 0, end: 1),
-       scaleTween = scaleTween ?? Tween<double>(begin: 0.95, end: 1);
+    this.motion = const FDialogMotion(),
+  });
 
   /// Creates a [FDialogStyle] that inherits its properties.
   factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {
     final title = typography.lg.copyWith(fontWeight: FontWeight.w600, color: colors.foreground);
     final body = typography.sm.copyWith(color: colors.mutedForeground);
     return FDialogStyle(
-      barrierFilter: (v) => ColorFilter.mode(Color.lerp(Colors.transparent, colors.barrier, v)!, BlendMode.srcOver),
       decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
       horizontalStyle: FDialogContentStyle(
         titleTextStyle: title,
@@ -510,4 +515,58 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
       ),
     );
   }
+}
+
+/// Motion-related properties for [FDialog].
+///
+/// These fields are only used when [FDialog.animation] is non-null.
+///
+/// The actual animation duration is controlled by the route used to display the dialog, such as [FDialogRoute]. When
+/// using [showFDialog], the duration can be customized via [FDialogRouteStyle.motion].
+class FDialogMotion with Diagnosticable, _$FDialogMotionFunctions {
+  /// The curve used for the dialog's expansion animation when entering. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve expandCurve;
+
+  /// The curve used for the dialog's collapse animation when exiting. Defaults to [Curves.easeInCubic].
+  @override
+  final Curve collapseCurve;
+
+  /// The curve used for the dialog's fade-in animation when entering. Defaults to [Curves.linear].
+  @override
+  final Curve fadeInCurve;
+
+  /// The curve used for the dialog's fade-out animation when exiting. Defaults to [Curves.linear].
+  @override
+  final Curve fadeOutCurve;
+
+  /// The tween used to animate the dialog's scale in and out. Defaults to `[0.95, 1]`.
+  @override
+  final Animatable<double> scaleTween;
+
+  /// The tween used to animate the dialog's fade in and out. Defaults to `[0, 1]`.
+  @override
+  final Animatable<double> fadeTween;
+
+  /// The duration of the animation to show when the system keyboard intrudes into the space that the dialog is placed in.
+  /// Defaults to 100ms.
+  @override
+  final Duration insetDuration;
+
+  /// The curve to use for the animation shown when the system keyboard intrudes into the space that the dialog is
+  /// placed in. Defaults to [Curves.decelerate].
+  @override
+  final Curve insetCurve;
+
+  /// Creates a [FDialogMotion].
+  const FDialogMotion({
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseCurve = Curves.easeInCubic,
+    this.fadeInCurve = Curves.linear,
+    this.fadeOutCurve = Curves.linear,
+    this.scaleTween = const FImmutableTween(begin: 0.95, end: 1.0),
+    this.fadeTween = const FImmutableTween(begin: 0.0, end: 1.0),
+    this.insetDuration = const Duration(milliseconds: 100),
+    this.insetCurve = Curves.decelerate,
+  });
 }

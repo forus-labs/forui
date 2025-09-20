@@ -61,6 +61,7 @@ showFDialog<T>(
   context: context,
   builder: (context, style, animation) => FDialog(...),
   useRootNavigator: false,
+  routeStyle: FDialogRouteStyle(...),
   style: FDialogStyle(...),
   barrierLabel: 'Label',
   barrierDismissible: true,
@@ -201,7 +202,7 @@ We recommend using the vertical layout on mobile devices.
             child: FButton(
               child: const Text('Show Dialog'),
               onPress: () => showFDialog(
-                style: context.theme.dialogStyle.copyWith(
+                routeStyle: context.theme.dialogRouteStyle.copyWith(
                   barrierFilter: (animation) => ImageFilter.compose(
                     outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
                     inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),

@@ -12,18 +12,22 @@ class FAutocompleteController extends FTypeaheadController {
   final FPopoverController popover;
 
   /// Creates a [FAutocompleteController] with an optional initial text and suggestions.
-  FAutocompleteController({required TickerProvider vsync, super.text, super.suggestions})
-    : popover = FPopoverController(vsync: vsync),
-      super(
-        textStyles: (context) {
-          final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
-          return (
-            style.fieldStyle.contentTextStyle.resolve(states),
-            style.composingTextStyle.resolve(states),
-            style.typeaheadTextStyle.resolve(states),
-          );
-        },
-      );
+  FAutocompleteController({
+    required TickerProvider vsync,
+    super.text,
+    super.suggestions,
+    FPopoverMotion popoverMotion = const FPopoverMotion(),
+  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion),
+       super(
+         textStyles: (context) {
+           final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
+           return (
+             style.fieldStyle.contentTextStyle.resolve(states),
+             style.composingTextStyle.resolve(states),
+             style.typeaheadTextStyle.resolve(states),
+           );
+         },
+       );
 
   @override
   void dispose() {
