@@ -59,6 +59,12 @@ We've reworked `FProgress` to be more customizable and easier to use.
 * **Breaking** Replace `FMultiSelectController(animationDuration: ...)` with `FMultiSelectController(popoverMotion: ...)`.
 
 
+### `FSidebar`
+
+* Add `FSiderbarItemrMotion`.
+* **Breaking** Move animation related fields from `FSiderbarItemStyle` to `FSiderbarItemMotion`.
+
+
 ### `FTappable`
 
 * Add `FTappableMotion`.
@@ -96,6 +102,7 @@ We've added a password visibility toggle to password fields.
 * Add `FWidgetStateMap.lerpIconThemeData(...)`.
 * Add `FWidgetStateMap.lerpTextStyle(...)`.
 * Add `FWidgetStateMap.lerpWhere(...)`.
+
 
 ### `FToaster`
 * Add `FToaster.of(...)`.

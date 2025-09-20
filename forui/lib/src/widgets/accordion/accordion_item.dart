@@ -97,9 +97,9 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     final InheritedAccordionData(:index, :controller, :style) = InheritedAccordionData.of(context);
     controller.remove(index);
 
-    _controller?.dispose();
     _curvedReveal?.dispose();
     _curvedIconRotation?.dispose();
+    _controller?.dispose();
 
     _controller = AnimationController(
       vsync: this,
