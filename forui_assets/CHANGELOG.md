@@ -1,3 +1,7 @@
+## 0.16.0
+* Update icons to Lucide 0.544.0.
+
+
 ## 0.15.0
 * Update icons to Lucide 0.540.0.
 
