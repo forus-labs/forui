@@ -70,6 +70,12 @@ We've reworked `FProgress` to be more customizable and easier to use.
 * Add `FSliderStyle.tooltipMotion`.
 
 
+### `FTab`
+
+* Add `FTabrMotion`.
+* **Breaking** Replace `FTabController(animationDuration: ...)` with `FTabController(motion: ...)`.
+
+
 ### `FTappable`
 
 * Add `FTappableMotion`.
