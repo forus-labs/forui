@@ -65,6 +65,11 @@ We've reworked `FProgress` to be more customizable and easier to use.
 * **Breaking** Move animation related fields from `FSiderbarItemStyle` to `FSiderbarItemMotion`.
 
 
+### `FSlider`
+
+* Add `FSliderStyle.tooltipMotion`.
+
+
 ### `FTappable`
 
 * Add `FTappableMotion`.

@@ -37,10 +37,11 @@ class Thumb extends StatefulWidget {
   }
 }
 
-class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
+class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
   late FSliderController _controller;
-  late final FTooltipController _tooltip;
   late UniqueKey _key;
+  FSliderStyle? _style;
+  FTooltipController? _tooltip;
   MouseCursor _cursor = SystemMouseCursors.grab;
   ({double min, double max})? _origin;
   bool _gesture = false;
@@ -49,15 +50,21 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tooltip = FTooltipController(vsync: this);
     _key = widget.min ? FSliderTooltipsController.min : FSliderTooltipsController.max;
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final style = InheritedData.of(context).style;
+    if (_style != style) {
+      _tooltip?.dispose();
+      _tooltip = FTooltipController(vsync: this, motion: style.tooltipMotion);
+      _style = style;
+    }
+
     _controller = InheritedController.of(context);
-    _controller.tooltips.add(_key, _tooltip);
+    _controller.tooltips.add(_key, _tooltip!);
   }
 
   @override
@@ -226,7 +233,7 @@ class _ThumbState extends State<Thumb> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     _controller.tooltips.remove(_key);
-    _tooltip.dispose();
+    _tooltip?.dispose();
     super.dispose();
   }
 }
