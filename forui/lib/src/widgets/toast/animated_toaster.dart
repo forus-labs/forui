@@ -93,6 +93,9 @@ class RenderAnimatedToaster extends RenderBox
 
   /// Performs the layout of all toast children, handling both collapsed and expanded states.
   ///
+  /// Terminology:
+  /// * "Previous front toast" - The toast that was at the front before the current front toast.
+  ///
   /// This method orchestrates a complex two-phase layout process:
   ///
   /// **Phase 1: Calculate vertical positioning and spacing**
@@ -122,7 +125,7 @@ class RenderAnimatedToaster extends RenderBox
     var accumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
     var visibleAccumulated = collapsedAlignTransform.dy * style.expandStartSpacing;
 
-    // First pass: calculate the offset to move the toasts when expanded, relative to (0, 0).
+    // Phase 1: calculate the offset to move the toasts when expanded, relative to (0, 0).
     //
     // This is a simplified implementation that assumes toasts can only be vertically stacked.
     // I'm not doing this for every possible alignment. You're welcome to open a PR if you want it. >:(
@@ -140,7 +143,8 @@ class RenderAnimatedToaster extends RenderBox
         }
 
         // Top aligned toasts' origins are affected by the previous front toast and not the current front toast. This is
-        // because the front toast's content is rendered after (0, 0) in the 1st quadrant.
+        // because toasts stack downward from the origin, so each toast's position depends on the height of the toast
+        // above it.
         final affectingHeight = current == lastChild ? 0.0 : childBefore(lastChild!)!.size.height;
         final begin = data.shift.begin ??= accumulated + affectingHeight;
         final end = data.shift.end ??= accumulated;
@@ -174,14 +178,15 @@ class RenderAnimatedToaster extends RenderBox
       current = data.previousSibling;
     }
 
+    // Phase 2:
     // Transition between previous front and front toast if their sizes are different.
     final front = lastChild!;
     final data = front.parentData! as AnimatedToasterParentData;
 
     final Size previousFrontSize;
     if (childCount >= 2) {
-      // Save the front toast's size in the previous front toast.
-      // Allows us to properly transition when there is only 1 toast after the front toast is removed.
+      // Save the front toast's size as the previous front toast.
+      // Allows us to properly transition when there is only 1 remaining toast after the front toast is removed.
       final previous = childBefore(lastChild!)!;
       previousFrontSize = previous.size;
       (previous.parentData! as AnimatedToasterParentData).collapsedUntransformedSize = front.size;

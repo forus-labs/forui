@@ -53,11 +53,13 @@ final class FTabController extends FChangeNotifier {
 }
 
 /// Motion-related properties for [FTabs].
-class FTabMotion {
+class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
   /// The duration of the tab change animation. Defaults to 300 ms.
+  @override
   final Duration duration;
 
   /// The curve of the tab change animation. Defaults to [Curves.easeOutCubic].
+  @override
   final Curve curve;
 
   /// Creates a [FTabMotion].

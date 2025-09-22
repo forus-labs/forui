@@ -82,13 +82,6 @@ We've reworked `FProgress` to be more customizable and easier to use.
 * **Breaking** Move animation related fields from `FTappableStyle` to `FTappableMotion`.
 
 
-### `FThemeData`
-We've added support for animated theme transitions. This should make transitions between themes gradual instead of abrupt.
-
-* Add `FThemeData.lerp(...)`.
-* Change `FThemeData.copyWith(...)` to accept style builder functions.
-
-
 ### `FTextField` & `FTextFormField`
 We've added a password visibility toggle to password fields.
 
@@ -96,9 +89,28 @@ We've added a password visibility toggle to password fields.
 * Add password visibility toggle to `FTextFormField.password(...)`.
 
 
+### `FThemeData`
+We've added support for animated theme transitions. This should make transitions between themes gradual instead of abrupt.
+
+* Add `FThemeData.lerp(...)`.
+* Change `FThemeData.copyWith(...)` to accept style builder functions.
+
+
 ### `FTimeField`
 
 * **Breaking** Replace `FTimeFieldController(animationDuration: ...)` with `FTimeFieldController(popoverMotion: ...)`.
+
+
+### `FToast`
+
+* Add `FToastMotion`.
+* Add `FToasterMotion`.
+
+* Change animation to be more subtle.
+* **Breaking** Move animation related fields from `FToastStyle` to `FToastMotion`.
+* **Breaking** Move animation related fields from `FToasterStyle` to `FToasterMotion`.
+
+* Remove no-op `FToast.onDismiss` parameter that was accidentally included.
 
 
 ### `FTooltip`

@@ -11,15 +11,14 @@ void main() {
   testWidgets('everything', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: FToast(
-          icon: const Icon(FIcons.triangleAlert),
-          title: const Text('Event has been created'),
-          description: const Text(
+        child: const FToast(
+          icon: Icon(FIcons.triangleAlert),
+          title: Text('Event has been created'),
+          description: Text(
             'This is a more detailed description that provides comprehensive context and additional information '
             'about the notification, explaining what happened and what the user might expect next.',
           ),
-          suffix: const Text('Suffix'),
-          onDismiss: () {},
+          suffix: Text('Suffix'),
         ),
       ),
     );

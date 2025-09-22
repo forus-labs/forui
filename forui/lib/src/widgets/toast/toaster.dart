@@ -132,9 +132,13 @@ FToasterEntry showRawFToast({
 /// The toast's alignment.
 enum FToastAlignment {
   /// Aligns the toasts to the top start of the screen, depending on the locale's text direction.
+  ///
+  /// Top left in LTR locales, top right in RTL locales.
   topStart(AlignmentDirectional.topStart, Alignment.bottomCenter),
 
   /// Aligns the toasts to the start of the screen, depending on the locale's text direction.
+  ///
+  /// Top right in LTR locales, top left in RTL locales.
   topEnd(AlignmentDirectional.topEnd, Alignment.bottomCenter),
 
   /// Aligns the toasts to the top left of the screen.
@@ -147,9 +151,13 @@ enum FToastAlignment {
   topCenter(Alignment.topCenter, Alignment.bottomCenter),
 
   /// Aligns the toasts to the bottom start of the screen, depending on the locale's text direction.
+  ///
+  /// Bottom left in LTR locales, bottom right in RTL locales.
   bottomStart(AlignmentDirectional.bottomStart, Alignment.topCenter),
 
   /// Aligns the toasts to the bottom end of the screen, depending on the locale's text direction.
+  ///
+  /// Bottom right in LTR locales, bottom right in RTL locales.
   bottomEnd(AlignmentDirectional.bottomEnd, Alignment.topCenter),
 
   /// Aligns the toasts to the bottom left of the screen.
@@ -208,6 +216,8 @@ class FToasterState extends State<FToaster> {
   /// Displays a toast in this toaster.
   ///
   /// It is generally recommend to use [showFToast] or [showRawFToast] instead.
+  ///
+  /// See [showRawFToast] for more information about the parameters.
   FToasterEntry show({
     required Widget Function(BuildContext context, FToasterEntry entry) builder,
     BuildContext? context,

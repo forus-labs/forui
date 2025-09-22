@@ -4,6 +4,7 @@
 * **Breaking** Replace `useFPopoverController(animationDuration: ...)` with `useFPopoverController(motion: ...)`.
 * **Breaking** Replace `useFSelectController(animationDuration: ...)` with `useFSelectController(popoverMotion: ...)`.
 * **Breaking** Replace `useFSMultiSelectController(animationDuration: ...)` with `useFSMultiSelectController(popoverMotion: ...)`.
+* **Breaking** Replace `useFTabController(animationDuration: ...)` with `useFTabController(motion: ...)`.
 * **Breaking** Replace `useFTimeFieldController(animationDuration: ...)` with `useFTimeFieldController(popoverMotion: ...)`.
 * **Breaking** Replace `useFTooltipController(animationDuration: ...)` with `useFTooltipController(motion: ...)`.
 

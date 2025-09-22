@@ -14,7 +14,7 @@ class FToast extends StatelessWidget {
   /// The toast's style.
   final FToastStyle Function(FToastStyle style)? style;
 
-  /// An optional icon displayed at the start.
+  /// An optional icon aligned to the start of the toast (left in LTR locales).
   final Widget? icon;
 
   /// The toast's title. Defaults to a maximum of 100 lines. Set [Text.maxLines] to change this.
@@ -23,15 +23,11 @@ class FToast extends StatelessWidget {
   /// The toast's description. Defaults to a maximum of 100 lines. Set [Text.maxLines] to change this.
   final Widget? description;
 
-  /// An optional widget displayed at the end.
+  /// An optional widget aligned to the end of the toast (left in LTR locales).
   final Widget? suffix;
 
-  /// A callback that is called when the toast is dismissed. Displays an "X" button at the top right corner of the
-  /// toast if provided.
-  final VoidCallback? onDismiss;
-
   /// Creates a [FToast].
-  const FToast({required this.title, this.style, this.icon, this.description, this.suffix, this.onDismiss, super.key});
+  const FToast({required this.title, this.style, this.icon, this.description, this.suffix, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +80,6 @@ class FToast extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('onDismiss', onDismiss));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }

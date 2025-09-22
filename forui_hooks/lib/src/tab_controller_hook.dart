@@ -9,14 +9,14 @@ FTabController useFTabController({
   required int length,
   int initialIndex = 0,
   TickerProvider? vsync,
-  Duration? animationDuration,
+  FTabMotion motion = const FTabMotion(),
   List<Object?>? keys,
 }) => use(
   _TabControllerHook(
     initialIndex: initialIndex,
     length: length,
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
-    animationDuration: animationDuration,
+    motion: motion,
     keys: keys,
   ),
 );
@@ -25,13 +25,13 @@ class _TabControllerHook extends Hook<FTabController> {
   final int initialIndex;
   final int length;
   final TickerProvider vsync;
-  final Duration? animationDuration;
+  final FTabMotion motion;
 
   const _TabControllerHook({
     required this.initialIndex,
     required this.length,
     required this.vsync,
-    required this.animationDuration,
+    required this.motion,
     super.keys,
   });
 
@@ -45,7 +45,7 @@ class _TabControllerHook extends Hook<FTabController> {
       ..add(IntProperty('initialIndex', initialIndex))
       ..add(IntProperty('length', length))
       ..add(DiagnosticsProperty('vsync', vsync))
-      ..add(DiagnosticsProperty('animationDuration', animationDuration));
+      ..add(DiagnosticsProperty('motion', motion));
   }
 }
 
@@ -54,7 +54,7 @@ class _TabControllerHookState extends HookState<FTabController, _TabControllerHo
     initialIndex: hook.initialIndex,
     length: hook.length,
     vsync: hook.vsync,
-    animationDuration: hook.animationDuration,
+    motion: hook.motion,
   );
 
   @override
