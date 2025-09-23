@@ -45,8 +45,16 @@ List<FieldElement2> instanceFields(ClassElement2 element) {
 
   void addFieldsFromType(ClassElement2 element) {
     fields.addAll(
-      element.fields2.where((f) => !f.isStatic && f.isPublic && f.name3 != 'runtimeType' && f.name3 != 'hashCode'),
+      element.fields2.where(
+        (f) =>
+            !(f.getter2?.isAbstract ?? false) &&
+            !f.isStatic &&
+            f.isPublic &&
+            f.name3 != 'runtimeType' &&
+            f.name3 != 'hashCode',
+      ),
     );
+
     if (element.supertype?.element3 case final ClassElement2 supertype) {
       addFieldsFromType(supertype);
     }

@@ -59,6 +59,20 @@ We've reworked `FProgress` to be more customizable and easier to use.
 * **Breaking** Replace `FMultiSelectController(animationDuration: ...)` with `FMultiSelectController(popoverMotion: ...)`.
 
 
+### `FSheet`
+
+* Add `FModalSheetStyle`.
+* Add `FPersistentSheetStyle`.
+* Add `FSheetMotion`.
+* Add `FModalSheetMotion`.
+* Add `FPersistentSheetMotion`.
+* Add `FModalSheet(onClosing: ...)`.
+* Add `FPersistentSheet(onClosing: ...)`.
+
+* **Breaking** Split `FSheetStyle` into `FModalSheetStyle` and `FPersistentSheetStyle`.
+* **Breaking** Move animation related fields from `FSheetStyle` to `FSheetMotion`.
+
+
 ### `FSidebar`
 
 * Add `FSiderbarItemrMotion`.

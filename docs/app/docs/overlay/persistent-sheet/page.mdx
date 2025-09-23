@@ -167,7 +167,7 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
 To generate and customize this style:
 
 ```shell copy
-dart run forui style create sheet 
+dart run forui style create persistent-sheet
 ```
 
 ## Usage
@@ -177,7 +177,7 @@ dart run forui style create sheet
 ```dart copy
 showFPersistentSheet(
   context: context,
-  style: FSheetStyle(...),
+  style: FPersistentSheetStyle(...),
   side: FLayout.ltr,
   useSafeArea: false,
   keepAliveOffstage: true,

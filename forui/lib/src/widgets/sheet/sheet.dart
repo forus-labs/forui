@@ -1,22 +1,17 @@
-import 'dart:ui';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/gesture_detector.dart';
 import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
-part 'sheet.design.dart';
-
 @internal
 class Sheet extends StatefulWidget {
-  static AnimationController createAnimationController(TickerProvider vsync, FSheetStyle style) =>
-      AnimationController(duration: style.enterDuration, reverseDuration: style.exitDuration, vsync: vsync);
-
-  static void _onClosing() {}
+  static AnimationController createAnimationController(TickerProvider vsync, FSheetStyle style) => AnimationController(
+    duration: style.motion.expandDuration,
+    reverseDuration: style.motion.collapseDuration,
+    vsync: vsync,
+  );
 
   final AnimationController? controller;
   final Animation<double>? animation;
@@ -29,21 +24,21 @@ class Sheet extends StatefulWidget {
   final bool useSafeArea;
   final WidgetBuilder builder;
   final ValueChanged<Size>? onChange;
-  final VoidCallback onClosing;
+  final VoidCallback? onClosing;
 
   const Sheet({
     required this.controller,
+    required this.animation,
     required this.style,
     required this.side,
     required this.mainAxisMaxRatio,
+    required this.constraints,
     required this.anchorPoint,
+    required this.draggable,
     required this.useSafeArea,
     required this.builder,
-    this.animation,
-    this.constraints = const BoxConstraints(),
-    this.draggable = true,
-    this.onChange,
-    this.onClosing = _onClosing,
+    required this.onChange,
+    required this.onClosing,
     super.key,
   }) : assert(!draggable || controller != null, 'Draggable sheets must have a controller');
 
@@ -73,13 +68,14 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   final GlobalKey _key = GlobalKey(debugLabel: 'Sheet child');
   late AnimationController _controller;
   late Animation<double> _animation;
-  ParametricCurve<double> _curve = Curves.easeOutCubic;
+  late ParametricCurve<double> _curve;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
     _animation = widget.animation ?? _controller.view;
+    _curve = widget.style.motion.curve;
   }
 
   @override
@@ -91,6 +87,8 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       }
 
       _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
+      _animation = widget.animation ?? _controller.view;
+      _curve = widget.style.motion.curve;
     }
   }
 
@@ -115,7 +113,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
             key: _key,
             onNotification: (notification) {
               if (notification.extent == notification.minExtent && notification.shouldCloseOnMinExtent) {
-                widget.onClosing();
+                widget.onClosing?.call();
               }
               return false;
             },
@@ -129,6 +127,8 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       sheet = SheetGestureDetector(
         layout: widget.side,
         // Allow the sheet to track the user's finger accurately.
+        // This cannot be done inside the Sheet widget itself since doing that will interfere with the expansion and
+        // collapse animations when initially entering the screen and when dismissing the sheet without dragging.
         onStart: (_) => _curve = Curves.linear,
         onUpdate: _dragUpdate,
         onEnd: _dragEnd,
@@ -227,9 +227,9 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       }
 
       // Allow the sheet to animate smoothly from its current position.
-      _curve = Split(_animation.value);
+      _curve = Split(_animation.value, endCurve: widget.style.motion.curve);
       if (closing) {
-        widget.onClosing();
+        widget.onClosing?.call();
       }
     };
   }
@@ -252,45 +252,41 @@ extension on GlobalKey {
 }
 
 /// A sheet's style.
-class FSheetStyle with Diagnosticable, _$FSheetStyleFunctions {
-  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
-  @override
-  final ImageFilter Function(double animation)? barrierFilter;
-
-  /// The entrance duration. Defaults to 200ms.
-  @override
-  final Duration enterDuration;
-
-  /// The exit duration. Defaults to 200ms.
-  @override
-  final Duration exitDuration;
-
+abstract class FSheetStyle {
   /// The minimum velocity to initiate a fling. Defaults to 700.
   ///
   /// ## Contract
   /// Throws an [AssertionError] if the value is not positive.
-  @override
   final double flingVelocity;
 
   /// The threshold for determining whether the sheet is closing. Defaults to 0.5.
   ///
   /// ## Contract
   /// Throws an [AssertionError] if the value is not in the range `[0, 1]`.
-  @override
   final double closeProgressThreshold;
 
   /// Creates a [FSheetStyle].
-  const FSheetStyle({
-    this.barrierFilter,
-    this.enterDuration = const Duration(milliseconds: 200),
-    this.exitDuration = const Duration(milliseconds: 200),
-    this.flingVelocity = 700,
-    this.closeProgressThreshold = 0.5,
-  });
+  const FSheetStyle({this.flingVelocity = 700, this.closeProgressThreshold = 0.5});
 
-  /// Creates a [FSheetStyle] that inherits its colors from the given [FColors].
-  FSheetStyle.inherit({required FColors colors})
-    : this(
-        barrierFilter: (v) => ColorFilter.mode(Color.lerp(Colors.transparent, colors.barrier, v)!, BlendMode.srcOver),
-      );
+  /// The motion-related properties for a sheet.
+  FSheetMotion get motion;
+}
+
+/// The motion-related properties for a sheet.
+abstract class FSheetMotion {
+  /// The duration of the sheet's expansion animation. Defaults to 200ms.
+  final Duration expandDuration;
+
+  /// The duration of the sheet's collapsing animation. Defaults to 200ms.
+  final Duration collapseDuration;
+
+  /// The curve of the sheet's expansion and collapse. Defaults to [Curves.easeOutCubic].
+  final Curve curve;
+
+  /// Creates a [FSheetMotion].
+  const FSheetMotion({
+    this.expandDuration = const Duration(milliseconds: 200),
+    this.collapseDuration = const Duration(milliseconds: 200),
+    this.curve = Curves.easeOutCubic,
+  });
 }
