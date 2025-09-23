@@ -232,15 +232,15 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
             child: Padding(
               padding: _style!.childrenPadding,
               child: AnimatedBuilder(
-                  animation: _fade!,
+                animation: _fade!,
                 builder: (context, child) => FadeTransition(
-                    opacity: _fade!,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: _style!.childrenSpacing,
-                      children: widget.children,
-                    ),
-                  )
+                  opacity: _fade!,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: _style!.childrenSpacing,
+                    children: widget.children,
+                  ),
+                ),
               ),
             ),
           ),
