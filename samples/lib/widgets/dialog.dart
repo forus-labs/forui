@@ -55,7 +55,7 @@ class BlurredDialogPage extends Sample {
       mainAxisSize: MainAxisSize.min,
       onPress: () => showFDialog(
         context: context,
-        style: context.theme.dialogStyle.copyWith(
+        routeStyle: context.theme.dialogRouteStyle.copyWith(
           barrierFilter: (animation) => ImageFilter.compose(
             outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
             inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),

@@ -1,8 +1,15 @@
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:meta/meta.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
+
+part 'modal_sheet.design.dart';
 
 /// Shows a modal sheet that appears from the given [side].
 ///
@@ -23,6 +30,11 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 /// i.e. [ListView], along the main axis, to have the sheet be draggable.
 ///
 /// [barrierLabel] defaults to [FLocalizations.barrierLabel].
+///
+/// [transitionAnimationController] can be used to provide a custom [AnimationController] for the sheet's entrance and
+/// exit. Passing a controller will override [FSheetMotion.expandDuration] and [FSheetMotion.collapseDuration].
+///
+/// [onClosing] is called when the sheet begins to close, before the route is popped.
 ///
 /// Returns a `Future` that resolves to the value (if any) that was passed to [Navigator.pop] when the modal sheet was
 /// closed.
@@ -46,7 +58,7 @@ Future<T?> showFSheet<T>({
   required WidgetBuilder builder,
   required FLayout side,
   bool useRootNavigator = false,
-  FSheetStyle Function(FSheetStyle style)? style,
+  FModalSheetStyle Function(FModalSheetStyle style)? style,
   double? mainAxisMaxRatio = 9 / 16,
   String? barrierLabel,
   bool barrierDismissible = true,
@@ -56,6 +68,7 @@ Future<T?> showFSheet<T>({
   AnimationController? transitionAnimationController,
   Offset? anchorPoint,
   bool useSafeArea = false,
+  VoidCallback? onClosing,
 }) {
   assert(debugCheckHasMediaQuery(context));
 
@@ -64,7 +77,7 @@ Future<T?> showFSheet<T>({
 
   return navigator.push(
     FModalSheetRoute<T>(
-      style: style?.call(context.theme.sheetStyle) ?? context.theme.sheetStyle,
+      style: style?.call(context.theme.modalSheetStyle) ?? context.theme.modalSheetStyle,
       side: side,
       builder: builder,
       mainAxisMaxRatio: mainAxisMaxRatio,
@@ -78,6 +91,7 @@ Future<T?> showFSheet<T>({
       transitionAnimationController: transitionAnimationController,
       anchorPoint: anchorPoint,
       useSafeArea: useSafeArea,
+      onClosing: onClosing,
     ),
   );
 }
@@ -101,7 +115,7 @@ Future<T?> showFSheet<T>({
 /// This is based on Material's `ModalBottomSheetRoute`.
 class FModalSheetRoute<T> extends PopupRoute<T> {
   /// The style.
-  final FSheetStyle style;
+  final FModalSheetStyle style;
 
   /// The side.
   final FLayout side;
@@ -170,6 +184,9 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   /// A builder for the contents of the sheet.
   final WidgetBuilder builder;
 
+  /// Called when the sheet begins to close, before the route is popped.
+  final VoidCallback? onClosing;
+
   @override
   final String? barrierLabel;
 
@@ -195,6 +212,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
     this.transitionAnimationController,
     this.anchorPoint,
     this.useSafeArea = false,
+    this.onClosing,
     super.settings,
   });
 
@@ -230,6 +248,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
         FLayout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
       }),
       onClosing: () {
+        onClosing?.call();
         if (isCurrent) {
           Navigator.pop(context);
         }
@@ -288,16 +307,56 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
     return true;
   }
 
-  /// Defaults to [Curves.easeOutCubic].
-  @override
-  Curve get barrierCurve => Curves.easeOutCubic;
-
+  /// Always returns [Colors.transparent] and is not used by [FModalSheetRoute].
   @override
   Color get barrierColor => Colors.transparent;
 
   @override
-  Duration get transitionDuration => style.enterDuration;
+  Curve get barrierCurve => style.motion.barrierCurve;
 
   @override
-  Duration get reverseTransitionDuration => style.exitDuration;
+  Duration get transitionDuration => style.motion.expandDuration;
+
+  @override
+  Duration get reverseTransitionDuration => style.motion.collapseDuration;
+}
+
+/// A modal sheet's style.
+class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetStyleFunctions {
+  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
+  @override
+  final ImageFilter Function(double animation)? barrierFilter;
+
+  /// The motion-related properties for a modal sheet.
+  @override
+  final FModalSheetMotion motion;
+
+  /// Creates a [FSheetStyle].
+  const FModalSheetStyle({
+    this.barrierFilter,
+    this.motion = const FModalSheetMotion(),
+    super.flingVelocity,
+    super.closeProgressThreshold,
+  });
+
+  /// Creates a [FSheetStyle] that inherits its colors from the given [FColors].
+  FModalSheetStyle.inherit({required FColors colors})
+    : this(
+        barrierFilter: (v) => ColorFilter.mode(Color.lerp(Colors.transparent, colors.barrier, v)!, BlendMode.srcOver),
+      );
+}
+
+/// The motion-related properties for a modal sheet.
+class FModalSheetMotion extends FSheetMotion with Diagnosticable, _$FModalSheetMotionFunctions {
+  /// The barrier's curve. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve barrierCurve;
+
+  /// Creates a [FModalSheetMotion].
+  const FModalSheetMotion({
+    this.barrierCurve = Curves.easeOutCubic,
+    super.expandDuration,
+    super.collapseDuration,
+    super.curve,
+  });
 }

@@ -41,7 +41,7 @@ class ToasterStack extends StatefulWidget {
 class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderStateMixin {
   final ValueNotifier<Swipe> _swiping = ValueNotifier(const Unswiped());
   late AnimationController _controller;
-  late Animation<double> _expand;
+  late CurvedAnimation _expand;
   bool _autoDismiss = true;
   bool _hovered = false;
   int _monotonic = 0;
@@ -49,9 +49,16 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: widget.style.expandDuration)
-      ..addListener(() => setState(() {}));
-    _expand = _controller.drive(CurveTween(curve: widget.style.expandCurve));
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.style.motion.expandDuration,
+      reverseDuration: widget.style.motion.collapseDuration,
+    )..addListener(() => setState(() {}));
+    _expand = CurvedAnimation(
+      parent: _controller,
+      curve: widget.style.motion.expandCurve,
+      reverseCurve: widget.style.motion.collapseCurve,
+    );
     _swiping.addListener(_collapseAfterSwipe);
 
     if (widget.style.expandBehavior == FToasterExpandBehavior.always) {
@@ -64,9 +71,15 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
     super.didUpdateWidget(old);
     if (old.style != widget.style) {
       _controller
-        ..duration = widget.style.expandDuration
+        ..duration = widget.style.motion.expandDuration
+        ..reverseDuration = widget.style.motion.collapseDuration
         ..value = 0;
-      _expand = _controller.drive(CurveTween(curve: widget.style.expandCurve));
+      _expand.dispose();
+      _expand = CurvedAnimation(
+        parent: _controller,
+        curve: widget.style.motion.expandCurve,
+        reverseCurve: widget.style.motion.collapseCurve,
+      );
     }
 
     if (widget.style.expandBehavior != old.style.expandBehavior) {
@@ -94,6 +107,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
   @override
   void dispose() {
     _swiping.dispose();
+    _expand.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -194,6 +208,7 @@ sealed class Swipe {
   Swipe exit() => this;
 }
 
+/// A toast is not being swiped, initial state.
 @internal
 class Unswiped extends Swipe {
   const Unswiped();
@@ -202,6 +217,7 @@ class Unswiped extends Swipe {
   Swipe start() => const InternalSwipe();
 }
 
+/// A toast is being swiped internally, i.e. within the toast region.
 @internal
 class InternalSwipe extends Swipe {
   const InternalSwipe();
@@ -213,6 +229,7 @@ class InternalSwipe extends Swipe {
   Swipe exit() => const ExternalSwipe();
 }
 
+/// A toast is being swiped externally, i.e. outside the toast region.
 @internal
 class ExternalSwipe extends Swipe {
   const ExternalSwipe();
@@ -224,6 +241,7 @@ class ExternalSwipe extends Swipe {
   Swipe enter() => const InternalSwipe();
 }
 
+/// A toast has been swiped externally, and the swipe has ended outside the toast region.
 @internal
 class ExternalEndSwipe extends Swipe {
   const ExternalEndSwipe();

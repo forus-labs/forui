@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -99,14 +98,15 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   static const _vertical = [AxisDirection.up, AxisDirection.down];
 
   Timer? _timer;
-  late final AnimationController _entranceExitController;
-  late CurvedAnimation _entranceExit;
+  late final AnimationController _entranceDismissController;
   late final AnimationController _transitionController;
-  late CurvedAnimation _transition;
   late final AnimationController _visibleController;
-  late CurvedAnimation _visible;
   late final AnimationController _swipeCompletionController;
+  late CurvedAnimation _curvedEntranceDismiss;
+  late CurvedAnimation _transition;
+  late CurvedAnimation _visible;
   late CurvedAnimation _swipeCompletion;
+  late Animation<double> _entranceDismiss;
 
   /// The current offset of the toast when swiping, normalized as a fraction of the toast's height/width. It is always
   /// in the range [-1, 1].
@@ -126,38 +126,53 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     super.initState();
     widget.dismissing.addListener(_startDismissing);
     if (widget.dismissing.value) {
-      _entranceExitController.value = 1;
+      _entranceDismissController.value = 1;
     }
 
     if (widget.duration case final duration?) {
       _timer = Timer(duration, _startDismissing);
     }
 
-    _entranceExitController = AnimationController(vsync: this, duration: widget.style.enterExitDuration)
-      ..forward()
-      ..addListener(() => setState(() {}))
-      ..addStatusListener(_dismiss);
-    _entranceExit = CurvedAnimation(
-      parent: _entranceExitController,
-      curve: widget.style.enterCurve,
-      reverseCurve: widget.style.exitCurve,
-    );
-
-    _transitionController = AnimationController(vsync: this, duration: widget.style.transitionDuration)
+    _entranceDismissController =
+        AnimationController(
+            vsync: this,
+            duration: widget.style.motion.entranceDuration,
+            reverseDuration: widget.style.motion.dismissDuration,
+          )
+          ..forward()
+          ..addListener(() => setState(() {}))
+          ..addStatusListener(_dismiss);
+    _transitionController = AnimationController(vsync: this, duration: widget.style.motion.transitionDuration)
       ..forward()
       ..addListener(() => setState(() {}));
-    _transition = CurvedAnimation(parent: _transitionController, curve: widget.style.transitionCurve);
-    _transitionController.forward();
-
-    _visibleController = AnimationController(vsync: this, duration: widget.style.transitionDuration)
-      ..value = widget.visible ? 1 : 0
-      ..addListener(() => setState(() {}));
-    _visible = CurvedAnimation(parent: _visibleController, curve: widget.style.transitionCurve);
-
-    _swipeCompletionController = AnimationController(vsync: this, duration: widget.style.swipeCompletionDuration)
+    _visibleController =
+        AnimationController(
+            vsync: this,
+            duration: widget.style.motion.reentranceDuration,
+            reverseDuration: widget.style.motion.exitDuration,
+          )
+          ..value = widget.visible ? 1 : 0
+          ..addListener(() => setState(() {}));
+    _swipeCompletionController = AnimationController(vsync: this, duration: widget.style.motion.swipeCompletionDuration)
       ..addListener(() => setState(() {}))
       ..addStatusListener(_completeSwipe);
-    _swipeCompletion = CurvedAnimation(parent: _swipeCompletionController, curve: widget.style.swipeCompletionCurve);
+
+    _curvedEntranceDismiss = CurvedAnimation(
+      parent: _entranceDismissController,
+      curve: widget.style.motion.entranceCurve,
+      reverseCurve: widget.style.motion.dismissCurve,
+    );
+    _transition = CurvedAnimation(parent: _transitionController, curve: widget.style.motion.transitionCurve);
+    _visible = CurvedAnimation(
+      parent: _visibleController,
+      curve: widget.style.motion.reentranceCurve,
+      reverseCurve: widget.style.motion.exitCurve,
+    );
+    _swipeCompletion = CurvedAnimation(
+      parent: _swipeCompletionController,
+      curve: widget.style.motion.swipeCompletionCurve,
+    );
+    _entranceDismiss = widget.style.motion.entranceDismissFadeTween.animate(_curvedEntranceDismiss);
   }
 
   @override
@@ -169,15 +184,25 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     }
 
     if (widget.style != old.style) {
-      _entranceExitController.duration = widget.style.enterExitDuration;
-      _entranceExit = CurvedAnimation(
-        parent: _entranceExitController,
-        curve: widget.style.enterCurve,
-        reverseCurve: widget.style.exitCurve,
+      _entranceDismissController
+        ..duration = widget.style.motion.entranceDuration
+        ..reverseDuration = widget.style.motion.dismissDuration;
+      _transitionController
+        ..duration = widget.style.motion.reentranceDuration
+        ..reverseDuration = widget.style.motion.exitDuration;
+
+      _curvedEntranceDismiss = CurvedAnimation(
+        parent: _entranceDismissController,
+        curve: widget.style.motion.entranceCurve,
+        reverseCurve: widget.style.motion.dismissCurve,
+      );
+      _transition = CurvedAnimation(
+        parent: _transitionController,
+        curve: widget.style.motion.reentranceCurve,
+        reverseCurve: widget.style.motion.exitCurve,
       );
 
-      _transitionController.duration = widget.style.transitionDuration;
-      _transition = CurvedAnimation(parent: _transitionController, curve: widget.style.transitionCurve);
+      _entranceDismiss = widget.style.motion.entranceDismissFadeTween.animate(_curvedEntranceDismiss);
 
       _signal++;
     }
@@ -218,7 +243,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     }
   }
 
-  void _startDismissing() => _entranceExitController.reverse();
+  void _startDismissing() => _entranceDismissController.reverse();
 
   void _resumeDismissing([Duration stagger = Duration.zero]) {
     if (widget.duration case final duration?) {
@@ -242,8 +267,8 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     _visibleController.dispose();
     _transition.dispose();
     _transitionController.dispose();
-    _entranceExit.dispose();
-    _entranceExitController.dispose();
+    _curvedEntranceDismiss.dispose();
+    _entranceDismissController.dispose();
     _timer?.cancel();
     super.dispose();
   }
@@ -251,12 +276,12 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     // Slide in & out during entrance & exit.
-    var translation = -widget.alignTransform * (1.0 - _entranceExit.value);
+    var translation = -widget.alignTransform * (1.0 - _curvedEntranceDismiss.value);
     // Slide out during swiping to dismiss.
     translation += Offset.lerp(_swipeFraction, _swipeFractionEnd, _swipeCompletion.value)!;
 
     // Gradually increase & decrease opacity during entrance & exit.
-    var opacity = lerpDouble(widget.style.entranceExitOpacity, 1.0, _entranceExit.value)! * _visible.value;
+    var opacity = _entranceDismiss.value * _visible.value;
     // Gradually decrease opacity during swiping to dismiss.
     opacity *= 1 - _swipeFraction.distance.abs();
 

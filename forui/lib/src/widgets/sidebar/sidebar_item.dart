@@ -104,8 +104,12 @@ class FSidebarItem extends StatefulWidget {
 class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMixin {
   FSidebarItemStyle? _style;
   AnimationController? _controller;
-  CurvedAnimation? _curvedAnimation;
-  Animation<double>? _icon;
+  CurvedAnimation? _curvedReveal;
+  CurvedAnimation? _curvedFade;
+  CurvedAnimation? _curvedIconRotation;
+  Animation<double>? _reveal;
+  Animation<double>? _fade;
+  Animation<double>? _iconRotation;
   late bool _expanded;
 
   @override
@@ -137,28 +141,39 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
 
     if (_style != style) {
       _style = style;
-
-      _curvedAnimation?.dispose();
+      _curvedIconRotation?.dispose();
+      _curvedFade?.dispose();
+      _curvedReveal?.dispose();
       _controller?.dispose();
 
       _controller = AnimationController(
         vsync: this,
         value: _expanded ? 1.0 : 0.0,
-        duration: style.expandDuration,
-        reverseDuration: style.collapseDuration,
+        duration: style.motion.expandDuration,
+        reverseDuration: style.motion.collapseDuration,
       );
-      _curvedAnimation = CurvedAnimation(
+      _curvedReveal = CurvedAnimation(
+        curve: style.motion.expandCurve,
+        reverseCurve: style.motion.collapseCurve,
         parent: _controller!,
-        curve: style.expandCurve,
-        reverseCurve: style.collapseCurve,
       );
-      _icon = Tween<double>(begin: 0.0, end: 0.25).animate(_curvedAnimation!);
+      _curvedFade = CurvedAnimation(curve: Curves.easeIn, reverseCurve: Curves.easeOut, parent: _controller!);
+      _curvedIconRotation = CurvedAnimation(
+        curve: style.motion.iconExpandCurve,
+        reverseCurve: style.motion.iconCollapseCurve,
+        parent: _controller!,
+      );
+      _reveal = style.motion.revealTween.animate(_curvedReveal!);
+      _fade = style.motion.fadeTween.animate(_curvedFade!);
+      _iconRotation = style.motion.iconTween.animate(_curvedIconRotation!);
     }
   }
 
   @override
   void dispose() {
-    _curvedAnimation?.dispose();
+    _curvedIconRotation?.dispose();
+    _curvedFade?.dispose();
+    _curvedReveal?.dispose();
     _controller?.dispose();
     super.dispose();
   }
@@ -204,7 +219,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
               if (widget.children.isNotEmpty)
                 IconTheme(
                   data: _style!.collapsibleIconStyle.resolve(states),
-                  child: RotationTransition(turns: _icon!, child: const Icon(FIcons.chevronRight)),
+                  child: RotationTransition(turns: _iconRotation!, child: const Icon(FIcons.chevronRight)),
                 ),
             ],
           ),
@@ -212,17 +227,20 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
       ),
       if (widget.children.isNotEmpty)
         AnimatedBuilder(
-          animation: _curvedAnimation!,
+          animation: _reveal!,
           builder: (_, _) => FCollapsible(
-            value: _curvedAnimation!.value,
+            value: _reveal!.value,
             child: Padding(
               padding: _style!.childrenPadding,
-              child: FadeTransition(
-                opacity: _curvedAnimation!,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: _style!.childrenSpacing,
-                  children: widget.children,
+              child: AnimatedBuilder(
+                animation: _fade!,
+                builder: (context, child) => FadeTransition(
+                  opacity: _fade!,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: _style!.childrenSpacing,
+                    children: widget.children,
+                  ),
                 ),
               ),
             ),
@@ -265,22 +283,6 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FWidgetStateMap<IconThemeData> collapsibleIconStyle;
 
-  /// The expand animation's duration. Defaults to 200ms.
-  @override
-  final Duration expandDuration;
-
-  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
-
-  /// The collapse animation's duration. Defaults to 150ms.
-  @override
-  final Duration collapseDuration;
-
-  /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
-  @override
-  final Curve collapseCurve;
-
   /// The spacing between child items. Defaults to 2.
   @override
   final double childrenSpacing;
@@ -311,6 +313,10 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
+  /// The motion-related properties.
+  @override
+  final FSidebarItemMotion motion;
+
   /// Creates a [FSidebarItemStyle].
   const FSidebarItemStyle({
     required this.textStyle,
@@ -322,13 +328,10 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
     required this.focusedOutlineStyle,
     this.iconSpacing = 8,
     this.collapsibleIconSpacing = 8,
-    this.expandDuration = const Duration(milliseconds: 200),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseDuration = const Duration(milliseconds: 150),
-    this.collapseCurve = Curves.easeInCubic,
     this.childrenSpacing = 2,
     this.childrenPadding = const EdgeInsets.only(left: 26, top: 2),
     this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    this.motion = const FSidebarItemMotion(),
   });
 
   /// Creates a [FSidebarItemStyle] that inherits its properties.
@@ -363,4 +366,66 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: 0),
       );
+}
+
+/// The motion-related properties for a [FSidebarItem].
+class FSidebarItemMotion with Diagnosticable, _$FSidebarItemMotionFunctions {
+  /// The expand animation's duration. Defaults to 200ms.
+  @override
+  final Duration expandDuration;
+
+  /// The collapse animation's duration. Defaults to 150ms.
+  @override
+  final Duration collapseDuration;
+
+  /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve expandCurve;
+
+  /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
+  @override
+  final Curve collapseCurve;
+
+  /// The fade-in animation's curve. Defaults to [Curves.linear].
+  @override
+  final Curve fadeInCurve;
+
+  /// The fade-out animation's curve. Defaults to [Curves.linear].
+  @override
+  final Curve fadeOutCurve;
+
+  /// The icon's animation curve when expanding. Defaults to [Curves.easeOut].
+  @override
+  final Curve iconExpandCurve;
+
+  /// The icon's animation curve when collapsing. Defaults to [Curves.easeOut].
+  @override
+  final Curve iconCollapseCurve;
+
+  /// The reveal animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 1.0)`.
+  @override
+  final Animatable<double> revealTween;
+
+  /// The fade animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 1.0)`.
+  @override
+  final Animatable<double> fadeTween;
+
+  /// The icon animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 0.25)`.
+  @override
+  final Animatable<double> iconTween;
+
+  /// Creates a [FSidebarItemMotion].
+  const FSidebarItemMotion({
+    this.expandDuration = const Duration(milliseconds: 200),
+    this.collapseDuration = const Duration(milliseconds: 150),
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseCurve = Curves.easeInCubic,
+    this.fadeInCurve = Curves.linear,
+    this.fadeOutCurve = Curves.linear,
+    this.iconExpandCurve = Curves.easeOut,
+    this.iconCollapseCurve = Curves.easeOut,
+    this.revealTween = const FImmutableTween(begin: 0.0, end: 1.0),
+    this.fadeTween = const FImmutableTween(begin: 0.0, end: 1.0),
+    this.iconTween = const FImmutableTween(begin: 0.0, end: 0.25),
+  });
 }

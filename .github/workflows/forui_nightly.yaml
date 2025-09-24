@@ -4,9 +4,6 @@ on:
   workflow_dispatch: {}
   push:
     branches: [ main ]
-    paths:
-      - forui_nightly.yaml
-      - forui/**
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

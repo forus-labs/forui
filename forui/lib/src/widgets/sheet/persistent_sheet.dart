@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
@@ -9,6 +10,8 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
+
+part 'persistent_sheet.design.dart';
 
 /// Shows a persistent sheet that appears above the current widget. It should have a [FSheets] or [FScaffold] ancestor.
 ///
@@ -32,6 +35,8 @@ import 'package:forui/src/widgets/sheet/sheet.dart';
 /// [keepAliveOffstage] determines whether the sheet should be kept alive even when it is offstage. Setting it to true
 /// retains the sheet's state even when it is not visible. Defaults to false. Keeping multiple sheets alive even when
 /// offstage can negatively impact performance.
+///
+/// [onClosing] is called when the sheet begins to close.
 ///
 /// [key] is used to identify the sheet. If a key is not provided, a random key will be generated. All sheets in a
 /// [FScaffold]/[FSheets] must have unique keys.
@@ -59,13 +64,14 @@ FPersistentSheetController showFPersistentSheet({
   required BuildContext context,
   required FLayout side,
   required Widget Function(BuildContext context, FPersistentSheetController controller) builder,
-  FSheetStyle Function(FSheetStyle)? style,
+  FPersistentSheetStyle Function(FPersistentSheetStyle)? style,
   double? mainAxisMaxRatio = 9 / 16,
   BoxConstraints constraints = const BoxConstraints(),
   bool draggable = true,
   Offset? anchorPoint,
   bool useSafeArea = false,
   bool keepAliveOffstage = false,
+  VoidCallback? onClosing,
   Key? key,
 }) {
   final state = context.findAncestorStateOfType<FSheetsState>();
@@ -86,7 +92,7 @@ FPersistentSheetController showFPersistentSheet({
   }
 
   key ??= ValueKey(Random().nextInt(2147483647));
-  final sheetStyle = style?.call(context.theme.sheetStyle) ?? context.theme.sheetStyle;
+  final sheetStyle = style?.call(context.theme.persistentSheetStyle) ?? context.theme.persistentSheetStyle;
 
   final controller = FPersistentSheetController._(
     vsync: state,
@@ -107,6 +113,7 @@ FPersistentSheetController showFPersistentSheet({
       controller,
       Sheet(
         controller: controller._controller,
+        animation: null,
         style: sheetStyle,
         side: side,
         mainAxisMaxRatio: mainAxisMaxRatio,
@@ -115,6 +122,8 @@ FPersistentSheetController showFPersistentSheet({
         anchorPoint: anchorPoint,
         useSafeArea: useSafeArea,
         builder: (context) => builder(context, controller),
+        onChange: null,
+        onClosing: onClosing,
       ),
     );
   } catch (_) {
@@ -278,4 +287,24 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('sheets', sheets));
   }
+}
+
+/// A persistent sheet's style.
+class FPersistentSheetStyle extends FSheetStyle with Diagnosticable, _$FPersistentSheetStyleFunctions {
+  /// The motion-related properties for a persistent sheet.
+  @override
+  final FPersistentSheetMotion motion;
+
+  /// Creates a [FSheetStyle].
+  const FPersistentSheetStyle({
+    this.motion = const FPersistentSheetMotion(),
+    super.flingVelocity,
+    super.closeProgressThreshold,
+  });
+}
+
+/// The motion-related properties for a persistent sheet.
+class FPersistentSheetMotion extends FSheetMotion with Diagnosticable, _$FPersistentSheetMotionFunctions {
+  /// Creates a [FPersistentSheetMotion].
+  const FPersistentSheetMotion({super.expandDuration, super.collapseDuration, super.curve});
 }

@@ -3,24 +3,27 @@ part of 'tabs.dart';
 /// A controller that controls selection in a [FTabs].
 final class FTabController extends FChangeNotifier {
   final TabController _controller;
+  final Curve _curve;
 
   /// Creates a [FTabController].
   FTabController({
     required int length,
     required TickerProvider vsync,
     int initialIndex = 0,
-    Duration? animationDuration,
+    FTabMotion motion = const FTabMotion(),
   }) : _controller = TabController(
          initialIndex: initialIndex,
          length: length,
-         animationDuration: animationDuration,
+         animationDuration: motion.duration,
          vsync: vsync,
-       );
+       ),
+       _curve = motion.curve;
 
   /// Animates to the given [index].
-  void animateTo(int index, {Duration? duration, Curve curve = Curves.ease}) {
-    _controller.animateTo(index, duration: duration, curve: curve);
-  }
+  ///
+  /// [curve] defaults to the [FTabMotion.curve] if not provided.
+  void animateTo(int index, {Duration? duration, Curve? curve}) =>
+      _controller.animateTo(index, duration: duration, curve: curve ?? _curve);
 
   @override
   void addListener(VoidCallback listener) => _controller.addListener(listener);
@@ -47,4 +50,18 @@ final class FTabController extends FChangeNotifier {
     _controller.dispose();
     super.dispose();
   }
+}
+
+/// Motion-related properties for [FTabs].
+class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
+  /// The duration of the tab change animation. Defaults to 300 ms.
+  @override
+  final Duration duration;
+
+  /// The curve of the tab change animation. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve curve;
+
+  /// Creates a [FTabMotion].
+  const FTabMotion({this.duration = const Duration(milliseconds: 300), this.curve = Curves.easeOutCubic});
 }

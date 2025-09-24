@@ -13,12 +13,23 @@ We've improved the styles' generated documentation. They should be much easier t
 
 ### `FAutocomplete`
 
+* Add `FAutocompletController(popoverMotion: ...)`.
 * **Breaking** Change `FAutocompleteContentStyle.loadingIndicatorStyle` to `FAutocompleteContentStyle.progressStyle`.
 
 
 ### `FDateField`
 
 * **Breaking** Replace `FDateFieldController(animationDuration: ...)` with `FDateFieldController(popoverMotion: ...)`.
+
+
+### `FDialog`
+* Add `FDialogRouteStyle`.
+* Add `FDialogRouteMotion`.
+* Add `showFDialog(routeStyle: ...)`.
+* Add `FDialogMotion`.
+
+* **Breaking** Move barrier related fields from `FDialogStyle` to `FDialogRouteStyle`.
+* **Breaking** Move animation related fields from `FDialogStyle` to `FDialogMotion`.
 
 
 ### `FPopover` & `FPopoverMenu`
@@ -48,17 +59,41 @@ We've reworked `FProgress` to be more customizable and easier to use.
 * **Breaking** Replace `FMultiSelectController(animationDuration: ...)` with `FMultiSelectController(popoverMotion: ...)`.
 
 
+### `FSheet`
+
+* Add `FModalSheetStyle`.
+* Add `FPersistentSheetStyle`.
+* Add `FSheetMotion`.
+* Add `FModalSheetMotion`.
+* Add `FPersistentSheetMotion`.
+* Add `FModalSheet(onClosing: ...)`.
+* Add `FPersistentSheet(onClosing: ...)`.
+
+* **Breaking** Split `FSheetStyle` into `FModalSheetStyle` and `FPersistentSheetStyle`.
+* **Breaking** Move animation related fields from `FSheetStyle` to `FSheetMotion`.
+
+
+### `FSidebar`
+
+* Add `FSidebarItemMotion`.
+* **Breaking** Move animation related fields from `FSiderbarItemStyle` to `FSiderbarItemMotion`.
+
+
+### `FSlider`
+
+* Add `FSliderStyle.tooltipMotion`.
+
+
+### `FTab`
+
+* Add `FTabMotion`.
+* **Breaking** Replace `FTabController(animationDuration: ...)` with `FTabController(motion: ...)`.
+
+
 ### `FTappable`
 
 * Add `FTappableMotion`.
 * **Breaking** Move animation related fields from `FTappableStyle` to `FTappableMotion`.
-
-
-### `FThemeData`
-We've added support for animated theme transitions. This should make transitions between themes gradual instead of abrupt.
-
-* Add `FThemeData.lerp(...)`.
-* Change `FThemeData.copyWith(...)` to accept style builder functions.
 
 
 ### `FTextField` & `FTextFormField`
@@ -68,9 +103,28 @@ We've added a password visibility toggle to password fields.
 * Add password visibility toggle to `FTextFormField.password(...)`.
 
 
+### `FThemeData`
+We've added support for animated theme transitions. This should make transitions between themes gradual instead of abrupt.
+
+* Add `FThemeData.lerp(...)`.
+* Change `FThemeData.copyWith(...)` to accept style builder functions.
+
+
 ### `FTimeField`
 
 * **Breaking** Replace `FTimeFieldController(animationDuration: ...)` with `FTimeFieldController(popoverMotion: ...)`.
+
+
+### `FToast`
+
+* Add `FToastMotion`.
+* Add `FToasterMotion`.
+
+* Change animation to be more subtle.
+* **Breaking** Move animation related fields from `FToastStyle` to `FToastMotion`.
+* **Breaking** Move animation related fields from `FToasterStyle` to `FToasterMotion`.
+
+* Remove no-op `FToast.onDismiss` parameter that was accidentally included.
 
 
 ### `FTooltip`
@@ -85,6 +139,7 @@ We've added a password visibility toggle to password fields.
 * Add `FWidgetStateMap.lerpIconThemeData(...)`.
 * Add `FWidgetStateMap.lerpTextStyle(...)`.
 * Add `FWidgetStateMap.lerpWhere(...)`.
+
 
 ### `FToaster`
 * Add `FToaster.of(...)`.

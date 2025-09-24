@@ -197,6 +197,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FDeterminateProgressStyle determinateProgressStyle;
 
+  /// The dialog route's style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create dialog-route
+  /// ```
+  @override
+  final FDialogRouteStyle dialogRouteStyle;
+
   /// The dialog style.
   ///
   /// ## CLI
@@ -282,6 +293,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FMultiSelectStyle multiSelectStyle;
 
+  /// The modal sheet style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create modal-sheet
+  /// ```
+  @override
+  final FModalSheetStyle modalSheetStyle;
+
   /// The pagination style.
   ///
   /// ## CLI
@@ -292,6 +314,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```
   @override
   final FPaginationStyle paginationStyle;
+
+  /// The persistent sheet style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create persistent-sheet
+  /// ```
+  @override
+  final FPersistentSheetStyle persistentSheetStyle;
 
   /// The picker's style.
   ///
@@ -402,17 +435,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```
   @override
   final FSelectMenuTileStyle selectMenuTileStyle;
-
-  /// The sheet style.
-  ///
-  /// ## CLI
-  /// To generate and customize this style:
-  ///
-  /// ```shell
-  /// dart run forui style create sheet
-  /// ```
-  @override
-  final FSheetStyle sheetStyle;
 
   /// The sidebar style.
   ///
@@ -569,6 +591,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FCircularProgressStyle? circularProgressStyle,
     FDateFieldStyle? dateFieldStyle,
     FDeterminateProgressStyle? determinateProgressStyle,
+    FDialogRouteStyle? dialogRouteStyle,
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyles,
@@ -577,7 +600,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
     FMultiSelectStyle? multiSelectStyle,
+    FModalSheetStyle? modalSheetStyle,
     FPaginationStyle? paginationStyle,
+    FPersistentSheetStyle? persistentSheetStyle,
     FPickerStyle? pickerStyle,
     FPopoverStyle? popoverStyle,
     FPopoverMenuStyle? popoverMenuStyle,
@@ -588,7 +613,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FSelectStyle? selectStyle,
     FSelectGroupStyle? selectGroupStyle,
     FSelectMenuTileStyle? selectMenuTileStyle,
-    FSheetStyle? sheetStyle,
     FSidebarStyle? sidebarStyle,
     FSliderStyles? sliderStyles,
     FToasterStyle? toasterStyle,
@@ -630,6 +654,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, typography: typography, style: style),
       determinateProgressStyle:
           determinateProgressStyle ?? FDeterminateProgressStyle.inherit(colors: colors, style: style),
+      dialogRouteStyle: dialogRouteStyle ?? FDialogRouteStyle.inherit(colors: colors),
       dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
       dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
       headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
@@ -640,8 +665,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
       multiSelectStyle:
           multiSelectStyle ?? FMultiSelectStyle.inherit(colors: colors, typography: typography, style: style),
+      modalSheetStyle: modalSheetStyle ?? FModalSheetStyle.inherit(colors: colors),
       paginationStyle:
           paginationStyle ?? FPaginationStyle.inherit(colors: colors, typography: typography, style: style),
+      persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),
       pickerStyle: pickerStyle ?? FPickerStyle.inherit(colors: colors, style: style, typography: typography),
       popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colors: colors, style: style),
       popoverMenuStyle:
@@ -655,7 +682,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           selectGroupStyle ?? FSelectGroupStyle.inherit(colors: colors, typography: typography, style: style),
       selectMenuTileStyle:
           selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(colors: colors, typography: typography, style: style),
-      sheetStyle: sheetStyle ?? FSheetStyle.inherit(colors: colors),
       sidebarStyle: sidebarStyle ?? FSidebarStyle.inherit(colors: colors, typography: typography, style: style),
       sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
       toasterStyle: toasterStyle ?? FToasterStyle.inherit(colors: colors, typography: typography, style: style),
@@ -694,6 +720,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     circularProgressStyle: a.circularProgressStyle.lerp(b.circularProgressStyle, t),
     dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
     determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
+    dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
     dividerStyles: a.dividerStyles.lerp(b.dividerStyles, t),
     headerStyles: a.headerStyles.lerp(b.headerStyles, t),
@@ -702,7 +729,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     labelStyles: a.labelStyles.lerp(b.labelStyles, t),
     lineCalendarStyle: a.lineCalendarStyle.lerp(b.lineCalendarStyle, t),
     multiSelectStyle: a.multiSelectStyle.lerp(b.multiSelectStyle, t),
+    modalSheetStyle: a.modalSheetStyle.lerp(b.modalSheetStyle, t),
     paginationStyle: a.paginationStyle.lerp(b.paginationStyle, t),
+    persistentSheetStyle: a.persistentSheetStyle.lerp(b.persistentSheetStyle, t),
     pickerStyle: a.pickerStyle.lerp(b.pickerStyle, t),
     popoverStyle: a.popoverStyle.lerp(b.popoverStyle, t),
     popoverMenuStyle: a.popoverMenuStyle.lerp(b.popoverMenuStyle, t),
@@ -713,7 +742,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     selectStyle: a.selectStyle.lerp(b.selectStyle, t),
     selectGroupStyle: a.selectGroupStyle.lerp(b.selectGroupStyle, t),
     selectMenuTileStyle: a.selectMenuTileStyle.lerp(b.selectMenuTileStyle, t),
-    sheetStyle: a.sheetStyle.lerp(b.sheetStyle, t),
     sidebarStyle: a.sidebarStyle.lerp(b.sidebarStyle, t),
     sliderStyles: a.sliderStyles.lerp(b.sliderStyles, t),
     toasterStyle: a.toasterStyle.lerp(b.toasterStyle, t),
@@ -752,6 +780,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.circularProgressStyle,
     required this.dateFieldStyle,
     required this.determinateProgressStyle,
+    required this.dialogRouteStyle,
     required this.dialogStyle,
     required this.dividerStyles,
     required this.headerStyles,
@@ -760,7 +789,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.labelStyles,
     required this.lineCalendarStyle,
     required this.multiSelectStyle,
+    required this.modalSheetStyle,
     required this.paginationStyle,
+    required this.persistentSheetStyle,
     required this.pickerStyle,
     required this.popoverStyle,
     required this.popoverMenuStyle,
@@ -771,7 +802,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.selectStyle,
     required this.selectGroupStyle,
     required this.selectMenuTileStyle,
-    required this.sheetStyle,
     required this.sidebarStyle,
     required this.sliderStyles,
     required this.toasterStyle,
@@ -1250,6 +1280,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FCircularProgressStyle Function(FCircularProgressStyle style)? circularProgressStyle,
     FDateFieldStyle Function(FDateFieldStyle style)? dateFieldStyle,
     FDeterminateProgressStyle Function(FDeterminateProgressStyle style)? determinateProgressStyle,
+    FDialogRouteStyle Function(FDialogRouteStyle style)? dialogRouteStyle,
     FDialogStyle Function(FDialogStyle style)? dialogStyle,
     FDividerStyles Function(FDividerStyles style)? dividerStyles,
     FHeaderStyles Function(FHeaderStyles style)? headerStyles,
@@ -1258,7 +1289,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FLabelStyles Function(FLabelStyles style)? labelStyles,
     FLineCalendarStyle Function(FLineCalendarStyle style)? lineCalendarStyle,
     FMultiSelectStyle Function(FMultiSelectStyle style)? multiSelectStyle,
+    FModalSheetStyle Function(FModalSheetStyle style)? modalSheetStyle,
     FPaginationStyle Function(FPaginationStyle style)? paginationStyle,
+    FPersistentSheetStyle Function(FPersistentSheetStyle style)? persistentSheetStyle,
     FPickerStyle Function(FPickerStyle style)? pickerStyle,
     FPopoverStyle Function(FPopoverStyle style)? popoverStyle,
     FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
@@ -1269,7 +1302,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FSelectStyle Function(FSelectStyle style)? selectStyle,
     FSelectGroupStyle Function(FSelectGroupStyle style)? selectGroupStyle,
     FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? selectMenuTileStyle,
-    FSheetStyle Function(FSheetStyle style)? sheetStyle,
     FSidebarStyle Function(FSidebarStyle style)? sidebarStyle,
     FSliderStyles Function(FSliderStyles style)? sliderStyles,
     FToasterStyle Function(FToasterStyle style)? toasterStyle,
@@ -1309,6 +1341,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     determinateProgressStyle: determinateProgressStyle != null
         ? determinateProgressStyle(this.determinateProgressStyle)
         : this.determinateProgressStyle,
+    dialogRouteStyle: dialogRouteStyle != null ? dialogRouteStyle(this.dialogRouteStyle) : this.dialogRouteStyle,
     dialogStyle: dialogStyle != null ? dialogStyle(this.dialogStyle) : this.dialogStyle,
     dividerStyles: dividerStyles != null ? dividerStyles(this.dividerStyles) : this.dividerStyles,
     headerStyles: headerStyles != null ? headerStyles(this.headerStyles) : this.headerStyles,
@@ -1317,7 +1350,11 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     labelStyles: labelStyles != null ? labelStyles(this.labelStyles) : this.labelStyles,
     lineCalendarStyle: lineCalendarStyle != null ? lineCalendarStyle(this.lineCalendarStyle) : this.lineCalendarStyle,
     multiSelectStyle: multiSelectStyle != null ? multiSelectStyle(this.multiSelectStyle) : this.multiSelectStyle,
+    modalSheetStyle: modalSheetStyle != null ? modalSheetStyle(this.modalSheetStyle) : this.modalSheetStyle,
     paginationStyle: paginationStyle != null ? paginationStyle(this.paginationStyle) : this.paginationStyle,
+    persistentSheetStyle: persistentSheetStyle != null
+        ? persistentSheetStyle(this.persistentSheetStyle)
+        : this.persistentSheetStyle,
     pickerStyle: pickerStyle != null ? pickerStyle(this.pickerStyle) : this.pickerStyle,
     popoverStyle: popoverStyle != null ? popoverStyle(this.popoverStyle) : this.popoverStyle,
     popoverMenuStyle: popoverMenuStyle != null ? popoverMenuStyle(this.popoverMenuStyle) : this.popoverMenuStyle,
@@ -1330,7 +1367,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     selectMenuTileStyle: selectMenuTileStyle != null
         ? selectMenuTileStyle(this.selectMenuTileStyle)
         : this.selectMenuTileStyle,
-    sheetStyle: sheetStyle != null ? sheetStyle(this.sheetStyle) : this.sheetStyle,
     sidebarStyle: sidebarStyle != null ? sidebarStyle(this.sidebarStyle) : this.sidebarStyle,
     sliderStyles: sliderStyles != null ? sliderStyles(this.sliderStyles) : this.sliderStyles,
     toasterStyle: toasterStyle != null ? toasterStyle(this.toasterStyle) : this.toasterStyle,

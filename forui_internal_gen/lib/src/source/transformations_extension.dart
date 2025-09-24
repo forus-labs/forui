@@ -38,14 +38,7 @@ class TransformationsExtension {
   @protected
   Method get copyWith {
     // Copy the documentation comments from the fields.
-    final docs = [
-      '/// ## Parameters',
-      // for (final field in fields)
-      //   if (field.documentationComment?.split(RegExp(r'(\. )|\n')).firstOrNull case final comment?)
-      //     '/// * [${element.name3}.${field.name3}] - ${comment.replaceFirst('/// ', '')}.'
-      //   else
-      //     '/// * [${element.name3}.${field.name3}]',
-    ];
+    final docs = ['/// ## Parameters'];
 
     for (final field in fields) {
       final prefix = '/// * [${element.name3}.${field.name3}]';
