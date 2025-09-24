@@ -14,6 +14,7 @@ class PickerFormField extends FormField<FTime> {
     required super.autovalidateMode,
     required super.forceErrorText,
     required super.onSaved,
+    required super.onReset,
     required super.validator,
     required FTime? initialTime,
     required super.builder,

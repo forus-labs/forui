@@ -14,6 +14,9 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
   final FormFieldSetter<String>? onSaved;
 
   @override
+  final VoidCallback? onReset;
+
+  @override
   final FormFieldValidator<String>? validator;
 
   @override
@@ -28,6 +31,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
   PasswordFormField({
     required this.properties,
     required this.onSaved,
+    required this.onReset,
     required this.validator,
     required this.autovalidateMode,
     required this.forceErrorText,
@@ -39,6 +43,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
   Widget build(BuildContext context) => Field(
     controller: properties.controller,
     onSaved: onSaved,
+    onReset: onReset,
     validator: validator,
     initialValue: properties.controller?.text ?? properties.initialText,
     enabled: enabled,

@@ -89,6 +89,7 @@ FDateField(
   enabled: true,
   onChange: (date) => print('Date changed: $date'),
   onSaved: (date) => print('Date saved: $date'),
+  onReset: () => print('Reset'),
   autovalidateMode: AutovalidateMode.onUnfocus,
   forceErrorText: null,
   errorBuilder: (context, error) => Text(error, style: TextStyle(color: Colors.red)),

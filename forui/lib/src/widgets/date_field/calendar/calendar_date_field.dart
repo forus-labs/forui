@@ -74,6 +74,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     super.enabled = true,
     super.onChange,
     super.onSaved,
+    super.onReset,
     super.autovalidateMode = AutovalidateMode.onUnfocus,
     super.forceErrorText,
     super.errorBuilder,
@@ -168,6 +169,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       onSaved: onSaved,
+      onReset: widget.onReset,
       validator: _controller.validator,
       initialValue: widget.initialDate,
       builder: (state) => FTextField(

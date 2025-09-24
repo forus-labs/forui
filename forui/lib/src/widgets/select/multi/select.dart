@@ -111,6 +111,9 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// {@macro forui.foundation.form_field_properties.onSaved}
   final void Function(Set<T> values)? onSaved;
 
+  /// {@macro forui.foundation.form_field_properties.onReset}
+  final VoidCallback? onReset;
+
   /// {@macro forui.foundation.form_field_properties.validator}
   final String? Function(Set<T> values) validator;
 
@@ -218,6 +221,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool enabled = true,
     ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     String? Function(Set<T> values) validator = _defaultValidator,
@@ -270,6 +274,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       enabled: enabled,
       onChange: onChange,
       onSaved: onSaved,
+      onReset: onReset,
       autovalidateMode: autovalidateMode,
       forceErrorText: forceErrorText,
       validator: validator,
@@ -314,6 +319,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool enabled,
     ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     String? Function(Set<T> values) validator,
@@ -376,6 +382,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool enabled = true,
     ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     String? Function(Set<T> values) validator = _defaultValidator,
@@ -430,6 +437,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       enabled: enabled,
       onChange: onChange,
       onSaved: onSaved,
+      onReset: onReset,
       autovalidateMode: autovalidateMode,
       forceErrorText: forceErrorText,
       validator: validator,
@@ -487,6 +495,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool enabled,
     ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     String? Function(Set<T> values) validator,
@@ -529,6 +538,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.enabled = true,
     this.onChange,
     this.onSaved,
+    this.onReset,
     this.autovalidateMode = AutovalidateMode.onUnfocus,
     this.forceErrorText,
     this.validator = _defaultValidator,
@@ -614,6 +624,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       forceErrorText: forceErrorText,
       errorBuilder: errorBuilder,
       onSaved: onSaved,
+      onReset: onReset,
       validator: validator,
       min: min,
       max: max,
@@ -637,6 +648,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(ObjectFlagProperty.has('format', format))
       ..add(ObjectFlagProperty.has('sort', sort))
@@ -682,6 +694,7 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     super.enabled,
     super.onChange,
     super.onSaved,
+    super.onReset,
     super.autovalidateMode,
     super.forceErrorText,
     super.validator,
@@ -755,6 +768,7 @@ class _SearchSelect<T> extends FMultiSelect<T> {
     super.enabled,
     super.onChange,
     super.onSaved,
+    super.onReset,
     super.autovalidateMode,
     super.forceErrorText,
     super.validator,

@@ -27,6 +27,7 @@ class TimeInput extends Input<FTime?> {
     required super.errorBuilder,
     required super.enabled,
     required super.onSaved,
+    required super.onReset,
     required super.validator,
     required super.autovalidateMode,
     required super.forceErrorText,

@@ -75,11 +75,13 @@ class Field<T> extends FormField<Set<T>> {
     required super.forceErrorText,
     required super.errorBuilder,
     required void Function(Set<T> values)? onSaved,
+    required VoidCallback? onReset,
     required String? Function(Set<T> values)? validator,
     required super.initialValue,
     super.key,
   }) : super(
          onSaved: onSaved == null ? null : (v) => onSaved(v ?? {}),
+         onReset: onReset,
          validator: validator == null ? null : (v) => validator(v ?? {}),
          builder: (formField) {
            final state = formField as _State<T>;

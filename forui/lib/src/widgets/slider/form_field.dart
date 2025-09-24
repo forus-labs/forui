@@ -23,6 +23,7 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
     required this.description,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
+    super.onReset,
     super.validator,
     super.forceErrorText,
     super.enabled = true,

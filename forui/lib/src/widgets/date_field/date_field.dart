@@ -188,6 +188,9 @@ abstract class FDateField extends StatefulWidget {
   /// {@macro forui.foundation.form_field_properties.onSaved}
   final FormFieldSetter<DateTime>? onSaved;
 
+  /// {@macro forui.foundation.form_field_properties.onReset}
+  final VoidCallback? onReset;
+
   /// Used to enable/disable this checkbox auto validation and update its error text.
   ///
   /// Defaults to [AutovalidateMode.onUnfocus].
@@ -220,6 +223,7 @@ abstract class FDateField extends StatefulWidget {
     this.enabled = true,
     this.onChange,
     this.onSaved,
+    this.onReset,
     this.autovalidateMode = AutovalidateMode.onUnfocus,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -292,6 +296,7 @@ abstract class FDateField extends StatefulWidget {
     bool enabled,
     ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder,
@@ -385,6 +390,7 @@ abstract class FDateField extends StatefulWidget {
     bool enabled,
     ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder,
@@ -445,6 +451,7 @@ abstract class FDateField extends StatefulWidget {
     bool enabled = true,
     ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -475,6 +482,7 @@ abstract class FDateField extends StatefulWidget {
     enabled: enabled,
     onChange: onChange,
     onSaved: onSaved,
+    onReset: onReset,
     autovalidateMode: autovalidateMode,
     forceErrorText: forceErrorText,
     errorBuilder: errorBuilder,
@@ -497,6 +505,7 @@ abstract class FDateField extends StatefulWidget {
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText));
   }

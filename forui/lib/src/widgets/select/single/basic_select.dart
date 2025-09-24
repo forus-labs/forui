@@ -18,6 +18,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.enabled,
     super.onChange,
     super.onSaved,
+    super.onReset,
     super.autovalidateMode,
     super.forceErrorText,
     super.validator,

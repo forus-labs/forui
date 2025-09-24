@@ -231,6 +231,9 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FormFieldSetter<String>? onSaved;
 
   @override
+  final VoidCallback? onReset;
+
+  @override
   final FormFieldValidator<String>? validator;
 
   /// {@macro forui.text_field.initialValue}
@@ -368,6 +371,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder,
     bool Function(TextEditingValue value) clearable = _clearable,
     FormFieldSetter<String>? onSaved,
+    VoidCallback? onReset,
     FormFieldValidator<String>? validator,
     String? initialText,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
@@ -457,6 +461,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          suffixBuilder: suffixBuilder,
          clearable: clearable,
          onSaved: onSaved,
+         onReset: onReset,
          validator: validator,
          initialText: initialText,
          autovalidateMode: autovalidateMode,
@@ -544,6 +549,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.suffixBuilder,
     this.clearable = _clearable,
     this.onSaved,
+    this.onReset,
     this.validator,
     this.initialText,
     this.autovalidateMode = AutovalidateMode.disabled,
@@ -643,6 +649,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('initialText', initialText))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
@@ -849,6 +856,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
             : (context, _, states) => widget.suffixBuilder!(context, style, states),
         clearable: widget.clearable,
         onSaved: widget.onSaved,
+        onReset: widget.onReset,
         validator: widget.validator,
         initialText: widget.initialText,
         autovalidateMode: widget.autovalidateMode,

@@ -84,6 +84,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
     this.onSelect,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
+    super.onReset,
     super.validator,
     super.forceErrorText,
     super.enabled = true,

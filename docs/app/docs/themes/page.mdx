@@ -76,7 +76,15 @@ class FAccordionStyle {
     +FAccordionStyle(...)
     +FAccordionStyle.inherit(colors, typography, style)
 }
+
+class FAccordionMotion {
+    +FAccordionMotion(...)
+}
+
 note for FAccordionStyle "Each Forui widget has a corresponding style.\nWe use FAccordionStyle here as an example."
+
+note for FAccordionMotion "Some Forui widgets have a motion which controls its animation
+properties. We use FAccordionMotion here as an example."
 
 FAnimatedTheme --> FThemeData
 FThemeData --> FColors
@@ -85,14 +93,15 @@ FThemeData --> FStyle
 FThemeData --> FAccordionStyle
 ```
 
-There are **5** core components in Forui's theming system.
+There are **6** core components in Forui's theming system.
 
 - **[`FAnimatedTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FAnimatedTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
 - **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds:
   - **[`FColors`](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html)**: Color scheme including primary, foreground, and background colors.
   - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography settings including font family and text styles.
   - **[`FStyle`](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html)**: Misc. options such as border radius and icon size.
-  - **Individual widget styles**.
+  - Individual widget styles.
+  - Individual widget motions.
 
 
 The included `BuildContext` extension allows `FThemeData` can be accessed via [`context.theme`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext.html):

@@ -90,6 +90,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     bool Function(TextEditingValue) clearable = Defaults.clearable,
     ValueNotifier<bool>? obscureTextController,
     FormFieldSetter<String>? onSaved,
+    VoidCallback? onReset,
     FormFieldValidator<String>? validator,
     String? initialText,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
@@ -162,6 +163,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       obscureTextController: obscureTextController,
     ),
     onSaved: onSaved,
+    onReset: onReset,
     validator: validator,
     autovalidateMode: autovalidateMode,
     forceErrorText: forceErrorText,
@@ -358,6 +360,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final FormFieldSetter<String>? onSaved;
 
   @override
+  final VoidCallback? onReset;
+
+  @override
   final FormFieldValidator<String>? validator;
 
   /// {@macro forui.text_field.initialValue}
@@ -435,6 +440,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
     this.onSaved,
+    this.onReset,
     this.validator,
     this.initialText,
     this.autovalidateMode = AutovalidateMode.disabled,
@@ -506,6 +512,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
     this.onSaved,
+    this.onReset,
     this.validator,
     this.initialText,
     this.autovalidateMode = AutovalidateMode.disabled,
@@ -581,6 +588,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
     this.onSaved,
+    this.onReset,
     this.validator,
     this.initialText,
     this.autovalidateMode = AutovalidateMode.disabled,
@@ -593,6 +601,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   Widget build(BuildContext context) => Field(
     controller: controller,
     onSaved: onSaved,
+    onReset: onReset,
     validator: validator,
     initialValue: controller?.text ?? initialText,
     enabled: enabled,

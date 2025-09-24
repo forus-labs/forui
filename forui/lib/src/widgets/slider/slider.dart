@@ -102,6 +102,9 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   final FormFieldSetter<FSliderSelection>? onSaved;
 
   @override
+  final VoidCallback? onReset;
+
+  @override
   final FormFieldValidator<FSliderSelection>? validator;
 
   @override
@@ -127,6 +130,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
     this.semanticFormatterCallback,
     this.onChange,
     this.onSaved,
+    this.onReset,
     this.validator,
     this.forceErrorText,
     this.enabled = true,
@@ -176,6 +180,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
         semanticValueFormatterCallback: semanticValueFormatterCallback,
         initialSelection: initialSelection,
         onSaved: onSaved,
+        onReset: onReset,
         validator: validator,
         autovalidateMode: autovalidateMode,
         forceErrorText: forceErrorText,
@@ -227,6 +232,7 @@ class _Slider extends StatefulWidget {
   final String Function(double) semanticValueFormatterCallback;
   final ValueChanged<FSliderSelection>? onChange;
   final FormFieldSetter<FSliderSelection>? onSaved;
+  final VoidCallback? onReset;
   final FormFieldValidator<FSliderSelection>? validator;
   final AutovalidateMode? autovalidateMode;
   final String? forceErrorText;
@@ -250,6 +256,7 @@ class _Slider extends StatefulWidget {
     required this.semanticValueFormatterCallback,
     required this.onChange,
     required this.onSaved,
+    required this.onReset,
     required this.validator,
     required this.autovalidateMode,
     required this.forceErrorText,
@@ -294,6 +301,7 @@ class _Slider extends StatefulWidget {
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DoubleProperty('mainAxisExtent', mainAxisExtent))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(ObjectFlagProperty.has('forceErrorText', forceErrorText))
@@ -367,6 +375,7 @@ class _SliderState extends State<_Slider> {
           description: widget.description,
           errorBuilder: widget.errorBuilder,
           onSaved: widget.onSaved,
+          onReset: widget.onReset,
           validator: widget.validator,
           autovalidateMode: widget.autovalidateMode ?? AutovalidateMode.disabled,
           forceErrorText: widget.forceErrorText,

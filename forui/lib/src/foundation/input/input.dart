@@ -16,6 +16,7 @@ abstract class Input<T> extends StatefulWidget {
   final Widget Function(BuildContext context, String message) errorBuilder;
   final bool enabled;
   final FormFieldSetter<T>? onSaved;
+  final VoidCallback? onReset;
   final FormFieldValidator<T> validator;
   final AutovalidateMode autovalidateMode;
   final String? forceErrorText;
@@ -43,6 +44,7 @@ abstract class Input<T> extends StatefulWidget {
     required this.errorBuilder,
     required this.enabled,
     required this.onSaved,
+    required this.onReset,
     required this.validator,
     required this.autovalidateMode,
     required this.forceErrorText,
@@ -73,6 +75,7 @@ abstract class Input<T> extends StatefulWidget {
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
@@ -128,6 +131,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
         controller: widget.controller,
         enabled: widget.enabled,
         onSaved: widget.onSaved,
+        onReset: widget.onReset,
         initialValue: widget.controller.value,
         validator: (value) => switch (this.value) {
           null when controller.text == controller.placeholder => widget.validator(null),
