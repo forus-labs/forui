@@ -227,7 +227,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
       );
 }
 
-/// /// The motion-related properties for [FToaster] that affect individual toasts.
+/// The motion-related properties for [FToaster] that affect individual toasts.
 class FToastMotion with Diagnosticable, _$FToastMotionFunctions {
   /// The duration of the toast's entrance when it is initially added to to toaster. Defaults to 400ms.
   @override

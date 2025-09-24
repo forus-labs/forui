@@ -75,7 +75,7 @@ We've reworked `FProgress` to be more customizable and easier to use.
 
 ### `FSidebar`
 
-* Add `FSiderbarItemrMotion`.
+* Add `FSidebarItemMotion`.
 * **Breaking** Move animation related fields from `FSiderbarItemStyle` to `FSiderbarItemMotion`.
 
 
@@ -86,7 +86,7 @@ We've reworked `FProgress` to be more customizable and easier to use.
 
 ### `FTab`
 
-* Add `FTabrMotion`.
+* Add `FTabMotion`.
 * **Breaking** Replace `FTabController(animationDuration: ...)` with `FTabController(motion: ...)`.
 
 

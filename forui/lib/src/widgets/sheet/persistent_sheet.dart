@@ -36,8 +36,7 @@ part 'persistent_sheet.design.dart';
 /// retains the sheet's state even when it is not visible. Defaults to false. Keeping multiple sheets alive even when
 /// offstage can negatively impact performance.
 ///
-/// [onClosing] is called when the sheet begins to close+
-///
+/// [onClosing] is called when the sheet begins to close.
 ///
 /// [key] is used to identify the sheet. If a key is not provided, a random key will be generated. All sheets in a
 /// [FScaffold]/[FSheets] must have unique keys.
