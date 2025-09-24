@@ -172,6 +172,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
   @override
   void dispose() {
     _curvedIconRotation?.dispose();
+    _curvedFade?.dispose();
     _curvedReveal?.dispose();
     _controller?.dispose();
     super.dispose();

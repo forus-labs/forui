@@ -283,7 +283,7 @@ class FToastMotion with Diagnosticable, _$FToastMotionFunctions {
 
   /// The toast's initial entrance's opacity and dismiss's fade tween. Defaults to `[0, 1]`.
   ///
-  /// Set to `[0, 1]` to disable the fade-in/out effect.
+  /// Set to `[1, 1]` to disable the fade-in/out effect.
   @override
   final Animatable<double> entranceDismissFadeTween;
 
