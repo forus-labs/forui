@@ -24,6 +24,7 @@ class DateInput extends Input<DateTime?> {
     required super.errorBuilder,
     required super.enabled,
     required super.onSaved,
+    required super.onReset,
     required super.validator,
     required super.autovalidateMode,
     required super.forceErrorText,

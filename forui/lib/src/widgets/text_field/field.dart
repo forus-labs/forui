@@ -9,6 +9,7 @@ class Field extends FormField<String> {
     required this.controller,
     required super.initialValue,
     required super.onSaved,
+    required super.onReset,
     required super.validator,
     required super.enabled,
     required super.autovalidateMode,

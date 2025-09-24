@@ -97,6 +97,7 @@ FTimeField(
   enabled: true,
   onChange: (time) => print('Time changed: $time'),
   onSaved: (time) => print('Time saved: $time'),
+  onReset: () => print('Reset'),
   autovalidateMode: AutovalidateMode.onUnfocus,
 );
 ```

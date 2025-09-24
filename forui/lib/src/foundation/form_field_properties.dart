@@ -31,6 +31,11 @@ mixin FFormFieldProperties<T> {
   /// {@endtemplate}
   FormFieldSetter<T>? get onSaved;
 
+  /// {@template forui.foundation.form_field_properties.onReset}
+  /// An optional method to call when the form field is reset via [FormFieldState.reset].
+  /// {@endtemplate}
+  VoidCallback? get onReset;
+
   /// {@template forui.foundation.form_field_properties.validator}
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.

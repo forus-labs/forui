@@ -106,6 +106,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
     this.onSelect,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.onSaved,
+    super.onReset,
     super.validator,
     super.forceErrorText,
     super.enabled = true,

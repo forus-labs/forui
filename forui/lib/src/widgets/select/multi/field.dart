@@ -75,6 +75,7 @@ class Field<T> extends FormField<Set<T>> {
     required super.forceErrorText,
     required super.errorBuilder,
     required void Function(Set<T> values)? onSaved,
+    required super.onReset,
     required String? Function(Set<T> values)? validator,
     required super.initialValue,
     super.key,

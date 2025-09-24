@@ -106,6 +106,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final FormFieldSetter<T>? onSaved;
 
   @override
+  final VoidCallback? onReset;
+
+  @override
   final AutovalidateMode autovalidateMode;
 
   @override
@@ -208,6 +211,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool enabled = true,
     ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     FormFieldValidator<T> validator = _defaultValidator,
@@ -250,6 +254,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       enabled: enabled,
       onChange: onChange,
       onSaved: onSaved,
+      onReset: onReset,
       autovalidateMode: autovalidateMode,
       forceErrorText: forceErrorText,
       validator: validator,
@@ -298,6 +303,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool enabled,
     ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     FormFieldValidator<T> validator,
@@ -361,6 +367,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool enabled = true,
     ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
     String? forceErrorText,
     FormFieldValidator<T> validator = _defaultValidator,
@@ -416,6 +423,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       enabled: enabled,
       onChange: onChange,
       onSaved: onSaved,
+      onReset: onReset,
       autovalidateMode: autovalidateMode,
       forceErrorText: forceErrorText,
       validator: validator,
@@ -474,6 +482,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool enabled,
     ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
+    VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     FormFieldValidator<T> validator,
@@ -517,6 +526,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.enabled = true,
     this.onChange,
     this.onSaved,
+    this.onReset,
     this.autovalidateMode = AutovalidateMode.onUnfocus,
     this.forceErrorText,
     this.validator = _defaultValidator,
@@ -564,6 +574,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('validator', validator))
@@ -699,6 +710,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       onSaved: widget.onSaved,
+      onReset: widget.onReset,
       validator: widget.validator,
       initialValue: widget.initialValue,
       builder: (state) => FTextField(
