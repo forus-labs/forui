@@ -122,6 +122,7 @@ class FCheckbox extends StatelessWidget {
         states = {...states, ...formStates};
 
         final iconTheme = style.iconStyle.maybeResolve(states);
+        final decoration = style.decoration.resolve(states);
         return FLabel(
           axis: Axis.horizontal,
           states: formStates,
@@ -135,15 +136,19 @@ class FCheckbox extends StatelessWidget {
             focused: states.contains(WidgetState.focused),
             style: style.focusedOutlineStyle,
             child: AnimatedSwitcher(
-              duration: style.animationDuration,
-              switchInCurve: style.curve,
+              duration: style.motion.fadeInDuration,
+              reverseDuration: style.motion.fadeOutDuration,
+              switchInCurve: style.motion.fadeInCurve,
+              switchOutCurve: style.motion.fadeOutCurve,
               // This transition builder is necessary because of https://github.com/flutter/flutter/issues/121336#issuecomment-1482620874
               transitionBuilder: (child, opacity) => FadeTransition(opacity: opacity, child: child),
               child: SizedBox.square(
-                key: SetKey(states),
+                // We use the derived iconTheme and decoration as keys to prevent the animation from triggering between
+                // states with the same appearance.
+                key: ListKey([iconTheme, decoration]),
                 dimension: style.size,
                 child: DecoratedBox(
-                  decoration: style.decoration.resolve(states),
+                  decoration: decoration,
                   child: iconTheme == null
                       ? const SizedBox()
                       : IconTheme(data: iconTheme, child: const Icon(FIcons.check)),
@@ -234,16 +239,6 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItem<T> {
 
 /// A checkboxes style.
 class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
-  /// The duration of the animation when the checkbox switches between checked and unchecked. Defaults to 100ms.
-  @override
-  final Duration animationDuration;
-
-  /// The curve of the animation when the checkbox switches between checked and unchecked.
-  ///
-  /// Defaults to [Curves.linear].
-  @override
-  final Curve curve;
-
   /// The tappable style.
   @override
   final FTappableStyle tappableStyle;
@@ -274,6 +269,10 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   @override
   final FWidgetStateMap<BoxDecoration> decoration;
 
+  /// The motion-related properties.
+  @override
+  final FCheckboxMotion motion;
+
   /// Creates a [FCheckboxStyle].
   const FCheckboxStyle({
     required this.tappableStyle,
@@ -283,9 +282,8 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
-    this.animationDuration = const Duration(milliseconds: 100),
-    this.curve = Curves.linear,
     this.size = 16,
+    this.motion = const FCheckboxMotion(),
     super.labelPadding,
     super.descriptionPadding,
     super.errorPadding,
@@ -343,4 +341,31 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
       childPadding: label.childPadding,
     );
   }
+}
+
+/// The motion-related properties for a [FCheckbox].
+class FCheckboxMotion with Diagnosticable, _$FCheckboxMotionFunctions {
+  /// The duration of the fade in animation. Defaults to 100ms.
+  @override
+  final Duration fadeInDuration;
+
+  /// The duration of the fade out animation. Defaults to 100ms.
+  @override
+  final Duration fadeOutDuration;
+
+  /// The curve of the fade in animation. Defaults to [Curves.linear].
+  @override
+  final Curve fadeInCurve;
+
+  /// The curve of the fade out animation. Defaults to [Curves.linear].
+  @override
+  final Curve fadeOutCurve;
+
+  /// Creates a [FCheckboxMotion].
+  const FCheckboxMotion({
+    this.fadeInDuration = const Duration(milliseconds: 100),
+    this.fadeOutDuration = const Duration(milliseconds: 100),
+    this.fadeInCurve = Curves.linear,
+    this.fadeOutCurve = Curves.linear,
+  });
 }

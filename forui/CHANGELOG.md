@@ -18,6 +18,13 @@ We've improved the styles' generated documentation. They should be much easier t
 * **Breaking** Change `FAutocompleteContentStyle.loadingIndicatorStyle` to `FAutocompleteContentStyle.progressStyle`.
 
 
+### `FCheckbox`
+* Add `FCheckboxMotion`.
+
+* **Breaking** Move animation related fields from `FCheckboxStyle` to `FCheckboxMotion`.
+* Fix `FCheckbox` flickering when rapidly hovering.
+
+
 ### `FDateField`
 * Add `FDateField.onReset`.
 
@@ -58,6 +65,12 @@ We've reworked `FProgress` to be more customizable and easier to use.
 
 * **Breaking** Change `FProgress` to represent indeterminate linear progress.
 * **Breaking** Remove `FProgressStyles`.
+
+
+### `FRadio`
+* Add `FRadioMotion`.
+
+* **Breaking** Move animation related fields from `FRadioStyle` to `FRadioMotion`.
 
 
 ### `FSelect` & `FMultiSelect`

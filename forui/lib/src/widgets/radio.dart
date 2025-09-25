@@ -146,8 +146,9 @@ class FRadio extends StatelessWidget {
                 DecoratedBox(
                   decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: BoxShape.circle),
                   child: AnimatedSize(
-                    duration: style.animationDuration,
-                    curve: style.curve,
+                    duration: style.motion.duration,
+                    reverseDuration: style.motion.reverseDuration,
+                    curve: style.motion.curve,
                     child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
                   ),
                 ),
@@ -238,16 +239,6 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItem<T> {
 
 /// A [FRadio]'s style.
 class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
-  /// The duration of the animation when the radio switches between selected and unselected. Defaults to 100ms.
-  @override
-  final Duration animationDuration;
-
-  /// The curve of the animation when the radio switches between selected and unselected.
-  ///
-  /// Defaults to [Curves.easeOutCirc].
-  @override
-  final Curve curve;
-
   /// The tappable style.
   @override
   final FTappableStyle tappableStyle;
@@ -292,8 +283,12 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   @override
   final FWidgetStateMap<Color> indicatorColor;
 
+  /// The motion-related properties.
+  @override
+  final FRadioMotion motion;
+
   /// Creates a [FRadioStyle].
-  FRadioStyle({
+  const FRadioStyle({
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     required this.borderColor,
@@ -302,12 +297,11 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
+    this.motion = const FRadioMotion(),
     super.labelPadding,
     super.descriptionPadding,
     super.errorPadding,
     super.childPadding,
-    this.animationDuration = const Duration(milliseconds: 100),
-    this.curve = Curves.easeOutCirc,
   });
 
   /// Creates a [FRadioStyle] that inherits its properties.
@@ -336,4 +330,26 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
       childPadding: label.childPadding,
     );
   }
+}
+
+/// The motion-related properties for a [FRadio].
+class FRadioMotion with Diagnosticable, _$FRadioMotionFunctions {
+  /// The duration of the animation when selected. Defaults to 100ms.
+  @override
+  final Duration duration;
+
+  /// The duration of the reverse animation when unselected. Defaults to 100ms.
+  @override
+  final Duration reverseDuration;
+
+  /// The curve of the animation. Defaults to [Curves.easeOutCirc].
+  @override
+  final Curve curve;
+
+  /// Creates a [FRadioMotion].
+  const FRadioMotion({
+    this.duration = const Duration(milliseconds: 100),
+    this.reverseDuration = const Duration(milliseconds: 100),
+    this.curve = Curves.easeOutCirc,
+  });
 }
