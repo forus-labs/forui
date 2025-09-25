@@ -343,7 +343,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   }
 }
 
-/// The motioned-related properties for a [FCheckbox].
+/// The motion-related properties for a [FCheckbox].
 class FCheckboxMotion with Diagnosticable, _$FCheckboxMotionFunctions {
   /// The duration of the fade in animation. Defaults to 100ms.
   @override

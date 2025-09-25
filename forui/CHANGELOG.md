@@ -21,7 +21,7 @@ We've improved the styles' generated documentation. They should be much easier t
 ### `FCheckbox`
 * Add `FCheckboxMotion`.
 
-* **Breaking** Move animation related fields from `FCheckboxStyle` to `FCheckboxMoton`.
+* **Breaking** Move animation related fields from `FCheckboxStyle` to `FCheckboxMotion`.
 * Fix `FCheckbox` flickering when rapidly hovering.
 
 
@@ -70,7 +70,7 @@ We've reworked `FProgress` to be more customizable and easier to use.
 ### `FRadio`
 * Add `FRadioMotion`.
 
-* **Breaking** Move animation related fields from `FRadioStyle` to `FRadioMoton`.
+* **Breaking** Move animation related fields from `FRadioStyle` to `FRadioMotion`.
 
 
 ### `FSelect` & `FMultiSelect`

@@ -332,7 +332,7 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   }
 }
 
-/// The motioned-related properties for a [FRadio].
+/// The motion-related properties for a [FRadio].
 class FRadioMotion with Diagnosticable, _$FRadioMotionFunctions {
   /// The duration of the animation when selected. Defaults to 100ms.
   @override
