@@ -149,7 +149,7 @@ void main() {
   testWidgets('focus does not cause inner gesture detector to be ignored', (tester) async {
     var outer = 0;
     var inner = 0;
-    final focusNode = FocusNode();
+    final focusNode = autoDispose(FocusNode());
     await tester.pumpWidget(
       TestScaffold(
         child: FItem(
