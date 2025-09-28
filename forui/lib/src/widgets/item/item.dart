@@ -288,22 +288,19 @@ class FItem extends StatelessWidget with FItemMixin {
           onSecondaryLongPress: enabled ? (onSecondaryLongPress ?? () {}) : null,
           shortcuts: shortcuts,
           actions: actions,
-          builder: (context, states, _) => Stack(
-            children: [
-              DecoratedBox(
-                decoration: style.decoration.maybeResolve(states) ?? const BoxDecoration(),
-                child: _builder(context, style, top, bottom, states, data.dividerColor, data.dividerWidth, divider),
+          builder: (context, states, _) => DecoratedBox(
+            position: DecorationPosition.foreground,
+            decoration: switch (style.focusedOutlineStyle) {
+              final outline? when states.contains(WidgetState.focused) => BoxDecoration(
+                border: Border.all(color: outline.color, width: outline.width),
+                borderRadius: outline.borderRadius,
               ),
-              if (style.focusedOutlineStyle case final outline? when states.contains(WidgetState.focused))
-                Positioned.fill(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: outline.color, width: outline.width),
-                      borderRadius: outline.borderRadius,
-                    ),
-                  ),
-                ),
-            ],
+              _ => const BoxDecoration(),
+            },
+            child: DecoratedBox(
+              decoration: style.decoration.maybeResolve(states) ?? const BoxDecoration(),
+              child: _builder(context, style, top, bottom, states, data.dividerColor, data.dividerWidth, divider),
+            ),
           ),
         ),
       ),

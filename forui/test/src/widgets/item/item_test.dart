@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -143,5 +144,30 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(count, 1);
+  });
+
+  testWidgets('focus does not cause inner gesture detector to be ignored', (tester) async {
+    var outer = 0;
+    var inner = 0;
+    final focusNode = autoDispose(FocusNode());
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FItem(
+          focusNode: focusNode,
+          title: const Text('Bluetooth'),
+          onPress: () => outer++,
+          suffix: FButton.icon(onPress: () => inner++, child: const Icon(FIcons.pencil)),
+        ),
+      ),
+    );
+
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    await tester.tap(find.byIcon(FIcons.pencil));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    expect(inner, 1);
+    expect(outer, 0);
   });
 }

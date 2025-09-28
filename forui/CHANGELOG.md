@@ -46,6 +46,11 @@ We've improved the styles' generated documentation. They should be much easier t
 * **Breaking** Add `FFormFieldProperties(onReset: ...)`.
 
 
+### `FItem`
+
+* Fix `GestureDetector` being absorbed in focused `FItem`s.
+
+
 ### `FPopover` & `FPopoverMenu`
 * Add `FPopoverMotion`.
 
