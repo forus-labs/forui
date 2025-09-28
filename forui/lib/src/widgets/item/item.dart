@@ -274,7 +274,6 @@ class FItem extends StatelessWidget with FItemMixin {
       child: Padding(
         padding: margin,
         child: FTappable(
-          behavior: HitTestBehavior.translucent,
           style: style.tappableStyle,
           semanticsLabel: semanticsLabel,
           autofocus: autofocus,
