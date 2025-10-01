@@ -109,5 +109,36 @@ void main() {
         expect(tester.takeException(), null);
       });
     }
+
+    testWidgets('scrollable body', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Builder(
+            builder: (context) => FButton(
+              mainAxisSize: MainAxisSize.min,
+              onPress: () => showFDialog(
+                context: context,
+                builder: (context, style, animation) => FDialog(
+                  style: style,
+                  animation: animation,
+                  title: const Text('Are you absolutely sure?'),
+                  body: SingleChildScrollView(child: Container(height: 5000)),
+                  actions: [
+                    FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () {}),
+                    FButton(child: const Text('Continue'), onPress: () {}),
+                  ],
+                ),
+              ),
+              child: const Text('Show Dialog'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Show Dialog'));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+    });
   });
 }

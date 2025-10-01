@@ -46,11 +46,13 @@ sealed class Content extends StatelessWidget {
             ),
           ),
         if (body case final body?)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 4),
-            child: Semantics(
-              container: true,
-              child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Semantics(
+                container: true,
+                child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
+              ),
             ),
           ),
         if (title != null && body != null) const SizedBox(height: 8),

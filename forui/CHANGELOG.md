@@ -40,6 +40,8 @@ We've improved the styles' generated documentation. They should be much easier t
 * **Breaking** Move barrier related fields from `FDialogStyle` to `FDialogRouteStyle`.
 * **Breaking** Move animation related fields from `FDialogStyle` to `FDialogMotion`.
 
+* Fix `FDialog.body` not allowing `ScrollView`s.  
+
 
 ### `FFormField`
 * **Breaking** Add `FFormField(onReset: ...)`.
