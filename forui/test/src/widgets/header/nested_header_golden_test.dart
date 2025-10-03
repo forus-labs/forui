@@ -86,6 +86,56 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-glassmorphic.png'));
     });
 
+    testWidgets('${theme.name} larger title', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: Builder(
+            builder: (context) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DecoratedBox(
+                  decoration: BoxDecoration(border: Border.all(color: context.theme.colors.primary)),
+                  child: FHeader.nested(
+                    title: Text('Title', style: context.theme.typography.xl3),
+                    prefixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                    suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-larger-title.png'));
+    });
+
+    testWidgets('${theme.name} smaller title', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: Builder(
+            builder: (context) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DecoratedBox(
+                  decoration: BoxDecoration(border: Border.all(color: context.theme.colors.primary)),
+                  child: FHeader.nested(
+                    title: Text('Title', style: context.theme.typography.xs),
+                    prefixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                    suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/${theme.name}-smaller-title.png'));
+    });
+
     testWidgets('${theme.name} with no FNestedHeader actions', (tester) async {
       await tester.pumpWidget(
         TestScaffold(

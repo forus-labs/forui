@@ -48,6 +48,14 @@ We've improved the styles' generated documentation. They should be much easier t
 * **Breaking** Add `FFormFieldProperties(onReset: ...)`.
 
 
+### `FHeader`
+
+* Fix `FHeader(...)` not vertically centering title.
+* Fix `FHeader(...)` not respecting RTL locales.
+* Fix `FHeader.nested(...)` not vertically centering title.
+* Fix `FHeader.nested(...)` not respecting RTL locales.
+
+
 ### `FItem`
 
 * Fix `GestureDetector` being absorbed in focused `FItem`s.
