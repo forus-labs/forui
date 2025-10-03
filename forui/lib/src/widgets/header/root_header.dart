@@ -33,10 +33,14 @@ class _FRootHeader extends FHeader {
             children: [
               Expanded(
                 child: DefaultTextStyle.merge(
-                  overflow: TextOverflow.fade,
+                  overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   softWrap: false,
                   style: style.titleTextStyle,
+                  textHeightBehavior: const TextHeightBehavior(
+                    applyHeightToFirstAscent: false,
+                    applyHeightToLastDescent: false,
+                  ),
                   child: title,
                 ),
               ),
