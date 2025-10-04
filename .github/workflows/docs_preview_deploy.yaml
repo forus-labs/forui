@@ -64,7 +64,7 @@ jobs:
           command: pages deploy ./docs/out --project-name=${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }} --branch=${{ github.event.pull_request.head.ref }}
 
       # Create/update comment with link to preview
-      - uses: peter-evans/find-comment@v3
+      - uses: peter-evans/find-comment@v4
         id: find-comment
         with:
           issue-number: ${{ github.event.pull_request.number }}
@@ -76,7 +76,7 @@ jobs:
           vars: |
             sha: ${{ github.event.pull_request.head.sha }}
             url: ${{ steps.publish-docs.outputs.deployment-url }}
-      - uses: peter-evans/create-or-update-comment@v4
+      - uses: peter-evans/create-or-update-comment@v5
         with:
           token: ${{ steps.generate-token.outputs.token }}
           comment-id: ${{ steps.find-comment.outputs.comment-id }}

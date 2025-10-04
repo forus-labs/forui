@@ -107,7 +107,7 @@ jobs:
     # TODO: Revert to macos-latest after Sept 12025.
     # github.blog/changelog/2025-07-11-upcoming-changes-to-macos-hosted-runners-macos-latest-migration-and-xcode-support-policy-updates/
     # https://github.com/actions/runner-images/issues/12758
-    runs-on: macos-14
+    runs-on: macos-15
     defaults:
       run:
         working-directory: forui/example
