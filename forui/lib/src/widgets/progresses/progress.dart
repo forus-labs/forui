@@ -40,9 +40,9 @@ class FProgress extends StatefulWidget {
 
 class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixin {
   FProgressStyle? _style;
-  AnimationController? _controller;
-  CurvedAnimation? _curved;
-  Animation<double>? _animation;
+  late final AnimationController _controller = AnimationController(vsync: this);
+  late final CurvedAnimation _curved = CurvedAnimation(parent: _controller, curve: Curves.linear);
+  late Animation<double> _animation;
 
   @override
   void didChangeDependencies() {
@@ -60,25 +60,22 @@ class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixi
     final style = widget.style?.call(context.theme.progressStyle) ?? context.theme.progressStyle;
     if (_style != style) {
       _style = style;
-      _curved?.dispose();
-      _controller?.dispose();
 
       final total = style.motion.period + style.motion.interval;
-      _controller = AnimationController(vsync: this, duration: total);
-      _curved = CurvedAnimation(
-        parent: _controller!,
-        curve: Interval(0, style.motion.period.inMilliseconds / total.inMilliseconds, curve: style.motion.curve),
-      );
-      _animation = Tween<double>(begin: -style.motion.value, end: 1).animate(_curved!);
+      final curve = Interval(0, style.motion.period.inMilliseconds / total.inMilliseconds, curve: style.motion.curve);
 
-      _controller!.repeat();
+      _controller
+        ..duration = total
+        ..repeat();
+      _curved.curve = curve;
+      _animation = Tween<double>(begin: -style.motion.value, end: 1).animate(_curved);
     }
   }
 
   @override
   void dispose() {
-    _curved?.dispose();
-    _controller?.dispose();
+    _curved.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -92,11 +89,11 @@ class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixi
         decoration: _style!.trackDecoration,
         child: LayoutBuilder(
           builder: (context, constraints) => AnimatedBuilder(
-            animation: _animation!,
+            animation: _animation,
             builder: (_, child) => Stack(
               children: [
                 PositionedDirectional(
-                  start: constraints.maxWidth * (_animation!.value),
+                  start: constraints.maxWidth * (_animation.value),
                   width: constraints.maxWidth * _style!.motion.value,
                   top: 0,
                   bottom: 0,

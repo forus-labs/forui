@@ -49,9 +49,9 @@ class FCircularProgress extends StatefulWidget {
 
 class _CircularState extends State<FCircularProgress> with SingleTickerProviderStateMixin {
   FCircularProgressStyle? _style;
-  AnimationController? _controller;
-  CurvedAnimation? _curveRotation;
-  Animation<double>? _rotation;
+  late final AnimationController _controller = AnimationController(vsync: this);
+  late final CurvedAnimation _curveRotation = CurvedAnimation(parent: _controller, curve: Curves.linear);
+  late Animation<double> _rotation;
 
   @override
   void didChangeDependencies() {
@@ -70,19 +70,18 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
     final style = widget.style?.call(inherited) ?? inherited;
     if (_style != style) {
       _style = style;
-      _curveRotation?.dispose();
-      _controller?.dispose();
-
-      _controller = AnimationController(vsync: this, duration: style.motion.duration)..repeat();
-      _curveRotation = CurvedAnimation(parent: _controller!, curve: style.motion.curve);
-      _rotation = style.motion.tween.animate(_curveRotation!);
+      _controller
+        ..duration = style.motion.duration
+        ..repeat();
+      _curveRotation.curve = style.motion.curve;
+      _rotation = style.motion.tween.animate(_curveRotation);
     }
   }
 
   @override
   void dispose() {
-    _curveRotation?.dispose();
-    _controller?.dispose();
+    _curveRotation.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -91,8 +90,8 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
     final semanticsLabel =
         widget.semanticsLabel ?? (FLocalizations.of(context) ?? FDefaultLocalizations()).progressSemanticsLabel;
     return AnimatedBuilder(
-      animation: _rotation!,
-      builder: (_, child) => Transform.rotate(angle: _rotation!.value * 2 * math.pi, child: child),
+      animation: _rotation,
+      builder: (_, child) => Transform.rotate(angle: _rotation.value * 2 * math.pi, child: child),
       child: IconTheme(
         data: _style!.iconStyle,
         child: Icon(widget.icon, semanticLabel: semanticsLabel),

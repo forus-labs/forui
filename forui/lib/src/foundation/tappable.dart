@@ -422,8 +422,8 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   Animation<double>? bounce;
 
   FTappableStyle? _style;
-  AnimationController? _bounceController;
-  CurvedAnimation? _curvedBounce;
+  late final AnimationController _bounceController = AnimationController(vsync: this);
+  late final CurvedAnimation _curvedBounce = CurvedAnimation(parent: _bounceController, curve: Curves.linear);
 
   @override
   void didChangeDependencies() {
@@ -441,27 +441,20 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
     final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
     if (_style != style) {
       _style = style;
-      _curvedBounce?.dispose();
-      _bounceController?.dispose();
-
-      _bounceController = AnimationController(
-        vsync: this,
-        duration: style.motion.bounceDownDuration,
-        reverseDuration: style.motion.bounceUpDuration,
-      );
-      _curvedBounce = CurvedAnimation(
-        parent: _bounceController!,
-        curve: style.motion.bounceDownCurve,
-        reverseCurve: style.motion.bounceUpCurve,
-      );
-      bounce = style.motion.bounceTween.animate(_curvedBounce!);
+      _bounceController
+        ..duration = style.motion.bounceDownDuration
+        ..reverseDuration = style.motion.bounceUpDuration;
+      _curvedBounce
+        ..curve = style.motion.bounceDownCurve
+        ..reverseCurve = style.motion.bounceUpCurve;
+      bounce = style.motion.bounceTween.animate(_curvedBounce);
     }
   }
 
   @override
   void dispose() {
-    _curvedBounce?.dispose();
-    _bounceController?.dispose();
+    _curvedBounce.dispose();
+    _bounceController.dispose();
     super.dispose();
   }
 
@@ -478,7 +471,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   void onPressedStart() {
     // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
     if (mounted) {
-      _bounceController?.forward();
+      _bounceController.forward();
     }
   }
 
@@ -486,7 +479,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   void onPressedEnd() {
     // Check if it's mounted due to a non-deterministic race condition, https://github.com/forus-labs/forui/issues/482.
     if (mounted) {
-      _bounceController?.reverse();
+      _bounceController.reverse();
     }
   }
 
