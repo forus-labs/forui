@@ -131,7 +131,7 @@ class FSidebar extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('autofocus', value: autofocus))
+      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(DoubleProperty('width', width));

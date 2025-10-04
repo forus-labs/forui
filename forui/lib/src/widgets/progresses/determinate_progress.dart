@@ -46,8 +46,8 @@ class FDeterminateProgress extends StatefulWidget {
 
 class _State extends State<FDeterminateProgress> with SingleTickerProviderStateMixin {
   FDeterminateProgressStyle? _style;
-  AnimationController? _controller;
-  CurvedAnimation? _animation;
+  late final AnimationController _controller = AnimationController(vsync: this);
+  late final CurvedAnimation _animation = CurvedAnimation(parent: _controller, curve: Curves.linear);
 
   @override
   void didChangeDependencies() {
@@ -63,27 +63,24 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
 
   void _setup() {
     final style = widget.style?.call(context.theme.determinateProgressStyle) ?? context.theme.determinateProgressStyle;
-    final previous = _controller?.value ?? 0.0;
 
     if (_style != style) {
       _style = style;
-      _animation?.dispose();
-      _controller?.dispose();
-
-      _controller = AnimationController(vsync: this, value: previous, duration: style.motion.duration);
-      _animation = CurvedAnimation(parent: _controller!, curve: style.motion.curve);
+      _controller
+        ..value = _controller.value
+        ..duration = style.motion.duration;
+      _animation.curve = style.motion.curve;
     }
 
-    if (widget.value != previous) {
-      _controller!.value = previous;
-      _controller!.animateTo(widget.value, duration: style.motion.duration * (widget.value - previous).abs());
+    if (widget.value != _controller.value) {
+      _controller.animateTo(widget.value, duration: style.motion.duration * (widget.value - _controller.value).abs());
     }
   }
 
   @override
   void dispose() {
-    _animation?.dispose();
-    _controller?.dispose();
+    _animation.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -97,8 +94,8 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
         child: Align(
           alignment: AlignmentDirectional.centerStart,
           child: AnimatedBuilder(
-            animation: _animation!,
-            builder: (_, child) => FractionallySizedBox(widthFactor: _animation!.value, child: child!),
+            animation: _animation,
+            builder: (_, child) => FractionallySizedBox(widthFactor: _animation.value, child: child!),
             child: Container(decoration: _style!.fillDecoration),
           ),
         ),

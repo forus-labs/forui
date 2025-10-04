@@ -23,8 +23,8 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.foruslabs.forui.samples.samples"
-    compileSdk 35
+    namespace "com.foruslabs.forui.example"
+    compileSdk 36
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17

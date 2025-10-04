@@ -74,12 +74,9 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
         ..duration = widget.style.motion.expandDuration
         ..reverseDuration = widget.style.motion.collapseDuration
         ..value = 0;
-      _expand.dispose();
-      _expand = CurvedAnimation(
-        parent: _controller,
-        curve: widget.style.motion.expandCurve,
-        reverseCurve: widget.style.motion.collapseCurve,
-      );
+      _expand
+        ..curve = widget.style.motion.expandCurve
+        ..reverseCurve = widget.style.motion.collapseCurve;
     }
 
     if (widget.style.expandBehavior != old.style.expandBehavior) {
