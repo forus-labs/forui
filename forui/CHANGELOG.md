@@ -1,4 +1,4 @@
-## 0.16.0 (Next)
+## 0.16.0
 
 ### Better Generated Documentation
 

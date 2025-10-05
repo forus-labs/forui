@@ -1,4 +1,4 @@
-## 0.16.0 (Next)
+## 0.16.0
 
 * **Breaking** Replace `useFDateFieldController(animationDuration: ...)` with `useFDateFieldController(popoverMotion: ...)`.
 * **Breaking** Replace `useFPopoverController(animationDuration: ...)` with `useFPopoverController(motion: ...)`.
