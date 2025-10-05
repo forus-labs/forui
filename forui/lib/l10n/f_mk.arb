@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Не се пронајдени совпаѓања.",
   "progressSemanticsLabel": "Се вчитува",
   "passwordFieldObscureTextButtonSemanticsLabel": "Сокриј лозинка",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Прикажи лозинка"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Прикажи лозинка",
+  "textFieldEmailLabel": "Е-пошта",
+  "passwordFieldLabel": "Лозинка"
 }

@@ -25,5 +25,7 @@
   "autocompleteNoResults": "לא נמצאו התאמות.",
   "progressSemanticsLabel": "טוען",
   "passwordFieldObscureTextButtonSemanticsLabel": "הסתר סיסמה",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "הראה סיסמה"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "הראה סיסמה",
+  "textFieldEmailLabel": "דוא״ל",
+  "passwordFieldLabel": "סיסמה"
 }

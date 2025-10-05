@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Geen overeenkomsten gevonden.",
   "progressSemanticsLabel": "Laden",
   "passwordFieldObscureTextButtonSemanticsLabel": "Wachtwoord verbergen",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Wachtwoord tonen"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Wachtwoord tonen",
+  "textFieldEmailLabel": "E-mail",
+  "passwordFieldLabel": "Wachtwoord"
 }

@@ -151,6 +151,11 @@ We've added a password visibility toggle to password fields.
 * Add password visibility toggle to `FTextFormField.password(...)`.
 * Add `FTextFormField.onReset`.
 
+* Change `FTextField.email(label: ...)` to be localized.
+* Change `FTextField.password(label: ...)` to be localized.
+* Change `FTextFormField.email(label: ...)` to be localized.
+* Change `FTextFormField.password(label: ...)` to be localized.
+
 
 ### `FThemeData`
 We've added support for animated theme transitions. This should make transitions between themes gradual instead of abrupt.

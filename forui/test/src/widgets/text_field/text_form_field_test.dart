@@ -167,4 +167,16 @@ void main() {
       expect(count, 2);
     });
   });
+
+  testWidgets('email - localized', (tester) async {
+    await tester.pumpWidget(TestScaffold.app(locale: const Locale('zh'), child: const FTextFormField.email()));
+
+    expect(find.text('电子邮件'), findsOneWidget);
+  });
+
+  testWidgets('password - localized', (tester) async {
+    await tester.pumpWidget(TestScaffold.app(locale: const Locale('zh'), child: FTextFormField.password()));
+
+    expect(find.text('密码'), findsOneWidget);
+  });
 }

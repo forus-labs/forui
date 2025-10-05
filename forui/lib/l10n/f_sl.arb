@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Ni ujemanj.",
   "progressSemanticsLabel": "Nalaganje",
   "passwordFieldObscureTextButtonSemanticsLabel": "Skrij geslo",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Prikaži geslo"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Prikaži geslo",
+  "textFieldEmailLabel": "E-pošta",
+  "passwordFieldLabel": "Geslo"
 }

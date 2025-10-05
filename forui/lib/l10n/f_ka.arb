@@ -25,5 +25,7 @@
   "autocompleteNoResults": "შესაბამისობები ვერ იქნა ნაპოვნი.",
   "progressSemanticsLabel": "იტვირთება",
   "passwordFieldObscureTextButtonSemanticsLabel": "პაროლის დამალვა",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "პაროლის ჩვენება"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "პაროლის ჩვენება",
+  "textFieldEmailLabel": "ელფოსტა",
+  "passwordFieldLabel": "პაროლი"
 }

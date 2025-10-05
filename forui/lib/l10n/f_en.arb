@@ -160,10 +160,17 @@
     "description": "The semantic label for a sheet."
   },
 
-
+  "textFieldEmailLabel": "Email",
+  "@textFieldEmailLabel": {
+    "description": "The email text field's label."
+  },
   "textFieldClearButtonSemanticsLabel": "Clear",
   "@textFieldClearButtonSemanticsLabel": {
     "description": "The semantic label for the clear button in a text field."
+  },
+  "passwordFieldLabel": "Password",
+  "@passwordFieldLabel": {
+    "description": "The password text field's label."
   },
   "passwordFieldObscureTextButtonSemanticsLabel": "Hide password",
   "@passwordFieldObscureTextButtonSemanticsLabel": {

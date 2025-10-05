@@ -120,7 +120,13 @@ class FLocalizationsEl extends FLocalizations {
   String get sheetSemanticsLabel => 'Φύλλο';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Κωδικός πρόσβασης';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Απόκρυψη κωδικού';

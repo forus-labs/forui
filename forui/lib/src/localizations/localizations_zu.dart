@@ -120,7 +120,13 @@ class FLocalizationsZu extends FLocalizations {
   String get sheetSemanticsLabel => 'Ishidi';
 
   @override
+  String get textFieldEmailLabel => 'I-imeyili';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Sula';
+
+  @override
+  String get passwordFieldLabel => 'Iphasiwedi';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Fihla iphasiwedi';

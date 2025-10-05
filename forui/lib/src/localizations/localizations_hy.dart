@@ -120,7 +120,13 @@ class FLocalizationsHy extends FLocalizations {
   String get sheetSemanticsLabel => 'էկրան';
 
   @override
+  String get textFieldEmailLabel => 'Էլ․ փոստ';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Գաղտնաբառ';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Թաքցնել գաղտնաբառը';

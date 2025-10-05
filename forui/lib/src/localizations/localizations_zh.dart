@@ -120,7 +120,13 @@ class FLocalizationsZh extends FLocalizations {
   String get sheetSemanticsLabel => '动作条';
 
   @override
+  String get textFieldEmailLabel => '电子邮件';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => '清除';
+
+  @override
+  String get passwordFieldLabel => '密码';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => '隐藏密码';
@@ -208,7 +214,13 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get sheetSemanticsLabel => '面板';
 
   @override
+  String get textFieldEmailLabel => '電郵';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => '清除';
+
+  @override
+  String get passwordFieldLabel => '密碼';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => '隱藏密碼';
@@ -296,7 +308,13 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String get sheetSemanticsLabel => '功能表';
 
   @override
+  String get textFieldEmailLabel => '電子郵件';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => '清除';
+
+  @override
+  String get passwordFieldLabel => '密碼';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => '隱藏密碼';

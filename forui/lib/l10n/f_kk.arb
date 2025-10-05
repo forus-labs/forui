@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Ешқандай сәйкестік табылмады.",
   "progressSemanticsLabel": "Жүктелуде",
   "passwordFieldObscureTextButtonSemanticsLabel": "Құпия сөзді жасыру",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Құпия сөзді көрсету"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Құпия сөзді көрсету",
+  "textFieldEmailLabel": "Электрондық пошта",
+  "passwordFieldLabel": "Құпия сөз"
 }

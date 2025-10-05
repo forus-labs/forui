@@ -120,7 +120,13 @@ class FLocalizationsNl extends FLocalizations {
   String get sheetSemanticsLabel => 'Blad';
 
   @override
+  String get textFieldEmailLabel => 'E-mail';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Wissen';
+
+  @override
+  String get passwordFieldLabel => 'Wachtwoord';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Wachtwoord verbergen';

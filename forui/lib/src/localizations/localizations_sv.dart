@@ -120,7 +120,13 @@ class FLocalizationsSv extends FLocalizations {
   String get sheetSemanticsLabel => 'Ark';
 
   @override
+  String get textFieldEmailLabel => 'E-post';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Rensa';
+
+  @override
+  String get passwordFieldLabel => 'Lösenord';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Dölj lösenord';

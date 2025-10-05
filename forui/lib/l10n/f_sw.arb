@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Hakuna mechi zilizopatikana.",
   "progressSemanticsLabel": "Inapakia",
   "passwordFieldObscureTextButtonSemanticsLabel": "Ficha nenosiri",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Onyesha nenosiri"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Onyesha nenosiri",
+  "textFieldEmailLabel": "Barua pepe",
+  "passwordFieldLabel": "Nenosiri"
 }

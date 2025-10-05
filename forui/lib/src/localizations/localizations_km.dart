@@ -120,7 +120,13 @@ class FLocalizationsKm extends FLocalizations {
   String get sheetSemanticsLabel => 'សន្លឹក';
 
   @override
+  String get textFieldEmailLabel => 'អ៊ីមែល';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'ពាក្យសម្ងាត់';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'លាក់ពាក្យសម្ងាត់';

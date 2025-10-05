@@ -120,7 +120,13 @@ class FLocalizationsUz extends FLocalizations {
   String get sheetSemanticsLabel => 'ekran';
 
   @override
+  String get textFieldEmailLabel => 'Elektron pochta';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Tozalash';
+
+  @override
+  String get passwordFieldLabel => 'Parol';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Parolni yashirish';

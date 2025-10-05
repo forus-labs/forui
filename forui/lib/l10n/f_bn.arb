@@ -26,5 +26,7 @@
   "autocompleteNoResults": "কোনো মিল পাওয়া যায়নি.",
   "progressSemanticsLabel": "লোড হচ্ছে",
   "passwordFieldObscureTextButtonSemanticsLabel": "পাসওয়ার্ড লুকান",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "পাসওয়ার্ড দেখান"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "পাসওয়ার্ড দেখান",
+  "textFieldEmailLabel": "ইমেল",
+  "passwordFieldLabel": "পাসওয়ার্ড"
 }

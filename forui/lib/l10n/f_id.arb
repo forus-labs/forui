@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Tidak ada hasil yang cocok.",
   "progressSemanticsLabel": "Memuat",
   "passwordFieldObscureTextButtonSemanticsLabel": "Sembunyikan kata sandi",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Tampilkan kata sandi"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Tampilkan kata sandi",
+  "textFieldEmailLabel": "Email",
+  "passwordFieldLabel": "Kata sandi"
 }

@@ -120,7 +120,13 @@ class FLocalizationsSl extends FLocalizations {
   String get sheetSemanticsLabel => 'Razdelek';
 
   @override
+  String get textFieldEmailLabel => 'E-pošta';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Počisti';
+
+  @override
+  String get passwordFieldLabel => 'Geslo';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Skrij geslo';

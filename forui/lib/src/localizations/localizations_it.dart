@@ -120,7 +120,13 @@ class FLocalizationsIt extends FLocalizations {
   String get sheetSemanticsLabel => 'Riquadro';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Cancella';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Nascondi password';

@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Không tìm thấy kết quả phù hợp.",
   "progressSemanticsLabel": "Đang tải",
   "passwordFieldObscureTextButtonSemanticsLabel": "Ẩn mật khẩu",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Hiển thị mật khẩu"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Hiển thị mật khẩu",
+  "textFieldEmailLabel": "Email",
+  "passwordFieldLabel": "Mật khẩu"
 }

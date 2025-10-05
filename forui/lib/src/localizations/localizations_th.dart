@@ -120,7 +120,13 @@ class FLocalizationsTh extends FLocalizations {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get textFieldEmailLabel => 'อีเมล';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'ล้าง';
+
+  @override
+  String get passwordFieldLabel => 'รหัสผ่าน';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'ซ่อนรหัสผ่าน';

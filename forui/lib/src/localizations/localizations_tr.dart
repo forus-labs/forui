@@ -120,7 +120,13 @@ class FLocalizationsTr extends FLocalizations {
   String get sheetSemanticsLabel => 'sayfa';
 
   @override
+  String get textFieldEmailLabel => 'E-posta';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Temizle';
+
+  @override
+  String get passwordFieldLabel => 'Şifre';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Şifreyi gizle';

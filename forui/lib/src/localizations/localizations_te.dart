@@ -120,7 +120,13 @@ class FLocalizationsTe extends FLocalizations {
   String get sheetSemanticsLabel => 'షీట్';
 
   @override
+  String get textFieldEmailLabel => 'ఇమెయిల్';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'పాస్‌వర్డ్';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'పాస్‌వర్డ్‌ను దాచండి';

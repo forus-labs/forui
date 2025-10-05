@@ -26,5 +26,7 @@
   "autocompleteNoResults": "कुनै मिल्दो फेला परेन.",
   "progressSemanticsLabel": "लोड हुँदै",
   "passwordFieldObscureTextButtonSemanticsLabel": "पासवर्ड लुकाउनुहोस्",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड देखाउनुहोस्"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड देखाउनुहोस्",
+  "textFieldEmailLabel": "इमेल",
+  "passwordFieldLabel": "पासवर्ड"
 }

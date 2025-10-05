@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Vasteid ei leitud.",
   "progressSemanticsLabel": "Laadimine",
   "passwordFieldObscureTextButtonSemanticsLabel": "Peida parool",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Näita parooli"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Näita parooli",
+  "textFieldEmailLabel": "E-post",
+  "passwordFieldLabel": "Parool"
 }

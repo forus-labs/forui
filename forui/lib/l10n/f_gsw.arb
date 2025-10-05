@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Kei Überiistimmige gfunde.",
   "progressSemanticsLabel": "Ladet",
   "passwordFieldObscureTextButtonSemanticsLabel": "Passwort verberge",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Passwort zeige"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Passwort zeige",
+  "textFieldEmailLabel": "E-Mail",
+  "passwordFieldLabel": "Passwort"
 }

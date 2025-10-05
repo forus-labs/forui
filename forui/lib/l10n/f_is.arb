@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Engar niðurstöður fundust.",
   "progressSemanticsLabel": "Hleður",
   "passwordFieldObscureTextButtonSemanticsLabel": "Fela lykilorð",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Sýna lykilorð"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Sýna lykilorð",
+  "textFieldEmailLabel": "Netfang",
+  "passwordFieldLabel": "Lykilorð"
 }

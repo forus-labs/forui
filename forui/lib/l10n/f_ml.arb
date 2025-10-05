@@ -25,5 +25,7 @@
   "autocompleteNoResults": "പൊരുത്തങ്ങളൊന്നും കണ്ടെത്തിയില്ല.",
   "progressSemanticsLabel": "ലോഡ് ചെയ്യുന്നു",
   "passwordFieldObscureTextButtonSemanticsLabel": "പാസ്‌വേഡ് മറയ്ക്കുക",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "പാസ്‌വേഡ് കാണിക്കുക"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "പാസ്‌വേഡ് കാണിക്കുക",
+  "textFieldEmailLabel": "ഇമെയിൽ",
+  "passwordFieldLabel": "പാസ്‌വേഡ്"
 }

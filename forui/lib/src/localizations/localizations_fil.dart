@@ -120,7 +120,13 @@ class FLocalizationsFil extends FLocalizations {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'I-clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Itago ang password';

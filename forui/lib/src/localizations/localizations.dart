@@ -436,11 +436,23 @@ abstract class FLocalizations {
   /// **'Sheet'**
   String get sheetSemanticsLabel;
 
+  /// The email text field's label.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get textFieldEmailLabel;
+
   /// The semantic label for the clear button in a text field.
   ///
   /// In en, this message translates to:
   /// **'Clear'**
   String get textFieldClearButtonSemanticsLabel;
+
+  /// The password text field's label.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordFieldLabel;
 
   /// The semantic label for the unobscure text button in a text field when the text is obscured.
   ///

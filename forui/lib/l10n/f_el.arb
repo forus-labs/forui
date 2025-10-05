@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Δεν βρέθηκαν αντιστοιχίες.",
   "progressSemanticsLabel": "Φόρτωση",
   "passwordFieldObscureTextButtonSemanticsLabel": "Απόκρυψη κωδικού",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Εμφάνιση κωδικού"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Εμφάνιση κωδικού",
+  "textFieldEmailLabel": "Email",
+  "passwordFieldLabel": "Κωδικός πρόσβασης"
 }

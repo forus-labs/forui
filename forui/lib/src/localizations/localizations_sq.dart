@@ -120,7 +120,13 @@ class FLocalizationsSq extends FLocalizations {
   String get sheetSemanticsLabel => 'Fleta';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Pastro';
+
+  @override
+  String get passwordFieldLabel => 'Fjalëkalimi';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Fshih fjalëkalimin';

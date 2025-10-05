@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Walang nahanap na tugma.",
   "progressSemanticsLabel": "Naglo-load",
   "passwordFieldObscureTextButtonSemanticsLabel": "Itago ang password",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Ipakita ang password"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Ipakita ang password",
+  "textFieldEmailLabel": "Email",
+  "passwordFieldLabel": "Password"
 }

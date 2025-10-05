@@ -120,7 +120,13 @@ class FLocalizationsPt extends FLocalizations {
   String get sheetSemanticsLabel => 'inferior';
 
   @override
+  String get textFieldEmailLabel => 'E-mail';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Senha';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar senha';
@@ -197,6 +203,12 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get sheetSemanticsLabel => 'Secção';
+
+  @override
+  String get textFieldEmailLabel => 'E-mail';
+
+  @override
+  String get passwordFieldLabel => 'Palavra-passe';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar palavra-passe';

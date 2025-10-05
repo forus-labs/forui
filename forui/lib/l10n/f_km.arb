@@ -26,5 +26,7 @@
   "autocompleteNoResults": "រកមិនឃើញការផ្គូផ្គង.",
   "progressSemanticsLabel": "កំពុងផ្ទុក",
   "passwordFieldObscureTextButtonSemanticsLabel": "លាក់ពាក្យសម្ងាត់",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "បង្ហាញពាក្យសម្ងាត់"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "បង្ហាញពាក្យសម្ងាត់",
+  "textFieldEmailLabel": "អ៊ីមែល",
+  "passwordFieldLabel": "ពាក្យសម្ងាត់"
 }

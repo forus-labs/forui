@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Nincs találat.",
   "progressSemanticsLabel": "Betöltés",
   "passwordFieldObscureTextButtonSemanticsLabel": "Jelszó elrejtése",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Jelszó megjelenítése"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Jelszó megjelenítése",
+  "textFieldEmailLabel": "E-mail",
+  "passwordFieldLabel": "Jelszó"
 }

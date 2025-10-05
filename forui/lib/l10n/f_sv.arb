@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Inga träffar hittades.",
   "progressSemanticsLabel": "Laddar",
   "passwordFieldObscureTextButtonSemanticsLabel": "Dölj lösenord",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Visa lösenord"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Visa lösenord",
+  "textFieldEmailLabel": "E-post",
+  "passwordFieldLabel": "Lösenord"
 }

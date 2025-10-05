@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Համընկնումներ չեն գտնվել.",
   "progressSemanticsLabel": "Բեռնում",
   "passwordFieldObscureTextButtonSemanticsLabel": "Թաքցնել գաղտնաբառը",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Ցույց տալ գաղտնաբառը"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Ցույց տալ գաղտնաբառը",
+  "textFieldEmailLabel": "Էլ․ փոստ",
+  "passwordFieldLabel": "Գաղտնաբառ"
 }

@@ -26,5 +26,7 @@
   "autocompleteNoResults": "କୌଣସି ମେଳ ମିଳିଲା ନାହିଁ.",
   "progressSemanticsLabel": "ଲୋଡ଼ ହେଉଛି",
   "passwordFieldObscureTextButtonSemanticsLabel": "ପାସୱାର୍ଡ ଲୁଚାନ୍ତୁ",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "ପାସୱାର୍ଡ ଦେଖାନ୍ତୁ"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ପାସୱାର୍ଡ ଦେଖାନ୍ତୁ",
+  "textFieldEmailLabel": "ଇମେଲ୍",
+  "passwordFieldLabel": "ପାସୱାର୍ଡ"
 }

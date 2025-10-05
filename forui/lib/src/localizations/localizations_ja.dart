@@ -120,7 +120,13 @@ class FLocalizationsJa extends FLocalizations {
   String get sheetSemanticsLabel => 'シート';
 
   @override
+  String get textFieldEmailLabel => 'メール';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'クリア';
+
+  @override
+  String get passwordFieldLabel => 'パスワード';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'パスワードを非表示';

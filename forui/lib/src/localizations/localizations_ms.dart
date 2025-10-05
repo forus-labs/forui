@@ -120,7 +120,13 @@ class FLocalizationsMs extends FLocalizations {
   String get sheetSemanticsLabel => 'Helaian';
 
   @override
+  String get textFieldEmailLabel => 'E-mel';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Kosongkan';
+
+  @override
+  String get passwordFieldLabel => 'Kata laluan';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Sembunyikan kata laluan';

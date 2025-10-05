@@ -26,5 +26,7 @@
   "autocompleteNoResults": "کوئی میچ نہیں ملا.",
   "progressSemanticsLabel": "لوڈ ہو رہا ہے",
   "passwordFieldObscureTextButtonSemanticsLabel": "پاس ورڈ چھپائیں",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "پاس ورڈ دکھائیں"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "پاس ورڈ دکھائیں",
+  "textFieldEmailLabel": "ای میل",
+  "passwordFieldLabel": "پاس ورڈ"
 }

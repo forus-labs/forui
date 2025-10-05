@@ -25,5 +25,7 @@
   "autocompleteNoResults": "कोणतेही जुळणारे आढळले नाही.",
   "progressSemanticsLabel": "लोड होत आहे",
   "passwordFieldObscureTextButtonSemanticsLabel": "पासवर्ड लपवा",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड दाखवा"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड दाखवा",
+  "textFieldEmailLabel": "ईमेल",
+  "passwordFieldLabel": "पासवर्ड"
 }

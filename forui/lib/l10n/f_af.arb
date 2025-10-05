@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Geen resultate gevind nie.",
   "progressSemanticsLabel": "Besig om te laai",
   "passwordFieldObscureTextButtonSemanticsLabel": "Versteek wagwoord",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Wys wagwoord"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Wys wagwoord",
+  "textFieldEmailLabel": "E-pos",
+  "passwordFieldLabel": "Wagwoord"
 }

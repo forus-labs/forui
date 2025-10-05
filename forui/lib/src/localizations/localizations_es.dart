@@ -120,7 +120,13 @@ class FLocalizationsEs extends FLocalizations {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -199,6 +205,12 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -273,6 +285,12 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -351,6 +369,12 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -425,6 +449,12 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -503,6 +533,12 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -577,6 +613,12 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -655,6 +697,12 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -729,6 +777,12 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -807,6 +861,12 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -881,6 +941,12 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -959,6 +1025,12 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -1033,6 +1105,12 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -1111,6 +1189,12 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -1185,6 +1269,12 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -1263,6 +1353,12 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -1337,6 +1433,12 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'inferior';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -1415,6 +1517,12 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -1489,6 +1597,12 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
@@ -1567,6 +1681,12 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
+
+  @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';
 
   @override
@@ -1641,6 +1761,12 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get textFieldEmailLabel => 'Correo electrónico';
+
+  @override
+  String get passwordFieldLabel => 'Contraseña';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ocultar contraseña';

@@ -120,7 +120,13 @@ class FLocalizationsTa extends FLocalizations {
   String get sheetSemanticsLabel => 'திரை';
 
   @override
+  String get textFieldEmailLabel => 'மின்னஞ்சல்';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'கடவுச்சொல்';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'கடவுச்சொல்லை மறைக்கவும்';

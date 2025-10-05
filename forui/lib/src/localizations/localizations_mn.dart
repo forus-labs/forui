@@ -120,7 +120,13 @@ class FLocalizationsMn extends FLocalizations {
   String get sheetSemanticsLabel => 'хүснэгт';
 
   @override
+  String get textFieldEmailLabel => 'Имэйл';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Нууц үг';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Нууц үгийг нуух';

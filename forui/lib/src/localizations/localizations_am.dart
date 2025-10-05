@@ -120,7 +120,13 @@ class FLocalizationsAm extends FLocalizations {
   String get sheetSemanticsLabel => 'ሉህ';
 
   @override
+  String get textFieldEmailLabel => 'ኢሜይል';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'አጽዳ';
+
+  @override
+  String get passwordFieldLabel => 'የይለፍ ቃል';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'ይለፍ ቃል ደብቅ';

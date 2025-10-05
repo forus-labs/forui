@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Eşleşme bulunamadı.",
   "progressSemanticsLabel": "Yükleniyor",
   "passwordFieldObscureTextButtonSemanticsLabel": "Şifreyi gizle",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Şifreyi göster"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Şifreyi göster",
+  "textFieldEmailLabel": "E-posta",
+  "passwordFieldLabel": "Şifre"
 }

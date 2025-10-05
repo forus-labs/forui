@@ -120,7 +120,13 @@ class FLocalizationsCy extends FLocalizations {
   String get sheetSemanticsLabel => 'Taflen';
 
   @override
+  String get textFieldEmailLabel => 'E-bost';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clirio';
+
+  @override
+  String get passwordFieldLabel => 'Cyfrinair';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Cuddio cyfrinair';

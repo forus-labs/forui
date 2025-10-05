@@ -26,5 +26,7 @@
   "autocompleteNoResults": "ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ.",
   "progressSemanticsLabel": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ",
   "passwordFieldObscureTextButtonSemanticsLabel": "ਪਾਸਵਰਡ ਲੁਕਾਓ",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "ਪਾਸਵਰਡ ਦਿਖਾਓ"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ਪਾਸਵਰਡ ਦਿਖਾਓ",
+  "textFieldEmailLabel": "ਈਮੇਲ",
+  "passwordFieldLabel": "ਪਾਸਵਰਡ"
 }

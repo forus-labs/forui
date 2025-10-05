@@ -120,7 +120,13 @@ class FLocalizationsKo extends FLocalizations {
   String get sheetSemanticsLabel => '시트';
 
   @override
+  String get textFieldEmailLabel => '이메일';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => '비밀번호';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => '비밀번호 숨기기';

@@ -25,5 +25,7 @@
   "autocompleteNoResults": "કોઈ મેળ મળ્યો નહીં.",
   "progressSemanticsLabel": "લોડ કરી રહ્યું છે",
   "passwordFieldObscureTextButtonSemanticsLabel": "પાસવર્ડ છુપાવો",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "પાસવર્ડ બતાવો"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "પાસવર્ડ બતાવો",
+  "textFieldEmailLabel": "ઇમેઇલ",
+  "passwordFieldLabel": "પાસવર્ડ"
 }

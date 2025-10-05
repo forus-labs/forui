@@ -25,5 +25,7 @@
   "autocompleteNoResults": "ບໍ່ພົບການຈັບຄູ່.",
   "progressSemanticsLabel": "ກຳລັງໂຫລດ",
   "passwordFieldObscureTextButtonSemanticsLabel": "ເຊື່ອງລະຫັດຜ່ານ",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "ສະແດງລະຫັດຜ່ານ"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ສະແດງລະຫັດຜ່ານ",
+  "textFieldEmailLabel": "ອີເມວ",
+  "passwordFieldLabel": "ລະຫັດຜ່ານ"
 }

@@ -120,7 +120,13 @@ class FLocalizationsUr extends FLocalizations {
   String get sheetSemanticsLabel => 'شیٹ';
 
   @override
+  String get textFieldEmailLabel => 'ای میل';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'صاف کریں';
+
+  @override
+  String get passwordFieldLabel => 'پاس ورڈ';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'پاس ورڈ چھپائیں';

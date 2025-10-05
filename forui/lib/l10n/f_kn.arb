@@ -25,5 +25,7 @@
   "autocompleteNoResults": "ಯಾವುದೇ ಹೊಂದಾಣಿಕೆ ಕಂಡುಬಂದಿಲ್ಲ.",
   "progressSemanticsLabel": "ಲೋಡ್ ಆಗುತ್ತಿದೆ",
   "passwordFieldObscureTextButtonSemanticsLabel": "ಪಾಸ್‌ವರ್ಡ್ ಮರೆಮಾಡು",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "ಪಾಸ್‌ವರ್ಡ್ ತೋರಿಸು"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ಪಾಸ್‌ವರ್ಡ್ ತೋರಿಸು",
+  "textFieldEmailLabel": "ಇಮೇಲ್",
+  "passwordFieldLabel": "ಪಾಸ್‌ವರ್ಡ್"
 }

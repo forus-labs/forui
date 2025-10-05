@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Nerasta atitikmenų.",
   "progressSemanticsLabel": "Įkeliama",
   "passwordFieldObscureTextButtonSemanticsLabel": "Slėpti slaptažodį",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Rodyti slaptažodį"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Rodyti slaptažodį",
+  "textFieldEmailLabel": "El. paštas",
+  "passwordFieldLabel": "Slaptažodis"
 }

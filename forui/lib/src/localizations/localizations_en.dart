@@ -120,7 +120,13 @@ class FLocalizationsEn extends FLocalizations {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
@@ -208,7 +214,13 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
@@ -296,7 +308,13 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
@@ -384,7 +402,13 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
@@ -472,7 +496,13 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
@@ -560,7 +590,13 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
@@ -648,7 +684,13 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
@@ -736,7 +778,13 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';
@@ -824,7 +872,13 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';

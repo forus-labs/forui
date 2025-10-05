@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Tiada padanan ditemui.",
   "progressSemanticsLabel": "Memuatkan",
   "passwordFieldObscureTextButtonSemanticsLabel": "Sembunyikan kata laluan",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Tunjukkan kata laluan"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Tunjukkan kata laluan",
+  "textFieldEmailLabel": "E-mel",
+  "passwordFieldLabel": "Kata laluan"
 }
