@@ -61,20 +61,11 @@ class FTreeItem extends StatefulWidget {
   /// Called when the state changes.
   final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
+  /// Called when the expansion state changes.
+  final ValueChanged<bool>? onExpandChange;
+
   /// The tree item's children.
   final List<FTreeItem> children;
-
-  /// The nesting depth of this item. Used internally for indentation and line rendering.
-  /// Should not be set manually.
-  final int depth;
-
-  /// Whether this is the last child at its level. Used internally for line rendering.
-  /// Should not be set manually.
-  final bool isLast;
-
-  /// The parent indices for line rendering. Used internally.
-  /// Should not be set manually.
-  final List<bool> parentIndices;
 
   /// Creates a [FTreeItem].
   const FTreeItem({
@@ -89,10 +80,8 @@ class FTreeItem extends StatefulWidget {
     this.onLongPress,
     this.onHoverChange,
     this.onStateChange,
+    this.onExpandChange,
     this.children = const [],
-    this.depth = 0,
-    this.isLast = false,
-    this.parentIndices = const [],
     super.key,
   });
 
@@ -112,10 +101,28 @@ class FTreeItem extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
-      ..add(IntProperty('depth', depth))
-      ..add(FlagProperty('isLast', value: isLast, ifTrue: 'isLast'))
+      ..add(ObjectFlagProperty.has('onExpandChange', onExpandChange))
       ..add(DiagnosticsProperty('children', children));
   }
+}
+
+/// Counts the number of visible rows that an [FTreeItem] will occupy,
+/// including itself and its expanded children.
+///
+/// [item] is the tree item to count rows for.
+/// [isExpanded] is whether this item is currently expanded (not just initiallyExpanded).
+int _countVisibleRows(FTreeItem item, bool isExpanded) {
+  if (item.children.isEmpty || !isExpanded) {
+    return 1; // Just the item itself
+  }
+
+  // Item itself + all its visible children
+  // For children, we use initiallyExpanded since we don't have their actual state at this level
+  var count = 1;
+  for (final child in item.children) {
+    count += _countVisibleRows(child, child.initiallyExpanded);
+  }
+  return count;
 }
 
 class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
@@ -128,11 +135,15 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
   Animation<double>? _fade;
   Animation<double>? _iconRotation;
   late bool _expanded;
+  late Map<int, bool> _childExpansionStates;
 
   @override
   void initState() {
     super.initState();
     _expanded = widget.initiallyExpanded;
+    _childExpansionStates = {
+      for (var i = 0; i < widget.children.length; i++) i: widget.children[i].initiallyExpanded,
+    };
   }
 
   @override
@@ -189,6 +200,7 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
   void _toggle() {
     setState(() {
       _expanded = !_expanded;
+      widget.onExpandChange?.call(_expanded);
       if (_expanded) {
         _controller!.forward();
       } else {
@@ -215,58 +227,44 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Main item content with tree lines
-        CustomPaint(
-          painter: FTreeLinePainter(
-            lineStyle: _style!.lineStyle,
-            depth: widget.depth,
-            hasChildren: widget.children.isNotEmpty,
-            isExpanded: _expanded,
-            isLast: widget.isLast,
-            parentIndices: widget.parentIndices,
-            indentWidth: indentWidth,
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(left: widget.depth * indentWidth),
-            child: FTappable(
-              style: _style!.tappableStyle,
-              focusedOutlineStyle: _style!.focusedOutlineStyle,
-              selected: widget.selected,
-              autofocus: widget.autofocus,
-              focusNode: widget.focusNode,
-              onPress: widget.children.isNotEmpty
-                  ? () {
-                      _toggle();
-                      widget.onPress?.call();
-                    }
-                  : widget.onPress,
-              onLongPress: widget.onLongPress,
-              onHoverChange: widget.onHoverChange,
-              onStateChange: widget.onStateChange,
-              builder: (_, states, child) => Container(
-                padding: _style!.padding,
-                decoration: BoxDecoration(
-                  color: _style!.backgroundColor.resolve(states),
-                  borderRadius: _style!.borderRadius,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: _style!.iconSpacing,
-                  children: [
-                    if (widget.children.isNotEmpty)
-                      IconTheme(
-                        data: _style!.expandIconStyle.resolve(states),
-                        child: RotationTransition(turns: _iconRotation!, child: const Icon(FIcons.chevronRight)),
-                      )
-                    else if (widget.icon != null)
-                      IconTheme(data: _style!.iconStyle.resolve(states), child: widget.icon!),
-                    if (widget.label != null)
-                      Flexible(
-                        child: DefaultTextStyle.merge(style: _style!.textStyle.resolve(states), child: widget.label!),
-                      ),
-                  ],
-                ),
-              ),
+        // Main item content
+        FTappable(
+          style: _style!.tappableStyle,
+          focusedOutlineStyle: _style!.focusedOutlineStyle,
+          selected: widget.selected,
+          autofocus: widget.autofocus,
+          focusNode: widget.focusNode,
+          onPress: widget.children.isNotEmpty
+              ? () {
+                  _toggle();
+                  widget.onPress?.call();
+                }
+              : widget.onPress,
+          onLongPress: widget.onLongPress,
+          onHoverChange: widget.onHoverChange,
+          onStateChange: widget.onStateChange,
+          builder: (_, states, child) => Container(
+            padding: _style!.padding,
+            decoration: BoxDecoration(
+              color: _style!.backgroundColor.resolve(states),
+              borderRadius: _style!.borderRadius,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              spacing: _style!.iconSpacing,
+              children: [
+                if (widget.children.isNotEmpty)
+                  IconTheme(
+                    data: _style!.expandIconStyle.resolve(states),
+                    child: RotationTransition(turns: _iconRotation!, child: const Icon(FIcons.chevronRight)),
+                  )
+                else if (widget.icon != null)
+                  IconTheme(data: _style!.iconStyle.resolve(states), child: widget.icon!),
+                if (widget.label != null)
+                  Flexible(
+                    child: DefaultTextStyle.merge(style: _style!.textStyle.resolve(states), child: widget.label!),
+                  ),
+              ],
             ),
           ),
         ),
@@ -278,34 +276,56 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
               value: _reveal!.value,
               child: AnimatedBuilder(
                 animation: _fade!,
-                builder: (context, child) => FadeTransition(
-                  opacity: _fade!,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: _style!.childrenSpacing,
-                    children: [
-                      for (var i = 0; i < widget.children.length; i++)
-                        FTreeItem(
-                          style: widget.children[i].style,
-                          icon: widget.children[i].icon,
-                          label: widget.children[i].label,
-                          selected: widget.children[i].selected,
-                          initiallyExpanded: widget.children[i].initiallyExpanded,
-                          autofocus: widget.children[i].autofocus,
-                          focusNode: widget.children[i].focusNode,
-                          onPress: widget.children[i].onPress,
-                          onLongPress: widget.children[i].onLongPress,
-                          onHoverChange: widget.children[i].onHoverChange,
-                          onStateChange: widget.children[i].onStateChange,
-                          depth: widget.depth + 1,
-                          isLast: i == widget.children.length - 1,
-                          parentIndices: [...widget.parentIndices, widget.isLast],
-                          children: widget.children[i].children,
+                builder: (context, child) {
+                  // Calculate the number of visible rows each child occupies using tracked expansion states
+                  final childRowCounts = [
+                    for (var i = 0; i < widget.children.length; i++)
+                      _countVisibleRows(widget.children[i], _childExpansionStates[i] ?? false),
+                  ];
+
+                  return FadeTransition(
+                    opacity: _fade!,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: indentWidth),
+                      child: CustomPaint(
+                        painter: FTreeChildrenLinePainter(
+                          lineStyle: _style!.lineStyle,
+                          childCount: widget.children.length,
+                          childrenSpacing: _style!.childrenSpacing,
+                          childRowCounts: childRowCounts,
                         ),
-                    ],
-                  ),
-                ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          spacing: _style!.childrenSpacing,
+                          children: [
+                            for (var i = 0; i < widget.children.length; i++)
+                              FTreeItem(
+                                key: widget.children[i].key,
+                                style: widget.children[i].style,
+                                icon: widget.children[i].icon,
+                                label: widget.children[i].label,
+                                selected: widget.children[i].selected,
+                                initiallyExpanded: widget.children[i].initiallyExpanded,
+                                autofocus: widget.children[i].autofocus,
+                                focusNode: widget.children[i].focusNode,
+                                onPress: widget.children[i].onPress,
+                                onLongPress: widget.children[i].onLongPress,
+                                onHoverChange: widget.children[i].onHoverChange,
+                                onStateChange: widget.children[i].onStateChange,
+                                onExpandChange: (expanded) {
+                                  setState(() {
+                                    _childExpansionStates[i] = expanded;
+                                  });
+                                },
+                                children: widget.children[i].children,
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -456,9 +476,9 @@ class FTreeItemMotion with Diagnosticable {
     Tween<double>? revealTween,
     Tween<double>? fadeTween,
     Tween<double>? iconTween,
-  })  : revealTween = revealTween ?? Tween(begin: 0.0, end: 1.0),
-        fadeTween = fadeTween ?? Tween(begin: 0.0, end: 1.0),
-        iconTween = iconTween ?? Tween(begin: 0.0, end: 0.25);
+  }) : revealTween = revealTween ?? Tween(begin: 0.0, end: 1.0),
+       fadeTween = fadeTween ?? Tween(begin: 0.0, end: 1.0),
+       iconTween = iconTween ?? Tween(begin: 0.0, end: 0.25);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -520,16 +540,9 @@ class FTreeLineStyle with Diagnosticable, _$FTreeLineStyleFunctions {
   final List<double>? dashPattern;
 
   /// Creates a [FTreeLineStyle].
-  const FTreeLineStyle({
-    required this.color,
-    this.width = 1.0,
-    this.dashPattern,
-  });
+  const FTreeLineStyle({required this.color, this.width = 1.0, this.dashPattern});
 
   /// Creates a [FTreeLineStyle] that inherits its properties.
   FTreeLineStyle.inherit({required FColors colors, required FStyle style})
-    : this(
-        color: colors.border,
-        width: style.borderWidth,
-      );
+    : this(color: colors.border, width: style.borderWidth);
 }

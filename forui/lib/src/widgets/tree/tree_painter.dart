@@ -5,96 +5,85 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A custom painter that draws tree connection lines.
+/// A custom painter that draws tree connection lines from a parent to its children.
 ///
-/// This painter draws the visual lines that connect parent and child items in a tree structure.
+/// This painter draws:
+/// - A vertical line from the top (parent item) to the last child
+/// - Horizontal lines from the vertical line to each child
 @internal
-class FTreeLinePainter extends CustomPainter {
+class FTreeChildrenLinePainter extends CustomPainter {
   /// The line style.
   final FTreeLineStyle lineStyle;
 
-  /// The nesting depth of the item.
-  final int depth;
+  /// The number of children.
+  final int childCount;
 
-  /// Whether the item has children.
-  final bool hasChildren;
+  /// The spacing between children.
+  final double childrenSpacing;
 
-  /// Whether the item is expanded.
-  final bool isExpanded;
+  /// The number of visible rows (including nested children) that each direct child occupies.
+  final List<int> childRowCounts;
 
-  /// Whether this is the last child at its level.
-  final bool isLast;
-
-  /// The parent indices for line rendering.
-  final List<bool> parentIndices;
-
-  /// The indentation width for each level.
-  final double indentWidth;
-
-  /// Creates a [FTreeLinePainter].
-  const FTreeLinePainter({
+  /// Creates a [FTreeChildrenLinePainter].
+  const FTreeChildrenLinePainter({
     required this.lineStyle,
-    required this.depth,
-    required this.hasChildren,
-    required this.isExpanded,
-    required this.isLast,
-    required this.parentIndices,
-    required this.indentWidth,
+    required this.childCount,
+    required this.childrenSpacing,
+    required this.childRowCounts,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (depth == 0) return; // No lines for root level
+    if (childCount == 0) {
+      return;
+    }
 
     final paint = Paint()
       ..color = lineStyle.color
       ..strokeWidth = lineStyle.width
       ..style = PaintingStyle.stroke;
 
-    // Draw vertical lines for parent levels
-    for (var i = 0; i < parentIndices.length; i++) {
-      final isParentLast = parentIndices[i];
-      if (!isParentLast) {
-        final x = (i + 1) * indentWidth + indentWidth / 2;
-        if (lineStyle.dashPattern != null) {
-          _drawDashedLine(
-            canvas,
-            Offset(x, 0),
-            Offset(x, size.height),
-            paint,
-            lineStyle.dashPattern!,
-          );
-        } else {
-          canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-        }
-      }
+    const itemPadding = 8.0; // From FTreeItemStyle padding horizontal
+    const lineStartX = 0.0; // Vertical line starts at the left edge (we're already indented)
+
+    // Calculate total number of rows and total spacing
+    final totalRows = childRowCounts.reduce((a, b) => a + b);
+
+    // Calculate the height of a single row based on actual rendered size
+    final itemHeight = (size.height) / totalRows;
+
+    // Calculate the vertical center position of each direct child
+    final childPositions = <double>[];
+    var currentY = itemHeight / 2; // Center of first child (which is in the first row)
+
+    for (var i = 0; i < childCount; i++) {
+      childPositions.add(currentY);
+      // Move to next child: advance by this child's row count, plus spacing
+      currentY += childRowCounts[i] * itemHeight;
     }
 
-    // Draw connector lines for current item
-    final x = depth * indentWidth + indentWidth / 2;
-    final y = size.height / 2;
-
-    // Vertical line from top to middle (or bottom if last)
-    if (isLast) {
-      if (lineStyle.dashPattern != null) {
-        _drawDashedLine(canvas, Offset(x, 0), Offset(x, y), paint, lineStyle.dashPattern!);
-      } else {
-        canvas.drawLine(Offset(x, 0), Offset(x, y), paint);
-      }
-    } else {
-      if (lineStyle.dashPattern != null) {
-        _drawDashedLine(canvas, Offset(x, 0), Offset(x, size.height), paint, lineStyle.dashPattern!);
-      } else {
-        canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-      }
-    }
-
-    // Horizontal line from vertical line to item
-    final horizontalEndX = x + indentWidth / 2;
+    // Draw vertical line from top to last child's center
+    final lastChildY = childPositions.last;
     if (lineStyle.dashPattern != null) {
-      _drawDashedLine(canvas, Offset(x, y), Offset(horizontalEndX, y), paint, lineStyle.dashPattern!);
+      _drawDashedLine(canvas, Offset.zero, Offset(lineStartX, lastChildY), paint, lineStyle.dashPattern!);
     } else {
-      canvas.drawLine(Offset(x, y), Offset(horizontalEndX, y), paint);
+      canvas.drawLine(Offset.zero, Offset(lineStartX, lastChildY), paint);
+    }
+
+    // Draw horizontal lines to each child
+    const horizontalEndX = itemPadding - 2; // Stop 2px before the icon area
+    for (final childY in childPositions) {
+      if (lineStyle.dashPattern != null) {
+        _drawDashedLine(
+          canvas,
+          Offset(lineStartX, childY),
+          Offset(horizontalEndX, childY),
+          paint,
+          lineStyle.dashPattern!,
+        );
+      } else {
+        canvas.drawLine(Offset(lineStartX, childY), Offset(horizontalEndX, childY), paint);
+      }
     }
   }
 
@@ -124,12 +113,9 @@ class FTreeLinePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(FTreeLinePainter oldDelegate) =>
+  bool shouldRepaint(FTreeChildrenLinePainter oldDelegate) =>
       lineStyle != oldDelegate.lineStyle ||
-      depth != oldDelegate.depth ||
-      hasChildren != oldDelegate.hasChildren ||
-      isExpanded != oldDelegate.isExpanded ||
-      isLast != oldDelegate.isLast ||
-      parentIndices != oldDelegate.parentIndices ||
-      indentWidth != oldDelegate.indentWidth;
+      childCount != oldDelegate.childCount ||
+      childrenSpacing != oldDelegate.childrenSpacing ||
+      childRowCounts != oldDelegate.childRowCounts;
 }
