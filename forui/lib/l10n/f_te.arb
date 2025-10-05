@@ -25,5 +25,7 @@
   "autocompleteNoResults": "సరిపోలినవి ఏవీ కనుగొనబడలేదు.",
   "progressSemanticsLabel": "లోడ్ అవుతోంది",
   "passwordFieldObscureTextButtonSemanticsLabel": "పాస్‌వర్డ్‌ను దాచండి",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "పాస్‌వర్డ్ చూపించు"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "పాస్‌వర్డ్ చూపించు",
+  "textFieldEmailLabel": "ఇమెయిల్",
+  "passwordFieldLabel": "పాస్‌వర్డ్"
 }

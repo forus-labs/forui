@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Nie znaleziono dopasowań.",
   "progressSemanticsLabel": "Ładowanie",
   "passwordFieldObscureTextButtonSemanticsLabel": "Ukryj hasło",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Pokaż hasło"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Pokaż hasło",
+  "textFieldEmailLabel": "E-mail",
+  "passwordFieldLabel": "Hasło"
 }

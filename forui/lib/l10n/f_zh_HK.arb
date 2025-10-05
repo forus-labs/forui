@@ -26,5 +26,7 @@
   "autocompleteNoResults": "未找到匹配項.",
   "progressSemanticsLabel": "載入中",
   "passwordFieldObscureTextButtonSemanticsLabel": "隱藏密碼",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "顯示密碼"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "顯示密碼",
+  "textFieldEmailLabel": "電郵",
+  "passwordFieldLabel": "密碼"
 }

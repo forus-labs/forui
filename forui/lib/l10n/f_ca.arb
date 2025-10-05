@@ -25,5 +25,7 @@
   "autocompleteNoResults": "No s'han trobat coincidències.",
   "progressSemanticsLabel": "Carregant",
   "passwordFieldObscureTextButtonSemanticsLabel": "Amaga la contrasenya",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostra la contrasenya"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostra la contrasenya",
+  "textFieldEmailLabel": "Correu electrònic",
+  "passwordFieldLabel": "Contrasenya"
 }

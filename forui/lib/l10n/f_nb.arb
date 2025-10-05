@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Ingen treff funnet.",
   "progressSemanticsLabel": "Laster",
   "passwordFieldObscureTextButtonSemanticsLabel": "Skjul passord",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Vis passord"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Vis passord",
+  "textFieldEmailLabel": "E-post",
+  "passwordFieldLabel": "Passord"
 }

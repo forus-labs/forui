@@ -132,7 +132,13 @@ class FDefaultLocalizations extends FLocalizations {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Password';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Hide password';

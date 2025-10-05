@@ -120,7 +120,13 @@ class FLocalizationsGu extends FLocalizations {
   String get sheetSemanticsLabel => 'શીટ';
 
   @override
+  String get textFieldEmailLabel => 'ઇમેઇલ';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'પાસવર્ડ';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'પાસવર્ડ છુપાવો';

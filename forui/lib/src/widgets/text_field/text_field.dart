@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/localizations/localized_text.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
 
 /// A callback for building a custom counter for a text field.
@@ -69,7 +70,7 @@ class FTextField extends StatefulWidget {
   static Widget password({
     FTextFieldStyle Function(FTextFieldStyle style)? style,
     FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
-    Widget? label,
+    Widget? label = const LocalizedText.password(),
     String? hint,
     Widget? description,
     Widget? error,
@@ -908,7 +909,7 @@ class FTextField extends StatefulWidget {
   const FTextField.email({
     this.style,
     this.builder = Defaults.builder,
-    this.label = const Text('Email'), // TODO: Localize
+    this.label = const LocalizedText.email(),
     this.hint,
     this.description,
     this.error,

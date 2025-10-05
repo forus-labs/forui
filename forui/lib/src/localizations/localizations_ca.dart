@@ -120,7 +120,13 @@ class FLocalizationsCa extends FLocalizations {
   String get sheetSemanticsLabel => 'Full';
 
   @override
+  String get textFieldEmailLabel => 'Correu electrònic';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Contrasenya';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Amaga la contrasenya';

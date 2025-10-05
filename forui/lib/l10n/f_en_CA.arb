@@ -26,5 +26,7 @@
   "autocompleteNoResults": "No matches found.",
   "progressSemanticsLabel": "Loading",
   "passwordFieldObscureTextButtonSemanticsLabel": "Hide password",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Show password"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Show password",
+  "textFieldEmailLabel": "Email",
+  "passwordFieldLabel": "Password"
 }

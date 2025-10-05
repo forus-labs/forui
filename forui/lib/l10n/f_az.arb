@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Heç bir uyğunluq tapılmadı.",
   "progressSemanticsLabel": "Yüklənir",
   "passwordFieldObscureTextButtonSemanticsLabel": "Parolu gizlə",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolu göstər"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolu göstər",
+  "textFieldEmailLabel": "E-poçt",
+  "passwordFieldLabel": "Parol"
 }

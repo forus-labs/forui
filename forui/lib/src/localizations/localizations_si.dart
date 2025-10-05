@@ -120,7 +120,13 @@ class FLocalizationsSi extends FLocalizations {
   String get sheetSemanticsLabel => 'පත්‍රය';
 
   @override
+  String get textFieldEmailLabel => 'විද්‍යුත් තැපෑල';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'මුරපදය';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'මුරපදය සඟවන්න';

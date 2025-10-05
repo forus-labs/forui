@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Dim cydweddiadau wedi'u canfod.",
   "progressSemanticsLabel": "Yn llwytho",
   "passwordFieldObscureTextButtonSemanticsLabel": "Cuddio cyfrinair",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Dangos cyfrinair"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Dangos cyfrinair",
+  "textFieldEmailLabel": "E-bost",
+  "passwordFieldLabel": "Cyfrinair"
 }

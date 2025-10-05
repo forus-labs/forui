@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Nuk u gjetën përputhje.",
   "progressSemanticsLabel": "Po ngarkohet",
   "passwordFieldObscureTextButtonSemanticsLabel": "Fshih fjalëkalimin",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Shfaq fjalëkalimin"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Shfaq fjalëkalimin",
+  "textFieldEmailLabel": "Email",
+  "passwordFieldLabel": "Fjalëkalimi"
 }

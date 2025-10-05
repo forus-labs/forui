@@ -26,5 +26,7 @@
   "autocompleteNoResults": "কোনো মিল পোৱা নগল.",
   "progressSemanticsLabel": "লোড হৈ আছে",
   "passwordFieldObscureTextButtonSemanticsLabel": "পাছৱাৰ্ড লুকুৱাওক",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "পাছৱাৰ্ড দেখুৱাওক"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "পাছৱাৰ্ড দেখুৱাওক",
+  "textFieldEmailLabel": "ইমেইল",
+  "passwordFieldLabel": "পাছৱাৰ্ড"
 }

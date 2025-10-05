@@ -120,7 +120,13 @@ class FLocalizationsSr extends FLocalizations {
   String get sheetSemanticsLabel => 'табела';
 
   @override
+  String get textFieldEmailLabel => 'Имејл';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Лозинка';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Сакриј лозинку';
@@ -208,7 +214,13 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get sheetSemanticsLabel => 'tabela';
 
   @override
+  String get textFieldEmailLabel => 'Imejl';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Obriši';
+
+  @override
+  String get passwordFieldLabel => 'Lozinka';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Sakrij lozinku';

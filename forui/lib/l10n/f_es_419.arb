@@ -25,5 +25,7 @@
   "autocompleteNoResults": "No se encontraron coincidencias.",
   "progressSemanticsLabel": "Cargando",
   "passwordFieldObscureTextButtonSemanticsLabel": "Ocultar contraseña",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar contraseña"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar contraseña",
+  "textFieldEmailLabel": "Correo electrónico",
+  "passwordFieldLabel": "Contraseña"
 }

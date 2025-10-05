@@ -120,7 +120,13 @@ class FLocalizationsKk extends FLocalizations {
   String get sheetSemanticsLabel => 'парақша';
 
   @override
+  String get textFieldEmailLabel => 'Электрондық пошта';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Құпия сөз';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Құпия сөзді жасыру';

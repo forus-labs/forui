@@ -120,7 +120,13 @@ class FLocalizationsAr extends FLocalizations {
   String get sheetSemanticsLabel => 'بطاق ';
 
   @override
+  String get textFieldEmailLabel => 'البريد الإلكتروني';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'كلمة المرور';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'إخفاء كلمة المرور';

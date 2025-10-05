@@ -120,7 +120,13 @@ class FLocalizationsPs extends FLocalizations {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get textFieldEmailLabel => 'برېښنالیک';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'پټنوم';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'پټنوم پټول';

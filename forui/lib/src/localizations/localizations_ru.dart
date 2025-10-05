@@ -120,7 +120,13 @@ class FLocalizationsRu extends FLocalizations {
   String get sheetSemanticsLabel => 'экран';
 
   @override
+  String get textFieldEmailLabel => 'Электронная почта';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Пароль';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Скрыть пароль';

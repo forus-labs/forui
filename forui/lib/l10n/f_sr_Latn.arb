@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Nije pronađeno podudaranje.",
   "progressSemanticsLabel": "Učitavanje",
   "passwordFieldObscureTextButtonSemanticsLabel": "Sakrij lozinku",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Prikaži lozinku"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Prikaži lozinku",
+  "textFieldEmailLabel": "Imejl",
+  "passwordFieldLabel": "Lozinka"
 }

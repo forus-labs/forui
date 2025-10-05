@@ -123,6 +123,18 @@ void main() {
     });
   });
 
+  testWidgets('email - localized', (tester) async {
+    await tester.pumpWidget(TestScaffold.app(locale: const Locale('zh'), child: const FTextField.email()));
+
+    expect(find.text('电子邮件'), findsOneWidget);
+  });
+
+  testWidgets('password - localized', (tester) async {
+    await tester.pumpWidget(TestScaffold.app(locale: const Locale('zh'), child: FTextField.password()));
+
+    expect(find.text('密码'), findsOneWidget);
+  });
+
   testWidgets('expands', (tester) async {
     await tester.pumpWidget(TestScaffold.app(child: const FTextField(maxLines: null, expands: true)));
 

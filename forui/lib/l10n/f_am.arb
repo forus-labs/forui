@@ -26,5 +26,7 @@
   "autocompleteNoResults": "ማንኛውም ውጤት አልተገኘም.",
   "progressSemanticsLabel": "በመጫን ላይ",
   "passwordFieldObscureTextButtonSemanticsLabel": "ይለፍ ቃል ደብቅ",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "ይለፍ ቃል አሳይ"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "ይለፍ ቃል አሳይ",
+  "textFieldEmailLabel": "ኢሜይል",
+  "passwordFieldLabel": "የይለፍ ቃል"
 }

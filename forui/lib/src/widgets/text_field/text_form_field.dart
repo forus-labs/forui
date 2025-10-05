@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/localizations/localized_text.dart';
 import 'package:forui/src/widgets/text_field/field.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
 import 'package:forui/src/widgets/text_field/password_form_field.dart';
@@ -30,7 +31,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   static Widget password({
     FTextFieldStyle Function(FTextFieldStyle style)? style,
     FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
-    Widget? label,
+    Widget? label = const LocalizedText.password(),
     String? hint,
     Widget? description,
     Widget? error,
@@ -453,7 +454,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   const FTextFormField.email({
     this.style,
     this.builder = Defaults.builder,
-    this.label = const Text('Email'),
+    this.label = const LocalizedText.email(),
     this.hint,
     this.description,
     this.magnifierConfiguration,

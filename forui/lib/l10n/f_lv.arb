@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Nav atrasts neviens atbilstošs rezultāts.",
   "progressSemanticsLabel": "Ielādē",
   "passwordFieldObscureTextButtonSemanticsLabel": "Paslēpt paroli",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Rādīt paroli"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Rādīt paroli",
+  "textFieldEmailLabel": "E-pasts",
+  "passwordFieldLabel": "Parole"
 }

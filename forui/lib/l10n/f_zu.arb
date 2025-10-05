@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Akukho ukufana okutholiwe.",
   "progressSemanticsLabel": "Iyalayisha",
   "passwordFieldObscureTextButtonSemanticsLabel": "Fihla iphasiwedi",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Bonisa iphasiwedi"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Bonisa iphasiwedi",
+  "textFieldEmailLabel": "I-imeyili",
+  "passwordFieldLabel": "Iphasiwedi"
 }

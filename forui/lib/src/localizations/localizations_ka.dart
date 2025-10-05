@@ -120,7 +120,13 @@ class FLocalizationsKa extends FLocalizations {
   String get sheetSemanticsLabel => 'ფურცელი';
 
   @override
+  String get textFieldEmailLabel => 'ელფოსტა';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'პაროლი';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'პაროლის დამალვა';

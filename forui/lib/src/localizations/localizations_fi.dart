@@ -120,7 +120,13 @@ class FLocalizationsFi extends FLocalizations {
   String get sheetSemanticsLabel => 'arkki';
 
   @override
+  String get textFieldEmailLabel => 'Sähköposti';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Tyhjennä';
+
+  @override
+  String get passwordFieldLabel => 'Salasana';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Piilota salasana';

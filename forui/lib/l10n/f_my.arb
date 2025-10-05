@@ -26,5 +26,7 @@
   "autocompleteNoResults": "ကိုက်ညီသောရလဒ်များ မတွေ့ရှိပါ.",
   "progressSemanticsLabel": "ဖွင့်နေသည်",
   "passwordFieldObscureTextButtonSemanticsLabel": "စကားဝှက်ကိုဝှက်မည်",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "စကားဝှက်ကိုပြမည်"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "စကားဝှက်ကိုပြမည်",
+  "textFieldEmailLabel": "အီးမေးလ်",
+  "passwordFieldLabel": "စကားဝှက်"
 }

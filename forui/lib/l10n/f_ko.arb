@@ -25,5 +25,7 @@
   "autocompleteNoResults": "일치하는 항목이 없습니다.",
   "progressSemanticsLabel": "로딩 중",
   "passwordFieldObscureTextButtonSemanticsLabel": "비밀번호 숨기기",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "비밀번호 보이기"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "비밀번호 보이기",
+  "textFieldEmailLabel": "이메일",
+  "passwordFieldLabel": "비밀번호"
 }

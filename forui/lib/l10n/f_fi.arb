@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Ei osumia löytynyt.",
   "progressSemanticsLabel": "Ladataan",
   "passwordFieldObscureTextButtonSemanticsLabel": "Piilota salasana",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Näytä salasana"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Näytä salasana",
+  "textFieldEmailLabel": "Sähköposti",
+  "passwordFieldLabel": "Salasana"
 }

@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Nenašli sa žiadne zhody.",
   "progressSemanticsLabel": "Načítava sa",
   "passwordFieldObscureTextButtonSemanticsLabel": "Skryť heslo",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Zobraziť heslo"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Zobraziť heslo",
+  "textFieldEmailLabel": "E-mail",
+  "passwordFieldLabel": "Heslo"
 }

@@ -120,7 +120,13 @@ class FLocalizationsMy extends FLocalizations {
   String get sheetSemanticsLabel => 'ပိုဆောင်း စာမျက်နှာ';
 
   @override
+  String get textFieldEmailLabel => 'အီးမေးလ်';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'စကားဝှက်';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'စကားဝှက်ကိုဝှက်မည်';

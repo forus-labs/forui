@@ -25,5 +25,7 @@
   "autocompleteNoResults": "कोई मिलान नहीं मिला.",
   "progressSemanticsLabel": "लोड हो रहा है",
   "passwordFieldObscureTextButtonSemanticsLabel": "पासवर्ड छुपाएं",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड दिखाएं"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड दिखाएं",
+  "textFieldEmailLabel": "ईमेल",
+  "passwordFieldLabel": "पासवर्ड"
 }

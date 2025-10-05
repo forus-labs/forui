@@ -120,7 +120,13 @@ class FLocalizationsSw extends FLocalizations {
   String get sheetSemanticsLabel => 'Safu';
 
   @override
+  String get textFieldEmailLabel => 'Barua pepe';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Futa';
+
+  @override
+  String get passwordFieldLabel => 'Nenosiri';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ficha nenosiri';

@@ -120,7 +120,13 @@ class FLocalizationsVi extends FLocalizations {
   String get sheetSemanticsLabel => 'Bảng';
 
   @override
+  String get textFieldEmailLabel => 'Email';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Xóa';
+
+  @override
+  String get passwordFieldLabel => 'Mật khẩu';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ẩn mật khẩu';

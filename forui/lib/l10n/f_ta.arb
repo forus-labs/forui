@@ -25,5 +25,7 @@
   "autocompleteNoResults": "பொருத்தங்கள் எதுவும் கிடைக்கவில்லை.",
   "progressSemanticsLabel": "ஏற்றுகிறது",
   "passwordFieldObscureTextButtonSemanticsLabel": "கடவுச்சொல்லை மறைக்கவும்",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "கடவுச்சொல்லைக் காட்டு"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "கடவுச்சொல்லைக் காட்டு",
+  "textFieldEmailLabel": "மின்னஞ்சல்",
+  "passwordFieldLabel": "கடவுச்சொல்"
 }

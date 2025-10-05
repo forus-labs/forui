@@ -25,5 +25,7 @@
   "autocompleteNoResults": "هیڅ میچ ونه موندل شو.",
   "progressSemanticsLabel": "د بارولو په حال کې",
   "passwordFieldObscureTextButtonSemanticsLabel": "پټنوم پټول",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "پټنوم ښودل"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "پټنوم ښودل",
+  "textFieldEmailLabel": "برېښنالیک",
+  "passwordFieldLabel": "پټنوم"
 }

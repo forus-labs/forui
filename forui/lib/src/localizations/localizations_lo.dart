@@ -120,7 +120,13 @@ class FLocalizationsLo extends FLocalizations {
   String get sheetSemanticsLabel => 'ແຜ່ນ';
 
   @override
+  String get textFieldEmailLabel => 'ອີເມວ';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'ລະຫັດຜ່ານ';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'ເຊື່ອງລະຫັດຜ່ານ';

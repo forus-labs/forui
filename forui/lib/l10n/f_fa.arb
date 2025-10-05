@@ -25,5 +25,7 @@
   "autocompleteNoResults": "هیچ تطبیقی یافت نشد.",
   "progressSemanticsLabel": "در حال بارگیری",
   "passwordFieldObscureTextButtonSemanticsLabel": "مخفی کردن رمز عبور",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "نمایش رمز عبور"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "نمایش رمز عبور",
+  "textFieldEmailLabel": "ایمیل",
+  "passwordFieldLabel": "رمز عبور"
 }

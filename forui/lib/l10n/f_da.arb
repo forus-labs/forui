@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Ingen resultater fundet.",
   "progressSemanticsLabel": "Indlæser",
   "passwordFieldObscureTextButtonSemanticsLabel": "Skjul adgangskode",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Vis adgangskode"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Vis adgangskode",
+  "textFieldEmailLabel": "E-mail",
+  "passwordFieldLabel": "Adgangskode"
 }

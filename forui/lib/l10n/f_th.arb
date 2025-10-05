@@ -26,5 +26,7 @@
   "autocompleteNoResults": "ไม่พบรายการที่ตรงกัน.",
   "progressSemanticsLabel": "กำลังโหลด",
   "passwordFieldObscureTextButtonSemanticsLabel": "ซ่อนรหัสผ่าน",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "แสดงรหัสผ่าน"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "แสดงรหัสผ่าน",
+  "textFieldEmailLabel": "อีเมล",
+  "passwordFieldLabel": "รหัสผ่าน"
 }

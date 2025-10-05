@@ -23,5 +23,7 @@
   "autocompleteNoResults": "Keine Übereinstimmungen gefunden.",
   "progressSemanticsLabel": "Wird geladen",
   "passwordFieldObscureTextButtonSemanticsLabel": "Passwort ausblenden",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Passwort anzeigen"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Passwort anzeigen",
+  "textFieldEmailLabel": "E-Mail",
+  "passwordFieldLabel": "Passwort"
 }

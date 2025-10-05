@@ -120,7 +120,13 @@ class FLocalizationsEu extends FLocalizations {
   String get sheetSemanticsLabel => 'orria';
 
   @override
+  String get textFieldEmailLabel => 'Posta elektronikoa';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Garbitu';
+
+  @override
+  String get passwordFieldLabel => 'Pasahitza';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Ezkutatu pasahitza';

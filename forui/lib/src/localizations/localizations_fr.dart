@@ -120,7 +120,13 @@ class FLocalizationsFr extends FLocalizations {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get textFieldEmailLabel => 'E-mail';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Effacer';
+
+  @override
+  String get passwordFieldLabel => 'Mot de passe';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Masquer le mot de passe';
@@ -208,7 +214,13 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   String get sheetSemanticsLabel => 'Zone de contenu';
 
   @override
+  String get textFieldEmailLabel => 'Courriel';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Effacer';
+
+  @override
+  String get passwordFieldLabel => 'Mot de passe';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Masquer le mot de passe';

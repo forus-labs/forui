@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Није пронађено подударање.",
   "progressSemanticsLabel": "Учитавање",
   "passwordFieldObscureTextButtonSemanticsLabel": "Сакриј лозинку",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Прикажи лозинку"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Прикажи лозинку",
+  "textFieldEmailLabel": "Имејл",
+  "passwordFieldLabel": "Лозинка"
 }

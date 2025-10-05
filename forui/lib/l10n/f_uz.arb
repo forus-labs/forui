@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Hech qanday moslik topilmadi.",
   "progressSemanticsLabel": "Yuklanmoqda",
   "passwordFieldObscureTextButtonSemanticsLabel": "Parolni yashirish",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolni koʻrsatish"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolni koʻrsatish",
+  "textFieldEmailLabel": "Elektron pochta",
+  "passwordFieldLabel": "Parol"
 }

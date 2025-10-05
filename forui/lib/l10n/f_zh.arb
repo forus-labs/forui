@@ -26,5 +26,7 @@
   "autocompleteNoResults": "未找到匹配项.",
   "progressSemanticsLabel": "加载中",
   "passwordFieldObscureTextButtonSemanticsLabel": "隐藏密码",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "显示密码"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "显示密码",
+  "textFieldEmailLabel": "电子邮件",
+  "passwordFieldLabel": "密码"
 }

@@ -120,7 +120,13 @@ class FLocalizationsHu extends FLocalizations {
   String get sheetSemanticsLabel => 'lap';
 
   @override
+  String get textFieldEmailLabel => 'E-mail';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Törlés';
+
+  @override
+  String get passwordFieldLabel => 'Jelszó';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Jelszó elrejtése';

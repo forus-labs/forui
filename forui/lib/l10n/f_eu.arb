@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Ez da bat-etortzerik aurkitu.",
   "progressSemanticsLabel": "Kargatzen",
   "passwordFieldObscureTextButtonSemanticsLabel": "Ezkutatu pasahitza",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Erakutsi pasahitza"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Erakutsi pasahitza",
+  "textFieldEmailLabel": "Posta elektronikoa",
+  "passwordFieldLabel": "Pasahitza"
 }

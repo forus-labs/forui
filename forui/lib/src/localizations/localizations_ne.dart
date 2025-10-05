@@ -120,7 +120,13 @@ class FLocalizationsNe extends FLocalizations {
   String get sheetSemanticsLabel => 'पाना';
 
   @override
+  String get textFieldEmailLabel => 'इमेल';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'पासवर्ड';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'पासवर्ड लुकाउनुहोस्';

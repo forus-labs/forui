@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Совпадений не найдено.",
   "progressSemanticsLabel": "Загрузка",
   "passwordFieldObscureTextButtonSemanticsLabel": "Скрыть пароль",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Показать пароль"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Показать пароль",
+  "textFieldEmailLabel": "Электронная почта",
+  "passwordFieldLabel": "Пароль"
 }

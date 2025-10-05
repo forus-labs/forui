@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Збігів не знайдено.",
   "progressSemanticsLabel": "Завантаження",
   "passwordFieldObscureTextButtonSemanticsLabel": "Приховати пароль",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Показати пароль"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Показати пароль",
+  "textFieldEmailLabel": "Електронна пошта",
+  "passwordFieldLabel": "Пароль"
 }

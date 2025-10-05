@@ -120,7 +120,13 @@ class FLocalizationsGsw extends FLocalizations {
   String get sheetSemanticsLabel => 'Ansicht';
 
   @override
+  String get textFieldEmailLabel => 'E-Mail';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Lösche';
+
+  @override
+  String get passwordFieldLabel => 'Passwort';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Passwort verberge';

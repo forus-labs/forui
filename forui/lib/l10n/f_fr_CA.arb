@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Aucune correspondance trouvée.",
   "progressSemanticsLabel": "Chargement",
   "passwordFieldObscureTextButtonSemanticsLabel": "Masquer le mot de passe",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Afficher le mot de passe"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Afficher le mot de passe",
+  "textFieldEmailLabel": "Courriel",
+  "passwordFieldLabel": "Mot de passe"
 }

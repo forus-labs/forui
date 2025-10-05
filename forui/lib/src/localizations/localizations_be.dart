@@ -120,7 +120,13 @@ class FLocalizationsBe extends FLocalizations {
   String get sheetSemanticsLabel => 'аркуш';
 
   @override
+  String get textFieldEmailLabel => 'Электронная пошта';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'Пароль';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'Схаваць пароль';

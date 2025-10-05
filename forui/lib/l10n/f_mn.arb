@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Тохирох зүйл олдсонгүй.",
   "progressSemanticsLabel": "Ачааллаж байна",
   "passwordFieldObscureTextButtonSemanticsLabel": "Нууц үгийг нуух",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Нууц үгийг харуулах"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Нууц үгийг харуулах",
+  "textFieldEmailLabel": "Имэйл",
+  "passwordFieldLabel": "Нууц үг"
 }

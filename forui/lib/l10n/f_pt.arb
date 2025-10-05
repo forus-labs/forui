@@ -25,5 +25,7 @@
   "autocompleteNoResults": "Nenhuma correspondência encontrada.",
   "progressSemanticsLabel": "Carregando",
   "passwordFieldObscureTextButtonSemanticsLabel": "Ocultar senha",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar senha"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar senha",
+  "textFieldEmailLabel": "E-mail",
+  "passwordFieldLabel": "Senha"
 }

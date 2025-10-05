@@ -26,5 +26,7 @@
   "autocompleteNoResults": "Nu s-au găsit potriviri.",
   "progressSemanticsLabel": "Se încarcă",
   "passwordFieldObscureTextButtonSemanticsLabel": "Ascunde parola",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Afișează parola"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Afișează parola",
+  "textFieldEmailLabel": "E-mail",
+  "passwordFieldLabel": "Parolă"
 }

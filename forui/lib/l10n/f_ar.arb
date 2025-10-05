@@ -25,5 +25,7 @@
   "autocompleteNoResults": "لم يتم العثور على أي تطابقات.",
   "progressSemanticsLabel": "جاري التحميل",
   "passwordFieldObscureTextButtonSemanticsLabel": "إخفاء كلمة المرور",
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "إظهار كلمة المرور"
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "إظهار كلمة المرور",
+  "textFieldEmailLabel": "البريد الإلكتروني",
+  "passwordFieldLabel": "كلمة المرور"
 }

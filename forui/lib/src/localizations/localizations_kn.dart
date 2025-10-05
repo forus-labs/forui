@@ -120,7 +120,13 @@ class FLocalizationsKn extends FLocalizations {
   String get sheetSemanticsLabel => 'ಶೀಟ್';
 
   @override
+  String get textFieldEmailLabel => 'ಇಮೇಲ್';
+
+  @override
   String get textFieldClearButtonSemanticsLabel => 'Clear';
+
+  @override
+  String get passwordFieldLabel => 'ಪಾಸ್‌ವರ್ಡ್';
 
   @override
   String get passwordFieldObscureTextButtonSemanticsLabel => 'ಪಾಸ್‌ವರ್ಡ್ ಮರೆಮಾಡು';
