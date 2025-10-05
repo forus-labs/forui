@@ -535,6 +535,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FTileGroupStyle tileGroupStyle;
 
+  /// The tree style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create tree
+  /// ```
+  @override
+  final FTreeStyle treeStyle;
+
   /// The time field's style.
   ///
   /// ## CLI
@@ -622,6 +633,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTextFieldStyle? textFieldStyle,
     FTileStyle? tileStyle,
     FTileGroupStyle? tileGroupStyle,
+    FTreeStyle? treeStyle,
     FTimeFieldStyle? timeFieldStyle,
     FTimePickerStyle? timePickerStyle,
     FTooltipStyle? tooltipStyle,
@@ -691,6 +703,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       textFieldStyle: textFieldStyle ?? FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
       tileStyle: tileStyle ?? FTileStyle.inherit(colors: colors, typography: typography, style: style),
       tileGroupStyle: tileGroupStyle ?? FTileGroupStyle.inherit(colors: colors, typography: typography, style: style),
+      treeStyle: treeStyle ?? FTreeStyle.inherit(colors: colors, typography: typography, style: style),
       timeFieldStyle: timeFieldStyle ?? FTimeFieldStyle.inherit(colors: colors, typography: typography, style: style),
       timePickerStyle:
           timePickerStyle ?? FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
@@ -751,6 +764,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     textFieldStyle: a.textFieldStyle.lerp(b.textFieldStyle, t),
     tileStyle: a.tileStyle.lerp(b.tileStyle, t),
     tileGroupStyle: a.tileGroupStyle.lerp(b.tileGroupStyle, t),
+    treeStyle: a.treeStyle.lerp(b.treeStyle, t),
     timeFieldStyle: a.timeFieldStyle.lerp(b.timeFieldStyle, t),
     timePickerStyle: a.timePickerStyle.lerp(b.timePickerStyle, t),
     tooltipStyle: a.tooltipStyle.lerp(b.tooltipStyle, t),
@@ -811,6 +825,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.textFieldStyle,
     required this.tileStyle,
     required this.tileGroupStyle,
+    required this.treeStyle,
     required this.timeFieldStyle,
     required this.timePickerStyle,
     required this.tooltipStyle,
@@ -1311,6 +1326,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTextFieldStyle Function(FTextFieldStyle style)? textFieldStyle,
     FTileStyle Function(FTileStyle style)? tileStyle,
     FTileGroupStyle Function(FTileGroupStyle style)? tileGroupStyle,
+    FTreeStyle Function(FTreeStyle style)? treeStyle,
     FTimeFieldStyle Function(FTimeFieldStyle style)? timeFieldStyle,
     FTimePickerStyle Function(FTimePickerStyle style)? timePickerStyle,
     FTooltipStyle Function(FTooltipStyle style)? tooltipStyle,
@@ -1376,6 +1392,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     textFieldStyle: textFieldStyle != null ? textFieldStyle(this.textFieldStyle) : this.textFieldStyle,
     tileStyle: tileStyle != null ? tileStyle(this.tileStyle) : this.tileStyle,
     tileGroupStyle: tileGroupStyle != null ? tileGroupStyle(this.tileGroupStyle) : this.tileGroupStyle,
+    treeStyle: treeStyle != null ? treeStyle(this.treeStyle) : this.treeStyle,
     timeFieldStyle: timeFieldStyle != null ? timeFieldStyle(this.timeFieldStyle) : this.timeFieldStyle,
     timePickerStyle: timePickerStyle != null ? timePickerStyle(this.timePickerStyle) : this.timePickerStyle,
     tooltipStyle: tooltipStyle != null ? tooltipStyle(this.tooltipStyle) : this.tooltipStyle,

@@ -1,0 +1,269 @@
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { Widget } from '@/components/demo/widget.tsx';
+import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
+import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
+
+# Tree
+
+A hierarchical tree widget for displaying nested data with visual connecting lines.
+
+<LinkBadgeGroup>
+    <LinkBadge label="API Reference" href="https://pub.dev/documentation/forui/latest/forui.widgets.tree/"/>
+</LinkBadgeGroup>
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='tree' variant='default' height={400}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+      ```dart copy
+      FTree(
+        children: [
+          FTreeItem(
+            icon: const Icon(FIcons.folder),
+            label: const Text('Apple'),
+            initiallyExpanded: true,
+            children: [
+              FTreeItem(
+                icon: const Icon(FIcons.folder),
+                label: const Text('Red Apple'),
+                onPress: () {},
+              ),
+              FTreeItem(
+                icon: const Icon(FIcons.folder),
+                label: const Text('Green Apple'),
+                onPress: () {},
+              ),
+            ],
+          ),
+          FTreeItem(
+            icon: const Icon(FIcons.folder),
+            label: const Text('Banana'),
+            onPress: () {},
+          ),
+          FTreeItem(
+            icon: const Icon(FIcons.folder),
+            label: const Text('Cherry'),
+            onPress: () {},
+          ),
+          FTreeItem(
+            icon: const Icon(FIcons.file),
+            label: const Text('Date'),
+            selected: true,
+            onPress: () {},
+          ),
+        ],
+      );
+      ```
+    </Tabs.Tab>
+</Tabs>
+
+## Usage
+
+### Basic Tree
+
+A basic tree structure with collapsible items.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='tree' variant='default' height={300}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+      ```dart copy
+      FTree(
+        children: [
+          FTreeItem(
+            icon: const Icon(FIcons.folder),
+            label: const Text('Folder 1'),
+            children: [
+              FTreeItem(
+                icon: const Icon(FIcons.file),
+                label: const Text('File 1.1'),
+                onPress: () {},
+              ),
+              FTreeItem(
+                icon: const Icon(FIcons.file),
+                label: const Text('File 1.2'),
+                onPress: () {},
+              ),
+            ],
+          ),
+          FTreeItem(
+            icon: const Icon(FIcons.file),
+            label: const Text('File 2'),
+            onPress: () {},
+          ),
+        ],
+      );
+      ```
+    </Tabs.Tab>
+</Tabs>
+
+### Nested Tree
+
+Trees support arbitrary nesting depth with visual connecting lines.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='tree' variant='nested' height={300}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+      ```dart copy
+      FTree(
+        children: [
+          FTreeItem(
+            icon: const Icon(FIcons.folder),
+            label: const Text('Level 1'),
+            initiallyExpanded: true,
+            children: [
+              FTreeItem(
+                icon: const Icon(FIcons.folder),
+                label: const Text('Level 2'),
+                initiallyExpanded: true,
+                children: [
+                  FTreeItem(
+                    icon: const Icon(FIcons.folder),
+                    label: const Text('Level 3'),
+                    initiallyExpanded: true,
+                    children: [
+                      FTreeItem(
+                        icon: const Icon(FIcons.file),
+                        label: const Text('Deep File'),
+                        onPress: () {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      );
+      ```
+    </Tabs.Tab>
+</Tabs>
+
+### Selected Item
+
+Tree items can be marked as selected.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tabs.Tab>
+        <Widget name='tree' variant='selected' height={200}/>
+    </Tabs.Tab>
+    <Tabs.Tab>
+      ```dart copy
+      FTree(
+        children: [
+          FTreeItem(
+            icon: const Icon(FIcons.folder),
+            label: const Text('Item 1'),
+            selected: true,
+            onPress: () {},
+          ),
+          FTreeItem(
+            icon: const Icon(FIcons.folder),
+            label: const Text('Item 2'),
+            onPress: () {},
+          ),
+        ],
+      );
+      ```
+    </Tabs.Tab>
+</Tabs>
+
+## Examples
+
+### File Explorer
+
+A file explorer-style tree with folders and files.
+
+```dart
+FTree(
+  children: [
+    FTreeItem(
+      icon: const Icon(FIcons.folder),
+      label: const Text('src'),
+      initiallyExpanded: true,
+      children: [
+        FTreeItem(
+          icon: const Icon(FIcons.folder),
+          label: const Text('components'),
+          children: [
+            FTreeItem(
+              icon: const Icon(FIcons.file),
+              label: const Text('button.dart'),
+              onPress: () {},
+            ),
+            FTreeItem(
+              icon: const Icon(FIcons.file),
+              label: const Text('card.dart'),
+              onPress: () {},
+            ),
+          ],
+        ),
+        FTreeItem(
+          icon: const Icon(FIcons.file),
+          label: const Text('main.dart'),
+          selected: true,
+          onPress: () {},
+        ),
+      ],
+    ),
+    FTreeItem(
+      icon: const Icon(FIcons.folder),
+      label: const Text('test'),
+      children: [
+        FTreeItem(
+          icon: const Icon(FIcons.file),
+          label: const Text('button_test.dart'),
+          onPress: () {},
+        ),
+      ],
+    ),
+  ],
+);
+```
+
+## Customization
+
+### Custom Styling
+
+You can customize the tree appearance using `FTreeStyle`.
+
+```dart
+FTree(
+  style: (style) => style.copyWith(
+    indentWidth: 30,
+    spacing: 4,
+    itemStyle: (itemStyle) => itemStyle.copyWith(
+      borderRadius: BorderRadius.circular(8),
+    ),
+  ),
+  children: [
+    // ... tree items
+  ],
+);
+```
+
+### Custom Line Style
+
+Customize the connecting line style.
+
+```dart
+FTree(
+  style: (style) => style.copyWith(
+    itemStyle: (itemStyle) => itemStyle.copyWith(
+      lineStyle: (lineStyle) => lineStyle.copyWith(
+        color: Colors.blue,
+        width: 2,
+        dashPattern: [4, 4], // Dashed line
+      ),
+    ),
+  ),
+  children: [
+    // ... tree items
+  ],
+);
+```
