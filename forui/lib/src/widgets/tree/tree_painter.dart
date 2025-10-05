@@ -24,12 +24,16 @@ class FTreeChildrenLinePainter extends CustomPainter {
   /// The number of visible rows (including nested children) that each direct child occupies.
   final List<int> childRowCounts;
 
+  /// The horizontal padding of each tree item.
+  final double itemPadding;
+
   /// Creates a [FTreeChildrenLinePainter].
   const FTreeChildrenLinePainter({
     required this.lineStyle,
     required this.childCount,
     required this.childrenSpacing,
     required this.childRowCounts,
+    required this.itemPadding,
   });
 
   @override
@@ -43,7 +47,6 @@ class FTreeChildrenLinePainter extends CustomPainter {
       ..strokeWidth = lineStyle.width
       ..style = PaintingStyle.stroke;
 
-    const itemPadding = 8.0; // From FTreeItemStyle padding horizontal
     const lineStartX = 0.0; // Vertical line starts at the left edge (we're already indented)
 
     // Calculate total number of rows and total spacing
@@ -71,7 +74,7 @@ class FTreeChildrenLinePainter extends CustomPainter {
     }
 
     // Draw horizontal lines to each child
-    const horizontalEndX = itemPadding - 2; // Stop 2px before the icon area
+    final horizontalEndX = itemPadding - 2; // Stop 2px before the icon area
     for (final childY in childPositions) {
       if (lineStyle.dashPattern != null) {
         _drawDashedLine(
@@ -117,5 +120,6 @@ class FTreeChildrenLinePainter extends CustomPainter {
       lineStyle != oldDelegate.lineStyle ||
       childCount != oldDelegate.childCount ||
       childrenSpacing != oldDelegate.childrenSpacing ||
-      childRowCounts != oldDelegate.childRowCounts;
+      childRowCounts != oldDelegate.childRowCounts ||
+      itemPadding != oldDelegate.itemPadding;
 }

@@ -314,6 +314,7 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
                           childCount: widget.children.length,
                           childrenSpacing: _style!.childrenSpacing,
                           childRowCounts: childRowCounts,
+                          itemPadding: _style!.padding.resolve(TextDirection.ltr).left,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
