@@ -64,6 +64,9 @@ class FTreeItem extends StatefulWidget {
   /// Called when the expansion state changes.
   final ValueChanged<bool>? onExpandChange;
 
+  /// Called when the visible row count changes (including this item and all visible descendants).
+  final ValueChanged<int>? onRowCountChange;
+
   /// The tree item's children.
   final List<FTreeItem> children;
 
@@ -81,6 +84,7 @@ class FTreeItem extends StatefulWidget {
     this.onHoverChange,
     this.onStateChange,
     this.onExpandChange,
+    this.onRowCountChange,
     this.children = const [],
     super.key,
   });
@@ -102,27 +106,9 @@ class FTreeItem extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
       ..add(ObjectFlagProperty.has('onExpandChange', onExpandChange))
+      ..add(ObjectFlagProperty.has('onRowCountChange', onRowCountChange))
       ..add(DiagnosticsProperty('children', children));
   }
-}
-
-/// Counts the number of visible rows that an [FTreeItem] will occupy,
-/// including itself and its expanded children.
-///
-/// [item] is the tree item to count rows for.
-/// [isExpanded] is whether this item is currently expanded (not just initiallyExpanded).
-int _countVisibleRows(FTreeItem item, bool isExpanded) {
-  if (item.children.isEmpty || !isExpanded) {
-    return 1; // Just the item itself
-  }
-
-  // Item itself + all its visible children
-  // For children, we use initiallyExpanded since we don't have their actual state at this level
-  var count = 1;
-  for (final child in item.children) {
-    count += _countVisibleRows(child, child.initiallyExpanded);
-  }
-  return count;
 }
 
 class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
@@ -136,6 +122,8 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
   Animation<double>? _iconRotation;
   late bool _expanded;
   late Map<int, bool> _childExpansionStates;
+  late Map<int, int> _childRowCounts;
+  bool _hasNotifiedInitialRowCount = false;
 
   @override
   void initState() {
@@ -144,12 +132,26 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
     _childExpansionStates = {
       for (var i = 0; i < widget.children.length; i++) i: widget.children[i].initiallyExpanded,
     };
+    // Initialize with 1 row per child (will be updated when children report their actual counts)
+    _childRowCounts = {
+      for (var i = 0; i < widget.children.length; i++) i: 1,
+    };
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _update();
+
+    // Notify parent of initial row count after first build
+    if (!_hasNotifiedInitialRowCount) {
+      _hasNotifiedInitialRowCount = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _notifyRowCountChange();
+        }
+      });
+    }
   }
 
   @override
@@ -201,12 +203,32 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
     setState(() {
       _expanded = !_expanded;
       widget.onExpandChange?.call(_expanded);
+      _notifyRowCountChange();
       if (_expanded) {
         _controller!.forward();
       } else {
         _controller!.reverse();
       }
     });
+  }
+
+  /// Calculates and notifies parent of this item's total visible row count.
+  void _notifyRowCountChange() {
+    final rowCount = _calculateRowCount();
+    widget.onRowCountChange?.call(rowCount);
+  }
+
+  /// Calculates the total number of visible rows for this item including descendants.
+  int _calculateRowCount() {
+    if (!_expanded || widget.children.isEmpty) {
+      return 1; // Just this item
+    }
+    // This item plus all visible children
+    var count = 1;
+    for (var i = 0; i < widget.children.length; i++) {
+      count += _childRowCounts[i] ?? 1;
+    }
+    return count;
   }
 
   @override
@@ -277,10 +299,9 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
               child: AnimatedBuilder(
                 animation: _fade!,
                 builder: (context, child) {
-                  // Calculate the number of visible rows each child occupies using tracked expansion states
+                  // Use tracked row counts from children
                   final childRowCounts = [
-                    for (var i = 0; i < widget.children.length; i++)
-                      _countVisibleRows(widget.children[i], _childExpansionStates[i] ?? false),
+                    for (var i = 0; i < widget.children.length; i++) _childRowCounts[i] ?? 1,
                   ];
 
                   return FadeTransition(
@@ -317,6 +338,13 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
                                   setState(() {
                                     _childExpansionStates[i] = expanded;
                                   });
+                                },
+                                onRowCountChange: (rowCount) {
+                                  setState(() {
+                                    _childRowCounts[i] = rowCount;
+                                  });
+                                  // Propagate the change up to our parent
+                                  _notifyRowCountChange();
                                 },
                                 children: widget.children[i].children,
                               ),
