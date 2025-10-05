@@ -65,7 +65,7 @@ class FTreeItem extends StatefulWidget {
   final ValueChanged<bool>? onExpandChange;
 
   /// Called when the visible row count changes (including this item and all visible descendants).
-  final ValueChanged<int>? onRowCountChange;
+  final ValueChanged<int>? _onRowCountChange;
 
   /// The tree item's children.
   final List<FTreeItem> children;
@@ -84,10 +84,27 @@ class FTreeItem extends StatefulWidget {
     this.onHoverChange,
     this.onStateChange,
     this.onExpandChange,
-    this.onRowCountChange,
     this.children = const [],
     super.key,
-  });
+  }) : _onRowCountChange = null;
+
+  const FTreeItem._({
+    this.style,
+    this.icon,
+    this.label,
+    this.selected = false,
+    this.initiallyExpanded = false,
+    this.autofocus = false,
+    this.focusNode,
+    this.onPress,
+    this.onLongPress,
+    this.onHoverChange,
+    this.onStateChange,
+    this.onExpandChange,
+    ValueChanged<int>? onRowCountChange,
+    this.children = const [],
+    super.key,
+  }) : _onRowCountChange = onRowCountChange;
 
   @override
   State<FTreeItem> createState() => _FTreeItemState();
@@ -106,7 +123,7 @@ class FTreeItem extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
       ..add(ObjectFlagProperty.has('onExpandChange', onExpandChange))
-      ..add(ObjectFlagProperty.has('onRowCountChange', onRowCountChange))
+      ..add(ObjectFlagProperty.has('onRowCountChange', _onRowCountChange))
       ..add(DiagnosticsProperty('children', children));
   }
 }
@@ -129,13 +146,9 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _expanded = widget.initiallyExpanded;
-    _childExpansionStates = {
-      for (var i = 0; i < widget.children.length; i++) i: widget.children[i].initiallyExpanded,
-    };
+    _childExpansionStates = {for (var i = 0; i < widget.children.length; i++) i: widget.children[i].initiallyExpanded};
     // Initialize with 1 row per child (will be updated when children report their actual counts)
-    _childRowCounts = {
-      for (var i = 0; i < widget.children.length; i++) i: 1,
-    };
+    _childRowCounts = {for (var i = 0; i < widget.children.length; i++) i: 1};
   }
 
   @override
@@ -215,7 +228,7 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
   /// Calculates and notifies parent of this item's total visible row count.
   void _notifyRowCountChange() {
     final rowCount = _calculateRowCount();
-    widget.onRowCountChange?.call(rowCount);
+    widget._onRowCountChange?.call(rowCount);
   }
 
   /// Calculates the total number of visible rows for this item including descendants.
@@ -300,9 +313,7 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
                 animation: _fade!,
                 builder: (context, child) {
                   // Use tracked row counts from children
-                  final childRowCounts = [
-                    for (var i = 0; i < widget.children.length; i++) _childRowCounts[i] ?? 1,
-                  ];
+                  final childRowCounts = [for (var i = 0; i < widget.children.length; i++) _childRowCounts[i] ?? 1];
 
                   return FadeTransition(
                     opacity: _fade!,
@@ -322,7 +333,7 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
                           spacing: _style!.childrenSpacing,
                           children: [
                             for (var i = 0; i < widget.children.length; i++)
-                              FTreeItem(
+                              FTreeItem._(
                                 key: widget.children[i].key,
                                 style: widget.children[i].style,
                                 icon: widget.children[i].icon,
