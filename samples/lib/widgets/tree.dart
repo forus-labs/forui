@@ -11,50 +11,30 @@ class TreePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FTree(
+    children: [
+      FTreeItem(
+        icon: const Icon(FIcons.folder),
+        label: const Text('Apple'),
+        initiallyExpanded: true,
         children: [
           FTreeItem(
             icon: const Icon(FIcons.folder),
-            label: const Text('Apple'),
-            initiallyExpanded: true,
+            label: const Text('Red Apple'),
+            onPress: () {},
+
             children: [
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Red Apple'),
-                onPress: () {},
-              ),
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Green Apple'),
-                onPress: () {},
-              ),
+              FTreeItem(icon: const Icon(FIcons.file), label: const Text('Fuji'), onPress: () {}),
+              FTreeItem(icon: const Icon(FIcons.file), label: const Text('Gala'), onPress: () {}),
             ],
           ),
-          FTreeItem(
-            icon: const Icon(FIcons.folder),
-            label: const Text('Banana'),
-            onPress: () {},
-          ),
-          FTreeItem(
-            icon: const Icon(FIcons.folder),
-            label: const Text('Cherry'),
-            onPress: () {},
-          ),
-          FTreeItem(
-            icon: const Icon(FIcons.file),
-            label: const Text('Date'),
-            selected: true,
-            onPress: () {},
-          ),
-          FTreeItem(
-            icon: const Icon(FIcons.folder),
-            label: const Text('Elderberry'),
-            onPress: () {},
-          ),
-          FTreeItem(
-            icon: const Icon(FIcons.folder),
-            label: const Text('Fig'),
-            onPress: () {},
-          ),
+          FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Green Apple'), onPress: () {}),
         ],
-      );
+      ),
+      FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Banana'), onPress: () {}),
+      FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Cherry'), onPress: () {}),
+      FTreeItem(icon: const Icon(FIcons.file), label: const Text('Date'), selected: true, onPress: () {}),
+      FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Elderberry'), onPress: () {}),
+      FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Fig'), onPress: () {}),
+    ],
+  );
 }
