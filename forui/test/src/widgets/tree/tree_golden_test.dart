@@ -16,19 +16,9 @@ void main() {
               FTreeItem(
                 icon: const Icon(FIcons.folder),
                 label: const Text('Folder 1'),
-                children: [
-                  FTreeItem(
-                    icon: const Icon(FIcons.file),
-                    label: const Text('File 1'),
-                    onPress: () {},
-                  ),
-                ],
+                children: [FTreeItem(icon: const Icon(FIcons.file), label: const Text('File 1'), onPress: () {})],
               ),
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Folder 2'),
-                onPress: () {},
-              ),
+              FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Folder 2'), onPress: () {}),
             ],
           ),
         ),
@@ -50,43 +40,15 @@ void main() {
                 label: const Text('Apple'),
                 initiallyExpanded: true,
                 children: [
-                  FTreeItem(
-                    icon: const Icon(FIcons.folder),
-                    label: const Text('Red Apple'),
-                    onPress: () {},
-                  ),
-                  FTreeItem(
-                    icon: const Icon(FIcons.folder),
-                    label: const Text('Green Apple'),
-                    onPress: () {},
-                  ),
+                  FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Red Apple'), onPress: () {}),
+                  FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Green Apple'), onPress: () {}),
                 ],
               ),
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Banana'),
-                onPress: () {},
-              ),
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Cherry'),
-                onPress: () {},
-              ),
-              FTreeItem(
-                icon: const Icon(FIcons.file),
-                label: const Text('Date'),
-                onPress: () {},
-              ),
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Elderberry'),
-                onPress: () {},
-              ),
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Fig'),
-                onPress: () {},
-              ),
+              FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Banana'), onPress: () {}),
+              FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Cherry'), onPress: () {}),
+              FTreeItem(icon: const Icon(FIcons.file), label: const Text('Date'), onPress: () {}),
+              FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Elderberry'), onPress: () {}),
+              FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Fig'), onPress: () {}),
             ],
           ),
         ),
@@ -116,11 +78,7 @@ void main() {
                         label: const Text('Level 3'),
                         initiallyExpanded: true,
                         children: [
-                          FTreeItem(
-                            icon: const Icon(FIcons.file),
-                            label: const Text('Deep File'),
-                            onPress: () {},
-                          ),
+                          FTreeItem(icon: const Icon(FIcons.file), label: const Text('Deep File'), onPress: () {}),
                         ],
                       ),
                     ],
@@ -141,17 +99,8 @@ void main() {
           theme: theme.data,
           child: FTree(
             children: [
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Item 1'),
-                selected: true,
-                onPress: () {},
-              ),
-              FTreeItem(
-                icon: const Icon(FIcons.folder),
-                label: const Text('Item 2'),
-                onPress: () {},
-              ),
+              FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Item 1'), selected: true, onPress: () {}),
+              FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
             ],
           ),
         ),

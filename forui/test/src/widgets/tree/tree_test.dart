@@ -10,10 +10,10 @@ void main() {
     testWidgets('renders basic tree', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTree(
+          child: const FTree(
             children: [
-              FTreeItem(label: const Text('Item 1')),
-              FTreeItem(label: const Text('Item 2')),
+              FTreeItem(label: Text('Item 1')),
+              FTreeItem(label: Text('Item 2')),
             ],
           ),
         ),
@@ -26,13 +26,13 @@ void main() {
     testWidgets('renders nested tree collapsed by default', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTree(
+          child: const FTree(
             children: [
               FTreeItem(
-                label: const Text('Parent'),
+                label: Text('Parent'),
                 children: [
-                  FTreeItem(label: const Text('Child 1')),
-                  FTreeItem(label: const Text('Child 2')),
+                  FTreeItem(label: Text('Child 1')),
+                  FTreeItem(label: Text('Child 2')),
                 ],
               ),
             ],
@@ -48,13 +48,11 @@ void main() {
     testWidgets('expands and collapses when pressed', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTree(
+          child: const FTree(
             children: [
               FTreeItem(
-                label: const Text('Parent'),
-                children: [
-                  FTreeItem(label: const Text('Child')),
-                ],
+                label: Text('Parent'),
+                children: [FTreeItem(label: Text('Child'))],
               ),
             ],
           ),
@@ -78,14 +76,12 @@ void main() {
     testWidgets('initially expanded shows children', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTree(
+          child: const FTree(
             children: [
               FTreeItem(
-                label: const Text('Parent'),
+                label: Text('Parent'),
                 initiallyExpanded: true,
-                children: [
-                  FTreeItem(label: const Text('Child')),
-                ],
+                children: [FTreeItem(label: Text('Child'))],
               ),
             ],
           ),
