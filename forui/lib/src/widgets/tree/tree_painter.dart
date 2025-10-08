@@ -27,6 +27,9 @@ class FTreeChildrenLinePainter extends CustomPainter {
   /// The horizontal padding of each tree item.
   final double itemPadding;
 
+  /// The text direction for drawing lines.
+  final TextDirection textDirection;
+
   /// Creates a [FTreeChildrenLinePainter].
   const FTreeChildrenLinePainter({
     required this.lineStyle,
@@ -34,6 +37,7 @@ class FTreeChildrenLinePainter extends CustomPainter {
     required this.childrenSpacing,
     required this.childRowCounts,
     required this.itemPadding,
+    required this.textDirection,
   });
 
   @override
@@ -47,7 +51,8 @@ class FTreeChildrenLinePainter extends CustomPainter {
       ..strokeWidth = lineStyle.width
       ..style = PaintingStyle.stroke;
 
-    const lineStartX = 0.0; // Vertical line starts at the left edge (we're already indented)
+    // For RTL, vertical line starts at the right edge; for LTR, at the left edge
+    final lineStartX = textDirection == TextDirection.rtl ? size.width : 0.0;
 
     // Calculate total number of rows and total spacing
     final totalRows = childRowCounts.reduce((a, b) => a + b);
@@ -68,13 +73,17 @@ class FTreeChildrenLinePainter extends CustomPainter {
     // Draw vertical line from top to last child's center
     final lastChildY = childPositions.last;
     if (lineStyle.dashPattern != null) {
-      _drawDashedLine(canvas, Offset.zero, Offset(lineStartX, lastChildY), paint, lineStyle.dashPattern!);
+      _drawDashedLine(canvas, Offset(lineStartX, 0), Offset(lineStartX, lastChildY), paint, lineStyle.dashPattern!);
     } else {
-      canvas.drawLine(Offset.zero, Offset(lineStartX, lastChildY), paint);
+      canvas.drawLine(Offset(lineStartX, 0), Offset(lineStartX, lastChildY), paint);
     }
 
     // Draw horizontal lines to each child
-    final horizontalEndX = itemPadding - 2; // Stop 2px before the icon area
+    // For RTL: line goes from right edge inward; for LTR: from left edge inward
+    final horizontalEndX = textDirection == TextDirection.rtl
+        ? size.width - (itemPadding - 2) // Start from right edge, go left
+        : itemPadding - 2; // Stop 2px before the icon area
+
     for (final childY in childPositions) {
       if (lineStyle.dashPattern != null) {
         _drawDashedLine(
@@ -121,5 +130,6 @@ class FTreeChildrenLinePainter extends CustomPainter {
       childCount != oldDelegate.childCount ||
       childrenSpacing != oldDelegate.childrenSpacing ||
       childRowCounts != oldDelegate.childRowCounts ||
-      itemPadding != oldDelegate.itemPadding;
+      itemPadding != oldDelegate.itemPadding ||
+      textDirection != oldDelegate.textDirection;
 }

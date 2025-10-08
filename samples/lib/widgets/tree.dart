@@ -7,34 +7,37 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TreePage extends Sample {
-  TreePage({@queryParam super.theme});
+  final bool rtl;
+
+  TreePage({@queryParam super.theme, @queryParam this.rtl = false});
 
   @override
-  Widget sample(BuildContext context) => FTree(
-    children: [
-      FTreeItem(
-        icon: const Icon(FIcons.folder),
-        label: const Text('Apple'),
-        initiallyExpanded: true,
-        children: [
-          FTreeItem(
-            icon: const Icon(FIcons.folder),
-            label: const Text('Red Apple'),
-            onPress: () {},
+  Widget sample(BuildContext context) {
+    final tree = FTree(
+      children: [
+        FTreeItem(
+          icon: const Icon(FIcons.folder),
+          label: const Text('Level 1'),
+          initiallyExpanded: true,
+          children: [
+            FTreeItem(
+              icon: const Icon(FIcons.folder),
+              label: const Text('Level 2'),
+              initiallyExpanded: true,
+              children: [
+                FTreeItem(
+                  icon: const Icon(FIcons.folder),
+                  label: const Text('Level 3'),
+                  initiallyExpanded: true,
+                  children: [FTreeItem(icon: const Icon(FIcons.file), label: const Text('Deep File'), onPress: () {})],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
 
-            children: [
-              FTreeItem(icon: const Icon(FIcons.file), label: const Text('Fuji'), onPress: () {}),
-              FTreeItem(icon: const Icon(FIcons.file), label: const Text('Gala'), onPress: () {}),
-            ],
-          ),
-          FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Green Apple'), onPress: () {}),
-        ],
-      ),
-      FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Banana'), onPress: () {}),
-      FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Cherry'), onPress: () {}),
-      FTreeItem(icon: const Icon(FIcons.file), label: const Text('Date'), selected: true, onPress: () {}),
-      FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Elderberry'), onPress: () {}),
-      FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Fig'), onPress: () {}),
-    ],
-  );
+    return rtl ? Directionality(textDirection: TextDirection.rtl, child: tree) : tree;
+  }
 }

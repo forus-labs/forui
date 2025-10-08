@@ -108,5 +108,75 @@ void main() {
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tree/${theme.name}/selected.png'));
     });
+
+    testWidgets('rtl-default - ${theme.name}', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: FTree(
+              children: [
+                FTreeItem(
+                  icon: const Icon(FIcons.folder),
+                  label: const Text('Apple'),
+                  initiallyExpanded: true,
+                  children: [
+                    FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Red Apple'), onPress: () {}),
+                    FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Green Apple'), onPress: () {}),
+                  ],
+                ),
+                FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Banana'), onPress: () {}),
+                FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Cherry'), onPress: () {}),
+                FTreeItem(icon: const Icon(FIcons.file), label: const Text('Date'), onPress: () {}),
+                FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Elderberry'), onPress: () {}),
+                FTreeItem(icon: const Icon(FIcons.folder), label: const Text('Fig'), onPress: () {}),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tree/${theme.name}/rtl-default.png'));
+    });
+
+    testWidgets('rtl-nested - ${theme.name}', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: Directionality(
+            textDirection: TextDirection.rtl,
+            child: FTree(
+              children: [
+                FTreeItem(
+                  icon: const Icon(FIcons.folder),
+                  label: const Text('Level 1'),
+                  initiallyExpanded: true,
+                  children: [
+                    FTreeItem(
+                      icon: const Icon(FIcons.folder),
+                      label: const Text('Level 2'),
+                      initiallyExpanded: true,
+                      children: [
+                        FTreeItem(
+                          icon: const Icon(FIcons.folder),
+                          label: const Text('Level 3'),
+                          initiallyExpanded: true,
+                          children: [
+                            FTreeItem(icon: const Icon(FIcons.file), label: const Text('Deep File'), onPress: () {}),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tree/${theme.name}/rtl-nested.png'));
+    });
   }
 }

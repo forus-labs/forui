@@ -38,11 +38,12 @@ class FTree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.treeStyle) ?? context.theme.treeStyle;
+    final textDirection = Directionality.of(context);
 
     return FTreeData(
       style: style,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: textDirection == TextDirection.rtl ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         spacing: style.spacing,
         children: children,

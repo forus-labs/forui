@@ -257,9 +257,10 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final treeData = FTreeData.maybeOf(context);
     final indentWidth = treeData?.style.indentWidth ?? context.theme.treeStyle.indentWidth;
+    final textDirection = Directionality.of(context);
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: textDirection == TextDirection.rtl ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         // Main item content
@@ -279,6 +280,7 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
           onHoverChange: widget.onHoverChange,
           onStateChange: widget.onStateChange,
           builder: (_, states, child) => Container(
+            alignment: textDirection == TextDirection.rtl ? Alignment.centerRight : Alignment.centerLeft,
             padding: _style!.padding,
             decoration: BoxDecoration(
               color: _style!.backgroundColor.resolve(states),
@@ -286,6 +288,7 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
+              textDirection: textDirection,
               spacing: _style!.iconSpacing,
               children: [
                 if (widget.children.isNotEmpty)
@@ -318,17 +321,22 @@ class _FTreeItemState extends State<FTreeItem> with TickerProviderStateMixin {
                   return FadeTransition(
                     opacity: _fade!,
                     child: Padding(
-                      padding: EdgeInsets.only(left: indentWidth),
+                      padding: textDirection == TextDirection.rtl
+                          ? EdgeInsets.only(right: indentWidth)
+                          : EdgeInsets.only(left: indentWidth),
                       child: CustomPaint(
                         painter: FTreeChildrenLinePainter(
                           lineStyle: _style!.lineStyle,
                           childCount: widget.children.length,
                           childrenSpacing: _style!.childrenSpacing,
                           childRowCounts: childRowCounts,
-                          itemPadding: _style!.padding.resolve(TextDirection.ltr).left,
+                          itemPadding: _style!.padding.resolve(textDirection).left,
+                          textDirection: textDirection,
                         ),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: textDirection == TextDirection.rtl
+                              ? CrossAxisAlignment.end
+                              : CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           spacing: _style!.childrenSpacing,
                           children: [
@@ -585,4 +593,7 @@ class FTreeLineStyle with Diagnosticable, _$FTreeLineStyleFunctions {
   /// Creates a [FTreeLineStyle] that inherits its properties.
   FTreeLineStyle.inherit({required FColors colors, required FStyle style})
     : this(color: colors.border, width: style.borderWidth);
+
+  @override
+  int get hashCode => Object.hash(color, width, Object.hashAll(dashPattern ?? []));
 }
