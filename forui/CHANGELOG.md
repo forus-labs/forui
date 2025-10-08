@@ -1,3 +1,11 @@
+## Next
+
+### `FTree`
+- Add `FTree` - A hierarchical tree widget for displaying nested data with visual connecting lines.
+- Add `FTreeItem` - Individual tree node widget with expand/collapse support.
+- Add `FTreeController`.
+- Add `FTreeStyle`, `FTreeItemStyle`, `FTreeLineStyle`, and `FTreeItemMotion`.
+
 ## 0.16.0
 
 ### Better Generated Documentation
