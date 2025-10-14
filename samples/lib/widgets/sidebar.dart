@@ -151,7 +151,7 @@ class SheetSidebarPage extends Sample {
   Widget _sidebar(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(color: context.theme.colors.background),
     child: FSidebar(
-      width: 300,
+      style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300)),
       header: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -254,7 +254,7 @@ class CustomWidthSidebarPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FSidebar(
-    width: 500,
+    style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 500, maxWidth: 500)),
     children: [
       FSidebarGroup(
         children: [
@@ -287,7 +287,7 @@ class NestedSidebarPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FSidebar(
-    width: 300,
+    style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300)),
     children: [
       FSidebarGroup(
         children: [

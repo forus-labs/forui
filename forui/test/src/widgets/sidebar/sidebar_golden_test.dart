@@ -138,7 +138,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FSidebar(
-            width: 500,
+            style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 500, maxWidth: 500)),
             header: const Text('Header'),
             footer: const Text('Footer'),
             children: [

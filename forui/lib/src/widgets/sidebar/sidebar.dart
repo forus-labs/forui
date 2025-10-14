@@ -66,9 +66,6 @@ class FSidebar extends StatefulWidget {
   /// Throws [AssertionError] if both [focusNode] and [traversalEdgeBehavior] are not null.
   final TraversalEdgeBehavior? traversalEdgeBehavior;
 
-  /// The optional width of the sidebar. If not provided, the width from the style will be used.
-  final double? width;
-
   /// Creates a sidebar with a list of children that will be wrapped in a [ListView].
   FSidebar({
     required List<Widget> children,
@@ -78,7 +75,6 @@ class FSidebar extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.traversalEdgeBehavior,
-    this.width,
     super.key,
   }) : assert(
          focusNode == null || traversalEdgeBehavior == null,
@@ -96,7 +92,6 @@ class FSidebar extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.traversalEdgeBehavior,
-    this.width,
     super.key,
   }) : assert(
          focusNode == null || traversalEdgeBehavior == null,
@@ -116,7 +111,6 @@ class FSidebar extends StatefulWidget {
     this.autofocus = false,
     this.focusNode,
     this.traversalEdgeBehavior,
-    this.width,
     super.key,
   }) : assert(
          focusNode == null || traversalEdgeBehavior == null,
@@ -133,8 +127,7 @@ class FSidebar extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
-      ..add(DoubleProperty('width', width));
+      ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior));
   }
 }
 
