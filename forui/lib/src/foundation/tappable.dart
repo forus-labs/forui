@@ -238,6 +238,7 @@ class FTappable extends StatefulWidget {
 
 class _FTappableState<T extends FTappable> extends State<T> {
   late final WidgetStatesController _controller;
+  late FocusNode _focus;
   late Set<WidgetState> _current;
   int _monotonic = 0;
 
@@ -249,6 +250,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       if (widget.autofocus) WidgetState.focused,
       if (widget._disabled) WidgetState.disabled,
     });
+    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTappable');
     _current = {..._controller.value};
     _controller.addListener(_onChange);
   }
@@ -259,6 +261,13 @@ class _FTappableState<T extends FTappable> extends State<T> {
     _controller
       ..update(WidgetState.selected, widget.selected)
       ..update(WidgetState.disabled, widget._disabled);
+
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focus.dispose();
+      }
+      _focus = widget.focusNode ?? FocusNode();
+    }
   }
 
   void _onChange() {
@@ -275,6 +284,9 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   @override
   void dispose() {
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
     _controller.dispose();
     super.dispose();
   }
@@ -303,7 +315,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
             autofocus: widget.autofocus,
             focusNode: widget.focusNode,
             onFocusChange: (focused) {
-              setState(() => _controller.update(WidgetState.focused, focused));
+              setState(() => _controller.update(WidgetState.focused, _focus.hasPrimaryFocus));
               widget.onFocusChange?.call(focused);
             },
             child: MouseRegion(
