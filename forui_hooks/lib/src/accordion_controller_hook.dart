@@ -26,9 +26,8 @@ class _AccordionControllerHook extends Hook<FAccordionController> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(IntProperty('min', min))
-      ..add(IntProperty('max', max));
+    properties.add(IntProperty('min', min));
+    properties.add(IntProperty('max', max));
   }
 }
 
