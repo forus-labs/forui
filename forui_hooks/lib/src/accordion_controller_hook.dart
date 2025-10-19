@@ -17,7 +17,7 @@ class _AccordionControllerHook extends Hook<FAccordionController> {
   final int? max;
   final String _debugLabel;
 
-  _AccordionControllerHook({required this.min, required this.max, required String debugLabel, super.keys})
+  const _AccordionControllerHook({required this.min, required this.max, required String debugLabel, super.keys})
     : _debugLabel = debugLabel;
 
   @override
