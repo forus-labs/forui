@@ -67,7 +67,6 @@ jobs:
           ref: main
           sparse-checkout: |
             .github/deployment_preview_template.md
-          sparse-checkout-cone-mode: false
       - uses: peter-evans/find-comment@v4
         id: find-comment
         with:

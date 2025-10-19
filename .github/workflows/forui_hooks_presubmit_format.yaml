@@ -1,0 +1,70 @@
+name: Forui Hooks Presubmit Format
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/forui_hooks_presubmit*.yaml'
+      - 'forui_hooks/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false
+    name: Format & Lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: forui_hooks
+    steps:
+      - uses: actions/checkout@v5
+      - uses: subosito/flutter-action@v2.21.0
+        with:
+          cache: true
+
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+      - run: flutter pub get
+      - run: dart run ../tool/sort.dart forui_hooks
+      - run: dart format .
+      - run: dart fix --apply
+        # We format the code again since the required trailing comma lint fixes causes code to be formatted differently.
+      - run: dart format .
+
+      - id: changes
+        run: |
+          git diff --exit-code && echo "changes=false" >> $GITHUB_OUTPUT || {
+            git diff > changes.patch
+            echo "changes=true" >> $GITHUB_OUTPUT
+          }
+
+      - if: steps.changes.outputs.changes == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: format-changes
+          path: changes.patch
+          retention-days: 1
+
+      - if: steps.changes.outputs.changes == 'true'
+        run: |
+          echo "${{ github.event.number }}" > pr-number.txt
+          echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt
+          echo "${{ github.event.pull_request.head.sha }}" > pr-head-sha.txt
+          echo "${{ github.event.pull_request.head.repo.full_name }}" > pr-head-repo.txt
+
+      - if: steps.changes.outputs.changes == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-metadata
+          path: |
+            pr-number.txt
+            pr-head-ref.txt
+            pr-head-sha.txt
+            pr-head-repo.txt
+          retention-days: 1
