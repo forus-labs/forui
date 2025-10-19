@@ -23,5 +23,5 @@ function Logo({ className = 'w-24 h-auto' }: Props) {
 }
 
 export default dynamic(() => Promise.resolve(Logo), {
-  ssr: false
+  ssr: false,
 });

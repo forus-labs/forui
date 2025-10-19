@@ -103,8 +103,8 @@ There are **6** core components in Forui's theming system.
   - Individual widget styles.
   - Individual widget motions.
 
-
 The included `BuildContext` extension allows `FThemeData` can be accessed via [`context.theme`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext.html):
+
 ```dart {3-6} copy
 @override
 Widget build(BuildContext context) {
@@ -117,16 +117,16 @@ Widget build(BuildContext context) {
 }
 ```
 
-
 ### Colors
 
 The `FColors` class contains the theme's color scheme. Colors come in **pairs** - a main color and its corresponding
 foreground color for text and icons.
 
 For example:
-  * `primary` (background) + `primaryForeground` (text/icons)
-  * `secondary` (background) + `secondaryForeground` (text/icons)
-  * `destructive` (background) + `destructiveForeground` (text/icons)
+
+- `primary` (background) + `primaryForeground` (text/icons)
+- `secondary` (background) + `secondaryForeground` (text/icons)
+- `destructive` (background) + `destructiveForeground` (text/icons)
 
 ```dart {3, 8} copy
 @override
@@ -146,7 +146,6 @@ Widget build(BuildContext context) {
 
 To create hovered and disabled color variants, use the [`FColors.hover`](https://pub.dev/documentation/forui/latest/forui.theme/FColors/hover.html)
 and [`FColors.disable`](https://pub.dev/documentation/forui/latest/forui.theme/FColors/disable.html) methods.
-
 
 ### Typography
 
@@ -229,6 +228,7 @@ Each combination is also known as a **constraint**. Constraints are evaluated fr
 be used. In general, more specific constraints should be placed above more general ones.
 
 In the following example, given the states `{hovered, pressed}`, the 1st constraint will **always** match.
+
 ```dart
 FWidgetStateMap({
   // ❌ Don't declare more general constraints above more specific ones!
@@ -255,10 +255,10 @@ FWidgetStateMap({
 Most `FWidgetStateMap` fields only support a subset of states. For example, [`FButtonStyle.decoration`](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html)
 only supports the disabled, hovered, pressed and focused states. A field's supported states are documented in its [API docs](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html).
 
-
 ## Customization
 
 Forui provides **2** ways to customize themes and widget styles.
+
 - [**CLI**](#themes) - major and reusable style changes, such as creating your own design system.
 - [**`copyWith(...)`**](#copywith) method - minor and one-off adjustments to existing styles.
 
@@ -275,6 +275,7 @@ as an example, but the same principles apply to all Forui widgets.
 Navigate to your project directory.
 
 Run to generate a `main.dart`:
+
 ```shell copy
 dart run forui init
 ```
@@ -313,6 +314,7 @@ class Application extends StatelessWidget {
 #### Generate a Theme
 
 Run to generate a theme based on [zinc](#getting-started)'s light variant:
+
 ```shell copy
 dart run forui theme create zinc-light
 ```
@@ -322,8 +324,9 @@ dart run forui theme create zinc-light
 </Callout>
 
 This generates a theme file which you can:
-  * add to your generated `main.dart`.
-  * add the generated styles to.
+
+- add to your generated `main.dart`.
+- add the generated styles to.
 
 ```dart filename="lib/theme/theme.dart" {1, 20} copy
 import 'accordion_style.dart';
@@ -386,6 +389,7 @@ FStyle _style({required FColors colors, required FTypography typography}) => FSt
 #### Generate a Style
 
 Run to generate a [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html):
+
 ```shell copy
 dart run forui style create accordion
 ```
@@ -436,15 +440,16 @@ See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateM
 ### Individual Widget Styles
 
 You can customize a widget's style in **2** ways:
-* Use `copyWith()` - Best for minor adjustments to existing styles.
-* Generate via CLI - Best for major style overhauls.
 
+- Use `copyWith()` - Best for minor adjustments to existing styles.
+- Generate via CLI - Best for major style overhauls.
 
 #### `copyWith(...)`
 
 All widgets and style `copyWith(...)`s accept style builder functions.
 
 To change an accordion's focused outline color:
+
 ```dart copy
 FAccordion(
   style: (style) => style.copyWith(
@@ -459,6 +464,7 @@ All styles implement the [`call` function](https://dart.dev/language/callable-ob
 passed directly to a widget or style's `copyWith(...)` as a shortcut.
 
 Both are equivalent:
+
 ```dart copy
 // Long-form
 FAccordion(
@@ -478,6 +484,7 @@ The following sections demonstrate how to override an accordion's style.
 ##### Generate the Style
 
 Run to generate a widget style:
+
 ```shell copy
 dart run forui style create accordion
 ```
@@ -489,6 +496,7 @@ dart run forui style create accordion
 ##### Modify the Style
 
 This example shows how to add underlining when the accordion title is focused, in addition to the existing hover and press states:
+
 ```dart filename="lib/theme/accordion_style.dart" {8} copy
 FAccordionStyle accordionStyle({
   required FColors colors,
@@ -544,6 +552,7 @@ system.
 ### Create a Theme Extension
 
 Theme extensions must extend `ThemeExtension` and implement `copyWith()` and `lerp()`.
+
 ```dart filename="lib/theme/brand_color.dart" copy
 import 'package:flutter/material.dart';
 
@@ -569,6 +578,7 @@ class BrandColor extends ThemeExtension<BrandColor> {
 ```
 
 Add the extension to `FThemeData(...)` via its `extensions` parameter:
+
 ```dart copy
 import 'brand_theme.dart';
 
@@ -581,6 +591,7 @@ FThemeData(
 ```
 
 You can also add extensions to existing themes using `copyWith(...)`:
+
 ```dart copy
 final theme = FThemes.zinc.light.copyWith(
   extensions: [
@@ -592,6 +603,7 @@ final theme = FThemes.zinc.light.copyWith(
 ### Accessing the Properties
 
 Retrieve your custom theme extension via [`extension<T>()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/extension.html):
+
 ```dart {3} copy
 @override
 Widget build(BuildContext context) {
@@ -614,9 +626,10 @@ Forui provides **2** ways to convert [`FThemeData`](https://pub.dev/documentatio
 to Material's [`ThemeData`](https://api.flutter.dev/flutter/material/ThemeData-class.html).
 
 This is useful when:
-  * Using Material widgets within a Forui application.
-  * Maintaining consistent theming across both Forui and Material components.
-  * Gradually migrating from Material to Forui.
+
+- Using Material widgets within a Forui application.
+- Maintaining consistent theming across both Forui and Material components.
+- Gradually migrating from Material to Forui.
 
 ### `toApproximateMaterialTheme()`
 
@@ -658,6 +671,7 @@ Widget build(BuildContext context) {
 ### CLI
 
 Use the CLI to generate a copy of `toApproximateMaterialTheme()` inside your project:
+
 ```shell copy
 dart run forui snippet create material-mapping
 ```

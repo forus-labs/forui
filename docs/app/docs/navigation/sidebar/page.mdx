@@ -5,7 +5,6 @@ import { Widget } from '@/components/demo/widget.tsx';
 import LinkBadge from '@/components/ui/link-badge/link-badge.tsx';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group.tsx';
 
-
 # Sidebar
 
 A sidebar widget that provides an opinionated layout for navigation on the side of the screen.
@@ -159,7 +158,6 @@ A sidebar widget that provides an opinionated layout for navigation on the side 
     </Tabs.Tab>
 </Tabs>
 
-
 ## CLI
 
 To generate and customize this style:
@@ -167,7 +165,6 @@ To generate and customize this style:
 ```shell copy
 dart run forui style create sidebar
 ```
-
 
 ## Anatomy
 
@@ -178,7 +175,7 @@ This segment describes the anatomy of the various elements of a sidebar.
 The widget that provides an opinionated layout on the side of the screen. The widget has the following sections:
 
 | Name    | Parameter      | Position   | Optional |
-|:--------|:---------------|:-----------|:---------|
+| :------ | :------------- | :--------- | :------- |
 | header  | header         | sticky     | ✅       |
 | content | child/children | scrollable | ❌       |
 | footer  | footer         | sticky     | ✅       |
@@ -190,7 +187,6 @@ A widget that is used to group several `FSidebarItem`s.
 ### `FSidebarItem`
 
 Represents an item on the sidebar. May be nested in `FSidebarItem.children` to create nested items.
-
 
 ## Usage
 
@@ -256,7 +252,6 @@ FSidebarItem(
   children: [FSidebarItem(...)],
 );
 ```
-
 
 ## Examples
 
@@ -370,6 +365,7 @@ Suited for devices with limited screen space.
         );
         ```
     </Tabs.Tab>
+
 </Tabs>
 
 ### Custom Width
