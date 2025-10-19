@@ -38,9 +38,10 @@ jobs:
       - run: dart format .
 
       - id: changes
+        working-directory: .
         run: |
-          git diff --exit-code && echo "changes=false" >> $GITHUB_OUTPUT || {
-            git diff > changes.patch
+          git diff --exit-code -- forui_hooks && echo "changes=false" >> $GITHUB_OUTPUT || {
+            git diff -- forui_hooks > changes.patch
             echo "changes=true" >> $GITHUB_OUTPUT
           }
 
@@ -52,6 +53,7 @@ jobs:
           retention-days: 1
 
       - if: steps.changes.outputs.changes == 'true'
+        working-directory: .
         run: |
           echo "${{ github.event.number }}" > pr-number.txt
           echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt
