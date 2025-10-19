@@ -38,8 +38,9 @@ jobs:
         run: |
           if [ -f "changes.patch" ] && [ -s "changes.patch" ]; then
             echo "changes=true" >> $GITHUB_OUTPUT
+            mv changes.patch ${{ runner.temp }}/changes.patch
           else
-            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "changes=false" >> $GITHUB_OUTPUT
           fi
 
       - if: steps.check-changes.outputs.changes == 'true'
@@ -58,6 +59,7 @@ jobs:
 
       - if: steps.check-changes.outputs.changes == 'true'
         run: |
+          mv ${{ runner.temp }}/changes.patch .
           git apply changes.patch
           rm changes.patch
 
