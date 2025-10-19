@@ -1,0 +1,67 @@
+name: Docs Preview Build
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/docs_preview_build.yaml'
+      - '.github/workflows/docs_preview_deploy.yaml'
+      - 'docs/**'
+      - 'samples/**'
+
+jobs:
+  build:
+    name: Build Docs & Samples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: subosito/flutter-action@v2.21.0
+        with:
+          cache: true
+
+      # Build samples
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+      - working-directory: ./samples
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+          flutter build web
+      - uses: actions/upload-artifact@v4
+        with:
+          name: samples-build
+          path: ./samples/build/web
+          retention-days: 1
+
+      # Build docs
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - working-directory: ./docs
+        run: |
+          pnpm install
+          pnpm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docs-build
+          path: ./docs/out
+          retention-days: 1
+
+      # Save PR metadata
+      - run: |
+          echo "${{ github.event.number }}" > pr-number.txt
+          echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt
+          echo "${{ github.event.pull_request.head.sha }}" > pr-head-sha.txt
+      - name: Upload PR metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-metadata
+          path: |
+            pr-number.txt
+            pr-head-ref.txt
+            pr-head-sha.txt
+          retention-days: 1
