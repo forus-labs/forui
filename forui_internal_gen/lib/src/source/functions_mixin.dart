@@ -3,6 +3,8 @@ import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
+const _foo = "lorem";
+
 /// Generates a mixin for a class that implements a call, debugFillProperties, equals and hashCode methods and getters.
 ///
 /// This will probably be replaced by an augment class in the future.
