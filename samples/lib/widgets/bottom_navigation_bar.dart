@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
-const _foo = "lorem";
+const _foo = 'lorem';
 
 @RoutePage()
 class BottomNavigationBarPage extends StatefulSample {

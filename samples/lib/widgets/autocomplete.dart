@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
-const features = ["Keyboard navigation", 'Typeahead suggestions', 'Tab to complete'];
+const features = ['Keyboard navigation', 'Typeahead suggestions', 'Tab to complete'];
 
 const fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Pineapple'];
 
