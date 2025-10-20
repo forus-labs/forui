@@ -38,7 +38,7 @@ jobs:
         shell: bash
         run: |
           git diff --exit-code -- forui && echo "changes=false" >> $GITHUB_OUTPUT || {
-            git diff --binary -- forui > changes-${{ matrix.os }}.patch
+            git diff --binary --full-index -- forui > changes-${{ matrix.os }}.patch
             echo "changes=true" >> $GITHUB_OUTPUT
           }
 
