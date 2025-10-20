@@ -1,24 +1,24 @@
-name: Forui Internal Gen Presubmit Format
+name: Forui Presubmit Format
 
 on:
   workflow_dispatch: {}
   pull_request:
     branches: [ main ]
     paths:
-      - '.github/workflows/forui_internal_gen_presubmit*.yaml'
-      - 'forui_internal_gen/**'
+      - '.github/workflows/forui_presubmit*.yaml'
+      - 'forui/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   format:
-    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false
+    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false && !contains(github.event.head_commit.message, 'Prepare Forui for review')
     name: Format & Lint
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: forui_internal_gen
+        working-directory: forui
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2.21.0
@@ -26,9 +26,9 @@ jobs:
           cache: true
 
       - run: flutter pub get
-      - run: dart run ../tool/sort.dart forui
       - run: dart run build_runner build --delete-conflicting-outputs
-      - run: dart format .
+      - run: dart run ./tool/cli_generator/main.dart
+      - run: dart run ../tool/sort.dart forui
       - run: dart fix --apply
         # We format the code again since the required trailing comma lint fixes causes code to be formatted differently.
       - run: dart format .
@@ -36,8 +36,8 @@ jobs:
       - id: changes
         working-directory: .
         run: |
-          git diff --exit-code -- forui_internal_gen && echo "changes=false" >> $GITHUB_OUTPUT || {
-            git diff -- forui_internal_gen > changes.patch
+          git diff --exit-code -- forui && echo "changes=false" >> $GITHUB_OUTPUT || {
+            git diff -- forui > changes.patch
             echo "changes=true" >> $GITHUB_OUTPUT
           }
 

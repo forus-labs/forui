@@ -1,24 +1,28 @@
-name: Forui Internal Gen Presubmit Format
+name: Forui Goldens Generate
 
 on:
   workflow_dispatch: {}
   pull_request:
     branches: [ main ]
     paths:
-      - '.github/workflows/forui_internal_gen_presubmit*.yaml'
-      - 'forui_internal_gen/**'
+      - '.github/workflows/forui_presubmit*.yaml'
+      - 'forui/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  format:
-    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false
-    name: Format & Lint
-    runs-on: ubuntu-latest
+  generate-goldens:
+    name: Generate goldens
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
-        working-directory: forui_internal_gen
+        working-directory: forui
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest ]
+        flutter-version: [ 3.x ]
+
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2.21.0
@@ -26,30 +30,28 @@ jobs:
           cache: true
 
       - run: flutter pub get
-      - run: dart run ../tool/sort.dart forui
       - run: dart run build_runner build --delete-conflicting-outputs
-      - run: dart format .
-      - run: dart fix --apply
-        # We format the code again since the required trailing comma lint fixes causes code to be formatted differently.
-      - run: dart format .
+      - run: flutter test --update-goldens
 
       - id: changes
         working-directory: .
+        shell: bash
         run: |
-          git diff --exit-code -- forui_internal_gen && echo "changes=false" >> $GITHUB_OUTPUT || {
-            git diff -- forui_internal_gen > changes.patch
+          git diff --exit-code -- forui && echo "changes=false" >> $GITHUB_OUTPUT || {
+            git diff -- forui > changes-${{ matrix.os }}.patch
             echo "changes=true" >> $GITHUB_OUTPUT
           }
 
       - if: steps.changes.outputs.changes == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: format-changes
-          path: changes.patch
+          name: golden-changes-${{ matrix.os }}
+          path: changes-${{ matrix.os }}.patch
           retention-days: 1
 
       - if: steps.changes.outputs.changes == 'true'
         working-directory: .
+        shell: bash
         run: |
           echo "${{ github.event.number }}" > pr-number.txt
           echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt
@@ -59,7 +61,7 @@ jobs:
       - if: steps.changes.outputs.changes == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: pr-metadata
+          name: pr-metadata-${{ matrix.os }}
           path: |
             pr-number.txt
             pr-head-ref.txt

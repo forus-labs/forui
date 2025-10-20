@@ -1,8 +1,8 @@
-name: Forui Samples Presubmit Commit
+name: Forui Presubmit Commit
 
 on:
   workflow_run:
-    workflows: ["Forui Samples Presubmit Format"]
+    workflows: ["Forui Presubmit Format"]
     types: [completed]
 
 jobs:
@@ -67,5 +67,5 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           pull: '--rebase --autostash'
-          message: 'Prepare Samples for review'
-          add: '.'
+          message: 'Prepare Forui for review'
+          add: '*'

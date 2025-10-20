@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   format:
-    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false && !contains(github.event.head_commit.message, 'Prepare samples for review')
+    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false && !contains(github.event.head_commit.message, 'Prepare Samples for review')
     name: Format & Lint
     runs-on: ubuntu-latest
     defaults:
