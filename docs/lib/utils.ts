@@ -28,5 +28,5 @@ export async function fetchDemoUrl(): Promise<string | null> {
   }
 
   const config = await response.json();
-  return config?.demoUrl ?? fallback;
+  return config.demoUrl ? (demoUrl = config.demoUrl) : fallback;
 }

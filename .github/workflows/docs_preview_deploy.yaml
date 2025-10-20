@@ -55,8 +55,7 @@ jobs:
           command: pages deploy ./docs-build --project-name=${{ vars.CLOUDFLARE_DOCS_PROJECT_NAME }} --branch=${{ steps.pr-metadata.outputs.pr_head_ref }}
 
       # Create/update comment with link to preview
-      - name: Generate GitHub App token
-        uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@v2
         id: generate-token
         with:
           app-id: ${{ secrets.AUTO_MAID_APP_ID }}
