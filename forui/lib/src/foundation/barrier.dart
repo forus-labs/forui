@@ -81,7 +81,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(
         FlagProperty(
-          "barrierSemanticsDismissible",
+          'barrierSemanticsDismissible',
           value: barrierSemanticsDismissible,
           ifTrue: 'barrier semantics dismissible',
         ),
