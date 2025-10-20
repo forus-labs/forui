@@ -70,7 +70,7 @@ void main() {
                       FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
                       FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
                       FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Library')),
-                      FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Search')),
+                      FBottomNavigationBarItem(icon: Icon(FIcons.x), label: Text('Search')),
                     ],
                   ),
                 ],
