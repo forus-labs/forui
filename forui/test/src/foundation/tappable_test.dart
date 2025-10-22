@@ -525,4 +525,48 @@ void main() {
       expect(hovered, false);
     });
   });
+
+  testWidgets('returns focused state on primary focus', (tester) async {
+    final focus = autoDispose(FocusNode());
+
+    var focused = false;
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTappable(
+          focusNode: focus,
+          onPress: focus.requestFocus,
+          onStateChange: (v) => focused = v.current.contains(WidgetState.focused),
+          focusedOutlineStyle: FThemes.zinc.light.style.focusedOutlineStyle,
+          child: const Text('focus'),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('focus'));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    expect(focus.hasFocus, true);
+    expect(focused, true);
+  });
+
+  testWidgets('does not return focused state on non-primary focus', (tester) async {
+    final focus = autoDispose(FocusNode());
+
+    var focused = false;
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTappable(
+          onStateChange: (v) => focused = v.current.contains(WidgetState.focused),
+          focusedOutlineStyle: FThemes.zinc.light.style.focusedOutlineStyle,
+          child: FButton(onPress: focus.requestFocus, focusNode: focus, child: const Text('focus')),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('focus'));
+    await tester.pumpAndSettle(const Duration(seconds: 1));
+
+    expect(focus.hasFocus, true);
+    expect(focused, false);
+  });
 }

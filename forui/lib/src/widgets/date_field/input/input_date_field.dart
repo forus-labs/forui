@@ -76,7 +76,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   void initState() {
     super.initState();
     _controller.addValueListener(_onChange);
-    _focus = widget.focusNode ?? FocusNode();
+    _focus = widget.focusNode ?? FocusNode(debugLabel: 'InputDateField');
   }
 
   @override
@@ -94,7 +94,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
     }
 
     if (widget.focusNode != old.focusNode) {
-      _focus = widget.focusNode ?? FocusNode();
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'InputDateField');
     }
   }
 

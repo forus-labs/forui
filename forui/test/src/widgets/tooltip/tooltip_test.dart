@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -193,6 +194,71 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.text('tip'), findsNothing);
+      });
+    });
+
+    group('focus', () {
+      testWidgets('shows tooltip on immediate descendant primary focus', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTooltip(
+              tipBuilder: (context, controller) => const Text('Tooltip'),
+              child: DecoratedBox(
+                decoration: BoxDecoration(border: Border.all()),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FTappable(
+                    focusedOutlineStyle: FThemes.zinc.light.style.focusedOutlineStyle,
+                    onPress: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FButton.icon(onPress: () {}, child: const Icon(FIcons.pencil)),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(find.text('Tooltip'), findsOne);
+      });
+
+      testWidgets('hides tooltip on nested descendant primary focus', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTooltip(
+              tipBuilder: (context, controller) => const Text('Tooltip'),
+              child: DecoratedBox(
+                decoration: BoxDecoration(border: Border.all()),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FTappable(
+                    focusedOutlineStyle: FThemes.zinc.light.style.focusedOutlineStyle,
+                    onPress: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FButton.icon(onPress: () {}, child: const Icon(FIcons.pencil)),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(find.text('Tooltip'), findsOne);
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pumpAndSettle(const Duration(seconds: 5));
+
+        expect(find.text('Tooltip'), findsNothing);
       });
     });
 

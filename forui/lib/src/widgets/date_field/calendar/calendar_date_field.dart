@@ -103,7 +103,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
 
 class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   final TextEditingController _textController = TextEditingController();
-  late FocusNode _focus = widget.focusNode ?? FocusNode();
+  late FocusNode _focus = widget.focusNode ?? FocusNode(debugLabel: 'CalendarDatePicker');
   DateFormat? _format;
 
   @override
@@ -121,7 +121,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       if (old.focusNode == null) {
         _focus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode();
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'CalendarDatePicker');
     }
 
     if (widget.controller != old.controller) {

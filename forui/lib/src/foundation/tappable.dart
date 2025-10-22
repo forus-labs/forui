@@ -67,13 +67,9 @@ class FTappable extends StatefulWidget {
   /// {@template forui.foundation.FTappable.onStateChange}
   /// Handler called when there are any changes to a tappable's [WidgetState]s.
   ///
-  /// It is called before the more specific callbacks, i.e., [onFocusChange].
+  /// It only gains the [WidgetState.focused] state on primary focus.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  ///
-  /// Consider using the more specific callbacks if you only need to listen to a specific state change:
-  /// * [onFocusChange] for focus changes.
-  /// * [onHoverChange] for hover changes.
   /// {@endtemplate}
   final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
@@ -238,6 +234,7 @@ class FTappable extends StatefulWidget {
 
 class _FTappableState<T extends FTappable> extends State<T> {
   late final WidgetStatesController _controller;
+  late FocusNode _focus;
   late Set<WidgetState> _current;
   int _monotonic = 0;
 
@@ -249,6 +246,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       if (widget.autofocus) WidgetState.focused,
       if (widget._disabled) WidgetState.disabled,
     });
+    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTappable');
     _current = {..._controller.value};
     _controller.addListener(_onChange);
   }
@@ -259,6 +257,13 @@ class _FTappableState<T extends FTappable> extends State<T> {
     _controller
       ..update(WidgetState.selected, widget.selected)
       ..update(WidgetState.disabled, widget._disabled);
+
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focus.dispose();
+      }
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTappable');
+    }
   }
 
   void _onChange() {
@@ -275,6 +280,9 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   @override
   void dispose() {
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
     _controller.dispose();
     super.dispose();
   }
@@ -301,9 +309,9 @@ class _FTappableState<T extends FTappable> extends State<T> {
           excludeSemantics: widget.excludeSemantics,
           child: Focus(
             autofocus: widget.autofocus,
-            focusNode: widget.focusNode,
+            focusNode: _focus,
             onFocusChange: (focused) {
-              setState(() => _controller.update(WidgetState.focused, focused));
+              setState(() => _controller.update(WidgetState.focused, _focus.hasPrimaryFocus));
               widget.onFocusChange?.call(focused);
             },
             child: MouseRegion(

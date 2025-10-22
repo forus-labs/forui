@@ -396,7 +396,10 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     super.initState();
     _focusNode =
         widget.focusNode ??
-        FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop);
+        FocusScopeNode(
+          debugLabel: 'FPopover',
+          traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop,
+        );
   }
 
   @override
@@ -413,7 +416,10 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
       _focusNode =
           widget.focusNode ??
-          FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop);
+          FocusScopeNode(
+            debugLabel: 'FPopover',
+            traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop,
+          );
     }
 
     if (widget.controller != old.controller) {

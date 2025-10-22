@@ -139,7 +139,10 @@ class _FSidebarState extends State<FSidebar> {
     super.initState();
     _focusNode =
         widget.focusNode ??
-        FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope);
+        FocusScopeNode(
+          debugLabel: 'FSidebar',
+          traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope,
+        );
   }
 
   @override
@@ -153,7 +156,10 @@ class _FSidebarState extends State<FSidebar> {
 
       _focusNode =
           widget.focusNode ??
-          FocusScopeNode(traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope);
+          FocusScopeNode(
+            debugLabel: 'FSidebar',
+            traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope,
+          );
     }
   }
 

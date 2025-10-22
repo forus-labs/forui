@@ -210,7 +210,7 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
 }
 
 class _State<T> extends FormFieldState<Set<T>> {
-  final FocusNode _focus = FocusNode();
+  final FocusNode _focus = FocusNode(debugLabel: 'FSelectTileGroup');
 
   @override
   void initState() {
