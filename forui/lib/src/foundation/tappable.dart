@@ -67,7 +67,7 @@ class FTappable extends StatefulWidget {
   /// {@template forui.foundation.FTappable.onStateChange}
   /// Handler called when there are any changes to a tappable's [WidgetState]s.
   ///
-  /// It only gains the [WidgetState.focused] state on primary focused.
+  /// It only gains the [WidgetState.focused] state on primary focus.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   /// {@endtemplate}
@@ -262,7 +262,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       if (old.focusNode == null) {
         _focus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode();
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTappable');
     }
   }
 
