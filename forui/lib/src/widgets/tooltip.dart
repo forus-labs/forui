@@ -250,8 +250,8 @@ class FTooltip extends StatefulWidget {
 }
 
 class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
+  final FocusNode _focus = FocusNode(debugLabel: 'FTooltip', canRequestFocus: false, skipTraversal: true);
   late FTooltipController _controller = widget.controller ?? FTooltipController(vsync: this);
-  late final FocusNode _focus = FocusNode(debugLabel: 'FTooltip', canRequestFocus: false, skipTraversal: true);
   int _monotonic = 0;
 
   @override
@@ -268,10 +268,10 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
   @override
   void dispose() {
-    _focus.dispose();
     if (widget.controller == null) {
       _controller.dispose();
     }
+    _focus.dispose();
     super.dispose();
   }
 
