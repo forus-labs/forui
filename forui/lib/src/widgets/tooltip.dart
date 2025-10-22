@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -250,6 +251,7 @@ class FTooltip extends StatefulWidget {
 
 class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
   late FTooltipController _controller = widget.controller ?? FTooltipController(vsync: this);
+  late final FocusNode _focus = FocusNode(debugLabel: 'FTooltip', canRequestFocus: false, skipTraversal: true);
   int _monotonic = 0;
 
   @override
@@ -266,6 +268,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
   @override
   void dispose() {
+    _focus.dispose();
     if (widget.controller == null) {
       _controller.dispose();
     }
@@ -281,7 +284,16 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     if (widget.hover || widget.longPress) {
       child = CallbackShortcuts(
         bindings: {const SingleActivator(LogicalKeyboardKey.escape): _exit},
-        child: Focus(onFocusChange: (focused) async => focused ? _enter() : _exit(), child: child),
+        child: Focus(
+          // This is required as onFocusChange is not called when focus is shifted from a child to a nested child.
+          onKeyEvent: (_, event) {
+            _toggle(_focus.hasFocus);
+            return KeyEventResult.ignored;
+          },
+          focusNode: _focus,
+          onFocusChange: _toggle,
+          child: child,
+        ),
       );
     }
 
@@ -359,6 +371,26 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         child: child,
       ),
     );
+  }
+
+  Future<void> _toggle(bool focused) {
+    if (!focused) {
+      return _exit();
+    }
+
+    final descendants = Queue.of(_focus.children);
+    while (descendants.isNotEmpty) {
+      final current = descendants.removeFirst();
+      if (current.hasPrimaryFocus) {
+        return _enter();
+      }
+
+      if (!current.canRequestFocus) {
+        descendants.addAll(current.children);
+      }
+    }
+
+    return _exit();
   }
 
   Future<void> _enter() async {

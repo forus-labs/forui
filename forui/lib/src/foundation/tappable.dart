@@ -67,13 +67,9 @@ class FTappable extends StatefulWidget {
   /// {@template forui.foundation.FTappable.onStateChange}
   /// Handler called when there are any changes to a tappable's [WidgetState]s.
   ///
-  /// It is called before the more specific callbacks, i.e., [onFocusChange].
+  /// It only gains the [WidgetState.focused] state on primary focused.
   ///
   /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  ///
-  /// Consider using the more specific callbacks if you only need to listen to a specific state change:
-  /// * [onFocusChange] for focus changes.
-  /// * [onHoverChange] for hover changes.
   /// {@endtemplate}
   final ValueChanged<FWidgetStatesDelta>? onStateChange;
 
@@ -313,7 +309,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
           excludeSemantics: widget.excludeSemantics,
           child: Focus(
             autofocus: widget.autofocus,
-            focusNode: widget.focusNode,
+            focusNode: _focus,
             onFocusChange: (focused) {
               setState(() => _controller.update(WidgetState.focused, _focus.hasPrimaryFocus));
               widget.onFocusChange?.call(focused);

@@ -4,6 +4,11 @@
 *  Change `FTappable` to only update focused state when it has primary focus.
 
 
+### `FTooltip`
+* Change `FTooltip` to not be focusable.
+* Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus. 
+
+
 ### Others
 * **Breaking** Remove `FSidebar.width`. This field was never intended for public usage - Use `FSidebarStyle.constraints`
   instead.
