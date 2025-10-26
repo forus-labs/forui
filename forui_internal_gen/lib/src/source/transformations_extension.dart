@@ -42,7 +42,8 @@ class TransformationsExtension {
     var backticked = false;
 
     String summary = '';
-    parse: for (var i = 0; i < full.length; i++) {
+    parse:
+    for (var i = 0; i < full.length; i++) {
       final char = full[i];
 
       switch (char) {
@@ -87,7 +88,6 @@ class TransformationsExtension {
     summary = summary.replaceAll('\n', ' ');
     return summary.isEmpty ? null : summary;
   }
-
 
   /// The type.
   @protected
