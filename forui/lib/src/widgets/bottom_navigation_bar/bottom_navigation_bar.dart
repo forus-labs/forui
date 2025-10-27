@@ -150,6 +150,11 @@ class FBottomNavigationBarData extends InheritedWidget {
 /// [FBottomNavigationBar]'s style.
 class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyleFunctions {
   /// The decoration.
+  ///
+  /// ## Removing the top border
+  /// By default, both [FBottomNavigationBar] and [FScaffold.footer] specify a top border. When used together, the
+  /// top border must be removed from both [FBottomNavigationBarStyle.decoration] and [FScaffoldStyle.footerDecoration]
+  /// for the changes to take effect.
   @override
   final BoxDecoration decoration;
 

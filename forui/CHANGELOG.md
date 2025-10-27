@@ -1,5 +1,10 @@
 ## 0.17.0 (Next)
 
+
+### `FBottomNavigationBar`
+* Change `FBottomNavigationBarItem.label` to be optional.
+
+
 ### `FTappable`
 *  Change `FTappable` to only update focused state when it has primary focus.
 
