@@ -511,7 +511,7 @@ import 'package:forui/forui.dart';
 
 /// Provides a mapping for [FIcons] which can be iterated over using [EnumByName].
 ///
-/// **Note**:
+/// ## Note
 /// This enum may prevent [FIcons] from being tree-shaken and result in larger bundle sizes.
 enum FIconMapping {
   aArrowDown(FIcons.aArrowDown),
