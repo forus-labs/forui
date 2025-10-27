@@ -49,6 +49,29 @@ void main() {
       );
     });
 
+    testWidgets('no label - ${theme.name}', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: const FBottomNavigationBar(
+            index: 2,
+            children: [
+              FBottomNavigationBarItem(icon: Icon(FIcons.house)),
+              FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid)),
+              FBottomNavigationBarItem(icon: Icon(FIcons.radio)),
+              FBottomNavigationBarItem(icon: Icon(FIcons.radio)),
+              FBottomNavigationBarItem(icon: Icon(FIcons.radio)),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('bottom-navigation-bar/${theme.name}-no-label.png'),
+      );
+    });
+
     testWidgets('${theme.name} glassmorphic', (tester) async {
       await tester.pumpWidget(
         TestScaffold(

@@ -25,7 +25,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   final Widget icon;
 
   /// The label.
-  final Widget label;
+  final Widget? label;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -45,7 +45,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   /// Creates a [FBottomNavigationBarItem].
   const FBottomNavigationBarItem({
     required this.icon,
-    required this.label,
+    this.label,
     this.style,
     this.autofocus = false,
     this.focusNode,
@@ -80,11 +80,12 @@ class FBottomNavigationBarItem extends StatelessWidget {
             ExcludeSemantics(
               child: IconTheme(data: style.iconStyle.resolve(states), child: icon),
             ),
-            DefaultTextStyle.merge(
-              style: style.textStyle.resolve(states),
-              overflow: TextOverflow.ellipsis,
-              child: label,
-            ),
+            if (label case final label?)
+              DefaultTextStyle.merge(
+                style: style.textStyle.resolve(states),
+                overflow: TextOverflow.ellipsis,
+                child: label,
+              ),
           ],
         ),
       ),
