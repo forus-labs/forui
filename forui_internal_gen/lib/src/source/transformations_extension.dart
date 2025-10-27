@@ -4,12 +4,91 @@ import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
+final _comment = RegExp('(/// ?)');
+
 /// Generates an extension.
 ///
 /// The copyWith function is generated in an extension rather than on a mixin/augmentation to make the function
 /// non-virtual. This prevents conflicts between base and subclasses.
 @internal
 class TransformationsExtension {
+  /// Summarizes the multi-line documentation comment by extracting the first sentence.
+  ///
+  /// Returns null if no summary could be found.
+  @visibleForTesting
+  static String? summarizeDocs(String? documentation) {
+    var lines = documentation?.split('\n').map((l) => l.replaceFirst(_comment, '')) ?? <String>[];
+    if (lines.isEmpty) {
+      return null;
+    }
+
+    if (lines.first case final comment when comment.startsWith('{@macro')) {
+      // The macro needs to be on a new line for dart doc to properly parse it.
+      return '\n /// $comment';
+    }
+
+    if (lines.first case final comment when comment.startsWith('{@template')) {
+      // Skip if template is malformed. We assume that a template is multi-lined.
+      if (lines.length <= 2) {
+        return null;
+      }
+
+      lines = lines.skip(1).toList();
+    }
+
+    final full = lines.join('\n');
+    var bracketDepth = 0;
+    var parenDepth = 0;
+    var backticked = false;
+
+    String summary = '';
+    parse:
+    for (var i = 0; i < full.length; i++) {
+      final char = full[i];
+
+      switch (char) {
+        case '[' when !backticked:
+          bracketDepth++;
+        case ']' when !backticked:
+          bracketDepth--;
+        case '(' when !backticked:
+          parenDepth++;
+        case ')' when !backticked:
+          parenDepth--;
+        case '`':
+          backticked = !backticked;
+        case '.' when bracketDepth == 0 && parenDepth == 0 && !backticked:
+          // Skip common abbreviations (i.e., e.g.)
+          // Both dots in "i.e." and "e.g." need to be skipped
+
+          // Check if this is the first dot: "i." or "e." part of "i.e." or "e.g."
+          if (i >= 1 && i + 2 < full.length) {
+            if ((full[i - 1] == 'i' && full[i + 1] == 'e' && full[i + 2] == '.') ||
+                (full[i - 1] == 'e' && full[i + 1] == 'g' && full[i + 2] == '.')) {
+              continue;
+            }
+          }
+
+          // Check if this is the second dot: final '.' in "i.e." or "e.g."
+          if (i >= 3) {
+            if ((full[i - 3] == 'i' && full[i - 2] == '.' && full[i - 1] == 'e') ||
+                (full[i - 3] == 'e' && full[i - 2] == '.' && full[i - 1] == 'g')) {
+              continue;
+            }
+          }
+
+          // Check if followed by whitespace, EOL, or EOS (to avoid matching decimals like 1.5).
+          if (i + 1 >= full.length || full[i + 1] == ' ' || full[i + 1] == '\n') {
+            summary = full.substring(0, i + 1).trim();
+            break parse;
+          }
+      }
+    }
+
+    summary = summary.replaceAll('\n', ' ');
+    return summary.isEmpty ? null : summary;
+  }
+
   /// The type.
   @protected
   final ClassElement2 element;
@@ -42,25 +121,9 @@ class TransformationsExtension {
 
     for (final field in fields) {
       final prefix = '/// * [${element.name3}.${field.name3}]';
-      final lines = field.documentationComment?.split('\n') ?? const <String>[];
+      final summary = summarizeDocs(field.documentationComment);
 
-      switch (lines.firstOrNull) {
-        case final comment? when comment.startsWith('/// {@macro'):
-          docs.add('$prefix - \n$comment');
-          continue;
-
-        case final comment? when comment.startsWith('/// {@template'):
-          final summary = lines.skip(1).join('\n').replaceFirst('/// ', '').split('.').firstOrNull;
-          final suffix = summary == null ? '' : ' - $summary.';
-          docs.add('$prefix$suffix');
-          continue;
-
-        default:
-          final summary = field.documentationComment?.replaceFirst('/// ', '').split('.').firstOrNull;
-          final suffix = summary == null ? '' : ' - $summary.';
-          docs.add('$prefix$suffix');
-          continue;
-      }
+      docs.add('$prefix${summary == null ? '' : ' - $summary'}');
     }
 
     // Generate assignments for the copyWith method body

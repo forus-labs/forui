@@ -12,6 +12,7 @@
 ### Others
 * **Breaking** Remove `FSidebar.width`. This field was never intended for public usage - Use `FSidebarStyle.constraints`
   instead.
+* Fix generated style docs being malformed.
 
 
 ## 0.16.0
