@@ -41,16 +41,19 @@ A popover displays rich content in a portal that is aligned to a child.
                   ),
                 ),
                 const SizedBox(height: 15),
-                for (final (label, value) in [
+                for (final (index, (label, value)) in [
                   ('Width', '100%'),
                   ('Max. Width', '300px'),
                   ('Height', '25px'),
                   ('Max. Height', 'none'),
-                ]) ...[
+                ].indexed) ...[
                   Row(
                     children: [
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                      Expanded(
+                        flex: 2,
+                        child: FTextField(autofocus: index == 0, initialText: value),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 7),
@@ -136,16 +139,19 @@ You can change how the popover is aligned to the button.
                   ),
                 ),
                 const SizedBox(height: 15),
-                for (final (label, value) in [
+                for (final (index, (label, value)) in [
                   ('Width', '100%'),
                   ('Max. Width', '300px'),
                   ('Height', '25px'),
                   ('Max. Height', 'none'),
-                ]) ...[
+                ].indexed) ...[
                   Row(
                     children: [
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                      Expanded(
+                        flex: 2,
+                        child: FTextField(autofocus: index == 0, initialText: value),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 7),
@@ -195,16 +201,19 @@ You can change how the popover is aligned to the button.
                   ),
                 ),
                 const SizedBox(height: 15),
-                for (final (label, value) in [
+                for (final (index, (label, value)) in [
                   ('Width', '100%'),
                   ('Max. Width', '300px'),
                   ('Height', '25px'),
                   ('Max. Height', 'none'),
-                ]) ...[
+                ].indexed) ...[
                   Row(
                     children: [
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                      Expanded(
+                        flex: 2,
+                        child: FTextField(autofocus: index == 0, initialText: value),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 7),
@@ -277,16 +286,19 @@ You can change how the popover is aligned to the button.
                       ),
                     ),
                     const SizedBox(height: 15),
-                    for (final (label, value) in [
+                    for (final (index, (label, value)) in [
                       ('Width', '100%'),
                       ('Max. Width', '300px'),
                       ('Height', '25px'),
                       ('Max. Height', 'none'),
-                    ]) ...[
+                    ].indexed) ...[
                       Row(
                         children: [
                           Expanded(child: Text(label, style: context.theme.typography.sm)),
-                          Expanded(flex: 2, child: FTextField(initialText: value)),
+                          Expanded(
+                            flex: 2,
+                            child: FTextField(autofocus: index == 0, initialText: value),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 7),
@@ -340,16 +352,19 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
                   ),
                 ),
                 const SizedBox(height: 15),
-                for (final (label, value) in [
+                for (final (index, (label, value)) in [
                   ('Width', '100%'),
                   ('Max. Width', '300px'),
                   ('Height', '25px'),
                   ('Max. Height', 'none'),
-                ]) ...[
+                ].indexed) ...[
                   Row(
                     children: [
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                      Expanded(
+                        flex: 2,
+                        child: FTextField(autofocus: index == 0, initialText: value),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 7),
@@ -404,16 +419,19 @@ The popover can be shifted along the overflowing axis to stay within the viewpor
                   ),
                 ),
                 const SizedBox(height: 15),
-                for (final (label, value) in [
+                for (final (index, (label, value)) in [
                   ('Width', '100%'),
                   ('Max. Width', '300px'),
                   ('Height', '25px'),
                   ('Max. Height', 'none'),
-                ]) ...[
+                ].indexed) ...[
                   Row(
                     children: [
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                      Expanded(
+                        flex: 2,
+                        child: FTextField(autofocus: index == 0, initialText: value),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 7),
@@ -468,16 +486,19 @@ The popover is not shifted to stay within the viewport boundaries, even if it ov
                   ),
                 ),
                 const SizedBox(height: 15),
-                for (final (label, value) in [
+                for (final (index, (label, value)) in [
                   ('Width', '100%'),
                   ('Max. Width', '300px'),
                   ('Height', '25px'),
                   ('Max. Height', 'none'),
-                ]) ...[
+                ].indexed) ...[
                   Row(
                     children: [
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                      Expanded(
+                        flex: 2,
+                        child: FTextField(autofocus: index == 0, initialText: value),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 7),

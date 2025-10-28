@@ -23,6 +23,7 @@ A popover menu displays a menu in a portal aligned to a child.
         title: const Text('Edit Notes'),
         suffixes: [
           FPopoverMenu(
+            autofocus: true,
             menuAnchor: Alignment.topRight,
             childAnchor: Alignment.bottomRight,
             menu: [
@@ -135,6 +136,7 @@ FPopoverMenu.tiles(
         title: const Text('Edit Notes'),
         suffixes: [
           FPopoverMenu.tiles(
+            autofocus: true,
             menuAnchor: Alignment.topRight,
             childAnchor: Alignment.bottomRight,
             menu: [
