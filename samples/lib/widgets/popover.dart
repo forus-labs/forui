@@ -70,16 +70,19 @@ class PopoverPage extends Sample {
                   ),
                 ),
                 const SizedBox(height: 15),
-                for (final (label, value) in [
+                for (final (index, (label, value)) in [
                   ('Width', '100%'),
                   ('Max. Width', '300px'),
                   ('Height', '25px'),
                   ('Max. Height', 'none'),
-                ]) ...[
+                ].indexed) ...[
                   Row(
                     children: [
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                      Expanded(
+                        flex: 2,
+                        child: FTextField(autofocus: index == 0, initialText: value),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 7),
@@ -149,16 +152,19 @@ class BlurredPopoverPage extends Sample {
                   ),
                 ),
                 const SizedBox(height: 15),
-                for (final (label, value) in [
+                for (final (index, (label, value)) in [
                   ('Width', '100%'),
                   ('Max. Width', '300px'),
                   ('Height', '25px'),
                   ('Max. Height', 'none'),
-                ]) ...[
+                ].indexed) ...[
                   Row(
                     children: [
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(flex: 2, child: FTextField(initialText: value)),
+                      Expanded(
+                        flex: 2,
+                        child: FTextField(autofocus: index == 0, initialText: value),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 7),

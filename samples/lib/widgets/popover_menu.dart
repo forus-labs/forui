@@ -14,6 +14,7 @@ class PopoverMenuPage extends Sample {
     title: const Text('Edit Notes'),
     suffixes: [
       FPopoverMenu(
+        autofocus: true,
         menuAnchor: Alignment.topRight,
         childAnchor: Alignment.bottomRight,
         menu: [
@@ -46,6 +47,7 @@ class TilePopoverMenuPage extends Sample {
     title: const Text('Edit Notes'),
     suffixes: [
       FPopoverMenu.tiles(
+        autofocus: true,
         menuAnchor: Alignment.topRight,
         childAnchor: Alignment.bottomRight,
         menu: [
