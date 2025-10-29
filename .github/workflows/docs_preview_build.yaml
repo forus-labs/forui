@@ -3,8 +3,8 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - '.github/workflows/docs_preview_build.yaml'
-      - '.github/workflows/docs_preview_deploy.yaml'
+      - 'docs_preview_build.yaml'
+      - 'docs_preview_deploy.yaml'
       - 'docs/**'
       - 'samples/**'
 
@@ -42,6 +42,8 @@ jobs:
         with:
           version: 10
       - working-directory: ./docs
+        env:
+          NEXT_PUBLIC_DEMO_URL: https://${{ github.event.pull_request.head.ref }}-${{ github.event.pull_request.head.sha }}.${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }}.pages.dev
         run: |
           pnpm install
           pnpm run build
@@ -51,7 +53,7 @@ jobs:
           path: ./docs/out
           retention-days: 1
 
-      # Save PR metadata
+      # Upload PR metadata
       - run: |
           echo "${{ github.event.number }}" > pr-number.txt
           echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt

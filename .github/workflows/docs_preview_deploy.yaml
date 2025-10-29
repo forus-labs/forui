@@ -36,7 +36,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./samples-build --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=main
+          command: pages deploy ./samples-build --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=${{ steps.pr-metadata.outputs.pr_head_ref }}-${{ steps.pr-metadata.outputs.pr_head_sha }}
 
       # Deploy docs
       - uses: actions/download-artifact@v5
@@ -45,8 +45,6 @@ jobs:
           path: ./docs-build
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
-      - run: |
-          echo '{"demoUrl": "${{ steps.publish-samples.outputs.deployment-url }}"}' > ./docs-build/config.json
       - uses: cloudflare/wrangler-action@v3
         id: publish-docs
         with:
