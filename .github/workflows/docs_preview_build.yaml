@@ -34,12 +34,17 @@ jobs:
           path: ./samples/build/web
           retention-days: 1
 
-      # Build docs
+      # Prepare branch & sha info
       - id: escape-branch
         run: |
           BRANCH="${{ github.event.pull_request.head.ref }}"
           ESCAPED="${BRANCH//\//-}"
           echo "branch=$ESCAPED" >> $GITHUB_OUTPUT
+      - id: short-sha
+        run: |
+          echo "sha=$(echo ${{ github.event.pull_request.head.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      # Build docs
       - uses: actions/setup-node@v6
         with:
           node-version: 22
@@ -49,8 +54,8 @@ jobs:
       - working-directory: ./docs
         env:
           # We don't use the CLOUDFLARE_DEMO_PROJECT_NAME environment variable since it requires us to set the
-          # environment  for this workflow.,unintentionally leaking environment secrets.
-          NEXT_PUBLIC_DEMO_URL: https://${{ steps.escape-branch.outputs.branch }}.forui-demo-dev.pages.dev
+          # environment for this workflow, unintentionally leaking environment secrets.
+          NEXT_PUBLIC_DEMO_URL: https://${{ steps.escape-branch.outputs.branch }}-${{ steps.short-sha.outputs.sha }}.forui-demo-dev.pages.dev
         run: |
           pnpm install
           pnpm run build
@@ -65,6 +70,7 @@ jobs:
           echo "${{ github.event.number }}" > pr-number.txt
           echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt
           echo "${{ github.event.pull_request.head.sha }}" > pr-head-sha.txt
+
       - uses: actions/upload-artifact@v4
         with:
           name: pr-metadata
