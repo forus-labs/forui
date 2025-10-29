@@ -24,13 +24,6 @@ jobs:
           echo "pr_head_ref=$(cat ./pr-metadata/pr-head-ref.txt)" >> $GITHUB_OUTPUT
           echo "pr_head_sha=$(cat ./pr-metadata/pr-head-sha.txt)" >> $GITHUB_OUTPUT
 
-      # Escape branch name for URL
-      - id: escape-branch
-        run: |
-          BRANCH="$(cat ./pr-metadata/pr-head-ref.txt)"
-          ESCAPED="${BRANCH//\//-}"
-          echo "branch=$ESCAPED" >> $GITHUB_OUTPUT
-
       # Deploy samples
       - uses: actions/download-artifact@v5
         with:
@@ -43,7 +36,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./samples-build --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=${{ steps.escape-branch.outputs.branch }}
+          command: pages deploy ./samples-build --project-name=${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }} --branch=${{ steps.pr-metadata.outputs.pr_head_ref }}
 
       # Deploy docs
       - uses: actions/download-artifact@v5
