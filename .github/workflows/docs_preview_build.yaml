@@ -35,6 +35,11 @@ jobs:
           retention-days: 1
 
       # Build docs
+      - id: escape-branch
+        run: |
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+          ESCAPED="${BRANCH//\//-}"
+          echo "branch=$ESCAPED" >> $GITHUB_OUTPUT
       - uses: actions/setup-node@v6
         with:
           node-version: 22
@@ -43,7 +48,9 @@ jobs:
           version: 10
       - working-directory: ./docs
         env:
-          NEXT_PUBLIC_DEMO_URL: https://${{ github.event.pull_request.head.ref }}-${{ github.event.pull_request.head.sha }}.${{ vars.CLOUDFLARE_DEMO_PROJECT_NAME }}.pages.dev
+          # We don't use the CLOUDFLARE_DEMO_PROJECT_NAME environment variable since it requires us to set the
+          # environment  for this workflow.,unintentionally leaking environment secrets.
+          NEXT_PUBLIC_DEMO_URL: https://${{ steps.escape-branch.outputs.branch }}.forui-demo-dev.pages.dev
         run: |
           pnpm install
           pnpm run build
