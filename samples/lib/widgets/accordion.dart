@@ -23,7 +23,7 @@ class AccordionPage extends Sample {
           controller: controller,
           children: const [
             FAccordionItem(
-              title: Text('Production Information'),
+              title: Text('TEST 123 Information'),
               child: Text('''
 Our flagship product combines cutting-edge technology with sleek design. Built with premium materials, it offers unparalleled performance and reliability.
 
