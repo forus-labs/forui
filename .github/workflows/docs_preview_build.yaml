@@ -28,7 +28,7 @@ jobs:
           flutter pub get
           dart run build_runner build --delete-conflicting-outputs
           flutter build web
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: samples-build
           path: ./samples/build/web
@@ -47,7 +47,7 @@ jobs:
       # Build docs
       - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
       - uses: pnpm/action-setup@v4
         with:
           version: 10
@@ -59,7 +59,7 @@ jobs:
         run: |
           pnpm install
           pnpm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: docs-build
           path: ./docs/out
@@ -71,7 +71,7 @@ jobs:
           echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt
           echo "${{ github.event.pull_request.head.sha }}" > pr-head-sha.txt
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: pr-metadata
           path: |

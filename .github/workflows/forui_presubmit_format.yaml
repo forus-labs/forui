@@ -42,7 +42,7 @@ jobs:
           }
 
       - if: steps.changes.outputs.changes == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: format-changes
           path: changes.patch
@@ -57,7 +57,7 @@ jobs:
           echo "${{ github.event.pull_request.head.repo.full_name }}" > pr-head-repo.txt
 
       - if: steps.changes.outputs.changes == 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: pr-metadata
           path: |
