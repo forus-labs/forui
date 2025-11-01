@@ -50,7 +50,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   /// The callback used to shift a portal when it overflows out of the viewport.
   ///
   /// Applied after [spacing] and before [offset].
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
 
   /// Additional translation to apply to the portal's position.
   ///
@@ -135,7 +135,7 @@ class RenderPortalLayer extends RenderProxyBox {
   Alignment _childAnchor;
   EdgeInsets _viewInsets;
   Offset _spacing;
-  Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) _overflow;
+  FPortalOverflow _overflow;
   Offset _offset;
 
   RenderPortalLayer({
@@ -148,7 +148,7 @@ class RenderPortalLayer extends RenderProxyBox {
     required Alignment childAnchor,
     required EdgeInsets viewInsets,
     required Offset spacing,
-    required Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
+    required FPortalOverflow overflow,
     required Offset offset,
     RenderBox? child,
   }) : _notifier = notifier,
@@ -417,9 +417,9 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
-  Offset Function(Size, FPortalChildRect, FPortalRect) get overflow => _overflow;
+  FPortalOverflow get overflow => _overflow;
 
-  set overflow(Offset Function(Size, FPortalChildRect, FPortalRect) value) {
+  set overflow(FPortalOverflow value) {
     if (_overflow == value) {
       return;
     }

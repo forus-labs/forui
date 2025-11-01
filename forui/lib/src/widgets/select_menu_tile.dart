@@ -86,7 +86,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -333,7 +333,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     AlignmentGeometry menuAnchor = Alignment.topRight,
     AlignmentGeometry tileAnchor = Alignment.bottomRight,
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow = FPortalOverflow.flip,
+    FPortalOverflow overflow = FPortalOverflow.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     VoidCallback? onTapHide,

@@ -378,7 +378,7 @@ abstract class FDateField extends StatefulWidget {
     Alignment anchor,
     Alignment inputAnchor,
     FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildRect, FPortalRect) overflow,
+    FPortalOverflow overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     VoidCallback? onTapHide,

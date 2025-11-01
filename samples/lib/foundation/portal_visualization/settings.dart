@@ -63,7 +63,7 @@ class Value extends FChangeNotifier {
   Size _portalSize;
   double _spacing;
   bool _diagonal;
-  Offset Function(Size, FPortalChildRect, FPortalRect) _overflow;
+  FPortalOverflow _overflow;
 
   Value({
     Alignment childAnchor = Alignment.bottomLeft,
@@ -73,7 +73,7 @@ class Value extends FChangeNotifier {
     Size portalSize = const Size(90, 90),
     double spacing = 4,
     bool diagonal = true,
-    Offset Function(Size, FPortalChildRect, FPortalRect) overflow = FPortalOverflow.flip,
+    FPortalOverflow overflow = FPortalOverflow.flip,
   }) : _childAnchor = childAnchor,
        _childSize = childSize,
        _childOffset = childOffset,
@@ -132,9 +132,9 @@ class Value extends FChangeNotifier {
     notifyListeners();
   }
 
-  Offset Function(Size, FPortalChildRect, FPortalRect) get overflow => _overflow;
+  FPortalOverflow get overflow => _overflow;
 
-  set overflow(Offset Function(Size, FPortalChildRect, FPortalRect) value) {
+  set overflow(FPortalOverflow value) {
     _overflow = value;
     notifyListeners();
   }
@@ -166,7 +166,7 @@ class Settings extends StatelessWidget {
           ),
         ),
         const FDivider(),
-        FSelect<Offset Function(Size, FPortalChildRect, FPortalRect)>(
+        FSelect<FPortalOverflow>(
           label: const Text('Overflow'),
           items: _overflows,
           initialValue: value.overflow,

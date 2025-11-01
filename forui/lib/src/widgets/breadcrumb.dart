@@ -124,7 +124,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     AlignmentGeometry menuAnchor,
     AlignmentGeometry childAnchor,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
+    FPortalOverflow overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     VoidCallback? onTapHide,
@@ -156,7 +156,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     AlignmentGeometry menuAnchor,
     AlignmentGeometry childAnchor,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
+    FPortalOverflow overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool autofocus,
@@ -236,7 +236,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final AlignmentGeometry menuAnchor;
   final AlignmentGeometry childAnchor;
   final FPortalSpacing spacing;
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
   final Offset offset;
   final FPopoverHideRegion hideRegion;
   final VoidCallback? onTapHide;

@@ -160,7 +160,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -244,7 +244,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow = FPortalOverflow.flip,
+    FPortalOverflow overflow = FPortalOverflow.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder =
@@ -335,7 +335,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
+    FPortalOverflow overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder,
@@ -398,7 +398,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow = FPortalOverflow.flip,
+    FPortalOverflow overflow = FPortalOverflow.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
@@ -511,7 +511,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
+    FPortalOverflow overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder,

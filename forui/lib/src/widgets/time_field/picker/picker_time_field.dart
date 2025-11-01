@@ -17,7 +17,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final FPortalSpacing spacing;
   @override
-  final Offset Function(Size, FPortalChildRect, FPortalRect) overflow;
+  final FPortalOverflow overflow;
   @override
   final Offset offset;
   @override

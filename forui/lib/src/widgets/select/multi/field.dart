@@ -34,7 +34,7 @@ class Field<T> extends FormField<Set<T>> {
   final AlignmentGeometry fieldAnchor;
   final FPortalConstraints popoverConstraints;
   final FPortalSpacing spacing;
-  final Offset Function(Size, FPortalChildRect, FPortalRect) overflow;
+  final FPortalOverflow overflow;
   final Offset offset;
   final FPopoverHideRegion hideRegion;
   final ValueChanged<Set<T>>? onChange;

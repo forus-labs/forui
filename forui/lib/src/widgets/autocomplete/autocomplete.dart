@@ -261,7 +261,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -381,7 +381,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow = FPortalOverflow.flip,
+    FPortalOverflow overflow = FPortalOverflow.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,

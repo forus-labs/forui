@@ -15,7 +15,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final Offset Function(Size, FPortalChildRect, FPortalRect) overflow;
+  final FPortalOverflow overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;

@@ -11,7 +11,7 @@ import 'package:forui_samples/sample.dart';
 class PopoverPage extends Sample {
   final Axis axis;
   final FPopoverHideRegion hideRegion;
-  final Offset Function(Size, FPortalChildRect, FPortalRect) overflow;
+  final FPortalOverflow overflow;
 
   PopoverPage({
     @queryParam String alignment = 'center',

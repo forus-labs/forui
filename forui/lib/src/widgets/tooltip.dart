@@ -181,7 +181,6 @@ class FTooltip extends StatefulWidget {
   /// Defaults to `FPortalSpacing(4)`.
   final FPortalSpacing spacing;
 
-
   /// The callback used to shift a tooltip's tip when it overflows out of the viewport.
   ///
   /// Applied after [spacing].
@@ -189,7 +188,7 @@ class FTooltip extends StatefulWidget {
   /// See [FPortalOverflow] for the different overflow strategies.
   ///
   /// Defaults to [FPortalOverflow.flip].
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
 
   /// True if the tooltip should be shown when hovered over. Defaults to true.
   final bool hover;
@@ -214,10 +213,10 @@ class FTooltip extends StatefulWidget {
   ///
   /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
   ///
-  /// This can be null if the entire widget subtree the [builder] builds doest not require the controller.
+  /// This can be null if the entire widget subtree the [builder] builds does not require the controller.
   final ValueWidgetBuilder<FTooltipController> builder;
 
-  /// The child tp which the tip is aligned to.
+  /// The child to which the tip is aligned to.
   final Widget? child;
 
   /// Creates a tooltip.

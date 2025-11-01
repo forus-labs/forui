@@ -38,6 +38,8 @@
 * **Breaking** Change `FPortalShift.along` to `FPortalShift.slide`.
 * **Breaking** Change `FPortal.shift` to `FPortal.overflow`.
 * **Breaking** Change `FPortal.shift` to `FPortal.overflow`.
+* **Breaking** Change `FPortalShift` from a function to a class. While this makes custom shift implementations slightly
+  more verbose, it  allows the consts to synergize with dot shorthands.
 
 
 ### `FSelect`

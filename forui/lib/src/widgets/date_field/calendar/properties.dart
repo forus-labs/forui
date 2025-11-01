@@ -15,7 +15,7 @@ class FDateFieldCalendarProperties with Diagnosticable {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;

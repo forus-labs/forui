@@ -53,7 +53,7 @@ class FPortal extends StatefulWidget {
   ///
   /// Defaults to [FPortalOverflow.flip].
   /// See [FPortalOverflow] for the different overflow strategies.
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
 
   /// Additional translation to apply to the portal's position.
   ///

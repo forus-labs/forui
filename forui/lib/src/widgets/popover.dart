@@ -218,7 +218,7 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   ///
   /// Defaults to [FPortalOverflow.flip].
-  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
+  final FPortalOverflow overflow;
 
   /// {@template forui.widgets.FPopover.offset}
   /// Additional translation to apply to the popover's position.
@@ -305,7 +305,7 @@ class FPopover extends StatefulWidget {
   ///
   /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
   ///
-  /// This can be null if the entire widget subtree the [builder] builds doest not require the controller.
+  /// This can be null if the entire widget subtree the [builder] builds does not require the controller.
   /// {@endtemplate}
   final ValueWidgetBuilder<FPopoverController> builder;
 
