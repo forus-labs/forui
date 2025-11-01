@@ -14,7 +14,7 @@ resolution: workspace
 
 dependencies:
   analyzer: ^7.4.0
-  build: ^3.0.0
+  build: 4.0.2
   code_builder: ^4.10.0
   collection: ^1.18.0
   dart_style: ^3.0.1
