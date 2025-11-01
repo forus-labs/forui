@@ -18,7 +18,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final FPortalSpacing spacing;
   @override
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
   @override
   final Offset offset;
   @override
@@ -51,7 +51,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.onTapHide,
@@ -262,7 +262,7 @@ class _CalendarPopover extends StatelessWidget {
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
     spacing: properties.spacing,
-    shift: properties.shift,
+    overflow: properties.overflow,
     offset: properties.offset,
     hideRegion: properties.hideRegion,
     autofocus: autofocus,

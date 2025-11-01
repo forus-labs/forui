@@ -17,7 +17,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final FPortalSpacing spacing;
   @override
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size, FPortalChildRect, FPortalRect) overflow;
   @override
   final Offset offset;
   @override
@@ -41,7 +41,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.onTapHide,
@@ -256,7 +256,7 @@ class _PickerPopover extends StatelessWidget {
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
     spacing: properties.spacing,
-    shift: properties.shift,
+    overflow: properties.overflow,
     offset: properties.offset,
     hideRegion: properties.hideRegion,
     onTapHide: properties.onTapHide,

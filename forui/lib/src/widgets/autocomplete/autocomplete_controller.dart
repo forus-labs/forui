@@ -9,7 +9,7 @@ import 'package:forui/src/foundation/debug.dart';
 /// A controller for managing autocomplete functionality in a text field.
 class FAutocompleteController extends FTypeaheadController {
   /// The popover controller used to show all autocomplete suggestions.
-  final FPopoverController popover;
+  final FPopoverController content;
 
   /// Creates a [FAutocompleteController] with an optional initial text and suggestions.
   FAutocompleteController({
@@ -17,7 +17,7 @@ class FAutocompleteController extends FTypeaheadController {
     super.text,
     super.suggestions,
     FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion),
+  }) : content = FPopoverController(vsync: vsync, motion: popoverMotion),
        super(
          textStyles: (context) {
            final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
@@ -31,7 +31,7 @@ class FAutocompleteController extends FTypeaheadController {
 
   @override
   void dispose() {
-    popover.dispose();
+    content.dispose();
     super.dispose();
   }
 }

@@ -343,8 +343,8 @@ abstract class FDateField extends StatefulWidget {
   /// The [spacing] property controls the spacing between the input field and the picker popover. Defaults to
   /// `FPortalSpacing(4)`.
   ///
-  /// The [shift] function controls how the picker repositions when space is constrained. Defaults to
-  /// [FPortalShift.flip].
+  /// The [overflow] function controls how the picker repositions when space is constrained. Defaults to
+  /// [FPortalOverflow.flip].
   ///
   /// The [offset] property controls the offset of the picker popover. Defaults to [Offset.zero].
   ///
@@ -378,7 +378,7 @@ abstract class FDateField extends StatefulWidget {
     Alignment anchor,
     Alignment inputAnchor,
     FPortalSpacing spacing,
-    Offset Function(Size, FPortalChildBox, FPortalBox) shift,
+    Offset Function(Size, FPortalChildRect, FPortalRect) overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     VoidCallback? onTapHide,

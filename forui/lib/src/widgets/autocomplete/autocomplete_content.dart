@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -28,9 +29,8 @@ class ContentData extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
+    properties..add(DiagnosticsProperty('style', style))..add(
+        FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
   }
 }
 
@@ -64,26 +64,30 @@ class Content extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => Column(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      switch (data) {
-        final Iterable<String> data => _content(context, data),
-        final Future<Iterable<String>> future => FutureBuilder(
-          future: future,
-          builder: (context, snapshot) => switch (snapshot.connectionState) {
-            ConnectionState.waiting => Center(child: loadingBuilder(context, style)),
-            _ when snapshot.hasError && errorBuilder != null => errorBuilder!.call(
-              context,
-              snapshot.error,
-              snapshot.stackTrace!,
-            ),
-            _ => _content(context, snapshot.data ?? []),
+  Widget build(BuildContext context) =>
+      Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          switch (data) {
+            final Iterable<String> data => _content(context, data),
+            final Future<Iterable<String>> future =>
+                FutureBuilder(
+                  future: future,
+                  builder: (context, snapshot) =>
+                  switch (snapshot.connectionState) {
+                    ConnectionState.waiting => Center(child: loadingBuilder(context, style)),
+                    _ when snapshot.hasError && errorBuilder != null =>
+                        errorBuilder!.call(
+                          context,
+                          snapshot.error,
+                          snapshot.stackTrace!,
+                        ),
+                    _ => _content(context, snapshot.data ?? []),
+                  },
+                ),
           },
-        ),
-      },
-    ],
-  );
+        ],
+      );
 
   Widget _content(BuildContext context, Iterable<String> values) {
     final children = builder(context, controller.text, values);
@@ -130,23 +134,18 @@ class Content extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
-      ..add(DiagnosticsProperty('scrollController', scrollController))
-      ..add(DiagnosticsProperty('physics', physics))
-      ..add(EnumProperty('divider', divider))
-      ..add(ObjectFlagProperty.has('data', data))
-      ..add(ObjectFlagProperty.has('loadingBuilder', loadingBuilder))
-      ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(ObjectFlagProperty.has('emptyBuilder', emptyBuilder))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
+    properties..add(DiagnosticsProperty('controller', controller))..add(DiagnosticsProperty('style', style))..add(
+        FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))..add(
+        DiagnosticsProperty('scrollController', scrollController))..add(DiagnosticsProperty('physics', physics))..add(
+        EnumProperty('divider', divider))..add(ObjectFlagProperty.has('data', data))..add(
+        ObjectFlagProperty.has('loadingBuilder', loadingBuilder))..add(ObjectFlagProperty.has('builder', builder))..add(
+        ObjectFlagProperty.has('emptyBuilder', emptyBuilder))..add(
+        ObjectFlagProperty.has('errorBuilder', errorBuilder));
   }
 }
 
 /// An [FAutocomplete]'s content style.
-class FAutocompleteContentStyle with Diagnosticable, _$FAutocompleteContentStyleFunctions {
+class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAutocompleteContentStyleFunctions {
   /// The default text style when there are no results.
   @override
   final TextStyle emptyTextStyle;
@@ -168,14 +167,18 @@ class FAutocompleteContentStyle with Diagnosticable, _$FAutocompleteContentStyle
     required this.emptyTextStyle,
     required this.progressStyle,
     required this.sectionStyle,
+    required super.decoration,
     this.padding = const EdgeInsets.symmetric(vertical: 5),
+    super.barrierFilter,
+    super.backgroundFilter,
+    super.viewInsets,
   });
 
   /// Creates a [FAutocompleteContentStyle] that inherits its properties.
-  FAutocompleteContentStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        emptyTextStyle: typography.sm,
-        progressStyle: FCircularProgressStyle.inherit(colors: colors),
-        sectionStyle: FAutocompleteSectionStyle.inherit(colors: colors, style: style, typography: typography),
-      );
+  FAutocompleteContentStyle.inherit({required super.colors, required FTypography typography, required super.style})
+      : emptyTextStyle = typography.sm,
+        progressStyle = FCircularProgressStyle.inherit(colors: colors),
+        sectionStyle = FAutocompleteSectionStyle.inherit(colors: colors, style: style, typography: typography),
+        padding = const EdgeInsets.symmetric(vertical: 5),
+        super.inherit();
 }

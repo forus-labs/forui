@@ -52,7 +52,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, true);
-      expect(controller.popover.hasListeners, false);
+      expect(controller.content.hasListeners, false);
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -61,7 +61,7 @@ void main() {
       );
 
       expect(controller.hasListeners, false);
-      expect(controller.popover.hasListeners, false);
+      expect(controller.content.hasListeners, false);
       expect(controller.dispose, returnsNormally);
     });
 
@@ -78,12 +78,12 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(controller.hasListeners, true);
-      expect(controller.popover.hasListeners, false);
+      expect(controller.content.hasListeners, false);
 
       await tester.pumpWidget(const SizedBox());
 
       expect(controller.hasListeners, false);
-      expect(controller.popover.hasListeners, false);
+      expect(controller.content.hasListeners, false);
       expect(controller.dispose, returnsNormally);
     });
   });
@@ -109,13 +109,13 @@ void main() {
       );
 
       expect(focus.hasFocus, false);
-      expect(controller.popover.status.isForwardOrCompleted, false);
+      expect(controller.content.status.isForwardOrCompleted, false);
 
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, true);
-      expect(controller.popover.status.isForwardOrCompleted, true);
+      expect(controller.content.status.isForwardOrCompleted, true);
     });
 
     testWidgets('tab when completion available completes text', (tester) async {
@@ -139,7 +139,7 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
 
-      expect(controller.popover.status.isForwardOrCompleted, false);
+      expect(controller.content.status.isForwardOrCompleted, false);
       expect(autocompleteFocus.hasFocus, true);
       expect(buttonFocus.hasFocus, false);
       expect(find.text('Banana'), findsOne);
@@ -166,7 +166,7 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
 
-      expect(controller.popover.status.isForwardOrCompleted, false);
+      expect(controller.content.status.isForwardOrCompleted, false);
       expect(autocompleteFocus.hasFocus, false);
       expect(buttonFocus.hasFocus, true);
     });
@@ -194,7 +194,7 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
       await tester.pumpAndSettle();
 
-      expect(controller.popover.status.isForwardOrCompleted, true);
+      expect(controller.content.status.isForwardOrCompleted, true);
       expect(autocompleteFocus.hasFocus, true);
       expect(buttonFocus.hasFocus, false);
       expect(find.text('b'), findsOne);
@@ -227,7 +227,7 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
       await tester.pumpAndSettle();
 
-      expect(controller.popover.status.isForwardOrCompleted, false);
+      expect(controller.content.status.isForwardOrCompleted, false);
       expect(autocompleteFocus.hasFocus, true);
       expect(buttonFocus.hasFocus, false);
       expect(find.text('Banana'), findsOne);
@@ -260,7 +260,7 @@ void main() {
 
         expect(focus.hasFocus, true);
         expect(controller.selection, const TextSelection.collapsed(offset: 5));
-        expect(controller.popover.status.isForwardOrCompleted, false);
+        expect(controller.content.status.isForwardOrCompleted, false);
         expect(find.text('app'), findsNothing);
         expect(find.text('Apple'), findsOne);
 
@@ -291,7 +291,7 @@ void main() {
 
         expect(focus.hasFocus, true);
         expect(controller.selection, const TextSelection.collapsed(offset: 3));
-        expect(controller.popover.status.isForwardOrCompleted, false);
+        expect(controller.content.status.isForwardOrCompleted, false);
         expect(find.text('app'), findsOne);
         expect(find.text('Apple'), findsNothing);
 
@@ -321,7 +321,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(focus.hasFocus, true);
-        expect(controller.popover.status.isForwardOrCompleted, false);
+        expect(controller.content.status.isForwardOrCompleted, false);
         expect(find.text('app'), findsOne);
         expect(find.text('Apple'), findsNothing);
 

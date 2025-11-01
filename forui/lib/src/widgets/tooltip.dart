@@ -145,7 +145,7 @@ class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
 class FTooltip extends StatefulWidget {
   static Widget _builder(BuildContext _, FTooltipController _, Widget? child) => child!;
 
-  /// The tooltip's controller.
+  /// The controller.
   final FTooltipController? controller;
 
   /// The tooltip's style.
@@ -158,22 +158,38 @@ class FTooltip extends StatefulWidget {
   /// ```
   final FTooltipStyle Function(FTooltipStyle style)? style;
 
-  /// The anchor of the follower to which the [childAnchor] is aligned. Defaults to [Alignment.bottomCenter].
+  /// The anchor point on the tip used for positioning relative to the [childAnchor].
+  ///
+  /// For example, with `tipAnchor: Alignment.bottomCenter` and `childAnchor: Alignment.topCenter`,
+  /// the tip's bottom edge will align with the child's top edge.
+  ///
+  /// Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry tipAnchor;
 
-  /// The anchor of the target to which the [tipAnchor] is aligned. Defaults to [Alignment.topCenter].
+  /// The anchor point on the [child] used for positioning relative to the [tipAnchor].
+  ///
+  /// For example, with `childAnchor: Alignment.topCenter` and `tipAnchor: Alignment.bottomCenter`,
+  /// the child's top edge will align with the tip's bottom edge.
+  ///
+  /// Defaults to [Alignment.topCenter].
   final AlignmentGeometry childAnchor;
 
-  /// The spacing between the child's anchor and tooltip's anchor. Defaults to `FPortalSpacing(4)`.
+  /// The spacing between the [tipAnchor] and [childAnchor].
   ///
-  /// It applied before [shift].
+  /// Applied before [overflow].
+  ///
+  /// Defaults to `FPortalSpacing(4)`.
   final FPortalSpacing spacing;
 
-  /// The shifting strategy used to shift a tooltip's tip when it overflows out of the viewport. Defaults to
-  /// [FPortalShift.flip].
+
+  /// The callback used to shift a tooltip's tip when it overflows out of the viewport.
   ///
-  /// See [FPortalShift] for more information on the different shifting strategies.
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  /// Applied after [spacing].
+  ///
+  /// See [FPortalOverflow] for the different overflow strategies.
+  ///
+  /// Defaults to [FPortalOverflow.flip].
+  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
 
   /// True if the tooltip should be shown when hovered over. Defaults to true.
   final bool hover;
@@ -215,7 +231,7 @@ class FTooltip extends StatefulWidget {
     this.tipAnchor = Alignment.bottomCenter,
     this.childAnchor = Alignment.topCenter,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.hover = true,
     this.hoverEnterDuration = const Duration(milliseconds: 500),
     this.hoverExitDuration = Duration.zero,
@@ -238,7 +254,7 @@ class FTooltip extends StatefulWidget {
       ..add(DiagnosticsProperty('tipAnchor', tipAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
       ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
       ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
@@ -332,7 +348,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         spacing: widget.spacing,
         childAnchor: widget.childAnchor,
         portalAnchor: widget.tipAnchor,
-        shift: widget.shift,
+        overflow: widget.overflow,
         portalBuilder: (context, _) {
           Widget tooltip = Semantics(
             container: true,

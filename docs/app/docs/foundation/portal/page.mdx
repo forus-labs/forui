@@ -79,7 +79,7 @@ A portal renders a portal widget that "floats" on top of a child widget.
 FPortal(
   controller: OverlayPortalController(),
   spacing: FPortalSpacing.zero,
-  shift: FPortalShift.flip,
+  overflow: FPortalOverflow.flip,
   offset: Offset.zero,
   portalConstraints: const FAutoWidthPortalConstraints(),
   portalAnchor: Alignment.topCenter,
@@ -91,3 +91,7 @@ FPortal(
   child: const Text('child'),
 );
 ```
+
+## Visualization
+
+<Widget name='portal-visualization' query={{}} height={600}/>

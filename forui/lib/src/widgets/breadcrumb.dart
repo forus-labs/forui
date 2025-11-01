@@ -124,7 +124,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     AlignmentGeometry menuAnchor,
     AlignmentGeometry childAnchor,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
+    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     VoidCallback? onTapHide,
@@ -156,7 +156,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     AlignmentGeometry menuAnchor,
     AlignmentGeometry childAnchor,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
+    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool autofocus,
@@ -236,7 +236,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final AlignmentGeometry menuAnchor;
   final AlignmentGeometry childAnchor;
   final FPortalSpacing spacing;
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
   final Offset offset;
   final FPopoverHideRegion hideRegion;
   final VoidCallback? onTapHide;
@@ -260,7 +260,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.menuAnchor = Alignment.topLeft,
     this.childAnchor = Alignment.bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.onTapHide,
@@ -287,7 +287,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.menuAnchor = Alignment.topLeft,
     this.childAnchor = Alignment.bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.onTapHide,
@@ -319,7 +319,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
@@ -358,7 +358,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         menuAnchor: widget.menuAnchor,
         childAnchor: widget.childAnchor,
         spacing: widget.spacing,
-        shift: widget.shift,
+        overflow: widget.overflow,
         offset: widget.offset,
         hideRegion: widget.hideRegion,
         onTapHide: widget.onTapHide,
@@ -389,7 +389,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         menuAnchor: widget.menuAnchor,
         childAnchor: widget.childAnchor,
         spacing: widget.spacing,
-        shift: widget.shift,
+        overflow: widget.overflow,
         offset: widget.offset,
         hideRegion: widget.hideRegion,
         autofocus: widget.autofocus,

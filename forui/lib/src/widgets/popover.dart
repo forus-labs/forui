@@ -164,7 +164,7 @@ class FPopover extends StatefulWidget {
 
   static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
 
-  /// The controller that shows and hides the popover. It initially hides the popover.
+  /// The controller.
   final FPopoverController? controller;
 
   /// The popover's style.
@@ -177,51 +177,56 @@ class FPopover extends StatefulWidget {
   /// ```
   final FPopoverStyle Function(FPopoverStyle style)? style;
 
-  /// The constraints.
+  /// The popover's size constraints.
   final FPortalConstraints constraints;
 
   /// {@template forui.widgets.FPopover.popoverAnchor}
-  /// The point on the popover (floating content) that connects with the child at the child's anchor.
+  /// The anchor point on the popover used for positioning relative to the [childAnchor].
   ///
-  /// For example, [Alignment.topCenter] means the top-center point of the popover will connect with the child.
-  /// See [childAnchor] for changing the child's anchor.
+  /// For example, with `popoverAnchor: Alignment.topCenter` and `childAnchor: Alignment.bottomCenter`,
+  /// the popover's top edge will align with the child's bottom edge.
   /// {@endtemplate}
   ///
   /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
   final AlignmentGeometry popoverAnchor;
 
   /// {@template forui.widgets.FPopover.childAnchor}
-  /// The point on the child that connects with the popover at the popover's anchor.
+  /// The anchor point on the [child] used for positioning relative to the [popoverAnchor].
   ///
-  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the popover.
-  /// See [popoverAnchor] for changing the popover's anchor.
+  /// For example, with `childAnchor: Alignment.bottomCenter` and `popoverAnchor: Alignment.topCenter`,
+  /// the child's bottom edge will align with the popover's top edge.
   /// {@endtemplate}
   ///
   /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
   final AlignmentGeometry childAnchor;
 
   /// {@template forui.widgets.FPopover.spacing}
-  /// The spacing between the child's anchor and popover's anchor. Defaults to `FPortalSpacing(4)`.
+  /// The spacing between the [popoverAnchor] and [childAnchor].
   ///
-  /// It applied before [shift].
+  /// Applied before [overflow].
   /// {@endtemplate}
+  ///
+  /// Defaults to `FPortalSpacing(4)`.
   final FPortalSpacing spacing;
 
-  /// {@template forui.widgets.FPopover.shift}
-  /// The shifting strategy used to shift a popover when it overflows out of the viewport. Defaults to
-  /// [FPortalShift.flip].
+  /// {@template forui.widgets.FPopover.overflow}
+  /// The callback used to shift a popover when it overflows out of the viewport.
   ///
-  /// It is applied after [spacing] and before [offset].
+  /// Applied after [spacing] and before [offset].
   ///
-  /// See [FPortalShift] for more information on the different shifting strategies.
+  /// See [FPortalOverflow] for the different overflow strategies.
   /// {@endtemplate}
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  ///
+  /// Defaults to [FPortalOverflow.flip].
+  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
 
   /// {@template forui.widgets.FPopover.offset}
-  /// The offset to adjust the popover by. Defaults to [Offset.zero].
+  /// Additional translation to apply to the popover's position.
   ///
-  /// It is applied after [shift].
+  /// Applied after [overflow].
   /// {@endtemplate}
+  ///
+  /// Defaults to [Offset.zero].
   final Offset offset;
 
   /// {@template forui.widgets.FPopover.groupId}
@@ -319,7 +324,7 @@ class FPopover extends StatefulWidget {
     this.style,
     this.constraints = const FPortalConstraints(),
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.groupId,
     this.hideRegion = FPopoverHideRegion.excludeChild,
@@ -362,7 +367,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideRegion', hideRegion))
@@ -462,7 +467,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
         childAnchor: widget.childAnchor,
         viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
         spacing: widget.spacing,
-        shift: widget.shift,
+        overflow: widget.overflow,
         offset: widget.offset,
         barrier: style.barrierFilter == null
             ? null

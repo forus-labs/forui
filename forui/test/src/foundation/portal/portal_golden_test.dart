@@ -133,7 +133,7 @@ void main() {
     });
   });
 
-  group('spacing, shifting & offset', () {
+  group('spacing, overflowed & offset', () {
     testWidgets('spacing', (tester) async {
       final controller = OverlayPortalController();
 
@@ -154,7 +154,7 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/spacing.png'));
     });
 
-    testWidgets('shifted', (tester) async {
+    testWidgets('overflowed', (tester) async {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
@@ -174,7 +174,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/overflow.png'));
     });
 
     testWidgets('offset', (tester) async {
@@ -197,7 +197,7 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/offset.png'));
     });
 
-    testWidgets('spacing & shifted', (tester) async {
+    testWidgets('spacing & overflowed', (tester) async {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
@@ -218,10 +218,10 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/spacing-shifted.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/spacing-overflowed.png'));
     });
 
-    testWidgets('shifted & offset', (tester) async {
+    testWidgets('overflowed & offset', (tester) async {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
@@ -242,12 +242,12 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted-offset.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/overflowed-offset.png'));
     });
   });
 
   group('rendering', () {
-    testWidgets('shifted when wrapped inside repaint boundary', (tester) async {
+    testWidgets('overflowed when wrapped inside repaint boundary', (tester) async {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
@@ -274,10 +274,10 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted-inside-repaint-boundary.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/overflowed-inside-repaint-boundary.png'));
     });
 
-    testWidgets('shifted when wrapped outside repaint boundary', (tester) async {
+    testWidgets('overflowed when wrapped outside repaint boundary', (tester) async {
       final controller = OverlayPortalController();
 
       await tester.pumpWidget(
@@ -304,7 +304,7 @@ void main() {
       controller.show();
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/shifted-outside-repaint-boundary.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/overflowed-outside-repaint-boundary.png'));
     });
 
     testWidgets('does not show portal when child is unlinked/not visible', (tester) async {

@@ -34,7 +34,7 @@ class Field<T> extends FormField<Set<T>> {
   final AlignmentGeometry fieldAnchor;
   final FPortalConstraints popoverConstraints;
   final FPortalSpacing spacing;
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final Offset Function(Size, FPortalChildRect, FPortalRect) overflow;
   final Offset offset;
   final FPopoverHideRegion hideRegion;
   final ValueChanged<Set<T>>? onChange;
@@ -63,7 +63,7 @@ class Field<T> extends FormField<Set<T>> {
     required this.fieldAnchor,
     required this.popoverConstraints,
     required this.spacing,
-    required this.shift,
+    required this.overflow,
     required this.offset,
     required this.hideRegion,
     required this.onChange,
@@ -109,7 +109,7 @@ class Field<T> extends FormField<Set<T>> {
                  popoverAnchor: anchor,
                  childAnchor: fieldAnchor,
                  spacing: spacing,
-                 shift: shift,
+                 overflow: overflow,
                  offset: offset,
                  hideRegion: hideRegion,
                  shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): state._toggle},
@@ -216,7 +216,7 @@ class Field<T> extends FormField<Set<T>> {
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
       ..add(DiagnosticsProperty('popoverConstraints', popoverConstraints))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))

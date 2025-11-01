@@ -248,20 +248,20 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   @override
   final Widget Function(BuildContext context, String message) errorBuilder;
 
-  /// The alignment point on the popover. Defaults to [AlignmentDirectional.topStart].
+  /// The alignment point on the content popover. Defaults to [AlignmentDirectional.topStart].
   final AlignmentGeometry anchor;
 
   /// The alignment point on the select's field. Defaults to [AlignmentDirectional.bottomStart].
   final AlignmentGeometry fieldAnchor;
 
-  /// The constraints to apply to the popover. Defaults to `const FAutoWidthPortalConstraints(maxHeight: 300)`.
+  /// The constraints to apply to the content popover. Defaults to `const FAutoWidthPortalConstraints(maxHeight: 300)`.
   final FPortalConstraints popoverConstraints;
 
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
 
-  /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  /// {@macro forui.widgets.FPopover.overflow}
+  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -272,7 +272,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.widgets.FPopover.onTapHide}
   final VoidCallback? onTapHide;
 
-  /// True if the select should be automatically hidden after an item is selected. Defaults to false.
+  /// True if the content should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
   /// The builder used to decorate the autocomplete. It should always use the given child.
@@ -381,7 +381,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow = FPortalOverflow.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
@@ -471,7 +471,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          fieldAnchor: fieldAnchor,
          popoverConstraints: popoverConstraints,
          spacing: spacing,
-         shift: shift,
+         overflow: overflow,
          offset: offset,
          hideRegion: hideRegion,
          autoHide: autoHide,
@@ -559,7 +559,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.fieldAnchor = AlignmentDirectional.bottomStart,
     this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.autoHide = true,
@@ -659,7 +659,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
       ..add(DiagnosticsProperty('popoverConstraints', popoverConstraints))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
@@ -730,8 +730,8 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       return;
     }
 
-    if (_fieldFocus.hasFocus && !_controller.popover.status.isForwardOrCompleted) {
-      _controller.popover.show();
+    if (_fieldFocus.hasFocus && !_controller.content.status.isForwardOrCompleted) {
+      _controller.content.show();
     }
 
     setState(() {
@@ -748,11 +748,11 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
       }
       _tapFocus = false;
-      _controller.popover.show();
+      _controller.content.show();
       // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
       // in the empty popover.
     } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
-      _controller.popover.hide();
+      _controller.content.hide();
     }
 
     _restore = null;
@@ -823,7 +823,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         maxLength: widget.maxLength,
         maxLengthEnforcement: widget.maxLengthEnforcement,
         onChange: widget.onChange,
-        onTap: _controller.popover.show,
+        onTap: _controller.content.show,
         onTapAlwaysCalled: true,
         onEditingComplete: widget.onEditingComplete,
         onSubmit: widget.onSubmit,
@@ -865,13 +865,13 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         builder: (context, _, states, field) => FocusTraversalGroup(
           policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
           child: FPopover(
-            controller: _controller.popover,
-            style: style.popoverStyle,
+            controller: _controller.content,
+            style: style.contentStyle,
             constraints: widget.popoverConstraints,
             popoverAnchor: widget.anchor,
             childAnchor: widget.fieldAnchor,
             spacing: widget.spacing,
-            shift: widget.shift,
+            overflow: widget.overflow,
             offset: widget.offset,
             hideRegion: widget.hideRegion,
             onTapHide: () {
@@ -887,7 +887,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
                 popover: popoverController,
                 onPress: (value) {
                   if (widget.autoHide) {
-                    _controller.popover.hide();
+                    _controller.content.hide();
                   }
                   _previous = value;
                   _controller.text = value;
@@ -917,7 +917,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
               states: states,
               child: CallbackShortcuts(
                 bindings: {
-                  const SingleActivator(LogicalKeyboardKey.escape): _controller.popover.hide,
+                  const SingleActivator(LogicalKeyboardKey.escape): _controller.content.hide,
                   const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
                       _popoverFocus.descendants.firstOrNull?.requestFocus(),
                   if (_controller.current case (:final replacement, completion: final _))
@@ -939,7 +939,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
 
   void _complete(String replacement) {
     if (widget.autoHide) {
-      _controller.popover.hide();
+      _controller.content.hide();
     }
     _previous = replacement;
     _controller.complete();
@@ -974,10 +974,6 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   @override
   final FWidgetStateMap<TextStyle> typeaheadTextStyle;
 
-  /// The popover's style.
-  @override
-  final FPopoverStyle popoverStyle;
-
   /// The content's style.
   @override
   final FAutocompleteContentStyle contentStyle;
@@ -987,7 +983,6 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
     required this.fieldStyle,
     required this.composingTextStyle,
     required this.typeaheadTextStyle,
-    required this.popoverStyle,
     required this.contentStyle,
   });
 
@@ -1003,7 +998,6 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
       fieldStyle: field,
       composingTextStyle: field.contentTextStyle.map((s) => s.copyWith(decoration: TextDecoration.underline)),
       typeaheadTextStyle: field.contentTextStyle.map((s) => s.copyWith(color: colors.mutedForeground)),
-      popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
       contentStyle: FAutocompleteContentStyle.inherit(colors: colors, typography: typography, style: style),
     );
   }

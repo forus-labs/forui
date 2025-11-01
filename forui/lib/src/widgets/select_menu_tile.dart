@@ -85,8 +85,8 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
 
-  /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  /// {@macro forui.widgets.FPopover.overflow}
+  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -181,7 +181,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.onTapHide,
@@ -247,7 +247,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              popoverAnchor: menuAnchor,
              childAnchor: tileAnchor,
              spacing: spacing,
-             shift: shift,
+             overflow: overflow,
              offset: offset,
              hideRegion: hideRegion,
              onTapHide: onTapHide,
@@ -333,7 +333,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     AlignmentGeometry menuAnchor = Alignment.topRight,
     AlignmentGeometry tileAnchor = Alignment.bottomRight,
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow = FPortalOverflow.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     VoidCallback? onTapHide,
@@ -381,7 +381,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     menuAnchor: menuAnchor,
     tileAnchor: tileAnchor,
     spacing: spacing,
-    shift: shift,
+    overflow: overflow,
     offset: offset,
     hideRegion: hideRegion,
     onTapHide: onTapHide,
@@ -450,7 +450,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.menuAnchor = Alignment.topRight,
     this.tileAnchor = Alignment.bottomRight,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.onTapHide,
@@ -517,7 +517,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              popoverAnchor: menuAnchor,
              childAnchor: tileAnchor,
              spacing: spacing,
-             shift: shift,
+             overflow: overflow,
              offset: offset,
              hideRegion: hideRegion,
              onTapHide: onTapHide,
@@ -595,7 +595,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))

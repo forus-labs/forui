@@ -157,8 +157,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
 
-  /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  /// {@macro forui.widgets.FPopover.overflow}
+  final Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -228,7 +228,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow = FPortalOverflow.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
@@ -272,7 +272,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       fieldAnchor: fieldAnchor,
       popoverConstraints: popoverConstraints,
       spacing: spacing,
-      shift: shift,
+      overflow: overflow,
       offset: offset,
       hideRegion: hideRegion,
       autoHide: autoHide,
@@ -320,7 +320,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
+    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool autoHide,
@@ -384,7 +384,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing spacing = const FPortalSpacing(4),
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift = FPortalShift.flip,
+    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow = FPortalOverflow.flip,
     Offset offset = Offset.zero,
     FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
     bool autoHide = true,
@@ -440,7 +440,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       fieldAnchor: fieldAnchor,
       popoverConstraints: popoverConstraints,
       spacing: spacing,
-      shift: shift,
+      overflow: overflow,
       offset: offset,
       hideRegion: hideRegion,
       autoHide: autoHide,
@@ -499,7 +499,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     AlignmentGeometry fieldAnchor,
     FPortalConstraints popoverConstraints,
     FPortalSpacing spacing,
-    Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
+    Offset Function(Size size, FPortalChildRect childBox, FPortalRect portalBox) overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool autoHide,
@@ -543,7 +543,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.fieldAnchor = AlignmentDirectional.bottomStart,
     this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.autoHide = true,
@@ -591,7 +591,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
       ..add(DiagnosticsProperty('popoverConstraints', popoverConstraints))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
@@ -746,7 +746,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
           popoverAnchor: widget.anchor,
           childAnchor: widget.fieldAnchor,
           spacing: widget.spacing,
-          shift: widget.shift,
+          overflow: widget.overflow,
           offset: widget.offset,
           hideRegion: widget.hideRegion,
           shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},

@@ -1,17 +1,65 @@
 ## 0.17.0 (Next)
 
+### `FAutocomplete`
+* **Breaking** Change `FAutocomplete.shift` to `FAutocomplete.overflow`.
+* **Breaking** Change `FAutocompleteController.popover` to `FAutocompleteController.content`.
+* **Breaking** Change `FAutocompleteContentStyle` to extend `FPopoverStyle`.
+* **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
+
 
 ### `FBottomNavigationBar`
 * Change `FBottomNavigationBarItem.label` to be optional.
+
+
+### `FBreadcrumb`
+*  **Breaking** Change `FBreadcrumb.shift` to `FBreadcrumb.overflow`.
+
+
+### `FDateField`
+*  **Breaking** Change `FDateField.shift` to `FDateField.overflow`.
+
+
+### `FMultiSelect`
+*  **Breaking** Change `FMultiSelect.shift` to `FMultiSelect.overflow`.
+
+
+### `FPopover`
+* **Breaking** Change `FPopover.shift` to `FPopover.overflow`.
+
+
+### `FPopoverMenu`
+* **Breaking** Change `FPopoverMenu.shift` to `FPopoverMenu.overflow`.
+
+
+### `FPortal`
+* **Breaking** Change `FPortalBox` to `FPortalRect`.
+* **Breaking** Change `FPortalChildBox` to `FPortalChildRect`.
+* **Breaking** Change `FPortalShift` to `FPortalOverflow`.
+* **Breaking** Change `FPortalShift.along` to `FPortalShift.slide`.
+* **Breaking** Change `FPortal.shift` to `FPortal.overflow`.
+* **Breaking** Change `FPortal.shift` to `FPortal.overflow`.
+
+
+### `FSelect`
+*  **Breaking** Change `FSelect.shift` to `FSelect.overflow`.
+
+
+### `FSelectMenutTile`
+*  **Breaking** Change `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
 
 
 ### `FTappable`
 *  Change `FTappable` to only update focused state when it has primary focus.
 
 
+### `FTimeField`
+* **Breaking** Change `FTimeField.shift` to `FTimeField.overflow`.
+
+
 ### `FTooltip`
 * Change `FTooltip` to not be focusable.
 * Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus. 
+* **Breaking** Change `FTooltip.shift` to `FTooltip.overflow`.
 
 
 ### Others

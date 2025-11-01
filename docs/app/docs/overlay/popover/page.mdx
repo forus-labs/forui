@@ -92,7 +92,7 @@ FPopover(
   childAnchor: Alignment.bottomCenter,
   constraints: const FPortalConstraints(),
   spacing: const FPortalSpacing(4),
-  shift: FPortalShift.flip,
+  overflow: FPortalOverflow.flip,
   offset: Offset.zero,
   groupId: 'popover-group',
   hideRegion: FPopoverHideRegion.excludeChild,
@@ -325,7 +325,7 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='popover' query={{alignment: 'bottomCenter', shift: 'flip'}} height={500}/>
+    <Widget name='popover' query={{alignment: 'bottomCenter', overflow: 'flip'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {5} copy
@@ -333,7 +333,7 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
       @override
       Widget build(BuildContext context) => FPopover(
         controller: controller,
-        shift: FPortalShift.flip,
+        overflow: FPortalOverflow.flip,
         popoverBuilder: (context, _) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(
@@ -386,13 +386,13 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
   </Tabs.Tab>
 </Tabs>
 
-### Shift along Axis
+### Slide along Axis
 
-The popover can be shifted along the overflowing axis to stay within the viewport boundaries.
+The popover can be slid along the overflowing axis to stay within the viewport boundaries.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='popover' query={{shift: 'along'}} height={500}/>
+    <Widget name='popover' query={{overflow: 'slide'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {5} copy
@@ -400,7 +400,7 @@ The popover can be shifted along the overflowing axis to stay within the viewpor
       @override
       Widget build(BuildContext context) => FPopover(
         controller: controller,
-        shift: FPortalShift.along,
+        overflow: FPortalOverflow.slide,
         popoverBuilder: (context, controller) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(
@@ -453,13 +453,13 @@ The popover can be shifted along the overflowing axis to stay within the viewpor
   </Tabs.Tab>
 </Tabs>
 
-### No Shifting
+### Allow Overflow
 
 The popover is not shifted to stay within the viewport boundaries, even if it overflows.
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget name='popover' query={{shift: 'none'}} height={500}/>
+    <Widget name='popover' query={{overflow: 'allow'}} height={500}/>
   </Tabs.Tab>
   <Tabs.Tab>
     ```dart {5} copy
@@ -467,7 +467,7 @@ The popover is not shifted to stay within the viewport boundaries, even if it ov
       @override
       Widget build(BuildContext context) => FPopover(
         controller: controller,
-        shift: FPortalShift.none,
+        overflow: FPortalOverflow.none,
         popoverBuilder: (context, controller) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(
