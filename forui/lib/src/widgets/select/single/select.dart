@@ -136,7 +136,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// True if the select should expand to fill the available space. Defaults to false.
   final bool expands;
 
-  /// The mouse cursor to use when the field is hovered over. Defaults to [SystemMouseCursors.click].
+  /// The mouse cursor to use when the field is hovered over. Defaults to [MouseCursor.defer].
   final MouseCursor mouseCursor;
 
   /// Whether the field can request focus. Defaults to true.
@@ -221,7 +221,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool expands = false,
-    MouseCursor mouseCursor = SystemMouseCursors.click,
+    MouseCursor mouseCursor = MouseCursor.defer,
     bool canRequestFocus = true,
     bool clearable = false,
     AlignmentGeometry anchor = AlignmentDirectional.topStart,
@@ -377,7 +377,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool expands = false,
-    MouseCursor mouseCursor = SystemMouseCursors.click,
+    MouseCursor mouseCursor = MouseCursor.defer,
     bool canRequestFocus = true,
     bool clearable = false,
     AlignmentGeometry anchor = AlignmentDirectional.topStart,
@@ -536,7 +536,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = SystemMouseCursors.click,
+    this.mouseCursor = MouseCursor.defer,
     this.canRequestFocus = true,
     this.clearable = false,
     this.anchor = AlignmentDirectional.topStart,

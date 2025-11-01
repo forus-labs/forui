@@ -42,6 +42,7 @@
 
 ### `FSelect`
 *  **Breaking** Change `FSelect.shift` to `FSelect.overflow`.
+* Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 
 
 ### `FSelectMenutTile`
