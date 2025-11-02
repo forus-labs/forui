@@ -191,7 +191,7 @@ class FPopover extends StatefulWidget {
   final AlignmentGeometry popoverAnchor;
 
   /// {@template forui.widgets.FPopover.childAnchor}
-  /// The anchor point on the [child] used for positioning relative to the [popoverAnchor].
+  /// The anchor point on the [child] used for positioning relative to the popover's anchor.
   ///
   /// For example, with `childAnchor: Alignment.bottomCenter` and `popoverAnchor: Alignment.topCenter`,
   /// the child's bottom edge will align with the popover's top edge.
@@ -201,7 +201,7 @@ class FPopover extends StatefulWidget {
   final AlignmentGeometry childAnchor;
 
   /// {@template forui.widgets.FPopover.spacing}
-  /// The spacing between the [popoverAnchor] and [childAnchor].
+  /// The spacing between the popover and child anchors.
   ///
   /// Applied before [overflow].
   /// {@endtemplate}
