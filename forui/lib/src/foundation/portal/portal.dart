@@ -168,7 +168,7 @@ class _State extends State<FPortal> {
                 viewInsets:
                     widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
                     MediaQuery.viewPaddingOf(context),
-                spacing: widget.spacing.resolve(childAnchor, portalAnchor),
+                spacing: widget.spacing(childAnchor, portalAnchor),
                 overflow: widget.overflow,
                 offset: widget.offset,
                 child: widget.portalBuilder(context, _controller),

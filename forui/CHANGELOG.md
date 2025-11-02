@@ -1,8 +1,8 @@
 ## 0.17.0 (Next)
 
 ### `FAutocomplete`
-* **Breaking** Change `FAutocomplete.shift` to `FAutocomplete.overflow`.
-* **Breaking** Change `FAutocompleteController.popover` to `FAutocompleteController.content`.
+* **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
+* **Breaking** Rename `FAutocompleteController.popover` to `FAutocompleteController.content`.
 * **Breaking** Change `FAutocompleteContentStyle` to extend `FPopoverStyle`.
 * **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
 
@@ -32,23 +32,23 @@
 
 
 ### `FPortal`
-* **Breaking** Change `FPortalBox` to `FPortalRect`.
-* **Breaking** Change `FPortalChildBox` to `FPortalChildRect`.
-* **Breaking** Change `FPortalShift` to `FPortalOverflow`.
-* **Breaking** Change `FPortalShift.along` to `FPortalShift.slide`.
-* **Breaking** Change `FPortal.shift` to `FPortal.overflow`.
-* **Breaking** Change `FPortal.shift` to `FPortal.overflow`.
+* **Breaking** Rename `FPortalBox` to `FPortalRect`.
+* **Breaking** Rename `FPortalChildBox` to `FPortalChildRect`.
+* **Breaking** Rename `FPortalShift` to `FPortalOverflow`.
 * **Breaking** Change `FPortalShift` from a function to a class. While this makes custom shift implementations slightly
-  more verbose, it  allows the consts to synergize with dot shorthands.
+  more verbose, it allows the consts to synergize with dot shorthands.
+* **Breaking** Rename `FPortalShift.along` to `FPortalShift.slide`.
+* **Breaking** Rename `FPortal.shift` to `FPortal.overflow`.
+* **Breaking** Rename `FPortalSpacing.resolve` to `FPortalSpacing.call`.
 
 
 ### `FSelect`
-*  **Breaking** Change `FSelect.shift` to `FSelect.overflow`.
+*  **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 
 
 ### `FSelectMenutTile`
-*  **Breaking** Change `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+*  **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
 
 
 ### `FTappable`
@@ -56,13 +56,13 @@
 
 
 ### `FTimeField`
-* **Breaking** Change `FTimeField.shift` to `FTimeField.overflow`.
+* **Breaking** Rename `FTimeField.shift` to `FTimeField.overflow`.
 
 
 ### `FTooltip`
 * Change `FTooltip` to not be focusable.
 * Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus. 
-* **Breaking** Change `FTooltip.shift` to `FTooltip.overflow`.
+* **Breaking** Rename `FTooltip.shift` to `FTooltip.overflow`.
 
 
 ### Others

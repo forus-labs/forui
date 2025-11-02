@@ -16,13 +16,13 @@ typedef FPortalRect = ({Offset offset, Size size, Alignment anchor});
 ///   overflow strategies work.
 abstract interface class FPortalOverflow {
   /// Flips the portal to the opposite side to avoid overflow, falling back to sliding along the edge if needed.
-  static const flip = _Flip();
+  static const FPortalOverflow flip = _Flip();
 
   /// Slides the portal along the child's edge until the portal does not overflow.
-  static const slide = _Slide();
+  static const FPortalOverflow slide = _Slide();
 
   /// Allows the portal to overflow.
-  static const allow = _Allow();
+  static const FPortalOverflow allow = _Allow();
 
   /// Returns the spacing offset for the portal.
   ///

@@ -20,7 +20,7 @@ abstract interface class FPortalSpacing {
   const factory FPortalSpacing(double spacing, {bool diagonal}) = _FPortalSpacing;
 
   /// Returns the spacing offset for the portal.
-  Offset resolve(Alignment child, Alignment portal);
+  Offset call(Alignment child, Alignment portal);
 }
 
 class _FPortalSpacing with Diagnosticable implements FPortalSpacing {
@@ -30,7 +30,7 @@ class _FPortalSpacing with Diagnosticable implements FPortalSpacing {
   const _FPortalSpacing(this.spacing, {this.diagonal = false});
 
   @override
-  Offset resolve(Alignment child, Alignment portal) {
+  Offset call(Alignment child, Alignment portal) {
     // ignore corners that are diagonal.
     if (!diagonal && (child.x != 0 && child.y != 0) && (child.x == -portal.x && child.y == -portal.y)) {
       return Offset.zero;

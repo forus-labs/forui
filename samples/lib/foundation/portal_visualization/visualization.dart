@@ -28,7 +28,7 @@ class _VisualizerState extends StatefulSampleState<PortalVisualizationPage> {
             final spacingOffset = FPortalSpacing(
               value.spacing,
               diagonal: value.diagonal,
-            ).resolve(value.childAnchor, value.portalAnchor);
+            ).call(value.childAnchor, value.portalAnchor);
             final portal = (offset: spacingOffset, size: value.portalSize, anchor: value.portalAnchor);
             final offset = value.overflow(Visualization.viewport, child, portal);
 
