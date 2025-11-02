@@ -35,29 +35,26 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   /// The portal's constraints.
   final FPortalConstraints constraints;
 
-  /// The anchor point on this widget that will line up with [childAnchor] on the linked [CompositedChild].
+  /// The anchor point on the portal used for positioning relative to the [childAnchor].
   final Alignment portalAnchor;
 
-  /// The anchor point on the linked [CompositedChild] that [portalAnchor] will line up with.
+  /// The anchor point on the [child] used for positioning relative to the [portalAnchor].
   final Alignment childAnchor;
 
   /// The padding to avoid system intrusions.
   final EdgeInsets viewInsets;
 
-  /// The spacing between the child's anchor and portal's anchor.
+  /// The spacing between the [portalAnchor] and [childAnchor].
   final Offset spacing;
 
-  /// The shifting strategy used to shift a portal when it overflows out of the viewport.
+  /// The callback used to shift a portal when it overflows out of the viewport.
   ///
-  /// It is applied after [spacing].
-  ///
-  /// See [FPortalShift] for the different shifting strategies.
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  /// Applied after [spacing] and before [offset].
+  final FPortalOverflow overflow;
 
-  /// The additional offset to apply to the [childAnchor] of the linked [CompositedChild] to obtain this widget's
-  /// [portalAnchor] position.
+  /// Additional translation to apply to the portal's position.
   ///
-  /// It is applied after [shift].
+  /// It is applied after [overflow].
   final Offset offset;
 
   const CompositedPortal({
@@ -68,7 +65,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     required this.childAnchor,
     required this.viewInsets,
     required this.spacing,
-    required this.shift,
+    required this.overflow,
     required this.offset,
     this.showWhenUnlinked = false,
     super.key,
@@ -86,7 +83,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     childAnchor: childAnchor,
     viewInsets: viewInsets,
     spacing: spacing,
-    shift: shift,
+    overflow: overflow,
     offset: offset,
   );
 
@@ -101,7 +98,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     ..childAnchor = childAnchor
     ..viewInsets = viewInsets
     ..spacing = spacing
-    ..shift = shift
+    ..overflow = overflow
     ..offset = offset;
 
   @override
@@ -116,7 +113,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('viewInsets', viewInsets))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset));
   }
 }
@@ -138,7 +135,7 @@ class RenderPortalLayer extends RenderProxyBox {
   Alignment _childAnchor;
   EdgeInsets _viewInsets;
   Offset _spacing;
-  Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) _shift;
+  FPortalOverflow _overflow;
   Offset _offset;
 
   RenderPortalLayer({
@@ -151,7 +148,7 @@ class RenderPortalLayer extends RenderProxyBox {
     required Alignment childAnchor,
     required EdgeInsets viewInsets,
     required Offset spacing,
-    required Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift,
+    required FPortalOverflow overflow,
     required Offset offset,
     RenderBox? child,
   }) : _notifier = notifier,
@@ -163,7 +160,7 @@ class RenderPortalLayer extends RenderProxyBox {
        _childAnchor = childAnchor,
        _viewInsets = viewInsets,
        _spacing = spacing,
-       _shift = shift,
+       _overflow = overflow,
        _offset = offset,
        super(child);
 
@@ -216,7 +213,7 @@ class RenderPortalLayer extends RenderProxyBox {
     final linkedOffset =
         this.offset +
         switch ((link.childLayer?.globalOffset, link.childSize, child)) {
-          (final childOffset?, final childSize?, final portal?) => shift(
+          (final childOffset?, final childSize?, final portal?) => overflow(
             // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
             // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
             Size(
@@ -420,14 +417,14 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
-  Offset Function(Size, FPortalChildBox, FPortalBox) get shift => _shift;
+  FPortalOverflow get overflow => _overflow;
 
-  set shift(Offset Function(Size, FPortalChildBox, FPortalBox) value) {
-    if (_shift == value) {
+  set overflow(FPortalOverflow value) {
+    if (_overflow == value) {
       return;
     }
 
-    _shift = value;
+    _overflow = value;
     markNeedsPaint();
   }
 
@@ -455,7 +452,7 @@ class RenderPortalLayer extends RenderProxyBox {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('viewInsets', viewInsets))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(TransformProperty('current transform matrix', _currentTransform));
   }

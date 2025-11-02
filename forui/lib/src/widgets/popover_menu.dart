@@ -42,7 +42,7 @@ class FPopoverMenu extends StatelessWidget {
   /// ```
   final FPopoverMenuStyle Function(FPopoverMenuStyle style)? style;
 
-  /// The controller that shows and hides the menu. It initially hides the menu.
+  /// The controller.
   final FPopoverController? popoverController;
 
   /// {@macro forui.widgets.FTileGroup.scrollController}
@@ -62,18 +62,18 @@ class FPopoverMenu extends StatelessWidget {
   /// Defaults to [FItemDivider.full].
   final FItemDivider divider;
 
-  /// The point on the menu (floating content) that connects with the child at the child's anchor.
+  /// The anchor point on the menu used for positioning relative to the [childAnchor].
   ///
-  /// For example, [Alignment.topCenter] means the top-center point of the menu will connect with the child.
-  /// See [childAnchor] for changing the child's anchor.
+  /// For example, with `menuAnchor: Alignment.topCenter` and `childAnchor: Alignment.bottomCenter`,
+  /// the menu's top edge will align with the child's bottom edge.
   ///
   /// Defaults to [Alignment.topCenter].
   final AlignmentGeometry menuAnchor;
 
-  /// The point on the child that connects with the menu at the menu's anchor.
+  /// The anchor point on the child used for positioning relative to the [menuAnchor].
   ///
-  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the menu.
-  /// See [menuAnchor] for changing the menu's anchor.
+  /// For example, with `childAnchor: Alignment.bottomCenter` and `menuAnchor: Alignment.topCenter`,
+  /// the child's bottom edge will align with the menu's top edge.
   ///
   /// Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry childAnchor;
@@ -81,8 +81,8 @@ class FPopoverMenu extends StatelessWidget {
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
 
-  /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  /// {@macro forui.widgets.FPopover.overflow}
+  final FPortalOverflow overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -155,7 +155,7 @@ class FPopoverMenu extends StatelessWidget {
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.groupId,
     this.hideRegion = FPopoverHideRegion.excludeChild,
@@ -213,7 +213,7 @@ class FPopoverMenu extends StatelessWidget {
     this.menuAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.groupId,
     this.hideRegion = FPopoverHideRegion.excludeChild,
@@ -255,7 +255,7 @@ class FPopoverMenu extends StatelessWidget {
       popoverAnchor: menuAnchor,
       childAnchor: childAnchor,
       spacing: spacing,
-      shift: shift,
+      overflow: overflow,
       offset: offset,
       groupId: groupId,
       hideRegion: hideRegion,
@@ -286,7 +286,7 @@ class FPopoverMenu extends StatelessWidget {
       ..add(DiagnosticsProperty('popoverAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideRegion', hideRegion))

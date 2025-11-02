@@ -35,7 +35,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.fieldAnchor,
     super.popoverConstraints,
     super.spacing,
-    super.shift,
+    super.overflow,
     super.offset,
     super.hideRegion,
     super.autoHide,

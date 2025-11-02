@@ -1,23 +1,26 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
-/// An interface for computing the spacing between a child and its portal.
+/// An interface for computing the spacing between a widget and its portal.
+///
+/// See:
+/// * [Visualization](http://forui.dev/docs/foundation/portal#visualization) for a visual demonstration of how the
+///   spacing works.
 abstract interface class FPortalSpacing {
   /// A [FPortalSpacing] that does not apply any spacing.
   static const zero = FPortalSpacing(0);
 
-  /// Creates a [FPortalSpacing] that applies a fixed spacing between the child and its portal when they do not overlap.
+  /// Creates a [FPortalSpacing] that adds spacing between the anchors of the portal and widget when they do not overlap.
   ///
-  /// The [spacing] parameter determines the amount of space to apply between the anchors.
+  /// [spacing] determines the amount of space to apply between the anchors.
   ///
-  /// The [diagonal] parameter controls how spacing is applied when both anchors are at corners:
-  /// * When [diagonal] is `false` (default), spacing is **not** applied if both anchors are at corners.
-  /// * When [diagonal] is `true`, spacing is applied regardless of anchor positions.
+  /// [diagonal] determines whether spacing applies to opposite diagonal corners:
+  /// * When `false` (default), opposite diagonal corners have no spacing.
+  /// * When `true`, spacing applies to opposite diagonal corners.
   const factory FPortalSpacing(double spacing, {bool diagonal}) = _FPortalSpacing;
 
-  /// Computes spacing between the [child]'s anchor and the [portal]'s anchor, returning an offset by which to shift
-  /// the portal.
-  Offset resolve(Alignment child, Alignment portal);
+  /// Returns the spacing offset for the portal.
+  Offset call(Alignment child, Alignment portal);
 }
 
 class _FPortalSpacing with Diagnosticable implements FPortalSpacing {
@@ -27,7 +30,7 @@ class _FPortalSpacing with Diagnosticable implements FPortalSpacing {
   const _FPortalSpacing(this.spacing, {this.diagonal = false});
 
   @override
-  Offset resolve(Alignment child, Alignment portal) {
+  Offset call(Alignment child, Alignment portal) {
     // ignore corners that are diagonal.
     if (!diagonal && (child.x != 0 && child.y != 0) && (child.x == -portal.x && child.y == -portal.y)) {
       return Offset.zero;

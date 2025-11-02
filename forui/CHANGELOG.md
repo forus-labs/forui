@@ -1,17 +1,68 @@
 ## 0.17.0 (Next)
 
+### `FAutocomplete`
+* **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
+* **Breaking** Rename `FAutocompleteController.popover` to `FAutocompleteController.content`.
+* **Breaking** Change `FAutocompleteContentStyle` to extend `FPopoverStyle`.
+* **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
+
 
 ### `FBottomNavigationBar`
 * Change `FBottomNavigationBarItem.label` to be optional.
+
+
+### `FBreadcrumb`
+*  **Breaking** Change `FBreadcrumb.shift` to `FBreadcrumb.overflow`.
+
+
+### `FDateField`
+*  **Breaking** Change `FDateField.shift` to `FDateField.overflow`.
+
+
+### `FMultiSelect`
+*  **Breaking** Change `FMultiSelect.shift` to `FMultiSelect.overflow`.
+
+
+### `FPopover`
+* **Breaking** Change `FPopover.shift` to `FPopover.overflow`.
+
+
+### `FPopoverMenu`
+* **Breaking** Change `FPopoverMenu.shift` to `FPopoverMenu.overflow`.
+
+
+### `FPortal`
+* **Breaking** Rename `FPortalBox` to `FPortalRect`.
+* **Breaking** Rename `FPortalChildBox` to `FPortalChildRect`.
+* **Breaking** Rename `FPortalShift` to `FPortalOverflow`.
+* **Breaking** Change `FPortalShift` from a function to a class. While this makes custom shift implementations slightly
+  more verbose, it allows the consts to synergize with dot shorthands.
+* **Breaking** Rename `FPortalShift.along` to `FPortalShift.slide`.
+* **Breaking** Rename `FPortal.shift` to `FPortal.overflow`.
+* **Breaking** Rename `FPortalSpacing.resolve` to `FPortalSpacing.call`.
+
+
+### `FSelect`
+*  **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
+* Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
+
+
+### `FSelectMenutTile`
+*  **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
 
 
 ### `FTappable`
 *  Change `FTappable` to only update focused state when it has primary focus.
 
 
+### `FTimeField`
+* **Breaking** Rename `FTimeField.shift` to `FTimeField.overflow`.
+
+
 ### `FTooltip`
 * Change `FTooltip` to not be focusable.
 * Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus. 
+* **Breaking** Rename `FTooltip.shift` to `FTooltip.overflow`.
 
 
 ### Others

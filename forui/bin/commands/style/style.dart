@@ -25,7 +25,7 @@ enum Style {
     'FAutocompleteContentStyle',
     <String>['autocomplete-content', 'autocompletecontent'],
     <String>['FAutocompleteContentStyle', 'FCircularProgressStyle', 'FAutocompleteSectionStyle', 'FItemContentStyle'],
-    'FAutocompleteContentStyle autocompleteContentStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FAutocompleteContentStyle(\n  emptyTextStyle: typography.sm,\n  progressStyle: _circularProgressStyle(colors: colors),\n  sectionStyle: _autocompleteSectionStyle(\n    colors: colors,\n    style: style,\n    typography: typography,\n  ),\n  padding: const EdgeInsets.symmetric(vertical: 5),\n);\n',
+    'FAutocompleteContentStyle autocompleteContentStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FAutocompleteContentStyle.inherit(\n  colors: colors,\n  typography: typography,\n  style: style,\n);\n',
   ),
   fautocompletesectionstyle(
     'FAutocompleteSectionStyle',
@@ -45,13 +45,12 @@ enum Style {
       'FButtonStyle',
       'FButtonContentStyle',
       'FButtonIconContentStyle',
-      'FPopoverStyle',
       'FAutocompleteContentStyle',
       'FCircularProgressStyle',
       'FAutocompleteSectionStyle',
       'FItemContentStyle',
     ],
-    'FAutocompleteStyle autocompleteStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final field = _textFieldStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  );\n  return FAutocompleteStyle(\n    fieldStyle: field,\n    composingTextStyle: field.contentTextStyle.map(\n      (s) => s.copyWith(decoration: TextDecoration.underline),\n    ),\n    typeaheadTextStyle: field.contentTextStyle.map(\n      (s) => s.copyWith(color: colors.mutedForeground),\n    ),\n    popoverStyle: _popoverStyle(colors: colors, style: style),\n    contentStyle: _autocompleteContentStyle(\n      colors: colors,\n      typography: typography,\n      style: style,\n    ),\n  );\n}\n',
+    'FAutocompleteStyle autocompleteStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final field = _textFieldStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  );\n  return FAutocompleteStyle(\n    fieldStyle: field,\n    composingTextStyle: field.contentTextStyle.map(\n      (s) => s.copyWith(decoration: TextDecoration.underline),\n    ),\n    typeaheadTextStyle: field.contentTextStyle.map(\n      (s) => s.copyWith(color: colors.mutedForeground),\n    ),\n    contentStyle: _autocompleteContentStyle(\n      colors: colors,\n      typography: typography,\n      style: style,\n    ),\n  );\n}\n',
   ),
   favatarstyle(
     'FAvatarStyle',

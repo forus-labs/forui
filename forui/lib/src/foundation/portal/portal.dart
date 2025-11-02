@@ -8,62 +8,66 @@ import 'package:forui/src/foundation/portal/composited_child.dart';
 import 'package:forui/src/foundation/portal/composited_portal.dart';
 import 'package:forui/src/foundation/portal/layer.dart';
 
-/// A portal renders a portal widget that "floats" on top of a child widget.
-///
-/// Similar to an [OverlayPortal], it requires an [Overlay] ancestor. Unlike an [OverlayPortal], the portal is aligned
-/// relative to the child.
+/// A portal that "floats" on top of and relative to a [child] widget.
 ///
 /// See:
-/// * [FPortalShift] for shifting strategies when a portal overflows outside of the viewport.
+/// * [FPortalOverflow] for handling viewport overflow.
 /// * [OverlayPortalController] for controlling the portal's visibility.
-/// * [OverlayPortal] for the underlying widget.
+/// * [Visualization](http://forui.dev/docs/foundation/portal#visualization) for a visual demonstration of how
+///   portals work.
 class FPortal extends StatefulWidget {
   static Widget _builder(BuildContext _, OverlayPortalController _, Widget? child) => child!;
 
-  /// The controller that shows and hides the portal. It initially hides the portal.
+  /// The controller.
   final OverlayPortalController? controller;
 
-  /// The constraints.
+  /// The portal's size constraints.
   final FPortalConstraints constraints;
 
-  /// The point on the portal (floating content) that connects with the child, at the child's anchor.
+  /// The anchor point on the portal used for positioning relative to the [childAnchor].
   ///
-  /// For example, [Alignment.topCenter] means the top-center point of the portal will connect with the child.
-  /// See [childAnchor] for changing the child's anchor.
+  /// For example, with `portalAnchor: Alignment.topCenter` and `childAnchor: Alignment.bottomCenter`,
+  /// the portal's top edge will align with the child's bottom edge.
   ///
   /// Defaults to [Alignment.topCenter].
   final AlignmentGeometry portalAnchor;
 
-  /// The point on the child widget that connects with the portal (floating content), at the portal's anchor.
+  /// The anchor point on the [child] used for positioning relative to the [portalAnchor].
   ///
-  /// For example, [Alignment.bottomCenter] means the bottom-center point of the child will connect with the portal.
-  /// See [portalAnchor] for changing the portal's anchor.
+  /// For example, with `childAnchor: Alignment.bottomCenter` and `portalAnchor: Alignment.topCenter`,
+  /// the child's bottom edge will align with the portal's top edge.
   ///
   /// Defaults to [Alignment.bottomCenter].
   final AlignmentGeometry childAnchor;
 
-  /// The spacing between the child's anchor and portal's anchor. Defaults to [FPortalSpacing.zero].
+  /// The spacing between the [portalAnchor] and [childAnchor].
   ///
-  /// It applied before [shift].
+  /// Applied before [overflow].
+  ///
+  /// Defaults to [FPortalSpacing.zero].
   final FPortalSpacing spacing;
 
-  /// The shifting strategy used to shift a portal when it overflows out of the viewport. Defaults to
-  /// [FPortalShift.flip].
+  /// The callback used to shift a portal when it overflows out of the viewport.
   ///
-  /// It is applied after [spacing] and before [offset].
+  /// Applied after [spacing] and before [offset].
   ///
-  /// See [FPortalShift] for the different shifting strategies.
-  final Offset Function(Size size, FPortalChildBox childBox, FPortalBox portalBox) shift;
+  /// Defaults to [FPortalOverflow.flip].
+  /// See [FPortalOverflow] for the different overflow strategies.
+  final FPortalOverflow overflow;
 
-  /// The offset to adjust the portal by. Defaults to [Offset.zero].
+  /// Additional translation to apply to the portal's position.
   ///
-  /// It is applied after [shift].
+  /// Applied after [overflow].
+  ///
+  /// Defaults to [Offset.zero].
   final Offset offset;
 
   /// The insets of the view. In other words, the minimum distance between the edges of the view and the edges of the
-  /// portal. Defaults to [MediaQueryData.viewPadding].
+  /// portal.
   ///
   /// Set this to [EdgeInsets.zero] to disable the insets.
+  ///
+  /// Defaults to [MediaQueryData.viewPadding].
   final EdgeInsetsGeometry? viewInsets;
 
   /// An optional barrier widget that is displayed behind the portal.
@@ -93,7 +97,7 @@ class FPortal extends StatefulWidget {
     this.portalAnchor = Alignment.topCenter,
     this.childAnchor = Alignment.bottomCenter,
     this.spacing = FPortalSpacing.zero,
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.viewInsets,
     this.barrier,
@@ -114,7 +118,7 @@ class FPortal extends StatefulWidget {
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('viewInsets', viewInsets))
       ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder))
@@ -164,8 +168,8 @@ class _State extends State<FPortal> {
                 viewInsets:
                     widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
                     MediaQuery.viewPaddingOf(context),
-                spacing: widget.spacing.resolve(childAnchor, portalAnchor),
-                shift: widget.shift,
+                spacing: widget.spacing(childAnchor, portalAnchor),
+                overflow: widget.overflow,
                 offset: widget.offset,
                 child: widget.portalBuilder(context, _controller),
               );

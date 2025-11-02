@@ -14,8 +14,8 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// {@macro forui.widgets.FPopover.spacing}
   final FPortalSpacing spacing;
 
-  /// {@macro forui.widgets.FPopover.shift}
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  /// {@macro forui.widgets.FPopover.overflow}
+  final FPortalOverflow overflow;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -45,7 +45,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
     this.anchor = Alignment.topLeft,
     this.inputAnchor = Alignment.bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.shift = FPortalShift.flip,
+    this.overflow = FPortalOverflow.flip,
     this.offset = Offset.zero,
     this.hideRegion = FPopoverHideRegion.excludeChild,
     this.onTapHide,
@@ -60,7 +60,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
       ..add(DiagnosticsProperty('anchor', anchor))
       ..add(DiagnosticsProperty('inputAnchor', inputAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
-      ..add(ObjectFlagProperty.has('shift', shift))
+      ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
@@ -76,7 +76,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
           anchor == other.anchor &&
           inputAnchor == other.inputAnchor &&
           spacing == other.spacing &&
-          shift == other.shift &&
+          overflow == other.overflow &&
           offset == other.offset &&
           hideRegion == other.hideRegion &&
           onTapHide == other.onTapHide &&
@@ -88,7 +88,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
       anchor.hashCode ^
       inputAnchor.hashCode ^
       spacing.hashCode ^
-      shift.hashCode ^
+      overflow.hashCode ^
       offset.hashCode ^
       hideRegion.hashCode ^
       onTapHide.hashCode ^

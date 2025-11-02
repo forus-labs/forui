@@ -11,13 +11,13 @@ import 'package:forui_samples/sample.dart';
 class PopoverPage extends Sample {
   final Axis axis;
   final FPopoverHideRegion hideRegion;
-  final Offset Function(Size, FPortalChildBox, FPortalBox) shift;
+  final FPortalOverflow overflow;
 
   PopoverPage({
     @queryParam String alignment = 'center',
     @queryParam String axis = 'vertical',
     @queryParam String hideRegion = 'anywhere',
-    @queryParam String shift = 'flip',
+    @queryParam String overflow = 'flip',
     @queryParam super.theme,
   }) : axis = switch (axis) {
          'horizontal' => Axis.horizontal,
@@ -28,10 +28,10 @@ class PopoverPage extends Sample {
          'excludeChild' => FPopoverHideRegion.excludeChild,
          _ => FPopoverHideRegion.none,
        },
-       shift = switch (shift) {
-         'flip' => FPortalShift.flip,
-         'along' => FPortalShift.along,
-         _ => FPortalShift.none,
+       overflow = switch (overflow) {
+         'flip' => FPortalOverflow.flip,
+         'slide' => FPortalOverflow.slide,
+         _ => FPortalOverflow.allow,
        },
        super(
          alignment: switch (alignment) {
@@ -51,7 +51,7 @@ class PopoverPage extends Sample {
         popoverAnchor: axis == Axis.horizontal ? Alignment.bottomLeft : Alignment.topCenter,
         childAnchor: axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
         hideRegion: hideRegion,
-        shift: shift,
+        overflow: overflow,
         popoverBuilder: (context, _) => Padding(
           padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(

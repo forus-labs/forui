@@ -119,6 +119,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/popover-menu/default', page: PopoverMenuRoute.page),
     AutoRoute(path: '/popover-menu/tiles', page: TilePopoverMenuRoute.page),
     AutoRoute(path: '/portal/default', page: PortalRoute.page),
+    AutoRoute(path: '/portal-visualization/default', page: PortalVisualizationRoute.page),
     AutoRoute(path: '/progress/default', page: ProgressRoute.page),
     AutoRoute(path: '/progress/determinate', page: DeterminateProgressRoute.page),
     AutoRoute(path: '/progress/circular', page: CircularProgressRoute.page),
