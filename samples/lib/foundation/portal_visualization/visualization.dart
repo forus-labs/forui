@@ -1,12 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
+import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+
 import 'package:forui_samples/foundation/portal_visualization/settings.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PortalVisualizationPage extends StatefulSample {
-  PortalVisualizationPage({@queryParam super.theme}): super(maxWidth: 800);
+  PortalVisualizationPage({@queryParam super.theme}) : super(maxWidth: 800);
 
   @override
   State<PortalVisualizationPage> createState() => _VisualizerState();
