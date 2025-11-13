@@ -308,7 +308,7 @@ is `/button/text`. `<variant>` should default to `default` and never be empty.
 
 ### Creating a Documentation Page
 
-Each widget should have its own MDX file in the documentation website's [docs folder](./docs/pages/docs). 
+Each widget should have its own MDX file in the documentation website's [docs folder](./docs/app/docs). 
 
 The file should contain the following sections:
 * A brief overview and minimal example.
