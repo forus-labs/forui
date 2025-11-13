@@ -69,7 +69,7 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
         focusedDate = _focusableYear(current, focusedDate!);
       }
 
-      SemanticsService.announce(current.toString(), textDirection);
+      SemanticsService.sendAnnouncement(View.of(context), current.toString(), textDirection);
     });
   }
 

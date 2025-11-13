@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
@@ -10,11 +10,11 @@ import 'package:meta/meta.dart';
 class FunctionsMixin {
   /// The type.
   @protected
-  final ClassElement2 element;
+  final ClassElement element;
 
   /// The fields.
   @protected
-  final List<FieldElement2> fields;
+  final List<FieldElement> fields;
 
   /// The generated call function's docs.
   @protected
@@ -26,7 +26,7 @@ class FunctionsMixin {
   /// Generates a mixin.
   Mixin generate() =>
       (MixinBuilder()
-            ..name = '_\$${element.name3}Functions'
+            ..name = '_\$${element.name}Functions'
             ..on = refer('Diagnosticable')
             ..methods.addAll([..._getters, _call, _debugFillProperties, _equals, _hashCode]))
           .build();
@@ -38,7 +38,7 @@ class FunctionsMixin {
           (m) => m
             ..returns = refer(field.type.getDisplayString())
             ..type = MethodType.getter
-            ..name = field.name3,
+            ..name = field.name,
         ),
       )
       .toList();
@@ -48,7 +48,7 @@ class FunctionsMixin {
     (m) => m
       ..docs.addAll(callDocs)
       ..annotations.add(refer('useResult'))
-      ..returns = refer(element.name3!)
+      ..returns = refer(element.name!)
       ..name = 'call'
       ..requiredParameters.add(
         Parameter(
@@ -58,7 +58,7 @@ class FunctionsMixin {
         ),
       )
       ..lambda = true
-      ..body = Code('this as ${element.name3}'),
+      ..body = Code('this as ${element.name}'),
   );
 
   /// Generates a `debugFillProperties` method.
@@ -67,26 +67,26 @@ class FunctionsMixin {
         .map(
           (field) => switch (field.type) {
             _ when intType.isAssignableFromType(field.type) =>
-              "IntProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "IntProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
             _ when doubleType.isAssignableFromType(field.type) =>
-              "DoubleProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "DoubleProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
             _ when boolType.isAssignableFromType(field.type) =>
-              "FlagProperty('${field.name3}', value: ${field.name3}, ifTrue: '${field.name3}', level: DiagnosticLevel.debug)",
+              "FlagProperty('${field.name}', value: ${field.name}, ifTrue: '${field.name}', level: DiagnosticLevel.debug)",
             _ when string.isAssignableFromType(field.type) =>
-              "StringProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "StringProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
             _ when color.isAssignableFromType(field.type) =>
-              "ColorProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "ColorProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
             _ when iconData.isAssignableFromType(field.type) =>
-              "IconDataProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "IconDataProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
             _ when enumeration.isAssignableFromType(field.type) =>
-              "EnumProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "EnumProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
             _ when iterable.isAssignableFromType(field.type) =>
-              "IterableProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "IterableProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
             _ when field.type.isDartCoreFunction =>
-              "ObjectFlagProperty.has('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "ObjectFlagProperty.has('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
             _ when field.type is RecordType =>
-              "StringProperty('${field.name3}', ${field.name3}.toString(), level: DiagnosticLevel.debug)",
-            _ => "DiagnosticsProperty('${field.name3}', ${field.name3}, level: DiagnosticLevel.debug)",
+              "StringProperty('${field.name}', ${field.name}.toString(), level: DiagnosticLevel.debug)",
+            _ => "DiagnosticsProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
           },
         )
         .toList();
@@ -119,11 +119,11 @@ class FunctionsMixin {
   /// Generates an `operator==` method.
   Method get _equals {
     // DO NOT REORDER, we need the list/set pattern to dominate the iterable pattern.
-    String generate(FieldElement2 field) => switch (field.type) {
-      _ when list.isAssignableFromType(field.type) => 'listEquals(${field.name3}, other.${field.name3})',
-      _ when set.isAssignableFromType(field.type) => 'setEquals(${field.name3}, other.${field.name3})',
-      _ when map.isAssignableFromType(field.type) => 'mapEquals(${field.name3}, other.${field.name3})',
-      _ => '${field.name3} == other.${field.name3}',
+    String generate(FieldElement field) => switch (field.type) {
+      _ when list.isAssignableFromType(field.type) => 'listEquals(${field.name}, other.${field.name})',
+      _ when set.isAssignableFromType(field.type) => 'setEquals(${field.name}, other.${field.name})',
+      _ when map.isAssignableFromType(field.type) => 'mapEquals(${field.name}, other.${field.name})',
+      _ => '${field.name} == other.${field.name}',
     };
 
     final comparisons = fields.isEmpty ? '' : '&& ${fields.map(generate).join(' && ')}';
@@ -140,18 +140,18 @@ class FunctionsMixin {
           ),
         )
         ..lambda = true
-        ..body = Code('identical(this, other) || (other is ${element.name3} $comparisons)'),
+        ..body = Code('identical(this, other) || (other is ${element.name} $comparisons)'),
     );
   }
 
   /// Generates a `hashCode` getter.
   Method get _hashCode {
     // DO NOT REORDER, we need the list/set pattern to dominate the iterable pattern.
-    String generate(FieldElement2 field) => switch (field.type) {
-      _ when list.isAssignableFromType(field.type) => 'const ListEquality().hash(${field.name3})',
-      _ when set.isAssignableFromType(field.type) => 'const SetEquality().hash(${field.name3})',
-      _ when map.isAssignableFromType(field.type) => 'const MapEquality().hash(${field.name3})',
-      _ => '${field.name3}.hashCode',
+    String generate(FieldElement field) => switch (field.type) {
+      _ when list.isAssignableFromType(field.type) => 'const ListEquality().hash(${field.name})',
+      _ when set.isAssignableFromType(field.type) => 'const SetEquality().hash(${field.name})',
+      _ when map.isAssignableFromType(field.type) => 'const MapEquality().hash(${field.name})',
+      _ => '${field.name}.hashCode',
     };
 
     final hash = fields.isEmpty ? '0' : fields.map(generate).join(' ^ ');

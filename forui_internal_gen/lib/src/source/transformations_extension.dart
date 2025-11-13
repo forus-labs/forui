@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
@@ -91,11 +91,11 @@ class TransformationsExtension {
 
   /// The type.
   @protected
-  final ClassElement2 element;
+  final ClassElement element;
 
   /// The fields.
   @protected
-  final List<FieldElement2> fields;
+  final List<FieldElement> fields;
 
   /// The copyWith documentation comments.
   @protected
@@ -108,8 +108,8 @@ class TransformationsExtension {
   Extension generate() =>
       (ExtensionBuilder()
             ..docs.addAll(['/// Provides a [copyWith] method.'])
-            ..name = '\$${element.name3!}Transformations'
-            ..on = refer(element.name3!)
+            ..name = '\$${element.name!}Transformations'
+            ..on = refer(element.name!)
             ..methods.addAll([copyWith]))
           .build();
 
@@ -120,7 +120,7 @@ class TransformationsExtension {
     final docs = ['/// ## Parameters'];
 
     for (final field in fields) {
-      final prefix = '/// * [${element.name3}.${field.name3}]';
+      final prefix = '/// * [${element.name}.${field.name}]';
       final summary = summarizeDocs(field.documentationComment);
 
       docs.add('$prefix${summary == null ? '' : ' - $summary'}');
@@ -129,15 +129,15 @@ class TransformationsExtension {
     // Generate assignments for the copyWith method body
     final assignments = fields.map((f) {
       if (nestedMotion(f.type) || nestedStyle(f.type)) {
-        return '${f.name3}: ${f.name3} != null ? ${f.name3}(this.${f.name3}) : this.${f.name3},';
+        return '${f.name}: ${f.name} != null ? ${f.name}(this.${f.name}) : this.${f.name},';
       } else {
-        return '${f.name3}: ${f.name3} ?? this.${f.name3},';
+        return '${f.name}: ${f.name} ?? this.${f.name},';
       }
     }).join();
 
     return Method(
       (m) => m
-        ..returns = refer(element.name3!)
+        ..returns = refer(element.name!)
         ..docs.addAll([...copyWithDocsHeader, ...docs])
         ..annotations.add(refer('useResult'))
         ..name = 'copyWith'
@@ -146,21 +146,21 @@ class TransformationsExtension {
             if (nestedMotion(field.type))
               Parameter(
                 (p) => p
-                  ..name = field.name3!
+                  ..name = field.name!
                   ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()} motion)?')
                   ..named = true,
               )
             else if (nestedStyle(field.type))
               Parameter(
                 (p) => p
-                  ..name = field.name3!
+                  ..name = field.name!
                   ..type = refer('${field.type.getDisplayString()} Function(${field.type.getDisplayString()} style)?')
                   ..named = true,
               )
             else
               Parameter(
                 (p) => p
-                  ..name = field.name3!
+                  ..name = field.name!
                   ..type = refer(
                     field.type.getDisplayString().endsWith('?')
                         ? field.type.getDisplayString()
@@ -170,7 +170,7 @@ class TransformationsExtension {
               ),
         ])
         ..lambda = true
-        ..body = Code('${element.name3!}($assignments)\n'),
+        ..body = Code('${element.name!}($assignments)\n'),
     );
   }
 

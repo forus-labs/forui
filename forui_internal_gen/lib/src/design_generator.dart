@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
@@ -19,11 +19,11 @@ class DesignGenerator extends Generator {
   Future<String?> generate(LibraryReader library, BuildStep step) async {
     final generated = <String>[];
     for (final type in library.classes) {
-      if (type.name3 == null && type.isSealed || type.isAbstract) {
+      if (type.name == null && type.isSealed || type.isAbstract) {
         continue;
       }
 
-      if (_style.hasMatch(type.name3!)) {
+      if (_style.hasMatch(type.name!)) {
         generated
           ..add(
             _emitter
@@ -31,7 +31,7 @@ class DesignGenerator extends Generator {
                   DesignTransformationsExtension(
                     type,
                     copyWithDocsHeader: [
-                      '/// Returns a copy of this [${type.name3!}] with the given properties replaced.',
+                      '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
                       '///',
                       '/// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).',
                       '///',
@@ -46,30 +46,30 @@ class DesignGenerator extends Generator {
                   FunctionsMixin(type, [
                     '/// Returns itself.',
                     '/// ',
-                    "/// Allows [${type.name3}] to replace functions that accept and return a [${type.name3}], such as a style's",
+                    "/// Allows [${type.name}] to replace functions that accept and return a [${type.name}], such as a style's",
                     '/// `copyWith(...)` function.',
                     '/// ',
                     '/// ## Example',
                     '/// ',
                     '/// Given:',
                     '/// ```dart',
-                    '/// void copyWith(${type.name3} Function(${type.name3}) nestedStyle) {}',
+                    '/// void copyWith(${type.name} Function(${type.name}) nestedStyle) {}',
                     '/// ```',
                     '/// ',
                     '/// The following:',
                     '/// ```dart',
-                    '/// copyWith((style) => ${type.name3}(...));',
+                    '/// copyWith((style) => ${type.name}(...));',
                     '/// ```',
                     '/// ',
                     '/// Can be replaced with:',
                     '/// ```dart',
-                    '/// copyWith(${type.name3}(...));',
+                    '/// copyWith(${type.name}(...));',
                     '/// ```',
                   ]).generate(),
                 )
                 .toString(),
           );
-      } else if (_motion.hasMatch(type.name3!)) {
+      } else if (_motion.hasMatch(type.name!)) {
         generated
           ..add(
             _emitter
@@ -77,7 +77,7 @@ class DesignGenerator extends Generator {
                   DesignTransformationsExtension(
                     type,
                     copyWithDocsHeader: [
-                      '/// Returns a copy of this [${type.name3!}] with the given properties replaced.',
+                      '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
                       '///',
                     ],
                   ).generate(),
@@ -85,7 +85,7 @@ class DesignGenerator extends Generator {
                 .toString(),
           )
           ..add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
-      } else if (type.name3 == 'FThemeData') {
+      } else if (type.name == 'FThemeData') {
         generated.add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
       }
     }
@@ -104,15 +104,15 @@ class DesignTransformationsExtension extends TransformationsExtension {
   Extension generate() =>
       (ExtensionBuilder()
             ..docs.addAll(['/// Provides [copyWith] and [lerp] methods.'])
-            ..name = '\$${element.name3!}Transformations'
-            ..on = refer(element.name3!)
+            ..name = '\$${element.name!}Transformations'
+            ..on = refer(element.name!)
             ..methods.addAll([copyWith, _lerp]))
           .build();
 
   Method get _lerp {
-    String invocation(FieldElement2 field) {
+    String invocation(FieldElement field) {
       final type = field.type;
-      final name = field.name3!;
+      final name = field.name!;
 
       // DO NOT REORDER, we need the subclass (Alignment) to dominate the superclass (AlignmentGeometry) pattern.
       return switch (type) {
@@ -178,13 +178,13 @@ class DesignTransformationsExtension extends TransformationsExtension {
     }
 
     // Generate field assignments for the lerp method body.
-    final assignments = [for (final field in fields) '${field.name3}: ${invocation(field)},'].join();
+    final assignments = [for (final field in fields) '${field.name}: ${invocation(field)},'].join();
 
     return Method(
       (m) => m
-        ..returns = refer(element.name3!)
+        ..returns = refer(element.name!)
         ..docs.addAll([
-          '/// Linearly interpolate between this and another [${element.name3!}] using the given factor [t].',
+          '/// Linearly interpolate between this and another [${element.name!}] using the given factor [t].',
         ])
         ..annotations.add(refer('useResult'))
         ..name = 'lerp'
@@ -192,7 +192,7 @@ class DesignTransformationsExtension extends TransformationsExtension {
           Parameter(
             (p) => p
               ..name = 'other'
-              ..type = refer(element.name3!),
+              ..type = refer(element.name!),
           ),
           Parameter(
             (p) => p
@@ -201,7 +201,7 @@ class DesignTransformationsExtension extends TransformationsExtension {
           ),
         ])
         ..lambda = true
-        ..body = Code('${element.name3!}($assignments)\n'),
+        ..body = Code('${element.name!}($assignments)\n'),
     );
   }
 }
