@@ -6,7 +6,7 @@ on:
     paths:
       - .github/workflows/md_lint.yaml
       - '**.md'
-  pull_request_target:
+  pull_request:
     paths:
       - .github/workflows/md_lint.yaml
       - '**.md'
