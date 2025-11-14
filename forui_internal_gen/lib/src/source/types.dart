@@ -1,4 +1,4 @@
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -40,22 +40,22 @@ const shadow = TypeChecker.fromUrl('dart:ui#Shadow');
 const fWidgetStateMap = TypeChecker.fromUrl('package:forui/src/theme/widget_state_map.dart#FWidgetStateMap');
 
 /// Returns the instance fields for the given [element].
-List<FieldElement2> instanceFields(ClassElement2 element) {
-  final fields = <FieldElement2>[];
+List<FieldElement> instanceFields(ClassElement element) {
+  final fields = <FieldElement>[];
 
-  void addFieldsFromType(ClassElement2 element) {
+  void addFieldsFromType(ClassElement element) {
     fields.addAll(
-      element.fields2.where(
+      element.fields.where(
         (f) =>
-            !(f.getter2?.isAbstract ?? false) &&
+            !(f.getter?.isAbstract ?? false) &&
             !f.isStatic &&
             f.isPublic &&
-            f.name3 != 'runtimeType' &&
-            f.name3 != 'hashCode',
+            f.name != 'runtimeType' &&
+            f.name != 'hashCode',
       ),
     );
 
-    if (element.supertype?.element3 case final ClassElement2 supertype) {
+    if (element.supertype?.element case final ClassElement supertype) {
       addFieldsFromType(supertype);
     }
   }

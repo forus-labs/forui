@@ -135,12 +135,12 @@ class ConstructorFragment {
           abort = true;
           constructorParameters = constructorParameters.replaceAll(
             'super.${parameter.name!.lexeme}',
-            '${superParameter.declaredElement?.type} ${parameter.name!.lexeme}',
+            '${superParameter.type} ${parameter.name!.lexeme}',
           );
         } else if (parameter.parameter case final FieldFormalParameter parameter) {
           constructorParameters = constructorParameters.replaceAll(
             'this.${parameter.name.lexeme}',
-            '${parameter.declaredElement?.type} ${parameter.name.lexeme}',
+            '${parameter.type} ${parameter.name.lexeme}',
           );
         }
       }

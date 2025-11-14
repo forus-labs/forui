@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
@@ -86,8 +87,8 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
         // the same day of the month.
         focusedDate = _focusableDayForMonth(current, focusedDate!.day);
       }
-
-      SemanticsService.announce(
+      SemanticsService.sendAnnouncement(
+        View.of(context),
         (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(current.toNative()),
         textDirection,
       );
