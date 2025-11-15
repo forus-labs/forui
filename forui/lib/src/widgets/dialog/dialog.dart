@@ -178,9 +178,7 @@ class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
 
   /// Creates a [FDialogRouteStyle] that inherits its properties.
   FDialogRouteStyle.inherit({required FColors colors})
-    : this(
-        barrierFilter: (v) => ColorFilter.mode(Color.lerp(Colors.transparent, colors.barrier, v)!, BlendMode.srcOver),
-      );
+    : this(barrierFilter: (v) => ColorFilter.mode(.lerp(Colors.transparent, colors.barrier, v)!, .srcOver));
 }
 
 /// Motion-related properties for [FDialogRoute].
@@ -287,16 +285,16 @@ class FDialog extends StatefulWidget {
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
     Widget? title,
     Widget? body,
-    Axis direction = Axis.vertical,
+    Axis direction = .vertical,
     super.key,
   }) : builder = switch (direction) {
-         Axis.horizontal => (_, style) => HorizontalContent(
+         .horizontal => (_, style) => HorizontalContent(
            style: style.horizontalStyle,
            title: title,
            body: body,
            actions: actions,
          ),
-         Axis.vertical => (_, style) => VerticalContent(
+         .vertical => (_, style) => VerticalContent(
            style: style.verticalStyle,
            title: title,
            body: body,
@@ -491,15 +489,15 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     required this.horizontalStyle,
     required this.verticalStyle,
     this.backgroundFilter,
-    this.insetPadding = const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
+    this.insetPadding = const .symmetric(horizontal: 40, vertical: 24),
     this.motion = const FDialogMotion(),
   });
 
   /// Creates a [FDialogStyle] that inherits its properties.
   factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {
-    final title = typography.lg.copyWith(fontWeight: FontWeight.w600, color: colors.foreground);
+    final title = typography.lg.copyWith(fontWeight: .w600, color: colors.foreground);
     final body = typography.sm.copyWith(color: colors.mutedForeground);
-    return FDialogStyle(
+    return .new(
       decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
       horizontalStyle: FDialogContentStyle(
         titleTextStyle: title,

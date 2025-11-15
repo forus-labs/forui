@@ -42,8 +42,8 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
     };
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: .center,
+      mainAxisSize: .min,
       children: [
         FButton(onPress: onPress(FLayout.ltr), child: const Text('Left')),
         const SizedBox(height: 5),

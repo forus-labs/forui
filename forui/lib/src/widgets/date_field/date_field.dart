@@ -119,7 +119,7 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
 abstract class FDateField extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
   static Widget defaultIconBuilder(BuildContext _, FDateFieldStyle style, Set<WidgetState> _) => Padding(
-    padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
+    padding: const .directional(start: 14.0, end: 8.0),
     child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.calendar)),
   );
 
@@ -224,7 +224,7 @@ abstract class FDateField extends StatefulWidget {
     this.onChange,
     this.onSaved,
     this.onReset,
-    this.autovalidateMode = AutovalidateMode.onUnfocus,
+    this.autovalidateMode = .onUnfocus,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     DateTime? initialDate,
@@ -452,7 +452,7 @@ abstract class FDateField extends StatefulWidget {
     ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
     VoidCallback? onReset,
-    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
+    AutovalidateMode autovalidateMode = .onUnfocus,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Key? key,
@@ -512,6 +512,5 @@ abstract class FDateField extends StatefulWidget {
 }
 
 abstract class _FDateFieldState<T extends FDateField> extends State<T> with SingleTickerProviderStateMixin {
-  late FDateFieldController _controller =
-      widget.controller ?? FDateFieldController(vsync: this, initialDate: widget.initialDate);
+  late FDateFieldController _controller = widget.controller ?? .new(vsync: this, initialDate: widget.initialDate);
 }

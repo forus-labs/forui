@@ -78,12 +78,12 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   FCardStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          border: Border.all(color: colors.border),
+          border: .all(color: colors.border),
           borderRadius: style.borderRadius,
           color: colors.background,
         ),
         contentStyle: FCardContentStyle(
-          titleTextStyle: typography.xl2.copyWith(fontWeight: FontWeight.w600, color: colors.foreground, height: 1.5),
+          titleTextStyle: typography.xl2.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.5),
           subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
         ),
       );

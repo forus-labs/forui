@@ -173,8 +173,8 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     required this.focusedOutlineStyle,
     required this.dividerStyle,
     required this.tappableStyle,
-    this.titlePadding = const EdgeInsets.symmetric(vertical: 15),
-    this.childPadding = const EdgeInsets.only(bottom: 15),
+    this.titlePadding = const .symmetric(vertical: 15),
+    this.childPadding = const .only(bottom: 15),
     this.motion = const FAccordionMotion(),
   });
 
@@ -183,16 +183,16 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     : this(
         titleTextStyle: FWidgetStateMap({
           WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
-            fontWeight: FontWeight.w500,
+            fontWeight: .w500,
             color: colors.foreground,
-            decoration: TextDecoration.underline,
+            decoration: .underline,
           ),
-          WidgetState.any: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground),
+          WidgetState.any: typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
         }),
         childTextStyle: typography.sm.copyWith(color: colors.foreground),
-        iconStyle: FWidgetStateMap.all(IconThemeData(color: colors.mutedForeground, size: 20)),
+        iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
-        dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
+        dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       );
 }

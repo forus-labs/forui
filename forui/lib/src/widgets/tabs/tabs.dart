@@ -9,7 +9,9 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 part 'tab_controller.dart';
+
 part 'tabs.design.dart';
+
 part 'tabs_style.dart';
 
 /// An object that represents a tab entry in a group of tabs.
@@ -136,8 +138,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller =
-        widget.controller ??
-        FTabController(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
+        widget.controller ?? .new(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
     _controller.addListener(_update);
   }
 
@@ -152,8 +153,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
       }
 
       _controller =
-          widget.controller ??
-          FTabController(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
+          widget.controller ?? .new(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
       _controller.addListener(_update);
     }
   }
@@ -178,7 +178,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           DecoratedBox(
             decoration: style.decoration,
             child: TabBar(
-              tabAlignment: widget.scrollable ? TabAlignment.start : TabAlignment.fill,
+              tabAlignment: widget.scrollable ? .start : .fill,
               tabs: [for (final tab in widget.children) _Tab(style: style, label: tab.label)],
               controller: _controller._controller,
               isScrollable: widget.scrollable,

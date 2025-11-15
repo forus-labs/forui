@@ -79,13 +79,13 @@ class AnimatedToastData extends ParentDataWidget<AnimatedToasterParentData> {
 /// Parent data for use with [RenderAnimatedToaster].
 @internal
 class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
-  final AnimationTween<Size> scale = AnimationTween.size();
+  final AnimationTween<Size> scale = .size();
 
-  final AnimationTween<Offset> alignment = AnimationTween.offset();
+  final AnimationTween<Offset> alignment = .offset();
 
-  final AnimationTween<double> shift = AnimationTween.of();
+  final AnimationTween<double> shift = .of();
 
-  final AnimationTween<double> protrusion = AnimationTween.of();
+  final AnimationTween<double> protrusion = .of();
 
   /// The index of the child.
   ({int previous, int current}) index = (previous: 0, current: 0);
@@ -127,13 +127,11 @@ class AnimationTween<T> {
   final bool Function(T, T) _equal;
 
   static AnimationTween<double> of({double? begin, double? end}) =>
-      AnimationTween<double>(equal: (a, b) => (a - b).abs() < epsilon, begin: begin, end: end);
+      .new(equal: (a, b) => (a - b).abs() < epsilon, begin: begin, end: end);
 
-  static AnimationTween<Offset> offset({Offset? begin, Offset? end}) =>
-      AnimationTween<Offset>(equal: _offset, begin: begin, end: end);
+  static AnimationTween<Offset> offset({Offset? begin, Offset? end}) => .new(equal: _offset, begin: begin, end: end);
 
-  static AnimationTween<Size> size({Size? begin, Size? end}) =>
-      AnimationTween<Size>(equal: _size, begin: begin, end: end);
+  static AnimationTween<Size> size({Size? begin, Size? end}) => .new(equal: _size, begin: begin, end: end);
 
   AnimationTween({required bool Function(T, T) equal, this.begin, this.end}) : _equal = equal;
 

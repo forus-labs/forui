@@ -135,11 +135,11 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   @override
   set value(Set<T> value) {
     if (value.length < _min || (_max != null && _max < value.length)) {
-      if (_max == null) {
-        throw ArgumentError('The number of elements must be <= $_min.');
-      } else {
-        throw ArgumentError('The number of elements must be between $_min and $_max.');
-      }
+      throw ArgumentError(
+        _max == null
+            ? 'The number of elements must be <= $_min.'
+            : 'The number of elements must be between $_min and $_max.',
+      );
     }
 
     super.value = {...value};

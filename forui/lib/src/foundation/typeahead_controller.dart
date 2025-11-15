@@ -57,7 +57,7 @@ class FTypeaheadController extends TextEditingController {
       // We call super.value to avoid finding completions.
       super.value = TextEditingValue(
         text: replacement,
-        selection: TextSelection.collapsed(offset: replacement.length),
+        selection: .collapsed(offset: replacement.length),
       );
     }
   }
@@ -127,8 +127,8 @@ class FTypeaheadController extends TextEditingController {
     if (text != newText) {
       value = value.copyWith(
         text: newText,
-        selection: TextSelection.collapsed(offset: newText.length),
-        composing: TextRange.empty,
+        selection: .collapsed(offset: newText.length),
+        composing: .empty,
       );
     }
   }

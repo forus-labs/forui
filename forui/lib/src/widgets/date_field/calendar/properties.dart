@@ -53,18 +53,18 @@ class FDateFieldCalendarProperties with Diagnosticable {
 
   /// Creates calendar properties for a date picker.
   const FDateFieldCalendarProperties({
-    this.anchor = Alignment.topLeft,
-    this.inputAnchor = Alignment.bottomLeft,
+    this.anchor = .topLeft,
+    this.inputAnchor = .bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
     this.today,
-    this.initialType = FCalendarPickerType.day,
+    this.initialType = .day,
     this.autoHide = true,
   });
 

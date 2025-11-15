@@ -180,7 +180,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: .start,
     children: [
       FTappable(
         style: _style!.tappableStyle,
@@ -202,7 +202,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
           decoration: BoxDecoration(color: _style!.backgroundColor.resolve(states), borderRadius: _style!.borderRadius),
           child: Row(
             spacing: _style!.collapsibleIconSpacing,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: .spaceBetween,
             children: [
               Expanded(
                 child: Row(
@@ -237,7 +237,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
                 builder: (context, child) => FadeTransition(
                   opacity: _fade!,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: .start,
                     spacing: _style!.childrenSpacing,
                     children: widget.children,
                   ),
@@ -329,8 +329,8 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
     this.iconSpacing = 8,
     this.collapsibleIconSpacing = 8,
     this.childrenSpacing = 2,
-    this.childrenPadding = const EdgeInsets.only(left: 26, top: 2),
-    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    this.childrenPadding = const .only(left: 26, top: 2),
+    this.padding = const .symmetric(horizontal: 12, vertical: 10),
     this.motion = const FSidebarItemMotion(),
   });
 

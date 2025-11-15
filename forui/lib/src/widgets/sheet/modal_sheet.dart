@@ -193,7 +193,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   @override
   final bool barrierDismissible;
 
-  final ValueNotifier<EdgeInsets> _clipDetailsNotifier = ValueNotifier<EdgeInsets>(EdgeInsets.zero);
+  final ValueNotifier<EdgeInsets> _clipDetailsNotifier = ValueNotifier(.zero);
 
   AnimationController? _animationController;
 
@@ -242,10 +242,10 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
       useSafeArea: useSafeArea,
       builder: builder,
       onChange: (size) => _didChangeBarrierSemanticsClip(switch (side) {
-        FLayout.ttb => EdgeInsets.fromLTRB(0, size.height, 0, 0),
-        FLayout.btt => EdgeInsets.fromLTRB(0, 0, 0, size.height),
-        FLayout.ltr => EdgeInsets.fromLTRB(size.width, 0, 0, 0),
-        FLayout.rtl => EdgeInsets.fromLTRB(0, 0, size.width, 0),
+        .ttb => .fromLTRB(0, size.height, 0, 0),
+        .btt => .fromLTRB(0, 0, 0, size.height),
+        .ltr => .fromLTRB(size.width, 0, 0, 0),
+        .rtl => .fromLTRB(0, 0, size.width, 0),
       }),
       onClosing: () {
         onClosing?.call();
@@ -341,9 +341,7 @@ class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetSty
 
   /// Creates a [FSheetStyle] that inherits its colors from the given [FColors].
   FModalSheetStyle.inherit({required FColors colors})
-    : this(
-        barrierFilter: (v) => ColorFilter.mode(Color.lerp(Colors.transparent, colors.barrier, v)!, BlendMode.srcOver),
-      );
+    : this(barrierFilter: (v) => ColorFilter.mode(.lerp(Colors.transparent, colors.barrier, v)!, .srcOver));
 }
 
 /// The motion-related properties for a modal sheet.

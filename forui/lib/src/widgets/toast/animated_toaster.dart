@@ -200,7 +200,7 @@ class RenderAnimatedToaster extends RenderBox
     final baseHeight = collapsedAlignTransform.dy.isNegative ? front.size.height : firstChild!.size.height;
     final expandedSize = Size(front.size.width, baseHeight + visibleAccumulated.abs());
 
-    size = constraints.constrain(Size.lerp(collapsedSize, expandedSize, expand * data.transition)!);
+    size = constraints.constrain(.lerp(collapsedSize, expandedSize, expand * data.transition)!);
 
     final translateY = visibleAccumulated.isNegative ? -visibleAccumulated * data.transition * expand : 0.0;
     var child = firstChild;
@@ -271,10 +271,10 @@ class RenderAnimatedToaster extends RenderBox
       final thisX = (current.size.width * scaleX) * (0.5 + collapsedAlignTransform.dx * 0.5);
       final thisY = collapsedAlignTransform.dy < 0 ? 0.0 : (current.size.height * scaleY);
 
-      final alignmentBegin = data.alignment.begin ??= Offset.zero;
+      final alignmentBegin = data.alignment.begin ??= .zero;
       // We don't set data.alignment.end as this constantly changes.
       final alignmentEnd = Offset(frontX - thisX, frontY - thisY);
-      final alignment = data.alignment.value = Offset.lerp(alignmentBegin, alignmentEnd, data.transition)!;
+      final alignment = data.alignment.value = .lerp(alignmentBegin, alignmentEnd, data.transition)!;
 
       // Calculate the amount to shift the toast such that it protrudes slightly above the toast in front.
       final begin = data.protrusion.begin ??= style.collapsedProtrusion * (log(data.index.previous + 1) / log(2));
@@ -284,7 +284,7 @@ class RenderAnimatedToaster extends RenderBox
       context.pushTransform(
         needsCompositing,
         data.offset + offset + (alignment + collapsedAlignTransform * protrusion) * (1 - expand),
-        Matrix4.diagonal3Values(scaleX, scaleY, 1.0),
+        .diagonal3Values(scaleX, scaleY, 1.0),
         (context, offset) => context.paintChild(current!, offset),
       );
 

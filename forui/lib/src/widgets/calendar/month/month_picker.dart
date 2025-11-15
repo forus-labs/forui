@@ -31,22 +31,23 @@ class MonthPicker extends StatefulWidget {
     required this.focused,
     required this.onPress,
     super.key,
-  }) : assert(currentYear == currentYear.truncate(to: DateUnit.years), 'currentYear must be truncated to years');
+  }) : assert(currentYear == currentYear.truncate(to: .years), 'currentYear must be truncated to years');
 
   @override
   State<MonthPicker> createState() => _MonthPickerState();
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('yearMonthStyle', yearMonthStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('dayStyle', dayStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('currentYear', currentYear, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('start', start, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('end', end, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('today', today, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('focused', focused, level: DiagnosticLevel.debug))
-      ..add(ObjectFlagProperty.has('onPress', onPress, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty('yearMonthStyle', yearMonthStyle, level: .debug))
+      ..add(DiagnosticsProperty('dayStyle', dayStyle, level: .debug))
+      ..add(DiagnosticsProperty('currentYear', currentYear, level: .debug))
+      ..add(DiagnosticsProperty('start', start, level: .debug))
+      ..add(DiagnosticsProperty('end', end, level: .debug))
+      ..add(DiagnosticsProperty('today', today, level: .debug))
+      ..add(DiagnosticsProperty('focused', focused, level: .debug))
+      ..add(ObjectFlagProperty.has('onPress', onPress, level: .debug));
   }
 }
 
@@ -65,9 +66,9 @@ class _MonthPickerState extends State<MonthPicker> {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 5.0),
+    padding: const .only(top: 5.0),
     child: GridView(
-      padding: EdgeInsets.zero,
+      padding: .zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: YearPicker.columns,
         mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
@@ -79,7 +80,7 @@ class _MonthPickerState extends State<MonthPicker> {
             style: widget.yearMonthStyle,
             date: month,
             focusNode: _months[i],
-            current: widget.today.truncate(to: DateUnit.months) == month,
+            current: widget.today.truncate(to: .months) == month,
             selectable: widget.start <= month && month <= widget.end,
             format: (date) => (FLocalizations.of(context) ?? FDefaultLocalizations()).abbreviatedMonth(date.toNative()),
             onPress: widget.onPress,

@@ -88,7 +88,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
 
     _controller =
         widget.controller ??
-        FCalendarController.date(initialSelection: widget.initialSelection?.toNative(), toggleable: widget.toggleable);
+        .date(initialSelection: widget.initialSelection?.toNative(), toggleable: widget.toggleable);
     _controller.addValueListener(_onChange);
 
     final start = ((widget.initialScroll ?? widget.today).difference(widget.start).inDays) * _width;
@@ -136,9 +136,9 @@ class _CalendarLayoutState extends State<CalendarLayout> {
 
     // We use the height to estimate the width.
     return [
-      height(widget.style, const {WidgetState.selected}),
-      height(widget.style, const {WidgetState.selected, WidgetState.hovered}),
-      height(widget.style, const {WidgetState.hovered}),
+      height(widget.style, const {.selected}),
+      height(widget.style, const {.selected, .hovered}),
+      height(widget.style, const {.hovered}),
       height(widget.style, const {}),
     ].max!;
   }
@@ -150,14 +150,14 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     final placeholder = widget.today.toNative();
     return SpeculativeLayout(
       children: [
-        ItemContent(style: widget.style, states: const {WidgetState.selected}, date: placeholder),
-        ItemContent(style: widget.style, states: const {WidgetState.selected, WidgetState.hovered}, date: placeholder),
+        ItemContent(style: widget.style, states: const {.selected}, date: placeholder),
+        ItemContent(style: widget.style, states: const {.selected, .hovered}, date: placeholder),
         ItemContent(style: widget.style, states: const {}, date: placeholder),
-        ItemContent(style: widget.style, states: const {WidgetState.hovered}, date: placeholder),
+        ItemContent(style: widget.style, states: const {.hovered}, date: placeholder),
         ListView.builder(
           controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.zero,
+          scrollDirection: .horizontal,
+          padding: .zero,
           physics: widget.physics,
           cacheExtent: widget.cacheExtent,
           keyboardDismissBehavior: widget.keyboardDismissBehavior,

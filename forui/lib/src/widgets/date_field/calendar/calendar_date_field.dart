@@ -41,25 +41,25 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   _CalendarDateField({
     this.format,
     this.hint,
-    this.textAlign = TextAlign.start,
+    this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = MouseCursor.defer,
+    this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.anchor = Alignment.topLeft,
-    this.inputAnchor = Alignment.bottomLeft,
+    this.anchor = .topLeft,
+    this.inputAnchor = .bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
     this.today,
-    this.initialType = FCalendarPickerType.day,
+    this.initialType = .day,
     this.autoHide = true,
     super.controller,
     super.style,
@@ -75,7 +75,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     super.onChange,
     super.onSaved,
     super.onReset,
-    super.autovalidateMode = AutovalidateMode.onUnfocus,
+    super.autovalidateMode = .onUnfocus,
     super.forceErrorText,
     super.errorBuilder,
     super.key,
@@ -102,8 +102,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
 }
 
 class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
-  final TextEditingController _textController = TextEditingController();
-  late FocusNode _focus = widget.focusNode ?? FocusNode(debugLabel: 'CalendarDatePicker');
+  final TextEditingController _textController = .new();
+  late FocusNode _focus = widget.focusNode ?? .new(debugLabel: 'CalendarDatePicker');
   DateFormat? _format;
 
   @override
@@ -121,7 +121,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       if (old.focusNode == null) {
         _focus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'CalendarDatePicker');
+      _focus = widget.focusNode ?? .new(debugLabel: 'CalendarDatePicker');
     }
 
     if (widget.controller != old.controller) {
@@ -132,7 +132,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         _controller.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FDateFieldController(vsync: this, initialDate: _controller.value);
+      _controller = widget.controller ?? .new(vsync: this, initialDate: _controller.value);
       _controller._calendar.addListener(_updateTextController);
       _controller.addValueListener(widget.onChange);
       _updateTextController();
@@ -144,7 +144,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _format = DateFormat.yMMMd(FLocalizations.of(context)?.localeName);
+    _format = .yMMMd(FLocalizations.of(context)?.localeName);
     _updateTextController();
   }
 
@@ -205,7 +205,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
           autofocus: true,
           fieldFocusNode: _focus,
           child: CallbackShortcuts(
-            bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
+            bindings: {const SingleActivator(.enter): _onTap},
             child: widget.builder(context, style, states, field),
           ),
         ),
@@ -256,7 +256,7 @@ class _CalendarPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => FPopover(
-    traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
+    traversalEdgeBehavior: .parentScope,
     style: style.popoverStyle,
     controller: controller.calendar,
     popoverAnchor: properties.anchor,
@@ -266,7 +266,7 @@ class _CalendarPopover extends StatelessWidget {
     offset: properties.offset,
     hideRegion: properties.hideRegion,
     autofocus: autofocus,
-    shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
+    shortcuts: {const SingleActivator(.escape): _hide},
     popoverBuilder: (_, _) => TextFieldTapRegion(
       child: ValueListenableBuilder(
         valueListenable: controller._calendar,
@@ -275,8 +275,8 @@ class _CalendarPopover extends StatelessWidget {
           controller: controller._calendar,
           initialMonth: switch (value) {
             null => null,
-            _ when value.isBefore(properties.start ?? DateTime.utc(1900)) => properties.today,
-            _ when value.isAfter(properties.end ?? DateTime.utc(2100)) => properties.today,
+            _ when value.isBefore(properties.start ?? .utc(1900)) => properties.today,
+            _ when value.isAfter(properties.end ?? .utc(2100)) => properties.today,
             _ => value,
           },
           onPress: properties.autoHide ? (_) => _hide() : null,

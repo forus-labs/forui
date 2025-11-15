@@ -28,7 +28,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) => _Outline(
     style?.call(context.theme.style.focusedOutlineStyle) ?? context.theme.style.focusedOutlineStyle,
-    Directionality.maybeOf(context) ?? TextDirection.ltr,
+    Directionality.maybeOf(context) ?? .ltr,
     focused: focused,
   );
 
@@ -37,7 +37,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   void updateRenderObject(BuildContext context, _Outline outline) {
     outline
       ..style = style?.call(context.theme.style.focusedOutlineStyle) ?? context.theme.style.focusedOutlineStyle
-      ..textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr
+      ..textDirection = Directionality.maybeOf(context) ?? .ltr
       ..focused = focused;
   }
 
@@ -64,7 +64,7 @@ class _Outline extends RenderProxyBox {
       final radius = _style.borderRadius.resolve(_textDirection);
       context.canvas.drawPath(
         Path()..addRRect(
-          RRect.fromRectAndCorners(
+          .fromRectAndCorners(
             (offset & child!.size).inflate(_style.spacing),
             topLeft: radius.topLeft,
             topRight: radius.topRight,
@@ -73,7 +73,7 @@ class _Outline extends RenderProxyBox {
           ),
         ),
         Paint()
-          ..style = PaintingStyle.stroke
+          ..style = .stroke
           ..color = _style.color
           ..strokeWidth = _style.width,
       );

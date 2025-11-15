@@ -160,23 +160,23 @@ final class FColors with Diagnosticable {
        assert(0 <= disabledOpacity && disabledOpacity <= 1, 'disabledOpacity must be between 0 and 1.');
 
   /// Creates a linear interpolation between two [FColors] using the given factor [t].
-  factory FColors.lerp(FColors a, FColors b, double t) => FColors(
+  factory FColors.lerp(FColors a, FColors b, double t) => .new(
     brightness: t < 0.5 ? a.brightness : b.brightness,
     systemOverlayStyle: t < 0.5 ? a.systemOverlayStyle : b.systemOverlayStyle,
-    barrier: Color.lerp(a.barrier, b.barrier, t)!,
-    background: Color.lerp(a.background, b.background, t)!,
-    foreground: Color.lerp(a.foreground, b.foreground, t)!,
-    primary: Color.lerp(a.primary, b.primary, t)!,
-    primaryForeground: Color.lerp(a.primaryForeground, b.primaryForeground, t)!,
-    secondary: Color.lerp(a.secondary, b.secondary, t)!,
-    secondaryForeground: Color.lerp(a.secondaryForeground, b.secondaryForeground, t)!,
-    muted: Color.lerp(a.muted, b.muted, t)!,
-    mutedForeground: Color.lerp(a.mutedForeground, b.mutedForeground, t)!,
-    destructive: Color.lerp(a.destructive, b.destructive, t)!,
-    destructiveForeground: Color.lerp(a.destructiveForeground, b.destructiveForeground, t)!,
-    error: Color.lerp(a.error, b.error, t)!,
-    errorForeground: Color.lerp(a.errorForeground, b.errorForeground, t)!,
-    border: Color.lerp(a.border, b.border, t)!,
+    barrier: .lerp(a.barrier, b.barrier, t)!,
+    background: .lerp(a.background, b.background, t)!,
+    foreground: .lerp(a.foreground, b.foreground, t)!,
+    primary: .lerp(a.primary, b.primary, t)!,
+    primaryForeground: .lerp(a.primaryForeground, b.primaryForeground, t)!,
+    secondary: .lerp(a.secondary, b.secondary, t)!,
+    secondaryForeground: .lerp(a.secondaryForeground, b.secondaryForeground, t)!,
+    muted: .lerp(a.muted, b.muted, t)!,
+    mutedForeground: .lerp(a.mutedForeground, b.mutedForeground, t)!,
+    destructive: .lerp(a.destructive, b.destructive, t)!,
+    destructiveForeground: .lerp(a.destructiveForeground, b.destructiveForeground, t)!,
+    error: .lerp(a.error, b.error, t)!,
+    errorForeground: .lerp(a.errorForeground, b.errorForeground, t)!,
+    border: .lerp(a.border, b.border, t)!,
     hoverLighten: lerpDouble(a.hoverLighten, b.hoverLighten, t)!,
     hoverDarken: lerpDouble(a.hoverDarken, b.hoverDarken, t)!,
     disabledOpacity: lerpDouble(a.disabledOpacity, b.disabledOpacity, t)!,
@@ -205,7 +205,7 @@ final class FColors with Diagnosticable {
   ///
   /// [FColors.background] is used if [background] is not given.
   Color disable(Color foreground, [Color? background]) =>
-      Color.alphaBlend(foreground.withValues(alpha: disabledOpacity), background ?? this.background);
+      .alphaBlend(foreground.withValues(alpha: disabledOpacity), background ?? this.background);
 
   /// Returns a copy of this [FColors] with the given properties replaced.
   ///
@@ -242,7 +242,7 @@ final class FColors with Diagnosticable {
     double? hoverLighten,
     double? hoverDarken,
     double? disabledOpacity,
-  }) => FColors(
+  }) => .new(
     brightness: brightness ?? this.brightness,
     systemOverlayStyle: systemOverlayStyle ?? this.systemOverlayStyle,
     barrier: barrier ?? this.barrier,

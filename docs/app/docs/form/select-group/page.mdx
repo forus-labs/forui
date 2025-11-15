@@ -29,15 +29,15 @@ A group of items that allow users to make a selection from a set of options.
       label: const Text('Sidebar'),
       description: const Text('These will be shown in the sidebar.'),
       children: [
-        FCheckbox.grouped(
+        .checkbox(
           value: Sidebar.recents,
           label: const Text('Recents'),
         ),
-        FCheckbox.grouped(
+        .checkbox(
           value: Sidebar.home,
           label: const Text('Home'),
         ),
-        FCheckbox.grouped(
+        .checkbox(
           value: Sidebar.applications,
           label: const Text('Applications'),
         ),
@@ -69,12 +69,12 @@ FSelectGroup<Value>(
   onChange: (all) => print(all),
   onSelect: (selection) => print(selection),
   children: [
-    FCheckbox.grouped(
+    .checkbox(
       value: Value.checkbox,
       label: const Text('Checkbox'),
     ),
     // or
-    FRadio.grouped(
+    .radio(
       value: Value.radio,
       label: const Text('Radio'),
     ),
@@ -118,19 +118,19 @@ FSelectGroup<Value>(
                       description: const Text('Your favorite language.'),
                       validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
                       children: [
-                        FCheckbox.grouped(
+                        .checkbox(
                           value: Language.dart,
                           label: const Text('Dart'),
                         ),
-                        FCheckbox.grouped(
+                        .checkbox(
                           value: Language.java,
                           label: const Text('Java'),
                         ),
-                        FCheckbox.grouped(
+                        .checkbox(
                           value: Language.rust,
                           label: const Text('Rust'),
                         ),
-                        FCheckbox.grouped(
+                        .checkbox(
                           value: Language.python,
                           label: const Text('Python'),
                         ),
@@ -198,15 +198,15 @@ FSelectGroup<Value>(
                   description: const Text('Select the notifications.'),
                   validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
                   children: [
-                    FRadio.grouped(
+                    .radio(
                       value: Notification.all,
                       label: const Text('All new messages'),
                     ),
-                    FRadio.grouped(
+                    .radio(
                       value: Notification.direct,
                       label: const Text('Direct messages and mentions'),
                     ),
-                    FRadio.grouped(
+                    .radio(
                       value: Notification.nothing,
                       label: const Text('Nothing'),
                     ),

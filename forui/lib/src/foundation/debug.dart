@@ -31,8 +31,8 @@ bool debugCheckInclusiveRange<T>(int min, int? max) {
     if (min < 0 && (max != null && max < 0)) {
       throw FlutterError.fromParts([
         ErrorSummary("$T's min < 0 and max < 0."),
-        IntProperty('The offending min value is', min, style: DiagnosticsTreeStyle.errorProperty),
-        IntProperty('The offending max value is', max, style: DiagnosticsTreeStyle.errorProperty),
+        IntProperty('The offending min value is', min, style: .errorProperty),
+        IntProperty('The offending max value is', max, style: .errorProperty),
         ErrorHint('To fix this, ensure that both min and max are non-negative.'),
       ]);
     }
@@ -40,7 +40,7 @@ bool debugCheckInclusiveRange<T>(int min, int? max) {
     if (min < 0) {
       throw FlutterError.fromParts([
         ErrorSummary("$T's min < 0."),
-        IntProperty('The offending min value is', min, style: DiagnosticsTreeStyle.errorProperty),
+        IntProperty('The offending min value is', min, style: .errorProperty),
         ErrorHint('To fix this, ensure that min is non-negative.'),
       ]);
     }
@@ -48,7 +48,7 @@ bool debugCheckInclusiveRange<T>(int min, int? max) {
     if (max != null && max < 0) {
       throw FlutterError.fromParts([
         ErrorSummary("$T's max < 0."),
-        IntProperty('The offending max value is', max, style: DiagnosticsTreeStyle.errorProperty),
+        IntProperty('The offending max value is', max, style: .errorProperty),
         ErrorHint('To fix this, ensure that max is non-negative.'),
       ]);
     }
@@ -56,8 +56,8 @@ bool debugCheckInclusiveRange<T>(int min, int? max) {
     if (max != null && max < min) {
       throw FlutterError.fromParts([
         ErrorSummary("$T's max < min."),
-        IntProperty('The offending min value is', min, style: DiagnosticsTreeStyle.errorProperty),
-        IntProperty('The offending max value is', max, style: DiagnosticsTreeStyle.errorProperty),
+        IntProperty('The offending min value is', min, style: .errorProperty),
+        IntProperty('The offending max value is', max, style: .errorProperty),
         ErrorHint('To fix this, ensure that min <= max.'),
       ]);
     }

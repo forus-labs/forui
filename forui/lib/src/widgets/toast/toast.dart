@@ -37,7 +37,7 @@ class FToast extends StatelessWidget {
       child: Padding(
         padding: style.padding,
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             if (icon case final icon?) ...[
               IconTheme(data: style.iconStyle, child: icon),
@@ -45,8 +45,8 @@ class FToast extends StatelessWidget {
             ],
             Flexible(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: .start,
+                mainAxisSize: .min,
                 spacing: style.titleSpacing,
                 children: [
                   DefaultTextStyle(style: style.titleTextStyle, maxLines: 100, child: title),

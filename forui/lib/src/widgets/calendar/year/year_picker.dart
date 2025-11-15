@@ -41,14 +41,14 @@ class YearPicker extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('yearMonthStyle', yearMonthStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('dayStyle', dayStyle, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('startYear', startYear, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('start', start, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('end', end, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('today', today, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('focused', focused, level: DiagnosticLevel.debug))
-      ..add(ObjectFlagProperty.has('onPress', onPress, level: DiagnosticLevel.debug));
+      ..add(DiagnosticsProperty('yearMonthStyle', yearMonthStyle, level: .debug))
+      ..add(DiagnosticsProperty('dayStyle', dayStyle, level: .debug))
+      ..add(DiagnosticsProperty('startYear', startYear, level: .debug))
+      ..add(DiagnosticsProperty('start', start, level: .debug))
+      ..add(DiagnosticsProperty('end', end, level: .debug))
+      ..add(DiagnosticsProperty('today', today, level: .debug))
+      ..add(DiagnosticsProperty('focused', focused, level: .debug))
+      ..add(ObjectFlagProperty.has('onPress', onPress, level: .debug));
   }
 }
 

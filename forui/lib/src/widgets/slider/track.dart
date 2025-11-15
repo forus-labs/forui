@@ -16,7 +16,7 @@ class Track extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :semanticFormatterCallback) = InheritedData.of(context);
+    final InheritedData(:style, :layout, :semanticFormatterCallback) = .of(context);
     final controller = InheritedController.of(context);
     final position = layout.position;
 
@@ -32,7 +32,7 @@ class Track extends StatelessWidget {
         enabled: true,
         value: semanticFormatterCallback(controller.selection),
         child: Stack(
-          alignment: Alignment.center,
+          alignment: .center,
           children: [
             const _GestureDetector(),
             if (controller.extendable.min)
@@ -60,14 +60,14 @@ class _GestureDetector extends StatefulWidget {
 }
 
 class _GestureDetectorState extends State<_GestureDetector> {
-  static const tappable = {FSliderInteraction.tap, FSliderInteraction.tapAndSlideThumb};
+  static const Set<FSliderInteraction> tappable = {.tap, .tapAndSlideThumb};
 
   ({double min, double max})? _origin;
   Offset? _pointerOrigin;
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled) = InheritedData.of(context);
+    final InheritedData(:style, :layout, :trackHitRegionCrossExtent, :enabled) = .of(context);
     final controller = InheritedController.of(context);
 
     Widget track = const Center(child: _Track());
@@ -178,7 +178,7 @@ class _Track extends StatelessWidget {
         height: height,
         width: width,
         child: Stack(
-          alignment: Alignment.center,
+          alignment: .center,
           children: [
             for (var FSliderMark(style: markStyle, :value, :tick) in marks)
               if (tick)
@@ -203,7 +203,7 @@ class ActiveTrack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout) = InheritedData.of(context);
+    final InheritedData(:style, :layout) = .of(context);
     final states = InheritedStates.of(context).states;
     final crossAxisExtent = style.crossAxisExtent;
     final rawOffset = InheritedController.of(context, InheritedController.rawOffset).selection.rawOffset;
@@ -224,23 +224,23 @@ class ActiveTrack extends StatelessWidget {
 @internal
 extension Layouts on FLayout {
   double Function(Offset) translateTrackTap(double extent, double thumbSize) => switch (this) {
-    FLayout.ltr => (offset) => offset.dx - thumbSize / 2,
-    FLayout.rtl => (offset) => extent - offset.dx + thumbSize / 2,
-    FLayout.ttb => (offset) => offset.dy - thumbSize / 2,
-    FLayout.btt => (offset) => extent - offset.dy + thumbSize / 2,
+    .ltr => (offset) => offset.dx - thumbSize / 2,
+    .rtl => (offset) => extent - offset.dx + thumbSize / 2,
+    .ttb => (offset) => offset.dy - thumbSize / 2,
+    .btt => (offset) => extent - offset.dy + thumbSize / 2,
   };
 
   double Function(Offset) translateTrackDrag() => switch (this) {
-    FLayout.ltr => (delta) => delta.dx,
-    FLayout.rtl => (delta) => -delta.dx,
-    FLayout.ttb => (delta) => delta.dy,
-    FLayout.btt => (delta) => -delta.dy,
+    .ltr => (delta) => delta.dx,
+    .rtl => (delta) => -delta.dx,
+    .ttb => (delta) => delta.dy,
+    .btt => (delta) => -delta.dy,
   };
 
   Positioned Function({required double offset, required Widget child}) get position => switch (this) {
-    FLayout.ltr => ({required offset, required child}) => Positioned(left: offset, child: child),
-    FLayout.rtl => ({required offset, required child}) => Positioned(right: offset, child: child),
-    FLayout.ttb => ({required offset, required child}) => Positioned(top: offset, child: child),
-    FLayout.btt => ({required offset, required child}) => Positioned(bottom: offset, child: child),
+    .ltr => ({required offset, required child}) => Positioned(left: offset, child: child),
+    .rtl => ({required offset, required child}) => Positioned(right: offset, child: child),
+    .ttb => ({required offset, required child}) => Positioned(top: offset, child: child),
+    .btt => ({required offset, required child}) => Positioned(bottom: offset, child: child),
   };
 }

@@ -25,8 +25,8 @@ abstract class TimePicker extends StatelessWidget {
     required this.padding,
     required this.hourInterval,
     required this.minuteInterval,
-  }) : start = EdgeInsetsDirectional.only(start: style.padding.start),
-       end = EdgeInsetsDirectional.only(end: style.padding.end);
+  }) : start = .directional(start: style.padding.start),
+       end = .directional(end: style.padding.end);
 
   factory TimePicker({
     required FTimePickerController controller,
@@ -133,8 +133,8 @@ class _Western12Picker extends TimePicker {
 
     final periodPicker = FPickerWheel(
       children: [
-        Padding(padding: periodPadding, child: Text(period.format(DateTime.utc(1970, 1, 1, 1)))),
-        Padding(padding: periodPadding, child: Text(period.format(DateTime.utc(1970, 1, 1, 13)))),
+        Padding(padding: periodPadding, child: Text(period.format(.utc(1970, 1, 1, 1)))),
+        Padding(padding: periodPadding, child: Text(period.format(.utc(1970, 1, 1, 13)))),
       ],
     );
 
@@ -213,8 +213,8 @@ class _Eastern12Picker extends TimePicker {
 
     final periodPicker = FPickerWheel(
       children: [
-        Padding(padding: periodPadding, child: Text(period.format(DateTime.utc(1970, 1, 1, 1)))),
-        Padding(padding: periodPadding, child: Text(period.format(DateTime.utc(1970, 1, 1, 13)))),
+        Padding(padding: periodPadding, child: Text(period.format(.utc(1970, 1, 1, 1)))),
+        Padding(padding: periodPadding, child: Text(period.format(.utc(1970, 1, 1, 13)))),
       ],
     );
 

@@ -11,7 +11,90 @@ import 'package:forui/forui.dart';
 part 'item_group.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can group items and be used in a [FItemGroup.merge].
-mixin FItemGroupMixin on Widget {}
+mixin FItemGroupMixin on Widget {
+  /// {@macro forui.widgets.FItemGroup.new}
+  static FItemGroup group({
+    required List<FItemMixin> children,
+    FItemGroupStyle Function(FItemGroupStyle style)? style,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    bool? enabled,
+    FItemDivider divider = .none,
+    String? semanticsLabel,
+    Key? key,
+  }) => .new(
+    style: style,
+    scrollController: scrollController,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    enabled: enabled,
+    divider: divider,
+    semanticsLabel: semanticsLabel,
+    key: key,
+    children: children,
+  );
+
+  /// {@macro forui.widgets.FItemGroup.builder}
+  static FItemGroup builder({
+    required NullableIndexedWidgetBuilder itemBuilder,
+    int? count,
+    FItemGroupStyle Function(FItemGroupStyle style)? style,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    bool? enabled,
+    FItemDivider divider = .none,
+    String? semanticsLabel,
+    Key? key,
+  }) => .builder(
+    itemBuilder: itemBuilder,
+    count: count,
+    style: style,
+    scrollController: scrollController,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    enabled: enabled,
+    divider: divider,
+    semanticsLabel: semanticsLabel,
+    key: key,
+  );
+
+  /// {@macro forui.widgets.FItemGroup.merge}
+  static FItemGroup merge({
+    required List<FItemGroupMixin> children,
+    FItemGroupStyle Function(FItemGroupStyle style)? style,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    bool? enabled,
+    FItemDivider divider = .full,
+    String? semanticsLabel,
+    Key? key,
+  }) => .merge(
+    style: style,
+    scrollController: scrollController,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    enabled: enabled,
+    divider: divider,
+    semanticsLabel: semanticsLabel,
+    key: key,
+    children: children,
+  );
+}
 
 /// An item group that groups multiple [FItemMixin]s together.
 ///
@@ -118,17 +201,19 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   // ignore: avoid_positional_boolean_parameters
   final Widget Function(FItemGroupStyle style, bool enabled) _builder;
 
+  /// {@template forui.widgets.FItemGroup.new}
   /// Creates a [FItemGroup].
+  /// {@endtemplate}
   FItemGroup({
     required List<FItemMixin> children,
     this.style,
     this.scrollController,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
-    this.divider = FItemDivider.none,
+    this.divider = .none,
     this.semanticsLabel,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
@@ -149,9 +234,9 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          ],
        ));
 
+  /// {@template forui.widgets.FItemGroup.builder}
   /// Creates a [FItemGroup] that lazily builds its children.
   ///
-  /// {@template forui.widgets.FItemGroup.builder}
   /// The [itemBuilder] is called for each item that should be built. The current level's [FInheritedItemData] is **not**
   /// visible to `itemBuilder`.
   /// * It may return null to signify the end of the group.
@@ -172,11 +257,11 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     this.style,
     this.scrollController,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
-    this.divider = FItemDivider.none,
+    this.divider = .none,
     this.semanticsLabel,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
@@ -202,19 +287,21 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          },
        ));
 
+  /// {@template forui.widgets.FItemGroup.merge}
   /// Creates a [FItemGroup] that merges multiple [FItemGroupMixin]s together.
   ///
   /// All group labels will be ignored.
+  /// {@endtemplate}
   FItemGroup.merge({
     required List<FItemGroupMixin> children,
     this.style,
     this.scrollController,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
-    this.divider = FItemDivider.full,
+    this.divider = .full,
     this.semanticsLabel,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
@@ -257,9 +344,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
         child: Container(
           decoration: style.decoration,
           child: ClipRRect(
-            borderRadius:
-                style.decoration.borderRadius?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
-                BorderRadius.zero,
+            borderRadius: style.decoration.borderRadius?.resolve(Directionality.maybeOf(context) ?? .ltr) ?? .zero,
             child: FItemGroupStyleData(
               style: style,
               child: CustomScrollView(
@@ -356,8 +441,8 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        itemStyle: FItemStyle.inherit(colors: colors, typography: typography, style: style),
-        dividerColor: FWidgetStateMap.all(colors.border),
+        itemStyle: .inherit(colors: colors, typography: typography, style: style),
+        dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
       );
 }

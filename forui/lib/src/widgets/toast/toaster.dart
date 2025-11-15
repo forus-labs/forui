@@ -134,40 +134,40 @@ enum FToastAlignment {
   /// Aligns the toasts to the top start of the screen, depending on the locale's text direction.
   ///
   /// Top left in LTR locales, top right in RTL locales.
-  topStart(AlignmentDirectional.topStart, Alignment.bottomCenter),
+  topStart(AlignmentDirectional.topStart, .bottomCenter),
 
   /// Aligns the toasts to the start of the screen, depending on the locale's text direction.
   ///
   /// Top right in LTR locales, top left in RTL locales.
-  topEnd(AlignmentDirectional.topEnd, Alignment.bottomCenter),
+  topEnd(AlignmentDirectional.topEnd, .bottomCenter),
 
   /// Aligns the toasts to the top left of the screen.
-  topLeft(Alignment.topLeft, Alignment.bottomCenter),
+  topLeft(.topLeft, .bottomCenter),
 
   /// Aligns the toasts to the top right of the screen.
-  topRight(Alignment.topRight, Alignment.bottomCenter),
+  topRight(.topRight, .bottomCenter),
 
   /// Aligns the toasts to the top center of the screen.
-  topCenter(Alignment.topCenter, Alignment.bottomCenter),
+  topCenter(.topCenter, .bottomCenter),
 
   /// Aligns the toasts to the bottom start of the screen, depending on the locale's text direction.
   ///
   /// Bottom left in LTR locales, bottom right in RTL locales.
-  bottomStart(AlignmentDirectional.bottomStart, Alignment.topCenter),
+  bottomStart(AlignmentDirectional.bottomStart, .topCenter),
 
   /// Aligns the toasts to the bottom end of the screen, depending on the locale's text direction.
   ///
   /// Bottom right in LTR locales, bottom right in RTL locales.
-  bottomEnd(AlignmentDirectional.bottomEnd, Alignment.topCenter),
+  bottomEnd(AlignmentDirectional.bottomEnd, .topCenter),
 
   /// Aligns the toasts to the bottom left of the screen.
-  bottomLeft(Alignment.bottomLeft, Alignment.topCenter),
+  bottomLeft(.bottomLeft, .topCenter),
 
   /// Aligns the toasts to the bottom right of the screen.
-  bottomRight(Alignment.bottomRight, Alignment.topCenter),
+  bottomRight(.bottomRight, .topCenter),
 
   /// Aligns the toasts to the bottom center of the screen.
-  bottomCenter(Alignment.bottomCenter, Alignment.topCenter);
+  bottomCenter(.bottomCenter, .topCenter);
 
   final AlignmentGeometry _alignment;
   final Alignment _toastAlignment;
@@ -229,10 +229,10 @@ class FToasterState extends State<FToaster> {
   }) {
     context ??= this.context;
 
-    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final direction = Directionality.maybeOf(context) ?? .ltr;
     final toasterStyle = widget.style?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle;
     final resolved = (alignment ?? toasterStyle.toastAlignment)._alignment.resolve(direction);
-    final directions = swipeToDismiss ?? [if (resolved.x < 1) AxisDirection.left else AxisDirection.right];
+    final directions = swipeToDismiss ?? [if (resolved.x < 1) .left else .right];
 
     final entry = ToasterEntry(
       style?.call(toasterStyle.toastStyle) ?? toasterStyle.toastStyle,
@@ -264,7 +264,7 @@ class FToasterState extends State<FToaster> {
       return;
     }
 
-    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final direction = Directionality.maybeOf(context) ?? .ltr;
     if (_entries[entry.alignment.resolve(direction)]?.$2 case final entries?) {
       setState(() {
         entries.remove(entry);
@@ -309,7 +309,7 @@ class FToasterState extends State<FToaster> {
       );
     }
 
-    return Stack(clipBehavior: Clip.none, fit: StackFit.passthrough, children: children);
+    return Stack(clipBehavior: .none, fit: .passthrough, children: children);
   }
 }
 

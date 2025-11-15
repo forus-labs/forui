@@ -137,20 +137,20 @@ final class FTypography with Diagnosticable {
       assert(defaultFontFamily.isNotEmpty, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
 
   /// Creates a linear interpolation between two [FTypography]s using the given factor [t].
-  factory FTypography.lerp(FTypography a, FTypography b, double t) => FTypography(
+  factory FTypography.lerp(FTypography a, FTypography b, double t) => .new(
     defaultFontFamily: t < 0.5 ? a.defaultFontFamily : b.defaultFontFamily,
-    xs: TextStyle.lerp(a.xs, b.xs, t)!,
-    sm: TextStyle.lerp(a.sm, b.sm, t)!,
-    base: TextStyle.lerp(a.base, b.base, t)!,
-    lg: TextStyle.lerp(a.lg, b.lg, t)!,
-    xl: TextStyle.lerp(a.xl, b.xl, t)!,
-    xl2: TextStyle.lerp(a.xl2, b.xl2, t)!,
-    xl3: TextStyle.lerp(a.xl3, b.xl3, t)!,
-    xl4: TextStyle.lerp(a.xl4, b.xl4, t)!,
-    xl5: TextStyle.lerp(a.xl5, b.xl5, t)!,
-    xl6: TextStyle.lerp(a.xl6, b.xl6, t)!,
-    xl7: TextStyle.lerp(a.xl7, b.xl7, t)!,
-    xl8: TextStyle.lerp(a.xl8, b.xl8, t)!,
+    xs: .lerp(a.xs, b.xs, t)!,
+    sm: .lerp(a.sm, b.sm, t)!,
+    base: .lerp(a.base, b.base, t)!,
+    lg: .lerp(a.lg, b.lg, t)!,
+    xl: .lerp(a.xl, b.xl, t)!,
+    xl2: .lerp(a.xl2, b.xl2, t)!,
+    xl3: .lerp(a.xl3, b.xl3, t)!,
+    xl4: .lerp(a.xl4, b.xl4, t)!,
+    xl5: .lerp(a.xl5, b.xl5, t)!,
+    xl6: .lerp(a.xl6, b.xl6, t)!,
+    xl7: .lerp(a.xl7, b.xl7, t)!,
+    xl8: .lerp(a.xl8, b.xl8, t)!,
   );
 
   /// Scales the fields of this [FTypography] by the given fields.
@@ -167,7 +167,7 @@ final class FTypography with Diagnosticable {
   /// print(scaled.base.fontSize); // 30
   /// ```
   @useResult
-  FTypography scale({double sizeScalar = 1}) => FTypography(
+  FTypography scale({double sizeScalar = 1}) => .new(
     defaultFontFamily: defaultFontFamily,
     xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
     sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),

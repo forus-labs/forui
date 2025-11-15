@@ -53,11 +53,11 @@ class FAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.avatarStyle) ?? context.theme.avatarStyle;
     return Container(
-      alignment: Alignment.center,
+      alignment: .center,
       height: size,
       width: size,
-      decoration: BoxDecoration(color: style.backgroundColor, shape: BoxShape.circle),
-      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(color: style.backgroundColor, shape: .circle),
+      clipBehavior: .hardEdge,
       child: DefaultTextStyle(style: style.textStyle, child: child),
     );
   }

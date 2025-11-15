@@ -71,25 +71,25 @@ class DetailedAutocompletePage extends Sample {
       contentBuilder: (context, query, suggestions) => [
         for (final suggestion in suggestions)
           switch (suggestion) {
-            'Bug' => FAutocompleteItem(
+            'Bug' => .item(
               value: 'Bug',
               prefix: const Icon(FIcons.bug),
               title: const Text('Bug'),
               subtitle: const Text('An unexpected problem or behavior'),
             ),
-            'Feature' => FAutocompleteItem(
+            'Feature' => .item(
               value: 'Feature',
               prefix: const Icon(FIcons.filePlus2),
               title: const Text('Feature'),
               subtitle: const Text('A new feature or enhancement'),
             ),
-            'Question' => FAutocompleteItem(
+            'Question' => .item(
               value: 'Question',
               prefix: const Icon(FIcons.messageCircleQuestionMark),
               title: const Text('Question'),
               subtitle: const Text('A question or clarification'),
             ),
-            _ => FAutocompleteItem(value: suggestion),
+            _ => .item(value: suggestion),
           },
       ],
     ),
@@ -138,17 +138,17 @@ class DividerAutocompletePage extends Sample {
         return items.where((item) => item.toLowerCase().contains(query.toLowerCase()));
       },
       contentBuilder: (context, query, suggestions) => <FAutocompleteItemMixin>[
-        FAutocompleteSection.rich(
+        .richSection(
           label: const Text('Level 1'),
           divider: FItemDivider.indented,
           children: [
-            if (suggestions.contains('1A')) FAutocompleteItem(value: '1A'),
-            if (suggestions.contains('1B')) FAutocompleteItem(value: '1B'),
+            if (suggestions.contains('1A')) .item(value: '1A'),
+            if (suggestions.contains('1B')) .item(value: '1B'),
           ],
         ),
-        FAutocompleteSection(label: const Text('Level 2'), items: ['2A', '2B'].where(suggestions.contains).toList()),
-        if (suggestions.contains('3')) FAutocompleteItem(value: '3'),
-        if (suggestions.contains('4')) FAutocompleteItem(value: '4'),
+        .section(label: const Text('Level 2'), items: ['2A', '2B'].where(suggestions.contains).toList()),
+        if (suggestions.contains('3')) .item(value: '3'),
+        if (suggestions.contains('4')) .item(value: '4'),
       ].where((item) => item is! FAutocompleteSection || item.children.isNotEmpty).toList(),
     ),
   );
@@ -156,7 +156,7 @@ class DividerAutocompletePage extends Sample {
 
 @RoutePage()
 class AsyncAutocompletePage extends Sample {
-  AsyncAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+  AsyncAutocompletePage({@queryParam super.theme, super.alignment = .topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -167,7 +167,7 @@ class AsyncAutocompletePage extends Sample {
         await Future.delayed(const Duration(seconds: 3));
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
-      contentBuilder: (context, query, values) => [for (final fruit in values) FAutocompleteItem(value: fruit)],
+      contentBuilder: (context, query, values) => [for (final fruit in values) .item(value: fruit)],
     ),
   );
 }
@@ -190,7 +190,7 @@ class AsyncLoadingAutocompletePage extends Sample {
         child: Text('Here be dragons...', style: style.emptyTextStyle),
       ),
       contentBuilder: (context, query, suggestions) => [
-        for (final suggestion in suggestions) FAutocompleteItem(value: suggestion),
+        for (final suggestion in suggestions) .item(value: suggestion),
       ],
     ),
   );
@@ -209,7 +209,7 @@ class AsyncErrorAutocompletePage extends Sample {
         await Future.delayed(const Duration(seconds: 3));
         throw StateError('Error loading data');
       },
-      contentBuilder: (context, query, values) => [for (final fruit in values) FAutocompleteItem(value: fruit)],
+      contentBuilder: (context, query, values) => [for (final fruit in values) .item(value: fruit)],
       contentErrorBuilder: (context, error, trace) => Padding(
         padding: const EdgeInsets.all(14.0),
         child: Icon(FIcons.circleX, size: 15, color: context.theme.colors.primary),

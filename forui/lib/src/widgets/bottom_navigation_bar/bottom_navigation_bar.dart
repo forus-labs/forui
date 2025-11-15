@@ -47,7 +47,7 @@ class FBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.bottomNavigationBarStyle) ?? context.theme.bottomNavigationBarStyle;
-    final padding = style.padding.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+    final padding = style.padding.resolve(Directionality.maybeOf(context) ?? .ltr);
 
     Widget bar = DecoratedBox(
       decoration: style.decoration,
@@ -57,7 +57,7 @@ class FBottomNavigationBar extends StatelessWidget {
         child: Padding(
           padding: padding.copyWith(bottom: padding.bottom + (MediaQuery.viewPaddingOf(context).bottom * 2 / 3)),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: .spaceAround,
             children: [
               for (final (i, child) in children.indexed)
                 Expanded(
@@ -196,7 +196,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
     required this.decoration,
     required this.itemStyle,
     this.backgroundFilter,
-    this.padding = const EdgeInsets.all(5),
+    this.padding = const .all(5),
   });
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties.
@@ -206,6 +206,6 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
           border: Border(top: BorderSide(color: colors.border)),
           color: colors.background,
         ),
-        itemStyle: FBottomNavigationBarItemStyle.inherit(colors: colors, typography: typography, style: style),
+        itemStyle: .inherit(colors: colors, typography: typography, style: style),
       );
 }

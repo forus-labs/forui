@@ -36,7 +36,7 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   Widget buildItem(BuildContext _, int page) => YearPicker(
     yearMonthStyle: widget.style.yearMonthPickerStyle,
     dayStyle: widget.style.dayPickerStyle,
-    startYear: widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items),
+    startYear: widget.start.truncate(to: .years).plus(years: page * YearPicker.items),
     start: widget.start,
     end: widget.end,
     today: widget.today,
@@ -48,7 +48,7 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   void onGridFocusChange(bool focused) {
     setState(() {
       if (focused && focusedDate == null) {
-        final currentYear = widget.today.truncate(to: DateUnit.years);
+        final currentYear = widget.today.truncate(to: .years);
         focusedDate = _focusableYear(current, currentYear == current ? currentYear : current);
       }
     });
@@ -57,13 +57,13 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
   @override
   void onPageChange(int page) {
     setState(() {
-      final changed = widget.start.truncate(to: DateUnit.years).plus(years: page * YearPicker.items);
+      final changed = widget.start.truncate(to: .years).plus(years: page * YearPicker.items);
       if (current == changed) {
         return;
       }
 
       current = changed;
-      if (focusedDate case final focused? when focused.truncate(to: DateUnit.years) == current) {
+      if (focusedDate case final focused? when focused.truncate(to: .years) == current) {
         // We have navigated to a new page with the grid focused, but the
         // focused year is not in this page. Choose a new one.
         focusedDate = _focusableYear(current, focusedDate!);
@@ -93,9 +93,9 @@ class _PagedYearPickerState extends PagedPickerState<PagedYearPicker> {
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {
-    TraversalDirection.up: Period(years: -YearPicker.columns),
-    TraversalDirection.right: Period(years: 1),
-    TraversalDirection.down: Period(years: YearPicker.columns),
-    TraversalDirection.left: Period(years: -1),
+    .up: Period(years: -YearPicker.columns),
+    .right: Period(years: 1),
+    .down: Period(years: YearPicker.columns),
+    .left: Period(years: -1),
   };
 }

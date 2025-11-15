@@ -10,7 +10,99 @@ import 'package:forui/src/widgets/item/raw_item_content.dart';
 part 'item.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets is an item.
-mixin FItemMixin on Widget {}
+mixin FItemMixin on Widget {
+  /// {@macro forui.widgets.FItem.new}
+  ///
+  /// This function is a shorthand for [FItem.new].
+  static FItem item({
+    required Widget title,
+    FItemStyle Function(FItemStyle style)? style,
+    bool? enabled,
+    bool selected = false,
+    String? semanticsLabel,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<FWidgetStatesDelta>? onStateChange,
+    VoidCallback? onPress,
+    VoidCallback? onLongPress,
+    VoidCallback? onSecondaryPress,
+    VoidCallback? onSecondaryLongPress,
+    Map<ShortcutActivator, Intent>? shortcuts,
+    Map<Type, Action<Intent>>? actions,
+    Widget? prefix,
+    Widget? subtitle,
+    Widget? details,
+    Widget? suffix,
+    Key? key,
+  }) => .new(
+    title: title,
+    style: style,
+    enabled: enabled,
+    selected: selected,
+    semanticsLabel: semanticsLabel,
+    autofocus: autofocus,
+    focusNode: focusNode,
+    onFocusChange: onFocusChange,
+    onHoverChange: onHoverChange,
+    onStateChange: onStateChange,
+    onPress: onPress,
+    onLongPress: onLongPress,
+    onSecondaryPress: onSecondaryPress,
+    onSecondaryLongPress: onSecondaryLongPress,
+    shortcuts: shortcuts,
+    actions: actions,
+    prefix: prefix,
+    subtitle: subtitle,
+    details: details,
+    suffix: suffix,
+    key: key,
+  );
+
+  /// {@macro forui.widgets.FItem.raw}
+  ///
+  /// This function is a shorthand for [FItem.raw].
+  static FItem raw({
+    required Widget child,
+    FItemStyle Function(FItemStyle style)? style,
+    bool? enabled,
+    bool selected = false,
+    String? semanticsLabel,
+    bool autofocus = false,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<FWidgetStatesDelta>? onStateChange,
+    VoidCallback? onPress,
+    VoidCallback? onLongPress,
+    VoidCallback? onSecondaryPress,
+    VoidCallback? onSecondaryLongPress,
+    Map<ShortcutActivator, Intent>? shortcuts,
+    Map<Type, Action<Intent>>? actions,
+    Widget? prefix,
+    Key? key,
+  }) => .raw(
+    style: style,
+    enabled: enabled,
+    selected: selected,
+    semanticsLabel: semanticsLabel,
+    autofocus: autofocus,
+    focusNode: focusNode,
+    onFocusChange: onFocusChange,
+    onHoverChange: onHoverChange,
+    onStateChange: onStateChange,
+    onPress: onPress,
+    onLongPress: onLongPress,
+    onSecondaryPress: onSecondaryPress,
+    onSecondaryLongPress: onSecondaryLongPress,
+    shortcuts: shortcuts,
+    actions: actions,
+    prefix: prefix,
+    key: key,
+    child: child,
+  );
+}
 
 /// An item that is typically used to group related information together.
 ///
@@ -135,6 +227,7 @@ class FItem extends StatelessWidget with FItemMixin {
   )
   _builder;
 
+  /// {@template forui.widgets.FItem.new}
   /// Creates a [FItem].
   ///
   /// Assuming LTR locale:
@@ -156,6 +249,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// the [title] and [subtitle] to never be rendered.
   ///
   /// Use [FItem.raw] in these cases.
+  /// {@endtemplate}
   FItem({
     required Widget title,
     this.style,
@@ -194,6 +288,7 @@ class FItem extends StatelessWidget with FItemMixin {
          suffix: suffix,
        ));
 
+  /// {@template forui.widgets.FItem.raw}
   /// Creates a [FItem] without custom layout behavior.
   ///
   /// Assuming LTR locale:
@@ -204,6 +299,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// ```
   ///
   /// The order is reversed for RTL locales.
+  /// {@endtemplate}
   FItem.raw({
     required Widget child,
     this.style,
@@ -250,7 +346,7 @@ class FItem extends StatelessWidget with FItemMixin {
     final top = data.index == 0 ? data.spacing : 0.0;
     final bottom = data.last ? data.spacing : 0.0;
 
-    var margin = style.margin.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+    var margin = style.margin.resolve(Directionality.maybeOf(context) ?? .ltr);
     margin = margin.copyWith(
       top: margin.top + top,
       bottom: margin.bottom + bottom + (divider == FItemDivider.none ? 0 : data.dividerWidth),
@@ -289,10 +385,10 @@ class FItem extends StatelessWidget with FItemMixin {
           shortcuts: shortcuts,
           actions: actions,
           builder: (context, states, _) => DecoratedBox(
-            position: DecorationPosition.foreground,
+            position: .foreground,
             decoration: switch (style.focusedOutlineStyle) {
               final outline? when states.contains(WidgetState.focused) => BoxDecoration(
-                border: Border.all(color: outline.color, width: outline.width),
+                border: .all(color: outline.color, width: outline.width),
                 borderRadius: outline.borderRadius,
               ),
               _ => const BoxDecoration(),
@@ -388,7 +484,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     required this.rawItemContentStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.margin = const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+    this.margin = const .symmetric(vertical: 2, horizontal: 4),
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
@@ -409,11 +505,11 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
           ),
           WidgetState.any: BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
         }),
-        contentStyle: FItemContentStyle.inherit(colors: colors, typography: typography),
-        rawItemContentStyle: FRawItemContentStyle.inherit(colors: colors, typography: typography),
+        contentStyle: .inherit(colors: colors, typography: typography),
+        rawItemContentStyle: .inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
           motion: FTappableMotion.none,
-          pressedEnterDuration: Duration.zero,
+          pressedEnterDuration: .zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),
         focusedOutlineStyle: style.focusedOutlineStyle,

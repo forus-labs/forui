@@ -117,8 +117,8 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   @override
   Widget build(BuildContext _) => Shortcuts(
     shortcuts: const {
-      SingleActivator(LogicalKeyboardKey.arrowUp): AdjustIntent(1),
-      SingleActivator(LogicalKeyboardKey.arrowDown): AdjustIntent(-1),
+      SingleActivator(.arrowUp): AdjustIntent(1),
+      SingleActivator(.arrowDown): AdjustIntent(-1),
     },
     child: Actions(
       actions: {
@@ -147,7 +147,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
           builder: widget.builder,
           autocorrect: false,
           // We cannot use TextInputType.number as it does not contain a done button on iOS.
-          keyboardType: const TextInputType.numberWithOptions(signed: true),
+          keyboardType: const .numberWithOptions(signed: true),
           minLines: 1,
           label: widget.label,
           description: widget.description,

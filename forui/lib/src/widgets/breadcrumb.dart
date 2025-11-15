@@ -254,15 +254,15 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.popoverController,
     this.scrollController,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FItemDivider.full,
-    this.menuAnchor = Alignment.topLeft,
-    this.childAnchor = Alignment.bottomLeft,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
+    this.divider = .full,
+    this.menuAnchor = .topLeft,
+    this.childAnchor = .bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.semanticsLabel,
     this.autofocus = false,
@@ -281,15 +281,15 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.popoverController,
     this.scrollController,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.divider = FItemDivider.full,
-    this.menuAnchor = Alignment.topLeft,
-    this.childAnchor = Alignment.bottomLeft,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
+    this.divider = .full,
+    this.menuAnchor = .topLeft,
+    this.childAnchor = .bottomLeft,
     this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.semanticsLabel,
     this.autofocus = false,
@@ -297,7 +297,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.onFocusChange,
     this.onHoverChange,
     this.onStateChange,
-    this.traversalEdgeBehavior = TraversalEdgeBehavior.closedLoop,
+    this.traversalEdgeBehavior = .closedLoop,
     super.key,
   }) : itemMenu = null,
        tileMenu = menu;
@@ -334,7 +334,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 }
 
 class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProviderStateMixin {
-  late FPopoverController _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
+  late FPopoverController _popoverController = widget.popoverController ?? .new(vsync: this);
 
   @override
   void didUpdateWidget(covariant _CollapsedCrumb old) {
@@ -344,7 +344,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         _popoverController.dispose();
       }
 
-      _popoverController = widget.popoverController ?? FPopoverController(vsync: this);
+      _popoverController = widget.popoverController ?? .new(vsync: this);
     }
   }
 
@@ -452,7 +452,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
     required this.iconStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 5),
+    this.padding = const .symmetric(horizontal: 5),
   });
 
   /// Creates a [FBreadcrumbStyle] that inherits its properties.
@@ -461,19 +461,19 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
         textStyle: FWidgetStateMap({
           // Selected
           WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
+            fontWeight: .w400,
             color: colors.foreground,
-            decoration: TextDecoration.underline,
+            decoration: .underline,
           ),
-          WidgetState.selected: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.foreground),
+          WidgetState.selected: typography.sm.copyWith(fontWeight: .w400, color: colors.foreground),
 
           // Unselected
           WidgetState.hovered | WidgetState.pressed: typography.sm.copyWith(
-            fontWeight: FontWeight.w400,
+            fontWeight: .w400,
             color: colors.primary,
-            decoration: TextDecoration.underline,
+            decoration: .underline,
           ),
-          WidgetState.any: typography.sm.copyWith(fontWeight: FontWeight.w400, color: colors.mutedForeground),
+          WidgetState.any: typography.sm.copyWith(fontWeight: .w400, color: colors.mutedForeground),
         }),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),

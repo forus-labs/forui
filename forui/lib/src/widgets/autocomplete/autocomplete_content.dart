@@ -66,7 +66,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     children: [
       switch (data) {
         final Iterable<String> data => _content(context, data),
@@ -103,7 +103,7 @@ class Content extends StatelessWidget {
           padding: style.padding,
           child: ListView(
             controller: scrollController,
-            padding: EdgeInsets.zero,
+            padding: .zero,
             physics: physics,
             shrinkWrap: true,
             children: [
@@ -170,7 +170,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
     required this.progressStyle,
     required this.sectionStyle,
     required super.decoration,
-    this.padding = const EdgeInsets.symmetric(vertical: 5),
+    this.padding = const .symmetric(vertical: 5),
     super.barrierFilter,
     super.backgroundFilter,
     super.viewInsets,
@@ -179,8 +179,8 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
   /// Creates a [FAutocompleteContentStyle] that inherits its properties.
   FAutocompleteContentStyle.inherit({required super.colors, required FTypography typography, required super.style})
     : emptyTextStyle = typography.sm,
-      progressStyle = FCircularProgressStyle.inherit(colors: colors),
-      sectionStyle = FAutocompleteSectionStyle.inherit(colors: colors, style: style, typography: typography),
-      padding = const EdgeInsets.symmetric(vertical: 5),
+      progressStyle = .inherit(colors: colors),
+      sectionStyle = .inherit(colors: colors, style: style, typography: typography),
+      padding = const .symmetric(vertical: 5),
       super.inherit();
 }

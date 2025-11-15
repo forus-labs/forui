@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/forui.dart';
 
 import 'package:meta/meta.dart';
 
-import 'package:forui/forui.dart';
 
 part 'radio.design.dart';
 
 /// A radio button that typically allows the user to choose only one of a predefined set of options.
 ///
-/// It is recommended to use [FSelectGroup] in conjunction with [FRadio.grouped] to create a group of radio
+/// It is recommended to use [FSelectGroup] in conjunction with [FSelectGroupItemMixin.radio] to create a group of radio
 /// buttons.
 ///
 /// See:
@@ -58,31 +58,6 @@ class FRadio extends StatelessWidget {
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
-  /// Creates a [FRadio] that is part of a [FSelectGroup].
-  static FSelectGroupItem<T> grouped<T>({
-    required T value,
-    Widget? label,
-    Widget? description,
-    Widget? error,
-    String? semanticsLabel,
-    FRadioStyle? style,
-    bool enabled = true,
-    bool autofocus = false,
-    FocusNode? focusNode,
-    ValueChanged<bool>? onFocusChange,
-  }) => _Radio<T>(
-    value: value,
-    label: label,
-    description: description,
-    error: error,
-    semanticsLabel: semanticsLabel,
-    style: style,
-    enabled: enabled,
-    autofocus: autofocus,
-    focusNode: focusNode,
-    onFocusChange: onFocusChange,
-  );
-
   /// Creates a [FRadio].
   const FRadio({
     this.style,
@@ -120,7 +95,7 @@ class FRadio extends StatelessWidget {
         states = {...states, ...formStates};
 
         return FLabel(
-          axis: Axis.horizontal,
+          axis: .horizontal,
           states: formStates,
           style: style,
           label: label,
@@ -132,19 +107,19 @@ class FRadio extends StatelessWidget {
             focused: states.contains(WidgetState.focused),
             style: style.focusedOutlineStyle,
             child: Stack(
-              alignment: Alignment.center,
+              alignment: .center,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(2),
+                  padding: const .all(2),
                   decoration: BoxDecoration(
                     border: Border.all(color: style.borderColor.resolve(states)),
                     color: style.backgroundColor.resolve(states),
-                    shape: BoxShape.circle,
+                    shape: .circle,
                   ),
                   child: const SizedBox.square(dimension: 10),
                 ),
                 DecoratedBox(
-                  decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: .circle),
                   child: AnimatedSize(
                     duration: style.motion.duration,
                     reverseDuration: style.motion.reverseDuration,
@@ -170,68 +145,6 @@ class FRadio extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
-  }
-}
-
-class _Radio<T> extends StatelessWidget with FSelectGroupItem<T> {
-  @override
-  final T value;
-  final FRadioStyle? style;
-  final Widget? label;
-  final Widget? description;
-  final Widget? error;
-  final String? semanticsLabel;
-  final bool enabled;
-  final bool autofocus;
-  final FocusNode? focusNode;
-  final ValueChanged<bool>? onFocusChange;
-
-  const _Radio({
-    required this.value,
-    this.style,
-    this.label,
-    this.description,
-    this.error,
-    this.semanticsLabel,
-    this.enabled = true,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final FSelectGroupItemData(:controller, :selected, :style) = FSelectGroupItemData.of<T>(context);
-    final radioStyle = this.style ?? style.radioStyle;
-
-    return FRadio(
-      style: radioStyle,
-      label: label,
-      description: description,
-      semanticsLabel: semanticsLabel,
-      error: error,
-      value: selected,
-      onChange: (state) => controller.update(value, add: state),
-      enabled: enabled,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      key: key,
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(DiagnosticsProperty('value', value))
-      ..add(FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
@@ -307,15 +220,15 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   /// Creates a [FRadioStyle] that inherits its properties.
   factory FRadioStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
-    return FRadioStyle(
+    return .new(
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-      focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: BorderRadius.circular(100)),
+      focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: .circular(100)),
       borderColor: FWidgetStateMap({
         WidgetState.error: colors.error,
         WidgetState.disabled: colors.disable(colors.primary),
         WidgetState.any: colors.primary,
       }),
-      backgroundColor: FWidgetStateMap.all(colors.background),
+      backgroundColor: .all(colors.background),
       indicatorColor: FWidgetStateMap({
         WidgetState.error: colors.error,
         WidgetState.disabled: colors.disable(colors.primary),

@@ -55,7 +55,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
     style: widget.style.dayPickerStyle,
     localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
     dayBuilder: widget.dayBuilder,
-    month: widget.start.truncate(to: DateUnit.months).plus(months: page),
+    month: widget.start.truncate(to: .months).plus(months: page),
     today: widget.today,
     focused: focusedDate,
     selectable: widget.selectable,
@@ -74,14 +74,14 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
   @override
   void onPageChange(int page) {
     setState(() {
-      final changed = widget.start.truncate(to: DateUnit.months).plus(months: page);
+      final changed = widget.start.truncate(to: .months).plus(months: page);
       if (current == changed) {
         return;
       }
 
       current = changed;
       widget.onMonthChange?.call(current);
-      if (focusedDate case final focused? when focused.truncate(to: DateUnit.months) == current) {
+      if (focusedDate case final focused? when focused.truncate(to: .months) == current) {
         // We have navigated to a new month with the grid focused, but the
         // focused day is not in this month. Choose a new one trying to keep
         // the same day of the month.
@@ -100,7 +100,7 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
     setState(() {
       _gridFocused = focused;
       if (focused && focusedDate == null) {
-        final preferred = widget.today.truncate(to: DateUnit.months) == current ? widget.today.day : 1;
+        final preferred = widget.today.truncate(to: .months) == current ? widget.today.day : 1;
         focusedDate = _focusableDayForMonth(current, preferred);
       } else if (!focused) {
         focusedDate = null;
@@ -137,9 +137,9 @@ class _PagedDayPickerState extends PagedPickerState<PagedDayPicker> {
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {
-    TraversalDirection.up: Period(days: -DateTime.daysPerWeek),
-    TraversalDirection.right: Period(days: 1),
-    TraversalDirection.down: Period(days: DateTime.daysPerWeek),
-    TraversalDirection.left: Period(days: -1),
+    .up: Period(days: -DateTime.daysPerWeek),
+    .right: Period(days: 1),
+    .down: Period(days: DateTime.daysPerWeek),
+    .left: Period(days: -1),
   };
 }

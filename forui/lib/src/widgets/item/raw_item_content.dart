@@ -54,7 +54,7 @@ class RawItemContent extends StatelessWidget {
     children: [
       if (prefix case final prefix?)
         Padding(
-          padding: EdgeInsetsDirectional.only(end: style.prefixIconSpacing),
+          padding: .directional(end: style.prefixIconSpacing),
           child: IconTheme(data: style.prefixIconStyle.resolve(states), child: prefix),
         )
       else
@@ -62,7 +62,7 @@ class RawItemContent extends StatelessWidget {
       DefaultTextStyle.merge(
         style: style.childTextStyle.resolve(states),
         textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false),
-        overflow: TextOverflow.ellipsis,
+        overflow: .ellipsis,
         child: child,
       ),
       const SizedBox(),
@@ -110,7 +110,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   FRawItemContentStyle({
     required this.prefixIconStyle,
     required this.childTextStyle,
-    this.padding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.padding = const .directional(start: 15, top: 7.5, bottom: 7.5, end: 10),
     this.prefixIconSpacing = 10,
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 

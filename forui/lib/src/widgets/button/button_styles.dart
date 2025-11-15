@@ -41,21 +41,21 @@ class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
   /// Creates a [FButtonStyle] that inherits its properties.
   FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        primary: FButtonStyle.inherit(
+        primary: .inherit(
           colors: colors,
           style: style,
           typography: typography,
           color: colors.primary,
           foregroundColor: colors.primaryForeground,
         ),
-        secondary: FButtonStyle.inherit(
+        secondary: .inherit(
           colors: colors,
           style: style,
           typography: typography,
           color: colors.secondary,
           foregroundColor: colors.secondaryForeground,
         ),
-        destructive: FButtonStyle.inherit(
+        destructive: .inherit(
           colors: colors,
           style: style,
           typography: typography,
@@ -65,26 +65,26 @@ class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
         outline: FButtonStyle(
           decoration: FWidgetStateMap({
             WidgetState.disabled: BoxDecoration(
-              border: Border.all(color: colors.disable(colors.border)),
+              border: .all(color: colors.disable(colors.border)),
               borderRadius: style.borderRadius,
             ),
             WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-              border: Border.all(color: colors.border),
+              border: .all(color: colors.border),
               borderRadius: style.borderRadius,
               color: colors.secondary,
             ),
             WidgetState.any: BoxDecoration(
-              border: Border.all(color: colors.border),
+              border: .all(color: colors.border),
               borderRadius: style.borderRadius,
             ),
           }),
           focusedOutlineStyle: style.focusedOutlineStyle,
-          contentStyle: FButtonContentStyle.inherit(
+          contentStyle: .inherit(
             typography: typography,
             enabled: colors.secondaryForeground,
             disabled: colors.disable(colors.secondaryForeground),
           ),
-          iconContentStyle: FButtonIconContentStyle.inherit(
+          iconContentStyle: .inherit(
             enabled: colors.secondaryForeground,
             disabled: colors.disable(colors.secondaryForeground),
           ),
@@ -100,12 +100,12 @@ class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
             WidgetState.any: BoxDecoration(borderRadius: style.borderRadius),
           }),
           focusedOutlineStyle: style.focusedOutlineStyle,
-          contentStyle: FButtonContentStyle.inherit(
+          contentStyle: .inherit(
             typography: typography,
             enabled: colors.secondaryForeground,
             disabled: colors.disable(colors.secondaryForeground),
           ),
-          iconContentStyle: FButtonIconContentStyle.inherit(
+          iconContentStyle: .inherit(
             enabled: colors.secondaryForeground,
             disabled: colors.disable(colors.secondaryForeground),
           ),

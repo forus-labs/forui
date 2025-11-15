@@ -1,11 +1,18 @@
 ## 0.17.0 (Next)
 
+This update focuses on overhauling the API to better support the new dot-shorthand syntax.
+
 ### `FAutocomplete`
+* Add `FAutocompleteItemMixin.item(...)`.
+* Add `FAutocompleteItemMixin.raw(...)`.
+* Add `FAutocompleteItemMixin.section(...)`.
+* Add `FAutocompleteItemMixin.richSection(...)`.
+* Add `FAutocompleteItem.item(...)`.
+
 * **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
 * **Breaking** Rename `FAutocompleteController.popover` to `FAutocompleteController.content`.
 * **Breaking** Change `FAutocompleteContentStyle` to extend `FPopoverStyle`.
 * **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
-
 
 ### `FBottomNavigationBar`
 * Change `FBottomNavigationBarItem.label` to be optional.
@@ -15,12 +22,12 @@
 *  **Breaking** Change `FBreadcrumb.shift` to `FBreadcrumb.overflow`.
 
 
+### `FCheckbox`
+* **Breaking** Remove `FCheckbox.grouped(...)`. Use `FSelectGroupItemMixin.checkbox(...)` instead.
+
+
 ### `FDateField`
 *  **Breaking** Change `FDateField.shift` to `FDateField.overflow`.
-
-
-### `FMultiSelect`
-*  **Breaking** Change `FMultiSelect.shift` to `FMultiSelect.overflow`.
 
 
 ### `FPopover`
@@ -42,9 +49,27 @@
 * **Breaking** Rename `FPortalSpacing.resolve` to `FPortalSpacing.call`.
 
 
-### `FSelect`
+### `FRadio`
+* **Breaking** Remove `FRadio.grouped(...)`. Use `FSelectGroupItemMixin.radio(...)` instead.
+
+
+### `FSelect` & `FMultiSelect`
+* Add `FSelectItemMixin.item(...)`.
+* Add `FSelectItemMixin.raw(...)`.
+* Add `FSelectItemMixin.section(...)`.
+* Add `FSelectItemMixin.richSection(...)`.
+* Add `FSelectItem.item(...)`.
+
 *  **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
+*  **Breaking** Change `FMultiSelect.shift` to `FMultiSelect.overflow`.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
+
+
+### `FSelectGroup`
+* Add `FSelectGroupItemMixin.checkbox(...)`.
+* Add `FSelectGroupItemMixin.radio(...)`.
+
+* **Breaking** Rename `FSelectGroupItem` to `FSelectGroupItemMixin`.
 
 
 ### `FSelectMenutTile`
@@ -53,6 +78,19 @@
 
 ### `FTappable`
 *  Change `FTappable` to only update focused state when it has primary focus.
+
+
+### `FTile` & `FTileGroup`
+* Add `FTileMixin.selectMenu(...)`.
+* Add `FTileMixin.selectMenuFromMap(...)`.
+* Add `FTileMixin.selectMenuBuilder(...)`.
+* Add `FTileMixin.tile(...)`.
+* Add `FTileMixin.raw(...)`.
+* Add `FTileGroupMixin.selectGroup(...)`.
+* Add `FTileGroupMixin.selectGroupBuilder(...)`.
+* Add `FTileGroupMixin.group(...)`.
+* Add `FTileGroupMixin.builder(...)`.
+* Add `FTileGroupMixin.merge(...)`.
 
 
 ### `FTimeField`

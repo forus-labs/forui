@@ -61,7 +61,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
     );
     _swiping.addListener(_collapseAfterSwipe);
 
-    if (widget.style.expandBehavior == FToasterExpandBehavior.always) {
+    if (widget.style.expandBehavior == .always) {
       _controller.value = 1;
     }
   }
@@ -80,9 +80,9 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
     }
 
     if (widget.style.expandBehavior != old.style.expandBehavior) {
-      if (widget.style.expandBehavior == FToasterExpandBehavior.always) {
+      if (widget.style.expandBehavior == .always) {
         _controller.value = 1;
-      } else if (widget.style.expandBehavior == FToasterExpandBehavior.disabled) {
+      } else if (widget.style.expandBehavior == .disabled) {
         _controller.value = 0;
       }
     }
@@ -95,7 +95,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
         _autoDismiss = true;
         _swiping.value = _swiping.value.end();
       });
-      if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
+      if (widget.style.expandBehavior == .hoverOrPress) {
         _controller.reverse();
       }
     }
@@ -117,7 +117,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
       onTap: () {
         if (!_hovered) {
           setState(() => _autoDismiss = !_autoDismiss);
-          if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
+          if (widget.style.expandBehavior == .hoverOrPress) {
             _controller.isForwardOrCompleted ? _controller.reverse() : _controller.forward();
           }
         }
@@ -165,7 +165,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
 
     if (fencingToken == _monotonic && mounted) {
       setState(() => _autoDismiss = false);
-      if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
+      if (widget.style.expandBehavior == .hoverOrPress) {
         await _controller.forward();
       }
     }
@@ -180,7 +180,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
 
     if (fencingToken == _monotonic && mounted && _swiping.value is! ExternalSwipe) {
       setState(() => _autoDismiss = true);
-      if (widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
+      if (widget.style.expandBehavior == .hoverOrPress) {
         await _controller.reverse();
       }
     }

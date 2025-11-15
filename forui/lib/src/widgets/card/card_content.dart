@@ -25,7 +25,7 @@ class Content extends StatelessWidget {
     return Padding(
       padding: style.padding,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           if (image case final image?) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
           if ((title != null || subtitle != null || child != null) && image != null)
@@ -92,6 +92,6 @@ class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
     required this.subtitleTextStyle,
     this.imageSpacing = 10,
     this.subtitleSpacing = 8,
-    this.padding = const EdgeInsets.all(16),
+    this.padding = const .all(16),
   });
 }

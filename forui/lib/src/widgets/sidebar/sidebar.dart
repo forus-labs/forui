@@ -139,10 +139,7 @@ class _FSidebarState extends State<FSidebar> {
     super.initState();
     _focusNode =
         widget.focusNode ??
-        FocusScopeNode(
-          debugLabel: 'FSidebar',
-          traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope,
-        );
+        .new(debugLabel: 'FSidebar', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .parentScope);
   }
 
   @override
@@ -156,10 +153,7 @@ class _FSidebarState extends State<FSidebar> {
 
       _focusNode =
           widget.focusNode ??
-          FocusScopeNode(
-            debugLabel: 'FSidebar',
-            traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.parentScope,
-          );
+          .new(debugLabel: 'FSidebar', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .parentScope);
     }
   }
 
@@ -284,11 +278,11 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   const FSidebarStyle({
     required this.decoration,
     required this.groupStyle,
-    this.constraints = const BoxConstraints.tightFor(width: 250),
+    this.constraints = const .tightFor(width: 250),
     this.backgroundFilter,
-    this.headerPadding = const EdgeInsets.fromLTRB(0, 16, 0, 0),
-    this.contentPadding = const EdgeInsets.symmetric(vertical: 12),
-    this.footerPadding = const EdgeInsets.fromLTRB(0, 0, 0, 16),
+    this.headerPadding = const .fromLTRB(0, 16, 0, 0),
+    this.contentPadding = const .symmetric(vertical: 12),
+    this.footerPadding = const .fromLTRB(0, 0, 0, 16),
   });
 
   /// Creates a [FSidebarStyle] that inherits its properties.
@@ -296,10 +290,10 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
     : this(
         decoration: BoxDecoration(
           color: colors.background,
-          border: BorderDirectional(
+          border: .fromSTEB(
             end: BorderSide(color: colors.border, width: style.borderWidth),
           ),
         ),
-        groupStyle: FSidebarGroupStyle.inherit(colors: colors, typography: typography, style: style),
+        groupStyle: .inherit(colors: colors, typography: typography, style: style),
       );
 }

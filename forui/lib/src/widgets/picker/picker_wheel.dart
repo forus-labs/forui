@@ -109,7 +109,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    final PickerData(:controller, :style) = PickerData.of(context);
+    final PickerData(:controller, :style) = .of(context);
     final extent = widget.itemExtent ?? FPickerWheel.estimateExtent(style, context);
     return Flexible(
       flex: widget.flex,
@@ -124,14 +124,14 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
           }
         },
         shortcuts: const {
-          SingleActivator(LogicalKeyboardKey.arrowUp): ScrollIntent(direction: AxisDirection.up),
-          SingleActivator(LogicalKeyboardKey.arrowDown): ScrollIntent(direction: AxisDirection.down),
+          SingleActivator(.arrowUp): ScrollIntent(direction: .up),
+          SingleActivator(.arrowDown): ScrollIntent(direction: .down),
         },
         actions: {
           ScrollIntent: CallbackAction<ScrollIntent>(
             onInvoke: (intent) {
               controller.animateToItem(
-                controller.selectedItem + (intent.direction == AxisDirection.up ? -1 : 1),
+                controller.selectedItem + (intent.direction == .up ? -1 : 1),
                 duration: const Duration(milliseconds: 100),
                 curve: Curves.decelerate,
               );
@@ -141,7 +141,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
           ),
         },
         child: Stack(
-          alignment: Alignment.center,
+          alignment: .center,
           children: [
             if (_focused)
               Container(

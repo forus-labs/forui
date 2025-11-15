@@ -48,8 +48,8 @@ class FResizableRegion extends StatelessWidget {
       container: true,
       child: GestureDetector(
         child: switch (axis) {
-          Axis.horizontal => SizedBox(width: data.extent.current, child: builder(context, data, child)),
-          Axis.vertical => SizedBox(height: data.extent.current, child: builder(context, data, child)),
+          .horizontal => SizedBox(width: data.extent.current, child: builder(context, data, child)),
+          .vertical => SizedBox(height: data.extent.current, child: builder(context, data, child)),
         },
       ),
     );

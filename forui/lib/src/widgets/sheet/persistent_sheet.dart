@@ -236,7 +236,7 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
       for (final (controller, sheet) in sheets.values)
         if (controller.keepAliveOffstage || controller.status.isAnimating || controller.status.isCompleted)
           CallbackShortcuts(
-            bindings: {const SingleActivator(LogicalKeyboardKey.escape): controller._controller.reverse},
+            bindings: {const SingleActivator(.escape): controller._controller.reverse},
             child: FocusTraversalGroup(
               descendantsAreFocusable: controller.status.isCompleted,
               descendantsAreTraversable: controller.status.isCompleted,

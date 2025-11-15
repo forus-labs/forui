@@ -10,9 +10,6 @@ import 'package:forui/forui.dart';
 
 part 'tile_group.design.dart';
 
-/// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [FTileGroup.merge].
-mixin FTileGroupMixin on Widget {}
-
 /// A tile group that groups multiple [FTileMixin]s together.
 ///
 /// Tiles grouped together will be separated by a divider, specified by [divider].
@@ -133,17 +130,19 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   // ignore: avoid_positional_boolean_parameters
   final Widget Function(FTileGroupStyle style, bool scrollable) _builder;
 
+  /// {@template forui.widgets.FTileGroup.new}
   /// Creates a [FTileGroup].
+  /// {@endtemplate}
   FTileGroup({
     required List<FTileMixin> children,
     this.style,
     this.scrollController,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
-    this.divider = FItemDivider.indented,
+    this.divider = .indented,
     this.semanticsLabel,
     this.label,
     this.description,
@@ -189,11 +188,11 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     this.style,
     this.scrollController,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
-    this.divider = FItemDivider.indented,
+    this.divider = .indented,
     this.semanticsLabel,
     this.label,
     this.description,
@@ -221,19 +220,21 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
          },
        ));
 
+  /// {@template forui.widgets.FTileGroup.merge}
   /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
   ///
   /// All group labels will be ignored.
+  /// {@endtemplate}
   FTileGroup.merge({
     required List<FTileGroupMixin> children,
     this.style,
     this.scrollController,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
-    this.divider = FItemDivider.full,
+    this.divider = .full,
     this.semanticsLabel,
     this.label,
     this.description,
@@ -270,8 +271,8 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
 
     return FLabel(
       style: style,
-      axis: Axis.vertical,
-      states: {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error},
+      axis: .vertical,
+      states: {if (!enabled) .disabled, if (error != null) .error},
       label: label,
       description: description,
       error: error,
@@ -285,7 +286,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
           child: Container(
             decoration: style.decoration,
             child: ClipRRect(
-              borderRadius: style.decoration.borderRadius ?? BorderRadius.zero,
+              borderRadius: style.decoration.borderRadius ?? .zero,
               child: FTileGroupStyleData(
                 style: style,
                 child: CustomScrollView(
@@ -376,16 +377,16 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
-    super.labelPadding = const EdgeInsets.symmetric(vertical: 7.7),
-    super.descriptionPadding = const EdgeInsets.only(top: 7.5),
-    super.errorPadding = const EdgeInsets.only(top: 5),
+    super.labelPadding = const .symmetric(vertical: 7.7),
+    super.descriptionPadding = const .only(top: 7.5),
+    super.errorPadding = const .only(top: 5),
     super.childPadding,
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
   factory FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final tileStyle = FTileStyle.inherit(colors: colors, typography: typography, style: style);
-    return FTileGroupStyle(
+    return .new(
       decoration: BoxDecoration(
         border: Border.all(color: colors.border, width: style.borderWidth),
         borderRadius: style.borderRadius,
@@ -405,22 +406,22 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
                 ),
         ),
       ),
-      dividerColor: FWidgetStateMap.all(colors.border),
+      dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
       labelTextStyle: FWidgetStateMap({
         WidgetState.error: typography.base.copyWith(
           color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
-          fontWeight: FontWeight.w600,
+          fontWeight: .w600,
         ),
         WidgetState.disabled: typography.base.copyWith(
           color:
               style.formFieldStyle.labelTextStyle.maybeResolve({WidgetState.disabled})?.color ??
               colors.disable(colors.primary),
-          fontWeight: FontWeight.w600,
+          fontWeight: .w600,
         ),
         WidgetState.any: typography.base.copyWith(
           color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
-          fontWeight: FontWeight.w600,
+          fontWeight: .w600,
         ),
       }),
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.map(

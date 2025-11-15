@@ -23,7 +23,7 @@ final class FTime implements Comparable<FTime> {
   FTime.fromDateTime(DateTime dateTime) : this(dateTime.hour, dateTime.minute);
 
   /// Creates a [FTime] based on the current time.
-  FTime.now() : this.fromDateTime(DateTime.now());
+  FTime.now() : this.fromDateTime(.now());
 
   /// Returns a new [FTime] with the hour and/or minute replaced.
   @useResult

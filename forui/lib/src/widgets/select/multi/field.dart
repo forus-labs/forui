@@ -85,15 +85,15 @@ class Field<T> extends FormField<Set<T>> {
          builder: (formField) {
            final state = formField as _State<T>;
            final localizations = FLocalizations.of(state.context) ?? FDefaultLocalizations();
-           final direction = textDirection ?? Directionality.maybeOf(state.context) ?? TextDirection.ltr;
+           final direction = textDirection ?? Directionality.maybeOf(state.context) ?? .ltr;
            final padding = style.fieldStyle.contentPadding.resolve(direction);
            final values = sort == null ? state._controller.value : state._controller.value.sorted(sort);
 
            return Directionality(
              textDirection: direction,
              child: FLabel(
-               axis: Axis.vertical,
-               states: {if (!enabled) WidgetState.disabled, if (state.hasError) WidgetState.error},
+               axis: .vertical,
+               states: {if (!enabled) .disabled, if (state.hasError) .error},
                label: label,
                style: style.fieldStyle,
                description: description,
@@ -112,7 +112,7 @@ class Field<T> extends FormField<Set<T>> {
                  overflow: overflow,
                  offset: offset,
                  hideRegion: hideRegion,
-                 shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): state._toggle},
+                 shortcuts: {const SingleActivator(.escape): state._toggle},
                  popoverBuilder: (context, controller) => InheritedSelectController<T>(
                    popover: state._controller.popover,
                    contains: (value) => state._controller.value.contains(value),
@@ -125,7 +125,7 @@ class Field<T> extends FormField<Set<T>> {
                    focusNode: state._focus,
                    onPress: enabled ? state._toggle : null,
                    builder: (context, states, child) {
-                     states = {...states, if (!enabled) WidgetState.disabled, if (state.hasError) WidgetState.error};
+                     states = {...states, if (!enabled) .disabled, if (state.hasError) .error};
                      return DecoratedBox(
                        decoration: style.fieldStyle.decoration.resolve(states),
                        child: Padding(
@@ -133,14 +133,14 @@ class Field<T> extends FormField<Set<T>> {
                          child: DefaultTextStyle.merge(
                            textAlign: textAlign,
                            child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             mainAxisAlignment: .spaceBetween,
                              children: [
                                if (prefixBuilder case final prefix?) prefix(context, style, states),
                                Expanded(
                                  child: Padding(
                                    padding: padding.copyWith(left: 0, right: 0),
                                    child: Wrap(
-                                     crossAxisAlignment: WrapCrossAlignment.center,
+                                     crossAxisAlignment: .center,
                                      spacing: style.fieldStyle.spacing,
                                      runSpacing: style.fieldStyle.runSpacing,
                                      children: [
@@ -233,13 +233,12 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
     _controller =
-        widget.controller ??
-        FMultiSelectController(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue ?? {});
+        widget.controller ?? .new(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue ?? {});
     _controller
       ..addListener(_handleChange)
       ..addValueListener(_onChange);
 
-    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
+    _focus = widget.focusNode ?? .new(debugLabel: 'FMultiSelect');
   }
 
   @override
@@ -250,7 +249,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
       if (old.focusNode == null) {
         _focus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
+      _focus = widget.focusNode ?? .new(debugLabel: 'FMultiSelect');
     }
 
     if (widget.controller != old.controller) {
@@ -261,16 +260,8 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
         old.controller?.removeValueListener(_onChange);
       }
 
-      if (widget.controller case final controller?) {
-        _controller = controller;
-      } else {
-        _controller = FMultiSelectController(
-          vsync: this,
-          min: widget.min,
-          max: widget.max,
-          value: widget.initialValue ?? {},
-        );
-      }
+      _controller =
+          widget.controller ?? .new(vsync: this, min: widget.min, max: widget.max, value: widget.initialValue ?? {});
 
       _controller
         ..addListener(_handleChange)
@@ -399,11 +390,11 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
-    this.contentPadding = const EdgeInsetsGeometry.directional(start: 10, top: 6, bottom: 6, end: 8),
-    this.hintPadding = const EdgeInsetsGeometry.directional(start: 4, top: 4, bottom: 4),
+    this.contentPadding = const .directional(start: 10, top: 6, bottom: 6, end: 8),
+    this.hintPadding = const .directional(start: 4, top: 4, bottom: 4),
     this.spacing = 4,
     this.runSpacing = 4,
-    this.clearButtonPadding = EdgeInsets.zero,
+    this.clearButtonPadding = .zero,
     super.labelPadding,
     super.descriptionPadding,
     super.errorPadding,
@@ -419,22 +410,22 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     final label = FLabelStyles.inherit(style: style).verticalStyle;
     final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
 
-    return FMultiSelectFieldStyle(
+    return .new(
       decoration: FWidgetStateMap({
         WidgetState.error: BoxDecoration(
-          border: Border.all(color: colors.error, width: style.borderWidth),
+          border: .all(color: colors.error, width: style.borderWidth),
           borderRadius: style.borderRadius,
         ),
         WidgetState.disabled: BoxDecoration(
-          border: Border.all(color: colors.disable(colors.border), width: style.borderWidth),
+          border: .all(color: colors.disable(colors.border), width: style.borderWidth),
           borderRadius: style.borderRadius,
         ),
         WidgetState.focused: BoxDecoration(
-          border: Border.all(color: colors.primary, width: style.borderWidth),
+          border: .all(color: colors.primary, width: style.borderWidth),
           borderRadius: style.borderRadius,
         ),
         WidgetState.any: BoxDecoration(
-          border: Border.all(color: colors.border, width: style.borderWidth),
+          border: .all(color: colors.border, width: style.borderWidth),
           borderRadius: style.borderRadius,
         ),
       }),

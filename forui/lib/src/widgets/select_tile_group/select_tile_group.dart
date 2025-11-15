@@ -66,17 +66,19 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
   /// The callback that is called when an item is selected.
   final ValueChanged<(T, bool)>? onSelect;
 
+  /// {@template forui.widgets.FSelectTileGroup.new}
   /// Creates a [FSelectTileGroup].
+  /// {@endtemplate}
   FSelectTileGroup({
     required this.selectController,
     required List<FSelectTile<T>> children,
     this.scrollController,
     this.style,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
-    this.divider = FItemDivider.indented,
+    this.divider = .indented,
     this.label,
     this.description,
     this.semanticsLabel,
@@ -123,9 +125,11 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
          },
        );
 
+  /// {@template forui.widgets.FSelectTileGroup.builder}
   /// Creates a [FSelectTileGroup] that lazily builds its children.
   ///
   /// {@macro forui.widgets.FTileGroup.builder}
+  /// {@endtemplate}
   FSelectTileGroup.builder({
     required this.selectController,
     required FSelectTile<T>? Function(BuildContext context, int index) tileBuilder,
@@ -133,10 +137,10 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
     this.scrollController,
     this.style,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
-    this.divider = FItemDivider.indented,
+    this.divider = .indented,
     this.label,
     this.description,
     this.semanticsLabel,

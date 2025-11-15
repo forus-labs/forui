@@ -50,10 +50,10 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
     if (_year) {
       return PagedYearPicker(
         style: widget.style,
-        start: widget.start.truncate(to: DateUnit.years),
-        end: widget.end.truncate(to: DateUnit.years),
+        start: widget.start.truncate(to: .years),
+        end: widget.end.truncate(to: .years),
         today: widget.today,
-        initial: widget.month.value.truncate(to: DateUnit.years),
+        initial: widget.month.value.truncate(to: .years),
         onPress: (date) {
           widget.month.value = switch (widget.month.value.copyWith(year: date.year)) {
             final proposed when proposed < widget.start => widget.start,
@@ -69,10 +69,10 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
     } else {
       return PagedMonthPicker(
         style: widget.style,
-        start: widget.start.truncate(to: DateUnit.months),
-        end: widget.end.truncate(to: DateUnit.months),
+        start: widget.start.truncate(to: .months),
+        end: widget.end.truncate(to: .months),
         today: widget.today,
-        initial: widget.month.value.truncate(to: DateUnit.years),
+        initial: widget.month.value.truncate(to: .years),
         onPress: (date) {
           widget.month.value = switch (widget.month.value.copyWith(month: date.month)) {
             final proposed when proposed < widget.start => widget.start,
@@ -80,7 +80,7 @@ class _YearMonthPickerState extends State<YearMonthPicker> {
             final proposed => proposed,
           };
 
-          widget.type.value = FCalendarPickerType.day;
+          widget.type.value = .day;
         },
       );
     }

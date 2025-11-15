@@ -627,84 +627,73 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTooltipStyle? tooltipStyle,
     Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
-    typography ??= FTypography.inherit(colors: colors);
-    style ??= FStyle.inherit(colors: colors, typography: typography);
-    return FThemeData._(
+    typography ??= .inherit(colors: colors);
+    style ??= .inherit(colors: colors, typography: typography);
+    return ._(
       debugLabel: debugLabel,
       breakpoints: breakpoints,
       colors: colors,
       typography: typography,
       style: style,
-      accordionStyle: accordionStyle ?? FAccordionStyle.inherit(colors: colors, typography: typography, style: style),
-      autocompleteStyle:
-          autocompleteStyle ?? FAutocompleteStyle.inherit(colors: colors, typography: typography, style: style),
-      alertStyles: alertStyles ?? FAlertStyles.inherit(colors: colors, typography: typography, style: style),
-      avatarStyle: avatarStyle ?? FAvatarStyle.inherit(colors: colors, typography: typography),
-      badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colors: colors, typography: typography, style: style),
+      accordionStyle: accordionStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      autocompleteStyle: autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      alertStyles: alertStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      avatarStyle: avatarStyle ?? .inherit(colors: colors, typography: typography),
+      badgeStyles: badgeStyles ?? .inherit(colors: colors, typography: typography, style: style),
       bottomNavigationBarStyle:
-          bottomNavigationBarStyle ??
-          FBottomNavigationBarStyle.inherit(colors: colors, typography: typography, style: style),
-      breadcrumbStyle:
-          breadcrumbStyle ?? FBreadcrumbStyle.inherit(colors: colors, typography: typography, style: style),
-      buttonStyles: buttonStyles ?? FButtonStyles.inherit(colors: colors, typography: typography, style: style),
-      calendarStyle: calendarStyle ?? FCalendarStyle.inherit(colors: colors, typography: typography, style: style),
-      cardStyle: cardStyle ?? FCardStyle.inherit(colors: colors, typography: typography, style: style),
-      checkboxStyle: checkboxStyle ?? FCheckboxStyle.inherit(colors: colors, style: style),
-      circularProgressStyle: circularProgressStyle ?? FCircularProgressStyle.inherit(colors: colors),
-      dateFieldStyle: dateFieldStyle ?? FDateFieldStyle.inherit(colors: colors, typography: typography, style: style),
-      determinateProgressStyle:
-          determinateProgressStyle ?? FDeterminateProgressStyle.inherit(colors: colors, style: style),
-      dialogRouteStyle: dialogRouteStyle ?? FDialogRouteStyle.inherit(colors: colors),
-      dialogStyle: dialogStyle ?? FDialogStyle.inherit(colors: colors, typography: typography, style: style),
-      dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
-      headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
-      itemStyle: itemStyle ?? FItemStyle.inherit(colors: colors, typography: typography, style: style),
-      itemGroupStyle: itemGroupStyle ?? FItemGroupStyle.inherit(colors: colors, typography: typography, style: style),
-      labelStyles: labelStyles ?? FLabelStyles.inherit(style: style),
-      lineCalendarStyle:
-          lineCalendarStyle ?? FLineCalendarStyle.inherit(colors: colors, typography: typography, style: style),
-      multiSelectStyle:
-          multiSelectStyle ?? FMultiSelectStyle.inherit(colors: colors, typography: typography, style: style),
-      modalSheetStyle: modalSheetStyle ?? FModalSheetStyle.inherit(colors: colors),
-      paginationStyle:
-          paginationStyle ?? FPaginationStyle.inherit(colors: colors, typography: typography, style: style),
+          bottomNavigationBarStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      breadcrumbStyle: breadcrumbStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      buttonStyles: buttonStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style),
+      circularProgressStyle: circularProgressStyle ?? .inherit(colors: colors),
+      dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
+      dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
+      dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      dividerStyles: dividerStyles ?? .inherit(colors: colors, style: style),
+      headerStyles: headerStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      itemStyle: itemStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      itemGroupStyle: itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      labelStyles: labelStyles ?? .inherit(style: style),
+      lineCalendarStyle: lineCalendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      multiSelectStyle: multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      modalSheetStyle: modalSheetStyle ?? .inherit(colors: colors),
+      paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style),
       persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),
-      pickerStyle: pickerStyle ?? FPickerStyle.inherit(colors: colors, style: style, typography: typography),
-      popoverStyle: popoverStyle ?? FPopoverStyle.inherit(colors: colors, style: style),
-      popoverMenuStyle:
-          popoverMenuStyle ?? FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
-      progressStyle: progressStyle ?? FProgressStyle.inherit(colors: colors, style: style),
-      radioStyle: radioStyle ?? FRadioStyle.inherit(colors: colors, style: style),
-      resizableStyle: resizableStyle ?? FResizableStyle.inherit(colors: colors, style: style),
-      scaffoldStyle: scaffoldStyle ?? FScaffoldStyle.inherit(colors: colors, style: style),
-      selectStyle: selectStyle ?? FSelectStyle.inherit(colors: colors, typography: typography, style: style),
-      selectGroupStyle:
-          selectGroupStyle ?? FSelectGroupStyle.inherit(colors: colors, typography: typography, style: style),
-      selectMenuTileStyle:
-          selectMenuTileStyle ?? FSelectMenuTileStyle.inherit(colors: colors, typography: typography, style: style),
-      sidebarStyle: sidebarStyle ?? FSidebarStyle.inherit(colors: colors, typography: typography, style: style),
-      sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
-      toasterStyle: toasterStyle ?? FToasterStyle.inherit(colors: colors, typography: typography, style: style),
-      switchStyle: switchStyle ?? FSwitchStyle.inherit(colors: colors, style: style),
-      tabsStyle: tabsStyle ?? FTabsStyle.inherit(colors: colors, typography: typography, style: style),
+      pickerStyle: pickerStyle ?? .inherit(colors: colors, style: style, typography: typography),
+      popoverStyle: popoverStyle ?? .inherit(colors: colors, style: style),
+      popoverMenuStyle: popoverMenuStyle ?? .inherit(colors: colors, style: style, typography: typography),
+      progressStyle: progressStyle ?? .inherit(colors: colors, style: style),
+      radioStyle: radioStyle ?? .inherit(colors: colors, style: style),
+      resizableStyle: resizableStyle ?? .inherit(colors: colors, style: style),
+      scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
+      selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      sliderStyles: sliderStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      toasterStyle: toasterStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      switchStyle: switchStyle ?? .inherit(colors: colors, style: style),
+      tabsStyle: tabsStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
-      textFieldStyle: textFieldStyle ?? FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
-      tileStyle: tileStyle ?? FTileStyle.inherit(colors: colors, typography: typography, style: style),
-      tileGroupStyle: tileGroupStyle ?? FTileGroupStyle.inherit(colors: colors, typography: typography, style: style),
-      timeFieldStyle: timeFieldStyle ?? FTimeFieldStyle.inherit(colors: colors, typography: typography, style: style),
-      timePickerStyle:
-          timePickerStyle ?? FTimePickerStyle.inherit(colors: colors, typography: typography, style: style),
-      tooltipStyle: tooltipStyle ?? FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
-      extensions: Map.unmodifiable({for (final extension in extensions) extension.type: extension}),
+      textFieldStyle: textFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      tileStyle: tileStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      timeFieldStyle: timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      tooltipStyle: tooltipStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      extensions: .unmodifiable({for (final extension in extensions) extension.type: extension}),
     );
   }
 
   /// Creates a linear interpolation between two [FThemeData] using the given factor [t].
-  factory FThemeData.lerp(FThemeData a, FThemeData b, double t) => FThemeData(
+  factory FThemeData.lerp(FThemeData a, FThemeData b, double t) => .new(
     debugLabel: t < 0.5 ? a.debugLabel : b.debugLabel,
     breakpoints: t < 0.5 ? a.breakpoints : b.breakpoints,
-    colors: FColors.lerp(a.colors, b.colors, t),
-    typography: FTypography.lerp(a.typography, b.typography, t),
+    colors: .lerp(a.colors, b.colors, t),
+    typography: .lerp(a.typography, b.typography, t),
     style: a.style.lerp(b.style, t),
     accordionStyle: a.accordionStyle.lerp(b.accordionStyle, t),
     autocompleteStyle: a.autocompleteStyle.lerp(b.autocompleteStyle, t),
@@ -901,63 +890,21 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     // Material requires height to be 1, certain widgets will overflow without it.
     // TextBaseline.alphabetic is required as TextField requires it.
     final textTheme = TextTheme(
-      displayLarge: typography.xl4.copyWith(
-        height: 1,
-        textBaseline: typography.xl4.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      displayMedium: typography.xl3.copyWith(
-        height: 1,
-        textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      displaySmall: typography.xl2.copyWith(
-        height: 1,
-        textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      headlineLarge: typography.xl3.copyWith(
-        height: 1,
-        textBaseline: typography.xl3.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      headlineMedium: typography.xl2.copyWith(
-        height: 1,
-        textBaseline: typography.xl2.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      headlineSmall: typography.xl.copyWith(
-        height: 1,
-        textBaseline: typography.xl.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      titleLarge: typography.lg.copyWith(
-        height: 1,
-        textBaseline: typography.lg.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      titleMedium: typography.base.copyWith(
-        height: 1,
-        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      titleSmall: typography.sm.copyWith(
-        height: 1,
-        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      labelLarge: typography.base.copyWith(
-        height: 1,
-        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      labelMedium: typography.sm.copyWith(
-        height: 1,
-        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      labelSmall: typography.xs.copyWith(
-        height: 1,
-        textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      bodyLarge: typography.base.copyWith(
-        height: 1,
-        textBaseline: typography.base.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      bodyMedium: typography.sm.copyWith(
-        height: 1,
-        textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
-      ),
-      bodySmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic),
+      displayLarge: typography.xl4.copyWith(height: 1, textBaseline: typography.xl4.textBaseline ?? .alphabetic),
+      displayMedium: typography.xl3.copyWith(height: 1, textBaseline: typography.xl3.textBaseline ?? .alphabetic),
+      displaySmall: typography.xl2.copyWith(height: 1, textBaseline: typography.xl2.textBaseline ?? .alphabetic),
+      headlineLarge: typography.xl3.copyWith(height: 1, textBaseline: typography.xl3.textBaseline ?? .alphabetic),
+      headlineMedium: typography.xl2.copyWith(height: 1, textBaseline: typography.xl2.textBaseline ?? .alphabetic),
+      headlineSmall: typography.xl.copyWith(height: 1, textBaseline: typography.xl.textBaseline ?? .alphabetic),
+      titleLarge: typography.lg.copyWith(height: 1, textBaseline: typography.lg.textBaseline ?? .alphabetic),
+      titleMedium: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? .alphabetic),
+      titleSmall: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? .alphabetic),
+      labelLarge: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? .alphabetic),
+      labelMedium: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? .alphabetic),
+      labelSmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? .alphabetic),
+      bodyLarge: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? .alphabetic),
+      bodyMedium: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? .alphabetic),
+      bodySmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? .alphabetic),
     )..apply(fontFamily: typography.defaultFontFamily, bodyColor: colors.foreground, displayColor: colors.foreground);
 
     return ThemeData(
@@ -1028,7 +975,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       // Date Picker
       datePickerTheme: DatePickerThemeData(
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-        dayShape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+        dayShape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         rangePickerShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
@@ -1083,8 +1030,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
             (states) =>
                 buttonStyles.secondary.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
-          padding: WidgetStateProperty.all(buttonStyles.secondary.contentStyle.padding),
-          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+          padding: .all(buttonStyles.secondary.contentStyle.padding),
+          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
@@ -1096,8 +1043,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           foregroundColor: WidgetStateColor.resolveWith(
             (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondaryForeground,
           ),
-          padding: WidgetStateProperty.all(buttonStyles.primary.contentStyle.padding),
-          shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+          padding: .all(buttonStyles.primary.contentStyle.padding),
+          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -1109,7 +1056,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           foregroundColor: WidgetStateColor.resolveWith(
             (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
           ),
-          padding: WidgetStateProperty.all(buttonStyles.outline.contentStyle.padding),
+          padding: .all(buttonStyles.outline.contentStyle.padding),
           side: WidgetStateBorderSide.resolveWith((states) {
             final border = buttonStyles.outline.decoration.maybeResolve(states)?.border;
             return BorderSide(

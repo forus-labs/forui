@@ -94,8 +94,8 @@ class AnimatedToast extends StatefulWidget {
 }
 
 class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateMixin {
-  static const _horizontal = [AxisDirection.left, AxisDirection.right];
-  static const _vertical = [AxisDirection.up, AxisDirection.down];
+  static const List<AxisDirection> _horizontal = [.left, .right];
+  static const List<AxisDirection> _vertical = [.up, .down];
 
   Timer? _timer;
   late final AnimationController _entranceDismissController;
@@ -113,10 +113,10 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   ///
   /// If the toast is swiped to the left/top, it will be negative, and if it is swiped to the right/bottom, it will be
   /// positive.
-  Offset _swipeFraction = Offset.zero;
+  Offset _swipeFraction = .zero;
 
   /// The offset that the toast should be at when the swipe animation is completed.
-  Offset _swipeFractionEnd = Offset.zero;
+  Offset _swipeFractionEnd = .zero;
 
   /// Used to signal to [RenderAnimatedToaster] that a toast has been updated.
   int _signal = 0;
@@ -230,9 +230,9 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   void _completeSwipe(AnimationStatus status) {
     if (status == AnimationStatus.completed) {
       // Reset the swipe fraction to zero if the swipe was not completed.
-      if (_swipeFractionEnd == Offset.zero) {
+      if (_swipeFractionEnd == .zero) {
         setState(() {
-          _swipeFraction = Offset.zero;
+          _swipeFraction = .zero;
           _swipeCompletionController.reset();
           _resumeDismissing();
         });
@@ -245,7 +245,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
 
   void _startDismissing() => _entranceDismissController.reverse();
 
-  void _resumeDismissing([Duration stagger = Duration.zero]) {
+  void _resumeDismissing([Duration stagger = .zero]) {
     if (widget.duration case final duration?) {
       _timer?.cancel();
       _timer = Timer(duration + stagger, _startDismissing);
@@ -278,7 +278,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     // Slide in & out during entrance & exit.
     var translation = -widget.alignTransform * (1.0 - _curvedEntranceDismiss.value);
     // Slide out during swiping to dismiss.
-    translation += Offset.lerp(_swipeFraction, _swipeFractionEnd, _swipeCompletion.value)!;
+    translation += .lerp(_swipeFraction, _swipeFractionEnd, _swipeCompletion.value)!;
 
     // Gradually increase & decrease opacity during entrance & exit.
     var opacity = _entranceDismiss.value * _visible.value;

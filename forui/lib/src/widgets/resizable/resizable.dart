@@ -114,7 +114,7 @@ class FResizable extends StatefulWidget {
 }
 
 class _FResizableState extends State<FResizable> {
-  late FResizableController _controller = widget.controller ?? FResizableController.cascade();
+  late FResizableController _controller = widget.controller ?? .cascade();
 
   @override
   void didChangeDependencies() {
@@ -133,7 +133,7 @@ class _FResizableState extends State<FResizable> {
         old.controller?.removeListener(_onChange);
       }
 
-      _controller = widget.controller ?? FResizableController.cascade();
+      _controller = widget.controller ?? .cascade();
       _controller.addListener(_onChange);
     }
 
@@ -176,7 +176,7 @@ class _FResizableState extends State<FResizable> {
     );
 
     final style = widget.style?.call(context.theme.resizableStyle) ?? context.theme.resizableStyle;
-    if (widget.axis == Axis.horizontal) {
+    if (widget.axis == .horizontal) {
       return SizedBox(
         height: widget.crossAxisExtent,
         child: LayoutBuilder(
@@ -185,7 +185,7 @@ class _FResizableState extends State<FResizable> {
             builder: (_, _) => Stack(
               children: [
                 Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [
                     for (final (i, child) in widget.children.indexed)
                       InheritedData(
@@ -223,7 +223,7 @@ class _FResizableState extends State<FResizable> {
             builder: (_, _) => Stack(
               children: [
                 Column(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: .min,
                   children: [
                     for (final (i, child) in widget.children.indexed)
                       InheritedData(

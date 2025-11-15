@@ -109,8 +109,7 @@ class _FPaginationState extends State<FPagination> {
   @override
   void initState() {
     super.initState();
-    _controller =
-        widget.controller ?? FPaginationController(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
+    _controller = widget.controller ?? .new(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
     _controller.addListener(_onChange);
   }
 
@@ -124,8 +123,7 @@ class _FPaginationState extends State<FPagination> {
         old.controller?.removeListener(_onChange);
       }
 
-      _controller =
-          widget.controller ?? FPaginationController(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
+      _controller = widget.controller ?? .new(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
       _controller.addListener(_onChange);
     }
   }
@@ -173,7 +171,7 @@ class _FPaginationState extends State<FPagination> {
         final (start, end) = _controller.siblingRange;
 
         return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: .center,
           children: [
             previous,
             if (_controller.page > _controller.minPagesDisplayedAtEdges) ...[

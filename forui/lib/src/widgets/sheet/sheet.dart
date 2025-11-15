@@ -65,7 +65,7 @@ class Sheet extends StatefulWidget {
 }
 
 class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
-  final GlobalKey _key = GlobalKey(debugLabel: 'Sheet child');
+  final GlobalKey _key = .new(debugLabel: 'Sheet child');
   late AnimationController _controller;
   late Animation<double> _animation;
   late ParametricCurve<double> _curve;
@@ -100,10 +100,10 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       anchorPoint: widget.anchorPoint,
       child: Align(
         alignment: switch (widget.side) {
-          FLayout.ttb => Alignment.topCenter,
-          FLayout.btt => Alignment.bottomCenter,
-          FLayout.ltr => Alignment.centerLeft,
-          FLayout.rtl => Alignment.centerRight,
+          FLayout.ttb => .topCenter,
+          FLayout.btt => .bottomCenter,
+          FLayout.ltr => .centerLeft,
+          FLayout.rtl => .centerRight,
         },
         heightFactor: widget.side.vertical ? 1 : null,
         widthFactor: widget.side.vertical ? null : 1,
@@ -137,14 +137,14 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
     }
 
     sheet = switch ((widget.side, widget.useSafeArea)) {
-      (FLayout.ttb, true) => SafeArea(top: false, child: sheet),
-      (FLayout.btt, true) => SafeArea(bottom: false, child: sheet),
-      (FLayout.ltr, true) => SafeArea(left: false, child: sheet),
-      (FLayout.rtl, true) => SafeArea(right: false, child: sheet),
-      (FLayout.ttb, false) => MediaQuery.removePadding(context: context, removeBottom: true, child: sheet),
-      (FLayout.btt, false) => MediaQuery.removePadding(context: context, removeTop: true, child: sheet),
-      (FLayout.ltr, false) => MediaQuery.removePadding(context: context, removeRight: true, child: sheet),
-      (FLayout.rtl, false) => MediaQuery.removePadding(context: context, removeLeft: true, child: sheet),
+      (.ttb, true) => SafeArea(top: false, child: sheet),
+      (.btt, true) => SafeArea(bottom: false, child: sheet),
+      (.ltr, true) => SafeArea(left: false, child: sheet),
+      (.rtl, true) => SafeArea(right: false, child: sheet),
+      (.ttb, false) => MediaQuery.removePadding(context: context, removeBottom: true, child: sheet),
+      (.btt, false) => MediaQuery.removePadding(context: context, removeTop: true, child: sheet),
+      (.ltr, false) => MediaQuery.removePadding(context: context, removeRight: true, child: sheet),
+      (.rtl, false) => MediaQuery.removePadding(context: context, removeLeft: true, child: sheet),
     };
 
     return AnimatedBuilder(
@@ -153,7 +153,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         scopesRoute: true,
         namesRoute: true,
         label: switch (defaultTargetPlatform) {
-          TargetPlatform.iOS || TargetPlatform.macOS => null,
+          .iOS || .macOS => null,
           _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).sheetSemanticsLabel,
         },
         explicitChildNodes: true,
@@ -172,22 +172,22 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   }
 
   GestureDragUpdateCallback get _dragUpdate => switch (widget.side) {
-    FLayout.ttb => (details) {
+    .ttb => (details) {
       if (!_dismissing) {
         _controller.value += details.primaryDelta! / _key.currentChildHeight;
       }
     },
-    FLayout.btt => (details) {
+    .btt => (details) {
       if (!_dismissing) {
         _controller.value -= details.primaryDelta! / _key.currentChildHeight;
       }
     },
-    FLayout.ltr => (details) {
+    .ltr => (details) {
       if (!_dismissing) {
         _controller.value += details.primaryDelta! / _key.currentChildWidth;
       }
     },
-    FLayout.rtl => (details) {
+    .rtl => (details) {
       if (!_dismissing) {
         _controller.value -= details.primaryDelta! / _key.currentChildWidth;
       }
@@ -196,10 +196,10 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
   GestureDragEndCallback get _dragEnd {
     final double Function(DragEndDetails) velocity = switch (widget.side) {
-      FLayout.ttb => (details) => details.primaryVelocity! / _key.currentChildHeight,
-      FLayout.btt => (details) => -details.primaryVelocity! / _key.currentChildHeight,
-      FLayout.ltr => (details) => details.primaryVelocity! / _key.currentChildWidth,
-      FLayout.rtl => (details) => -details.primaryVelocity! / _key.currentChildWidth,
+      .ttb => (details) => details.primaryVelocity! / _key.currentChildHeight,
+      .btt => (details) => -details.primaryVelocity! / _key.currentChildHeight,
+      .ltr => (details) => details.primaryVelocity! / _key.currentChildWidth,
+      .rtl => (details) => -details.primaryVelocity! / _key.currentChildWidth,
     };
 
     return (details) {

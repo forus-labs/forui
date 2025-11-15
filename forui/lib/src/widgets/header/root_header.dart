@@ -29,11 +29,11 @@ class _FRootHeader extends FHeader {
         child: Padding(
           padding: style.padding,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: .spaceBetween,
             children: [
               Expanded(
                 child: DefaultTextStyle.merge(
-                  overflow: TextOverflow.ellipsis,
+                  overflow: .ellipsis,
                   maxLines: 1,
                   softWrap: false,
                   style: style.titleTextStyle,

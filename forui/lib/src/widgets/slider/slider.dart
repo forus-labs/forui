@@ -134,7 +134,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
     this.validator,
     this.forceErrorText,
     this.enabled = true,
-    this.autovalidateMode = AutovalidateMode.disabled,
+    this.autovalidateMode = .disabled,
     super.key,
   }) : assert(
          controller == null || initialSelection == null,
@@ -154,7 +154,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
   Widget build(BuildContext context) {
     final layout = switch (this.layout) {
       final layout? => layout,
-      _ when Directionality.maybeOf(context) == TextDirection.rtl => FLayout.rtl,
+      _ when Directionality.maybeOf(context) == .rtl => FLayout.rtl,
       _ => FLayout.ltr,
     };
 
@@ -171,7 +171,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderSelection
         description: description,
         errorBuilder: errorBuilder,
         marks: marks,
-        textDirection: Directionality.maybeOf(context) ?? TextDirection.ltr,
+        textDirection: Directionality.maybeOf(context) ?? .ltr,
         constraints: constraints,
         mainAxisExtent: trackMainAxisExtent,
         trackHitRegionCrossExtent: trackHitRegionCrossExtent,
@@ -349,7 +349,7 @@ class _SliderState extends State<_Slider> {
   }
 
   FSliderController _createController() =>
-      widget.controller ?? FContinuousSliderController(selection: widget.initialSelection ?? FSliderSelection(max: 0));
+      widget.controller ?? FContinuousSliderController(selection: widget.initialSelection ?? .new(max: 0));
 
   void _onChange() => widget.onChange?.call(_controller.selection);
 
@@ -406,6 +406,6 @@ class _SliderState extends State<_Slider> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty<String Function(FSliderSelection p1)>.has('formatter', formatter));
+    properties.add(ObjectFlagProperty<String Function(FSliderSelection)>.has('formatter', formatter));
   }
 }

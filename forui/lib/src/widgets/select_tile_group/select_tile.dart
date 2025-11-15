@@ -70,7 +70,9 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
 
   final bool _suffix;
 
+  /// {@template forui.widgets.FSelectTile.new}
   /// Creates a [FSelectTile] with a prefix check icon.
+  /// {@endtemplate}
   const FSelectTile({
     required this.title,
     required this.value,
@@ -93,7 +95,34 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   }) : _suffix = false,
        _icon = suffix;
 
+  /// Creates a [FSelectTile] with a prefix check icon.
+  ///
+  /// This is identical to [FSelectTile.new]. It provides consistency with other [FTileMixin]
+  /// members when using dot-shorthands.
+  const factory FSelectTile.tile({
+    required Widget title,
+    required T value,
+    FItemStyle Function(FItemStyle)? style,
+    Widget checkedIcon,
+    Widget uncheckedIcon,
+    Widget? subtitle,
+    Widget? details,
+    String? semanticsLabel,
+    bool? enabled,
+    bool autofocus,
+    FocusNode? focusNode,
+    ValueChanged<bool>? onFocusChange,
+    ValueChanged<bool>? onHoverChange,
+    ValueChanged<FWidgetStatesDelta>? onStatesChange,
+    Map<ShortcutActivator, Intent>? shortcuts,
+    Map<Type, Action<Intent>>? actions,
+    Widget? suffix,
+    Key? key,
+  }) = FSelectTile<T>;
+
+  /// {@template forui.widgets.FSelectTile.suffix}
   /// Creates a [FSelectTile] with a suffix check icon.
+  /// {@endtemplate}
   const FSelectTile.suffix({
     required this.title,
     required this.value,
@@ -118,7 +147,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectTileData(:controller, :selected) = FSelectTileData.of<T>(context);
+    final FSelectTileData(:controller, :selected) = .of<T>(context);
     return FTile(
       style: style,
       prefix: switch ((_suffix, selected)) {

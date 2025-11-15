@@ -20,7 +20,7 @@ class FAutocompleteController extends FTypeaheadController {
   }) : content = FPopoverController(vsync: vsync, motion: popoverMotion),
        super(
          textStyles: (context) {
-           final InheritedAutocompleteStyle(:style, :states) = InheritedAutocompleteStyle.of(context);
+           final InheritedAutocompleteStyle(:style, :states) = .of(context);
            return (
              style.fieldStyle.contentTextStyle.resolve(states),
              style.composingTextStyle.resolve(states),

@@ -5,13 +5,13 @@ enum FTabBarIndicatorSize {
   /// The tab indicator's bounds are as wide as the space occupied by the tab
   /// in the tab bar: from the right edge of the previous tab to the left edge
   /// of the next tab.
-  tab(TabBarIndicatorSize.tab),
+  tab(.tab),
 
   /// The tab's bounds are only as wide as the (centered) tab widget itself.
   ///
   /// This value is used to align the tab's label, typically a [Tab]
   /// widget's text or icon, with the selected tab indicator.
-  label(TabBarIndicatorSize.label);
+  label(.label);
 
   final TabBarIndicatorSize _value;
 
@@ -63,8 +63,8 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
     required this.unselectedLabelTextStyle,
     required this.indicatorDecoration,
     required this.focusedOutlineStyle,
-    this.padding = const EdgeInsets.all(4),
-    this.indicatorSize = FTabBarIndicatorSize.tab,
+    this.padding = const .all(4),
+    this.indicatorSize = .tab,
     this.height = 35,
     this.spacing = 10,
   });
@@ -73,17 +73,17 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   FTabsStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          border: Border.all(color: colors.muted),
+          border: .all(color: colors.muted),
           borderRadius: style.borderRadius,
           color: colors.muted,
         ),
         selectedLabelTextStyle: typography.sm.copyWith(
-          fontWeight: FontWeight.w500,
+          fontWeight: .w500,
           fontFamily: typography.defaultFontFamily,
           color: colors.foreground,
         ),
         unselectedLabelTextStyle: typography.sm.copyWith(
-          fontWeight: FontWeight.w500,
+          fontWeight: .w500,
           fontFamily: typography.defaultFontFamily,
           color: colors.mutedForeground,
         ),

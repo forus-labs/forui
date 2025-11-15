@@ -13,7 +13,7 @@ part 'tooltip.design.dart';
 
 /// A controller that controls whether a [FTooltip] is shown or hidden.
 final class FTooltipController extends FChangeNotifier {
-  final OverlayPortalController _overlay = OverlayPortalController();
+  final OverlayPortalController _overlay = .new();
   late final AnimationController _animation;
   late final CurvedAnimation _curveFade;
   late final CurvedAnimation _curveScale;
@@ -82,7 +82,7 @@ final class FTooltipController extends FChangeNotifier {
 /// Motion-related properties for [FTooltip].
 class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
   /// A [FTooltipMotion] with no motion effects.
-  static const FTooltipMotion none = FTooltipMotion(
+  static const FTooltipMotion none = .new(
     scaleTween: FImmutableTween(begin: 1, end: 1),
     fadeTween: FImmutableTween(begin: 1, end: 1),
   );
@@ -227,13 +227,13 @@ class FTooltip extends StatefulWidget {
     required this.tipBuilder,
     this.controller,
     this.style,
-    this.tipAnchor = Alignment.bottomCenter,
-    this.childAnchor = Alignment.topCenter,
+    this.tipAnchor = .bottomCenter,
+    this.childAnchor = .topCenter,
     this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
+    this.overflow = .flip,
     this.hover = true,
     this.hoverEnterDuration = const Duration(milliseconds: 500),
-    this.hoverExitDuration = Duration.zero,
+    this.hoverExitDuration = .zero,
     this.longPress = true,
     this.longPressExitDuration = const Duration(milliseconds: 1500),
     this.builder = _builder,
@@ -265,8 +265,8 @@ class FTooltip extends StatefulWidget {
 }
 
 class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
-  final FocusNode _focus = FocusNode(debugLabel: 'FTooltip', canRequestFocus: false, skipTraversal: true);
-  late FTooltipController _controller = widget.controller ?? FTooltipController(vsync: this);
+  final FocusNode _focus = .new(debugLabel: 'FTooltip', canRequestFocus: false, skipTraversal: true);
+  late FTooltipController _controller = widget.controller ?? .new(vsync: this);
   int _monotonic = 0;
 
   @override
@@ -277,7 +277,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         _controller.dispose();
       }
 
-      _controller = widget.controller ?? FTooltipController(vsync: this);
+      _controller = widget.controller ?? .new(vsync: this);
     }
   }
 
@@ -293,17 +293,17 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.tooltipStyle) ?? context.theme.tooltipStyle;
-    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final direction = Directionality.maybeOf(context) ?? .ltr;
 
     var child = widget.builder(context, _controller, widget.child);
     if (widget.hover || widget.longPress) {
       child = CallbackShortcuts(
-        bindings: {const SingleActivator(LogicalKeyboardKey.escape): _exit},
+        bindings: {const SingleActivator(.escape): _exit},
         child: Focus(
           // This is required as onFocusChange is not called when focus is shifted from a child to a nested child.
           onKeyEvent: (_, event) {
             _toggle(_focus.hasFocus);
-            return KeyEventResult.ignored;
+            return .ignored;
           },
           focusNode: _focus,
           onFocusChange: _toggle,
@@ -458,7 +458,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     required this.decoration,
     required this.textStyle,
     this.backgroundFilter,
-    this.padding = const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+    this.padding = const .symmetric(horizontal: 14, vertical: 10),
   });
 
   /// Creates a [FTooltipStyle] that inherits its properties.
@@ -467,7 +467,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
         decoration: BoxDecoration(
           color: colors.background,
           borderRadius: style.borderRadius,
-          border: Border.all(width: style.borderWidth, color: colors.border),
+          border: .all(width: style.borderWidth, color: colors.border),
           boxShadow: FTooltipStyle.shadow,
         ),
         textStyle: typography.sm,
