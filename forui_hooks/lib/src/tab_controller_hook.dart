@@ -36,7 +36,7 @@ class _TabControllerHook extends Hook<FTabController> {
   });
 
   @override
-  _TabControllerHookState createState() => _TabControllerHookState();
+  _TabControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -50,7 +50,7 @@ class _TabControllerHook extends Hook<FTabController> {
 }
 
 class _TabControllerHookState extends HookState<FTabController, _TabControllerHook> {
-  late final FTabController _controller = FTabController(
+  late final _controller = FTabController(
     initialIndex: hook.initialIndex,
     length: hook.length,
     vsync: hook.vsync,

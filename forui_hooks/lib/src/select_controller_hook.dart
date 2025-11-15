@@ -35,7 +35,7 @@ class _SelectHook<T> extends Hook<FSelectController<T>> {
   }) : _debugLabel = debugLabel;
 
   @override
-  _SelectHookState<T> createState() => _SelectHookState<T>();
+  _SelectHookState<T> createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -48,7 +48,7 @@ class _SelectHook<T> extends Hook<FSelectController<T>> {
 }
 
 class _SelectHookState<T> extends HookState<FSelectController<T>, _SelectHook<T>> {
-  late final FSelectController<T> _controller = FSelectController<T>(
+  late final _controller = FSelectController<T>(
     vsync: hook.vsync,
     value: hook.value,
     popoverMotion: hook.popoverMotion,
@@ -106,7 +106,7 @@ class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
   }) : _debugLabel = debugLabel;
 
   @override
-  _MultiSelectHookState<T> createState() => _MultiSelectHookState<T>();
+  _MultiSelectHookState<T> createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -121,7 +121,7 @@ class _MultiSelectHook<T> extends Hook<FMultiSelectController<T>> {
 }
 
 class _MultiSelectHookState<T> extends HookState<FMultiSelectController<T>, _MultiSelectHook<T>> {
-  late final FMultiSelectController<T> _controller = FMultiSelectController<T>(
+  late final _controller = FMultiSelectController<T>(
     vsync: hook.vsync,
     value: hook.value,
     min: hook.min,

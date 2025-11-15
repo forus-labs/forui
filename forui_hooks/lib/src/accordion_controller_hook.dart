@@ -21,7 +21,7 @@ class _AccordionControllerHook extends Hook<FAccordionController> {
     : _debugLabel = debugLabel;
 
   @override
-  _AccordionControllerHookState createState() => _AccordionControllerHookState();
+  _AccordionControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -33,7 +33,7 @@ class _AccordionControllerHook extends Hook<FAccordionController> {
 }
 
 class _AccordionControllerHookState extends HookState<FAccordionController, _AccordionControllerHook> {
-  late final FAccordionController _controller = FAccordionController(min: hook.min, max: hook.max);
+  late final _controller = FAccordionController(min: hook.min, max: hook.max);
 
   @override
   FAccordionController build(BuildContext context) => _controller;

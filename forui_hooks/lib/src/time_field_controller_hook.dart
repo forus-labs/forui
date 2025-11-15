@@ -45,7 +45,7 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
   }) : _debugLabel = debugLabel;
 
   @override
-  _TimeFieldHookState createState() => _TimeFieldHookState();
+  _TimeFieldHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -59,7 +59,7 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
 }
 
 class _TimeFieldHookState extends HookState<FTimeFieldController, _TimeFieldHook> {
-  late final FTimeFieldController _controller = FTimeFieldController(
+  late final _controller = FTimeFieldController(
     vsync: hook.vsync,
     initialTime: hook.initialTime,
     validator: hook.validator,

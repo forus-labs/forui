@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 /// Creates a [FContinuousSliderController] that represents a continuous value and is automatically disposed.
 FContinuousSliderController useFContinuousSliderController({
   required FSliderSelection selection,
-  FSliderInteraction allowedInteraction = FSliderInteraction.tapAndSlideThumb,
+  FSliderInteraction allowedInteraction = .tapAndSlideThumb,
   double stepPercentage = 0.05,
   bool tooltips = true,
   bool minExtendable = false,
@@ -40,7 +40,7 @@ class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
   });
 
   @override
-  _ContinuousControllerHookState createState() => _ContinuousControllerHookState();
+  _ContinuousControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -55,7 +55,7 @@ class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
 }
 
 class _ContinuousControllerHookState extends HookState<FContinuousSliderController, _ContinuousControllerHook> {
-  late final FContinuousSliderController _controller = FContinuousSliderController(
+  late final _controller = FContinuousSliderController(
     selection: hook.selection,
     stepPercentage: hook.stepPercentage,
     allowedInteraction: hook.allowedInteraction,
@@ -99,7 +99,7 @@ class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
   });
 
   @override
-  _ContinuousRangeControllerHookState createState() => _ContinuousRangeControllerHookState();
+  _ContinuousRangeControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -113,7 +113,7 @@ class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
 
 class _ContinuousRangeControllerHookState
     extends HookState<FContinuousSliderController, _ContinuousRangeControllerHook> {
-  late final FContinuousSliderController _controller = FContinuousSliderController.range(
+  late final _controller = FContinuousSliderController.range(
     selection: hook.selection,
     stepPercentage: hook.stepPercentage,
     tooltips: hook.tooltips,
@@ -135,7 +135,7 @@ class _ContinuousRangeControllerHookState
 /// Creates a [FDiscreteSliderController] that represents a discrete value and is automatically disposed.
 FDiscreteSliderController useFDiscreteSliderController({
   required FSliderSelection selection,
-  FSliderInteraction allowedInteraction = FSliderInteraction.tapAndSlideThumb,
+  FSliderInteraction allowedInteraction = .tapAndSlideThumb,
   bool tooltips = true,
   bool minExtendable = false,
   List<Object?>? keys,
@@ -164,7 +164,7 @@ class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
   });
 
   @override
-  _DiscreteControllerHookState createState() => _DiscreteControllerHookState();
+  _DiscreteControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -178,7 +178,7 @@ class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
 }
 
 class _DiscreteControllerHookState extends HookState<FDiscreteSliderController, _DiscreteControllerHook> {
-  late final FDiscreteSliderController _controller = FDiscreteSliderController(
+  late final _controller = FDiscreteSliderController(
     selection: hook.selection,
     allowedInteraction: hook.allowedInteraction,
     tooltips: hook.tooltips,
@@ -212,7 +212,7 @@ class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
   const _DiscreteRangeControllerHook({required this.selection, required this.tooltips, super.keys});
 
   @override
-  _DiscreteRangeControllerHookState createState() => _DiscreteRangeControllerHookState();
+  _DiscreteRangeControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -224,7 +224,7 @@ class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
 }
 
 class _DiscreteRangeControllerHookState extends HookState<FDiscreteSliderController, _DiscreteRangeControllerHook> {
-  late final FDiscreteSliderController _controller = FDiscreteSliderController.range(
+  late final _controller = FDiscreteSliderController.range(
     selection: hook.selection,
     tooltips: hook.tooltips,
   );

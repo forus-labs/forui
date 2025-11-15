@@ -24,8 +24,8 @@ class _LocaleScaffoldState extends State<LocaleScaffold> {
 
   @override
   Widget build(BuildContext context) => Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisSize: .min,
+    mainAxisAlignment: .center,
     spacing: 10,
     children: [
       Localizations.override(

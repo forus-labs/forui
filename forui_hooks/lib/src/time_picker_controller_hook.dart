@@ -14,7 +14,7 @@ class _TimePickerControllerHook extends Hook<FTimePickerController> {
   const _TimePickerControllerHook({required this.initial, super.keys});
 
   @override
-  _TimePickerControllerHookState createState() => _TimePickerControllerHookState();
+  _TimePickerControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -24,7 +24,7 @@ class _TimePickerControllerHook extends Hook<FTimePickerController> {
 }
 
 class _TimePickerControllerHookState extends HookState<FTimePickerController, _TimePickerControllerHook> {
-  late final FTimePickerController _controller = FTimePickerController(initial: hook.initial);
+  late final _controller = FTimePickerController(initial: hook.initial);
 
   @override
   FTimePickerController build(BuildContext context) => _controller;

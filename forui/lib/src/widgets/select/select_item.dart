@@ -135,7 +135,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
     Key? key,
   }) : this.rich(
          label: label,
-         children: [for (final e in items.entries) .item<T>(title: Text(e.key), value: e.value)],
+         children: [for (final e in items.entries) .item(title: Text(e.key), value: e.value)],
          style: style,
          enabled: enabled,
          divider: divider,

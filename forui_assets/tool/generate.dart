@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:html/parser.dart' as html;
-import 'package:pub_semver/pub_semver.dart';
 import 'package:sugar/core.dart';
 
 const family = 'ForuiLucideIcons';
@@ -115,7 +114,7 @@ void generate(List<(String, String, String)> icons) {
 
   final code = DartFormatter(
     pageWidth: 120,
-    languageVersion: Version(3, 7, 0),
+    languageVersion: DartFormatter.latestLanguageVersion,
   ).format(DartEmitter(orderDirectives: true, useNullSafetySyntax: true).visitLibrary(library.build()).toString());
 
   File('./lib/src/assets.g.dart').writeAsStringSync(code);

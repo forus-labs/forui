@@ -35,7 +35,7 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
     // As such, we use the default `testUrl`, which is only the `baseDir` and
     // append a generically named `test.dart` so that the `baseDir` is
     // properly extracted.
-    Uri.parse('$relativePath/test/golden/${Platform.operatingSystem}/test.dart'),
+    .parse('$relativePath/test/golden/${Platform.operatingSystem}/test.dart'),
   );
 
   await testMain();

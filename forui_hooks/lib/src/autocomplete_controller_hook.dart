@@ -20,7 +20,7 @@ class _AutocompleteControllerHook extends Hook<FAutocompleteController> {
   const _AutocompleteControllerHook({required this.vsync, required this.text, required this.suggestions, super.keys});
 
   @override
-  _AutocompleteControllerHookState createState() => _AutocompleteControllerHookState();
+  _AutocompleteControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -33,11 +33,7 @@ class _AutocompleteControllerHook extends Hook<FAutocompleteController> {
 }
 
 class _AutocompleteControllerHookState extends HookState<FAutocompleteController, _AutocompleteControllerHook> {
-  late final FAutocompleteController _controller = FAutocompleteController(
-    vsync: hook.vsync,
-    text: hook.text,
-    suggestions: hook.suggestions,
-  );
+  late final _controller = FAutocompleteController(vsync: hook.vsync, text: hook.text, suggestions: hook.suggestions);
 
   @override
   FAutocompleteController build(BuildContext context) => _controller;

@@ -8,7 +8,7 @@ import 'package:forui/src/foundation/tappable.dart';
 import '../test_scaffold.dart';
 
 // ignore: avoid_positional_boolean_parameters
-Set<WidgetState> set(bool enabled) => {if (!enabled) WidgetState.disabled};
+Set<WidgetState> set(bool enabled) => {if (!enabled) .disabled};
 
 class _StubTappable extends AnimatedTappable {
   static void _press() {}
@@ -265,7 +265,7 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
       await tester.pumpAndSettle();
 
-      expect(states, FWidgetStatesDelta({}, {WidgetState.hovered}));
+      expect(states, FWidgetStatesDelta({}, {.hovered}));
     });
 
     testWidgets('onStateChange throwing error does not corrupt state', (tester) async {
@@ -289,13 +289,13 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
       await tester.pumpAndSettle();
 
-      expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
+      expect(delta, FWidgetStatesDelta({}, {.hovered}));
       expect(tester.takeException(), isNotNull);
 
       await gesture.moveTo(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(delta, FWidgetStatesDelta({WidgetState.hovered}, {}));
+      expect(delta, FWidgetStatesDelta({.hovered}, {}));
       expect(tester.takeException(), isNotNull);
     });
   });
@@ -515,13 +515,13 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
       await tester.pumpAndSettle();
 
-      expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
+      expect(delta, FWidgetStatesDelta({}, {.hovered}));
       expect(hovered, true);
 
       await gesture.moveTo(Offset.zero);
       await tester.pumpAndSettle();
 
-      expect(delta, FWidgetStatesDelta({WidgetState.hovered}, {}));
+      expect(delta, FWidgetStatesDelta({.hovered}, {}));
       expect(hovered, false);
     });
   });

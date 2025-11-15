@@ -34,7 +34,7 @@ class Application extends StatelessWidget {
       child: Builder(
         builder: (context) => FScaffold(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const .all(16.0),
             child: FCard(
               child: Column(spacing: 16, children: [FBadge(child: const Text('Badge'))]),
             ),

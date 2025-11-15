@@ -9,8 +9,8 @@ import 'package:forui/forui.dart';
 void main() {
   group('FColorScheme', () {
     const scheme = FColors(
-      brightness: Brightness.light,
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      brightness: .light,
+      systemOverlayStyle: .dark,
       barrier: Color(0xFF03A9F4),
       background: Colors.black,
       foreground: Colors.black12,
@@ -32,8 +32,8 @@ void main() {
 
       test('all arguments', () {
         final copy = scheme.copyWith(
-          brightness: Brightness.dark,
-          systemOverlayStyle: SystemUiOverlayStyle.light,
+          brightness: .dark,
+          systemOverlayStyle: .light,
           barrier: Colors.red,
           background: Colors.red,
           foreground: Colors.greenAccent,
@@ -120,8 +120,8 @@ void main() {
 
     group('lerp(...)', () {
       const schemeB = FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Colors.red,
         background: Colors.white,
         foreground: Colors.white70,

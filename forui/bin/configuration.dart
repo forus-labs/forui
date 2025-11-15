@@ -24,7 +24,7 @@ class Configuration {
   static const defaultTheme = 'lib/theme/theme.dart';
 
   static Directory _findProjectRoot([Directory? directory]) {
-    directory ??= Directory.current;
+    directory ??= .current;
 
     final pubspec = File('${directory.path}/pubspec.yaml');
     if (pubspec.existsSync()) {
