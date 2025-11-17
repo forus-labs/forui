@@ -103,6 +103,10 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * **Breaking** Rename `FTooltip.shift` to `FTooltip.overflow`.
 
 
+### `FToast`
+* Change `FToasterMotion.collapseCurve`'s default value from `easeOutCubic` to `easeOut`.
+
+
 ### Others
 * **Breaking** Remove `FSidebar.width`. This field was never intended for public usage - Use `FSidebarStyle.constraints`
   instead.

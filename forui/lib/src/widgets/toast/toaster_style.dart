@@ -101,6 +101,8 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
 }
 
 /// The motion-related properties for [FToaster] that affect all toasts.
+///
+/// See [FToastMotion] for motion properties that affect individual toasts.
 class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
   /// The duration of the toasts' expansion. Defaults to 400ms.
   @override
@@ -114,7 +116,7 @@ class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
   @override
   final Curve expandCurve;
 
-  /// The animation curve for the toasts' collapsing. Defaults to [Curves.easeOutCubic].
+  /// The animation curve for the toasts' collapsing. Defaults to [Curves.easeOut].
   @override
   final Curve collapseCurve;
 
@@ -123,7 +125,7 @@ class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
     this.expandDuration = const Duration(milliseconds: 400),
     this.collapseDuration = const Duration(milliseconds: 300),
     this.expandCurve = Curves.easeOutCubic,
-    this.collapseCurve = Curves.easeOutCubic,
+    this.collapseCurve = Curves.easeOut,
   });
 }
 
@@ -228,6 +230,8 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
 }
 
 /// The motion-related properties for [FToaster] that affect individual toasts.
+///
+/// See [FToasterMotion] for motion properties that affect the entire toaster.
 class FToastMotion with Diagnosticable, _$FToastMotionFunctions {
   /// The duration of the toast's entrance when it is initially added to to toaster. Defaults to 400ms.
   @override

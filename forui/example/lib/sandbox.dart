@@ -34,35 +34,43 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
       spacing: 5,
       children: [
-        FButton(style: FButtonStyle.primary(), onPress: () {}, child: Text('Primary')),
-        FButton(style: FButtonStyle.secondary(), onPress: () {}, child: Text('Secondary')),
-        FButton(style: FButtonStyle.ghost(), onPress: () {}, child: Text('Ghost')),
-        FButton(style: FButtonStyle.destructive(), onPress: () {}, child: Text('Destructive')),
-        FTextField.password(label: Text('FTextField Password'), hint: 'Enter password'),
-        SizedBox(height: 20),
-
-        // Test FTextFormField.password
-        FTextFormField.password(label: Text('FTextFormField Password'), hint: 'Enter password'),
-
-        SizedBox(height: 20),
-
-        // Test with custom obscureText notifier
-        FTextField.password(
-          label: Text('FTextField Password (starts visible)'),
-          hint: 'Enter password',
-          obscureTextController: controller,
-        ),
-        SizedBox(height: 20),
-        FTextFormField.password(
-          label: Text('FTextFormField Password (starts visible)'),
-          hint: 'Enter password',
-          obscureTextController: controller,
-        ),
+        for (final (alignment, description) in [
+          (FToastAlignment.topLeft, 'Top Left'),
+          (FToastAlignment.topCenter, 'Top Center'),
+          (FToastAlignment.topRight, 'Top Right'),
+          (FToastAlignment.bottomLeft, 'Bottom Left'),
+          (FToastAlignment.bottomCenter, 'Bottom Center'),
+          (FToastAlignment.bottomRight, 'Bottom Right'),
+        ])
+          FButton(
+            onPress: () => showFToast(
+              context: context,
+              alignment: alignment,
+              title: const Text('Event has been created'),
+              description: const Text('Friday, May 23, 2025 at 9:00 AM'),
+              suffixBuilder: (context, entry) => IntrinsicHeight(
+                child: FButton(
+                  style: context.theme.buttonStyles.primary.copyWith(
+                    contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
+                      textStyle: FWidgetStateMap.all(
+                        context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
+                      ),
+                    ),
+                  ),
+                  onPress: entry.dismiss,
+                  child: const Text('Undo'),
+                ),
+              ),
+            ),
+            child: Text('Show $description Toast'),
+          ),
       ],
-    );
-  }
+    ),
+  );
 }
