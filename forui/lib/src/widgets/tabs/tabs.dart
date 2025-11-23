@@ -22,8 +22,13 @@ class FTabEntry {
   /// The content of a tab.
   final Widget child;
 
-  /// Creates a [FTabs].
+  /// Creates a [FTabEntry].
   const FTabEntry({required this.label, required this.child});
+
+  /// Creates a [FTabEntry].
+  ///
+  /// This is identical to [FTabEntry.new], allowing dot-shorthand construction.
+  const factory FTabEntry.entry({required Widget label, required Widget child}) = FTabEntry.new;
 
   @override
   bool operator ==(Object other) =>

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:auto_route/annotations.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -50,7 +50,7 @@ class AutocompletePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15),
+    padding: const .only(top: 15),
     child: FAutocomplete(label: const Text('Autocomplete'), hint: 'What can it do?', items: features),
   );
 }
@@ -61,13 +61,11 @@ class DetailedAutocompletePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15),
+    padding: const .only(top: 15),
     child: FAutocomplete.builder(
       hint: 'Type to search',
-      filter: (query) {
-        const items = ['Bug', 'Feature', 'Question'];
-        return items.where((item) => item.toLowerCase().contains(query.toLowerCase()));
-      },
+      filter: (query) =>
+          const ['Bug', 'Feature', 'Question'].where((i) => i.toLowerCase().contains(query.toLowerCase())),
       contentBuilder: (context, query, suggestions) => [
         for (final suggestion in suggestions)
           switch (suggestion) {
@@ -102,24 +100,17 @@ class SectionAutocompletePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15),
+    padding: const .only(top: 15),
     child: FAutocomplete.builder(
       hint: 'Type to search timezones',
       filter: (query) => timezones.values
           .expand((list) => list)
           .where((timezone) => timezone.toLowerCase().contains(query.toLowerCase())),
-      contentBuilder: (context, query, suggestions) {
-        final sections = <FAutocompleteSection>[];
-
-        for (final MapEntry(key: label, value: zones) in timezones.entries) {
-          final items = zones.where(suggestions.contains).toList();
-          if (items.isNotEmpty) {
-            sections.add(FAutocompleteSection(label: Text(label), items: items));
-          }
-        }
-
-        return sections;
-      },
+      contentBuilder: (context, query, suggestions) => [
+        for (final MapEntry(key: label, value: zones) in timezones.entries)
+          if (zones.where(suggestions.contains).toList() case final zones when zones.isNotEmpty)
+            .section(label: Text(label), items: zones),
+      ],
     ),
   );
 }
@@ -130,17 +121,15 @@ class DividerAutocompletePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15),
+    padding: const .only(top: 15),
     child: FAutocomplete.builder(
       hint: 'Type to search levels',
-      filter: (query) {
-        final items = ['1A', '1B', '2A', '2B', '3', '4'];
-        return items.where((item) => item.toLowerCase().contains(query.toLowerCase()));
-      },
+      filter: (query) =>
+          const ['1A', '1B', '2A', '2B', '3', '4'].where((i) => i.toLowerCase().contains(query.toLowerCase())),
       contentBuilder: (context, query, suggestions) => <FAutocompleteItemMixin>[
         .richSection(
           label: const Text('Level 1'),
-          divider: FItemDivider.indented,
+          divider: .indented,
           children: [
             if (suggestions.contains('1A')) .item(value: '1A'),
             if (suggestions.contains('1B')) .item(value: '1B'),
@@ -160,7 +149,7 @@ class AsyncAutocompletePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15),
+    padding: const .only(top: 15),
     child: FAutocomplete.builder(
       hint: 'Type to search fruits',
       filter: (query) async {
@@ -178,7 +167,7 @@ class AsyncLoadingAutocompletePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15),
+    padding: const .only(top: 15),
     child: FAutocomplete.builder(
       hint: 'Type to search fruits',
       filter: (query) async {
@@ -186,12 +175,10 @@ class AsyncLoadingAutocompletePage extends Sample {
         return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
       },
       contentLoadingBuilder: (context, style) => Padding(
-        padding: const EdgeInsets.all(14.0),
+        padding: const .all(14.0),
         child: Text('Here be dragons...', style: style.emptyTextStyle),
       ),
-      contentBuilder: (context, query, suggestions) => [
-        for (final suggestion in suggestions) .item(value: suggestion),
-      ],
+      contentBuilder: (context, query, suggestions) => [for (final suggestion in suggestions) .item(value: suggestion)],
     ),
   );
 }
@@ -202,7 +189,7 @@ class AsyncErrorAutocompletePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15),
+    padding: const .only(top: 15),
     child: FAutocomplete.builder(
       hint: 'Type to search fruits',
       filter: (query) async {
@@ -211,7 +198,7 @@ class AsyncErrorAutocompletePage extends Sample {
       },
       contentBuilder: (context, query, values) => [for (final fruit in values) .item(value: fruit)],
       contentErrorBuilder: (context, error, trace) => Padding(
-        padding: const EdgeInsets.all(14.0),
+        padding: const .all(14.0),
         child: Icon(FIcons.circleX, size: 15, color: context.theme.colors.primary),
       ),
     ),
@@ -224,7 +211,7 @@ class ClearableAutocompletePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 15),
+    padding: const .only(top: 15),
     child: FAutocomplete(hint: 'Type to search fruits', clearable: (value) => value.text.isNotEmpty, items: fruits),
   );
 }
@@ -240,19 +227,25 @@ class FormAutocompletePage extends StatefulSample {
 class _FormAutocompletePageState extends StatefulSampleState<FormAutocompletePage> with SingleTickerProviderStateMixin {
   static const _departments = ['Engineering', 'Marketing', 'Sales', 'Human Resources', 'Finance'];
 
-  final _formKey = GlobalKey<FormState>();
-  late final _departmentController = FAutocompleteController(vsync: this);
+  final _key = GlobalKey<FormState>();
+  late final _controller = FAutocompleteController(vsync: this);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(30.0),
+    padding: const .all(30.0),
     child: Form(
-      key: _formKey,
+      key: _key,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
           FAutocomplete(
-            controller: _departmentController,
+            controller: _controller,
             label: const Text('Department'),
             description: const Text('Type to search your dream department'),
             hint: 'Search departments',
@@ -263,7 +256,7 @@ class _FormAutocompletePageState extends StatefulSampleState<FormAutocompletePag
           FButton(
             child: const Text('Submit'),
             onPress: () {
-              if (_formKey.currentState!.validate()) {
+              if (_key.currentState!.validate()) {
                 // Form is valid, do something with department.
               }
             },
@@ -278,11 +271,5 @@ class _FormAutocompletePageState extends StatefulSampleState<FormAutocompletePag
       return 'Please select a department';
     }
     return null;
-  }
-
-  @override
-  void dispose() {
-    _departmentController.dispose();
-    super.dispose();
   }
 }

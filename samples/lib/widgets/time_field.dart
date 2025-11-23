@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -9,8 +9,7 @@ import 'package:forui_samples/sample.dart';
 class TimeFieldPage extends Sample {
   final bool hour24;
 
-  TimeFieldPage({@queryParam super.theme, @queryParam String hour24 = 'false'})
-    : hour24 = bool.tryParse(hour24) ?? false;
+  TimeFieldPage({@queryParam this.hour24 = false, @queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => FTimeField(
@@ -22,11 +21,11 @@ class TimeFieldPage extends Sample {
 
 @RoutePage()
 class PickerTimeFieldPage extends Sample {
-  PickerTimeFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
+  PickerTimeFieldPage({@queryParam super.theme, super.alignment = .topCenter});
 
   @override
   Widget sample(BuildContext context) => const Padding(
-    padding: EdgeInsets.only(top: 30),
+    padding: .only(top: 30),
     child: FTimeField.picker(label: Text('Appointment Time'), description: Text('Select a time for your appointment.')),
   );
 }
@@ -41,15 +40,15 @@ class ValidatorTimeFieldPage extends StatefulSample {
 
 class _ValidationTimePickerPageState extends StatefulSampleState<ValidatorTimeFieldPage>
     with SingleTickerProviderStateMixin {
-  late final FTimeFieldController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = FTimeFieldController(vsync: this, validator: _validate);
-  }
+  late final _controller = FTimeFieldController(vsync: this, validator: _validate);
 
   String? _validate(FTime? time) => time?.hour == 12 ? 'Time cannot be noon.' : null;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => FTimeField(
@@ -57,12 +56,6 @@ class _ValidationTimePickerPageState extends StatefulSampleState<ValidatorTimeFi
     label: const Text('Appointment Time'),
     description: const Text('Select a time for your appointment.'),
   );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -70,66 +63,59 @@ class FormTimeFieldPage extends StatefulSample {
   FormTimeFieldPage({@queryParam super.theme});
 
   @override
-  State<FormTimeFieldPage> createState() => _FormTimePickerPageState();
+  State<FormTimeFieldPage> createState() => _FormTimeFieldPageState();
 }
 
-class _FormTimePickerPageState extends StatefulSampleState<FormTimeFieldPage> with TickerProviderStateMixin {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FTimeFieldController _startTimeController;
-  late final FTimeFieldController _endTimeController;
+class _FormTimeFieldPageState extends StatefulSampleState<FormTimeFieldPage> with TickerProviderStateMixin {
+  final _key = GlobalKey<FormState>();
+  late final _startTimeController = FTimeFieldController(vsync: this, validator: _validateStartTime);
+  late final _endTimeController = FTimeFieldController(vsync: this, validator: _validateEndTime);
+
+  String? _validateStartTime(FTime? time) => switch (time) {
+    null => 'Please select a start time.',
+    _ when time < .now() => 'Start Time must be in the future.',
+    _ => null,
+  };
+
+  String? _validateEndTime(FTime? time) => switch (time) {
+    null => 'Please select an end time.',
+    _ when _startTimeController.value != null && time < _startTimeController.value! =>
+      'End Time must be after start time.',
+    _ => null,
+  };
 
   @override
-  void initState() {
-    super.initState();
-    _startTimeController = FTimeFieldController(vsync: this, validator: _validateStartTime);
-    _endTimeController = FTimeFieldController(vsync: this, validator: _validateEndTime);
-  }
-
-  String? _validateStartTime(FTime? time) {
-    if (time == null) {
-      return 'Please select a start time.';
-    }
-    if (time < FTime.now()) {
-      return 'Start Time must be in the future.';
-    }
-    return null;
-  }
-
-  String? _validateEndTime(FTime? time) {
-    if (time == null) {
-      return 'Please select an end time.';
-    }
-    if (_startTimeController.value != null && time < _startTimeController.value!) {
-      return 'End Time must be after start time.';
-    }
-    return null;
+  void dispose() {
+    _endTimeController.dispose();
+    _startTimeController.dispose();
+    super.dispose();
   }
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(30.0),
+    padding: const .all(30.0),
     child: Form(
-      key: _formKey,
+      key: _key,
       child: Column(
         children: [
           FTimeField(
             controller: _startTimeController,
             label: const Text('Start Time'),
             description: const Text('Select a start time.'),
-            autovalidateMode: AutovalidateMode.disabled,
+            autovalidateMode: .disabled,
           ),
           const SizedBox(height: 20),
           FTimeField(
             controller: _endTimeController,
             label: const Text('End Time'),
             description: const Text('Select an end time.'),
-            autovalidateMode: AutovalidateMode.disabled,
+            autovalidateMode: .disabled,
           ),
           const SizedBox(height: 25),
           FButton(
             child: const Text('Submit'),
             onPress: () {
-              if (_formKey.currentState!.validate()) {
+              if (_key.currentState!.validate()) {
                 // Form is valid, process the dates
               }
             },
@@ -138,11 +124,4 @@ class _FormTimePickerPageState extends StatefulSampleState<FormTimeFieldPage> wi
       ),
     ),
   );
-
-  @override
-  void dispose() {
-    _startTimeController.dispose();
-    _endTimeController.dispose();
-    super.dispose();
-  }
 }

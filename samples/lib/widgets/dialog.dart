@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -22,7 +22,7 @@ class DialogPage extends Sample {
     ];
 
     return FButton(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       onPress: () => showFDialog(
         context: context,
         builder: (context, style, animation) => FTheme(
@@ -35,7 +35,7 @@ class DialogPage extends Sample {
             body: const Text(
               'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
             ),
-            actions: direction == Axis.vertical ? actions.reversed.toList() : actions,
+            actions: direction == .vertical ? actions.reversed.toList() : actions,
           ),
         ),
       ),
@@ -46,19 +46,19 @@ class DialogPage extends Sample {
 
 @RoutePage()
 class BlurredDialogPage extends Sample {
-  BlurredDialogPage({@queryParam super.theme}) : super(alignment: Alignment.topCenter);
+  BlurredDialogPage({@queryParam super.theme, super.alignment = .topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 10.0),
+    padding: const .only(top: 10.0),
     child: FButton(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       onPress: () => showFDialog(
         context: context,
         routeStyle: context.theme.dialogRouteStyle.copyWith(
           barrierFilter: (animation) => ImageFilter.compose(
             outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-            inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
+            inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
           ),
         ),
         builder: (context, style, animation) => FTheme(

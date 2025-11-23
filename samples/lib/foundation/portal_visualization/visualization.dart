@@ -8,7 +8,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PortalVisualizationPage extends StatefulSample {
-  PortalVisualizationPage({@queryParam super.theme}) : super(maxWidth: 800);
+  PortalVisualizationPage({@queryParam super.theme, super.maxWidth = 800});
 
   @override
   State<PortalVisualizationPage> createState() => _VisualizerState();
@@ -19,7 +19,7 @@ class _VisualizerState extends StatefulSampleState<PortalVisualizationPage> {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const .all(8.0),
     child: Row(
       spacing: 4,
       children: [
@@ -71,22 +71,22 @@ class Visualization extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    clipBehavior: Clip.hardEdge,
+    clipBehavior: .hardEdge,
     decoration: BoxDecoration(
-      border: Border.all(color: context.theme.colors.border),
+      border: .all(color: context.theme.colors.border),
       borderRadius: context.theme.style.borderRadius,
     ),
-    padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 30),
+    padding: const .symmetric(horizontal: 75, vertical: 30),
     child: Center(
       child: Container(
         width: viewport.width,
         height: viewport.height,
         decoration: BoxDecoration(
-          border: Border.all(color: context.theme.colors.border),
+          border: .all(color: context.theme.colors.border),
           color: context.theme.colors.muted,
         ),
         child: Stack(
-          clipBehavior: Clip.none,
+          clipBehavior: .none,
           children: [
             Positioned(
               top: 8,
@@ -144,7 +144,7 @@ class _Rect extends StatelessWidget {
     left: offset.dx,
     top: offset.dy,
     child: Stack(
-      clipBehavior: Clip.none,
+      clipBehavior: .none,
       children: [
         Container(
           width: size.width,
@@ -152,10 +152,10 @@ class _Rect extends StatelessWidget {
           decoration: BoxDecoration(color: background),
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const .all(8.0),
               child: Text(
                 label,
-                style: context.theme.typography.xs.copyWith(color: foreground, overflow: TextOverflow.ellipsis),
+                style: context.theme.typography.xs.copyWith(color: foreground, overflow: .ellipsis),
               ),
             ),
           ),
@@ -167,7 +167,7 @@ class _Rect extends StatelessWidget {
             width: 10,
             height: 10,
             decoration: BoxDecoration(
-              border: Border.all(color: background),
+              border: .all(color: background),
               color: foreground,
               shape: BoxShape.circle,
             ),

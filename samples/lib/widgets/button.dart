@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
-final variants = {
+final _styles = {
   'primary': FButtonStyle.primary(),
   'secondary': FButtonStyle.secondary(),
   'destructive': FButtonStyle.destructive(),
@@ -15,28 +15,28 @@ final variants = {
 
 @RoutePage()
 class ButtonTextPage extends Sample {
-  final FBaseButtonStyle Function(FButtonStyle) variant;
+  final FBaseButtonStyle Function(FButtonStyle) style;
   final String label;
 
   ButtonTextPage({@queryParam super.theme, @queryParam String style = 'primary', @queryParam this.label = 'Button'})
-    : variant = variants[style]!;
+    : style = _styles[style]!;
 
   @override
   Widget sample(BuildContext context) =>
-      FButton(style: variant, mainAxisSize: MainAxisSize.min, onPress: () {}, child: Text(label));
+      FButton(style: style, mainAxisSize: .min, onPress: () {}, child: Text(label));
 }
 
 @RoutePage()
 class ButtonIconPage extends Sample {
-  final FBaseButtonStyle Function(FButtonStyle) variant;
+  final FBaseButtonStyle Function(FButtonStyle) style;
 
-  ButtonIconPage({@queryParam super.theme = 'zinc-light', @queryParam String variant = 'primary'})
-    : variant = variants[variant]!;
+  ButtonIconPage({@queryParam super.theme = 'zinc-light', @queryParam String style = 'primary'})
+      : style = _styles[style]!;
 
   @override
   Widget sample(BuildContext context) => FButton(
-    style: variant,
-    mainAxisSize: MainAxisSize.min,
+    style: style,
+    mainAxisSize: .min,
     prefix: const Icon(FIcons.mail),
     onPress: () {},
     child: const Text('Login with Email'),
@@ -57,7 +57,7 @@ class ButtonCircularProgressPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FButton(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     prefix: const FCircularProgress(),
     onPress: null,
     child: const Text('Please wait'),

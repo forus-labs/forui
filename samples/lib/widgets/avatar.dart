@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -14,7 +14,7 @@ class AvatarPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       FAvatar(image: AssetImage(path('avatar.png')), fallback: const Text('MN')),
       const SizedBox(width: 10),
@@ -31,7 +31,7 @@ class AvatarRawPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       FAvatar.raw(),
       const SizedBox(width: 10),
@@ -48,7 +48,7 @@ class AvatarInvalidPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       FAvatar(image: const AssetImage(''), fallback: const Text('MN')),
       const SizedBox(width: 10),

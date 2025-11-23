@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -11,17 +11,17 @@ class BreadcrumbPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       FBreadcrumb(
         children: [
           FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
           FBreadcrumbItem.collapsed(
             menu: [
-              FItemGroup(
+              .group(
                 children: [
-                  FItem(title: const Text('Documentation'), onPress: () {}),
-                  FItem(title: const Text('Themes'), onPress: () {}),
+                  .item(title: const Text('Documentation'), onPress: () {}),
+                  .item(title: const Text('Themes'), onPress: () {}),
                 ],
               ),
             ],
@@ -40,7 +40,7 @@ class BreadcrumbTilesPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       FBreadcrumb(
         children: [
@@ -69,7 +69,7 @@ class BreadcrumbDividerPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       FBreadcrumb(
         divider: Transform.rotate(angle: -60, child: const Icon(FIcons.slash, size: 14)),
@@ -77,10 +77,10 @@ class BreadcrumbDividerPage extends Sample {
           FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
           FBreadcrumbItem.collapsed(
             menu: [
-              FItemGroup(
+              .group(
                 children: [
-                  FItem(title: const Text('Documentation'), onPress: () {}),
-                  FItem(title: const Text('Themes'), onPress: () {}),
+                  .item(title: const Text('Documentation'), onPress: () {}),
+                  .item(title: const Text('Themes'), onPress: () {}),
                 ],
               ),
             ],

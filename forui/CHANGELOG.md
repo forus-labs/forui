@@ -30,6 +30,15 @@ This update focuses on overhauling the API to better support the new dot-shortha
 *  **Breaking** Change `FDateField.shift` to `FDateField.overflow`.
 
 
+### `FItem` & `FItemGroup`
+* Add `FItemMixin.tile(...)`.
+* Add `FItemMixin.raw(...)`.
+* Add `FItemGroup.group(...)`.
+* Add `FItemGroupMixin.group(...)`.
+* Add `FItemGroupMixin.builder(...)`.
+* Add `FItemGroupMixin.merge(...)`.
+
+
 ### `FPopover`
 * **Breaking** Change `FPopover.shift` to `FPopover.overflow`.
 
@@ -39,6 +48,8 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 
 ### `FPortal`
+* Add `FPortalSpacing.spacing(...)`.
+
 * **Breaking** Rename `FPortalBox` to `FPortalRect`.
 * **Breaking** Rename `FPortalChildBox` to `FPortalChildRect`.
 * **Breaking** Rename `FPortalShift` to `FPortalOverflow`.
@@ -51,6 +62,10 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 ### `FRadio`
 * **Breaking** Remove `FRadio.grouped(...)`. Use `FSelectGroupItemMixin.radio(...)` instead.
+
+
+### `FResizable`
+* Add `FResizable.region(...)`.
 
 
 ### `FSelect` & `FMultiSelect`
@@ -74,6 +89,14 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 ### `FSelectMenutTile`
 *  **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+
+
+### `FSlider`
+* Add `FSliderMark.mark(...)`.
+
+
+### `FTab`
+* Add `FTabEntry.entry(...)`.
 
 
 ### `FTappable`

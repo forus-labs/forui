@@ -322,6 +322,35 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          ],
        ));
 
+  /// {@macro forui.widgets.FItemGroup.new}
+  ///
+  /// This function is a shorthand for [FItemGroup.new].
+  FItemGroup.group({
+    required List<FItemMixin> children,
+    FItemGroupStyle Function(FItemGroupStyle style)? style,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    bool? enabled,
+    FItemDivider divider = .none,
+    String? semanticsLabel,
+    Key? key,
+  }) : this(
+         children: children,
+         style: style,
+         scrollController: scrollController,
+         cacheExtent: cacheExtent,
+         maxHeight: maxHeight,
+         dragStartBehavior: dragStartBehavior,
+         physics: physics,
+         enabled: enabled,
+         divider: divider,
+         semanticsLabel: semanticsLabel,
+         key: key,
+       );
+
   @override
   Widget build(BuildContext context) {
     final data = FInheritedItemData.maybeOf(context);

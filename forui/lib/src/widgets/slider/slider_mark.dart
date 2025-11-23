@@ -32,6 +32,12 @@ class FSliderMark with Diagnosticable {
   const FSliderMark({required this.value, this.style, this.tick = true, this.label})
     : assert(0 <= value && value <= 1, 'value ($value) must be between 0.0 and 1.0, inclusive.');
 
+  /// Creates a [FSliderMark] at the given percentage in a slider.
+  ///
+  /// This is identical to [FSliderMark.new], allowing dot-shorthand construction.
+  const factory FSliderMark.mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label}) =
+      FSliderMark.new;
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

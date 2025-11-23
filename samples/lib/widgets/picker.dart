@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:auto_route/annotations.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -10,9 +10,7 @@ class PickerPage extends Sample {
   final bool loop;
   final bool builder;
 
-  PickerPage({@queryParam String loop = 'false', @queryParam String builder = 'false', @queryParam super.theme})
-    : loop = bool.tryParse(loop) ?? false,
-      builder = bool.tryParse(builder) ?? false;
+  PickerPage({@queryParam this.loop = false, @queryParam this.builder = false, @queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => FPicker(

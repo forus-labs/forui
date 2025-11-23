@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -11,13 +11,13 @@ class TabsPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const .all(16),
         child: FTabs(
           children: [
-            FTabEntry(
+            .entry(
               label: const Text('Account'),
               child: FCard(
                 title: const Text('Account'),
@@ -33,7 +33,7 @@ class TabsPage extends Sample {
                 ),
               ),
             ),
-            FTabEntry(
+            .entry(
               label: const Text('Password'),
               child: FCard(
                 title: const Text('Password'),

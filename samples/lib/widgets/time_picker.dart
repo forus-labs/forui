@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 
-import 'package:auto_route/annotations.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -11,24 +11,23 @@ import 'package:forui_samples/sample.dart';
 class TimePickerPage extends StatefulSample {
   final bool hour24;
 
-  TimePickerPage({@queryParam String hour24 = 'false', @queryParam super.theme, super.maxWidth = 200})
-    : hour24 = bool.tryParse(hour24) ?? false;
+  TimePickerPage({@queryParam this.hour24 = false, @queryParam super.theme, super.maxWidth = 200});
 
   @override
   State<TimePickerPage> createState() => _TimePickerPageState();
 }
 
 class _TimePickerPageState extends StatefulSampleState<TimePickerPage> {
-  late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
-
-  @override
-  Widget sample(BuildContext context) => FTimePicker(controller: _controller, hour24: widget.hour24);
+  final _controller = FTimePickerController(initial: .now());
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
+  @override
+  Widget sample(BuildContext context) => FTimePicker(controller: _controller, hour24: widget.hour24);
 }
 
 @RoutePage()
@@ -40,16 +39,16 @@ class IntervalTimePickerPage extends StatefulSample {
 }
 
 class _IntervalTimePickerPageState extends StatefulSampleState<IntervalTimePickerPage> {
-  late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
-
-  @override
-  Widget sample(BuildContext context) => FTimePicker(controller: _controller, hourInterval: 2, minuteInterval: 5);
+  final _controller = FTimePickerController(initial: .now());
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
+  @override
+  Widget sample(BuildContext context) => FTimePicker(controller: _controller, hourInterval: 2, minuteInterval: 5);
 }
 
 @RoutePage()
@@ -62,11 +61,17 @@ class AnimatedTimePickerPage extends StatefulSample {
 
 class _AnimatedTimePickerPageState extends StatefulSampleState<AnimatedTimePickerPage> {
   static final _random = Random();
-  late final FTimePickerController _controller = FTimePickerController(initial: FTime.now());
+  final _controller = FTimePickerController(initial: .now());
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisSize: MainAxisSize.min,
+    mainAxisSize: .min,
     children: [
       SizedBox(height: 300, child: FTimePicker(controller: _controller)),
       FButton(
@@ -75,10 +80,4 @@ class _AnimatedTimePickerPageState extends StatefulSampleState<AnimatedTimePicke
       ),
     ],
   );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 }

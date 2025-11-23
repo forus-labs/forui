@@ -1,8 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -18,6 +17,14 @@ class PersistentSheetPage extends StatefulSample {
 
 class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
   final Map<FLayout, FPersistentSheetController> _controllers = {};
+
+  @override
+  void dispose() {
+    for (final controller in _controllers.values) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) {
@@ -45,23 +52,15 @@ class _SheetsState extends StatefulSampleState<PersistentSheetPage> {
       mainAxisAlignment: .center,
       mainAxisSize: .min,
       children: [
-        FButton(onPress: onPress(FLayout.ltr), child: const Text('Left')),
+        FButton(onPress: onPress(.ltr), child: const Text('Left')),
         const SizedBox(height: 5),
-        FButton(onPress: onPress(FLayout.ttb), child: const Text('Top')),
+        FButton(onPress: onPress(.ttb), child: const Text('Top')),
         const SizedBox(height: 5),
-        FButton(onPress: onPress(FLayout.rtl), child: const Text('Right')),
+        FButton(onPress: onPress(.rtl), child: const Text('Right')),
         const SizedBox(height: 5),
-        FButton(onPress: onPress(FLayout.btt), child: const Text('Bottom')),
+        FButton(onPress: onPress(.btt), child: const Text('Bottom')),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    for (final controller in _controllers.values) {
-      controller.dispose();
-    }
-    super.dispose();
   }
 }
 
@@ -73,25 +72,25 @@ class Form extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: double.infinity,
-    width: double.infinity,
+    height: .infinity,
+    width: .infinity,
     decoration: BoxDecoration(
       color: context.theme.colors.background,
       border: side.vertical
-          ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-          : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
+          ? .symmetric(horizontal: BorderSide(color: context.theme.colors.border))
+          : .symmetric(vertical: BorderSide(color: context.theme.colors.border)),
     ),
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
+      padding: const .symmetric(horizontal: 15, vertical: 8.0),
       child: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           children: [
             Text(
               'Account',
               style: context.theme.typography.xl2.copyWith(
-                fontWeight: FontWeight.w600,
+                fontWeight: .w600,
                 color: context.theme.colors.foreground,
                 height: 1.5,
               ),
@@ -132,6 +131,12 @@ class _DraggableState extends StatefulSampleState<DraggablePersistentSheetPage> 
   FPersistentSheetController? controller;
 
   @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget sample(BuildContext context) => FButton(
     child: const Text('Click me'),
     onPress: () {
@@ -142,16 +147,14 @@ class _DraggableState extends StatefulSampleState<DraggablePersistentSheetPage> 
 
       controller = showFPersistentSheet(
         context: context,
-        side: FLayout.btt,
+        side: .btt,
         mainAxisMaxRatio: null,
         builder: (context, _) => DraggableScrollableSheet(
           expand: false,
           builder: (context, controller) => ScrollConfiguration(
             // This is required to enable dragging on desktop.
             // See https://github.com/flutter/flutter/issues/101903 for more information.
-            behavior: ScrollConfiguration.of(
-              context,
-            ).copyWith(dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad}),
+            behavior: ScrollConfiguration.of(context).copyWith(dragDevices: {.touch, .mouse, .trackpad}),
             child: FTileGroup.builder(
               count: 25,
               scrollController: controller,
@@ -162,10 +165,4 @@ class _DraggableState extends StatefulSampleState<DraggablePersistentSheetPage> 
       );
     },
   );
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
-  }
 }

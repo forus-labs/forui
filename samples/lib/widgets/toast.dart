@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class ToastPage extends Sample {
-  ToastPage({@queryParam super.theme, super.key});
+  ToastPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => Center(
     child: Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       spacing: 5,
       children: [
-        for (final (alignment, description) in [
-          (FToastAlignment.topLeft, 'Top Left'),
-          (FToastAlignment.topCenter, 'Top Center'),
-          (FToastAlignment.topRight, 'Top Right'),
-          (FToastAlignment.bottomLeft, 'Bottom Left'),
-          (FToastAlignment.bottomCenter, 'Bottom Center'),
-          (FToastAlignment.bottomRight, 'Bottom Right'),
+        for (final (FToastAlignment alignment, description) in [
+          (.topLeft, 'Top Left'),
+          (.topCenter, 'Top Center'),
+          (.topRight, 'Top Right'),
+          (.bottomLeft, 'Bottom Left'),
+          (.bottomCenter, 'Bottom Center'),
+          (.bottomRight, 'Bottom Right'),
         ])
           FButton(
             onPress: () => showFToast(
@@ -34,7 +34,7 @@ class ToastPage extends Sample {
                   style: context.theme.buttonStyles.primary.copyWith(
                     contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
-                      textStyle: FWidgetStateMap.all(
+                      textStyle: .all(
                         context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
                       ),
                     ),
@@ -53,12 +53,12 @@ class ToastPage extends Sample {
 
 @RoutePage()
 class NoAutoDismissToastPage extends Sample {
-  NoAutoDismissToastPage({@queryParam super.theme, super.key});
+  NoAutoDismissToastPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => Center(
     child: FButton(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       onPress: () => showFToast(
         context: context,
         duration: null,
@@ -72,7 +72,7 @@ class NoAutoDismissToastPage extends Sample {
 
 @RoutePage()
 class RawToastPage extends Sample {
-  RawToastPage({@queryParam super.theme, super.key});
+  RawToastPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) {
@@ -87,7 +87,7 @@ class RawToastPage extends Sample {
 
     return Center(
       child: FButton(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         onPress: () => showRawFToast(
           context: context,
           duration: null,
@@ -96,7 +96,7 @@ class RawToastPage extends Sample {
               style: cardStyle,
               title: const Text('Event has been created'),
               subtitle: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 5),
+                padding: .symmetric(vertical: 5),
                 child: Text(
                   'This is a more detailed description that provides comprehensive context and additional information '
                   'about the notification, explaining what happened and what the user might expect next.',
@@ -117,9 +117,9 @@ class BehaviorToastPage extends StatelessWidget {
   final FThemeData theme;
   final FToasterExpandBehavior behavior;
 
-  BehaviorToastPage({@queryParam String theme = 'zinc-light', @queryParam String behavior = 'always', super.key})
+  BehaviorToastPage({@queryParam String theme = 'zinc-light', @queryParam String behavior = 'always'})
     : theme = themes[theme]!,
-      behavior = behavior == 'always' ? FToasterExpandBehavior.always : FToasterExpandBehavior.disabled;
+      behavior = behavior == 'always' ? .always : .disabled;
 
   @override
   Widget build(BuildContext context) => FTheme(
@@ -132,7 +132,7 @@ class BehaviorToastPage extends StatelessWidget {
           child: Builder(
             builder: (context) => Center(
               child: FButton(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: .min,
                 onPress: () => showFToast(
                   context: context,
                   icon: const Icon(FIcons.info),
@@ -153,9 +153,9 @@ class SwipeToastPage extends StatelessWidget {
   final FThemeData theme;
   final List<AxisDirection> directions;
 
-  SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam bool down = false, super.key})
+  SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam bool down = false})
     : theme = themes[theme]!,
-      directions = [if (down) AxisDirection.down];
+      directions = [if (down) .down];
 
   @override
   Widget build(BuildContext context) => FTheme(
@@ -167,7 +167,7 @@ class SwipeToastPage extends StatelessWidget {
           child: Builder(
             builder: (context) => Center(
               child: FButton(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisSize: .min,
                 onPress: () => showFToast(
                   context: context,
                   swipeToDismiss: directions,

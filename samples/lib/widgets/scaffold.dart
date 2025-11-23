@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -10,23 +10,23 @@ class ScaffoldPage extends StatefulSample {
   ScaffoldPage({@queryParam super.theme});
 
   @override
-  State<ScaffoldPage> createState() => _State();
+  State<ScaffoldPage> createState() => _ScaffoldPageState();
 }
 
-class _State extends StatefulSampleState<ScaffoldPage> {
-  int index = 3;
+class _ScaffoldPageState extends StatefulSampleState<ScaffoldPage> {
+  int _index = 3;
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       SizedBox(
         height: 500,
         child: FScaffold(
-          header: headers[index],
+          header: headers[_index],
           footer: FBottomNavigationBar(
-            index: index,
-            onChange: (index) => setState(() => this.index = index),
+            index: _index,
+            onChange: (index) => setState(() => _index = index),
             children: const [
               FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
               FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
@@ -34,7 +34,7 @@ class _State extends StatefulSampleState<ScaffoldPage> {
               FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
             ],
           ),
-          child: contents[index],
+          child: contents[_index],
         ),
       ),
     ],
@@ -52,9 +52,9 @@ final headers = [
 ];
 
 final contents = [
-  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [Text('Home Placeholder')]),
-  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [Text('Categories Placeholder')]),
-  const Column(mainAxisAlignment: MainAxisAlignment.center, children: [Text('Search Placeholder')]),
+  const Column(mainAxisAlignment: .center, children: [Text('Home Placeholder')]),
+  const Column(mainAxisAlignment: .center, children: [Text('Categories Placeholder')]),
+  const Column(mainAxisAlignment: .center, children: [Text('Search Placeholder')]),
   Column(
     children: [
       const SizedBox(height: 5),

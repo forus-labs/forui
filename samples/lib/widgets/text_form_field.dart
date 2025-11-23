@@ -1,48 +1,55 @@
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TextFormFieldPage extends StatefulSample {
-  TextFormFieldPage({@queryParam super.theme});
+  TextFormFieldPage({String? theme}) : super(theme: theme ?? 'zinc-light');
 
   @override
-  State<TextFormFieldPage> createState() => _FormFieldState();
+  State<TextFormFieldPage> createState() => _TextFormFieldPageState();
 }
 
-class _FormFieldState extends StatefulSampleState<TextFormFieldPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+class _TextFormFieldPageState extends StatefulSampleState<TextFormFieldPage> {
+  final _key = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(15.0),
+    padding: const .all(15.0),
     child: Form(
-      key: _formKey,
+      key: _key,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: .center,
         children: [
           FTextFormField.email(
             controller: _emailController,
             hint: 'janedoe@foruslabs.com',
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateMode: .onUserInteraction,
             validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
           ),
           const SizedBox(height: 10),
           FTextFormField.password(
             controller: _passwordController,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
+            autovalidateMode: .onUserInteraction,
             validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
           ),
           const SizedBox(height: 20),
           FButton(
             child: const Text('Login'),
             onPress: () {
-              if (!_formKey.currentState!.validate()) {
+              if (!_key.currentState!.validate()) {
                 return; // Form is invalid.
               }
 
@@ -53,11 +60,4 @@ class _FormFieldState extends StatefulSampleState<TextFormFieldPage> {
       ),
     ),
   );
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
+import 'package:auto_route/auto_route.dart';
 
 @RoutePage()
 class TooltipPage extends StatelessWidget {
@@ -34,14 +34,14 @@ class TooltipPage extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 200, maxHeight: 200),
           child: Builder(
             builder: (context) => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: .center,
               children: [
                 const SizedBox(height: 30),
                 FTooltip(
                   hover: hover,
                   longPress: longPress,
-                  tipAnchor: axis == Axis.horizontal ? Alignment.topLeft : Alignment.bottomCenter,
-                  childAnchor: axis == Axis.horizontal ? Alignment.topRight : Alignment.topCenter,
+                  tipAnchor: axis == .horizontal ? .topLeft : .bottomCenter,
+                  childAnchor: axis == .horizontal ? .topRight : .topCenter,
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
                     style: FButtonStyle.outline(),

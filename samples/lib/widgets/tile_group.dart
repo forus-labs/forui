@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -11,9 +11,9 @@ class TileGroupPage extends Sample {
 
   TileGroupPage({@queryParam super.theme, @queryParam String divider = 'indented'})
     : divider = switch (divider) {
-        'indented' => FItemDivider.indented,
-        'none' => FItemDivider.none,
-        _ => FItemDivider.full,
+        'indented' => .indented,
+        'none' => .none,
+        _ => .full,
       };
 
   @override
@@ -22,13 +22,13 @@ class TileGroupPage extends Sample {
     description: const Text('Personalize your experience'),
     divider: divider,
     children: [
-      FTile(
+      .tile(
         prefix: const Icon(FIcons.user),
         title: const Text('Personalization'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
-      FTile(
+      .tile(
         prefix: const Icon(FIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Forus Labs (5G)'),
@@ -49,32 +49,32 @@ class ScrollableTileGroupPage extends Sample {
     description: const Text('Personalize your experience'),
     maxHeight: 200,
     children: [
-      FTile(
+      .tile(
         prefix: const Icon(FIcons.user),
         title: const Text('Personalization'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
-      FTile(
+      .tile(
         prefix: const Icon(FIcons.mail),
         title: const Text('Mail'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
-      FTile(
+      .tile(
         prefix: const Icon(FIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Forus Labs (5G)'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
-      FTile(
+      .tile(
         prefix: const Icon(FIcons.alarmClock),
         title: const Text('Alarm Clock'),
         suffix: const Icon(FIcons.chevronRight),
         onPress: () {},
       ),
-      FTile(
+      .tile(
         prefix: const Icon(FIcons.qrCode),
         title: const Text('QR code'),
         suffix: const Icon(FIcons.chevronRight),
@@ -100,36 +100,35 @@ class LazyTileGroupPage extends Sample {
 }
 
 @RoutePage()
-class MergeTileGroup extends Sample {
+class MergeTileGroup extends StatefulSample {
   MergeTileGroup({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => const _MergeTileGroup();
+  State<MergeTileGroup> createState() => _MergeTileGroupPageState();
 }
 
-class _MergeTileGroup extends StatefulWidget {
-  const _MergeTileGroup();
+class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroup> {
+  final _controller = FMultiValueNotifier.radio('List');
 
   @override
-  State<_MergeTileGroup> createState() => _MergeTileGroupState();
-}
-
-class _MergeTileGroupState extends State<_MergeTileGroup> {
-  late final controller = FMultiValueNotifier.radio('List');
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
-  Widget build(BuildContext context) => FTileGroup.merge(
+  Widget sample(BuildContext context) => FTileGroup.merge(
     label: const Text('Settings'),
     children: [
-      FTileGroup(
+      .group(
         children: [
-          FTile(
+          .tile(
             prefix: const Icon(FIcons.user),
             title: const Text('Personalization'),
             suffix: const Icon(FIcons.chevronRight),
             onPress: () {},
           ),
-          FTile(
+          .tile(
             prefix: const Icon(FIcons.wifi),
             title: const Text('WiFi'),
             details: const Text('Forus Labs (5G)'),
@@ -138,8 +137,8 @@ class _MergeTileGroupState extends State<_MergeTileGroup> {
           ),
         ],
       ),
-      FSelectTileGroup(
-        selectController: controller,
+      .selectGroup(
+        selectController: _controller,
         children: const [
           FSelectTile(title: Text('List View'), value: 'List'),
           FSelectTile(title: Text('Grid View'), value: 'Grid'),
@@ -147,10 +146,4 @@ class _MergeTileGroupState extends State<_MergeTileGroup> {
       ),
     ],
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }

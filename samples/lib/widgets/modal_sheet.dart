@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -13,15 +13,15 @@ class ModalSheetPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: .center,
+    mainAxisSize: .min,
     children: [
       FButton(
         child: const Text('Left'),
         onPress: () => showFSheet(
           context: context,
-          side: FLayout.ltr,
-          builder: (context) => const Form(side: FLayout.ltr),
+          side: .ltr,
+          builder: (context) => const Form(side: .ltr),
         ),
       ),
       const SizedBox(height: 5),
@@ -29,8 +29,8 @@ class ModalSheetPage extends Sample {
         child: const Text('Top'),
         onPress: () => showFSheet(
           context: context,
-          side: FLayout.ttb,
-          builder: (context) => const Form(side: FLayout.ttb),
+          side: .ttb,
+          builder: (context) => const Form(side: .ttb),
         ),
       ),
       const SizedBox(height: 5),
@@ -38,8 +38,8 @@ class ModalSheetPage extends Sample {
         child: const Text('Right'),
         onPress: () => showFSheet(
           context: context,
-          side: FLayout.rtl,
-          builder: (context) => const Form(side: FLayout.rtl),
+          side: .rtl,
+          builder: (context) => const Form(side: .rtl),
         ),
       ),
       const SizedBox(height: 5),
@@ -47,8 +47,8 @@ class ModalSheetPage extends Sample {
         child: const Text('Bottom'),
         onPress: () => showFSheet(
           context: context,
-          side: FLayout.btt,
-          builder: (context) => const Form(side: FLayout.btt),
+          side: .btt,
+          builder: (context) => const Form(side: .btt),
         ),
       ),
     ],
@@ -67,12 +67,12 @@ class BlurredModalSheetPage extends Sample {
         style: context.theme.modalSheetStyle.copyWith(
           barrierFilter: (animation) => ImageFilter.compose(
             outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-            inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
+            inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
           ),
         ),
         context: context,
-        side: FLayout.ltr,
-        builder: (context) => const Form(side: FLayout.ltr),
+        side: .ltr,
+        builder: (context) => const Form(side: .ltr),
       ),
     ),
   );
@@ -85,25 +85,25 @@ class Form extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: double.infinity,
-    width: double.infinity,
+    height: .infinity,
+    width: .infinity,
     decoration: BoxDecoration(
       color: context.theme.colors.background,
       border: side.vertical
-          ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-          : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
+          ? .symmetric(horizontal: BorderSide(color: context.theme.colors.border))
+          : .symmetric(vertical: BorderSide(color: context.theme.colors.border)),
     ),
     child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
+      padding: const .symmetric(horizontal: 15, vertical: 8.0),
       child: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           children: [
             Text(
               'Account',
               style: context.theme.typography.xl2.copyWith(
-                fontWeight: FontWeight.w600,
+                fontWeight: .w600,
                 color: context.theme.colors.foreground,
                 height: 1.5,
               ),
@@ -141,16 +141,14 @@ class DraggableModalSheetPage extends Sample {
     child: const Text('Click me'),
     onPress: () => showFSheet(
       context: context,
-      side: FLayout.btt,
+      side: .btt,
       mainAxisMaxRatio: null,
       builder: (context) => DraggableScrollableSheet(
         expand: false,
         builder: (context, controller) => ScrollConfiguration(
           // This is required to enable dragging on desktop.
           // See https://github.com/flutter/flutter/issues/101903 for more information.
-          behavior: ScrollConfiguration.of(
-            context,
-          ).copyWith(dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad}),
+          behavior: ScrollConfiguration.of(context).copyWith(dragDevices: {.touch, .mouse, .trackpad}),
           child: FTileGroup.builder(
             count: 25,
             scrollController: controller,

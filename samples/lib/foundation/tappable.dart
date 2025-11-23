@@ -16,10 +16,10 @@ class TappablePage extends Sample {
         color: (states.contains(WidgetState.hovered) || states.contains(WidgetState.pressed))
             ? context.theme.colors.secondary
             : context.theme.colors.background,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: context.theme.colors.border),
+        borderRadius: .circular(8),
+        border: .all(color: context.theme.colors.border),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+      padding: const .symmetric(vertical: 8.0, horizontal: 12),
       child: child!,
     ),
     child: const Text('Tappable'),

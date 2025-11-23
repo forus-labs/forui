@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -20,26 +20,20 @@ class CheckboxPage extends StatefulSample {
   });
 
   @override
-  State<CheckboxPage> createState() => _CheckboxState();
+  State<CheckboxPage> createState() => _CheckboxPageState();
 }
 
-class _CheckboxState extends StatefulSampleState<CheckboxPage> {
-  bool state = false;
-
-  @override
-  void initState() {
-    super.initState();
-    state = widget.initialValue;
-  }
+class _CheckboxPageState extends StatefulSampleState<CheckboxPage> {
+  late bool _state = widget.initialValue;
 
   @override
   Widget sample(BuildContext context) => FCheckbox(
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),
-    error: widget.error != null ? Text(widget.error!) : null,
+    error: widget.error == null ? null : Text(widget.error!),
     semanticsLabel: 'Accept terms and conditions',
-    value: state,
-    onChange: (value) => setState(() => state = value),
+    value: _state,
+    onChange: (value) => setState(() => _state = value),
     enabled: widget.enabled,
   );
 }
@@ -51,15 +45,15 @@ class RawCheckboxPage extends StatefulSample {
   RawCheckboxPage({@queryParam super.theme, @queryParam this.enabled = true});
 
   @override
-  State<RawCheckboxPage> createState() => _RawCheckboxState();
+  State<RawCheckboxPage> createState() => _RawCheckboxPageState();
 }
 
-class _RawCheckboxState extends StatefulSampleState<RawCheckboxPage> {
-  bool state = false;
+class _RawCheckboxPageState extends StatefulSampleState<RawCheckboxPage> {
+  bool _state = false;
 
   @override
   Widget sample(BuildContext context) =>
-      FCheckbox(value: state, onChange: (value) => setState(() => state = value), enabled: widget.enabled);
+      FCheckbox(value: _state, onChange: (value) => setState(() => _state = value), enabled: widget.enabled);
 }
 
 @RoutePage()
@@ -67,20 +61,20 @@ class FormCheckboxPage extends StatefulSample {
   FormCheckboxPage({@queryParam super.theme});
 
   @override
-  State<FormCheckboxPage> createState() => _FormCheckboxState();
+  State<FormCheckboxPage> createState() => _FormCheckboxPageState();
 }
 
-class _FormCheckboxState extends StatefulSampleState<FormCheckboxPage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _FormCheckboxPageState extends StatefulSampleState<FormCheckboxPage> {
+  final _key = GlobalKey<FormState>();
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(15.0),
+    padding: const .all(15.0),
     child: Form(
-      key: _formKey,
+      key: _key,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: .center,
+        crossAxisAlignment: .start,
         children: [
           FTextFormField.email(
             hint: 'janedoe@foruslabs.com',
@@ -100,7 +94,7 @@ class _FormCheckboxState extends StatefulSampleState<FormCheckboxPage> {
             builder: (state) => FCheckbox(
               label: const Text('Accept terms and conditions'),
               description: const Text('You agree to our terms and conditions.'),
-              error: state.errorText != null ? Text(state.errorText!) : null,
+              error: state.errorText == null ? null : Text(state.errorText!),
               value: state.value ?? false,
               onChange: (value) => state.didChange(value),
             ),
@@ -109,12 +103,12 @@ class _FormCheckboxState extends StatefulSampleState<FormCheckboxPage> {
           FButton(
             child: const Text('Register'),
             onPress: () {
-              if (!_formKey.currentState!.validate()) {
+              if (!_key.currentState!.validate()) {
                 // Handle errors here.
                 return;
               }
 
-              _formKey.currentState!.save();
+              _key.currentState!.save();
               // Do something.
             },
           ),

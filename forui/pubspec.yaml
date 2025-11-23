@@ -37,7 +37,7 @@ dependencies:
 
 dev_dependencies:
   analyzer: ^8.0.0
-  build_runner: ^2.4.0
+  build_runner: ^2.10.4
   code_builder: ^4.10.1
   flint: ^2.8.1
   flutter_test:

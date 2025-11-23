@@ -41,6 +41,17 @@ class FResizableRegion extends StatelessWidget {
         'minExtent ($minExtent) must be < initialExtent ($initialExtent)',
       );
 
+  /// Creates a [FResizableRegion].
+  ///
+  /// This is identical to [FResizableRegion.new], allowing dot-shorthand construction.
+  factory FResizableRegion.region({
+    required double initialExtent,
+    required ValueWidgetBuilder<FResizableRegionData> builder,
+    double? minExtent,
+    Widget? child,
+    Key? key,
+  }) = FResizableRegion.new;
+
   @override
   Widget build(BuildContext context) {
     final InheritedData(:axis, :data) = InheritedData.of(context);

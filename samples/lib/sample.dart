@@ -13,10 +13,9 @@ abstract class Sample extends StatelessWidget {
 
   Sample({
     String theme = 'zinc-light',
-    this.alignment = Alignment.center,
+    this.alignment = .center,
     this.maxWidth = 400,
-    this.maxHeight = double.infinity,
-    super.key,
+    this.maxHeight = .infinity,
   }) : theme = themes[theme]!;
 
   // In most cases, we should create FTheme inside MaterialApp.builder(...) instead. Otherwise FDialog will not inherit
@@ -52,9 +51,9 @@ abstract class StatefulSample extends StatefulWidget {
 
   StatefulSample({
     String theme = 'zinc-light',
-    this.alignment = Alignment.center,
+    this.alignment = .center,
     this.maxWidth = 400,
-    this.maxHeight = double.infinity,
+    this.maxHeight = .infinity,
     super.key,
   }) : theme = themes[theme]!;
 }
