@@ -279,7 +279,6 @@ We've reworked `FProgress` to be more customizable and easier to use.
 * Add `FTabMotion`.
 * Add `FTabs.mouseCursor`.
 
-* **Breaking** Remove `FTabsStyle.mouseCursor`. Use `FTabs.mouseCursor` instead.
 * **Breaking** Replace `FTabController(animationDuration: ...)` with `FTabController(motion: ...)`.
 
 

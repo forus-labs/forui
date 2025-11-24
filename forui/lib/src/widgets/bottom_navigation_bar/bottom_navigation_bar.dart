@@ -113,7 +113,7 @@ class FBottomNavigationBar extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(IntProperty('index', index))
       ..add(FlagProperty('safeAreaTop', value: safeAreaTop, ifTrue: 'safeAreaTop'))
-      ..add(FlagProperty('safeAreaBottom', value: safeAreaBottom, ifTrue: 'safeAreaTop'));
+      ..add(FlagProperty('safeAreaBottom', value: safeAreaBottom, ifTrue: 'safeAreaBottom'));
   }
 }
 
