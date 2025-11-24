@@ -39,10 +39,7 @@ void main() {
       });
 
       test('spans multi-line', () {
-        expect(
-          summarizeDocs('/// This is the first\n/// sentence. More text.'),
-          'This is the first sentence.',
-        );
+        expect(summarizeDocs('/// This is the first\n/// sentence. More text.'), 'This is the first sentence.');
       });
 
       test('no sentence ending', () {
@@ -52,24 +49,15 @@ void main() {
 
     group('brackets', () {
       test("'.'", () {
-        expect(
-          summarizeDocs('/// Sets [FButton.style] property.'),
-          'Sets [FButton.style] property.',
-        );
+        expect(summarizeDocs('/// Sets [FButton.style] property.'), 'Sets [FButton.style] property.');
       });
 
       test('nested', () {
-        expect(
-          summarizeDocs('/// See [[inner.value]] reference.'),
-          'See [[inner.value]] reference.',
-        );
+        expect(summarizeDocs('/// See [[inner.value]] reference.'), 'See [[inner.value]] reference.');
       });
 
       test('multiple pairs', () {
-        expect(
-          summarizeDocs('/// Uses [Foo.bar] and [Baz.qux] together.'),
-          'Uses [Foo.bar] and [Baz.qux] together.',
-        );
+        expect(summarizeDocs('/// Uses [Foo.bar] and [Baz.qux] together.'), 'Uses [Foo.bar] and [Baz.qux] together.');
       });
 
       test('unclosed', () {
@@ -83,33 +71,21 @@ void main() {
       });
 
       test('nested', () {
-        expect(
-          summarizeDocs('/// Calls func((inner.value)) here.'),
-          'Calls func((inner.value)) here.',
-        );
+        expect(summarizeDocs('/// Calls func((inner.value)) here.'), 'Calls func((inner.value)) here.');
       });
 
       test('multiple pairs', () {
-        expect(
-          summarizeDocs('/// Uses foo(1.5) and bar(2.5) together.'),
-          'Uses foo(1.5) and bar(2.5) together.',
-        );
+        expect(summarizeDocs('/// Uses foo(1.5) and bar(2.5) together.'), 'Uses foo(1.5) and bar(2.5) together.');
       });
     });
 
     group('backtick', () {
       test('.', () {
-        expect(
-          summarizeDocs('/// Call `value.property` first.'),
-          'Call `value.property` first.',
-        );
+        expect(summarizeDocs('/// Call `value.property` first.'), 'Call `value.property` first.');
       });
 
       test('multiple sections', () {
-        expect(
-          summarizeDocs('/// Use `foo.bar` and `baz.qux` here.'),
-          'Use `foo.bar` and `baz.qux` here.',
-        );
+        expect(summarizeDocs('/// Use `foo.bar` and `baz.qux` here.'), 'Use `foo.bar` and `baz.qux` here.');
       });
     });
 
@@ -119,10 +95,7 @@ void main() {
       });
 
       test('multiple decimals', () {
-        expect(
-          summarizeDocs('/// Values 1.5 and 2.5 are used.'),
-          'Values 1.5 and 2.5 are used.',
-        );
+        expect(summarizeDocs('/// Values 1.5 and 2.5 are used.'), 'Values 1.5 and 2.5 are used.');
       });
 
       test('semantic version', () {
@@ -132,10 +105,7 @@ void main() {
 
     group('abbreviation handling', () {
       test('i.e.', () {
-        expect(
-          summarizeDocs('/// Use the function, i.e. call it. More text.'),
-          'Use the function, i.e. call it.',
-        );
+        expect(summarizeDocs('/// Use the function, i.e. call it. More text.'), 'Use the function, i.e. call it.');
       });
 
       test('e.g.', () {
@@ -159,10 +129,7 @@ void main() {
       });
 
       test('brackets inside backticks inside parens', () {
-        expect(
-          summarizeDocs('/// Calls func(`[value.prop]`, 1.5) here.'),
-          'Calls func(`[value.prop]`, 1.5) here.',
-        );
+        expect(summarizeDocs('/// Calls func(`[value.prop]`, 1.5) here.'), 'Calls func(`[value.prop]`, 1.5) here.');
       });
     });
   });
