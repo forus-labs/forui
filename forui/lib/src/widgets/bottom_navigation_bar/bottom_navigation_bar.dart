@@ -39,10 +39,24 @@ class FBottomNavigationBar extends StatelessWidget {
   /// The children.
   final List<Widget> children;
 
+  /// Whether to avoid system intrusions on the top. Defaults to false.
+  final bool safeAreaTop;
+
+  /// Whether to avoid system intrusions on the bottom. Defaults to false.
+  final bool safeAreaBottom;
+
   /// Creates a [FBottomNavigationBar] with [FBottomNavigationBarItem]s.
   ///
   /// See [FBottomNavigationBarItem] for the items in a bottom navigation bar.
-  const FBottomNavigationBar({required this.children, this.style, this.onChange, this.index = -1, super.key});
+  const FBottomNavigationBar({
+    required this.children,
+    this.style,
+    this.onChange,
+    this.index = -1,
+    this.safeAreaTop = false,
+    this.safeAreaBottom = false,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +66,8 @@ class FBottomNavigationBar extends StatelessWidget {
     Widget bar = DecoratedBox(
       decoration: style.decoration,
       child: SafeArea(
-        top: false,
-        bottom: false,
+        top: safeAreaTop,
+        bottom: safeAreaBottom,
         child: Padding(
           padding: padding.copyWith(bottom: padding.bottom + (MediaQuery.viewPaddingOf(context).bottom * 2 / 3)),
           child: Row(
@@ -97,7 +111,9 @@ class FBottomNavigationBar extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(IntProperty('index', index));
+      ..add(IntProperty('index', index))
+      ..add(FlagProperty('safeAreaTop', value: safeAreaTop, ifTrue: 'safeAreaTop'))
+      ..add(FlagProperty('safeAreaBottom', value: safeAreaBottom, ifTrue: 'safeAreaBottom'));
   }
 }
 
