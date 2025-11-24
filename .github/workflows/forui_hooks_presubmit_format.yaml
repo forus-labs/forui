@@ -22,9 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2.21.0
-        with:
-          cache: true
-
       - working-directory: forui
         run: |
           flutter pub get

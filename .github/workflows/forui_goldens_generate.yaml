@@ -26,9 +26,6 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: subosito/flutter-action@v2.21.0
-        with:
-          cache: true
-
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter test --update-goldens
