@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:forui/forui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -82,7 +82,8 @@ class ValidatorDateFieldPage extends StatefulSample {
   State<ValidatorDateFieldPage> createState() => _ValidatorDateFieldPageState();
 }
 
-class _ValidatorDateFieldPageState extends StatefulSampleState<ValidatorDateFieldPage> with SingleTickerProviderStateMixin {
+class _ValidatorDateFieldPageState extends StatefulSampleState<ValidatorDateFieldPage>
+    with SingleTickerProviderStateMixin {
   late final _controller = FDateFieldController(vsync: this, validator: _validate);
 
   String? _validate(DateTime? date) => date?.weekday == 6 || date?.weekday == 7 ? 'Date cannot be a weekend.' : null;

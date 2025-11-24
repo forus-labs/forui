@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:forui/forui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -22,8 +22,7 @@ class ButtonTextPage extends Sample {
     : style = _styles[style]!;
 
   @override
-  Widget sample(BuildContext context) =>
-      FButton(style: style, mainAxisSize: .min, onPress: () {}, child: Text(label));
+  Widget sample(BuildContext context) => FButton(style: style, mainAxisSize: .min, onPress: () {}, child: Text(label));
 }
 
 @RoutePage()
@@ -31,7 +30,7 @@ class ButtonIconPage extends Sample {
   final FBaseButtonStyle Function(FButtonStyle) style;
 
   ButtonIconPage({@queryParam super.theme = 'zinc-light', @queryParam String style = 'primary'})
-      : style = _styles[style]!;
+    : style = _styles[style]!;
 
   @override
   Widget sample(BuildContext context) => FButton(
@@ -56,10 +55,6 @@ class ButtonCircularProgressPage extends Sample {
   ButtonCircularProgressPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FButton(
-    mainAxisSize: .min,
-    prefix: const FCircularProgress(),
-    onPress: null,
-    child: const Text('Please wait'),
-  );
+  Widget sample(BuildContext context) =>
+      FButton(mainAxisSize: .min, prefix: const FCircularProgress(), onPress: null, child: const Text('Please wait'));
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/forui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -365,8 +365,6 @@ class FormMultiSelectPage extends StatefulSample {
   @override
   State<FormMultiSelectPage> createState() => _FormMultiSelectPageState();
 }
-
-
 
 class _FormMultiSelectPageState extends StatefulSampleState<FormMultiSelectPage> with SingleTickerProviderStateMixin {
   static const _departments = ['Engineering', 'Marketing', 'Sales', 'Human Resources', 'Finance'];

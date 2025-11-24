@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:forui/forui.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:forui/forui.dart';
 
 import 'package:forui_samples/sample.dart';
 
@@ -53,8 +53,6 @@ class PaginationCustomIconPage extends StatefulSample {
   @override
   State<PaginationCustomIconPage> createState() => _PaginationCustomIconPageState();
 }
-
-
 
 class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCustomIconPage> {
   late final _controller = FPaginationController(pages: 10, initialPage: 4);
@@ -108,8 +106,6 @@ class PaginationWithViewPage extends StatefulSample {
   @override
   State<PaginationWithViewPage> createState() => _PaginationWithViewPageState();
 }
-
-
 
 class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithViewPage> {
   final _controller = PageController();
