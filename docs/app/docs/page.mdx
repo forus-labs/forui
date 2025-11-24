@@ -79,7 +79,7 @@ class Application extends StatelessWidget {
     /// ```shell
     /// dart forui theme create [theme template].
     /// ```
-    final theme = FThemes.zinc.dark;
+    final fThemes = FThemes.zinc;
 
     return MaterialApp(
       // TODO: replace with your application's supported locales.
@@ -91,8 +91,19 @@ class Application extends StatelessWidget {
       //
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
       // See https://github.com/forus-labs/forui/issues/670.
-      theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FAnimatedTheme(data: theme, child: child!),
+      theme: fThemes.light.toApproximateMaterialTheme(),
+      darkTheme: fThemes.dark.toApproximateMaterialTheme(),
+      // TODO: replace with your theme mode.
+      themeMode: ThemeMode.system,
+      builder: (context, child) {
+        Brightness systemBrightness = MediaQuery.platformBrightnessOf(context);
+        return FAnimatedTheme(
+          data: systemBrightness == Brightness.light
+            ? fThemes.light
+            : fThemes.dark,
+          child: child!,
+        );
+      },
       // You can also replace FScaffold with Material Scaffold.
       home: const FScaffold(
         // TODO: replace with your widget.
@@ -146,10 +157,15 @@ class Application extends StatelessWidget {
   const Application({super.key});
 
   Widget build(BuildContext context) => CupertinoApp(
-    builder: (context, child) => FAnimatedTheme(
-      data: FThemes.zinc.light,
-      child: child!,
-    ),
+    builder: (context, child) {
+      Brightness systemBrightness = MediaQuery.platformBrightnessOf(context);
+      return FAnimatedTheme(
+        data: systemBrightness == Brightness.light
+          ? FThemes.zinc.light
+          : FThemes.zinc.dark,
+        child: child!,
+      );
+    },
     home: FScaffold(...)
   );
 }
