@@ -9,7 +9,7 @@ import 'package:forui_samples/sample.dart';
 class AccordionPage extends StatefulSample {
   final int? max;
 
-  AccordionPage({this.max, @queryParam super.theme});
+  AccordionPage({@queryParam this.max, @queryParam super.theme});
 
   @override
   State<AccordionPage> createState() => _AccordionPageState();

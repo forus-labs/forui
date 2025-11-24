@@ -21,6 +21,7 @@ class SliderPage extends StatefulSample {
     @queryParam this.enabled = true,
     @queryParam String interaction = 'tapAndSlideThumb',
     @queryParam bool extent = false,
+    @queryParam super.theme,
   }) : interaction = switch (interaction) {
          'slide' => .slide,
          'slideThumb' => .slideThumb,

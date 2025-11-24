@@ -220,22 +220,3 @@ FPagination(
     </Tabs.Tab>
 
 </Tabs>
-
-### Usage
-
-<Tabs items={['Preview', 'Code']}>
-    <Tabs.Tab>
-        <Widget name='pagination' query={{controller: 'simplified'}} height={400}/>
-    </Tabs.Tab>
-    <Tabs.Tab>
-        ```dart copy
-        FPagination(
-          pages: 15,
-          initialPage: 7,
-          onChange: (page) {
-            print('Current page: $page');
-          },
-        );
-        ```
-    </Tabs.Tab>
-</Tabs>

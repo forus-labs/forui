@@ -11,7 +11,7 @@ final _styles = {'primary': FAlertStyle.primary(), 'destructive': FAlertStyle.de
 class AlertPage extends Sample {
   final FBaseAlertStyle Function(FAlertStyle) style;
 
-  AlertPage({String style = 'primary', @queryParam super.theme}) : style = _styles[style]!;
+  AlertPage({@queryParam super.theme, @queryParam String style = 'primary'}) : style = _styles[style]!;
 
   @override
   Widget sample(BuildContext context) => Column(

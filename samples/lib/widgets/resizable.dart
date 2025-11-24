@@ -138,7 +138,7 @@ class Label extends StatelessWidget {
 class HorizontalResizablePage extends Sample {
   final FResizableDivider divider;
 
-  HorizontalResizablePage({String divider = 'dividerWithThumb', @queryParam super.theme})
+  HorizontalResizablePage({@queryParam String divider = 'dividerWithThumb', @queryParam super.theme})
     : divider = switch (divider) {
         'dividerWithThumb' => .dividerWithThumb,
         'divider' => .divider,

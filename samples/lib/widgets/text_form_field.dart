@@ -7,7 +7,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TextFormFieldPage extends StatefulSample {
-  TextFormFieldPage({String? theme}) : super(theme: theme ?? 'zinc-light');
+  TextFormFieldPage({@queryParam super.theme});
 
   @override
   State<TextFormFieldPage> createState() => _TextFormFieldPageState();

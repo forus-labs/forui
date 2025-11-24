@@ -151,11 +151,15 @@ class BehaviorToastPage extends StatelessWidget {
 @RoutePage()
 class SwipeToastPage extends StatelessWidget {
   final FThemeData theme;
-  final List<AxisDirection> directions;
+  final List<AxisDirection>? directions;
 
-  SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam bool down = false})
+  SwipeToastPage({@queryParam String theme = 'zinc-light', @queryParam bool? down})
     : theme = themes[theme]!,
-      directions = [if (down) .down];
+      directions = switch (down) {
+        null => [],
+        true => [.down],
+        false => null,
+      };
 
   @override
   Widget build(BuildContext context) => FTheme(
