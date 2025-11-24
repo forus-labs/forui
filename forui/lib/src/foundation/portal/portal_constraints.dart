@@ -33,7 +33,7 @@ final class FAutoHeightPortalConstraints extends FPortalConstraints {
 
   /// The maximum width that satisfies the constraints.
   ///
-  /// Might be [.infinity].
+  /// Might be [double.infinity].
   final double maxWidth;
 
   /// Creates a [FPortalConstraints] that has the same height as the child widget.
@@ -73,7 +73,7 @@ final class FAutoWidthPortalConstraints extends FPortalConstraints {
 
   /// The maximum height that satisfies the constraints.
   ///
-  /// Might be [.infinity].
+  /// Might be [double.infinity].
   final double maxHeight;
 
   /// Creates a [FPortalConstraints] that has the same width as the child widget.
