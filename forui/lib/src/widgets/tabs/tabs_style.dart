@@ -52,6 +52,10 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   @override
   final double spacing;
 
+  /// The mouse cursor. Defaults to [MouseCursor.defer].
+  @override
+  final MouseCursor mouseCursor;
+
   /// The focused outline style.
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
@@ -67,6 +71,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
     this.indicatorSize = .tab,
     this.height = 35,
     this.spacing = 10,
+    this.mouseCursor = .defer,
   });
 
   /// Creates a [FTabsStyle] that inherits its properties.

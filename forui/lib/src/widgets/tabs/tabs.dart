@@ -189,6 +189,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               isScrollable: widget.scrollable,
               physics: widget.physics,
               padding: style.padding,
+              mouseCursor: style.mouseCursor,
               indicator: style.indicatorDecoration,
               indicatorSize: style.indicatorSize._value,
               dividerColor: Colors.transparent,
