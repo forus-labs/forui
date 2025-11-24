@@ -15,6 +15,9 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
 
 ### `FBottomNavigationBar`
+* Add `FBottomNavigationBar.safeAreaTop`.
+* Add `FBottomNavigationBar.safeAreaBottom`.
+
 * Change `FBottomNavigationBarItem.label` to be optional.
 
 
@@ -95,8 +98,9 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * Add `FSliderMark.mark(...)`.
 
 
-### `FTab`
+### `FTabs`
 * Add `FTabEntry.entry(...)`.
+* Add `FTabsStyle.mouseCursor`.
 
 
 ### `FTappable`
