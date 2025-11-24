@@ -273,7 +273,7 @@ class _RenderScaffold extends RenderBox
     final othersHeight = constraints.maxHeight - footerHeight;
     others.layout(constraints.copyWith(minHeight: 0, maxHeight: othersHeight));
 
-    others.data.offset = Offset.zero;
+    others.data.offset = .zero;
     footer.data.offset = Offset(0, size.height - footer.size.height);
   }
 

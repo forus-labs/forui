@@ -22,7 +22,7 @@ class _MultiNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
   const _MultiNotifierHook({required this.value, required this.min, required this.max, super.keys});
 
   @override
-  _MultiNotifierHookState<T> createState() => _MultiNotifierHookState<T>();
+  _MultiNotifierHookState<T> createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -60,7 +60,7 @@ class _RadioNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
   const _RadioNotifierHook({required this.value, super.keys});
 
   @override
-  _RadioNotifierHookState<T> createState() => _RadioNotifierHookState<T>();
+  _RadioNotifierHookState<T> createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -89,7 +89,7 @@ class FSwitch extends StatelessWidget {
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.dragStartBehavior = .start,
     super.key,
   });
 
@@ -112,7 +112,7 @@ class FSwitch extends StatelessWidget {
           enabled: enabled,
           toggled: value,
           child: FLabel(
-            axis: Axis.horizontal,
+            axis: .horizontal,
             states: formStates,
             style: style,
             label: label,
@@ -200,7 +200,7 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
   /// Creates a [FSwitchStyle] that inherits its properties.
   factory FSwitchStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
-    return FSwitchStyle(
+    return .new(
       focusColor: colors.primary,
       trackColor: FWidgetStateMap({
         // Disabled
@@ -211,7 +211,7 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
         WidgetState.selected: colors.primary,
         WidgetState.any: colors.border,
       }),
-      thumbColor: FWidgetStateMap.all(colors.background),
+      thumbColor: .all(colors.background),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
       errorTextStyle: style.formFieldStyle.errorTextStyle,

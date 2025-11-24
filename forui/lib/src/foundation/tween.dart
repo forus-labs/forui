@@ -100,5 +100,5 @@ class FImmutableTween<T extends Object?> extends Animatable<T> {
   }
 
   @override
-  String toString() => '${objectRuntimeType(this, 'Animatable')}($begin \u2192 $end)';
+  String toString() => '${objectRuntimeType(this, 'FImmutableTween')}($begin \u2192 $end)';
 }

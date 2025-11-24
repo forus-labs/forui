@@ -14,7 +14,7 @@ class _PickerControllerHook extends Hook<FPickerController> {
   const _PickerControllerHook({required this.initialIndexes, super.keys});
 
   @override
-  _PickerControllerHookState createState() => _PickerControllerHookState();
+  _PickerControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -24,7 +24,7 @@ class _PickerControllerHook extends Hook<FPickerController> {
 }
 
 class _PickerControllerHookState extends HookState<FPickerController, _PickerControllerHook> {
-  late final FPickerController _controller = FPickerController(initialIndexes: hook.initialIndexes);
+  late final _controller = FPickerController(initialIndexes: hook.initialIndexes);
 
   @override
   FPickerController build(BuildContext context) => _controller;

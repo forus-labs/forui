@@ -110,9 +110,9 @@ class FButton extends StatelessWidget {
     this.selected = false,
     this.shortcuts,
     this.actions,
-    MainAxisSize mainAxisSize = MainAxisSize.max,
-    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.center,
-    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
+    MainAxisSize mainAxisSize = .max,
+    MainAxisAlignment mainAxisAlignment = .center,
+    CrossAxisAlignment crossAxisAlignment = .center,
     TextBaseline? textBaseline,
     Widget? prefix,
     Widget? suffix,
@@ -316,7 +316,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            WidgetState.any: BoxDecoration(borderRadius: style.borderRadius, color: color),
          }),
          focusedOutlineStyle: style.focusedOutlineStyle,
-         contentStyle: FButtonContentStyle.inherit(
+         contentStyle: .inherit(
            typography: typography,
            enabled: foregroundColor,
            disabled: colors.disable(foregroundColor, colors.disable(color)),

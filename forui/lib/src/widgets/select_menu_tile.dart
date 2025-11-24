@@ -8,6 +8,9 @@ import 'package:forui/forui.dart';
 
 part 'select_menu_tile.design.dart';
 
+@internal
+Widget defaultSelectMenuTileBuilder<T>(BuildContext _, Set<dynamic>? _, Widget? child) => child ?? const SizedBox();
+
 /// A [FSelectMenuTile]'s controller.
 typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;
 
@@ -22,8 +25,6 @@ typedef FSelectMenuTileController<T> = FMultiValueNotifier<T>;
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select menu tile's appearance.
 class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldProperties<Set<T>> {
-  static Widget _builder<T>(BuildContext _, Set<dynamic>? _, Widget? child) => child ?? const SizedBox();
-
   /// The controller that controls the selected tiles. Defaults to `FSelectMenuTileController.radio`.
   final FSelectMenuTileController<T>? selectController;
 
@@ -161,11 +162,13 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// The callback that is called when an item is selected.
   final ValueChanged<(T, bool)>? onSelect;
 
+  /// {@template forui.widgets.FSelectMenuTile.new}
   /// Creates a [FSelectMenuTile] that eagerly builds the menu.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * both [selectController] and [initialValue] are provided.
+  /// {@endtemplate}
   FSelectMenuTile({
     required this.title,
     required List<FSelectTile<T>> menu,
@@ -174,16 +177,16 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.scrollController,
     this.style,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
-    this.divider = FItemDivider.full,
-    this.menuAnchor = Alignment.topRight,
-    this.tileAnchor = Alignment.bottomRight,
-    this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.divider = .full,
+    this.menuAnchor = .topRight,
+    this.tileAnchor = .bottomRight,
+    this.spacing = const .spacing(4),
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.autoHide = true,
     this.label,
@@ -197,7 +200,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.semanticsLabel,
     this.prefix,
     this.subtitle,
-    this.detailsBuilder = _builder,
+    this.detailsBuilder = defaultSelectMenuTileBuilder,
     this.details,
     this.suffix,
     this.shortcuts,
@@ -297,7 +300,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
 
              tile = FLabel(
-               axis: Axis.vertical,
+               axis: .vertical,
                style: selectMenuTileStyle ?? global,
                states: states,
                label: label,
@@ -311,6 +314,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
          },
        );
 
+  /// {@template forui.widgets.FSelectMenuTile.fromMap}
   /// Creates a [FSelectMenuTile] with the given [menu].
   ///
   /// ## Contract
@@ -318,6 +322,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// undefined behavior.
   ///
   /// Throws [AssertionError] if both [selectController] and [initialValue] are provided.
+  /// {@endtemplate}
   factory FSelectMenuTile.fromMap(
     Map<String, T> menu, {
     required Text title,
@@ -326,16 +331,16 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     ScrollController? scrollController,
     FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style,
     double? cacheExtent,
-    double maxHeight = double.infinity,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
-    FItemDivider divider = FItemDivider.full,
-    AlignmentGeometry menuAnchor = Alignment.topRight,
-    AlignmentGeometry tileAnchor = Alignment.bottomRight,
-    FPortalSpacing spacing = const FPortalSpacing(4),
-    FPortalOverflow overflow = FPortalOverflow.flip,
-    Offset offset = Offset.zero,
-    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
+    FItemDivider divider = .full,
+    AlignmentGeometry menuAnchor = .topRight,
+    AlignmentGeometry tileAnchor = .bottomRight,
+    FPortalSpacing spacing = const .spacing(4),
+    FPortalOverflow overflow = .flip,
+    Offset offset = .zero,
+    FPopoverHideRegion hideRegion = .excludeChild,
     VoidCallback? onTapHide,
     bool autoHide = true,
     Widget? label,
@@ -349,7 +354,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     String? semanticsLabel,
     Widget? prefix,
     Widget? subtitle,
-    ValueWidgetBuilder<Set<T>> detailsBuilder = _builder,
+    ValueWidgetBuilder<Set<T>> detailsBuilder = defaultSelectMenuTileBuilder,
     Widget? details,
     Widget? suffix,
     Map<ShortcutActivator, Intent>? shortcuts,
@@ -366,7 +371,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     AutovalidateMode? autovalidateMode,
     String? restorationId,
     Key? key,
-  }) => FSelectMenuTile<T>(
+  }) => .new(
     title: title,
     menu: [for (final MapEntry(:key, :value) in menu.entries) FSelectTile<T>(title: Text(key), value: value)],
     selectController: selectController,
@@ -416,6 +421,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     key: key,
   );
 
+  /// {@template forui.widgets.FSelectMenuTile.builder}
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
   /// The [menuBuilder] is called for each tile that should be built. The current level's [FInheritedItemData] is **not**
@@ -434,6 +440,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
   /// * Placed in a parent widget that does not constrain its size, i.e., [Column].
   /// * [count] is null and [menuBuilder] always provides a zero-size widget, i.e., SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from the builder, or set [count] to non-null.
+  /// {@endtemplate}
   FSelectMenuTile.builder({
     required this.title,
     required FSelectTile<T>? Function(BuildContext context, int index) menuBuilder,
@@ -443,16 +450,16 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.scrollController,
     this.style,
     this.cacheExtent,
-    this.maxHeight = double.infinity,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.maxHeight = .infinity,
+    this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
-    this.divider = FItemDivider.full,
-    this.menuAnchor = Alignment.topRight,
-    this.tileAnchor = Alignment.bottomRight,
-    this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.divider = .full,
+    this.menuAnchor = .topRight,
+    this.tileAnchor = .bottomRight,
+    this.spacing = const .spacing(4),
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.autoHide = true,
     this.label,
@@ -466,7 +473,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
     this.semanticsLabel,
     this.prefix,
     this.subtitle,
-    this.detailsBuilder = _builder,
+    this.detailsBuilder = defaultSelectMenuTileBuilder,
     this.details,
     this.suffix,
     this.shortcuts,
@@ -562,7 +569,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              final states = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
              final error = state.errorText == null ? null : errorBuilder(state.context, state.errorText!);
              tile = FLabel(
-               axis: Axis.vertical,
+               axis: .vertical,
                style: global,
                states: states,
                label: label,
@@ -630,8 +637,8 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
     super.initState();
     _controller =
         _Notifier(
-            widget.selectController ?? FSelectMenuTileController<T>.radio(widget.initialValue?.firstOrNull),
-            widget.popoverController ?? FPopoverController(vsync: this),
+            widget.selectController ?? .radio(widget.initialValue?.firstOrNull),
+            widget.popoverController ?? .new(vsync: this),
             autoHide: widget.autoHide,
           )
           ..addListener(_handleControllerChanged)
@@ -653,7 +660,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
         _controller._popover.dispose();
       }
 
-      _controller._popover = widget.popoverController ?? FPopoverController(vsync: this);
+      _controller._popover = widget.popoverController ?? .new(vsync: this);
     }
 
     if (widget.selectController != old.selectController) {
@@ -663,8 +670,7 @@ class _State<T> extends FormFieldState<Set<T>> with SingleTickerProviderStateMix
         _controller.delegate.removeListener(_handleControllerChanged);
       }
 
-      _controller.delegate =
-          widget.selectController ?? FSelectMenuTileController<T>.radio(widget.initialValue?.firstOrNull);
+      _controller.delegate = widget.selectController ?? .radio(widget.initialValue?.firstOrNull);
     }
 
     _controller
@@ -810,9 +816,9 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
     required FStyle style,
   }) {
     final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography);
-    return FSelectMenuTileStyle(
-      menuStyle: FPopoverMenuStyle.inherit(colors: colors, style: style, typography: typography),
-      tileStyle: FTileStyle.inherit(colors: colors, typography: typography, style: style),
+    return .new(
+      menuStyle: .inherit(colors: colors, style: style, typography: typography),
+      tileStyle: .inherit(colors: colors, typography: typography, style: style),
       labelTextStyle: groupStyle.labelTextStyle,
       descriptionTextStyle: groupStyle.descriptionTextStyle,
       errorTextStyle: groupStyle.errorTextStyle,

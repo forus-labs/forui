@@ -24,7 +24,7 @@ class _PopoverControllerHook extends Hook<FPopoverController> {
   const _PopoverControllerHook({required this.vsync, required this.motion, super.keys});
 
   @override
-  _PopoverControllerHookState createState() => _PopoverControllerHookState();
+  _PopoverControllerHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -36,7 +36,7 @@ class _PopoverControllerHook extends Hook<FPopoverController> {
 }
 
 class _PopoverControllerHookState extends HookState<FPopoverController, _PopoverControllerHook> {
-  late final FPopoverController _controller = FPopoverController(vsync: hook.vsync, motion: hook.motion);
+  late final _controller = FPopoverController(vsync: hook.vsync, motion: hook.motion);
 
   @override
   FPopoverController build(BuildContext context) => _controller;

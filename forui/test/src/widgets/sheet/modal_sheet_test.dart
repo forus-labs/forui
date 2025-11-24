@@ -16,8 +16,8 @@ void main() {
               context: context,
               side: FLayout.btt,
               builder: (context) => Container(
-                height: double.infinity,
-                width: double.infinity,
+                height: .infinity,
+                width: .infinity,
                 color: context.theme.colors.background,
                 child: const Center(child: Text('sheet')),
               ),
@@ -52,8 +52,8 @@ void main() {
                 context: context,
                 side: side,
                 builder: (context) => Container(
-                  height: double.infinity,
-                  width: double.infinity,
+                  height: .infinity,
+                  width: .infinity,
                   color: context.theme.colors.background,
                   child: const Center(child: Text('sheet')),
                 ),
@@ -83,8 +83,8 @@ void main() {
                 side: side,
                 draggable: false,
                 builder: (context) => Container(
-                  height: double.infinity,
-                  width: double.infinity,
+                  height: .infinity,
+                  width: .infinity,
                   color: context.theme.colors.background,
                   child: const Center(child: Text('sheet')),
                 ),

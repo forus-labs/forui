@@ -28,14 +28,7 @@ abstract class TimeInputController extends InputController {
         .replaceAll("'", '');
     final time = controller.value == null ? placeholder : format.format(controller.value!.withDate(DateTime(1970)));
 
-    return TimeInputController.test(
-      localizations,
-      controller,
-      format,
-      style,
-      placeholder,
-      TextEditingValue(text: time),
-    );
+    return .test(localizations, controller, format, style, placeholder, TextEditingValue(text: time));
   }
 
   @visibleForTesting
@@ -65,7 +58,7 @@ abstract class TimeInputController extends InputController {
   @override
   void onValueChanged(String newValue) {
     final time = format.tryParseStrict(newValue, true);
-    controller.value = time == null ? null : FTime.fromDateTime(time);
+    controller.value = time == null ? null : .fromDateTime(time);
   }
 
   @visibleForTesting

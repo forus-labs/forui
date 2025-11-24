@@ -11,7 +11,7 @@ class Foo extends StatelessWidget {
   const Foo({required this.child, super.key});
 
   @override
-  Widget build(BuildContext context) => FTheme(data: FThemes.zinc.dark, textDirection: TextDirection.ltr, child: child);
+  Widget build(BuildContext context) => FTheme(data: FThemes.zinc.dark, textDirection: .ltr, child: child);
 }
 
 void main() {
@@ -28,7 +28,7 @@ void main() {
       await tester.pumpWidget(
         FTheme(
           data: FThemes.zinc.light,
-          textDirection: TextDirection.ltr,
+          textDirection: .ltr,
           child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
         ),
       );
@@ -37,7 +37,7 @@ void main() {
       await tester.pumpWidget(
         FTheme(
           data: FThemes.zinc.dark,
-          textDirection: TextDirection.ltr,
+          textDirection: .ltr,
           child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
         ),
       );
@@ -49,7 +49,7 @@ void main() {
     testWidgets('no ThemeData in ancestor', (tester) async {
       await tester.pumpWidget(
         Directionality(
-          textDirection: TextDirection.ltr,
+          textDirection: .ltr,
           child: Builder(builder: (context) => Text('${context.theme == FThemes.zinc.dark}')),
         ),
       );

@@ -185,11 +185,11 @@ class RenderPortalLayer extends RenderProxyBox {
           minWidth: minWidth,
           maxWidth: maxWidth,
           minHeight: size?.height ?? 0,
-          maxHeight: size?.height ?? double.infinity,
+          maxHeight: size?.height ?? .infinity,
         ),
         FAutoWidthPortalConstraints(:final minHeight, :final maxHeight) => BoxConstraints(
           minWidth: size?.width ?? 0,
-          maxWidth: size?.width ?? double.infinity,
+          maxWidth: size?.width ?? .infinity,
           minHeight: minHeight,
           maxHeight: maxHeight,
         ),
@@ -249,12 +249,12 @@ class RenderPortalLayer extends RenderProxyBox {
       layer!,
       super.paint,
       Offset.zero,
-      childPaintBounds: const Rect.fromLTRB(
+      childPaintBounds: const .fromLTRB(
         // We don't know where we'll end up, so we have no idea what our cull rect should be.
         double.negativeInfinity,
         double.negativeInfinity,
-        double.infinity,
-        double.infinity,
+        .infinity,
+        .infinity,
       ),
     );
 
@@ -292,7 +292,7 @@ class RenderPortalLayer extends RenderProxyBox {
   ///
   /// If the [PortalLayer] has not yet been created, was never composited, or was unable to determine the transform (see
   /// [PortalLayer.getLastTransform]), this returns the identity matrix (see [Matrix4.identity]).
-  Matrix4 get _currentTransform => layer?.getLastTransform() ?? Matrix4.identity();
+  Matrix4 get _currentTransform => layer?.getLastTransform() ?? .identity();
 
   @override
   void detach() {

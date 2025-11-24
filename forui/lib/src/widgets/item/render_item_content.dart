@@ -31,7 +31,7 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
 
   @override
   RenderObject createRenderObject(BuildContext context) {
-    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final direction = Directionality.maybeOf(context) ?? .ltr;
     return _RenderItemContent(
       margin.resolve(direction),
       padding.resolve(direction),
@@ -47,7 +47,7 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
   @override
   // ignore: library_private_types_in_public_api
   void updateRenderObject(BuildContext context, covariant _RenderItemContent content) {
-    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final direction = Directionality.maybeOf(context) ?? .ltr;
     content
       ..margin = margin.resolve(direction)
       ..padding = padding.resolve(direction)
@@ -161,9 +161,9 @@ class _RenderItemContent extends RenderBox
 
     if (_dividerType == FItemDivider.indented) {
       final prefix = firstChild!;
-      final spacing = _textDirection == TextDirection.ltr ? left : right;
+      final spacing = _textDirection == .ltr ? left : right;
 
-      if (_textDirection == TextDirection.ltr) {
+      if (_textDirection == .ltr) {
         context.canvas.drawLine(
           Offset(offset.dx + spacing + prefix.size.width, y),
           Offset(offset.dx + size.width + _margin.right, y),

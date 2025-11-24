@@ -13,7 +13,7 @@ class TextFieldPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+    padding: const .symmetric(horizontal: 20, vertical: 30),
     child: FTextField(
       enabled: enabled,
       label: const Text('Username'),
@@ -28,15 +28,21 @@ class ClearableTextFieldPage extends StatefulSample {
   ClearableTextFieldPage({@queryParam super.theme});
 
   @override
-  State<ClearableTextFieldPage> createState() => ClearableTextFieldState();
+  State<ClearableTextFieldPage> createState() => _ClearableTextFieldPageState();
 }
 
-class ClearableTextFieldState extends StatefulSampleState<ClearableTextFieldPage> {
-  late final TextEditingController _controller = TextEditingController(text: 'MyUsername');
+class _ClearableTextFieldPageState extends StatefulSampleState<ClearableTextFieldPage> {
+  final TextEditingController _controller = TextEditingController(text: 'MyUsername');
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+    padding: const .symmetric(horizontal: 20, vertical: 30),
     child: FTextField(
       controller: _controller,
       label: const Text('Username'),
@@ -53,7 +59,7 @@ class EmailTextFieldPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => const Padding(
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+    padding: .symmetric(horizontal: 20, vertical: 30),
     child: FTextField.email(initialText: 'jane@doe.com'),
   );
 }
@@ -64,7 +70,7 @@ class PasswordTextFieldPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+    padding: const .symmetric(horizontal: 20, vertical: 30),
     child: FTextField.password(initialText: 'My password'),
   );
 }
@@ -75,7 +81,7 @@ class MultilineTextFieldPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => const Padding(
-    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+    padding: .symmetric(horizontal: 20, vertical: 30),
     child: FTextField.multiline(label: Text('Leave a review'), maxLines: 4),
   );
 }

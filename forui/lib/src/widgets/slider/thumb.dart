@@ -76,7 +76,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       :tooltipBuilder,
       :semanticValueFormatterCallback,
       :enabled,
-    ) = InheritedData.of(
+    ) = .of(
       context,
     );
 
@@ -104,7 +104,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
           _ShrinkIntent: CallbackAction(onInvoke: (_) => _controller.step(min: widget.min, extend: false)),
         },
         enabled: enabled,
-        mouseCursor: enabled ? _cursor : MouseCursor.defer,
+        mouseCursor: enabled ? _cursor : .defer,
         includeFocusSemantics: false,
         onFocusChange: (focused) => setState(() => _focused = focused),
         child: FFocusedOutline(
@@ -112,9 +112,9 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
           focused: _focused,
           child: DecoratedBox(
             decoration: BoxDecoration(
-              shape: BoxShape.circle,
+              shape: .circle,
               color: thumbStyle.color.resolve(states),
-              border: Border.all(color: thumbStyle.borderColor.resolve(states), width: thumbStyle.borderWidth),
+              border: .all(color: thumbStyle.borderColor.resolve(states), width: thumbStyle.borderWidth),
             ),
             child: SizedBox.square(dimension: thumbSize),
           ),
@@ -197,22 +197,16 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
   double _offset(FSliderSelection selection) => widget.min ? selection.offset.min : selection.offset.max;
 
   Map<ShortcutActivator, Intent> _shortcuts(FLayout layout) => switch ((layout, widget.min)) {
-    (FLayout.ltr, true) || (FLayout.rtl, false) => const {
-      SingleActivator(LogicalKeyboardKey.arrowLeft): _ExtendIntent(),
-      SingleActivator(LogicalKeyboardKey.arrowRight): _ShrinkIntent(),
+    (.ltr, true) || (.rtl, false) => const {
+      SingleActivator(.arrowLeft): _ExtendIntent(),
+      SingleActivator(.arrowRight): _ShrinkIntent(),
     },
-    (FLayout.ltr, false) || (FLayout.rtl, true) => const {
-      SingleActivator(LogicalKeyboardKey.arrowLeft): _ShrinkIntent(),
-      SingleActivator(LogicalKeyboardKey.arrowRight): _ExtendIntent(),
-    },
-    (FLayout.ttb, true) || (FLayout.btt, false) => const {
-      SingleActivator(LogicalKeyboardKey.arrowUp): _ExtendIntent(),
-      SingleActivator(LogicalKeyboardKey.arrowDown): _ShrinkIntent(),
-    },
-    (FLayout.ttb, false) || (FLayout.btt, true) => const {
-      SingleActivator(LogicalKeyboardKey.arrowUp): _ShrinkIntent(),
-      SingleActivator(LogicalKeyboardKey.arrowDown): _ExtendIntent(),
-    },
+    (.ltr, false) ||
+    (.rtl, true) => const {SingleActivator(.arrowLeft): _ShrinkIntent(), SingleActivator(.arrowRight): _ExtendIntent()},
+    (.ttb, true) ||
+    (.btt, false) => const {SingleActivator(.arrowUp): _ExtendIntent(), SingleActivator(.arrowDown): _ShrinkIntent()},
+    (.ttb, false) ||
+    (.btt, true) => const {SingleActivator(.arrowUp): _ShrinkIntent(), SingleActivator(.arrowDown): _ExtendIntent()},
   };
 
   GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, FLayout layout) {
@@ -279,9 +273,9 @@ class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
 @internal
 extension Layouts on FLayout {
   double Function(Offset) translateThumbDrag(double thumbSize) => switch (this) {
-    FLayout.ltr => (delta) => delta.dx - thumbSize / 2,
-    FLayout.rtl => (delta) => -delta.dx + thumbSize / 2,
-    FLayout.ttb => (delta) => delta.dy - thumbSize / 2,
-    FLayout.btt => (delta) => -delta.dy + thumbSize / 2,
+    .ltr => (delta) => delta.dx - thumbSize / 2,
+    .rtl => (delta) => -delta.dx + thumbSize / 2,
+    .ttb => (delta) => delta.dy - thumbSize / 2,
+    .btt => (delta) => -delta.dy + thumbSize / 2,
   };
 }

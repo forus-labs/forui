@@ -10,16 +10,16 @@ class BottomNavigationBarPage extends StatefulSample {
   BottomNavigationBarPage({@queryParam super.theme});
 
   @override
-  State<BottomNavigationBarPage> createState() => _State();
+  State<BottomNavigationBarPage> createState() => _BottomNavigationBarPageState();
 }
 
-class _State extends StatefulSampleState<BottomNavigationBarPage> {
-  int index = 1;
+class _BottomNavigationBarPageState extends StatefulSampleState<BottomNavigationBarPage> {
+  int _index = 1;
 
   @override
   Widget sample(BuildContext context) => FBottomNavigationBar(
-    index: index,
-    onChange: (index) => setState(() => this.index = index),
+    index: _index,
+    onChange: (index) => setState(() => _index = index),
     children: const [
       FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
       FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),

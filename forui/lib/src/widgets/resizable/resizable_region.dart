@@ -41,6 +41,17 @@ class FResizableRegion extends StatelessWidget {
         'minExtent ($minExtent) must be < initialExtent ($initialExtent)',
       );
 
+  /// Creates a [FResizableRegion].
+  ///
+  /// This is identical to [FResizableRegion.new], allowing dot-shorthand construction.
+  factory FResizableRegion.region({
+    required double initialExtent,
+    required ValueWidgetBuilder<FResizableRegionData> builder,
+    double? minExtent,
+    Widget? child,
+    Key? key,
+  }) = FResizableRegion;
+
   @override
   Widget build(BuildContext context) {
     final InheritedData(:axis, :data) = InheritedData.of(context);
@@ -48,8 +59,8 @@ class FResizableRegion extends StatelessWidget {
       container: true,
       child: GestureDetector(
         child: switch (axis) {
-          Axis.horizontal => SizedBox(width: data.extent.current, child: builder(context, data, child)),
-          Axis.vertical => SizedBox(height: data.extent.current, child: builder(context, data, child)),
+          .horizontal => SizedBox(width: data.extent.current, child: builder(context, data, child)),
+          .vertical => SizedBox(height: data.extent.current, child: builder(context, data, child)),
         },
       ),
     );

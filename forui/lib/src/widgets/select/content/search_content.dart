@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:meta/meta.dart';
 
@@ -74,7 +73,7 @@ class SearchContent<T> extends StatefulWidget {
 }
 
 class _SearchContentState<T> extends State<SearchContent<T>> {
-  final FocusNode _focus = FocusNode(debugLabel: 'search field');
+  final FocusNode _focus = .new(debugLabel: 'search field');
   late TextEditingController _controller;
   late String _previous;
   late FutureOr<Iterable<T>> _data;
@@ -82,7 +81,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.properties.controller ?? TextEditingController();
+    _controller = widget.properties.controller ?? .new();
     _controller.addListener(_update);
 
     _previous = _controller.text;
@@ -98,7 +97,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
         _controller.dispose();
       }
 
-      _controller = widget.properties.controller ?? TextEditingController();
+      _controller = widget.properties.controller ?? .new();
       _controller.addListener(_update);
 
       _previous = _controller.text;
@@ -131,10 +130,10 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   Widget build(BuildContext context) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       children: [
         CallbackShortcuts(
-          bindings: {const SingleActivator(LogicalKeyboardKey.enter): _focus.nextFocus},
+          bindings: {const SingleActivator(.enter): _focus.nextFocus},
           child: FTextField(
             controller: _controller,
             focusNode: _focus,
@@ -259,14 +258,14 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
   FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style).copyWith(
-          border: FWidgetStateMap.all(const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))),
+        textFieldStyle: .inherit(colors: colors, typography: typography, style: style).copyWith(
+          border: .all(const OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent))),
         ),
         iconStyle: IconThemeData(size: 15, color: colors.mutedForeground),
         dividerStyle: FDividerStyles.inherit(
           colors: colors,
           style: style,
-        ).horizontalStyle.copyWith(width: 2, padding: EdgeInsets.zero),
-        progressStyle: FCircularProgressStyle.inherit(colors: colors),
+        ).horizontalStyle.copyWith(width: 2, padding: .zero),
+        progressStyle: .inherit(colors: colors),
       );
 }

@@ -7,9 +7,6 @@ import 'package:forui/forui.dart';
 
 part 'tile.design.dart';
 
-/// A marker interface which denotes that mixed-in widgets can be used in a [FTileGroup].
-mixin FTileMixin on Widget {}
-
 /// A specialized [FItem] for touch devices.
 ///
 /// Multiple tiles can be grouped together in a [FTileGroup]. Tiles grouped together will be separated by a divider,
@@ -122,6 +119,7 @@ class FTile extends StatelessWidget with FTileMixin {
 
   final Widget _child;
 
+  /// {@template forui.widgets.FTile.new}
   /// Creates a [FTile].
   ///
   /// Assuming LTR locale:
@@ -143,6 +141,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// the [title] and [subtitle] to never be rendered.
   ///
   /// Use [FTile.raw] in these cases.
+  /// {@endtemplate}
   FTile({
     required Widget title,
     this.style,
@@ -188,6 +187,7 @@ class FTile extends StatelessWidget with FTileMixin {
          suffix: suffix,
        );
 
+  /// {@template forui.widgets.FTile.raw}
   /// Creates a [FTile] without custom layout behavior.
   ///
   /// Assuming LTR locale:
@@ -198,6 +198,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// ```
   ///
   /// The order is reversed for RTL locales.
+  /// {@endtemplate}
   FTile.raw({
     required Widget child,
     this.style,
@@ -282,26 +283,26 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
   FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        backgroundColor: FWidgetStateMap.all(colors.background),
+        backgroundColor: .all(colors.background),
         decoration: FWidgetStateMap({
           WidgetState.disabled: BoxDecoration(
             color: colors.disable(colors.secondary),
-            border: Border.all(color: colors.border),
+            border: .all(color: colors.border),
             borderRadius: style.borderRadius,
           ),
           WidgetState.hovered | WidgetState.pressed: BoxDecoration(
             color: colors.secondary,
-            border: Border.all(color: colors.border),
+            border: .all(color: colors.border),
             borderRadius: style.borderRadius,
           ),
           WidgetState.any: BoxDecoration(
             color: colors.background,
-            border: Border.all(color: colors.border),
+            border: .all(color: colors.border),
             borderRadius: style.borderRadius,
           ),
         }),
         contentStyle: FItemContentStyle(
-          padding: const EdgeInsetsDirectional.fromSTEB(15, 13, 10, 13),
+          padding: const .fromSTEB(15, 13, 10, 13),
           prefixIconStyle: FWidgetStateMap({
             WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
             WidgetState.any: IconThemeData(color: colors.primary, size: 18),
@@ -324,7 +325,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           }),
         ),
         rawItemContentStyle: FRawItemContentStyle(
-          padding: const EdgeInsetsDirectional.fromSTEB(15, 13, 10, 13),
+          padding: const .fromSTEB(15, 13, 10, 13),
           prefixIconStyle: FWidgetStateMap({
             WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
             WidgetState.any: IconThemeData(color: colors.primary, size: 18),
@@ -336,7 +337,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
         ),
         tappableStyle: style.tappableStyle.copyWith(
           motion: FTappableMotion.none,
-          pressedEnterDuration: Duration.zero,
+          pressedEnterDuration: .zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),
         focusedOutlineStyle: style.focusedOutlineStyle,

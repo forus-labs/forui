@@ -163,15 +163,15 @@ class FModalBarrier extends StatelessWidget {
     final semanticsDismissible =
         onDismiss != null &&
         switch (defaultTargetPlatform) {
-          TargetPlatform.android || TargetPlatform.iOS || TargetPlatform.macOS => true,
-          TargetPlatform.fuchsia || TargetPlatform.linux || TargetPlatform.windows => false,
+          .android || .iOS || .macOS => true,
+          .fuchsia || .linux || .windows => false,
         };
 
     void handleDismiss() {
       if (onDismiss case final onDismiss?) {
         onDismiss();
       } else {
-        SystemSound.play(SystemSoundType.alert);
+        SystemSound.play(.alert);
       }
     }
 
@@ -184,7 +184,7 @@ class FModalBarrier extends StatelessWidget {
       child: MouseRegion(
         cursor: SystemMouseCursors.basic,
         child: ConstrainedBox(
-          constraints: const BoxConstraints.expand(),
+          constraints: const .expand(),
           child: filter == null ? null : BackdropFilter(filter: filter!, child: Container()),
         ),
       ),
@@ -204,7 +204,7 @@ class FModalBarrier extends StatelessWidget {
         excluding: including,
         child: RawGestureDetector(
           gestures: {_AnyTapGestureRecognizer: _AnyTapGestureRecognizerFactory(onAnyTapUp: handleDismiss)},
-          behavior: HitTestBehavior.opaque,
+          behavior: .opaque,
           child: barrier,
         ),
       ),
@@ -284,7 +284,7 @@ class _RenderSemanticsClipper extends RenderProxyBox {
   }
 
   @override
-  Rect get semanticBounds => Rect.fromLTRB(
+  Rect get semanticBounds => .fromLTRB(
     super.semanticBounds.left + _clipDetailsNotifier.value.left,
     super.semanticBounds.top + _clipDetailsNotifier.value.top,
     super.semanticBounds.right - _clipDetailsNotifier.value.right,

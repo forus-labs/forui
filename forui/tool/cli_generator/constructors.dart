@@ -24,8 +24,8 @@ class ConstructorFragment {
         source: fragmentFormatter.format(switch (match.constructor) {
           final constructor when constructor.factoryKeyword != null => _factory(key, pattern, match),
           final constructor when constructor.initializers.singleOrNull is RedirectingConstructorInvocation =>
-            _redirecting(key, pattern, match),
-          _ => _initializers(key, pattern, match),
+            _redirecting(key, pattern, constructor),
+          final constructor => _initializers(key, pattern, constructor),
         }),
       ),
   };
@@ -89,14 +89,14 @@ class ConstructorFragment {
     return source;
   }
 
-  static String _redirecting(String type, RegExp pattern, ConstructorMatch metadata) {
-    var source = metadata.constructor
+  static String _redirecting(String type, RegExp pattern, ConstructorDeclaration constructor) {
+    var source = constructor
         .toSource()
         .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAll(' : this', ' => $type');
 
     // Finds all optional named parameters that are not given in the constructor.
-    final to = metadata.constructor.initializers.whereType<RedirectingConstructorInvocation>().single;
+    final to = constructor.initializers.whereType<RedirectingConstructorInvocation>().single;
     final given = to.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
     final additional = [
       for (final p in to.element!.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name3)))
@@ -115,38 +115,35 @@ class ConstructorFragment {
     return source.replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
   }
 
-  static String _initializers(String type, RegExp pattern, ConstructorMatch match) {
-    if (match.constructor.body.toSource() != ';') {
-      throw UnsupportedError('Constructor bodies are not supported: ${match.constructor.toSource()}');
+  static String _initializers(String type, RegExp pattern, ConstructorDeclaration constructor) {
+    if (constructor.body.toSource() != ';') {
+      throw UnsupportedError('Constructor bodies are not supported: ${constructor.toSource()}');
     }
 
     // Unlike factory & redirecting constructors, creating a type using an initializer list implies that there are no
     // optional parameters that need to be added to the constructor.
-
     final parameters = <String>[];
-    var abort = false;
-    var constructorParameters = match.constructor.parameters.toSource();
 
-    for (final parameter in match.constructor.parameters.parameters) {
+    var abort = false;
+    var constructorParameters = constructor.parameters.toSource();
+
+    for (final parameter in constructor.parameters.parameters) {
       parameters.add('${parameter.name!.lexeme}: ${parameter.name!.lexeme},');
 
       if (parameter case final DefaultFormalParameter superParameter) {
-        if (superParameter.parameter case final SuperFormalParameter superParameter) {
+        final name = parameter.name!.lexeme;
+        final type = constructor.declaredFragment!.formalParameters.firstWhere((p) => p.name == name).element.type;
+
+        if (superParameter.parameter is SuperFormalParameter) {
           abort = true;
-          constructorParameters = constructorParameters.replaceAll(
-            'super.${parameter.name!.lexeme}',
-            '${superParameter.type} ${parameter.name!.lexeme}',
-          );
-        } else if (parameter.parameter case final FieldFormalParameter parameter) {
-          constructorParameters = constructorParameters.replaceAll(
-            'this.${parameter.name.lexeme}',
-            '${parameter.type} ${parameter.name.lexeme}',
-          );
+          constructorParameters = constructorParameters.replaceAll('super.$name', '$type $name');
+        } else if (parameter.parameter is FieldFormalParameter) {
+          constructorParameters = constructorParameters.replaceAll('this.$name', '$type $name');
         }
       }
     }
 
-    for (final initializer in match.constructor.initializers) {
+    for (final initializer in constructor.initializers) {
       if (initializer case final SuperConstructorInvocation _) {
         abort = true;
       }
@@ -157,7 +154,7 @@ class ConstructorFragment {
       return '$type ${type.substring(1).toCamelCase()}$constructorParameters => $type.inherit(${parameters.join()});';
     }
 
-    final arguments = match.constructor.initializers
+    final arguments = constructor.initializers
         .whereType<ConstructorFieldInitializer>()
         .map((initializer) => '${initializer.fieldName}: ${initializer.expression.toSource()},')
         .toList()

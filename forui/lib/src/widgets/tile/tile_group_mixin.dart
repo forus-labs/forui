@@ -1,0 +1,216 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:forui/forui.dart';
+
+/// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [FTileGroup.merge].
+mixin FTileGroupMixin on Widget {
+  /// {@macro forui.widgets.FSelectTileGroup.new}
+  ///
+  /// This function is a shorthand for [FSelectTileGroup.new].
+  static FSelectTileGroup<T> selectGroup<T>({
+    required FSelectTileGroupController<T> selectController,
+    required List<FSelectTile<T>> children,
+    ScrollController? scrollController,
+    FTileGroupStyle? style,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    FItemDivider divider = .indented,
+    Widget? label,
+    Widget? description,
+    String? semanticsLabel,
+    ValueChanged<Set<T>>? onChange,
+    ValueChanged<(T, bool)>? onSelect,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    FormFieldSetter<Set<T>>? onSaved,
+    VoidCallback? onReset,
+    FormFieldValidator<Set<T>>? validator,
+    String? forceErrorText,
+    bool enabled = true,
+    AutovalidateMode? autovalidateMode,
+    Key? key,
+  }) => .new(
+    selectController: selectController,
+    scrollController: scrollController,
+    style: style,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    divider: divider,
+    label: label,
+    description: description,
+    semanticsLabel: semanticsLabel,
+    onChange: onChange,
+    onSelect: onSelect,
+    errorBuilder: errorBuilder,
+    onSaved: onSaved,
+    onReset: onReset,
+    validator: validator,
+    forceErrorText: forceErrorText,
+    enabled: enabled,
+    autovalidateMode: autovalidateMode,
+    key: key,
+    children: children,
+  );
+
+  /// {@macro forui.widgets.FSelectTileGroup.builder}
+  ///
+  /// This function is a shorthand for [FSelectTileGroup.builder].
+  static FSelectTileGroup<T> selectGroupBuilder<T>({
+    required FSelectTileGroupController<T> selectController,
+    required FSelectTile<T>? Function(BuildContext context, int index) tileBuilder,
+    int? count,
+    ScrollController? scrollController,
+    FTileGroupStyle? style,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    FItemDivider divider = .indented,
+    Widget? label,
+    Widget? description,
+    String? semanticsLabel,
+    ValueChanged<Set<T>>? onChange,
+    ValueChanged<(T, bool)>? onSelect,
+    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    FormFieldSetter<Set<T>>? onSaved,
+    FormFieldValidator<Set<T>>? validator,
+    String? forceErrorText,
+    bool enabled = true,
+    AutovalidateMode? autovalidateMode,
+    Key? key,
+  }) => .builder(
+    selectController: selectController,
+    tileBuilder: tileBuilder,
+    count: count,
+    scrollController: scrollController,
+    style: style,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    divider: divider,
+    label: label,
+    description: description,
+    semanticsLabel: semanticsLabel,
+    onChange: onChange,
+    onSelect: onSelect,
+    errorBuilder: errorBuilder,
+    onSaved: onSaved,
+    validator: validator,
+    forceErrorText: forceErrorText,
+    enabled: enabled,
+    autovalidateMode: autovalidateMode,
+    key: key,
+  );
+
+  /// {@macro forui.widgets.FTileGroup.new}
+  ///
+  /// This function is a shorthand for [FTileGroup.new].
+  static FTileGroup group({
+    required List<FTileMixin> children,
+    FTileGroupStyle Function(FTileGroupStyle style)? style,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    bool? enabled,
+    FItemDivider divider = .indented,
+    String? semanticsLabel,
+    Widget? label,
+    Widget? description,
+    Widget? error,
+    Key? key,
+  }) => .new(
+    style: style,
+    scrollController: scrollController,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    enabled: enabled,
+    divider: divider,
+    semanticsLabel: semanticsLabel,
+    label: label,
+    description: description,
+    error: error,
+    key: key,
+    children: children,
+  );
+
+  /// {@macro forui.widgets.FTileGroup.builder}
+  ///
+  /// This function is a shorthand for [FTileGroup.builder].
+  static FTileGroup builder({
+    required NullableIndexedWidgetBuilder tileBuilder,
+    int? count,
+    FTileGroupStyle Function(FTileGroupStyle style)? style,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    bool? enabled,
+    FItemDivider divider = .indented,
+    String? semanticsLabel,
+    Widget? label,
+    Widget? description,
+    Widget? error,
+    Key? key,
+  }) => .builder(
+    tileBuilder: tileBuilder,
+    count: count,
+    style: style,
+    scrollController: scrollController,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    enabled: enabled,
+    divider: divider,
+    semanticsLabel: semanticsLabel,
+    label: label,
+    description: description,
+    error: error,
+    key: key,
+  );
+
+  /// {@macro forui.widgets.FTileGroup.merge}
+  ///
+  /// This function is a shorthand for [FTileGroup.merge].
+  static FTileGroup merge({
+    required List<FTileGroupMixin> children,
+    FTileGroupStyle Function(FTileGroupStyle style)? style,
+    ScrollController? scrollController,
+    double? cacheExtent,
+    double maxHeight = .infinity,
+    DragStartBehavior dragStartBehavior = .start,
+    ScrollPhysics physics = const ClampingScrollPhysics(),
+    bool? enabled,
+    FItemDivider divider = .full,
+    String? semanticsLabel,
+    Widget? label,
+    Widget? description,
+    Widget? error,
+    Key? key,
+  }) => .merge(
+    style: style,
+    scrollController: scrollController,
+    cacheExtent: cacheExtent,
+    maxHeight: maxHeight,
+    dragStartBehavior: dragStartBehavior,
+    physics: physics,
+    enabled: enabled,
+    divider: divider,
+    semanticsLabel: semanticsLabel,
+    label: label,
+    description: description,
+    error: error,
+    key: key,
+    children: children,
+  );
+}

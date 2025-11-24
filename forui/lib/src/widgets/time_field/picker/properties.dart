@@ -42,12 +42,12 @@ class FTimeFieldPickerProperties with Diagnosticable {
   final int minuteInterval;
 
   const FTimeFieldPickerProperties({
-    this.anchor = Alignment.topLeft,
-    this.inputAnchor = Alignment.bottomLeft,
-    this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.anchor = .topLeft,
+    this.inputAnchor = .bottomLeft,
+    this.spacing = const .spacing(4),
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.hourInterval = 1,
     this.minuteInterval = 1,

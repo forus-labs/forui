@@ -94,7 +94,7 @@ class _FTimePickerState extends State<FTimePicker> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? FTimePickerController();
+    _controller = widget.controller ?? .new();
     _controller.addListener(_onChange);
   }
 
@@ -114,7 +114,7 @@ class _FTimePickerState extends State<FTimePicker> {
         old.controller?.removeListener(_onChange);
       }
 
-      _controller = widget.controller ?? FTimePickerController();
+      _controller = widget.controller ?? .new();
       _controller.addListener(_onChange);
     }
 
@@ -126,7 +126,7 @@ class _FTimePickerState extends State<FTimePicker> {
   void _update() {
     final locale = FLocalizations.of(context) ?? FDefaultLocalizations();
 
-    format = widget.hour24 ? DateFormat.Hm(locale.localeName) : DateFormat.jm(locale.localeName);
+    format = widget.hour24 ? .Hm(locale.localeName) : .jm(locale.localeName);
     padding = format.pattern!.contains(RegExp('HH|hh')) ? 2 : 0;
 
     // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
@@ -195,18 +195,18 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
       applyHeightToLastDescent: false,
     ),
     super.selectionHeightAdjustment = 5,
-    this.padding = const EdgeInsetsDirectional.only(start: 10, end: 10),
+    this.padding = const .only(start: 10, end: 10),
   });
 
   /// Creates a [FTimePickerStyle] that inherits its properties.
   FTimePickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        textStyle: typography.base.copyWith(fontWeight: FontWeight.w500),
+        textStyle: typography.base.copyWith(fontWeight: .w500),
         selectionBorderRadius: style.borderRadius,
         selectionColor: colors.muted,
         selectionHeightAdjustment: 5,
         spacing: 2,
         focusedOutlineStyle: style.focusedOutlineStyle,
-        padding: const EdgeInsetsDirectional.only(start: 10, end: 10),
+        padding: const .only(start: 10, end: 10),
       );
 }

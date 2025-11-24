@@ -11,10 +11,10 @@ import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 typedef Select24 = TextEditingValue Function(TextEditingValue, int only, int end, int separator);
 
 TextEditingValue _first(TextEditingValue value, int only, int _, int _) =>
-    value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: only));
+    value.copyWith(selection: .new(baseOffset: 0, extentOffset: only));
 
 TextEditingValue _last(TextEditingValue value, int only, int end, int separator) => value.copyWith(
-  selection: TextSelection(baseOffset: only + separator, extentOffset: end),
+  selection: .new(baseOffset: only + separator, extentOffset: end),
 );
 
 @internal
@@ -97,7 +97,7 @@ class Time24Selector extends Selector {
 
     return TextEditingValue(
       text: join(parts),
-      selection: TextSelection(baseOffset: start, extentOffset: end),
+      selection: .new(baseOffset: start, extentOffset: end),
     );
   }
 

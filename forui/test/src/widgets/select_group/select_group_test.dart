@@ -16,7 +16,7 @@ void main() {
           key: key,
           child: FSelectGroup<int>(
             controller: autoDispose(FMultiValueNotifier(value: {1})),
-            children: [FRadio.grouped(label: const Text('1'), value: 1)],
+            children: [.radio(label: const Text('1'), value: 1)],
             onSaved: (value) => initial = value,
           ),
         ),
@@ -44,9 +44,9 @@ void main() {
             selection = value;
           },
           children: [
-            FRadio.grouped(value: 1, label: const Text('1')),
-            FRadio.grouped(value: 2, label: const Text('2')),
-            FRadio.grouped(value: 3, label: const Text('3')),
+            .radio(value: 1, label: const Text('1')),
+            .radio(value: 2, label: const Text('2')),
+            .radio(value: 3, label: const Text('3')),
           ],
         ),
       ),
@@ -76,7 +76,7 @@ void main() {
             firstSelections++;
             firsSelection = value;
           },
-          children: [FCheckbox.grouped(value: 1, label: const Text('1'))],
+          children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
     );
@@ -102,7 +102,7 @@ void main() {
             secondSelections++;
             secondSelection = value;
           },
-          children: [FCheckbox.grouped(value: 1, label: const Text('1'))],
+          children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
     );
@@ -127,7 +127,7 @@ void main() {
           controller: first,
           onChange: (_) {},
           onSelect: (_) {},
-          children: [FCheckbox.grouped(value: 1, label: const Text('1'))],
+          children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
     );
@@ -142,7 +142,7 @@ void main() {
           controller: second,
           onChange: (_) {},
           onSelect: (_) {},
-          children: [FCheckbox.grouped(value: 1, label: const Text('1'))],
+          children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
     );
@@ -161,7 +161,7 @@ void main() {
           controller: controller,
           onChange: (_) {},
           onSelect: (_) {},
-          children: [FCheckbox.grouped(value: 1, label: const Text('1'))],
+          children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
     );

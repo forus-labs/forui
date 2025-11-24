@@ -93,7 +93,7 @@ class _ContentState<T> extends State<Content<T>> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? ScrollController();
+    _controller = widget.controller ?? .new();
     _controller.addListener(_updateHandles);
   }
 
@@ -106,7 +106,7 @@ class _ContentState<T> extends State<Content<T>> {
         _controller.dispose();
       }
 
-      _controller = widget.controller ?? ScrollController();
+      _controller = widget.controller ?? .new();
       _controller.addListener(_updateHandles);
     }
   }
@@ -144,10 +144,10 @@ class _ContentState<T> extends State<Content<T>> {
         // Giving a ListView an increased cacheExtent did not fix the issue.
         child: SingleChildScrollView(
           controller: _controller,
-          padding: EdgeInsets.zero,
+          padding: .zero,
           physics: widget.physics,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisSize: .min,
             children: [
               if (widget.children.firstOrNull case final first?)
                 ContentData<T>(
@@ -248,13 +248,13 @@ class FSelectContentStyle with Diagnosticable, _$FSelectContentStyleFunctions {
   const FSelectContentStyle({
     required this.sectionStyle,
     required this.scrollHandleStyle,
-    this.padding = const EdgeInsets.symmetric(vertical: 5),
+    this.padding = const .symmetric(vertical: 5),
   });
 
   /// Creates a [FSelectContentStyle] that inherits its properties.
   FSelectContentStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        sectionStyle: FSelectSectionStyle.inherit(colors: colors, style: style, typography: typography),
-        scrollHandleStyle: FSelectScrollHandleStyle.inherit(colors: colors),
+        sectionStyle: .inherit(colors: colors, style: style, typography: typography),
+        scrollHandleStyle: .inherit(colors: colors),
       );
 }

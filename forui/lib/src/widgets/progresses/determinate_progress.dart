@@ -126,7 +126,7 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
   const FDeterminateProgressStyle({
     required this.trackDecoration,
     required this.fillDecoration,
-    this.constraints = const BoxConstraints.tightFor(height: 10.0),
+    this.constraints = const .tightFor(height: 10.0),
     this.motion = const FDeterminateProgressMotion(),
   });
 

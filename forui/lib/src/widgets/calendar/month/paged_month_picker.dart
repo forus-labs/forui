@@ -50,7 +50,7 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
   void onGridFocusChange(bool focused) {
     setState(() {
       if (focused && focusedDate == null) {
-        final currentMonth = widget.today.truncate(to: DateUnit.months);
+        final currentMonth = widget.today.truncate(to: .months);
         focusedDate = _focusableMonth(widget.initial.year == widget.today.year ? currentMonth : current);
       }
     });
@@ -76,9 +76,9 @@ class _PagedMonthPickerState extends PagedPickerState<PagedMonthPicker> {
 
   @override
   Map<TraversalDirection, Period> get directionOffset => const {
-    TraversalDirection.up: Period(months: -MonthPicker.columns),
-    TraversalDirection.right: Period(months: 1),
-    TraversalDirection.down: Period(months: MonthPicker.columns),
-    TraversalDirection.left: Period(months: -1),
+    .up: Period(months: -MonthPicker.columns),
+    .right: Period(months: 1),
+    .down: Period(months: MonthPicker.columns),
+    .left: Period(months: -1),
   };
 }

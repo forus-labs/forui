@@ -13,17 +13,17 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPortal(
-          portalAnchor: Alignment.topRight,
-          childAnchor: Alignment.bottomLeft,
+          portalAnchor: .topRight,
+          childAnchor: .bottomLeft,
           controller: controller,
           portalBuilder: (context, _) => Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const .all(5),
             child: ColoredBox(
               color: Colors.red,
               child: SizedBox.square(
                 dimension: 100,
                 child: Align(
-                  alignment: Alignment.bottomLeft,
+                  alignment: .bottomLeft,
                   child: SizedBox.square(dimension: 1, child: GestureDetector(onTap: () => taps++)),
                 ),
               ),

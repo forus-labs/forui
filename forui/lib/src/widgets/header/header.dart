@@ -113,14 +113,14 @@ class FHeaderStyles with Diagnosticable, _$FHeaderStylesFunctions {
   FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : rootStyle = FHeaderStyle(
         systemOverlayStyle: colors.systemOverlayStyle,
-        titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: FontWeight.w700, height: 1),
-        actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 30),
+        titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: .w700, height: 1),
+        actionStyle: .inherit(colors: colors, style: style, size: 30),
         padding: style.pagePadding.copyWith(bottom: 15),
       ),
       nestedStyle = FHeaderStyle(
         systemOverlayStyle: colors.systemOverlayStyle,
-        titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: FontWeight.w600, height: 1),
-        actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 25),
+        titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: .w600, height: 1),
+        actionStyle: .inherit(colors: colors, style: style, size: 25),
         padding: style.pagePadding.copyWith(bottom: 15),
       );
 }

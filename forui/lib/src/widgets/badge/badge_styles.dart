@@ -10,7 +10,7 @@ part 'badge_styles.design.dart';
 /// The [FBadgeStyle]s.
 class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
   /// The default border radius for badges.
-  static const BorderRadius defaultRadius = BorderRadius.all(Radius.circular(100));
+  static const BorderRadius defaultRadius = .all(.circular(100));
 
   /// The primary badge style.
   @override
@@ -37,13 +37,13 @@ class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
         primary: FBadgeStyle(
           decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultRadius),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: .w600),
           ),
         ),
         secondary: FBadgeStyle(
           decoration: BoxDecoration(color: colors.secondary, borderRadius: FBadgeStyles.defaultRadius),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: typography.sm.copyWith(color: colors.secondaryForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.secondaryForeground, fontWeight: .w600),
           ),
         ),
         outline: FBadgeStyle(
@@ -52,13 +52,13 @@ class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
             borderRadius: FBadgeStyles.defaultRadius,
           ),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
           ),
         ),
         destructive: FBadgeStyle(
           decoration: BoxDecoration(color: colors.destructive, borderRadius: FBadgeStyles.defaultRadius),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: typography.sm.copyWith(color: colors.destructiveForeground, fontWeight: FontWeight.w600),
+            labelTextStyle: typography.sm.copyWith(color: colors.destructiveForeground, fontWeight: .w600),
           ),
         ),
       );

@@ -60,14 +60,14 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     required this.actionTappableStyle,
     required this.pageTappableStyle,
     required this.focusedOutlineStyle,
-    this.itemPadding = const EdgeInsets.symmetric(horizontal: 2),
-    this.itemConstraints = const BoxConstraints.tightFor(width: 40.0, height: 40.0),
+    this.itemPadding = const .symmetric(horizontal: 2),
+    this.itemConstraints = const .tightFor(width: 40.0, height: 40.0),
   });
 
   /// Creates a [FPaginationStyle] that inherits its properties.
   FPaginationStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        itemIconStyle: FWidgetStateMap.all(IconThemeData(color: colors.primary, size: 18)),
+        itemIconStyle: .all(IconThemeData(color: colors.primary, size: 18)),
         itemDecoration: FWidgetStateMap({
           WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): BoxDecoration(
             borderRadius: style.borderRadius,

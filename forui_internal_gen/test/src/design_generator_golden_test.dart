@@ -1,4 +1,3 @@
-import 'package:build/build.dart';
 import 'package:build_test/build_test.dart';
 import 'package:forui_internal_gen/forui_internal_gen.dart';
 import 'package:test/test.dart';
@@ -177,7 +176,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     List<String>? list,
     Set<String>? set,
     Map<String, int>? map,
-  }) => FGoldenStyle(
+  }) => .new(
     someDouble: someDouble ?? this.someDouble,
     alignment: alignment ?? this.alignment,
     alignmentGeometry: alignmentGeometry ?? this.alignmentGeometry,
@@ -211,48 +210,41 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
 
   /// Linearly interpolate between this and another [FGoldenStyle] using the given factor [t].
   @useResult
-  FGoldenStyle lerp(FGoldenStyle other, double t) => FGoldenStyle(
+  FGoldenStyle lerp(FGoldenStyle other, double t) => .new(
     someDouble: lerpDouble(someDouble, other.someDouble, t) ?? someDouble,
-    alignment: Alignment.lerp(alignment, other.alignment, t) ?? alignment,
-    alignmentGeometry: AlignmentGeometry.lerp(alignmentGeometry, other.alignmentGeometry, t) ?? alignmentGeometry,
-    borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
-    borderRadiusGeometry:
-        BorderRadiusGeometry.lerp(borderRadiusGeometry, other.borderRadiusGeometry, t) ?? borderRadiusGeometry,
-    boxConstraints: BoxConstraints.lerp(boxConstraints, other.boxConstraints, t) ?? boxConstraints,
-    boxDecoration: BoxDecoration.lerp(boxDecoration, other.boxDecoration, t) ?? boxDecoration,
-    decoration: Decoration.lerp(decoration, other.decoration, t) ?? decoration,
-    color: Color.lerp(color, other.color, t) ?? color,
-    edgeInsets: EdgeInsets.lerp(edgeInsets, other.edgeInsets, t) ?? edgeInsets,
-    edgeInsetsDirectional:
-        EdgeInsetsDirectional.lerp(edgeInsetsDirectional, other.edgeInsetsDirectional, t) ?? edgeInsetsDirectional,
-    edgeInsetsGeometry: EdgeInsetsGeometry.lerp(edgeInsetsGeometry, other.edgeInsetsGeometry, t) ?? edgeInsetsGeometry,
-    iconThemeData: IconThemeData.lerp(iconThemeData, other.iconThemeData, t),
-    textStyle: TextStyle.lerp(textStyle, other.textStyle, t) ?? textStyle,
+    alignment: .lerp(alignment, other.alignment, t) ?? alignment,
+    alignmentGeometry: .lerp(alignmentGeometry, other.alignmentGeometry, t) ?? alignmentGeometry,
+    borderRadius: .lerp(borderRadius, other.borderRadius, t) ?? borderRadius,
+    borderRadiusGeometry: .lerp(borderRadiusGeometry, other.borderRadiusGeometry, t) ?? borderRadiusGeometry,
+    boxConstraints: .lerp(boxConstraints, other.boxConstraints, t) ?? boxConstraints,
+    boxDecoration: .lerp(boxDecoration, other.boxDecoration, t) ?? boxDecoration,
+    decoration: .lerp(decoration, other.decoration, t) ?? decoration,
+    color: .lerp(color, other.color, t) ?? color,
+    edgeInsets: .lerp(edgeInsets, other.edgeInsets, t) ?? edgeInsets,
+    edgeInsetsDirectional: .lerp(edgeInsetsDirectional, other.edgeInsetsDirectional, t) ?? edgeInsetsDirectional,
+    edgeInsetsGeometry: .lerp(edgeInsetsGeometry, other.edgeInsetsGeometry, t) ?? edgeInsetsGeometry,
+    iconThemeData: .lerp(iconThemeData, other.iconThemeData, t),
+    textStyle: .lerp(textStyle, other.textStyle, t) ?? textStyle,
     boxShadows: BoxShadow.lerpList(boxShadows, other.boxShadows, t) ?? boxShadows,
     shadows: Shadow.lerpList(shadows, other.shadows, t) ?? shadows,
-    boxDecorationMap: FWidgetStateMap.lerpBoxDecoration(boxDecorationMap, other.boxDecorationMap, t),
-    nullableBoxDecorationMap: FWidgetStateMap.lerpWhere(
+    boxDecorationMap: .lerpBoxDecoration(boxDecorationMap, other.boxDecorationMap, t),
+    nullableBoxDecorationMap: .lerpWhere(
       nullableBoxDecorationMap,
       other.nullableBoxDecorationMap,
       t,
       BoxDecoration.lerp,
     ),
-    colorMap: FWidgetStateMap.lerpColor(colorMap, other.colorMap, t),
-    nullableColorMap: FWidgetStateMap.lerpWhere(nullableColorMap, other.nullableColorMap, t, Color.lerp),
-    iconThemeDataMap: FWidgetStateMap.lerpIconThemeData(iconThemeDataMap, other.iconThemeDataMap, t),
-    nullableIconThemeDataMap: FWidgetStateMap.lerpWhere(
+    colorMap: .lerpColor(colorMap, other.colorMap, t),
+    nullableColorMap: .lerpWhere(nullableColorMap, other.nullableColorMap, t, Color.lerp),
+    iconThemeDataMap: .lerpIconThemeData(iconThemeDataMap, other.iconThemeDataMap, t),
+    nullableIconThemeDataMap: .lerpWhere(
       nullableIconThemeDataMap,
       other.nullableIconThemeDataMap,
       t,
       IconThemeData.lerp,
     ),
-    textStyleMap: FWidgetStateMap.lerpTextStyle(textStyleMap, other.textStyleMap, t),
-    nullableTextStyleMap: FWidgetStateMap.lerpWhere(
-      nullableTextStyleMap,
-      other.nullableTextStyleMap,
-      t,
-      TextStyle.lerp,
-    ),
+    textStyleMap: .lerpTextStyle(textStyleMap, other.textStyleMap, t),
+    nullableTextStyleMap: .lerpWhere(nullableTextStyleMap, other.nullableTextStyleMap, t, TextStyle.lerp),
     nestedMotion: nestedMotion.lerp(other.nestedMotion, t),
     nestedStyle: nestedStyle.lerp(other.nestedStyle, t),
     list: t < 0.5 ? list : other.list,
@@ -320,35 +312,35 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('someDouble', someDouble, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('alignment', alignment, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('alignmentGeometry', alignmentGeometry, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('borderRadius', borderRadius, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('borderRadiusGeometry', borderRadiusGeometry, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('boxConstraints', boxConstraints, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('boxDecoration', boxDecoration, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('decoration', decoration, level: DiagnosticLevel.debug))
-      ..add(ColorProperty('color', color, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('edgeInsets', edgeInsets, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('edgeInsetsDirectional', edgeInsetsDirectional, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('edgeInsetsGeometry', edgeInsetsGeometry, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('iconThemeData', iconThemeData, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('textStyle', textStyle, level: DiagnosticLevel.debug))
-      ..add(IterableProperty('boxShadows', boxShadows, level: DiagnosticLevel.debug))
-      ..add(IterableProperty('shadows', shadows, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('boxDecorationMap', boxDecorationMap, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('nullableBoxDecorationMap', nullableBoxDecorationMap, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('colorMap', colorMap, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('nullableColorMap', nullableColorMap, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('iconThemeDataMap', iconThemeDataMap, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('nullableIconThemeDataMap', nullableIconThemeDataMap, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('textStyleMap', textStyleMap, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('nullableTextStyleMap', nullableTextStyleMap, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('nestedMotion', nestedMotion, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('nestedStyle', nestedStyle, level: DiagnosticLevel.debug))
-      ..add(IterableProperty('list', list, level: DiagnosticLevel.debug))
-      ..add(IterableProperty('set', set, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('map', map, level: DiagnosticLevel.debug));
+      ..add(DoubleProperty('someDouble', someDouble, level: .debug))
+      ..add(DiagnosticsProperty('alignment', alignment, level: .debug))
+      ..add(DiagnosticsProperty('alignmentGeometry', alignmentGeometry, level: .debug))
+      ..add(DiagnosticsProperty('borderRadius', borderRadius, level: .debug))
+      ..add(DiagnosticsProperty('borderRadiusGeometry', borderRadiusGeometry, level: .debug))
+      ..add(DiagnosticsProperty('boxConstraints', boxConstraints, level: .debug))
+      ..add(DiagnosticsProperty('boxDecoration', boxDecoration, level: .debug))
+      ..add(DiagnosticsProperty('decoration', decoration, level: .debug))
+      ..add(ColorProperty('color', color, level: .debug))
+      ..add(DiagnosticsProperty('edgeInsets', edgeInsets, level: .debug))
+      ..add(DiagnosticsProperty('edgeInsetsDirectional', edgeInsetsDirectional, level: .debug))
+      ..add(DiagnosticsProperty('edgeInsetsGeometry', edgeInsetsGeometry, level: .debug))
+      ..add(DiagnosticsProperty('iconThemeData', iconThemeData, level: .debug))
+      ..add(DiagnosticsProperty('textStyle', textStyle, level: .debug))
+      ..add(IterableProperty('boxShadows', boxShadows, level: .debug))
+      ..add(IterableProperty('shadows', shadows, level: .debug))
+      ..add(DiagnosticsProperty('boxDecorationMap', boxDecorationMap, level: .debug))
+      ..add(DiagnosticsProperty('nullableBoxDecorationMap', nullableBoxDecorationMap, level: .debug))
+      ..add(DiagnosticsProperty('colorMap', colorMap, level: .debug))
+      ..add(DiagnosticsProperty('nullableColorMap', nullableColorMap, level: .debug))
+      ..add(DiagnosticsProperty('iconThemeDataMap', iconThemeDataMap, level: .debug))
+      ..add(DiagnosticsProperty('nullableIconThemeDataMap', nullableIconThemeDataMap, level: .debug))
+      ..add(DiagnosticsProperty('textStyleMap', textStyleMap, level: .debug))
+      ..add(DiagnosticsProperty('nullableTextStyleMap', nullableTextStyleMap, level: .debug))
+      ..add(DiagnosticsProperty('nestedMotion', nestedMotion, level: .debug))
+      ..add(DiagnosticsProperty('nestedStyle', nestedStyle, level: .debug))
+      ..add(IterableProperty('list', list, level: .debug))
+      ..add(IterableProperty('set', set, level: .debug))
+      ..add(DiagnosticsProperty('map', map, level: .debug));
   }
 
   @override
@@ -427,15 +419,12 @@ extension $FGoldenNestedMotionTransformations on FGoldenNestedMotion {
   /// * [FGoldenNestedMotion.duration]
   /// * [FGoldenNestedMotion.curve]
   @useResult
-  FGoldenNestedMotion copyWith({double? someDouble, Duration? duration, Curve? curve}) => FGoldenNestedMotion(
-    someDouble: someDouble ?? this.someDouble,
-    duration: duration ?? this.duration,
-    curve: curve ?? this.curve,
-  );
+  FGoldenNestedMotion copyWith({double? someDouble, Duration? duration, Curve? curve}) =>
+      .new(someDouble: someDouble ?? this.someDouble, duration: duration ?? this.duration, curve: curve ?? this.curve);
 
   /// Linearly interpolate between this and another [FGoldenNestedMotion] using the given factor [t].
   @useResult
-  FGoldenNestedMotion lerp(FGoldenNestedMotion other, double t) => FGoldenNestedMotion(
+  FGoldenNestedMotion lerp(FGoldenNestedMotion other, double t) => .new(
     someDouble: lerpDouble(someDouble, other.someDouble, t) ?? someDouble,
     duration: t < 0.5 ? duration : other.duration,
     curve: t < 0.5 ? curve : other.curve,
@@ -455,9 +444,9 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('someDouble', someDouble, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('duration', duration, level: DiagnosticLevel.debug))
-      ..add(DiagnosticsProperty('curve', curve, level: DiagnosticLevel.debug));
+      ..add(DoubleProperty('someDouble', someDouble, level: .debug))
+      ..add(DiagnosticsProperty('duration', duration, level: .debug))
+      ..add(DiagnosticsProperty('curve', curve, level: .debug));
   }
 
   @override
@@ -480,11 +469,11 @@ extension $FGoldenNestedStyleTransformations on FGoldenNestedStyle {
   ///
   /// ## Parameters
   @useResult
-  FGoldenNestedStyle copyWith() => FGoldenNestedStyle();
+  FGoldenNestedStyle copyWith() => .new();
 
   /// Linearly interpolate between this and another [FGoldenNestedStyle] using the given factor [t].
   @useResult
-  FGoldenNestedStyle lerp(FGoldenNestedStyle other, double t) => FGoldenNestedStyle();
+  FGoldenNestedStyle lerp(FGoldenNestedStyle other, double t) => .new();
 }
 
 mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
@@ -531,7 +520,7 @@ void main() {
     await readerWriter.testing.loadIsolateSources();
 
     await testBuilder(
-      designBuilder(BuilderOptions.empty),
+      designBuilder(.empty),
       {'forui_internal_gen|test/src/sample.dart': _source},
       outputs: {'forui_internal_gen|test/src/sample.design.dart': _golden},
       readerWriter: readerWriter,

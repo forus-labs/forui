@@ -11,8 +11,74 @@ import 'package:forui/src/widgets/select/select_controller.dart';
 
 part 'select_item.design.dart';
 
+Widget? _defaultSuffixBuilder(BuildContext _, bool selected) => selected ? const Icon(FIcons.check) : null;
+
 /// A marker interface which denotes that mixed-in widgets can be used in a [FSelect].
-mixin FSelectItemMixin on Widget {}
+mixin FSelectItemMixin on Widget {
+  /// {@macro forui.widgets.FSelectSection.new}
+  ///
+  /// For more control over the items' appearances, use [richSection].
+  ///
+  /// This function is a shorthand for [FSelectSection.new].
+  static FSelectSection<T> section<T>({
+    required Widget label,
+    required Map<String, T> items,
+    FSelectSectionStyle Function(FSelectSectionStyle style)? style,
+    bool? enabled,
+    FItemDivider divider = .none,
+    Key? key,
+  }) => .new(label: label, items: items, style: style, enabled: enabled, divider: divider, key: key);
+
+  /// {@macro forui.widgets.FSelectSection.rich}
+  ///
+  /// This function is a shorthand for [FSelectSection.rich].
+  static FSelectSection<T> richSection<T>({
+    required Widget label,
+    required List<FSelectItem<T>> children,
+    FSelectSectionStyle Function(FSelectSectionStyle style)? style,
+    bool? enabled,
+    FItemDivider divider = .none,
+    Key? key,
+  }) => .rich(label: label, style: style, enabled: enabled, divider: divider, key: key, children: children);
+
+  /// {@macro forui.widgets.FSelectItem.new}
+  ///
+  /// For even more control over the item's appearance, use [raw].
+  ///
+  /// This function is a shorthand for [FSelectItem.new].
+  static FSelectItem<T> item<T>({
+    required Widget title,
+    required T value,
+    FItemStyle Function(FItemStyle style)? style,
+    bool? enabled,
+    Widget? prefix,
+    Widget? subtitle,
+    // ignore: avoid_positional_boolean_parameters
+    Widget? Function(BuildContext context, bool selected) suffixBuilder = _defaultSuffixBuilder,
+    Key? key,
+  }) => .new(
+    title: title,
+    value: value,
+    style: style,
+    enabled: enabled,
+    prefix: prefix,
+    subtitle: subtitle,
+    suffixBuilder: suffixBuilder,
+    key: key,
+  );
+
+  /// {@macro forui.widgets.FSelectItem.raw}
+  ///
+  /// This function is a shorthand for [FSelectItem.raw].
+  static FSelectItem<T> raw<T>({
+    required Widget child,
+    required T value,
+    FItemStyle Function(FItemStyle style)? style,
+    bool? enabled,
+    Widget? prefix,
+    Key? key,
+  }) => .raw(value: value, style: style, enabled: enabled, prefix: prefix, key: key, child: child);
+}
 
 /// A section in a [FSelect] that can contain multiple [FSelectItem]s.
 class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
@@ -41,32 +107,36 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// The nested [FSelectItem]s.
   final List<FSelectItem<T>> children;
 
+  /// {@template forui.widgets.FSelectSection.new}
   /// Creates a [FSelectSection] from the given [items].
   ///
   /// For more control over the items' appearances, use [FSelectSection.rich].
+  /// {@endtemplate}
   FSelectSection({
     required Widget label,
     required Map<String, T> items,
     FSelectSectionStyle Function(FSelectSectionStyle style)? style,
     bool? enabled,
-    FItemDivider divider = FItemDivider.none,
+    FItemDivider divider = .none,
     Key? key,
   }) : this.rich(
          label: label,
-         children: [for (final e in items.entries) FSelectItem<T>(title: Text(e.key), value: e.value)],
+         children: [for (final e in items.entries) .item(title: Text(e.key), value: e.value)],
          style: style,
          enabled: enabled,
          divider: divider,
          key: key,
        );
 
+  /// {@template forui.widgets.FSelectSection.rich}
   /// Creates a [FSelectSection] with the given [children].
+  /// {@endtemplate}
   const FSelectSection.rich({
     required this.label,
     required this.children,
     this.style,
     this.enabled,
-    this.divider = FItemDivider.none,
+    this.divider = .none,
     super.key,
   });
 
@@ -83,11 +153,11 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
       first: false,
       ensureVisible: content.ensureVisible,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
         children: [
           DefaultTextStyle.merge(
-            style: style.labelTextStyle.resolve({if (!enabled) WidgetState.disabled}),
+            style: style.labelTextStyle.resolve({if (!enabled) .disabled}),
             child: Padding(padding: style.labelPadding, child: label),
           ),
           // There is an edge case where a non-first, enabled child of a disabled section will not be auto-focused.
@@ -163,7 +233,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required this.dividerColor,
     required this.dividerWidth,
     required this.itemStyle,
-    this.labelPadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.labelPadding = const .directional(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
 
   /// Creates a [FSelectSectionStyle] that inherits its properties.
@@ -182,25 +252,22 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
       WidgetState.any: typography.sm.copyWith(color: colors.primary),
     });
 
-    return FSelectSectionStyle(
+    return .new(
       labelTextStyle: FWidgetStateMap({
-        WidgetState.disabled: typography.sm.copyWith(
-          color: colors.disable(colors.primary),
-          fontWeight: FontWeight.w600,
-        ),
-        WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: .w600),
+        WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
       }),
-      dividerColor: FWidgetStateMap.all(colors.border),
+      dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
-        backgroundColor: FWidgetStateMap.all(null),
+        backgroundColor: .all(null),
         decoration: FWidgetStateMap({
           ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
             color: colors.secondary,
             borderRadius: style.borderRadius,
           ),
         }),
-        contentStyle: FItemContentStyle.inherit(colors: colors, typography: typography).copyWith(
+        contentStyle: .inherit(colors: colors, typography: typography).copyWith(
           padding: padding,
           prefixIconStyle: iconStyle,
           prefixIconSpacing: 10,
@@ -250,7 +317,9 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// A prefix.
   final Widget? prefix;
 
+  /// {@template forui.widgets.FSelectItem.new}
   /// Creates a [FSelectItem] with a custom [title] and value.
+  /// {@endtemplate}
   const factory FSelectItem({
     required Widget title,
     required T value,
@@ -263,7 +332,25 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     Key? key,
   }) = _SelectItem<T>;
 
+  /// Creates a [FSelectItem] with a custom [title] and value.
+  ///
+  /// This is identical to [FSelectItem.new]. It provides consistency with other [FSelectItemMixin] members when using
+  /// dot-shorthands.
+  const factory FSelectItem.item({
+    required Widget title,
+    required T value,
+    FItemStyle Function(FItemStyle style)? style,
+    bool? enabled,
+    Widget? prefix,
+    Widget? subtitle,
+    // ignore: avoid_positional_boolean_parameters
+    Widget? Function(BuildContext context, bool selected) suffixBuilder,
+    Key? key,
+  }) = FSelectItem<T>;
+
+  /// {@template forui.widgets.FSelectItem.raw}
   /// Creates a [FSelectItem] with a raw layout.
+  /// {@endtemplate}
   const factory FSelectItem.raw({
     required Widget child,
     required T value,
@@ -286,7 +373,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
 }
 
 abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
-  late final _focus = FocusNode(debugLabel: widget.value.toString());
+  late final FocusNode _focus = .new(debugLabel: widget.value.toString());
 
   @override
   void initState() {
@@ -298,7 +385,7 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
         return;
       }
 
-      final InheritedSelectController(:focus, :onPress) = InheritedSelectController.of<T>(context);
+      final InheritedSelectController(:focus, :onPress) = .of<T>(context);
       final content = ContentData.of<T>(context);
       if (focus(widget.value)) {
         content.ensureVisible(context);
@@ -314,7 +401,7 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedSelectController(:popover, :contains, :focus, :onPress) = InheritedSelectController.of<T>(context);
+    final InheritedSelectController(:popover, :contains, :focus, :onPress) = .of<T>(context);
     final content = ContentData.of<T>(context);
 
     return _item(
@@ -346,8 +433,6 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
 }
 
 class _SelectItem<T> extends FSelectItem<T> {
-  static Widget? _defaultSuffixBuilder(BuildContext _, bool selected) => selected ? const Icon(FIcons.check) : null;
-
   final Widget? subtitle;
   final Widget title;
 

@@ -64,7 +64,7 @@ class _DateFieldHook extends Hook<FDateFieldController> {
   }) : _debugLabel = debugLabel;
 
   @override
-  _DateFieldHookState createState() => _DateFieldHookState();
+  _DateFieldHookState createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -81,7 +81,7 @@ class _DateFieldHook extends Hook<FDateFieldController> {
 }
 
 class _DateFieldHookState extends HookState<FDateFieldController, _DateFieldHook> {
-  late final FDateFieldController _controller = FDateFieldController(
+  late final _controller = FDateFieldController(
     vsync: hook.vsync,
     initialDate: hook.initialDate,
     validator: hook.validator,

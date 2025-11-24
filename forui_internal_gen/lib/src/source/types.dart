@@ -17,19 +17,13 @@ const map = TypeChecker.typeNamed(Map, inSdk: true);
 
 const color = TypeChecker.fromUrl('dart:ui#Color');
 
-const alignment = TypeChecker.fromUrl('package:flutter/src/painting/alignment.dart#Alignment');
 const alignmentGeometry = TypeChecker.fromUrl('package:flutter/src/painting/alignment.dart#AlignmentGeometry');
-const borderRadius = TypeChecker.fromUrl('package:flutter/src/painting/border_radius.dart#BorderRadius');
 const borderRadiusGeometry = TypeChecker.fromUrl(
   'package:flutter/src/painting/border_radius.dart#BorderRadiusGeometry',
 );
 const boxConstraints = TypeChecker.fromUrl('package:flutter/src/rendering/box.dart#BoxConstraints');
 const boxDecoration = TypeChecker.fromUrl('package:flutter/src/painting/box_decoration.dart#BoxDecoration');
 const decoration = TypeChecker.fromUrl('package:flutter/src/painting/decoration.dart#Decoration');
-const edgeInsets = TypeChecker.fromUrl('package:flutter/src/painting/edge_insets.dart#EdgeInsets');
-const edgeInsetsDirectional = TypeChecker.fromUrl(
-  'package:flutter/src/painting/edge_insets.dart#EdgeInsetsDirectional',
-);
 const edgeInsetsGeometry = TypeChecker.fromUrl('package:flutter/src/painting/edge_insets.dart#EdgeInsetsGeometry');
 const iconData = TypeChecker.fromUrl('package:flutter/src/widgets/icon_theme.dart#IconData');
 const iconThemeData = TypeChecker.fromUrl('package:flutter/src/widgets/icon_theme_data.dart#IconThemeData');

@@ -36,9 +36,9 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
   /// Creates a [FDateFieldStyle] that inherits its properties.
   FDateFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textFieldStyle: FTextFieldStyle.inherit(colors: colors, typography: typography, style: style),
-        popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
-        calendarStyle: FCalendarStyle.inherit(colors: colors, typography: typography, style: style),
+        textFieldStyle: .inherit(colors: colors, typography: typography, style: style),
+        popoverStyle: .inherit(colors: colors, style: style),
+        calendarStyle: .inherit(colors: colors, typography: typography, style: style),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
       );
 }

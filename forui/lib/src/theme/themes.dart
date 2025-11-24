@@ -9,8 +9,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Zinc Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
@@ -30,8 +30,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Zinc Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF09090B),
         foreground: Color(0xFFFAFAFA),
@@ -55,8 +55,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Slate Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF020817),
@@ -76,8 +76,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Slate Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF020817),
         foreground: Color(0xFFF8FAFC),
@@ -101,8 +101,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Red Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
@@ -122,8 +122,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Red Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0A0A0A),
         foreground: Color(0xFFFAFAFA),
@@ -147,8 +147,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Rose Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
@@ -168,8 +168,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Rose Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFF2F2F2),
@@ -193,8 +193,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Orange Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF0C0A09),
@@ -214,8 +214,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Orange Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFFAFAF9),
@@ -239,8 +239,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Green Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF09090B),
@@ -260,8 +260,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Green Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFF2F2F2),
@@ -285,8 +285,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Blue Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF020817),
@@ -306,8 +306,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Blue Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF020817),
         foreground: Color(0xFFF8FAFC),
@@ -331,8 +331,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Yellow Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF0C0A09),
@@ -352,8 +352,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Yellow Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF0C0A09),
         foreground: Color(0xFFFAFAF9),
@@ -377,8 +377,8 @@ extension FThemes on Never {
     light: FThemeData(
       debugLabel: 'Violet Light ThemeData',
       colors: const FColors(
-        brightness: Brightness.light,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        brightness: .light,
+        systemOverlayStyle: .dark,
         barrier: Color(0x33000000),
         background: Color(0xFFFFFFFF),
         foreground: Color(0xFF030712),
@@ -398,8 +398,8 @@ extension FThemes on Never {
     dark: FThemeData(
       debugLabel: 'Violet Dark ThemeData',
       colors: const FColors(
-        brightness: Brightness.dark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        brightness: .dark,
+        systemOverlayStyle: .light,
         barrier: Color(0x7A000000),
         background: Color(0xFF030712),
         foreground: Color(0xFFF9FAFB),

@@ -67,26 +67,26 @@ class FunctionsMixin {
         .map(
           (field) => switch (field.type) {
             _ when intType.isAssignableFromType(field.type) =>
-              "IntProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "IntProperty('${field.name}', ${field.name}, level: .debug)",
             _ when doubleType.isAssignableFromType(field.type) =>
-              "DoubleProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "DoubleProperty('${field.name}', ${field.name}, level: .debug)",
             _ when boolType.isAssignableFromType(field.type) =>
-              "FlagProperty('${field.name}', value: ${field.name}, ifTrue: '${field.name}', level: DiagnosticLevel.debug)",
+              "FlagProperty('${field.name}', value: ${field.name}, ifTrue: '${field.name}', level: .debug)",
             _ when string.isAssignableFromType(field.type) =>
-              "StringProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "StringProperty('${field.name}', ${field.name}, level: .debug)",
             _ when color.isAssignableFromType(field.type) =>
-              "ColorProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "ColorProperty('${field.name}', ${field.name}, level: .debug)",
             _ when iconData.isAssignableFromType(field.type) =>
-              "IconDataProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "IconDataProperty('${field.name}', ${field.name}, level: .debug)",
             _ when enumeration.isAssignableFromType(field.type) =>
-              "EnumProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "EnumProperty('${field.name}', ${field.name}, level: .debug)",
             _ when iterable.isAssignableFromType(field.type) =>
-              "IterableProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "IterableProperty('${field.name}', ${field.name}, level: .debug)",
             _ when field.type.isDartCoreFunction =>
-              "ObjectFlagProperty.has('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "ObjectFlagProperty.has('${field.name}', ${field.name}, level: .debug)",
             _ when field.type is RecordType =>
-              "StringProperty('${field.name}', ${field.name}.toString(), level: DiagnosticLevel.debug)",
-            _ => "DiagnosticsProperty('${field.name}', ${field.name}, level: DiagnosticLevel.debug)",
+              "StringProperty('${field.name}', ${field.name}.toString(), level: .debug)",
+            _ => "DiagnosticsProperty('${field.name}', ${field.name}, level: .debug)",
           },
         )
         .toList();

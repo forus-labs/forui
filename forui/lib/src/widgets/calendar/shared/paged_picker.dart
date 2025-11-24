@@ -43,10 +43,10 @@ abstract class PagedPicker extends StatefulWidget {
 @internal
 abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
   static const _shortcuts = {
-    SingleActivator(LogicalKeyboardKey.arrowLeft): DirectionalFocusIntent(TraversalDirection.left),
-    SingleActivator(LogicalKeyboardKey.arrowRight): DirectionalFocusIntent(TraversalDirection.right),
-    SingleActivator(LogicalKeyboardKey.arrowDown): DirectionalFocusIntent(TraversalDirection.down),
-    SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(TraversalDirection.up),
+    SingleActivator(.arrowLeft): DirectionalFocusIntent(.left),
+    SingleActivator(.arrowRight): DirectionalFocusIntent(.right),
+    SingleActivator(.arrowDown): DirectionalFocusIntent(.down),
+    SingleActivator(.arrowUp): DirectionalFocusIntent(.up),
   };
 
   LocalDate? focusedDate;
@@ -197,8 +197,8 @@ abstract class PagedPickerState<T extends PagedPicker> extends State<T> {
     final textDirection = Directionality.of(context);
     final offset =
         directionOffset[switch ((direction, textDirection)) {
-          (TraversalDirection.left, TextDirection.rtl) => TraversalDirection.right,
-          (TraversalDirection.right, TextDirection.rtl) => TraversalDirection.left,
+          (.left, .rtl) => TraversalDirection.right,
+          (.right, .rtl) => TraversalDirection.left,
           _ => direction,
         }]!;
 

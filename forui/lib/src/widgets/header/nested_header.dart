@@ -30,7 +30,7 @@ class _FNestedHeader extends FHeader {
     this.style,
     this.prefixes = const [],
     this.suffixes = const [],
-    this.titleAlignment = Alignment.center,
+    this.titleAlignment = .center,
     super.title = const SizedBox(),
     super.key,
   }) : super._();
@@ -38,7 +38,7 @@ class _FNestedHeader extends FHeader {
   @override
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.headerStyles.nestedStyle) ?? context.theme.headerStyles.nestedStyle;
-    final alignment = titleAlignment.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr);
+    final alignment = titleAlignment.resolve(Directionality.maybeOf(context) ?? .ltr);
 
     Widget header = SafeArea(
       bottom: false,
@@ -52,11 +52,11 @@ class _FNestedHeader extends FHeader {
               actionStyle: style.actionStyle,
               child: _NestedHeader(
                 alignment: alignment,
-                prefixes: Row(mainAxisSize: MainAxisSize.min, spacing: style.actionSpacing, children: prefixes),
+                prefixes: Row(mainAxisSize: .min, spacing: style.actionSpacing, children: prefixes),
                 title: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const .symmetric(horizontal: 10.0),
                   child: DefaultTextStyle.merge(
-                    overflow: TextOverflow.ellipsis,
+                    overflow: .ellipsis,
                     maxLines: 1,
                     softWrap: false,
                     style: style.titleTextStyle,
@@ -67,7 +67,7 @@ class _FNestedHeader extends FHeader {
                     child: title,
                   ),
                 ),
-                suffixes: Row(mainAxisSize: MainAxisSize.min, spacing: style.actionSpacing, children: suffixes),
+                suffixes: Row(mainAxisSize: .min, spacing: style.actionSpacing, children: suffixes),
               ),
             ),
           ),

@@ -40,8 +40,8 @@ void main() {
             ),
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
-              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              .section(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
+              .section(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),
@@ -66,8 +66,8 @@ void main() {
             initialText: 'App',
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
-              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              .section(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
+              .section(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),
@@ -89,14 +89,10 @@ void main() {
             description: const Text('Select your favorite fruits'),
             initialText: 'App',
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-            contentDivider: FItemDivider.full,
+            contentDivider: .full,
             contentBuilder: (context, query, items) => [
-              FAutocompleteSection(
-                divider: FItemDivider.indented,
-                label: const Text('Most popular'),
-                items: const ['Apple', 'Kiwi'],
-              ),
-              FAutocompleteSection(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
+              .section(divider: .indented, label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
+              .section(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),
         ),
@@ -112,7 +108,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          alignment: Alignment.topCenter,
+          alignment: .topCenter,
           child: FAutocomplete(key: key, items: const ['item']),
         ),
       );
@@ -160,7 +156,7 @@ void main() {
             key: key,
             filter: (query) => ['v'],
             contentBuilder: (_, _, _) => [
-              FAutocompleteItem(prefix: const Icon(FIcons.circle), title: const Text('Title'), value: 'v'),
+              FAutocompleteItem.item(prefix: const Icon(FIcons.circle), title: const Text('Title'), value: 'v'),
             ],
           ),
         ),

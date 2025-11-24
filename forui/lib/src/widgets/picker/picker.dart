@@ -147,8 +147,7 @@ class _FPickerState extends State<FPicker> {
 
   void _createController() {
     _controller =
-        widget.controller ??
-        FPickerController(initialIndexes: List.filled(widget.children.whereType<FPickerWheel>().length, 0));
+        widget.controller ?? .new(initialIndexes: .filled(widget.children.whereType<FPickerWheel>().length, 0));
 
     for (final wheel in _controller.wheels) {
       wheel.dispose();
@@ -182,7 +181,7 @@ class _FPickerState extends State<FPicker> {
 
     var wheelIndex = 0;
     return Stack(
-      alignment: Alignment.center,
+      alignment: .center,
       children: [
         Container(
           height: selectionExtent,
@@ -212,8 +211,8 @@ class _FPickerState extends State<FPicker> {
                 return false;
               },
               child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: .min,
+                mainAxisAlignment: .center,
                 spacing: style.spacing,
                 children: [
                   for (final child in widget.children)

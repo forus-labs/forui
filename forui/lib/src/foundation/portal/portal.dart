@@ -94,11 +94,11 @@ class FPortal extends StatefulWidget {
     required this.portalBuilder,
     this.controller,
     this.constraints = const FPortalConstraints(),
-    this.portalAnchor = Alignment.topCenter,
-    this.childAnchor = Alignment.bottomCenter,
-    this.spacing = FPortalSpacing.zero,
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
+    this.portalAnchor = .topCenter,
+    this.childAnchor = .bottomCenter,
+    this.spacing = .zero,
+    this.overflow = .flip,
+    this.offset = .zero,
     this.viewInsets,
     this.barrier,
     this.builder = _builder,
@@ -134,14 +134,14 @@ class _State extends State<FPortal> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? OverlayPortalController();
+    _controller = widget.controller ?? .new();
   }
 
   @override
   void didUpdateWidget(covariant FPortal old) {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
-      _controller = widget.controller ?? OverlayPortalController();
+      _controller = widget.controller ?? .new();
     }
   }
 
@@ -155,7 +155,7 @@ class _State extends State<FPortal> {
           child: OverlayPortal(
             controller: _controller,
             overlayChildBuilder: (context) {
-              final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+              final direction = Directionality.maybeOf(context) ?? .ltr;
               final portalAnchor = widget.portalAnchor.resolve(direction);
               final childAnchor = widget.childAnchor.resolve(direction);
 
@@ -166,7 +166,7 @@ class _State extends State<FPortal> {
                 portalAnchor: portalAnchor,
                 childAnchor: childAnchor,
                 viewInsets:
-                    widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? TextDirection.ltr) ??
+                    widget.viewInsets?.resolve(Directionality.maybeOf(context) ?? .ltr) ??
                     MediaQuery.viewPaddingOf(context),
                 spacing: widget.spacing(childAnchor, portalAnchor),
                 overflow: widget.overflow,

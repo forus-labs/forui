@@ -6,49 +6,29 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class CollapsiblePage extends Sample {
+class CollapsiblePage extends StatefulSample {
   CollapsiblePage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => const Demo();
+  State<CollapsiblePage> createState() => _CollapsiblePageState();
 }
 
-class Demo extends StatefulWidget {
-  const Demo({super.key});
-
-  @override
-  State<Demo> createState() => _DemoState();
-}
-
-class _DemoState extends State<Demo> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _animation;
+class _CollapsiblePageState extends StatefulSampleState<CollapsiblePage> with SingleTickerProviderStateMixin {
+  late final _controller = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
+  late final _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   bool _expanded = false;
 
   @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
-  }
-
-  @override
   void dispose() {
+    _animation.dispose();
     _controller.dispose();
     super.dispose();
   }
 
-  void _toggle() {
-    setState(() {
-      _expanded = !_expanded;
-    });
-    _controller.toggle();
-  }
-
   @override
-  Widget build(BuildContext context) => Column(
-    mainAxisSize: MainAxisSize.min,
-    crossAxisAlignment: CrossAxisAlignment.start,
+  Widget sample(BuildContext context) => Column(
+    mainAxisSize: .min,
+    crossAxisAlignment: .start,
     children: [
       FButton(onPress: _toggle, child: Text(_expanded ? 'Collapse' : 'Expand')),
       const SizedBox(height: 16),
@@ -69,4 +49,11 @@ class _DemoState extends State<Demo> with SingleTickerProviderStateMixin {
       ),
     ],
   );
+
+  void _toggle() {
+    setState(() {
+      _expanded = !_expanded;
+    });
+    _controller.toggle();
+  }
 }

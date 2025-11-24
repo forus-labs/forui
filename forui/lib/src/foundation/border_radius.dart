@@ -1,4 +1,4 @@
-import 'dart:math' as math;
+import 'dart:math';
 
 import 'package:flutter/painting.dart';
 
@@ -14,18 +14,18 @@ class FLerpBorderRadius extends BorderRadius {
 
   @override
   RRect toRRect(Rect rect) {
-    final dimension = math.min(rect.width, rect.height);
+    final dimension = min(rect.width, rect.height);
     if (_min <= dimension) {
       return super.toRRect(rect);
     }
 
     final t = 1 - dimension / _min;
-    return RRect.fromRectAndCorners(
+    return .fromRectAndCorners(
       rect,
-      topLeft: Radius.elliptical(topLeft.x * t, topLeft.y * t),
-      topRight: Radius.elliptical(topRight.x * t, topRight.y * t),
-      bottomLeft: Radius.elliptical(bottomLeft.x * t, bottomLeft.y * t),
-      bottomRight: Radius.elliptical(bottomRight.x * t, bottomRight.y * t),
+      topLeft: .elliptical(topLeft.x * t, topLeft.y * t),
+      topRight: .elliptical(topRight.x * t, topRight.y * t),
+      bottomLeft: .elliptical(bottomLeft.x * t, bottomLeft.y * t),
+      bottomRight: .elliptical(bottomRight.x * t, bottomRight.y * t),
     );
   }
 }

@@ -56,9 +56,9 @@ abstract class Entry extends StatelessWidget {
         ),
         _Content(
           style: entryStyle,
-          borderRadius: BorderRadiusDirectional.horizontal(start: yesterday, end: tomorrow),
+          borderRadius: .horizontal(start: yesterday, end: tomorrow),
           text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
-          states: {...states, if (!canSelect) WidgetState.disabled},
+          states: {...states, if (!canSelect) .disabled},
           current: today,
         ),
       );
@@ -89,9 +89,9 @@ abstract class Entry extends StatelessWidget {
   }) {
     Widget builder(BuildContext _, Set<WidgetState> states, Widget? _) => _Content(
       style: style,
-      borderRadius: BorderRadius.all(style.radius),
+      borderRadius: .all(style.radius),
       text: format(date),
-      states: {...states, if (!selectable) WidgetState.disabled},
+      states: {...states, if (!selectable) .disabled},
       current: current,
     );
 
@@ -197,13 +197,13 @@ class _Content extends StatelessWidget {
   Widget build(BuildContext _) {
     var textStyle = style.textStyle.resolve(states);
     if (current) {
-      textStyle = textStyle.copyWith(decoration: TextDecoration.underline);
+      textStyle = textStyle.copyWith(decoration: .underline);
     }
 
     final borderColor = style.borderColor.resolve(states);
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: borderColor == null ? null : Border.all(color: borderColor),
+        border: borderColor == null ? null : .all(color: borderColor),
         borderRadius: borderRadius,
         color: style.backgroundColor.resolve(states),
       ),

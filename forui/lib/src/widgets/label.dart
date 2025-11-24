@@ -79,13 +79,13 @@ class FLabel extends StatelessWidget {
     this.expands = false,
     this.states = const {},
     super.key,
-  }) : assert(axis == Axis.vertical || !expands, 'expands can only be true when axis is vertical');
+  }) : assert(axis == .vertical || !expands, 'expands can only be true when axis is vertical');
 
   @override
   Widget build(BuildContext context) {
     final inheritedStyle = switch (axis) {
-      Axis.horizontal => context.theme.labelStyles.horizontalStyle,
-      Axis.vertical => context.theme.labelStyles.verticalStyle,
+      .horizontal => context.theme.labelStyles.horizontalStyle,
+      .vertical => context.theme.labelStyles.verticalStyle,
     };
     final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
 
@@ -94,7 +94,7 @@ class FLabel extends StatelessWidget {
     }
 
     return switch (axis) {
-      Axis.horizontal => _FHorizontalLabel(
+      .horizontal => _FHorizontalLabel(
         style: style,
         label: label,
         description: description,
@@ -102,7 +102,7 @@ class FLabel extends StatelessWidget {
         states: states,
         child: child,
       ),
-      Axis.vertical => _FVerticalLabel(
+      .vertical => _FVerticalLabel(
         style: style,
         label: label,
         description: description,
@@ -144,7 +144,7 @@ class _FHorizontalLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Table(
     defaultColumnWidth: const IntrinsicColumnWidth(),
-    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+    defaultVerticalAlignment: .middle,
     columnWidths: const {0: IntrinsicColumnWidth(), 1: FlexColumnWidth()},
     children: [
       TableRow(
@@ -231,8 +231,8 @@ class _FVerticalLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: .start,
+    mainAxisSize: .min,
     children: [
       if (label != null)
         Padding(
@@ -295,17 +295,17 @@ class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
 
   /// Creates a [FLabelStyles] that inherits its properties.
   FLabelStyles.inherit({required FStyle style})
-    : horizontalStyle = FLabelStyle.inherit(
+    : horizontalStyle = .inherit(
         style: style,
-        descriptionPadding: const EdgeInsets.only(top: 2),
-        errorPadding: const EdgeInsets.only(top: 2),
-        childPadding: const EdgeInsets.symmetric(horizontal: 8),
+        descriptionPadding: const .only(top: 2),
+        errorPadding: const .only(top: 2),
+        childPadding: const .symmetric(horizontal: 8),
       ),
-      verticalStyle = FLabelStyle.inherit(
+      verticalStyle = .inherit(
         style: style,
-        labelPadding: const EdgeInsets.only(bottom: 5),
-        descriptionPadding: const EdgeInsets.only(top: 5),
-        errorPadding: const EdgeInsets.only(top: 5),
+        labelPadding: const .only(bottom: 5),
+        descriptionPadding: const .only(top: 5),
+        errorPadding: const .only(top: 5),
       );
 }
 
@@ -332,19 +332,19 @@ class FLabelStyle extends FFormFieldStyle with _$FLabelStyleFunctions {
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
-    this.labelPadding = EdgeInsets.zero,
-    this.descriptionPadding = EdgeInsets.zero,
-    this.errorPadding = EdgeInsets.zero,
-    this.childPadding = EdgeInsets.zero,
+    this.labelPadding = .zero,
+    this.descriptionPadding = .zero,
+    this.errorPadding = .zero,
+    this.childPadding = .zero,
   });
 
   /// Creates a [FLabelStyle].
   FLabelStyle.inherit({
     required FStyle style,
-    this.labelPadding = EdgeInsets.zero,
-    this.descriptionPadding = EdgeInsets.zero,
-    this.errorPadding = EdgeInsets.zero,
-    this.childPadding = EdgeInsets.zero,
+    this.labelPadding = .zero,
+    this.descriptionPadding = .zero,
+    this.errorPadding = .zero,
+    this.childPadding = .zero,
   }) : super(
          labelTextStyle: style.formFieldStyle.labelTextStyle,
          descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,

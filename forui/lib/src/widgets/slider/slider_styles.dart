@@ -26,25 +26,25 @@ class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
   /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        horizontalStyle: FSliderStyle.inherit(
+        horizontalStyle: .inherit(
           colors: colors,
           typography: typography,
           style: style,
-          labelAnchor: Alignment.topCenter,
+          labelAnchor: .topCenter,
           labelOffset: 10,
-          descriptionPadding: const EdgeInsets.only(top: 10),
-          childPadding: const EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),
+          descriptionPadding: const .only(top: 10),
+          childPadding: const .only(top: 10, bottom: 20, left: 10, right: 10),
         ),
-        verticalStyle: FSliderStyle.inherit(
+        verticalStyle: .inherit(
           colors: colors,
           typography: typography,
           style: style,
-          labelAnchor: Alignment.centerRight,
+          labelAnchor: .centerRight,
           labelOffset: -10,
-          tooltipTipAnchor: FTouch.primary ? Alignment.bottomCenter : Alignment.centerLeft,
-          tooltipThumbAnchor: FTouch.primary ? Alignment.topCenter : Alignment.centerRight,
-          descriptionPadding: const EdgeInsets.only(top: 5),
-          childPadding: const EdgeInsets.all(10),
+          tooltipTipAnchor: FTouch.primary ? .bottomCenter : .centerLeft,
+          tooltipThumbAnchor: FTouch.primary ? .topCenter : .centerRight,
+          descriptionPadding: const .only(top: 5),
+          childPadding: const .all(10),
         ),
       );
 }
@@ -126,15 +126,15 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
-    this.borderRadius = const BorderRadius.all(Radius.circular(4)),
+    this.borderRadius = const .all(.circular(4)),
     this.crossAxisExtent = 8,
     double? thumbSize,
     this.tooltipMotion = const FTooltipMotion(),
-    this.tooltipTipAnchor = Alignment.bottomCenter,
-    this.tooltipThumbAnchor = Alignment.topCenter,
-    super.labelPadding = const EdgeInsets.only(bottom: 5),
+    this.tooltipTipAnchor = .bottomCenter,
+    this.tooltipThumbAnchor = .topCenter,
+    super.labelPadding = const .only(bottom: 5),
     super.descriptionPadding,
-    super.errorPadding = const EdgeInsets.only(top: 5),
+    super.errorPadding = const .only(top: 5),
     super.childPadding,
   }) : assert(thumbSize == null || 0 < thumbSize, 'thumbSize ($thumbSize) must be > 0'),
        thumbSize = thumbSize ?? (FTouch.primary ? 25 : 20);
@@ -148,15 +148,15 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required double labelOffset,
     required EdgeInsetsGeometry descriptionPadding,
     required EdgeInsetsGeometry childPadding,
-    AlignmentGeometry tooltipTipAnchor = Alignment.bottomCenter,
-    AlignmentGeometry tooltipThumbAnchor = Alignment.topCenter,
+    AlignmentGeometry tooltipTipAnchor = .bottomCenter,
+    AlignmentGeometry tooltipThumbAnchor = .topCenter,
   }) : this(
          activeColor: FWidgetStateMap({
            WidgetState.error: colors.error,
            WidgetState.disabled: colors.disable(colors.primary, colors.secondary),
            WidgetState.any: colors.primary,
          }),
-         inactiveColor: FWidgetStateMap.all(colors.secondary),
+         inactiveColor: .all(colors.secondary),
          thumbStyle: FSliderThumbStyle(
            color: FWidgetStateMap({
              WidgetState.error: colors.errorForeground,
@@ -170,7 +170,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
            focusedOutlineStyle: style.focusedOutlineStyle,
          ),
          markStyle: FSliderMarkStyle(
-           tickColor: FWidgetStateMap.all(colors.mutedForeground),
+           tickColor: .all(colors.mutedForeground),
            labelTextStyle: FWidgetStateMap({
              WidgetState.error: typography.xs.copyWith(color: colors.error),
              WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
@@ -178,7 +178,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
            labelAnchor: labelAnchor,
            labelOffset: labelOffset,
          ),
-         tooltipStyle: FTooltipStyle.inherit(colors: colors, typography: typography, style: style),
+         tooltipStyle: .inherit(colors: colors, typography: typography, style: style),
          tooltipTipAnchor: tooltipTipAnchor,
          tooltipThumbAnchor: tooltipThumbAnchor,
          labelTextStyle: style.formFieldStyle.labelTextStyle,

@@ -8,56 +8,56 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class SidebarPage extends Sample {
-  SidebarPage({@queryParam super.theme}) : super(maxWidth: 1000);
+  SidebarPage({@queryParam super.theme, super.maxWidth = 1000});
 
   @override
   Widget sample(BuildContext context) => FScaffold(
     sidebar: FSidebar(
       header: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const .symmetric(horizontal: 16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+              padding: const .fromLTRB(16, 8, 16, 16),
               child: SvgPicture.network(
-                theme.colors.brightness == Brightness.light
+                theme.colors.brightness == .light
                     ? 'https://forui.dev/light_logo.svg'
                     : 'https://forui.dev/dark_logo.svg',
                 height: 24,
-                colorFilter: ColorFilter.mode(context.theme.colors.foreground, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(context.theme.colors.foreground, .srcIn),
               ),
             ),
-            FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
+            FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: .zero)),
           ],
         ),
       ),
       footer: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const .symmetric(horizontal: 16),
         child: FCard.raw(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            padding: const .symmetric(vertical: 12, horizontal: 16),
             child: Row(
               spacing: 10,
               children: [
                 FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
                 Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: .start,
                     spacing: 2,
                     children: [
                       Text(
                         'Dash',
                         style: context.theme.typography.sm.copyWith(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: .bold,
                           color: context.theme.colors.foreground,
                         ),
-                        overflow: TextOverflow.ellipsis,
+                        overflow: .ellipsis,
                       ),
                       Text(
                         'dash@forui.dev',
                         style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
-                        overflow: TextOverflow.ellipsis,
+                        overflow: .ellipsis,
                       ),
                     ],
                   ),
@@ -99,9 +99,9 @@ class SidebarPage extends Sample {
       ],
     ),
     child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 14),
+      padding: const .symmetric(vertical: 14),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         spacing: 12,
         children: [
           FBreadcrumb(
@@ -153,18 +153,18 @@ class SheetSidebarPage extends Sample {
     child: FSidebar(
       style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300)),
       header: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const .symmetric(horizontal: 16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: .start,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+              padding: const .fromLTRB(16, 8, 16, 16),
               child: SvgPicture.network(
-                theme.colors.brightness == Brightness.light
+                theme.colors.brightness == .light
                     ? 'https://forui.dev/light_logo.svg'
                     : 'https://forui.dev/dark_logo.svg',
                 height: 24,
-                colorFilter: ColorFilter.mode(context.theme.colors.foreground, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(context.theme.colors.foreground, .srcIn),
               ),
             ),
             FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
@@ -172,31 +172,31 @@ class SheetSidebarPage extends Sample {
         ),
       ),
       footer: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: const .symmetric(horizontal: 16),
         child: FCard.raw(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            padding: const .symmetric(vertical: 12, horizontal: 16),
             child: Row(
               spacing: 10,
               children: [
                 FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
                 Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: .start,
                     spacing: 2,
                     children: [
                       Text(
                         'Dash',
                         style: context.theme.typography.sm.copyWith(
-                          fontWeight: FontWeight.bold,
+                          fontWeight: .bold,
                           color: context.theme.colors.foreground,
                         ),
-                        overflow: TextOverflow.ellipsis,
+                        overflow: .ellipsis,
                       ),
                       Text(
                         'dash@forui.dev',
                         style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
-                        overflow: TextOverflow.ellipsis,
+                        overflow: .ellipsis,
                       ),
                     ],
                   ),
@@ -243,7 +243,7 @@ class SheetSidebarPage extends Sample {
   Widget sample(BuildContext context) => Center(
     child: FButton(
       child: const Text('Open Sidebar'),
-      onPress: () => showFSheet(context: context, side: FLayout.ltr, builder: _sidebar),
+      onPress: () => showFSheet(context: context, side: .ltr, builder: _sidebar),
     ),
   );
 }

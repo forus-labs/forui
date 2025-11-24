@@ -12,7 +12,7 @@ part 'tappable.design.dart';
 extension FTouch on Never {
   /// The platforms that use touch as the primary input. This isn't 100% accurate as there are hybrid devices that use
   /// both touch and keyboard/mouse input, i.e., Windows Surface laptops.
-  static const platforms = {TargetPlatform.android, TargetPlatform.iOS, TargetPlatform.fuchsia};
+  static const Set<TargetPlatform> platforms = {.android, .iOS, .fuchsia};
 
   static bool? _primary;
 
@@ -186,7 +186,7 @@ class FTappable extends StatefulWidget {
     this.onHoverChange,
     this.onStateChange,
     this.selected = false,
-    this.behavior = HitTestBehavior.translucent,
+    this.behavior = .translucent,
     this.onPress,
     this.onLongPress,
     this.onSecondaryPress,
@@ -196,9 +196,7 @@ class FTappable extends StatefulWidget {
     this.child,
     Map<ShortcutActivator, Intent>? shortcuts,
     super.key,
-  }) : shortcuts =
-           shortcuts ??
-           (onPress == null ? const {} : const {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()}),
+  }) : shortcuts = shortcuts ?? (onPress == null ? const {} : const {SingleActivator(.enter): ActivateIntent()}),
        assert(builder != _builder || child != null, 'Either builder or child must be provided');
 
   @override
@@ -242,11 +240,11 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void initState() {
     super.initState();
     _controller = WidgetStatesController({
-      if (widget.selected) WidgetState.selected,
-      if (widget.autofocus) WidgetState.focused,
-      if (widget._disabled) WidgetState.disabled,
+      if (widget.selected) .selected,
+      if (widget.autofocus) .focused,
+      if (widget._disabled) .disabled,
     });
-    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTappable');
+    _focus = widget.focusNode ?? .new(debugLabel: 'FTappable');
     _current = {..._controller.value};
     _controller.addListener(_onChange);
   }
@@ -255,14 +253,14 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void didUpdateWidget(covariant T old) {
     super.didUpdateWidget(old);
     _controller
-      ..update(WidgetState.selected, widget.selected)
-      ..update(WidgetState.disabled, widget._disabled);
+      ..update(.selected, widget.selected)
+      ..update(.disabled, widget._disabled);
 
     if (widget.focusNode != old.focusNode) {
       if (old.focusNode == null) {
         _focus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTappable');
+      _focus = widget.focusNode ?? .new(debugLabel: 'FTappable');
     }
   }
 
@@ -311,17 +309,17 @@ class _FTappableState<T extends FTappable> extends State<T> {
             autofocus: widget.autofocus,
             focusNode: _focus,
             onFocusChange: (focused) {
-              setState(() => _controller.update(WidgetState.focused, _focus.hasPrimaryFocus));
+              setState(() => _controller.update(.focused, _focus.hasPrimaryFocus));
               widget.onFocusChange?.call(focused);
             },
             child: MouseRegion(
               cursor: style.cursor.resolve(_controller.value),
               onEnter: (_) {
-                setState(() => _controller.update(WidgetState.hovered, true));
+                setState(() => _controller.update(.hovered, true));
                 widget.onHoverChange?.call(true);
               },
               onExit: (_) => setState(() {
-                _controller.update(WidgetState.hovered, false);
+                _controller.update(.hovered, false);
                 widget.onHoverChange?.call(false);
               }),
               // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
@@ -336,7 +334,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
                   await Future.delayed(style.pressedEnterDuration);
                   if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
-                    setState(() => _controller.update(WidgetState.pressed, true));
+                    setState(() => _controller.update(.pressed, true));
                   }
                 },
                 onPointerMove: (event) {
@@ -348,7 +346,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
                     if (!widget._disabled) {
                       onPressedEnd();
                     }
-                    setState(() => _controller.update(WidgetState.pressed, false));
+                    setState(() => _controller.update(.pressed, false));
                   }
                 },
                 onPointerUp: (_) async {
@@ -359,7 +357,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
                   await Future.delayed(style.pressedExitDuration);
                   if (mounted && count == _monotonic && _controller.value.contains(WidgetState.pressed)) {
-                    setState(() => _controller.update(WidgetState.pressed, false));
+                    setState(() => _controller.update(.pressed, false));
                   }
                 },
                 child: GestureDetector(
@@ -520,9 +518,9 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
 
   /// Creates a [FTappableStyle].
   FTappableStyle({
-    this.cursor = const FWidgetStateMap({WidgetState.any: MouseCursor.defer}),
+    this.cursor = const FWidgetStateMap({WidgetState.any: .defer}),
     this.pressedEnterDuration = const Duration(milliseconds: 200),
-    this.pressedExitDuration = Duration.zero,
+    this.pressedExitDuration = .zero,
     this.motion = const FTappableMotion(),
   });
 }
@@ -530,14 +528,14 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
 /// Motion-related properties for [FTappable].
 class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   /// A [FTappableMotion] with no motion effects.
-  static const FTappableMotion none = FTappableMotion(bounceTween: noBounceTween);
+  static const FTappableMotion none = .new(bounceTween: noBounceTween);
 
   /// The default bounce tween used by [FTappableStyle]. It scales the widget down to 0.97 on tap down and back to 1.0
   /// on tap up.
-  static const FImmutableTween<double> defaultBounceTween = FImmutableTween(begin: 1.0, end: 0.97);
+  static const FImmutableTween<double> defaultBounceTween = .new(begin: 1.0, end: 0.97);
 
   /// A tween that does not animate the scale of the tappable. It is used to disable the bounce effect.
-  static const FImmutableTween<double> noBounceTween = FImmutableTween(begin: 1.0, end: 1.0);
+  static const FImmutableTween<double> noBounceTween = .new(begin: 1.0, end: 1.0);
 
   /// The bounce animation's duration when the tappable is pressed down. Defaults to 100ms.
   @override

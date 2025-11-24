@@ -96,10 +96,10 @@ class FLineCalendar extends StatelessWidget {
   FLineCalendar({
     this.controller,
     this.style,
-    this.initialScrollAlignment = AlignmentDirectional.center,
+    this.initialScrollAlignment = .center,
     this.physics,
     this.cacheExtent,
-    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+    this.keyboardDismissBehavior = .manual,
     this.builder = _builder,
     this.onChange,
     bool? toggleable,
@@ -110,11 +110,11 @@ class FLineCalendar extends StatelessWidget {
     DateTime? today,
     super.key,
   }) : _toggleable = toggleable ?? false,
-       _start = (start ?? DateTime.utc(1900)).toLocalDate(),
+       _start = (start ?? .utc(1900)).toLocalDate(),
        _end = end?.toLocalDate(),
        _initialScroll = initialScroll?.toLocalDate(),
        _initialSelection = initialSelection?.toLocalDate(),
-       _today = (today ?? DateTime.now()).toLocalDate(),
+       _today = (today ?? .now()).toLocalDate(),
        assert(
          controller == null || toggleable == null,
          'controller and toggleable cannot both be non-null. To fix, set the toggleable field directly in the controller.',
@@ -240,7 +240,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
     required this.dateTextStyle,
     required this.weekdayTextStyle,
     required this.tappableStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 6.5),
+    this.padding = const .symmetric(horizontal: 6.5),
     this.contentEdgeSpacing = 15.5,
     this.contentSpacing = 2,
   });
@@ -252,7 +252,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
     required FStyle style,
   }) {
     final focusedBorder = Border.all(color: colors.primary, width: style.borderWidth);
-    return FLineCalendarStyle(
+    return .new(
       decoration: FWidgetStateMap({
         WidgetState.selected & (WidgetState.hovered | WidgetState.pressed) & WidgetState.focused: BoxDecoration(
           color: colors.hover(colors.primary),
@@ -297,20 +297,12 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
         WidgetState.any: colors.primary,
       }),
       dateTextStyle: FWidgetStateMap({
-        WidgetState.selected: typography.xl.copyWith(
-          color: colors.primaryForeground,
-          fontWeight: FontWeight.w500,
-          height: 0,
-        ),
-        WidgetState.any: typography.xl.copyWith(color: colors.primary, fontWeight: FontWeight.w500, height: 0),
+        WidgetState.selected: typography.xl.copyWith(color: colors.primaryForeground, fontWeight: .w500, height: 0),
+        WidgetState.any: typography.xl.copyWith(color: colors.primary, fontWeight: .w500, height: 0),
       }),
       weekdayTextStyle: FWidgetStateMap({
-        WidgetState.selected: typography.xs.copyWith(
-          color: colors.primaryForeground,
-          fontWeight: FontWeight.w500,
-          height: 0,
-        ),
-        WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground, fontWeight: FontWeight.w500, height: 0),
+        WidgetState.selected: typography.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500, height: 0),
+        WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground, fontWeight: .w500, height: 0),
       }),
       tappableStyle: style.tappableStyle,
     );

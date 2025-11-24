@@ -76,7 +76,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   void initState() {
     super.initState();
     _controller.addValueListener(_onChange);
-    _focus = widget.focusNode ?? FocusNode(debugLabel: 'InputDateField');
+    _focus = widget.focusNode ?? .new(debugLabel: 'InputDateField');
   }
 
   @override
@@ -89,12 +89,12 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         old.controller?.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FDateFieldController(vsync: this, initialDate: _controller.value);
+      _controller = widget.controller ?? .new(vsync: this, initialDate: _controller.value);
       _controller.addValueListener(_onChange);
     }
 
     if (widget.focusNode != old.focusNode) {
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'InputDateField');
+      _focus = widget.focusNode ?? .new(debugLabel: 'InputDateField');
     }
   }
 
@@ -105,7 +105,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
     final style = widget.style?.call(context.theme.dateFieldStyle) ?? context.theme.dateFieldStyle;
     return CallbackShortcuts(
       bindings: {
-        const SingleActivator(LogicalKeyboardKey.enter): () {
+        const SingleActivator(.enter): () {
           _focus.unfocus();
           _controller.calendar.hide();
         },

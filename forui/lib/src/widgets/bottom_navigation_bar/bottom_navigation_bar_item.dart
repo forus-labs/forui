@@ -57,7 +57,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FBottomNavigationBarData(:itemStyle, :selected, :index, :onChange) = FBottomNavigationBarData.of(context);
+    final FBottomNavigationBarData(:itemStyle, :selected, :index, :onChange) = .of(context);
     final style = this.style?.call(itemStyle) ?? itemStyle;
 
     return FTappable(
@@ -74,18 +74,14 @@ class FBottomNavigationBarItem extends StatelessWidget {
       builder: (_, states, _) => Padding(
         padding: style.padding,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           spacing: style.spacing,
           children: [
             ExcludeSemantics(
               child: IconTheme(data: style.iconStyle.resolve(states), child: icon),
             ),
             if (label case final label?)
-              DefaultTextStyle.merge(
-                style: style.textStyle.resolve(states),
-                overflow: TextOverflow.ellipsis,
-                child: label,
-              ),
+              DefaultTextStyle.merge(style: style.textStyle.resolve(states), overflow: .ellipsis, child: label),
           ],
         ),
       ),
@@ -141,7 +137,7 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
     required this.textStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.padding = const EdgeInsets.all(5),
+    this.padding = const .all(5),
     this.spacing = 2,
   });
 

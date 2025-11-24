@@ -43,7 +43,7 @@ class ItemContent extends StatelessWidget {
     required this.suffix,
     super.key,
   }) : assert(
-         (dividerColor != null && dividerWidth != null) || dividerType == FItemDivider.none,
+         (dividerColor != null && dividerWidth != null) || dividerType == .none,
          'dividerColor and dividerWidth must be provided if dividerType is not FItemDivider.none. This is a bug unless '
          "you're creating your own custom item container.",
        );
@@ -60,17 +60,17 @@ class ItemContent extends StatelessWidget {
     children: [
       if (prefix case final prefix?)
         Padding(
-          padding: EdgeInsetsDirectional.only(end: style.prefixIconSpacing),
+          padding: .directional(end: style.prefixIconSpacing),
           child: IconTheme(data: style.prefixIconStyle.resolve(states), child: prefix),
         )
       else
         const SizedBox(),
       Padding(
-        padding: EdgeInsetsDirectional.only(end: style.middleSpacing),
+        padding: .directional(end: style.middleSpacing),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          mainAxisAlignment: .center,
+          crossAxisAlignment: .start,
           spacing: style.titleSpacing,
           children: [
             DefaultTextStyle.merge(
@@ -79,7 +79,7 @@ class ItemContent extends StatelessWidget {
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
               ),
-              overflow: TextOverflow.ellipsis,
+              overflow: .ellipsis,
               child: title,
             ),
             if (subtitle case final subtitle?)
@@ -89,7 +89,7 @@ class ItemContent extends StatelessWidget {
                   applyHeightToFirstAscent: false,
                   applyHeightToLastDescent: false,
                 ),
-                overflow: TextOverflow.ellipsis,
+                overflow: .ellipsis,
                 child: subtitle,
               ),
           ],
@@ -102,14 +102,14 @@ class ItemContent extends StatelessWidget {
             applyHeightToFirstAscent: false,
             applyHeightToLastDescent: false,
           ),
-          overflow: TextOverflow.ellipsis,
+          overflow: .ellipsis,
           child: details,
         )
       else
         const SizedBox(),
       if (suffix case final suffixIcon?)
         Padding(
-          padding: EdgeInsetsDirectional.only(start: style.suffixIconSpacing),
+          padding: .directional(start: style.suffixIconSpacing),
           child: IconTheme(data: style.suffixIconStyle.resolve(states), child: suffixIcon),
         )
       else
@@ -193,7 +193,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    this.padding = const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6),
+    this.padding = const .directional(start: 11, top: 7.5, bottom: 7.5, end: 6),
     this.prefixIconSpacing = 10,
     this.titleSpacing = 3,
     this.middleSpacing = 4,

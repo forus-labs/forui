@@ -35,7 +35,7 @@ class SliderFormField extends FormField<FSliderSelection> with FFormFieldPropert
          errorBuilder: errorBuilder,
          builder: (field) {
            final state = field as _State;
-           final InheritedData(:layout, :marks, :trackMainAxisExtent) = InheritedData.of(state.context);
+           final InheritedData(:layout, :marks, :trackMainAxisExtent) = .of(state.context);
            final style = InheritedData.of(state.context).style;
            final states = {if (!enabled) WidgetState.disabled, if (state.hasError) WidgetState.error};
 

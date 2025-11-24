@@ -17,11 +17,11 @@ class ScrollHandle extends StatefulWidget {
   final IconData icon;
 
   const ScrollHandle.up({required this.controller, required this.style, super.key})
-    : alignment = Alignment.topCenter,
+    : alignment = .topCenter,
       icon = FIcons.chevronUp;
 
   const ScrollHandle.down({required this.controller, required this.style, super.key})
-    : alignment = Alignment.bottomCenter,
+    : alignment = .bottomCenter,
       icon = FIcons.chevronDown;
 
   @override
@@ -73,9 +73,9 @@ class _ScrollHandleState extends State<ScrollHandle> {
           child: Semantics(
             label: label,
             child: Padding(
-              padding: const EdgeInsets.all(3),
+              padding: const .all(3),
               child: SizedBox(
-                width: double.infinity,
+                width: .infinity,
                 child: ColoredBox(
                   color: widget.style.background,
                   child: IconTheme(data: widget.style.iconStyle, child: Icon(widget.icon)),

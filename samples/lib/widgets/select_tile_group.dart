@@ -17,9 +17,9 @@ class SelectTileGroupPage extends StatefulSample {
 
   SelectTileGroupPage({@queryParam super.theme, @queryParam String divider = 'indented'})
     : divider = switch (divider) {
-        'indented' => FItemDivider.indented,
-        'none' => FItemDivider.none,
-        _ => FItemDivider.full,
+        'indented' => .indented,
+        'none' => .none,
+        _ => .full,
       };
 
   @override
@@ -30,31 +30,31 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
   final controller = FSelectTileGroupController(value: {Sidebar.recents});
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
-        child: FSelectTileGroup(
+        child: FSelectTileGroup<Sidebar>(
           selectController: controller,
           label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           divider: widget.divider,
           children: const [
-            FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
-            FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
-            FSelectTile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: Sidebar.applications),
+            .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
+            .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
+            .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
           ],
         ),
       ),
     ],
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -69,31 +69,31 @@ class _ScrollableSelectTileGroupPageState extends StatefulSampleState<Scrollable
   final controller = FSelectTileGroupController(value: {Sidebar.recents});
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
-        child: FSelectTileGroup(
+        child: FSelectTileGroup<Sidebar>(
           selectController: controller,
           label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           maxHeight: 100,
           children: const [
-            FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
-            FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
-            FSelectTile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: Sidebar.applications),
+            .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
+            .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
+            .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
           ],
         ),
       ),
     ],
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -108,8 +108,14 @@ class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGr
   final controller = FMultiValueNotifier(value: {1});
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
@@ -117,17 +123,11 @@ class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGr
           selectController: controller,
           label: const Text('Applicable values'),
           maxHeight: 200,
-          tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
+          tileBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
         ),
       ),
     ],
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -139,50 +139,50 @@ class SelectTileGroupMultiValuePage extends StatefulSample {
 }
 
 class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTileGroupMultiValuePage> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final controller = FSelectTileGroupController<Language>();
+  final _key = GlobalKey<FormState>();
+  final _controller = FSelectTileGroupController<Language>();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => Form(
-    key: _formKey,
+    key: _key,
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: .center,
+      crossAxisAlignment: .start,
       children: [
-        FSelectTileGroup(
-          selectController: controller,
+        FSelectTileGroup<Language>(
+          selectController: _controller,
           label: const Text('Favorite Languages'),
           description: const Text('Your favorite language.'),
           validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
           children: const [
-            FSelectTile(title: Text('Dart'), value: Language.dart),
-            FSelectTile(title: Text('Java'), value: Language.java),
-            FSelectTile(title: Text('Rust'), value: Language.rust),
-            FSelectTile(title: Text('Python'), value: Language.python),
+            .tile(title: Text('Dart'), value: .dart),
+            .tile(title: Text('Java'), value: .java),
+            .tile(title: Text('Rust'), value: .rust),
+            .tile(title: Text('Python'), value: .python),
           ],
         ),
         const SizedBox(height: 20),
         FButton(
           child: const Text('Save'),
           onPress: () {
-            if (!_formKey.currentState!.validate()) {
+            if (!_key.currentState!.validate()) {
               // Handle errors here.
               return;
             }
 
-            _formKey.currentState!.save();
+            _key.currentState!.save();
             // Do something.
           },
         ),
       ],
     ),
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -194,49 +194,49 @@ class SelectTileGroupRadioPage extends StatefulSample {
 }
 
 class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroupRadioPage> {
-  final _formKey = GlobalKey<FormState>();
-  final controller = FSelectTileGroupController<Notification>.radio();
+  final _key = GlobalKey<FormState>();
+  final _controller = FSelectTileGroupController<Notification>.radio();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => Form(
-    key: _formKey,
+    key: _key,
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: .center,
+      crossAxisAlignment: .start,
       children: [
-        FSelectTileGroup(
-          selectController: controller,
+        FSelectTileGroup<Notification>(
+          selectController: _controller,
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
           children: const [
-            FSelectTile(title: Text('All new messages'), value: Notification.all),
-            FSelectTile(title: Text('Direct messages and mentions'), value: Notification.direct),
-            FSelectTile(title: Text('Nothing'), value: Notification.nothing),
+            .tile(title: Text('All new messages'), value: .all),
+            .tile(title: Text('Direct messages and mentions'), value: .direct),
+            .tile(title: Text('Nothing'), value: .nothing),
           ],
         ),
         const SizedBox(height: 20),
         FButton(
           child: const Text('Save'),
           onPress: () {
-            if (!_formKey.currentState!.validate()) {
+            if (!_key.currentState!.validate()) {
               // Handle errors here.
               return;
             }
 
-            _formKey.currentState!.save();
+            _key.currentState!.save();
             // Do something.
           },
         ),
       ],
     ),
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -248,16 +248,22 @@ class SelectTileGroupSuffixPage extends StatefulSample {
 }
 
 class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGroupSuffixPage> {
-  final controller = FSelectTileGroupController<String>.radio();
+  final _controller = FSelectTileGroupController<String>.radio();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 300),
         child: FSelectTileGroup(
-          selectController: controller,
+          selectController: _controller,
           label: const Text('Settings'),
           children: const [
             FSelectTile.suffix(prefix: Icon(FIcons.list), title: Text('List View'), value: 'List'),
@@ -267,10 +273,4 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
       ),
     ],
   );
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
 }

@@ -41,7 +41,7 @@ abstract class InputController extends TextEditingController {
       super.value = switch (value) {
         _ when value.text.isEmpty => TextEditingValue(
           text: placeholder,
-          selection: TextSelection(baseOffset: 0, extentOffset: placeholder.length),
+          selection: .new(baseOffset: 0, extentOffset: placeholder.length),
         ),
         _ when text != value.text => _update(value),
         _ => selector.resolve(value) ?? this.value,
@@ -73,7 +73,7 @@ abstract class InputController extends TextEditingController {
         final text = selector.join(parts);
         return TextEditingValue(
           text: text,
-          selection: TextSelection(baseOffset: 0, extentOffset: text.length),
+          selection: .new(baseOffset: 0, extentOffset: text.length),
         );
     }
   }

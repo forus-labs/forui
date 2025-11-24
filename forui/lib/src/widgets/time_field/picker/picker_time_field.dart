@@ -32,18 +32,18 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   const _PickerTimeField({
     this.format,
     this.hint,
-    this.textAlign = TextAlign.start,
+    this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
-    this.mouseCursor = MouseCursor.defer,
+    this.mouseCursor = .defer,
     this.canRequestFocus = true,
-    this.anchor = Alignment.topLeft,
-    this.inputAnchor = Alignment.bottomLeft,
-    this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.anchor = .topLeft,
+    this.inputAnchor = .bottomLeft,
+    this.spacing = const .spacing(4),
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.hourInterval = 1,
     this.minuteInterval = 1,
@@ -62,7 +62,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     super.onChange,
     super.onSaved,
     super.onReset,
-    super.autovalidateMode = AutovalidateMode.onUnfocus,
+    super.autovalidateMode = .onUnfocus,
     super.forceErrorText,
     super.errorBuilder,
     super.key,
@@ -87,8 +87,8 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
 }
 
 class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
-  final TextEditingController _textController = TextEditingController();
-  late FocusNode _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTimeField');
+  final TextEditingController _textController = .new();
+  late FocusNode _focus = widget.focusNode ?? .new(debugLabel: 'FTimeField');
   DateFormat? _format;
 
   @override
@@ -106,12 +106,12 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       if (old.focusNode == null) {
         _focus.dispose();
       }
-      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FTimeField');
+      _focus = widget.focusNode ?? .new(debugLabel: 'FTimeField');
     }
 
     if (widget.hour24 != old.hour24) {
       final localizations = FLocalizations.of(context)?.localeName;
-      _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
+      _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
     }
 
     if (widget.controller != old.controller) {
@@ -122,7 +122,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         _controller.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
+      _controller = widget.controller ?? .new(vsync: this, initialTime: _controller.value);
       _controller._picker.addListener(_updateTextController);
       _controller.addValueListener(_onChange);
       _updateTextController();
@@ -136,7 +136,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     super.didChangeDependencies();
 
     final localizations = FLocalizations.of(context)?.localeName;
-    _format = widget.hour24 ? DateFormat.Hm(localizations) : DateFormat.jm(localizations);
+    _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
 
     _updateTextController();
   }
@@ -213,7 +213,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
           autofocus: true,
           fieldFocusNode: _focus,
           child: CallbackShortcuts(
-            bindings: {const SingleActivator(LogicalKeyboardKey.enter): _onTap},
+            bindings: {const SingleActivator(.enter): _onTap},
             child: widget.builder(context, style, states, field),
           ),
         ),
@@ -261,10 +261,10 @@ class _PickerPopover extends StatelessWidget {
     hideRegion: properties.hideRegion,
     onTapHide: properties.onTapHide,
     autofocus: autofocus,
-    shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _hide},
+    shortcuts: {const SingleActivator(.escape): _hide},
     popoverBuilder: (_, _) => TextFieldTapRegion(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        padding: const .symmetric(horizontal: 5.0),
         child: FTimePicker(
           controller: controller._picker,
           style: style.pickerStyle,

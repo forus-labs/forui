@@ -32,21 +32,21 @@ class FDivider extends StatelessWidget {
   final Axis axis;
 
   /// Creates a [FDivider].
-  const FDivider({this.style, this.axis = Axis.horizontal, super.key});
+  const FDivider({this.style, this.axis = .horizontal, super.key});
 
   @override
   Widget build(BuildContext context) {
     final inheritedStyle = switch (axis) {
-      Axis.horizontal => context.theme.dividerStyles.horizontalStyle,
-      Axis.vertical => context.theme.dividerStyles.verticalStyle,
+      .horizontal => context.theme.dividerStyles.horizontalStyle,
+      .vertical => context.theme.dividerStyles.verticalStyle,
     };
     final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
 
     return Container(
       margin: style.padding,
       color: style.color,
-      height: axis == Axis.horizontal ? style.width : null,
-      width: axis == Axis.horizontal ? null : style.width,
+      height: axis == .horizontal ? style.width : null,
+      width: axis == .horizontal ? null : style.width,
     );
   }
 

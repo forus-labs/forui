@@ -85,7 +85,7 @@ class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixi
     child: Semantics(
       label: widget.semanticsLabel ?? (FLocalizations.of(context) ?? FDefaultLocalizations()).progressSemanticsLabel,
       child: Container(
-        clipBehavior: Clip.antiAlias,
+        clipBehavior: .antiAlias,
         decoration: _style!.trackDecoration,
         child: LayoutBuilder(
           builder: (context, constraints) => AnimatedBuilder(
@@ -131,7 +131,7 @@ class FProgressStyle with Diagnosticable, _$FProgressStyleFunctions {
   const FProgressStyle({
     required this.trackDecoration,
     required this.fillDecoration,
-    this.constraints = const BoxConstraints.tightFor(height: 10.0),
+    this.constraints = const .tightFor(height: 10.0),
     this.motion = const FProgressMotion(),
   });
 

@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 
 bool _true(DateTime _) => true;
 
-DateTime _truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
+DateTime _truncateAndStripTimezone(DateTime date) => .utc(date.year, date.month, date.day);
 
 /// A controller that controls date selection in a calendar.
 ///

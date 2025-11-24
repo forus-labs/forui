@@ -18,8 +18,8 @@ void main() {
             return FSelectGroup<int>(
               controller: controller,
               children: [
-                FCheckbox.grouped(value: 0, label: const Text('0')),
-                FCheckbox.grouped(value: 1, label: const Text('1')),
+                .checkbox(value: 0, label: const Text('0')),
+                .checkbox(value: 1, label: const Text('1')),
               ],
             );
           },
@@ -43,8 +43,8 @@ void main() {
             return FSelectGroup<int>(
               controller: controller,
               children: [
-                FRadio.grouped(value: 0, label: const Text('0')),
-                FRadio.grouped(value: 1, label: const Text('1')),
+                .radio(value: 0, label: const Text('0')),
+                .radio(value: 1, label: const Text('1')),
               ],
             );
           },

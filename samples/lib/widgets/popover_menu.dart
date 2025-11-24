@@ -7,7 +7,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class PopoverMenuPage extends Sample {
-  PopoverMenuPage({@queryParam super.theme = 'zinc-light'});
+  PopoverMenuPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => FHeader(
@@ -15,20 +15,20 @@ class PopoverMenuPage extends Sample {
     suffixes: [
       FPopoverMenu(
         autofocus: true,
-        menuAnchor: Alignment.topRight,
-        childAnchor: Alignment.bottomRight,
+        menuAnchor: .topRight,
+        childAnchor: .bottomRight,
         menu: [
-          FItemGroup(
+          .group(
             children: [
-              FItem(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-              FItem(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-              FItem(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+              .item(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+              .item(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              .item(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
             ],
           ),
-          FItemGroup(
+          .group(
             children: [
-              FItem(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-              FItem(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+              .item(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+              .item(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
             ],
           ),
         ],
@@ -40,7 +40,7 @@ class PopoverMenuPage extends Sample {
 
 @RoutePage()
 class TilePopoverMenuPage extends Sample {
-  TilePopoverMenuPage({@queryParam super.theme = 'zinc-light'});
+  TilePopoverMenuPage({@queryParam super.theme});
 
   @override
   Widget sample(BuildContext context) => FHeader(
@@ -48,20 +48,20 @@ class TilePopoverMenuPage extends Sample {
     suffixes: [
       FPopoverMenu.tiles(
         autofocus: true,
-        menuAnchor: Alignment.topRight,
-        childAnchor: Alignment.bottomRight,
+        menuAnchor: .topRight,
+        childAnchor: .bottomRight,
         menu: [
-          FTileGroup(
+          .group(
             children: [
-              FTile(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-              FTile(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-              FTile(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+              .tile(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+              .tile(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              .tile(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
             ],
           ),
-          FTileGroup(
+          .group(
             children: [
-              FTile(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-              FTile(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+              .tile(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+              .tile(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
             ],
           ),
         ],

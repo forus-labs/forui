@@ -117,20 +117,16 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
   Widget build(BuildContext context) => Positioned(
     left: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
     child: widget.focusableActionDetector(
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.arrowLeft): _Up(),
-        SingleActivator(LogicalKeyboardKey.arrowRight): _Down(),
-      },
+      shortcuts: const {SingleActivator(.arrowLeft): _Up(), SingleActivator(.arrowRight): _Down()},
       onFocusChange: (focused) => setState(() => _focused = focused),
       focused: _focused,
       children: [
-        if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
+        if (widget.type == .divider || widget.type == .dividerWithThumb)
           ColoredBox(
             color: widget.style.color,
             child: SizedBox(height: widget.crossAxisExtent, width: widget.style.width),
           ),
-        if (widget.type == FResizableDivider.dividerWithThumb)
-          _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripVertical),
+        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripVertical),
         SizedBox(
           height: widget.crossAxisExtent,
           width: widget.hitRegionExtent,
@@ -178,20 +174,16 @@ class _VerticalDividerState extends State<VerticalDivider> {
   Widget build(BuildContext context) => Positioned(
     top: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
     child: widget.focusableActionDetector(
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.arrowUp): _Up(),
-        SingleActivator(LogicalKeyboardKey.arrowDown): _Down(),
-      },
+      shortcuts: const {SingleActivator(.arrowUp): _Up(), SingleActivator(.arrowDown): _Down()},
       onFocusChange: (focused) => setState(() => _focused = focused),
       focused: _focused,
       children: [
-        if (widget.type == FResizableDivider.divider || widget.type == FResizableDivider.dividerWithThumb)
+        if (widget.type == .divider || widget.type == .dividerWithThumb)
           ColoredBox(
             color: widget.style.color,
             child: SizedBox(height: widget.style.width, width: widget.crossAxisExtent),
           ),
-        if (widget.type == FResizableDivider.dividerWithThumb)
-          _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripHorizontal),
+        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripHorizontal),
         SizedBox(
           height: widget.hitRegionExtent,
           width: widget.crossAxisExtent,
@@ -220,7 +212,7 @@ class _Thumb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    alignment: Alignment.center,
+    alignment: .center,
     decoration: style.decoration,
     height: style.height,
     width: style.width,

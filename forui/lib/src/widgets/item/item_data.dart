@@ -73,17 +73,17 @@ final class FInheritedItemData extends InheritedWidget {
         data: FItemData(
           style: style ?? parent?.style,
           spacing: max(spacing ?? 0, parent?.spacing ?? 0),
-          dividerColor: dividerColor ?? parent?.dividerColor ?? FWidgetStateMap.all(Colors.transparent),
+          dividerColor: dividerColor ?? parent?.dividerColor ?? .all(Colors.transparent),
           dividerWidth: dividerWidth ?? parent?.dividerWidth ?? 0,
           divider: switch ((last, globalLast)) {
             // The first/middle items of a group.
-            (false, false) => divider ?? FItemDivider.none,
+            (false, false) => divider ?? .none,
             // Last of a group which itself isn't the last.
             // propagatedLast can only be false if parent?.last is false since last must always be true.
             // Hence, parent!.divider can never be null.
             (true, false) => parent!.divider,
             // The last item in the last group.
-            (_, true) => FItemDivider.none,
+            (_, true) => .none,
           },
           enabled: enabled ?? parent?.enabled ?? true,
           index: index ?? parent?.index ?? 0,

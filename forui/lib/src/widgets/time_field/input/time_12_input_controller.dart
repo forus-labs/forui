@@ -20,15 +20,15 @@ typedef Select12 =
     );
 
 TextEditingValue _onFirst(TextEditingValue value, int first, int _, int _, int _, int _) =>
-    value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
+    value.copyWith(selection: .new(baseOffset: 0, extentOffset: first));
 
 TextEditingValue _onMiddle(TextEditingValue value, int first, int last, int _, int firstSeparator, int _) =>
     value.copyWith(
-      selection: TextSelection(baseOffset: first + firstSeparator, extentOffset: last),
+      selection: .new(baseOffset: first + firstSeparator, extentOffset: last),
     );
 
 TextEditingValue _onLast(TextEditingValue value, int _, int last, int end, int _, int lastSeparator) => value.copyWith(
-  selection: TextSelection(baseOffset: last + lastSeparator, extentOffset: end),
+  selection: .new(baseOffset: last + lastSeparator, extentOffset: end),
 );
 
 @internal
@@ -150,7 +150,7 @@ class Time12Selector extends Selector {
 
     return TextEditingValue(
       text: join(parts),
-      selection: TextSelection(baseOffset: start, extentOffset: end),
+      selection: .new(baseOffset: start, extentOffset: end),
     );
   }
 

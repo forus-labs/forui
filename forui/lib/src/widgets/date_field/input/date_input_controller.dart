@@ -13,14 +13,14 @@ import 'package:forui/src/widgets/date_field/input/date_parser.dart';
 typedef Select = TextEditingValue Function(TextEditingValue value, int first, int last, int end, int separator);
 
 TextEditingValue _first(TextEditingValue value, int first, int _, int _, int _) =>
-    value.copyWith(selection: TextSelection(baseOffset: 0, extentOffset: first));
+    value.copyWith(selection: .new(baseOffset: 0, extentOffset: first));
 
 TextEditingValue _middle(TextEditingValue value, int first, int last, int _, int separator) => value.copyWith(
-  selection: TextSelection(baseOffset: first + separator, extentOffset: last),
+  selection: .new(baseOffset: first + separator, extentOffset: last),
 );
 
 TextEditingValue _last(TextEditingValue value, int _, int last, int end, int separator) => value.copyWith(
-  selection: TextSelection(baseOffset: last + separator, extentOffset: end),
+  selection: .new(baseOffset: last + separator, extentOffset: end),
 );
 
 @internal
@@ -42,14 +42,7 @@ class DateInputController extends InputController {
         .replaceAll('y', 'YYYY')
         .replaceAll("'", '');
     final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
-    return DateInputController.test(
-      controller,
-      localizations,
-      style,
-      placeholder,
-      initialYear,
-      TextEditingValue(text: text),
-    );
+    return .test(controller, localizations, style, placeholder, initialYear, TextEditingValue(text: text));
   }
 
   @visibleForTesting
@@ -61,7 +54,7 @@ class DateInputController extends InputController {
     int initialYear,
     TextEditingValue? value,
   ) : selector = DateSelector(localizations),
-      _format = DateFormat.yMd(localizations.localeName),
+      _format = .yMd(localizations.localeName),
       super(style, DateParser(localizations.localeName, initialYear), placeholder, value) {
     controller.addListener(updateFromCalendar);
   }
@@ -163,7 +156,7 @@ class DateSelector extends Selector {
 
     return TextEditingValue(
       text: join(parts),
-      selection: TextSelection(baseOffset: start, extentOffset: end),
+      selection: .new(baseOffset: start, extentOffset: end),
     );
   }
 

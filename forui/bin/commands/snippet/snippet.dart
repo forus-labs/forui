@@ -63,7 +63,7 @@ class _ExampleState extends State<Example> {
   @override
   Widget build(BuildContext context) => Center(
     child: Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       spacing: 10,
       children: [
         Text('Count: $_count'),
@@ -96,71 +96,63 @@ extension CustomMaterialTheme on FThemeData {
         TextTheme(
           displayLarge: typography.xl4.copyWith(
             height: 1,
-            textBaseline:
-                typography.xl4.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.xl4.textBaseline ?? .alphabetic,
           ),
           displayMedium: typography.xl3.copyWith(
             height: 1,
-            textBaseline:
-                typography.xl3.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.xl3.textBaseline ?? .alphabetic,
           ),
           displaySmall: typography.xl2.copyWith(
             height: 1,
-            textBaseline:
-                typography.xl2.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.xl2.textBaseline ?? .alphabetic,
           ),
           headlineLarge: typography.xl3.copyWith(
             height: 1,
-            textBaseline:
-                typography.xl3.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.xl3.textBaseline ?? .alphabetic,
           ),
           headlineMedium: typography.xl2.copyWith(
             height: 1,
-            textBaseline:
-                typography.xl2.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.xl2.textBaseline ?? .alphabetic,
           ),
           headlineSmall: typography.xl.copyWith(
             height: 1,
-            textBaseline: typography.xl.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.xl.textBaseline ?? .alphabetic,
           ),
           titleLarge: typography.lg.copyWith(
             height: 1,
-            textBaseline: typography.lg.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.lg.textBaseline ?? .alphabetic,
           ),
           titleMedium: typography.base.copyWith(
             height: 1,
-            textBaseline:
-                typography.base.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.base.textBaseline ?? .alphabetic,
           ),
           titleSmall: typography.sm.copyWith(
             height: 1,
-            textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.sm.textBaseline ?? .alphabetic,
           ),
           labelLarge: typography.base.copyWith(
             height: 1,
-            textBaseline:
-                typography.base.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.base.textBaseline ?? .alphabetic,
           ),
           labelMedium: typography.sm.copyWith(
             height: 1,
-            textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.sm.textBaseline ?? .alphabetic,
           ),
           labelSmall: typography.xs.copyWith(
             height: 1,
-            textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.xs.textBaseline ?? .alphabetic,
           ),
           bodyLarge: typography.base.copyWith(
             height: 1,
-            textBaseline:
-                typography.base.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.base.textBaseline ?? .alphabetic,
           ),
           bodyMedium: typography.sm.copyWith(
             height: 1,
-            textBaseline: typography.sm.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.sm.textBaseline ?? .alphabetic,
           ),
           bodySmall: typography.xs.copyWith(
             height: 1,
-            textBaseline: typography.xs.textBaseline ?? TextBaseline.alphabetic,
+            textBaseline: typography.xs.textBaseline ?? .alphabetic,
           ),
         )..apply(
           fontFamily: typography.defaultFontFamily,
@@ -231,7 +223,7 @@ extension CustomMaterialTheme on FThemeData {
       ),
       datePickerTheme: DatePickerThemeData(
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-        dayShape: WidgetStateProperty.all(
+        dayShape: .all(
           RoundedRectangleBorder(borderRadius: style.borderRadius),
         ),
         rangePickerShape: RoundedRectangleBorder(
@@ -306,12 +298,8 @@ extension CustomMaterialTheme on FThemeData {
                     ?.color ??
                 colors.secondaryForeground,
           ),
-          padding: WidgetStateProperty.all(
-            buttonStyles.secondary.contentStyle.padding,
-          ),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(borderRadius: style.borderRadius),
-          ),
+          padding: .all(buttonStyles.secondary.contentStyle.padding),
+          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
@@ -327,12 +315,8 @@ extension CustomMaterialTheme on FThemeData {
                 buttonStyles.secondary.decoration.maybeResolve(states)?.color ??
                 colors.secondaryForeground,
           ),
-          padding: WidgetStateProperty.all(
-            buttonStyles.primary.contentStyle.padding,
-          ),
-          shape: WidgetStateProperty.all(
-            RoundedRectangleBorder(borderRadius: style.borderRadius),
-          ),
+          padding: .all(buttonStyles.primary.contentStyle.padding),
+          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -348,9 +332,7 @@ extension CustomMaterialTheme on FThemeData {
                 buttonStyles.outline.decoration.maybeResolve(states)?.color ??
                 Colors.transparent,
           ),
-          padding: WidgetStateProperty.all(
-            buttonStyles.outline.contentStyle.padding,
-          ),
+          padding: .all(buttonStyles.outline.contentStyle.padding),
           side: WidgetStateBorderSide.resolveWith((states) {
             final border = buttonStyles.outline.decoration
                 .maybeResolve(states)

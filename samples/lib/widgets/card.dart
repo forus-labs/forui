@@ -14,12 +14,12 @@ class CardPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       FCard(
         image: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(path('avatar.png')), fit: BoxFit.cover),
+            image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
           ),
           height: 200,
         ),

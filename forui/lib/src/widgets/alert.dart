@@ -67,14 +67,14 @@ class FAlert extends StatelessWidget {
       child: Padding(
         padding: style.padding,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           children: [
             Row(
               children: [
                 IconTheme(data: style.iconStyle, child: icon),
                 Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 8),
+                    padding: const .only(left: 8),
                     child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
                   ),
                 ),
@@ -86,7 +86,7 @@ class FAlert extends StatelessWidget {
                   SizedBox(width: style.iconStyle.size),
                   Flexible(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 3, left: 8),
+                      padding: const .only(top: 3, left: 8),
                       child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
                     ),
                   ),
@@ -123,20 +123,20 @@ class FAlertStyles with Diagnosticable, _$FAlertStylesFunctions {
     : this(
         primary: FAlertStyle(
           iconStyle: IconThemeData(color: colors.foreground, size: 20),
-          titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.foreground, height: 1.2),
+          titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
           subtitleTextStyle: typography.sm.copyWith(color: colors.foreground),
           decoration: BoxDecoration(
-            border: Border.all(color: colors.border),
+            border: .all(color: colors.border),
             borderRadius: style.borderRadius,
             color: colors.background,
           ),
         ),
         destructive: FAlertStyle(
           iconStyle: IconThemeData(color: colors.destructive, size: 20),
-          titleTextStyle: typography.base.copyWith(fontWeight: FontWeight.w500, color: colors.destructive, height: 1.2),
+          titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.destructive, height: 1.2),
           subtitleTextStyle: typography.sm.copyWith(color: colors.destructive),
           decoration: BoxDecoration(
-            border: Border.all(color: colors.destructive),
+            border: .all(color: colors.destructive),
             borderRadius: style.borderRadius,
             color: colors.background,
           ),
@@ -199,6 +199,6 @@ final class FAlertStyle extends FBaseAlertStyle with Diagnosticable, _$FAlertSty
     required this.iconStyle,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    this.padding = const EdgeInsets.fromLTRB(16, 12, 16, 12),
+    this.padding = const .fromLTRB(16, 12, 16, 12),
   });
 }

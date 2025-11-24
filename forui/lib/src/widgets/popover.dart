@@ -12,7 +12,7 @@ part 'popover.design.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 final class FPopoverController extends FChangeNotifier {
-  final OverlayPortalController _overlay = OverlayPortalController();
+  final OverlayPortalController _overlay = .new();
   late final AnimationController _animation;
   late final CurvedAnimation _curveScale;
   late final CurvedAnimation _curveFade;
@@ -81,7 +81,7 @@ final class FPopoverController extends FChangeNotifier {
 /// Motion-related properties for [FPopover].
 class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
   /// A [FPopoverMotion] with no motion effects.
-  static const FPopoverMotion none = FPopoverMotion(
+  static const FPopoverMotion none = .new(
     scaleTween: FImmutableTween(begin: 1, end: 1),
     fadeTween: FImmutableTween(begin: 1, end: 1),
   );
@@ -158,9 +158,8 @@ enum FPopoverHideRegion {
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
   /// The platform-specific default popover and child anchors.
-  static ({Alignment popover, Alignment child}) get defaultPlatform => FTouch.primary
-      ? (popover: Alignment.bottomCenter, child: Alignment.topCenter)
-      : (popover: Alignment.topCenter, child: Alignment.bottomCenter);
+  static ({Alignment popover, Alignment child}) get defaultPlatform =>
+      FTouch.primary ? (popover: .bottomCenter, child: .topCenter) : (popover: .topCenter, child: .bottomCenter);
 
   static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
 
@@ -323,11 +322,11 @@ class FPopover extends StatefulWidget {
     this.controller,
     this.style,
     this.constraints = const FPortalConstraints(),
-    this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
+    this.spacing = const .spacing(4),
+    this.overflow = .flip,
+    this.offset = .zero,
     this.groupId,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.autofocus,
     this.focusNode,
@@ -393,7 +392,7 @@ class FPopover extends StatefulWidget {
 
 class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   late Object? _groupId = widget.groupId ?? UniqueKey();
-  late FPopoverController _controller = widget.controller ?? FPopoverController(vsync: this);
+  late FPopoverController _controller = widget.controller ?? .new(vsync: this);
   FocusScopeNode? _focusNode;
 
   @override
@@ -401,10 +400,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
     super.initState();
     _focusNode =
         widget.focusNode ??
-        FocusScopeNode(
-          debugLabel: 'FPopover',
-          traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop,
-        );
+        .new(debugLabel: 'FPopover', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
   }
 
   @override
@@ -421,17 +417,14 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
       _focusNode =
           widget.focusNode ??
-          FocusScopeNode(
-            debugLabel: 'FPopover',
-            traversalEdgeBehavior: widget.traversalEdgeBehavior ?? TraversalEdgeBehavior.closedLoop,
-          );
+          .new(debugLabel: 'FPopover', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
     }
 
     if (widget.controller != old.controller) {
       if (old.controller == null) {
         _controller.dispose();
       }
-      _controller = widget.controller ?? FPopoverController(vsync: this);
+      _controller = widget.controller ?? .new(vsync: this);
     }
   }
 
@@ -450,12 +443,12 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.popoverStyle) ?? context.theme.popoverStyle;
-    final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final direction = Directionality.maybeOf(context) ?? .ltr;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     var child = widget.builder(context, _controller, widget.child);
 
-    if (widget.hideRegion == FPopoverHideRegion.excludeChild) {
+    if (widget.hideRegion == .excludeChild) {
       child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
     }
 
@@ -478,7 +471,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                 barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
                 semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
                 // The actual dismissal logic is handled in the TapRegion below.
-                onDismiss: widget.hideRegion == FPopoverHideRegion.none ? null : () {},
+                onDismiss: widget.hideRegion == .none ? null : () {},
               ),
         portalBuilder: (context, _) {
           Widget popover = ScaleTransition(
@@ -495,7 +488,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                   onFocusChange: widget.onFocusChange,
                   child: TapRegion(
                     groupId: _groupId,
-                    onTapOutside: widget.hideRegion == FPopoverHideRegion.none ? null : (_) => _hide(),
+                    onTapOutside: widget.hideRegion == .none ? null : (_) => _hide(),
                     child: DecoratedBox(
                       decoration: style.decoration,
                       child: widget.popoverBuilder(context, _controller),
@@ -524,7 +517,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
           }
 
           return CallbackShortcuts(
-            bindings: widget.shortcuts ?? {const SingleActivator(LogicalKeyboardKey.escape): _hide},
+            bindings: widget.shortcuts ?? {const SingleActivator(.escape): _hide},
             child: popover,
           );
         },
@@ -613,7 +606,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
     required this.decoration,
     this.barrierFilter,
     this.backgroundFilter,
-    this.viewInsets = const EdgeInsets.all(5),
+    this.viewInsets = const .all(5),
   });
 
   /// Creates a [FPopoverStyle] that inherits its properties.
@@ -622,7 +615,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
         decoration: BoxDecoration(
           color: colors.background,
           borderRadius: style.borderRadius,
-          border: Border.all(width: style.borderWidth, color: colors.border),
+          border: .all(width: style.borderWidth, color: colors.border),
           boxShadow: style.shadow,
         ),
       );

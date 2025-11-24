@@ -12,7 +12,70 @@ import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 part 'autocomplete_item.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FAutocomplete].
-mixin FAutocompleteItemMixin on Widget {}
+mixin FAutocompleteItemMixin on Widget {
+  /// {@macro forui.widgets.FAutocompleteSection.new}
+  ///
+  /// For more control over the appearance of individual items, use [richSection].
+  ///
+  /// This function is a shorthand for [FAutocompleteSection.new].
+  static FAutocompleteSection section({
+    required Widget label,
+    required List<String> items,
+    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle style)? style,
+    bool? enabled,
+    FItemDivider divider = .none,
+    Key? key,
+  }) => .new(label: label, items: items, style: style, enabled: enabled, divider: divider, key: key);
+
+  /// {@macro forui.widgets.FAutocompleteSection.rich}
+  ///
+  /// This function is a shorthand for [FAutocompleteSection.rich].
+  static FAutocompleteSection richSection({
+    required Widget label,
+    required List<FAutocompleteItem> children,
+    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle style)? style,
+    bool? enabled,
+    FItemDivider divider = .none,
+    Key? key,
+  }) => .rich(label: label, style: style, enabled: enabled, divider: divider, key: key, children: children);
+
+  /// {@macro forui.widgets.FAutocompleteItem.new}
+  ///
+  /// For even more control over the item's appearance, use [rawItem].
+  ///
+  /// This function is a shorthand for [FAutocompleteItem.new].
+  static FAutocompleteItem item({
+    required String value,
+    FItemStyle Function(FItemStyle style)? style,
+    bool? enabled,
+    Widget? prefix,
+    Widget? title,
+    Widget? subtitle,
+    Widget? suffix,
+    Key? key,
+  }) => .item(
+    value: value,
+    style: style,
+    enabled: enabled,
+    prefix: prefix,
+    title: title,
+    subtitle: subtitle,
+    suffix: suffix,
+    key: key,
+  );
+
+  /// {@macro forui.widgets.FAutocompleteItem.raw}
+  ///
+  /// This function is a shorthand for [FAutocompleteItem.raw].
+  static FAutocompleteItem rawItem({
+    required Widget child,
+    required String value,
+    FItemStyle Function(FItemStyle style)? style,
+    bool? enabled,
+    Widget? prefix,
+    Key? key,
+  }) => .raw(value: value, style: style, enabled: enabled, prefix: prefix, key: key, child: child);
+}
 
 /// A section in a [FAutocomplete] that can contain multiple [FAutocompleteItem]s.
 class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
@@ -41,7 +104,9 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   /// The nested [FAutocompleteItem]s.
   final List<FAutocompleteItem> children;
 
+  /// {@template forui.widgets.FAutocompleteSection.new}
   /// Creates a [FAutocompleteSection] from the given items.
+  /// {@endtemplate}
   ///
   /// For more control over the appearance of individual items, use [FAutocompleteSection.rich].
   FAutocompleteSection({
@@ -49,24 +114,26 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
     required List<String> items,
     FAutocompleteSectionStyle Function(FAutocompleteSectionStyle style)? style,
     bool? enabled,
-    FItemDivider divider = FItemDivider.none,
+    FItemDivider divider = .none,
     Key? key,
   }) : this.rich(
          label: label,
-         children: [for (final item in items) FAutocompleteItem(value: item)],
+         children: [for (final item in items) FAutocompleteItem.item(value: item)],
          style: style,
          enabled: enabled,
          divider: divider,
          key: key,
        );
 
+  /// {@template forui.widgets.FAutocompleteSection.rich}
   /// Creates a [FAutocompleteSection] with the given [children].
+  /// {@endtemplate}
   const FAutocompleteSection.rich({
     required this.label,
     required this.children,
     this.style,
     this.enabled,
-    this.divider = FItemDivider.none,
+    this.divider = .none,
     super.key,
   });
 
@@ -81,11 +148,11 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
       style: style,
       enabled: enabled,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
         children: [
           DefaultTextStyle.merge(
-            style: style.labelTextStyle.resolve({if (!enabled) WidgetState.disabled}),
+            style: style.labelTextStyle.resolve({if (!enabled) .disabled}),
             child: Padding(padding: style.labelPadding, child: label),
           ),
           if (children.firstOrNull case final first?)
@@ -157,7 +224,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required this.dividerColor,
     required this.dividerWidth,
     required this.itemStyle,
-    this.labelPadding = const EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10),
+    this.labelPadding = const .directional(start: 15, top: 7.5, bottom: 7.5, end: 10),
   });
 
   /// Creates a [FAutocompleteSectionStyle] that inherits its properties.
@@ -176,7 +243,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
       WidgetState.any: typography.sm.copyWith(color: colors.primary),
     });
 
-    return FAutocompleteSectionStyle(
+    return .new(
       labelTextStyle: FWidgetStateMap({
         WidgetState.disabled: typography.sm.copyWith(
           color: colors.disable(colors.primary),
@@ -184,17 +251,17 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
         ),
         WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
       }),
-      dividerColor: FWidgetStateMap.all(colors.border),
+      dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
-        backgroundColor: FWidgetStateMap.all(null),
+        backgroundColor: .all(null),
         decoration: FWidgetStateMap({
           ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
             color: colors.secondary,
             borderRadius: style.borderRadius,
           ),
         }),
-        contentStyle: FItemContentStyle.inherit(colors: colors, typography: typography).copyWith(
+        contentStyle: .inherit(colors: colors, typography: typography).copyWith(
           padding: padding,
           prefixIconStyle: iconStyle,
           prefixIconSpacing: 10,
@@ -244,9 +311,11 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// A prefix.
   final Widget? prefix;
 
+  /// {@template forui.widgets.FAutocompleteItem.new}
   /// Creates a [FAutocompleteItem] with a custom [title] and value.
   ///
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
+  /// {@endtemplate}
   factory FAutocompleteItem({
     required String value,
     FItemStyle Function(FItemStyle style)? style,
@@ -258,10 +327,29 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
     Key? key,
   }) = _AutocompleteItem;
 
+  /// Creates a [FAutocompleteItem] with a custom [title] and value.
+  ///
+  /// This is identical to [FAutocompleteItem.new]. It provides consistency with other [FAutocompleteItemMixin]
+  /// members when using dot-shorthands.
+  ///
+  /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
+  factory FAutocompleteItem.item({
+    required String value,
+    FItemStyle Function(FItemStyle style)? style,
+    bool? enabled,
+    Widget? prefix,
+    Widget? title,
+    Widget? subtitle,
+    Widget? suffix,
+    Key? key,
+  }) = FAutocompleteItem;
+
+  /// {@template forui.widgets.FAutocompleteItem.raw}
   /// Creates a [FAutocompleteItem] with raw layout that delegates to [FItem.raw].
   ///
   /// This provides full control over the item's layout without the structured
   /// title/subtitle/prefix/suffix layout of the default constructor.
+  /// {@endtemplate}
   factory FAutocompleteItem.raw({
     required Widget child,
     required String value,
@@ -302,7 +390,7 @@ class _AutocompleteItem extends FAutocompleteItem {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedAutocompleteController(:popover, :onPress, :onFocus) = InheritedAutocompleteController.of(context);
+    final InheritedAutocompleteController(:popover, :onPress, :onFocus) = .of(context);
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;
@@ -339,7 +427,7 @@ class _RawAutocompleteItem extends FAutocompleteItem {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedAutocompleteController(:popover, :onPress, :onFocus) = InheritedAutocompleteController.of(context);
+    final InheritedAutocompleteController(:popover, :onPress, :onFocus) = .of(context);
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;

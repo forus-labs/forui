@@ -79,9 +79,9 @@ class FTextField extends StatefulWidget {
     TextEditingController? controller,
     FocusNode? focusNode,
     TextInputType? keyboardType,
-    TextInputAction textInputAction = TextInputAction.next,
-    TextCapitalization textCapitalization = TextCapitalization.none,
-    TextAlign textAlign = TextAlign.start,
+    TextInputAction textInputAction = .next,
+    TextCapitalization textCapitalization = .none,
+    TextAlign textAlign = .start,
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool autofocus = false,
@@ -111,7 +111,7 @@ class FTextField extends StatefulWidget {
     bool enableInteractiveSelection = true,
     bool? selectAllOnFocus,
     TextSelectionControls? selectionControls,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    DragStartBehavior dragStartBehavior = .start,
     MouseCursor? mouseCursor,
     FTextFieldCounterBuilder? counterBuilder,
     ScrollPhysics? scrollPhysics,
@@ -848,8 +848,8 @@ class FTextField extends StatefulWidget {
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
+    this.textCapitalization = .none,
+    this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
@@ -880,7 +880,7 @@ class FTextField extends StatefulWidget {
     this.enableInteractiveSelection = true,
     this.selectAllOnFocus,
     this.selectionControls,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.dragStartBehavior = .start,
     this.mouseCursor,
     this.counterBuilder,
     this.scrollPhysics,
@@ -917,10 +917,10 @@ class FTextField extends StatefulWidget {
     this.groupId = EditableText,
     this.controller,
     this.focusNode,
-    this.keyboardType = TextInputType.emailAddress,
-    this.textInputAction = TextInputAction.next,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
+    this.keyboardType = .emailAddress,
+    this.textInputAction = .next,
+    this.textCapitalization = .none,
+    this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
@@ -951,7 +951,7 @@ class FTextField extends StatefulWidget {
     this.enableInteractiveSelection = true,
     this.selectAllOnFocus,
     this.selectionControls,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.dragStartBehavior = .start,
     this.mouseCursor,
     this.counterBuilder,
     this.scrollPhysics,
@@ -994,8 +994,8 @@ class FTextField extends StatefulWidget {
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
-    this.textCapitalization = TextCapitalization.sentences,
-    this.textAlign = TextAlign.start,
+    this.textCapitalization = .sentences,
+    this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
@@ -1026,7 +1026,7 @@ class FTextField extends StatefulWidget {
     this.enableInteractiveSelection = true,
     this.selectAllOnFocus,
     this.selectionControls,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.dragStartBehavior = .start,
     this.mouseCursor,
     this.counterBuilder,
     this.scrollPhysics,
@@ -1137,10 +1137,10 @@ class _State extends State<FTextField> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+    _controller = widget.controller ?? .new(text: widget.initialText);
     _controller.addListener(_handleOnChange);
 
-    _statesController = widget.statesController ?? WidgetStatesController();
+    _statesController = widget.statesController ?? .new();
     _statesController.addListener(_handleStatesChange);
   }
 
@@ -1154,7 +1154,7 @@ class _State extends State<FTextField> {
         _controller.removeListener(_handleOnChange);
       }
 
-      _controller = widget.controller ?? TextEditingController(text: widget.initialText);
+      _controller = widget.controller ?? .new(text: widget.initialText);
       _controller.addListener(_handleOnChange);
     }
 
@@ -1165,7 +1165,7 @@ class _State extends State<FTextField> {
         _statesController.removeListener(_handleStatesChange);
       }
 
-      _statesController = widget.statesController ?? WidgetStatesController();
+      _statesController = widget.statesController ?? .new();
       _statesController.addListener(_handleStatesChange);
     }
   }
@@ -1248,7 +1248,7 @@ class _State extends State<FTextField> {
     );
 
     Widget field = FLabel(
-      axis: Axis.vertical,
+      axis: .vertical,
       states: states,
       label: widget.label,
       style: style,
@@ -1267,7 +1267,7 @@ class _State extends State<FTextField> {
           // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
           // for overriding selectionHandleColor.
           data: Theme.of(context).copyWith(
-            visualDensity: VisualDensity.standard,
+            visualDensity: .standard,
             textSelectionTheme: TextSelectionThemeData(
               cursorColor: style.cursorColor,
               selectionColor: style.cursorColor.withValues(alpha: 0.4),
@@ -1301,7 +1301,7 @@ class _State extends State<FTextField> {
 
   InputDecoration _decoration(FTextFieldStyle style) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final textDirection = Directionality.maybeOf(context) ?? .ltr;
     final padding = style.contentPadding.resolve(textDirection);
     final states = _statesController.value;
 
@@ -1322,8 +1322,8 @@ class _State extends State<FTextField> {
       prefixIcon: widget.prefixBuilder?.call(context, style, states),
       suffixIcon: switch ((suffix, clear)) {
         (final icon?, final clear?) when !states.contains(WidgetState.disabled) => Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: .end,
+          mainAxisSize: .min,
           children: [clear, icon],
         ),
         (null, final clear?) when !states.contains(WidgetState.disabled) => clear,
@@ -1332,15 +1332,15 @@ class _State extends State<FTextField> {
       // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
       prefix: Padding(
         padding: switch (textDirection) {
-          TextDirection.ltr => EdgeInsets.only(left: widget.prefixBuilder == null ? padding.left : 0),
-          TextDirection.rtl => EdgeInsets.only(right: widget.prefixBuilder == null ? padding.right : 0),
+          .ltr => .only(left: widget.prefixBuilder == null ? padding.left : 0),
+          .rtl => .only(right: widget.prefixBuilder == null ? padding.right : 0),
         },
       ),
       prefixIconConstraints: const BoxConstraints(),
       suffixIconConstraints: const BoxConstraints(),
       contentPadding: switch (textDirection) {
-        TextDirection.ltr => padding.copyWith(left: 0),
-        TextDirection.rtl => padding.copyWith(right: 0),
+        .ltr => padding.copyWith(left: 0),
+        .rtl => padding.copyWith(right: 0),
       },
       hintText: widget.hint,
       hintStyle: WidgetStateTextStyle.resolveWith(style.hintTextStyle.resolve),

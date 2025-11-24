@@ -32,7 +32,7 @@ typedef FAutoCompleteContentBuilder =
 class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style) => Padding(
-    padding: const EdgeInsets.all(13),
+    padding: const .all(13),
     child: FCircularProgress(style: style.progressStyle),
   );
 
@@ -40,7 +40,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   static Widget defaultContentEmptyBuilder(BuildContext context, FAutocompleteContentStyle style) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+      padding: const .symmetric(horizontal: 8, vertical: 14),
       child: Text(localizations.autocompleteNoResults, style: style.emptyTextStyle),
     );
   }
@@ -323,8 +323,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     FocusNode? focusNode,
     TextInputType? keyboardType,
     TextInputAction? textInputAction,
-    TextCapitalization textCapitalization = TextCapitalization.none,
-    TextAlign textAlign = TextAlign.start,
+    TextCapitalization textCapitalization = .none,
+    TextAlign textAlign = .start,
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     VoidCallback? onTapHide,
@@ -353,7 +353,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     bool? ignorePointers,
     bool enableInteractiveSelection = true,
     TextSelectionControls? selectionControls,
-    DragStartBehavior dragStartBehavior = DragStartBehavior.start,
+    DragStartBehavior dragStartBehavior = .start,
     MouseCursor? mouseCursor,
     FTextFieldCounterBuilder? counterBuilder,
     ScrollPhysics? scrollPhysics,
@@ -374,16 +374,16 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     VoidCallback? onReset,
     FormFieldValidator<String>? validator,
     String? initialText,
-    AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
+    AutovalidateMode autovalidateMode = .disabled,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     AlignmentGeometry anchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const FPortalSpacing(4),
-    FPortalOverflow overflow = FPortalOverflow.flip,
-    Offset offset = Offset.zero,
-    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
+    FPortalSpacing spacing = const .spacing(4),
+    FPortalOverflow overflow = .flip,
+    Offset offset = .zero,
+    FPopoverHideRegion hideRegion = .excludeChild,
     bool autoHide = true,
     FFieldBuilder<FAutocompleteStyle> builder = _builder,
     bool rightArrowToComplete = false,
@@ -391,7 +391,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     FAutoCompleteContentBuilder? contentBuilder,
     ScrollController? contentScrollController,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
-    FItemDivider contentDivider = FItemDivider.none,
+    FItemDivider contentDivider = .none,
     Widget Function(BuildContext context, FAutocompleteContentStyle style) contentEmptyBuilder =
         defaultContentEmptyBuilder,
     Widget Function(BuildContext context, FAutocompleteContentStyle style) contentLoadingBuilder =
@@ -401,8 +401,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   }) : this.builder(
          filter: filter ?? (query) => items.where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
          contentBuilder:
-             contentBuilder ??
-             (context, query, values) => [for (final value in values) FAutocompleteItem(value: value)],
+             contentBuilder ?? (context, query, values) => [for (final value in values) .item(value: value)],
          style: style,
          label: label,
          hint: hint,
@@ -501,8 +500,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
+    this.textCapitalization = .none,
+    this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
     this.onTapHide,
@@ -531,7 +530,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.ignorePointers,
     this.enableInteractiveSelection = true,
     this.selectionControls,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.dragStartBehavior = .start,
     this.mouseCursor,
     this.counterBuilder,
     this.scrollPhysics,
@@ -552,22 +551,22 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.onReset,
     this.validator,
     this.initialText,
-    this.autovalidateMode = AutovalidateMode.disabled,
+    this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.anchor = AlignmentDirectional.topStart,
     this.fieldAnchor = AlignmentDirectional.bottomStart,
     this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.spacing = const .spacing(4),
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.autoHide = true,
     this.builder = _builder,
     this.rightArrowToComplete = false,
     this.contentScrollController,
     this.contentPhysics = const ClampingScrollPhysics(),
-    this.contentDivider = FItemDivider.none,
+    this.contentDivider = .none,
     this.contentEmptyBuilder = defaultContentEmptyBuilder,
     this.contentLoadingBuilder = defaultContentLoadingBuilder,
     this.contentErrorBuilder,
@@ -691,9 +690,9 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
+    _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     _fieldFocus.addListener(_focus);
-    _controller = widget.controller ?? FAutocompleteController(vsync: this, text: widget.initialText);
+    _controller = widget.controller ?? .new(vsync: this, text: widget.initialText);
     _controller
       ..addListener(_update)
       ..loadSuggestions(_data = widget.filter(_controller.text));
@@ -708,7 +707,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       if (old.focusNode == null) {
         _fieldFocus.dispose();
       }
-      _fieldFocus = widget.focusNode ?? FocusNode(debugLabel: 'FAutocomplete field');
+      _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     }
 
     if (widget.controller != old.controller) {
@@ -718,7 +717,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         _controller.removeListener(_update);
       }
 
-      _controller = widget.controller ?? FAutocompleteController(vsync: this, text: widget.initialText);
+      _controller = widget.controller ?? .new(vsync: this, text: widget.initialText);
       _controller
         ..addListener(_update)
         ..loadSuggestions(widget.filter(_controller.text));
@@ -917,16 +916,15 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
               states: states,
               child: CallbackShortcuts(
                 bindings: {
-                  const SingleActivator(LogicalKeyboardKey.escape): _controller.content.hide,
-                  const SingleActivator(LogicalKeyboardKey.arrowDown): () =>
-                      _popoverFocus.descendants.firstOrNull?.requestFocus(),
+                  const SingleActivator(.escape): _controller.content.hide,
+                  const SingleActivator(.arrowDown): () => _popoverFocus.descendants.firstOrNull?.requestFocus(),
                   if (_controller.current case (:final replacement, completion: final _))
-                    const SingleActivator(LogicalKeyboardKey.tab): () => _complete(replacement),
+                    const SingleActivator(.tab): () => _complete(replacement),
                   if (_controller.current case (
                     :final replacement,
                     completion: final _,
                   ) when widget.rightArrowToComplete)
-                    const SingleActivator(LogicalKeyboardKey.arrowRight): () => _complete(replacement),
+                    const SingleActivator(.arrowRight): () => _complete(replacement),
                 },
                 child: widget.builder(context, style, states, field),
               ),
@@ -993,12 +991,11 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
     required FStyle style,
   }) {
     final field = FTextFieldStyle.inherit(colors: colors, typography: typography, style: style);
-
-    return FAutocompleteStyle(
+    return .new(
       fieldStyle: field,
-      composingTextStyle: field.contentTextStyle.map((s) => s.copyWith(decoration: TextDecoration.underline)),
+      composingTextStyle: field.contentTextStyle.map((s) => s.copyWith(decoration: .underline)),
       typeaheadTextStyle: field.contentTextStyle.map((s) => s.copyWith(color: colors.mutedForeground)),
-      contentStyle: FAutocompleteContentStyle.inherit(colors: colors, typography: typography, style: style),
+      contentStyle: .inherit(colors: colors, typography: typography, style: style),
     );
   }
 }

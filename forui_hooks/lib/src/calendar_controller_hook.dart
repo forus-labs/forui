@@ -37,7 +37,7 @@ FCalendarController<DateTime?> useFDateCalendarController({
     selectable: selectable,
     toggleable: toggleable,
     debugLabel: 'useFDateCalendarController',
-    create: (hook) => FCalendarController.date(
+    create: (hook) => .date(
       initialSelection: hook.value,
       selectable: hook.selectable,
       toggleable: hook.toggleable,
@@ -74,7 +74,7 @@ FCalendarController<Set<DateTime>> useFDatesCalendarController({
     value: initialSelections,
     selectable: selectable,
     debugLabel: 'useFDatesCalendarController',
-    create: (hook) => FCalendarController.dates(
+    create: (hook) => .dates(
       initialSelections: hook.value,
       selectable: hook.selectable,
       truncateAndStripTimezone: truncateAndStripTimezone,
@@ -115,7 +115,7 @@ FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
     value: initialSelection,
     selectable: selectable,
     debugLabel: 'useFRangeCalendarController',
-    create: (hook) => FCalendarController.range(
+    create: (hook) => .range(
       initialSelection: hook.value,
       selectable: hook.selectable,
       truncateAndStripTimezone: truncateAndStripTimezone,
@@ -141,7 +141,7 @@ class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
        _debugLabel = debugLabel;
 
   @override
-  _CalendarControllerHookState<T> createState() => _CalendarControllerHookState<T>();
+  _CalendarControllerHookState<T> createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

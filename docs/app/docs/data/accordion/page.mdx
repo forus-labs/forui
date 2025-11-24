@@ -13,7 +13,7 @@ A vertically stacked set of interactive headings that reveal associated content 
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='accordion' query={{controller: 'default'}} height={500}/>
+        <Widget name='accordion' query={{}} height={700}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart copy
@@ -82,11 +82,11 @@ FAccordion(
 );
 ```
 
-### With Multi-select Behaviour
+### With Max Number of Expanded Items
 
 <Tabs items={['Preview', 'Code']}>
     <Tabs.Tab>
-        <Widget name='accordion' query={{controller: 'max'}} height={500}/>
+        <Widget name='accordion' query={{max: 2}} height={600}/>
     </Tabs.Tab>
     <Tabs.Tab>
         ```dart {5} copy

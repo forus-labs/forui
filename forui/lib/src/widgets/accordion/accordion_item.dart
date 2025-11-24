@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -139,7 +138,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     final style = widget.style ?? inheritedStyle;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: .stretch,
       children: [
         FTappable(
           style: style.tappableStyle,

@@ -376,6 +376,5 @@ abstract class FTimeField extends StatefulWidget {
 }
 
 abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with SingleTickerProviderStateMixin {
-  late FTimeFieldController _controller =
-      widget.controller ?? FTimeFieldController(vsync: this, initialTime: widget.initialTime);
+  late FTimeFieldController _controller = widget.controller ?? .new(vsync: this, initialTime: widget.initialTime);
 }

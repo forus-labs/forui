@@ -67,14 +67,14 @@ class Value extends FChangeNotifier {
   FPortalOverflow _overflow;
 
   Value({
-    Alignment childAnchor = Alignment.bottomLeft,
+    Alignment childAnchor = .bottomLeft,
     Size childSize = const Size(150, 150),
     Offset childOffset = const Offset(20, 30),
-    Alignment portalAnchor = Alignment.topRight,
+    Alignment portalAnchor = .topRight,
     Size portalSize = const Size(90, 90),
     double spacing = 4,
     bool diagonal = true,
-    FPortalOverflow overflow = FPortalOverflow.flip,
+    FPortalOverflow overflow = .flip,
   }) : _childAnchor = childAnchor,
        _childSize = childSize,
        _childOffset = childOffset,
@@ -148,9 +148,9 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(8),
+    padding: const .all(8),
     child: Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       children: [
         Expanded(
           child: FTabs(
@@ -176,14 +176,14 @@ class Settings extends StatelessWidget {
         const SizedBox(height: 10),
         FLabel(
           label: const Text('Spacing'),
-          axis: Axis.vertical,
+          axis: .vertical,
           child: Row(
             spacing: 12,
             children: [
               Expanded(
                 child: FTextField(
                   hint: 'Distance',
-                  keyboardType: TextInputType.number,
+                  keyboardType: .number,
                   inputFormatters: [_spacingFormatter],
                   initialText: value.spacing.toStringAsFixed(0),
                   onChange: (v) => value.spacing = double.tryParse(v) ?? value.spacing,
@@ -216,7 +216,7 @@ class _ChildSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListView(
-    padding: EdgeInsets.zero,
+    padding: .zero,
     shrinkWrap: true,
     children: [
       FSelect<Alignment>(
@@ -229,14 +229,14 @@ class _ChildSettings extends StatelessWidget {
       const SizedBox(height: 12),
       FLabel(
         label: const Text('Size'),
-        axis: Axis.vertical,
+        axis: .vertical,
         child: Row(
           spacing: 8,
           children: [
             Expanded(
               child: FTextField(
                 hint: 'W',
-                keyboardType: TextInputType.number,
+                keyboardType: .number,
                 inputFormatters: [_dimensionFormatter],
                 initialText: value.childSize.width.toStringAsFixed(0),
                 onChange: (v) =>
@@ -246,7 +246,7 @@ class _ChildSettings extends StatelessWidget {
             Expanded(
               child: FTextField(
                 hint: 'H',
-                keyboardType: TextInputType.number,
+                keyboardType: .number,
                 inputFormatters: [_dimensionFormatter],
                 initialText: value.childSize.height.toStringAsFixed(0),
                 onChange: (v) =>
@@ -259,14 +259,14 @@ class _ChildSettings extends StatelessWidget {
       const SizedBox(height: 12),
       FLabel(
         label: const Text('Position'),
-        axis: Axis.vertical,
+        axis: .vertical,
         child: Row(
           spacing: 8,
           children: [
             Expanded(
               child: FTextField(
                 hint: 'X',
-                keyboardType: TextInputType.number,
+                keyboardType: .number,
                 inputFormatters: [_offsetFormatter],
                 initialText: value.childOffset.dx.toStringAsFixed(0),
                 onChange: (v) =>
@@ -276,7 +276,7 @@ class _ChildSettings extends StatelessWidget {
             Expanded(
               child: FTextField(
                 hint: 'Y',
-                keyboardType: TextInputType.number,
+                keyboardType: .number,
                 inputFormatters: [_offsetFormatter],
                 initialText: value.childOffset.dy.toStringAsFixed(0),
                 onChange: (v) =>
@@ -297,7 +297,7 @@ class _PortalSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListView(
-    padding: EdgeInsets.zero,
+    padding: .zero,
     shrinkWrap: true,
     children: [
       FSelect<Alignment>(
@@ -310,14 +310,14 @@ class _PortalSettings extends StatelessWidget {
       const SizedBox(height: 12),
       FLabel(
         label: const Text('Size'),
-        axis: Axis.vertical,
+        axis: .vertical,
         child: Row(
           spacing: 8,
           children: [
             Expanded(
               child: FTextField(
                 hint: 'W',
-                keyboardType: TextInputType.number,
+                keyboardType: .number,
                 inputFormatters: [_dimensionFormatter],
                 initialText: value.portalSize.width.toStringAsFixed(0),
                 onChange: (v) =>
@@ -327,7 +327,7 @@ class _PortalSettings extends StatelessWidget {
             Expanded(
               child: FTextField(
                 hint: 'H',
-                keyboardType: TextInputType.number,
+                keyboardType: .number,
                 inputFormatters: [_dimensionFormatter],
                 initialText: value.portalSize.height.toStringAsFixed(0),
                 onChange: (v) =>

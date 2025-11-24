@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -24,9 +23,9 @@ T autoDispose<T>(T disposable) {
 }
 
 extension WidgetTesters on WidgetTester {
-  Future<TestGesture> createPointerGesture({PointerDeviceKind kind = PointerDeviceKind.mouse}) async {
+  Future<TestGesture> createPointerGesture({PointerDeviceKind kind = .mouse}) async {
     final gesture = await createGesture(kind: kind);
-    await gesture.addPointer(location: Offset.zero);
+    await gesture.addPointer(location: .zero);
     addTearDown(gesture.removePointer);
 
     return gesture;
@@ -36,8 +35,8 @@ extension WidgetTesters on WidgetTester {
 class TestScaffold extends StatelessWidget {
   static final blueScreen = () {
     const colors = FColors(
-      brightness: Brightness.light,
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      brightness: .light,
+      systemOverlayStyle: .dark,
       barrier: Color(0xFF03A9F4),
       background: Color(0xFF03A9F4),
       foreground: Color(0xFF03A9F4),
@@ -76,7 +75,7 @@ class TestScaffold extends StatelessWidget {
   TestScaffold({
     required this.child,
     this.textDirection,
-    this.alignment = Alignment.center,
+    this.alignment = .center,
     this.padded = true,
     FThemeData? theme,
     super.key,
@@ -93,7 +92,7 @@ class TestScaffold extends StatelessWidget {
     required this.child,
     this.locale,
     this.textDirection,
-    this.alignment = Alignment.center,
+    this.alignment = .center,
     this.padded = true,
     FThemeData? theme,
     super.key,
@@ -105,7 +104,7 @@ class TestScaffold extends StatelessWidget {
        },
        wrapped = true;
 
-  TestScaffold.blue({required this.child, this.alignment = Alignment.center, super.key})
+  TestScaffold.blue({required this.child, this.alignment = .center, super.key})
     : theme = FThemes.zinc.light,
       background = blueScreen.colors.background,
       locale = null,
@@ -126,7 +125,7 @@ class TestScaffold extends StatelessWidget {
           textDirection: textDirection,
           child: Container(
             color: background ?? theme.colors.background,
-            padding: padded ? const EdgeInsets.all(16) : null,
+            padding: padded ? const .all(16) : null,
             child: child!,
           ),
         ),
@@ -138,7 +137,7 @@ class TestScaffold extends StatelessWidget {
         textDirection: textDirection,
         child: Container(
           color: background ?? theme.colors.background,
-          padding: padded ? const EdgeInsets.all(16) : null,
+          padding: padded ? const .all(16) : null,
           child: Align(alignment: alignment, child: child),
         ),
       );

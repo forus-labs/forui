@@ -20,45 +20,45 @@ class PopoverPage extends Sample {
     @queryParam String overflow = 'flip',
     @queryParam super.theme,
   }) : axis = switch (axis) {
-         'horizontal' => Axis.horizontal,
-         _ => Axis.vertical,
+         'horizontal' => .horizontal,
+         _ => .vertical,
        },
        hideRegion = switch (hideRegion) {
-         'anywhere' => FPopoverHideRegion.anywhere,
-         'excludeChild' => FPopoverHideRegion.excludeChild,
-         _ => FPopoverHideRegion.none,
+         'anywhere' => .anywhere,
+         'excludeChild' => .excludeChild,
+         _ => .none,
        },
        overflow = switch (overflow) {
-         'flip' => FPortalOverflow.flip,
-         'slide' => FPortalOverflow.slide,
-         _ => FPortalOverflow.allow,
+         'flip' => .flip,
+         'slide' => .slide,
+         _ => .allow,
        },
        super(
          alignment: switch (alignment) {
-           'topCenter' => Alignment.topCenter,
-           'bottomCenter' => Alignment.bottomCenter,
-           _ => Alignment.center,
+           'topCenter' => .topCenter,
+           'bottomCenter' => .bottomCenter,
+           _ => .center,
          },
          maxHeight: 200,
        );
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [
       const SizedBox(height: 30),
       FPopover(
-        popoverAnchor: axis == Axis.horizontal ? Alignment.bottomLeft : Alignment.topCenter,
-        childAnchor: axis == Axis.horizontal ? Alignment.bottomRight : Alignment.bottomCenter,
+        popoverAnchor: axis == .horizontal ? .bottomLeft : .topCenter,
+        childAnchor: axis == .horizontal ? .bottomRight : .bottomCenter,
         hideRegion: hideRegion,
         overflow: overflow,
         popoverBuilder: (context, _) => Padding(
-          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(
             width: 288,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: .min,
+              crossAxisAlignment: .start,
               children: [
                 Text('Dimensions', style: context.theme.typography.base),
                 const SizedBox(height: 7),
@@ -66,7 +66,7 @@ class PopoverPage extends Sample {
                   'Set the dimensions for the layer.',
                   style: context.theme.typography.sm.copyWith(
                     color: context.theme.colors.mutedForeground,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: .w300,
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -93,7 +93,7 @@ class PopoverPage extends Sample {
         ),
         builder: (_, controller, _) => FButton(
           style: FButtonStyle.outline(),
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           onPress: controller.toggle,
           child: const Text('Open popover'),
         ),
@@ -108,13 +108,13 @@ class BlurredPopoverPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.end,
+    mainAxisAlignment: .center,
+    crossAxisAlignment: .end,
     children: [
       Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: .start,
         children: [
-          Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: FontWeight.bold)),
+          Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: .bold)),
           const SizedBox(height: 20),
           const FTextField(initialText: 'Header Component'),
           const SizedBox(height: 16),
@@ -128,19 +128,19 @@ class BlurredPopoverPage extends Sample {
             outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
             inner: ColorFilter.mode(
               Color.lerp(Colors.transparent, Colors.black.withValues(alpha: 0.2), animation)!,
-              BlendMode.srcOver,
+              .srcOver,
             ),
           ),
         ),
-        popoverAnchor: Alignment.topCenter,
-        childAnchor: Alignment.bottomCenter,
+        popoverAnchor: .topCenter,
+        childAnchor: .bottomCenter,
         popoverBuilder: (context, _) => Padding(
-          padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+          padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
           child: SizedBox(
             width: 288,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: .min,
+              crossAxisAlignment: .start,
               children: [
                 Text('Dimensions', style: context.theme.typography.base),
                 const SizedBox(height: 7),
@@ -148,7 +148,7 @@ class BlurredPopoverPage extends Sample {
                   'Set the dimensions for the layer.',
                   style: context.theme.typography.sm.copyWith(
                     color: context.theme.colors.mutedForeground,
-                    fontWeight: FontWeight.w300,
+                    fontWeight: .w300,
                   ),
                 ),
                 const SizedBox(height: 15),
@@ -175,7 +175,7 @@ class BlurredPopoverPage extends Sample {
         ),
         builder: (_, controller, _) => FButton(
           style: FButtonStyle.outline(),
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: .min,
           onPress: controller.toggle,
           child: const Text('Open popover'),
         ),

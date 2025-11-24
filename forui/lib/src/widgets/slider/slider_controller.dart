@@ -43,7 +43,7 @@ abstract class FSliderController extends FChangeNotifier {
   /// Creates a [FSliderController] for selecting a single value.
   FSliderController({
     required FSliderSelection selection,
-    this.allowedInteraction = FSliderInteraction.tapAndSlideThumb,
+    this.allowedInteraction = .tapAndSlideThumb,
     bool tooltips = true,
     bool minExtendable = false,
   }) : tooltips = FSliderTooltipsController(enabled: tooltips),
@@ -53,7 +53,7 @@ abstract class FSliderController extends FChangeNotifier {
   /// Creates a [FSliderController] for selecting a range.
   FSliderController.range({required FSliderSelection selection, bool tooltips = true})
     : tooltips = FSliderTooltipsController(enabled: tooltips),
-      allowedInteraction = FSliderInteraction.tapAndSlideThumb,
+      allowedInteraction = .tapAndSlideThumb,
       extendable = (min: true, max: true),
       _initialSelection = selection;
 
@@ -73,7 +73,7 @@ abstract class FSliderController extends FChangeNotifier {
   ///
   /// The delta is relative to the origin defined by [FSlider.layout].
   void slide(double offset, {required bool min}) {
-    if (allowedInteraction == FSliderInteraction.tap) {
+    if (allowedInteraction == .tap) {
       return;
     }
 
@@ -93,7 +93,7 @@ abstract class FSliderController extends FChangeNotifier {
   ///
   /// The offset is relative to the origin defined by [FSlider.layout].
   bool? tap(double offset) {
-    if (allowedInteraction == FSliderInteraction.slide || allowedInteraction == FSliderInteraction.slideThumb) {
+    if (allowedInteraction == .slide || allowedInteraction == .slideThumb) {
       return null;
     }
 
@@ -179,10 +179,10 @@ class FContinuousSliderController extends FSliderController {
 
   @override
   void reset() {
-    if (_selection case final selection?) {
-      this.selection = ContinuousSelection(
+    if (_selection case FSliderSelection(:final rawExtent)) {
+      selection = ContinuousSelection(
         step: stepPercentage,
-        mainAxisExtent: selection.rawExtent.total,
+        mainAxisExtent: rawExtent.total,
         extent: _initialSelection.extent,
         offset: _initialSelection.offset,
       );
@@ -223,10 +223,10 @@ class FDiscreteSliderController extends FSliderController {
 
   @override
   void reset() {
-    if (_selection case final DiscreteSelection discrete?) {
+    if (_selection case DiscreteSelection(:final ticks, :final rawExtent)) {
       selection = DiscreteSelection(
-        ticks: discrete.ticks,
-        mainAxisExtent: discrete.rawExtent.total,
+        ticks: ticks,
+        mainAxisExtent: rawExtent.total,
         extent: _initialSelection.extent,
         offset: _initialSelection.offset,
       );

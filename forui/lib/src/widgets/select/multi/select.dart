@@ -38,7 +38,7 @@ typedef FMultiSelectTagBuilder<T> =
 abstract class FMultiSelect<T> extends StatelessWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
   static Widget defaultIconBuilder(BuildContext _, FMultiSelectStyle style, Set<WidgetState> states) => Padding(
-    padding: const EdgeInsetsDirectional.only(start: 4),
+    padding: const .directional(start: 4),
     child: IconTheme(data: style.fieldStyle.iconStyle, child: const Icon(FIcons.chevronDown)),
   );
 
@@ -61,7 +61,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   static Widget defaultContentEmptyBuilder(BuildContext context, FMultiSelectStyle style) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+      padding: const .symmetric(horizontal: 8, vertical: 14),
       child: Text(localizations.selectNoResults, style: style.emptyTextStyle, textAlign: TextAlign.center),
     );
   }
@@ -222,7 +222,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
     VoidCallback? onReset,
-    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
+    AutovalidateMode autovalidateMode = .onUnfocus,
     String? forceErrorText,
     String? Function(Set<T> values) validator = _defaultValidator,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -237,29 +237,29 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       Widget label,
     )?
     tagBuilder,
-    TextAlign textAlign = TextAlign.start,
+    TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
     AlignmentGeometry anchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const FPortalSpacing(4),
-    FPortalOverflow overflow = FPortalOverflow.flip,
+    FPortalSpacing spacing = const .spacing(4),
+    FPortalOverflow overflow = .flip,
     Offset offset = Offset.zero,
-    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
+    FPopoverHideRegion hideRegion = .excludeChild,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder =
         FMultiSelect.defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
-    FItemDivider contentDivider = FItemDivider.none,
+    FItemDivider contentDivider = .none,
     int min = 0,
     int? max,
     Set<T>? initialValue,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
-    return FMultiSelect<T>.rich(
+    return .rich(
       controller: controller,
       style: style,
       autofocus: autofocus,
@@ -300,7 +300,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       max: max,
       initialValue: initialValue,
       key: key,
-      children: [for (final MapEntry(:key, :value) in items.entries) FSelectItem(title: Text(key), value: value)],
+      children: [for (final MapEntry(:key, :value) in items.entries) .item(title: Text(key), value: value)],
     );
   }
 
@@ -383,7 +383,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
     VoidCallback? onReset,
-    AutovalidateMode autovalidateMode = AutovalidateMode.onUnfocus,
+    AutovalidateMode autovalidateMode = .onUnfocus,
     String? forceErrorText,
     String? Function(Set<T> values) validator = _defaultValidator,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -391,28 +391,28 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool keepHint = true,
     int Function(T, T)? sort,
     FMultiSelectTagBuilder<T>? tagBuilder,
-    TextAlign textAlign = TextAlign.start,
+    TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
     AlignmentGeometry anchor = AlignmentDirectional.topStart,
     AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
     FPortalConstraints popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    FPortalSpacing spacing = const FPortalSpacing(4),
-    FPortalOverflow overflow = FPortalOverflow.flip,
-    Offset offset = Offset.zero,
-    FPopoverHideRegion hideRegion = FPopoverHideRegion.excludeChild,
+    FPortalSpacing spacing = const .spacing(4),
+    FPortalOverflow overflow = .flip,
+    Offset offset = .zero,
+    FPopoverHideRegion hideRegion = .excludeChild,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
-    FItemDivider contentDivider = FItemDivider.none,
+    FItemDivider contentDivider = .none,
     int min = 0,
     int? max,
     Set<T>? initialValue,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
-    return FMultiSelect<T>.searchBuilder(
+    return .searchBuilder(
       format: (value) => Text(inverse[value] ?? ''),
       filter:
           filter ??
@@ -421,7 +421,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
               .map((entry) => entry.value)
               .toList(),
       contentBuilder: (context, _, values) => [
-        for (final value in values) FSelectItem<T>(title: Text(inverse[value]!), value: value),
+        for (final value in values) .item<T>(title: Text(inverse[value]!), value: value),
       ],
       searchFieldProperties: searchFieldProperties,
       contentLoadingBuilder: contentLoadingBuilder,
@@ -539,28 +539,28 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.onChange,
     this.onSaved,
     this.onReset,
-    this.autovalidateMode = AutovalidateMode.onUnfocus,
+    this.autovalidateMode = .onUnfocus,
     this.forceErrorText,
     this.validator = _defaultValidator,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.hint,
     this.keepHint = true,
     this.sort,
-    this.textAlign = TextAlign.start,
+    this.textAlign = .start,
     this.textDirection,
     this.clearable = false,
     this.anchor = AlignmentDirectional.topStart,
     this.fieldAnchor = AlignmentDirectional.bottomStart,
     this.popoverConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
-    this.spacing = const FPortalSpacing(4),
-    this.overflow = FPortalOverflow.flip,
-    this.offset = Offset.zero,
-    this.hideRegion = FPopoverHideRegion.excludeChild,
+    this.spacing = const .spacing(4),
+    this.overflow = .flip,
+    this.offset = .zero,
+    this.hideRegion = .excludeChild,
     this.contentEmptyBuilder = FMultiSelect.defaultContentEmptyBuilder,
     this.contentScrollController,
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
-    this.contentDivider = FItemDivider.none,
+    this.contentDivider = .none,
     this.min = 0,
     this.max,
     Widget Function(
@@ -868,11 +868,11 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   /// Creates a [FMultiSelectStyle] that inherits its properties.
   FMultiSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        fieldStyle: FMultiSelectFieldStyle.inherit(colors: colors, typography: typography, style: style),
-        tagStyle: FMultiSelectTagStyle.inherit(colors: colors, typography: typography, style: style),
-        popoverStyle: FPopoverStyle.inherit(colors: colors, style: style),
-        searchStyle: FSelectSearchStyle.inherit(colors: colors, typography: typography, style: style),
-        contentStyle: FSelectContentStyle.inherit(colors: colors, typography: typography, style: style),
+        fieldStyle: .inherit(colors: colors, typography: typography, style: style),
+        tagStyle: .inherit(colors: colors, typography: typography, style: style),
+        popoverStyle: .inherit(colors: colors, style: style),
+        searchStyle: .inherit(colors: colors, typography: typography, style: style),
+        contentStyle: .inherit(colors: colors, typography: typography, style: style),
         emptyTextStyle: typography.sm,
       );
 }

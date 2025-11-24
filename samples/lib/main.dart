@@ -28,7 +28,7 @@ class ForuiSamples extends StatelessWidget {
 @RoutePage()
 class EmptyPage extends Sample {
   @override
-  Widget sample(BuildContext context) => const Placeholder();
+  Widget sample(BuildContext context) => const SizedBox();
 }
 
 @AutoRouterConfig()
@@ -87,7 +87,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/item-group/default', page: ItemGroupRoute.page),
     AutoRoute(path: '/item-group/scrollable', page: ScrollableItemGroupRoute.page),
     AutoRoute(path: '/item-group/lazy', page: LazyItemGroupRoute.page),
-    AutoRoute(path: '/item-group/merge', page: MergeItemGroup.page),
+    AutoRoute(path: '/item-group/merge', page: MergeItemGroupRoute.page),
     AutoRoute(path: '/label/vertical', page: VerticalLabelRoute.page),
     AutoRoute(path: '/label/horizontal', page: HorizontalLabelRoute.page),
     AutoRoute(path: '/line-calendar/default', page: LineCalendarRoute.page),
@@ -127,8 +127,6 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/resizable/default', page: ResizableRoute.page),
     AutoRoute(path: '/resizable/no-cascading', page: NoCascadingResizableRoute.page),
     AutoRoute(path: '/resizable/horizontal', page: HorizontalResizableRoute.page),
-    AutoRoute(path: '/resizable/no-thumb', page: NoThumbResizableRoute.page),
-    AutoRoute(path: '/resizable/no-divider', page: NoDividerResizableRoute.page),
     AutoRoute(path: '/scaffold/default', page: ScaffoldRoute.page),
     AutoRoute(path: '/select/default', page: SelectRoute.page),
     AutoRoute(path: '/select/detailed', page: DetailedSelectRoute.page),

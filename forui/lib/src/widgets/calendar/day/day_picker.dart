@@ -105,7 +105,7 @@ class _DayPickerState extends State<DayPicker> {
   Widget build(BuildContext context) => SizedBox(
     width: DateTime.daysPerWeek * widget.style.tileSize,
     child: GridView.custom(
-      padding: EdgeInsets.zero,
+      padding: .zero,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: _GridDelegate(widget.style.tileSize),
@@ -227,10 +227,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
   factory FCalendarDayPickerStyle.inherit({required FColors colors, required FTypography typography}) {
-    final mutedTextStyle = typography.base.copyWith(
-      color: colors.disable(colors.mutedForeground),
-      fontWeight: FontWeight.w500,
-    );
+    final mutedTextStyle = typography.base.copyWith(color: colors.disable(colors.mutedForeground), fontWeight: .w500);
 
     final background = {
       WidgetState.disabled & WidgetState.selected: colors.primaryForeground,
@@ -243,7 +240,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       WidgetState.focused: colors.foreground,
     };
 
-    return FCalendarDayPickerStyle(
+    return .new(
       headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
       current: FCalendarEntryStyle(
         backgroundColor: FWidgetStateMap({
@@ -255,10 +252,10 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         borderColor: FWidgetStateMap(border),
         textStyle: FWidgetStateMap({
           WidgetState.disabled: mutedTextStyle,
-          WidgetState.selected: typography.base.copyWith(color: colors.background, fontWeight: FontWeight.w500),
-          WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
+          WidgetState.selected: typography.base.copyWith(color: colors.background, fontWeight: .w500),
+          WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
         }),
-        radius: const Radius.circular(4),
+        radius: const .circular(4),
       ),
       enclosing: FCalendarEntryStyle(
         backgroundColor: FWidgetStateMap({
@@ -269,7 +266,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         }),
         borderColor: FWidgetStateMap(border),
         textStyle: FWidgetStateMap.all(mutedTextStyle),
-        radius: const Radius.circular(4),
+        radius: const .circular(4),
       ),
     );
   }

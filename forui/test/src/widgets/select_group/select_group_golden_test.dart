@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  group('FCheckbox', () {
+  group('checkbox', () {
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
@@ -16,8 +16,8 @@ void main() {
             description: const Text('Select Group Description'),
             controller: autoDispose(FMultiValueNotifier(value: {1})),
             children: [
-              FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
-              FRadio.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
+              .checkbox(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
+              .radio(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
             ],
           ),
         ),
@@ -36,9 +36,9 @@ void main() {
               description: const Text('Select Group Description'),
               controller: autoDispose(FMultiValueNotifier(value: {1})),
               children: [
-                FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
-                FCheckbox.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
-                FCheckbox.grouped(value: 3, label: const Text('Checkbox 3'), semanticsLabel: 'Checkbox 3'),
+                .checkbox(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
+                .checkbox(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
+                .checkbox(value: 3, label: const Text('Checkbox 3'), semanticsLabel: 'Checkbox 3'),
               ],
             ),
           ),
@@ -57,9 +57,9 @@ void main() {
               forceErrorText: 'Some error message.',
               controller: autoDispose(FMultiValueNotifier(value: {1})),
               children: [
-                FCheckbox.grouped(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
-                FCheckbox.grouped(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
-                FCheckbox.grouped(value: 3, label: const Text('Checkbox 3'), semanticsLabel: 'Checkbox 3'),
+                .checkbox(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
+                .checkbox(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
+                .checkbox(value: 3, label: const Text('Checkbox 3'), semanticsLabel: 'Checkbox 3'),
               ],
             ),
           ),
@@ -73,7 +73,7 @@ void main() {
     }
   });
 
-  group('FRadio', () {
+  group('radio', () {
     for (final theme in TestScaffold.themes) {
       testWidgets('${theme.name} with radio', (tester) async {
         await tester.pumpWidget(
@@ -84,9 +84,9 @@ void main() {
               description: const Text('Select Group Description'),
               controller: autoDispose(FMultiValueNotifier.radio(1)),
               children: [
-                FRadio.grouped(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
-                FRadio.grouped(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
-                FRadio.grouped(value: 3, label: const Text('Radio 3'), semanticsLabel: 'Radio 3'),
+                .radio(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
+                .radio(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
+                .radio(value: 3, label: const Text('Radio 3'), semanticsLabel: 'Radio 3'),
               ],
             ),
           ),
@@ -105,9 +105,9 @@ void main() {
               forceErrorText: 'Some error message.',
               controller: autoDispose(FMultiValueNotifier.radio(1)),
               children: [
-                FRadio.grouped(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
-                FRadio.grouped(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
-                FRadio.grouped(value: 3, label: const Text('Radio 3'), semanticsLabel: 'Radio 3'),
+                .radio(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
+                .radio(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
+                .radio(value: 3, label: const Text('Radio 3'), semanticsLabel: 'Radio 3'),
               ],
             ),
           ),

@@ -11,8 +11,8 @@ class PortalPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FPortal(
-    spacing: const FPortalSpacing(8),
-    viewInsets: const EdgeInsets.all(5),
+    spacing: const .spacing(8),
+    viewInsets: const .all(5),
     portalBuilder: (context, _) => Container(
       decoration: BoxDecoration(
         color: context.theme.colors.background,
@@ -23,8 +23,8 @@ class PortalPage extends Sample {
       child: SizedBox(
         width: 288,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
           children: [
             Text('Dimensions', style: context.theme.typography.base),
             const SizedBox(height: 7),

@@ -7,23 +7,20 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class VerticalLabelPage extends Sample {
-  final String state;
+  final Set<WidgetState> states;
 
-  VerticalLabelPage({@queryParam super.theme, @queryParam this.state = 'enabled', super.maxWidth = 320});
+  VerticalLabelPage({@queryParam super.theme, @queryParam bool enabled = true, super.maxWidth = 320})
+    : states = enabled ? {} : {WidgetState.disabled};
 
   @override
   Widget sample(BuildContext context) => FLabel(
-    axis: Axis.vertical,
+    axis: .vertical,
     label: const Text('Email'),
     description: const Text('Enter your email address.'),
     error: const Text('Please enter a valid email address.'),
-    states: switch (state) {
-      'disabled' => {WidgetState.disabled},
-      'error' => {WidgetState.error},
-      _ => {},
-    },
+    states: states,
     child: const DecoratedBox(
-      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+      decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
       child: SizedBox(width: 250, height: 30),
     ),
   );
@@ -31,23 +28,20 @@ class VerticalLabelPage extends Sample {
 
 @RoutePage()
 class HorizontalLabelPage extends Sample {
-  final String state;
+  final Set<WidgetState> states;
 
-  HorizontalLabelPage({@queryParam super.theme, @queryParam this.state = 'enabled', super.maxWidth = 320});
+  HorizontalLabelPage({@queryParam super.theme, @queryParam bool enabled = true, super.maxWidth = 320})
+    : states = enabled ? {} : {WidgetState.disabled};
 
   @override
   Widget sample(BuildContext context) => FLabel(
-    axis: Axis.horizontal,
+    axis: .horizontal,
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),
     error: const Text('Please accept the terms.'),
-    states: switch (state) {
-      'disabled' => {WidgetState.disabled},
-      'error' => {WidgetState.error},
-      _ => {},
-    },
+    states: states,
     child: const DecoratedBox(
-      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
+      decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
       child: SizedBox(width: 16, height: 16),
     ),
   );

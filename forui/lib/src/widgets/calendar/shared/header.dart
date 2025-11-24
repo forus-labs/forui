@@ -48,24 +48,24 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
     super.initState();
     widget.type.addListener(_animate);
     _controller = AnimationController(vsync: this, duration: widget.style.animationDuration);
-    _controller.value = widget.type.value == FCalendarPickerType.day ? 0.0 : 1.0;
+    _controller.value = widget.type.value == .day ? 0.0 : 1.0;
   }
 
   @override
   Widget build(BuildContext context) => FTappable(
     focusedOutlineStyle: widget.style.focusedOutlineStyle,
     onPress: () => widget.type.value = switch (widget.type.value) {
-      FCalendarPickerType.day => FCalendarPickerType.yearMonth,
-      FCalendarPickerType.yearMonth => FCalendarPickerType.day,
+      .day => .yearMonth,
+      .yearMonth => .day,
     },
     excludeSemantics: true,
     builder: (_, states, _) => SizedBox(
       height: Header.height,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const .symmetric(horizontal: 15),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: .min,
+          mainAxisAlignment: .center,
           children: [
             Text(
               (FLocalizations.of(context) ?? FDefaultLocalizations()).yearMonth(widget.month.toNative()),
@@ -74,10 +74,10 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
             RotationTransition(
               turns: Tween(
                 begin: 0.0,
-                end: Directionality.maybeOf(context) == TextDirection.rtl ? -0.25 : 0.25,
+                end: Directionality.maybeOf(context) == .rtl ? -0.25 : 0.25,
               ).animate(_controller),
               child: Padding(
-                padding: const EdgeInsets.all(2.0),
+                padding: const .all(2.0),
                 child: IconTheme(
                   data: widget.style.buttonStyle.iconContentStyle.iconStyle
                       .resolve(states)
@@ -109,9 +109,9 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   void _animate() {
     // we check the picker type to prevent de-syncs
     switch ((widget.type.value, _controller.isCompleted)) {
-      case (FCalendarPickerType.yearMonth, false):
+      case (.yearMonth, false):
         _controller.forward();
-      case (FCalendarPickerType.day, true):
+      case (.day, true):
         _controller.reverse();
 
       case _:
@@ -129,20 +129,20 @@ class Navigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => Padding(
-    padding: const EdgeInsets.only(bottom: 5),
+    padding: const .only(bottom: 5),
     child: SizedBox(
       height: Header.height,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: .spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 7),
+            padding: const .directional(start: 7),
             child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
           ),
 
           const Expanded(child: SizedBox()),
           Padding(
-            padding: const EdgeInsetsDirectional.only(end: 7),
+            padding: const .directional(end: 7),
             child: FButton.icon(style: style.buttonStyle, onPress: onNext, child: const Icon(FIcons.chevronRight)),
           ),
         ],
@@ -193,10 +193,10 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required FStyle style,
   }) {
     final outline = FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline;
-    return FCalendarHeaderStyle(
+    return .new(
       focusedOutlineStyle: style.focusedOutlineStyle,
       buttonStyle: outline.copyWith(
-        decoration: outline.decoration.map((d) => d.copyWith(borderRadius: BorderRadius.circular(4))),
+        decoration: outline.decoration.map((d) => d.copyWith(borderRadius: .circular(4))),
         iconContentStyle: FButtonIconContentStyle(
           iconStyle: FWidgetStateMap({
             WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
@@ -204,7 +204,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
           }),
         ),
       ),
-      headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+      headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: .w600),
     );
   }
 }

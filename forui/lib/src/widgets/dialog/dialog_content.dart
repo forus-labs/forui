@@ -34,12 +34,12 @@ sealed class Content extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: style.padding,
     child: Column(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: .min,
       crossAxisAlignment: alignment,
       children: [
         if (title case final title?)
           Padding(
-            padding: const EdgeInsets.only(bottom: 4),
+            padding: const .only(bottom: 4),
             child: Semantics(
               container: true,
               child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
@@ -48,7 +48,7 @@ sealed class Content extends StatelessWidget {
         if (body case final body?)
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: const .only(bottom: 4),
               child: Semantics(
                 container: true,
                 child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
@@ -83,11 +83,11 @@ class HorizontalContent extends Content {
     required super.body,
     required super.actions,
     super.key,
-  }) : super(alignment: CrossAxisAlignment.start, titleTextAlign: TextAlign.start, bodyTextAlign: TextAlign.start);
+  }) : super(alignment: .start, titleTextAlign: .start, bodyTextAlign: .start);
 
   @override
   Widget _actions(BuildContext context) =>
-      Row(mainAxisAlignment: MainAxisAlignment.end, spacing: style.actionSpacing, children: actions);
+      Row(mainAxisAlignment: .end, spacing: style.actionSpacing, children: actions);
 }
 
 @internal
@@ -98,11 +98,10 @@ class VerticalContent extends Content {
     required super.body,
     required super.actions,
     super.key,
-  }) : super(alignment: CrossAxisAlignment.center, titleTextAlign: TextAlign.center, bodyTextAlign: TextAlign.center);
+  }) : super(alignment: .center, titleTextAlign: .center, bodyTextAlign: .center);
 
   @override
-  Widget _actions(BuildContext context) =>
-      Column(mainAxisSize: MainAxisSize.min, spacing: style.actionSpacing, children: actions);
+  Widget _actions(BuildContext context) => Column(mainAxisSize: .min, spacing: style.actionSpacing, children: actions);
 }
 
 /// [FDialog] content's style.

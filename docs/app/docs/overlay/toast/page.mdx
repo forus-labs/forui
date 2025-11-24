@@ -269,7 +269,36 @@ showRawFToast(
 
 ### Swipe to Dismiss
 
+#### Default
+
 By default, toasts are dismissible by horizontally swiping towards the closest edge of the screen.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Widget name='toast' variant='swipe' query={{down: false}} height={300}/>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```dart {10} copy
+    class ToastPage extends StatelessWidget {
+      @override
+      Widget build(BuildContext context) => FScaffold(
+        child: Builder(
+          builder: (context) => Center(
+            child: FButton(
+              mainAxisSize: MainAxisSize.min,
+              onPress: () => showFToast(
+                context: context,
+                title: const Text('Event has been created'),
+              ),
+              child: const Text('Show Toast'),
+            ),
+          ),
+        ),
+      );
+    }
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 #### Down
 

@@ -93,7 +93,7 @@ void main() {
                 child: Text.rich(
                   WidgetSpan(
                     child: Stack(
-                      children: [Container(height: 200, width: double.infinity, color: Colors.red)],
+                      children: [Container(height: 200, width: .infinity, color: Colors.red)],
                     ),
                   ),
                 ),

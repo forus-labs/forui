@@ -88,7 +88,7 @@ class FCalendar extends StatefulWidget {
     this.onMonthChange,
     this.onPress,
     this.onLongPress,
-    FCalendarPickerType initialType = FCalendarPickerType.day,
+    FCalendarPickerType initialType = .day,
     DateTime? start,
     DateTime? end,
     DateTime? today,
@@ -96,9 +96,9 @@ class FCalendar extends StatefulWidget {
     super.key,
   }) : start = start ?? DateTime(1900),
        end = end ?? DateTime(2100),
-       today = today ?? DateTime.now(),
+       today = today ?? .now(),
        _initialType = initialType,
-       _initialMonth = (initialMonth ?? today ?? DateTime.now()).toLocalDate().truncate(to: DateUnit.months) {
+       _initialMonth = (initialMonth ?? today ?? .now()).toLocalDate().truncate(to: .months) {
     assert(this.start.toLocalDate() < this.end.toLocalDate(), 'start ($start) must be < end ($end)');
   }
 
@@ -150,7 +150,7 @@ class _State extends State<FCalendar> {
           height: (DayPicker.maxRows * style.dayPickerStyle.tileSize) + Header.height + 5,
           width: DateTime.daysPerWeek * style.dayPickerStyle.tileSize,
           child: Stack(
-            alignment: Alignment.topCenter,
+            alignment: .topCenter,
             children: [
               ValueListenableBuilder(
                 valueListenable: _month,
@@ -229,7 +229,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     required this.dayPickerStyle,
     required this.yearMonthPickerStyle,
     required this.decoration,
-    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+    this.padding = const .symmetric(horizontal: 12, vertical: 16),
     this.pageAnimationDuration = const Duration(milliseconds: 200),
   });
 
@@ -250,15 +250,15 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
           textStyle: FWidgetStateMap({
             WidgetState.disabled: typography.base.copyWith(
               color: colors.disable(colors.mutedForeground),
-              fontWeight: FontWeight.w500,
+              fontWeight: .w500,
             ),
-            WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: FontWeight.w500),
+            WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
           }),
-          radius: const Radius.circular(8),
+          radius: const .circular(8),
         ),
         decoration: BoxDecoration(
           borderRadius: style.borderRadius,
-          border: Border.all(color: colors.border),
+          border: .all(color: colors.border),
           color: colors.background,
         ),
       );

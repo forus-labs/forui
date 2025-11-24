@@ -92,7 +92,7 @@ class FHeaderAction extends StatelessWidget {
     Map<ShortcutActivator, Intent>? shortcuts,
     Map<Type, Action<Intent>>? actions,
     Key? key,
-  }) => FHeaderAction(
+  }) => .new(
     icon: const Icon(FIcons.arrowLeft),
     onPress: onPress,
     style: style,
@@ -125,7 +125,7 @@ class FHeaderAction extends StatelessWidget {
     Map<ShortcutActivator, Intent>? shortcuts,
     Map<Type, Action<Intent>>? actions,
     Key? key,
-  }) => FHeaderAction(
+  }) => .new(
     icon: const Icon(FIcons.x),
     onPress: onPress,
     style: style,

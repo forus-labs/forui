@@ -46,7 +46,7 @@ class Item extends StatelessWidget {
                 child: Container(
                   height: 4,
                   width: 4,
-                  decoration: BoxDecoration(color: style.todayIndicatorColor.resolve(states), shape: BoxShape.circle),
+                  decoration: BoxDecoration(color: style.todayIndicatorColor.resolve(states), shape: .circle),
                 ),
               ),
           ],
@@ -81,10 +81,10 @@ class ItemContent extends StatelessWidget {
     return DecoratedBox(
       decoration: style.decoration.resolve(states),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: style.contentEdgeSpacing),
+        padding: .symmetric(vertical: style.contentEdgeSpacing),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: .center,
+          mainAxisSize: .min,
           spacing: style.contentSpacing,
           children: [
             DefaultTextStyle.merge(

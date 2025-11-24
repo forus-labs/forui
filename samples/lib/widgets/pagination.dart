@@ -16,13 +16,7 @@ class PaginationPage extends StatefulSample {
 }
 
 class _PaginationPageState extends StatefulSampleState<PaginationPage> {
-  late FPaginationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = _updateController(widget.controller);
-  }
+  late FPaginationController _controller = _updateController(widget.controller);
 
   @override
   void didUpdateWidget(covariant PaginationPage old) {
@@ -33,20 +27,21 @@ class _PaginationPageState extends StatefulSampleState<PaginationPage> {
     }
   }
 
-  FPaginationController _updateController(String controller) {
-    switch (controller) {
-      case 'siblings':
-        return FPaginationController(pages: 20, siblings: 2, initialPage: 9);
-      case 'hide-edges':
-        return FPaginationController(pages: 8, showEdges: false);
-      default:
-        return FPaginationController(pages: 10);
-    }
+  FPaginationController _updateController(String controller) => switch (controller) {
+    'siblings' => FPaginationController(pages: 20, siblings: 2, initialPage: 9),
+    'hide-edges' => FPaginationController(pages: 8, showEdges: false),
+    _ => FPaginationController(pages: 10),
+  };
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: .center,
     children: [FPagination(controller: _controller)],
   );
 }
@@ -60,19 +55,19 @@ class PaginationCustomIconPage extends StatefulSample {
 }
 
 class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCustomIconPage> {
-  late final FPaginationController _controller;
+  late final _controller = FPaginationController(pages: 10, initialPage: 4);
 
   @override
-  void initState() {
-    super.initState();
-    _controller = FPaginationController(pages: 10, initialPage: 4);
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget sample(BuildContext context) {
     final style = context.theme.paginationStyle;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: .center,
       children: [
         FPagination(
           controller: _controller,
@@ -102,12 +97,6 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
       ],
     );
   }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -119,56 +108,60 @@ class PaginationWithViewPage extends StatefulSample {
 }
 
 class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithViewPage> {
-  int pages = 10;
-  late PageController controller = PageController();
-  late FPaginationController paginationController = FPaginationController(pages: pages);
+  final _controller = PageController();
+  final _paginationController = FPaginationController(pages: 10);
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final value = PageStorage.maybeOf(context)?.readState(context) ?? 0;
-    paginationController.page = value;
+    _paginationController.page = PageStorage.maybeOf(context)?.readState(context) ?? 0;
   }
 
   void _handlePageChange(int page) {
-    final old = controller.page?.round();
+    final old = _controller.page?.round();
     if (old case final old when old != page) {
       if (page == old! + 1 || page == old - 1) {
         setState(() {
-          controller.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+          _controller.animateToPage(page, duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
         });
       } else {
         setState(() {
-          controller.jumpToPage(page);
+          _controller.jumpToPage(page);
         });
       }
     }
   }
 
   @override
+  void dispose() {
+    _paginationController.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget sample(BuildContext context) {
     final colors = context.theme.colors;
     return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: .min,
+      mainAxisAlignment: .center,
       spacing: 10,
       children: [
         SizedBox(
           height: 300,
           width: 300,
-          child: NotificationListener(
+          child: NotificationListener<ScrollEndNotification>(
             onNotification: (notification) {
-              if (notification is ScrollEndNotification) {
-                if (controller.hasClients) {
-                  paginationController.page = controller.page!.round();
-                  return true;
-                }
+              if (_controller.hasClients) {
+                _paginationController.page = _controller.page!.round();
+                return true;
               }
+
               return false;
             },
             child: PageView.builder(
-              itemCount: pages,
-              controller: controller,
+              itemCount: 10,
+              controller: _controller,
               itemBuilder: (context, index) => ColoredBox(
                 color: index.isEven ? colors.hover(colors.primary) : colors.mutedForeground,
                 child: Center(
@@ -181,15 +174,8 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
             ),
           ),
         ),
-        FPagination(controller: paginationController, onChange: _handlePageChange),
+        FPagination(controller: _paginationController, onChange: _handlePageChange),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    paginationController.dispose();
-    controller.dispose();
-    super.dispose();
   }
 }

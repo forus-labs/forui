@@ -26,7 +26,6 @@ jobs:
       - uses: subosito/flutter-action@v2.21.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
-          cache: true
       - working-directory: forui
         run: |
           flutter pub get

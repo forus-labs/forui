@@ -27,8 +27,8 @@ void main() {
                       context: context,
                       side: side,
                       builder: (context, controller) => Container(
-                        height: double.infinity,
-                        width: double.infinity,
+                        height: .infinity,
+                        width: .infinity,
                         decoration: BoxDecoration(
                           border: Border.all(color: context.theme.colors.primary),
                           color: context.theme.colors.background,
@@ -64,8 +64,8 @@ void main() {
                       side: side,
                       constraints: const BoxConstraints(maxHeight: 200, maxWidth: 200),
                       builder: (context, controller) => Container(
-                        height: double.infinity,
-                        width: double.infinity,
+                        height: .infinity,
+                        width: .infinity,
                         decoration: BoxDecoration(
                           border: Border.all(color: context.theme.colors.primary),
                           color: context.theme.colors.background,
@@ -101,8 +101,8 @@ void main() {
                       side: side,
                       mainAxisMaxRatio: null,
                       builder: (context, controller) => Container(
-                        height: double.infinity,
-                        width: double.infinity,
+                        height: .infinity,
+                        width: .infinity,
                         decoration: BoxDecoration(
                           border: Border.all(color: context.theme.colors.primary),
                           color: context.theme.colors.background,

@@ -32,7 +32,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonStyle(:contentStyle), :states) = FButtonData.of(context);
+    final FButtonData(style: FButtonStyle(:contentStyle), :states) = .of(context);
     return Padding(
       padding: contentStyle.padding,
       child: DefaultTextStyle.merge(
@@ -74,7 +74,7 @@ class IconContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(:style, :states) = FButtonData.of(context);
+    final FButtonData(:style, :states) = .of(context);
 
     return Padding(
       padding: style.iconContentStyle.padding,
@@ -116,7 +116,7 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
     required this.textStyle,
     required this.iconStyle,
     required this.circularProgressStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12.5),
+    this.padding = const .symmetric(horizontal: 16, vertical: 12.5),
     this.spacing = 10,
   });
 
@@ -124,8 +124,8 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
     : this(
         textStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.base.copyWith(color: disabled, fontWeight: FontWeight.w500, height: 1),
-          WidgetState.any: typography.base.copyWith(color: enabled, fontWeight: FontWeight.w500, height: 1),
+          WidgetState.disabled: typography.base.copyWith(color: disabled, fontWeight: .w500, height: 1),
+          WidgetState.any: typography.base.copyWith(color: enabled, fontWeight: .w500, height: 1),
         }),
         iconStyle: FWidgetStateMap({
           WidgetState.disabled: IconThemeData(color: disabled, size: 20),
@@ -151,7 +151,7 @@ class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunc
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({required this.iconStyle, this.padding = const EdgeInsets.all(7.5)});
+  const FButtonIconContentStyle({required this.iconStyle, this.padding = const .all(7.5)});
 
   /// Creates a [FButtonIconContentStyle] that inherits its properties.
   FButtonIconContentStyle.inherit({required Color enabled, required Color disabled})

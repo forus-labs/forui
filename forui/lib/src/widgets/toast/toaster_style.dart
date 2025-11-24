@@ -81,8 +81,8 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   const FToasterStyle({
     required this.toastStyle,
     this.max = 3,
-    this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-    this.expandBehavior = FToasterExpandBehavior.hoverOrPress,
+    this.padding = const .symmetric(horizontal: 20, vertical: 15),
+    this.expandBehavior = .hoverOrPress,
     this.expandHoverEnterDuration = const Duration(milliseconds: 200),
     this.expandHoverExitDuration = const Duration(milliseconds: 200),
     this.expandStartSpacing = 0,
@@ -90,17 +90,19 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
     this.collapsedProtrusion = 12,
     this.collapsedScale = 0.9,
     this.motion = const FToasterMotion(),
-    this.toastAlignment = FToastAlignment.bottomEnd,
+    this.toastAlignment = .bottomEnd,
   });
 
   /// Creates a [FToasterStyle] that inherits its properties.
   FToasterStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        toastStyle: FToastStyle.inherit(colors: colors, typography: typography, style: style),
+        toastStyle: .inherit(colors: colors, typography: typography, style: style),
       );
 }
 
 /// The motion-related properties for [FToaster] that affect all toasts.
+///
+/// See [FToastMotion] for motion properties that affect individual toasts.
 class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
   /// The duration of the toasts' expansion. Defaults to 400ms.
   @override
@@ -114,7 +116,7 @@ class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
   @override
   final Curve expandCurve;
 
-  /// The animation curve for the toasts' collapsing. Defaults to [Curves.easeOutCubic].
+  /// The animation curve for the toasts' collapsing. Defaults to [Curves.easeOut].
   @override
   final Curve collapseCurve;
 
@@ -123,7 +125,7 @@ class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
     this.expandDuration = const Duration(milliseconds: 400),
     this.collapseDuration = const Duration(milliseconds: 300),
     this.expandCurve = Curves.easeOutCubic,
-    this.collapseCurve = Curves.easeOutCubic,
+    this.collapseCurve = Curves.easeOut,
   });
 }
 
@@ -204,7 +206,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     required this.titleTextStyle,
     required this.descriptionTextStyle,
     this.constraints = const BoxConstraints(maxHeight: 250, maxWidth: 400),
-    this.padding = const EdgeInsets.all(16),
+    this.padding = const .all(16),
     this.backgroundFilter,
     this.iconSpacing = 10,
     this.titleSpacing = 1,
@@ -216,18 +218,20 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   FToastStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          border: Border.all(color: colors.border),
+          border: .all(color: colors.border),
           borderRadius: style.borderRadius,
           color: colors.background,
         ),
         iconStyle: IconThemeData(color: colors.primary, size: 18),
-        titleTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+        titleTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: .w500),
         titleSpacing: 5,
-        descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis),
+        descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis),
       );
 }
 
 /// The motion-related properties for [FToaster] that affect individual toasts.
+///
+/// See [FToasterMotion] for motion properties that affect the entire toaster.
 class FToastMotion with Diagnosticable, _$FToastMotionFunctions {
   /// The duration of the toast's entrance when it is initially added to to toaster. Defaults to 400ms.
   @override

@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 class FSelectSearchFieldProperties with Diagnosticable {
   /// The search field's default prefix builder that displays a search icon.
   static Widget defaultIconBuilder(BuildContext _, FSelectSearchStyle style, Set<WidgetState> states) => Padding(
-    padding: const EdgeInsetsDirectional.only(start: 10.0, end: 4.0),
+    padding: const .directional(start: 10.0, end: 4.0),
     child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.search)),
   );
 
@@ -184,8 +184,8 @@ class FSelectSearchFieldProperties with Diagnosticable {
     this.magnifierConfiguration,
     this.keyboardType,
     this.textInputAction,
-    this.textCapitalization = TextCapitalization.none,
-    this.textAlign = TextAlign.start,
+    this.textCapitalization = .none,
+    this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
@@ -209,7 +209,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
     this.ignorePointers,
     this.enableInteractiveSelection = true,
     this.selectionControls,
-    this.dragStartBehavior = DragStartBehavior.start,
+    this.dragStartBehavior = .start,
     this.mouseCursor,
     this.scrollPhysics,
     this.scrollController,

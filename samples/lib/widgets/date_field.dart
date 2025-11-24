@@ -11,7 +11,7 @@ class DateFieldPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 30),
+    padding: const .only(top: 30),
     child: FDateField(
       label: const Text('Appointment Date'),
       description: const Text('Select a date for your appointment'),
@@ -25,7 +25,7 @@ class CalendarDateFieldPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 30),
+    padding: const .only(top: 30),
     child: FDateField.calendar(
       label: const Text('Appointment Date'),
       description: const Text('Select a date for your appointment'),
@@ -54,11 +54,17 @@ class ClearableDateFieldPage extends StatefulSample {
 
 class _ClearableDateFieldPageState extends StatefulSampleState<ClearableDateFieldPage>
     with SingleTickerProviderStateMixin {
-  late final FDateFieldController _controller = FDateFieldController(vsync: this, initialDate: DateTime.now());
+  late final _controller = FDateFieldController(vsync: this, initialDate: .now());
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 30),
+    padding: const .only(top: 30),
     child: FDateField(
       controller: _controller,
       label: const Text('Appointment Date'),
@@ -66,12 +72,6 @@ class _ClearableDateFieldPageState extends StatefulSampleState<ClearableDateFiel
       clearable: true,
     ),
   );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 }
 
 @RoutePage()
@@ -79,36 +79,30 @@ class ValidatorDateFieldPage extends StatefulSample {
   ValidatorDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
-  State<ValidatorDateFieldPage> createState() => _ValidationDatePickerPageState();
+  State<ValidatorDateFieldPage> createState() => _ValidatorDateFieldPageState();
 }
 
-class _ValidationDatePickerPageState extends StatefulSampleState<ValidatorDateFieldPage>
+class _ValidatorDateFieldPageState extends StatefulSampleState<ValidatorDateFieldPage>
     with SingleTickerProviderStateMixin {
-  late final FDateFieldController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = FDateFieldController(vsync: this, validator: _validate);
-  }
+  late final _controller = FDateFieldController(vsync: this, validator: _validate);
 
   String? _validate(DateTime? date) => date?.weekday == 6 || date?.weekday == 7 ? 'Date cannot be a weekend.' : null;
-
-  @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 30),
-    child: FDateField(
-      controller: _controller,
-      label: const Text('Appointment Date'),
-      description: const Text('Select a date for your appointment'),
-    ),
-  );
 
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
+
+  @override
+  Widget sample(BuildContext context) => Padding(
+    padding: const .only(top: 30),
+    child: FDateField(
+      controller: _controller,
+      label: const Text('Appointment Date'),
+      description: const Text('Select a date for your appointment'),
+    ),
+  );
 }
 
 @RoutePage()
@@ -116,66 +110,59 @@ class FormDateFieldPage extends StatefulSample {
   FormDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
-  State<FormDateFieldPage> createState() => _FormDatePickerPageState();
+  State<FormDateFieldPage> createState() => _FormDateFieldPageState();
 }
 
-class _FormDatePickerPageState extends StatefulSampleState<FormDateFieldPage> with TickerProviderStateMixin {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  late final FDateFieldController _startDateController;
-  late final FDateFieldController _endDateController;
+class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> with TickerProviderStateMixin {
+  final _key = GlobalKey<FormState>();
+  late final _startDateController = FDateFieldController(vsync: this, validator: _validateStartDate);
+  late final _endDateController = FDateFieldController(vsync: this, validator: _validateEndDate);
+
+  String? _validateStartDate(DateTime? date) => switch (date) {
+    null => 'Please select a start date',
+    final date when date.isBefore(.now()) => 'Start date must be in the future',
+    _ => null,
+  };
+
+  String? _validateEndDate(DateTime? date) => switch (date) {
+    null => 'Please select an end date',
+    final date when _startDateController.value != null && date.isBefore(_startDateController.value!) =>
+      'Start date must be in the future',
+    _ => null,
+  };
 
   @override
-  void initState() {
-    super.initState();
-    _startDateController = FDateFieldController(vsync: this, validator: _validateStartDate);
-    _endDateController = FDateFieldController(vsync: this, validator: _validateEndDate);
-  }
-
-  String? _validateStartDate(DateTime? date) {
-    if (date == null) {
-      return 'Please select a start date';
-    }
-    if (date.isBefore(DateTime.now())) {
-      return 'Start date must be in the future';
-    }
-    return null;
-  }
-
-  String? _validateEndDate(DateTime? date) {
-    if (date == null) {
-      return 'Please select an end date';
-    }
-    if (_startDateController.value != null && date.isBefore(_startDateController.value!)) {
-      return 'End date must be after start date';
-    }
-    return null;
+  void dispose() {
+    _endDateController.dispose();
+    _startDateController.dispose();
+    super.dispose();
   }
 
   @override
   Widget sample(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(30.0),
+    padding: const .all(30.0),
     child: Form(
-      key: _formKey,
+      key: _key,
       child: Column(
         children: [
           FDateField(
             controller: _startDateController,
             label: const Text('Start Date'),
             description: const Text('Select a start date'),
-            autovalidateMode: AutovalidateMode.disabled,
+            autovalidateMode: .disabled,
           ),
           const SizedBox(height: 20),
           FDateField(
             controller: _endDateController,
             label: const Text('End Date'),
             description: const Text('Select an end date'),
-            autovalidateMode: AutovalidateMode.disabled,
+            autovalidateMode: .disabled,
           ),
           const SizedBox(height: 25),
           FButton(
             child: const Text('Submit'),
             onPress: () {
-              if (_formKey.currentState!.validate()) {
+              if (_key.currentState!.validate()) {
                 // Form is valid, process the dates
               }
             },
@@ -184,11 +171,4 @@ class _FormDatePickerPageState extends StatefulSampleState<FormDateFieldPage> wi
       ),
     ),
   );
-
-  @override
-  void dispose() {
-    _startDateController.dispose();
-    _endDateController.dispose();
-    super.dispose();
-  }
 }

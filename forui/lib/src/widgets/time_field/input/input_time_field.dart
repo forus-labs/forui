@@ -13,7 +13,7 @@ class _InputTimeField extends FTimeField {
 
   const _InputTimeField({
     this.textInputAction,
-    this.textAlign = TextAlign.start,
+    this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
     this.expands = false,
@@ -78,7 +78,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
         old.controller?.removeValueListener(_onChange);
       }
 
-      _controller = widget.controller ?? FTimeFieldController(vsync: this, initialTime: _controller.value);
+      _controller = widget.controller ?? .new(vsync: this, initialTime: _controller.value);
       _controller.addValueListener(_onChange);
     }
   }

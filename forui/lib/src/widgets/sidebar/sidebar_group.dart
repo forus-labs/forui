@@ -79,7 +79,7 @@ class FSidebarGroup extends StatelessWidget {
                 padding: style.headerPadding,
                 child: Row(
                   spacing: style.headerSpacing,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: .spaceBetween,
                   children: [
                     if (label != null)
                       Expanded(
@@ -201,27 +201,23 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     required this.itemStyle,
-    this.padding = const EdgeInsets.symmetric(horizontal: 16),
+    this.padding = const .symmetric(horizontal: 16),
     this.headerSpacing = 8,
-    this.headerPadding = const EdgeInsets.fromLTRB(12, 0, 8, 2),
+    this.headerPadding = const .fromLTRB(12, 0, 8, 2),
     this.childrenSpacing = 2,
-    this.childrenPadding = const EdgeInsets.fromLTRB(0, 0, 0, 24),
+    this.childrenPadding = const .fromLTRB(0, 0, 0, 24),
   });
 
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
   FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        labelStyle: typography.sm.copyWith(
-          color: colors.mutedForeground,
-          overflow: TextOverflow.ellipsis,
-          fontWeight: FontWeight.w500,
-        ),
+        labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
         actionStyle: FWidgetStateMap({
           WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 18),
           WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
         }),
         tappableStyle: style.tappableStyle,
         focusedOutlineStyle: style.focusedOutlineStyle,
-        itemStyle: FSidebarItemStyle.inherit(colors: colors, typography: typography, style: style),
+        itemStyle: .inherit(colors: colors, typography: typography, style: style),
       );
 }

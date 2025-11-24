@@ -35,17 +35,14 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   /// Creates a [FFormFieldStyle] that inherits its properties.
   FFormFieldStyle.inherit({required FColors colors, required FTypography typography})
     : labelTextStyle = FWidgetStateMap({
-        WidgetState.error: typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w600),
-        WidgetState.disabled: typography.sm.copyWith(
-          color: colors.disable(colors.primary),
-          fontWeight: FontWeight.w600,
-        ),
-        WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        WidgetState.error: typography.sm.copyWith(color: colors.error, fontWeight: .w600),
+        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: .w600),
+        WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
       }),
       descriptionTextStyle = FWidgetStateMap({
         WidgetState.error: typography.sm.copyWith(color: colors.mutedForeground),
         WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
         WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
       }),
-      errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w600);
+      errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: .w600);
 }

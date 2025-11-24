@@ -60,31 +60,6 @@ class FCheckbox extends StatelessWidget {
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
-  /// Creates a [FCheckbox] that is part of a [FSelectGroup].
-  static FSelectGroupItem<T> grouped<T>({
-    required T value,
-    FCheckboxStyle? style,
-    Widget? label,
-    Widget? description,
-    Widget? error,
-    String? semanticsLabel,
-    bool enabled = true,
-    bool autofocus = false,
-    FocusNode? focusNode,
-    ValueChanged<bool>? onFocusChange,
-  }) => _Checkbox(
-    value: value,
-    style: style,
-    label: label,
-    description: description,
-    error: error,
-    semanticsLabel: semanticsLabel,
-    enabled: enabled,
-    autofocus: autofocus,
-    focusNode: focusNode,
-    onFocusChange: onFocusChange,
-  );
-
   /// Creates a [FCheckbox].
   const FCheckbox({
     this.style,
@@ -176,67 +151,6 @@ class FCheckbox extends StatelessWidget {
   }
 }
 
-class _Checkbox<T> extends StatelessWidget with FSelectGroupItem<T> {
-  @override
-  final T value;
-  final FCheckboxStyle? style;
-  final Widget? label;
-  final Widget? description;
-  final Widget? error;
-  final String? semanticsLabel;
-  final bool enabled;
-  final bool autofocus;
-  final FocusNode? focusNode;
-  final ValueChanged<bool>? onFocusChange;
-
-  const _Checkbox({
-    required this.value,
-    this.style,
-    this.label,
-    this.description,
-    this.error,
-    this.semanticsLabel,
-    this.enabled = true,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final FSelectGroupItemData(:controller, :selected, :style) = FSelectGroupItemData.of<T>(context);
-    final checkboxStyle = this.style ?? style.checkboxStyle;
-    return FCheckbox(
-      style: checkboxStyle,
-      label: label,
-      description: description,
-      semanticsLabel: semanticsLabel,
-      error: error,
-      value: selected,
-      onChange: (state) => controller.update(value, add: state),
-      enabled: enabled,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      key: key,
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(DiagnosticsProperty('value', value))
-      ..add(FlagProperty('autofocus', value: autofocus, ifFalse: 'not autofocus'))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
-  }
-}
-
 /// A checkboxes style.
 class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   /// The tappable style.
@@ -293,9 +207,9 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   /// Creates a [FCheckboxStyle] that inherits its properties.
   factory FCheckboxStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
-    return FCheckboxStyle(
+    return .new(
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-      focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: BorderRadius.circular(4)),
+      focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: .circular(4)),
       iconStyle: FWidgetStateMap({
         WidgetState.selected & WidgetState.error: IconThemeData(color: colors.errorForeground, size: 14),
         WidgetState.selected & ~WidgetState.disabled: IconThemeData(color: colors.primaryForeground, size: 14),
@@ -309,7 +223,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
         WidgetState.error & WidgetState.selected: BoxDecoration(borderRadius: style.borderRadius, color: colors.error),
         WidgetState.error: BoxDecoration(
           borderRadius: style.borderRadius,
-          border: Border.all(color: colors.error, width: 0.6),
+          border: .all(color: colors.error, width: 0.6),
           color: colors.background,
         ),
 
@@ -320,7 +234,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
         ),
         WidgetState.disabled: BoxDecoration(
           borderRadius: style.borderRadius,
-          border: Border.all(color: colors.disable(colors.primary), width: 0.6),
+          border: .all(color: colors.disable(colors.primary), width: 0.6),
           color: colors.disable(colors.background),
         ),
 
@@ -328,7 +242,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
         WidgetState.selected: BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
         WidgetState.any: BoxDecoration(
           borderRadius: style.borderRadius,
-          border: Border.all(color: colors.primary, width: 0.6),
+          border: .all(color: colors.primary, width: 0.6),
           color: colors.background,
         ),
       }),

@@ -11,13 +11,7 @@ part 'select_group.design.dart';
 /// A [FSelectGroup]'s controller.
 typedef FSelectGroupController<T> = FMultiValueNotifier<T>;
 
-/// Represents an item in a [FSelectGroup].
-mixin FSelectGroupItem<T> on Widget {
-  /// The value.
-  T get value;
-}
-
-/// A [FSelectGroup]'s item data. Useful for creating your own [FSelectGroupItem].
+/// A [FSelectGroup]'s item data. Useful for creating your own [FSelectGroupItemMixin].
 class FSelectGroupItemData<T> extends InheritedWidget {
   /// Return the [FSelectGroup]'s item data.
   static FSelectGroupItemData<T> of<T>(BuildContext context) {
@@ -59,7 +53,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 
 /// A set of items that are treated as a single selection.
 ///
-/// Typically used to group multiple [FCheckbox.grouped]s or [FRadio.grouped]s.
+/// Typically used to group multiple [FSelectGroupItemMixin]s.
 ///
 /// For touch devices, a [FSelectTileGroup] is generally recommended over this.
 ///
@@ -87,7 +81,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   final Widget? description;
 
   /// The items.
-  final List<FSelectGroupItem<T>> children;
+  final List<FSelectGroupItemMixin<T>> children;
 
   /// The callback that is called when the value changes.
   final ValueChanged<Set<T>>? onChange;
@@ -121,7 +115,7 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
            final formStates = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
 
            return FLabel(
-             axis: Axis.vertical,
+             axis: .vertical,
              states: formStates,
              style: groupStyle,
              label: label,
@@ -243,7 +237,7 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
-    this.itemPadding = const EdgeInsets.symmetric(vertical: 2),
+    this.itemPadding = const .symmetric(vertical: 2),
     super.labelPadding,
     super.descriptionPadding,
     super.errorPadding,
@@ -255,22 +249,22 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
     final vertical = FLabelStyles.inherit(style: style).verticalStyle;
 
     final labelTextStyle = FWidgetStateMap({
-      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: FontWeight.w500),
-      WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w500),
+      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: .w500),
+      WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: .w500),
     });
     final descriptionTextStyle = FWidgetStateMap({
       WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
       WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
     });
-    final errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: FontWeight.w500);
+    final errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: .w500);
 
-    return FSelectGroupStyle(
-      checkboxStyle: FCheckboxStyle.inherit(colors: colors, style: style).copyWith(
+    return .new(
+      checkboxStyle: .inherit(colors: colors, style: style).copyWith(
         labelTextStyle: labelTextStyle,
         descriptionTextStyle: descriptionTextStyle,
         errorTextStyle: errorTextStyle,
       ),
-      radioStyle: FRadioStyle.inherit(colors: colors, style: style).copyWith(
+      radioStyle: .inherit(colors: colors, style: style).copyWith(
         labelTextStyle: labelTextStyle,
         descriptionTextStyle: descriptionTextStyle,
         errorTextStyle: errorTextStyle,
