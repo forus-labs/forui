@@ -141,7 +141,7 @@ void main() {
         TestScaffold.app(
           child: FPortal(
             controller: controller,
-            spacing: const FPortalSpacing(5),
+            spacing: const .spacing(5),
             portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
@@ -206,7 +206,7 @@ void main() {
             alignment: .bottomRight,
             child: FPortal(
               controller: controller,
-              spacing: const FPortalSpacing(5),
+              spacing: const .spacing(5),
               portalBuilder: (context, _) =>
                   const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
@@ -259,7 +259,7 @@ void main() {
                 children: [
                   FPortal(
                     controller: controller,
-                    spacing: const FPortalSpacing(5),
+                    spacing: const .spacing(5),
                     portalBuilder: (context, _) =>
                         const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
@@ -289,7 +289,7 @@ void main() {
                 children: [
                   FPortal(
                     controller: controller,
-                    spacing: const FPortalSpacing(5),
+                    spacing: const .spacing(5),
                     portalBuilder: (context, _) =>
                         const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
@@ -319,7 +319,7 @@ void main() {
                 children: [
                   FPortal(
                     controller: controller,
-                    spacing: const FPortalSpacing(5),
+                    spacing: const .spacing(5),
                     portalBuilder: (context, _) =>
                         const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
                     child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
@@ -344,7 +344,7 @@ void main() {
         TestScaffold.app(
           child: FPortal(
             controller: controller,
-            spacing: const FPortalSpacing(5),
+            spacing: const .spacing(5),
             portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
             child: const Center(child: Expanding()),
           ),

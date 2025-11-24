@@ -25,7 +25,7 @@ const fruits = [
 
 @RoutePage()
 class MultiSelectPage extends Sample {
-  MultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  MultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -40,7 +40,7 @@ class MultiSelectPage extends Sample {
 
 @RoutePage()
 class DetailedMultiSelectPage extends Sample {
-  DetailedMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  DetailedMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -74,7 +74,7 @@ class DetailedMultiSelectPage extends Sample {
 
 @RoutePage()
 class SectionMultiSelectPage extends Sample {
-  SectionMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  SectionMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -157,7 +157,7 @@ class SectionMultiSelectPage extends Sample {
 
 @RoutePage()
 class DividerMultiSelectPage extends Sample {
-  DividerMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  DividerMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -189,7 +189,7 @@ class DividerMultiSelectPage extends Sample {
 
 @RoutePage()
 class SyncMultiSelectPage extends Sample {
-  SyncMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  SyncMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -205,7 +205,7 @@ class SyncMultiSelectPage extends Sample {
 
 @RoutePage()
 class AsyncMultiSelectPage extends Sample {
-  AsyncMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  AsyncMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -224,7 +224,7 @@ class AsyncMultiSelectPage extends Sample {
 
 @RoutePage()
 class AsyncLoadingMultiSelectPage extends Sample {
-  AsyncLoadingMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  AsyncLoadingMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -247,7 +247,7 @@ class AsyncLoadingMultiSelectPage extends Sample {
 
 @RoutePage()
 class AsyncErrorMultiSelectPage extends Sample {
-  AsyncErrorMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  AsyncErrorMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -273,7 +273,7 @@ class AsyncErrorMultiSelectPage extends Sample {
 
 @RoutePage()
 class ClearableMultiSelectPage extends Sample {
-  ClearableMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  ClearableMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -296,7 +296,7 @@ class FormatMultiSelectPage extends Sample {
     (firstName: 'Peter', lastName: 'Parker'),
   ];
 
-  FormatMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  FormatMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -311,7 +311,7 @@ class FormatMultiSelectPage extends Sample {
 
 @RoutePage()
 class MinMaxMultiSelectPage extends Sample {
-  MinMaxMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  MinMaxMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -328,7 +328,7 @@ class MinMaxMultiSelectPage extends Sample {
 
 @RoutePage()
 class ScrollHandlesMultiSelectPage extends Sample {
-  ScrollHandlesMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  ScrollHandlesMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -344,7 +344,7 @@ class ScrollHandlesMultiSelectPage extends Sample {
 
 @RoutePage()
 class SortedMultiSelectPage extends Sample {
-  SortedMultiSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  SortedMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(

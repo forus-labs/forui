@@ -229,7 +229,7 @@ class FTooltip extends StatefulWidget {
     this.style,
     this.tipAnchor = .bottomCenter,
     this.childAnchor = .topCenter,
-    this.spacing = const FPortalSpacing(4),
+    this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.hover = true,
     this.hoverEnterDuration = const Duration(milliseconds: 500),

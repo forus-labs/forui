@@ -145,7 +145,7 @@ class DividerAutocompletePage extends Sample {
 
 @RoutePage()
 class AsyncAutocompletePage extends Sample {
-  AsyncAutocompletePage({@queryParam super.theme, super.alignment = .topCenter});
+  AsyncAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(

@@ -25,7 +25,7 @@ const fruits = [
 
 @RoutePage()
 class SelectPage extends Sample {
-  SelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  SelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -40,7 +40,7 @@ class SelectPage extends Sample {
 
 @RoutePage()
 class DetailedSelectPage extends Sample {
-  DetailedSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  DetailedSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -74,7 +74,7 @@ class DetailedSelectPage extends Sample {
 
 @RoutePage()
 class SectionSelectPage extends Sample {
-  SectionSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  SectionSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -157,7 +157,7 @@ class SectionSelectPage extends Sample {
 
 @RoutePage()
 class DividerSelectPage extends Sample {
-  DividerSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  DividerSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -189,7 +189,7 @@ class DividerSelectPage extends Sample {
 
 @RoutePage()
 class SyncSelectPage extends Sample {
-  SyncSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  SyncSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -205,7 +205,7 @@ class SyncSelectPage extends Sample {
 
 @RoutePage()
 class AsyncSelectPage extends Sample {
-  AsyncSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  AsyncSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -224,7 +224,7 @@ class AsyncSelectPage extends Sample {
 
 @RoutePage()
 class AsyncLoadingSelectPage extends Sample {
-  AsyncLoadingSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  AsyncLoadingSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -247,7 +247,7 @@ class AsyncLoadingSelectPage extends Sample {
 
 @RoutePage()
 class AsyncErrorSelectPage extends Sample {
-  AsyncErrorSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  AsyncErrorSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -273,7 +273,7 @@ class AsyncErrorSelectPage extends Sample {
 
 @RoutePage()
 class ToggleableSelectPage extends StatefulSample {
-  ToggleableSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  ToggleableSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   State<ToggleableSelectPage> createState() => _ToggleableSelectPageState();
@@ -302,7 +302,7 @@ class _ToggleableSelectPageState extends StatefulSampleState<ToggleableSelectPag
 
 @RoutePage()
 class ClearableSelectPage extends Sample {
-  ClearableSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  ClearableSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -325,7 +325,7 @@ class FormatSelectPage extends Sample {
     (firstName: 'Peter', lastName: 'Parker'),
   ];
 
-  FormatSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  FormatSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -340,7 +340,7 @@ class FormatSelectPage extends Sample {
 
 @RoutePage()
 class ScrollHandlesSelectPage extends Sample {
-  ScrollHandlesSelectPage({@queryParam super.theme, super.alignment = .topCenter});
+  ScrollHandlesSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(

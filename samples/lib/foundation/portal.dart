@@ -11,7 +11,7 @@ class PortalPage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FPortal(
-    spacing: const FPortalSpacing(8),
+    spacing: const .spacing(8),
     viewInsets: const .all(5),
     portalBuilder: (context, _) => Container(
       decoration: BoxDecoration(

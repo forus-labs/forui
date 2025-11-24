@@ -46,7 +46,7 @@ class DialogPage extends Sample {
 
 @RoutePage()
 class BlurredDialogPage extends Sample {
-  BlurredDialogPage({@queryParam super.theme, super.alignment = .topCenter});
+  BlurredDialogPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(

@@ -7,7 +7,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class DateFieldPage extends Sample {
-  DateFieldPage({@queryParam super.theme, super.alignment = .topCenter});
+  DateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -21,7 +21,7 @@ class DateFieldPage extends Sample {
 
 @RoutePage()
 class CalendarDateFieldPage extends Sample {
-  CalendarDateFieldPage({@queryParam super.theme, super.alignment = .topCenter});
+  CalendarDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -46,7 +46,7 @@ class InputDateFieldPage extends Sample {
 
 @RoutePage()
 class ClearableDateFieldPage extends StatefulSample {
-  ClearableDateFieldPage({@queryParam super.theme, super.alignment = .topCenter});
+  ClearableDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   State<ClearableDateFieldPage> createState() => _ClearableDateFieldPageState();
@@ -76,7 +76,7 @@ class _ClearableDateFieldPageState extends StatefulSampleState<ClearableDateFiel
 
 @RoutePage()
 class ValidatorDateFieldPage extends StatefulSample {
-  ValidatorDateFieldPage({@queryParam super.theme, super.alignment = .topCenter});
+  ValidatorDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   State<ValidatorDateFieldPage> createState() => _ValidatorDateFieldPageState();
@@ -106,7 +106,7 @@ class _ValidatorDateFieldPageState extends StatefulSampleState<ValidatorDateFiel
 
 @RoutePage()
 class FormDateFieldPage extends StatefulSample {
-  FormDateFieldPage({@queryParam super.theme, super.alignment = .topCenter});
+  FormDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   State<FormDateFieldPage> createState() => _FormDateFieldPageState();

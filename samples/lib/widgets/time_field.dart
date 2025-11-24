@@ -21,7 +21,7 @@ class TimeFieldPage extends Sample {
 
 @RoutePage()
 class PickerTimeFieldPage extends Sample {
-  PickerTimeFieldPage({@queryParam super.theme, super.alignment = .topCenter});
+  PickerTimeFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
   Widget sample(BuildContext context) => const Padding(

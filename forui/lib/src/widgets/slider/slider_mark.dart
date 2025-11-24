@@ -36,7 +36,7 @@ class FSliderMark with Diagnosticable {
   ///
   /// This is identical to [FSliderMark.new], allowing dot-shorthand construction.
   const factory FSliderMark.mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label}) =
-      FSliderMark.new;
+      FSliderMark;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

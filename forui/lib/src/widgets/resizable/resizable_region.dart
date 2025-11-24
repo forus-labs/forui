@@ -50,7 +50,7 @@ class FResizableRegion extends StatelessWidget {
     double? minExtent,
     Widget? child,
     Key? key,
-  }) = FResizableRegion.new;
+  }) = FResizableRegion;
 
   @override
   Widget build(BuildContext context) {

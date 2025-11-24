@@ -322,7 +322,7 @@ class FPopover extends StatefulWidget {
     this.controller,
     this.style,
     this.constraints = const FPortalConstraints(),
-    this.spacing = const FPortalSpacing(4),
+    this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
     this.groupId,

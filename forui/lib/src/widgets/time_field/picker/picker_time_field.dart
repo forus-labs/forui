@@ -40,7 +40,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.canRequestFocus = true,
     this.anchor = .topLeft,
     this.inputAnchor = .bottomLeft,
-    this.spacing = const FPortalSpacing(4),
+    this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
