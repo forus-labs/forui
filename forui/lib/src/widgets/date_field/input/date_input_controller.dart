@@ -42,14 +42,7 @@ class DateInputController extends InputController {
         .replaceAll('y', 'YYYY')
         .replaceAll("'", '');
     final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
-    return .test(
-      controller,
-      localizations,
-      style,
-      placeholder,
-      initialYear,
-      TextEditingValue(text: text),
-    );
+    return .test(controller, localizations, style, placeholder, initialYear, TextEditingValue(text: text));
   }
 
   @visibleForTesting

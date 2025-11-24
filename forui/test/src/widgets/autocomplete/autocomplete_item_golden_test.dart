@@ -91,11 +91,7 @@ void main() {
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentDivider: .full,
             contentBuilder: (context, query, items) => [
-              .section(
-                divider: .indented,
-                label: const Text('Most popular'),
-                items: const ['Apple', 'Kiwi'],
-              ),
+              .section(divider: .indented, label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
               .section(label: const Text('Others'), items: const ['Banana', 'Blueberry']),
             ],
           ),

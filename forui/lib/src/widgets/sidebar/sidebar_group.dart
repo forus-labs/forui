@@ -211,11 +211,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
   FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        labelStyle: typography.sm.copyWith(
-          color: colors.mutedForeground,
-          overflow: .ellipsis,
-          fontWeight: .w500,
-        ),
+        labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
         actionStyle: FWidgetStateMap({
           WidgetState.hovered | WidgetState.pressed: IconThemeData(color: colors.primary, size: 18),
           WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),

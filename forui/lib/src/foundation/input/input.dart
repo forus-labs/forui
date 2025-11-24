@@ -116,10 +116,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
 
   @override
   Widget build(BuildContext _) => Shortcuts(
-    shortcuts: const {
-      SingleActivator(.arrowUp): AdjustIntent(1),
-      SingleActivator(.arrowDown): AdjustIntent(-1),
-    },
+    shortcuts: const {SingleActivator(.arrowUp): AdjustIntent(1), SingleActivator(.arrowDown): AdjustIntent(-1)},
     child: Actions(
       actions: {
         AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => controller.adjust(intent.amount)),

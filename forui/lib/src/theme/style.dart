@@ -66,10 +66,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   FStyle.inherit({required FColors colors, required FTypography typography})
     : this(
         formFieldStyle: .inherit(colors: colors, typography: typography),
-        focusedOutlineStyle: FFocusedOutlineStyle(
-          color: colors.primary,
-          borderRadius: const .all(.circular(8)),
-        ),
+        focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: const .all(.circular(8))),
         iconStyle: IconThemeData(color: colors.primary, size: 20),
         tappableStyle: FTappableStyle(),
       );

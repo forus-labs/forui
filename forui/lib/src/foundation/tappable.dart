@@ -196,9 +196,7 @@ class FTappable extends StatefulWidget {
     this.child,
     Map<ShortcutActivator, Intent>? shortcuts,
     super.key,
-  }) : shortcuts =
-           shortcuts ??
-           (onPress == null ? const {} : const {SingleActivator(.enter): ActivateIntent()}),
+  }) : shortcuts = shortcuts ?? (onPress == null ? const {} : const {SingleActivator(.enter): ActivateIntent()}),
        assert(builder != _builder || child != null, 'Either builder or child must be provided');
 
   @override

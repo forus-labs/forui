@@ -36,10 +36,7 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   FFormFieldStyle.inherit({required FColors colors, required FTypography typography})
     : labelTextStyle = FWidgetStateMap({
         WidgetState.error: typography.sm.copyWith(color: colors.error, fontWeight: .w600),
-        WidgetState.disabled: typography.sm.copyWith(
-          color: colors.disable(colors.primary),
-          fontWeight: .w600,
-        ),
+        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: .w600),
         WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
       }),
       descriptionTextStyle = FWidgetStateMap({

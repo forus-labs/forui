@@ -201,18 +201,12 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       SingleActivator(.arrowLeft): _ExtendIntent(),
       SingleActivator(.arrowRight): _ShrinkIntent(),
     },
-    (.ltr, false) || (.rtl, true) => const {
-      SingleActivator(.arrowLeft): _ShrinkIntent(),
-      SingleActivator(.arrowRight): _ExtendIntent(),
-    },
-    (.ttb, true) || (.btt, false) => const {
-      SingleActivator(.arrowUp): _ExtendIntent(),
-      SingleActivator(.arrowDown): _ShrinkIntent(),
-    },
-    (.ttb, false) || (.btt, true) => const {
-      SingleActivator(.arrowUp): _ShrinkIntent(),
-      SingleActivator(.arrowDown): _ExtendIntent(),
-    },
+    (.ltr, false) ||
+    (.rtl, true) => const {SingleActivator(.arrowLeft): _ShrinkIntent(), SingleActivator(.arrowRight): _ExtendIntent()},
+    (.ttb, true) ||
+    (.btt, false) => const {SingleActivator(.arrowUp): _ExtendIntent(), SingleActivator(.arrowDown): _ShrinkIntent()},
+    (.ttb, false) ||
+    (.btt, true) => const {SingleActivator(.arrowUp): _ShrinkIntent(), SingleActivator(.arrowDown): _ExtendIntent()},
   };
 
   GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, FLayout layout) {

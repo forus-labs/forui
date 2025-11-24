@@ -39,14 +39,7 @@ mixin FSelectItemMixin on Widget {
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
-  }) => .rich(
-    label: label,
-    style: style,
-    enabled: enabled,
-    divider: divider,
-    key: key,
-    children: children,
-  );
+  }) => .rich(label: label, style: style, enabled: enabled, divider: divider, key: key, children: children);
 
   /// {@macro forui.widgets.FSelectItem.new}
   ///
@@ -84,14 +77,7 @@ mixin FSelectItemMixin on Widget {
     bool? enabled,
     Widget? prefix,
     Key? key,
-  }) => .raw(
-    value: value,
-    style: style,
-    enabled: enabled,
-    prefix: prefix,
-    key: key,
-    child: child,
-  );
+  }) => .raw(value: value, style: style, enabled: enabled, prefix: prefix, key: key, child: child);
 }
 
 /// A section in a [FSelect] that can contain multiple [FSelectItem]s.
@@ -268,10 +254,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 
     return .new(
       labelTextStyle: FWidgetStateMap({
-        WidgetState.disabled: typography.sm.copyWith(
-          color: colors.disable(colors.primary),
-          fontWeight: .w600,
-        ),
+        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: .w600),
         WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
       }),
       dividerColor: .all(colors.border),

@@ -81,11 +81,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
               child: IconTheme(data: style.iconStyle.resolve(states), child: icon),
             ),
             if (label case final label?)
-              DefaultTextStyle.merge(
-                style: style.textStyle.resolve(states),
-                overflow: .ellipsis,
-                child: label,
-              ),
+              DefaultTextStyle.merge(style: style.textStyle.resolve(states), overflow: .ellipsis, child: label),
           ],
         ),
       ),

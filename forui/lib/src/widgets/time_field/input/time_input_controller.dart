@@ -28,14 +28,7 @@ abstract class TimeInputController extends InputController {
         .replaceAll("'", '');
     final time = controller.value == null ? placeholder : format.format(controller.value!.withDate(DateTime(1970)));
 
-    return .test(
-      localizations,
-      controller,
-      format,
-      style,
-      placeholder,
-      TextEditingValue(text: time),
-    );
+    return .test(localizations, controller, format, style, placeholder, TextEditingValue(text: time));
   }
 
   @visibleForTesting

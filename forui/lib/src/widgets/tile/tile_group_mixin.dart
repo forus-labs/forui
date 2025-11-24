@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 
 /// A marker interface which denotes that mixed-in widgets can group tiles and be used in a [FTileGroup.merge].
