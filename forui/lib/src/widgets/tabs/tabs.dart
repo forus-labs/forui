@@ -84,6 +84,9 @@ class FTabs extends StatefulWidget {
   /// and the controller is updated.
   final ValueChanged<int>? onPress;
 
+  /// The mouse cursor. Defaults to [MouseCursor.defer].
+  final MouseCursor mouseCursor;
+
   /// The tabs.
   final List<FTabEntry> children;
 
@@ -102,6 +105,7 @@ class FTabs extends StatefulWidget {
     this.style,
     this.onChange,
     this.onPress,
+    this.mouseCursor = .defer,
     this.initialIndex = 0,
     super.key,
   }) : assert(children.isNotEmpty, 'Must provide at least 1 tab.'),
@@ -129,6 +133,7 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('physics', physics))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(IterableProperty('children', children));
   }
 
@@ -189,7 +194,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               isScrollable: widget.scrollable,
               physics: widget.physics,
               padding: style.padding,
-              mouseCursor: style.mouseCursor,
+              mouseCursor: widget.mouseCursor,
               indicator: style.indicatorDecoration,
               indicatorSize: style.indicatorSize._value,
               dividerColor: Colors.transparent,

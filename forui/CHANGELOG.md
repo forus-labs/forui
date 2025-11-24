@@ -29,7 +29,7 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * **Breaking** Remove `FCheckbox.grouped(...)`. Use `FSelectGroupItemMixin.checkbox(...)` instead.
 
 
-### `FDateField`
+### `FDateField` 
 *  **Breaking** Change `FDateField.shift` to `FDateField.overflow`.
 
 
@@ -100,7 +100,7 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 ### `FTabs`
 * Add `FTabEntry.entry(...)`.
-* Add `FTabsStyle.mouseCursor`.
+* Add `FTabs.mouseCursor`.
 
 
 ### `FTappable`
@@ -277,6 +277,9 @@ We've reworked `FProgress` to be more customizable and easier to use.
 
 ### `FTab`
 * Add `FTabMotion`.
+* Add `FTabs.mouseCursor`.
+
+* **Breaking** Remove `FTabsStyle.mouseCursor`. Use `FTabs.mouseCursor` instead.
 * **Breaking** Replace `FTabController(animationDuration: ...)` with `FTabController(motion: ...)`.
 
 
