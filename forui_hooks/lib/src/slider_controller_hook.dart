@@ -224,10 +224,7 @@ class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
 }
 
 class _DiscreteRangeControllerHookState extends HookState<FDiscreteSliderController, _DiscreteRangeControllerHook> {
-  late final _controller = FDiscreteSliderController.range(
-    selection: hook.selection,
-    tooltips: hook.tooltips,
-  );
+  late final _controller = FDiscreteSliderController.range(selection: hook.selection, tooltips: hook.tooltips);
 
   @override
   FDiscreteSliderController build(BuildContext context) => _controller;
