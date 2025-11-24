@@ -80,8 +80,8 @@ void main() {
                             side: FLayout.ltr,
                             draggable: false,
                             builder: (context, controller) => Container(
-                              height: double.infinity,
-                              width: double.infinity,
+                              height: .infinity,
+                              width: .infinity,
                               decoration: BoxDecoration(
                                 border: Border.all(color: context.theme.colors.primary),
                                 color: context.theme.colors.background,

@@ -185,11 +185,11 @@ class RenderPortalLayer extends RenderProxyBox {
           minWidth: minWidth,
           maxWidth: maxWidth,
           minHeight: size?.height ?? 0,
-          maxHeight: size?.height ?? double.infinity,
+          maxHeight: size?.height ?? .infinity,
         ),
         FAutoWidthPortalConstraints(:final minHeight, :final maxHeight) => BoxConstraints(
           minWidth: size?.width ?? 0,
-          maxWidth: size?.width ?? double.infinity,
+          maxWidth: size?.width ?? .infinity,
           minHeight: minHeight,
           maxHeight: maxHeight,
         ),
@@ -253,8 +253,8 @@ class RenderPortalLayer extends RenderProxyBox {
         // We don't know where we'll end up, so we have no idea what our cull rect should be.
         double.negativeInfinity,
         double.negativeInfinity,
-        double.infinity,
-        double.infinity,
+        .infinity,
+        .infinity,
       ),
     );
 

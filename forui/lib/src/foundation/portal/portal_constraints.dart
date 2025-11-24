@@ -18,9 +18,9 @@ sealed class FPortalConstraints extends Constraints {
 final class FixedConstraints extends BoxConstraints implements FPortalConstraints {
   const FixedConstraints({
     super.minWidth = 0.0,
-    super.maxWidth = double.infinity,
+    super.maxWidth = .infinity,
     super.minHeight = 0.0,
-    super.maxHeight = double.infinity,
+    super.maxHeight = .infinity,
   });
 
   const FixedConstraints.tightFor({super.width, super.height}) : super.tightFor();
@@ -33,16 +33,16 @@ final class FAutoHeightPortalConstraints extends FPortalConstraints {
 
   /// The maximum width that satisfies the constraints.
   ///
-  /// Might be [double.infinity].
+  /// Might be [.infinity].
   final double maxWidth;
 
   /// Creates a [FPortalConstraints] that has the same height as the child widget.
-  const FAutoHeightPortalConstraints({this.minWidth = 0.0, this.maxWidth = double.infinity}) : super._();
+  const FAutoHeightPortalConstraints({this.minWidth = 0.0, this.maxWidth = .infinity}) : super._();
 
   /// Creates a [FPortalConstraints] that has the same height as the child widget.
   const FAutoHeightPortalConstraints.tightFor({double? width})
     : minWidth = width ?? 0,
-      maxWidth = width ?? double.infinity,
+      maxWidth = width ?? .infinity,
       super._();
 
   @override
@@ -73,16 +73,16 @@ final class FAutoWidthPortalConstraints extends FPortalConstraints {
 
   /// The maximum height that satisfies the constraints.
   ///
-  /// Might be [double.infinity].
+  /// Might be [.infinity].
   final double maxHeight;
 
   /// Creates a [FPortalConstraints] that has the same width as the child widget.
-  const FAutoWidthPortalConstraints({this.minHeight = 0.0, this.maxHeight = double.infinity}) : super._();
+  const FAutoWidthPortalConstraints({this.minHeight = 0.0, this.maxHeight = .infinity}) : super._();
 
   /// Creates a [FPortalConstraints] that has the same width as the child widget.
   const FAutoWidthPortalConstraints.tightFor({double? height})
     : minHeight = height ?? 0,
-      maxHeight = height ?? double.infinity,
+      maxHeight = height ?? .infinity,
       super._();
 
   @override
