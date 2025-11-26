@@ -69,7 +69,7 @@ jobs:
         with:
           app-id: ${{ secrets.AUTO_MAID_APP_ID }}
           private-key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           token: ${{ steps.generate-token.outputs.token }}
           ref: main
