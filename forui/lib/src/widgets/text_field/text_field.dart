@@ -10,6 +10,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localized_text.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
+import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
 /// A callback for building a custom counter for a text field.
 ///
@@ -68,6 +69,7 @@ class FTextField extends StatefulWidget {
   ///
   /// [autofillHints] defaults to [AutofillHints.password]. Use [AutofillHints.newPassword] for new-password inputs.
   static Widget password({
+    FTextFieldControl control = const .managed(),
     FTextFieldStyle Function(FTextFieldStyle style)? style,
     FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
     Widget? label = const LocalizedText.password(),
@@ -76,7 +78,6 @@ class FTextField extends StatefulWidget {
     Widget? error,
     TextMagnifierConfiguration? magnifierConfiguration,
     Object groupId = EditableText,
-    TextEditingController? controller,
     FocusNode? focusNode,
     TextInputType? keyboardType,
     TextInputAction textInputAction = .next,
@@ -98,7 +99,6 @@ class FTextField extends StatefulWidget {
     bool? showCursor,
     int? maxLength,
     MaxLengthEnforcement? maxLengthEnforcement,
-    ValueChanged<String>? onChange,
     GestureTapCallback? onTap,
     TapRegionCallback? onTapOutside,
     bool onTapAlwaysCalled = false,
@@ -128,11 +128,11 @@ class FTextField extends StatefulWidget {
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
     bool Function(TextEditingValue) clearable = Defaults.clearable,
-    String? initialText,
     ValueNotifier<bool>? obscureTextController,
     Key? key,
   }) => PasswordField(
     properties: PasswordFieldProperties(
+      control: control,
       style: style,
       builder: builder,
       label: label,
@@ -141,7 +141,6 @@ class FTextField extends StatefulWidget {
       error: error,
       magnifierConfiguration: magnifierConfiguration,
       groupId: groupId,
-      controller: controller,
       focusNode: focusNode,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
@@ -163,7 +162,6 @@ class FTextField extends StatefulWidget {
       showCursor: showCursor,
       maxLength: maxLength,
       maxLengthEnforcement: maxLengthEnforcement,
-      onChange: onChange,
       onTap: onTap,
       onTapOutside: onTapOutside,
       onTapAlwaysCalled: onTapAlwaysCalled,
@@ -193,7 +191,6 @@ class FTextField extends StatefulWidget {
       prefixBuilder: prefixBuilder,
       suffixBuilder: suffixBuilder,
       clearable: clearable,
-      initialText: initialText,
       obscureTextController: obscureTextController,
     ),
     key: key,
@@ -257,13 +254,14 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final Object groupId;
 
-  /// {@template forui.text_field.controller}
-  /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
+  /// {@template forui.text_field.control}
+  /// Controls the text field's state and value.
   ///
-  /// ## Contract
-  /// Throws an [AssertionError] if both [controller] and [initialText] are provided.
+  /// See [FTextFieldControl] for details on the two modes:
+  /// * [FTextFieldControl.lifted] - Declarative mode where value is driven by props
+  /// * [FTextFieldControl.managed] - Controller mode using [TextEditingController]
   /// {@endtemplate}
-  final TextEditingController? controller;
+  final FTextFieldControl control;
 
   /// {@template forui.text_field.keyboardType}
   /// The type of keyboard to use for editing the text. Defaults to [TextInputType.text] if maxLines is one and
@@ -491,24 +489,6 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final MaxLengthEnforcement? maxLengthEnforcement;
 
-  /// {@template forui.text_field.onChange}
-  /// Called when the user initiates a change to the TextField's value: when they have inserted or deleted text.
-  ///
-  /// This callback doesn't run when the TextField's text is changed programmatically, via the TextField's [controller].
-  /// Typically it isn't necessary to be notified of such changes, since they're initiated by the app itself.
-  ///
-  /// To be notified of all changes to the TextField's text, cursor, and selection, one can add a listener to its
-  /// [controller] with [TextEditingController.addListener].
-  ///
-  /// [onChange] is called before [onSubmit] when user indicates completion of editing, such as when pressing the "done"
-  /// button on the keyboard. That default behavior can be overridden. See [onEditingComplete] for details.
-  ///
-  /// See also:
-  ///  * [inputFormatters], which are called before [onChange] runs and can validate and change ("format") the input value.
-  ///  * [onEditingComplete], [onSubmit]: which are more specialized input change notifications.
-  /// {@endtemplate}
-  final ValueChanged<String>? onChange;
-
   /// {@template forui.text_field.onTap}
   /// Called for the first tap in a series of taps.
   ///
@@ -570,11 +550,11 @@ class FTextField extends StatefulWidget {
   /// The default implementation of [onEditingComplete] executes 2 different behaviors based on the situation:
   ///
   ///  - When a completion action is pressed, such as "done", "go", "send", or "search", the user's content is submitted
-  ///    to the [controller] and then focus is given up.
+  ///    and then focus is given up.
   ///
-  ///  - When a non-completion action is pressed, such as "next" or "previous", the user's content is submitted to the
-  ///    [controller], but focus is not given up because developers may want to immediately move focus to another input
-  ///    widget within [onSubmit].
+  ///  - When a non-completion action is pressed, such as "next" or "previous", the user's content is submitted, but
+  ///    focus is not given up because developers may want to immediately move focus to another input widget within
+  ///    [onSubmit].
   ///
   /// Providing [onEditingComplete] prevents the aforementioned default behavior.
   /// {@endtemplate}
@@ -583,7 +563,7 @@ class FTextField extends StatefulWidget {
   /// {@template forui.text_field.onSubmit}
   /// Called when the user indicates that they are done editing the text in the field.
   ///
-  /// By default, [onSubmit] is called after [onChange] when the user has finalized editing; or, if the default behavior
+  /// By default, [onSubmit] is called after `onChange` when the user has finalized editing; or, if the default behavior
   /// has been overridden, after [onEditingComplete]. See [onEditingComplete] for details.
   ///
   /// ## Testing
@@ -615,12 +595,13 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final AppPrivateCommandCallback? onAppPrivateCommand;
 
+  // TODO: verify that the docs are correct.
   /// {@template forui.text_field.inputFormatters}
   /// Optional input validation and formatting overrides.
   ///
   /// Formatters are run in the provided order when the user changes the text this widget contains. When this parameter
   /// changes, the new formatters will not be applied until the next time the user inserts or deletes text. Similar to
-  /// the [onChange] callback, formatters don't run when the text is changed programmatically via [controller].
+  /// the `_onChange` callback, formatters don't run when the text is changed programmatically via [controller].
   ///
   /// See also:
   ///  * [TextEditingController], which implements the [Listenable] interface and notifies its listeners on
@@ -826,16 +807,9 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final bool Function(TextEditingValue) clearable;
 
-  /// {@template forui.text_field.initialValue}
-  /// The initial text.
-  ///
-  /// ## Contract
-  /// Throws an [AssertionError] if both [controller] and [initialText] are provided.
-  /// {@endtemplate}
-  final String? initialText;
-
   /// Creates a [FTextField].
   const FTextField({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label,
@@ -844,7 +818,6 @@ class FTextField extends StatefulWidget {
     this.error,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
@@ -867,7 +840,6 @@ class FTextField extends StatefulWidget {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -897,16 +869,12 @@ class FTextField extends StatefulWidget {
     this.prefixBuilder,
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
-    this.initialText,
     super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and an initialText. '
-         'To fix, set the initial text directly in the controller.',
-       );
+  });
 
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label = const LocalizedText.email(),
@@ -915,7 +883,6 @@ class FTextField extends StatefulWidget {
     this.error,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType = .emailAddress,
     this.textInputAction = .next,
@@ -938,7 +905,6 @@ class FTextField extends StatefulWidget {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -968,13 +934,8 @@ class FTextField extends StatefulWidget {
     this.prefixBuilder,
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
-    this.initialText,
     super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and an initialText. '
-         'To fix, set the initial text directly in the controller.',
-       );
+  });
 
   /// Creates a [FTextField] configured for multiline inputs.
   ///
@@ -982,6 +943,7 @@ class FTextField extends StatefulWidget {
   /// time a new line is added. To limit the maximum height of the text field and make it scrollable, consider setting
   /// [maxLines].
   const FTextField.multiline({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label,
@@ -990,7 +952,6 @@ class FTextField extends StatefulWidget {
     this.error,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
@@ -1013,7 +974,6 @@ class FTextField extends StatefulWidget {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -1043,13 +1003,8 @@ class FTextField extends StatefulWidget {
     this.prefixBuilder,
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
-    this.initialText,
     super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and an initialText. '
-         'To fix, set the initial text directly in the controller.',
-       );
+  });
 
   @override
   State<FTextField> createState() => _State();
@@ -1063,7 +1018,7 @@ class FTextField extends StatefulWidget {
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('groupId', groupId))
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))
       ..add(EnumProperty('textInputAction', textInputAction))
@@ -1086,7 +1041,6 @@ class FTextField extends StatefulWidget {
       ..add(FlagProperty('showCursor', value: showCursor, ifTrue: 'showCursor'))
       ..add(IntProperty('maxLength', maxLength))
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
       ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
@@ -1125,8 +1079,7 @@ class FTextField extends StatefulWidget {
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
-      ..add(ObjectFlagProperty.has('clearable', clearable))
-      ..add(StringProperty('initialText', initialText));
+      ..add(ObjectFlagProperty.has('clearable', clearable));
   }
 }
 
@@ -1137,8 +1090,7 @@ class _State extends State<FTextField> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? .new(text: widget.initialText);
-    _controller.addListener(_handleOnChange);
+    _controller = widget.control.create(_handleOnChange);
 
     _statesController = widget.statesController ?? .new();
     _statesController.addListener(_handleStatesChange);
@@ -1147,15 +1099,8 @@ class _State extends State<FTextField> {
   @override
   void didUpdateWidget(covariant FTextField old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller.removeListener(_handleOnChange);
-      }
-
-      _controller = widget.controller ?? .new(text: widget.initialText);
-      _controller.addListener(_handleOnChange);
+    if (widget.control != old.control) {
+      _controller = widget.control.update(old.control, _controller, _handleOnChange);
     }
 
     if (widget.statesController != old.statesController) {
@@ -1170,7 +1115,11 @@ class _State extends State<FTextField> {
     }
   }
 
-  void _handleOnChange() => widget.onChange?.call(_controller.text);
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
 
   void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
     if (mounted) {
@@ -1360,11 +1309,7 @@ class _State extends State<FTextField> {
       _statesController.removeListener(_handleStatesChange);
     }
 
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_handleOnChange);
-    }
+    widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
   }
 }

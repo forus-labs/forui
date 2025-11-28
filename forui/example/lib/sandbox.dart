@@ -15,23 +15,7 @@ class Sandbox extends StatefulWidget {
 enum Notification { all, direct, nothing, limitedTime, timeSensitive, selectedApps }
 
 class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
-  late final FTabController c;
-  final controller = ValueNotifier<bool>(false);
-  final textController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    c = FTabController(vsync: this, length: 2, initialIndex: 1);
-  }
-
-  @override
-  void dispose() {
-    c.dispose();
-    controller.dispose();
-    textController.dispose();
-    super.dispose();
-  }
+  TextEditingValue _v = TextEditingValue(text: 'Banana');
 
   @override
   Widget build(BuildContext context) => Center(
@@ -39,38 +23,61 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
       mainAxisSize: MainAxisSize.min,
       spacing: 5,
       children: [
-        for (final (alignment, description) in [
-          (FToastAlignment.topLeft, 'Top Left'),
-          (FToastAlignment.topCenter, 'Top Center'),
-          (FToastAlignment.topRight, 'Top Right'),
-          (FToastAlignment.bottomLeft, 'Bottom Left'),
-          (FToastAlignment.bottomCenter, 'Bottom Center'),
-          (FToastAlignment.bottomRight, 'Bottom Right'),
-        ])
-          FButton(
-            onPress: () => showFToast(
-              context: context,
-              alignment: alignment,
-              title: const Text('Event has been created'),
-              description: const Text('Friday, May 23, 2025 at 9:00 AM'),
-              suffixBuilder: (context, entry) => IntrinsicHeight(
-                child: FButton(
-                  style: context.theme.buttonStyles.primary.copyWith(
-                    contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
-                      textStyle: FWidgetStateMap.all(
-                        context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
-                      ),
-                    ),
-                  ),
-                  onPress: entry.dismiss,
-                  child: const Text('Undo'),
-                ),
-              ),
-            ),
-            child: Text('Show $description Toast'),
-          ),
+        FTextField(
+          control: .lifted(value: _v, onChange: (v) => setState(() => _v = v)),
+        ),
       ],
     ),
   );
+}
+
+class FDefaultTextEditingController extends StatefulWidget {
+  final TextEditingValue value;
+  final ValueChanged<TextEditingValue> onChange;
+  final ValueWidgetBuilder<TextEditingController> builder;
+
+  const FDefaultTextEditingController({required this.value, required this.onChange, required this.builder, super.key});
+
+  @override
+  State<FDefaultTextEditingController> createState() => _FDefaultTextEditingControllerState();
+}
+
+class _FDefaultTextEditingControllerState extends State<FDefaultTextEditingController> {
+  late final _controller = _Controller(widget.value, onChange: widget.onChange);
+
+  @override
+  void didUpdateWidget(covariant FDefaultTextEditingController old) {
+    super.didUpdateWidget(old);
+    print('didUpdateWidget');
+    print('old: ${old.value}');
+    print('new: ${widget.value}');
+    if (widget.value != old.value) {
+      _controller._set(widget.value);
+    }
+
+    if (widget.onChange != old.onChange) {
+      _controller.onChange = widget.onChange;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.builder(context, _controller, null);
+}
+
+class _Controller extends TextEditingController {
+  ValueChanged<TextEditingValue> onChange;
+
+  _Controller(super.value, {required this.onChange}) : super.fromValue();
+
+  void _set(TextEditingValue newValue) {
+    super.value = newValue;
+  }
+
+  @override
+  set value(TextEditingValue newValue) {
+    if (newValue == super.value) {
+      return;
+    }
+    onChange(newValue);
+  }
 }
