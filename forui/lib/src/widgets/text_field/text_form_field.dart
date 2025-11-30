@@ -610,7 +610,10 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     forceErrorText: forceErrorText,
     restorationId: restorationId,
     builder: (state) => FTextField(
-      style: style,
+      control: .managed(controller: state.effectiveController, onChange: (value) {
+        state.didChange(value);
+        onChange?.call(value);
+      }), style: style,
       builder: builder,
       label: label,
       hint: hint,
@@ -621,7 +624,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       },
       magnifierConfiguration: magnifierConfiguration,
       groupId: groupId,
-      controller: state.effectiveController,
       focusNode: focusNode,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
@@ -644,10 +646,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       showCursor: showCursor,
       maxLength: maxLength,
       maxLengthEnforcement: maxLengthEnforcement,
-      onChange: (value) {
-        state.didChange(value);
-        onChange?.call(value);
-      },
       onTap: onTap,
       onTapAlwaysCalled: onTapAlwaysCalled,
       onEditingComplete: onEditingComplete,

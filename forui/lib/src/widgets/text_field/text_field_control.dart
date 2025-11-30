@@ -11,7 +11,7 @@ sealed class FTextFieldControl {
 
   /// Creates a [FTextFieldControl] that is managed internally.
   const factory FTextFieldControl.managed({
-    required TextEditingController? controller,
+    TextEditingController? controller,
     TextEditingValue? initial,
     ValueChanged<TextEditingValue>? onChange,
   }) = Managed;

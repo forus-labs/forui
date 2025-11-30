@@ -595,13 +595,13 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final AppPrivateCommandCallback? onAppPrivateCommand;
 
-  // TODO: verify that the docs are correct.
   /// {@template forui.text_field.inputFormatters}
   /// Optional input validation and formatting overrides.
   ///
   /// Formatters are run in the provided order when the user changes the text this widget contains. When this parameter
   /// changes, the new formatters will not be applied until the next time the user inserts or deletes text. Similar to
-  /// the `_onChange` callback, formatters don't run when the text is changed programmatically via [controller].
+  /// the `_onChange` callback, formatters don't run when the text is changed programmatically via
+  /// [TextEditingController].
   ///
   /// See also:
   ///  * [TextEditingController], which implements the [Listenable] interface and notifies its listeners on

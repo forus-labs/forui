@@ -285,7 +285,7 @@ class _State extends State<PasswordField> {
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: _controller,
     builder: (context, obscured, child) => FTextField(
-      style: widget.properties.style,
+      control: .managed(controller: widget.properties.controller, onChange: widget.properties.onChange, initial: TextEditingValue(text: widget.properties.initialText)), style: widget.properties.style,
       builder: widget.properties.builder,
       label: widget.properties.label,
       hint: widget.properties.hint,
@@ -293,7 +293,6 @@ class _State extends State<PasswordField> {
       error: widget.properties.error,
       magnifierConfiguration: widget.properties.magnifierConfiguration,
       groupId: widget.properties.groupId,
-      controller: widget.properties.controller,
       focusNode: widget.properties.focusNode,
       keyboardType: widget.properties.keyboardType,
       textInputAction: widget.properties.textInputAction,
@@ -316,7 +315,6 @@ class _State extends State<PasswordField> {
       showCursor: widget.properties.showCursor,
       maxLength: widget.properties.maxLength,
       maxLengthEnforcement: widget.properties.maxLengthEnforcement,
-      onChange: widget.properties.onChange,
       onTap: widget.properties.onTap,
       onTapOutside: widget.properties.onTapOutside,
       onTapAlwaysCalled: widget.properties.onTapAlwaysCalled,
@@ -350,7 +348,6 @@ class _State extends State<PasswordField> {
           ? null
           : (context, style, states) => widget.properties.suffixBuilder!(context, style, _controller, states),
       clearable: widget.properties.clearable,
-      initialText: widget.properties.initialText,
     ),
   );
 }
