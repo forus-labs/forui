@@ -88,7 +88,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: FThemes.zinc.light,
-          child: FTextField(controller: controller, clearable: (value) => value.text.isNotEmpty),
+          child: FTextField(control: .managed(controller: controller), clearable: (value) => value.text.isNotEmpty),
         ),
       );
 
@@ -107,8 +107,7 @@ void main() {
         TestScaffold.app(
           theme: FThemes.zinc.light,
           child: FTextField(
-            controller: controller,
-            clearable: (value) => value.text.isNotEmpty,
+            control: .managed(controller: controller), clearable: (value) => value.text.isNotEmpty,
             suffixBuilder: (_, _, _) => const SizedBox(),
           ),
         ),

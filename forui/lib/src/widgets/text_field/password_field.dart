@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/text_field/field.dart';
 
 /// A callback for building a field's icon.
 ///
@@ -25,7 +26,6 @@ class PasswordFieldProperties with Diagnosticable {
   final Widget? error;
   final TextMagnifierConfiguration? magnifierConfiguration;
   final Object groupId;
-  final TextEditingController? controller;
   final FocusNode? focusNode;
   final TextInputType? keyboardType;
   final TextInputAction textInputAction;
@@ -47,7 +47,6 @@ class PasswordFieldProperties with Diagnosticable {
   final bool? showCursor;
   final int? maxLength;
   final MaxLengthEnforcement? maxLengthEnforcement;
-  final ValueChanged<String>? onChange;
   final GestureTapCallback? onTap;
   final TapRegionCallback? onTapOutside;
   final bool onTapAlwaysCalled;
@@ -77,7 +76,6 @@ class PasswordFieldProperties with Diagnosticable {
   final FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
   final FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
   final bool Function(TextEditingValue) clearable;
-  final String? initialText;
   final ValueNotifier<bool>? obscureTextController;
 
   PasswordFieldProperties({
@@ -89,7 +87,6 @@ class PasswordFieldProperties with Diagnosticable {
     required this.error,
     required this.magnifierConfiguration,
     required this.groupId,
-    required this.controller,
     required this.focusNode,
     required this.keyboardType,
     required this.textInputAction,
@@ -111,7 +108,6 @@ class PasswordFieldProperties with Diagnosticable {
     required this.showCursor,
     required this.maxLength,
     required this.maxLengthEnforcement,
-    required this.onChange,
     required this.onTap,
     required this.onTapOutside,
     required this.onTapAlwaysCalled,
@@ -141,7 +137,6 @@ class PasswordFieldProperties with Diagnosticable {
     required this.prefixBuilder,
     required this.suffixBuilder,
     required this.clearable,
-    required this.initialText,
     required this.obscureTextController,
   });
 
@@ -154,7 +149,6 @@ class PasswordFieldProperties with Diagnosticable {
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('groupId', groupId))
-      ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))
       ..add(EnumProperty('textInputAction', textInputAction))
@@ -176,7 +170,6 @@ class PasswordFieldProperties with Diagnosticable {
       ..add(FlagProperty('showCursor', value: showCursor, ifTrue: 'showCursor'))
       ..add(IntProperty('maxLength', maxLength))
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
       ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
@@ -216,7 +209,6 @@ class PasswordFieldProperties with Diagnosticable {
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
-      ..add(StringProperty('initialText', initialText))
       ..add(DiagnosticsProperty('obscureTextController', obscureTextController));
   }
 }
@@ -245,9 +237,10 @@ class PasswordField extends StatefulWidget {
     );
   }
 
+  final TextEditingController controller;
   final PasswordFieldProperties properties;
 
-  const PasswordField({required this.properties, super.key});
+  const PasswordField({required this.controller, required this.properties, super.key});
 
   @override
   State<PasswordField> createState() => _State();
@@ -255,7 +248,9 @@ class PasswordField extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('properties', this.properties));
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('properties', this.properties));
   }
 }
 
@@ -284,7 +279,8 @@ class _State extends State<PasswordField> {
   @override
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: _controller,
-    builder: (context, obscured, child) => FTextField(
+    builder: (context, obscured, child) => Field(
+      controller: widget.controller,
       style: widget.properties.style,
       builder: widget.properties.builder,
       label: widget.properties.label,
@@ -293,7 +289,6 @@ class _State extends State<PasswordField> {
       error: widget.properties.error,
       magnifierConfiguration: widget.properties.magnifierConfiguration,
       groupId: widget.properties.groupId,
-      controller: widget.properties.controller,
       focusNode: widget.properties.focusNode,
       keyboardType: widget.properties.keyboardType,
       textInputAction: widget.properties.textInputAction,
@@ -316,7 +311,6 @@ class _State extends State<PasswordField> {
       showCursor: widget.properties.showCursor,
       maxLength: widget.properties.maxLength,
       maxLengthEnforcement: widget.properties.maxLengthEnforcement,
-      onChange: widget.properties.onChange,
       onTap: widget.properties.onTap,
       onTapOutside: widget.properties.onTapOutside,
       onTapAlwaysCalled: widget.properties.onTapAlwaysCalled,
@@ -350,7 +344,6 @@ class _State extends State<PasswordField> {
           ? null
           : (context, style, states) => widget.properties.suffixBuilder!(context, style, _controller, states),
       clearable: widget.properties.clearable,
-      initialText: widget.properties.initialText,
     ),
   );
 }

@@ -38,7 +38,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FTextField(
-                controller: controller,
+                control: .managed(controller: controller),
                 autofocus: focused_,
                 label: const Text('My Label'),
                 hint: 'hint',
@@ -61,7 +61,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FTextField(
-                controller: controller,
+                control: .managed(controller: controller),
                 autofocus: focused_,
                 label: const Text('My Label'),
                 hint: 'hint',
@@ -83,7 +83,11 @@ void main() {
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
-              child: FTextField.email(controller: controller, autofocus: focused_, hint: 'janedoe@foruslabs.com'),
+              child: FTextField.email(
+                control: .managed(controller: controller),
+                autofocus: focused_,
+                hint: 'janedoe@foruslabs.com',
+              ),
             ),
           );
 
@@ -100,7 +104,7 @@ void main() {
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
-              child: FTextField.password(controller: controller, autofocus: focused_, hint: 'password'),
+              child: FTextField.password(control: .managed(controller: controller), autofocus: focused_, hint: 'password'),
             ),
           );
 
@@ -122,8 +126,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FTextField.password(
-                controller: controller,
-                autofocus: focused_,
+                control: .managed(controller: controller), autofocus: focused_,
                 hint: 'password',
                 obscureTextController: obscure,
               ),
@@ -148,7 +151,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FTextField.multiline(
-                controller: controller,
+                control: .managed(controller: controller),
                 autofocus: focused_,
                 label: const Text('My Label'),
                 hint: 'hint',
@@ -188,7 +191,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FTextField(controller: controller),
+          child: FTextField(control: .managed(controller: controller)),
         ),
       );
 

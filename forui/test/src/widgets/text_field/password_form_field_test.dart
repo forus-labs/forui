@@ -79,7 +79,7 @@ void main() {
       TestScaffold.app(
         child: Form(
           key: key,
-          child: FTextFormField.password(obscureTextController: obscure, initialText: 'initial'),
+          child: FTextFormField.password(control: const .managed(initial: TextEditingValue(text: 'initial')), obscureTextController: obscure),
         ),
       ),
     );

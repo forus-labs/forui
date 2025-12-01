@@ -103,7 +103,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
   final MaxLengthEnforcement? maxLengthEnforcement;
 
   /// {@macro forui.text_field.onChange}
-  final ValueChanged<String>? onChange;
+  final ValueChanged<TextEditingValue>? onChange;
 
   /// Called for the first tap in a series of taps.
   final GestureTapCallback? onTap;

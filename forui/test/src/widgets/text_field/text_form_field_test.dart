@@ -11,9 +11,8 @@ void main() {
       (
         'normal',
         (text, controller, autovalidate, validator, saved) => FTextFormField(
-          initialText: text,
-          controller: controller,
-          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          control: .managed(controller: controller, initial: text),
+          autovalidateMode: autovalidate ?? .disabled,
           validator: validator,
           onSaved: saved,
         ),
@@ -21,9 +20,8 @@ void main() {
       (
         'email',
         (text, controller, autovalidate, validator, saved) => FTextFormField.email(
-          initialText: text,
-          controller: controller,
-          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          control: .managed(controller: controller, initial: text),
+          autovalidateMode: autovalidate ?? .disabled,
           validator: validator,
           onSaved: saved,
         ),
@@ -31,9 +29,8 @@ void main() {
       (
         'password',
         (text, controller, autovalidate, validator, saved) => FTextFormField.password(
-          initialText: text,
-          controller: controller,
-          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          control: .managed(controller: controller, initial: text),
+          autovalidateMode: autovalidate ?? .disabled,
           validator: validator,
           onSaved: saved,
         ),
@@ -41,21 +38,23 @@ void main() {
       (
         'multiline',
         (text, controller, autovalidate, validator, saved) => FTextFormField.multiline(
-          initialText: text,
-          controller: controller,
-          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          control: .managed(controller: controller, initial: text),
+          autovalidateMode: autovalidate ?? .disabled,
           validator: validator,
           onSaved: saved,
         ),
       ),
     ]) {
-      testWidgets('$type - set initial text using initialText', (tester) async {
+      testWidgets('$type - set initial text using initial', (tester) async {
         final key = GlobalKey<FormState>();
 
         String? initial;
         await tester.pumpWidget(
           TestScaffold.app(
-            child: Form(key: key, child: field('initial', null, null, null, (value) => initial = value)),
+            child: Form(
+              key: key,
+              child: field(const TextEditingValue(text: 'initial'), null, null, null, (value) => initial = value),
+            ),
           ),
         );
 
@@ -154,7 +153,9 @@ void main() {
         TestScaffold.app(
           child: Form(
             key: key,
-            child: FTextFormField(controller: controller, onChange: (value) => count++),
+            child: FTextFormField(
+              control: .managed(controller: controller, onChange: (value) => count++),
+            ),
           ),
         ),
       );

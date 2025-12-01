@@ -714,8 +714,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       validator: widget.validator,
       initialValue: widget.initialValue,
       builder: (state) => FTextField(
-        focusNode: _focus,
-        controller: _textController,
+        control: .managed(controller: _textController), focusNode: _focus,
         style: style.selectFieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,

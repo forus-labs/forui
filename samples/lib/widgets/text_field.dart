@@ -44,8 +44,7 @@ class _ClearableTextFieldPageState extends StatefulSampleState<ClearableTextFiel
   Widget sample(BuildContext context) => Padding(
     padding: const .symmetric(horizontal: 20, vertical: 30),
     child: FTextField(
-      controller: _controller,
-      label: const Text('Username'),
+      control: .managed(controller: _controller), label: const Text('Username'),
       hint: 'JaneDoe',
       description: const Text('Please enter your username.'),
       clearable: (value) => value.text.isNotEmpty,
@@ -60,7 +59,7 @@ class EmailTextFieldPage extends Sample {
   @override
   Widget sample(BuildContext context) => const Padding(
     padding: .symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.email(initialText: 'jane@doe.com'),
+    child: FTextField.email(control: .managed(initial: TextEditingValue(text: 'jane@doe.com'))),
   );
 }
 
@@ -71,7 +70,7 @@ class PasswordTextFieldPage extends Sample {
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const .symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.password(initialText: 'My password'),
+    child: FTextField.password(control: const .managed(initial: TextEditingValue(text: 'My password'))),
   );
 }
 

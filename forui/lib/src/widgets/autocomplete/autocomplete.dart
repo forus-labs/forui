@@ -146,7 +146,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final MaxLengthEnforcement? maxLengthEnforcement;
 
   /// {@macro forui.text_field.onChange}
-  final ValueChanged<String>? onChange;
+  final ValueChanged<TextEditingValue>? onChange;
 
   /// {@macro forui.text_field.onTap}
   final bool onTapAlwaysCalled;
@@ -343,7 +343,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     bool? showCursor,
     int? maxLength,
     MaxLengthEnforcement? maxLengthEnforcement,
-    ValueChanged<String>? onChange,
+    ValueChanged<TextEditingValue>? onChange,
     bool onTapAlwaysCalled = false,
     VoidCallback? onEditingComplete,
     ValueChanged<String>? onSubmit,
@@ -792,13 +792,17 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         }
       },
       child: FTextFormField(
+        control: .managed(
+          controller: _controller,
+          onChange: widget.onChange,
+          initial: widget.initialText == null ? null : TextEditingValue(text: widget.initialText!),
+        ),
         style: style.fieldStyle,
         label: widget.label,
         hint: widget.hint,
         description: widget.description,
         magnifierConfiguration: widget.magnifierConfiguration,
         groupId: widget.groupId,
-        controller: _controller,
         focusNode: _fieldFocus,
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,
@@ -821,7 +825,6 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         showCursor: widget.showCursor,
         maxLength: widget.maxLength,
         maxLengthEnforcement: widget.maxLengthEnforcement,
-        onChange: widget.onChange,
         onTap: _controller.content.show,
         onTapAlwaysCalled: true,
         onEditingComplete: widget.onEditingComplete,
@@ -857,7 +860,6 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         onSaved: widget.onSaved,
         onReset: widget.onReset,
         validator: widget.validator,
-        initialText: widget.initialText,
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
         errorBuilder: widget.errorBuilder,

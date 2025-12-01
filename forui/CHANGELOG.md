@@ -1,6 +1,15 @@
 ## 0.17.0 (Next)
 
-This update focuses on overhauling the API to better support the new dot-shorthand syntax.
+This update focuses on overhauling the API to better declarative state & support the new dot-shorthand syntax.
+
+To simplify updating to the latest version, we've included [Data Driven Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
+This allows you to run automated fixes on your codebase to update deprecated APIs to the latest version.
+
+After updating to the latest version, run:
+```dart
+dart fix --apply
+```
+
 
 ### `FAutocomplete`
 * Add `FAutocompleteItemMixin.item(...)`.
@@ -29,7 +38,7 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * **Breaking** Remove `FCheckbox.grouped(...)`. Use `FSelectGroupItemMixin.checkbox(...)` instead.
 
 
-### `FDateField` 
+### `FDateField`
 *  **Breaking** Change `FDateField.shift` to `FDateField.overflow`.
 
 
@@ -78,8 +87,8 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * Add `FSelectItemMixin.richSection(...)`.
 * Add `FSelectItem.item(...)`.
 
-*  **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
-*  **Breaking** Change `FMultiSelect.shift` to `FMultiSelect.overflow`.
+* **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
+* **Breaking** Change `FMultiSelect.shift` to `FMultiSelect.overflow`.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 
 
@@ -107,6 +116,19 @@ This update focuses on overhauling the API to better support the new dot-shortha
 *  Change `FTappable` to only update focused state when it has primary focus.
 
 
+### `FTextField`
+* Add `FTextFieldControl`.
+* Add `FTextField.control`.
+* Add `FTextFormField.control`.
+
+* **Breaking** Remove `FTextField.controller`. Use `FTextField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextField.onChange`. Use `FTextField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextField.initialText`. Use `FTextField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextFormField.controller`. Use `FTextFormField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextFormField.onChange`. Use `FTextFormField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextFormField.initialText`. Use `FTextFormField(control: .managed(...))` instead.
+
+
 ### `FTile` & `FTileGroup`
 * Add `FTileMixin.selectMenu(...)`.
 * Add `FTileMixin.selectMenuFromMap(...)`.
@@ -126,7 +148,7 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 ### `FTooltip`
 * Change `FTooltip` to not be focusable.
-* Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus. 
+* Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus.
 * **Breaking** Rename `FTooltip.shift` to `FTooltip.overflow`.
 
 

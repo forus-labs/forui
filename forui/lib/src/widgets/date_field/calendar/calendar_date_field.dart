@@ -173,8 +173,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       validator: _controller.validator,
       initialValue: widget.initialDate,
       builder: (state) => FTextField(
-        focusNode: _focus,
-        controller: _textController,
+        control: .managed(controller: _textController), focusNode: _focus,
         style: style.textFieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,

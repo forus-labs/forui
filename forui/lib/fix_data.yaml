@@ -1,0 +1,1246 @@
+version: 1
+transforms:
+  # FAutocomplete
+  - title: 'Rename FAutocomplete(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FAutocomplete.builder(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'builder'
+      inClass: FAutocomplete
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'FAutocompleteController.popover to FAutocompleteController.content'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      getter: 'popover'
+      inClass: FAutocompleteController
+    changes:
+      - kind: rename
+        newName: 'content'
+
+  - title: 'Rename FAutocompleteStyle(popoverStyle: ...) to contentStyle'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FAutocompleteStyle
+    changes:
+      - kind: renameParameter
+        oldName: 'popoverStyle'
+        newName: 'contentStyle'
+
+  # FBreadcrumb
+  - title: 'Rename FBreadcrumb(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FBreadcrumb
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  # FCheckbox
+  - title: 'Replace FCheckbox.grouped with FSelectGroupItemMixin.checkbox'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'grouped'
+      inClass: FCheckbox
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: ['package:forui/forui.dart']
+          constructor: 'checkbox'
+          inClass: FSelectGroupItemMixin
+
+
+  # FDateField
+  - title: 'Rename FDateField(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FDateField
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FDateField.calendar(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'calendar'
+      inClass: FDateField
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FDateField.input(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'input'
+      inClass: FDateField
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  # FPopover
+  - title: 'Rename FPopover(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FPopover
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+
+  # FPopoverMenu
+  - title: 'Rename FPopoverMenu(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FPopoverMenu
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FPopoverMenu.tiles(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'tiles'
+      inClass: FPopoverMenu
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  # FPortal
+  - title: 'Rename FPortalBox to FPortalRect'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      class: FPortalBox
+    changes:
+      - kind: rename
+        newName: 'FPortalRect'
+
+  - title: 'Rename FPortalChildBox to FPortalChildRect'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      class: FPortalChildBox
+    changes:
+      - kind: rename
+        newName: 'FPortalChildRect'
+
+  - title: 'Rename FPortalShift to FPortalOverflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      class: FPortalShift
+    changes:
+      - kind: rename
+        newName: 'FPortalOverflow'
+
+  - title: 'Rename FPortalShift.along to FPortalOverflow.slide'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      field: 'along'
+      inClass: FPortalOverflow
+    changes:
+      - kind: rename
+        newName: 'slide'
+
+  - title: 'Rename FPortal(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FPortal
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FPortalSpacing.resolve to FPortalSpacing.call'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      method: 'resolve'
+      inClass: FPortalSpacing
+    changes:
+      - kind: rename
+        newName: 'call'
+
+  # FRadio
+  - title: 'Replace FRadio.grouped with FSelectGroupItemMixin.radio'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'grouped'
+      inClass: FRadio
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: ['package:forui/forui.dart']
+          constructor: 'radio'
+          inClass: FSelectGroupItemMixin
+
+
+  # FSelect
+  - title: 'Rename FSelect(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FSelect.rich(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'rich'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FSelect.search(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'search'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FSelect.searchBuilder(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'searchBuilder'
+      inClass: FSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+
+  # FMultiSelect
+  - title: 'Rename FMultiSelect(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FMultiSelect.rich(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'rich'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FMultiSelect.search(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'search'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FMultiSelect.searchBuilder(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'searchBuilder'
+      inClass: FMultiSelect
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+
+  # FSelectGroup
+  - title: 'Rename FSelectGroupItem to FSelectGroupItemMixin'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      class: FSelectGroupItem
+    changes:
+      - kind: rename
+        newName: 'FSelectGroupItemMixin'
+
+
+  # FSelectMenuTile
+  - title: 'Rename FSelectMenuTile(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FSelectMenuTile.fromMap(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FSelectMenuTile.builder(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+
+  # FTextField
+  - title: 'Migrate FTextField.new to control parameter'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FTextField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+  - title: 'Migrate FTextField.email to control parameter'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'email'
+      inClass: FTextField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+  - title: 'Migrate FTextField.multiline to control parameter'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'multiline'
+      inClass: FTextField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+  - title: 'Migrate FTextField.password to control parameter'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      method: 'password'
+      inClass: FTextField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+  # FTextFormField
+  - title: 'Migrate FTextFormField.new to control parameter'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FTextFormField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+  - title: 'Migrate FTextFormField.email to control parameter'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'email'
+      inClass: FTextFormField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+  - title: 'Migrate FTextFormField.multiline to control parameter'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'multiline'
+      inClass: FTextFormField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+  - title: 'Migrate FTextFormField.password to control parameter'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      method: 'password'
+      inClass: FTextFormField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+
+  # FTimeField
+  - title: 'Rename FTimeField(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FTimeField
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+  - title: 'Rename FTimeField.picker(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: 'picker'
+      inClass: FTimeField
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+
+  # FTooltip
+  - title: 'Rename FTooltip(shift: ...) to overflow'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FTooltip
+    changes:
+      - kind: renameParameter
+        oldName: 'shift'
+        newName: 'overflow'
+
+
+  # FSidebar
+  - title: 'Remove FSidebar(width: ...)'
+    date: 2025-11-30
+    element:
+      uris: ['package:forui/forui.dart']
+      constructor: ''
+      inClass: FSidebar
+    changes:
+      - kind: renameParameter
+        oldName: 'width'
+        newName: 'constraints'
