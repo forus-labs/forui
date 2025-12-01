@@ -1,15 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart' show CupertinoTextMagnifier;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localized_text.dart';
+import 'package:forui/src/widgets/text_field/field.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
+import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
 /// A callback for building a custom counter for a text field.
 ///
@@ -58,7 +57,7 @@ extension Defaults on Never {
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [FTextFormField] for creating a text field that can be used in a form.
 /// * [TextField] for more details about working with a text field.
-class FTextField extends StatefulWidget {
+class FTextField extends StatelessWidget {
   /// Creates a [FTextField] configured for password entry with a visibility toggle.
   ///
   /// By default, [suffixBuilder] is an eye icon that toggles showing and hiding the password. Replace the toggle by
@@ -68,6 +67,7 @@ class FTextField extends StatefulWidget {
   ///
   /// [autofillHints] defaults to [AutofillHints.password]. Use [AutofillHints.newPassword] for new-password inputs.
   static Widget password({
+    FTextFieldControl control = const .managed(),
     FTextFieldStyle Function(FTextFieldStyle style)? style,
     FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
     Widget? label = const LocalizedText.password(),
@@ -76,7 +76,6 @@ class FTextField extends StatefulWidget {
     Widget? error,
     TextMagnifierConfiguration? magnifierConfiguration,
     Object groupId = EditableText,
-    TextEditingController? controller,
     FocusNode? focusNode,
     TextInputType? keyboardType,
     TextInputAction textInputAction = .next,
@@ -98,7 +97,6 @@ class FTextField extends StatefulWidget {
     bool? showCursor,
     int? maxLength,
     MaxLengthEnforcement? maxLengthEnforcement,
-    ValueChanged<String>? onChange,
     GestureTapCallback? onTap,
     TapRegionCallback? onTapOutside,
     bool onTapAlwaysCalled = false,
@@ -128,75 +126,75 @@ class FTextField extends StatefulWidget {
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
     bool Function(TextEditingValue) clearable = Defaults.clearable,
-    String? initialText,
     ValueNotifier<bool>? obscureTextController,
     Key? key,
-  }) => PasswordField(
-    properties: PasswordFieldProperties(
-      style: style,
-      builder: builder,
-      label: label,
-      hint: hint,
-      description: description,
-      error: error,
-      magnifierConfiguration: magnifierConfiguration,
-      groupId: groupId,
-      controller: controller,
-      focusNode: focusNode,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      textCapitalization: textCapitalization,
-      textAlign: textAlign,
-      textAlignVertical: textAlignVertical,
-      textDirection: textDirection,
-      autofocus: autofocus,
-      statesController: statesController,
-      obscuringCharacter: obscuringCharacter,
-      autocorrect: autocorrect,
-      smartDashesType: smartDashesType,
-      smartQuotesType: smartQuotesType,
-      enableSuggestions: enableSuggestions,
-      minLines: minLines,
-      maxLines: maxLines,
-      expands: expands,
-      readOnly: readOnly,
-      showCursor: showCursor,
-      maxLength: maxLength,
-      maxLengthEnforcement: maxLengthEnforcement,
-      onChange: onChange,
-      onTap: onTap,
-      onTapOutside: onTapOutside,
-      onTapAlwaysCalled: onTapAlwaysCalled,
-      onEditingComplete: onEditingComplete,
-      onSubmit: onSubmit,
-      onAppPrivateCommand: onAppPrivateCommand,
-      inputFormatters: inputFormatters,
-      enabled: enabled,
-      ignorePointers: ignorePointers,
-      enableInteractiveSelection: enableInteractiveSelection,
-      selectAllOnFocus: selectAllOnFocus,
-      selectionControls: selectionControls,
-      dragStartBehavior: dragStartBehavior,
-      mouseCursor: mouseCursor,
-      counterBuilder: counterBuilder,
-      scrollPhysics: scrollPhysics,
-      scrollController: scrollController,
-      autofillHints: autofillHints,
-      restorationId: restorationId,
-      stylusHandwritingEnabled: stylusHandwritingEnabled,
-      enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-      contentInsertionConfiguration: contentInsertionConfiguration,
-      contextMenuBuilder: contextMenuBuilder,
-      canRequestFocus: canRequestFocus,
-      undoController: undoController,
-      spellCheckConfiguration: spellCheckConfiguration,
-      prefixBuilder: prefixBuilder,
-      suffixBuilder: suffixBuilder,
-      clearable: clearable,
-      initialText: initialText,
-      obscureTextController: obscureTextController,
-    ),
+  }) => TextFieldControl(
     key: key,
+    control: control,
+    builder: (context, controller, _) => PasswordField(
+      controller: controller,
+      properties: PasswordFieldProperties(
+        style: style,
+        builder: builder,
+        label: label,
+        hint: hint,
+        description: description,
+        error: error,
+        magnifierConfiguration: magnifierConfiguration,
+        groupId: groupId,
+        focusNode: focusNode,
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        textCapitalization: textCapitalization,
+        textAlign: textAlign,
+        textAlignVertical: textAlignVertical,
+        textDirection: textDirection,
+        autofocus: autofocus,
+        statesController: statesController,
+        obscuringCharacter: obscuringCharacter,
+        autocorrect: autocorrect,
+        smartDashesType: smartDashesType,
+        smartQuotesType: smartQuotesType,
+        enableSuggestions: enableSuggestions,
+        minLines: minLines,
+        maxLines: maxLines,
+        expands: expands,
+        readOnly: readOnly,
+        showCursor: showCursor,
+        maxLength: maxLength,
+        maxLengthEnforcement: maxLengthEnforcement,
+        onTap: onTap,
+        onTapOutside: onTapOutside,
+        onTapAlwaysCalled: onTapAlwaysCalled,
+        onEditingComplete: onEditingComplete,
+        onSubmit: onSubmit,
+        onAppPrivateCommand: onAppPrivateCommand,
+        inputFormatters: inputFormatters,
+        enabled: enabled,
+        ignorePointers: ignorePointers,
+        enableInteractiveSelection: enableInteractiveSelection,
+        selectAllOnFocus: selectAllOnFocus,
+        selectionControls: selectionControls,
+        dragStartBehavior: dragStartBehavior,
+        mouseCursor: mouseCursor,
+        counterBuilder: counterBuilder,
+        scrollPhysics: scrollPhysics,
+        scrollController: scrollController,
+        autofillHints: autofillHints,
+        restorationId: restorationId,
+        stylusHandwritingEnabled: stylusHandwritingEnabled,
+        enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+        contentInsertionConfiguration: contentInsertionConfiguration,
+        contextMenuBuilder: contextMenuBuilder,
+        canRequestFocus: canRequestFocus,
+        undoController: undoController,
+        spellCheckConfiguration: spellCheckConfiguration,
+        prefixBuilder: prefixBuilder,
+        suffixBuilder: suffixBuilder,
+        clearable: clearable,
+        obscureTextController: obscureTextController,
+      ),
+    ),
   );
 
   /// {@template forui.text_field.style}
@@ -257,13 +255,12 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final Object groupId;
 
-  /// {@template forui.text_field.controller}
-  /// Controls the text being edited. If null, this widget will create its own [TextEditingController].
+  /// {@template forui.text_field.control}
+  /// Controls the text being edited.
   ///
-  /// ## Contract
-  /// Throws an [AssertionError] if both [controller] and [initialText] are provided.
+  /// Defaults to [FTextFieldControl.managed] which creates and manages an internal [TextEditingController].
   /// {@endtemplate}
-  final TextEditingController? controller;
+  final FTextFieldControl control;
 
   /// {@template forui.text_field.keyboardType}
   /// The type of keyboard to use for editing the text. Defaults to [TextInputType.text] if maxLines is one and
@@ -491,24 +488,6 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final MaxLengthEnforcement? maxLengthEnforcement;
 
-  /// {@template forui.text_field.onChange}
-  /// Called when the user initiates a change to the TextField's value: when they have inserted or deleted text.
-  ///
-  /// This callback doesn't run when the TextField's text is changed programmatically, via the TextField's [controller].
-  /// Typically it isn't necessary to be notified of such changes, since they're initiated by the app itself.
-  ///
-  /// To be notified of all changes to the TextField's text, cursor, and selection, one can add a listener to its
-  /// [controller] with [TextEditingController.addListener].
-  ///
-  /// [onChange] is called before [onSubmit] when user indicates completion of editing, such as when pressing the "done"
-  /// button on the keyboard. That default behavior can be overridden. See [onEditingComplete] for details.
-  ///
-  /// See also:
-  ///  * [inputFormatters], which are called before [onChange] runs and can validate and change ("format") the input value.
-  ///  * [onEditingComplete], [onSubmit]: which are more specialized input change notifications.
-  /// {@endtemplate}
-  final ValueChanged<String>? onChange;
-
   /// {@template forui.text_field.onTap}
   /// Called for the first tap in a series of taps.
   ///
@@ -570,11 +549,11 @@ class FTextField extends StatefulWidget {
   /// The default implementation of [onEditingComplete] executes 2 different behaviors based on the situation:
   ///
   ///  - When a completion action is pressed, such as "done", "go", "send", or "search", the user's content is submitted
-  ///    to the [controller] and then focus is given up.
+  ///    and then focus is given up.
   ///
-  ///  - When a non-completion action is pressed, such as "next" or "previous", the user's content is submitted to the
-  ///    [controller], but focus is not given up because developers may want to immediately move focus to another input
-  ///    widget within [onSubmit].
+  ///  - When a non-completion action is pressed, such as "next" or "previous", the user's content is submitted but
+  ///    focus is not given up because developers may want to immediately move focus to another input widget within
+  ///    [onSubmit].
   ///
   /// Providing [onEditingComplete] prevents the aforementioned default behavior.
   /// {@endtemplate}
@@ -583,7 +562,7 @@ class FTextField extends StatefulWidget {
   /// {@template forui.text_field.onSubmit}
   /// Called when the user indicates that they are done editing the text in the field.
   ///
-  /// By default, [onSubmit] is called after [onChange] when the user has finalized editing; or, if the default behavior
+  /// By default, [onSubmit] is called after `onChange` when the user has finalized editing; or, if the default behavior
   /// has been overridden, after [onEditingComplete]. See [onEditingComplete] for details.
   ///
   /// ## Testing
@@ -620,7 +599,8 @@ class FTextField extends StatefulWidget {
   ///
   /// Formatters are run in the provided order when the user changes the text this widget contains. When this parameter
   /// changes, the new formatters will not be applied until the next time the user inserts or deletes text. Similar to
-  /// the [onChange] callback, formatters don't run when the text is changed programmatically via [controller].
+  /// the `onChange` callback, formatters don't run when the text is changed programmatically via a
+  /// [TextEditingController].
   ///
   /// See also:
   ///  * [TextEditingController], which implements the [Listenable] interface and notifies its listeners on
@@ -826,16 +806,9 @@ class FTextField extends StatefulWidget {
   /// {@endtemplate}
   final bool Function(TextEditingValue) clearable;
 
-  /// {@template forui.text_field.initialValue}
-  /// The initial text.
-  ///
-  /// ## Contract
-  /// Throws an [AssertionError] if both [controller] and [initialText] are provided.
-  /// {@endtemplate}
-  final String? initialText;
-
   /// Creates a [FTextField].
   const FTextField({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label,
@@ -844,7 +817,6 @@ class FTextField extends StatefulWidget {
     this.error,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
@@ -867,7 +839,6 @@ class FTextField extends StatefulWidget {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -897,16 +868,12 @@ class FTextField extends StatefulWidget {
     this.prefixBuilder,
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
-    this.initialText,
     super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and an initialText. '
-         'To fix, set the initial text directly in the controller.',
-       );
+  });
 
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label = const LocalizedText.email(),
@@ -915,7 +882,6 @@ class FTextField extends StatefulWidget {
     this.error,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType = .emailAddress,
     this.textInputAction = .next,
@@ -938,7 +904,6 @@ class FTextField extends StatefulWidget {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -968,13 +933,8 @@ class FTextField extends StatefulWidget {
     this.prefixBuilder,
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
-    this.initialText,
     super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and an initialText. '
-         'To fix, set the initial text directly in the controller.',
-       );
+  });
 
   /// Creates a [FTextField] configured for multiline inputs.
   ///
@@ -982,6 +942,7 @@ class FTextField extends StatefulWidget {
   /// time a new line is added. To limit the maximum height of the text field and make it scrollable, consider setting
   /// [maxLines].
   const FTextField.multiline({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label,
@@ -990,7 +951,6 @@ class FTextField extends StatefulWidget {
     this.error,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
@@ -1013,7 +973,6 @@ class FTextField extends StatefulWidget {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -1043,27 +1002,86 @@ class FTextField extends StatefulWidget {
     this.prefixBuilder,
     this.suffixBuilder,
     this.clearable = Defaults.clearable,
-    this.initialText,
     super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and an initialText. '
-         'To fix, set the initial text directly in the controller.',
-       );
+  });
 
   @override
-  State<FTextField> createState() => _State();
+  Widget build(BuildContext context) => TextFieldControl(
+    control: control,
+    builder: (context, controller, _) => Field(
+      controller: controller,
+      style: style,
+      builder: builder,
+      label: label,
+      hint: hint,
+      description: description,
+      error: error,
+      magnifierConfiguration: magnifierConfiguration,
+      groupId: groupId,
+      focusNode: focusNode,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      textCapitalization: textCapitalization,
+      textAlign: textAlign,
+      textAlignVertical: textAlignVertical,
+      textDirection: textDirection,
+      autofocus: autofocus,
+      statesController: statesController,
+      obscuringCharacter: obscuringCharacter,
+      obscureText: obscureText,
+      autocorrect: autocorrect,
+      smartDashesType: smartDashesType,
+      smartQuotesType: smartQuotesType,
+      enableSuggestions: enableSuggestions,
+      minLines: minLines,
+      maxLines: maxLines,
+      expands: expands,
+      readOnly: readOnly,
+      showCursor: showCursor,
+      maxLength: maxLength,
+      maxLengthEnforcement: maxLengthEnforcement,
+      onTap: onTap,
+      onTapOutside: onTapOutside,
+      onTapAlwaysCalled: onTapAlwaysCalled,
+      onEditingComplete: onEditingComplete,
+      onSubmit: onSubmit,
+      onAppPrivateCommand: onAppPrivateCommand,
+      inputFormatters: inputFormatters,
+      enabled: enabled,
+      ignorePointers: ignorePointers,
+      enableInteractiveSelection: enableInteractiveSelection,
+      selectAllOnFocus: selectAllOnFocus,
+      selectionControls: selectionControls,
+      dragStartBehavior: dragStartBehavior,
+      mouseCursor: mouseCursor,
+      counterBuilder: counterBuilder,
+      scrollPhysics: scrollPhysics,
+      scrollController: scrollController,
+      autofillHints: autofillHints,
+      restorationId: restorationId,
+      stylusHandwritingEnabled: stylusHandwritingEnabled,
+      enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+      contentInsertionConfiguration: contentInsertionConfiguration,
+      contextMenuBuilder: contextMenuBuilder,
+      canRequestFocus: canRequestFocus,
+      undoController: undoController,
+      spellCheckConfiguration: spellCheckConfiguration,
+      prefixBuilder: prefixBuilder,
+      suffixBuilder: suffixBuilder,
+      clearable: clearable,
+    ),
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('groupId', groupId))
-      ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))
       ..add(EnumProperty('textInputAction', textInputAction))
@@ -1086,7 +1104,6 @@ class FTextField extends StatefulWidget {
       ..add(FlagProperty('showCursor', value: showCursor, ifTrue: 'showCursor'))
       ..add(IntProperty('maxLength', maxLength))
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
       ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
@@ -1125,246 +1142,6 @@ class FTextField extends StatefulWidget {
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
-      ..add(ObjectFlagProperty.has('clearable', clearable))
-      ..add(StringProperty('initialText', initialText));
-  }
-}
-
-class _State extends State<FTextField> {
-  late TextEditingController _controller;
-  late WidgetStatesController _statesController;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? .new(text: widget.initialText);
-    _controller.addListener(_handleOnChange);
-
-    _statesController = widget.statesController ?? .new();
-    _statesController.addListener(_handleStatesChange);
-  }
-
-  @override
-  void didUpdateWidget(covariant FTextField old) {
-    super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller.removeListener(_handleOnChange);
-      }
-
-      _controller = widget.controller ?? .new(text: widget.initialText);
-      _controller.addListener(_handleOnChange);
-    }
-
-    if (widget.statesController != old.statesController) {
-      if (old.statesController == null) {
-        _statesController.dispose();
-      } else {
-        _statesController.removeListener(_handleStatesChange);
-      }
-
-      _statesController = widget.statesController ?? .new();
-      _statesController.addListener(_handleStatesChange);
-    }
-  }
-
-  void _handleOnChange() => widget.onChange?.call(_controller.text);
-
-  void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
-    if (mounted) {
-      setState(() {});
-    }
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.textFieldStyle) ?? context.theme.textFieldStyle;
-    final states = {..._statesController.value};
-
-    final textfield = TextField(
-      controller: _controller,
-      decoration: _decoration(style),
-      focusNode: widget.focusNode,
-      undoController: widget.undoController,
-      cursorErrorColor: style.cursorColor,
-      keyboardType: widget.keyboardType,
-      textInputAction: widget.textInputAction,
-      textCapitalization: widget.textCapitalization,
-      style: style.contentTextStyle.resolve(states),
-      textAlign: widget.textAlign,
-      textAlignVertical: widget.textAlignVertical,
-      textDirection: widget.textDirection,
-      readOnly: widget.readOnly,
-      showCursor: widget.showCursor,
-      autofocus: widget.autofocus,
-      statesController: _statesController,
-      obscuringCharacter: widget.obscuringCharacter,
-      obscureText: widget.obscureText,
-      autocorrect: widget.autocorrect,
-      smartDashesType: widget.smartDashesType,
-      smartQuotesType: widget.smartQuotesType,
-      enableSuggestions: widget.enableSuggestions,
-      maxLines: widget.maxLines,
-      minLines: widget.minLines,
-      expands: widget.expands,
-      maxLength: widget.maxLength,
-      maxLengthEnforcement: widget.maxLengthEnforcement,
-      onTap: widget.onTap,
-      onTapOutside: widget.onTapOutside,
-      onTapAlwaysCalled: widget.onTapAlwaysCalled,
-      onEditingComplete: widget.onEditingComplete,
-      onSubmitted: widget.onSubmit,
-      onAppPrivateCommand: widget.onAppPrivateCommand,
-      inputFormatters: widget.inputFormatters,
-      enabled: widget.enabled,
-      ignorePointers: widget.ignorePointers,
-      enableInteractiveSelection: widget.enableInteractiveSelection,
-      keyboardAppearance: style.keyboardAppearance,
-      scrollPadding: style.scrollPadding,
-      dragStartBehavior: widget.dragStartBehavior,
-      mouseCursor: widget.mouseCursor,
-      buildCounter: (context, {required currentLength, required isFocused, required maxLength}) {
-        final counter = widget.counterBuilder?.call(context, currentLength, maxLength, isFocused);
-        return counter == null
-            ? null
-            : DefaultTextStyle.merge(style: style.counterTextStyle.resolve(states), child: counter);
-      },
-      selectAllOnFocus: widget.selectAllOnFocus,
-      selectionControls: widget.selectionControls,
-      scrollController: widget.scrollController,
-      scrollPhysics: widget.scrollPhysics,
-      autofillHints: widget.autofillHints,
-      restorationId: widget.restorationId,
-      stylusHandwritingEnabled: widget.stylusHandwritingEnabled,
-      enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
-      contentInsertionConfiguration: widget.contentInsertionConfiguration,
-      contextMenuBuilder: widget.contextMenuBuilder,
-      canRequestFocus: widget.canRequestFocus,
-      spellCheckConfiguration: widget.spellCheckConfiguration,
-      magnifierConfiguration: widget.magnifierConfiguration,
-      groupId: widget.groupId,
-    );
-
-    Widget field = FLabel(
-      axis: .vertical,
-      states: states,
-      label: widget.label,
-      style: style,
-      description: widget.description,
-      // Error should never be null as doing so causes the widget tree to change. This causes overlays attached to
-      // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.
-      error: widget.error ?? const SizedBox(),
-      expands: widget.expands,
-      child: widget.builder(context, style, states, textfield),
-    );
-
-    field = MergeSemantics(
-      child: Material(
-        color: Colors.transparent,
-        child: Theme(
-          // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
-          // for overriding selectionHandleColor.
-          data: Theme.of(context).copyWith(
-            visualDensity: .standard,
-            textSelectionTheme: TextSelectionThemeData(
-              cursorColor: style.cursorColor,
-              selectionColor: style.cursorColor.withValues(alpha: 0.4),
-              selectionHandleColor: style.cursorColor,
-            ),
-          ),
-          child: CupertinoTheme(
-            // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
-            data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
-            child: field,
-          ),
-        ),
-      ),
-    );
-
-    final materialLocalizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
-    if (materialLocalizations == null) {
-      field = Localizations(
-        locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-        delegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        child: field,
-      );
-    }
-
-    return field;
-  }
-
-  InputDecoration _decoration(FTextFieldStyle style) {
-    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    final textDirection = Directionality.maybeOf(context) ?? .ltr;
-    final padding = style.contentPadding.resolve(textDirection);
-    final states = _statesController.value;
-
-    final suffix = widget.suffixBuilder?.call(context, style, states);
-    final clear = widget.clearable(_controller.value)
-        ? Padding(
-            padding: style.clearButtonPadding,
-            child: FButton.icon(
-              style: style.clearButtonStyle,
-              onPress: () => _controller.text = '',
-              child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
-            ),
-          )
-        : null;
-
-    return InputDecoration(
-      isDense: true,
-      prefixIcon: widget.prefixBuilder?.call(context, style, states),
-      suffixIcon: switch ((suffix, clear)) {
-        (final icon?, final clear?) when !states.contains(WidgetState.disabled) => Row(
-          mainAxisAlignment: .end,
-          mainAxisSize: .min,
-          children: [clear, icon],
-        ),
-        (null, final clear?) when !states.contains(WidgetState.disabled) => clear,
-        (final icon, _) => icon,
-      },
-      // See https://stackoverflow.com/questions/70771410/flutter-how-can-i-remove-the-content-padding-for-error-in-textformfield
-      prefix: Padding(
-        padding: switch (textDirection) {
-          .ltr => .only(left: widget.prefixBuilder == null ? padding.left : 0),
-          .rtl => .only(right: widget.prefixBuilder == null ? padding.right : 0),
-        },
-      ),
-      prefixIconConstraints: const BoxConstraints(),
-      suffixIconConstraints: const BoxConstraints(),
-      contentPadding: switch (textDirection) {
-        .ltr => padding.copyWith(left: 0),
-        .rtl => padding.copyWith(right: 0),
-      },
-      hintText: widget.hint,
-      hintStyle: WidgetStateTextStyle.resolveWith(style.hintTextStyle.resolve),
-      fillColor: style.fillColor,
-      filled: style.filled,
-      border: WidgetStateInputBorder.resolveWith(style.border.resolve),
-      // This is done to trigger the error state. We don't pass in error directly since we build our own using FLabel.
-      error: widget.error == null ? null : const SizedBox(),
-    );
-  }
-
-  @override
-  void dispose() {
-    if (widget.statesController == null) {
-      _statesController.dispose();
-    } else {
-      _statesController.removeListener(_handleStatesChange);
-    }
-
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_handleOnChange);
-    }
-    super.dispose();
+      ..add(ObjectFlagProperty.has('clearable', clearable));
   }
 }

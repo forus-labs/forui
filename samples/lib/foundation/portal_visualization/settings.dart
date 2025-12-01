@@ -182,11 +182,13 @@ class Settings extends StatelessWidget {
             children: [
               Expanded(
                 child: FTextField(
+                  control: .managed(
+                    onChange: (v) => value.spacing = double.tryParse(v.text) ?? value.spacing,
+                    initial: TextEditingValue(text: value.spacing.toStringAsFixed(0)),
+                  ),
                   hint: 'Distance',
                   keyboardType: .number,
                   inputFormatters: [_spacingFormatter],
-                  initialText: value.spacing.toStringAsFixed(0),
-                  onChange: (v) => value.spacing = double.tryParse(v) ?? value.spacing,
                 ),
               ),
               Expanded(
@@ -235,22 +237,26 @@ class _ChildSettings extends StatelessWidget {
           children: [
             Expanded(
               child: FTextField(
+                control: .managed(
+                  onChange: (v) =>
+                      value.childSize = Size(double.tryParse(v.text) ?? value.childSize.width, value.childSize.height),
+                  initial: TextEditingValue(text: value.childSize.width.toStringAsFixed(0)),
+                ),
                 hint: 'W',
                 keyboardType: .number,
                 inputFormatters: [_dimensionFormatter],
-                initialText: value.childSize.width.toStringAsFixed(0),
-                onChange: (v) =>
-                    value.childSize = Size(double.tryParse(v) ?? value.childSize.width, value.childSize.height),
               ),
             ),
             Expanded(
               child: FTextField(
+                control: .managed(
+                  onChange: (v) =>
+                      value.childSize = Size(value.childSize.width, double.tryParse(v.text) ?? value.childSize.height),
+                  initial: TextEditingValue(text: value.childSize.height.toStringAsFixed(0)),
+                ),
                 hint: 'H',
                 keyboardType: .number,
                 inputFormatters: [_dimensionFormatter],
-                initialText: value.childSize.height.toStringAsFixed(0),
-                onChange: (v) =>
-                    value.childSize = Size(value.childSize.width, double.tryParse(v) ?? value.childSize.height),
               ),
             ),
           ],
@@ -265,22 +271,26 @@ class _ChildSettings extends StatelessWidget {
           children: [
             Expanded(
               child: FTextField(
+                control: .managed(
+                  onChange: (v) =>
+                      value.childOffset = Offset(double.tryParse(v.text) ?? value.childOffset.dx, value.childOffset.dy),
+                  initial: TextEditingValue(text: value.childOffset.dx.toStringAsFixed(0)),
+                ),
                 hint: 'X',
                 keyboardType: .number,
                 inputFormatters: [_offsetFormatter],
-                initialText: value.childOffset.dx.toStringAsFixed(0),
-                onChange: (v) =>
-                    value.childOffset = Offset(double.tryParse(v) ?? value.childOffset.dx, value.childOffset.dy),
               ),
             ),
             Expanded(
               child: FTextField(
+                control: .managed(
+                  onChange: (v) =>
+                      value.childOffset = Offset(value.childOffset.dx, double.tryParse(v.text) ?? value.childOffset.dy),
+                  initial: TextEditingValue(text: value.childOffset.dy.toStringAsFixed(0)),
+                ),
                 hint: 'Y',
                 keyboardType: .number,
                 inputFormatters: [_offsetFormatter],
-                initialText: value.childOffset.dy.toStringAsFixed(0),
-                onChange: (v) =>
-                    value.childOffset = Offset(value.childOffset.dx, double.tryParse(v) ?? value.childOffset.dy),
               ),
             ),
           ],
@@ -316,22 +326,30 @@ class _PortalSettings extends StatelessWidget {
           children: [
             Expanded(
               child: FTextField(
+                control: .managed(
+                  onChange: (v) => value.portalSize = Size(
+                    double.tryParse(v.text) ?? value.portalSize.width,
+                    value.portalSize.height,
+                  ),
+                  initial: TextEditingValue(text: value.portalSize.width.toStringAsFixed(0)),
+                ),
                 hint: 'W',
                 keyboardType: .number,
                 inputFormatters: [_dimensionFormatter],
-                initialText: value.portalSize.width.toStringAsFixed(0),
-                onChange: (v) =>
-                    value.portalSize = Size(double.tryParse(v) ?? value.portalSize.width, value.portalSize.height),
               ),
             ),
             Expanded(
               child: FTextField(
+                control: .managed(
+                  onChange: (v) => value.portalSize = Size(
+                    value.portalSize.width,
+                    double.tryParse(v.text) ?? value.portalSize.height,
+                  ),
+                  initial: TextEditingValue(text: value.portalSize.height.toStringAsFixed(0)),
+                ),
                 hint: 'H',
                 keyboardType: .number,
                 inputFormatters: [_dimensionFormatter],
-                initialText: value.portalSize.height.toStringAsFixed(0),
-                onChange: (v) =>
-                    value.portalSize = Size(value.portalSize.width, double.tryParse(v) ?? value.portalSize.height),
               ),
             ),
           ],

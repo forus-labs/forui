@@ -34,15 +34,13 @@ class _TextFormFieldPageState extends StatefulSampleState<TextFormFieldPage> {
         mainAxisAlignment: .center,
         children: [
           FTextFormField.email(
-            controller: _emailController,
-            hint: 'janedoe@foruslabs.com',
+            control: .managed(controller: _emailController), hint: 'janedoe@foruslabs.com',
             autovalidateMode: .onUserInteraction,
             validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
           ),
           const SizedBox(height: 10),
           FTextFormField.password(
-            controller: _passwordController,
-            autovalidateMode: .onUserInteraction,
+            control: .managed(controller: _passwordController), autovalidateMode: .onUserInteraction,
             validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
           ),
           const SizedBox(height: 20),
