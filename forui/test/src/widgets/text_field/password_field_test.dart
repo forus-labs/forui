@@ -6,9 +6,36 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('lifted', (tester) async {
+    var value = const TextEditingValue(text: 'initial');
+    TextEditingValue? received;
+
+    Widget buildWidget() => TestScaffold.app(
+      child: FTextField.password(
+        control: .lifted(
+          value: value,
+          onChange: (v) => received = v,
+        ),
+      ),
+    );
+
+    await tester.pumpWidget(buildWidget());
+
+    expect(find.text('initial'), findsOneWidget);
+
+    await tester.enterText(find.byType(EditableText), 'typed');
+    await tester.pumpAndSettle();
+    expect(received?.text, 'typed');
+
+    value = const TextEditingValue(text: 'external');
+    await tester.pumpWidget(buildWidget());
+    await tester.pumpAndSettle();
+    expect(find.text('external'), findsOneWidget);
+  });
+
   testWidgets('hide', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.app(child: FTextField.password(obscureTextController: autoDispose(ValueNotifier(false)))),
+      TestScaffold.app(child: FTextField.password(obscureTextControl: .managed(controller: autoDispose(ValueNotifier(false))))),
     );
 
     expect(find.bySemanticsLabel('Hide password'), findsOne);
@@ -34,8 +61,8 @@ void main() {
       TestScaffold.app(
         child: Column(
           children: [
-            FTextField.password(obscureTextController: controller),
-            FTextField.password(obscureTextController: controller, suffixBuilder: null),
+            FTextField.password(obscureTextControl: .managed(controller: controller)),
+            FTextField.password(obscureTextControl: .managed(controller: controller), suffixBuilder: null),
           ],
         ),
       ),
@@ -55,13 +82,38 @@ void main() {
     expect(fields[1].obscureText, false);
   });
 
-  group('obscureTextController', () {
-    const key = Key('field');
+  group('obscureTextControl', () {
+    testWidgets('lifted', (tester) async {
+      var value = true;
+      bool? received;
+
+      Widget buildWidget() => TestScaffold.app(
+        child: FTextField.password(
+          obscureTextControl: .lifted(
+            value: value,
+            onChange: (v) => received = v,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(buildWidget());
+
+      expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, true);
+
+      await tester.tap(find.byIcon(FIcons.eye));
+      await tester.pumpAndSettle();
+      expect(received, false);
+
+      value = false;
+      await tester.pumpWidget(buildWidget());
+      await tester.pumpAndSettle();
+      expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, false);
+    });
 
     testWidgets('set value', (tester) async {
       final controller = autoDispose(ValueNotifier(false));
 
-      await tester.pumpWidget(TestScaffold.app(child: FTextField.password(obscureTextController: controller)));
+      await tester.pumpWidget(TestScaffold.app(child: FTextField.password(obscureTextControl: .managed(controller: controller))));
 
       expect(find.bySemanticsLabel('Hide password'), findsOne);
       expect(find.byIcon(FIcons.eyeClosed), findsOne);
@@ -79,39 +131,6 @@ void main() {
       expect(find.byIcon(FIcons.eyeClosed), findsNothing);
 
       expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, true);
-    });
-
-    testWidgets('old controller is not disposed', (tester) async {
-      final first = autoDispose(FValueNotifier(false));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FTextField.password(key: key, obscureTextController: first),
-        ),
-      );
-
-      final second = autoDispose(FValueNotifier(true));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FTextField.password(key: key, obscureTextController: first),
-        ),
-      );
-
-      expect(first.disposed, false);
-      expect(second.disposed, false);
-    });
-
-    testWidgets('dispose controller', (tester) async {
-      final controller = autoDispose(FValueNotifier(false));
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FTextField.password(key: key, obscureTextController: controller),
-        ),
-      );
-      expect(controller.disposed, false);
-
-      await tester.pumpWidget(TestScaffold.app(child: const SizedBox()));
-      expect(controller.disposed, false);
     });
   });
 }

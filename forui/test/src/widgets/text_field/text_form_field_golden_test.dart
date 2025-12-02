@@ -130,10 +130,9 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FTextFormField.password(
-                control: .managed(controller: controller),
+                control: .managed(controller: controller), obscureTextControl: .managed(controller: obscure),
                 autofocus: focused_,
                 hint: 'password',
-                obscureTextController: obscure,
               ),
             ),
           );

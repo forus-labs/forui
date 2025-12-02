@@ -27,11 +27,12 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// By default, [suffixBuilder] is an eye icon that toggles showing and hiding the password. Replace the toggle by
   /// providing a custom [suffixBuilder], or disable it by setting it to `null`.
   ///
-  /// The [obscureTextController] parameter is a [ValueNotifier] that controls the obscuring state.
+  /// The [obscureTextControl] parameter controls the obscuring state.
   ///
   /// [autofillHints] defaults to [AutofillHints.password]. Use [AutofillHints.newPassword] for new-password inputs.
   static Widget password({
     FTextFieldControl control = const .managed(),
+    FObscureTextControl obscureTextControl = const .managed(),
     FTextFieldStyle Function(FTextFieldStyle style)? style,
     FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
     Widget? label = const LocalizedText.password(),
@@ -90,7 +91,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
     bool Function(TextEditingValue) clearable = Defaults.clearable,
-    ValueNotifier<bool>? obscureTextController,
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
     FormFieldValidator<String>? validator,
@@ -159,7 +159,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       prefixBuilder: prefixBuilder,
       suffixBuilder: suffixBuilder,
       clearable: clearable,
-      obscureTextController: obscureTextController,
+      obscureTextControl: obscureTextControl,
     ),
     onSaved: onSaved,
     onReset: onReset,

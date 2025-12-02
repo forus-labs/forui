@@ -6,6 +6,33 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('lifted', (tester) async {
+    var value = const TextEditingValue(text: 'initial');
+    TextEditingValue? received;
+
+    Widget buildWidget() => TestScaffold.app(
+      child: FTextFormField(
+        control: .lifted(
+          value: value,
+          onChange: (v) => received = v,
+        ),
+      ),
+    );
+
+    await tester.pumpWidget(buildWidget());
+
+    expect(find.text('initial'), findsOneWidget);
+
+    await tester.enterText(find.byType(EditableText), 'typed');
+    await tester.pumpAndSettle();
+    expect(received?.text, 'typed');
+
+    value = const TextEditingValue(text: 'external');
+    await tester.pumpWidget(buildWidget());
+    await tester.pumpAndSettle();
+    expect(find.text('external'), findsOneWidget);
+  });
+
   group('form', () {
     for (final (type, field) in [
       (

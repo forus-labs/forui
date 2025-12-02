@@ -117,6 +117,7 @@ dart fix --apply
 
 
 ### `FTextField`
+* Add `FObscureTextControl`.
 * Add `FTextFieldControl`.
 * Add `FTextField.control`.
 * Add `FTextFormField.control`.
@@ -127,6 +128,8 @@ dart fix --apply
 * **Breaking** Remove `FTextFormField.controller`. Use `FTextFormField(control: .managed(...))` instead.
 * **Breaking** Remove `FTextFormField.onChange`. Use `FTextFormField(control: .managed(...))` instead.
 * **Breaking** Remove `FTextFormField.initialText`. Use `FTextFormField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextField.password(obscureTextController: ...)`. Use `FTextField.password(obscureTextControl: ...)` instead.
+* **Breaking** Remove `FTextFormField.password(obscureTextController: ...)`. Use `FTextFormField.password(obscureTextControl: ...)` instead.
 
 
 ### `FTile` & `FTileGroup`
