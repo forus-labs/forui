@@ -29,8 +29,11 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// The icon, wrapped in a [IconTheme]. Defaults to `Icon(FIcons.chevronRight)`.
   final Widget icon;
 
-  /// True if the item is initially expanded.
-  final bool initiallyExpanded;
+  /// True if the parent accordion is managed and the item is initially expanded.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if the parent accordion has lifted state and [initiallyExpanded] is non-null.
+  final bool? initiallyExpanded;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -56,7 +59,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
     required this.child,
     this.style,
     this.icon = const Icon(FIcons.chevronDown),
-    this.initiallyExpanded = false,
+    this.initiallyExpanded,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -83,52 +86,51 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
 }
 
 class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStateMixin {
-  AnimationController? _controller;
-  CurvedAnimation? _curvedReveal;
-  CurvedAnimation? _curvedIconRotation;
+  late final AnimationController _controller = AnimationController(vsync: this);
+  late final CurvedAnimation _curvedReveal = CurvedAnimation(curve: Curves.linear, parent: _controller);
+  late final CurvedAnimation _curvedIconRotation = CurvedAnimation(curve: Curves.linear, parent: _controller);
+  late FAccordionController _accordionController;
+  late int _index;
   Animation<double>? _reveal;
   Animation<double>? _iconRotation;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // TODO: assert initiallyExpanded is null if accordion is in lifted mode.
 
-    final InheritedAccordionData(:index, :controller, :style) = InheritedAccordionData.of(context);
-    controller.remove(index);
+    final InheritedAccordionData(:index, :controller, :style) = .of(context);
+    _accordionController = controller;
+    _index = index;
+    _accordionController.remove(_index, _controller);
 
-    _curvedReveal?.dispose();
-    _curvedIconRotation?.dispose();
-    _controller?.dispose();
+    _controller
+      ..value = (widget.initiallyExpanded ?? false) ? 1 : 0
+      ..duration = style.motion.expandDuration
+      ..reverseDuration = style.motion.collapseDuration;
 
-    _controller = AnimationController(
-      vsync: this,
-      value: widget.initiallyExpanded ? 1 : 0,
-      duration: style.motion.expandDuration,
-      reverseDuration: style.motion.collapseDuration,
-    );
-    _curvedReveal = CurvedAnimation(
-      curve: style.motion.expandCurve,
-      reverseCurve: style.motion.collapseCurve,
-      parent: _controller!,
-    );
-    _curvedIconRotation = CurvedAnimation(
-      curve: style.motion.iconExpandCurve,
-      reverseCurve: style.motion.iconCollapseCurve,
-      parent: _controller!,
-    );
-    _reveal = style.motion.revealTween.animate(_curvedReveal!);
-    _iconRotation = style.motion.iconTween.animate(_curvedIconRotation!);
+    _curvedReveal
+      ..curve = style.motion.expandCurve
+      ..reverseCurve = style.motion.collapseCurve;
 
-    if (!controller.add(index, _controller!)) {
+    _curvedIconRotation
+      ..curve = style.motion.iconExpandCurve
+      ..reverseCurve = style.motion.iconCollapseCurve;
+
+    _reveal = style.motion.revealTween.animate(_curvedReveal);
+    _iconRotation = style.motion.iconTween.animate(_curvedIconRotation);
+
+    if (!controller.add(index, _controller)) {
       throw StateError('Number of expanded items must be within the min and max.');
     }
   }
 
   @override
   void dispose() {
-    _curvedIconRotation?.dispose();
-    _curvedReveal?.dispose();
-    _controller?.dispose();
+    _accordionController.remove(_index, _controller);
+    _curvedIconRotation.dispose();
+    _curvedReveal.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
