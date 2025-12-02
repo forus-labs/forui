@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/accordion/accordion_controller.dart';
+
 import '../../test_scaffold.dart';
 
 void main() {
@@ -82,5 +84,65 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('button'), findsOneWidget);
+  });
+
+  testWidgets('disposed item removes controller from map', (tester) async {
+    final controller = autoDispose(FAccordionController());
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FAccordion(
+          controller: controller,
+          children: const [
+            FAccordionItem(title: Text('Title'), child: Text('Content')),
+          ],
+        ),
+      ),
+    );
+
+    expect(controller.controllers.length, 1);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FAccordion(
+          controller: controller,
+          children: const [],
+        ),
+      ),
+    );
+
+    expect(controller.controllers.length, 0);
+  });
+
+  testWidgets('replaced item does not remove new controller', (tester) async {
+    final controller = autoDispose(FAccordionController());
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FAccordion(
+          controller: controller,
+          children: const [
+            FAccordionItem(key: Key('a'), title: Text('Title A'), child: Text('Content A')),
+          ],
+        ),
+      ),
+    );
+
+    expect(controller.controllers.length, 1);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FAccordion(
+          controller: controller,
+          children: const [
+            FAccordionItem(key: Key('b'), title: Text('Title B'), child: Text('Content B')),
+          ],
+        ),
+      ),
+    );
+
+    // New item at same index should still have its controller registered
+    expect(controller.controllers.length, 1);
+    expect(find.text('Title B'), findsOneWidget);
   });
 }

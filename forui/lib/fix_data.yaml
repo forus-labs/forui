@@ -774,6 +774,28 @@ transforms:
           - kind: removeParameter
             name: 'initialText'
 
+  - title: 'Migrate FTextField.password(obscureTextController: ...) to obscureTextControl'
+    date: 2025-12-02
+    element:
+      uris: ['package:forui/forui.dart']
+      method: 'password'
+      inClass: FTextField
+    variables:
+      obscureTextController:
+        kind: fragment
+        value: arguments[obscureTextController]
+    oneOf:
+      - if: "obscureTextController != ''"
+        changes:
+          - kind: addParameter
+            name: 'obscureTextControl'
+            index: 1
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% obscureTextController %})'
+          - kind: removeParameter
+            name: 'obscureTextController'
+
   # FTextFormField
   - title: 'Migrate FTextFormField.new to control parameter'
     date: 2025-11-30
@@ -1194,6 +1216,28 @@ transforms:
               expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
           - kind: removeParameter
             name: 'initialText'
+
+  - title: 'Migrate FTextFormField.password(obscureTextController: ...) to obscureTextControl'
+    date: 2025-12-02
+    element:
+      uris: ['package:forui/forui.dart']
+      method: 'password'
+      inClass: FTextFormField
+    variables:
+      obscureTextController:
+        kind: fragment
+        value: arguments[obscureTextController]
+    oneOf:
+      - if: "obscureTextController != ''"
+        changes:
+          - kind: addParameter
+            name: 'obscureTextControl'
+            index: 1
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% obscureTextController %})'
+          - kind: removeParameter
+            name: 'obscureTextController'
 
 
   # FTimeField

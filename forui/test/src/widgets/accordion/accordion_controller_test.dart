@@ -63,7 +63,16 @@ void main() {
       first.value = 1;
       final controller = FAccordionController()..add(2, first);
 
-      expect(controller.remove(3), false);
+      expect(controller.remove(3, first), false);
+      expect(controller.controllers.length, 1);
+      expect(controller.expanded.length, 1);
+    });
+
+    test('different controller at index', () {
+      first.value = 1;
+      final controller = FAccordionController()..add(2, first);
+
+      expect(controller.remove(2, second), false);
       expect(controller.controllers.length, 1);
       expect(controller.expanded.length, 1);
     });
@@ -72,7 +81,7 @@ void main() {
       first.value = 1;
       final controller = FAccordionController()..add(2, first);
 
-      expect(controller.remove(2), true);
+      expect(controller.remove(2, first), true);
       expect(controller.controllers.length, 0);
       expect(controller.expanded.length, 0);
     });
@@ -80,7 +89,7 @@ void main() {
     test('not expanded', () {
       final controller = FAccordionController()..add(2, first);
 
-      expect(controller.remove(2), true);
+      expect(controller.remove(2, first), true);
       expect(controller.controllers.length, 0);
       expect(controller.expanded.length, 0);
     });
@@ -89,7 +98,7 @@ void main() {
       first.value = 1;
       final controller = FAccordionController(min: 1)..add(2, first);
 
-      expect(controller.remove(2), false);
+      expect(controller.remove(2, first), false);
       expect(controller.controllers.length, 1);
       expect(controller.expanded.length, 1);
     });
@@ -97,7 +106,7 @@ void main() {
     test('under min - not expanded', () {
       final controller = FAccordionController(min: 1)..add(2, first);
 
-      expect(controller.remove(2), true);
+      expect(controller.remove(2, first), true);
       expect(controller.controllers.length, 0);
       expect(controller.expanded.length, 0);
     });

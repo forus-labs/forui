@@ -106,8 +106,12 @@ extension InternalAccordionController on FAccordionController {
     return true;
   }
 
-  /// Removes the item at the given [index], returning true if removed.
-  bool remove(int index) {
+  /// Removes the controller at the given [index] if it matches the given [controller], returning true if removed.
+  bool remove(int index, AnimationController controller) {
+    if (_controllers[index] != controller) {
+      return false;
+    }
+
     if (_expanded.length <= _min && _expanded.contains(index)) {
       return false;
     }

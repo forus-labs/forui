@@ -11,6 +11,12 @@ dart fix --apply
 ```
 
 
+### `FAccordion`
+
+
+* Fix `FAccordionItem` not being properly disposed.
+
+
 ### `FAutocomplete`
 * Add `FAutocompleteItemMixin.item(...)`.
 * Add `FAutocompleteItemMixin.raw(...)`.
