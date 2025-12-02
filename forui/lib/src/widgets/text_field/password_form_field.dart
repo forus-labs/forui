@@ -121,7 +121,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
           prefixBuilder: properties.prefixBuilder,
           suffixBuilder: properties.suffixBuilder,
           clearable: properties.clearable,
-          obscureTextController: properties.obscureTextController,
+          obscureTextControl: properties.obscureTextControl,
         ),
       ),
     ),

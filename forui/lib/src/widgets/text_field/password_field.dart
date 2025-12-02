@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/text_field/field.dart';
+import 'package:forui/src/widgets/text_field/obscure_text_control.dart';
 
 /// A callback for building a field's icon.
 ///
@@ -76,7 +77,7 @@ class PasswordFieldProperties with Diagnosticable {
   final FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
   final FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
   final bool Function(TextEditingValue) clearable;
-  final ValueNotifier<bool>? obscureTextController;
+  final FObscureTextControl obscureTextControl;
 
   PasswordFieldProperties({
     required this.style,
@@ -137,7 +138,7 @@ class PasswordFieldProperties with Diagnosticable {
     required this.prefixBuilder,
     required this.suffixBuilder,
     required this.clearable,
-    required this.obscureTextController,
+    required this.obscureTextControl,
   });
 
   @override
@@ -209,7 +210,7 @@ class PasswordFieldProperties with Diagnosticable {
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
-      ..add(DiagnosticsProperty('obscureTextController', obscureTextController));
+      ..add(DiagnosticsProperty('obscureTextControl', obscureTextControl));
   }
 }
 
@@ -255,25 +256,72 @@ class PasswordField extends StatefulWidget {
 }
 
 class _State extends State<PasswordField> {
-  late ValueNotifier<bool> _controller = widget.properties.obscureTextController ?? ValueNotifier(true);
+  late ValueNotifier<bool> _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = switch (widget.properties.obscureTextControl) {
+      Lifted(:final value, :final onChange) => LiftedController(value, onChange),
+      Managed(:final controller, :final initial) => (controller ?? ValueNotifier(initial))..addListener(_handleOnChange),
+    };
+  }
 
   @override
   void didUpdateWidget(PasswordField old) {
     super.didUpdateWidget(old);
-    if (widget.properties.obscureTextController != old.properties.obscureTextController) {
-      if (old.properties.obscureTextController == null) {
+    switch ((old.properties.obscureTextControl, widget.properties.obscureTextControl)) {
+      case _ when old.properties.obscureTextControl == widget.properties.obscureTextControl:
+        break;
+
+      // Lifted (Value A) -> Lifted (Value B)
+      case (Lifted(), Lifted(:final value, :final onChange)):
+        (_controller as LiftedController).update(value, onChange);
+
+      // External -> Lifted
+      case (Managed(controller: _?), Lifted(:final value, :final onChange)):
+        _controller.removeListener(_handleOnChange);
+        _controller = LiftedController(value, onChange);
+
+      // Internal -> Lifted
+      case (Managed(), Lifted(:final value, :final onChange)):
         _controller.dispose();
-      }
-      _controller = widget.properties.obscureTextController ?? ValueNotifier(true);
+        _controller = LiftedController(value, onChange);
+
+      // External (Controller A) -> External (Controller B)
+      case (Managed(controller: final old?), Managed(:final controller?)) when old != controller:
+        _controller.removeListener(_handleOnChange);
+        _controller = controller..addListener(_handleOnChange);
+
+      // Internal -> External
+      case (Managed(controller: final old), Managed(:final controller?)) when old == null:
+        _controller.dispose();
+        _controller = controller..addListener(_handleOnChange);
+
+      // External -> Internal
+      case (Managed(controller: final _?), Managed(:final controller, :final initial)) when controller == null:
+        _controller.removeListener(_handleOnChange);
+        _controller = ValueNotifier(initial)..addListener(_handleOnChange);
+
+      default:
+        break;
     }
   }
 
   @override
   void dispose() {
-    if (widget.properties.obscureTextController == null) {
+    if (widget.properties.obscureTextControl case Managed(controller: _?)) {
+      _controller.removeListener(_handleOnChange);
+    } else {
       _controller.dispose();
     }
     super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.properties.obscureTextControl case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
   }
 
   @override
