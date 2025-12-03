@@ -12,8 +12,9 @@ dart fix --apply
 
 
 ### `FAccordion`
+* Add `FAccordionControl`.
 
-
+* **Breaking** Remove `FAccordion.controller`. Use `FAccordion(control: .managed(...))` instead.
 * Fix `FAccordionItem` not being properly disposed.
 
 

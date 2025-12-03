@@ -30,8 +30,7 @@ class _AccordionPageState extends StatefulSampleState<AccordionPage> {
     child: Column(
       children: [
         FAccordion(
-          controller: _controller,
-          children: const [
+          control: .managed(controller: _controller), children: const [
             FAccordionItem(
               title: Text('Production Information'),
               child: Text('''

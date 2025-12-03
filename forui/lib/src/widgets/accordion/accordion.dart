@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
+import 'package:forui/src/widgets/accordion/accordion_control.dart';
 
 part 'accordion.design.dart';
 
@@ -17,8 +18,10 @@ part 'accordion.design.dart';
 /// * [FAccordionItem] for adding items to an accordion.
 /// * [FAccordionStyle] for customizing an accordion's appearance.
 class FAccordion extends StatefulWidget {
-  /// The controller. Defaults to [FAccordionController.new].
-  final FAccordionController? controller;
+  /// Defines how the accordion's expanded state is controlled.
+  ///
+  /// Defaults to [FAccordionControl.managed] which creates an internal [FAccordionController].
+  final FAccordionControl control;
 
   /// The style. Defaults to [FThemeData.accordionStyle].
   ///
@@ -38,7 +41,7 @@ class FAccordion extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FAccordion].
-  const FAccordion({required this.children, this.controller, this.style, super.key});
+  const FAccordion({required this.children, this.control = const .managed(), this.style, super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -47,31 +50,89 @@ class FAccordion extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style));
   }
 }
 
 class _FAccordionState extends State<FAccordion> {
-  late FAccordionController _controller = widget.controller ?? FAccordionController();
+  late FAccordionController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = switch (widget.control) {
+      Lifted(:final expanded, :final onChange) => LiftedController(expanded, onChange, widget.children.length),
+      Managed(:final controller, :final min, :final max) =>
+        (controller ?? .new(min: min ?? 0, max: max))..addListener(_handleOnChange),
+    };
+  }
 
   @override
   void didUpdateWidget(covariant FAccordion old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
+    switch ((old.control, widget.control)) {
+      case _ when old.control == widget.control:
+        break;
+
+      // Lifted (Value A) -> Lifted (Value B)
+      case (Lifted(), Lifted(:final expanded, :final onChange)):
+        (_controller as LiftedController).update(expanded, onChange, widget.children.length);
+
+      // External -> Lifted
+      case (Managed(controller: _?), Lifted(:final expanded, :final onChange)):
+        _controller.removeListener(_handleOnChange);
+        _controller = LiftedController(expanded, onChange, widget.children.length);
+
+      // Internal -> Lifted
+      case (Managed(), Lifted(:final expanded, :final onChange)):
         _controller.dispose();
-      }
-      _controller = widget.controller ?? FAccordionController();
+        _controller = LiftedController(expanded, onChange, widget.children.length);
+
+      // External (Controller A) -> External (Controller B)
+      case (Managed(controller: final old?), Managed(:final controller?)) when old != controller:
+        _controller.removeListener(_handleOnChange);
+        _controller = controller..addListener(_handleOnChange);
+
+      // Internal -> External
+      case (Managed(controller: final old), Managed(:final controller?)) when old == null:
+        _controller.dispose();
+        _controller = controller..addListener(_handleOnChange);
+
+      // External -> Internal
+      case (Managed(controller: _?), Managed(:final controller, :final min, :final max)) when controller == null:
+        _controller.removeListener(_handleOnChange);
+        _controller = FAccordionController(min: min ?? 0, max: max)..addListener(_handleOnChange);
+
+      // Lifted -> External
+      case (Lifted(), Managed(:final controller?)):
+        _controller.dispose();
+        _controller = controller..addListener(_handleOnChange);
+
+      // Lifted -> Internal
+      case (Lifted(), Managed(:final min, :final max)):
+        _controller.dispose();
+        _controller = FAccordionController(min: min ?? 0, max: max)..addListener(_handleOnChange);
+
+      default:
+        break;
     }
   }
 
   @override
   void dispose() {
-    if (widget.controller == null) {
+    if (widget.control case Managed(controller: _?)) {
+      _controller.removeListener(_handleOnChange);
+    } else {
       _controller.dispose();
     }
     super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.expanded);
+    }
   }
 
   @override
@@ -100,18 +161,19 @@ class InheritedAccordionData extends InheritedWidget {
   final FAccordionController controller;
   final FAccordionStyle style;
   final int index;
+  final Set<int> _expanded;
 
-  const InheritedAccordionData({
+  InheritedAccordionData({
     required this.controller,
     required this.style,
     required this.index,
     required super.child,
     super.key,
-  });
+  }) : _expanded = controller is LiftedController ? controller.items : {};
 
   @override
   bool updateShouldNotify(covariant InheritedAccordionData old) =>
-      controller != old.controller || style != old.style || index != old.index;
+      controller != old.controller || style != old.style || index != old.index || !setEquals(_expanded, old._expanded);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
