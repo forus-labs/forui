@@ -190,8 +190,7 @@ void main() {
       TestScaffold.app(
         child: FTextField(
           builder: (_, _, _, child) => FPopover(
-            controller: controller,
-            popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
+            control: .managed(controller: controller), popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
             child: child,
           ),
         ),
@@ -206,8 +205,7 @@ void main() {
         child: FTextField(
           error: Container(height: 100, width: 100, color: Colors.red),
           builder: (_, _, _, child) => FPopover(
-            controller: controller,
-            popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
+            control: .managed(controller: controller), popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
             child: child,
           ),
         ),

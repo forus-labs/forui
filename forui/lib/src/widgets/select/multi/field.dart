@@ -103,7 +103,7 @@ class Field<T> extends FormField<Set<T>> {
                    ? const SizedBox()
                    : errorBuilder(state.context, state.errorText!),
                child: FPopover(
-                 controller: state._controller.popover,
+                 control: .managed(controller: state._controller.popover),
                  style: style.popoverStyle,
                  constraints: popoverConstraints,
                  popoverAnchor: anchor,

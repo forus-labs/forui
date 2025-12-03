@@ -249,7 +249,7 @@ class FPopoverMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle;
     return FPopover(
-      controller: popoverController,
+      control: .managed(controller: popoverController),
       style: style,
       constraints: FPortalConstraints(maxWidth: style.maxWidth),
       popoverAnchor: menuAnchor,

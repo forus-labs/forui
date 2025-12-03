@@ -7,11 +7,8 @@ import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
 @internal
 class Sheet extends StatefulWidget {
-  static AnimationController createAnimationController(TickerProvider vsync, FSheetStyle style) => AnimationController(
-    duration: style.motion.expandDuration,
-    reverseDuration: style.motion.collapseDuration,
-    vsync: vsync,
-  );
+  static AnimationController createAnimationController(TickerProvider vsync, FSheetMotion motion) =>
+      AnimationController(duration: motion.expandDuration, reverseDuration: motion.collapseDuration, vsync: vsync);
 
   final AnimationController? controller;
   final Animation<double>? animation;
@@ -73,7 +70,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
+    _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style.motion);
     _animation = widget.animation ?? _controller.view;
     _curve = widget.style.motion.curve;
   }
@@ -86,7 +83,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         _controller.dispose();
       }
 
-      _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style);
+      _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style.motion);
       _animation = widget.animation ?? _controller.view;
       _curve = widget.style.motion.curve;
     }

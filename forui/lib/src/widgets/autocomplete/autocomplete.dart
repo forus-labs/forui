@@ -866,7 +866,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         builder: (context, _, states, field) => FocusTraversalGroup(
           policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
           child: FPopover(
-            controller: _controller.content,
+            control: .managed(controller: _controller.content),
             style: style.contentStyle,
             constraints: widget.popoverConstraints,
             popoverAnchor: widget.anchor,

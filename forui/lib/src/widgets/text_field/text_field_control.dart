@@ -143,7 +143,7 @@ class _Managed with Diagnosticable implements FTextFieldControl {
   final ValueChanged<TextEditingValue>? onChange;
 
   const _Managed({this.controller, this.initial, this.onChange})
-    : assert(initial == null || controller == null, 'Cannot provide both an initial value and a controller.');
+    : assert(controller == null || initial == null, 'Cannot provide both an initial value and a controller.');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
