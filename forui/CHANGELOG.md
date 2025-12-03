@@ -67,6 +67,7 @@ dart fix --apply
 
 ### `FPopoverMenu`
 * **Breaking** Change `FPopoverMenu.shift` to `FPopoverMenu.overflow`.
+* **Breaking** Remove `FPopoverMenu.popoverController`. Use `FPopoverMenu(control: .managed(...))` instead.
 
 
 ### `FPortal`
