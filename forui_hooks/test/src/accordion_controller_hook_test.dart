@@ -18,7 +18,7 @@ void main() {
           builder: (context) {
             controller = useFAccordionController();
             return FAccordion(
-              controller: controller,
+              control: .managed(controller: controller),
               children: const [
                 FAccordionItem(title: Text('Header 1'), child: Text('Body 1')),
                 FAccordionItem(title: Text('Header 1'), child: Text('Body 1')),

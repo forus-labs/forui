@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/accordion/accordion.dart';
+import 'package:forui/src/widgets/accordion/accordion_control.dart';
 import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FAccordion].
@@ -93,21 +94,35 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   late int _index;
   Animation<double>? _reveal;
   Animation<double>? _iconRotation;
+  bool _initialized = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // TODO: assert initiallyExpanded is null if accordion is in lifted mode.
-
     final InheritedAccordionData(:index, :controller, :style) = .of(context);
+    assert(
+      controller is! LiftedController || widget.initiallyExpanded == null,
+      'Cannot provide initiallyExpanded when the parent accordion has lifted state.',
+    );
+
     _accordionController = controller;
     _index = index;
     _accordionController.remove(_index, _controller);
 
     _controller
-      ..value = (widget.initiallyExpanded ?? false) ? 1 : 0
       ..duration = style.motion.expandDuration
       ..reverseDuration = style.motion.collapseDuration;
+
+    switch ((_accordionController, _initialized)) {
+      case (LiftedController(:final items), true):
+        items.contains(index) ? _controller.forward(): _controller.reverse();
+
+      case (LiftedController(:final items), false):
+        _controller.value = items.contains(index) ? 1.0 : 0.0;
+
+      case _:
+        _controller.value = (widget.initiallyExpanded ?? false) ? 1.0 : 0.0;
+    }
 
     _curvedReveal
       ..curve = style.motion.expandCurve
@@ -119,6 +134,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
 
     _reveal = style.motion.revealTween.animate(_curvedReveal);
     _iconRotation = style.motion.iconTween.animate(_curvedIconRotation);
+    _initialized = true;
 
     if (!controller.add(index, _controller)) {
       throw StateError('Number of expanded items must be within the min and max.');
@@ -136,7 +152,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final InheritedAccordionData(:index, :controller, style: inheritedStyle) = InheritedAccordionData.of(context);
+    final InheritedAccordionData(:index, :controller, style: inheritedStyle) = .of(context);
     final style = widget.style ?? inheritedStyle;
 
     return Column(

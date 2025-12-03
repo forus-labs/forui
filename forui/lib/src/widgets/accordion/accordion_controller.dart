@@ -121,6 +121,6 @@ extension InternalAccordionController on FAccordionController {
     return removed != null;
   }
 
-  @visibleForTesting
+  @protected
   Map<int, AnimationController> get controllers => _controllers;
 }
