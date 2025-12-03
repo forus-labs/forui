@@ -165,6 +165,50 @@ transforms:
 
 
   # FPopoverMenu
+  - title: 'Migrate FPopoverMenu(popoverController: ...) to control parameter'
+    date: 2025-12-03
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPopoverMenu
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[popoverController]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'popoverController'
+
+  - title: 'Migrate FPopoverMenu.tiles(popoverController: ...) to control parameter'
+    date: 2025-12-03
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'tiles'
+      inClass: FPopoverMenu
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[popoverController]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'popoverController'
+
   - title: 'Rename FPopoverMenu(shift: ...) to overflow'
     date: 2025-11-30
     element:

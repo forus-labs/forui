@@ -353,8 +353,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
     final style = FBreadcrumbItemData.of(context).style;
     if (widget.itemMenu case final menu?) {
       return FPopoverMenu(
-        popoverController: _popoverController,
-        style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
+        control: .managed(controller: _popoverController), style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
         menuAnchor: widget.menuAnchor,
         childAnchor: widget.childAnchor,
         spacing: widget.spacing,
@@ -384,8 +383,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       );
     } else {
       return FPopoverMenu.tiles(
-        popoverController: _popoverController,
-        style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
+        control: .managed(controller: _popoverController), style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
         menuAnchor: widget.menuAnchor,
         childAnchor: widget.childAnchor,
         spacing: widget.spacing,

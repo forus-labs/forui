@@ -161,8 +161,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FPopoverMenu.tiles(
-            popoverController: first,
-            menu: [
+            control: .managed(controller: first), menu: [
               FTileGroup(
                 children: [FTile(title: const Text('Group 1'), onPress: () {})],
               ),
@@ -179,8 +178,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FPopoverMenu.tiles(
-            popoverController: second,
-            menu: [
+            control: .managed(controller: second), menu: [
               FTileGroup(
                 children: [FTile(title: const Text('Group 1'), onPress: () {})],
               ),
@@ -201,8 +199,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FPopoverMenu.tiles(
-            popoverController: controller,
-            menu: [
+            control: .managed(controller: controller), menu: [
               FTileGroup(
                 children: [FTile(title: const Text('Group 1'), onPress: () {})],
               ),
