@@ -255,9 +255,9 @@ class _CalendarPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => FPopover(
+    control: .managed(controller: controller.calendar),
     traversalEdgeBehavior: .parentScope,
     style: style.popoverStyle,
-    controller: controller.calendar,
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
     spacing: properties.spacing,

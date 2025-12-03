@@ -5,4 +5,6 @@
 /// See https://forui.dev/docs/overlay/popover for working examples.
 library forui.widgets.popover;
 
-export '../src/widgets/popover.dart';
+export '../src/widgets/popover/popover.dart';
+export '../src/widgets/popover/popover_control.dart' hide Lifted, Managed;
+export '../src/widgets/popover/popover_controller.dart' hide InternalPopoverController, LiftedController;

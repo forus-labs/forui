@@ -12,6 +12,42 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('lifted', (tester) async {
+    var shown = false;
+
+    Future<void> rebuild() async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopover(
+            control: .lifted(shown: shown, onChange: (value) => shown = value),
+            popoverBuilder: (_, _) => const Text('Popover'),
+            child: const SizedBox.square(dimension: 100),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+    }
+
+    await rebuild();
+    expect(find.text('Popover'), findsNothing);
+
+    shown = true;
+    await rebuild();
+    expect(find.text('Popover'), findsOneWidget);
+
+    shown = false;
+    await rebuild();
+    expect(find.text('Popover'), findsNothing);
+
+    shown = true;
+    await rebuild();
+    expect(find.text('Popover'), findsOneWidget);
+
+    shown = false;
+    await rebuild();
+    expect(find.text('Popover'), findsNothing);
+  });
+
   testWidgets('barrier blocks taps', (tester) async {
     var outside = 0;
 
@@ -269,7 +305,7 @@ void main() {
           child: Column(
             children: [
               FPopover(
-                controller: controller,
+                control: .managed(controller: controller),
                 traversalEdgeBehavior: TraversalEdgeBehavior.parentScope,
                 popoverBuilder: (_, _) => SizedBox.square(dimension: 100, child: FTextField(focusNode: first)),
                 child: Container(color: Colors.black, height: 10, width: 10),
@@ -306,7 +342,7 @@ void main() {
           child: Column(
             children: [
               FPopover(
-                controller: controller,
+                control: .managed(controller: controller),
                 popoverBuilder: (_, _) => SizedBox.square(dimension: 100, child: FTextField(focusNode: first)),
                 child: Container(color: Colors.black, height: 10, width: 10),
               ),
@@ -341,7 +377,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             focusNode: first,
             popoverBuilder: (_, _) => const SizedBox(),
             child: Container(color: Colors.black, height: 10, width: 10),
@@ -358,7 +394,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             focusNode: second,
             popoverBuilder: (_, _) => const SizedBox(),
             child: Container(color: Colors.black, height: 10, width: 10),
@@ -380,7 +416,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             focusNode: node,
             popoverBuilder: (_, _) => const SizedBox(),
             child: Container(color: Colors.black, height: 10, width: 10),
@@ -403,21 +439,21 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FPopover(
-            controller: first,
+            control: .managed(controller: first),
             popoverBuilder: (_, _) => const SizedBox(),
             child: Container(color: Colors.black, height: 10, width: 10),
           ),
         ),
       );
 
-      expect(first.hasListeners, false);
+      expect(first.hasListeners, true);
       expect(first.disposed, false);
 
       final second = autoDispose(FPopoverController(vsync: tester));
       await tester.pumpWidget(
         TestScaffold(
           child: FPopover(
-            controller: second,
+            control: .managed(controller: second),
             popoverBuilder: (_, _) => const SizedBox(),
             child: Container(color: Colors.black, height: 10, width: 10),
           ),
@@ -426,7 +462,7 @@ void main() {
 
       expect(first.hasListeners, false);
       expect(first.disposed, false);
-      expect(second.hasListeners, false);
+      expect(second.hasListeners, true);
       expect(second.disposed, false);
     });
 
@@ -435,14 +471,14 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             popoverBuilder: (_, _) => const SizedBox(),
             child: Container(color: Colors.black, height: 10, width: 10),
           ),
         ),
       );
 
-      expect(controller.hasListeners, false);
+      expect(controller.hasListeners, true);
       expect(controller.disposed, false);
 
       await tester.pumpWidget(TestScaffold(child: const SizedBox()));

@@ -159,7 +159,7 @@ class FPersistentSheetController {
     required this.key,
     required this.keepAliveOffstage,
     required this.setState,
-  }) : _controller = Sheet.createAnimationController(vsync, style),
+  }) : _controller = Sheet.createAnimationController(vsync, style.motion),
        _onDispose = onDispose {
     if (kFlutterMemoryAllocationsEnabled) {
       FlutterMemoryAllocations.instance.dispatchObjectCreated(

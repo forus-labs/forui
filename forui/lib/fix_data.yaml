@@ -130,6 +130,28 @@ transforms:
         newName: 'overflow'
 
   # FPopover
+  - title: 'Migrate FPopover(controller: ...) to control parameter'
+    date: 2025-12-03
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPopover
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+
   - title: 'Rename FPopover(shift: ...) to overflow'
     date: 2025-11-30
     element:

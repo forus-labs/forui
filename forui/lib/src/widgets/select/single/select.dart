@@ -739,7 +739,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
         enabled: widget.enabled,
         builder: (context, _, states, field) => FPopover(
-          controller: _controller.popover,
+          control: .managed(controller: _controller.popover),
           style: style.popoverStyle,
           constraints: widget.popoverConstraints,
           popoverAnchor: widget.anchor,

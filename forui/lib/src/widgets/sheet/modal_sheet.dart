@@ -222,7 +222,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
       _animationController = transitionAnimationController;
       willDisposeAnimationController = false;
     } else {
-      _animationController = Sheet.createAnimationController(navigator!, style);
+      _animationController = Sheet.createAnimationController(navigator!, style.motion);
     }
 
     return _animationController!;

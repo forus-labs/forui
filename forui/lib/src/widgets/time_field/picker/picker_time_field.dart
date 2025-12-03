@@ -249,8 +249,8 @@ class _PickerPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => FPopover(
+    control: .managed(controller: controller.popover),
     style: style.popoverStyle,
-    controller: controller.popover,
     constraints: style.popoverConstraints,
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,

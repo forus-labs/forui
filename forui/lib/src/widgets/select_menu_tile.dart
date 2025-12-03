@@ -245,7 +245,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              //
              // See https://stackoverflow.com/a/59410824/4189771
              key: GlobalObjectKey(state._controller._popover),
-             controller: state._controller._popover,
+             control: .managed(controller: state._controller._popover),
              style: menuStyle,
              popoverAnchor: menuAnchor,
              childAnchor: tileAnchor,
@@ -518,7 +518,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              //
              // See https://stackoverflow.com/a/59410824/4189771
              key: GlobalObjectKey(state._controller._popover),
-             controller: state._controller._popover,
+             control: .managed(controller: state._controller._popover),
              style: menuStyle,
              constraints: FPortalConstraints(maxWidth: menuStyle.maxWidth),
              popoverAnchor: menuAnchor,
