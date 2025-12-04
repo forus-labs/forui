@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/accordion/accordion_control.dart';
+import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
 part 'accordion.design.dart';
 

@@ -39,6 +39,7 @@ class Lifted with Diagnosticable implements FAccordionControl {
 
   const Lifted({required this.expanded, required this.onChange});
 
+  // All these can be generated.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -71,6 +72,7 @@ class Managed with Diagnosticable implements FAccordionControl {
       assert(min == null || min >= 0, 'min must be non-negative'),
       assert(max == null || min == null || max >= min, 'max must be greater than or equal to min');
 
+  // All these can be generated.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -93,40 +95,4 @@ class Managed with Diagnosticable implements FAccordionControl {
 
   @override
   int get hashCode => Object.hash(controller, min, max, onChange);
-}
-
-@internal
-class LiftedController extends FAccordionController {
-  bool Function(int index) _supply;
-  void Function(int index, bool expanded) _onChange;
-  Set<int> _expanded;
-
-  LiftedController(this._supply, this._onChange, int length)
-    : _expanded = {
-        for (var i = 0; i < length; i++)
-          if (_supply(i)) i,
-      };
-
-  void update(bool Function(int index) supply, void Function(int index, bool expanded) onChange, int length) {
-    _supply = supply;
-    _onChange = onChange;
-    _expanded = {
-      for (var i = 0; i < length; i++)
-        if (_supply(i)) i,
-    };
-  }
-
-  @override
-  Future<bool> expand(int index) async {
-    _onChange(index, true);
-    return true;
-  }
-
-  @override
-  Future<bool> collapse(int index) async {
-    _onChange(index, false);
-    return true;
-  }
-
-  Set<int> get items =>_expanded;
 }

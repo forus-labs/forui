@@ -23,7 +23,7 @@ void main() {
       ),
     );
 
-    unawaited(controller.content.show());
+    unawaited(controller.popover.show());
 
     await tester.pumpAndSettle();
   });

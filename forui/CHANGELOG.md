@@ -19,6 +19,7 @@ dart fix --apply
 
 
 ### `FAutocomplete`
+* Add `FAutocompleteControl`.
 * Add `FAutocompleteItemMixin.item(...)`.
 * Add `FAutocompleteItemMixin.raw(...)`.
 * Add `FAutocompleteItemMixin.section(...)`.
@@ -26,7 +27,8 @@ dart fix --apply
 * Add `FAutocompleteItem.item(...)`.
 
 * **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
-* **Breaking** Rename `FAutocompleteController.popover` to `FAutocompleteController.content`.
+* **Breaking** Remove `FAutocomplete.controller`. Use `FAutocomplete(control: .managed(...))` instead.
+* **Breaking** Remove `FAutocomplete.initialText`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Change `FAutocompleteContentStyle` to extend `FPopoverStyle`.
 * **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
 
@@ -171,6 +173,9 @@ dart fix --apply
 
 
 ### Others
+* Add `FTypeaheadController.fromValue(...)`.
+* Add `FTypeheadTextStyles`.
+
 * **Breaking** Remove `FSidebar.width`. This field was never intended for public usage - Use `FSidebarStyle.constraints`
   instead.
 * Fix generated style docs being malformed.
