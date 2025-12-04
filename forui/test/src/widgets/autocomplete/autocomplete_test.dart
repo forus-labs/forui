@@ -44,7 +44,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(key: key, items: fruits, controller: controller),
+          child: FAutocomplete(key: key, items: fruits, control: .managed(controller: controller)),
         ),
       );
 
@@ -70,7 +70,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(key: key, items: fruits, controller: controller),
+          child: FAutocomplete(key: key, items: fruits, control: .managed(controller: controller)),
         ),
       );
 
@@ -104,7 +104,7 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
+          child: FAutocomplete(key: key, control: .managed(controller: controller), focusNode: focus, items: fruits),
         ),
       );
 
@@ -126,7 +126,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(key: key, controller: controller, focusNode: autocompleteFocus, items: fruits),
+              FAutocomplete(key: key, control: .managed(controller: controller), focusNode: autocompleteFocus, items: fruits),
               FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
             ],
           ),
@@ -153,7 +153,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(key: key, controller: controller, focusNode: autocompleteFocus, items: fruits),
+              FAutocomplete(key: key, control: .managed(controller: controller), focusNode: autocompleteFocus, items: fruits),
               FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
             ],
           ),
@@ -181,7 +181,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(key: key, controller: controller, focusNode: autocompleteFocus, items: fruits),
+              FAutocomplete(key: key, control: .managed(controller: controller), focusNode: autocompleteFocus, items: fruits),
               FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
             ],
           ),
@@ -210,7 +210,7 @@ void main() {
             children: [
               FAutocomplete(
                 key: key,
-                controller: controller,
+                control: .managed(controller: controller),
                 focusNode: autocompleteFocus,
                 rightArrowToComplete: true,
                 items: fruits,
@@ -242,7 +242,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
+            child: FAutocomplete(key: key, control: .managed(controller: controller), focusNode: focus, items: fruits),
           ),
         );
 
@@ -273,7 +273,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
+            child: FAutocomplete(key: key, control: .managed(controller: controller), focusNode: focus, items: fruits),
           ),
         );
 
@@ -304,7 +304,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(key: key, controller: controller, focusNode: focus, items: fruits),
+            child: FAutocomplete(key: key, control: .managed(controller: controller), focusNode: focus, items: fruits),
           ),
         );
 

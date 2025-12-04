@@ -5,6 +5,8 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 
+// ignore_for_file: avoid_positional_boolean_parameters
+
 /// A controller shows and hides items in an [FAccordion].
 ///
 /// When the maximum number of expanded items is reached, it automatically collapses the least recently expanded item
@@ -123,4 +125,40 @@ extension InternalAccordionController on FAccordionController {
 
   @protected
   Map<int, AnimationController> get controllers => _controllers;
+}
+
+@internal
+class LiftedController extends FAccordionController {
+  bool Function(int index) _supply;
+  void Function(int index, bool expanded) _onChange;
+  Set<int> _items;
+
+  LiftedController(this._supply, this._onChange, int length)
+    : _items = {
+        for (var i = 0; i < length; i++)
+          if (_supply(i)) i,
+      };
+
+  void update(bool Function(int index) supply, void Function(int index, bool expanded) onChange, int length) {
+    _supply = supply;
+    _onChange = onChange;
+    _items = {
+      for (var i = 0; i < length; i++)
+        if (_supply(i)) i,
+    };
+  }
+
+  @override
+  Future<bool> expand(int index) async {
+    _onChange(index, true);
+    return true;
+  }
+
+  @override
+  Future<bool> collapse(int index) async {
+    _onChange(index, false);
+    return true;
+  }
+
+  Set<int> get items => _items;
 }

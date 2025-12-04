@@ -47,16 +47,6 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
-  - title: 'FAutocompleteController.popover to FAutocompleteController.content'
-    date: 2025-11-30
-    element:
-      uris: [ 'package:forui/forui.dart' ]
-      getter: 'popover'
-      inClass: FAutocompleteController
-    changes:
-      - kind: rename
-        newName: 'content'
-
   - title: 'Rename FAutocompleteStyle(popoverStyle: ...) to contentStyle'
     date: 2025-11-30
     element:
@@ -67,6 +57,216 @@ transforms:
       - kind: renameParameter
         oldName: 'popoverStyle'
         newName: 'contentStyle'
+
+  - title: 'Migrate FAutocomplete.new to control parameter'
+    date: 2025-12-03
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAutocomplete
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
+
+  - title: 'Migrate FAutocomplete.builder to control parameter'
+    date: 2025-12-03
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FAutocomplete
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialText:
+        kind: fragment
+        value: arguments[initialText]
+    oneOf:
+      # controller + onChange + initialText
+      - if: "controller != '' && onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller + initialText
+      - if: "controller != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialText'
+      # onChange + initialText
+      - if: "onChange != '' && initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'initialText'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialText only
+      - if: "initialText != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: TextEditingValue(text: {% initialText %}))'
+          - kind: removeParameter
+            name: 'initialText'
 
   # FBreadcrumb
   - title: 'Rename FBreadcrumb(shift: ...) to overflow'

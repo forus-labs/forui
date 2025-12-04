@@ -63,7 +63,7 @@ void main() {
             key: key,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
-            initialText: 'App',
+            control: const .managed(initial: TextEditingValue(text: 'App')),
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [
               .section(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),
@@ -87,7 +87,7 @@ void main() {
             key: key,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
-            initialText: 'App',
+            control: const .managed(initial: TextEditingValue(text: 'App')),
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentDivider: .full,
             contentBuilder: (context, query, items) => [

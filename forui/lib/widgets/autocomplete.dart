@@ -7,6 +7,7 @@ library forui.widgets.autocomplete;
 
 export '../src/widgets/autocomplete/autocomplete.dart';
 export '../src/widgets/autocomplete/autocomplete_content.dart' hide Content, ContentData;
+export '../src/widgets/autocomplete/autocomplete_control.dart' hide Lifted, Managed;
 export '../src/widgets/autocomplete/autocomplete_controller.dart'
-    hide InheritedAutocompleteController, InheritedAutocompleteStyle;
+    hide InheritedAutocompleteController, InheritedAutocompleteStyle, LiftedAutocompleteController;
 export '../src/widgets/autocomplete/autocomplete_item.dart';
