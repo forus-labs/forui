@@ -78,7 +78,7 @@ jobs:
           private-key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
 
       - if: steps.check-changes.outputs.changes == 'true'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           token: ${{ steps.generate-token.outputs.token }}
           repository: ${{ steps.pr-metadata.outputs.pr_head_repo }}
