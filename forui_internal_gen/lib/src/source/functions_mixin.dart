@@ -3,11 +3,11 @@ import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
-/// Generates a mixin for a class that implements a call, debugFillProperties, equals and hashCode methods and getters.
+/// Generates a mixin for a class that implements a debugFillProperties, equals and hashCode methods and getters.
 ///
 /// This will probably be replaced by an augment class in the future.
 @internal
-class FunctionsMixin {
+abstract class FunctionsMixin {
   /// The type.
   @protected
   final ClassElement element;
@@ -16,23 +16,15 @@ class FunctionsMixin {
   @protected
   final List<FieldElement> fields;
 
-  /// The generated call function's docs.
-  @protected
-  final List<String> callDocs;
-
   /// Creates a new [FunctionsMixin].
-  FunctionsMixin(this.element, this.callDocs) : fields = instanceFields(element);
+  FunctionsMixin(this.element) : fields = instanceFields(element);
 
   /// Generates a mixin.
-  Mixin generate() =>
-      (MixinBuilder()
-            ..name = '_\$${element.name}Functions'
-            ..on = refer('Diagnosticable')
-            ..methods.addAll([..._getters, _call, _debugFillProperties, _equals, _hashCode]))
-          .build();
+  Mixin generate();
 
   /// Generates getters for the class's fields that must be overridden by the class.
-  List<Method> get _getters => fields
+  @protected
+  List<Method> get getters => fields
       .map(
         (field) => Method(
           (m) => m
@@ -43,26 +35,9 @@ class FunctionsMixin {
       )
       .toList();
 
-  /// Generates a special `call` method that allows styles to be used directly.
-  Method get _call => Method(
-    (m) => m
-      ..docs.addAll(callDocs)
-      ..annotations.add(refer('useResult'))
-      ..returns = refer(element.name!)
-      ..name = 'call'
-      ..requiredParameters.add(
-        Parameter(
-          (p) => p
-            ..type = refer('Object?')
-            ..name = '_',
-        ),
-      )
-      ..lambda = true
-      ..body = Code('this as ${element.name}'),
-  );
-
   /// Generates a `debugFillProperties` method.
-  Method get _debugFillProperties {
+  @protected
+  Method get debugFillProperties {
     final properties = fields
         .map(
           (field) => switch (field.type) {
@@ -117,7 +92,8 @@ class FunctionsMixin {
   }
 
   /// Generates an `operator==` method.
-  Method get _equals {
+  @protected
+  Method get equals {
     // DO NOT REORDER, we need the list/set pattern to dominate the iterable pattern.
     String generate(FieldElement field) => switch (field.type) {
       _ when list.isAssignableFromType(field.type) => 'listEquals(${field.name}, other.${field.name})',
@@ -145,7 +121,8 @@ class FunctionsMixin {
   }
 
   /// Generates a `hashCode` getter.
-  Method get _hashCode {
+  @protected
+  Method get hash {
     // DO NOT REORDER, we need the list/set pattern to dominate the iterable pattern.
     String generate(FieldElement field) => switch (field.type) {
       _ when list.isAssignableFromType(field.type) => 'const ListEquality().hash(${field.name})',

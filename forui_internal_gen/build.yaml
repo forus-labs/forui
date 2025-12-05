@@ -3,6 +3,12 @@
 targets:
   $default:
     builders:
+      controlBuilder:
+        enabled: true
+        generate_for:
+          exclude:
+            - example
+            - test
       designBuilder:
         enabled: true
         generate_for:
@@ -15,6 +21,13 @@ targets:
             - "type=lint"
 
 builders:
+  controlBuilder:
+    import: "package:forui_internal_gen/forui_internal_gen.dart"
+    builder_factories: [ "controlBuilder" ]
+    build_extensions: { ".dart": [ ".control.dart" ] }
+    auto_apply: dependents
+    build_to: source
+
   designBuilder:
     import: "package:forui_internal_gen/forui_internal_gen.dart"
     builder_factories: [ "designBuilder" ]

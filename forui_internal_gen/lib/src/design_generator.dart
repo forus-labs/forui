@@ -1,7 +1,7 @@
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:forui_internal_gen/src/source/design_transformations_extension.dart';
-import 'package:forui_internal_gen/src/source/functions_mixin.dart';
+import 'package:forui_internal_gen/src/source/design_functions_mixin.dart';
 import 'package:source_gen/source_gen.dart';
 
 final _style = RegExp(r'^F(?!Inherited).*(Style|Styles)$');
@@ -39,7 +39,7 @@ class DesignGenerator extends Generator {
           ..add(
             _emitter
                 .visitMixin(
-                  FunctionsMixin(type, [
+                  DesignFunctionsMixin(type, [
                     '/// Returns itself.',
                     '/// ',
                     "/// Allows [${type.name}] to replace functions that accept and return a [${type.name}], such as a style's",
@@ -80,9 +80,9 @@ class DesignGenerator extends Generator {
                 )
                 .toString(),
           )
-          ..add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
+          ..add(_emitter.visitMixin(DesignFunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
       } else if (type.name == 'FThemeData') {
-        generated.add(_emitter.visitMixin(FunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
+        generated.add(_emitter.visitMixin(DesignFunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
       }
     }
 
