@@ -2,6 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:collection/collection.dart';
+import 'package:forui_internal_gen/src/source/control_internal_extension.dart';
 import 'package:forui_internal_gen/src/source/control_functions_mixin.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -26,22 +27,39 @@ class ControlGenerator extends Generator {
     }
 
     for (final MapEntry(key: supertype, value: subtypes) in types.entries) {
-      // Find _update method in the sealed class.
+      // Find _create, _update and _dispose methods in the sealed class.
+      final create = supertype.methods.firstWhereOrNull((m) => m.name == '_create');
       final update = supertype.methods.firstWhereOrNull((m) => m.name == '_update');
+      final dispose = supertype.methods.firstWhereOrNull((m) => m.name == '_dispose');
 
-      generated.addAll([
-        for (final type in subtypes)
+      // Generate mixins for each subtype.
+      generated
+        ..add(
           _emitter
-              .visitMixin(
-                ControlFunctionsMixin(
-                  element: type,
+              .visitExtension(
+                ControlInternalExtension(
                   supertype: supertype,
+                  create: create,
                   update: update,
-                  siblings: subtypes,
+                  dispose: dispose,
                 ).generate(),
               )
               .toString(),
-      ]);
+        )
+        ..addAll([
+          for (final type in subtypes)
+            _emitter
+                .visitMixin(
+                  ControlFunctionsMixin(
+                    element: type,
+                    supertype: supertype,
+                    update: update,
+                    dispose: dispose,
+                    siblings: subtypes,
+                  ).generate(),
+                )
+                .toString(),
+        ]);
     }
 
     return generated.join('\n');

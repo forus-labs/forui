@@ -14,6 +14,9 @@ abstract class ControlFunctionsMixin extends FunctionsMixin {
   /// The `_update` method from the sealed parent, if any.
   final MethodElement? update;
 
+  /// The `_dispose` method from the sealed parent, if any.
+  final MethodElement? dispose;
+
   /// All sibling subclasses (including this one).
   final List<ClassElement> siblings;
 
@@ -22,16 +25,30 @@ abstract class ControlFunctionsMixin extends FunctionsMixin {
     required ClassElement element,
     required ClassElement supertype,
     required MethodElement? update,
+    required MethodElement? dispose,
     required List<ClassElement> siblings,
   }) =>
       element.name!.contains('Lifted') // TODO: Support controls that have more than 2 variants
-      ? _LiftedControlFunctionsMixin(element: element, supertype: supertype, update: update, siblings: siblings)
-      : _ManagedControlFunctionsMixin(element: element, supertype: supertype, update: update, siblings: siblings);
+      ? _LiftedControlFunctionsMixin(
+          element: element,
+          supertype: supertype,
+          update: update,
+          dispose: dispose,
+          siblings: siblings,
+        )
+      : _ManagedControlFunctionsMixin(
+          element: element,
+          supertype: supertype,
+          update: update,
+          dispose: dispose,
+          siblings: siblings,
+        );
 
   ControlFunctionsMixin._({
     required ClassElement element,
     required this.supertype,
     required this.update,
+    required this.dispose,
     required this.siblings,
   }) : super(element);
 
@@ -67,6 +84,7 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
     required super.element,
     required super.supertype,
     required super.update,
+    required super.dispose,
     required super.siblings,
   }) : assert(siblings.length == 2, 'LiftedControlFunctionsMixin only supports exactly 2 variants.'),
        super._();
@@ -79,6 +97,7 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
             ..methods.addAll([
               ...getters,
               if (update != null) ...[_update, _updateController],
+              if (dispose != null) _dispose,
               debugFillProperties,
               equals,
               hash,
@@ -132,6 +151,22 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
             ),
       ]),
   );
+
+  Method get _dispose => Method(
+    (m) => m
+      ..annotations.add(refer('override'))
+      ..returns = refer('void')
+      ..name = '_dispose'
+      ..requiredParameters.addAll([
+        for (final parameter in dispose!.formalParameters)
+          Parameter(
+            (p) => p
+              ..name = parameter.name!
+              ..type = refer(parameter.type.getDisplayString()),
+          ),
+      ])
+      ..body = const Code('controller.dispose();'),
+  );
 }
 
 class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
@@ -139,6 +174,7 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
     required super.element,
     required super.supertype,
     required super.update,
+    required super.dispose,
     required super.siblings,
   }) : assert(siblings.length == 2, 'ManagedControlFunctionsMixin only supports exactly 2 variants.'),
        super._();
@@ -150,7 +186,8 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
             ..on = refer(supertype.name!)
             ..methods.addAll([
               ...getters,
-              if (update != null) ...[_update],
+              if (update != null) _update,
+              if (dispose != null) _dispose,
               debugFillProperties,
               equals,
               hash,
@@ -182,4 +219,26 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
           return controller;
       }
     ''');
+
+  Method get _dispose => Method(
+    (m) => m
+      ..annotations.add(refer('override'))
+      ..returns = refer('void')
+      ..name = '_dispose'
+      ..requiredParameters.addAll([
+        for (final parameter in dispose!.formalParameters)
+          Parameter(
+            (p) => p
+              ..name = parameter.name!
+              ..type = refer(parameter.type.getDisplayString()),
+          ),
+      ])
+      ..body = const Code('''
+        if (this.controller != null) {
+          controller.removeListener(callback);
+        } else {
+          controller.dispose();
+        }
+        '''),
+  );
 }
