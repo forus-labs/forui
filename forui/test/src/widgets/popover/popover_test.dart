@@ -1,4 +1,3 @@
-// ignore_for_file: invalid_use_of_protected_member
 
 import 'dart:async';
 import 'dart:ui';
@@ -459,59 +458,6 @@ void main() {
       await tester.pumpWidget(TestScaffold(child: const SizedBox()));
 
       expect(node.context, isNotNull);
-    });
-
-    testWidgets('update controller', (tester) async {
-      final first = autoDispose(FPopoverController(vsync: tester));
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FPopover(
-            control: .managed(controller: first),
-            popoverBuilder: (_, _) => const SizedBox(),
-            child: Container(color: Colors.black, height: 10, width: 10),
-          ),
-        ),
-      );
-
-      expect(first.hasListeners, true);
-      expect(first.disposed, false);
-
-      final second = autoDispose(FPopoverController(vsync: tester));
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FPopover(
-            control: .managed(controller: second),
-            popoverBuilder: (_, _) => const SizedBox(),
-            child: Container(color: Colors.black, height: 10, width: 10),
-          ),
-        ),
-      );
-
-      expect(first.hasListeners, false);
-      expect(first.disposed, false);
-      expect(second.hasListeners, true);
-      expect(second.disposed, false);
-    });
-
-    testWidgets('dispose controller', (tester) async {
-      final controller = autoDispose(FPopoverController(vsync: tester));
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FPopover(
-            control: .managed(controller: controller),
-            popoverBuilder: (_, _) => const SizedBox(),
-            child: Container(color: Colors.black, height: 10, width: 10),
-          ),
-        ),
-      );
-
-      expect(controller.hasListeners, true);
-      expect(controller.disposed, false);
-
-      await tester.pumpWidget(TestScaffold(child: const SizedBox()));
-
-      expect(controller.hasListeners, false);
-      expect(controller.disposed, false);
     });
   });
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +11,70 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FTooltip', () {
+    group('lifted', () {
+      testWidgets('lifted', (tester) async {
+        var shown = false;
+
+        Future<void> rebuild() async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              child: FTooltip(
+                control: .lifted(shown: shown, onChange: (value) => shown = value),
+                tipBuilder: (_, _) => const Text('Tooltip'),
+                child: const SizedBox.square(dimension: 100),
+              ),
+            ),
+          );
+          await tester.pumpAndSettle();
+        }
+
+        await rebuild();
+        expect(find.text('Tooltip'), findsNothing);
+
+        shown = true;
+        await rebuild();
+        expect(find.text('Tooltip'), findsOneWidget);
+
+        shown = false;
+        await rebuild();
+        expect(find.text('Tooltip'), findsNothing);
+
+        shown = true;
+        await rebuild();
+        expect(find.text('Tooltip'), findsOneWidget);
+
+        shown = false;
+        await rebuild();
+        expect(find.text('Tooltip'), findsNothing);
+      });
+    });
+
+    group('managed', () {
+      testWidgets('onChange', (tester) async {
+        final controller = FTooltipController(vsync: tester);
+        addTearDown(controller.dispose);
+        var value = false;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTooltip(
+              control: .managed(controller: controller, onChange: (v) => value = v),
+              tipBuilder: (_, _) => const Text('Tooltip'),
+              child: const SizedBox.square(dimension: 100),
+            ),
+          ),
+        );
+
+        unawaited(controller.show());
+        await tester.pumpAndSettle();
+        expect(value, true);
+
+        unawaited(controller.hide());
+        await tester.pumpAndSettle();
+        expect(value, false);
+      });
+    });
+
     testWidgets('does nothing', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
@@ -260,35 +326,6 @@ void main() {
 
         expect(find.text('Tooltip'), findsNothing);
       });
-    });
-
-    testWidgets('old controller is not disposed', (tester) async {
-      final first = autoDispose(FTooltipController(vsync: tester));
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FTooltip(
-            controller: first,
-            tipBuilder: (context, _) => const Text('tip'),
-            child: FButton(onPress: () {}, child: const Text('button')),
-          ),
-        ),
-      );
-
-      final second = autoDispose(FTooltipController(vsync: tester));
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FTooltip(
-            controller: first,
-            tipBuilder: (context, _) => const Text('tip'),
-            child: FButton(onPress: () {}, child: const Text('button')),
-          ),
-        ),
-      );
-
-      expect(first.disposed, false);
-      expect(second.disposed, false);
     });
   });
 }

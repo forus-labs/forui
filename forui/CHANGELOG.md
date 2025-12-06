@@ -163,9 +163,12 @@ dart fix --apply
 
 
 ### `FTooltip`
+* Add `FTooltipControl`.
+
 * Change `FTooltip` to not be focusable.
 * Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus.
 * **Breaking** Rename `FTooltip.shift` to `FTooltip.overflow`.
+* **Breaking** Remove `FTooltip.controller`. Use `FTooltip(control: .managed(...))` instead.
 
 
 ### `FToast`

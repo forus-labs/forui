@@ -3,23 +3,24 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:forui/forui.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
 
-part 'popover_controller.control.dart';
+part 'tooltip_controller.control.dart';
 
-/// A controller that controls whether a [FPopover] is shown or hidden.
-class FPopoverController extends FChangeNotifier {
+/// A controller that controls whether a [FTooltip] is shown or hidden.
+class FTooltipController extends FChangeNotifier {
   final OverlayPortalController _overlay = .new();
   late final AnimationController _animation;
-  late final CurvedAnimation _curveScale;
   late final CurvedAnimation _curveFade;
-  late final Animation<double> _scale;
+  late final CurvedAnimation _curveScale;
   late final Animation<double> _fade;
+  late final Animation<double> _scale;
 
-  /// Creates a [FPopoverController] with the given [vsync] and [motion].
-  FPopoverController({required TickerProvider vsync, FPopoverMotion motion = const FPopoverMotion()}) {
+  /// Creates a [FTooltipController] with the given [vsync] and [motion].
+  FTooltipController({required TickerProvider vsync, FTooltipMotion motion = const FTooltipMotion()}) {
     _animation = AnimationController(
       vsync: vsync,
       duration: motion.entranceDuration,
@@ -27,19 +28,19 @@ class FPopoverController extends FChangeNotifier {
     );
     _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
     _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
-    _scale = motion.scaleTween.animate(_curveScale);
     _fade = motion.fadeTween.animate(_curveFade);
+    _scale = motion.scaleTween.animate(_curveScale);
   }
 
-  /// Convenience method for showing/hiding the popover.
+  /// Convenience method for showing/hiding the tooltip.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> toggle() async =>
       const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_animation.status) ? hide() : show();
 
-  /// Shows the popover.
+  /// Shows the tooltip.
   ///
-  /// If already shown, calling this method brings the popover to the top.
+  /// If already shown, calling this method brings the tooltip to the top.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> show() async {
@@ -48,10 +49,10 @@ class FPopoverController extends FChangeNotifier {
     notifyListeners();
   }
 
-  /// Hides the popover.
+  /// Hides the tooltip.
   ///
-  /// Once hidden, the popover will be removed from the widget tree the next time the widget tree rebuilds, and stateful
-  /// widgets in the popover may lose their states as a result.
+  /// Once hidden, the tooltip will be removed from the widget tree the next time the widget tree rebuilds, and stateful
+  /// widgets in the tooltip may lose their states as a result.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
   Future<void> hide() async {
@@ -62,10 +63,10 @@ class FPopoverController extends FChangeNotifier {
 
   /// The current status.
   ///
-  /// [AnimationStatus.dismissed] - The popover is hidden.
-  /// [AnimationStatus.forward] - The popover is transitioning from hidden to shown.
-  /// [AnimationStatus.completed] - The popover is shown.
-  /// [AnimationStatus.reverse] - The popover is transitioning from shown to hidden.
+  /// [AnimationStatus.dismissed] - The tooltip is hidden.
+  /// [AnimationStatus.forward] - The tooltip is transitioning from hidden to shown.
+  /// [AnimationStatus.completed] - The tooltip is shown.
+  /// [AnimationStatus.reverse] - The tooltip is transitioning from shown to hidden.
   AnimationStatus get status => _animation.status;
 
   @override
@@ -78,20 +79,19 @@ class FPopoverController extends FChangeNotifier {
 }
 
 @internal
-extension InternalPopoverController on FPopoverController {
+extension InternalTooltipController on FTooltipController {
   OverlayPortalController get overlay => _overlay;
 
-  Animation<double> get scale => _scale;
-
   Animation<double> get fade => _fade;
+
+  Animation<double> get scale => _scale;
 }
 
-@internal
-class LiftedController extends FPopoverController {
+class _Controller extends FTooltipController {
   int _monotonic;
   void Function(bool shown) _onChange;
 
-  LiftedController(bool shown, this._onChange, {required super.vsync, super.motion}) : _monotonic = 0 {
+  _Controller(bool shown, this._onChange, {required super.vsync, super.motion}) : _monotonic = 0 {
     if (shown) {
       _overlay.show();
       _animation.value = 1;
@@ -125,73 +125,73 @@ class LiftedController extends FPopoverController {
   Future<void> hide() async => _onChange(false);
 }
 
-/// Defines how a popover's shown state is controlled.
-sealed class FPopoverControl with Diagnosticable {
-  /// Creates a [FPopoverControl] for controlling a popover using lifted state.
+/// Defines how a tooltip's shown state is controlled.
+sealed class FTooltipControl with Diagnosticable {
+  /// Creates a [FTooltipControl] for controlling a tooltip using lifted state.
   ///
-  /// The [shown] parameter indicates whether the popover is currently shown.
+  /// The [shown] parameter indicates whether the tooltip is currently shown.
   /// The [onChange] callback is invoked when the user triggers a show/hide action.
-  const factory FPopoverControl.lifted({
+  const factory FTooltipControl.lifted({
     required bool shown,
     required void Function(bool shown) onChange,
-    FPopoverMotion motion,
+    FTooltipMotion motion,
   }) = Lifted;
 
-  /// Creates a [FPopoverControl] for controlling a popover using a controller.
+  /// Creates a [FTooltipControl] for controlling a tooltip using a controller.
   ///
   /// Either [controller] or [motion] can be provided. If neither is provided,
   /// an internal controller with default motion is created.
   ///
-  /// The [onChange] callback is invoked when the popover's shown state changes.
+  /// The [onChange] callback is invoked when the tooltip's shown state changes.
   ///
   /// ## Contract
   /// Throws [AssertionError] if both [controller] and [motion] are provided.
-  const factory FPopoverControl.managed({
-    FPopoverController? controller,
-    FPopoverMotion? motion,
+  const factory FTooltipControl.managed({
+    FTooltipController? controller,
+    FTooltipMotion? motion,
     void Function(bool shown)? onChange,
   }) = Managed;
 
-  const FPopoverControl._();
+  const FTooltipControl._();
 
-  FPopoverController _create(VoidCallback callback, TickerProvider vsync);
+  FTooltipController _create(VoidCallback callback, TickerProvider vsync);
 
-  FPopoverController _update(
-    FPopoverControl old,
-    FPopoverController controller,
+  FTooltipController _update(
+    FTooltipControl old,
+    FTooltipController controller,
     VoidCallback callback,
     TickerProvider vsync,
   );
 
-  void _dispose(FPopoverController controller, VoidCallback callback);
+  void _dispose(FTooltipController controller, VoidCallback callback);
 }
 
 @internal
-class Lifted extends FPopoverControl with _$LiftedFunctions {
+class Lifted extends FTooltipControl with _$LiftedFunctions {
   @override
   final bool shown;
   @override
   final void Function(bool shown) onChange;
   @override
-  final FPopoverMotion motion;
+  final FTooltipMotion motion;
 
-  const Lifted({required this.shown, required this.onChange, this.motion = const FPopoverMotion()}) : super._();
-
-  @override
-  FPopoverController _create(VoidCallback callback, TickerProvider vsync) =>
-      LiftedController(vsync: vsync, shown, onChange, motion: motion);
+  const Lifted({required this.shown, required this.onChange, this.motion = const FTooltipMotion()}) : super._();
 
   @override
-  void _updateController(FPopoverController controller, TickerProvider vsync) =>
-      (controller as LiftedController).update(shown, onChange);
+  FTooltipController _create(VoidCallback callback, TickerProvider vsync) =>
+      _Controller(vsync: vsync, shown, onChange, motion: motion);
+
+  @override
+  void _updateController(FTooltipController controller, TickerProvider vsync) =>
+      (controller as _Controller).update(shown, onChange);
 }
 
 @internal
-class Managed extends FPopoverControl with Diagnosticable, _$ManagedFunctions {
+class Managed extends FTooltipControl with Diagnosticable, _$ManagedFunctions {
   @override
-  final FPopoverController? controller;
+  final FTooltipController? controller;
   @override
-  final FPopoverMotion? motion;
+  final FTooltipMotion? motion;
   @override
   final void Function(bool shown)? onChange;
 
@@ -200,6 +200,6 @@ class Managed extends FPopoverControl with Diagnosticable, _$ManagedFunctions {
       super._();
 
   @override
-  FPopoverController _create(VoidCallback callback, TickerProvider vsync) =>
+  FTooltipController _create(VoidCallback callback, TickerProvider vsync) =>
       (controller ?? .new(vsync: vsync, motion: motion ?? const .new()))..addListener(callback);
 }

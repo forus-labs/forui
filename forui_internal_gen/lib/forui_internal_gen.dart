@@ -10,6 +10,7 @@ $defaultFileHeader
 
 // dart format width=120
 // coverage:ignore-file
+// ignore_for_file: unnecessary_ignore
 // ignore_for_file: avoid_positional_boolean_parameters
 ''';
 

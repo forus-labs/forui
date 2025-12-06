@@ -1555,6 +1555,28 @@ transforms:
 
 
   # FTooltip
+  - title: 'Migrate FTooltip(controller: ...) to control parameter'
+    date: 2025-12-06
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTooltip
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+
   - title: 'Rename FTooltip(shift: ...) to overflow'
     date: 2025-11-30
     element:
