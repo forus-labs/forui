@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:forui/src/widgets/popover/popover_control.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 import 'package:meta/meta.dart';
@@ -334,16 +333,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = switch (widget.control) {
-      Lifted(:final shown, :final onChange, :final motion) => LiftedController(
-        vsync: this,
-        shown,
-        onChange,
-        motion: motion,
-      ),
-      Managed(:final controller, :final motion) =>
-        (controller ?? .new(vsync: this, motion: motion ?? const .new()))..addListener(_handleOnChange),
-    };
+    _controller = widget.control.create(_handleOnChange, this);
     _focusNode =
         widget.focusNode ??
         .new(debugLabel: 'FPopover', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
@@ -366,52 +356,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
           .new(debugLabel: 'FPopover', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
     }
 
-    switch ((old.control, widget.control)) {
-      case _ when old.control == widget.control:
-        break;
-
-      // Lifted A -> Lifted B
-      case (Lifted(), Lifted(:final shown, :final onChange)):
-        (_controller as LiftedController).update(shown, onChange);
-
-      // External -> Lifted
-      case (Managed(controller: _?), Lifted(:final shown, :final onChange, :final motion)):
-        _controller.removeListener(_handleOnChange);
-        _controller = LiftedController(shown, onChange, vsync: this, motion: motion);
-
-      // Internal -> Lifted
-      case (Managed(), Lifted(:final shown, :final onChange, :final motion)):
-        _controller.dispose();
-        _controller = LiftedController(shown, onChange, vsync: this, motion: motion);
-
-      // External A -> External B
-      case (Managed(controller: final old?), Managed(:final controller?)) when old != controller:
-        _controller.removeListener(_handleOnChange);
-        _controller = controller..addListener(_handleOnChange);
-
-      // Internal -> External
-      case (Managed(controller: final old), Managed(:final controller?)) when old == null:
-        _controller.dispose();
-        _controller = controller..addListener(_handleOnChange);
-
-      // External -> Internal
-      case (Managed(controller: _?), Managed(:final controller, :final motion)) when controller == null:
-        _controller.removeListener(_handleOnChange);
-        _controller = FPopoverController(vsync: this, motion: motion ?? const .new())..addListener(_handleOnChange);
-
-      // Lifted -> External
-      case (Lifted(), Managed(:final controller?)):
-        _controller.dispose();
-        _controller = controller..addListener(_handleOnChange);
-
-      // Lifted -> Internal
-      case (Lifted(), Managed(:final motion)):
-        _controller.dispose();
-        _controller = FPopoverController(vsync: this, motion: motion ?? const .new())..addListener(_handleOnChange);
-
-      default:
-        break;
-    }
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, this);
   }
 
   @override
@@ -420,11 +365,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
       _focusNode?.dispose();
     }
 
-    if (widget.control case Managed(controller: _?)) {
-      _controller.removeListener(_handleOnChange);
-    } else {
-      _controller.dispose();
-    }
+    widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
   }
 
