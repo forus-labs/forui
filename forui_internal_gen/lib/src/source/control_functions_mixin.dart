@@ -68,15 +68,32 @@ abstract class ControlFunctionsMixin extends FunctionsMixin {
       ..body = _updateBody,
   );
 
+  Method get _createController => Method(
+    (m) => m
+      ..returns = refer(update!.returnType.getDisplayString())
+      ..name = '_createController'
+      ..requiredParameters.addAll([
+        for (final parameter in update!.formalParameters)
+          if (parameter.name case final name when name != 'old' && name != 'controller')
+            Parameter(
+              (p) => p
+                ..name = name!
+                ..type = refer(parameter.type.getDisplayString()),
+            ),
+      ])
+      ..lambda = true
+      ..body = Code('''_create($_createParameters)'''),
+  );
+
+  String get _createParameters => [
+    for (final p in update!.formalParameters)
+      if (p.name case final name when name != 'old' && name != 'controller') p.name!,
+  ].join(', ');
+
   /// Generates the body of the `_update` method.
   ///
   /// We assume that the parameter names are always old, controller and callback.
   Code get _updateBody;
-
-  String get _remainingParameters => [
-    for (final p in update!.formalParameters)
-      if (p.name case final name when name != 'old' && name != 'controller') p.name!,
-  ].join(', ');
 }
 
 class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
@@ -93,10 +110,11 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
   Mixin generate() =>
       (MixinBuilder()
             ..name = '_\$${element.name}Functions'
-            ..on = refer(supertype.name!)
+            ..on = refer('Diagnosticable')
+            ..implements.addAll([refer(supertype.name!)])
             ..methods.addAll([
               ...getters,
-              if (update != null) ...[_update, _updateController],
+              if (update != null) ...[_update, _createController, _updateController],
               if (dispose != null) _dispose,
               debugFillProperties,
               equals,
@@ -124,12 +142,12 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
         // External -> Lifted
         case Managed(controller: _?):
           controller.removeListener(callback);
-          return _create($_remainingParameters);
+          return _createController($_createParameters);
   
         // Internal -> Lifted
         case Managed():
           controller.dispose();
-          return _create($_remainingParameters);
+          return _createController($_createParameters);
           
         default:
           return controller;
@@ -183,10 +201,11 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
   Mixin generate() =>
       (MixinBuilder()
             ..name = '_\$${element.name}Functions'
-            ..on = refer(supertype.name!)
+            ..on = refer('Diagnosticable')
+            ..implements.addAll([refer(supertype.name!)])
             ..methods.addAll([
               ...getters,
-              if (update != null) _update,
+              if (update != null) ...[_update, _createController],
               if (dispose != null) _dispose,
               debugFillProperties,
               equals,
@@ -203,17 +222,22 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
         // External (Controller A) -> External (Controller B)
         case ${element.name}(controller: final old?) when this.controller != null && this.controller != old:
           controller.removeListener(callback);
-          return this.controller!..addListener(callback);
+          return _createController($_createParameters);
   
         // Internal -> External
         case ${element.name}(controller: final old) when this.controller != null && old == null:
           controller.dispose();
-          return this.controller!..addListener(callback);
+          return _createController($_createParameters);
   
         // External -> Internal
         case ${element.name}(controller: _?) when this.controller == null:
           controller.removeListener(callback);
-          return _create($_remainingParameters);
+          return _createController($_createParameters);
+          
+        // Lifted -> Managed
+        case Lifted():
+          controller.dispose();
+          return _createController($_createParameters);
   
         default:
           return controller;

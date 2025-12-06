@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-import 'package:forui/src/widgets/accordion/accordion_control.dart';
 import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
 part 'accordion.design.dart';
@@ -62,71 +61,18 @@ class _FAccordionState extends State<FAccordion> {
   @override
   void initState() {
     super.initState();
-    _controller = switch (widget.control) {
-      Lifted(:final expanded, :final onChange) => LiftedController(expanded, onChange, widget.children.length),
-      Managed(:final controller, :final min, :final max) =>
-        (controller ?? .new(min: min ?? 0, max: max))..addListener(_handleOnChange),
-    };
+    _controller = widget.control.create(_handleOnChange, widget.children.length);
   }
 
   @override
   void didUpdateWidget(covariant FAccordion old) {
     super.didUpdateWidget(old);
-    switch ((old.control, widget.control)) {
-      case _ when old.control == widget.control:
-        break;
-
-      // Lifted (Value A) -> Lifted (Value B)
-      case (Lifted(), Lifted(:final expanded, :final onChange)):
-        (_controller as LiftedController).update(expanded, onChange, widget.children.length);
-
-      // External -> Lifted
-      case (Managed(controller: _?), Lifted(:final expanded, :final onChange)):
-        _controller.removeListener(_handleOnChange);
-        _controller = LiftedController(expanded, onChange, widget.children.length);
-
-      // Internal -> Lifted
-      case (Managed(), Lifted(:final expanded, :final onChange)):
-        _controller.dispose();
-        _controller = LiftedController(expanded, onChange, widget.children.length);
-
-      // External (Controller A) -> External (Controller B)
-      case (Managed(controller: final old?), Managed(:final controller?)) when old != controller:
-        _controller.removeListener(_handleOnChange);
-        _controller = controller..addListener(_handleOnChange);
-
-      // Internal -> External
-      case (Managed(controller: final old), Managed(:final controller?)) when old == null:
-        _controller.dispose();
-        _controller = controller..addListener(_handleOnChange);
-
-      // External -> Internal
-      case (Managed(controller: _?), Managed(:final controller, :final min, :final max)) when controller == null:
-        _controller.removeListener(_handleOnChange);
-        _controller = FAccordionController(min: min ?? 0, max: max)..addListener(_handleOnChange);
-
-      // Lifted -> External
-      case (Lifted(), Managed(:final controller?)):
-        _controller.dispose();
-        _controller = controller..addListener(_handleOnChange);
-
-      // Lifted -> Internal
-      case (Lifted(), Managed(:final min, :final max)):
-        _controller.dispose();
-        _controller = FAccordionController(min: min ?? 0, max: max)..addListener(_handleOnChange);
-
-      default:
-        break;
-    }
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, widget.children.length);
   }
 
   @override
   void dispose() {
-    if (widget.control case Managed(controller: _?)) {
-      _controller.removeListener(_handleOnChange);
-    } else {
-      _controller.dispose();
-    }
+    widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
   }
 

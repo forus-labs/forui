@@ -2,14 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/debug.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
-import 'package:forui/src/widgets/autocomplete/autocomplete_control.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.dart';
 
@@ -669,6 +670,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
   late FocusScopeNode _popoverFocus;
   bool _tapFocus = false;
   String? _previous;
+  int _monotonic = 0;
 
   /// The original text used to restore the textfield when navigating but not selecting any completion using a keyboard.
   String? _restore;
@@ -678,18 +680,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     super.initState();
     _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     _fieldFocus.addListener(_focus);
-    _controller = switch (widget.control) {
-      Lifted(:final value, :final onValueChange, :final popoverShown, :final onPopoverChange) =>
-        LiftedAutocompleteController(
-          value,
-          vsync: this,
-          onValueChange: onValueChange,
-          popoverShown: popoverShown,
-          onPopoverChange: onPopoverChange,
-        ),
-      Managed(:final controller, :final initial) =>
-        (controller ?? .fromValue(initial, vsync: this))..addListener(_update),
-    };
+    _controller = widget.control.create(_update, this, (_) => []);
     _controller.loadSuggestions(_data = widget.filter(_controller.text));
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
   }
@@ -705,79 +696,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     }
 
-    switch ((old.control, widget.control)) {
-      case _ when old.control == widget.control:
-        break;
-
-      // Lifted -> Lifted (update values)
-      case (Lifted(), Lifted(:final value, :final onValueChange, :final popoverShown, :final onPopoverChange)):
-        (_controller as LiftedAutocompleteController)
-          ..update(this, value, onValueChange, popoverShown, onPopoverChange)
-          ..loadSuggestions(widget.filter(_controller.text));
-
-      // External -> Lifted
-      case (
-        Managed(controller: _?),
-        Lifted(:final value, :final onValueChange, :final popoverShown, :final onPopoverChange),
-      ):
-        _controller.removeListener(_update);
-        _controller = LiftedAutocompleteController(
-          value,
-          vsync: this,
-          onValueChange: onValueChange,
-          popoverShown: popoverShown,
-          onPopoverChange: onPopoverChange,
-        )..loadSuggestions(widget.filter(_controller.text));
-
-      // Internal -> Lifted
-      case (Managed(), Lifted(:final value, :final onValueChange, :final popoverShown, :final onPopoverChange)):
-        _controller.dispose();
-        _controller = LiftedAutocompleteController(
-          value,
-          vsync: this,
-          onValueChange: onValueChange,
-          popoverShown: popoverShown,
-          onPopoverChange: onPopoverChange,
-        )..loadSuggestions(widget.filter(_controller.text));
-
-      // External A -> External B
-      case (Managed(controller: final old?), Managed(:final controller?)) when old != controller:
-        _controller.removeListener(_update);
-        _controller = controller
-          ..addListener(_update)
-          ..loadSuggestions(widget.filter(_controller.text));
-
-      // Internal -> External
-      case (Managed(controller: final old), Managed(:final controller?)) when old == null:
-        _controller.dispose();
-        _controller = controller
-          ..addListener(_update)
-          ..loadSuggestions(widget.filter(_controller.text));
-
-      // External -> Internal
-      case (Managed(controller: _?), Managed(:final controller, :final initial)) when controller == null:
-        _controller.removeListener(_update);
-        _controller = .fromValue(initial, vsync: this)
-          ..addListener(_update)
-          ..loadSuggestions(widget.filter(_controller.text));
-
-      // Lifted -> External
-      case (Lifted(), Managed(:final controller?)):
-        _controller.dispose();
-        _controller = controller
-          ..addListener(_update)
-          ..loadSuggestions(widget.filter(_controller.text));
-
-      // Lifted -> Internal
-      case (Lifted(), Managed(:final initial)):
-        _controller.dispose();
-        _controller = .fromValue(initial, vsync: this)
-          ..addListener(_update)
-          ..loadSuggestions(widget.filter(_controller.text));
-
-      default:
-        break;
-    }
+    _controller = widget.control.update(old.control, _controller, _update, this, widget.filter);
   }
 
   @override
@@ -788,11 +707,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       _fieldFocus.dispose();
     }
 
-    if (widget.control case Managed(controller: _?)) {
-      _controller.removeListener(_update);
-    } else {
-      _controller.dispose();
-    }
+    widget.control.dispose(_controller, _update);
     super.dispose();
   }
 
@@ -802,18 +717,21 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     }
 
     if (_fieldFocus.hasFocus && !_controller.popover.status.isForwardOrCompleted) {
-      _controller.popover.show();
+      final current = ++_monotonic;
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (current == _monotonic) {
+          _controller.popover.show();
+        }
+      });
     }
 
     setState(() {
       _previous = _controller.text;
       _controller.loadSuggestions(_data = widget.filter(_controller.text));
     });
-  }
 
-  void _handleOnChange(TextEditingValue value) {
     if (widget.control case Managed(:final onChange?)) {
-      onChange(value);
+      onChange(_controller.value);
     }
   }
 
@@ -854,7 +772,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         }
       },
       child: FTextFormField(
-        control: .managed(controller: _controller, onChange: _handleOnChange),
+        control: .managed(controller: _controller),
         style: style.fieldStyle,
         label: widget.label,
         hint: widget.hint,
@@ -1001,6 +919,34 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     }
     _previous = replacement;
     _controller.complete();
+  }
+}
+
+@internal
+final class InheritedAutocompleteStyle extends InheritedWidget {
+  @useResult
+  static InheritedAutocompleteStyle of(BuildContext context) {
+    assert(debugCheckHasAncestor<InheritedAutocompleteStyle>('FAutocomplete', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedAutocompleteStyle>()!;
+  }
+
+  /// The autocomplete style.
+  final FAutocompleteStyle style;
+
+  /// The current widget states.
+  final Set<WidgetState> states;
+
+  const InheritedAutocompleteStyle({required this.style, required this.states, required super.child, super.key});
+
+  @override
+  bool updateShouldNotify(InheritedAutocompleteStyle old) => style != old.style || states != old.states;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('states', states));
   }
 }
 

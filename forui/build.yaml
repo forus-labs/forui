@@ -5,7 +5,7 @@ targets:
     builders:
       forui_internal_gen:controlBuilder:
         generate_for:
-          - lib/src/widgets/**_control.dart
+          - lib/src/widgets/**.dart
 
       forui_internal_gen:designBuilder:
         generate_for:
