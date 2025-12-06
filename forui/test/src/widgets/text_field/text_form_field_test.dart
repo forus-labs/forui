@@ -32,6 +32,25 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('external'), findsOneWidget);
   });
+  
+  testWidgets('onChange', (tester) async {
+    TextEditingValue? lastValue;
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTextFormField(
+          control: .managed(
+            onChange: (value) => lastValue = value,
+          ),
+        ),
+      ),
+    );
+
+    await tester.enterText(find.byType(EditableText), 'hello');
+    await tester.pumpAndSettle();
+
+    expect(lastValue?.text, 'hello');
+  });
 
   group('form', () {
     for (final (type, field) in [
@@ -168,9 +187,7 @@ void main() {
         expect(find.text('Invalid value'), findsNothing);
       });
     }
-  });
 
-  group('onChange', () {
     testWidgets('reset', (tester) async {
       final key = GlobalKey<FormState>();
       final controller = autoDispose(TextEditingController(text: 'initial'));

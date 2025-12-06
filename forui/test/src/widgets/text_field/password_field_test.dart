@@ -110,7 +110,7 @@ void main() {
       expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, false);
     });
 
-    testWidgets('set value', (tester) async {
+    testWidgets('managed', (tester) async {
       final controller = autoDispose(ValueNotifier(false));
 
       await tester.pumpWidget(TestScaffold.app(child: FTextField.password(obscureTextControl: .managed(controller: controller))));

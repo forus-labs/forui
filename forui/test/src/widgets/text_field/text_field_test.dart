@@ -10,32 +10,56 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  testWidgets('lifted', (tester) async {
-    var value = const TextEditingValue(text: 'initial');
-    TextEditingValue? received;
+  group('lifted', () {
+    testWidgets('lifted', (tester) async {
+      var value = const TextEditingValue(text: 'initial');
+      TextEditingValue? received;
 
-    Widget buildWidget() => TestScaffold.app(
-      child: FTextField(
-        control: .lifted(
-          value: value,
-          onChange: (v) => received = v,
+      Widget buildWidget() => TestScaffold.app(
+        child: FTextField(
+          control: .lifted(
+            value: value,
+            onChange: (v) => received = v,
+          ),
         ),
-      ),
-    );
+      );
 
-    await tester.pumpWidget(buildWidget());
+      await tester.pumpWidget(buildWidget());
 
-    expect(find.text('initial'), findsOneWidget);
+      expect(find.text('initial'), findsOneWidget);
 
-    await tester.enterText(find.byType(EditableText), 'typed');
-    await tester.pumpAndSettle();
-    expect(received?.text, 'typed');
+      await tester.enterText(find.byType(EditableText), 'typed');
+      await tester.pumpAndSettle();
+      expect(received?.text, 'typed');
 
-    value = const TextEditingValue(text: 'external');
-    await tester.pumpWidget(buildWidget());
-    await tester.pumpAndSettle();
-    expect(find.text('external'), findsOneWidget);
+      value = const TextEditingValue(text: 'external');
+      await tester.pumpWidget(buildWidget());
+      await tester.pumpAndSettle();
+      expect(find.text('external'), findsOneWidget);
+    });
   });
+  
+  group('managed', () {
+    testWidgets('onChange called', (tester) async {
+      TextEditingValue? lastValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField(
+            control: .managed(
+              onChange: (value) => lastValue = value,
+            ),
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byType(EditableText), 'hello');
+      await tester.pumpAndSettle();
+
+      expect(lastValue?.text, 'hello');
+    });
+  });
+  
 
   group('embedding', () {
     testWidgets('embedded in CupertinoApp', (tester) async {

@@ -261,60 +261,22 @@ class _State extends State<PasswordField> {
   @override
   void initState() {
     super.initState();
-    _controller = switch (widget.properties.obscureTextControl) {
-      Lifted(:final value, :final onChange) => LiftedController(value, onChange),
-      Managed(:final controller, :final initial) => (controller ?? ValueNotifier(initial))..addListener(_handleOnChange),
-    };
+    _controller = widget.properties.obscureTextControl.create(_handleOnChange);
   }
 
   @override
   void didUpdateWidget(PasswordField old) {
     super.didUpdateWidget(old);
-    switch ((old.properties.obscureTextControl, widget.properties.obscureTextControl)) {
-      case _ when old.properties.obscureTextControl == widget.properties.obscureTextControl:
-        break;
-
-      // Lifted (Value A) -> Lifted (Value B)
-      case (Lifted(), Lifted(:final value, :final onChange)):
-        (_controller as LiftedController).update(value, onChange);
-
-      // External -> Lifted
-      case (Managed(controller: _?), Lifted(:final value, :final onChange)):
-        _controller.removeListener(_handleOnChange);
-        _controller = LiftedController(value, onChange);
-
-      // Internal -> Lifted
-      case (Managed(), Lifted(:final value, :final onChange)):
-        _controller.dispose();
-        _controller = LiftedController(value, onChange);
-
-      // External (Controller A) -> External (Controller B)
-      case (Managed(controller: final old?), Managed(:final controller?)) when old != controller:
-        _controller.removeListener(_handleOnChange);
-        _controller = controller..addListener(_handleOnChange);
-
-      // Internal -> External
-      case (Managed(controller: final old), Managed(:final controller?)) when old == null:
-        _controller.dispose();
-        _controller = controller..addListener(_handleOnChange);
-
-      // External -> Internal
-      case (Managed(controller: final _?), Managed(:final controller, :final initial)) when controller == null:
-        _controller.removeListener(_handleOnChange);
-        _controller = ValueNotifier(initial)..addListener(_handleOnChange);
-
-      default:
-        break;
-    }
+    _controller = widget.properties.obscureTextControl.update(
+      old.properties.obscureTextControl,
+      _controller,
+      _handleOnChange,
+    );
   }
 
   @override
   void dispose() {
-    if (widget.properties.obscureTextControl case Managed(controller: _?)) {
-      _controller.removeListener(_handleOnChange);
-    } else {
-      _controller.dispose();
-    }
+    widget.properties.obscureTextControl.dispose(_controller, _handleOnChange);
     super.dispose();
   }
 

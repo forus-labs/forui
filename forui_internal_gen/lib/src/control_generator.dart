@@ -55,7 +55,7 @@ class ControlGenerator extends Generator {
                     supertype: supertype,
                     update: update,
                     dispose: dispose,
-                    siblings: subtypes,
+                    siblings: subtypes.whereNot((t) => t == type).toList(),
                   ).generate(),
                 )
                 .toString(),

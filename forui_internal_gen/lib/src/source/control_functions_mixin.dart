@@ -17,7 +17,7 @@ abstract class ControlFunctionsMixin extends FunctionsMixin {
   /// The `_dispose` method from the sealed parent, if any.
   final MethodElement? dispose;
 
-  /// All sibling subclasses (including this one).
+  /// All sibling subclasses (excluding this one).
   final List<ClassElement> siblings;
 
   /// Creates a new [ControlFunctionsMixin].
@@ -103,7 +103,7 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
     required super.update,
     required super.dispose,
     required super.siblings,
-  }) : assert(siblings.length == 2, 'LiftedControlFunctionsMixin only supports exactly 2 variants.'),
+  }) : assert(siblings.length == 1, 'LiftedControlFunctionsMixin only supports exactly 2 variants.'),
        super._();
 
   @override
@@ -135,17 +135,17 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
           return controller;
 
         // Lifted (Value A) -> Lifted (Value B)
-        case Lifted():
+        case ${element.name}():
           _updateController($updateParameters);
           return controller;
   
         // External -> Lifted
-        case Managed(controller: _?):
+        case ${siblings.first.name}(controller: _?):
           controller.removeListener(callback);
           return _createController($_createParameters);
   
         // Internal -> Lifted
-        case Managed():
+        case ${siblings.first.name}():
           controller.dispose();
           return _createController($_createParameters);
           
@@ -194,7 +194,7 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
     required super.update,
     required super.dispose,
     required super.siblings,
-  }) : assert(siblings.length == 2, 'ManagedControlFunctionsMixin only supports exactly 2 variants.'),
+  }) : assert(siblings.length == 1, 'ManagedControlFunctionsMixin only supports exactly 2 variants.'),
        super._();
 
   @override
@@ -235,7 +235,7 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
           return _createController($_createParameters);
           
         // Lifted -> Managed
-        case Lifted():
+        case ${siblings.first.name}():
           controller.dispose();
           return _createController($_createParameters);
   

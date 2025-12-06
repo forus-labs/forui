@@ -1,7 +1,11 @@
 import 'package:flutter/foundation.dart';
 
+// ignore_for_file: avoid_positional_boolean_parameters
+
+part 'obscure_text_control.control.dart';
+
 /// Defines how the password field's obscure text is controlled.
-sealed class FObscureTextControl {
+sealed class FObscureTextControl with Diagnosticable {
   /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
   const factory FObscureTextControl.lifted({required bool value, required ValueChanged<bool> onChange}) = Lifted;
 
@@ -14,71 +18,54 @@ sealed class FObscureTextControl {
     bool initial,
     ValueChanged<bool>? onChange,
   }) = Managed;
+
+  const FObscureTextControl._();
+
+  ValueNotifier<bool> _create(VoidCallback callback);
+
+  ValueNotifier<bool> _update(FObscureTextControl old, ValueNotifier<bool> controller, VoidCallback callback);
+
+  void _dispose(ValueNotifier<bool> controller, VoidCallback callback);
 }
 
 @internal
-class Lifted with Diagnosticable implements FObscureTextControl {
+final class Lifted extends FObscureTextControl with _$LiftedFunctions {
+  @override
   final bool value;
+  @override
   final ValueChanged<bool> onChange;
 
-  const Lifted({required this.value, required this.onChange});
+  const Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(FlagProperty('value', value: value, ifTrue: 'obscured', ifFalse: 'visible'))
-      ..add(ObjectFlagProperty.has('onChange', onChange));
-  }
+  ValueNotifier<bool> _create(VoidCallback _) => _Controller(value, onChange);
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Lifted && runtimeType == other.runtimeType && value == other.value && onChange == other.onChange;
-
-  @override
-  int get hashCode => Object.hash(value, onChange);
+  void _updateController(ValueNotifier<bool> controller) => (controller as _Controller).update(value, onChange);
 }
 
 @internal
-class Managed with Diagnosticable implements FObscureTextControl {
+final class Managed extends FObscureTextControl with _$ManagedFunctions {
+  @override
   final ValueNotifier<bool>? controller;
+  @override
   final bool initial;
+  @override
   final ValueChanged<bool>? onChange;
 
   const Managed({this.controller, this.initial = true, this.onChange})
-    : assert(controller == null || initial, 'Cannot provide both an initial value and a controller.');
+    : assert(controller == null || initial, 'Cannot provide both an initial value and a controller.'),
+      super._();
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(FlagProperty('initial', value: initial, ifTrue: 'obscured', ifFalse: 'visible'))
-      ..add(ObjectFlagProperty.has('onChange', onChange));
-  }
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Managed &&
-          runtimeType == other.runtimeType &&
-          controller == other.controller &&
-          initial == other.initial &&
-          onChange == other.onChange;
-
-  @override
-  int get hashCode => Object.hash(controller, initial, onChange);
+  ValueNotifier<bool> _create(VoidCallback callback) => (controller ?? ValueNotifier(initial))..addListener(callback);
 }
 
-@internal
-class LiftedController extends ValueNotifier<bool> {
+class _Controller extends ValueNotifier<bool> {
   ValueChanged<bool> _onChange;
 
-  // ignore: avoid_positional_boolean_parameters
-  LiftedController(super._value, this._onChange);
+  _Controller(super._value, this._onChange);
 
-  // ignore: avoid_positional_boolean_parameters
   void update(bool value, ValueChanged<bool> onChange) {
     if (super.value != value) {
       super.value = value;
