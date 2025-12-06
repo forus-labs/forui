@@ -12,40 +12,67 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  testWidgets('lifted', (tester) async {
-    var shown = false;
+  group('lifted', () {
+    testWidgets('lifted', (tester) async {
+      var shown = false;
 
-    Future<void> rebuild() async {
+      Future<void> rebuild() async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPopover(
+              control: .lifted(shown: shown, onChange: (value) => shown = value),
+              popoverBuilder: (_, _) => const Text('Popover'),
+              child: const SizedBox.square(dimension: 100),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+      }
+
+      await rebuild();
+      expect(find.text('Popover'), findsNothing);
+
+      shown = true;
+      await rebuild();
+      expect(find.text('Popover'), findsOneWidget);
+
+      shown = false;
+      await rebuild();
+      expect(find.text('Popover'), findsNothing);
+
+      shown = true;
+      await rebuild();
+      expect(find.text('Popover'), findsOneWidget);
+
+      shown = false;
+      await rebuild();
+      expect(find.text('Popover'), findsNothing);
+    });
+  });
+
+  group('managed', () {
+    testWidgets('onChange', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester));
+      var value = false;
+
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopover(
-            control: .lifted(shown: shown, onChange: (value) => shown = value),
+            control: .managed(controller: controller, onChange: (v) => value = v),
             popoverBuilder: (_, _) => const Text('Popover'),
             child: const SizedBox.square(dimension: 100),
           ),
         ),
       );
+
+      unawaited(controller.show());
       await tester.pumpAndSettle();
-    }
+      expect(value, true);
 
-    await rebuild();
-    expect(find.text('Popover'), findsNothing);
-
-    shown = true;
-    await rebuild();
-    expect(find.text('Popover'), findsOneWidget);
-
-    shown = false;
-    await rebuild();
-    expect(find.text('Popover'), findsNothing);
-
-    shown = true;
-    await rebuild();
-    expect(find.text('Popover'), findsOneWidget);
-
-    shown = false;
-    await rebuild();
-    expect(find.text('Popover'), findsNothing);
+      unawaited(controller.hide());
+      await tester.pumpAndSettle();
+      expect(value, false);
+    });
   });
 
   testWidgets('barrier blocks taps', (tester) async {

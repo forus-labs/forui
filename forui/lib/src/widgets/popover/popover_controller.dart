@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
+
+part 'popover_controller.control.dart';
 
 /// A controller that controls whether a [FPopover] is shown or hidden.
 class FPopoverController extends FChangeNotifier {
@@ -87,7 +91,7 @@ class LiftedController extends FPopoverController {
   int _monotonic;
   void Function(bool shown) _onChange;
 
-  LiftedController(bool shown, this._onChange, {required super.vsync, super.motion}): _monotonic = 0 {
+  LiftedController(bool shown, this._onChange, {required super.vsync, super.motion}) : _monotonic = 0 {
     if (shown) {
       _overlay.show();
       _animation.value = 1;
@@ -116,4 +120,83 @@ class LiftedController extends FPopoverController {
 
   @override
   Future<void> hide() async => _onChange(false);
+}
+
+/// Defines how a popover's shown state is controlled.
+sealed class FPopoverControl with Diagnosticable {
+  /// Creates a [FPopoverControl] for controlling a popover using lifted state.
+  ///
+  /// The [shown] parameter indicates whether the popover is currently shown.
+  /// The [onChange] callback is invoked when the user triggers a show/hide action.
+  const factory FPopoverControl.lifted({
+    required bool shown,
+    required void Function(bool shown) onChange,
+    FPopoverMotion motion,
+  }) = Lifted;
+
+  /// Creates a [FPopoverControl] for controlling a popover using a controller.
+  ///
+  /// Either [controller] or [motion] can be provided. If neither is provided,
+  /// an internal controller with default motion is created.
+  ///
+  /// The [onChange] callback is invoked when the popover's shown state changes.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if both [controller] and [motion] are provided.
+  const factory FPopoverControl.managed({
+    FPopoverController? controller,
+    FPopoverMotion? motion,
+    void Function(bool shown)? onChange,
+  }) = Managed;
+
+  const FPopoverControl._();
+
+  FPopoverController _create(VoidCallback callback, TickerProvider vsync);
+
+  FPopoverController _update(
+    FPopoverControl old,
+    FPopoverController controller,
+    VoidCallback callback,
+    TickerProvider vsync,
+  );
+
+  void _dispose(FPopoverController controller, VoidCallback callback);
+}
+
+@internal
+class Lifted extends FPopoverControl with _$LiftedFunctions {
+  @override
+  final bool shown;
+  @override
+  final void Function(bool shown) onChange;
+  @override
+  final FPopoverMotion motion;
+
+  const Lifted({required this.shown, required this.onChange, this.motion = const FPopoverMotion()}) : super._();
+
+  @override
+  FPopoverController _create(VoidCallback callback, TickerProvider vsync) =>
+      LiftedController(vsync: vsync, shown, onChange, motion: motion);
+
+  @override
+  void _updateController(FPopoverController controller, TickerProvider vsync) =>
+      (controller as LiftedController).update(shown, onChange);
+}
+
+@internal
+class Managed extends FPopoverControl with Diagnosticable, _$ManagedFunctions {
+  @override
+  final FPopoverController? controller;
+  @override
+  final FPopoverMotion? motion;
+  @override
+  final void Function(bool shown)? onChange;
+
+  const Managed({this.controller, this.motion, this.onChange})
+    : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
+      super._();
+
+  @override
+  FPopoverController _create(VoidCallback callback, TickerProvider vsync) =>
+      (controller ?? .new(vsync: vsync, motion: motion ?? const .new()))..addListener(callback);
 }
