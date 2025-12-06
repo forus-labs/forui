@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,56 +36,6 @@ void main() {
 
   tearDown(() => controller.dispose());
 
-  group('controller', () {
-    testWidgets('update', (tester) async {
-      final controller = FAutocompleteController(vsync: const TestVSync());
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FAutocomplete(key: key, items: fruits, control: .managed(controller: controller)),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(controller.hasListeners, true);
-      expect(controller.content.hasListeners, false);
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FAutocomplete(key: key, items: fruits),
-        ),
-      );
-
-      expect(controller.hasListeners, false);
-      expect(controller.content.hasListeners, false);
-      expect(controller.dispose, returnsNormally);
-    });
-
-    testWidgets('dispose', (tester) async {
-      final controller = FAutocompleteController(vsync: const TestVSync());
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FAutocomplete(key: key, items: fruits, control: .managed(controller: controller)),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(controller.hasListeners, true);
-      expect(controller.content.hasListeners, false);
-
-      await tester.pumpWidget(const SizedBox());
-
-      expect(controller.hasListeners, false);
-      expect(controller.content.hasListeners, false);
-      expect(controller.dispose, returnsNormally);
-    });
-  });
-
   group('focus', () {
     testWidgets('external focus is not disposed', (tester) async {
       final focus = autoDispose(FocusNode());
@@ -104,18 +52,23 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(key: key, control: .managed(controller: controller), focusNode: focus, items: fruits),
+          child: FAutocomplete(
+            key: key,
+            control: .managed(controller: controller),
+            focusNode: focus,
+            items: fruits,
+          ),
         ),
       );
 
       expect(focus.hasFocus, false);
-      expect(controller.content.status.isForwardOrCompleted, false);
+      expect(controller.popover.status.isForwardOrCompleted, false);
 
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, true);
-      expect(controller.content.status.isForwardOrCompleted, true);
+      expect(controller.popover.status.isForwardOrCompleted, true);
     });
 
     testWidgets('tab when completion available completes text', (tester) async {
@@ -126,7 +79,12 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(key: key, control: .managed(controller: controller), focusNode: autocompleteFocus, items: fruits),
+              FAutocomplete(
+                key: key,
+                control: .managed(controller: controller),
+                focusNode: autocompleteFocus,
+                items: fruits,
+              ),
               FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
             ],
           ),
@@ -139,7 +97,7 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
 
-      expect(controller.content.status.isForwardOrCompleted, false);
+      expect(controller.popover.status.isForwardOrCompleted, false);
       expect(autocompleteFocus.hasFocus, true);
       expect(buttonFocus.hasFocus, false);
       expect(find.text('Banana'), findsOne);
@@ -153,7 +111,12 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(key: key, control: .managed(controller: controller), focusNode: autocompleteFocus, items: fruits),
+              FAutocomplete(
+                key: key,
+                control: .managed(controller: controller),
+                focusNode: autocompleteFocus,
+                items: fruits,
+              ),
               FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
             ],
           ),
@@ -166,7 +129,7 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.tab);
       await tester.pumpAndSettle();
 
-      expect(controller.content.status.isForwardOrCompleted, false);
+      expect(controller.popover.status.isForwardOrCompleted, false);
       expect(autocompleteFocus.hasFocus, false);
       expect(buttonFocus.hasFocus, true);
     });
@@ -181,7 +144,12 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(key: key, control: .managed(controller: controller), focusNode: autocompleteFocus, items: fruits),
+              FAutocomplete(
+                key: key,
+                control: .managed(controller: controller),
+                focusNode: autocompleteFocus,
+                items: fruits,
+              ),
               FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
             ],
           ),
@@ -194,7 +162,7 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
       await tester.pumpAndSettle();
 
-      expect(controller.content.status.isForwardOrCompleted, true);
+      expect(controller.popover.status.isForwardOrCompleted, true);
       expect(autocompleteFocus.hasFocus, true);
       expect(buttonFocus.hasFocus, false);
       expect(find.text('b'), findsOne);
@@ -227,10 +195,137 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.arrowRight);
       await tester.pumpAndSettle();
 
-      expect(controller.content.status.isForwardOrCompleted, false);
+      expect(controller.popover.status.isForwardOrCompleted, false);
       expect(autocompleteFocus.hasFocus, true);
       expect(buttonFocus.hasFocus, false);
       expect(find.text('Banana'), findsOne);
+    });
+  });
+
+  group('lifted', () {
+    testWidgets('lifted', (tester) async {
+      var value = TextEditingValue.empty;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FAutocomplete(
+              key: key,
+              control: .lifted(value: value, onValueChange: (v) => setState(() => value = v)),
+              items: fruits,
+            ),
+          ),
+        ),
+      );
+
+      expect(find.byKey(key), findsOneWidget);
+    });
+
+    testWidgets('showing popover does not cause error', (tester) async {
+      var value = TextEditingValue.empty;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FAutocomplete(
+              key: key,
+              control: .lifted(value: value, onValueChange: (v) => setState(() => value = v)),
+              items: fruits,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byType(EditableText));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Apple'));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(EditableText), ' ');
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+    });
+
+    testWidgets('onPopoverChange called', (tester) async {
+      var value = TextEditingValue.empty;
+      var popoverShown = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FAutocomplete(
+              key: key,
+              control: .lifted(
+                value: value,
+                onValueChange: (v) => setState(() => value = v),
+                popoverShown: popoverShown,
+                onPopoverChange: (shown) => setState(() => popoverShown = shown),
+              ),
+              items: fruits,
+            ),
+          ),
+        ),
+      );
+
+      expect(popoverShown, false);
+
+      await tester.tap(find.byType(EditableText));
+      await tester.pumpAndSettle();
+
+      expect(popoverShown, true);
+
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
+      expect(popoverShown, false);
+    });
+
+    testWidgets('popoverShown controls visibility', (tester) async {
+      var value = TextEditingValue.empty;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FAutocomplete(
+              key: key,
+              control: .lifted(
+                value: value,
+                onValueChange: (v) => setState(() => value = v),
+                popoverShown: false,
+                onPopoverChange: (_) => {},
+              ),
+              items: fruits,
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.byType(EditableText));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Apple'), findsNothing);
+    });
+  });
+
+  group('managed', () {
+    testWidgets('onChange callback called', (tester) async {
+      TextEditingValue? changedValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      expect(changedValue?.text, 'app');
     });
   });
 
@@ -242,7 +337,12 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(key: key, control: .managed(controller: controller), focusNode: focus, items: fruits),
+            child: FAutocomplete(
+              key: key,
+              control: .managed(controller: controller),
+              focusNode: focus,
+              items: fruits,
+            ),
           ),
         );
 
@@ -260,7 +360,7 @@ void main() {
 
         expect(focus.hasFocus, true);
         expect(controller.selection, const TextSelection.collapsed(offset: 5));
-        expect(controller.content.status.isForwardOrCompleted, false);
+        expect(controller.popover.status.isForwardOrCompleted, false);
         expect(find.text('app'), findsNothing);
         expect(find.text('Apple'), findsOne);
 
@@ -273,7 +373,12 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(key: key, control: .managed(controller: controller), focusNode: focus, items: fruits),
+            child: FAutocomplete(
+              key: key,
+              control: .managed(controller: controller),
+              focusNode: focus,
+              items: fruits,
+            ),
           ),
         );
 
@@ -291,7 +396,7 @@ void main() {
 
         expect(focus.hasFocus, true);
         expect(controller.selection, const TextSelection.collapsed(offset: 3));
-        expect(controller.content.status.isForwardOrCompleted, false);
+        expect(controller.popover.status.isForwardOrCompleted, false);
         expect(find.text('app'), findsOne);
         expect(find.text('Apple'), findsNothing);
 
@@ -304,7 +409,12 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(key: key, control: .managed(controller: controller), focusNode: focus, items: fruits),
+            child: FAutocomplete(
+              key: key,
+              control: .managed(controller: controller),
+              focusNode: focus,
+              items: fruits,
+            ),
           ),
         );
 
@@ -321,7 +431,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(focus.hasFocus, true);
-        expect(controller.content.status.isForwardOrCompleted, false);
+        expect(controller.popover.status.isForwardOrCompleted, false);
         expect(find.text('app'), findsOne);
         expect(find.text('Apple'), findsNothing);
 
