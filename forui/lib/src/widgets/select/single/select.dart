@@ -58,7 +58,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   static String? _defaultValidator(Object? _) => null;
 
   /// The control that manages the select's state.
-  final FSelectControl<T> control;
+  ///
+  /// Defaults to [FSelectControl.managed] if not provided.
+  final FSelectControl<T>? control;
 
   /// The style.
   ///
@@ -191,7 +193,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// undefined behavior.
   factory FSelect({
     required Map<String, T> items,
-    FSelectControl<T> control = const .managed(),
+    FSelectControl<T>? control,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -279,7 +281,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   const factory FSelect.rich({
     required String Function(T value) format,
     required List<FSelectItemMixin> children,
-    FSelectControl<T> control,
+    FSelectControl<T>? control,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -341,7 +343,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder =
         FSelect.defaultContentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
-    FSelectControl<T> control = const .managed(),
+    FSelectControl<T>? control,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -452,7 +454,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FSelectSearchFieldProperties searchFieldProperties,
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
-    FSelectControl<T> control,
+    FSelectControl<T>? control,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -494,7 +496,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   const FSelect._({
     required this.format,
-    this.control = const .managed(),
+    this.control,
     this.style,
     this.autofocus = false,
     this.focusNode,
@@ -586,7 +588,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
   @override
   void initState() {
     super.initState();
-    _controller = widget.control.create(_updateTextController, this);
+    _controller = (widget.control ?? FSelectControl<T>.managed()).create(_updateTextController, this);
     _textController = TextEditingController(
       text: _controller.value == null ? '' : widget.format(_controller.value as T),
     )..addListener(_updateSelectController);
@@ -605,7 +607,9 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       _focus = widget.focusNode ?? .new(debugLabel: 'FSelect');
     }
 
-    final (controller, updated) = widget.control.update(old.control, _controller, _updateTextController, this);
+    final current = widget.control ?? FSelectControl<T>.managed();
+    final previous = old.control ?? FSelectControl<T>.managed();
+    final (controller, updated) = current.update(previous, _controller, _updateTextController, this);
     if (updated) {
       _controller = controller;
       _updateTextController();
@@ -732,7 +736,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
   @override
   void dispose() {
     _textController.dispose();
-    widget.control.dispose(_controller, _updateTextController);
+    (widget.control ?? FSelectControl<T>.managed()).dispose(_controller, _updateTextController);
 
     if (widget.focusNode == null) {
       _focus.dispose();
