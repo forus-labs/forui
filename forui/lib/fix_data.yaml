@@ -1708,6 +1708,219 @@ transforms:
             name: 'onChange'
 
 
+  # FSelectTileGroup
+  - title: 'Rename FSelectTileGroupController to FSelectGroupController'
+    date: 2025-11-30
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      typedef: FSelectTileGroupController
+    changes:
+      - kind: rename
+        newName: 'FSelectGroupController'
+
+  - title: 'Migrate FSelectTileGroup to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectTileGroup
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[selectController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FSelectTileGroup.builder to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectTileGroup
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[selectController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+
+  # FTileGroupMixin
+  - title: 'Migrate FTileGroupMixin.selectGroup to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'selectGroup'
+      inClass: FTileGroupMixin
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[selectController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FTileGroupMixin.selectGroupBuilder to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'selectGroupBuilder'
+      inClass: FTileGroupMixin
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[selectController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+
   # FSelectMenuTile
   - title: 'Rename FSelectMenuTile(shift: ...) to overflow'
     date: 2025-11-30

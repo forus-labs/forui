@@ -264,7 +264,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
                constraints: BoxConstraints(maxWidth: menuStyle.maxWidth),
                child: FInheritedItemData(
                  child: FSelectTileGroup<T>(
-                   selectController: state._controller,
+                   control: FSelectGroupControl.managed(controller: state._controller),
                    scrollController: scrollController,
                    cacheExtent: cacheExtent,
                    maxHeight: maxHeight,
@@ -535,8 +535,7 @@ class FSelectMenuTile<T> extends FormField<Set<T>> with FTileMixin, FFormFieldPr
              barrierSemanticsLabel: barrierSemanticsLabel,
              barrierSemanticsDismissible: barrierSemanticsDismissible,
              popoverBuilder: (_, _) => FSelectTileGroup<T>.builder(
-               selectController: state._controller,
-               scrollController: scrollController,
+               control: FSelectGroupControl.managed(controller: state._controller), scrollController: scrollController,
                cacheExtent: cacheExtent,
                maxHeight: maxHeight,
                dragStartBehavior: dragStartBehavior,

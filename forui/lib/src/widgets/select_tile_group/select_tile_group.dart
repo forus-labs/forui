@@ -3,10 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/form/multi_value_form_field.dart';
+import 'package:forui/src/widgets/select_group/select_group_controller.dart';
 import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
-
-/// A controller for a [FSelectTileGroup].
-typedef FSelectTileGroupController<T> = FMultiValueNotifier<T>;
 
 /// A set of tiles that are treated as a single selection.
 ///
@@ -18,9 +17,11 @@ typedef FSelectTileGroupController<T> = FMultiValueNotifier<T>;
 /// * https://forui.dev/docs/tile/select-tile-group for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FTileGroupStyle] for customizing a select group's appearance.
-class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormFieldProperties<Set<T>> {
-  /// The controller.
-  final FSelectTileGroupController<T> selectController;
+class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFieldProperties<Set<T>> {
+  /// Defines how the select tile group's value is controlled.
+  ///
+  /// Defaults to [FSelectGroupControl.managed].
+  final FSelectGroupControl<T>? control;
 
   /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
@@ -60,18 +61,43 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
-  /// The callback that is called when the value changes.
-  final ValueChanged<Set<T>>? onChange;
+  @override
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
-  /// The callback that is called when an item is selected.
-  final ValueChanged<(T, bool)>? onSelect;
+  /// {@macro flutter.widgets.FormField.onSaved}
+  @override
+  final FormFieldSetter<Set<T>>? onSaved;
+
+  /// {@macro forui.widgets.FFormField.onReset}
+  @override
+  final VoidCallback? onReset;
+
+  /// {@macro flutter.widgets.FormField.validator}
+  @override
+  final FormFieldValidator<Set<T>>? validator;
+
+  /// {@macro flutter.widgets.FormField.forceErrorText}
+  @override
+  final String? forceErrorText;
+
+  /// Whether the form field is enabled. Defaults to true.
+  @override
+  final bool enabled;
+
+  /// {@macro flutter.widgets.FormField.autovalidateMode}
+  @override
+  final AutovalidateMode autovalidateMode;
+
+  final List<FSelectTile<T>>? _children;
+  final FSelectTile<T>? Function(BuildContext context, int index)? _tileBuilder;
+  final int? _count;
 
   /// {@template forui.widgets.FSelectTileGroup.new}
   /// Creates a [FSelectTileGroup].
   /// {@endtemplate}
   FSelectTileGroup({
-    required this.selectController,
     required List<FSelectTile<T>> children,
+    this.control,
     this.scrollController,
     this.style,
     this.cacheExtent,
@@ -82,48 +108,17 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
     this.label,
     this.description,
     this.semanticsLabel,
-    this.onChange,
-    this.onSelect,
-    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    super.onSaved,
-    super.onReset,
-    super.validator,
-    super.forceErrorText,
-    super.enabled = true,
-    super.autovalidateMode,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.onSaved,
+    this.onReset,
+    this.validator,
+    this.forceErrorText,
+    this.enabled = true,
+    this.autovalidateMode = .disabled,
     super.key,
-  }) : super(
-         initialValue: selectController.value,
-         builder: (field) {
-           final state = field as _State;
-           return FTileGroup(
-             scrollController: scrollController,
-             style: style ?? state.context.theme.tileGroupStyle,
-             cacheExtent: cacheExtent,
-             maxHeight: maxHeight,
-             dragStartBehavior: dragStartBehavior,
-             physics: physics,
-             divider: divider,
-             label: label,
-             enabled: enabled,
-             description: description,
-             error: switch (state.errorText) {
-               _ when !enabled => null,
-               final text? => errorBuilder(state.context, text),
-               null => null,
-             },
-             semanticsLabel: semanticsLabel,
-             children: [
-               for (final child in children)
-                 FSelectTileData<T>(
-                   controller: selectController,
-                   selected: selectController.contains(child.value),
-                   child: child,
-                 ),
-             ],
-           );
-         },
-       );
+  })  : _children = children,
+        _tileBuilder = null,
+        _count = null;
 
   /// {@template forui.widgets.FSelectTileGroup.builder}
   /// Creates a [FSelectTileGroup] that lazily builds its children.
@@ -131,9 +126,9 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
   /// {@macro forui.widgets.FTileGroup.builder}
   /// {@endtemplate}
   FSelectTileGroup.builder({
-    required this.selectController,
     required FSelectTile<T>? Function(BuildContext context, int index) tileBuilder,
     int? count,
+    this.control,
     this.scrollController,
     this.style,
     this.cacheExtent,
@@ -144,61 +139,26 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
     this.label,
     this.description,
     this.semanticsLabel,
-    this.onChange,
-    this.onSelect,
-    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    super.onSaved,
-    super.validator,
-    super.forceErrorText,
-    super.enabled = true,
-    super.autovalidateMode,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.onSaved,
+    this.onReset,
+    this.validator,
+    this.forceErrorText,
+    this.enabled = true,
+    this.autovalidateMode = .disabled,
     super.key,
-  }) : super(
-         initialValue: selectController.value,
-         errorBuilder: errorBuilder,
-         builder: (field) {
-           final state = field as _State;
-
-           return FTileGroup.builder(
-             scrollController: scrollController,
-             style: style ?? state.context.theme.tileGroupStyle,
-             cacheExtent: cacheExtent,
-             maxHeight: maxHeight,
-             dragStartBehavior: dragStartBehavior,
-             physics: physics,
-             count: count,
-             divider: divider,
-             label: label,
-             enabled: enabled,
-             description: description,
-             error: switch (state.errorText) {
-               _ when !enabled => null,
-               final text? => errorBuilder(state.context, text),
-               null => null,
-             },
-             semanticsLabel: semanticsLabel,
-             tileBuilder: (context, index) {
-               final child = tileBuilder(context, index);
-               return child == null
-                   ? null
-                   : FSelectTileData<T>(
-                       controller: selectController,
-                       selected: selectController.contains(child.value),
-                       child: child,
-                     );
-             },
-           );
-         },
-       );
+  })  : _children = null,
+        _tileBuilder = tileBuilder,
+        _count = count;
 
   @override
-  FormFieldState<Set<T>> createState() => _State();
+  State<FSelectTileGroup<T>> createState() => _FSelectTileGroupState<T>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('groupController', selectController))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
@@ -208,102 +168,113 @@ class FSelectTileGroup<T> extends FormField<Set<T>> with FTileGroupMixin, FFormF
       ..add(EnumProperty('divider', divider))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(ObjectFlagProperty.has('onSelect', onSelect));
+      ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('onReset', onReset))
+      ..add(ObjectFlagProperty.has('validator', validator))
+      ..add(StringProperty('forceErrorText', forceErrorText))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(EnumProperty('autovalidateMode', autovalidateMode));
   }
 }
 
-class _State<T> extends FormFieldState<Set<T>> {
-  final FocusNode _focus = FocusNode(debugLabel: 'FSelectTileGroup');
+class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
+  late FSelectGroupController<T> _controller;
 
   @override
   void initState() {
     super.initState();
-    widget.selectController.addListener(_handleControllerChanged);
-    widget.selectController.addValueListener(widget.onChange);
-    widget.selectController.addUpdateListener(widget.onSelect);
+    _controller = (widget.control ?? FSelectGroupControl<T>.managed()).create(_handleChange);
   }
 
   @override
   void didUpdateWidget(covariant FSelectTileGroup<T> old) {
     super.didUpdateWidget(old);
-    if (widget.selectController != old.selectController) {
-      widget.selectController.addListener(_handleControllerChanged);
-      old.selectController.removeListener(_handleControllerChanged);
-    }
-
-    old.selectController.removeValueListener(old.onChange);
-    old.selectController.removeUpdateListener(old.onSelect);
-    widget.selectController.addValueListener(widget.onChange);
-    widget.selectController.addUpdateListener(widget.onSelect);
+    final current = widget.control ?? FSelectGroupControl<T>.managed();
+    final previous = old.control ?? FSelectGroupControl<T>.managed();
+    _controller = current.update(previous, _controller, _handleChange).$1;
   }
 
-  @override
-  void didChange(Set<T>? value) {
-    super.didChange(value);
-    if (!setEquals(widget.selectController.value, value)) {
-      widget.selectController.value = value ?? {};
+  void _handleChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
     }
   }
 
   @override
-  void reset() {
-    // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
-    widget.selectController.value = widget.initialValue ?? {};
-    super.reset();
+  Widget build(BuildContext context) {
+    final groupStyle = widget.style ?? context.theme.tileGroupStyle;
+
+    return MultiValueFormField<T>(
+      controller: _controller,
+      enabled: widget.enabled,
+      onSaved: widget.onSaved,
+      validator: widget.validator,
+      forceErrorText: widget.forceErrorText,
+      autovalidateMode: widget.autovalidateMode,
+      builder: (state) {
+        final error = switch (state.errorText) {
+          _ when !widget.enabled => null,
+          final text? => widget.errorBuilder(context, text),
+          null => null,
+        };
+
+        if (widget._children case final children?) {
+          return FTileGroup(
+            scrollController: widget.scrollController,
+            style: groupStyle,
+            cacheExtent: widget.cacheExtent,
+            maxHeight: widget.maxHeight,
+            dragStartBehavior: widget.dragStartBehavior,
+            physics: widget.physics,
+            divider: widget.divider,
+            label: widget.label,
+            enabled: widget.enabled,
+            description: widget.description,
+            error: error,
+            semanticsLabel: widget.semanticsLabel,
+            children: [
+              for (final child in children)
+                FSelectTileData<T>(
+                  controller: _controller,
+                  selected: _controller.contains(child.value),
+                  child: child,
+                ),
+            ],
+          );
+        }
+
+        return FTileGroup.builder(
+          scrollController: widget.scrollController,
+          style: groupStyle,
+          cacheExtent: widget.cacheExtent,
+          maxHeight: widget.maxHeight,
+          dragStartBehavior: widget.dragStartBehavior,
+          physics: widget.physics,
+          count: widget._count,
+          divider: widget.divider,
+          label: widget.label,
+          enabled: widget.enabled,
+          description: widget.description,
+          error: error,
+          semanticsLabel: widget.semanticsLabel,
+          tileBuilder: (context, index) {
+            final child = widget._tileBuilder!(context, index);
+            return child == null
+                ? null
+                : FSelectTileData<T>(
+                    controller: _controller,
+                    selected: _controller.contains(child.value),
+                    child: child,
+                  );
+          },
+        );
+      },
+    );
   }
 
   @override
   void dispose() {
-    widget.selectController
-      ..removeListener(_handleControllerChanged)
-      ..removeValueListener(widget.onChange)
-      ..removeUpdateListener(widget.onSelect);
-    _focus.dispose();
+    (widget.control ?? FSelectGroupControl<T>.managed()).dispose(_controller, _handleChange);
     super.dispose();
   }
-
-  void _handleControllerChanged() {
-    // Suppress changes that originated from within this class.
-    //
-    // In the case where a controller has been passed in to this widget, we register this change listener. In these
-    // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
-    // reset() method. In such cases, the FormField value will already have been set.
-    if (!setEquals(widget.selectController.value, value)) {
-      didChange(widget.selectController.value);
-    }
-  }
-
-  @protected
-  @override
-  Widget build(BuildContext context) {
-    // This is a workaround the default FormField.build() function wrapping the child (a SliverList) in a Semantics
-    // which results in:
-    // "A RenderSemanticsAnnotations expected a child of type RenderBox but received a child of type RenderSliverList."
-    //
-    // This behavior was introduced without any prior notice in Flutter 3.32.
-    super.build(context);
-
-    final child = widget.builder(this);
-    if (Form.maybeOf(context)?.widget.autovalidateMode == AutovalidateMode.onUnfocus &&
-            widget.autovalidateMode != AutovalidateMode.always ||
-        widget.autovalidateMode == AutovalidateMode.onUnfocus) {
-      return Focus(
-        canRequestFocus: false,
-        skipTraversal: true,
-        onFocusChange: (value) {
-          if (!value) {
-            validate();
-          }
-        },
-        focusNode: _focus,
-        child: child,
-      );
-    }
-
-    return child;
-  }
-
-  @override
-  FSelectTileGroup<T> get widget => super.widget as FSelectTileGroup<T>;
 }

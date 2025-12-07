@@ -78,6 +78,17 @@ class MultiValueFormFieldState<T> extends FormFieldState<Set<T>> {
     super.reset();
   }
 
+  // This is a workaround the default FormField.build() function wrapping the child (a SliverList) in a Semantics
+  // which results in:
+  // "A RenderSemanticsAnnotations expected a child of type RenderBox but received a child of type RenderSliverList."
+  //
+  // This behavior was introduced without any prior notice in Flutter 3.32.
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return widget.builder(this);
+  }
+
   @override
   MultiValueFormField<T> get widget => super.widget as MultiValueFormField<T>;
 

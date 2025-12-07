@@ -127,8 +127,8 @@ dart fix --apply
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 
 
-### `FSelectGroup`
-* Add `FSelectGroupControl`.
+### `FSelectGroup` & `FSelectTileGroup`
+* Add `FSelectGroupControl` - shared by both `FSelectGroup` and `FSelectTileGroup`.
 * Add `FSelectGroupItemMixin.checkbox(...)`.
 * Add `FSelectGroupItemMixin.radio(...)`.
 
@@ -140,6 +140,22 @@ dart fix --apply
 
 ### `FSelectMenutTile`
 *  **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+
+
+### `FSelectTileGroup`
+* **Breaking** Remove `FSelectTileGroupController`. Use `FSelectGroupController` instead.
+* **Breaking** Remove `FSelectTileGroup.selectController`. Use `FSelectTileGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectTileGroup.onChange`. Use `FSelectTileGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectTileGroup.onSelect`.
+
+
+### `FTileGroupMixin`
+* **Breaking** Remove `FTileGroupMixin.selectGroup(selectController: ...)`. Use `FTileGroupMixin.selectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroup(onChange: ...)`. Use `FTileGroupMixin.selectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroup(onSelect: ...)`.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(selectController: ...)`. Use `FTileGroupMixin.selectGroupBuilder(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onChange: ...)`. Use `FTileGroupMixin.selectGroupBuilder(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onSelect: ...)`.
 
 
 ### `FSlider`

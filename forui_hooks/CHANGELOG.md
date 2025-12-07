@@ -1,3 +1,7 @@
+## 0.17.0
+* **Breaking** Remove `useFSelectTileGroupController`. Use `useFSelectGroupController` instead.
+
+
 ## 0.16.0
 
 * **Breaking** Replace `useFDateFieldController(animationDuration: ...)` with `useFDateFieldController(popoverMotion: ...)`.

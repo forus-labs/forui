@@ -201,7 +201,7 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
     return context.dependOnInheritedWidgetOfExactType<FSelectTileData<T>>()!;
   }
 
-  final FSelectTileGroupController<T> controller;
+  final FSelectGroupController<T> controller;
   final bool selected;
 
   const FSelectTileData({required this.controller, required this.selected, required super.child, super.key});
