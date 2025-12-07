@@ -1657,6 +1657,56 @@ transforms:
       - kind: rename
         newName: 'FSelectGroupItemMixin'
 
+  - title: 'Migrate FSelectGroup to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectGroup
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
 
   # FSelectMenuTile
   - title: 'Rename FSelectMenuTile(shift: ...) to overflow'

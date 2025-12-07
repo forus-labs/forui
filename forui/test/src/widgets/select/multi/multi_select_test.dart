@@ -143,7 +143,7 @@ void main() {
             builder: (context, setState) => FMultiSelect<String>.searchBuilder(
               key: key,
               control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
-              format: (v) => Text(v),
+              format: Text.new,
               filter: (query) => letters.keys.where((k) => k.toLowerCase().contains(query.toLowerCase())),
               contentBuilder: (context, query, items) => [
                 for (final item in items) FSelectItem(title: Text(item), value: item),

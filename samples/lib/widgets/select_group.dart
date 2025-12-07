@@ -33,8 +33,7 @@ class _SelectGroupPageState extends StatefulSampleState<SelectGroupPage> {
     mainAxisAlignment: .center,
     children: [
       FSelectGroup(
-        controller: _controller,
-        label: const Text('Sidebar'),
+        control: .managed(controller: _controller), label: const Text('Sidebar'),
         description: const Text('These will be shown in the sidebar.'),
         children: [
           .checkbox(value: Sidebar.recents, label: const Text('Recents')),
@@ -72,8 +71,7 @@ class _SelectGroupCheckboxFormPageState extends StatefulSampleState<SelectGroupC
       crossAxisAlignment: .start,
       children: [
         FSelectGroup(
-          controller: _controller,
-          label: const Text('Favorite Languages'),
+          control: .managed(controller: _controller), label: const Text('Favorite Languages'),
           description: const Text('Your favorite language.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
           children: <FSelectGroupItemMixin<Language>>[
@@ -127,8 +125,7 @@ class _SelectGroupRadioFormPageState extends StatefulSampleState<SelectGroupRadi
       crossAxisAlignment: .start,
       children: [
         FSelectGroup(
-          controller: _controller,
-          label: const Text('Notifications'),
+          control: .managed(controller: _controller), label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
           children: <FSelectGroupItemMixin<Notification>>[

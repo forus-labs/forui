@@ -128,9 +128,13 @@ dart fix --apply
 
 
 ### `FSelectGroup`
+* Add `FSelectGroupControl`.
 * Add `FSelectGroupItemMixin.checkbox(...)`.
 * Add `FSelectGroupItemMixin.radio(...)`.
 
+* **Breaking** Remove `FSelectGroup.controller`. Use `FSelectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectGroup.onChange`. Use `FSelectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectGroup.onSelect`.
 * **Breaking** Rename `FSelectGroupItem` to `FSelectGroupItemMixin`.
 
 

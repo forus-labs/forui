@@ -14,7 +14,7 @@ void main() {
             style: TestScaffold.blueScreen.selectGroupStyle,
             label: const Text('Select Group'),
             description: const Text('Select Group Description'),
-            controller: autoDispose(FMultiValueNotifier(value: {1})),
+            control: .managed(controller: autoDispose(FMultiValueNotifier(value: {1}))),
             children: [
               .checkbox(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
               .radio(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
@@ -34,7 +34,7 @@ void main() {
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
-              controller: autoDispose(FMultiValueNotifier(value: {1})),
+              control: .managed(controller: autoDispose(FMultiValueNotifier(value: {1}))),
               children: [
                 .checkbox(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
                 .checkbox(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
@@ -55,7 +55,7 @@ void main() {
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
               forceErrorText: 'Some error message.',
-              controller: autoDispose(FMultiValueNotifier(value: {1})),
+              control: .managed(controller: autoDispose(FMultiValueNotifier(value: {1}))),
               children: [
                 .checkbox(value: 1, label: const Text('Checkbox 1'), semanticsLabel: 'Checkbox 1'),
                 .checkbox(value: 2, label: const Text('Checkbox 2'), semanticsLabel: 'Checkbox 2'),
@@ -82,7 +82,7 @@ void main() {
             child: FSelectGroup(
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
-              controller: autoDispose(FMultiValueNotifier.radio(1)),
+              control: .managed(controller: autoDispose(FMultiValueNotifier.radio(1))),
               children: [
                 .radio(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
                 .radio(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
@@ -103,7 +103,7 @@ void main() {
               label: const Text('Select Group'),
               description: const Text('Select Group Description'),
               forceErrorText: 'Some error message.',
-              controller: autoDispose(FMultiValueNotifier.radio(1)),
+              control: .managed(controller: autoDispose(FMultiValueNotifier.radio(1))),
               children: [
                 .radio(value: 1, label: const Text('Radio 1'), semanticsLabel: 'Radio 1'),
                 .radio(value: 2, label: const Text('Radio 2'), semanticsLabel: 'Radio 2'),
