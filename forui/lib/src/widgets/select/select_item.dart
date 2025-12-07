@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
-import 'package:forui/src/widgets/select/select_controller.dart';
+import 'package:forui/src/widgets/select/content/inherited_controller.dart';
 
 part 'select_item.design.dart';
 

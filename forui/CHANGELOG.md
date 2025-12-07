@@ -40,7 +40,9 @@ dart fix --apply
 
 
 ### `FBreadcrumb`
-*  **Breaking** Change `FBreadcrumb.shift` to `FBreadcrumb.overflow`.
+* **Breaking** Rename `FBreadcrumb.shift` to `FBreadcrumb.overflow`.
+* **Breaking** Remove `FBreadcrumbItem.collapsed(popoverController: ...)`. Use `FBreadcrumbItem.collapsed(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FBreadcrumbItem.collapsedTiles(popoverController: ...)`. Use `FBreadcrumbItem.collapsedTiles(popoverControl: .managed(...))` instead.
 
 
 ### `FCheckbox`
@@ -104,6 +106,7 @@ dart fix --apply
 
 ### `FSelect` & `FMultiSelect`
 * Add `FSelectControl`.
+* Add `FMultiSelectControl`.
 * Add `FSelectItemMixin.item(...)`.
 * Add `FSelectItemMixin.raw(...)`.
 * Add `FSelectItemMixin.section(...)`.
@@ -115,6 +118,11 @@ dart fix --apply
 * **Breaking** Remove `FSelect.controller`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.onChange`. Use `FSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelect.initialValue`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.controller`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.onChange`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.initialValue`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.min`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.max`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 

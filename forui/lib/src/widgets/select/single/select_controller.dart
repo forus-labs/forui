@@ -103,22 +103,25 @@ sealed class FSelectControl<T> with Diagnosticable {
     required ValueChanged<T?> onChange,
     bool? popoverShown,
     ValueChanged<bool>? onPopoverChange,
+    FPopoverMotion motion,
   }) = Lifted<T>;
 
   /// Creates a [FSelectControl] for controlling select using a controller.
   ///
-  /// Either [controller] or [initial] can be provided. If neither is provided,
-  /// an internal controller with no initial value is created.
+  /// Either [controller] or [initial] can be provided. If neither is provided, an internal controller with no initial
+  /// value is created.
   ///
   /// The [onChange] callback is invoked when the selected value changes.
   ///
   /// ## Contract
   /// Throws [AssertionError] if both [controller] and [initial] are provided.
+  /// Throws [AssertionError] if both [controller] and [motion] are provided.
   const factory FSelectControl.managed({
     FSelectController<T>? controller,
     T? initial,
     bool toggleable,
     ValueChanged<T?>? onChange,
+    FPopoverMotion? motion,
   }) = Managed<T>;
 
   const FSelectControl._();
@@ -145,13 +148,20 @@ class Lifted<T> extends FSelectControl<T> with _$LiftedFunctions<T> {
   final bool? popoverShown;
   @override
   final ValueChanged<bool>? onPopoverChange;
+  @override
+  final FPopoverMotion motion;
 
-  const Lifted({required this.value, required this.onChange, this.popoverShown, this.onPopoverChange})
-    : assert(
-        (popoverShown == null) == (onPopoverChange == null),
-        'popoverShown and onPopoverChange must both be provided or both be null.',
-      ),
-      super._();
+  const Lifted({
+    required this.value,
+    required this.onChange,
+    this.popoverShown,
+    this.onPopoverChange,
+    this.motion = const FPopoverMotion(),
+  }) : assert(
+         (popoverShown == null) == (onPopoverChange == null),
+         'popoverShown and onPopoverChange must both be provided or both be null.',
+       ),
+       super._();
 
   @override
   FSelectController<T> _create(VoidCallback callback, TickerProvider vsync) => _Controller(
@@ -160,6 +170,7 @@ class Lifted<T> extends FSelectControl<T> with _$LiftedFunctions<T> {
     onValueChange: onChange,
     popoverShown: popoverShown,
     onPopoverChange: onPopoverChange,
+    popoverMotion: motion,
   )..addListener(callback);
 
   @override
@@ -177,15 +188,28 @@ class Managed<T> extends FSelectControl<T> with Diagnosticable, _$ManagedFunctio
   final bool toggleable;
   @override
   final ValueChanged<T?>? onChange;
+  @override
+  final FPopoverMotion? motion;
 
-  const Managed({this.controller, this.initial, this.toggleable = false, this.onChange})
+  const Managed({this.controller, this.initial, this.toggleable = false, this.onChange, this.motion})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initialValue. Set the value directly in the controller.',
+      ),
+      assert(
+        controller == null || motion == null,
+        'Cannot provide both controller and motion. Set the motion directly in the controller.',
       ),
       super._();
 
   @override
   FSelectController<T> _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ?? FSelectController<T>(vsync: vsync, value: initial, toggleable: toggleable))..addListener(callback);
+      (controller ??
+          FSelectController<T>(
+            vsync: vsync,
+            value: initial,
+            toggleable: toggleable,
+            popoverMotion: motion ?? const FPopoverMotion(),
+          ))
+        ..addListener(callback);
 }

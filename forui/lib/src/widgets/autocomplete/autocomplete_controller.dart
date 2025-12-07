@@ -165,16 +165,19 @@ sealed class FAutocompleteControl with Diagnosticable {
     required ValueChanged<TextEditingValue> onValueChange,
     bool? popoverShown,
     ValueChanged<bool>? onPopoverChange,
+    FPopoverMotion motion,
   }) = Lifted;
 
   /// Creates managed control using an [FAutocompleteController].
   ///
   /// ## Contract
   /// Throws [AssertionError] if both [controller] and [initial] are provided.
+  /// Throws [AssertionError] if both [controller] and [motion] are provided.
   const factory FAutocompleteControl.managed({
     FAutocompleteController? controller,
     TextEditingValue? initial,
     ValueChanged<TextEditingValue>? onChange,
+    FPopoverMotion? motion,
   }) = Managed;
 
   const FAutocompleteControl._();
@@ -206,13 +209,20 @@ class Lifted extends FAutocompleteControl with _$LiftedFunctions {
   final bool? popoverShown;
   @override
   final ValueChanged<bool>? onPopoverChange;
+  @override
+  final FPopoverMotion motion;
 
-  const Lifted({required this.value, required this.onValueChange, this.popoverShown, this.onPopoverChange})
-    : assert(
-        (popoverShown == null) == (onPopoverChange == null),
-        'popoverShown and onPopoverChange must both be provided or both be null.',
-      ),
-      super._();
+  const Lifted({
+    required this.value,
+    required this.onValueChange,
+    this.popoverShown,
+    this.onPopoverChange,
+    this.motion = const FPopoverMotion(),
+  }) : assert(
+         (popoverShown == null) == (onPopoverChange == null),
+         'popoverShown and onPopoverChange must both be provided or both be null.',
+       ),
+       super._();
 
   @override
   FAutocompleteController _create(
@@ -225,6 +235,7 @@ class Lifted extends FAutocompleteControl with _$LiftedFunctions {
     onValueChange: onValueChange,
     popoverShown: popoverShown,
     onPopoverChange: onPopoverChange,
+    popoverMotion: motion,
   )..addListener(callback);
 
   @override
@@ -247,9 +258,12 @@ class Managed extends FAutocompleteControl with _$ManagedFunctions {
   final TextEditingValue? initial;
   @override
   final ValueChanged<TextEditingValue>? onChange;
+  @override
+  final FPopoverMotion? motion;
 
-  const Managed({this.controller, this.initial, this.onChange})
+  const Managed({this.controller, this.initial, this.onChange, this.motion})
     : assert(controller == null || initial == null, 'Cannot provide both a controller and initial.'),
+      assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
       super._();
 
   @override
@@ -257,5 +271,6 @@ class Managed extends FAutocompleteControl with _$ManagedFunctions {
     VoidCallback callback,
     TickerProvider vsync,
     FutureOr<Iterable<String>> Function(String) _,
-  ) => (controller ?? .fromValue(initial, vsync: vsync))..addListener(callback);
+  ) => (controller ?? .fromValue(initial, vsync: vsync, popoverMotion: motion ?? const FPopoverMotion()))
+        ..addListener(callback);
 }

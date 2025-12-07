@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -8,77 +6,115 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  testWidgets('update controller', (tester) async {
-    final first = autoDispose(FPopoverController(vsync: tester));
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FBreadcrumb(
-          children: [
-            FBreadcrumbItem.collapsed(
-              popoverController: first,
-              menu: [
-                FItemGroup(
-                  children: [FItem(title: const Text('Documentation'), onPress: () {})],
+  group('lifted', () {
+    testWidgets('FBreadcrumbItem.collapsed', (tester) async {
+      var shown = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FBreadcrumb(
+              children: [
+                FBreadcrumbItem.collapsed(
+                  popoverControl: .lifted(shown: shown, onChange: (v) => setState(() => shown = v)),
+                  menu: [
+                    .group(
+                      children: [.item(onPress: () {}, title: const Text('Item'))],
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
-    );
+      );
 
-    expect(first.hasListeners, false);
-    expect(first.disposed, false);
+      await tester.tap(find.byIcon(FIcons.ellipsis));
+      await tester.pumpAndSettle();
 
-    final second = autoDispose(FPopoverController(vsync: tester));
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FBreadcrumb(
-          children: [
-            FBreadcrumbItem.collapsed(
-              popoverController: second,
-              menu: [
-                FItemGroup(
-                  children: [FItem(title: const Text('Documentation'), onPress: () {})],
+      expect(shown, true);
+    });
+
+    testWidgets('FBreadcrumbItem.collapsedTiles', (tester) async {
+      var shown = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FBreadcrumb(
+              children: [
+                FBreadcrumbItem.collapsedTiles(
+                  popoverControl: .lifted(shown: shown, onChange: (v) => setState(() => shown = v)),
+                  menu: [
+                    FTileGroup(
+                      children: [.tile(onPress: () {}, title: const Text('Item'))],
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
-    );
+      );
 
-    expect(first.hasListeners, false);
-    expect(first.disposed, false);
-    expect(second.hasListeners, false);
-    expect(second.disposed, false);
+      await tester.tap(find.byIcon(FIcons.ellipsis));
+      await tester.pumpAndSettle();
+
+      expect(shown, true);
+    });
   });
 
-  testWidgets('dispose controller', (tester) async {
-    final controller = autoDispose(FPopoverController(vsync: tester));
-    await tester.pumpWidget(
-      TestScaffold(
-        child: FBreadcrumb(
-          children: [
-            FBreadcrumbItem.collapsed(
-              popoverController: controller,
-              menu: [
-                FItemGroup(
-                  children: [FItem(title: const Text('Documentation'), onPress: () {})],
-                ),
-              ],
-            ),
-          ],
+  group('managed', () {
+    testWidgets('FBreadcrumbItem.collapsed onChange callback', (tester) async {
+      bool? changedValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem.collapsed(
+                popoverControl: .managed(onChange: (value) => changedValue = value),
+                menu: [
+                  FItemGroup(
+                    children: [FItem(onPress: () {}, title: const Text('Item'))],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
 
-    expect(controller.hasListeners, false);
-    expect(controller.disposed, false);
+      await tester.tap(find.byIcon(FIcons.ellipsis));
+      await tester.pumpAndSettle();
 
-    await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+      expect(changedValue, true);
+    });
 
-    expect(controller.hasListeners, false);
-    expect(controller.disposed, false);
+    testWidgets('FBreadcrumbItem.collapsedTiles onChange callback', (tester) async {
+      bool? changedValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem.collapsedTiles(
+                popoverControl: .managed(onChange: (value) => changedValue = value),
+                menu: [
+                  FTileGroup(
+                    children: [FTile(onPress: () {}, title: const Text('Item'))],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byIcon(FIcons.ellipsis));
+      await tester.pumpAndSettle();
+
+      expect(changedValue, true);
+    });
   });
 }

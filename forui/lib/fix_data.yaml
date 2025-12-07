@@ -280,6 +280,50 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
+  - title: 'Migrate FBreadcrumbItem.collapsed(popoverController: ...) to popoverControl'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'collapsed'
+      inClass: FBreadcrumbItem
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[popoverController]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'popoverController'
+
+  - title: 'Migrate FBreadcrumbItem.collapsedTiles(popoverController: ...) to popoverControl'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'collapsedTiles'
+      inClass: FBreadcrumbItem
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[popoverController]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'popoverController'
+
   # FCheckbox
   - title: 'Replace FCheckbox.grouped with FSelectGroupItemMixin.checkbox'
     date: 2025-11-30
@@ -1022,6 +1066,561 @@ transforms:
       - kind: renameParameter
         oldName: 'shift'
         newName: 'overflow'
+
+  - title: 'Migrate FMultiSelect to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelect
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+      min:
+        kind: fragment
+        value: arguments[min]
+      max:
+        kind: fragment
+        value: arguments[max]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialValue + onChange + min + max
+      - if: "initialValue != '' && onChange != '' && min != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %}, min: {% min %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'min'
+          - kind: removeParameter
+            name: 'max'
+      # initialValue + onChange + min
+      - if: "initialValue != '' && onChange != '' && min != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %}, min: {% min %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'min'
+      # initialValue + onChange + max
+      - if: "initialValue != '' && onChange != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'max'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # min + max
+      - if: "min != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(min: {% min %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'min'
+          - kind: removeParameter
+            name: 'max'
+      # min only
+      - if: "min != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(min: {% min %})'
+          - kind: removeParameter
+            name: 'min'
+      # max only
+      - if: "max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(max: {% max %})'
+          - kind: removeParameter
+            name: 'max'
+
+  - title: 'Migrate FMultiSelect.rich to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FMultiSelect
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+      min:
+        kind: fragment
+        value: arguments[min]
+      max:
+        kind: fragment
+        value: arguments[max]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialValue + onChange + min + max
+      - if: "initialValue != '' && onChange != '' && min != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %}, min: {% min %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'min'
+          - kind: removeParameter
+            name: 'max'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %})'
+          - kind: removeParameter
+            name: 'initialValue'
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "min != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(min: {% min %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'min'
+          - kind: removeParameter
+            name: 'max'
+      - if: "min != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(min: {% min %})'
+          - kind: removeParameter
+            name: 'min'
+      - if: "max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(max: {% max %})'
+          - kind: removeParameter
+            name: 'max'
+
+  - title: 'Migrate FMultiSelect.search to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FMultiSelect
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+      min:
+        kind: fragment
+        value: arguments[min]
+      max:
+        kind: fragment
+        value: arguments[max]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialValue + onChange + min + max
+      - if: "initialValue != '' && onChange != '' && min != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %}, min: {% min %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'min'
+          - kind: removeParameter
+            name: 'max'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %})'
+          - kind: removeParameter
+            name: 'initialValue'
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "min != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(min: {% min %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'min'
+          - kind: removeParameter
+            name: 'max'
+      - if: "min != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(min: {% min %})'
+          - kind: removeParameter
+            name: 'min'
+      - if: "max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(max: {% max %})'
+          - kind: removeParameter
+            name: 'max'
+
+  - title: 'Migrate FMultiSelect.searchBuilder to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FMultiSelect
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+      min:
+        kind: fragment
+        value: arguments[min]
+      max:
+        kind: fragment
+        value: arguments[max]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialValue + onChange + min + max
+      - if: "initialValue != '' && onChange != '' && min != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %}, min: {% min %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'min'
+          - kind: removeParameter
+            name: 'max'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %})'
+          - kind: removeParameter
+            name: 'initialValue'
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "min != '' && max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(min: {% min %}, max: {% max %})'
+          - kind: removeParameter
+            name: 'min'
+          - kind: removeParameter
+            name: 'max'
+      - if: "min != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(min: {% min %})'
+          - kind: removeParameter
+            name: 'min'
+      - if: "max != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(max: {% max %})'
+          - kind: removeParameter
+            name: 'max'
 
 
   # FSelectSearchFieldProperties

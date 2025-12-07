@@ -41,27 +41,3 @@ class InheritedSelectController<T> extends InheritedWidget {
       ..add(ObjectFlagProperty.has('onPress', onPress));
   }
 }
-
-/// The [FMultiSelect]'s controller.
-class FMultiSelectController<T> extends FMultiValueNotifier<T> {
-  /// The controller for the popover.
-  ///
-  /// ## Contract
-  /// Manually disposing this controller is undefined behavior. Dispose this [FMultiSelectController] instead.
-  final FPopoverController popover;
-
-  /// Creates a [FMultiSelectController].
-  FMultiSelectController({
-    required TickerProvider vsync,
-    super.min,
-    super.max,
-    super.value,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion);
-
-  @override
-  void dispose() {
-    popover.dispose();
-    super.dispose();
-  }
-}

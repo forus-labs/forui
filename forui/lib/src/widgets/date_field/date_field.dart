@@ -6,7 +6,7 @@ import 'package:intl/intl.dart' hide TextDirection;
 import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/form_field.dart';
+import 'package:forui/src/foundation/form/form_field.dart';
 import 'package:forui/src/widgets/date_field/input/date_input.dart';
 
 part 'calendar/calendar_date_field.dart';

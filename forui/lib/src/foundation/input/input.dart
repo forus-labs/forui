@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/form_field.dart';
+import 'package:forui/src/foundation/form/form_field.dart';
 import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
 
@@ -129,7 +129,6 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
         enabled: widget.enabled,
         onSaved: widget.onSaved,
         onReset: widget.onReset,
-        initialValue: widget.controller.value,
         validator: (value) => switch (this.value) {
           null when controller.text == controller.placeholder => widget.validator(null),
           null => errorMessage,

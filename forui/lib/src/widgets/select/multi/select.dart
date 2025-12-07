@@ -1,15 +1,23 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/debug.dart';
+import 'package:forui/src/foundation/form/multi_value_form_field.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
+import 'package:forui/src/widgets/select/content/inherited_controller.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
-import 'package:forui/src/widgets/select/multi/field.dart';
+import 'package:forui/src/widgets/select/multi/multi_select_controller.dart';
+
+part 'basic_select.dart';
+
+part 'search_select.dart';
 
 part 'select.design.dart';
 
@@ -35,7 +43,7 @@ typedef FMultiSelectTagBuilder<T> =
 /// * https://forui.dev/docs/form/multi-select for working examples.
 /// * [FMultiSelectController] for customizing the behavior of a select.
 /// * [FMultiSelectStyle] for customizing the appearance of a select.
-abstract class FMultiSelect<T> extends StatelessWidget {
+abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
   static Widget defaultIconBuilder(BuildContext _, FMultiSelectStyle style, Set<WidgetState> states) => Padding(
     padding: const .directional(start: 4),
@@ -68,8 +76,10 @@ abstract class FMultiSelect<T> extends StatelessWidget {
 
   static String? _defaultValidator(Object? _) => null;
 
-  /// The controller.
-  final FMultiSelectController<T>? controller;
+  /// The control that manages the multi-select's state.
+  ///
+  /// Defaults to [FMultiSelectControl.managed] if not provided.
+  final FMultiSelectControl<T>? control;
 
   /// The style.
   ///
@@ -104,9 +114,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
 
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
-
-  /// Handler called when the selected value changes.
-  final ValueChanged<Set<T>>? onChange;
 
   /// {@macro forui.foundation.form_field_properties.onSaved}
   final void Function(Set<T> values)? onSaved;
@@ -183,24 +190,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// The divider used to separate the content items. Defaults to [FItemDivider.none].
   final FItemDivider contentDivider;
 
-  /// The minimum number of items that needs to be selected. Defaults to 0.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both the [controller] and [min] are provided.
-  final int min;
-
-  /// The maximum number of items that can be selected. Defaults to null.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both the [controller] and [max] are provided.
-  final int? max;
-
-  /// The initial value.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both the [controller] and [initialValue] are provided.
-  final Set<T> initialValue;
-
   /// Creates a [FMultiSelect] from the given [items].
   ///
   /// For more control over the appearance of items, use [FMultiSelect.rich].
@@ -210,7 +199,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// undefined behavior.
   factory FMultiSelect({
     required Map<String, T> items,
-    FMultiSelectController<T>? controller,
+    FMultiSelectControl<T>? control,
     FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -219,7 +208,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? label,
     Widget? description,
     bool enabled = true,
-    ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode = .onUnfocus,
@@ -253,14 +241,11 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
-    int min = 0,
-    int? max,
-    Set<T>? initialValue,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
     return .rich(
-      controller: controller,
+      control: control,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -272,7 +257,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       sort: sort,
       tagBuilder: tagBuilder,
       enabled: enabled,
-      onChange: onChange,
       onSaved: onSaved,
       onReset: onReset,
       autovalidateMode: autovalidateMode,
@@ -296,19 +280,16 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
-      min: min,
-      max: max,
-      initialValue: initialValue,
       key: key,
       children: [for (final MapEntry(:key, :value) in items.entries) .item(title: Text(key), value: value)],
     );
   }
 
   /// Creates a [FMultiSelect] with the given [children].
-  factory FMultiSelect.rich({
+  const factory FMultiSelect.rich({
     required Widget Function(T value) format,
     required List<FSelectItemMixin> children,
-    FMultiSelectController<T>? controller,
+    FMultiSelectControl<T>? control,
     FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -317,7 +298,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? label,
     Widget? description,
     bool enabled,
-    ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
@@ -343,9 +323,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
-    int min,
-    int? max,
-    Set<T>? initialValue,
     Key? key,
   }) = _BasicSelect<T>;
 
@@ -371,7 +348,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder =
         FMultiSelect.defaultContentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
-    FMultiSelectController<T>? controller,
+    FMultiSelectControl<T>? control,
     FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -380,7 +357,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? label,
     Widget? description,
     bool enabled = true,
-    ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode = .onUnfocus,
@@ -406,9 +382,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
-    int min = 0,
-    int? max,
-    Set<T>? initialValue,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
@@ -426,7 +399,7 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       searchFieldProperties: searchFieldProperties,
       contentLoadingBuilder: contentLoadingBuilder,
       contentErrorBuilder: contentErrorBuilder,
-      controller: controller,
+      control: control,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -435,7 +408,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       label: label,
       description: description,
       enabled: enabled,
-      onChange: onChange,
       onSaved: onSaved,
       onReset: onReset,
       autovalidateMode: autovalidateMode,
@@ -461,9 +433,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
-      min: min,
-      max: max,
-      initialValue: initialValue,
       key: key,
     );
   }
@@ -477,14 +446,14 @@ abstract class FMultiSelect<T> extends StatelessWidget {
   /// The [contentLoadingBuilder] is used to show a loading indicator while the search results is processed
   /// asynchronously by [filter].
   /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
-  factory FMultiSelect.searchBuilder({
+  const factory FMultiSelect.searchBuilder({
     required Widget Function(T) format,
     required FutureOr<Iterable<T>> Function(String query) filter,
     required FSelectSearchContentBuilder<T> contentBuilder,
     FSelectSearchFieldProperties searchFieldProperties,
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
-    FMultiSelectController<T>? controller,
+    FMultiSelectControl<T>? control,
     FMultiSelectStyle Function(FMultiSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -493,7 +462,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     Widget? label,
     Widget? description,
     bool enabled,
-    ValueChanged<Set<T>>? onChange,
     void Function(Set<T> values)? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
@@ -519,15 +487,12 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
-    int min,
-    int? max,
-    Set<T>? initialValue,
     Key? key,
   }) = _SearchSelect<T>;
 
-  FMultiSelect._({
+  const FMultiSelect._({
     required this.format,
-    this.controller,
+    this.control,
     this.style,
     this.autofocus = false,
     this.focusNode,
@@ -536,7 +501,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.label,
     this.description,
     this.enabled = true,
-    this.onChange,
     this.onSaved,
     this.onReset,
     this.autovalidateMode = .onUnfocus,
@@ -561,8 +525,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = .none,
-    this.min = 0,
-    this.max,
     Widget Function(
       BuildContext context,
       FMultiSelectController<T> controller,
@@ -571,74 +533,14 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       Widget label,
     )?
     tagBuilder,
-    Set<T>? initialValue,
     super.key,
-  }) : tagBuilder = tagBuilder ?? defaultTagBuilder,
-       initialValue = initialValue ?? controller?.value ?? {},
-       assert(debugCheckInclusiveRange(min, max)),
-       assert(
-         controller == null || min == 0,
-         'Cannot provide both a controller and min. To fix, set the min directly in the controller.',
-       ),
-       assert(
-         controller == null || max == null,
-         'Cannot provide both a controller and max. To fix, set the max directly in the controller.',
-       ),
-       assert(
-         controller == null || initialValue == null,
-         'Cannot provide both a controller and initialValue. To fix, set the initial Value directly in the controller.',
-       );
-
-  @override
-  Widget build(BuildContext context) {
-    final globalStyle = context.theme.multiSelectStyle;
-    final style = this.style?.call(globalStyle) ?? globalStyle;
-    return Field(
-      controller: controller,
-      style: style,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      prefixBuilder: prefixBuilder,
-      suffixBuilder: suffixBuilder,
-      label: label,
-      description: description,
-      onChange: onChange,
-      hint: hint,
-      keepHint: keepHint,
-      sort: sort,
-      format: format,
-      tagBuilder: tagBuilder,
-      textAlign: textAlign,
-      textDirection: textDirection,
-      clearable: clearable,
-      anchor: anchor,
-      fieldAnchor: fieldAnchor,
-      popoverConstraints: popoverConstraints,
-      spacing: spacing,
-      overflow: overflow,
-      offset: offset,
-      hideRegion: hideRegion,
-      popoverBuilder: (context, controller) => _content(context, controller, style),
-      enabled: enabled,
-      autovalidateMode: autovalidateMode,
-      forceErrorText: forceErrorText,
-      errorBuilder: errorBuilder,
-      onSaved: onSaved,
-      onReset: onReset,
-      validator: validator,
-      min: min,
-      max: max,
-      initialValue: initialValue,
-    );
-  }
-
-  Widget _content(BuildContext context, FMultiSelectController<T> controller, FMultiSelectStyle style);
+  }) : tagBuilder = tagBuilder ?? defaultTagBuilder;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -646,7 +548,6 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
@@ -670,163 +571,172 @@ abstract class FMultiSelect<T> extends StatelessWidget {
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
-      ..add(EnumProperty('contentDivider', contentDivider))
-      ..add(IntProperty('min', min, defaultValue: 0))
-      ..add(IntProperty('max', max, defaultValue: null))
-      ..add(IterableProperty('initialValue', initialValue));
+      ..add(EnumProperty('contentDivider', contentDivider));
   }
 }
 
-class _BasicSelect<T> extends FMultiSelect<T> {
-  final List<FSelectItemMixin> children;
-
-  _BasicSelect({
-    required this.children,
-    required super.format,
-    super.controller,
-    super.style,
-    super.autofocus,
-    super.focusNode,
-    super.prefixBuilder,
-    super.suffixBuilder,
-    super.label,
-    super.description,
-    super.enabled,
-    super.onChange,
-    super.onSaved,
-    super.onReset,
-    super.autovalidateMode,
-    super.forceErrorText,
-    super.validator,
-    super.errorBuilder,
-    super.hint,
-    super.keepHint,
-    super.sort,
-    super.textAlign,
-    super.textDirection,
-    super.clearable,
-    super.anchor,
-    super.fieldAnchor,
-    super.popoverConstraints,
-    super.spacing,
-    super.overflow,
-    super.offset,
-    super.hideRegion,
-    super.contentEmptyBuilder,
-    super.contentScrollController,
-    super.contentScrollHandles,
-    super.contentPhysics,
-    super.contentDivider,
-    super.tagBuilder,
-    super.min,
-    super.max,
-    super.initialValue,
-    super.key,
-  }) : super._();
+abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S> with TickerProviderStateMixin {
+  late FMultiSelectController<T> _controller;
+  late FocusNode _focus;
 
   @override
-  Widget _content(BuildContext context, FMultiSelectController<T> controller, FMultiSelectStyle style) {
-    if (children.isEmpty) {
-      return contentEmptyBuilder(context, style);
+  void initState() {
+    super.initState();
+    _controller = (widget.control ?? FMultiSelectControl<T>.managed()).create(_handleChange, this);
+    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
+  }
+
+  @override
+  void didUpdateWidget(covariant S old) {
+    super.didUpdateWidget(old);
+    // DO NOT REORDER
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focus.dispose();
+      }
+      _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
     }
 
-    return Content<T>(
-      controller: contentScrollController,
-      style: style.contentStyle,
-      first: controller.value.isEmpty,
-      enabled: enabled,
-      scrollHandles: contentScrollHandles,
-      physics: contentPhysics,
-      divider: contentDivider,
-      children: children,
+    final current = widget.control ?? FMultiSelectControl<T>.managed();
+    final previous = old.control ?? FMultiSelectControl<T>.managed();
+    _controller = current.update(previous, _controller, _handleChange, this).$1;
+  }
+
+  @override
+  void dispose() {
+    (widget.control ?? FMultiSelectControl<T>.managed()).dispose(_controller, _handleChange);
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
+    super.dispose();
+  }
+
+  void _handleChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style?.call(context.theme.multiSelectStyle) ?? context.theme.multiSelectStyle;
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final direction = widget.textDirection ?? Directionality.maybeOf(context) ?? .ltr;
+    final padding = style.fieldStyle.contentPadding.resolve(direction);
+
+    return MultiValueFormField<T>(
+      controller: _controller,
+      enabled: widget.enabled,
+      autovalidateMode: widget.autovalidateMode,
+      forceErrorText: widget.forceErrorText,
+      onSaved: widget.onSaved == null ? null : (v) => widget.onSaved!(v ?? {}),
+      validator: (v) => widget.validator(v ?? {}),
+      builder: (state) {
+        final values = widget.sort == null ? _controller.value : _controller.value.sorted(widget.sort!);
+        return Directionality(
+          textDirection: direction,
+          child: FLabel(
+            axis: Axis.vertical,
+            states: {if (!widget.enabled) WidgetState.disabled, if (state.hasError) WidgetState.error},
+            label: widget.label,
+            style: style.fieldStyle,
+            description: widget.description,
+            // Error should never be null as doing so causes the widget tree to change.
+            error: state.errorText == null ? const SizedBox() : widget.errorBuilder(context, state.errorText!),
+            child: FPopover(
+              control: FPopoverControl.managed(controller: _controller.popover),
+              style: style.popoverStyle,
+              constraints: widget.popoverConstraints,
+              popoverAnchor: widget.anchor,
+              childAnchor: widget.fieldAnchor,
+              spacing: widget.spacing,
+              overflow: widget.overflow,
+              offset: widget.offset,
+              hideRegion: widget.hideRegion,
+              shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
+              popoverBuilder: (context, controller) => InheritedSelectController<T>(
+                popover: _controller.popover,
+                contains: (value) => _controller.value.contains(value),
+                focus: (value) => _controller.value.lastOrNull == value,
+                onPress: (value) => _controller.update(value, add: !_controller.value.contains(value)),
+                child: content(context, style),
+              ),
+              child: FTappable(
+                style: style.fieldStyle.tappableStyle,
+                focusNode: _focus,
+                onPress: widget.enabled ? _toggle : null,
+                builder: (context, states, child) {
+                  states = {
+                    ...states,
+                    if (!widget.enabled) WidgetState.disabled,
+                    if (state.hasError) WidgetState.error,
+                  };
+                  return DecoratedBox(
+                    decoration: style.fieldStyle.decoration.resolve(states),
+                    child: Padding(
+                      padding: padding.copyWith(top: 0, bottom: 0),
+                      child: DefaultTextStyle.merge(
+                        textAlign: widget.textAlign,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (widget.prefixBuilder case final prefix?) prefix(context, style, states),
+                            Expanded(
+                              child: Padding(
+                                padding: padding.copyWith(left: 0, right: 0),
+                                child: Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  spacing: style.fieldStyle.spacing,
+                                  runSpacing: style.fieldStyle.runSpacing,
+                                  children: [
+                                    for (final value in values)
+                                      widget.tagBuilder(context, _controller, style, value, widget.format(value)),
+                                    if (widget.keepHint || _controller.value.isEmpty)
+                                      Padding(
+                                        padding: style.fieldStyle.hintPadding,
+                                        child: DefaultTextStyle.merge(
+                                          style: style.fieldStyle.hintTextStyle.resolve(states),
+                                          child: widget.hint ?? Text(localizations.multiSelectHint),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            if (widget.clearable && _controller.value.isNotEmpty)
+                              Padding(
+                                padding: style.fieldStyle.clearButtonPadding,
+                                child: FButton.icon(
+                                  style: style.fieldStyle.clearButtonStyle,
+                                  onPress: () => _controller.value = {},
+                                  child: Icon(
+                                    FIcons.x,
+                                    semanticLabel: localizations.textFieldClearButtonSemanticsLabel,
+                                  ),
+                                ),
+                              ),
+                            if (widget.suffixBuilder case final suffix?) suffix(context, style, states),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
-}
 
-class _SearchSelect<T> extends FMultiSelect<T> {
-  final FSelectSearchFieldProperties searchFieldProperties;
-  final FutureOr<Iterable<T>> Function(String query) filter;
-  final FSelectSearchContentBuilder<T> contentBuilder;
-  final Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder;
-  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder;
-
-  _SearchSelect({
-    required this.filter,
-    required this.contentBuilder,
-    required super.format,
-    this.searchFieldProperties = const FSelectSearchFieldProperties(),
-    this.contentLoadingBuilder = FSelect.defaultContentLoadingBuilder,
-    this.contentErrorBuilder,
-    super.controller,
-    super.style,
-    super.autofocus,
-    super.focusNode,
-    super.prefixBuilder,
-    super.suffixBuilder,
-    super.label,
-    super.description,
-    super.enabled,
-    super.onChange,
-    super.onSaved,
-    super.onReset,
-    super.autovalidateMode,
-    super.forceErrorText,
-    super.validator,
-    super.errorBuilder,
-    super.hint,
-    super.keepHint,
-    super.sort,
-    super.textAlign,
-    super.textDirection,
-    super.clearable,
-    super.anchor,
-    super.fieldAnchor,
-    super.popoverConstraints,
-    super.spacing,
-    super.overflow,
-    super.offset,
-    super.hideRegion,
-    super.contentEmptyBuilder,
-    super.contentScrollController,
-    super.contentScrollHandles,
-    super.contentPhysics,
-    super.contentDivider,
-    super.tagBuilder,
-    super.min,
-    super.max,
-    super.initialValue,
-    super.key,
-  }) : super._();
-
-  @override
-  Widget _content(BuildContext context, FMultiSelectController<T> controller, FMultiSelectStyle style) =>
-      SearchContent<T>(
-        scrollController: contentScrollController,
-        searchStyle: style.searchStyle,
-        contentStyle: style.contentStyle,
-        properties: searchFieldProperties,
-        scrollHandles: contentScrollHandles,
-        first: controller.value.isEmpty,
-        enabled: enabled,
-        physics: contentPhysics,
-        divider: contentDivider,
-        filter: filter,
-        builder: contentBuilder,
-        emptyBuilder: (context) => contentEmptyBuilder(context, style),
-        loadingBuilder: contentLoadingBuilder,
-        errorBuilder: contentErrorBuilder,
-      );
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('searchFieldProperties', searchFieldProperties))
-      ..add(DiagnosticsProperty('filter', filter))
-      ..add(ObjectFlagProperty.has('contentBuilder', contentBuilder))
-      ..add(ObjectFlagProperty('searchLoadingBuilder', contentLoadingBuilder, ifPresent: 'searchLoadingBuilder'))
-      ..add(ObjectFlagProperty('searchErrorBuilder', contentErrorBuilder, ifPresent: 'searchErrorBuilder'));
+  void _toggle() {
+    _controller.popover.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();
+    _controller.popover.toggle();
   }
+
+  /// Builds the content displayed in the popover.
+  Widget content(BuildContext context, FMultiSelectStyle style);
 }
 
 /// A [FMultiSelect]'s style.
@@ -875,4 +785,136 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
         contentStyle: .inherit(colors: colors, typography: typography, style: style),
         emptyTextStyle: typography.sm,
       );
+}
+
+/// A [FMultiSelectFieldStyle]'s style.
+class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
+  /// The multi-select field's decoration.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  @override
+  final FWidgetStateMap<Decoration> decoration;
+
+  /// The multi-select field's padding. Defaults to `EdgeInsets.only(start: 10, top: 6, bottom: 6, end: 8)`.
+  @override
+  final EdgeInsetsGeometry contentPadding;
+
+  /// The spacing between tags. Defaults to 4.
+  @override
+  final double spacing;
+
+  /// The spacing between the rows of tags. Defaults to 4.
+  @override
+  final double runSpacing;
+
+  /// The multi-select field hint's text style.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  @override
+  final FWidgetStateMap<TextStyle> hintTextStyle;
+
+  /// The multi-select field's hint padding. Defaults to `EdgeInsetsDirectional.only(start: 4, top: 4, bottom: 4)`.
+  ///
+  /// The vertical padding should typically be the same as the [FMultiSelectTagStyle.padding].
+  @override
+  final EdgeInsetsGeometry hintPadding;
+
+  /// The multi-select field's icon style.
+  @override
+  final IconThemeData iconStyle;
+
+  /// The clear button's style when [FMultiSelect.clearable] is true.
+  @override
+  final FButtonStyle clearButtonStyle;
+
+  /// The padding surrounding the clear button. Defaults to [EdgeInsets.zero].
+  @override
+  final EdgeInsetsGeometry clearButtonPadding;
+
+  /// The multi-select field's tappable style.
+  @override
+  final FTappableStyle tappableStyle;
+
+  /// Creates a [FMultiSelectFieldStyle].
+  FMultiSelectFieldStyle({
+    required this.decoration,
+    required this.hintTextStyle,
+    required this.iconStyle,
+    required this.clearButtonStyle,
+    required this.tappableStyle,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
+    this.contentPadding = const .directional(start: 10, top: 6, bottom: 6, end: 8),
+    this.hintPadding = const .directional(start: 4, top: 4, bottom: 4),
+    this.spacing = 4,
+    this.runSpacing = 4,
+    this.clearButtonPadding = .zero,
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
+  });
+
+  /// Creates a [FMultiSelectFieldStyle] that inherits its properties.
+  factory FMultiSelectFieldStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
+    final label = FLabelStyles.inherit(style: style).verticalStyle;
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
+
+    return .new(
+      decoration: FWidgetStateMap({
+        WidgetState.error: BoxDecoration(
+          border: .all(color: colors.error, width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.disabled: BoxDecoration(
+          border: .all(color: colors.disable(colors.border), width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.focused: BoxDecoration(
+          border: .all(color: colors.primary, width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+        WidgetState.any: BoxDecoration(
+          border: .all(color: colors.border, width: style.borderWidth),
+          borderRadius: style.borderRadius,
+        ),
+      }),
+      hintTextStyle: FWidgetStateMap({
+        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.border)),
+        WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
+      }),
+      iconStyle: IconThemeData(color: colors.mutedForeground, size: 18),
+      clearButtonStyle: ghost.copyWith(
+        iconContentStyle: ghost.iconContentStyle.copyWith(
+          iconStyle: FWidgetStateMap({
+            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
+          }),
+        ),
+      ),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      labelTextStyle: style.formFieldStyle.labelTextStyle,
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+      errorTextStyle: style.formFieldStyle.errorTextStyle,
+      labelPadding: label.labelPadding,
+      descriptionPadding: label.descriptionPadding,
+      errorPadding: label.errorPadding,
+      childPadding: label.childPadding,
+    );
+  }
 }
