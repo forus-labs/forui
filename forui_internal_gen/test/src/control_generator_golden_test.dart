@@ -78,6 +78,7 @@ const _golden = r'''
 
 // dart format width=120
 // coverage:ignore-file
+// ignore_for_file: unnecessary_ignore
 // ignore_for_file: avoid_positional_boolean_parameters
 
 part of 'sample.dart';
@@ -213,8 +214,214 @@ mixin _$ManagedFunctions on Diagnosticable implements FGoldenControl {
 }
 ''';
 
+const _typeParametersSource = r'''
+import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
+
+part 'sample.control.dart';
+
+class FGenericController<T> {
+  void addListener(void Function() callback) {}
+  void removeListener(void Function() callback) {}
+  void dispose() {}
+}
+
+sealed class FGenericControl<T> with Diagnosticable {
+  const factory FGenericControl.lifted({
+    required T? value,
+    required void Function(T?) onChange,
+  }) = Lifted<T>;
+
+  const factory FGenericControl.managed({
+    FGenericController<T>? controller,
+    T? initialValue,
+  }) = Managed<T>;
+
+  const FGenericControl._();
+
+  FGenericController<T> _create(VoidCallback callback);
+
+  FGenericController<T> _update(
+    FGenericControl<T> old,
+    FGenericController<T> controller,
+    VoidCallback callback,
+  );
+
+  void _dispose(FGenericController<T> controller, VoidCallback callback);
+}
+
+@internal
+final class Lifted<T> extends FGenericControl<T> with _$LiftedFunctions<T> {
+  @override
+  final T? value;
+  @override
+  final void Function(T?) onChange;
+
+  const Lifted({required this.value, required this.onChange}) : super._();
+
+  @override
+  FGenericController<T> _create(VoidCallback _) => FGenericController<T>();
+
+  @override
+  void _updateController(FGenericController<T> controller) {}
+}
+
+@internal
+final class Managed<T> extends FGenericControl<T> with _$ManagedFunctions<T> {
+  @override
+  final FGenericController<T>? controller;
+  @override
+  final T? initialValue;
+
+  const Managed({this.controller, this.initialValue}) : super._();
+
+  @override
+  FGenericController<T> _create(VoidCallback callback) =>
+      (controller ?? FGenericController<T>())..addListener(callback);
+}
+''';
+
+const _typeParametersGolden = r'''
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// dart format width=120
+// coverage:ignore-file
+// ignore_for_file: unnecessary_ignore
+// ignore_for_file: avoid_positional_boolean_parameters
+
+part of 'sample.dart';
+
+// **************************************************************************
+// ControlGenerator
+// **************************************************************************
+
+@internal
+extension InternalFGenericControl<T> on FGenericControl<T> {
+  FGenericController<T> create(void Function() callback) => _create(callback);
+
+  FGenericController<T> update(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) =>
+      _update(old, controller, callback);
+
+  void dispose(FGenericController<T> controller, void Function() callback) => _dispose(controller, callback);
+}
+
+mixin _$LiftedFunctions<T> on Diagnosticable implements FGenericControl<T> {
+  T? get value;
+  void Function(T?) get onChange;
+  @override
+  FGenericController<T> _update(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) {
+    switch (old) {
+      case _ when old == this:
+        return controller;
+
+      // Lifted (Value A) -> Lifted (Value B)
+      case Lifted():
+        _updateController(controller);
+        return controller;
+
+      // External -> Lifted
+      case Managed(controller: _?):
+        controller.removeListener(callback);
+        return _createController(callback);
+
+      // Internal -> Lifted
+      case Managed():
+        controller.dispose();
+        return _createController(callback);
+
+      default:
+        return controller;
+    }
+  }
+
+  FGenericController<T> _createController(void Function() callback) => _create(callback);
+
+  void _updateController(FGenericController<T> controller);
+  @override
+  void _dispose(FGenericController<T> controller, void Function() callback) {
+    controller.dispose();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('value', value, level: .debug))
+      ..add(DiagnosticsProperty('onChange', onChange, level: .debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || (other is Lifted && value == other.value && onChange == other.onChange);
+
+  @override
+  int get hashCode => value.hashCode ^ onChange.hashCode;
+}
+mixin _$ManagedFunctions<T> on Diagnosticable implements FGenericControl<T> {
+  FGenericController<T>? get controller;
+  T? get initialValue;
+  @override
+  FGenericController<T> _update(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) {
+    switch (old) {
+      case _ when old == this:
+        return controller;
+
+      // External (Controller A) -> External (Controller B)
+      case Managed(controller: final old?) when this.controller != null && this.controller != old:
+        controller.removeListener(callback);
+        return _createController(callback);
+
+      // Internal -> External
+      case Managed(controller: final old) when this.controller != null && old == null:
+        controller.dispose();
+        return _createController(callback);
+
+      // External -> Internal
+      case Managed(controller: _?) when this.controller == null:
+        controller.removeListener(callback);
+        return _createController(callback);
+
+      // Lifted -> Managed
+      case Lifted():
+        controller.dispose();
+        return _createController(callback);
+
+      default:
+        return controller;
+    }
+  }
+
+  FGenericController<T> _createController(void Function() callback) => _create(callback);
+
+  @override
+  void _dispose(FGenericController<T> controller, void Function() callback) {
+    if (this.controller != null) {
+      controller.removeListener(callback);
+    } else {
+      controller.dispose();
+    }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller, level: .debug))
+      ..add(DiagnosticsProperty('initialValue', initialValue, level: .debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Managed && controller == other.controller && initialValue == other.initialValue);
+
+  @override
+  int get hashCode => controller.hashCode ^ initialValue.hashCode;
+}
+''';
+
 void main() {
-  test('control', () async {
+  test('no type parameters', () async {
     final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
     await readerWriter.testing.loadIsolateSources();
 
@@ -222,6 +429,18 @@ void main() {
       controlBuilder(.empty),
       {'forui_internal_gen|test/src/sample.dart': _source},
       outputs: {'forui_internal_gen|test/src/sample.control.dart': _golden},
+      readerWriter: readerWriter,
+    );
+  }, timeout: const Timeout(Duration(minutes: 1)));
+
+  test('with type parameters', () async {
+    final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
+    await readerWriter.testing.loadIsolateSources();
+
+    await testBuilder(
+      controlBuilder(.empty),
+      {'forui_internal_gen|test/src/sample.dart': _typeParametersSource},
+      outputs: {'forui_internal_gen|test/src/sample.control.dart': _typeParametersGolden},
       readerWriter: readerWriter,
     );
   }, timeout: const Timeout(Duration(minutes: 1)));

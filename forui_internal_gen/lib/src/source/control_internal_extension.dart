@@ -27,17 +27,23 @@ class ControlInternalExtension {
   });
 
   /// Generates the extension.
-  Extension generate() =>
-      (ExtensionBuilder()
-            ..annotations.add(refer('internal'))
-            ..name = 'Internal${supertype.name}'
-            ..on = refer(supertype.name!)
-            ..methods.addAll([
-              if (create != null) _delegate(create!),
-              if (update != null) _delegate(update!),
-              if (dispose != null) _delegate(dispose!),
-            ]))
-          .build();
+  Extension generate() {
+    final typeParameters = supertype.typeParameters.isEmpty
+        ? ''
+        : '<${supertype.typeParameters.map((t) => t.name).join(', ')}>';
+
+    return (ExtensionBuilder()
+          ..annotations.add(refer('internal'))
+          ..name = 'Internal${supertype.name}'
+          ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
+          ..on = refer('${supertype.name}$typeParameters')
+          ..methods.addAll([
+            if (create != null) _delegate(create!),
+            if (update != null) _delegate(update!),
+            if (dispose != null) _delegate(dispose!),
+          ]))
+        .build();
+  }
 
   /// Generates a method that delegates to a private method.
   Method _delegate(MethodElement method) {

@@ -52,6 +52,9 @@ abstract class ControlFunctionsMixin extends FunctionsMixin {
     required this.siblings,
   }) : super(element);
 
+  String get _typeParameters =>
+      supertype.typeParameters.isEmpty ? '' : '<${supertype.typeParameters.map((t) => t.name).join(', ')}>';
+
   Method get _update => Method(
     (m) => m
       ..annotations.add(refer('override'))
@@ -110,8 +113,9 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
   Mixin generate() =>
       (MixinBuilder()
             ..name = '_\$${element.name}Functions'
+            ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..on = refer('Diagnosticable')
-            ..implements.addAll([refer(supertype.name!)])
+            ..implements.addAll([refer('${supertype.name}$_typeParameters')])
             ..methods.addAll([
               ...getters,
               if (update != null) ...[_update, _createController, _updateController],
@@ -201,8 +205,9 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
   Mixin generate() =>
       (MixinBuilder()
             ..name = '_\$${element.name}Functions'
+            ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..on = refer('Diagnosticable')
-            ..implements.addAll([refer(supertype.name!)])
+            ..implements.addAll([refer('${supertype.name}$_typeParameters')])
             ..methods.addAll([
               ...getters,
               if (update != null) ...[_update, _createController],
