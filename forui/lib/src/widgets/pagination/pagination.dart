@@ -70,7 +70,7 @@ class _FPaginationState extends State<FPagination> {
   @override
   void didUpdateWidget(covariant FPagination old) {
     super.didUpdateWidget(old);
-    _controller = widget.control.update(old.control, _controller, _handleOnChange);
+    _controller = widget.control.update(old.control, _controller, _handleOnChange).$1;
   }
 
   @override

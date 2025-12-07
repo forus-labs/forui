@@ -271,7 +271,7 @@ class _State extends State<PasswordField> {
       old.properties.obscureTextControl,
       _controller,
       _handleOnChange,
-    );
+    ).$1;
   }
 
   @override

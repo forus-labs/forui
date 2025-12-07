@@ -71,23 +71,6 @@ abstract class ControlFunctionsMixin extends FunctionsMixin {
       ..body = _updateBody,
   );
 
-  Method get _createController => Method(
-    (m) => m
-      ..returns = refer(update!.returnType.getDisplayString())
-      ..name = '_createController'
-      ..requiredParameters.addAll([
-        for (final parameter in update!.formalParameters)
-          if (parameter.name case final name when name != 'old' && name != 'controller')
-            Parameter(
-              (p) => p
-                ..name = name!
-                ..type = refer(parameter.type.getDisplayString()),
-            ),
-      ])
-      ..lambda = true
-      ..body = Code('''_create($_createParameters)'''),
-  );
-
   String get _createParameters => [
     for (final p in update!.formalParameters)
       if (p.name case final name when name != 'old' && name != 'controller') p.name!,
@@ -118,7 +101,7 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
             ..implements.addAll([refer('${supertype.name}$_typeParameters')])
             ..methods.addAll([
               ...getters,
-              if (update != null) ...[_update, _createController, _updateController],
+              if (update != null) ...[_update, _updateController],
               if (dispose != null) _dispose,
               debugFillProperties,
               equals,
@@ -136,25 +119,25 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
     return Code('''
       switch (old) {
         case _ when old == this:
-          return controller;
+          return (controller, false);
 
         // Lifted (Value A) -> Lifted (Value B)
         case ${element.name}():
           _updateController($updateParameters);
-          return controller;
-  
+          return (controller, true);
+
         // External -> Lifted
         case ${siblings.first.name}(controller: _?):
           controller.removeListener(callback);
-          return _createController($_createParameters);
-  
+          return (_create($_createParameters), true);
+
         // Internal -> Lifted
         case ${siblings.first.name}():
           controller.dispose();
-          return _createController($_createParameters);
-          
+          return (_create($_createParameters), true);
+
         default:
-          return controller;
+          return (controller, false);
       }
     ''');
   }
@@ -210,7 +193,7 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
             ..implements.addAll([refer('${supertype.name}$_typeParameters')])
             ..methods.addAll([
               ...getters,
-              if (update != null) ...[_update, _createController],
+              if (update != null) ...[_update],
               if (dispose != null) _dispose,
               debugFillProperties,
               equals,
@@ -222,30 +205,30 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
   Code get _updateBody => Code('''
       switch (old) {
         case _ when old == this:
-          return controller;
-  
+          return (controller, false);
+
         // External (Controller A) -> External (Controller B)
         case ${element.name}(controller: final old?) when this.controller != null && this.controller != old:
           controller.removeListener(callback);
-          return _createController($_createParameters);
-  
+          return (_create($_createParameters), true);
+
         // Internal -> External
         case ${element.name}(controller: final old) when this.controller != null && old == null:
           controller.dispose();
-          return _createController($_createParameters);
-  
+          return (_create($_createParameters), true);
+
         // External -> Internal
         case ${element.name}(controller: _?) when this.controller == null:
           controller.removeListener(callback);
-          return _createController($_createParameters);
-          
+          return (_create($_createParameters), true);
+
         // Lifted -> Managed
         case ${siblings.first.name}():
           controller.dispose();
-          return _createController($_createParameters);
-  
+          return (_create($_createParameters), true);
+
         default:
-          return controller;
+          return (controller, false);
       }
     ''');
 

@@ -67,7 +67,7 @@ class _FAccordionState extends State<FAccordion> {
   @override
   void didUpdateWidget(covariant FAccordion old) {
     super.didUpdateWidget(old);
-    _controller = widget.control.update(old.control, _controller, _handleOnChange, widget.children.length);
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, widget.children.length).$1;
   }
 
   @override

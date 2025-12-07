@@ -9,7 +9,7 @@ void main() {
     testWidgets('lifted', (tester) async {
       var page = 0;
 
-      Future<void> rebuild() async => await tester.pumpWidget(
+      void rebuild() => tester.pumpWidget(
         TestScaffold(
           child: FPagination(
             control: .lifted(page: page, pages: 10, onChange: (value) => page = value),
@@ -17,17 +17,17 @@ void main() {
         ),
       );
 
-      await rebuild();
+      rebuild();
       await tester.tap(find.text('5'));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       expect(page, 4);
 
-      await rebuild();
+      rebuild();
       await tester.tap(find.text('10'));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       expect(page, 9);
 
-      await rebuild();
+      rebuild();
       await tester.tap(find.text('7'));
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       expect(page, 6);

@@ -41,74 +41,13 @@ void main() {
     controller.dispose();
   });
 
-  testWidgets('didUpdateWidget does not dispose external controller', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelect<String>.searchBuilder(
-          key: key,
-          format: (s) => s,
-          searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
-          filter: (_) => [],
-          contentBuilder: (_, _, _) => [],
-        ),
-      ),
-    );
-
-    await tester.tap(find.byKey(key));
-    await tester.pumpAndSettle();
-
-    expect(textController.hasListeners, true);
-
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelect<String>.searchBuilder(
-          key: key,
-          format: (s) => s,
-          filter: (_) => [],
-          contentBuilder: (_, _, _) => [],
-        ),
-      ),
-    );
-
-    await tester.tap(find.byKey(key));
-    await tester.pumpAndSettle();
-
-    expect(textController.hasListeners, false);
-    expect(textController.dispose, returnsNormally);
-  });
-
-  testWidgets('dispose() does not dispose external controller', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FSelect<String>.searchBuilder(
-          key: key,
-          format: (s) => s,
-          searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
-          filter: (_) => [],
-          contentBuilder: (_, _, _) => [],
-        ),
-      ),
-    );
-
-    await tester.tap(find.byKey(key));
-    await tester.pumpAndSettle();
-
-    expect(textController.hasListeners, true);
-
-    await tester.pumpWidget(const SizedBox());
-
-    expect(textController.hasListeners, false);
-    expect(textController.dispose, returnsNormally);
-  });
-
   testWidgets('keyboard navigation', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelect<String>.searchBuilder(
-          key: key,
+          control: .managed(controller: controller), key: key,
           format: (s) => s,
-          controller: controller,
-          searchFieldProperties: FSelectSearchFieldProperties(controller: textController),
+          searchFieldProperties: FSelectSearchFieldProperties(control: .managed(controller: textController)),
           filter: (query) =>
               query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
           contentBuilder: (context, _, fruits) => [
@@ -131,5 +70,90 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(controller.value, 'Banana');
+  });
+
+  group('search field control', () {
+    group('lifted', () {
+      testWidgets('value updates filter', (tester) async {
+        var value = TextEditingValue.empty;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: StatefulBuilder(
+              builder: (context, setState) => FSelect<String>.search(
+                key: key,
+                searchFieldProperties: FSelectSearchFieldProperties(
+                  control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                ),
+                filter: (query) =>
+                    query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
+                items: {for (final fruit in fruits) fruit: fruit},
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byType(FTextField).last, 'Ba');
+        await tester.pumpAndSettle();
+
+        expect(value.text, 'Ba');
+        expect(find.text('Banana'), findsOneWidget);
+        expect(find.text('Apple'), findsNothing);
+      });
+
+      testWidgets('showing popover does not cause error', (tester) async {
+        var value = TextEditingValue.empty;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: StatefulBuilder(
+              builder: (context, setState) => FSelect<String>.search(
+                key: key,
+                searchFieldProperties: FSelectSearchFieldProperties(
+                  control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                ),
+                filter: (query) => fruits,
+                items: {for (final fruit in fruits) fruit: fruit},
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        expect(tester.takeException(), null);
+      });
+    });
+
+    group('managed', () {
+      testWidgets('onChange callback called', (tester) async {
+        TextEditingValue? changedValue;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelect<String>.search(
+              key: key,
+              searchFieldProperties: FSelectSearchFieldProperties(
+                onChange: (v) => changedValue = v,
+              ),
+              filter: (query) => fruits,
+              items: {for (final fruit in fruits) fruit: fruit},
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byType(FTextField).last, 'test');
+        await tester.pumpAndSettle();
+
+        expect(changedValue?.text, 'test');
+      });
+    });
   });
 }

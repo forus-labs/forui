@@ -23,7 +23,7 @@ sealed class FObscureTextControl with Diagnosticable {
 
   ValueNotifier<bool> _create(VoidCallback callback);
 
-  ValueNotifier<bool> _update(FObscureTextControl old, ValueNotifier<bool> controller, VoidCallback callback);
+  (ValueNotifier<bool>, bool) _update(FObscureTextControl old, ValueNotifier<bool> controller, VoidCallback callback);
 
   void _dispose(ValueNotifier<bool> controller, VoidCallback callback);
 }
@@ -38,7 +38,7 @@ final class Lifted extends FObscureTextControl with _$LiftedFunctions {
   const Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  ValueNotifier<bool> _create(VoidCallback _) => _Controller(value, onChange);
+  ValueNotifier<bool> _create(VoidCallback callback) => _Controller(value, onChange)..addListener(callback);
 
   @override
   void _updateController(ValueNotifier<bool> controller) => (controller as _Controller).update(value, onChange);

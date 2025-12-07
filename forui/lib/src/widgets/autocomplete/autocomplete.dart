@@ -696,7 +696,11 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     }
 
-    _controller = widget.control.update(old.control, _controller, _update, this, widget.filter);
+    final (controller, updated) = widget.control.update(old.control, _controller, _update, this, widget.filter);
+    if (updated) {
+      _controller = controller;
+      _controller.loadSuggestions(widget.filter(_controller.text));
+    }
   }
 
   @override

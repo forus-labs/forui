@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
 import 'package:meta/meta.dart';
 
@@ -81,7 +82,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.properties.controller ?? .new();
+    _controller = widget.properties.control.create(_update);
     _controller.addListener(_update);
 
     _previous = _controller.text;
@@ -91,18 +92,19 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   @override
   void didUpdateWidget(covariant SearchContent<T> old) {
     super.didUpdateWidget(old);
-    if (widget.properties.controller != old.properties.controller) {
-      old.properties.controller?.removeListener(_update);
-      if (old.properties.controller == null) {
-        _controller.dispose();
-      }
-
-      _controller = widget.properties.controller ?? .new();
-      _controller.addListener(_update);
-
+    final (controller, updated) = widget.properties.control.update(old.properties.control, _controller, _update);
+    if (updated) {
+      _controller = controller;
       _previous = _controller.text;
       _data = widget.filter(_controller.text);
     }
+  }
+
+  @override
+  void dispose() {
+    widget.properties.control.dispose(_controller, _update);
+    _focus.dispose();
+    super.dispose();
   }
 
   void _update() {
@@ -114,16 +116,6 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
         _data = widget.filter(_controller.text);
       });
     }
-  }
-
-  @override
-  void dispose() {
-    _controller.removeListener(_update);
-    if (widget.properties.controller == null) {
-      _controller.dispose();
-    }
-    _focus.dispose();
-    super.dispose();
   }
 
   @override

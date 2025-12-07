@@ -103,6 +103,7 @@ dart fix --apply
 
 
 ### `FSelect` & `FMultiSelect`
+* Add `FSelectControl`.
 * Add `FSelectItemMixin.item(...)`.
 * Add `FSelectItemMixin.raw(...)`.
 * Add `FSelectItemMixin.section(...)`.
@@ -110,7 +111,11 @@ dart fix --apply
 * Add `FSelectItem.item(...)`.
 
 * **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
-* **Breaking** Change `FMultiSelect.shift` to `FMultiSelect.overflow`.
+* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.overflow`.
+* **Breaking** Remove `FSelect.controller`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FSelect.onChange`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FSelect.initialValue`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 
 

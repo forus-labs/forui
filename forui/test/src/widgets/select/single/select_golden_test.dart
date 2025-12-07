@@ -278,8 +278,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FSelect<String>(
-            items: letters,
-            initialValue: 'A',
+            control: const .managed(initial: 'A'), items: letters,
             label: const Text('Letters'),
             description: const Text('Select your favorite letters'),
             clearable: true,
@@ -303,9 +302,8 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FSelect(
-            items: letters,
+            control: const .managed(initial: 'A'), items: letters,
             enabled: false,
-            initialValue: 'A',
             label: const Text('Letters'),
             description: const Text('Select your favorite letters'),
             clearable: true,
@@ -326,8 +324,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FSelect(
-            items: letters,
-            initialValue: 'A',
+            control: const .managed(initial: 'A'), items: letters,
             label: const Text('Letters'),
             description: const Text('Select your favorite letters'),
             autovalidateMode: AutovalidateMode.always,

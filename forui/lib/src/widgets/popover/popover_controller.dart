@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
+import 'package:meta/meta.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
 
@@ -79,6 +80,37 @@ class FPopoverController extends FChangeNotifier {
 
 @internal
 extension InternalPopoverController on FPopoverController {
+  /// Updates the given [controller] based on the [shown] and [onChange].
+  ///
+  /// Typically used when updating a popover controller nested in another controller.
+  @useResult
+  static FPopoverController updateNested(
+      FPopoverController controller,
+      TickerProvider vsync,
+      bool? shown,
+      ValueChanged<bool>? onChange,
+      ) {
+    switch ((controller, shown != null)) {
+    // Lifted -> Lifted
+      case (final LiftedPopoverController lifted, true):
+        lifted.update(shown!, onChange!);
+        return lifted;
+
+    // Lifted -> Internal
+      case (LiftedPopoverController(), false):
+        controller.dispose();
+        return FPopoverController(vsync: vsync);
+
+    // Internal -> Lifted
+      case (_, true) when controller is! LiftedPopoverController:
+        controller.dispose();
+        return LiftedPopoverController(shown!, onChange!, vsync: vsync);
+
+      default:
+        return controller;
+    }
+  }
+
   OverlayPortalController get overlay => _overlay;
 
   Animation<double> get scale => _scale;
@@ -86,12 +118,13 @@ extension InternalPopoverController on FPopoverController {
   Animation<double> get fade => _fade;
 }
 
+
 @internal
-class LiftedController extends FPopoverController {
+class LiftedPopoverController extends FPopoverController {
   int _monotonic;
   void Function(bool shown) _onChange;
 
-  LiftedController(bool shown, this._onChange, {required super.vsync, super.motion}) : _monotonic = 0 {
+  LiftedPopoverController(bool shown, this._onChange, {required super.vsync, super.motion}) : _monotonic = 0 {
     if (shown) {
       _overlay.show();
       _animation.value = 1;
@@ -156,7 +189,7 @@ sealed class FPopoverControl with Diagnosticable {
 
   FPopoverController _create(VoidCallback callback, TickerProvider vsync);
 
-  FPopoverController _update(
+  (FPopoverController, bool) _update(
     FPopoverControl old,
     FPopoverController controller,
     VoidCallback callback,
@@ -179,11 +212,11 @@ class Lifted extends FPopoverControl with _$LiftedFunctions {
 
   @override
   FPopoverController _create(VoidCallback callback, TickerProvider vsync) =>
-      LiftedController(vsync: vsync, shown, onChange, motion: motion);
+      LiftedPopoverController(vsync: vsync, shown, onChange, motion: motion);
 
   @override
   void _updateController(FPopoverController controller, TickerProvider vsync) =>
-      (controller as LiftedController).update(shown, onChange);
+      (controller as LiftedPopoverController).update(shown, onChange);
 }
 
 @internal

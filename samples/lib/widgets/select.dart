@@ -292,9 +292,9 @@ class _ToggleableSelectPageState extends StatefulSampleState<ToggleableSelectPag
   Widget sample(BuildContext context) => Padding(
     padding: const .only(top: 15.0),
     child: FSelect<String>.rich(
+      control: .managed(controller: _controller),
       hint: 'Select a fruit',
       format: (s) => s,
-      controller: _controller,
       children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
     ),
   );
@@ -383,7 +383,7 @@ class _FormSelectPageState extends StatefulSampleState<FormSelectPage> with Sing
         crossAxisAlignment: .start,
         children: [
           FSelect<String>.rich(
-            controller: _controller,
+            control: .managed(controller: _controller),
             label: const Text('Department'),
             description: const Text('Choose your dream department'),
             hint: 'Select a department',

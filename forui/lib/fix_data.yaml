@@ -669,6 +669,314 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
+  - title: 'Migrate FSelect to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelect
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FSelect.rich to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'rich'
+      inClass: FSelect
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FSelect.search to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'search'
+      inClass: FSelect
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FSelect.searchBuilder to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'searchBuilder'
+      inClass: FSelect
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialValue %})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
 
   # FMultiSelect
   - title: 'Rename FMultiSelect(shift: ...) to overflow'
@@ -714,6 +1022,30 @@ transforms:
       - kind: renameParameter
         oldName: 'shift'
         newName: 'overflow'
+
+
+  # FSelectSearchFieldProperties
+  - title: 'Migrate FSelectSearchFieldProperties(controller: ...) to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectSearchFieldProperties
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
 
 
   # FSelectGroup

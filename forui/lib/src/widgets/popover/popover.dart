@@ -356,7 +356,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
           .new(debugLabel: 'FPopover', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
     }
 
-    _controller = widget.control.update(old.control, _controller, _handleOnChange, this);
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
   }
 
   @override

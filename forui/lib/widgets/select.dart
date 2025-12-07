@@ -15,3 +15,4 @@ export '../src/widgets/select/multi/field.dart' hide Field;
 export '../src/widgets/select/multi/select.dart';
 export '../src/widgets/select/multi/tag.dart';
 export '../src/widgets/select/single/select.dart';
+export '../src/widgets/select/single/select_controller.dart' hide InternalFSelectControl, Lifted, Managed;

@@ -42,42 +42,12 @@ class InheritedSelectController<T> extends InheritedWidget {
   }
 }
 
-/// The [FSelect]'s controller.
-class FSelectController<T> extends FValueNotifier<T?> {
-  /// The controller for the popover.
-  ///
-  /// ## Contract
-  /// Manually disposing this controller is undefined behavior. Dispose this [FSelectController] instead.
-  final FPopoverController popover;
-
-  /// True if the items in the select can toggled (unselected). Defaults to false.
-  final bool toggleable;
-
-  /// Creates a [FSelectController].
-  FSelectController({
-    required TickerProvider vsync,
-    T? value,
-    this.toggleable = false,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion),
-       super(value);
-
-  @override
-  set value(T? value) => super.value = toggleable && super.value == value ? null : value;
-
-  @override
-  void dispose() {
-    popover.dispose();
-    super.dispose();
-  }
-}
-
 /// The [FMultiSelect]'s controller.
 class FMultiSelectController<T> extends FMultiValueNotifier<T> {
   /// The controller for the popover.
   ///
   /// ## Contract
-  /// Manually disposing this controller is undefined behavior. Dispose this [FSelectController] instead.
+  /// Manually disposing this controller is undefined behavior. Dispose this [FMultiSelectController] instead.
   final FPopoverController popover;
 
   /// Creates a [FMultiSelectController].

@@ -160,7 +160,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   @override
   void didUpdateWidget(covariant FTooltip old) {
     super.didUpdateWidget(old);
-    _controller = widget.control.update(old.control, _controller, _handleOnChange, this);
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
   }
 
   @override

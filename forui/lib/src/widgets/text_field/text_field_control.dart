@@ -35,7 +35,7 @@ class _TextFieldControlState extends State<TextFieldControl> {
   @override
   void didUpdateWidget(covariant TextFieldControl old) {
     super.didUpdateWidget(old);
-    _controller = widget.control.update(old.control, _controller, _handleOnChange);
+    _controller = widget.control.update(old.control, _controller, _handleOnChange).$1;
   }
 
   @override
@@ -96,7 +96,7 @@ sealed class FTextFieldControl with Diagnosticable {
 
   TextEditingController _create(VoidCallback callback);
 
-  TextEditingController _update(FTextFieldControl old, TextEditingController controller, VoidCallback callback);
+  (TextEditingController, bool) _update(FTextFieldControl old, TextEditingController controller, VoidCallback callback);
 
   void _dispose(TextEditingController controller, VoidCallback callback);
 }
@@ -110,7 +110,7 @@ class _Lifted extends FTextFieldControl with _$_LiftedFunctions {
   const _Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  TextEditingController _create(VoidCallback callback) => _Controller(value, onChange);
+  TextEditingController _create(VoidCallback callback) => _Controller(value, onChange)..addListener(callback);
 
   @override
   void _updateController(TextEditingController controller) => (controller as _Controller).update(value, onChange);

@@ -13,8 +13,8 @@ class Field<T> extends FormField<T> {
     required super.onSaved,
     required super.onReset,
     required super.validator,
-    required T? initialValue,
     required super.builder,
+    T? initialValue,
     super.key,
   }) : super(initialValue: initialValue ?? controller.value);
 

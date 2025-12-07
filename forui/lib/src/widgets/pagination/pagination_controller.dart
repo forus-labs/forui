@@ -186,7 +186,7 @@ sealed class FPaginationControl with Diagnosticable {
 
   FPaginationController _create(VoidCallback callback);
 
-  FPaginationController _update(FPaginationControl old, FPaginationController controller, VoidCallback callback);
+  (FPaginationController, bool) _update(FPaginationControl old, FPaginationController controller, VoidCallback callback);
 
   void _dispose(FPaginationController controller, VoidCallback callback);
 }

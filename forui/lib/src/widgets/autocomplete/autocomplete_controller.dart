@@ -53,19 +53,18 @@ class FAutocompleteController extends FTypeaheadController {
          },
        );
 
-  FAutocompleteController._internal(
-    super.value,
-    this.popover,
-  ) : super.fromValue(
-         textStyles: (context) {
-           final InheritedAutocompleteStyle(:style, :states) = .of(context);
-           return (
-             style.fieldStyle.contentTextStyle.resolve(states),
-             style.composingTextStyle.resolve(states),
-             style.typeaheadTextStyle.resolve(states),
-           );
-         },
-       );
+  /// Creates a [FAutocompleteController] from a [TextEditingValue].
+  FAutocompleteController._(super.value, {required this.popover})
+    : super.fromValue(
+        textStyles: (context) {
+          final InheritedAutocompleteStyle(:style, :states) = .of(context);
+          return (
+            style.fieldStyle.contentTextStyle.resolve(states),
+            style.composingTextStyle.resolve(states),
+            style.typeaheadTextStyle.resolve(states),
+          );
+        },
+      );
 
   @override
   void dispose() {
@@ -75,23 +74,24 @@ class FAutocompleteController extends FTypeaheadController {
 }
 
 class _Controller extends FAutocompleteController {
-  FPopoverController _popover;
+  late FPopoverController _popover;
   ValueChanged<TextEditingValue> _onValueChange;
 
-  factory _Controller(
-    TextEditingValue value, {
+  _Controller(
+    super.value, {
     required TickerProvider vsync,
     required ValueChanged<TextEditingValue> onValueChange,
     bool? popoverShown,
     ValueChanged<bool>? onPopoverChange,
-  }) {
-    final popover = popoverShown != null && onPopoverChange != null
-        ? LiftedController(popoverShown, onPopoverChange, vsync: vsync)
-        : FPopoverController(vsync: vsync);
-    return _Controller._create(value, popover, onValueChange);
+    FPopoverMotion popoverMotion = const FPopoverMotion(),
+  }) : _onValueChange = onValueChange,
+       super._(
+         popover: popoverShown != null && onPopoverChange != null
+             ? LiftedPopoverController(popoverShown, onPopoverChange, vsync: vsync, motion: popoverMotion)
+             : FPopoverController(vsync: vsync, motion: popoverMotion),
+       ) {
+    _popover = super.popover; // This prevents the creation of two popover controllers, with one being shadowed.
   }
-
-  _Controller._create(TextEditingValue value, this._popover, this._onValueChange) : super._internal(value, _popover);
 
   void update(
     TickerProvider vsync,
@@ -105,21 +105,7 @@ class _Controller extends FAutocompleteController {
     }
 
     _onValueChange = onValueChange;
-    switch ((_popover, popoverShown != null)) {
-      // Lifted -> Lifted
-      case (final LiftedController lifted, true):
-        lifted.update(popoverShown!, onPopoverChange!);
-
-      // Lifted -> Internal
-      case (LiftedController(), false):
-        _popover.dispose();
-        _popover = FPopoverController(vsync: vsync);
-
-      // Internal -> Lifted
-      case (_, true) when _popover is! LiftedController:
-        _popover.dispose();
-        _popover = LiftedController(popoverShown!, onPopoverChange!, vsync: vsync);
-    }
+    _popover = InternalPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
   }
 
   @override
@@ -199,7 +185,7 @@ sealed class FAutocompleteControl with Diagnosticable {
     FutureOr<Iterable<String>> Function(String) filter,
   );
 
-  FAutocompleteController _update(
+  (FAutocompleteController, bool) _update(
     FAutocompleteControl old,
     FAutocompleteController controller,
     VoidCallback callback,
@@ -242,16 +228,6 @@ class Lifted extends FAutocompleteControl with _$LiftedFunctions {
   )..addListener(callback);
 
   @override
-  FAutocompleteController _createController(
-    VoidCallback callback,
-    TickerProvider vsync,
-    FutureOr<Iterable<String>> Function(String) filter,
-  ) {
-    final controller = _create(callback, vsync, filter);
-    return controller..loadSuggestions(filter(controller.text));
-  }
-
-  @override
   void _updateController(
     FAutocompleteController controller,
     TickerProvider vsync,
@@ -282,14 +258,4 @@ class Managed extends FAutocompleteControl with _$ManagedFunctions {
     TickerProvider vsync,
     FutureOr<Iterable<String>> Function(String) _,
   ) => (controller ?? .fromValue(initial, vsync: vsync))..addListener(callback);
-
-  @override
-  FAutocompleteController _createController(
-    VoidCallback callback,
-    TickerProvider vsync,
-    FutureOr<Iterable<String>> Function(String) filter,
-  ) {
-    final controller = _create(callback, vsync, filter);
-    return controller..loadSuggestions(filter(controller.text));
-  }
 }

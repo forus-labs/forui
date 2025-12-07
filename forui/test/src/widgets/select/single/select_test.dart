@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_use_of_protected_member
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,9 +46,9 @@ void main() {
           child: Form(
             key: key,
             child: FSelect<String>.rich(
+              control: const .managed(initial: 'A'),
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
-              initialValue: 'A',
               children: const [
                 FSelectItem(title: Text('A'), value: 'A'),
                 FSelectItem(title: Text('B'), value: 'B'),
@@ -77,7 +75,9 @@ void main() {
           child: Form(
             key: key,
             child: FSelect<String>.rich(
-              controller: autoDispose(FSelectController(vsync: tester, value: 'A')),
+              control: .managed(
+                controller: autoDispose(FSelectController(vsync: tester, value: 'A')),
+              ),
               format: (value) => '$value!',
               onSaved: (value) => initial = value,
               children: const [
@@ -103,9 +103,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.rich(
+            control: .managed(controller: controller),
             key: key,
             format: (value) => '$value!',
-            controller: controller,
             children: const [
               FSelectItem(title: Text('A'), value: 'A'),
               FSelectItem(title: Text('B'), value: 'B'),
@@ -127,7 +127,11 @@ void main() {
     testWidgets('keyboard navigation', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key, controller: controller),
+          child: FSelect<String>(
+            control: .managed(controller: controller),
+            items: const {'A': 'A', 'B': 'B'},
+            key: key,
+          ),
         ),
       );
 
@@ -150,177 +154,17 @@ void main() {
     });
   });
 
-  group('controller', () {
-    testWidgets('update', (tester) async {
-      final controller = FSelectController<String>(vsync: const TestVSync());
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, key: key, controller: controller),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(controller.hasListeners, true);
-      expect(controller.popover.hasListeners, false);
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, key: key),
-        ),
-      );
-
-      expect(controller.hasListeners, false);
-      expect(controller.popover.hasListeners, false);
-      expect(controller.dispose, returnsNormally);
-    });
-
-    testWidgets('dispose', (tester) async {
-      final controller = FSelectController<String>(vsync: const TestVSync());
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, key: key, controller: controller),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      expect(controller.hasListeners, true);
-      expect(controller.popover.hasListeners, false);
-
-      await tester.pumpWidget(const SizedBox());
-
-      expect(controller.hasListeners, false);
-      expect(controller.popover.hasListeners, false);
-      expect(controller.dispose, returnsNormally);
-    });
-  });
-
-  group('onChange', () {
-    testWidgets('when controller changes but onChange callback is the same', (tester) async {
-      int count = 0;
-      void onChange(String? _) => count++;
-
-      final firstController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, controller: firstController, onChange: onChange),
-        ),
-      );
-
-      firstController.value = 'A';
-      await tester.pump();
-
-      expect(count, 1);
-
-      final secondController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, controller: secondController, onChange: onChange),
-        ),
-      );
-
-      firstController.value = 'B';
-      secondController.value = 'C';
-      await tester.pump();
-
-      expect(count, 2);
-    });
-
-    testWidgets('when onChange callback changes but controller is the same', (tester) async {
-      int first = 0;
-      int second = 0;
-
-      final controller = autoDispose(FSelectController<String>(vsync: const TestVSync()));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, controller: controller, onChange: (_) => first++),
-        ),
-      );
-
-      controller.value = 'A';
-      await tester.pump();
-
-      expect(first, 1);
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, controller: controller, onChange: (_) => second++),
-        ),
-      );
-
-      controller.value = 'B';
-      await tester.pump();
-
-      expect(first, 1);
-      expect(second, 1);
-    });
-
-    testWidgets('when both controller and onChange callback change', (tester) async {
-      int first = 0;
-      int second = 0;
-
-      final firstController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, controller: firstController, onChange: (_) => first++),
-        ),
-      );
-
-      firstController.value = 'A';
-      await tester.pump();
-
-      expect(first, 1);
-
-      final secondController = autoDispose(FSelectController<String>(vsync: const TestVSync()));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, controller: secondController, onChange: (_) => second++),
-        ),
-      );
-
-      firstController.value = 'B';
-      secondController.value = 'C';
-      await tester.pump();
-
-      expect(first, 1);
-      expect(second, 1);
-    });
-
-    testWidgets('disposed when controller is external', (tester) async {
-      int count = 0;
-
-      final controller = autoDispose(FSelectController<String>(vsync: const TestVSync()));
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>(items: letters, controller: controller, onChange: (_) => count++),
-        ),
-      );
-
-      controller.value = 'A';
-      await tester.pump();
-
-      expect(count, 1);
-
-      await tester.pumpWidget(TestScaffold.app(child: const SizedBox()));
-
-      controller.value = 'B';
-      await tester.pump();
-
-      expect(count, 1);
-    });
-  });
-
   group('focus', () {
     testWidgets('external focus is not disposed', (tester) async {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key, focusNode: focus, controller: controller),
+          child: FSelect<String>(
+            control: .managed(controller: controller),
+            items: const {'A': 'A', 'B': 'B'},
+            key: key,
+            focusNode: focus,
+          ),
         ),
       );
 
@@ -334,10 +178,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FSelect<String>.rich(
+            control: .managed(controller: controller),
             key: key,
             format: (s) => s,
             focusNode: focus,
-            controller: controller,
             children: const [
               FSelectItem(title: Text('A'), value: 'A', key: itemKey),
               FSelectItem(title: Text('B'), value: 'B'),
@@ -429,6 +273,231 @@ void main() {
       expect(focus.hasFocus, false);
 
       debugDefaultTargetPlatformOverride = null;
+    });
+  });
+
+  group('lifted', () {
+    testWidgets('FSelect', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(value, 'A');
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('FSelect.rich', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>.rich(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              format: (v) => v,
+              children: const [
+                FSelectItem(title: Text('A'), value: 'A'),
+                FSelectItem(title: Text('B'), value: 'B'),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(value, 'A');
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('FSelect.search', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>.search(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(value, 'A');
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('FSelect.searchBuilder', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>.searchBuilder(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              format: (v) => v,
+              filter: (query) => letters.keys.where((k) => k.toLowerCase().contains(query.toLowerCase())),
+              contentBuilder: (context, query, items) => [
+                for (final item in items) FSelectItem(title: Text(item), value: item),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(value, 'A');
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('showing popover does not cause error', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('onPopoverChange called', (tester) async {
+      String? value;
+      var popoverShown = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              control: .lifted(
+                value: value,
+                onChange: (v) => setState(() => value = v),
+                popoverShown: popoverShown,
+                onPopoverChange: (shown) => setState(() => popoverShown = shown),
+              ),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      expect(popoverShown, false);
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(popoverShown, true);
+
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
+      expect(popoverShown, false);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('popoverShown controls visibility', (tester) async {
+      String? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              control: .lifted(
+                value: value,
+                onChange: (v) => setState(() => value = v),
+                popoverShown: false,
+                onPopoverChange: (_) {},
+              ),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(find.text('A'), findsNothing);
+
+      await tester.pumpWidget(const SizedBox());
+    });
+  });
+
+  group('managed', () {
+    testWidgets('onChange callback called', (tester) async {
+      String? changedValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            key: key,
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
+            items: letters,
+          ),
+        ),
+      );
+
+      controller.value = 'A';
+      await tester.pump();
+
+      expect(changedValue, 'A');
     });
   });
 }

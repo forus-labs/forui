@@ -102,6 +102,9 @@ abstract class FunctionsMixin {
       _ => '${field.name} == other.${field.name}',
     };
 
+    final typeParameters = element.typeParameters.isEmpty
+        ? ''
+        : '<${element.typeParameters.map((e) => e.name).join(', ')}>';
     final comparisons = fields.isEmpty ? '' : '&& ${fields.map(generate).join(' && ')}';
     return Method(
       (m) => m
@@ -116,7 +119,7 @@ abstract class FunctionsMixin {
           ),
         )
         ..lambda = true
-        ..body = Code('identical(this, other) || (other is ${element.name} $comparisons)'),
+        ..body = Code('identical(this, other) || (other is ${element.name}$typeParameters $comparisons)'),
     );
   }
 

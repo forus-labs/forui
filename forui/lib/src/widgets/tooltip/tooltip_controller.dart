@@ -156,7 +156,7 @@ sealed class FTooltipControl with Diagnosticable {
 
   FTooltipController _create(VoidCallback callback, TickerProvider vsync);
 
-  FTooltipController _update(
+  (FTooltipController, bool) _update(
     FTooltipControl old,
     FTooltipController controller,
     VoidCallback callback,

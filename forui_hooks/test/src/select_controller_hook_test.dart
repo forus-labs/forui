@@ -17,7 +17,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFSelectController();
-            return FSelect.rich(controller: controller, format: (s) => s, children: const []);
+            return FSelect.rich(control: .managed(controller: controller), format: (s) => s, children: const []);
           },
         ),
       ),

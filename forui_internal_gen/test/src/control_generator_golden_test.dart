@@ -104,29 +104,27 @@ mixin _$LiftedFunctions on Diagnosticable implements FGoldenControl {
   FGoldenController _update(FGoldenControl old, FGoldenController controller, void Function() callback, int children) {
     switch (old) {
       case _ when old == this:
-        return controller;
+        return (controller, false);
 
       // Lifted (Value A) -> Lifted (Value B)
       case Lifted():
         _updateController(controller, children);
-        return controller;
+        return (controller, true);
 
       // External -> Lifted
       case Managed(controller: _?):
         controller.removeListener(callback);
-        return _createController(callback, children);
+        return (_create(callback, children), true);
 
       // Internal -> Lifted
       case Managed():
         controller.dispose();
-        return _createController(callback, children);
+        return (_create(callback, children), true);
 
       default:
-        return controller;
+        return (controller, false);
     }
   }
-
-  FGoldenController _createController(void Function() callback, int children) => _create(callback, children);
 
   void _updateController(FGoldenController controller, int children);
   @override
@@ -157,34 +155,32 @@ mixin _$ManagedFunctions on Diagnosticable implements FGoldenControl {
   FGoldenController _update(FGoldenControl old, FGoldenController controller, void Function() callback, int children) {
     switch (old) {
       case _ when old == this:
-        return controller;
+        return (controller, false);
 
       // External (Controller A) -> External (Controller B)
       case Managed(controller: final old?) when this.controller != null && this.controller != old:
         controller.removeListener(callback);
-        return _createController(callback, children);
+        return (_create(callback, children), true);
 
       // Internal -> External
       case Managed(controller: final old) when this.controller != null && old == null:
         controller.dispose();
-        return _createController(callback, children);
+        return (_create(callback, children), true);
 
       // External -> Internal
       case Managed(controller: _?) when this.controller == null:
         controller.removeListener(callback);
-        return _createController(callback, children);
+        return (_create(callback, children), true);
 
       // Lifted -> Managed
       case Lifted():
         controller.dispose();
-        return _createController(callback, children);
+        return (_create(callback, children), true);
 
       default:
-        return controller;
+        return (controller, false);
     }
   }
-
-  FGoldenController _createController(void Function() callback, int children) => _create(callback, children);
 
   @override
   void _dispose(FGoldenController controller, void Function() callback) {
@@ -312,29 +308,27 @@ mixin _$LiftedFunctions<T> on Diagnosticable implements FGenericControl<T> {
   FGenericController<T> _update(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) {
     switch (old) {
       case _ when old == this:
-        return controller;
+        return (controller, false);
 
       // Lifted (Value A) -> Lifted (Value B)
       case Lifted():
         _updateController(controller);
-        return controller;
+        return (controller, true);
 
       // External -> Lifted
       case Managed(controller: _?):
         controller.removeListener(callback);
-        return _createController(callback);
+        return (_create(callback), true);
 
       // Internal -> Lifted
       case Managed():
         controller.dispose();
-        return _createController(callback);
+        return (_create(callback), true);
 
       default:
-        return controller;
+        return (controller, false);
     }
   }
-
-  FGenericController<T> _createController(void Function() callback) => _create(callback);
 
   void _updateController(FGenericController<T> controller);
   @override
@@ -352,7 +346,7 @@ mixin _$LiftedFunctions<T> on Diagnosticable implements FGenericControl<T> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || (other is Lifted && value == other.value && onChange == other.onChange);
+      identical(this, other) || (other is Lifted<T> && value == other.value && onChange == other.onChange);
 
   @override
   int get hashCode => value.hashCode ^ onChange.hashCode;
@@ -364,34 +358,32 @@ mixin _$ManagedFunctions<T> on Diagnosticable implements FGenericControl<T> {
   FGenericController<T> _update(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) {
     switch (old) {
       case _ when old == this:
-        return controller;
+        return (controller, false);
 
       // External (Controller A) -> External (Controller B)
       case Managed(controller: final old?) when this.controller != null && this.controller != old:
         controller.removeListener(callback);
-        return _createController(callback);
+        return (_create(callback), true);
 
       // Internal -> External
       case Managed(controller: final old) when this.controller != null && old == null:
         controller.dispose();
-        return _createController(callback);
+        return (_create(callback), true);
 
       // External -> Internal
       case Managed(controller: _?) when this.controller == null:
         controller.removeListener(callback);
-        return _createController(callback);
+        return (_create(callback), true);
 
       // Lifted -> Managed
       case Lifted():
         controller.dispose();
-        return _createController(callback);
+        return (_create(callback), true);
 
       default:
-        return controller;
+        return (controller, false);
     }
   }
-
-  FGenericController<T> _createController(void Function() callback) => _create(callback);
 
   @override
   void _dispose(FGenericController<T> controller, void Function() callback) {
@@ -413,7 +405,7 @@ mixin _$ManagedFunctions<T> on Diagnosticable implements FGenericControl<T> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Managed && controller == other.controller && initialValue == other.initialValue);
+      (other is Managed<T> && controller == other.controller && initialValue == other.initialValue);
 
   @override
   int get hashCode => controller.hashCode ^ initialValue.hashCode;
