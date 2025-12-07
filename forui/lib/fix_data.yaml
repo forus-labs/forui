@@ -329,6 +329,126 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
+  # FPagination
+  - title: 'Migrate FPagination to control parameter'
+    date: 2025-12-07
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPagination
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialPage:
+        kind: fragment
+        value: arguments[initialPage]
+      pages:
+        kind: fragment
+        value: arguments[pages]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initialPage + pages + onChange
+      - if: "initialPage != '' && pages != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initialPage: {% initialPage %}, pages: {% pages %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialPage'
+          - kind: removeParameter
+            name: 'pages'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialPage + pages
+      - if: "initialPage != '' && pages != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initialPage: {% initialPage %}, pages: {% pages %})'
+          - kind: removeParameter
+            name: 'initialPage'
+          - kind: removeParameter
+            name: 'pages'
+      # pages + onChange
+      - if: "pages != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(pages: {% pages %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'pages'
+          - kind: removeParameter
+            name: 'onChange'
+      # pages only
+      - if: "pages != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(pages: {% pages %})'
+          - kind: removeParameter
+            name: 'pages'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialPage only
+      - if: "initialPage != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initialPage: {% initialPage %})'
+          - kind: removeParameter
+            name: 'initialPage'
+
   # FPopover
   - title: 'Migrate FPopover(controller: ...) to control parameter'
     date: 2025-12-03
@@ -362,7 +482,6 @@ transforms:
       - kind: renameParameter
         oldName: 'shift'
         newName: 'overflow'
-
 
   # FPopoverMenu
   - title: 'Migrate FPopoverMenu(popoverController: ...) to control parameter'

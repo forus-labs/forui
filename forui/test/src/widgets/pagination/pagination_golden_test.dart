@@ -16,7 +16,10 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FPagination(style: TestScaffold.blueScreen.paginationStyle, controller: controller),
+        child: FPagination(
+          style: TestScaffold.blueScreen.paginationStyle,
+          control: .managed(controller: controller),
+        ),
       ),
     );
 
@@ -28,7 +31,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPagination(controller: controller),
+          child: FPagination(control: .managed(controller: controller)),
         ),
       );
 
@@ -41,7 +44,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPagination(controller: controller),
+          child: FPagination(control: FPaginationControl.managed(controller: controller)),
         ),
       );
 
@@ -55,7 +58,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPagination(controller: autoDispose(FPaginationController(pages: 10, siblings: 0, initialPage: 2))),
+          child: FPagination(
+            control: FPaginationControl.managed(
+              controller: autoDispose(FPaginationController(pages: 10, siblings: 0, initialPage: 2)),
+            ),
+          ),
         ),
       );
       await tester.tap(find.byType(Action).last);
@@ -68,7 +75,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FPagination(controller: autoDispose(FPaginationController(pages: 14, siblings: 2))),
+          child: FPagination(
+            control: FPaginationControl.managed(
+              controller: autoDispose(FPaginationController(pages: 14, siblings: 2)),
+            ),
+          ),
         ),
       );
       await tester.tap(find.text('7'));
@@ -85,7 +96,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPagination(
-            controller: controller,
+            control: FPaginationControl.managed(controller: controller),
             next: Padding(
               padding: style.itemPadding,
               child: ConstrainedBox(

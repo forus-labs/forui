@@ -1,6 +1,8 @@
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
+
+part 'pagination_controller.control.dart';
 
 /// A controller that controls which page is selected.
 class FPaginationController extends FChangeNotifier {
@@ -102,7 +104,7 @@ class FPaginationController extends FChangeNotifier {
 }
 
 @internal
-extension MinPagesDisplayedAtEdges on FPaginationController {
+extension InternalPaginationController on FPaginationController {
   /// The minimum number of pages to display at both the start and end of the pagination.
   ///
   /// If the total number of pages is too small to accommodate both the edge pages
@@ -114,4 +116,150 @@ extension MinPagesDisplayedAtEdges on FPaginationController {
     }
     return siblings + 1 + (showEdges ? 1 : 0);
   }
+}
+
+class _Controller extends FPaginationController {
+  int _value;
+  ValueChanged<int> _onChange;
+
+  _Controller({
+    required int page,
+    required super.pages,
+    required ValueChanged<int> onChange,
+    super.siblings,
+    super.showEdges,
+  }) : _value = page,
+       _onChange = onChange,
+       super();
+
+  void update(int page, ValueChanged<int> onChange) {
+    _onChange = onChange;
+    if (_value != page) {
+      _value = page;
+      notifyListeners();
+    }
+  }
+
+  @override
+  int get _page => _value;
+
+  @override
+  set _page(int index) {
+    _onChange(index);
+  }
+}
+
+/// Defines how a [FPagination]'s page is controlled.
+sealed class FPaginationControl with Diagnosticable {
+  /// Creates a [FPaginationControl] for controlling pagination using lifted state.
+  ///
+  /// The [page] parameter contains the current page index.
+  /// The [onChange] callback is invoked when the user changes the page.
+  const factory FPaginationControl.lifted({
+    required int page,
+    required int pages,
+    required ValueChanged<int> onChange,
+    int siblings,
+    bool showEdges,
+  }) = Lifted;
+
+  /// Creates a [FPaginationControl] for controlling pagination using a controller.
+  ///
+  /// Either [controller] or [pages] can be provided. If neither is provided,
+  /// an internal controller with 1 page is created.
+  ///
+  /// The [onChange] callback is invoked when the page changes.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if both [controller] and [initialPage] are provided.
+  /// Throws [AssertionError] if both [controller] and [pages] are provided.
+  const factory FPaginationControl.managed({
+    FPaginationController? controller,
+    int? initialPage,
+    int? pages,
+    int siblings,
+    bool showEdges,
+    ValueChanged<int>? onChange,
+  }) = Managed;
+
+  const FPaginationControl._();
+
+  FPaginationController _create(VoidCallback callback);
+
+  FPaginationController _update(FPaginationControl old, FPaginationController controller, VoidCallback callback);
+
+  void _dispose(FPaginationController controller, VoidCallback callback);
+}
+
+@internal
+class Lifted extends FPaginationControl with _$LiftedFunctions {
+  @override
+  final int page;
+  @override
+  final int pages;
+  @override
+  final ValueChanged<int> onChange;
+  @override
+  final int siblings;
+  @override
+  final bool showEdges;
+
+  const Lifted({
+    required this.page,
+    required this.pages,
+    required this.onChange,
+    this.siblings = 1,
+    this.showEdges = true,
+  }) : super._();
+
+  @override
+  FPaginationController _create(VoidCallback _) =>
+      _Controller(page: page, pages: pages, onChange: onChange, siblings: siblings, showEdges: showEdges);
+
+  @override
+  void _updateController(FPaginationController controller) => (controller as _Controller).update(page, onChange);
+}
+
+@internal
+class Managed extends FPaginationControl with Diagnosticable, _$ManagedFunctions {
+  @override
+  final FPaginationController? controller;
+  @override
+  final int? initialPage;
+  @override
+  final int? pages;
+  @override
+  final int siblings;
+  @override
+  final bool showEdges;
+  @override
+  final ValueChanged<int>? onChange;
+
+  const Managed({
+    this.controller,
+    this.initialPage,
+    this.pages,
+    this.siblings = 1,
+    this.showEdges = true,
+    this.onChange,
+  }) : assert(
+         controller == null || initialPage == null,
+         'Cannot provide both controller and initialPage. Set the page directly in the controller.',
+       ),
+       assert(
+         controller == null || pages == null,
+         'Cannot provide both controller and pages. Set the pages directly in the controller.',
+       ),
+       super._();
+
+  @override
+  FPaginationController _create(VoidCallback callback) =>
+      (controller ??
+            FPaginationController(
+              initialPage: initialPage ?? 0,
+              pages: pages ?? 1,
+              siblings: siblings,
+              showEdges: showEdges,
+            ))
+        ..addListener(callback);
 }

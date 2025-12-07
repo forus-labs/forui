@@ -60,6 +60,15 @@ dart fix --apply
 * Add `FItemGroupMixin.merge(...)`.
 
 
+### `FPagination`
+* Add `FPaginationControl`.
+
+* **Breaking** Remove `FPagination.controller`. Use `FPagination(control: .managed(controller: ...))` instead.
+* **Breaking** Remove `FPagination.initialPage`. Use `FPagination(control: .managed(initialPage: ...))` instead.
+* **Breaking** Remove `FPagination.pages`. Use `FPagination(control: .managed(pages: ...))` instead.
+* **Breaking** Remove `FPagination.onChange`. Use `FPagination(control: .managed(onChange: ...))` instead.
+
+
 ### `FPopover`
 * Add `FPopoverControl`.
 
