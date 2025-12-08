@@ -138,8 +138,14 @@ dart fix --apply
 * **Breaking** Rename `FSelectGroupItem` to `FSelectGroupItemMixin`.
 
 
-### `FSelectMenutTile`
-*  **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+### `FSelectMenuTile`
+* **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+* **Breaking** Remove `FSelectMenuTile.selectController`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FSelectMenuTile.popoverController`. Use `FSelectMenuTile(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FSelectMenuTile.onChange`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FSelectMenuTile.initialValue`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FSelectMenuTile.onSelect`.
+* **Breaking** Remove `FSelectMenuTileController`. Use `FSelectGroupController` instead.
 
 
 ### `FSelectTileGroup`
@@ -198,6 +204,22 @@ dart fix --apply
 * Add `FTileGroupMixin.group(...)`.
 * Add `FTileGroupMixin.builder(...)`.
 * Add `FTileGroupMixin.merge(...)`.
+
+* **Breaking** Remove `FTileMixin.selectMenu(selectController: ...)`. Use `FTileMixin.selectMenu(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenu(popoverController: ...)`. Use `FTileMixin.selectMenu(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenu(onChange: ...)`. Use `FTileMixin.selectMenu(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenu(onSelect: ...)`.
+* **Breaking** Remove `FTileMixin.selectMenu(initialValue: ...)`. Use `FTileMixin.selectMenu(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(selectController: ...)`. Use `FTileMixin.selectMenuFromMap(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(popoverController: ...)`. Use `FTileMixin.selectMenuFromMap(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(onChange: ...)`. Use `FTileMixin.selectMenuFromMap(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(onSelect: ...)`.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(initialValue: ...)`. Use `FTileMixin.selectMenuFromMap(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(selectController: ...)`. Use `FTileMixin.selectMenuBuilder(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(popoverController: ...)`. Use `FTileMixin.selectMenuBuilder(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(onChange: ...)`. Use `FTileMixin.selectMenuBuilder(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(onSelect: ...)`.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(initialValue: ...)`. Use `FTileMixin.selectMenuBuilder(selectControl: .managed(...))` instead.
 
 
 ### `FTimeField`

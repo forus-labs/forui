@@ -1955,6 +1955,358 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
+  - title: 'Rename FSelectMenuTileController to FSelectGroupController'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      typedef: FSelectMenuTileController
+    changes:
+      - kind: rename
+        newName: 'FSelectGroupController'
+
+  - title: 'Migrate FSelectMenuTile to control parameters'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectMenuTile
+    variables:
+      selectController:
+        kind: fragment
+        value: arguments[selectController]
+      popoverController:
+        kind: fragment
+        value: arguments[popoverController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # selectController + popoverController
+      - if: "selectController != '' && popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 1
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'popoverController'
+      # selectController + onChange
+      - if: "selectController != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # selectController only
+      - if: "selectController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # popoverController only
+      - if: "popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'popoverController'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FSelectMenuTile.fromMap to control parameters'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'fromMap'
+      inClass: FSelectMenuTile
+    variables:
+      selectController:
+        kind: fragment
+        value: arguments[selectController]
+      popoverController:
+        kind: fragment
+        value: arguments[popoverController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # selectController + popoverController
+      - if: "selectController != '' && popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 1
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'popoverController'
+      # selectController + onChange
+      - if: "selectController != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # selectController only
+      - if: "selectController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # popoverController only
+      - if: "popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'popoverController'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FSelectMenuTile.builder to control parameters'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectMenuTile
+    variables:
+      selectController:
+        kind: fragment
+        value: arguments[selectController]
+      popoverController:
+        kind: fragment
+        value: arguments[popoverController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # selectController + popoverController
+      - if: "selectController != '' && popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 1
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'popoverController'
+      # selectController + onChange
+      - if: "selectController != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # selectController only
+      - if: "selectController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # popoverController only
+      - if: "popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'popoverController'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+
+
+  # FSidebar
+  - title: 'Remove FSidebar(width: ...)'
+    date: 2025-11-30
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSidebar
+    changes:
+      - kind: renameParameter
+        oldName: 'width'
+        newName: 'constraints'
 
   # FTextField
   - title: 'Migrate FTextField.new to control parameter'
@@ -2842,6 +3194,336 @@ transforms:
           - kind: removeParameter
             name: 'obscureTextController'
 
+  # FTileMixin
+  - title: 'Migrate FTileMixin.selectMenu to control parameters'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'selectMenu'
+      inClass: FTileMixin
+    variables:
+      selectController:
+        kind: fragment
+        value: arguments[selectController]
+      popoverController:
+        kind: fragment
+        value: arguments[popoverController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # selectController + popoverController
+      - if: "selectController != '' && popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 1
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'popoverController'
+      # selectController + onChange
+      - if: "selectController != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # selectController only
+      - if: "selectController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # popoverController only
+      - if: "popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'popoverController'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FTileMixin.selectMenuFromMap to control parameters'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'selectMenuFromMap'
+      inClass: FTileMixin
+    variables:
+      selectController:
+        kind: fragment
+        value: arguments[selectController]
+      popoverController:
+        kind: fragment
+        value: arguments[popoverController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # selectController + popoverController
+      - if: "selectController != '' && popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 1
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'popoverController'
+      # selectController + onChange
+      - if: "selectController != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # selectController only
+      - if: "selectController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # popoverController only
+      - if: "popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'popoverController'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FTileMixin.selectMenuBuilder to control parameters'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'selectMenuBuilder'
+      inClass: FTileMixin
+    variables:
+      selectController:
+        kind: fragment
+        value: arguments[selectController]
+      popoverController:
+        kind: fragment
+        value: arguments[popoverController]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initialValue:
+        kind: fragment
+        value: arguments[initialValue]
+    oneOf:
+      # selectController + popoverController
+      - if: "selectController != '' && popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 1
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'popoverController'
+      # selectController + onChange
+      - if: "selectController != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'selectController'
+          - kind: removeParameter
+            name: 'onChange'
+      # selectController only
+      - if: "selectController != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% selectController %})'
+          - kind: removeParameter
+            name: 'selectController'
+      # popoverController only
+      - if: "popoverController != ''"
+        changes:
+          - kind: addParameter
+            name: 'popoverControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% popoverController %})'
+          - kind: removeParameter
+            name: 'popoverController'
+      # initialValue + onChange
+      - if: "initialValue != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialValue'
+          - kind: removeParameter
+            name: 'onChange'
+      # initialValue only
+      - if: "initialValue != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {{% initialValue %}})'
+          - kind: removeParameter
+            name: 'initialValue'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'selectControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
 
   # FTimeField
   - title: 'Rename FTimeField(shift: ...) to overflow'
@@ -2865,7 +3547,6 @@ transforms:
       - kind: renameParameter
         oldName: 'shift'
         newName: 'overflow'
-
 
   # FTooltip
   - title: 'Migrate FTooltip(controller: ...) to control parameter'
@@ -2900,16 +3581,3 @@ transforms:
       - kind: renameParameter
         oldName: 'shift'
         newName: 'overflow'
-
-
-  # FSidebar
-  - title: 'Remove FSidebar(width: ...)'
-    date: 2025-11-30
-    element:
-      uris: [ 'package:forui/forui.dart' ]
-      constructor: ''
-      inClass: FSidebar
-    changes:
-      - kind: renameParameter
-        oldName: 'width'
-        newName: 'constraints'
