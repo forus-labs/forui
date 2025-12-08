@@ -8,8 +8,7 @@ import '../../test_scaffold.dart';
 void main() {
   Widget picker([FPickerController? controller, ValueChanged<List<int>>? onChange]) => TestScaffold(
     child: FPicker(
-      controller: controller,
-      onChange: onChange,
+      control: .managed(controller: controller, onChange: onChange),
       children: [
         for (var i = 0; i < (controller?.initialIndexes.length ?? 2); i++)
           FPickerWheel(children: [Text('${i}A'), Text('${i}B'), Text('${i}C')]),
@@ -188,5 +187,140 @@ void main() {
 
       expect(count, 7);
     });
+
+    testWidgets('onChange called on multiple controller updates', (tester) async {
+      List<int>? changedValue;
+      int callCount = 0;
+
+      final controller = autoDispose(FPickerController(initialIndexes: [0, 0]));
+      await tester.pumpWidget(
+        picker(
+          controller,
+          (value) {
+            changedValue = value;
+            callCount++;
+          },
+        ),
+      );
+
+      controller.value = [1, 0];
+      await tester.pump();
+
+      expect(changedValue, [1, 0]);
+      final firstCallCount = callCount;
+      expect(firstCallCount, greaterThan(0));
+
+      controller.value = [1, 1];
+      await tester.pump();
+
+      expect(changedValue, [1, 1]);
+      expect(callCount, greaterThan(firstCallCount));
+
+      controller.value = [2, 2];
+      await tester.pump();
+
+      expect(changedValue, [2, 2]);
+      expect(callCount, greaterThan(firstCallCount));
+    });
+  });
+
+  group('lifted', () {
+    testWidgets('onChange receives correct indexes on multiple changes', (tester) async {
+      List<int> value = [0, 0];
+
+      await tester.pumpWidget(
+        StatefulBuilder(
+          builder: (_, setState) => TestScaffold(
+            child: FPicker(
+              control: .lifted(
+                value: value,
+                onChange: (v) => setState(() => value = v),
+              ),
+              children: const [
+                FPickerWheel(
+                  key: ValueKey('first'),
+                  children: [Text('0A'), Text('0B'), Text('0C')],
+                ),
+                FPickerWheel(
+                  key: ValueKey('second'),
+                  children: [Text('1A'), Text('1B'), Text('1C')],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+      expect(value, [0, 0]);
+
+      await tester.drag(find.byKey(const ValueKey('first')), const Offset(0, -100));
+      await tester.pumpAndSettle();
+      expect(value, isNot([0, 0]));
+      expect(value[0], isNot(0));
+
+      final firstWheelValue = value[0];
+      await tester.drag(find.byKey(const ValueKey('second')), const Offset(0, -100));
+      await tester.pumpAndSettle();
+      expect(value[0], firstWheelValue);
+      expect(value[1], isNot(0));
+
+      final secondWheelValue = value[1];
+      await tester.drag(find.byKey(const ValueKey('first')), const Offset(0, 100));
+      await tester.pumpAndSettle();
+      expect(value[0], isNot(firstWheelValue));
+      expect(value[1], secondWheelValue);
+    });
+  });
+
+  testWidgets('adding wheels and indexes dynamically', (tester) async {
+    List<int> value = [0];
+
+    await tester.pumpWidget(
+      StatefulBuilder(
+        builder: (_, setState) => TestScaffold(
+          child: FPicker(
+            control: .lifted(
+              value: value,
+              onChange: (v) => setState(() => value = v),
+            ),
+            children: const [
+              FPickerWheel(children: [Text('0A'), Text('0B'), Text('0C')]),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    expect(value, [0]);
+
+    value = [value[0],  0];
+
+    await tester.pumpWidget(
+      StatefulBuilder(
+        builder: (_, setState) => TestScaffold(
+          child: FPicker(
+            key: const ValueKey('expanded'),
+            control: .lifted(
+              value: value,
+              onChange: (v) => setState(() => value = v),
+            ),
+            children: const [
+              FPickerWheel(children: [Text('0A'), Text('0B'), Text('0C')]),
+              FPickerWheel(children: [Text('1A'), Text('1B'), Text('1C')]),
+            ],
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), null);
+    expect(find.text('0A'), findsOneWidget);
+    expect(find.text('1A'), findsOneWidget);
+
+    await tester.drag(find.text('1A'), const Offset(0, -50));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), null);
+    expect(value.length, 2);
   });
 }

@@ -5,6 +5,24 @@ const features = ['Keyboard navigation', 'Typeahead suggestions', 'Tab to comple
 
 const fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Pineapple'];
 
+const letters = {
+  'A': 'A',
+  'B': 'B',
+  'C': 'C',
+  'D': 'D',
+  'E': 'E',
+  'F': 'F',
+  'G': 'G',
+  'H': 'H',
+  'I': 'I',
+  'J': 'J',
+  'K': 'K',
+  'L': 'L',
+  'M': 'M',
+  'N': 'N',
+  'O': 'O',
+};
+
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -33,43 +51,57 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
+  String? _a;
+  TextEditingValue? _b;
+  List<int> value = [9];
+
   @override
   Widget build(BuildContext context) => Center(
     child: Column(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 5,
+      mainAxisSize: .min,
       children: [
-        for (final (alignment, description) in [
-          (FToastAlignment.topLeft, 'Top Left'),
-          (FToastAlignment.topCenter, 'Top Center'),
-          (FToastAlignment.topRight, 'Top Right'),
-          (FToastAlignment.bottomLeft, 'Bottom Left'),
-          (FToastAlignment.bottomCenter, 'Bottom Center'),
-          (FToastAlignment.bottomRight, 'Bottom Right'),
-        ])
-          FButton(
-            onPress: () => showFToast(
-              context: context,
-              alignment: alignment,
-              title: const Text('Event has been created'),
-              description: const Text('Friday, May 23, 2025 at 9:00 AM'),
-              suffixBuilder: (context, entry) => IntrinsicHeight(
-                child: FButton(
-                  style: context.theme.buttonStyles.primary.copyWith(
-                    contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
-                      textStyle: FWidgetStateMap.all(
-                        context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
-                      ),
-                    ),
-                  ),
-                  onPress: entry.dismiss,
-                  child: const Text('Undo'),
-                ),
-              ),
+        Expanded(
+          child: FPicker(
+            control: .lifted(
+              value: value,
+              onChange: (v) {
+                // setState(() {
+                //   // value = v;
+                //   print('setState');
+                // });
+              },
             ),
-            child: Text('Show $description Toast'),
+            children: [
+              if (true)
+                FPickerWheel.builder(builder: (context, index) => Text('$index'))
+              else
+                FPickerWheel(
+                  loop: false,
+                  children: const [
+                    Text('January'),
+                    Text('February'),
+                    Text('March'),
+                    Text('April'),
+                    Text('May'),
+                    Text('June'),
+                    Text('July'),
+                    Text('August'),
+                    Text('September'),
+                    Text('October'),
+                    Text('November'),
+                    Text('December'),
+                  ],
+                ),
+            ],
           ),
+        ),
+        FButton(
+          onPress: () => setState(() {
+            value = [5];
+            print('setState outer');
+          }),
+          child: Text('button'),
+        ),
       ],
     ),
   );

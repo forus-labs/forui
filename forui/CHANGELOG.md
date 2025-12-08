@@ -71,6 +71,13 @@ dart fix --apply
 * **Breaking** Remove `FPagination.onChange`. Use `FPagination(control: .managed(onChange: ...))` instead.
 
 
+### `FPicker`
+* Add `FPickerControl`.
+
+* **Breaking** Remove `FPicker.controller`. Use `FPicker(control: .managed(...))` instead.
+* **Breaking** Remove `FPicker.onChange`. Use `FPicker(control: .managed(...))` instead.
+
+
 ### `FPopover`
 * Add `FPopoverControl`.
 

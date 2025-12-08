@@ -493,6 +493,57 @@ transforms:
           - kind: removeParameter
             name: 'initialPage'
 
+  # FPicker
+  - title: 'Migrate FPicker to control parameter'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPicker
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
   # FPopover
   - title: 'Migrate FPopover(controller: ...) to control parameter'
     date: 2025-12-03

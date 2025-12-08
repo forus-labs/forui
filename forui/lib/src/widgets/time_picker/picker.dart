@@ -158,7 +158,7 @@ class _Western12Picker extends TimePicker {
 
     format.pattern!.startsWith('a') ? pickers.insert(0, periodPicker) : pickers.add(periodPicker);
 
-    return FPicker(controller: controller.picker, style: style, children: pickers);
+    return FPicker(control: .managed(controller: controller.picker), style: style, children: pickers);
   }
 }
 
@@ -174,7 +174,7 @@ class _Western24Picker extends TimePicker {
 
   @override
   Widget build(BuildContext context) => FPicker(
-    controller: controller.picker,
+    control: .managed(controller: controller.picker),
     style: style,
     children: [
       FPickerWheel.builder(
@@ -240,7 +240,7 @@ class _Eastern12Picker extends TimePicker {
 
     format.pattern!.startsWith('a') ? pickers.insert(0, periodPicker) : pickers.add(periodPicker);
 
-    return FPicker(controller: controller.picker, style: style, children: pickers);
+    return FPicker(control: .managed(controller: controller.picker), style: style, children: pickers);
   }
 }
 
@@ -256,7 +256,7 @@ class _Eastern24Picker extends TimePicker {
 
   @override
   Widget build(BuildContext context) => FPicker(
-    controller: controller.picker,
+    control: .managed(controller: controller.picker),
     style: style,
     children: [
       FPickerWheel.builder(

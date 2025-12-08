@@ -33,7 +33,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FPicker(
-          controller: controller,
+          control: .managed(controller: controller),
           children: const [
             FPickerWheel(children: [Text('A1'), Text('A2'), Text('A3')]),
             FPickerWheel(children: [Text('B1'), Text('B2'), Text('B3')]),
@@ -53,7 +53,7 @@ void main() {
       TestScaffold(
         textDirection: TextDirection.rtl,
         child: FPicker(
-          controller: controller,
+          control: .managed(controller: controller),
           children: const [
             FPickerWheel(children: [Text('A1'), Text('A2'), Text('A3')]),
             FPickerWheel(children: [Text('B1'), Text('B2'), Text('B3')]),
