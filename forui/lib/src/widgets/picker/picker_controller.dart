@@ -108,7 +108,7 @@ class _Controller extends FPickerController {
 }
 
 /// Defines how a [FPicker]'s value is controlled.
-sealed class FPickerControl with Diagnosticable {
+sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
   /// Creates a [FPickerControl] for controlling a picker using lifted state.
   ///
   /// It does not prevent the user from scrolling to invalid indexes. To animate back to the provided [value],
@@ -142,20 +142,16 @@ sealed class FPickerControl with Diagnosticable {
 
   const FPickerControl._();
 
-  FPickerController _create(VoidCallback callback, int wheelCount);
-
   (FPickerController, bool) _update(
     FPickerControl old,
     FPickerController controller,
     VoidCallback callback,
     int wheelCount,
   );
-
-  void _dispose(FPickerController controller, VoidCallback callback);
 }
 
 @internal
-class Lifted extends FPickerControl with _$LiftedFunctions {
+class Lifted extends FPickerControl with _$LiftedMixin {
   @override
   final List<int> value;
   @override
@@ -203,7 +199,7 @@ class Lifted extends FPickerControl with _$LiftedFunctions {
 }
 
 @internal
-class Managed extends FPickerControl with Diagnosticable, _$ManagedFunctions {
+class Managed extends FPickerControl with Diagnosticable, _$ManagedMixin {
   @override
   final FPickerController? controller;
   @override

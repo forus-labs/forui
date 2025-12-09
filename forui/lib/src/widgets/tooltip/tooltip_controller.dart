@@ -126,7 +126,7 @@ class _Controller extends FTooltipController {
 }
 
 /// Defines how a tooltip's shown state is controlled.
-sealed class FTooltipControl with Diagnosticable {
+sealed class FTooltipControl with Diagnosticable, _$FTooltipControlMixin {
   /// Creates a [FTooltipControl] for controlling a tooltip using lifted state.
   ///
   /// The [shown] parameter indicates whether the tooltip is currently shown.
@@ -154,20 +154,16 @@ sealed class FTooltipControl with Diagnosticable {
 
   const FTooltipControl._();
 
-  FTooltipController _create(VoidCallback callback, TickerProvider vsync);
-
   (FTooltipController, bool) _update(
     FTooltipControl old,
     FTooltipController controller,
     VoidCallback callback,
     TickerProvider vsync,
   );
-
-  void _dispose(FTooltipController controller, VoidCallback callback);
 }
 
 @internal
-class Lifted extends FTooltipControl with _$LiftedFunctions {
+class Lifted extends FTooltipControl with _$LiftedMixin {
   @override
   final bool shown;
   @override
@@ -187,7 +183,7 @@ class Lifted extends FTooltipControl with _$LiftedFunctions {
 }
 
 @internal
-class Managed extends FTooltipControl with Diagnosticable, _$ManagedFunctions {
+class Managed extends FTooltipControl with Diagnosticable, _$ManagedMixin {
   @override
   final FTooltipController? controller;
   @override

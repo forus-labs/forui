@@ -152,7 +152,7 @@ class InheritedAutocompleteController extends InheritedWidget {
 }
 
 /// Defines how [FAutocomplete]'s state is controlled.
-sealed class FAutocompleteControl with Diagnosticable {
+sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMixin {
   /// Creates lifted state control.
   ///
   /// Text is always lifted.
@@ -182,12 +182,6 @@ sealed class FAutocompleteControl with Diagnosticable {
 
   const FAutocompleteControl._();
 
-  FAutocompleteController _create(
-    VoidCallback callback,
-    TickerProvider vsync,
-    FutureOr<Iterable<String>> Function(String) filter,
-  );
-
   (FAutocompleteController, bool) _update(
     FAutocompleteControl old,
     FAutocompleteController controller,
@@ -195,12 +189,10 @@ sealed class FAutocompleteControl with Diagnosticable {
     TickerProvider vsync,
     FutureOr<Iterable<String>> Function(String) filter,
   );
-
-  void _dispose(FAutocompleteController controller, VoidCallback callback);
 }
 
 @internal
-class Lifted extends FAutocompleteControl with _$LiftedFunctions {
+class Lifted extends FAutocompleteControl with _$LiftedMixin {
   @override
   final TextEditingValue value;
   @override
@@ -251,7 +243,7 @@ class Lifted extends FAutocompleteControl with _$LiftedFunctions {
 }
 
 @internal
-class Managed extends FAutocompleteControl with _$ManagedFunctions {
+class Managed extends FAutocompleteControl with _$ManagedMixin {
   @override
   final FAutocompleteController? controller;
   @override

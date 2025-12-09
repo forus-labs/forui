@@ -159,7 +159,7 @@ class LiftedPopoverController extends FPopoverController {
 }
 
 /// Defines how a popover's shown state is controlled.
-sealed class FPopoverControl with Diagnosticable {
+sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
   /// Creates a [FPopoverControl] for controlling a popover using lifted state.
   ///
   /// The [shown] parameter indicates whether the popover is currently shown.
@@ -187,20 +187,16 @@ sealed class FPopoverControl with Diagnosticable {
 
   const FPopoverControl._();
 
-  FPopoverController _create(VoidCallback callback, TickerProvider vsync);
-
   (FPopoverController, bool) _update(
     FPopoverControl old,
     FPopoverController controller,
     VoidCallback callback,
     TickerProvider vsync,
   );
-
-  void _dispose(FPopoverController controller, VoidCallback callback);
 }
 
 @internal
-class Lifted extends FPopoverControl with _$LiftedFunctions {
+class Lifted extends FPopoverControl with _$LiftedMixin {
   @override
   final bool shown;
   @override
@@ -220,7 +216,7 @@ class Lifted extends FPopoverControl with _$LiftedFunctions {
 }
 
 @internal
-class Managed extends FPopoverControl with Diagnosticable, _$ManagedFunctions {
+class Managed extends FPopoverControl with Diagnosticable, _$ManagedMixin {
   @override
   final FPopoverController? controller;
   @override

@@ -95,7 +95,7 @@ class _Controller<T> extends FMultiSelectController<T> {
 }
 
 /// Defines how a [FMultiSelect]'s value is controlled.
-sealed class FMultiSelectControl<T> with Diagnosticable {
+sealed class FMultiSelectControl<T> with Diagnosticable, _$FMultiSelectControlMixin<T> {
   /// Creates a [FMultiSelectControl] for controlling multi-select using lifted state.
   ///
   /// The [value] parameter contains the current selected values.
@@ -136,20 +136,16 @@ sealed class FMultiSelectControl<T> with Diagnosticable {
 
   const FMultiSelectControl._();
 
-  FMultiSelectController<T> _create(VoidCallback callback, TickerProvider vsync);
-
   (FMultiSelectController<T>, bool) _update(
     FMultiSelectControl<T> old,
     FMultiSelectController<T> controller,
     VoidCallback callback,
     TickerProvider vsync,
   );
-
-  void _dispose(FMultiSelectController<T> controller, VoidCallback callback);
 }
 
 @internal
-class Lifted<T> extends FMultiSelectControl<T> with _$LiftedFunctions<T> {
+class Lifted<T> extends FMultiSelectControl<T> with _$LiftedMixin<T> {
   @override
   final Set<T> value;
   @override
@@ -189,7 +185,7 @@ class Lifted<T> extends FMultiSelectControl<T> with _$LiftedFunctions<T> {
 }
 
 @internal
-class Managed<T> extends FMultiSelectControl<T> with Diagnosticable, _$ManagedFunctions<T> {
+class Managed<T> extends FMultiSelectControl<T> with Diagnosticable, _$ManagedMixin<T> {
   @override
   final FMultiSelectController<T>? controller;
   @override

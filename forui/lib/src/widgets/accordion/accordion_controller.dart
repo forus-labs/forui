@@ -165,7 +165,7 @@ class LiftedController extends FAccordionController {
 }
 
 /// Defines how the accordion's expanded state is controlled.
-sealed class FAccordionControl with Diagnosticable {
+sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
   /// Creates a [FAccordionControl] for controlling an accordion using lifted state.
   ///
   /// The [expanded] function should return true if the item at the given index is expanded. It must be idempotent.
@@ -193,20 +193,16 @@ sealed class FAccordionControl with Diagnosticable {
 
   const FAccordionControl._();
 
-  FAccordionController _create(VoidCallback callback, int children);
-
   (FAccordionController, bool) _update(
     FAccordionControl old,
     FAccordionController controller,
     VoidCallback callback,
     int children,
   );
-
-  void _dispose(FAccordionController controller, VoidCallback callback);
 }
 
 @internal
-final class Lifted extends FAccordionControl with _$LiftedFunctions {
+final class Lifted extends FAccordionControl with _$LiftedMixin {
   @override
   final bool Function(int index) expanded;
   @override
@@ -223,7 +219,7 @@ final class Lifted extends FAccordionControl with _$LiftedFunctions {
 }
 
 @internal
-final class Managed extends FAccordionControl with _$ManagedFunctions {
+final class Managed extends FAccordionControl with _$ManagedMixin {
   @override
   final FAccordionController? controller;
   @override

@@ -75,7 +75,7 @@ class _Controller extends TextEditingController {
 }
 
 /// Defines how the text field's text is controlled.
-sealed class FTextFieldControl with Diagnosticable {
+sealed class FTextFieldControl with Diagnosticable, _$FTextFieldControlMixin {
   /// Creates a [FTextFieldControl] for controlling a text field using lifted state.
   const factory FTextFieldControl.lifted({
     required TextEditingValue value,
@@ -94,14 +94,10 @@ sealed class FTextFieldControl with Diagnosticable {
 
   const FTextFieldControl._();
 
-  TextEditingController _create(VoidCallback callback);
-
   (TextEditingController, bool) _update(FTextFieldControl old, TextEditingController controller, VoidCallback callback);
-
-  void _dispose(TextEditingController controller, VoidCallback callback);
 }
 
-class _Lifted extends FTextFieldControl with _$_LiftedFunctions {
+class _Lifted extends FTextFieldControl with _$_LiftedMixin {
   @override
   final TextEditingValue value;
   @override
@@ -116,7 +112,7 @@ class _Lifted extends FTextFieldControl with _$_LiftedFunctions {
   void _updateController(TextEditingController controller) => (controller as _Controller).update(value, onChange);
 }
 
-class _Managed extends FTextFieldControl with _$_ManagedFunctions {
+class _Managed extends FTextFieldControl with _$_ManagedMixin {
   @override
   final TextEditingController? controller;
   @override

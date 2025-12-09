@@ -88,7 +88,7 @@ class _Controller<T> extends FSelectController<T> {
 }
 
 /// Defines how a [FSelect]'s value is controlled.
-sealed class FSelectControl<T> with Diagnosticable {
+sealed class FSelectControl<T> with Diagnosticable, _$FSelectControlMixin<T> {
   /// Creates a [FSelectControl] for controlling select using lifted state.
   ///
   /// The [value] parameter contains the current selected value.
@@ -126,20 +126,16 @@ sealed class FSelectControl<T> with Diagnosticable {
 
   const FSelectControl._();
 
-  FSelectController<T> _create(VoidCallback callback, TickerProvider vsync);
-
   (FSelectController<T>, bool) _update(
     FSelectControl<T> old,
     FSelectController<T> controller,
     VoidCallback callback,
     TickerProvider vsync,
   );
-
-  void _dispose(FSelectController<T> controller, VoidCallback callback);
 }
 
 @internal
-class Lifted<T> extends FSelectControl<T> with _$LiftedFunctions<T> {
+class Lifted<T> extends FSelectControl<T> with _$LiftedMixin<T> {
   @override
   final T? value;
   @override
@@ -179,7 +175,7 @@ class Lifted<T> extends FSelectControl<T> with _$LiftedFunctions<T> {
 }
 
 @internal
-class Managed<T> extends FSelectControl<T> with Diagnosticable, _$ManagedFunctions<T> {
+class Managed<T> extends FSelectControl<T> with Diagnosticable, _$ManagedMixin<T> {
   @override
   final FSelectController<T>? controller;
   @override

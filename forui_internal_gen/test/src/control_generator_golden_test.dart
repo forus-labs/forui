@@ -14,7 +14,7 @@ class FGoldenController {
   void dispose() {}
 }
 
-sealed class FGoldenControl with Diagnosticable {
+sealed class FGoldenControl with Diagnosticable, _$FGoldenControlMixin {
   const factory FGoldenControl.lifted({
     required bool Function(int) expanded,
     required void Function(int, bool) onChange,
@@ -28,20 +28,16 @@ sealed class FGoldenControl with Diagnosticable {
 
   const FGoldenControl._();
 
-  FGoldenController _create(VoidCallback callback, int children);
-
-  FGoldenController _update(
+  (FGoldenController, bool) _update(
     FGoldenControl old,
     FGoldenController controller,
     VoidCallback callback,
     int children,
   );
-
-  void _dispose(FGoldenController controller, VoidCallback callback);
 }
 
 @internal
-final class Lifted extends FGoldenControl with _$LiftedFunctions {
+final class Lifted extends FGoldenControl with _$LiftedMixin {
   @override
   final bool Function(int) expanded;
   @override
@@ -57,7 +53,7 @@ final class Lifted extends FGoldenControl with _$LiftedFunctions {
 }
 
 @internal
-final class Managed extends FGoldenControl with _$ManagedFunctions {
+final class Managed extends FGoldenControl with _$ManagedMixin {
   @override
   final FGoldenController? controller;
   @override
@@ -91,20 +87,39 @@ part of 'sample.dart';
 extension InternalFGoldenControl on FGoldenControl {
   FGoldenController create(void Function() callback, int children) => _create(callback, children);
 
-  FGoldenController update(FGoldenControl old, FGoldenController controller, void Function() callback, int children) =>
-      _update(old, controller, callback, children);
+  (FGoldenController, bool) update(
+    FGoldenControl old,
+    FGoldenController controller,
+    void Function() callback,
+    int children,
+  ) => _update(old, controller, callback, children);
 
   void dispose(FGoldenController controller, void Function() callback) => _dispose(controller, callback);
 }
 
-mixin _$LiftedFunctions on Diagnosticable implements FGoldenControl {
+mixin _$FGoldenControlMixin {
+  FGoldenController _create(void Function() callback, int children);
+  void _dispose(FGoldenController controller, void Function() callback);
+  FGoldenController _default(
+    FGoldenControl old,
+    FGoldenController controller,
+    void Function() callback,
+    int children,
+  ) => controller;
+}
+mixin _$LiftedMixin on Diagnosticable implements FGoldenControl {
   bool Function(int) get expanded;
   void Function(int, bool) get onChange;
   @override
-  FGoldenController _update(FGoldenControl old, FGoldenController controller, void Function() callback, int children) {
+  (FGoldenController, bool) _update(
+    FGoldenControl old,
+    FGoldenController controller,
+    void Function() callback,
+    int children,
+  ) {
     switch (old) {
       case _ when old == this:
-        return (controller, false);
+        return (_default(old, controller, callback, children), false);
 
       // Lifted (Value A) -> Lifted (Value B)
       case Lifted():
@@ -122,7 +137,7 @@ mixin _$LiftedFunctions on Diagnosticable implements FGoldenControl {
         return (_create(callback, children), true);
 
       default:
-        return (controller, false);
+        return (_default(old, controller, callback, children), false);
     }
   }
 
@@ -147,15 +162,20 @@ mixin _$LiftedFunctions on Diagnosticable implements FGoldenControl {
   @override
   int get hashCode => expanded.hashCode ^ onChange.hashCode;
 }
-mixin _$ManagedFunctions on Diagnosticable implements FGoldenControl {
+mixin _$ManagedMixin on Diagnosticable implements FGoldenControl {
   FGoldenController? get controller;
   int? get min;
   int? get max;
   @override
-  FGoldenController _update(FGoldenControl old, FGoldenController controller, void Function() callback, int children) {
+  (FGoldenController, bool) _update(
+    FGoldenControl old,
+    FGoldenController controller,
+    void Function() callback,
+    int children,
+  ) {
     switch (old) {
       case _ when old == this:
-        return (controller, false);
+        return (_default(old, controller, callback, children), false);
 
       // External (Controller A) -> External (Controller B)
       case Managed(controller: final old?) when this.controller != null && this.controller != old:
@@ -178,7 +198,7 @@ mixin _$ManagedFunctions on Diagnosticable implements FGoldenControl {
         return (_create(callback, children), true);
 
       default:
-        return (controller, false);
+        return (_default(old, controller, callback, children), false);
     }
   }
 
@@ -222,7 +242,7 @@ class FGenericController<T> {
   void dispose() {}
 }
 
-sealed class FGenericControl<T> with Diagnosticable {
+sealed class FGenericControl<T> with Diagnosticable, _$FGenericControlMixin<T> {
   const factory FGenericControl.lifted({
     required T? value,
     required void Function(T?) onChange,
@@ -235,19 +255,15 @@ sealed class FGenericControl<T> with Diagnosticable {
 
   const FGenericControl._();
 
-  FGenericController<T> _create(VoidCallback callback);
-
-  FGenericController<T> _update(
+  (FGenericController<T>, bool) _update(
     FGenericControl<T> old,
     FGenericController<T> controller,
     VoidCallback callback,
   );
-
-  void _dispose(FGenericController<T> controller, VoidCallback callback);
 }
 
 @internal
-final class Lifted<T> extends FGenericControl<T> with _$LiftedFunctions<T> {
+final class Lifted<T> extends FGenericControl<T> with _$LiftedMixin<T> {
   @override
   final T? value;
   @override
@@ -263,7 +279,7 @@ final class Lifted<T> extends FGenericControl<T> with _$LiftedFunctions<T> {
 }
 
 @internal
-final class Managed<T> extends FGenericControl<T> with _$ManagedFunctions<T> {
+final class Managed<T> extends FGenericControl<T> with _$ManagedMixin<T> {
   @override
   final FGenericController<T>? controller;
   @override
@@ -295,20 +311,33 @@ part of 'sample.dart';
 extension InternalFGenericControl<T> on FGenericControl<T> {
   FGenericController<T> create(void Function() callback) => _create(callback);
 
-  FGenericController<T> update(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) =>
-      _update(old, controller, callback);
+  (FGenericController<T>, bool) update(
+    FGenericControl<T> old,
+    FGenericController<T> controller,
+    void Function() callback,
+  ) => _update(old, controller, callback);
 
   void dispose(FGenericController<T> controller, void Function() callback) => _dispose(controller, callback);
 }
 
-mixin _$LiftedFunctions<T> on Diagnosticable implements FGenericControl<T> {
+mixin _$FGenericControlMixin<T> {
+  FGenericController<T> _create(void Function() callback);
+  void _dispose(FGenericController<T> controller, void Function() callback);
+  FGenericController<T> _default(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) =>
+      controller;
+}
+mixin _$LiftedMixin<T> on Diagnosticable implements FGenericControl<T> {
   T? get value;
   void Function(T?) get onChange;
   @override
-  FGenericController<T> _update(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) {
+  (FGenericController<T>, bool) _update(
+    FGenericControl<T> old,
+    FGenericController<T> controller,
+    void Function() callback,
+  ) {
     switch (old) {
       case _ when old == this:
-        return (controller, false);
+        return (_default(old, controller, callback), false);
 
       // Lifted (Value A) -> Lifted (Value B)
       case Lifted():
@@ -326,7 +355,7 @@ mixin _$LiftedFunctions<T> on Diagnosticable implements FGenericControl<T> {
         return (_create(callback), true);
 
       default:
-        return (controller, false);
+        return (_default(old, controller, callback), false);
     }
   }
 
@@ -351,14 +380,18 @@ mixin _$LiftedFunctions<T> on Diagnosticable implements FGenericControl<T> {
   @override
   int get hashCode => value.hashCode ^ onChange.hashCode;
 }
-mixin _$ManagedFunctions<T> on Diagnosticable implements FGenericControl<T> {
+mixin _$ManagedMixin<T> on Diagnosticable implements FGenericControl<T> {
   FGenericController<T>? get controller;
   T? get initialValue;
   @override
-  FGenericController<T> _update(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) {
+  (FGenericController<T>, bool) _update(
+    FGenericControl<T> old,
+    FGenericController<T> controller,
+    void Function() callback,
+  ) {
     switch (old) {
       case _ when old == this:
-        return (controller, false);
+        return (_default(old, controller, callback), false);
 
       // External (Controller A) -> External (Controller B)
       case Managed(controller: final old?) when this.controller != null && this.controller != old:
@@ -381,7 +414,7 @@ mixin _$ManagedFunctions<T> on Diagnosticable implements FGenericControl<T> {
         return (_create(callback), true);
 
       default:
-        return (controller, false);
+        return (_default(old, controller, callback), false);
     }
   }
 

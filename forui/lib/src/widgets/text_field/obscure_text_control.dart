@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 part 'obscure_text_control.control.dart';
 
 /// Defines how the password field's obscure text is controlled.
-sealed class FObscureTextControl with Diagnosticable {
+sealed class FObscureTextControl with Diagnosticable, _$FObscureTextControlMixin {
   /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
   const factory FObscureTextControl.lifted({required bool value, required ValueChanged<bool> onChange}) = Lifted;
 
@@ -21,15 +21,11 @@ sealed class FObscureTextControl with Diagnosticable {
 
   const FObscureTextControl._();
 
-  ValueNotifier<bool> _create(VoidCallback callback);
-
   (ValueNotifier<bool>, bool) _update(FObscureTextControl old, ValueNotifier<bool> controller, VoidCallback callback);
-
-  void _dispose(ValueNotifier<bool> controller, VoidCallback callback);
 }
 
 @internal
-final class Lifted extends FObscureTextControl with _$LiftedFunctions {
+final class Lifted extends FObscureTextControl with _$LiftedMixin {
   @override
   final bool value;
   @override
@@ -45,7 +41,7 @@ final class Lifted extends FObscureTextControl with _$LiftedFunctions {
 }
 
 @internal
-final class Managed extends FObscureTextControl with _$ManagedFunctions {
+final class Managed extends FObscureTextControl with _$ManagedMixin {
   @override
   final ValueNotifier<bool>? controller;
   @override

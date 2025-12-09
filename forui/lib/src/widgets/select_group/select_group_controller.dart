@@ -38,7 +38,7 @@ class _Controller<T> extends FMultiValueNotifier<T> {
 }
 
 /// Defines how a [FSelectGroup]'s value is controlled.
-sealed class FSelectGroupControl<T> with Diagnosticable {
+sealed class FSelectGroupControl<T> with Diagnosticable, _$FSelectGroupControlMixin<T> {
   /// Creates a [FSelectGroupControl] for controlling the select group using lifted state.
   const factory FSelectGroupControl.lifted({required Set<T> value, required ValueChanged<Set<T>> onChange}) = Lifted<T>;
 
@@ -59,19 +59,15 @@ sealed class FSelectGroupControl<T> with Diagnosticable {
 
   const FSelectGroupControl._();
 
-  FSelectGroupController<T> _create(VoidCallback callback);
-
   (FSelectGroupController<T>, bool) _update(
     FSelectGroupControl<T> old,
     FSelectGroupController<T> controller,
     VoidCallback callback,
   );
-
-  void _dispose(FSelectGroupController<T> controller, VoidCallback callback);
 }
 
 @internal
-final class Lifted<T> extends FSelectGroupControl<T> with _$LiftedFunctions<T> {
+final class Lifted<T> extends FSelectGroupControl<T> with _$LiftedMixin<T> {
   @override
   final Set<T> value;
   @override
@@ -89,7 +85,7 @@ final class Lifted<T> extends FSelectGroupControl<T> with _$LiftedFunctions<T> {
 }
 
 @internal
-final class Managed<T> extends FSelectGroupControl<T> with _$ManagedFunctions<T> {
+final class Managed<T> extends FSelectGroupControl<T> with _$ManagedMixin<T> {
   @override
   final FSelectGroupController<T>? controller;
   @override

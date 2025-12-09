@@ -150,7 +150,7 @@ class _Controller extends FPaginationController {
 }
 
 /// Defines how a [FPagination]'s page is controlled.
-sealed class FPaginationControl with Diagnosticable {
+sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
   /// Creates a [FPaginationControl] for controlling pagination using lifted state.
   ///
   /// The [page] parameter contains the current page index.
@@ -184,15 +184,11 @@ sealed class FPaginationControl with Diagnosticable {
 
   const FPaginationControl._();
 
-  FPaginationController _create(VoidCallback callback);
-
   (FPaginationController, bool) _update(FPaginationControl old, FPaginationController controller, VoidCallback callback);
-
-  void _dispose(FPaginationController controller, VoidCallback callback);
 }
 
 @internal
-class Lifted extends FPaginationControl with _$LiftedFunctions {
+class Lifted extends FPaginationControl with _$LiftedMixin {
   @override
   final int page;
   @override
@@ -221,7 +217,7 @@ class Lifted extends FPaginationControl with _$LiftedFunctions {
 }
 
 @internal
-class Managed extends FPaginationControl with Diagnosticable, _$ManagedFunctions {
+class Managed extends FPaginationControl with Diagnosticable, _$ManagedMixin {
   @override
   final FPaginationController? controller;
   @override
