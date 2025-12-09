@@ -40,25 +40,6 @@ void main() {
     });
   }
 
-  for (final (name, constructor) in [
-    (
-    'input only',
-        (controller, initial) => FTimeField(
-      control: .managed(controller: controller, initial: initial),
-    ),
-    ),
-    (
-    'picker only',
-        (controller, initial) => FTimeField.picker(
-      control: .managed(controller: controller, initial: initial),
-    ),
-    ),
-  ]) {
-    group('$name - constructor', () {
-
-    });
-  }
-
   for (final (name, field) in [
     (
       'picker',

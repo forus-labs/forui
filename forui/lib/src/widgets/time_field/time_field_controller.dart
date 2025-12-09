@@ -3,7 +3,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/time.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 part 'time_field_controller.control.dart';
