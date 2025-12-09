@@ -7,6 +7,91 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  group('lifted', () {
+    testWidgets('switches tabs via tapping', (tester) async {
+      var index = 0;
+
+      Future<void> rebuild() async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTabs(
+              control: .lifted(index: index, onChange: (value) => index = value),
+              children: const [
+                FTabEntry(label: Text('foo'), child: Text('foo content')),
+                FTabEntry(label: Text('bar'), child: Text('bar content')),
+              ],
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+      }
+
+      await rebuild();
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
+
+      await tester.tap(find.text('bar'));
+      await rebuild();
+      expect(find.text('foo content'), findsNothing);
+      expect(find.text('bar content'), findsOneWidget);
+
+      await tester.tap(find.text('foo'));
+      await rebuild();
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
+    });
+
+    testWidgets('tabs do not change when onChange does nothing', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            control: .lifted(index: 0, onChange: (_) {}),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
+
+      await tester.tap(find.text('bar'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
+    });
+  });
+
+  group('managed', () {
+    testWidgets('onChange', (tester) async {
+      var index = -1;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            control: .managed(onChange: (value) => index = value),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('bar'));
+      await tester.pumpAndSettle();
+      expect(index, 1);
+
+      await tester.tap(find.text('foo'));
+      await tester.pumpAndSettle();
+      expect(index, 0);
+    });
+  });
+
   testWidgets('embedded in CupertinoApp', (tester) async {
     await tester.pumpWidget(
       CupertinoApp(
@@ -51,7 +136,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTabs(
-          controller: autoDispose(FTabController(initialIndex: 1, length: 2, vsync: tester)),
+          control: .managed(controller: autoDispose(FTabController(initialIndex: 1, length: 2, vsync: tester))),
           children: [
             FTabEntry(
               label: const Text('Account'),
@@ -145,7 +230,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTabs(
-          controller: controller,
+          control: .managed(controller: controller),
           children: const [
             FTabEntry(label: Text('foo'), child: Text('foo content')),
             FTabEntry(label: Text('bar'), child: Text('bar content')),
@@ -168,7 +253,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTabs(
-          controller: controller,
+          control: .managed(controller: controller),
           children: const [
             FTabEntry(label: Text('foo'), child: Text('foo content')),
             FTabEntry(label: Text('bar'), child: Text('bar content')),
@@ -185,61 +270,6 @@ void main() {
     expect(find.text('bar content'), findsOneWidget);
   });
 
-  testWidgets('update controller', (tester) async {
-    final first = autoDispose(FTabController(length: 2, vsync: tester));
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTabs(
-          controller: first,
-          children: const [
-            FTabEntry(label: Text('foo'), child: Text('foo content')),
-            FTabEntry(label: Text('bar'), child: Text('bar content')),
-          ],
-        ),
-      ),
-    );
-
-    expect(first.hasListeners, true);
-    expect(first.disposed, false);
-
-    final second = autoDispose(FTabController(length: 2, vsync: tester));
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTabs(
-          controller: second,
-          children: const [
-            FTabEntry(label: Text('foo'), child: Text('foo content')),
-            FTabEntry(label: Text('bar'), child: Text('bar content')),
-          ],
-        ),
-      ),
-    );
-
-    expect(first.hasListeners, false);
-    expect(first.disposed, false);
-    expect(second.hasListeners, true);
-    expect(second.disposed, false);
-  });
-
-  testWidgets('dispose controller', (tester) async {
-    final controller = autoDispose(FTabController(length: 2, vsync: tester));
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTabs(
-          controller: controller,
-          children: const [
-            FTabEntry(label: Text('foo'), child: Text('foo content')),
-            FTabEntry(label: Text('bar'), child: Text('bar content')),
-          ],
-        ),
-      ),
-    );
-
-    await tester.pumpWidget(TestScaffold(child: const SizedBox()));
-
-    expect(controller.hasListeners, false);
-    expect(controller.disposed, false);
-  });
 
   testWidgets('onPress is triggered when a tab is pressed', (tester) async {
     var index = -1;
@@ -248,7 +278,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTabs(
-          controller: controller,
+          control: .managed(controller: controller),
           children: const [
             FTabEntry(label: Text('foo'), child: Text('foo content')),
             FTabEntry(label: Text('bar'), child: Text('bar content')),
@@ -259,7 +289,7 @@ void main() {
     );
 
     await tester.tap(find.text('bar'));
-    await tester.pump();
+    await tester.pumpAndSettle();
 
     expect(index, 1);
     expect(controller.index, 1);

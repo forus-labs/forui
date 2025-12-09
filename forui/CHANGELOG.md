@@ -176,8 +176,13 @@ dart fix --apply
 
 
 ### `FTabs`
+* Add `FTabControl`.
 * Add `FTabEntry.entry(...)`.
 * Add `FTabs.mouseCursor`.
+
+* **Breaking** Remove `FTabs.controller`. Use `FTabs(control: .managed(...))` instead.
+* **Breaking** Remove `FTabs.initialIndex`. Use `FTabs(control: .managed(...))` instead.
+* **Breaking** Remove `FTabs.onChange`. Use `FTabs(control: .managed(...))` instead.
 
 
 ### `FTappable`

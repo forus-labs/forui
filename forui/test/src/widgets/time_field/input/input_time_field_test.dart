@@ -17,17 +17,21 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: FTimeField(key: key, control: .managed(onChange: (value) => changedValue = value)),
+          child: FTimeField(
+            key: key,
+            control: .managed(initial: const FTime(), onChange: (value) => changedValue = value),
+          ),
         ),
       );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
+      await tester.sendKeyEvent(.arrowLeft);
       await tester.sendKeyEvent(.arrowUp);
       await tester.pumpAndSettle();
 
-      expect(changedValue, isNotNull);
+      expect(changedValue, const FTime(0, 1));
     });
   });
 
@@ -185,7 +189,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: FTimeField(control: .managed(controller: controller), key: key),
+          child: FTimeField(
+            control: .managed(controller: controller),
+            key: key,
+          ),
         ),
       );
 

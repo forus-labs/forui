@@ -10,6 +10,8 @@ import 'package:forui/forui.dart';
 
 part 'tab_controller.dart';
 
+part 'tabs.control.dart';
+
 part 'tabs.design.dart';
 
 part 'tabs_style.dart';
@@ -45,8 +47,8 @@ class FTabEntry {
 /// * https://forui.dev/docs/navigation/tabs for working examples.
 /// * [FTabsStyle] for customizing tabs' appearance.
 class FTabs extends StatefulWidget {
-  /// The tab controller.
-  final FTabController? controller;
+  /// Controls the tab value.
+  final FTabControl control;
 
   /// The style.
   ///
@@ -58,13 +60,6 @@ class FTabs extends StatefulWidget {
   /// ```
   final FTabsStyle Function(FTabsStyle style)? style;
 
-  /// The initial tab that is selected.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * [initialIndex] is not within the range '0 <= initialIndex < tabs.length`.
-  final int initialIndex;
-
   /// Whether this tab bar can be scrolled horizontally. Defaults to false.
   ///
   /// If [scrollable] is true, then each tab is as wide as needed for its label and the entire [TabBar] is scrollable.
@@ -75,10 +70,6 @@ class FTabs extends StatefulWidget {
   ///
   /// Defaults to matching platform conventions.
   final ScrollPhysics? physics;
-
-  /// Handler for when a tab is changed. It is called **after** the tab switching animation has completed and the
-  /// controller has been updated.
-  final ValueChanged<int>? onChange;
 
   /// A callback that is triggered when a tab is pressed. It is called **before** the tab switching animation begins
   /// and the controller is updated.
@@ -95,43 +86,25 @@ class FTabs extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * [children] is empty.
-  /// * [initialIndex] is not within the range '0 <= initialIndex < tabs.length`.
-  /// * [controller] index does not match the [initialIndex].
   FTabs({
     required this.children,
+    this.control = const .managed(),
     this.scrollable = false,
     this.physics,
-    this.controller,
     this.style,
-    this.onChange,
     this.onPress,
     this.mouseCursor = .defer,
-    this.initialIndex = 0,
     super.key,
-  }) : assert(children.isNotEmpty, 'Must provide at least 1 tab.'),
-       assert(
-         0 <= initialIndex && initialIndex < children.length,
-         'initialIndex ($initialIndex) must be between 0 and the number of children (${children.length})',
-       ),
-       assert(
-         controller == null || initialIndex == 0,
-         'Cannot provide both controller and initialIndex. To fix, set the initialIndex on the controller.',
-       ),
-       assert(
-         controller == null || controller.length == children.length,
-         "Controller's number of tabs (${controller.length} must match the number of children (${children.length}).",
-       );
+  }) : assert(children.isNotEmpty, 'Must provide at least 1 tab.');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(ObjectFlagProperty.has('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
-      ..add(IntProperty('initialIndex', initialIndex))
       ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'))
       ..add(DiagnosticsProperty('physics', physics))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(IterableProperty('children', children));
@@ -147,30 +120,32 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller =
-        widget.controller ?? .new(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
-    _controller.addListener(_update);
+    _controller = widget.control.create(_update, this, widget.children.length);
   }
 
   @override
   void didUpdateWidget(covariant FTabs old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller.removeListener(_update);
-      }
+    _controller = widget.control.update(
+      old.control,
+      _controller,
+      _update,
+      this,
+      widget.children.length,
+    ).$1;
+  }
 
-      _controller =
-          widget.controller ?? .new(initialIndex: widget.initialIndex, length: widget.children.length, vsync: this);
-      _controller.addListener(_update);
-    }
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, _update);
+    super.dispose();
   }
 
   void _update() {
     if (!_controller._controller.indexIsChanging) {
-      widget.onChange?.call(_controller.index);
+      if (widget.control case Managed(:final onChange)) {
+        onChange?.call(_controller.index);
+      }
     }
     setState(() {});
   }
@@ -228,16 +203,6 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     }
 
     return tabs;
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_update);
-    }
-    super.dispose();
   }
 }
 

@@ -100,6 +100,8 @@ class _Controller extends FTimeFieldController {
     ValueChanged<FTime?> onChange,
     bool? popoverShown,
     ValueChanged<bool>? onPopoverChange,
+    Duration duration,
+    Curve curve,
   ) {
     _onChange = onChange;
     _popover = InternalPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
@@ -112,7 +114,7 @@ class _Controller extends FTimeFieldController {
       final current = ++_monotonic;
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (current == _monotonic) {
-          _picker.animateTo(value ?? const FTime());
+          _picker.animateTo(value ?? const FTime(), duration: duration, curve: curve);
         }
       });
     } else {
@@ -146,6 +148,8 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
   ///
   /// The [value] parameter contains the current selected time.
   /// The [onChange] callback is invoked when the user selects a time.
+  /// The [duration] when animating to [value] from an invalid/different time. Defaults to 200 milliseconds.
+  /// The [curve] when animating to [value] from an invalid/different time. Defaults to [Curves.easeOutCubic].
   ///
   /// ## Contract
   /// Throws [AssertionError] if only one of [popoverShown]/[onPopoverChange] is provided.
@@ -155,6 +159,8 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
     bool? popoverShown,
     ValueChanged<bool>? onPopoverChange,
     FPopoverMotion motion,
+    Duration duration,
+    Curve curve,
   }) = Lifted;
 
   /// Creates managed control using a [FTimeFieldController].
@@ -198,6 +204,10 @@ class Lifted extends FTimeFieldControl with _$LiftedMixin {
   final ValueChanged<bool>? onPopoverChange;
   @override
   final FPopoverMotion motion;
+  @override
+  final Duration duration;
+  @override
+  final Curve curve;
 
   const Lifted({
     required this.value,
@@ -205,6 +215,8 @@ class Lifted extends FTimeFieldControl with _$LiftedMixin {
     this.popoverShown,
     this.onPopoverChange,
     this.motion = const FPopoverMotion(),
+    this.duration = const Duration(milliseconds: 200),
+    this.curve = Curves.easeOutCubic,
   }) : assert(
          (popoverShown == null) == (onPopoverChange == null),
          'popoverShown and onPopoverChange must both be provided or both be null.',
@@ -223,7 +235,7 @@ class Lifted extends FTimeFieldControl with _$LiftedMixin {
 
   @override
   void _updateController(FTimeFieldController controller, TickerProvider vsync) =>
-      (controller as _Controller)._update(vsync, value, onChange, popoverShown, onPopoverChange);
+      (controller as _Controller)._update(vsync, value, onChange, popoverShown, onPopoverChange, duration, curve);
 }
 
 @internal
