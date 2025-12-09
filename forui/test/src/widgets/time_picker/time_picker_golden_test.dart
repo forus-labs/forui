@@ -52,8 +52,7 @@ void main() {
               width: 300,
               height: 300,
               child: FTimePicker(
-                controller: controller,
-                hour24: hour24,
+                control: .managed(controller: controller), hour24: hour24,
                 hourInterval: hourInterval,
                 minuteInterval: minuteInterval,
               ),
@@ -66,6 +65,178 @@ void main() {
     }
   }
 
+  group('lifted', () {
+    testWidgets('animates programmatically changed value', (tester) async {
+      final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));
+      FTime value = const FTime(10, 30);
+
+      await tester.pumpWidget(
+        sheet.record(
+          TestScaffold.app(
+            locale: const Locale('en'),
+            child: StatefulBuilder(
+              builder: (_, setState) => SizedBox(
+                width: 300,
+                height: 300,
+                child: FTimePicker(
+                  control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      value = const FTime(14, 45);
+
+      await tester.pumpFrames(
+        sheet.record(
+          TestScaffold.app(
+            locale: const Locale('en'),
+            child: StatefulBuilder(
+              builder: (_, setState) => SizedBox(
+                width: 300,
+                height: 300,
+                child: FTimePicker(
+                  control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const Duration(milliseconds: 200),
+      );
+
+      await expectLater(
+        sheet.collate(5),
+        matchesGoldenFile('time-picker/lifted-value-change-animation.png'),
+      );
+    });
+
+    testWidgets('animates drag back', (tester) async {
+      final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));
+      FTime value = const FTime(10, 30);
+
+      Widget buildWidget() => sheet.record(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          child: StatefulBuilder(
+            builder: (_, setState) => SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(
+                control: .lifted(value: value, onChange: (v) => setState(() {})),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(buildWidget());
+
+      final gesture = await tester.startGesture(tester.getCenter(find.byType(BuilderWheel).first));
+      await tester.pump(const Duration(milliseconds: 50));
+      await gesture.moveBy(const Offset(0, -100));
+      await tester.pump();
+      await gesture.up();
+
+      await tester.pumpFrames(buildWidget(), const Duration(milliseconds: 200));
+
+      await expectLater(
+        sheet.collate(5),
+        matchesGoldenFile('time-picker/lifted-drag-back-animation.png'),
+      );
+    });
+
+    testWidgets('change hour24 format', (tester) async {
+      var value = const FTime(14, 30); // 2:30 PM
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (_, setState) => SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(
+                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (_, setState) => SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(
+                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                hour24: true,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-picker/lifted-hour24.png'),
+      );
+    });
+
+    testWidgets('change locale', (tester) async {
+      var value = const FTime(22, 30); // 10:30 PM
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          child: StatefulBuilder(
+            builder: (_, setState) => SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(
+                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      // Change to Korean locale (period-first format)
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('ko'),
+          child: StatefulBuilder(
+            builder: (_, setState) => SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(
+                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-picker/lifted-change-locale.png'),
+      );
+    });
+  });
+
   group('boundary', () {
     // We cannot use the time directly adjacent to the boundary. The simulated drag occurs too quickly and doesn't
     // emit a scroll notification that crosses said boundary.
@@ -76,7 +247,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
+            child: SizedBox(width: 300, height: 300, child: FTimePicker(control: .managed(controller: controller))),
           ),
         );
 
@@ -97,7 +268,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
+            child: SizedBox(width: 300, height: 300, child: FTimePicker(control: .managed(controller: controller))),
           ),
         );
 
@@ -118,7 +289,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
+            child: SizedBox(width: 300, height: 300, child: FTimePicker(control: .managed(controller: controller))),
           ),
         );
 
@@ -139,7 +310,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
+            child: SizedBox(width: 300, height: 300, child: FTimePicker(control: .managed(controller: controller))),
           ),
         );
 

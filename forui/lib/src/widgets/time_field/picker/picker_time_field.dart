@@ -265,7 +265,7 @@ class _PickerPopover extends StatelessWidget {
       child: Padding(
         padding: const .symmetric(horizontal: 5.0),
         child: FTimePicker(
-          controller: controller._picker,
+          control: .managed(controller: controller._picker),
           style: style.pickerStyle,
           hour24: hour24,
           hourInterval: properties.hourInterval,

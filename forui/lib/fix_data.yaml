@@ -3599,6 +3599,84 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
+  # FTimePicker
+  - title: 'Migrate FTimePicker to control parameter'
+    date: 2025-12-09
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTimePicker
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      initial:
+        kind: fragment
+        value: arguments[initial]
+    oneOf:
+      # controller + onChange
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      # controller only
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      # initial + onChange
+      - if: "initial != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initial %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initial'
+          - kind: removeParameter
+            name: 'onChange'
+      # initial only
+      - if: "initial != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initial %})'
+          - kind: removeParameter
+            name: 'initial'
+      # onChange only
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
   # FTooltip
   - title: 'Migrate FTooltip(controller: ...) to control parameter'
     date: 2025-12-06

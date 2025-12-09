@@ -27,7 +27,7 @@ class _TimePickerPageState extends StatefulSampleState<TimePickerPage> {
   }
 
   @override
-  Widget sample(BuildContext context) => FTimePicker(controller: _controller, hour24: widget.hour24);
+  Widget sample(BuildContext context) => FTimePicker(control: .managed(controller: _controller), hour24: widget.hour24);
 }
 
 @RoutePage()
@@ -48,7 +48,7 @@ class _IntervalTimePickerPageState extends StatefulSampleState<IntervalTimePicke
   }
 
   @override
-  Widget sample(BuildContext context) => FTimePicker(controller: _controller, hourInterval: 2, minuteInterval: 5);
+  Widget sample(BuildContext context) => FTimePicker(control: .managed(controller: _controller), hourInterval: 2, minuteInterval: 5);
 }
 
 @RoutePage()
@@ -73,7 +73,7 @@ class _AnimatedTimePickerPageState extends StatefulSampleState<AnimatedTimePicke
   Widget sample(BuildContext context) => Column(
     mainAxisSize: .min,
     children: [
-      SizedBox(height: 300, child: FTimePicker(controller: _controller)),
+      SizedBox(height: 300, child: FTimePicker(control: .managed(controller: _controller))),
       FButton(
         child: const Text('Funny button'),
         onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),

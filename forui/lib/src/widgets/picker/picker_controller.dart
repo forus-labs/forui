@@ -46,11 +46,16 @@ class FPickerController extends FValueNotifier<List<int>> {
         wheels[i].jumpToItem(index);
       }
     }
+
     _value = value;
   }
 
   // ignore: avoid_setters_without_getters
-  set _value(List<int> value) => super.value = value;
+  set _value(List<int> value) {
+    if (!listEquals(super.value, value)) {
+      super.value = value;
+    }
+  }
 
   @override
   void dispose() {

@@ -113,7 +113,7 @@ void main() {
       firstController.value = [1, 1];
       await tester.pump();
 
-      expect(count, 7);
+      expect(count, 2);
 
       final secondController = autoDispose(FPickerController(initialIndexes: [0, 0]));
       await tester.pumpWidget(picker(secondController, onChange));
@@ -122,7 +122,7 @@ void main() {
       secondController.value = [3, 3];
       await tester.pump();
 
-      expect(count, 11);
+      expect(count, 6);
     });
 
     testWidgets('when onChange callback changes but controller is the same', (tester) async {
@@ -135,15 +135,15 @@ void main() {
       controller.value = [1, 1];
       await tester.pump();
 
-      expect(first, 7);
+      expect(first, 2);
 
       await tester.pumpWidget(picker(controller, (_) => second++));
 
       controller.value = [2, 2];
       await tester.pump();
 
-      expect(first, 7);
-      expect(second, 5);
+      expect(first, 2);
+      expect(second, 2);
     });
 
     testWidgets('when both controller and onChange callback change', (tester) async {
@@ -156,7 +156,7 @@ void main() {
       firstController.value = [1, 1];
       await tester.pump();
 
-      expect(first, 7);
+      expect(first, 2);
 
       final secondController = autoDispose(FPickerController(initialIndexes: [0, 0]));
       await tester.pumpWidget(picker(secondController, (_) => second++));
@@ -165,7 +165,7 @@ void main() {
       secondController.value = [3, 3];
       await tester.pump();
 
-      expect(first, 7);
+      expect(first, 2);
       expect(second, 4);
     });
 
@@ -178,14 +178,14 @@ void main() {
       controller.value = [1, 1];
       await tester.pump();
 
-      expect(count, 7);
+      expect(count, 2);
 
       await tester.pumpWidget(TestScaffold(child: const SizedBox()));
 
       controller.value = [2, 2];
       await tester.pump();
 
-      expect(count, 7);
+      expect(count, 2);
     });
 
     testWidgets('onChange called on multiple controller updates', (tester) async {

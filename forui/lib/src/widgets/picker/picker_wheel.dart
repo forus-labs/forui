@@ -133,7 +133,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
               controller.animateToItem(
                 controller.selectedItem + (intent.direction == .up ? -1 : 1),
                 duration: const Duration(milliseconds: 100),
-                curve: Curves.easeOutCubic,
+                curve: Curves.decelerate,
               );
 
               return null;

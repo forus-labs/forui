@@ -22,7 +22,11 @@ void main() {
   ]) {
     group(grouping, () {
       testWidgets('does nothing', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller)),
+          ),
+        );
 
         function(const FTime());
         await tester.pumpAndSettle();
@@ -32,7 +36,11 @@ void main() {
       });
 
       testWidgets('set to rounded hour', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller, hourInterval: 2)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller), hourInterval: 2),
+          ),
+        );
 
         function(const FTime(13, 31));
         await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -43,7 +51,11 @@ void main() {
       });
 
       testWidgets('set to rounded minute', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller, minuteInterval: 5)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller), minuteInterval: 5),
+          ),
+        );
 
         function(const FTime(13, 31));
         await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -54,7 +66,11 @@ void main() {
       });
 
       testWidgets('set to 12-hour time before noon', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller)),
+          ),
+        );
 
         function(const FTime(5, 30));
         await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -65,7 +81,11 @@ void main() {
       });
 
       testWidgets('set to 12-hour time after noon', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller)),
+          ),
+        );
 
         function(const FTime(13, 30));
         await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -76,7 +96,11 @@ void main() {
       });
 
       testWidgets('set to 24-hour time', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller, hour24: true)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller), hour24: true),
+          ),
+        );
 
         function(const FTime(13, 30));
         await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -91,7 +115,11 @@ void main() {
   testWidgets('dispose()', (tester) async {
     final controller = FTimePickerController();
 
-    await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTimePicker(control: .managed(controller: controller)),
+      ),
+    );
 
     controller.dispose();
     expect(controller.disposed, true);
@@ -104,7 +132,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: const Locale('ko'),
-            child: FTimePicker(controller: controller),
+            child: FTimePicker(control: .managed(controller: controller)),
           ),
         );
 
@@ -115,7 +143,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: const Locale('ko'),
-            child: FTimePicker(controller: controller),
+            child: FTimePicker(control: .managed(controller: controller)),
           ),
         );
 
@@ -126,7 +154,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: const Locale('ko'),
-            child: FTimePicker(controller: controller, hour24: true),
+            child: FTimePicker(control: .managed(controller: controller), hour24: true),
           ),
         );
 
@@ -141,7 +169,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: const Locale('ko'),
-            child: FTimePicker(controller: controller),
+            child: FTimePicker(control: .managed(controller: controller)),
           ),
         );
 
@@ -157,7 +185,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: const Locale('ko'),
-            child: FTimePicker(controller: controller),
+            child: FTimePicker(control: .managed(controller: controller)),
           ),
         );
 
@@ -172,7 +200,11 @@ void main() {
 
     group('period last', () {
       testWidgets('12-hour time after noon', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller)),
+          ),
+        );
 
         controller
           ..picker?.dispose()
@@ -183,7 +215,11 @@ void main() {
       });
 
       testWidgets('12-hour time before noon', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller)),
+          ),
+        );
 
         controller
           ..picker?.dispose()
@@ -196,7 +232,11 @@ void main() {
 
     group('24 hours', () {
       testWidgets('24-hour time', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FTimePicker(controller: controller, hour24: true)));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller), hour24: true),
+          ),
+        );
 
         controller
           ..picker?.dispose()
@@ -208,7 +248,9 @@ void main() {
 
       testWidgets('rounded hour', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(child: FTimePicker(controller: controller, hour24: true, hourInterval: 6)),
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller), hour24: true, hourInterval: 6),
+          ),
         );
 
         controller
@@ -221,7 +263,9 @@ void main() {
 
       testWidgets('rounded minute', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(child: FTimePicker(controller: controller, hour24: true, minuteInterval: 5)),
+          TestScaffold.app(
+            child: FTimePicker(control: .managed(controller: controller), hour24: true, minuteInterval: 5),
+          ),
         );
 
         controller
