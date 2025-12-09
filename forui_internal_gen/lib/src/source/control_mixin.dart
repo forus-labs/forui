@@ -7,47 +7,61 @@ import 'package:meta/meta.dart';
 ///
 /// This will probably be replaced by an augment class in the future.
 @internal
-abstract class ControlFunctionsMixin extends FunctionsMixin {
+abstract class ControlMixin extends FunctionsMixin {
   /// The sealed parent class.
   final ClassElement supertype;
 
-  /// The `_update` method from the sealed parent, if any.
-  final MethodElement? update;
+  /// The `_update` method.
+  final MethodElement update;
 
-  /// The `_dispose` method from the sealed parent, if any.
-  final MethodElement? dispose;
+  /// The `_create` method.
+  final Method create;
+
+  /// The `_dispose` method.
+  final Method dispose;
+
+  /// The `_default` method.
+  final Method default_;
 
   /// All sibling subclasses (excluding this one).
   final List<ClassElement> siblings;
 
-  /// Creates a new [ControlFunctionsMixin].
-  factory ControlFunctionsMixin({
+  /// Creates a new [ControlMixin].
+  factory ControlMixin({
     required ClassElement element,
     required ClassElement supertype,
-    required MethodElement? update,
-    required MethodElement? dispose,
+    required MethodElement update,
+    required Method create,
+    required Method dispose,
+    required Method default_,
     required List<ClassElement> siblings,
   }) =>
       element.name!.contains('Lifted') // TODO: Support controls that have more than 2 variants
-      ? _LiftedControlFunctionsMixin(
+      ? _LiftedControlMixin(
           element: element,
           supertype: supertype,
           update: update,
+          create: create,
           dispose: dispose,
+          default_: default_,
           siblings: siblings,
         )
-      : _ManagedControlFunctionsMixin(
+      : _ManagedControlMixin(
           element: element,
           supertype: supertype,
           update: update,
+          create: create,
           dispose: dispose,
+          default_: default_,
           siblings: siblings,
         );
 
-  ControlFunctionsMixin._({
+  ControlMixin._({
     required ClassElement element,
     required this.supertype,
     required this.update,
+    required this.create,
+    required this.default_,
     required this.dispose,
     required this.siblings,
   }) : super(element);
@@ -58,10 +72,10 @@ abstract class ControlFunctionsMixin extends FunctionsMixin {
   Method get _update => Method(
     (m) => m
       ..annotations.add(refer('override'))
-      ..returns = refer(update!.returnType.getDisplayString())
+      ..returns = refer(update.returnType.getDisplayString())
       ..name = '_update'
       ..requiredParameters.addAll([
-        for (final parameter in update!.formalParameters)
+        for (final parameter in update.formalParameters)
           Parameter(
             (p) => p
               ..name = parameter.name!
@@ -71,55 +85,49 @@ abstract class ControlFunctionsMixin extends FunctionsMixin {
       ..body = _updateBody,
   );
 
-  String get _createParameters => [
-    for (final p in update!.formalParameters)
-      if (p.name case final name when name != 'old' && name != 'controller') p.name!,
-  ].join(', ');
-
   /// Generates the body of the `_update` method.
   ///
   /// We assume that the parameter names are always old, controller and callback.
   Code get _updateBody;
+
+  String get _createParameters => [for (final p in create.requiredParameters) p.name].join(', ');
+
+  String get _defaultParameters => [for (final p in default_.requiredParameters) p.name].join(', ');
 }
 
-class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
-  _LiftedControlFunctionsMixin({
+class _LiftedControlMixin extends ControlMixin {
+  _LiftedControlMixin({
     required super.element,
     required super.supertype,
     required super.update,
+    required super.create,
     required super.dispose,
+    required super.default_,
     required super.siblings,
-  }) : assert(siblings.length == 1, 'LiftedControlFunctionsMixin only supports exactly 2 variants.'),
+  }) : assert(siblings.length == 1, '_LiftedControlMixin only supports exactly 2 variants.'),
        super._();
 
   @override
   Mixin generate() =>
       (MixinBuilder()
-            ..name = '_\$${element.name}Functions'
+            ..name = '_\$${element.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..on = refer('Diagnosticable')
             ..implements.addAll([refer('${supertype.name}$_typeParameters')])
-            ..methods.addAll([
-              ...getters,
-              if (update != null) ...[_update, _updateController],
-              if (dispose != null) _dispose,
-              debugFillProperties,
-              equals,
-              hash,
-            ]))
+            ..methods.addAll([...getters, _update, _updateController, _dispose, debugFillProperties, equals, hash]))
           .build();
 
   @override
   Code get _updateBody {
     final updateParameters = [
-      for (final p in update!.formalParameters)
+      for (final p in update.formalParameters)
         if (p.name case final name when name != 'old' && name != 'callback') p.name!,
     ].join(', ');
 
     return Code('''
       switch (old) {
         case _ when old == this:
-          return (controller, false);
+          return (_default($_defaultParameters), false);
 
         // Lifted (Value A) -> Lifted (Value B)
         case ${element.name}():
@@ -137,7 +145,7 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
           return (_create($_createParameters), true);
 
         default:
-          return (controller, false);
+          return (_default($_defaultParameters), false);
       }
     ''');
   }
@@ -147,7 +155,7 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
       ..returns = refer('void')
       ..name = '_updateController'
       ..requiredParameters.addAll([
-        for (final parameter in update!.formalParameters)
+        for (final parameter in update.formalParameters)
           if (parameter.name case final name? when name != 'old' && name != 'callback')
             Parameter(
               (p) => p
@@ -157,55 +165,40 @@ class _LiftedControlFunctionsMixin extends ControlFunctionsMixin {
       ]),
   );
 
-  Method get _dispose => Method(
-    (m) => m
-      ..annotations.add(refer('override'))
-      ..returns = refer('void')
-      ..name = '_dispose'
-      ..requiredParameters.addAll([
-        for (final parameter in dispose!.formalParameters)
-          Parameter(
-            (p) => p
-              ..name = parameter.name!
-              ..type = refer(parameter.type.getDisplayString()),
-          ),
-      ])
-      ..body = const Code('controller.dispose();'),
-  );
+  Method get _dispose =>
+      (dispose.toBuilder()
+            ..annotations.add(refer('override'))
+            ..body = const Code('controller.dispose();'))
+          .build();
 }
 
-class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
-  _ManagedControlFunctionsMixin({
+class _ManagedControlMixin extends ControlMixin {
+  _ManagedControlMixin({
     required super.element,
     required super.supertype,
     required super.update,
+    required super.create,
     required super.dispose,
+    required super.default_,
     required super.siblings,
-  }) : assert(siblings.length == 1, 'ManagedControlFunctionsMixin only supports exactly 2 variants.'),
+  }) : assert(siblings.length == 1, '_ManagedControlMixin only supports exactly 2 variants.'),
        super._();
 
   @override
   Mixin generate() =>
       (MixinBuilder()
-            ..name = '_\$${element.name}Functions'
+            ..name = '_\$${element.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..on = refer('Diagnosticable')
             ..implements.addAll([refer('${supertype.name}$_typeParameters')])
-            ..methods.addAll([
-              ...getters,
-              if (update != null) ...[_update],
-              if (dispose != null) _dispose,
-              debugFillProperties,
-              equals,
-              hash,
-            ]))
+            ..methods.addAll([...getters, _update, _dispose, debugFillProperties, equals, hash]))
           .build();
 
   @override
   Code get _updateBody => Code('''
       switch (old) {
         case _ when old == this:
-          return (controller, false);
+          return (_default($_defaultParameters), false);
 
         // External (Controller A) -> External (Controller B)
         case ${element.name}(controller: final old?) when this.controller != null && this.controller != old:
@@ -228,29 +221,19 @@ class _ManagedControlFunctionsMixin extends ControlFunctionsMixin {
           return (_create($_createParameters), true);
 
         default:
-          return (controller, false);
+          return (_default($_defaultParameters), false);
       }
     ''');
 
-  Method get _dispose => Method(
-    (m) => m
-      ..annotations.add(refer('override'))
-      ..returns = refer('void')
-      ..name = '_dispose'
-      ..requiredParameters.addAll([
-        for (final parameter in dispose!.formalParameters)
-          Parameter(
-            (p) => p
-              ..name = parameter.name!
-              ..type = refer(parameter.type.getDisplayString()),
-          ),
-      ])
-      ..body = const Code('''
-        if (this.controller != null) {
-          controller.removeListener(callback);
-        } else {
-          controller.dispose();
-        }
-        '''),
-  );
+  Method get _dispose =>
+      (dispose.toBuilder()
+            ..annotations.add(refer('override'))
+            ..body = const Code('''
+              if (this.controller != null) {
+                controller.removeListener(callback);
+              } else {
+                controller.dispose();
+              }
+        '''))
+          .build();
 }

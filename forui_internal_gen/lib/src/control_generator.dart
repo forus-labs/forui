@@ -3,7 +3,8 @@ import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:collection/collection.dart';
 import 'package:forui_internal_gen/src/source/control_internal_extension.dart';
-import 'package:forui_internal_gen/src/source/control_functions_mixin.dart';
+import 'package:forui_internal_gen/src/source/control_mixin.dart';
+import 'package:forui_internal_gen/src/source/control_parent_mixin.dart';
 import 'package:source_gen/source_gen.dart';
 
 final _control = RegExp(r'^F.*(Control)$');
@@ -27,34 +28,44 @@ class ControlGenerator extends Generator {
     }
 
     for (final MapEntry(key: supertype, value: subtypes) in types.entries) {
-      // Find _create, _update and _dispose methods in the sealed class.
       final create = supertype.methods.firstWhereOrNull((m) => m.name == '_create');
       final update = supertype.methods.firstWhereOrNull((m) => m.name == '_update');
       final dispose = supertype.methods.firstWhereOrNull((m) => m.name == '_dispose');
 
-      // Generate mixins for each subtype.
+      if (update == null) {
+        continue;
+      }
+
+      final parentMixin = ControlParentMixin(supertype: supertype, create: create, update: update, dispose: dispose);
+      final createMethod = parentMixin.createMethod;
+      final disposeMethod = parentMixin.disposeMethod;
+      final defaultMethod = parentMixin.defaultMethod;
+
       generated
         ..add(
           _emitter
               .visitExtension(
                 ControlInternalExtension(
                   supertype: supertype,
-                  create: create,
                   update: update,
-                  dispose: dispose,
+                  dispose: disposeMethod,
+                  create: createMethod,
                 ).generate(),
               )
               .toString(),
         )
+        ..add(_emitter.visitMixin(parentMixin.generate()).toString())
         ..addAll([
           for (final type in subtypes)
             _emitter
                 .visitMixin(
-                  ControlFunctionsMixin(
+                  ControlMixin(
                     element: type,
                     supertype: supertype,
                     update: update,
-                    dispose: dispose,
+                    create: createMethod,
+                    dispose: disposeMethod,
+                    default_: defaultMethod,
                     siblings: subtypes.whereNot((t) => t == type).toList(),
                   ).generate(),
                 )

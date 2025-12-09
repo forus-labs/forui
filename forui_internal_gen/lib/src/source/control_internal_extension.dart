@@ -9,20 +9,20 @@ class ControlInternalExtension {
   /// The sealed parent class.
   final ClassElement supertype;
 
-  /// The `_create` method from the sealed parent, if any.
-  final MethodElement? create;
+  /// The `_update` method.
+  final MethodElement update;
 
-  /// The `_update` method from the sealed parent, if any.
-  final MethodElement? update;
+  /// The `_create` method.
+  final Method create;
 
-  /// The `_dispose` method from the sealed parent, if any.
-  final MethodElement? dispose;
+  /// The `_dispose` method.
+  final Method dispose;
 
   /// Creates a new [ControlInternalExtension].
   ControlInternalExtension({
     required this.supertype,
-    required this.create,
     required this.update,
+    required this.create,
     required this.dispose,
   });
 
@@ -38,23 +38,34 @@ class ControlInternalExtension {
           ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
           ..on = refer('${supertype.name}$typeParameters')
           ..methods.addAll([
-            if (create != null) _delegate(create!),
-            if (update != null) _delegate(update!),
-            if (dispose != null) _delegate(dispose!),
+            (create.toBuilder()
+                  ..name = create.name!.replaceFirst('_', '')
+                  ..lambda = true
+                  ..body = Code('''
+                    ${create.name!}(${create.requiredParameters.map((p) => p.name).join(', ')})
+            '''))
+                .build(),
+            _update,
+            (dispose.toBuilder()
+                  ..name = dispose.name!.replaceFirst('_', '')
+                  ..lambda = true
+                  ..body = Code('''
+                    ${dispose.name!}(${dispose.requiredParameters.map((p) => p.name).join(', ')})
+            '''))
+                .build(),
           ]))
         .build();
   }
 
-  /// Generates a method that delegates to a private method.
-  Method _delegate(MethodElement method) {
-    final paramNames = method.formalParameters.map((p) => p.name!).join(', ');
+  Method get _update {
+    final paramNames = update.formalParameters.map((p) => p.name!).join(', ');
 
     return Method(
       (m) => m
-        ..returns = refer(method.returnType.getDisplayString())
-        ..name = method.name!.replaceFirst('_', '')
+        ..returns = refer(update.returnType.getDisplayString())
+        ..name = update.name!.replaceFirst('_', '')
         ..requiredParameters.addAll([
-          for (final parameter in method.formalParameters)
+          for (final parameter in update.formalParameters)
             Parameter(
               (p) => p
                 ..name = parameter.name!
@@ -62,7 +73,7 @@ class ControlInternalExtension {
             ),
         ])
         ..lambda = true
-        ..body = Code('${method.name!}($paramNames)'),
+        ..body = Code('${update.name!}($paramNames)'),
     );
   }
 }
