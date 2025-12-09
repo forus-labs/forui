@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/basic.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -115,7 +114,7 @@ void main() {
 
     testWidgets('animates drag back', (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));
-      FTime value = const FTime(10, 30);
+      const value = FTime(10, 30);
 
       Widget buildWidget() => sheet.record(
         TestScaffold.app(
