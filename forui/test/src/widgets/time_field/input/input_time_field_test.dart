@@ -10,6 +10,27 @@ import '../../../test_scaffold.dart';
 void main() {
   const key = Key('field');
 
+  group('managed', () {
+    testWidgets('onChange callback called', (tester) async {
+      FTime? changedValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FTimeField(key: key, control: .managed(onChange: (value) => changedValue = value)),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+
+      expect(changedValue, isNotNull);
+    });
+  });
+
   for (final (index, (locale, placeholder)) in const [
     (null, 'HH:MM --'),
     (Locale('en', 'SG'), 'HH:MM --'),
@@ -164,7 +185,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: FTimeField(controller: controller, key: key),
+          child: FTimeField(control: .managed(controller: controller), key: key),
         ),
       );
 

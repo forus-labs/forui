@@ -31,9 +31,9 @@ final class FTimePickerController extends FValueNotifier<FTime> {
     }
 
     final values = [
-      (value.hour / hourInterval).round(),
-      (value.minute / minuteInterval).round(),
-      if (!hours24) value.hour < 12 ? 0 : 1,
+      (value.hour / _hourInterval).round(),
+      (value.minute / _minuteInterval).round(),
+      if (!_hours24) value.hour < 12 ? 0 : 1,
     ];
 
     try {
@@ -80,10 +80,10 @@ extension FTimePickerControllers on FTimePickerController {
     // It is difficult to fix without FixedExtentScrollController exposing the keepOffset parameter.
     // See https://github.com/flutter/flutter/issues/162972
     this
-      ..pattern = format.pattern!
-      ..hours24 = !format.pattern!.contains('a')
-      ..hourInterval = hourInterval
-      ..minuteInterval = minuteInterval;
+      .._pattern = format.pattern!
+      .._hours24 = !format.pattern!.contains('a')
+      .._hourInterval = hourInterval
+      .._minuteInterval = minuteInterval;
 
     _picker?.dispose();
     _picker = FPickerController(initialIndexes: encode(value));
@@ -92,9 +92,9 @@ extension FTimePickerControllers on FTimePickerController {
 
   /// Encodes the given [value] as picker wheels.
   List<int> encode(FTime value) {
-    final indexes = [(value.hour / hourInterval).round(), (value.minute / minuteInterval).round()];
+    final indexes = [(value.hour / _hourInterval).round(), (value.minute / _minuteInterval).round()];
 
-    if (!hours24) {
+    if (!_hours24) {
       final period = value.hour < 12 ? 0 : 1;
       _pattern.startsWith('a') ? indexes.insert(0, period) : indexes.add(period);
     }
@@ -108,15 +108,14 @@ extension FTimePickerControllers on FTimePickerController {
     final hourIndex = _pattern.startsWith('a') ? 1 : 0;
     final periodIndex = _pattern.startsWith('a') ? 0 : 2;
 
-    var hour = (indexes[hourIndex] * hourInterval) % (hours24 ? 24 : 12);
-    if (!hours24 && indexes[periodIndex].isOdd) {
+    var hour = (indexes[hourIndex] * _hourInterval) % (_hours24 ? 24 : 12);
+    if (!_hours24 && indexes[periodIndex].isOdd) {
       hour += 12;
     }
 
-    _value = FTime(hour, (indexes[hourIndex + 1] * minuteInterval) % 60);
+    _value = FTime(hour, (indexes[hourIndex + 1] * _minuteInterval) % 60);
   }
 
-  // TODO: Remove redundant getters.0
   FPickerController? get picker => _picker;
 
   set picker(FPickerController? controller) => _picker = controller;
@@ -125,19 +124,11 @@ extension FTimePickerControllers on FTimePickerController {
 
   String get pattern => _pattern;
 
-  set pattern(String value) => _pattern = value;
-
   bool get hours24 => _hours24;
-
-  set hours24(bool value) => _hours24 = value;
 
   int get hourInterval => _hourInterval;
 
-  set hourInterval(int value) => _hourInterval = value;
-
   int get minuteInterval => _minuteInterval;
-
-  set minuteInterval(int value) => _minuteInterval = value;
 }
 
 final class _Controller extends FTimePickerController {
@@ -150,9 +141,10 @@ final class _Controller extends FTimePickerController {
 
   void update(FTime value, ValueChanged<FTime> onChange, Duration duration, Curve curve) {
     _onChange = onChange;
+
     final current = ++_monotonic;
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (current == _monotonic) {
+      if (super.value != value && current == _monotonic) {
         animateTo(value, duration: duration, curve: curve);
       }
     });

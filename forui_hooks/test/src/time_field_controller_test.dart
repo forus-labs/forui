@@ -17,7 +17,7 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFTimeFieldController();
-            return FTimeField(controller: controller);
+            return FTimeField(control: .managed(controller: controller));
           },
         ),
       ),

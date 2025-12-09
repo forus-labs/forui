@@ -9,67 +9,10 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/time_field/input/time_input.dart';
 import 'package:forui/src/widgets/time_field/picker/picker_form_field.dart';
 import 'package:forui/src/widgets/time_field/picker/properties.dart';
+import 'package:forui/src/widgets/time_field/time_field_controller.dart';
 
 part 'input/input_time_field.dart';
-
 part 'picker/picker_time_field.dart';
-
-/// The time field's controller.
-class FTimeFieldController extends FValueNotifier<FTime?> {
-  static String? _defaultValidator(FTime? _) => null;
-
-  /// The controller for the popover. Does nothing if the time field is input only.
-  ///
-  /// ## Contract
-  /// Manually disposing this controller is undefined behavior. Dispose this [FTimeFieldController] instead.
-  final FPopoverController popover;
-
-  /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
-  /// whether a time in a picker is selectable.
-  ///
-  /// Defaults to always returning null.
-  final FormFieldValidator<FTime> validator;
-
-  final FTimePickerController _picker;
-  bool _mutating = false;
-
-  /// Creates a [FTimeFieldController].
-  FTimeFieldController({
-    required TickerProvider vsync,
-    this.validator = _defaultValidator,
-    FTime? initialTime,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion),
-       _picker = FTimePickerController(initial: initialTime ?? const FTime()),
-       super(initialTime) {
-    _picker.addValueListener((time) {
-      try {
-        _mutating = true;
-        value = time;
-      } finally {
-        _mutating = false;
-      }
-    });
-
-    addValueListener(update);
-  }
-
-  @override
-  void dispose() {
-    _picker.dispose();
-    popover.dispose();
-    super.dispose();
-  }
-}
-
-@internal
-extension FTimeFieldControllers on FTimeFieldController {
-  void update(FTime? time) {
-    if (!_mutating && time != null) {
-      _picker.value = time;
-    }
-  }
-}
 
 /// A time field allows a time to be selected from a picker or input field.
 ///
@@ -106,12 +49,8 @@ abstract class FTimeField extends StatefulWidget {
 
   static Widget _fieldBuilder(BuildContext _, FTimeFieldStyle _, Set<WidgetState> _, Widget child) => child;
 
-  /// The controller.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * Both [controller] and [initialTime] are provided.
-  final FTimeFieldController? controller;
+  /// The control for managing the time field's state.
+  final FTimeFieldControl control;
 
   /// The style.
   ///
@@ -122,13 +61,6 @@ abstract class FTimeField extends StatefulWidget {
   /// dart run forui style create time-field
   /// ```
   final FTimeFieldStyle Function(FTimeFieldStyle style)? style;
-
-  /// The initial time.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * Both [controller] and [initialTime] are provided.
-  final FTime? initialTime;
 
   /// True if the time field should use the 24-hour format.
   ///
@@ -166,9 +98,6 @@ abstract class FTimeField extends StatefulWidget {
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
 
-  /// Handler called when the time changes.
-  final ValueChanged<FTime?>? onChange;
-
   /// {@macro forui.foundation.form_field_properties.onSaved}
   final FormFieldSetter<FTime>? onSaved;
 
@@ -195,9 +124,8 @@ abstract class FTimeField extends StatefulWidget {
   final String? forceErrorText;
 
   const FTimeField._({
-    this.controller,
+    this.control = const .managed(),
     this.style,
-    this.initialTime,
     this.hour24 = false,
     this.autofocus = false,
     this.focusNode,
@@ -207,17 +135,13 @@ abstract class FTimeField extends StatefulWidget {
     this.label,
     this.description,
     this.enabled = true,
-    this.onChange,
     this.onSaved,
     this.onReset,
-    this.autovalidateMode = AutovalidateMode.onUnfocus,
+    this.autovalidateMode = .onUnfocus,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     super.key,
-  }) : assert(
-         controller == null || initialTime == null,
-         'Cannot provide both a controller and initialTime. To fix, set the initial time directly in the controller.',
-       );
+  });
 
   /// Creates a time field that wraps a text input field.
   ///
@@ -243,9 +167,8 @@ abstract class FTimeField extends StatefulWidget {
   /// See also:
   /// * [FTimeField.picker] - Creates a time field with only a picker.
   const factory FTimeField({
-    FTimeFieldController? controller,
+    FTimeFieldControl control,
     FTimeFieldStyle Function(FTimeFieldStyle style)? style,
-    FTime? initialTime,
     bool hour24,
     bool autofocus,
     FocusNode? focusNode,
@@ -264,7 +187,6 @@ abstract class FTimeField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
-    ValueChanged<FTime?>? onChange,
     FormFieldSetter<FTime>? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
@@ -314,9 +236,8 @@ abstract class FTimeField extends StatefulWidget {
   /// See also:
   /// * [FTimeField.new] - Creates a time field with only an input field.
   const factory FTimeField.picker({
-    FTimeFieldController? controller,
+    FTimeFieldControl control,
     FTimeFieldStyle Function(FTimeFieldStyle style)? style,
-    FTime? initialTime,
     bool hour24,
     DateFormat? format,
     TextAlign textAlign,
@@ -343,7 +264,6 @@ abstract class FTimeField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
-    ValueChanged<FTime?>? onChange,
     FormFieldSetter<FTime>? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
@@ -356,9 +276,8 @@ abstract class FTimeField extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('initialTime', initialTime))
       ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -367,7 +286,6 @@ abstract class FTimeField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
@@ -375,6 +293,6 @@ abstract class FTimeField extends StatefulWidget {
   }
 }
 
-abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with SingleTickerProviderStateMixin {
-  late FTimeFieldController _controller = widget.controller ?? .new(vsync: this, initialTime: widget.initialTime);
+abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with TickerProviderStateMixin {
+  late FTimeFieldController _controller;
 }

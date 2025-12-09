@@ -21,8 +21,7 @@ class _InputTimeField extends FTimeField {
     this.onSubmit,
     this.mouseCursor,
     this.canRequestFocus = true,
-    super.controller,
-    super.initialTime,
+    super.control,
     super.style,
     super.hour24,
     super.autofocus,
@@ -33,7 +32,6 @@ class _InputTimeField extends FTimeField {
     super.label,
     super.description,
     super.enabled,
-    super.onChange,
     super.onSaved,
     super.onReset,
     super.autovalidateMode,
@@ -65,30 +63,30 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
   void initState() {
     super.initState();
-    _controller.addValueListener(_onChange);
+    _controller = widget.control.create(_handleOnChange, this);
   }
 
   @override
   void didUpdateWidget(covariant _InputTimeField old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeValueListener(_onChange);
-      }
-
-      _controller = widget.controller ?? .new(vsync: this, initialTime: _controller.value);
-      _controller.addValueListener(_onChange);
-    }
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
   }
 
-  void _onChange(FTime? time) => widget.onChange?.call(time);
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, _handleOnChange);
+    super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.timeFieldStyle) ?? context.theme.timeFieldStyle;
-
     return TimeInput(
       controller: _controller,
       timeController: _controller,
@@ -123,15 +121,5 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
       builder: (context, _, states, field) => widget.builder(context, style, states, field),
     );
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeValueListener(_onChange);
-    }
-    super.dispose();
   }
 }
