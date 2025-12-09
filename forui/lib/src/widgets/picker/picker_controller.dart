@@ -148,6 +148,31 @@ sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
     VoidCallback callback,
     int wheelCount,
   );
+
+  // The attachment logic must be handled inside FPickerControl since it will otherwise always be called when updating
+  // from Lifted -> Lifted, causing an infinite loop.
+  void _updateWheels(FPickerController controller) {
+    for (final wheel in controller.wheels) {
+      wheel.dispose();
+    }
+    controller.wheels.clear();
+
+    for (final (index, item) in controller.value.indexed) {
+      controller.wheels.add(
+        FixedExtentScrollController(
+          initialItem: item,
+          onAttach: (position) {
+            if (position.hasContentDimensions) {
+              final copy = controller.value;
+              // This is evil but it's the only way to get the item index as it's hidden in a private class.
+              copy[index] = (position as FixedExtentMetrics).itemIndex;
+              controller.replace(copy);
+            }
+          },
+        ),
+      );
+    }
+  }
 }
 
 @internal
@@ -170,26 +195,10 @@ class Lifted extends FPickerControl with _$LiftedMixin {
 
   @override
   FPickerController _create(VoidCallback callback, int wheelCount) {
-    final created = _Controller(initialIndexes: value, onChange: onChange);
-    // The attachment logic must be handled inside _create since it will otherwise always be called when updating
-    // from Lifted -> Lifted, causing an infinite loop.
-    for (final (index, item) in created.value.indexed) {
-      created.wheels.add(
-        FixedExtentScrollController(
-          initialItem: item,
-          onAttach: (position) {
-            if (position.hasContentDimensions) {
-              final copy = created.value;
-              // This is evil but it's the only way to get the item index as it's hidden in a private class.
-              copy[index] = (position as FixedExtentMetrics).itemIndex;
-              created.replace(copy);
-            }
-          },
-        ),
-      );
-    }
+    final controller = _Controller(initialIndexes: value, onChange: onChange);
+    _updateWheels(controller);
 
-    return created..addListener(callback);
+    return controller..addListener(callback);
   }
 
   @override
@@ -216,29 +225,8 @@ class Managed extends FPickerControl with Diagnosticable, _$ManagedMixin {
 
   @override
   FPickerController _create(VoidCallback callback, int wheelCount) {
-    if (controller case final controller?) {
-      for (final wheel in controller.wheels) {
-        wheel.dispose();
-      }
-      controller.wheels.clear();
-    }
-
     final created = controller ?? FPickerController(initialIndexes: initial ?? .filled(wheelCount, 0));
-    for (final (index, item) in created.value.indexed) {
-      created.wheels.add(
-        FixedExtentScrollController(
-          initialItem: item,
-          onAttach: (position) {
-            if (position.hasContentDimensions) {
-              final copy = created.value;
-              // This is evil but it's the only way to get the item index as it's hidden in a private class.
-              copy[index] = (position as FixedExtentMetrics).itemIndex;
-              created.replace(copy);
-            }
-          },
-        ),
-      );
-    }
+    _updateWheels(created);
 
     return created..addListener(callback);
   }

@@ -233,6 +233,13 @@ dart fix --apply
 * **Breaking** Rename `FTimeField.shift` to `FTimeField.overflow`.
 
 
+### `FTimePicker`
+* Add `FTimePickerControl`.
+
+* **Breaking** Remove `FTimePicker.controller`. Use `FTimePicker(control: .managed(...))` instead.
+* **Breaking** Remove `FTimePicker.onChange`. Use `FTimePicker(control: .managed(...))` instead.
+
+
 ### `FTooltip`
 * Add `FTooltipControl`.
 
