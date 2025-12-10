@@ -97,7 +97,6 @@ class DateInputController extends InputController {
 
   @visibleForTesting
   void updateFromCalendar() {
-    print('from controller: ${controller.value}');
     if (!mutating) {
       rawValue = TextEditingValue(
         text: switch (controller.value) {

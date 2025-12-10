@@ -702,6 +702,138 @@ transforms:
       - kind: rename
         newName: 'popover'
 
+  # FLineCalendar
+  - title: 'Migrate FLineCalendar to control parameter'
+    date: 2025-12-10
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FLineCalendar
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      initialSelection:
+        kind: fragment
+        value: arguments[initialSelection]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+      toggleable:
+        kind: fragment
+        value: arguments[toggleable]
+    oneOf:
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialSelection'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'toggleable'
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialSelection'
+          - kind: removeParameter
+            name: 'toggleable'
+      - if: "initialSelection != '' && onChange != '' && toggleable != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialSelection %}, onChange: {% onChange %}, toggleable: {% toggleable %})'
+          - kind: removeParameter
+            name: 'initialSelection'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'toggleable'
+      - if: "initialSelection != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialSelection %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialSelection'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "initialSelection != '' && toggleable != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialSelection %}, toggleable: {% toggleable %})'
+          - kind: removeParameter
+            name: 'initialSelection'
+          - kind: removeParameter
+            name: 'toggleable'
+      - if: "initialSelection != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialSelection %})'
+          - kind: removeParameter
+            name: 'initialSelection'
+      - if: "onChange != '' && toggleable != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %}, toggleable: {% toggleable %})'
+          - kind: removeParameter
+            name: 'onChange'
+          - kind: removeParameter
+            name: 'toggleable'
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "toggleable != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(toggleable: {% toggleable %})'
+          - kind: removeParameter
+            name: 'toggleable'
+
   # FPagination
   - title: 'Migrate FPagination to control parameter'
     date: 2025-12-07

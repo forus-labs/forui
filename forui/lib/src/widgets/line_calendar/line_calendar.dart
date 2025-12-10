@@ -23,8 +23,8 @@ part 'line_calendar.design.dart';
 class FLineCalendar extends StatelessWidget {
   static Widget _builder(BuildContext _, FLineCalendarItemData _, Widget? child) => child!;
 
-  /// The controller.
-  final FCalendarController<DateTime?>? controller;
+  /// Defines how this line calendar's value is controlled.
+  final FLineCalendarControl control;
 
   /// The style.
   ///
@@ -58,20 +58,12 @@ class FLineCalendar extends StatelessWidget {
   /// in a [Stack] to avoid re-creating the custom content from scratch.
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
 
-  /// The callback that is called when the date changes.
-  final ValueChanged<DateTime?>? onChange;
-
-  final bool _toggleable;
   final LocalDate _start;
   final LocalDate? _end;
   final LocalDate? _initialScroll;
-  final LocalDate? _initialSelection;
   final LocalDate _today;
 
   /// Creates a [FLineCalendar].
-  ///
-  /// [toggleable] represents whether the calendar is togglable, meaning that it can be selected and unselected.
-  /// Defaults to false.
   ///
   /// [start] represents the start date, inclusive. It is truncated to the nearest date. Defaults to the
   /// [DateTime.utc(1900)].
@@ -81,44 +73,30 @@ class FLineCalendar extends StatelessWidget {
   /// [initialScroll] represents the initial date to which the line calendar is scrolled. It is aligned based on
   /// [initialScrollAlignment]. It is truncated to the nearest date. Defaults to [today] if not provided.
   ///
-  /// [initialSelection] represents the initial date which is selected. It is truncated to the nearest date.
-  ///
   /// [today] represents the current date. It is truncated to the nearest date. Defaults to the [DateTime.now].
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * [controller] and [initialSelection] are both non-null.
-  /// * [controller] and [toggleable] are both non-null.
   /// * [end] <= [start].
   /// * [initialScroll] < [start] or [end] <= [initialScroll].
-  /// * [initialSelection] < [start] or [end] <= [initialSelection].
   /// * [today] < [start] or [end] <= [today].
   FLineCalendar({
-    this.controller,
+    this.control = const .managed(),
     this.style,
     this.initialScrollAlignment = .center,
     this.physics,
     this.cacheExtent,
     this.keyboardDismissBehavior = .manual,
     this.builder = _builder,
-    this.onChange,
-    bool? toggleable,
     DateTime? start,
     DateTime? end,
     DateTime? initialScroll,
-    DateTime? initialSelection,
     DateTime? today,
     super.key,
-  }) : _toggleable = toggleable ?? false,
-       _start = (start ?? .utc(1900)).toLocalDate(),
+  }) : _start = (start ?? .utc(1900)).toLocalDate(),
        _end = end?.toLocalDate(),
        _initialScroll = initialScroll?.toLocalDate(),
-       _initialSelection = initialSelection?.toLocalDate(),
        _today = (today ?? .now()).toLocalDate(),
-       assert(
-         controller == null || toggleable == null,
-         'controller and toggleable cannot both be non-null. To fix, set the toggleable field directly in the controller.',
-       ),
        assert(
          start == null || end == null || start.toLocalDate() < end.toLocalDate(),
          'start ($start) must be < end ($end)',
@@ -130,17 +108,6 @@ class FLineCalendar extends StatelessWidget {
          'initialScroll ($initialScroll) must be >= start ($start)',
        ),
        assert(
-         controller == null || initialSelection == null,
-         'controller and initial selection cannot be both non-null. To fix, set the date field directly in the controller.',
-       ),
-       assert(
-         initialSelection == null ||
-             start == null ||
-             (initialSelection.toLocalDate() >= start.toLocalDate() &&
-                 initialSelection.toLocalDate() < end!.toLocalDate()),
-         'initialSelection ($initialSelection) must be >= start ($start) and < end ($end)',
-       ),
-       assert(
          today == null ||
              start == null ||
              (today.toLocalDate() >= start.toLocalDate() && today.toLocalDate() < end!.toLocalDate()),
@@ -150,20 +117,17 @@ class FLineCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) => CalendarLayout(
-      controller: controller,
+      control: control,
       style: style?.call(context.theme.lineCalendarStyle) ?? context.theme.lineCalendarStyle,
       physics: physics,
       cacheExtent: cacheExtent,
       keyboardDismissBehavior: keyboardDismissBehavior,
       scale: MediaQuery.textScalerOf(context),
       textStyle: DefaultTextStyle.of(context).style,
-      onChange: onChange,
       builder: builder,
-      toggleable: _toggleable,
       start: _start,
       end: _end,
       initialScroll: _initialScroll,
-      initialSelection: _initialSelection,
       today: _today,
       constraints: constraints,
       alignment: initialScrollAlignment,
@@ -174,14 +138,13 @@ class FLineCalendar extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('initialScrollAlignment', initialScrollAlignment))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
-      ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(ObjectFlagProperty.has('onChange', onChange));
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 

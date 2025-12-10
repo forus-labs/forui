@@ -76,6 +76,15 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * Add `FItemGroupMixin.merge(...)`.
 
 
+### `FLineCalendar`
+* Add `FLineCalendarControl`.
+
+* **Breaking** Remove `FLineCalendar.controller`. Use `FLineCalendar(control: .managed(controller: ...))` instead.
+* **Breaking** Remove `FLineCalendar.initialSelection`. Use `FLineCalendar(control: .managed(initial: ...))` instead.
+* **Breaking** Remove `FLineCalendar.onChange`. Use `FLineCalendar(control: .managed(onChange: ...))` instead.
+* **Breaking** Remove `FLineCalendar.toggleable`. Use `FLineCalendar(control: .managed(toggleable: ...))` instead.
+
+
 ### `FPagination`
 * Add `FPaginationControl`.
 
