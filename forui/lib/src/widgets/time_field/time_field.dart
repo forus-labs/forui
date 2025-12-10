@@ -12,6 +12,7 @@ import 'package:forui/src/widgets/time_field/picker/properties.dart';
 import 'package:forui/src/widgets/time_field/time_field_controller.dart';
 
 part 'input/input_time_field.dart';
+
 part 'picker/picker_time_field.dart';
 
 /// A time field allows a time to be selected from a picker or input field.
@@ -295,4 +296,18 @@ abstract class FTimeField extends StatefulWidget {
 
 abstract class _FTimeFieldState<T extends FTimeField> extends State<T> with TickerProviderStateMixin {
   late FTimeFieldController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.control.create(_handleOnChange, this);
+  }
+
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, _handleOnChange);
+    super.dispose();
+  }
+
+  void _handleOnChange();
 }

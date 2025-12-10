@@ -3,96 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart' hide TextDirection;
-import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/form_field.dart';
+import 'package:forui/src/widgets/date_field/date_field_controller.dart';
 import 'package:forui/src/widgets/date_field/input/date_input.dart';
 
 part 'calendar/calendar_date_field.dart';
-
 part 'input/input_date_field.dart';
-
-/// The date field's controller.
-class FDateFieldController implements FValueNotifier<DateTime?> {
-  static String? _defaultValidator(DateTime? _) => null;
-
-  /// The controller for the calendar popover. Does nothing if the date field is input only.
-  ///
-  /// ## Contract
-  /// Manually disposing this controller is undefined behavior. Dispose this [FDateFieldController] instead.
-  final FPopoverController calendar;
-
-  /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
-  /// whether a date in a calendar is selectable.
-  ///
-  /// Defaults to always returning null.
-  final FormFieldValidator<DateTime> validator;
-
-  /// True if the controller should truncate and convert all given [DateTime]s to dates in UTC timezone. Defaults to
-  /// true.
-  ///
-  /// ```dart
-  /// DateTime truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
-  /// ```
-  ///
-  /// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
-  /// the help of a 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
-  /// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
-  final bool truncateAndStripTimezone;
-
-  /// We use the calendar controller as the source of truth.
-  final FCalendarController<DateTime?> _calendar;
-
-  /// Creates a [FDateFieldController].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [initialDate] is not in UTC timezone and [truncateAndStripTimezone] is false.
-  FDateFieldController({
-    required TickerProvider vsync,
-    this.validator = _defaultValidator,
-    this.truncateAndStripTimezone = true,
-    DateTime? initialDate,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
-  }) : calendar = FPopoverController(vsync: vsync, motion: popoverMotion),
-       _calendar = FCalendarController.date(
-         initialSelection: initialDate,
-         selectable: (date) => validator(date) == null,
-       );
-
-  @override
-  void addListener(VoidCallback listener) => _calendar.addListener(listener);
-
-  @override
-  void addValueListener(ValueChanged<DateTime?>? listener) => _calendar.addValueListener(listener);
-
-  @override
-  void notifyListeners() => _calendar.notifyListeners();
-
-  @override
-  void removeListener(VoidCallback listener) => _calendar.removeListener(listener);
-
-  @override
-  void removeValueListener(ValueChanged<DateTime?>? listener) => _calendar.removeValueListener(listener);
-
-  @override
-  bool get hasListeners => _calendar.hasListeners;
-
-  @override
-  DateTime? get value => _calendar.value;
-
-  @override
-  set value(DateTime? value) => _calendar.value = value;
-
-  @override
-  bool get disposed => _calendar.disposed;
-
-  @override
-  void dispose() {
-    _calendar.dispose();
-    calendar.dispose();
-  }
-}
 
 /// A date field allows a date to be selected from a calendar, input field, or both.
 ///
@@ -125,12 +43,8 @@ abstract class FDateField extends StatefulWidget {
 
   static Widget _fieldBuilder(BuildContext _, FDateFieldStyle _, Set<WidgetState> _, Widget child) => child;
 
-  /// The controller.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * Both [controller] and [initialDate] are provided.
-  final FDateFieldController? controller;
+  /// The control for managing the date field's state.
+  final FDateFieldControl control;
 
   /// The style.
   ///
@@ -141,13 +55,6 @@ abstract class FDateField extends StatefulWidget {
   /// dart run forui style create date-field
   /// ```
   final FDateFieldStyle Function(FDateFieldStyle style)? style;
-
-  /// The initial date.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * Both [controller] and [initialDate] are provided.
-  final DateTime? initialDate;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -180,11 +87,6 @@ abstract class FDateField extends StatefulWidget {
   /// {@macro forui.foundation.form_field_properties.enabled}
   final bool enabled;
 
-  /// Handler called when the date changes.
-  ///
-  /// The given [DateTime] is always in UTC timezone.
-  final ValueChanged<DateTime?>? onChange;
-
   /// {@macro forui.foundation.form_field_properties.onSaved}
   final FormFieldSetter<DateTime>? onSaved;
 
@@ -210,8 +112,8 @@ abstract class FDateField extends StatefulWidget {
   /// [FDateFieldController.validator] will not be called unless [forceErrorText] is null.
   final String? forceErrorText;
 
-  FDateField._({
-    this.controller,
+  const FDateField._({
+    this.control = const .managed(),
     this.style,
     this.autofocus = false,
     this.focusNode,
@@ -221,19 +123,13 @@ abstract class FDateField extends StatefulWidget {
     this.label,
     this.description,
     this.enabled = true,
-    this.onChange,
     this.onSaved,
     this.onReset,
     this.autovalidateMode = .onUnfocus,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    DateTime? initialDate,
     super.key,
-  }) : assert(
-         controller == null || initialDate == null,
-         'Cannot provide both a controller and an initialDate. To fix, set the date directly in the controller.',
-       ),
-       initialDate = initialDate?.toLocalDate().toNative();
+  });
 
   /// Creates a [FDateField] that allows date selection through both an input field and a calendar popover.
   ///
@@ -270,10 +166,9 @@ abstract class FDateField extends StatefulWidget {
   /// See also:
   /// * [FDateField.calendar] - Creates a date field with only a calendar.
   /// * [FDateField.input] - Creates a date field with only an input field.
-  factory FDateField({
-    FDateFieldController? controller,
+  const factory FDateField({
+    FDateFieldControl control,
     FDateFieldStyle Function(FDateFieldStyle style)? style,
-    DateTime? initialDate,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
     TextAlign textAlign,
@@ -294,7 +189,6 @@ abstract class FDateField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
-    ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
@@ -354,10 +248,9 @@ abstract class FDateField extends StatefulWidget {
   /// See also:
   /// * [FDateField] - Creates a date field with both input field and calendar.
   /// * [FDateField.input] - Creates a date field with only an input field.
-  factory FDateField.calendar({
-    FDateFieldController? controller,
+  const factory FDateField.calendar({
+    FDateFieldControl control,
     FDateFieldStyle Function(FDateFieldStyle style)? style,
-    DateTime? initialDate,
     DateFormat? format,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -388,7 +281,6 @@ abstract class FDateField extends StatefulWidget {
     Widget? label,
     Widget? description,
     bool enabled,
-    ValueChanged<DateTime?>? onChange,
     FormFieldSetter<DateTime>? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
@@ -426,76 +318,42 @@ abstract class FDateField extends StatefulWidget {
   /// See also:
   /// * [FDateField] - Creates a date field with both input field and calendar.
   /// * [FDateField.calendar] - Creates a date field with only a calendar.
-  factory FDateField.input({
-    FDateFieldController? controller,
+  const factory FDateField.input({
+    FDateFieldControl control,
     FDateFieldStyle Function(FDateFieldStyle style)? style,
-    DateTime? initialDate,
-    bool autofocus = false,
+    bool autofocus,
     FocusNode? focusNode,
-    FFieldBuilder<FDateFieldStyle> builder = _fieldBuilder,
-    FFieldIconBuilder<FDateFieldStyle>? prefixBuilder = defaultIconBuilder,
+    FFieldBuilder<FDateFieldStyle> builder,
+    FFieldIconBuilder<FDateFieldStyle>? prefixBuilder,
     FFieldIconBuilder<FDateFieldStyle>? suffixBuilder,
     TextInputAction? textInputAction,
-    TextAlign textAlign = TextAlign.start,
+    TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
-    bool expands = false,
+    bool expands,
     VoidCallback? onEditingComplete,
     ValueChanged<DateTime>? onSubmit,
     MouseCursor? mouseCursor,
-    bool canRequestFocus = true,
-    bool clearable = false,
-    int baselineInputYear = 2000,
+    bool canRequestFocus,
+    bool clearable,
+    int baselineInputYear,
     Widget? label,
     Widget? description,
-    bool enabled = true,
-    ValueChanged<DateTime?>? onChange,
+    bool enabled,
     FormFieldSetter<DateTime>? onSaved,
     VoidCallback? onReset,
-    AutovalidateMode autovalidateMode = .onUnfocus,
+    AutovalidateMode autovalidateMode,
     String? forceErrorText,
-    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Widget Function(BuildContext context, String message) errorBuilder,
     Key? key,
-  }) => _InputDateField(
-    controller: controller,
-    style: style,
-    initialDate: initialDate,
-    autofocus: autofocus,
-    focusNode: focusNode,
-    builder: builder,
-    prefixBuilder: prefixBuilder,
-    suffixBuilder: suffixBuilder,
-    clearable: clearable,
-    textInputAction: textInputAction,
-    textAlign: textAlign,
-    textAlignVertical: textAlignVertical,
-    textDirection: textDirection,
-    expands: expands,
-    onEditingComplete: onEditingComplete,
-    onSubmit: onSubmit,
-    mouseCursor: mouseCursor,
-    canRequestFocus: canRequestFocus,
-    baselineInputYear: baselineInputYear,
-    calendar: null,
-    label: label,
-    description: description,
-    enabled: enabled,
-    onChange: onChange,
-    onSaved: onSaved,
-    onReset: onReset,
-    autovalidateMode: autovalidateMode,
-    forceErrorText: forceErrorText,
-    errorBuilder: errorBuilder,
-    key: key,
-  );
+  }) = _InputOnlyDateField;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('initialDate', initialDate))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('builder', builder))
@@ -503,7 +361,6 @@ abstract class FDateField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
@@ -511,6 +368,34 @@ abstract class FDateField extends StatefulWidget {
   }
 }
 
-abstract class _FDateFieldState<T extends FDateField> extends State<T> with SingleTickerProviderStateMixin {
-  late FDateFieldController _controller = widget.controller ?? .new(vsync: this, initialDate: widget.initialDate);
+abstract class _FDateFieldState<T extends FDateField> extends State<T> with TickerProviderStateMixin {
+  late FocusNode _focus;
+  late FDateFieldController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _focus = widget.focusNode ?? .new(debugLabel: _focusLabel);
+  }
+
+  @override
+  void didUpdateWidget(covariant T old) {
+    super.didUpdateWidget(old);
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focus.dispose();
+      }
+      _focus = widget.focusNode ?? .new(debugLabel: _focusLabel);
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.focusNode == null) {
+      _focus.dispose();
+    }
+    super.dispose();
+  }
+
+  String get _focusLabel;
 }

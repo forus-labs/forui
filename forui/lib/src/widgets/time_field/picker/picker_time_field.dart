@@ -90,12 +90,6 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   DateFormat? _format;
 
   @override
-  void initState() {
-    super.initState();
-    _controller = widget.control.create(_handleOnChange, this);
-  }
-
-  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
@@ -131,7 +125,6 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
 
   @override
   void dispose() {
-    widget.control.dispose(_controller, _handleOnChange);
     if (widget.focusNode == null) {
       _focus.dispose();
     }
@@ -139,6 +132,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     super.dispose();
   }
 
+  @override
   void _handleOnChange() {
     _updateTextController();
     if (widget.control case Managed(:final onChange?)) {

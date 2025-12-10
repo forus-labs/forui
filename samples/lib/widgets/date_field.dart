@@ -10,12 +10,9 @@ class DateFieldPage extends Sample {
   DateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const .only(top: 30),
-    child: FDateField(
-      label: const Text('Appointment Date'),
-      description: const Text('Select a date for your appointment'),
-    ),
+  Widget sample(BuildContext context) => const Padding(
+    padding: .only(top: 30),
+    child: FDateField(label: Text('Appointment Date'), description: Text('Select a date for your appointment')),
   );
 }
 
@@ -24,11 +21,11 @@ class CalendarDateFieldPage extends Sample {
   CalendarDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
   @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const .only(top: 30),
+  Widget sample(BuildContext context) => const Padding(
+    padding: .only(top: 30),
     child: FDateField.calendar(
-      label: const Text('Appointment Date'),
-      description: const Text('Select a date for your appointment'),
+      label: Text('Appointment Date'),
+      description: Text('Select a date for your appointment'),
     ),
   );
 }
@@ -38,35 +35,19 @@ class InputDateFieldPage extends Sample {
   InputDateFieldPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FDateField.input(
-    label: const Text('Appointment Date'),
-    description: const Text('Select a date for your appointment'),
-  );
+  Widget sample(BuildContext context) =>
+      const FDateField.input(label: Text('Appointment Date'), description: Text('Select a date for your appointment'));
 }
 
 @RoutePage()
-class ClearableDateFieldPage extends StatefulSample {
+class ClearableDateFieldPage extends Sample {
   ClearableDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
-
-  @override
-  State<ClearableDateFieldPage> createState() => _ClearableDateFieldPageState();
-}
-
-class _ClearableDateFieldPageState extends StatefulSampleState<ClearableDateFieldPage>
-    with SingleTickerProviderStateMixin {
-  late final _controller = FDateFieldController(vsync: this, initialDate: .now());
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const .only(top: 30),
     child: FDateField(
-      controller: _controller,
+      control: .managed(initial: .now()),
       label: const Text('Appointment Date'),
       description: const Text('Select a date for your appointment'),
       clearable: true,
@@ -75,30 +56,16 @@ class _ClearableDateFieldPageState extends StatefulSampleState<ClearableDateFiel
 }
 
 @RoutePage()
-class ValidatorDateFieldPage extends StatefulSample {
+class ValidatorDateFieldPage extends Sample {
   ValidatorDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter});
 
-  @override
-  State<ValidatorDateFieldPage> createState() => _ValidatorDateFieldPageState();
-}
-
-class _ValidatorDateFieldPageState extends StatefulSampleState<ValidatorDateFieldPage>
-    with SingleTickerProviderStateMixin {
-  late final _controller = FDateFieldController(vsync: this, validator: _validate);
-
   String? _validate(DateTime? date) => date?.weekday == 6 || date?.weekday == 7 ? 'Date cannot be a weekend.' : null;
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget sample(BuildContext context) => Padding(
     padding: const .only(top: 30),
     child: FDateField(
-      controller: _controller,
+      control: .managed(validator: _validate),
       label: const Text('Appointment Date'),
       description: const Text('Select a date for your appointment'),
     ),
@@ -116,7 +83,6 @@ class FormDateFieldPage extends StatefulSample {
 class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> with TickerProviderStateMixin {
   final _key = GlobalKey<FormState>();
   late final _startDateController = FDateFieldController(vsync: this, validator: _validateStartDate);
-  late final _endDateController = FDateFieldController(vsync: this, validator: _validateEndDate);
 
   String? _validateStartDate(DateTime? date) => switch (date) {
     null => 'Please select a start date',
@@ -133,7 +99,6 @@ class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> wit
 
   @override
   void dispose() {
-    _endDateController.dispose();
     _startDateController.dispose();
     super.dispose();
   }
@@ -146,14 +111,14 @@ class _FormDateFieldPageState extends StatefulSampleState<FormDateFieldPage> wit
       child: Column(
         children: [
           FDateField(
-            controller: _startDateController,
+            control: .managed(controller: _startDateController),
             label: const Text('Start Date'),
             description: const Text('Select a start date'),
             autovalidateMode: .disabled,
           ),
           const SizedBox(height: 20),
           FDateField(
-            controller: _endDateController,
+            control: .managed(validator: _validateEndDate),
             label: const Text('End Date'),
             description: const Text('Select an end date'),
             autovalidateMode: .disabled,

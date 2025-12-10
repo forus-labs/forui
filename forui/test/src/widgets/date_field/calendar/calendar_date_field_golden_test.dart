@@ -29,7 +29,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField.calendar(key: key),
+          child: const FDateField.calendar(key: key),
         ),
       );
 
@@ -40,7 +40,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDateField.calendar(prefixBuilder: null)));
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDateField.calendar(prefixBuilder: null)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/no-icon.png'));
     });
@@ -127,7 +127,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField.calendar(enabled: false, key: key),
+          child: const FDateField.calendar(enabled: false, key: key),
         ),
       );
 

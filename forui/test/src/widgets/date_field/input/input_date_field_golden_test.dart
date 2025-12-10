@@ -20,7 +20,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField.input(key: key),
+          child: const FDateField.input(key: key),
         ),
       );
 
@@ -31,7 +31,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDateField.input(prefixBuilder: null)));
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDateField.input(prefixBuilder: null)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/no-icon.png'));
     });
@@ -55,7 +55,7 @@ void main() {
 
     testWidgets('${theme.name} hr locale', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, locale: const Locale('hr'), child: FDateField.input()),
+        TestScaffold.app(theme: theme.data, locale: const Locale('hr'), child: const FDateField.input()),
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/hr-locale.png'));
@@ -65,7 +65,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField.input(enabled: false, key: key),
+          child: const FDateField.input(enabled: false, key: key),
         ),
       );
 
@@ -79,7 +79,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField.input(forceErrorText: 'Error', key: key),
+          child: const FDateField.input(forceErrorText: 'Error', key: key),
         ),
       );
       await tester.pumpAndSettle();
@@ -92,7 +92,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           locale: const Locale('ar'),
-          child: FDateField.input(key: key),
+          child: const FDateField.input(key: key),
         ),
       );
 
@@ -109,7 +109,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField.input(key: key),
+          child: const FDateField.input(key: key),
         ),
       );
 
@@ -131,7 +131,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField.input(key: key),
+          child: const FDateField.input(key: key),
         ),
       );
 

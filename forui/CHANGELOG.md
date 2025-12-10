@@ -58,7 +58,13 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### `FDateField`
-*  **Breaking** Change `FDateField.shift` to `FDateField.overflow`.
+* Add `FDateFieldControl`.
+
+* **Breaking** Rename `FDateField.shift` to `FDateField.overflow`.
+* **Breaking** Rename `FDateFieldController.calendar` to `FDateFieldController.popover`.
+* **Breaking** Remove `FDateField.controller`. Use `FDateField(control: .managed(controller: ...))` instead.
+* **Breaking** Remove `FDateField.initialDate`. Use `FDateField(control: .managed(initial: ...))` instead.
+* **Breaking** Remove `FDateField.onChange`. Use `FDateField(control: .managed(onChange: ...))` instead.
 
 
 ### `FItem` & `FItemGroup`

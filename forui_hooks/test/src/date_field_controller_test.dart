@@ -17,13 +17,13 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFDateFieldController();
-            return FDateField(controller: controller);
+            return FDateField(control: .managed(controller: controller));
           },
         ),
       ),
     );
 
-    unawaited(controller.calendar.show());
+    unawaited(controller.popover.show());
 
     await tester.pumpAndSettle();
   });

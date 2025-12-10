@@ -11,8 +11,8 @@ void main() {
   const key = Key('field');
 
   for (final (description, field) in [
-    ('input only', FDateField.input(key: key)),
-    ('input & calendar', FDateField(key: key)),
+    ('input only', const FDateField.input(key: key)),
+    ('input & calendar', const FDateField(key: key)),
   ]) {
     for (final (index, (locale, placeholder)) in const [
       (null, 'MM/DD/YYYY'), // M/d/y
@@ -54,8 +54,8 @@ void main() {
 
   group('validator', () {
     for (final (description, field) in [
-      ('input only', FDateField.input(key: key)),
-      ('input & calendar', FDateField(key: key)),
+      ('input only', const FDateField.input(key: key)),
+      ('input & calendar', const FDateField(key: key)),
     ]) {
       testWidgets('placeholder - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
@@ -126,8 +126,8 @@ void main() {
     }
 
     for (final (description, field) in [
-      ('input only', (controller) => FDateField.input(key: key, controller: controller)),
-      ('input & calendar', (controller) => FDateField(key: key, controller: controller)),
+      ('input only', (controller) => FDateField.input(control: .managed(controller: controller), key: key)),
+      ('input & calendar', (controller) => FDateField(control: .managed(controller: controller), key: key)),
     ]) {
       testWidgets('custom invalid date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;
@@ -161,10 +161,10 @@ void main() {
   });
 
   for (final (description, field, expected) in [
-    ('input only', FDateField.input(key: key), 0),
-    ('input & calendar', FDateField(key: key), 0),
-    ('input only, clearable', FDateField.input(key: key, clearable: true), 1),
-    ('input & calendar, clearable', FDateField(key: key, clearable: true), 1),
+    ('input only', const FDateField.input(key: key), 0),
+    ('input & calendar', const FDateField(key: key), 0),
+    ('input only, clearable', const FDateField.input(key: key, clearable: true), 1),
+    ('input & calendar, clearable', const FDateField(key: key, clearable: true), 1),
   ]) {
     testWidgets(description, (tester) async {
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field));
@@ -182,7 +182,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FDateField(key: key),
+        child: const FDateField(key: key),
       ),
     );
 
@@ -195,5 +195,68 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(FCalendar), findsNothing);
+  });
+
+  group('lifted', () {
+    testWidgets('interaction works', (tester) async {
+      DateTime? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField.input(
+              key: key,
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            ),
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), '15/01/2025');
+      await tester.pumpAndSettle();
+
+      expect(value, DateTime.utc(2025, 1, 15));
+    });
+
+    testWidgets('value does not change when onChange does not update state', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField.input(
+              key: key,
+              control: .lifted(value: null, onChange: (v) => setState(() {})),
+            ),
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), '15/01/2025');
+      await tester.pumpAndSettle();
+
+      expect(find.text('DD/MM/YYYY'), findsOneWidget);
+    });
+  });
+
+  group('managed onChange', () {
+    testWidgets('called when value changes', (tester) async {
+      DateTime? changed;
+      final controller = autoDispose(FDateFieldController(vsync: tester));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FDateField.input(
+            control: .managed(controller: controller, onChange: (v) => changed = v),
+          ),
+        ),
+      );
+
+      controller.value = DateTime.utc(2025, 1, 15);
+      await tester.pump();
+
+      expect(changed, DateTime.utc(2025, 1, 15));
+    });
   });
 }

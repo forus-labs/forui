@@ -61,23 +61,12 @@ class _InputTimeField extends FTimeField {
 
 class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
   @override
-  void initState() {
-    super.initState();
-    _controller = widget.control.create(_handleOnChange, this);
-  }
-
-  @override
   void didUpdateWidget(covariant _InputTimeField old) {
     super.didUpdateWidget(old);
     _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
   }
 
   @override
-  void dispose() {
-    widget.control.dispose(_controller, _handleOnChange);
-    super.dispose();
-  }
-
   void _handleOnChange() {
     if (widget.control case Managed(:final onChange?)) {
       onChange(_controller.value);

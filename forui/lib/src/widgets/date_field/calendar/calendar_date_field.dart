@@ -38,7 +38,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   @override
   final bool autoHide;
 
-  _CalendarDateField({
+  const _CalendarDateField({
     this.format,
     this.hint,
     this.textAlign = .start,
@@ -61,9 +61,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.today,
     this.initialType = .day,
     this.autoHide = true,
-    super.controller,
+    super.control,
     super.style,
-    super.initialDate,
     super.autofocus,
     super.focusNode,
     super.builder,
@@ -71,11 +70,10 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     super.suffixBuilder,
     super.label,
     super.description,
-    super.enabled = true,
-    super.onChange,
+    super.enabled,
     super.onSaved,
     super.onReset,
-    super.autovalidateMode = .onUnfocus,
+    super.autovalidateMode,
     super.forceErrorText,
     super.errorBuilder,
     super.key,
@@ -103,43 +101,16 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
 
 class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   final TextEditingController _textController = .new();
-  late FocusNode _focus = widget.focusNode ?? .new(debugLabel: 'CalendarDatePicker');
   DateFormat? _format;
+
+  @override
+  String get _focusLabel => 'CalendarDatePicker';
 
   @override
   void initState() {
     super.initState();
-    _controller._calendar.addListener(_updateTextController);
-    _controller.addValueListener(_onChange);
+    _controller = widget.control.create(_handleOnChange, this);
   }
-
-  @override
-  void didUpdateWidget(covariant _CalendarDateField old) {
-    super.didUpdateWidget(old);
-    // DO NOT REORDER
-    if (widget.focusNode != old.focusNode) {
-      if (old.focusNode == null) {
-        _focus.dispose();
-      }
-      _focus = widget.focusNode ?? .new(debugLabel: 'CalendarDatePicker');
-    }
-
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller._calendar.removeListener(_updateTextController);
-        _controller.removeValueListener(_onChange);
-      }
-
-      _controller = widget.controller ?? .new(vsync: this, initialDate: _controller.value);
-      _controller._calendar.addListener(_updateTextController);
-      _controller.addValueListener(widget.onChange);
-      _updateTextController();
-    }
-  }
-
-  void _onChange(DateTime? date) => widget.onChange?.call(date);
 
   @override
   void didChangeDependencies() {
@@ -148,8 +119,32 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     _updateTextController();
   }
 
+  @override
+  void didUpdateWidget(covariant _CalendarDateField old) {
+    super.didUpdateWidget(old);
+    final (controller, updated) = widget.control.update(old.control, _controller, _handleOnChange, this);
+    if (updated) {
+      _controller = controller;
+      _updateTextController();
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, _handleOnChange);
+    _textController.dispose();
+    super.dispose();
+  }
+
+  void _handleOnChange() {
+    _updateTextController();
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
+
   void _updateTextController() {
-    if (_controller._calendar.value case final value?) {
+    if (_controller.value case final value?) {
       _textController.text = widget.format?.format(value) ?? _format?.format(value) ?? '';
     } else {
       _textController.text = '';
@@ -163,7 +158,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     final hint = widget.hint ?? localizations.dateFieldHint;
     final onSaved = widget.onSaved;
 
-    return Field(
+    return Field<DateTime>(
       controller: _controller,
       enabled: widget.enabled,
       autovalidateMode: widget.autovalidateMode,
@@ -171,9 +166,9 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       onSaved: onSaved,
       onReset: widget.onReset,
       validator: _controller.validator,
-      initialValue: widget.initialDate,
       builder: (state) => FTextField(
-        control: .managed(controller: _textController), focusNode: _focus,
+        control: .managed(controller: _textController),
+        focusNode: _focus,
         style: style.textFieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
@@ -213,26 +208,10 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   }
 
   void _onTap() {
-    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_controller.calendar.status)
+    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_controller.popover.status)
         ? _focus.requestFocus()
         : _focus.unfocus();
-    _controller.calendar.toggle();
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller._calendar.removeListener(_updateTextController);
-      _controller.removeValueListener(_onChange);
-    }
-
-    if (widget.focusNode == null) {
-      _focus.dispose();
-    }
-    _textController.dispose();
-    super.dispose();
+    _controller.popover.toggle();
   }
 }
 
@@ -255,7 +234,7 @@ class _CalendarPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => FPopover(
-    control: .managed(controller: controller.calendar),
+    control: .managed(controller: controller.popover),
     traversalEdgeBehavior: .parentScope,
     style: style.popoverStyle,
     popoverAnchor: properties.anchor,
@@ -268,9 +247,10 @@ class _CalendarPopover extends StatelessWidget {
     shortcuts: {const SingleActivator(.escape): _hide},
     popoverBuilder: (_, _) => TextFieldTapRegion(
       child: ValueListenableBuilder(
-        valueListenable: controller._calendar,
+        valueListenable: controller.calendar,
         builder: (_, value, _) => FCalendar(
-          control: .managedDate(controller: controller._calendar), style: style.calendarStyle,
+          control: .managedDate(controller: controller.calendar),
+          style: style.calendarStyle,
           initialMonth: switch (value) {
             null => null,
             _ when value.isBefore(properties.start ?? .utc(1900)) => properties.today,
@@ -291,7 +271,7 @@ class _CalendarPopover extends StatelessWidget {
 
   void _hide() {
     fieldFocusNode?.requestFocus();
-    controller.calendar.hide();
+    controller.popover.hide();
   }
 
   @override

@@ -398,6 +398,310 @@ transforms:
         oldName: 'shift'
         newName: 'overflow'
 
+  - title: 'Migrate FDateField to control parameter'
+    date: 2025-12-10
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FDateField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      initialDate:
+        kind: fragment
+        value: arguments[initialDate]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      - if: "controller != '' && initialDate != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: {% initialDate %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialDate'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "controller != '' && initialDate != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: {% initialDate %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialDate'
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      - if: "initialDate != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialDate %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialDate'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "initialDate != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialDate %})'
+          - kind: removeParameter
+            name: 'initialDate'
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FDateField.calendar to control parameter'
+    date: 2025-12-10
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'calendar'
+      inClass: FDateField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      initialDate:
+        kind: fragment
+        value: arguments[initialDate]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      - if: "controller != '' && initialDate != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: {% initialDate %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialDate'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "controller != '' && initialDate != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: {% initialDate %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialDate'
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      - if: "initialDate != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialDate %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialDate'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "initialDate != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialDate %})'
+          - kind: removeParameter
+            name: 'initialDate'
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Migrate FDateField.input to control parameter'
+    date: 2025-12-10
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'input'
+      inClass: FDateField
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+      initialDate:
+        kind: fragment
+        value: arguments[initialDate]
+      onChange:
+        kind: fragment
+        value: arguments[onChange]
+    oneOf:
+      - if: "controller != '' && initialDate != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: {% initialDate %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialDate'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "controller != '' && initialDate != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, initial: {% initialDate %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'initialDate'
+      - if: "controller != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'controller'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'
+      - if: "initialDate != '' && onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialDate %}, onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'initialDate'
+          - kind: removeParameter
+            name: 'onChange'
+      - if: "initialDate != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initial: {% initialDate %})'
+          - kind: removeParameter
+            name: 'initialDate'
+      - if: "onChange != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(onChange: {% onChange %})'
+          - kind: removeParameter
+            name: 'onChange'
+
+  - title: 'Rename FDateFieldController.calendar to FDateFieldController.popover'
+    date: 2025-11-30
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      field: 'calendar'
+      inClass: FDateFieldController
+    changes:
+      - kind: rename
+        newName: 'popover'
+
   # FPagination
   - title: 'Migrate FPagination to control parameter'
     date: 2025-12-07
