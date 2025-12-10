@@ -15,13 +15,17 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFDateCalendarController();
-            return FCalendar(controller: controller, start: DateTime.utc(1900), end: DateTime.utc(2100));
+            return FCalendar(
+              control: .managedDate(controller: controller),
+              start: DateTime.utc(1900),
+              end: DateTime.utc(2100),
+            );
           },
         ),
       ),
     );
 
-    controller.value = DateTime.utc(2000);
+    controller.value = .utc(2000);
 
     await tester.pumpAndSettle();
   });
@@ -34,7 +38,11 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFDatesCalendarController();
-            return FCalendar(controller: controller, start: DateTime.utc(1900), end: DateTime.utc(2100));
+            return FCalendar(
+              control: .managedDates(controller: controller),
+              start: DateTime.utc(1900),
+              end: DateTime.utc(2100),
+            );
           },
         ),
       ),
@@ -53,7 +61,11 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFRangeCalendarController();
-            return FCalendar(controller: controller, start: DateTime.utc(1900), end: DateTime.utc(2100));
+            return FCalendar(
+              control: .managedRange(controller: controller),
+              start: DateTime.utc(1900),
+              end: DateTime.utc(2100),
+            );
           },
         ),
       ),

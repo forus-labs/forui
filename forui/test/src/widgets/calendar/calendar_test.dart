@@ -8,6 +8,100 @@ import '../../test_scaffold.dart';
 
 // TODO : enable leak testing when calendar is reimplemented.
 void main() {
+  group('lifted', () {
+    testWidgets('calls select when date tapped', (tester) async {
+      DateTime? selected;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FCalendar(
+            control: .lifted(selected: (_) => false, select: (date) => selected = date),
+            start: DateTime(2024, 7),
+            end: DateTime(2024, 7, 31),
+            today: DateTime(2024, 7, 14),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      expect(selected, DateTime.utc(2024, 7, 15));
+    }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
+  });
+
+  group('managed', () {
+    testWidgets('managedDate calls onChange when date selected', (tester) async {
+      DateTime? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FCalendar(
+            control: .managedDate(onChange: (date) => changed = date),
+            start: DateTime(2024, 7),
+            end: DateTime(2024, 7, 31),
+            today: DateTime(2024, 7, 14),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      expect(changed, DateTime.utc(2024, 7, 15));
+    }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
+
+    testWidgets('managedDates calls onChange when date selected', (tester) async {
+      Set<DateTime>? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FCalendar(
+            control: .managedDates(onChange: (dates) => changed = dates),
+            start: DateTime(2024, 7),
+            end: DateTime(2024, 7, 31),
+            today: DateTime(2024, 7, 14),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      expect(changed, {DateTime.utc(2024, 7, 15)});
+
+      await tester.tap(find.text('20'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      expect(changed, {DateTime.utc(2024, 7, 15), DateTime.utc(2024, 7, 20)});
+    }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
+
+    testWidgets('managedRange calls onChange when range selected', (tester) async {
+      (DateTime, DateTime)? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FCalendar(
+            control: .managedRange(onChange: (range) => changed = range),
+            start: DateTime(2024, 7),
+            end: DateTime(2024, 7, 31),
+            today: DateTime(2024, 7, 14),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      expect(changed, (DateTime.utc(2024, 7, 15), DateTime.utc(2024, 7, 15)));
+
+      await tester.tap(find.text('20'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+      expect(changed, (DateTime.utc(2024, 7, 15), DateTime.utc(2024, 7, 20)));
+    }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
+  });
+
   testWidgets('initial type changes', (tester) async {
     final controller = autoDispose(FCalendarController.date(initialSelection: DateTime(2024, 7, 14)));
     final type = autoDispose(ValueNotifier(FCalendarPickerType.yearMonth));
@@ -17,7 +111,7 @@ void main() {
         child: ValueListenableBuilder(
           valueListenable: type,
           builder: (context, value, _) => FCalendar(
-            controller: controller,
+            control: .managedDate(controller: controller),
             start: DateTime(1900, 1, 8),
             end: DateTime(2025, 7, 10),
             initialType: value,
@@ -43,7 +137,7 @@ void main() {
         child: ValueListenableBuilder(
           valueListenable: controller,
           builder: (context, value, _) => FCalendar(
-            controller: controller,
+            control: .managedDate(controller: controller),
             start: DateTime(1900, 1, 8),
             end: DateTime(2025, 7, 10),
             initialMonth: value,
@@ -70,7 +164,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FCalendar(
-            controller: autoDispose(FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2))),
+            control: .managedDates(selectable: (date) => date != .utc(2024, 7, 2)),
             start: DateTime(1900, 1, 8),
             end: DateTime(2024, 7, 10),
             today: DateTime(2024, 7, 14),
@@ -90,7 +184,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FCalendar(
-            controller: autoDispose(FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2))),
+            control: .managedDates(selectable: (date) => date != .utc(2024, 7, 2)),
             start: DateTime(2024, 7),
             end: DateTime(2024, 7, 10),
             today: DateTime(2024, 7, 14),
@@ -112,7 +206,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FCalendar(
-            controller: autoDispose(FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2))),
+            control: .managedDates(selectable: (date) => date != .utc(2024, 7, 2)),
             start: DateTime(1900, 1, 8),
             end: DateTime(2024, 8, 10),
             today: DateTime(2024, 7, 14),
@@ -132,7 +226,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FCalendar(
-            controller: autoDispose(FCalendarController.dates(selectable: (date) => date != DateTime.utc(2024, 7, 2))),
+            control: .managedDate(selectable: (date) => date != .utc(2024, 7, 2)),
             start: DateTime(2024),
             end: DateTime(2024, 7, 10),
             today: DateTime(2024, 7, 14),
@@ -157,8 +251,8 @@ void main() {
       controller = FCalendarController.dates();
       calendar = TestScaffold.app(
         child: FCalendar(
+          control: .managedDates(controller: controller),
           initialType: FCalendarPickerType.yearMonth,
-          controller: controller,
           start: DateTime(2023, 2, 8),
           end: DateTime(2025, 8, 10),
           today: DateTime(2024, 7, 14),
@@ -227,8 +321,8 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FCalendar(
+              control: .managedDates(),
               initialType: FCalendarPickerType.yearMonth,
-              controller: autoDispose(FCalendarController.dates()),
               start: DateTime(2023, 9, 8),
               end: DateTime(2025, 5, 10),
               today: DateTime(2024, 7, 14),

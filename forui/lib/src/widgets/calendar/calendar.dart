@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/calendar/calendar_controller.dart' show InternalFCalendarControl, Managed;
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/day/paged_day_picker.dart';
 import 'package:forui/src/widgets/calendar/shared/header.dart';
@@ -17,12 +18,12 @@ part 'calendar.design.dart';
 /// The calendar pages are designed to be navigable through swipe gestures on mobile Android, iOS & iPadOS, allowing
 /// left and right swipes to transition between pages.
 ///
-/// All [DateTime]s are in UTC timezone. A [FCalendarController] is used to customize the date selection behavior.
-/// [DateTime]s outside [start] and [end] are unselectable regardless of the [FCalendarController] used.
+/// All [DateTime]s are in UTC timezone. A [FCalendarControl] is used to customize the date selection behavior.
+/// [DateTime]s outside [start] and [end] are unselectable regardless of the [FCalendarControl] used.
 ///
 /// See:
 /// * https://forui.dev/docs/calendar for working examples.
-/// * [FCalendarController] for customizing a calendar's date selection behavior.
+/// * [FCalendarControl] for customizing a calendar's date selection behavior.
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatefulWidget {
   /// The default day builder.
@@ -38,8 +39,8 @@ class FCalendar extends StatefulWidget {
   /// ```
   final FCalendarStyle Function(FCalendarStyle style)? style;
 
-  /// A controller that determines if a date is selected.
-  final FCalendarController controller;
+  /// Controls how dates are selected.
+  final FCalendarControl<Object?> control;
 
   /// The builder used to build a day in the day picker. Defaults to returning the given child.
   ///
@@ -82,7 +83,7 @@ class FCalendar extends StatefulWidget {
   /// no effect. To change the selected date, change the key to create a new [FCalendar], and provide that widget the
   /// new [initialMonth]. This will reset the widget's interactive state.
   FCalendar({
-    required this.controller,
+    required this.control,
     this.style,
     this.dayBuilder = defaultDayBuilder,
     this.onMonthChange,
@@ -110,7 +111,7 @@ class FCalendar extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
@@ -122,21 +123,36 @@ class FCalendar extends StatefulWidget {
 }
 
 class _State extends State<FCalendar> {
+  late FCalendarController<Object?> _controller;
   late ValueNotifier<FCalendarPickerType> _type;
   late ValueNotifier<LocalDate> _month;
 
   @override
   void initState() {
     super.initState();
+    _controller = widget.control.create(_handleOnChange);
     _type = ValueNotifier(widget._initialType);
     _month = ValueNotifier(widget._initialMonth);
+  }
+
+  @override
+  void didUpdateWidget(covariant FCalendar old) {
+    super.didUpdateWidget(old);
+    _controller = widget.control.update(old.control, _controller, _handleOnChange).$1;
   }
 
   @override
   void dispose() {
     _month.dispose();
     _type.dispose();
+    widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.control case final Managed managed) {
+      managed.handleOnChange(_controller);
+    }
   }
 
   @override
@@ -166,15 +182,15 @@ class _State extends State<FCalendar> {
                     end: widget.end.toLocalDate(),
                     today: widget.today.toLocalDate(),
                     initial: _month.value,
-                    selectable: (date) => widget.controller.selectable(date.toNative()),
-                    selected: (date) => widget.controller.selected(date.toNative()),
+                    selectable: (date) => _controller.selectable(date.toNative()),
+                    selected: (date) => _controller.selected(date.toNative()),
                     onMonthChange: (date) {
                       _month.value = date;
                       widget.onMonthChange?.call(date.toNative());
                     },
                     onPress: (date) {
                       final native = date.toNative();
-                      widget.controller.select(native);
+                      _controller.select(native);
                       widget.onPress?.call(native);
                     },
                     onLongPress: (date) => widget.onLongPress?.call(date.toNative()),

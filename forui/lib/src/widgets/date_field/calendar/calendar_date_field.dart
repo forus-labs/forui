@@ -270,8 +270,7 @@ class _CalendarPopover extends StatelessWidget {
       child: ValueListenableBuilder(
         valueListenable: controller._calendar,
         builder: (_, value, _) => FCalendar(
-          style: style.calendarStyle,
-          controller: controller._calendar,
+          control: .managedDate(controller: controller._calendar), style: style.calendarStyle,
           initialMonth: switch (value) {
             null => null,
             _ when value.isBefore(properties.start ?? .utc(1900)) => properties.today,

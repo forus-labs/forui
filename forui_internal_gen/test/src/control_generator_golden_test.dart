@@ -76,6 +76,7 @@ const _golden = r'''
 // coverage:ignore-file
 // ignore_for_file: unnecessary_ignore
 // ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: unrelated_type_equality_checks
 
 part of 'sample.dart';
 
@@ -307,6 +308,7 @@ const _typeParametersGolden = r'''
 // coverage:ignore-file
 // ignore_for_file: unnecessary_ignore
 // ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: unrelated_type_equality_checks
 
 part of 'sample.dart';
 
@@ -547,6 +549,7 @@ const _managedSubclassesGolden = r'''
 // coverage:ignore-file
 // ignore_for_file: unnecessary_ignore
 // ignore_for_file: avoid_positional_boolean_parameters
+// ignore_for_file: unrelated_type_equality_checks
 
 part of 'sample.dart';
 

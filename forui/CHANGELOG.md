@@ -45,6 +45,14 @@ dart fix --apply
 * **Breaking** Remove `FBreadcrumbItem.collapsedTiles(popoverController: ...)`. Use `FBreadcrumbItem.collapsedTiles(popoverControl: .managed(...))` instead.
 
 
+### `FCalendar`
+Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due to the complexity of its API changes.
+
+* Add `FCalendarControl`.
+
+* **Breaking** Remove `FCalendar.controller`. Use `FCalendar(control: .managedDate(...))` instead.
+
+
 ### `FCheckbox`
 * **Breaking** Remove `FCheckbox.grouped(...)`. Use `FSelectGroupItemMixin.checkbox(...)` instead.
 

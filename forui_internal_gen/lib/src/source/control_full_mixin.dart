@@ -220,7 +220,7 @@ class _ManagedControlMixin extends ControlMixin {
           
         ${element.isAbstract ? '''
         // Internal -> Internal (different type, e.g. Normal -> Cascade)
-        case final ${element.name} old when old != this:
+        case final ${element.name}$_typeParameters old when old != this:
           controller.dispose();
           return (_create($_createParameters), true);
         ''' : ''}
