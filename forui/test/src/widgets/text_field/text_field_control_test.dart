@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/src/widgets/text_field/text_field_control.dart';
-
 import '../../test_scaffold.dart';
 
 class _Controller extends TextEditingController {

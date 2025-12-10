@@ -1,5 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
+
+import 'package:collection/collection.dart';
 
 import 'package:forui/forui.dart';
 

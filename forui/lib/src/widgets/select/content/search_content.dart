@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
+import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
 part 'search_content.design.dart';
 

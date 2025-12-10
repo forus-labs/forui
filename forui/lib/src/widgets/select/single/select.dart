@@ -9,8 +9,8 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/form_field.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
-import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/content/inherited_controller.dart';
+import 'package:forui/src/widgets/select/content/search_content.dart';
 import 'package:forui/src/widgets/select/single/select_controller.dart';
 
 part 'basic_select.dart';

@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/autocomplete/autocomplete.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
+import 'package:forui/src/widgets/autocomplete/autocomplete.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
