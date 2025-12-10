@@ -724,10 +724,14 @@ mixin _$CascadeMixin on Diagnosticable, FSubclassControl {
 ''';
 
 void main() {
-  test('no type parameters', () async {
-    final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
-    await readerWriter.testing.loadIsolateSources();
+  late TestReaderWriter readerWriter;
 
+  setUpAll(() async {
+    readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
+    await readerWriter.testing.loadIsolateSources();
+  });
+
+  test('no type parameters', () async {
     await testBuilder(
       controlBuilder(.empty),
       {'forui_internal_gen|test/src/sample.dart': _source},
@@ -737,9 +741,6 @@ void main() {
   }, timeout: const Timeout(Duration(minutes: 1)));
 
   test('with type parameters', () async {
-    final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
-    await readerWriter.testing.loadIsolateSources();
-
     await testBuilder(
       controlBuilder(.empty),
       {'forui_internal_gen|test/src/sample.dart': _typeParametersSource},
@@ -749,9 +750,6 @@ void main() {
   }, timeout: const Timeout(Duration(minutes: 1)));
 
   test('with managed subclasses', () async {
-    final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
-    await readerWriter.testing.loadIsolateSources();
-
     await testBuilder(
       controlBuilder(.empty),
       {'forui_internal_gen|test/src/sample.dart': _managedSubclassesSource},
