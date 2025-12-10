@@ -62,11 +62,11 @@ List<FieldElement> transitiveInstanceFields(ClassElement element) {
 
 /// Returns the instance fields for the given [element].
 List<FieldElement> instanceFields(ClassElement element) => [
-    for (final field in element.fields)
-      if (!(field.getter?.isAbstract ?? false) &&
-          !field.isStatic &&
-          field.isPublic &&
-          field.name != 'runtimeType' &&
-          field.name != 'hashCode')
-        field,
-  ];
+  for (final field in element.fields)
+    if (!(field.getter?.isAbstract ?? false) &&
+        !field.isStatic &&
+        field.isPublic &&
+        field.name != 'runtimeType' &&
+        field.name != 'hashCode')
+      field,
+];

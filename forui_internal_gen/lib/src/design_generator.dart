@@ -1,7 +1,7 @@
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
-import 'package:forui_internal_gen/src/source/design_transformations_extension.dart';
 import 'package:forui_internal_gen/src/source/design_functions_mixin.dart';
+import 'package:forui_internal_gen/src/source/design_transformations_extension.dart';
 import 'package:source_gen/source_gen.dart';
 
 final _style = RegExp(r'^F(?!Inherited).*(Style|Styles)$');

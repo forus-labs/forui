@@ -5,7 +5,7 @@ import 'package:forui_internal_gen/src/design_generator.dart';
 import 'package:source_gen/source_gen.dart';
 
 const _controlHeader =
-'''
+    '''
 $defaultFileHeader
 
 // dart format width=120

@@ -100,10 +100,7 @@ class ControlParentMixin {
 
   Method get defaultMethod => Method(
     (m) => m
-      ..docs.addAll([
-        '// TODO: https://github.com/dart-lang/sdk/issues/62198',
-        '// ignore: unused_element',
-      ])
+      ..docs.addAll(['// TODO: https://github.com/dart-lang/sdk/issues/62198', '// ignore: unused_element'])
       ..returns = refer(_returnType)
       ..name = '_default'
       ..requiredParameters.addAll([
