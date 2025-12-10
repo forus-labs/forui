@@ -17,10 +17,7 @@ void main() {
 
       Widget buildWidget() => TestScaffold.app(
         child: FTextField(
-          control: .lifted(
-            value: value,
-            onChange: (v) => received = v,
-          ),
+          control: .lifted(value: value, onChange: (v) => received = v),
         ),
       );
 
@@ -38,18 +35,14 @@ void main() {
       expect(find.text('external'), findsOneWidget);
     });
   });
-  
+
   group('managed', () {
     testWidgets('onChange called', (tester) async {
       TextEditingValue? lastValue;
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTextField(
-            control: .managed(
-              onChange: (value) => lastValue = value,
-            ),
-          ),
+          child: FTextField(control: .managed(onChange: (value) => lastValue = value)),
         ),
       );
 
@@ -59,7 +52,6 @@ void main() {
       expect(lastValue?.text, 'hello');
     });
   });
-  
 
   group('embedding', () {
     testWidgets('embedded in CupertinoApp', (tester) async {
@@ -139,7 +131,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: FThemes.zinc.light,
-          child: FTextField(control: .managed(controller: controller), clearable: (value) => value.text.isNotEmpty),
+          child: FTextField(
+            control: .managed(controller: controller),
+            clearable: (value) => value.text.isNotEmpty,
+          ),
         ),
       );
 
@@ -158,7 +153,8 @@ void main() {
         TestScaffold.app(
           theme: FThemes.zinc.light,
           child: FTextField(
-            control: .managed(controller: controller), clearable: (value) => value.text.isNotEmpty,
+            control: .managed(controller: controller),
+            clearable: (value) => value.text.isNotEmpty,
             suffixBuilder: (_, _, _) => const SizedBox(),
           ),
         ),
@@ -214,7 +210,8 @@ void main() {
       TestScaffold.app(
         child: FTextField(
           builder: (_, _, _, child) => FPopover(
-            control: .managed(controller: controller), popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
+            control: .managed(controller: controller),
+            popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
             child: child,
           ),
         ),
@@ -229,7 +226,8 @@ void main() {
         child: FTextField(
           error: Container(height: 100, width: 100, color: Colors.red),
           builder: (_, _, _, child) => FPopover(
-            control: .managed(controller: controller), popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
+            control: .managed(controller: controller),
+            popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
             child: child,
           ),
         ),

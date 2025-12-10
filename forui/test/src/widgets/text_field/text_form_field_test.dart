@@ -12,10 +12,7 @@ void main() {
 
     Widget buildWidget() => TestScaffold.app(
       child: FTextFormField(
-        control: .lifted(
-          value: value,
-          onChange: (v) => received = v,
-        ),
+        control: .lifted(value: value, onChange: (v) => received = v),
       ),
     );
 
@@ -32,17 +29,13 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('external'), findsOneWidget);
   });
-  
+
   testWidgets('onChange', (tester) async {
     TextEditingValue? lastValue;
 
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FTextFormField(
-          control: .managed(
-            onChange: (value) => lastValue = value,
-          ),
-        ),
+        child: FTextFormField(control: .managed(onChange: (value) => lastValue = value)),
       ),
     );
 

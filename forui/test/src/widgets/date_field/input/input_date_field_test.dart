@@ -126,8 +126,20 @@ void main() {
     }
 
     for (final (description, field) in [
-      ('input only', (controller) => FDateField.input(control: .managed(controller: controller), key: key)),
-      ('input & calendar', (controller) => FDateField(control: .managed(controller: controller), key: key)),
+      (
+        'input only',
+        (controller) => FDateField.input(
+          control: .managed(controller: controller),
+          key: key,
+        ),
+      ),
+      (
+        'input & calendar',
+        (controller) => FDateField(
+          control: .managed(controller: controller),
+          key: key,
+        ),
+      ),
     ]) {
       testWidgets('custom invalid date - $description', (tester) async {
         debugDefaultTargetPlatformOverride = TargetPlatform.macOS;

@@ -81,7 +81,8 @@ class Managed extends FLineCalendarControl with Diagnosticable, _$ManagedMixin {
 
   @override
   FCalendarController<DateTime?> _create(VoidCallback callback) =>
-      (controller ?? FCalendarController.date(initialSelection: initial, toggleable: toggleable))..addListener(callback);
+      (controller ?? FCalendarController.date(initialSelection: initial, toggleable: toggleable))
+        ..addListener(callback);
 }
 
 class _Controller implements FCalendarController<DateTime?> {

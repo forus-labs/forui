@@ -51,7 +51,8 @@ void main() {
               width: 300,
               height: 300,
               child: FTimePicker(
-                control: .managed(controller: controller), hour24: hour24,
+                control: .managed(controller: controller),
+                hour24: hour24,
                 hourInterval: hourInterval,
                 minuteInterval: minuteInterval,
               ),
@@ -106,10 +107,7 @@ void main() {
         const Duration(milliseconds: 200),
       );
 
-      await expectLater(
-        sheet.collate(5),
-        matchesGoldenFile('time-picker/lifted-value-change-animation.png'),
-      );
+      await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-value-change-animation.png'));
     });
 
     testWidgets('animates drag back', (tester) async {
@@ -141,10 +139,7 @@ void main() {
 
       await tester.pumpFrames(buildWidget(), const Duration(milliseconds: 200));
 
-      await expectLater(
-        sheet.collate(5),
-        matchesGoldenFile('time-picker/lifted-drag-back-animation.png'),
-      );
+      await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-drag-back-animation.png'));
     });
 
     testWidgets('change hour24 format', (tester) async {
@@ -185,10 +180,7 @@ void main() {
       await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('time-picker/lifted-hour24.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-picker/lifted-hour24.png'));
     });
 
     testWidgets('change locale', (tester) async {
@@ -229,10 +221,7 @@ void main() {
       await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('time-picker/lifted-change-locale.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-picker/lifted-change-locale.png'));
     });
   });
 
@@ -246,7 +235,11 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(control: .managed(controller: controller))),
+            child: SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(control: .managed(controller: controller)),
+            ),
           ),
         );
 
@@ -267,7 +260,11 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(control: .managed(controller: controller))),
+            child: SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(control: .managed(controller: controller)),
+            ),
           ),
         );
 
@@ -288,7 +285,11 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(control: .managed(controller: controller))),
+            child: SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(control: .managed(controller: controller)),
+            ),
           ),
         );
 
@@ -309,7 +310,11 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             locale: locale,
-            child: SizedBox(width: 300, height: 300, child: FTimePicker(control: .managed(controller: controller))),
+            child: SizedBox(
+              width: 300,
+              height: 300,
+              child: FTimePicker(control: .managed(controller: controller)),
+            ),
           ),
         );
 

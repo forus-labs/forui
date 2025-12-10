@@ -17,7 +17,10 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFAutocompleteController(vsync: tester);
-            return FAutocomplete(control: .managed(controller: controller), items: const []);
+            return FAutocomplete(
+              control: .managed(controller: controller),
+              items: const [],
+            );
           },
         ),
       ),

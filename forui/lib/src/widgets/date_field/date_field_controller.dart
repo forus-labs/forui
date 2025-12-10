@@ -328,14 +328,14 @@ class Lifted extends FDateFieldControl with _$LiftedMixin {
   @override
   void _updateController(FDateFieldController controller, TickerProvider vsync) {
     (controller as _Controller).update(
-    vsync,
-    value,
-    onChange,
-    validator,
-    truncateAndStripTimezone,
-    popoverShown,
-    onPopoverChange,
-  );
+      vsync,
+      value,
+      onChange,
+      validator,
+      truncateAndStripTimezone,
+      popoverShown,
+      onPopoverChange,
+    );
   }
 }
 

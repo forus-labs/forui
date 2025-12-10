@@ -143,7 +143,8 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
         builder: (state) => FTextField(
-          control: .managed(controller: inputController), style: textFieldStyle,
+          control: .managed(controller: inputController),
+          style: textFieldStyle,
           statesController: inputController.statesController,
           builder: widget.builder,
           autocorrect: false,

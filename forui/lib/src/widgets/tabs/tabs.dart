@@ -126,13 +126,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   @override
   void didUpdateWidget(covariant FTabs old) {
     super.didUpdateWidget(old);
-    _controller = widget.control.update(
-      old.control,
-      _controller,
-      _update,
-      this,
-      widget.children.length,
-    ).$1;
+    _controller = widget.control.update(old.control, _controller, _update, this, widget.children.length).$1;
   }
 
   @override

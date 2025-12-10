@@ -11,18 +11,18 @@ import '../../test_scaffold.dart';
 void main() {
   for (final (name, field) in [
     (
-    'input only',
-        (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField(
-      key: key,
-      control: .lifted(value: value, onChange: onChange),
-    ),
+      'input only',
+      (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField(
+        key: key,
+        control: .lifted(value: value, onChange: onChange),
+      ),
     ),
     (
-    'picker only',
-        (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField.picker(
-      key: key,
-      control: .lifted(value: value, onChange: onChange),
-    ),
+      'picker only',
+      (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField.picker(
+        key: key,
+        control: .lifted(value: value, onChange: onChange),
+      ),
     ),
   ]) {
     testWidgets('$name - lifted', (tester) async {

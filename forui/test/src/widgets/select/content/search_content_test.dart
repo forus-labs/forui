@@ -1,4 +1,3 @@
-
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -44,7 +43,8 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelect<String>.searchBuilder(
-          control: .managed(controller: controller), key: key,
+          control: .managed(controller: controller),
+          key: key,
           format: (s) => s,
           searchFieldProperties: FSelectSearchFieldProperties(control: .managed(controller: textController)),
           filter: (query) =>
@@ -84,8 +84,9 @@ void main() {
                 searchFieldProperties: FSelectSearchFieldProperties(
                   control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
                 ),
-                filter: (query) =>
-                    query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
+                filter: (query) => query.isEmpty
+                    ? fruits
+                    : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
                 items: {for (final fruit in fruits) fruit: fruit},
               ),
             ),
@@ -136,9 +137,7 @@ void main() {
           TestScaffold.app(
             child: FSelect<String>.search(
               key: key,
-              searchFieldProperties: FSelectSearchFieldProperties(
-                onChange: (v) => changedValue = v,
-              ),
+              searchFieldProperties: FSelectSearchFieldProperties(onChange: (v) => changedValue = v),
               filter: (query) => fruits,
               items: {for (final fruit in fruits) fruit: fruit},
             ),

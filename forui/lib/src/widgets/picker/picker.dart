@@ -74,12 +74,9 @@ class _FPickerState extends State<FPicker> {
   @override
   void didUpdateWidget(covariant FPicker old) {
     super.didUpdateWidget(old);
-    _controller = widget.control.update(
-      old.control,
-      _controller,
-      _handleChange,
-      widget.children.whereType<FPickerWheel>().length,
-    ).$1;
+    _controller = widget.control
+        .update(old.control, _controller, _handleChange, widget.children.whereType<FPickerWheel>().length)
+        .$1;
   }
 
   @override

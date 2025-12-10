@@ -194,13 +194,10 @@ void main() {
 
       final controller = autoDispose(FPickerController(initialIndexes: [0, 0]));
       await tester.pumpWidget(
-        picker(
-          controller,
-          (value) {
-            changedValue = value;
-            callCount++;
-          },
-        ),
+        picker(controller, (value) {
+          changedValue = value;
+          callCount++;
+        }),
       );
 
       controller.value = [1, 0];
@@ -232,19 +229,10 @@ void main() {
         StatefulBuilder(
           builder: (_, setState) => TestScaffold(
             child: FPicker(
-              control: .lifted(
-                value: value,
-                onChange: (v) => setState(() => value = v),
-              ),
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
               children: const [
-                FPickerWheel(
-                  key: ValueKey('first'),
-                  children: [Text('0A'), Text('0B'), Text('0C')],
-                ),
-                FPickerWheel(
-                  key: ValueKey('second'),
-                  children: [Text('1A'), Text('1B'), Text('1C')],
-                ),
+                FPickerWheel(key: ValueKey('first'), children: [Text('0A'), Text('0B'), Text('0C')]),
+                FPickerWheel(key: ValueKey('second'), children: [Text('1A'), Text('1B'), Text('1C')]),
               ],
             ),
           ),
@@ -278,10 +266,7 @@ void main() {
       StatefulBuilder(
         builder: (_, setState) => TestScaffold(
           child: FPicker(
-            control: .lifted(
-              value: value,
-              onChange: (v) => setState(() => value = v),
-            ),
+            control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
             children: const [
               FPickerWheel(children: [Text('0A'), Text('0B'), Text('0C')]),
             ],
@@ -292,17 +277,14 @@ void main() {
 
     expect(value, [0]);
 
-    value = [value[0],  0];
+    value = [value[0], 0];
 
     await tester.pumpWidget(
       StatefulBuilder(
         builder: (_, setState) => TestScaffold(
           child: FPicker(
             key: const ValueKey('expanded'),
-            control: .lifted(
-              value: value,
-              onChange: (v) => setState(() => value = v),
-            ),
+            control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
             children: const [
               FPickerWheel(children: [Text('0A'), Text('0B'), Text('0C')]),
               FPickerWheel(children: [Text('1A'), Text('1B'), Text('1C')]),

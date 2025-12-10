@@ -12,10 +12,7 @@ void main() {
 
     Widget buildWidget() => TestScaffold.app(
       child: FTextField.password(
-        control: .lifted(
-          value: value,
-          onChange: (v) => received = v,
-        ),
+        control: .lifted(value: value, onChange: (v) => received = v),
       ),
     );
 
@@ -35,7 +32,9 @@ void main() {
 
   testWidgets('hide', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.app(child: FTextField.password(obscureTextControl: .managed(controller: autoDispose(ValueNotifier(false))))),
+      TestScaffold.app(
+        child: FTextField.password(obscureTextControl: .managed(controller: autoDispose(ValueNotifier(false)))),
+      ),
     );
 
     expect(find.bySemanticsLabel('Hide password'), findsOne);
@@ -89,10 +88,7 @@ void main() {
 
       Widget buildWidget() => TestScaffold.app(
         child: FTextField.password(
-          obscureTextControl: .lifted(
-            value: value,
-            onChange: (v) => received = v,
-          ),
+          obscureTextControl: .lifted(value: value, onChange: (v) => received = v),
         ),
       );
 
@@ -113,7 +109,11 @@ void main() {
     testWidgets('managed', (tester) async {
       final controller = autoDispose(ValueNotifier(false));
 
-      await tester.pumpWidget(TestScaffold.app(child: FTextField.password(obscureTextControl: .managed(controller: controller))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField.password(obscureTextControl: .managed(controller: controller)),
+        ),
+      );
 
       expect(find.bySemanticsLabel('Hide password'), findsOne);
       expect(find.byIcon(FIcons.eyeClosed), findsOne);

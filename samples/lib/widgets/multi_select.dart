@@ -317,7 +317,8 @@ class MinMaxMultiSelectPage extends Sample {
   Widget sample(BuildContext context) => Padding(
     padding: const .only(top: 15),
     child: FMultiSelect<String>.rich(
-      control: const .managed(min: 1, max: 3), hint: const Text('Select favorite fruits'),
+      control: const .managed(min: 1, max: 3),
+      hint: const Text('Select favorite fruits'),
       format: Text.new,
       children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
     ),
@@ -385,7 +386,8 @@ class _FormMultiSelectPageState extends StatefulSampleState<FormMultiSelectPage>
         crossAxisAlignment: .start,
         children: [
           FMultiSelect<String>.rich(
-            control: .managed(controller: _controller), label: const Text('Department'),
+            control: .managed(controller: _controller),
+            label: const Text('Department'),
             description: const Text('Choose your dream department(s)'),
             hint: const Text('Select departments'),
             format: Text.new,

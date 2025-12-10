@@ -116,9 +116,9 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
     this.enabled = true,
     this.autovalidateMode = .disabled,
     super.key,
-  })  : _children = children,
-        _tileBuilder = null,
-        _count = null;
+  }) : _children = children,
+       _tileBuilder = null,
+       _count = null;
 
   /// {@template forui.widgets.FSelectTileGroup.builder}
   /// Creates a [FSelectTileGroup] that lazily builds its children.
@@ -147,9 +147,9 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
     this.enabled = true,
     this.autovalidateMode = .disabled,
     super.key,
-  })  : _children = null,
-        _tileBuilder = tileBuilder,
-        _count = count;
+  }) : _children = null,
+       _tileBuilder = tileBuilder,
+       _count = count;
 
   @override
   State<FSelectTileGroup<T>> createState() => _FSelectTileGroupState<T>();
@@ -234,11 +234,7 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
             semanticsLabel: widget.semanticsLabel,
             children: [
               for (final child in children)
-                FSelectTileData<T>(
-                  controller: _controller,
-                  selected: _controller.contains(child.value),
-                  child: child,
-                ),
+                FSelectTileData<T>(controller: _controller, selected: _controller.contains(child.value), child: child),
             ],
           );
         }

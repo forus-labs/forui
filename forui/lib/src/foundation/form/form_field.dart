@@ -14,8 +14,6 @@ class Field<T> extends FormField<T> {
     required super.onReset,
     required super.validator,
     required super.builder,
-    @Deprecated('Remove in the near future')
-    T? initialValue,
     super.key,
   }) : super(initialValue: controller.value);
 

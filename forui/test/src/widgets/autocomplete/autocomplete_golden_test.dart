@@ -138,7 +138,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FAutocomplete(key: key, control: const .managed(initial: TextEditingValue(text: 'Zebra')), items: fruits),
+          child: FAutocomplete(
+            key: key,
+            control: const .managed(initial: TextEditingValue(text: 'Zebra')),
+            items: fruits,
+          ),
         ),
       );
 
@@ -283,7 +287,12 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, hint: 'Type to search', control: const .managed(initial: TextEditingValue(text: 'App')), items: fruits),
+        child: FAutocomplete(
+          key: key,
+          hint: 'Type to search',
+          control: const .managed(initial: TextEditingValue(text: 'App')),
+          items: fruits,
+        ),
       ),
     );
 
@@ -300,7 +309,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, control: const .managed(initial: TextEditingValue(text: 'B')), items: fruits),
+        child: FAutocomplete(
+          key: key,
+          control: const .managed(initial: TextEditingValue(text: 'B')),
+          items: fruits,
+        ),
       ),
     );
 

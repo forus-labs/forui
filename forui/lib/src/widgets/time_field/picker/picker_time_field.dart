@@ -116,7 +116,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
     }
 
-    final(controller, updated) = widget.control.update(old.control, _controller, _handleOnChange, this);
+    final (controller, updated) = widget.control.update(old.control, _controller, _handleOnChange, this);
     if (updated) {
       _controller = controller;
       _updateTextController();

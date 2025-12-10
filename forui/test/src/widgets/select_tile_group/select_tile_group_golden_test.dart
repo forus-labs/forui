@@ -317,7 +317,11 @@ void main() {
             theme: theme.data,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: FSelectTileGroup(control: .managed(controller: controller), label: const Text('Network'), children: const []),
+              child: FSelectTileGroup(
+                control: .managed(controller: controller),
+                label: const Text('Network'),
+                children: const [],
+              ),
             ),
           ),
         );

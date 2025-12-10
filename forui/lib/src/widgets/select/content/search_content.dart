@@ -127,7 +127,8 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
         CallbackShortcuts(
           bindings: {const SingleActivator(.enter): _focus.nextFocus},
           child: FTextField(
-            control: .managed(controller: _controller, onChange: widget.properties.onChange), focusNode: _focus,
+            control: .managed(controller: _controller, onChange: widget.properties.onChange),
+            focusNode: _focus,
             style: widget.searchStyle.textFieldStyle,
             hint: widget.properties.hint ?? localizations.selectSearchHint,
             magnifierConfiguration: widget.properties.magnifierConfiguration,

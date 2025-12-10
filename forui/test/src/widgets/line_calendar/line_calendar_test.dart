@@ -40,10 +40,18 @@ void main() {
 
     testWidgets('old controller is not disposed', (tester) async {
       final first = autoDispose(FCalendarController.date(initialSelection: DateTime(2023)));
-      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar(control: .managed(controller: first))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FLineCalendar(control: .managed(controller: first)),
+        ),
+      );
 
       final second = autoDispose(FCalendarController.date());
-      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar(control: .managed(controller: second))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FLineCalendar(control: .managed(controller: second)),
+        ),
+      );
 
       expect(first.disposed, false);
       expect(second.disposed, false);
@@ -51,10 +59,18 @@ void main() {
 
     testWidgets('old controller is not disposed', (tester) async {
       final first = autoDispose(FCalendarController.date());
-      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar(control: .managed(controller: first))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FLineCalendar(control: .managed(controller: first)),
+        ),
+      );
 
       final second = autoDispose(FCalendarController.date());
-      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar(control: .managed(controller: second))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FLineCalendar(control: .managed(controller: second)),
+        ),
+      );
 
       expect(first.disposed, false);
       expect(second.disposed, false);
@@ -62,12 +78,20 @@ void main() {
 
     testWidgets('update controller', (tester) async {
       final first = autoDispose(FCalendarController.date());
-      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar(control: .managed(controller: first))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FLineCalendar(control: .managed(controller: first)),
+        ),
+      );
 
       expect(first.disposed, false);
 
       final second = autoDispose(FCalendarController.date());
-      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar(control: .managed(controller: second))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FLineCalendar(control: .managed(controller: second)),
+        ),
+      );
 
       expect(first.disposed, false);
       expect(second.disposed, false);
@@ -75,7 +99,11 @@ void main() {
 
     testWidgets('dispose controller', (tester) async {
       final controller = autoDispose(FCalendarController.date());
-      await tester.pumpWidget(TestScaffold.app(child: FLineCalendar(control: .managed(controller: controller))));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FLineCalendar(control: .managed(controller: controller)),
+        ),
+      );
 
       expect(controller.disposed, false);
 
@@ -93,7 +121,9 @@ void main() {
       final firstController = autoDispose(FCalendarController.date());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FLineCalendar(control: .managed(controller: firstController, onChange: onChange)),
+          child: FLineCalendar(
+            control: .managed(controller: firstController, onChange: onChange),
+          ),
         ),
       );
 
@@ -105,7 +135,9 @@ void main() {
       final secondController = autoDispose(FCalendarController.date());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FLineCalendar(control: .managed(controller: secondController, onChange: onChange)),
+          child: FLineCalendar(
+            control: .managed(controller: secondController, onChange: onChange),
+          ),
         ),
       );
 
@@ -123,7 +155,9 @@ void main() {
       final controller = autoDispose(FCalendarController.date());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FLineCalendar(control: .managed(controller: controller, onChange: (_) => first++)),
+          child: FLineCalendar(
+            control: .managed(controller: controller, onChange: (_) => first++),
+          ),
         ),
       );
 
@@ -134,7 +168,9 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FLineCalendar(control: .managed(controller: controller, onChange: (_) => second++)),
+          child: FLineCalendar(
+            control: .managed(controller: controller, onChange: (_) => second++),
+          ),
         ),
       );
 
@@ -152,7 +188,9 @@ void main() {
       final firstController = autoDispose(FCalendarController.date());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FLineCalendar(control: .managed(controller: firstController, onChange: (_) => first++)),
+          child: FLineCalendar(
+            control: .managed(controller: firstController, onChange: (_) => first++),
+          ),
         ),
       );
 
@@ -164,7 +202,9 @@ void main() {
       final secondController = autoDispose(FCalendarController.date());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FLineCalendar(control: .managed(controller: secondController, onChange: (_) => second++)),
+          child: FLineCalendar(
+            control: .managed(controller: secondController, onChange: (_) => second++),
+          ),
         ),
       );
 
@@ -182,7 +222,9 @@ void main() {
       final controller = autoDispose(FCalendarController.date());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FLineCalendar(control: .managed(controller: controller, onChange: (_) => count++)),
+          child: FLineCalendar(
+            control: .managed(controller: controller, onChange: (_) => count++),
+          ),
         ),
       );
 

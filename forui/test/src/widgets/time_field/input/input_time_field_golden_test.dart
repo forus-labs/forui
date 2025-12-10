@@ -39,10 +39,7 @@ void main() {
     await tester.sendKeyEvent(.arrowUp);
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('time-field/lifted-arrow-scroll.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/lifted-arrow-scroll.png'));
   });
 
   for (final theme in TestScaffold.themes) {

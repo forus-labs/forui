@@ -11,5 +11,6 @@ class LineCalendarPage extends Sample {
   LineCalendarPage({@queryParam super.theme, super.maxWidth = 600});
 
   @override
-  Widget sample(BuildContext context) => FLineCalendar(control: .managed(initial: .now().subtract(const Duration(days: 1))));
+  Widget sample(BuildContext context) =>
+      FLineCalendar(control: .managed(initial: .now().subtract(const Duration(days: 1))));
 }

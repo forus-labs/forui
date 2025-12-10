@@ -184,7 +184,11 @@ sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
 
   const FPaginationControl._();
 
-  (FPaginationController, bool) _update(FPaginationControl old, FPaginationController controller, VoidCallback callback);
+  (FPaginationController, bool) _update(
+    FPaginationControl old,
+    FPaginationController controller,
+    VoidCallback callback,
+  );
 }
 
 @internal

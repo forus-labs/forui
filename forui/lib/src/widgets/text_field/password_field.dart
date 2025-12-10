@@ -267,11 +267,9 @@ class _State extends State<PasswordField> {
   @override
   void didUpdateWidget(PasswordField old) {
     super.didUpdateWidget(old);
-    _controller = widget.properties.obscureTextControl.update(
-      old.properties.obscureTextControl,
-      _controller,
-      _handleOnChange,
-    ).$1;
+    _controller = widget.properties.obscureTextControl
+        .update(old.properties.obscureTextControl, _controller, _handleOnChange)
+        .$1;
   }
 
   @override

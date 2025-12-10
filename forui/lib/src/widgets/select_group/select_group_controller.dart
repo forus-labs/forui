@@ -11,8 +11,7 @@ typedef FSelectGroupController<T> = FMultiValueNotifier<T>;
 class _Controller<T> extends FMultiValueNotifier<T> {
   ValueChanged<Set<T>> _onChange;
 
-  _Controller({required super.value, required ValueChanged<Set<T>> onChange})
-      : _onChange = onChange;
+  _Controller({required super.value, required ValueChanged<Set<T>> onChange}) : _onChange = onChange;
 
   void updateState(Set<T> value, ValueChanged<Set<T>> onChange) {
     if (super.value != value) {

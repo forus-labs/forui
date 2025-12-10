@@ -114,7 +114,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
 
     switch ((_accordionController, _initialized)) {
       case (LiftedController(:final items), true):
-        items.contains(index) ? _controller.forward(): _controller.reverse();
+        items.contains(index) ? _controller.forward() : _controller.reverse();
 
       case (LiftedController(:final items), false):
         _controller.value = items.contains(index) ? 1.0 : 0.0;

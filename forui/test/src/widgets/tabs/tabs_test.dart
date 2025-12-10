@@ -270,7 +270,6 @@ void main() {
     expect(find.text('bar content'), findsOneWidget);
   });
 
-
   testWidgets('onPress is triggered when a tab is pressed', (tester) async {
     var index = -1;
     final controller = autoDispose(FTabController(length: 2, vsync: tester));

@@ -77,7 +77,8 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FDateField(
-            control: .managed(controller: first), key: key,
+            control: .managed(controller: first),
+            key: key,
             calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
           ),
         ),
@@ -87,7 +88,8 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FDateField(
-            control: .managed(controller: second), key: key,
+            control: .managed(controller: second),
+            key: key,
             calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
           ),
         ),
@@ -103,7 +105,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: LocaleScaffold(
-            child: FDateField.input(control: .managed(controller: controller), key: key),
+            child: FDateField.input(
+              control: .managed(controller: controller),
+              key: key,
+            ),
           ),
         ),
       );
@@ -122,7 +127,9 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: LocaleScaffold(child: FDateField.calendar(control: .managed(controller: controller))),
+          child: LocaleScaffold(
+            child: FDateField.calendar(control: .managed(controller: controller)),
+          ),
         ),
       );
       expect(find.text('Pick a date'), findsOneWidget);
@@ -136,9 +143,27 @@ void main() {
     });
 
     for (final (name, field) in [
-      ('calendar only', (controller, focus) => FDateField.calendar(control: .managed(controller: controller), focusNode: focus)),
-      ('input only', (controller, focus) => FDateField.input(control: .managed(controller: controller), focusNode: focus)),
-      ('both', (controller, focus) => FDateField(control: .managed(controller: controller), focusNode: focus)),
+      (
+        'calendar only',
+        (controller, focus) => FDateField.calendar(
+          control: .managed(controller: controller),
+          focusNode: focus,
+        ),
+      ),
+      (
+        'input only',
+        (controller, focus) => FDateField.input(
+          control: .managed(controller: controller),
+          focusNode: focus,
+        ),
+      ),
+      (
+        'both',
+        (controller, focus) => FDateField(
+          control: .managed(controller: controller),
+          focusNode: focus,
+        ),
+      ),
     ]) {
       group(name, () {
         testWidgets('update focus', (tester) async {

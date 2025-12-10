@@ -76,9 +76,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPagination(
-            control: FPaginationControl.managed(
-              controller: autoDispose(FPaginationController(pages: 14, siblings: 2)),
-            ),
+            control: FPaginationControl.managed(controller: autoDispose(FPaginationController(pages: 14, siblings: 2))),
           ),
         ),
       );

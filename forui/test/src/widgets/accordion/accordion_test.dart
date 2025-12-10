@@ -199,9 +199,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FAccordion(
-          control: .managed(
-            onChange: (expanded) => lastExpanded = expanded,
-          ),
+          control: .managed(onChange: (expanded) => lastExpanded = expanded),
           children: const [FAccordionItem(title: Text('Title'), child: Text('Content'))],
         ),
       ),

@@ -38,13 +38,7 @@ class FPagination extends StatefulWidget {
   final Widget? next;
 
   /// Creates an [FPagination].
-  const FPagination({
-    this.control = const .managed(),
-    this.style,
-    this.previous,
-    this.next,
-    super.key,
-  });
+  const FPagination({this.control = const .managed(), this.style, this.previous, this.next, super.key});
 
   @override
   State<FPagination> createState() => _FPaginationState();

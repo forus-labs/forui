@@ -85,23 +85,23 @@ extension InternalPopoverController on FPopoverController {
   /// Typically used when updating a popover controller nested in another controller.
   @useResult
   static FPopoverController updateNested(
-      FPopoverController controller,
-      TickerProvider vsync,
-      bool? shown,
-      ValueChanged<bool>? onChange,
-      ) {
+    FPopoverController controller,
+    TickerProvider vsync,
+    bool? shown,
+    ValueChanged<bool>? onChange,
+  ) {
     switch ((controller, shown != null)) {
-    // Lifted -> Lifted
+      // Lifted -> Lifted
       case (final LiftedPopoverController lifted, true):
         lifted.update(shown!, onChange!);
         return lifted;
 
-    // Lifted -> Internal
+      // Lifted -> Internal
       case (LiftedPopoverController(), false):
         controller.dispose();
         return FPopoverController(vsync: vsync);
 
-    // Internal -> Lifted
+      // Internal -> Lifted
       case (_, true) when controller is! LiftedPopoverController:
         controller.dispose();
         return LiftedPopoverController(shown!, onChange!, vsync: vsync);
@@ -117,7 +117,6 @@ extension InternalPopoverController on FPopoverController {
 
   Animation<double> get fade => _fade;
 }
-
 
 @internal
 class LiftedPopoverController extends FPopoverController {

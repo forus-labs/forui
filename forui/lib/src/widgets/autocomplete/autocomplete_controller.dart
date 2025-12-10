@@ -263,6 +263,7 @@ class Managed extends FAutocompleteControl with _$ManagedMixin {
     VoidCallback callback,
     TickerProvider vsync,
     FutureOr<Iterable<String>> Function(String) _,
-  ) => (controller ?? .fromValue(initial, vsync: vsync, popoverMotion: motion ?? const FPopoverMotion()))
+  ) =>
+      (controller ?? .fromValue(initial, vsync: vsync, popoverMotion: motion ?? const FPopoverMotion()))
         ..addListener(callback);
 }

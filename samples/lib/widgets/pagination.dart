@@ -70,7 +70,8 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
       mainAxisAlignment: .center,
       children: [
         FPagination(
-          control: .managed(controller: _controller), next: Padding(
+          control: .managed(controller: _controller),
+          next: Padding(
             padding: style.itemPadding,
             child: ConstrainedBox(
               constraints: style.itemConstraints,
@@ -173,7 +174,9 @@ class _PaginationWithViewPageState extends StatefulSampleState<PaginationWithVie
             ),
           ),
         ),
-        FPagination(control: .managed(controller: _paginationController, onChange: _handlePageChange)),
+        FPagination(
+          control: .managed(controller: _paginationController, onChange: _handlePageChange),
+        ),
       ],
     );
   }

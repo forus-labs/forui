@@ -42,7 +42,8 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup<Sidebar>(
-          control: FSelectGroupControl.managed(controller: controller), label: const Text('Sidebar'),
+          control: FSelectGroupControl.managed(controller: controller),
+          label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           divider: widget.divider,
           children: const [
@@ -80,7 +81,8 @@ class _ScrollableSelectTileGroupPageState extends StatefulSampleState<Scrollable
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup<Sidebar>(
-          control: FSelectGroupControl.managed(controller: controller), label: const Text('Sidebar'),
+          control: FSelectGroupControl.managed(controller: controller),
+          label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           maxHeight: 100,
           children: const [
@@ -118,7 +120,8 @@ class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGr
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup.builder(
-          control: .managed(controller: controller), label: const Text('Applicable values'),
+          control: .managed(controller: controller),
+          label: const Text('Applicable values'),
           maxHeight: 200,
           tileBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
         ),
@@ -153,7 +156,8 @@ class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTile
       crossAxisAlignment: .start,
       children: [
         FSelectTileGroup<Language>(
-          control: .managed(controller: _controller), label: const Text('Favorite Languages'),
+          control: .managed(controller: _controller),
+          label: const Text('Favorite Languages'),
           description: const Text('Your favorite language.'),
           validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
           children: const [
@@ -207,7 +211,8 @@ class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroup
       crossAxisAlignment: .start,
       children: [
         FSelectTileGroup<Notification>(
-          control: FSelectGroupControl.managed(controller: _controller), label: const Text('Notifications'),
+          control: FSelectGroupControl.managed(controller: _controller),
+          label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
           children: const [
@@ -258,7 +263,8 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 300),
         child: FSelectTileGroup(
-          control: FSelectGroupControl.managed(controller: _controller), label: const Text('Settings'),
+          control: FSelectGroupControl.managed(controller: _controller),
+          label: const Text('Settings'),
           children: const [
             FSelectTile.suffix(prefix: Icon(FIcons.list), title: Text('List View'), value: 'List'),
             FSelectTile.suffix(prefix: Icon(FIcons.layoutGrid), title: Text('Grid View'), value: 'Grid'),

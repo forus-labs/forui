@@ -26,12 +26,7 @@ class FMultiSelectController<T> extends FMultiValueNotifier<T> {
     FPopoverMotion popoverMotion = const FPopoverMotion(),
   }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion);
 
-  FMultiSelectController._({
-    required super.value,
-    required this.popover,
-    super.min,
-    super.max,
-  });
+  FMultiSelectController._({required super.value, required this.popover, super.min, super.max});
 
   @override
   void dispose() {
@@ -221,12 +216,12 @@ class Managed<T> extends FMultiSelectControl<T> with Diagnosticable, _$ManagedMi
   @override
   FMultiSelectController<T> _create(VoidCallback callback, TickerProvider vsync) =>
       (controller ??
-          FMultiSelectController<T>(
-            vsync: vsync,
-            value: initial ?? {},
-            min: min,
-            max: max,
-            popoverMotion: motion ?? const FPopoverMotion(),
-          ))
+            FMultiSelectController<T>(
+              vsync: vsync,
+              value: initial ?? {},
+              min: min,
+              max: max,
+              popoverMotion: motion ?? const FPopoverMotion(),
+            ))
         ..addListener(callback);
 }

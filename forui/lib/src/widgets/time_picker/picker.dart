@@ -158,7 +158,11 @@ class _Western12Picker extends TimePicker {
 
     format.pattern!.startsWith('a') ? pickers.insert(0, periodPicker) : pickers.add(periodPicker);
 
-    return FPicker(control: .managed(controller: controller.picker), style: style, children: pickers);
+    return FPicker(
+      control: .managed(controller: controller.picker),
+      style: style,
+      children: pickers,
+    );
   }
 }
 
@@ -240,7 +244,11 @@ class _Eastern12Picker extends TimePicker {
 
     format.pattern!.startsWith('a') ? pickers.insert(0, periodPicker) : pickers.add(periodPicker);
 
-    return FPicker(control: .managed(controller: controller.picker), style: style, children: pickers);
+    return FPicker(
+      control: .managed(controller: controller.picker),
+      style: style,
+      children: pickers,
+    );
   }
 }
 

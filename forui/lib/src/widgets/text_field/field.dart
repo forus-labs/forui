@@ -180,7 +180,13 @@ class Field extends StatefulWidget {
       ..add(IterableProperty('inputFormatters', inputFormatters))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('ignorePointers', value: ignorePointers, ifTrue: 'ignorePointers'))
-      ..add(FlagProperty('enableInteractiveSelection', value: enableInteractiveSelection, ifTrue: 'enableInteractiveSelection'))
+      ..add(
+        FlagProperty(
+          'enableInteractiveSelection',
+          value: enableInteractiveSelection,
+          ifTrue: 'enableInteractiveSelection',
+        ),
+      )
       ..add(FlagProperty('selectAllOnFocus', value: selectAllOnFocus, ifTrue: 'selectAllOnFocus'))
       ..add(DiagnosticsProperty('selectionControls', selectionControls))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
@@ -190,8 +196,16 @@ class Field extends StatefulWidget {
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(IterableProperty('autofillHints', autofillHints))
       ..add(StringProperty('restorationId', restorationId))
-      ..add(FlagProperty('stylusHandwritingEnabled', value: stylusHandwritingEnabled, ifTrue: 'stylusHandwritingEnabled'))
-      ..add(FlagProperty('enableIMEPersonalizedLearning', value: enableIMEPersonalizedLearning, ifTrue: 'enableIMEPersonalizedLearning'))
+      ..add(
+        FlagProperty('stylusHandwritingEnabled', value: stylusHandwritingEnabled, ifTrue: 'stylusHandwritingEnabled'),
+      )
+      ..add(
+        FlagProperty(
+          'enableIMEPersonalizedLearning',
+          value: enableIMEPersonalizedLearning,
+          ifTrue: 'enableIMEPersonalizedLearning',
+        ),
+      )
       ..add(DiagnosticsProperty('contentInsertionConfiguration', contentInsertionConfiguration))
       ..add(ObjectFlagProperty.has('contextMenuBuilder', contextMenuBuilder))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))

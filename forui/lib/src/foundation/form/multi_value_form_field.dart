@@ -11,6 +11,7 @@ import 'package:forui/forui.dart';
 class MultiValueFormField<T> extends FormField<Set<T>> {
   /// The controller that holds the current set value.
   final FMultiValueNotifier<T> controller;
+
   /// Creates a [MultiValueFormField].
   MultiValueFormField({
     required this.controller,

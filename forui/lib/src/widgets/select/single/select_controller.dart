@@ -201,11 +201,11 @@ class Managed<T> extends FSelectControl<T> with Diagnosticable, _$ManagedMixin<T
   @override
   FSelectController<T> _create(VoidCallback callback, TickerProvider vsync) =>
       (controller ??
-          FSelectController<T>(
-            vsync: vsync,
-            value: initial,
-            toggleable: toggleable,
-            popoverMotion: motion ?? const FPopoverMotion(),
-          ))
+            FSelectController<T>(
+              vsync: vsync,
+              value: initial,
+              toggleable: toggleable,
+              popoverMotion: motion ?? const FPopoverMotion(),
+            ))
         ..addListener(callback);
 }

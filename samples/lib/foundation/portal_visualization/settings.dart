@@ -168,7 +168,8 @@ class Settings extends StatelessWidget {
         ),
         const FDivider(),
         FSelect<FPortalOverflow>(
-          control: .managed(initial: value.overflow, onChange: (v) => value.overflow = v!), label: const Text('Overflow'),
+          control: .managed(initial: value.overflow, onChange: (v) => value.overflow = v!),
+          label: const Text('Overflow'),
           items: _overflows,
         ),
         const SizedBox(height: 10),
@@ -220,7 +221,8 @@ class _ChildSettings extends StatelessWidget {
     shrinkWrap: true,
     children: [
       FSelect<Alignment>(
-        control: .managed(initial: value.childAnchor, onChange: (v) => value.childAnchor = v!), label: const Text('Anchor'),
+        control: .managed(initial: value.childAnchor, onChange: (v) => value.childAnchor = v!),
+        label: const Text('Anchor'),
         popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 350),
         items: _alignments,
       ),
@@ -307,7 +309,8 @@ class _PortalSettings extends StatelessWidget {
     shrinkWrap: true,
     children: [
       FSelect<Alignment>(
-        control: .managed(initial: value.portalAnchor, onChange: (v) => value.portalAnchor = v!), label: const Text('Anchor'),
+        control: .managed(initial: value.portalAnchor, onChange: (v) => value.portalAnchor = v!),
+        label: const Text('Anchor'),
         popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 350),
         items: _alignments,
       ),
