@@ -3,7 +3,8 @@ import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/functions_mixin.dart';
 import 'package:meta/meta.dart';
 
-/// Generates a mixin for a class that implements a call, debugFillProperties, equals and hashCode methods and getters.
+/// Generates a mixin for a class that implements a call, debugFillProperties, equals and hashCode , and _update
+/// methods and getters.
 ///
 /// This will probably be replaced by an augment class in the future.
 @internal
@@ -35,8 +36,7 @@ abstract class ControlMixin extends FunctionsMixin {
     required Method dispose,
     required Method default_,
     required List<ClassElement> siblings,
-  }) =>
-      element.name!.contains('Lifted') // TODO: Support controls that have more than 2 variants
+  }) => element.name!.contains('Lifted')
       ? _LiftedControlMixin(
           element: element,
           supertype: supertype,
@@ -112,8 +112,7 @@ class _LiftedControlMixin extends ControlMixin {
       (MixinBuilder()
             ..name = '_\$${element.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
-            ..on = refer('Diagnosticable')
-            ..implements.addAll([refer('${supertype.name}$_typeParameters')])
+            ..on = refer('Diagnosticable, ${supertype.name}$_typeParameters')
             ..methods.addAll([...getters, _update, _updateController, _dispose, debugFillProperties, equals, hash]))
           .build();
 
@@ -189,8 +188,7 @@ class _ManagedControlMixin extends ControlMixin {
       (MixinBuilder()
             ..name = '_\$${element.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
-            ..on = refer('Diagnosticable')
-            ..implements.addAll([refer('${supertype.name}$_typeParameters')])
+            ..on = refer('Diagnosticable, ${supertype.name}$_typeParameters')
             ..methods.addAll([...getters, _update, _dispose, debugFillProperties, equals, hash]))
           .build();
 
@@ -219,6 +217,13 @@ class _ManagedControlMixin extends ControlMixin {
         case ${siblings.first.name}():
           controller.dispose();
           return (_create($_createParameters), true);
+          
+        ${element.isAbstract ? '''
+        // Internal -> Internal (different type, e.g. Normal -> Cascade)
+        case final ${element.name} old when old != this:
+          controller.dispose();
+          return (_create($_createParameters), true);
+        ''' : ''}
 
         default:
           return (_default($_defaultParameters), false);

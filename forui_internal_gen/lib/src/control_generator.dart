@@ -3,8 +3,9 @@ import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:collection/collection.dart';
 import 'package:forui_internal_gen/src/source/control_internal_extension.dart';
-import 'package:forui_internal_gen/src/source/control_mixin.dart';
+import 'package:forui_internal_gen/src/source/control_full_mixin.dart';
 import 'package:forui_internal_gen/src/source/control_parent_mixin.dart';
+import 'package:forui_internal_gen/src/source/control_partial_mixin.dart';
 import 'package:source_gen/source_gen.dart';
 
 final _control = RegExp(r'^F.*(Control)$');
@@ -41,6 +42,9 @@ class ControlGenerator extends Generator {
       final disposeMethod = parentMixin.disposeMethod;
       final defaultMethod = parentMixin.defaultMethod;
 
+      final direct = subtypes.where((t) => t.supertype?.element == supertype).toList();
+      final transitive = subtypes.where((t) => t.supertype?.element != supertype).toList();
+
       generated
         ..add(
           _emitter
@@ -56,7 +60,7 @@ class ControlGenerator extends Generator {
         )
         ..add(_emitter.visitMixin(parentMixin.generate()).toString())
         ..addAll([
-          for (final type in subtypes)
+          for (final type in direct)
             _emitter
                 .visitMixin(
                   ControlMixin(
@@ -66,10 +70,14 @@ class ControlGenerator extends Generator {
                     create: createMethod,
                     dispose: disposeMethod,
                     default_: defaultMethod,
-                    siblings: subtypes.whereNot((t) => t == type).toList(),
+                    siblings: direct.whereNot((t) => t == type).toList(),
                   ).generate(),
                 )
                 .toString(),
+        ])
+        ..addAll([
+          for (final type in transitive)
+            _emitter.visitMixin(ControlPartialMixin(type: type, supertype: supertype).generate()).toString(),
         ]);
     }
 

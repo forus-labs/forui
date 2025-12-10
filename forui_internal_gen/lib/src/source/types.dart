@@ -33,8 +33,8 @@ const shadow = TypeChecker.fromUrl('dart:ui#Shadow');
 
 const fWidgetStateMap = TypeChecker.fromUrl('package:forui/src/theme/widget_state_map.dart#FWidgetStateMap');
 
-/// Returns the instance fields for the given [element].
-List<FieldElement> instanceFields(ClassElement element) {
+/// Returns the instance fields for the given [element] and its supertypes.
+List<FieldElement> transitiveInstanceFields(ClassElement element) {
   final fields = <FieldElement>[];
 
   void addFieldsFromType(ClassElement element) {
@@ -59,3 +59,14 @@ List<FieldElement> instanceFields(ClassElement element) {
   // Remove duplicates (in case a field is overridden)
   return fields.toSet().toList();
 }
+
+/// Returns the instance fields for the given [element].
+List<FieldElement> instanceFields(ClassElement element) => [
+    for (final field in element.fields)
+      if (!(field.getter?.isAbstract ?? false) &&
+          !field.isStatic &&
+          field.isPublic &&
+          field.name != 'runtimeType' &&
+          field.name != 'hashCode')
+        field,
+  ];

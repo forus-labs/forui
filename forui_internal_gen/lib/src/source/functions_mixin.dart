@@ -12,19 +12,22 @@ abstract class FunctionsMixin {
   @protected
   final ClassElement element;
 
-  /// The fields.
+  /// The transitive fields.
+  @protected
+  final List<FieldElement> transitiveFields;
+
   @protected
   final List<FieldElement> fields;
 
   /// Creates a new [FunctionsMixin].
-  FunctionsMixin(this.element) : fields = instanceFields(element);
+  FunctionsMixin(this.element) : transitiveFields = transitiveInstanceFields(element), fields = instanceFields(element);
 
   /// Generates a mixin.
   Mixin generate();
 
   /// Generates getters for the class's fields that must be overridden by the class.
   @protected
-  List<Method> get getters => fields
+  List<Method> get getters => transitiveFields
       .map(
         (field) => Method(
           (m) => m
@@ -105,7 +108,7 @@ abstract class FunctionsMixin {
     final typeParameters = element.typeParameters.isEmpty
         ? ''
         : '<${element.typeParameters.map((e) => e.name).join(', ')}>';
-    final comparisons = fields.isEmpty ? '' : '&& ${fields.map(generate).join(' && ')}';
+    final comparisons = transitiveFields.isEmpty ? '' : '&& ${transitiveFields.map(generate).join(' && ')}';
     return Method(
       (m) => m
         ..returns = refer('bool')
@@ -119,7 +122,9 @@ abstract class FunctionsMixin {
           ),
         )
         ..lambda = true
-        ..body = Code('identical(this, other) || (other is ${element.name}$typeParameters $comparisons)'),
+        ..body = Code(
+          'identical(this, other) || (other is ${element.name}$typeParameters && runtimeType == other.runtimeType $comparisons)',
+        ),
     );
   }
 
@@ -134,7 +139,7 @@ abstract class FunctionsMixin {
       _ => '${field.name}.hashCode',
     };
 
-    final hash = fields.isEmpty ? '0' : fields.map(generate).join(' ^ ');
+    final hash = transitiveFields.isEmpty ? '0' : transitiveFields.map(generate).join(' ^ ');
 
     return Method(
       (m) => m

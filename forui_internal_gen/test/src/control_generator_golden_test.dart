@@ -100,6 +100,8 @@ extension InternalFGoldenControl on FGoldenControl {
 mixin _$FGoldenControlMixin {
   FGoldenController _create(void Function() callback, int children);
   void _dispose(FGoldenController controller, void Function() callback);
+  // TODO: https://github.com/dart-lang/sdk/issues/62198
+  // ignore: unused_element
   FGoldenController _default(
     FGoldenControl old,
     FGoldenController controller,
@@ -107,7 +109,7 @@ mixin _$FGoldenControlMixin {
     int children,
   ) => controller;
 }
-mixin _$LiftedMixin on Diagnosticable implements FGoldenControl {
+mixin _$LiftedMixin on Diagnosticable, FGoldenControl {
   bool Function(int) get expanded;
   void Function(int, bool) get onChange;
   @override
@@ -157,12 +159,13 @@ mixin _$LiftedMixin on Diagnosticable implements FGoldenControl {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || (other is Lifted && expanded == other.expanded && onChange == other.onChange);
+      identical(this, other) ||
+      (other is Lifted && runtimeType == other.runtimeType && expanded == other.expanded && onChange == other.onChange);
 
   @override
   int get hashCode => expanded.hashCode ^ onChange.hashCode;
 }
-mixin _$ManagedMixin on Diagnosticable implements FGoldenControl {
+mixin _$ManagedMixin on Diagnosticable, FGoldenControl {
   FGoldenController? get controller;
   int? get min;
   int? get max;
@@ -223,7 +226,11 @@ mixin _$ManagedMixin on Diagnosticable implements FGoldenControl {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Managed && controller == other.controller && min == other.min && max == other.max);
+      (other is Managed &&
+          runtimeType == other.runtimeType &&
+          controller == other.controller &&
+          min == other.min &&
+          max == other.max);
 
   @override
   int get hashCode => controller.hashCode ^ min.hashCode ^ max.hashCode;
@@ -323,10 +330,12 @@ extension InternalFGenericControl<T> on FGenericControl<T> {
 mixin _$FGenericControlMixin<T> {
   FGenericController<T> _create(void Function() callback);
   void _dispose(FGenericController<T> controller, void Function() callback);
+  // TODO: https://github.com/dart-lang/sdk/issues/62198
+  // ignore: unused_element
   FGenericController<T> _default(FGenericControl<T> old, FGenericController<T> controller, void Function() callback) =>
       controller;
 }
-mixin _$LiftedMixin<T> on Diagnosticable implements FGenericControl<T> {
+mixin _$LiftedMixin<T> on Diagnosticable, FGenericControl<T> {
   T? get value;
   void Function(T?) get onChange;
   @override
@@ -375,12 +384,13 @@ mixin _$LiftedMixin<T> on Diagnosticable implements FGenericControl<T> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || (other is Lifted<T> && value == other.value && onChange == other.onChange);
+      identical(this, other) ||
+      (other is Lifted<T> && runtimeType == other.runtimeType && value == other.value && onChange == other.onChange);
 
   @override
   int get hashCode => value.hashCode ^ onChange.hashCode;
 }
-mixin _$ManagedMixin<T> on Diagnosticable implements FGenericControl<T> {
+mixin _$ManagedMixin<T> on Diagnosticable, FGenericControl<T> {
   FGenericController<T>? get controller;
   T? get initialValue;
   @override
@@ -438,10 +448,275 @@ mixin _$ManagedMixin<T> on Diagnosticable implements FGenericControl<T> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is Managed<T> && controller == other.controller && initialValue == other.initialValue);
+      (other is Managed<T> &&
+          runtimeType == other.runtimeType &&
+          controller == other.controller &&
+          initialValue == other.initialValue);
 
   @override
   int get hashCode => controller.hashCode ^ initialValue.hashCode;
+}
+''';
+
+const _managedSubclassesSource = r'''
+import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
+
+part 'sample.control.dart';
+
+class FSubclassController {
+  void addListener(void Function() callback) {}
+  void removeListener(void Function() callback) {}
+  void dispose() {}
+}
+
+sealed class FSubclassControl with Diagnosticable, _$FSubclassControlMixin {
+  const factory FSubclassControl.lifted({
+    required int value,
+    required void Function(int) onChange,
+  }) = Lifted;
+
+  const factory FSubclassControl.normal({
+    FSubclassController? controller,
+    void Function(int)? onChange,
+  }) = Normal;
+
+  const factory FSubclassControl.cascade({
+    FSubclassController? controller,
+    void Function(int)? onChange,
+  }) = Cascade;
+
+  const FSubclassControl._();
+
+  (FSubclassController, bool) _update(
+    FSubclassControl old,
+    FSubclassController controller,
+    VoidCallback callback,
+  );
+}
+
+@internal
+class Lifted extends FSubclassControl with _$LiftedMixin {
+  @override
+  final int value;
+  @override
+  final void Function(int) onChange;
+
+  const Lifted({required this.value, required this.onChange}) : super._();
+
+  @override
+  FSubclassController _create(VoidCallback _) => FSubclassController();
+
+  @override
+  void _updateController(FSubclassController controller) {}
+}
+
+@internal
+abstract class Managed extends FSubclassControl with _$ManagedMixin {
+  @override
+  final FSubclassController? controller;
+  @override
+  final void Function(int)? onChange;
+
+  const Managed({this.controller, this.onChange}) : super._();
+}
+
+@internal
+class Normal extends Managed with _$NormalMixin {
+  const Normal({super.controller, super.onChange});
+
+  @override
+  FSubclassController _create(VoidCallback callback) =>
+      (controller ?? FSubclassController())..addListener(callback);
+}
+
+@internal
+class Cascade extends Managed with _$CascadeMixin {
+  const Cascade({super.controller, super.onChange});
+
+  @override
+  FSubclassController _create(VoidCallback callback) =>
+      (controller ?? FSubclassController())..addListener(callback);
+}
+''';
+
+const _managedSubclassesGolden = r'''
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// dart format width=120
+// coverage:ignore-file
+// ignore_for_file: unnecessary_ignore
+// ignore_for_file: avoid_positional_boolean_parameters
+
+part of 'sample.dart';
+
+// **************************************************************************
+// ControlGenerator
+// **************************************************************************
+
+@internal
+extension InternalFSubclassControl on FSubclassControl {
+  FSubclassController create(void Function() callback) => _create(callback);
+
+  (FSubclassController, bool) update(FSubclassControl old, FSubclassController controller, void Function() callback) =>
+      _update(old, controller, callback);
+
+  void dispose(FSubclassController controller, void Function() callback) => _dispose(controller, callback);
+}
+
+mixin _$FSubclassControlMixin {
+  FSubclassController _create(void Function() callback);
+  void _dispose(FSubclassController controller, void Function() callback);
+  // TODO: https://github.com/dart-lang/sdk/issues/62198
+  // ignore: unused_element
+  FSubclassController _default(FSubclassControl old, FSubclassController controller, void Function() callback) =>
+      controller;
+}
+mixin _$LiftedMixin on Diagnosticable, FSubclassControl {
+  int get value;
+  void Function(int) get onChange;
+  @override
+  (FSubclassController, bool) _update(FSubclassControl old, FSubclassController controller, void Function() callback) {
+    switch (old) {
+      case _ when old == this:
+        return (_default(old, controller, callback), false);
+
+      // Lifted (Value A) -> Lifted (Value B)
+      case Lifted():
+        _updateController(controller);
+        return (controller, true);
+
+      // External -> Lifted
+      case Managed(controller: _?):
+        controller.removeListener(callback);
+        return (_create(callback), true);
+
+      // Internal -> Lifted
+      case Managed():
+        controller.dispose();
+        return (_create(callback), true);
+
+      default:
+        return (_default(old, controller, callback), false);
+    }
+  }
+
+  void _updateController(FSubclassController controller);
+  @override
+  void _dispose(FSubclassController controller, void Function() callback) {
+    controller.dispose();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('value', value, level: .debug))
+      ..add(DiagnosticsProperty('onChange', onChange, level: .debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Lifted && runtimeType == other.runtimeType && value == other.value && onChange == other.onChange);
+
+  @override
+  int get hashCode => value.hashCode ^ onChange.hashCode;
+}
+mixin _$ManagedMixin on Diagnosticable, FSubclassControl {
+  FSubclassController? get controller;
+  void Function(int)? get onChange;
+  @override
+  (FSubclassController, bool) _update(FSubclassControl old, FSubclassController controller, void Function() callback) {
+    switch (old) {
+      case _ when old == this:
+        return (_default(old, controller, callback), false);
+
+      // External (Controller A) -> External (Controller B)
+      case Managed(controller: final old?) when this.controller != null && this.controller != old:
+        controller.removeListener(callback);
+        return (_create(callback), true);
+
+      // Internal -> External
+      case Managed(controller: final old) when this.controller != null && old == null:
+        controller.dispose();
+        return (_create(callback), true);
+
+      // External -> Internal
+      case Managed(controller: _?) when this.controller == null:
+        controller.removeListener(callback);
+        return (_create(callback), true);
+
+      // Lifted -> Managed
+      case Lifted():
+        controller.dispose();
+        return (_create(callback), true);
+
+      // Internal -> Internal (different type, e.g. Normal -> Cascade)
+      case final Managed old when old != this:
+        controller.dispose();
+        return (_create(callback), true);
+
+      default:
+        return (_default(old, controller, callback), false);
+    }
+  }
+
+  @override
+  void _dispose(FSubclassController controller, void Function() callback) {
+    if (this.controller != null) {
+      controller.removeListener(callback);
+    } else {
+      controller.dispose();
+    }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller, level: .debug))
+      ..add(DiagnosticsProperty('onChange', onChange, level: .debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Managed &&
+          runtimeType == other.runtimeType &&
+          controller == other.controller &&
+          onChange == other.onChange);
+
+  @override
+  int get hashCode => controller.hashCode ^ onChange.hashCode;
+}
+mixin _$NormalMixin on Diagnosticable, FSubclassControl {
+  FSubclassController? get controller;
+  void Function(int)? get onChange;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Normal &&
+          runtimeType == other.runtimeType &&
+          controller == other.controller &&
+          onChange == other.onChange);
+
+  @override
+  int get hashCode => controller.hashCode ^ onChange.hashCode;
+}
+mixin _$CascadeMixin on Diagnosticable, FSubclassControl {
+  FSubclassController? get controller;
+  void Function(int)? get onChange;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Cascade &&
+          runtimeType == other.runtimeType &&
+          controller == other.controller &&
+          onChange == other.onChange);
+
+  @override
+  int get hashCode => controller.hashCode ^ onChange.hashCode;
 }
 ''';
 
@@ -466,6 +741,18 @@ void main() {
       controlBuilder(.empty),
       {'forui_internal_gen|test/src/sample.dart': _typeParametersSource},
       outputs: {'forui_internal_gen|test/src/sample.control.dart': _typeParametersGolden},
+      readerWriter: readerWriter,
+    );
+  }, timeout: const Timeout(Duration(minutes: 1)));
+
+  test('with managed subclasses', () async {
+    final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
+    await readerWriter.testing.loadIsolateSources();
+
+    await testBuilder(
+      controlBuilder(.empty),
+      {'forui_internal_gen|test/src/sample.dart': _managedSubclassesSource},
+      outputs: {'forui_internal_gen|test/src/sample.control.dart': _managedSubclassesGolden},
       readerWriter: readerWriter,
     );
   }, timeout: const Timeout(Duration(minutes: 1)));

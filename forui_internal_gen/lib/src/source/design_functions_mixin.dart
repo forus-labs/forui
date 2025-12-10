@@ -20,7 +20,7 @@ class DesignFunctionsMixin extends FunctionsMixin {
       (MixinBuilder()
             ..name = '_\$${element.name}Functions'
             ..on = refer('Diagnosticable')
-            ..methods.addAll([...getters, _call, debugFillProperties, equals, hash]))
+            ..methods.addAll([...getters, _call, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
           .build();
 
   /// Generates a special `call` method that allows styles to be used directly.
