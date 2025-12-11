@@ -31,7 +31,6 @@ void main() {
       expect(controller.status, AnimationStatus.dismissed);
     });
 
-
     testWidgets('toggle shows when reverse', (tester) async {
       final controller = autoDispose(FPopoverController(vsync: tester, initial: 1.0));
 

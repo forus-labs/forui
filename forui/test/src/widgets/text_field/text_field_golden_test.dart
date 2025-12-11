@@ -257,10 +257,7 @@ void main() {
             theme: theme.data,
             child: FTextField(
               clearable: (_) => true,
-              clearIconBuilder: (_, _, clear) => FButton.icon(
-                onPress: clear,
-                child: const Icon(FIcons.trash),
-              ),
+              clearIconBuilder: (_, _, clear) => FButton.icon(onPress: clear, child: const Icon(FIcons.trash)),
             ),
           ),
         );

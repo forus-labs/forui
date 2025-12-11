@@ -20,11 +20,7 @@ class FTooltipController extends FChangeNotifier {
   late final Animation<double> _scale;
 
   /// Creates a [FTooltipController] with the given [vsync] and [motion].
-  FTooltipController({
-    required TickerProvider vsync,
-    double initial = 0.0,
-    FTooltipMotion motion = const .new(),
-  }) {
+  FTooltipController({required TickerProvider vsync, double initial = 0.0, FTooltipMotion motion = const .new()}) {
     _animation = AnimationController(
       vsync: vsync,
       duration: motion.entranceDuration,
