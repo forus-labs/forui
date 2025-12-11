@@ -12,11 +12,13 @@ class PaginationPage extends Sample {
   PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 600, @queryParam this.controller = 'default'});
 
   @override
-  Widget sample(BuildContext context) => FPagination(control: switch(controller) {
-    'siblings' => const .managed(pages: 20, siblings: 2, initial: 9),
-    'hide-edges' => const .managed(pages: 8, showEdges: false),
-    _ => const .managed(pages: 10),
-  });
+  Widget sample(BuildContext context) => FPagination(
+    control: switch (controller) {
+      'siblings' => const .managed(pages: 20, siblings: 2, initial: 9),
+      'hide-edges' => const .managed(pages: 8, showEdges: false),
+      _ => const .managed(pages: 10),
+    },
+  );
 }
 
 @RoutePage()

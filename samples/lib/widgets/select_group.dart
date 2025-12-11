@@ -24,9 +24,9 @@ class SelectGroupPage extends Sample {
         label: const Text('Sidebar'),
         description: const Text('These will be shown in the sidebar.'),
         children: [
-              .checkbox(value: .recents, label: const Text('Recents')),
-              .checkbox(value: .home, label: const Text('Home')),
-              .checkbox(value: .applications, label: const Text('Applications')),
+          .checkbox(value: .recents, label: const Text('Recents')),
+          .checkbox(value: .home, label: const Text('Home')),
+          .checkbox(value: .applications, label: const Text('Applications')),
         ],
       ),
     ],
