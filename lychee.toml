@@ -16,7 +16,5 @@ exclude_path = [
 exclude = [
     'https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default',
     'https://lucide.dev/icons/',
-    'https://medium.com/simple-human/buttons-shouldnt-have-a-hand-cursor-b11e99ca374b',
-    'https://medium.com/flutter-community/flutter-golden-tests-compare-widgets-with-snapshots-27f83f266cea',
-    'https://medium.com/@ugamakelechi501/barrel-files-in-dart-and-flutter-a-guide-to-simplifying-imports-9b245dbe516a'
+    '^https://(www\.)?medium\.com',
 ]
