@@ -12,44 +12,25 @@ class TextFieldPage extends Sample {
   TextFieldPage({@queryParam super.theme, @queryParam this.enabled = false});
 
   @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const .symmetric(horizontal: 20, vertical: 30),
-    child: FTextField(
-      enabled: enabled,
-      label: const Text('Username'),
-      hint: 'JaneDoe',
-      description: const Text('Please enter your username.'),
-    ),
+  Widget sample(BuildContext _) => FTextField(
+    enabled: enabled,
+    label: const Text('Username'),
+    hint: 'JaneDoe',
+    description: const Text('Please enter your username.'),
   );
 }
 
 @RoutePage()
-class ClearableTextFieldPage extends StatefulSample {
+class ClearableTextFieldPage extends Sample {
   ClearableTextFieldPage({@queryParam super.theme});
 
   @override
-  State<ClearableTextFieldPage> createState() => _ClearableTextFieldPageState();
-}
-
-class _ClearableTextFieldPageState extends StatefulSampleState<ClearableTextFieldPage> {
-  final TextEditingController _controller = TextEditingController(text: 'MyUsername');
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const .symmetric(horizontal: 20, vertical: 30),
-    child: FTextField(
-      control: .managed(controller: _controller),
-      label: const Text('Username'),
-      hint: 'JaneDoe',
-      description: const Text('Please enter your username.'),
-      clearable: (value) => value.text.isNotEmpty,
-    ),
+  Widget sample(BuildContext _) => FTextField(
+    control: const .managed(initial: TextEditingValue(text: 'MyUsername')),
+    label: const Text('Username'),
+    hint: 'JaneDoe',
+    description: const Text('Please enter your username.'),
+    clearable: (value) => value.text.isNotEmpty,
   );
 }
 
@@ -58,11 +39,8 @@ class EmailTextFieldPage extends Sample {
   EmailTextFieldPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => const Padding(
-    padding: .symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.email(
-      control: .managed(initial: TextEditingValue(text: 'jane@doe.com')),
-    ),
+  Widget sample(BuildContext _) => const FTextField.email(
+    control: .managed(initial: TextEditingValue(text: 'jane@doe.com')),
   );
 }
 
@@ -71,11 +49,8 @@ class PasswordTextFieldPage extends Sample {
   PasswordTextFieldPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const .symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.password(
-      control: const .managed(initial: TextEditingValue(text: 'My password')),
-    ),
+  Widget sample(BuildContext _) => FTextField.password(
+    control: const .managed(initial: TextEditingValue(text: 'My password')),
   );
 }
 
@@ -84,8 +59,5 @@ class MultilineTextFieldPage extends Sample {
   MultilineTextFieldPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => const Padding(
-    padding: .symmetric(horizontal: 20, vertical: 30),
-    child: FTextField.multiline(label: Text('Leave a review'), maxLines: 4),
-  );
+  Widget sample(BuildContext _) => const FTextField.multiline(label: Text('Leave a review'), maxLines: 4);
 }

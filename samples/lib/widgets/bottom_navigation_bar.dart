@@ -17,7 +17,7 @@ class _BottomNavigationBarPageState extends StatefulSampleState<BottomNavigation
   int _index = 1;
 
   @override
-  Widget sample(BuildContext context) => FBottomNavigationBar(
+  Widget sample(BuildContext _) => FBottomNavigationBar(
     index: _index,
     onChange: (index) => setState(() => _index = index),
     children: const [

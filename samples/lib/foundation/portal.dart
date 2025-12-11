@@ -10,16 +10,16 @@ class PortalPage extends Sample {
   PortalPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FPortal(
+  Widget sample(BuildContext _) => FPortal(
     spacing: const .spacing(8),
     viewInsets: const .all(5),
     portalBuilder: (context, _) => Container(
       decoration: BoxDecoration(
         color: context.theme.colors.background,
-        border: Border.all(color: context.theme.colors.border),
-        borderRadius: BorderRadius.circular(4),
+        border: .all(color: context.theme.colors.border),
+        borderRadius: .circular(4),
       ),
-      padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
+      padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
       child: SizedBox(
         width: 288,
         child: Column(

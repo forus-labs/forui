@@ -8,51 +8,25 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class TimePickerPage extends StatefulSample {
+class TimePickerPage extends Sample {
   final bool hour24;
 
   TimePickerPage({@queryParam this.hour24 = false, @queryParam super.theme, super.maxWidth = 200});
 
   @override
-  State<TimePickerPage> createState() => _TimePickerPageState();
-}
-
-class _TimePickerPageState extends StatefulSampleState<TimePickerPage> {
-  final _controller = FTimePickerController(initial: .now());
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget sample(BuildContext context) => FTimePicker(
-    control: .managed(controller: _controller),
-    hour24: widget.hour24,
+    control: .managed(initial: .now()),
+    hour24: hour24,
   );
 }
 
 @RoutePage()
-class IntervalTimePickerPage extends StatefulSample {
+class IntervalTimePickerPage extends Sample {
   IntervalTimePickerPage({@queryParam super.theme, super.maxWidth = 200});
 
   @override
-  State<IntervalTimePickerPage> createState() => _IntervalTimePickerPageState();
-}
-
-class _IntervalTimePickerPageState extends StatefulSampleState<IntervalTimePickerPage> {
-  final _controller = FTimePickerController(initial: .now());
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget sample(BuildContext context) =>
-      FTimePicker(control: .managed(controller: _controller), hourInterval: 2, minuteInterval: 5);
+      FTimePicker(control: .managed(initial: .now()), hourInterval: 2, minuteInterval: 5);
 }
 
 @RoutePage()

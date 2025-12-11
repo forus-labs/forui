@@ -26,12 +26,18 @@ class _CollapsiblePageState extends StatefulSampleState<CollapsiblePage> with Si
   }
 
   @override
-  Widget sample(BuildContext context) => Column(
+  Widget sample(BuildContext _) => Column(
     mainAxisSize: .min,
     crossAxisAlignment: .start,
+    spacing: 16,
     children: [
-      FButton(onPress: _toggle, child: Text(_expanded ? 'Collapse' : 'Expand')),
-      const SizedBox(height: 16),
+      FButton(
+        onPress: () {
+          setState(() => _expanded = !_expanded);
+          _controller.toggle();
+        },
+        child: Text(_expanded ? 'Collapse' : 'Expand'),
+      ),
       AnimatedBuilder(
         animation: _animation,
         builder: (context, child) => FCollapsible(
@@ -49,11 +55,4 @@ class _CollapsiblePageState extends StatefulSampleState<CollapsiblePage> with Si
       ),
     ],
   );
-
-  void _toggle() {
-    setState(() {
-      _expanded = !_expanded;
-    });
-    _controller.toggle();
-  }
 }

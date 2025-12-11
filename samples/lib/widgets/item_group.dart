@@ -17,7 +17,7 @@ class ItemGroupPage extends Sample {
       };
 
   @override
-  Widget sample(BuildContext context) => FItemGroup(
+  Widget sample(BuildContext _) => FItemGroup(
     divider: divider,
     children: [
       FItem(
@@ -42,7 +42,7 @@ class ScrollableItemGroupPage extends Sample {
   ScrollableItemGroupPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FItemGroup(
+  Widget sample(BuildContext _) => FItemGroup(
     maxHeight: 150,
     children: [
       .item(
@@ -85,7 +85,7 @@ class LazyItemGroupPage extends Sample {
   LazyItemGroupPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FItemGroup.builder(
+  Widget sample(BuildContext _) => FItemGroup.builder(
     maxHeight: 200,
     count: 200,
     itemBuilder: (context, index) =>
@@ -98,7 +98,7 @@ class MergeItemGroupPage extends Sample {
   MergeItemGroupPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FItemGroup.merge(
+  Widget sample(BuildContext _) => FItemGroup.merge(
     children: [
       .group(
         children: [

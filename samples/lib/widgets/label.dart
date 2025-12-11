@@ -10,10 +10,10 @@ class VerticalLabelPage extends Sample {
   final Set<WidgetState> states;
 
   VerticalLabelPage({@queryParam super.theme, @queryParam bool enabled = true, super.maxWidth = 320})
-    : states = enabled ? {} : {WidgetState.disabled};
+    : states = {if (!enabled) .disabled};
 
   @override
-  Widget sample(BuildContext context) => FLabel(
+  Widget sample(BuildContext _) => FLabel(
     axis: .vertical,
     label: const Text('Email'),
     description: const Text('Enter your email address.'),
@@ -31,10 +31,10 @@ class HorizontalLabelPage extends Sample {
   final Set<WidgetState> states;
 
   HorizontalLabelPage({@queryParam super.theme, @queryParam bool enabled = true, super.maxWidth = 320})
-    : states = enabled ? {} : {WidgetState.disabled};
+    : states = {if (!enabled) .disabled};
 
   @override
-  Widget sample(BuildContext context) => FLabel(
+  Widget sample(BuildContext _) => FLabel(
     axis: .horizontal,
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),

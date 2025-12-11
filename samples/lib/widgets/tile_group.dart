@@ -17,7 +17,7 @@ class TileGroupPage extends Sample {
       };
 
   @override
-  Widget sample(BuildContext context) => FTileGroup(
+  Widget sample(BuildContext _) => FTileGroup(
     label: const Text('Settings'),
     description: const Text('Personalize your experience'),
     divider: divider,
@@ -44,7 +44,7 @@ class ScrollableTileGroupPage extends Sample {
   ScrollableTileGroupPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FTileGroup(
+  Widget sample(BuildContext _) => FTileGroup(
     label: const Text('Settings'),
     description: const Text('Personalize your experience'),
     maxHeight: 200,
@@ -89,7 +89,7 @@ class LazyTileGroupPage extends Sample {
   LazyTileGroupPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FTileGroup.builder(
+  Widget sample(BuildContext _) => FTileGroup.builder(
     label: const Text('Settings'),
     description: const Text('Personalize your experience'),
     maxHeight: 200,
@@ -107,6 +107,7 @@ class MergeTileGroup extends StatefulSample {
   State<MergeTileGroup> createState() => _MergeTileGroupPageState();
 }
 
+// TODO: Replace with FSelectGroupControl.radio(...).
 class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroup> {
   final _controller = FMultiValueNotifier.radio('List');
 

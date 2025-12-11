@@ -17,27 +17,22 @@ class _ScaffoldPageState extends StatefulSampleState<ScaffoldPage> {
   int _index = 3;
 
   @override
-  Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: .center,
-    children: [
-      SizedBox(
-        height: 500,
-        child: FScaffold(
-          header: headers[_index],
-          footer: FBottomNavigationBar(
-            index: _index,
-            onChange: (index) => setState(() => _index = index),
-            children: const [
-              FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-              FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
-              FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
-              FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
-            ],
-          ),
-          child: contents[_index],
-        ),
+  Widget sample(BuildContext _) => SizedBox(
+    height: 500,
+    child: FScaffold(
+      header: headers[_index],
+      footer: FBottomNavigationBar(
+        index: _index,
+        onChange: (index) => setState(() => _index = index),
+        children: const [
+          FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+          FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
+        ],
       ),
-    ],
+      child: contents[_index],
+    ),
   );
 }
 

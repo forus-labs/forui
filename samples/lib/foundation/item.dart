@@ -13,7 +13,7 @@ class ItemPage extends Sample {
   ItemPage({@queryParam super.theme, @queryParam this.enabled = true, @queryParam this.tappable = true});
 
   @override
-  Widget sample(BuildContext context) => FItem(
+  Widget sample(BuildContext _) => FItem(
     enabled: enabled,
     prefix: const Icon(FIcons.user),
     title: const Text('Personalization'),
@@ -27,7 +27,7 @@ class ItemSubtitlePage extends Sample {
   ItemSubtitlePage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FItem(
+  Widget sample(BuildContext _) => FItem(
     prefix: const Icon(FIcons.bell),
     title: const Text('Notifications'),
     subtitle: const Text('Banners, Sounds, Badges'),
@@ -41,7 +41,7 @@ class ItemDetailsPage extends Sample {
   ItemDetailsPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FItem(
+  Widget sample(BuildContext _) => FItem(
     prefix: const Icon(FIcons.wifi),
     title: const Text('WiFi'),
     details: const Text('Forus Labs (5G)'),

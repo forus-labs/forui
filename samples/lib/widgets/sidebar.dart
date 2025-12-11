@@ -253,7 +253,7 @@ class CustomWidthSidebarPage extends Sample {
   CustomWidthSidebarPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FSidebar(
+  Widget sample(BuildContext _) => FSidebar(
     style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 500, maxWidth: 500)),
     children: [
       FSidebarGroup(
@@ -286,7 +286,7 @@ class NestedSidebarPage extends Sample {
   NestedSidebarPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FSidebar(
+  Widget sample(BuildContext _) => FSidebar(
     style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300)),
     children: [
       FSidebarGroup(

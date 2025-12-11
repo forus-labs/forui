@@ -12,7 +12,7 @@ class ProgressPage extends Sample {
   ProgressPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => const FProgress();
+  Widget sample(BuildContext _) => const FProgress();
 }
 
 @RoutePage()
@@ -34,7 +34,7 @@ class _DeterminateProgressPageState extends StatefulSampleState<DeterminateProgr
   }
 
   @override
-  Widget sample(BuildContext context) => Column(
+  Widget sample(BuildContext _) => Column(
     mainAxisAlignment: .center,
     spacing: 20,
     children: [
@@ -56,7 +56,7 @@ class CircularProgressPage extends Sample {
   CircularProgressPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => const Row(
+  Widget sample(BuildContext _) => const Row(
     mainAxisAlignment: .center,
     spacing: 25,
     children: [FCircularProgress(), FCircularProgress.loader(), FCircularProgress.pinwheel()],

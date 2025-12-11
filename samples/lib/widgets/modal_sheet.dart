@@ -15,6 +15,7 @@ class ModalSheetPage extends Sample {
   Widget sample(BuildContext context) => Column(
     mainAxisAlignment: .center,
     mainAxisSize: .min,
+    spacing: 5,
     children: [
       FButton(
         child: const Text('Left'),
@@ -24,7 +25,6 @@ class ModalSheetPage extends Sample {
           builder: (context) => const Form(side: .ltr),
         ),
       ),
-      const SizedBox(height: 5),
       FButton(
         child: const Text('Top'),
         onPress: () => showFSheet(
@@ -33,7 +33,6 @@ class ModalSheetPage extends Sample {
           builder: (context) => const Form(side: .ttb),
         ),
       ),
-      const SizedBox(height: 5),
       FButton(
         child: const Text('Right'),
         onPress: () => showFSheet(
@@ -42,7 +41,6 @@ class ModalSheetPage extends Sample {
           builder: (context) => const Form(side: .rtl),
         ),
       ),
-      const SizedBox(height: 5),
       FButton(
         child: const Text('Bottom'),
         onPress: () => showFSheet(
@@ -60,20 +58,18 @@ class BlurredModalSheetPage extends Sample {
   BlurredModalSheetPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Center(
-    child: FButton(
-      child: const Text('Open'),
-      onPress: () => showFSheet(
-        style: context.theme.modalSheetStyle.copyWith(
-          barrierFilter: (animation) => ImageFilter.compose(
-            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-            inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
-          ),
+  Widget sample(BuildContext context) => FButton(
+    child: const Text('Open'),
+    onPress: () => showFSheet(
+      style: context.theme.modalSheetStyle.copyWith(
+        barrierFilter: (animation) => ImageFilter.compose(
+          outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+          inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
         ),
-        context: context,
-        side: .ltr,
-        builder: (context) => const Form(side: .ltr),
       ),
+      context: context,
+      side: .ltr,
+      builder: (context) => const Form(side: .ltr),
     ),
   );
 }

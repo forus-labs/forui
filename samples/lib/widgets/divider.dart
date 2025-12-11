@@ -10,7 +10,7 @@ class DividerPage extends Sample {
   DividerPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) {
+  Widget sample(BuildContext _) {
     final colors = theme.colors;
     final text = theme.typography;
 
@@ -31,9 +31,9 @@ class DividerPage extends Sample {
             mainAxisSize: .min,
             children: [
               Text('Blog', style: text.sm.copyWith(color: colors.foreground)),
-              const FDivider(axis: Axis.vertical),
+              const FDivider(axis: .vertical),
               Text('Docs', style: text.sm.copyWith(color: colors.foreground)),
-              const FDivider(axis: Axis.vertical),
+              const FDivider(axis: .vertical),
               Text('Source', style: text.sm.copyWith(color: colors.foreground)),
             ],
           ),
