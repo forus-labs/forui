@@ -42,8 +42,22 @@ class FCard extends StatelessWidget {
   /// |  [child]                  |
   /// |---------------------------|
   /// ```
-  FCard({Widget? image, Widget? title, Widget? subtitle, Widget? child, this.style, super.key})
-    : child = Content(image: image, title: title, subtitle: subtitle, style: style, child: child);
+  FCard({
+    Widget? image,
+    Widget? title,
+    Widget? subtitle,
+    Widget? child,
+    MainAxisSize mainAxisSize = .min,
+    this.style,
+    super.key,
+  }) : child = Content(
+         image: image,
+         title: title,
+         subtitle: subtitle,
+         mainAxisSize: mainAxisSize,
+         style: style,
+         child: child,
+       );
 
   /// Creates a [FCard] with custom content.
   const FCard.raw({required this.child, this.style, super.key});

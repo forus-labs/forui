@@ -53,6 +53,10 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FCalendar.controller`. Use `FCalendar(control: .managedDate(...))` instead.
 
 
+### `FCard`
+* **Breaking** Add `FCard.mainAxisSize`, which efaults to `MainAxisSize.min`.
+
+
 ### `FCheckbox`
 * **Breaking** Remove `FCheckbox.grouped(...)`. Use `FSelectGroupItemMixin.checkbox(...)` instead.
 

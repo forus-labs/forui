@@ -25,10 +25,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [FCard(title: const Text('Notifications'), subtitle: const Text('You have 3 unread messages.'))],
-          ),
+          child: FCard(title: const Text('Notifications'), subtitle: const Text('You have 3 unread messages.')),
         ),
       );
 
@@ -39,15 +36,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FCard(
-                image: Container(color: Colors.blue, height: 100, width: 200),
-                title: const Text('Notifications'),
-                subtitle: const Text('You have 3 unread messages.'),
-              ),
-            ],
+          child: FCard(
+            image: Container(color: Colors.blue, height: 100, width: 200),
+            title: const Text('Notifications'),
+            subtitle: const Text('You have 3 unread messages.'),
           ),
         ),
       );
@@ -59,10 +51,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [FCard.raw(child: SizedBox(width: 50, height: 50))],
-          ),
+          child: const FCard.raw(child: SizedBox(width: 50, height: 50)),
         ),
       );
 

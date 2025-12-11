@@ -15,9 +15,10 @@ class Content extends StatelessWidget {
   final Widget? title;
   final Widget? subtitle;
   final Widget? child;
+  final MainAxisSize mainAxisSize;
   final FCardStyle Function(FCardStyle style)? style;
 
-  const Content({this.image, this.title, this.subtitle, this.child, this.style, super.key});
+  const Content({required this.mainAxisSize, this.image, this.title, this.subtitle, this.child, this.style, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class Content extends StatelessWidget {
       padding: style.padding,
       child: Column(
         crossAxisAlignment: .start,
+        mainAxisSize: .min,
         children: [
           if (image case final image?) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
           if ((title != null || subtitle != null || child != null) && image != null)
@@ -59,6 +61,7 @@ class Content extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('mainAxisSize', mainAxisSize))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('image', image));
   }
