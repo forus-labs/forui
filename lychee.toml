@@ -17,4 +17,5 @@ exclude = [
     'https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default',
     'https://lucide.dev/icons/',
     '^https://(www\.)?medium\.com',
+    '^https://(www\.)?github\.com',
 ]
