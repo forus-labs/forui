@@ -159,6 +159,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FMultiSelect.max`. Use `FMultiSelect(control: .managed(...))` instead.
 * **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
+* Deprecate `FSelect.contentScrollHandles`. Please [open an issue](https://github.com/forus-labs/forui/issues) if you use & and need this.
 
 
 ### `FSelectGroup` & `FSelectTileGroup`
@@ -296,6 +297,11 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 * **Breaking** Remove `FSidebar.width`. This field was never intended for public usage - Use `FSidebarStyle.constraints`
   instead.
+* Deprecate `FValueNotifier`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FValueNotifier.addValueListener(...)`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FValueNotifier.removeValueListener(...)`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FMultiValueNotifier.addUpdateListener(...)`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
+* Deprecate `FMultiValueNotifier.removeUpdateListener(...)`. Please [open an issue](https://github.com/forus-labs/forui/issues) if there's a use-case that isn't covered.
 * Fix generated style docs being malformed.
 
 
