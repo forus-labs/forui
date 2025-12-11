@@ -806,7 +806,7 @@ class FTextField extends StatelessWidget {
 
   /// {@template forui.text_field.clearIconBuilder}
   /// The builder used to build the clear icon when [clearable] returns true.
-  /// {@endtemplate
+  /// {@endtemplate}
   final FFieldClearIconBuilder clearIconBuilder;
 
   /// Creates a [FTextField].
