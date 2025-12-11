@@ -25,8 +25,8 @@ part 'time_picker.design.dart';
 /// * [FTimePickerController] for controlling a time picker.
 /// * [FTimePickerStyle] for customizing a time picker's appearance.
 class FTimePicker extends StatefulWidget {
-  /// The controller.
-  final FTimePickerController? controller;
+  /// The control.
+  final FTimePickerControl control;
 
   /// The style. If null, the default picker style will be used.
   ///
@@ -49,23 +49,19 @@ class FTimePicker extends StatefulWidget {
   /// Throws [AssertionError] if [hourInterval] < 1.
   final int hourInterval;
 
-  /// The interval between minutes in the picker. Defaults to 5.
+  /// The interval between minutes in the picker. Defaults to 1.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [minuteInterval] < 1.
   final int minuteInterval;
 
-  /// Handler called when the time picker's time changes.
-  final ValueChanged<FTime>? onChange;
-
   /// Creates a [FTimePicker].
   const FTimePicker({
-    this.controller,
+    this.control = const .managed(),
     this.style,
     this.hour24 = false,
     this.hourInterval = 1,
     this.minuteInterval = 1,
-    this.onChange,
     super.key,
   }) : assert(0 < hourInterval, 'hourInterval ($hourInterval) must be > 0'),
        assert(0 < minuteInterval, 'minuteInterval ($minuteInterval) must be > 0');
@@ -77,100 +73,68 @@ class FTimePicker extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('hour24', value: hour24, ifTrue: '24-hour'))
       ..add(IntProperty('hourInterval', hourInterval))
-      ..add(IntProperty('minuteInterval', minuteInterval))
-      ..add(ObjectFlagProperty.has('onChange', onChange));
+      ..add(IntProperty('minuteInterval', minuteInterval));
   }
 }
 
 class _FTimePickerState extends State<FTimePicker> {
   late FTimePickerController _controller;
-  late DateFormat format;
-  late int padding;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = widget.controller ?? .new();
-    _controller.addListener(_onChange);
-  }
+  late DateFormat _format;
+  late int _padding;
+  bool _initialized = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _update();
+    _locale();
+    if (!_initialized) {
+      _initialized = true;
+      _controller = widget.control.create(_handleOnChange, _format, widget.hourInterval, widget.minuteInterval);
+    } else {
+      _controller.configure(_format, widget.hourInterval, widget.minuteInterval);
+    }
   }
 
   @override
   void didUpdateWidget(covariant FTimePicker old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeListener(_onChange);
-      }
-
-      _controller = widget.controller ?? .new();
-      _controller.addListener(_onChange);
-    }
-
-    _update();
+    _locale();
+    _controller = widget.control
+        .update(old.control, _controller, _handleOnChange, _format, widget.hourInterval, widget.minuteInterval)
+        .$1;
   }
 
-  void _onChange() => widget.onChange?.call(_controller.value);
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, _handleOnChange);
+    super.dispose();
+  }
 
-  void _update() {
+  void _locale() {
     final locale = FLocalizations.of(context) ?? FDefaultLocalizations();
+    _format = widget.hour24 ? .Hm(locale.localeName) : .jm(locale.localeName);
+    _padding = _format.pattern!.contains(RegExp('HH|hh')) ? 2 : 0;
+  }
 
-    format = widget.hour24 ? .Hm(locale.localeName) : .jm(locale.localeName);
-    padding = format.pattern!.contains(RegExp('HH|hh')) ? 2 : 0;
-
-    // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
-    // It is difficult to fix without FixedExtentScrollController exposing the keepOffset parameter.
-    // See https://github.com/flutter/flutter/issues/162972
-    _controller
-      ..pattern = format.pattern!
-      ..hours24 = !format.pattern!.contains('a')
-      ..hourInterval = widget.hourInterval
-      ..minuteInterval = widget.minuteInterval;
-
-    _controller.picker?.dispose();
-    _controller.picker = FPickerController(initialIndexes: _controller.encode(_controller.value));
-    _controller.picker?.addListener(() => _controller.decode());
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
   }
 
   @override
   Widget build(BuildContext context) => TimePicker(
     controller: _controller,
     style: widget.style?.call(context.theme.timePickerStyle) ?? context.theme.timePickerStyle,
-    format: format,
-    padding: padding,
+    format: _format,
+    padding: _padding,
     hourInterval: _controller.hourInterval,
     minuteInterval: _controller.minuteInterval,
   );
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_onChange);
-    }
-    super.dispose();
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', _controller))
-      ..add(DiagnosticsProperty('format', format))
-      ..add(IntProperty('padding', padding));
-  }
 }
 
 /// The style of a time picker.

@@ -135,7 +135,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
           }
         },
         child: FTooltip(
-          controller: _tooltip,
+          control: .managed(controller: _tooltip),
           tipAnchor: tooltipTipAnchor,
           childAnchor: tooltipThumbAnchor,
           tipBuilder: (_, controller) => tooltipBuilder(controller, _offset(_controller.selection)),

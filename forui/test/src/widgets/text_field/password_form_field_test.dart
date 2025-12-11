@@ -6,9 +6,35 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('lifted', (tester) async {
+    var value = const TextEditingValue(text: 'initial');
+    TextEditingValue? received;
+
+    Widget buildWidget() => TestScaffold.app(
+      child: FTextFormField.password(
+        control: .lifted(value: value, onChange: (v) => received = v),
+      ),
+    );
+
+    await tester.pumpWidget(buildWidget());
+
+    expect(find.text('initial'), findsOneWidget);
+
+    await tester.enterText(find.byType(EditableText), 'typed');
+    await tester.pumpAndSettle();
+    expect(received?.text, 'typed');
+
+    value = const TextEditingValue(text: 'external');
+    await tester.pumpWidget(buildWidget());
+    await tester.pumpAndSettle();
+    expect(find.text('external'), findsOneWidget);
+  });
+
   testWidgets('hide', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.app(child: FTextFormField.password(obscureTextController: autoDispose(ValueNotifier(false)))),
+      TestScaffold.app(
+        child: FTextFormField.password(obscureTextControl: .managed(controller: autoDispose(ValueNotifier(false)))),
+      ),
     );
 
     expect(find.bySemanticsLabel('Hide password'), findsOne);
@@ -34,8 +60,8 @@ void main() {
       TestScaffold.app(
         child: Column(
           children: [
-            FTextFormField.password(obscureTextController: controller),
-            FTextFormField.password(obscureTextController: controller, suffixBuilder: null),
+            FTextFormField.password(obscureTextControl: .managed(controller: controller)),
+            FTextFormField.password(obscureTextControl: .managed(controller: controller), suffixBuilder: null),
           ],
         ),
       ),
@@ -53,6 +79,30 @@ void main() {
     fields = tester.widgetList<EditableText>(find.byType(EditableText)).toList();
     expect(fields[0].obscureText, false);
     expect(fields[1].obscureText, false);
+  });
+
+  testWidgets('lifted obscureTextControl', (tester) async {
+    var value = true;
+    bool? received;
+
+    Widget buildWidget() => TestScaffold.app(
+      child: FTextFormField.password(
+        obscureTextControl: .lifted(value: value, onChange: (v) => received = v),
+      ),
+    );
+
+    await tester.pumpWidget(buildWidget());
+
+    expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, true);
+
+    await tester.tap(find.byIcon(FIcons.eye));
+    await tester.pumpAndSettle();
+    expect(received, false);
+
+    value = false;
+    await tester.pumpWidget(buildWidget());
+    await tester.pumpAndSettle();
+    expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, false);
   });
 
   testWidgets('custom suffix disables toggle', (tester) async {
@@ -79,7 +129,10 @@ void main() {
       TestScaffold.app(
         child: Form(
           key: key,
-          child: FTextFormField.password(obscureTextController: obscure, initialText: 'initial'),
+          child: FTextFormField.password(
+            control: const .managed(initial: TextEditingValue(text: 'initial')),
+            obscureTextControl: .managed(controller: obscure),
+          ),
         ),
       ),
     );

@@ -17,13 +17,16 @@ void main() {
         home: HookBuilder(
           builder: (context) {
             controller = useFAutocompleteController(vsync: tester);
-            return FAutocomplete(controller: controller, items: const []);
+            return FAutocomplete(
+              control: .managed(controller: controller),
+              items: const [],
+            );
           },
         ),
       ),
     );
 
-    unawaited(controller.content.show());
+    unawaited(controller.popover.show());
 
     await tester.pumpAndSettle();
   });

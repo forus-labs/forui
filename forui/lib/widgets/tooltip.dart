@@ -6,4 +6,6 @@
 /// See https://forui.dev/docs/overlay/tooltip for working examples.
 library forui.widgets.tooltip;
 
-export '../src/widgets/tooltip.dart';
+export '../src/widgets/tooltip/tooltip.dart';
+export '../src/widgets/tooltip/tooltip_controller.dart'
+    hide InternalFTooltipControl, InternalTooltipController, Lifted, Managed;

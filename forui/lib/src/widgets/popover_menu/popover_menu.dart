@@ -42,8 +42,10 @@ class FPopoverMenu extends StatelessWidget {
   /// ```
   final FPopoverMenuStyle Function(FPopoverMenuStyle style)? style;
 
-  /// The controller.
-  final FPopoverController? popoverController;
+  /// Defines how the popover menu's shown state is controlled.
+  ///
+  /// Defaults to [FPopoverControl.managed] which creates an internal [FPopoverController].
+  final FPopoverControl control;
 
   /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
@@ -145,7 +147,7 @@ class FPopoverMenu extends StatelessWidget {
   /// * neither [builder] nor [child] is provided.
   /// * neither [menuBuilder] nor [menu] is provided.
   FPopoverMenu({
-    this.popoverController,
+    this.control = const .managed(),
     this.scrollController,
     this.style,
     this.cacheExtent,
@@ -203,7 +205,7 @@ class FPopoverMenu extends StatelessWidget {
   /// * neither [builder] nor [child] is provided.
   /// * neither [menuBuilder] nor [menu] is provided.
   FPopoverMenu.tiles({
-    this.popoverController,
+    this.control = const .managed(),
     this.scrollController,
     this.style,
     this.cacheExtent,
@@ -249,7 +251,7 @@ class FPopoverMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle;
     return FPopover(
-      controller: popoverController,
+      control: control,
       style: style,
       constraints: FPortalConstraints(maxWidth: style.maxWidth),
       popoverAnchor: menuAnchor,
@@ -276,7 +278,7 @@ class FPopoverMenu extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('popoverController', popoverController))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('cacheExtent', cacheExtent))

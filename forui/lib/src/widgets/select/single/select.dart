@@ -7,10 +7,11 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/form_field.dart';
+import 'package:forui/src/foundation/form/form_field.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
+import 'package:forui/src/widgets/select/content/inherited_controller.dart';
 import 'package:forui/src/widgets/select/content/search_content.dart';
-import 'package:forui/src/widgets/select/select_controller.dart';
+import 'package:forui/src/widgets/select/single/select_controller.dart';
 
 part 'basic_select.dart';
 
@@ -56,8 +57,10 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   static String? _defaultValidator(Object? _) => null;
 
-  /// The controller.
-  final FSelectController<T>? controller;
+  /// The control that manages the select's state.
+  ///
+  /// Defaults to [FSelectControl.managed] if not provided.
+  final FSelectControl<T>? control;
 
   /// The style.
   ///
@@ -98,9 +101,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   @override
   final bool enabled;
-
-  /// Handler called when the selected value changes.
-  final ValueChanged<T?>? onChange;
 
   @override
   final FormFieldSetter<T>? onSaved;
@@ -184,12 +184,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The divider used to separate the content items. Defaults to [FItemDivider.none].
   final FItemDivider contentDivider;
 
-  /// The initial value.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both the controller and initialValue are provided.
-  final T? initialValue;
-
   /// Creates a [FSelect] from the given [items].
   ///
   /// For more control over the appearance of items, use [FSelect.rich].
@@ -199,7 +193,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// undefined behavior.
   factory FSelect({
     required Map<String, T> items,
-    FSelectController<T>? controller,
+    FSelectControl<T>? control,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -209,7 +203,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget? label,
     Widget? description,
     bool enabled = true,
-    ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode = .onUnfocus,
@@ -237,12 +230,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
-    T? initialValue,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
     return .rich(
-      controller: controller,
+      control: control,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -252,7 +244,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       label: label,
       description: description,
       enabled: enabled,
-      onChange: onChange,
       onSaved: onSaved,
       onReset: onReset,
       autovalidateMode: autovalidateMode,
@@ -281,7 +272,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
-      initialValue: initialValue,
       key: key,
       children: [for (final MapEntry(:key, :value) in items.entries) .item(title: Text(key), value: value)],
     );
@@ -291,7 +281,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   const factory FSelect.rich({
     required String Function(T value) format,
     required List<FSelectItemMixin> children,
-    FSelectController<T>? controller,
+    FSelectControl<T>? control,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -301,7 +291,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget? label,
     Widget? description,
     bool enabled,
-    ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
@@ -329,7 +318,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
-    T? initialValue,
     Key? key,
   }) = _BasicSelect<T>;
 
@@ -355,7 +343,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder =
         FSelect.defaultContentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
-    FSelectController<T>? controller,
+    FSelectControl<T>? control,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -365,7 +353,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget? label,
     Widget? description,
     bool enabled = true,
-    ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode = .onUnfocus,
@@ -393,7 +380,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
-    T? initialValue,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
@@ -411,7 +397,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       searchFieldProperties: searchFieldProperties,
       contentLoadingBuilder: contentLoadingBuilder,
       contentErrorBuilder: contentErrorBuilder,
-      controller: controller,
+      control: control,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -421,7 +407,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       label: label,
       description: description,
       enabled: enabled,
-      onChange: onChange,
       onSaved: onSaved,
       onReset: onReset,
       autovalidateMode: autovalidateMode,
@@ -449,7 +434,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
-      initialValue: initialValue,
       key: key,
     );
   }
@@ -470,7 +454,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FSelectSearchFieldProperties searchFieldProperties,
     Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder,
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
-    FSelectController<T>? controller,
+    FSelectControl<T>? control,
     FSelectStyle Function(FSelectStyle style)? style,
     bool autofocus,
     FocusNode? focusNode,
@@ -480,7 +464,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget? label,
     Widget? description,
     bool enabled,
-    ValueChanged<T?>? onChange,
     FormFieldSetter<T>? onSaved,
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode,
@@ -508,13 +491,12 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
-    T? initialValue,
     Key? key,
   }) = _SearchSelect<T>;
 
   const FSelect._({
     required this.format,
-    this.controller,
+    this.control,
     this.style,
     this.autofocus = false,
     this.focusNode,
@@ -524,7 +506,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.label,
     this.description,
     this.enabled = true,
-    this.onChange,
     this.onSaved,
     this.onReset,
     this.autovalidateMode = .onUnfocus,
@@ -552,18 +533,14 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = .none,
-    this.initialValue,
     super.key,
-  }) : assert(
-         controller == null || initialValue == null,
-         'Cannot provide both a controller and initialValue. To fix, set the initial value directly in the controller.',
-       );
+  });
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -572,7 +549,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
@@ -599,38 +575,25 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
-      ..add(EnumProperty('contentDivider', contentDivider))
-      ..add(DiagnosticsProperty('initialValue', initialValue));
+      ..add(EnumProperty('contentDivider', contentDivider));
   }
 }
 
-abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTickerProviderStateMixin {
-  late final TextEditingController _textController;
+abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProviderStateMixin {
   late FSelectController<T> _controller;
+  late final TextEditingController _textController;
   late FocusNode _focus;
   bool _mutating = false;
 
   @override
   void initState() {
     super.initState();
-    _textController = TextEditingController(text: _initialText);
-    _controller = widget.controller ?? .new(vsync: this, value: widget.initialValue);
-    _controller.addValueListener(_onChange);
+    _controller = (widget.control ?? FSelectControl<T>.managed()).create(_updateTextController, this);
+    _textController = TextEditingController(
+      text: _controller.value == null ? '' : widget.format(_controller.value as T),
+    )..addListener(_updateSelectController);
 
     _focus = widget.focusNode ?? .new(debugLabel: 'FSelect');
-
-    _textController.addListener(_updateSelectController);
-    _controller.addListener(_updateTextController);
-  }
-
-  String get _initialText {
-    if (widget.initialValue case final value?) {
-      return widget.format(value);
-    } else if (widget.controller?.value case final value?) {
-      return widget.format(value);
-    } else {
-      return '';
-    }
   }
 
   @override
@@ -644,29 +607,14 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       _focus = widget.focusNode ?? .new(debugLabel: 'FSelect');
     }
 
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeValueListener(_onChange);
-        old.controller?.removeListener(_updateTextController);
-      }
-
-      if (widget.controller case final controller?) {
-        _controller = controller;
-      } else {
-        _textController.text = widget.initialValue == null ? '' : widget.format(widget.initialValue as T);
-        _controller = FSelectController(vsync: this, value: widget.initialValue);
-      }
-
-      _controller
-        ..addValueListener(_onChange)
-        ..addListener(_updateTextController);
+    final current = widget.control ?? FSelectControl<T>.managed();
+    final previous = old.control ?? FSelectControl<T>.managed();
+    final (controller, updated) = current.update(previous, _controller, _updateTextController, this);
+    if (updated) {
+      _controller = controller;
       _updateTextController();
     }
   }
-
-  void _onChange(T? value) => widget.onChange?.call(value);
 
   void _updateSelectController() {
     if (_mutating) {
@@ -697,6 +645,10 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     } finally {
       _mutating = false;
     }
+
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
   }
 
   @override
@@ -704,7 +656,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
     final style = widget.style?.call(context.theme.selectStyle) ?? context.theme.selectStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
-    return Field(
+    return Field<T>(
       controller: _controller,
       enabled: widget.enabled,
       autovalidateMode: widget.autovalidateMode,
@@ -712,10 +664,9 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
       onSaved: widget.onSaved,
       onReset: widget.onReset,
       validator: widget.validator,
-      initialValue: widget.initialValue,
       builder: (state) => FTextField(
+        control: .managed(controller: _textController),
         focusNode: _focus,
-        controller: _textController,
         style: style.selectFieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
@@ -740,7 +691,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
         enabled: widget.enabled,
         builder: (context, _, states, field) => FPopover(
-          controller: _controller.popover,
+          control: .managed(controller: _controller.popover),
           style: style.popoverStyle,
           constraints: widget.popoverConstraints,
           popoverAnchor: widget.anchor,
@@ -784,14 +735,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with SingleTicke
 
   @override
   void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller
-        ..removeValueListener(_onChange)
-        ..removeListener(_updateTextController);
-    }
     _textController.dispose();
+    (widget.control ?? FSelectControl<T>.managed()).dispose(_controller, _updateTextController);
 
     if (widget.focusNode == null) {
       _focus.dispose();

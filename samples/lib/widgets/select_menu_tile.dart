@@ -15,8 +15,8 @@ class SelectMenuTilePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile<Notification>.fromMap(
+    selectControl: const .managed(initial: {.all}),
     const {'All': .all, 'Direct Messages': .direct, 'None': .nothing},
-    initialValue: .all,
     autoHide: autoHide,
     validator: (value) => value == null ? 'Select an item' : null,
     prefix: const Icon(FIcons.bell),
@@ -37,7 +37,7 @@ class ScrollableSelectMenuTilePage extends Sample {
 
   @override
   Widget sample(BuildContext context) => FSelectMenuTile<Notification>(
-    initialValue: .all,
+    selectControl: const .managed(initial: {.all}),
     autoHide: autoHide,
     maxHeight: 150,
     validator: (value) => value == null ? 'Select an item' : null,
@@ -71,7 +71,7 @@ class LazySelectMenuTilePage extends StatefulSample {
 }
 
 class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTilePage> {
-  final controller = FSelectMenuTileController(value: {1});
+  final controller = FSelectGroupController(value: {1});
 
   @override
   void dispose() {
@@ -86,7 +86,7 @@ class _LazySelectMenuTilePageState extends StatefulSampleState<LazySelectMenuTil
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectMenuTile.builder(
-          selectController: controller,
+          selectControl: .managed(controller: controller),
           prefix: const Icon(FIcons.variable),
           title: const Text('Applicable values'),
           maxHeight: 200,
@@ -115,7 +115,7 @@ class _SelectMenuTileFormPageState extends StatefulSampleState<SelectMenuTileFor
       mainAxisSize: .min,
       children: [
         FSelectMenuTile<Notification>(
-          initialValue: .all,
+          selectControl: const .managed(initial: {.all}),
           validator: (value) => value == null ? 'Select an item' : null,
           prefix: const Icon(FIcons.bell),
           title: const Text('Notifications'),

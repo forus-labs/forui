@@ -52,7 +52,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPicker(
-            controller: controller,
+            control: .managed(controller: controller),
             children: [
               const FPickerWheel(flex: 3, loop: true, children: months),
               FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
@@ -69,7 +69,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPicker(
-            controller: controller,
+            control: .managed(controller: controller),
             children: [
               const FPickerWheel(flex: 3, loop: true, children: months),
               const Text(':'),
@@ -89,7 +89,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPicker(
-            controller: controller,
+            control: .managed(controller: controller),
             children: const [FPickerWheel(flex: 3, children: months)],
           ),
         ),
@@ -103,7 +103,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FPicker(
-            controller: controller,
+            control: .managed(controller: controller),
             children: [
               const FPickerWheel(autofocus: true, flex: 3, loop: true, children: months),
               const Text(':'),
@@ -123,7 +123,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FPicker(
-          controller: controller,
+          control: .managed(controller: controller),
           children: [
             const FPickerWheel(flex: 3, key: key, children: months),
             const Text(':'),
@@ -147,7 +147,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FPicker(
-          controller: controller,
+          control: .managed(controller: controller),
           children: [
             const FPickerWheel(flex: 3, key: key, children: months),
             const Text(':'),
@@ -173,7 +173,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FPicker(
-          controller: controller,
+          control: .managed(controller: controller),
           children: [
             const FPickerWheel(autofocus: true, flex: 3, key: key, children: months),
             const Text(':'),
@@ -190,5 +190,43 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/arrow-key.png'));
 
     debugDefaultTargetPlatformOverride = null;
+  });
+
+  group('lifted', () {
+    testWidgets('animates programmatically changed value', (tester) async {
+      final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(400, 300)));
+      var value = [1];
+
+      await tester.pumpWidget(
+        sheet.record(
+          TestScaffold(
+            child: StatefulBuilder(
+              builder: (_, setState) => FPicker(
+                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                children: const [FPickerWheel(flex: 3, children: months)],
+              ),
+            ),
+          ),
+        ),
+      );
+
+      value = [8];
+
+      await tester.pumpFrames(
+        sheet.record(
+          TestScaffold(
+            child: StatefulBuilder(
+              builder: (_, setState) => FPicker(
+                control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+                children: const [FPickerWheel(children: months)],
+              ),
+            ),
+          ),
+        ),
+        const Duration(milliseconds: 200),
+      );
+
+      await expectLater(sheet.collate(5), matchesGoldenFile('picker/lifted-value-change-animation.png'));
+    });
   });
 }

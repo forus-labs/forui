@@ -10,6 +10,49 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  group('lifted', () {
+    testWidgets('lifted', (tester) async {
+      var value = const TextEditingValue(text: 'initial');
+      TextEditingValue? received;
+
+      Widget buildWidget() => TestScaffold.app(
+        child: FTextField(
+          control: .lifted(value: value, onChange: (v) => received = v),
+        ),
+      );
+
+      await tester.pumpWidget(buildWidget());
+
+      expect(find.text('initial'), findsOneWidget);
+
+      await tester.enterText(find.byType(EditableText), 'typed');
+      await tester.pumpAndSettle();
+      expect(received?.text, 'typed');
+
+      value = const TextEditingValue(text: 'external');
+      await tester.pumpWidget(buildWidget());
+      await tester.pumpAndSettle();
+      expect(find.text('external'), findsOneWidget);
+    });
+  });
+
+  group('managed', () {
+    testWidgets('onChange called', (tester) async {
+      TextEditingValue? lastValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField(control: .managed(onChange: (value) => lastValue = value)),
+        ),
+      );
+
+      await tester.enterText(find.byType(EditableText), 'hello');
+      await tester.pumpAndSettle();
+
+      expect(lastValue?.text, 'hello');
+    });
+  });
+
   group('embedding', () {
     testWidgets('embedded in CupertinoApp', (tester) async {
       await tester.pumpWidget(CupertinoApp(home: TestScaffold(child: const FTextField())));
@@ -88,7 +131,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: FThemes.zinc.light,
-          child: FTextField(controller: controller, clearable: (value) => value.text.isNotEmpty),
+          child: FTextField(
+            control: .managed(controller: controller),
+            clearable: (value) => value.text.isNotEmpty,
+          ),
         ),
       );
 
@@ -107,7 +153,7 @@ void main() {
         TestScaffold.app(
           theme: FThemes.zinc.light,
           child: FTextField(
-            controller: controller,
+            control: .managed(controller: controller),
             clearable: (value) => value.text.isNotEmpty,
             suffixBuilder: (_, _, _) => const SizedBox(),
           ),
@@ -164,7 +210,7 @@ void main() {
       TestScaffold.app(
         child: FTextField(
           builder: (_, _, _, child) => FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
             child: child,
           ),
@@ -180,7 +226,7 @@ void main() {
         child: FTextField(
           error: Container(height: 100, width: 100, color: Colors.red),
           builder: (_, _, _, child) => FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             popoverBuilder: (_, _) => Container(height: 100, width: 100, color: Colors.blue),
             child: child,
           ),

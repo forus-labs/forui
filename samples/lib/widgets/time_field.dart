@@ -52,7 +52,7 @@ class _ValidationTimePickerPageState extends StatefulSampleState<ValidatorTimeFi
 
   @override
   Widget sample(BuildContext context) => FTimeField(
-    controller: _controller,
+    control: .managed(controller: _controller),
     label: const Text('Appointment Time'),
     description: const Text('Select a time for your appointment.'),
   );
@@ -99,14 +99,14 @@ class _FormTimeFieldPageState extends StatefulSampleState<FormTimeFieldPage> wit
       child: Column(
         children: [
           FTimeField(
-            controller: _startTimeController,
+            control: .managed(controller: _startTimeController),
             label: const Text('Start Time'),
             description: const Text('Select a start time.'),
             autovalidateMode: .disabled,
           ),
           const SizedBox(height: 20),
           FTimeField(
-            controller: _endTimeController,
+            control: .managed(controller: _endTimeController),
             label: const Text('End Time'),
             description: const Text('Select an end time.'),
             autovalidateMode: .disabled,

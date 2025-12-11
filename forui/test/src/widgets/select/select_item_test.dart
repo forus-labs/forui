@@ -26,7 +26,7 @@ void main() {
           child: FSelect<String>.rich(
             key: key,
             format: (s) => s,
-            controller: controller,
+            control: .managed(controller: controller),
             children: const [
               FSelectSection.rich(
                 label: Text('1st'),
@@ -62,7 +62,7 @@ void main() {
           child: FSelect<String>.rich(
             key: key,
             format: (s) => s,
-            controller: controller,
+            control: .managed(controller: controller),
             children: const [
               FSelectItem(title: Text('A'), value: 'A'),
               FSelectItem(title: Text('B'), value: 'B'),

@@ -245,7 +245,7 @@ class _FormAutocompletePageState extends StatefulSampleState<FormAutocompletePag
         crossAxisAlignment: .start,
         children: [
           FAutocomplete(
-            controller: _controller,
+            control: .managed(controller: _controller),
             label: const Text('Department'),
             description: const Text('Type to search your dream department'),
             hint: 'Search departments',

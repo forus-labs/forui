@@ -88,11 +88,11 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
       localizations = scriptNumerals.contains(widget.localizations.localeName)
           ? FDefaultLocalizations()
           : widget.localizations;
-      controller.dispose();
-      controller = createController();
+      inputController.dispose();
+      inputController = createController();
     } else if (widget.calendarController != old.calendarController) {
-      controller.dispose();
-      controller = createController();
+      inputController.dispose();
+      inputController = createController();
     }
   }
 
@@ -103,7 +103,7 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
 
   @override
   @protected
-  bool clearable(TextEditingValue value) => value.text != controller.placeholder;
+  bool clearable(TextEditingValue value) => value.text != inputController.placeholder;
 
   @override
   @protected

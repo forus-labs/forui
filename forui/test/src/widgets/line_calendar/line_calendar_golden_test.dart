@@ -22,8 +22,8 @@ void main() {
         child: Focus(
           focusNode: focus,
           child: FLineCalendar(
+            control: .managed(controller: autoDispose(FCalendarController.date())),
             style: TestScaffold.blueScreen.lineCalendarStyle,
-            controller: autoDispose(FCalendarController.date()),
           ),
         ),
       ),
@@ -36,6 +36,48 @@ void main() {
     await expectBlueScreen();
   });
 
+  group('lifted', () {
+    testWidgets('selected', (tester) async {
+      DateTime? value;
+
+      await tester.pumpWidget(
+        StatefulBuilder(
+          builder: (context, setState) => TestScaffold.app(
+            child: FLineCalendar(
+              control: .lifted(value: value, onChange: (date) => setState(() => value = date)),
+              today: DateTime(2024, 11, 28),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('29').last);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/lifted-selected.png'));
+    });
+
+    testWidgets('does not update without setState', (tester) async {
+      DateTime? value;
+
+      await tester.pumpWidget(
+        StatefulBuilder(
+          builder: (context, setState) => TestScaffold.app(
+            child: FLineCalendar(
+              control: .lifted(value: value, onChange: (date) => setState(() {})),
+              today: DateTime(2024, 11, 28),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('29').last);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/lifted-not-updated.png'));
+    });
+  });
+
   group('states', () {
     for (final theme in TestScaffold.themes) {
       testWidgets('${theme.name} - default', (tester) async {
@@ -44,7 +86,10 @@ void main() {
             theme: theme.data,
             child: Focus(
               focusNode: focus,
-              child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+              child: FLineCalendar(
+                control: .managed(controller: autoDispose(FCalendarController.date())),
+                today: DateTime(2024, 11, 28),
+              ),
             ),
           ),
         );
@@ -60,7 +105,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              control: .managed(controller: autoDispose(FCalendarController.date())),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
@@ -77,7 +125,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              control: .managed(controller: autoDispose(FCalendarController.date())),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
@@ -97,7 +148,10 @@ void main() {
             theme: theme.data,
             child: Focus(
               focusNode: focus,
-              child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+              child: FLineCalendar(
+                control: .managed(controller: autoDispose(FCalendarController.date())),
+                today: DateTime(2024, 11, 28),
+              ),
             ),
           ),
         );
@@ -119,7 +173,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              control: .managed(controller: autoDispose(FCalendarController.date())),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
@@ -142,7 +199,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              control: .managed(controller: autoDispose(FCalendarController.date())),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
@@ -162,7 +222,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(initialSelection: DateTime(2024, 11, 29), today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(
+              control: .managed(initial: DateTime(2024, 11, 29)),
+              today: DateTime(2024, 11, 28),
+            ),
           ),
         );
 
@@ -177,8 +240,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FLineCalendar(
-              toggleable: true,
-              initialSelection: DateTime(2024, 11, 29),
+              control: .managed(initial: DateTime(2024, 11, 29), toggleable: true),
               today: DateTime(2024, 11, 28),
             ),
           ),
@@ -196,7 +258,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         textDirection: TextDirection.rtl,
-        child: FLineCalendar(controller: autoDispose(FCalendarController.date()), today: DateTime(2024, 11, 28)),
+        child: FLineCalendar(
+          control: .managed(controller: autoDispose(FCalendarController.date())),
+          today: DateTime(2024, 11, 28),
+        ),
       ),
     );
 
@@ -207,7 +272,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FLineCalendar(
-          controller: autoDispose(FCalendarController.date()),
+          control: .managed(controller: autoDispose(FCalendarController.date())),
           initialScrollAlignment: AlignmentDirectional.bottomStart,
           today: DateTime(2024, 11, 28),
         ),
@@ -221,7 +286,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FLineCalendar(
-          controller: autoDispose(FCalendarController.date()),
+          control: .managed(controller: autoDispose(FCalendarController.date())),
           initialScrollAlignment: AlignmentDirectional.bottomEnd,
           today: DateTime(2024, 11, 28),
         ),
@@ -235,7 +300,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FLineCalendar(
-          controller: autoDispose(FCalendarController.date()),
+          control: .managed(controller: autoDispose(FCalendarController.date())),
           builder: (context, state, child) => Stack(
             children: [
               child!,
@@ -248,18 +313,5 @@ void main() {
     );
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/builder.png'));
-  });
-
-  testWidgets('retains same scrolled date when controller changes', (tester) async {
-    final first = autoDispose(FCalendarController.date(initialSelection: DateTime(2025, 4, 23)));
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FLineCalendar(controller: first, initialScroll: DateTime(2025, 4, 25), today: DateTime(2025, 5, 21)),
-      ),
-    );
-
-    await tester.pumpWidget(TestScaffold.app(child: FLineCalendar()));
-
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('line-calendar/retains-scroll-offset.png'));
   });
 }

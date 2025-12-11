@@ -48,7 +48,7 @@ void main() {
         child: FSelect<String>(
           items: letters,
           key: key,
-          controller: controller,
+          control: FSelectControl.managed(controller: controller),
           contentScrollController: scrollController,
           contentScrollHandles: true,
         ),
@@ -76,7 +76,7 @@ void main() {
         child: FSelect<String>(
           items: letters,
           key: key,
-          controller: controller,
+          control: FSelectControl.managed(controller: controller),
           contentScrollController: scrollController,
           contentScrollHandles: true,
         ),
@@ -101,7 +101,7 @@ void main() {
         child: FSelect<String>(
           items: letters,
           key: key,
-          controller: controller,
+          control: FSelectControl.managed(controller: controller),
           contentScrollController: scrollController,
           contentScrollHandles: true,
         ),
@@ -133,7 +133,7 @@ void main() {
         child: FSelect<String>(
           items: letters,
           key: key,
-          controller: controller,
+          control: FSelectControl.managed(controller: controller),
           contentScrollController: scrollController,
           contentScrollHandles: true,
         ),

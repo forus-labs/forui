@@ -180,7 +180,11 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect(items: letters, initialValue: const {'Apple', 'Banana'}, key: key),
+          child: FMultiSelect(
+            control: const .managed(initial: {'Apple', 'Banana'}),
+            items: letters,
+            key: key,
+          ),
         ),
       );
 
@@ -233,7 +237,12 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect(items: letters, initialValue: const {'Apple', 'Banana'}, clearable: true, key: key),
+          child: FMultiSelect(
+            control: const .managed(initial: {'Apple', 'Banana'}),
+            items: letters,
+            clearable: true,
+            key: key,
+          ),
         ),
       );
 
@@ -248,7 +257,12 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FMultiSelect(items: letters, initialValue: const {'Apple', 'Banana'}, clearable: true, key: key),
+          child: FMultiSelect(
+            control: const .managed(initial: {'Apple', 'Banana'}),
+            items: letters,
+            clearable: true,
+            key: key,
+          ),
         ),
       );
 
@@ -271,7 +285,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
-            initialValue: const {'Apple', 'Banana'},
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -290,7 +304,7 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
-            initialValue: const {'Apple', 'Banana'},
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
             enabled: false,
             label: const Text('Fruits'),
@@ -310,8 +324,8 @@ void main() {
           theme: theme.data,
           alignment: Alignment.topCenter,
           child: FMultiSelect(
+            control: const .managed(initial: {'Apple', 'Banana'}),
             items: letters,
-            initialValue: const {'Apple', 'Banana'},
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
             autovalidateMode: AutovalidateMode.always,
@@ -383,17 +397,19 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          initialValue: const {
-            'Apple',
-            'Banana',
-            'Cherry',
-            'Dragonfruit',
-            'Elderberry',
-            'Fig',
-            'Grape',
-            'Honeydew',
-            'Italian plum',
-          },
+          control: const .managed(
+            initial: {
+              'Apple',
+              'Banana',
+              'Cherry',
+              'Dragonfruit',
+              'Elderberry',
+              'Fig',
+              'Grape',
+              'Honeydew',
+              'Italian plum',
+            },
+          ),
           items: letters,
           key: key,
         ),
@@ -411,7 +427,9 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          initialValue: const {'Apple', 'Banana', 'Cherry', 'Dragonfruit', 'Elderberry', 'Fig', 'Grape', 'Honeydew'},
+          control: const .managed(
+            initial: {'Apple', 'Banana', 'Cherry', 'Dragonfruit', 'Elderberry', 'Fig', 'Grape', 'Honeydew'},
+          ),
           items: letters,
           key: key,
         ),
@@ -429,7 +447,7 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          initialValue: const {'Apple', 'Banana', 'Cherry'},
+          control: const .managed(initial: {'Apple', 'Banana', 'Cherry'}),
           items: letters,
           tagBuilder: (context, _, _, _, child) => child,
           key: key,
@@ -447,7 +465,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FMultiSelect<String>(items: letters, initialValue: const {'Grape', 'Apple', 'Banana'}, key: key),
+        child: FMultiSelect<String>(
+          control: const .managed(initial: {'Grape', 'Apple', 'Banana'}),
+          items: letters,
+          key: key,
+        ),
       ),
     );
 
@@ -462,7 +484,7 @@ void main() {
       TestScaffold.app(
         alignment: Alignment.topCenter,
         child: FMultiSelect<String>(
-          initialValue: const {'Grape', 'Apple', 'Banana'},
+          control: const .managed(initial: {'Grape', 'Apple', 'Banana'}),
           items: letters,
           sort: (a, b) => a.compareTo(b),
           key: key,

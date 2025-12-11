@@ -5,8 +5,8 @@
 /// See https://forui.dev/docs/form/autocomplete for working examples.
 library forui.widgets.autocomplete;
 
-export '../src/widgets/autocomplete/autocomplete.dart';
+export '../src/widgets/autocomplete/autocomplete.dart' hide InheritedAutocompleteStyle;
 export '../src/widgets/autocomplete/autocomplete_content.dart' hide Content, ContentData;
 export '../src/widgets/autocomplete/autocomplete_controller.dart'
-    hide InheritedAutocompleteController, InheritedAutocompleteStyle;
+    hide InheritedAutocompleteController, InternalFAutocompleteControl, Lifted, Managed;
 export '../src/widgets/autocomplete/autocomplete_item.dart';

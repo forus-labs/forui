@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/form_field.dart';
+import 'package:forui/src/foundation/form/form_field.dart';
 import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
 
@@ -100,7 +100,7 @@ abstract class Input<T> extends StatefulWidget {
 @internal
 abstract class InputState<T extends Input<U>, U> extends State<T> {
   late FLocalizations localizations;
-  late InputController controller;
+  late InputController inputController;
 
   @override
   void initState() {
@@ -108,7 +108,13 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
     localizations = scriptNumerals.contains(widget.localizations.localeName)
         ? FDefaultLocalizations()
         : widget.localizations;
-    controller = createController();
+    inputController = createController();
+  }
+
+  @override
+  void dispose() {
+    inputController.dispose();
+    super.dispose();
   }
 
   @protected
@@ -119,9 +125,9 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
     shortcuts: const {SingleActivator(.arrowUp): AdjustIntent(1), SingleActivator(.arrowDown): AdjustIntent(-1)},
     child: Actions(
       actions: {
-        AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => controller.adjust(intent.amount)),
+        AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => inputController.adjust(intent.amount)),
         ExtendSelectionByCharacterIntent: CallbackAction<ExtendSelectionByCharacterIntent>(
-          onInvoke: (intent) => controller.traverse(forward: intent.forward),
+          onInvoke: (intent) => inputController.traverse(forward: intent.forward),
         ),
       },
       child: Field<U>(
@@ -129,18 +135,17 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
         enabled: widget.enabled,
         onSaved: widget.onSaved,
         onReset: widget.onReset,
-        initialValue: widget.controller.value,
         validator: (value) => switch (this.value) {
-          null when controller.text == controller.placeholder => widget.validator(null),
+          null when inputController.text == inputController.placeholder => widget.validator(null),
           null => errorMessage,
           final value => widget.validator(value),
         },
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
         builder: (state) => FTextField(
-          controller: controller,
+          control: .managed(controller: inputController),
           style: textFieldStyle,
-          statesController: controller.statesController,
+          statesController: inputController.statesController,
           builder: widget.builder,
           autocorrect: false,
           // We cannot use TextInputType.number as it does not contain a done button on iOS.
@@ -182,17 +187,11 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   String get errorMessage;
 
   @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('localizations', localizations))
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('inputController', inputController))
       ..add(DiagnosticsProperty('textFieldStyle', textFieldStyle))
       ..add(DiagnosticsProperty('value', value))
       ..add(StringProperty('errorMessage', errorMessage));

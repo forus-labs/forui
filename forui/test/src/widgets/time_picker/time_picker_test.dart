@@ -11,6 +11,50 @@ import '../../test_scaffold.dart';
 void main() {
   setUpAll(initializeDateFormatting);
 
+  group('lifted', () {
+    testWidgets('basic', (tester) async {
+      FTime value = const FTime(10, 30);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          child: StatefulBuilder(
+            builder: (_, setState) => FTimePicker(
+              control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            ),
+          ),
+        ),
+      );
+      expect(value, const FTime(10, 30));
+
+      await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(value, isNot(const FTime(10, 30)));
+    });
+  });
+
+  group('managed', () {
+    testWidgets('onChange callback called', (tester) async {
+      FTime? changedValue;
+
+      final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          child: FTimePicker(
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
+          ),
+        ),
+      );
+
+      controller.value = const FTime(14, 45);
+      await tester.pump();
+
+      expect(changedValue, const FTime(14, 45));
+    });
+  });
+
   group('state', () {
     testWidgets('crossing 12pm does not cause controller value to update', (tester) async {
       final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
@@ -18,7 +62,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: FTimePicker(controller: controller),
+          child: FTimePicker(control: .managed(controller: controller)),
         ),
       );
 
@@ -43,7 +87,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: initial),
+          child: FTimePicker(control: .managed(controller: initial)),
         ),
       );
       expect(initial.value, const FTime(10, 30));
@@ -52,7 +96,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: current),
+          child: FTimePicker(control: .managed(controller: current)),
         ),
       );
 
@@ -67,7 +111,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: controller),
+          child: FTimePicker(control: .managed(controller: controller)),
         ),
       );
       expect(controller.hours24, false);
@@ -75,7 +119,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: controller, hour24: true),
+          child: FTimePicker(control: .managed(controller: controller), hour24: true),
         ),
       );
       expect(controller.hours24, true);
@@ -87,7 +131,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: controller),
+          child: FTimePicker(control: .managed(controller: controller)),
         ),
       );
       expect(controller.hourInterval, 1);
@@ -96,7 +140,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: controller, hourInterval: 2, minuteInterval: 15),
+          child: FTimePicker(control: .managed(controller: controller), hourInterval: 2, minuteInterval: 15),
         ),
       );
       expect(controller.value, const FTime(8, 45));
@@ -113,7 +157,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: controller),
+          child: FTimePicker(control: .managed(controller: controller)),
         ),
       );
       expect(controller.value, const FTime());
@@ -125,7 +169,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: controller),
+          child: FTimePicker(control: .managed(controller: controller)),
         ),
       );
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: const FTimePicker()));
@@ -139,7 +183,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en'),
-          child: FTimePicker(controller: controller),
+          child: FTimePicker(control: .managed(controller: controller)),
         ),
       );
       await tester.pumpWidget(TestScaffold.app(locale: const Locale('en'), child: const SizedBox()));
@@ -154,7 +198,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('ko'),
-        child: SizedBox(width: 300, height: 300, child: FTimePicker(controller: controller)),
+        child: SizedBox(
+          width: 300,
+          height: 300,
+          child: FTimePicker(control: .managed(controller: controller)),
+        ),
       ),
     );
 
@@ -174,7 +222,9 @@ void main() {
       final firstController = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTimePicker(controller: firstController, onChange: onChange),
+          child: FTimePicker(
+            control: .managed(controller: firstController, onChange: onChange),
+          ),
         ),
       );
 
@@ -186,7 +236,9 @@ void main() {
       final secondController = autoDispose(FTimePickerController(initial: const FTime(12)));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTimePicker(controller: secondController, onChange: onChange),
+          child: FTimePicker(
+            control: .managed(controller: secondController, onChange: onChange),
+          ),
         ),
       );
 
@@ -204,7 +256,9 @@ void main() {
       final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTimePicker(controller: controller, onChange: (_) => first++),
+          child: FTimePicker(
+            control: .managed(controller: controller, onChange: (_) => first++),
+          ),
         ),
       );
 
@@ -215,7 +269,9 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTimePicker(controller: controller, onChange: (_) => second++),
+          child: FTimePicker(
+            control: .managed(controller: controller, onChange: (_) => second++),
+          ),
         ),
       );
 
@@ -233,7 +289,9 @@ void main() {
       final firstController = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTimePicker(controller: firstController, onChange: (_) => first++),
+          child: FTimePicker(
+            control: .managed(controller: firstController, onChange: (_) => first++),
+          ),
         ),
       );
 
@@ -245,7 +303,9 @@ void main() {
       final secondController = autoDispose(FTimePickerController(initial: const FTime(12)));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTimePicker(controller: secondController, onChange: (_) => second++),
+          child: FTimePicker(
+            control: .managed(controller: secondController, onChange: (_) => second++),
+          ),
         ),
       );
 
@@ -263,7 +323,9 @@ void main() {
       final controller = autoDispose(FTimePickerController(initial: const FTime(10, 30)));
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTimePicker(controller: controller, onChange: (_) => count++),
+          child: FTimePicker(
+            control: .managed(controller: controller, onChange: (_) => count++),
+          ),
         ),
       );
 

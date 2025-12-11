@@ -3,12 +3,16 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+/// A function type that provides text styles for the typeahead controller.
+typedef FTypeaheadControllerTextStyles =
+    (TextStyle textStyle, TextStyle composingStyle, TextStyle completionStyle) Function(BuildContext context);
+
 /// A [TextEditingController] with typeahead support.
 ///
 /// A typeahead controller manages suggestions and provides inline completions as the user types. When the current text
 /// matches the beginning of a suggestion, the remaining text is shown as a completion that can be accepted.
 class FTypeaheadController extends TextEditingController {
-  final (TextStyle, TextStyle, TextStyle) Function(BuildContext) _textStyles;
+  final FTypeaheadControllerTextStyles _textStyles;
   List<String> _suggestions;
   ({String completion, String replacement})? _current;
 
@@ -19,12 +23,22 @@ class FTypeaheadController extends TextEditingController {
 
   /// Creates a [FTypeaheadController] with an optional initial text and completion.
   FTypeaheadController({
-    required (TextStyle textStyle, TextStyle composingStyle, TextStyle completionStyle) Function(BuildContext context)
-    textStyles,
+    required FTypeaheadControllerTextStyles textStyles,
     List<String> suggestions = const [],
     super.text,
   }) : _textStyles = textStyles,
        _suggestions = suggestions {
+    findCompletion();
+  }
+
+  /// Creates a [FTypeaheadController] from a [TextEditingValue].
+  FTypeaheadController.fromValue(
+    super.value, {
+    required FTypeaheadControllerTextStyles textStyles,
+    List<String> suggestions = const [],
+  }) : _textStyles = textStyles,
+       _suggestions = suggestions,
+       super.fromValue() {
     findCompletion();
   }
 
@@ -149,9 +163,7 @@ class FTypeaheadController extends TextEditingController {
 
   @protected
   @nonVirtual
-  set current(({String completion, String replacement})? value) {
-    _current = value;
-  }
+  set current(({String completion, String replacement})? value) => _current = value;
 
   @override
   @mustCallSuper

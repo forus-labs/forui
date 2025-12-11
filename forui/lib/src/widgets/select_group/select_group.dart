@@ -5,11 +5,10 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
+import 'package:forui/src/foundation/form/multi_value_form_field.dart';
+import 'package:forui/src/widgets/select_group/select_group_controller.dart';
 
 part 'select_group.design.dart';
-
-/// A [FSelectGroup]'s controller.
-typedef FSelectGroupController<T> = FMultiValueNotifier<T>;
 
 /// A [FSelectGroup]'s item data. Useful for creating your own [FSelectGroupItemMixin].
 class FSelectGroupItemData<T> extends InheritedWidget {
@@ -60,9 +59,11 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 /// See:
 /// * https://forui.dev/docs/form/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
-class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>> {
-  /// The controller.
-  final FSelectGroupController<T> controller;
+class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
+  /// Defines how the select group's value is controlled.
+  ///
+  /// Defaults to [FSelectGroupControl.managed].
+  final FSelectGroupControl<T>? control;
 
   /// The style. Defaults to [FThemeData.selectGroupStyle].
   ///
@@ -83,137 +84,138 @@ class FSelectGroup<T> extends FormField<Set<T>> with FFormFieldProperties<Set<T>
   /// The items.
   final List<FSelectGroupItemMixin<T>> children;
 
-  /// The callback that is called when the value changes.
-  final ValueChanged<Set<T>>? onChange;
+  @override
+  final Widget Function(BuildContext context, String message) errorBuilder;
 
-  /// The callback that is called when an item is selected.
-  final ValueChanged<(T, bool)>? onSelect;
+  /// {@macro forui.foundation.FFormFieldProperties.onSaved}
+  @override
+  final FormFieldSetter<Set<T>>? onSaved;
+
+  /// {@macro forui.foundation.FFormFieldProperties.onReset}
+  @override
+  final VoidCallback? onReset;
+
+  /// {@macro forui.foundation.FFormFieldProperties.validator}
+  @override
+  final FormFieldValidator<Set<T>>? validator;
+
+  /// {@macro forui.foundation.FFormFieldProperties.forceErrorText}
+  @override
+  final String? forceErrorText;
+
+  /// Whether the form field is enabled. Defaults to true.
+  @override
+  final bool enabled;
+
+  /// {@macro flutter.widgets.FormField.autovalidateMode}
+  @override
+  final AutovalidateMode autovalidateMode;
 
   /// Creates a [FSelectGroup].
-  FSelectGroup({
-    required this.controller,
+  const FSelectGroup({
     required this.children,
+    this.control,
     this.style,
     this.label,
     this.description,
-    this.onChange,
-    this.onSelect,
-    Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
-    super.onSaved,
-    super.onReset,
-    super.validator,
-    super.forceErrorText,
-    super.enabled = true,
-    super.autovalidateMode,
+    this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.onSaved,
+    this.onReset,
+    this.validator,
+    this.forceErrorText,
+    this.enabled = true,
+    this.autovalidateMode = .disabled,
     super.key,
-  }) : super(
-         initialValue: controller.value,
-         errorBuilder: errorBuilder,
-         builder: (field) {
-           final state = field as _State;
-           final groupStyle = style?.call(state.context.theme.selectGroupStyle) ?? state.context.theme.selectGroupStyle;
-           final formStates = {if (!enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
-
-           return FLabel(
-             axis: .vertical,
-             states: formStates,
-             style: groupStyle,
-             label: label,
-             description: description,
-             error: state.errorText == null ? null : errorBuilder(state.context, state.errorText!),
-             child: Column(
-               children: [
-                 for (final child in children)
-                   Padding(
-                     padding: groupStyle.itemPadding,
-                     child: FSelectGroupItemData<T>(
-                       controller: controller,
-                       style: groupStyle,
-                       selected: controller.contains(child.value),
-                       child: child,
-                     ),
-                   ),
-               ],
-             ),
-           );
-         },
-       );
+  });
 
   @override
-  FormFieldState<Set<T>> createState() => _State();
+  State<FSelectGroup<T>> createState() => _FSelectGroupState<T>();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('controller', controller))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(ObjectFlagProperty.has('onSelect', onSelect));
+      ..add(ObjectFlagProperty.has('onSaved', onSaved))
+      ..add(ObjectFlagProperty.has('onReset', onReset))
+      ..add(ObjectFlagProperty.has('validator', validator))
+      ..add(StringProperty('forceErrorText', forceErrorText))
+      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
+      ..add(EnumProperty('autovalidateMode', autovalidateMode));
   }
 }
 
-class _State<T> extends FormFieldState<Set<T>> {
+class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
+  late FSelectGroupController<T> _controller;
+
   @override
   void initState() {
     super.initState();
-    widget.controller.addListener(_handleControllerChanged);
-    widget.controller.addValueListener(widget.onChange);
-    widget.controller.addUpdateListener(widget.onSelect);
+    _controller = (widget.control ?? FSelectGroupControl<T>.managed()).create(_handleChange);
   }
 
   @override
   void didUpdateWidget(covariant FSelectGroup<T> old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      widget.controller.addListener(_handleControllerChanged);
-      old.controller.removeListener(_handleControllerChanged);
-    }
-
-    old.controller.removeValueListener(old.onChange);
-    old.controller.removeUpdateListener(old.onSelect);
-    widget.controller.addValueListener(widget.onChange);
-    widget.controller.addUpdateListener(widget.onSelect);
+    final current = widget.control ?? FSelectGroupControl<T>.managed();
+    final previous = old.control ?? FSelectGroupControl<T>.managed();
+    _controller = current.update(previous, _controller, _handleChange).$1;
   }
 
-  @override
-  void didChange(Set<T>? value) {
-    super.didChange(value);
-    if (!setEquals(widget.controller.value, value)) {
-      widget.controller.value = value ?? {};
+  void _handleChange() {
+    setState(() {});
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
     }
   }
 
   @override
-  void reset() {
-    // Set the controller value before calling super.reset() to let _handleControllerChanged suppress the change.
-    widget.controller.value = widget.initialValue ?? {};
-    super.reset();
+  Widget build(BuildContext context) {
+    final groupStyle = widget.style?.call(context.theme.selectGroupStyle) ?? context.theme.selectGroupStyle;
+
+    return MultiValueFormField<T>(
+      controller: _controller,
+      enabled: widget.enabled,
+      onSaved: widget.onSaved,
+      validator: widget.validator,
+      forceErrorText: widget.forceErrorText,
+      autovalidateMode: widget.autovalidateMode,
+      builder: (state) {
+        final formStates = {if (!widget.enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+
+        return FLabel(
+          axis: .vertical,
+          states: formStates,
+          style: groupStyle,
+          label: widget.label,
+          description: widget.description,
+          error: state.errorText == null ? null : widget.errorBuilder(context, state.errorText!),
+          child: Column(
+            children: [
+              for (final child in widget.children)
+                Padding(
+                  padding: groupStyle.itemPadding,
+                  child: FSelectGroupItemData<T>(
+                    controller: _controller,
+                    style: groupStyle,
+                    selected: _controller.contains(child.value),
+                    child: child,
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
   void dispose() {
-    widget.controller
-      ..removeListener(_handleControllerChanged)
-      ..removeValueListener(widget.onChange)
-      ..removeUpdateListener(widget.onSelect);
+    (widget.control ?? FSelectGroupControl<T>.managed()).dispose(_controller, _handleChange);
     super.dispose();
   }
-
-  void _handleControllerChanged() {
-    // Suppress changes that originated from within this class.
-    //
-    // In the case where a controller has been passed in to this widget, we register this change listener. In these
-    // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
-    // reset() method. In such cases, the FormField value will already have been set.
-    if (widget.controller.value != value) {
-      didChange(widget.controller.value);
-    }
-  }
-
-  @override
-  FSelectGroup<T> get widget => super.widget as FSelectGroup<T>;
 }
 
 /// [FSelectGroup]'s style.

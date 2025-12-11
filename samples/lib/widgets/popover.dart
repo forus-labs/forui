@@ -81,7 +81,10 @@ class PopoverPage extends Sample {
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
                       Expanded(
                         flex: 2,
-                        child: FTextField(autofocus: index == 0, initialText: value),
+                        child: FTextField(
+                          control: .managed(initial: TextEditingValue(text: value)),
+                          autofocus: index == 0,
+                        ),
                       ),
                     ],
                   ),
@@ -116,9 +119,13 @@ class BlurredPopoverPage extends Sample {
         children: [
           Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: .bold)),
           const SizedBox(height: 20),
-          const FTextField(initialText: 'Header Component'),
+          const FTextField(
+            control: .managed(initial: TextEditingValue(text: 'Header Component')),
+          ),
           const SizedBox(height: 16),
-          const FTextField(initialText: 'Navigation Bar'),
+          const FTextField(
+            control: .managed(initial: TextEditingValue(text: 'Navigation Bar')),
+          ),
           const SizedBox(height: 30),
         ],
       ),
@@ -163,7 +170,10 @@ class BlurredPopoverPage extends Sample {
                       Expanded(child: Text(label, style: context.theme.typography.sm)),
                       Expanded(
                         flex: 2,
-                        child: FTextField(autofocus: index == 0, initialText: value),
+                        child: FTextField(
+                          control: .managed(initial: TextEditingValue(text: value)),
+                          autofocus: index == 0,
+                        ),
                       ),
                     ],
                   ),

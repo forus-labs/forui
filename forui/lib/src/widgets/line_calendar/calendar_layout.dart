@@ -6,11 +6,12 @@ import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
+import 'package:forui/src/widgets/line_calendar/line_calendar_controller.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar_item.dart';
 
 @internal
 class CalendarLayout extends StatefulWidget {
-  final FCalendarController<DateTime?>? controller;
+  final FLineCalendarControl control;
   final FLineCalendarStyle style;
   final AlignmentDirectional alignment;
   final ScrollPhysics? physics;
@@ -19,17 +20,14 @@ class CalendarLayout extends StatefulWidget {
   final TextScaler scale;
   final TextStyle textStyle;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
-  final ValueChanged<DateTime?>? onChange;
-  final bool toggleable;
   final LocalDate start;
   final LocalDate? end;
   final LocalDate? initialScroll;
-  final LocalDate? initialSelection;
   final LocalDate today;
   final BoxConstraints constraints;
 
   const CalendarLayout({
-    required this.controller,
+    required this.control,
     required this.style,
     required this.alignment,
     required this.physics,
@@ -38,12 +36,9 @@ class CalendarLayout extends StatefulWidget {
     required this.scale,
     required this.textStyle,
     required this.builder,
-    required this.onChange,
-    required this.toggleable,
     required this.start,
     required this.end,
     required this.initialScroll,
-    required this.initialSelection,
     required this.today,
     required this.constraints,
     super.key,
@@ -56,7 +51,7 @@ class CalendarLayout extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('alignment', alignment))
       ..add(DiagnosticsProperty('physics', physics))
@@ -65,12 +60,9 @@ class CalendarLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('scaler', scale))
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
-      ..add(FlagProperty('toggleable', value: toggleable, ifTrue: 'toggleable'))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
       ..add(DiagnosticsProperty('initialScroll', initialScroll))
-      ..add(DiagnosticsProperty('initialSelection', initialSelection))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('constraints', constraints));
   }
@@ -86,10 +78,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     super.initState();
     _width = _estimateWidth();
 
-    _controller =
-        widget.controller ??
-        .date(initialSelection: widget.initialSelection?.toNative(), toggleable: widget.toggleable);
-    _controller.addValueListener(_onChange);
+    _controller = widget.control.create(_handleOnChange);
 
     final start = ((widget.initialScroll ?? widget.today).difference(widget.start).inDays) * _width;
     _scrollController = ScrollController(
@@ -108,18 +97,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
       _width = _estimateWidth();
     }
 
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller.removeValueListener(_onChange);
-      }
-
-      _controller =
-          widget.controller ??
-          FCalendarController.date(initialSelection: _controller.value, toggleable: widget.toggleable);
-      _controller.addValueListener(_onChange);
-    }
+    _controller = widget.control.update(old.control, _controller, _handleOnChange).$1;
   }
 
   double _estimateWidth() {
@@ -143,7 +121,11 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     ].max!;
   }
 
-  void _onChange(DateTime? date) => widget.onChange?.call(date);
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
 
   @override
   Widget build(BuildContext _) {
@@ -184,11 +166,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
   @override
   void dispose() {
     _scrollController.dispose();
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeValueListener(_onChange);
-    }
+    widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
   }
 }

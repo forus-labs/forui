@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.dart';
@@ -49,8 +51,10 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
 
   static Widget _builder(BuildContext _, FAutocompleteStyle _, Set<WidgetState> _, Widget? child) => child!;
 
-  /// The controller.
-  final FAutocompleteController? controller;
+  /// Defines how the autocomplete's state is controlled.
+  ///
+  /// Defaults to [FAutocompleteControl.managed] which creates an internal [FAutocompleteController].
+  final FAutocompleteControl control;
 
   /// The style.
   ///
@@ -145,9 +149,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.text_field.maxLengthEnforcement}
   final MaxLengthEnforcement? maxLengthEnforcement;
 
-  /// {@macro forui.text_field.onChange}
-  final ValueChanged<String>? onChange;
-
   /// {@macro forui.text_field.onTap}
   final bool onTapAlwaysCalled;
 
@@ -236,9 +237,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   @override
   final FormFieldValidator<String>? validator;
 
-  /// {@macro forui.text_field.initialValue}
-  final String? initialText;
-
   @override
   final AutovalidateMode autovalidateMode;
 
@@ -313,13 +311,13 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// For more control over the appearance of items, use [FAutocomplete.builder].
   FAutocomplete({
     required List<String> items,
+    FAutocompleteControl control = const .managed(),
     FAutocompleteStyle Function(FAutocompleteStyle style)? style,
     Widget? label,
     String? hint,
     Widget? description,
     TextMagnifierConfiguration? magnifierConfiguration,
     Object groupId = EditableText,
-    FAutocompleteController? controller,
     FocusNode? focusNode,
     TextInputType? keyboardType,
     TextInputAction? textInputAction,
@@ -343,7 +341,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     bool? showCursor,
     int? maxLength,
     MaxLengthEnforcement? maxLengthEnforcement,
-    ValueChanged<String>? onChange,
     bool onTapAlwaysCalled = false,
     VoidCallback? onEditingComplete,
     ValueChanged<String>? onSubmit,
@@ -373,7 +370,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
     FormFieldValidator<String>? validator,
-    String? initialText,
     AutovalidateMode autovalidateMode = .disabled,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -402,13 +398,13 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          filter: filter ?? (query) => items.where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
          contentBuilder:
              contentBuilder ?? (context, query, values) => [for (final value in values) .item(value: value)],
+         control: control,
          style: style,
          label: label,
          hint: hint,
          description: description,
          magnifierConfiguration: magnifierConfiguration,
          groupId: groupId,
-         controller: controller,
          focusNode: focusNode,
          keyboardType: keyboardType,
          textInputAction: textInputAction,
@@ -432,7 +428,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          showCursor: showCursor,
          maxLength: maxLength,
          maxLengthEnforcement: maxLengthEnforcement,
-         onChange: onChange,
          onTapAlwaysCalled: onTapAlwaysCalled,
          onEditingComplete: onEditingComplete,
          onSubmit: onSubmit,
@@ -462,7 +457,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          onSaved: onSaved,
          onReset: onReset,
          validator: validator,
-         initialText: initialText,
          autovalidateMode: autovalidateMode,
          forceErrorText: forceErrorText,
          errorBuilder: errorBuilder,
@@ -490,13 +484,13 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   const FAutocomplete.builder({
     required this.filter,
     required this.contentBuilder,
+    this.control = const .managed(),
     this.style,
     this.label,
     this.hint,
     this.description,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
@@ -520,7 +514,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTapAlwaysCalled = false,
     this.onEditingComplete,
     this.onSubmit,
@@ -550,7 +543,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.onSaved,
     this.onReset,
     this.validator,
-    this.initialText,
     this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -571,10 +563,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.contentLoadingBuilder = defaultContentLoadingBuilder,
     this.contentErrorBuilder,
     super.key,
-  }) : assert(
-         controller == null || initialText == null,
-         'Cannot provide both a controller and initialText. To fix, set the initial text directly in the controller.',
-       );
+  });
 
   @override
   State<FAutocomplete> createState() => _State();
@@ -583,7 +572,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
@@ -610,7 +599,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(FlagProperty('showCursor', value: showCursor, ifTrue: 'showCursor'))
       ..add(IntProperty('maxLength', maxLength))
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
       ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
       ..add(ObjectFlagProperty.has('onSubmit', onSubmit))
@@ -650,7 +638,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(StringProperty('initialText', initialText))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
@@ -676,13 +663,14 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   }
 }
 
-class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
+class _State extends State<FAutocomplete> with TickerProviderStateMixin {
   late FAutocompleteController _controller;
   late FutureOr<Iterable<String>> _data;
   late FocusNode _fieldFocus;
   late FocusScopeNode _popoverFocus;
   bool _tapFocus = false;
   String? _previous;
+  int _monotonic = 0;
 
   /// The original text used to restore the textfield when navigating but not selecting any completion using a keyboard.
   String? _restore;
@@ -692,10 +680,8 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
     super.initState();
     _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     _fieldFocus.addListener(_focus);
-    _controller = widget.controller ?? .new(vsync: this, text: widget.initialText);
-    _controller
-      ..addListener(_update)
-      ..loadSuggestions(_data = widget.filter(_controller.text));
+    _controller = widget.control.create(_update, this, (_) => []);
+    _controller.loadSuggestions(_data = widget.filter(_controller.text));
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
   }
 
@@ -710,51 +696,11 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     }
 
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller.removeListener(_update);
-      }
-
-      _controller = widget.controller ?? .new(vsync: this, text: widget.initialText);
-      _controller
-        ..addListener(_update)
-        ..loadSuggestions(widget.filter(_controller.text));
+    final (controller, updated) = widget.control.update(old.control, _controller, _update, this, widget.filter);
+    if (updated) {
+      _controller = controller;
+      _controller.loadSuggestions(widget.filter(_controller.text));
     }
-  }
-
-  void _update() {
-    if (_previous == _controller.text) {
-      return;
-    }
-
-    if (_fieldFocus.hasFocus && !_controller.content.status.isForwardOrCompleted) {
-      _controller.content.show();
-    }
-
-    setState(() {
-      _previous = _controller.text;
-      _controller.loadSuggestions(_data = widget.filter(_controller.text));
-    });
-  }
-
-  void _focus() {
-    // Check if the field gained focus because of the user tapping/tabbing into the autocomplete while completions are
-    // hidden.
-    if (_fieldFocus.hasFocus && _restore == null) {
-      if (!_tapFocus) {
-        _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
-      }
-      _tapFocus = false;
-      _controller.content.show();
-      // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
-      // in the empty popover.
-    } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
-      _controller.content.hide();
-    }
-
-    _restore = null;
   }
 
   @override
@@ -765,12 +711,50 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
       _fieldFocus.dispose();
     }
 
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_update);
-    }
+    widget.control.dispose(_controller, _update);
     super.dispose();
+  }
+
+  void _update() {
+    if (_previous == _controller.text) {
+      return;
+    }
+
+    if (_fieldFocus.hasFocus && !_controller.popover.status.isForwardOrCompleted) {
+      final current = ++_monotonic;
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (current == _monotonic) {
+          _controller.popover.show();
+        }
+      });
+    }
+
+    setState(() {
+      _previous = _controller.text;
+      _controller.loadSuggestions(_data = widget.filter(_controller.text));
+    });
+
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
+
+  void _focus() {
+    // Check if the field gained focus because of the user tapping/tabbing into the autocomplete while completions are
+    // hidden.
+    if (_fieldFocus.hasFocus && _restore == null) {
+      if (!_tapFocus) {
+        _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
+      }
+      _tapFocus = false;
+      _controller.popover.show();
+      // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
+      // in the empty popover.
+    } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
+      _controller.popover.hide();
+    }
+
+    _restore = null;
   }
 
   @override
@@ -792,13 +776,13 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         }
       },
       child: FTextFormField(
+        control: .managed(controller: _controller),
         style: style.fieldStyle,
         label: widget.label,
         hint: widget.hint,
         description: widget.description,
         magnifierConfiguration: widget.magnifierConfiguration,
         groupId: widget.groupId,
-        controller: _controller,
         focusNode: _fieldFocus,
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,
@@ -821,8 +805,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         showCursor: widget.showCursor,
         maxLength: widget.maxLength,
         maxLengthEnforcement: widget.maxLengthEnforcement,
-        onChange: widget.onChange,
-        onTap: _controller.content.show,
+        onTap: _controller.popover.show,
         onTapAlwaysCalled: true,
         onEditingComplete: widget.onEditingComplete,
         onSubmit: widget.onSubmit,
@@ -857,14 +840,13 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
         onSaved: widget.onSaved,
         onReset: widget.onReset,
         validator: widget.validator,
-        initialText: widget.initialText,
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
         errorBuilder: widget.errorBuilder,
         builder: (context, _, states, field) => FocusTraversalGroup(
           policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
           child: FPopover(
-            controller: _controller.content,
+            control: .managed(controller: _controller.popover),
             style: style.contentStyle,
             constraints: widget.popoverConstraints,
             popoverAnchor: widget.anchor,
@@ -886,7 +868,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
                 popover: popoverController,
                 onPress: (value) {
                   if (widget.autoHide) {
-                    _controller.content.hide();
+                    _controller.popover.hide();
                   }
                   _previous = value;
                   _controller.text = value;
@@ -916,7 +898,7 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
               states: states,
               child: CallbackShortcuts(
                 bindings: {
-                  const SingleActivator(.escape): _controller.content.hide,
+                  const SingleActivator(.escape): _controller.popover.hide,
                   const SingleActivator(.arrowDown): () => _popoverFocus.descendants.firstOrNull?.requestFocus(),
                   if (_controller.current case (:final replacement, completion: final _))
                     const SingleActivator(.tab): () => _complete(replacement),
@@ -937,10 +919,38 @@ class _State extends State<FAutocomplete> with SingleTickerProviderStateMixin {
 
   void _complete(String replacement) {
     if (widget.autoHide) {
-      _controller.content.hide();
+      _controller.popover.hide();
     }
     _previous = replacement;
     _controller.complete();
+  }
+}
+
+@internal
+final class InheritedAutocompleteStyle extends InheritedWidget {
+  @useResult
+  static InheritedAutocompleteStyle of(BuildContext context) {
+    assert(debugCheckHasAncestor<InheritedAutocompleteStyle>('FAutocomplete', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedAutocompleteStyle>()!;
+  }
+
+  /// The autocomplete style.
+  final FAutocompleteStyle style;
+
+  /// The current widget states.
+  final Set<WidgetState> states;
+
+  const InheritedAutocompleteStyle({required this.style, required this.states, required super.child, super.key});
+
+  @override
+  bool updateShouldNotify(InheritedAutocompleteStyle old) => style != old.style || states != old.states;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('states', states));
   }
 }
 

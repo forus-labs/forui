@@ -1,8 +1,25 @@
 ## 0.17.0 (Next)
 
-This update focuses on overhauling the API to better support the new dot-shorthand syntax.
+This update focuses on overhauling the API to better declarative state & support the new dot-shorthand syntax.
+
+To simplify updating to the latest version, we've included [Data Driven Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
+This allows you to run automated fixes on your codebase to update deprecated APIs to the latest version.
+
+After updating to the latest version, run:
+```dart
+dart fix --apply
+```
+
+
+### `FAccordion`
+* Add `FAccordionControl`.
+
+* **Breaking** Remove `FAccordion.controller`. Use `FAccordion(control: .managed(...))` instead.
+* Fix `FAccordionItem` not being properly disposed.
+
 
 ### `FAutocomplete`
+* Add `FAutocompleteControl`.
 * Add `FAutocompleteItemMixin.item(...)`.
 * Add `FAutocompleteItemMixin.raw(...)`.
 * Add `FAutocompleteItemMixin.section(...)`.
@@ -10,7 +27,8 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * Add `FAutocompleteItem.item(...)`.
 
 * **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
-* **Breaking** Rename `FAutocompleteController.popover` to `FAutocompleteController.content`.
+* **Breaking** Remove `FAutocomplete.controller`. Use `FAutocomplete(control: .managed(...))` instead.
+* **Breaking** Remove `FAutocomplete.initialText`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Change `FAutocompleteContentStyle` to extend `FPopoverStyle`.
 * **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
 
@@ -22,15 +40,31 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 
 ### `FBreadcrumb`
-*  **Breaking** Change `FBreadcrumb.shift` to `FBreadcrumb.overflow`.
+* **Breaking** Rename `FBreadcrumb.shift` to `FBreadcrumb.overflow`.
+* **Breaking** Remove `FBreadcrumbItem.collapsed(popoverController: ...)`. Use `FBreadcrumbItem.collapsed(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FBreadcrumbItem.collapsedTiles(popoverController: ...)`. Use `FBreadcrumbItem.collapsedTiles(popoverControl: .managed(...))` instead.
+
+
+### `FCalendar`
+Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due to the complexity of its API changes.
+
+* Add `FCalendarControl`.
+
+* **Breaking** Remove `FCalendar.controller`. Use `FCalendar(control: .managedDate(...))` instead.
 
 
 ### `FCheckbox`
 * **Breaking** Remove `FCheckbox.grouped(...)`. Use `FSelectGroupItemMixin.checkbox(...)` instead.
 
 
-### `FDateField` 
-*  **Breaking** Change `FDateField.shift` to `FDateField.overflow`.
+### `FDateField`
+* Add `FDateFieldControl`.
+
+* **Breaking** Rename `FDateField.shift` to `FDateField.overflow`.
+* **Breaking** Rename `FDateFieldController.calendar` to `FDateFieldController.popover`.
+* **Breaking** Remove `FDateField.controller`. Use `FDateField(control: .managed(controller: ...))` instead.
+* **Breaking** Remove `FDateField.initialDate`. Use `FDateField(control: .managed(initial: ...))` instead.
+* **Breaking** Remove `FDateField.onChange`. Use `FDateField(control: .managed(onChange: ...))` instead.
 
 
 ### `FItem` & `FItemGroup`
@@ -42,12 +76,41 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * Add `FItemGroupMixin.merge(...)`.
 
 
+### `FLineCalendar`
+* Add `FLineCalendarControl`.
+
+* **Breaking** Remove `FLineCalendar.controller`. Use `FLineCalendar(control: .managed(controller: ...))` instead.
+* **Breaking** Remove `FLineCalendar.initialSelection`. Use `FLineCalendar(control: .managed(initial: ...))` instead.
+* **Breaking** Remove `FLineCalendar.onChange`. Use `FLineCalendar(control: .managed(onChange: ...))` instead.
+* **Breaking** Remove `FLineCalendar.toggleable`. Use `FLineCalendar(control: .managed(toggleable: ...))` instead.
+
+
+### `FPagination`
+* Add `FPaginationControl`.
+
+* **Breaking** Remove `FPagination.controller`. Use `FPagination(control: .managed(controller: ...))` instead.
+* **Breaking** Remove `FPagination.initialPage`. Use `FPagination(control: .managed(initialPage: ...))` instead.
+* **Breaking** Remove `FPagination.pages`. Use `FPagination(control: .managed(pages: ...))` instead.
+* **Breaking** Remove `FPagination.onChange`. Use `FPagination(control: .managed(onChange: ...))` instead.
+
+
+### `FPicker`
+* Add `FPickerControl`.
+
+* **Breaking** Remove `FPicker.controller`. Use `FPicker(control: .managed(...))` instead.
+* **Breaking** Remove `FPicker.onChange`. Use `FPicker(control: .managed(...))` instead.
+
+
 ### `FPopover`
+* Add `FPopoverControl`.
+
 * **Breaking** Change `FPopover.shift` to `FPopover.overflow`.
+* **Breaking** Remove `FPopover.controller`. Use `FPopover(control: .managed(...))` instead.
 
 
 ### `FPopoverMenu`
 * **Breaking** Change `FPopoverMenu.shift` to `FPopoverMenu.overflow`.
+* **Breaking** Remove `FPopoverMenu.popoverController`. Use `FPopoverMenu(control: .managed(...))` instead.
 
 
 ### `FPortal`
@@ -72,26 +135,63 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 
 ### `FSelect` & `FMultiSelect`
+* Add `FSelectControl`.
+* Add `FMultiSelectControl`.
 * Add `FSelectItemMixin.item(...)`.
 * Add `FSelectItemMixin.raw(...)`.
 * Add `FSelectItemMixin.section(...)`.
 * Add `FSelectItemMixin.richSection(...)`.
 * Add `FSelectItem.item(...)`.
 
-*  **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
-*  **Breaking** Change `FMultiSelect.shift` to `FMultiSelect.overflow`.
+* **Breaking** Rename `FSelect.shift` to `FSelect.overflow`.
+* **Breaking** Rename `FMultiSelect.shift` to `FMultiSelect.overflow`.
+* **Breaking** Remove `FSelect.controller`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FSelect.onChange`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FSelect.initialValue`. Use `FSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.controller`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.onChange`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.initialValue`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.min`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FMultiSelect.max`. Use `FMultiSelect(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectSearchFieldProperties.controller`. Use `FSelectSearchFieldProperties(control: .managed(...))` instead.
 * Fix `FSelect.mouseCursor` defaulting to `SystemMouseCursors.click` instead of `MouseCursor.defer`.
 
 
-### `FSelectGroup`
+### `FSelectGroup` & `FSelectTileGroup`
+* Add `FSelectGroupControl` - shared by both `FSelectGroup` and `FSelectTileGroup`.
 * Add `FSelectGroupItemMixin.checkbox(...)`.
 * Add `FSelectGroupItemMixin.radio(...)`.
 
+* **Breaking** Remove `FSelectGroup.controller`. Use `FSelectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectGroup.onChange`. Use `FSelectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectGroup.onSelect`.
 * **Breaking** Rename `FSelectGroupItem` to `FSelectGroupItemMixin`.
 
 
-### `FSelectMenutTile`
-*  **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+### `FSelectMenuTile`
+* **Breaking** Rename `FSelectMenuTile.shift` to `FSelectMenuTile.overflow`.
+* **Breaking** Remove `FSelectMenuTile.selectController`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FSelectMenuTile.popoverController`. Use `FSelectMenuTile(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FSelectMenuTile.onChange`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FSelectMenuTile.initialValue`. Use `FSelectMenuTile(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FSelectMenuTile.onSelect`.
+* **Breaking** Remove `FSelectMenuTileController`. Use `FSelectGroupController` instead.
+
+
+### `FSelectTileGroup`
+* **Breaking** Remove `FSelectTileGroupController`. Use `FSelectGroupController` instead.
+* **Breaking** Remove `FSelectTileGroup.selectController`. Use `FSelectTileGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectTileGroup.onChange`. Use `FSelectTileGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FSelectTileGroup.onSelect`.
+
+
+### `FTileGroupMixin`
+* **Breaking** Remove `FTileGroupMixin.selectGroup(selectController: ...)`. Use `FTileGroupMixin.selectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroup(onChange: ...)`. Use `FTileGroupMixin.selectGroup(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroup(onSelect: ...)`.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(selectController: ...)`. Use `FTileGroupMixin.selectGroupBuilder(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onChange: ...)`. Use `FTileGroupMixin.selectGroupBuilder(control: .managed(...))` instead.
+* **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onSelect: ...)`.
 
 
 ### `FSlider`
@@ -99,12 +199,33 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 
 ### `FTabs`
+* Add `FTabControl`.
 * Add `FTabEntry.entry(...)`.
 * Add `FTabs.mouseCursor`.
+
+* **Breaking** Remove `FTabs.controller`. Use `FTabs(control: .managed(...))` instead.
+* **Breaking** Remove `FTabs.initialIndex`. Use `FTabs(control: .managed(...))` instead.
+* **Breaking** Remove `FTabs.onChange`. Use `FTabs(control: .managed(...))` instead.
 
 
 ### `FTappable`
 *  Change `FTappable` to only update focused state when it has primary focus.
+
+
+### `FTextField`
+* Add `FObscureTextControl`.
+* Add `FTextFieldControl`.
+* Add `FTextField.control`.
+* Add `FTextFormField.control`.
+
+* **Breaking** Remove `FTextField.controller`. Use `FTextField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextField.onChange`. Use `FTextField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextField.initialText`. Use `FTextField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextFormField.controller`. Use `FTextFormField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextFormField.onChange`. Use `FTextFormField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextFormField.initialText`. Use `FTextFormField(control: .managed(...))` instead.
+* **Breaking** Remove `FTextField.password(obscureTextController: ...)`. Use `FTextField.password(obscureTextControl: ...)` instead.
+* **Breaking** Remove `FTextFormField.password(obscureTextController: ...)`. Use `FTextFormField.password(obscureTextControl: ...)` instead.
 
 
 ### `FTile` & `FTileGroup`
@@ -119,15 +240,46 @@ This update focuses on overhauling the API to better support the new dot-shortha
 * Add `FTileGroupMixin.builder(...)`.
 * Add `FTileGroupMixin.merge(...)`.
 
+* **Breaking** Remove `FTileMixin.selectMenu(selectController: ...)`. Use `FTileMixin.selectMenu(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenu(popoverController: ...)`. Use `FTileMixin.selectMenu(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenu(onChange: ...)`. Use `FTileMixin.selectMenu(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenu(onSelect: ...)`.
+* **Breaking** Remove `FTileMixin.selectMenu(initialValue: ...)`. Use `FTileMixin.selectMenu(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(selectController: ...)`. Use `FTileMixin.selectMenuFromMap(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(popoverController: ...)`. Use `FTileMixin.selectMenuFromMap(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(onChange: ...)`. Use `FTileMixin.selectMenuFromMap(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(onSelect: ...)`.
+* **Breaking** Remove `FTileMixin.selectMenuFromMap(initialValue: ...)`. Use `FTileMixin.selectMenuFromMap(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(selectController: ...)`. Use `FTileMixin.selectMenuBuilder(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(popoverController: ...)`. Use `FTileMixin.selectMenuBuilder(popoverControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(onChange: ...)`. Use `FTileMixin.selectMenuBuilder(selectControl: .managed(...))` instead.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(onSelect: ...)`.
+* **Breaking** Remove `FTileMixin.selectMenuBuilder(initialValue: ...)`. Use `FTileMixin.selectMenuBuilder(selectControl: .managed(...))` instead.
+
 
 ### `FTimeField`
+* Add `FTimeFieldControl`.
+
 * **Breaking** Rename `FTimeField.shift` to `FTimeField.overflow`.
+* **Breaking** Remove `FTimeField.controller`. Use `FTimeField(control: .managed(...))` instead.
+* **Breaking** Remove `FTimeField.onChange`. Use `FTimeField(control: .managed(...))` instead.
+* **Breaking** Remove `FTimeField.initialTime`. Use `FTimeField(control: .managed(...))` instead.
+
+
+### `FTimePicker`
+* Add `FTimePickerControl`.
+
+* **Breaking** Remove `FTimePicker.controller`. Use `FTimePicker(control: .managed(...))` instead.
+* **Breaking** Remove `FTimePicker.onChange`. Use `FTimePicker(control: .managed(...))` instead.
 
 
 ### `FTooltip`
+* Add `FTooltipControl`.
+
 * Change `FTooltip` to not be focusable.
-* Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus. 
+* Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus.
 * **Breaking** Rename `FTooltip.shift` to `FTooltip.overflow`.
+* **Breaking** Remove `FTooltip.controller`. Use `FTooltip(control: .managed(...))` instead.
 
 
 ### `FToast`
@@ -135,6 +287,9 @@ This update focuses on overhauling the API to better support the new dot-shortha
 
 
 ### Others
+* Add `FTypeaheadController.fromValue(...)`.
+* Add `FTypeheadTextStyles`.
+
 * **Breaking** Remove `FSidebar.width`. This field was never intended for public usage - Use `FSidebarStyle.constraints`
   instead.
 * Fix generated style docs being malformed.

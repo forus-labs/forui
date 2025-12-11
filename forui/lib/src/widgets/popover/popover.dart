@@ -7,76 +7,9 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 part 'popover.design.dart';
-
-/// A controller that controls whether a [FPopover] is shown or hidden.
-final class FPopoverController extends FChangeNotifier {
-  final OverlayPortalController _overlay = .new();
-  late final AnimationController _animation;
-  late final CurvedAnimation _curveScale;
-  late final CurvedAnimation _curveFade;
-  late final Animation<double> _scale;
-  late final Animation<double> _fade;
-
-  /// Creates a [FPopoverController] with the given [vsync] and [motion].
-  FPopoverController({required TickerProvider vsync, FPopoverMotion motion = const FPopoverMotion()}) {
-    _animation = AnimationController(
-      vsync: vsync,
-      duration: motion.entranceDuration,
-      reverseDuration: motion.exitDuration,
-    );
-    _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
-    _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
-    _scale = motion.scaleTween.animate(_curveScale);
-    _fade = motion.fadeTween.animate(_curveFade);
-  }
-
-  /// Convenience method for showing/hiding the popover.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async =>
-      const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_animation.status) ? hide() : show();
-
-  /// Shows the popover.
-  ///
-  /// If already shown, calling this method brings the popover to the top.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> show() async {
-    _overlay.show();
-    await _animation.forward();
-    notifyListeners();
-  }
-
-  /// Hides the popover.
-  ///
-  /// Once hidden, the popover will be removed from the widget tree the next time the widget tree rebuilds, and stateful
-  /// widgets in the popover may lose their states as a result.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> hide() async {
-    await _animation.reverse();
-    _overlay.hide();
-    notifyListeners();
-  }
-
-  /// The current status.
-  ///
-  /// [AnimationStatus.dismissed] - The popover is hidden.
-  /// [AnimationStatus.forward] - The popover is transitioning from hidden to shown.
-  /// [AnimationStatus.completed] - The popover is shown.
-  /// [AnimationStatus.reverse] - The popover is transitioning from shown to hidden.
-  AnimationStatus get status => _animation.status;
-
-  @override
-  void dispose() {
-    _curveFade.dispose();
-    _curveScale.dispose();
-    _animation.dispose();
-    super.dispose();
-  }
-}
 
 /// Motion-related properties for [FPopover].
 class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
@@ -163,8 +96,10 @@ class FPopover extends StatefulWidget {
 
   static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
 
-  /// The controller.
-  final FPopoverController? controller;
+  /// Defines how the popover's shown state is controlled.
+  ///
+  /// Defaults to [FPopoverControl.managed] which creates an internal [FPopoverController].
+  final FPopoverControl control;
 
   /// The popover's style.
   ///
@@ -319,7 +254,7 @@ class FPopover extends StatefulWidget {
   /// * neither [builder] nor [child] is provided.
   FPopover({
     required this.popoverBuilder,
-    this.controller,
+    this.control = const .managed(),
     this.style,
     this.constraints = const FPortalConstraints(),
     this.spacing = const .spacing(4),
@@ -360,7 +295,7 @@ class FPopover extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('popoverAnchor', popoverAnchor))
@@ -390,14 +325,15 @@ class FPopover extends StatefulWidget {
   }
 }
 
-class _State extends State<FPopover> with SingleTickerProviderStateMixin {
+class _State extends State<FPopover> with TickerProviderStateMixin {
   late Object? _groupId = widget.groupId ?? UniqueKey();
-  late FPopoverController _controller = widget.controller ?? .new(vsync: this);
+  late FPopoverController _controller;
   FocusScopeNode? _focusNode;
 
   @override
   void initState() {
     super.initState();
+    _controller = widget.control.create(_handleOnChange, this);
     _focusNode =
         widget.focusNode ??
         .new(debugLabel: 'FPopover', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
@@ -420,12 +356,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
           .new(debugLabel: 'FPopover', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
     }
 
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      }
-      _controller = widget.controller ?? .new(vsync: this);
-    }
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
   }
 
   @override
@@ -434,10 +365,14 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
       _focusNode?.dispose();
     }
 
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
+    widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.status.isForwardOrCompleted);
+    }
   }
 
   @override
@@ -454,7 +389,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
 
     return BackdropGroup(
       child: FPortal(
-        controller: _controller._overlay,
+        controller: _controller.overlay,
         constraints: widget.constraints,
         portalAnchor: widget.popoverAnchor,
         childAnchor: widget.childAnchor,
@@ -465,7 +400,7 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
         barrier: style.barrierFilter == null
             ? null
             : FAnimatedModalBarrier(
-                animation: _controller._fade,
+                animation: _controller.fade,
                 filter: style.barrierFilter!,
                 semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
                 barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
@@ -476,9 +411,9 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
         portalBuilder: (context, _) {
           Widget popover = ScaleTransition(
             alignment: widget.popoverAnchor.resolve(direction),
-            scale: _controller._scale,
+            scale: _controller.scale,
             child: FadeTransition(
-              opacity: _controller._fade,
+              opacity: _controller.fade,
               child: Semantics(
                 label: widget.semanticsLabel,
                 container: true,
@@ -506,8 +441,8 @@ class _State extends State<FPopover> with SingleTickerProviderStateMixin {
                 Positioned.fill(
                   child: ClipRect(
                     child: AnimatedBuilder(
-                      animation: _controller._fade,
-                      builder: (_, _) => BackdropFilter(filter: filter(_controller._fade.value), child: Container()),
+                      animation: _controller.fade,
+                      builder: (_, _) => BackdropFilter(filter: filter(_controller.fade.value), child: Container()),
                     ),
                   ),
                 ),

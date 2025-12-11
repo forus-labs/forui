@@ -6,7 +6,7 @@ class _BasicSelect<T> extends FSelect<T> {
   const _BasicSelect({
     required this.children,
     required super.format,
-    super.controller,
+    super.control,
     super.style,
     super.autofocus,
     super.focusNode,
@@ -16,7 +16,6 @@ class _BasicSelect<T> extends FSelect<T> {
     super.label,
     super.description,
     super.enabled,
-    super.onChange,
     super.onSaved,
     super.onReset,
     super.autovalidateMode,
@@ -44,7 +43,6 @@ class _BasicSelect<T> extends FSelect<T> {
     super.contentScrollHandles,
     super.contentPhysics,
     super.contentDivider,
-    super.initialValue,
     super.key,
   }) : super._();
 

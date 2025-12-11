@@ -6,14 +6,52 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('lifted', (tester) async {
+    var value = const TextEditingValue(text: 'initial');
+    TextEditingValue? received;
+
+    Widget buildWidget() => TestScaffold.app(
+      child: FTextFormField(
+        control: .lifted(value: value, onChange: (v) => received = v),
+      ),
+    );
+
+    await tester.pumpWidget(buildWidget());
+
+    expect(find.text('initial'), findsOneWidget);
+
+    await tester.enterText(find.byType(EditableText), 'typed');
+    await tester.pumpAndSettle();
+    expect(received?.text, 'typed');
+
+    value = const TextEditingValue(text: 'external');
+    await tester.pumpWidget(buildWidget());
+    await tester.pumpAndSettle();
+    expect(find.text('external'), findsOneWidget);
+  });
+
+  testWidgets('onChange', (tester) async {
+    TextEditingValue? lastValue;
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTextFormField(control: .managed(onChange: (value) => lastValue = value)),
+      ),
+    );
+
+    await tester.enterText(find.byType(EditableText), 'hello');
+    await tester.pumpAndSettle();
+
+    expect(lastValue?.text, 'hello');
+  });
+
   group('form', () {
     for (final (type, field) in [
       (
         'normal',
         (text, controller, autovalidate, validator, saved) => FTextFormField(
-          initialText: text,
-          controller: controller,
-          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          control: .managed(controller: controller, initial: text),
+          autovalidateMode: autovalidate ?? .disabled,
           validator: validator,
           onSaved: saved,
         ),
@@ -21,9 +59,8 @@ void main() {
       (
         'email',
         (text, controller, autovalidate, validator, saved) => FTextFormField.email(
-          initialText: text,
-          controller: controller,
-          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          control: .managed(controller: controller, initial: text),
+          autovalidateMode: autovalidate ?? .disabled,
           validator: validator,
           onSaved: saved,
         ),
@@ -31,9 +68,8 @@ void main() {
       (
         'password',
         (text, controller, autovalidate, validator, saved) => FTextFormField.password(
-          initialText: text,
-          controller: controller,
-          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          control: .managed(controller: controller, initial: text),
+          autovalidateMode: autovalidate ?? .disabled,
           validator: validator,
           onSaved: saved,
         ),
@@ -41,21 +77,23 @@ void main() {
       (
         'multiline',
         (text, controller, autovalidate, validator, saved) => FTextFormField.multiline(
-          initialText: text,
-          controller: controller,
-          autovalidateMode: autovalidate ?? AutovalidateMode.disabled,
+          control: .managed(controller: controller, initial: text),
+          autovalidateMode: autovalidate ?? .disabled,
           validator: validator,
           onSaved: saved,
         ),
       ),
     ]) {
-      testWidgets('$type - set initial text using initialText', (tester) async {
+      testWidgets('$type - set initial text using initial', (tester) async {
         final key = GlobalKey<FormState>();
 
         String? initial;
         await tester.pumpWidget(
           TestScaffold.app(
-            child: Form(key: key, child: field('initial', null, null, null, (value) => initial = value)),
+            child: Form(
+              key: key,
+              child: field(const TextEditingValue(text: 'initial'), null, null, null, (value) => initial = value),
+            ),
           ),
         );
 
@@ -142,9 +180,7 @@ void main() {
         expect(find.text('Invalid value'), findsNothing);
       });
     }
-  });
 
-  group('onChange', () {
     testWidgets('reset', (tester) async {
       final key = GlobalKey<FormState>();
       final controller = autoDispose(TextEditingController(text: 'initial'));
@@ -154,7 +190,9 @@ void main() {
         TestScaffold.app(
           child: Form(
             key: key,
-            child: FTextFormField(controller: controller, onChange: (value) => count++),
+            child: FTextFormField(
+              control: .managed(controller: controller, onChange: (value) => count++),
+            ),
           ),
         ),
       );

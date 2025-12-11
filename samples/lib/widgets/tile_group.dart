@@ -138,7 +138,7 @@ class _MergeTileGroupPageState extends StatefulSampleState<MergeTileGroup> {
         ],
       ),
       .selectGroup(
-        selectController: _controller,
+        control: .managed(controller: _controller),
         children: const [
           FSelectTile(title: Text('List View'), value: 'List'),
           FSelectTile(title: Text('Grid View'), value: 'Grid'),

@@ -90,11 +90,11 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
         _ => widget.localizations,
       };
 
-      controller.dispose();
-      controller = createController();
+      inputController.dispose();
+      inputController = createController();
     } else if (widget.timeController != old.timeController) {
-      controller.dispose();
-      controller = createController();
+      inputController.dispose();
+      inputController = createController();
     }
   }
 

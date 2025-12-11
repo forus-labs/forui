@@ -14,7 +14,7 @@ class _SearchSelect<T> extends FSelect<T> {
     this.searchFieldProperties = const FSelectSearchFieldProperties(),
     this.contentLoadingBuilder = FSelect.defaultContentLoadingBuilder,
     this.contentErrorBuilder,
-    super.controller,
+    super.control,
     super.style,
     super.autofocus,
     super.focusNode,
@@ -24,7 +24,6 @@ class _SearchSelect<T> extends FSelect<T> {
     super.label,
     super.description,
     super.enabled,
-    super.onChange,
     super.onSaved,
     super.onReset,
     super.autovalidateMode,
@@ -52,7 +51,6 @@ class _SearchSelect<T> extends FSelect<T> {
     super.contentScrollHandles,
     super.contentPhysics,
     super.contentDivider,
-    super.initialValue,
     super.key,
   }) : super._();
 

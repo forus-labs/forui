@@ -24,7 +24,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
@@ -41,7 +41,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
@@ -61,7 +61,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
@@ -84,7 +84,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopover(
-            controller: controller,
+            control: .managed(controller: controller),
             style: theme.data.popoverStyle.copyWith(
               barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
             ),
@@ -109,7 +109,7 @@ void main() {
             children: [
               FButton(onPress: controller.toggle, child: const Text('Toggle Popover')),
               FPopover(
-                controller: controller,
+                control: .managed(controller: controller),
                 style: theme.data.popoverStyle.copyWith(
                   backgroundFilter: (v) => ImageFilter.blur(sigmaX: v * 5, sigmaY: v * 5),
                   decoration: BoxDecoration(

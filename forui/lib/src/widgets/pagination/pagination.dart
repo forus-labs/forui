@@ -14,13 +14,8 @@ import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 /// * [FPaginationController] for customizing the pagination's behavior.
 /// * [FPaginationStyle] for customizing the pagination's appearance.
 class FPagination extends StatefulWidget {
-  /// The controller.
-  ///
-  /// ## Contract
-  /// Throws an [AssertionError] if:
-  /// * Both [controller] and [initialPage] are provided.
-  /// * Both [controller] and [pages] are provided.
-  final FPaginationController? controller;
+  /// The control that manages the pagination's state.
+  final FPaginationControl control;
 
   /// The pagination's style.
   ///
@@ -42,51 +37,8 @@ class FPagination extends StatefulWidget {
   /// Defaults to an `FIcons.chevronRight` icon.
   final Widget? next;
 
-  /// The initial page to be displayed.
-  ///
-  /// ## Contract
-  /// Throws an [AssertionError] if:
-  /// * Both [controller] and [initialPage] are provided.
-  /// * [initialPage] is < 0.
-  /// * [initialPage] is >= [pages]
-  final int? initialPage;
-
-  /// The total number of pages.
-  ///
-  /// ## Contract
-  /// Throws an [AssertionError] if:
-  /// * [controller] and [pages] are provided.
-  /// * [pages] is < 0.
-  /// * [pages] is >= [initialPage]
-  final int? pages;
-
-  /// A callback triggered when the current page changes.
-  final ValueChanged<int>? onChange;
-
   /// Creates an [FPagination].
-  const FPagination({
-    this.controller,
-    this.style,
-    this.previous,
-    this.next,
-    this.initialPage,
-    this.pages,
-    this.onChange,
-    super.key,
-  }) : assert(
-         controller == null || initialPage == null,
-         'Cannot provide both controller and initialPage. To fix, set the page directly in the controller.',
-       ),
-       assert(
-         controller == null || pages == null,
-         'Cannot provide both controller and pages. To fix, set the pages directly in the controller.',
-       ),
-       assert(initialPage == null || initialPage >= 0, 'initialPage ($initialPage) must be >= 0'),
-       assert(
-         initialPage == null || pages == null || initialPage < pages,
-         'initialPage ($initialPage) must be < pages ($pages)',
-       ),
-       assert(pages == null || pages > 0, 'pages ($pages) must be > 0');
+  const FPagination({this.control = const .managed(), this.style, this.previous, this.next, super.key});
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -95,11 +47,8 @@ class FPagination extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(IntProperty('initialPage', initialPage))
-      ..add(IntProperty('pages', pages))
-      ..add(ObjectFlagProperty.has('onChange', onChange));
+      ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -109,26 +58,26 @@ class _FPaginationState extends State<FPagination> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? .new(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
-    _controller.addListener(_onChange);
+    _controller = widget.control.create(_handleOnChange);
   }
 
   @override
   void didUpdateWidget(covariant FPagination old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeListener(_onChange);
-      }
-
-      _controller = widget.controller ?? .new(initialPage: widget.initialPage ?? 0, pages: widget.pages ?? 1);
-      _controller.addListener(_onChange);
-    }
+    _controller = widget.control.update(old.control, _controller, _handleOnChange).$1;
   }
 
-  void _onChange() => widget.onChange?.call(_controller.page);
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, _handleOnChange);
+    super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.page);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -191,16 +140,6 @@ class _FPaginationState extends State<FPagination> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeListener(_onChange);
-    }
-    super.dispose();
   }
 }
 

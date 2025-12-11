@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
+import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
 part 'accordion.design.dart';
 
@@ -17,8 +18,10 @@ part 'accordion.design.dart';
 /// * [FAccordionItem] for adding items to an accordion.
 /// * [FAccordionStyle] for customizing an accordion's appearance.
 class FAccordion extends StatefulWidget {
-  /// The controller. Defaults to [FAccordionController.new].
-  final FAccordionController? controller;
+  /// Defines how the accordion's expanded state is controlled.
+  ///
+  /// Defaults to [FAccordionControl.managed] which creates an internal [FAccordionController].
+  final FAccordionControl control;
 
   /// The style. Defaults to [FThemeData.accordionStyle].
   ///
@@ -38,7 +41,7 @@ class FAccordion extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FAccordion].
-  const FAccordion({required this.children, this.controller, this.style, super.key});
+  const FAccordion({required this.children, this.control = const .managed(), this.style, super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -47,31 +50,36 @@ class FAccordion extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style));
   }
 }
 
 class _FAccordionState extends State<FAccordion> {
-  late FAccordionController _controller = widget.controller ?? FAccordionController();
+  late FAccordionController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.control.create(_handleOnChange, widget.children.length);
+  }
 
   @override
   void didUpdateWidget(covariant FAccordion old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      }
-      _controller = widget.controller ?? FAccordionController();
-    }
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, widget.children.length).$1;
   }
 
   @override
   void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
+    widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.expanded);
+    }
   }
 
   @override
@@ -100,18 +108,19 @@ class InheritedAccordionData extends InheritedWidget {
   final FAccordionController controller;
   final FAccordionStyle style;
   final int index;
+  final Set<int> _expanded;
 
-  const InheritedAccordionData({
+  InheritedAccordionData({
     required this.controller,
     required this.style,
     required this.index,
     required super.child,
     super.key,
-  });
+  }) : _expanded = controller is LiftedController ? controller.items : {};
 
   @override
   bool updateShouldNotify(covariant InheritedAccordionData old) =>
-      controller != old.controller || style != old.style || index != old.index;
+      controller != old.controller || style != old.style || index != old.index || !setEquals(_expanded, old._expanded);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

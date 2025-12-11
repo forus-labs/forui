@@ -15,6 +15,33 @@ void main() {
     await expectBlueScreen();
   });
 
+  testWidgets('lifted does not cause entire text to be selected', (tester) async {
+    FTime? value = const FTime(10, 30);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: StatefulBuilder(
+          builder: (context, setState) => FTimeField(
+            key: key,
+            control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(.arrowLeft);
+    await tester.pumpAndSettle();
+
+    await tester.sendKeyEvent(.arrowUp);
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/lifted-arrow-scroll.png'));
+  });
+
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} with placeholder', (tester) async {
       await tester.pumpWidget(

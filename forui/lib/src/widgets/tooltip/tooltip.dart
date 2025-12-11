@@ -8,129 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/tooltip/tooltip_controller.dart';
 
 part 'tooltip.design.dart';
-
-/// A controller that controls whether a [FTooltip] is shown or hidden.
-final class FTooltipController extends FChangeNotifier {
-  final OverlayPortalController _overlay = .new();
-  late final AnimationController _animation;
-  late final CurvedAnimation _curveFade;
-  late final CurvedAnimation _curveScale;
-  late final Animation<double> _fade;
-  late final Animation<double> _scale;
-
-  /// Creates a [FTooltipController] with the given [vsync] and [motion].
-  FTooltipController({required TickerProvider vsync, FTooltipMotion motion = const FTooltipMotion()}) {
-    _animation = AnimationController(
-      vsync: vsync,
-      duration: motion.entranceDuration,
-      reverseDuration: motion.exitDuration,
-    );
-    _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
-    _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
-    _fade = motion.fadeTween.animate(_curveFade);
-    _scale = motion.scaleTween.animate(_curveScale);
-  }
-
-  /// Convenience method for showing/hiding the tooltip.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async =>
-      const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_animation.status) ? hide() : show();
-
-  /// Shows the tooltip.
-  ///
-  /// If already shown, calling this method brings the tooltip to the top.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> show() async {
-    _overlay.show();
-    await _animation.forward();
-    notifyListeners();
-  }
-
-  /// Hides the tooltip.
-  ///
-  /// Once hidden, the tooltip will be removed from the widget tree the next time the widget tree rebuilds, and stateful
-  /// widgets in the tooltip may lose their states as a result.
-  ///
-  /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> hide() async {
-    await _animation.reverse();
-    _overlay.hide();
-    notifyListeners();
-  }
-
-  /// The current status.
-  ///
-  /// [AnimationStatus.dismissed] - The tooltip is hidden.
-  /// [AnimationStatus.forward] - The tooltip is transitioning from hidden to shown.
-  /// [AnimationStatus.completed] - The tooltip is shown.
-  /// [AnimationStatus.reverse] - The tooltip is transitioning from shown to hidden.
-  AnimationStatus get status => _animation.status;
-
-  @override
-  void dispose() {
-    _curveFade.dispose();
-    _curveScale.dispose();
-    _animation.dispose();
-    super.dispose();
-  }
-}
-
-/// Motion-related properties for [FTooltip].
-class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
-  /// A [FTooltipMotion] with no motion effects.
-  static const FTooltipMotion none = .new(
-    scaleTween: FImmutableTween(begin: 1, end: 1),
-    fadeTween: FImmutableTween(begin: 1, end: 1),
-  );
-
-  /// The tooltip's entrance duration. Defaults to 100ms.
-  @override
-  final Duration entranceDuration;
-
-  /// The tooltip's exit duration. Defaults to 100ms.
-  @override
-  final Duration exitDuration;
-
-  /// The curve used for the tooltip's expansion animation when entering. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
-
-  /// The curve used for the tooltip's collapse animation when exiting. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve collapseCurve;
-
-  /// The curve used for the tooltip's fade-in animation when entering. Defaults to [Curves.linear].
-  @override
-  final Curve fadeInCurve;
-
-  /// The curve used for the tooltip's fade-out animation when exiting. Defaults to [Curves.linear].
-  @override
-  final Curve fadeOutCurve;
-
-  /// The tooltip's scale tween. Defaults to a tween from 0.93 to 1.
-  @override
-  final Animatable<double> scaleTween;
-
-  /// The tooltip's fade tween. Defaults to a tween from 0 to 1.
-  @override
-  final Animatable<double> fadeTween;
-
-  /// Creates a [FTooltipMotion].
-  const FTooltipMotion({
-    this.entranceDuration = const Duration(milliseconds: 100),
-    this.exitDuration = const Duration(milliseconds: 100),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseCurve = Curves.easeOutCubic,
-    this.fadeInCurve = Curves.linear,
-    this.fadeOutCurve = Curves.linear,
-    this.scaleTween = const FImmutableTween(begin: 0.93, end: 1),
-    this.fadeTween = const FImmutableTween(begin: 0, end: 1),
-  });
-}
 
 /// A tooltip displays information related to a widget when focused, hovered over, or long pressed.
 ///
@@ -145,8 +25,10 @@ class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
 class FTooltip extends StatefulWidget {
   static Widget _builder(BuildContext _, FTooltipController _, Widget? child) => child!;
 
-  /// The controller.
-  final FTooltipController? controller;
+  /// Defines how the tooltip's shown state is controlled.
+  ///
+  /// Defaults to [FTooltipControl.managed] which creates an internal [FTooltipController].
+  final FTooltipControl control;
 
   /// The tooltip's style.
   ///
@@ -225,7 +107,7 @@ class FTooltip extends StatefulWidget {
   /// Throws [AssertionError] if neither [builder] nor [child] is both provided.
   const FTooltip({
     required this.tipBuilder,
-    this.controller,
+    this.control = const .managed(),
     this.style,
     this.tipAnchor = .bottomCenter,
     this.childAnchor = .topCenter,
@@ -248,7 +130,7 @@ class FTooltip extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('tipAnchor', tipAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
@@ -266,28 +148,32 @@ class FTooltip extends StatefulWidget {
 
 class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
   final FocusNode _focus = .new(debugLabel: 'FTooltip', canRequestFocus: false, skipTraversal: true);
-  late FTooltipController _controller = widget.controller ?? .new(vsync: this);
+  late FTooltipController _controller;
   int _monotonic = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.control.create(_handleOnChange, this);
+  }
 
   @override
   void didUpdateWidget(covariant FTooltip old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      }
-
-      _controller = widget.controller ?? .new(vsync: this);
-    }
+    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
   }
 
   @override
   void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
+    widget.control.dispose(_controller, _handleOnChange);
     _focus.dispose();
     super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.status.isForwardOrCompleted);
+    }
   }
 
   @override
@@ -343,7 +229,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
     return BackdropGroup(
       child: FPortal(
-        controller: _controller._overlay,
+        controller: _controller.overlay,
         spacing: widget.spacing,
         childAnchor: widget.childAnchor,
         portalAnchor: widget.tipAnchor,
@@ -352,10 +238,10 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
           Widget tooltip = Semantics(
             container: true,
             child: FadeTransition(
-              opacity: _controller._fade,
+              opacity: _controller.fade,
               child: ScaleTransition(
                 alignment: widget.tipAnchor.resolve(direction),
-                scale: _controller._scale,
+                scale: _controller.scale,
                 child: DecoratedBox(
                   decoration: style.decoration,
                   child: Padding(
@@ -472,4 +358,57 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
         ),
         textStyle: typography.sm,
       );
+}
+
+/// Motion-related properties for [FTooltip].
+class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
+  /// A [FTooltipMotion] with no motion effects.
+  static const FTooltipMotion none = .new(
+    scaleTween: FImmutableTween(begin: 1, end: 1),
+    fadeTween: FImmutableTween(begin: 1, end: 1),
+  );
+
+  /// The tooltip's entrance duration. Defaults to 100ms.
+  @override
+  final Duration entranceDuration;
+
+  /// The tooltip's exit duration. Defaults to 100ms.
+  @override
+  final Duration exitDuration;
+
+  /// The curve used for the tooltip's expansion animation when entering. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve expandCurve;
+
+  /// The curve used for the tooltip's collapse animation when exiting. Defaults to [Curves.easeOutCubic].
+  @override
+  final Curve collapseCurve;
+
+  /// The curve used for the tooltip's fade-in animation when entering. Defaults to [Curves.linear].
+  @override
+  final Curve fadeInCurve;
+
+  /// The curve used for the tooltip's fade-out animation when exiting. Defaults to [Curves.linear].
+  @override
+  final Curve fadeOutCurve;
+
+  /// The tooltip's scale tween. Defaults to a tween from 0.93 to 1.
+  @override
+  final Animatable<double> scaleTween;
+
+  /// The tooltip's fade tween. Defaults to a tween from 0 to 1.
+  @override
+  final Animatable<double> fadeTween;
+
+  /// Creates a [FTooltipMotion].
+  const FTooltipMotion({
+    this.entranceDuration = const Duration(milliseconds: 100),
+    this.exitDuration = const Duration(milliseconds: 100),
+    this.expandCurve = Curves.easeOutCubic,
+    this.collapseCurve = Curves.easeOutCubic,
+    this.fadeInCurve = Curves.linear,
+    this.fadeOutCurve = Curves.linear,
+    this.scaleTween = const FImmutableTween(begin: 0.93, end: 1),
+    this.fadeTween = const FImmutableTween(begin: 0, end: 1),
+  });
 }

@@ -40,7 +40,12 @@ class PortalPage extends Sample {
               Row(
                 children: [
                   Expanded(child: Text(label, style: context.theme.typography.sm)),
-                  Expanded(flex: 2, child: FTextField(initialText: value)),
+                  Expanded(
+                    flex: 2,
+                    child: FTextField(
+                      control: .managed(initial: TextEditingValue(text: value)),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 7),

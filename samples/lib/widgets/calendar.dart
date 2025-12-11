@@ -17,91 +17,51 @@ DateTime get selected {
 }
 
 @RoutePage()
-class CalendarPage extends StatefulSample {
+class CalendarPage extends Sample {
   CalendarPage({@queryParam super.theme});
 
   @override
-  State<CalendarPage> createState() => _CalendarPageState();
-}
-
-class _CalendarPageState extends StatefulSampleState<CalendarPage> {
-  final _controller = FCalendarController.date(initialSelection: selected);
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget sample(BuildContext context) => FCalendar(controller: _controller, start: DateTime(2000), end: DateTime(2030));
+  Widget sample(BuildContext context) => FCalendar(control: .managedDate(), start: DateTime(2000), end: DateTime(2030));
 }
 
 @RoutePage()
-class DatesCalendarPage extends StatefulSample {
+class DatesCalendarPage extends Sample {
   DatesCalendarPage({@queryParam super.theme});
 
   @override
-  State<DatesCalendarPage> createState() => _DatesCalendarPageState();
-}
-
-class _DatesCalendarPageState extends StatefulSampleState<DatesCalendarPage> {
-  final _controller = FCalendarController.dates(initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)});
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget sample(BuildContext context) =>
-      FCalendar(controller: _controller, start: DateTime(2000), today: DateTime(2024, 7, 15), end: DateTime(2030));
+  Widget sample(BuildContext context) => FCalendar(
+    control: .managedDates(initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)}),
+    start: DateTime(2000),
+    today: DateTime(2024, 7, 15),
+    end: DateTime(2030),
+  );
 }
 
 @RoutePage()
-class UnselectableCalendarPage extends StatefulSample {
+class UnselectableCalendarPage extends Sample {
   UnselectableCalendarPage({@queryParam super.theme});
 
   @override
-  State<UnselectableCalendarPage> createState() => _UnselectableCalendarPageState();
-}
-
-class _UnselectableCalendarPageState extends StatefulSampleState<UnselectableCalendarPage> {
-  final _controller = FCalendarController.dates(
-    initialSelections: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-    selectable: (date) => !{DateTime(2024, 7, 18), DateTime(2024, 7, 19)}.contains(date),
+  Widget sample(BuildContext context) => FCalendar(
+    control: .managedDates(
+      initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
+      selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
+    ),
+    start: DateTime(2000),
+    today: DateTime(2024, 7, 15),
+    end: DateTime(2030),
   );
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget sample(BuildContext context) =>
-      FCalendar(controller: _controller, start: DateTime(2000), today: DateTime(2024, 7, 15), end: DateTime(2030));
 }
 
 @RoutePage()
-class RangeCalendarPage extends StatefulSample {
+class RangeCalendarPage extends Sample {
   RangeCalendarPage({@queryParam super.theme});
 
   @override
-  State<RangeCalendarPage> createState() => _RangeCalendarPageState();
-}
-
-class _RangeCalendarPageState extends StatefulSampleState<RangeCalendarPage> {
-  final _controller = FCalendarController.range(initialSelection: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)));
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget sample(BuildContext context) =>
-      FCalendar(controller: _controller, start: DateTime(2000), today: DateTime(2024, 7, 15), end: DateTime(2030));
+  Widget sample(BuildContext context) => FCalendar(
+    control: .managedRange(initial: (DateTime(2024, 7, 17), DateTime(2024, 7, 20))),
+    start: DateTime(2000),
+    today: DateTime(2024, 7, 15),
+    end: DateTime(2030),
+  );
 }

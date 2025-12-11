@@ -1,0 +1,34 @@
+version: 1
+transforms:
+  - title: 'Rename useFSelectTileGroupController to useFSelectGroupController'
+    date: 2025-11-30
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFSelectTileGroupController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFSelectGroupController'
+
+  - title: 'Rename useFSelectMenuTileController to useFSelectGroupController'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFSelectMenuTileController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFSelectGroupController'
+
+  - title: 'Rename useFRadioSelectMenuTileController to useFRadioSelectGroupController'
+    date: 2025-12-08
+    element:
+      uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+      function: useFRadioSelectMenuTileController
+    changes:
+      - kind: replacedBy
+        newElement:
+          uris: [ 'package:forui_hooks/forui_hooks.dart' ]
+          function: 'useFRadioSelectGroupController'

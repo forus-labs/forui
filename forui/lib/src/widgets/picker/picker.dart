@@ -5,60 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-
-/// A picker's controller.
-///
-/// The [value] contains the index of the selected item in each wheel. The indexes are ordered:
-/// * from left to right if the current text direction is LTR
-/// * from right to left if the current text direction is RTL
-class FPickerController extends FValueNotifier<List<int>> {
-  /// The picker wheels' initial indexes.
-  final List<int> initialIndexes;
-
-  /// The controllers for the individual picker wheels.
-  ///
-  /// The controllers are ordered:
-  /// * from left to right if the current text direction is LTR
-  /// * from right to left if the current text direction is RTL
-  ///
-  /// ## Contract
-  /// Reading the controllers before this FPickerController is attached to a [FPicker] is undefined behavior.
-  ///
-  /// Modifying [wheels] is undefined behavior.
-  final List<FixedExtentScrollController> wheels = [];
-
-  /// Creates a [FPickerController].
-  FPickerController({required this.initialIndexes}) : super([...initialIndexes]);
-
-  @override
-  List<int> get value => [...super.value];
-
-  @override
-  set value(List<int> value) {
-    assert(
-      wheels.isEmpty || value.length == wheels.length,
-      'The value must have the same length as the number of wheels.',
-    );
-
-    if (wheels.isNotEmpty) {
-      for (final (i, index) in value.indexed) {
-        wheels[i].jumpToItem(index);
-      }
-    }
-    super.value = value;
-  }
-
-  @override
-  void dispose() {
-    for (final wheel in wheels) {
-      wheel.dispose();
-    }
-    super.dispose();
-  }
-
-  // ignore: avoid_setters_without_getters
-  set _value(List<int> value) => super.value = value;
-}
+import 'package:forui/src/widgets/picker/picker_controller.dart';
 
 /// A generic picker that allows an item to be selected. It is composed of one or more [FPickerWheel]s, optionally,
 /// with separators between those wheels.
@@ -75,8 +22,10 @@ class FPickerController extends FValueNotifier<List<int>> {
 /// * [FPickerWheel] for customizing a picker's individual wheel.
 /// * [FPickerStyle] for customizing a picker's appearance.
 class FPicker extends StatefulWidget {
-  /// The controller.
-  final FPickerController? controller;
+  /// The control that manages the picker's value.
+  ///
+  /// Defaults to [FPickerControl.managed].
+  final FPickerControl control;
 
   /// The style.
   ///
@@ -88,12 +37,6 @@ class FPicker extends StatefulWidget {
   /// ```
   final FPickerStyle Function(FPickerStyle style)? style;
 
-  /// Handler called when the picker indexes change.
-  ///
-  /// The given indexes are not automatically wrap around the wheel's length. This means that the indexes may be greater
-  /// than the wheel's length or even negative.
-  final ValueChanged<List<int>>? onChange;
-
   /// The individual wheels and separators.
   ///
   /// ## Contract
@@ -102,7 +45,7 @@ class FPicker extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FPicker] with several wheels, and optionally, separators.
-  const FPicker({required this.children, this.controller, this.style, this.onChange, super.key});
+  const FPicker({required this.children, this.control = const .managed(), this.style, super.key});
 
   @override
   State<FPicker> createState() => _FPickerState();
@@ -111,9 +54,8 @@ class FPicker extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('onChange', onChange));
+      ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -126,52 +68,28 @@ class _FPickerState extends State<FPicker> {
   @override
   void initState() {
     super.initState();
-    _createController();
-    _controller.addValueListener(_onChange);
+    _controller = widget.control.create(_handleChange, widget.children.whereType<FPickerWheel>().length);
   }
 
   @override
   void didUpdateWidget(covariant FPicker old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        old.controller?.removeValueListener(_onChange);
-      }
-
-      _createController();
-      _controller.addValueListener(_onChange);
-    }
+    _controller = widget.control
+        .update(old.control, _controller, _handleChange, widget.children.whereType<FPickerWheel>().length)
+        .$1;
   }
 
-  void _createController() {
-    _controller =
-        widget.controller ?? .new(initialIndexes: .filled(widget.children.whereType<FPickerWheel>().length, 0));
-
-    for (final wheel in _controller.wheels) {
-      wheel.dispose();
-    }
-    _controller.wheels.clear();
-
-    for (final (index, item) in _controller.value.indexed) {
-      _controller.wheels.add(
-        FixedExtentScrollController(
-          initialItem: item,
-          onAttach: (position) {
-            if (position.hasContentDimensions) {
-              final copy = _controller.value;
-              // This is evil but it's the only way to get the item index as it's hidden in a private class.
-              copy[index] = (position as dynamic).itemIndex;
-              _controller._value = copy;
-            }
-          },
-        ),
-      );
-    }
+  @override
+  void dispose() {
+    widget.control.dispose(_controller, _handleChange);
+    super.dispose();
   }
 
-  void _onChange(List<int> value) => widget.onChange?.call(value);
+  void _handleChange() {
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +109,7 @@ class _FPickerState extends State<FPicker> {
         NotificationListener<ScrollMetricsNotification>(
           onNotification: (_) {
             if (_scrolling == 0) {
-              _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+              _controller.replace([for (final wheel in _controller.wheels) wheel.selectedItem]);
             }
 
             return false;
@@ -205,7 +123,7 @@ class _FPickerState extends State<FPicker> {
               onNotification: (_) {
                 _scrolling = max(_scrolling - 1, 0);
                 if (_scrolling == 0) {
-                  _controller._value = [for (final wheel in _controller.wheels) wheel.selectedItem];
+                  _controller.replace([for (final wheel in _controller.wheels) wheel.selectedItem]);
                 }
 
                 return false;
@@ -233,16 +151,6 @@ class _FPickerState extends State<FPicker> {
         ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller.removeValueListener(_onChange);
-    }
-    super.dispose();
   }
 }
 

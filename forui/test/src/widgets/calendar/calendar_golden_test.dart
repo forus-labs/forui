@@ -21,11 +21,8 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FCalendar(
+            control: .managedDates(initial: selected, selectable: (date) => date != .utc(2024, 7, 2)),
             style: TestScaffold.blueScreen.calendarStyle,
-            controller: FCalendarController.dates(
-              initialSelections: selected,
-              selectable: (date) => date != DateTime.utc(2024, 7, 2),
-            ),
             start: DateTime(1900, 1, 8),
             end: DateTime(2024, 7, 10),
             today: DateTime(2024, 7, 14),
@@ -40,12 +37,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FCalendar(
+            control: .managedDates(initial: selected, selectable: (date) => date != .utc(2024, 7, 2)),
             style: TestScaffold.blueScreen.calendarStyle,
             initialType: FCalendarPickerType.yearMonth,
-            controller: FCalendarController.dates(
-              initialSelections: selected,
-              selectable: (date) => date != DateTime.utc(2024, 7, 2),
-            ),
             start: DateTime(1900, 1, 8),
             end: DateTime(2024, 7, 10),
             today: DateTime(2024, 7, 14),
@@ -63,10 +57,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FCalendar(
-              controller: FCalendarController.dates(
-                initialSelections: selected,
-                selectable: (date) => date != DateTime.utc(2024, 7, 2),
-              ),
+              control: .managedDates(initial: selected, selectable: (date) => date != .utc(2024, 7, 2)),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),
@@ -91,7 +82,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FCalendar(
-              controller: FCalendarController.dates(initialSelections: selected),
+              control: .managedDates(initial: selected),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 6, 14),
@@ -112,7 +103,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FCalendar(
-                controller: FCalendarController.dates(),
+                control: .managedDates(),
                 start: DateTime(1900, 1, 8),
                 end: DateTime(2024, 8, 10),
                 today: DateTime(2024, 7, 14),
@@ -142,7 +133,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FCalendar(
-              controller: FCalendarController.dates(initialSelections: {DateTime.utc(2024, 7, 13)}),
+              control: .managedDates(initial: {.utc(2024, 7, 13)}),
               start: DateTime(2024, 7),
               end: DateTime(2024, 8, 10),
               today: DateTime(2024, 7, 14),
@@ -163,7 +154,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FCalendar(
-              controller: FCalendarController.dates(initialSelections: selected),
+              control: .managedDates(initial: selected),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),
@@ -194,7 +185,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FCalendar(
-              controller: FCalendarController.dates(initialSelections: selected),
+              control: .managedDates(initial: selected),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),
@@ -216,7 +207,7 @@ void main() {
             TestScaffold(
               theme: theme.data,
               child: FCalendar(
-                controller: FCalendarController.dates(initialSelections: selected),
+                control: .managedDates(initial: selected),
                 start: DateTime(1900, 1, 8),
                 end: DateTime(2024, 7, 10),
                 today: DateTime(2024, 7, 14),
@@ -245,10 +236,7 @@ void main() {
           TestScaffold(
             textDirection: TextDirection.rtl,
             child: FCalendar(
-              controller: FCalendarController.dates(
-                initialSelections: selected,
-                selectable: (date) => date != DateTime.utc(2024, 7, 2),
-              ),
+              control: .managedDates(initial: selected, selectable: (date) => date != .utc(2024, 7, 2)),
               start: DateTime(1900, 1, 8),
               end: DateTime(2024, 7, 10),
               today: DateTime(2024, 7, 14),

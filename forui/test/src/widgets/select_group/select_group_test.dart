@@ -6,6 +6,63 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
+  testWidgets('lifted', (tester) async {
+    Set<int> value = {};
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: StatefulBuilder(
+          builder: (context, setState) => FSelectGroup<int>(
+            control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
+            children: [
+              .checkbox(value: 1, label: const Text('1')),
+              .checkbox(value: 2, label: const Text('2')),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+
+    expect(value, {1});
+
+    await tester.tap(find.text('2'));
+    await tester.pumpAndSettle();
+
+    expect(value, {1, 2});
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+
+    expect(value, {2});
+  });
+
+  group('managed', () {
+    testWidgets('onChange callback called on controller value change', (tester) async {
+      final controller = autoDispose(FMultiValueNotifier<int>());
+      Set<int>? changedValue;
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FSelectGroup<int>(
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
+            children: [
+              .checkbox(value: 1, label: const Text('1')),
+              .checkbox(value: 2, label: const Text('2')),
+            ],
+          ),
+        ),
+      );
+
+      controller.value = {1, 2};
+      await tester.pump();
+
+      expect(changedValue, {1, 2});
+    });
+  });
+
   testWidgets('set initial value', (tester) async {
     final key = GlobalKey<FormState>();
 
@@ -15,7 +72,7 @@ void main() {
         child: Form(
           key: key,
           child: FSelectGroup<int>(
-            controller: autoDispose(FMultiValueNotifier(value: {1})),
+            control: .managed(controller: autoDispose(FMultiValueNotifier(value: {1}))),
             children: [.radio(label: const Text('1'), value: 1)],
             onSaved: (value) => initial = value,
           ),
@@ -29,20 +86,13 @@ void main() {
     expect(initial, {1});
   });
 
-  testWidgets('callbacks called', (tester) async {
+  testWidgets('onChange callback called', (tester) async {
     var changes = 0;
-    var selections = 0;
-    (int, bool)? selection;
 
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
-          controller: autoDispose(FMultiValueNotifier()),
-          onChange: (_) => changes++,
-          onSelect: (value) {
-            selections++;
-            selection = value;
-          },
+          control: .managed(controller: autoDispose(FMultiValueNotifier()), onChange: (_) => changes++),
           children: [
             .radio(value: 1, label: const Text('1')),
             .radio(value: 2, label: const Text('2')),
@@ -56,26 +106,17 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(changes, 1);
-    expect(selections, 1);
-    expect(selection, (2, true));
   });
 
   testWidgets('update callbacks', (tester) async {
     final controller = autoDispose(FMultiValueNotifier<int>());
 
     var firstChanges = 0;
-    var firstSelections = 0;
-    (int, bool)? firsSelection;
 
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
-          controller: controller,
-          onChange: (_) => firstChanges++,
-          onSelect: (value) {
-            firstSelections++;
-            firsSelection = value;
-          },
+          control: .managed(controller: controller, onChange: (_) => firstChanges++),
           children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
@@ -85,23 +126,14 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(firstChanges, 1);
-    expect(firstSelections, 1);
-    expect(firsSelection, (1, true));
     expect(controller.hasListeners, true);
 
     var secondChanges = 0;
-    var secondSelections = 0;
-    (int, bool)? secondSelection;
 
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
-          controller: controller,
-          onChange: (_) => secondChanges++,
-          onSelect: (value) {
-            secondSelections++;
-            secondSelection = value;
-          },
+          control: .managed(controller: controller, onChange: (_) => secondChanges++),
           children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
@@ -111,12 +143,7 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(firstChanges, 1);
-    expect(firstSelections, 1);
-    expect(firsSelection, (1, true));
-
     expect(secondChanges, 1);
-    expect(secondSelections, 1);
-    expect(secondSelection, (1, false));
   });
 
   testWidgets('update controller', (tester) async {
@@ -124,9 +151,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
-          controller: first,
-          onChange: (_) {},
-          onSelect: (_) {},
+          control: .managed(controller: first, onChange: (_) {}),
           children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
@@ -139,9 +164,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
-          controller: second,
-          onChange: (_) {},
-          onSelect: (_) {},
+          control: .managed(controller: second, onChange: (_) {}),
           children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),
@@ -158,9 +181,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FSelectGroup<int>(
-          controller: controller,
-          onChange: (_) {},
-          onSelect: (_) {},
+          control: .managed(controller: controller, onChange: (_) {}),
           children: [.checkbox(value: 1, label: const Text('1'))],
         ),
       ),

@@ -3,6 +3,10 @@
 targets:
   $default:
     builders:
+      forui_internal_gen:controlBuilder:
+        generate_for:
+          - lib/src/widgets/**.dart
+
       forui_internal_gen:designBuilder:
         generate_for:
           - lib/src/foundation/**.dart

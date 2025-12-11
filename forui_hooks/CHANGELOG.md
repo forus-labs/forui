@@ -1,3 +1,9 @@
+## 0.17.0
+* **Breaking** Remove `useFSelectTileGroupController`. Use `useFSelectGroupController` instead.
+* **Breaking** Remove `useFSelectMenuTileController`. Use `useFSelectGroupController` instead.
+* **Breaking** Remove `useFRadioSelectMenuTileController`. Use `useFRadioSelectGroupController` instead.
+
+
 ## 0.16.0
 
 * **Breaking** Replace `useFDateFieldController(animationDuration: ...)` with `useFDateFieldController(popoverMotion: ...)`.

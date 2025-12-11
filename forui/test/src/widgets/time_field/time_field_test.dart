@@ -5,29 +5,59 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/time_field/time_field.dart';
 import '../../locale_scaffold.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  for (final (name, constructor) in [
-    ('input only', (controller, time) => FTimeField(controller: controller, initialTime: time)),
-    ('picker only', (controller, time) => FTimeField.picker(controller: controller, initialTime: time)),
+  for (final (name, field) in [
+    (
+      'input only',
+      (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField(
+        key: key,
+        control: .lifted(value: value, onChange: onChange),
+      ),
+    ),
+    (
+      'picker only',
+      (Key key, FTime? value, ValueChanged<FTime?> onChange) => FTimeField.picker(
+        key: key,
+        control: .lifted(value: value, onChange: onChange),
+      ),
+    ),
   ]) {
-    group('$name - constructor', () {
-      testWidgets('cannot provide both controller and initialTime', (tester) async {
-        final controller = autoDispose(FTimeFieldController(vsync: tester));
-        expect(() => constructor(controller, const FTime()), throwsAssertionError);
-      });
+    testWidgets('$name - lifted', (tester) async {
+      const key = Key('field');
+      FTime? value;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(builder: (context, setState) => field(key, value, (v) => setState(() => value = v))),
+        ),
+      );
+
+      expect(find.byKey(key), findsOneWidget);
     });
   }
 
   for (final (name, field) in [
-    ('picker', (controller, time, save) => FTimeField.picker(controller: controller, initialTime: time, onSaved: save)),
-    ('input', (controller, time, save) => FTimeField(controller: controller, initialTime: time, onSaved: save)),
+    (
+      'picker',
+      (controller, initial, save) => FTimeField.picker(
+        control: .managed(controller: controller, initial: initial),
+        onSaved: save,
+      ),
+    ),
+    (
+      'input',
+      (controller, initial, save) => FTimeField(
+        control: .managed(controller: controller, initial: initial),
+        onSaved: save,
+      ),
+    ),
   ]) {
     group('$name - form', () {
-      testWidgets('set initial value using initialValue', (tester) async {
+      testWidgets('set initial value using initial', (tester) async {
         final key = GlobalKey<FormState>();
 
         FTime? initial;
@@ -75,48 +105,22 @@ void main() {
   }
 
   for (final (name, field) in [
-    ('input only', (controller, focus) => FTimeField(controller: controller, focusNode: focus)),
-    ('picker only', (controller, focus) => FTimeField.picker(controller: controller, focusNode: focus)),
+    (
+      'input only',
+      (controller, focus) => FTimeField(
+        control: .managed(controller: controller),
+        focusNode: focus,
+      ),
+    ),
+    (
+      'picker only',
+      (controller, focus) => FTimeField.picker(
+        control: .managed(controller: controller),
+        focusNode: focus,
+      ),
+    ),
   ]) {
     group(name, () {
-      testWidgets('update controller', (tester) async {
-        final first = autoDispose(FTimeFieldController(vsync: tester));
-
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first, null))));
-
-        expect(first.disposed, false);
-
-        final second = autoDispose(FTimeFieldController(vsync: tester));
-
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second, null))));
-
-        // We remove the internal update controllers to prevent interference with the assertion.
-        first.removeValueListener(first.update);
-        second.removeValueListener(second.update);
-
-        expect(first.popover.hasListeners, false);
-        expect(first.disposed, false);
-        expect(second.disposed, false);
-      });
-
-      testWidgets('dispose controller', (tester) async {
-        final controller = autoDispose(FTimeFieldController(vsync: tester));
-
-        await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(controller, null))));
-
-        expect(controller.hasListeners, true);
-        expect(controller.disposed, false);
-
-        await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));
-        await tester.pumpAndSettle();
-
-        // We remove the internal update controllers to prevent interference with the assertion.
-        controller.removeValueListener(controller.update);
-
-        expect(controller.popover.hasListeners, false);
-        expect(controller.disposed, false);
-      });
-
       testWidgets('update focus', (tester) async {
         final first = autoDispose(FocusNode());
 
@@ -145,8 +149,18 @@ void main() {
   }
 
   for (final (name, field) in [
-    ('input only', (controller, onChange) => FTimeField(controller: controller, onChange: onChange)),
-    ('picker only', (controller, onChange) => FTimeField.picker(controller: controller, onChange: onChange)),
+    (
+      'input only',
+      (controller, onChange) => FTimeField(
+        control: .managed(controller: controller, onChange: onChange),
+      ),
+    ),
+    (
+      'picker only',
+      (controller, onChange) => FTimeField.picker(
+        control: .managed(controller: controller, onChange: onChange),
+      ),
+    ),
   ]) {
     group('$name - onChange', () {
       testWidgets('when controller changes but onChange callback is the same', (tester) async {

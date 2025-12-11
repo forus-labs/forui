@@ -47,9 +47,8 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.onTapHide,
     this.hourInterval = 1,
     this.minuteInterval = 1,
-    super.controller,
+    super.control,
     super.style,
-    super.initialTime,
     super.hour24,
     super.autofocus,
     super.focusNode,
@@ -59,7 +58,6 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     super.label,
     super.description,
     super.enabled = true,
-    super.onChange,
     super.onSaved,
     super.onReset,
     super.autovalidateMode = .onUnfocus,
@@ -92,15 +90,19 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   DateFormat? _format;
 
   @override
-  void initState() {
-    super.initState();
-    _controller._picker.addListener(_updateTextController);
-    _controller.addValueListener(_onChange);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final localizations = FLocalizations.of(context)?.localeName;
+    _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
+
+    _updateTextController();
   }
 
   @override
   void didUpdateWidget(covariant _PickerTimeField old) {
     super.didUpdateWidget(old);
+
     // DO NOT REORDER
     if (widget.focusNode != old.focusNode) {
       if (old.focusNode == null) {
@@ -114,56 +116,37 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
     }
 
-    if (widget.controller != old.controller) {
-      if (old.controller == null) {
-        _controller.dispose();
-      } else {
-        _controller._picker.removeListener(_updateTextController);
-        _controller.removeValueListener(_onChange);
-      }
-
-      _controller = widget.controller ?? .new(vsync: this, initialTime: _controller.value);
-      _controller._picker.addListener(_updateTextController);
-      _controller.addValueListener(_onChange);
+    final (controller, updated) = widget.control.update(old.control, _controller, _handleOnChange, this);
+    if (updated) {
+      _controller = controller;
       _updateTextController();
     }
   }
 
-  void _onChange(FTime? time) => widget.onChange?.call(time);
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    final localizations = FLocalizations.of(context)?.localeName;
-    _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
-
-    _updateTextController();
-  }
-
-  void _updateTextController() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (_controller._picker.value case final value) {
-        final time = value.withDate(DateTime(1970));
-        _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
-      }
-    });
-  }
-
   @override
   void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    } else {
-      _controller._picker.removeListener(_updateTextController);
-      _controller.removeValueListener(_onChange);
-    }
-
     if (widget.focusNode == null) {
       _focus.dispose();
     }
     _textController.dispose();
     super.dispose();
+  }
+
+  @override
+  void _handleOnChange() {
+    _updateTextController();
+    if (widget.control case Managed(:final onChange?)) {
+      onChange(_controller.value);
+    }
+  }
+
+  void _updateTextController() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (_controller.picker.value case final value) {
+        final time = value.withDate(DateTime(1970));
+        _textController.text = widget.format?.format(time) ?? _format?.format(time) ?? '';
+      }
+    });
   }
 
   @override
@@ -179,10 +162,9 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       validator: _controller.validator,
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
-      initialTime: widget.initialTime,
       builder: (state) => FTextField(
+        control: .managed(controller: _textController),
         focusNode: _focus,
-        controller: _textController,
         style: style.textFieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
@@ -250,8 +232,8 @@ class _PickerPopover extends StatelessWidget {
 
   @override
   Widget build(BuildContext _) => FPopover(
+    control: .managed(controller: controller.popover),
     style: style.popoverStyle,
-    controller: controller.popover,
     constraints: style.popoverConstraints,
     popoverAnchor: properties.anchor,
     childAnchor: properties.inputAnchor,
@@ -266,7 +248,7 @@ class _PickerPopover extends StatelessWidget {
       child: Padding(
         padding: const .symmetric(horizontal: 5.0),
         child: FTimePicker(
-          controller: controller._picker,
+          control: .managed(controller: controller.picker),
           style: style.pickerStyle,
           hour24: hour24,
           hourInterval: properties.hourInterval,

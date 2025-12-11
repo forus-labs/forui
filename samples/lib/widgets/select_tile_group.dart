@@ -27,7 +27,7 @@ class SelectTileGroupPage extends StatefulSample {
 }
 
 class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage> {
-  final controller = FSelectTileGroupController(value: {Sidebar.recents});
+  final controller = FSelectGroupController(value: {Sidebar.recents});
 
   @override
   void dispose() {
@@ -42,7 +42,7 @@ class _SelectTileGroupPageState extends StatefulSampleState<SelectTileGroupPage>
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup<Sidebar>(
-          selectController: controller,
+          control: FSelectGroupControl.managed(controller: controller),
           label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           divider: widget.divider,
@@ -66,7 +66,7 @@ class ScrollableSelectTileGroupPage extends StatefulSample {
 }
 
 class _ScrollableSelectTileGroupPageState extends StatefulSampleState<ScrollableSelectTileGroupPage> {
-  final controller = FSelectTileGroupController(value: {Sidebar.recents});
+  final controller = FSelectGroupController(value: {Sidebar.recents});
 
   @override
   void dispose() {
@@ -81,7 +81,7 @@ class _ScrollableSelectTileGroupPageState extends StatefulSampleState<Scrollable
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup<Sidebar>(
-          selectController: controller,
+          control: FSelectGroupControl.managed(controller: controller),
           label: const Text('Sidebar'),
           description: const Text('These will be shown in the sidebar.'),
           maxHeight: 100,
@@ -120,7 +120,7 @@ class _LazySelectTileGroupPageState extends StatefulSampleState<LazySelectTileGr
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 400),
         child: FSelectTileGroup.builder(
-          selectController: controller,
+          control: .managed(controller: controller),
           label: const Text('Applicable values'),
           maxHeight: 200,
           tileBuilder: (context, index) => .tile(title: Text('Tile $index'), value: index),
@@ -140,7 +140,7 @@ class SelectTileGroupMultiValuePage extends StatefulSample {
 
 class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTileGroupMultiValuePage> {
   final _key = GlobalKey<FormState>();
-  final _controller = FSelectTileGroupController<Language>();
+  final _controller = FSelectGroupController<Language>();
 
   @override
   void dispose() {
@@ -156,7 +156,7 @@ class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTile
       crossAxisAlignment: .start,
       children: [
         FSelectTileGroup<Language>(
-          selectController: _controller,
+          control: .managed(controller: _controller),
           label: const Text('Favorite Languages'),
           description: const Text('Your favorite language.'),
           validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
@@ -195,7 +195,7 @@ class SelectTileGroupRadioPage extends StatefulSample {
 
 class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroupRadioPage> {
   final _key = GlobalKey<FormState>();
-  final _controller = FSelectTileGroupController<Notification>.radio();
+  final _controller = FSelectGroupController<Notification>.radio();
 
   @override
   void dispose() {
@@ -211,7 +211,7 @@ class _SelectTileGroupRadioPageState extends StatefulSampleState<SelectTileGroup
       crossAxisAlignment: .start,
       children: [
         FSelectTileGroup<Notification>(
-          selectController: _controller,
+          control: FSelectGroupControl.managed(controller: _controller),
           label: const Text('Notifications'),
           description: const Text('Select the notifications.'),
           validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
@@ -248,7 +248,7 @@ class SelectTileGroupSuffixPage extends StatefulSample {
 }
 
 class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGroupSuffixPage> {
-  final _controller = FSelectTileGroupController<String>.radio();
+  final _controller = FSelectGroupController<String>.radio();
 
   @override
   void dispose() {
@@ -263,7 +263,7 @@ class _SelectTileGroupSuffixPageState extends StatefulSampleState<SelectTileGrou
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 300),
         child: FSelectTileGroup(
-          selectController: _controller,
+          control: FSelectGroupControl.managed(controller: _controller),
           label: const Text('Settings'),
           children: const [
             FSelectTile.suffix(prefix: Icon(FIcons.list), title: Text('List View'), value: 'List'),

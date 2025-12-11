@@ -347,6 +347,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is FGoldenStyle &&
+          runtimeType == other.runtimeType &&
           someDouble == other.someDouble &&
           alignment == other.alignment &&
           alignmentGeometry == other.alignmentGeometry &&
@@ -453,6 +454,7 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is FGoldenNestedMotion &&
+          runtimeType == other.runtimeType &&
           someDouble == other.someDouble &&
           duration == other.duration &&
           curve == other.curve);
@@ -502,12 +504,8 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
   FGoldenNestedStyle call(Object? _) => this as FGoldenNestedStyle;
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-  }
-
-  @override
-  bool operator ==(Object other) => identical(this, other) || (other is FGoldenNestedStyle);
+  bool operator ==(Object other) =>
+      identical(this, other) || (other is FGoldenNestedStyle && runtimeType == other.runtimeType);
 
   @override
   int get hashCode => 0;

@@ -6,9 +6,11 @@ import 'package:flutter/services.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localized_text.dart';
 import 'package:forui/src/widgets/text_field/field.dart';
+import 'package:forui/src/widgets/text_field/form_field.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
 import 'package:forui/src/widgets/text_field/password_form_field.dart';
 import 'package:forui/src/widgets/text_field/text_field.dart';
+import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
 /// A text field that is wrapped is a [FormField] for convenience.
 ///
@@ -25,10 +27,12 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// By default, [suffixBuilder] is an eye icon that toggles showing and hiding the password. Replace the toggle by
   /// providing a custom [suffixBuilder], or disable it by setting it to `null`.
   ///
-  /// The [obscureTextController] parameter is a [ValueNotifier] that controls the obscuring state.
+  /// The [obscureTextControl] parameter controls the obscuring state.
   ///
   /// [autofillHints] defaults to [AutofillHints.password]. Use [AutofillHints.newPassword] for new-password inputs.
   static Widget password({
+    FTextFieldControl control = const .managed(),
+    FObscureTextControl obscureTextControl = const .managed(),
     FTextFieldStyle Function(FTextFieldStyle style)? style,
     FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
     Widget? label = const LocalizedText.password(),
@@ -37,7 +41,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     Widget? error,
     TextMagnifierConfiguration? magnifierConfiguration,
     Object groupId = EditableText,
-    TextEditingController? controller,
     FocusNode? focusNode,
     TextInputType? keyboardType,
     TextInputAction textInputAction = .next,
@@ -59,7 +62,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     bool? showCursor,
     int? maxLength,
     MaxLengthEnforcement? maxLengthEnforcement,
-    ValueChanged<String>? onChange,
     GestureTapCallback? onTap,
     TapRegionCallback? onTapOutside,
     bool onTapAlwaysCalled = false,
@@ -89,16 +91,15 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
     bool Function(TextEditingValue) clearable = Defaults.clearable,
-    ValueNotifier<bool>? obscureTextController,
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
     FormFieldValidator<String>? validator,
-    String? initialText,
     AutovalidateMode autovalidateMode = .disabled,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder = _errorBuilder,
     Key? key,
   }) => PasswordFormField(
+    control: control,
     properties: PasswordFieldProperties(
       style: style,
       builder: builder,
@@ -108,7 +109,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       error: null,
       magnifierConfiguration: magnifierConfiguration,
       groupId: groupId,
-      controller: controller,
       focusNode: focusNode,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
@@ -130,7 +130,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       showCursor: showCursor,
       maxLength: maxLength,
       maxLengthEnforcement: maxLengthEnforcement,
-      onChange: onChange,
       onTap: onTap,
       onTapOutside: onTapOutside,
       onTapAlwaysCalled: onTapAlwaysCalled,
@@ -160,8 +159,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       prefixBuilder: prefixBuilder,
       suffixBuilder: suffixBuilder,
       clearable: clearable,
-      initialText: initialText,
-      obscureTextController: obscureTextController,
+      obscureTextControl: obscureTextControl,
     ),
     onSaved: onSaved,
     onReset: onReset,
@@ -173,6 +171,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   );
 
   static Widget _errorBuilder(BuildContext _, String text) => Text(text);
+
+  /// {@macro forui.text_field.control}
+  final FTextFieldControl control;
 
   /// {@macro forui.text_field.style}
   final FTextFieldStyle Function(FTextFieldStyle style)? style;
@@ -196,9 +197,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
 
   /// {@macro forui.text_field_groupId}
   final Object groupId;
-
-  /// {@macro forui.text_field.controller}
-  final TextEditingController? controller;
 
   /// {@macro forui.text_field.keyboardType}
   final TextInputType? keyboardType;
@@ -265,9 +263,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
 
   /// {@macro forui.text_field.maxLengthEnforcement}
   final MaxLengthEnforcement? maxLengthEnforcement;
-
-  /// {@macro forui.text_field.onChange}
-  final ValueChanged<String>? onChange;
 
   /// {@macro forui.text_field.onTap}
   final GestureTapCallback? onTap;
@@ -366,9 +361,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   @override
   final FormFieldValidator<String>? validator;
 
-  /// {@macro forui.text_field.initialValue}
-  final String? initialText;
-
   @override
   final AutovalidateMode autovalidateMode;
 
@@ -380,6 +372,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
 
   /// Creates a [FTextFormField].
   const FTextFormField({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label,
@@ -387,7 +380,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.description,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
@@ -410,7 +402,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -443,7 +434,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.onSaved,
     this.onReset,
     this.validator,
-    this.initialText,
     this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
@@ -452,6 +442,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
 
   /// Creates a [FTextFormField] configured for emails.
   const FTextFormField.email({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label = const LocalizedText.email(),
@@ -459,7 +450,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.description,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType = .emailAddress,
     this.textInputAction = .next,
@@ -482,7 +472,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -515,7 +504,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.onSaved,
     this.onReset,
     this.validator,
-    this.initialText,
     this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
@@ -528,6 +516,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// time a new line is added. To limit the maximum height of the text field and make it scrollable, consider setting
   /// [maxLines].
   const FTextFormField.multiline({
+    this.control = const .managed(),
     this.style,
     this.builder = Defaults.builder,
     this.label,
@@ -535,7 +524,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.description,
     this.magnifierConfiguration,
     this.groupId = EditableText,
-    this.controller,
     this.focusNode,
     this.keyboardType,
     this.textInputAction,
@@ -558,7 +546,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.showCursor,
     this.maxLength,
     this.maxLengthEnforcement,
-    this.onChange,
     this.onTap,
     this.onTapOutside,
     this.onTapAlwaysCalled = false,
@@ -591,7 +578,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.onSaved,
     this.onReset,
     this.validator,
-    this.initialText,
     this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = _errorBuilder,
@@ -599,84 +585,83 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   });
 
   @override
-  Widget build(BuildContext context) => Field(
-    controller: controller,
-    onSaved: onSaved,
-    onReset: onReset,
-    validator: validator,
-    initialValue: controller?.text ?? initialText,
-    enabled: enabled,
-    autovalidateMode: autovalidateMode,
-    forceErrorText: forceErrorText,
-    restorationId: restorationId,
-    builder: (state) => FTextField(
-      style: style,
-      builder: builder,
-      label: label,
-      hint: hint,
-      description: description,
-      error: switch (state.errorText) {
-        null => null,
-        final error => errorBuilder(state.context, error),
-      },
-      magnifierConfiguration: magnifierConfiguration,
-      groupId: groupId,
-      controller: state.effectiveController,
-      focusNode: focusNode,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      textCapitalization: textCapitalization,
-      textAlign: textAlign,
-      textAlignVertical: textAlignVertical,
-      textDirection: textDirection,
-      autofocus: autofocus,
-      statesController: statesController,
-      obscuringCharacter: obscuringCharacter,
-      obscureText: obscureText,
-      autocorrect: autocorrect,
-      smartDashesType: smartDashesType,
-      smartQuotesType: smartQuotesType,
-      enableSuggestions: enableSuggestions,
-      minLines: minLines,
-      maxLines: maxLines,
-      expands: expands,
-      readOnly: readOnly,
-      showCursor: showCursor,
-      maxLength: maxLength,
-      maxLengthEnforcement: maxLengthEnforcement,
-      onChange: (value) {
-        state.didChange(value);
-        onChange?.call(value);
-      },
-      onTap: onTap,
-      onTapAlwaysCalled: onTapAlwaysCalled,
-      onEditingComplete: onEditingComplete,
-      onSubmit: onSubmit,
-      onAppPrivateCommand: onAppPrivateCommand,
-      inputFormatters: inputFormatters,
+  Widget build(BuildContext context) => TextFieldControl(
+    control: control,
+    builder: (context, controller, _) => InputFormField(
+      controller: controller,
+      onSaved: onSaved,
+      onReset: onReset,
+      validator: validator,
+      initialValue: controller.text,
       enabled: enabled,
-      ignorePointers: ignorePointers,
-      enableInteractiveSelection: enableInteractiveSelection,
-      selectionControls: selectionControls,
-      selectAllOnFocus: selectAllOnFocus,
-      dragStartBehavior: dragStartBehavior,
-      mouseCursor: mouseCursor,
-      counterBuilder: counterBuilder,
-      scrollPhysics: scrollPhysics,
-      scrollController: scrollController,
-      autofillHints: autofillHints,
+      autovalidateMode: autovalidateMode,
+      forceErrorText: forceErrorText,
       restorationId: restorationId,
-      stylusHandwritingEnabled: stylusHandwritingEnabled,
-      enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
-      contentInsertionConfiguration: contentInsertionConfiguration,
-      contextMenuBuilder: contextMenuBuilder,
-      canRequestFocus: canRequestFocus,
-      undoController: undoController,
-      spellCheckConfiguration: spellCheckConfiguration,
-      prefixBuilder: prefixBuilder,
-      suffixBuilder: suffixBuilder,
-      clearable: clearable,
-      key: key,
+      builder: (state) => Field(
+        controller: controller,
+        style: style,
+        builder: builder,
+        label: label,
+        hint: hint,
+        description: description,
+        error: switch (state.errorText) {
+          null => null,
+          final error => errorBuilder(state.context, error),
+        },
+        magnifierConfiguration: magnifierConfiguration,
+        groupId: groupId,
+        focusNode: focusNode,
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        textCapitalization: textCapitalization,
+        textAlign: textAlign,
+        textAlignVertical: textAlignVertical,
+        textDirection: textDirection,
+        autofocus: autofocus,
+        statesController: statesController,
+        obscuringCharacter: obscuringCharacter,
+        obscureText: obscureText,
+        autocorrect: autocorrect,
+        smartDashesType: smartDashesType,
+        smartQuotesType: smartQuotesType,
+        enableSuggestions: enableSuggestions,
+        minLines: minLines,
+        maxLines: maxLines,
+        expands: expands,
+        readOnly: readOnly,
+        showCursor: showCursor,
+        maxLength: maxLength,
+        maxLengthEnforcement: maxLengthEnforcement,
+        onTap: onTap,
+        onTapAlwaysCalled: onTapAlwaysCalled,
+        onEditingComplete: onEditingComplete,
+        onSubmit: onSubmit,
+        onAppPrivateCommand: onAppPrivateCommand,
+        inputFormatters: inputFormatters,
+        enabled: enabled,
+        ignorePointers: ignorePointers,
+        enableInteractiveSelection: enableInteractiveSelection,
+        selectionControls: selectionControls,
+        selectAllOnFocus: selectAllOnFocus,
+        dragStartBehavior: dragStartBehavior,
+        mouseCursor: mouseCursor,
+        counterBuilder: counterBuilder,
+        scrollPhysics: scrollPhysics,
+        scrollController: scrollController,
+        autofillHints: autofillHints,
+        restorationId: restorationId,
+        stylusHandwritingEnabled: stylusHandwritingEnabled,
+        enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+        contentInsertionConfiguration: contentInsertionConfiguration,
+        contextMenuBuilder: contextMenuBuilder,
+        canRequestFocus: canRequestFocus,
+        undoController: undoController,
+        spellCheckConfiguration: spellCheckConfiguration,
+        prefixBuilder: prefixBuilder,
+        suffixBuilder: suffixBuilder,
+        clearable: clearable,
+        key: key,
+      ),
     ),
   );
 
@@ -684,12 +669,12 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('groupId', groupId))
-      ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))
       ..add(EnumProperty('textInputAction', textInputAction))
@@ -712,7 +697,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(FlagProperty('showCursor', value: showCursor, ifTrue: 'showCursor'))
       ..add(IntProperty('maxLength', maxLength))
       ..add(EnumProperty('maxLengthEnforcement', maxLengthEnforcement))
-      ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onTap', onTap))
       ..add(ObjectFlagProperty.has('onTapOutside', onTapOutside))
       ..add(FlagProperty('onTapAlwaysCalled', value: onTapAlwaysCalled, ifTrue: 'onTapAlwaysCalled'))
@@ -754,7 +738,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('clearable', clearable))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(StringProperty('initialText', initialText))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));

@@ -16,10 +16,9 @@ class PickerFormField extends FormField<FTime> {
     required super.onSaved,
     required super.onReset,
     required super.validator,
-    required FTime? initialTime,
     required super.builder,
     super.key,
-  }) : super(initialValue: initialTime ?? controller.value);
+  }) : super(initialValue: controller.value);
 
   @override
   FormFieldState<FTime> createState() => _State();
@@ -27,10 +26,7 @@ class PickerFormField extends FormField<FTime> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('properties', properties))
-      ..add(DiagnosticsProperty('initialValue', initialValue));
+    properties.add(DiagnosticsProperty('controller', controller));
   }
 }
 

@@ -16,8 +16,8 @@ class FSelectSearchFieldProperties with Diagnosticable {
 
   static bool _clearable(TextEditingValue _) => false;
 
-  /// The search field's controller.
-  final TextEditingController? controller;
+  /// The search field's control.
+  final FTextFieldControl control;
 
   /// {@macro forui.text_field.hint}
   final String? hint;
@@ -102,8 +102,8 @@ class FSelectSearchFieldProperties with Diagnosticable {
   /// {@macro forui.text_field.maxLengthEnforcement}
   final MaxLengthEnforcement? maxLengthEnforcement;
 
-  /// {@macro forui.text_field.onChange}
-  final ValueChanged<String>? onChange;
+  /// Called when the text field's value changes.
+  final ValueChanged<TextEditingValue>? onChange;
 
   /// Called for the first tap in a series of taps.
   final GestureTapCallback? onTap;
@@ -179,7 +179,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
 
   /// Creates a [FSelectSearchFieldProperties].
   const FSelectSearchFieldProperties({
-    this.controller,
+    this.control = const .managed(),
     this.hint,
     this.magnifierConfiguration,
     this.keyboardType,
@@ -230,7 +230,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))

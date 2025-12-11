@@ -146,7 +146,7 @@ void main() {
             child: FSelect<String>(
               items: letters,
               key: key,
-              controller: controller,
+              control: .managed(controller: controller),
               contentScrollController: scrollController,
             ),
           ),
@@ -175,7 +175,7 @@ void main() {
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              controller: controller..value = 'A',
+              control: .managed(controller: controller..value = 'A'),
               children: [FSelectItem(title: Text(letters.keys.first), value: letters.keys.first, enabled: false)],
             ),
           ),

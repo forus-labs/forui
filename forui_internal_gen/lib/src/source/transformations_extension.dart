@@ -102,7 +102,8 @@ class TransformationsExtension {
   final List<String> copyWithDocsHeader;
 
   /// Creates a [TransformationsExtension].
-  TransformationsExtension(this.element, {required this.copyWithDocsHeader}) : fields = instanceFields(element);
+  TransformationsExtension(this.element, {required this.copyWithDocsHeader})
+    : fields = transitiveInstanceFields(element);
 
   /// Generates an extension that provides non virtual transforming methods.
   Extension generate() =>

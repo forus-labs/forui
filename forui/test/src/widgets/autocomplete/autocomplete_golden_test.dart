@@ -122,7 +122,7 @@ void main() {
             key: key,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
-            initialText: 'App',
+            control: const .managed(initial: TextEditingValue(text: 'App')),
             items: fruits,
           ),
         ),
@@ -138,7 +138,11 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FAutocomplete(key: key, initialText: 'Zebra', items: fruits),
+          child: FAutocomplete(
+            key: key,
+            control: const .managed(initial: TextEditingValue(text: 'Zebra')),
+            items: fruits,
+          ),
         ),
       );
 
@@ -156,7 +160,7 @@ void main() {
           theme: theme.data,
           child: FAutocomplete(
             key: key,
-            initialText: 'App',
+            control: const .managed(initial: TextEditingValue(text: 'App')),
             items: fruits,
             filter: (query) async {
               await completer.future;
@@ -283,7 +287,12 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, hint: 'Type to search', initialText: 'App', items: fruits),
+        child: FAutocomplete(
+          key: key,
+          hint: 'Type to search',
+          control: const .managed(initial: TextEditingValue(text: 'App')),
+          items: fruits,
+        ),
       ),
     );
 
@@ -300,7 +309,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, initialText: 'B', items: fruits),
+        child: FAutocomplete(
+          key: key,
+          control: const .managed(initial: TextEditingValue(text: 'B')),
+          items: fruits,
+        ),
       ),
     );
 

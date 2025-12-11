@@ -29,7 +29,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField(key: key),
+          child: const FDateField(key: key),
         ),
       );
 
@@ -40,7 +40,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDateField(prefixBuilder: null)));
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDateField(prefixBuilder: null)));
 
       await expectLater(
         find.byType(TestScaffold),
@@ -193,7 +193,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FDateField(enabled: false, key: key),
+          child: const FDateField(enabled: false, key: key),
         ),
       );
 
@@ -233,7 +233,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FDateField(key: key),
+          child: const FDateField(key: key),
         ),
       );
 
@@ -256,7 +256,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FDateField(key: key),
+          child: const FDateField(key: key),
         ),
       );
 

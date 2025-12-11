@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
+import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 part 'breadcrumb.design.dart';
 
@@ -115,7 +116,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   const factory FBreadcrumbItem.collapsed({
     required List<FItemGroup> menu,
     FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
-    FPopoverController? popoverController,
+    FPopoverControl popoverControl,
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight,
@@ -147,7 +148,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   const factory FBreadcrumbItem.collapsedTiles({
     required List<FTileGroup> menu,
     FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
-    FPopoverController? popoverController,
+    FPopoverControl popoverControl,
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight,
@@ -227,7 +228,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup>? tileMenu;
   final List<FItemGroup>? itemMenu;
   final FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle;
-  final FPopoverController? popoverController;
+  final FPopoverControl popoverControl;
   final ScrollController? scrollController;
   final double? cacheExtent;
   final double maxHeight;
@@ -251,7 +252,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   const _CollapsedCrumb({
     required List<FItemGroup> menu,
     this.popoverMenuStyle,
-    this.popoverController,
+    this.popoverControl = const .managed(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -278,7 +279,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   const _CollapsedCrumb.tiles({
     required List<FTileGroup> menu,
     this.popoverMenuStyle,
-    this.popoverController,
+    this.popoverControl = const .managed(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -310,7 +311,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle))
-      ..add(DiagnosticsProperty('popoverController', popoverController))
+      ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
@@ -334,17 +335,29 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 }
 
 class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProviderStateMixin {
-  late FPopoverController _popoverController = widget.popoverController ?? .new(vsync: this);
+  late FPopoverController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.popoverControl.create(_handleOnChange, this);
+  }
 
   @override
   void didUpdateWidget(covariant _CollapsedCrumb old) {
     super.didUpdateWidget(old);
-    if (widget.popoverController != old.popoverController) {
-      if (old.popoverController == null) {
-        _popoverController.dispose();
-      }
+    _controller = widget.popoverControl.update(old.popoverControl, _controller, _handleOnChange, this).$1;
+  }
 
-      _popoverController = widget.popoverController ?? .new(vsync: this);
+  @override
+  void dispose() {
+    widget.popoverControl.dispose(_controller, _handleOnChange);
+    super.dispose();
+  }
+
+  void _handleOnChange() {
+    if (widget.popoverControl case Managed(:final onChange?)) {
+      onChange(_controller.status.isForwardOrCompleted);
     }
   }
 
@@ -353,7 +366,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
     final style = FBreadcrumbItemData.of(context).style;
     if (widget.itemMenu case final menu?) {
       return FPopoverMenu(
-        popoverController: _popoverController,
+        control: .managed(controller: _controller),
         style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
         menuAnchor: widget.menuAnchor,
         childAnchor: widget.childAnchor,
@@ -375,7 +388,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         menu: menu,
         child: FTappable(
           focusedOutlineStyle: style.focusedOutlineStyle,
-          onPress: _popoverController.toggle,
+          onPress: _controller.toggle,
           child: Padding(
             padding: style.padding,
             child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
@@ -384,7 +397,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
       );
     } else {
       return FPopoverMenu.tiles(
-        popoverController: _popoverController,
+        control: .managed(controller: _controller),
         style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
         menuAnchor: widget.menuAnchor,
         childAnchor: widget.childAnchor,
@@ -405,7 +418,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         menu: widget.tileMenu!,
         child: FTappable(
           focusedOutlineStyle: style.focusedOutlineStyle,
-          onPress: _popoverController.toggle,
+          onPress: _controller.toggle,
           child: Padding(
             padding: style.padding,
             child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
@@ -413,14 +426,6 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         ),
       );
     }
-  }
-
-  @override
-  void dispose() {
-    if (widget.popoverController == null) {
-      _popoverController.dispose();
-    }
-    super.dispose();
   }
 }
 

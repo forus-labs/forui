@@ -318,7 +318,7 @@ void main() {
           child: FSelect<String>.rich(
             key: key,
             format: (string) => string,
-            controller: controller,
+            control: FSelectControl.managed(controller: controller),
             contentScrollController: scrollController,
             children: [
               FSelectSection.rich(

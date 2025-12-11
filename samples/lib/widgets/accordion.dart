@@ -6,23 +6,10 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class AccordionPage extends StatefulSample {
+class AccordionPage extends Sample {
   final int? max;
 
   AccordionPage({@queryParam this.max, @queryParam super.theme});
-
-  @override
-  State<AccordionPage> createState() => _AccordionPageState();
-}
-
-class _AccordionPageState extends StatefulSampleState<AccordionPage> {
-  late final _controller = FAccordionController(max: widget.max);
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget sample(BuildContext context) => Padding(
@@ -30,7 +17,7 @@ class _AccordionPageState extends StatefulSampleState<AccordionPage> {
     child: Column(
       children: [
         FAccordion(
-          controller: _controller,
+          control: .managed(max: max),
           children: const [
             FAccordionItem(
               title: Text('Production Information'),

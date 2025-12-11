@@ -13,10 +13,9 @@ class Field<T> extends FormField<T> {
     required super.onSaved,
     required super.onReset,
     required super.validator,
-    required T? initialValue,
     required super.builder,
     super.key,
-  }) : super(initialValue: initialValue ?? controller.value);
+  }) : super(initialValue: controller.value);
 
   @override
   FormFieldState<T> createState() => _State();

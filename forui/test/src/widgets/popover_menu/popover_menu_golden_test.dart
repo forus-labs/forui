@@ -91,7 +91,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopoverMenu(
-            popoverController: controller,
+            control: .managed(controller: controller),
             menu: [
               FItemGroup(
                 children: [
@@ -122,7 +122,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopoverMenu.tiles(
-            popoverController: controller,
+            control: .managed(controller: controller),
             menu: [
               FTileGroup(
                 children: [FTile(title: const Text('Group 1'), onPress: () {})],
@@ -147,7 +147,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FPopoverMenu.tiles(
-            popoverController: controller,
+            control: .managed(controller: controller),
             maxHeight: 200,
             menu: [
               FTileGroup(
