@@ -24,8 +24,10 @@ class PickerTimeFieldPage extends Sample {
   PickerTimeFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 30});
 
   @override
-  Widget sample(BuildContext _) =>
-      FTimeField.picker(label: Text('Appointment Time'), description: Text('Select a time for your appointment.'));
+  Widget sample(BuildContext _) => const FTimeField.picker(
+    label: Text('Appointment Time'),
+    description: Text('Select a time for your appointment.'),
+  );
 }
 
 @RoutePage()
