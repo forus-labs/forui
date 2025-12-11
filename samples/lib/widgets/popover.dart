@@ -16,7 +16,7 @@ class PopoverPage extends Sample {
   PopoverPage({
     @queryParam String alignment = 'center',
     @queryParam String axis = 'vertical',
-    @queryParam String hideRegion = 'anywhere',
+    @queryParam String hideRegion = 'excludeChild',
     @queryParam String overflow = 'flip',
     @queryParam super.theme,
     super.top = 30,
@@ -25,7 +25,6 @@ class PopoverPage extends Sample {
          _ => .vertical,
        },
        hideRegion = switch (hideRegion) {
-         'anywhere' => .anywhere,
          'excludeChild' => .excludeChild,
          _ => .none,
        },
