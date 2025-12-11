@@ -22,7 +22,7 @@ class FPopoverController extends FChangeNotifier {
   late final Animation<double> _fade;
 
   /// Creates a [FPopoverController] with the given [vsync] and [motion].
-  FPopoverController({required TickerProvider vsync, FPopoverMotion motion = const FPopoverMotion()}) {
+  FPopoverController({required TickerProvider vsync, FPopoverMotion motion = const .new()}) {
     _animation = AnimationController(
       vsync: vsync,
       duration: motion.entranceDuration,
@@ -167,7 +167,7 @@ sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
   /// The [onChange] callback is invoked when the user triggers a show/hide action.
   const factory FPopoverControl.lifted({
     required bool shown,
-    required void Function(bool shown) onChange,
+    required ValueChanged<bool> onChange,
     FPopoverMotion motion,
   }) = Lifted;
 
@@ -183,7 +183,7 @@ sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
   const factory FPopoverControl.managed({
     FPopoverController? controller,
     FPopoverMotion? motion,
-    void Function(bool shown)? onChange,
+    ValueChanged<bool>? onChange,
   }) = Managed;
 
   const FPopoverControl._();
@@ -201,11 +201,11 @@ class Lifted extends FPopoverControl with _$LiftedMixin {
   @override
   final bool shown;
   @override
-  final void Function(bool shown) onChange;
+  final ValueChanged<bool> onChange;
   @override
   final FPopoverMotion motion;
 
-  const Lifted({required this.shown, required this.onChange, this.motion = const FPopoverMotion()}) : super._();
+  const Lifted({required this.shown, required this.onChange, this.motion = const .new()}) : super._();
 
   @override
   FPopoverController _create(VoidCallback callback, TickerProvider vsync) =>
@@ -223,7 +223,7 @@ class Managed extends FPopoverControl with Diagnosticable, _$ManagedMixin {
   @override
   final FPopoverMotion? motion;
   @override
-  final void Function(bool shown)? onChange;
+  final ValueChanged<bool>? onChange;
 
   const Managed({this.controller, this.motion, this.onChange})
     : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),

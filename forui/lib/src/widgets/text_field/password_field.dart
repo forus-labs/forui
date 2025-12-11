@@ -77,6 +77,7 @@ class PasswordFieldProperties with Diagnosticable {
   final FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
   final FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
   final bool Function(TextEditingValue) clearable;
+  final FFieldClearIconBuilder clearIconBuilder;
   final FObscureTextControl obscureTextControl;
 
   PasswordFieldProperties({
@@ -138,6 +139,7 @@ class PasswordFieldProperties with Diagnosticable {
     required this.prefixBuilder,
     required this.suffixBuilder,
     required this.clearable,
+    required this.clearIconBuilder,
     required this.obscureTextControl,
   });
 
@@ -210,6 +212,7 @@ class PasswordFieldProperties with Diagnosticable {
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder))
       ..add(DiagnosticsProperty('obscureTextControl', obscureTextControl));
   }
 }
@@ -352,6 +355,7 @@ class _State extends State<PasswordField> {
           ? null
           : (context, style, states) => widget.properties.suffixBuilder!(context, style, _controller, states),
       clearable: widget.properties.clearable,
+      clearIconBuilder: widget.properties.clearIconBuilder,
     ),
   );
 }

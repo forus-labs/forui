@@ -9,7 +9,6 @@ import 'package:forui/src/widgets/text_field/field.dart';
 import 'package:forui/src/widgets/text_field/form_field.dart';
 import 'package:forui/src/widgets/text_field/password_field.dart';
 import 'package:forui/src/widgets/text_field/password_form_field.dart';
-import 'package:forui/src/widgets/text_field/text_field.dart';
 import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
 /// A text field that is wrapped is a [FormField] for convenience.
@@ -34,7 +33,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
     FTextFieldStyle Function(FTextFieldStyle style)? style,
-    FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
+    FFieldBuilder<FTextFieldStyle> builder = Field.defaultBuilder,
     Widget? label = const LocalizedText.password(),
     String? hint,
     Widget? description,
@@ -84,13 +83,14 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     bool stylusHandwritingEnabled = true,
     bool enableIMEPersonalizedLearning = true,
     ContentInsertionConfiguration? contentInsertionConfiguration,
-    EditableTextContextMenuBuilder contextMenuBuilder = Defaults.contextMenuBuilder,
+    EditableTextContextMenuBuilder contextMenuBuilder = Field.defaultContextMenuBuilder,
     bool canRequestFocus = true,
     UndoHistoryController? undoController,
     SpellCheckConfiguration? spellCheckConfiguration,
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
-    bool Function(TextEditingValue) clearable = Defaults.clearable,
+    bool Function(TextEditingValue) clearable = Field.defaultClearable,
+    FFieldClearIconBuilder clearIconBuilder = Field.defaultClearIconBuilder,
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
     FormFieldValidator<String>? validator,
@@ -159,6 +159,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       prefixBuilder: prefixBuilder,
       suffixBuilder: suffixBuilder,
       clearable: clearable,
+      clearIconBuilder: clearIconBuilder,
       obscureTextControl: obscureTextControl,
     ),
     onSaved: onSaved,
@@ -352,6 +353,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue) clearable;
 
+  /// {@macro forui.text_field.clearIconBuilder}
+  final FFieldClearIconBuilder clearIconBuilder;
+
   @override
   final FormFieldSetter<String>? onSaved;
 
@@ -374,7 +378,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   const FTextFormField({
     this.control = const .managed(),
     this.style,
-    this.builder = Defaults.builder,
+    this.builder = Field.defaultBuilder,
     this.label,
     this.hint,
     this.description,
@@ -424,13 +428,14 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
+    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Defaults.clearable,
+    this.clearable = Field.defaultClearable,
+    this.clearIconBuilder = Field.defaultClearIconBuilder,
     this.onSaved,
     this.onReset,
     this.validator,
@@ -444,7 +449,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   const FTextFormField.email({
     this.control = const .managed(),
     this.style,
-    this.builder = Defaults.builder,
+    this.builder = Field.defaultBuilder,
     this.label = const LocalizedText.email(),
     this.hint,
     this.description,
@@ -494,13 +499,14 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
+    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Defaults.clearable,
+    this.clearable = Field.defaultClearable,
+    this.clearIconBuilder = Field.defaultClearIconBuilder,
     this.onSaved,
     this.onReset,
     this.validator,
@@ -518,7 +524,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   const FTextFormField.multiline({
     this.control = const .managed(),
     this.style,
-    this.builder = Defaults.builder,
+    this.builder = Field.defaultBuilder,
     this.label,
     this.hint,
     this.description,
@@ -568,13 +574,14 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
+    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Defaults.clearable,
+    this.clearable = Field.defaultClearable,
+    this.clearIconBuilder = Field.defaultClearIconBuilder,
     this.onSaved,
     this.onReset,
     this.validator,
@@ -660,6 +667,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
         prefixBuilder: prefixBuilder,
         suffixBuilder: suffixBuilder,
         clearable: clearable,
+        clearIconBuilder: clearIconBuilder,
         key: key,
       ),
     ),
@@ -736,6 +744,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))

@@ -38,15 +38,11 @@ typedef FFieldBuilder<T> = Widget Function(BuildContext context, T style, Set<Wi
 /// See [FTextField.prefixBuilder] and [FTextField.suffixBuilder].
 typedef FFieldIconBuilder<T> = Widget Function(BuildContext context, T style, Set<WidgetState> states);
 
-@internal
-extension Defaults on Never {
-  static bool clearable(TextEditingValue _) => false;
-
-  static Widget contextMenuBuilder(BuildContext _, EditableTextState state) =>
-      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
-
-  static Widget builder(BuildContext _, FTextFieldStyle _, Set<WidgetState> _, Widget child) => child;
-}
+/// A callback for building a clear icon.
+///
+/// [style] is the text field's style.
+/// [clear] is the callback to clear the text field's content.
+typedef FFieldClearIconBuilder = Widget Function(BuildContext, FTextFieldStyle style, VoidCallback clear);
 
 /// A text field.
 ///
@@ -70,7 +66,7 @@ class FTextField extends StatelessWidget {
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
     FTextFieldStyle Function(FTextFieldStyle style)? style,
-    FFieldBuilder<FTextFieldStyle> builder = Defaults.builder,
+    FFieldBuilder<FTextFieldStyle> builder = Field.defaultBuilder,
     Widget? label = const LocalizedText.password(),
     String? hint,
     Widget? description,
@@ -120,13 +116,14 @@ class FTextField extends StatelessWidget {
     bool stylusHandwritingEnabled = true,
     bool enableIMEPersonalizedLearning = true,
     ContentInsertionConfiguration? contentInsertionConfiguration,
-    EditableTextContextMenuBuilder contextMenuBuilder = Defaults.contextMenuBuilder,
+    EditableTextContextMenuBuilder contextMenuBuilder = Field.defaultContextMenuBuilder,
     bool canRequestFocus = true,
     UndoHistoryController? undoController,
     SpellCheckConfiguration? spellCheckConfiguration,
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
-    bool Function(TextEditingValue) clearable = Defaults.clearable,
+    bool Function(TextEditingValue) clearable = Field.defaultClearable,
+    FFieldClearIconBuilder clearIconBuilder = Field.defaultClearIconBuilder,
     Key? key,
   }) => TextFieldControl(
     key: key,
@@ -192,6 +189,7 @@ class FTextField extends StatelessWidget {
         prefixBuilder: prefixBuilder,
         suffixBuilder: suffixBuilder,
         clearable: clearable,
+        clearIconBuilder: clearIconBuilder,
         obscureTextControl: obscureTextControl,
       ),
     ),
@@ -806,11 +804,16 @@ class FTextField extends StatelessWidget {
   /// {@endtemplate}
   final bool Function(TextEditingValue) clearable;
 
+  /// {@template forui.text_field.clearIconBuilder}
+  /// The builder used to build the clear icon when [clearable] returns true.
+  /// {@endtemplate
+  final FFieldClearIconBuilder clearIconBuilder;
+
   /// Creates a [FTextField].
   const FTextField({
     this.control = const .managed(),
     this.style,
-    this.builder = Defaults.builder,
+    this.builder = Field.defaultBuilder,
     this.label,
     this.hint,
     this.description,
@@ -861,13 +864,14 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
+    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Defaults.clearable,
+    this.clearable = Field.defaultClearable,
+    this.clearIconBuilder = Field.defaultClearIconBuilder,
     super.key,
   });
 
@@ -875,7 +879,7 @@ class FTextField extends StatelessWidget {
   const FTextField.email({
     this.control = const .managed(),
     this.style,
-    this.builder = Defaults.builder,
+    this.builder = Field.defaultBuilder,
     this.label = const LocalizedText.email(),
     this.hint,
     this.description,
@@ -926,13 +930,14 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
+    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Defaults.clearable,
+    this.clearable = Field.defaultClearable,
+    this.clearIconBuilder = Field.defaultClearIconBuilder,
     super.key,
   });
 
@@ -944,7 +949,7 @@ class FTextField extends StatelessWidget {
   const FTextField.multiline({
     this.control = const .managed(),
     this.style,
-    this.builder = Defaults.builder,
+    this.builder = Field.defaultBuilder,
     this.label,
     this.hint,
     this.description,
@@ -995,13 +1000,14 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Defaults.contextMenuBuilder,
+    this.contextMenuBuilder = Field.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Defaults.clearable,
+    this.clearable = Field.defaultClearable,
+    this.clearIconBuilder = Field.defaultClearIconBuilder,
     super.key,
   });
 
@@ -1069,6 +1075,7 @@ class FTextField extends StatelessWidget {
       prefixBuilder: prefixBuilder,
       suffixBuilder: suffixBuilder,
       clearable: clearable,
+      clearIconBuilder: clearIconBuilder,
     ),
   );
 
@@ -1142,6 +1149,7 @@ class FTextField extends StatelessWidget {
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
-      ..add(ObjectFlagProperty.has('clearable', clearable));
+      ..add(ObjectFlagProperty.has('clearable', clearable))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder));
   }
 }

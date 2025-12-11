@@ -218,9 +218,12 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### `FTextField`
+* Add `FFieldClearIconBuilder`.
 * Add `FObscureTextControl`.
 * Add `FTextFieldControl`.
 * Add `FTextField.control`.
+* Add `FTextField.clearIconBuilder`.
+* Add `FTextField.password.clearIconBuilder`.
 * Add `FTextFormField.control`.
 
 * **Breaking** Remove `FTextField.controller`. Use `FTextField(control: .managed(...))` instead.
