@@ -10,7 +10,7 @@ If you're new to Flutter, you may follow the official [installation guide](https
 From your Flutter project directory, run the following command to install Forui.
 
 <Callout type="warning">
-  Forui 0.15.0+ requires Flutter **3.35.0+**. Run `flutter --version` to check your Flutter version.
+  Forui 0.17.0+ requires Flutter **3.38.0+**. Run `flutter --version` to check your Flutter version.
 </Callout>
 
 ```bash filename="bash" copy
@@ -21,11 +21,11 @@ flutter pub add forui
 
 Flutter does not automatically upgrade minor versions of packages prior to `1.0.0`.
 
-This means that that following entry in your `pubspec.yaml` file will **not** automatically upgrade to `0.15.0`:
+This means that that following entry in your `pubspec.yaml` file will **not** automatically upgrade to `0.17.0`:
 
 ```yaml filename="pubspec.yaml"
 dependencies:
-  forui: ^0.15.0 // ❌ will not upgrade to 0.16.0
+  forui: ^0.16.0 // ❌ will not upgrade to 0.17.0
 ```
 
 To upgrade to the latest version of Forui, run the following command:
@@ -33,6 +33,9 @@ To upgrade to the latest version of Forui, run the following command:
 ```bash filename="bash" copy
 flutter pub upgrade forui --major-versions
 ```
+
+From `0.17.0` onwards, Forui provides [data driven fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
+This means that you can automate some of the migration by running `dart fix --apply`.
 
 ### Forui Icons
 
@@ -92,7 +95,7 @@ class Application extends StatelessWidget {
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
       // See https://github.com/forus-labs/forui/issues/670.
       theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FAnimatedTheme(data: theme, child: child!),
+      builder: (_, child) => FAnimatedTheme(data: theme, child: FToaster(child: child!)),
       // You can also replace FScaffold with Material Scaffold.
       home: const FScaffold(
         // TODO: replace with your widget.

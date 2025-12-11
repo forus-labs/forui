@@ -119,21 +119,23 @@ class BehaviorToastPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTheme(
     data: theme,
-    child: FScaffold(
-      toasterStyle: context.theme.toasterStyle.copyWith(expandBehavior: behavior),
-      child: Align(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: Builder(
-            builder: (context) => Center(
-              child: FButton(
-                mainAxisSize: .min,
-                onPress: () => showFToast(
-                  context: context,
-                  icon: const Icon(FIcons.info),
-                  title: const Text('Event has been created'),
+    child: FToaster(
+      style: context.theme.toasterStyle.copyWith(expandBehavior: behavior),
+      child: FScaffold(
+        child: Align(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Builder(
+              builder: (context) => Center(
+                child: FButton(
+                  mainAxisSize: .min,
+                  onPress: () => showFToast(
+                    context: context,
+                    icon: const Icon(FIcons.info),
+                    title: const Text('Event has been created'),
+                  ),
+                  child: const Text('Show Toast'),
                 ),
-                child: const Text('Show Toast'),
               ),
             ),
           ),
@@ -159,21 +161,23 @@ class SwipeToastPage extends StatelessWidget {
   @override
   Widget build(BuildContext _) => FTheme(
     data: theme,
-    child: FScaffold(
-      child: Align(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 400),
-          child: Builder(
-            builder: (context) => Center(
-              child: FButton(
-                mainAxisSize: .min,
-                onPress: () => showFToast(
-                  context: context,
-                  swipeToDismiss: directions,
-                  icon: const Icon(FIcons.info),
-                  title: const Text('Event has been created'),
+    child: FToaster(
+      child: FScaffold(
+        child: Align(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Builder(
+              builder: (context) => Center(
+                child: FButton(
+                  mainAxisSize: .min,
+                  onPress: () => showFToast(
+                    context: context,
+                    swipeToDismiss: directions,
+                    icon: const Icon(FIcons.info),
+                    title: const Text('Event has been created'),
+                  ),
+                  child: const Text('Show Toast'),
                 ),
-                child: const Text('Show Toast'),
               ),
             ),
           ),

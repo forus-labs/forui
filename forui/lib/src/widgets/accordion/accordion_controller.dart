@@ -94,7 +94,7 @@ class FAccordionController extends FChangeNotifier {
 }
 
 @internal
-extension InternalAccordionController on FAccordionController {
+extension InternalFAccordionController on FAccordionController {
   /// Adds an item at the given [index], returning true if added.
   bool add(int index, AnimationController controller) {
     if (controller.value == 1 && _max != null && _max <= _expanded.length) {

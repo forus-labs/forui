@@ -11,6 +11,25 @@ import 'package:forui/forui.dart';
 
 @internal
 class Field extends StatefulWidget {
+  static bool defaultClearable(TextEditingValue _) => false;
+
+  static Widget defaultContextMenuBuilder(BuildContext _, EditableTextState state) =>
+      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+
+  static Widget defaultBuilder(BuildContext _, FTextFieldStyle _, Set<WidgetState> _, Widget child) => child;
+
+  static Widget defaultClearIconBuilder(BuildContext context, FTextFieldStyle style, VoidCallback clear) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return Padding(
+      padding: style.clearButtonPadding,
+      child: FButton.icon(
+        style: style.clearButtonStyle,
+        onPress: clear,
+        child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
+      ),
+    );
+  }
+
   final TextEditingController controller;
   final FTextFieldStyle Function(FTextFieldStyle)? style;
   final FFieldBuilder<FTextFieldStyle> builder;
@@ -71,6 +90,7 @@ class Field extends StatefulWidget {
   final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
   final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
   final bool Function(TextEditingValue) clearable;
+  final FFieldClearIconBuilder clearIconBuilder;
 
   const Field({
     required this.controller,
@@ -93,6 +113,7 @@ class Field extends StatefulWidget {
     required this.enableIMEPersonalizedLearning,
     required this.canRequestFocus,
     required this.clearable,
+    required this.clearIconBuilder,
     this.style,
     this.label,
     this.hint,
@@ -213,7 +234,8 @@ class Field extends StatefulWidget {
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
-      ..add(ObjectFlagProperty.has('clearable', clearable));
+      ..add(ObjectFlagProperty.has('clearable', clearable))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder));
   }
 }
 
@@ -370,21 +392,13 @@ class _FieldState extends State<Field> {
   }
 
   InputDecoration _decoration(FTextFieldStyle style) {
-    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    final textDirection = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final textDirection = Directionality.maybeOf(context) ?? .ltr;
     final padding = style.contentPadding.resolve(textDirection);
     final states = _statesController.value;
 
     final suffix = widget.suffixBuilder?.call(context, style, states);
     final clear = widget.clearable(widget.controller.value)
-        ? Padding(
-            padding: style.clearButtonPadding,
-            child: FButton.icon(
-              style: style.clearButtonStyle,
-              onPress: () => widget.controller.text = '',
-              child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
-            ),
-          )
+        ? widget.clearIconBuilder(context, style, () => widget.controller.text = '')
         : null;
 
     return InputDecoration(

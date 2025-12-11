@@ -250,6 +250,29 @@ void main() {
           matchesGoldenFile('text-form-field/${theme.name}/clear-suffix-icon.png'),
         );
       });
+
+      testWidgets('custom clear icon', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FTextFormField(
+              clearable: (_) => true,
+              clearIconBuilder: (_, _, clear) => FButton.icon(onPress: clear, child: const Icon(FIcons.trash)),
+            ),
+          ),
+        );
+
+        final gesture = await tester.createPointerGesture();
+
+        await tester.pump();
+        await gesture.moveTo(tester.getCenter(find.byType(FButton)));
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('text-form-field/${theme.name}/custom-clear-icon.png'),
+        );
+      });
     });
   }
 }
