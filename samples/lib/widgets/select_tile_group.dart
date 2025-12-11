@@ -47,9 +47,9 @@ class ScrollableSelectTileGroupPage extends Sample {
     description: const Text('These will be shown in the sidebar.'),
     maxHeight: 100,
     children: const [
-          .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
-          .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
-          .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
+      .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
+      .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
+      .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
     ],
   );
 }
@@ -113,7 +113,6 @@ class _SelectTileGroupMultiValuePageState extends StatefulSampleState<SelectTile
     ),
   );
 }
-
 
 // TODO: Replace with FSelectControl.managedRadio(...).
 @RoutePage()

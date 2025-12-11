@@ -29,8 +29,7 @@ class ButtonTextPage extends Sample {
 class ButtonIconPage extends Sample {
   final FBaseButtonStyle Function(FButtonStyle) style;
 
-  ButtonIconPage({@queryParam super.theme, @queryParam String style = 'primary'})
-    : style = _styles[style]!;
+  ButtonIconPage({@queryParam super.theme, @queryParam String style = 'primary'}) : style = _styles[style]!;
 
   @override
   Widget sample(BuildContext _) => FButton(

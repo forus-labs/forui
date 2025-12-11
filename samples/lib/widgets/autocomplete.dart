@@ -60,8 +60,7 @@ class DetailedAutocompletePage extends Sample {
   @override
   Widget sample(BuildContext _) => FAutocomplete.builder(
     hint: 'Type to search',
-    filter: (query) =>
-        const ['Bug', 'Feature', 'Question'].where((i) => i.toLowerCase().contains(query.toLowerCase())),
+    filter: (query) => const ['Bug', 'Feature', 'Question'].where((i) => i.toLowerCase().contains(query.toLowerCase())),
     contentBuilder: (context, query, suggestions) => [
       for (final suggestion in suggestions)
         switch (suggestion) {
@@ -190,7 +189,8 @@ class ClearableAutocompletePage extends Sample {
   ClearableAutocompletePage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 20});
 
   @override
-  Widget sample(BuildContext _) => FAutocomplete(hint: 'Type to search fruits', clearable: (value) => value.text.isNotEmpty, items: fruits);
+  Widget sample(BuildContext _) =>
+      FAutocomplete(hint: 'Type to search fruits', clearable: (value) => value.text.isNotEmpty, items: fruits);
 }
 
 @RoutePage()
