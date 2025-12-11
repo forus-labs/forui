@@ -107,9 +107,12 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FPopover`
 * Add `FPopoverControl`.
+* Add `FPopoverController.initial`.
 
 * **Breaking** Change `FPopover.shift` to `FPopover.overflow`.
 * **Breaking** Remove `FPopover.controller`. Use `FPopover(control: .managed(...))` instead.
+
+* Fix `FPopover` not interrupting ongoing animations when toggled again.
 
 
 ### `FPopoverMenu`
@@ -283,11 +286,14 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 ### `FTooltip`
 * Add `FTooltipControl`.
+* Add `FTooltipController.initial`.
 
 * Change `FTooltip` to not be focusable.
 * Change `FTooltip`'s focus-triggered behavior to only show if its immediate focusable descendant has primary focus.
 * **Breaking** Rename `FTooltip.shift` to `FTooltip.overflow`.
 * **Breaking** Remove `FTooltip.controller`. Use `FTooltip(control: .managed(...))` instead.
+
+* Fix `FTooltip` not interrupting ongoing animations when toggled again.
 
 
 ### `FToast`
@@ -514,7 +520,7 @@ We've added support for animated theme transitions. This should make transitions
 * Make `FToasterState.show(context: ...)` optional.
 
 
-## Others
+### Others
 * Add `FImmutableTween`.
 * Add `FLabel.expands`.
 

@@ -21,13 +21,13 @@ class FPopoverController extends FChangeNotifier {
   late final Animation<double> _scale;
   late final Animation<double> _fade;
 
-  /// Creates a [FPopoverController] with the given [vsync] and [motion].
-  FPopoverController({required TickerProvider vsync, FPopoverMotion motion = const .new()}) {
+  /// Creates a [FPopoverController] with the given [vsync], [initial] and [motion].
+  FPopoverController({required TickerProvider vsync, double initial = 0.0, FPopoverMotion motion = const .new()}) {
     _animation = AnimationController(
       vsync: vsync,
       duration: motion.entranceDuration,
       reverseDuration: motion.exitDuration,
-    );
+    )..value = initial;
     _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
     _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
     _scale = motion.scaleTween.animate(_curveScale);
@@ -37,8 +37,7 @@ class FPopoverController extends FChangeNotifier {
   /// Convenience method for showing/hiding the popover.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async =>
-      const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_animation.status) ? hide() : show();
+  Future<void> toggle() => _animation.status.isForwardOrCompleted ? hide() : show();
 
   /// Shows the popover.
   ///
@@ -136,17 +135,15 @@ class LiftedPopoverController extends FPopoverController {
     _onChange = onChange;
     final current = ++_monotonic;
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (current != _monotonic) {
-        return;
-      }
-
-      if (shown && status.isDismissed) {
-        _overlay.show();
-        await _animation.forward();
-      } else if (!shown && status.isForwardOrCompleted) {
-        await _animation.reverse();
-        if (current == _monotonic) {
-          _overlay.hide();
+      if (current == _monotonic) {
+        if (!shown && status.isForwardOrCompleted) {
+          await _animation.reverse();
+          if (current == _monotonic) {
+            _overlay.hide();
+          }
+        } else if (shown && !status.isForwardOrCompleted) {
+          _overlay.show();
+          await _animation.forward();
         }
       }
     });

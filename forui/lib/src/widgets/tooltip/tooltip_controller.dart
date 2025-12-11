@@ -20,12 +20,16 @@ class FTooltipController extends FChangeNotifier {
   late final Animation<double> _scale;
 
   /// Creates a [FTooltipController] with the given [vsync] and [motion].
-  FTooltipController({required TickerProvider vsync, FTooltipMotion motion = const FTooltipMotion()}) {
+  FTooltipController({
+    required TickerProvider vsync,
+    double initial = 0.0,
+    FTooltipMotion motion = const .new(),
+  }) {
     _animation = AnimationController(
       vsync: vsync,
       duration: motion.entranceDuration,
       reverseDuration: motion.exitDuration,
-    );
+    )..value = initial;
     _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
     _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
     _fade = motion.fadeTween.animate(_curveFade);
@@ -35,8 +39,7 @@ class FTooltipController extends FChangeNotifier {
   /// Convenience method for showing/hiding the tooltip.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
-  Future<void> toggle() async =>
-      const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_animation.status) ? hide() : show();
+  Future<void> toggle() => _animation.status.isForwardOrCompleted ? hide() : show();
 
   /// Shows the tooltip.
   ///
@@ -102,17 +105,15 @@ class _Controller extends FTooltipController {
     _onChange = onChange;
     final current = ++_monotonic;
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (current != _monotonic) {
-        return;
-      }
-
-      if (shown && status.isDismissed) {
-        _overlay.show();
-        await _animation.forward();
-      } else if (!shown && status.isForwardOrCompleted) {
-        await _animation.reverse();
-        if (current == _monotonic) {
-          _overlay.hide();
+      if (current == _monotonic) {
+        if (!shown && status.isForwardOrCompleted) {
+          await _animation.reverse();
+          if (current == _monotonic) {
+            _overlay.hide();
+          }
+        } else if (shown && !status.isForwardOrCompleted) {
+          _overlay.show();
+          await _animation.forward();
         }
       }
     });
