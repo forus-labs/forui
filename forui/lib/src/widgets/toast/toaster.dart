@@ -40,15 +40,15 @@ FToasterEntry showFToast({
   final state = context.findAncestorStateOfType<FToasterState>();
   if (state == null) {
     throw FlutterError.fromParts([
-      ErrorSummary('showFToast(...) called with a context that does not contain a FToaster/FScaffold.'),
+      ErrorSummary('showFToast(...) called with a context that does not contain a FToaster.'),
       ErrorDescription(
-        'No FToaster/FScaffold ancestor could be found starting from the context that was passed to FToaster/FScaffold.of(). '
+        'No FToaster ancestor could be found starting from the context that was passed to showFToast(...). '
         'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
-        'actually creates the FToaster/FScaffold widget being sought.',
+        'actually creates the FToaster widget being sought.',
       ),
       ErrorHint(
         'There are several ways to avoid this problem. The simplest is to use a Builder to get a '
-        'context that is "under" the FToaster/FScaffold.',
+        'context that is "under" the FToaster.',
       ),
       context.describeElement('The context used was'),
     ]);
@@ -104,15 +104,15 @@ FToasterEntry showRawFToast({
   final state = context.findAncestorStateOfType<FToasterState>();
   if (state == null) {
     throw FlutterError.fromParts([
-      ErrorSummary('showRawFToast(...) called with a context that does not contain a FToaster/FScaffold.'),
+      ErrorSummary('showRawFToast(...) called with a context that does not contain a FToaster.'),
       ErrorDescription(
-        'No FToaster/FScaffold ancestor could be found starting from the context that was passed to FToaster/FScaffold.of(). '
+        'No FToaster ancestor could be found starting from the context that was passed to showFToast(...). '
         'This usually happens when the context provided is from the same StatefulWidget as that whose build function '
-        'actually creates the FToaster/FScaffold widget being sought.',
+        'actually creates the FToaster widget being sought.',
       ),
       ErrorHint(
         'There are several ways to avoid this problem. The simplest is to use a Builder to get a '
-        'context that is "under" the FToaster/FScaffold.',
+        'context that is "under" the FToaster.',
       ),
       context.describeElement('The context used was'),
     ]);
@@ -178,7 +178,16 @@ enum FToastAlignment {
 /// An opinionated toast widget.
 ///
 /// This widget manages a stack of toasts that can be added to using [showRawFToast]. It should be placed near the root
-/// of the widget tree. It is included in [FScaffold] by default.
+/// of the widget tree, such as `WidgetsApp.builder(...)/MaterialApp.builder(...)/CupertinoApp.builder(...)`:
+/// ```dart
+/// MaterialApp(
+///   builder: (context, child) => FAnimatedTheme(
+///     data: FThemes.zinc.light,
+///     child: FToaster(child: child!),
+///   ),
+///   home: HomePage(),
+/// );
+/// ```
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/toaster for working examples.

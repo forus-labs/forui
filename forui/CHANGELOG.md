@@ -202,6 +202,11 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 * **Breaking** Remove `FTileGroupMixin.selectGroupBuilder(onSelect: ...)`.
 
 
+### `FScaffold`
+* **Breaking** Remove `FToaster` from `FScaffold`. This was causing toasts to be cleared when switching between pages. 
+  Use `FToaster` directly instead.
+
+
 ### `FSlider`
 * Add `FSliderMark.mark(...)`.
 

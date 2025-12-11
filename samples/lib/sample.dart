@@ -31,14 +31,16 @@ abstract class Sample extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTheme(
     data: theme,
-    child: FScaffold(
-      child: Align(
-        alignment: alignment,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-          child: Padding(
-            padding: .only(top: top),
-            child: Builder(builder: sample),
+    child: FToaster(
+      child: FScaffold(
+        child: Align(
+          alignment: alignment,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+            child: Padding(
+              padding: .only(top: top),
+              child: Builder(builder: sample),
+            ),
           ),
         ),
       ),

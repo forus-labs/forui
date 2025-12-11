@@ -9,7 +9,18 @@ An opinionated toast that temporarily displays a succinct message.
 
 <Callout type="info">
     To show a toast, use the `showFToast(...)` or `showRawFToast(...)` functions. The function must be called from a
-    widget that is a descendant of a `FToaster` or `FScaffold` widget.
+    descendant of a `FToaster`.
+
+    We recommend placing `FToaster` in the `builder` method of `MaterialApp`/`WidgetsApp`/`CupertinoApp`:
+    ```dart
+    MaterialApp(
+      builder: (context, child) => FAnimatedTheme(
+        data: FThemes.zinc.light,
+        child: FToaster(child: child!),
+      ),
+      home: HomePage(),
+    );
+    ```
 </Callout>
 
 <LinkBadgeGroup>
@@ -223,7 +234,7 @@ showRawFToast(
     ```dart {4} copy
     class ToastPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FScaffold(
+      Widget build(BuildContext context) => FToaster(
         toasterStyle: context.theme.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.always),
         child: Builder(
           builder: (context) => Center(
@@ -250,7 +261,7 @@ showRawFToast(
     ```dart {4} copy
     class ToastPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FScaffold(
+      Widget build(BuildContext context) => FToaster(
         toasterStyle: context.theme.toasterStyle.copyWith(expandBehavior: FToasterExpandBehavior.disabled),
         child: Builder(
           builder: (context) => Center(
@@ -281,7 +292,7 @@ By default, toasts are dismissible by horizontally swiping towards the closest e
     ```dart {10} copy
     class ToastPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FScaffold(
+      Widget build(BuildContext context) => FToaster(
         child: Builder(
           builder: (context) => Center(
             child: FButton(
@@ -310,7 +321,7 @@ By default, toasts are dismissible by horizontally swiping towards the closest e
     ```dart {10} copy
     class ToastPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FScaffold(
+      Widget build(BuildContext context) => FToaster(
         child: Builder(
           builder: (context) => Center(
             child: FButton(
@@ -340,7 +351,7 @@ By default, toasts are dismissible by horizontally swiping towards the closest e
     ```dart {11} copy
     class ToastPage extends StatelessWidget {
       @override
-      Widget build(BuildContext context) => FScaffold(
+      Widget build(BuildContext context) => FToaster(
         child: Builder(
           builder: (context) => Center(
             child: FButton(

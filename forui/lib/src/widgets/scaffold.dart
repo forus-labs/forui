@@ -47,16 +47,6 @@ class FScaffold extends StatelessWidget {
   /// ```
   final FScaffoldStyle Function(FScaffoldStyle style)? scaffoldStyle;
 
-  /// The toaster style.
-  ///
-  /// ## CLI
-  /// To generate and customize this style:
-  ///
-  /// ```shell
-  /// dart run forui style create toast
-  /// ```
-  final FToasterStyle Function(FToasterStyle style)? toasterStyle;
-
   /// The main content area of the scaffold.
   final Widget child;
 
@@ -85,7 +75,6 @@ class FScaffold extends StatelessWidget {
   const FScaffold({
     required this.child,
     this.scaffoldStyle,
-    this.toasterStyle,
     this.header,
     this.sidebar,
     this.footer,
@@ -113,30 +102,27 @@ class FScaffold extends StatelessWidget {
         // TODO: Move to ForuiApp.
         data: context.theme.style.iconStyle,
         child: FSheets(
-          child: FToaster(
-            style: toasterStyle?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle,
-            child: Row(
-              children: [
-                if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
-                Expanded(
-                  child: ColoredBox(
-                    color: style.backgroundColor,
-                    child: _RenderScaffoldWidget(
-                      resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-                      children: [
-                        Column(
-                          children: [
-                            if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
-                            Expanded(child: child),
-                          ],
-                        ),
-                        footer,
-                      ],
-                    ),
+          child: Row(
+            children: [
+              if (sidebar != null) ColoredBox(color: style.sidebarBackgroundColor, child: sidebar),
+              Expanded(
+                child: ColoredBox(
+                  color: style.backgroundColor,
+                  child: _RenderScaffoldWidget(
+                    resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+                    children: [
+                      Column(
+                        children: [
+                          if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                          Expanded(child: child),
+                        ],
+                      ),
+                      footer,
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -148,7 +134,6 @@ class FScaffold extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', scaffoldStyle))
-      ..add(DiagnosticsProperty('toasterStyle', toasterStyle))
       ..add(FlagProperty('childPad', value: childPad, ifTrue: 'contentPad', defaultValue: true))
       ..add(
         FlagProperty(
