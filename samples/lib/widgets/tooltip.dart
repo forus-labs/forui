@@ -21,8 +21,8 @@ class TooltipPage extends StatelessWidget {
        hover = bool.tryParse(hover) ?? true,
        longPress = bool.tryParse(longPress) ?? true,
        axis = switch (axis) {
-         'horizontal' => Axis.horizontal,
-         _ => Axis.vertical,
+         'horizontal' => .horizontal,
+         _ => .vertical,
        };
 
   @override
@@ -45,7 +45,7 @@ class TooltipPage extends StatelessWidget {
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
                     style: FButtonStyle.outline(),
-                    mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: .min,
                     onPress: () {},
                     child: Text([if (longPress) 'Long press', if (hover) 'Hover'].join('/')),
                   ),

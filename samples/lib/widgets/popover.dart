@@ -19,6 +19,7 @@ class PopoverPage extends Sample {
     @queryParam String hideRegion = 'anywhere',
     @queryParam String overflow = 'flip',
     @queryParam super.theme,
+    super.top = 30,
   }) : axis = switch (axis) {
          'horizontal' => .horizontal,
          _ => .vertical,
@@ -43,65 +44,59 @@ class PopoverPage extends Sample {
        );
 
   @override
-  Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: .center,
-    children: [
-      const SizedBox(height: 30),
-      FPopover(
-        popoverAnchor: axis == .horizontal ? .bottomLeft : .topCenter,
-        childAnchor: axis == .horizontal ? .bottomRight : .bottomCenter,
-        hideRegion: hideRegion,
-        overflow: overflow,
-        popoverBuilder: (context, _) => Padding(
-          padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
-          child: SizedBox(
-            width: 288,
-            child: Column(
-              mainAxisSize: .min,
-              crossAxisAlignment: .start,
-              children: [
-                Text('Dimensions', style: context.theme.typography.base),
-                const SizedBox(height: 7),
-                Text(
-                  'Set the dimensions for the layer.',
-                  style: context.theme.typography.sm.copyWith(
-                    color: context.theme.colors.mutedForeground,
-                    fontWeight: .w300,
-                  ),
-                ),
-                const SizedBox(height: 15),
-                for (final (index, (label, value)) in [
-                  ('Width', '100%'),
-                  ('Max. Width', '300px'),
-                  ('Height', '25px'),
-                  ('Max. Height', 'none'),
-                ].indexed) ...[
-                  Row(
-                    children: [
-                      Expanded(child: Text(label, style: context.theme.typography.sm)),
-                      Expanded(
-                        flex: 2,
-                        child: FTextField(
-                          control: .managed(initial: TextEditingValue(text: value)),
-                          autofocus: index == 0,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 7),
-                ],
-              ],
-            ),
-          ),
-        ),
-        builder: (_, controller, _) => FButton(
-          style: FButtonStyle.outline(),
+  Widget sample(BuildContext _) => FPopover(
+    popoverAnchor: axis == .horizontal ? .bottomLeft : .topCenter,
+    childAnchor: axis == .horizontal ? .bottomRight : .bottomCenter,
+    hideRegion: hideRegion,
+    overflow: overflow,
+    popoverBuilder: (context, _) => Padding(
+      padding: const .only(left: 20, top: 14, right: 20, bottom: 10),
+      child: SizedBox(
+        width: 288,
+        child: Column(
           mainAxisSize: .min,
-          onPress: controller.toggle,
-          child: const Text('Open popover'),
+          crossAxisAlignment: .start,
+          children: [
+            Text('Dimensions', style: context.theme.typography.base),
+            const SizedBox(height: 7),
+            Text(
+              'Set the dimensions for the layer.',
+              style: context.theme.typography.sm.copyWith(
+                color: context.theme.colors.mutedForeground,
+                fontWeight: .w300,
+              ),
+            ),
+            const SizedBox(height: 15),
+            for (final (index, (label, value)) in [
+              ('Width', '100%'),
+              ('Max. Width', '300px'),
+              ('Height', '25px'),
+              ('Max. Height', 'none'),
+            ].indexed) ...[
+              Row(
+                children: [
+                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(
+                    flex: 2,
+                    child: FTextField(
+                      control: .managed(initial: TextEditingValue(text: value)),
+                      autofocus: index == 0,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 7),
+            ],
+          ],
         ),
       ),
-    ],
+    ),
+    builder: (_, controller, _) => FButton(
+      style: FButtonStyle.outline(),
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }
 

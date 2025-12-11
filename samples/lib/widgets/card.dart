@@ -13,21 +13,14 @@ class CardPage extends Sample {
   CardPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: .center,
-    children: [
-      FCard(
-        image: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
-          ),
-          height: 200,
-        ),
-        title: const Text('Gratitude'),
-        subtitle: const Text(
-          'The quality of being thankful; readiness to show appreciation for and to return kindness.',
-        ),
+  Widget sample(BuildContext _) => FCard(
+    image: Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
       ),
-    ],
+      height: 200,
+    ),
+    title: const Text('Gratitude'),
+    subtitle: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
   );
 }

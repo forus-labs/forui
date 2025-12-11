@@ -10,44 +10,43 @@ class ToastPage extends Sample {
   ToastPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: .min,
-      spacing: 5,
-      children: [
-        for (final (FToastAlignment alignment, description) in [
-          (.topLeft, 'Top Left'),
-          (.topCenter, 'Top Center'),
-          (.topRight, 'Top Right'),
-          (.bottomLeft, 'Bottom Left'),
-          (.bottomCenter, 'Bottom Center'),
-          (.bottomRight, 'Bottom Right'),
-        ])
-          FButton(
-            onPress: () => showFToast(
-              context: context,
-              alignment: alignment,
-              title: const Text('Event has been created'),
-              description: const Text('Friday, May 23, 2025 at 9:00 AM'),
-              suffixBuilder: (context, entry) => IntrinsicHeight(
-                child: FButton(
-                  style: context.theme.buttonStyles.primary.copyWith(
-                    contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7.5),
-                      textStyle: .all(
-                        context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
-                      ),
+  Widget sample(BuildContext context) => Column(
+    mainAxisSize: .min,
+    mainAxisAlignment: .center,
+    spacing: 5,
+    children: [
+      for (final (FToastAlignment alignment, description) in [
+        (.topLeft, 'Top Left'),
+        (.topCenter, 'Top Center'),
+        (.topRight, 'Top Right'),
+        (.bottomLeft, 'Bottom Left'),
+        (.bottomCenter, 'Bottom Center'),
+        (.bottomRight, 'Bottom Right'),
+      ])
+        FButton(
+          onPress: () => showFToast(
+            context: context,
+            alignment: alignment,
+            title: const Text('Event has been created'),
+            description: const Text('Friday, May 23, 2025 at 9:00 AM'),
+            suffixBuilder: (context, entry) => IntrinsicHeight(
+              child: FButton(
+                style: context.theme.buttonStyles.primary.copyWith(
+                  contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
+                    padding: const .symmetric(horizontal: 12, vertical: 7.5),
+                    textStyle: .all(
+                      context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
                     ),
                   ),
-                  onPress: entry.dismiss,
-                  child: const Text('Undo'),
                 ),
+                onPress: entry.dismiss,
+                child: const Text('Undo'),
               ),
             ),
-            child: Text('Show $description Toast'),
           ),
-      ],
-    ),
+          child: Text('Show $description Toast'),
+        ),
+    ],
   );
 }
 
@@ -56,17 +55,15 @@ class NoAutoDismissToastPage extends Sample {
   NoAutoDismissToastPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Center(
-    child: FButton(
-      mainAxisSize: .min,
-      onPress: () => showFToast(
-        context: context,
-        duration: null,
-        icon: const Icon(FIcons.triangleAlert),
-        title: const Text('Event start time cannot be earlier than 8am'),
-      ),
-      child: const Text('Show Toast'),
+  Widget sample(BuildContext context) => FButton(
+    mainAxisSize: .min,
+    onPress: () => showFToast(
+      context: context,
+      duration: null,
+      icon: const Icon(FIcons.triangleAlert),
+      title: const Text('Event start time cannot be earlier than 8am'),
     ),
+    child: const Text('Show Toast'),
   );
 }
 
@@ -85,29 +82,27 @@ class RawToastPage extends Sample {
       ),
     );
 
-    return Center(
-      child: FButton(
-        mainAxisSize: .min,
-        onPress: () => showRawFToast(
-          context: context,
-          duration: null,
-          builder: (context, toast) => IntrinsicHeight(
-            child: FCard(
-              style: cardStyle,
-              title: const Text('Event has been created'),
-              subtitle: const Padding(
-                padding: .symmetric(vertical: 5),
-                child: Text(
-                  'This is a more detailed description that provides comprehensive context and additional information '
-                  'about the notification, explaining what happened and what the user might expect next.',
-                ),
+    return FButton(
+      mainAxisSize: .min,
+      onPress: () => showRawFToast(
+        context: context,
+        duration: null,
+        builder: (context, toast) => IntrinsicHeight(
+          child: FCard(
+            style: cardStyle,
+            title: const Text('Event has been created'),
+            subtitle: const Padding(
+              padding: .symmetric(vertical: 5),
+              child: Text(
+                'This is a more detailed description that provides comprehensive context and additional information '
+                'about the notification, explaining what happened and what the user might expect next.',
               ),
-              child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
             ),
+            child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
           ),
         ),
-        child: const Text('Show Toast'),
       ),
+      child: const Text('Show Toast'),
     );
   }
 }
@@ -162,7 +157,7 @@ class SwipeToastPage extends StatelessWidget {
       };
 
   @override
-  Widget build(BuildContext context) => FTheme(
+  Widget build(BuildContext _) => FTheme(
     data: theme,
     child: FScaffold(
       child: Align(

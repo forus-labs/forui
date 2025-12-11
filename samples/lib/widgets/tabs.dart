@@ -10,7 +10,7 @@ class TabsPage extends Sample {
   TabsPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Column(
+  Widget sample(BuildContext _) => Column(
     mainAxisAlignment: .center,
     children: [
       Padding(

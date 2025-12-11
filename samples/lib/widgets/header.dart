@@ -10,7 +10,7 @@ class RootHeaderPage extends Sample {
   RootHeaderPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FHeader(
+  Widget sample(BuildContext _) => FHeader(
     title: const Text('Edit Alarm'),
     suffixes: [
       FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),
@@ -24,7 +24,7 @@ class NestedHeaderPage extends Sample {
   NestedHeaderPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FHeader.nested(
+  Widget sample(BuildContext _) => FHeader.nested(
     title: const Text('Appointment'),
     prefixes: [FHeaderAction.back(onPress: () {})],
     suffixes: [
@@ -39,7 +39,7 @@ class XNestedHeaderPage extends Sample {
   XNestedHeaderPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FHeader.nested(
+  Widget sample(BuildContext _) => FHeader.nested(
     title: const Text('Climate'),
     prefixes: [
       FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),

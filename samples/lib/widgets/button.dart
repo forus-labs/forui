@@ -22,18 +22,18 @@ class ButtonTextPage extends Sample {
     : style = _styles[style]!;
 
   @override
-  Widget sample(BuildContext context) => FButton(style: style, mainAxisSize: .min, onPress: () {}, child: Text(label));
+  Widget sample(BuildContext _) => FButton(style: style, mainAxisSize: .min, onPress: () {}, child: Text(label));
 }
 
 @RoutePage()
 class ButtonIconPage extends Sample {
   final FBaseButtonStyle Function(FButtonStyle) style;
 
-  ButtonIconPage({@queryParam super.theme = 'zinc-light', @queryParam String style = 'primary'})
+  ButtonIconPage({@queryParam super.theme, @queryParam String style = 'primary'})
     : style = _styles[style]!;
 
   @override
-  Widget sample(BuildContext context) => FButton(
+  Widget sample(BuildContext _) => FButton(
     style: style,
     mainAxisSize: .min,
     prefix: const Icon(FIcons.mail),
@@ -47,7 +47,7 @@ class ButtonOnlyIconPage extends Sample {
   ButtonOnlyIconPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {});
+  Widget sample(BuildContext _) => FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {});
 }
 
 @RoutePage()
@@ -55,6 +55,6 @@ class ButtonCircularProgressPage extends Sample {
   ButtonCircularProgressPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) =>
+  Widget sample(BuildContext _) =>
       FButton(mainAxisSize: .min, prefix: const FCircularProgress(), onPress: null, child: const Text('Please wait'));
 }

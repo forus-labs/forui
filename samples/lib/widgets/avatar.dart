@@ -13,13 +13,12 @@ class AvatarPage extends Sample {
   AvatarPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Row(
+  Widget sample(BuildContext _) => Row(
     mainAxisAlignment: .center,
+    spacing: 10,
     children: [
       FAvatar(image: AssetImage(path('avatar.png')), fallback: const Text('MN')),
-      const SizedBox(width: 10),
       FAvatar(image: const AssetImage(''), fallback: const Text('MN')),
-      const SizedBox(width: 10),
       FAvatar(image: const AssetImage('')),
     ],
   );
@@ -30,13 +29,12 @@ class AvatarRawPage extends Sample {
   AvatarRawPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Row(
+  Widget sample(BuildContext _) => Row(
     mainAxisAlignment: .center,
+    spacing: 10,
     children: [
       FAvatar.raw(),
-      const SizedBox(width: 10),
       FAvatar.raw(child: Icon(FIcons.baby, color: theme.colors.mutedForeground)),
-      const SizedBox(width: 10),
       FAvatar.raw(child: const Text('MN')),
     ],
   );
@@ -47,11 +45,11 @@ class AvatarInvalidPage extends Sample {
   AvatarInvalidPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Row(
+  Widget sample(BuildContext _) => Row(
     mainAxisAlignment: .center,
+    spacing: 10,
     children: [
       FAvatar(image: const AssetImage(''), fallback: const Text('MN')),
-      const SizedBox(width: 10),
       FAvatar(image: const AssetImage('')),
     ],
   );

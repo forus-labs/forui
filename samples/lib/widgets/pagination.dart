@@ -6,44 +6,17 @@ import 'package:forui/forui.dart';
 import 'package:forui_samples/sample.dart';
 
 @RoutePage()
-class PaginationPage extends StatefulSample {
+class PaginationPage extends Sample {
   final String controller;
 
   PaginationPage({@queryParam super.theme, @queryParam super.maxWidth = 600, @queryParam this.controller = 'default'});
 
   @override
-  State<PaginationPage> createState() => _PaginationPageState();
-}
-
-class _PaginationPageState extends StatefulSampleState<PaginationPage> {
-  late FPaginationController _controller = _updateController(widget.controller);
-
-  @override
-  void didUpdateWidget(covariant PaginationPage old) {
-    super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      _controller.dispose();
-      _controller = _updateController(widget.controller);
-    }
-  }
-
-  FPaginationController _updateController(String controller) => switch (controller) {
-    'siblings' => FPaginationController(pages: 20, siblings: 2, initialPage: 9),
-    'hide-edges' => FPaginationController(pages: 8, showEdges: false),
-    _ => FPaginationController(pages: 10),
-  };
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget sample(BuildContext context) => Column(
-    mainAxisAlignment: .center,
-    children: [FPagination(control: .managed(controller: _controller))],
-  );
+  Widget sample(BuildContext context) => FPagination(control: switch(controller) {
+    'siblings' => const .managed(pages: 20, siblings: 2, initial: 9),
+    'hide-edges' => const .managed(pages: 8, showEdges: false),
+    _ => const .managed(pages: 10),
+  });
 }
 
 @RoutePage()
@@ -66,35 +39,30 @@ class _PaginationCustomIconPageState extends StatefulSampleState<PaginationCusto
   @override
   Widget sample(BuildContext context) {
     final style = context.theme.paginationStyle;
-    return Column(
-      mainAxisAlignment: .center,
-      children: [
-        FPagination(
-          control: .managed(controller: _controller),
-          next: Padding(
-            padding: style.itemPadding,
-            child: ConstrainedBox(
-              constraints: style.itemConstraints,
-              child: FButton.icon(
-                style: FButtonStyle.ghost(),
-                onPress: _controller.next,
-                child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.bird)),
-              ),
-            ),
-          ),
-          previous: Padding(
-            padding: style.itemPadding,
-            child: ConstrainedBox(
-              constraints: style.itemConstraints,
-              child: FButton.icon(
-                style: FButtonStyle.ghost(),
-                onPress: _controller.previous,
-                child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.anchor)),
-              ),
-            ),
+    return FPagination(
+      control: .managed(controller: _controller),
+      next: Padding(
+        padding: style.itemPadding,
+        child: ConstrainedBox(
+          constraints: style.itemConstraints,
+          child: FButton.icon(
+            style: FButtonStyle.ghost(),
+            onPress: _controller.next,
+            child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.bird)),
           ),
         ),
-      ],
+      ),
+      previous: Padding(
+        padding: style.itemPadding,
+        child: ConstrainedBox(
+          constraints: style.itemConstraints,
+          child: FButton.icon(
+            style: FButtonStyle.ghost(),
+            onPress: _controller.previous,
+            child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.anchor)),
+          ),
+        ),
+      ),
     );
   }
 }

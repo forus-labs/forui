@@ -139,7 +139,6 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/select/toggleable', page: ToggleableSelectRoute.page),
     AutoRoute(path: '/select/clearable', page: ClearableSelectRoute.page),
     AutoRoute(path: '/select/format', page: FormatSelectRoute.page),
-    AutoRoute(path: '/select/scroll-handles', page: ScrollHandlesSelectRoute.page),
     AutoRoute(path: '/select/form', page: FormSelectRoute.page),
     AutoRoute(path: '/select-group/default', page: SelectGroupRoute.page),
     AutoRoute(path: '/select-group/checkbox-form', page: SelectGroupCheckboxFormRoute.page),

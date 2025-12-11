@@ -10,7 +10,7 @@ class BreadcrumbPage extends Sample {
   BreadcrumbPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Row(
+  Widget sample(BuildContext _) => Row(
     mainAxisAlignment: .center,
     children: [
       FBreadcrumb(
@@ -39,7 +39,7 @@ class BreadcrumbTilesPage extends Sample {
   BreadcrumbTilesPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Row(
+  Widget sample(BuildContext _) => Row(
     mainAxisAlignment: .center,
     children: [
       FBreadcrumb(
@@ -68,7 +68,7 @@ class BreadcrumbDividerPage extends Sample {
   BreadcrumbDividerPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => Row(
+  Widget sample(BuildContext _) => Row(
     mainAxisAlignment: .center,
     children: [
       FBreadcrumb(

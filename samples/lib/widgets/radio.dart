@@ -17,13 +17,10 @@ class _RadioPageState extends StatefulSampleState<RadioPage> {
   bool _value = true;
 
   @override
-  Widget sample(BuildContext context) => ConstrainedBox(
-    constraints: const BoxConstraints(maxWidth: 290),
-    child: FRadio(
-      label: const Text('Default'),
-      description: const Text('The description of the default option.'),
-      value: _value,
-      onChange: (value) => setState(() => _value = value),
-    ),
+  Widget sample(BuildContext _) => FRadio(
+    label: const Text('Default'),
+    description: const Text('The description of the default option.'),
+    value: _value,
+    onChange: (value) => setState(() => _value = value),
   );
 }

@@ -10,7 +10,7 @@ class PopoverMenuPage extends Sample {
   PopoverMenuPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FHeader(
+  Widget sample(BuildContext _) => FHeader(
     title: const Text('Edit Notes'),
     suffixes: [
       FPopoverMenu(
@@ -43,7 +43,7 @@ class TilePopoverMenuPage extends Sample {
   TilePopoverMenuPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FHeader(
+  Widget sample(BuildContext _) => FHeader(
     title: const Text('Edit Notes'),
     suffixes: [
       FPopoverMenu.tiles(

@@ -25,14 +25,21 @@ class FChangeNotifier with ChangeNotifier {
 }
 
 /// A [ValueNotifier] that provides additional life-cycle tracking capabilities.
+@Deprecated(
+  "Use ValueNotifier instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+)
 class FValueNotifier<T> extends ValueNotifier<T> {
   final List<ValueChanged<T>> _listeners = [];
   bool _disposed = false;
 
   /// Creates a [FValueNotifier].
+  @Deprecated('Use ValueNotifier instead.')
   FValueNotifier(super._value);
 
   /// Registers a closure to be called with a new value when the notifier changes if not null.
+  @Deprecated(
+    "Use lifted state instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+  )
   void addValueListener(ValueChanged<T>? listener) {
     if (listener != null) {
       _listeners.add(listener);
@@ -40,6 +47,9 @@ class FValueNotifier<T> extends ValueNotifier<T> {
   }
 
   /// Removes a previously registered closure from the list of closures that are notified when the object changes.
+  @Deprecated(
+    "Use lifted state instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+  )
   void removeValueListener(ValueChanged<T>? listener) => _listeners.remove(listener);
 
   @override
@@ -112,6 +122,9 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   }
 
   /// Registers a closure to be called whenever [update] successfully adds/removes an element if not null.
+  @Deprecated(
+    "Use lifted state instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+  )
   void addUpdateListener(ValueChanged<(T, bool)>? listener) {
     if (listener != null) {
       _updateListeners.add(listener);
@@ -120,6 +133,9 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
 
   /// Removes a previously registered closure from the list of closures that are notified whenever [update] successfully
   /// adds/removes a value.
+  @Deprecated(
+    "Use lifted state instead. Please open an issue at https://github.com/forus-labs/forui/issues if that doesn't cover your use case.",
+  )
   void removeUpdateListener(ValueChanged<(T, bool)>? listener) => _updateListeners.remove(listener);
 
   /// Notifies all registered update listeners of a change.

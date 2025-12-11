@@ -7,7 +7,7 @@ import 'package:forui_samples/sample.dart';
 
 @RoutePage()
 class TextFormFieldPage extends StatefulSample {
-  TextFormFieldPage({@queryParam super.theme});
+  TextFormFieldPage({@queryParam super.theme, super.top = 20});
 
   @override
   State<TextFormFieldPage> createState() => _TextFormFieldPageState();
@@ -15,49 +15,35 @@ class TextFormFieldPage extends StatefulSample {
 
 class _TextFormFieldPageState extends StatefulSampleState<TextFormFieldPage> {
   final _key = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
   @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
+  Widget sample(BuildContext _) => Form(
+    key: _key,
+    child: Column(
+      mainAxisAlignment: .center,
+      children: [
+        FTextFormField.email(
+          hint: 'janedoe@foruslabs.com',
+          autovalidateMode: .onUserInteraction,
+          validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
+        ),
+        const SizedBox(height: 10),
+        FTextFormField.password(
+          autovalidateMode: .onUserInteraction,
+          validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
+        ),
+        const SizedBox(height: 20),
+        FButton(
+          child: const Text('Login'),
+          onPress: () {
+            if (!_key.currentState!.validate()) {
+              return; // Form is invalid.
+            }
 
-  @override
-  Widget sample(BuildContext context) => Padding(
-    padding: const .all(15.0),
-    child: Form(
-      key: _key,
-      child: Column(
-        mainAxisAlignment: .center,
-        children: [
-          FTextFormField.email(
-            control: .managed(controller: _emailController),
-            hint: 'janedoe@foruslabs.com',
-            autovalidateMode: .onUserInteraction,
-            validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
-          ),
-          const SizedBox(height: 10),
-          FTextFormField.password(
-            control: .managed(controller: _passwordController),
-            autovalidateMode: .onUserInteraction,
-            validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-          ),
-          const SizedBox(height: 20),
-          FButton(
-            child: const Text('Login'),
-            onPress: () {
-              if (!_key.currentState!.validate()) {
-                return; // Form is invalid.
-              }
-
-              // Form is valid, do something.
-            },
-          ),
-        ],
-      ),
+            // Form is valid, do something.
+          },
+        ),
+      ],
     ),
   );
 }

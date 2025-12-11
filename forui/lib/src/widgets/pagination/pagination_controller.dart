@@ -171,11 +171,11 @@ sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
   /// The [onChange] callback is invoked when the page changes.
   ///
   /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initialPage] are provided.
+  /// Throws [AssertionError] if both [controller] and [initial] are provided.
   /// Throws [AssertionError] if both [controller] and [pages] are provided.
   const factory FPaginationControl.managed({
     FPaginationController? controller,
-    int? initialPage,
+    int? initial,
     int? pages,
     int siblings,
     bool showEdges,
@@ -225,7 +225,7 @@ class Managed extends FPaginationControl with Diagnosticable, _$ManagedMixin {
   @override
   final FPaginationController? controller;
   @override
-  final int? initialPage;
+  final int? initial;
   @override
   final int? pages;
   @override
@@ -237,18 +237,26 @@ class Managed extends FPaginationControl with Diagnosticable, _$ManagedMixin {
 
   const Managed({
     this.controller,
-    this.initialPage,
+    this.initial,
     this.pages,
     this.siblings = 1,
     this.showEdges = true,
     this.onChange,
   }) : assert(
-         controller == null || initialPage == null,
-         'Cannot provide both controller and initialPage. Set the page directly in the controller.',
+         controller == null || initial == null,
+         'Cannot provide both controller and initial. Set the page directly in the controller.',
        ),
        assert(
          controller == null || pages == null,
          'Cannot provide both controller and pages. Set the pages directly in the controller.',
+       ),
+       assert(
+         controller == null || siblings == 1,
+         'Cannot provide both controller and siblings. Set siblings directly in the controller.',
+       ),
+       assert(
+         controller == null || showEdges,
+         'Cannot provide both controller and showEdges. Set showEdges directly in the controller.',
        ),
        super._();
 
@@ -256,7 +264,7 @@ class Managed extends FPaginationControl with Diagnosticable, _$ManagedMixin {
   FPaginationController _create(VoidCallback callback) =>
       (controller ??
             FPaginationController(
-              initialPage: initialPage ?? 0,
+              initialPage: initial ?? 0,
               pages: pages ?? 1,
               siblings: siblings,
               showEdges: showEdges,

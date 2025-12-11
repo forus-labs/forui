@@ -13,7 +13,7 @@ class TilePage extends Sample {
   TilePage({@queryParam super.theme, @queryParam this.enabled = true, @queryParam this.tappable = true});
 
   @override
-  Widget sample(BuildContext context) => FTile(
+  Widget sample(BuildContext _) => FTile(
     enabled: enabled,
     prefix: const Icon(FIcons.user),
     title: const Text('Personalization'),
@@ -27,7 +27,7 @@ class TileSubtitlePage extends Sample {
   TileSubtitlePage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FTile(
+  Widget sample(BuildContext _) => FTile(
     prefix: const Icon(FIcons.bell),
     title: const Text('Notifications'),
     subtitle: const Text('Banners, Sounds, Badges'),
@@ -41,7 +41,7 @@ class TileDetailsPage extends Sample {
   TileDetailsPage({@queryParam super.theme});
 
   @override
-  Widget sample(BuildContext context) => FTile(
+  Widget sample(BuildContext _) => FTile(
     prefix: const Icon(FIcons.wifi),
     title: const Text('WiFi'),
     details: const Text('Forus Labs (5G)'),
