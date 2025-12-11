@@ -13,12 +13,12 @@ mixin FFormFieldProperties<T> {
   /// The description.
   Widget? get description;
 
-  /// {@template forui.foundation.form_field_properties.errorBuilder}
+  /// {@template forui.foundation.FFormFieldProperties.errorBuilder}
   /// The builder for errors displayed below the [description]. Defaults to displaying the error message.
   /// {@endtemplate}
   Widget Function(BuildContext context, String message)? get errorBuilder;
 
-  /// {@template forui.foundation.form_field_properties.enabled}
+  /// {@template forui.foundation.FFormFieldProperties.enabled}
   /// Whether the form is able to receive user input.
   ///
   /// Defaults to true. If [autovalidateMode] is not [AutovalidateMode.disabled], the form field will be auto validated.
@@ -26,17 +26,17 @@ mixin FFormFieldProperties<T> {
   /// {@endtemplate}
   bool get enabled;
 
-  /// {@template forui.foundation.form_field_properties.onSaved}
+  /// {@template forui.foundation.FFormFieldProperties.onSaved}
   /// An optional method to call with the final value when the form is saved via [FormState.save].
   /// {@endtemplate}
   FormFieldSetter<T>? get onSaved;
 
-  /// {@template forui.foundation.form_field_properties.onReset}
+  /// {@template forui.foundation.FFormFieldProperties.onReset}
   /// An optional method to call when the form field is reset via [FormFieldState.reset].
   /// {@endtemplate}
   VoidCallback? get onReset;
 
-  /// {@template forui.foundation.form_field_properties.validator}
+  /// {@template forui.foundation.FFormFieldProperties.validator}
   /// An optional method that validates an input. Returns an error string to
   /// display if the input is invalid, or null otherwise.
   ///
@@ -49,7 +49,7 @@ mixin FFormFieldProperties<T> {
   /// {@endtemplate}
   FormFieldValidator<T>? get validator;
 
-  /// {@template forui.foundation.form_field_properties.autovalidateMode}
+  /// {@template forui.foundation.FFormFieldProperties.autovalidateMode}
   /// Used to enable/disable this form field's auto validation and update its error text.
   ///
   /// Defaults to [AutovalidateMode.disabled].
@@ -60,7 +60,7 @@ mixin FFormFieldProperties<T> {
   /// {@endtemplate}
   AutovalidateMode get autovalidateMode;
 
-  /// {@template forui.foundation.form_field_properties.forceErrorText}
+  /// {@template forui.foundation.FFormFieldProperties.forceErrorText}
   /// An optional property that forces the [FormFieldState] into an error state by directly setting the
   /// [FormFieldState.errorText] property without running the validator function.
   ///

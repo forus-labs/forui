@@ -93,16 +93,16 @@ abstract class FTimeField extends StatefulWidget {
   /// The description.
   final Widget? description;
 
-  /// {@macro forui.foundation.form_field_properties.errorBuilder}
+  /// {@macro forui.foundation.FFormFieldProperties.errorBuilder}
   final Widget Function(BuildContext context, String message) errorBuilder;
 
-  /// {@macro forui.foundation.form_field_properties.enabled}
+  /// {@macro forui.foundation.FFormFieldProperties.enabled}
   final bool enabled;
 
-  /// {@macro forui.foundation.form_field_properties.onSaved}
+  /// {@macro forui.foundation.FFormFieldProperties.onSaved}
   final FormFieldSetter<FTime>? onSaved;
 
-  /// {@macro forui.foundation.form_field_properties.onReset}
+  /// {@macro forui.foundation.FFormFieldProperties.onReset}
   final VoidCallback? onReset;
 
   /// Used to enable/disable this checkbox auto validation and update its error text.

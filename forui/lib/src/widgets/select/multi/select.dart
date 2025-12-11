@@ -109,25 +109,25 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// The description.
   final Widget? description;
 
-  /// {@macro forui.foundation.form_field_properties.errorBuilder}
+  /// {@macro forui.foundation.FFormFieldProperties.errorBuilder}
   final Widget Function(BuildContext context, String message) errorBuilder;
 
-  /// {@macro forui.foundation.form_field_properties.enabled}
+  /// {@macro forui.foundation.FFormFieldProperties.enabled}
   final bool enabled;
 
-  /// {@macro forui.foundation.form_field_properties.onSaved}
+  /// {@macro forui.foundation.FFormFieldProperties.onSaved}
   final void Function(Set<T> values)? onSaved;
 
-  /// {@macro forui.foundation.form_field_properties.onReset}
+  /// {@macro forui.foundation.FFormFieldProperties.onReset}
   final VoidCallback? onReset;
 
-  /// {@macro forui.foundation.form_field_properties.validator}
+  /// {@macro forui.foundation.FFormFieldProperties.validator}
   final String? Function(Set<T> values) validator;
 
-  /// {@macro forui.foundation.form_field_properties.autovalidateMode}
+  /// {@macro forui.foundation.FFormFieldProperties.autovalidateMode}
   final AutovalidateMode autovalidateMode;
 
-  /// {@macro forui.foundation.form_field_properties.forceErrorText}
+  /// {@macro forui.foundation.FFormFieldProperties.forceErrorText}
   final String? forceErrorText;
 
   /// The hint.

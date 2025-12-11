@@ -163,19 +163,19 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   @override
   final Widget Function(BuildContext context, String message) errorBuilder;
 
-  /// {@macro flutter.widgets.FormField.onSaved}
+  /// {@macro forui.foundation.FFormFieldProperties.onSaved}
   @override
   final FormFieldSetter<Set<T>>? onSaved;
 
-  /// {@macro forui.widgets.FFormField.onReset}
+  /// {@macro forui.foundation.FFormFieldProperties.onReset}
   @override
   final VoidCallback? onReset;
 
-  /// {@macro flutter.widgets.FormField.validator}
+  /// {@macro forui.foundation.FFormFieldProperties.validator}
   @override
   final FormFieldValidator<Set<T>>? validator;
 
-  /// {@macro flutter.widgets.FormField.forceErrorText}
+  /// {@macro forui.foundation.FFormFieldProperties.forceErrorText}
   @override
   final String? forceErrorText;
 
