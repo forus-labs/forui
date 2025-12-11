@@ -27,7 +27,7 @@ class Content extends StatelessWidget {
       padding: style.padding,
       child: Column(
         crossAxisAlignment: .start,
-        mainAxisSize: .min,
+        mainAxisSize: mainAxisSize,
         children: [
           if (image case final image?) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
           if ((title != null || subtitle != null || child != null) && image != null)

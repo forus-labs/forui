@@ -54,7 +54,7 @@ Unfortunately, `FCalendar` cannot be easily migrated using data driven fixes due
 
 
 ### `FCard`
-* **Breaking** Add `FCard.mainAxisSize`, which efaults to `MainAxisSize.min`.
+* **Breaking** Add `FCard.mainAxisSize`, which defaults to `MainAxisSize.min`.
 
 
 ### `FCheckbox`
