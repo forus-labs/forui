@@ -122,7 +122,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FLineCalendarManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

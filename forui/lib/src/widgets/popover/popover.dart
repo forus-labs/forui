@@ -370,7 +370,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FPopoverManagedControl(:final onChange?)) {
       onChange(_controller.status.isForwardOrCompleted);
     }
   }

@@ -664,7 +664,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       _mutating = false;
     }
 
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FSelectManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

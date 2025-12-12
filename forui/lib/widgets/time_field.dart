@@ -7,5 +7,5 @@ library forui.widgets.time_field;
 
 export '../src/widgets/time_field/time_field.dart';
 export '../src/widgets/time_field/time_field_controller.dart'
-    hide InternalFTimeFieldControl, InternalFTimeFieldController, Lifted, Managed;
+    hide InternalFTimeFieldControl, InternalFTimeFieldController, Lifted, FTimeFieldManagedControl;
 export '../src/widgets/time_field/time_field_style.dart';

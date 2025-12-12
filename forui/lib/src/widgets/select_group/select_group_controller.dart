@@ -37,25 +37,21 @@ class _Controller<T> extends FMultiValueNotifier<T> {
   }
 }
 
-/// Defines how a [FSelectGroup]'s value is controlled.
+/// A [FSelectGroupControl] defines how a [FSelectGroup] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FSelectGroupControl<T> with Diagnosticable, _$FSelectGroupControlMixin<T> {
   /// Creates a [FSelectGroupControl] for controlling the select group using lifted state.
   const factory FSelectGroupControl.lifted({required Set<T> value, required ValueChanged<Set<T>> onChange}) = Lifted<T>;
 
-  /// Creates a [FSelectGroupControl] for controlling the select group using a controller.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * both [controller] and [initial] are provided.
-  /// * both [controller] and [min] are provided.
-  /// * both [controller] and [max] are provided.
+  /// Creates a [FSelectGroupControl].
   const factory FSelectGroupControl.managed({
     FSelectGroupController<T>? controller,
     Set<T>? initial,
     int min,
     int? max,
     ValueChanged<Set<T>>? onChange,
-  }) = Managed<T>;
+  }) = FSelectGroupManagedControl<T>;
 
   const FSelectGroupControl._();
 
@@ -76,32 +72,54 @@ final class Lifted<T> extends FSelectGroupControl<T> with _$LiftedMixin<T> {
   const Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  FSelectGroupController<T> _create() => _Controller(value: value, onChange: onChange);
+  FSelectGroupController<T> createController() => _Controller(value: value, onChange: onChange);
 
   @override
   void _updateController(FSelectGroupController<T> controller) =>
       (controller as _Controller<T>).updateState(value, onChange);
 }
 
-@internal
-final class Managed<T> extends FSelectGroupControl<T> with _$ManagedMixin<T> {
+/// A [FSelectGroupManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+final class FSelectGroupManagedControl<T> extends FSelectGroupControl<T> with _$FSelectGroupManagedControlMixin<T> {
+  /// The controller.
   @override
   final FSelectGroupController<T>? controller;
+
+  /// The initial values. Defaults to an empty set.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final Set<T>? initial;
+
+  /// The minimum number of selected items. Defaults to 0.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [min] is non-zero and [controller] is provided.
   @override
   final int min;
+
+  /// The maximum number of selected items. Defaults to no limit.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [max] and [controller] are both provided.
   @override
   final int? max;
+
+  /// Called when the selected values change.
   @override
   final ValueChanged<Set<T>>? onChange;
 
-  const Managed({this.controller, this.initial, this.min = 0, this.max, this.onChange})
+  /// Creates a [FSelectGroupControl].
+  const FSelectGroupManagedControl({this.controller, this.initial, this.min = 0, this.max, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both an initial value and a controller.'),
       assert(controller == null || min == 0, 'Cannot provide both a min value and a controller.'),
       assert(controller == null || max == null, 'Cannot provide both a max value and a controller.'),
       super._();
 
   @override
-  FSelectGroupController<T> _create() => controller ?? FMultiValueNotifier(value: initial ?? {}, min: min, max: max);
+  FSelectGroupController<T> createController() => controller ?? FMultiValueNotifier(value: initial ?? {}, min: min, max: max);
 }

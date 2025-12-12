@@ -77,7 +77,7 @@ class _FAccordionState extends State<FAccordion> {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FAccordionManagedControl(:final onChange?)) {
       onChange(_controller.expanded);
     }
   }

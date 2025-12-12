@@ -144,7 +144,7 @@ class _Controller extends FDateFieldController {
     bool? popoverShown,
     ValueChanged<bool>? onPopoverChange,
   ) {
-    _popover = InternalPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
+    _popover = InternalFPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
     (_calendar as _CalendarController).update(value, onChange, validator, truncateAndStripTimezone);
   }
 
@@ -231,7 +231,9 @@ class _CalendarController implements FCalendarController<DateTime?> {
   }
 }
 
-/// Defines how a [FDateField]'s value is controlled.
+/// A [FDateFieldControl] defines how a [FDateField] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FDateFieldControl with Diagnosticable, _$FDateFieldControlMixin {
   /// Creates lifted state control.
   ///
@@ -251,18 +253,7 @@ sealed class FDateFieldControl with Diagnosticable, _$FDateFieldControlMixin {
     FPopoverMotion motion,
   }) = Lifted;
 
-  /// Creates managed control using a [FDateFieldController].
-  ///
-  /// Either [controller] or [initial] can be provided. If neither is provided,
-  /// an internal controller with default date (null) is created.
-  ///
-  /// The [onChange] callback is invoked when the date changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [popoverMotion] are provided.
-  /// Throws [AssertionError] if both [controller] and [validator] are provided.
-  /// Throws [AssertionError] if both [controller] and [truncateAndStripTimezone] is false.
+  /// Creates a [FDateFieldControl].
   const factory FDateFieldControl.managed({
     FDateFieldController? controller,
     DateTime? initial,
@@ -270,7 +261,7 @@ sealed class FDateFieldControl with Diagnosticable, _$FDateFieldControlMixin {
     FPopoverMotion? popoverMotion,
     bool truncateAndStripTimezone,
     ValueChanged<DateTime?>? onChange,
-  }) = Managed;
+  }) = FDateFieldManagedControl;
 
   const FDateFieldControl._();
 
@@ -314,7 +305,7 @@ class Lifted extends FDateFieldControl with _$LiftedMixin {
        super._();
 
   @override
-  FDateFieldController _create(TickerProvider vsync) => _Controller(
+  FDateFieldController createController(TickerProvider vsync) => _Controller(
     vsync: vsync,
     value: value,
     onChange: onChange,
@@ -339,22 +330,49 @@ class Lifted extends FDateFieldControl with _$LiftedMixin {
   }
 }
 
-@internal
-class Managed extends FDateFieldControl with Diagnosticable, _$ManagedMixin {
+/// A [FDateFieldManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FDateFieldManagedControl extends FDateFieldControl with Diagnosticable, _$FDateFieldManagedControlMixin {
+  /// The controller.
   @override
   final FDateFieldController? controller;
+
+  /// The initial date. Defaults to null.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final DateTime? initial;
+
+  /// The validator. Defaults to no validation.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [validator] and [controller] are both provided.
   @override
   final FormFieldValidator<DateTime>? validator;
+
+  /// The popover motion. Defaults to [FPopoverMotion].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [popoverMotion] and [controller] are both provided.
   @override
   final FPopoverMotion? popoverMotion;
+
+  /// Whether to truncate and convert all [DateTime]s to dates in UTC timezone. Defaults to true.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [truncateAndStripTimezone] is false and [controller] is provided.
   @override
   final bool truncateAndStripTimezone;
+
+  /// Called when the selected date changes.
   @override
   final ValueChanged<DateTime?>? onChange;
 
-  const Managed({
+  /// Creates a [FDateFieldControl].
+  const FDateFieldManagedControl({
     this.controller,
     this.initial,
     this.validator,
@@ -371,7 +389,7 @@ class Managed extends FDateFieldControl with Diagnosticable, _$ManagedMixin {
        super._();
 
   @override
-  FDateFieldController _create(TickerProvider vsync) =>
+  FDateFieldController createController(TickerProvider vsync) =>
       controller ??
       FDateFieldController(
         vsync: vsync,

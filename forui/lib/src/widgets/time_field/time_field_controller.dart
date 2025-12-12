@@ -104,7 +104,7 @@ class _Controller extends FTimeFieldController {
     Curve curve,
   ) {
     _onChange = onChange;
-    _popover = InternalPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
+    _popover = InternalFPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
 
     if (super.value == value) {
       return;
@@ -139,7 +139,9 @@ class _Controller extends FTimeFieldController {
   FPopoverController get popover => _popover;
 }
 
-/// Defines how a [FTimeField]'s value is controlled.
+/// A [FTimeFieldControl] defines how a [FTimeField] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
   /// Creates lifted state control.
   ///
@@ -163,24 +165,14 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
     Curve curve,
   }) = Lifted;
 
-  /// Creates managed control using a [FTimeFieldController].
-  ///
-  /// Either [controller] or [initial] can be provided. If neither is provided,
-  /// an internal controller with default time (null) is created.
-  ///
-  /// The [onChange] callback is invoked when the time changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [popoverMotion] are provided.
-  /// Throws [AssertionError] if both [controller] and [validator] are provided.
+  /// Creates a [FTimeFieldControl].
   const factory FTimeFieldControl.managed({
     FTimeFieldController? controller,
     FTime? initial,
     FormFieldValidator<FTime>? validator,
     FPopoverMotion? popoverMotion,
     ValueChanged<FTime?>? onChange,
-  }) = Managed;
+  }) = FTimeFieldManagedControl;
 
   const FTimeFieldControl._();
 
@@ -224,7 +216,7 @@ class Lifted extends FTimeFieldControl with _$LiftedMixin {
        super._();
 
   @override
-  FTimeFieldController _create(TickerProvider vsync) => _Controller(
+  FTimeFieldController createController(TickerProvider vsync) => _Controller(
     vsync: vsync,
     value: value,
     onChange: onChange,
@@ -238,27 +230,49 @@ class Lifted extends FTimeFieldControl with _$LiftedMixin {
       (controller as _Controller)._update(vsync, value, onChange, popoverShown, onPopoverChange, duration, curve);
 }
 
-@internal
-class Managed extends FTimeFieldControl with Diagnosticable, _$ManagedMixin {
+/// A [FTimeFieldManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FTimeFieldManagedControl extends FTimeFieldControl with Diagnosticable, _$FTimeFieldManagedControlMixin {
+  /// The controller.
   @override
   final FTimeFieldController? controller;
+
+  /// The initial time. Defaults to null.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final FTime? initial;
+
+  /// The validator. Defaults to no validation.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [validator] and [controller] are both provided.
   @override
   final FormFieldValidator<FTime>? validator;
+
+  /// The popover motion. Defaults to [FPopoverMotion].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [popoverMotion] and [controller] are both provided.
   @override
   final FPopoverMotion? popoverMotion;
+
+  /// Called when the selected time changes.
   @override
   final ValueChanged<FTime?>? onChange;
 
-  const Managed({this.controller, this.initial, this.validator, this.popoverMotion, this.onChange})
+  /// Creates a [FTimeFieldControl].
+  const FTimeFieldManagedControl({this.controller, this.initial, this.validator, this.popoverMotion, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
       assert(controller == null || popoverMotion == null, 'Cannot provide both controller and popoverMotion.'),
       assert(controller == null || validator == null, 'Cannot provide both controller and validator.'),
       super._();
 
   @override
-  FTimeFieldController _create(TickerProvider vsync) =>
+  FTimeFieldController createController(TickerProvider vsync) =>
       controller ??
       FTimeFieldController(
         vsync: vsync,

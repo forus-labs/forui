@@ -138,7 +138,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
   void _handleOnChange() {
     _updateTextController();
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

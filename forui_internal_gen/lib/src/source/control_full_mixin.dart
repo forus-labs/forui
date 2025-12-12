@@ -16,8 +16,8 @@ abstract class ControlMixin extends FunctionsMixin {
   /// The `_update` method.
   final MethodElement update;
 
-  /// The `_create` method.
-  final Method create;
+  /// The `create` method.
+  final Method createController;
 
   /// The `_dispose` method.
   final Method dispose;
@@ -33,7 +33,7 @@ abstract class ControlMixin extends FunctionsMixin {
     required ClassElement element,
     required ClassElement supertype,
     required MethodElement update,
-    required Method create,
+    required Method createController,
     required Method dispose,
     required Method default_,
     required List<ClassElement> siblings,
@@ -42,7 +42,7 @@ abstract class ControlMixin extends FunctionsMixin {
           element: element,
           supertype: supertype,
           update: update,
-          create: create,
+          createController: createController,
           dispose: dispose,
           default_: default_,
           siblings: siblings,
@@ -51,7 +51,7 @@ abstract class ControlMixin extends FunctionsMixin {
           element: element,
           supertype: supertype,
           update: update,
-          create: create,
+          createController: createController,
           dispose: dispose,
           default_: default_,
           siblings: siblings,
@@ -61,7 +61,7 @@ abstract class ControlMixin extends FunctionsMixin {
     required ClassElement element,
     required this.supertype,
     required this.update,
-    required this.create,
+    required this.createController,
     required this.default_,
     required this.dispose,
     required this.siblings,
@@ -91,7 +91,7 @@ abstract class ControlMixin extends FunctionsMixin {
   /// We assume that the parameter names are always old, controller and callback.
   Code get _updateBody;
 
-  String get _createParameters => [for (final p in create.requiredParameters) p.name].join(', ');
+  String get _createParameters => [for (final p in createController.requiredParameters) p.name].join(', ');
 
   String get _defaultParameters => [for (final p in default_.requiredParameters) p.name].join(', ');
 }
@@ -101,7 +101,7 @@ class _LiftedControlMixin extends ControlMixin {
     required super.element,
     required super.supertype,
     required super.update,
-    required super.create,
+    required super.createController,
     required super.dispose,
     required super.default_,
     required super.siblings,
@@ -137,12 +137,12 @@ class _LiftedControlMixin extends ControlMixin {
         // External -> Lifted
         case ${siblings.first.name}(controller: _?):
           controller.removeListener(callback);
-          return (_create($_createParameters)..addListener(callback), true);
+          return (createController($_createParameters)..addListener(callback), true);
 
         // Internal -> Lifted
         case ${siblings.first.name}():
           controller.dispose();
-          return (_create($_createParameters)..addListener(callback), true);
+          return (createController($_createParameters)..addListener(callback), true);
 
         default:
           return (_default($_defaultParameters), false);
@@ -177,7 +177,7 @@ class _ManagedControlMixin extends ControlMixin {
     required super.element,
     required super.supertype,
     required super.update,
-    required super.create,
+    required super.createController,
     required super.dispose,
     required super.default_,
     required super.siblings,
@@ -202,28 +202,28 @@ class _ManagedControlMixin extends ControlMixin {
         // External (Controller A) -> External (Controller B)
         case ${element.name}(controller: final old?) when this.controller != null && this.controller != old:
           controller.removeListener(callback);
-          return (_create($_createParameters)..addListener(callback), true);
+          return (createController($_createParameters)..addListener(callback), true);
 
         // Internal -> External
         case ${element.name}(controller: final old) when this.controller != null && old == null:
           controller.dispose();
-          return (_create($_createParameters)..addListener(callback), true);
+          return (createController($_createParameters)..addListener(callback), true);
 
         // External -> Internal
         case ${element.name}(controller: _?) when this.controller == null:
           controller.removeListener(callback);
-          return (_create($_createParameters)..addListener(callback), true);
+          return (createController($_createParameters)..addListener(callback), true);
 
         // Lifted -> Managed
         case ${siblings.first.name}():
           controller.dispose();
-          return (_create($_createParameters)..addListener(callback), true);
+          return (createController($_createParameters)..addListener(callback), true);
 
         ${element.isAbstract ? '''
         // Internal -> Internal (different type, e.g. Normal -> Cascade)
         case final ${element.name}$_typeParameters old when old != this:
           controller.dispose();
-          return (_create($_createParameters)..addListener(callback), true);
+          return (createController($_createParameters)..addListener(callback), true);
         ''' : ''}
 
         default:

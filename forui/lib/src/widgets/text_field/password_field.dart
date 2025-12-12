@@ -282,7 +282,7 @@ class _State extends State<PasswordField> {
   }
 
   void _handleOnChange() {
-    if (widget.properties.obscureTextControl case Managed(:final onChange?)) {
+    if (widget.properties.obscureTextControl case FObscureTextManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

@@ -90,7 +90,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }
@@ -241,7 +241,7 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
   }
 
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

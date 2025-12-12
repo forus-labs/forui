@@ -45,7 +45,7 @@ class _TextFieldControlState extends State<TextFieldControl> {
   }
 
   void _handleOnChange() {
-    if (widget.control case _Managed(:final onChange?)) {
+    if (widget.control case FTextFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }
@@ -74,7 +74,9 @@ class _Controller extends TextEditingController {
   }
 }
 
-/// Defines how the text field's text is controlled.
+/// A [FTextFieldControl] defines how a [FTextField] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FTextFieldControl with Diagnosticable, _$FTextFieldControlMixin {
   /// Creates a [FTextFieldControl] for controlling a text field using lifted state.
   const factory FTextFieldControl.lifted({
@@ -82,15 +84,12 @@ sealed class FTextFieldControl with Diagnosticable, _$FTextFieldControlMixin {
     required ValueChanged<TextEditingValue> onChange,
   }) = _Lifted;
 
-  /// Creates a [FTextFieldControl] for controlling a text field using a controller.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
+  /// Creates a [FTextFieldControl].
   const factory FTextFieldControl.managed({
     TextEditingController? controller,
     TextEditingValue? initial,
     ValueChanged<TextEditingValue>? onChange,
-  }) = _Managed;
+  }) = FTextFieldManagedControl;
 
   const FTextFieldControl._();
 
@@ -106,24 +105,37 @@ class _Lifted extends FTextFieldControl with _$_LiftedMixin {
   const _Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  TextEditingController _create() => _Controller(value, onChange);
+  TextEditingController createController() => _Controller(value, onChange);
 
   @override
   void _updateController(TextEditingController controller) => (controller as _Controller).update(value, onChange);
 }
 
-class _Managed extends FTextFieldControl with _$_ManagedMixin {
+/// A [FTextFieldManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FTextFieldManagedControl extends FTextFieldControl with _$FTextFieldManagedControlMixin {
+  /// The controller.
   @override
   final TextEditingController? controller;
+
+  /// The initial value. Defaults to [TextEditingValue.empty].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final TextEditingValue? initial;
+
+  /// Called when the value changes.
   @override
   final ValueChanged<TextEditingValue>? onChange;
 
-  const _Managed({this.controller, this.initial, this.onChange})
+  /// Creates a [FTextFieldControl].
+  const FTextFieldManagedControl({this.controller, this.initial, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both an initial value and a controller.'),
       super._();
 
   @override
-  TextEditingController _create() => controller ?? .fromValue(initial);
+  TextEditingController createController() => controller ?? .fromValue(initial);
 }

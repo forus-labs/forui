@@ -35,7 +35,9 @@ class _Controller extends FCalendarController<Object?> {
   void select(DateTime date) => _select(date);
 }
 
-/// Defines how a [FCalendar]'s value is controlled.
+/// A [FCalendarControl] defines how a [FCalendar] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FCalendarControl<T> with Diagnosticable, _$FCalendarControlMixin<T> {
   static bool _defaultSelectable(DateTime _) => true;
 
@@ -50,23 +52,7 @@ sealed class FCalendarControl<T> with Diagnosticable, _$FCalendarControlMixin<T>
     Predicate<DateTime> selectable = _defaultSelectable,
   }) => Lifted(selected: selected, select: select, selectable: selectable);
 
-  /// Managed control for single date selection.
-  ///
-  /// [selectable] will always return true if not given.
-  ///
-  /// [toggleable] determines whether the controller should unselect a date if it is already selected. Defaults to true.
-  ///
-  /// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
-  /// dates in UTC timezone. Defaults to true.
-  ///
-  /// [onChange] is called when the selected date changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * both [controller] and [initial] are provided.
-  /// * both [controller] and [selectable] are provided.
-  /// * both [controller] and [toggleable] are provided.
-  /// * both [controller] and [truncateAndStripTimezone] are provided.
+  /// Creates a [FCalendarControl] for single date selection.
   static FCalendarControl<DateTime?> managedDate({
     FCalendarController<DateTime?>? controller,
     DateTime? initial,
@@ -83,20 +69,7 @@ sealed class FCalendarControl<T> with Diagnosticable, _$FCalendarControlMixin<T>
     onChange: onChange,
   );
 
-  /// Managed control for multiple dates selection.
-  ///
-  /// [selectable] will always return true if not given.
-  ///
-  /// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
-  /// dates in UTC timezone. Defaults to true.
-  ///
-  /// [onChange] is called when the selected dates change.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * both [controller] and [initial] are provided.
-  /// * both [controller] and [selectable] are provided.
-  /// * both [controller] and [truncateAndStripTimezone] are provided.
+  /// Creates a [FCalendarControl] for multiple dates selection.
   static FCalendarControl<Set<DateTime>> managedDates({
     FCalendarController<Set<DateTime>>? controller,
     Set<DateTime>? initial,
@@ -111,23 +84,7 @@ sealed class FCalendarControl<T> with Diagnosticable, _$FCalendarControlMixin<T>
     onChange: onChange,
   );
 
-  /// Managed control for range selection.
-  ///
-  /// [selectable] will always return true if not given.
-  ///
-  /// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
-  /// dates in UTC timezone. Defaults to true.
-  ///
-  /// Both the start and end dates of the range are inclusive. Unselectable dates within the selected range are selected
-  /// regardless.
-  ///
-  /// [onChange] is called when the selected range changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * both [controller] and [initial] are provided.
-  /// * both [controller] and [selectable] are provided.
-  /// * both [controller] and [truncateAndStripTimezone] are provided.
+  /// Creates a [FCalendarControl] for range selection.
   static FCalendarControl<(DateTime, DateTime)?> managedRange({
     FCalendarController<(DateTime, DateTime)?>? controller,
     (DateTime, DateTime)? initial,
@@ -163,7 +120,7 @@ class Lifted extends FCalendarControl<Object?> with _$LiftedMixin<Object?> {
   const Lifted({required this.selectable, required this.selected, required this.select}) : super._();
 
   @override
-  FCalendarController<Object?> _create() =>
+  FCalendarController<Object?> createController() =>
       _Controller(selectable: selectable, selected: selected, select: select);
 
   @override
@@ -171,20 +128,42 @@ class Lifted extends FCalendarControl<Object?> with _$LiftedMixin<Object?> {
       (controller as _Controller).update(selectable: selectable, selected: selected, select: select);
 }
 
-@internal
-abstract class Managed<T> extends FCalendarControl<T> with _$ManagedMixin<T> {
+/// A [FCalendarManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+abstract class FCalendarManagedControl<T> extends FCalendarControl<T> with _$FCalendarManagedControlMixin<T> {
+  /// The controller.
   @override
   final FCalendarController<T>? controller;
+
+  /// The initial value. Defaults to null.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final T? initial;
+
+  /// A predicate that determines if a date can be selected. Defaults to always true.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [selectable] and [controller] are both provided.
   @override
   final Predicate<DateTime>? selectable;
+
+  /// Whether to truncate and convert all [DateTime]s to dates in UTC timezone. Defaults to true.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [truncateAndStripTimezone] is false and [controller] is provided.
   @override
   final bool truncateAndStripTimezone;
+
+  /// Called when the selected value changes.
   @override
   final ValueChanged<T>? onChange;
 
-  const Managed({this.controller, this.initial, this.selectable, this.truncateAndStripTimezone = true, this.onChange})
+  /// Creates a [FCalendarControl].
+  const FCalendarManagedControl({this.controller, this.initial, this.selectable, this.truncateAndStripTimezone = true, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
       assert(controller == null || selectable == null, 'Cannot provide both controller and selectable.'),
       assert(
@@ -197,8 +176,7 @@ abstract class Managed<T> extends FCalendarControl<T> with _$ManagedMixin<T> {
   void handleOnChange(FCalendarController<Object?> controller) => onChange?.call(controller.value as T);
 }
 
-class _Date extends Managed<DateTime?> with _$_DateMixin {
-  @override
+class _Date extends FCalendarManagedControl<DateTime?> {
   final bool toggleable;
 
   const _Date({
@@ -211,7 +189,7 @@ class _Date extends Managed<DateTime?> with _$_DateMixin {
   }) : assert(controller == null || toggleable, 'Cannot provide both controller and toggleable.');
 
   @override
-  FCalendarController<DateTime?> _create() =>
+  FCalendarController<DateTime?> createController() =>
       controller ??
       .date(
         initialSelection: initial,
@@ -221,11 +199,11 @@ class _Date extends Managed<DateTime?> with _$_DateMixin {
       );
 }
 
-class _Dates extends Managed<Set<DateTime>> with _$_DatesMixin {
+class _Dates extends FCalendarManagedControl<Set<DateTime>> {
   const _Dates({super.controller, super.initial, super.selectable, super.truncateAndStripTimezone, super.onChange});
 
   @override
-  FCalendarController<Set<DateTime>> _create() =>
+  FCalendarController<Set<DateTime>> createController() =>
       controller ??
       .dates(
         initialSelections: initial ?? {},
@@ -234,11 +212,11 @@ class _Dates extends Managed<Set<DateTime>> with _$_DatesMixin {
       );
 }
 
-class _Range extends Managed<(DateTime, DateTime)?> with _$_RangeMixin {
+class _Range extends FCalendarManagedControl<(DateTime, DateTime)?> {
   const _Range({super.controller, super.initial, super.selectable, super.truncateAndStripTimezone, super.onChange});
 
   @override
-  FCalendarController<(DateTime, DateTime)?> _create() =>
+  FCalendarController<(DateTime, DateTime)?> createController() =>
       controller ??
       .range(
         initialSelection: initial,

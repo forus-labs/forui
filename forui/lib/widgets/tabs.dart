@@ -5,4 +5,4 @@
 /// See https://forui.dev/docs/navigation/tabs for working examples.
 library forui.widgets.tabs;
 
-export '../src/widgets/tabs/tabs.dart' hide InternalFTabControl, Lifted, Managed;
+export '../src/widgets/tabs/tabs.dart' hide InternalFTabControl, Lifted, FTabManagedControl;

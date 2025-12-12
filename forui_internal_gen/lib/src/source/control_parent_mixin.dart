@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 /// Generates a private mixin for the sealed parent control class.
 ///
 /// This mixin provides:
-/// - `_create` method (if not specified in sealed class)
+/// - `create` method (if not specified in sealed class)
 /// - `_dispose` method (if not specified in sealed class)
 /// - `_default` method (always generated)
 @internal
@@ -15,8 +15,8 @@ class ControlParentMixin {
   /// The sealed parent class.
   final ClassElement supertype;
 
-  /// The `_create` method from the sealed parent, if any.
-  final MethodElement? create;
+  /// The `createController` method from the sealed parent, if any.
+  final MethodElement? createController;
 
   /// The `_update` method from the sealed parent, if any.
   final MethodElement update;
@@ -25,22 +25,33 @@ class ControlParentMixin {
   final MethodElement? dispose;
 
   /// Creates a new [ControlParentMixin].
-  ControlParentMixin({required this.supertype, required this.create, required this.update, required this.dispose});
+  ControlParentMixin({
+    required this.supertype,
+    required this.createController,
+    required this.update,
+    required this.dispose,
+  });
 
   /// Generates the mixin.
   Mixin generate() =>
       (MixinBuilder()
             ..name = '_\$${supertype.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
-            ..methods.addAll([if (create == null) _create, if (dispose == null) _dispose, defaultMethod]))
+            ..methods.addAll([
+              if (createController == null) _createController,
+              if (dispose == null) _dispose,
+              defaultMethod,
+            ]))
           .build();
 
-  Method get createMethod => switch (create) {
-    null => _create,
+  Method get createControllerMethod => switch (createController) {
+    null => _createController,
     final create => Method(
       (m) => m
+        ..annotations.add(refer('visibleForOverriding'))
+        ..docs.add('/// Creates a [${aliasAwareType(create.returnType)}].')
         ..returns = refer(aliasAwareType(create.returnType))
-        ..name = '_create'
+        ..name = 'createController'
         ..requiredParameters.addAll([
           for (final parameter in create.formalParameters)
             Parameter(
@@ -52,10 +63,12 @@ class ControlParentMixin {
     ),
   };
 
-  Method get _create => Method(
+  Method get _createController => Method(
     (m) => m
+      ..annotations.add(refer('visibleForOverriding'))
+      ..docs.add('/// Creates a [$_returnType].')
       ..returns = refer(_returnType)
-      ..name = '_create'
+      ..name = 'createController'
       ..requiredParameters.addAll([
         for (final parameter in update.formalParameters)
           if (parameter.name case final name? when name != 'old' && name != 'controller' && name != 'callback')

@@ -113,7 +113,9 @@ class _Controller extends FPickerController {
   }
 }
 
-/// Defines how a [FPicker]'s value is controlled.
+/// A [FPickerControl] defines how a [FPicker] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
   /// Creates a [FPickerControl] for controlling a picker using lifted state.
   ///
@@ -131,20 +133,12 @@ sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
     Curve curve,
   }) = Lifted;
 
-  /// Creates a [FPickerControl] for controlling a picker using a controller.
-  ///
-  /// Either [controller] or [initial] can be provided. If neither is provided,
-  /// an internal controller with default indexes (all zeros) is created.
-  ///
-  /// The [onChange] callback is invoked when the value changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
+  /// Creates a [FPickerControl].
   const factory FPickerControl.managed({
     FPickerController? controller,
     List<int>? initial,
     ValueChanged<List<int>>? onChange,
-  }) = Managed;
+  }) = FPickerManagedControl;
 
   const FPickerControl._();
 
@@ -200,7 +194,7 @@ class Lifted extends FPickerControl with _$LiftedMixin {
   }) : super._();
 
   @override
-  FPickerController _create(int wheelCount) {
+  FPickerController createController(int wheelCount) {
     final controller = _Controller(initialIndexes: value, onChange: onChange);
     _updateWheels(controller);
 
@@ -213,16 +207,28 @@ class Lifted extends FPickerControl with _$LiftedMixin {
   }
 }
 
-@internal
-class Managed extends FPickerControl with Diagnosticable, _$ManagedMixin {
+/// A [FPickerManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FPickerManagedControl extends FPickerControl with Diagnosticable, _$FPickerManagedControlMixin {
+  /// The controller.
   @override
   final FPickerController? controller;
+
+  /// The initial indexes. Defaults to all zeros.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final List<int>? initial;
+
+  /// Called when the selected indexes change.
   @override
   final ValueChanged<List<int>>? onChange;
 
-  const Managed({this.controller, this.initial, this.onChange})
+  /// Creates a [FPickerControl].
+  const FPickerManagedControl({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Set the value directly in the controller.',
@@ -230,7 +236,7 @@ class Managed extends FPickerControl with Diagnosticable, _$ManagedMixin {
       super._();
 
   @override
-  FPickerController _create(int wheelCount) {
+  FPickerController createController(int wheelCount) {
     final created = controller ?? FPickerController(initialIndexes: initial ?? .filled(wheelCount, 0));
     _updateWheels(created);
 

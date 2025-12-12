@@ -6,5 +6,5 @@
 library forui.widgets.select_group;
 
 export '../src/widgets/select_group/select_group.dart';
-export '../src/widgets/select_group/select_group_controller.dart' hide InternalFSelectGroupControl, Lifted, Managed;
+export '../src/widgets/select_group/select_group_controller.dart' hide InternalFSelectGroupControl, Lifted, FSelectGroupManagedControl;
 export '../src/widgets/select_group/select_group_item.dart';

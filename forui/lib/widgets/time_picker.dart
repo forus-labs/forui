@@ -9,4 +9,4 @@ library forui.widgets.time_picker;
 
 export '../src/widgets/time_picker/time_picker.dart';
 export '../src/widgets/time_picker/time_picker_controller.dart'
-    hide FTimePickerControllers, InternalFTimePickerControl, Lifted, Managed;
+    hide FTimePickerControllers, InternalFTimePickerControl, Lifted, FTimePickerManagedControl;

@@ -174,7 +174,9 @@ final class _Controller extends FTimePickerController {
   }
 }
 
-/// Defines how a [FTimePicker]'s value is controlled.
+/// A [FTimePickerControl] defines how a [FTimePicker] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
   /// Creates a [FTimePickerControl] for controlling time picker using lifted state.
   ///
@@ -192,20 +194,12 @@ sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
     Curve curve,
   }) = Lifted;
 
-  /// Creates a [FTimePickerControl] for controlling time picker using a controller.
-  ///
-  /// Either [controller] or [initial] can be provided. If neither is provided,
-  /// an internal controller with default time (00:00) is created.
-  ///
-  /// The [onChange] callback is invoked when the time changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
+  /// Creates a [FTimePickerControl].
   const factory FTimePickerControl.managed({
     FTimePickerController? controller,
     FTime? initial,
     ValueChanged<FTime>? onChange,
-  }) = Managed;
+  }) = FTimePickerManagedControl;
 
   const FTimePickerControl._();
 
@@ -248,7 +242,7 @@ class Lifted extends FTimePickerControl with _$LiftedMixin {
   }) : super._();
 
   @override
-  FTimePickerController _create(DateFormat format, int hourInterval, int minuteInterval) =>
+  FTimePickerController createController(DateFormat format, int hourInterval, int minuteInterval) =>
       (_Controller(value: value, onChange: onChange))..configure(format, hourInterval, minuteInterval);
 
   @override
@@ -259,21 +253,33 @@ class Lifted extends FTimePickerControl with _$LiftedMixin {
   }
 }
 
-@internal
-class Managed extends FTimePickerControl with Diagnosticable, _$ManagedMixin {
+/// A [FTimePickerManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FTimePickerManagedControl extends FTimePickerControl with Diagnosticable, _$FTimePickerManagedControlMixin {
+  /// The controller.
   @override
   final FTimePickerController? controller;
+
+  /// The initial time. Defaults to 00:00.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final FTime? initial;
+
+  /// Called when the time changes.
   @override
   final ValueChanged<FTime>? onChange;
 
-  const Managed({this.controller, this.initial, this.onChange})
+  /// Creates a [FTimePickerControl].
+  const FTimePickerManagedControl({this.controller, this.initial, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
       super._();
 
   @override
-  FTimePickerController _create(DateFormat format, int hourInterval, int minuteInterval) =>
+  FTimePickerController createController(DateFormat format, int hourInterval, int minuteInterval) =>
       (controller ?? FTimePickerController(initial: initial ?? const FTime()))
         ..configure(format, hourInterval, minuteInterval);
 }

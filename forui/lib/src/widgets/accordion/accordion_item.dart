@@ -100,7 +100,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     super.didChangeDependencies();
     final InheritedAccordionData(:index, :controller, :style, :expanded) = .of(context);
     assert(
-      controller is! ProxyController || widget.initiallyExpanded == null,
+      controller is! ProxyAccordionController || widget.initiallyExpanded == null,
       'Cannot provide initiallyExpanded when the parent accordion has lifted state.',
     );
 
@@ -113,10 +113,10 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       ..reverseDuration = style.motion.collapseDuration;
 
     switch ((_accordionController, _initialized)) {
-      case (ProxyController _, true):
+      case (ProxyAccordionController _, true):
         expanded.contains(index) ? _controller.forward() : _controller.reverse();
 
-      case (ProxyController _, false):
+      case (ProxyAccordionController _, false):
         _controller.value = expanded.contains(index) ? 1.0 : 0.0;
 
       case _:

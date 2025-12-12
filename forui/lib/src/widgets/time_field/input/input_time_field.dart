@@ -68,7 +68,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
 
   @override
   void _handleOnChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FTimeFieldManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

@@ -4,7 +4,9 @@ import 'package:forui/forui.dart';
 
 part 'line_calendar_controller.control.dart';
 
-/// Defines how a [FLineCalendar]'s value is controlled.
+/// A [FLineCalendarControl] defines how a [FLineCalendar] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMixin {
   /// Creates lifted state control.
   ///
@@ -17,22 +19,13 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
     bool toggleable,
   }) = Lifted;
 
-  /// Creates managed control using a [FCalendarController].
-  ///
-  /// Either [controller] or [initial] can be provided. If neither is provided,
-  /// an internal controller with default date (null) is created.
-  ///
-  /// The [onChange] callback is invoked when the date changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [toggleable] is true.
+  /// Creates a [FLineCalendarControl].
   const factory FLineCalendarControl.managed({
     FCalendarController<DateTime?>? controller,
     DateTime? initial,
     bool toggleable,
     ValueChanged<DateTime?>? onChange,
-  }) = Managed;
+  }) = FLineCalendarManagedControl;
 
   const FLineCalendarControl._();
 
@@ -55,31 +48,48 @@ class Lifted extends FLineCalendarControl with _$LiftedMixin {
   const Lifted({required this.value, required this.onChange, this.toggleable = false}) : super._();
 
   @override
-  FCalendarController<DateTime?> _create() => _Controller(value: value, onChange: onChange, toggleable: toggleable);
+  FCalendarController<DateTime?> createController() => _Controller(value: value, onChange: onChange, toggleable: toggleable);
 
   @override
   void _updateController(FCalendarController<DateTime?> controller) =>
       (controller as _Controller).update(value, onChange, toggleable);
 }
 
-@internal
-class Managed extends FLineCalendarControl with Diagnosticable, _$ManagedMixin {
+/// A [FLineCalendarManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticable, _$FLineCalendarManagedControlMixin {
+  /// The controller.
   @override
   final FCalendarController<DateTime?>? controller;
+
+  /// The initial date. Defaults to null.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final DateTime? initial;
+
+  /// Whether the selection is toggleable. Defaults to false.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [toggleable] is true and [controller] is provided.
   @override
   final bool toggleable;
+
+  /// Called when the selected date changes.
   @override
   final ValueChanged<DateTime?>? onChange;
 
-  const Managed({this.controller, this.initial, this.toggleable = false, this.onChange})
+  /// Creates a [FLineCalendarControl].
+  const FLineCalendarManagedControl({this.controller, this.initial, this.toggleable = false, this.onChange})
     : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
       assert(controller == null || !toggleable, 'Cannot provide both controller and toggleable.'),
       super._();
 
   @override
-  FCalendarController<DateTime?> _create() =>
+  FCalendarController<DateTime?> createController() =>
       controller ?? FCalendarController.date(initialSelection: initial, toggleable: toggleable);
 }
 

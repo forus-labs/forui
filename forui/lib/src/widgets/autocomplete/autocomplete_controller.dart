@@ -22,7 +22,7 @@ class FAutocompleteController extends FTypeaheadController {
     required TickerProvider vsync,
     super.text,
     super.suggestions,
-    FPopoverMotion popoverMotion = const FPopoverMotion(),
+    FPopoverMotion popoverMotion = const .new(),
   }) : popover = FPopoverController(vsync: vsync, motion: popoverMotion),
        super(
          textStyles: (context) {
@@ -105,7 +105,7 @@ class _Controller extends FAutocompleteController {
     }
 
     _onValueChange = onValueChange;
-    _popover = InternalPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
+    _popover = InternalFPopoverController.updateNested(_popover, vsync, popoverShown, onPopoverChange);
   }
 
   @override
@@ -151,8 +151,18 @@ class InheritedAutocompleteController extends InheritedWidget {
   }
 }
 
-/// Defines how [FAutocomplete]'s state is controlled.
+/// A [FAutocompleteControl] defines how a [FAutocomplete] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMixin {
+  /// Creates a [FAutocompleteControl].
+  const factory FAutocompleteControl.managed({
+    FAutocompleteController? controller,
+    TextEditingValue? initial,
+    ValueChanged<TextEditingValue>? onChange,
+    FPopoverMotion? motion,
+  }) = FAutocompleteManagedControl;
+
   /// Creates lifted state control.
   ///
   /// Text is always lifted.
@@ -168,18 +178,6 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
     FPopoverMotion motion,
   }) = Lifted;
 
-  /// Creates managed control using an [FAutocompleteController].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
-  /// Throws [AssertionError] if both [controller] and [motion] are provided.
-  const factory FAutocompleteControl.managed({
-    FAutocompleteController? controller,
-    TextEditingValue? initial,
-    ValueChanged<TextEditingValue>? onChange,
-    FPopoverMotion? motion,
-  }) = Managed;
-
   const FAutocompleteControl._();
 
   (FAutocompleteController, bool) _update(
@@ -189,6 +187,44 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
     TickerProvider vsync,
     FutureOr<Iterable<String>> Function(String) filter,
   );
+}
+
+/// A [FAutocompleteManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompleteManagedControlMixin {
+  /// The controller.
+  @override
+  final FAutocompleteController? controller;
+
+  /// The initial value. Defaults to null.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
+  @override
+  final TextEditingValue? initial;
+
+  /// Called when the value changes.
+  @override
+  final ValueChanged<TextEditingValue>? onChange;
+
+  /// The popover motion. Defaults to [FPopoverMotion].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [motion] and [controller] are both provided.
+  @override
+  final FPopoverMotion? motion;
+
+  /// Creates a [FAutocompleteControl].
+  const FAutocompleteManagedControl({this.controller, this.initial, this.onChange, this.motion})
+    : assert(controller == null || initial == null, 'Cannot provide both a controller and initial.'),
+      assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
+      super._();
+
+  @override
+  FAutocompleteController createController(TickerProvider vsync, FutureOr<Iterable<String>> Function(String) _) =>
+      controller ?? .fromValue(initial, vsync: vsync, popoverMotion: motion ?? const FPopoverMotion());
 }
 
 @internal
@@ -217,17 +253,15 @@ class Lifted extends FAutocompleteControl with _$LiftedMixin {
        super._();
 
   @override
-  FAutocompleteController _create(
-    TickerProvider vsync,
-    FutureOr<Iterable<String>> Function(String) _,
-  ) => _Controller(
-    value,
-    vsync: vsync,
-    onValueChange: onValueChange,
-    popoverShown: popoverShown,
-    onPopoverChange: onPopoverChange,
-    popoverMotion: motion,
-  );
+  FAutocompleteController createController(TickerProvider vsync, FutureOr<Iterable<String>> Function(String) _) =>
+      _Controller(
+        value,
+        vsync: vsync,
+        onValueChange: onValueChange,
+        popoverShown: popoverShown,
+        onPopoverChange: onPopoverChange,
+        popoverMotion: motion,
+      );
 
   @override
   void _updateController(
@@ -239,28 +273,4 @@ class Lifted extends FAutocompleteControl with _$LiftedMixin {
       ..update(vsync, value, onValueChange, popoverShown, onPopoverChange)
       ..loadSuggestions(filter(controller.text));
   }
-}
-
-@internal
-class Managed extends FAutocompleteControl with _$ManagedMixin {
-  @override
-  final FAutocompleteController? controller;
-  @override
-  final TextEditingValue? initial;
-  @override
-  final ValueChanged<TextEditingValue>? onChange;
-  @override
-  final FPopoverMotion? motion;
-
-  const Managed({this.controller, this.initial, this.onChange, this.motion})
-    : assert(controller == null || initial == null, 'Cannot provide both a controller and initial.'),
-      assert(controller == null || motion == null, 'Cannot provide both controller and motion.'),
-      super._();
-
-  @override
-  FAutocompleteController _create(
-    TickerProvider vsync,
-    FutureOr<Iterable<String>> Function(String) _,
-  ) =>
-      controller ?? .fromValue(initial, vsync: vsync, popoverMotion: motion ?? const FPopoverMotion());
 }

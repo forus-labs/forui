@@ -129,11 +129,11 @@ extension InternalFAccordionController on FAccordionController {
 }
 
 @internal
-class ProxyController extends FAccordionController {
+class ProxyAccordionController extends FAccordionController {
   bool Function(int index) _supply;
   void Function(int index, bool expanded) _onChange;
 
-  ProxyController(this._supply, this._onChange, int length) {
+  ProxyAccordionController(this._supply, this._onChange, int length) {
     _expanded = {
       for (var i = 0; i < length; i++)
         if (_supply(i)) i,
@@ -163,8 +163,18 @@ class ProxyController extends FAccordionController {
   }
 }
 
-/// Defines how the accordion's expanded state is controlled.
+/// A [FAccordionControl] defines how a [FAccordion] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
+  /// Creates a [FAccordionManagedControl].
+  const factory FAccordionControl.managed({
+    FAccordionController? controller,
+    int? min,
+    int? max,
+    void Function(Set<int> expanded)? onChange,
+  }) = FAccordionManagedControl;
+
   /// Creates a [FAccordionControl] for controlling an accordion using lifted state.
   ///
   /// The [expanded] function should return true if the item at the given index is expanded. It must be idempotent.
@@ -173,22 +183,6 @@ sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
     required bool Function(int index) expanded,
     required void Function(int index, bool expanded) onChange,
   }) = _Lifted;
-
-  /// Creates a [FAccordionControl] for controlling an accordion using a controller.
-  ///
-  /// Either [controller], or [min]/[max] constraints should be provided. If neither is provided, an internal controller
-  /// with no min and max is created.
-  ///
-  /// The [onChange] callback is invoked when the expanded state changes, receiving the set of currently expanded indices.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [min]/[max] are provided.
-  const factory FAccordionControl.managed({
-    FAccordionController? controller,
-    int? min,
-    int? max,
-    void Function(Set<int> expanded)? onChange,
-  }) = Managed;
 
   const FAccordionControl._();
 
@@ -200,6 +194,50 @@ sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
   );
 }
 
+/// A [FAccordionManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FAccordionManagedControl extends FAccordionControl with _$FAccordionManagedControlMixin {
+  /// The controller.
+  @override
+  final FAccordionController? controller;
+  /// The minimum number of expanded items. Defaults to 0.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * [min] is negative
+  /// * [max] is less than [min]
+  /// * [min] and [controller] are provided.
+  @override
+  final int? min;
+  /// The maximum number of expanded items. Defaults to no limit.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * [max] is less than [min]
+  /// * [max] and [controller] are provided.
+  @override
+  final int? max;
+  /// Called when the set of expanded items changes.
+  @override
+  final ValueChanged<Set<int>>? onChange;
+
+  /// Creates a [FAccordionControl].
+  const FAccordionManagedControl({this.controller, this.min, this.max, this.onChange})
+      : assert(
+          controller == null || (min == null && max == null),
+          'Cannot provide both controller and min/max constraints',
+        ),
+        assert(min == null || min >= 0, 'min must be non-negative'),
+        assert(max == null || min == null || max >= min, 'max must be greater than or equal to min'),
+        super._();
+
+
+  @override
+  FAccordionController createController(int children) => controller ?? .new(min: min ?? 0, max: max);
+}
+
 final class _Lifted extends FAccordionControl with _$_LiftedMixin {
   @override
   final bool Function(int index) expanded;
@@ -209,33 +247,9 @@ final class _Lifted extends FAccordionControl with _$_LiftedMixin {
   const _Lifted({required this.expanded, required this.onChange}) : super._();
 
   @override
-  FAccordionController _create(int children) => ProxyController(expanded, onChange, children);
+  FAccordionController createController(int children) => ProxyAccordionController(expanded, onChange, children);
 
   @override
   void _updateController(FAccordionController controller, int children) =>
-      (controller as ProxyController).update(expanded, onChange, children);
-}
-
-@internal
-final class Managed extends FAccordionControl with _$ManagedMixin {
-  @override
-  final FAccordionController? controller;
-  @override
-  final int? min;
-  @override
-  final int? max;
-  @override
-  final ValueChanged<Set<int>>? onChange;
-
-  const Managed({this.controller, this.min, this.max, this.onChange})
-    : assert(
-        controller == null || (min == null && max == null),
-        'Cannot provide both controller and min/max constraints',
-      ),
-      assert(min == null || min >= 0, 'min must be non-negative'),
-      assert(max == null || min == null || max >= min, 'max must be greater than or equal to min'),
-      super._();
-
-  @override
-  FAccordionController _create(int children) => controller ?? .new(min: min ?? 0, max: max);
+      (controller as ProxyAccordionController).update(expanded, onChange, children);
 }

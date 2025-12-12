@@ -86,7 +86,7 @@ class _FPickerState extends State<FPicker> {
   }
 
   void _handleChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FPickerManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

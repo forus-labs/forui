@@ -195,7 +195,7 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
   }
 
   void _handleChange() {
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FSelectGroupManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

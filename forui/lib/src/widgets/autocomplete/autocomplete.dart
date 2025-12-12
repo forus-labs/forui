@@ -734,7 +734,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       _controller.loadSuggestions(_data = widget.filter(_controller.text));
     });
 
-    if (widget.control case Managed(:final onChange?)) {
+    if (widget.control case FAutocompleteManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }

@@ -356,7 +356,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
   }
 
   void _handleOnChange() {
-    if (widget.popoverControl case Managed(:final onChange?)) {
+    if (widget.popoverControl case FPopoverManagedControl(:final onChange?)) {
       onChange(_controller.status.isForwardOrCompleted);
     }
   }

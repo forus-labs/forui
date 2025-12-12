@@ -4,20 +4,19 @@ import 'package:flutter/foundation.dart';
 
 part 'obscure_text_control.control.dart';
 
-/// Defines how the password field's obscure text is controlled.
+/// A [FObscureTextControl] defines how a [FPasswordField]'s obscured state is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FObscureTextControl with Diagnosticable, _$FObscureTextControlMixin {
   /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
   const factory FObscureTextControl.lifted({required bool value, required ValueChanged<bool> onChange}) = Lifted;
 
-  /// Creates a [FObscureTextControl] for controlling the obscure text using a controller.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [initial] are provided.
+  /// Creates a [FObscureTextControl].
   const factory FObscureTextControl.managed({
     ValueNotifier<bool>? controller,
     bool initial,
     ValueChanged<bool>? onChange,
-  }) = Managed;
+  }) = FObscureTextManagedControl;
 
   const FObscureTextControl._();
 
@@ -34,27 +33,39 @@ final class Lifted extends FObscureTextControl with _$LiftedMixin {
   const Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  ValueNotifier<bool> _create() => _Controller(value, onChange);
+  ValueNotifier<bool> createController() => _Controller(value, onChange);
 
   @override
   void _updateController(ValueNotifier<bool> controller) => (controller as _Controller).update(value, onChange);
 }
 
-@internal
-final class Managed extends FObscureTextControl with _$ManagedMixin {
+/// A [FObscureTextManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+final class FObscureTextManagedControl extends FObscureTextControl with _$FObscureTextManagedControlMixin {
+  /// The controller.
   @override
   final ValueNotifier<bool>? controller;
+
+  /// Whether the text is initially obscured. Defaults to true.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] is false and [controller] is provided.
   @override
   final bool initial;
+
+  /// Called when the obscured state changes.
   @override
   final ValueChanged<bool>? onChange;
 
-  const Managed({this.controller, this.initial = true, this.onChange})
+  /// Creates a [FObscureTextControl].
+  const FObscureTextManagedControl({this.controller, this.initial = true, this.onChange})
     : assert(controller == null || initial, 'Cannot provide both an initial value and a controller.'),
       super._();
 
   @override
-  ValueNotifier<bool> _create() => controller ?? ValueNotifier(initial);
+  ValueNotifier<bool> createController() => controller ?? ValueNotifier(initial);
 }
 
 class _Controller extends ValueNotifier<bool> {

@@ -80,7 +80,7 @@ class FPopoverController extends FChangeNotifier {
 }
 
 @internal
-extension InternalPopoverController on FPopoverController {
+extension InternalFPopoverController on FPopoverController {
   /// Updates the given [controller] based on the [shown] and [onChange].
   ///
   /// Typically used when updating a popover controller nested in another controller.
@@ -156,8 +156,17 @@ class LiftedPopoverController extends FPopoverController {
   Future<void> hide() async => _onChange(false);
 }
 
-/// Defines how a popover's shown state is controlled.
+/// A [FPopoverControl] defines how a [FPopover] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
 sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
+  /// Creates a [FPopoverControl].
+  const factory FPopoverControl.managed({
+    FPopoverController? controller,
+    FPopoverMotion? motion,
+    ValueChanged<bool>? onChange,
+  }) = FPopoverManagedControl;
+
   /// Creates a [FPopoverControl] for controlling a popover using lifted state.
   ///
   /// The [shown] parameter indicates whether the popover is currently shown.
@@ -166,22 +175,7 @@ sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
     required bool shown,
     required ValueChanged<bool> onChange,
     FPopoverMotion motion,
-  }) = Lifted;
-
-  /// Creates a [FPopoverControl] for controlling a popover using a controller.
-  ///
-  /// Either [controller] or [motion] can be provided. If neither is provided,
-  /// an internal controller with default motion is created.
-  ///
-  /// The [onChange] callback is invoked when the popover's shown state changes.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if both [controller] and [motion] are provided.
-  const factory FPopoverControl.managed({
-    FPopoverController? controller,
-    FPopoverMotion? motion,
-    ValueChanged<bool>? onChange,
-  }) = Managed;
+  }) = _Lifted;
 
   const FPopoverControl._();
 
@@ -193,8 +187,37 @@ sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
   );
 }
 
-@internal
-class Lifted extends FPopoverControl with _$LiftedMixin {
+/// A [FPopoverManagedControl] enables widgets to manage their own controller internally while exposing parameters for
+/// common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FPopoverManagedControl extends FPopoverControl with Diagnosticable, _$FPopoverManagedControlMixin {
+  /// The controller.
+  @override
+  final FPopoverController? controller;
+
+  /// The popover motion. Defaults to [FPopoverMotion].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [motion] and [controller] are both provided.
+  @override
+  final FPopoverMotion? motion;
+
+  /// Called when the shown state changes.
+  @override
+  final ValueChanged<bool>? onChange;
+
+  /// Creates a [FPopoverControl].
+  const FPopoverManagedControl({this.controller, this.motion, this.onChange})
+      : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
+        super._();
+
+  @override
+  FPopoverController createController(TickerProvider vsync) =>
+      controller ?? .new(vsync: vsync, motion: motion ?? const .new());
+}
+
+class _Lifted extends FPopoverControl with _$_LiftedMixin {
   @override
   final bool shown;
   @override
@@ -202,31 +225,13 @@ class Lifted extends FPopoverControl with _$LiftedMixin {
   @override
   final FPopoverMotion motion;
 
-  const Lifted({required this.shown, required this.onChange, this.motion = const .new()}) : super._();
+  const _Lifted({required this.shown, required this.onChange, this.motion = const .new()}) : super._();
 
   @override
-  FPopoverController _create(TickerProvider vsync) =>
+  FPopoverController createController(TickerProvider vsync) =>
       LiftedPopoverController(vsync: vsync, shown, onChange, motion: motion);
 
   @override
   void _updateController(FPopoverController controller, TickerProvider vsync) =>
       (controller as LiftedPopoverController).update(shown, onChange);
-}
-
-@internal
-class Managed extends FPopoverControl with Diagnosticable, _$ManagedMixin {
-  @override
-  final FPopoverController? controller;
-  @override
-  final FPopoverMotion? motion;
-  @override
-  final ValueChanged<bool>? onChange;
-
-  const Managed({this.controller, this.motion, this.onChange})
-    : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
-      super._();
-
-  @override
-  FPopoverController _create(TickerProvider vsync) =>
-      controller ?? .new(vsync: vsync, motion: motion ?? const .new());
 }
