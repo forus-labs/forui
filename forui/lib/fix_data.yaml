@@ -268,6 +268,18 @@ transforms:
           - kind: removeParameter
             name: 'initialText'
 
+  - title: 'Remove FAutocompleteController vsync and popoverMotion parameters'
+    date: 2025-12-12
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAutocompleteController
+    changes:
+      - kind: removeParameter
+        name: 'vsync'
+      - kind: removeParameter
+        name: 'popoverMotion'
+
 
   # FCalendar
   - title: 'Migrate FCalendar(controller: ...) to control parameter'

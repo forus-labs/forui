@@ -1,10 +1,10 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-
-// ignore_for_file: avoid_positional_boolean_parameters
 
 part 'accordion_controller.control.dart';
 
@@ -147,7 +147,6 @@ class ProxyAccordionController extends FAccordionController {
       for (var i = 0; i < length; i++)
         if (_supply(i)) i,
     };
-
   }
 
   @override
@@ -172,7 +171,7 @@ sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
     FAccordionController? controller,
     int? min,
     int? max,
-    void Function(Set<int> expanded)? onChange,
+    ValueChanged<Set<int>>? onChange,
   }) = FAccordionManagedControl;
 
   /// Creates a [FAccordionControl] for controlling an accordion using lifted state.
@@ -202,43 +201,32 @@ class FAccordionManagedControl extends FAccordionControl with _$FAccordionManage
   /// The controller.
   @override
   final FAccordionController? controller;
+
   /// The minimum number of expanded items. Defaults to 0.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * [min] is negative
-  /// * [max] is less than [min]
-  /// * [min] and [controller] are provided.
   @override
   final int? min;
+
   /// The maximum number of expanded items. Defaults to no limit.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * [max] is less than [min]
-  /// * [max] and [controller] are provided.
   @override
   final int? max;
+
   /// Called when the set of expanded items changes.
   @override
   final ValueChanged<Set<int>>? onChange;
 
   /// Creates a [FAccordionControl].
   const FAccordionManagedControl({this.controller, this.min, this.max, this.onChange})
-      : assert(
-          controller == null || (min == null && max == null),
-          'Cannot provide both controller and min/max constraints',
-        ),
-        assert(min == null || min >= 0, 'min must be non-negative'),
-        assert(max == null || min == null || max >= min, 'max must be greater than or equal to min'),
-        super._();
-
+    : assert(
+        controller == null || (min == null && max == null),
+        'Cannot provide both controller and min/max constraints',
+      ),
+      super._();
 
   @override
-  FAccordionController createController(int children) => controller ?? .new(min: min ?? 0, max: max);
+  FAccordionController createController(int _) => controller ?? .new(min: min ?? 0, max: max);
 }
 
-final class _Lifted extends FAccordionControl with _$_LiftedMixin {
+class _Lifted extends FAccordionControl with _$_LiftedMixin {
   @override
   final bool Function(int index) expanded;
   @override

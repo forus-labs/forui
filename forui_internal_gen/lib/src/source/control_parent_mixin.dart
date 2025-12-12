@@ -66,7 +66,11 @@ class ControlParentMixin {
   Method get _createController => Method(
     (m) => m
       ..annotations.add(refer('visibleForOverriding'))
-      ..docs.add('/// Creates a [$_returnType].')
+      ..docs.addAll([
+        '/// Creates a [$_returnType].',
+        '///',
+        '/// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`',
+      ])
       ..returns = refer(_returnType)
       ..name = 'createController'
       ..requiredParameters.addAll([

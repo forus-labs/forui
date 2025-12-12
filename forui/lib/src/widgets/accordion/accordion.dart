@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
 part 'accordion.design.dart';
 

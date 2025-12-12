@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 part 'obscure_text_control.control.dart';
 
-/// A [FObscureTextControl] defines how a [FPasswordField]'s obscured state is controlled.
+/// A [FObscureTextControl] defines how a password field's obscured state is controlled.
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FObscureTextControl with Diagnosticable, _$FObscureTextControlMixin {

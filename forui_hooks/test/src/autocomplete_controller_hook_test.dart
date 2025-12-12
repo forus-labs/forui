@@ -16,7 +16,7 @@ void main() {
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFAutocompleteController(vsync: tester);
+            controller = useFAutocompleteController();
             return FAutocomplete(
               control: .managed(controller: controller),
               items: const [],
@@ -26,7 +26,7 @@ void main() {
       ),
     );
 
-    unawaited(controller.popover.show());
+    unawaited(controller.loadSuggestions([]));
 
     await tester.pumpAndSettle();
   });

@@ -197,6 +197,12 @@ class _Date extends FCalendarManagedControl<DateTime?> {
         toggleable: toggleable,
         truncateAndStripTimezone: truncateAndStripTimezone,
       );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<bool>('toggleable', toggleable));
+  }
 }
 
 class _Dates extends FCalendarManagedControl<Set<DateTime>> {

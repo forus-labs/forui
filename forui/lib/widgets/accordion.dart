@@ -6,6 +6,5 @@
 library forui.widgets.accordion;
 
 export '../src/widgets/accordion/accordion.dart' hide InheritedAccordionData;
-export '../src/widgets/accordion/accordion_controller.dart'
-    hide FAccordionManagedControl, InternalFAccordionControl, InternalFAccordionController, ProxyAccordionController;
+export '../src/widgets/accordion/accordion_controller.dart' hide InternalFAccordionControl, InternalFAccordionController, ProxyAccordionController;
 export '../src/widgets/accordion/accordion_item.dart';

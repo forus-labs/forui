@@ -19,6 +19,7 @@ dart fix --apply
 
 
 ### `FAutocomplete`
+* Add `FAutocomplete.popoverControl`.
 * Add `FAutocompleteControl`.
 * Add `FAutocompleteItemMixin.item(...)`.
 * Add `FAutocompleteItemMixin.raw(...)`.
@@ -29,6 +30,13 @@ dart fix --apply
 * **Breaking** Rename `FAutocomplete.shift` to `FAutocomplete.overflow`.
 * **Breaking** Remove `FAutocomplete.controller`. Use `FAutocomplete(control: .managed(...))` instead.
 * **Breaking** Remove `FAutocomplete.initialText`. Use `FAutocomplete(control: .managed(...))` instead.
+* **Breaking** Remove `FAutocompleteController.vsync`. Use `FAutocomplete(popoverControl: ...)` instead.
+* **Breaking** Remove `FAutocompleteController.popoverMotion`. Use `FAutocomplete(popoverControl: .managed(motion: ...))` instead.
+* **Breaking** Remove `FAutocompleteController.content`. Use `FAutocomplete(popoverControl: .managed(controller: ...))` instead.
+* **Breaking** Remove `FAutocompleteControl.lifted(popoverShown: ...)`. Use `FAutocomplete(popoverControl: .lifted(...))` instead.
+* **Breaking** Remove `FAutocompleteControl.lifted(onPopoverChange: ...)`. Use `FAutocomplete(popoverControl: .lifted(...))` instead.
+* **Breaking** Remove `FAutocompleteControl.lifted(motion: ...)`. Use `FAutocomplete(popoverControl: .managed(motion: ...))` instead.
+* **Breaking** Remove `FAutocompleteControl.managed(motion: ...)`. Use `FAutocomplete(popoverControl: .managed(motion: ...))` instead.
 * **Breaking** Change `FAutocompleteContentStyle` to extend `FPopoverStyle`.
 * **Breaking** Remove `FAutocompleteStyle.popoverStyle` - use `FAutocompleteStyle.contentStyle` instead.
 

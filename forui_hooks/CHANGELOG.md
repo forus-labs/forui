@@ -1,4 +1,5 @@
 ## 0.17.0
+* **Breaking** Remove `useFAutocompleteController(vsync: ...)`.
 * **Breaking** Remove `useFSelectTileGroupController`. Use `useFSelectGroupController` instead.
 * **Breaking** Remove `useFSelectMenuTileController`. Use `useFSelectGroupController` instead.
 * **Breaking** Remove `useFRadioSelectMenuTileController`. Use `useFRadioSelectGroupController` instead.

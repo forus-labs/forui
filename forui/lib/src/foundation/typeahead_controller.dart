@@ -68,8 +68,7 @@ class FTypeaheadController extends TextEditingController {
   void complete() {
     if (current case (completion: final _, :final replacement)) {
       current = null;
-      // We call super.value to avoid finding completions.
-      super.value = TextEditingValue(
+      rawValue = TextEditingValue(
         text: replacement,
         selection: .collapsed(offset: replacement.length),
       );
@@ -155,8 +154,15 @@ class FTypeaheadController extends TextEditingController {
       // We have to pass in the new text since value is not updated yet.
       findCompletion(newValue.text);
     }
-    super.value = newValue;
+    rawValue = newValue;
   }
+
+  /// The raw value of the controller without triggering completion logic.
+  @protected
+  TextEditingValue get rawValue => super.value;
+
+  @protected
+  set rawValue(TextEditingValue newValue) => super.value = newValue;
 
   /// The current completion and corresponding replacement text, or null if no completion is available.
   ({String completion, String replacement})? get current => _current;

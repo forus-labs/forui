@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 import 'package:meta/meta.dart';
 
@@ -53,8 +54,13 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
 
   /// Defines how the autocomplete's state is controlled.
   ///
-  /// Defaults to [FAutocompleteControl.managed] which creates an internal [FAutocompleteController].
+  /// Defaults to [FAutocompleteControl.managed].
   final FAutocompleteControl control;
+
+  /// Defines how the autocomplete's popover is controlled.
+  ///
+  /// Defaults to [FPopoverControl.managed].
+  final FPopoverControl popoverControl;
 
   /// The style.
   ///
@@ -312,6 +318,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   FAutocomplete({
     required List<String> items,
     FAutocompleteControl control = const .managed(),
+    FPopoverControl popoverControl = const .managed(),
     FAutocompleteStyle Function(FAutocompleteStyle style)? style,
     Widget? label,
     String? hint,
@@ -399,6 +406,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          contentBuilder:
              contentBuilder ?? (context, query, values) => [for (final value in values) .item(value: value)],
          control: control,
+         popoverControl: popoverControl,
          style: style,
          label: label,
          hint: hint,
@@ -485,6 +493,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     required this.filter,
     required this.contentBuilder,
     this.control = const .managed(),
+    this.popoverControl = const .managed(),
     this.style,
     this.label,
     this.hint,
@@ -573,6 +582,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
@@ -665,6 +675,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
 
 class _State extends State<FAutocomplete> with TickerProviderStateMixin {
   late FAutocompleteController _controller;
+  late FPopoverController _popoverController;
   late FutureOr<Iterable<String>> _data;
   late FocusNode _fieldFocus;
   late FocusScopeNode _popoverFocus;
@@ -680,9 +691,10 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     super.initState();
     _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     _fieldFocus.addListener(_focus);
-    _controller = widget.control.create(_update, this, (_) => []);
-    _controller.loadSuggestions(_data = widget.filter(_controller.text));
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
+    _popoverController = widget.popoverControl.create(() {}, this);
+    _controller = widget.control.create(_update, widget.filter);
+    _controller.loadSuggestions(_data = widget.filter(_controller.text));
   }
 
   @override
@@ -696,11 +708,12 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     }
 
-    final (controller, updated) = widget.control.update(old.control, _controller, _update, this, widget.filter);
+    final (controller, updated) = widget.control.update(old.control, _controller, _update, widget.filter);
     if (updated) {
       _controller = controller;
       _controller.loadSuggestions(widget.filter(_controller.text));
     }
+    _popoverController = widget.popoverControl.update(old.popoverControl, _popoverController, () {}, this).$1;
   }
 
   @override
@@ -711,6 +724,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       _fieldFocus.dispose();
     }
 
+    widget.popoverControl.dispose(_popoverController, () {});
     widget.control.dispose(_controller, _update);
     super.dispose();
   }
@@ -720,11 +734,11 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       return;
     }
 
-    if (_fieldFocus.hasFocus && !_controller.popover.status.isForwardOrCompleted) {
+    if (_fieldFocus.hasFocus && !_popoverController.status.isForwardOrCompleted) {
       final current = ++_monotonic;
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (current == _monotonic) {
-          _controller.popover.show();
+          _popoverController.show();
         }
       });
     }
@@ -747,11 +761,11 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
       }
       _tapFocus = false;
-      _controller.popover.show();
+      _popoverController.show();
       // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
       // in the empty popover.
     } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
-      _controller.popover.hide();
+      _popoverController.hide();
     }
 
     _restore = null;
@@ -805,7 +819,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         showCursor: widget.showCursor,
         maxLength: widget.maxLength,
         maxLengthEnforcement: widget.maxLengthEnforcement,
-        onTap: _controller.popover.show,
+        onTap: _popoverController.show,
         onTapAlwaysCalled: true,
         onEditingComplete: widget.onEditingComplete,
         onSubmit: widget.onSubmit,
@@ -846,7 +860,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         builder: (context, _, states, field) => FocusTraversalGroup(
           policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
           child: FPopover(
-            control: .managed(controller: _controller.popover),
+            control: .managed(controller: _popoverController),
             style: style.contentStyle,
             constraints: widget.popoverConstraints,
             popoverAnchor: widget.anchor,
@@ -868,7 +882,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                 popover: popoverController,
                 onPress: (value) {
                   if (widget.autoHide) {
-                    _controller.popover.hide();
+                    _popoverController.hide();
                   }
                   _previous = value;
                   _controller.text = value;
@@ -898,7 +912,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
               states: states,
               child: CallbackShortcuts(
                 bindings: {
-                  const SingleActivator(.escape): _controller.popover.hide,
+                  const SingleActivator(.escape): _popoverController.hide,
                   const SingleActivator(.arrowDown): () => _popoverFocus.descendants.firstOrNull?.requestFocus(),
                   if (_controller.current case (:final replacement, completion: final _))
                     const SingleActivator(.tab): () => _complete(replacement),
@@ -919,7 +933,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
 
   void _complete(String replacement) {
     if (widget.autoHide) {
-      _controller.popover.hide();
+      _popoverController.hide();
     }
     _previous = replacement;
     _controller.complete();
