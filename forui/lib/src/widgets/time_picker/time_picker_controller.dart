@@ -248,10 +248,8 @@ class Lifted extends FTimePickerControl with _$LiftedMixin {
   }) : super._();
 
   @override
-  FTimePickerController _create(VoidCallback callback, DateFormat format, int hourInterval, int minuteInterval) =>
-      (_Controller(value: value, onChange: onChange))
-        ..configure(format, hourInterval, minuteInterval)
-        ..addListener(callback);
+  FTimePickerController _create(DateFormat format, int hourInterval, int minuteInterval) =>
+      (_Controller(value: value, onChange: onChange))..configure(format, hourInterval, minuteInterval);
 
   @override
   void _updateController(FTimePickerController controller, DateFormat format, int hourInterval, int minuteInterval) {
@@ -275,8 +273,7 @@ class Managed extends FTimePickerControl with Diagnosticable, _$ManagedMixin {
       super._();
 
   @override
-  FTimePickerController _create(VoidCallback callback, DateFormat format, int hourInterval, int minuteInterval) =>
+  FTimePickerController _create(DateFormat format, int hourInterval, int minuteInterval) =>
       (controller ?? FTimePickerController(initial: initial ?? const FTime()))
-        ..configure(format, hourInterval, minuteInterval)
-        ..addListener(callback);
+        ..configure(format, hourInterval, minuteInterval);
 }

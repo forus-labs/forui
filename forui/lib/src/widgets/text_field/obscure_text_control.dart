@@ -34,7 +34,7 @@ final class Lifted extends FObscureTextControl with _$LiftedMixin {
   const Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  ValueNotifier<bool> _create(VoidCallback callback) => _Controller(value, onChange)..addListener(callback);
+  ValueNotifier<bool> _create() => _Controller(value, onChange);
 
   @override
   void _updateController(ValueNotifier<bool> controller) => (controller as _Controller).update(value, onChange);
@@ -54,7 +54,7 @@ final class Managed extends FObscureTextControl with _$ManagedMixin {
       super._();
 
   @override
-  ValueNotifier<bool> _create(VoidCallback callback) => (controller ?? ValueNotifier(initial))..addListener(callback);
+  ValueNotifier<bool> _create() => controller ?? ValueNotifier(initial);
 }
 
 class _Controller extends ValueNotifier<bool> {

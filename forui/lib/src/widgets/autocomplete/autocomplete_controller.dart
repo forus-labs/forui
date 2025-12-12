@@ -218,7 +218,6 @@ class Lifted extends FAutocompleteControl with _$LiftedMixin {
 
   @override
   FAutocompleteController _create(
-    VoidCallback callback,
     TickerProvider vsync,
     FutureOr<Iterable<String>> Function(String) _,
   ) => _Controller(
@@ -228,7 +227,7 @@ class Lifted extends FAutocompleteControl with _$LiftedMixin {
     popoverShown: popoverShown,
     onPopoverChange: onPopoverChange,
     popoverMotion: motion,
-  )..addListener(callback);
+  );
 
   @override
   void _updateController(
@@ -260,10 +259,8 @@ class Managed extends FAutocompleteControl with _$ManagedMixin {
 
   @override
   FAutocompleteController _create(
-    VoidCallback callback,
     TickerProvider vsync,
     FutureOr<Iterable<String>> Function(String) _,
   ) =>
-      (controller ?? .fromValue(initial, vsync: vsync, popoverMotion: motion ?? const FPopoverMotion()))
-        ..addListener(callback);
+      controller ?? .fromValue(initial, vsync: vsync, popoverMotion: motion ?? const FPopoverMotion());
 }

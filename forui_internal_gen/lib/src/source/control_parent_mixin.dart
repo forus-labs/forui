@@ -58,7 +58,7 @@ class ControlParentMixin {
       ..name = '_create'
       ..requiredParameters.addAll([
         for (final parameter in update.formalParameters)
-          if (parameter.name case final name? when name != 'old' && name != 'controller')
+          if (parameter.name case final name? when name != 'old' && name != 'controller' && name != 'callback')
             Parameter(
               (p) => p
                 ..name = name

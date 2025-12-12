@@ -137,12 +137,12 @@ class _LiftedControlMixin extends ControlMixin {
         // External -> Lifted
         case ${siblings.first.name}(controller: _?):
           controller.removeListener(callback);
-          return (_create($_createParameters), true);
+          return (_create($_createParameters)..addListener(callback), true);
 
         // Internal -> Lifted
         case ${siblings.first.name}():
           controller.dispose();
-          return (_create($_createParameters), true);
+          return (_create($_createParameters)..addListener(callback), true);
 
         default:
           return (_default($_defaultParameters), false);
@@ -202,28 +202,28 @@ class _ManagedControlMixin extends ControlMixin {
         // External (Controller A) -> External (Controller B)
         case ${element.name}(controller: final old?) when this.controller != null && this.controller != old:
           controller.removeListener(callback);
-          return (_create($_createParameters), true);
+          return (_create($_createParameters)..addListener(callback), true);
 
         // Internal -> External
         case ${element.name}(controller: final old) when this.controller != null && old == null:
           controller.dispose();
-          return (_create($_createParameters), true);
+          return (_create($_createParameters)..addListener(callback), true);
 
         // External -> Internal
         case ${element.name}(controller: _?) when this.controller == null:
           controller.removeListener(callback);
-          return (_create($_createParameters), true);
+          return (_create($_createParameters)..addListener(callback), true);
 
         // Lifted -> Managed
         case ${siblings.first.name}():
           controller.dispose();
-          return (_create($_createParameters), true);
-          
+          return (_create($_createParameters)..addListener(callback), true);
+
         ${element.isAbstract ? '''
         // Internal -> Internal (different type, e.g. Normal -> Cascade)
         case final ${element.name}$_typeParameters old when old != this:
           controller.dispose();
-          return (_create($_createParameters), true);
+          return (_create($_createParameters)..addListener(callback), true);
         ''' : ''}
 
         default:

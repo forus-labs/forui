@@ -163,8 +163,8 @@ class Lifted extends FCalendarControl<Object?> with _$LiftedMixin<Object?> {
   const Lifted({required this.selectable, required this.selected, required this.select}) : super._();
 
   @override
-  FCalendarController<Object?> _create(VoidCallback callback) =>
-      _Controller(selectable: selectable, selected: selected, select: select)..addListener(callback);
+  FCalendarController<Object?> _create() =>
+      _Controller(selectable: selectable, selected: selected, select: select);
 
   @override
   void _updateController(FCalendarController<Object?> controller) =>
@@ -211,41 +211,38 @@ class _Date extends Managed<DateTime?> with _$_DateMixin {
   }) : assert(controller == null || toggleable, 'Cannot provide both controller and toggleable.');
 
   @override
-  FCalendarController<DateTime?> _create(VoidCallback callback) =>
-      (controller ??
-            .date(
-              initialSelection: initial,
-              selectable: selectable,
-              toggleable: toggleable,
-              truncateAndStripTimezone: truncateAndStripTimezone,
-            ))
-        ..addListener(callback);
+  FCalendarController<DateTime?> _create() =>
+      controller ??
+      .date(
+        initialSelection: initial,
+        selectable: selectable,
+        toggleable: toggleable,
+        truncateAndStripTimezone: truncateAndStripTimezone,
+      );
 }
 
 class _Dates extends Managed<Set<DateTime>> with _$_DatesMixin {
   const _Dates({super.controller, super.initial, super.selectable, super.truncateAndStripTimezone, super.onChange});
 
   @override
-  FCalendarController<Set<DateTime>> _create(VoidCallback callback) =>
-      (controller ??
-            .dates(
-              initialSelections: initial ?? {},
-              selectable: selectable,
-              truncateAndStripTimezone: truncateAndStripTimezone,
-            ))
-        ..addListener(callback);
+  FCalendarController<Set<DateTime>> _create() =>
+      controller ??
+      .dates(
+        initialSelections: initial ?? {},
+        selectable: selectable,
+        truncateAndStripTimezone: truncateAndStripTimezone,
+      );
 }
 
 class _Range extends Managed<(DateTime, DateTime)?> with _$_RangeMixin {
   const _Range({super.controller, super.initial, super.selectable, super.truncateAndStripTimezone, super.onChange});
 
   @override
-  FCalendarController<(DateTime, DateTime)?> _create(VoidCallback callback) =>
-      (controller ??
-            .range(
-              initialSelection: initial,
-              selectable: selectable,
-              truncateAndStripTimezone: truncateAndStripTimezone,
-            ))
-        ..addListener(callback);
+  FCalendarController<(DateTime, DateTime)?> _create() =>
+      controller ??
+      .range(
+        initialSelection: initial,
+        selectable: selectable,
+        truncateAndStripTimezone: truncateAndStripTimezone,
+      );
 }

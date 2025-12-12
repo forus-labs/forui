@@ -314,7 +314,7 @@ class Lifted extends FDateFieldControl with _$LiftedMixin {
        super._();
 
   @override
-  FDateFieldController _create(VoidCallback callback, TickerProvider vsync) => _Controller(
+  FDateFieldController _create(TickerProvider vsync) => _Controller(
     vsync: vsync,
     value: value,
     onChange: onChange,
@@ -323,7 +323,7 @@ class Lifted extends FDateFieldControl with _$LiftedMixin {
     popoverShown: popoverShown,
     onPopoverChange: onPopoverChange,
     popoverMotion: motion,
-  )..addListener(callback);
+  );
 
   @override
   void _updateController(FDateFieldController controller, TickerProvider vsync) {
@@ -371,14 +371,13 @@ class Managed extends FDateFieldControl with Diagnosticable, _$ManagedMixin {
        super._();
 
   @override
-  FDateFieldController _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ??
-            FDateFieldController(
-              vsync: vsync,
-              initialDate: initial,
-              validator: validator ?? FDateFieldController._defaultValidator,
-              popoverMotion: popoverMotion ?? const FPopoverMotion(),
-              truncateAndStripTimezone: truncateAndStripTimezone,
-            ))
-        ..addListener(callback);
+  FDateFieldController _create(TickerProvider vsync) =>
+      controller ??
+      FDateFieldController(
+        vsync: vsync,
+        initialDate: initial,
+        validator: validator ?? FDateFieldController._defaultValidator,
+        popoverMotion: popoverMotion ?? const FPopoverMotion(),
+        truncateAndStripTimezone: truncateAndStripTimezone,
+      );
 }

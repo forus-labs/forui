@@ -224,14 +224,14 @@ class Lifted extends FTimeFieldControl with _$LiftedMixin {
        super._();
 
   @override
-  FTimeFieldController _create(VoidCallback callback, TickerProvider vsync) => _Controller(
+  FTimeFieldController _create(TickerProvider vsync) => _Controller(
     vsync: vsync,
     value: value,
     onChange: onChange,
     popoverShown: popoverShown,
     onPopoverChange: onPopoverChange,
     popoverMotion: motion,
-  )..addListener(callback);
+  );
 
   @override
   void _updateController(FTimeFieldController controller, TickerProvider vsync) =>
@@ -258,13 +258,12 @@ class Managed extends FTimeFieldControl with Diagnosticable, _$ManagedMixin {
       super._();
 
   @override
-  FTimeFieldController _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ??
-            FTimeFieldController(
-              vsync: vsync,
-              initialTime: initial,
-              validator: validator ?? FTimeFieldController._defaultValidator,
-              popoverMotion: popoverMotion ?? const FPopoverMotion(),
-            ))
-        ..addListener(callback);
+  FTimeFieldController _create(TickerProvider vsync) =>
+      controller ??
+      FTimeFieldController(
+        vsync: vsync,
+        initialTime: initial,
+        validator: validator ?? FTimeFieldController._defaultValidator,
+        popoverMotion: popoverMotion ?? const FPopoverMotion(),
+      );
 }

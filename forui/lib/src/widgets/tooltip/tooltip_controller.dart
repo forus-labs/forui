@@ -171,7 +171,7 @@ class Lifted extends FTooltipControl with _$LiftedMixin {
   const Lifted({required this.shown, required this.onChange, this.motion = const FTooltipMotion()}) : super._();
 
   @override
-  FTooltipController _create(VoidCallback callback, TickerProvider vsync) =>
+  FTooltipController _create(TickerProvider vsync) =>
       _Controller(vsync: vsync, shown, onChange, motion: motion);
 
   @override
@@ -193,6 +193,6 @@ class Managed extends FTooltipControl with Diagnosticable, _$ManagedMixin {
       super._();
 
   @override
-  FTooltipController _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ?? .new(vsync: vsync, motion: motion ?? const .new()))..addListener(callback);
+  FTooltipController _create(TickerProvider vsync) =>
+      controller ?? .new(vsync: vsync, motion: motion ?? const .new());
 }

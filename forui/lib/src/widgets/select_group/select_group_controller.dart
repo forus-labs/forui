@@ -76,8 +76,7 @@ final class Lifted<T> extends FSelectGroupControl<T> with _$LiftedMixin<T> {
   const Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  FSelectGroupController<T> _create(VoidCallback callback) =>
-      _Controller(value: value, onChange: onChange)..addListener(callback);
+  FSelectGroupController<T> _create() => _Controller(value: value, onChange: onChange);
 
   @override
   void _updateController(FSelectGroupController<T> controller) =>
@@ -104,6 +103,5 @@ final class Managed<T> extends FSelectGroupControl<T> with _$ManagedMixin<T> {
       super._();
 
   @override
-  FSelectGroupController<T> _create(VoidCallback callback) =>
-      (controller ?? FMultiValueNotifier(value: initial ?? {}, min: min, max: max))..addListener(callback);
+  FSelectGroupController<T> _create() => controller ?? FMultiValueNotifier(value: initial ?? {}, min: min, max: max);
 }

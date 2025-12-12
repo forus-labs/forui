@@ -162,9 +162,8 @@ class Lifted extends FTabControl with _$LiftedMixin {
   const Lifted({required this.index, required this.onChange, this.motion = const FTabMotion()}) : super._();
 
   @override
-  FTabController _create(VoidCallback callback, TickerProvider vsync, int length) =>
-      FTabController._lifted(length: length, vsync: vsync, index: index, onChange: onChange, motion: motion)
-        ..addListener(callback);
+  FTabController _create(TickerProvider vsync, int length) =>
+      FTabController._lifted(length: length, vsync: vsync, index: index, onChange: onChange, motion: motion);
 
   @override
   void _updateController(FTabController controller, TickerProvider vsync, int length) =>
@@ -188,13 +187,12 @@ class Managed extends FTabControl with _$ManagedMixin {
       super._();
 
   @override
-  FTabController _create(VoidCallback callback, TickerProvider vsync, int length) =>
-      (controller ??
-            FTabController(
-              length: length,
-              vsync: vsync,
-              initialIndex: initial ?? 0,
-              motion: motion ?? const FTabMotion(),
-            ))
-        ..addListener(callback);
+  FTabController _create(TickerProvider vsync, int length) =>
+      controller ??
+      FTabController(
+        length: length,
+        vsync: vsync,
+        initialIndex: initial ?? 0,
+        motion: motion ?? const FTabMotion(),
+      );
 }

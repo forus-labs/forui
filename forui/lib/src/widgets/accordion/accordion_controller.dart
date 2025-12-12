@@ -17,9 +17,9 @@ part 'accordion_controller.control.dart';
 /// items are built. Use [FAccordionItem.initiallyExpanded] instead.
 class FAccordionController extends FChangeNotifier {
   final Map<int, AnimationController> _controllers;
-  final Set<int> _expanded;
   final int _min;
   final int? _max;
+  Set<int> _expanded;
 
   /// Creates a [FAccordionController].
   ///
@@ -29,9 +29,9 @@ class FAccordionController extends FChangeNotifier {
   /// [min] and [max] must be: `0 <= min <= max`.
   FAccordionController({int min = 0, int? max})
     : _controllers = {},
-      _expanded = {},
       _min = min,
       _max = max,
+      _expanded = {},
       assert(debugCheckInclusiveRange<FAccordionController>(min, max));
 
   /// Toggles the item at the given [index], expanding it if it is collapsed and vice versa.
@@ -129,24 +129,25 @@ extension InternalFAccordionController on FAccordionController {
 }
 
 @internal
-class LiftedController extends FAccordionController {
+class ProxyController extends FAccordionController {
   bool Function(int index) _supply;
   void Function(int index, bool expanded) _onChange;
-  Set<int> _items;
 
-  LiftedController(this._supply, this._onChange, int length)
-    : _items = {
-        for (var i = 0; i < length; i++)
-          if (_supply(i)) i,
-      };
+  ProxyController(this._supply, this._onChange, int length) {
+    _expanded = {
+      for (var i = 0; i < length; i++)
+        if (_supply(i)) i,
+    };
+  }
 
   void update(bool Function(int index) supply, void Function(int index, bool expanded) onChange, int length) {
     _supply = supply;
     _onChange = onChange;
-    _items = {
+    _expanded = {
       for (var i = 0; i < length; i++)
         if (_supply(i)) i,
     };
+
   }
 
   @override
@@ -160,8 +161,6 @@ class LiftedController extends FAccordionController {
     _onChange(index, false);
     return true;
   }
-
-  Set<int> get items => _items;
 }
 
 /// Defines how the accordion's expanded state is controlled.
@@ -173,7 +172,7 @@ sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
   const factory FAccordionControl.lifted({
     required bool Function(int index) expanded,
     required void Function(int index, bool expanded) onChange,
-  }) = Lifted;
+  }) = _Lifted;
 
   /// Creates a [FAccordionControl] for controlling an accordion using a controller.
   ///
@@ -201,21 +200,20 @@ sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
   );
 }
 
-@internal
-final class Lifted extends FAccordionControl with _$LiftedMixin {
+final class _Lifted extends FAccordionControl with _$_LiftedMixin {
   @override
   final bool Function(int index) expanded;
   @override
   final void Function(int index, bool expanded) onChange;
 
-  const Lifted({required this.expanded, required this.onChange}) : super._();
+  const _Lifted({required this.expanded, required this.onChange}) : super._();
 
   @override
-  FAccordionController _create(VoidCallback _, int children) => LiftedController(expanded, onChange, children);
+  FAccordionController _create(int children) => ProxyController(expanded, onChange, children);
 
   @override
   void _updateController(FAccordionController controller, int children) =>
-      (controller as LiftedController).update(expanded, onChange, children);
+      (controller as ProxyController).update(expanded, onChange, children);
 }
 
 @internal
@@ -227,7 +225,7 @@ final class Managed extends FAccordionControl with _$ManagedMixin {
   @override
   final int? max;
   @override
-  final void Function(Set<int> expanded)? onChange;
+  final ValueChanged<Set<int>>? onChange;
 
   const Managed({this.controller, this.min, this.max, this.onChange})
     : assert(
@@ -239,6 +237,5 @@ final class Managed extends FAccordionControl with _$ManagedMixin {
       super._();
 
   @override
-  FAccordionController _create(VoidCallback callback, int children) =>
-      (controller ?? .new(min: min ?? 0, max: max))..addListener(callback);
+  FAccordionController _create(int children) => controller ?? .new(min: min ?? 0, max: max);
 }

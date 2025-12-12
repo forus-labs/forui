@@ -106,7 +106,7 @@ class _Lifted extends FTextFieldControl with _$_LiftedMixin {
   const _Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  TextEditingController _create(VoidCallback callback) => _Controller(value, onChange)..addListener(callback);
+  TextEditingController _create() => _Controller(value, onChange);
 
   @override
   void _updateController(TextEditingController controller) => (controller as _Controller).update(value, onChange);
@@ -125,5 +125,5 @@ class _Managed extends FTextFieldControl with _$_ManagedMixin {
       super._();
 
   @override
-  TextEditingController _create(VoidCallback callback) => (controller ?? .fromValue(initial))..addListener(callback);
+  TextEditingController _create() => controller ?? .fromValue(initial);
 }

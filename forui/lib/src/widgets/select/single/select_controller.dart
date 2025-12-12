@@ -160,14 +160,14 @@ class Lifted<T> extends FSelectControl<T> with _$LiftedMixin<T> {
        super._();
 
   @override
-  FSelectController<T> _create(VoidCallback callback, TickerProvider vsync) => _Controller(
+  FSelectController<T> _create(TickerProvider vsync) => _Controller(
     value: value,
     vsync: vsync,
     onValueChange: onChange,
     popoverShown: popoverShown,
     onPopoverChange: onPopoverChange,
     popoverMotion: motion,
-  )..addListener(callback);
+  );
 
   @override
   void _updateController(FSelectController<T> controller, TickerProvider vsync) =>
@@ -199,13 +199,12 @@ class Managed<T> extends FSelectControl<T> with Diagnosticable, _$ManagedMixin<T
       super._();
 
   @override
-  FSelectController<T> _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ??
-            FSelectController<T>(
-              vsync: vsync,
-              value: initial,
-              toggleable: toggleable,
-              popoverMotion: motion ?? const FPopoverMotion(),
-            ))
-        ..addListener(callback);
+  FSelectController<T> _create(TickerProvider vsync) =>
+      controller ??
+      FSelectController<T>(
+        vsync: vsync,
+        value: initial,
+        toggleable: toggleable,
+        popoverMotion: motion ?? const FPopoverMotion(),
+      );
 }

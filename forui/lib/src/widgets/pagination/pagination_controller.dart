@@ -213,7 +213,7 @@ class Lifted extends FPaginationControl with _$LiftedMixin {
   }) : super._();
 
   @override
-  FPaginationController _create(VoidCallback _) =>
+  FPaginationController _create() =>
       _Controller(page: page, pages: pages, onChange: onChange, siblings: siblings, showEdges: showEdges);
 
   @override
@@ -255,13 +255,7 @@ class Managed extends FPaginationControl with Diagnosticable, _$ManagedMixin {
       super._();
 
   @override
-  FPaginationController _create(VoidCallback callback) =>
-      (controller ??
-            FPaginationController(
-              initialPage: initial ?? 0,
-              pages: pages ?? 1,
-              siblings: siblings,
-              showEdges: showEdges,
-            ))
-        ..addListener(callback);
+  FPaginationController _create() =>
+      controller ??
+      FPaginationController(initialPage: initial ?? 0, pages: pages ?? 1, siblings: siblings, showEdges: showEdges);
 }

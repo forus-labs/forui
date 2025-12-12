@@ -55,8 +55,7 @@ class Lifted extends FLineCalendarControl with _$LiftedMixin {
   const Lifted({required this.value, required this.onChange, this.toggleable = false}) : super._();
 
   @override
-  FCalendarController<DateTime?> _create(VoidCallback callback) =>
-      _Controller(value: value, onChange: onChange, toggleable: toggleable)..addListener(callback);
+  FCalendarController<DateTime?> _create() => _Controller(value: value, onChange: onChange, toggleable: toggleable);
 
   @override
   void _updateController(FCalendarController<DateTime?> controller) =>
@@ -80,9 +79,8 @@ class Managed extends FLineCalendarControl with Diagnosticable, _$ManagedMixin {
       super._();
 
   @override
-  FCalendarController<DateTime?> _create(VoidCallback callback) =>
-      (controller ?? FCalendarController.date(initialSelection: initial, toggleable: toggleable))
-        ..addListener(callback);
+  FCalendarController<DateTime?> _create() =>
+      controller ?? FCalendarController.date(initialSelection: initial, toggleable: toggleable);
 }
 
 class _Controller implements FCalendarController<DateTime?> {

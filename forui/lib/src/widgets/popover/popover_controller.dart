@@ -205,7 +205,7 @@ class Lifted extends FPopoverControl with _$LiftedMixin {
   const Lifted({required this.shown, required this.onChange, this.motion = const .new()}) : super._();
 
   @override
-  FPopoverController _create(VoidCallback callback, TickerProvider vsync) =>
+  FPopoverController _create(TickerProvider vsync) =>
       LiftedPopoverController(vsync: vsync, shown, onChange, motion: motion);
 
   @override
@@ -227,6 +227,6 @@ class Managed extends FPopoverControl with Diagnosticable, _$ManagedMixin {
       super._();
 
   @override
-  FPopoverController _create(VoidCallback callback, TickerProvider vsync) =>
-      (controller ?? .new(vsync: vsync, motion: motion ?? const .new()))..addListener(callback);
+  FPopoverController _create(TickerProvider vsync) =>
+      controller ?? .new(vsync: vsync, motion: motion ?? const .new());
 }

@@ -200,11 +200,11 @@ class Lifted extends FPickerControl with _$LiftedMixin {
   }) : super._();
 
   @override
-  FPickerController _create(VoidCallback callback, int wheelCount) {
+  FPickerController _create(int wheelCount) {
     final controller = _Controller(initialIndexes: value, onChange: onChange);
     _updateWheels(controller);
 
-    return controller..addListener(callback);
+    return controller;
   }
 
   @override
@@ -230,10 +230,10 @@ class Managed extends FPickerControl with Diagnosticable, _$ManagedMixin {
       super._();
 
   @override
-  FPickerController _create(VoidCallback callback, int wheelCount) {
+  FPickerController _create(int wheelCount) {
     final created = controller ?? FPickerController(initialIndexes: initial ?? .filled(wheelCount, 0));
     _updateWheels(created);
 
-    return created..addListener(callback);
+    return created;
   }
 }

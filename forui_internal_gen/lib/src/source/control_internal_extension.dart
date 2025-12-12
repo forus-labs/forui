@@ -42,8 +42,17 @@ class ControlInternalExtension {
             (create.toBuilder()
                   ..name = create.name!.replaceFirst('_', '')
                   ..lambda = true
+                  ..requiredParameters.insert(
+                    0,
+                    Parameter(
+                      (p) => p
+                        ..name = 'callback'
+                        ..type = refer('VoidCallback'),
+                    ),
+                  )
                   ..body = Code('''
                     ${create.name!}(${create.requiredParameters.map((p) => p.name).join(', ')})
+                    ..addListener(callback)
             '''))
                 .build(),
             _update,
