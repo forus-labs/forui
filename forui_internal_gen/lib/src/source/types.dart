@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -70,3 +71,18 @@ List<FieldElement> instanceFields(ClassElement element) => [
         field.name != 'hashCode')
       field,
 ];
+
+String aliasAwareType(DartType type) {
+  if (type.alias case final alias?) {
+    final name = alias.element.displayName;
+    final typeParameters = alias.typeArguments.isEmpty ? '' : '<${alias.typeArguments.map(aliasAwareType).join(', ')}>';
+    final suffix = switch (type.nullabilitySuffix) {
+          .question => '?',
+          .star => '*',
+          .none => '',
+    };
+    return '$name$typeParameters$suffix';
+  }
+
+  return type.getDisplayString();
+}

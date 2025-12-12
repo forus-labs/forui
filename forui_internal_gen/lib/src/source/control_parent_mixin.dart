@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
+import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
 /// Generates a private mixin for the sealed parent control class.
@@ -38,14 +39,14 @@ class ControlParentMixin {
     null => _create,
     final create => Method(
       (m) => m
-        ..returns = refer(create.returnType.getDisplayString())
+        ..returns = refer(aliasAwareType(create.returnType))
         ..name = '_create'
         ..requiredParameters.addAll([
           for (final parameter in create.formalParameters)
             Parameter(
               (p) => p
                 ..name = parameter.name!
-                ..type = refer(parameter.type.getDisplayString()),
+                ..type = refer(aliasAwareType(parameter.type)),
             ),
         ]),
     ),
@@ -61,7 +62,7 @@ class ControlParentMixin {
             Parameter(
               (p) => p
                 ..name = name
-                ..type = refer(parameter.type.getDisplayString()),
+                ..type = refer(aliasAwareType(parameter.type)),
             ),
       ]),
   );
@@ -70,14 +71,14 @@ class ControlParentMixin {
     null => _dispose,
     final dispose => Method(
       (m) => m
-        ..returns = refer(dispose.returnType.getDisplayString())
+        ..returns = refer(aliasAwareType(dispose.returnType))
         ..name = '_dispose'
         ..requiredParameters.addAll([
           for (final parameter in dispose.formalParameters)
             Parameter(
               (p) => p
                 ..name = parameter.name!
-                ..type = refer(parameter.type.getDisplayString()),
+                ..type = refer(aliasAwareType(parameter.type)),
             ),
         ]),
     ),
@@ -93,7 +94,7 @@ class ControlParentMixin {
             Parameter(
               (p) => p
                 ..name = parameter.name!
-                ..type = refer(parameter.type.getDisplayString()),
+                ..type = refer(aliasAwareType(parameter.type)),
             ),
       ]),
   );
@@ -108,12 +109,12 @@ class ControlParentMixin {
           Parameter(
             (p) => p
               ..name = parameter.name!
-              ..type = refer(parameter.type.getDisplayString()),
+              ..type = refer(aliasAwareType(parameter.type)),
           ),
       ])
       ..lambda = true
       ..body = const Code('controller'),
   );
 
-  String get _returnType => (update.returnType as RecordType).positionalFields.first.type.getDisplayString();
+  String get _returnType => aliasAwareType((update.returnType as RecordType).positionalFields.first.type);
 }

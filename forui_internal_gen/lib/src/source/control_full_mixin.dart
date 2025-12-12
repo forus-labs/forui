@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/functions_mixin.dart';
+import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
 /// Generates a mixin for a class that implements a call, debugFillProperties, equals and hashCode , and _update
@@ -79,7 +80,7 @@ abstract class ControlMixin extends FunctionsMixin {
           Parameter(
             (p) => p
               ..name = parameter.name!
-              ..type = refer(parameter.type.getDisplayString()),
+              ..type = refer(aliasAwareType(parameter.type)),
           ),
       ])
       ..body = _updateBody,
@@ -159,7 +160,7 @@ class _LiftedControlMixin extends ControlMixin {
             Parameter(
               (p) => p
                 ..name = name
-                ..type = refer(parameter.type.getDisplayString()),
+                ..type = refer(aliasAwareType(parameter.type)),
             ),
       ]),
   );

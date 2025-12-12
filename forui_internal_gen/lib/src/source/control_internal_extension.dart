@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
+import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
 /// Generates an `@internal` extension on a sealed control class that delegates
@@ -69,7 +70,7 @@ class ControlInternalExtension {
             Parameter(
               (p) => p
                 ..name = parameter.name!
-                ..type = refer(parameter.type.getDisplayString()),
+                ..type = refer(aliasAwareType(parameter.type)),
             ),
         ])
         ..lambda = true
