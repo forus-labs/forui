@@ -77,9 +77,9 @@ String aliasAwareType(DartType type) {
     final name = alias.element.displayName;
     final typeParameters = alias.typeArguments.isEmpty ? '' : '<${alias.typeArguments.map(aliasAwareType).join(', ')}>';
     final suffix = switch (type.nullabilitySuffix) {
-          .question => '?',
-          .star => '*',
-          .none => '',
+      .question => '?',
+      .star => '*',
+      .none => '',
     };
     return '$name$typeParameters$suffix';
   }
