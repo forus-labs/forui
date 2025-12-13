@@ -121,5 +121,6 @@ final class FSelectGroupManagedControl<T> extends FSelectGroupControl<T> with _$
       super._();
 
   @override
-  FSelectGroupController<T> createController() => controller ?? FMultiValueNotifier(value: initial ?? {}, min: min, max: max);
+  FSelectGroupController<T> createController() =>
+      controller ?? FMultiValueNotifier(value: initial ?? {}, min: min, max: max);
 }

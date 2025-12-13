@@ -303,7 +303,6 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/arrow-key-traversal.png'));
   });
 
-
   group('preserve selection', () {
     testWidgets('managed - short to long', (tester) async {
       await tester.pumpWidget(

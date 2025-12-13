@@ -175,7 +175,8 @@ class Lifted<T> extends FMultiSelectControl<T> with _$LiftedMixin<T> {
 /// for common configurations.
 ///
 /// {@macro forui.foundation.doc_templates.managed}
-class FMultiSelectManagedControl<T> extends FMultiSelectControl<T> with Diagnosticable, _$FMultiSelectManagedControlMixin<T> {
+class FMultiSelectManagedControl<T> extends FMultiSelectControl<T>
+    with Diagnosticable, _$FMultiSelectManagedControlMixin<T> {
   /// The controller.
   @override
   final FMultiSelectController<T>? controller;

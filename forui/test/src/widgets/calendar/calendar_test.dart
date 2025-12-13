@@ -16,10 +16,7 @@ void main() {
         TestScaffold.app(
           child: StatefulBuilder(
             builder: (context, setState) => FCalendar(
-              control: .lifted(
-                selected: (date) => date == selected,
-                select: (date) => setState(() => selected = date),
-              ),
+              control: .lifted(selected: (date) => date == selected, select: (date) => setState(() => selected = date)),
               start: DateTime(2024, 7),
               end: DateTime(2024, 7, 31),
               today: DateTime(2024, 7, 14),

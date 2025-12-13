@@ -37,7 +37,8 @@ class Time24InputController extends TimeInputController {
   void traverse({required bool forward}) {
     try {
       mutating = true;
-      rawValue = (forward ? selector.navigate(value, onFirst: _last) : selector.navigate(value, onLast: _first)) ?? value;
+      rawValue =
+          (forward ? selector.navigate(value, onFirst: _last) : selector.navigate(value, onLast: _first)) ?? value;
     } finally {
       mutating = false;
     }

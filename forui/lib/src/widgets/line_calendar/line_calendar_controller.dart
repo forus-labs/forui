@@ -48,7 +48,8 @@ class Lifted extends FLineCalendarControl with _$LiftedMixin {
   const Lifted({required this.value, required this.onChange, this.toggleable = false}) : super._();
 
   @override
-  FCalendarController<DateTime?> createController() => _Controller(value: value, onChange: onChange, toggleable: toggleable);
+  FCalendarController<DateTime?> createController() =>
+      _Controller(value: value, onChange: onChange, toggleable: toggleable);
 
   @override
   void _updateController(FCalendarController<DateTime?> controller) =>

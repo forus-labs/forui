@@ -95,10 +95,7 @@ void main() {
           child: StatefulBuilder(
             builder: (context, setState) => FAutocomplete(
               key: key,
-              popoverControl: .lifted(
-                shown: popoverShown,
-                onChange: (shown) => setState(() => popoverShown = shown),
-              ),
+              popoverControl: .lifted(shown: popoverShown, onChange: (shown) => setState(() => popoverShown = shown)),
               items: fruits,
             ),
           ),
@@ -119,7 +116,6 @@ void main() {
     });
 
     testWidgets('popoverShown controls visibility', (tester) async {
-
       await tester.pumpWidget(
         TestScaffold.app(
           child: StatefulBuilder(

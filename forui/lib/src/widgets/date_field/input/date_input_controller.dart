@@ -101,7 +101,8 @@ class DateInputController extends InputController {
     }
 
     final proposed = _format.tryParseStrict(newValue.text, true);
-    if (proposed == controller.value) { // Prevent toggling controller.value.
+    if (proposed == controller.value) {
+      // Prevent toggling controller.value.
       super.rawValue = newValue;
       return;
     }

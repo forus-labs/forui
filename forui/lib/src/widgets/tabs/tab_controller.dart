@@ -199,10 +199,5 @@ class FTabManagedControl extends FTabControl with _$FTabManagedControlMixin {
   @override
   FTabController createController(TickerProvider vsync, int length) =>
       controller ??
-      FTabController(
-        length: length,
-        vsync: vsync,
-        initialIndex: initial ?? 0,
-        motion: motion ?? const FTabMotion(),
-      );
+      FTabController(length: length, vsync: vsync, initialIndex: initial ?? 0, motion: motion ?? const FTabMotion());
 }

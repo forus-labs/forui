@@ -255,24 +255,30 @@ class FPaginationManagedControl extends FPaginationControl with Diagnosticable, 
   final ValueChanged<int>? onChange;
 
   /// Creates a [FPaginationControl].
-  const FPaginationManagedControl({this.controller, this.initial, this.pages, this.siblings = 1, this.showEdges = true, this.onChange})
-    : assert(
-        controller == null || initial == null,
-        'Cannot provide both controller and initial. Set the page directly in the controller.',
-      ),
-      assert(
-        controller == null || pages == null,
-        'Cannot provide both controller and pages. Set the pages directly in the controller.',
-      ),
-      assert(
-        controller == null || siblings == 1,
-        'Cannot provide both controller and siblings. Set siblings directly in the controller.',
-      ),
-      assert(
-        controller == null || showEdges,
-        'Cannot provide both controller and showEdges. Set showEdges directly in the controller.',
-      ),
-      super._();
+  const FPaginationManagedControl({
+    this.controller,
+    this.initial,
+    this.pages,
+    this.siblings = 1,
+    this.showEdges = true,
+    this.onChange,
+  }) : assert(
+         controller == null || initial == null,
+         'Cannot provide both controller and initial. Set the page directly in the controller.',
+       ),
+       assert(
+         controller == null || pages == null,
+         'Cannot provide both controller and pages. Set the pages directly in the controller.',
+       ),
+       assert(
+         controller == null || siblings == 1,
+         'Cannot provide both controller and siblings. Set siblings directly in the controller.',
+       ),
+       assert(
+         controller == null || showEdges,
+         'Cannot provide both controller and showEdges. Set showEdges directly in the controller.',
+       ),
+       super._();
 
   @override
   FPaginationController createController() =>

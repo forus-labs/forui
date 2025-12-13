@@ -203,14 +203,10 @@ class FDateFieldManagedControl extends FDateFieldControl with Diagnosticable, _$
   final ValueChanged<DateTime?>? onChange;
 
   /// Creates a [FDateFieldControl].
-  const FDateFieldManagedControl({
-    this.controller,
-    this.initial,
-    this.validator,
-    this.onChange,
-  }) : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
-       assert(controller == null || validator == null, 'Cannot provide both controller and validator.'),
-       super._();
+  const FDateFieldManagedControl({this.controller, this.initial, this.validator, this.onChange})
+    : assert(controller == null || initial == null, 'Cannot provide both controller and initial.'),
+      assert(controller == null || validator == null, 'Cannot provide both controller and validator.'),
+      super._();
 
   @override
   FDateFieldController createController(TickerProvider vsync) =>

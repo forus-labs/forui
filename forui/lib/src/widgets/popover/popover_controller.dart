@@ -209,8 +209,8 @@ class FPopoverManagedControl extends FPopoverControl with Diagnosticable, _$FPop
 
   /// Creates a [FPopoverControl].
   const FPopoverManagedControl({this.controller, this.motion, this.onChange})
-      : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
-        super._();
+    : assert(controller == null || motion == null, 'Cannot provide both controller and motion'),
+      super._();
 
   @override
   FPopoverController createController(TickerProvider vsync) =>

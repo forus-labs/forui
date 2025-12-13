@@ -6,5 +6,6 @@
 library forui.widgets.line_calendar;
 
 export '../src/widgets/line_calendar/line_calendar.dart';
-export '../src/widgets/line_calendar/line_calendar_controller.dart' hide FLineCalendarManagedControl, InternalFLineCalendarControl, Lifted;
+export '../src/widgets/line_calendar/line_calendar_controller.dart'
+    hide FLineCalendarManagedControl, InternalFLineCalendarControl, Lifted;
 export '../src/widgets/line_calendar/line_calendar_item.dart' hide Item, ItemContent;

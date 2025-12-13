@@ -3,9 +3,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:sugar/core.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
-import 'package:sugar/core.dart';
 
 part 'accordion_controller.control.dart';
 
