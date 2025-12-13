@@ -16,23 +16,13 @@ FDateFieldController useFDateFieldController({
   DateTime? initial,
   FormFieldValidator<DateTime> validator = _defaultValidator,
   List<Object?>? keys,
-}) => use(
-  _DateFieldHook(
-    initial: initial,
-    validator: validator,
-    keys: keys,
-  ),
-);
+}) => use(_DateFieldHook(initial: initial, validator: validator, keys: keys));
 
 class _DateFieldHook extends Hook<FDateFieldController> {
   final DateTime? initial;
   final FormFieldValidator<DateTime> validator;
 
-  const _DateFieldHook({
-    required this.initial,
-    required this.validator,
-    super.keys,
-  });
+  const _DateFieldHook({required this.initial, required this.validator, super.keys});
 
   @override
   _DateFieldHookState createState() => .new();
@@ -47,10 +37,7 @@ class _DateFieldHook extends Hook<FDateFieldController> {
 }
 
 class _DateFieldHookState extends HookState<FDateFieldController, _DateFieldHook> {
-  late final _controller = FDateFieldController(
-    initial: hook.initial,
-    validator: hook.validator,
-  );
+  late final _controller = FDateFieldController(initial: hook.initial, validator: hook.validator);
 
   @override
   FDateFieldController build(BuildContext context) => _controller;
